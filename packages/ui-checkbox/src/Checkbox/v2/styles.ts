@@ -65,16 +65,18 @@ const generateStyle = (
           : `calc(${componentTheme.gap} + ${componentTheme.controlSizeLg})`
     }
   }
+  const sizeVariant =
+    sizeVariants[size as keyof typeof sizeVariants] ?? sizeVariants.medium
 
   return {
     requiredInvalid: {
       color: componentTheme.asteriskColor
     },
     indentedError: {
-      paddingLeft: sizeVariants[size!].paddingLeft
+      paddingLeft: sizeVariant.paddingLeft
     },
     indentedToggleError: {
-      paddingLeft: sizeVariants[size!].paddingLeft
+      paddingLeft: sizeVariant.paddingLeft
     },
     checkbox: {
       label: 'checkbox',
@@ -82,8 +84,7 @@ const generateStyle = (
       width: '100%',
       ...(disabled && {
         cursor: 'not-allowed',
-        pointerEvents: 'none',
-        opacity: 0.5
+        pointerEvents: 'none'
       }),
       ...(inline && {
         display: 'inline-block',

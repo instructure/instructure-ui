@@ -226,6 +226,7 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
         <ToggleFacade
           disabled={disabled}
           size={size}
+          hovered={hovered}
           focused={focused}
           checked={this.checked}
           readOnly={readOnly}
@@ -248,10 +249,12 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
     } else {
       return (
         <CheckboxFacade
+          disabled={disabled}
           size={size}
           hovered={hovered}
           focused={focused}
           checked={this.checked}
+          readOnly={readOnly}
           indeterminate={indeterminate}
           themeOverride={themeOverride as Partial<CheckboxFacadeTheme>}
           invalid={this.invalid}

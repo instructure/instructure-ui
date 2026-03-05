@@ -23,6 +23,7 @@
  */
 
 import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
+import { boxShadowObjectsToCSSString } from '@instructure/ui-themes'
 import { calcFocusOutlineStyles } from '@instructure/emotion'
 import type { ToggleFacadeProps, ToggleFacadeStyle } from './props'
 
@@ -42,7 +43,16 @@ const generateStyle = (
   props: ToggleFacadeProps,
   sharedTokens: SharedTokens
 ): ToggleFacadeStyle => {
-  const { disabled, size, checked, focused, labelPlacement, invalid } = props
+  const {
+    disabled,
+    size,
+    checked,
+    readOnly,
+    focused,
+    hovered,
+    labelPlacement,
+    invalid
+  } = props
 
   const labelPlacementVariants = {
     start: {
@@ -69,6 +79,10 @@ const generateStyle = (
       }
     }
   }
+  const labelPlacementVariant =
+    labelPlacementVariants[
+      labelPlacement as keyof typeof labelPlacementVariants
+    ] ?? labelPlacementVariants.end
 
   const labelSizeVariants = {
     small: {
@@ -84,7 +98,130 @@ const generateStyle = (
       lineHeight: componentTheme.labelLineHeightLg
     }
   }
+  const sizeVariant =
+    labelSizeVariants[size as keyof typeof labelSizeVariants] ??
+    labelSizeVariants.medium
 
+  const getIconBorderColor = () => {
+    if (disabled) {
+      return checked
+        ? componentTheme.checkedIconBorderDisabledColor
+        : componentTheme.uncheckedIconBorderDisabledColor
+    }
+
+    if (readOnly) {
+      return checked
+        ? componentTheme.checkedIconBorderReadonlyColor
+        : componentTheme.uncheckedIconBorderReadonlyColor
+    }
+
+    if (invalid && !checked) {
+      return hovered
+        ? componentTheme.uncheckedIconBorderHoverColor
+        : componentTheme.uncheckedIconErrorBorderColor
+    }
+
+    if (checked) {
+      return hovered
+        ? componentTheme.checkedIconBorderHoverColor
+        : componentTheme.checkedIconBorderColor
+    }
+
+    // DEFAULT (unchecked) state
+    return hovered
+      ? componentTheme.uncheckedIconBorderHoverColor
+      : componentTheme.uncheckedIconBorderColor
+  }
+
+  const getFacadeStyles = () => {
+    const baseStyles = {
+      cursor: 'pointer',
+      display: 'inline-block',
+      userSelect: 'none',
+      position: 'relative',
+      borderRadius: componentTheme.borderRadius,
+      verticalAlign: 'middle',
+      height: componentTheme.toggleSize,
+      width: componentTheme.toggleWidth,
+      ...labelPlacementVariant.facade
+    }
+
+    if (disabled) {
+      return {
+        ...baseStyles,
+        background: checked
+          ? componentTheme.checkedBackgroundDisabledColor
+          : componentTheme.backgroundDisabledColor,
+        boxShadow: `inset 0 0 0 ${componentTheme.borderWidth} ${
+          checked
+            ? componentTheme.checkedBorderDisabledColor
+            : componentTheme.borderDisabledColor
+        }`,
+        cursor: 'not-allowed',
+        pointerEvents: 'none',
+        opacity: componentTheme.disabledOpacity
+      }
+    }
+
+    if (readOnly) {
+      return {
+        ...baseStyles,
+        background: checked
+          ? componentTheme.checkedBackgroundReadonlyColor
+          : componentTheme.backgroundReadonlyColor,
+        boxShadow: `inset 0 0 0 ${componentTheme.borderWidth} ${
+          checked
+            ? componentTheme.checkedBorderReadonlyColor
+            : componentTheme.borderReadonlyColor
+        }`,
+        cursor: 'default',
+        pointerEvents: 'none'
+      }
+    }
+
+    if (invalid) {
+      return {
+        ...baseStyles,
+        ...(checked && {
+          background: hovered
+            ? componentTheme.checkedBackgroundHoverColor
+            : componentTheme.checkedBackgroundColor,
+          boxShadow: `inset 0 0 0 ${componentTheme.borderWidth} ${componentTheme.errorBorderColor}`
+        }),
+        ...(!checked && {
+          background: hovered
+            ? componentTheme.errorBackgroundHoverColor
+            : componentTheme.errorBackgroundColor,
+          boxShadow: `inset 0 0 0 ${componentTheme.borderWidth} ${componentTheme.errorBorderColor}`
+        })
+      }
+    }
+
+    if (checked) {
+      return {
+        ...baseStyles,
+        background: hovered
+          ? componentTheme.checkedBackgroundHoverColor
+          : componentTheme.checkedBackgroundColor,
+        boxShadow: `inset 0 0 0 ${componentTheme.borderWidth} ${
+          hovered
+            ? componentTheme.checkedBorderHoverColor
+            : componentTheme.checkedBorderColor
+        }`
+      }
+    }
+
+    // DEFAULT (unchecked) state
+    return {
+      ...baseStyles,
+      background: hovered
+        ? componentTheme.backgroundHoverColor
+        : componentTheme.backgroundColor,
+      boxShadow: `inset 0 0 0 ${componentTheme.borderWidth} ${
+        hovered ? componentTheme.borderHoverColor : componentTheme.borderColor
+      }`
+    }
+  }
   return {
     toggleFacade: {
       label: 'toggleFacade',
@@ -94,37 +231,12 @@ const generateStyle = (
     },
     facade: {
       label: 'toggleFacade__facade',
-      background: componentTheme.toggleBackground,
-      borderColor: componentTheme.borderColor,
-      cursor: 'pointer',
-      display: 'inline-block',
-      userSelect: 'none',
-      position: 'relative',
-      borderRadius: '3rem',
-      verticalAlign: 'middle',
-      boxShadow: `inset 0 0 0 ${componentTheme.borderWidth} ${
-        invalid && !checked
-          ? componentTheme.errorBorderColor
-          : componentTheme.borderColor
-      }`,
-      height: componentTheme.toggleSize,
-      width: `calc(${componentTheme.toggleSize} * 1.5)`,
-      ...labelPlacementVariants[labelPlacement!].facade,
+      ...getFacadeStyles(),
       ...(sharedTokens?.focusOutline
         ? calcFocusOutlineStyles(sharedTokens.focusOutline, {
             withFocusOutline: focused
           })
-        : {}),
-
-      ...(checked && {
-        background: componentTheme.checkedBackgroundColor,
-        boxShadow: 'none'
-      }),
-
-      ...(disabled && {
-        cursor: 'not-allowed',
-        pointerEvents: 'none'
-      })
+        : {})
     },
 
     icon: {
@@ -137,14 +249,13 @@ const generateStyle = (
       insetInlineEnd: 'auto',
       transition: 'all 0.2s',
       transform: 'translate3d(0, 0, 0)',
-      fontSize: '0.875rem',
       height: componentTheme.toggleSize,
       width: componentTheme.toggleSize,
 
       ...(checked && {
-        transform: 'translate3d(50%, 0, 0)',
+        transform: `translateX(calc(${componentTheme.toggleWidth} - ${componentTheme.toggleSize}))`,
         '[dir="rtl"] &': {
-          transform: 'translate3d(-50%, 0, 0)'
+          transform: `translateX(calc(-1 * (${componentTheme.toggleWidth} - ${componentTheme.toggleSize})))`
         }
       })
     },
@@ -164,13 +275,9 @@ const generateStyle = (
         height: `calc(100% - (${componentTheme.borderWidth} * 6))`,
         width: `calc(100% - (${componentTheme.borderWidth} * 6))`,
         background: componentTheme.toggleBackground,
-        boxShadow: componentTheme.toggleShadow,
+        boxShadow: boxShadowObjectsToCSSString(componentTheme.toggleShadow),
         borderRadius: '100%',
-        border: `${componentTheme.borderWidth} solid ${
-          checked
-            ? componentTheme.checkedIconBorderColor
-            : componentTheme.uncheckedIconBorderColor
-        }`
+        border: `${componentTheme.borderWidth} solid ${getIconBorderColor()}`
       },
 
       '& [class*="lucideIcon"] svg': {
@@ -183,11 +290,13 @@ const generateStyle = (
       label: 'toggleFacade__label',
       flex: 1,
       minWidth: '0.0625rem',
-      color: componentTheme.labelColor,
+      color: disabled
+        ? componentTheme.labelDisabledColor
+        : componentTheme.labelColor,
       fontFamily: componentTheme.labelFontFamily,
       fontWeight: componentTheme.labelFontWeight,
-      ...labelSizeVariants[size!],
-      ...labelPlacementVariants[labelPlacement!].label
+      ...sizeVariant,
+      ...labelPlacementVariant.label
     }
   }
 }
