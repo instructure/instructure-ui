@@ -88,14 +88,14 @@ const generateStyle = (
             },
             '&:focus': {
               backgroundColor: componentTheme.hoverBackgroundColor,
-              boxShadow: `${componentTheme.outerFocusOutlineColor}, ${componentTheme.innerFocusOutlineColor}`,
+              boxShadow: `inset 0 0 0 0.125rem ${componentTheme.outerFocusOutlineColor}, inset 0 0 0 0.25rem ${componentTheme.innerFocusOutlineColor}`,
               outline: 'none'
             }
           })
     },
     icon: {
       label: 'navigationItem__icon',
-      height: (componentTheme as any).iconWrapperHeight, // TODO-rework remove the cast after merging into v12
+      height: componentTheme.iconWrapperHeight,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center'
