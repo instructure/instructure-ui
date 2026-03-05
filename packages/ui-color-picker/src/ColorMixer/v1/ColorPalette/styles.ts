@@ -27,7 +27,7 @@ import type {
   ColorPaletteProps,
   ColorPaletteState
 } from './props'
-import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
+import type { ColorMixerPaletteTheme } from '@instructure/shared-types'
 import { px } from '@instructure/ui-utils'
 
 /**
@@ -41,9 +41,8 @@ import { px } from '@instructure/ui-utils'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['Palette'],
+  componentTheme: ColorMixerPaletteTheme,
   props: ColorPaletteProps,
-  _sharedTokens: SharedTokens,
   state: ColorPaletteState
 ): ColorPaletteStyle => {
   return {

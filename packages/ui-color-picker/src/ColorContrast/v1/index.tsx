@@ -30,25 +30,26 @@ import {
   contrastWithAlpha,
   validateContrast
 } from '@instructure/ui-color-utils'
-import { withStyle } from '@instructure/emotion'
+import { withStyleLegacy as withStyle } from '@instructure/emotion'
 
-import { Text } from '@instructure/ui-text/latest'
-import { Heading } from '@instructure/ui-heading/latest'
-import { Pill } from '@instructure/ui-pill/latest'
+import { Text } from '@instructure/ui-text/v11_6'
+import { Heading } from '@instructure/ui-heading/v11_6'
+import { Pill } from '@instructure/ui-pill/v11_6'
 
-import ColorIndicator from '../../ColorIndicator/v2'
+import ColorIndicator from '../../ColorIndicator/v1'
 
 import { allowedProps } from './props'
 import type { ColorContrastProps, ColorContrastState } from './props'
 
 import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
 category: components
 ---
 **/
-@withStyle(generateStyle)
+@withStyle(generateStyle, generateComponentTheme)
 class ColorContrast extends Component<ColorContrastProps, ColorContrastState> {
   static allowedProps = allowedProps
   static readonly componentId = 'ColorContrast'
@@ -116,7 +117,7 @@ class ColorContrast extends Component<ColorContrastProps, ColorContrastState> {
           {description}
         </div>
         <div css={styles?.statusIndicatorWrapper}>
-          <Pill color={pass ? 'success' : 'error'}>
+          <Pill color={pass ? 'success' : 'danger'}>
             {pass ? successLabel : failureLabel}
           </Pill>
         </div>

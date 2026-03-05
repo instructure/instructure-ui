@@ -231,6 +231,23 @@ type: embed
 
 ```
 
+### ColorPicker
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"warningIconColor",note:""},
+    {name:"errorIconColor",note:""},
+    {name:"successIconColor",note:""},
+    {name:"spacing",note:"now uses sharedTokens.spacing"}
+  ]}
+/>
+
+```
+
 ### Flex
 
 Gap styling now uses `sharedTokens.legacySpacing`.

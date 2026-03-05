@@ -22,63 +22,30 @@
  * SOFTWARE.
  */
 
-import { Component } from 'react'
-
-import { omitProps } from '@instructure/ui-react-utils'
-import { withStyle } from '@instructure/emotion'
-
-import generateStyle from './styles'
-
-import type { ColorIndicatorProps } from './props'
-import { allowedProps } from './props'
+import type { ColorMixerStyle } from './props'
 
 /**
----
-category: components
----
-**/
-@withStyle(generateStyle)
-class ColorIndicator extends Component<ColorIndicatorProps> {
-  static allowedProps = allowedProps
-  static readonly componentId = 'ColorIndicator'
-
-  static defaultProps = {
-    shape: 'circle'
-  }
-
-  ref: HTMLDivElement | null = null
-
-  componentDidMount() {
-    this.props.makeStyles?.()
-  }
-
-  componentDidUpdate() {
-    this.props.makeStyles?.()
-  }
-
-  handleRef = (el: HTMLDivElement | null) => {
-    const { elementRef } = this.props
-
-    this.ref = el
-
-    if (typeof elementRef === 'function') {
-      elementRef(el)
+ * ---
+ * private: true
+ * ---
+ * Generates the style object from the theme and provided additional information
+ * @param  {Object} componentTheme The theme variable object.
+ * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
+ */
+const generateStyle = (): ColorMixerStyle => {
+  return {
+    colorMixer: {
+      label: 'colorMixer',
+      width: '17rem'
+    },
+    sliderAndPaletteContainer: {
+      label: 'colorMixer__sliderAndPaletteContainer',
+      display: 'flex',
+      flexDirection: 'column'
     }
-  }
-
-  render() {
-    const { styles } = this.props
-
-    return (
-      <div
-        {...omitProps(this.props, ColorIndicator.allowedProps)}
-        ref={this.handleRef}
-        css={styles?.colorIndicator}
-        data-cid="ColorIndicator"
-      />
-    )
   }
 }
 
-export default ColorIndicator
-export { ColorIndicator }
+export default generateStyle

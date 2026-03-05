@@ -22,13 +22,8 @@
  * SOFTWARE.
  */
 
-import type {
-  ColorPaletteStyle,
-  ColorPaletteProps,
-  ColorPaletteState
-} from './props'
-import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
-import { px } from '@instructure/ui-utils'
+import type { ColorMixerSliderTheme } from '@instructure/shared-types'
+import type { SliderStyle, SliderProps, SliderStyleProps } from './props'
 
 /**
  * ---
@@ -41,46 +36,70 @@ import { px } from '@instructure/ui-utils'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['Palette'],
-  props: ColorPaletteProps,
-  _sharedTokens: SharedTokens,
-  state: ColorPaletteState
-): ColorPaletteStyle => {
+  componentTheme: ColorMixerSliderTheme,
+  props: SliderProps,
+  state: SliderStyleProps
+): SliderStyle => {
+  const sliderBackground = props.isColorSlider
+    ? {
+        background:
+          'linear-gradient(to right, #ff0000 0%, #ffff00 17%, #00ff00 33%, #00ffff 50%, #0000ff 67%, #ff00ff 83%, #ff0000 100%)'
+      }
+    : {
+        background: componentTheme.checkerboardBackgroundImage,
+        backgroundSize: componentTheme.checkerboardBackgroundSize,
+        backgroundPosition: componentTheme.checkerboardBackgroundPosition
+      }
+
   return {
-    ColorPalette: {
-      label: 'ColorPalette'
+    colorSlider: {
+      label: 'colorMixerSlider'
     },
     indicator: {
-      label: 'ColorPalette__indicator',
+      label: 'colorMixerSlider__indicator',
       width: `${props.indicatorRadius / 8}rem`,
       height: `${props.indicatorRadius / 8}rem`,
       borderRadius: `${props.indicatorRadius / 8}rem`,
-      background: componentTheme.whiteColor,
+      background: 'white',
       position: 'absolute',
       borderStyle: 'solid',
       borderWidth: componentTheme.indicatorBorderWidth,
       borderColor: componentTheme.indicatorBorderColor,
-      top: `${
-        state?.colorPosition?.y - px(`${props.indicatorRadius / 16}rem`)
-      }px`,
+      top: `-0.1875rem`,
       left: `${
-        state?.colorPosition?.x - px(`${props.indicatorRadius / 16}rem`)
-      }px`
+        (state?.sliderPositionFromValue - props.indicatorRadius) / 16
+      }rem`,
+      zIndex: componentTheme.indicatorZIndex
     },
-    palette: {
-      label: 'ColorPalette__palette',
+
+    sliderBackground: {
+      label: 'colorMixerSlider__sliderBackground',
+      borderRadius: `${props.height / 16}rem`,
       width: `${props.width / 16}rem`,
       height: `${props.height / 16}rem`,
-      borderRadius: componentTheme.paletteBorderRadius,
-      borderStyle: 'solid',
-      borderWidth: componentTheme.paletteBorderWidth,
       boxSizing: 'border-box',
+      ...sliderBackground
+    },
+    slider: {
+      label: 'colorMixerSlider__slider',
+      width: `${props.width / 16}rem`,
+      height: `${props.height / 16}rem`,
+      background: props.isColorSlider
+        ? 'transparent'
+        : `linear-gradient(to right, rgba(255,0,0,0), ${props.color?.slice(
+            0,
+            -2
+          )})`,
+      borderRadius: `${props.height / 16}rem`,
+
+      boxSizing: 'border-box',
+
+      borderStyle: 'solid',
       borderColor: componentTheme.colorIndicatorBorderColor,
-      background: `linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1)),
-      linear-gradient(to right, white, hsl(${props.hue},100%,50%))`
+      borderWidth: componentTheme.sliderBorderWidth
     },
     disabledOverlay: {
-      label: 'ColorPalette__disabledOverlay',
+      label: 'colorMixerSlider__disabledOverlay',
       background: 'rgba(255,255,255,.5)',
       zIndex: componentTheme.disabledOverlayZIndex,
       width: `${props.width / 16 + 1}rem`,
@@ -88,8 +107,7 @@ const generateStyle = (
       position: 'absolute',
       top: '-.5rem',
       left: '-.5rem'
-    },
-    paletteOffset: componentTheme.paletteOffset
+    }
   }
 }
 

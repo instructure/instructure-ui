@@ -180,7 +180,7 @@ describe('<ColorPicker />', () => {
             'div[class$="-colorPicker__successIcon"]'
           )
           const successIcon = container.querySelector(
-            'svg[name="IconCheckDark"]'
+            'svg[name="Check"]'
           )
 
           expect(successIconWrapper).toBeInTheDocument()
@@ -210,7 +210,7 @@ describe('<ColorPicker />', () => {
           const warningIconWrapper = container.querySelector(
             'div[class$="-colorPicker__errorIcons"]'
           )
-          const warningIcon = container.querySelector('svg[name="IconWarning"]')
+          const warningIcon = container.querySelector('svg[name="CircleAlert"]')
 
           expect(warningIconWrapper).toBeInTheDocument()
           expect(warningIcon).toBeInTheDocument()
@@ -239,7 +239,7 @@ describe('<ColorPicker />', () => {
           const errorIconWrapper = container.querySelector(
             'div[class$="-colorPicker__errorIcons"]'
           )
-          const errorIcon = container.querySelector('svg[name="IconTrouble"]')
+          const errorIcon = container.querySelector('svg[name="CircleX"]')
 
           expect(errorIconWrapper).toBeInTheDocument()
           expect(errorIcon).toBeInTheDocument()

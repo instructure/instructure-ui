@@ -28,7 +28,7 @@ import '@testing-library/jest-dom'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { contrast } from '@instructure/ui-color-utils'
 
-import { ColorContrast } from '../'
+import { ColorContrast } from './'
 
 const testColors = {
   firstColor: '#FF0000',
