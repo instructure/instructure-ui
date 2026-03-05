@@ -56,42 +56,6 @@ type: example
 </InstUISettingsProvider>
 ```
 
-### Heading
-
-`color` prop has 2 new values: `primary-on` and `secondary-on`, these are used for colored surfaces.
-
-The default value of the `color` prop has changed from `'inherit'` to `'primary'`. If you need to preserve the previous behavior, explicitly set `color="inherit"`.
-
-```js
----
-type: embed
----
-<V12ChangelogTable
-  removed={[
-    {name:"weightImportant",note:""},
-    {name:"lineHeight125",note:""},
-    {name:"lineHeight150",note:""}
-  ]}
-  changed={[
-    {oldName:"primaryColor",newName:"baseColor",note:""},
-    {oldName:"secondaryColor",newName:"mutedColor",note:""},
-    {oldName:"primaryInverseColor",newName:"inverseColor",note:""},
-    {oldName:"secondaryInverseColor",newName:"inverseColor",note:""},
-    {oldName:"titlePageDesktop",newName:"titlePageDesktop",note:"now returns a full typography object instead of just a font size"},
-    {oldName:"titlePageMobile",newName:"titlePageMobile",note:"now returns a full typography object instead of just a font size"},
-    {oldName:"titleSection",newName:"titleSection",note:"now returns a full typography object instead of just a font size"},
-    {oldName:"titleCardSection",newName:"titleCardSection",note:"now returns a full typography object instead of just a font size"},
-    {oldName:"titleModule",newName:"titleModule",note:"now returns a full typography object instead of just a font size"},
-    {oldName:"titleCardLarge",newName:"titleCardLarge",note:"now returns a full typography object instead of just a font size"},
-    {oldName:"titleCardRegular",newName:"titleCardRegular",note:"now returns a full typography object instead of just a font size"},
-    {oldName:"titleCardMini",newName:"titleCardMini",note:"now returns a full typography object instead of just a font size"},
-    {oldName:"label",newName:"label",note:"now returns a full typography object instead of just a font size"},
-    {oldName:"labelInline",newName:"labelInline",note:"now returns a full typography object instead of just a font size"}
-  ]}
-/>
-
-```
-
 ### Alert
 
 ```js
@@ -410,6 +374,22 @@ type: embed
 
 ```
 
+### Grid.Col
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  changed={[
+    {oldName:"mediumMin",newName:"mediumMin",note:"now only provides the value, not the full media query (e.g., '768px' instead of 'min-width: 768px'). The component now adds the `min-width:` prefix automatically in the generated styles."},
+    {oldName:"largeMin",newName:"largeMin",note:"now only provides the value, not the full media query (e.g., '1024px' instead of 'min-width: 1024px'). The component now adds the `min-width:` prefix automatically in the generated styles."},
+    {oldName:"xLargeMin",newName:"xLargeMin",note:"now only provides the value, not the full media query (e.g., '1440px' instead of 'min-width: 1440px'). The component now adds the `min-width:` prefix automatically in the generated styles."}
+  ]}
+/>
+
+```
+
 ### Grid.Row
 
 ```js
@@ -426,17 +406,37 @@ type: embed
 
 ```
 
-### Grid.Col
+### Heading
+
+`color` prop has 2 new values: `primary-on` and `secondary-on`, these are used for colored surfaces.
+
+The default value of the `color` prop has changed from `'inherit'` to `'primary'`. If you need to preserve the previous behavior, explicitly set `color="inherit"`.
 
 ```js
 ---
 type: embed
 ---
 <V12ChangelogTable
+  removed={[
+    {name:"weightImportant",note:""},
+    {name:"lineHeight125",note:""},
+    {name:"lineHeight150",note:""}
+  ]}
   changed={[
-    {oldName:"mediumMin",newName:"mediumMin",note:"now only provides the value, not the full media query (e.g., '768px' instead of 'min-width: 768px'). The component now adds the `min-width:` prefix automatically in the generated styles."},
-    {oldName:"largeMin",newName:"largeMin",note:"now only provides the value, not the full media query (e.g., '1024px' instead of 'min-width: 1024px'). The component now adds the `min-width:` prefix automatically in the generated styles."},
-    {oldName:"xLargeMin",newName:"xLargeMin",note:"now only provides the value, not the full media query (e.g., '1440px' instead of 'min-width: 1440px'). The component now adds the `min-width:` prefix automatically in the generated styles."}
+    {oldName:"primaryColor",newName:"baseColor",note:""},
+    {oldName:"secondaryColor",newName:"mutedColor",note:""},
+    {oldName:"primaryInverseColor",newName:"inverseColor",note:""},
+    {oldName:"secondaryInverseColor",newName:"inverseColor",note:""},
+    {oldName:"titlePageDesktop",newName:"titlePageDesktop",note:"now returns a full typography object instead of just a font size"},
+    {oldName:"titlePageMobile",newName:"titlePageMobile",note:"now returns a full typography object instead of just a font size"},
+    {oldName:"titleSection",newName:"titleSection",note:"now returns a full typography object instead of just a font size"},
+    {oldName:"titleCardSection",newName:"titleCardSection",note:"now returns a full typography object instead of just a font size"},
+    {oldName:"titleModule",newName:"titleModule",note:"now returns a full typography object instead of just a font size"},
+    {oldName:"titleCardLarge",newName:"titleCardLarge",note:"now returns a full typography object instead of just a font size"},
+    {oldName:"titleCardRegular",newName:"titleCardRegular",note:"now returns a full typography object instead of just a font size"},
+    {oldName:"titleCardMini",newName:"titleCardMini",note:"now returns a full typography object instead of just a font size"},
+    {oldName:"label",newName:"label",note:"now returns a full typography object instead of just a font size"},
+    {oldName:"labelInline",newName:"labelInline",note:"now returns a full typography object instead of just a font size"}
   ]}
 />
 
@@ -804,6 +804,27 @@ type: embed
 
 ```
 
+### RangeInput
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"handleFocusRingSize",note:"style uses sharedTokens.focusOutline.width token"},
+    {name:"handleFocusRingColor",note:"style uses sharedTokens.focusOutline.onColor token"}
+  ]}
+  changed={[
+    {oldName:"handleShadow",newName:"boxShadow",note:""},
+    {oldName:"valueSmallPadding",newName:"valueSmallPadding",note:"now only sets horizontal padding of the value"},
+    {oldName:"valueMediumPadding",newName:"valueMediumPadding",note:"now only sets horizontal padding of the value"},
+    {oldName:"valueLargePadding",newName:"valueLargePadding",note:"now only sets horizontal padding of the value"}
+  ]}
+/>
+
+```
+
 ### SideNavBar
 
 ```js
@@ -854,6 +875,20 @@ type: embed
     {oldName:"outerFocusOutline",newName:"outerFocusOutlineColor",note:""},
     {oldName:"selectedInnerFocusOutline",newName:"selectedInnerFocusOutlineColor",note:""},
     {oldName:"selectedOuterFocusOutline",newName:"selectedOuterFocusOutlineColor",note:""},
+  ]}
+/>
+
+```
+
+### SourceCodeEditor
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"focusBorderColor",note:"now uses sharedTokens.focusOutline.infoColor"}
   ]}
 />
 
@@ -981,39 +1016,6 @@ type: embed
 
 ```
 
-### Text
-
-- `alert` color has been removed. Please use `primary` instead.
-- Some prop values have been deprecated, see [Text](/Text) for more details.
-- `color` has 2 new values: `primary-on` and `secondary-on`, these are used for colored surfaces.
-
-### TreeBrowser
-
-#### Icon system migration
-
-TreeBrowser now uses Lucide icons instead of the legacy icon system:
-
-- Default `collectionIcon` changed from `IconFolderLine` to `FolderClosedInstUIIcon`
-- Default `collectionIconExpanded` changed from `IconFolderLine` to `FolderClosedInstUIIcon`
-- Default `itemIcon` changed from `IconDocumentLine` to `FileTextInstUIIcon`
-
-#### Theme variable changes
-
-**TreeBrowser:**
-
-- theme variable `focusOutlineWidth` is now removed (handled by `sharedTokens`)
-- theme variable `focusOutlineStyle` is now removed (handled by `sharedTokens`)
-- theme variable `focusOutlineColor` is now removed (handled by `sharedTokens`)
-
-**TreeButton:**
-
-- theme variable `focusOutlineWidth` is now removed (handled by `sharedTokens`)
-- theme variable `focusOutlineStyle` is now removed (handled by `sharedTokens`)
-- theme variable `focusOutlineColor` is now removed (handled by `sharedTokens`)
-- theme variable `selectedOutlineWidth` is now removed (handled by `sharedTokens`)
-- theme variable `iconColor` is now removed
-- theme variable `iconsMarginRight` is now removed
-
 ### Tag
 
 ```js
@@ -1035,6 +1037,12 @@ type: embed
 />
 
 ```
+
+### Text
+
+- `alert` color has been removed. Please use `primary` instead.
+- Some prop values have been deprecated, see [Text](/Text) for more details.
+- `color` has 2 new values: `primary-on` and `secondary-on`, these are used for colored surfaces.
 
 ### TextArea
 
@@ -1117,41 +1125,6 @@ type: embed
 
 ```
 
-### RangeInput
-
-```js
----
-type: embed
----
-<V12ChangelogTable
-  removed={[
-    {name:"handleFocusRingSize",note:"style uses sharedTokens.focusOutline.width token"},
-    {name:"handleFocusRingColor",note:"style uses sharedTokens.focusOutline.onColor token"}
-  ]}
-  changed={[
-    {oldName:"handleShadow",newName:"boxShadow",note:""},
-    {oldName:"valueSmallPadding",newName:"valueSmallPadding",note:"now only sets horizontal padding of the value"},
-    {oldName:"valueMediumPadding",newName:"valueMediumPadding",note:"now only sets horizontal padding of the value"},
-    {oldName:"valueLargePadding",newName:"valueLargePadding",note:"now only sets horizontal padding of the value"}
-  ]}
-/>
-
-```
-
-### SourceCodeEditor
-
-```js
----
-type: embed
----
-<V12ChangelogTable
-  removed={[
-    {name:"focusBorderColor",note:"now uses sharedTokens.focusOutline.infoColor"}
-  ]}
-/>
-
-```
-
 ### Tray
 
 ```js
@@ -1170,6 +1143,50 @@ type: embed
     {oldName:"regularWidth",newName:"widthMg",note:""},
     {oldName:"mediumWidth",newName:"widthLg",note:""},
     {oldName:"largeWidth",newName:"widthXl",note:""}
+  ]}
+/>
+
+```
+
+### TreeBrowser
+
+#### Icon system migration
+
+TreeBrowser now uses Lucide icons instead of the legacy icon system:
+
+- Default `collectionIcon` changed from `IconFolderLine` to `FolderClosedInstUIIcon`
+- Default `collectionIconExpanded` changed from `IconFolderLine` to `FolderClosedInstUIIcon`
+- Default `itemIcon` changed from `IconDocumentLine` to `FileTextInstUIIcon`
+
+#### Theme variable changes
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"focusOutlineWidth",note:"handled by sharedTokens"},
+    {name:"focusOutlineStyle",note:"handled by sharedTokens"},
+    {name:"focusOutlineColor",note:"handled by sharedTokens"}
+  ]}
+/>
+```
+
+**TreeButton:**
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"focusOutlineWidth",note:"handled by sharedTokens"},
+    {name:"focusOutlineStyle",note:"handled by sharedTokens"},
+    {name:"focusOutlineColor",note:"handled by sharedTokens"},
+    {name:"selectedOutlineWidth",note:"handled by sharedTokens"},
+    {name:"iconColor",note:""},
+    {name:"iconsMarginRight",note:""}
   ]}
 />
 
