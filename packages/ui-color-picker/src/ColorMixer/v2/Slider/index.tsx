@@ -25,23 +25,22 @@
 import { Component } from 'react'
 
 import { addEventListener } from '@instructure/ui-dom-utils'
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import {  withStyle } from '@instructure/emotion'
 
-import { View } from '@instructure/ui-view'
-import type { ViewOwnProps } from '@instructure/ui-view'
+import { View } from '@instructure/ui-view/latest'
+import type { ViewOwnProps } from '@instructure/ui-view/latest'
 
 import { allowedProps } from './props'
 import type { SliderProps, SliderStyleProps } from './props'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 /**
 ---
 private: true
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, 'Slider')
 class Slider extends Component<SliderProps> {
   static allowedProps = allowedProps
   static readonly componentId = 'ColorMixer.Slider'

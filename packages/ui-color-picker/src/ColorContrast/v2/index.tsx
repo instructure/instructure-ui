@@ -30,26 +30,25 @@ import {
   contrastWithAlpha,
   validateContrast
 } from '@instructure/ui-color-utils'
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
-import { Text } from '@instructure/ui-text'
-import { Heading } from '@instructure/ui-heading'
-import { Pill } from '@instructure/ui-pill/v11_6'
+import { Text } from '@instructure/ui-text/latest'
+import { Heading } from '@instructure/ui-heading/latest'
+import { Pill } from '@instructure/ui-pill/latest'
 
-import ColorIndicator from '../ColorIndicator'
+import ColorIndicator from '../../ColorIndicator/v2'
 
 import { allowedProps } from './props'
 import type { ColorContrastProps, ColorContrastState } from './props'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 /**
 ---
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle)
 class ColorContrast extends Component<ColorContrastProps, ColorContrastState> {
   static allowedProps = allowedProps
   static readonly componentId = 'ColorContrast'

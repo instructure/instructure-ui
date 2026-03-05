@@ -24,24 +24,23 @@
 
 import { Component } from 'react'
 
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import shallowCompare from '../utils/shallowCompare'
 
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
-import { TextInput } from '@instructure/ui-text-input'
+import { TextInput } from '@instructure/ui-text-input/latest'
 
 import { allowedProps } from './props'
 import type { RGBAInputProps, RGBAInputState } from './props'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 /**
 ---
 private: true
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, 'RgbaInput')
 class RGBAInput extends Component<RGBAInputProps, RGBAInputState> {
   static allowedProps = allowedProps
   static readonly componentId = 'ColorMixer.RGBAInput'

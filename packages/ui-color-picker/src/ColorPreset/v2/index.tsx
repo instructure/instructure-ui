@@ -24,25 +24,24 @@
 
 import { Component } from 'react'
 
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import { omitProps } from '@instructure/ui-react-utils'
 import conversions from '@instructure/ui-color-utils'
 
-import { IconButton, Button } from '@instructure/ui-buttons'
-import { View } from '@instructure/ui-view'
-import { Tooltip } from '@instructure/ui-tooltip'
-import { Popover } from '@instructure/ui-popover'
-import { Text } from '@instructure/ui-text'
-import { Drilldown } from '@instructure/ui-drilldown'
-import type { DrilldownProps } from '@instructure/ui-drilldown'
-import { IconAddLine, IconCheckDarkSolid } from '@instructure/ui-icons'
+import { IconButton, Button } from '@instructure/ui-buttons/latest'
+import { View } from '@instructure/ui-view/latest'
+import { Tooltip } from '@instructure/ui-tooltip/latest'
+import { Popover } from '@instructure/ui-popover/latest'
+import { Text } from '@instructure/ui-text/latest'
+import { Drilldown } from '@instructure/ui-drilldown/latest'
+import type { DrilldownProps } from '@instructure/ui-drilldown/latest'
+import { PlusInstUIIcon, CheckInstUIIcon } from '@instructure/ui-icons'
 
-import { ColorIndicator } from '../ColorIndicator'
-import { ColorMixer } from '../ColorMixer'
-import { ColorContrast } from '../ColorContrast'
+import { ColorIndicator } from '../../ColorIndicator/v2'
+import { ColorMixer } from '../../ColorMixer/v2'
+import { ColorContrast } from '../../ColorContrast/v2'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import type { ColorPresetProps, ColorPresetState } from './props'
 import { allowedProps } from './props'
@@ -52,7 +51,7 @@ import { allowedProps } from './props'
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle)
 class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
   static allowedProps = allowedProps
   static readonly componentId = 'ColorPreset'
@@ -126,7 +125,7 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
               this.props.colorMixerSettings!.addNewPresetButtonScreenReaderLabel
             }
           >
-            <IconAddLine />
+            <PlusInstUIIcon />
           </IconButton>
         </div>
       }
@@ -280,9 +279,7 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
           <ColorIndicator color={color} shape="rectangle" role="presentation" />
           {this.isSelectedColor(color) && (
             <div css={this.props?.styles?.selectedIndicator}>
-              <IconCheckDarkSolid
-                themeOverride={{ sizeXSmall: '0.8rem' }}
-                size="x-small"
+              <CheckInstUIIcon size="sm" color="dark"
               />
             </div>
           )}

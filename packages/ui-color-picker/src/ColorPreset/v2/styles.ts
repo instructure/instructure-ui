@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { ColorPresetTheme } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { ColorPresetProps } from './props'
 /**
  * ---
@@ -35,7 +35,7 @@ import type { ColorPresetProps } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: ColorPresetTheme,
+  componentTheme: NewComponentTypes['ColorPreset'],
   props: ColorPresetProps
 ) => {
   const { colorMixerSettings, disabled } = props

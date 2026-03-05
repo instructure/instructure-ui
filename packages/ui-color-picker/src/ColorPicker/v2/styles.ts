@@ -23,7 +23,7 @@
  */
 
 import { calcSpacingFromShorthand } from '@instructure/emotion'
-import type { ColorPickerTheme } from '@instructure/shared-types'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 
 import type {
   ColorPickerProps,
@@ -42,21 +42,19 @@ import type {
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: ColorPickerTheme,
+  componentTheme: NewComponentTypes['ColorPicker'],
   props: ColorPickerProps,
+  sharedTokens: SharedTokens,
   state: ColorPickerState & { isSimple: boolean }
 ): ColorPickerStyle => {
-  const {
-    hashMarkColor,
-    errorIconColor,
-    warningIconColor,
-    successIconColor,
-    spacing
-  } = componentTheme
-  const { checkContrast, popoverMaxHeight, margin } = props
+  const { hashMarkColor } = componentTheme
+  const { popoverMaxHeight, margin } = props
   const { isSimple, calculatedPopoverMaxHeight } = state
 
-  const cssMargin = calcSpacingFromShorthand(margin, spacing)
+  const cssMargin = calcSpacingFromShorthand(margin, {
+    ...sharedTokens.spacing,
+    ...sharedTokens.legacy.spacing
+  })
   return {
     colorPicker: {
       label: 'colorPicker',
@@ -85,14 +83,12 @@ const generateStyle = (
     errorIcons: {
       label: 'colorPicker__errorIcons',
       display: 'flex',
-      paddingInlineEnd: componentTheme.errorIconsRightPadding,
-      color: checkContrast?.isStrict ? errorIconColor : warningIconColor
+      paddingInlineEnd: componentTheme.errorIconsRightPadding
     },
     successIcon: {
       label: 'colorPicker__successIcon',
       display: 'flex',
-      paddingInlineEnd: componentTheme.successIconRightPadding,
-      color: successIconColor
+      paddingInlineEnd: componentTheme.successIconRightPadding
     },
     label: {
       label: 'colorPicker__label',

@@ -132,14 +132,14 @@ type: example
             secondColorLabel="Foreground"
           />
         </div>
-        <div
-          style={{
-            backgroundColor: '#F5F5F5',
-            display: 'flex',
-            flexDirection: 'row-reverse',
-            padding: '7px',
-            borderTop: 'solid 1px #C7CDD1'
-          }}
+        <View
+          as="div"
+          background="secondary"
+          borderColor="primary"
+          borderWidth="small 0 0 0"
+          display="flex"
+          padding="x-small"
+          style={{ flexDirection: 'row-reverse' }}
         >
           <Button onClick={handleAdd} color="primary" margin="xx-small">
             Add
@@ -147,7 +147,7 @@ type: example
           <Button onClick={handleClose} color="secondary" margin="xx-small">
             Close
           </Button>
-        </div>
+        </View>
       </div>
     )
 
@@ -218,7 +218,7 @@ type: example
               contrastAgainst,
               renderContrastErrorMessage: (contrast, minContrast) => [
                 {
-                  type: 'newError',
+                  type: 'error',
                   text: `Not high enough contrast. Minimum required is ${minContrast}:1, current is ${contrast}:1`
                 }
               ]
@@ -226,13 +226,13 @@ type: example
           }
           renderInvalidColorMessage={(hexCode) => [
             {
-              type: 'newError',
+              type: 'error',
               text: `Not valid hex color. It should be either 3, 6 or 8 character long.`
             }
           ]}
           renderIsRequiredMessage={() => [
             {
-              type: 'newError',
+              type: 'error',
               text: `This field is required, please enter a valid hex code`
             }
           ]}
@@ -334,17 +334,17 @@ type: example
         { type: "success", text: "I am a contrast success message" },
       ],
       renderContrastErrorMessage: () => [
-        { type: "newError", text: "I am a contrast warning message" },
+        { type: "error", text: "I am a contrast warning message" },
       ],
     }}
     renderMessages={() => [
       { type: "hint", text: "I can display anything, at any time" },
     ]}
     renderInvalidColorMessage={() => [
-      { type: "newError", text: "I am an invalid color message" },
+      { type: "error", text: "I am an invalid color message" },
     ]}
     renderIsRequiredMessage={() => [
-      { type: "newError", text: "I am a required message" },
+      { type: "error", text: "I am a required message" },
     ]}
     placeholderText="Enter HEX"
   />

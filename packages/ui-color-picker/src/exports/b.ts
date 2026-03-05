@@ -21,29 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+export { ColorPicker } from '../ColorPicker/v2'
+export { ColorMixer } from '../ColorMixer/v2'
+export { ColorPreset } from '../ColorPreset/v2'
+export { ColorContrast } from '../ColorContrast/v2'
+export { ColorIndicator } from '../ColorIndicator/v2'
 
-import { render } from '@testing-library/react'
-import { vi } from 'vitest'
-import '@testing-library/jest-dom'
-import { runAxeCheck } from '@instructure/ui-axe-check'
-import { ColorIndicator } from '../'
-
-describe('<ColorIndicator />', () => {
-  describe('elementRef prop', () => {
-    it('should provide ref', async () => {
-      const elementRef = vi.fn()
-      const { container } = render(<ColorIndicator elementRef={elementRef} />)
-
-      expect(elementRef).toHaveBeenCalledWith(container.firstChild)
-    })
-  })
-
-  describe('should be accessible', () => {
-    it('a11y', async () => {
-      const { container } = render(<ColorIndicator />)
-      const axeCheck = await runAxeCheck(container)
-
-      expect(axeCheck).toBe(true)
-    })
-  })
-})
+export type { ColorPickerProps } from '../ColorPicker/v2/props'
+export type { ColorMixerProps } from '../ColorMixer/v2/props'
+export type { ColorPresetProps } from '../ColorPreset/v2/props'
+export type { ColorContrastProps } from '../ColorContrast/v2/props'
+export type { ColorIndicatorProps } from '../ColorIndicator/v2/props'

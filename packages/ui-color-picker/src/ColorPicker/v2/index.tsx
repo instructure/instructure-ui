@@ -25,32 +25,31 @@
 import { Component } from 'react'
 
 import {
-  withStyleLegacy as withStyle,
+  withStyle,
   InstUISettingsProvider
 } from '@instructure/emotion'
 import { warn, error } from '@instructure/console'
 import { omitProps } from '@instructure/ui-react-utils'
 import { isValid, contrast as getContrast } from '@instructure/ui-color-utils'
 import conversions from '@instructure/ui-color-utils'
-import { TextInput } from '@instructure/ui-text-input'
-import { Tooltip } from '@instructure/ui-tooltip'
-import { Button, IconButton } from '@instructure/ui-buttons'
-import { Popover } from '@instructure/ui-popover'
+import { TextInput } from '@instructure/ui-text-input/latest'
+import { Tooltip } from '@instructure/ui-tooltip/latest'
+import { Button, IconButton } from '@instructure/ui-buttons/latest'
+import { Popover } from '@instructure/ui-popover/latest'
 import {
-  IconCheckDarkLine,
-  IconWarningLine,
-  IconTroubleLine,
-  IconInfoLine
+  CheckInstUIIcon,
+  CircleXInstUIIcon,
+  AlertCircleInstUIIcon,
+  InfoInstUIIcon
 } from '@instructure/ui-icons'
-import type { FormMessage } from '@instructure/ui-form-field'
+import type { FormMessage } from '@instructure/ui-form-field/latest'
 
-import ColorIndicator from '../ColorIndicator'
-import ColorMixer from '../ColorMixer'
-import ColorContrast from '../ColorContrast'
-import ColorPreset from '../ColorPreset'
+import ColorIndicator from '../../ColorIndicator/v2'
+import ColorMixer from '../../ColorMixer/v2'
+import ColorContrast from '../../ColorContrast/v2'
+import ColorPreset from '../../ColorPreset/v2'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import { allowedProps } from './props'
 import type {
@@ -90,7 +89,7 @@ const acceptedCharactersForHEX = [
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle)
 class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
   static allowedProps = allowedProps
   static readonly componentId = 'ColorPicker'
@@ -382,13 +381,13 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
       if (minContrast >= contrast) {
         return (
           <div css={styles?.errorIcons}>
-            {checkContrast.isStrict ? <IconTroubleLine /> : <IconWarningLine />}
+            {checkContrast.isStrict ? <CircleXInstUIIcon color="errorColor" /> : <AlertCircleInstUIIcon color="warningColor" />}
           </div>
         )
       }
       return (
         <div css={styles?.successIcon}>
-          <IconCheckDarkLine />
+          <CheckInstUIIcon color="successColor" />
         </div>
       )
     }
@@ -474,7 +473,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
                 size="small"
                 shape="circle"
                 width="auto"
-                renderIcon={IconInfoLine}
+                renderIcon={<InfoInstUIIcon size="sm"/>}
               />
             </Tooltip>
           </InstUISettingsProvider>

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { ColorContrastTheme } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { ColorContrastProps } from './props'
 /**
  * ---
@@ -35,7 +35,7 @@ import type { ColorContrastProps } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: ColorContrastTheme,
+  componentTheme: NewComponentTypes['ColorContrast'],
   props: ColorContrastProps
 ) => {
   const statusDescriptionStyle = (pass: boolean) => ({
@@ -74,7 +74,8 @@ const generateStyle = (
     },
     colorIndicatorLabel: {
       label: 'colorContrast__colorIndicatorLabel',
-      wordBreak: 'break-all'
+      wordBreak: 'break-all',
+      color: componentTheme.colorIndicatorLabelColor
     },
     pickedColorHex: {
       label: 'colorContrast__pickedColorHex',

@@ -23,7 +23,7 @@
  */
 
 import type { ColorIndicatorProps, ColorIndicatorStyle } from './props'
-import type { ColorIndicatorTheme } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { RGBAType } from '@instructure/ui-color-utils'
 import conversions from '@instructure/ui-color-utils'
 import { isValid } from '@instructure/ui-color-utils'
@@ -51,7 +51,7 @@ const calcBlendedColor = (c1: RGBAType, c2: RGBAType) => {
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: ColorIndicatorTheme,
+  componentTheme: NewComponentTypes['ColorIndicator'],
   props: ColorIndicatorProps
 ): ColorIndicatorStyle => {
   const { color, shape } = props

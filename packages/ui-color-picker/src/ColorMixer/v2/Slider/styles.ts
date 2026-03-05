@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { ColorMixerSliderTheme } from '@instructure/shared-types'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import type { SliderStyle, SliderProps, SliderStyleProps } from './props'
 
 /**
@@ -36,8 +36,9 @@ import type { SliderStyle, SliderProps, SliderStyleProps } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: ColorMixerSliderTheme,
+  componentTheme: NewComponentTypes['Slider'],
   props: SliderProps,
+  _sharedTokens: SharedTokens,
   state: SliderStyleProps
 ): SliderStyle => {
   const sliderBackground = props.isColorSlider

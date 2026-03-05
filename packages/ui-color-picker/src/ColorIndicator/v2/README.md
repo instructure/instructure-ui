@@ -10,7 +10,7 @@ A component displaying a circle with checkerboard background capable of displayi
 ---
 type: example
 ---
-<div style={{display:'flex', background:'white'}}>
+<View as="div" background="primary" display='flex'>
   <View margin='small'>
     <ColorIndicator color=''/>
   </View>
@@ -41,7 +41,7 @@ type: example
   <View margin='small'>
     <ColorIndicator color='hwb(1.5708rad 60% 0%)'/>
   </View>
-</div>
+</View>
 
 
 ```
@@ -54,14 +54,14 @@ type: example
 ---
 type: example
 ---
-<div style={{display:'flex', background:'white'}}>
+<View as="div" background="primary" display='flex'>
   <View margin='small'>
     <ColorIndicator color='#ff0000'/>
   </View>
   <View margin='small'>
     <ColorIndicator color='#ff0000' shape='rectangle'/>
   </View>
-</div>
+</View>
 ```
 
 ### Color Button Pattern

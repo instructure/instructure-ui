@@ -24,12 +24,12 @@
 
 import { Component } from 'react'
 
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import { addEventListener } from '@instructure/ui-dom-utils'
 import type { HSVType } from '@instructure/ui-color-utils'
 
-import { View } from '@instructure/ui-view'
-import type { ViewOwnProps } from '@instructure/ui-view'
+import { View } from '@instructure/ui-view/latest'
+import type { ViewOwnProps } from '@instructure/ui-view/latest'
 import { px } from '@instructure/ui-utils'
 import { withDeterministicId } from '@instructure/ui-react-utils'
 
@@ -39,7 +39,6 @@ import { allowedProps } from './props'
 import type { ColorPaletteProps, ColorPaletteState } from './props'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 /**
 ---
@@ -47,7 +46,7 @@ private: true
 ---
 **/
 @withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle,'Palette')
 class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
   static allowedProps = allowedProps
   static readonly componentId = 'ColorMixer.Palette'
