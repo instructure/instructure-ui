@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
-import type { PaginationStyle, PaginationProps } from './props'
+import type { NewComponentTypes } from '@instructure/ui-themes'
+import type { PaginationStyle } from './props'
 
 /**
  * ---
@@ -37,9 +37,7 @@ import type { PaginationStyle, PaginationProps } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['Pagination'],
-  _props: PaginationProps,
-  _sharedTokens: SharedTokens
+  componentTheme: NewComponentTypes['Pagination']
 ): PaginationStyle => {
   return {
     pageIndicatorList: {
