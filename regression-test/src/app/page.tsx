@@ -27,6 +27,7 @@ import { Link } from '@instructure/ui/latest'
 
 const components = [
   'small-components',
+  'custom-icons',
   'alert',
   'avatar',
   'badge',
