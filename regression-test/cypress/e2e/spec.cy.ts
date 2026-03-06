@@ -162,6 +162,12 @@ describe('visual regression test', () => {
     cy.checkA11y('.axe-test', axeOptions, terminalLog)
   })
 
+  it('Custom and Lucide icons', () => {
+    cy.visit('http://localhost:3000/custom-icons')
+    cy.injectAxe()
+    cy.checkA11y('.axe-test', axeOptions, terminalLog)
+  })
+
   it('Dateinput, DateInput2', () => {
     cy.visit('http://localhost:3000/dateinput')
     cy.wait(400)

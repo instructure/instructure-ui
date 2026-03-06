@@ -22,5 +22,19 @@
  * SOFTWARE.
  */
 
-// Re-export all generated SVG icons and Lucide icons
-export * from './__build__'
+// Shared icon utilities
+export type { InstUIIconProps } from './props'
+export { renderIconWithProps } from './IconPropsProvider'
+
+// Lucide icons
+export * from './generated/lucide'
+
+// Custom/brand icons
+export * from './generated/custom'
+
+// Re-export legacy icons for backwards compatibility
+export * from './generated'
+
+// Re-export as namespaces for cases where distinction is needed (e.g., icon gallery)
+export * as CustomIcons from './generated/custom'
+export * as LucideIcons from './generated/lucide'
