@@ -60,6 +60,7 @@ import { Theme } from '../Theme'
 import { Select } from '../Select'
 import { Section } from '../Section'
 import IconsPage from '../Icons'
+import LegacyIconsPage from '../LegacyIcons'
 import { compileMarkdown } from '../compileMarkdown'
 
 import {
@@ -143,8 +144,7 @@ class App extends Component<AppProps, AppState> {
       themeKey: undefined,
       layout: 'large',
       docsData: null,
-      versionsData: undefined,
-      iconsData: null
+      versionsData: undefined
     }
 
     this._heroRef = createRef()
@@ -298,13 +298,6 @@ class App extends Component<AppProps, AppState> {
 
     this.fetchVersionData(signal).catch(errorHandler)
     document.addEventListener('keydown', this.handleTabKey)
-
-    fetch(`${getAssetBasePath()}/icons-data.json`, { signal })
-      .then((response) => response.json())
-      .then((iconsData) => {
-        this.setState({ iconsData: iconsData })
-      })
-      .catch(errorHandler)
 
     // Detect minor version from URL (e.g. /v11_7/Menu)
     const { minorVersion: urlMinorVersion } = parseCurrentUrl()
@@ -626,7 +619,6 @@ class App extends Component<AppProps, AppState> {
   }
 
   renderIcons(key: string) {
-    const { iconsData } = this.state
     const { layout } = this.state
     const smallerScreens = layout === 'small' || layout === 'medium'
 
@@ -640,7 +632,25 @@ class App extends Component<AppProps, AppState> {
         <Heading level="h1" as="h2" margin="0 0 medium">
           Icons
         </Heading>
-        <IconsPage glyphs={iconsData!.glyphs} />
+        <IconsPage />
+      </View>
+    )
+
+    return <Section id={key}>{this.renderWrappedContent(iconContent)}</Section>
+  }
+
+  renderLegacyIcons(key: string) {
+    const { layout } = this.state
+    const smallerScreens = layout === 'small' || layout === 'medium'
+
+    const iconContent = (
+      <View
+        as="div"
+        padding={
+          smallerScreens ? 'x-large none none large' : 'x-large none none'
+        }
+      >
+        <LegacyIconsPage />
       </View>
     )
 
@@ -847,6 +857,17 @@ class App extends Component<AppProps, AppState> {
           {this.renderIcons(key)}
         </View>
       )
+    } else if (key === 'legacy-icons') {
+      return (
+        <View
+          elementRef={this.mainContentRef}
+          tabIndex={0}
+          aria-label="legacy icons page main content"
+          as={'div'}
+        >
+          {this.renderLegacyIcons(key)}
+        </View>
+      )
     } else if (theme) {
       return (
         <View
@@ -961,9 +982,9 @@ class App extends Component<AppProps, AppState> {
   }
 
   renderLegacyDocWarning() {
-    const { versionsData, iconsData } = this.state
+    const { versionsData } = this.state
 
-    if (!versionsData || !iconsData) {
+    if (!versionsData) {
       return null
     }
 
@@ -1025,9 +1046,9 @@ class App extends Component<AppProps, AppState> {
 
   render() {
     const key = this.state.key
-    const { showMenu, layout, docsData, iconsData } = this.state
+    const { showMenu, layout, docsData } = this.state
 
-    if (!docsData || !iconsData) {
+    if (!docsData) {
       return <LoadingScreen />
     }
     return (

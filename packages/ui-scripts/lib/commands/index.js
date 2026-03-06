@@ -34,6 +34,8 @@ import build from '../build/babel.js'
 import generateAllTokens from '../build/generate-all-tokens.js'
 import buildIcons from '../icons/build-icons.js'
 import buildThemes from '../build/build-themes.js'
+import generateLucideIndex from './generate-lucide-index.ts'
+import generateCustomIndex from './generate-custom-index.ts'
 
 export const yargCommands = [
   bump,
@@ -47,5 +49,7 @@ export const yargCommands = [
   build,
   generateAllTokens,
   buildIcons,
-  buildThemes
+  buildThemes,
+  generateLucideIndex,
+  generateCustomIndex
 ]
