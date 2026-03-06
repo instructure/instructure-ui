@@ -37,7 +37,8 @@ export { windowMessageListener } from './windowMessageListener'
 export {
   DeterministicIdContext,
   DeterministicIdContextProvider,
-  withDeterministicId
+  withDeterministicId,
+  useDeterministicId
 } from './DeterministicIdContext'
 
 export type { GetInteractionOptions } from './getInteraction'

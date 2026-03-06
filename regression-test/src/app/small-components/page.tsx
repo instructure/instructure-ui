@@ -29,21 +29,23 @@ import {
   MetricGroup as mcg,
   Pill as pl,
   Tag as tg,
+  Text as tx,
   TimeSelect as ts,
   IconMessageLine,
   IconClockLine,
   IconEndLine,
   IconCheckLine,
   AccessibleContent
-} from '@instructure/ui'
+} from '@instructure/ui/latest'
 
 const Metric = mc as any
 const MetricGroup = mcg as any
 const Pill = pl as any
 const Tag = tg as any
 const TimeSelect = ts as any
+const Text = tx as any
 
-export default function MetricPage() {
+export default function SmallComponentsPage() {
   return (
     <main id="main" className="flex gap-8 p-8 flex-col items-start axe-test">
       <div>Metric:</div>
@@ -124,6 +126,46 @@ export default function MetricPage() {
         onHideOptions={(e: any) => 5}
         defaultValue="2025-08-18T09:30:00+00:00"
       />
+      <div>Text:</div>
+      <div>
+        <Text variant="descriptionPage"> descriptionPage </Text>
+        <Text variant="descriptionSection"> descriptionSection </Text>
+        <Text variant="content"> content </Text>
+        <Text variant="contentImportant"> contentImportant </Text>
+      </div>
+      <div>
+        <Text variant="contentQuote"> contentQuote </Text>
+        <Text variant="contentSmall"> contentSmall </Text>
+        <Text variant="legend"> legend </Text>
+      </div>
+      <div>
+        <Text color="primary">I&#39;m primary text</Text>
+        <Text color="secondary">I&#39;m secondary text</Text>
+        <Text color="brand">I&#39;m brand text</Text>
+        <Text color="success">I&#39;m success text</Text>
+      </div>
+      <div>
+        <Text color="warning">I&#39;m warning text</Text>
+        <Text color="danger">I&#39;m danger text</Text>
+        <Text color="ai-highlight">I&#39;m an ai-highlight text</Text>
+        <Text color="primary-inverse">I&#39;m primary-inverse text</Text>
+      </div>
+      <div>
+        <Text color="secondary-inverse">I&#39;m secondary-inverse text</Text>
+        <Text color="primary-on">I&#39;m primary-on text</Text>
+        <Text color="secondary-on">I&#39;m secondary-on text</Text>
+      </div>
+      <div>
+        <Text size="descriptionPage">descriptionPage</Text>
+        <br />
+        <Text size="descriptionSection">descriptionSection</Text>
+        <br />
+        <Text size="content">content</Text>
+        <br />
+        <Text size="contentSmall">contentSmall</Text>
+        <br />
+        <Text size="legend">legend</Text>
+      </div>
     </main>
   )
 }

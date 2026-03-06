@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import { useState } from 'react'
-import { Tooltip, Modal, Button, CloseButton } from '@instructure/ui'
+import { Tooltip, Modal, Button, CloseButton } from '@instructure/ui/latest'
 import 'cypress-real-events'
 
 import '../support/component'

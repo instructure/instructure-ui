@@ -39,7 +39,7 @@ import type { Debounced } from '@instructure/debounce'
 import { deepEqual, shallowEqual, combineDataCid } from '@instructure/ui-utils'
 import { debounce } from '@instructure/debounce'
 import { Portal } from '@instructure/ui-portal'
-import { withStyle } from '@instructure/emotion'
+import { withStyleLegacy as withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

@@ -23,7 +23,7 @@
  */
 
 // This is the format of the saved JSON files
-import { Documentation } from 'react-docgen'
+import type { Documentation } from 'react-docgen'
 import type { Theme } from '@instructure/ui-themes'
 
 type ProcessedFile =
@@ -31,7 +31,7 @@ type ProcessedFile =
   YamlMetaInfo &
   JsDocResult &
   PackagePathData &
-  { title: string, id:string }
+  { title: string, id:string, componentVersion?: string }
 
 type PackagePathData = {
   extension: string
@@ -142,9 +142,25 @@ type MainIconsData = {
 }
 
 type MainDocsData = {
-  themes: Record<string, { resource: Theme; requirePath: string }>
+  themes: Record<string, { resource: Theme }>
   library: LibraryOptions
 } & ParsedDoc
+
+type VersionMapEntry = {
+  exportLetter: string
+  componentVersion: string
+}
+
+type VersionMap = {
+  libraryVersions: string[]
+  defaultVersion: string
+  mapping: Record<string, Record<string, VersionMapEntry>>
+}
+
+type MinorVersionData = {
+  libraryVersions: string[]
+  defaultVersion: string
+}
 
 export type {
   ProcessedFile,
@@ -155,5 +171,9 @@ export type {
   Glyph,
   MainDocsData,
   MainIconsData,
-  JsDocResult
+  JsDocResult,
+  MinorVersionData,
+  Section,
+  VersionMapEntry,
+  VersionMap
 }

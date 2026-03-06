@@ -38,15 +38,12 @@ import 'moment/min/locales'
 
 import { mirrorHorizontalPlacement } from '@instructure/ui-position'
 
-// eslint-plugin-import doesn't like 'import * as Components' here
-const Components = require('./components')
-
+import { getComponentsForVersion } from './versioned-components'
+import { rebrandDark, rebrandLight } from '@instructure/ui-themes'
 import { debounce } from '@instructure/debounce'
 
-// eslint-disable-next-line no-restricted-imports
-import '@instructure/ui-icons/es/icon-font/Solid/InstructureIcons-Solid.css'
-// eslint-disable-next-line no-restricted-imports
-import '@instructure/ui-icons/es/icon-font/Line/InstructureIcons-Line.css'
+import '@instructure/ui-icons/src/__build__/icon-font/Solid/InstructureIcons-Solid.css'
+import '@instructure/ui-icons/src/__build__/icon-font/Line/InstructureIcons-Line.css'
 
 import { DateTime } from '@instructure/ui-i18n'
 // @ts-ignore webpack import
@@ -74,9 +71,13 @@ const lorem = new LoremIpsum({
   }
 })
 
-const globals = {
+const Components = getComponentsForVersion()
+
+const globals: Record<string, any> = {
   ...Components,
   debounce,
+  rebrandLight,
+  rebrandDark,
   moment,
   avatarSquare,
   avatarPortrait,
@@ -109,4 +110,16 @@ Object.keys(globals).forEach((key) => {
   ;(global as any)[key] = globals[key]
 })
 
+/**
+ * Re-populates global component references with version-specific components.
+ * Called when the user switches minor versions in the docs UI.
+ */
+function updateGlobalsForVersion(version: string) {
+  const versionComponents = getComponentsForVersion(version)
+  Object.keys(versionComponents).forEach((key) => {
+    ;(global as any)[key] = versionComponents[key]
+  })
+}
+
 export default globals
+export { updateGlobalsForVersion }

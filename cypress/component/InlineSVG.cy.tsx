@@ -24,7 +24,7 @@
 
 import '../support/component'
 import 'cypress-real-events'
-import { InlineSVG } from '@instructure/ui'
+import { InlineSVG } from '@instructure/ui/latest'
 import { expect } from 'chai'
 
 const WIDTH = '100px'

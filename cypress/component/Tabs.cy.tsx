@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { Tabs } from '@instructure/ui'
+import { Tabs } from '@instructure/ui/latest'
 import { expect } from 'chai'
 
 import '../support/component'

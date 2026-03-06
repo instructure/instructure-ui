@@ -1,0 +1,126 @@
+{
+  "topNavBarActionItems": {
+    "smallViewportActionItemContainerMargin": {
+      "value": "3.75rem",
+      "type": "spacing"
+    },
+    "smallViewportActionItemContainerMaxWidth": {
+      "value": "50%",
+      "type": "sizing"
+    },
+    "smallViewportDropdownMenuActiveOptionFontWeight": {
+      "value": "{fontWeight.body.strong}",
+      "type": "fontWeights"
+    },
+    "smallViewportDropdownMenuActiveOptionIndicatorSpacing": {
+      "value": "{spacing.spaceXs}",
+      "type": "spacing"
+    },
+    "smallViewportDropdownMenuActiveOptionIndicatorWidth": {
+      "value": "{borderWidth.lg}",
+      "type": "borderWidth"
+    },
+    "activeIndicatorWidth": {
+      "value": "{borderWidth.md}",
+      "type": "borderWidth"
+    }
+  },
+  "topNavBarBrand": {
+    "logoHeight": {
+      "value": "2.25rem",
+      "type": "sizing"
+    },
+    "focusOutlineInset": {
+      "value": "-0.25rem",
+      "type": "sizing"
+    },
+    "iconPadding": {
+      "value": "{spacing.spaceMd}",
+      "type": "spacing"
+    }
+  },
+  "topNavBarItem": {
+    "fontSize": {
+      "value": "{fontSize.textBase}",
+      "type": "fontSizes"
+    },
+    "fontFamily": {
+      "value": "{fontFamily.base}",
+      "type": "fontFamilies"
+    },
+    "fontWeight": {
+      "value": "{fontWeight.body.base}",
+      "type": "fontWeights"
+    },
+    "color": {
+      "value": "{color.text.inverse}",
+      "type": "color"
+    },
+    "colorInverse": {
+      "value": "{color.text.base}",
+      "type": "color"
+    },
+    "itemInlinePadding": {
+      "value": "{spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "itemSpacing": {
+      "value": "{spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "iconTextGap": {
+      "value": "{spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "activeItemFontWeight": {
+      "value": "{fontWeight.body.strong}",
+      "type": "fontWeights"
+    },
+    "activeItemIndicatorSpacing": {
+      "value": "{spacing.spaceXs}",
+      "type": "spacing"
+    },
+    "activeIndicatorColor": {
+      "value": "{color.text.inverse}",
+      "type": "color"
+    },
+    "activeIndicatorColorInverse": {
+      "value": "{color.text.base}",
+      "type": "color"
+    }
+  },
+  "topNavBarLayout": {
+    "desktopHeight": {
+      "value": "4rem",
+      "type": "sizing"
+    },
+    "desktopInlinePadding": {
+      "value": "{spacing.padding.container.xs}",
+      "type": "spacing"
+    },
+    "desktopBackground": {
+      "value": "{color.background.inverse}",
+      "type": "color"
+    },
+    "desktopBackgroundInverse": {
+      "value": "{color.background.muted}",
+      "type": "color"
+    },
+    "desktopFontFamily": {
+      "value": "{fontFamily.base}",
+      "type": "fontFamilies"
+    },
+    "desktopFontWeight": {
+      "value": "{fontWeight.body.base}",
+      "type": "fontWeights"
+    },
+    "desktopFontSize": {
+      "value": "{fontSize.textBase}",
+      "type": "fontSizes"
+    },
+    "desktopBottomBorder": {
+      "value": "none",
+      "type": "other"
+    }
+  }
+}

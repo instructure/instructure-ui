@@ -34,6 +34,7 @@ import { Menu } from '@instructure/ui-menu'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
 import { versionInPath } from '../versionData'
+import { navigateTo } from '../navigationUtils'
 
 import type { HeaderProps } from './props'
 import { allowedProps } from './props'
@@ -82,12 +83,94 @@ class Header extends Component<HeaderProps> {
     return window.location.replace(versionToNavigate)
   }
 
+  /**
+   * Returns the version string for display: major only (e.g. "v10") when
+   * minor version switcher is active, full semver otherwise.
+   */
+  getDisplayVersion = () => {
+    const { version, minorVersionsData } = this.props
+    if (minorVersionsData && version) {
+      return version.split('.')[0]
+    }
+    return version
+  }
+
+  handleMinorVersionSelect = (
+    _e: React.MouseEvent<any>,
+    updated: (string | number | undefined)[]
+  ) => {
+    const [selectedVersion] = updated
+    if (
+      selectedVersion &&
+      typeof selectedVersion === 'string' &&
+      this.props.onMinorVersionChange
+    ) {
+      this.props.onMinorVersionChange(selectedVersion)
+    }
+  }
+
+  /**
+   * Formats a version key like "v11_5" into display format "v11.5"
+   */
+  formatMinorVersion = (version: string) => {
+    return version.replace(/_/g, '.')
+  }
+
+  renderMinorVersionsBlock = () => {
+    const { minorVersionsData, selectedMinorVersion } = this.props
+    if (
+      !minorVersionsData ||
+      minorVersionsData.libraryVersions.length <= 1
+    ) {
+      return null
+    }
+
+    return (
+      <View display="block" textAlign="center" margin="none none small">
+        <Menu
+          placement="bottom"
+          label="Select minor version"
+          themeOverride={{ minWidth: '10rem' }}
+          trigger={
+            <CondensedButton>
+              <Text size="small">
+                {selectedMinorVersion
+                  ? this.formatMinorVersion(selectedMinorVersion)
+                  : 'Minor version'}
+              </Text>
+              <IconMiniArrowDownLine size="x-small" />
+            </CondensedButton>
+          }
+        >
+          <Menu.Group
+            selected={selectedMinorVersion ? [selectedMinorVersion] : []}
+            onSelect={this.handleMinorVersionSelect}
+            label={
+              <ScreenReaderContent>
+                Select minor version
+              </ScreenReaderContent>
+            }
+          >
+            {minorVersionsData.libraryVersions.map((ver, index) => (
+              <Menu.Item key={index} id={`minor-opt-${index}`} value={ver}>
+                <View textAlign="center" as="div">
+                  {this.formatMinorVersion(ver)}
+                </View>
+              </Menu.Item>
+            ))}
+          </Menu.Group>
+        </Menu>
+      </View>
+    )
+  }
+
   renderVersionsBlock = () => {
-    const { versionsData, name, version } = this.props
+    const { versionsData, name } = this.props
     const { latestVersion, previousVersions } = versionsData
     const allVersions = [latestVersion, ...previousVersions]
 
     const currentVersion = versionInPath || latestVersion
+    const displayVersion = this.getDisplayVersion()
 
     return (
       <View display="block" textAlign="center" margin="small none large">
@@ -98,10 +181,10 @@ class Header extends Component<HeaderProps> {
           trigger={
             <CondensedButton>
               <Text size="large">
-                {name && version ? (
+                {name && displayVersion ? (
                   <span>
                     {name}
-                    {version}
+                    {displayVersion}
                   </span>
                 ) : (
                   'Documentation'
@@ -137,16 +220,11 @@ class Header extends Component<HeaderProps> {
       <View as="div" margin="none none medium" padding="none medium">
         <Link
           href="index"
-          isWithinText={false}
+          variant="standalone"
           display="block"
           onClick={(e) => {
             e.preventDefault()
-            const basePath =
-              window.location.pathname.match(/^(\/pr-preview\/pr-\d+)/)?.[1] ||
-              ''
-            const newUrl = basePath ? `${basePath}/index` : `/`
-            window.history.pushState({}, '', newUrl)
-            window.dispatchEvent(new PopStateEvent('popstate'))
+            navigateTo('index')
           }}
         >
           <View display="block" textAlign="center">
@@ -160,27 +238,22 @@ class Header extends Component<HeaderProps> {
           ) : (
             <Link
               href="index"
-              isWithinText={false}
+              variant="standalone"
               display="block"
               onClick={(e) => {
                 e.preventDefault()
-                const basePath =
-                  window.location.pathname.match(
-                    /^(\/pr-preview\/pr-\d+)/
-                  )?.[1] || ''
-                const newUrl = basePath ? `${basePath}/index` : `/`
-                window.history.pushState({}, '', newUrl)
-                window.dispatchEvent(new PopStateEvent('popstate'))
+                navigateTo('index')
               }}
             >
               <View display="block" margin="small none none">
                 <Text size="large">
                   {this.props.name}
-                  {this.props.version}
+                  {this.getDisplayVersion()}
                 </Text>
               </View>
             </Link>
           )}
+          {this.renderMinorVersionsBlock()}
         </View>
       </View>
     )

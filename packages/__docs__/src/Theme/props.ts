@@ -28,7 +28,6 @@ import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 type ThemeOwnProps = {
   themeKey: string
   variables: BaseTheme
-  requirePath: string
 }
 
 type PropKeys = keyof ThemeOwnProps
@@ -42,6 +41,6 @@ type ThemeTheme = {
   convertedValueFontSize: Typography['fontSizeSmall']
 }
 export type ThemeStyle = ComponentStyle<'convertedValue'>
-const allowedProps: AllowedPropKeys = ['themeKey', 'variables', 'requirePath']
+const allowedProps: AllowedPropKeys = ['themeKey', 'variables']
 export type { ThemeProps, ThemeTheme }
 export { allowedProps }

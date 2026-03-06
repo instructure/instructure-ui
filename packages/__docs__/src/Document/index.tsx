@@ -29,10 +29,9 @@ import { View } from '@instructure/ui-view'
 import { Tabs } from '@instructure/ui-tabs'
 import type { TabsProps } from '@instructure/ui-tabs'
 import { SourceCodeEditor } from '@instructure/ui-source-code-editor'
-import { withStyle } from '@instructure/emotion'
+import { withStyleForDocs as withStyle } from '../withStyleForDocs'
 
 import generateStyle from './styles'
-import functionalComponentThemes from '../../functionalComponentThemes'
 
 import { Description } from '../Description'
 import { Properties } from '../Properties'
@@ -75,22 +74,29 @@ class Document extends Component<DocumentProps, DocumentState> {
   fetchGenerateComponentTheme = async () => {
     const { doc, themeVariables } = this.props
     let generateTheme
-    if (this.state.selectedDetailsTabId === doc.id) {
+    // Doc IDs use dot notation (e.g. "Menu.Item") but theme component keys
+    // use PascalCase without dots (e.g. "MenuItem").
+    // New-theme entries are in themeVariables.newTheme.components.
+    const selectedId = this.state.selectedDetailsTabId
+    const themeKey = selectedId?.replace(/\./g, '')
+    // @ts-ignore todo type
+    const newThemeEntry = themeVariables?.newTheme?.components?.[themeKey]
+    if (newThemeEntry) {
+      // new theme - use pre-computed theme object directly
+      this.setState({ componentTheme: newThemeEntry })
+      return
+    }
+    // old theme - use generateComponentTheme function
+    if (selectedId === doc.id) {
       generateTheme = doc?.componentInstance?.generateComponentTheme
     } else {
       generateTheme = doc?.children?.find(
-        (value) => value.id === this.state.selectedDetailsTabId
+        (value) => value.id === selectedId
       )?.componentInstance?.generateComponentTheme
     }
-    const generateThemeFunctional =
-      functionalComponentThemes[
-        doc.id as keyof typeof functionalComponentThemes
-      ]
     if (typeof generateTheme === 'function' && themeVariables) {
+      // @ts-ignore todo type
       this.setState({ componentTheme: generateTheme(themeVariables) })
-    } else if (generateThemeFunctional && themeVariables) {
-      const componentTheme = await generateThemeFunctional(themeVariables)
-      this.setState({ componentTheme: componentTheme })
     } else {
       this.setState({ componentTheme: undefined })
     }
@@ -99,6 +105,7 @@ class Document extends Component<DocumentProps, DocumentState> {
   componentDidUpdate(prevProps: typeof this.props, prevState: DocumentState) {
     this.props.makeStyles?.()
     if (
+      // @ts-ignore todo check
       this.props.themeVariables?.key !== prevProps.themeVariables?.key ||
       this.state.selectedDetailsTabId != prevState.selectedDetailsTabId
     ) {
@@ -138,12 +145,18 @@ class Document extends Component<DocumentProps, DocumentState> {
           <View as="div" margin="0 0 x-small 0">
             See which global theme variables are mapped to the component here:{' '}
             {this.renderThemeLink(doc)}
+            <br />
+            <br />
+            Note: Theme variables with a dot in their name are nested objects,
+            to override them you need to override the whole object, for example:
+            &nbsp;
+            <code>
+              themeOverride=
+              {`{{ boxShadow: {x: "0.3rem", y: "0.5rem", color: "red"}}}`}
+            </code>
           </View>
         ) : null}
-        <ComponentTheme
-          componentTheme={componentTheme}
-          themeVariables={themeVariables}
-        />
+        <ComponentTheme componentTheme={componentTheme} />
 
         <View margin="x-large 0 0" display="block">
           <Heading
@@ -237,15 +250,24 @@ class Document extends Component<DocumentProps, DocumentState> {
   }
 
   renderUsage() {
-    const { esPath, id, displayName, packageName, title } = this.props.doc
+    const { esPath, id, displayName, packageName, title, componentVersion } =
+      this.props.doc
+    const { selectedMinorVersion } = this.props
     const importName = displayName || id
+
+    // For versioned components, show the version-specific import path
+    // e.g. '@instructure/ui-avatar/v11_6' instead of '@instructure/ui-avatar'
+    const versionedPackageName =
+      packageName && componentVersion && selectedMinorVersion
+        ? `${packageName}/${selectedMinorVersion}`
+        : packageName
 
     const example = []
 
-    if (packageName) {
+    if (versionedPackageName) {
       example.push(`\
 /*** ES Modules (with tree shaking) ***/
-import { ${importName} } from '${packageName}'
+import { ${importName} } from '${versionedPackageName}'
 `)
     }
 

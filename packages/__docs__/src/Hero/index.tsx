@@ -35,7 +35,7 @@ import { IconGithubSolid, IconCheckMarkSolid } from '@instructure/ui-icons'
 import { AccessibleContent } from '@instructure/ui-a11y-content'
 import { InlineSVG, SVGIcon } from '@instructure/ui-svg-images'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleForDocs as withStyle } from '../withStyleForDocs'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -44,6 +44,7 @@ import { ColorBand } from '../ColorBand'
 import { ContentWrap } from '../ContentWrap'
 import { Search } from '../Search'
 import { Heading } from '../Heading'
+import { navigateTo } from '../navigationUtils'
 
 import type { HeroProps } from './props'
 import { allowedProps } from './props'
@@ -235,13 +236,7 @@ class Hero extends Component<HeroProps> {
               href="usage"
               onClick={(e: any) => {
                 e.preventDefault()
-                const basePath =
-                  window.location.pathname.match(
-                    /^(\/pr-preview\/pr-\d+)/
-                  )?.[1] || ''
-                const newUrl = basePath ? `${basePath}/usage` : `/usage`
-                window.history.pushState({}, '', newUrl)
-                window.dispatchEvent(new PopStateEvent('popstate'))
+                navigateTo('usage')
               }}
             >
               Developer Quick Start
@@ -264,13 +259,7 @@ class Hero extends Component<HeroProps> {
               href="LICENSE"
               onClick={(e: any) => {
                 e.preventDefault()
-                const basePath =
-                  window.location.pathname.match(
-                    /^(\/pr-preview\/pr-\d+)/
-                  )?.[1] || ''
-                const newUrl = basePath ? `${basePath}/LICENSE` : `/LICENSE`
-                window.history.pushState({}, '', newUrl)
-                window.dispatchEvent(new PopStateEvent('popstate'))
+                navigateTo('LICENSE')
               }}
             >
               MIT
@@ -292,15 +281,7 @@ class Hero extends Component<HeroProps> {
               href="contributing"
               onClick={(e: any) => {
                 e.preventDefault()
-                const basePath =
-                  window.location.pathname.match(
-                    /^(\/pr-preview\/pr-\d+)/
-                  )?.[1] || ''
-                const newUrl = basePath
-                  ? `${basePath}/contributing`
-                  : `/contributing`
-                window.history.pushState({}, '', newUrl)
-                window.dispatchEvent(new PopStateEvent('popstate'))
+                navigateTo('contributing')
               }}
             >
               Contributing Guidelines
@@ -311,15 +292,7 @@ class Hero extends Component<HeroProps> {
               href="CODE_OF_CONDUCT"
               onClick={(e: any) => {
                 e.preventDefault()
-                const basePath =
-                  window.location.pathname.match(
-                    /^(\/pr-preview\/pr-\d+)/
-                  )?.[1] || ''
-                const newUrl = basePath
-                  ? `${basePath}/CODE_OF_CONDUCT`
-                  : `/CODE_OF_CONDUCT`
-                window.history.pushState({}, '', newUrl)
-                window.dispatchEvent(new PopStateEvent('popstate'))
+                navigateTo('CODE_OF_CONDUCT')
               }}
             >
               Code of Conduct
@@ -341,13 +314,7 @@ class Hero extends Component<HeroProps> {
             href="CHANGELOG"
             onClick={(e: any) => {
               e.preventDefault()
-              const basePath =
-                window.location.pathname.match(
-                  /^(\/pr-preview\/pr-\d+)/
-                )?.[1] || ''
-              const newUrl = basePath ? `${basePath}/CHANGELOG` : `/CHANGELOG`
-              window.history.pushState({}, '', newUrl)
-              window.dispatchEvent(new PopStateEvent('popstate'))
+              navigateTo('CHANGELOG')
             }}
           >
             Change Log ({version})
@@ -356,7 +323,7 @@ class Hero extends Component<HeroProps> {
         <Link
           display="block"
           href="https://www.instructure.com/canvas/"
-          isWithinText={false}
+          variant="standalone"
           themeOverride={{
             hoverTextDecorationOutsideText: 'none'
           }}
@@ -470,15 +437,7 @@ class Hero extends Component<HeroProps> {
                         href="CHANGELOG"
                         onClick={(e: any) => {
                           e.preventDefault()
-                          const basePath =
-                            window.location.pathname.match(
-                              /^(\/pr-preview\/pr-\d+)/
-                            )?.[1] || ''
-                          const newUrl = basePath
-                            ? `${basePath}/CHANGELOG`
-                            : `/CHANGELOG`
-                          window.history.pushState({}, '', newUrl)
-                          window.dispatchEvent(new PopStateEvent('popstate'))
+                          navigateTo('CHANGELOG')
                         }}
                       >
                         {version}
@@ -517,15 +476,7 @@ class Hero extends Component<HeroProps> {
                         size={bigScreen ? 'large' : 'medium'}
                         onClick={(e: any) => {
                           e.preventDefault()
-                          const basePath =
-                            window.location.pathname.match(
-                              /^(\/pr-preview\/pr-\d+)/
-                            )?.[1] || ''
-                          const newUrl = basePath
-                            ? `${basePath}/usage`
-                            : `/usage`
-                          window.history.pushState({}, '', newUrl)
-                          window.dispatchEvent(new PopStateEvent('popstate'))
+                          navigateTo('usage')
                         }}
                       >
                         Developer Quick Start
@@ -552,15 +503,7 @@ class Hero extends Component<HeroProps> {
                         margin="0 x-small x-small 0"
                         onClick={(e: any) => {
                           e.preventDefault()
-                          const basePath =
-                            window.location.pathname.match(
-                              /^(\/pr-preview\/pr-\d+)/
-                            )?.[1] || ''
-                          const newUrl = basePath
-                            ? `${basePath}/upgrade-guide`
-                            : `/upgrade-guide`
-                          window.history.pushState({}, '', newUrl)
-                          window.dispatchEvent(new PopStateEvent('popstate'))
+                          navigateTo('upgrade-guide')
                         }}
                       >
                         v11 Upgrade Guide

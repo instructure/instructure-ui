@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Select } from '@instructure/ui'
+import { Select } from '@instructure/ui/latest'
 import { IconCheckSolid, IconEyeSolid } from '@instructure/ui-icons'
 import 'cypress-real-events'
 import '../support/component'
