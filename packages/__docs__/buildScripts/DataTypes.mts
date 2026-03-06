@@ -137,9 +137,7 @@ type Glyph = {
   glyphName: string
 }
 
-type MainIconsData = {
-  glyphs: Glyph[]
-}
+type LegacyIconsData = Glyph[]
 
 type MainDocsData = {
   themes: Record<string, { resource: Theme }>
@@ -170,7 +168,7 @@ export type {
   LibraryOptions,
   Glyph,
   MainDocsData,
-  MainIconsData,
+  LegacyIconsData,
   JsDocResult,
   MinorVersionData,
   Section,
