@@ -27,12 +27,6 @@ import path from 'path'
 import { getClientProps } from './utils/getClientProps.mjs'
 import { processFile } from './processFile.mjs'
 import fs from 'fs'
-import {
-  canvas,
-  canvasHighContrast,
-  rebrandDark,
-  rebrandLight
-} from '@instructure/ui-themes'
 import type {
   LibraryOptions,
   MainDocsData,
@@ -42,6 +36,12 @@ import { getFrontMatter } from './utils/getFrontMatter.mjs'
 import { createRequire } from 'module'
 import { fileURLToPath, pathToFileURL } from 'url'
 import { generateAIAccessibleMarkdowns } from './ai-accessible-documentation/generate-ai-accessible-markdowns.mjs'
+import {
+  canvas,
+  canvasHighContrast,
+  rebrandDark,
+  rebrandLight
+} from '@instructure/ui-themes'
 import { generateAIAccessibleLlmsFile } from './ai-accessible-documentation/generate-ai-accessible-llms-file.mjs'
 
 const __filename = fileURLToPath(import.meta.url)
@@ -173,13 +173,6 @@ function buildDocs() {
           baseUrl: 'https://instructure.design/markdowns/',
           summariesFilePath: path.join(__dirname, '../buildScripts/ai-accessible-documentation/summaries-for-llms-file.json')
         }
-      )
-
-      // eslint-disable-next-line no-console
-      console.log('Copying icons data...')
-      fs.copyFileSync(
-        projectRoot + '/packages/ui-icons/src/__build__/icons-data.json',
-        buildDir + 'icons-data.json'
       )
 
       // eslint-disable-next-line no-console
