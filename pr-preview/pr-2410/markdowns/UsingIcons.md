@@ -4,7 +4,7 @@
 Icons from `@instructure/ui-icons` are available as `<Name>InstUIIcon` components — browse them
 in the [Icons gallery](#icons). Legacy class-component icons (`IconHeartLine`, `IconSearchLine`,
 etc.) are still available for backwards compatibility but are deprecated — see
-[Legacy Icons](#legacy-icons) below.
+[Legacy Icons](#legacy-icons) below. Components with the new theming system only accept new icons.
 
 ### Accessibility
 
@@ -45,8 +45,9 @@ Illustration sizes (`illu-sm`, `illu-md`, `illu-lg`) are intended for larger dec
 
 ### Color
 
-Use the `color` prop with a semantic color token. `inherit` passes `currentColor` through from
-the parent element. `ai` renders the icon with an AI gradient.
+Use the `color` prop with a semantic color token — a theme-aware named value (e.g. `errorColor`,
+`successColor`) that automatically adapts to the active theme. `inherit` passes `currentColor` through from the parent element.
+`ai` renders the icon with an AI gradient.
 
 ```js
 ---
