@@ -1,5 +1,5 @@
 lib/
 .babel-cache/
 es/
-__build__/
+src/generated/
 types/

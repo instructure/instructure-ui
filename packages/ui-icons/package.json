@@ -14,7 +14,6 @@
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
     "lint": "ui-scripts lint",
-    "generate-lucide": "node --experimental-strip-types scripts/generateLucideIndex.ts",
     "prepare-build": "pnpm run build-icons",
     "build-icons": "pnpm exec ui-scripts build-icons --skipOptimization --config icons.config.cjs",
     "build-icons:optimize": "pnpm exec ui-scripts build-icons --svgoConfig svgo.config.cjs --config icons.config.cjs",
@@ -58,9 +57,6 @@
       "default": "./es/index.js"
     },
     "./lib/*": "./lib/*",
-    "./es/*": "./es/*",
-    "./types/*": "./types/*",
-    "./package.json": "./package.json",
-    "./src/*": "./src/*"
+    "./package.json": "./package.json"
   }
 }

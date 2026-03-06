@@ -4,7 +4,9 @@
     "outDir": "./types",
     "module": "ESNext",
     "composite": true,
-    "rootDir": "./lib"
+    "rootDir": "./lib",
+    "allowImportingTsExtensions": true,
+    "emitDeclarationOnly": true
   },
   "include": ["lib"],
   "references": [

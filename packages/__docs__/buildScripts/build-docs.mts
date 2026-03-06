@@ -272,10 +272,10 @@ async function buildDocs() {
     )
 
     // eslint-disable-next-line no-console
-    console.log('Copying icons data...')
+    console.log('Copying legacy icons data...')
     fs.copyFileSync(
-      projectRoot + '/packages/ui-icons/src/__build__/icons-data.json',
-      buildDir + 'icons-data.json'
+      projectRoot + '/packages/ui-icons/src/generated/legacy/legacy-icons-data.json',
+      buildDir + 'legacy-icons-data.json'
     )
 
     // eslint-disable-next-line no-console
