@@ -22,6 +22,26 @@
  * SOFTWARE.
  */
 
+/**
+ * Convert an SVG attribute name to its JSX/camelCase equivalent.
+ */
+export function convertSvgAttrName(name) {
+  // Specific SVG attributes that often need direct camelCase even with colons
+  if (name === 'xlink:href') return 'xlinkHref'
+  if (name === 'xml:space') return 'xmlSpace'
+  if (name === 'xml:lang') return 'xmlLang'
+
+  // General kebab-case to camelCase, excluding data-*, aria-*, and xmlns attributes
+  if (
+    name.startsWith('data-') ||
+    name.startsWith('aria-') ||
+    name.startsWith('xmlns')
+  ) {
+    return name
+  }
+  return name.replace(/-([a-z])/g, (g) => g[1].toUpperCase())
+}
+
 // this is a custom svg to jsx converter function which should be able to handle all of our svgs with some assumptions:
 // - the root tag is always <svg>
 // - there are no inline styles
@@ -34,24 +54,6 @@ export function svg2jsx(svgString) {
 
   let jsxString = svgString
 
-  // Convert attribute names
-  const convertAttrName = (name) => {
-    // Specific SVG attributes that often need direct camelCase even with colons
-    if (name === 'xlink:href') return 'xlinkHref'
-    if (name === 'xml:space') return 'xmlSpace'
-    if (name === 'xml:lang') return 'xmlLang'
-
-    // General kebab-case to camelCase, excluding data-*, aria-*, and xmlns attributes
-    if (
-      name.startsWith('data-') ||
-      name.startsWith('aria-') ||
-      name.startsWith('xmlns')
-    ) {
-      return name
-    }
-    return name.replace(/-([a-z])/g, (g) => g[1].toUpperCase())
-  }
-
   // Process tags and attributes
   jsxString = jsxString.replace(
     /<([a-zA-Z0-9:]+)([^>]*?)(\/?)>/g,
@@ -61,7 +63,7 @@ export function svg2jsx(svgString) {
         attrsStr.replace(
           /([a-zA-Z0-9:_-]+)\s*=\s*(["'])(.*?)\2/g,
           (attrMatch, name, quote, value) => {
-            const newName = convertAttrName(name)
+            const newName = convertSvgAttrName(name)
             // Escape curly braces within attribute values for JSX
             const escapedValue = value
               .replace(/{/g, '&#123;')

@@ -116,11 +116,7 @@ function generateIconIndex(glyphs) {
     })
     .join('\n\n')
 
-  // Re-export Lucide icons if lucide directory exists
-  const lucideReexport =
-    "\n\n// Re-export all Lucide icons\nexport * from '../lucide'"
-
-  return NOTICE_HEADER + content + lucideReexport
+  return NOTICE_HEADER + content
 }
 
 export default function generateReactComponents(glyphs, destination) {
