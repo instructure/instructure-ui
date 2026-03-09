@@ -44,7 +44,7 @@ type: example
   name="sports2"
   layout="inline"
   messages={[
-    { text: 'Invalid name', type: 'newError' }
+    { text: 'Invalid name', type: 'error' }
   ]}
   onChange={function (value) { console.log(value) }}
   defaultValue={['soccer', 'volleyball']}
