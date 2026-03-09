@@ -495,12 +495,16 @@
       "value": "{color.text.interactive.action.aiSecondary.topGradient.base}",
       "type": "color"
     },
+    "smallFontSize": {
+      "value": "{fontSize.textSm}",
+      "type": "fontSizes"
+    },
     "mediumFontSize": {
       "value": "{fontSize.textBase}",
       "type": "fontSizes"
     },
     "largeFontSize": {
-      "value": "18px",
+      "value": "1.375rem",
       "type": "fontSizes"
     },
     "largeHeight": {
@@ -518,10 +522,6 @@
     "mediumPaddingHorizontal": {
       "value": "{spacing.padding.interactive.horizontal.md}",
       "type": "spacing"
-    },
-    "smallFontSize": {
-      "value": "{fontSize.textSm}",
-      "type": "fontSizes"
     },
     "smallHeight": {
       "value": "{size.interactive.height.sm}",
