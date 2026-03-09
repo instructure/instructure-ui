@@ -80,7 +80,7 @@ type: example
 |-----------|------|------|----------|---------|-------------|
 | CondensedButton | children | `React.ReactNode` | No | - | Specifies the `CondensedButton` children. |
 | CondensedButton | type | `'button' \| 'submit' \| 'reset'` | No | `'button'` | Specifies the type of the `CondensedButton`'s underlying html element. |
-| CondensedButton | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` | The size of the `CondensedButton` |
+| CondensedButton | size | `'small' \| 'medium' \| 'large' \| 'condensedSmall' \| 'condensedMedium'` | No | `'medium'` | The size of the `CondensedButton` |
 | CondensedButton | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to the `CondensedButton`'s underlying html element. |
 | CondensedButton | as | `AsElementType` | No | `'button'` | The element to render as the component root, `button` by default. |
 | CondensedButton | interaction | `'enabled' \| 'disabled' \| 'readonly'` | No | `undefined` | Specifies if interaction with the `CondensedButton` is enabled, disabled, or readonly. |

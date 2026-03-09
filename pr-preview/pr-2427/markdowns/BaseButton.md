@@ -20,7 +20,7 @@ type: example
 |-----------|------|------|----------|---------|-------------|
 | BaseButton | children | `React.ReactNode` | No | - | Specifies the `Button` children. |
 | BaseButton | type | `'button' \| 'submit' \| 'reset'` | No | `'button'` | Specifies the type of the `Button`'s underlying html element. |
-| BaseButton | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` | The size of the `Button` |
+| BaseButton | size | `'small' \| 'medium' \| 'large' \| 'condensedSmall' \| 'condensedMedium'` | No | `'medium'` | The size of the `Button` |
 | BaseButton | elementRef | `(element: HTMLElement \| null) => void` | No | - | Provides a reference to the `Button`'s underlying html element. |
 | BaseButton | as | `AsElementType` | No | `'button'` | The element to render as the component root, `Button` by default. |
 | BaseButton | interaction | `InteractionType` | No | `undefined` | Specifies if interaction with the `Button` is enabled, disabled, or readonly. |

@@ -20,7 +20,7 @@ type: example
         <ToggleButton
           status={locked ? 'pressed' : 'unpressed'}
           color={locked ? 'danger' : 'secondary'}
-          renderIcon={locked ? IconLockSolid : IconUnlockLine}
+          renderIcon={locked ? LockInstUIIcon : UnlockInstUIIcon}
           screenReaderLabel={locked ? 'Unlock assignment' : 'Lock assignment'}
           renderTooltipContent={locked ? 'Unlock' : 'Lock'}
           onClick={handleLocked}
@@ -55,7 +55,7 @@ type: example
         <ToggleButton
           status={locked ? 'pressed' : 'unpressed'}
           color="primary-inverse"
-          renderIcon={locked ? IconLockSolid : IconUnlockLine}
+          renderIcon={locked ? LockInstUIIcon : UnlockInstUIIcon}
           screenReaderLabel={locked ? 'Unlock assignment' : 'Lock assignment'}
           renderTooltipContent={locked ? 'Unlock' : 'Lock'}
           onClick={handleLocked}
