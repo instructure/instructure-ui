@@ -340,7 +340,18 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
             onBlur={createChainedFunction(onBlur, this.handleBlur)}
             checked={this.checked}
           />
-          <label htmlFor={this.id} css={styles?.control}>
+          {/* Prevent the browser from firing a blur on the hidden input during
+              mousedown on the label, which would cause Focusable to lose focus
+              before the click event is processed. Manually restore focus instead. */}
+          {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+          <label
+            htmlFor={this.id}
+            css={styles?.control}
+            onMouseDown={(e) => {
+              e.preventDefault()
+              this._input?.focus()
+            }}
+          >
             {this.renderFacade()}
             {this.renderMessages()}
           </label>
