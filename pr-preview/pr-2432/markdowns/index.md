@@ -34,14 +34,15 @@
 
 ### Components
 
+- [InstUISettingsProvider](./InstUISettingsProvider.md): A global configuration component for applying themes and text direction settings across an application. It wraps Emotion's ThemeProvider and supports nested providers for theme inheritance and overrides. Also manages text direction (LTR/RTL) via context for descendant components.
 - [Alert](./Alert.md): Notifies users with contextual variants (success, info, error, warning). Supports dismissible dialogs, automatic timeout dismissal, live regions for screen readers, and inline usage without shadows. Includes accessibility guidelines for proper implementation.
 - [Avatar](./Avatar.md): Displays user avatars with fallback to initials or icons. Supports circle/rectangle shapes, multiple sizes, colors, and inverse styling. Includes special AI avatar variant and accessibility considerations with aria-hidden attribute.
 - [Badge](./Badge.md): Displays numeric counts or notifications with accessibility features. Supports count limits, various placements, standalone usage, and color variants. Requires formatOutput prop for screen reader context beyond simple numbers.
 - [Billboard](./Billboard.md): Used for empty states, 404 pages, and redirects. Supports various sizes, hero icons, and interactive behaviors (button or link). Can be disabled and includes structured messaging with headings and calls to action.
 - [Breadcrumb](./Breadcrumb.md): Shows navigation path location with automatic text truncation. Best for tablet+ screens; use Link for mobile. Supports multiple sizes, icons, and accessibility with aria-current attribute for current page indication.
 - [Button](./Button.md): Triggers actions or changes with multiple color schemes, sizes, and display options. Supports icons, text wrapping control, and backgroundless variants. Includes specific AI button styles with gradients and icons.
-- [CloseButton](./CloseButton.md): Specialized button for closing modals, dialogs, or containers. Supports absolute positioning with placement options (start/end/static) and offset control. Built with accessibility in mind using IconButton with X icon and screen reader labels.
 - [CondensedButton](./CondensedButton.md): Button variant without padding for tight spaces or alignment with other content. Ideal for table cells or areas where standard button padding would disrupt layout. Maintains button functionality while minimizing visual footprint.
+- [CloseButton](./CloseButton.md): Specialized button for closing modals, dialogs, or containers. Supports absolute positioning with placement options (start/end/static) and offset control. Built with accessibility in mind using IconButton with X icon and screen reader labels.
 - [IconButton](./IconButton.md): A button component designed specifically for icon-only actions. Requires screen reader labels for accessibility, supports various shapes (rectangle/circle), and can remove background/border for minimalist designs. Works well with Tooltip for additional context.
 - [ToggleButton](./ToggleButton.md): Controlled button for toggling between two states (on/off), featuring icon support, tooltips, inverse variants for dark backgrounds, and accessibility labels. Perfect for status toggles like lock/unlock.
 - [Byline](./Byline.md): Combines visual elements (avatars, icons) with descriptive captions. Supports titles, various sizes, content alignment options, and margin control. Useful for author attribution or content metadata displays.
@@ -50,8 +51,8 @@
 - [CheckboxGroup](./CheckboxGroup.md): Groups multiple Checkbox components with shared name and value management. Supports vertical or horizontal layouts, toggle variants, and group-level disabled/readonly states. Handles validation messages and maintains consistent state across all checkboxes.
 - [ColorContrast](./ColorContrast.md): WCAG 2.1 compliance tool that calculates and displays contrast ratios between two colors. Validates against normal text (4.5:1), large text (3:1), and graphics (3:1) standards. Provides pass/fail indicators and supports AA/AAA validation levels.
 - [ColorIndicator](./ColorIndicator.md): Displays color swatches with checkerboard background for transparency visualization. Supports circle and rectangle shapes, various color formats (hex, RGB, HSL, HWB), and can be used within buttons for color selection interfaces.
-- [ColorMixer](./ColorMixer.md): Interactive color selection component with RGBA input fields, color sliders, and visual palette. Supports alpha transparency, keyboard navigation for accessibility, and can be disabled. Provides real-time color feedback and value changes.
 - [ColorPicker](./ColorPicker.md): Versatile color selection component with hex input validation and optional popover color mixer. Supports controlled/uncontrolled operation, contrast checking, alpha transparency, and custom popover content. Includes comprehensive error messaging and accessibility features.
+- [ColorMixer](./ColorMixer.md): Interactive color selection component with RGBA input fields, color sliders, and visual palette. Supports alpha transparency, keyboard navigation for accessibility, and can be disabled. Provides real-time color feedback and value changes.
 - [ColorPreset](./ColorPreset.md): Color selection from predefined palettes with support for adding/removing colors. Includes visual color indicators, screen reader labels, and optional color mixer integration for custom color creation. Handles color management and selection callbacks.
 - [DateInput](./DateInput.md): A date input component with a calendar picker (uses Moment.js). Supports disabled dates, validation, and formatted display. Note: Being deprecated in favor of DateInput2 for better UX and accessibility.
 - [DateInput2](./DateInput2.md): An improved date input with easier configuration, better accessibility, and a year picker. Supports custom date parsing, timezone handling, validation, and disabled dates. Recommended over the original DateInput.
@@ -112,17 +113,29 @@
 
 #### utilities
 
+- [Dialog](./Dialog.md): A utility component for accessibility in modals, popovers, and trays. Manages focus trapping, screen reader visibility, and keyboard navigation. Essential for WCAG-compliant modal interactions.
+- [Expandable](./Expandable.md): Handles expand/collapse functionality for components like ToggleDetails and ToggleGroup. Provides props for accessibility and event handling. Manages state for expanded content visibility.
+- [Focusable](./Focusable.md): A utility component that detects when elements receive focus. Provides render props for creating accessible focus-based interactions, such as skip-to-content links or focus-triggered tooltips. Ensures WCAG compliance for focus management.
+- [Transition](./Transition.md): A wrapper component for transitioning elements in and out of the UI. Supports fade, scale, and slide transitions with customizable directions. Handles mount/unmount transitions and supports RTL mirroring for slide animations.
+- [Portal](./Portal.md): Renders a React subtree into a different DOM element. Useful for modal-like components that need to break out of parent containers. Typically used with Overlay, Modal, or other components that need to render outside their parent hierarchy.
+- [Position](./Position.md): Positions content relative to a target element with various placement options. Supports RTL internationalization, offset adjustments, and mounting in specific DOM nodes. Replaces older Target/Content pattern with renderTarget prop.
+- [Selectable](./Selectable.md): Low-level utility for building custom combobox widgets. Provides ARIA-compliant prop getters and state management hooks. Use existing Select component when possible.
+- [InlineSVG](./InlineSVG.md): Renders accessible SVG content inline with support for fixed dimensions or container filling. Differentiates from SVGIcon by being suitable for non-icon SVG graphics while maintaining accessibility standards.
+- [SVGIcon](./SVGIcon.md): Renders accessible inline SVG icons. Supports custom sizing, color theming, rotation, and display properties. Accepts SVG content via children or external source strings.
+- [TruncateList](./TruncateList.md): A utility component that truncates items when space is limited, commonly used in navigation bars. Controls visible item count and provides dropdown for hidden items with customizable spacing and menu triggers.
 - [BaseButton](./BaseButton.md): Low-level utility component for composing Instructure UI buttons. Not intended for direct use; developers should use Button, CloseButton, IconButton, or CondensedButton instead.
 - [Options](./Options.md): A view-only component for building option lists or menus. Supports variants (default, highlighted, selected, disabled), icons, nesting, and custom roles. Does not manage state—requires external event handling.
 - [Mask](./Mask.md): A component that covers its nearest positioned parent element. Can be used fullscreen within a Portal and supports click-to-close functionality. Useful for overlays and blocking UI interactions.
+
+#### contexts
+
+- [ApplyLocale](./ApplyLocale.md): Sets locale and timezone context for child components like TimeSelect. Enables internationalization by providing consistent localization settings throughout the component tree.
+- [DeterministicIdContextProvider](./DeterministicIdContextProvider.md): Deprecated utility component for providing deterministic ID context. Do not use the instanceCounterMap prop. Part of InstUISettingsProvider infrastructure.
+- [TableContext](./TableContext.md)
+- [TreeBrowserContext](./TreeBrowserContext.md)
 
 #### AI Components
 
 - [AiInformation](./AiInformation.md): Displays AI-related data in Instructure products. Composed from NutritionFacts and DataPermissionLevels components with prefixed APIs. Supports fullscreen modals for mobile viewports with comprehensive data structure for AI feature information.
 - [DataPermissionLevels](./DataPermissionLevels.md): Displays AI-related data permissions in Instructure products. Shows hierarchical permission levels with titles and descriptions. Includes a modal interface with close functionality and supports highlighting specific levels for emphasis.
 - [NutritionFacts](./NutritionFacts.md): A specialized modal component for displaying AI-related data in structured blocks. Includes model info, privacy/compliance details, and output metrics. Features a trigger button and modal presentation.
-
-#### contexts
-
-- [TableContext](./TableContext.md)
-- [TreeBrowserContext](./TreeBrowserContext.md)
