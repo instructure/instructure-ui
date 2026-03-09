@@ -11,7 +11,7 @@
       "type": "sizing"
     },
     "inputSpacing": {
-      "value": "{spacing.spaceXs}",
+      "value": "{spacing.spaceSm}",
       "type": "spacing"
     },
     "labelColor": {

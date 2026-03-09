@@ -7,7 +7,7 @@
   },
   "paginationPageInput": {
     "inputSpacing": {
-      "value": "{spacing.spaceXs}",
+      "value": "{spacing.spaceSm}",
       "type": "spacing"
     },
     "inputWidth": {
