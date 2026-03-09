@@ -140,11 +140,9 @@ type: example
     maxWidth="480px"
     withVisualDebug
   >
-    <Text as="p">
-      <TruncateText position="middle">
-        <span>This line of text should be truncated from the middle of the string <strong>instead of the end.</strong></span>
-      </TruncateText>
-    </Text>
+    <TruncateText position="middle">
+      <span>This line of text should be truncated from the middle of the string <strong>instead of the end.</strong></span>
+    </TruncateText>
   </View>
   <br />
   <View
