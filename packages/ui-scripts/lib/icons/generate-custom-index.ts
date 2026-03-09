@@ -22,10 +22,9 @@
  * SOFTWARE.
  */
 
-import * as fs from 'fs'
-import * as path from 'path'
-import { parseSync, type INode } from 'svgson'
-import { info } from '@instructure/command-utils'
+import fs from 'fs'
+import path from 'path'
+import * as svgson from 'svgson'
 
 const HEADER = `/*
  * The MIT License (MIT)
@@ -60,9 +59,9 @@ function svgToIconNode(svgContent: string): {
   viewBox?: string
 } {
   const iconNode: Array<[string, Record<string, string>]> = []
-  const parsed = parseSync(svgContent, { camelcase: true })
+  const parsed = svgson.parseSync(svgContent, { camelcase: true })
 
-  function extract(node: INode): void {
+  function extract(node: svgson.INode): void {
     if (node.type !== 'element') return
     iconNode.push([node.name, { ...node.attributes }])
     node.children.forEach(extract)
@@ -115,7 +114,7 @@ export default function generateCustomIndex() {
   // Output goes to src/generated/custom/ so the import is relative to that:
   // ../../custom/wrapCustomIcon resolves to src/custom/wrapCustomIcon
   const content = `${HEADER}
-import { type IconNode } from 'lucide-react'
+import type { IconNode } from 'lucide-react'
 import { wrapCustomIcon } from '../../custom/wrapCustomIcon'
 
 // Custom icons with InstUI theming
@@ -127,7 +126,8 @@ ${exports.join('\n')}
   fs.mkdirSync(path.dirname(outputPath), { recursive: true })
   fs.writeFileSync(outputPath, content, 'utf-8')
 
-  info(
+  // eslint-disable-next-line no-console
+  console.log(
     `Generated src/generated/custom/index.ts with ${exports.length} / ${svgFiles.length} custom icons`
   )
 }

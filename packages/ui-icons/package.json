@@ -34,10 +34,10 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.27.6",
+    "@instructure/ui-svg-images": "workspace:*",
     "@instructure/emotion": "workspace:*",
     "@instructure/shared-types": "workspace:*",
     "@instructure/ui-react-utils": "workspace:*",
-    "@instructure/ui-svg-images": "workspace:*",
     "@instructure/ui-themes": "workspace:*",
     "@instructure/ui-utils": "workspace:*",
     "lucide-react": "^0.559.0"

@@ -28,7 +28,7 @@ import instUICodemodExecutor from './utils/instUICodemodExecutor'
 import { printWarning } from './utils/codemodHelpers'
 import { isImportSpecifier } from './utils/codemodTypeCheckers'
 import fs from 'fs'
-import * as path from 'path'
+import path from 'path'
 import { fileURLToPath } from 'url'
 
 const __filename = fileURLToPath(import.meta.url)

@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-import * as fs from 'fs'
-import * as path from 'path'
-import { info } from '@instructure/command-utils'
+import fs from 'fs'
+import path from 'path'
+import * as lucideReact from 'lucide-react'
 
 function toPascalCase(kebab: string): string {
   return kebab
@@ -58,7 +58,7 @@ const HEADER = `/*
  */
 `
 
-export default async function generateLucideIndex() {
+export default function generateLucideIndex() {
   // Custom icons automatically shadow Lucide icons of the same name.
   // Derived at build time from svg/Custom/ so it stays in sync automatically.
   const customSvgDir = path.join(process.cwd(), 'svg/Custom')
@@ -69,7 +69,6 @@ export default async function generateLucideIndex() {
       .map((f) => toPascalCase(f.replace('.svg', '')))
   )
 
-  const lucideReact = await import('lucide-react')
   const allLucideIcons = Object.keys(lucideReact).filter((key) => {
     const value = lucideReact[key as keyof typeof lucideReact] as any
     return (
@@ -106,7 +105,8 @@ ${iconExports}
   const outputPath = path.join(process.cwd(), 'src/generated/lucide/index.ts')
   fs.mkdirSync(path.dirname(outputPath), { recursive: true })
   fs.writeFileSync(outputPath, content, 'utf-8')
-  info(
+  // eslint-disable-next-line no-console
+  console.log(
     `Generated src/generated/lucide/index.ts with ${allLucideIcons.length} icons`
   )
 }

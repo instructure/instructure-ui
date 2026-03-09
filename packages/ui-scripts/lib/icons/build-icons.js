@@ -101,7 +101,7 @@ export default {
 
     // generate svg index
     generateSvgIndex(glyphs, config.destination)
-    //    - output: ui-icons/generated/svg/index.js
+    //    - output: ui-icons/src/generated/svg/index.js
     //    - fields: variant, glyphName, src (svg), deprecated
 
     // generate react components
@@ -136,10 +136,13 @@ export default {
       JSON.stringify(legacyIconsData, null, 2),
       'utf8'
     )
-    info(`Generated ${legacyOutputPath} (${legacyIconsData.length} icons)`)
+    // eslint-disable-next-line no-console
+    console.log(
+      `Generated ${legacyOutputPath} (${legacyIconsData.length} icons)`
+    )
 
     // generate Lucide icon index (src/generated/lucide/index.ts)
-    await generateLucideIndex()
+    generateLucideIndex()
 
     // generate custom icon index (src/generated/custom/index.ts)
     generateCustomIndex()
