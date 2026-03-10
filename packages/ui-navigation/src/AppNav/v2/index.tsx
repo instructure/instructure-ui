@@ -24,16 +24,15 @@
 
 import { ComponentElement, Component } from 'react'
 
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import { callRenderProp, omitProps } from '@instructure/ui-react-utils'
 
-import { View } from '@instructure/ui-view'
-import { Menu } from '@instructure/ui-menu'
+import { View } from '@instructure/ui-view/latest'
+import { Menu } from '@instructure/ui-menu/latest'
 import { Item } from './Item'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 import type { AppNavProps } from './props'
 import { allowedProps } from './props'
 import { AppNavItemProps } from './Item/props'
@@ -45,7 +44,7 @@ import { TruncateList } from '@instructure/ui-truncate-list'
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle)
 class AppNav extends Component<AppNavProps> {
   static readonly componentId = 'AppNav'
 
