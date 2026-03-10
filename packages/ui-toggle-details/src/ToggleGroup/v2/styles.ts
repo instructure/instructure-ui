@@ -22,8 +22,26 @@
  * SOFTWARE.
  */
 
-export { ToggleDetails } from '../ToggleDetails/v2'
-export { ToggleGroup } from '../ToggleGroup/v2'
+import type { NewComponentTypes } from '@instructure/ui-themes'
+import type { ToggleGroupProps, ToggleGroupStyle } from './props'
 
-export type { ToggleDetailsProps } from '../ToggleDetails/v2/props'
-export type { ToggleGroupProps } from '../ToggleGroup/v2/props'
+/**
+ * ---
+ * private: true
+ * ---
+ * Generates the style object from the theme and provided additional information
+ * @param  {Object} componentTheme The theme variable object.
+ * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
+ */
+const generateStyle = (
+  componentTheme: NewComponentTypes['ToggleGroup'],
+  _props: ToggleGroupProps
+): ToggleGroupStyle => {
+  return {
+    borderColor: componentTheme.borderColor
+  }
+}
+
+export default generateStyle
