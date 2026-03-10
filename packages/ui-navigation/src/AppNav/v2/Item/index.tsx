@@ -32,14 +32,13 @@ import {
   passthroughProps
 } from '@instructure/ui-react-utils'
 
-import { View } from '@instructure/ui-view/v11_6'
+import { View } from '@instructure/ui-view/latest'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import type { ScreenReaderContentProps } from '@instructure/ui-a11y-content'
 
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 import type { AppNavItemProps } from './props'
 import { allowedProps } from './props'
 
@@ -50,7 +49,7 @@ id: AppNav.Item
 ---
 @module Item
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle)
 class Item extends Component<AppNavItemProps> {
   static readonly componentId = 'AppNav.Item'
 
