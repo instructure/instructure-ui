@@ -24,6 +24,7 @@
 
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 import type {
+  LegacyIconsData,
   MainDocsData,
   MinorVersionData,
   ProcessedFile
@@ -77,6 +78,7 @@ type LayoutSize = 'small' | 'medium' | 'large' | 'x-large'
 type AppState = {
   themeKey?: string
   docsData: MainDocsData | null
+  legacyIconsData: LegacyIconsData | null
   layout: LayoutSize
   showMenu: boolean
   key?: string

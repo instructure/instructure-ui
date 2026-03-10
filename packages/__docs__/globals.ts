@@ -42,8 +42,10 @@ import { getComponentsForVersion } from './versioned-components'
 import { rebrandDark, rebrandLight } from '@instructure/ui-themes'
 import { debounce } from '@instructure/debounce'
 
-import '@instructure/ui-icons/InstructureIcons-Solid.css'
-import '@instructure/ui-icons/InstructureIcons-Line.css'
+// eslint-disable-next-line @instructure/no-relative-imports
+import '../ui-icons/src/generated/icon-font/Solid/InstructureIcons-Solid.css'
+// eslint-disable-next-line @instructure/no-relative-imports
+import '../ui-icons/src/generated/icon-font/Line/InstructureIcons-Line.css'
 
 import { DateTime } from '@instructure/ui-i18n'
 // @ts-ignore webpack import

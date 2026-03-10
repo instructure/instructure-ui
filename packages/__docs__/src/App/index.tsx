@@ -144,7 +144,8 @@ class App extends Component<AppProps, AppState> {
       themeKey: undefined,
       layout: 'large',
       docsData: null,
-      versionsData: undefined
+      versionsData: undefined,
+      legacyIconsData: null
     }
 
     this._heroRef = createRef()
@@ -234,11 +235,11 @@ class App extends Component<AppProps, AppState> {
     ).catch(errorHandler)
 
     // Icons are not version-specific; only re-fetch if not already loaded
-    if (!this.state.iconsData) {
-      fetch(`${getAssetBasePath()}/icons-data.json`, { signal })
+    if (!this.state.legacyIconsData) {
+      fetch(`${getAssetBasePath()}/legacy-icons-data.json`, { signal })
         .then((response) => response.json())
-        .then((iconsData) => {
-          this.setState({ iconsData })
+        .then((legacyIconsData) => {
+          this.setState({ legacyIconsData })
         })
         .catch(errorHandler)
     }
@@ -299,16 +300,18 @@ class App extends Component<AppProps, AppState> {
     this.fetchVersionData(signal).catch(errorHandler)
     document.addEventListener('keydown', this.handleTabKey)
 
+    fetch(`${getAssetBasePath()}/legacy-icons-data.json`, { signal })
+      .then((response) => response.json())
+      .then((iconsData) => this.setState({ legacyIconsData: iconsData }))
+      .catch(errorHandler)
+
     // Detect minor version from URL (e.g. /v11_7/Menu)
     const { minorVersion: urlMinorVersion } = parseCurrentUrl()
 
     // Always fetch minor version data to enable the version selector
     fetchMinorVersionData(signal)
       .then((minorVersionsData) => {
-        if (
-          minorVersionsData &&
-          minorVersionsData.libraryVersions.length > 0
-        ) {
+        if (minorVersionsData && minorVersionsData.libraryVersions.length > 0) {
           // If URL has a version, use it; otherwise use default
           const selectedMinorVersion =
             urlMinorVersion ?? minorVersionsData.defaultVersion
@@ -650,7 +653,7 @@ class App extends Component<AppProps, AppState> {
           smallerScreens ? 'x-large none none large' : 'x-large none none'
         }
       >
-        <LegacyIconsPage />
+        <LegacyIconsPage iconData={this.state.legacyIconsData} />
       </View>
     )
 
@@ -683,7 +686,10 @@ class App extends Component<AppProps, AppState> {
         })
         .catch((error: Error) => {
           if (error.name !== 'AbortError') {
-            logError(false, `Failed to fetch document ${docId}: ${error.message}`)
+            logError(
+              false,
+              `Failed to fetch document ${docId}: ${error.message}`
+            )
           }
         })
       return (

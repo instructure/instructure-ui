@@ -28,7 +28,6 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/command-utils": "workspace:^",
     "@instructure/ui-babel-preset": "workspace:*",
     "@types/node": "^22.5.4"
   },
@@ -56,8 +55,6 @@
       "require": "./lib/index.js",
       "default": "./es/index.js"
     },
-    "./InstructureIcons-Solid.css": "./src/generated/icon-font/Solid/InstructureIcons-Solid.css",
-    "./InstructureIcons-Line.css": "./src/generated/icon-font/Line/InstructureIcons-Line.css",
     "./lib/*": "./lib/*",
     "./package.json": "./package.json"
   }

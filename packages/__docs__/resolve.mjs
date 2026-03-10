@@ -32,7 +32,12 @@ const alias = {
     '../ui-a11y-content/src/'
   ),
   '@instructure/ui-alerts$': path.resolve(import.meta.dirname, '../ui-alerts/src/exports/a'),
+
   '@instructure/ui-avatar$': path.resolve(import.meta.dirname, '../ui-avatar/src/exports/a'),
+  '@instructure/ui-avatar/v11_6': path.resolve(import.meta.dirname, '../ui-avatar/src/exports/a'),
+  '@instructure/ui-avatar/v11_7': path.resolve(import.meta.dirname, '../ui-avatar/src/exports/b'),
+  '@instructure/ui-avatar/latest': path.resolve(import.meta.dirname, '../ui-avatar/src/exports/b'),
+
   '@instructure/ui-badge$': path.resolve(import.meta.dirname, '../ui-badge/src/exports/a'),
   '@instructure/ui-billboard$': path.resolve(
     import.meta.dirname,

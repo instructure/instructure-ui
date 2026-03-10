@@ -2444,9 +2444,6 @@ importers:
         specifier: ^0.559.0
         version: 0.559.0(react@18.3.1)
     devDependencies:
-      '@instructure/command-utils':
-        specifier: workspace:^
-        version: link:../command-utils
       '@instructure/ui-babel-preset':
         specifier: workspace:*
         version: link:../ui-babel-preset

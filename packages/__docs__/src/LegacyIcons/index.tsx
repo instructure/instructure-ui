@@ -43,15 +43,15 @@ import * as InstIcons from '@instructure/ui-icons'
 import { IconXSolid } from '@instructure/ui-icons'
 import { Link } from '@instructure/ui-link'
 import { Flex } from '@instructure/ui-flex'
-import type { Glyph } from '../../buildScripts/DataTypes.mjs'
-
-// Import legacy icon data
-// eslint-disable-next-line no-restricted-imports
-import iconData from '@instructure/ui-icons/lib/legacy/legacy-icons-data.json'
+import type { Glyph, LegacyIconsData } from '../../buildScripts/DataTypes.mjs'
 
 type Format = 'react' | 'svg' | 'font'
 
 type StyleType = 'line' | 'solid'
+
+type LegacyIconsPageProps = {
+  iconData: LegacyIconsData | null
+}
 
 type LegacyIconTileProps = {
   glyph: Glyph
@@ -181,11 +181,8 @@ const LegacyIconTile = memo(
 )
 LegacyIconTile.displayName = 'LegacyIconTile'
 
-const LegacyIconsPage = () => {
-  // Icon data is already in the correct format
-  const glyphs = useMemo<Glyph[]>(() => {
-    return iconData as Glyph[]
-  }, [])
+const LegacyIconsPage = ({ iconData }: LegacyIconsPageProps) => {
+  const glyphs = useMemo<Glyph[]>(() => iconData ?? [], [iconData])
 
   const [selectedFormat, setSelectedFormat] = useState<Format>('react')
   const [searchQuery, setSearchQuery] = useState<string>('')
