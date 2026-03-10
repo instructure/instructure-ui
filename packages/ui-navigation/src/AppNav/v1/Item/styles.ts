@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import type { NewComponentTypes } from '@instructure/ui-themes'
-import type { AppNavStyle } from './props'
+import type { AppNavItemTheme } from '@instructure/shared-types'
+import type { AppNavItemProps, AppNavItemStyle } from './props'
 
 /**
  * ---
@@ -35,27 +35,62 @@ import type { AppNavStyle } from './props'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme: NewComponentTypes['AppNav']): AppNavStyle => {
+const generateStyle = (
+  componentTheme: AppNavItemTheme,
+  props: AppNavItemProps
+): AppNavItemStyle => {
+  const { isSelected, isDisabled } = props
+
+  const itemStyles = {
+    appearance: 'none',
+    overflow: 'visible',
+    direction: 'inherit',
+    margin: '0',
+    textDecoration: 'none',
+    userSelect: 'none',
+    touchAction: 'manipulation',
+    background: 'transparent',
+    border: 'none',
+    outline: 'none',
+    lineHeight: componentTheme.height,
+    padding: `0 ${componentTheme.padding}`,
+    alignItems: 'flex-start',
+
+    '&:hover': {
+      textDecoration: 'underline',
+      textDecorationColor: componentTheme.textColor
+    },
+    ...(isDisabled && {
+      pointerEvents: 'none',
+      opacity: 0.5
+    })
+  }
+
   return {
-    appNav: {
-      label: 'appNav',
+    item: {
+      label: 'item',
+      ...itemStyles,
+
+      // NOTE: needs separate groups for `:is()` and `:-webkit-any()` because of css selector group validation (see https://www.w3.org/TR/selectors-3/#grouping)
+      '&:is(a), &:is(button)': itemStyles,
+      '&:-webkit-any(a), &:-webkit-any(button)': itemStyles
+    },
+
+    label: {
+      label: 'item__label',
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
       fontFamily: componentTheme.fontFamily,
-      borderBottom: `${componentTheme.borderWidth} ${componentTheme.borderStyle} ${componentTheme.borderColor}`
-    },
-    alignCenter: {
-      alignItems: 'center'
-    },
-    list: {
-      label: 'appNav__list',
-      height: componentTheme.height,
-      flexGrow: 1,
-      flexShrink: 1,
-      flexBasis: '0',
-      minWidth: '0.0625rem',
-      paddingInlineStart: componentTheme.horizontalMargin
-    },
-    horizontalMargin: componentTheme.horizontalMargin,
-    menuTriggerWidth: componentTheme.menuTriggerWidth
+      fontSize: componentTheme.fontSize,
+      fontWeight: componentTheme.fontWeight,
+      color: componentTheme.textColor,
+
+      ...(isSelected && {
+        color: componentTheme.textColorSelected,
+        textDecoration: 'underline'
+      })
+    }
   }
 }
 

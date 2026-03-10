@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { NewComponentTypes } from '@instructure/ui-themes'
+import type { AppNavTheme } from '@instructure/shared-types'
 import type { AppNavStyle } from './props'
 
 /**
@@ -35,7 +35,7 @@ import type { AppNavStyle } from './props'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme: NewComponentTypes['AppNav']): AppNavStyle => {
+const generateStyle = (componentTheme: AppNavTheme): AppNavStyle => {
   return {
     appNav: {
       label: 'appNav',
@@ -54,8 +54,8 @@ const generateStyle = (componentTheme: NewComponentTypes['AppNav']): AppNavStyle
       minWidth: '0.0625rem',
       paddingInlineStart: componentTheme.horizontalMargin
     },
-    horizontalMargin: componentTheme.horizontalMargin,
-    menuTriggerWidth: componentTheme.menuTriggerWidth
+    horizontalMargin: componentTheme.horizontalMargin.toString(),
+    menuTriggerWidth: componentTheme.menuTriggerWidth.toString()
   }
 }
 
