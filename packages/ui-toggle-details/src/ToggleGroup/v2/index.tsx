@@ -27,34 +27,39 @@ import { Component } from 'react'
 import {
   omitProps,
   pickProps,
-  getElementType,
-  callRenderProp
+  getElementType
 } from '@instructure/ui-react-utils'
-import { IconButton } from '@instructure/ui-buttons/v11_6'
+import { IconButton } from '@instructure/ui-buttons/latest'
 import { Transition } from '@instructure/ui-motion'
 import { Expandable } from '@instructure/ui-expandable'
 import type { ExpandableToggleProps } from '@instructure/ui-expandable'
 import { isActiveElement } from '@instructure/ui-dom-utils'
-import { Flex } from '@instructure/ui-flex/v11_6'
-import { View } from '@instructure/ui-view/v11_6'
+import { Flex } from '@instructure/ui-flex/latest'
+import { View } from '@instructure/ui-view/latest'
 import {
-  IconArrowOpenEndSolid,
-  IconArrowOpenDownSolid
+  ChevronRightInstUIIcon,
+  ChevronDownInstUIIcon,
+  renderIconWithProps
 } from '@instructure/ui-icons'
 import type { ToggleGroupProps } from './props'
 import { allowedProps } from './props'
 
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
+
+const toggleGroupSizeToIconSize = {
+  small: 'md',
+  medium: 'md',
+  large: 'lg'
+} as const
 
 /**
 ---
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle)
 class ToggleGroup extends Component<ToggleGroupProps> {
   static readonly componentId = 'ToggleGroup'
 
@@ -62,8 +67,8 @@ class ToggleGroup extends Component<ToggleGroupProps> {
 
   static defaultProps = {
     size: 'medium',
-    icon: IconArrowOpenEndSolid,
-    iconExpanded: IconArrowOpenDownSolid,
+    icon: ChevronRightInstUIIcon,
+    iconExpanded: ChevronDownInstUIIcon,
     defaultExpanded: false,
     transition: true,
     as: 'span',
@@ -106,7 +111,10 @@ class ToggleGroup extends Component<ToggleGroupProps> {
 
   renderIcon(expanded: boolean) {
     const Icon = expanded ? this.props.iconExpanded : this.props.icon
-    return Icon ? callRenderProp(Icon) : null
+    if (!Icon) return null
+
+    const iconSize = toggleGroupSizeToIconSize[this.props.size!]
+    return renderIconWithProps(Icon, iconSize, 'baseColor')
   }
 
   renderToggle(

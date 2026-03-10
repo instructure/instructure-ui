@@ -24,19 +24,38 @@
 
 import React from 'react'
 
-import type {
+import {
+  AsElementType,
   OtherHTMLAttributes,
-  ToggleDetailsTheme
+  Renderable,
+  ToggleGroupTheme
 } from '@instructure/shared-types'
-import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
-import type { ViewProps } from '@instructure/ui-view/v11_6'
 
-type ToggleDetailsOwnProps = {
-  variant?: 'default' | 'filled'
+import type { WithStyleProps } from '@instructure/emotion'
+
+type ToggleGroupOwnProps = {
   /**
-   * The summary that displays and can be interacted with
+   * the content to show and hide
+   */
+  children: React.ReactNode
+  /**
+   * the content area next to the toggle button
    */
   summary: React.ReactNode
+  /**
+   * provides a screenreader label for the toggle button
+   * (takes `expanded` as an argument if a function)
+   */
+  toggleLabel: React.ReactNode | ((expanded: boolean) => React.ReactNode)
+  /**
+   * the element type to render as
+   */
+  as?: AsElementType
+  /**
+   * provides a reference to the underlying html root element
+   */
+  elementRef?: (element: Element | null) => void
+  size?: 'small' | 'medium' | 'large'
   /**
    * Whether the content is expanded or hidden
    */
@@ -45,70 +64,52 @@ type ToggleDetailsOwnProps = {
    * Whether the content is initially expanded or hidden (uncontrolled)
    */
   defaultExpanded?: boolean
-  onToggle?: (
-    event: React.KeyboardEvent<ViewProps> | React.MouseEvent<ViewProps>,
-    expanded: boolean
-  ) => void
   /**
-   * The icon to display next to the summary text when content is hidden
+   * Fired when the content display is toggled
    */
-  icon?: (...args: any[]) => React.ReactElement
+  onToggle?: (event: React.MouseEvent, expanded: boolean) => void
   /**
-   * The icon to display when content is expanded
+   * The icon displayed in the toggle button when the content is hidden
    */
-  iconExpanded?: (...args: any[]) => React.ReactElement
+  icon?: Renderable
   /**
-   * Icon position at the start or end of the summary text
+   * The icon displayed in the toggle button when the content is showing
    */
-  iconPosition?: 'start' | 'end'
+  iconExpanded?: Renderable
   /**
-   * should the summary fill the width of its container
+   * Transition content into view
    */
-  fluidWidth?: boolean
+  transition?: boolean
   /**
-   * Choose a size for the expand/collapse icon
+   * Toggle the border around the component
    */
-  size?: 'small' | 'medium' | 'large'
-  /**
-   * The toggleable content passed inside the ToggleDetails component
-   */
-  children?: React.ReactNode
+  border?: boolean
 }
 
-type PropKeys = keyof ToggleDetailsOwnProps
+type PropKeys = keyof ToggleGroupOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type ToggleDetailsProps = ToggleDetailsOwnProps &
-  WithStyleProps<ToggleDetailsTheme, ToggleDetailsStyle> &
-  OtherHTMLAttributes<ToggleDetailsOwnProps>
+type ToggleGroupStyle = { borderColor: string }
 
-type ToggleDetailsStyle = ComponentStyle<
-  | 'toggleDetails'
-  | 'summary'
-  | 'summaryText'
-  | 'toggle'
-  | 'icon'
-  | 'details'
-  | 'content'
->
-
-type ToggleDetailsStyleProps = {
-  animate: boolean
-}
+type ToggleGroupProps = ToggleGroupOwnProps &
+  OtherHTMLAttributes<ToggleGroupOwnProps> &
+  WithStyleProps<ToggleGroupTheme, ToggleGroupStyle>
 const allowedProps: AllowedPropKeys = [
-  'variant',
+  'children',
   'summary',
+  'toggleLabel',
+  'as',
+  'elementRef',
+  'size',
   'expanded',
   'defaultExpanded',
   'onToggle',
   'icon',
   'iconExpanded',
-  'iconPosition',
-  'fluidWidth',
-  'children',
-  'size'
+  'transition',
+  'border'
 ]
 
-export type { ToggleDetailsProps, ToggleDetailsStyleProps, ToggleDetailsStyle }
+export type { ToggleGroupProps, ToggleGroupStyle }
 export { allowedProps }
