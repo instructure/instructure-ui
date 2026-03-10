@@ -1,0 +1,103 @@
+---
+describes: AppNav
+---
+
+`AppNav` is a navigation component currently intended for use within LTI apps. AppNav
+can be configured to adapt to small screen widths by truncating nav items that
+don't fit within the available space.
+
+The `onUpdate` function prop returns the number of visible nav items, while the
+`renderTruncateLabel` function prop allows you to customize the trigger for the Menu
+that contains the truncated items. The example below shows how you can use both of
+these props to create a hamburger menu when the number of visible nav items is less
+than two.
+
+```js
+---
+type: example
+---
+const totalItemsCount = 5
+
+const AppNavExample = () => {
+  const [visibleItemsCount, setVisibleItemsCount] = useState(totalItemsCount)
+
+  const handleUpdate = ({ visibleItemsCount }) => {
+    setVisibleItemsCount(visibleItemsCount)
+  }
+
+  return (
+    <AppNav
+      screenReaderLabel="App navigation"
+      visibleItemsCount={visibleItemsCount >= 2 ? visibleItemsCount : 0}
+      onUpdate={handleUpdate}
+      renderBeforeItems={
+        <AppNav.Item
+          renderLabel={<ScreenReaderContent>Instructure</ScreenReaderContent>}
+          renderIcon={
+            <CommandInstUIIcon inline={false} size="2xl" color="baseColor" />
+          }
+          href="http://instructure.com"
+        />
+      }
+      renderAfterItems={
+        <IconButton
+          onClick={() => console.log('Add')}
+          renderIcon={<PlusInstUIIcon/>}
+          margin="0 0 0 x-small"
+          screenReaderLabel="Add something"
+          withBorder={false}
+          withBackground={false}
+        />
+      }
+      renderTruncateLabel={() => {
+        const hiddenItemsCount = totalItemsCount - visibleItemsCount
+        if (visibleItemsCount >= 2) {
+          return `${hiddenItemsCount} More`
+        } else {
+          return (
+            <span>
+              <MenuInstUIIcon size={'2xl'} inline={false} />
+              <ScreenReaderContent>{`${hiddenItemsCount} More`}</ScreenReaderContent>
+            </span>
+          )
+        }
+      }}
+    >
+      <AppNav.Item
+        renderLabel="instructure-ui"
+        href="http://instructure.design"
+        renderAfter={
+          <Badge
+            type="notification"
+            variant="success"
+            standalone
+            formatOutput={() => {
+              return (
+                <ScreenReaderContent>
+                  You have notifications from instructure-ui
+                </ScreenReaderContent>
+              )
+            }}
+          />
+        }
+      />
+      <AppNav.Item
+        isSelected
+        renderLabel="Canvas"
+        href="https://www.instructure.com/canvas/"
+      />
+      <AppNav.Item renderLabel="Canvas Network" href="https://canvas.net" />
+      <AppNav.Item
+        renderLabel={() => 'Canvas Community'}
+        href="https://community.canvaslms.com/"
+      />
+      <AppNav.Item
+        renderLabel="Bridge"
+        href="https://www.instructure.com/bridge/"
+      />
+    </AppNav>
+  )
+}
+
+render(<AppNavExample />)
+```
