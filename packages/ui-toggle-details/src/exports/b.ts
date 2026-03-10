@@ -23,7 +23,7 @@
  */
 
 export { ToggleDetails } from '../ToggleDetails/v2'
-export { ToggleGroup } from '../ToggleGroup/v1'
+export { ToggleGroup } from '../ToggleGroup/v2'
 
 export type { ToggleDetailsProps } from '../ToggleDetails/v2/props'
-export type { ToggleGroupProps } from '../ToggleGroup/v1/props'
+export type { ToggleGroupProps } from '../ToggleGroup/v2/props'
