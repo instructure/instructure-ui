@@ -26,7 +26,6 @@ import { resolve as resolvePath } from 'path'
 import baseConfig from '@instructure/ui-webpack-config'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import { merge } from 'webpack-merge'
-import resolve from './resolve.mjs'
 import webpack from 'webpack'
 import TerserPlugin from 'terser-webpack-plugin'
 
@@ -36,7 +35,6 @@ const GITHUB_PULL_REQUEST_PREVIEW = process.env.GITHUB_PULL_REQUEST_PREVIEW || '
 const PR_NUMBER = process.env.PR_NUMBER
 
 const outputPath = resolvePath(import.meta.dirname, '__build__')
-const resolveAliases = DEBUG ? { resolve } : {}
 
 const config = merge(baseConfig, {
   entry: {
@@ -81,7 +79,10 @@ const config = merge(baseConfig, {
   optimization: {
     usedExports: true,
   },
-  ...resolveAliases,
+  resolve: {
+    conditionNames: DEBUG ? ['src', 'import', 'default'] : ['import',
+  'default']
+  },
   mode: 'production',
 })
 
