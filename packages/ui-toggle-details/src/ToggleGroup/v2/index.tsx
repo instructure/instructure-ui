@@ -29,13 +29,13 @@ import {
   pickProps,
   getElementType
 } from '@instructure/ui-react-utils'
-import { IconButton } from '@instructure/ui-buttons'
+import { IconButton } from '@instructure/ui-buttons/latest'
 import { Transition } from '@instructure/ui-motion'
 import { Expandable } from '@instructure/ui-expandable'
 import type { ExpandableToggleProps } from '@instructure/ui-expandable'
 import { isActiveElement } from '@instructure/ui-dom-utils'
-import { Flex } from '@instructure/ui-flex'
-import { View } from '@instructure/ui-view'
+import { Flex } from '@instructure/ui-flex/latest'
+import { View } from '@instructure/ui-view/latest'
 import {
   ChevronRightInstUIIcon,
   ChevronDownInstUIIcon,

@@ -30,13 +30,13 @@ import {
   getElementType,
   callRenderProp
 } from '@instructure/ui-react-utils'
-import { IconButton } from '@instructure/ui-buttons/latest'
+import { IconButton } from '@instructure/ui-buttons/v11_6'
 import { Transition } from '@instructure/ui-motion'
 import { Expandable } from '@instructure/ui-expandable'
 import type { ExpandableToggleProps } from '@instructure/ui-expandable'
 import { isActiveElement } from '@instructure/ui-dom-utils'
-import { Flex } from '@instructure/ui-flex/latest'
-import { View } from '@instructure/ui-view/latest'
+import { Flex } from '@instructure/ui-flex/v11_6'
+import { View } from '@instructure/ui-view/v11_6'
 import {
   IconArrowOpenEndSolid,
   IconArrowOpenDownSolid
