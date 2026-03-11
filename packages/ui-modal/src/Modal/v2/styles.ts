@@ -102,6 +102,7 @@ const generateStyle = (
       boxSizing: 'border-box',
       boxShadow: boxShadowObjectsToCSSString(componentTheme.boxShadow),
       borderRadius: componentTheme.borderRadius,
+      overflow: 'hidden',
       ...sizeStyles[size!],
       ...backgroundStyles
     },
@@ -113,7 +114,6 @@ const generateStyle = (
       height: '100%'
     },
     joinedHeaderAndBody: {
-      borderRadius: componentTheme.borderRadius,
       display: 'flex',
       flexDirection: 'column',
       overflow: 'hidden',
