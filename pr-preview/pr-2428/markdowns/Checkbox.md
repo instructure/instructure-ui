@@ -219,8 +219,6 @@ type: embed
 | Checkbox | inputRef | `(inputElement: HTMLInputElement \| null) => void` | No | - | A function that provides a reference to the actual underlying input element |
 | Checkbox.CheckboxFacade | children | `React.ReactNode` | Yes | - |  |
 | Checkbox.CheckboxFacade | checked | `boolean` | No | `false` |  |
-| Checkbox.CheckboxFacade | disabled | `boolean` | No | `false` |  |
-| Checkbox.CheckboxFacade | readOnly | `boolean` | No | `false` |  |
 | Checkbox.CheckboxFacade | focused | `boolean` | No | `false` |  |
 | Checkbox.CheckboxFacade | hovered | `boolean` | No | `false` |  |
 | Checkbox.CheckboxFacade | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` |  |
@@ -231,7 +229,6 @@ type: embed
 | Checkbox.ToggleFacade | disabled | `boolean` | No | `false` |  |
 | Checkbox.ToggleFacade | readOnly | `boolean` | No | `false` |  |
 | Checkbox.ToggleFacade | focused | `boolean` | No | `false` |  |
-| Checkbox.ToggleFacade | hovered | `boolean` | No | `false` |  |
 | Checkbox.ToggleFacade | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` |  |
 | Checkbox.ToggleFacade | labelPlacement | `'top' \| 'start' \| 'end'` | No | `'end'` |  |
 | Checkbox.ToggleFacade | invalid | `boolean` | No | - | Indicate if the parent component (`Checkbox`) is invalid to set the style accordingly. |
