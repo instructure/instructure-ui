@@ -54,8 +54,7 @@ export default function generateSvgIndex(glyphs, destination) {
       return `export const ${glyph.name}${glyph.variant} = {
   variant: "${glyph.variant}",
   glyphName: "${glyph.glyphName}",
-  src: \`${glyph.src}\`,
-  deprecated: ${!!glyph.deprecated}
+  src: \`${glyph.src}\`
 }`
     })
     .join('\n\n')
