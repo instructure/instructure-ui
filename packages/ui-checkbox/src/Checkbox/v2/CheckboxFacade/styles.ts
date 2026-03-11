@@ -42,7 +42,16 @@ const generateStyle = (
   props: CheckboxFacadeProps,
   sharedTokens: SharedTokens
 ): CheckboxFacadeStyle => {
-  const { size, checked, focused, hovered, indeterminate, invalid } = props
+  const {
+    size,
+    checked,
+    disabled,
+    readOnly,
+    focused,
+    hovered,
+    indeterminate,
+    invalid
+  } = props
 
   const isChecked = checked || indeterminate
 
@@ -73,17 +82,26 @@ const generateStyle = (
       }
     }
   }
+  const sizeVariant =
+    sizeVariants[size as keyof typeof sizeVariants] ?? sizeVariants.medium
 
-  return {
-    checkboxFacade: {
-      label: 'checkboxFacade',
-      display: 'flex',
-      alignItems: 'flex-start'
-    },
-    facade: {
-      label: 'checkboxFacade__facade',
-      color: '#FFFFFF',
-      background: componentTheme.backgroundColor,
+  const getLabelColor = () => {
+    if (disabled) {
+      return componentTheme.labelDisabledColor
+    }
+
+    if (readOnly) {
+      return componentTheme.labelReadonlyColor
+    }
+
+    // DEFAULT state
+    return hovered
+      ? componentTheme.labelHoverColor
+      : componentTheme.labelBaseColor
+  }
+
+  const getFacadeStyles = () => {
+    const baseStyles = {
       position: 'relative',
       display: 'flex',
       alignItems: 'center',
@@ -91,42 +109,99 @@ const generateStyle = (
       boxSizing: 'border-box',
       flexShrink: 0,
       transition: 'all 0.2s',
-      border: `${componentTheme.borderWidth} solid ${
-        invalid ? componentTheme.errorBorderColor : componentTheme.borderColor
-      }`,
       borderRadius: componentTheme.borderRadius,
       marginInlineEnd: componentTheme.gap,
       marginInlineStart: '0',
-      ...sizeVariants[size!].facade,
+      ...sizeVariant.facade
+    }
+
+    if (disabled) {
+      return {
+        ...baseStyles,
+        background: componentTheme.backgroundDisabledColor,
+        border: `${componentTheme.borderWidth} solid ${componentTheme.borderDisabledColor}`
+      }
+    }
+
+    if (readOnly) {
+      return {
+        ...baseStyles,
+        background: componentTheme.backgroundReadonlyColor,
+        border: `${componentTheme.borderWidth} solid ${componentTheme.borderReadonlyColor}`,
+        pointerEvents: 'none'
+      }
+    }
+
+    if (invalid) {
+      return {
+        ...baseStyles,
+        ...(isChecked && {
+          background: componentTheme.backgroundCheckedColor,
+          border: `${componentTheme.borderWidth} solid ${
+            hovered
+              ? componentTheme.errorBorderHoverColor
+              : componentTheme.errorBorderColor
+          }`
+        }),
+        ...(!isChecked && {
+          background: hovered
+            ? componentTheme.backgroundHoverColor
+            : componentTheme.backgroundColor,
+          border: `${componentTheme.borderWidth} solid ${
+            hovered
+              ? componentTheme.errorBorderHoverColor
+              : componentTheme.errorBorderColor
+          }`
+        })
+      }
+    }
+
+    if (isChecked) {
+      return {
+        ...baseStyles,
+        background: componentTheme.backgroundCheckedColor,
+        border: `${componentTheme.borderWidth} solid ${componentTheme.borderCheckedColor}`
+      }
+    }
+
+    // DEFAULT (unchecked) state
+    return {
+      ...baseStyles,
+      background: hovered
+        ? componentTheme.backgroundHoverColor
+        : componentTheme.backgroundColor,
+      border: `${componentTheme.borderWidth} solid ${
+        hovered ? componentTheme.borderHoverColor : componentTheme.borderColor
+      }`
+    }
+  }
+
+  return {
+    checkboxFacade: {
+      label: 'checkboxFacade',
+      display: 'flex',
+      alignItems: 'flex-start',
+      cursor: disabled ? 'not-allowed' : readOnly ? 'default' : 'pointer'
+    },
+    facade: {
+      label: 'checkboxFacade__facade',
+      ...getFacadeStyles(),
       ...(sharedTokens?.focusOutline
         ? calcFocusOutlineStyles(sharedTokens.focusOutline, {
             withFocusOutline: focused
           })
-        : {}),
-      ...(isChecked && {
-        background: componentTheme.backgroundCheckedColor,
-        borderColor: componentTheme.borderCheckedColor
-      }),
-      ...(!isChecked &&
-        hovered && {
-          background: componentTheme.backgroundHoverColor,
-          borderColor: componentTheme.borderHoverColor
-        })
+        : {})
     },
     label: {
       label: 'checkboxFacade__label',
       flex: '1 1 auto',
       alignSelf: 'center',
       minWidth: '0.0625rem',
-      color: componentTheme.labelBaseColor,
+      color: getLabelColor(),
       fontFamily: componentTheme.fontFamily,
       fontWeight: componentTheme.fontWeight,
       lineHeight: componentTheme.lineHeight,
-      ...sizeVariants[size!].label,
-
-      ...(isChecked && {
-        color: componentTheme.labelBaseColor
-      })
+      ...sizeVariant.label
     }
   }
 }
