@@ -40,7 +40,12 @@ const generateStyle = (
   componentTheme: NewComponentTypes['ModalBody'],
   props: ModalBodyProps
 ): ModalBodyStyle => {
-  const { variant } = props
+  const { variant, spacing } = props
+
+  const sizeVariants = {
+    default: { padding: componentTheme.padding },
+    compact: { padding: componentTheme.paddingCompact }
+  }
 
   const backgroundStyle =
     variant === 'inverse'
@@ -52,6 +57,7 @@ const generateStyle = (
   return {
     modalBody: {
       label: 'modalBody',
+      borderRadius: 0,
       boxSizing: 'border-box',
       flex: '1 1 auto',
       '&:focus': {
@@ -61,6 +67,7 @@ const generateStyle = (
       '@media (min-height: 20rem)': {
         overflowY: 'auto'
       },
+      ...(spacing ? sizeVariants[spacing] : {}),
       ...backgroundStyle
     }
   }

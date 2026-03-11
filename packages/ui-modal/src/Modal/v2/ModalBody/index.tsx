@@ -105,8 +105,16 @@ class ModalBody extends Component<ModalBodyProps> {
   }
 
   render() {
-    const { as, elementRef, overflow, variant, padding, children, ...rest } =
-      this.props
+    const {
+      as,
+      elementRef,
+      overflow,
+      variant,
+      padding,
+      spacing,
+      children,
+      ...rest
+    } = this.props
 
     const passthroughProps = View.omitViewProps(
       omitProps(rest, ModalBody.allowedProps),
@@ -135,7 +143,7 @@ class ModalBody extends Component<ModalBodyProps> {
             elementRef={this.handleRef}
             as={as}
             css={this.props.styles?.modalBody}
-            padding={padding}
+            padding={spacing ? undefined : padding}
             // check if there is a scrollbar, if so, the element has to be tabbable
             {...(hasScrollbar
               ? {
