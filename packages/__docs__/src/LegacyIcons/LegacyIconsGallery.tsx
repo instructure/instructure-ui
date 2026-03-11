@@ -24,7 +24,6 @@
 
 import { useState, useRef, memo, useCallback, useMemo } from 'react'
 import type { ChangeEvent, SyntheticEvent } from 'react'
-import { Grid } from 'react-window'
 
 import { InlineSVG } from '@instructure/ui-svg-images'
 import { Heading } from '@instructure/ui-heading'
@@ -178,14 +177,6 @@ const LegacyIconTile = memo(
 )
 LegacyIconTile.displayName = 'LegacyIconTile'
 
-const TILE_WIDTH = 240
-const TILE_HEIGHT = 180
-const COLUMN_COUNT = 4
-const GRID_WIDTH = TILE_WIDTH * COLUMN_COUNT
-
-// Empty object constant for cellProps to maintain referential equality
-// and prevent unnecessary re-renders of all cells
-const EMPTY_CELL_PROPS = {}
 
 const LegacyIconsGallery = ({ glyphs }: LegacyIconsGalleryProps) => {
   const [selectedFormat, setSelectedFormat] = useState<Format>('react')
@@ -243,8 +234,6 @@ const LegacyIconsGallery = ({ glyphs }: LegacyIconsGalleryProps) => {
     )
   }, [glyphs, searchQuery])
 
-  const rowCount = Math.ceil(filteredGlyphs.length / COLUMN_COUNT)
-
   return (
     <div css={{ overflowX: 'hidden' }}>
       <FormFieldGroup
@@ -297,42 +286,22 @@ const LegacyIconsGallery = ({ glyphs }: LegacyIconsGalleryProps) => {
 
       <div
         css={{
+          display: 'flex',
+          flexWrap: 'wrap',
           margin: '0 auto',
           paddingTop: '1rem',
-          width: '100%',
-          maxWidth: `${GRID_WIDTH}px`
+          gap: '1rem',
         }}
       >
-        <Grid
-          cellComponent={({ columnIndex, rowIndex, style }) => {
-            const index = rowIndex * COLUMN_COUNT + columnIndex
-            if (index >= filteredGlyphs.length) {
-              return <div style={style} />
-            }
-
-            const glyph = filteredGlyphs[index]
-            return (
-              <div style={style}>
-                <LegacyIconTile
-                  glyph={glyph}
-                  format={selectedFormat}
-                  rtl={rtl}
-                  onClick={handleIconClick}
-                />
-              </div>
-            )
-          }}
-          cellProps={EMPTY_CELL_PROPS}
-          columnCount={COLUMN_COUNT}
-          columnWidth={TILE_WIDTH}
-          rowCount={rowCount}
-          rowHeight={TILE_HEIGHT}
-          style={{
-            height: '600px',
-            width: `${GRID_WIDTH}px`,
-            overflowX: 'hidden'
-          }}
-        />
+        {filteredGlyphs.map((glyph) => (
+          <LegacyIconTile
+            key={glyph.glyphName}
+            glyph={glyph}
+            format={selectedFormat}
+            rtl={rtl}
+            onClick={handleIconClick}
+          />
+        ))}
       </div>
       {selectedGlyph && (
         <Modal
