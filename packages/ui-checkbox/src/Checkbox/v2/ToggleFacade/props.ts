@@ -32,6 +32,7 @@ type ToggleFacadeOwnProps = {
   disabled?: boolean
   readOnly?: boolean
   focused?: boolean
+  hovered?: boolean
   size?: 'small' | 'medium' | 'large'
   labelPlacement?: 'top' | 'start' | 'end'
   /**
@@ -56,8 +57,10 @@ const allowedProps: AllowedPropKeys = [
   'disabled',
   'readOnly',
   'focused',
+  'hovered',
   'size',
-  'labelPlacement'
+  'labelPlacement',
+  'invalid'
 ]
 
 export type { ToggleFacadeProps, ToggleFacadeStyle }
