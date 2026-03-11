@@ -152,6 +152,8 @@ type: embed
 
 ### Checkbox
 
+`readOnly` checkboxes are now focusable, in line with WCAG accessibility requirements. Previously, `readOnly` checkboxes were treated the same as `disabled` and were excluded from the tab order. Clicking a `readOnly` checkbox still has no effect — neither `onClick` nor `onChange` will fire.
+
 #### Checkbox (simple variant)
 
 ```js

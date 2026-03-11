@@ -28,6 +28,8 @@ import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 type CheckboxFacadeOwnProps = {
   children: React.ReactNode
   checked?: boolean
+  disabled?: boolean
+  readOnly?: boolean
   focused?: boolean
   hovered?: boolean
   size?: 'small' | 'medium' | 'large'
@@ -52,10 +54,13 @@ type CheckboxFacadeStyle = ComponentStyle<'checkboxFacade' | 'facade' | 'label'>
 const allowedProps: AllowedPropKeys = [
   'children',
   'checked',
+  'disabled',
+  'readOnly',
   'focused',
   'hovered',
   'size',
-  'indeterminate'
+  'indeterminate',
+  'invalid'
 ]
 
 export type { CheckboxFacadeProps, CheckboxFacadeStyle }
