@@ -45,42 +45,6 @@ const react = {
   componentBaseName: 'Icon'
 }
 
-const deprecated = {
-  /* [icon name]: [icon name to use instead]
-  /* e.g. 'arrow-up': 'arrow' */
-  'discussion-x': 'x',
-  'copy-course': 'copy',
-  'discussion-reply-dark': 'more',
-  'discussion-reply': 'more',
-  'discussion-search': 'search',
-  'search-address-book': 'search',
-  'rss-add': 'add',
-  'user-add': 'add',
-  'materials-required-light': 'materials-required',
-  'mature-light': 'mature',
-  'note-dark': 'note',
-  'note-light': 'note',
-  'icon-reply-2': 'icon-reply',
-  'icon-replied': 'icon-reply',
-  instructure: 'instructure-logo',
-  'settings-2': 'settings',
-  'twitter-boxed': 'twitter',
-  'arrow-left': 'arrow-start',
-  'arrow-open-left': 'arrow-open-start',
-  'arrow-open-right': 'arrow-open-end',
-  'arrow-right': 'arrow-end',
-  'expand-left': 'expand-start',
-  'mini-arrow-left': 'mini-arrow-start',
-  'mini-arrow-right': 'mini-arrow-end',
-  'move-left': 'move-start',
-  'move-right': 'move-end',
-  'text-left': 'text-start',
-  'text-right': 'text-end',
-  'toggle-left': 'toggle-start',
-  'toggle-right': 'toggle-end',
-  unpublish: 'unpublished'
-}
-
 const bidirectional = [
   'address-book',
   'annotate',
@@ -171,6 +135,5 @@ module.exports = {
   svg,
   fonts,
   react,
-  deprecated,
   bidirectional
 }

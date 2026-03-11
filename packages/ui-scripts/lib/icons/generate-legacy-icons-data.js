@@ -26,12 +26,10 @@ import getGlyphData from './get-glyph-data.js'
 
 export default function generateLegacyIconsData() {
   const svgDir = path.join(process.cwd(), 'svg/')
-  const deprecatedMap = {}
   const bidirectionalList = []
 
   const glyphsRaw = getGlyphData(
     svgDir,
-    deprecatedMap,
     bidirectionalList,
     'Icon'
   )
@@ -39,17 +37,14 @@ export default function generateLegacyIconsData() {
   // Group by glyphName to merge Line and Solid variants
   return Object.values(
     glyphsRaw.reduce(
-      (acc, { name, glyphName, variant, src, bidirectional, deprecated }) => {
-        if (!deprecated) {
-          const existing = acc[glyphName] || { name, glyphName, bidirectional }
-          const updated = { ...existing }
+      (acc, { name, glyphName, variant, src, bidirectional }) => {
+        const existing = acc[glyphName] || { name, glyphName, bidirectional }
+        const updated = { ...existing }
 
-          if (variant === 'Line') updated.lineSrc = src
-          if (variant === 'Solid') updated.solidSrc = src
+        if (variant === 'Line') updated.lineSrc = src
+        if (variant === 'Solid') updated.solidSrc = src
 
-          return { ...acc, [glyphName]: updated }
-        }
-        return acc
+        return { ...acc, [glyphName]: updated }
       },
       {}
     )

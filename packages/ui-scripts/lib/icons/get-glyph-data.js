@@ -32,7 +32,6 @@ function toPascalCase(text) {
 
 export default function getGlyphData(
   svgSourceDir,
-  deprecatedMap,
   bidirectionalList,
   prefix
 ) {
@@ -57,8 +56,7 @@ export default function getGlyphData(
         glyphName: name,
         variant: subdir,
         src: fileContent,
-        bidirectional: bidirectionalList.includes(name),
-        deprecated: deprecatedMap[name] ?? false
+        bidirectional: bidirectionalList.includes(name)
       })
     })
   })
