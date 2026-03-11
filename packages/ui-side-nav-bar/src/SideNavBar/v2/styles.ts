@@ -69,7 +69,13 @@ const generateStyle = (
       height: '100%',
       overflowY: 'auto',
       boxShadow: boxShadowObjectsToCSSString(componentTheme.boxShadow),
-      ...layoutVariants[minimized ? 'minimized' : 'expanded']
+      ...layoutVariants[minimized ? 'minimized' : 'expanded'],
+      // The layout toggle button needs the nav's border radius to visually match the container corners.
+      '& > [data-cid="SideNavBarItem"]': {
+        borderRadius: minimized
+          ? componentTheme.minimizedBorderRadius
+          : componentTheme.borderRadius
+      }
     },
     list: {
       label: 'navigation__list',
