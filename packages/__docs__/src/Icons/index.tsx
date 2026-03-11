@@ -31,7 +31,7 @@ const IconsGallery = lazy(() => import('./IconsGallery'))
 
 const IconsPage = () => {
   return (
-    <View as="div" padding="medium">
+    <View as="div">
       <Suspense
         fallback={
           <div

@@ -22,9 +22,8 @@
  * SOFTWARE.
  */
 
-import { useState, memo, useCallback, useMemo, useRef, useEffect } from 'react'
+import { useState, memo, useCallback, useMemo, useRef } from 'react'
 import type { ChangeEvent } from 'react'
-import { Grid } from 'react-window'
 
 import { Heading } from '@instructure/ui-heading'
 import { TextInput } from '@instructure/ui-text-input'
@@ -41,12 +40,9 @@ import { LucideIcons, CustomIcons } from '@instructure/ui-icons'
 import { XInstUIIcon } from '@instructure/ui-icons'
 import { Flex } from '@instructure/ui-flex'
 
-type IconSource = 'lucide' | 'custom'
-
 type IconInfo = {
   name: string
   component: React.ComponentType<any>
-  source: IconSource
   importPath: string
 }
 
@@ -60,13 +56,11 @@ const allIcons: IconInfo[] = [
   ...Object.entries(LucideIcons).map(([name, component]) => ({
     name,
     component: component as React.ComponentType<any>,
-    source: 'lucide' as const,
     importPath: '@instructure/ui-icons'
   })),
   ...Object.entries(CustomIcons).map(([name, component]) => ({
     name,
     component: component as React.ComponentType<any>,
-    source: 'custom' as const,
     importPath: '@instructure/ui-icons'
   }))
 ]
@@ -95,10 +89,9 @@ const IconTile = memo(
           display: 'flex',
           alignItems: 'center',
           flexDirection: 'column',
-          width: '100%',
-          padding: '0.5rem',
-          boxSizing: 'border-box',
-          overflow: 'hidden'
+          minWidth: '14em',
+          flexBasis: '14em',
+          flexGrow: 1,
         }}
       >
         <div
@@ -162,43 +155,28 @@ const IconTile = memo(
 )
 IconTile.displayName = 'IconTile'
 
-const TILE_HEIGHT = 180
-
-// Empty object constant for cellProps to maintain referential equality
-// and prevent unnecessary re-renders of all cells
-const EMPTY_CELL_PROPS = {}
-
-// Helper function to determine column count based on window width
-function getColumnCountForWidth(width: number): number {
-  if (width < 600) return 1
-  if (width < 900) return 2
-  return 3
-}
-
 const IconsGallery = () => {
   const [searchQuery, setSearchQuery] = useState<string>('')
-  const [searchInput, setSearchInput] = useState<string>('')
   const [selectedIcon, setSelectedIcon] = useState<IconInfo | null>(null)
   const [rtl, setRtl] = useState<boolean>(false)
-  const [containerWidth, setContainerWidth] = useState<number>(() =>
-    typeof window !== 'undefined' ? window.innerWidth : 900
-  )
   const searchTimeoutId = useRef<NodeJS.Timeout | null>(null)
-  const resizeTimeoutId = useRef<NodeJS.Timeout | null>(null)
-  const containerRef = useRef<HTMLDivElement>(null)
 
-  // Debounced search
-  const handleSearchChange = useCallback((_e: ChangeEvent, value: string) => {
-    setSearchInput(value)
+  const handleSearchChange = (_e: ChangeEvent, value: string) => {
+    // Instant update when extending query (typing adds characters)
+    if (value.startsWith(searchQuery)) {
+      setSearchQuery(value)
+      return
+    }
 
+    // Debounce when deleting (reveals more icons = heavier re-render)
     if (searchTimeoutId.current) {
       clearTimeout(searchTimeoutId.current)
     }
 
     searchTimeoutId.current = setTimeout(() => {
       setSearchQuery(value)
-    }, 300)
-  }, [])
+    }, 500)
+  }
 
   const handleBidirectionToggle = useCallback((e: ChangeEvent<any>) => {
     setRtl(e.target.checked)
@@ -214,70 +192,12 @@ const IconsGallery = () => {
 
   const filteredIcons = useMemo(() => {
     if (!searchQuery) return allIcons
-    return allIcons.filter((icon) =>
-      icon.name.toLowerCase().includes(searchQuery.toLowerCase())
-    )
+    const query = searchQuery.toLowerCase()
+    return allIcons.filter((icon) => icon.name.toLowerCase().includes(query))
   }, [searchQuery])
 
-  // Update container width on resize with debouncing
-  useEffect(() => {
-    const updateWidth = () => {
-      if (containerRef.current) {
-        setContainerWidth(containerRef.current.offsetWidth)
-      } else {
-        setContainerWidth(window.innerWidth)
-      }
-    }
-
-    const handleResize = () => {
-      if (resizeTimeoutId.current) {
-        clearTimeout(resizeTimeoutId.current)
-      }
-
-      resizeTimeoutId.current = setTimeout(() => {
-        updateWidth()
-      }, 150)
-    }
-
-    // Initial measurement
-    updateWidth()
-
-    window.addEventListener('resize', handleResize)
-    return () => {
-      window.removeEventListener('resize', handleResize)
-      if (resizeTimeoutId.current) {
-        clearTimeout(resizeTimeoutId.current)
-      }
-    }
-  }, [])
-
-  // Calculate column count and tile width based on container width
-  const columnCount = getColumnCountForWidth(containerWidth)
-  const tileWidth = Math.floor(containerWidth / columnCount)
-  const gridWidth = tileWidth * columnCount
-  const rowCount = Math.ceil(filteredIcons.length / columnCount)
-  const gridHeight = rowCount * TILE_HEIGHT
-
-  // Memoized cell renderer to prevent unnecessary re-renders
-  const CellRenderer = useCallback(
-    ({ columnIndex, rowIndex, style }: any) => {
-      const index = rowIndex * columnCount + columnIndex
-      if (index >= filteredIcons.length) {
-        return <div style={style} />
-      }
-
-      const icon = filteredIcons[index]
-      return (
-        <div style={{ ...style, overflow: 'hidden' }}>
-          <IconTile icon={icon} rtl={rtl} onClick={handleIconClick} />
-        </div>
-      )
-    },
-    [columnCount, filteredIcons, rtl, handleIconClick]
-  )
-
   return (
-    <div css={{ overflowX: 'hidden' }}>
+    <div>
       <FormFieldGroup
         layout="columns"
         colSpacing="small"
@@ -285,7 +205,6 @@ const IconsGallery = () => {
       >
         <TextInput
           placeholder="Filter icons..."
-          value={searchInput}
           onChange={handleSearchChange}
           renderLabel={<ScreenReaderContent>Icon Name</ScreenReaderContent>}
         />
@@ -302,28 +221,22 @@ const IconsGallery = () => {
       </FormFieldGroup>
 
       <div
-        ref={containerRef}
         css={{
+          display: 'flex',
+          flexWrap: 'wrap',
           margin: '0 auto',
           paddingTop: '1rem',
-          width: '100%',
-          maxWidth: '1200px'
+          gap: '1rem',
         }}
       >
-        <Grid
-          key={`grid-${columnCount}`}
-          cellComponent={CellRenderer}
-          cellProps={EMPTY_CELL_PROPS}
-          columnCount={columnCount}
-          columnWidth={tileWidth}
-          rowCount={rowCount}
-          rowHeight={TILE_HEIGHT}
-          style={{
-            height: `${gridHeight}px`,
-            width: `${gridWidth}px`,
-            overflowX: 'hidden'
-          }}
-        />
+        {filteredIcons.map((icon) => (
+          <IconTile
+            key={icon.name}
+            icon={icon}
+            rtl={rtl}
+            onClick={handleIconClick}
+          />
+        ))}
       </div>
 
       {selectedIcon && (
