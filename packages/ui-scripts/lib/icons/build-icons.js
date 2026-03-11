@@ -94,7 +94,6 @@ export default {
 
     const glyphs = getGlyphData(
       svgSourceDir,
-      config.deprecated,
       config.bidirectional,
       config.react.componentBaseName
     )
@@ -102,7 +101,7 @@ export default {
     // generate svg index
     generateSvgIndex(glyphs, config.destination)
     //    - output: ui-icons/src/generated/svg/index.js
-    //    - fields: variant, glyphName, src (svg), deprecated
+    //    - fields: variant, glyphName, src (svg)
 
     // generate react components
     generateReactComponents(glyphs, config.destination)
