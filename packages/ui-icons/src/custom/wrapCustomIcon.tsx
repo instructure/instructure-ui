@@ -25,25 +25,26 @@
 import React, { useId, useContext } from 'react'
 import { useStyle } from '@instructure/emotion'
 import { passthroughProps } from '@instructure/ui-react-utils'
-import type { IconNode } from 'lucide-react'
 
 import { IconPropsContext } from '../IconPropsProvider'
 import type { InstUIIconProps } from '../props'
 import generateStyle from '../styles'
 
 /**
- * Unified wrapper for custom icons (both stroke and filled) rendered from iconNode.
+ * Unified wrapper for custom icons (both stroke and filled) rendered from a
+ * JSX paths component.
  *
  * strokeWidth is always applied to the SVG root with absolute sizing (equivalent to
  * Lucide's absoluteStrokeWidth=true). Since SVG strokeWidth only affects elements
  * that have an explicit stroke attribute, fill-only paths are unaffected
  *
- * @param iconNode  Flat array of [tagName, attributes] tuples from the build script.
+ * @param PathsComponent  A component that renders inner SVG elements, accepting
+ *                        an optional `color` prop (defaults to 'currentColor').
  * @param iconName  Used as displayName (e.g. 'AiInfo').
  * @param viewBox   SVG viewBox string. Defaults to '0 0 24 24'.
  */
 export function wrapCustomIcon(
-  iconNode: IconNode,
+  PathsComponent: React.ComponentType<{ color?: string }>,
   iconName: string,
   viewBox: string = '0 0 24 24'
 ): React.ComponentType<InstUIIconProps> {
@@ -51,21 +52,6 @@ export function wrapCustomIcon(
 
   // For the AI gradient, coordinates span the viewBox width
   const viewBoxWidth = parseFloat(viewBox.split(' ')[2]) || 24
-
-  const renderPaths = (gradientId?: string) =>
-    iconNode.map(([tagName, attrs], index) => {
-      if (!gradientId) {
-        return React.createElement(tagName, { key: index, ...attrs })
-      }
-      const elementProps: Record<string, unknown> = { key: index }
-      for (const [k, v] of Object.entries(attrs)) {
-        elementProps[k] =
-          (k === 'fill' || k === 'stroke') && v === 'currentColor'
-            ? `url(#${gradientId})`
-            : v
-      }
-      return React.createElement(tagName, elementProps)
-    })
 
   const WrappedIcon = (props: InstUIIconProps) => {
     const {
@@ -152,7 +138,7 @@ export function wrapCustomIcon(
             </defs>
           </svg>
           <svg {...svgProps} {...strokeWidthProp}>
-            {renderPaths(gradientId)}
+            <PathsComponent color={`url(#${gradientId})`} />
           </svg>
         </span>
       )
@@ -165,7 +151,7 @@ export function wrapCustomIcon(
           {...strokeWidthProp}
           style={{ color: styles.resolvedColor }}
         >
-          {renderPaths()}
+          <PathsComponent />
         </svg>
       </span>
     )

@@ -24,7 +24,7 @@
 
 import fs from 'fs'
 import path from 'path'
-import * as svgson from 'svgson'
+import { svg2jsx } from './svg2jsx.js'
 
 const HEADER = `/*
  * The MIT License (MIT)
@@ -52,23 +52,30 @@ const HEADER = `/*
 `
 
 /**
- * Parse SVG into iconNode format: [[tagName, attributes], ...]
+ * Extract viewBox and convert inner SVG content to JSX with dynamic color.
  */
-function svgToIconNode(svgContent: string): {
-  iconNode: Array<[string, Record<string, string>]>
+function svgToJsxPaths(svgContent: string): {
+  jsxContent: string
   viewBox?: string
 } {
-  const iconNode: Array<[string, Record<string, string>]> = []
-  const parsed = svgson.parseSync(svgContent, { camelcase: true })
+  // Extract viewBox from the <svg> root tag
+  const svgTagMatch = svgContent.match(/<svg\s+([\s\S]*?)>/)
+  const viewBoxMatch = svgTagMatch?.[1].match(/viewBox\s*=\s*"([^"]*)"/)
+  const viewBox = viewBoxMatch?.[1] || undefined
 
-  function extract(node: svgson.INode): void {
-    if (node.type !== 'element') return
-    iconNode.push([node.name, { ...node.attributes }])
-    node.children.forEach(extract)
-  }
-  parsed.children.forEach(extract)
+  // Strip the <svg> wrapper to get inner content
+  const inner = svgContent
+    .replace(/<svg[^>]*>/, '')
+    .replace(/<\/svg\s*>/, '')
+    .trim()
 
-  return { iconNode, viewBox: parsed.attributes.viewBox || undefined }
+  // Convert SVG attributes to JSX
+  let jsxContent = svg2jsx(inner)
+
+  // Make currentColor values dynamic via the color prop
+  jsxContent = jsxContent.replace(/="currentColor"/g, '={color}')
+
+  return { jsxContent, viewBox }
 }
 
 /**
@@ -91,20 +98,23 @@ export default function generateCustomIndex() {
   }
 
   const svgFiles = fs.readdirSync(svgDir).filter((f) => f.endsWith('.svg'))
-  const exports: string[] = []
+  const iconBlocks: string[] = []
 
   for (const fileName of svgFiles) {
     const svgContent = fs.readFileSync(path.join(svgDir, fileName), 'utf-8')
     const iconName = fileNameToIconName(fileName)
 
     try {
-      const { iconNode, viewBox } = svgToIconNode(svgContent)
-      const viewBoxArg = viewBox ? `, '${viewBox}'` : ''
+      const { jsxContent, viewBox } = svgToJsxPaths(svgContent)
+      const viewBoxArg = viewBox ? `'${viewBox}'` : "'0 0 24 24'"
 
-      exports.push(
-        `export const ${iconName}InstUIIcon = wrapCustomIcon(${JSON.stringify(
-          iconNode
-        )} as IconNode, '${iconName}'${viewBoxArg})`
+      iconBlocks.push(
+        `const ${iconName}Paths = ({ color = 'currentColor' }: { color?: string }) => (\n` +
+          `  <>\n` +
+          `    ${jsxContent}\n` +
+          `  </>\n` +
+          `)\n` +
+          `export const ${iconName}InstUIIcon = wrapCustomIcon(${iconName}Paths, '${iconName}', ${viewBoxArg})`
       )
     } catch (err) {
       throw new Error(`Error processing ${fileName}: ${err}`)
@@ -114,20 +124,21 @@ export default function generateCustomIndex() {
   // Output goes to src/generated/custom/ so the import is relative to that:
   // ../../custom/wrapCustomIcon resolves to src/custom/wrapCustomIcon
   const content = `${HEADER}
-import type { IconNode } from 'lucide-react'
 import { wrapCustomIcon } from '../../custom/wrapCustomIcon'
 
 // Custom icons with InstUI theming
-// wrapCustomIcon(iconNode, displayName, viewBox?)
-${exports.join('\n')}
+// Each icon is a JSX component that accepts a color prop
+${iconBlocks.join('\n\n')}
 `
 
-  const outputPath = path.join(process.cwd(), 'src/generated/custom/index.ts')
-  fs.mkdirSync(path.dirname(outputPath), { recursive: true })
+  const outputDir = path.join(process.cwd(), 'src/generated/custom')
+  fs.mkdirSync(outputDir, { recursive: true })
+
+  const outputPath = path.join(outputDir, 'index.tsx')
   fs.writeFileSync(outputPath, content, 'utf-8')
 
   // eslint-disable-next-line no-console
   console.log(
-    `Generated src/generated/custom/index.ts with ${exports.length} / ${svgFiles.length} custom icons`
+    `Generated src/generated/custom/index.tsx with ${iconBlocks.length} / ${svgFiles.length} custom icons`
   )
 }
