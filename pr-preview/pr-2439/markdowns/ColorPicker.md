@@ -131,14 +131,14 @@ type: example
             secondColorLabel="Foreground"
           />
         </div>
-        <View
-          as="div"
-          background="secondary"
-          borderColor="primary"
-          borderWidth="small 0 0 0"
-          display="flex"
-          padding="x-small"
-          style={{ flexDirection: 'row-reverse' }}
+        <div
+          style={{
+            backgroundColor: '#F5F5F5',
+            display: 'flex',
+            flexDirection: 'row-reverse',
+            padding: '7px',
+            borderTop: 'solid 1px #C7CDD1'
+          }}
         >
           <Button onClick={handleAdd} color="primary" margin="xx-small">
             Add
@@ -146,7 +146,7 @@ type: example
           <Button onClick={handleClose} color="secondary" margin="xx-small">
             Close
           </Button>
-        </View>
+        </div>
       </div>
     )
 
