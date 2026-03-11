@@ -32,6 +32,7 @@ import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 type ModalFooterOwnProps = {
   children?: React.ReactNode
   variant?: 'default' | 'inverse'
+  spacing?: 'default' | 'compact'
 }
 
 type PropKeys = keyof ModalFooterOwnProps
@@ -43,7 +44,7 @@ type ModalFooterProps = ModalFooterOwnProps &
   OtherHTMLAttributes<ModalFooterOwnProps>
 
 type ModalFooterStyle = ComponentStyle<'modalFooter'>
-const allowedProps: AllowedPropKeys = ['children', 'variant']
+const allowedProps: AllowedPropKeys = ['children', 'variant', 'spacing']
 
 export type { ModalFooterProps, ModalFooterStyle }
 export { allowedProps }

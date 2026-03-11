@@ -40,7 +40,7 @@ const generateStyle = (
   componentTheme: NewComponentTypes['ModalFooter'],
   props: ModalFooterProps
 ): ModalFooterStyle => {
-  const { variant } = props
+  const { variant, spacing } = props
 
   const backgroundStyle =
     variant === 'inverse'
@@ -58,7 +58,10 @@ const generateStyle = (
       label: 'modalFooter',
       flex: '0 0 auto',
       boxSizing: 'border-box',
-      padding: componentTheme.padding,
+      padding:
+        spacing === 'compact'
+          ? componentTheme.paddingCompact
+          : componentTheme.padding,
       borderBottomRightRadius: componentTheme.borderRadius,
       borderBottomLeftRadius: componentTheme.borderRadius,
       display: 'flex',
