@@ -49,6 +49,8 @@ class CheckboxFacade extends Component<CheckboxFacadeProps> {
   static allowedProps = allowedProps
   static defaultProps = {
     checked: false,
+    disabled: false,
+    readOnly: false,
     focused: false,
     hovered: false,
     size: 'medium',
@@ -70,10 +72,24 @@ class CheckboxFacade extends Component<CheckboxFacadeProps> {
   }
 
   renderIcon() {
-    if (this.props.indeterminate) {
-      return renderIconWithProps(MinusInstUIIcon, 'sm', 'inverseColor')
-    } else if (this.props.checked) {
-      return renderIconWithProps(CheckInstUIIcon, 'sm', 'inverseColor')
+    const { disabled, readOnly, indeterminate, checked } = this.props
+
+    const getIconColor = () => {
+      if (disabled) {
+        return 'disabledBaseColor'
+      }
+      if (readOnly) {
+        return 'baseColor'
+      }
+      return 'inverseColor'
+    }
+
+    const iconColor = getIconColor()
+
+    if (indeterminate) {
+      return renderIconWithProps(MinusInstUIIcon, 'sm', iconColor)
+    } else if (checked) {
+      return renderIconWithProps(CheckInstUIIcon, 'sm', iconColor)
     } else {
       return null
     }

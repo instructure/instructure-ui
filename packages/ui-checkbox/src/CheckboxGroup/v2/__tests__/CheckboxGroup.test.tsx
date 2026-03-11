@@ -127,7 +127,7 @@ describe('<CheckboxGroup />', () => {
 
     await waitFor(() => {
       expect(onChange).not.toHaveBeenCalled()
-      expect(checkboxElement).toBeDisabled()
+      expect(checkboxElement).not.toBeDisabled()
     })
   })
 

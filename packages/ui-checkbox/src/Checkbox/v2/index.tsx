@@ -226,6 +226,7 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
         <ToggleFacade
           disabled={disabled}
           size={size}
+          hovered={hovered}
           focused={focused}
           checked={this.checked}
           readOnly={readOnly}
@@ -248,10 +249,12 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
     } else {
       return (
         <CheckboxFacade
+          disabled={disabled}
           size={size}
           hovered={hovered}
           focused={focused}
           checked={this.checked}
+          readOnly={readOnly}
           indeterminate={indeterminate}
           themeOverride={themeOverride as Partial<CheckboxFacadeTheme>}
           invalid={this.invalid}
@@ -331,9 +334,17 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
             type="checkbox"
             ref={this.handleInputRef}
             required={isRequired}
-            disabled={disabled || readOnly}
+            disabled={disabled}
+            readOnly={readOnly}
+            aria-readonly={readOnly ? true : undefined}
             aria-checked={indeterminate ? 'mixed' : undefined}
             css={styles?.input}
+            onClickCapture={(e) => {
+              if (readOnly) {
+                e.stopPropagation()
+                e.preventDefault()
+              }
+            }}
             onChange={this.handleChange}
             onKeyDown={createChainedFunction(onKeyDown, this.handleKeyDown)}
             onFocus={createChainedFunction(onFocus, this.handleFocus)}

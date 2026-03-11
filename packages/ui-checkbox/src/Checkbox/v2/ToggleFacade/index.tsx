@@ -50,6 +50,7 @@ class ToggleFacade extends Component<ToggleFacadeProps> {
   static defaultProps = {
     checked: false,
     focused: false,
+    hovered: false,
     size: 'medium',
     disabled: false,
     readOnly: false,
@@ -71,12 +72,27 @@ class ToggleFacade extends Component<ToggleFacadeProps> {
   }
 
   renderIcon() {
-    const { checked } = this.props
+    const { disabled, readOnly, checked } = this.props
+
+    const getIconColor = () => {
+      if (disabled) {
+        return 'disabledBaseColor'
+      }
+      if (readOnly) {
+        return 'mutedColor'
+      }
+      if (checked) {
+        return 'successColor'
+      }
+      return 'baseColor'
+    }
+
+    const iconColor = getIconColor()
 
     if (checked) {
-      return renderIconWithProps(CheckInstUIIcon, 'sm', 'successColor')
+      return renderIconWithProps(CheckInstUIIcon, 'xs', iconColor)
     } else {
-      return renderIconWithProps(XInstUIIcon, 'sm', 'baseColor')
+      return renderIconWithProps(XInstUIIcon, 'xs', iconColor)
     }
   }
 

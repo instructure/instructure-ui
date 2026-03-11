@@ -154,7 +154,17 @@ describe('<Checkbox />', () => {
       await waitFor(() => {
         expect(onClick).not.toHaveBeenCalled()
         expect(onChange).not.toHaveBeenCalled()
+        expect(checkboxElement).not.toBeDisabled()
       })
+    })
+
+    it('when focused, readOnly checkbox is focusable', async () => {
+      renderCheckbox({ readOnly: true })
+      const checkboxElement = screen.getByRole('checkbox')
+
+      checkboxElement.focus()
+
+      expect(document.activeElement).toBe(checkboxElement)
     })
 
     it('calls onChange when enter key is pressed', async () => {

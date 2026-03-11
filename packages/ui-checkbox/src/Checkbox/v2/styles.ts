@@ -40,7 +40,7 @@ const generateStyle = (
   componentTheme: NewComponentTypes['Checkbox'],
   props: CheckboxProps
 ): CheckboxStyle => {
-  const { inline, disabled, size, variant } = props
+  const { inline, size, variant } = props
 
   // toggleFullWidth calculation based on Toggle facade width (1.625rem * 1.5) and the marginInlineEnd (0.75rem)
   const toggleFullWidth = `calc(1.625rem * 1.5 + 0.75rem)`
@@ -65,26 +65,23 @@ const generateStyle = (
           : `calc(${componentTheme.gap} + ${componentTheme.controlSizeLg})`
     }
   }
+  const sizeVariant =
+    sizeVariants[size as keyof typeof sizeVariants] ?? sizeVariants.medium
 
   return {
     requiredInvalid: {
       color: componentTheme.asteriskColor
     },
     indentedError: {
-      paddingLeft: sizeVariants[size!].paddingLeft
+      paddingLeft: sizeVariant.paddingLeft
     },
     indentedToggleError: {
-      paddingLeft: sizeVariants[size!].paddingLeft
+      paddingLeft: sizeVariant.paddingLeft
     },
     checkbox: {
       label: 'checkbox',
       position: 'relative',
       width: '100%',
-      ...(disabled && {
-        cursor: 'not-allowed',
-        pointerEvents: 'none',
-        opacity: 0.5
-      }),
       ...(inline && {
         display: 'inline-block',
         verticalAlign: 'middle',
