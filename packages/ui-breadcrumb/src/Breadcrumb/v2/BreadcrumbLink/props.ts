@@ -28,8 +28,8 @@ import type {
   OtherHTMLAttributes,
   Renderable
 } from '@instructure/shared-types'
-import type { ViewOwnProps } from '@instructure/ui-view'
-import type { LinkProps } from '@instructure/ui-link'
+import type { ViewOwnProps } from '@instructure/ui-view/latest'
+import type { LinkProps } from '@instructure/ui-link/latest'
 
 type BreadcrumbLinkOwnProps = {
   /**

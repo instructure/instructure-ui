@@ -26,7 +26,7 @@ import { Component } from 'react'
 
 import { findDOMNode, findTabbable } from '@instructure/ui-dom-utils'
 import { logError as error } from '@instructure/console'
-import { View } from '@instructure/ui-view/latest'
+import { View } from '@instructure/ui-view/v11_6'
 
 import { PagesContext } from '../PagesContext'
 

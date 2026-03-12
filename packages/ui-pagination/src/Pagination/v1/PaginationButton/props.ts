@@ -27,7 +27,7 @@ import type {
   OtherHTMLAttributes,
   PickPropsWithExceptions
 } from '@instructure/shared-types'
-import type { BaseButtonProps } from '@instructure/ui-buttons'
+import type { BaseButtonProps } from '@instructure/ui-buttons/v11_6'
 
 type PaginationPageOwnProps = {
   /**

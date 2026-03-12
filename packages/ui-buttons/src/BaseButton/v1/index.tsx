@@ -33,8 +33,8 @@ import {
 } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
-import { View } from '@instructure/ui-view/latest'
-import type { ViewProps } from '@instructure/ui-view/latest'
+import { View } from '@instructure/ui-view/v11_6'
+import type { ViewProps } from '@instructure/ui-view/v11_6'
 
 // TODO these have to be imported in separate lines because otherwise `isSafari` will be missing from the babel build
 // this bug is very likely caused by `babel-plugin-transform-imports` and can be reverted once it is removed from the codebase

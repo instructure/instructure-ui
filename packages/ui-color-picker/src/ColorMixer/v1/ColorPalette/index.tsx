@@ -28,8 +28,8 @@ import { withStyleLegacy as withStyle } from '@instructure/emotion'
 import { addEventListener } from '@instructure/ui-dom-utils'
 import type { HSVType } from '@instructure/ui-color-utils'
 
-import { View } from '@instructure/ui-view/latest'
-import type { ViewOwnProps } from '@instructure/ui-view/latest'
+import { View } from '@instructure/ui-view/v11_6'
+import type { ViewOwnProps } from '@instructure/ui-view/v11_6'
 import { px } from '@instructure/ui-utils'
 import { withDeterministicId } from '@instructure/ui-react-utils'
 

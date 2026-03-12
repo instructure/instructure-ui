@@ -28,7 +28,7 @@ import type {
   OtherHTMLAttributes,
   SelectTheme
 } from '@instructure/shared-types'
-import type { FormMessage } from '@instructure/ui-form-field'
+import type { FormMessage } from '@instructure/ui-form-field/v11_6'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
   PlacementPropValues,

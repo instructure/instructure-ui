@@ -26,7 +26,7 @@ import { Component } from 'react'
 
 import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
 
-import { Tooltip } from '@instructure/ui-tooltip/latest'
+import { Tooltip } from '@instructure/ui-tooltip/v11_6'
 import { IconButton } from '../../IconButton/v1'
 
 import { allowedProps } from './props'

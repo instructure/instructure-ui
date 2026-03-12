@@ -32,7 +32,7 @@ import {
   passthroughProps
 } from '@instructure/ui-react-utils'
 
-import { View } from '@instructure/ui-view'
+import { View } from '@instructure/ui-view/v11_6'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import type { ScreenReaderContentProps } from '@instructure/ui-a11y-content'
 

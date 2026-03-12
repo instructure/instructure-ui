@@ -26,7 +26,7 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { vi } from 'vitest'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
-import { Calendar } from '@instructure/ui-calendar'
+import { Calendar } from '@instructure/ui-calendar/latest'
 import { DateInput } from '../index'
 
 describe('<DateInput />', () => {

@@ -28,7 +28,7 @@ import type {
   OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
-import type { FormFieldLayoutOwnProps } from '../../FormFieldLayout/v2/props'
+import type { FormFieldLayoutOwnProps } from '../../FormFieldLayout/v1/props'
 import type { FormMessage } from '../../utils/v1/FormPropTypes'
 
 type FormFieldGroupOwnProps = {
