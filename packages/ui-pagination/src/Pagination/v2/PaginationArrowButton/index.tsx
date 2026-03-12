@@ -86,7 +86,7 @@ class PaginationArrowButton extends Component<PaginationNavigationProps> {
   renderIcon() {
     const icon = this.Icon
     if (!icon) return null
-    return renderIconWithProps(icon, 'md', 'baseColor')
+    return renderIconWithProps(icon, 'md', 'actionTertiaryBaseColor')
   }
 
   render() {

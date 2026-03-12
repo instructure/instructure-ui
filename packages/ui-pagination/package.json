@@ -37,6 +37,7 @@
     "@instructure/ui-themes": "workspace:*",
     "@instructure/ui-tooltip": "workspace:*",
     "@instructure/ui-utils": "workspace:*",
+    "@instructure/ui-text": "workspace:*",
     "@instructure/ui-view": "workspace:*",
     "@instructure/uid": "workspace:*"
   },

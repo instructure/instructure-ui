@@ -219,9 +219,7 @@ describe('<Pagination />', () => {
     const pagination = screen.getByRole('navigation')
     const allButtons = screen.queryAllByRole('button')
     const paginationButtons = screen.getAllByRole('button', { name: /^#\d$/ })
-    const ellipses = screen.getAllByText('…', {
-      selector: '[aria-hidden="true"]'
-    })
+    const ellipses = document.querySelectorAll('li[aria-hidden="true"]')
 
     expect(pagination).toBeInTheDocument()
     expect(pagination).toHaveTextContent('Prev#0…#2#3#4#5#6…#8Next')
@@ -229,6 +227,9 @@ describe('<Pagination />', () => {
     expect(allButtons.length).toEqual(9)
     expect(paginationButtons.length).toEqual(7)
     expect(ellipses.length).toEqual(2)
+    expect(Array.from(ellipses).every((el) => el.textContent === '…')).toBe(
+      true
+    )
   })
 
   it('should truncate start', async () => {
@@ -241,9 +242,7 @@ describe('<Pagination />', () => {
     const pagination = screen.getByRole('navigation')
     const allButtons = screen.queryAllByRole('button')
     const paginationButtons = screen.getAllByRole('button', { name: /^#\d$/ })
-    const ellipses = screen.getAllByText('…', {
-      selector: '[aria-hidden="true"]'
-    })
+    const ellipses = document.querySelectorAll('li[aria-hidden="true"]')
 
     expect(pagination).toBeInTheDocument()
     expect(pagination).toHaveTextContent('Prev#0…#5#6#7#8')
@@ -251,6 +250,9 @@ describe('<Pagination />', () => {
     expect(allButtons.length).toEqual(6)
     expect(paginationButtons.length).toEqual(5)
     expect(ellipses.length).toEqual(1)
+    expect(Array.from(ellipses).every((el) => el.textContent === '…')).toBe(
+      true
+    )
   })
 
   it('should truncate end', async () => {
@@ -263,9 +265,7 @@ describe('<Pagination />', () => {
     const pagination = screen.getByRole('navigation')
     const allButtons = screen.queryAllByRole('button')
     const paginationButtons = screen.getAllByRole('button', { name: /^#\d$/ })
-    const ellipses = screen.getAllByText('…', {
-      selector: '[aria-hidden="true"]'
-    })
+    const ellipses = document.querySelectorAll('li[aria-hidden="true"]')
 
     expect(pagination).toBeInTheDocument()
     expect(pagination).toHaveTextContent('#0#1#2#3…#5Next')
@@ -273,6 +273,9 @@ describe('<Pagination />', () => {
     expect(allButtons.length).toEqual(6)
     expect(paginationButtons.length).toEqual(5)
     expect(ellipses.length).toEqual(1)
+    expect(Array.from(ellipses).every((el) => el.textContent === '…')).toBe(
+      true
+    )
   })
 
   it('should omit ellipses when bounds included in context', async () => {
