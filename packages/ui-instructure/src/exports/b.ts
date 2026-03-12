@@ -21,36 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import type {
-  OtherHTMLAttributes,
-  PickPropsWithExceptions,
-  AsElementType,
-  OptionsSeparatorTheme
-} from '@instructure/shared-types'
-import type { WithStyleProps } from '@instructure/emotion'
-import type { OptionsSeparatorProps } from '@instructure/ui-options/v11_6'
-
-type DrilldownSeparatorOwnProps = {
-  id: string
-
-  /**
-   * Element type to render as
-   */
-  as?: AsElementType
-}
-
-type PropKeys = keyof DrilldownSeparatorOwnProps
-
-type AllowedPropKeys = Readonly<Array<PropKeys>>
-
-type DrilldownSeparatorProps =
-  // we are passing all props to Options.Separator
-  PickPropsWithExceptions<OptionsSeparatorProps, 'as'> &
-    DrilldownSeparatorOwnProps &
-    WithStyleProps<OptionsSeparatorTheme, null> &
-    OtherHTMLAttributes<DrilldownSeparatorOwnProps>
-const allowedProps: AllowedPropKeys = ['id', 'as']
-
-export type { DrilldownSeparatorProps }
-export { allowedProps }
+export { NutritionFacts } from '../NutritionFacts/v1'
+export { DataPermissionLevels } from '../DataPermissionLevels/v1'
+export { AiInformation } from '../AiInformation/v2'
+export type { NutritionFactsProps } from '../NutritionFacts/v1/props'
+export type { DataPermissionLevelsProps } from '../DataPermissionLevels/v1/props'
+export type { AiInformationProps } from '../AiInformation/v2/props'

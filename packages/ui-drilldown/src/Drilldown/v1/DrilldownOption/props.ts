@@ -32,7 +32,7 @@ import type { WithStyleProps } from '@instructure/emotion'
 import type {
   OptionsItemRenderProps,
   OptionsItemProps
-} from '@instructure/ui-options'
+} from '@instructure/ui-options/v11_6'
 
 import Drilldown from '../index'
 import { Renderable } from '@instructure/shared-types'

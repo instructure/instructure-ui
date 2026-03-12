@@ -29,7 +29,7 @@ import type {
   TextAreaTheme,
   PickPropsWithExceptions
 } from '@instructure/shared-types'
-import type { FormMessage, FormFieldOwnProps } from '@instructure/ui-form-field'
+import type { FormMessage, FormFieldOwnProps } from '@instructure/ui-form-field/v11_6'
 import type {
   WithStyleProps,
   ComponentStyle,
