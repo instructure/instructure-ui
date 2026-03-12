@@ -29,7 +29,7 @@ import type {
 } from '@instructure/emotion'
 import type { OtherHTMLAttributes, TabsTheme } from '@instructure/shared-types'
 import type { TextDirectionContextConsumerProps } from '@instructure/ui-i18n'
-import type { ViewOwnProps } from '@instructure/ui-view'
+import type { ViewOwnProps } from '@instructure/ui-view/latest'
 
 type TabsOwnProps = {
   /**

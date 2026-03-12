@@ -27,7 +27,7 @@ import type {
   OtherHTMLAttributes,
   PickPropsWithExceptions
 } from '@instructure/shared-types'
-import type { IconButtonProps } from '@instructure/ui-buttons'
+import type { IconButtonProps } from '@instructure/ui-buttons/v11_6'
 
 type PaginationArrowDirections = 'first' | 'prev' | 'next' | 'last'
 

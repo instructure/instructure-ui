@@ -22,5 +22,5 @@
  * SOFTWARE.
  */
 
-export { Link } from '../Link/v1'
-export type { LinkProps } from '../Link/v1/props'
+export { Link } from '../Link/v2'
+export type { LinkProps } from '../Link/v2/props'

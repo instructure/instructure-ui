@@ -24,7 +24,7 @@
 
 import { InputHTMLAttributes } from 'react'
 
-import type { FormFieldProps, FormMessage } from '@instructure/ui-form-field'
+import type { FormFieldProps, FormMessage } from '@instructure/ui-form-field/v11_6'
 import type {
   OtherHTMLAttributes,
   TextInputTheme

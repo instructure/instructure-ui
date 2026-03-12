@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Drilldown } from '@instructure/ui-drilldown'
+import { Drilldown } from '@instructure/ui-drilldown/v11_6'
 import {
   IconQuestionLine,
   IconAlertsLine,
@@ -44,7 +44,7 @@ import type { TopNavBarContextType } from '../TopNavBarContext'
 
 import { TopNavBar } from '../index'
 import { elevateIcon } from './exampleSvgFiles'
-import { Breadcrumb } from '@instructure/ui-breadcrumb'
+import { Breadcrumb } from '@instructure/ui-breadcrumb/v11_6'
 
 type ChildrenFuncProps = {
   currentLayout: TopNavBarContextType['layout']
