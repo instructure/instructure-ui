@@ -24,7 +24,7 @@
 
 import { Children, Component, ReactElement } from 'react'
 
-import { View } from '@instructure/ui-view/latest'
+import { View } from '@instructure/ui-view/v11_6'
 import { containsActiveElement, findTabbable } from '@instructure/ui-dom-utils'
 import {
   safeCloneElement,

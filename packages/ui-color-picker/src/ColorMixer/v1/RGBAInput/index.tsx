@@ -28,7 +28,7 @@ import { withStyleLegacy as withStyle } from '@instructure/emotion'
 import shallowCompare from '../utils/shallowCompare'
 
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
-import { TextInput } from '@instructure/ui-text-input/latest'
+import { TextInput } from '@instructure/ui-text-input/v11_6'
 
 import { allowedProps } from './props'
 import type { RGBAInputProps, RGBAInputState } from './props'

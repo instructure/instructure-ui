@@ -37,23 +37,23 @@ import {
   isActiveElement
 } from '@instructure/ui-dom-utils'
 
-import { View } from '@instructure/ui-view/latest'
+import { View } from '@instructure/ui-view/v11_6'
 import { Selectable } from '@instructure/ui-selectable'
-import { Popover } from '@instructure/ui-popover/latest'
-import { TextInput } from '@instructure/ui-text-input/latest'
-import { Options } from '@instructure/ui-options'
+import { Popover } from '@instructure/ui-popover/v11_6'
+import { TextInput } from '@instructure/ui-text-input/v11_6'
+import { Options } from '@instructure/ui-options/v11_6'
 import {
   IconArrowOpenDownLine,
   IconArrowOpenUpLine
 } from '@instructure/ui-icons'
 
-import type { ViewProps } from '@instructure/ui-view/latest'
-import type { TextInputProps } from '@instructure/ui-text-input/latest'
+import type { ViewProps } from '@instructure/ui-view/v11_6'
+import type { TextInputProps } from '@instructure/ui-text-input/v11_6'
 import type {
   OptionsItemProps,
   OptionsSeparatorProps,
   OptionsItemRenderProps
-} from '@instructure/ui-options'
+} from '@instructure/ui-options/v11_6'
 import type {
   SelectableProps,
   SelectableRender
