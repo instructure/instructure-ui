@@ -122,5 +122,31 @@
       "value": "none",
       "type": "other"
     }
+  },
+  "topNavBarMenuItems": {
+    "desktopSubmenuActiveOptionIndicatorWidth": {
+      "value": "0.125rem",
+      "type": "sizing"
+    },
+    "desktopItemSpacing": {
+      "value": "{spacing.spaceLg}",
+      "type": "spacing"
+    },
+    "desktopSubmenuActiveOptionIndicatorSpacing": {
+      "value": "{spacing.spaceXs}",
+      "type": "spacing"
+    },
+    "desktopSubmenuActiveOptionFontWeight": {
+      "value": "{fontWeight.body.strong}",
+      "type": "fontWeights"
+    },
+    "desktopMaxWidth": {
+      "value": "100%",
+      "type": "other"
+    },
+    "desktopSubmenuActiveOptionIndicatorColor": {
+      "value": "currentColor",
+      "type": "other"
+    }
   }
 }
