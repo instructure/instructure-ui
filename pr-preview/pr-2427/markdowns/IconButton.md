@@ -44,8 +44,8 @@ type: example
 type: example
 ---
 <View display="block">
-  <IconButton color="ai-primary" screenReaderLabel="AI button" margin="small"><SparklesInstUIIcon/></IconButton>
-  <IconButton color="ai-secondary" screenReaderLabel="AI button"  margin="small"><SparklesInstUIIcon/></IconButton>
+  <IconButton color="ai-primary" screenReaderLabel="AI button" margin="small"><IgniteaiLogoInstUIIcon/></IconButton>
+  <IconButton color="ai-secondary" screenReaderLabel="AI button"  margin="small"><IgniteaiLogoInstUIIcon/></IconButton>
 </View>
 ```
 

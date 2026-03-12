@@ -23,9 +23,21 @@ type: example
   <Button color="secondary" margin="small">Secondary</Button>
   <Button color="success" margin="small">Success</Button>
   <Button color="danger" margin="small">Danger</Button>
-  <Button color="primary-inverse" margin="small">Primary Inverse</Button>
   <Button color="ai-primary" margin="small">AI Primary</Button>
   <Button color="ai-secondary" margin="small">AI Secondary</Button>
+</View>
+```
+
+### Primary Inverse
+
+The `primary-inverse` color is designed for use on colored backgrounds. It provides adequate contrast when placed on colored surfaces.
+
+```js
+---
+type: example
+---
+<View display="block" background="brand" padding="small">
+  <Button color="primary-inverse" margin="small">Primary Inverse</Button>
 </View>
 ```
 
@@ -38,12 +50,12 @@ There is a specific need for `AI buttons`, which has an icon and gradient colors
 type: example
 ---
 <View display="block">
-  <Button color="ai-primary" renderIcon={SparklesInstUIIcon} margin="small">AI Primary</Button>
-  <Button color="ai-secondary" renderIcon={SparklesInstUIIcon} margin="small">AI Secondary</Button>
-  <IconButton color="ai-primary" screenReaderLabel="AI button" margin="small"><SparklesInstUIIcon/></IconButton>
-  <IconButton  shape='circle' color="ai-secondary" screenReaderLabel="AI button"  margin="small"><SparklesInstUIIcon/></IconButton>
-  <IconButton   shape='circle' color="ai-primary" screenReaderLabel="AI button" margin="small"><SparklesInstUIIcon/></IconButton>
-  <IconButton color="ai-secondary" screenReaderLabel="AI button"  margin="small"><SparklesInstUIIcon/></IconButton>
+  <Button color="ai-primary" renderIcon={IgniteaiLogoInstUIIcon} margin="small">AI Primary</Button>
+  <Button color="ai-secondary" renderIcon={IgniteaiLogoInstUIIcon} margin="small">AI Secondary</Button>
+  <IconButton color="ai-primary" screenReaderLabel="AI button" margin="small"><IgniteaiLogoInstUIIcon/></IconButton>
+  <IconButton  shape='circle' color="ai-secondary" screenReaderLabel="AI button"  margin="small"><IgniteaiLogoInstUIIcon/></IconButton>
+  <IconButton   shape='circle' color="ai-primary" screenReaderLabel="AI button" margin="small"><IgniteaiLogoInstUIIcon/></IconButton>
+  <IconButton color="ai-secondary" screenReaderLabel="AI button"  margin="small"><IgniteaiLogoInstUIIcon/></IconButton>
 </View>
 ```
 
@@ -71,7 +83,6 @@ type: example
 <View display="block">
   <Button size="condensedSmall" margin="small">Condensed Small</Button>
   <Button size="condensedMedium" margin="small">Condensed Medium</Button>
-  <Button size="small" margin="small">Small</Button>
 </View>
 ```
 
