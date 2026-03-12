@@ -23,7 +23,7 @@
  */
 
 import { SyntheticEvent } from 'react'
-import type { FormMessage } from '@instructure/ui-form-field'
+import type { FormMessage } from '@instructure/ui-form-field/v11_6'
 import type { InteractionType } from '@instructure/ui-react-utils'
 import type { Moment } from '@instructure/ui-i18n'
 import type { Renderable } from '@instructure/shared-types'

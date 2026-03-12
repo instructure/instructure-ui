@@ -29,7 +29,7 @@ import type {
   ToggleDetailsTheme
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
-import type { ViewProps } from '@instructure/ui-view'
+import type { ViewProps } from '@instructure/ui-view/latest'
 
 type ToggleDetailsOwnProps = {
   variant?: 'default' | 'filled'

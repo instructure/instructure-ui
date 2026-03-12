@@ -22,21 +22,19 @@
  * SOFTWARE.
  */
 
-import type {
-  AsElementType,
-  FormFieldGroupTheme,
-  OtherHTMLAttributes
-} from '@instructure/shared-types'
-import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
-import type { FormFieldLayoutOwnProps } from '../../FormFieldLayout/v1/props'
-import type { FormMessage } from '../../utils/v1/FormPropTypes'
+import React from 'react'
 
-type FormFieldGroupOwnProps = {
-  description: React.ReactNode
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
+import type { FormMessage } from '../../utils/v1/FormPropTypes'
+import type { Spacing } from '@instructure/emotion'
+
+type FormFieldOwnProps = {
+  label: React.ReactNode
   /**
-   * the element type to render as
+   * the id of the input (to link it to its label for a11y).
+   * Applied as the `for` HTML prop on the label.
    */
-  as?: AsElementType
+  id: string
   /**
    * Array of objects with shape: `{
    *   text: React.ReactNode,
@@ -48,56 +46,59 @@ type FormFieldGroupOwnProps = {
    * id for the form field messages
    */
   messagesId?: string
-  disabled?: boolean
   children?: React.ReactNode
-  layout?: 'stacked' | 'columns' | 'inline'
-  rowSpacing?: 'none' | 'small' | 'medium' | 'large'
-  colSpacing?: 'none' | 'small' | 'medium' | 'large'
+  inline?: boolean
+  layout?: 'stacked' | 'inline'
+  labelAlign?: 'start' | 'end'
   vAlign?: 'top' | 'middle' | 'bottom'
-  startAt?: 'small' | 'medium' | 'large' | 'x-large' | null
+  width?: string
+  inputContainerRef?: (element: HTMLSpanElement | null) => void
   /**
    * provides a reference to the underlying html root element
    */
   elementRef?: (element: Element | null) => void
+  /**
+   * If `true`, displays an asterisk after the label to indicate the field is required
+   */
+  isRequired?: boolean
+
+  /**
+   * Margin around the component. Accepts a `Spacing` token. See token values and example usage in [this guide](https://instructure.design/#layout-spacing).
+   */
+  margin?: Spacing
+  /**
+   * Whether the field is disabled. When true, error and success messages will be hidden.
+   */
+  disabled?: boolean
+  /**
+   * Whether the field is read-only. When true, error and success messages will be hidden.
+   */
+  readOnly?: boolean
 }
 
-type FormFieldGroupStyleProps = {
-  invalid: boolean
-}
-
-type PropKeys = keyof FormFieldGroupOwnProps
+type PropKeys = keyof FormFieldOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type FormFieldGroupProps = FormFieldGroupOwnProps &
-  WithStyleProps<FormFieldGroupTheme, FormFieldGroupStyle> &
-  OtherHTMLAttributes<FormFieldGroupOwnProps> &
-  // Adding other props that can be passed to FormFieldLayout,
-  // excluding the ones we set manually
-  Omit<
-    FormFieldLayoutOwnProps,
-    'messages' | 'messagesId' | 'vAlign' | 'layout' | 'label' | 'children'
-  >
-
-type FormFieldGroupStyle = ComponentStyle<'formFieldGroup'>
+type FormFieldProps = FormFieldOwnProps & OtherHTMLAttributes<FormFieldOwnProps>
 const allowedProps: AllowedPropKeys = [
-  'description',
-  'as',
+  'label',
+  'id',
   'messages',
   'messagesId',
-  'disabled',
   'children',
+  'inline',
   'layout',
-  'rowSpacing',
-  'colSpacing',
+  'labelAlign',
   'vAlign',
-  'startAt',
-  'elementRef'
+  'width',
+  'inputContainerRef',
+  'elementRef',
+  'isRequired',
+  'margin',
+  'disabled',
+  'readOnly'
 ]
 
-export type {
-  FormFieldGroupProps,
-  FormFieldGroupStyleProps,
-  FormFieldGroupStyle
-}
+export type { FormFieldOwnProps, FormFieldProps }
 export { allowedProps }

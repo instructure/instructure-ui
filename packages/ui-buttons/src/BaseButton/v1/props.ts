@@ -36,7 +36,7 @@ import type {
   OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { Cursor } from '@instructure/shared-types'
-import type { ViewProps } from '@instructure/ui-view'
+import type { ViewProps } from '@instructure/ui-view/v11_6'
 import { Renderable } from '@instructure/shared-types'
 
 type BaseButtonOwnProps = {

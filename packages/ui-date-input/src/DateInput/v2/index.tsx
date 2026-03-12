@@ -54,7 +54,7 @@ import generateStyle from './styles'
 
 import { allowedProps } from './props'
 import type { DateInputProps, DateInputState } from './props'
-import type { FormMessage } from '@instructure/ui-form-field'
+import type { FormMessage } from '@instructure/ui-form-field/latest'
 
 /**
 ---

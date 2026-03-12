@@ -23,7 +23,7 @@
  */
 
 import type { SyntheticEvent, InputHTMLAttributes } from 'react'
-import type { FormMessage } from '@instructure/ui-form-field'
+import type { FormMessage } from '@instructure/ui-form-field/v11_6'
 import type { OtherHTMLAttributes, Renderable } from '@instructure/shared-types'
 import type { Spacing } from '@instructure/emotion'
 

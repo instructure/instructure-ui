@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import type { CalendarDayProps } from '@instructure/ui-calendar'
-import type { FormMessage } from '@instructure/ui-form-field'
+import type { CalendarDayProps } from '@instructure/ui-calendar/v11_6'
+import type { FormMessage } from '@instructure/ui-form-field/v11_6'
 import type { PlacementPropValues } from '@instructure/ui-position'
 import type { Renderable, OtherHTMLAttributes } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
