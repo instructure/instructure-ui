@@ -25,6 +25,7 @@
 import { Component } from 'react'
 
 import { withStyle } from '@instructure/emotion'
+import { Text } from '@instructure/ui-text/latest'
 import { NumberInput } from '@instructure/ui-number-input/latest'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
@@ -191,7 +192,9 @@ class PaginationPageInput extends Component<
     const { label, numberOfPages, styles } = this.props
 
     return typeof label === 'function' && label(numberOfPages) ? (
-      <span css={styles?.inputLabel}>{label(numberOfPages)}</span>
+      <Text variant="content">
+        <span css={styles?.inputLabel}>{label(numberOfPages)}</span>
+      </Text>
     ) : null
   }
 
