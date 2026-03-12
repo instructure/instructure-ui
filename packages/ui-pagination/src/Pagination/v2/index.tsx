@@ -29,6 +29,7 @@ import {
   ReactNode
 } from 'react'
 
+import { Text } from '@instructure/ui-text/latest'
 import { View } from '@instructure/ui-view/latest'
 import { omitProps, withDeterministicId } from '@instructure/ui-react-utils'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
@@ -258,12 +259,11 @@ class Pagination extends Component<PaginationProps> {
 
     return (
       <View
-        as="span"
         padding={visibleLabel ? 'small' : '0'}
         display={visibleLabel ? display : 'auto'}
         id={this._labelId}
       >
-        {this.props.label}
+        <Text variant="content">{this.props.label}</Text>
       </View>
     )
   }
@@ -375,7 +375,7 @@ class Pagination extends Component<PaginationProps> {
       pages.push(this.renderPagesInInterval(1, boundaryCount!, currentPage!))
       pages.push(
         <li key="ellipsis1" style={{ all: 'unset' }}>
-          {ellipsis}
+          <Text>{ellipsis}</Text>
         </li>
       )
       if (
@@ -418,7 +418,7 @@ class Pagination extends Component<PaginationProps> {
       )
       pages.push(
         <li key="ellipsis2" style={{ all: 'unset' }}>
-          {ellipsis}
+          <Text>{ellipsis}</Text>
         </li>
       )
       pages.push(
@@ -463,14 +463,14 @@ class Pagination extends Component<PaginationProps> {
       if (sliceStart - firstIndex > 1)
         visiblePages.unshift(
           <li style={{ all: 'unset' }} key="first" aria-hidden="true">
-            {this.props.ellipsis}
+            <Text>{this.props.ellipsis}</Text>
           </li>
         )
       if (sliceStart - firstIndex > 0) visiblePages.unshift(firstPage)
       if (lastIndex - sliceEnd + 1 > 1)
         visiblePages.push(
           <li style={{ all: 'unset' }} key="last" aria-hidden="true">
-            {this.props.ellipsis}
+            <Text>{this.props.ellipsis}</Text>
           </li>
         )
       if (lastIndex - sliceEnd + 1 > 0) visiblePages.push(lastPage)
