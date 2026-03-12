@@ -32,7 +32,7 @@ import type {
   BillboardTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
-import type { ViewProps } from '@instructure/ui-view'
+import type { ViewProps } from '@instructure/ui-view/v11_6'
 import { MouseEvent } from 'react'
 import { Renderable } from '@instructure/shared-types'
 type HeroIconSize = 'medium' | 'x-large' | 'large'

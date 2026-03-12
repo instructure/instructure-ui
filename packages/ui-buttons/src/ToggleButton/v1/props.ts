@@ -33,7 +33,7 @@ import type {
   PositionConstraint,
   PositionMountNode
 } from '@instructure/ui-position'
-import type { ViewProps } from '@instructure/ui-view'
+import type { ViewProps } from '@instructure/ui-view/v11_6'
 import { Renderable } from '@instructure/shared-types'
 
 type ToggleButtonOwnProps = {

@@ -24,30 +24,27 @@
 
 import { Component } from 'react'
 
-import { View } from '@instructure/ui-view/latest'
-import { passthroughProps } from '@instructure/ui-react-utils'
-import { withStyle } from '@instructure/emotion'
+import { omitProps, pickProps } from '@instructure/ui-react-utils'
 
-import generateStyle from './styles'
+import { FormFieldLayout } from '../../FormFieldLayout/v1'
+
 import { allowedProps } from './props'
-import type { ListItemProps } from './props'
+import type { FormFieldProps } from './props'
 
 /**
 ---
-parent: List
-id: List.Item
+category: components
 ---
 **/
-@withStyle(generateStyle)
-class ListItem extends Component<ListItemProps> {
-  static readonly componentId = 'List.Item'
+class FormField extends Component<FormFieldProps> {
+  static readonly componentId = 'FormField'
 
   static allowedProps = allowedProps
   static defaultProps = {
-    padding: 'none',
-    spacing: 'none',
-    delimiter: 'none',
-    size: 'medium'
+    inline: false,
+    layout: 'stacked',
+    labelAlign: 'end',
+    vAlign: 'middle'
   }
 
   ref: Element | null = null
@@ -62,43 +59,24 @@ class ListItem extends Component<ListItemProps> {
     }
   }
 
-  componentDidMount() {
-    this.props.makeStyles?.()
-  }
-
-  componentDidUpdate() {
-    this.props.makeStyles?.()
-  }
-
   render() {
-    const {
-      delimiter,
-      spacing,
-      size,
-      margin,
-      padding,
-      elementRef,
-      children,
-      styles,
-      ...rest
-    } = this.props
-
     return (
-      <View
-        {...passthroughProps(rest)}
-        css={styles?.listItem}
-        as="li"
-        margin={margin}
-        padding={padding}
-        maxWidth="100%"
+      <FormFieldLayout
+        {...omitProps(this.props, FormField.allowedProps)}
+        {...pickProps(this.props, FormFieldLayout.allowedProps)}
+        label={this.props.label}
+        vAlign={this.props.vAlign}
+        as="label"
+        // This makes the control in focus when the label is clicked
+        // This is needed to prevent the wrong element to be focused, e.g.
+        // multi selects Tag-s
+        htmlFor={this.props.id}
         elementRef={this.handleRef}
-        data-cid="ListItem"
-      >
-        {children}
-      </View>
+        margin={this.props.margin}
+      />
     )
   }
 }
 
-export default ListItem
-export { ListItem }
+export default FormField
+export { FormField }

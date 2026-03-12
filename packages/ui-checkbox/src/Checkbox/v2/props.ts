@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { FormMessage } from '@instructure/ui-form-field'
+import type { FormMessage } from '@instructure/ui-form-field/latest'
 import type {
   CheckboxFacadeTheme,
   OtherHTMLAttributes,

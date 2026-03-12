@@ -24,7 +24,7 @@
 
 import { InputHTMLAttributes } from 'react'
 
-import type { FormMessage } from '@instructure/ui-form-field'
+import type { FormMessage } from '@instructure/ui-form-field/v11_6'
 import type {
   OtherHTMLAttributes,
   PickPropsWithExceptions
@@ -34,7 +34,7 @@ import type {
   PositionConstraint,
   PositionMountNode
 } from '@instructure/ui-position'
-import type { SelectOwnProps } from '@instructure/ui-select'
+import type { SelectOwnProps } from '@instructure/ui-select/v11_6'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 import { Renderable } from '@instructure/shared-types'
 

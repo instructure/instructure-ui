@@ -31,10 +31,10 @@ import {
   callRenderProp,
   withDeterministicId
 } from '@instructure/ui-react-utils'
-import { Select } from '@instructure/ui-select/latest'
+import { Select } from '@instructure/ui-select/v11_6'
 import * as utils from '@instructure/ui-utils'
 
-import type { SelectProps } from '@instructure/ui-select/latest'
+import type { SelectProps } from '@instructure/ui-select/v11_6'
 import type {
   TimeSelectProps,
   TimeSelectState,

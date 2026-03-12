@@ -33,12 +33,12 @@ import type {
   AsElementType
 } from '@instructure/shared-types'
 
-import { Drilldown } from '@instructure/ui-drilldown'
-import type { DrilldownProps } from '@instructure/ui-drilldown'
-import type { PopoverProps } from '@instructure/ui-popover'
-import type { TooltipProps } from '@instructure/ui-tooltip'
-import type { BaseButtonOwnProps } from '@instructure/ui-buttons'
-import type { ViewOwnProps, ViewProps } from '@instructure/ui-view'
+import { Drilldown } from '@instructure/ui-drilldown/v11_6'
+import type { DrilldownProps } from '@instructure/ui-drilldown/v11_6'
+import type { PopoverProps } from '@instructure/ui-popover/v11_6'
+import type { TooltipProps } from '@instructure/ui-tooltip/v11_6'
+import type { BaseButtonOwnProps } from '@instructure/ui-buttons/v11_6'
+import type { ViewOwnProps, ViewProps } from '@instructure/ui-view/v11_6'
 
 import { TopNavBarContextType } from '../TopNavBarContext'
 import { TopNavBarItem } from './index'

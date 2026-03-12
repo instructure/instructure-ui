@@ -28,7 +28,7 @@ import { error } from '@instructure/console'
 import { px } from '@instructure/ui-utils'
 import { matchComponentTypes } from '@instructure/ui-react-utils'
 
-import { Responsive } from '@instructure/ui-responsive'
+import { Responsive } from '@instructure/ui-responsive/v11_6'
 
 import { TopNavBarActionItems } from './TopNavBarActionItems'
 import { TopNavBarBrand } from './TopNavBarBrand'

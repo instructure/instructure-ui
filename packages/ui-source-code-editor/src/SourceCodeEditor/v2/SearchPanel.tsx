@@ -32,7 +32,7 @@ import {
   closeSearchPanel
 } from '@codemirror/search'
 import { EditorView } from '@codemirror/view'
-import { TextInput } from '@instructure/ui-text-input'
+import { TextInput } from '@instructure/ui-text-input/latest'
 import { IconButton } from '@instructure/ui-buttons/latest'
 import {
   IconArrowOpenDownLine,

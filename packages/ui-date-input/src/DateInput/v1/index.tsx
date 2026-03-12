@@ -30,7 +30,7 @@ import type {
   CalendarDayProps
 } from '@instructure/ui-calendar/v11_6'
 import { IconCalendarMonthLine } from '@instructure/ui-icons'
-import { Popover } from '@instructure/ui-popover/latest'
+import { Popover } from '@instructure/ui-popover/v11_6'
 import { Selectable } from '@instructure/ui-selectable'
 import type {
   SelectableProps,
@@ -54,7 +54,7 @@ import generateStyle from './styles'
 
 import { allowedProps } from './props'
 import type { DateInputProps, DateInputState } from './props'
-import type { FormMessage } from '@instructure/ui-form-field'
+import type { FormMessage } from '@instructure/ui-form-field/v11_6'
 
 /**
 ---

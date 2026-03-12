@@ -24,14 +24,14 @@
 
 import { Component } from 'react'
 
-import { Flex } from '@instructure/ui-flex'
-import { IconButton } from '@instructure/ui-buttons'
-import type { IconButtonProps } from '@instructure/ui-buttons'
+import { Flex } from '@instructure/ui-flex/v11_6'
+import { IconButton } from '@instructure/ui-buttons/v11_6'
+import type { IconButtonProps } from '@instructure/ui-buttons/v11_6'
 import { IconEditLine } from '@instructure/ui-icons'
 import { logWarn as warn } from '@instructure/console'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { withStyleLegacy as withStyle } from '@instructure/emotion'
-import { View } from '@instructure/ui-view'
+import { View } from '@instructure/ui-view/v11_6'
 
 import { Editable } from '../../Editable/v1'
 import generateStyle from './styles'

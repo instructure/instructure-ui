@@ -46,10 +46,10 @@ import {
   IconArrowOpenDownSolid,
   IconArrowOpenUpSolid
 } from '@instructure/ui-icons'
-import { Avatar } from '@instructure/ui-avatar'
+import { Avatar } from '@instructure/ui-avatar/v11_6'
 import { Dialog } from '@instructure/ui-dialog'
-import { Drilldown } from '@instructure/ui-drilldown'
-import type { DrilldownPageChildren } from '@instructure/ui-drilldown'
+import { Drilldown } from '@instructure/ui-drilldown/v11_6'
+import type { DrilldownPageChildren } from '@instructure/ui-drilldown/v11_6'
 
 import { TopNavBarItem } from '../../TopNavBarItem'
 import type { ItemChild, TopNavBarItemProps } from '../../TopNavBarItem/props'

@@ -28,7 +28,7 @@ import type {
   OtherHTMLAttributes,
   PickPropsWithExceptions
 } from '@instructure/shared-types'
-import type { FormMessage, FormFieldOwnProps } from '@instructure/ui-form-field'
+import type { FormMessage, FormFieldOwnProps } from '@instructure/ui-form-field/latest'
 import type {
   ComponentStyle,
   Spacing,

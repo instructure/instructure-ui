@@ -22,11 +22,11 @@
  * SOFTWARE.
  */
 import { useState } from 'react'
-import { Modal } from '@instructure/ui-modal/latest'
-import { Button, CloseButton } from '@instructure/ui-buttons/latest'
-import { Heading } from '@instructure/ui-heading/latest'
-import { Text } from '@instructure/ui-text/latest'
-import { Link } from '@instructure/ui-link/latest'
+import { Modal } from '@instructure/ui-modal/v11_6'
+import { Button, CloseButton } from '@instructure/ui-buttons/v11_6'
+import { Heading } from '@instructure/ui-heading/v11_6'
+import { Text } from '@instructure/ui-text/v11_6'
+import { Link } from '@instructure/ui-link/v11_6'
 import { useStyleLegacy as useStyle } from '@instructure/emotion'
 
 import { DataPermissionLevelsProps } from './props'

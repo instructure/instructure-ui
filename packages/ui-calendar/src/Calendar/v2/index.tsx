@@ -24,7 +24,7 @@
 
 import { Children, Component, ReactElement, MouseEvent } from 'react'
 
-import { View } from '@instructure/ui-view'
+import { View } from '@instructure/ui-view/latest'
 import {
   safeCloneElement,
   callRenderProp,
@@ -54,7 +54,7 @@ import {
   ChevronRightInstUIIcon
 } from '@instructure/ui-icons'
 
-import { SimpleSelect } from '@instructure/ui-simple-select'
+import { SimpleSelect } from '@instructure/ui-simple-select/latest'
 
 /**
 ---

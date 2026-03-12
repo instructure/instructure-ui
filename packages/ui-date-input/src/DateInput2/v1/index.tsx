@@ -24,20 +24,20 @@
 
 import { useState, useEffect, forwardRef, ForwardedRef } from 'react'
 import type { SyntheticEvent } from 'react'
-import { Calendar } from '@instructure/ui-calendar/latest'
-import { IconButton } from '@instructure/ui-buttons/latest'
+import { Calendar } from '@instructure/ui-calendar/v11_6'
+import { IconButton } from '@instructure/ui-buttons/v11_6'
 import {
   CalendarInstUIIcon,
   ChevronLeftInstUIIcon,
   ChevronRightInstUIIcon
 } from '@instructure/ui-icons'
-import { Popover } from '@instructure/ui-popover/latest'
-import { TextInput } from '@instructure/ui-text-input/latest'
+import { Popover } from '@instructure/ui-popover/v11_6'
+import { TextInput } from '@instructure/ui-text-input/v11_6'
 import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
 import { getLocale, getTimezone } from '@instructure/ui-i18n'
 
 import type { DateInput2Props } from './props'
-import type { FormMessage } from '@instructure/ui-form-field/latest'
+import type { FormMessage } from '@instructure/ui-form-field/v11_6'
 import type { Moment } from '@instructure/ui-i18n'
 
 function parseLocaleDate(

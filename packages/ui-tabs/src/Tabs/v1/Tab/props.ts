@@ -29,7 +29,7 @@ import type {
   TabsTabTheme
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
-import type { ViewOwnProps } from '@instructure/ui-view'
+import type { ViewOwnProps } from '@instructure/ui-view/v11_6'
 
 type TabsTabOwnProps = {
   variant?: 'default' | 'secondary'

@@ -27,7 +27,7 @@ import { vi } from 'vitest'
 
 import '@testing-library/jest-dom'
 import { runAxeCheck } from '@instructure/ui-axe-check'
-import { View } from '@instructure/ui-view/latest'
+import { View } from '@instructure/ui-view/v11_6'
 
 import { Rating } from '../index'
 

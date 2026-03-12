@@ -64,8 +64,8 @@ import { withStyleLegacy as withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import type { PopoverProps, PopoverState } from '../v2/props'
-import { allowedProps } from '../v2/props'
+import type { PopoverProps, PopoverState } from '../v1/props'
+import { allowedProps } from '../v1/props'
 import type { Renderable } from '@instructure/shared-types'
 /**
 ---

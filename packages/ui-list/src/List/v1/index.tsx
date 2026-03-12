@@ -24,7 +24,7 @@
 
 import { Children, Component, ReactElement } from 'react'
 
-import { View } from '@instructure/ui-view'
+import { View } from '@instructure/ui-view/v11_6'
 import { passthroughProps, safeCloneElement } from '@instructure/ui-react-utils'
 
 import { ListItem } from './ListItem'

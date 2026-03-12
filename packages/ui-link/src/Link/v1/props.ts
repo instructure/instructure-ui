@@ -34,7 +34,7 @@ import type {
   WithStyleProps,
   ComponentStyle
 } from '@instructure/emotion'
-import type { ViewOwnProps } from '@instructure/ui-view'
+import type { ViewOwnProps } from '@instructure/ui-view/v11_6'
 import { Renderable } from '@instructure/shared-types'
 
 type LinkOwnProps = {

@@ -29,7 +29,7 @@ import '@testing-library/jest-dom'
 import { HeartInstUIIcon } from '@instructure/ui-icons'
 
 import { DateInput2 } from '../index'
-import { TextInput } from '@instructure/ui-text-input/latest'
+import { TextInput } from '@instructure/ui-text-input/v11_6'
 
 const LABEL_TEXT = 'Choose a date'
 

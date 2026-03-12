@@ -29,7 +29,7 @@ import type {
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import { KeyboardEvent, MouseEvent } from 'react'
-import type { ViewProps } from '@instructure/ui-view'
+import type { ViewProps } from '@instructure/ui-view/latest'
 import { Renderable } from '@instructure/shared-types'
 
 type CalendarDayOwnProps = {

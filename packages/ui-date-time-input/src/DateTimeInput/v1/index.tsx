@@ -25,14 +25,14 @@
 import { Component, SyntheticEvent, MouseEvent } from 'react'
 import { Locale, DateTime, ApplyLocaleContext } from '@instructure/ui-i18n'
 import type { Moment } from '@instructure/ui-i18n'
-import { FormFieldGroup } from '@instructure/ui-form-field/latest'
-import type { FormMessage } from '@instructure/ui-form-field/latest'
+import { FormFieldGroup } from '@instructure/ui-form-field/v11_6'
+import type { FormMessage } from '@instructure/ui-form-field/v11_6'
 
-import { DateInput } from '@instructure/ui-date-input/latest'
-import { TimeSelect } from '@instructure/ui-time-select/latest'
-import { Calendar } from '@instructure/ui-calendar/latest'
+import { DateInput } from '@instructure/ui-date-input/v11_6'
+import { TimeSelect } from '@instructure/ui-time-select/v11_6'
+import { Calendar } from '@instructure/ui-calendar/v11_6'
 import { AccessibleContent } from '@instructure/ui-a11y-content'
-import { IconButton } from '@instructure/ui-buttons/latest'
+import { IconButton } from '@instructure/ui-buttons/v11_6'
 import {
   IconArrowOpenEndSolid,
   IconArrowOpenStartSolid

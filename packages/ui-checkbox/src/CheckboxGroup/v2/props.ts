@@ -23,7 +23,7 @@
  */
 
 import { type InputHTMLAttributes } from 'react'
-import type { FormMessage } from '@instructure/ui-form-field'
+import type { FormMessage } from '@instructure/ui-form-field/latest'
 import type { OtherHTMLAttributes } from '@instructure/shared-types'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 

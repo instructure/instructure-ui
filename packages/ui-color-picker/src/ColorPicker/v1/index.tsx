@@ -32,17 +32,17 @@ import { warn, error } from '@instructure/console'
 import { omitProps } from '@instructure/ui-react-utils'
 import { isValid, contrast as getContrast } from '@instructure/ui-color-utils'
 import conversions from '@instructure/ui-color-utils'
-import { TextInput } from '@instructure/ui-text-input/latest'
-import { Tooltip } from '@instructure/ui-tooltip'
-import { Button, IconButton } from '@instructure/ui-buttons/latest'
-import { Popover } from '@instructure/ui-popover/latest'
+import { TextInput } from '@instructure/ui-text-input/v11_6'
+import { Tooltip } from '@instructure/ui-tooltip/v11_6'
+import { Button, IconButton } from '@instructure/ui-buttons/v11_6'
+import { Popover } from '@instructure/ui-popover/v11_6'
 import {
   IconCheckDarkLine,
   IconWarningLine,
   IconTroubleLine,
   IconInfoLine
 } from '@instructure/ui-icons'
-import type { FormMessage } from '@instructure/ui-form-field/latest'
+import type { FormMessage } from '@instructure/ui-form-field/v11_6'
 
 import ColorIndicator from '../../ColorIndicator/v1'
 import ColorMixer from '../../ColorMixer/v1'

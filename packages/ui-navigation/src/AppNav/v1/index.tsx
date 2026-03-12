@@ -28,8 +28,8 @@ import { withStyleLegacy as withStyle } from '@instructure/emotion'
 
 import { callRenderProp, omitProps } from '@instructure/ui-react-utils'
 
-import { View } from '@instructure/ui-view/latest'
-import { Menu } from '@instructure/ui-menu/latest'
+import { View } from '@instructure/ui-view/v11_6'
+import { Menu } from '@instructure/ui-menu/v11_6'
 import { Item } from './Item'
 
 import generateStyle from './styles'

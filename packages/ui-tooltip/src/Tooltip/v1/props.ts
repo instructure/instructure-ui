@@ -35,7 +35,7 @@ import type {
   PositionMountNode
 } from '@instructure/ui-position'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
-import type { PopoverOwnProps } from '@instructure/ui-popover'
+import type { PopoverOwnProps } from '@instructure/ui-popover/v11_6'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 import { Renderable } from '@instructure/shared-types'
 

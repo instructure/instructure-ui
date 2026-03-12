@@ -29,7 +29,7 @@ import type {
   OtherHTMLAttributes,
   AsElementType
 } from '@instructure/shared-types'
-import type { ViewOwnProps } from '@instructure/ui-view'
+import type { ViewOwnProps } from '@instructure/ui-view/v11_6'
 import type { TopNavBarContextType } from '../TopNavBarContext'
 
 import { TopNavBarBrand } from './index'

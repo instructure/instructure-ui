@@ -24,7 +24,7 @@
 
 import { Component } from 'react'
 
-import { View } from '@instructure/ui-view/latest'
+import { View } from '@instructure/ui-view/v11_6'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { omitProps } from '@instructure/ui-react-utils'
 import { RatingIcon } from '../../RatingIcon/v1'

@@ -35,14 +35,14 @@ import {
   withDeterministicId
 } from '@instructure/ui-react-utils'
 
-import { View } from '@instructure/ui-view/latest'
-import { Options } from '@instructure/ui-options'
+import { View } from '@instructure/ui-view/v11_6'
+import { Options } from '@instructure/ui-options/v11_6'
 import type {
   OptionsProps,
   OptionsItemProps,
   OptionsSeparatorProps
-} from '@instructure/ui-options'
-import { Popover } from '@instructure/ui-popover/latest'
+} from '@instructure/ui-options/v11_6'
+import { Popover } from '@instructure/ui-popover/v11_6'
 import { Selectable } from '@instructure/ui-selectable'
 import type { SelectableRender } from '@instructure/ui-selectable'
 import {

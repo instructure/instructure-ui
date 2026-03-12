@@ -32,8 +32,8 @@ import {
   closeSearchPanel
 } from '@codemirror/search'
 import { EditorView } from '@codemirror/view'
-import { TextInput } from '@instructure/ui-text-input'
-import { IconButton } from '@instructure/ui-buttons'
+import { TextInput } from '@instructure/ui-text-input/v11_6'
+import { IconButton } from '@instructure/ui-buttons/v11_6'
 import {
   IconArrowOpenDownLine,
   IconArrowOpenUpLine,

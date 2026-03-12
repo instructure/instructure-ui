@@ -28,12 +28,12 @@ import { warn } from '@instructure/console'
 import { generateId } from '@instructure/ui-utils'
 import { matchComponentTypes } from '@instructure/ui-react-utils'
 
-import { Drilldown } from '@instructure/ui-drilldown'
+import { Drilldown } from '@instructure/ui-drilldown/v11_6'
 import type {
   DrilldownPageChild,
   DrilldownOptionChild,
   DrilldownOptionProps
-} from '@instructure/ui-drilldown'
+} from '@instructure/ui-drilldown/v11_6'
 
 import { TopNavBarItem } from '../TopNavBarItem'
 import type { ItemChild, TopNavBarItemProps } from '../TopNavBarItem/props'

@@ -24,7 +24,7 @@
 
 import { Children, Component, ReactElement, MouseEvent } from 'react'
 
-import { View } from '@instructure/ui-view'
+import { View } from '@instructure/ui-view/v11_6'
 import {
   safeCloneElement,
   callRenderProp,
@@ -49,13 +49,13 @@ import { allowedProps } from './props'
 import type { CalendarProps, CalendarState } from './props'
 import { Renderable } from '@instructure/shared-types'
 
-import { IconButton } from '@instructure/ui-buttons'
+import { IconButton } from '@instructure/ui-buttons/v11_6'
 import {
   IconArrowOpenStartSolid,
   IconArrowOpenEndSolid
 } from '@instructure/ui-icons'
 
-import { SimpleSelect } from '@instructure/ui-simple-select'
+import { SimpleSelect } from '@instructure/ui-simple-select/v11_6'
 
 /**
 ---

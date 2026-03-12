@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import type { ViewProps } from '@instructure/ui-view'
+import type { ViewProps } from '@instructure/ui-view/latest'
 import type {
   Spacing,
   WithStyleProps,
