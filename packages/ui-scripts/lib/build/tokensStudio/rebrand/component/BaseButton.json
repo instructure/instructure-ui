@@ -724,7 +724,7 @@
       "type": "other"
     },
     "paddingVertical": {
-      "value": "0.5rem",
+      "value": "0.25rem",
       "type": "spacing"
     },
     "lineHeight": {
