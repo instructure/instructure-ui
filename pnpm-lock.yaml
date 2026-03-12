@@ -3216,6 +3216,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-text':
+        specifier: workspace:*
+        version: link:../ui-text
       '@instructure/ui-themes':
         specifier: workspace:*
         version: link:../ui-themes
