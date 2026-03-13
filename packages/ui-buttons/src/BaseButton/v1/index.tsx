@@ -28,50 +28,34 @@ import keycode from 'keycode'
 import {
   getElementType,
   getInteraction,
-  passthroughProps
+  passthroughProps,
+  callRenderProp
 } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
-import { renderIconWithProps } from '@instructure/ui-icons'
-import { View } from '@instructure/ui-view/latest'
-import type { ViewProps } from '@instructure/ui-view/latest'
+import { View } from '@instructure/ui-view/v11_6'
+import type { ViewProps } from '@instructure/ui-view/v11_6'
 
 // TODO these have to be imported in separate lines because otherwise `isSafari` will be missing from the babel build
 // this bug is very likely caused by `babel-plugin-transform-imports` and can be reverted once it is removed from the codebase
 import { isSafari } from '@instructure/ui-utils'
 import { combineDataCid } from '@instructure/ui-utils'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleLegacy as withStyle } from '@instructure/emotion'
 
 import generateStyles from './styles'
+import generateComponentTheme from './theme'
 
 import { allowedProps } from './props'
 import type { BaseButtonProps, BaseButtonStyleProps } from './props'
-
-const buttonSizeToIconSize = {
-  small: 'sm',
-  medium: 'md',
-  large: 'lg',
-  condensedSmall: 'xs',
-  condensedMedium: 'xs'
-} as const
-
-const buttonColorToIconColor = {
-  'primary': 'inherit',
-  'primary-inverse': 'inherit',
-  'secondary': 'inherit',
-  'success': 'inherit',
-  'danger': 'inherit',
-  'ai-primary': 'inherit',
-  'ai-secondary': 'ai'
-} as const
 
 /**
 ---
 category: components/utilities
 ---
 **/
-@withStyle(generateStyles)
+
+@withStyle(generateStyles, generateComponentTheme)
 class BaseButton extends Component<BaseButtonProps> {
   static readonly componentId = 'BaseButton'
 
@@ -217,7 +201,7 @@ class BaseButton extends Component<BaseButtonProps> {
   }
 
   renderChildren() {
-    const { renderIcon, children, styles, size, color } = this.props
+    const { renderIcon, children, styles } = this.props
 
     const wrappedChildren = <span css={styles?.children}>{children}</span>
 
@@ -226,12 +210,8 @@ class BaseButton extends Component<BaseButtonProps> {
     }
 
     const { hasOnlyIconVisible } = this
-    const iconSize = buttonSizeToIconSize[size!]
-    const iconColor = buttonColorToIconColor[color!]
     const wrappedIcon = (
-      <span css={styles?.iconSVG}>
-        {renderIconWithProps(renderIcon, iconSize, iconColor)}
-      </span>
+      <span css={styles?.iconSVG}>{callRenderProp(renderIcon)}</span>
     )
 
     const flexChildren = hasOnlyIconVisible ? (

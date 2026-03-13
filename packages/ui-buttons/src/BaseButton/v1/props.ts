@@ -23,7 +23,12 @@
  */
 
 import React from 'react'
-import type { Spacing, WithStyleProps } from '@instructure/emotion'
+import type { InteractionType } from '@instructure/ui-react-utils'
+import type {
+  Spacing,
+  WithStyleProps,
+  ComponentStyle
+} from '@instructure/emotion'
 import type {
   ToProp,
   AsElementType,
@@ -31,9 +36,10 @@ import type {
   OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { Cursor } from '@instructure/shared-types'
-import type { ViewProps } from '@instructure/ui-view/latest'
+import type { ViewProps } from '@instructure/ui-view/v11_6'
+import { Renderable } from '@instructure/shared-types'
 
-type ButtonOwnProps = {
+type BaseButtonOwnProps = {
   /**
    * Specifies the `Button` children.
    */
@@ -47,12 +53,12 @@ type ButtonOwnProps = {
   /**
    * The size of the `Button`
    */
-  size?: 'small' | 'medium' | 'large' | 'condensedSmall' | 'condensedMedium'
+  size?: 'small' | 'medium' | 'large'
 
   /**
    * Provides a reference to the `Button`'s underlying html element.
    */
-  elementRef?: (element: Element | null) => void
+  elementRef?: (element: HTMLElement | null) => void
 
   /**
    * The element to render as the component root, `Button` by default.
@@ -62,7 +68,7 @@ type ButtonOwnProps = {
   /**
    * Specifies if interaction with the `Button` is enabled, disabled, or readonly.
    */
-  interaction?: 'enabled' | 'disabled' | 'readonly'
+  interaction?: InteractionType
 
   /**
    * Specifies the color for the `Button`.
@@ -93,9 +99,25 @@ type ButtonOwnProps = {
   textAlign?: 'start' | 'center'
 
   /**
+   * Specifies if the `Button` shape should be a circle or rectangle.
+   */
+  shape?: 'rectangle' | 'circle'
+
+  /**
    * Specifies if the `Button` should render with a solid background. When false, the background is transparent.
    */
   withBackground?: boolean
+
+  /**
+   * Specifies if the `Button` should render with a border.
+   */
+  withBorder?: boolean
+
+  /**
+   * Designates if the `Button` should render without padding. This option should only be set when `withBorder` and
+   * `withBackground` are also set to false.
+   */
+  isCondensed?: boolean
 
   /**
    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
@@ -116,26 +138,61 @@ type ButtonOwnProps = {
   href?: string
 
   /**
-   * An icon, or function that returns an icon.
-   */
-  renderIcon?: React.ReactNode | (() => React.ReactNode)
-
-  /**
    * Callback fired when the `Button` is clicked.
    */
   onClick?: (
     event: React.KeyboardEvent<ViewProps> | React.MouseEvent<ViewProps>
   ) => void
+
+  /**
+   * Callback fired when the `Button` receives a keydown event.
+   */
+  onKeyDown?: (event: React.KeyboardEvent<ViewProps>) => void
+
+  /**
+   * An icon, or function that returns an icon.
+   */
+  renderIcon?: Renderable
+
+  /**
+   * Specifies the tabindex of the `Button`.
+   */
+  tabIndex?: number
+
+  /**
+   * Manually control if the `Button` should display a focus outline.
+   *
+   * When left `undefined` (which is the default) the focus outline will display
+   * if this component is focusable and receives focus.
+   */
+  withFocusOutline?: boolean
 }
 
-type PropKeys = keyof ButtonOwnProps
+type BaseButtonStyleProps = {
+  isDisabled: boolean
+  hasOnlyIconVisible: boolean
+  isEnabled: boolean
+}
+
+type PropKeys = keyof BaseButtonOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type ButtonProps = ButtonOwnProps &
-  WithStyleProps<BaseButtonTheme, null> &
-  OtherHTMLAttributes<ButtonOwnProps> &
+type BaseButtonProps = BaseButtonOwnProps &
+  WithStyleProps<BaseButtonTheme, BaseButtonStyle> &
+  OtherHTMLAttributes<BaseButtonOwnProps> &
   ToProp
+
+type BaseButtonStyle = ComponentStyle<
+  | 'baseButton'
+  | 'content'
+  | 'children'
+  | 'iconSVG'
+  | 'childrenLayout'
+  | 'iconOnly'
+  | 'iconWrapper'
+  | 'childrenWrapper'
+>
 const allowedProps: AllowedPropKeys = [
   'as',
   'children',
@@ -146,14 +203,24 @@ const allowedProps: AllowedPropKeys = [
   'focusColor',
   'href',
   'interaction',
+  'isCondensed',
   'margin',
+  'onClick',
+  'onKeyDown',
   'renderIcon',
+  'shape',
   'size',
+  'tabIndex',
   'textAlign',
   'type',
   'withBackground',
-  'onClick'
+  'withBorder'
 ]
 
-export type { ButtonProps }
+export type {
+  BaseButtonProps,
+  BaseButtonOwnProps,
+  BaseButtonStyleProps,
+  BaseButtonStyle
+}
 export { allowedProps }

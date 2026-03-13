@@ -24,119 +24,117 @@
 
 import { Component } from 'react'
 
-import { XInstUIIcon } from '@instructure/ui-icons'
+import { passthroughProps } from '@instructure/ui-react-utils'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
-import { getInteraction, passthroughProps } from '@instructure/ui-react-utils'
+import { combineDataCid } from '@instructure/ui-utils'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleLegacy as withStyle } from '@instructure/emotion'
 
-import generateStyle from './styles'
-import { BaseButton } from '../../BaseButton/v2'
+import generateComponentTheme from './theme'
+import { BaseButton } from '../../BaseButton/v1'
 
 import { allowedProps } from './props'
-import type { CloseButtonProps } from './props'
+import type { IconButtonProps } from './props'
 
 /**
 ---
 category: components
 ---
 **/
-@withStyle(generateStyle, 'BaseButton')
-class CloseButton extends Component<CloseButtonProps> {
-  static readonly componentId = 'CloseButton'
+
+// needed for listing the available theme variables on docs page
+@withStyle(null, generateComponentTheme)
+class IconButton extends Component<IconButtonProps> {
+  static readonly componentId = 'IconButton'
 
   static allowedProps = allowedProps
   static defaultProps = {
+    type: 'button',
+    size: 'medium',
+    as: 'button',
     // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
     interaction: undefined,
-    type: 'button',
-    placement: 'static',
-    offset: 'x-small',
-    size: 'small',
+    color: 'secondary',
+    shape: 'rectangle',
+    withBackground: true,
+    withBorder: true,
     margin: '0',
-    as: 'button',
     cursor: 'pointer'
   }
+
+  _baseButton: BaseButton | null = null
 
   ref: Element | null = null
 
   handleRef = (el: Element | null) => {
     const { elementRef } = this.props
+
+    this.ref = el
+
     if (typeof elementRef === 'function') {
       elementRef(el)
     }
   }
 
-  componentDidMount() {
-    this.props.makeStyles?.()
+  get focused() {
+    return this._baseButton && this._baseButton.focused
   }
 
-  componentDidUpdate() {
-    this.props.makeStyles?.()
-  }
-
-  get interaction() {
-    return getInteraction({ props: this.props })
-  }
-
-  get color() {
-    const { color } = this.props
-
-    return color === 'primary' ? 'secondary' : color
+  focus() {
+    this._baseButton && this._baseButton.focus()
   }
 
   render() {
     const {
+      children,
+      renderIcon,
       screenReaderLabel,
-      elementRef,
-      size,
-      onClick,
-      margin,
-      placement,
-      offset,
       type,
+      size,
+      elementRef,
       as,
-      href,
+      interaction,
+      color,
+      focusColor,
+      shape,
+      withBackground,
+      withBorder,
+      margin,
       cursor,
-      tabIndex,
-      styles,
+      href,
       ...props
     } = this.props
 
     const themeOverride = this.props.themeOverride
 
     return (
-      <span
+      <BaseButton
         {...passthroughProps(props)}
-        css={styles?.closeButton}
-        ref={(el) => {
-          this.ref = el
+        type={type}
+        size={size}
+        elementRef={this.handleRef}
+        as={as}
+        interaction={interaction}
+        color={color}
+        focusColor={focusColor}
+        shape={shape}
+        withBackground={withBackground}
+        withBorder={withBorder}
+        margin={margin}
+        cursor={cursor}
+        href={href}
+        renderIcon={children || renderIcon}
+        themeOverride={themeOverride}
+        ref={(component) => {
+          this._baseButton = component
         }}
+        data-cid={combineDataCid('IconButton', this.props)}
       >
-        <BaseButton
-          renderIcon={XInstUIIcon}
-          elementRef={this.handleRef}
-          interaction={this.interaction}
-          type={type}
-          {...(this.color ? { color: this.color } : {})}
-          size={size}
-          onClick={onClick}
-          margin={margin}
-          withBorder={false}
-          withBackground={false}
-          as={as}
-          href={href}
-          cursor={cursor}
-          tabIndex={tabIndex}
-          themeOverride={themeOverride}
-          data-cid="CloseButton"
-        >
-          <ScreenReaderContent>{screenReaderLabel}</ScreenReaderContent>
-        </BaseButton>
-      </span>
+        <ScreenReaderContent>{screenReaderLabel}</ScreenReaderContent>
+      </BaseButton>
     )
   }
 }
 
-export default CloseButton
-export { CloseButton }
+export default IconButton
+export { IconButton }

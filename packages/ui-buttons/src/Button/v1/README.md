@@ -24,21 +24,9 @@ type: example
   <Button color="secondary" margin="small">Secondary</Button>
   <Button color="success" margin="small">Success</Button>
   <Button color="danger" margin="small">Danger</Button>
+  <Button color="primary-inverse" margin="small">Primary Inverse</Button>
   <Button color="ai-primary" margin="small">AI Primary</Button>
   <Button color="ai-secondary" margin="small">AI Secondary</Button>
-</View>
-```
-
-### Primary Inverse
-
-The `primary-inverse` color is designed for use on colored backgrounds. It provides adequate contrast when placed on colored surfaces.
-
-```js
----
-type: example
----
-<View display="block" background="brand" padding="small">
-  <Button color="primary-inverse" margin="small">Primary Inverse</Button>
 </View>
 ```
 
@@ -51,12 +39,12 @@ There is a specific need for `AI buttons`, which has an icon and gradient colors
 type: example
 ---
 <View display="block">
-  <Button color="ai-primary" renderIcon={IgniteaiLogoInstUIIcon} margin="small">AI Primary</Button>
-  <Button color="ai-secondary" renderIcon={IgniteaiLogoInstUIIcon} margin="small">AI Secondary</Button>
-  <IconButton color="ai-primary" screenReaderLabel="AI button" margin="small"><IgniteaiLogoInstUIIcon/></IconButton>
-  <IconButton  shape='circle' color="ai-secondary" screenReaderLabel="AI button"  margin="small"><IgniteaiLogoInstUIIcon/></IconButton>
-  <IconButton   shape='circle' color="ai-primary" screenReaderLabel="AI button" margin="small"><IgniteaiLogoInstUIIcon/></IconButton>
-  <IconButton color="ai-secondary" screenReaderLabel="AI button"  margin="small"><IgniteaiLogoInstUIIcon/></IconButton>
+  <Button color="ai-primary" renderIcon={IconAiSolid} margin="small">AI Primary</Button>
+  <Button color="ai-secondary" renderIcon={IconAiColoredSolid} margin="small">AI Secondary</Button>
+  <IconButton color="ai-primary" screenReaderLabel="AI button" margin="small"><IconAiSolid/></IconButton>
+  <IconButton  shape='circle' color="ai-secondary" screenReaderLabel="AI button"  margin="small"><IconAiColoredSolid/></IconButton>
+  <IconButton   shape='circle' color="ai-primary" screenReaderLabel="AI button" margin="small"><IconAiSolid/></IconButton>
+  <IconButton color="ai-secondary" screenReaderLabel="AI button"  margin="small"><IconAiColoredSolid/></IconButton>
 </View>
 ```
 
@@ -75,18 +63,6 @@ type: example
 </View>
 ```
 
-There are also two condensed size variants for compact layouts: `condensedSmall` and `condensedMedium`.
-
-```js
----
-type: example
----
-<View display="block">
-  <Button size="condensedSmall" margin="small">Condensed Small</Button>
-  <Button size="condensedMedium" margin="small">Condensed Medium</Button>
-</View>
-```
-
 ### Rendering icons in Buttons
 
 An icon can be rendered alongside the Button content using the `renderIcon` prop. Use [IconButton](IconButton) instead if your Button only displays an Icon with no other visual content.
@@ -95,7 +71,7 @@ An icon can be rendered alongside the Button content using the `renderIcon` prop
 ---
 type: example
 ---
-<Button renderIcon={SaveInstUIIcon}>Save</Button>
+<Button renderIcon={IconAddLine}>Add Item</Button>
 ```
 
 ### Text wrapping
@@ -183,7 +159,7 @@ type: example
   withVisualDebug
 >
   <Button
-    renderIcon={UserInstUIIcon}
+    renderIcon={IconUserLine}
     display="block"
     textAlign="center"
     color="success"
@@ -195,14 +171,19 @@ type: example
 
 ### Rendering Buttons without backgrounds
 
-Use backgroundless buttons when there is a need to deemphasize the button. Be sure to use border/text colors that meet the proper contrast ratios with whatever background they are placed on.
+Use backgroundless buttons for interfaces on dark backgrounds or when there is a need to deemphasize the button from another primary action on the page. Be sure to use border/text colors that meet the proper contrast ratios with whatever background they are placed on.
 
 ```js
 ---
 type: example
 ---
 <View display="block">
-  <Button renderIcon={PlusInstUIIcon} withBackground={false} color="secondary" margin="small">Click here</Button>
+  <View display="inline-block" background="primary">
+    <Button renderIcon={IconAddLine} withBackground={false} color="primary" margin="small">Click here</Button>
+  </View>
+  <View display="inline-block" background="primary-inverse">
+    <Button renderIcon={IconAddLine} withBackground={false} color="primary-inverse" margin="small">Click here</Button>
+  </View>
 </View>
 ```
 
@@ -287,7 +268,7 @@ type: example
                           withBackground={this.state.withBackground}
                           color={this.state.color}
                           themeOverride={overrides}>
-                <UserInstUIIcon />
+                <IconUserLine />
               </IconButton>
             </Flex.Item>
           </Flex>

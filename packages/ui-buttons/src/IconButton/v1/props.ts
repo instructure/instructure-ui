@@ -22,35 +22,47 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import { ReactNode } from 'react'
+
 import type { Spacing, WithStyleProps } from '@instructure/emotion'
 import type {
   ToProp,
   AsElementType,
   BaseButtonTheme,
-  OtherHTMLAttributes
+  OtherHTMLAttributes,
+  Renderable
 } from '@instructure/shared-types'
 import type { Cursor } from '@instructure/shared-types'
-import type { ViewProps } from '@instructure/ui-view/latest'
+import type { ViewProps } from '@instructure/ui-view/v11_6'
 
-type CondensedButtonOwnProps = {
+type IconButtonOwnProps = {
   /**
-   * Specifies the `CondensedButton` children.
+   * An icon, or function returning an icon (identical to the `renderIcon` prop).
    */
-  children?: React.ReactNode
+  children?: Renderable
 
   /**
-   * Specifies the type of the `CondensedButton`'s underlying html element.
+   * An icon, or function that returns an icon (identical to the `children` prop).
+   */
+  renderIcon?: Renderable
+
+  /**
+   * An accessible label for the `IconButton`.
+   */
+  screenReaderLabel: ReactNode
+
+  /**
+   * Specifies the type of the `IconButton`'s underlying html element.
    */
   type?: 'button' | 'submit' | 'reset'
 
   /**
-   * The size of the `CondensedButton`
+   * The size of the `IconButton`
    */
-  size?: 'small' | 'medium' | 'large' | 'condensedSmall' | 'condensedMedium'
+  size?: 'small' | 'medium' | 'large'
 
   /**
-   * Provides a reference to the `CondensedButton`'s underlying html element.
+   * Provides a reference to the `IconButton`'s underlying html element.
    */
   elementRef?: (element: Element | null) => void
 
@@ -60,14 +72,41 @@ type CondensedButtonOwnProps = {
   as?: AsElementType
 
   /**
-   * Specifies if interaction with the `CondensedButton` is enabled, disabled, or readonly.
+   * Specifies if interaction with the `IconButton` is enabled, disabled, or readonly.
    */
   interaction?: 'enabled' | 'disabled' | 'readonly'
 
   /**
-   * Specifies the color for the `CondensedButton`.
+   * Specifies the color for the `IconButton`.
    */
-  color?: 'primary' | 'primary-inverse' | 'secondary'
+  color?:
+    | 'primary'
+    | 'primary-inverse'
+    | 'secondary'
+    | 'success'
+    | 'danger'
+    | 'ai-primary'
+    | 'ai-secondary'
+
+  /**
+   * Override the `Button`'s default focus outline color.
+   */
+  focusColor?: 'info' | 'inverse'
+
+  /**
+   * Specifies if the `IconButton` shape should be a circle or rectangle.
+   */
+  shape?: 'rectangle' | 'circle'
+
+  /**
+   * Specifies if the `IconButton` should render with a solid background. When false, the background is transparent.
+   */
+  withBackground?: boolean
+
+  /**
+   * Specifies if the `IconButton` should render with a border.
+   */
+  withBorder?: boolean
 
   /**
    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
@@ -83,52 +122,45 @@ type CondensedButtonOwnProps = {
   cursor?: Cursor
 
   /**
-   * Specifies an href attribute for the `CondensedButton`'s underlying html element.
+   * Specifies an href attribute for the `IconButton`'s underlying html element.
    */
   href?: string
 
   /**
-   * An icon, or function that returns an icon.
-   */
-  renderIcon?: React.ReactNode | (() => React.ReactNode)
-
-  /**
-   * Callback fired when the `CondensedButton` is clicked.
+   * Callback fired when the `Button` is clicked.
    */
   onClick?: (
     event: React.KeyboardEvent<ViewProps> | React.MouseEvent<ViewProps>
   ) => void
-
-  /**
-   * The CSS display property of the button, `inline-block` or `block`
-   */
-  display?: 'inline-block' | 'block'
 }
 
-type PropKeys = keyof CondensedButtonOwnProps
+type PropKeys = keyof IconButtonOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type CondensedButtonProps = CondensedButtonOwnProps &
+type IconButtonProps = IconButtonOwnProps &
   WithStyleProps<BaseButtonTheme, null> &
-  OtherHTMLAttributes<CondensedButtonOwnProps> &
+  OtherHTMLAttributes<IconButtonOwnProps> &
   ToProp
-
 const allowedProps: AllowedPropKeys = [
   'as',
   'children',
   'color',
   'cursor',
   'elementRef',
+  'focusColor',
   'href',
   'interaction',
   'margin',
   'renderIcon',
+  'screenReaderLabel',
+  'shape',
   'size',
   'type',
-  'onClick',
-  'display'
+  'withBackground',
+  'withBorder',
+  'onClick'
 ]
 
-export type { CondensedButtonProps }
+export type { IconButtonProps }
 export { allowedProps }

@@ -24,119 +24,108 @@
 
 import { Component } from 'react'
 
-import { XInstUIIcon } from '@instructure/ui-icons'
-import { ScreenReaderContent } from '@instructure/ui-a11y-content'
-import { getInteraction, passthroughProps } from '@instructure/ui-react-utils'
+import { passthroughProps } from '@instructure/ui-react-utils'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleLegacy as withStyle } from '@instructure/emotion'
 
-import generateStyle from './styles'
-import { BaseButton } from '../../BaseButton/v2'
+import generateComponentTheme from './theme'
+import { BaseButton } from '../../BaseButton/v1'
 
 import { allowedProps } from './props'
-import type { CloseButtonProps } from './props'
+import type { CondensedButtonProps } from './props'
 
 /**
 ---
 category: components
 ---
 **/
-@withStyle(generateStyle, 'BaseButton')
-class CloseButton extends Component<CloseButtonProps> {
-  static readonly componentId = 'CloseButton'
+// needed for listing the available theme variables on docs page
+@withStyle(null, generateComponentTheme)
+class CondensedButton extends Component<CondensedButtonProps> {
+  static readonly componentId = 'CondensedButton'
 
   static allowedProps = allowedProps
   static defaultProps = {
+    type: 'button',
+    size: 'medium',
+    as: 'button',
     // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
     interaction: undefined,
-    type: 'button',
-    placement: 'static',
-    offset: 'x-small',
-    size: 'small',
+    color: 'primary',
     margin: '0',
-    as: 'button',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    display: 'inline-block'
   }
+
+  _baseButton: BaseButton | null = null
 
   ref: Element | null = null
 
   handleRef = (el: Element | null) => {
     const { elementRef } = this.props
+
+    this.ref = el
+
     if (typeof elementRef === 'function') {
       elementRef(el)
     }
   }
 
-  componentDidMount() {
-    this.props.makeStyles?.()
+  get focused() {
+    return this._baseButton && this._baseButton.focused
   }
 
-  componentDidUpdate() {
-    this.props.makeStyles?.()
-  }
-
-  get interaction() {
-    return getInteraction({ props: this.props })
-  }
-
-  get color() {
-    const { color } = this.props
-
-    return color === 'primary' ? 'secondary' : color
+  focus() {
+    this._baseButton && this._baseButton.focus()
   }
 
   render() {
     const {
-      screenReaderLabel,
-      elementRef,
-      size,
-      onClick,
-      margin,
-      placement,
-      offset,
+      children,
       type,
+      size,
+      elementRef,
       as,
-      href,
+      interaction,
+      color,
+      margin,
       cursor,
-      tabIndex,
-      styles,
+      href,
+      renderIcon,
+      display,
       ...props
     } = this.props
 
     const themeOverride = this.props.themeOverride
 
     return (
-      <span
+      <BaseButton
         {...passthroughProps(props)}
-        css={styles?.closeButton}
-        ref={(el) => {
-          this.ref = el
+        isCondensed
+        display={display}
+        withBackground={false}
+        withBorder={false}
+        type={type}
+        size={size}
+        elementRef={this.handleRef}
+        as={as}
+        interaction={interaction}
+        color={color}
+        margin={margin}
+        cursor={cursor}
+        href={href}
+        renderIcon={renderIcon}
+        themeOverride={themeOverride}
+        ref={(component) => {
+          this._baseButton = component
         }}
+        data-cid="CondensedButton"
       >
-        <BaseButton
-          renderIcon={XInstUIIcon}
-          elementRef={this.handleRef}
-          interaction={this.interaction}
-          type={type}
-          {...(this.color ? { color: this.color } : {})}
-          size={size}
-          onClick={onClick}
-          margin={margin}
-          withBorder={false}
-          withBackground={false}
-          as={as}
-          href={href}
-          cursor={cursor}
-          tabIndex={tabIndex}
-          themeOverride={themeOverride}
-          data-cid="CloseButton"
-        >
-          <ScreenReaderContent>{screenReaderLabel}</ScreenReaderContent>
-        </BaseButton>
-      </span>
+        {children}
+      </BaseButton>
     )
   }
 }
 
-export default CloseButton
-export { CloseButton }
+export default CondensedButton
+export { CondensedButton }

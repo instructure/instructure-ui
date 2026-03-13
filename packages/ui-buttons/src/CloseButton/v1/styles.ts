@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
+import type { CloseButtonTheme } from '@instructure/shared-types'
 import type { CloseButtonProps, CloseButtonStyle } from './props'
 
 /**
@@ -30,23 +30,22 @@ import type { CloseButtonProps, CloseButtonStyle } from './props'
  * private: true
  * ---
  * Generates the style object from the theme and provided additional information
- * @param  {Object} _componentTheme The theme variable object.
+ * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} sharedTokens the shared design tokens
+ * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  _componentTheme: NewComponentTypes['BaseButton'],
-  props: CloseButtonProps,
-  sharedTokens: SharedTokens
+  componentTheme: CloseButtonTheme,
+  props: CloseButtonProps
 ): CloseButtonStyle => {
   const { placement, offset } = props
 
   const offsetValueMap = {
     none: 0,
-    'x-small': sharedTokens.spacing.general.spaceXs,
-    small: sharedTokens.spacing.general.spaceSm,
-    medium: sharedTokens.spacing.general.spaceMd,
+    'x-small': componentTheme.offsetXSmall,
+    small: componentTheme.offsetSmall,
+    medium: componentTheme.offsetMedium
   }
 
   const getOffsetStyle = () => {
@@ -64,7 +63,7 @@ const generateStyle = (
   return {
     closeButton: {
       label: 'closeButton',
-      zIndex: 1,
+      zIndex: componentTheme.zIndex,
       display: 'inline-block',
       ...(placement === 'static'
         ? {

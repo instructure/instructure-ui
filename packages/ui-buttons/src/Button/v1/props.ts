@@ -31,43 +31,71 @@ import type {
   OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { Cursor } from '@instructure/shared-types'
-import type { ViewProps } from '@instructure/ui-view/latest'
+import type { ViewProps } from '@instructure/ui-view/v11_6'
 
-type CondensedButtonOwnProps = {
+type ButtonOwnProps = {
   /**
-   * Specifies the `CondensedButton` children.
+   * Specifies the `Button` children.
    */
   children?: React.ReactNode
 
   /**
-   * Specifies the type of the `CondensedButton`'s underlying html element.
+   * Specifies the type of the `Button`'s underlying html element.
    */
   type?: 'button' | 'submit' | 'reset'
 
   /**
-   * The size of the `CondensedButton`
+   * The size of the `Button`
    */
-  size?: 'small' | 'medium' | 'large' | 'condensedSmall' | 'condensedMedium'
+  size?: 'small' | 'medium' | 'large'
 
   /**
-   * Provides a reference to the `CondensedButton`'s underlying html element.
+   * Provides a reference to the `Button`'s underlying html element.
    */
   elementRef?: (element: Element | null) => void
 
   /**
-   * The element to render as the component root, `button` by default.
+   * The element to render as the component root, `Button` by default.
    */
   as?: AsElementType
 
   /**
-   * Specifies if interaction with the `CondensedButton` is enabled, disabled, or readonly.
+   * Specifies if interaction with the `Button` is enabled, disabled, or readonly.
    */
   interaction?: 'enabled' | 'disabled' | 'readonly'
 
   /**
-   * Specifies the color for the `CondensedButton`.
+   * Specifies the color for the `Button`.
    */
-  color?: 'primary' | 'primary-inverse' | 'secondary'
+  color?:
+    | 'primary'
+    | 'primary-inverse'
+    | 'secondary'
+    | 'success'
+    | 'danger'
+    | 'ai-primary'
+    | 'ai-secondary'
+
+  /**
+   * Override the `Button`'s default focus outline color.
+   */
+  focusColor?: 'info' | 'inverse'
+
+  /**
+   * The `Button` display property. When set to `inline-block`, the `Button` displays inline with other elements.
+   * When set to block, the `Button` expands to fill the width of the container.
+   */
+  display?: 'inline-block' | 'block'
+
+  /**
+   * Sets the alignment of the `Button` children and/or icon.
+   */
+  textAlign?: 'start' | 'center'
+
+  /**
+   * Specifies if the `Button` should render with a solid background. When false, the background is transparent.
+   */
+  withBackground?: boolean
 
   /**
    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
@@ -83,7 +111,7 @@ type CondensedButtonOwnProps = {
   cursor?: Cursor
 
   /**
-   * Specifies an href attribute for the `CondensedButton`'s underlying html element.
+   * Specifies an href attribute for the `Button`'s underlying html element.
    */
   href?: string
 
@@ -93,42 +121,39 @@ type CondensedButtonOwnProps = {
   renderIcon?: React.ReactNode | (() => React.ReactNode)
 
   /**
-   * Callback fired when the `CondensedButton` is clicked.
+   * Callback fired when the `Button` is clicked.
    */
   onClick?: (
     event: React.KeyboardEvent<ViewProps> | React.MouseEvent<ViewProps>
   ) => void
-
-  /**
-   * The CSS display property of the button, `inline-block` or `block`
-   */
-  display?: 'inline-block' | 'block'
 }
 
-type PropKeys = keyof CondensedButtonOwnProps
+type PropKeys = keyof ButtonOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type CondensedButtonProps = CondensedButtonOwnProps &
+type ButtonProps = ButtonOwnProps &
   WithStyleProps<BaseButtonTheme, null> &
-  OtherHTMLAttributes<CondensedButtonOwnProps> &
+  OtherHTMLAttributes<ButtonOwnProps> &
   ToProp
-
 const allowedProps: AllowedPropKeys = [
   'as',
   'children',
   'color',
   'cursor',
+  'display',
   'elementRef',
+  'focusColor',
   'href',
   'interaction',
   'margin',
   'renderIcon',
   'size',
+  'textAlign',
   'type',
-  'onClick',
-  'display'
+  'withBackground',
+  'onClick'
 ]
 
-export type { CondensedButtonProps }
+export type { ButtonProps }
 export { allowedProps }

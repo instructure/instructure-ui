@@ -24,26 +24,25 @@
 
 import { Component } from 'react'
 
-import { passthroughProps } from '@instructure/ui-react-utils'
-import { ScreenReaderContent } from '@instructure/ui-a11y-content'
-import { combineDataCid } from '@instructure/ui-utils'
+import { getInteraction, passthroughProps } from '@instructure/ui-react-utils'
 
-import { withStyle } from '@instructure/emotion'
-import { BaseButton } from '../../BaseButton/v2'
+import { withStyleLegacy as withStyle } from '@instructure/emotion'
+
+import generateComponentTheme from './theme'
+import { BaseButton } from '../../BaseButton/v1'
 
 import { allowedProps } from './props'
-import type { IconButtonProps } from './props'
+import type { ButtonProps } from './props'
 
 /**
 ---
 category: components
 ---
 **/
-
 // needed for listing the available theme variables on docs page
-@withStyle(null, 'BaseButton')
-class IconButton extends Component<IconButtonProps> {
-  static readonly componentId = 'IconButton'
+@withStyle(null, generateComponentTheme)
+class Button extends Component<ButtonProps> {
+  static readonly componentId = 'Button'
 
   static allowedProps = allowedProps
   static defaultProps = {
@@ -53,18 +52,26 @@ class IconButton extends Component<IconButtonProps> {
     // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
     interaction: undefined,
     color: 'secondary',
-    shape: 'rectangle',
+    display: 'inline-block',
+    textAlign: 'center',
     withBackground: true,
-    withBorder: true,
     margin: '0',
     cursor: 'pointer'
   }
 
-  _baseButton: BaseButton | null = null
+  _buttonComponent: BaseButton | null = null
 
   ref: Element | null = null
 
-  handleRef = (el: Element | null) => {
+  get focused() {
+    return this._buttonComponent && this._buttonComponent.focused
+  }
+
+  focus() {
+    this._buttonComponent && this._buttonComponent.focus()
+  }
+
+  handleElementRef = (el: Element | null) => {
     const { elementRef } = this.props
 
     this.ref = el
@@ -74,65 +81,59 @@ class IconButton extends Component<IconButtonProps> {
     }
   }
 
-  get focused() {
-    return this._baseButton && this._baseButton.focused
-  }
-
-  focus() {
-    this._baseButton && this._baseButton.focus()
+  handleButtonRef = (component: BaseButton | null) => {
+    this._buttonComponent = component
   }
 
   render() {
     const {
       children,
-      renderIcon,
-      screenReaderLabel,
       type,
       size,
-      elementRef,
       as,
-      interaction,
       color,
       focusColor,
-      shape,
+      display,
+      textAlign,
       withBackground,
-      withBorder,
       margin,
       cursor,
       href,
+      renderIcon,
       ...props
     } = this.props
 
+    const interaction = getInteraction({ props })
+
     const themeOverride = this.props.themeOverride
 
+    const buttonProps = {
+      ...passthroughProps(props),
+      type,
+      size,
+      elementRef: this.handleElementRef,
+      ref: this.handleButtonRef,
+      as,
+      color,
+      interaction,
+      focusColor,
+      display,
+      textAlign,
+      withBackground,
+      margin,
+      cursor,
+      href,
+      renderIcon,
+      themeOverride
+    }
+
     return (
-      <BaseButton
-        {...passthroughProps(props)}
-        type={type}
-        size={size}
-        elementRef={this.handleRef}
-        as={as}
-        interaction={interaction}
-        color={color}
-        focusColor={focusColor}
-        shape={shape}
-        withBackground={withBackground}
-        withBorder={withBorder}
-        margin={margin}
-        cursor={cursor}
-        href={href}
-        renderIcon={children || renderIcon}
-        themeOverride={themeOverride}
-        ref={(component) => {
-          this._baseButton = component
-        }}
-        data-cid={combineDataCid('IconButton', this.props)}
-      >
-        <ScreenReaderContent>{screenReaderLabel}</ScreenReaderContent>
+      <BaseButton {...buttonProps} data-cid="Button">
+        {children}
       </BaseButton>
     )
   }
 }
 
-export default IconButton
-export { IconButton }
+export default Button
+export { Button }
