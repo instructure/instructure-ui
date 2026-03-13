@@ -72,7 +72,7 @@
       "type": "color"
     },
     "highlightedLabelColor": {
-      "value": "{color.text.base}",
+      "value": "{color.text.interactive.action.primary.base}",
       "type": "color"
     },
     "iconPadding": {
