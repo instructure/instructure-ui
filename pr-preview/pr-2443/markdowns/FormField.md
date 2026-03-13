@@ -10,25 +10,25 @@ type: example
 ---
 <div>
   <FormField id="_foo121" label="Stacked layout" width="400px" layout="stacked"
-             messages={[{type:'success', text: 'This is a success message'}, {type:'error', text: 'An error message. It will wrap if the text is longer than the width of the container.'}]}>
+             messages={[{type:'success', text: 'This is a success message'}, {type:'newError', text: 'An error message. It will wrap if the text is longer than the width of the container.'}]}>
     <TextInput id="_foo121"/>
   </FormField>
   test
   <hr/>
   <FormField id="_foo122" label="Stacked layout (inline=true)" width="400px" layout="stacked" inline
-             messages={[{type:'success', text: 'This is a success message'}, {type:'error', text: 'An error message. It will wrap if the text is longer than the width of the container.'}]}>
+             messages={[{type:'success', text: 'This is a success message'}, {type:'newError', text: 'An error message. It will wrap if the text is longer than the width of the container.'}]}>
     <TextInput id="_foo122"/>
   </FormField>
   test
   <hr/>
   <FormField id="_foo123" label="Inline layout" width="400px" layout="inline"
-             messages={[{type:'success', text: 'success!'}, {type:'error', text: 'An error message. It will wrap if the text is longer than the width of the container.'}]}>
+             messages={[{type:'success', text: 'success!'}, {type:'newError', text: 'An error message. It will wrap if the text is longer than the width of the container.'}]}>
     <TextInput id="_foo123"/>
   </FormField>
   test
   <hr/>
   <FormField id="_foo124" label="Inline layout (inline=true)" width="400px" layout="inline" inline
-             messages={[{type:'success', text: 'success!'}, {type:'error', text: 'An error message. It will wrap if the text is longer than the width of the container.'}]}>
+             messages={[{type:'success', text: 'success!'}, {type:'newError', text: 'An error message. It will wrap if the text is longer than the width of the container.'}]}>
     <TextInput id="_foo124"/>
   </FormField>
   test
@@ -58,10 +58,7 @@ type: example
 | FormField | width | `string` | No | - |  |
 | FormField | inputContainerRef | `(element: HTMLSpanElement \| null) => void` | No | - |  |
 | FormField | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
-| FormField | isRequired | `boolean` | No | - | If `true`, displays an asterisk after the label to indicate the field is required |
 | FormField | margin | `Spacing` | No | - | Margin around the component. Accepts a `Spacing` token. See token values and example usage in [this guide](https://instructure.design/#layout-spacing). |
-| FormField | disabled | `boolean` | No | - | Whether the field is disabled. When true, error and success messages will be hidden. |
-| FormField | readOnly | `boolean` | No | - | Whether the field is read-only. When true, error and success messages will be hidden. |
 | FormField.FormFieldLabel | children | `React.ReactNode` | Yes | - |  |
 | FormField.FormFieldLabel | as | `AsElementType` | No | `'span'` |  |
 | FormField.FormFieldLayout | label | `React.ReactNode` | Yes | - |  |
