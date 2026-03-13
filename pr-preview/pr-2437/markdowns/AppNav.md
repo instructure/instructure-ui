@@ -33,7 +33,7 @@ const AppNavExample = () => {
         <AppNav.Item
           renderLabel={<ScreenReaderContent>Instructure</ScreenReaderContent>}
           renderIcon={
-            <CommandInstUIIcon inline={false} size="2xl" color="baseColor" />
+            <IconCommonsLine inline={false} size="medium" color="primary" />
           }
           href="http://instructure.com"
         />
@@ -41,7 +41,7 @@ const AppNavExample = () => {
       renderAfterItems={
         <IconButton
           onClick={() => console.log('Add')}
-          renderIcon={<PlusInstUIIcon/>}
+          renderIcon={IconPlusSolid}
           margin="0 0 0 x-small"
           screenReaderLabel="Add something"
           withBorder={false}
@@ -55,7 +55,7 @@ const AppNavExample = () => {
         } else {
           return (
             <span>
-              <MenuInstUIIcon size={'2xl'} inline={false} />
+              <IconHamburgerLine size="small" inline={false} />
               <ScreenReaderContent>{`${hiddenItemsCount} More`}</ScreenReaderContent>
             </span>
           )
