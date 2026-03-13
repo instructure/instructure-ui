@@ -31,11 +31,11 @@ import type {
 import type {
   ToProp,
   AsElementType,
-  CloseButtonTheme,
+  BaseButtonTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { Cursor } from '@instructure/shared-types'
-import type { ViewProps } from '@instructure/ui-view'
+import type { ViewProps } from '@instructure/ui-view/latest'
 
 type CloseButtonOwnProps = {
   /**
@@ -122,7 +122,7 @@ type PropKeys = keyof CloseButtonOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type CloseButtonProps = CloseButtonOwnProps &
-  WithStyleProps<CloseButtonTheme, CloseButtonStyle> &
+  WithStyleProps<BaseButtonTheme, CloseButtonStyle> &
   OtherHTMLAttributes<CloseButtonOwnProps> &
   ToProp
 

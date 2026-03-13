@@ -28,7 +28,7 @@ import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
-import { BaseButton } from '../../BaseButton'
+import { BaseButton } from '../../../BaseButton/v2'
 import { Button } from '../index'
 
 describe('<Button/>', () => {

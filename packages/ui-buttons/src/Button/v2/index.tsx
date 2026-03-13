@@ -26,10 +26,8 @@ import { Component } from 'react'
 
 import { getInteraction, passthroughProps } from '@instructure/ui-react-utils'
 
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
-
-import generateComponentTheme from './theme'
-import { BaseButton } from '../BaseButton'
+import { withStyle } from '@instructure/emotion'
+import { BaseButton } from '../../BaseButton/v2'
 
 import { allowedProps } from './props'
 import type { ButtonProps } from './props'
@@ -40,7 +38,7 @@ category: components
 ---
 **/
 // needed for listing the available theme variables on docs page
-@withStyle(null, generateComponentTheme)
+@withStyle(null, 'BaseButton')
 class Button extends Component<ButtonProps> {
   static readonly componentId = 'Button'
 

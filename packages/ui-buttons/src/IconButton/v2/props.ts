@@ -33,7 +33,7 @@ import type {
   Renderable
 } from '@instructure/shared-types'
 import type { Cursor } from '@instructure/shared-types'
-import type { ViewProps } from '@instructure/ui-view'
+import type { ViewProps } from '@instructure/ui-view/latest'
 
 type IconButtonOwnProps = {
   /**

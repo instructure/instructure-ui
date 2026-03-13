@@ -31,7 +31,7 @@ import type {
   OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { Cursor } from '@instructure/shared-types'
-import type { ViewProps } from '@instructure/ui-view'
+import type { ViewProps } from '@instructure/ui-view/latest'
 
 type CondensedButtonOwnProps = {
   /**
@@ -47,7 +47,7 @@ type CondensedButtonOwnProps = {
   /**
    * The size of the `CondensedButton`
    */
-  size?: 'small' | 'medium' | 'large'
+  size?: 'small' | 'medium' | 'large' | 'condensedSmall' | 'condensedMedium'
 
   /**
    * Provides a reference to the `CondensedButton`'s underlying html element.
