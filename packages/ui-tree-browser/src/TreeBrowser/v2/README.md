@@ -1,0 +1,712 @@
+---
+describes: TreeBrowser
+---
+
+The `<TreeBrowser/>` component provides a keyboard accessible tree structure. The component expects
+to receive a normalized data structure, examples can be seen at https://github.com/paularmstrong/normalizr.
+
+### Size
+
+```js
+---
+type: example
+---
+const Example = () => {
+  const [size, setSize] = useState('medium')
+  const sizes = ['small', 'medium', 'large']
+
+  const handleSizeSelect = (e, size) => {
+    setSize(size)
+  }
+
+  return (
+    <>
+      <View display="block" margin="none none medium">
+        <RadioInputGroup
+          name="treeBrowserSize"
+          defaultValue="medium"
+          description={
+            <ScreenReaderContent>
+              TreeBrowser size selector
+            </ScreenReaderContent>
+          }
+          variant="toggle"
+          onChange={handleSizeSelect}
+        >
+          {sizes.map((size) => (
+            <RadioInput key={size} label={size} value={size} />
+          ))}
+        </RadioInputGroup>
+      </View>
+
+      <TreeBrowser
+        size={size}
+        collections={{
+          1: {
+            id: 1,
+            name: 'Assignments',
+            collections: [2, 3],
+            items: [3],
+            descriptor: 'Class Assignments'
+          },
+          2: {
+            id: 2,
+            name: 'English Assignments',
+            collections: [4],
+            items: []
+          },
+          3: {
+            id: 3,
+            name: 'Math Assignments',
+            collections: [5],
+            items: [1, 2]
+          },
+          4: {
+            id: 4,
+            name: 'Reading Assignments',
+            collections: [],
+            items: [4]
+          },
+          5: { id: 5, name: 'Advanced Math Assignments', items: [5] }
+        }}
+        items={{
+          1: { id: 1, name: 'Addition Worksheet' },
+          2: { id: 2, name: 'Subtraction Worksheet' },
+          3: { id: 3, name: 'General Questions' },
+          4: { id: 4, name: 'Vogon Poetry' },
+          5: {
+            id: 5,
+            name: 'Bistromath',
+            descriptor: 'Explain the Bistromathic Drive'
+          }
+        }}
+        defaultExpanded={[1, 3]}
+        rootId={1}
+      />
+    </>
+  )
+}
+
+render(<Example />)
+```
+
+### Managing State
+
+`<TreeBrowser />` can be fully controlled. The following example uses the `onCollectionToggle` callback function to set the state. It then uses the `expanded` prop to configure which collections are open or closed.
+
+```js
+---
+type: example
+---
+const Example = () => {
+  const [expanded, setExpanded] = useState([2])
+
+  const handleCollectionClick = (id, collection) => {
+    console.log(collection.id)
+  }
+
+  const handleCollectionToggle = (collection) => {
+    setExpanded((prevExpanded) => {
+      const newExpanded = [...prevExpanded]
+      const index = newExpanded.indexOf(collection.id)
+
+      if (!collection.expanded) {
+        newExpanded.splice(index, 1)
+      } else if (index < 0) {
+        newExpanded.push(collection.id)
+      }
+
+      return newExpanded
+    })
+  }
+
+  return (
+    <TreeBrowser
+      variant="indent"
+      selectionType="single"
+      collections={{
+        1: { id: 1, name: 'Grade 1', collections: [2, 3, 6] },
+        2: {
+          id: 2,
+          name: 'Math Outcomes',
+          collections: [4],
+          items: [3, 4],
+          descriptor: '1 Group | 2 Outcomes'
+        },
+        3: {
+          id: 3,
+          name: 'Reading Outcome',
+          collections: [5],
+          items: [1, 2],
+          descriptor: '1 Group | 2 Outcomes'
+        },
+        4: {
+          id: 4,
+          name: 'Advanced Math',
+          items: [6],
+          descriptor: '1 Outcome'
+        },
+        5: {
+          id: 5,
+          name: 'Advanced Reading',
+          items: [5],
+          descriptor: '1 Group | 2 Outcomes'
+        },
+        6: {
+          id: 6,
+          name: 'Advanced Outcomes',
+          items: [5, 6],
+          descriptor: '2 Outcomes'
+        }
+      }}
+      items={{
+        1: { id: 1, name: 'Can read' },
+        2: { id: 2, name: 'Can write' },
+        3: { id: 3, name: 'Can add' },
+        4: { id: 4, name: 'Can subtract' },
+        5: { id: 5, name: 'Can read Shakespeare' },
+        6: { id: 6, name: 'Can do quantum physics' }
+      }}
+      showRootCollection={false}
+      rootId={1}
+      expanded={expanded}
+      onCollectionToggle={handleCollectionToggle}
+      onCollectionClick={handleCollectionClick}
+    />
+  )
+}
+
+render(<Example />)
+```
+
+### Customizing Icons
+
+All of the `<TreeBrowser>` icons are customizable.
+The following example sets custom icons for the expanded and collapsed state of the collections via `collectionIcon` and `collectionIconExpanded` and custom item icons via `itemIcon`.
+
+```js
+---
+type: example
+---
+<TreeBrowser
+  collections={{
+    1: {
+      id: 1,
+      name: "Grades",
+      collections: [],
+      items: [1,2,3]
+    },
+  }}
+  items={{
+    1: { id: 1, name: "Sarah" },
+    2: { id: 2, name: "Jenny" },
+    3: { id: 3, name: "Juan" }
+  }}
+  defaultExpanded={[1]}
+
+  collectionIcon = {<BookCheckInstUIIcon />}
+  collectionIconExpanded = {XInstUIIcon}
+  itemIcon={() => <UserInstUIIcon />}
+
+  rootId={1}
+  size="large"
+/>
+```
+
+#### Different icons for each item
+
+One way do this is to use `getItemProps`. This function is called with the props for each item and returns new props you specify. These props are then passed to the item when it is rendered. In the following example, we override the `itemIcon` prop depending on the item name.
+
+```js
+---
+type: example
+---
+<TreeBrowser
+  collections={{
+    1: {
+      id: 1,
+      name: "Saved",
+      collections: [],
+      items: [1,2,3]
+    },
+  }}
+  items={{
+    1: { id: 1, name: "Modules" },
+    2: { id: 2, name: "Videos" },
+    3: { id: 3, name: "Students" }
+  }}
+  defaultExpanded={[1]}
+  rootId={1}
+  size="large"
+  getItemProps={({ name, ...props }) => {
+    let itemIcon = <UserInstUIIcon />
+
+    if (name === 'Modules') {
+      itemIcon = <BoxesInstUIIcon />
+    }
+
+    if (name === 'Videos') {
+      itemIcon = <PlaySquareInstUIIcon />
+    }
+
+    return {
+      ...props, // Be sure to pass the rest of the props along
+      itemIcon,
+      name
+    }
+  }}
+/>
+```
+
+Another way to do it is to specify the `thumbnail` property in the `items` collection. This also overrides `itemIcon`.
+
+```js
+---
+type: example
+---
+<TreeBrowser
+  collections={{
+    1: {
+      id: 1,
+      name: "Pandas",
+      collections: [],
+      items: [1,2,3]
+    },
+  }}
+  items={{
+    1: { id: 1, name: "Bao Bao", thumbnail: avatarSquare },
+    2: { id: 2, name: "Bei Bei" },
+    3: { id: 3, name: "Mei Xiang", thumbnail: avatarPortrait }
+  }}
+  defaultExpanded={[1]}
+  itemIcon={<UserInstUIIcon />}
+  rootId={1}
+  size="large"
+/>
+```
+
+### Rendering custom content in nodes
+
+Using the `renderContent` property allows you to render custom content in the area where the text and descriptor are.
+To meet a11y standards make sure to have the right contrast ratio on hovered and selected states; you can use the
+`selected` and `focused` attributes in the given `props`.
+
+```js
+---
+type: example
+---
+<TreeBrowser
+  collections={{
+    1: {
+      id: 1,
+      name: "Pandas",
+      collections: [],
+      items: [1, 2, 3]
+    },
+  }}
+  items={{
+    1: { id: 1, name: "Bao Bao" },
+    2: { id: 2, name: "Bei Bei" },
+    3: { id: 3, name: "Mei Xiang" }
+  }}
+  defaultExpanded={[1]}
+  itemIcon={<UserInstUIIcon />}
+  rootId={1}
+  size="large"
+  renderContent={(props)=> {
+    if (props.level > 1) {
+      return <div style={{ display: 'flex', alignItems: 'flex-end', padding: '0.6rem 0 0.6rem 1rem', color: 'darkorange' }}>
+        <span>{props.name}</span>
+        <Tag text="done" size="small" margin="0 xx-small 0 xx-small"/>
+        <Tag text="class A" size="small"/>
+      </div>
+    }
+    return <div style={{padding: '0.6rem 0 0.6rem 1rem', color: 'darkorange'}}>{props.name}</div>
+  }}
+/>
+```
+
+### Rendering custom items before and after nodes
+
+An example of a `<TreeBrowser />` with a custom item after each collection.
+
+When rendering custom interactive content (such as input fields), use the `hoverable` prop on `<TreeBrowser.Node />` to control the default hover behavior. Set it to `false` to disable hover effects while custom interactive elements are shown.
+
+This example uses controlled selection (the `selection` prop with the `onSelectionChange` callback) to manage the selected state. Clicking the custom node clears the current selection by calling `setSelection('')`, ensuring a clean and predictable user experience.
+
+```js
+---
+type: example
+---
+const Example = () => {
+  const [expanded, setExpanded] = useState(true)
+  const [hoveredLine, setHoveredLine] = useState(null)
+  const [selection, setSelection] = useState('')
+  const nodeRef = useRef(null)
+
+  const handleExpandToggle = useCallback((e, newExpandedState) => {
+    e.stopPropagation()
+    setExpanded(newExpandedState)
+    setSelection('')
+    nodeRef.current?.focus()
+  }, [])
+
+  const handleKeyPress = useCallback(
+    (e, newExpandedState) => {
+      if (e.code === 'Space' || e.code === 'Enter') {
+        e.preventDefault()
+        handleExpandToggle(e, newExpandedState)
+      }
+    },
+    [handleExpandToggle]
+  )
+
+  const renderInput = () => {
+    if (expanded) {
+      return (
+        <View
+          as="div"
+          padding="xx-small"
+          onFocus={(e) => e.stopPropagation()}
+          onClick={(e) => {
+            e.stopPropagation()
+            setSelection('')
+          }}
+          onMouseEnter={() => setHoveredLine('renderAfter')}
+          onMouseLeave={() => setHoveredLine(null)}
+        >
+          <TextInput
+            placeholder="Enter new group name"
+            display="inline-block"
+            width="12rem"
+            renderLabel=""
+            onKeyDown={(e) => e.stopPropagation()}
+            onFocus={() => setSelection('')}
+          />
+          <IconButton
+            screenReaderLabel="Cancel"
+            onClick={(e) => handleExpandToggle(e, false)}
+            onKeyDown={(e) => handleKeyPress(e, false)}
+            margin="0 0 0 small"
+          >
+            <XInstUIIcon />
+          </IconButton>
+          <IconButton
+            screenReaderLabel="Add new group"
+            onClick={(e) => handleExpandToggle(e, false)}
+            onKeyDown={(e) => handleKeyPress(e, false)}
+            margin="0 0 0 small"
+          >
+            <CheckInstUIIcon />
+          </IconButton>
+        </View>
+      )
+    }
+
+    return <View as="div">Create New Group</View>
+  }
+
+  const renderNode = () => (
+    <TreeBrowser.Node
+      containerRef={(el) => (nodeRef.current = el)}
+      onClick={(e) => handleExpandToggle(e, !expanded)}
+      onKeyDown={(e) => handleKeyPress(e, !expanded)}
+      itemIcon={expanded ? '' : <PlusInstUIIcon />}
+      size="large"
+      hoverable={!expanded}
+    >
+      {renderInput()}
+    </TreeBrowser.Node>
+  )
+
+  return (
+    <TreeBrowser
+      selectionType="single"
+      selection={selection}
+      onSelectionChange={(newSelection) => setSelection(newSelection)}
+      size="large"
+      defaultExpanded={[1, 2]}
+      collections={{
+        1: {
+          id: 1,
+          name: 'Grade 1',
+          collections: [2]
+        },
+        2: {
+          id: 2,
+          name: 'Math Outcomes',
+          collections: [],
+          items: [1, 2],
+          descriptor: '1 Group | 2 Outcomes',
+          renderAfterItems: renderNode()
+        }
+      }}
+      items={{
+        1: { id: 1, name: 'Can add' },
+        2: { id: 2, name: 'Can subtract' }
+      }}
+      showRootCollection={true}
+      rootId={1}
+    />
+  )
+}
+
+render(<Example />)
+```
+
+### Change the order of appearance of items and collections
+
+By default, the order of collections and items depend on the order of `collections` and `items` array. We can override it by providing a `sortOrder` comparison function.
+
+---
+
+**NOTE**
+
+This works with all collections and items of the TreeBrowser.
+
+---
+
+```js
+---
+type: example
+---
+const Example = () => {
+  const [size, setSize] = useState('medium')
+  const [sorted, setSorted] = useState(false)
+
+  const toggleSort = () => {
+    setSorted(!sorted)
+  }
+
+  return (
+    <>
+      <View display="block" margin="none none medium">
+        <FormFieldGroup description="Turn on/off sorting">
+          <Checkbox checked={sorted} label="Sort" onChange={toggleSort} />
+        </FormFieldGroup>
+      </View>
+
+      <TreeBrowser
+        size={size}
+        collections={{
+          1: {
+            id: 1,
+            name: 'Assignments',
+            collections: [3, 2],
+            items: [3],
+            descriptor: 'Class Assignments'
+          },
+          2: {
+            id: 2,
+            name: 'English Assignments',
+            collections: [4],
+            items: []
+          },
+          3: {
+            id: 3,
+            name: 'Math Assignments',
+            collections: [5],
+            items: [2, 1]
+          },
+          4: {
+            id: 4,
+            name: 'Reading Assignments',
+            collections: [],
+            items: [4]
+          },
+          5: { id: 5, name: 'Advanced Math Assignments', items: [5] }
+        }}
+        items={{
+          1: { id: 1, name: 'Addition Worksheet' },
+          2: { id: 2, name: 'Subtraction Worksheet' },
+          3: { id: 3, name: 'General Questions' },
+          4: { id: 4, name: 'Vogon Poetry' },
+          5: {
+            id: 5,
+            name: 'Bistromath',
+            descriptor: 'Explain the Bistromathic Drive'
+          }
+        }}
+        defaultExpanded={[1, 3]}
+        rootId={1}
+        sortOrder={sorted ? (a, b) => a.name.localeCompare(b.name) : () => 0}
+      />
+    </>
+  )
+}
+
+render(<Example />)
+```
+
+There is another way to sort the children of one collection. By adding the `compareFunc` as the comparison function to the collection's properties. This will be effective only within the collection's scope. For more convenience, we support a prop called `type` to specify whether the collection's children is either an item or a subcollection (this is only make sense in `compareFunc`)
+
+```js
+---
+type: example
+---
+const Example = () => {
+  const [size, setSize] = useState('medium')
+
+  return (
+    <TreeBrowser
+      size={size}
+      collections={{
+        1: {
+          id: 1,
+          name: 'Assignments',
+          collections: [3, 2],
+          items: [3],
+          descriptor: 'Class Assignments',
+          // Sort the direct children of "Assignment" by their name in alphabetical order
+          compareFunc: (a, b) => a.name.localeCompare(b.name)
+        },
+        2: {
+          id: 2,
+          name: 'English Assignments',
+          collections: [4],
+          items: []
+        },
+        3: {
+          id: 3,
+          name: 'Math Assignments',
+          collections: [5],
+          items: [2, 1],
+          //  The items appear before subcollections
+          compareFunc: (a, b) => {
+            if (a.type === 'item' && b.type === 'collection') {
+              return -1
+            }
+            if (a.type === 'collection' && b.type === 'item') {
+              return 1
+            }
+            return 0
+          }
+        },
+        4: {
+          id: 4,
+          name: 'Reading Assignments',
+          collections: [],
+          items: [4]
+        },
+        5: { id: 5, name: 'Advanced Math Assignments', items: [5] }
+      }}
+      items={{
+        1: { id: 1, name: 'Addition Worksheet' },
+        2: { id: 2, name: 'Subtraction Worksheet' },
+        3: { id: 3, name: 'General Questions' },
+        4: { id: 4, name: 'Vogon Poetry' },
+        5: {
+          id: 5,
+          name: 'Bistromath',
+          descriptor: 'Explain the Bistromathic Drive'
+        }
+      }}
+      defaultExpanded={[1, 3]}
+      rootId={1}
+    />
+  )
+}
+
+render(<Example />)
+```
+
+### showRootCollection
+
+The `showRootCollection` prop sets whether the root collection (specified in `rootId` prop) is displayed or to begin with its immediate sub-collections and items instead. It defaults to `true`.
+
+```js
+---
+type: example
+---
+const Example = () => {
+  const [showRootCollection, setShowRootCollection] = useState(true)
+
+  const handleSwitch = () => {
+    setShowRootCollection(!showRootCollection)
+  }
+
+  const renderNode = () => {
+    return (
+      <TreeBrowser.Node itemIcon={<PlusInstUIIcon />}>More</TreeBrowser.Node>
+    )
+  }
+
+  return (
+    <>
+      <View display="block" margin="none none medium">
+        <Checkbox
+          label="showRootCollection"
+          variant="toggle"
+          size="medium"
+          checked={showRootCollection}
+          onChange={handleSwitch}
+        />
+      </View>
+
+      <TreeBrowser
+        collections={{
+          1: {
+            id: 1,
+            name: 'Assignments',
+            collections: [2, 3],
+            items: [3, 5],
+            descriptor: 'Class Assignments',
+            renderAfterItems: renderNode()
+          },
+          2: {
+            id: 2,
+            name: 'English Assignments',
+            collections: [4],
+            items: []
+          },
+          3: {
+            id: 3,
+            name: 'Math Assignments',
+            collections: [5],
+            items: [1, 2]
+          },
+          4: {
+            id: 4,
+            name: 'Reading Assignments',
+            collections: [],
+            items: [4]
+          },
+          5: { id: 5, name: 'Advanced Math Assignments', items: [5] }
+        }}
+        items={{
+          1: { id: 1, name: 'Addition Worksheet' },
+          2: { id: 2, name: 'Subtraction Worksheet' },
+          3: { id: 3, name: 'General Questions' },
+          4: { id: 4, name: 'Vogon Poetry' },
+          5: {
+            id: 5,
+            name: 'Bistromath',
+            descriptor: 'Explain the Bistromathic Drive'
+          }
+        }}
+        defaultExpanded={[1, 3]}
+        rootId={1}
+        showRootCollection={showRootCollection}
+      />
+    </>
+  )
+}
+
+render(<Example />)
+```
+
+### Guidelines
+
+```js
+---
+type: embed
+---
+<Guidelines>
+  <Figure recommendation="yes" title="Do">
+    <Figure.Item>Use for browsing hierarchical content</Figure.Item>
+  </Figure>
+  <Figure recommendation="no" title="Don't">
+    <Figure.Item>Use for site navigation</Figure.Item>
+  </Figure>
+</Guidelines>
+```

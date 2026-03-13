@@ -1,6 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+    <!-- GitHub Pages SPA redirect for PR preview sub-routes.
+         When serving this page as 404.html, redirect PR preview deep links
+         (e.g. /pr-preview/pr-123/Button) back to the PR preview root with
+         the route encoded as a query parameter. No-op for non-PR paths. -->
+    <script>
+      ;(function () {
+        var l = window.location
+        var m = l.pathname.match(/^(\/pr-preview\/pr-\d+)(\/.*)$/)
+        if (m && m[2] !== '/') {
+          l.replace(
+            m[1] + '/?__spa_route=' + encodeURIComponent(m[2] + l.hash)
+          )
+        }
+      })()
+    </script>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -12,9 +27,12 @@
       type="image/png"
       href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwBAMAAAClLOS0AAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAAhUExURQYcMOzt75afqP///z4eL68hLHcfLeciKg8kN9ba3Z+nr/Cciq0AAAABYktHRAMRDEzyAAAAB3RJTUUH6QkICx4M5Jk2YQAAAEZJREFUOMtjYBgFuICgoBB2CWNjo1GJoS/hGuaAXaK8vASrBFt5eSlWCdby8nJcEth1sJSXl6GLc8ycOYuBga0U01WjAAYAf4oY5LYoa2EAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjUtMDktMDhUMTE6MzA6MTArMDA6MDD/lM3MAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDI1LTA5LTA4VDExOjMwOjEwKzAwOjAwjsl1cAAAACh0RVh0ZGF0ZTp0aW1lc3RhbXAAMjAyNS0wOS0wOFQxMTozMDoxMiswMDowME5DRYYAAAAASUVORK5CYII="
     />
-    <!-- font for canvas theme -->
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i"
+      href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&family=Inclusive+Sans:ital,wght@0,300..700;1,300..700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
       rel="stylesheet"
     />
 

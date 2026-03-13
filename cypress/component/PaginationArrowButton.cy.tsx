@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Pagination } from '@instructure/ui'
+import { Pagination } from '@instructure/ui/latest'
 
 import '../support/component'
 import 'cypress-real-events'

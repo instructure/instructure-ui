@@ -26,7 +26,7 @@ import { expect } from 'chai'
 import 'cypress-real-events'
 
 import '../support/component'
-import { MenuItem } from '@instructure/ui'
+import { MenuItem } from '@instructure/ui/latest'
 
 describe('<MenuItem />', () => {
   it('should call onSelect after SPACE key is pressed', () => {

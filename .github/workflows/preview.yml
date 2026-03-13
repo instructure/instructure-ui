@@ -12,6 +12,9 @@ on:
 jobs:
   deploy-preview:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_PULL_REQUEST_PREVIEW: 'true'
+      PR_NUMBER: ${{ github.event.pull_request.number }}
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4

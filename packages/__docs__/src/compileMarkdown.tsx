@@ -39,6 +39,7 @@ import { Playground } from './Playground'
 import { compileAndRenderExample } from './compileAndRenderExample'
 import { Heading } from './Heading'
 import { Link } from './Link'
+import { navigateTo } from './navigationUtils'
 
 type CodeData = {
   code: string
@@ -285,11 +286,7 @@ const renderer = (title: string) => ({
           return
         }
         e.preventDefault()
-        const basePath =
-          window.location.pathname.match(/^(\/pr-preview\/pr-\d+)/)?.[1] || ''
-        const newUrl = basePath ? `${basePath}/${href}` : `/${href}`
-        window.history.pushState({}, '', newUrl)
-        window.dispatchEvent(new PopStateEvent('popstate'))
+        navigateTo(href)
       }}
     >
       {text}

@@ -29,7 +29,9 @@ import getGlyphData from './get-glyph-data.js'
 import generateReactComponents from './generate-react-components.js'
 import generateSvgIndex from './generate-svg-index.js'
 import generateIconFonts from './generate-icon-fonts.js'
-import generateIconsData from './generate-icons-data.js'
+import generateLegacyIconsData from './generate-legacy-icons-data.js'
+import generateLucideIndex from './generate-lucide-index.ts'
+import generateCustomIndex from './generate-custom-index.ts'
 import { pathToFileURL } from 'url'
 
 export default {
@@ -92,15 +94,14 @@ export default {
 
     const glyphs = getGlyphData(
       svgSourceDir,
-      config.deprecated,
       config.bidirectional,
       config.react.componentBaseName
     )
 
     // generate svg index
     generateSvgIndex(glyphs, config.destination)
-    //    - output: ui-icons/__build__/svg/index.js
-    //    - fields: variant, glyphName, src (svg), deprecated
+    //    - output: ui-icons/src/generated/svg/index.js
+    //    - fields: variant, glyphName, src (svg)
 
     // generate react components
     generateReactComponents(glyphs, config.destination)
@@ -121,11 +122,31 @@ export default {
       prefix: 'icon-solid'
     })
 
-    // generate icons-data.json for the docs
-    const iconsData = generateIconsData(glyphs)
-    fs.writeFileSync(
-      `${config.destination}icons-data.json`,
-      JSON.stringify(iconsData)
+    // write legacy-icons-data.json for the docs gallery
+    const legacyIconsData = generateLegacyIconsData()
+    const legacyOutputDir = path.join(
+      process.cwd(),
+      `${config.destination}/legacy/`
     )
+    fs.mkdirSync(legacyOutputDir, { recursive: true })
+    const legacyOutputPath = path.join(
+      legacyOutputDir,
+      'legacy-icons-data.json'
+    )
+    fs.writeFileSync(
+      legacyOutputPath,
+      JSON.stringify(legacyIconsData, null, 2),
+      'utf8'
+    )
+    // eslint-disable-next-line no-console
+    console.log(
+      `Generated ${legacyOutputPath} (${legacyIconsData.length} icons)`
+    )
+
+    // generate Lucide icon index (src/generated/lucide/index.ts)
+    generateLucideIndex()
+
+    // generate custom icon index (src/generated/custom/index.ts)
+    generateCustomIndex()
   }
 }

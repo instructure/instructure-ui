@@ -31,6 +31,7 @@ import { IconTroubleLine } from '@instructure/ui-icons'
 import { Select } from '@instructure/ui-select'
 
 import { SearchStatus } from '../SearchStatus'
+import { navigateTo } from '../navigationUtils'
 
 import type { SearchProps, SearchState, OptionType } from './props'
 import { debounce } from '@instructure/debounce'
@@ -151,7 +152,7 @@ class Search extends Component<SearchProps, SearchState> {
         filteredOptions: [this.getOptionById(id || '')!]
       },
       () => {
-        window.location.href = option.value
+        navigateTo(option.label)
       }
     )
   }

@@ -50,6 +50,7 @@
     "@instructure/ui-color-utils": "workspace:*",
     "@instructure/ui-date-input": "workspace:*",
     "@instructure/ui-date-time-input": "workspace:*",
+    "@instructure/ui-decorator": "workspace:*",
     "@instructure/ui-dialog": "workspace:*",
     "@instructure/ui-dom-utils": "workspace:*",
     "@instructure/ui-drawer-layout": "workspace:*",

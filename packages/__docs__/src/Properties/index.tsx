@@ -25,7 +25,7 @@
 import { Component } from 'react'
 
 import { Table } from '@instructure/ui-table'
-import { withStyle } from '@instructure/emotion'
+import { withStyleForDocs as withStyle } from '../withStyleForDocs'
 
 import generateStyle from './styles'
 import { compileMarkdown } from '../compileMarkdown'

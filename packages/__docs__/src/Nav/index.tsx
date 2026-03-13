@@ -32,9 +32,11 @@ import { View, ViewOwnProps } from '@instructure/ui-view'
 
 import { capitalizeFirstLetter } from '@instructure/ui-utils'
 
+import { navigateTo, buildUrl } from '../navigationUtils'
 import { NavToggle } from '../NavToggle'
 import type { NavProps, NavState } from './props'
 import { Alert } from '@instructure/ui-alerts'
+import type { Section } from '../../buildScripts/DataTypes.mjs'
 
 class Nav extends Component<NavProps, NavState> {
   _themeId: string
@@ -63,9 +65,9 @@ class Nav extends Component<NavProps, NavState> {
 
   setExpandedSections = (
     expanded: boolean,
-    sections: NavProps['sections']
-  ): NavProps['sections'] => {
-    const expandedSections: NavProps['sections'] = {}
+    sections: Record<string, boolean | Section>
+  ) => {
+    const expandedSections: Record<string, boolean> = {}
     Object.keys(sections).forEach((sectionId) => {
       expandedSections[sectionId] = expanded
     })
@@ -141,20 +143,11 @@ class Nav extends Component<NavProps, NavState> {
     })
   }
 
-  getEffectiveBasePath = () => {
-    const pathname = window.location.pathname
-    // Check if we're in a PR preview (path contains /pr-preview/)
-    const prPreviewMatch = pathname.match(/^(\/pr-preview\/pr-\d+)/)
-    if (prPreviewMatch) {
-      return prPreviewMatch[1]
-    }
-    // Live version - no base path
-    return ''
-  }
-
   matchQuery(str: string): boolean {
     const { query } = this.state
-    return query && typeof query.test === 'function' ? query.test(str) : true
+    return query && typeof (query as RegExp).test === 'function'
+      ? (query as RegExp).test(str)
+      : true
   }
 
   createNavToggle({
@@ -271,10 +264,7 @@ class Nav extends Component<NavProps, NavState> {
   handleInternalNavigation = (targetPath: string, e: React.MouseEvent) => {
     e.preventDefault()
     this.removeFocus(e as React.MouseEvent<ViewOwnProps>)
-    const basePath = this.getEffectiveBasePath()
-    const newUrl = basePath ? `${basePath}/${targetPath}` : `/${targetPath}`
-    window.history.pushState({}, '', newUrl)
-    window.dispatchEvent(new PopStateEvent('popstate'))
+    navigateTo(targetPath)
   }
 
   renderDocLink(docId: string) {
@@ -305,8 +295,8 @@ class Nav extends Component<NavProps, NavState> {
         <Link
           onClick={(e: any) => this.handleInternalNavigation(docId, e)}
           display="block"
-          href={`/${docId}`} // Keep href simple
-          isWithinText={false}
+          href={buildUrl(docId)}
+          variant="standalone"
         >
           {docs[docId].title}
         </Link>
@@ -396,7 +386,7 @@ class Nav extends Component<NavProps, NavState> {
     } else {
       return this.createNavToggle({
         id: sectionId,
-        title: this.props.sections[sectionId].title,
+        title: this.props.sections[sectionId].title || '[no title]',
         children: this.renderSectionChildren(sectionId, markExpanded),
         variant
       })
@@ -472,8 +462,8 @@ class Nav extends Component<NavProps, NavState> {
             <Link
               display="block"
               onClick={(e: any) => this.handleInternalNavigation(themeKey, e)}
-              isWithinText={false}
-              href={`/${themeKey}`}
+              variant="standalone"
+              href={buildUrl(themeKey)}
             >
               {themeKey}
             </Link>
@@ -499,13 +489,23 @@ class Nav extends Component<NavProps, NavState> {
     const themes = this.renderThemes()
     const icons = (
       <NavToggle
+        key="Icons button"
         summary="Icons"
         onToggle={(e: any) => this.handleInternalNavigation('icons', e)}
         href="icons"
         shouldBlur={true}
       />
     )
-    const matches = [...sections, ...themes, icons]
+    const legacyIcons = (
+      <NavToggle
+        key="Legacy Icons button"
+        summary="Legacy Icons"
+        onToggle={(e: any) => this.handleInternalNavigation('legacy-icons', e)}
+        href="legacy-icons"
+        shouldBlur={true}
+      />
+    )
+    const matches = [...sections, ...themes, icons, legacyIcons]
     const hasMatches = matches.length > 0
     const errorMessage = [
       { text: `No matches for '${this.state.queryStr}'`, type: 'hint' as const }

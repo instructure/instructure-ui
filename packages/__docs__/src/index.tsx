@@ -26,12 +26,24 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 
 import { App } from './App'
+import canvas from './canvas'
 import { InstUISettingsProvider } from '@instructure/emotion'
 import '../globals'
 
+// Restore the original URL after a GitHub Pages 404 -> SPA redirect.
+// The 404.html (built in deploy.yml) redirects PR preview sub-routes to
+// /pr-preview/pr-{N}/?__spa_route=/path, and this code restores the clean URL.
+const spaRouteParam = new URLSearchParams(window.location.search).get(
+  '__spa_route'
+)
+if (spaRouteParam) {
+  const base = window.location.pathname.replace(/\/+$/, '')
+  window.history.replaceState(null, '', base + spaRouteParam)
+}
+
 createRoot(document.getElementById('app')!).render(
   <StrictMode>
-    <InstUISettingsProvider>
+    <InstUISettingsProvider theme={canvas}>
       <App />
     </InstUISettingsProvider>
   </StrictMode>

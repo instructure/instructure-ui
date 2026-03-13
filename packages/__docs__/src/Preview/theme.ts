@@ -36,7 +36,6 @@ const generateComponentTheme = (theme: Theme): PreviewTheme => {
   return {
     padding: spacing?.small,
     borderRadius: borders?.radiusMedium,
-    backgroundColor: colors?.contrasts?.white1010,
     borderWidth: borders?.widthSmall,
     borderColor: '#aaaaaa',
     fontFamilyError: 'Menlo, Consolas, Monaco, "Andale Mono", monospace',

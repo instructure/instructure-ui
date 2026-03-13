@@ -24,8 +24,9 @@
 
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 import type {
-  MainIconsData,
+  LegacyIconsData,
   MainDocsData,
+  MinorVersionData,
   ProcessedFile
 } from '../../buildScripts/DataTypes.mts'
 import type { DocDataType } from '../Document/props'
@@ -77,7 +78,7 @@ type LayoutSize = 'small' | 'medium' | 'large' | 'x-large'
 type AppState = {
   themeKey?: string
   docsData: MainDocsData | null
-  iconsData: MainIconsData | null
+  legacyIconsData: LegacyIconsData | null
   layout: LayoutSize
   showMenu: boolean
   key?: string
@@ -93,15 +94,15 @@ type AppState = {
   changelogData?: DocData
   // the currently shown document
   currentDocData?: DocData
+  // minor version switching (e.g. v11.5 vs v11.6)
+  minorVersionsData?: MinorVersionData
+  selectedMinorVersion?: string
+  showMinorVersionSelector?: boolean
 }
 
 type ThemeFunctionsClassic = {
   [K in keyof ThemeVariables]: (theme: Theme) => ThemeVariables[K]
 }
-
-export type ThemeFunctionsFunctional = Partial<{
-  [K in keyof ThemeVariables]: (theme: Theme) => Promise<ThemeVariables[K]>
-}>
 
 type DocData = ProcessedFile & {
   componentInstance: Record<string, any> & {

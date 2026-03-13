@@ -434,7 +434,7 @@
   },
   {
     "title": "form-errors",
-    "summary": "InstUI form components use a `messages` prop for error/hint/success messages. Supports both `error` (legacy) and `newError` (accessible) types. Required fields now show an asterisk automatically. Examples provided for various form components like TextInput, Checkbox, and DateTimeInput."
+    "summary": "InstUI form components use a `messages` prop for error/hint/success messages. Required fields now show an asterisk automatically. Examples provided for various form components like TextInput, Checkbox, and DateTimeInput."
   },
   {
     "title": "layout-spacing",
