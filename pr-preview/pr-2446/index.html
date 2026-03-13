@@ -1,7 +1,7 @@
 <!doctype html><html lang="en" dir="ltr"><head><script>;(function () {
         var l = window.location
         var m = l.pathname.match(/^(\/pr-preview\/pr-\d+)(\/.*)$/)
-        if (m) {
+        if (m && m[2] !== '/') {
           l.replace(
             m[1] + '/?__spa_route=' + encodeURIComponent(m[2] + l.hash)
           )
