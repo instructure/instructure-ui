@@ -51,7 +51,7 @@ describe('<CloseButton />', () => {
     const icon = document.querySelector('svg')
 
     expect(icon).toBeInTheDocument()
-    expect(icon).toHaveAttribute('name', 'IconX')
+    expect(icon).toHaveAttribute('name', 'X')
     expect(button).toBeInTheDocument()
     expect(button).toHaveTextContent('Close')
   })
