@@ -49,6 +49,12 @@ function parseCurrentUrl(): ParsedUrl {
     idx = 2
   }
 
+  // Detect /latest/ prefix
+  if (idx === 0 && segments[idx] === 'latest') {
+    prPrefix = '/latest'
+    idx++
+  }
+
   // Detect minor version prefix: /v11_7
   let minorVersion: string | null = null
   if (idx < segments.length && MINOR_VERSION_REGEX.test(segments[idx])) {
