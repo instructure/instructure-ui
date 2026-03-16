@@ -32,6 +32,7 @@ type SelectOwnProps = {
   value?: string
   onChange?: (e: React.SyntheticEvent, params: { value: string }) => void
   children: React.ReactElement[]
+  width: string
 }
 
 type PropKeys = keyof SelectOwnProps
