@@ -86,7 +86,13 @@ const generateStyle = (
         background: componentTheme.selectedHighlightedBackground
       }
     : {
-        background: componentTheme.highlightedBackground
+        background: componentTheme.highlightedBackground,
+        '[class*="menuItem__label"]': {
+          color: componentTheme.highlightedLabelColor
+        },
+        '[class*="menuItem__labelInfo"]': {
+          color: componentTheme.highlightedLabelInfoColor
+        }
       }
 
   const linkStyles = { textDecoration: 'none' }
