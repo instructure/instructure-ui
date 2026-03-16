@@ -1,0 +1,112 @@
+{
+  "sourceCodeEditor": {
+    "background": {
+      "value": "{color.background.base}",
+      "type": "color"
+    },
+    "borderColor": {
+      "value": "{color.stroke.base}",
+      "type": "color"
+    },
+    "borderRadius": {
+      "value": "{borderRadius.md}",
+      "type": "borderRadius"
+    },
+    "borderWidth": {
+      "value": "{borderWidth.sm}",
+      "type": "borderWidth"
+    },
+    "color": {
+      "value": "{color.text.base}",
+      "type": "color"
+    },
+    "fontFamily": {
+      "value": "{fontFamily.code}",
+      "type": "fontFamilies"
+    },
+    "fontSize": {
+      "value": "{fontSize.textSm}",
+      "type": "fontSizes"
+    },
+    "gutterBackground": {
+      "value": "{color.background.muted}",
+      "type": "color"
+    },
+    "horizontalPadding": {
+      "value": "{spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "verticalPadding": {
+      "value": "0.375rem",
+      "type": "spacing"
+    },
+    "focusedSelectionBackgroundColor": {
+      "value": "#d7d4f0",
+      "type": "color"
+    },
+    "placeholderBackgroundColor": {
+      "value": "#707070",
+      "type": "color"
+    },
+    "tagKeywordColor": {
+      "value": "#708",
+      "type": "color"
+    },
+    "tagLiteralColor": {
+      "value": "#164",
+      "type": "color"
+    },
+    "tagStringColor": {
+      "value": "#a11",
+      "type": "color"
+    },
+    "tagDefinitionVariableNameColor": {
+      "value": "#00f",
+      "type": "color"
+    },
+    "tagLocalVariableNameColor": {
+      "value": "#30a",
+      "type": "color"
+    },
+    "tagClassNameColor": {
+      "value": "#167",
+      "type": "color"
+    },
+    "tagSpecialVariableNameColor": {
+      "value": "#256",
+      "type": "color"
+    },
+    "tagDefinitionPropertyNameColor": {
+      "value": "#00c",
+      "type": "color"
+    },
+    "tagCommentColor": {
+      "value": "#940",
+      "type": "color"
+    },
+    "tagMetaColor": {
+      "value": "#757075",
+      "type": "color"
+    },
+    "tagRegExpColor": {
+      "value": "#d13b00",
+      "type": "color"
+    },
+    "tagTypeNameColor": {
+      "value": "#008051",
+      "type": "color"
+    },
+    "tagInvalidColor": {
+      "value": "#e60000",
+      "type": "color"
+    },
+    "tagAtomColor": {
+      "value": "#219",
+      "type": "color"
+    },
+    "activeLineColor": {
+      "value": "#99999912",
+      "type": "color"
+    }
+  }
+}
