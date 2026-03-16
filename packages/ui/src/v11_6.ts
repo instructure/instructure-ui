@@ -269,13 +269,13 @@ export {
   optionsThemeGenerator,
   optionsItemThemeGenerator,
   optionsSeparatorThemeGenerator
-} from '@instructure/ui-options'
+} from '@instructure/ui-options/v11_6'
 export type {
   OptionsItemProps,
   OptionsItemRenderProps,
   OptionsProps,
   OptionsSeparatorProps
-} from '@instructure/ui-options'
+} from '@instructure/ui-options/v11_6'
 export { Mask, Overlay } from '@instructure/ui-overlays/v11_6'
 export type { MaskProps, OverlayProps } from '@instructure/ui-overlays/v11_6'
 export { Pages, PagesPage } from '@instructure/ui-pages/v11_6'
