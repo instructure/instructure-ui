@@ -18,7 +18,7 @@
 - [Accessing the dom](./accessing-the-dom.md): Guidance for properly accessing DOM elements in React components using refs instead of findDOMNode to avoid warnings. Examples show good and bad patterns for component ref handling.
 - [Color system](./color-system.md): Color system divided into primitive (hex values) and semantic (contextual) colors. Includes data visualization palette with primary and secondary hues for charts and graphs on white backgrounds.
 - [Focus management](./focus-management.md): Comprehensive focus management system for dialogs, modals, and popovers. Uses Dialog component with FocusRegion and FocusRegionManager to trap focus, handle escape keys, and manage screen reader accessibility.
-- [Form errors](./form-errors.md): InstUI form components use a `messages` prop for error/hint/success messages. Supports both `error` (legacy) and `newError` (accessible) types. Required fields now show an asterisk automatically. Examples provided for various form components like TextInput, Checkbox, and DateTimeInput.
+- [Form errors](./form-errors.md): InstUI form components use a `messages` prop for error/hint/success messages. Required fields now show an asterisk automatically. Examples provided for various form components like TextInput, Checkbox, and DateTimeInput.
 - [Layout spacing](./layout-spacing.md): InstUI provides semantic spacing tokens (e.g., buttons, tags) for consistent layouts. Apply spacing via `margin` prop, container `gap`, or importing from theme. Legacy tokens are available for compatibility but not recommended for new layouts.
 - [Module federation](./module-federation.md): InstUI supports module federation with specific version requirements. For v10.14+, use local themes (`canvasThemeLocal`). For older hosts, guest apps must use v10.14+ and local themes. Global theme overrides don't apply to local themes.
 - [Server side rendering](./server-side-rendering.md): SSR with Next.js requires wrapping the app with `InstUISettingsProvider` for deterministic ID generation. Avoid `@instructure/ui` meta-package; install only needed packages. CodeEditor isn't SSR-compatible and must be dynamically imported.
@@ -113,19 +113,19 @@
 
 #### utilities
 
-- [BaseButton](./BaseButton.md): Low-level utility component for composing Instructure UI buttons. Not intended for direct use; developers should use Button, CloseButton, IconButton, or CondensedButton instead.
 - [Dialog](./Dialog.md): A utility component for accessibility in modals, popovers, and trays. Manages focus trapping, screen reader visibility, and keyboard navigation. Essential for WCAG-compliant modal interactions.
 - [Expandable](./Expandable.md): Handles expand/collapse functionality for components like ToggleDetails and ToggleGroup. Provides props for accessibility and event handling. Manages state for expanded content visibility.
 - [Focusable](./Focusable.md): A utility component that detects when elements receive focus. Provides render props for creating accessible focus-based interactions, such as skip-to-content links or focus-triggered tooltips. Ensures WCAG compliance for focus management.
 - [Transition](./Transition.md): A wrapper component for transitioning elements in and out of the UI. Supports fade, scale, and slide transitions with customizable directions. Handles mount/unmount transitions and supports RTL mirroring for slide animations.
-- [Options](./Options.md): A view-only component for building option lists or menus. Supports variants (default, highlighted, selected, disabled), icons, nesting, and custom roles. Does not manage state—requires external event handling.
-- [Mask](./Mask.md): A component that covers its nearest positioned parent element. Can be used fullscreen within a Portal and supports click-to-close functionality. Useful for overlays and blocking UI interactions.
 - [Portal](./Portal.md): Renders a React subtree into a different DOM element. Useful for modal-like components that need to break out of parent containers. Typically used with Overlay, Modal, or other components that need to render outside their parent hierarchy.
 - [Position](./Position.md): Positions content relative to a target element with various placement options. Supports RTL internationalization, offset adjustments, and mounting in specific DOM nodes. Replaces older Target/Content pattern with renderTarget prop.
 - [Selectable](./Selectable.md): Low-level utility for building custom combobox widgets. Provides ARIA-compliant prop getters and state management hooks. Use existing Select component when possible.
 - [InlineSVG](./InlineSVG.md): Renders accessible SVG content inline with support for fixed dimensions or container filling. Differentiates from SVGIcon by being suitable for non-icon SVG graphics while maintaining accessibility standards.
 - [SVGIcon](./SVGIcon.md): Renders accessible inline SVG icons. Supports custom sizing, color theming, rotation, and display properties. Accepts SVG content via children or external source strings.
 - [TruncateList](./TruncateList.md): A utility component that truncates items when space is limited, commonly used in navigation bars. Controls visible item count and provides dropdown for hidden items with customizable spacing and menu triggers.
+- [BaseButton](./BaseButton.md): Low-level utility component for composing Instructure UI buttons. Not intended for direct use; developers should use Button, CloseButton, IconButton, or CondensedButton instead.
+- [Options](./Options.md): A view-only component for building option lists or menus. Supports variants (default, highlighted, selected, disabled), icons, nesting, and custom roles. Does not manage state—requires external event handling.
+- [Mask](./Mask.md): A component that covers its nearest positioned parent element. Can be used fullscreen within a Portal and supports click-to-close functionality. Useful for overlays and blocking UI interactions.
 
 #### contexts
 

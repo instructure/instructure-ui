@@ -9,7 +9,6 @@ type: code
 ---
 type FormMessages = {
   type:
-    | 'newError'
     | 'error'
     | 'hint'
     | 'success'
@@ -27,7 +26,7 @@ type: example
 const PasswordExample = () => {
   const [password, setPassword] = useState('')
   const messages = password.length < 6
-    ? [{type: 'newError', text: 'Password have to be at least 6 characters long!'}]
+    ? [{type: 'error', text: 'Password have to be at least 6 characters long!'}]
     : []
   return (
     <TextInput
@@ -42,11 +41,9 @@ const PasswordExample = () => {
 render(<PasswordExample/>)
 ```
 
-However you might have noticed from the type definition that a message can be `error` and `newError` type. This is due to compatibility reasons. `error` is the older type and does not meet accessibility requirements, `newError` (hance the name) is the newer and more accessible format.
+The `error` type has been updated to meet accessibility requirements with proper icons and visual styling. Previously, there was a `newError` type that provided this enhanced behavior, but it has been consolidated into the standard `error` type for consistency. `newError` has been deprecated.
 
-We wanted to allow users to start using the new format without making it mandatory, but after the introductory period `newError` will be deprecated and `error` type will be changed to look and behave the same way.
-
-With this update we also introduced the "required asterisk" which will display an `*` character next to field labels that are required. This update is not opt-in and will apply to **all** InstUI form components so if you were relying on a custom solution for this feature before, you need to remove that to avoid having double asterisks.
+We also introduced the "required asterisk" which displays an `*` character next to field labels that are required. This update applies to **all** InstUI form components, so if you were relying on a custom solution for this feature before, you need to remove that to avoid having double asterisks.
 
 Here are examples with different form components:
 
@@ -56,17 +53,15 @@ type: example
 ---
 const Example = () => {
   const [showError, setShowError] = useState(true)
-  const [showNewError, setShowNewError] = useState(true)
   const [showLongError, setShowLongError] = useState(false)
   const [isRequired, setIsRequired] = useState(true)
 
   const messages = showError
-    ? [{type: showNewError ? 'newError' : 'error', text: showLongError ? 'Long error. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos voluptas, esse commodi eos facilis voluptatibus harum exercitationem. Et magni est consectetur, eveniet veniam unde! Molestiae labore libero sapiente ad ratione.' : 'Short error message'}]
+    ? [{type: 'error', text: showLongError ? 'Long error. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos voluptas, esse commodi eos facilis voluptatibus harum exercitationem. Et magni est consectetur, eveniet veniam unde! Molestiae labore libero sapiente ad ratione.' : 'Short error message'}]
     : []
 
   const handleSettingsChange = (v) => {
     setShowError(v.includes('showError'))
-    setShowNewError(v.includes('showNewError'))
     setShowLongError(v.includes('showLongError'))
     setIsRequired(v.includes('isRequired'))
   }
@@ -77,10 +72,9 @@ const Example = () => {
         name="errorOptions"
         description="Error message options"
         onChange={handleSettingsChange}
-        defaultValue={['showError', 'showNewError', 'isRequired']}
+        defaultValue={['showError', 'isRequired']}
       >
         <Checkbox label="Show error message" value="showError"/>
-        <Checkbox label="Use the new error type" value="showNewError" />
         <Checkbox label="Use long message" value="showLongError" />
         <Checkbox label="Make fields required" value="isRequired" />
       </CheckboxGroup>
