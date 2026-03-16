@@ -159,7 +159,8 @@
           "type": "dropShadow"
         }
       ],
-      "type": "boxShadow"
+      "type": "boxShadow",
+      "description": "Do not use this for other components"
     },
     "toggleSize": {
       "value": "1.625rem",
@@ -204,10 +205,6 @@
     "toggleBackground": {
       "value": "{color.background.base}",
       "type": "color"
-    },
-    "padding": {
-      "value": "{spacing.space2xs}",
-      "type": "spacing"
     },
     "disabledOpacity": {
       "value": "{opacity.disabled}",

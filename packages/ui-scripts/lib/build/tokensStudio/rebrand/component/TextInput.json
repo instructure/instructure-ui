@@ -33,11 +33,11 @@
       "type": "color"
     },
     "errorBorderColor": {
-      "value": "{color.stroke.interactive.action.destructive.base}",
+      "value": "{color.stroke.interactive.action.destructive.secondary.base}",
       "type": "color"
     },
     "successBorderColor": {
-      "value": "{color.stroke.success}",
+      "value": "{color.stroke.interactive.action.success.secondary.base}",
       "type": "color"
     },
     "borderRadius": {
@@ -129,15 +129,15 @@
       "type": "spacing"
     },
     "paddingHorizontalSm": {
-      "value": "{spacing.padding.interactive.horizontal.sm}",
+      "value": "{spacing.spaceSm}",
       "type": "spacing"
     },
     "paddingHorizontalMd": {
-      "value": "{spacing.padding.interactive.horizontal.md}",
+      "value": "{spacing.spaceMd}",
       "type": "spacing"
     },
     "paddingHorizontalLg": {
-      "value": "{spacing.padding.interactive.horizontal.lg}",
+      "value": "{spacing.spaceMd}",
       "type": "spacing"
     },
     "arrowsBorderHoverColor": {

@@ -23,7 +23,6 @@
  */
 
 import { createContext } from 'react'
-import { MenuItem } from '../../Menu/v1/MenuItem'
 
 /**
 ---
@@ -32,8 +31,9 @@ private: true
 @module MenuContext
 **/
 const MenuContext = createContext({
-  registerMenuItem: (_value: MenuItem) => {},
-  removeMenuItem: (_value: MenuItem) => {}
+  // This is actually a `MenuItem`, but we dont want to version this one
+  registerMenuItem: (_value: any) => {},
+  removeMenuItem: (_value: any) => {}
 })
 
 export default MenuContext

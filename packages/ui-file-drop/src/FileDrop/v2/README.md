@@ -104,7 +104,7 @@ type: example
   accept=".jpg"
   onDropAccepted={([file]) => { console.log(`File accepted ${file.name}`) }}
   onDropRejected={([file]) => { console.log(`File rejected ${file.name}`) }}
-  messages={[{ text: 'Invalid file type', type: 'newError' }]}
+  messages={[{ text: 'Invalid file type', type: 'error' }]}
   renderLabel={
     <Billboard
       size="small"
