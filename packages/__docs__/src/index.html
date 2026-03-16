@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <!-- GitHub Pages SPA redirect for PR preview sub-routes.
-         When serving this page as 404.html, redirect PR preview deep links
-         (e.g. /pr-preview/pr-123/Button) back to the PR preview root with
-         the route encoded as a query parameter. No-op for non-PR paths. -->
+    <base href="/" />
+    <!-- GitHub Pages SPA redirect for subdirectory deployments.
+         When serving this page as 404.html, redirect deep links under
+         /pr-preview/pr-N/ or /latest/ back to the subdirectory root with
+         the route encoded as a query parameter. No-op for root paths. -->
     <script>
       ;(function () {
         var l = window.location
-        var m = l.pathname.match(/^(\/pr-preview\/pr-\d+)(\/.*)$/)
+        var m = l.pathname.match(/^(\/pr-preview\/pr-\d+|\/latest)(\/.*)$/)
         if (m && m[2] !== '/') {
           l.replace(
             m[1] + '/?__spa_route=' + encodeURIComponent(m[2] + l.hash)

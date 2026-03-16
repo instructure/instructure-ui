@@ -59,6 +59,8 @@ jobs:
   deploy-latest:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
+    env:
+      PUBLIC_PATH: '/latest/'
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
