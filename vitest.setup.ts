@@ -36,8 +36,10 @@ beforeAll(() => {
     unobserve: vi.fn(),
     disconnect: vi.fn()
   }))
-
   vi.stubGlobal('ResizeObserver', ResizeObserverMock)
+  // This is needed because getFontSize() reads the font size from here, and
+  // jest-dom does not give this a value, so getFontSize() will return NaN
+  document.documentElement.style.fontSize = '16px'
 })
 
 afterAll(() => {
