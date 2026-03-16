@@ -39,7 +39,7 @@ import 'moment/min/locales'
 import { mirrorHorizontalPlacement } from '@instructure/ui-position'
 
 import { getComponentsForVersion } from './versioned-components'
-import { rebrandDark, rebrandLight } from '@instructure/ui-themes'
+import { dark, light } from '@instructure/ui-themes'
 import { debounce } from '@instructure/debounce'
 
 // eslint-disable-next-line @instructure/no-relative-imports
@@ -78,8 +78,8 @@ const Components = getComponentsForVersion()
 const globals: Record<string, any> = {
   ...Components,
   debounce,
-  rebrandLight,
-  rebrandDark,
+  light,
+  dark,
   moment,
   avatarSquare,
   avatarPortrait,

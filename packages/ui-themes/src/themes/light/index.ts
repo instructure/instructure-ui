@@ -23,25 +23,22 @@
  */
 
 import sharedThemeTokens from '../../sharedThemeTokens'
-import type { Colors } from '@instructure/shared-types'
 import { colors } from './colors'
-import { light as rebrandLight, type Light as RebrandLight } from '../newThemes'
+import { light } from '../newThemes'
 import { Theme } from '../../index'
 
-const key = 'rebrand-light'
+import type { Colors } from '@instructure/shared-types'
+import type { Light } from '../newThemes'
 
-export type RebrandLightTheme = Theme<RebrandLight, 'rebrand-light'> &
+const key = 'light'
+
+export type LightTheme = Theme<Light, 'light'> &
   typeof sharedThemeTokens & { colors: Colors }
-/**
- * Canvas high contrast theme without the `use` function and `variables` prop.
- * Not affected by global theme overrides (`.use()` function).
- *
- * Will be default in the next major version of InstUI
- */
-const theme: RebrandLightTheme = {
-  newTheme: rebrandLight,
+
+const theme: LightTheme = {
+  newTheme: light,
   key,
-  description: 'This theme meets WCAG 2.1 AAA rules for color contrast.',
+  description: 'This theme meets WCAG 2.1 AA rules for color contrast.',
   ...sharedThemeTokens,
   colors
 }
