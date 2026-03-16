@@ -565,13 +565,23 @@ class App extends Component<AppProps, AppState> {
 
   renderThemeSelect() {
     const allThemeKeys = Object.keys(this.state.docsData!.themes)
-    const showRebrandThemes =
+    const showNewThemes =
       this.state.showMinorVersionSelector &&
       this.state.selectedMinorVersion !== 'v11_6'
-    const themeKeys = showRebrandThemes
+    const themeKeys = showNewThemes
       ? allThemeKeys
-      : allThemeKeys.filter((key) => !key.startsWith('rebrand'))
+      : ['canvas', 'canvas-high-contrast']
     const smallScreen = this.state.layout === 'small'
+
+    const displayThemeName = (themeKey: string) => {
+      if (
+        showNewThemes &&
+        (themeKey === 'canvas' || themeKey === 'canvas-high-contrast')
+      ) {
+        return `${themeKey} (legacy)`
+      }
+      return themeKey
+    }
 
     return themeKeys.length > 1 ? (
       <Flex
@@ -584,11 +594,12 @@ class App extends Component<AppProps, AppState> {
             renderLabel="Theme"
             onChange={this.handleThemeChange}
             value={this.state.themeKey}
+            width="16.5rem"
           >
             {themeKeys.map((themeKey) => {
               return (
                 <option key={themeKey} value={themeKey}>
-                  {themeKey}
+                  {displayThemeName(themeKey)}
                 </option>
               )
             })}
