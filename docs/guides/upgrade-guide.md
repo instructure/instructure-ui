@@ -787,8 +787,8 @@ type: embed
 ---
 <V12ChangelogTable
   added={[
-    {name:"borderColor",note:"full border color for rebrand theme"},
-    {name:"borderColorInverse",note:"full border color for rebrand theme"}
+    {name:"borderColor",note:"full border color for light and dark themes"},
+    {name:"borderColorInverse",note:"full border color for light and dark themes"}
   ]}
   removed={[
     {name:"lineHeight",note:""},

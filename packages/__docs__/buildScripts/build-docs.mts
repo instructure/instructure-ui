@@ -30,8 +30,8 @@ import fs from 'fs'
 import {
   canvas,
   canvasHighContrast,
-  rebrandDark,
-  rebrandLight
+  dark,
+  light
 } from '@instructure/ui-themes'
 import type {
   LibraryOptions,
@@ -373,8 +373,8 @@ function parseThemes() {
   const parsed: MainDocsData['themes'] = {}
   parsed[canvas.key] = { resource: canvas }
   parsed[canvasHighContrast.key] = { resource: canvasHighContrast }
-  parsed[rebrandLight.key] = { resource: rebrandLight }
-  parsed[rebrandDark.key] = { resource: rebrandDark }
+  parsed[light.key] = { resource: light }
+  parsed[dark.key] = { resource: dark }
   return parsed
 }
 

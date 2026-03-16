@@ -47,7 +47,7 @@ const generateStyle = (
     borderStyle: 'solid',
     borderColor: componentTheme.borderColor,
     borderRadius: componentTheme.borderRadius,
-    backgroundColor: themeKey === 'rebrand-dark' ? '#000000' : '#FFFFFF',
+    backgroundColor: themeKey === 'dark' ? '#000000' : '#FFFFFF',
     ...(fullscreen && {
       position: 'fixed',
       width: '100vw',
