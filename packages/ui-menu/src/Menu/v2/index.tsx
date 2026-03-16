@@ -34,7 +34,7 @@ import {
 import { logError as error } from '@instructure/console'
 import { containsActiveElement } from '@instructure/ui-dom-utils'
 
-import { MenuContext } from '../../utils/v2/MenuContext'
+import { MenuContext } from '../../utils/v1/MenuContext'
 import { MenuItem } from './MenuItem'
 import type { MenuItemProps } from './MenuItem/props'
 import { MenuItemGroup } from './MenuItemGroup'

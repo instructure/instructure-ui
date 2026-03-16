@@ -1,10 +1,6 @@
 {
   "tooltip": {
-    "paddingHorizontal": {
-      "value": "{spacing.spaceMd}",
-      "type": "spacing"
-    },
-    "paddingVertical": {
+    "padding": {
       "value": "{spacing.spaceMd}",
       "type": "spacing"
     },
@@ -16,21 +12,9 @@
       "value": "{fontWeight.body.base}",
       "type": "fontWeights"
     },
-    "lineHeight": {
-      "value": "{lineHeight.paragraph.textSm}",
-      "type": "lineHeights"
-    },
     "fontSize": {
       "value": "{fontSize.textSm}",
       "type": "fontSizes"
-    },
-    "baseTextColor": {
-      "value": "{color.text.inverse}",
-      "type": "color"
-    },
-    "onColorTextColor": {
-      "value": "{color.text.base}",
-      "type": "color"
     }
   }
 }

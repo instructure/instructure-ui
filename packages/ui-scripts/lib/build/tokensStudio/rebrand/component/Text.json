@@ -182,6 +182,10 @@
       "value": "{color.text.onColor}",
       "type": "color"
     },
+    "inverseColor": {
+      "value": "{color.text.inverse}",
+      "type": "color"
+    },
     "mutedColor": {
       "value": "{color.text.muted}",
       "type": "color"

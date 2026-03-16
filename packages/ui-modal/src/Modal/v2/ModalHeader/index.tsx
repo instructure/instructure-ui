@@ -38,6 +38,7 @@ import generateStyle from './styles'
 
 import { allowedProps } from './props'
 import type { ModalHeaderProps, ModalHeaderStyleProps } from './props'
+import ModalContext from '../ModalContext'
 
 type CloseButtonChild = ComponentElement<CloseButtonProps, CloseButton>
 
@@ -58,9 +59,34 @@ class ModalHeader extends Component<ModalHeaderProps> {
   }
 
   ref: HTMLDivElement | null = null
+  declare context: React.ContextType<typeof ModalContext>
+  static contextType = ModalContext
+
+  /**
+   * Gets all text in a DOM subtree, text under <button> nodes is excluded
+   */
+  getTextExcludingButtons = (root: Node) => {
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode(node) {
+        return node.parentElement?.closest('button')
+          ? NodeFilter.FILTER_REJECT
+          : NodeFilter.FILTER_ACCEPT
+      }
+    })
+    let text = ''
+    let current
+    while ((current = walker.nextNode())) {
+      text += current.nodeValue
+    }
+    return text
+  }
 
   handleRef = (el: HTMLDivElement | null) => {
     this.ref = el
+    if (el) {
+      const txt = this.getTextExcludingButtons(el)
+      this.context.setBodyScrollAriaLabel?.(txt)
+    }
   }
 
   componentDidMount() {

@@ -1,16 +1,12 @@
 {
   "popover": {
-    "borderRadiusBase": {
-      "value": "{borderRadius.md}",
+    "borderColor": {
+      "value": "{color.stroke.base}",
+      "type": "color"
+    },
+    "borderRadius": {
+      "value": "{borderRadius.lg}",
       "type": "borderRadius"
-    },
-    "baseBackgroundColor": {
-      "value": "{color.background.elevatedSurface.inverse}",
-      "type": "color"
-    },
-    "onColorBackgroundColor": {
-      "value": "{color.background.elevatedSurface.base}",
-      "type": "color"
     }
   }
 }
