@@ -5,608 +5,329 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 # [11.6.0](https://github.com/instructure/instructure-ui/compare/v11.5.0...v11.6.0) (2026-02-18)
 
-
 ### Bug Fixes
 
-* **ui-modal:** voiceOver in Chrome treats scrollable modal body as single interactive object preventing line-by-line navigation ([0be3fb1](https://github.com/instructure/instructure-ui/commit/0be3fb1dee541a37c2d38ae6656fd0330f651265))
-
-
-
-
+- **ui-modal:** voiceOver in Chrome treats scrollable modal body as single interactive object preventing line-by-line navigation ([0be3fb1](https://github.com/instructure/instructure-ui/commit/0be3fb1dee541a37c2d38ae6656fd0330f651265))
 
 # [11.5.0](https://github.com/instructure/instructure-ui/compare/v11.4.0...v11.5.0) (2026-02-03)
 
 **Note:** Version bump only for package @instructure/ui-modal
 
-
-
-
-
 # [11.4.0](https://github.com/instructure/instructure-ui/compare/v11.3.0...v11.4.0) (2026-01-20)
 
 **Note:** Version bump only for package @instructure/ui-modal
 
-
-
-
-
 # [11.3.0](https://github.com/instructure/instructure-ui/compare/v11.2.0...v11.3.0) (2026-01-12)
-
 
 ### Bug Fixes
 
-* **ui-modal:** adjust scrollbar detection tolerance in ModalBody ([5ae1f42](https://github.com/instructure/instructure-ui/commit/5ae1f42f47102b87a8c7afabdd9ab51b331de96a))
-
-
-
-
+- **ui-modal:** adjust scrollbar detection tolerance in ModalBody ([5ae1f42](https://github.com/instructure/instructure-ui/commit/5ae1f42f47102b87a8c7afabdd9ab51b331de96a))
 
 # [11.2.0](https://github.com/instructure/instructure-ui/compare/v11.0.1...v11.2.0) (2025-11-06)
 
-
 ### Features
 
-* **many:** migrate from npm to pnpm ([f7bb16e](https://github.com/instructure/instructure-ui/commit/f7bb16e114df83984c67d5a6e07fb4d9c65efc53))
-
-
-
-
+- **many:** migrate from npm to pnpm ([f7bb16e](https://github.com/instructure/instructure-ui/commit/f7bb16e114df83984c67d5a6e07fb4d9c65efc53))
 
 # [11.1.0](https://github.com/instructure/instructure-ui/compare/v11.0.1...v11.1.0) (2025-11-05)
 
-
 ### Features
 
-* **many:** migrate from npm to pnpm ([f7bb16e](https://github.com/instructure/instructure-ui/commit/f7bb16e114df83984c67d5a6e07fb4d9c65efc53))
-
-
-
-
+- **many:** migrate from npm to pnpm ([f7bb16e](https://github.com/instructure/instructure-ui/commit/f7bb16e114df83984c67d5a6e07fb4d9c65efc53))
 
 ## [11.0.1](https://github.com/instructure/instructure-ui/compare/v11.0.0...v11.0.1) (2025-10-13)
 
 **Note:** Version bump only for package @instructure/ui-modal
 
-
-
-
-
 # [11.0.0](https://github.com/instructure/instructure-ui/compare/v10.26.0...v11.0.0) (2025-10-06)
-
 
 ### Features
 
-* **many:** instUI v11 release ([36f5438](https://github.com/instructure/instructure-ui/commit/36f54382669186227ba24798bbf7201ef2f5cd4c))
-
+- **many:** instUI v11 release ([36f5438](https://github.com/instructure/instructure-ui/commit/36f54382669186227ba24798bbf7201ef2f5cd4c))
 
 ### BREAKING CHANGES
 
-* **many:** InstUI v11 contains the following breaking changes:
-- React 16 and 17 are no longer supported
-- remove `PropTypes` from all packages
-- remove `CodeEditor` component
-- remove `@instui/theme-registry` package
-- remove `@testable`, `@experimental`, `@hack` decorators
-- InstUISettingsProvider's `as` prop is removed
-- `canvas.use()`, `canvasHighContrast.use()` functions are removed
-- `canvasThemeLocal`, `canvasHighContrastThemeLocal` are removed
-- `variables` field on theme objects are removed
-- remove deprecated props from Table: Row's `isStacked`, Body's
+- **many:** InstUI v11 contains the following breaking changes:
+
+* React 16 and 17 are no longer supported
+* remove `PropTypes` from all packages
+* remove `CodeEditor` component
+* remove `@instui/theme-registry` package
+* remove `@testable`, `@experimental`, `@hack` decorators
+* InstUISettingsProvider's `as` prop is removed
+* `canvas.use()`, `canvasHighContrast.use()` functions are removed
+* `canvasThemeLocal`, `canvasHighContrastThemeLocal` are removed
+* `variables` field on theme objects are removed
+* remove deprecated props from Table: Row's `isStacked`, Body's
   `isStacked`, `hover`, and `headers`
-- `Table`'s `caption` prop is now required
-- `ui-dom-utils`'s `getComputedStyle` can now return `undefined`
-
-
-
-
+* `Table`'s `caption` prop is now required
+* `ui-dom-utils`'s `getComputedStyle` can now return `undefined`
 
 # [10.26.0](https://github.com/instructure/instructure-ui/compare/v10.25.0...v10.26.0) (2025-10-01)
 
 **Note:** Version bump only for package @instructure/ui-modal
 
-
-
-
-
 # [10.25.0](https://github.com/instructure/instructure-ui/compare/v10.24.2...v10.25.0) (2025-09-09)
-
 
 ### Bug Fixes
 
-* **ui-modal:** fix Modal.body throwing error when 'as' is set to a React component ([350a05c](https://github.com/instructure/instructure-ui/commit/350a05c109ac219a885d0998290d00b20584e168))
-* **ui-modal:** fix tabbable modal edge case ([e66ad32](https://github.com/instructure/instructure-ui/commit/e66ad32360a428668204bb8fb1299448af639200))
-
-
-
-
+- **ui-modal:** fix Modal.body throwing error when 'as' is set to a React component ([350a05c](https://github.com/instructure/instructure-ui/commit/350a05c109ac219a885d0998290d00b20584e168))
+- **ui-modal:** fix tabbable modal edge case ([e66ad32](https://github.com/instructure/instructure-ui/commit/e66ad32360a428668204bb8fb1299448af639200))
 
 ## [10.24.2](https://github.com/instructure/instructure-ui/compare/v10.24.1...v10.24.2) (2025-08-11)
 
 **Note:** Version bump only for package @instructure/ui-modal
 
-
-
-
-
 ## [10.24.1](https://github.com/instructure/instructure-ui/compare/v10.24.0...v10.24.1) (2025-07-30)
 
 **Note:** Version bump only for package @instructure/ui-modal
 
-
-
-
-
 # [10.24.0](https://github.com/instructure/instructure-ui/compare/v10.23.0...v10.24.0) (2025-07-18)
-
 
 ### Bug Fixes
 
-* **ui-modal:** remove tabbability from modalBody if there is no scrollbar ([eb790ba](https://github.com/instructure/instructure-ui/commit/eb790ba3a05cb993a006f89b8cccf791ed918303))
-
-
-
-
+- **ui-modal:** remove tabbability from modalBody if there is no scrollbar ([eb790ba](https://github.com/instructure/instructure-ui/commit/eb790ba3a05cb993a006f89b8cccf791ed918303))
 
 # [10.23.0](https://github.com/instructure/instructure-ui/compare/v10.22.0...v10.23.0) (2025-07-09)
 
 **Note:** Version bump only for package @instructure/ui-modal
 
-
-
-
-
 # [10.22.0](https://github.com/instructure/instructure-ui/compare/v10.21.0...v10.22.0) (2025-07-04)
-
 
 ### Bug Fixes
 
-* **ui-modal,ui-dom-utils:** fix Modal focus trap broken when it has a scrollbar ([0e4adf0](https://github.com/instructure/instructure-ui/commit/0e4adf07e17819f08f1004eb0f3b5c0036dc413b))
-
-
-
-
+- **ui-modal,ui-dom-utils:** fix Modal focus trap broken when it has a scrollbar ([0e4adf0](https://github.com/instructure/instructure-ui/commit/0e4adf07e17819f08f1004eb0f3b5c0036dc413b))
 
 # [10.21.0](https://github.com/instructure/instructure-ui/compare/v10.20.1...v10.21.0) (2025-06-27)
 
 **Note:** Version bump only for package @instructure/ui-modal
 
-
-
-
-
 ## [10.20.1](https://github.com/instructure/instructure-ui/compare/v10.20.0...v10.20.1) (2025-06-17)
 
 **Note:** Version bump only for package @instructure/ui-modal
 
-
-
-
-
 # [10.20.0](https://github.com/instructure/instructure-ui/compare/v10.19.1...v10.20.0) (2025-06-13)
-
 
 ### Bug Fixes
 
-* **many:** update dependencies, browsersdb and moment timezone database ([3813636](https://github.com/instructure/instructure-ui/commit/3813636458c901ad4bc74a4d5ae015cb55defcb2))
-* **ui-modal:** fill the available space if fullscreen prop is set ([6e42d1e](https://github.com/instructure/instructure-ui/commit/6e42d1e8f11266af16c7eb7e2b858eb39ebeec4d))
-
-
-
-
+- **many:** update dependencies, browsersdb and moment timezone database ([3813636](https://github.com/instructure/instructure-ui/commit/3813636458c901ad4bc74a4d5ae015cb55defcb2))
+- **ui-modal:** fill the available space if fullscreen prop is set ([6e42d1e](https://github.com/instructure/instructure-ui/commit/6e42d1e8f11266af16c7eb7e2b858eb39ebeec4d))
 
 ## [10.19.1](https://github.com/instructure/instructure-ui/compare/v10.19.0...v10.19.1) (2025-06-05)
 
-
 ### Bug Fixes
 
-* **ui-modal:** save modal from unnecessary rerender ([a473127](https://github.com/instructure/instructure-ui/commit/a473127b2049b02e5463b71c84a0b803fd9d40d4))
-
-
-
-
+- **ui-modal:** save modal from unnecessary rerender ([a473127](https://github.com/instructure/instructure-ui/commit/a473127b2049b02e5463b71c84a0b803fd9d40d4))
 
 # [10.19.0](https://github.com/instructure/instructure-ui/compare/v10.18.1...v10.19.0) (2025-06-03)
 
 **Note:** Version bump only for package @instructure/ui-modal
 
-
-
-
-
 ## [10.18.1](https://github.com/instructure/instructure-ui/compare/v10.18.0...v10.18.1) (2025-05-29)
 
 **Note:** Version bump only for package @instructure/ui-modal
-
-
-
-
 
 # [10.18.0](https://github.com/instructure/instructure-ui/compare/v10.17.0...v10.18.0) (2025-05-26)
 
 **Note:** Version bump only for package @instructure/ui-modal
 
-
-
-
-
 # [10.17.0](https://github.com/instructure/instructure-ui/compare/v10.16.4...v10.17.0) (2025-05-20)
 
 **Note:** Version bump only for package @instructure/ui-modal
-
-
-
-
 
 ## [10.16.4](https://github.com/instructure/instructure-ui/compare/v10.16.3...v10.16.4) (2025-05-09)
 
 **Note:** Version bump only for package @instructure/ui-modal
 
-
-
-
-
 ## [10.16.3](https://github.com/instructure/instructure-ui/compare/v10.16.1...v10.16.3) (2025-04-30)
-
 
 ### Bug Fixes
 
-* **ui-modal:** set inverseBackground to grey100100 ([2ef4a6b](https://github.com/instructure/instructure-ui/commit/2ef4a6b261d0412b43b690f5f6782bfcea17b7a0))
-
-
-
-
+- **ui-modal:** set inverseBackground to grey100100 ([2ef4a6b](https://github.com/instructure/instructure-ui/commit/2ef4a6b261d0412b43b690f5f6782bfcea17b7a0))
 
 ## [10.16.2](https://github.com/instructure/instructure-ui/compare/v10.16.1...v10.16.2) (2025-04-22)
 
 **Note:** Version bump only for package @instructure/ui-modal
 
-
-
-
-
 ## [10.16.1](https://github.com/instructure/instructure-ui/compare/v10.16.0...v10.16.1) (2025-04-22)
 
 **Note:** Version bump only for package @instructure/ui-modal
 
-
-
-
-
 # [10.16.0](https://github.com/instructure/instructure-ui/compare/v10.15.2...v10.16.0) (2025-04-11)
-
 
 ### Bug Fixes
 
-* **ui-buttons:** fix button border color ([5322f9c](https://github.com/instructure/instructure-ui/commit/5322f9c8d359a394e0ea4caa5dbab982169edddf))
-
-
-
-
+- **ui-buttons:** fix button border color ([5322f9c](https://github.com/instructure/instructure-ui/commit/5322f9c8d359a394e0ea4caa5dbab982169edddf))
 
 ## [10.15.2](https://github.com/instructure/instructure-ui/compare/v10.15.1...v10.15.2) (2025-04-07)
 
-
 ### Bug Fixes
 
-* update PropTypes to align with the new spacing tokens ([223d55b](https://github.com/instructure/instructure-ui/commit/223d55bad95e2a3a8b298d622e5b1d0fbab6b289))
-
-
-
-
+- update PropTypes to align with the new spacing tokens ([223d55b](https://github.com/instructure/instructure-ui/commit/223d55bad95e2a3a8b298d622e5b1d0fbab6b289))
 
 ## [10.15.1](https://github.com/instructure/instructure-ui/compare/v10.15.0...v10.15.1) (2025-04-03)
 
 **Note:** Version bump only for package @instructure/ui-modal
 
-
-
-
-
 # [10.15.0](https://github.com/instructure/instructure-ui/compare/v10.14.0...v10.15.0) (2025-03-31)
 
 **Note:** Version bump only for package @instructure/ui-modal
-
-
-
-
 
 # [10.14.0](https://github.com/instructure/instructure-ui/compare/v10.13.0...v10.14.0) (2025-03-17)
 
 **Note:** Version bump only for package @instructure/ui-modal
 
-
-
-
-
 # [10.13.0](https://github.com/instructure/instructure-ui/compare/v10.12.0...v10.13.0) (2025-03-06)
 
 **Note:** Version bump only for package @instructure/ui-modal
 
-
-
-
-
 # [10.12.0](https://github.com/instructure/instructure-ui/compare/v10.11.0...v10.12.0) (2025-02-24)
-
 
 ### Bug Fixes
 
-* **ui-modal:** make Modal's header non-sticky with small window height ([db5c708](https://github.com/instructure/instructure-ui/commit/db5c7082ec4834793d83cf7d6f469c4fbaa83eed))
-
-
-
-
+- **ui-modal:** make Modal's header non-sticky with small window height ([db5c708](https://github.com/instructure/instructure-ui/commit/db5c7082ec4834793d83cf7d6f469c4fbaa83eed))
 
 # [10.11.0](https://github.com/instructure/instructure-ui/compare/v10.10.0...v10.11.0) (2025-02-03)
 
 **Note:** Version bump only for package @instructure/ui-modal
 
-
-
-
-
 # [10.10.0](https://github.com/instructure/instructure-ui/compare/v10.9.0...v10.10.0) (2024-12-18)
 
 **Note:** Version bump only for package @instructure/ui-modal
 
-
-
-
-
 # [10.9.0](https://github.com/instructure/instructure-ui/compare/v10.8.0...v10.9.0) (2024-12-12)
-
 
 ### Features
 
-* **many:** make meta package export every component and type definition ([dee9abb](https://github.com/instructure/instructure-ui/commit/dee9abb9cbffa4abc9edf48fb7d8ad41fea385b4))
-
-
-
-
+- **many:** make meta package export every component and type definition ([dee9abb](https://github.com/instructure/instructure-ui/commit/dee9abb9cbffa4abc9edf48fb7d8ad41fea385b4))
 
 # [10.8.0](https://github.com/instructure/instructure-ui/compare/v10.7.0...v10.8.0) (2024-12-09)
 
 **Note:** Version bump only for package @instructure/ui-modal
 
-
-
-
-
 # [10.7.0](https://github.com/instructure/instructure-ui/compare/v10.6.1...v10.7.0) (2024-12-03)
 
 **Note:** Version bump only for package @instructure/ui-modal
-
-
-
-
 
 ## [10.6.1](https://github.com/instructure/instructure-ui/compare/v10.6.0...v10.6.1) (2024-11-26)
 
 **Note:** Version bump only for package @instructure/ui-modal
 
-
-
-
-
 # [10.6.0](https://github.com/instructure/instructure-ui/compare/v10.5.0...v10.6.0) (2024-11-18)
 
 **Note:** Version bump only for package @instructure/ui-modal
-
-
-
-
 
 # [10.5.0](https://github.com/instructure/instructure-ui/compare/v10.4.1...v10.5.0) (2024-11-07)
 
 **Note:** Version bump only for package @instructure/ui-modal
 
-
-
-
-
 ## [10.4.1](https://github.com/instructure/instructure-ui/compare/v10.4.0...v10.4.1) (2024-10-28)
-
 
 ### Bug Fixes
 
-* update license ([1c039d9](https://github.com/instructure/instructure-ui/commit/1c039d9cbf5a3ea99b59803ddde5c6c0b2d76ba5))
-
-
-
-
+- update license ([1c039d9](https://github.com/instructure/instructure-ui/commit/1c039d9cbf5a3ea99b59803ddde5c6c0b2d76ba5))
 
 # [10.4.0](https://github.com/instructure/instructure-ui/compare/v10.3.0...v10.4.0) (2024-10-16)
 
-
 ### Features
 
-* **ui-modal:** modify modal to support less strict children ([40f8ca2](https://github.com/instructure/instructure-ui/commit/40f8ca24e80ceb41e8c5d05d1f9d5e8f77113370))
-
-
-
-
+- **ui-modal:** modify modal to support less strict children ([40f8ca2](https://github.com/instructure/instructure-ui/commit/40f8ca24e80ceb41e8c5d05d1f9d5e8f77113370))
 
 # [10.3.0](https://github.com/instructure/instructure-ui/compare/v10.2.2...v10.3.0) (2024-10-03)
 
 **Note:** Version bump only for package @instructure/ui-modal
 
-
-
-
-
 ## [10.2.2](https://github.com/instructure/instructure-ui/compare/v10.2.1...v10.2.2) (2024-09-13)
 
 **Note:** Version bump only for package @instructure/ui-modal
-
-
-
-
 
 ## [10.2.1](https://github.com/instructure/instructure-ui/compare/v10.2.0...v10.2.1) (2024-08-30)
 
 **Note:** Version bump only for package @instructure/ui-modal
 
-
-
-
-
 # [10.2.0](https://github.com/instructure/instructure-ui/compare/v10.0.0...v10.2.0) (2024-08-23)
-
 
 ### Features
 
-* **many:** add data visualization colors, refactor theme code ([c395e17](https://github.com/instructure/instructure-ui/commit/c395e17a43be9fd7ec9d6854f28ae8584c3667bc))
-
-
-
-
+- **many:** add data visualization colors, refactor theme code ([c395e17](https://github.com/instructure/instructure-ui/commit/c395e17a43be9fd7ec9d6854f28ae8584c3667bc))
 
 # [10.1.0](https://github.com/instructure/instructure-ui/compare/v10.0.0...v10.1.0) (2024-08-23)
 
-
 ### Features
 
-* **many:** add data visualization colors, refactor theme code ([c395e17](https://github.com/instructure/instructure-ui/commit/c395e17a43be9fd7ec9d6854f28ae8584c3667bc))
-
-
-
-
+- **many:** add data visualization colors, refactor theme code ([c395e17](https://github.com/instructure/instructure-ui/commit/c395e17a43be9fd7ec9d6854f28ae8584c3667bc))
 
 # [10.0.0](https://github.com/instructure/instructure-ui/compare/v9.5.1...v10.0.0) (2024-07-31)
 
-
 ### Bug Fixes
 
-* **ui-modal:** fix modal border color ([0363846](https://github.com/instructure/instructure-ui/commit/03638468d7ba38993977ba7679a7f7dc7054c3a0))
-
+- **ui-modal:** fix modal border color ([0363846](https://github.com/instructure/instructure-ui/commit/03638468d7ba38993977ba7679a7f7dc7054c3a0))
 
 ### Features
 
-* **many:** rewrite color system ([1e5809e](https://github.com/instructure/instructure-ui/commit/1e5809e28dee8c2a71703a429609b8d2f95d76e6))
-
+- **many:** rewrite color system ([1e5809e](https://github.com/instructure/instructure-ui/commit/1e5809e28dee8c2a71703a429609b8d2f95d76e6))
 
 ### BREAKING CHANGES
 
-* **many:** Breaks color overrides in certain cases
-
-
-
-
+- **many:** Breaks color overrides in certain cases
 
 ## [9.5.1](https://github.com/instructure/instructure-ui/compare/v9.5.0...v9.5.1) (2024-07-30)
 
-
 ### Bug Fixes
 
-* **ui-modal:** inherit border radius for ModalHeader ([03cf94d](https://github.com/instructure/instructure-ui/commit/03cf94d2d2a2c8f639c9e23eb9af78e38945db60))
-
-
-
-
+- **ui-modal:** inherit border radius for ModalHeader ([03cf94d](https://github.com/instructure/instructure-ui/commit/03cf94d2d2a2c8f639c9e23eb9af78e38945db60))
 
 # [9.5.0](https://github.com/instructure/instructure-ui/compare/v9.3.0...v9.5.0) (2024-07-26)
 
 **Note:** Version bump only for package @instructure/ui-modal
 
-
-
-
-
 # [9.4.0](https://github.com/instructure/instructure-ui/compare/v9.3.0...v9.4.0) (2024-07-26)
 
 **Note:** Version bump only for package @instructure/ui-modal
-
-
-
-
 
 # [9.3.0](https://github.com/instructure/instructure-ui/compare/v9.2.0...v9.3.0) (2024-07-17)
 
 **Note:** Version bump only for package @instructure/ui-modal
 
-
-
-
-
 # [9.2.0](https://github.com/instructure/instructure-ui/compare/v9.1.0...v9.2.0) (2024-07-09)
 
 **Note:** Version bump only for package @instructure/ui-modal
-
-
-
-
 
 # [9.1.0](https://github.com/instructure/instructure-ui/compare/v9.0.1...v9.1.0) (2024-06-14)
 
 **Note:** Version bump only for package @instructure/ui-modal
 
-
-
-
-
 ## [9.0.1](https://github.com/instructure/instructure-ui/compare/v9.0.0...v9.0.1) (2024-05-09)
 
 **Note:** Version bump only for package @instructure/ui-modal
-
-
-
-
 
 # [9.0.0](https://github.com/instructure/instructure-ui/compare/v8.56.0...v9.0.0) (2024-05-09)
 
 **Note:** Version bump only for package @instructure/ui-modal
 
-
-
-
-
 # [8.56.0](https://github.com/instructure/instructure-ui/compare/v8.55.1...v8.56.0) (2024-05-06)
 
 **Note:** Version bump only for package @instructure/ui-modal
-
-
-
-
 
 ## [8.55.1](https://github.com/instructure/instructure-ui/compare/v8.55.0...v8.55.1) (2024-04-30)
 
 **Note:** Version bump only for package @instructure/ui-modal
 
-
-
-
-
 # [8.55.0](https://github.com/instructure/instructure-ui/compare/v8.54.0...v8.55.0) (2024-04-09)
 
 **Note:** Version bump only for package @instructure/ui-modal
-
-
-
-
 
 # [8.54.0](https://github.com/instructure/instructure-ui/compare/v8.53.2...v8.54.0) (2024-03-21)
 
 **Note:** Version bump only for package @instructure/ui-modal
 
-
-
-
-
 ## [8.53.2](https://github.com/instructure/instructure-ui/compare/v8.53.1...v8.53.2) (2024-02-15)
 
 **Note:** Version bump only for package @instructure/ui-modal
 
-
-
-
-
 ## [8.53.1](https://github.com/instructure/instructure-ui/compare/v8.53.0...v8.53.1) (2024-02-09)
 
 **Note:** Version bump only for package @instructure/ui-modal
-
-
-
-
 
 # [8.53.0](https://github.com/instructure/instructure-ui/compare/v8.52.0...v8.53.0) (2024-02-08)
 

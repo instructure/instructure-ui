@@ -7,576 +7,306 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
 
-
-
-
-
 # [11.5.0](https://github.com/instructure/instructure-ui/compare/v11.4.0...v11.5.0) (2026-02-03)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
-
-
-
-
 
 # [11.4.0](https://github.com/instructure/instructure-ui/compare/v11.3.0...v11.4.0) (2026-01-20)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
 
-
-
-
-
 # [11.3.0](https://github.com/instructure/instructure-ui/compare/v11.2.0...v11.3.0) (2026-01-12)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
 
-
-
-
-
 # [11.2.0](https://github.com/instructure/instructure-ui/compare/v11.0.1...v11.2.0) (2025-11-06)
-
 
 ### Features
 
-* **many:** migrate from npm to pnpm ([f7bb16e](https://github.com/instructure/instructure-ui/commit/f7bb16e114df83984c67d5a6e07fb4d9c65efc53))
-
-
-
-
+- **many:** migrate from npm to pnpm ([f7bb16e](https://github.com/instructure/instructure-ui/commit/f7bb16e114df83984c67d5a6e07fb4d9c65efc53))
 
 # [11.1.0](https://github.com/instructure/instructure-ui/compare/v11.0.1...v11.1.0) (2025-11-05)
 
-
 ### Features
 
-* **many:** migrate from npm to pnpm ([f7bb16e](https://github.com/instructure/instructure-ui/commit/f7bb16e114df83984c67d5a6e07fb4d9c65efc53))
-
-
-
-
+- **many:** migrate from npm to pnpm ([f7bb16e](https://github.com/instructure/instructure-ui/commit/f7bb16e114df83984c67d5a6e07fb4d9c65efc53))
 
 ## [11.0.1](https://github.com/instructure/instructure-ui/compare/v11.0.0...v11.0.1) (2025-10-13)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
 
-
-
-
-
 # [11.0.0](https://github.com/instructure/instructure-ui/compare/v10.26.0...v11.0.0) (2025-10-06)
-
 
 ### Features
 
-* **many:** instUI v11 release ([36f5438](https://github.com/instructure/instructure-ui/commit/36f54382669186227ba24798bbf7201ef2f5cd4c))
-
+- **many:** instUI v11 release ([36f5438](https://github.com/instructure/instructure-ui/commit/36f54382669186227ba24798bbf7201ef2f5cd4c))
 
 ### BREAKING CHANGES
 
-* **many:** InstUI v11 contains the following breaking changes:
-- React 16 and 17 are no longer supported
-- remove `PropTypes` from all packages
-- remove `CodeEditor` component
-- remove `@instui/theme-registry` package
-- remove `@testable`, `@experimental`, `@hack` decorators
-- InstUISettingsProvider's `as` prop is removed
-- `canvas.use()`, `canvasHighContrast.use()` functions are removed
-- `canvasThemeLocal`, `canvasHighContrastThemeLocal` are removed
-- `variables` field on theme objects are removed
-- remove deprecated props from Table: Row's `isStacked`, Body's
+- **many:** InstUI v11 contains the following breaking changes:
+
+* React 16 and 17 are no longer supported
+* remove `PropTypes` from all packages
+* remove `CodeEditor` component
+* remove `@instui/theme-registry` package
+* remove `@testable`, `@experimental`, `@hack` decorators
+* InstUISettingsProvider's `as` prop is removed
+* `canvas.use()`, `canvasHighContrast.use()` functions are removed
+* `canvasThemeLocal`, `canvasHighContrastThemeLocal` are removed
+* `variables` field on theme objects are removed
+* remove deprecated props from Table: Row's `isStacked`, Body's
   `isStacked`, `hover`, and `headers`
-- `Table`'s `caption` prop is now required
-- `ui-dom-utils`'s `getComputedStyle` can now return `undefined`
-
-
-
-
+* `Table`'s `caption` prop is now required
+* `ui-dom-utils`'s `getComputedStyle` can now return `undefined`
 
 # [10.26.0](https://github.com/instructure/instructure-ui/compare/v10.25.0...v10.26.0) (2025-10-01)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
 
-
-
-
-
 # [10.25.0](https://github.com/instructure/instructure-ui/compare/v10.24.2...v10.25.0) (2025-09-09)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
-
-
-
-
 
 ## [10.24.2](https://github.com/instructure/instructure-ui/compare/v10.24.1...v10.24.2) (2025-08-11)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
 
-
-
-
-
 ## [10.24.1](https://github.com/instructure/instructure-ui/compare/v10.24.0...v10.24.1) (2025-07-30)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
-
-
-
-
 
 # [10.24.0](https://github.com/instructure/instructure-ui/compare/v10.23.0...v10.24.0) (2025-07-18)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
 
-
-
-
-
 # [10.23.0](https://github.com/instructure/instructure-ui/compare/v10.22.0...v10.23.0) (2025-07-09)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
-
-
-
-
 
 # [10.22.0](https://github.com/instructure/instructure-ui/compare/v10.21.0...v10.22.0) (2025-07-04)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
 
-
-
-
-
 # [10.21.0](https://github.com/instructure/instructure-ui/compare/v10.20.1...v10.21.0) (2025-06-27)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
-
-
-
-
 
 ## [10.20.1](https://github.com/instructure/instructure-ui/compare/v10.20.0...v10.20.1) (2025-06-17)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
 
-
-
-
-
 # [10.20.0](https://github.com/instructure/instructure-ui/compare/v10.19.1...v10.20.0) (2025-06-13)
-
 
 ### Bug Fixes
 
-* **many:** update dependencies, browsersdb and moment timezone database ([3813636](https://github.com/instructure/instructure-ui/commit/3813636458c901ad4bc74a4d5ae015cb55defcb2))
-
-
-
-
+- **many:** update dependencies, browsersdb and moment timezone database ([3813636](https://github.com/instructure/instructure-ui/commit/3813636458c901ad4bc74a4d5ae015cb55defcb2))
 
 ## [10.19.1](https://github.com/instructure/instructure-ui/compare/v10.19.0...v10.19.1) (2025-06-05)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
 
-
-
-
-
 # [10.19.0](https://github.com/instructure/instructure-ui/compare/v10.18.1...v10.19.0) (2025-06-03)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
-
-
-
-
 
 ## [10.18.1](https://github.com/instructure/instructure-ui/compare/v10.18.0...v10.18.1) (2025-05-29)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
 
-
-
-
-
 # [10.18.0](https://github.com/instructure/instructure-ui/compare/v10.17.0...v10.18.0) (2025-05-26)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
-
-
-
-
 
 # [10.17.0](https://github.com/instructure/instructure-ui/compare/v10.16.4...v10.17.0) (2025-05-20)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
 
-
-
-
-
 ## [10.16.4](https://github.com/instructure/instructure-ui/compare/v10.16.3...v10.16.4) (2025-05-09)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
-
-
-
-
 
 ## [10.16.3](https://github.com/instructure/instructure-ui/compare/v10.16.1...v10.16.3) (2025-04-30)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
 
-
-
-
-
 ## [10.16.2](https://github.com/instructure/instructure-ui/compare/v10.16.1...v10.16.2) (2025-04-22)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
-
-
-
-
 
 ## [10.16.1](https://github.com/instructure/instructure-ui/compare/v10.16.0...v10.16.1) (2025-04-22)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
 
-
-
-
-
 # [10.16.0](https://github.com/instructure/instructure-ui/compare/v10.15.2...v10.16.0) (2025-04-11)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
-
-
-
-
 
 ## [10.15.2](https://github.com/instructure/instructure-ui/compare/v10.15.1...v10.15.2) (2025-04-07)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
 
-
-
-
-
 ## [10.15.1](https://github.com/instructure/instructure-ui/compare/v10.15.0...v10.15.1) (2025-04-03)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
 
-
-
-
-
 # [10.15.0](https://github.com/instructure/instructure-ui/compare/v10.14.0...v10.15.0) (2025-03-31)
-
 
 ### Bug Fixes
 
-* **ui-source-code-editor:** make scrollview in SourceCodeEditor keyboard accessible ([6b3701c](https://github.com/instructure/instructure-ui/commit/6b3701cf076431ec56e0e5cfc720bbdc2114d885))
-
-
-
-
+- **ui-source-code-editor:** make scrollview in SourceCodeEditor keyboard accessible ([6b3701c](https://github.com/instructure/instructure-ui/commit/6b3701cf076431ec56e0e5cfc720bbdc2114d885))
 
 # [10.14.0](https://github.com/instructure/instructure-ui/compare/v10.13.0...v10.14.0) (2025-03-17)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
 
-
-
-
-
 # [10.13.0](https://github.com/instructure/instructure-ui/compare/v10.12.0...v10.13.0) (2025-03-06)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
 
-
-
-
-
 # [10.12.0](https://github.com/instructure/instructure-ui/compare/v10.11.0...v10.12.0) (2025-02-24)
-
 
 ### Bug Fixes
 
-* **ui-sourcecodeeditor:** link label to input field programmatically ([b092b45](https://github.com/instructure/instructure-ui/commit/b092b457777c2dea480c09da87989cf985a1713e))
-
-
-
-
+- **ui-sourcecodeeditor:** link label to input field programmatically ([b092b45](https://github.com/instructure/instructure-ui/commit/b092b457777c2dea480c09da87989cf985a1713e))
 
 # [10.11.0](https://github.com/instructure/instructure-ui/compare/v10.10.0...v10.11.0) (2025-02-03)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
 
-
-
-
-
 # [10.10.0](https://github.com/instructure/instructure-ui/compare/v10.9.0...v10.10.0) (2024-12-18)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
-
-
-
-
 
 # [10.9.0](https://github.com/instructure/instructure-ui/compare/v10.8.0...v10.9.0) (2024-12-12)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
 
-
-
-
-
 # [10.8.0](https://github.com/instructure/instructure-ui/compare/v10.7.0...v10.8.0) (2024-12-09)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
 
-
-
-
-
 # [10.7.0](https://github.com/instructure/instructure-ui/compare/v10.6.1...v10.7.0) (2024-12-03)
-
 
 ### Bug Fixes
 
-* **ui-source-code-editor:** prevent Vite from erroring out during the build in React 16/17 ([c871244](https://github.com/instructure/instructure-ui/commit/c8712447a296fc0e3e436536e983196be27ad388))
-
-
-
-
+- **ui-source-code-editor:** prevent Vite from erroring out during the build in React 16/17 ([c871244](https://github.com/instructure/instructure-ui/commit/c8712447a296fc0e3e436536e983196be27ad388))
 
 ## [10.6.1](https://github.com/instructure/instructure-ui/compare/v10.6.0...v10.6.1) (2024-11-26)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
 
-
-
-
-
 # [10.6.0](https://github.com/instructure/instructure-ui/compare/v10.5.0...v10.6.0) (2024-11-18)
-
 
 ### Bug Fixes
 
-* **many:** adjust border colors to meet a11y contrast standards ([2f47e06](https://github.com/instructure/instructure-ui/commit/2f47e066f7107c67e37ce8b7aff483586cf7a6b7))
-
-
-
-
+- **many:** adjust border colors to meet a11y contrast standards ([2f47e06](https://github.com/instructure/instructure-ui/commit/2f47e066f7107c67e37ce8b7aff483586cf7a6b7))
 
 # [10.5.0](https://github.com/instructure/instructure-ui/compare/v10.4.1...v10.5.0) (2024-11-07)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
 
-
-
-
-
 ## [10.4.1](https://github.com/instructure/instructure-ui/compare/v10.4.0...v10.4.1) (2024-10-28)
-
 
 ### Bug Fixes
 
-* update license ([1c039d9](https://github.com/instructure/instructure-ui/commit/1c039d9cbf5a3ea99b59803ddde5c6c0b2d76ba5))
-
-
-
-
+- update license ([1c039d9](https://github.com/instructure/instructure-ui/commit/1c039d9cbf5a3ea99b59803ddde5c6c0b2d76ba5))
 
 # [10.4.0](https://github.com/instructure/instructure-ui/compare/v10.3.0...v10.4.0) (2024-10-16)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
 
-
-
-
-
 # [10.3.0](https://github.com/instructure/instructure-ui/compare/v10.2.2...v10.3.0) (2024-10-03)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
-
-
-
-
 
 ## [10.2.2](https://github.com/instructure/instructure-ui/compare/v10.2.1...v10.2.2) (2024-09-13)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
 
-
-
-
-
 ## [10.2.1](https://github.com/instructure/instructure-ui/compare/v10.2.0...v10.2.1) (2024-08-30)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
-
-
-
-
 
 # [10.2.0](https://github.com/instructure/instructure-ui/compare/v10.0.0...v10.2.0) (2024-08-23)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
 
-
-
-
-
 # [10.1.0](https://github.com/instructure/instructure-ui/compare/v10.0.0...v10.1.0) (2024-08-23)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
 
-
-
-
-
 # [10.0.0](https://github.com/instructure/instructure-ui/compare/v9.5.1...v10.0.0) (2024-07-31)
-
 
 ### Features
 
-* **many:** rewrite color system ([1e5809e](https://github.com/instructure/instructure-ui/commit/1e5809e28dee8c2a71703a429609b8d2f95d76e6))
-
+- **many:** rewrite color system ([1e5809e](https://github.com/instructure/instructure-ui/commit/1e5809e28dee8c2a71703a429609b8d2f95d76e6))
 
 ### BREAKING CHANGES
 
-* **many:** Breaks color overrides in certain cases
-
-
-
-
+- **many:** Breaks color overrides in certain cases
 
 ## [9.5.1](https://github.com/instructure/instructure-ui/compare/v9.5.0...v9.5.1) (2024-07-30)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
 
-
-
-
-
 # [9.5.0](https://github.com/instructure/instructure-ui/compare/v9.3.0...v9.5.0) (2024-07-26)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
-
-
-
-
 
 # [9.4.0](https://github.com/instructure/instructure-ui/compare/v9.3.0...v9.4.0) (2024-07-26)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
 
-
-
-
-
 # [9.3.0](https://github.com/instructure/instructure-ui/compare/v9.2.0...v9.3.0) (2024-07-17)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
-
-
-
-
 
 # [9.2.0](https://github.com/instructure/instructure-ui/compare/v9.1.0...v9.2.0) (2024-07-09)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
 
-
-
-
-
 # [9.1.0](https://github.com/instructure/instructure-ui/compare/v9.0.1...v9.1.0) (2024-06-14)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
-
-
-
-
 
 ## [9.0.1](https://github.com/instructure/instructure-ui/compare/v9.0.0...v9.0.1) (2024-05-09)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
 
-
-
-
-
 # [9.0.0](https://github.com/instructure/instructure-ui/compare/v8.56.0...v9.0.0) (2024-05-09)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
-
-
-
-
 
 # [8.56.0](https://github.com/instructure/instructure-ui/compare/v8.55.1...v8.56.0) (2024-05-06)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
 
-
-
-
-
 ## [8.55.1](https://github.com/instructure/instructure-ui/compare/v8.55.0...v8.55.1) (2024-04-30)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
-
-
-
-
 
 # [8.55.0](https://github.com/instructure/instructure-ui/compare/v8.54.0...v8.55.0) (2024-04-09)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
 
-
-
-
-
 # [8.54.0](https://github.com/instructure/instructure-ui/compare/v8.53.2...v8.54.0) (2024-03-21)
-
 
 ### Bug Fixes
 
-* **ui-source-code-editor:** make search panel work with older react versions ([76cdaac](https://github.com/instructure/instructure-ui/commit/76cdaac296d8bdcbcf337ef1d95eb8d2e538b993))
-* **ui-source-code-editor:** remove warning and fix focus for search panel ([def33a3](https://github.com/instructure/instructure-ui/commit/def33a34e28373b2d6b2455afbae638a3c98685a))
-
-
-
-
+- **ui-source-code-editor:** make search panel work with older react versions ([76cdaac](https://github.com/instructure/instructure-ui/commit/76cdaac296d8bdcbcf337ef1d95eb8d2e538b993))
+- **ui-source-code-editor:** remove warning and fix focus for search panel ([def33a3](https://github.com/instructure/instructure-ui/commit/def33a34e28373b2d6b2455afbae638a3c98685a))
 
 ## [8.53.2](https://github.com/instructure/instructure-ui/compare/v8.53.1...v8.53.2) (2024-02-15)
 
-
 ### Bug Fixes
 
-* **ui-source-code-editor:** make search panel react version agnostic ([f917e20](https://github.com/instructure/instructure-ui/commit/f917e20c588d93a30e0681a5c0b1a42e262f7d3e))
-
-
-
-
+- **ui-source-code-editor:** make search panel react version agnostic ([f917e20](https://github.com/instructure/instructure-ui/commit/f917e20c588d93a30e0681a5c0b1a42e262f7d3e))
 
 ## [8.53.1](https://github.com/instructure/instructure-ui/compare/v8.53.0...v8.53.1) (2024-02-09)
 
-
 ### Bug Fixes
 
-* **ui-source-code-editor:** use dependencies instead of devDependencies ([2cfbb4f](https://github.com/instructure/instructure-ui/commit/2cfbb4f5e4ab6f9aeffadd5657cb94965050d618))
-
-
-
-
+- **ui-source-code-editor:** use dependencies instead of devDependencies ([2cfbb4f](https://github.com/instructure/instructure-ui/commit/2cfbb4f5e4ab6f9aeffadd5657cb94965050d618))
 
 # [8.53.0](https://github.com/instructure/instructure-ui/compare/v8.52.0...v8.53.0) (2024-02-08)
 

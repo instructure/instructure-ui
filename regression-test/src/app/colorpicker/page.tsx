@@ -191,7 +191,10 @@ export default function ColorPickerPage() {
         ColorPreset, and ColorContrast). When opened near the bottom of the
         viewport, the popover should be scrollable.
       </p>
-      <div style={{ marginTop: '50vh' }} data-test-id="colorpicker-scrollable-container">
+      <div
+        style={{ marginTop: '50vh' }}
+        data-test-id="colorpicker-scrollable-container"
+      >
         <ColorPicker
           label="Color"
           placeholderText="Enter HEX"

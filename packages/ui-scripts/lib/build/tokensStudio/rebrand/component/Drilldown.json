@@ -15,6 +15,14 @@
     "labelInfoColor": {
       "value": "{color.text.muted}",
       "type": "color"
+    },
+    "borderRadius": {
+      "value": "{borderRadius.md}",
+      "type": "borderRadius"
+    },
+    "labelInfoPadding": {
+      "value": "{spacing.spaceMd}",
+      "type": "spacing"
     }
   }
 }

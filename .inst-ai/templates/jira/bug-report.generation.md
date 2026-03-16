@@ -5,6 +5,7 @@
 **Task:** Use the `CONTEXT` to generate a JSON object with a `summary` and an ADF `description`.
 
 **Requirements:**
+
 - The `summary` must be: `Fix: [<Component Name>] <Brief problem description>`. Use the component_name from extracted data if available, otherwise use a generic name based on the affected area.
 - The `description` must be a valid Atlassian Document Format (ADF) JSON object.
 - Include all relevant technical details from the context.

@@ -25,11 +25,19 @@
       "type": "fontSizes"
     },
     "lineHeight": {
-      "value": "{lineHeight.standalone.textBase}",
+      "value": "{lineHeight.label.base}",
       "type": "lineHeights"
     },
     "gapPrimitives": {
       "value": "{spacing.gap.inputElements}",
+      "type": "spacing"
+    },
+    "stackedOrInlineBreakpoint": {
+      "value": "48em",
+      "type": "sizing"
+    },
+    "gapInputs": {
+      "value": "0.75rem",
       "type": "spacing"
     }
   }

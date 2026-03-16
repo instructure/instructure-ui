@@ -16,7 +16,7 @@
       "value": "{color.background.interactive.input.disabled}",
       "type": "color"
     },
-    "backgroundChecked": {
+    "backgroundCheckedColor": {
       "value": "{color.background.interactive.input.selected}",
       "type": "color"
     },
@@ -37,14 +37,18 @@
       "type": "color"
     },
     "errorBorderColor": {
-      "value": "{color.stroke.interactive.action.destructive.base}",
+      "value": "{color.stroke.interactive.action.destructive.secondary.base}",
       "type": "color"
     },
     "errorBorderHoverColor": {
-      "value": "{color.stroke.interactive.action.destructive.hover}",
+      "value": "{color.stroke.interactive.action.destructive.secondary.hover}",
       "type": "color"
     },
-    "borderChecked": {
+    "asteriskColor": {
+      "value": "{color.text.error}",
+      "type": "color"
+    },
+    "borderCheckedColor": {
       "value": "{color.stroke.interactive.input.selected}",
       "type": "color"
     },
@@ -60,16 +64,8 @@
       "value": "{fontSize.textLg}",
       "type": "fontSizes"
     },
-    "lineHeightSm": {
-      "value": "{lineHeight.paragraph.textSm}",
-      "type": "lineHeights"
-    },
-    "lineHeightMd": {
-      "value": "{lineHeight.paragraph.textBase}",
-      "type": "lineHeights"
-    },
-    "lineHeightLg": {
-      "value": "{lineHeight.paragraph.textBase}",
+    "lineHeight": {
+      "value": "{lineHeight.standalone.base}",
       "type": "lineHeights"
     },
     "fontFamily": {
@@ -80,20 +76,8 @@
       "value": "{fontWeight.body.base}",
       "type": "fontWeights"
     },
-    "iconSizeSm": {
-      "value": "{icon.sizeXs}",
-      "type": "sizing"
-    },
-    "iconSizeMd": {
-      "value": "{icon.sizeSm}",
-      "type": "sizing"
-    },
-    "iconSizeLg": {
-      "value": "{icon.sizeSm}",
-      "type": "sizing"
-    },
     "gap": {
-      "value": "{size.size8}",
+      "value": "{spacing.spaceSm}",
       "type": "spacing"
     },
     "borderRadius": {
@@ -131,6 +115,10 @@
     "labelReadonlyColor": {
       "value": "{color.text.base}",
       "type": "color"
+    },
+    "controlVerticalMargin": {
+      "value": "0rem",
+      "type": "spacing"
     }
   }
 }

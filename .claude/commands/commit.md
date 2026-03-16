@@ -7,6 +7,7 @@ Create a commit following the Instructure UI commit conventions:
 ## Format Requirements
 
 Use Conventional Commits format:
+
 ```
 type(scope): subject
 
@@ -25,6 +26,7 @@ Document any breaking changes here with BREAKING CHANGE: prefix
 ## Breaking Changes
 
 Mark breaking changes with an exclamation mark after scope and document in body:
+
 ```
 feat(ui-select)!: remove deprecated onOpen prop
 
@@ -32,6 +34,7 @@ BREAKING CHANGE: The onOpen prop has been removed. Use onShowOptions instead.
 ```
 
 Breaking changes include:
+
 - Removing/renaming props or components
 - Changing prop types or behavior
 - Changing defaults that affect behavior
@@ -40,6 +43,7 @@ Breaking changes include:
 ## Commit Footer
 
 Always include:
+
 ```
 🤖 Generated with [Claude Code](https://claude.com/claude-code)
 

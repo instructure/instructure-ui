@@ -870,12 +870,11 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
     }
 
     const isOptionDisabled =
-    id !== this._headerBackId && (
-      this.props.disabled ||
-      this.currentPage?.disabled ||
-      selectedOption.groupProps?.disabled ||
-      selectedOption.props.disabled
-      )
+      id !== this._headerBackId &&
+      (this.props.disabled ||
+        this.currentPage?.disabled ||
+        selectedOption.groupProps?.disabled ||
+        selectedOption.props.disabled)
 
     if (isOptionDisabled) {
       event.preventDefault()

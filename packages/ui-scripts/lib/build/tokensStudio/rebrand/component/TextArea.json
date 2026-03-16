@@ -37,7 +37,7 @@
       "type": "color"
     },
     "successBorderColor": {
-      "value": "{color.stroke.success}",
+      "value": "{color.stroke.interactive.action.success.secondary.base}",
       "type": "color"
     },
     "borderRadius": {
@@ -52,10 +52,6 @@
       "value": "{color.text.interactive.input.base}",
       "type": "color"
     },
-    "textHoverColor": {
-      "value": "{color.text.interactive.input.hover}",
-      "type": "color"
-    },
     "textReadonlyColor": {
       "value": "{color.text.interactive.input.readonly}",
       "type": "color"
@@ -66,6 +62,10 @@
     },
     "placeholderColor": {
       "value": "{color.text.interactive.input.placeholder}",
+      "type": "color"
+    },
+    "placeholderHoverColor": {
+      "value": "{color.text.interactive.input.hover}",
       "type": "color"
     },
     "fontFamily": {
@@ -88,23 +88,11 @@
       "value": "{fontSize.textLg}",
       "type": "fontSizes"
     },
-    "heightSm": {
-      "value": "{size.interactive.height.sm}",
-      "type": "sizing"
-    },
-    "heightMd": {
-      "value": "{size.interactive.height.md}",
-      "type": "sizing"
-    },
-    "heightLg": {
-      "value": "{size.interactive.height.lg}",
-      "type": "sizing"
-    },
     "gapContent": {
       "value": "{spacing.spaceMd}",
       "type": "spacing"
     },
-    "paddingHorizontal": {
+    "padding": {
       "value": "{spacing.spaceMd}",
       "type": "spacing"
     },

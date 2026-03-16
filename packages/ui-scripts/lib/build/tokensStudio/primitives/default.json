@@ -4,6 +4,10 @@
       "value": "#ffffff",
       "type": "color"
     },
+    "transparent": {
+      "value": "#00000000",
+      "type": "color"
+    },
     "green": {
       "green10": {
         "value": "#DBFCDF",
@@ -970,12 +974,24 @@
       "value": "rgba(255,255,255,0.1)",
       "type": "color"
     },
+    "whiteOpacity20": {
+      "value": "rgba(255,255,255,0.2)",
+      "type": "color"
+    },
     "whiteOpacity75": {
       "value": "rgba(255,255,255,0.75)",
       "type": "color"
     },
     "greyOpacity75": {
       "value": "rgba(28,34,43,0.75)",
+      "type": "color"
+    },
+    "navyOpacity10": {
+      "value": "rgba(35,68,101,0.1)",
+      "type": "color"
+    },
+    "greyOpacity10": {
+      "value": "rgba(28,34,43,0.1)",
       "type": "color"
     }
   },

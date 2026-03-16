@@ -20,7 +20,7 @@ type: example
   >
     <TextInput renderLabel="Favorite Breakfast Eatery"
       messages={[
-      { text: 'Invalid name', type: 'newError' }
+      { text: 'Invalid name', type: 'error' }
       ]}
     />
     <TextInput renderLabel="Favorite Side Dish" />
@@ -80,7 +80,7 @@ type: example
     layout="stacked"
     rowSpacing="large"
     messages={[
-    { text: 'Complete All Fields', type: 'newError' }
+    { text: 'Complete All Fields', type: 'error' }
     ]}
   >
     <RadioInputGroup

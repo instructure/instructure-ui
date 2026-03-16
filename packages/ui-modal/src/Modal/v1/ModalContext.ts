@@ -23,18 +23,24 @@
  */
 
 import { createContext } from 'react'
-import { MenuItem } from '../../Menu/v2/MenuItem'
+
+type ModalContextType = {
+  /**
+   * Needed for setting the correct aria-label in the modal body when its scrollable.
+   * This is a value read from the Modal's Header.
+   */
+  bodyScrollAriaLabel?: string
+  setBodyScrollAriaLabel?: (txt: string) => void
+}
 
 /**
----
-private: true
----
-@module MenuContext
-**/
-const MenuContext = createContext({
-  registerMenuItem: (_value: MenuItem) => {},
-  removeMenuItem: (_value: MenuItem) => {}
+ * React context created by the `Modal` component
+ * @private
+ */
+const ModalContext = createContext<ModalContextType>({
+  bodyScrollAriaLabel: undefined
 })
 
-export default MenuContext
-export { MenuContext }
+export default ModalContext
+export { ModalContext }
+export type { ModalContextType }

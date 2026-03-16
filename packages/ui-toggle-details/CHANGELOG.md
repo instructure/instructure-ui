@@ -7,567 +7,300 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
 
-
-
-
-
 # [11.5.0](https://github.com/instructure/instructure-ui/compare/v11.4.0...v11.5.0) (2026-02-03)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
-
-
-
-
 
 # [11.4.0](https://github.com/instructure/instructure-ui/compare/v11.3.0...v11.4.0) (2026-01-20)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
 
-
-
-
-
 # [11.3.0](https://github.com/instructure/instructure-ui/compare/v11.2.0...v11.3.0) (2026-01-12)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
 
-
-
-
-
 # [11.2.0](https://github.com/instructure/instructure-ui/compare/v11.0.1...v11.2.0) (2025-11-06)
-
 
 ### Features
 
-* **many:** migrate from npm to pnpm ([f7bb16e](https://github.com/instructure/instructure-ui/commit/f7bb16e114df83984c67d5a6e07fb4d9c65efc53))
-
-
-
-
+- **many:** migrate from npm to pnpm ([f7bb16e](https://github.com/instructure/instructure-ui/commit/f7bb16e114df83984c67d5a6e07fb4d9c65efc53))
 
 # [11.1.0](https://github.com/instructure/instructure-ui/compare/v11.0.1...v11.1.0) (2025-11-05)
 
-
 ### Features
 
-* **many:** migrate from npm to pnpm ([f7bb16e](https://github.com/instructure/instructure-ui/commit/f7bb16e114df83984c67d5a6e07fb4d9c65efc53))
-
-
-
-
+- **many:** migrate from npm to pnpm ([f7bb16e](https://github.com/instructure/instructure-ui/commit/f7bb16e114df83984c67d5a6e07fb4d9c65efc53))
 
 ## [11.0.1](https://github.com/instructure/instructure-ui/compare/v11.0.0...v11.0.1) (2025-10-13)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
 
-
-
-
-
 # [11.0.0](https://github.com/instructure/instructure-ui/compare/v10.26.0...v11.0.0) (2025-10-06)
-
 
 ### Features
 
-* **many:** instUI v11 release ([36f5438](https://github.com/instructure/instructure-ui/commit/36f54382669186227ba24798bbf7201ef2f5cd4c))
-
+- **many:** instUI v11 release ([36f5438](https://github.com/instructure/instructure-ui/commit/36f54382669186227ba24798bbf7201ef2f5cd4c))
 
 ### BREAKING CHANGES
 
-* **many:** InstUI v11 contains the following breaking changes:
-- React 16 and 17 are no longer supported
-- remove `PropTypes` from all packages
-- remove `CodeEditor` component
-- remove `@instui/theme-registry` package
-- remove `@testable`, `@experimental`, `@hack` decorators
-- InstUISettingsProvider's `as` prop is removed
-- `canvas.use()`, `canvasHighContrast.use()` functions are removed
-- `canvasThemeLocal`, `canvasHighContrastThemeLocal` are removed
-- `variables` field on theme objects are removed
-- remove deprecated props from Table: Row's `isStacked`, Body's
+- **many:** InstUI v11 contains the following breaking changes:
+
+* React 16 and 17 are no longer supported
+* remove `PropTypes` from all packages
+* remove `CodeEditor` component
+* remove `@instui/theme-registry` package
+* remove `@testable`, `@experimental`, `@hack` decorators
+* InstUISettingsProvider's `as` prop is removed
+* `canvas.use()`, `canvasHighContrast.use()` functions are removed
+* `canvasThemeLocal`, `canvasHighContrastThemeLocal` are removed
+* `variables` field on theme objects are removed
+* remove deprecated props from Table: Row's `isStacked`, Body's
   `isStacked`, `hover`, and `headers`
-- `Table`'s `caption` prop is now required
-- `ui-dom-utils`'s `getComputedStyle` can now return `undefined`
-
-
-
-
+* `Table`'s `caption` prop is now required
+* `ui-dom-utils`'s `getComputedStyle` can now return `undefined`
 
 # [10.26.0](https://github.com/instructure/instructure-ui/compare/v10.25.0...v10.26.0) (2025-10-01)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
 
-
-
-
-
 # [10.25.0](https://github.com/instructure/instructure-ui/compare/v10.24.2...v10.25.0) (2025-09-09)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
-
-
-
-
 
 ## [10.24.2](https://github.com/instructure/instructure-ui/compare/v10.24.1...v10.24.2) (2025-08-11)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
 
-
-
-
-
 ## [10.24.1](https://github.com/instructure/instructure-ui/compare/v10.24.0...v10.24.1) (2025-07-30)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
 
-
-
-
-
 # [10.24.0](https://github.com/instructure/instructure-ui/compare/v10.23.0...v10.24.0) (2025-07-18)
-
 
 ### Bug Fixes
 
-* **ui-toggle-details,ui-expandable:** improve typing for onClick prop ([e086e31](https://github.com/instructure/instructure-ui/commit/e086e3194f93565a0314233a10bba804f48c3a16))
-
-
-
-
+- **ui-toggle-details,ui-expandable:** improve typing for onClick prop ([e086e31](https://github.com/instructure/instructure-ui/commit/e086e3194f93565a0314233a10bba804f48c3a16))
 
 # [10.23.0](https://github.com/instructure/instructure-ui/compare/v10.22.0...v10.23.0) (2025-07-09)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
 
-
-
-
-
 # [10.22.0](https://github.com/instructure/instructure-ui/compare/v10.21.0...v10.22.0) (2025-07-04)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
-
-
-
-
 
 # [10.21.0](https://github.com/instructure/instructure-ui/compare/v10.20.1...v10.21.0) (2025-06-27)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
 
-
-
-
-
 ## [10.20.1](https://github.com/instructure/instructure-ui/compare/v10.20.0...v10.20.1) (2025-06-17)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
 
-
-
-
-
 # [10.20.0](https://github.com/instructure/instructure-ui/compare/v10.19.1...v10.20.0) (2025-06-13)
-
 
 ### Bug Fixes
 
-* **many:** update dependencies, browsersdb and moment timezone database ([3813636](https://github.com/instructure/instructure-ui/commit/3813636458c901ad4bc74a4d5ae015cb55defcb2))
-
-
-
-
+- **many:** update dependencies, browsersdb and moment timezone database ([3813636](https://github.com/instructure/instructure-ui/commit/3813636458c901ad4bc74a4d5ae015cb55defcb2))
 
 ## [10.19.1](https://github.com/instructure/instructure-ui/compare/v10.19.0...v10.19.1) (2025-06-05)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
 
-
-
-
-
 # [10.19.0](https://github.com/instructure/instructure-ui/compare/v10.18.1...v10.19.0) (2025-06-03)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
-
-
-
-
 
 ## [10.18.1](https://github.com/instructure/instructure-ui/compare/v10.18.0...v10.18.1) (2025-05-29)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
 
-
-
-
-
 # [10.18.0](https://github.com/instructure/instructure-ui/compare/v10.17.0...v10.18.0) (2025-05-26)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
-
-
-
-
 
 # [10.17.0](https://github.com/instructure/instructure-ui/compare/v10.16.4...v10.17.0) (2025-05-20)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
 
-
-
-
-
 ## [10.16.4](https://github.com/instructure/instructure-ui/compare/v10.16.3...v10.16.4) (2025-05-09)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
-
-
-
-
 
 ## [10.16.3](https://github.com/instructure/instructure-ui/compare/v10.16.1...v10.16.3) (2025-04-30)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
 
-
-
-
-
 ## [10.16.2](https://github.com/instructure/instructure-ui/compare/v10.16.1...v10.16.2) (2025-04-22)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
-
-
-
-
 
 ## [10.16.1](https://github.com/instructure/instructure-ui/compare/v10.16.0...v10.16.1) (2025-04-22)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
 
-
-
-
-
 # [10.16.0](https://github.com/instructure/instructure-ui/compare/v10.15.2...v10.16.0) (2025-04-11)
-
 
 ### Bug Fixes
 
-* **ui-buttons:** fix button border color ([5322f9c](https://github.com/instructure/instructure-ui/commit/5322f9c8d359a394e0ea4caa5dbab982169edddf))
-
-
-
-
+- **ui-buttons:** fix button border color ([5322f9c](https://github.com/instructure/instructure-ui/commit/5322f9c8d359a394e0ea4caa5dbab982169edddf))
 
 ## [10.15.2](https://github.com/instructure/instructure-ui/compare/v10.15.1...v10.15.2) (2025-04-07)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
 
-
-
-
-
 ## [10.15.1](https://github.com/instructure/instructure-ui/compare/v10.15.0...v10.15.1) (2025-04-03)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
-
-
-
-
 
 # [10.15.0](https://github.com/instructure/instructure-ui/compare/v10.14.0...v10.15.0) (2025-03-31)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
 
-
-
-
-
 # [10.14.0](https://github.com/instructure/instructure-ui/compare/v10.13.0...v10.14.0) (2025-03-17)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
-
-
-
-
 
 # [10.13.0](https://github.com/instructure/instructure-ui/compare/v10.12.0...v10.13.0) (2025-03-06)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
 
-
-
-
-
 # [10.12.0](https://github.com/instructure/instructure-ui/compare/v10.11.0...v10.12.0) (2025-02-24)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
-
-
-
-
 
 # [10.11.0](https://github.com/instructure/instructure-ui/compare/v10.10.0...v10.11.0) (2025-02-03)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
 
-
-
-
-
 # [10.10.0](https://github.com/instructure/instructure-ui/compare/v10.9.0...v10.10.0) (2024-12-18)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
-
-
-
-
 
 # [10.9.0](https://github.com/instructure/instructure-ui/compare/v10.8.0...v10.9.0) (2024-12-12)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
 
-
-
-
-
 # [10.8.0](https://github.com/instructure/instructure-ui/compare/v10.7.0...v10.8.0) (2024-12-09)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
-
-
-
-
 
 # [10.7.0](https://github.com/instructure/instructure-ui/compare/v10.6.1...v10.7.0) (2024-12-03)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
 
-
-
-
-
 ## [10.6.1](https://github.com/instructure/instructure-ui/compare/v10.6.0...v10.6.1) (2024-11-26)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
 
-
-
-
-
 # [10.6.0](https://github.com/instructure/instructure-ui/compare/v10.5.0...v10.6.0) (2024-11-18)
-
 
 ### Bug Fixes
 
-* **many:** adjust border colors to meet a11y contrast standards ([2f47e06](https://github.com/instructure/instructure-ui/commit/2f47e066f7107c67e37ce8b7aff483586cf7a6b7))
-
-
-
-
+- **many:** adjust border colors to meet a11y contrast standards ([2f47e06](https://github.com/instructure/instructure-ui/commit/2f47e066f7107c67e37ce8b7aff483586cf7a6b7))
 
 # [10.5.0](https://github.com/instructure/instructure-ui/compare/v10.4.1...v10.5.0) (2024-11-07)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
 
-
-
-
-
 ## [10.4.1](https://github.com/instructure/instructure-ui/compare/v10.4.0...v10.4.1) (2024-10-28)
-
 
 ### Bug Fixes
 
-* **ui-toggle-details:** do not put aria-expanded and aria-controls on the toggle if there is nothing to toggle ([82094c3](https://github.com/instructure/instructure-ui/commit/82094c3289dae60946047bbbdf60f768dcd63f4c))
-* update license ([1c039d9](https://github.com/instructure/instructure-ui/commit/1c039d9cbf5a3ea99b59803ddde5c6c0b2d76ba5))
-
-
-
-
+- **ui-toggle-details:** do not put aria-expanded and aria-controls on the toggle if there is nothing to toggle ([82094c3](https://github.com/instructure/instructure-ui/commit/82094c3289dae60946047bbbdf60f768dcd63f4c))
+- update license ([1c039d9](https://github.com/instructure/instructure-ui/commit/1c039d9cbf5a3ea99b59803ddde5c6c0b2d76ba5))
 
 # [10.4.0](https://github.com/instructure/instructure-ui/compare/v10.3.0...v10.4.0) (2024-10-16)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
 
-
-
-
-
 # [10.3.0](https://github.com/instructure/instructure-ui/compare/v10.2.2...v10.3.0) (2024-10-03)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
 
-
-
-
-
 ## [10.2.2](https://github.com/instructure/instructure-ui/compare/v10.2.1...v10.2.2) (2024-09-13)
-
 
 ### Bug Fixes
 
-* **ui-toggle-details:** fix ToggleDetails flickering ([cbab3be](https://github.com/instructure/instructure-ui/commit/cbab3befb43f37f5df8b981f757dd857388502e0))
-
-
-
-
+- **ui-toggle-details:** fix ToggleDetails flickering ([cbab3be](https://github.com/instructure/instructure-ui/commit/cbab3befb43f37f5df8b981f757dd857388502e0))
 
 ## [10.2.1](https://github.com/instructure/instructure-ui/compare/v10.2.0...v10.2.1) (2024-08-30)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
 
-
-
-
-
 # [10.2.0](https://github.com/instructure/instructure-ui/compare/v10.0.0...v10.2.0) (2024-08-23)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
-
-
-
-
 
 # [10.1.0](https://github.com/instructure/instructure-ui/compare/v10.0.0...v10.1.0) (2024-08-23)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
 
-
-
-
-
 # [10.0.0](https://github.com/instructure/instructure-ui/compare/v9.5.1...v10.0.0) (2024-07-31)
-
 
 ### Features
 
-* **many:** rewrite color system ([1e5809e](https://github.com/instructure/instructure-ui/commit/1e5809e28dee8c2a71703a429609b8d2f95d76e6))
-
+- **many:** rewrite color system ([1e5809e](https://github.com/instructure/instructure-ui/commit/1e5809e28dee8c2a71703a429609b8d2f95d76e6))
 
 ### BREAKING CHANGES
 
-* **many:** Breaks color overrides in certain cases
-
-
-
-
+- **many:** Breaks color overrides in certain cases
 
 ## [9.5.1](https://github.com/instructure/instructure-ui/compare/v9.5.0...v9.5.1) (2024-07-30)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
 
-
-
-
-
 # [9.5.0](https://github.com/instructure/instructure-ui/compare/v9.3.0...v9.5.0) (2024-07-26)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
-
-
-
-
 
 # [9.4.0](https://github.com/instructure/instructure-ui/compare/v9.3.0...v9.4.0) (2024-07-26)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
 
-
-
-
-
 # [9.3.0](https://github.com/instructure/instructure-ui/compare/v9.2.0...v9.3.0) (2024-07-17)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
-
-
-
-
 
 # [9.2.0](https://github.com/instructure/instructure-ui/compare/v9.1.0...v9.2.0) (2024-07-09)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
 
-
-
-
-
 # [9.1.0](https://github.com/instructure/instructure-ui/compare/v9.0.1...v9.1.0) (2024-06-14)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
-
-
-
-
 
 ## [9.0.1](https://github.com/instructure/instructure-ui/compare/v9.0.0...v9.0.1) (2024-05-09)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
 
-
-
-
-
 # [9.0.0](https://github.com/instructure/instructure-ui/compare/v8.56.0...v9.0.0) (2024-05-09)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
-
-
-
-
 
 # [8.56.0](https://github.com/instructure/instructure-ui/compare/v8.55.1...v8.56.0) (2024-05-06)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
 
-
-
-
-
 ## [8.55.1](https://github.com/instructure/instructure-ui/compare/v8.55.0...v8.55.1) (2024-04-30)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
-
-
-
-
 
 # [8.55.0](https://github.com/instructure/instructure-ui/compare/v8.54.0...v8.55.0) (2024-04-09)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
 
-
-
-
-
 # [8.54.0](https://github.com/instructure/instructure-ui/compare/v8.53.2...v8.54.0) (2024-03-21)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
-
-
-
-
 
 ## [8.53.2](https://github.com/instructure/instructure-ui/compare/v8.53.1...v8.53.2) (2024-02-15)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
 
-
-
-
-
 ## [8.53.1](https://github.com/instructure/instructure-ui/compare/v8.53.0...v8.53.1) (2024-02-09)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
-
-
-
-
 
 # [8.53.0](https://github.com/instructure/instructure-ui/compare/v8.52.0...v8.53.0) (2024-02-08)
 

@@ -28,23 +28,27 @@ All PRs must include:
 6. **If Jira ticket number is unknown, ask the user for it before creating the PR**
 7. Push to remote if needed: `git push -u origin <branch>`
 8. Create PR with `gh pr create --title "title" --body "$(cat <<'EOF'
+
 ## Summary
+
 - Bullet point 1
 - Bullet point 2
 
 ## Test Plan
+
 - [ ] Step 1
 - [ ] Step 2
 
 ## Jira Reference
+
 Fixes INST-XXXX (or omit this section if not applicable)
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)
 EOF
-)"`
-9. Return the PR URL
+)"` 9. Return the PR URL
 
 **Important**:
+
 - Base branch is usually `master` (not main)
 - Analyze ALL commits in the branch, not just the latest one
 - Use markdown checklists for test plan

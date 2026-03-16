@@ -53,8 +53,9 @@ const generateStyle = (
       listStyleType: 'none',
       margin: '0',
       padding: '0.25rem 0',
-      background: componentTheme.background,
-      borderRadius: componentTheme.borderRadius,
+      // TODO-rework
+      //background: componentTheme.background,
+      //borderRadius: componentTheme.borderRadius,
       display: 'block',
       position: 'relative',
       overflow: 'hidden',
