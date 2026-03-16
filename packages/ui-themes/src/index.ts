@@ -41,9 +41,9 @@ import type {
 import canvasHighContrast from './themes/canvasHighContrast'
 import canvas from './themes/canvas'
 
-import rebrandDark from './themes/rebrandDark'
+import dark from './themes/dark'
 
-import rebrandLight from './themes/rebrandLight'
+import light from './themes/light'
 
 import {
   primitives,
@@ -55,8 +55,8 @@ import { boxShadowObjectsToCSSString } from './utils/boxShadowObjectToString'
 import type {
   LegacyCanvas as NewCanvas,
   LegacyCanvasHighContrast as NewCanvasHighContrast,
-  Dark as NewRebrandDark,
-  Light as NewRebrandLight
+  Dark,
+  Light
 } from './themes/newThemes'
 
 type ThemeMap = {
@@ -80,8 +80,8 @@ type ThemeSpecificStyle<ComponentTheme> = {
 }
 
 export {
-  rebrandDark,
-  rebrandLight,
+  dark,
+  light,
   canvas,
   canvasHighContrast,
   primitives,
@@ -105,8 +105,8 @@ export type {
   UI,
   NewCanvas,
   NewCanvasHighContrast,
-  NewRebrandDark,
-  NewRebrandLight,
+  Dark,
+  Light,
   NewComponentTypes,
   NewBaseTheme,
   TokenBoxshadowValueInst,
