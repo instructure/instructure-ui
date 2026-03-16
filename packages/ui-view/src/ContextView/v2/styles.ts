@@ -307,7 +307,8 @@ const generateStyle = (
     },
     contextView__content: {
       label: 'contextView__content',
-      position: 'relative'
+      position: 'relative',
+      overflow: 'clip'
     },
     contextView__arrow: {
       label: 'contextView__arrow',
