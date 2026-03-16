@@ -393,6 +393,11 @@ class App extends Component<AppProps, AppState> {
       idx = 2
     }
 
+    // Skip /latest/ prefix
+    if (idx === 0 && segments[idx] === 'latest') {
+      idx++
+    }
+
     // Skip minor version prefix (e.g. v11_7)
     if (idx < segments.length && MINOR_VERSION_REGEX.test(segments[idx])) {
       idx++
