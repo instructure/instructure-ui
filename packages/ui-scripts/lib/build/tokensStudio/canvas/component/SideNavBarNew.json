@@ -69,6 +69,10 @@
     "minimizedBorderRadius": {
       "value": "0rem",
       "type": "borderRadius"
+    },
+    "borderColor": {
+      "value": "{color.stroke.muted}",
+      "type": "color"
     }
   },
   "sideNavBarItemNew": {
