@@ -31,20 +31,12 @@ import {
   withDeterministicId,
   safeCloneElement
 } from '@instructure/ui-react-utils'
-import {
-  isActiveElement,
-  addEventListener,
-  getCSSStyleDeclaration
-} from '@instructure/ui-dom-utils'
+import { isActiveElement, addEventListener } from '@instructure/ui-dom-utils'
 import { FormField } from '@instructure/ui-form-field/latest'
 import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
-import type {
-  TextInputProps,
-  TextInputState,
-  TextInputStyleProps
-} from './props'
+import type { TextInputProps, TextInputStyleProps } from './props'
 import { allowedProps } from './props'
 import type { Renderable } from '@instructure/shared-types'
 
@@ -56,7 +48,7 @@ tags: form, field, input
 **/
 @withDeterministicId()
 @withStyle(generateStyle)
-class TextInput extends Component<TextInputProps, TextInputState> {
+class TextInput extends Component<TextInputProps> {
   static readonly componentId = 'TextInput'
 
   static allowedProps = allowedProps
@@ -75,7 +67,6 @@ class TextInput extends Component<TextInputProps, TextInputState> {
 
   constructor(props: TextInputProps) {
     super(props)
-    this.state = { afterElementHasWidth: undefined }
     this._defaultId = props.deterministicId!()
     this._messagesId = props.deterministicId!('TextInput-messages')
   }
@@ -83,7 +74,6 @@ class TextInput extends Component<TextInputProps, TextInputState> {
   ref: Element | null = null
 
   private _input: HTMLInputElement | null = null
-  private _afterElement: HTMLSpanElement | null = null
 
   private readonly _defaultId: string
   private readonly _messagesId: string
@@ -107,11 +97,7 @@ class TextInput extends Component<TextInputProps, TextInputState> {
         'focus',
         this.handleFocus
       )
-      this.setState({
-        afterElementHasWidth: this.getElementHasWidth(this._afterElement)
-      })
     }
-    this.adjustAfterElementHeight()
     this.props.makeStyles?.(this.makeStyleProps())
   }
 
@@ -121,12 +107,7 @@ class TextInput extends Component<TextInputProps, TextInputState> {
     }
   }
 
-  componentDidUpdate(prevProps: TextInputProps) {
-    if (prevProps.renderAfterInput !== this.props.renderAfterInput) {
-      this.setState({
-        afterElementHasWidth: this.getElementHasWidth(this._afterElement)
-      })
-    }
+  componentDidUpdate() {
     this.props.makeStyles?.(this.makeStyleProps())
   }
 
@@ -152,37 +133,7 @@ class TextInput extends Component<TextInputProps, TextInputState> {
     return rendered
   }
 
-  adjustAfterElementHeight() {
-    const afterElementChild = this._afterElement
-      ?.firstElementChild as HTMLElement | null
-
-    // Check if the child is a button, then get the button's first child (the content span)
-    const buttonContentSpan =
-      afterElementChild?.tagName === 'BUTTON'
-        ? (afterElementChild.firstElementChild as HTMLElement | null)
-        : null
-
-    // This is a necessary workaround for DateInput2 because it uses a Popover, which has a nested Button as an afterElement
-    // Check if the child is a Popover's inner span containing a button, then get the button's first child (the content span)
-    const popoverContentSpan =
-      afterElementChild?.tagName === 'SPAN' &&
-      afterElementChild.firstElementChild?.tagName === 'BUTTON'
-        ? (afterElementChild.firstElementChild
-            .firstElementChild as HTMLElement | null)
-        : null
-
-    const targetSpan = buttonContentSpan ?? popoverContentSpan
-
-    if (targetSpan) {
-      // Set the height to 36px (the height of a medium TextInput) to avoid layout shift when the afterElement content changes
-      // this temporary workaround is necessary because otherwise the layout breaks, later on IconButton's default height will be adjusted to the TextInput size
-      // so this workaround will not be needed anymore
-      targetSpan.style.height = '36px'
-    }
-  }
-
   makeStyleProps = (): TextInputStyleProps => {
-    const { afterElementHasWidth } = this.state
     const beforeElement = this.props.renderBeforeInput
       ? callRenderProp(this.props.renderBeforeInput)
       : null
@@ -193,7 +144,6 @@ class TextInput extends Component<TextInputProps, TextInputState> {
       interaction: this.interaction,
       invalid: this.invalid,
       success: success,
-      afterElementHasWidth: afterElementHasWidth,
       beforeElementExists: !!beforeElement
     }
   }
@@ -303,34 +253,6 @@ class TextInput extends Component<TextInputProps, TextInputState> {
     )
   }
 
-  getElementHasWidth(element: Element | null) {
-    if (!element) {
-      return undefined
-    }
-
-    const computedStyle = getCSSStyleDeclaration(element)
-    if (!computedStyle) {
-      return undefined
-    }
-
-    const { width, paddingInlineStart, paddingInlineEnd } = computedStyle
-
-    if (width === 'auto' || width === '') {
-      // This is a workaround for an edge-case, when the TextInput's parent
-      // is hidden on load, so the element is not visible either.
-      // In this case the computed width is going to be either 'auto' or '',
-      // so we assume it has width so that the padding won't be removed.
-      return true
-    }
-
-    const elementWidth =
-      parseFloat(width) -
-      parseFloat(paddingInlineStart) -
-      parseFloat(paddingInlineEnd)
-
-    return elementWidth > 0
-  }
-
   render() {
     const {
       width,
@@ -381,14 +303,7 @@ class TextInput extends Component<TextInputProps, TextInputState> {
               <span css={styles?.inputLayout}>
                 {this.renderInput()}
                 {afterElement && (
-                  <span
-                    css={styles?.afterElement}
-                    ref={(e) => {
-                      this._afterElement = e
-                    }}
-                  >
-                    {afterElement}
-                  </span>
+                  <span css={styles?.afterElement}>{afterElement}</span>
                 )}
               </span>
             </span>
