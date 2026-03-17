@@ -2,7 +2,15 @@
 describes: DateInput
 ---
 
-> _Note:_ we recommend to update to the new [`DateInput2`](/#DateInput2) which is easier to configure for developers, has a better UX, better accessibility features and a year picker. `DateInput` will be deprecated in the future.
+> **Deprecated:** This version of `DateInput` is deprecated. Please use the latest version of [`DateInput`](/v11_7/DateInput) which offers easier configuration, better UX, improved accessibility, and a year picker.
+
+### DateInput versions at a glance
+
+| Version                                    | API                          | Theming          | Accessibility   | Status          |
+| :----------------------------------------- | :--------------------------- | :--------------- | :-------------- | :-------------- |
+| [v11.6 DateInput](/v11_6/DateInput) (this) | Old (manual calendar wiring) | Old theming only | Has a11y issues | **Deprecated**  |
+| [v11.6 DateInput2](/v11_6/DateInput2)      | New (simple)                 | Old theming only | Good            | **Deprecated**  |
+| [v11.7 DateInput](/v11_7/DateInput)        | New (simple)                 | New theming      | Good            | **Recommended** |
 
 The `DateInput` component provides a visual interface for inputting date data.
 
