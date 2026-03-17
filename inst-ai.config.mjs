@@ -32,8 +32,8 @@ export const config = {
   ai: {
     provider: 'claude',
     models: {
-      fast: 'claude-3-5-haiku-latest',         // For quick tasks: classification, extraction, parsing
-      thorough: 'claude-sonnet-4-5-20250929'   // For complex tasks: generation, detailed analysis
+      fast: 'claude-haiku-4-5-20251001',        // For quick tasks: classification, extraction, parsing
+      thorough: 'claude-sonnet-4-6'             // For complex tasks: generation, detailed analysis
     },
     enableMockMode: false,
     // Warn user if estimated input tokens exceed this threshold. Helps prevent
