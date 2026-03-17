@@ -3,6 +3,14 @@
 
 > **Deprecated:** `DateInput2` is deprecated and will not receive further updates. Its functionality has been merged into the latest version of [`DateInput`](/v11_7/DateInput) which has the same API. Please migrate to `DateInput` for continued support.
 
+### DateInput versions at a glance
+
+| Version                                      | API                          | Theming          | Accessibility   | Status          |
+| :------------------------------------------- | :--------------------------- | :--------------- | :-------------- | :-------------- |
+| [v11.6 DateInput](/v11_6/DateInput)          | Old (manual calendar wiring) | Old theming only | Has a11y issues | **Deprecated**  |
+| [v11.6 DateInput2](/v11_6/DateInput2) (this) | New (simple)                 | Old theming only | Good            | **Deprecated**  |
+| [v11.7 DateInput](/v11_7/DateInput)          | New (simple)                 | New theming      | Good            | **Recommended** |
+
 ### Minimal config
 
 ```js
