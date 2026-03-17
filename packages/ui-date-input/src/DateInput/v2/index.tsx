@@ -22,477 +22,320 @@
  * SOFTWARE.
  */
 
-import { Children, Component, ReactElement } from 'react'
-
+import { useState, useEffect, forwardRef, ForwardedRef } from 'react'
+import type { SyntheticEvent } from 'react'
 import { Calendar } from '@instructure/ui-calendar/latest'
-import type {
-  CalendarProps,
-  CalendarDayProps
-} from '@instructure/ui-calendar/latest'
-import { CalendarInstUIIcon } from '@instructure/ui-icons'
-import { Popover } from '@instructure/ui-popover/latest'
-import { Selectable } from '@instructure/ui-selectable'
-import type {
-  SelectableProps,
-  SelectableRender
-} from '@instructure/ui-selectable'
-import { TextInput } from '@instructure/ui-text-input/latest'
-import type { TextInputProps } from '@instructure/ui-text-input/latest'
-import { createChainedFunction } from '@instructure/ui-utils'
+import { IconButton } from '@instructure/ui-buttons/latest'
 import {
-  getInteraction,
-  callRenderProp,
-  safeCloneElement,
-  passthroughProps
-} from '@instructure/ui-react-utils'
+  CalendarInstUIIcon,
+  ChevronLeftInstUIIcon,
+  ChevronRightInstUIIcon
+} from '@instructure/ui-icons'
+import { Popover } from '@instructure/ui-popover/latest'
+import { TextInput } from '@instructure/ui-text-input/latest'
+import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
+import { getLocale, getTimezone } from '@instructure/ui-i18n'
 
-import { DateTime, ApplyLocaleContext, Locale } from '@instructure/ui-i18n'
-
-import { withStyle } from '@instructure/emotion'
-
-import generateStyle from './styles'
-
-import { allowedProps } from './props'
-import type { DateInputProps, DateInputState } from './props'
+import type { DateInputProps } from './props'
 import type { FormMessage } from '@instructure/ui-form-field/latest'
+import type { Moment } from '@instructure/ui-i18n'
+
+function parseLocaleDate(
+  dateString: string = '',
+  locale: string,
+  timeZone: string
+): Date | null {
+  // This function may seem complicated but it basically does one thing:
+  //   Given a dateString, a locale and a timeZone. The dateString is assumed to be formatted according
+  //   to the locale. So if the locale is `en-us` the dateString is expected to be in the format of M/D/YYYY.
+  //   The dateString is also assumed to be in the given timeZone, so "1/1/2020" in "America/Los_Angeles" timezone is
+  //   expected to be "2020-01-01T08:00:00.000Z" in UTC time.
+  //   This function tries to parse the dateString taking these variables into account and return a javascript Date object
+  //   that is adjusted to be in UTC.
+
+  // Split string on '.', whitespace, '/', ',' or '-' using regex: /[.\s/.-]+/.
+  // The '+' allows splitting on consecutive delimiters.
+  // `.filter(Boolean)` is needed because some locales have a delimeter at the end (e.g.: hungarian dates are formatted as `2024. 09. 19.`)
+  const splitDate = dateString.split(/[,.\s/.-]+/).filter(Boolean)
+
+  // create a locale formatted new date to later extract the order and delimeter information
+  const localeDate = new Intl.DateTimeFormat(locale).formatToParts(new Date())
+
+  let index = 0
+  let day: number | undefined,
+    month: number | undefined,
+    year: number | undefined
+  localeDate.forEach((part) => {
+    if (part.type === 'month') {
+      month = parseInt(splitDate[index], 10)
+      index++
+    } else if (part.type === 'day') {
+      day = parseInt(splitDate[index], 10)
+      index++
+    } else if (part.type === 'year') {
+      year = parseInt(splitDate[index], 10)
+      index++
+    }
+  })
+
+  // sensible limitations
+  if (!year || !month || !day || year < 1000 || year > 9999) return null
+
+  // create utc date from year, month (zero indexed) and day
+  const date = new Date(Date.UTC(year, month - 1, day))
+
+  // Format date string in the provided timezone. The locale here is irrelevant, we only care about how to time is adjusted for the timezone.
+  const parts = new Intl.DateTimeFormat('en-US', {
+    timeZone,
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false
+  }).formatToParts(date)
+
+  // Extract the date and time parts from the formatted string
+  const dateStringInTimezone: {
+    [key: string]: number
+  } = parts.reduce((acc, part) => {
+    return part.type === 'literal'
+      ? acc
+      : {
+          ...acc,
+          [part.type]: part.value
+        }
+  }, {})
+
+  // Create a date string in the format 'YYYY-MM-DDTHH:mm:ss'
+  const dateInTimezone = `${dateStringInTimezone.year}-${dateStringInTimezone.month}-${dateStringInTimezone.day}T${dateStringInTimezone.hour}:${dateStringInTimezone.minute}:${dateStringInTimezone.second}`
+
+  // Calculate time difference for timezone offset
+  const timeDiff = new Date(dateInTimezone + 'Z').getTime() - date.getTime()
+  const utcTime = new Date(date.getTime() - timeDiff)
+  // Return the UTC Date corresponding to the time in the specified timezone
+  return utcTime
+}
 
 /**
 ---
 category: components
 ---
 **/
-@withStyle(generateStyle)
-class DateInput extends Component<DateInputProps, DateInputState> {
-  static readonly componentId = 'DateInput'
-  static Day = Calendar.Day
-  declare context: React.ContextType<typeof ApplyLocaleContext>
-  static allowedProps = allowedProps
-  static defaultProps = {
-    value: '',
-    size: 'medium',
-    onBlur: () => {}, // must have a default so createChainedFunction works
-    isRequired: false,
-    isInline: false,
-    layout: 'stacked',
-    display: 'inline-block',
-    placement: 'bottom center',
-    isShowingCalendar: false
-  }
-
-  state = {
-    hasInputRef: false,
-    isShowingCalendar: false,
-    validatedDate: undefined,
-    messages: []
-  }
-  _input?: HTMLInputElement | null = undefined
-  ref: Element | null = null
-
-  locale(): string {
-    if (this.props.locale) {
-      return this.props.locale
-    } else if (this.context && this.context.locale) {
-      return this.context.locale
-    }
-    return Locale.browserLocale()
-  }
-
-  timezone() {
-    if (this.props.timezone) {
-      return this.props.timezone
-    } else if (this.context && this.context.timezone) {
-      return this.context.timezone
-    }
-    return DateTime.browserTimeZone()
-  }
-
-  componentDidMount() {
-    this.props.makeStyles?.()
-  }
-
-  componentDidUpdate() {
-    this.props.makeStyles?.()
-  }
-
-  get selectedDateId() {
-    let selectedDateId: string | undefined
-    Children.toArray(this.props.children).forEach((day) => {
-      const { date, isSelected } = (day as ReactElement<CalendarDayProps>).props
-      if (isSelected) {
-        selectedDateId = this.formatDateId(date)
-      }
-    })
-    return selectedDateId
-  }
-
-  get interaction() {
-    return getInteraction({ props: this.props })
-  }
-
-  formatDateId = (date: string) => {
-    // ISO8601 strings may contain a space. Remove any spaces before using the
-    // date as the id.
-    return date.replace(/\s/g, '')
-  }
-
-  handleInputRef: TextInputProps['inputRef'] = (el) => {
-    // Ensures that we position the Calendar with respect to the input correctly
-    // if the Calendar is open on mount
-    if (!this.state.hasInputRef) {
-      this.setState({ hasInputRef: true })
-    }
-    this._input = el
-    this.props.inputRef?.(el)
-  }
-
-  handleInputChange: TextInputProps['onChange'] = (event, value) => {
-    this.props.onChange?.(event, { value })
-    this.handleShowCalendar(event)
-  }
-
-  handleShowCalendar = (event: React.SyntheticEvent) => {
-    if (!this.props.children) {
-      this.setState({ isShowingCalendar: true })
-    } else if (this.interaction === 'enabled' && this.props.children) {
-      this.props.onRequestShowCalendar?.(event)
-    }
-  }
-
-  validateDate = (date: string) => {
-    const { invalidDateErrorMessage } = this.props
-    const disabledDateErrorMessage =
-      this.props.disabledDateErrorMessage || invalidDateErrorMessage
-    const messages: FormMessage[] = []
-    // check if date is enabled
-    const { disabledDates } = this.props
-    if (
-      (typeof disabledDates === 'function' && disabledDates(date)) ||
-      (Array.isArray(disabledDates) &&
-        disabledDates.find((dateString) =>
-          DateTime.parse(dateString, this.locale(), this.timezone()).isSame(
-            DateTime.parse(date, this.locale(), this.timezone()),
-            'day'
-          )
-        ))
-    ) {
-      messages.push(
-        typeof disabledDateErrorMessage === 'function'
-          ? disabledDateErrorMessage(date)
-          : { type: 'error', text: disabledDateErrorMessage }
-      )
-    }
-
-    // check if date is valid
-    if (
-      !DateTime.parse(
-        date,
-        this.locale(),
-        this.timezone(),
-        [
-          DateTime.momentISOFormat,
-          'llll',
-          'LLLL',
-          'lll',
-          'LLL',
-          'll',
-          'LL',
-          'l',
-          'L'
-        ],
-        true
-      ).isValid()
-    ) {
-      messages.push(
-        typeof invalidDateErrorMessage === 'function'
-          ? invalidDateErrorMessage(date)
-          : { type: 'error', text: invalidDateErrorMessage }
-      )
-    }
-
-    return messages
-  }
-
-  handleHideCalendar = (event: React.SyntheticEvent, setectedDate?: string) => {
-    if (!this.props.children) {
-      const dateString = setectedDate || this.props.value
-      const messages: FormMessage[] = []
-      if (this.props.onRequestValidateDate) {
-        const userValidatedDate = this.props.onRequestValidateDate?.(
-          event,
-          dateString || '',
-          this.validateDate(dateString || '')
-        )
-        messages.push(...(userValidatedDate || []))
-      } else {
-        if (dateString) {
-          messages.push(...this.validateDate(dateString))
-        }
-      }
-      this.setState({ messages, isShowingCalendar: false })
-    } else {
-      this.props.onRequestValidateDate?.(event)
-      this.props.onRequestHideCalendar?.(event)
-    }
-  }
-
-  handleHighlightOption: SelectableProps['onRequestHighlightOption'] = (
-    event,
-    { direction }
-  ) => {
-    const {
-      onRequestSelectNextDay,
-      onRequestSelectPrevDay,
-      onChange,
-      value,
-      currentDate
-    } = this.props
-
-    const isValueValid =
-      value && DateTime.parse(value, this.locale(), this.timezone()).isValid()
-
-    if (direction === -1) {
-      if (onRequestSelectPrevDay) {
-        onRequestSelectPrevDay?.(event)
-      } else {
-        // @ts-expect-error TODO
-        onChange(event, {
-          value: DateTime.parse(
-            isValueValid ? value : currentDate!,
-            this.locale(),
-            this.timezone()
-          )
-            .subtract(1, 'day')
-            .format('MMMM D, YYYY')
-        })
-        this.setState({ messages: [] })
-      }
-    }
-    if (direction === 1) {
-      if (onRequestSelectNextDay) {
-        onRequestSelectNextDay?.(event)
-      } else {
-        // @ts-expect-error TODO
-        onChange(event, {
-          value: DateTime.parse(
-            isValueValid ? value : currentDate!,
-            this.locale(),
-            this.timezone()
-          )
-            .add(1, 'day')
-            .format('MMMM D, YYYY')
-        })
-        this.setState({ messages: [] })
-      }
-    }
-  }
-
-  renderMonthNavigationButton(type = 'prev') {
-    const { renderPrevMonthButton, renderNextMonthButton } = this.props
-    const button =
-      type === 'prev' ? renderPrevMonthButton : renderNextMonthButton
-    return button && safeCloneElement(callRenderProp(button), { tabIndex: -1 })
-  }
-
-  renderDays(getOptionProps: SelectableRender['getOptionProps']) {
-    const children = this.props.children as ReactElement<CalendarDayProps>[]
-    if (!children) return
-    return Children.map(children, (day) => {
-      const { date, isOutsideMonth } = day.props
-      const props = { tabIndex: -1, id: this.formatDateId(date) }
-      const optionProps = getOptionProps(props)
-
-      const propsAdded = isOutsideMonth
-        ? {
-            ...props,
-            onClick: optionProps.onClick,
-            role: 'presentation'
-          }
-        : optionProps
-
-      return safeCloneElement(day, propsAdded)
-    })
-  }
-
-  renderCalendar({
-    getListProps,
-    getOptionProps
-  }: {
-    getListProps: SelectableRender['getListProps']
-    getOptionProps: SelectableRender['getOptionProps']
-  }) {
-    const {
-      onRequestRenderNextMonth,
-      onRequestRenderPrevMonth,
-      renderNavigationLabel,
-      renderWeekdayLabels,
-      value,
-      onChange,
-      disabledDates,
-      currentDate
-    } = this.props
-
-    const isValidDate = value
-      ? DateTime.parse(value, this.locale(), this.timezone()).isValid()
-      : false
-
-    const noChildrenProps = this.props.children
-      ? {}
-      : {
-          disabledDates,
-          currentDate,
-          selectedDate: isValidDate ? value : undefined,
-          visibleMonth: isValidDate ? value : undefined,
-          onDateSelected: (
-            dateString: string,
-            momentDate: any,
-            e: React.MouseEvent
-          ) => {
-            // @ts-expect-error TODO
-            onChange?.(e, {
-              value: `${momentDate.format('MMMM')} ${momentDate.format(
-                'D'
-              )}, ${momentDate.format('YYYY')}`
-            })
-            this.handleHideCalendar(e, dateString)
-          }
-        }
-
-    return (
-      <Calendar
-        {...(getListProps({
-          onRequestRenderNextMonth,
-          onRequestRenderPrevMonth,
-          renderNavigationLabel,
-          renderWeekdayLabels,
-          renderNextMonthButton: this.renderMonthNavigationButton('next'),
-          renderPrevMonthButton: this.renderMonthNavigationButton('prev')
-        }) as CalendarProps)}
-        {...noChildrenProps}
-      >
-        {this.renderDays(getOptionProps)}
-      </Calendar>
-    )
-  }
-
-  renderInput({
-    getInputProps,
-    getTriggerProps
-  }: {
-    getInputProps: SelectableRender['getInputProps']
-    getTriggerProps: SelectableRender['getInputProps']
-  }) {
-    const {
+const DateInput = forwardRef(
+  (
+    {
       renderLabel,
+      screenReaderLabels,
+      isRequired = false,
+      interaction = 'enabled',
+      isInline = false,
       value,
-      placeholder,
-      onBlur,
-      isRequired,
-      size,
-      isInline,
-      layout,
+      messages,
       width,
+      onChange,
+      onBlur,
+      withYearPicker,
+      invalidDateErrorMessage,
+      locale,
+      timezone,
+      placeholder,
+      dateFormat,
       onRequestValidateDate,
-      onRequestShowCalendar,
-      onRequestHideCalendar,
-      onRequestSelectNextDay,
-      onRequestSelectPrevDay,
-      onRequestRenderNextMonth,
-      onRequestRenderPrevMonth,
+      disabledDates,
+      renderCalendarIcon,
+      margin,
+      inputRef,
       ...rest
-    } = this.props
+    }: DateInputProps,
+    ref: ForwardedRef<TextInput>
+  ) => {
+    const userLocale = locale || getLocale()
+    const userTimezone = timezone || getTimezone()
 
-    const { interaction } = this
+    const [inputMessages, setInputMessages] = useState<FormMessage[]>(
+      messages || []
+    )
+    const [showPopover, setShowPopover] = useState<boolean>(false)
 
-    const {
-      ref, // Apply this to the actual inputRef
-      ...triggerProps
-    } = getTriggerProps()
-    const messages = this.props.messages || this.state.messages
+    useEffect(() => {
+      // don't set input messages if there is an internal error set already
+      if (inputMessages.find((m) => m.text === invalidDateErrorMessage)) return
+
+      setInputMessages(messages || [])
+    }, [messages])
+
+    useEffect(() => {
+      const [, utcIsoDate] = parseDate(value)
+      // clear error messages if date becomes valid
+      if (utcIsoDate || !value) {
+        setInputMessages(messages || [])
+      }
+    }, [value])
+
+    const parseDate = (dateString: string = ''): [string, string] => {
+      let date: Date | null = null
+      if (dateFormat) {
+        if (typeof dateFormat === 'string') {
+          // use dateFormat instead of the user locale
+          date = parseLocaleDate(dateString, dateFormat, userTimezone)
+        } else if (dateFormat.parser) {
+          date = dateFormat.parser(dateString)
+        }
+      } else {
+        // no dateFormat prop passed, use locale for formatting
+        date = parseLocaleDate(dateString, userLocale, userTimezone)
+      }
+      return date ? [formatDate(date), date.toISOString()] : ['', '']
+    }
+
+    const formatDate = (
+      date: Date,
+      timeZone: string = userTimezone
+    ): string => {
+      // use formatter function if provided
+      if (typeof dateFormat !== 'string' && dateFormat?.formatter) {
+        return dateFormat.formatter(date)
+      }
+      // if dateFormat set to a locale, use that, otherwise default to the user's locale
+      return date.toLocaleDateString(
+        typeof dateFormat === 'string' ? dateFormat : userLocale,
+        {
+          timeZone,
+          calendar: 'gregory',
+          numberingSystem: 'latn'
+        }
+      )
+    }
+
+    const getDateFormatHint = () => {
+      const exampleDate = new Date('2024-09-01')
+      const formattedDate = formatDate(exampleDate, 'UTC') // exampleDate is in UTC so format it as such
+
+      // Create a regular expression to find the exact match of the number
+      const regex = (n: string) => {
+        return new RegExp(`(?<!\\d)0*${n}(?!\\d)`, 'g')
+      }
+
+      // Replace the matched number with the same number of dashes
+      const year = '2024'
+      const month = '9'
+      const day = '1'
+      return formattedDate
+        .replace(regex(year), (match) => 'Y'.repeat(match.length))
+        .replace(regex(month), (match) => 'M'.repeat(match.length))
+        .replace(regex(day), (match) => 'D'.repeat(match.length))
+    }
+
+    const handleInputChange = (e: SyntheticEvent, newValue: string) => {
+      const [, utcIsoDate] = parseDate(newValue)
+      onChange?.(e, newValue, utcIsoDate)
+    }
+
+    const handleDateSelected = (
+      dateString: string,
+      _momentDate: Moment,
+      e: SyntheticEvent
+    ) => {
+      setShowPopover(false)
+      const newValue = formatDate(new Date(dateString))
+      onChange?.(e, newValue, dateString)
+      onRequestValidateDate?.(e, newValue, dateString)
+    }
+
+    const handleBlur = (e: SyntheticEvent) => {
+      const [localeDate, utcIsoDate] = parseDate(value)
+      if (localeDate) {
+        if (localeDate !== value) {
+          onChange?.(e, localeDate, utcIsoDate)
+        }
+      } else if (value && invalidDateErrorMessage) {
+        setInputMessages([{ type: 'error', text: invalidDateErrorMessage }])
+      }
+      onRequestValidateDate?.(e, value || '', utcIsoDate)
+      onBlur?.(e, value || '', utcIsoDate)
+    }
+
+    const selectedDate = parseDate(value)[1]
+
     return (
       <TextInput
-        {...triggerProps}
         {...passthroughProps(rest)}
-        {...getInputProps({
-          renderLabel: callRenderProp(renderLabel),
-          value,
-          placeholder,
-          size,
-          layout,
-          width,
-          messages,
-          onChange: this.handleInputChange,
-          onBlur: createChainedFunction(onBlur, this.handleHideCalendar),
-          inputRef: createChainedFunction(ref, this.handleInputRef),
-          interaction,
-          isRequired,
-          display: isInline ? 'inline-block' : 'block',
-          renderAfterInput: <CalendarInstUIIcon />
-        })}
-        onKeyDown={(e) => {
-          if (!this.props.children) {
-            if (e.key === 'Enter') {
-              // @ts-expect-error TODO
-              this.handleHideCalendar(e)
+        ref={ref}
+        inputRef={inputRef}
+        renderLabel={renderLabel}
+        onChange={handleInputChange}
+        onBlur={handleBlur}
+        isRequired={isRequired}
+        value={value}
+        placeholder={placeholder ?? getDateFormatHint()}
+        width={width}
+        display={isInline ? 'inline-block' : 'block'}
+        messages={inputMessages}
+        interaction={interaction}
+        margin={margin}
+        renderAfterInput={
+          <Popover
+            renderTrigger={
+              <IconButton
+                withBackground={false}
+                withBorder={false}
+                screenReaderLabel={screenReaderLabels.calendarIcon}
+                interaction={interaction}
+              >
+                {renderCalendarIcon ? (
+                  callRenderProp(renderCalendarIcon)
+                ) : (
+                  <CalendarInstUIIcon color="baseColor" />
+                )}
+              </IconButton>
             }
-          }
-          triggerProps.onKeyDown?.(e)
-        }}
+            isShowingContent={showPopover}
+            onShowContent={() => setShowPopover(true)}
+            onHideContent={() => setShowPopover(false)}
+            on="click"
+            shouldContainFocus
+            shouldReturnFocus
+            shouldCloseOnDocumentClick
+            screenReaderLabel={screenReaderLabels.datePickerDialog}
+          >
+            <Calendar
+              withYearPicker={withYearPicker}
+              onDateSelected={handleDateSelected}
+              selectedDate={selectedDate}
+              disabledDates={disabledDates}
+              visibleMonth={selectedDate}
+              locale={userLocale}
+              timezone={userTimezone}
+              renderNextMonthButton={
+                <IconButton
+                  size="small"
+                  withBackground={false}
+                  withBorder={false}
+                  renderIcon={<ChevronRightInstUIIcon color="baseColor" />}
+                  screenReaderLabel={screenReaderLabels.nextMonthButton}
+                />
+              }
+              renderPrevMonthButton={
+                <IconButton
+                  size="small"
+                  withBackground={false}
+                  withBorder={false}
+                  renderIcon={<ChevronLeftInstUIIcon color="baseColor" />}
+                  screenReaderLabel={screenReaderLabels.prevMonthButton}
+                />
+              }
+            />
+          </Popover>
+        }
       />
     )
   }
+)
 
-  shouldShowCalendar = () =>
-    this.props.children
-      ? this.props.isShowingCalendar
-      : this.state.isShowingCalendar
-
-  render() {
-    const { placement, assistiveText, styles } = this.props
-    const isShowingCalendar = this.shouldShowCalendar()
-    return (
-      <Selectable
-        isShowingOptions={isShowingCalendar}
-        onRequestShowOptions={this.handleShowCalendar}
-        onRequestHideOptions={this.handleHideCalendar}
-        onRequestHighlightOption={this.handleHighlightOption}
-        onRequestSelectOption={(e) => this.handleHideCalendar(e)}
-        selectedOptionId={this.selectedDateId}
-        highlightedOptionId={this.selectedDateId}
-      >
-        {({
-          getRootProps,
-          getInputProps,
-          getTriggerProps,
-          getListProps,
-          getOptionProps,
-          getDescriptionProps
-        }) => (
-          <span
-            {...getRootProps({ css: styles?.dateInput })}
-            ref={(el) => {
-              this.ref = el
-            }}
-            data-cid="DateInput"
-          >
-            {this.renderInput({ getInputProps, getTriggerProps })}
-            <span {...getDescriptionProps()} css={styles?.assistiveText}>
-              {assistiveText}
-            </span>
-            <Popover
-              placement={placement}
-              isShowingContent={isShowingCalendar}
-              positionTarget={this._input}
-              shouldReturnFocus={false}
-              shouldFocusContentOnTriggerBlur
-            >
-              {this.renderCalendar({ getListProps, getOptionProps })}
-            </Popover>
-          </span>
-        )}
-      </Selectable>
-    )
-  }
-}
+// TODO this is probably needed?
+DateInput.displayName = 'DateInput'
 
 export default DateInput
 export { DateInput }

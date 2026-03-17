@@ -10,7 +10,8 @@ A date input component.
 
 The `ui-date-input` package contains the following:
 
-- [DateInput](DateInput)
+- [DateInput](DateInput) — the recommended date input component
+- [DateInput2](DateInput2) — deprecated, use `DateInput` instead
 
 ### Installation
 

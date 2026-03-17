@@ -231,6 +231,18 @@ type: embed
 
 ```
 
+### DateInput / DateInput2
+
+**Short version:** Use [`DateInput`](/v11_7/DateInput). Forget `DateInput2` exists.
+
+**The full story:** The original `DateInput` had a complex API — you had to manually wire up calendar navigation, day rendering, and date parsing. We wanted to simplify it but couldn't without breaking changes, so we released `DateInput2` as a drop-in alternative with a much simpler API.
+
+Now that InstUI supports component versioning, we no longer need the separate `DateInput2` name. Instead:
+
+- **[DateInput v2](/v11_7/DateInput)** (from v11.7) — the recommended version. Same component that was previously `DateInput2`, same API. **This is the only version that will receive the new theming.**
+- **[DateInput v1](/v11_6/DateInput)** (up to v11.6) — the original component. **Deprecated.** Does not support the new theming system.
+- **[DateInput2 v1](/v11_6/DateInput2)** — **Deprecated.** Will not get a v2 and does not support the new theming system. If you're using `DateInput2`, switch your import to `DateInput` (from v11.7) — the API is identical, no other code changes needed.
+
 ### ColorPicker
 
 ```js
