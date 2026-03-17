@@ -164,7 +164,7 @@ type: example
   render(<ExtraContentExample />)
 ```
 
-Another common usecase is to add an `IconButton` at the end of a TextInput, e.g. for revealing the content of a password field. In these cases, please use the `withBorder={false}` and `withBackground={false}` props for the IconButton.
+Another common usecase is to add an [IconButton](IconButton) at the end of a TextInput, e.g. for revealing the content of a password field. Use the `condensedMedium` size together with `withBorder={false}` and `withBackground={false}` on the IconButton.
 
 ```js
 ---
@@ -174,18 +174,25 @@ const InputsWithButtonsExample = () => {
   const [passwordValue, setPasswordValue] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   return (
-    <TextInput
-      renderLabel="Password"
-      type={showPassword ? 'text' : 'password'}
-      placeholder="Find something..."
-      value={passwordValue}
-      onChange={(e, newValue) => setPasswordValue(newValue)}
-      renderAfterInput={
-        <IconButton withBorder={false} withBackground={false} onClick={() => setShowPassword(prevState => !prevState)} screenReaderLabel={showPassword ? 'Hide password' : 'Show password'}>
-          {showPassword ? <IconOffLine/> : <IconEyeLine/>}
-        </IconButton>
-      }
-    />
+    <View as="div" maxWidth="20rem">
+      <TextInput
+        renderLabel="Password"
+        type={showPassword ? 'text' : 'password'}
+        value={passwordValue}
+        onChange={(e, newValue) => setPasswordValue(newValue)}
+        renderAfterInput={
+          <IconButton
+            size="condensedMedium"
+            withBorder={false}
+            withBackground={false}
+            screenReaderLabel={showPassword ? 'Hide password' : 'Show password'}
+            onClick={() => setShowPassword((prev) => !prev)}
+          >
+            {showPassword ? <EyeOffInstUIIcon /> : <EyeInstUIIcon />}
+          </IconButton>
+        }
+      />
+    </View>
   )
 }
 render(<InputsWithButtonsExample />)
@@ -228,7 +235,7 @@ type: example
 <View as="div" maxWidth="250px">
   <TextInput
     renderLabel="I will not wrap"
-    renderBeforeInput={() => (<IconSearchLine inline={false} />)}
+    renderBeforeInput={<SearchInstUIIcon />}
     renderAfterInput={<Avatar name="Paula Panda" src={avatarSquare} size="x-small" />}
     shouldNotWrap
   />

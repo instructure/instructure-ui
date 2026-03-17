@@ -12,6 +12,52 @@ type: example
 <IconButton screenReaderLabel="Add User"><PlusInstUIIcon /></IconButton>
 ```
 
+### Sizes
+
+```js
+---
+type: example
+---
+<View display="block">
+  <IconButton size="small" screenReaderLabel="Add" margin="small"><PlusInstUIIcon /></IconButton>
+  <IconButton size="medium" screenReaderLabel="Add" margin="small"><PlusInstUIIcon /></IconButton>
+  <IconButton size="large" screenReaderLabel="Add" margin="small"><PlusInstUIIcon /></IconButton>
+</View>
+```
+
+There are also two condensed size variants for compact layouts: `condensedSmall` and `condensedMedium`. These are designed to be used inside other components, such as a [TextInput](TextInput).
+
+```js
+---
+type: example
+---
+const PasswordInput = () => {
+  const [showPassword, setShowPassword] = useState(false)
+
+  return (
+    <View as="div" maxWidth="20rem">
+    <TextInput
+      renderLabel="Password"
+      type={showPassword ? 'text' : 'password'}
+      renderAfterInput={
+        <IconButton
+          size="condensedMedium"
+          withBackground={false}
+          withBorder={false}
+          screenReaderLabel={showPassword ? 'Hide password' : 'Show password'}
+          onClick={() => setShowPassword(!showPassword)}
+        >
+          {showPassword ? <EyeOffInstUIIcon /> : <EyeInstUIIcon />}
+        </IconButton>
+      }
+    />
+    </View>
+  )
+}
+
+render(<PasswordInput />)
+```
+
 ### Accessibility
 
 Because the IconButton visually only renders an icon, a description is necessary for assistive technologies. The `screenReaderLabel` prop is required for this purpose, and should consist of a complete description of the action.

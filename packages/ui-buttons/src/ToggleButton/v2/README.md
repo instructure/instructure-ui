@@ -50,7 +50,7 @@ type: example
       <View
         as="div"
         padding="xx-large"
-        background="primary-inverse"
+        background="info"
         id="inverseToggleContainer"
       >
         <ToggleButton

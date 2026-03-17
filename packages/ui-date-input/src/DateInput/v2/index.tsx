@@ -279,6 +279,7 @@ const DateInput = forwardRef(
           <Popover
             renderTrigger={
               <IconButton
+                size="condensedMedium"
                 withBackground={false}
                 withBorder={false}
                 screenReaderLabel={screenReaderLabels.calendarIcon}

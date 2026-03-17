@@ -37,7 +37,7 @@ The `primary-inverse` color is designed for use on colored backgrounds. It provi
 ---
 type: example
 ---
-<View display="block" background="brand" padding="small">
+<View display="block" background="info" padding="small">
   <Button color="primary-inverse" margin="small">Primary Inverse</Button>
 </View>
 ```

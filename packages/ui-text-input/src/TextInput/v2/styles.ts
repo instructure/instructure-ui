@@ -44,13 +44,7 @@ const generateStyle = (
   state: TextInputStyleProps
 ): TextInputStyle => {
   const { size, textAlign, shouldNotWrap } = props
-  const {
-    interaction,
-    success,
-    invalid,
-    afterElementHasWidth,
-    beforeElementExists
-  } = state
+  const { interaction, success, invalid, beforeElementExists } = state
 
   const sizeVariants = {
     small: {
@@ -212,32 +206,13 @@ const generateStyle = (
       flexDirection: 'row'
     },
     afterElement: {
-      // the next couple lines (until the `label`) is needed so the IconButton looks OK inside the TextInput
-      // explanation: if the content inside is not a button or a popover (which could contain a button) it should have some padding on the right
-      // lineHeight is only needed if it is not popover or button
-      '& > :not(button):not([data-position^="Popover"])': {
-        marginRight: paddingHorizontalVariants[size!]
-        // TODO check if it looks OK with the new buttons. With this it does not look OK with new icons
-        //...(sizeVariants[size!] && {
-        //  lineHeight: sizeVariants[size!]?.lineHeight
-        //})
-      },
       display: 'flex',
       alignItems: 'center',
-      // Spread all sizeVariants except lineHeight (handled above)
-      ...(sizeVariants[size!]
-        ? // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          (({ lineHeight, ...rest }) => rest)(sizeVariants[size!])
-        : {}),
+      paddingInlineEnd: paddingHorizontalVariants[size!],
       label: 'textInput__afterElement',
       ...viewBase,
       borderRadius: componentTheme.borderRadius,
-      flexShrink: 0,
-      // we only override the padding once the width is calculated,
-      // it needs the padding on render
-      ...(afterElementHasWidth === false && {
-        paddingInlineEnd: 0
-      })
+      flexShrink: 0
     }
   }
 }
