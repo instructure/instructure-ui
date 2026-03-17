@@ -1,7 +1,7 @@
 # DateInput2
 
 
-> _Info_: `DateInput2` is an upgrade to the [`DateInput`](/#DateInput) component, offering easier configuration, better UX, improved accessibility, and a year picker. Please consider updating to this for WCAG compatiblity and an overall better experience (for both devs and users).
+> **Deprecated:** `DateInput2` is deprecated and will not receive further updates. Its functionality has been merged into the latest version of [`DateInput`](/v11_7/DateInput) which has the same API. Please migrate to `DateInput` for continued support.
 
 ### Minimal config
 

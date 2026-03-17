@@ -1,7 +1,7 @@
 # DateInput
 
 
-> _Note:_ we recommend to update to the new [`DateInput2`](/#DateInput2) which is easier to configure for developers, has a better UX, better accessibility features and a year picker. `DateInput` will be deprecated in the future.
+> **Deprecated:** This version of `DateInput` is deprecated. Please use the latest version of [`DateInput`](/v11_7/DateInput) which offers easier configuration, better UX, improved accessibility, and a year picker.
 
 The `DateInput` component provides a visual interface for inputting date data.
 
