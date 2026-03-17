@@ -223,22 +223,12 @@ const allowedProps: AllowedPropKeys = [
   'margin'
 ]
 
-type TextInputState = {
-  afterElementHasWidth?: boolean
-}
-
 type TextInputStyleProps = {
   interaction: InteractionType
   success: boolean
   invalid: boolean
-  afterElementHasWidth: TextInputState['afterElementHasWidth']
   beforeElementExists: boolean
 }
 
-export type {
-  TextInputProps,
-  TextInputState,
-  TextInputStyleProps,
-  TextInputStyle
-}
+export type { TextInputProps, TextInputStyleProps, TextInputStyle }
 export { allowedProps }

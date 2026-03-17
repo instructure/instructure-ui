@@ -113,7 +113,12 @@ class Header extends Component<HeaderProps> {
    * Formats a version key like "v11_5" into display format "v11.5"
    */
   formatMinorVersion = (version: string) => {
-    return version.replace(/_/g, '.')
+    const formatted = version.replace(/_/g, '.')
+    // TODO: Remove the beta label once v11.7 is stable
+    if (version === 'v11_7') {
+      return `${formatted} (beta)`
+    }
+    return formatted
   }
 
   renderMinorVersionsBlock = () => {
@@ -151,7 +156,7 @@ class Header extends Component<HeaderProps> {
               </ScreenReaderContent>
             }
           >
-            {minorVersionsData.libraryVersions.map((ver, index) => (
+            {[...minorVersionsData.libraryVersions].reverse().map((ver: string, index: number) => (
               <Menu.Item key={index} id={`minor-opt-${index}`} value={ver}>
                 <View textAlign="center" as="div">
                   {this.formatMinorVersion(ver)}
@@ -165,15 +170,21 @@ class Header extends Component<HeaderProps> {
   }
 
   renderVersionsBlock = () => {
-    const { versionsData, name } = this.props
+    const { versionsData, minorVersionsData, name } = this.props
     const { latestVersion, previousVersions } = versionsData
     const allVersions = [latestVersion, ...previousVersions]
 
     const currentVersion = versionInPath || latestVersion
     const displayVersion = this.getDisplayVersion()
+    const hasMinorVersions =
+      minorVersionsData && minorVersionsData.libraryVersions.length > 1
 
     return (
-      <View display="block" textAlign="center" margin="small none large">
+      <View
+        display="block"
+        textAlign="center"
+        margin={hasMinorVersions ? 'small none none' : 'small none large'}
+      >
         <Menu
           placement="bottom"
           label="Select InstUI version"
