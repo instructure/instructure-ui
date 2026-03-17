@@ -8,6 +8,10 @@
       "value": "{color.icon.interactive.action.primaryOnColor.base}",
       "type": "color"
     },
+    "borderColor": {
+      "value": "{color.stroke.muted}",
+      "type": "color"
+    },
     "fontColor": {
       "value": "{color.text.base}",
       "type": "color"
