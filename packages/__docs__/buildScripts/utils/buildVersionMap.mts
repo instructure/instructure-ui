@@ -92,8 +92,8 @@ export async function buildVersionMap(
         continue
       }
 
-      // Resolve the component version from the source export file
-      const componentVersion = resolveComponentVersion(
+      // Resolve all component versions from the source export file
+      const componentVersions = resolveComponentVersions(
         pkgDir,
         exportLetter,
         pkgShortName
@@ -104,7 +104,7 @@ export async function buildVersionMap(
       }
       mapping[libVersion][pkgShortName] = {
         exportLetter,
-        componentVersion
+        componentVersions
       }
     }
   }
@@ -162,18 +162,20 @@ export function isDocIncludedInVersion(
     return componentVersion === 'v1'
   }
 
-  return componentVersion === entry.componentVersion
+  return entry.componentVersions.includes(componentVersion)
 }
 
 /**
  * Reads the source export file (e.g. src/exports/a.ts) and parses imports
- * to determine which component version directory it maps to (v1 or v2).
+ * to determine which component version directories it maps to (v1, v2, etc.).
+ * A single export file may reference multiple versions when a package contains
+ * components at different migration stages (e.g. DateInput/v2 + DateInput2/v1).
  */
-function resolveComponentVersion(
+function resolveComponentVersions(
   pkgDir: string,
   exportLetter: string,
   pkgShortName: string
-): string {
+): string[] {
   const exportFilePath = path.join(
     pkgDir,
     'src',
@@ -190,20 +192,24 @@ function resolveComponentVersion(
 
   const content = fs.readFileSync(exportFilePath, 'utf-8')
 
-  // Match patterns like:
+  // Match all patterns like:
   //   from '../ComponentName/v2'
   //   from '../ComponentName/v1/SubComponent'
-  const versionMatch = content.match(
-    /from\s+['"]\.\.\/[^/]+\/(v\d+)(?:\/|['"])/
-  )
-  if (versionMatch) {
-    return versionMatch[1]
+  const versionRegex = /from\s+['"]\.\.\/[^/]+\/(v\d+)(?:\/|['"])/g
+  const versions = new Set<string>()
+  let match
+  while ((match = versionRegex.exec(content)) !== null) {
+    versions.add(match[1])
   }
 
-  throw new Error(
-    `[buildVersionMap] Could not resolve component version from ${exportFilePath} (${pkgShortName}). ` +
-    `Ensure the file has an import like: from '../ComponentName/v1'`
-  )
+  if (versions.size === 0) {
+    throw new Error(
+      `[buildVersionMap] Could not resolve component version from ${exportFilePath} (${pkgShortName}). ` +
+      `Ensure the file has an import like: from '../ComponentName/v1'`
+    )
+  }
+
+  return Array.from(versions)
 }
 
 /**

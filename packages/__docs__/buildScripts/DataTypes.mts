@@ -146,7 +146,7 @@ type MainDocsData = {
 
 type VersionMapEntry = {
   exportLetter: string
-  componentVersion: string
+  componentVersions: string[]
 }
 
 type VersionMap = {
