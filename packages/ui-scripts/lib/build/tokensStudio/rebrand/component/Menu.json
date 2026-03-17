@@ -7,6 +7,10 @@
     "minWidth": {
       "value": "8em",
       "type": "sizing"
+    },
+    "borderRadius": {
+      "value": "{borderRadius.sm}",
+      "type": "borderRadius"
     }
   },
   "menuGroup": {
