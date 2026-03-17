@@ -2,314 +2,289 @@
 describes: DateInput
 ---
 
-> _Note:_ we recommend to update to the new [`DateInput2`](/#DateInput2) which is easier to configure for developers, has a better UX, better accessibility features and a year picker. `DateInput` will be deprecated in the future.
+> _Info_: If you are migrating from the deprecated [`DateInput2`](/v11_6/DateInput2), this `DateInput` component has the same API — you can switch with no code changes.
 
-The `DateInput` component provides a visual interface for inputting date data.
+### DateInput versions at a glance
 
-### Composing a DateInput in your Application
+| Version                                    | API                          | Theming          | Accessibility   | Status          |
+| :----------------------------------------- | :--------------------------- | :--------------- | :-------------- | :-------------- |
+| [v11.6 DateInput](/v11_6/DateInput)        | Old (manual calendar wiring) | Old theming only | Has a11y issues | **Deprecated**  |
+| [v11.6 DateInput2](/v11_6/DateInput2)      | New (simple)                 | Old theming only | Good            | **Deprecated**  |
+| [v11.7 DateInput](/v11_7/DateInput) (this) | New (simple)                 | New theming      | Good            | **Recommended** |
 
-`DateInput` uses `Calendar` internally. See [Calendar](Calendar) for more detailed
-documentation and guided examples. `DateInput` shares many of the same `Calendar`
-props and it is created the same way with some additional attributes and callback
-methods for the input. The following example is configured similar to the `Calendar`
-examples using [Moment.js](https://momentjs.com/docs/#/parsing/).
+### Minimal config
 
-```javascript
+```js
 ---
 type: example
 ---
-
-class Example extends React.Component {
-  state = {
-    value: '',
-    isShowingCalendar: false,
-    todayDate: parseDate('2019-08-28').toISOString(),
-    selectedDate: null,
-    renderedDate: parseDate('2019-08-01').toISOString(),
-    disabledDates: [
-      parseDate('2019-08-14').toISOString(),
-      parseDate('2019-08-19').toISOString(),
-      parseDate('2019-08-29').toISOString()
-    ],
-    messages: []
-  }
-
-  generateMonth = (renderedDate = this.state.renderedDate) => {
-    const date = parseDate(renderedDate)
-      .startOf('month')
-      .startOf('week')
-
-    return Array.apply(null, Array(Calendar.DAY_COUNT)).map(() => {
-      const currentDate = date.clone()
-      date.add({days: 1})
-
-      // This workaround is needed because moment's `.add({days: 1})` function has a bug that happens when the date added lands perfectly onto the DST cutoff,
-      // in these cases adding 1 day results in 23 hours added instead,
-      // so `moment.tz('2024-09-07T00:00:00', 'America/Santiago').add({days: 1})` results
-      // in "Sat Sep 07 2024 23:00:00 GMT-0400" instead of "Sun Sep 08 2024 00:00:00 GMT-0400".
-      // which would cause duplicate dates in the calendar.
-      // More info on the bug: https://github.com/moment/moment/issues/4743
-      // Please note that this causes one hour of time difference in the affected timezones/dates and to
-      // fully solve this bug we need to change to something like luxon which handles this properly
-      if (currentDate.clone().format('HH') === '23') {
-        return currentDate.clone().add({hours: 1})
-      }
-
-      return currentDate.clone()
-    })
-  }
-
-  formatDate = (dateInput) => {
-    const date = parseDate(dateInput)
-    return `${date.format('MMMM')} ${date.format('D')}, ${date.format('YYYY')}`
-  }
-
-  handleChange = (event, { value }) => {
-    const newDateStr = parseDate(value).toISOString()
-
-    this.setState(({ renderedDate }) => ({
-      value,
-      selectedDate: newDateStr,
-      renderedDate: newDateStr || renderedDate,
-      messages: []
-    }))
-  }
-
-  handleShowCalendar = (event) => {
-    this.setState({ isShowingCalendar: true })
-  }
-
-  handleHideCalendar = (event) => {
-    this.setState(({ selectedDate, disabledDates, value }) => ({
-      isShowingCalendar: false,
-      value: selectedDate ? this.formatDate(selectedDate) : value
-    }))
-  }
-
-  handleValidateDate = (event) => {
-    this.setState(({ selectedDate, value }) => {
-      // We don't have a selectedDate but we have a value. That means that the value
-      // could not be parsed and so the date is invalid
-      if (!selectedDate && value) {
-        return {
-          messages: [{ type: 'error', text: 'This date is invalid' }],
-        }
-      }
-      // Display a message if the user has typed in a value that corresponds to a
-      // disabledDate
-      if (this.isDisabledDate(parseDate(selectedDate))) {
-        return {
-          messages: [{ type: 'error', text: 'This date is disabled' }],
-        }
-      }
-    })
-  }
-
-  handleDayClick = (event, { date }) => {
-    this.setState({
-      selectedDate: date,
-      renderedDate: date,
-      messages: []
-    })
-  }
-
-  handleSelectNextDay = (event) => {
-    this.modifySelectedDate('day', 1)
-  }
-
-  handleSelectPrevDay = (event) => {
-    this.modifySelectedDate('day', -1)
-  }
-
-  handleRenderNextMonth = (event) => {
-    this.modifyRenderedDate('month', 1)
-  }
-
-  handleRenderPrevMonth = (event) => {
-    this.modifyRenderedDate('month', -1)
-  }
-
-  modifyRenderedDate = (type, step) => {
-    this.setState(({ renderedDate }) => {
-      return { renderedDate: this.modifyDate(renderedDate, type, step) }
-    })
-  }
-
-  modifySelectedDate = (type, step) => {
-    this.setState(({ selectedDate, renderedDate }) => {
-      // We are either going to increase or decrease our selectedDate by 1 day.
-      // If we do not have a selectedDate yet, we'll just select the first day of
-      // the currently rendered month instead.
-      const newDate = selectedDate
-        ? this.modifyDate(selectedDate, type, step)
-        : parseDate(renderedDate).startOf('month').toISOString()
-
-      return {
-        selectedDate: newDate,
-        renderedDate: newDate,
-        value: this.formatDate(newDate),
-        messages: []
-      }
-    })
-  }
-
-  modifyDate = (dateStr, type, step) => {
-    const date = parseDate(dateStr)
-    date.add(step, type)
-    return date.toISOString()
-  }
-
-  isDisabledDate = (date, disabledDates = this.state.disabledDates) => {
-    return disabledDates.reduce((result, disabledDate) => {
-      return result || date.isSame(disabledDate, 'day')
-    }, false)
-  }
-
-  renderWeekdayLabels = () => {
-    const date = parseDate(this.state.renderedDate).startOf('week')
-
-    return Array.apply(null, Array(7)).map(() => {
-      const currentDate = date.clone()
-      date.add(1, 'day')
-
-      return (
-        <AccessibleContent alt={currentDate.format('dddd')}>
-          {currentDate.format('dd')}
-        </AccessibleContent>
-      )
-    })
-  }
-
-  renderDays () {
-    const {
-      renderedDate,
-      selectedDate,
-      todayDate,
-    } = this.state
-
-    return this.generateMonth().map((date) => {
-      const dateStr = date.toISOString()
-
-      return (
-        <DateInput.Day
-          key={dateStr}
-          date={dateStr}
-          interaction={this.isDisabledDate(date) ? 'disabled' : 'enabled'}
-          isSelected={date.isSame(selectedDate, 'day')}
-          isToday={date.isSame(todayDate, 'day')}
-          isOutsideMonth={!date.isSame(renderedDate, 'month')}
-          label={`${date.format('D')} ${date.format('MMMM')} ${date.format('YYYY')}`}
-          onClick={this.handleDayClick}
-        >
-          {date.format('D')}
-        </DateInput.Day>
-      )
-    })
-  }
-
-  render () {
-    const {
-      value,
-      isShowingCalendar,
-      renderedDate,
-      messages
-    } = this.state
-
-    const date = parseDate(this.state.renderedDate)
-
-    const buttonProps = (type = 'prev') => ({
-      size: 'small',
-      withBackground: false,
-      withBorder: false,
-      renderIcon: type === 'prev'
-        ? <ChevronLeftInstUIIcon color="baseColor" />
-        : <ChevronRightInstUIIcon color="baseColor" />,
-      screenReaderLabel: type === 'prev' ? 'Previous month' : 'Next month'
-    })
-
+  const Example = () => {
+    const [inputValue, setInputValue] = useState('')
+    const [dateString, setDateString] = useState('')
     return (
-      <DateInput
-        renderLabel="Choose a date"
-        assistiveText="Type a date or use arrow keys to navigate date picker."
-        value={value}
-        onChange={this.handleChange}
-        width="20rem"
-        isInline
-        messages={messages}
-        isShowingCalendar = {this.state.isShowingCalendar}
-        onRequestValidateDate={this.handleValidateDate}
-        onRequestShowCalendar={this.handleShowCalendar}
-        onRequestHideCalendar={this.handleHideCalendar}
-        onRequestSelectNextDay={this.handleSelectNextDay}
-        onRequestSelectPrevDay={this.handleSelectPrevDay}
-        onRequestRenderNextMonth={this.handleRenderNextMonth}
-        onRequestRenderPrevMonth={this.handleRenderPrevMonth}
-        renderNavigationLabel={
-          <span>
-            <div>{date.format('MMMM')}</div>
-            <div>{date.format('YYYY')}</div>
-          </span>
-        }
-        renderPrevMonthButton={<IconButton {...buttonProps('prev')} />}
-        renderNextMonthButton={<IconButton {...buttonProps('next')} />}
-        renderWeekdayLabels={this.renderWeekdayLabels()}
-      >
-        {this.renderDays()}
-      </DateInput>
+      <div>
+        <DateInput
+          renderLabel="Choose a date"
+          screenReaderLabels={{
+            calendarIcon: 'Calendar',
+            nextMonthButton: 'Next month',
+            prevMonthButton: 'Previous month',
+            datePickerDialog: 'Date picker'
+          }}
+          value={inputValue}
+          width="20rem"
+          onChange={(e, inputValue, dateString) => {
+            setInputValue(inputValue)
+            setDateString(dateString)
+          }}
+          invalidDateErrorMessage="Invalid date"
+        />
+        <p>
+          <Text>Input Value: </Text><code>{inputValue}</code>
+          <br />
+          <Text>UTC Date String: </Text><code>{dateString}</code>
+        </p>
+      </div>
     )
   }
-}
 
-const locale = 'en-us'
-const timezone = 'America/Denver'
+  render(<Example />)
+```
 
-const parseDate = (dateStr) => {
-  return moment.tz(dateStr, [moment.ISO_8601, 'llll', 'LLLL', 'lll', 'LLL', 'll', 'LL', 'l', 'L'], locale, timezone)
+### Parsing and formatting dates
+
+When typing in a date manually (instead of using the included picker), the component tries to parse the date as you type it in. By default parsing is based on the user's locale which determines the order of day, month and year (e.g.: a user with US locale will have MONTH/DAY/YEAR order, and someone with GB locale will have DAY/MONTH/YEAR order).
+
+Any of the following separators can be used when typing a date: `,`, `-`, `.`, `/` or a whitespace however on blur the date will be formatted according to the locale and separators will be changed and leading zeros also adjusted.
+
+If you want different parsing and formatting then the current locale you can use the `dateFormat` prop which accepts either a string with a name of a different locale (so you can use US date format even if the user is France) or a parser and formatter functions.
+
+The default parser also has a limitation of not working with years before `1000` and after `9999`. These values are invalid by default but not with custom parsers.
+
+```js
+---
+type: example
+---
+const Example = () => {
+  const [value, setValue] = useState('')
+  const [value2, setValue2] = useState('')
+  const [value3, setValue3] = useState('')
+
+  return (
+    <div>
+      <Text as="p">US locale with default format:</Text>
+      <DateInput
+        renderLabel="Choose a date"
+        screenReaderLabels={{
+          calendarIcon: 'Calendar',
+          nextMonthButton: 'Next month',
+          prevMonthButton: 'Previous month',
+          datePickerDialog: 'Date picker'
+        }}
+        width="20rem"
+        value={value}
+        locale="en-us"
+        onChange={(e, value) => setValue(value)}
+      />
+      <Text as="p">US locale with german date format:</Text>
+      <DateInput
+        renderLabel="Choose a date"
+        screenReaderLabels={{
+          calendarIcon: 'Calendar',
+          nextMonthButton: 'Next month',
+          prevMonthButton: 'Previous month',
+          datePickerDialog: 'Date picker'
+        }}
+        width="20rem"
+        value={value2}
+        locale="en-us"
+        dateFormat="de-de"
+        onChange={(e, value) => setValue2(value)}
+      />
+      <Text as="p">US locale with ISO date format:</Text>
+      <DateInput
+        renderLabel="Choose a date"
+        screenReaderLabels={{
+          calendarIcon: 'Calendar',
+          nextMonthButton: 'Next month',
+          prevMonthButton: 'Previous month',
+          datePickerDialog: 'Date picker'
+        }}
+        width="20rem"
+        value={value3}
+        locale="en-us"
+        dateFormat={{
+          parser: (input) => {
+            // split input on '.', whitespace, '/', ',' or '-' using regex: /[.\s/.-]+/
+            // the '+' allows splitting on consecutive delimiters
+            const [year, month, day] = input.split(/[,.\s/.-]+/)
+            const newDate = new Date(year, month-1, day)
+            return isNaN(newDate) ? '' : newDate
+          },
+          formatter: (date) => {
+            // vanilla js formatter but you could use a date library instead
+            const year = date.getFullYear()
+            // month is zero indexed so add 1
+            const month = `${date.getMonth() + 1}`.padStart(2, '0')
+            const day = `${date.getDate()}`.padStart(2, '0')
+            return `${year}-${month}-${day}`
+          }
+        }}
+        onChange={(e, value) => setValue3(value)}
+      />
+    </div>
+  )
 }
 
 render(<Example />)
 ```
 
-#### Some dates to keep track of
+### Timezones
 
-- `todayDate` - the date that represents today
-- `selectedDate` - the user's selected date
-- `renderedDate` - the date that the user is viewing as they navigate the `Calendar`
-- `disabledDates` - any dates that are disabled
+In the examples above you can see that the `onChange` callback also return a UTC date string. This means it is timezone adjusted. If the timezone is not set via the `timezone` prop, it is calculated/assumed from the user's machine. So if a user chooses September 10th 2024 with the timezone 'Europe/Budapest', the `onChange` function will return `2024-09-09T22:00:00.000Z` because Budapest is two hours ahead of UTC (summertime).
 
-#### Rendering `DateInput.Day` children
+### With year picker
 
-`DateInput` accepts children of type `DateInput.Day`. Both `DateInput.Day` and
-`Calendar.Day` are exporting the same `Day` component. The documentation for
-`Day` can be found in [Calendar](Calendar).
+```js
+---
+type: example
+---
+  const Example = () => {
+    const [inputValue, setInputValue] = useState('')
+    const [dateString, setDateString] = useState('')
+    return (
+      <div>
+        <DateInput
+          renderLabel="Choose a date"
+          screenReaderLabels={{
+            calendarIcon: 'Calendar',
+            nextMonthButton: 'Next month',
+            prevMonthButton: 'Previous month',
+            datePickerDialog: 'Date picker'
+          }}
+          value={inputValue}
+          width="20rem"
+          onChange={(e, inputValue, dateString) => {
+            setInputValue(inputValue)
+            setDateString(dateString)
+          }}
+          invalidDateErrorMessage="Invalid date"
+          withYearPicker={{
+            screenReaderLabel: 'Year picker',
+            startYear: 1900,
+            endYear: 2024
+          }}
+        />
+        <p>
+          <Text>Input Value: </Text><code>{inputValue}</code>
+          <br />
+          <Text>UTC Date String: </Text><code>{dateString}</code>
+        </p>
+      </div>
+    )
+  }
 
-#### Handling onChange
+  render(<Example />)
+```
 
-When the `DateInput` fires an `onChange` event:
+### Date validation
 
-- The value should be updated and any messages should be cleared
-- Verify if the value can be parsed as a date
-- If it can be parsed, update the `selectedDate` and `renderedDate` with that date
-- If it cannot be parsed, the `selectedDate` is set to null and the `renderedDate`
-  stays the same
+By default `DateInput` only does date validation if the `invalidDateErrorMessage` prop is provided. Validation is triggered on the blur event of the input field. Invalid dates are determined current locale.
 
-#### Handling onRequestHideCalendar
+If you want to do more complex validation (e.g. only allow a subset of dates) you can use the `onRequestValidateDate` and `messages` props.
 
-When the `DateInput` fires `onRequestHideCalendar`:
+```js
+---
+type: example
+---
+const Example = () => {
+  const [value, setValue] = useState('')
+  const [dateString, setDateString] = useState('')
+  const [messages, setMessages] = useState([])
 
-- The calendar should be hidden
-- The value should be updated with a formatted version of the `selectedDate` if
-  it exists. See "Formatting user input" below
+  const handleDateValidation = (e, inputValue, utcIsoDate) => {
+    // utcIsoDate will be an empty string if the input cannot be parsed as a date
 
-#### Formatting user input
+    const date = new Date(utcIsoDate)
 
-Date formats can vary widely (ex. '8-9-19' vs '8/9/19'). When the `Calendar` is
-hidden, the input value should be converted to a consistent, standardized format.
-The formatted result of the raw input '8/9/19'
-could be "August 9, 2019".
+    // don't validate empty input
+    if (!utcIsoDate && inputValue.length > 0) {
+      setMessages([{
+        type: 'error',
+        text: 'This is not a valid date'
+      }])
+    } else if (date < new Date('1990-01-01')) {
+      setMessages([{
+        type: 'error',
+        text: 'Select date after January 1, 1990'
+      }])
+    } else {
+      setMessages([])
+    }
+  }
 
-#### Handling onRequestValidateDate
+  return (
+    <DateInput
+      renderLabel="Choose a date after January 1, 1990"
+      screenReaderLabels={{
+        calendarIcon: 'Calendar',
+        nextMonthButton: 'Next month',
+        prevMonthButton: 'Previous month',
+        datePickerDialog: 'Date picker'
+      }}
+      width="20rem"
+      value={value}
+      messages={messages}
+      onRequestValidateDate={handleDateValidation}
+      onChange={(e, value) => setValue(value)}
+      withYearPicker={{
+        screenReaderLabel: 'Year picker',
+        startYear: 1900,
+        endYear: 2024
+      }}
+    />
+  )
+}
 
-When the `DateInput` fires `onRequestValidateDate`, the provided user input
-should be validated. If the value cannot be parsed as a valid date, or if the
-`selectedDate` is disabled, the user should be notified via the `messages` prop.
+render(<Example />)
+```
+
+### Date format hint
+
+If the `placeholder` property is undefined it will display a hint for the date format (like `DD/MM/YYYY`). Usually it is recommended to leave it as it is for a better user experience.
+
+### Disabling dates
+
+You can use the `disabledDates` prop to disable specific dates. It accepts either an array of ISO8601 date strings or a function. Keep in mind that this will only disable the dates in the calendar and does not prevent the user the enter them into the input field. To validate those values please use the `onRequestValidateDate` prop.
+
+```js
+---
+type: example
+---
+const Example = () => {
+  const [inputValue, setInputValue] = useState('2/5/2025')
+  const [dateString, setDateString] = useState('')
+  return (
+    <DateInput
+      renderLabel="Choose a date"
+      disabledDates={['2025-02-11', '2025-02-12', '2025-02-13']}
+      screenReaderLabels={{
+        calendarIcon: 'Calendar',
+        nextMonthButton: 'Next month',
+        prevMonthButton: 'Previous month',
+        datePickerDialog: 'Date picker'
+      }}
+      value={inputValue}
+      locale="en-us"
+      width="20rem"
+      onChange={(e, inputValue, dateString) => {
+        setInputValue(inputValue)
+        setDateString(dateString)
+      }}
+      invalidDateErrorMessage="Invalid date"
+    />
+  )
+}
+
+render(<Example />)
+```
