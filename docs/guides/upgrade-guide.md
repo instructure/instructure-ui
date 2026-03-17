@@ -4,7 +4,11 @@ category: Guides
 order: 1
 ---
 
-# Upgrade Guide for Version 12
+# Upgrade Guide for the new theming system
+
+## Multi-version support for components
+
+TODO add details
 
 ## New theming system
 
