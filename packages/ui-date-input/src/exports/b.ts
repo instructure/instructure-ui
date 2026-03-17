@@ -23,6 +23,6 @@
  */
 
 export { DateInput } from '../DateInput/v2'
-export { DateInput2 } from '../DateInput2/v1'
+export { DateInput2 } from '../DateInput2/v2'
 export type { DateInputProps } from '../DateInput/v2/props'
-export type { DateInput2Props } from '../DateInput2/v1/props'
+export type { DateInput2Props } from '../DateInput2/v2/props'
