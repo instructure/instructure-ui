@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.7.0](https://github.com/instructure/instructure-ui/compare/v11.6.0...v11.7.0) (2026-03-18)
+
+
+### Features
+
+* **many:** add new theming solution ([1cef88e](https://github.com/instructure/instructure-ui/commit/1cef88e97f40dd85e15b10bc4307d013ae8b09d0))
+* **many:** separate focus outline calculation from view, inject sharedTokens to generateStyles ([793fe43](https://github.com/instructure/instructure-ui/commit/793fe4346e7b960a272e8b4a98bc8e2c9bb7d2fe))
+* **ui-avatar:** rework avatar to comply with new design ([70a60d4](https://github.com/instructure/instructure-ui/commit/70a60d4754851be21412a0fbaf234dd4ab39650b))
+* **ui-react-utils,ui-icons-lucide,ui-avatar:** add lucide icons to Avatar, refactor ui-icons-lucid package ([ab5c1ca](https://github.com/instructure/instructure-ui/commit/ab5c1ca8ec9961d754dafee0bcbe5040bb2641b1))
+* **ui-spinner,ui-avatar:** refactor spinner ([665ab13](https://github.com/instructure/instructure-ui/commit/665ab13c536a8b94b7ba3adc316d06a81f2b67e4))
+
+
+
+
+
 # [11.6.0](https://github.com/instructure/instructure-ui/compare/v11.5.0...v11.6.0) (2026-02-18)
 
 **Note:** Version bump only for package @instructure/ui-avatar
