@@ -1,10 +1,10 @@
-import { Accessibility2InstUIIcon } from '@instructure/ui-icons'
 import React from 'react'
+import { Accessibility2InstUIIcon as A11yIcon } from '@instructure/ui-icons'
 
 function MyComponent() {
   return (
     <div>
-      <Accessibility2InstUIIcon />
+      <A11yIcon />
     </div>
   )
 }

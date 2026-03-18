@@ -1,5 +1,11 @@
 import React from 'react'
-import { IconA11yLine, IconAddLine, IconAdminLine } from '@instructure/ui-icons'
+import {
+  IconA11yLine,
+  IconAddLine,
+  IconAdminLine,
+  IconSearchLine,
+  IconAiSolid
+} from '@instructure/ui-icons'
 
 function MyComponent() {
   return (
@@ -7,6 +13,8 @@ function MyComponent() {
       <IconA11yLine />
       <IconAddLine />
       <IconAdminLine />
+      <IconSearchLine />
+      <IconAiSolid />
     </div>
   )
 }

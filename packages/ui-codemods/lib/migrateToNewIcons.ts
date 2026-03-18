@@ -22,11 +22,14 @@
  * SOFTWARE.
  */
 
-import type { Transform } from 'jscodeshift'
+import type { Collection, JSCodeshift, Transform } from 'jscodeshift'
 import type { InstUICodemod } from './utils/instUICodemodExecutor'
 import instUICodemodExecutor from './utils/instUICodemodExecutor'
-import { printWarning } from './utils/codemodHelpers'
-import { isImportSpecifier } from './utils/codemodTypeCheckers'
+import {
+  findEveryImport,
+  printWarning,
+  renameImportAndUsages
+} from './utils/codemodHelpers'
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -34,24 +37,21 @@ import { fileURLToPath } from 'url'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
+const IMPORT_PATHS = [
+  '@instructure/ui-icons',
+  '@instructure/ui-icons/es/svg',
+  '@instructure/ui'
+]
+
 const mappingData = JSON.parse(
   fs.readFileSync(
     path.join(__dirname, '../../ui-icons/src/lucide/mapping.json'),
     'utf-8'
   )
 )
-const iconMapping = mappingData.mappingOverrides as Record<string, string>
 
-const ICON_IMPORT_PATHS = [
-  '@instructure/ui-icons',
-  '@instructure/ui-icons/es/svg'
-]
-const NEW_ICON_IMPORT_PATH = '@instructure/ui-icons'
+const iconMappings = mappingData.mappingOverrides as Record<string, string>
 
-/**
- * Convert kebab-case to PascalCase.
- * Example: 'accessibility-2' -> 'Accessibility2'
- */
 function kebabToPascal(str: string): string {
   return str
     .split('-')
@@ -59,107 +59,71 @@ function kebabToPascal(str: string): string {
     .join('')
 }
 
-/**
- * Returns the new icon export name for the given legacy icon name,
- * or null if no mapping exists.
- * Example: 'IconA11yLine' -> 'Accessibility2InstUIIcon'
- */
-function getNewIconName(oldName: string): string | null {
-  const match = oldName.match(/^Icon(.+?)(Line|Solid)$/)
-  if (!match) return null
-  const mappedName = iconMapping[match[1]]
-  if (!mappedName) return null
-  return kebabToPascal(mappedName) + 'InstUIIcon'
-}
+const LEGACY_ICON_PATTERN = /^Icon(.+?)(Line|Solid)$/
 
 /**
- * Migrates from legacy InstUI icons to new lucide and custom icons
+ * Warns about legacy icons that has no mappings and have to be migrated manually
  */
-const migrateToNewIcons: Transform = (
-  file,
-  api,
-  options?: { fileName?: string; usePrettier?: boolean }
-) => {
-  return instUICodemodExecutor(migrateToNewIconsCodemod, file, api, options)
-}
+function warnUnmappedIcons(
+  j: JSCodeshift,
+  root: Collection,
+  filePath: string
+): void {
+  // findEveryImport only accepts a single path, so flatMap collects results across all paths
+  IMPORT_PATHS.flatMap((p) => findEveryImport(j, root, p)).forEach(
+    (localName) => {
+      const match = localName.match(LEGACY_ICON_PATTERN)
+      if (!match || iconMappings[match[1]]) return
 
-const migrateToNewIconsCodemod: InstUICodemod = (j, root, filePath) => {
-  let hasModifications = false
-  const newIconNames = new Set<string>()
-  // localIconName -> newIconName (handles aliased imports like `import { A as B }`)
-  const replacements = new Map<string, string>()
-
-  root.find(j.ImportDeclaration).forEach((path) => {
-    if (!ICON_IMPORT_PATHS.includes(path.node.source.value as string)) return
-
-    const remainingSpecifiers: typeof path.node.specifiers = []
-
-    path.node.specifiers?.forEach((spec) => {
-      if (!isImportSpecifier(spec)) {
-        remainingSpecifiers.push(spec)
-        return
-      }
-
-      const oldIconName = spec.imported.name as string
-      const localIconName = (spec.local?.name as string) ?? oldIconName
-      const newIconName = getNewIconName(oldIconName)
-
-      if (!newIconName) {
-        remainingSpecifiers.push(spec)
-        printWarning(
-          filePath,
-          spec.loc?.start.line,
-          `No mapping found for icon: ${oldIconName}. Please migrate manually.`
-        )
-        return
-      }
-
-      replacements.set(localIconName, newIconName)
-      newIconNames.add(newIconName)
-      hasModifications = true
-    })
-
-    if (remainingSpecifiers.length === 0) {
-      j(path).remove()
-    } else {
-      // eslint-disable-next-line no-param-reassign
-      path.node.specifiers = remainingSpecifiers
+      printWarning(
+        filePath,
+        undefined,
+        `No mapping found for "${localName}". Please migrate manually.`
+      )
     }
-  })
-
-  if (!hasModifications) return false
-
-  // Rename JSX usages
-  root.find(j.JSXElement).forEach((path) => {
-    const opening = path.node.openingElement
-    const closing = path.node.closingElement
-    if (opening.name.type !== 'JSXIdentifier') return
-
-    const newName = replacements.get(opening.name.name)
-    if (!newName) return
-
-    opening.name.name = newName
-    if (closing?.name.type === 'JSXIdentifier') {
-      closing.name.name = newName
-    }
-  })
-
-  // Add new import at the top, sorted alphabetically
-  const specifiers = Array.from(newIconNames)
-    .sort()
-    .map((name) => j.importSpecifier(j.identifier(name), j.identifier(name)))
-  const newImport = j.importDeclaration(
-    specifiers,
-    j.literal(NEW_ICON_IMPORT_PATH)
   )
-  const firstImport = root.find(j.ImportDeclaration).at(0)
-  if (firstImport.length > 0) {
-    firstImport.insertBefore(newImport)
-  } else {
-    root.get().node.program.body.unshift(newImport)
+}
+
+/**
+ * Iterates every known legacy icon name (derived from mapping.json) and migrates it:
+ * 1. Renames the import specifier in-place
+ * 2. Renames JSX elements
+ * 3. Renames references (`renderIcon={OldIcon}`).
+ */
+function migrateIcons(j: JSCodeshift, root: Collection): boolean {
+  let didChange = false
+
+  for (const [iconSuffix, newIconKey] of Object.entries(iconMappings)) {
+    const newName = kebabToPascal(newIconKey) + 'InstUIIcon'
+
+    for (const variant of ['Line', 'Solid']) {
+      const legacyName = `Icon${iconSuffix}${variant}`
+
+      if (renameImportAndUsages(j, root, legacyName, newName, IMPORT_PATHS)) {
+        didChange = true
+      }
+    }
   }
 
-  return true
+  return didChange
+}
+
+/**
+ * Migrates legacy InstUI icons (`IconXxxLine` / `IconXxxSolid`) to new
+ * `XxxInstUIIcon` components.
+ *
+ * Renames specifiers in-place for imports from:
+ *   - `@instructure/ui-icons`
+ *   - `@instructure/ui-icons/es/svg`
+ *   - `@instructure/ui`
+ */
+const migrateToNewIconsCodemod: InstUICodemod = (j, root, filePath) => {
+  warnUnmappedIcons(j, root, filePath)
+  return migrateIcons(j, root)
+}
+
+const migrateToNewIcons: Transform = (file, api, options) => {
+  return instUICodemodExecutor(migrateToNewIconsCodemod, file, api, options)
 }
 
 export default migrateToNewIcons
