@@ -22,27 +22,39 @@
  * SOFTWARE.
  */
 
-import type { ComponentStyle, ThemeOverrideValue } from '@instructure/emotion'
-import type { OtherHTMLAttributes } from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type {
+  NutritionFactsTheme,
+  OtherHTMLAttributes
+} from '@instructure/shared-types'
 
-type DataPermissionLevelsOwnProps = {
+type BlockType = {
+  blockTitle: string
+  segmentData: {
+    segmentTitle: string
+    description: string
+    value: string
+    valueDescription?: string
+  }[]
+}
+
+type NutritionFactsOwnProps = {
   /**
    * i18n text for the label of the modal
    */
   modalLabel: string
   /**
-   * i18n text for the dataPermissionLevels title
+   * i18n text for the Nutrition Facts title
    */
   title: string
   /**
-   * i18n text for the "model and data" heading of the dataPermissionLevels
+   * i18n text for the feature name that the Nutrition Facts describes
    */
-  data: {
-    level: string
-    title: string
-    description: string
-    highlighted?: boolean
-  }[]
+  featureName: string
+  /**
+   * i18n text for the "model and data" heading of the Nutrition Facts
+   */
+  data: BlockType[]
   /**
    * i18n text for the close button
    */
@@ -51,14 +63,6 @@ type DataPermissionLevelsOwnProps = {
    * i18n text for the close iconButton
    */
   closeIconButtonScreenReaderLabel: string
-  /**
-   * i18n text for the "current feature" text
-   */
-  currentFeatureText: string
-  /**
-   * i18n text for the current feature
-   */
-  currentFeature: string
   /**
    * i18n text for the trigger
    */
@@ -69,23 +73,20 @@ type DataPermissionLevelsOwnProps = {
   fullscreen?: boolean
 }
 
-type PropKeys = keyof DataPermissionLevelsOwnProps
+type PropKeys = keyof NutritionFactsOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type DataPermissionLevelsProps = DataPermissionLevelsOwnProps & {
-  themeOverride?: ThemeOverrideValue
-} & OtherHTMLAttributes<DataPermissionLevelsOwnProps>
+type NutritionFactsProps = NutritionFactsOwnProps &
+  WithStyleProps<NutritionFactsTheme, NutritionFactsStyle> &
+  OtherHTMLAttributes<NutritionFactsOwnProps>
 
-type DataPermissionLevelsStyle = ComponentStyle<
-  | 'dataPermissionLevels'
+type NutritionFactsStyle = ComponentStyle<
+  | 'segmentCard'
+  | 'segmentCardExplainerContainer'
+  | 'segmentContainer'
+  | 'blockContainer'
   | 'body'
-  | 'card'
-  | 'level'
-  | 'highlightedCard'
-  | 'currentFeature'
-  | 'contentContainer'
-  | 'permissionTitle'
 > & {
   maxWidth?: string
 }
@@ -94,13 +95,12 @@ const allowedProps: AllowedPropKeys = [
   'fullscreen',
   'modalLabel',
   'title',
+  'featureName',
   'data',
   'closeButtonText',
   'closeIconButtonScreenReaderLabel',
-  'currentFeatureText',
-  'currentFeature',
   'triggerText'
 ]
 
-export type { DataPermissionLevelsProps, DataPermissionLevelsStyle }
+export type { NutritionFactsProps, NutritionFactsStyle }
 export { allowedProps }

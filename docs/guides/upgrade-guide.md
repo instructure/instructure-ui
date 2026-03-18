@@ -243,6 +243,26 @@ Now that InstUI supports component versioning, we no longer need the separate `D
 - **[DateInput v1](/v11_6/DateInput)** (up to v11.6) — the original component. **Deprecated.** Does not support the new theming system.
 - **[DateInput2 v1](/v11_6/DateInput2)** — **Deprecated.** Will not get a v2 and does not support the new theming system. If you're using `DateInput2`, switch your import to `DateInput` (from v11.7) — the API is identical, no other code changes needed.
 
+### DataPermissionLevels
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  added={[
+    {name:"contentContainerBorderRadius",note:""},
+    {name:"contentContainerColor",note:""}
+  ]}
+  removed={[
+    {name:"cardPadding",note:""},
+    {name:"cardExplainerContainerBottomMargin",note:""},
+    {name:"cardGap",note:""}
+  ]}
+/>
+
+```
+
 ### ColorPicker
 
 ```js
@@ -701,6 +721,20 @@ type: embed
     {oldName:"largeHeight",newName:"textColor",note:""},
     {oldName:"color",newName:"textColor",note:""},
     {oldName:"background",newName:"backgroundColor",note:""}
+  ]}
+/>
+
+```
+
+### NutritionFacts
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  changed={[
+    {oldName:"cardBorderRadius",newName:"borderRadius",note:""}
   ]}
 />
 

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
+import type { NutritionFactsTheme } from '@instructure/shared-types'
 import type { NutritionFactsProps, NutritionFactsStyle } from './props'
 
 /**
@@ -30,15 +30,13 @@ import type { NutritionFactsProps, NutritionFactsStyle } from './props'
  * private: true
  * ---
  * Generates the style object from the theme and provided additional information
- * @param componentTheme The theme variable object.
- * @param params Additional parameters to customize the style.
- * @param sharedTokens Shared token object that stores common values for the theme.
- * @return The final style object, which will be used in the component
+ * @param  {Object} componentTheme The theme variable object.
+ * @param  {Object} props the props of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['NutritionFacts'],
-  _params: NutritionFactsProps,
-  _sharedTokens: SharedTokens
+  componentTheme: NutritionFactsTheme,
+  _props: NutritionFactsProps
 ): NutritionFactsStyle => {
   return {
     segmentCard: {
@@ -46,7 +44,7 @@ const generateStyle = (
       borderStyle: 'solid',
       borderWidth: componentTheme?.cardBorderWidth,
       borderColor: componentTheme?.cardBorderColor,
-      borderRadius: componentTheme?.borderRadius,
+      borderRadius: componentTheme?.cardBorderRadius,
       padding: componentTheme?.cardPadding,
       display: 'flex',
       flexDirection: 'column'

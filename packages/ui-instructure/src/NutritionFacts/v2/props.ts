@@ -22,11 +22,8 @@
  * SOFTWARE.
  */
 
-import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
-import type {
-  NutritionFactsTheme,
-  OtherHTMLAttributes
-} from '@instructure/shared-types'
+import type { ComponentStyle, ThemeOverrideValue } from '@instructure/emotion'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 
 type BlockType = {
   blockTitle: string
@@ -77,9 +74,9 @@ type PropKeys = keyof NutritionFactsOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type NutritionFactsProps = NutritionFactsOwnProps &
-  WithStyleProps<NutritionFactsTheme, NutritionFactsStyle> &
-  OtherHTMLAttributes<NutritionFactsOwnProps>
+type NutritionFactsProps = NutritionFactsOwnProps & {
+  themeOverride?: ThemeOverrideValue
+} & OtherHTMLAttributes<NutritionFactsOwnProps>
 
 type NutritionFactsStyle = ComponentStyle<
   | 'segmentCard'

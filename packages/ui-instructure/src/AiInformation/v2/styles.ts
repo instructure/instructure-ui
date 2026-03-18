@@ -23,7 +23,7 @@
  */
 
 import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
-import type { AiInformationStyle } from './props'
+import type { AiInformationStyle, AiInformationProps } from './props'
 
 /**
  * ---
@@ -37,7 +37,7 @@ import type { AiInformationStyle } from './props'
  */
 const generateStyle = (
   componentTheme: NewComponentTypes['AiInformation'],
-  _params: Record<string, never>,
+  _params: AiInformationProps,
   _sharedTokens: SharedTokens
 ): AiInformationStyle => {
   return {

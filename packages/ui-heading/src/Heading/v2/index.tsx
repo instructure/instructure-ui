@@ -26,7 +26,10 @@ import { Component } from 'react'
 
 import { View } from '@instructure/ui-view/latest'
 import { passthroughProps } from '@instructure/ui-react-utils'
-import { StarsInstUIIcon, renderIconWithProps } from '@instructure/ui-icons'
+import {
+  IgniteaiLogoInstUIIcon,
+  renderIconWithProps
+} from '@instructure/ui-icons'
 
 import { withStyle } from '@instructure/emotion'
 
@@ -196,7 +199,7 @@ class Heading extends Component<HeadingProps> {
       return (
         <span css={[this.props.styles?.withIcon]} aria-hidden="true">
           <span css={this.props.styles?.igniteAIStacked}>
-            <StarsInstUIIcon color="ai" size="sm" />
+            <IgniteaiLogoInstUIIcon color="ai" size="sm" />
             <span css={this.props.styles?.igniteAI}>IgniteAI</span>
           </span>
           {children}
@@ -207,7 +210,7 @@ class Heading extends Component<HeadingProps> {
       return (
         <span css={this.props.styles?.withIcon} aria-hidden="true">
           <span css={this.props.styles?.igniteAIHorizontal}>
-            <StarsInstUIIcon color="ai" size={this.getIconSize(true)} />
+            <IgniteaiLogoInstUIIcon color="ai" size={this.getIconSize(true)} />
             <span css={this.props.styles?.igniteAI}>IgniteAI</span>
           </span>
           {children}
@@ -217,7 +220,7 @@ class Heading extends Component<HeadingProps> {
     if (aiVariant === 'iconOnly') {
       return (
         <span css={this.props.styles?.withIcon} aria-hidden="true">
-          <StarsInstUIIcon color="ai" size={this.getIconSize(true)} />
+          <IgniteaiLogoInstUIIcon color="ai" size={this.getIconSize(true)} />
           {children}
         </span>
       )

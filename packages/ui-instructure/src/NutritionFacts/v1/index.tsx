@@ -22,40 +22,39 @@
  * SOFTWARE.
  */
 import { useState } from 'react'
-import { Modal } from '@instructure/ui-modal/latest'
-import { Button, CloseButton } from '@instructure/ui-buttons/latest'
-import { Heading } from '@instructure/ui-heading/latest'
-import { Text } from '@instructure/ui-text/latest'
-import { Link } from '@instructure/ui-link/latest'
-import { useStyle } from '@instructure/emotion'
+import { Modal } from '@instructure/ui-modal/v11_6'
+import { Button, CloseButton } from '@instructure/ui-buttons/v11_6'
+import { Heading } from '@instructure/ui-heading/v11_6'
+import { Text } from '@instructure/ui-text/v11_6'
+import { Link } from '@instructure/ui-link/v11_6'
+import { useStyleLegacy as useStyle } from '@instructure/emotion'
 
-import { DataPermissionLevelsProps } from './props'
+import { NutritionFactsProps } from './props'
 import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
 category: components/AI Components
 ---
 **/
-const DataPermissionLevels = ({
+const NutritionFacts = ({
   modalLabel,
   title,
+  featureName,
   data,
   closeButtonText,
   closeIconButtonScreenReaderLabel,
-  currentFeature,
-  currentFeatureText,
   triggerText,
-  fullscreen = false,
-  themeOverride
-}: DataPermissionLevelsProps) => {
+  fullscreen = false
+}: NutritionFactsProps) => {
   const [open, setOpen] = useState(false)
 
   const styles = useStyle({
     generateStyle,
-    themeOverride,
-    componentId: 'DataPermissionLevels',
-    displayName: 'DataPermissionLevels'
+    generateComponentTheme,
+    componentId: 'NutritionFacts',
+    displayName: 'NutritionFacts'
   })
 
   return (
@@ -72,13 +71,13 @@ const DataPermissionLevels = ({
         {triggerText}
       </Link>
       <Modal
-        size={fullscreen ? 'fullscreen' : 'medium'}
         open={open}
         onDismiss={() => {
           setOpen(false)
         }}
         label={modalLabel}
         shouldCloseOnDocumentClick
+        size={fullscreen ? 'fullscreen' : 'medium'}
       >
         <Modal.Header spacing="compact">
           <Heading aiVariant="stacked">{title}</Heading>
@@ -92,37 +91,48 @@ const DataPermissionLevels = ({
         </Modal.Header>
         <Modal.Body>
           <div css={styles?.body}>
-            {data.map(({ level, title, description, highlighted }, index) => (
-              <div
-                key={index}
-                css={highlighted ? styles?.highlightedCard : styles?.card}
-              >
-                {highlighted ? (
-                  <div css={styles?.currentFeature}>
-                    <Heading
-                      color="primary-on"
-                      level="reset"
-                      variant="labelInline"
-                    >
-                      {currentFeatureText}{' '}
-                    </Heading>
-                    <Text color="primary-on" variant="content">
-                      {currentFeature}
-                    </Text>
+            <Heading variant="titleSection" level="h3">
+              {' '}
+              {featureName}{' '}
+            </Heading>
+            {data.map(({ blockTitle, segmentData }, index) => {
+              return (
+                <div key={index} css={styles?.blockContainer}>
+                  <Heading variant="titleModule" level="h4">
+                    {' '}
+                    {blockTitle}{' '}
+                  </Heading>
+                  <div css={styles?.segmentContainer}>
+                    {segmentData.map(
+                      (
+                        { segmentTitle, description, value, valueDescription },
+                        index
+                      ) => {
+                        return (
+                          <div key={index} css={styles?.segmentCard}>
+                            <div css={styles?.segmentCardExplainerContainer}>
+                              <Heading variant="label">
+                                {' '}
+                                {segmentTitle}{' '}
+                              </Heading>
+                              <Text variant="contentSmall" color="secondary">
+                                {' '}
+                                {description}{' '}
+                              </Text>
+                            </div>
+                            <Text variant="content"> {value} </Text>
+                            <Text variant="contentSmall" color="secondary">
+                              {' '}
+                              {valueDescription}{' '}
+                            </Text>
+                          </div>
+                        )
+                      }
+                    )}
                   </div>
-                ) : null}
-
-                <div css={styles?.contentContainer}>
-                  <div css={styles?.level}>{level}</div>
-                  <div css={styles?.permissionTitle}>
-                    <Text variant="descriptionPage">{title} </Text>
-                  </div>
-                  <Text variant="content" color="secondary">
-                    {description}
-                  </Text>
                 </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
         </Modal.Body>
         <Modal.Footer>
@@ -133,5 +143,5 @@ const DataPermissionLevels = ({
   )
 }
 
-export default DataPermissionLevels
-export { DataPermissionLevels }
+export default NutritionFacts
+export { NutritionFacts }

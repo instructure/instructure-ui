@@ -22,15 +22,16 @@
  * SOFTWARE.
  */
 import { useState } from 'react'
-import { Modal } from '@instructure/ui-modal/latest'
-import { Button, CloseButton } from '@instructure/ui-buttons/latest'
-import { Heading } from '@instructure/ui-heading/latest'
-import { Text } from '@instructure/ui-text/latest'
-import { Link } from '@instructure/ui-link/latest'
-import { useStyle } from '@instructure/emotion'
+import { Modal } from '@instructure/ui-modal/v11_6'
+import { Button, CloseButton } from '@instructure/ui-buttons/v11_6'
+import { Heading } from '@instructure/ui-heading/v11_6'
+import { Text } from '@instructure/ui-text/v11_6'
+import { Link } from '@instructure/ui-link/v11_6'
+import { useStyleLegacy as useStyle } from '@instructure/emotion'
 
 import { DataPermissionLevelsProps } from './props'
 import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -46,14 +47,13 @@ const DataPermissionLevels = ({
   currentFeature,
   currentFeatureText,
   triggerText,
-  fullscreen = false,
-  themeOverride
+  fullscreen = false
 }: DataPermissionLevelsProps) => {
   const [open, setOpen] = useState(false)
 
   const styles = useStyle({
     generateStyle,
-    themeOverride,
+    generateComponentTheme,
     componentId: 'DataPermissionLevels',
     displayName: 'DataPermissionLevels'
   })
@@ -100,13 +100,13 @@ const DataPermissionLevels = ({
                 {highlighted ? (
                   <div css={styles?.currentFeature}>
                     <Heading
-                      color="primary-on"
+                      color="primary-inverse"
                       level="reset"
                       variant="labelInline"
                     >
                       {currentFeatureText}{' '}
                     </Heading>
-                    <Text color="primary-on" variant="content">
+                    <Text color="primary-inverse" variant="content">
                       {currentFeature}
                     </Text>
                   </div>
