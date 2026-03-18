@@ -546,6 +546,7 @@ class Calendar extends Component<CalendarProps, CalendarState> {
         display="inline-block"
         padding="small"
         background="primary"
+        borderRadius="inherit"
         elementRef={this.handleRef}
         data-cid="Calendar"
       >

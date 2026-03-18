@@ -55,7 +55,7 @@ const generateStyle = (
       padding: '0.25rem 0',
       // TODO-rework
       //background: componentTheme.background,
-      //borderRadius: componentTheme.borderRadius,
+      borderRadius: 'inherit',
       display: 'block',
       position: 'relative',
       overflow: 'hidden',
