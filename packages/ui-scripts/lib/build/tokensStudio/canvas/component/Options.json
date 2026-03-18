@@ -68,11 +68,11 @@
       "type": "fontWeights"
     },
     "highlightedBackground": {
-      "value": "{color.background.interactive.action.primary.hover}",
+      "value": "{color.background.muted}",
       "type": "color"
     },
     "highlightedLabelColor": {
-      "value": "{color.text.interactive.action.primary.base}",
+      "value": "{color.text.base}",
       "type": "color"
     },
     "iconPadding": {
