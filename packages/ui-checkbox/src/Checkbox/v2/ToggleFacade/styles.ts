@@ -277,7 +277,7 @@ const generateStyle = (
         border: `${componentTheme.borderWidth} solid ${getIconBorderColor()}`
       },
 
-      '& [class*="lucideIcon"] svg': {
+      '& [class*="icon"] svg': {
         position: 'relative',
         zIndex: 1
       }
