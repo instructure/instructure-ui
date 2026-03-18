@@ -1,7 +1,15 @@
 # DateInput2
 
 
-> _Info_: `DateInput2` is an upgrade to the [`DateInput`](/#DateInput) component, offering easier configuration, better UX, improved accessibility, and a year picker. Please consider updating to this for WCAG compatiblity and an overall better experience (for both devs and users).
+> **Deprecated:** `DateInput2` is deprecated and will not receive further updates. Its functionality has been merged into the latest version of [`DateInput`](/v11_7/DateInput) which has the same API. Please migrate to `DateInput` for continued support.
+
+### DateInput versions at a glance
+
+| Version                                      | API                          | Theming          | Accessibility   | Status          |
+| :------------------------------------------- | :--------------------------- | :--------------- | :-------------- | :-------------- |
+| [v11.6 DateInput](/v11_6/DateInput)          | Old (manual calendar wiring) | Old theming only | Has a11y issues | **Deprecated**  |
+| [v11.6 DateInput2](/v11_6/DateInput2) (this) | New (simple)                 | Old theming only | Good            | **Deprecated**  |
+| [v11.7 DateInput](/v11_7/DateInput)          | New (simple)                 | New theming      | Good            | **Recommended** |
 
 ### Minimal config
 
@@ -31,9 +39,9 @@ type: example
           invalidDateErrorMessage="Invalid date"
         />
         <p>
-          Input Value: <code>{inputValue}</code>
+          <Text>Input Value: </Text><code>{inputValue}</code>
           <br />
-          UTC Date String: <code>{dateString}</code>
+          <Text>UTC Date String: </Text><code>{dateString}</code>
         </p>
       </div>
     )
@@ -63,7 +71,7 @@ const Example = () => {
 
   return (
     <div>
-      <p>US locale with default format:</p>
+      <Text as="p">US locale with default format:</Text>
       <DateInput2
         renderLabel="Choose a date"
         screenReaderLabels={{
@@ -77,7 +85,7 @@ const Example = () => {
         locale="en-us"
         onChange={(e, value) => setValue(value)}
       />
-      <p>US locale with german date format:</p>
+      <Text as="p">US locale with german date format:</Text>
       <DateInput2
         renderLabel="Choose a date"
         screenReaderLabels={{
@@ -92,7 +100,7 @@ const Example = () => {
         dateFormat="de-de"
         onChange={(e, value) => setValue2(value)}
       />
-      <p>US locale with ISO date format:</p>
+      <Text as="p">US locale with ISO date format:</Text>
       <DateInput2
         renderLabel="Choose a date"
         screenReaderLabels={{
@@ -167,9 +175,9 @@ type: example
           }}
         />
         <p>
-          Input Value: <code>{inputValue}</code>
+          <Text>Input Value: </Text><code>{inputValue}</code>
           <br />
-          UTC Date String: <code>{dateString}</code>
+          <Text>UTC Date String: </Text><code>{dateString}</code>
         </p>
       </div>
     )
@@ -201,12 +209,12 @@ const Example = () => {
     // don't validate empty input
     if (!utcIsoDate && inputValue.length > 0) {
       setMessages([{
-        type: 'newError',
+        type: 'error',
         text: 'This is not a valid date'
       }])
     } else if (date < new Date('1990-01-01')) {
       setMessages([{
-        type: 'newError',
+        type: 'error',
         text: 'Select date after January 1, 1990'
       }])
     } else {

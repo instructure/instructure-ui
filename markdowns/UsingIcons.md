@@ -1,6 +1,141 @@
 
 ## Using Icons
 
+Icons from `@instructure/ui-icons` are available as `<Name>InstUIIcon` components — browse them
+in the [Icons gallery](#icons). Legacy class-component icons (`IconHeartLine`, `IconSearchLine`,
+etc.) are still available for backwards compatibility but are deprecated — see
+[Legacy Icons](#legacy-icons) below. Components with the new theming system only accept new icons.
+
+### Accessibility
+
+Without a `title` prop the icon is decorative: `aria-hidden="true"` and `role="presentation"` are
+set automatically. When a `title` is provided, the icon becomes meaningful: `aria-label` is set to
+the title value and `role="img"` is added.
+
+```js
+---
+type: example
+---
+<View as="div" margin="small" padding="medium" background="primary">
+  <Text as="div" size="large">I <HeartInstUIIcon size="md" color="errorColor" title="Love" /> New York</Text>
+</View>
+```
+
+### Size
+
+Use the `size` prop with a semantic size token. Stroke width scales automatically with the size.
+
+```js
+---
+type: example
+---
+<View as="div" margin="small" padding="medium" background="primary">
+  <Flex wrap="wrap" alignItems="center" gap="small">
+    <Flex.Item><Text>xs</Text> <SearchInstUIIcon size="xs" /></Flex.Item>
+    <Flex.Item><Text>sm</Text> <SearchInstUIIcon size="sm" /></Flex.Item>
+    <Flex.Item><Text>md</Text> <SearchInstUIIcon size="md" /></Flex.Item>
+    <Flex.Item><Text>lg</Text> <SearchInstUIIcon size="lg" /></Flex.Item>
+    <Flex.Item><Text>xl</Text> <SearchInstUIIcon size="xl" /></Flex.Item>
+    <Flex.Item><Text>2xl</Text> <SearchInstUIIcon size="2xl" /></Flex.Item>
+  </Flex>
+</View>
+```
+
+Illustration sizes (`illu-sm`, `illu-md`, `illu-lg`) are intended for larger decorative contexts.
+
+### Color
+
+Use the `color` prop with a semantic color token — a theme-aware named value (e.g. `errorColor`,
+`successColor`) that automatically adapts to the active theme. `inherit` passes `currentColor` through from the parent element.
+`ai` renders the icon with an AI gradient.
+
+```js
+---
+type: example
+---
+<View as="div" margin="small" padding="medium" background="primary">
+  <Flex wrap="wrap" alignItems="center" gap="small">
+    <Flex.Item><HeartInstUIIcon size="lg" color="baseColor" /></Flex.Item>
+    <Flex.Item><HeartInstUIIcon size="lg" color="mutedColor" /></Flex.Item>
+    <Flex.Item><HeartInstUIIcon size="lg" color="successColor" /></Flex.Item>
+    <Flex.Item><HeartInstUIIcon size="lg" color="errorColor" /></Flex.Item>
+    <Flex.Item><HeartInstUIIcon size="lg" color="warningColor" /></Flex.Item>
+    <Flex.Item><HeartInstUIIcon size="lg" color="infoColor" /></Flex.Item>
+    <Flex.Item><AiInfoInstUIIcon size="lg" color="ai" /></Flex.Item>
+  </Flex>
+</View>
+```
+
+### Rotate
+
+```js
+---
+type: example
+---
+<View as="div" margin="small" padding="medium" background="primary">
+  <Flex wrap="wrap" alignItems="center" gap="small">
+    <Flex.Item><ChevronUpInstUIIcon size="lg" rotate="0" /></Flex.Item>
+    <Flex.Item><ChevronUpInstUIIcon size="lg" rotate="90" /></Flex.Item>
+    <Flex.Item><ChevronUpInstUIIcon size="lg" rotate="180" /></Flex.Item>
+    <Flex.Item><ChevronUpInstUIIcon size="lg" rotate="270" /></Flex.Item>
+  </Flex>
+</View>
+```
+
+### Stroke vs Filled
+
+Lucide icons are stroke-based. Several custom icons come in a filled variant, identified by the
+`Solid` suffix in their export name (e.g. `BellInstUIIcon` vs `BellSolidInstUIIcon`).
+
+```js
+---
+type: example
+---
+<View as="div" margin="small">
+  <Flex gap="small" alignItems="center">
+    <Flex.Item><Text>Stroke</Text> <HeartInstUIIcon size="lg" color="errorColor" /></Flex.Item>
+    <Flex.Item><Text>Filled</Text> <HeartSolidInstUIIcon size="lg" color="errorColor" /></Flex.Item>
+  </Flex>
+</View>
+```
+
+---
+
+## Component / Icon Compatibility
+
+Old (components that use old theming engine) and new components (using new theming engine) use different internal mechanisms to render icon props, which affects
+compatibility:
+
+|                   |             Old icon             |                    New Icon                    |
+| ----------------- | :------------------------------: | :--------------------------------------------: |
+| **old component** |            supported             | icons must be passed as JSX, set size manually |
+| **new component** | do not use, icon sizes are wrong |                   supported                    |
+
+An example on how you can use an old component with a new icon and setting explicit size on the icon. Note that the `Button` in this example is a component that uses the old theming system (11.6):
+
+```js
+---
+type: code
+---
+<Flex gap="small" alignItems="center" wrap="wrap">
+  <Button size="small"  renderIcon={<SearchInstUIIcon size="sm" />}>small</Button>
+  <Button size="medium" renderIcon={<SearchInstUIIcon size="md" />}>medium</Button>
+  <Button size="large"  renderIcon={<SearchInstUIIcon size="lg" />}>large</Button>
+</Flex>
+
+
+```
+
+## Legacy Icons
+
+> **Deprecated.** The legacy icon set (`IconHeartLine`, `IconSearchLine`, etc.) is kept for
+> backwards compatibility. Use the `InstUIIcon` components above for new code.
+> To migrate existing usage run:
+>
+> ```
+> npx @instructure/ui-codemods migrateToNewIcons <path>
+> ```
+
 ### Accessibility
 
 By default, the icon's `role` is set to `presentation`. However, when the `title` prop is set, the role attribute is set to `img`. Include the `description` prop to further describe the icon.
