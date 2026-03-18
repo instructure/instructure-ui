@@ -1,9 +1,11 @@
+import React from 'react'
 import {
   Accessibility2InstUIIcon,
   PlusInstUIIcon,
-  ShieldUserInstUIIcon
+  ShieldUserInstUIIcon,
+  SearchInstUIIcon,
+  IgniteaiLogoInstUIIcon
 } from '@instructure/ui-icons'
-import React from 'react'
 
 function MyComponent() {
   return (
@@ -11,6 +13,8 @@ function MyComponent() {
       <Accessibility2InstUIIcon />
       <PlusInstUIIcon />
       <ShieldUserInstUIIcon />
+      <SearchInstUIIcon />
+      <IgniteaiLogoInstUIIcon />
     </div>
   )
 }
