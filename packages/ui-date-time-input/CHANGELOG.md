@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.7.0](https://github.com/instructure/instructure-ui/compare/v11.6.0...v11.7.0) (2026-03-18)
+
+
+### Bug Fixes
+
+* **ui-many:** fix imports of the multiversion support ([ff5f2b3](https://github.com/instructure/instructure-ui/commit/ff5f2b38660ddae432edd32b98eedae586589977))
+
+
+### Features
+
+* **many:** rework TextArea and dependent FormField components ([0f8c438](https://github.com/instructure/instructure-ui/commit/0f8c43803e3458bbf7b2dd266a9e246cb89b0d3c))
+
+
+
+
+
 # [11.6.0](https://github.com/instructure/instructure-ui/compare/v11.5.0...v11.6.0) (2026-02-18)
 
 **Note:** Version bump only for package @instructure/ui-date-time-input

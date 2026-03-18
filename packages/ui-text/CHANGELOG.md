@@ -3,6 +3,40 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.7.0](https://github.com/instructure/instructure-ui/compare/v11.6.0...v11.7.0) (2026-03-18)
+
+
+### Code Refactoring
+
+* **ui-text:** migrate to new theming system ([19c7c44](https://github.com/instructure/instructure-ui/commit/19c7c4413a5632b6b10380f888824384724b6be3))
+
+
+### Features
+
+* **many:** add solution for using both old and new token system in the same app ([688a713](https://github.com/instructure/instructure-ui/commit/688a713ff715433bb085323dbad61285387c5141))
+
+
+### BREAKING CHANGES
+
+* **ui-text:** Removed 'alert' color prop value. Use 'primary' color instead.
+
+Also improves documentation:
+- Clarify variant usage and recommendations in README
+- Add deprecation notes for size, weight, and lineHeight legacy values
+- Update color examples to include inverse colors and remove alert
+- Add JSDoc comments for deprecated prop values
+- Improve code examples with clearer formatting
+
+To test: Compare with Figma design
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: Claude <noreply@anthropic.com>
+
+
+
+
+
 # [11.6.0](https://github.com/instructure/instructure-ui/compare/v11.5.0...v11.6.0) (2026-02-18)
 
 **Note:** Version bump only for package @instructure/ui-text

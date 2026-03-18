@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.7.0](https://github.com/instructure/instructure-ui/compare/v11.6.0...v11.7.0) (2026-03-18)
+
+
+### Features
+
+* **ui-radio-input:** use the new theme for RadioInput ([34bfd59](https://github.com/instructure/instructure-ui/commit/34bfd5956c47beceacb50637e7fd605b9e3f4210))
+* **ui-react-utils,ui-icons-lucide,ui-avatar:** add lucide icons to Avatar, refactor ui-icons-lucid package ([ab5c1ca](https://github.com/instructure/instructure-ui/commit/ab5c1ca8ec9961d754dafee0bcbe5040bb2641b1))
+* **ui-react-utils:** add useDeterministicID which can be used instead of withDeterministicId for functional components ([91f025e](https://github.com/instructure/instructure-ui/commit/91f025e0a5b157f7a3bc801d8fd45d96b454124c))
+
+
+
+
+
 # [11.6.0](https://github.com/instructure/instructure-ui/compare/v11.5.0...v11.6.0) (2026-02-18)
 
 **Note:** Version bump only for package @instructure/ui-react-utils

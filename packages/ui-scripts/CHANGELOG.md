@@ -3,6 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.7.0](https://github.com/instructure/instructure-ui/compare/v11.6.0...v11.7.0) (2026-03-18)
+
+
+### Bug Fixes
+
+* **ui-scripts,ui-list:** fix new theme build issues ([d0cd58d](https://github.com/instructure/instructure-ui/commit/d0cd58d8eb610748673570f611778157922c9fee))
+* **ui-scripts:** fix number token type issue ([060d59a](https://github.com/instructure/instructure-ui/commit/060d59a34a663c68d2e03748e743a03cd22c17ba))
+* **ui-scripts:** fix token conflict ([273ef99](https://github.com/instructure/instructure-ui/commit/273ef99abdf49f298a5e71b2b5c80fcfc0f6a139))
+* **ui-scripts:** fix token conflict ([72aba24](https://github.com/instructure/instructure-ui/commit/72aba2498276004585ba0a1a54d78cbd8f52c028))
+* **ui-scripts:** fix token conflicts ([4e2bf7a](https://github.com/instructure/instructure-ui/commit/4e2bf7ab658ee084c116e6924c3bb5f17fd76525))
+
+
+### Features
+
+* **many:** add new theming solution ([1cef88e](https://github.com/instructure/instructure-ui/commit/1cef88e97f40dd85e15b10bc4307d013ae8b09d0))
+* **many:** refactor theme parser and implement tray and tabs ([ef28373](https://github.com/instructure/instructure-ui/commit/ef283736fd76fbdcc674854916b298c199f8df50))
+* **ui-scripts,ui-icons,ui-codemods:** add build-time generation of custom/brand icon components and migration codemod ([b56cb4e](https://github.com/instructure/instructure-ui/commit/b56cb4e69339387ddfb37d532e644e20c4d87876))
+* **ui-scripts:** add exeption for primitive theme ([0d54af1](https://github.com/instructure/instructure-ui/commit/0d54af1b99a1aeaf8640e2fa4fb7d9205857cbf8))
+* **ui-scripts:** rework parser to accomodate multiple files ([bd4960e](https://github.com/instructure/instructure-ui/commit/bd4960e3e806ea5321b170309e30c0f7a9ef22ec))
+
+
+### Reverts
+
+* **ui-scripts:** revert last 6 commits ([be97efa](https://github.com/instructure/instructure-ui/commit/be97efa1673e9130e494b11654360d7272d908a0))
+
+
+
+
+
 # [11.6.0](https://github.com/instructure/instructure-ui/compare/v11.5.0...v11.6.0) (2026-02-18)
 
 **Note:** Version bump only for package @instructure/ui-scripts

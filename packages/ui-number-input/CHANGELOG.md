@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.7.0](https://github.com/instructure/instructure-ui/compare/v11.6.0...v11.7.0) (2026-03-18)
+
+
+### Features
+
+* **many:** add solution for using both old and new token system in the same app ([688a713](https://github.com/instructure/instructure-ui/commit/688a713ff715433bb085323dbad61285387c5141))
+* **many:** rework TextArea and dependent FormField components ([0f8c438](https://github.com/instructure/instructure-ui/commit/0f8c43803e3458bbf7b2dd266a9e246cb89b0d3c))
+* **ui-number-input:** rewrite NumberInput to the new theming system ([500d4bc](https://github.com/instructure/instructure-ui/commit/500d4bc03037c2cc60bf83cd1e84b878bef87535))
+
+
+
+
+
 # [11.6.0](https://github.com/instructure/instructure-ui/compare/v11.5.0...v11.6.0) (2026-02-18)
 
 **Note:** Version bump only for package @instructure/ui-number-input

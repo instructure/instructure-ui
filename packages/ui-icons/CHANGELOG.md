@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.7.0](https://github.com/instructure/instructure-ui/compare/v11.6.0...v11.7.0) (2026-03-18)
+
+
+### Features
+
+* **ui-icons,ui-billboard:** migrate to new theming system ([fb42132](https://github.com/instructure/instructure-ui/commit/fb42132f5f5fc9b0ecfe2b28773c2e1c10fa0c86))
+* **ui-scripts,ui-icons,ui-codemods:** add build-time generation of custom/brand icon components and migration codemod ([b56cb4e](https://github.com/instructure/instructure-ui/commit/b56cb4e69339387ddfb37d532e644e20c4d87876))
+
+
+
+
+
 # [11.6.0](https://github.com/instructure/instructure-ui/compare/v11.5.0...v11.6.0) (2026-02-18)
 
 **Note:** Version bump only for package @instructure/ui-icons
