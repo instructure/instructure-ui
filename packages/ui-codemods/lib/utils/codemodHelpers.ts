@@ -516,6 +516,8 @@ function addImportIfNeeded(
  * import { oldName as localName } from "@import-path"
  * oldName()
  * localName()
+ * <oldName />
+ * <localName />
  * ```
  * with
  * ```
@@ -523,6 +525,8 @@ function addImportIfNeeded(
  * import { newName as localName } from "@import-path"
  * newName()
  * localName()
+ * <newName />
+ * <localName />
  * ```
  *
  * @param j - jscodeshift API
@@ -553,19 +557,19 @@ function renameImportAndUsages(
         // eslint-disable-next-line no-param-reassign
         specifier.imported.name = newName
 
-      // Rename usages if no alias (no 'as' syntax)
-      if (!specifier.local || specifier.local.name === oldName) {
-        const localName = specifier.local ? specifier.local.name : oldName
+        // Rename usages if no alias (no 'as' syntax)
+        if (!specifier.local || specifier.local.name === oldName) {
+          const localName = specifier.local ? specifier.local.name : oldName
 
-        root
-          .find(j.Identifier, { name: localName as string})
-          .forEach((idPath) => {
-            // Make sure this identifier is not inside import declaration
-            if (idPath.parentPath.node.type !== 'ImportSpecifier') {
-              // eslint-disable-next-line no-param-reassign
-              idPath.node.name = newName
-            }
-          })
+          root
+            .find(j.Identifier, { name: localName as string })
+            .forEach((idPath) => {
+              // Make sure this identifier is not inside import declaration
+              if (idPath.parentPath.node.type !== 'ImportSpecifier') {
+                // eslint-disable-next-line no-param-reassign
+                idPath.node.name = newName
+              }
+            })
         }
 
         didRename = true
