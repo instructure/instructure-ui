@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-pagination",
-  "version": "11.6.0",
+  "version": "11.7.0",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -34,10 +34,10 @@
     "@instructure/ui-number-input": "workspace:*",
     "@instructure/ui-portal": "workspace:*",
     "@instructure/ui-react-utils": "workspace:*",
+    "@instructure/ui-text": "workspace:*",
     "@instructure/ui-themes": "workspace:*",
     "@instructure/ui-tooltip": "workspace:*",
     "@instructure/ui-utils": "workspace:*",
-    "@instructure/ui-text": "workspace:*",
     "@instructure/ui-view": "workspace:*",
     "@instructure/uid": "workspace:*"
   },
