@@ -94,7 +94,7 @@
       "type": "spacing"
     },
     "highlightedBackground": {
-      "value": "{color.background.interactive.action.primary.hover}",
+      "value": "{color.background.muted}",
       "type": "color"
     },
     "selectedHighlightedBackground": {
@@ -102,11 +102,11 @@
       "type": "color"
     },
     "highlightedLabelColor": {
-      "value": "{color.text.interactive.action.primary.base}",
+      "value": "{color.text.base}",
       "type": "color"
     },
     "highlightedLabelInfoColor": {
-      "value": "{color.text.interactive.action.primary.base}",
+      "value": "{color.text.muted}",
       "type": "color"
     }
   },
