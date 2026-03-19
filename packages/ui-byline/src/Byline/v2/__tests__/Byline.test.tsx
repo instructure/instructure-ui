@@ -30,7 +30,7 @@ import '@testing-library/jest-dom'
 import { Byline } from '../index'
 import { BylineProps } from '../props'
 import { runAxeCheck } from '@instructure/ui-axe-check'
-import { View } from '@instructure/ui-view/v11_6'
+import { View } from '@instructure/ui-view/latest'
 
 const TEST_TITLE = 'Test-title'
 const TEST_DESCRIPTION = 'Test-description'
