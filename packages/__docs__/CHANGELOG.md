@@ -5,20 +5,11 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 # [11.7.0](https://github.com/instructure/instructure-ui/compare/v11.6.0...v11.7.0) (2026-03-18)
 
-### Bug Fixes
-
-- **docs:** fix SPA routing for PR preview and /latest/ deployments ([64badec](https://github.com/instructure/instructure-ui/commit/64badec7235c311a3cba32daad94aae69b5acaf1))
-- **docs:** fix SPA routing for PR preview deployments on GitHub Pages ([1f8a93e](https://github.com/instructure/instructure-ui/commit/1f8a93e7a4713eaa405370aaf78271be86664bf9))
-- **docs:** include components at different version stages in versioned docs ([df36851](https://github.com/instructure/instructure-ui/commit/df3685195a7981f256a5f9218acc724156bd1faa))
-- **docs:** skip /latest/ prefix in App getPathInfo URL parsing ([83f9117](https://github.com/instructure/instructure-ui/commit/83f91178cd871766622b17fa5965828798da9445))
-- **many:** a11y requirement fix, interactive links must be underlined on interaction and isWithinText prop was removed ([8531756](https://github.com/instructure/instructure-ui/commit/8531756c564a3220a8266d02a72fb26c3bbcc977))
-
 ### Code Refactoring
-
-- **ui-text:** migrate to new theming system ([19c7c44](https://github.com/instructure/instructure-ui/commit/19c7c4413a5632b6b10380f888824384724b6be3))
 
 ### Features
 
+- **ui-text:** migrate to new theming system ([19c7c44](https://github.com/instructure/instructure-ui/commit/19c7c4413a5632b6b10380f888824384724b6be3))
 - **many:** add new theming solution ([1cef88e](https://github.com/instructure/instructure-ui/commit/1cef88e97f40dd85e15b10bc4307d013ae8b09d0))
 - **many:** add solution for using both old and new token system in the same app ([688a713](https://github.com/instructure/instructure-ui/commit/688a713ff715433bb085323dbad61285387c5141))
 - **many:** rework TextArea and dependent FormField components ([0f8c438](https://github.com/instructure/instructure-ui/commit/0f8c43803e3458bbf7b2dd266a9e246cb89b0d3c))

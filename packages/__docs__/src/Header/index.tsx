@@ -123,12 +123,6 @@ class Header extends Component<HeaderProps> {
 
   renderMinorVersionsBlock = () => {
     const { minorVersionsData, selectedMinorVersion } = this.props
-    if (
-      !minorVersionsData ||
-      minorVersionsData.libraryVersions.length <= 1
-    ) {
-      return null
-    }
 
     return (
       <View display="block" textAlign="center" margin="none none small">
@@ -151,18 +145,18 @@ class Header extends Component<HeaderProps> {
             selected={selectedMinorVersion ? [selectedMinorVersion] : []}
             onSelect={this.handleMinorVersionSelect}
             label={
-              <ScreenReaderContent>
-                Select minor version
-              </ScreenReaderContent>
+              <ScreenReaderContent>Select minor version</ScreenReaderContent>
             }
           >
-            {[...minorVersionsData.libraryVersions].reverse().map((ver: string, index: number) => (
-              <Menu.Item key={index} id={`minor-opt-${index}`} value={ver}>
-                <View textAlign="center" as="div">
-                  {this.formatMinorVersion(ver)}
-                </View>
-              </Menu.Item>
-            ))}
+            {[...minorVersionsData!.libraryVersions]
+              .reverse()
+              .map((ver: string, index: number) => (
+                <Menu.Item key={index} id={`minor-opt-${index}`} value={ver}>
+                  <View textAlign="center" as="div">
+                    {this.formatMinorVersion(ver)}
+                  </View>
+                </Menu.Item>
+              ))}
           </Menu.Group>
         </Menu>
       </View>

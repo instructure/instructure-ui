@@ -450,6 +450,13 @@ class Nav extends Component<NavProps, NavState> {
 
         themeSelected = themeSelected || isSelected
 
+        const renderThemeName = (rawName: string) => {
+          if (rawName !== 'canvas' && rawName !== 'canvas-high-contrast') {
+            return `${rawName} (beta)`
+          }
+          return rawName
+        }
+
         return (
           <View
             display="block"
@@ -465,7 +472,7 @@ class Nav extends Component<NavProps, NavState> {
               variant="standalone"
               href={buildUrl(themeKey)}
             >
-              {themeKey}
+              {renderThemeName(themeKey)}
             </Link>
           </View>
         )
@@ -487,25 +494,26 @@ class Nav extends Component<NavProps, NavState> {
   render() {
     const sections = this.renderSections()
     const themes = this.renderThemes()
-    const icons = (
-      <NavToggle
-        key="Icons button"
-        summary="Icons"
-        onToggle={(e: any) => this.handleInternalNavigation('icons', e)}
-        href="icons"
-        shouldBlur={true}
-      />
-    )
+    //delist from the navbar until full release
+    // const icons = (
+    //   <NavToggle
+    //     key="Icons button"
+    //     summary="Icons"
+    //     onToggle={(e: any) => this.handleInternalNavigation('icons', e)}
+    //     href="icons"
+    //     shouldBlur={true}
+    //   />
+    // )
     const legacyIcons = (
       <NavToggle
         key="Legacy Icons button"
-        summary="Legacy Icons"
+        summary="Icons"
         onToggle={(e: any) => this.handleInternalNavigation('legacy-icons', e)}
         href="legacy-icons"
         shouldBlur={true}
       />
     )
-    const matches = [...sections, ...themes, icons, legacyIcons]
+    const matches = [...sections, ...themes, legacyIcons]
     const hasMatches = matches.length > 0
     const errorMessage = [
       { text: `No matches for '${this.state.queryStr}'`, type: 'hint' as const }

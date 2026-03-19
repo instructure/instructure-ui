@@ -79,7 +79,7 @@ class Hero extends Component<HeroProps> {
   }
 
   render() {
-    const { version, layout, styles } = this.props
+    const { layout, styles } = this.props
 
     const corpLogo = <SVGIcon src={logo} />
 
@@ -317,7 +317,7 @@ class Hero extends Component<HeroProps> {
               navigateTo('CHANGELOG')
             }}
           >
-            Change Log ({version})
+            Change Log
           </Link>
         </Text>
         <Link
@@ -429,20 +429,6 @@ class Hero extends Component<HeroProps> {
                         Instructure UI
                       </Heading>
                     </Flex.Item>
-                    <Flex.Item>
-                      <Button
-                        size="small"
-                        withBackground={false}
-                        color="primary-inverse"
-                        href="CHANGELOG"
-                        onClick={(e: any) => {
-                          e.preventDefault()
-                          navigateTo('CHANGELOG')
-                        }}
-                      >
-                        {version}
-                      </Button>
-                    </Flex.Item>
                   </Flex>
 
                   <Heading
@@ -498,12 +484,12 @@ class Hero extends Component<HeroProps> {
                       <Button
                         focusColor="inverse"
                         color="success"
-                        href="upgrade-guide"
+                        href="upgrade-guide-v11"
                         size={bigScreen ? 'large' : 'medium'}
                         margin="0 x-small x-small 0"
                         onClick={(e: any) => {
                           e.preventDefault()
-                          navigateTo('upgrade-guide')
+                          navigateTo('upgrade-guide-v11')
                         }}
                       >
                         v11 Upgrade Guide

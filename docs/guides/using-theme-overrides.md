@@ -348,68 +348,6 @@ const generateStyle = (componentTheme) => {
 }
 ```
 
-### Theme overrides for focus rings, border radii, shadows, spacing
-
-Certain visuals as of now styled via a central object called `SharedTokens`. You can override this too, for example:
-
-```js
----
-type: example
----
-<InstUISettingsProvider
-  theme={{
-    newTheme: { // TODO remove this when we remove the old theme
-      sharedTokens: {
-        focusOutline: {
-          infoColor: 'green',
-          width: '0.4rem',
-          offset: '0rem'
-        },
-        boxShadow: {
-          // View shadows:
-          // resting: elevation1,
-          // above: elevation2,
-          // topmost: elevation4
-          elevation1: {
-            "0": {
-              color: 'blue',
-              blur: '1rem',
-              spread: '0.2rem'
-            }
-          }
-        },
-        spacing: {
-          general: {
-            space2xs: '2rem' // component margin/padding/Flex gap spacing
-          }
-        },
-        legacy: {
-          radiusSmall: '2rem', // View border radius
-        },
-        strokeWidth: {
-          sm: '1rem' // View border width
-        }
-      },
-    }
-  }}>
-  <TextInput renderLabel="Fancy focus ring!" placeholder="TODO: Change example when the old theme is renamed!"/>
-  <View
-    as="span"
-    display="inline-block"
-    maxWidth="15rem"
-    margin="general.space2xs"
-    padding="small"
-    background="primary"
-    shadow="resting"
-    borderRadius="small"
-    borderWidth="small"
-  >
-    Here is a View with a blue shadow. and custom borders
-  </View>
-  <Avatar name="Spacing Override" margin="general.space2xs" />
-</InstUISettingsProvider>
-```
-
 ### Branding (user customizable theming)
 
 The `canvas` theme has specific theme variables that are meant as a basis to provide end users a customizability of this theme, e.g. a university can use their own colors throughout the UI. This is used by [Canvas's theme editor](https://community.canvaslms.com/t5/Admin-Guide/How-do-I-create-a-theme-for-an-account-using-the-Theme-Editor/ta-p/242).

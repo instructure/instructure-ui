@@ -7,30 +7,14 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-- **docs:** fix SPA routing for PR preview and /latest/ deployments ([64badec](https://github.com/instructure/instructure-ui/commit/64badec7235c311a3cba32daad94aae69b5acaf1))
-- **docs:** fix SPA routing for PR preview deployments on GitHub Pages ([1f8a93e](https://github.com/instructure/instructure-ui/commit/1f8a93e7a4713eaa405370aaf78271be86664bf9))
-- **docs:** include components at different version stages in versioned docs ([df36851](https://github.com/instructure/instructure-ui/commit/df3685195a7981f256a5f9218acc724156bd1faa))
-- **docs:** skip /latest/ prefix in App getPathInfo URL parsing ([83f9117](https://github.com/instructure/instructure-ui/commit/83f91178cd871766622b17fa5965828798da9445))
-- **emotion:** fix old them override not working properly ([02bf2b7](https://github.com/instructure/instructure-ui/commit/02bf2b7f6b43a7d731908ec0f35757dc8c79737b))
 - **many:** a11y requirement fix, interactive links must be underlined on interaction and isWithinText prop was removed ([8531756](https://github.com/instructure/instructure-ui/commit/8531756c564a3220a8266d02a72fb26c3bbcc977))
 - **ui-checkbox:** prevent blur on checkbox label mousedown by manually restoring focus to hidden input ([843ca3e](https://github.com/instructure/instructure-ui/commit/843ca3e0d0db1197b343a17cd2740a4a8446d318))
-- **ui-many:** fix imports of the multiversion support ([ff5f2b3](https://github.com/instructure/instructure-ui/commit/ff5f2b38660ddae432edd32b98eedae586589977))
-- **ui-pagination:** fix Pagination.PageInput theme variables not visible in the docs app ([30ca564](https://github.com/instructure/instructure-ui/commit/30ca564c8a8df14c67f30bd106c2c8705f7ef3c0))
-- **ui-scripts,ui-list:** fix new theme build issues ([d0cd58d](https://github.com/instructure/instructure-ui/commit/d0cd58d8eb610748673570f611778157922c9fee))
-- **ui-scripts:** fix number token type issue ([060d59a](https://github.com/instructure/instructure-ui/commit/060d59a34a663c68d2e03748e743a03cd22c17ba))
-- **ui-scripts:** fix token conflict ([273ef99](https://github.com/instructure/instructure-ui/commit/273ef99abdf49f298a5e71b2b5c80fcfc0f6a139))
-- **ui-scripts:** fix token conflict ([72aba24](https://github.com/instructure/instructure-ui/commit/72aba2498276004585ba0a1a54d78cbd8f52c028))
-- **ui-scripts:** fix token conflicts ([4e2bf7a](https://github.com/instructure/instructure-ui/commit/4e2bf7ab658ee084c116e6924c3bb5f17fd76525))
-- **ui-svg-images:** fix inlinesvg parser ([9fc9675](https://github.com/instructure/instructure-ui/commit/9fc967538df47b26609ea3ab171b7253d736f89f))
 - **ui-text-input,emotion:** fix TextInput displaying double focus rings when a focusable element is rendered inside ([b33cea2](https://github.com/instructure/instructure-ui/commit/b33cea283ef84cdc674c43bf8a0b7ca55f04cfaa))
 - **ui-view:** clipping ContextView child content overflow ([94a76e8](https://github.com/instructure/instructure-ui/commit/94a76e884ee2ee09071d793daff9696049c06fe4))
 
-### Code Refactoring
-
-- **ui-text:** migrate to new theming system ([19c7c44](https://github.com/instructure/instructure-ui/commit/19c7c4413a5632b6b10380f888824384724b6be3))
-
 ### Features
 
+- **ui-text:** migrate to new theming system ([19c7c44](https://github.com/instructure/instructure-ui/commit/19c7c4413a5632b6b10380f888824384724b6be3))
 - **many:** add new theming solution ([1cef88e](https://github.com/instructure/instructure-ui/commit/1cef88e97f40dd85e15b10bc4307d013ae8b09d0))
 - **many:** add solution for using both old and new token system in the same app ([688a713](https://github.com/instructure/instructure-ui/commit/688a713ff715433bb085323dbad61285387c5141))
 - **many:** refactor theme parser and implement tray and tabs ([ef28373](https://github.com/instructure/instructure-ui/commit/ef283736fd76fbdcc674854916b298c199f8df50))

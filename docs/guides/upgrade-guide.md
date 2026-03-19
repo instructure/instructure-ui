@@ -1,14 +1,14 @@
 ---
-title: Upgrade Guide for Version 12
+title: Upgrade Guide for multi version (beta)
 category: Guides
-order: 1
+order: 9999999
 ---
 
-# Upgrade Guide for Version 12
+# Upgrade Guide for multi version support
 
 ## New theming system
 
-TODO add details
+NOTE: this section is under development, will be updated soon
 
 ## New icons
 

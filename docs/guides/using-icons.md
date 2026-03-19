@@ -1,9 +1,11 @@
 ---
-title: Using Icons
-category: Patterns
+title: Using Icons (beta)
+category: Guides
 id: UsingIcons
 relevantForAI: true
 ---
+
+Note: These icons are only meant to be used with the new theming system (beta), please don't use them with the old (pre v11.7) components
 
 ## Using Icons
 

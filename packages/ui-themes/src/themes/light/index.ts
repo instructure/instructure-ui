@@ -38,7 +38,8 @@ export type LightTheme = Theme<Light, 'light'> &
 const theme: LightTheme = {
   newTheme: light,
   key,
-  description: 'This theme meets WCAG 2.1 AA rules for color contrast.',
+  description:
+    'Only usable with v11.7 or newer components! This theme meets WCAG 2.1 AA rules for color contrast.',
   ...sharedThemeTokens,
   colors
 }

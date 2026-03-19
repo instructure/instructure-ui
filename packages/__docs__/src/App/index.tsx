@@ -222,8 +222,7 @@ class App extends Component<AppProps, AppState> {
       docsData: null,
       currentDocData: undefined,
       changelogData: undefined,
-      selectedMinorVersion: newVersion,
-      showMinorVersionSelector: true
+      selectedMinorVersion: newVersion
     })
 
     // Update URL to reflect new version
@@ -319,9 +318,7 @@ class App extends Component<AppProps, AppState> {
           updateGlobalsForVersion(selectedMinorVersion)
           this.setState({
             minorVersionsData,
-            selectedMinorVersion,
-            // Only show version selector when URL has explicit version
-            showMinorVersionSelector: !!urlMinorVersion
+            selectedMinorVersion
           })
           return this.fetchMainDocsData(
             `${getAssetBasePath()}/docs/${selectedMinorVersion}/markdown-and-sources-data.json`,
@@ -449,14 +446,12 @@ class App extends Component<AppProps, AppState> {
 
   updateKey = () => {
     const [page, _id] = this.getPathInfo()
-    const { minorVersion } = parseCurrentUrl()
 
     if (page) {
       this.setState(
         ({ key, showMenu }) => ({
           key: page || 'index',
-          showMenu: this.handleShowTrayOnURLChange(key, showMenu),
-          showMinorVersionSelector: !!minorVersion
+          showMenu: this.handleShowTrayOnURLChange(key, showMenu)
         }),
         this.scrollToElement
       )
@@ -570,9 +565,8 @@ class App extends Component<AppProps, AppState> {
 
   renderThemeSelect() {
     const allThemeKeys = Object.keys(this.state.docsData!.themes)
-    const showNewThemes =
-      this.state.showMinorVersionSelector &&
-      this.state.selectedMinorVersion !== 'v11_6'
+    const showNewThemes = this.state.selectedMinorVersion !== 'v11_6'
+
     const themeKeys = showNewThemes
       ? allThemeKeys
       : ['canvas', 'canvas-high-contrast']
@@ -649,7 +643,7 @@ class App extends Component<AppProps, AppState> {
         }
       >
         <Heading level="h1" as="h2" margin="0 0 medium">
-          Icons
+          Icons (beta)
         </Heading>
         <IconsPage />
       </View>
@@ -973,11 +967,7 @@ class App extends Component<AppProps, AppState> {
           name={name === 'instructure-ui' ? 'v' : name}
           version={version}
           versionsData={versionsData}
-          minorVersionsData={
-            this.state.showMinorVersionSelector
-              ? this.state.minorVersionsData
-              : undefined
-          }
+          minorVersionsData={this.state.minorVersionsData}
           selectedMinorVersion={this.state.selectedMinorVersion}
           onMinorVersionChange={this.handleMinorVersionChange}
         />
