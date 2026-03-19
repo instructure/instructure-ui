@@ -54,6 +54,6 @@ type: example
       </Text>
     </View>
   }>
-  <HeartInstUIIcon size="medium" color="successColor" />
+  <SVGIcon src={iconExample} title="love" size="small" color="success" />
 </Byline>
 ```

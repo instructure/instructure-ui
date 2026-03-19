@@ -25,11 +25,12 @@
 import { Component } from 'react'
 
 import { omitProps } from '@instructure/ui-react-utils'
-import { View } from '@instructure/ui-view/latest'
+import { View } from '@instructure/ui-view/v11_6'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleLegacy as withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 import { allowedProps } from './props'
 import type { BylineProps } from './props'
@@ -40,7 +41,7 @@ category: components
 ---
 **/
 
-@withStyle(generateStyle)
+@withStyle(generateStyle, generateComponentTheme)
 class Byline extends Component<BylineProps> {
   static readonly componentId = 'Byline'
 

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
+import type { BylineTheme } from '@instructure/shared-types'
 import type { BylineProps, BylineStyle } from './props'
 
 /**
@@ -30,25 +30,15 @@ import type { BylineProps, BylineStyle } from './props'
  * private: true
  * ---
  * Generates the style object from the theme and provided additional information
- * @param componentTheme The theme variable object.
- * @param params Additional parameters to customize the style.
- * @param sharedTokens Shared token object that stores common values for the theme.
- * @return The final style object, which will be used in the component
+ * @param  {Object} componentTheme The theme variable object.
+ * @param  {Object} props the props of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['Byline'],
-  params: BylineProps,
-  _sharedTokens: SharedTokens
+  componentTheme: BylineTheme,
+  props: BylineProps
 ): BylineStyle => {
-  const { alignContent, size } = params
-
-  const widthSizeVariants: Record<string, string> = {
-    small: String(componentTheme.small),
-    medium: String(componentTheme.medium),
-    large: String(componentTheme.large)
-  }
-
-  const widthSizeVariant = widthSizeVariants[size!]
+  const { alignContent, size } = props
 
   const alignContentVariants = {
     top: { alignItems: 'flex-start' },
@@ -109,7 +99,7 @@ const generateStyle = (
       lineHeight: componentTheme.descriptionLineHeight,
       fontWeight: componentTheme.descriptionFontWeight
     },
-    maxWidth: widthSizeVariant
+    maxWidth: size && componentTheme[size]
   }
 }
 
