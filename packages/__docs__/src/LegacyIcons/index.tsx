@@ -241,16 +241,11 @@ const LegacyIconsPage = ({ iconData }: LegacyIconsPageProps) => {
   return (
     <div>
       <Heading level="h1" as="h2" margin="0 0 medium">
-        Legacy Icons (Deprecated)
+        Icons
       </Heading>
       <Alert variant="info" margin="0 0 medium">
-        <strong>
-          This icon set is deprecated and will be removed in the next major
-          version.
-        </strong>{' '}
-        Please migrate to the icons. Use the{' '}
-        <code>@instructure/ui-codemods</code> package to automatically migrate
-        your codebase.
+        New icon set is available, please only use it with InstUI v11.7 or newer
+        components: <Link href="/icons">Icons (beta)</Link>
       </Alert>
       <FormFieldGroup
         layout="columns"
