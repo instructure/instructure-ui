@@ -195,14 +195,14 @@ type: example
 
 ### Rendering Buttons without backgrounds
 
-Use backgroundless buttons when there is a need to deemphasize the button. Be sure to use border/text colors that meet the proper contrast ratios with whatever background they are placed on.
+Use backgroundless buttons when there is a need to deemphasize the button. Be sure to use border/text colors that meet the proper contrast ratios with whatever background they are placed on. Backgroundless buttons are sometimes called `tertiary` variant.
 
 ```js
 ---
 type: example
 ---
 <View display="block">
-  <Button renderIcon={PlusInstUIIcon} withBackground={false} color="secondary" margin="small">Click here</Button>
+  <Button renderIcon={PlusInstUIIcon} withBackground={false} color="primary" margin="small">Click here</Button>
 </View>
 ```
 
