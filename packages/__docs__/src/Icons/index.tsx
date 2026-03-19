@@ -25,6 +25,8 @@
 import { lazy, Suspense } from 'react'
 import { Spinner } from '@instructure/ui-spinner'
 import { View } from '@instructure/ui-view'
+import { Alert } from '@instructure/ui-alerts'
+import { Link } from '@instructure/ui-link'
 
 // Lazy load icons gallery component
 const IconsGallery = lazy(() => import('./IconsGallery'))
@@ -45,6 +47,14 @@ const IconsPage = () => {
           </div>
         }
       >
+        <Alert variant="info" margin="0 0 medium">
+          New incon set, currently in beta. Currently supported icons:{' '}
+          <Link href="/legacy-icons">Icons</Link>
+        </Alert>
+        <Alert variant="info" margin="0 0 medium">
+          These icons are only meant to be used with the new theming system
+          (beta), please do not use them with the old (pre v11.7) components
+        </Alert>
         <IconsGallery />
       </Suspense>
     </View>
