@@ -157,6 +157,22 @@
     "smallViewportZIndex": {
       "value": "10000",
       "type": "other"
+    },
+    "desktopBottomBorderInverse": {
+      "value": "{color.stroke.inverse}",
+      "type": "color"
+    },
+    "desktopBrandContainerInlineMargin": {
+      "value": "{spacing.spaceMd}",
+      "type": "spacing"
+    },
+    "desktopActionItemsContainerInlineMargin": {
+      "value": "{spacing.spaceXs}",
+      "type": "spacing"
+    },
+    "smallViewportFontSize": {
+      "value": "{fontSize.textSm}",
+      "type": "fontSizes"
     }
   },
   "topNavBarBrand": {
