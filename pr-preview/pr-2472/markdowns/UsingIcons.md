@@ -101,6 +101,31 @@ type: example
 
 ---
 
+## Component / Icon Compatibility
+
+Old (components that use old theming engine) and new components (using new theming engine) use different internal mechanisms to render icon props, which affects
+compatibility:
+
+|                   |             Old icon             |                    New Icon                    |
+| ----------------- | :------------------------------: | :--------------------------------------------: |
+| **old component** |            supported             | icons must be passed as JSX, set size manually |
+| **new component** | do not use, icon sizes are wrong |                   supported                    |
+
+An example on how you can use an old component with a new icon and setting explicit size on the icon. Note that the `Button` in this example is a component that uses the old theming system (11.6):
+
+```js
+---
+type: code
+---
+<Flex gap="small" alignItems="center" wrap="wrap">
+  <Button size="small"  renderIcon={<SearchInstUIIcon size="sm" />}>small</Button>
+  <Button size="medium" renderIcon={<SearchInstUIIcon size="md" />}>medium</Button>
+  <Button size="large"  renderIcon={<SearchInstUIIcon size="lg" />}>large</Button>
+</Flex>
+
+
+```
+
 ## Legacy Icons
 
 > **Deprecated.** The legacy icon set (`IconHeartLine`, `IconSearchLine`, etc.) is kept for
