@@ -52,16 +52,16 @@ const buttonSizeToIconSize = {
   small: 'sm',
   medium: 'md',
   large: 'lg',
-  condensedSmall: 'xs',
-  condensedMedium: 'xs'
+  condensedSmall: 'sm',
+  condensedMedium: 'md'
 } as const
 
 const buttonColorToIconColor = {
-  'primary': 'inherit',
+  primary: 'inherit',
   'primary-inverse': 'inherit',
-  'secondary': 'inherit',
-  'success': 'inherit',
-  'danger': 'inherit',
+  secondary: 'inherit',
+  success: 'inherit',
+  danger: 'inherit',
   'ai-primary': 'inherit',
   'ai-secondary': 'ai'
 } as const
