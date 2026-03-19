@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.1](https://github.com/instructure/instructure-ui/compare/v11.6.0...v11.7.1) (2026-03-19)
+
+
+### Features
+
+* **many:** add new theming solution ([1cef88e](https://github.com/instructure/instructure-ui/commit/1cef88e97f40dd85e15b10bc4307d013ae8b09d0))
+* **many:** add solution for using both old and new token system in the same app ([688a713](https://github.com/instructure/instructure-ui/commit/688a713ff715433bb085323dbad61285387c5141))
+* **ui-pill:** migrate to new theming system ([8f8cfbe](https://github.com/instructure/instructure-ui/commit/8f8cfbee89256d3a29713cc73be1dcf7333a8488))
+
+
+
+
+
 # [11.7.0](https://github.com/instructure/instructure-ui/compare/v11.6.0...v11.7.0) (2026-03-18)
 
 

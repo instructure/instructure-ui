@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.1](https://github.com/instructure/instructure-ui/compare/v11.6.0...v11.7.1) (2026-03-19)
+
+
+### Bug Fixes
+
+* **ui-many:** fix imports of the multiversion support ([ff5f2b3](https://github.com/instructure/instructure-ui/commit/ff5f2b38660ddae432edd32b98eedae586589977))
+
+
+### Features
+
+* **many:** add solution for using both old and new token system in the same app ([688a713](https://github.com/instructure/instructure-ui/commit/688a713ff715433bb085323dbad61285387c5141))
+* **ui-buttons,ui-text-input:** add condensed sizes to IconButton and simplify TextInput afterElement ([49bd675](https://github.com/instructure/instructure-ui/commit/49bd675ad9d9e77bffeb1940888d33d6cc911c60))
+* **ui-date-input,ui-calendar:** rework Calendar and DateInput ([4f127ef](https://github.com/instructure/instructure-ui/commit/4f127ef48f4cf3263e07c4b147e2f3f7c5218a3a))
+* **ui-date-input:** migrate DateInput and DateInput2 ([c685444](https://github.com/instructure/instructure-ui/commit/c68544410815dd9cb2602e5a531b0de10c50b151))
+
+
+
+
+
 # [11.7.0](https://github.com/instructure/instructure-ui/compare/v11.6.0...v11.7.0) (2026-03-18)
 
 

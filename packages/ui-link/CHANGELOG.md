@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.1](https://github.com/instructure/instructure-ui/compare/v11.6.0...v11.7.1) (2026-03-19)
+
+
+### Bug Fixes
+
+* **many:** a11y requirement fix, interactive links must be underlined on interaction and isWithinText prop was removed ([8531756](https://github.com/instructure/instructure-ui/commit/8531756c564a3220a8266d02a72fb26c3bbcc977))
+* **ui-many:** fix imports of the multiversion support ([ff5f2b3](https://github.com/instructure/instructure-ui/commit/ff5f2b38660ddae432edd32b98eedae586589977))
+
+
+### Features
+
+* **many:** add solution for using both old and new token system in the same app ([688a713](https://github.com/instructure/instructure-ui/commit/688a713ff715433bb085323dbad61285387c5141))
+* **ui-breadcrumb:** migrate to new theming system and add new lucide icon and change separator style calculation ([d6c8006](https://github.com/instructure/instructure-ui/commit/d6c8006d213e95c6502d611d9a8e6792ba46e55d))
+* **ui-link:** migrate to new theming system and deprecate old variants and add new size prop ([b83f73b](https://github.com/instructure/instructure-ui/commit/b83f73b6b6782ff48af88c5fa78b9ced0363e327))
+* **ui-link:** migrate to new theming system and deprecate old variants and add new size prop ([777836e](https://github.com/instructure/instructure-ui/commit/777836ecf40f9df152885b4df2fa6f2a4abac1da))
+
+
+
+
+
 # [11.7.0](https://github.com/instructure/instructure-ui/compare/v11.6.0...v11.7.0) (2026-03-18)
 
 

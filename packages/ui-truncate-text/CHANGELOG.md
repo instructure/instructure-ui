@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.1](https://github.com/instructure/instructure-ui/compare/v11.6.0...v11.7.1) (2026-03-19)
+
+
+### Features
+
+* **many:** add solution for using both old and new token system in the same app ([688a713](https://github.com/instructure/instructure-ui/commit/688a713ff715433bb085323dbad61285387c5141))
+* **ui-breadcrumb:** migrate to new theming system and add new lucide icon and change separator style calculation ([d6c8006](https://github.com/instructure/instructure-ui/commit/d6c8006d213e95c6502d611d9a8e6792ba46e55d))
+* **ui-truncate-text:** rework TruncateText and sort the upgrade guide alphabetically ([61ea852](https://github.com/instructure/instructure-ui/commit/61ea8524000d08423249ff2f76acdb643ba1d047))
+
+
+
+
+
 # [11.7.0](https://github.com/instructure/instructure-ui/compare/v11.6.0...v11.7.0) (2026-03-18)
 
 

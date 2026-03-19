@@ -3,6 +3,58 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.1](https://github.com/instructure/instructure-ui/compare/v11.6.0...v11.7.1) (2026-03-19)
+
+
+### Bug Fixes
+
+* **docs:** fix SPA routing for PR preview and /latest/ deployments ([64badec](https://github.com/instructure/instructure-ui/commit/64badec7235c311a3cba32daad94aae69b5acaf1))
+* **docs:** fix SPA routing for PR preview deployments on GitHub Pages ([1f8a93e](https://github.com/instructure/instructure-ui/commit/1f8a93e7a4713eaa405370aaf78271be86664bf9))
+* **docs:** include components at different version stages in versioned docs ([df36851](https://github.com/instructure/instructure-ui/commit/df3685195a7981f256a5f9218acc724156bd1faa))
+* **docs:** skip /latest/ prefix in App getPathInfo URL parsing ([83f9117](https://github.com/instructure/instructure-ui/commit/83f91178cd871766622b17fa5965828798da9445))
+* **many:** a11y requirement fix, interactive links must be underlined on interaction and isWithinText prop was removed ([8531756](https://github.com/instructure/instructure-ui/commit/8531756c564a3220a8266d02a72fb26c3bbcc977))
+
+
+### Code Refactoring
+
+* **ui-text:** migrate to new theming system ([19c7c44](https://github.com/instructure/instructure-ui/commit/19c7c4413a5632b6b10380f888824384724b6be3))
+
+
+### Features
+
+* **many:** add new theming solution ([1cef88e](https://github.com/instructure/instructure-ui/commit/1cef88e97f40dd85e15b10bc4307d013ae8b09d0))
+* **many:** add solution for using both old and new token system in the same app ([688a713](https://github.com/instructure/instructure-ui/commit/688a713ff715433bb085323dbad61285387c5141))
+* **many:** rework TextArea and dependent FormField components ([0f8c438](https://github.com/instructure/instructure-ui/commit/0f8c43803e3458bbf7b2dd266a9e246cb89b0d3c))
+* **ui-avatar:** rework avatar to comply with new design ([70a60d4](https://github.com/instructure/instructure-ui/commit/70a60d4754851be21412a0fbaf234dd4ab39650b))
+* **ui-buttons,ui-text-input:** add condensed sizes to IconButton and simplify TextInput afterElement ([49bd675](https://github.com/instructure/instructure-ui/commit/49bd675ad9d9e77bffeb1940888d33d6cc911c60))
+* **ui-date-input:** migrate DateInput and DateInput2 ([c685444](https://github.com/instructure/instructure-ui/commit/c68544410815dd9cb2602e5a531b0de10c50b151))
+* **ui-icons-lucide:** add lucide icons ([881275f](https://github.com/instructure/instructure-ui/commit/881275f2dff553db67c492bd2f929812f59fec37))
+* **ui-number-input:** rewrite NumberInput to the new theming system ([500d4bc](https://github.com/instructure/instructure-ui/commit/500d4bc03037c2cc60bf83cd1e84b878bef87535))
+* **ui-react-utils,ui-icons-lucide,ui-avatar:** add lucide icons to Avatar, refactor ui-icons-lucid package ([ab5c1ca](https://github.com/instructure/instructure-ui/commit/ab5c1ca8ec9961d754dafee0bcbe5040bb2641b1))
+* **ui-scripts,ui-icons,ui-codemods:** add build-time generation of custom/brand icon components and migration codemod ([b56cb4e](https://github.com/instructure/instructure-ui/commit/b56cb4e69339387ddfb37d532e644e20c4d87876))
+
+
+### BREAKING CHANGES
+
+* **ui-text:** Removed 'alert' color prop value. Use 'primary' color instead.
+
+Also improves documentation:
+- Clarify variant usage and recommendations in README
+- Add deprecation notes for size, weight, and lineHeight legacy values
+- Update color examples to include inverse colors and remove alert
+- Add JSDoc comments for deprecated prop values
+- Improve code examples with clearer formatting
+
+To test: Compare with Figma design
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: Claude <noreply@anthropic.com>
+
+
+
+
+
 # [11.7.0](https://github.com/instructure/instructure-ui/compare/v11.6.0...v11.7.0) (2026-03-18)
 
 ### Code Refactoring

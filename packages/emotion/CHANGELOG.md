@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.1](https://github.com/instructure/instructure-ui/compare/v11.6.0...v11.7.1) (2026-03-19)
+
+
+### Bug Fixes
+
+* **emotion:** fix old them override not working properly ([02bf2b7](https://github.com/instructure/instructure-ui/commit/02bf2b7f6b43a7d731908ec0f35757dc8c79737b))
+* **ui-text-input,emotion:** fix TextInput displaying double focus rings when a focusable element is rendered inside ([b33cea2](https://github.com/instructure/instructure-ui/commit/b33cea283ef84cdc674c43bf8a0b7ca55f04cfaa))
+
+
+### Features
+
+* **many:** add new theming solution ([1cef88e](https://github.com/instructure/instructure-ui/commit/1cef88e97f40dd85e15b10bc4307d013ae8b09d0))
+* **many:** add solution for using both old and new token system in the same app ([688a713](https://github.com/instructure/instructure-ui/commit/688a713ff715433bb085323dbad61285387c5141))
+* **many:** refactor theme parser and implement tray and tabs ([ef28373](https://github.com/instructure/instructure-ui/commit/ef283736fd76fbdcc674854916b298c199f8df50))
+* **many:** separate focus outline calculation from view, inject sharedTokens to generateStyles ([793fe43](https://github.com/instructure/instructure-ui/commit/793fe4346e7b960a272e8b4a98bc8e2c9bb7d2fe))
+* **ui-metric,emotion:** rework Metric ([019cac4](https://github.com/instructure/instructure-ui/commit/019cac4b4b7d9982be8d29ac831672c2e2d1b16a))
+* **ui-number-input:** rewrite NumberInput to the new theming system ([500d4bc](https://github.com/instructure/instructure-ui/commit/500d4bc03037c2cc60bf83cd1e84b878bef87535))
+* **ui-radio-input:** use the new theme for RadioInput ([34bfd59](https://github.com/instructure/instructure-ui/commit/34bfd5956c47beceacb50637e7fd605b9e3f4210))
+
+
+
+
+
 # [11.7.0](https://github.com/instructure/instructure-ui/compare/v11.6.0...v11.7.0) (2026-03-18)
 
 

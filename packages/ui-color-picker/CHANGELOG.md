@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.1](https://github.com/instructure/instructure-ui/compare/v11.6.0...v11.7.1) (2026-03-19)
+
+
+### Bug Fixes
+
+* **ui-many:** fix imports of the multiversion support ([ff5f2b3](https://github.com/instructure/instructure-ui/commit/ff5f2b38660ddae432edd32b98eedae586589977))
+
+
+### Features
+
+* **many:** add new theming solution ([1cef88e](https://github.com/instructure/instructure-ui/commit/1cef88e97f40dd85e15b10bc4307d013ae8b09d0))
+* **many:** add solution for using both old and new token system in the same app ([688a713](https://github.com/instructure/instructure-ui/commit/688a713ff715433bb085323dbad61285387c5141))
+* **many:** separate focus outline calculation from view, inject sharedTokens to generateStyles ([793fe43](https://github.com/instructure/instructure-ui/commit/793fe4346e7b960a272e8b4a98bc8e2c9bb7d2fe))
+* **ui-color-picker:** rework ColorPicker ([fd7780f](https://github.com/instructure/instructure-ui/commit/fd7780fc7ba49cb12bdbe67d2f646d3ae0fbd23a))
+
+
+
+
+
 # [11.7.0](https://github.com/instructure/instructure-ui/compare/v11.6.0...v11.7.0) (2026-03-18)
 
 

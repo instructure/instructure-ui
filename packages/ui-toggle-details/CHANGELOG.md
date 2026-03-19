@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.1](https://github.com/instructure/instructure-ui/compare/v11.6.0...v11.7.1) (2026-03-19)
+
+
+### Features
+
+* **many:** add solution for using both old and new token system in the same app ([688a713](https://github.com/instructure/instructure-ui/commit/688a713ff715433bb085323dbad61285387c5141))
+* **ui-toggle-details:** rework ToggleDetails ([a201f69](https://github.com/instructure/instructure-ui/commit/a201f69884d47ea24de0972b7d93c0f2a7508e4b))
+* **ui-toggle-details:** rework ToggleGroup ([b36a4d3](https://github.com/instructure/instructure-ui/commit/b36a4d3873be7350659f68f9bfa695c51020cea9))
+
+
+
+
+
 # [11.7.0](https://github.com/instructure/instructure-ui/compare/v11.6.0...v11.7.0) (2026-03-18)
 
 
