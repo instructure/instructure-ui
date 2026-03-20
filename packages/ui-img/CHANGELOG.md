@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.1](https://github.com/instructure/instructure-ui/compare/v11.7.0...v11.7.1) (2026-03-20)
+
+**Note:** Version bump only for package @instructure/ui-img
+
+
+
+
+
 # [11.7.0](https://github.com/instructure/instructure-ui/compare/v11.6.0...v11.7.0) (2026-03-18)
 
 
