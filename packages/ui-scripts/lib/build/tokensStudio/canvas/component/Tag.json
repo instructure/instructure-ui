@@ -13,7 +13,7 @@
       "type": "color"
     },
     "defaultBorderRadius": {
-      "value": "{borderRadius.md}",
+      "value": "{borderRadius.full}",
       "type": "borderRadius"
     },
     "defaultBorderStyle": {
