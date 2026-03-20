@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-rating",
-  "version": "11.7.0",
+  "version": "11.7.1",
   "description": "A static rating component",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.1](https://github.com/instructure/instructure-ui/compare/v11.7.0...v11.7.1) (2026-03-20)
+
+
+### Bug Fixes
+
+* **ui-buttons:** fix button to icon size mapping ([4bf8ed1](https://github.com/instructure/instructure-ui/commit/4bf8ed1dca8d0d88a79815bd80b4de252fa843ee))
+
+
+
+
+
 # [11.7.0](https://github.com/instructure/instructure-ui/compare/v11.6.0...v11.7.0) (2026-03-18)
 
 
