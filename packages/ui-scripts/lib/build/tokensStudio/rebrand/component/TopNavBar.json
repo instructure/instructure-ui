@@ -19,10 +19,6 @@
     "smallViewportDropdownMenuActiveOptionIndicatorWidth": {
       "value": "{borderWidth.lg}",
       "type": "borderWidth"
-    },
-    "activeIndicatorWidth": {
-      "value": "{borderWidth.md}",
-      "type": "borderWidth"
     }
   },
   "topNavBarBrand": {
@@ -87,10 +83,6 @@
     "activeIndicatorColorInverse": {
       "value": "{color.text.base}",
       "type": "color"
-    },
-    "smallViewportFontSize": {
-      "value": "{fontSize.textBase}",
-      "type": "fontSizes"
     }
   },
   "topNavBarLayout": {
@@ -241,16 +233,16 @@
     "smallViewportFontSize": {
       "value": "{fontSize.textSm}",
       "type": "fontSizes"
+    },
+    "smallViewportTrayFixTopPosition": {
+      "value": "undefined",
+      "type": "other"
     }
   },
   "topNavBarMenuItems": {
     "desktopItemSpacing": {
       "value": "{spacing.spaceLg}",
       "type": "spacing"
-    },
-    "desktopMaxWidth": {
-      "value": "100%",
-      "type": "other"
     },
     "desktopSubmenuActiveOptionFontWeight": {
       "value": "{fontWeight.body.strong}",
