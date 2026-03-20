@@ -1,6 +1,6 @@
 # Instructure UI (InstUI) - React Component Library
 
-- version 11.6.0 
+- version 11.7.0 
 
 - Instructure UI (InstUI) is a comprehensive React component library.
 
@@ -23,6 +23,7 @@
 - [Module federation](./module-federation.md): InstUI supports module federation with specific version requirements. For v10.14+, use local themes (`canvasThemeLocal`). For older hosts, guest apps must use v10.14+ and local themes. Global theme overrides don't apply to local themes.
 - [Server side rendering](./server-side-rendering.md): SSR with Next.js requires wrapping the app with `InstUISettingsProvider` for deterministic ID generation. Avoid `@instructure/ui` meta-package; install only needed packages. CodeEditor isn't SSR-compatible and must be dynamically imported.
 - [Typography system](./typography-system.md): Use `<Text>` and `<Heading>` components with semantic variants for consistent typography. Variants define font style, weight, size, and line height. Legacy tokens (e.g., fontSizeXSmall) are deprecated and should not be used in new designs.
+- [Using icons](./UsingIcons.md): Guidelines for using icons with proper accessibility roles, size variants, and color options. Line icons for light backgrounds, solid for dark backgrounds. Icons scale with parent font-size by default.
 - [Using theme overrides](./using-theme-overrides.md): Customize components via theme overrides while ensuring WCAG compliance. Use nested `InstUISettingsProvider` for subtree themes, override global or component themes, and leverage branding variables for user customization. Deprecated global theming causes issues with multiple InstUI versions.
 
 #### Patterns
@@ -30,7 +31,6 @@
 - [Content alignment](./ContentAlignment.md): Guidelines for main content area alignment with maximum width (948px) for readability, minimum width (320px) for accessibility, and responsive padding (24px/12px). Ensures proper centering, avoids two-dimensional scrolling, and allows exceptions for complex data displays.
 - [Destroy action](./DestroyAction.md): A modal used for irreversible actions like deletion. Includes guidelines for usage: use clear language, avoid vague confirmations, and use a danger button for the destructive action.
 - [Search](./Search.md): Provides search input patterns including auto-activated, activated, and autocomplete search. Includes guidelines, accessibility support, and clear state management examples.
-- [Using icons](./UsingIcons.md): Guidelines for using icons with proper accessibility roles, size variants, and color options. Line icons for light backgrounds, solid for dark backgrounds. Icons scale with parent font-size by default.
 
 ### Components
 
