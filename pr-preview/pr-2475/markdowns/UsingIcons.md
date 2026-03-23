@@ -1,4 +1,6 @@
 
+Note: These icons are only meant to be used with the new theming system (beta), please don't use them with the old (pre v11.7) components
+
 ## Using Icons
 
 Icons from `@instructure/ui-icons` are available as `<Name>InstUIIcon` components — browse them
