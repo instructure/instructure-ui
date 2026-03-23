@@ -29,7 +29,7 @@ import type {
   Renderable
 } from '@instructure/shared-types'
 import type { ViewOwnProps } from '@instructure/ui-view'
-import type { LinkProps } from '@instructure/ui-link/latest'
+import type { LinkProps } from '@instructure/ui-link'
 
 type BreadcrumbLinkOwnProps = {
   /**

@@ -87,7 +87,9 @@ const generateStyle = (
       boxSizing: 'border-box',
       flexShrink: 0,
       transition: 'all 0.2s',
-      border: `${componentTheme.borderWidth} solid ${invalid ? componentTheme.errorBorderColor : componentTheme.borderColor}`,
+      border: `${componentTheme.borderWidth} solid ${
+        invalid ? componentTheme.errorBorderColor : componentTheme.borderColor
+      }`,
       borderRadius: componentTheme.borderRadius,
       marginInlineEnd: componentTheme.marginRight,
       marginInlineStart: '0',

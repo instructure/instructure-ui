@@ -49,7 +49,7 @@ const generateStyle = (
       paddingLeft: componentTheme.checkErrorInsetWidth
     },
     indentedToggleError: {
-      paddingLeft: componentTheme.toggleErrorInsetWidth,
+      paddingLeft: componentTheme.toggleErrorInsetWidth
     },
     checkbox: {
       label: 'checkbox',
