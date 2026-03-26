@@ -145,7 +145,8 @@ function filterDocsForVersion(
       versionMap,
       libVersion,
       doc.componentVersion,
-      getPackageShortName(doc.relativePath)
+      getPackageShortName(doc.relativePath),
+      doc.componentDirName
     )
   )
 }

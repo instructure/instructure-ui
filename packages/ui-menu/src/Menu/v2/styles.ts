@@ -53,8 +53,6 @@ const generateStyle = (
       listStyleType: 'none',
       margin: '0',
       padding: '0.25rem 0',
-      // TODO-rework
-      //background: componentTheme.background,
       borderRadius: 'inherit',
       display: 'block',
       position: 'relative',

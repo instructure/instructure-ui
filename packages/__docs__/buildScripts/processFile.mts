@@ -71,13 +71,16 @@ export function processFile(
     docData.title = docData.id
   }
 
-  // Extract component version from the file path (e.g. /v1/ or /v2/)
+  // Extract component version and directory name from the file path (e.g. /v1/ or /v2/)
   const pathSegments = fullPath.split(path.sep)
   const srcIndex = pathSegments.indexOf('src')
   const segmentsAfterSrc = srcIndex >= 0 ? pathSegments.slice(srcIndex + 1) : pathSegments
-  const versionSegment = segmentsAfterSrc.find((seg) => /^v\d+$/.test(seg))
-  if (versionSegment) {
-    docData.componentVersion = versionSegment
+  const versionSegmentIndex = segmentsAfterSrc.findIndex((seg) => /^v\d+$/.test(seg))
+  if (versionSegmentIndex >= 0) {
+    docData.componentVersion = segmentsAfterSrc[versionSegmentIndex]
+    if (versionSegmentIndex > 0) {
+      docData.componentDirName = segmentsAfterSrc[versionSegmentIndex - 1]
+    }
   }
 
   return docData

@@ -204,7 +204,8 @@ class Modal extends Component<ModalProps, ModalState> {
       | keyof ModalPropsForTransition
       | 'constrain'
       | 'overflow'
-    >
+    >,
+    open?: boolean
   ) {
     const {
       onDismiss,
@@ -223,7 +224,7 @@ class Modal extends Component<ModalProps, ModalState> {
       <Dialog
         {...passthroughProps(props)}
         as={as}
-        open
+        open={open && !this.state.transitioning}
         label={label}
         defaultFocusElement={this.defaultFocusElement}
         shouldCloseOnDocumentClick={shouldCloseOnDocumentClick}
@@ -310,10 +311,10 @@ class Modal extends Component<ModalProps, ModalState> {
           >
             {constrain === 'parent' ? (
               <span css={this.props.styles?.constrainContext}>
-                {this.renderDialog(passthroughProps)}
+                {this.renderDialog(passthroughProps, open)}
               </span>
             ) : (
-              this.renderDialog(passthroughProps)
+              this.renderDialog(passthroughProps, open)
             )}
           </ModalContext.Provider>
         </Transition>

@@ -92,8 +92,8 @@ export async function buildVersionMap(
         continue
       }
 
-      // Resolve all component versions from the source export file
-      const componentVersions = resolveComponentVersions(
+      // Resolve per-component-dir versions from the source export file
+      const componentDirVersions = resolveComponentVersions(
         pkgDir,
         exportLetter,
         pkgShortName
@@ -104,7 +104,7 @@ export async function buildVersionMap(
       }
       mapping[libVersion][pkgShortName] = {
         exportLetter,
-        componentVersions
+        componentDirVersions
       }
     }
   }
@@ -150,7 +150,8 @@ export function isDocIncludedInVersion(
   versionMap: VersionMap,
   libVersion: string,
   componentVersion: string | undefined,
-  pkgShortName: string | undefined
+  pkgShortName: string | undefined,
+  componentDirName: string | undefined
 ): boolean {
   if (!componentVersion || !pkgShortName) {
     return true
@@ -162,7 +163,14 @@ export function isDocIncludedInVersion(
     return componentVersion === 'v1'
   }
 
-  return entry.componentVersions.includes(componentVersion)
+  if (componentDirName) {
+    const mappedVersion = entry.componentDirVersions[componentDirName]
+    if (mappedVersion !== undefined) {
+      return mappedVersion === componentVersion
+    }
+    // Component dir not found in map; fall back to checking any match
+  }
+  return Object.values(entry.componentDirVersions).includes(componentVersion)
 }
 
 /**
@@ -175,7 +183,7 @@ function resolveComponentVersions(
   pkgDir: string,
   exportLetter: string,
   pkgShortName: string
-): string[] {
+): Record<string, string> {
   const exportFilePath = path.join(
     pkgDir,
     'src',
@@ -195,11 +203,11 @@ function resolveComponentVersions(
   // Match all patterns like:
   //   from '../ComponentName/v2'
   //   from '../ComponentName/v1/SubComponent'
-  const versionRegex = /from\s+['"]\.\.\/[^/]+\/(v\d+)(?:\/|['"])/g
-  const versions = new Set<string>()
+  const versionRegex = /from\s+['"]\.\.\/([^/]+)\/(v\d+)(?:\/|['"])/g
+  const versions = new Map<string, string>() // componentDir → version
   let match
   while ((match = versionRegex.exec(content)) !== null) {
-    versions.add(match[1])
+    versions.set(match[1], match[2])
   }
 
   if (versions.size === 0) {
@@ -209,7 +217,7 @@ function resolveComponentVersions(
     )
   }
 
-  return Array.from(versions)
+  return Object.fromEntries(versions)
 }
 
 /**

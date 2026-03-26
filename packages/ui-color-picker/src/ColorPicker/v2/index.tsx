@@ -24,10 +24,7 @@
 
 import { Component } from 'react'
 
-import {
-  withStyle,
-  InstUISettingsProvider
-} from '@instructure/emotion'
+import { withStyle, InstUISettingsProvider } from '@instructure/emotion'
 import { warn, error } from '@instructure/console'
 import { omitProps } from '@instructure/ui-react-utils'
 import { isValid, contrast as getContrast } from '@instructure/ui-color-utils'
@@ -381,7 +378,11 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
       if (minContrast >= contrast) {
         return (
           <div css={styles?.errorIcons}>
-            {checkContrast.isStrict ? <CircleXInstUIIcon color="errorColor" /> : <AlertCircleInstUIIcon color="warningColor" />}
+            {checkContrast.isStrict ? (
+              <CircleXInstUIIcon color="errorColor" />
+            ) : (
+              <AlertCircleInstUIIcon color="warningColor" />
+            )}
           </div>
         )
       }
@@ -473,7 +474,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
                 size="small"
                 shape="circle"
                 width="auto"
-                renderIcon={<InfoInstUIIcon size="sm"/>}
+                renderIcon={<InfoInstUIIcon size="sm" />}
               />
             </Tooltip>
           </InstUISettingsProvider>
@@ -498,7 +499,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
       onShowContent={() => {
         this.setState({
           openColorPicker: true,
-          mixedColor: this.state.hexCode,
+          mixedColor: this.state.hexCode || '000000',
           calculatedPopoverMaxHeight: undefined,
           isHeightCalculated: false
         })
