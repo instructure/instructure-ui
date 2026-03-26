@@ -55,7 +55,7 @@ const Example = (props) => {
   }
 
   const renderViewer = () => {
-    return <span>{value}</span>
+    return <Text>{value}</Text>
   }
 
   const handleValueChange = (event) => {
