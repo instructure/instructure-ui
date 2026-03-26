@@ -110,26 +110,30 @@ Create a new component version whenever you need to introduce a **breaking chang
 
 We'll walk through an example: adding a `v3` of `Alert` in `@instructure/ui-alerts`, assuming the current library version is `11.7`.
 
-#### 1. Copy the current latest version
+#### 1. Create the new version
 
-Copy the entire contents of the current latest version directory to a new one:
+From the component's directory, run:
 
-```sh
+```bash
 ---
 type: code
 ---
-packages/ui-alerts/src/Alert/v2/  →  packages/ui-alerts/src/Alert/v3/
+OLD=v2 NEW=v3 && git mv $OLD $NEW && cp -r $NEW $OLD && git add $OLD
 ```
 
-The new version (`v3`) should contain everything the previous version had: `index.tsx`, `props.ts`, `README.md`, `styles.ts`, `theme.ts`, `__tests__/`, etc.
+This does three things in order:
+
+1. `git mv v2 v3` — renames the directory so `v3` inherits full `git blame` history
+2. `cp -r v3 v2` — recreates `v2` as a frozen copy (loses blame history, which is fine)
+3. `git add v2` — stages the recreated copy
+
+**Why `git mv` instead of copying?** Plain `git blame` (used by every IDE) only traces history through renames, not copies. If you copy files to create a new version, all blame is lost — every line shows the copy commit as its author.
 
 #### 2. Freeze the old version
 
 The version that was previously the latest (`v2` in this case) must be frozen:
 
-1. **Delete its tests.** Only the latest version is tested and supported. Remove the `__tests__/` directory from `v2`.
-
-2. **Pin internal cross-package imports.** Any imports from other versioned `@instructure/*` packages that use the `/latest` subpath must be changed to the current released version. For example:
+1. **Pin internal cross-package imports.** Any imports from other versioned `@instructure/*` packages that use the `/latest` subpath must be changed to the current released version. For example:
 
    ```diff
    ---
@@ -298,8 +302,8 @@ When you add a breaking change to a component, you manually add the new `./v11_8
 
 ## Summary of steps needed to add a new version of a component
 
-1. **Copy** the current latest version to a new `vX` directory
-2. **Freeze** the old version: delete tests, pin `/latest` imports to the current released version
+1. **`git mv`** the current latest version to a new `vX` directory, then recreate the old version as a copy (see the one-liner in step 1 above)
+2. **Freeze** the old version: pin `/latest` imports to the current released version
 3. **Implement** breaking changes in the new version (keep `/latest` imports)
 4. **Create** a new lettered export file that exports all components at their latest versions
 5. **Update** `package.json` exports: add the new `./vX_Y` entry and point `./latest` to the new letter
