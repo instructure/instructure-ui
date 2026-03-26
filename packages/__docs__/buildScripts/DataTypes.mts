@@ -31,7 +31,7 @@ type ProcessedFile =
   YamlMetaInfo &
   JsDocResult &
   PackagePathData &
-  { title: string, id:string, componentVersion?: string }
+  { title: string, id:string, componentVersion?: string, componentDirName?: string }
 
 type PackagePathData = {
   extension: string
@@ -146,7 +146,8 @@ type MainDocsData = {
 
 type VersionMapEntry = {
   exportLetter: string
-  componentVersions: string[]
+  /** Maps component directory names (e.g. 'DateInput') to their version (e.g. 'v2') */
+  componentDirVersions: Record<string, string>
 }
 
 type VersionMap = {

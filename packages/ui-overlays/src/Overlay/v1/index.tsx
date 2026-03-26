@@ -140,7 +140,7 @@ class Overlay extends Component<OverlayProps, OverlayState> {
           this.props.onExited
         )}
       >
-        {content}
+        <div>{content}</div>
       </Transition>
     )
   }
