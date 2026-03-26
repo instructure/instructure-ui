@@ -26,9 +26,11 @@ import { Component } from 'react'
 import { render, screen, waitFor } from '@testing-library/react'
 import { MockInstance, vi } from 'vitest'
 import { userEvent } from '@testing-library/user-event'
-import type { TableColHeaderProps } from '../v2/ColHeader/props'
 import { Table } from '@instructure/ui-table/latest'
-import type { TableProps } from '@instructure/ui-table/latest'
+import type {
+  TableProps,
+  TableColHeaderProps
+} from '@instructure/ui-table/latest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import '@testing-library/jest-dom'
 

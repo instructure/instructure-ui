@@ -26,8 +26,8 @@ import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { vi } from 'vitest'
 import '@testing-library/jest-dom'
-import type { CalendarDayProps } from '../v2/Day/props'
 import { Calendar } from '@instructure/ui-calendar/latest'
+import type { CalendarDayProps } from '@instructure/ui-calendar/latest'
 
 const weekdayLabels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 

@@ -27,7 +27,7 @@ import { vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { IconWarningLine } from '@instructure/ui-icons'
 import { FormFieldMessages } from '@instructure/ui-form-field/latest'
-import type { FormMessage } from '../../utils/v1/FormPropTypes'
+import type { FormMessage } from '@instructure/ui-form-field/latest'
 import '@testing-library/jest-dom'
 
 describe('<FormFieldMessages />', () => {

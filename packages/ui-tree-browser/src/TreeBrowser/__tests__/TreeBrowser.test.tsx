@@ -28,8 +28,7 @@ import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 
-import { TreeBrowser } from '@instructure/ui-tree-browser/latest'
-import { TreeNode } from '../v2/TreeNode'
+import { TreeBrowser, TreeNode } from '@instructure/ui-tree-browser/latest'
 
 const COLLECTIONS_DATA = {
   2: { id: 2, name: 'Root Directory', collections: [3, 4], items: [1] },

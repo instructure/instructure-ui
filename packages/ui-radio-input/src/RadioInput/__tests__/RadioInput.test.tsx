@@ -29,8 +29,7 @@ import { vi } from 'vitest'
 
 import '@testing-library/jest-dom'
 import { runAxeCheck } from '@instructure/ui-axe-check'
-import { RadioInput } from '@instructure/ui-radio-input/latest'
-import { type RadioInputHandle } from '../v2/index'
+import { RadioInput, type RadioInputHandle } from '@instructure/ui-radio-input/latest'
 
 describe('<RadioInput />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>

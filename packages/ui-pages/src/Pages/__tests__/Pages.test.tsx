@@ -28,8 +28,7 @@ import type { MockInstance } from 'vitest'
 
 import '@testing-library/jest-dom'
 import userEvent from '@testing-library/user-event'
-import { Pages } from '../v1'
-import { Page } from '../v1/index'
+import { Pages, PagesPage as Page } from '@instructure/ui-pages/latest'
 
 describe('<Pages />', () => {
   let consoleErrorMock: ReturnType<typeof vi.spyOn>

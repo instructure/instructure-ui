@@ -27,7 +27,7 @@ import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
 
 import '@testing-library/jest-dom'
-import SourceCodeEditor from '../v2/index'
+import { SourceCodeEditor } from '@instructure/ui-source-code-editor/latest'
 
 describe('<SourceCodeEditor />', () => {
   describe('syntax highlight', () => {

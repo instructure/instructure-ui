@@ -28,7 +28,7 @@ import { vi, expect } from 'vitest'
 import type { MockInstance } from 'vitest'
 
 import '@testing-library/jest-dom'
-import Spinner from '../v2/index'
+import { Spinner } from '@instructure/ui-spinner/latest'
 import type { SpinnerProps } from '@instructure/ui-spinner/latest'
 
 describe('<Spinner />', () => {

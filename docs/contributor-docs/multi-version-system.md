@@ -112,7 +112,18 @@ We'll walk through an example: adding a `v3` of `Alert` in `@instructure/ui-aler
 
 #### 1. Create the new version
 
-From the component's directory, run:
+Run the automated script from anywhere in the repo:
+
+```bash
+---
+type: code
+---
+pnpm run create-component-version
+```
+
+The script will auto-detect the component if you're inside its directory, or let you search for one. It handles all the steps below automatically: renaming via `git mv` (to preserve blame history), freezing the old version, creating the export file, and updating `package.json`.
+
+If you prefer to do it manually, from the component's directory run:
 
 ```bash
 ---
@@ -120,12 +131,6 @@ type: code
 ---
 OLD=v2 NEW=v3 && git mv $OLD $NEW && cp -r $NEW $OLD && git add $OLD
 ```
-
-This does three things in order:
-
-1. `git mv v2 v3` — renames the directory so `v3` inherits full `git blame` history
-2. `cp -r v3 v2` — recreates `v2` as a frozen copy (loses blame history, which is fine)
-3. `git add v2` — stages the recreated copy
 
 **Why `git mv` instead of copying?** Plain `git blame` (used by every IDE) only traces history through renames, not copies. If you copy files to create a new version, all blame is lost — every line shows the copy commit as its author.
 

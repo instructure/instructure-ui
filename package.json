@@ -36,6 +36,7 @@
     "clean": "node scripts/clean.js",
     "clean-node": "node scripts/clean.js --nuke_node",
     "export:icons": "pnpm --filter @instructure/ui-icons export",
+    "create-component-version": "ui-scripts create-component-version",
     "bump": "ui-scripts bump",
     "release": "ui-scripts publish",
     "husky:pre-commit": "lint-staged && node scripts/checkTSReferences.js",
