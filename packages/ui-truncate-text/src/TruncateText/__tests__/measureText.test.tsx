@@ -26,7 +26,7 @@ import { render, screen } from '@testing-library/react'
 import { vi, expect } from 'vitest'
 
 import '@testing-library/jest-dom'
-import measureText from '../measureText'
+import measureText from '../v2/utils/measureText'
 
 const baseStyle = {
   fontSize: '16px',

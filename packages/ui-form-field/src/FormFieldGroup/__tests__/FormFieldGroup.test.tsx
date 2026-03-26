@@ -26,7 +26,7 @@ import { render, screen } from '@testing-library/react'
 import { vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { FormFieldGroup } from '@instructure/ui-form-field/latest'
-import { FormMessage } from '../../utils/v1/FormPropTypes'
+import type { FormMessage } from '@instructure/ui-form-field/latest'
 import '@testing-library/jest-dom'
 
 describe('<FormFieldGroup />', () => {

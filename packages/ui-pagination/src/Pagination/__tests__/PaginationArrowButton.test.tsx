@@ -22,36 +22,33 @@
  * SOFTWARE.
  */
 
-import { expect } from 'vitest'
+import { render, screen } from '@testing-library/react'
+import { vi } from 'vitest'
+
 import '@testing-library/jest-dom'
-import cleanString from '../cleanString'
+import { PaginationArrowButton } from '../v2/PaginationArrowButton'
 
-describe('cleanSring', () => {
-  it('should remove spaces from start and end of string', async () => {
-    const string = ' Hello world '
+describe('<PaginationArrowButton />', () => {
+  it('should render', async () => {
+    render(<PaginationArrowButton direction="prev" label="Label" />)
 
-    const newString = cleanString(string, [' '])
-    expect(newString).to.equal('Hello world')
+    const button = screen.getByRole('button', { name: 'Label' })
+
+    expect(button).toBeInTheDocument()
   })
 
-  it('should remove spaces from only the end of string', async () => {
-    const string = ' Hello world '
+  it('should provide a ref to the button element', async () => {
+    const buttonRef = vi.fn()
 
-    const newString = cleanString(string, [' '], false)
-    expect(newString).to.equal(' Hello world')
-  })
+    render(
+      <PaginationArrowButton
+        direction="prev"
+        label="Label"
+        buttonRef={buttonRef}
+      />
+    )
+    const button = screen.getByRole('button', { name: 'Label' })
 
-  it('should remove spaces and commas', async () => {
-    const string = ' Hello world,'
-
-    const newString = cleanString(string, [' ', ','])
-    expect(newString).to.equal('Hello world')
-  })
-
-  it('should do a thorough cleaning', async () => {
-    const string = 'Hello world. '
-
-    const newString = cleanString(string, [' ', '.'], false, true, true)
-    expect(newString).to.equal('Hello world')
+    expect(buttonRef).toHaveBeenCalledWith(button)
   })
 })

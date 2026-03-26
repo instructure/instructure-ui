@@ -27,7 +27,7 @@ import { vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 
 import '@testing-library/jest-dom'
-import Avatar from '../v2/index'
+import { Avatar } from '@instructure/ui-avatar/latest'
 import { HeartInstUIIcon } from '@instructure/ui-icons'
 
 describe('<Avatar />', () => {

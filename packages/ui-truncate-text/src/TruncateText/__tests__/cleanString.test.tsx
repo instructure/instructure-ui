@@ -21,9 +21,37 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { RadioInput } from '../RadioInput/v2'
-export { RadioInputGroup } from '../RadioInputGroup/v2'
 
-export type { RadioInputProps } from '../RadioInput/v2/props'
-export type { RadioInputGroupProps } from '../RadioInputGroup/v2/props'
-export type { RadioInputHandle } from '../RadioInput/v2'
+import { expect } from 'vitest'
+import '@testing-library/jest-dom'
+import cleanString from '../v2/utils/cleanString'
+
+describe('cleanSring', () => {
+  it('should remove spaces from start and end of string', async () => {
+    const string = ' Hello world '
+
+    const newString = cleanString(string, [' '])
+    expect(newString).to.equal('Hello world')
+  })
+
+  it('should remove spaces from only the end of string', async () => {
+    const string = ' Hello world '
+
+    const newString = cleanString(string, [' '], false)
+    expect(newString).to.equal(' Hello world')
+  })
+
+  it('should remove spaces and commas', async () => {
+    const string = ' Hello world,'
+
+    const newString = cleanString(string, [' ', ','])
+    expect(newString).to.equal('Hello world')
+  })
+
+  it('should do a thorough cleaning', async () => {
+    const string = 'Hello world. '
+
+    const newString = cleanString(string, [' ', '.'], false, true, true)
+    expect(newString).to.equal('Hello world')
+  })
+})
