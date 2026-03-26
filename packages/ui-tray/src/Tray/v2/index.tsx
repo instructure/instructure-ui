@@ -210,7 +210,7 @@ class Tray extends Component<TrayProps> {
             as="div"
             label={label}
             defaultFocusElement={defaultFocusElement}
-            open
+            open={open}
             shouldContainFocus={shouldContainFocus}
             shouldReturnFocus={shouldReturnFocus}
             shouldCloseOnDocumentClick={shouldCloseOnDocumentClick}

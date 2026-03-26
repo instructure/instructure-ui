@@ -77,9 +77,9 @@ class ThemeColors extends Component<ThemeColorsProps, ThemeColorsState> {
     return (
       <Responsive
         query={{
-          xsmall: { maxWidth: '23rem' },
-          small: { minWidth: '23rem' },
-          medium: { minWidth: '36rem' },
+          xsmall: { maxWidth: '22.9999rem' },
+          small: { minWidth: '23rem', maxWidth: '35.9999rem' },
+          medium: { minWidth: '36rem', maxWidth: '49.9999rem' },
           large: { minWidth: '50rem' }
         }}
         props={{

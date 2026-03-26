@@ -304,4 +304,4 @@ When you add a breaking change to a component, you manually add the new `./v11_8
 4. **Create** a new lettered export file that exports all components at their latest versions
 5. **Update** `package.json` exports: add the new `./vX_Y` entry and point `./latest` to the new letter
 
-For information on how documentation is versioned alongside components, see the [Docs Versioning](/#contributor-guides/#docs-versioning) guide.
+For information on how documentation is versioned alongside components, see the [Docs Versioning](/docs-versioning) guide.

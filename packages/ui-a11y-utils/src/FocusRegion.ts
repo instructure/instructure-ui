@@ -113,6 +113,14 @@ class FocusRegion {
       this._contextElement,
       this._documentClickTarget
     )
+    // Preemptively remove aria-hidden before focus moves to the clicked element
+    // outside the region, preventing the "aria-hidden on focused ancestor" warning.
+    if (
+      !this._contextContainsTarget &&
+      this._options.shouldCloseOnDocumentClick
+    ) {
+      this._screenReaderFocusRegion.deactivate()
+    }
   }
 
   handleDocumentClick = (event: React.PointerEvent) => {

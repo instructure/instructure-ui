@@ -410,6 +410,8 @@ export type { TextInputProps } from '@instructure/ui-text-input/v11_7'
 export {
   canvas,
   canvasHighContrast,
+  dark,
+  light,
   primitives,
   additionalPrimitives,
   dataVisualization
@@ -426,7 +428,11 @@ export type {
   Primitives,
   AdditionalPrimitives,
   DataVisualization,
-  UI
+  UI,
+  Dark,
+  DarkTheme,
+  Light,
+  LightTheme
 } from '@instructure/ui-themes'
 export { TimeSelect } from '@instructure/ui-time-select/v11_7'
 export type { TimeSelectProps } from '@instructure/ui-time-select/v11_7'

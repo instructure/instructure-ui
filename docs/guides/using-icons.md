@@ -144,7 +144,7 @@ type: code
 > npx @instructure/ui-codemods migrateToNewIcons <path>
 > ```
 
-### Accessibility
+### Legacy Accessibility
 
 By default, the icon's `role` is set to `presentation`. However, when the `title` prop is set, the role attribute is set to `img`. Include the `description` prop to further describe the icon.
 

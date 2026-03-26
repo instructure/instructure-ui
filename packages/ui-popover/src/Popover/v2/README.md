@@ -70,7 +70,9 @@ const Example = () => {
           onHideContent={() => console.log('hidden')}
         >
           <View padding="x-small" display="block" as="div" id="tip">
-            Hello World
+            <Text color={color}>
+              Hello World
+            </Text>
           </View>
         </Popover>
       </View>
@@ -243,7 +245,9 @@ type: example
 const MyComponent = React.forwardRef((props, ref) => {
   return (
     <div {...props} ref={ref} style={{ width: '10rem' }}>
-      My custom component
+      <Text color="primary">
+        My custom component
+      </Text>
     </div>
   )
 })
@@ -407,7 +411,7 @@ const Example = () => {
           shadow={shadow}
           color={color}
         >
-          <Heading>
+          <Heading color={color}>
             Small
             <br />
             Target

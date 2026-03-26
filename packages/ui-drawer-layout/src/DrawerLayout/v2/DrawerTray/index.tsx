@@ -245,7 +245,7 @@ class DrawerTray extends Component<
                 data-cid="DrawerTray"
               >
                 <Dialog
-                  open
+                  open={open}
                   role={shouldOverlayTray ? 'dialog' : 'region'}
                   label={label}
                   shouldReturnFocus={shouldReturnFocus}

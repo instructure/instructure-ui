@@ -30,6 +30,8 @@ import type {
 } from './themes/newThemes/commonTypes'
 import type { CanvasHighContrastTheme } from './themes/canvasHighContrast'
 import type { CanvasTheme, CanvasBrandVariables } from './themes/canvas'
+import type { DarkTheme } from './themes/dark'
+import type { LightTheme } from './themes/light'
 import type {
   BaseTheme,
   Primitives,
@@ -99,6 +101,8 @@ export type {
   CanvasTheme,
   CanvasBrandVariables,
   CanvasHighContrastTheme,
+  DarkTheme,
+  LightTheme,
   Primitives,
   AdditionalPrimitives,
   DataVisualization,
