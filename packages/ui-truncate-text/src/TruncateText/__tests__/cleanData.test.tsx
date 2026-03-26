@@ -23,8 +23,8 @@
  */
 import { expect } from 'vitest'
 import '@testing-library/jest-dom'
-import cleanData from '../cleanData'
-import { CleanDataOptions } from '../../props'
+import cleanData from '../v2/utils/cleanData'
+import { CleanDataOptions } from '../v2/props'
 
 describe('cleanData', () => {
   it('should remove spaces from the end of character data', async () => {

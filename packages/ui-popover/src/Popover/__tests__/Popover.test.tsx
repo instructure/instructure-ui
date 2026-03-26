@@ -26,7 +26,7 @@ import { vi } from 'vitest'
 import { fireEvent, render, screen, cleanup } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
-import Popover from '../v2/index'
+import { Popover } from '@instructure/ui-popover/latest'
 import type { PopoverProps } from '@instructure/ui-popover/latest'
 
 describe('<Popover />', () => {

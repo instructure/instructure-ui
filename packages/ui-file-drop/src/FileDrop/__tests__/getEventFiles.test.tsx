@@ -24,7 +24,7 @@
 
 import React from 'react'
 import { expect } from 'vitest'
-import { getEventFiles } from '../getEventFiles'
+import { getEventFiles } from '../v2/utils/getEventFiles'
 
 describe('getEventFiles', () => {
   const chromeDragEnter = {

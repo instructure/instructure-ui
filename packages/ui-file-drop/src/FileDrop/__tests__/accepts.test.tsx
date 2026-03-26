@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import { expect } from 'vitest'
-import { accepts } from '../accepts'
+import { accepts } from '../v2/utils/accepts'
 
 describe('accepts', () => {
   const dropImage = new File([], 'whale whale whale.jpg', {

@@ -34,6 +34,7 @@ import build from '../build/babel.js'
 import generateAllTokens from '../build/generate-all-tokens.js'
 import buildIcons from '../icons/build-icons.js'
 import buildThemes from '../build/build-themes.js'
+import createComponentVersion from './create-component-version.ts'
 
 export const yargCommands = [
   bump,
@@ -47,5 +48,6 @@ export const yargCommands = [
   build,
   generateAllTokens,
   buildIcons,
-  buildThemes
+  buildThemes,
+  createComponentVersion
 ]
