@@ -34,7 +34,7 @@
     "@babel/runtime": "^7.27.6",
     "@instructure/babel-plugin-transform-imports": "workspace:*",
     "@instructure/browserslist-config-instui": "workspace:*",
-    "babel-loader": "^9.2.1",
+    "babel-loader": "^10.0.0",
     "babel-plugin-dynamic-import-node": "^2.3.3",
     "babel-plugin-istanbul": "^7.0.0",
     "babel-plugin-macros": "^3.1.0",
