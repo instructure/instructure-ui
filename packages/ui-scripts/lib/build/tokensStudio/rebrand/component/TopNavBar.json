@@ -19,6 +19,10 @@
     "smallViewportDropdownMenuActiveOptionIndicatorWidth": {
       "value": "{borderWidth.lg}",
       "type": "borderWidth"
+    },
+    "smallViewportDropdownMenuActiveOptionIndicatorColor": {
+      "value": "currentColor",
+      "type": "fontWeights"
     }
   },
   "topNavBarBrand": {
@@ -83,6 +87,10 @@
     "activeIndicatorColorInverse": {
       "value": "{color.text.base}",
       "type": "color"
+    },
+    "activeIndicatorWidth": {
+      "value": "{borderWidth.md}",
+      "type": "borderWidth"
     }
   },
   "topNavBarLayout": {
