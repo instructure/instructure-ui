@@ -631,6 +631,8 @@ class SourceCodeEditor extends Component<SourceCodeEditorProps> {
         userEvent = 'delete.backward'
       }
 
+      const scrollTop = this._editorView.scrollDOM.scrollTop
+
       this.dispatchViewChanges({
         changes: {
           from: 0,
@@ -640,6 +642,14 @@ class SourceCodeEditor extends Component<SourceCodeEditorProps> {
         selection: this._newSelectionAfterValueChange,
         userEvent: userEvent
       })
+
+      // Restore scroll position after CodeMirror updates the DOM
+      this.addAnimationFrame(() => {
+        if (this._editorView) {
+          this._editorView.scrollDOM.scrollTop = scrollTop
+        }
+      })
+
       this._newSelectionAfterValueChange = undefined
     }
 
