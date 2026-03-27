@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { NewComponentTypes } from '@instructure/ui-themes'
+import type { MaskTheme } from '@instructure/shared-types'
 import type { MaskProps, MaskStyle } from './props'
 
 /**
@@ -32,12 +32,11 @@ import type { MaskProps, MaskStyle } from './props'
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} sharedTokens Shared token object that stores common values for the theme.
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['Mask'],
+  componentTheme: MaskTheme,
   props: MaskProps
 ): MaskStyle => {
   const { placement, fullscreen } = props
@@ -57,7 +56,7 @@ const generateStyle = (
     mask: {
       label: 'mask',
       boxSizing: 'border-box',
-      background: componentTheme.backgroundColor,
+      background: componentTheme.background,
       top: 0,
       left: 0,
       right: 0,
@@ -66,7 +65,12 @@ const generateStyle = (
       display: 'flex',
       justifyContent: 'center',
       outline: 'none',
-      zIndex: 9999,
+      border: `${componentTheme.borderWidth} solid ${componentTheme.borderColor}`,
+      borderRadius: componentTheme.borderRadius,
+      '&:focus': {
+        borderColor: componentTheme.focusBorderColor
+      },
+      zIndex: componentTheme.zIndex,
       ...positionStyles,
       ...placementStyles[placement!]
     }
