@@ -58,10 +58,9 @@ function logMessage(
   const isGitHubPullRequestPreview =
     typeof process !== 'undefined' &&
     process?.env?.GITHUB_PULL_REQUEST_PREVIEW === 'true'
-  if (
-    (isGitHubPullRequestPreview || process.env.NODE_ENV !== 'production') &&
-    !condition
-  ) {
+  const isNonProdBuild =
+    typeof process !== 'undefined' && process?.env?.NODE_ENV !== 'production'
+  if ((isGitHubPullRequestPreview || isNonProdBuild) && !condition) {
     if (typeof console[level] === 'function') {
       const renderStack = withRenderStack ? getRenderStack() : ''
       //@ts-expect-error level can be 'constructor' which is not callable
@@ -77,19 +76,10 @@ function logDeprecated(
   message: string,
   ...args: unknown[]
 ) {
-  let shouldLogMessage = false
-
-  try {
-    shouldLogMessage = !process?.env?.OMIT_INSTUI_DEPRECATION_WARNINGS
-  } catch (e) {
-    if (e instanceof ReferenceError) {
-      // if process is not available a ReferenceError is thrown
-      shouldLogMessage = true
-    } else {
-      throw e
-    }
-  }
-  if (shouldLogMessage) {
+  if (
+    typeof process !== 'undefined' &&
+    !process?.env?.OMIT_INSTUI_DEPRECATION_WARNINGS
+  ) {
     logMessage('warn', true, condition, message, ...args)
   } else if (!condition && !loggedInitialDeprecationWarning) {
     loggedInitialDeprecationWarning = true

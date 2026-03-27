@@ -91,20 +91,10 @@ class View extends Component<ViewProps> {
       'makeStyles',
       'themeOverride'
     ]
-
-    let shouldLogError = true
-    try {
-      shouldLogError = process.env.NODE_ENV !== 'production'
-    } catch (e) {
-      if (e instanceof ReferenceError) {
-        // if process is not available a ReferenceError is thrown
-        shouldLogError = false
-      } else {
-        throw e
-      }
-    }
-
-    if (shouldLogError) {
+    if (
+      typeof process !== 'undefined' &&
+      process?.env?.NODE_ENV !== 'production'
+    ) {
       Object.keys(pickProps(props, propsToOmit)).forEach((prop) => {
         error(false, `[${Component.name}] prop '${prop}' is not allowed.`)
       })
@@ -134,7 +124,11 @@ class View extends Component<ViewProps> {
     this.props.makeStyles?.()
 
     // Not calling getCSSStyleDeclaration can save hundreds of ms in tests and production
-    if (process.env.NODE_ENV === 'development' && !this.spanMarginVerified) {
+    if (
+      typeof process !== 'undefined' &&
+      process?.env?.NODE_ENV === 'development' &&
+      !this.spanMarginVerified
+    ) {
       // We have to verify margins in the first 'componentDidUpdate',
       // because that is when all styles are calculated,
       // but we only want to check once, using a flag

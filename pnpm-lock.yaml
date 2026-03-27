@@ -5158,9 +5158,6 @@ importers:
       file-loader:
         specifier: ^6.2.0
         version: 6.2.0(webpack@5.102.1(esbuild@0.25.10))
-      process:
-        specifier: ^0.11.10
-        version: 0.11.10
       style-loader:
         specifier: ^4.0.0
         version: 4.0.0(webpack@5.102.1(esbuild@0.25.10))

@@ -88,7 +88,10 @@ const withDeterministicId = decorator((ComposedComponent: InstUIComponent) => {
   WithDeterministicId.originalType =
     ComposedComponent.originalType || ComposedComponent
 
-  if (process.env.NODE_ENV !== 'production') {
+  if (
+    typeof process !== 'undefined' &&
+    process?.env?.NODE_ENV !== 'production'
+  ) {
     WithDeterministicId.displayName = `WithDeterministicId(${ComposedComponent.displayName})`
   }
 

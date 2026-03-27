@@ -41,7 +41,11 @@ const dictionaryLengthMinus1 = dictionary.length - 1
  */
 function uid(prefix = '', length = 12) {
   const id = `u${_uid(length - 1)}`
-  if (prefix && process.env.NODE_ENV !== 'production') {
+  if (
+    prefix &&
+    typeof process !== 'undefined' &&
+    process?.env?.NODE_ENV !== 'production'
+  ) {
     return `${prefix}__${id}`
   } else {
     return id
