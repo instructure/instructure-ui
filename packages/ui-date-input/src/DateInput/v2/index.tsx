@@ -265,6 +265,7 @@ const DateInput = forwardRef(
         ref={ref}
         inputRef={inputRef}
         renderLabel={renderLabel}
+        aria-label={callRenderProp(renderLabel)}
         onChange={handleInputChange}
         onBlur={handleBlur}
         isRequired={isRequired}
