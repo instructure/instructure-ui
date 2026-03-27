@@ -74,8 +74,9 @@ function InstUISettingsProvider({
   const finalDir = dir || useContext(TextDirectionContext)
 
   if (
-    (process.env.NODE_ENV !== 'production' ||
-      process.env.GITHUB_PULL_REQUEST_PREVIEW === 'true') &&
+    typeof process !== 'undefined' &&
+    (process?.env?.NODE_ENV !== 'production' ||
+      process?.env?.GITHUB_PULL_REQUEST_PREVIEW === 'true') &&
     finalDir === 'auto'
   ) {
     console.warn(

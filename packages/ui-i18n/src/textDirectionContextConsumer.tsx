@@ -121,8 +121,9 @@ const textDirectionContextConsumer: TextDirectionContextConsumerType =
             <TextDirectionContext.Consumer>
               {(dir) => {
                 if (
-                  (process.env.NODE_ENV !== 'production' ||
-                    process.env.GITHUB_PULL_REQUEST_PREVIEW === 'true') &&
+                  typeof process !== 'undefined' &&
+                  (process?.env?.NODE_ENV !== 'production' ||
+                    process?.env?.GITHUB_PULL_REQUEST_PREVIEW === 'true') &&
                   dir === 'auto'
                 ) {
                   console.warn(
@@ -152,7 +153,10 @@ const textDirectionContextConsumer: TextDirectionContextConsumerType =
       // } = forwardRef<any, TextDirectionContextConsumerProps>((props, ref) => (
       //   <TextDirectionContextConsumerComponent {...props} forwardedRef={ref} />
       // ))
-      if (process.env.NODE_ENV !== 'production') {
+      if (
+        typeof process !== 'undefined' &&
+        process?.env?.NODE_ENV !== 'production'
+      ) {
         const displayName =
           ComposedComponent.displayName || ComposedComponent.name
         TextDirectionContextConsumerForwardingRef.displayName = `TextDirectionContextConsumerForwardingRef(${displayName})`

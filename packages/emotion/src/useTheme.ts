@@ -41,8 +41,9 @@ const useTheme = () => {
   let theme = useEmotionTheme() as BaseThemeOrOverride
   if (isEmpty(theme)) {
     if (
-      process.env.NODE_ENV !== 'production' ||
-      process.env.GITHUB_PULL_REQUEST_PREVIEW === 'true'
+      typeof process !== 'undefined' &&
+      (process?.env?.NODE_ENV !== 'production' ||
+        process?.env?.GITHUB_PULL_REQUEST_PREVIEW === 'true')
     ) {
       console.warn(
         `No theme provided for [InstUISettingsProvider], using default <canvas> theme.`
