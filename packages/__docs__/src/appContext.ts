@@ -22,38 +22,28 @@
  * SOFTWARE.
  */
 
-import dotenv from 'dotenv'
-import rules from './module/rules.js'
-import plugins from './plugins.js'
-import optimization from './optimization.js'
+import type {
+  LibraryOptions,
+  MainDocsData
+} from '../buildScripts/DataTypes.mjs'
+import { createContext } from 'react'
 
-dotenv.config({ path: process.cwd() })
-
-const DEBUG = process.env.DEBUG
-const ENV = process.env.NODE_ENV || 'production'
-
-const config = {
-  mode: ENV === 'production' ? 'production' : 'development',
-  cache: ENV !== 'production',
-  bail: !DEBUG,
-  devtool: ENV === 'production' ? false : 'eval-source-map',
-  module: {
-    rules
-  },
-  plugins,
-  optimization,
-  performance: {
-    hints: ENV === 'production' ? 'warning' : false
-  },
-  resolve: {
-    fallback: {
-      fs: false,
-      module: false,
-      path: false,
-      process: false // needed for Sinon 12+
-    },
-    extensions: ['.ts', '.tsx', '.js', '.json']
-  }
+type AppContextType = {
+  /**
+   * The ID of the currently selected theme.
+   */
+  themeKey: keyof MainDocsData['themes']
+  themes: MainDocsData['themes']
+  library?: LibraryOptions
+  /**
+   * Currently selected component version, e.g. "v11_7"
+   */
+  componentVersion?: string
 }
 
-export default config
+export const AppContext = createContext<AppContextType>({
+  themes: {},
+  themeKey: '',
+  library: undefined,
+  componentVersion: undefined
+})

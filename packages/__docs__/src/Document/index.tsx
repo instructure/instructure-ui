@@ -22,12 +22,13 @@
  * SOFTWARE.
  */
 
-import { Component } from 'react'
+import React, { Component } from 'react'
 
 import { Link } from '@instructure/ui-link'
 import { View } from '@instructure/ui-view'
 import { Tabs } from '@instructure/ui-tabs'
 import type { TabsProps } from '@instructure/ui-tabs'
+import type { NewBaseTheme } from '@instructure/ui-themes'
 import { SourceCodeEditor } from '@instructure/ui-source-code-editor'
 import { withStyleForDocs as withStyle } from '../withStyleForDocs'
 
@@ -41,12 +42,16 @@ import { ComponentTheme } from '../ComponentTheme'
 import { TableOfContents } from '../TableOfContents'
 import { Heading } from '../Heading'
 
+import { AppContext } from '../appContext'
+
 import { allowedProps } from './props'
 import type { DocumentProps, DocumentState, DocDataType } from './props'
 
 @withStyle(generateStyle)
 class Document extends Component<DocumentProps, DocumentState> {
   static allowedProps = allowedProps
+  static contextType = AppContext
+  declare context: React.ContextType<typeof AppContext>
 
   static defaultProps = {
     description: undefined,
@@ -78,34 +83,39 @@ class Document extends Component<DocumentProps, DocumentState> {
     // use PascalCase without dots (e.g. "MenuItem").
     // New-theme entries are in themeVariables.newTheme.components.
     const selectedId = this.state.selectedDetailsTabId
+    type ComponentKey = keyof NewBaseTheme['components']
     const childDoc =
       selectedId !== doc.id
         ? doc?.children?.find((value) => value.id === selectedId)
         : null
     // in case of some components, we need to display the theme variables of other components based on themeId (like displaying the theme variables of Options in Drillsdown.Group)
-    const themeKey = childDoc?.themeId || selectedId?.replace(/\./g, '')
-    // @ts-ignore todo type
-    const newThemeEntry = themeVariables?.newTheme?.components?.[themeKey]
-    const componentInstance =
-      selectedId === doc.id
-        ? doc?.componentInstance
-        : childDoc?.componentInstance
-    if (
-      newThemeEntry &&
-      typeof componentInstance?.generateComponentTheme !== 'function'
-    ) {
-      // new theme - use pre-computed theme object directly
-      this.setState({ componentTheme: newThemeEntry })
-      return
+    const themeKey: ComponentKey = (childDoc?.themeId ||
+      selectedId?.replace(/\./g, '')) as ComponentKey
+    const isLegacyTheme = this.context?.componentVersion == 'v11_6'
+    // new theme
+    if (!isLegacyTheme) {
+      const newThemeEntry = themeVariables?.newTheme?.components?.[themeKey]
+      const componentInstance =
+        selectedId === doc.id
+          ? doc?.componentInstance
+          : childDoc?.componentInstance
+      if (
+        newThemeEntry &&
+        typeof componentInstance?.generateComponentTheme !== 'function'
+      ) {
+        // new theme - use pre-computed theme object directly
+        this.setState({ componentTheme: newThemeEntry })
+        return
+      }
     }
     // old theme - use generateComponentTheme function
     if (selectedId === doc.id) {
       generateTheme = doc?.componentInstance?.generateComponentTheme
+      // TODO functional components do not work, e.g. Avatar
     } else {
       generateTheme = childDoc?.componentInstance?.generateComponentTheme
     }
     if (typeof generateTheme === 'function' && themeVariables) {
-      // @ts-ignore todo type
       this.setState({ componentTheme: generateTheme(themeVariables) })
     } else {
       this.setState({ componentTheme: undefined })
@@ -115,7 +125,6 @@ class Document extends Component<DocumentProps, DocumentState> {
   componentDidUpdate(prevProps: typeof this.props, prevState: DocumentState) {
     this.props.makeStyles?.()
     if (
-      // @ts-ignore todo check
       this.props.themeVariables?.key !== prevProps.themeVariables?.key ||
       this.state.selectedDetailsTabId != prevState.selectedDetailsTabId
     ) {

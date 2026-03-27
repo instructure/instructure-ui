@@ -22,9 +22,8 @@
  * SOFTWARE.
  */
 
-import {
+import React, {
   Component,
-  createContext,
   LegacyRef,
   ReactElement,
   SyntheticEvent,
@@ -82,34 +81,18 @@ import { getComponentsForVersion } from '../../versioned-components'
 import { updateGlobalsForVersion } from '../../globals'
 import type { AppProps, AppState, DocData, LayoutSize } from './props'
 import { allowedProps } from './props'
-import type {
-  LibraryOptions,
-  MainDocsData,
-  ParsedDocSummary
-} from '../../buildScripts/DataTypes.mjs'
+import type { ParsedDocSummary } from '../../buildScripts/DataTypes.mjs'
 import { logError } from '@instructure/console'
 import type { Spacing } from '@instructure/emotion'
 import type { NewComponentTypes } from '@instructure/ui-themes'
 import { FocusRegion } from '@instructure/ui-a11y-utils'
-
-type AppContextType = {
-  /**
-   * The ID of the currently selected theme.
-   */
-  themeKey: keyof MainDocsData['themes']
-  themes: MainDocsData['themes']
-  library?: LibraryOptions
-}
-
-export const AppContext = createContext<AppContextType>({
-  themes: {},
-  themeKey: '',
-  library: undefined
-})
+import { AppContext } from '../appContext'
 
 @withStyle(generateStyle, generateComponentTheme)
 class App extends Component<AppProps, AppState> {
   static allowedProps = allowedProps
+  static contextType = AppContext
+  declare context: React.ContextType<typeof AppContext>
 
   private navRef = createRef<HTMLElement>()
   private navFocusRegion: FocusRegion | null = null
@@ -1068,7 +1051,8 @@ class App extends Component<AppProps, AppState> {
         value={{
           library: docsData.library,
           themeKey: this.state.themeKey!,
-          themes: docsData.themes
+          themes: docsData.themes,
+          componentVersion: this.state.selectedMinorVersion
         }}
       >
         <div css={this.props.styles?.app}>
@@ -1111,5 +1095,4 @@ class App extends Component<AppProps, AppState> {
 }
 
 export default App
-export type { AppContextType }
 export { App }
