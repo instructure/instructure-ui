@@ -35,7 +35,7 @@ import type { TableRowHeaderProps, TableRowHeaderStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['TableRowHeader'],
+  componentTheme: ReturnType<NewComponentTypes['TableRowHeader']>,
   props: TableRowHeaderProps
 ): TableRowHeaderStyle => {
   const { textAlign } = props

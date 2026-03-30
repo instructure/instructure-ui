@@ -40,7 +40,7 @@ import type {
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['ProgressCircle'],
+  componentTheme: ReturnType<NewComponentTypes['ProgressCircle']>,
   props: ProgressCircleProps,
   _sharedTokens: SharedTokens,
   state: ProgressCircleState

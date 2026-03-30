@@ -54,7 +54,7 @@ type PropKeys = keyof BreadcrumbOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type BreadcrumbProps = BreadcrumbOwnProps &
-  WithStyleProps<NewComponentTypes['Breadcrumb'], BreadcrumbStyle>
+  WithStyleProps<ReturnType<NewComponentTypes['Breadcrumb']>, BreadcrumbStyle>
 
 type BreadcrumbStyle = ComponentStyle<'breadcrumb' | 'crumb' | 'separator'>
 

@@ -36,7 +36,7 @@ import type { ProgressBarProps, ProgressBarStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['ProgressBar'],
+  componentTheme: ReturnType<NewComponentTypes['ProgressBar']>,
   props: ProgressBarProps,
   _sharedTokens: SharedTokens
 ): ProgressBarStyle => {

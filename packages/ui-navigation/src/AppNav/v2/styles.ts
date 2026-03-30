@@ -35,7 +35,9 @@ import type { AppNavStyle } from './props'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme: NewComponentTypes['AppNav']): AppNavStyle => {
+const generateStyle = (
+  componentTheme: ReturnType<NewComponentTypes['AppNav']>
+): AppNavStyle => {
   return {
     appNav: {
       label: 'appNav',

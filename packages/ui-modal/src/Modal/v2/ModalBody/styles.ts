@@ -37,7 +37,7 @@ import type { ModalBodyProps, ModalBodyStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['ModalBody'],
+  componentTheme: ReturnType<NewComponentTypes['ModalBody']>,
   props: ModalBodyProps
 ): ModalBodyStyle => {
   const { variant, spacing } = props

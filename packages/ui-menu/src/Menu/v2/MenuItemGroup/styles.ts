@@ -36,7 +36,7 @@ import type { MenuGroupStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['MenuGroup']
+  componentTheme: ReturnType<NewComponentTypes['MenuGroup']>
 ): MenuGroupStyle => {
   return {
     menuItemGroup: {

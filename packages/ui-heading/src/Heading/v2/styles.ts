@@ -35,7 +35,7 @@ import type { HeadingProps, HeadingStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['Heading'],
+  componentTheme: ReturnType<NewComponentTypes['Heading']>,
   props: HeadingProps
 ): HeadingStyle => {
   const { level, color, border, variant, aiVariant } = props

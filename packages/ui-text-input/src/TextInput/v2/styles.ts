@@ -38,7 +38,7 @@ import { calcFocusOutlineStyles } from '@instructure/emotion'
  * @return The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['TextInput'],
+  componentTheme: ReturnType<NewComponentTypes['TextInput']>,
   props: TextInputProps,
   sharedTokens: SharedTokens,
   state: TextInputStyleProps

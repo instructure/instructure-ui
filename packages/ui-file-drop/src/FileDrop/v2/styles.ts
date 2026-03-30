@@ -38,7 +38,7 @@ type StyleParams = FileDropProps & FileDropStyleProps
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['FileDrop'],
+  componentTheme: ReturnType<NewComponentTypes['FileDrop']>,
   params: StyleParams,
   _sharedTokens: SharedTokens
 ): FileDropStyle => {

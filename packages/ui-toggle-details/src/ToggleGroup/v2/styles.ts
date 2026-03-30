@@ -36,7 +36,7 @@ import type { ToggleGroupProps, ToggleGroupStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['ToggleGroup'],
+  componentTheme: ReturnType<NewComponentTypes['ToggleGroup']>,
   _props: ToggleGroupProps
 ): ToggleGroupStyle => {
   return {

@@ -39,7 +39,7 @@ type BreakPoints = NonNullable<GridBreakpoints>
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['GridCol'],
+  componentTheme: ReturnType<NewComponentTypes['GridCol']>,
   props: GridColProps
 ): GridColStyle => {
   const {

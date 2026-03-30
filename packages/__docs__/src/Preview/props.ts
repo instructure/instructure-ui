@@ -71,7 +71,6 @@ const allowedProps: AllowedPropKeys = [
   'frameless',
   'inverse',
   'rtl',
-  'themes',
   'themeKey'
 ]
 export type { PreviewProps, PreviewTheme, PreviewState }

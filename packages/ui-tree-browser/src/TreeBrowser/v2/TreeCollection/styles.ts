@@ -48,7 +48,7 @@ const list = keyframes`
  */
 
 const generateStyles = (
-  componentTheme: NewComponentTypes['TreeBrowserTreeCollection'],
+  componentTheme: ReturnType<NewComponentTypes['TreeBrowserTreeCollection']>,
   props: TreeBrowserCollectionProps,
   sharedTokens: SharedTokens,
   state: { animation?: boolean }
