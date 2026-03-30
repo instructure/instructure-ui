@@ -89,7 +89,7 @@
       "type": "color"
     },
     "contentPadding": {
-      "value": "0.375rem",
+      "value": "{sharedTokens.spacing.general.spaceSm}",
       "type": "spacing"
     },
     "fontColor": {
