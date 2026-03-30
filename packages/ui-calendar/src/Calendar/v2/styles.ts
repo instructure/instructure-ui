@@ -34,7 +34,7 @@ import type { CalendarStyle, CalendarProps } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['Calendar'],
+  componentTheme: ReturnType<NewComponentTypes['Calendar']>,
   props: CalendarProps
 ): CalendarStyle => {
   const { withYearPicker } = props

@@ -34,7 +34,7 @@ import type { PopoverStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['Popover']
+  componentTheme: ReturnType<NewComponentTypes['Popover']>
 ): PopoverStyle => {
   return {
     borderColor: componentTheme.borderColor,

@@ -36,7 +36,7 @@ import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['Table'],
+  componentTheme: ReturnType<NewComponentTypes['Table']>,
   props: TableProps,
   _sharedTokens: SharedTokens
 ): TableStyle => {

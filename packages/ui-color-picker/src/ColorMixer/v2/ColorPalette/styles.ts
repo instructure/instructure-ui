@@ -41,7 +41,7 @@ import { px } from '@instructure/ui-utils'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['Palette'],
+  componentTheme: ReturnType<NewComponentTypes['Palette']>,
   props: ColorPaletteProps,
   _sharedTokens: SharedTokens,
   state: ColorPaletteState

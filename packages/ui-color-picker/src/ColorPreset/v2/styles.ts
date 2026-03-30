@@ -35,7 +35,7 @@ import type { ColorPresetProps } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['ColorPreset'],
+  componentTheme: ReturnType<NewComponentTypes['ColorPreset']>,
   props: ColorPresetProps
 ) => {
   const { colorMixerSettings, disabled } = props

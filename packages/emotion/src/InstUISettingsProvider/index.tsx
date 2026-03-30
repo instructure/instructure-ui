@@ -34,6 +34,7 @@ import type { ThemeOrOverride } from '../EmotionTypes'
 import type { DeterministicIdProviderValue } from '@instructure/ui-react-utils'
 declare const process: Record<string, any> | undefined
 import { mergeDeep } from '@instructure/ui-utils'
+import { Theme } from '@instructure/ui-themes'
 
 type InstUIProviderProps = {
   children?: React.ReactNode
@@ -95,15 +96,10 @@ function InstUISettingsProvider({
 
   let providedTheme = theme
   if (typeof theme !== 'function') {
-    {
-      /*TODO-theme-types: fix getTheme typing */
-    }
-    {
-      /*@ts-expect-error types*/
-    }
+    const override = (theme as Theme).themeOverride!
     providedTheme = {
       ...theme,
-      themeOverride: mergeDeep(theme.themeOverride, themeOverride)
+      themeOverride: mergeDeep(override, themeOverride)
     }
   }
 

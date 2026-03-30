@@ -35,7 +35,7 @@ import type { PillProps, PillStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['Pill'],
+  componentTheme: ReturnType<NewComponentTypes['Pill']>,
   props: PillProps
 ): PillStyle => {
   const { color } = props

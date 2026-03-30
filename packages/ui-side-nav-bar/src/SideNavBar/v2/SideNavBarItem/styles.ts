@@ -37,7 +37,7 @@ import type { SideNavBarItemProps, SideNavBarItemStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['SideNavBarItem'],
+  componentTheme: ReturnType<NewComponentTypes['SideNavBarItem']>,
   props: SideNavBarItemProps
 ): SideNavBarItemStyle => {
   const { selected } = props

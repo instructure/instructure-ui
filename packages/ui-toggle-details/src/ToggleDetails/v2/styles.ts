@@ -48,7 +48,7 @@ const contentAnimation = keyframes`
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['ToggleDetails'],
+  componentTheme: ReturnType<NewComponentTypes['ToggleDetails']>,
   props: ToggleDetailsProps,
   sharedTokens: SharedTokens,
   _state: ToggleDetailsStyleProps

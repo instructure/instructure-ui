@@ -30,7 +30,7 @@ import type {
 } from './props'
 
 const generateStyle = (
-  componentTheme: NewComponentTypes['BaseButton'],
+  componentTheme: ReturnType<NewComponentTypes['BaseButton']>,
   params: BaseButtonProps,
   _sharedTokens: SharedTokens,
   extraArgs: BaseButtonStyleProps
@@ -262,7 +262,7 @@ const generateStyle = (
             boxShadow: componentTheme.secondaryGhostBoxShadow
           },
           active: {
-            background: componentTheme.secondaryGhostActiveBackground,
+            background: componentTheme.secondaryGhostActiveBackground
           },
           hover: {
             background: componentTheme.secondaryGhostHoverBackground,

@@ -40,7 +40,7 @@ type StyleParams = {
  */
 const convertSemanticSize = (
   size: InstUIIconProps['size'],
-  componentTheme: NewComponentTypes['Icon']
+  componentTheme: ReturnType<NewComponentTypes['Icon']>
 ) => {
   if (!size) return undefined
 
@@ -70,7 +70,7 @@ const convertSemanticSize = (
  */
 const convertSizeToStrokeWidth = (
   size: InstUIIconProps['size'],
-  componentTheme: NewComponentTypes['Icon']
+  componentTheme: ReturnType<NewComponentTypes['Icon']>
 ) => {
   if (!size) return undefined
 
@@ -97,7 +97,7 @@ const convertSizeToStrokeWidth = (
 
 const determineColorValue = (
   color: InstUIIconProps['color'],
-  componentTheme: NewComponentTypes['Icon']
+  componentTheme: ReturnType<NewComponentTypes['Icon']>
 ) => {
   if (!color) {
     return undefined
@@ -213,7 +213,7 @@ const determineColorValue = (
 }
 
 const generateStyle = (
-  componentTheme: NewComponentTypes['Icon'],
+  componentTheme: ReturnType<NewComponentTypes['Icon']>,
   params: StyleParams
 ): IconStyle => {
   const {

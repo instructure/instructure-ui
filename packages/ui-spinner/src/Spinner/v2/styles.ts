@@ -66,7 +66,7 @@ const morph = keyframes`
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['Spinner'],
+  componentTheme: ReturnType<NewComponentTypes['Spinner']>,
   params: StyleParams,
   sharedTokens: SharedTokens
 ): SpinnerStyle => {

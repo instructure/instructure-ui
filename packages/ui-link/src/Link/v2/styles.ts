@@ -40,7 +40,7 @@ import {
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['Link'],
+  componentTheme: ReturnType<NewComponentTypes['Link']>,
   props: LinkProps,
   sharedTokens: SharedTokens,
   state: Partial<

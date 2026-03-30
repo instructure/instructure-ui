@@ -44,7 +44,7 @@ type StyleParams = {
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['TextArea'],
+  componentTheme: ReturnType<NewComponentTypes['TextArea']>,
   params: StyleParams,
   sharedTokens: SharedTokens
 ): TextAreaStyle => {

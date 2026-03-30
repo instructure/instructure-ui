@@ -41,7 +41,9 @@ describe('<ModalHeader />', () => {
   })
 
   it('should set inverse styles', async () => {
-    const themeVariables = canvas.newTheme.components.ModalHeader
+    const themeVariables = canvas.newTheme.components.ModalHeader(
+      canvas.newTheme.semantics(canvas.newTheme.primitives)
+    )
     const { findByText } = render(
       <ModalHeader variant="inverse">{HEADER_TEXT}</ModalHeader>
     )
@@ -62,7 +64,9 @@ describe('<ModalHeader />', () => {
 
   describe('spacing prop', () => {
     it('should be correct by default', async () => {
-      const themeVariables = canvas.newTheme.components.ModalHeader
+      const themeVariables = canvas.newTheme.components.ModalHeader(
+        canvas.newTheme.semantics(canvas.newTheme.primitives)
+      )
       const { findByText } = render(<ModalHeader>{HEADER_TEXT}</ModalHeader>)
       const modalHeader = await findByText(HEADER_TEXT)
 
@@ -74,7 +78,9 @@ describe('<ModalHeader />', () => {
     })
 
     it('should correctly set default spacing', async () => {
-      const themeVariables = canvas.newTheme.components.ModalHeader
+      const themeVariables = canvas.newTheme.components.ModalHeader(
+        canvas.newTheme.semantics(canvas.newTheme.primitives)
+      )
       const { findByText } = render(
         <ModalHeader spacing="default">{HEADER_TEXT}</ModalHeader>
       )
@@ -88,7 +94,9 @@ describe('<ModalHeader />', () => {
     })
 
     it('should correctly set compact spacing', async () => {
-      const themeVariables = canvas.newTheme.components.ModalHeader
+      const themeVariables = canvas.newTheme.components.ModalHeader(
+        canvas.newTheme.semantics(canvas.newTheme.primitives)
+      )
       const { findByText } = render(
         <ModalHeader spacing="compact">{HEADER_TEXT}</ModalHeader>
       )

@@ -48,7 +48,7 @@ type StyleParams = {
  * @return The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['RadioInput'],
+  componentTheme: ReturnType<NewComponentTypes['RadioInput']>,
   params: StyleParams,
   sharedTokens: SharedTokens
 ): RadioInputStyle => {

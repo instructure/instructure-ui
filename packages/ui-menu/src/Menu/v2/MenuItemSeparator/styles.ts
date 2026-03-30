@@ -36,7 +36,7 @@ import type { MenuSeparatorStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['MenuSeparator']
+  componentTheme: ReturnType<NewComponentTypes['MenuSeparator']>
 ): MenuSeparatorStyle => {
   return {
     menuItemSeparator: {

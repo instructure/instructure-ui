@@ -36,7 +36,7 @@ import type { CloseButtonProps, CloseButtonStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  _componentTheme: NewComponentTypes['BaseButton'],
+  _componentTheme: ReturnType<NewComponentTypes['BaseButton']>,
   props: CloseButtonProps,
   sharedTokens: SharedTokens
 ): CloseButtonStyle => {
@@ -46,7 +46,7 @@ const generateStyle = (
     none: 0,
     'x-small': sharedTokens.spacing.general.spaceXs,
     small: sharedTokens.spacing.general.spaceSm,
-    medium: sharedTokens.spacing.general.spaceMd,
+    medium: sharedTokens.spacing.general.spaceMd
   }
 
   const getOffsetStyle = () => {

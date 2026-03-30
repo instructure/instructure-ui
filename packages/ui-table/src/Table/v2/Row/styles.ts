@@ -37,7 +37,7 @@ import type { TableRowProps, TableRowStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['TableRow'],
+  componentTheme: ReturnType<NewComponentTypes['TableRow']>,
   props: TableRowProps,
   _sharedTokens: SharedTokens,
   extraArgs: { isStacked: boolean; hover: boolean }

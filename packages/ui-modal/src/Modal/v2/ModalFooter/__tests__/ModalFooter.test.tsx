@@ -41,7 +41,9 @@ describe('<ModalFooter />', () => {
   })
 
   it('should set inverse styles', async () => {
-    const themeVariables = canvas.newTheme.components.ModalFooter
+    const themeVariables = canvas.newTheme.components.ModalFooter(
+      canvas.newTheme.semantics(canvas.newTheme.primitives)
+    )
     const { findByText } = render(
       <ModalFooter variant="inverse">{FOOTER_TEXT}</ModalFooter>
     )

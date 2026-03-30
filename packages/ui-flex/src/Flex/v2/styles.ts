@@ -42,7 +42,7 @@ import type { FlexProps, FlexStyle } from './props'
  */
 
 const generateStyle = (
-  componentTheme: NewComponentTypes['Flex'],
+  componentTheme: ReturnType<NewComponentTypes['Flex']>,
   props: FlexProps,
   sharedTokens: SharedTokens
 ): FlexStyle => {

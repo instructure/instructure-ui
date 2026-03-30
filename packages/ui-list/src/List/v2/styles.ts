@@ -36,7 +36,7 @@ import type { NewComponentTypes } from '@instructure/ui-themes'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['List'],
+  componentTheme: ReturnType<NewComponentTypes['List']>,
   props: ListProps
 ): ListStyle => {
   const { isUnstyled, as } = props

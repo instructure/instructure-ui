@@ -35,7 +35,7 @@ import type { TableCellProps, TableCellStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['TableCell'],
+  componentTheme: ReturnType<NewComponentTypes['TableCell']>,
   props: TableCellProps
 ): TableCellStyle => {
   const { textAlign } = props

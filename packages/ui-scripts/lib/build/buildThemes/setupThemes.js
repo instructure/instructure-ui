@@ -125,8 +125,8 @@ const setupThemes = async (targetPath, input) => {
         import type {Primitives} from "./primitives"
 
         export type Semantics = ${semanticsTypes}
-        //TODO-theme-types: fix any
-        const semantics = (primitives: any): Semantics => ({${semantics}})
+
+        const semantics = (primitives: Primitives): Semantics => ({${semantics}})
         export default semantics
           `
     await createFile(`${themePath}/semantics.ts`, semanticsFileContent)
@@ -167,7 +167,7 @@ const setupThemes = async (targetPath, input) => {
         // because of Figma, but it should be one level higher for our purposes
         if (rawComponentName !== 'SharedTokens') {
           const componentFileContent = `
-          
+
           import type { ${capitalize(
             fullComponentName
           )} } from '../../componentTypes/${fullComponentName}'
@@ -186,7 +186,7 @@ const setupThemes = async (targetPath, input) => {
         if (rawComponentName === 'SharedTokens') {
           sharedTokensTypes = componentTypes
           const componentFileContent = `
-          
+
         import { SharedTokens } from '../commonTypes'
         // TODO-theme-types: fix any
         const ${fullComponentName} = (semantics:any): ${capitalize(
@@ -270,9 +270,14 @@ const setupThemes = async (targetPath, input) => {
         .join('\n')
       const componentTypeExport = componentAndSubcomponentNames
         .map(
-          (componentName) =>
-            `${capitalize(componentName)}:${capitalize(componentName)}`
+          (
+            componentName // TODO type better
+          ) =>
+            `${capitalize(componentName)}: (semantics: any) => ${capitalize(
+              componentName
+            )}`
         )
+        .sort()
         .join(',\n')
 
       const componentsTypesFileContent = `
@@ -320,14 +325,12 @@ const setupThemes = async (targetPath, input) => {
 
   export type SharedTokens = ${sharedTokensTypes}
 
-  export type BaseTheme<P extends Record<string, any> = Record<string, any>, S extends Record<string, any> = Record<string, any>> = {
+  export type BaseTheme<P = any, S = any> = {
     primitives: P
-    semantics: S
-    sharedTokens: SharedTokens
+    semantics: (primitives: P) => S
+    sharedTokens: (semantics: S) => SharedTokens
     components: ComponentTypes
   }
-
-
   `
   await createFile(`${targetPath}/commonTypes.ts`, commonTypes)
 

@@ -226,7 +226,7 @@ const withBorder = (props: ViewProps) => {
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['View'],
+  componentTheme: ReturnType<NewComponentTypes['View']>,
   props: ViewProps,
   sharedTokens: SharedTokens
 ): ViewStyle => {

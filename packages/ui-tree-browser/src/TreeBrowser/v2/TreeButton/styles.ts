@@ -49,7 +49,7 @@ const transform = keyframes`
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyles = (
-  componentTheme: NewComponentTypes['TreeBrowserTreeButton'],
+  componentTheme: ReturnType<NewComponentTypes['TreeBrowserTreeButton']>,
   props: TreeBrowserButtonProps,
   sharedTokens: SharedTokens,
   state: { animation?: boolean; hoverable?: boolean }

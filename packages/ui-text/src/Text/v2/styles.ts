@@ -48,7 +48,7 @@ type StyleParams = {
  * @return The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['Text'],
+  componentTheme: ReturnType<NewComponentTypes['Text']>,
   params: StyleParams
 ): TextStyle => {
   const {

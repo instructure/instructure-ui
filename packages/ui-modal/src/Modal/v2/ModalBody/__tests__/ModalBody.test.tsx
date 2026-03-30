@@ -44,7 +44,9 @@ describe('<ModalBody />', () => {
   })
 
   it('should set inverse styles', async () => {
-    const themeVariables = canvas.newTheme.components.ModalBody
+    const themeVariables = canvas.newTheme.components.ModalBody(
+      canvas.newTheme.semantics(canvas.newTheme.primitives)
+    )
     const { findByText } = render(
       <ModalBody variant="inverse">{BODY_TEXT}</ModalBody>
     )

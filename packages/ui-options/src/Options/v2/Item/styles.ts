@@ -39,7 +39,7 @@ import { ReactNode } from 'react'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['OptionsItem'],
+  componentTheme: ReturnType<NewComponentTypes['OptionsItem']>,
   props: OptionsItemProps
 ): OptionsItemStyle => {
   const {

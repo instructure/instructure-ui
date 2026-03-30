@@ -35,7 +35,7 @@ import type { BreadcrumbProps, BreadcrumbStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['Breadcrumb'],
+  componentTheme: ReturnType<NewComponentTypes['Breadcrumb']>,
   props: BreadcrumbProps
 ): BreadcrumbStyle => {
   const { size } = props
