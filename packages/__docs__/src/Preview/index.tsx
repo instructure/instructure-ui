@@ -31,7 +31,7 @@ import generateComponentTheme from './theme'
 import { compileAndRenderExample } from '../compileAndRenderExample'
 import { allowedProps } from './props'
 import type { PreviewProps, PreviewState } from './props'
-import canvas from '@instructure/ui-themes'
+import * as themes from '@instructure/ui-themes'
 
 @withStyle(generateStyle, generateComponentTheme)
 class Preview extends Component<PreviewProps, PreviewState> {
@@ -69,8 +69,8 @@ class Preview extends Component<PreviewProps, PreviewState> {
   }
 
   render() {
-    const { code, themeKey, themes, styles } = this.props
-    const theme = themes?.[themeKey!]?.resource || canvas
+    const { code, themeKey, styles } = this.props
+
     const dir = (this.props.rtl ? DIRECTION.rtl : DIRECTION.ltr) as
       | 'rtl'
       | 'ltr'
@@ -87,7 +87,9 @@ class Preview extends Component<PreviewProps, PreviewState> {
 
     return (
       <div css={styles?.preview}>
-        <InstUISettingsProvider theme={theme}>
+        {/*TODO-theme-types: fix getTheme typing*/}
+        {/*@ts-expect-error types*/}
+        <InstUISettingsProvider theme={themes?.[themeKey!]}>
           <TextDirectionContext.Provider value={dir}>
             <div dir={dir}>{compiledCode}</div>
           </TextDirectionContext.Provider>

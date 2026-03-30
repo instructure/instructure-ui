@@ -178,11 +178,7 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
     )
   }
 
-  renderPreview = (
-    code: string,
-    themeKey: string,
-    themes: MainDocsData['themes']
-  ) => {
+  renderPreview = (code: string, themeKey: string) => {
     const { fullscreen, rtl } = this.state
 
     return (
@@ -192,7 +188,6 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
         fullscreen={fullscreen}
         rtl={rtl}
         themeKey={themeKey}
-        themes={themes}
       />
     )
   }
@@ -202,7 +197,7 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
     const { fullscreen } = this.state
     return (
       <AppContext.Consumer>
-        {({ themeKey, themes }) => (
+        {({ themeKey }) => (
           <div css={styles?.playground}>
             {fullscreen ? (
               <Modal
@@ -218,11 +213,11 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
                     onClick={this.handleMinimize}
                     screenReaderLabel="Close"
                   />
-                  {this.renderPreview(this.state.code, themeKey, themes)}
+                  {this.renderPreview(this.state.code, themeKey)}
                 </Modal.Body>
               </Modal>
             ) : (
-              this.renderPreview(this.state.code, themeKey, themes)
+              this.renderPreview(this.state.code, themeKey)
             )}
 
             {this.state.showCode && this.renderEditor()}

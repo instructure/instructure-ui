@@ -40,7 +40,6 @@ type PreviewOwnProps = {
   inverse?: boolean
   rtl?: boolean
   themeKey?: keyof MainDocsData['themes']
-  themes?: MainDocsData['themes']
   error?: string
 }
 

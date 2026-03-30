@@ -24,6 +24,7 @@
 
 import { useTheme } from './useTheme'
 import { getComponentThemeOverride } from './getComponentThemeOverride'
+import { mergeDeep } from '@instructure/ui-utils'
 import type {
   SharedTokens,
   NewComponentTypes,
@@ -75,17 +76,37 @@ const useStyle = <P extends GenerateStyleParams>(useStyleParams: {
   const useTokensFrom = useStyleParams.useTokensFrom
   const theme = useTheme()
 
-  let baseComponentTheme = {}
   const componentWithTokensId = useTokensFrom ?? componentId
 
+  // TODO-theme-types: fix Theme typing
+  //@ts-expect-error types
+  const { primitives: primitiveOverrides, semantics: semanticsOverrides } = (
+    theme as Theme
+  ).themeOverride
+
+  const primitives = mergeDeep(
+    (theme as Theme).newTheme.primitives,
+    primitiveOverrides
+  )
+  // TODO-theme-types: fix Theme typing
+  //@ts-expect-error types
+  const semantics = mergeDeep(
+    (theme as Theme).newTheme.semantics?.(primitives),
+    semanticsOverrides
+  )
+
+  let baseComponentTheme = {}
+
   if (
-    isNewThemeObject(theme) && // TODO: is it possible not to have a theme object here?
+    isNewThemeObject(theme) &&
     theme.newTheme.components[componentWithTokensId as keyof NewComponentTypes]
   ) {
     baseComponentTheme =
+      // TODO-theme-types: fix Theme typing
+      //@ts-expect-error types
       theme.newTheme.components[
         componentWithTokensId as keyof NewComponentTypes
-      ]
+      ]?.(semantics)
   }
   const finalOverride = getComponentThemeOverride(
     theme,
@@ -95,13 +116,12 @@ const useStyle = <P extends GenerateStyleParams>(useStyleParams: {
     baseComponentTheme
   )
 
+  // TODO-theme-types: fix Theme typing
+  //@ts-expect-error types
+  const sharedTokens = (theme as Theme).newTheme.sharedTokens?.(semantics)
   const componentTheme = { ...baseComponentTheme, ...finalOverride }
 
-  return generateStyle(
-    componentTheme,
-    params,
-    (theme as Theme).newTheme.sharedTokens
-  )
+  return generateStyle(componentTheme, params, sharedTokens)
 }
 
 export default useStyle

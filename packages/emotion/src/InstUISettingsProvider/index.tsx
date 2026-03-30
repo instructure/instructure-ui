@@ -33,6 +33,7 @@ import { getTheme } from '../getTheme'
 import type { ThemeOrOverride } from '../EmotionTypes'
 import type { DeterministicIdProviderValue } from '@instructure/ui-react-utils'
 declare const process: Record<string, any> | undefined
+import { mergeDeep } from '@instructure/ui-utils'
 
 type InstUIProviderProps = {
   children?: React.ReactNode
@@ -41,6 +42,12 @@ type InstUIProviderProps = {
    * A full theme or an override object
    */
   theme?: ThemeOrOverride
+
+  // TODO-theme-types: fix override typing
+  /**
+   * An override object
+   */
+  themeOverride?: any
 
   /**
    * @deprecated the `instanceCounterMap` prop is deprecated. You don't need to supply the
@@ -69,6 +76,7 @@ type InstUIProviderProps = {
 function InstUISettingsProvider({
   children,
   theme = {},
+  themeOverride = {},
   dir,
   instanceCounterMap
 }: InstUIProviderProps) {
@@ -85,9 +93,23 @@ function InstUISettingsProvider({
     )
   }
 
+  let providedTheme = theme
+  if (typeof theme !== 'function') {
+    {
+      /*TODO-theme-types: fix getTheme typing */
+    }
+    {
+      /*@ts-expect-error types*/
+    }
+    providedTheme = {
+      ...theme,
+      themeOverride: mergeDeep(theme.themeOverride, themeOverride)
+    }
+  }
+
   let providers = (
     <DeterministicIdContextProvider instanceCounterMap={instanceCounterMap}>
-      <ThemeProvider theme={getTheme(theme)}>
+      <ThemeProvider theme={getTheme(providedTheme)}>
         <TextDirectionContext.Provider value={finalDir}>
           {children}
         </TextDirectionContext.Provider>

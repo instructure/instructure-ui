@@ -31,7 +31,7 @@ import type {
 
 import hoistNonReactStatics from 'hoist-non-react-statics'
 
-import { deepEqual as isEqual } from '@instructure/ui-utils'
+import { deepEqual as isEqual, mergeDeep } from '@instructure/ui-utils'
 import { warn } from '@instructure/console'
 import { decorator } from '@instructure/ui-decorator'
 
@@ -188,10 +188,30 @@ const withStyle = decorator(
 
       const componentWithTokensId = useTokensFrom ?? componentId
 
+      // TODO-theme-types: fix Theme typing
+      //@ts-expect-error types
+      const { primitives: primitiveOverrides, semantics: semanticsOverrides } =
+        theme.themeOverride
+
+      const primitives = mergeDeep(
+        theme.newTheme.primitives,
+        primitiveOverrides
+      )
+      //override primitives here
+      // TODO-theme-types: fix Theme typing
+      //@ts-expect-error types
+      const semantics = mergeDeep(
+        theme.newTheme.semantics?.(primitives),
+        semanticsOverrides
+      )
+      //override semantics here
+
       const baseComponentTheme =
+        // TODO-theme-types: fix Theme typing
+        //@ts-expect-error types
         theme.newTheme.components[
           componentWithTokensId as keyof NewComponentTypes
-        ]
+        ]?.(semantics)
 
       const themeOverride = getComponentThemeOverride(
         theme,
@@ -201,17 +221,14 @@ const withStyle = decorator(
         baseComponentTheme
       )
 
+      // TODO-theme-types: fix Theme typing
+      //@ts-expect-error types
+      const sharedTokens = (theme as Theme).newTheme.sharedTokens?.(semantics)
       const componentTheme = { ...baseComponentTheme, ...themeOverride }
-
       // TODO do not call here generateStyle, it does not receive the extraArgs
       const [styles, setStyles] = useState(
         generateStyle
-          ? generateStyle(
-              componentTheme,
-              componentProps,
-              (theme as Theme).newTheme.sharedTokens,
-              {}
-            )
+          ? generateStyle(componentTheme, componentProps, sharedTokens, {})
           : {}
       )
 
@@ -219,7 +236,7 @@ const withStyle = decorator(
         const calculatedStyles = generateStyle(
           componentTheme,
           componentProps,
-          (theme as Theme).newTheme.sharedTokens,
+          sharedTokens,
           extraArgs
         )
         if (!isEqual(calculatedStyles, styles)) {
