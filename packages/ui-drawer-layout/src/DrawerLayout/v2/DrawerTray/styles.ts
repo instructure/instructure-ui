@@ -41,7 +41,7 @@ import type {
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['DrawerLayoutTray'],
+  componentTheme: ReturnType<NewComponentTypes['DrawerLayoutTray']>,
   props: DrawerLayoutTrayProps,
   _sharedTokens: SharedTokens,
   state: DrawerLayoutTrayStyleProps

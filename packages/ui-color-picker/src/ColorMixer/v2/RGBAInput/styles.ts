@@ -36,7 +36,7 @@ import type { NewComponentTypes } from '@instructure/ui-themes'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['RgbaInput'],
+  componentTheme: ReturnType<NewComponentTypes['RgbaInput']>,
   props: RGBAInputProps
 ): RGBAInputStyle => {
   return {

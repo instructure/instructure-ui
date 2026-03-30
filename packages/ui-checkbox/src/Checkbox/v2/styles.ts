@@ -37,7 +37,7 @@ import type { NewComponentTypes } from '@instructure/ui-themes'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['Checkbox'],
+  componentTheme: ReturnType<NewComponentTypes['Checkbox']>,
   props: CheckboxProps
 ): CheckboxStyle => {
   const { inline, size, variant } = props

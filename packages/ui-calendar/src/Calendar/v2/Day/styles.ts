@@ -40,7 +40,7 @@ import type {
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['CalendarDay'],
+  componentTheme: ReturnType<NewComponentTypes['CalendarDay']>,
   props: CalendarDayProps,
   _sharedTokens: SharedTokens,
   state: CalendarDayStyleProps

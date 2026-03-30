@@ -38,7 +38,7 @@ import type { CheckboxFacadeProps, CheckboxFacadeStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['Checkbox'],
+  componentTheme: ReturnType<NewComponentTypes['Checkbox']>,
   props: CheckboxFacadeProps,
   sharedTokens: SharedTokens
 ): CheckboxFacadeStyle => {

@@ -52,7 +52,7 @@ const selectedTab = keyframes`
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['TabsTab'],
+  componentTheme: ReturnType<NewComponentTypes['TabsTab']>,
   params: StyleParams
 ): TabsTabStyle => {
   const { variant, isSelected, isDisabled, isOverflowScroll } = params

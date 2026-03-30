@@ -63,7 +63,7 @@ const topPlacements: PlacementArray = [
 
 const getPlacementStyle = (
   placement: PlacementPropValues,
-  theme: NewComponentTypes['ContextView']
+  theme: ReturnType<NewComponentTypes['ContextView']>
 ) => {
   if (endPlacements.includes(placement)) {
     return { paddingInlineStart: theme?.arrowSize, paddingInlineEnd: '0' }
@@ -83,7 +83,7 @@ const getPlacementStyle = (
 
 const getArrowCorrections = (
   placement: PlacementPropValues,
-  theme: NewComponentTypes['ContextView']
+  theme: ReturnType<NewComponentTypes['ContextView']>
 ) => {
   const center: PlacementArray = [
     'top',
@@ -132,7 +132,7 @@ const getArrowCorrections = (
 const getArrowPlacementVariant = (
   placement: PlacementPropValues,
   background: ContextViewProps['background'],
-  theme: NewComponentTypes['ContextView'],
+  theme: ReturnType<NewComponentTypes['ContextView']>,
   props: ContextViewProps
 ) => {
   const transformedPlacement = mirrorPlacement(placement, ' ')
@@ -269,7 +269,7 @@ const getArrowPlacementVariant = (
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['ContextView'],
+  componentTheme: ReturnType<NewComponentTypes['ContextView']>,
   props: ContextViewProps
 ): ContextViewStyle => {
   const { placement, background, borderColor } = props

@@ -46,7 +46,7 @@ const pulseAnimation = keyframes`
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['Badge'],
+  componentTheme: ReturnType<NewComponentTypes['Badge']>,
   props: BadgeProps
 ): BadgeStyle => {
   const { type, variant, placement = '', standalone, pulse } = props

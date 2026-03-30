@@ -38,7 +38,7 @@ import { boxShadowObjectsToCSSString } from '@instructure/ui-themes'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['SideNavBar'],
+  componentTheme: ReturnType<NewComponentTypes['SideNavBar']>,
   _props: SideNavBarProps,
   _sharedTokens: SharedTokens,
   state: SideNavBarState
