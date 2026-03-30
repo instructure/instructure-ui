@@ -41,6 +41,7 @@ declare const process: Record<string, any> | undefined
 const useTheme = () => {
   // This reads the theme from Emotion's ThemeContext
   let theme = useEmotionTheme() as BaseThemeOrOverride
+
   if (isEmpty(theme)) {
     if (
       typeof process !== 'undefined' &&

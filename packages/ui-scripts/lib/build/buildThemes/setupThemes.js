@@ -122,12 +122,11 @@ const setupThemes = async (targetPath, input) => {
     const semantics = generateSemantics(mergedSemanticData)
     const semanticsTypes = generateSemanticsType(mergedSemanticData)
     const semanticsFileContent = `
-        import primitives from "./primitives"
         import type {Primitives} from "./primitives"
 
         export type Semantics = ${semanticsTypes}
-
-        const semantics: Semantics = {${semantics}}
+        //TODO-theme-types: fix any
+        const semantics = (primitives: any): Semantics => ({${semantics}})
         export default semantics
           `
     await createFile(`${themePath}/semantics.ts`, semanticsFileContent)
@@ -162,21 +161,20 @@ const setupThemes = async (targetPath, input) => {
         const componentTypes = generateComponentType(
           input[componentpath][fullComponentName]
         )
-        const semanticsImport = componentThemeVars.includes('semantics.')
-          ? 'import semantics from "../semantics"'
-          : ''
+        const usesSemantic = componentThemeVars.includes('semantics.')
+
         // SharedTokens have to be at the component level in the input data
         // because of Figma, but it should be one level higher for our purposes
         if (rawComponentName !== 'SharedTokens') {
           const componentFileContent = `
-          ${semanticsImport}
+          
           import type { ${capitalize(
             fullComponentName
           )} } from '../../componentTypes/${fullComponentName}'
-
-          const ${fullComponentName}: ${capitalize(
-            fullComponentName
-          )} = {${componentThemeVars}}
+          // TODO-theme-types: fix any
+          const ${fullComponentName} = (${
+            usesSemantic ? 'semantics:any' : ''
+          }): ${capitalize(fullComponentName)} => ({${componentThemeVars}})
           export default ${fullComponentName}
             `
           await createFile(
@@ -188,12 +186,12 @@ const setupThemes = async (targetPath, input) => {
         if (rawComponentName === 'SharedTokens') {
           sharedTokensTypes = componentTypes
           const componentFileContent = `
-        import semantics from "./semantics"
+          
         import { SharedTokens } from '../commonTypes'
-
-        const ${fullComponentName}: ${capitalize(
+        // TODO-theme-types: fix any
+        const ${fullComponentName} = (semantics:any): ${capitalize(
             fullComponentName
-          )} = {${componentThemeVars}}
+          )} => ({${componentThemeVars}})
         export default ${fullComponentName}
           `
 
@@ -246,8 +244,8 @@ const setupThemes = async (targetPath, input) => {
       import type { BaseTheme } from '../commonTypes';
 
       export type Theme = BaseTheme<Primitives, Semantics>
-
-      const theme: Theme = {
+      // TODO-theme-types: fix any
+      const theme: any = {
         primitives,
         semantics,
         sharedTokens,
