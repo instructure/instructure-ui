@@ -39,7 +39,7 @@ import type { ToggleFacadeProps, ToggleFacadeStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['Toggle'],
+  componentTheme: ReturnType<NewComponentTypes['Toggle']>,
   props: ToggleFacadeProps,
   sharedTokens: SharedTokens
 ): ToggleFacadeStyle => {

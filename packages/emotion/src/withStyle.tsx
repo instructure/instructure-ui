@@ -188,27 +188,20 @@ const withStyle = decorator(
 
       const componentWithTokensId = useTokensFrom ?? componentId
 
-      // TODO-theme-types: fix Theme typing
-      //@ts-expect-error types
-      const { primitives: primitiveOverrides, semantics: semanticsOverrides } =
-        theme.themeOverride
+      const primitiveOverrides = (theme as Theme).themeOverride?.primitives
+      const semanticsOverrides = (theme as Theme).themeOverride?.semantics
 
       const primitives = mergeDeep(
         theme.newTheme.primitives,
         primitiveOverrides
       )
       //override primitives here
-      // TODO-theme-types: fix Theme typing
-      //@ts-expect-error types
       const semantics = mergeDeep(
         theme.newTheme.semantics?.(primitives),
         semanticsOverrides
       )
       //override semantics here
-
       const baseComponentTheme =
-        // TODO-theme-types: fix Theme typing
-        //@ts-expect-error types
         theme.newTheme.components[
           componentWithTokensId as keyof NewComponentTypes
         ]?.(semantics)
@@ -220,10 +213,7 @@ const withStyle = decorator(
         (componentProps as ThemeOverrideProp).themeOverride,
         baseComponentTheme
       )
-
-      // TODO-theme-types: fix Theme typing
-      //@ts-expect-error types
-      const sharedTokens = (theme as Theme).newTheme.sharedTokens?.(semantics)
+      const sharedTokens = theme.newTheme.sharedTokens?.(semantics)
       const componentTheme = { ...baseComponentTheme, ...themeOverride }
       // TODO do not call here generateStyle, it does not receive the extraArgs
       const [styles, setStyles] = useState(

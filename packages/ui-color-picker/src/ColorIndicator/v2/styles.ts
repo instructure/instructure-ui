@@ -51,7 +51,7 @@ const calcBlendedColor = (c1: RGBAType, c2: RGBAType) => {
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['ColorIndicator'],
+  componentTheme: ReturnType<NewComponentTypes['ColorIndicator']>,
   props: ColorIndicatorProps
 ): ColorIndicatorStyle => {
   const { color, shape } = props

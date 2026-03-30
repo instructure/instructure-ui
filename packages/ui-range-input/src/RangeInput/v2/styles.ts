@@ -38,7 +38,7 @@ import { boxShadowObjectsToCSSString } from '@instructure/ui-themes'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['RangeInput'],
+  componentTheme: ReturnType<NewComponentTypes['RangeInput']>,
   props: RangeInputProps,
   sharedTokens: SharedTokens
 ): RangeInputStyle => {

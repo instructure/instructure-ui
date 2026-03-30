@@ -36,7 +36,7 @@ import type { SliderStyle, SliderProps, SliderStyleProps } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['Slider'],
+  componentTheme: ReturnType<NewComponentTypes['Slider']>,
   props: SliderProps,
   _sharedTokens: SharedTokens,
   state: SliderStyleProps

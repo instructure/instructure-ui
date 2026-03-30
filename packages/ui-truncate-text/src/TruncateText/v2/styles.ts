@@ -36,7 +36,7 @@ import type { TruncateTextStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['TruncateText']
+  componentTheme: ReturnType<NewComponentTypes['TruncateText']>
 ): TruncateTextStyle => {
   return {
     truncateText: {

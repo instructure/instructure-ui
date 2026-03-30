@@ -37,7 +37,7 @@ import type { AlertProps, AlertStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['Alert'],
+  componentTheme: ReturnType<NewComponentTypes['Alert']>,
   props: AlertProps,
   sharedTokens: SharedTokens
 ): AlertStyle => {

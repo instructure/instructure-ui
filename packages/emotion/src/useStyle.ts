@@ -78,18 +78,13 @@ const useStyle = <P extends GenerateStyleParams>(useStyleParams: {
 
   const componentWithTokensId = useTokensFrom ?? componentId
 
-  // TODO-theme-types: fix Theme typing
-  //@ts-expect-error types
-  const { primitives: primitiveOverrides, semantics: semanticsOverrides } = (
-    theme as Theme
-  ).themeOverride
+  const primitiveOverrides = (theme as Theme).themeOverride?.primitives
+  const semanticsOverrides = (theme as Theme).themeOverride?.semantics
 
   const primitives = mergeDeep(
     (theme as Theme).newTheme.primitives,
     primitiveOverrides
   )
-  // TODO-theme-types: fix Theme typing
-  //@ts-expect-error types
   const semantics = mergeDeep(
     (theme as Theme).newTheme.semantics?.(primitives),
     semanticsOverrides
@@ -102,8 +97,6 @@ const useStyle = <P extends GenerateStyleParams>(useStyleParams: {
     theme.newTheme.components[componentWithTokensId as keyof NewComponentTypes]
   ) {
     baseComponentTheme =
-      // TODO-theme-types: fix Theme typing
-      //@ts-expect-error types
       theme.newTheme.components[
         componentWithTokensId as keyof NewComponentTypes
       ]?.(semantics)
@@ -116,8 +109,6 @@ const useStyle = <P extends GenerateStyleParams>(useStyleParams: {
     baseComponentTheme
   )
 
-  // TODO-theme-types: fix Theme typing
-  //@ts-expect-error types
   const sharedTokens = (theme as Theme).newTheme.sharedTokens?.(semantics)
   const componentTheme = { ...baseComponentTheme, ...finalOverride }
 

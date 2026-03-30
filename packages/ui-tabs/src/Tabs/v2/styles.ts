@@ -40,7 +40,7 @@ type StyleParams = {
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['Tabs'],
+  componentTheme: ReturnType<NewComponentTypes['Tabs']>,
   params: StyleParams
 ): TabsStyle => {
   const { variant, tabOverflow, fixHeight } = params

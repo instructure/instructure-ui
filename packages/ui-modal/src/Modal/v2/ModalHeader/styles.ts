@@ -41,7 +41,7 @@ import type {
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['ModalHeader'],
+  componentTheme: ReturnType<NewComponentTypes['ModalHeader']>,
   props: ModalHeaderProps,
   _sharedTokens: SharedTokens,
   state: ModalHeaderStyleProps

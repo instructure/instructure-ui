@@ -36,7 +36,7 @@ import type { ListItemProps, ListItemStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['ListItem'],
+  componentTheme: ReturnType<NewComponentTypes['ListItem']>,
   props: ListItemProps
 ): ListItemStyle => {
   const { size, delimiter, spacing } = props

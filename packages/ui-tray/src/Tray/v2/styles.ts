@@ -41,7 +41,7 @@ type StyleParams = {
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['Tray'],
+  componentTheme: ReturnType<NewComponentTypes['Tray']>,
   params: StyleParams
 ): TrayStyle => {
   const { border, shadow, size, placement } = params

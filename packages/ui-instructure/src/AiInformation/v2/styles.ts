@@ -36,7 +36,7 @@ import type { AiInformationStyle, AiInformationProps } from './props'
  * @return The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['AiInformation'],
+  componentTheme: ReturnType<NewComponentTypes['AiInformation']>,
   _params: AiInformationProps,
   _sharedTokens: SharedTokens
 ): AiInformationStyle => {

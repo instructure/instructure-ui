@@ -36,7 +36,7 @@ import type { AppNavItemProps, AppNavItemStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['AppNavItem'],
+  componentTheme: ReturnType<NewComponentTypes['AppNavItem']>,
   props: AppNavItemProps
 ): AppNavItemStyle => {
   const { isSelected, isDisabled } = props

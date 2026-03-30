@@ -82,7 +82,7 @@ const generateGridLayout = (
  * @return The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['FormFieldLayout'],
+  componentTheme: ReturnType<NewComponentTypes['FormFieldLayout']>,
   params: StyleParams,
   sharedTokens: SharedTokens
 ): FormFieldLayoutStyle => {

@@ -39,7 +39,7 @@ import type { TreeBrowserStyle, TreeBrowserProps } from './props'
  */
 
 const generateStyles = (
-  componentTheme: NewComponentTypes['TreeBrowser'],
+  componentTheme: ReturnType<NewComponentTypes['TreeBrowser']>,
   _props: TreeBrowserProps,
   sharedTokens: SharedTokens
 ): TreeBrowserStyle => {

@@ -36,7 +36,7 @@ import type { MenuItemProps, MenuItemStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['MenuItem'],
+  componentTheme: ReturnType<NewComponentTypes['MenuItem']>,
   props: MenuItemProps
 ): MenuItemStyle => {
   const { type, disabled, selected } = props

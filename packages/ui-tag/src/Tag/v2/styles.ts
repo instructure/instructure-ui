@@ -37,7 +37,7 @@ import { calcFocusOutlineStyles } from '@instructure/emotion'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['Tag'],
+  componentTheme: ReturnType<NewComponentTypes['Tag']>,
   props: TagProps,
   sharedTokens: SharedTokens
 ): TagStyle => {

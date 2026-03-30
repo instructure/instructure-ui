@@ -42,7 +42,7 @@ import type {
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['ColorPicker'],
+  componentTheme: ReturnType<NewComponentTypes['ColorPicker']>,
   props: ColorPickerProps,
   sharedTokens: SharedTokens,
   state: ColorPickerState & { isSimple: boolean }

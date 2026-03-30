@@ -37,7 +37,7 @@ import type { PaginationPageInputStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['PaginationPageInput']
+  componentTheme: ReturnType<NewComponentTypes['PaginationPageInput']>
 ): PaginationPageInputStyle => {
   return {
     paginationPageInput: {

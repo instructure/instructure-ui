@@ -35,7 +35,7 @@ import type { ColorContrastProps } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['ColorContrast'],
+  componentTheme: ReturnType<NewComponentTypes['ColorContrast']>,
   props: ColorContrastProps
 ) => {
   const statusDescriptionStyle = (pass: boolean) => ({
