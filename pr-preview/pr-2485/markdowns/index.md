@@ -136,6 +136,6 @@
 
 #### AI Components
 
-- [AiInformation](./AiInformation.md): Displays AI-related data in Instructure products. Composed from NutritionFacts and DataPermissionLevels components with prefixed APIs. Supports fullscreen modals for mobile viewports with comprehensive data structure for AI feature information.
 - [DataPermissionLevels](./DataPermissionLevels.md): Displays AI-related data permissions in Instructure products. Shows hierarchical permission levels with titles and descriptions. Includes a modal interface with close functionality and supports highlighting specific levels for emphasis.
+- [AiInformation](./AiInformation.md): Displays AI-related data in Instructure products. Composed from NutritionFacts and DataPermissionLevels components with prefixed APIs. Supports fullscreen modals for mobile viewports with comprehensive data structure for AI feature information.
 - [NutritionFacts](./NutritionFacts.md): A specialized modal component for displaying AI-related data in structured blocks. Includes model info, privacy/compliance details, and output metrics. Features a trigger button and modal presentation.
