@@ -168,12 +168,13 @@ const setupThemes = async (targetPath, input) => {
         if (rawComponentName !== 'SharedTokens') {
           const componentFileContent = `
 
+          ${usesSemantic ? "import type { Semantics} from '../semantics'" : ''}
           import type { ${capitalize(
             fullComponentName
           )} } from '../../componentTypes/${fullComponentName}'
-          // TODO-theme-types: fix any
+
           const ${fullComponentName} = (${
-            usesSemantic ? 'semantics:any' : ''
+            usesSemantic ? 'semantics: Semantics' : ''
           }): ${capitalize(fullComponentName)} => ({${componentThemeVars}})
           export default ${fullComponentName}
             `
@@ -188,8 +189,9 @@ const setupThemes = async (targetPath, input) => {
           const componentFileContent = `
 
         import { SharedTokens } from '../commonTypes'
-        // TODO-theme-types: fix any
-        const ${fullComponentName} = (semantics:any): ${capitalize(
+        import { Semantics } from "./semantics"
+
+        const ${fullComponentName} = (semantics: Semantics): ${capitalize(
             fullComponentName
           )} => ({${componentThemeVars}})
         export default ${fullComponentName}
