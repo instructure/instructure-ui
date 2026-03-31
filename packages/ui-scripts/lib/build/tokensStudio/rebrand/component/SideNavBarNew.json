@@ -101,7 +101,7 @@
       "type": "color"
     },
     "horizontalPadding": {
-      "value": "{sharedTokens.spacing.general.spaceSm}",
+      "value": "{spacing.spaceSm}",
       "type": "spacing"
     },
     "fontColor": {
