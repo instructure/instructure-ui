@@ -16,16 +16,16 @@
       "value": "{color.text.base}",
       "type": "color"
     },
-    "minimizedWidth": {
-      "value": "3.75rem",
+    "minimizedminWidth": {
+      "value": "6.75rem",
       "type": "sizing"
     },
     "toggleTransition": {
       "value": "300ms",
       "type": "other"
     },
-    "width": {
-      "value": "5.875rem",
+    "minWidth": {
+      "value": "17rem",
       "type": "sizing"
     },
     "margin": {
