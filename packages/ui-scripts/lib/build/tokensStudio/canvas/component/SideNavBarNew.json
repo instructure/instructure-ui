@@ -12,7 +12,7 @@
       "value": "{color.text.onColor}",
       "type": "color"
     },
-    "minimizedWidth": {
+    "minimizedminWidth": {
       "value": "3.375rem",
       "type": "sizing"
     },
@@ -20,7 +20,7 @@
       "value": "300ms",
       "type": "other"
     },
-    "width": {
+    "minWidth": {
       "value": "5.25rem",
       "type": "sizing"
     },

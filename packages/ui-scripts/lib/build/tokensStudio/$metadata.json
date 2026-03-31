@@ -70,6 +70,9 @@
     "canvas/component/TreeBrowser",
     "canvas/component/View",
     "canvas/component/TruncateText",
+    "rebrand/semantic/layout/default",
+    "rebrand/semantic/color/rebrandLight",
+    "rebrand/semantic/color/rebrandDark",
     "rebrand/component/AiInformation",
     "rebrand/component/Alert",
     "rebrand/component/AppNav",
@@ -135,9 +138,6 @@
     "rebrand/component/Tray",
     "rebrand/component/TreeBrowser",
     "rebrand/component/TruncateText",
-    "rebrand/component/View",
-    "rebrand/semantic/layout/default",
-    "rebrand/semantic/color/rebrandLight",
-    "rebrand/semantic/color/rebrandDark"
+    "rebrand/component/View"
   ]
 }
