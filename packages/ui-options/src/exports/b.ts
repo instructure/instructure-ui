@@ -26,10 +26,6 @@ export { Options } from '../Options/v2'
 export { Item as OptionItem } from '../Options/v2/Item'
 export { Separator as OptionSeparator } from '../Options/v2/Separator'
 
-export { optionsThemeGenerator } from '../Options/v2/theme'
-export { optionsItemThemeGenerator } from '../Options/v2/Item/theme'
-export { optionsSeparatorThemeGenerator } from '../Options/v2/Separator/theme'
-
 export type { OptionsProps } from '../Options/v2/props'
 export type {
   OptionsItemProps,

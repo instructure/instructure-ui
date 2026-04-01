@@ -29,7 +29,7 @@ import type {
   OptionsSeparatorTheme
 } from '@instructure/shared-types'
 import type { WithStyleProps } from '@instructure/emotion'
-import type { OptionsSeparatorProps } from '@instructure/ui-options/v11_6'
+import type { OptionsSeparatorProps } from '@instructure/ui-options'
 
 type DrilldownSeparatorOwnProps = {
   id: string

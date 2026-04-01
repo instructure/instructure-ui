@@ -24,7 +24,8 @@
 
 import { Component } from 'react'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { optionsItemThemeGenerator } from '@instructure/ui-options'
 
 import { allowedProps } from './props'
 import type { DrilldownOptionProps } from './props'
@@ -33,13 +34,12 @@ import type { DrilldownOptionProps } from './props'
 ---
 parent: Drilldown
 id: Drilldown.Option
-themeId: OptionsItem
 ---
 @module DrilldownOption
 **/
 // needed for listing the available theme variables on docs page,
 // we pass the themeOverrides to Options.Item
-@withStyle(null)
+@withStyle(null, optionsItemThemeGenerator)
 class DrilldownOption extends Component<DrilldownOptionProps> {
   static readonly componentId = 'Drilldown.Option'
 

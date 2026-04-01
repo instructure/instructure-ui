@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { NewComponentTypes } from '@instructure/ui-themes'
+import type { DrilldownTheme } from '@instructure/shared-types'
 import type {
   DrilldownProps,
   DrilldownStyleProps,
@@ -40,7 +40,7 @@ import type {
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['Drilldown'],
+  componentTheme: DrilldownTheme,
   _props: DrilldownProps,
   state: DrilldownStyleProps
 ): DrilldownStyle => {
@@ -49,9 +49,8 @@ const generateStyle = (
   return {
     drilldown: {
       label: 'drilldown',
-      overflow: 'hidden', // needed for focus ring!
+      overflow: 'visible', // needed for focus ring!
       borderColor: componentTheme.borderColor,
-      borderRadius: componentTheme.borderRadius,
       ...(hasHighlightedOption && {
         '&:focus::before': {
           display: 'none'

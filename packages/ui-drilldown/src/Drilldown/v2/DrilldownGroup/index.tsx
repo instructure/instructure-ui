@@ -24,8 +24,7 @@
 
 import { Component } from 'react'
 
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
-import { optionsThemeGenerator } from '@instructure/ui-options'
+import { withStyle } from '@instructure/emotion'
 
 import { allowedProps } from './props'
 import type { DrilldownGroupProps } from './props'
@@ -35,12 +34,13 @@ import { isMac, isFirefox } from '@instructure/ui-utils'
 ---
 parent: Drilldown
 id: Drilldown.Group
+themeId: Options
 ---
 @module DrilldownGroup
 **/
 // needed for listing the available theme variables on docs page,
 // we pass the themeOverrides to Options
-@withStyle(null, optionsThemeGenerator)
+@withStyle(null)
 class DrilldownGroup extends Component<DrilldownGroupProps> {
   static readonly componentId = 'Drilldown.Group'
 

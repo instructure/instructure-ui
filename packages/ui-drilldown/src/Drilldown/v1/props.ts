@@ -24,7 +24,7 @@
 
 import React from 'react'
 
-import { Popover } from '@instructure/ui-popover/latest'
+import { Popover } from '@instructure/ui-popover/v11_6'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 import type {

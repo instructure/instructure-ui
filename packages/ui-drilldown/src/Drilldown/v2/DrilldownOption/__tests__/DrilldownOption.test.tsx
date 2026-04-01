@@ -27,7 +27,7 @@ import { vi } from 'vitest'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
-import { IconCheckSolid } from '@instructure/ui-icons'
+import { CheckInstUIIcon } from '@instructure/ui-icons'
 
 import { Drilldown } from '../../index'
 
@@ -196,7 +196,7 @@ describe('<Drilldown.Option />', () => {
       const icon = container.querySelector('svg')
 
       expect(icon).toBeInTheDocument()
-      expect(icon).toHaveAttribute('name', 'IconArrowOpenEnd')
+      expect(icon).toHaveAttribute('name', 'ChevronRight')
     })
 
     it('should indicate subpage fo SR', async () => {
@@ -448,7 +448,7 @@ describe('<Drilldown.Option />', () => {
           <Drilldown.Page id="page0">
             <Drilldown.Option
               id="option1"
-              renderBeforeLabel={<IconCheckSolid />}
+              renderBeforeLabel={<CheckInstUIIcon />}
             >
               Option
             </Drilldown.Option>
@@ -458,11 +458,11 @@ describe('<Drilldown.Option />', () => {
       const icon = container.querySelector('svg')
 
       expect(icon).toBeInTheDocument()
-      expect(icon).toHaveAttribute('name', 'IconCheck')
+      expect(icon).toHaveAttribute('name', 'Check')
     })
 
     it('as function should have option props as params', async () => {
-      const beforeLabelFunction = vi.fn(() => <IconCheckSolid />)
+      const beforeLabelFunction = vi.fn(() => <CheckInstUIIcon />)
       render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
@@ -517,7 +517,7 @@ describe('<Drilldown.Option />', () => {
           <Drilldown.Page id="page0">
             <Drilldown.Option
               id="option1"
-              renderAfterLabel={<IconCheckSolid />}
+              renderAfterLabel={<CheckInstUIIcon />}
             >
               Option
             </Drilldown.Option>
@@ -527,11 +527,11 @@ describe('<Drilldown.Option />', () => {
       const icon = container.querySelector('svg')
 
       expect(icon).toBeInTheDocument()
-      expect(icon).toHaveAttribute('name', 'IconCheck')
+      expect(icon).toHaveAttribute('name', 'Check')
     })
 
     it('as function should have option props as params', async () => {
-      const beforeLabelFunction = vi.fn(() => <IconCheckSolid />)
+      const beforeLabelFunction = vi.fn(() => <CheckInstUIIcon />)
       render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">

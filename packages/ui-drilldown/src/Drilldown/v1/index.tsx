@@ -35,23 +35,23 @@ import {
   withDeterministicId
 } from '@instructure/ui-react-utils'
 
-import { View } from '@instructure/ui-view/latest'
-import { Options } from '@instructure/ui-options/latest'
+import { View } from '@instructure/ui-view/v11_6'
+import { Options } from '@instructure/ui-options/v11_6'
 import type {
   OptionsProps,
   OptionsItemProps,
   OptionsSeparatorProps
-} from '@instructure/ui-options/latest'
-import { Popover } from '@instructure/ui-popover/latest'
+} from '@instructure/ui-options/v11_6'
+import { Popover } from '@instructure/ui-popover/v11_6'
 import { Selectable } from '@instructure/ui-selectable'
 import type { SelectableRender } from '@instructure/ui-selectable'
 import {
-  ChevronLeftInstUIIcon,
-  ChevronRightInstUIIcon,
-  CheckInstUIIcon
+  IconArrowOpenStartSolid,
+  IconArrowOpenEndSolid,
+  IconCheckSolid
 } from '@instructure/ui-icons'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleLegacy as withStyle } from '@instructure/emotion'
 
 import { DrilldownSeparator } from './DrilldownSeparator'
 import { DrilldownOption } from './DrilldownOption'
@@ -62,6 +62,7 @@ import { DrilldownPage } from './DrilldownPage'
 import type { DrilldownPageProps, PageChildren } from './DrilldownPage/props'
 
 import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 import { allowedProps, SelectedGroupOptionsMap } from './props'
 
@@ -100,7 +101,7 @@ category: components
 ---
 **/
 @withDeterministicId()
-@withStyle(generateStyle)
+@withStyle(generateStyle, generateComponentTheme)
 class Drilldown extends Component<DrilldownProps, DrilldownState> {
   static readonly componentId = 'Drilldown'
 
@@ -1213,7 +1214,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
     // we set a few manually on Options.Item,
     // the rest are passed directly
     if (subPageId) {
-      optionProps.renderAfterLabel = <ChevronRightInstUIIcon />
+      optionProps.renderAfterLabel = <IconArrowOpenEndSolid />
       optionProps['aria-haspopup'] = true
       optionProps.role = customRole || 'menuitem'
       warn(
@@ -1222,7 +1223,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       )
     }
     if (id === this._headerBackId) {
-      optionProps.renderBeforeLabel = <ChevronLeftInstUIIcon />
+      optionProps.renderBeforeLabel = <IconArrowOpenStartSolid />
     }
     const isOptionControlled = typeof option.props.selected === 'boolean'
     if ((groupProps?.selectableType || isOptionControlled) && groupProps) {
@@ -1236,9 +1237,11 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       optionProps['aria-checked'] = isSelected
 
       optionProps.renderBeforeLabel = (
-        <span style={{ visibility: isSelected ? 'visible' : 'hidden' }}>
-          <CheckInstUIIcon />
-        </span>
+        <IconCheckSolid
+          style={{
+            opacity: isSelected ? 1 : 0
+          }}
+        />
       )
 
       warn(

@@ -60,6 +60,9 @@ type YamlMetaInfo = {
   // if true it won't be included in the docs
   private: boolean
   tags?: string
+  // points to another component's theme ID to display its theme variables
+  // (e.g. Drilldown.Group uses Options theme, so themeId: "Options")
+  themeId?: string
 }
 
 type JsDocResult = {

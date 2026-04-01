@@ -24,42 +24,32 @@
 
 import { Component } from 'react'
 
-import { withStyle } from '@instructure/emotion'
-
 import { allowedProps } from './props'
-import type { DrilldownOptionProps } from './props'
+import type { DrilldownPageProps } from './props'
 
 /**
 ---
 parent: Drilldown
-id: Drilldown.Option
-themeId: OptionsItem
+id: Drilldown.Page
 ---
-@module DrilldownOption
+@module DrilldownPage
 **/
-// needed for listing the available theme variables on docs page,
-// we pass the themeOverrides to Options.Item
-@withStyle(null)
-class DrilldownOption extends Component<DrilldownOptionProps> {
-  static readonly componentId = 'Drilldown.Option'
+class DrilldownPage extends Component<DrilldownPageProps> {
+  static readonly componentId = 'Drilldown.Page'
 
   static allowedProps = allowedProps
-
   static defaultProps = {
+    renderBackButtonLabel: 'Back',
     disabled: false,
-    beforeLabelContentVAlign: 'start',
-    afterLabelContentVAlign: 'start',
-    as: 'li',
-    role: 'menuitem',
-    shouldCloseOnClick: 'auto'
+    withoutHeaderSeparator: false
   }
 
   render() {
-    // this component is only used for prop validation. Drilldown.Option children
-    // are parsed in Drilldown and rendered as Options.Item components
+    // this component is only used for prop validation.
+    // Drilldown.Page children are parsed in Drilldown.
     return null
   }
 }
 
-export default DrilldownOption
-export { DrilldownOption }
+export default DrilldownPage
+export { DrilldownPage }

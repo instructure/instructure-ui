@@ -22,31 +22,35 @@
  * SOFTWARE.
  */
 
-import type { Theme } from '@instructure/ui-themes'
-import type { OptionsTheme } from '@instructure/shared-types'
+import type {
+  OtherHTMLAttributes,
+  PickPropsWithExceptions,
+  AsElementType,
+  OptionsSeparatorTheme
+} from '@instructure/shared-types'
+import type { WithStyleProps } from '@instructure/emotion'
+import type { OptionsSeparatorProps } from '@instructure/ui-options/v11_6'
 
-/**
- * Generates the theme object for the component from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @return {Object} The final theme object with the overrides and component variables
- */
-const generateComponentTheme = (theme: Theme): OptionsTheme => {
-  const { colors, typography, spacing } = theme
+type DrilldownSeparatorOwnProps = {
+  id: string
 
-  const componentVariables: OptionsTheme = {
-    labelFontWeight: typography?.fontWeightBold,
-
-    background: colors?.contrasts?.white1010,
-    labelColor: colors?.contrasts?.grey125125,
-
-    labelPadding: `${spacing?.xSmall} 0`,
-    nestedLabelPadding: `${spacing?.xSmall} ${spacing?.small}`
-  }
-
-  return {
-    ...componentVariables
-  }
+  /**
+   * Element type to render as
+   */
+  as?: AsElementType
 }
 
-export { generateComponentTheme as optionsThemeGenerator }
-export default generateComponentTheme
+type PropKeys = keyof DrilldownSeparatorOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type DrilldownSeparatorProps =
+  // we are passing all props to Options.Separator
+  PickPropsWithExceptions<OptionsSeparatorProps, 'as'> &
+    DrilldownSeparatorOwnProps &
+    WithStyleProps<OptionsSeparatorTheme, null> &
+    OtherHTMLAttributes<DrilldownSeparatorOwnProps>
+const allowedProps: AllowedPropKeys = ['id', 'as']
+
+export type { DrilldownSeparatorProps }
+export { allowedProps }

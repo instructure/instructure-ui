@@ -78,10 +78,22 @@ class Document extends Component<DocumentProps, DocumentState> {
     // use PascalCase without dots (e.g. "MenuItem").
     // New-theme entries are in themeVariables.newTheme.components.
     const selectedId = this.state.selectedDetailsTabId
-    const themeKey = selectedId?.replace(/\./g, '')
+    const childDoc =
+      selectedId !== doc.id
+        ? doc?.children?.find((value) => value.id === selectedId)
+        : null
+    // in case of some components, we need to display the theme variables of other components based on themeId (like displaying the theme variables of Options in Drillsdown.Group)
+    const themeKey = childDoc?.themeId || selectedId?.replace(/\./g, '')
     // @ts-ignore todo type
     const newThemeEntry = themeVariables?.newTheme?.components?.[themeKey]
-    if (newThemeEntry) {
+    const componentInstance =
+      selectedId === doc.id
+        ? doc?.componentInstance
+        : childDoc?.componentInstance
+    if (
+      newThemeEntry &&
+      typeof componentInstance?.generateComponentTheme !== 'function'
+    ) {
       // new theme - use pre-computed theme object directly
       this.setState({ componentTheme: newThemeEntry })
       return
@@ -90,9 +102,7 @@ class Document extends Component<DocumentProps, DocumentState> {
     if (selectedId === doc.id) {
       generateTheme = doc?.componentInstance?.generateComponentTheme
     } else {
-      generateTheme = doc?.children?.find(
-        (value) => value.id === selectedId
-      )?.componentInstance?.generateComponentTheme
+      generateTheme = childDoc?.componentInstance?.generateComponentTheme
     }
     if (typeof generateTheme === 'function' && themeVariables) {
       // @ts-ignore todo type

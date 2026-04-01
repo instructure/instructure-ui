@@ -22,27 +22,23 @@
  * SOFTWARE.
  */
 
-import type { Theme } from '@instructure/ui-themes'
-import { OptionsSeparatorTheme } from '@instructure/shared-types'
+export { Drilldown } from '../Drilldown/v2'
+export { DrilldownGroup } from '../Drilldown/v2/DrilldownGroup'
+export { DrilldownOption } from '../Drilldown/v2/DrilldownOption'
+export { DrilldownPage } from '../Drilldown/v2/DrilldownPage'
+export { DrilldownSeparator } from '../Drilldown/v2/DrilldownSeparator'
 
-/**
- * Generates the theme object for the component from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @return {Object} The final theme object with the overrides and component variables
- */
-const generateComponentTheme = (theme: Theme): OptionsSeparatorTheme => {
-  const { borders, colors, spacing } = theme
-
-  const componentVariables: OptionsSeparatorTheme = {
-    background: colors?.contrasts?.grey3045,
-    height: borders?.widthSmall,
-    margin: `0 ${spacing?.small}`
-  }
-
-  return {
-    ...componentVariables
-  }
-}
-
-export { generateComponentTheme as optionsSeparatorThemeGenerator }
-export default generateComponentTheme
+export type {
+  DrilldownProps,
+  PageChild as DrilldownPageChild,
+  GroupChild as DrilldownGroupChild,
+  OptionChild as DrilldownOptionChild,
+  SeparatorChild as DrilldownSeparatorChild
+} from '../Drilldown/v2/props'
+export type { DrilldownGroupProps } from '../Drilldown/v2/DrilldownGroup/props'
+export type { DrilldownOptionProps } from '../Drilldown/v2/DrilldownOption/props'
+export type {
+  DrilldownPageProps,
+  PageChildren as DrilldownPageChildren
+} from '../Drilldown/v2/DrilldownPage/props'
+export type { DrilldownSeparatorProps } from '../Drilldown/v2/DrilldownSeparator/props'

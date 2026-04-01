@@ -24,42 +24,41 @@
 
 import { Component } from 'react'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { optionsThemeGenerator } from '@instructure/ui-options'
 
 import { allowedProps } from './props'
-import type { DrilldownOptionProps } from './props'
+import type { DrilldownGroupProps } from './props'
+import { isMac, isFirefox } from '@instructure/ui-utils'
 
 /**
 ---
 parent: Drilldown
-id: Drilldown.Option
-themeId: OptionsItem
+id: Drilldown.Group
 ---
-@module DrilldownOption
+@module DrilldownGroup
 **/
 // needed for listing the available theme variables on docs page,
-// we pass the themeOverrides to Options.Item
-@withStyle(null)
-class DrilldownOption extends Component<DrilldownOptionProps> {
-  static readonly componentId = 'Drilldown.Option'
+// we pass the themeOverrides to Options
+@withStyle(null, optionsThemeGenerator)
+class DrilldownGroup extends Component<DrilldownGroupProps> {
+  static readonly componentId = 'Drilldown.Group'
 
   static allowedProps = allowedProps
-
   static defaultProps = {
     disabled: false,
-    beforeLabelContentVAlign: 'start',
-    afterLabelContentVAlign: 'start',
-    as: 'li',
-    role: 'menuitem',
-    shouldCloseOnClick: 'auto'
+    withoutSeparators: false,
+    // Firefox with NVDA does not read Drilldown.Group with role="group" correctly
+    // but setting role="menu" on all other platforms results in Drilldown.Group label not being read
+    role: !isMac() && isFirefox() ? 'menu' : 'group'
   }
 
   render() {
-    // this component is only used for prop validation. Drilldown.Option children
-    // are parsed in Drilldown and rendered as Options.Item components
+    // this component is only used for prop validation.
+    // Drilldown.Group is parsed in Drilldown as an Options component.
     return null
   }
 }
 
-export default DrilldownOption
-export { DrilldownOption }
+export default DrilldownGroup
+export { DrilldownGroup }

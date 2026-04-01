@@ -265,10 +265,7 @@ export type { NumberInputProps } from '@instructure/ui-number-input/v11_7'
 export {
   Options,
   OptionSeparator,
-  OptionItem,
-  optionsThemeGenerator,
-  optionsItemThemeGenerator,
-  optionsSeparatorThemeGenerator
+  OptionItem
 } from '@instructure/ui-options/v11_7'
 export type {
   OptionsItemProps,

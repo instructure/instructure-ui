@@ -133,8 +133,8 @@ type: example
     <Drilldown.Option
       id="renderElementExampleOption1"
       description="Curabitur fringilla, urna ut efficitur molestie, nibh lacus tincidunt elit, ut tempor ipsum nunc sit amet massa."
-      renderBeforeLabel={<CheckInstUIIcon/>}
-      renderAfterLabel={<ChevronRightInstUIIcon/>}
+      renderBeforeLabel={IconCheckSolid}
+      renderAfterLabel={IconArrowOpenEndSolid}
       beforeLabelContentVAlign="start"
       afterLabelContentVAlign="start"
     >
@@ -143,8 +143,8 @@ type: example
     <Drilldown.Option
       id="renderElementExampleOption2"
       description="Curabitur fringilla, urna ut efficitur molestie, nibh lacus tincidunt elit, ut tempor ipsum nunc sit amet massa."
-      renderBeforeLabel={<CheckInstUIIcon/>}
-      renderAfterLabel={<ChevronRightInstUIIcon/>}
+      renderBeforeLabel={IconCheckSolid}
+      renderAfterLabel={IconArrowOpenEndSolid}
       beforeLabelContentVAlign="center"
       afterLabelContentVAlign="center"
     >
@@ -153,8 +153,8 @@ type: example
     <Drilldown.Option
       id="renderElementExampleOption3"
       description="Curabitur fringilla, urna ut efficitur molestie, nibh lacus tincidunt elit, ut tempor ipsum nunc sit amet massa."
-      renderBeforeLabel={<CheckInstUIIcon/>}
-      renderAfterLabel={<ChevronRightInstUIIcon/>}
+      renderBeforeLabel={IconCheckSolid}
+      renderAfterLabel={IconArrowOpenEndSolid}
       beforeLabelContentVAlign="end"
       afterLabelContentVAlign="end"
     >
@@ -177,7 +177,7 @@ const VideoSettingsExample = (props) => {
   const [isCommentsOn, setIsCommentsOn] = useState(true)
 
   const renderTrigger = () => {
-    return <Button renderIcon={<SettingsInstUIIcon/>}>Video Settings</Button>
+    return <Button renderIcon={IconSettingsSolid}>Video Settings</Button>
   }
 
   const renderSelected = (props, value) => {
@@ -1067,7 +1067,7 @@ type: example
     </Drilldown.Group>
     <Drilldown.Option
       id="close"
-      renderBeforeLabel={<XInstUIIcon />}
+      renderBeforeLabel={<IconXLine />}
       onOptionClick={(_event, data) => {
         data.drilldown.hide()
       }}
@@ -1218,13 +1218,13 @@ type: example
     }
 
     const renderSelectedIcon = (isSelected) => {
-      return <span style={{ visibility: isSelected ? 'visible' : 'hidden' }}><CheckInstUIIcon /></span>
+      return <IconCheckSolid style={{ opacity: isSelected ? 1 : 0 }} />
     }
 
     const renderAddAction = (label) => {
       return (
         <span>
-          <PlusInstUIIcon />
+          <IconAddSolid />
           <View as="span" margin="0 0 0 x-small">
             New {label}
           </View>
@@ -1289,7 +1289,7 @@ type: example
             return { color: currentTheme.colors.textDanger }
           }}
         >
-          <Trash2InstUIIcon size="md"/>
+          <IconTrashLine />
           <View as="span" margin="0 0 0 x-small">
             Delete {label}
           </View>
