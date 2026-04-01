@@ -915,6 +915,22 @@ type: embed
 
 ```
 
+### Rating
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"smallIconFontSize",note:""},
+    {name:"mediumIconFontSize",note:""},
+    {name:"largeIconFontSize",note:""}
+  ]}
+/>
+
+```
+
 ### RangeInput
 
 ```js
