@@ -58,7 +58,8 @@ function getShorthandPropValue(
     return
   }
   return propValue
-    .split(' ')
+    .trim()
+    .split(/\s+/) // any number of whitespaces
     .map((shortHandValue) => {
       if (shortHandValue === 'auto' || shortHandValue === '0') {
         return shortHandValue
