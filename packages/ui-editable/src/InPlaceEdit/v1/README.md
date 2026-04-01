@@ -313,7 +313,7 @@ type: example
     }
 
     return (
-      <View as="div" background="primary">
+      <View as="div">
         <InPlaceEdit
           renderViewer={renderView}
           renderEditor={renderEdit}
