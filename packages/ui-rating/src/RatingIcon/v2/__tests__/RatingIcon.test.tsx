@@ -69,10 +69,13 @@ describe('<RatingIcon />', () => {
     await waitFor(
       () => {
         const icon = container.querySelector('svg')
+        const iconWrapper = container.querySelector(
+          '[class*="ratingIcon__icon"]'
+        )
 
         expect(icon).toBeInTheDocument()
-        expect(icon!.getAttribute('name')).toBe('IconStar')
-        expect(icon).toHaveClass('transition--scale-entered')
+        expect(icon!.getAttribute('name')).toBe('StarSolid')
+        expect(iconWrapper).toHaveClass('transition--scale-entered')
       },
       { timeout: 500 }
     )
@@ -95,10 +98,13 @@ describe('<RatingIcon />', () => {
     await waitFor(
       () => {
         const icon = container.querySelector('svg')
+        const iconWrapper = container.querySelector(
+          '[class*="ratingIcon__icon"]'
+        )
 
         expect(icon).toBeInTheDocument()
-        expect(icon!.getAttribute('name')).toBe('IconStarLight')
-        expect(icon).not.toHaveClass('transition--scale-entered')
+        expect(icon!.getAttribute('name')).toBe('Star')
+        expect(iconWrapper).not.toHaveClass('transition--scale-entered')
       },
       { timeout: 500 }
     )
@@ -120,10 +126,13 @@ describe('<RatingIcon />', () => {
     await waitFor(
       () => {
         const icon = container.querySelector('svg')
+        const iconWrapper = container.querySelector(
+          '[class*="ratingIcon__icon"]'
+        )
 
         expect(icon).toBeInTheDocument()
-        expect(icon!.getAttribute('name')).toBe('IconStar')
-        expect(icon).toHaveClass('transition--scale-entered')
+        expect(icon!.getAttribute('name')).toBe('StarSolid')
+        expect(iconWrapper).toHaveClass('transition--scale-entered')
       },
       { timeout: 500 }
     )

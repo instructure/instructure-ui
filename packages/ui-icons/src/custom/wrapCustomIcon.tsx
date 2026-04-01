@@ -101,6 +101,7 @@ export function wrapCustomIcon(
     const svgProps = {
       ...passthroughProps(rest),
       ref: handleElementRef,
+      name: iconName,
       viewBox,
       width: styles.numericSize,
       height: styles.numericSize,
