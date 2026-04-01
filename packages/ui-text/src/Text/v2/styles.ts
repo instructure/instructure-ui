@@ -206,7 +206,6 @@ const generateStyle = (
     borderRadius: 0,
     padding: 0,
     margin: 0,
-    color: 'inherit',
     height: 'auto',
     width: '100%',
     lineHeight: 'inherit',
