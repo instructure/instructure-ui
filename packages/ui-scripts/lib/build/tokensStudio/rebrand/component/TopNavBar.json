@@ -230,10 +230,6 @@
       "value": "{color.stroke.inverse}",
       "type": "color"
     },
-    "desktopBrandContainerInlineMargin": {
-      "value": "{spacing.spaceMd}",
-      "type": "spacing"
-    },
     "desktopActionItemsContainerInlineMargin": {
       "value": "{spacing.spaceXs}",
       "type": "spacing"
@@ -244,6 +240,10 @@
     },
     "smallViewportTrayFixTopPosition": {
       "value": "undefined",
+      "type": "other"
+    },
+    "desktopBrandContainerInlineMargin": {
+      "value": "0 1.5rem",
       "type": "other"
     }
   },
