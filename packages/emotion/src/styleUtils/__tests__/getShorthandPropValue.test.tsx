@@ -110,4 +110,18 @@ describe('getShorthandPropValue', () => {
     const r5 = getShorthandPropValue(name, theme, '15px .2rem', 'border', true)
     expect(r5).toEqual('15px .2rem')
   })
+
+  it('trims whitespaces correctly', () => {
+    const r1 = getShorthandPropValue(name, theme, 'x-small 0 0 ', 'border')
+    expect(r1).toEqual('0.1rem 0 0')
+    const r2 = getShorthandPropValue(name, theme, ' auto large 0', 'border')
+    expect(r2).toEqual('auto 0.3rem 0')
+    const r3 = getShorthandPropValue(
+      name,
+      theme,
+      ' auto    pill   0  ',
+      'border'
+    )
+    expect(r3).toEqual('auto 999em 0')
+  })
 })
