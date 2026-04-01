@@ -55,7 +55,7 @@ const Example = (props) => {
   }
 
   const renderViewer = () => {
-    return <span>{value}</span>
+    return <Text>{value}</Text>
   }
 
   const handleValueChange = (event) => {
@@ -68,8 +68,10 @@ const Example = (props) => {
 
   const renderEditor = ({ onBlur, editorRef }) => {
     return (
-      <input
-        ref={editorRef}
+      <TextInput
+        renderLabel=""
+        width="10rem"
+        inputRef={editorRef}
         onBlur={onBlur}
         value={value}
         onChange={handleValueChange}
