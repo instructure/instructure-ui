@@ -280,6 +280,14 @@ type: embed
 
 ```
 
+### Drilldown
+
+Drilldown itself has no token changes. However, its sub-components share tokens with Options components, so the token changes listed under Options apply here as well:
+
+- `Drilldown.Group` uses the same tokens as `Options`
+- `Drilldown.Option` uses the same tokens as `Options.Item`
+- `Drilldown.Separator` uses the same tokens as `Options.Separator`
+
 ### Flex
 
 Gap styling now uses `sharedTokens.legacySpacing`.

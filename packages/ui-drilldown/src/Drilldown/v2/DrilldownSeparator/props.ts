@@ -22,13 +22,35 @@
  * SOFTWARE.
  */
 
-export { Options } from '../Options/v2'
-export { Item as OptionItem } from '../Options/v2/Item'
-export { Separator as OptionSeparator } from '../Options/v2/Separator'
+import type {
+  OtherHTMLAttributes,
+  PickPropsWithExceptions,
+  AsElementType,
+  OptionsSeparatorTheme
+} from '@instructure/shared-types'
+import type { WithStyleProps } from '@instructure/emotion'
+import type { OptionsSeparatorProps } from '@instructure/ui-options'
 
-export type { OptionsProps } from '../Options/v2/props'
-export type {
-  OptionsItemProps,
-  OptionsItemRenderProps
-} from '../Options/v2/Item/props'
-export type { OptionsSeparatorProps } from '../Options/v2/Separator/props'
+type DrilldownSeparatorOwnProps = {
+  id: string
+
+  /**
+   * Element type to render as
+   */
+  as?: AsElementType
+}
+
+type PropKeys = keyof DrilldownSeparatorOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type DrilldownSeparatorProps =
+  // we are passing all props to Options.Separator
+  PickPropsWithExceptions<OptionsSeparatorProps, 'as'> &
+    DrilldownSeparatorOwnProps &
+    WithStyleProps<OptionsSeparatorTheme, null> &
+    OtherHTMLAttributes<DrilldownSeparatorOwnProps>
+const allowedProps: AllowedPropKeys = ['id', 'as']
+
+export type { DrilldownSeparatorProps }
+export { allowedProps }

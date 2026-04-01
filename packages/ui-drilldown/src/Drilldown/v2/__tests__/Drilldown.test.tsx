@@ -28,8 +28,8 @@ import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
-import { IconCheckSolid } from '@instructure/ui-icons'
-import { Popover } from '@instructure/ui-popover/v11_6'
+import { CheckInstUIIcon } from '@instructure/ui-icons'
+import { Popover } from '@instructure/ui-popover/latest'
 
 import { Drilldown } from '../index'
 
@@ -219,6 +219,7 @@ describe('<Drilldown />', () => {
           ></Drilldown.Page>
         </Drilldown>
       )
+
       // 1. Navigate to the disabled page
       await userEvent.click(screen.getByText('Go to Disabled Page'))
       expect(screen.getByText('Disabled Page')).toBeInTheDocument()
@@ -950,11 +951,14 @@ describe('<Drilldown />', () => {
             </Drilldown.Option>
             <Drilldown.Option
               id="item07"
-              renderBeforeLabel={<IconCheckSolid />}
+              renderBeforeLabel={<CheckInstUIIcon />}
             >
               Item7
             </Drilldown.Option>
-            <Drilldown.Option id="item08" renderAfterLabel={<IconCheckSolid />}>
+            <Drilldown.Option
+              id="item08"
+              renderAfterLabel={<CheckInstUIIcon />}
+            >
               Item8
             </Drilldown.Option>
 

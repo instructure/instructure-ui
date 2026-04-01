@@ -363,7 +363,7 @@ describe('<Drilldown.Group />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const icon = container.querySelector('svg[name="IconCheck"]')
+      const icon = container.querySelector('svg[name="Check"]')
       const groupOption = container.querySelector('#groupOption01')
 
       expect(icon).not.toBeInTheDocument()
@@ -380,7 +380,7 @@ describe('<Drilldown.Group />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const icon = container.querySelector('svg[name="IconCheck"]')
+      const icon = container.querySelector('svg[name="Check"]')
       const groupOption = container.querySelector('#groupOption01')
 
       expect(icon).toBeInTheDocument()
@@ -397,7 +397,7 @@ describe('<Drilldown.Group />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const icon = container.querySelector('svg[name="IconCheck"]')
+      const icon = container.querySelector('svg[name="Check"]')
       const groupOption = container.querySelector('#groupOption01')
 
       expect(icon).toBeInTheDocument()
@@ -451,7 +451,7 @@ describe('<Drilldown.Group />', () => {
             </Drilldown.Page>
           </Drilldown>
         )
-        const icons = container.querySelectorAll('svg[name="IconCheck"]')
+        const icons = container.querySelectorAll('svg[name="Check"]')
 
         expect(icons.length).toBe(3)
 
@@ -486,7 +486,7 @@ describe('<Drilldown.Group />', () => {
           </Drilldown>
         )
         const options = screen.getAllByRole('menuitemcheckbox')
-        const icons = container.querySelectorAll('svg')
+        const icons = container.querySelectorAll('svg[name="Check"]')
 
         expect(options[0]).toHaveAttribute('aria-checked', 'true')
         expect(options[1]).toHaveAttribute('aria-checked', 'false')
