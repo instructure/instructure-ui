@@ -24,21 +24,16 @@
 
 import { Component } from 'react'
 
-import { StarInstUIIcon, StarSolidInstUIIcon } from '@instructure/ui-icons'
+import { IconStarSolid, IconStarLightSolid } from '@instructure/ui-icons'
 import { requestAnimationFrame } from '@instructure/ui-dom-utils'
 import type { RequestAnimationFrameType } from '@instructure/ui-dom-utils'
 import { Transition } from '@instructure/ui-motion'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleLegacy as withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
+import generateComponentTheme from './theme'
 import type { RatingIconProps, RatingIconState } from './props'
 import { allowedProps } from './props'
-
-const ratingIconSizeToIconSize = {
-  small: 'md',
-  medium: 'lg',
-  large: 'xl'
-} as const
 
 /**
 ---
@@ -46,7 +41,7 @@ parent: Rating
 id: Rating.Icon
 ---
 **/
-@withStyle(generateStyle)
+@withStyle(generateStyle, generateComponentTheme)
 class RatingIcon extends Component<RatingIconProps, RatingIconState> {
   static readonly componentId = 'Rating.Icon'
 
@@ -108,9 +103,8 @@ class RatingIcon extends Component<RatingIconProps, RatingIconState> {
   }
 
   render() {
-    const { animateFill, size } = this.props
-    const Icon = this.state.filled ? StarSolidInstUIIcon : StarInstUIIcon
-    const iconSize = ratingIconSizeToIconSize[size!]
+    const { animateFill } = this.props
+    const Icon = this.state.filled ? IconStarSolid : IconStarLightSolid
 
     return (
       <span
@@ -122,14 +116,10 @@ class RatingIcon extends Component<RatingIconProps, RatingIconState> {
       >
         {this.state.filled && animateFill ? (
           <Transition in transitionOnMount type="scale">
-            <span css={this.props.styles?.icon}>
-              <Icon size={iconSize} />
-            </span>
+            <Icon css={this.props.styles?.icon} />
           </Transition>
         ) : (
-          <span css={this.props.styles?.icon}>
-            <Icon size={iconSize} />
-          </span>
+          <Icon css={this.props.styles?.icon} />
         )}
       </span>
     )

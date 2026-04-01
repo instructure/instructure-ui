@@ -30,7 +30,7 @@ type: example
       valueNow={68.45}
       valueMax={100}
     />
-    <Text>2/3</Text>
+    <div>2/3</div>
   </Flex>
   <Flex gap="x-small">
     <Rating
@@ -43,7 +43,7 @@ type: example
       valueNow={68.45}
       valueMax={100}
     />
-    <Text>3/5</Text>
+    <div>3/5</div>
   </Flex>
 </Flex>
 ```
@@ -66,7 +66,7 @@ type: example
       valueNow={3.76}
       valueMax={5}
       margin="small"/>
-    <Text>4/5</Text>
+    <div>4/5</div>
   </Flex>
   <Flex>
     <Rating
@@ -76,7 +76,7 @@ type: example
       valueMax={100}
       margin="small"
     />
-    <Text>2/5</Text>
+    <div>2/5</div>
   </Flex>
   <Flex>
     <Rating
@@ -87,7 +87,7 @@ type: example
       valueNow={8}
       valueMax={8}
       margin="small"/>
-    <Text>5/5</Text>
+    <div>5/5</div>
   </Flex>
 </Flex>
 ```

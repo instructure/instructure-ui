@@ -27,7 +27,7 @@ import { vi } from 'vitest'
 
 import '@testing-library/jest-dom'
 import { runAxeCheck } from '@instructure/ui-axe-check'
-import { View } from '@instructure/ui-view/v11_6'
+import { View } from '@instructure/ui-view/latest'
 
 import { Rating } from '../index'
 
@@ -55,7 +55,7 @@ describe('<Rating />', () => {
         valueMax={100}
       />
     )
-    const filledIcons = container.querySelectorAll('svg[name="IconStar"]')
+    const filledIcons = container.querySelectorAll('svg[name="StarSolid"]')
 
     expect(filledIcons).toHaveLength(4)
   })

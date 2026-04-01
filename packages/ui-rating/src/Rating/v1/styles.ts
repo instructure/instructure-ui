@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
-import type { RatingIconProps, RatingIconState, RatingIconStyle } from './props'
+import type { RatingStyle } from './props'
 
 /**
  * ---
@@ -35,35 +34,11 @@ import type { RatingIconProps, RatingIconState, RatingIconStyle } from './props'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (
-  componentTheme: NewComponentTypes['RatingIcon'],
-  _props: RatingIconProps,
-  state: RatingIconState,
-  _sharedTokens: SharedTokens
-): RatingIconStyle => {
-  const { filled } = state
-
+const generateStyle = (): RatingStyle => {
   return {
-    ratingIcon: {
-      label: 'ratingIcon',
-      display: 'inline-block',
-      verticalAlign: 'bottom',
-      margin: `0 ${componentTheme.iconMargin}`,
-      lineHeight: 1,
-      '&:first-of-type': {
-        marginLeft: 0
-      },
-      '&:last-of-type': {
-        marginRight: 0
-      }
-    },
-    icon: {
-      label: 'ratingIcon__icon',
-      display: 'inline-block',
-      verticalAlign: 'bottom',
-      color: filled
-        ? componentTheme.iconFilledColor
-        : componentTheme.iconEmptyColor
+    rating: {
+      label: 'rating',
+      lineHeight: 1
     }
   }
 }
