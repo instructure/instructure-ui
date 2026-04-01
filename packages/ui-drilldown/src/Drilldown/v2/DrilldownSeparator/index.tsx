@@ -22,13 +22,36 @@
  * SOFTWARE.
  */
 
-export { Options } from '../Options/v2'
-export { Item as OptionItem } from '../Options/v2/Item'
-export { Separator as OptionSeparator } from '../Options/v2/Separator'
+import { Component } from 'react'
 
-export type { OptionsProps } from '../Options/v2/props'
-export type {
-  OptionsItemProps,
-  OptionsItemRenderProps
-} from '../Options/v2/Item/props'
-export type { OptionsSeparatorProps } from '../Options/v2/Separator/props'
+import { withStyle } from '@instructure/emotion'
+
+import { allowedProps } from './props'
+import type { DrilldownSeparatorProps } from './props'
+
+/**
+---
+parent: Drilldown
+id: Drilldown.Separator
+themeId: OptionsSeparator
+---
+@module DrilldownSeparator
+**/
+// needed for listing the available theme variables on docs page,
+// we pass the themeOverrides to Options.Separator
+@withStyle(null)
+class DrilldownSeparator extends Component<DrilldownSeparatorProps> {
+  static readonly componentId = 'Drilldown.Separator'
+
+  static allowedProps = allowedProps
+  static defaultProps = {}
+
+  render() {
+    // this component is only used for prop validation. Drilldown.Separator children
+    // are parsed in Drilldown and rendered as Options.Separator components
+    return null
+  }
+}
+
+export default DrilldownSeparator
+export { DrilldownSeparator }

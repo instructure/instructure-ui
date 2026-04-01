@@ -22,27 +22,44 @@
  * SOFTWARE.
  */
 
-import type { Theme } from '@instructure/ui-themes'
-import { OptionsSeparatorTheme } from '@instructure/shared-types'
+import { Component } from 'react'
+
+import { withStyle } from '@instructure/emotion'
+
+import { allowedProps } from './props'
+import type { DrilldownOptionProps } from './props'
 
 /**
- * Generates the theme object for the component from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @return {Object} The final theme object with the overrides and component variables
- */
-const generateComponentTheme = (theme: Theme): OptionsSeparatorTheme => {
-  const { borders, colors, spacing } = theme
+---
+parent: Drilldown
+id: Drilldown.Option
+themeId: OptionsItem
+---
+@module DrilldownOption
+**/
+// needed for listing the available theme variables on docs page,
+// we pass the themeOverrides to Options.Item
+@withStyle(null)
+class DrilldownOption extends Component<DrilldownOptionProps> {
+  static readonly componentId = 'Drilldown.Option'
 
-  const componentVariables: OptionsSeparatorTheme = {
-    background: colors?.contrasts?.grey3045,
-    height: borders?.widthSmall,
-    margin: `0 ${spacing?.small}`
+  static allowedProps = allowedProps
+
+  static defaultProps = {
+    disabled: false,
+    beforeLabelContentVAlign: 'start',
+    afterLabelContentVAlign: 'start',
+    as: 'li',
+    role: 'menuitem',
+    shouldCloseOnClick: 'auto'
   }
 
-  return {
-    ...componentVariables
+  render() {
+    // this component is only used for prop validation. Drilldown.Option children
+    // are parsed in Drilldown and rendered as Options.Item components
+    return null
   }
 }
 
-export { generateComponentTheme as optionsSeparatorThemeGenerator }
-export default generateComponentTheme
+export default DrilldownOption
+export { DrilldownOption }

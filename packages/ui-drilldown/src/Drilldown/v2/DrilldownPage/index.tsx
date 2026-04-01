@@ -22,13 +22,34 @@
  * SOFTWARE.
  */
 
-export { Options } from '../Options/v2'
-export { Item as OptionItem } from '../Options/v2/Item'
-export { Separator as OptionSeparator } from '../Options/v2/Separator'
+import { Component } from 'react'
 
-export type { OptionsProps } from '../Options/v2/props'
-export type {
-  OptionsItemProps,
-  OptionsItemRenderProps
-} from '../Options/v2/Item/props'
-export type { OptionsSeparatorProps } from '../Options/v2/Separator/props'
+import { allowedProps } from './props'
+import type { DrilldownPageProps } from './props'
+
+/**
+---
+parent: Drilldown
+id: Drilldown.Page
+---
+@module DrilldownPage
+**/
+class DrilldownPage extends Component<DrilldownPageProps> {
+  static readonly componentId = 'Drilldown.Page'
+
+  static allowedProps = allowedProps
+  static defaultProps = {
+    renderBackButtonLabel: 'Back',
+    disabled: false,
+    withoutHeaderSeparator: false
+  }
+
+  render() {
+    // this component is only used for prop validation.
+    // Drilldown.Page children are parsed in Drilldown.
+    return null
+  }
+}
+
+export default DrilldownPage
+export { DrilldownPage }
