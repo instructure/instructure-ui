@@ -73,7 +73,7 @@
       "type": "color"
     },
     "defaultSelectedBorderColor": {
-      "value": "{color.stroke.brand}",
+      "value": "{color.institutional.brandPrimary}",
       "type": "color"
     },
     "fontFamily": {
