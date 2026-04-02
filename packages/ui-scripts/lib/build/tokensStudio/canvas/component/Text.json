@@ -97,7 +97,7 @@
       "type": "color"
     },
     "primaryColor": {
-      "value": "{color.text.interactive.navigation.primary.base}",
+      "value": "{color.institutional.brandPrimary}",
       "type": "color"
     },
     "errorColor": {

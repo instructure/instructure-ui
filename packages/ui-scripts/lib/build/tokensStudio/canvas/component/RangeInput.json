@@ -1,24 +1,24 @@
 {
   "rangeInput": {
     "handleBackground": {
-      "value": "{color.background.brand}",
+      "value": "{color.institutional.brandPrimary}",
       "type": "color"
     },
     "handleHoverBackground": {
-      "value": "{color.background.brand}",
+      "value": "{color.institutional.brandPrimary}",
       "type": "color"
     },
     "handleFocusBackground": {
-      "value": "{color.background.brand}",
+      "value": "{color.institutional.brandPrimary}",
       "type": "color"
     },
     "handleFocusOutlineColor": {
-      "value": "{color.background.brand}",
+      "value": "{color.institutional.brandPrimary}",
       "type": "color",
       "description": "Deprecated, remove with \"deprecated\" thumbVariant"
     },
     "handleShadowColor": {
-      "value": "{color.background.brand}",
+      "value": "{color.institutional.brandPrimary}",
       "type": "color",
       "description": "Deprecated, remove with \"deprecated\" thumbVariant\n"
     },
