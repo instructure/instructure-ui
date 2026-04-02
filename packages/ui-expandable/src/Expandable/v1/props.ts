@@ -24,7 +24,7 @@
 
 import { JSX } from 'react'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
-import type { ViewProps } from '@instructure/ui-view'
+import type { ViewProps } from '@instructure/ui-view/latest'
 
 type ExpandableToggleProps = (props?: {
   onClick?: (
