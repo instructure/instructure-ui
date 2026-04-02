@@ -1417,6 +1417,44 @@
     "transparentColor": {
       "value": "{color.transparent}",
       "type": "color"
+    },
+    "institutional": {
+      "brandPrimary": {
+        "value": "{color.blue.blue100}",
+        "type": "color"
+      },
+      "brandFontColorDark": {
+        "value": "{color.grey.grey170}",
+        "type": "color"
+      },
+      "linkColor": {
+        "value": "{color.blue.blue100}",
+        "type": "color"
+      },
+      "brandButtonPrimaryBgd": {
+        "value": "{color.blue.blue100}",
+        "type": "color"
+      },
+      "brandButtonPrimaryText": {
+        "value": "{color.white}",
+        "type": "color"
+      },
+      "brandGlobalNavBgd": {
+        "value": "{color.grey.grey150}",
+        "type": "color"
+      },
+      "globalNavLinkHover": {
+        "value": "{color.grey.grey170}",
+        "type": "color"
+      },
+      "brandGlobalNavMenuItemTextColor": {
+        "value": "{color.white}",
+        "type": "color"
+      },
+      "brandGlobalNavMenuItemTextColorActive": {
+        "value": "{color.grey.grey170}",
+        "type": "color"
+      }
     }
   },
   "dropShadow": {
