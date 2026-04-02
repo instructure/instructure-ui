@@ -262,8 +262,7 @@ describe('<SourceCodeEditor />', () => {
           highlightActiveLine
         />
       )
-      const allLines = container.querySelectorAll('[class$="cm-line"]')!
-
+      const allLines = container.querySelectorAll('.cm-line')!
       expect(allLines[0]).toHaveClass('cm-activeLine')
     })
   })
