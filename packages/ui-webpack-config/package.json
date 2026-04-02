@@ -26,7 +26,7 @@
     "style-loader": "^4.0.0",
     "terser-webpack-plugin": "^5.3.14",
     "thread-loader": "^4.0.4",
-    "webpack": "^5.99.9"
+    "webpack": "^5.105.4"
   },
   "publishConfig": {
     "access": "public"
