@@ -21,9 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { Expandable } from './Expandable'
+export { Expandable } from '../Expandable/v1'
 export type {
   ExpandableProps,
   RenderExpandable,
   ExpandableToggleProps
-} from './Expandable/props'
+} from '../Expandable/v1/props'

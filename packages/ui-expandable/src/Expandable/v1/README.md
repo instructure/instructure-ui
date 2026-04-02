@@ -23,7 +23,7 @@ type: example
           I am expanded? {expanded.toString()}
         </Button>
         {expanded ? <div {...getDetailsProps()}>
-          This is the content that will display under the Expandable
+          <Text>This is the content that will display under the Expandable</Text>
         </div> : null}
       </div>
     )
