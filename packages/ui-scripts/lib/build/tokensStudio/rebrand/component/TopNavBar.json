@@ -53,11 +53,11 @@
       "type": "fontWeights"
     },
     "color": {
-      "value": "{color.text.inverse}",
+      "value": "{color.text.base}",
       "type": "color"
     },
     "colorInverse": {
-      "value": "{color.text.base}",
+      "value": "{color.text.inverse}",
       "type": "color"
     },
     "itemInlinePadding": {
@@ -231,7 +231,7 @@
       "type": "color"
     },
     "desktopActionItemsContainerInlineMargin": {
-      "value": "{spacing.spaceXs}",
+      "value": "{spacing.spaceXs} 0",
       "type": "spacing"
     },
     "smallViewportFontSize": {
