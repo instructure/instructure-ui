@@ -16,6 +16,7 @@ __build__
 .pnpm-store/
 
 tsconfig.build.tsbuildinfo
+tsconfig.node.build.tsbuildinfo
 
 .pnp.*
 

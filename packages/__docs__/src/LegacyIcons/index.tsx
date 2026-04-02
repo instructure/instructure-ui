@@ -191,7 +191,7 @@ const LegacyIconsPage = ({ iconData }: LegacyIconsPageProps) => {
     styleType: StyleType
   } | null>(null)
   const [rtl, setRtl] = useState<boolean>(false)
-  const timeoutId = useRef<NodeJS.Timeout | null>(null)
+  const timeoutId = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const handleSearchChange = (_e: ChangeEvent, value: string) => {
     // don't debounce when typing, it should be instant because of React.memo

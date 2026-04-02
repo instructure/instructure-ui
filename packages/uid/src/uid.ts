@@ -24,6 +24,8 @@
 
 //  based on: https://github.com/ai/nanoid/blob/main/non-secure/index.js
 
+declare const process: Record<string, any> | undefined
+
 const dictionary =
   'getRandomVcryp0123456789bfhijklqsuvwxzABCDEFGHIJKLMNOPQSTUWXYZ'
 const dictionaryLengthMinus1 = dictionary.length - 1

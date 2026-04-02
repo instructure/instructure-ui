@@ -34,6 +34,7 @@ import ReactDOM from 'react-dom'
 
 import { LoremIpsum } from 'lorem-ipsum'
 import moment from 'moment'
+// @ts-expect-error no type declarations for moment locales side-effect import
 import 'moment/min/locales'
 
 import { mirrorHorizontalPlacement } from '@instructure/ui-position'
@@ -42,8 +43,11 @@ import { getComponentsForVersion } from './versioned-components'
 import { dark, light } from '@instructure/ui-themes'
 import { debounce } from '@instructure/debounce'
 
+// @ts-expect-error no type declarations for CSS side-effect import
 // eslint-disable-next-line @instructure/no-relative-imports
 import '../ui-icons/src/generated/icon-font/Solid/InstructureIcons-Solid.css'
+
+// @ts-expect-error no type declarations for CSS side-effect import
 // eslint-disable-next-line @instructure/no-relative-imports
 import '../ui-icons/src/generated/icon-font/Line/InstructureIcons-Line.css'
 
@@ -109,7 +113,7 @@ const globals: Record<string, any> = {
 }
 
 Object.keys(globals).forEach((key) => {
-  ;(global as any)[key] = globals[key]
+  ;(globalThis as any)[key] = globals[key]
 })
 
 /**
@@ -119,7 +123,7 @@ Object.keys(globals).forEach((key) => {
 function updateGlobalsForVersion(version: string) {
   const versionComponents = getComponentsForVersion(version)
   Object.keys(versionComponents).forEach((key) => {
-    ;(global as any)[key] = versionComponents[key]
+    ;(globalThis as any)[key] = versionComponents[key]
   })
 }
 

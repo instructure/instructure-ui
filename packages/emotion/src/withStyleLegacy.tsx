@@ -83,6 +83,8 @@ type WithStyleProps<
   ? WithStylePrivateProps<Style>
   : WithStylePrivateProps<Style> & ThemeOverrideProp<Theme>
 
+declare const process: Record<string, any> | undefined
+
 const defaultValues = {
   styles: {},
   makeStyles: () => {}

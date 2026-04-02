@@ -30,7 +30,14 @@ import renameGetComputedStyleToGetCSSStyleDeclaration from '../renameGetComputed
 import warnTableCaptionMissing from '../warnTableCaptionMissing'
 import warnCodeEditorRemoved from '../warnCodeEditorRemoved'
 import migrateToNewIcons from '../migrateToNewIcons'
-import { type MockInstance, vi } from 'vitest'
+import {
+  describe,
+  it,
+  beforeEach,
+  afterEach,
+  type MockInstance,
+  vi
+} from 'vitest'
 
 describe('test codemods', () => {
   let consoleLogMock: ReturnType<typeof vi.spyOn>

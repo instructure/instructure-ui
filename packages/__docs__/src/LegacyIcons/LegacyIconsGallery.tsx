@@ -177,7 +177,6 @@ const LegacyIconTile = memo(
 )
 LegacyIconTile.displayName = 'LegacyIconTile'
 
-
 const LegacyIconsGallery = ({ glyphs }: LegacyIconsGalleryProps) => {
   const [selectedFormat, setSelectedFormat] = useState<Format>('react')
   const [searchQuery, setSearchQuery] = useState<string>('')
@@ -187,7 +186,7 @@ const LegacyIconsGallery = ({ glyphs }: LegacyIconsGalleryProps) => {
     styleType: StyleType
   } | null>(null)
   const [rtl, setRtl] = useState<boolean>(false)
-  const timeoutId = useRef<NodeJS.Timeout | null>(null)
+  const timeoutId = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   // Debounced search
   const handleSearchChange = useCallback((_e: ChangeEvent, value: string) => {
@@ -290,7 +289,7 @@ const LegacyIconsGallery = ({ glyphs }: LegacyIconsGalleryProps) => {
           flexWrap: 'wrap',
           margin: '0 auto',
           paddingTop: '1rem',
-          gap: '1rem',
+          gap: '1rem'
         }}
       >
         {filteredGlyphs.map((glyph) => (

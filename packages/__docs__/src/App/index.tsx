@@ -755,7 +755,6 @@ class App extends Component<AppProps, AppState> {
     return (
       <InstUISettingsProvider>
         <Hero
-          name={library.name}
           docs={{ ...docs, ...themeDocs }}
           repository={library.repository}
           version={
@@ -893,9 +892,9 @@ class App extends Component<AppProps, AppState> {
   }
 
   renderFooter() {
-    const { author, repository } = this.state.docsData!.library
+    const { author } = this.state.docsData!.library
 
-    return author || repository ? (
+    return (
       <View as="footer" textAlign="center" padding="large medium">
         {author && (
           <AccessibleContent alt={`Made with love by ${author}`}>
@@ -912,11 +911,11 @@ class App extends Component<AppProps, AppState> {
           </AccessibleContent>
         )}
       </View>
-    ) : null
+    )
   }
 
   renderNavigation() {
-    const { name, version } = this.state.docsData!.library
+    const { version } = this.state.docsData!.library
     const { key, layout, showMenu, versionsData } = this.state
     // Render nothing when the menu is not shown and the layout isn't small
     // When the layout is small, we still render the tray so that it can properly
@@ -947,7 +946,6 @@ class App extends Component<AppProps, AppState> {
         </View>
 
         <Header
-          name={name === 'instructure-ui' ? 'v' : name}
           version={version}
           versionsData={versionsData}
           minorVersionsData={this.state.minorVersionsData}
@@ -1064,7 +1062,7 @@ class App extends Component<AppProps, AppState> {
           {this.renderNavigation()}
           <div
             css={this.props.styles?.content}
-            aria-label={key || docsData.library.name}
+            aria-label={key || 'instructure-ui'}
             ref={this.handleContentRef}
           >
             {!showMenu && (

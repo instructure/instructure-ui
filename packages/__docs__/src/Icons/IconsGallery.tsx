@@ -91,7 +91,7 @@ const IconTile = memo(
           flexDirection: 'column',
           minWidth: '14em',
           flexBasis: '14em',
-          flexGrow: 1,
+          flexGrow: 1
         }}
       >
         <div
@@ -159,7 +159,7 @@ const IconsGallery = () => {
   const [searchQuery, setSearchQuery] = useState<string>('')
   const [selectedIcon, setSelectedIcon] = useState<IconInfo | null>(null)
   const [rtl, setRtl] = useState<boolean>(false)
-  const searchTimeoutId = useRef<NodeJS.Timeout | null>(null)
+  const searchTimeoutId = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const handleSearchChange = (_e: ChangeEvent, value: string) => {
     // Instant update when extending query (typing adds characters)
@@ -226,7 +226,7 @@ const IconsGallery = () => {
           flexWrap: 'wrap',
           margin: '0 auto',
           paddingTop: '1rem',
-          gap: '1rem',
+          gap: '1rem'
         }}
       >
         {filteredIcons.map((icon) => (

@@ -40,6 +40,8 @@ import generateStyle from './styles'
 import { allowedProps } from './props'
 import type { ViewProps } from './props'
 
+declare const process: Record<string, any> | undefined
+
 /**
 ---
 category: components

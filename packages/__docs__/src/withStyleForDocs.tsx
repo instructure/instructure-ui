@@ -290,12 +290,7 @@ const withStyleForDocs = decorator(
       styles: defaultValues.styles
     }
 
-    if (
-      typeof process !== 'undefined' &&
-      process?.env?.NODE_ENV !== 'production'
-    ) {
-      WithStyle.displayName = `WithStyle(${displayName})`
-    }
+    WithStyle.displayName = `WithStyle(${displayName})`
 
     return WithStyle
   }
