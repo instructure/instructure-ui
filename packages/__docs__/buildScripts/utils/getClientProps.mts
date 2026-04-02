@@ -22,11 +22,11 @@
  * SOFTWARE.
  */
 
-import type { LibraryOptions, ParsedDoc, ProcessedFile } from '../DataTypes.mjs'
+import type { ParsedDoc, ProcessedFile } from '../DataTypes.mjs'
 
 const CATEGORY_DELIMITER = '/'
 
-export function getClientProps(docs: ProcessedFile[], library: LibraryOptions) {
+export function getClientProps(docs: ProcessedFile[]) {
   const parsed: ParsedDoc = {
     sections: {
       __uncategorized: {
@@ -102,7 +102,6 @@ export function getClientProps(docs: ProcessedFile[], library: LibraryOptions) {
         if (
           !parent &&
           !describes &&
-          id !== library.name &&
           id !== 'CHANGELOG'
         ) {
           parsed.sections.__uncategorized.docs.push(id)

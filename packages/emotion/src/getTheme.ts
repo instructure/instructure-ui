@@ -31,6 +31,7 @@ import type {
   ThemeOrOverride,
   SpecificThemeOverride
 } from './EmotionTypes'
+declare const process: Record<string, any> | undefined
 
 /**
  * ---

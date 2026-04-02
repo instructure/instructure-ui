@@ -64,6 +64,8 @@ interface ForwardRefComponentWithStatics
   propTypes?: any
   allowedProps?: any
 }
+
+declare const process: Record<string, any> | undefined
 /**
  * ---
  * category: utilities/i18n

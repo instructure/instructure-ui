@@ -41,6 +41,8 @@ import generateComponentTheme from './theme'
 import { allowedProps } from './props'
 import type { ViewProps } from './props'
 
+declare const process: Record<string, any> | undefined
+
 /**
 ---
 category: components

@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 import React from 'react'
+declare const process: Record<string, any> | undefined
 
 let loggedInitialDeprecationWarning = false
 

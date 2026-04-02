@@ -164,7 +164,7 @@ class Header extends Component<HeaderProps> {
   }
 
   renderVersionsBlock = () => {
-    const { versionsData, minorVersionsData, name } = this.props
+    const { versionsData, minorVersionsData } = this.props
     const { latestVersion, previousVersions } = versionsData
     const allVersions = [latestVersion, ...previousVersions]
 
@@ -186,11 +186,8 @@ class Header extends Component<HeaderProps> {
           trigger={
             <CondensedButton>
               <Text size="large">
-                {name && displayVersion ? (
-                  <span>
-                    {name}
-                    {displayVersion}
-                  </span>
+                {displayVersion ? (
+                  <span>v{displayVersion}</span>
                 ) : (
                   'Documentation'
                 )}
@@ -251,10 +248,7 @@ class Header extends Component<HeaderProps> {
               }}
             >
               <View display="block" margin="small none none">
-                <Text size="large">
-                  {this.props.name}
-                  {this.getDisplayVersion()}
-                </Text>
+                <Text size="large">v{this.getDisplayVersion()}</Text>
               </View>
             </Link>
           )}

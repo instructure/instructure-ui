@@ -1,6 +1,7 @@
 {
   "extends": "../../tsconfig.node.json",
   "compilerOptions": {
+    "rootDir": "./buildScripts",
     "declarationDir": "./types",
     "module": "Node16",
     "moduleResolution": "Node16",

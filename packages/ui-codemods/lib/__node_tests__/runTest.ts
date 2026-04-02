@@ -27,7 +27,7 @@ import fs from 'fs'
 // eslint-disable-next-line no-restricted-imports
 import { runInlineTest } from 'jscodeshift/src/testUtils'
 import jscodeshift, { Transform } from 'jscodeshift'
-import { vi } from 'vitest'
+import { expect, vi } from 'vitest'
 
 /**
  * A helper function to run codemods. For it work properly some conventions
