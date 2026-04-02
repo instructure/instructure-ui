@@ -25,7 +25,7 @@
       "type": "color"
     },
     "colorPrimary": {
-      "value": "{color.background.info}",
+      "value": "{color.institutional.brandPrimary}",
       "type": "color"
     },
     "fontSize": {

@@ -25,7 +25,7 @@
       "type": "borderWidth"
     },
     "hoverBorderColor": {
-      "value": "{color.stroke.brand}",
+      "value": "{color.institutional.brandPrimary}",
       "type": "color"
     },
     "rejectedColor": {

@@ -41,7 +41,7 @@
   },
   "menuItem": {
     "activeBackground": {
-      "value": "{color.background.interactive.action.primary.base}",
+      "value": "{color.institutional.brandPrimary}",
       "type": "color"
     },
     "activeLabelColor": {

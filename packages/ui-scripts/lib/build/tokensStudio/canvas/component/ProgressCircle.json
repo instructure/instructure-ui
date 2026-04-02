@@ -109,7 +109,7 @@
       "type": "color"
     },
     "meterColorBrand": {
-      "value": "{color.stroke.brand}",
+      "value": "{color.institutional.brandPrimary}",
       "type": "color"
     },
     "meterColorBrandInverse": {

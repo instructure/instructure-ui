@@ -67,7 +67,7 @@
       "type": "color"
     },
     "todayBackground": {
-      "value": "{color.background.interactive.action.primary.base}",
+      "value": "{color.institutional.brandPrimary}",
       "type": "color"
     },
     "fontSize": {
