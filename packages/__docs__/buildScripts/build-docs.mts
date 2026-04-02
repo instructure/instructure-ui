@@ -52,17 +52,15 @@ const require = createRequire(import.meta.url)
 
 // This needs to be required, otherwise TSC will mess up the directory structure
 // in the output directory
-// eslint-disable-next-line @instructure/no-relative-imports
-const rootPackage = require('../../../package.json') // root package.json
+const packageJson = require('../package.json')
 
 const buildDir = './__build__/'
 const projectRoot = path.resolve(__dirname, '../../../')
 const packagesDir = '../..'
 const library: LibraryOptions = {
-  name: rootPackage.name,
-  version: rootPackage.version,
-  repository: rootPackage.repository.url,
-  author: rootPackage.author,
+  version: packageJson.version,
+  repository: packageJson.repository.url,
+  author: packageJson.author,
   packages: 'packages',
   scope: '@instructure'
 }
@@ -202,7 +200,7 @@ async function buildDocs() {
         `Building docs for ${libVersion}: ${versionDocs.length} docs`
       )
 
-      const clientProps = getClientProps(versionDocs, library)
+      const clientProps = getClientProps(versionDocs)
       const mainDocsData: MainDocsData = {
         ...clientProps,
         themes,

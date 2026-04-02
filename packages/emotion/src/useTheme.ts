@@ -28,6 +28,8 @@ import { isEmpty } from '@instructure/ui-utils'
 
 import type { BaseThemeOrOverride } from './EmotionTypes'
 
+declare const process: Record<string, any> | undefined
+
 /**
  * ---
  * private: true

@@ -25,7 +25,6 @@
 import type { MinorVersionData } from '../../buildScripts/DataTypes.mts'
 
 type HeaderOwnProps = {
-  name: string
   version: string
   versionsData: {
     latestVersion: string
@@ -42,7 +41,6 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type HeaderProps = HeaderOwnProps
 const allowedProps: AllowedPropKeys = [
-  'name',
   'version',
   'versionsData',
   'minorVersionsData',

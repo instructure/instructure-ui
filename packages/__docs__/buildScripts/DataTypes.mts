@@ -95,7 +95,6 @@ type JSDocFunctionReturns = {
 }
 
 type LibraryOptions = {
-  name: string
   version: string
   repository: string
   author: string

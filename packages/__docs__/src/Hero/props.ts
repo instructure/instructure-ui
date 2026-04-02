@@ -25,7 +25,6 @@ import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 import type { ParsedDocSummary } from '../../buildScripts/DataTypes.mjs'
 
 type HeroOwnProps = {
-  name: string
   repository: string
   version: string
   layout: 'small' | 'medium' | 'large' | 'x-large'
@@ -40,7 +39,6 @@ type HeroProps = HeroOwnProps & WithStyleProps<HeroTheme, HeroStyle>
 const allowedProps: AllowedPropKeys = [
   'docs',
   'layout',
-  'name',
   'repository',
   'version'
 ]

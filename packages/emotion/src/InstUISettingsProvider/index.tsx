@@ -32,6 +32,7 @@ import { getTheme } from '../getTheme'
 
 import type { ThemeOrOverride } from '../EmotionTypes'
 import type { DeterministicIdProviderValue } from '@instructure/ui-react-utils'
+declare const process: Record<string, any> | undefined
 
 type InstUIProviderProps = {
   children?: React.ReactNode

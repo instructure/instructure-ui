@@ -36,6 +36,8 @@ import { generateId } from '@instructure/ui-utils'
 import type { InstUIComponent } from '@instructure/shared-types'
 import { warn } from '@instructure/console'
 
+declare const process: Record<string, any> | undefined
+
 type WithDeterministicIdProps = {
   deterministicId?: (instanceName?: string) => string
 }
