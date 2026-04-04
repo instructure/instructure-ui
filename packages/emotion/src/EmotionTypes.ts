@@ -104,7 +104,7 @@ type Overrides = {
 
 type BaseThemeOrOverride = Theme | PartialTheme | Overrides
 
-type ThemeOrOverride =
+type ThemeOrLegacyOverride =
   | BaseThemeOrOverride
   | ((theme: BaseTheme) => BaseThemeOrOverride)
 
@@ -147,7 +147,7 @@ export interface StyleObject {
 
 export type {
   BaseThemeOrOverride,
-  ThemeOrOverride,
+  ThemeOrLegacyOverride,
   Overrides,
   ComponentOverride,
   SpecificThemeOverride,
