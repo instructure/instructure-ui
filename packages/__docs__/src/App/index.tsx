@@ -554,7 +554,6 @@ class App extends Component<AppProps, AppState> {
       ? allThemeKeys
       : ['canvas', 'canvas-high-contrast']
     const smallScreen = this.state.layout === 'small'
-
     const displayThemeName = (themeKey: string) => {
       if (
         showNewThemes &&

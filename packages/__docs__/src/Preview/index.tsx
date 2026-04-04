@@ -32,6 +32,7 @@ import { compileAndRenderExample } from '../compileAndRenderExample'
 import { allowedProps } from './props'
 import type { PreviewProps, PreviewState } from './props'
 import * as themes from '@instructure/ui-themes'
+import { camelize } from '@instructure/ui-utils'
 
 @withStyle(generateStyle, generateComponentTheme)
 class Preview extends Component<PreviewProps, PreviewState> {
@@ -89,7 +90,7 @@ class Preview extends Component<PreviewProps, PreviewState> {
       <div css={styles?.preview}>
         {/*TODO-theme-types: fix getTheme typing*/}
         {/*@ts-expect-error types*/}
-        <InstUISettingsProvider theme={themes?.[themeKey!]}>
+        <InstUISettingsProvider theme={themes?.[camelize(themeKey)!]}>
           <TextDirectionContext.Provider value={dir}>
             <div dir={dir}>{compiledCode}</div>
           </TextDirectionContext.Provider>
