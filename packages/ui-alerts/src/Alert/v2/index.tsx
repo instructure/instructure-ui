@@ -49,6 +49,7 @@ import generateStyle from './styles'
 
 import { allowedProps } from './props'
 import type { AlertProps, AlertState } from './props'
+import frozenThemes from '@instructure/ui-themes/v11_7'
 
 /**
 ---
@@ -56,7 +57,7 @@ category: components
 ---
 **/
 @withDeterministicId()
-@withStyle(generateStyle)
+@withStyle(generateStyle, null, frozenThemes)
 class Alert extends Component<AlertProps, AlertState> {
   static readonly componentId = 'Alert'
 

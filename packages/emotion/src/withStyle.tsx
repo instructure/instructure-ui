@@ -148,9 +148,10 @@ const defaultValues = {
  */
 const withStyle = decorator(
   (
-    ComposedComponent: WithStyleComponent,
+    ComposedComponent: any,
     generateStyle: GenerateStyleRework,
-    useTokensFrom?: keyof NewComponentTypes
+    useTokensFrom?: keyof NewComponentTypes,
+    frozenTheme?: any
   ) => {
     const displayName = ComposedComponent.displayName || ComposedComponent.name
 
@@ -163,7 +164,26 @@ const withStyle = decorator(
       originalType?: WithStyleComponent
       defaultProps?: Partial<any>
     } = forwardRef((props, ref) => {
-      const theme = useTheme() as Theme
+      const themeInContext = useTheme() as Theme
+      const themeKey = themeInContext.key
+
+      // this is for the new overrides. theme.themeOverride has all the overrides
+      const themeOverride = themeInContext.themeOverride
+
+      // if a new theme has been added to the lib since this component version has been frozen, it can't be used with this
+      // theme, so we throw an error. Solution: upgrade to the latest version, it will support it
+      if (frozenTheme && !frozenTheme[themeKey]) {
+        throw new Error(
+          `The version of ${displayName} you are using does not support the currently applied "${themeKey}" theme. ` +
+            `Please upgrade to the latest version of ${displayName}.`
+        )
+      }
+
+      // if this component is an older component version but still uses the new theming system, it'll have a frozenTheme
+      // object passed to it. We use that instead of the current theme so backward compatibility stays intact
+      const theme = frozenTheme
+        ? { newTheme: frozenTheme[themeKey] }
+        : themeInContext
 
       if (props.styles) {
         warn(
@@ -188,33 +208,38 @@ const withStyle = decorator(
 
       const componentWithTokensId = useTokensFrom ?? componentId
 
-      const primitiveOverrides = (theme as Theme).themeOverride?.primitives
-      const semanticsOverrides = (theme as Theme).themeOverride?.semantics
+      // resolving the theming functions and applying the overrides
+      const primitiveOverrides = themeOverride?.primitives
+      const semanticsOverrides = themeOverride?.semantics
 
       const primitives = mergeDeep(
         theme.newTheme.primitives,
         primitiveOverrides
       )
-      //override primitives here
+
       const semantics = mergeDeep(
         theme.newTheme.semantics?.(primitives),
         semanticsOverrides
       )
-      //override semantics here
-      const baseComponentTheme =
+
+      const baseComponentTheme = mergeDeep(
         theme.newTheme.components[
           componentWithTokensId as keyof NewComponentTypes
-        ]?.(semantics)
+          // TODO-theme-types: fix typing
+          // @ts-expect-error fix
+        ]?.(semantics),
+        themeOverride?.components?.[
+          componentWithTokensId as keyof NewComponentTypes
+        ]
+      )
 
-      const themeOverride = getComponentThemeOverride(
-        theme,
-        displayName,
-        ComposedComponent.componentId,
+      const derivedThemeOverride = getComponentThemeOverride(
         (componentProps as ThemeOverrideProp).themeOverride,
-        baseComponentTheme
+        baseComponentTheme,
+        themeInContext
       )
       const sharedTokens = theme.newTheme.sharedTokens?.(semantics)
-      const componentTheme = { ...baseComponentTheme, ...themeOverride }
+      const componentTheme = { ...baseComponentTheme, ...derivedThemeOverride }
       // TODO do not call here generateStyle, it does not receive the extraArgs
       const [styles, setStyles] = useState(
         generateStyle
@@ -240,10 +265,6 @@ const withStyle = decorator(
           {...props}
           makeStyles={makeStyleHandler}
           styles={styles}
-          // passing themeOverrides is needed for components like Button
-          // that have no makeStyles of their own and only pass themeOverrides
-          // to the underlying component (e.g.: BaseButton)
-          themeOverride={themeOverride}
         />
       )
     })

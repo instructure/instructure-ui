@@ -30,7 +30,7 @@ import { DeterministicIdContextProvider } from '@instructure/ui-react-utils'
 
 import { getTheme } from '../getTheme'
 
-import type { ThemeOrOverride } from '../EmotionTypes'
+import type { ThemeOrLegacyOverride } from '../EmotionTypes'
 import type { DeterministicIdProviderValue } from '@instructure/ui-react-utils'
 declare const process: Record<string, any> | undefined
 import { mergeDeep } from '@instructure/ui-utils'
@@ -42,11 +42,12 @@ type InstUIProviderProps = {
   /**
    * A full theme or an override object
    */
-  theme?: ThemeOrOverride
+  theme?: ThemeOrLegacyOverride
 
   // TODO-theme-types: fix override typing
+  // TODO explain the usage of this override object. It will be deep merged into theme.themeOverride and the shape has to be a partial of the "newTheme" object
   /**
-   * An override object
+   * An override object for the new theming system.
    */
   themeOverride?: any
 
@@ -77,9 +78,9 @@ type InstUIProviderProps = {
 function InstUISettingsProvider({
   children,
   theme = {},
-  themeOverride = {},
   dir,
-  instanceCounterMap
+  instanceCounterMap,
+  themeOverride
 }: InstUIProviderProps) {
   const finalDir = dir || useContext(TextDirectionContext)
 
@@ -94,18 +95,17 @@ function InstUISettingsProvider({
     )
   }
 
-  let providedTheme = theme
-  if (typeof theme !== 'function') {
-    const override = (theme as Theme).themeOverride!
-    providedTheme = {
-      ...theme,
-      themeOverride: mergeDeep(override, themeOverride)
-    }
-  }
+  /**
+   * new pattern: if you want to replace a theme inside an InstUISettingsProvider, provide it via the theme prop. It'll
+   * override everything, replacing the otherwise used theme.
+   * if you want to apply an override, use the themeOverride prop.
+   * For backward compatibility reasons, the old way of passing a partial theme to the theme prop is still supported, however only for
+   * legacy (pre v11_7) components. Overriding the newTheme this way could break the system.
+   */
 
   let providers = (
     <DeterministicIdContextProvider instanceCounterMap={instanceCounterMap}>
-      <ThemeProvider theme={getTheme(providedTheme)}>
+      <ThemeProvider theme={getTheme(theme, themeOverride)}>
         <TextDirectionContext.Provider value={finalDir}>
           {children}
         </TextDirectionContext.Provider>

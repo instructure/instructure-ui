@@ -22,40 +22,14 @@
  * SOFTWARE.
  */
 
-import type { ComponentTheme, BaseTheme } from '@instructure/shared-types'
-import { ThemeOverrideProp } from './withStyle'
-import { ThemeOverrideValue } from './useStyle'
+import legacyCanvas from './legacyCanvas'
+import legacyCanvasHighContrast from './legacyCanvasHighContrast'
+import light from './light'
+import dark from './dark'
 
-/**
- * ---
- * private: true
- * ---
- * Resolves the per-component `themeOverride` prop into a partial component theme.
- *
- * @param themeOverride - The themeOverride prop value (object or function)
- * @param componentTheme - The component's calculated base theme
- * @param currentTheme - The current full theme (passed to function overrides)
- * @returns The resolved theme override object
- */
-const getComponentThemeOverride = (
-  themeOverride:
-    | ThemeOverrideProp['themeOverride']
-    | ThemeOverrideValue
-    | undefined,
-  componentTheme: ComponentTheme,
-  currentTheme: BaseTheme
-): Partial<ComponentTheme> => {
-  if (!themeOverride) {
-    return {}
-  }
-
-  if (typeof themeOverride === 'function') {
-    // TODO-theme-types: fix typing
-    return (themeOverride as any)(componentTheme, currentTheme)
-  }
-
-  return themeOverride
+export default {
+  canvas: legacyCanvas,
+  'canvas-high-contrast': legacyCanvasHighContrast,
+  light,
+  dark
 }
-
-export default getComponentThemeOverride
-export { getComponentThemeOverride }

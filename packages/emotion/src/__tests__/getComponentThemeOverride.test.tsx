@@ -25,7 +25,7 @@
 import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
 import canvas from '@instructure/ui-themes'
-import { getComponentThemeOverride } from '../getComponentThemeOverride'
+import { getComponentThemeOverride } from '../getComponentThemeOverrideLegacy'
 
 const componentName = 'ExampleComponent'
 const componentId = 'Example.Component'

@@ -22,40 +22,11 @@
  * SOFTWARE.
  */
 
-import type { ComponentTheme, BaseTheme } from '@instructure/shared-types'
-import { ThemeOverrideProp } from './withStyle'
-import { ThemeOverrideValue } from './useStyle'
+import type Alert from './alert'
 
-/**
- * ---
- * private: true
- * ---
- * Resolves the per-component `themeOverride` prop into a partial component theme.
- *
- * @param themeOverride - The themeOverride prop value (object or function)
- * @param componentTheme - The component's calculated base theme
- * @param currentTheme - The current full theme (passed to function overrides)
- * @returns The resolved theme override object
- */
-const getComponentThemeOverride = (
-  themeOverride:
-    | ThemeOverrideProp['themeOverride']
-    | ThemeOverrideValue
-    | undefined,
-  componentTheme: ComponentTheme,
-  currentTheme: BaseTheme
-): Partial<ComponentTheme> => {
-  if (!themeOverride) {
-    return {}
-  }
-
-  if (typeof themeOverride === 'function') {
-    // TODO-theme-types: fix typing
-    return (themeOverride as any)(componentTheme, currentTheme)
-  }
-
-  return themeOverride
+type ComponentTypes = {
+  Alert: (semantics: any) => Alert
 }
 
-export default getComponentThemeOverride
-export { getComponentThemeOverride }
+export type { ComponentTypes }
+export default ComponentTypes

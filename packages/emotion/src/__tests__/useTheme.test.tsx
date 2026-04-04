@@ -29,10 +29,10 @@ import '@testing-library/jest-dom'
 
 import { useTheme } from '../useTheme'
 import { InstUISettingsProvider } from '../InstUISettingsProvider'
-import type { ThemeOrOverride } from '../EmotionTypes'
+import type { ThemeOrLegacyOverride } from '../EmotionTypes'
 
 type Props = {
-  callback(theme: ThemeOrOverride): void
+  callback(theme: ThemeOrLegacyOverride): void
 }
 
 const ExampleComponent = (props: Props) => {

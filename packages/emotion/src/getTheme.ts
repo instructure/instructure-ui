@@ -28,7 +28,7 @@ import type { BaseTheme } from '@instructure/shared-types'
 
 import type {
   Overrides,
-  ThemeOrOverride,
+  ThemeOrLegacyOverride,
   SpecificThemeOverride
 } from './EmotionTypes'
 declare const process: Record<string, any> | undefined
@@ -44,13 +44,14 @@ declare const process: Record<string, any> | undefined
  * If an override object is given, it returns the ancestor theme and
  * the overrides merged together.
  *
- * @param themeOrOverride - A full theme or an override object
+ * @param themeOrLegacyOverride - A full theme or an override object
+ * @param themeOverride - if provided, it means it's a new theming-system override. This will be merged into theme.themeOverride and will be treated separately from the old way of applying overrides. This override will be applied in the withStyle.ts decorator
  * @returns A function that returns with the theme object for the [ThemeProvider](https://emotion.sh/docs/theming#themeprovider-reactcomponenttype)
  *    This function is called by Emotion on theme provider creation, where
  *    `ancestorTheme` is a theme object from an ancestor `ThemeProvider`
  */
 const getTheme =
-  (themeOrOverride: ThemeOrOverride) =>
+  (themeOrLegacyOverride: ThemeOrLegacyOverride, themeOverride?: any) =>
   (ancestorTheme = {} as BaseTheme) => {
     // we need to clone the ancestor theme not to override it
     let currentTheme
@@ -69,15 +70,26 @@ const getTheme =
       currentTheme = ancestorTheme
     }
 
-    let resolvedThemeOrOverride = themeOrOverride
+    const resolvedThemeOverride =
+      typeof themeOverride === 'function'
+        ? themeOverride(currentTheme)
+        : themeOverride
 
-    if (typeof resolvedThemeOrOverride === 'function') {
-      resolvedThemeOrOverride = resolvedThemeOrOverride(currentTheme)
-    }
+    let resolvedLegacyThemeOrOverride =
+      typeof themeOrLegacyOverride === 'function'
+        ? themeOrLegacyOverride(currentTheme)
+        : themeOrLegacyOverride
+
     try {
       // If a valid InstUI theme is given, it just returns the theme.
-      if (isBaseTheme(resolvedThemeOrOverride)) {
-        return resolvedThemeOrOverride
+      // in case of the legacy pattern, it's just a simple replacement, in the new system, overrides should be merged into the new theme. Old overrides will be removed because they may make no sense for a different theme
+      if (isBaseTheme(resolvedLegacyThemeOrOverride)) {
+        return {
+          ...resolvedLegacyThemeOrOverride,
+          ...(resolvedThemeOverride
+            ? { themeOverride: resolvedThemeOverride }
+            : {})
+        }
       }
     } catch {
       // If the prop passed is not an Object, it will throw an error.
@@ -90,16 +102,16 @@ const getTheme =
       ) {
         console.warn(
           'The `theme` property provided to InstUISettingsProvider is not a valid InstUI theme object.\ntheme: ',
-          resolvedThemeOrOverride
+          resolvedLegacyThemeOrOverride
         )
       }
-      resolvedThemeOrOverride = {}
+      resolvedLegacyThemeOrOverride = {}
     }
 
     const themeName = currentTheme.key
 
-    // we pick the overrides for the current theme from the override object
-    const specificOverrides = (resolvedThemeOrOverride as Overrides)
+    // legacy: we pick the overrides for the current theme from the override object
+    const specificOverrides = (resolvedLegacyThemeOrOverride as Overrides)
       ?.themeOverrides
     const currentThemeOverrides =
       (specificOverrides as SpecificThemeOverride)?.[themeName] ||
@@ -108,8 +120,11 @@ const getTheme =
 
     return mergeDeep(
       currentTheme,
-      resolvedThemeOrOverride,
-      currentThemeOverrides
+      resolvedLegacyThemeOrOverride,
+      currentThemeOverrides,
+      ...(resolvedThemeOverride
+        ? [{ themeOverride: resolvedThemeOverride }]
+        : [])
     )
   }
 

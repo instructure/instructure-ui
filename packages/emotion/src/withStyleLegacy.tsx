@@ -35,7 +35,7 @@ import { deepEqual as isEqual } from '@instructure/ui-utils'
 import { warn } from '@instructure/console'
 import { decorator } from '@instructure/ui-decorator'
 
-import { getComponentThemeOverride } from './getComponentThemeOverride'
+import { getComponentThemeOverride } from './getComponentThemeOverrideLegacy'
 import { useTheme } from './useTheme'
 
 import type {

@@ -36,6 +36,11 @@
   },
   "sideEffects": false,
   "exports": {
+    "./lib/*": "./lib/*",
+    "./es/*": "./es/*",
+    "./types/*": "./types/*",
+    "./package.json": "./package.json",
+    "./src/*": "./src/*",
     ".": {
       "src": "./src/index.ts",
       "types": "./types/index.d.ts",
@@ -43,10 +48,12 @@
       "require": "./lib/index.js",
       "default": "./es/index.js"
     },
-    "./lib/*": "./lib/*",
-    "./es/*": "./es/*",
-    "./types/*": "./types/*",
-    "./package.json": "./package.json",
-    "./src/*": "./src/*"
+    "./v11_7": {
+      "src": "./src/themes/frozenThemes/v11_7/index.ts",
+      "types": "./types/themes/frozenThemes/v11_7/index.d.ts",
+      "import": "./es/themes/frozenThemes/v11_7/index.js",
+      "require": "./lib/themes/frozenThemes/v11_7/index.js",
+      "default": "./es/themes/frozenThemes/v11_7/index.js"
+    }
   }
 }

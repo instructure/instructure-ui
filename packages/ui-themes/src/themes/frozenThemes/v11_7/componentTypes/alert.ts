@@ -22,40 +22,29 @@
  * SOFTWARE.
  */
 
-import type { ComponentTheme, BaseTheme } from '@instructure/shared-types'
-import { ThemeOverrideProp } from './withStyle'
-import { ThemeOverrideValue } from './useStyle'
-
-/**
- * ---
- * private: true
- * ---
- * Resolves the per-component `themeOverride` prop into a partial component theme.
- *
- * @param themeOverride - The themeOverride prop value (object or function)
- * @param componentTheme - The component's calculated base theme
- * @param currentTheme - The current full theme (passed to function overrides)
- * @returns The resolved theme override object
- */
-const getComponentThemeOverride = (
-  themeOverride:
-    | ThemeOverrideProp['themeOverride']
-    | ThemeOverrideValue
-    | undefined,
-  componentTheme: ComponentTheme,
-  currentTheme: BaseTheme
-): Partial<ComponentTheme> => {
-  if (!themeOverride) {
-    return {}
-  }
-
-  if (typeof themeOverride === 'function') {
-    // TODO-theme-types: fix typing
-    return (themeOverride as any)(componentTheme, currentTheme)
-  }
-
-  return themeOverride
+export type Alert = {
+  background: string
+  borderRadius: string
+  borderStyle: string | number
+  borderWidth: string
+  closeButtonMarginRight: string | number
+  closeButtonMarginTop: string | number
+  color: string
+  contentFontFamily: string
+  contentFontSize: string
+  contentFontWeight: string | number
+  contentLineHeight: string | number
+  dangerBorderColor: string
+  dangerIconBackground: string
+  iconColor: string
+  infoBorderColor: string
+  infoIconBackground: string
+  successBorderColor: string
+  successIconBackground: string
+  warningBorderColor: string
+  warningIconBackground: string
+  contentPaddingVertical: string
+  contentPaddingHorizontal: string
 }
 
-export default getComponentThemeOverride
-export { getComponentThemeOverride }
+export default Alert
