@@ -23,7 +23,7 @@
  */
 
 import { useTheme } from './useTheme'
-import { getComponentThemeOverride } from './getComponentThemeOverride'
+import { getComponentThemeOverride } from './getComponentThemeOverrideLegacy'
 import type { ComponentTheme } from '@instructure/shared-types'
 import type { Theme } from '@instructure/ui-themes'
 

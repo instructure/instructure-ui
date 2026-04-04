@@ -28,6 +28,7 @@ export * from '@emotion/react'
 export { InstUISettingsProvider } from './InstUISettingsProvider'
 export { withStyleLegacy } from './withStyleLegacy'
 export { getComponentThemeOverride } from './getComponentThemeOverride'
+export { getComponentThemeOverride as getComponentThemeOverrideLegacy } from './getComponentThemeOverrideLegacy'
 export { withStyle } from './withStyle'
 export {
   ThemeablePropValues,

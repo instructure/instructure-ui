@@ -92,6 +92,12 @@ export async function buildVersionMap(
         continue
       }
 
+      // Skip packages that don't follow the src/exports/{letter}.ts convention
+      const exportFilePath = path.join(pkgDir, 'src', 'exports', `${exportLetter}.ts`)
+      if (!fs.existsSync(exportFilePath)) {
+        continue
+      }
+
       // Resolve per-component-dir versions from the source export file
       const componentDirVersions = resolveComponentVersions(
         pkgDir,
@@ -194,7 +200,7 @@ function resolveComponentVersions(
   if (!fs.existsSync(exportFilePath)) {
     throw new Error(
       `[buildVersionMap] Export file not found: ${exportFilePath} (${pkgShortName}). ` +
-        `The package.json exports field references a file that does not exist on disk.`
+      `The package.json exports field references a file that does not exist on disk.`
     )
   }
 

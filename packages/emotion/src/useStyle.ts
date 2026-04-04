@@ -23,7 +23,8 @@
  */
 
 import { useTheme } from './useTheme'
-import { getComponentThemeOverride } from './getComponentThemeOverride'
+// TODO: rework useStyle to use the new getComponentThemeOverride signature
+import { getComponentThemeOverride } from './getComponentThemeOverrideLegacy'
 import { mergeDeep } from '@instructure/ui-utils'
 import type {
   SharedTokens,
