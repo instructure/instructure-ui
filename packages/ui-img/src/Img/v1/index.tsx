@@ -24,12 +24,13 @@
 
 import { Component } from 'react'
 
-import { View } from '@instructure/ui-view/latest'
+import { View } from '@instructure/ui-view/v11_6'
 import { passthroughProps } from '@instructure/ui-react-utils'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleLegacy as withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 import { allowedProps } from './props'
 import type { ImgProps } from './props'
@@ -39,7 +40,7 @@ import type { ImgProps } from './props'
 category: components
 ---
 **/
-@withStyle(generateStyle)
+@withStyle(generateStyle, generateComponentTheme)
 class Img extends Component<ImgProps> {
   static readonly componentId = 'Img'
 

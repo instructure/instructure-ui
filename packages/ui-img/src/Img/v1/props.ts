@@ -22,13 +22,12 @@
  * SOFTWARE.
  */
 
-import type { OtherHTMLAttributes } from '@instructure/shared-types'
+import type { ImgTheme, OtherHTMLAttributes } from '@instructure/shared-types'
 import type {
   Spacing,
   WithStyleProps,
   ComponentStyle
 } from '@instructure/emotion'
-import type { NewComponentTypes } from '@instructure/ui-themes'
 
 type ImgOwnProps = {
   src: string
@@ -66,7 +65,7 @@ type PropKeys = keyof ImgOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type ImgProps = ImgOwnProps &
-  WithStyleProps<NewComponentTypes['Img'], ImgStyle> &
+  WithStyleProps<ImgTheme, ImgStyle> &
   OtherHTMLAttributes<ImgOwnProps>
 
 type ImgStyle = ComponentStyle<'overlay' | 'container' | 'img'>
