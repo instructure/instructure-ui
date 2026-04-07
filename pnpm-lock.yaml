@@ -2468,6 +2468,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-view':
         specifier: workspace:*
         version: link:../ui-view
