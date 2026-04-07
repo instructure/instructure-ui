@@ -1420,11 +1420,11 @@
     },
     "institutional": {
       "brandPrimary": {
-        "value": "{color.blue.blue100}",
+        "value": "{color.navy.navy10}",
         "type": "color"
       },
       "brandFontColorDark": {
-        "value": "{color.grey.grey170}",
+        "value": "{color.white}",
         "type": "color"
       },
       "linkColor": {
