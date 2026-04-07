@@ -47,7 +47,7 @@
       "type": "spacing"
     },
     "descriptorTextColor": {
-      "value": "{color.text.base}",
+      "value": "{color.institutional.brandFontColorDark}",
       "type": "color"
     },
     "hoverBackgroundColor": {

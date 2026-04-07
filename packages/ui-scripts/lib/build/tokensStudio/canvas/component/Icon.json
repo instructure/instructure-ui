@@ -73,7 +73,7 @@
       "type": "borderWidth"
     },
     "baseColor": {
-      "value": "{color.icon.base}",
+      "value": "{color.institutional.brandFontColorDark}",
       "type": "color"
     },
     "mutedColor": {
