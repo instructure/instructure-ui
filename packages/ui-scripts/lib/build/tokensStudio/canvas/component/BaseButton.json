@@ -13,15 +13,15 @@
       "type": "color"
     },
     "primaryBackground": {
-      "value": "{color.background.interactive.action.primary.base}",
+      "value": "{color.institutional.brandButtonPrimaryBgd}",
       "type": "color"
     },
     "primaryBorderColor": {
-      "value": "{color.stroke.interactive.action.primary.base}",
+      "value": "{color.institutional.brandButtonPrimaryBgd}",
       "type": "color"
     },
     "primaryColor": {
-      "value": "{color.text.interactive.action.primary.base}",
+      "value": "{color.institutional.brandButtonPrimaryText}",
       "type": "color"
     },
     "primaryDisabledBackgroundColor": {

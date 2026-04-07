@@ -1,7 +1,7 @@
 {
   "sideNavBar": {
     "backgroundColor": {
-      "value": "{color.background.dark}",
+      "value": "{color.institutional.brandGlobalNavBgd}",
       "type": "color"
     },
     "fill": {
@@ -9,7 +9,7 @@
       "type": "color"
     },
     "fontColor": {
-      "value": "{color.text.onColor}",
+      "value": "{color.institutional.brandGlobalNavMenuItemTextColor}",
       "type": "color"
     },
     "minimizedWidth": {
@@ -89,7 +89,7 @@
       "type": "spacing"
     },
     "fontColor": {
-      "value": "{color.text.onColor}",
+      "value": "{color.institutional.brandGlobalNavMenuItemTextColor}",
       "type": "color"
     },
     "fontFamily": {
@@ -105,7 +105,7 @@
       "type": "fontWeights"
     },
     "hoverBackgroundColor": {
-      "value": "{color.background.interactive.action.primary.hover}",
+      "value": "{color.institutional.globalNavLinkHover}",
       "type": "color"
     },
     "lineHeight": {
@@ -121,7 +121,7 @@
       "type": "color"
     },
     "selectedFontColor": {
-      "value": "{color.text.interactive.navigation.primary.base}",
+      "value": "{color.institutional.brandGlobalNavMenuItemTextColorActive}",
       "type": "color"
     },
     "innerFocusOutlineColor": {

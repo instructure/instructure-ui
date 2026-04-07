@@ -49,7 +49,7 @@
       "type": "color"
     },
     "messageColorClickable": {
-      "value": "{color.text.interactive.navigation.primary.base}",
+      "value": "{color.institutional.linkColor}",
       "type": "color"
     },
     "clickableActiveBg": {

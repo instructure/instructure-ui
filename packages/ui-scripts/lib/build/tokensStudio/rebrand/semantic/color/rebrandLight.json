@@ -1428,11 +1428,11 @@
         "type": "color"
       },
       "linkColor": {
-        "value": "{color.blue.blue100}",
+        "value": "{color.blue.blue120}",
         "type": "color"
       },
       "brandButtonPrimaryBgd": {
-        "value": "{color.blue.blue100}",
+        "value": "{color.navy.navy170}",
         "type": "color"
       },
       "brandButtonPrimaryText": {
@@ -1440,7 +1440,7 @@
         "type": "color"
       },
       "brandGlobalNavBgd": {
-        "value": "{color.grey.grey150}",
+        "value": "{color.white}",
         "type": "color"
       },
       "globalNavLinkHover": {
@@ -1448,11 +1448,11 @@
         "type": "color"
       },
       "brandGlobalNavMenuItemTextColor": {
-        "value": "{color.white}",
+        "value": "{color.grey.grey170}",
         "type": "color"
       },
       "brandGlobalNavMenuItemTextColorActive": {
-        "value": "{color.grey.grey170}",
+        "value": "{color.white}",
         "type": "color"
       }
     }
