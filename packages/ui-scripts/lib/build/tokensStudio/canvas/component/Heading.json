@@ -167,7 +167,7 @@
       "type": "lineHeights"
     },
     "baseColor": {
-      "value": "{color.text.base}",
+      "value": "{color.institutional.brandFontColorDark}",
       "type": "color"
     },
     "baseOnColor": {

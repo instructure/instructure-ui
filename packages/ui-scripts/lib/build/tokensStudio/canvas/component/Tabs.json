@@ -35,7 +35,7 @@
       "type": "color"
     },
     "textColor": {
-      "value": "{color.text.base}",
+      "value": "{color.institutional.brandFontColorDark}",
       "type": "color"
     },
     "borderWidth": {
@@ -65,7 +65,7 @@
   },
   "tabsTab": {
     "defaultTextColor": {
-      "value": "{color.text.base}",
+      "value": "{color.institutional.brandFontColorDark}",
       "type": "color"
     },
     "defaultHoverBorderColor": {
@@ -93,7 +93,7 @@
       "type": "lineHeights"
     },
     "secondaryTextColor": {
-      "value": "{color.text.base}",
+      "value": "{color.institutional.brandFontColorDark}",
       "type": "color"
     },
     "secondarySelectedTextColor": {
