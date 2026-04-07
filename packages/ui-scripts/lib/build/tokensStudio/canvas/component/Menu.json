@@ -27,7 +27,7 @@
       "type": "fontWeights"
     },
     "color": {
-      "value": "{color.text.base}",
+      "value": "{color.institutional.brandFontColorDark}",
       "type": "color"
     },
     "paddingHorizontal": {
@@ -70,7 +70,7 @@
       "description": "code only token"
     },
     "labelColor": {
-      "value": "{color.text.base}",
+      "value": "{color.institutional.brandFontColorDark}",
       "type": "color"
     },
     "labelInfoColor": {
