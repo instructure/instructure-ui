@@ -33,7 +33,7 @@
       "type": "borderWidth"
     },
     "defaultColor": {
-      "value": "{color.text.base}",
+      "value": "{color.institutional.brandFontColorDark}",
       "type": "color"
     },
     "inlineColor": {
