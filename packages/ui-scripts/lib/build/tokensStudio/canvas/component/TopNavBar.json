@@ -206,14 +206,6 @@
       "value": "{fontWeight.body.base}",
       "type": "fontWeights"
     },
-    "color": {
-      "value": "{color.text.base}",
-      "type": "color"
-    },
-    "colorInverse": {
-      "value": "{color.text.inverse}",
-      "type": "color"
-    },
     "itemInlinePadding": {
       "value": "{spacing.spaceSm}",
       "type": "spacing"
@@ -245,6 +237,14 @@
     "activeIndicatorWidth": {
       "value": "{borderWidth.md}",
       "type": "borderWidth"
+    },
+    "color": {
+      "value": "inherit",
+      "type": "other"
+    },
+    "colorInverse": {
+      "value": "inherit",
+      "type": "other"
     }
   },
   "topNavBarMenuItems": {
