@@ -29,7 +29,7 @@
       "type": "lineHeights"
     },
     "textColor": {
-      "value": "{color.text.base}",
+      "value": "{color.institutional.brandFontColorDark}",
       "type": "color"
     },
     "toggleBorderRadius": {

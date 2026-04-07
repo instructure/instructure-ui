@@ -5,7 +5,7 @@
       "type": "fontFamilies"
     },
     "color": {
-      "value": "{color.text.base}",
+      "value": "{color.institutional.brandFontColorDark}",
       "type": "color"
     },
     "colorPrimaryInverse": {

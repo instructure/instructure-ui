@@ -32,7 +32,7 @@
       "description": "code only token"
     },
     "color": {
-      "value": "{color.text.base}",
+      "value": "{color.institutional.brandFontColorDark}",
       "type": "color"
     },
     "descriptionColor": {
