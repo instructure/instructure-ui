@@ -49,11 +49,11 @@
       "type": "borderWidth"
     },
     "textColor": {
-      "value": "{color.text.interactive.input.base}",
+      "value": "{color.institutional.brandFontColorDark}",
       "type": "color"
     },
     "textReadonlyColor": {
-      "value": "{color.text.interactive.input.readonly}",
+      "value": "{color.institutional.brandFontColorDark}",
       "type": "color"
     },
     "textDisabledColor": {

@@ -77,7 +77,7 @@
       "type": "borderWidth"
     },
     "color": {
-      "value": "{color.text.base}",
+      "value": "{color.institutional.brandFontColorDark}",
       "type": "color"
     },
     "colorInverse": {

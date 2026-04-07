@@ -1,7 +1,7 @@
 {
   "metric": {
     "labelColor": {
-      "value": "{color.text.base}",
+      "value": "{color.institutional.brandFontColorDark}",
       "type": "color"
     },
     "labelFontSize": {
@@ -13,7 +13,7 @@
       "type": "spacing"
     },
     "valueColor": {
-      "value": "{color.text.base}",
+      "value": "{color.institutional.brandFontColorDark}",
       "type": "color"
     },
     "valueFontSize": {
