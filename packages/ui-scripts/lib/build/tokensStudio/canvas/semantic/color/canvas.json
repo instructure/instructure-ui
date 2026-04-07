@@ -1447,7 +1447,7 @@
         "type": "color"
       },
       "brandGlobalNavMenuItemTextColorActive": {
-        "value": "{color.grey.grey170}",
+        "value": "{color.blue.blue100}",
         "type": "color"
       }
     }
