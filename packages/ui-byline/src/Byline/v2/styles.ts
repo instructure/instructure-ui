@@ -36,7 +36,7 @@ import type { BylineProps, BylineStyle } from './props'
  * @return The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['Byline'],
+  componentTheme: ReturnType<NewComponentTypes['Byline']>,
   params: BylineProps,
   _sharedTokens: SharedTokens
 ): BylineStyle => {

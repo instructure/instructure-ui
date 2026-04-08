@@ -35,12 +35,12 @@ import type {
  * ---
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} _props the props of the component, the style is applied to
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['Drilldown'],
+  componentTheme: ReturnType<NewComponentTypes['Drilldown']>,
   _props: DrilldownProps,
   state: DrilldownStyleProps
 ): DrilldownStyle => {

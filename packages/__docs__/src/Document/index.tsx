@@ -175,7 +175,9 @@ class Document extends Component<DocumentProps, DocumentState> {
             </code>
           </View>
         ) : null}
-        <ComponentTheme componentTheme={componentTheme} />
+        <ComponentTheme
+          componentTheme={componentTheme as any /* TODO-theme-types check */}
+        />
 
         <View margin="x-large 0 0" display="block">
           <Heading

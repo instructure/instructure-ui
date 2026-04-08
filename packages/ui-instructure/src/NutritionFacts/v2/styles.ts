@@ -36,7 +36,7 @@ import type { NutritionFactsProps, NutritionFactsStyle } from './props'
  * @return The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['NutritionFacts'],
+  componentTheme: ReturnType<NewComponentTypes['NutritionFacts']>,
   _params: NutritionFactsProps,
   _sharedTokens: SharedTokens
 ): NutritionFactsStyle => {

@@ -37,7 +37,7 @@ import type { MaskProps, MaskStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['Mask'],
+  componentTheme: ReturnType<NewComponentTypes['Mask']>,
   props: MaskProps
 ): MaskStyle => {
   const { placement, fullscreen } = props

@@ -39,7 +39,7 @@ import type {
  * @return The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['DataPermissionLevels'],
+  componentTheme: ReturnType<NewComponentTypes['DataPermissionLevels']>,
   _params: DataPermissionLevelsProps,
   _sharedTokens: SharedTokens
 ): DataPermissionLevelsStyle => {
