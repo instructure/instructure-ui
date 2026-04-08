@@ -225,9 +225,8 @@ const withStyle = decorator(
       const baseComponentTheme = mergeDeep(
         theme.newTheme.components[
           componentWithTokensId as keyof NewComponentTypes
-          // TODO-theme-types: fix typing
-          // @ts-expect-error fix
         ]?.(semantics),
+        // @ts-ignore TODO-theme-types: fix typing
         themeOverride?.components?.[
           componentWithTokensId as keyof NewComponentTypes
         ]
