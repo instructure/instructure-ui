@@ -73,7 +73,7 @@
       "type": "spacing"
     },
     "activeIndicatorColor": {
-      "value": "{color.text.inverse}",
+      "value": "#fff",
       "type": "color"
     },
     "activeIndicatorColorInverse": {
@@ -95,7 +95,7 @@
   },
   "topNavBarLayout": {
     "desktopBackground": {
-      "value": "{color.background.container}",
+      "value": "{color.background.elevatedSurface.inverse}",
       "type": "color"
     },
     "desktopBackgroundInverse": {
