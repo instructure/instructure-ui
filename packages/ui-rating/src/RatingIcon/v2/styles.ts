@@ -36,7 +36,7 @@ import type { RatingIconProps, RatingIconState, RatingIconStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['RatingIcon'],
+  componentTheme: ReturnType<NewComponentTypes['RatingIcon']>,
   _props: RatingIconProps,
   state: RatingIconState,
   _sharedTokens: SharedTokens
