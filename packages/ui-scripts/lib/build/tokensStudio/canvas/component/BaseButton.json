@@ -45,7 +45,7 @@
       "type": "color"
     },
     "primaryGhostColor": {
-      "value": "{color.text.interactive.action.tertiary.base}",
+      "value": "{color.institutional.brandButtonPrimaryBgd}",
       "type": "color"
     },
     "primaryGhostHoverBackground": {
