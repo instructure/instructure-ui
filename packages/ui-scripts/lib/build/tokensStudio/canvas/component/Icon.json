@@ -121,7 +121,7 @@
       "type": "color"
     },
     "sideNavActiveColor": {
-      "value": "{color.icon.info}",
+      "value": "{color.institutional.brandGlobalNavMenuItemTextColorActive}",
       "type": "color"
     },
     "navigationPrimaryBaseColor": {
