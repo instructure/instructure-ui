@@ -206,6 +206,7 @@ class Example extends React.Component {
           isToday={date.isSame(todayDate, 'day')}
           isOutsideMonth={!date.isSame(renderedDate, 'month')}
           label={`${date.format('D')} ${date.format('MMMM')} ${date.format('YYYY')}`}
+          selectedLabel="Selected"
           onClick={this.handleDayClick}
         >
           {date.format('D')}
@@ -362,6 +363,7 @@ should be validated. If the value cannot be parsed as a valid date, or if the
 | DateInput | locale | `string` | No | - | A standard language identifier. See [Moment.js](https://momentjs.com/timezone/docs/#/using-timezones/parsing-in-zone/) for more details. This property can also be set via a context property and if both are set then the component property takes precedence over the context property. The web browser's locale will be used if no value is set via a component property or a context property. |
 | DateInput | timezone | `string` | No | - | A timezone identifier in the format: *Area/Location* See [List of tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for the list of possible options. This property can also be set via a context property and if both are set then the component property takes precedence over the context property. The web browser's timezone will be used if no value is set via a component property or a context property. |
 | DateInput | withYearPicker | `{ screenReaderLabel: string onRequestYearChange?: (e: any, requestedYear: number) => void startYear: number endYear: number }` | No | - | If set, years can be picked from a dropdown. It accepts an object. screenReaderLabel: string // e.g.: i18n("pick a year") onRequestYearChange?:(e: React.MouseEvent,requestedYear: number): void // if set, on year change, only this will be called and no internal change will take place startYear: number // e.g.: 2001, sets the start year of the selectable list endYear: number // e.g.: 2030, sets the end year of the selectable list |
+| DateInput | selectedLabel | `string` | No | - | Screen reader label appended to the date label when the day is selected. Used to announce the selected state to assistive technologies. |
 
 ### Usage
 
