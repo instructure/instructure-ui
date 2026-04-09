@@ -56,6 +56,14 @@ const generateStyle = (
       borderSpacing: 0,
       ...(layout === 'fixed' && { tableLayout: 'fixed' }),
       caption: { textAlign: 'start' }
+    },
+    liveRegion: {
+      label: 'table__liveRegion',
+      position: 'absolute',
+      left: '-10000px',
+      width: '1px',
+      height: '1px',
+      overflow: 'hidden'
     }
   }
 }

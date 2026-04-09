@@ -351,10 +351,7 @@ const SortableTable = ({ caption, headers, rows }) => {
             </View>
           )}
 
-          <Table
-            caption={`${caption}: sorted by ${sortBy} in ${direction} order`}
-            {...props}
-          >
+          <Table caption={caption} {...props}>
             <Table.Head renderSortLabel="Sort by">
               {renderHeaderRow(direction)}
             </Table.Head>
@@ -370,13 +367,6 @@ const SortableTable = ({ caption, headers, rows }) => {
               ))}
             </Table.Body>
           </Table>
-          <Alert
-            liveRegion={() => document.getElementById('flash-messages')}
-            liveRegionPoliteness="polite"
-            screenReaderOnly
-          >
-            {`Sorted by ${sortBy} in ${direction} order`}
-          </Alert>
         </div>
       )}
     </Responsive>
@@ -505,10 +495,7 @@ const SelectableTable = ({
           <View as="div" padding="small" background="primary-inverse">
             {`${selected.size} of ${rowIds.length} selected`}
           </View>
-          <Table
-            caption={`${caption}: sorted by ${sortBy} in ${direction} order`}
-            {...props}
-          >
+          <Table caption={caption} {...props}>
             <Table.Head
               renderSortLabel={
                 <ScreenReaderContent>Sort by</ScreenReaderContent>
@@ -685,15 +672,6 @@ const SortableTable = ({ caption, headers, rows, perPage }) => {
         ascending={ascending}
         perPage={perPage}
       />
-      <Alert
-        liveRegion={() => document.getElementById('flash-messages')}
-        liveRegionPoliteness="polite"
-        screenReaderOnly
-      >
-        {`Sorted by ${sortBy} in ${
-          ascending ? 'ascending' : 'descending'
-        } order`}
-      </Alert>
     </div>
   )
 }

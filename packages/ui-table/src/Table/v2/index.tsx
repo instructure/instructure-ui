@@ -70,23 +70,51 @@ class Table extends Component<TableProps> {
   static Cell = Cell
 
   ref: Element | null = null
+  // Reference to hidden aria-live region for announcing caption changes to screen readers
+  _liveRegionRef: HTMLDivElement | null = null
+  // Timeout for delayed announcement (workaround for Safari/VoiceOver caption update bug)
+  _announcementTimeout?: ReturnType<typeof setTimeout>
 
   handleRef = (el: Element | null) => {
-    const { elementRef } = this.props
-
     this.ref = el
-
-    if (typeof elementRef === 'function') {
-      elementRef(el)
-    }
+    this.props.elementRef?.(el)
   }
 
   componentDidMount() {
     this.props.makeStyles?.()
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps: TableProps) {
     this.props.makeStyles?.()
+    // Announce caption changes for screen readers (especially VoiceOver)
+    // Safari/VoiceOver has a known bug where dynamic <caption> updates aren't announced,
+    // so we use an aria-live region as a workaround
+    const prevSortInfo = this.getSortedHeaderInfo(prevProps)
+    const currentSortInfo = this.getSortedHeaderInfo(this.props)
+    // Only announce if sorting actually changed
+    const sortingChanged =
+      prevSortInfo?.header !== currentSortInfo?.header ||
+      prevSortInfo?.direction !== currentSortInfo?.direction
+    if (sortingChanged && currentSortInfo && this._liveRegionRef) {
+      // Clear any pending announcement
+      clearTimeout(this._announcementTimeout)
+      // Clear the live region first (part of the clear-then-set pattern)
+      this._liveRegionRef.textContent = ''
+      // Wait 100ms before setting new content to ensure screen readers detect the change
+      this._announcementTimeout = setTimeout(() => {
+        if (this._liveRegionRef) {
+          const currentCaption = this.getCaptionText(this.props)
+          // Append non-breaking space (\u00A0) to force Safari/VoiceOver to treat
+          // repeated captions as different announcements
+          this._liveRegionRef.textContent = currentCaption + '\u00A0'
+        }
+      }, 100)
+    }
+  }
+
+  componentWillUnmount() {
+    // Clean up pending announcement timeout
+    clearTimeout(this._announcementTimeout)
   }
 
   getHeaders() {
@@ -105,11 +133,45 @@ class Table extends Component<TableProps> {
     )
   }
 
+  getSortedHeaderInfo(props: TableProps) {
+    const [headChild] = Children.toArray(props.children)
+    const [firstRow] = Children.toArray(
+      isValidElement(headChild) ? headChild.props.children : []
+    )
+    const colHeaders = Children.toArray(
+      isValidElement(firstRow) ? firstRow.props.children : []
+    )
+    // Find the column with an active sort direction
+    for (const colHeader of colHeaders) {
+      if (
+        isValidElement(colHeader) &&
+        colHeader.props.sortDirection &&
+        colHeader.props.sortDirection !== 'none'
+      ) {
+        // Extract header text (may be nested in child components)
+        const headerText =
+          typeof colHeader.props.children === 'string'
+            ? colHeader.props.children
+            : colHeader.props.children?.props?.children ?? ''
+        return { header: headerText, direction: colHeader.props.sortDirection }
+      }
+    }
+    return null
+  }
+
+  getCaptionText(props: TableProps) {
+    const sortInfo = this.getSortedHeaderInfo(props)
+    const caption = props.caption as string
+    if (!sortInfo) return caption
+    const sortText = ` Sorted by ${sortInfo.header} (${sortInfo.direction})`
+    return caption ? caption + sortText : sortText.trim()
+  }
+
   render() {
     const { margin, layout, caption, children, hover, styles, minWidth } =
       this.props
     const isStacked = layout === 'stacked'
-    const headers = isStacked ? this.getHeaders() : undefined
+    const captionText = this.getCaptionText(this.props)
 
     if (!caption) {
       error(false, `[Table] required prop caption is not set.`)
@@ -118,11 +180,23 @@ class Table extends Component<TableProps> {
     return (
       <TableContext.Provider
         value={{
-          isStacked: isStacked,
+          isStacked,
           hover: hover!,
-          headers: headers
+          headers: isStacked ? this.getHeaders() : undefined
         }}
       >
+        {/* ARIA live region for dynamic sort announcements.
+            MUST be outside <table> due to Safari/VoiceOver bug.
+            Empty on page load, populated only when sorting changes. */}
+        <div
+          ref={(el) => {
+            this._liveRegionRef = el
+          }}
+          aria-live="polite"
+          aria-atomic="true"
+          role="status"
+          css={styles?.liveRegion}
+        />
         <View
           // All HTML props, except the ones accepted by `View` and `Table`
           {...View.omitViewProps(
@@ -135,21 +209,21 @@ class Table extends Component<TableProps> {
           elementRef={this.handleRef}
           css={styles?.table}
           role={isStacked ? 'table' : undefined}
-          aria-label={isStacked ? (caption as string) : undefined}
+          aria-label={captionText}
         >
-          {!isStacked && (
+          {/* Caption for visual display and semantic HTML */}
+          {!isStacked && caption && (
             <caption>
-              <ScreenReaderContent>{caption}</ScreenReaderContent>
+              <ScreenReaderContent>{captionText}</ScreenReaderContent>
             </caption>
           )}
-          {Children.map(children, (child) => {
-            if (isValidElement(child)) {
-              return safeCloneElement(child, {
-                key: (child as ReactElement<any>).props.name
-              })
-            }
-            return child
-          })}
+          {Children.map(children, (child) =>
+            isValidElement(child)
+              ? safeCloneElement(child, {
+                  key: (child as ReactElement<any>).props.name
+                })
+              : child
+          )}
         </View>
       </TableContext.Provider>
     )
