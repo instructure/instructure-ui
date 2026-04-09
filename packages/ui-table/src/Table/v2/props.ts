@@ -79,7 +79,7 @@ type TableProps = TableOwnProps &
   WithStyleProps<null, TableStyle> &
   OtherHTMLAttributes<TableOwnProps>
 
-type TableStyle = ComponentStyle<'table'>
+type TableStyle = ComponentStyle<'table' | 'liveRegion'>
 const allowedProps: AllowedPropKeys = [
   'caption',
   'children',
