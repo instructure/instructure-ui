@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-color-utils",
-  "version": "11.6.0",
+  "version": "11.7.1",
   "description": "A color utility library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -35,6 +35,7 @@
   "sideEffects": false,
   "exports": {
     ".": {
+      "src": "./src/index.ts",
       "types": "./types/index.d.ts",
       "import": "./es/index.js",
       "require": "./lib/index.js",

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { TruncateText, Text } from '@instructure/ui'
+import { TruncateText, Text } from '@instructure/ui/latest'
 import { expect } from 'chai'
 import '../support/component'
 

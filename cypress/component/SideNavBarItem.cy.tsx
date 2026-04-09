@@ -24,8 +24,8 @@
 
 import 'cypress-real-events'
 
-import { SideNavBarItem } from '@instructure/ui-side-nav-bar'
-import { IconAdminLine } from '@instructure/ui-icons'
+import { SideNavBarItem } from '@instructure/ui/latest'
+import { IconAdminLine } from '@instructure/ui/latest'
 import '../support/component'
 
 describe('<SideNavBarItem/>', () => {

@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-theme-tokens",
-  "version": "11.6.0",
+  "version": "11.7.1",
   "description": "Cross-platform theme tokens for Instructure products",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -34,6 +34,7 @@
   "sideEffects": false,
   "exports": {
     ".": {
+      "src": "./src/index.ts",
       "types": "./types/index.d.ts",
       "import": "./es/index.js",
       "require": "./lib/index.js",

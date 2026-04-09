@@ -39,6 +39,7 @@ import { Playground } from './Playground'
 import { compileAndRenderExample } from './compileAndRenderExample'
 import { Heading } from './Heading'
 import { Link } from './Link'
+import { navigateTo, MINOR_VERSION_REGEX } from './navigationUtils'
 
 type CodeData = {
   code: string
@@ -285,11 +286,21 @@ const renderer = (title: string) => ({
           return
         }
         e.preventDefault()
-        const basePath =
-          window.location.pathname.match(/^(\/pr-preview\/pr-\d+)/)?.[1] || ''
-        const newUrl = basePath ? `${basePath}/${href}` : `/${href}`
-        window.history.pushState({}, '', newUrl)
-        window.dispatchEvent(new PopStateEvent('popstate'))
+
+        // Markdown links can point to a specific version of a component,
+        // e.g. href="/v11_7/DateInput". navigateTo() expects the page
+        // name and version as separate arguments, so we need to split
+        // them apart. Plain links like "DateInput" are passed through
+        // as-is.
+        const path = href.replace(/^\/+/, '') // "/v11_7/DateInput" -> "v11_7/DateInput"
+        const [first, second] = path.split('/')
+        const isVersionedLink = MINOR_VERSION_REGEX.test(first) && second
+
+        if (isVersionedLink) {
+          navigateTo(second, { minorVersion: first })
+        } else {
+          navigateTo(href)
+        }
       }}
     >
       {text}

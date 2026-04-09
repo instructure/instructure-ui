@@ -6,7 +6,9 @@ if [ "$2" = "commit" ] && [ -n "$3" ]; then
 fi
 
 # Check if a rebase is in progress
-if [ -d ".git/rebase-merge" ] || [ -d ".git/rebase-apply" ]; then
+if [ -d "$(git rev-parse --git-path rebase-merge)" ] ||
+   [ -d "$(git rev-parse --git-path rebase-apply)" ]; then
+  echo "Skipping prepare-commit-msg git hook during rebase"
   exit 0
 fi
 

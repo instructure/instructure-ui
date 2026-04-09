@@ -36,7 +36,7 @@ const config = {
   mode: ENV === 'production' ? 'production' : 'development',
   cache: ENV !== 'production',
   bail: !DEBUG,
-  devtool: ENV === 'production' ? false : 'cheap-module-source-map',
+  devtool: ENV === 'production' ? false : 'eval-source-map',
   module: {
     rules
   },

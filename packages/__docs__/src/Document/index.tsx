@@ -22,17 +22,17 @@
  * SOFTWARE.
  */
 
-import { Component } from 'react'
+import React, { Component } from 'react'
 
 import { Link } from '@instructure/ui-link'
 import { View } from '@instructure/ui-view'
 import { Tabs } from '@instructure/ui-tabs'
 import type { TabsProps } from '@instructure/ui-tabs'
+import type { NewBaseTheme } from '@instructure/ui-themes'
 import { SourceCodeEditor } from '@instructure/ui-source-code-editor'
-import { withStyle } from '@instructure/emotion'
+import { withStyleForDocs as withStyle } from '../withStyleForDocs'
 
 import generateStyle from './styles'
-import functionalComponentThemes from '../../functionalComponentThemes'
 
 import { Description } from '../Description'
 import { Properties } from '../Properties'
@@ -42,12 +42,16 @@ import { ComponentTheme } from '../ComponentTheme'
 import { TableOfContents } from '../TableOfContents'
 import { Heading } from '../Heading'
 
+import { AppContext } from '../appContext'
+
 import { allowedProps } from './props'
 import type { DocumentProps, DocumentState, DocDataType } from './props'
 
 @withStyle(generateStyle)
 class Document extends Component<DocumentProps, DocumentState> {
   static allowedProps = allowedProps
+  static contextType = AppContext
+  declare context: React.ContextType<typeof AppContext>
 
   static defaultProps = {
     description: undefined,
@@ -75,22 +79,44 @@ class Document extends Component<DocumentProps, DocumentState> {
   fetchGenerateComponentTheme = async () => {
     const { doc, themeVariables } = this.props
     let generateTheme
-    if (this.state.selectedDetailsTabId === doc.id) {
-      generateTheme = doc?.componentInstance?.generateComponentTheme
-    } else {
-      generateTheme = doc?.children?.find(
-        (value) => value.id === this.state.selectedDetailsTabId
-      )?.componentInstance?.generateComponentTheme
+    // Doc IDs use dot notation (e.g. "Menu.Item") but theme component keys
+    // use PascalCase without dots (e.g. "MenuItem").
+    // New-theme entries are in themeVariables.newTheme.components.
+    const selectedId = this.state.selectedDetailsTabId
+    type ComponentKey = keyof NewBaseTheme['components']
+    const childDoc =
+      selectedId !== doc.id
+        ? doc?.children?.find((value) => value.id === selectedId)
+        : null
+    // in case of some components, we need to display the theme variables of other components based on themeId (like displaying the theme variables of Options in Drillsdown.Group)
+    const themeKey: ComponentKey = (childDoc?.themeId ||
+      selectedId?.replace(/\./g, '')) as ComponentKey
+    const isLegacyTheme = this.context?.componentVersion == 'v11_6'
+    // new theme
+    if (!isLegacyTheme) {
+      const newThemeEntry = themeVariables?.newTheme?.components?.[themeKey]
+      const componentInstance =
+        selectedId === doc.id
+          ? doc?.componentInstance
+          : childDoc?.componentInstance
+      if (
+        newThemeEntry &&
+        typeof componentInstance?.generateComponentTheme !== 'function'
+      ) {
+        // new theme - use pre-computed theme object directly
+        this.setState({ componentTheme: newThemeEntry })
+        return
+      }
     }
-    const generateThemeFunctional =
-      functionalComponentThemes[
-        doc.id as keyof typeof functionalComponentThemes
-      ]
+    // old theme - use generateComponentTheme function
+    if (selectedId === doc.id) {
+      generateTheme = doc?.componentInstance?.generateComponentTheme
+      // TODO functional components do not work, e.g. Avatar
+    } else {
+      generateTheme = childDoc?.componentInstance?.generateComponentTheme
+    }
     if (typeof generateTheme === 'function' && themeVariables) {
       this.setState({ componentTheme: generateTheme(themeVariables) })
-    } else if (generateThemeFunctional && themeVariables) {
-      const componentTheme = await generateThemeFunctional(themeVariables)
-      this.setState({ componentTheme: componentTheme })
     } else {
       this.setState({ componentTheme: undefined })
     }
@@ -138,12 +164,18 @@ class Document extends Component<DocumentProps, DocumentState> {
           <View as="div" margin="0 0 x-small 0">
             See which global theme variables are mapped to the component here:{' '}
             {this.renderThemeLink(doc)}
+            <br />
+            <br />
+            Note: Theme variables with a dot in their name are nested objects,
+            to override them you need to override the whole object, for example:
+            &nbsp;
+            <code>
+              themeOverride=
+              {`{{ boxShadow: {x: "0.3rem", y: "0.5rem", color: "red"}}}`}
+            </code>
           </View>
         ) : null}
-        <ComponentTheme
-          componentTheme={componentTheme}
-          themeVariables={themeVariables}
-        />
+        <ComponentTheme componentTheme={componentTheme} />
 
         <View margin="x-large 0 0" display="block">
           <Heading
@@ -237,15 +269,24 @@ class Document extends Component<DocumentProps, DocumentState> {
   }
 
   renderUsage() {
-    const { esPath, id, displayName, packageName, title } = this.props.doc
+    const { esPath, id, displayName, packageName, title, componentVersion } =
+      this.props.doc
+    const { selectedMinorVersion } = this.props
     const importName = displayName || id
+
+    // For versioned components, show the version-specific import path
+    // e.g. '@instructure/ui-avatar/v11_6' instead of '@instructure/ui-avatar'
+    const versionedPackageName =
+      packageName && componentVersion && selectedMinorVersion
+        ? `${packageName}/${selectedMinorVersion}`
+        : packageName
 
     const example = []
 
-    if (packageName) {
+    if (versionedPackageName) {
       example.push(`\
 /*** ES Modules (with tree shaking) ***/
-import { ${importName} } from '${packageName}'
+import { ${importName} } from '${versionedPackageName}'
 `)
     }
 

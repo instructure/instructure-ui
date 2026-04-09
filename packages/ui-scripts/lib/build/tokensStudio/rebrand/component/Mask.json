@@ -1,0 +1,8 @@
+{
+  "mask": {
+    "backgroundColor": {
+      "value": "{color.background.overlay.base}",
+      "type": "color"
+    }
+  }
+}

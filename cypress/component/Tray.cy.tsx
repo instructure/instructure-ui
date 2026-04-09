@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Button, Overlay, Text, Tray, View } from '@instructure/ui'
+import { Button, Overlay, Text, Tray, View } from '@instructure/ui/latest'
 import React from 'react'
 
 import '../support/component'

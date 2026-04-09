@@ -24,7 +24,7 @@
 
 'use client'
 import React, { useState } from 'react'
-import { DateInput as di, IconAddLine } from '@instructure/ui'
+import { DateInput as di, IconAddLine } from '@instructure/ui/latest'
 
 const DateInput = di as any
 

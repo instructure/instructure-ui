@@ -120,7 +120,12 @@ const textDirectionContextConsumer: TextDirectionContextConsumerType =
           return (
             <TextDirectionContext.Consumer>
               {(dir) => {
-                if (process.env.NODE_ENV !== 'production' && dir === 'auto') {
+                if (
+                  typeof process !== 'undefined' &&
+                  (process?.env?.NODE_ENV !== 'production' ||
+                    process?.env?.GITHUB_PULL_REQUEST_PREVIEW === 'true') &&
+                  dir === 'auto'
+                ) {
                   console.warn(
                     "'auto' is not an supported value for the 'dir' prop. Please pass 'ltr' or 'rtl'"
                   )
@@ -148,7 +153,10 @@ const textDirectionContextConsumer: TextDirectionContextConsumerType =
       // } = forwardRef<any, TextDirectionContextConsumerProps>((props, ref) => (
       //   <TextDirectionContextConsumerComponent {...props} forwardedRef={ref} />
       // ))
-      if (process.env.NODE_ENV !== 'production') {
+      if (
+        typeof process !== 'undefined' &&
+        process?.env?.NODE_ENV !== 'production'
+      ) {
         const displayName =
           ComposedComponent.displayName || ComposedComponent.name
         TextDirectionContextConsumerForwardingRef.displayName = `TextDirectionContextConsumerForwardingRef(${displayName})`

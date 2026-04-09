@@ -1,6 +1,6 @@
 {
   "name": "@instructure/emotion",
-  "version": "11.6.0",
+  "version": "11.7.1",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -27,6 +27,7 @@
     "@emotion/react": "^11",
     "@instructure/console": "workspace:*",
     "@instructure/shared-types": "workspace:*",
+    "@instructure/ui-color-utils": "workspace:*",
     "@instructure/ui-decorator": "workspace:*",
     "@instructure/ui-i18n": "workspace:*",
     "@instructure/ui-react-utils": "workspace:*",
@@ -51,6 +52,7 @@
   "sideEffects": false,
   "exports": {
     ".": {
+      "src": "./src/index.ts",
       "types": "./types/index.d.ts",
       "import": "./es/index.js",
       "require": "./lib/index.js",

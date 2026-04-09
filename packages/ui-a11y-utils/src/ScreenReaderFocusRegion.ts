@@ -188,6 +188,18 @@ class ScreenReaderFocusRegion {
     if (!this._options.shouldContainFocus) {
       return
     }
+    // Blur any focused element outside the context before setting aria-hidden,
+    // otherwise the browser warns about aria-hidden on an ancestor of a focused element
+    const activeElement = this._contextElement
+      ? (this._contextElement as Element).ownerDocument?.activeElement
+      : null
+    if (
+      activeElement &&
+      activeElement !== document.body &&
+      !this._contextElement!.contains(activeElement)
+    ) {
+      ;(activeElement as HTMLElement).blur()
+    }
     this._observer = new MutationObserver(this.handleDOMMutation)
     let node = this._contextElement
     while (

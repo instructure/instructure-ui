@@ -23,8 +23,13 @@
  */
 
 import sharedThemeTokens from '../../sharedThemeTokens'
-import { BaseTheme, Colors } from '@instructure/shared-types'
+import { Colors } from '@instructure/shared-types'
 import { colors } from './colors'
+import {
+  legacyCanvas as canvas,
+  type LegacyCanvas as Canvas
+} from '../newThemes'
+import { Theme } from '../../index'
 
 const key = 'canvas'
 
@@ -54,14 +59,14 @@ const brandVariables = {
 
 export type CanvasBrandVariables = typeof brandVariables
 
-export type CanvasTheme = BaseTheme & {
-  key: 'canvas'
-} & typeof sharedThemeTokens & { colors: Colors } & CanvasBrandVariables
+export type CanvasTheme = Theme<Canvas, 'canvas'> &
+  typeof sharedThemeTokens & { colors: Colors } & CanvasBrandVariables
 
 /**
- * Canvas theme
+ * Canvas theme object
  */
-const canvas: CanvasTheme = {
+const theme: CanvasTheme = {
+  newTheme: canvas,
   key,
   description: 'This theme meets WCAG 2.1 AA rules for color contrast.',
   ...sharedThemeTokens,
@@ -69,5 +74,4 @@ const canvas: CanvasTheme = {
   ...brandVariables
 }
 
-export { canvas }
-export default canvas
+export default theme

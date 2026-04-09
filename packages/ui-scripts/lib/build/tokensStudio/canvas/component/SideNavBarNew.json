@@ -1,0 +1,164 @@
+{
+  "sideNavBarNew": {
+    "backgroundColor": {
+      "value": "{color.background.dark}",
+      "type": "color"
+    },
+    "fill": {
+      "value": "{color.icon.onColor}",
+      "type": "color"
+    },
+    "fontColor": {
+      "value": "{color.text.onColor}",
+      "type": "color"
+    },
+    "minimizedminWidth": {
+      "value": "3.375rem",
+      "type": "sizing"
+    },
+    "toggleTransition": {
+      "value": "300ms",
+      "type": "other"
+    },
+    "minWidth": {
+      "value": "5.25rem",
+      "type": "sizing"
+    },
+    "margin": {
+      "value": "0rem",
+      "type": "spacing"
+    },
+    "minimizedMargin": {
+      "value": "0rem",
+      "type": "spacing"
+    },
+    "mainNavMargin": {
+      "value": "0rem",
+      "type": "spacing"
+    },
+    "mainNavMinimizedMargin": {
+      "value": "0rem",
+      "type": "spacing"
+    },
+    "mainNavGap": {
+      "value": "{spacing.padding.container.xxs}",
+      "type": "spacing"
+    },
+    "mainNavMinimizedGap": {
+      "value": "0rem",
+      "type": "spacing"
+    },
+    "navItemsGap": {
+      "value": "0rem",
+      "type": "spacing"
+    },
+    "boxShadow": {
+      "value": [
+        {
+          "x": "0rem",
+          "y": "0rem",
+          "blur": "0rem",
+          "spread": "0rem",
+          "color": "{color.transparentColor}",
+          "type": "dropShadow"
+        },
+        {
+          "x": "0rem",
+          "y": "0rem",
+          "blur": "0rem",
+          "spread": "0rem",
+          "color": "{color.transparentColor}",
+          "type": "dropShadow"
+        }
+      ],
+      "type": "boxShadow",
+      "description": "Do not use this for other components"
+    },
+    "borderRadius": {
+      "value": "0rem",
+      "type": "borderRadius"
+    },
+    "minimizedBorderRadius": {
+      "value": "0rem",
+      "type": "borderRadius"
+    },
+    "borderColor": {
+      "value": "{color.stroke.base}",
+      "type": "color"
+    }
+  },
+  "sideNavBarItemNew": {
+    "iconWrapperHeight": {
+      "value": "2.25rem",
+      "type": "sizing"
+    },
+    "borderRadius": {
+      "value": "0rem",
+      "type": "borderRadius"
+    },
+    "backgroundColor": {
+      "value": "transparent",
+      "type": "color"
+    },
+    "horizontalPadding": {
+      "value": "0.375rem",
+      "type": "spacing"
+    },
+    "verticalPadding": {
+      "value": "0.25rem",
+      "type": "spacing"
+    },
+    "fontColor": {
+      "value": "{color.text.onColor}",
+      "type": "color"
+    },
+    "fontFamily": {
+      "value": "{fontFamily.base}",
+      "type": "fontFamilies"
+    },
+    "fontSize": {
+      "value": "{fontSize.textSm}",
+      "type": "fontSizes"
+    },
+    "fontWeight": {
+      "value": "{fontWeight.body.base}",
+      "type": "fontWeights"
+    },
+    "hoverBackgroundColor": {
+      "value": "{color.background.interactive.action.primary.hover}",
+      "type": "color"
+    },
+    "lineHeight": {
+      "value": "{lineHeight.paragraph.base}",
+      "type": "lineHeights"
+    },
+    "linkTextDecoration": {
+      "value": "none",
+      "type": "other"
+    },
+    "selectedBackgroundColor": {
+      "value": "{color.background.base}",
+      "type": "color"
+    },
+    "selectedFontColor": {
+      "value": "{color.text.interactive.navigation.primary.base}",
+      "type": "color"
+    },
+    "innerFocusOutlineColor": {
+      "value": "{color.stroke.interactive.focusRing.onColor}",
+      "type": "color"
+    },
+    "selectedInnerFocusOutlineColor": {
+      "value": "{color.stroke.interactive.focusRing.base}",
+      "type": "color"
+    },
+    "outerFocusOutlineColor": {
+      "value": "{color.stroke.base}",
+      "type": "color"
+    },
+    "selectedOuterFocusOutlineColor": {
+      "value": "{color.stroke.interactive.focusRing.onColor}",
+      "type": "color"
+    }
+  }
+}

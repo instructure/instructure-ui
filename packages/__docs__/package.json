@@ -1,7 +1,7 @@
 {
   "name": "docs-app",
   "private": true,
-  "version": "11.6.0",
+  "version": "11.7.1",
   "description": "Documentation and showcase application for Instructure-UI.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "repository": {
@@ -50,6 +50,7 @@
     "@instructure/ui-color-utils": "workspace:*",
     "@instructure/ui-date-input": "workspace:*",
     "@instructure/ui-date-time-input": "workspace:*",
+    "@instructure/ui-decorator": "workspace:*",
     "@instructure/ui-dialog": "workspace:*",
     "@instructure/ui-dom-utils": "workspace:*",
     "@instructure/ui-drawer-layout": "workspace:*",

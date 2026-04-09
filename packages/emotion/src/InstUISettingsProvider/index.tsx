@@ -73,7 +73,12 @@ function InstUISettingsProvider({
 }: InstUIProviderProps) {
   const finalDir = dir || useContext(TextDirectionContext)
 
-  if (process.env.NODE_ENV !== 'production' && finalDir === 'auto') {
+  if (
+    typeof process !== 'undefined' &&
+    (process?.env?.NODE_ENV !== 'production' ||
+      process?.env?.GITHUB_PULL_REQUEST_PREVIEW === 'true') &&
+    finalDir === 'auto'
+  ) {
     console.warn(
       "'auto' is not an supported value for the 'dir' prop. Please pass 'ltr' or 'rtl'"
     )

@@ -1,7 +1,7 @@
 {
   "name": "@instructure/ui-scripts",
   "private": true,
-  "version": "11.6.0",
+  "version": "11.7.1",
   "description": "A UI build scripts library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -25,6 +25,7 @@
     "@instructure/pkg-utils": "workspace:*",
     "@lerna/project": "^6.4.1",
     "dotenv": "^16.5.0",
+    "dprint": "^0.50.2",
     "find-up": "^7.0.0",
     "http-server": "^14.1.1",
     "jscodeshift": "^0.16.1",
@@ -39,7 +40,6 @@
   },
   "peerDependencies": {
     "eslint": "^9",
-    "prettier": "^2",
     "react": ">=18 <=19",
     "webpack": "^5"
   },

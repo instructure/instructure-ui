@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-decorator",
-  "version": "11.6.0",
+  "version": "11.7.1",
   "description": "A utility to wrap (decorates) a React component class adding functionality.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -32,6 +32,7 @@
   },
   "exports": {
     ".": {
+      "src": "./src/index.ts",
       "types": "./types/index.d.ts",
       "import": "./es/index.js",
       "require": "./lib/index.js",

@@ -28,7 +28,7 @@ import {
   ColorPreset,
   ColorContrast,
   Button
-} from '@instructure/ui'
+} from '@instructure/ui/latest'
 
 import '../support/component'
 import 'cypress-real-events'

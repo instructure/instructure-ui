@@ -21,9 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
+import type { ComponentTypes as NewComponentTypes } from './themes/newThemes/componentTypes'
+import type {
+  SharedTokens,
+  BaseTheme as NewBaseTheme,
+  TokenBoxshadowValueInst,
+  TokenTypographyValueInst
+} from './themes/newThemes/commonTypes'
 import type { CanvasHighContrastTheme } from './themes/canvasHighContrast'
 import type { CanvasTheme, CanvasBrandVariables } from './themes/canvas'
+import type { DarkTheme } from './themes/dark'
+import type { LightTheme } from './themes/light'
 import type {
   BaseTheme,
   Primitives,
@@ -32,27 +40,41 @@ import type {
   UI
 } from '@instructure/shared-types'
 
-import { canvasHighContrast } from './themes/canvasHighContrast'
-import { canvas } from './themes/canvas'
+import canvasHighContrast from './themes/canvasHighContrast'
+import canvas from './themes/canvas'
+
+import dark from './themes/dark'
+
+import light from './themes/light'
 
 import {
   primitives,
   additionalPrimitives
 } from './sharedThemeTokens/colors/primitives'
 import dataVisualization from './sharedThemeTokens/colors/dataVisualization'
+import { boxShadowObjectsToCSSString } from './utils/boxShadowObjectToString'
+
+import type {
+  LegacyCanvas as NewCanvas,
+  LegacyCanvasHighContrast as NewCanvasHighContrast,
+  Dark,
+  Light
+} from './themes/newThemes'
 
 type ThemeMap = {
   canvas: CanvasTheme
   'canvas-high-contrast': CanvasHighContrastTheme
-
   // needed for custom theme support
   [k: string]: BaseTheme
 }
 
 type ThemeKeys = keyof ThemeMap
 
-type Theme = BaseTheme & {
-  key: ThemeKeys
+type Theme<
+  NewThemeType extends NewBaseTheme = NewBaseTheme,
+  K extends ThemeKeys = ThemeKeys
+> = BaseTheme & { newTheme: NewThemeType } & {
+  key: K
 } & Partial<CanvasBrandVariables>
 
 type ThemeSpecificStyle<ComponentTheme> = {
@@ -60,11 +82,14 @@ type ThemeSpecificStyle<ComponentTheme> = {
 }
 
 export {
+  dark,
+  light,
   canvas,
   canvasHighContrast,
   primitives,
   additionalPrimitives,
-  dataVisualization
+  dataVisualization,
+  boxShadowObjectsToCSSString
 }
 export default canvas
 export type {
@@ -76,8 +101,19 @@ export type {
   CanvasTheme,
   CanvasBrandVariables,
   CanvasHighContrastTheme,
+  DarkTheme,
+  LightTheme,
   Primitives,
   AdditionalPrimitives,
   DataVisualization,
-  UI
+  UI,
+  NewCanvas,
+  NewCanvasHighContrast,
+  Dark,
+  Light,
+  NewComponentTypes,
+  NewBaseTheme,
+  TokenBoxshadowValueInst,
+  TokenTypographyValueInst,
+  SharedTokens
 }

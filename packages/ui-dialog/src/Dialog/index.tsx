@@ -144,7 +144,7 @@ class Dialog extends Component<DialogProps> {
   get contentElement() {
     let contentElement = findDOMNode(this.props.contentElement)
     if (!contentElement) {
-      contentElement = findDOMNode(this.ref)
+      contentElement = this.ref ?? undefined
     }
     return contentElement as Element | Node
   }
@@ -168,7 +168,8 @@ class Dialog extends Component<DialogProps> {
         {...omitProps(this.props, Dialog.allowedProps)}
         role={role}
         aria-label={this.props.label}
-        className={this.props.className}
+        className={this.props.className} // TODO in V2 remove className, there is no usage of it.
+        style={{ borderRadius: 'inherit' }} // ensure the dialog inherits border radius from View
         ref={this.getRef}
       >
         {this.props.children}

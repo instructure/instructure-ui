@@ -25,7 +25,7 @@
 import 'cypress-real-events'
 
 import '../support/component'
-import { Position } from '@instructure/ui'
+import { Position } from '@instructure/ui/latest'
 import { within } from '@instructure/ui-utils'
 
 const parentDefaults = {

@@ -36,7 +36,7 @@ import {
   IconEndLine,
   IconCheckLine,
   AccessibleContent
-} from '@instructure/ui'
+} from '@instructure/ui/latest'
 
 const Metric = mc as any
 const MetricGroup = mcg as any
@@ -152,6 +152,8 @@ export default function SmallComponentsPage() {
       </div>
       <div>
         <Text color="secondary-inverse">I&#39;m secondary-inverse text</Text>
+        <Text color="primary-on">I&#39;m primary-on text</Text>
+        <Text color="secondary-on">I&#39;m secondary-on text</Text>
       </div>
       <div>
         <Text size="descriptionPage">descriptionPage</Text>

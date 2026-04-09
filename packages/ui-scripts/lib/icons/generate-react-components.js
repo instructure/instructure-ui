@@ -50,7 +50,7 @@ const NOTICE_HEADER = `/*
 `
 
 async function generateIconComponent(glyph) {
-  const { name, variant, glyphName, deprecated, bidirectional, src } = glyph
+  const { name, variant, glyphName, bidirectional, src } = glyph
 
   const source = src.match(
     /<svg\b[^>]*?(?:viewBox="(\b[^"]*)")?>([\s\S]*?)<\/svg>/
@@ -66,7 +66,6 @@ class ${name}${variant} extends Component<SVGIconProps> {
   static glyphName = '${glyphName}'
   static variant = '${variant}'
   static displayName = '${name}${variant}'
-  ${deprecated ? `static deprecated = true` : ''}
   static allowedProps: Array<string> = [ ...SVGIcon.allowedProps ]
 
   ref: Element | null = null
@@ -82,13 +81,6 @@ class ${name}${variant} extends Component<SVGIconProps> {
   }
 
   render () {
-    ${
-      deprecated
-        ? `if (process.env.NODE_ENV !== 'production') {
-      console.warn('<${name}${variant} /> is deprecated. Please use <${deprecated}${variant} /> instead.')
-    }`
-        : ''
-    }
     return (
       <SVGIcon
         {...this.props}
@@ -115,6 +107,7 @@ function generateIconIndex(glyphs) {
       return `export { ${glyph.name}${glyph.variant} } from './${glyph.name}${glyph.variant}'`
     })
     .join('\n\n')
+
   return NOTICE_HEADER + content
 }
 

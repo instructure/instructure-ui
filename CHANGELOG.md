@@ -3,69 +3,130 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [11.6.0](https://github.com/instructure/instructure-ui/compare/v11.5.0...v11.6.0) (2026-02-18)
-
+## [11.7.1](https://github.com/instructure/instructure-ui/compare/v11.7.0...v11.7.1) (2026-03-20)
 
 ### Bug Fixes
 
-* **ui-modal:** voiceOver in Chrome treats scrollable modal body as single interactive object preventing line-by-line navigation ([0be3fb1](https://github.com/instructure/instructure-ui/commit/0be3fb1dee541a37c2d38ae6656fd0330f651265))
+- **ui-buttons:** fix button to icon size mapping ([4bf8ed1](https://github.com/instructure/instructure-ui/commit/4bf8ed1dca8d0d88a79815bd80b4de252fa843ee))
 
+# [11.7.0](https://github.com/instructure/instructure-ui/compare/v11.6.0...v11.7.0) (2026-03-18)
+
+### Bug Fixes
+
+- **many:** a11y requirement fix, interactive links must be underlined on interaction and isWithinText prop was removed ([8531756](https://github.com/instructure/instructure-ui/commit/8531756c564a3220a8266d02a72fb26c3bbcc977))
+- **ui-checkbox:** prevent blur on checkbox label mousedown by manually restoring focus to hidden input ([843ca3e](https://github.com/instructure/instructure-ui/commit/843ca3e0d0db1197b343a17cd2740a4a8446d318))
+- **ui-text-input,emotion:** fix TextInput displaying double focus rings when a focusable element is rendered inside ([b33cea2](https://github.com/instructure/instructure-ui/commit/b33cea283ef84cdc674c43bf8a0b7ca55f04cfaa))
+- **ui-view:** clipping ContextView child content overflow ([94a76e8](https://github.com/instructure/instructure-ui/commit/94a76e884ee2ee09071d793daff9696049c06fe4))
 
 ### Features
 
-* **ui-date-input:** add missing role and aria-label to DateInput2 dialog ([6f2219a](https://github.com/instructure/instructure-ui/commit/6f2219a4f8df3f1261e5d41052c9233fdfaff6e8))
+- **ui-text:** migrate to new theming system ([19c7c44](https://github.com/instructure/instructure-ui/commit/19c7c4413a5632b6b10380f888824384724b6be3))
+- **many:** add new theming solution ([1cef88e](https://github.com/instructure/instructure-ui/commit/1cef88e97f40dd85e15b10bc4307d013ae8b09d0))
+- **many:** add solution for using both old and new token system in the same app ([688a713](https://github.com/instructure/instructure-ui/commit/688a713ff715433bb085323dbad61285387c5141))
+- **many:** refactor theme parser and implement tray and tabs ([ef28373](https://github.com/instructure/instructure-ui/commit/ef283736fd76fbdcc674854916b298c199f8df50))
+- **many:** rework TextArea and dependent FormField components ([0f8c438](https://github.com/instructure/instructure-ui/commit/0f8c43803e3458bbf7b2dd266a9e246cb89b0d3c))
+- **many:** separate focus outline calculation from view, inject sharedTokens to generateStyles ([793fe43](https://github.com/instructure/instructure-ui/commit/793fe4346e7b960a272e8b4a98bc8e2c9bb7d2fe))
+- **ui-avatar:** rework avatar to comply with new design ([70a60d4](https://github.com/instructure/instructure-ui/commit/70a60d4754851be21412a0fbaf234dd4ab39650b))
+- **ui-badge:** rework Badge ([214ad24](https://github.com/instructure/instructure-ui/commit/214ad2468e9a5a2ea819d3d65f6efa35e915bd3e))
+- **ui-breadcrumb:** migrate to new theming system and add new lucide icon and change separator style calculation ([d6c8006](https://github.com/instructure/instructure-ui/commit/d6c8006d213e95c6502d611d9a8e6792ba46e55d))
+- **ui-buttons,ui-text-input:** add condensed sizes to IconButton and simplify TextInput afterElement ([49bd675](https://github.com/instructure/instructure-ui/commit/49bd675ad9d9e77bffeb1940888d33d6cc911c60))
+- **ui-buttons:** add v2 button components with new icon system and theming ([4f49e3e](https://github.com/instructure/instructure-ui/commit/4f49e3e27d8a44f566f2390f8bb8abf6d8ee745b))
+- **ui-checkbox:** checkbox rework ([85cc06b](https://github.com/instructure/instructure-ui/commit/85cc06b3580e117680b5df1c804a519f8ac7828c))
+- **ui-color-picker:** rework ColorPicker ([fd7780f](https://github.com/instructure/instructure-ui/commit/fd7780fc7ba49cb12bdbe67d2f646d3ae0fbd23a))
+- **ui-date-input,ui-calendar:** rework Calendar and DateInput ([4f127ef](https://github.com/instructure/instructure-ui/commit/4f127ef48f4cf3263e07c4b147e2f3f7c5218a3a))
+- **ui-date-input:** migrate DateInput and DateInput2 ([c685444](https://github.com/instructure/instructure-ui/commit/c68544410815dd9cb2602e5a531b0de10c50b151))
+- **ui-file-drop:** migrate to new theming system ([7e9208a](https://github.com/instructure/instructure-ui/commit/7e9208ad056ef1d18f5ffd616540624ef5615991))
+- **ui-flex:** rework Flex ([ef2104b](https://github.com/instructure/instructure-ui/commit/ef2104bc3448df5b54647ec5db008b236441b919))
+- **ui-form-field:** rework FormFieldGroup ([fb06912](https://github.com/instructure/instructure-ui/commit/fb069121f2e522b5ac18deb7f513e6212735cde2))
+- **ui-grid:** rework Grid ([1002c2d](https://github.com/instructure/instructure-ui/commit/1002c2dea5dc3f94ed3080c06a16a7cc385eac56))
+- **ui-heading:** rework Heading ([b8d5995](https://github.com/instructure/instructure-ui/commit/b8d5995bd0b7d11db6a4d83a96cef74c434ab40f))
+- **ui-icons-lucide:** add lucide icons ([881275f](https://github.com/instructure/instructure-ui/commit/881275f2dff553db67c492bd2f929812f59fec37))
+- **ui-icons,ui-billboard:** migrate to new theming system ([fb42132](https://github.com/instructure/instructure-ui/commit/fb42132f5f5fc9b0ecfe2b28773c2e1c10fa0c86))
+- **ui-instructure:** migrate aiinformation to the new theming system ([419de61](https://github.com/instructure/instructure-ui/commit/419de618bb76b0fd4e71f1bfa8481b54b3c0af6e))
+- **ui-link:** migrate to new theming system and deprecate old variants and add new size prop ([b83f73b](https://github.com/instructure/instructure-ui/commit/b83f73b6b6782ff48af88c5fa78b9ced0363e327))
+- **ui-link:** migrate to new theming system and deprecate old variants and add new size prop ([777836e](https://github.com/instructure/instructure-ui/commit/777836ecf40f9df152885b4df2fa6f2a4abac1da))
+- **ui-list:** migrate to new theming system ([98e203a](https://github.com/instructure/instructure-ui/commit/98e203a3f13f3a7b2e97846500c6d0d91730e29e))
+- **ui-metric,emotion:** rework Metric ([019cac4](https://github.com/instructure/instructure-ui/commit/019cac4b4b7d9982be8d29ac831672c2e2d1b16a))
+- **ui-modal:** rework Modal ([ce24aa1](https://github.com/instructure/instructure-ui/commit/ce24aa13ea866d62681e5e847cd42f0a01fc3fc3))
+- **ui-navigation:** rework AppNav ([fba6b4d](https://github.com/instructure/instructure-ui/commit/fba6b4d6a7feb616175ff105f7d8d2aee34eca2b))
+- **ui-number-input:** rewrite NumberInput to the new theming system ([500d4bc](https://github.com/instructure/instructure-ui/commit/500d4bc03037c2cc60bf83cd1e84b878bef87535))
+- **ui-pagination:** pagination rework ([662d474](https://github.com/instructure/instructure-ui/commit/662d4742c22098d24d8bf8edffef77a78c42d832))
+- **ui-pill:** migrate to new theming system ([8f8cfbe](https://github.com/instructure/instructure-ui/commit/8f8cfbee89256d3a29713cc73be1dcf7333a8488))
+- **ui-popover:** rework Popover ([f1fc5f2](https://github.com/instructure/instructure-ui/commit/f1fc5f27abc8fd64ede88b18368e95a4ba8d3762))
+- **ui-progress:** migrate progress bar to new theming ([caed1a6](https://github.com/instructure/instructure-ui/commit/caed1a68ad055d2b36927a55545f95128071a4e1))
+- **ui-progress:** rework ProgressCircle ([cc773de](https://github.com/instructure/instructure-ui/commit/cc773de16d96f09cb7192a411ce7965acc525fff))
+- **ui-radio-input:** migrate toggle variant to the new theming system ([87e3f80](https://github.com/instructure/instructure-ui/commit/87e3f80e07eaa4166eb0a9f45f8d39d6789b4ce7))
+- **ui-radio-input:** use the new theme for RadioInput ([34bfd59](https://github.com/instructure/instructure-ui/commit/34bfd5956c47beceacb50637e7fd605b9e3f4210))
+- **ui-range-input:** rework RangeInput ([7e1490c](https://github.com/instructure/instructure-ui/commit/7e1490c73f252acca017424722c7055e9be10c92))
+- **ui-react-utils,ui-icons-lucide,ui-avatar:** add lucide icons to Avatar, refactor ui-icons-lucid package ([ab5c1ca](https://github.com/instructure/instructure-ui/commit/ab5c1ca8ec9961d754dafee0bcbe5040bb2641b1))
+- **ui-react-utils:** add useDeterministicID which can be used instead of withDeterministicId for functional components ([91f025e](https://github.com/instructure/instructure-ui/commit/91f025e0a5b157f7a3bc801d8fd45d96b454124c))
+- **ui-scripts,ui-icons,ui-codemods:** add build-time generation of custom/brand icon components and migration codemod ([b56cb4e](https://github.com/instructure/instructure-ui/commit/b56cb4e69339387ddfb37d532e644e20c4d87876))
+- **ui-scripts:** add exeption for primitive theme ([0d54af1](https://github.com/instructure/instructure-ui/commit/0d54af1b99a1aeaf8640e2fa4fb7d9205857cbf8))
+- **ui-scripts:** rework parser to accomodate multiple files ([bd4960e](https://github.com/instructure/instructure-ui/commit/bd4960e3e806ea5321b170309e30c0f7a9ef22ec))
+- **ui-side-nav-bar:** rework SideNavBar ([97e48d1](https://github.com/instructure/instructure-ui/commit/97e48d1d807b193bbd637a57b27efe102731ba17))
+- **ui-source-code-editor:** rework SourceCodeEditor ([2dcb747](https://github.com/instructure/instructure-ui/commit/2dcb747f94987e456c0c5bb5619bb6c8b641e98b))
+- **ui-spinner,ui-avatar:** refactor spinner ([665ab13](https://github.com/instructure/instructure-ui/commit/665ab13c536a8b94b7ba3adc316d06a81f2b67e4))
+- **ui-table:** migrate table to new theming system ([db376b5](https://github.com/instructure/instructure-ui/commit/db376b5ea018cad4edd56c975158bcc4d7dede89))
+- **ui-tag:** rework Tag ([f3a72e3](https://github.com/instructure/instructure-ui/commit/f3a72e3be1d2f6aa912fa1e348d9eec6849b3f8c))
+- **ui-toggle-details:** rework ToggleDetails ([a201f69](https://github.com/instructure/instructure-ui/commit/a201f69884d47ea24de0972b7d93c0f2a7508e4b))
+- **ui-toggle-details:** rework ToggleGroup ([b36a4d3](https://github.com/instructure/instructure-ui/commit/b36a4d3873be7350659f68f9bfa695c51020cea9))
+- **ui-tooltip:** rework Tooltip ([f87cf01](https://github.com/instructure/instructure-ui/commit/f87cf01e9bdd1003ee68324b1eb5b1d2a207a275))
+- **ui-tray:** migrate to new theming system ([fea7820](https://github.com/instructure/instructure-ui/commit/fea78205526a3c07134c66c85003d5fd566e792a))
+- **ui-tree-browser:** migrate to new theming system, add controlled selection and hoverable prop ([dad9ff4](https://github.com/instructure/instructure-ui/commit/dad9ff4d1e85ab07ba917e658b8d5799a40ba069))
+- **ui-truncate-text:** rework TruncateText and sort the upgrade guide alphabetically ([61ea852](https://github.com/instructure/instructure-ui/commit/61ea8524000d08423249ff2f76acdb643ba1d047))
+- **ui-text:** Removed 'alert' color prop value. Use 'primary' color instead.
 
+Also improves documentation:
 
+- Clarify variant usage and recommendations in README
+- Add deprecation notes for size, weight, and lineHeight legacy values
+- Update color examples to include inverse colors and remove alert
+- Add JSDoc comments for deprecated prop values
+- Improve code examples with clearer formatting
 
+To test: Compare with Figma design
 
+# [11.6.0](https://github.com/instructure/instructure-ui/compare/v11.5.0...v11.6.0) (2026-02-18)
+
+### Bug Fixes
+
+- **ui-modal:** voiceOver in Chrome treats scrollable modal body as single interactive object preventing line-by-line navigation ([0be3fb1](https://github.com/instructure/instructure-ui/commit/0be3fb1dee541a37c2d38ae6656fd0330f651265))
+
+### Features
+
+- **ui-date-input:** add missing role and aria-label to DateInput2 dialog ([6f2219a](https://github.com/instructure/instructure-ui/commit/6f2219a4f8df3f1261e5d41052c9233fdfaff6e8))
 
 # [11.5.0](https://github.com/instructure/instructure-ui/compare/v11.4.0...v11.5.0) (2026-02-03)
 
-
 ### Features
 
-* **ui-table:** expose min-width prop, so one can make a table where each column has no wrapping text ([317897a](https://github.com/instructure/instructure-ui/commit/317897a996288108865e8204be075b1cfab7530f))
-* **ui-top-nav-bar:** allow to set aria-label on TopNavBar's overflow menu button ([2702ad4](https://github.com/instructure/instructure-ui/commit/2702ad42e42e67f1d69d8aa11d4135d9eea6bff2))
-* **ui-view:** allow to set View's display prop to contents, inherit, initial, revert, revert-layer, unset ([3c3c93f](https://github.com/instructure/instructure-ui/commit/3c3c93f824317155552778c7dbe24c5e18b32615))
-
-
-
-
+- **ui-table:** expose min-width prop, so one can make a table where each column has no wrapping text ([317897a](https://github.com/instructure/instructure-ui/commit/317897a996288108865e8204be075b1cfab7530f))
+- **ui-top-nav-bar:** allow to set aria-label on TopNavBar's overflow menu button ([2702ad4](https://github.com/instructure/instructure-ui/commit/2702ad42e42e67f1d69d8aa11d4135d9eea6bff2))
+- **ui-view:** allow to set View's display prop to contents, inherit, initial, revert, revert-layer, unset ([3c3c93f](https://github.com/instructure/instructure-ui/commit/3c3c93f824317155552778c7dbe24c5e18b32615))
 
 # [11.4.0](https://github.com/instructure/instructure-ui/compare/v11.3.0...v11.4.0) (2026-01-20)
 
-
 ### Features
 
-* **ui-color-picker:** add new labelLevel prop to set heading level in ColorContrast ([06c9e79](https://github.com/instructure/instructure-ui/commit/06c9e79fc87c31da4ca8eff61e93094aa09c8be5))
-* **ui-instructure:** add privacy notice link to the ai information panel ([447e40b](https://github.com/instructure/instructure-ui/commit/447e40b8ef1a5b776e01e831b2c5a6d45ca8274e))
-
-
-
-
+- **ui-color-picker:** add new labelLevel prop to set heading level in ColorContrast ([06c9e79](https://github.com/instructure/instructure-ui/commit/06c9e79fc87c31da4ca8eff61e93094aa09c8be5))
+- **ui-instructure:** add privacy notice link to the ai information panel ([447e40b](https://github.com/instructure/instructure-ui/commit/447e40b8ef1a5b776e01e831b2c5a6d45ca8274e))
 
 # [11.3.0](https://github.com/instructure/instructure-ui/compare/v11.2.0...v11.3.0) (2026-01-12)
 
-
 ### Bug Fixes
 
-* **ui-color-picker:** fix mixer button alignment and visual jump ([68c3e60](https://github.com/instructure/instructure-ui/commit/68c3e60acc5e1f410ed79a623a35fa3eaf7107f5))
-* **ui-color-picker:** fix popover scrolling when content exceeds viewport ([66f2b18](https://github.com/instructure/instructure-ui/commit/66f2b18af0dead1f62ee61629262c39c6273dad0))
-* **ui-icons:** fix ai info icon ([723ef9f](https://github.com/instructure/instructure-ui/commit/723ef9fb972fbcbf7627653698d2e47f8af49822))
-* **ui-link:** fix Link outline styles and overrides ([f23269e](https://github.com/instructure/instructure-ui/commit/f23269ed1139bb9833abbc894493a95bb80e27f4))
-* **ui-list:** align ordered list start position with unordered lists ([baed912](https://github.com/instructure/instructure-ui/commit/baed912a2f246797b5bcd58c40c64b26de6baaf2))
-* **ui-modal:** adjust scrollbar detection tolerance in ModalBody ([5ae1f42](https://github.com/instructure/instructure-ui/commit/5ae1f42f47102b87a8c7afabdd9ab51b331de96a))
-* **ui-selectable,ui-select:** fix typing of Select and Selectable event types and TypeScript errors in the examples ([bde40cc](https://github.com/instructure/instructure-ui/commit/bde40cc121674666cceb7eb24e116a50e1879445))
-* **ui-top-nav-bar:** fix aria-expanded added twice when displaying menus/popups ([b58a1bc](https://github.com/instructure/instructure-ui/commit/b58a1bc8daba596c987dc368d7772e53253c1d77))
-
+- **ui-color-picker:** fix mixer button alignment and visual jump ([68c3e60](https://github.com/instructure/instructure-ui/commit/68c3e60acc5e1f410ed79a623a35fa3eaf7107f5))
+- **ui-color-picker:** fix popover scrolling when content exceeds viewport ([66f2b18](https://github.com/instructure/instructure-ui/commit/66f2b18af0dead1f62ee61629262c39c6273dad0))
+- **ui-icons:** fix ai info icon ([723ef9f](https://github.com/instructure/instructure-ui/commit/723ef9fb972fbcbf7627653698d2e47f8af49822))
+- **ui-link:** fix Link outline styles and overrides ([f23269e](https://github.com/instructure/instructure-ui/commit/f23269ed1139bb9833abbc894493a95bb80e27f4))
+- **ui-list:** align ordered list start position with unordered lists ([baed912](https://github.com/instructure/instructure-ui/commit/baed912a2f246797b5bcd58c40c64b26de6baaf2))
+- **ui-modal:** adjust scrollbar detection tolerance in ModalBody ([5ae1f42](https://github.com/instructure/instructure-ui/commit/5ae1f42f47102b87a8c7afabdd9ab51b331de96a))
+- **ui-selectable,ui-select:** fix typing of Select and Selectable event types and TypeScript errors in the examples ([bde40cc](https://github.com/instructure/instructure-ui/commit/bde40cc121674666cceb7eb24e116a50e1879445))
+- **ui-top-nav-bar:** fix aria-expanded added twice when displaying menus/popups ([b58a1bc](https://github.com/instructure/instructure-ui/commit/b58a1bc8daba596c987dc368d7772e53253c1d77))
 
 ### Features
 
-* **ui-tabs:** add tabIndex prop to the Panel for WCAG-compliant focus control (defaults to 0 for backward compatibility) ([9b2121f](https://github.com/instructure/instructure-ui/commit/9b2121f3e0f5fb0abf4ad12158f9972aa1acc5a4))
-
-
-
-
+- **ui-tabs:** add tabIndex prop to the Panel for WCAG-compliant focus control (defaults to 0 for backward compatibility) ([9b2121f](https://github.com/instructure/instructure-ui/commit/9b2121f3e0f5fb0abf4ad12158f9972aa1acc5a4))
 
 # [11.2.0](https://github.com/instructure/instructure-ui/compare/v11.0.1...v11.2.0) (2025-11-06)
 

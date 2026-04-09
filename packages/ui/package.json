@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui",
-  "version": "11.6.0",
+  "version": "11.7.1",
   "description": "A meta package exporting all UI components",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -110,16 +110,38 @@
   },
   "sideEffects": false,
   "exports": {
-    ".": {
-      "types": "./types/index.d.ts",
-      "import": "./es/index.js",
-      "require": "./lib/index.js",
-      "default": "./es/index.js"
-    },
     "./lib/*": "./lib/*",
     "./es/*": "./es/*",
     "./types/*": "./types/*",
     "./package.json": "./package.json",
-    "./src/*": "./src/*"
+    "./src/*": "./src/*",
+    ".": {
+      "src": "./src/v11_6.ts",
+      "types": "./types/v11_6.d.ts",
+      "import": "./es/v11_6.js",
+      "require": "./lib/v11_6.js",
+      "default": "./es/v11_6.js"
+    },
+    "./v11_6": {
+      "src": "./src/v11_6.ts",
+      "types": "./types/v11_6.d.ts",
+      "import": "./es/v11_6.js",
+      "require": "./lib/v11_6.js",
+      "default": "./es/v11_6.js"
+    },
+    "./v11_7": {
+      "src": "./src/v11_7.ts",
+      "types": "./types/v11_7.d.ts",
+      "import": "./es/v11_7.js",
+      "require": "./lib/v11_7.js",
+      "default": "./es/v11_7.js"
+    },
+    "./latest": {
+      "src": "./src/v11_7.ts",
+      "types": "./types/v11_7.d.ts",
+      "import": "./es/v11_7.js",
+      "require": "./lib/v11_7.js",
+      "default": "./es/v11_7.js"
+    }
   }
 }

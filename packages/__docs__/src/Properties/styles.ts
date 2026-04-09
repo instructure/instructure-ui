@@ -48,8 +48,7 @@ const generateStyle = (): PropertiesStyle => {
       margin: 0,
       padding: 0,
       display: 'inline',
-      listStyleType: 'none',
-      code: { fontSize: '0.875em' }
+      listStyleType: 'none'
     },
 
     listSignatureItem: {

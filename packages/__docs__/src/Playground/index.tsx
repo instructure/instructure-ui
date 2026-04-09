@@ -34,12 +34,12 @@ import { Flex } from '@instructure/ui-flex'
 import { IconButton, CloseButton } from '@instructure/ui-buttons'
 import { IconXLine } from '@instructure/ui-icons'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleForDocs as withStyle } from '../withStyleForDocs'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { AppContext } from '../App'
+import { AppContext } from '../appContext'
 import Preview from '../Preview'
 import { CodeSandboxButton } from '../CodeSandboxButton'
 import type { PlaygroundProps, PlaygroundState } from './props'

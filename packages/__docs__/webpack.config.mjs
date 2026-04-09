@@ -26,13 +26,16 @@ import { resolve as resolvePath } from 'path'
 import baseConfig from '@instructure/ui-webpack-config'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import { merge } from 'webpack-merge'
-import resolve from './resolve.mjs'
+import webpack from 'webpack'
+import TerserPlugin from 'terser-webpack-plugin'
 
 const ENV = process.env.NODE_ENV || 'production'
 const DEBUG = process.env.DEBUG || ENV === 'development'
+const GITHUB_PULL_REQUEST_PREVIEW = process.env.GITHUB_PULL_REQUEST_PREVIEW || 'false'
+const PR_NUMBER = process.env.PR_NUMBER
+const PUBLIC_PATH = process.env.PUBLIC_PATH
 
 const outputPath = resolvePath(import.meta.dirname, '__build__')
-const resolveAliases = DEBUG ? { resolve } : {}
 
 const config = merge(baseConfig, {
   entry: {
@@ -50,6 +53,9 @@ const config = merge(baseConfig, {
   output: {
     path: outputPath,
     filename: '[name].js',
+    // Builds deployed to subdirectories on GitHub Pages (e.g. /pr-preview/pr-123/
+    // or /latest/) need a matching publicPath so script tags resolve correctly.
+    publicPath: PUBLIC_PATH || (PR_NUMBER ? `/pr-preview/pr-${PR_NUMBER}/` : '/'),
   },
   devServer: {
     static: {
@@ -66,11 +72,17 @@ const config = merge(baseConfig, {
       template: './src/index.html',
       chunks: ['main'],
     }),
+    new webpack.DefinePlugin({
+      'process.env.GITHUB_PULL_REQUEST_PREVIEW': JSON.stringify(GITHUB_PULL_REQUEST_PREVIEW),
+    }),
   ],
   optimization: {
     usedExports: true,
   },
-  ...resolveAliases,
+  resolve: {
+    conditionNames: DEBUG ? ['src', 'import', 'default'] : ['import',
+  'default']
+  },
   mode: 'production',
 })
 

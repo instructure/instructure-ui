@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
-import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
+import { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 import type { ThemeVariables } from '@instructure/shared-types'
 import { DocData } from '../App/props'
-import { Theme } from '@instructure/ui-themes'
+import type { Theme, NewBaseTheme } from '@instructure/ui-themes'
 
 type DocDataType = DocData & { legacyGitBranch?: string }
 
@@ -35,6 +35,7 @@ type DocumentOwnProps = {
   themeVariables?: Theme
   repository?: string
   layout?: 'small' | 'medium' | 'large' | 'x-large'
+  selectedMinorVersion?: string
 }
 
 type PropKeys = keyof DocumentOwnProps
@@ -48,7 +49,10 @@ type DocumentStyle = ComponentStyle<'githubCornerOctoArm' | 'githubCorner'>
 type DocumentState = {
   selectedDetailsTabId: string | undefined
   pageRef: HTMLDivElement | null
-  componentTheme: Partial<ThemeVariables[keyof ThemeVariables]> | undefined
+  componentTheme:
+    | ThemeVariables[keyof ThemeVariables]
+    | NewBaseTheme['components'][keyof NewBaseTheme['components']]
+    | undefined
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -56,6 +60,7 @@ const allowedProps: AllowedPropKeys = [
   'doc',
   'layout',
   'repository',
+  'selectedMinorVersion',
   'themeVariables'
 ]
 
