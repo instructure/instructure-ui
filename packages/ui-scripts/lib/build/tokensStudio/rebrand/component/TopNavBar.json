@@ -95,7 +95,7 @@
   },
   "topNavBarLayout": {
     "desktopBackground": {
-      "value": "{color.background.elevatedSurface.inverse}",
+      "value": "{color.background.container}",
       "type": "color"
     },
     "desktopBackgroundInverse": {
