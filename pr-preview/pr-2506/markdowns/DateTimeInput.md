@@ -33,6 +33,7 @@ type: example
           invalidDateTimeMessage="Invalid date!"
           prevMonthLabel="Previous month"
           nextMonthLabel="Next month"
+          selectedLabel="Selected"
           defaultValue="2018-01-18T13:30"
           layout="columns"
         />
@@ -91,6 +92,7 @@ type: example
             timeRenderLabel="Time"
             prevMonthLabel="Previous month"
             nextMonthLabel="Next month"
+            selectedLabel="Selected"
             onChange={onChange}
             layout="stacked"
             value={value}
@@ -144,6 +146,7 @@ type: example
             timeRenderLabel="Time"
             prevMonthLabel="Previous month"
             nextMonthLabel="Next month"
+            selectedLabel="Selected"
             invalidDateTimeMessage={(dvalue) => {
               return `'${dvalue} is not valid.`
             }}
@@ -217,6 +220,7 @@ type: example
           }
           prevMonthLabel="Previous month"
           nextMonthLabel="Next month"
+          selectedLabel="Selected"
           defaultValue="2022-04-08T13:30"
           layout="columns"
           disabledDates={getDisabledDates}
@@ -252,6 +256,7 @@ type: example
           invalidDateTimeMessage="Invalid date!"
           prevMonthLabel="Previous month"
           nextMonthLabel="Next month"
+          selectedLabel="Selected"
           value={date}
           onChange={(e, newDate) => setDate(newDate)}
           reset={(reset) => (resetFn.current = reset)}
@@ -302,6 +307,7 @@ type: example
 | DateTimeInput | allowNonStepInput | `boolean` | No | `false` | Whether to allow the user to enter non-step divisible values in the time input field. Note that even if this is set to false one can enter non-step divisible values programmatically. The user will need to enter the value exactly (except for lower/uppercase) as specified by the `timeFormat` prop for it to be accepted. Default is `undefined` which equals to `false` |
 | DateTimeInput | initialTimeForNewDate | `string` | No | - | The default time to be prefilled if a day is selected. The time input has to be empty for this to be applied. An error is thrown if the time format is not HH:MM. |
 | DateTimeInput | reset | `(reset: () => void) => void` | No | - | Used for getting the internal reset function of DateTimeInput. If that function is called, the component will reset to its default inner state. The callback function will be called in componentDidMount NOTE: this won't call onChange, so you have to reset the value manually when calling reset |
+| DateTimeInput | selectedLabel | `string` | No | - | Screen reader label appended to the date label when the day is selected. Used to announce the selected state to assistive technologies. |
 
 ### Usage
 
