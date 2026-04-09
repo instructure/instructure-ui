@@ -13,7 +13,7 @@
   },
   "keywords": [],
   "devDependencies": {
-    "@chromatic-com/cypress": "^0.11.0",
+    "@chromatic-com/cypress": "^0.12.0",
     "@instructure/browserslist-config-instui": "10.14.0",
     "@tailwindcss/postcss": "^4.1.4",
     "@types/node": "^22",

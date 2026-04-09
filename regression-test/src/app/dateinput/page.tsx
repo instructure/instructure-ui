@@ -24,17 +24,12 @@
 
 'use client'
 import React, { useState } from 'react'
-import {
-  DateInput as di,
-  DateInput2 as di2,
-  IconAddLine
-} from '@instructure/ui'
+import { DateInput as di, IconAddLine } from '@instructure/ui'
 
 const DateInput = di as any
-const DateInput2 = di2 as any
 
 export default function DateInputExamplesPage() {
-  // DateInput2 states
+  // DateInput states
   const [di2Value, setDi2Value] = useState('')
   const [di2DateString, setDi2DateString] = useState('')
   const [di2Value2, setDi2Value2] = useState('')
@@ -45,9 +40,9 @@ export default function DateInputExamplesPage() {
 
   return (
     <main className="flex gap-10 p-12 flex-col items-start axe-test">
-      <div>DateInput2:</div>
+      <div>DateInput:</div>
       <section>
-        <DateInput2
+        <DateInput
           locale="en-us"
           dateFormat="en-us"
           renderCalendarIcon={<IconAddLine />}
@@ -72,9 +67,9 @@ export default function DateInputExamplesPage() {
         </p>
       </section>
 
-      {/* DateInput2 - with year picker */}
+      {/* DateInput - with year picker */}
       <section>
-        <DateInput2
+        <DateInput
           locale="en-us"
           dateFormat="de-de"
           renderLabel="Choose a date (with year picker)"
@@ -95,9 +90,9 @@ export default function DateInputExamplesPage() {
         />
       </section>
 
-      {/* DateInput2 - disabled dates */}
+      {/* DateInput - disabled dates */}
       <section>
-        <DateInput2
+        <DateInput
           locale="en-us"
           dateFormat="en-us"
           renderLabel="Choose a date (with disabled dates)"
@@ -111,28 +106,6 @@ export default function DateInputExamplesPage() {
           width="40rem"
           onChange={(e: any, inputValue: string) => setDi2Value3(inputValue)}
           invalidDateErrorMessage="Invalid date"
-        />
-      </section>
-
-      <section>
-        <div>DateInput:</div>
-        <DateInput
-          locale="en-us"
-          renderLabel="Choose a date (legacy DateInput)"
-          assistiveText="Type a date or use arrow keys to navigate date picker."
-          value={diValue}
-          onChange={(e: any, { value }: { value: string }) => {
-            setDiValue(value)
-            // rudimentary validation example: flag very short values
-            if (value && value.length < 4) {
-              setDiMessages([{ type: 'error', text: 'This date is invalid' }])
-            } else {
-              setDiMessages([])
-            }
-          }}
-          messages={diMessages}
-          width="40rem"
-          isInline
         />
       </section>
     </main>
