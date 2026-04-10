@@ -13,12 +13,6 @@
 - [Theming components](./theming-components.md): InstUI has two themes: `canvas` (default) and `canvas-high-contrast`. Colors are layered: primitives (base), contrasts (theme-specific), and UI (curated tokens). Use `InstUISettingsProvider` to set themes. Overrides allow customization but must maintain accessibility.
 - [Usage](./usage.md): Quick start: Create a React app, add `@instructure/ui`, wrap with `InstUISettingsProvider`, and use components. Integrate with existing projects by adding the dependency and provider. Read about theme overrides and accessibility for best practices.
 
-#### Patterns
-
-- [Content alignment](./ContentAlignment.md): Guidelines for main content area alignment with maximum width (948px) for readability, minimum width (320px) for accessibility, and responsive padding (24px/12px). Ensures proper centering, avoids two-dimensional scrolling, and allows exceptions for complex data displays.
-- [Destroy action](./DestroyAction.md): A modal used for irreversible actions like deletion. Includes guidelines for usage: use clear language, avoid vague confirmations, and use a danger button for the destructive action.
-- [Search](./Search.md): Provides search input patterns including auto-activated, activated, and autocomplete search. Includes guidelines, accessibility support, and clear state management examples.
-
 #### Guides
 
 - [Accessing the dom](./accessing-the-dom.md): Guidance for properly accessing DOM elements in React components using refs instead of findDOMNode to avoid warnings. Examples show good and bad patterns for component ref handling.
@@ -31,6 +25,12 @@
 - [Typography system](./typography-system.md): Use `<Text>` and `<Heading>` components with semantic variants for consistent typography. Variants define font style, weight, size, and line height. Legacy tokens (e.g., fontSizeXSmall) are deprecated and should not be used in new designs.
 - [Using icons](./UsingIcons.md): Guidelines for using icons with proper accessibility roles, size variants, and color options. Line icons for light backgrounds, solid for dark backgrounds. Icons scale with parent font-size by default.
 - [Using theme overrides](./using-theme-overrides.md): Customize components via theme overrides while ensuring WCAG compliance. Use nested `InstUISettingsProvider` for subtree themes, override global or component themes, and leverage branding variables for user customization. Deprecated global theming causes issues with multiple InstUI versions.
+
+#### Patterns
+
+- [Content alignment](./ContentAlignment.md): Guidelines for main content area alignment with maximum width (948px) for readability, minimum width (320px) for accessibility, and responsive padding (24px/12px). Ensures proper centering, avoids two-dimensional scrolling, and allows exceptions for complex data displays.
+- [Destroy action](./DestroyAction.md): A modal used for irreversible actions like deletion. Includes guidelines for usage: use clear language, avoid vague confirmations, and use a danger button for the destructive action.
+- [Search](./Search.md): Provides search input patterns including auto-activated, activated, and autocomplete search. Includes guidelines, accessibility support, and clear state management examples.
 
 ### Components
 
@@ -59,8 +59,8 @@
 - [DateTimeInput](./DateTimeInput.md): Combines DateInput and TimeSelect for entering date-time values. Supports localization, validation, disabled dates, and layout options (stacked or columns). Includes reset functionality and context-aware formatting.
 - [DrawerLayout](./DrawerLayout.md): A responsive layout component with a collapsible tray and content area. Tray can be placed at start or end and switches to overlay on small screens. Supports nested layouts and accessibility features.
 - [Drilldown](./Drilldown.md): A hierarchical navigation component for tree structures. Supports pages, groups, selectable options, and in-place editing. Replaces flyout menus and TreeBrowser for better responsiveness and accessibility.
-- [InPlaceEdit](./InPlaceEdit.md): Enables inline editing of content with smooth transitions between view and edit modes. Provides controlled component pattern for mode management, custom renderers for viewer/editor components, and support for various layouts and read-only states.
 - [Editable](./Editable.md): Enables in-place editing of content. Manages state and transitions between view and edit modes. Provides render props for custom UI implementation. Used by InPlaceEdit.
+- [InPlaceEdit](./InPlaceEdit.md): Enables inline editing of content with smooth transitions between view and edit modes. Provides controlled component pattern for mode management, custom renderers for viewer/editor components, and support for various layouts and read-only states.
 - [FileDrop](./FileDrop.md): A drag-and-drop file upload component with browse functionality. Supports file type validation via MIME types/extensions, multiple file uploads, and visual feedback for accepted/rejected files. Includes accessibility features and customizable rendering for labels and error messages.
 - [Flex](./Flex.md): A flexbox-based layout component for creating responsive multi-column designs. Supports directional layouts, gap control, item sizing (grow/shrink), alignment, and overflow handling. Includes visual debugging tools and common layout patterns like header-button combinations.
 - [FormField](./FormField.md): A foundational component for building form inputs with consistent styling and layout. Supports stacked and inline layouts, validation messages, and accessibility features. Typically used internally by other form components rather than directly.
