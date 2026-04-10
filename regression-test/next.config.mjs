@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { dirname, join } from 'path'
+import { dirname } from 'path'
 import { fileURLToPath } from 'url'
 import webpack from 'webpack'
 
@@ -36,8 +36,8 @@ const nextConfig = {
   reactStrictMode: false,
   // Use regression-test as its own workspace root (simulates external usage)
   outputFileTracingRoot: __dirname,
-
-  webpack: (config, { dev, isServer }) => {
+  // TODO move to turbopack (then we can also remove the `--webpack` flag
+  webpack: (config) => {
     // for some reason webpack HMR wants to use CJS modules, force it to use ESM
     // otherwise `npm run dev` crashes
     config.plugins.push(
@@ -45,6 +45,7 @@ const nextConfig = {
         /@instructure\/(.*)\/lib\/(.*)/,
         (resource) => {
           // Replace /lib/ with /es/ in the request
+          // eslint-disable-next-line no-param-reassign
           resource.request = resource.request.replace('/lib/', '/es/')
         }
       )

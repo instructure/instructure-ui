@@ -75,7 +75,6 @@ export function updateToV10Colors(
       }
     })
     if (!hasModifications) {
-      // eslint-disable-next-line no-console
       console.log(
         'Warning: ' + _filePath + ' might need manual replacement of colors'
       )

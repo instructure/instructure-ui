@@ -2,7 +2,8 @@
   "extends": "../../tsconfig.build.json",
   "compilerOptions": {
     "outDir": "./types",
-    "module": "ESNext",
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "composite": true,
     "allowImportingTsExtensions": true
   },

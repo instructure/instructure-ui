@@ -32,7 +32,6 @@ import React, {
 
 import { Alert } from '@instructure/ui-alerts'
 import { InstUISettingsProvider, Global } from '@instructure/emotion'
-import { withStyleForDocs as withStyle } from '../withStyleForDocs'
 import { Flex } from '@instructure/ui-flex'
 import { Text } from '@instructure/ui-text'
 import { View } from '@instructure/ui-view'
@@ -49,6 +48,7 @@ import {
   IconXSolid
 } from '@instructure/ui-icons'
 
+import { withStyleForDocs as withStyle } from '../withStyleForDocs'
 import { ContentWrap } from '../ContentWrap'
 import { Document } from '../Document'
 import { Header } from '../Header'
@@ -892,24 +892,20 @@ class App extends Component<AppProps, AppState> {
   }
 
   renderFooter() {
-    const { author } = this.state.docsData!.library
-
+    const author = 'Instructure, Inc. Engineering and Product Design'
     return (
       <View as="footer" textAlign="center" padding="large medium">
-        {author && (
-          <AccessibleContent alt={`Made with love by ${author}`}>
-            <Text
-              color="secondary"
-              letterSpacing="expanded"
-              transform="uppercase"
-              size="small"
-              lineHeight="fit"
-            >
-              Made with <IconHeartLine size="small" color="error" /> by {author}
-              .
-            </Text>
-          </AccessibleContent>
-        )}
+        <AccessibleContent alt={`Made with love by ${author}`}>
+          <Text
+            color="secondary"
+            letterSpacing="expanded"
+            transform="uppercase"
+            size="small"
+            lineHeight="fit"
+          >
+            Made with <IconHeartLine size="small" color="error" /> by {author}.
+          </Text>
+        </AccessibleContent>
       </View>
     )
   }

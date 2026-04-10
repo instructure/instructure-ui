@@ -137,7 +137,6 @@ ${iconBlocks.join('\n\n')}
   const outputPath = path.join(outputDir, 'index.tsx')
   fs.writeFileSync(outputPath, content, 'utf-8')
 
-  // eslint-disable-next-line no-console
   console.log(
     `Generated src/generated/custom/index.tsx with ${iconBlocks.length} / ${svgFiles.length} custom icons`
   )

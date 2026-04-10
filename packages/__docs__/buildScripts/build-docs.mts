@@ -41,28 +41,20 @@ import type {
 } from './DataTypes.mjs'
 import { getFrontMatter } from './utils/getFrontMatter.mjs'
 import { buildVersionMap, getPackageShortName, isDocIncludedInVersion } from './utils/buildVersionMap.mjs'
-import { createRequire } from 'module'
 import { fileURLToPath, pathToFileURL } from 'url'
 import { generateAIAccessibleMarkdowns } from './ai-accessible-documentation/generate-ai-accessible-markdowns.mjs'
 import { generateAIAccessibleLlmsFile } from './ai-accessible-documentation/generate-ai-accessible-llms-file.mjs'
+import packageJson from '../package.json' with { type: "json" }
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
-const require = createRequire(import.meta.url)
-
-// This needs to be required, otherwise TSC will mess up the directory structure
-// in the output directory
-const packageJson = require('../package.json')
 
 const buildDir = './__build__/'
 const projectRoot = path.resolve(__dirname, '../../../')
 const packagesDir = '../..'
 const library: LibraryOptions = {
   version: packageJson.version,
-  repository: packageJson.repository.url,
-  author: packageJson.author,
-  packages: 'packages',
-  scope: '@instructure'
+  repository: packageJson.repository.url
 }
 
 // TODO this misses:

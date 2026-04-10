@@ -21,13 +21,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 'use client'
 import React from 'react'
-import { CustomIcons, LucideIcons } from '@instructure/ui-icons'
+import {
+  AArrowDownInstUIIcon,
+  AArrowUpInstUIIcon,
+  Accessibility2InstUIIcon,
+  AccessibilityInstUIIcon,
+  ActivityInstUIIcon,
+  AiInfoInstUIIcon,
+  ALargeSmallInstUIIcon,
+  AppsInstUIIcon,
+  BackgroundColorInstUIIcon,
+  BellSolidInstUIIcon,
+  CanvasLogoInstUIIcon,
+  HeartInstUIIcon
+} from '@instructure/ui-icons'
 import type { InstUIIconProps } from '@instructure/ui-icons'
 
-type IconComponent = (props: InstUIIconProps) => React.ReactNode
-type IconEntry = [string, IconComponent]
+// This is just a React component, but that type doesn't work because
+// the main project uses a different React version
+type IconEntry = [string, any]
 
 const COLORS: InstUIIconProps['color'][] = [
   'ai',
@@ -51,14 +66,20 @@ const SIZES: InstUIIconProps['size'][] = [
   'illu-lg'
 ]
 
-const sample = (entries: IconEntry[], n = 5): IconEntry[] =>
-  Array.from(
-    { length: n },
-    (_, i) => entries[Math.floor((i * entries.length) / n)]
-  )
-
-const CUSTOM = sample(Object.entries(CustomIcons) as IconEntry[])
-const LUCIDE = sample(Object.entries(LucideIcons) as IconEntry[])
+const CUSTOM: IconEntry[] = [
+  [Accessibility2InstUIIcon.displayName!, Accessibility2InstUIIcon],
+  [AiInfoInstUIIcon.displayName!, AiInfoInstUIIcon],
+  [AppsInstUIIcon.displayName!, AppsInstUIIcon],
+  [BackgroundColorInstUIIcon.displayName!, BackgroundColorInstUIIcon],
+  [BellSolidInstUIIcon.displayName!, BellSolidInstUIIcon]
+]
+const LUCIDE: IconEntry[] = [
+  [AArrowDownInstUIIcon.displayName!, AArrowDownInstUIIcon],
+  [AArrowUpInstUIIcon.displayName!, AArrowUpInstUIIcon],
+  [ALargeSmallInstUIIcon.displayName!, ALargeSmallInstUIIcon],
+  [AccessibilityInstUIIcon.displayName!, AccessibilityInstUIIcon],
+  [ActivityInstUIIcon.displayName!, ActivityInstUIIcon]
+]
 
 function IconGrid({
   icons,
@@ -67,7 +88,7 @@ function IconGrid({
 }: {
   icons: IconEntry[]
   color: InstUIIconProps['color']
-  size?: InstUIIconProps['size']
+  size: InstUIIconProps['size']
 }) {
   return (
     <div className="flex flex-wrap gap-1">
@@ -75,10 +96,10 @@ function IconGrid({
         <div key={name} className="flex flex-col items-center gap-1 p-1">
           <Icon size={size} color={color} title={name} />
           <span
-            style={{ fontSize: '8px', maxWidth: '76px' }}
-            className="text-gray-500 text-center break-words leading-tight"
+            style={{ fontSize: '15px' }}
+            className="text-gray-500 text-center leading-tight"
           >
-            {name.replace('InstUIIcon', '')}
+            {name.replace('InstUIIcon_', '')}
           </span>
         </div>
       ))}
@@ -91,7 +112,7 @@ function SizeRow({
   name,
   color
 }: {
-  Icon: IconComponent
+  Icon: any
   name: string
   color: InstUIIconProps['color']
 }) {
@@ -100,7 +121,7 @@ function SizeRow({
       {SIZES.map((size) => (
         <div key={size} className="flex flex-col items-center gap-1 p-1">
           <Icon size={size} color={color} title={name} />
-          <span style={{ fontSize: '8px' }} className="text-gray-500">
+          <span style={{ fontSize: '15px' }} className="text-gray-500">
             {size}
           </span>
         </div>
@@ -127,7 +148,7 @@ export default function CustomIconsPage() {
       {COLORS.map((color) => (
         <React.Fragment key={color}>
           <SectionHeader>color={color}</SectionHeader>
-          <IconGrid icons={CUSTOM} color={color} />
+          <IconGrid icons={CUSTOM} color={color} size="md" />
         </React.Fragment>
       ))}
 
@@ -141,18 +162,10 @@ export default function CustomIconsPage() {
       <SectionHeader>
         Size scale — AiInfo (stroke) + BellSolid (filled) + CanvasLogo (brand)
       </SectionHeader>
+      <SizeRow Icon={AiInfoInstUIIcon} name="AiInfo" color="ai" />
+      <SizeRow Icon={BellSolidInstUIIcon} name="BellSolid" color="ai" />
       <SizeRow
-        Icon={CustomIcons.AiInfoInstUIIcon as IconComponent}
-        name="AiInfo"
-        color="ai"
-      />
-      <SizeRow
-        Icon={CustomIcons.BellSolidInstUIIcon as IconComponent}
-        name="BellSolid"
-        color="ai"
-      />
-      <SizeRow
-        Icon={CustomIcons.CanvasLogoInstUIIcon as IconComponent}
+        Icon={CanvasLogoInstUIIcon}
         name="CanvasLogo"
         color="baseColor"
       />
@@ -164,16 +177,12 @@ export default function CustomIconsPage() {
       {COLORS.map((color) => (
         <React.Fragment key={color}>
           <SectionHeader>color={color}</SectionHeader>
-          <IconGrid icons={LUCIDE} color={color} />
+          <IconGrid icons={LUCIDE} color={color} size="md" />
         </React.Fragment>
       ))}
 
-      <SectionHeader>Size scale — Heart, color=ai</SectionHeader>
-      <SizeRow
-        Icon={LucideIcons.HeartInstUIIcon as IconComponent}
-        name="Heart"
-        color="ai"
-      />
+      <SectionHeader>Size scale — Heart icon, color=ai</SectionHeader>
+      <SizeRow Icon={HeartInstUIIcon} name="Heart" color="ai" />
     </main>
   )
 }

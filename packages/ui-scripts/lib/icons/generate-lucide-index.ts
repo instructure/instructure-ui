@@ -105,7 +105,6 @@ ${iconExports}
   const outputPath = path.join(process.cwd(), 'src/generated/lucide/index.ts')
   fs.mkdirSync(path.dirname(outputPath), { recursive: true })
   fs.writeFileSync(outputPath, content, 'utf-8')
-  // eslint-disable-next-line no-console
   console.log(
     `Generated src/generated/lucide/index.ts with ${allLucideIcons.length} icons`
   )
