@@ -28,7 +28,8 @@ import {
   useImperativeHandle,
   forwardRef,
   useCallback,
-  useEffect
+  useEffect,
+  type RefObject
 } from 'react'
 
 import {
@@ -164,7 +165,8 @@ const RadioInput = forwardRef<RadioInputHandle, RadioInputProps>(
         },
         get id() {
           return id
-        }
+        },
+        ref: containerRef
       }),
       [checked, id]
     )
@@ -217,6 +219,7 @@ export interface RadioInputHandle {
   readonly focused: boolean
   readonly checked: boolean
   readonly id: string | undefined
+  readonly ref: RefObject<HTMLDivElement | null>
 }
 
 export default RadioInput

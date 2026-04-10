@@ -29,7 +29,8 @@ import {
   useContext,
   useImperativeHandle,
   useCallback,
-  useMemo
+  useMemo,
+  type RefObject
 } from 'react'
 import { FormField } from '@instructure/ui-form-field/latest'
 import {
@@ -60,6 +61,7 @@ export type TextAreaElement = {
   readonly minHeight: string
   readonly focused: boolean
   readonly invalid: boolean
+  readonly ref: RefObject<Element | null>
   readonly id: string
 }
 
@@ -361,7 +363,8 @@ const TextArea = forwardRef<TextAreaElement, TextAreaProps>((props, ref) => {
       },
       get id() {
         return id
-      }
+      },
+      ref: formFieldRef
     }),
     [id, messages]
   )
