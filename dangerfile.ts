@@ -34,7 +34,6 @@ const SIZE_DIFF_THRESHOLD = process.env.SIZE_DIFF_THRESHOLD
 
 const git = async (command: string) => {
   return new Promise((resolve, reject) => {
-    // eslint-disable-next-line no-console
     console.info(`[git: ${command}]\n`)
     exec(`git ${command}`, (err: any, stdout: string) => {
       if (err) {
@@ -57,14 +56,12 @@ const calculateSizes = async () => {
   // instead of showing the analysis in the comment
   // just print it inside the job's console so we won't
   // send out huge emails with the bundle analysis in them
-  // eslint-disable-next-line no-console
   console.log(analysis)
 
   const prHeadStats = await gzip(outFile2)
 
   // We want to calculate the bundle size against the base commit of the PR.
   // this will be the base against we will calculate the bundle size changes.
-  // eslint-disable-next-line no-console
   console.log('switching to master branch...')
   await git(`checkout -d ${baseCommitSha}`)
   execSync('pnpm install')
@@ -94,7 +91,6 @@ const calculateSizes = async () => {
 
   // We have to switch back to the feature branch and run pnpm install
   // so that the rest of the workflow actions are not executed on master
-  // eslint-disable-next-line no-console
   console.log('switching back to feature branch...')
   await git(`checkout -d ${headCommitSha}`)
   execSync('pnpm install')

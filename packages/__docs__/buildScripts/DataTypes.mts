@@ -97,9 +97,6 @@ type JSDocFunctionReturns = {
 type LibraryOptions = {
   version: string
   repository: string
-  author: string
-  packages: 'packages'
-  scope: '@instructure'
 }
 
 type Section = {

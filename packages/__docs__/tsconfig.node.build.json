@@ -3,11 +3,10 @@
   "compilerOptions": {
     "rootDir": "./buildScripts",
     "declarationDir": "./types",
-    "module": "Node16",
-    "moduleResolution": "Node16",
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "esModuleInterop": true,
-    "outDir": "./lib",
-    "resolveJsonModule": true
+    "outDir": "./lib"
   },
   "include": ["buildScripts/**/*"]
 }

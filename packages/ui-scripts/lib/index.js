@@ -27,10 +27,6 @@
 import yargs from 'yargs'
 import { yargCommands } from './commands/index.js'
 import { hideBin } from 'yargs/helpers'
-import { findUpSync } from 'find-up'
-import { config } from 'dotenv'
-
-config({ path: findUpSync('.env') || process.cwd() })
 
 // https://github.com/yargs/yargs/blob/main/docs/advanced.md#example-command-hierarchy-using-indexmjs
 yargs(hideBin(process.argv)).strictOptions(true).command(yargCommands).argv

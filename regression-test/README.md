@@ -24,7 +24,7 @@ Since most external users install packages via npm, using it here helps us:
 3. Install dependencies: `npm install`
 4. Run the dev server with `npm run dev`
 5. The dev server will be accessible at `localhost:3000`
-6. Once the dev server is running you can start the Cypress e2e tests with the `npm run cypress` command. Run `npm run cypress-chrome` to open the Cypress GUI where you can see detailed error logs, snapshots etc.
+6. Once the dev server is running, you can start the Cypress e2e tests with the `npm run cypress` command. Run `npm run cypress-chrome` to open the Cypress GUI where you can see detailed error logs, snapshots etc.
 
 ### To add a new component
 

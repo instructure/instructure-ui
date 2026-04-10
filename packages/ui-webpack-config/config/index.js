@@ -22,12 +22,9 @@
  * SOFTWARE.
  */
 
-import dotenv from 'dotenv'
 import rules from './module/rules.js'
 import plugins from './plugins.js'
 import optimization from './optimization.js'
-
-dotenv.config({ path: process.cwd() })
 
 const DEBUG = process.env.DEBUG
 const ENV = process.env.NODE_ENV || 'production'

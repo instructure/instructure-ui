@@ -37,15 +37,11 @@ export default defineConfig({
       // More info: https://www.npmjs.com/package/cypress-axe
       on('task', {
         log(message) {
-          // eslint-disable-next-line no-console
           console.log(message)
-
           return null
         },
         table(message) {
-          // eslint-disable-next-line no-console
           console.table(message)
-
           return null
         }
       })

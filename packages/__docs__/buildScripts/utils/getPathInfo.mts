@@ -36,10 +36,10 @@ export function getPathInfo(
     extension: path.extname(resourcePath),
     srcPath: relativePath(resourcePath, projectRoot),
     srcUrl: srcUrl(resourcePath, projectRoot, library),
-    packageName: packageName(resourcePath, projectRoot, library),
-    requirePath: requirePath(resourcePath, projectRoot, library),
+    packageName: packageName(resourcePath, projectRoot),
+    requirePath: requirePath(resourcePath, projectRoot),
     requireStr: `require('${resourcePath}').default`,
-    esPath: esPath(resourcePath, projectRoot, library)
+    esPath: esPath(resourcePath, projectRoot)
   }
 
   const themePath = resourcePath.replace('index.tsx', 'theme.ts')
@@ -51,11 +51,11 @@ export function getPathInfo(
   return pathInfo
 }
 
-function pathParts(resourcePath: string, library: LibraryOptions) {
+function pathParts(resourcePath: string) {
   const parts = resourcePath
     .split(path.sep)
-    .filter((part) => part !== library.packages && part !== 'index.js')
-  return [library.scope, ...parts]
+    .filter((part) => part !== 'packages' && part !== 'index.js')
+  return ['@instructure', ...parts]
 }
 
 function relativePath(resourcePath: string, projectRoot: string) {
@@ -73,12 +73,10 @@ function srcUrl(
 
 function requirePath(
   resourcePath: string,
-  projectRoot: string,
-  library: LibraryOptions
+  projectRoot: string
 ) {
   return pathParts(
-    relativePath(resourcePath, projectRoot).replace('/src/', '/lib/'),
-    library
+    relativePath(resourcePath, projectRoot).replace('/src/', '/lib/')
   )
     .join(path.sep)
     .replace(path.extname(resourcePath), '')
@@ -86,12 +84,10 @@ function requirePath(
 
 function esPath(
   resourcePath: string,
-  projectRoot: string,
-  library: LibraryOptions
+  projectRoot: string
 ) {
   return pathParts(
-    relativePath(resourcePath, projectRoot).replace('/src/', '/es/'),
-    library
+    relativePath(resourcePath, projectRoot).replace('/src/', '/es/')
   )
     .join(path.sep)
     .replace(path.extname(resourcePath), '')
@@ -99,13 +95,8 @@ function esPath(
 
 function packageName(
   resourcePath: string,
-  projectRoot: string,
-  library: LibraryOptions
+  projectRoot: string
 ) {
-  const parts = requirePath(resourcePath, projectRoot, library).split(path.sep)
-  if (library.scope) {
-    return parts.slice(0, 2).join(path.sep)
-  } else {
-    return parts[0]
-  }
+  const parts = requirePath(resourcePath, projectRoot).split(path.sep)
+  return parts.slice(0, 2).join(path.sep)
 }
