@@ -30,7 +30,7 @@ import jscodeshift, { Transform } from 'jscodeshift'
 import { expect, vi } from 'vitest'
 
 /**
- * A helper function to run codemods. For it work properly some conventions
+ * A helper function to run codemods. For it to work properly, some conventions
  * must be kept:
  * - Fixtures must be in the `./__testfixtures__/[codemod name]/` subfolder
  * - Fixtures must be named `XY.input.[ts|tsx|js]` and `XY.output.[ts|tsx|js]`
@@ -56,7 +56,6 @@ export function runTest(codemod: Transform) {
       const expectedPath = path.join(entry.parentPath, expectedName)
       const expected = fs.readFileSync(expectedPath, 'utf8')
 
-      // eslint-disable-next-line no-console
       console.log(
         codemod.name + ':',
         'Running fixture',

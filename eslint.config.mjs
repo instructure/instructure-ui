@@ -192,10 +192,13 @@ const finalConfig = tseslint.config(
   {// Node scripts
     files: [
       "packages/+(" + NODE_PACKAGES + ")/**/*",
-      'packages/__docs__/*.js', // docs is a mess
-      'packages/__docs__/*.mjs', // docs is a mess
+      'packages/__docs__/**/*.js', // docs is a mess
+      'packages/__docs__/**/*.mjs', // docs is a mess
       '!packages/**' // every file not in packages
     ],
+    rules: {
+      "no-console": "off"
+    },
     languageOptions: {
       globals: {
         ...globals.node

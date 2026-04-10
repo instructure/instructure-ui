@@ -22,12 +22,14 @@
  * SOFTWARE.
  */
 
-module.exports = {
+import uiBabelPreset from '@instructure/ui-babel-preset'
+
+export default {
   presets: [
     [
-      require('@instructure/ui-babel-preset'),
+      uiBabelPreset,
       {
-        transformImports: false // needed for webpack reload on change to work,
+        transformImports: false // needed for webpack reload on change to work
       }
     ]
   ]

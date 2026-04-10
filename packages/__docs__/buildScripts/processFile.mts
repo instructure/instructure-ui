@@ -54,7 +54,6 @@ export function processFile(
   } else if (lowerPath.includes(path.sep + 'index.tsx')) {
     const fallbackId = path.basename(path.dirname(fullPath))
     if (!docData.displayName && /^v\d+$/.test(fallbackId)) {
-      // eslint-disable-next-line no-console
       console.warn(
         `[processFile] Suspicious docId "${fallbackId}" derived from path: ${fullPath}`
       )
@@ -71,7 +70,7 @@ export function processFile(
     docData.title = docData.id
   }
 
-  // Extract component version and directory name from the file path (e.g. /v1/ or /v2/)
+  // Extract the component version and directory name from the file path (e.g. /v1/ or /v2/)
   const pathSegments = fullPath.split(path.sep)
   const srcIndex = pathSegments.indexOf('src')
   const segmentsAfterSrc = srcIndex >= 0 ? pathSegments.slice(srcIndex + 1) : pathSegments
