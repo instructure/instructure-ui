@@ -28,7 +28,8 @@ import {
   useCallback,
   useImperativeHandle,
   forwardRef,
-  useEffect
+  useEffect,
+  type RefObject
 } from 'react'
 import keycode from 'keycode'
 
@@ -267,7 +268,8 @@ const NumberInput = forwardRef<NumberInputHandle, NumberInputProps>(
         },
         get value() {
           return inputRef.current?.value
-        }
+        },
+        ref: containerRef
       }),
       [id, invalid, interaction]
     )
@@ -376,6 +378,7 @@ export interface NumberInputHandle {
   readonly invalid: boolean
   readonly interaction: ReturnType<typeof getInteraction>
   readonly value: string | undefined
+  readonly ref: RefObject<Element | null>
 }
 
 export default NumberInput
