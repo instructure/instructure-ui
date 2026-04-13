@@ -30,6 +30,7 @@ import renameGetComputedStyleToGetCSSStyleDeclaration from './renameGetComputedS
 import warnTableCaptionMissing from './warnTableCaptionMissing'
 import warnCodeEditorRemoved from './warnCodeEditorRemoved'
 import migrateToNewIcons from './migrateToNewIcons'
+import updateInstUIImportVersions from './updateInstUIImportVersions'
 
 export {
   updateV10Breaking,
@@ -39,5 +40,6 @@ export {
   renameGetComputedStyleToGetCSSStyleDeclaration,
   warnTableCaptionMissing,
   warnCodeEditorRemoved,
-  migrateToNewIcons
+  migrateToNewIcons,
+  updateInstUIImportVersions
 }

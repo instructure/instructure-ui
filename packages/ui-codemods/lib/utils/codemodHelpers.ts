@@ -728,6 +728,7 @@ export {
   findAttribute,
   findImport,
   findEveryImport,
+  findImportPath,
   // editing
   replaceImport,
   addImportIfNeeded,

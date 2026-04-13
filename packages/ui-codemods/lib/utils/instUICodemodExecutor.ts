@@ -56,7 +56,11 @@ const instUICodemodExecutor = (
   instUICodemods: InstUICodemod[] | InstUICodemod,
   file: FileInfo,
   api: API,
-  options?: { fileName?: string; usePrettier?: boolean }
+  options?: {
+    fileName?: string
+    usePrettier?: boolean
+    quote?: 'single' | 'double' | 'auto'
+  }
 ) => {
   const j = api.jscodeshift.withParser('tsx')
   const root = j(file.source)
@@ -80,7 +84,7 @@ const instUICodemodExecutor = (
     const shouldUsePrettier = options?.usePrettier !== false
     return shouldUsePrettier
       ? formatSource(root.toSource(), file.path)
-      : root.toSource()
+      : root.toSource({ quote: options?.quote ?? 'double' })
   } else {
     return null
   }
