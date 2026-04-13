@@ -1377,25 +1377,78 @@ type: embed
 
 ## Codemods
 
-To ease the upgrade, we provide codemods that will automate most of the changes. Pay close attention to its output, it cannot refactor complex code! The codemod scripts can be run via the following commands:
+### updateInstUIImportVersions
+
+Rewrites `@instructure/*` import paths to a specific version subpath (e.g. `@instructure/ui-buttons/v11_7`). Only touches known versioned components — utilities and non-versioned symbols are left untouched. Imports mixing versioned components with other symbols are automatically split into two declarations.
 
 ```sh
 ---
 type: code
 ---
-npm install @instructure/ui-codemods@12
-npx jscodeshift@17.3.0 -t node_modules/@instructure/ui-codemods/lib/instUIv12Codemods.ts <path> --usePrettier=false
+npm install @instructure/ui-codemods
 ```
 
-where `<path>` is the path to the directory (and its subdirectories) to be transformed.
+It is worth adding `--extensions=ts,tsx` for TypeScript codebases. Also exclude `node_modules` and declaration files to avoid false matches:
 
-The codemods that will do the following:
+```sh
+---
+type: code
+---
+npx jscodeshift@latest ... \
+  --extensions=ts,tsx \
+  --ignore-pattern="**/node_modules/**" \
+  --ignore-pattern="**/*.d.ts"
+```
 
-- TODO add details
-- TODO
+**Diagnose** — inspect which components are imported and at what version, without modifying files:
 
-Options for the codemod:
+```sh
+---
+type: code
+---
+# inspect all versioned imports
+npx jscodeshift@latest -t node_modules/@instructure/ui-codemods/lib/updateInstUIImportVersions.ts <path> \
+  --extensions=ts,tsx \
+  --ignore-pattern="**/node_modules/**" --ignore-pattern="**/*.d.ts" \
+  --diagnose=true
 
-- `filename`: if specified then emitted warnings are written to this file.
-- `usePrettier`: if `true` the transformed code will be run through Prettier. You can customize this through a [Prettier
-  config file](https://prettier.io/docs/configuration.html)
+# inspect only specific components
+npx jscodeshift@latest -t node_modules/@instructure/ui-codemods/lib/updateInstUIImportVersions.ts <path> \
+  --extensions=ts,tsx \
+  --ignore-pattern="**/node_modules/**" --ignore-pattern="**/*.d.ts" \
+  --diagnose=true --components=Button,Alert
+```
+
+**Update** — rewrite import paths:
+
+```sh
+---
+type: code
+---
+# all versioned components → v11.7
+npx jscodeshift@latest -t node_modules/@instructure/ui-codemods/lib/updateInstUIImportVersions.ts <path> \
+  --extensions=ts,tsx \
+  --ignore-pattern="**/node_modules/**" --ignore-pattern="**/*.d.ts" \
+  --versionTo=v11.7
+
+# only imports already pinned to v11.6
+npx jscodeshift@latest -t node_modules/@instructure/ui-codemods/lib/updateInstUIImportVersions.ts <path> \
+  --extensions=ts,tsx \
+  --ignore-pattern="**/node_modules/**" --ignore-pattern="**/*.d.ts" \
+  --versionFrom=v11.6 --versionTo=v11.7
+
+# specific components only
+npx jscodeshift@latest -t node_modules/@instructure/ui-codemods/lib/updateInstUIImportVersions.ts <path> \
+  --extensions=ts,tsx \
+  --ignore-pattern="**/node_modules/**" --ignore-pattern="**/*.d.ts" \
+  --versionTo=v11.7 --components=Button,Alert
+```
+
+Options:
+
+- `versionTo`: target version, e.g. `v11.7`. Required for update mode.
+- `versionFrom`: only rewrite imports already pinned to this version.
+- `components`: comma-separated component names. Defaults to all known versioned exports.
+- `diagnose`: report matching imports without modifying files.
+- `fileName`: write parse errors and transform failures to this file.
+- `usePrettier`: run output through Prettier (default `true`).

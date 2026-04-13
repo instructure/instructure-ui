@@ -15,7 +15,9 @@
     "test:vitest": "vitest --watch=false",
     "lint": "ui-scripts lint",
     "lint:fix": "ui-scripts lint --fix",
-    "ts:check": "tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false"
+    "ts:check": "tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false",
+    "generate:versioned-exports": "node --experimental-strip-types scripts/generateVersionedExports.ts",
+    "prepare-build": "pnpm run generate:versioned-exports"
   },
   "license": "MIT",
   "dependencies": {

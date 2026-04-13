@@ -38,6 +38,7 @@ function buildProject() {
   }
 
   execSync('pnpm --filter @instructure/ui-icons prepare-build', opts)
+  execSync('pnpm --filter @instructure/ui-codemods prepare-build', opts)
 
   console.info('Building packages with Babel...')
   try {
