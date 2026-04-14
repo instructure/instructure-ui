@@ -97,6 +97,12 @@ class Alert extends Component<AlertProps, AlertState> {
 
   handleRef = (el: Element | null) => {
     this.ref = el
+    const { elementRef } = this.props as AlertProps & {
+      elementRef?: (el: Element | null) => void
+    }
+    if (typeof elementRef === 'function') {
+      elementRef(el)
+    }
   }
 
   handleTimeout = () => {

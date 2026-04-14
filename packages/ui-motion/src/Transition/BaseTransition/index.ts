@@ -24,11 +24,12 @@
 
 import { Component, ReactElement } from 'react'
 
-import { getClassList, findDOMNode } from '@instructure/ui-dom-utils'
+import { getClassList } from '@instructure/ui-dom-utils'
 import {
   ensureSingleChild,
   safeCloneElement
 } from '@instructure/ui-react-utils'
+import { createChainedFunction } from '@instructure/ui-utils'
 
 import { allowedProps } from './props'
 import type {
@@ -37,6 +38,24 @@ import type {
   BaseTransitionStateValue,
   BaseTransitionStatesType
 } from './props'
+
+const REACT_FORWARD_REF_TYPE = Symbol.for('react.forward_ref')
+const REACT_MEMO_TYPE = Symbol.for('react.memo')
+
+type ElementRefCallback = (el: Element | null) => void
+type ChildElementType = ReactElement['type']
+
+function unwrapMemo(type: ChildElementType): ChildElementType {
+  let unwrapped = type
+  while (
+    unwrapped &&
+    typeof unwrapped !== 'string' &&
+    (unwrapped as { $$typeof?: symbol }).$$typeof === REACT_MEMO_TYPE
+  ) {
+    unwrapped = (unwrapped as unknown as { type: ChildElementType }).type
+  }
+  return unwrapped
+}
 
 const STATES: Record<BaseTransitionStateValue, BaseTransitionStatesType> = {
   EXITED: -2,
@@ -86,6 +105,16 @@ class BaseTransition extends Component<
     if (typeof elementRef === 'function') {
       elementRef(el)
     }
+  }
+
+  handleChildRef = (el: unknown) => {
+    // The `ref` we attach to a forwardRef child can end up bound to a class
+    // instance (when the forwardRef chain wraps a class component). Ignore
+    // those so they don't clobber a DOM node we got via `elementRef`.
+    if (el != null && !(el instanceof Element)) return
+    const next = el instanceof Element ? el : null
+    if (next === this.ref) return
+    this.handleRef(next)
   }
 
   componentDidMount() {
@@ -333,19 +362,45 @@ class BaseTransition extends Component<
   }
 
   renderChildren() {
-    return this.props.children
-      ? safeCloneElement(
-          ensureSingleChild(this.props.children) as ReactElement,
-          {
-            'aria-hidden': !this.props.in ? true : undefined,
-            ref: (el: React.ReactInstance | null) => {
-              const ref = (findDOMNode(el) as Element) || null
+    if (!this.props.children) return null
 
-              this.handleRef(ref)
-            }
-          }
-        )
-      : null
+    const child = ensureSingleChild(this.props.children) as ReactElement
+
+    return safeCloneElement(child, {
+      'aria-hidden': !this.props.in ? true : undefined,
+      ...(this.refPropsForChild(child) as Record<string, unknown>)
+    })
+  }
+
+  // Host elements receive a plain `ref`. `forwardRef` components (including
+  // memo-wrapped ones) receive both `ref` (for non-InstUI forwardRef
+  // children) and `elementRef` (the InstUI convention). Any other component
+  // shape (class, function, Context.Provider, etc.) only gets `elementRef` —
+  // attaching `ref` to a non-forwardRef component would either bind to the
+  // class instance (which we can't resolve to a DOM node without
+  // findDOMNode) or trigger a React "Function components cannot be given
+  // refs" warning.
+  // If the child already carries an `elementRef` prop from the consumer,
+  // we chain it with ours so the consumer's callback isn't clobbered.
+  refPropsForChild(child: ReactElement) {
+    if (typeof child.type === 'string') {
+      return { ref: this.handleChildRef }
+    }
+
+    const consumerElementRef = child.props?.elementRef
+    const mergedElementRef: ElementRefCallback =
+      typeof consumerElementRef === 'function'
+        ? (createChainedFunction(
+            consumerElementRef as ElementRefCallback,
+            this.handleChildRef
+          ) as ElementRefCallback)
+        : this.handleChildRef
+
+    const unwrapped = unwrapMemo(child.type) as { $$typeof?: symbol }
+    if (unwrapped?.$$typeof === REACT_FORWARD_REF_TYPE) {
+      return { elementRef: mergedElementRef, ref: this.handleChildRef }
+    }
+    return { elementRef: mergedElementRef }
   }
 
   render() {
