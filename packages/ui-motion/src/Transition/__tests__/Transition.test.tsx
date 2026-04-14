@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Component, createRef, RefObject } from 'react'
+import { forwardRef } from 'react'
 import {
   render,
   waitFor,
@@ -47,17 +47,13 @@ const getClass = (
   return classNames[phase]
 }
 
-class ExampleComponent extends Component<any, any> {
-  private ref: RefObject<any>
-
-  constructor(props: any) {
-    super(props)
-    this.ref = createRef()
-  }
-  render() {
-    return <div ref={this.ref}>{COMPONENT_TEXT}</div>
-  }
-}
+const ExampleComponent = forwardRef<HTMLDivElement>((props, ref) => {
+  return (
+    <div ref={ref} {...props}>
+      {COMPONENT_TEXT}
+    </div>
+  )
+})
 
 describe('<Transition />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
