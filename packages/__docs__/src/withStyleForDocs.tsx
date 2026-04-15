@@ -35,7 +35,7 @@ import { deepEqual as isEqual } from '@instructure/ui-utils'
 import { warn } from '@instructure/console'
 import { decorator } from '@instructure/ui-decorator'
 
-import { getComponentThemeOverrideLegacy as getComponentThemeOverride } from '@instructure/emotion'
+import { getComponentThemeOverride } from '@instructure/emotion'
 import { useTheme } from '@instructure/emotion'
 import type {
   BaseTheme,

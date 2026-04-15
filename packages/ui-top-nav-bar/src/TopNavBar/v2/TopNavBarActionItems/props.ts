@@ -94,7 +94,7 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TopNavBarActionItemsProps = TopNavBarActionItemsOwnProps &
   WithStyleProps<
-    NewComponentTypes['TopNavBarActionItems'],
+    ReturnType<NewComponentTypes['TopNavBarActionItems']>,
     TopNavBarActionItemsStyle
   > &
   OtherHTMLAttributes<TopNavBarActionItemsOwnProps> &

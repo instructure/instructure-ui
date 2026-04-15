@@ -116,7 +116,7 @@ type SmallViewportAllowedPropKeys = Readonly<Array<SmallViewportPropKeys>>
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TopNavBarLayoutProps = TopNavBarLayoutOwnProps &
-  WithStyleProps<NewComponentTypes['TopNavBarLayout'], null> &
+  WithStyleProps<ReturnType<NewComponentTypes['TopNavBarLayout']>, null> &
   OtherHTMLAttributes<TopNavBarLayoutOwnProps>
 
 const commonAllowedProps: CommonAllowedPropKeys = [

@@ -93,7 +93,7 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TopNavBarMenuItemsProps = TopNavBarMenuItemsOwnProps &
   WithStyleProps<
-    NewComponentTypes['TopNavBarMenuItems'],
+    ReturnType<NewComponentTypes['TopNavBarMenuItems']>,
     TopNavBarMenuItemsStyle
   > &
   WithDeterministicIdProps &
