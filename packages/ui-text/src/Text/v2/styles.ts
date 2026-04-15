@@ -239,7 +239,9 @@ const generateStyle = (
       },
       'pre, code': {
         all: 'initial',
-        fontFamily: componentTheme.fontFamilyMonospace
+        fontFamily: componentTheme.fontFamilyMonospace,
+        background: '#99999945',
+        color: 'inherit'
       },
       'i, em': {
         fontStyle: 'italic'

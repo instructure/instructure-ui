@@ -46,13 +46,13 @@ type: example
 readonly: true
 ---
 <View display="block" padding="small medium" background="primary">
-  <Avatar size="xx-small" color="ai" name="AI Assistant" renderIcon={IconAiSolid} />
-  <Avatar size="x-small" color="ai" name="AI Assistant" renderIcon={IconAiSolid} />
-  <Avatar size="small" color="ai" name="AI Assistant" renderIcon={IconAiSolid} />
-  <Avatar size="medium" color="ai" name="AI Assistant" renderIcon={IconAiSolid} />
-  <Avatar size="large" color="ai" name="AI Assistant" renderIcon={IconAiSolid} />
-  <Avatar size="x-large" color="ai" name="AI Assistant" renderIcon={IconAiSolid} />
-  <Avatar size="xx-large" color="ai" name="AI Assistant" renderIcon={IconAiSolid} />
+  <Avatar size="xx-small" color="ai" name="AI Assistant" renderIcon={IgniteaiLogoInstUIIcon} />
+  <Avatar size="x-small" color="ai" name="AI Assistant" renderIcon={IgniteaiLogoInstUIIcon} />
+  <Avatar size="small" color="ai" name="AI Assistant" renderIcon={IgniteaiLogoInstUIIcon} />
+  <Avatar size="medium" color="ai" name="AI Assistant" renderIcon={IgniteaiLogoInstUIIcon} />
+  <Avatar size="large" color="ai" name="AI Assistant" renderIcon={IgniteaiLogoInstUIIcon} />
+  <Avatar size="x-large" color="ai" name="AI Assistant" renderIcon={IgniteaiLogoInstUIIcon} />
+  <Avatar size="xx-large" color="ai" name="AI Assistant" renderIcon={IgniteaiLogoInstUIIcon} />
 </View>
 ```
 
