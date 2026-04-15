@@ -297,7 +297,9 @@ class TextInput extends Component<TextInputProps> {
         <span css={styles?.facade}>
           {renderBeforeOrAfter ? (
             <span css={styles?.layout}>
-              {beforeElement}
+              {beforeElement && (
+                <span css={styles?.beforeElement}>{beforeElement}</span>
+              )}
               {/* The input and content after input should not wrap,
                 so they're in their own flex container */}
               <span css={styles?.inputLayout}>

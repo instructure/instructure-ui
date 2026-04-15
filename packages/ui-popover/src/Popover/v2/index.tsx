@@ -178,6 +178,7 @@ class Popover extends Component<PopoverProps, PopoverState> {
   }
 
   componentDidMount() {
+    this.props.makeStyles?.()
     if (this.isTooltip) {
       // if popover is being used as a tooltip with no focusable content
       // manage its FocusRegion internally rather than registering it with
@@ -213,6 +214,7 @@ class Popover extends Component<PopoverProps, PopoverState> {
   }
 
   componentDidUpdate(prevProps: PopoverProps, prevState: PopoverState) {
+    this.props.makeStyles?.()
     if (this._focusRegion && this.isTooltip) {
       // if focus region exists, popover is acting as a tooltip
       // so we manually activate and deactivate the region when showing/hiding
