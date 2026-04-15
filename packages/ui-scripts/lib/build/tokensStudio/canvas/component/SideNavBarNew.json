@@ -79,7 +79,7 @@
       "type": "borderRadius"
     },
     "borderColor": {
-      "value": "{color.stroke.base}",
+      "value": "{color.stroke.strong}",
       "type": "color"
     },
     "borderWidth": {
