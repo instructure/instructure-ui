@@ -71,7 +71,7 @@ const generateStyle = (
     },
     'selected-highlighted': {
       background: componentTheme.selectedHighlightedBackground,
-      color: componentTheme.highlightedLabelColor
+      color: componentTheme.selectedLabelColor
     },
     default: {
       transition: 'background 200ms'
