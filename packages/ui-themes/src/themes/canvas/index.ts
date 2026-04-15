@@ -22,13 +22,13 @@
  * SOFTWARE.
  */
 
-import sharedThemeTokens from '../../sharedThemeTokens'
+import legacySharedThemeTokens from '../../legacySharedThemeTokens'
 import { Colors } from '@instructure/shared-types'
 import { colors } from './colors'
 import {
   legacyCanvas as canvas,
   type LegacyCanvas as Canvas
-} from '../newThemes'
+} from '../newThemeTokens'
 import { Theme } from '../../index'
 
 const key = 'canvas'
@@ -60,7 +60,7 @@ const brandVariables = {
 export type CanvasBrandVariables = typeof brandVariables
 
 export type CanvasTheme = Theme<Canvas, 'canvas'> &
-  typeof sharedThemeTokens & { colors: Colors } & CanvasBrandVariables
+  typeof legacySharedThemeTokens & { colors: Colors } & CanvasBrandVariables
 
 /**
  * Canvas theme object
@@ -69,7 +69,9 @@ const theme: CanvasTheme = {
   newTheme: canvas,
   key,
   description: 'This theme meets WCAG 2.1 AA rules for color contrast.',
-  ...sharedThemeTokens,
+  // This is needed so 11.6 component don't break when using this theme.
+  // They will default to the 'canvas' theme
+  ...legacySharedThemeTokens,
   colors,
   ...brandVariables
 }

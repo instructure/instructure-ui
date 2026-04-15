@@ -66,6 +66,7 @@ type PropKeys = keyof ImgOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type ImgProps = ImgOwnProps &
+  //@ts-expect-error TODO-theme-types
   WithStyleProps<NewComponentTypes['Img'], ImgStyle> &
   OtherHTMLAttributes<ImgOwnProps>
 

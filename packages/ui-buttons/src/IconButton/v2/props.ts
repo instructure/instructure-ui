@@ -139,7 +139,7 @@ type PropKeys = keyof IconButtonOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type IconButtonProps = IconButtonOwnProps &
-  WithStyleProps<NewComponentTypes['BaseButton'], null> &
+  WithStyleProps<ReturnType<NewComponentTypes['BaseButton']>, null> &
   OtherHTMLAttributes<IconButtonOwnProps> &
   ToProp
 const allowedProps: AllowedPropKeys = [

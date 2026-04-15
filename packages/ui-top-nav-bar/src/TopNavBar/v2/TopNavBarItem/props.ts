@@ -252,7 +252,10 @@ type PropKeys = keyof TopNavBarItemOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TopNavBarItemProps = TopNavBarItemOwnProps &
-  WithStyleProps<NewComponentTypes['TopNavBarItem'], TopNavBarItemStyle> &
+  WithStyleProps<
+    ReturnType<NewComponentTypes['TopNavBarItem']>,
+    TopNavBarItemStyle
+  > &
   OtherHTMLAttributes<TopNavBarItemOwnProps> &
   WithDeterministicIdProps
 

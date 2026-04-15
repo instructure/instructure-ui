@@ -48,7 +48,7 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TopNavBarDesktopLayoutProps = TopNavBarDesktopLayoutOwnProps &
   WithStyleProps<
-    NewComponentTypes['TopNavBarLayout'],
+    ReturnType<NewComponentTypes['TopNavBarLayout']>,
     TopNavBarDesktopLayoutStyle
   > &
   OtherHTMLAttributes<TopNavBarDesktopLayoutOwnProps>

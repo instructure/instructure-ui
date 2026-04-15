@@ -184,6 +184,7 @@ type PropKeys = keyof TextInputOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TextInputProps = TextInputOwnProps &
+  //@ts-expect-error TODO-theme-types
   WithStyleProps<NewComponentTypes['TextInput'], TextInputStyle> &
   OtherHTMLAttributes<
     TextInputOwnProps,

@@ -23,15 +23,12 @@
  */
 
 import { useTheme } from './useTheme'
-// TODO: rework useStyle to use the new getComponentThemeOverride signature
-import { getComponentThemeOverride } from './getComponentThemeOverrideLegacy'
 import { mergeDeep } from '@instructure/ui-utils'
 import type {
   SharedTokens,
   NewComponentTypes,
   Theme
 } from '@instructure/ui-themes'
-import type { BaseThemeOrOverride } from './EmotionTypes'
 
 // returns the second parameter of a function
 type SecondParameter<T extends (...args: any) => any> =
@@ -48,13 +45,9 @@ type GenerateStyleParams =
 type ThemeOverrideValue =
   | Partial<Theme>
   | ((
-      componentTheme: Theme,
-      currentTheme: NewComponentTypes[keyof NewComponentTypes]
-    ) => Partial<Theme>)
-
-const isNewThemeObject = (obj: BaseThemeOrOverride): obj is Theme => {
-  return typeof (obj as any)?.newTheme === 'object'
-}
+    componentTheme: Theme,
+    currentTheme: NewComponentTypes[keyof NewComponentTypes]
+  ) => Partial<Theme>)
 
 /**
  * new useStyle syntax, use this with v12 themes
@@ -72,47 +65,61 @@ const useStyle = <P extends GenerateStyleParams>(useStyleParams: {
   //in case of a child component needed to use it's parent's tokens, provide parent's name
   useTokensFrom?: keyof NewComponentTypes
 }): ReturnType<P> => {
-  const { generateStyle, params, componentId, displayName, themeOverride } =
-    useStyleParams
+  const { generateStyle, params, componentId, themeOverride } = useStyleParams
   const useTokensFrom = useStyleParams.useTokensFrom
-  const theme = useTheme()
+  const themeInContext = useTheme() as Theme
 
+  const themeOverrideFromProvider = themeInContext.themeOverride
   const componentWithTokensId = useTokensFrom ?? componentId
 
-  const primitiveOverrides = (theme as Theme).themeOverride?.primitives
-  const semanticsOverrides = (theme as Theme).themeOverride?.semantics
+  // resolving the theming functions and applying the overrides
+  const primitiveOverrides = themeOverrideFromProvider?.primitives
+  const semanticsOverrides = themeOverrideFromProvider?.semantics
+  // @ts-ignore TODO-theme-types: fix typing
+  const sharedTokensOverrides = themeOverrideFromProvider?.sharedTokens
+  const componentOverridesFromSettingsProvider =
+    // @ts-ignore TODO-theme-types: fix typing
+    themeOverrideFromProvider?.components?.[
+    componentWithTokensId as keyof NewComponentTypes
+    ]
 
   const primitives = mergeDeep(
-    (theme as Theme).newTheme.primitives,
+    themeInContext.newTheme.primitives,
     primitiveOverrides
   )
+
   const semantics = mergeDeep(
-    (theme as Theme).newTheme.semantics?.(primitives),
+    themeInContext.newTheme.semantics?.(primitives),
     semanticsOverrides
   )
 
-  let baseComponentTheme = {}
-
-  if (
-    isNewThemeObject(theme) &&
-    theme.newTheme.components[componentWithTokensId as keyof NewComponentTypes]
-  ) {
-    baseComponentTheme =
-      theme.newTheme.components[
-        componentWithTokensId as keyof NewComponentTypes
-      ]?.(semantics)
-  }
-  const finalOverride = getComponentThemeOverride(
-    theme,
-    useTokensFrom ?? displayName ?? componentId ?? '',
-    componentWithTokensId,
-    themeOverride,
-    baseComponentTheme
+  const sharedTokens = mergeDeep(
+    themeInContext.newTheme.sharedTokens?.(semantics),
+    sharedTokensOverrides
   )
 
-  const sharedTokens = (theme as Theme).newTheme.sharedTokens?.(semantics)
-  const componentTheme = { ...baseComponentTheme, ...finalOverride }
+  const baseComponentTheme =
+    themeInContext.newTheme.components[
+      componentWithTokensId as keyof NewComponentTypes
+    ]?.(semantics)
 
+  const componentThemeFromSettingsProvider = mergeDeep(
+    baseComponentTheme,
+    componentOverridesFromSettingsProvider
+  )
+
+  const componentTheme = mergeDeep(
+    componentThemeFromSettingsProvider,
+    // @ts-ignore TODO-theme-types: fix typing
+    typeof themeOverride === 'function'
+      ? themeOverride(
+        componentThemeFromSettingsProvider as Theme,
+        themeInContext as any
+      )
+      : themeOverride
+  )
+
+  // @ts-ignore TODO-theme-types: fix typing
   return generateStyle(componentTheme, params, sharedTokens)
 }
 

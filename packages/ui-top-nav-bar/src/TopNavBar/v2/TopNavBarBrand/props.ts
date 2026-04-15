@@ -80,13 +80,16 @@ type PropKeys = keyof TopNavBarBrandOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TopNavBarBrandProps = TopNavBarBrandOwnProps &
-  WithStyleProps<NewComponentTypes['TopNavBarBrand'], TopNavBarBrandStyle> &
+  WithStyleProps<
+    ReturnType<NewComponentTypes['TopNavBarBrand']>,
+    TopNavBarBrandStyle
+  > &
   OtherHTMLAttributes<TopNavBarBrandOwnProps>
 
 type TopNavBarBrandStyle = ComponentStyle<
   'topNavBarBrand' | 'container' | 'name' | 'iconContainer' | 'icon'
 > &
-  Pick<NewComponentTypes['TopNavBarBrand'], 'focusOutlineInset'>
+  Pick<ReturnType<NewComponentTypes['TopNavBarBrand']>, 'focusOutlineInset'>
 
 type TopNavBarBrandStyleProps = {
   layout: TopNavBarContextType['layout']

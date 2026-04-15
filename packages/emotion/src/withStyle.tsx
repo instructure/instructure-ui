@@ -35,7 +35,6 @@ import { deepEqual as isEqual, mergeDeep } from '@instructure/ui-utils'
 import { warn } from '@instructure/console'
 import { decorator } from '@instructure/ui-decorator'
 
-import { getComponentThemeOverride } from './getComponentThemeOverride'
 import { useTheme } from './useTheme'
 
 import type {
@@ -67,14 +66,14 @@ type WithStylePrivateProps<
 > = Style extends null
   ? object
   : {
-      styles?: Style
-      makeStyles?: (extraArgs?: Record<string, unknown>) => void
-    }
+    styles?: Style
+    makeStyles?: (extraArgs?: Record<string, unknown>) => void
+  }
 
 type ThemeOverrideProp<Theme extends ComponentTheme | null = ComponentTheme> = {
   themeOverride?:
-    | Partial<Theme>
-    | ((componentTheme: Theme, currentTheme: BaseTheme) => Partial<Theme>)
+  | Partial<Theme>
+  | ((componentTheme: Theme, currentTheme: BaseTheme) => Partial<Theme>)
 }
 
 type WithStyleProps<
@@ -88,7 +87,7 @@ declare const process: Record<string, any> | undefined
 
 const defaultValues = {
   styles: {},
-  makeStyles: () => {}
+  makeStyles: () => { }
 }
 
 /**
@@ -155,7 +154,8 @@ const withStyle = decorator(
   ) => {
     const displayName = ComposedComponent.displayName || ComposedComponent.name
 
-    const componentId = ComposedComponent.componentId?.replace('.', '')
+    const componentId =
+      useTokensFrom ?? ComposedComponent.componentId?.replace('.', '')
 
     const WithStyle: ForwardRefExoticComponent<
       PropsWithoutRef<Props> & RefAttributes<any>
@@ -173,9 +173,9 @@ const withStyle = decorator(
       // if a new theme has been added to the lib since this component version has been frozen, it can't be used with this
       // theme, so we throw an error. Solution: upgrade to the latest version, it will support it
       if (frozenTheme && !frozenTheme[themeKey]) {
-        throw new Error(
+        console.error(
           `The version of ${displayName} you are using does not support the currently applied "${themeKey}" theme. ` +
-            `Please upgrade to the latest version of ${displayName}.`
+          `Please upgrade to the latest version of ${displayName}.`
         )
       }
 
@@ -205,12 +205,17 @@ const withStyle = decorator(
         ...props,
         ...defaultValues
       }
-
-      const componentWithTokensId = useTokensFrom ?? componentId
-
       // resolving the theming functions and applying the overrides
       const primitiveOverrides = themeOverride?.primitives
       const semanticsOverrides = themeOverride?.semantics
+      // @ts-ignore TODO-theme-types: fix typing
+      const sharedTokensOverrides = themeOverride?.sharedTokens
+      const componentOverridesFromSettingsProvider =
+        // @ts-ignore TODO-theme-types: fix typing
+        themeOverride?.components?.[componentId as keyof NewComponentTypes]
+      const componentOverridesFromThemeOverrideProp = (
+        componentProps as ThemeOverrideProp
+      ).themeOverride
 
       const primitives = mergeDeep(
         theme.newTheme.primitives,
@@ -222,27 +227,37 @@ const withStyle = decorator(
         semanticsOverrides
       )
 
-      const baseComponentTheme = mergeDeep(
-        theme.newTheme.components[
-          componentWithTokensId as keyof NewComponentTypes
-        ]?.(semantics),
-        // @ts-ignore TODO-theme-types: fix typing
-        themeOverride?.components?.[
-          componentWithTokensId as keyof NewComponentTypes
-        ]
+      const sharedTokens = mergeDeep(
+        theme.newTheme.sharedTokens?.(semantics),
+        sharedTokensOverrides
       )
 
-      const derivedThemeOverride = getComponentThemeOverride(
-        (componentProps as ThemeOverrideProp).themeOverride,
+      const baseComponentTheme =
+        theme.newTheme.components[componentId as keyof NewComponentTypes]?.(
+          semantics
+        )
+
+      const componentThemeFromSettingsProvider = mergeDeep(
         baseComponentTheme,
-        themeInContext
+        componentOverridesFromSettingsProvider
       )
-      const sharedTokens = theme.newTheme.sharedTokens?.(semantics)
-      const componentTheme = { ...baseComponentTheme, ...derivedThemeOverride }
+
+      const componentTheme = mergeDeep(
+        componentThemeFromSettingsProvider,
+        // @ts-ignore TODO-theme-types: fix typing
+        typeof componentOverridesFromThemeOverrideProp === 'function'
+          ? componentOverridesFromThemeOverrideProp(
+            componentThemeFromSettingsProvider,
+            themeInContext
+          )
+          : componentOverridesFromThemeOverrideProp
+      )
+
       // TODO do not call here generateStyle, it does not receive the extraArgs
       const [styles, setStyles] = useState(
         generateStyle
-          ? generateStyle(componentTheme, componentProps, sharedTokens, {})
+          ? // @ts-ignore TODO-theme-types: fix typing
+          generateStyle(componentTheme, componentProps, sharedTokens, {})
           : {}
       )
 
@@ -250,6 +265,7 @@ const withStyle = decorator(
         const calculatedStyles = generateStyle(
           componentTheme,
           componentProps,
+          // @ts-ignore TODO-theme-types: fix typing
           sharedTokens,
           extraArgs
         )

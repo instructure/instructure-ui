@@ -110,7 +110,7 @@ type PropKeys = keyof CondensedButtonOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type CondensedButtonProps = CondensedButtonOwnProps &
-  WithStyleProps<NewComponentTypes['BaseButton'], null> &
+  WithStyleProps<ReturnType<NewComponentTypes['BaseButton']>, null> &
   OtherHTMLAttributes<CondensedButtonOwnProps> &
   ToProp
 

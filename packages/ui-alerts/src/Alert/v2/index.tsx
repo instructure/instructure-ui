@@ -49,7 +49,6 @@ import generateStyle from './styles'
 
 import { allowedProps } from './props'
 import type { AlertProps, AlertState } from './props'
-import frozenThemes from '@instructure/ui-themes/v11_7'
 
 /**
 ---
@@ -57,7 +56,7 @@ category: components
 ---
 **/
 @withDeterministicId()
-@withStyle(generateStyle, null, frozenThemes)
+@withStyle(generateStyle)
 class Alert extends Component<AlertProps, AlertState> {
   static readonly componentId = 'Alert'
 
@@ -300,9 +299,9 @@ class Alert extends Component<AlertProps, AlertState> {
 
     return open
       ? ReactDOM.createPortal(
-          <div id={this.srid}>{this.createScreenreaderContentNode()}</div>,
-          liveRegion
-        )
+        <div id={this.srid}>{this.createScreenreaderContentNode()}</div>,
+        liveRegion
+      )
       : null
   }
 

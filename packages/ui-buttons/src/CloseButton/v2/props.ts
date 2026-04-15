@@ -122,7 +122,10 @@ type PropKeys = keyof CloseButtonOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type CloseButtonProps = CloseButtonOwnProps &
-  WithStyleProps<NewComponentTypes['BaseButton'], CloseButtonStyle> &
+  WithStyleProps<
+    ReturnType<NewComponentTypes['BaseButton']>,
+    CloseButtonStyle
+  > &
   OtherHTMLAttributes<CloseButtonOwnProps> &
   ToProp
 

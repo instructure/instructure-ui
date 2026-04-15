@@ -22,13 +22,13 @@
  * SOFTWARE.
  */
 
-import sharedThemeTokens from '../../sharedThemeTokens'
+import legacySharedThemeTokens from '../../legacySharedThemeTokens'
 import { Colors } from '@instructure/shared-types'
 import { colors } from './colors'
 import {
   legacyCanvasHighContrast as newCanvasHighContrast,
   type LegacyCanvasHighContrast as NewCanvasHighContrast
-} from '../newThemes'
+} from '../newThemeTokens'
 import { Theme } from '../../index'
 
 const key = 'canvas-high-contrast'
@@ -37,7 +37,7 @@ export type CanvasHighContrastTheme = Theme<
   NewCanvasHighContrast,
   'canvas-high-contrast'
 > &
-  typeof sharedThemeTokens & { colors: Colors }
+  typeof legacySharedThemeTokens & { colors: Colors }
 /**
  * Canvas high contrast theme without the `use` function and `variables` prop.
  * Not affected by global theme overrides (`.use()` function).
@@ -48,7 +48,9 @@ const theme: CanvasHighContrastTheme = {
   newTheme: newCanvasHighContrast,
   key,
   description: 'This theme meets WCAG 2.1 AAA rules for color contrast.',
-  ...sharedThemeTokens,
+  // This is needed so 11.6 component don't break when using this theme.
+  // They will default to the 'canvas' theme
+  ...legacySharedThemeTokens,
   colors
 }
 
