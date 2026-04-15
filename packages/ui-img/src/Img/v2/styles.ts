@@ -47,23 +47,25 @@ const generateStyle = (
   // if overlay or filters are updated via props,
   // make the transition look smooth
   const transitionStyle = {
+    //@ts-expect-error TODO-theme-types
     transition: `all ${componentTheme.effectTransitionDuration}`
   }
 
   const getFilterStyle = () => {
     const filters = []
 
+    //@ts-expect-error TODO-theme-types
     withBlur && filters.push(`blur(${componentTheme.imageBlurAmount})`)
     withGrayscale && filters.push('grayscale(1)')
 
     return filters.length > 0
       ? {
-          ...transitionStyle,
-          filter: filters.join(' ')
-        }
+        ...transitionStyle,
+        filter: filters.join(' ')
+      }
       : {
-          filter: 'none'
-        }
+        filter: 'none'
+      }
   }
 
   const fillContainer = {

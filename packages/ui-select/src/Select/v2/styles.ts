@@ -41,6 +41,7 @@ const generateStyle = (
       label: 'select__assistiveText',
       display: 'none'
     },
+    //@ts-expect-error TODO-theme-types
     popoverBorderWidth: componentTheme.popoverBorderWidth
   }
 }
