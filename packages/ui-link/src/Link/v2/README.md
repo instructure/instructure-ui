@@ -86,14 +86,14 @@ Use the `variant` prop in combination with the `size` prop to control both the a
 type: example
 ---
 <div>
-  <div>
+  <Text>
     In a line of text you should use the <Link variant="inline" size="medium" renderIcon={<DiamondInstUIIcon />} href="https://instructure.github.io/instructure-ui/">inline</Link> link variant.
-  </div>
+  </Text>
   <br />
-  <div>
+  <Text>
     If the link is standalone (not in a text), use the <code>standalone</code> variant:
     <Link variant="standalone" size="medium" renderIcon={<DiamondInstUIIcon />} href="https://instructure.github.io/instructure-ui/">standalone</Link>
-  </div>
+  </Text>
 </div>
 ```
 
@@ -161,22 +161,29 @@ type: example
 ---
 <div>
   <View as="div" margin="0 0 small">
-    <Link href="https://instructure.design" renderIcon={<DiamondInstUIIcon />}>Icon before text</Link> with the quick brown fox
+    <Text>
+      <Link href="https://instructure.design" renderIcon={<DiamondInstUIIcon />}>Icon before text</Link> with the quick brown fox
+    </Text>
   </View>
   <View as="div" margin="0 0 small">
-    This Link has an icon and displays inline with text. <Link
-      href="https://instructure.design"
-      renderIcon={<DiamondInstUIIcon />}
-      iconPlacement="end"
-    >
-      Icon appears after Link text
-    </Link>. This is more text after the link.
+    <Text>
+      This Link has an icon and displays inline with text.
+      <Link
+        href="https://instructure.design"
+        renderIcon={<DiamondInstUIIcon />}
+        iconPlacement="end"
+      >
+        Icon appears after Link text
+      </Link>. This is more text after the link.
+    </Text>
   </View>
   <View as="div">
-    This Link consists of only an icon&nbsp;
-    <Link onClick={() => console.log('clicked!')} renderIcon={<DiamondInstUIIcon />}>
-      <ScreenReaderContent>Descriptive text</ScreenReaderContent>
-    </Link>.
+    <Text>
+      This Link consists of only an icon&nbsp;
+      <Link onClick={() => console.log('clicked!')} renderIcon={<DiamondInstUIIcon />}>
+        <ScreenReaderContent>Descriptive text</ScreenReaderContent>
+      </Link>.
+    </Text>
   </View>
 </div>
 ```

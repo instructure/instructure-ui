@@ -431,11 +431,15 @@ type: example
 ---
 <Flex gap="medium" direction="column">
   <View tabIndex="0" role="button" cursor="pointer">
-    Tab here to see the focus outline
+    <Text>
+      Tab here to see the focus outline
+    </Text>
   </View>
   <View focusWithin>
-    if the <code>focusWithin</code> prop is <code>true</code>, the View will display the focus ring if any of its descendants receives focus
-    <div tabIndex="0" role="button" style={{outline: 'none'}}>Tab here to see the focus outline</div>
+    <Text>
+      if the <code>focusWithin</code> prop is <code>true</code>, the View will display the focus ring if any of its descendants receives focus
+    </Text>
+    <div tabIndex="0" role="button" style={{outline: 'none'}}><Text>Tab here to see the focus outline</Text></div>
   </View>
 </Flex>
 ```
@@ -723,7 +727,7 @@ type: example
     padding="large"
     withVisualDebug
   >
-    {lorem.sentence()}
+    <Text>{lorem.sentence()}</Text>
   </View>
   <View
     as="div"
@@ -736,7 +740,7 @@ type: example
       padding="small"
       withVisualDebug
     >
-      {lorem.sentence()}
+      <Text>{lorem.sentence()}</Text>
     </View>
     <View
       as="div"
@@ -744,7 +748,7 @@ type: example
       padding="small"
       withVisualDebug
     >
-      {lorem.sentence()}
+      <Text>{lorem.sentence()}</Text>
     </View>
   </View>
 </div>
@@ -771,7 +775,9 @@ type: example
     margin="0 0 medium"
     withVisualDebug
   >
-  Some header content
+    <Text>
+      Some header content
+    </Text>
   </View>
   <Text as="p">{lorem.paragraph()}</Text>
 </View>
@@ -796,7 +802,9 @@ type: example
     margin="large auto"
     padding="0 small 0 0"
   >
+    <Text>
     {lorem.sentence()}
+    </Text>
   </View>
   <Button color="success">Some Action</Button>
 </View>
