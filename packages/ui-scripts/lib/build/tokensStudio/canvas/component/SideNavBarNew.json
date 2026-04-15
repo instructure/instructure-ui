@@ -41,7 +41,7 @@
       "type": "spacing"
     },
     "mainNavGap": {
-      "value": "{spacing.padding.container.xxs}",
+      "value": "0rem",
       "type": "spacing"
     },
     "navItemsGap": {
