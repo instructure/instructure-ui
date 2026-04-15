@@ -21,13 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import type { ComponentTypes as NewComponentTypes } from './themes/newThemes/componentTypes'
+import type { ComponentTypes as NewComponentTypes } from './themes/newThemeTokens/componentTypes'
 import type {
   SharedTokens,
   BaseTheme as NewBaseTheme,
   TokenBoxshadowValueInst,
   TokenTypographyValueInst
-} from './themes/newThemes/commonTypes'
+} from './themes/newThemeTokens/commonTypes'
 import type { CanvasHighContrastTheme } from './themes/canvasHighContrast'
 import type { CanvasTheme, CanvasBrandVariables } from './themes/canvas'
 import type { DarkTheme } from './themes/dark'
@@ -50,8 +50,8 @@ import light from './themes/light'
 import {
   primitives,
   additionalPrimitives
-} from './sharedThemeTokens/colors/primitives'
-import dataVisualization from './sharedThemeTokens/colors/dataVisualization'
+} from './legacySharedThemeTokens/colors/primitives'
+import dataVisualization from './legacySharedThemeTokens/colors/dataVisualization'
 import { boxShadowObjectsToCSSString } from './utils/boxShadowObjectToString'
 
 import type {
@@ -59,7 +59,7 @@ import type {
   LegacyCanvasHighContrast as NewCanvasHighContrast,
   Dark,
   Light
-} from './themes/newThemes'
+} from './themes/newThemeTokens'
 
 type ThemeMap = {
   canvas: CanvasTheme

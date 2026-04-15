@@ -97,7 +97,7 @@ const pathsToIgnore = [
   // version export mapping files (e.g. src/exports/a.ts, b.ts)
   '**/src/exports/**',
   // shared theme token files
-  '**/src/sharedThemeTokens/**',
+  '**/src/legacySharedThemeTokens/**',
 
   // packages to ignore:
   '**/canvas-theme/**',

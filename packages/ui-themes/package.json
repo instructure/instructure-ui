@@ -47,13 +47,6 @@
       "import": "./es/index.js",
       "require": "./lib/index.js",
       "default": "./es/index.js"
-    },
-    "./v11_7": {
-      "src": "./src/themes/frozenThemes/v11_7/index.ts",
-      "types": "./types/themes/frozenThemes/v11_7/index.d.ts",
-      "import": "./es/themes/frozenThemes/v11_7/index.js",
-      "require": "./lib/themes/frozenThemes/v11_7/index.js",
-      "default": "./es/themes/frozenThemes/v11_7/index.js"
     }
   }
 }

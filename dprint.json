@@ -3,6 +3,9 @@
   "typescript": {
     "semiColons": "asi"
   },
-  "excludes": ["**/node_modules", "!packages/ui-themes/src/themes/newThemes/"],
+  "excludes": [
+    "**/node_modules",
+    "!packages/ui-themes/src/themes/newThemeTokens/"
+  ],
   "plugins": ["https://plugins.dprint.dev/typescript-0.95.11.wasm"]
 }

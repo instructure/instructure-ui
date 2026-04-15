@@ -40,7 +40,7 @@ import type {
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['TopNavBarLayout'],
+  componentTheme: ReturnType<NewComponentTypes['TopNavBarLayout']>,
   _props: TopNavBarDesktopLayoutProps,
   _sharedTokens: SharedTokens,
   state: TopNavBarDesktopLayoutStyleProps

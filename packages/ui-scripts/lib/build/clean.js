@@ -40,7 +40,7 @@ export default {
       '.cache',
       'types',
       'tsconfig.build.tsbuildinfo',
-      'src/themes/newThemes'
+      'src/themes/newThemeTokens'
     ]
     for (const dir of dirs) {
       if (fs.existsSync(dir)) {

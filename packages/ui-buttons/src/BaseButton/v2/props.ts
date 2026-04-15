@@ -179,7 +179,7 @@ type PropKeys = keyof BaseButtonOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type BaseButtonProps = BaseButtonOwnProps &
-  WithStyleProps<NewComponentTypes['BaseButton'], BaseButtonStyle> &
+  WithStyleProps<ReturnType<NewComponentTypes['BaseButton']>, BaseButtonStyle> &
   OtherHTMLAttributes<BaseButtonOwnProps> &
   ToProp
 

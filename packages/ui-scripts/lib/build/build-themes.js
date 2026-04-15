@@ -47,6 +47,9 @@ export default {
       themeTokens[relativePath] = JSON.parse(rawData)
     }
 
-    await setupThemes('packages/ui-themes/src/themes/newThemes', themeTokens)
+    await setupThemes(
+      'packages/ui-themes/src/themes/newThemeTokens',
+      themeTokens
+    )
   }
 }

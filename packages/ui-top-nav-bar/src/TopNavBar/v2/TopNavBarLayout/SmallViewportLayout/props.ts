@@ -119,7 +119,7 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TopNavBarSmallViewportLayoutProps = TopNavBarSmallViewportLayoutOwnProps &
   WithStyleProps<
-    NewComponentTypes['TopNavBarLayout'],
+    ReturnType<NewComponentTypes['TopNavBarLayout']>,
     TopNavBarSmallViewportLayoutStyle
   > &
   OtherHTMLAttributes<TopNavBarSmallViewportLayoutOwnProps> &

@@ -22,25 +22,27 @@
  * SOFTWARE.
  */
 
-import sharedThemeTokens from '../../sharedThemeTokens'
-import { colors } from './colors'
-import { light } from '../newThemes'
+import legacySharedThemeTokens from '../../legacySharedThemeTokens'
+import { colors } from '../canvas/colors'
+import { light } from '../newThemeTokens'
 import { Theme } from '../../index'
 
 import type { Colors } from '@instructure/shared-types'
-import type { Light } from '../newThemes'
+import type { Light } from '../newThemeTokens'
 
 const key = 'light'
 
 export type LightTheme = Theme<Light, 'light'> &
-  typeof sharedThemeTokens & { colors: Colors }
+  typeof legacySharedThemeTokens & { colors: Colors }
 
 const theme: LightTheme = {
   newTheme: light,
   key,
   description:
-    'Only usable with v11.7 or newer components! This theme meets WCAG 2.1 AA rules for color contrast.',
-  ...sharedThemeTokens,
+    'Pre v11_7 components will fall back to the canvas theme! This theme meets WCAG 2.1 AA rules for color contrast.',
+  // This is needed so 11.6 component don't break when using this theme.
+  // They will default to the 'canvas' theme
+  ...legacySharedThemeTokens,
   colors
 }
 

@@ -22,39 +22,70 @@
  * SOFTWARE.
  */
 
-import type { ComponentTheme, BaseTheme } from '@instructure/shared-types'
+import type {
+  ThemeOverride,
+  Overrides,
+  ComponentOverride
+} from './EmotionTypes'
+import type { ComponentTheme } from '@instructure/shared-types'
 import { ThemeOverrideProp } from './withStyle'
 import { ThemeOverrideValue } from './useStyle'
+
+type ComponentName = keyof ComponentOverride | undefined
 
 /**
  * ---
  * private: true
  * ---
- * Resolves the per-component `themeOverride` prop into a partial component theme.
- *
- * @param themeOverride - The themeOverride prop value (object or function)
- * @param componentTheme - The component's calculated base theme
- * @param currentTheme - The current full theme (passed to function overrides)
- * @returns The resolved theme override object
+ * This is a utility function which calculates the correct component theme
+ * based on every possible override there is.
+
+ * @param theme - Theme object
+ * @param displayName - Name of the component
+ * @param componentId - componentId of the component
+ * @param themeOverride - The theme override object
+ * @param componentTheme - The component's default theme
+ * @returns The calculated theme override object
  */
 const getComponentThemeOverride = (
-  themeOverride:
-    | ThemeOverrideProp['themeOverride']
-    | ThemeOverrideValue
-    | undefined,
-  componentTheme: ComponentTheme,
-  currentTheme: BaseTheme
+  theme: ThemeOverride,
+  displayName: string,
+  componentId?: string,
+  // ThemeOverrideProp is the old type, ThemeOverrideValue is the new one
+  themeOverride?: ThemeOverrideProp['themeOverride'] | ThemeOverrideValue,
+  componentTheme?: ComponentTheme
 ): Partial<ComponentTheme> => {
-  if (!themeOverride) {
-    return {}
+  const name = displayName as ComponentName
+  const id = componentId as ComponentName
+
+  const { componentOverrides } = theme as Overrides
+
+  let overridesFromTheme: Partial<ComponentTheme> = {}
+  let overrideFromComponent: Partial<ComponentTheme> = {}
+
+  if (componentOverrides) {
+    overridesFromTheme =
+      (name && componentOverrides[name]) || (id && componentOverrides[id]) || {}
   }
 
-  if (typeof themeOverride === 'function') {
-    // TODO-theme-types: fix typing
-    return (themeOverride as any)(componentTheme, currentTheme)
+  if (themeOverride) {
+    if (typeof themeOverride === 'function') {
+      overrideFromComponent = themeOverride(
+        //TODO type properly when the old theme is gone
+        componentTheme || ({} as any),
+        // the `theme` technically could be a partial theme / override object too,
+        // but we want to display all possible options
+        theme as any
+      )
+    } else {
+      overrideFromComponent = themeOverride
+    }
   }
 
-  return themeOverride
+  return {
+    ...overridesFromTheme,
+    ...overrideFromComponent
+  }
 }
 
 export default getComponentThemeOverride

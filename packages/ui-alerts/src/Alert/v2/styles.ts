@@ -21,8 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import type { NewComponentTypes } from '@instructure/ui-themes'
+import { boxShadowObjectsToCSSString } from '@instructure/ui-themes'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import type { AlertProps, AlertStyle } from './props'
 
 /**
@@ -37,7 +37,8 @@ import type { AlertProps, AlertStyle } from './props'
  */
 const generateStyle = (
   componentTheme: ReturnType<NewComponentTypes['Alert']>,
-  props: AlertProps
+  props: AlertProps,
+  sharedTokens: SharedTokens
 ): AlertStyle => {
   const { variant, hasShadow } = props
 
@@ -84,12 +85,11 @@ const generateStyle = (
       borderStyle: componentTheme.borderStyle,
       borderRadius: componentTheme.borderRadius,
       ...variantStyles[variant!].alert,
-      ...(hasShadow &&
-        {
-          // boxShadow: boxShadowObjectsToCSSString(
-          //   sharedTokens.boxShadow.elevation4
-          // )
-        })
+      ...(hasShadow && {
+        boxShadow: boxShadowObjectsToCSSString(
+          sharedTokens.boxShadow.elevation4
+        )
+      })
     },
     icon: {
       color: componentTheme.iconColor,
