@@ -205,7 +205,12 @@ const generateStyle = (
       justifyContent: 'flex-start',
       flexDirection: 'row'
     },
+    beforeElement: {
+      ...(interaction === 'disabled' && { opacity: 0.5 }),
+      label: 'textInput__beforeElement'
+    },
     afterElement: {
+      ...(interaction === 'disabled' && { opacity: 0.5 }),
       display: 'flex',
       alignItems: 'center',
       paddingInlineEnd: paddingHorizontalVariants[size!],

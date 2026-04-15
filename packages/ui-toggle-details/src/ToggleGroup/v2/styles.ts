@@ -23,9 +23,12 @@
  */
 
 import type { NewComponentTypes } from '@instructure/ui-themes'
-import type { SelectProps, SelectStyle } from './props'
+import type { ToggleGroupProps, ToggleGroupStyle } from './props'
 
 /**
+ * ---
+ * private: true
+ * ---
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
@@ -33,15 +36,11 @@ import type { SelectProps, SelectStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['Select'],
-  _props: SelectProps
-): SelectStyle => {
+  componentTheme: NewComponentTypes['ToggleGroup'],
+  _props: ToggleGroupProps
+): ToggleGroupStyle => {
   return {
-    assistiveText: {
-      label: 'select__assistiveText',
-      display: 'none'
-    },
-    popoverBorderWidth: componentTheme.popoverBorderWidth
+    borderColor: componentTheme.borderColor
   }
 }
 

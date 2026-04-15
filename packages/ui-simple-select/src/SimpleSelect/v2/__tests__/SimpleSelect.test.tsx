@@ -26,7 +26,7 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { vi, MockInstance, it } from 'vitest'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
-import { IconCheckSolid } from '@instructure/ui-icons'
+import { CheckInstUIIcon } from '@instructure/ui-icons'
 
 import SimpleSelect from '../index'
 
@@ -228,7 +228,7 @@ describe('<SimpleSelect />', () => {
 
   it('should render icons before option and call renderBeforeLabel callback with necessary props', async () => {
     const renderBeforeLabel = vi.fn(() => (
-      <IconCheckSolid data-testid="option-icon" />
+      <CheckInstUIIcon data-testid="option-icon" />
     ))
 
     render(

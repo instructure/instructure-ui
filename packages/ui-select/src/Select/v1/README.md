@@ -304,8 +304,8 @@ type: example
           onRequestHideOptions={handleHideOptions}
           onRequestHighlightOption={handleHighlightOption}
           onRequestSelectOption={handleSelectOption}
-          renderBeforeInput={<User2InstUIIcon inline={false} />}
-          renderAfterInput={<SearchInstUIIcon inline={false} />}
+          renderBeforeInput={<IconUserSolid inline={false} />}
+          renderAfterInput={<IconSearchLine inline={false} />}
           inputRef={(el) => {
             inputRef.current = el
           }}
@@ -319,7 +319,9 @@ type: example
                   isHighlighted={option.id === highlightedOptionId}
                   isSelected={option.id === selectedOptionId}
                   isDisabled={option.disabled}
-                  renderBeforeLabel={<User2InstUIIcon />}
+                  renderBeforeLabel={
+                    !option.disabled ? IconUserSolid : IconUserLine
+                  }
                 >
                   {!option.disabled
                     ? option.label
@@ -1132,7 +1134,9 @@ const AsyncExample = ({ options }) => {
                 isHighlighted={option.id === highlightedOptionId}
                 isSelected={option.id === selectedOptionId}
                 isDisabled={option.disabled}
-                renderBeforeLabel={<User2InstUIIcon />}
+                renderBeforeLabel={
+                  !option.disabled ? IconUserSolid : IconUserLine
+                }
               >
                 {option.label}
               </Select.Option>
@@ -1302,17 +1306,17 @@ render(
         {
           id: 'opt2',
           label: 'Icon',
-          renderBeforeLabel: <CheckInstUIIcon />
+          renderBeforeLabel: <IconCheckSolid />
         },
         {
           id: 'opt3',
           label: 'Colored Icon',
           renderBeforeLabel: (props) => {
-            let color = 'infoColor'
-            if (props.isHighlighted) color = 'baseColor'
-            if (props.isSelected) color = 'inverseColor'
-            if (props.isDisabled) color = 'disabledBaseColor'
-            return <VerifiedInstUIIcon color={color}/>
+            let color = 'brand'
+            if (props.isHighlighted) color = 'primary-inverse'
+            if (props.isSelected) color = 'primary'
+            if (props.isDisabled) color = 'warning'
+            return <IconInstructureSolid color={color} />
           }
         }
       ]}

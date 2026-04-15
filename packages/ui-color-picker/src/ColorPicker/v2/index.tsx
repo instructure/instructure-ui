@@ -710,7 +710,11 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
           display="inline-block"
           width={width}
           placeholder={placeholderText}
-          themeOverride={{ padding: '' }}
+          themeOverride={{
+            paddingHorizontalSm: '',
+            paddingHorizontalMd: '',
+            paddingHorizontalLg: ''
+          }}
           renderAfterInput={this.renderAfterInput()}
           renderBeforeInput={this.renderBeforeInput()}
           inputContainerRef={this.handleInputContainerRef}

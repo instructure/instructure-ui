@@ -32,10 +32,10 @@ import Select from '../index'
 
 import * as utils from '@instructure/ui-utils'
 import {
-  IconAddLine,
-  IconCheckSolid,
-  IconDownloadSolid,
-  IconEyeSolid
+  CheckInstUIIcon,
+  DownloadInstUIIcon,
+  EyeInstUIIcon,
+  PlusInstUIIcon
 } from '@instructure/ui-icons'
 
 type ExampleOption = 'foo' | 'bar' | 'baz'
@@ -87,12 +87,12 @@ const optionsWithBeforeContent = [
   {
     id: 'opt2',
     label: 'Icon',
-    renderBeforeLabel: <IconCheckSolid />
+    renderBeforeLabel: <CheckInstUIIcon />
   },
   {
     id: 'opt3',
     label: 'Colored Icon',
-    renderBeforeLabel: <IconEyeSolid />
+    renderBeforeLabel: <EyeInstUIIcon />
   }
 ]
 
@@ -108,12 +108,12 @@ const groupOptionsWithBeforeContent: {
     {
       id: 'opt2',
       label: 'Icon1',
-      renderBeforeLabel: <IconCheckSolid />
+      renderBeforeLabel: <CheckInstUIIcon />
     },
     {
       id: 'opt3',
       label: 'Colored Icon1',
-      renderBeforeLabel: <IconEyeSolid />
+      renderBeforeLabel: <EyeInstUIIcon />
     }
   ],
   Options2: [
@@ -125,12 +125,12 @@ const groupOptionsWithBeforeContent: {
     {
       id: 'opt5',
       label: 'Icon2',
-      renderBeforeLabel: <IconAddLine />
+      renderBeforeLabel: <PlusInstUIIcon />
     },
     {
       id: 'opt6',
       label: 'Colored Icon2',
-      renderBeforeLabel: <IconDownloadSolid />
+      renderBeforeLabel: <DownloadInstUIIcon />
     }
   ]
 }
@@ -144,12 +144,12 @@ const optionsWithAfterContent = [
   {
     id: 'opt2',
     label: 'Icon',
-    renderAfterLabel: <IconCheckSolid />
+    renderAfterLabel: <CheckInstUIIcon />
   },
   {
     id: 'opt3',
     label: 'Colored Icon',
-    renderAfterLabel: <IconEyeSolid />
+    renderAfterLabel: <EyeInstUIIcon />
   }
 ]
 
@@ -165,12 +165,12 @@ const groupOptionsWithAfterContent: {
     {
       id: 'opt2',
       label: 'Icon1',
-      renderAfterLabel: <IconCheckSolid />
+      renderAfterLabel: <CheckInstUIIcon />
     },
     {
       id: 'opt3',
       label: 'Colored Icon1',
-      renderAfterLabel: <IconEyeSolid />
+      renderAfterLabel: <EyeInstUIIcon />
     }
   ],
   Options2: [
@@ -182,12 +182,12 @@ const groupOptionsWithAfterContent: {
     {
       id: 'opt5',
       label: 'Icon2',
-      renderAfterLabel: <IconAddLine />
+      renderAfterLabel: <PlusInstUIIcon />
     },
     {
       id: 'opt6',
       label: 'Colored Icon2',
-      renderAfterLabel: <IconDownloadSolid />
+      renderAfterLabel: <DownloadInstUIIcon />
     }
   ]
 }
@@ -202,14 +202,14 @@ const optionsWithBeforeAndAfterContent = [
   {
     id: 'opt2',
     label: 'Icon',
-    renderAfterLabel: <IconCheckSolid />,
-    renderBeforeLabel: <IconEyeSolid />
+    renderAfterLabel: <CheckInstUIIcon />,
+    renderBeforeLabel: <EyeInstUIIcon />
   },
   {
     id: 'opt3',
     label: 'Colored Icon',
-    renderBeforeLabel: <IconEyeSolid />,
-    renderAfterLabel: <IconCheckSolid />
+    renderBeforeLabel: <EyeInstUIIcon />,
+    renderAfterLabel: <CheckInstUIIcon />
   }
 ]
 
@@ -374,7 +374,7 @@ describe('<Select />', () => {
       </Select>
     )
 
-    const select = container.querySelector('span[class$="-select"]')
+    const select = screen.getByTestId('subidubi')
     const label = screen.getByLabelText('Choose an option')
     const input = container.querySelector('input[id^="Select_"]')
     const list = screen.getByRole('listbox')
@@ -661,9 +661,7 @@ describe('<Select />', () => {
       const spanElement = container.querySelector(
         'span[class$="-textInput__afterElement"]'
       )
-      const svgElement = spanElement!.querySelector(
-        'svg[name="IconArrowOpenDown"]'
-      )
+      const svgElement = spanElement!.querySelector('svg[name="ChevronDown"]')
       expect(svgElement).toBeInTheDocument()
     })
 
@@ -699,9 +697,7 @@ describe('<Select />', () => {
       const spanElement = container.querySelector(
         'span[class$="-textInput__afterElement"]'
       )
-      const svgElement = spanElement!.querySelector(
-        'svg[name="IconArrowOpenDown"]'
-      )
+      const svgElement = spanElement!.querySelector('svg[name="ChevronDown"]')
       expect(svgElement).toBeInTheDocument()
     })
 
@@ -824,9 +820,7 @@ describe('<Select />', () => {
       const spanElement = container.querySelector(
         'span[class$="-textInput__afterElement"]'
       )
-      const svgElement = spanElement!.querySelector(
-        'svg[name="IconArrowOpenDown"]'
-      )
+      const svgElement = spanElement!.querySelector('svg[name="ChevronDown"]')
 
       expect(svgElement).toBeInTheDocument()
     })
@@ -880,9 +874,7 @@ describe('<Select />', () => {
       const spanElement = container.querySelector(
         'span[class$="-textInput__afterElement"]'
       )
-      const svgElement = spanElement!.querySelector(
-        'svg[name="IconArrowOpenDown"]'
-      )
+      const svgElement = spanElement!.querySelector('svg[name="ChevronDown"]')
       expect(svgElement).toBeInTheDocument()
     })
 
@@ -976,7 +968,7 @@ describe('<Select />', () => {
           </Select>
         )
 
-        const icon = container.querySelector('svg[name="IconArrowOpenDown"]')
+        const icon = container.querySelector('svg[name="ChevronDown"]')
         const label = screen.getByText('Choose an option')
 
         expect(icon).toBeInTheDocument()
@@ -1117,7 +1109,7 @@ describe('<Select />', () => {
           </Select>
         )
 
-        const icon = container.querySelector('svg[name="IconArrowOpenUp"]')
+        const icon = container.querySelector('svg[name="ChevronUp"]')
         const label = screen.getByText('Choose an option')
 
         expect(icon).toBeInTheDocument()

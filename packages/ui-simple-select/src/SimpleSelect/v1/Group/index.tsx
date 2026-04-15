@@ -22,27 +22,30 @@
  * SOFTWARE.
  */
 
-import type { NewComponentTypes } from '@instructure/ui-themes'
-import type { SelectProps, SelectStyle } from './props'
+import { Component } from 'react'
+
+import type { SimpleSelectGroupProps } from './props'
+import { allowedProps } from './props'
 
 /**
- * Generates the style object from the theme and provided additional information
- * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
- * @return {Object} The final style object, which will be used in the component
- */
-const generateStyle = (
-  componentTheme: NewComponentTypes['Select'],
-  _props: SelectProps
-): SelectStyle => {
-  return {
-    assistiveText: {
-      label: 'select__assistiveText',
-      display: 'none'
-    },
-    popoverBorderWidth: componentTheme.popoverBorderWidth
+---
+parent: SimpleSelect
+id: SimpleSelect.Group
+---
+**/
+class Group extends Component<SimpleSelectGroupProps> {
+  static readonly componentId = 'SimpleSelect.Group'
+
+  static allowedProps = allowedProps
+  static defaultProps = {}
+
+  /* istanbul ignore next */
+  render() {
+    // this component is only used for prop validation. Select.Group children
+    // are parsed in Select and rendered as Options components
+    return null
   }
 }
 
-export default generateStyle
+export default Group
+export { Group }

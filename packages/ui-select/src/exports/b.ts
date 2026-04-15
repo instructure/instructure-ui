@@ -22,27 +22,10 @@
  * SOFTWARE.
  */
 
-import type { NewComponentTypes } from '@instructure/ui-themes'
-import type { SelectProps, SelectStyle } from './props'
+export { Select } from '../Select/v2'
+export { Group as SelectGroup } from '../Select/v2/Group'
+export { Option as SelectOption } from '../Select/v2/Option'
 
-/**
- * Generates the style object from the theme and provided additional information
- * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
- * @return {Object} The final style object, which will be used in the component
- */
-const generateStyle = (
-  componentTheme: NewComponentTypes['Select'],
-  _props: SelectProps
-): SelectStyle => {
-  return {
-    assistiveText: {
-      label: 'select__assistiveText',
-      display: 'none'
-    },
-    popoverBorderWidth: componentTheme.popoverBorderWidth
-  }
-}
-
-export default generateStyle
+export type { SelectProps, SelectOwnProps } from '../Select/v2/props'
+export type { SelectGroupProps } from '../Select/v2/Group/props'
+export type { SelectOptionProps } from '../Select/v2/Option/props'

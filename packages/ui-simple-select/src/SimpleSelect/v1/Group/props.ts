@@ -22,27 +22,28 @@
  * SOFTWARE.
  */
 
-import type { NewComponentTypes } from '@instructure/ui-themes'
-import type { SelectProps, SelectStyle } from './props'
+import React from 'react'
 
-/**
- * Generates the style object from the theme and provided additional information
- * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
- * @return {Object} The final style object, which will be used in the component
- */
-const generateStyle = (
-  componentTheme: NewComponentTypes['Select'],
-  _props: SelectProps
-): SelectStyle => {
-  return {
-    assistiveText: {
-      label: 'select__assistiveText',
-      display: 'none'
-    },
-    popoverBorderWidth: componentTheme.popoverBorderWidth
-  }
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
+
+type SimpleSelectGroupOwnProps = {
+  /**
+   * The label associated with the group options.
+   */
+  renderLabel: React.ReactNode | (() => React.ReactNode)
+  /**
+   * Children of type `<SimpleSelect.Option />` that will be considered part of the group.
+   */
+  children?: React.ReactNode // TODO: ChildrenPropTypes.oneOf([Option])
 }
 
-export default generateStyle
+type PropKeys = keyof SimpleSelectGroupOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type SimpleSelectGroupProps = SimpleSelectGroupOwnProps &
+  OtherHTMLAttributes<SimpleSelectGroupOwnProps>
+const allowedProps: AllowedPropKeys = ['renderLabel', 'children']
+
+export type { SimpleSelectGroupProps }
+export { allowedProps }

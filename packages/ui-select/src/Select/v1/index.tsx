@@ -37,32 +37,32 @@ import {
   isActiveElement
 } from '@instructure/ui-dom-utils'
 
-import { View } from '@instructure/ui-view/latest'
+import { View } from '@instructure/ui-view/v11_6'
 import { Selectable } from '@instructure/ui-selectable'
-import { Popover } from '@instructure/ui-popover/latest'
-import { TextInput } from '@instructure/ui-text-input/latest'
-import { Options } from '@instructure/ui-options/latest'
+import { Popover } from '@instructure/ui-popover/v11_6'
+import { TextInput } from '@instructure/ui-text-input/v11_6'
+import { Options } from '@instructure/ui-options/v11_6'
 import {
-  ChevronDownInstUIIcon,
-  ChevronUpInstUIIcon,
-  CheckInstUIIcon
+  IconArrowOpenDownLine,
+  IconArrowOpenUpLine
 } from '@instructure/ui-icons'
 
-import type { ViewProps } from '@instructure/ui-view/latest'
-import type { TextInputProps } from '@instructure/ui-text-input/latest'
+import type { ViewProps } from '@instructure/ui-view/v11_6'
+import type { TextInputProps } from '@instructure/ui-text-input/v11_6'
 import type {
   OptionsItemProps,
   OptionsSeparatorProps,
   OptionsItemRenderProps
-} from '@instructure/ui-options/latest'
+} from '@instructure/ui-options/v11_6'
 import type {
   SelectableProps,
   SelectableRender
 } from '@instructure/ui-selectable'
 
-import { withStyle, BorderWidth } from '@instructure/emotion'
+import { withStyleLegacy as withStyle, BorderWidth } from '@instructure/emotion'
 
 import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 import { Group } from './Group'
 import type { SelectGroupProps } from './Group/props'
@@ -72,15 +72,6 @@ import type { SelectOptionProps, RenderSelectOptionLabel } from './Option/props'
 import type { SelectProps } from './props'
 import { allowedProps } from './props'
 import { Renderable } from '@instructure/shared-types'
-
-const selectSizeToIconSize: Record<
-  NonNullable<SelectProps['size']>,
-  'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'
-> = {
-  small: 'sm',
-  medium: 'md',
-  large: 'lg'
-}
 
 type GroupChild = ComponentElement<SelectGroupProps, Group>
 type OptionChild = ComponentElement<SelectOptionProps, Option>
@@ -138,7 +129,7 @@ tags: autocomplete, typeahead, combobox, dropdown, search, form
 ---
 **/
 @withDeterministicId()
-@withStyle(generateStyle)
+@withStyle(generateStyle, generateComponentTheme)
 class Select extends Component<SelectProps> {
   static readonly componentId = 'Select'
   private readonly SCROLL_TOLERANCE = 0.5
@@ -422,13 +413,6 @@ class Select extends Component<SelectProps> {
         : (renderOptionLabel as React.ReactNode)
     }
 
-    const { isOptionContentAppliedToInput, size = 'medium' } = this.props
-    const iconSize = selectSizeToIconSize[size]
-    const checkIcon =
-      isSelected && !isOptionContentAppliedToInput ? (
-        <CheckInstUIIcon inline={false} size={iconSize} color="inverseColor" />
-      ) : null
-
     let optionProps: Partial<OptionsItemProps> = {
       // passthrough props
       ...omitProps(option.props, [
@@ -439,7 +423,7 @@ class Select extends Component<SelectProps> {
       ...getOptionProps({ id }),
       // Options.Item props
       renderBeforeLabel: getRenderOptionLabel(renderBeforeLabel),
-      renderAfterLabel: checkIcon ?? getRenderOptionLabel(renderAfterLabel)
+      renderAfterLabel: getRenderOptionLabel(renderAfterLabel)
     }
     // should option be treated as highlighted or selected
     if (isSelected && isHighlighted) {
@@ -549,7 +533,7 @@ class Select extends Component<SelectProps> {
           maxWidth: optionsMaxWidth || this.width,
           background: 'primary',
           elementRef: (node: Element | null) => (this._listView = node),
-          borderRadius: 'inherit'
+          borderRadius: 'medium'
         }
       : { maxHeight: 0 }
 
@@ -591,22 +575,13 @@ class Select extends Component<SelectProps> {
   }
 
   renderIcon() {
-    const { isShowingOptions, size = 'medium' } = this.props
-    const iconSize = selectSizeToIconSize[size]
+    const { styles, isShowingOptions } = this.props
     return (
-      <span>
+      <span css={styles?.icon}>
         {isShowingOptions ? (
-          <ChevronUpInstUIIcon
-            inline={false}
-            size={iconSize}
-            color="baseColor"
-          />
+          <IconArrowOpenUpLine inline={false} />
         ) : (
-          <ChevronDownInstUIIcon
-            inline={false}
-            size={iconSize}
-            color="baseColor"
-          />
+          <IconArrowOpenDownLine inline={false} />
         )}
       </span>
     )
@@ -809,12 +784,6 @@ class Select extends Component<SelectProps> {
         {...triggerProps}
         {...getInputProps(inputProps)}
         suppressHydrationWarning
-        {...(interaction === 'enabled' &&
-          !isEditable && {
-            themeOverride: (componentTheme) => ({
-              backgroundReadonlyColor: componentTheme.backgroundColor
-            })
-          })}
       />
     )
   }
@@ -851,7 +820,7 @@ class Select extends Component<SelectProps> {
           getDescriptionProps
         }) => (
           <span
-            {...getRootProps()}
+            {...getRootProps({ css: styles?.select })}
             ref={(el) => {
               this.ref = el
             }}

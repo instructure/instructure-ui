@@ -19,7 +19,7 @@ type: example
   <SimpleSelect.Option id="foo" value="foo"
                        renderBeforeLabel={(props) => {
                          console.log(props)
-                         return <CheckInstUIIcon />
+                         return <IconCheckSolid />
                        }}>
     Foo
   </SimpleSelect.Option>
@@ -134,7 +134,7 @@ type: example
   <SimpleSelect.Option
     id="icon"
     value="icon"
-    renderBeforeLabel={<CheckInstUIIcon />}
+    renderBeforeLabel={<IconCheckSolid />}
   >
     Icon
   </SimpleSelect.Option>
@@ -142,11 +142,11 @@ type: example
     id="coloredIcon"
     value="coloredIcon"
     renderBeforeLabel={(props) => {
-      let color = 'infoColor'
-      if (props.isHighlighted) color = 'baseColor'
-      if (props.isSelected) color = 'inverseColor'
-      if (props.isDisabled) color = 'disabledBaseColor'
-      return <VerifiedInstUIIcon color={color} />
+      let color = 'brand'
+      if (props.isHighlighted) color = 'primary-inverse'
+      if (props.isSelected) color = 'primary'
+      if (props.isDisabled) color = 'warning'
+      return <IconInstructureSolid color={color} />
     }}
   >
     Colored Icon

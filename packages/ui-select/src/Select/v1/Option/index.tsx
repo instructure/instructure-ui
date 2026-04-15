@@ -22,27 +22,35 @@
  * SOFTWARE.
  */
 
-import type { NewComponentTypes } from '@instructure/ui-themes'
-import type { SelectProps, SelectStyle } from './props'
+import { Component } from 'react'
+import type { SelectOptionProps } from './props'
+import { allowedProps } from './props'
 
 /**
- * Generates the style object from the theme and provided additional information
- * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
- * @return {Object} The final style object, which will be used in the component
- */
-const generateStyle = (
-  componentTheme: NewComponentTypes['Select'],
-  _props: SelectProps
-): SelectStyle => {
-  return {
-    assistiveText: {
-      label: 'select__assistiveText',
-      display: 'none'
-    },
-    popoverBorderWidth: componentTheme.popoverBorderWidth
+---
+parent: Select
+id: Select.Option
+---
+@module Option
+**/
+class Option extends Component<SelectOptionProps> {
+  static readonly componentId = 'Select.Option'
+
+  static allowedProps = allowedProps
+
+  static defaultProps = {
+    isHighlighted: false,
+    isSelected: false,
+    isDisabled: false
+  }
+
+  /* istanbul ignore next */
+  render() {
+    // this component is only used for prop validation. Select.Option children
+    // are parsed in Select and rendered as Options.Item components
+    return null
   }
 }
 
-export default generateStyle
+export default Option
+export { Option }

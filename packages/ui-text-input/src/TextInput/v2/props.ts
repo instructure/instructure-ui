@@ -24,16 +24,17 @@
 
 import { InputHTMLAttributes } from 'react'
 
-import type { FormFieldProps, FormMessage } from '@instructure/ui-form-field/latest'
 import type {
-  OtherHTMLAttributes,
-  TextInputTheme
-} from '@instructure/shared-types'
+  FormFieldProps,
+  FormMessage
+} from '@instructure/ui-form-field/latest'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 import type {
   WithStyleProps,
   ComponentStyle,
   Spacing
 } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type {
   InteractionType,
   WithDeterministicIdProps
@@ -183,7 +184,7 @@ type PropKeys = keyof TextInputOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TextInputProps = TextInputOwnProps &
-  WithStyleProps<TextInputTheme, TextInputStyle> &
+  WithStyleProps<NewComponentTypes['TextInput'], TextInputStyle> &
   OtherHTMLAttributes<
     TextInputOwnProps,
     InputHTMLAttributes<TextInputOwnProps>
@@ -194,7 +195,12 @@ type TextInputProps = TextInputOwnProps &
   WithDeterministicIdProps
 
 type TextInputStyle = ComponentStyle<
-  'textInput' | 'facade' | 'layout' | 'afterElement' | 'inputLayout'
+  | 'textInput'
+  | 'facade'
+  | 'layout'
+  | 'beforeElement'
+  | 'afterElement'
+  | 'inputLayout'
 >
 const allowedProps: AllowedPropKeys = [
   'renderLabel',

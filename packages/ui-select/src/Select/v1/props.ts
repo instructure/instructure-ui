@@ -24,10 +24,12 @@
 
 import { InputHTMLAttributes } from 'react'
 
-import type { OtherHTMLAttributes } from '@instructure/shared-types'
-import type { FormMessage } from '@instructure/ui-form-field/latest'
+import type {
+  OtherHTMLAttributes,
+  SelectTheme
+} from '@instructure/shared-types'
+import type { FormMessage } from '@instructure/ui-form-field/v11_6'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
-import type { NewComponentTypes } from '@instructure/ui-themes'
 import type {
   PlacementPropValues,
   PositionConstraint,
@@ -282,14 +284,16 @@ type PropKeys = keyof SelectOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type SelectProps = SelectOwnProps &
-  WithStyleProps<NewComponentTypes['Select'], SelectStyle> &
+  WithStyleProps<SelectTheme, SelectStyle> &
   OtherHTMLAttributes<
     SelectOwnProps,
     InputHTMLAttributes<SelectOwnProps & Element>
   > &
   WithDeterministicIdProps
 
-type SelectStyle = ComponentStyle<'assistiveText' | 'popoverBorderWidth'>
+type SelectStyle = ComponentStyle<
+  'select' | 'icon' | 'assistiveText' | 'popoverBorderWidth'
+>
 
 const allowedProps: AllowedPropKeys = [
   'renderLabel',
