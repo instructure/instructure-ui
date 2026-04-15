@@ -77,21 +77,21 @@ type: example
 ---
 
 <InstUISettingsProvider dir="ltr">
-  <div>LTR text</div>
+  <div><Text>LTR text</Text></div>
   <Badge count={105} countUntil={100} margin="small medium 0 0">
     <Button>LTR Badge</Button>
   </Badge>
 
   <InstUISettingsProvider dir="rtl">
     <View as="div">
-      <div>Nested RTL text</div>
+      <div><Text>Nested RTL text</Text></div>
       <Badge count={105} countUntil={100} margin="small medium 0 0">
         <Button>Nested RTL Badge</Button>
       </Badge>
     </View>
   </InstUISettingsProvider>
 
-  <div>LTR text</div>
-  <div>LTR text</div>
+  <div><Text>LTR text</Text></div>
+  <div><Text>LTR text</Text></div>
 </InstUISettingsProvider>
 ```

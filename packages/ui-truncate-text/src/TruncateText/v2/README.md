@@ -48,9 +48,9 @@ type: example
           console.log(truncated, text)
         }}
       >
-        <span>
+        <Text>
           Regular sized text with <Link href="#">A Text Link </Link>and <Text weight="bold">some bold text.</Text>
-        </span>
+        </Text>
       </TruncateText>
     </div>
 

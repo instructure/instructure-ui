@@ -20,28 +20,28 @@ type: example
 ---
 <div>
   <Flex withVisualDebug margin="none none large">
-    <Flex.Item>One</Flex.Item>
-    <Flex.Item>Two</Flex.Item>
-    <Flex.Item>Three</Flex.Item>
-    <Flex.Item>Four</Flex.Item>
+    <Flex.Item><Text>One</Text></Flex.Item>
+    <Flex.Item><Text>Two</Text></Flex.Item>
+    <Flex.Item><Text>Three</Text></Flex.Item>
+    <Flex.Item><Text>Four</Text></Flex.Item>
   </Flex>
   <Flex withVisualDebug direction="column" margin="none none large">
-    <Flex.Item>One</Flex.Item>
-    <Flex.Item>Two</Flex.Item>
-    <Flex.Item>Three</Flex.Item>
-    <Flex.Item>Four</Flex.Item>
+    <Flex.Item><Text>One</Text></Flex.Item>
+    <Flex.Item><Text>Two</Text></Flex.Item>
+    <Flex.Item><Text>Three</Text></Flex.Item>
+    <Flex.Item><Text>Four</Text></Flex.Item>
   </Flex>
   <Flex withVisualDebug direction="row-reverse" margin="none none large">
-    <Flex.Item>One</Flex.Item>
-    <Flex.Item>Two</Flex.Item>
-    <Flex.Item>Three</Flex.Item>
-    <Flex.Item>Four</Flex.Item>
+    <Flex.Item><Text>One</Text></Flex.Item>
+    <Flex.Item><Text>Two</Text></Flex.Item>
+    <Flex.Item><Text>Three</Text></Flex.Item>
+    <Flex.Item><Text>Four</Text></Flex.Item>
   </Flex>
   <Flex withVisualDebug direction="column-reverse">
-    <Flex.Item>One</Flex.Item>
-    <Flex.Item>Two</Flex.Item>
-    <Flex.Item>Three</Flex.Item>
-    <Flex.Item>Four</Flex.Item>
+    <Flex.Item><Text>One</Text></Flex.Item>
+    <Flex.Item><Text>Two</Text></Flex.Item>
+    <Flex.Item><Text>Three</Text></Flex.Item>
+    <Flex.Item><Text>Four</Text></Flex.Item>
   </Flex>
 </div>
 ```
@@ -56,28 +56,28 @@ type: example
 ---
 <div>
   <Flex withVisualDebug margin="none none large" gap="small">
-    <Flex.Item>One</Flex.Item>
-    <Flex.Item>Two</Flex.Item>
-    <Flex.Item>Three</Flex.Item>
-    <Flex.Item>Four</Flex.Item>
+    <Flex.Item><Text>One</Text></Flex.Item>
+    <Flex.Item><Text>Two</Text></Flex.Item>
+    <Flex.Item><Text>Three</Text></Flex.Item>
+    <Flex.Item><Text>Four</Text></Flex.Item>
   </Flex>
   <Flex withVisualDebug direction="column" margin="none none large" gap="medium">
-    <Flex.Item>One</Flex.Item>
-    <Flex.Item>Two</Flex.Item>
-    <Flex.Item>Three</Flex.Item>
-    <Flex.Item>Four</Flex.Item>
+    <Flex.Item><Text>One</Text></Flex.Item>
+    <Flex.Item><Text>Two</Text></Flex.Item>
+    <Flex.Item><Text>Three</Text></Flex.Item>
+    <Flex.Item><Text>Four</Text></Flex.Item>
   </Flex>
   <Flex withVisualDebug direction="row-reverse" margin="none none large" gap="medium">
-    <Flex.Item>One</Flex.Item>
-    <Flex.Item>Two</Flex.Item>
-    <Flex.Item>Three</Flex.Item>
-    <Flex.Item>Four</Flex.Item>
+    <Flex.Item><Text>One</Text></Flex.Item>
+    <Flex.Item><Text>Two</Text></Flex.Item>
+    <Flex.Item><Text>Three</Text></Flex.Item>
+    <Flex.Item><Text>Four</Text></Flex.Item>
   </Flex>
   <Flex withVisualDebug direction="column-reverse" gap="small">
-    <Flex.Item>One</Flex.Item>
-    <Flex.Item>Two</Flex.Item>
-    <Flex.Item>Three</Flex.Item>
-    <Flex.Item>Four</Flex.Item>
+    <Flex.Item><Text>One</Text></Flex.Item>
+    <Flex.Item><Text>Two</Text></Flex.Item>
+    <Flex.Item><Text>Three</Text></Flex.Item>
+    <Flex.Item><Text>Four</Text></Flex.Item>
   </Flex>
 </div>
 ```
@@ -90,28 +90,28 @@ type: example
 ---
 <div>
   <Flex withVisualDebug margin="none none large" gap="small" wrap="wrap">
-    <Flex.Item size='25rem'>One</Flex.Item>
-    <Flex.Item size='25rem'>Two</Flex.Item>
-    <Flex.Item size='25rem'>Three</Flex.Item>
-    <Flex.Item size='25rem'>Four</Flex.Item>
+    <Flex.Item size='25rem'><Text>One</Text></Flex.Item>
+    <Flex.Item size='25rem'><Text>Two</Text></Flex.Item>
+    <Flex.Item size='25rem'><Text>Three</Text></Flex.Item>
+    <Flex.Item size='25rem'><Text>Four</Text></Flex.Item>
   </Flex>
   <Flex withVisualDebug margin="none none large" gap="small large" wrap="wrap">
-    <Flex.Item size='25rem'>One</Flex.Item>
-    <Flex.Item size='25rem'>Two</Flex.Item>
-    <Flex.Item size='25rem'>Three</Flex.Item>
-    <Flex.Item size='25rem'>Four</Flex.Item>
+    <Flex.Item size='25rem'><Text>One</Text></Flex.Item>
+    <Flex.Item size='25rem'><Text>Two</Text></Flex.Item>
+    <Flex.Item size='25rem'><Text>Three</Text></Flex.Item>
+    <Flex.Item size='25rem'><Text>Four</Text></Flex.Item>
   </Flex>
   <Flex withVisualDebug margin="none none large" gap="small" wrap="wrap-reverse">
-    <Flex.Item size='25rem'>One</Flex.Item>
-    <Flex.Item size='25rem'>Two</Flex.Item>
-    <Flex.Item size='25rem'>Three</Flex.Item>
-    <Flex.Item size='25rem'>Four</Flex.Item>
+    <Flex.Item size='25rem'><Text>One</Text></Flex.Item>
+    <Flex.Item size='25rem'><Text>Two</Text></Flex.Item>
+    <Flex.Item size='25rem'><Text>Three</Text></Flex.Item>
+    <Flex.Item size='25rem'><Text>Four</Text></Flex.Item>
   </Flex>
   <Flex withVisualDebug margin="none none large" gap="small large" wrap="wrap-reverse">
-    <Flex.Item size='25rem'>One</Flex.Item>
-    <Flex.Item size='25rem'>Two</Flex.Item>
-    <Flex.Item size='25rem'>Three</Flex.Item>
-    <Flex.Item size='25rem'>Four</Flex.Item>
+    <Flex.Item size='25rem'><Text>One</Text></Flex.Item>
+    <Flex.Item size='25rem'><Text>Two</Text></Flex.Item>
+    <Flex.Item size='25rem'><Text>Three</Text></Flex.Item>
+    <Flex.Item size='25rem'><Text>Four</Text></Flex.Item>
   </Flex>
 </div>
 ```
@@ -127,16 +127,16 @@ type: example
 ---
 <Flex withVisualDebug>
   <Flex.Item padding="x-small">
-    Villum dolore eu fugiat nulla pariatur.
+    <Text>Villum dolore eu fugiat nulla pariatur.</Text>
   </Flex.Item>
   <Flex.Item padding="x-small">
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+    <Text>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</Text>
   </Flex.Item>
   <Flex.Item padding="x-small">
-    Duis aute irure.
+    <Text>Duis aute irure.</Text>
   </Flex.Item>
   <Flex.Item padding="x-small">
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    <Text>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Text>
   </Flex.Item>
 </Flex>
 ```
@@ -150,16 +150,16 @@ type: example
 ---
 <Flex withVisualDebug>
   <Flex.Item padding="x-small" shouldShrink>
-    Villum dolore eu fugiat nulla pariatur.
+    <Text>Villum dolore eu fugiat nulla pariatur.</Text>
   </Flex.Item>
   <Flex.Item padding="x-small" shouldShrink>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+    <Text>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</Text>
   </Flex.Item>
   <Flex.Item padding="x-small" shouldShrink>
-    Duis aute irure.
+    <Text>Duis aute irure.</Text>
   </Flex.Item>
   <Flex.Item padding="x-small" shouldShrink>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    <Text>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Text>
   </Flex.Item>
 </Flex>
 ```
@@ -172,10 +172,10 @@ type: example
 ---
 <Flex withVisualDebug>
   <Flex.Item padding="x-small" shouldShrink shouldGrow>
-    I am growing and shrinking!
+    <Text>I am growing and shrinking!</Text>
   </Flex.Item>
   <Flex.Item>
-    I am not shrinking or growing.
+    <Text>I am not shrinking or growing.</Text>
   </Flex.Item>
 </Flex>
 ```
@@ -191,13 +191,13 @@ type: example
 ---
 <Flex withVisualDebug>
   <Flex.Item padding="x-small" size="200px">
-    I am always 200px.
+    <Text>I am always 200px.</Text>
   </Flex.Item>
   <Flex.Item padding="x-small" shouldShrink shouldGrow size="200px">
-    I can grow, and shrink down to 200px.
+    <Text>I can grow, and shrink down to 200px.</Text>
   </Flex.Item>
   <Flex.Item padding="x-small" size="25%">
-    I am always 25%.
+    <Text>I am always 25%.</Text>
   </Flex.Item>
 </Flex>
 ```
@@ -218,13 +218,13 @@ type: example
     <Avatar name="Sarah Robinson" size="large" src={avatarSquare} />
   </Flex.Item>
   <Flex.Item shouldGrow shouldShrink>
-    I should be aligned to the bottom of the Avatar.
+    <Text>I should be aligned to the bottom of the Avatar.</Text>
   </Flex.Item>
   <Flex.Item>
-    Me, too.
+    <Text>Me, too.</Text>
   </Flex.Item>
   <Flex.Item align="start">
-    I am aligning myself to the top.
+    <Text>I am aligning myself to the top.</Text>
   </Flex.Item>
 </Flex>
 ```
@@ -243,10 +243,10 @@ type: example
       <Avatar name="Sarah Robinson" size="large" src={avatarSquare} />
     </Flex.Item>
     <Flex.Item>
-      We are all centered!
+      <Text>We are all centered!</Text>
     </Flex.Item>
     <Flex.Item>
-      Yeah!
+      <Text>Yeah!</Text>
     </Flex.Item>
   </Flex>
 
@@ -255,10 +255,10 @@ type: example
       <Avatar name="Sarah Robinson" size="large" src={avatarSquare} />
     </Flex.Item>
     <Flex.Item>
-      Ah, a little more space.
+      <Text>Ah, a little more space.</Text>
     </Flex.Item>
     <Flex.Item>
-      Totally.
+      <Text>Totally.</Text>
     </Flex.Item>
   </Flex>
 
@@ -267,10 +267,10 @@ type: example
       <Avatar name="Sarah Robinson" size="large" src={avatarSquare} />
     </Flex.Item>
     <Flex.Item>
-      Smooshed again.
+      <Text>Smooshed again.</Text>
     </Flex.Item>
     <Flex.Item>
-      Ugh.
+      <Text>Ugh.</Text>
     </Flex.Item>
   </Flex>
 </div>
@@ -319,7 +319,7 @@ type: example
     <Button margin="none x-small none none">
       Cancel
     </Button>
-    <Button color="success" renderIcon={IconUserSolid}>
+    <Button color="success" renderIcon={UserInstUIIcon}>
       Add user
     </Button>
   </Flex.Item>
@@ -339,15 +339,15 @@ type: example
 
     <Flex withVisualDebug wrap="wrap" justifyItems="space-around" margin="0 0 medium">
       <Flex.Item padding="small">
-        <SVGIcon src={iconExample} size="medium" title="Icon Example" />
+        <HeartInstUIIcon size="medium" title="Icon Example" color="primary" />
         <Text weight="bold" size="large" as="div">We love you!</Text>
       </Flex.Item>
       <Flex.Item padding="small">
-        <SVGIcon src={iconExample} size="medium" title="Icon Example" />
+        <HeartInstUIIcon size="medium" title="Icon Example" color="primary" />
         <Text weight="bold" size="large" as="div">We love you!</Text>
       </Flex.Item>
       <Flex.Item padding="small">
-        <SVGIcon src={iconExample} size="medium" title="Icon Example" />
+        <HeartInstUIIcon size="medium" title="Icon Example" color="primary" />
         <Text weight="bold" size="large" as="div">We love you!</Text>
       </Flex.Item>
     </Flex>
@@ -374,7 +374,7 @@ type: example
   </Flex.Item>
 
   <Flex.Item shouldGrow shouldShrink padding="small" as="main">
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    <Text>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</Text>
   </Flex.Item>
 
   <Flex.Item padding="small" as="footer">
@@ -382,7 +382,7 @@ type: example
     <Flex withVisualDebug justifyItems="space-between">
       <Flex.Item>
         <IconButton
-          renderIcon={IconEmailLine}
+          renderIcon={MailInstUIIcon}
           withBackground={false}
           withBorder={false}
           screenReaderLabel="Some app function"
@@ -390,7 +390,7 @@ type: example
       </Flex.Item>
       <Flex.Item>
         <IconButton
-          renderIcon={IconPrinterLine}
+          renderIcon={PrinterInstUIIcon}
           withBackground={false}
           withBorder={false}
           screenReaderLabel="Some app function"
@@ -398,7 +398,7 @@ type: example
       </Flex.Item>
       <Flex.Item>
         <IconButton
-          renderIcon={IconCalendarDayLine}
+          renderIcon={Calendar1InstUIIcon}
           withBackground={false}
           withBorder={false}
           screenReaderLabel="Some app function"
@@ -406,7 +406,7 @@ type: example
       </Flex.Item>
       <Flex.Item>
         <IconButton
-          renderIcon={IconSettingsLine}
+          renderIcon={SettingsInstUIIcon}
           withBackground={false}
           withBorder={false}
           screenReaderLabel="Some app function"
