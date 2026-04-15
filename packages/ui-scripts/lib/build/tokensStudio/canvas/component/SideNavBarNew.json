@@ -13,7 +13,7 @@
       "type": "color"
     },
     "minimizedminWidth": {
-      "value": "3.375rem",
+      "value": "6.5rem",
       "type": "sizing"
     },
     "toggleTransition": {
@@ -21,7 +21,7 @@
       "type": "other"
     },
     "minWidth": {
-      "value": "5.25rem",
+      "value": "17.25rem",
       "type": "sizing"
     },
     "margin": {
@@ -42,10 +42,6 @@
     },
     "mainNavGap": {
       "value": "{spacing.padding.container.xxs}",
-      "type": "spacing"
-    },
-    "mainNavMinimizedGap": {
-      "value": "0rem",
       "type": "spacing"
     },
     "navItemsGap": {
@@ -85,6 +81,10 @@
     "borderColor": {
       "value": "{color.stroke.base}",
       "type": "color"
+    },
+    "borderWidth": {
+      "value": "{borderWidth.sm}",
+      "type": "borderWidth"
     }
   },
   "sideNavBarItemNew": {
