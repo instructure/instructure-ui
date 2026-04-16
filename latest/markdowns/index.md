@@ -98,8 +98,8 @@
 - [Tabs](./Tabs.md): Accessible tabbed navigation component with support for secondary variants, overflow handling, size control, dynamic content, and tab persistence. Supports disabled tabs and controlled/uncontrolled usage patterns.
 - [Tag](./Tag.md): Compact component for representing categories or groups, featuring dismissible functionality, multiple sizes, inline variants, and accessibility support. Ideal for form elements and filtering interfaces.
 - [Text](./Text.md): Comprehensive text styling component with semantic variants, color options, font properties, line heights, text transformation, and wrapping controls. Replaces deprecated legacy values with semantic alternatives.
-- [TextInput](./TextInput.md): Custom styled input supporting various types, prepend/append content, inline display, and controlled/uncontrolled behavior. Features validation, disabled/readonly states, and flexible content wrapping options.
 - [TextArea](./TextArea.md): Resizable textarea input with height constraints, validation messages, disabled states, and inline display options. Supports controlled/uncontrolled usage and includes accessibility guidelines.
+- [TextInput](./TextInput.md): Custom styled input supporting various types, prepend/append content, inline display, and controlled/uncontrolled behavior. Features validation, disabled/readonly states, and flexible content wrapping options.
 - [TimeSelect](./TimeSelect.md): Specialized time selection component built on Select, supporting controlled/uncontrolled usage, freeform input, locale/timezone awareness, and step-based time increments. Ideal for time-based form inputs.
 - [ToggleDetails](./ToggleDetails.md): Collapsible content component with configurable expansion, icon positioning, sizing variants, and fluid width options. Supports controlled behavior and custom summary formatting with text components.
 - [ToggleGroup](./ToggleGroup.md): Enhanced toggle component with separated summary/toggle button, built-in padding/borders, and nesting support. Features custom icons, transition control, and expanded state management.
@@ -114,7 +114,6 @@
 #### utilities
 
 - [Dialog](./Dialog.md): A utility component for accessibility in modals, popovers, and trays. Manages focus trapping, screen reader visibility, and keyboard navigation. Essential for WCAG-compliant modal interactions.
-- [Expandable](./Expandable.md): Handles expand/collapse functionality for components like ToggleDetails and ToggleGroup. Provides props for accessibility and event handling. Manages state for expanded content visibility.
 - [Focusable](./Focusable.md): A utility component that detects when elements receive focus. Provides render props for creating accessible focus-based interactions, such as skip-to-content links or focus-triggered tooltips. Ensures WCAG compliance for focus management.
 - [Transition](./Transition.md): A wrapper component for transitioning elements in and out of the UI. Supports fade, scale, and slide transitions with customizable directions. Handles mount/unmount transitions and supports RTL mirroring for slide animations.
 - [Portal](./Portal.md): Renders a React subtree into a different DOM element. Useful for modal-like components that need to break out of parent containers. Typically used with Overlay, Modal, or other components that need to render outside their parent hierarchy.
@@ -124,6 +123,7 @@
 - [SVGIcon](./SVGIcon.md): Renders accessible inline SVG icons. Supports custom sizing, color theming, rotation, and display properties. Accepts SVG content via children or external source strings.
 - [TruncateList](./TruncateList.md): A utility component that truncates items when space is limited, commonly used in navigation bars. Controls visible item count and provides dropdown for hidden items with customizable spacing and menu triggers.
 - [BaseButton](./BaseButton.md): Low-level utility component for composing Instructure UI buttons. Not intended for direct use; developers should use Button, CloseButton, IconButton, or CondensedButton instead.
+- [Expandable](./Expandable.md): Handles expand/collapse functionality for components like ToggleDetails and ToggleGroup. Provides props for accessibility and event handling. Manages state for expanded content visibility.
 - [Options](./Options.md): A view-only component for building option lists or menus. Supports variants (default, highlighted, selected, disabled), icons, nesting, and custom roles. Does not manage state—requires external event handling.
 - [Mask](./Mask.md): A component that covers its nearest positioned parent element. Can be used fullscreen within a Portal and supports click-to-close functionality. Useful for overlays and blocking UI interactions.
 
