@@ -57,6 +57,7 @@ describe('<DateTimeInput />', () => {
     render(
       <DateTimeInput
         description="date_time"
+        calendarIcon="Open calendar"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
         dateRenderLabel="date-input"
@@ -83,6 +84,7 @@ describe('<DateTimeInput />', () => {
     render(
       <DateTimeInput
         description="date_time"
+        calendarIcon="Open calendar"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
         dateRenderLabel="date-input"
@@ -111,6 +113,7 @@ describe('<DateTimeInput />', () => {
     render(
       <DateTimeInput
         description="date_time"
+        calendarIcon="Open calendar"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
         dateRenderLabel="date-input"
@@ -140,6 +143,7 @@ describe('<DateTimeInput />', () => {
       <DateTimeInput
         description="date_time"
         dateRenderLabel="date-input"
+        calendarIcon="Open calendar"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
         timeRenderLabel="time-input"
@@ -163,6 +167,7 @@ describe('<DateTimeInput />', () => {
       <DateTimeInput
         description="date_time"
         dateRenderLabel="date-input"
+        calendarIcon="Open calendar"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
         timeRenderLabel="time-input"
@@ -190,6 +195,7 @@ describe('<DateTimeInput />', () => {
       <DateTimeInput
         description="date_time"
         dateRenderLabel="date-input"
+        calendarIcon="Open calendar"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
         timeRenderLabel="time-input"
@@ -221,6 +227,7 @@ describe('<DateTimeInput />', () => {
       <DateTimeInput
         description="date_time"
         dateRenderLabel="date-input"
+        calendarIcon="Open calendar"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
         timeRenderLabel="time-input"
@@ -248,6 +255,7 @@ describe('<DateTimeInput />', () => {
       <DateTimeInput
         description="date_time"
         dateRenderLabel="date-input"
+        calendarIcon="Open calendar"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
         timeRenderLabel="time-input"
@@ -275,6 +283,7 @@ describe('<DateTimeInput />', () => {
       <DateTimeInput
         description="date_time"
         dateRenderLabel="date-input"
+        calendarIcon="Open calendar"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
         timeRenderLabel="time-input"
@@ -297,6 +306,7 @@ describe('<DateTimeInput />', () => {
       <DateTimeInput
         description="date_time"
         dateRenderLabel="date-input"
+        calendarIcon="Open calendar"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
         timeRenderLabel="time-input"
@@ -317,6 +327,7 @@ describe('<DateTimeInput />', () => {
       <DateTimeInput
         description="date_time"
         dateRenderLabel="date-input"
+        calendarIcon="Open calendar"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
         timeRenderLabel="time-input"
@@ -346,6 +357,7 @@ describe('<DateTimeInput />', () => {
 
     const props = {
       description: 'date_time',
+      calendarIcon: 'Open calendar',
       prevMonthLabel: 'Previous month',
       nextMonthLabel: 'Next month',
       dateRenderLabel: 'date',
@@ -373,6 +385,7 @@ describe('<DateTimeInput />', () => {
     const props = {
       description: 'date_time',
       dateRenderLabel: 'date-input',
+      calendarIcon: 'Open calendar',
       prevMonthLabel: 'Previous month',
       nextMonthLabel: 'Next month',
       timeRenderLabel: 'time-input',
@@ -398,6 +411,7 @@ describe('<DateTimeInput />', () => {
     const props = {
       description: 'date_time',
       dateRenderLabel: 'date-input',
+      calendarIcon: 'Open calendar',
       prevMonthLabel: 'Previous month',
       nextMonthLabel: 'Next month',
       timeRenderLabel: 'time-input',
@@ -420,6 +434,7 @@ describe('<DateTimeInput />', () => {
       <DateTimeInput
         description="date_time"
         dateRenderLabel="date-input"
+        calendarIcon="Open calendar"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
         timeRenderLabel="time-input"
@@ -440,6 +455,7 @@ describe('<DateTimeInput />', () => {
       <DateTimeInput
         description="date_time"
         dateRenderLabel="date-input"
+        calendarIcon="Open calendar"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
         timeRenderLabel="time-input"
@@ -462,6 +478,7 @@ describe('<DateTimeInput />', () => {
     const props = {
       description: 'date_time',
       dateRenderLabel: 'date-input',
+      calendarIcon: 'Open calendar',
       prevMonthLabel: 'Previous month',
       nextMonthLabel: 'Next month',
       timeRenderLabel: 'time-input',
@@ -489,6 +506,7 @@ describe('<DateTimeInput />', () => {
     const props = {
       description: 'date_time',
       dateRenderLabel: 'date-input',
+      calendarIcon: 'Open calendar',
       prevMonthLabel: 'Previous month',
       nextMonthLabel: 'Next month',
       timeRenderLabel: 'time-input',
@@ -522,6 +540,7 @@ describe('<DateTimeInput />', () => {
     const props = {
       description: 'date_time',
       dateRenderLabel: 'date-input',
+      calendarIcon: 'Open calendar',
       prevMonthLabel: 'Previous month',
       nextMonthLabel: 'Next month',
       timeRenderLabel: 'time-input',
@@ -576,6 +595,7 @@ describe('<DateTimeInput />', () => {
         <DateTimeInput
           description="date_time"
           dateRenderLabel="date-input"
+          calendarIcon="Open calendar"
           prevMonthLabel="Previous month"
           nextMonthLabel="Next month"
           timeRenderLabel="time-input"
@@ -595,6 +615,7 @@ describe('<DateTimeInput />', () => {
     const props = {
       description: 'date_time',
       dateRenderLabel: 'date-input',
+      calendarIcon: 'Open calendar',
       prevMonthLabel: 'Previous month',
       nextMonthLabel: 'Next month',
       timeRenderLabel: 'time-input',
@@ -628,6 +649,7 @@ describe('<DateTimeInput />', () => {
     const props = {
       description: 'date_time',
       dateRenderLabel: 'date-input',
+      calendarIcon: 'Open calendar',
       prevMonthLabel: 'Previous month',
       nextMonthLabel: 'Next month',
       timeRenderLabel: 'time-input',
@@ -656,6 +678,7 @@ describe('<DateTimeInput />', () => {
     const props = {
       description: 'date_time',
       dateRenderLabel: 'date-input',
+      calendarIcon: 'Open calendar',
       prevMonthLabel: 'Previous month',
       nextMonthLabel: 'Next month',
       timeRenderLabel: 'time-input',
@@ -689,6 +712,7 @@ describe('<DateTimeInput />', () => {
       <DateTimeInput
         description="date_time"
         dateRenderLabel="date-input"
+        calendarIcon="Open calendar"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
         timeRenderLabel="time-input"
@@ -719,6 +743,7 @@ describe('<DateTimeInput />', () => {
       <DateTimeInput
         description="date_time"
         dateRenderLabel="date-input"
+        calendarIcon="Open calendar"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
         timeRenderLabel="time-input"
@@ -753,6 +778,7 @@ describe('<DateTimeInput />', () => {
       <DateTimeInput
         description="date_time"
         dateRenderLabel="date-input"
+        calendarIcon="Open calendar"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
         timeRenderLabel="time-input"
@@ -767,5 +793,297 @@ describe('<DateTimeInput />', () => {
 
     expect(timeInput).toHaveValue('1:30 PM')
     expect(container).toHaveTextContent('Thursday, January 18, 2018 1:30 PM')
+  })
+
+  it('should parse ISO format date typed into the date input', async () => {
+    // In v1, DateTimeInput parsed typed text using moment with the full default format
+    // list which included ISO_8601. In v2 the parser only uses [this.props.dateFormat]
+    // ("LL" by default) as a hint. This test verifies that typing an ISO date string
+    // still works correctly after the switch to DateInput v2.
+    const onChange = vi.fn()
+    render(
+      <DateTimeInput
+        description="date_time"
+        dateRenderLabel="date-input"
+        timeRenderLabel="time-input"
+        calendarIcon="Open calendar"
+        prevMonthLabel="Previous month"
+        nextMonthLabel="Next month"
+        invalidDateTimeMessage="whoops"
+        locale="en-US"
+        timezone="US/Eastern"
+        onChange={onChange}
+      />
+    )
+    const dateInput = screen.getByLabelText('date-input')
+
+    await userEvent.type(dateInput, '2017-05-01')
+    fireEvent.blur(dateInput)
+
+    await waitFor(() => {
+      expect(onChange).toHaveBeenCalled()
+      expect(onChange.mock.calls[0][1]).toContain('2017-05-01')
+      expect(dateInput).toHaveValue('May 1, 2017')
+    })
+  })
+
+  it('should preserve the selected time when a new date is picked from the calendar', async () => {
+    // In v1, calendar day clicks went through handleDayClick which called
+    // recalculateState directly in a single setState. In v2, DateInput fires
+    // onChange (→ handleDateTextChange) then onRequestValidateDate (→ handleDateValidated)
+    // synchronously, resulting in two setState calls. This means handleDateValidated
+    // reads this.state.timeSelectValue from the pre-update state. This test verifies
+    // that React 18 batching keeps the state consistent and the existing time is
+    // correctly preserved when the user picks a new date from the calendar.
+    const onChange = vi.fn()
+    const locale = 'en-US'
+    const timezone = 'US/Eastern'
+
+    render(
+      <DateTimeInput
+        description="date_time"
+        dateRenderLabel="date-input"
+        timeRenderLabel="time-input"
+        calendarIcon="Open calendar"
+        prevMonthLabel="Previous month"
+        nextMonthLabel="Next month"
+        invalidDateTimeMessage="whoops"
+        locale={locale}
+        timezone={timezone}
+        defaultValue="2017-05-01T17:30Z"
+        onChange={onChange}
+      />
+    )
+
+    const calendarButton = screen.getByRole('button', { name: 'Open calendar' })
+    await userEvent.click(calendarButton)
+
+    await waitFor(() => {
+      expect(
+        screen.getByRole('button', { name: '15 May 2017' })
+      ).toBeInTheDocument()
+    })
+    await userEvent.click(screen.getByRole('button', { name: '15 May 2017' }))
+
+    await waitFor(() => {
+      expect(screen.getByLabelText('date-input')).toHaveValue('May 15, 2017')
+      expect(screen.getByLabelText('time-input')).toHaveValue('1:30 PM')
+      expect(onChange).toHaveBeenCalled()
+      expect(onChange.mock.calls[0][1]).toContain('2017-05-15')
+    })
+  })
+
+  it('should normalize the typed date and emit the correct ISO on blur', async () => {
+    // DateInput v2 introduced input normalization on blur, which did not exist in v1.
+    // If the user types a valid but non-canonical string (e.g. "May 1 2017" without
+    // comma), DateInput v2 fires an extra onChange with the normalized form ("May 1, 2017")
+    // before onRequestValidateDate. DateTimeInput must handle this correctly: the
+    // displayed value should be normalized and onChange should fire with the correct ISO.
+    const onChange = vi.fn()
+    render(
+      <DateTimeInput
+        description="date_time"
+        dateRenderLabel="date-input"
+        timeRenderLabel="time-input"
+        calendarIcon="Open calendar"
+        prevMonthLabel="Previous month"
+        nextMonthLabel="Next month"
+        invalidDateTimeMessage="whoops"
+        locale="en-US"
+        timezone="US/Eastern"
+        onChange={onChange}
+      />
+    )
+    const dateInput = screen.getByLabelText('date-input')
+
+    await userEvent.type(dateInput, 'May 1 2017')
+    fireEvent.blur(dateInput)
+
+    await waitFor(() => {
+      expect(dateInput).toHaveValue('May 1, 2017')
+      expect(onChange).toHaveBeenCalled()
+      expect(onChange.mock.calls[0][1]).toContain('2017-05-01')
+    })
+  })
+
+  describe('dateFormat parsing regression from v1: formats v1 accepted but v2 rejects', () => {
+    // DateTimeInput v1 used DateInput v1 which tried many moment formats:
+    // [ISO, 'llll', 'LLLL', 'lll', 'LLL', 'll', 'LL', 'l', 'L'].
+    // DateTimeInput v2 uses a custom parser that only tries [momentISOFormat, dateFormat]
+    // (default 'LL'). The tests below document the regression: these inputs were
+    // accepted in v1 but are currently rejected in v2. They should pass once fixed.
+    const renderComponent = (onChange = vi.fn()) =>
+      render(
+        <DateTimeInput
+          description="date_time"
+          dateRenderLabel="date-input"
+          timeRenderLabel="time-input"
+          calendarIcon="Open calendar"
+          prevMonthLabel="Previous month"
+          nextMonthLabel="Next month"
+          invalidDateTimeMessage="whoops"
+          locale="en-US"
+          timezone="US/Eastern"
+          onChange={onChange}
+        />
+      )
+
+    it('should accept abbreviated month name (ll format: "Sep 4, 1986")', async () => {
+      const onChange = vi.fn()
+      renderComponent(onChange)
+      const dateInput = screen.getByLabelText('date-input')
+
+      await userEvent.type(dateInput, 'Sep 4, 1986')
+      fireEvent.blur(dateInput)
+
+      await waitFor(() => {
+        expect(screen.queryByText('whoops')).not.toBeInTheDocument()
+        expect(onChange).toHaveBeenCalled()
+        expect(onChange.mock.calls[0][1]).toContain('1986-09-04')
+      })
+    })
+
+    it('should accept numeric date with leading zeros (L format: "09/04/1986")', async () => {
+      const onChange = vi.fn()
+      renderComponent(onChange)
+      const dateInput = screen.getByLabelText('date-input')
+
+      await userEvent.type(dateInput, '09/04/1986')
+      fireEvent.blur(dateInput)
+
+      await waitFor(() => {
+        expect(screen.queryByText('whoops')).not.toBeInTheDocument()
+        expect(onChange).toHaveBeenCalled()
+        expect(onChange.mock.calls[0][1]).toContain('1986-09-04')
+      })
+    })
+
+    it('should accept numeric date without leading zeros (l format: "9/4/1986")', async () => {
+      const onChange = vi.fn()
+      renderComponent(onChange)
+      const dateInput = screen.getByLabelText('date-input')
+
+      await userEvent.type(dateInput, '9/4/1986')
+      fireEvent.blur(dateInput)
+
+      await waitFor(() => {
+        expect(screen.queryByText('whoops')).not.toBeInTheDocument()
+        expect(onChange).toHaveBeenCalled()
+        expect(onChange.mock.calls[0][1]).toContain('1986-09-04')
+      })
+    })
+
+    it('should accept date with time component (LLL format: "September 4, 1986 8:30 PM")', async () => {
+      const onChange = vi.fn()
+      renderComponent(onChange)
+      const dateInput = screen.getByLabelText('date-input')
+
+      await userEvent.type(dateInput, 'September 4, 1986 8:30 PM')
+      fireEvent.blur(dateInput)
+
+      await waitFor(() => {
+        expect(screen.queryByText('whoops')).not.toBeInTheDocument()
+        expect(onChange).toHaveBeenCalled()
+        expect(onChange.mock.calls[0][1]).toContain('1986-09-04')
+      })
+    })
+  })
+
+  it('should render the year picker in the calendar when withYearPicker is set', async () => {
+    render(
+      <DateTimeInput
+        description="date_time"
+        dateRenderLabel="date-input"
+        timeRenderLabel="time-input"
+        calendarIcon="Open calendar"
+        prevMonthLabel="Previous month"
+        nextMonthLabel="Next month"
+        invalidDateTimeMessage="whoops"
+        locale="en-US"
+        timezone="US/Eastern"
+        defaultValue="2017-05-01T00:00Z"
+        withYearPicker={{
+          screenReaderLabel: 'Pick a year',
+          startYear: 2000,
+          endYear: 2030
+        }}
+      />
+    )
+
+    const calendarButton = screen.getByRole('button', { name: 'Open calendar' })
+    await userEvent.click(calendarButton)
+
+    await waitFor(() => {
+      const yearPicker = screen.getByRole('combobox', {
+        description: 'Pick a year'
+      })
+      expect(yearPicker).toBeInTheDocument()
+      expect(yearPicker).toHaveValue('2017')
+    })
+  })
+
+  it('should call consumer onChange exactly once when typing a short-format date and blurring', async () => {
+    const onChange = vi.fn()
+    render(
+      <DateTimeInput
+        description="date_time"
+        calendarIcon="Open calendar"
+        prevMonthLabel="Previous month"
+        nextMonthLabel="Next month"
+        dateRenderLabel="date-input"
+        timeRenderLabel="time-input"
+        invalidDateTimeMessage="whoops"
+        locale="en-US"
+        timezone="US/Eastern"
+        onChange={onChange}
+      />
+    )
+    const dateInput = screen.getByLabelText('date-input')
+
+    await userEvent.type(dateInput, '9/1/2017')
+    fireEvent.blur(dateInput)
+
+    await waitFor(() => {
+      expect(dateInput).toHaveValue('September 1, 2017')
+      expect(onChange).toHaveBeenCalledTimes(1)
+      expect(onChange.mock.calls[0][1]).toContain('2017-09-01')
+    })
+  })
+
+  describe('date input placeholder', () => {
+    const defaultProps = {
+      description: 'date_time',
+      calendarIcon: 'Open calendar',
+      prevMonthLabel: 'Previous month',
+      nextMonthLabel: 'Next month',
+      dateRenderLabel: 'date-input',
+      timeRenderLabel: 'time-input',
+      invalidDateTimeMessage: 'whoops'
+    } as const
+
+    it('uses datePlaceholder when provided', () => {
+      render(
+        <DateTimeInput
+          {...defaultProps}
+          locale="en-US"
+          timezone="US/Eastern"
+          datePlaceholder="Pick a date"
+        />
+      )
+      expect(screen.getByLabelText('date-input')).toHaveAttribute(
+        'placeholder',
+        'Pick a date'
+      )
+    })
+
+    it('shows no placeholder when datePlaceholder is omitted', () => {
+      render(
+        <DateTimeInput {...defaultProps} locale="en-US" timezone="US/Eastern" />
+      )
+      expect(screen.getByLabelText('date-input')).toHaveAttribute(
+        'placeholder',
+        ''
+      )
+    })
   })
 })

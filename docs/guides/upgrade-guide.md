@@ -263,6 +263,38 @@ type: embed
 
 ```
 
+#### DateTimeInput v1 → v2 API changes
+
+**Removed props:**
+
+| Removed prop          | Replacement                      |
+| --------------------- | -------------------------------- |
+| `renderWeekdayLabels` | Built in — no replacement needed |
+
+**New props in v2:**
+
+| New prop           | Description                                                                                |
+| ------------------ | ------------------------------------------------------------------------------------------ |
+| `calendarIcon`     | **Required.** Screen reader label for the calendar icon button that opens the date picker. |
+| `datePickerDialog` | Optional. Screen reader label for the date picker dialog.                                  |
+| `withYearPicker`   | Optional. Enables a year dropdown in the calendar.                                         |
+
+```jsx
+// v1
+<DateTimeInput
+  prevMonthLabel="Previous month"
+  nextMonthLabel="Next month"
+/>
+
+// v2
+<DateTimeInput
+  prevMonthLabel="Previous month"
+  nextMonthLabel="Next month"
+  calendarIcon="Open calendar"
+  datePickerDialog="Date picker"  // optional
+/>
+```
+
 ### ColorPicker
 
 ```js

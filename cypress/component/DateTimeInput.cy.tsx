@@ -41,6 +41,7 @@ describe('<DateInput/>', () => {
         description="date time description"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
+        calendarIcon="Choose date"
         dateRenderLabel="date-input label"
         timeRenderLabel="time-input label"
         invalidDateTimeMessage="whoops"
@@ -56,7 +57,7 @@ describe('<DateInput/>', () => {
     cy.contains('time-input label')
     cy.contains('Thursday, January 18, 2018 1:30 PM')
 
-    cy.get('input[id^="Selectable_"]').as('dateInput')
+    cy.get('input[id^="TextInput_"]').as('dateInput')
     cy.get('input[id^="Select_"]').as('timeInput')
 
     cy.get('@dateInput').should('have.value', 'January 18, 2018')
@@ -67,13 +68,14 @@ describe('<DateInput/>', () => {
     cy.get('@timeInput').should('have.value', '')
     cy.wrap(onChange).should('have.been.called')
 
-    cy.get('@dateInput').realClick().wait(100)
+    cy.contains('button', 'Choose date').realClick().wait(100)
 
-    cy.contains('button', '22')
-      .realClick()
-      .wait(100)
-      .then(($btn) => {
-        const selectedDateId = $btn.attr('id')!
+    cy.contains('button', '22').realClick().wait(100)
+
+    cy.wrap(onChange)
+      .should('have.been.called')
+      .then((spy) => {
+        const selectedDateId: string = spy.lastCall.args[1]
         const selectedDateValue = DateTime.parse(
           selectedDateId,
           'en-US',
@@ -83,16 +85,9 @@ describe('<DateInput/>', () => {
         cy.get('@dateInput').should('have.value', selectedDateValue)
         cy.get('@timeInput').should('have.value', '4:16 PM')
 
-        cy.wrap(onChange)
-          .should('have.been.called')
-          .then((spy) => {
-            const lastCallFirstArg = spy.lastCall.args[1]
+        const lastCallDatePart = selectedDateId.split('T')[0]
 
-            const lastCallDatePart = lastCallFirstArg.split('T')[0]
-            const expectedDatePart = selectedDateId.split('T')[0]
-
-            expect(lastCallDatePart).to.equal(expectedDatePart)
-          })
+        expect(lastCallDatePart).to.include('-22')
       })
   })
 
@@ -112,7 +107,7 @@ describe('<DateInput/>', () => {
         onChange={onChange}
       />
     )
-    cy.get('input[id^="Selectable_"]').as('dateInput')
+    cy.get('input[id^="TextInput_"]').as('dateInput')
     cy.get('@dateInput').realClick().wait(100)
     cy.get('@dateInput').type('Not a date{enter}')
     cy.get('@dateInput').blur()
@@ -140,9 +135,9 @@ describe('<DateInput/>', () => {
         disabledDateTimeMessage={errorMsg}
       />
     )
-    cy.get('input[id^="Selectable_"]').as('dateInput')
+    cy.get('input[id^="TextInput_"]').as('dateInput')
     cy.get('body').should('contain', errorMsg)
-    cy.get('@dateInput').clear().type(`05/18/2017{enter}`)
+    cy.get('@dateInput').clear().type(`05/18/2017`).blur()
 
     cy.get('body').should('not.contain', errorMsg)
   })
@@ -172,9 +167,9 @@ describe('<DateInput/>', () => {
         disabledDateTimeMessage={errorMsg}
       />
     )
-    cy.get('input[id^="Selectable_"]').as('dateInput')
+    cy.get('input[id^="TextInput_"]').as('dateInput')
     cy.get('body').should('contain', errorMsgText)
-    cy.get('@dateInput').clear().type(`May 18, 2022{enter}`)
+    cy.get('@dateInput').clear().type(`May 18, 2022`).blur()
 
     cy.get('body').should('not.contain', errorMsgText)
   })
@@ -197,7 +192,7 @@ describe('<DateInput/>', () => {
 
     cy.mount(<DateTimeInput {...props} value={dateTime.toISOString()} />)
 
-    cy.get('input[id^="Selectable_"]').as('dateInput')
+    cy.get('input[id^="TextInput_"]').as('dateInput')
     cy.get('input[id^="Select_"]').as('timeInput')
 
     cy.get('@dateInput').should('have.value', 'May 1, 2017')
@@ -219,7 +214,7 @@ describe('<DateInput/>', () => {
     cy.get('@timeInput').should('have.value', '3:00 PM')
     cy.get('body').should('contain', 'March 29, 2022 3:00 PM')
 
-    cy.get('@dateInput').clear().type('{esc}')
+    cy.get('@dateInput').clear().blur()
 
     cy.get('@dateInput').should('have.value', '')
     cy.get('@timeInput').should('have.value', '')
@@ -244,12 +239,12 @@ describe('<DateInput/>', () => {
         allowNonStepInput={true}
       />
     )
-    cy.get('input[id^="Selectable_"]').as('dateInput')
+    cy.get('input[id^="TextInput_"]').as('dateInput')
     cy.get('input[id^="Select_"]').as('timeInput')
 
     cy.get('@timeInput').clear().type(`7:34 PM`)
 
-    cy.get('@dateInput').clear().type(`May 1, 2017{enter}`)
+    cy.get('@dateInput').clear().type(`May 1, 2017`).blur()
 
     cy.wrap(onChange)
       .should('have.been.called')
@@ -277,7 +272,7 @@ describe('<DateInput/>', () => {
         initialTimeForNewDate="05:05"
       />
     )
-    cy.get('input[id^="Selectable_"]').as('dateInput')
+    cy.get('input[id^="TextInput_"]').as('dateInput')
     cy.get('input[id^="Select_"]').as('timeInput')
 
     cy.get('@dateInput').clear().type(`May 1, 2017{enter}`)
