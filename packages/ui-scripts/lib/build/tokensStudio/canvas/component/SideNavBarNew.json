@@ -13,7 +13,7 @@
       "type": "color"
     },
     "minimizedminWidth": {
-      "value": "6.5rem",
+      "value": "5.75rem",
       "type": "sizing"
     },
     "toggleTransition": {
@@ -21,7 +21,7 @@
       "type": "other"
     },
     "minWidth": {
-      "value": "17.25rem",
+      "value": "15.75rem",
       "type": "sizing"
     },
     "margin": {
