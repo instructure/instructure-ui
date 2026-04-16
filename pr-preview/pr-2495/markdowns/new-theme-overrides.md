@@ -268,7 +268,7 @@ type: example
 </InstUISettingsProvider>
 ```
 
-### 8. Per-component `themeOverride` prop
+### 8. Component's `themeOverride` prop
 
 Individual component instances accept a `themeOverride` prop for one-off styling. This overrides the component's own tokens and takes highest priority.
 
@@ -384,12 +384,261 @@ type: example
 </InstUISettingsProvider>
 ```
 
+### 11. Overriding shared tokens
+
+Shared tokens are cross-component design tokens for common UI patterns like focus outlines, spacing, border radii, and elevation shadows. They sit alongside semantics and are passed to all component style functions. Overriding shared tokens affects every component that uses them.
+
+#### Focus outline
+
+The `focusOutline` shared tokens control the focus ring appearance across all focusable components.
+
+```js
+---
+type: example
+---
+<InstUISettingsProvider theme={light}>
+  <TextInput renderLabel="Default focus ring" placeholder="Click to focus me" />
+
+  <View as="div" margin="small 0 0 0">
+    <InstUISettingsProvider
+      themeOverride={{
+        sharedTokens: {
+          focusOutline: {
+            width: '0.25rem',
+            infoColor: 'deeppink'
+          }
+        }
+      }}
+    >
+      <TextInput renderLabel="Custom focus ring" placeholder="Click to focus me" />
+    </InstUISettingsProvider>
+  </View>
+</InstUISettingsProvider>
+```
+
+#### Box shadow (elevation)
+
+The `boxShadow` shared tokens control elevation shadows. Components like `Alert` use these to render drop shadows.
+
+```js
+---
+type: example
+---
+<InstUISettingsProvider theme={light}>
+  <Alert variant="info" margin="small">
+    Default elevation shadow.
+  </Alert>
+
+  <InstUISettingsProvider
+    themeOverride={{
+      sharedTokens: {
+        boxShadow: {
+          elevation4: {
+            0: { color: 'rgba(138, 43, 226, 0.4)', type: 'dropShadow', x: '0px', y: '0.25rem', blur: '0.75rem', spread: '0px' },
+            1: { color: 'rgba(138, 43, 226, 0.2)', type: 'dropShadow', x: '0px', y: '0.5rem', blur: '1.5rem', spread: '0px' }
+          }
+        }
+      }
+    }}
+  >
+    <Alert variant="info" margin="small">
+      Custom purple elevation shadow.
+    </Alert>
+  </InstUISettingsProvider>
+</InstUISettingsProvider>
+```
+
+#### Combining shared tokens with other overrides
+
+Shared tokens can be combined with primitives, semantics, and component overrides in a single `themeOverride`.
+
+```js
+---
+type: example
+---
+<InstUISettingsProvider theme={light}>
+  <InstUISettingsProvider
+    themeOverride={{
+      sharedTokens: {
+        focusOutline: {
+          width: '0.25rem',
+          infoColor: 'darkorange'
+        }
+      },
+      components: {
+        Alert: {
+          infoBorderColor: 'darkorange',
+          infoIconBackground: 'darkorange'
+        }
+      }
+    }}
+  >
+    <Alert variant="info" margin="small">
+      Alert with orange info styling.
+    </Alert>
+    <View as="div" margin="small 0 0 0">
+      <TextInput renderLabel="Matching orange focus ring" placeholder="Click to focus me" />
+    </View>
+  </InstUISettingsProvider>
+</InstUISettingsProvider>
+```
+
+### 12. Overrides on internal child components
+
+Some components render other components internally. For example, `Button` renders `BaseButton` internally. Provider-level `components.BaseButton` overrides affect all BaseButton instances, including those rendered inside `Button`.
+
+```js
+---
+type: example
+---
+<InstUISettingsProvider theme={canvas}>
+  <InstUISettingsProvider
+    themeOverride={{
+      components: {
+        BaseButton: {
+          primaryBackground: 'rebeccapurple',
+          primaryBorderColor: 'rebeccapurple'
+        }
+      }
+    }}
+  >
+    <BaseButton color="primary" margin="small">
+      BaseButton - purple via BaseButton override
+    </BaseButton>
+    <Button color="primary" margin="small">
+      Button - also purple (uses BaseButton internally)
+    </Button>
+  </InstUISettingsProvider>
+</InstUISettingsProvider>
+```
+
+### 13. Targeted override for a parent component
+
+You can use the parent component's name (e.g. `Button`) in `themeOverride.components` to override its internal child component's tokens. When both `BaseButton` and `Button` overrides are present, the `Button` override should take precedence for `Button` instances, while `BaseButton` stays unaffected.
+
+```js
+---
+type: example
+---
+<InstUISettingsProvider theme={canvas}>
+  <InstUISettingsProvider
+    themeOverride={{
+      components: {
+        BaseButton: {
+          primaryBackground: 'rebeccapurple',
+          primaryBorderColor: 'rebeccapurple'
+        },
+        Button: {
+          primaryBackground: 'deeppink',
+          primaryBorderColor: 'deeppink'
+        }
+      }
+    }}
+  >
+    <BaseButton color="primary" margin="small">
+      BaseButton - still purple (BaseButton override)
+    </BaseButton>
+    <Button color="primary" margin="small">
+      Button - deeppink (Button override wins)
+    </Button>
+  </InstUISettingsProvider>
+</InstUISettingsProvider>
+```
+
+### 14. Per-component `themeOverride` prop overriding provider-level child overrides
+
+When a provider sets `components.BaseButton` overrides, a specific `Button` instance can override those via its own `themeOverride` prop. The per-component prop has the highest priority.
+
+```js
+---
+type: example
+---
+<InstUISettingsProvider theme={canvas}>
+  <InstUISettingsProvider
+    themeOverride={{
+      components: {
+        BaseButton: {
+          primaryBackground: 'rebeccapurple',
+          primaryBorderColor: 'rebeccapurple'
+        }
+      }
+    }}
+  >
+    <BaseButton color="primary" margin="small">
+      BaseButton - purple (from provider)
+    </BaseButton>
+    <Button color="primary" margin="small">
+      Button - also purple (inherits BaseButton override)
+    </Button>
+    <Button
+      color="primary"
+      margin="small"
+      themeOverride={{
+        primaryBackground: 'deeppink',
+        primaryBorderColor: 'deeppink'
+      }}
+    >
+      Button - deeppink (per-component themeOverride wins)
+    </Button>
+  </InstUISettingsProvider>
+</InstUISettingsProvider>
+```
+
+### 15. Overrides on functional (`useStyle`) components
+
+All override patterns work identically on functional components that use the `useStyle` hook. Here, Avatar tokens are overridden the same way as class-based components using `withStyle`.
+
+```js
+---
+type: example
+---
+<InstUISettingsProvider theme={light}>
+  <Avatar name="Default" color="accent1" margin="0 small 0 0" />
+
+  <InstUISettingsProvider
+    themeOverride={{
+      components: {
+        Avatar: {
+          backgroundColor: 'navy',
+          blueTextColor: 'lime'
+        }
+      }
+    }}
+  >
+    <Avatar name="Overridden" color="accent1" margin="0 small 0 0" />
+    <Avatar name="Unaffected" color="accent2" />
+  </InstUISettingsProvider>
+</InstUISettingsProvider>
+```
+
+### 16. Function form `themeOverride` on functional components
+
+The function form also works on `useStyle` components. The function receives the component's calculated theme as the first argument, letting you derive overrides from existing token values.
+
+```js
+---
+type: example
+---
+<InstUISettingsProvider theme={light}>
+  <Avatar name="Default Blue" color="accent1" margin="0 small 0 0" />
+  <Avatar
+    name="Swapped to Green"
+    color="accent1"
+    themeOverride={(componentTheme) => ({
+      backgroundColor: componentTheme.greenBackgroundColor,
+      blueTextColor: componentTheme.greenTextColor
+    })}
+  />
+</InstUISettingsProvider>
+```
+
 ### Override priority (highest to lowest)
 
 1. **Per-component `themeOverride` prop** - affects a single instance
 2. **Provider `themeOverride.components`** - affects all instances of a component in the subtree
-3. **Provider `themeOverride.semantics`** - affects all components using those semantic tokens
-4. **Provider `themeOverride.primitives`** - affects everything that references those raw values
-5. **Base theme** (from `theme` prop or inherited from parent provider)
+3. **Provider `themeOverride.sharedTokens`** - affects cross-component patterns (focus outlines, spacing, shadows, border radii)
+4. **Provider `themeOverride.semantics`** - affects all components using those semantic tokens
+5. **Provider `themeOverride.primitives`** - affects everything that references those raw values
+6. **Base theme** (from `theme` prop or inherited from parent provider)
 
 
