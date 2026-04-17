@@ -27,10 +27,10 @@ import type { Spacing, WithStyleProps } from '@instructure/emotion'
 import type {
   ToProp,
   AsElementType,
-  BaseButtonTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { Cursor } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { ViewProps } from '@instructure/ui-view/latest'
 
 type CondensedButtonOwnProps = {
@@ -110,7 +110,7 @@ type PropKeys = keyof CondensedButtonOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type CondensedButtonProps = CondensedButtonOwnProps &
-  WithStyleProps<BaseButtonTheme, null> &
+  WithStyleProps<NewComponentTypes['BaseButton'], null> &
   OtherHTMLAttributes<CondensedButtonOwnProps> &
   ToProp
 

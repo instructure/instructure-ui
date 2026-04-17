@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { TopNavBarLayoutSmallViewportTheme } from '@instructure/shared-types'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import type {
   TopNavBarSmallViewportLayoutProps,
   TopNavBarSmallViewportLayoutStyleProps,
@@ -40,8 +40,9 @@ import type {
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: TopNavBarLayoutSmallViewportTheme,
+  componentTheme: NewComponentTypes['TopNavBarLayout'],
   _props: TopNavBarSmallViewportLayoutProps,
+  _sharedTokens: SharedTokens,
   state: TopNavBarSmallViewportLayoutStyleProps
 ): TopNavBarSmallViewportLayoutStyle => {
   const {
@@ -157,9 +158,10 @@ const generateStyle = (
       })
     },
     globalStyles: {
-      // the tray should all have 100% height
+      // the tray should have 100% height and absolute position
       [`#${trayId}`]: {
-        height: '100%'
+        height: '100%',
+        position: 'absolute'
       },
       // removes the focus ring on the drilldown,
       // not needed on the mobile menu

@@ -1283,6 +1283,12 @@ type: embed
 
 ```
 
+### TopNavBar
+
+#### TopNavBar.Brand
+
+The deprecated `renderName` and `nameBackground` props have been removed. Please remove them from your code.
+
 ### TreeBrowser
 
 #### Icon system migration
