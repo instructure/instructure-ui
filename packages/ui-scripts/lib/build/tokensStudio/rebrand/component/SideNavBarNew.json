@@ -85,80 +85,90 @@
     "borderWidth": {
       "value": "{borderWidth.sm}",
       "type": "borderWidth"
-    }
-  },
-  "sideNavBarItemNew": {
-    "iconWrapperHeight": {
-      "value": "2.25rem",
-      "type": "sizing"
     },
-    "borderRadius": {
-      "value": "{borderRadius.lg}",
-      "type": "borderRadius"
+    "item": {
+      "horizontalPadding": {
+        "value": "{spacing.spaceSm}",
+        "type": "spacing"
+      },
+      "verticalPadding": {
+        "value": "0.25rem",
+        "type": "spacing"
+      },
+      "iconWrapperHeight": {
+        "value": "2.25rem",
+        "type": "sizing"
+      },
+      "borderRadius": {
+        "value": "{borderRadius.lg}",
+        "type": "borderRadius"
+      },
+      "backgroundColor": {
+        "value": "transparent",
+        "type": "color"
+      },
+      "fontColor": {
+        "value": "{color.text.base}",
+        "type": "color"
+      },
+      "fontFamily": {
+        "value": "{fontFamily.base}",
+        "type": "fontFamilies"
+      },
+      "fontSize": {
+        "value": "{fontSize.textBase}",
+        "type": "fontSizes"
+      },
+      "fontWeight": {
+        "value": "{fontWeight.body.base}",
+        "type": "fontWeights"
+      },
+      "hoverBackgroundColor": {
+        "value": "{color.background.interactive.action.tertiary.hover}",
+        "type": "color"
+      },
+      "lineHeight": {
+        "value": "{lineHeight.paragraph.base}",
+        "type": "lineHeights"
+      },
+      "linkTextDecoration": {
+        "value": "none",
+        "type": "other"
+      },
+      "selectedBackgroundColor": {
+        "value": "{color.background.brand}",
+        "type": "color"
+      },
+      "selectedFontColor": {
+        "value": "{color.text.inverse}",
+        "type": "color"
+      },
+      "innerFocusOutlineColor": {
+        "value": "{color.stroke.interactive.focusRing.base}",
+        "type": "color"
+      },
+      "selectedInnerFocusOutlineColor": {
+        "value": "{color.icon.inverse}",
+        "type": "color"
+      },
+      "outerFocusOutlineColor": {
+        "value": "{color.transparentColor}",
+        "type": "color"
+      },
+      "selectedOuterFocusOutlineColor": {
+        "value": "{color.transparentColor}",
+        "type": "color"
+      }
     },
-    "backgroundColor": {
-      "value": "transparent",
-      "type": "color"
-    },
-    "horizontalPadding": {
-      "value": "{spacing.spaceSm}",
-      "type": "spacing"
-    },
-    "fontColor": {
-      "value": "{color.text.base}",
-      "type": "color"
-    },
-    "fontFamily": {
-      "value": "{fontFamily.base}",
-      "type": "fontFamilies"
-    },
-    "fontSize": {
-      "value": "{fontSize.textBase}",
-      "type": "fontSizes"
-    },
-    "fontWeight": {
-      "value": "{fontWeight.body.base}",
-      "type": "fontWeights"
-    },
-    "hoverBackgroundColor": {
-      "value": "{color.background.interactive.action.tertiary.hover}",
-      "type": "color"
-    },
-    "lineHeight": {
-      "value": "{lineHeight.paragraph.base}",
-      "type": "lineHeights"
-    },
-    "linkTextDecoration": {
-      "value": "none",
-      "type": "other"
-    },
-    "selectedBackgroundColor": {
-      "value": "{color.background.brand}",
-      "type": "color"
-    },
-    "selectedFontColor": {
-      "value": "{color.text.inverse}",
-      "type": "color"
-    },
-    "innerFocusOutlineColor": {
-      "value": "{color.stroke.interactive.focusRing.base}",
-      "type": "color"
-    },
-    "selectedInnerFocusOutlineColor": {
-      "value": "{color.icon.inverse}",
-      "type": "color"
-    },
-    "outerFocusOutlineColor": {
-      "value": "{color.transparentColor}",
-      "type": "color"
-    },
-    "selectedOuterFocusOutlineColor": {
-      "value": "{color.transparentColor}",
-      "type": "color"
-    },
-    "verticalPadding": {
-      "value": "0.25rem",
-      "type": "spacing"
+    "drilldownOption": {
+      "backgroundColor": {
+        "value": "{color.transparentColor}",
+        "type": "color"
+      },
+      "textColor": {
+        "value": "{color.text.base}",
+        "type": "color"
+      }
     }
   }
 }

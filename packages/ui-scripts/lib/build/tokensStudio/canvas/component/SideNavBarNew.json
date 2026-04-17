@@ -85,80 +85,90 @@
     "borderWidth": {
       "value": "{borderWidth.sm}",
       "type": "borderWidth"
-    }
-  },
-  "sideNavBarItemNew": {
-    "iconWrapperHeight": {
-      "value": "2.25rem",
-      "type": "sizing"
     },
-    "borderRadius": {
-      "value": "0rem",
-      "type": "borderRadius"
+    "item": {
+      "iconWrapperHeight": {
+        "value": "2.25rem",
+        "type": "sizing"
+      },
+      "borderRadius": {
+        "value": "0rem",
+        "type": "borderRadius"
+      },
+      "backgroundColor": {
+        "value": "transparent",
+        "type": "color"
+      },
+      "horizontalPadding": {
+        "value": "0.375rem",
+        "type": "spacing"
+      },
+      "verticalPadding": {
+        "value": "0.25rem",
+        "type": "spacing"
+      },
+      "fontColor": {
+        "value": "{color.text.onColor}",
+        "type": "color"
+      },
+      "fontFamily": {
+        "value": "{fontFamily.base}",
+        "type": "fontFamilies"
+      },
+      "fontSize": {
+        "value": "{fontSize.textBase}",
+        "type": "fontSizes"
+      },
+      "fontWeight": {
+        "value": "{fontWeight.body.base}",
+        "type": "fontWeights"
+      },
+      "hoverBackgroundColor": {
+        "value": "{color.background.interactive.action.primary.hover}",
+        "type": "color"
+      },
+      "lineHeight": {
+        "value": "{lineHeight.paragraph.base}",
+        "type": "lineHeights"
+      },
+      "linkTextDecoration": {
+        "value": "none",
+        "type": "other"
+      },
+      "selectedBackgroundColor": {
+        "value": "{color.background.base}",
+        "type": "color"
+      },
+      "selectedFontColor": {
+        "value": "{color.text.interactive.navigation.primary.base}",
+        "type": "color"
+      },
+      "innerFocusOutlineColor": {
+        "value": "{color.stroke.interactive.focusRing.onColor}",
+        "type": "color"
+      },
+      "selectedInnerFocusOutlineColor": {
+        "value": "{color.stroke.interactive.focusRing.base}",
+        "type": "color"
+      },
+      "outerFocusOutlineColor": {
+        "value": "{color.stroke.base}",
+        "type": "color"
+      },
+      "selectedOuterFocusOutlineColor": {
+        "value": "{color.stroke.interactive.focusRing.onColor}",
+        "type": "color"
+      }
     },
-    "backgroundColor": {
-      "value": "transparent",
-      "type": "color"
-    },
-    "horizontalPadding": {
-      "value": "0.375rem",
-      "type": "spacing"
-    },
-    "verticalPadding": {
-      "value": "0.25rem",
-      "type": "spacing"
-    },
-    "fontColor": {
-      "value": "{color.text.onColor}",
-      "type": "color"
-    },
-    "fontFamily": {
-      "value": "{fontFamily.base}",
-      "type": "fontFamilies"
-    },
-    "fontSize": {
-      "value": "{fontSize.textBase}",
-      "type": "fontSizes"
-    },
-    "fontWeight": {
-      "value": "{fontWeight.body.base}",
-      "type": "fontWeights"
-    },
-    "hoverBackgroundColor": {
-      "value": "{color.background.interactive.action.primary.hover}",
-      "type": "color"
-    },
-    "lineHeight": {
-      "value": "{lineHeight.paragraph.base}",
-      "type": "lineHeights"
-    },
-    "linkTextDecoration": {
-      "value": "none",
-      "type": "other"
-    },
-    "selectedBackgroundColor": {
-      "value": "{color.background.base}",
-      "type": "color"
-    },
-    "selectedFontColor": {
-      "value": "{color.text.interactive.navigation.primary.base}",
-      "type": "color"
-    },
-    "innerFocusOutlineColor": {
-      "value": "{color.stroke.interactive.focusRing.onColor}",
-      "type": "color"
-    },
-    "selectedInnerFocusOutlineColor": {
-      "value": "{color.stroke.interactive.focusRing.base}",
-      "type": "color"
-    },
-    "outerFocusOutlineColor": {
-      "value": "{color.stroke.base}",
-      "type": "color"
-    },
-    "selectedOuterFocusOutlineColor": {
-      "value": "{color.stroke.interactive.focusRing.onColor}",
-      "type": "color"
+    "drilldownOption": {
+      "backgroundColor": {
+        "value": "{color.transparentColor}",
+        "type": "color"
+      },
+      "textColor": {
+        "value": "{color.text.onColor}",
+        "type": "color"
+      }
     }
   }
 }
