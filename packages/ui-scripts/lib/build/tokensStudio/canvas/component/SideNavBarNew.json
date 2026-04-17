@@ -168,6 +168,16 @@
       "textColor": {
         "value": "{color.text.onColor}",
         "type": "color"
+      },
+      "logoutTextColor": {
+        "value": "{color.text.onColor}",
+        "type": "color"
+      }
+    },
+    "collapseButton": {
+      "textColor": {
+        "value": "{color.text.onColor}",
+        "type": "color"
       }
     }
   }
