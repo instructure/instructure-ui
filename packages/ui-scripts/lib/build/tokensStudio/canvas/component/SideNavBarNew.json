@@ -117,7 +117,7 @@
       "type": "fontFamilies"
     },
     "fontSize": {
-      "value": "{fontSize.textSm}",
+      "value": "{fontSize.textBase}",
       "type": "fontSizes"
     },
     "fontWeight": {
