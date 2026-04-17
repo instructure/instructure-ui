@@ -242,7 +242,7 @@ class PlaygroundExample extends React.Component {
           width="100%"
           display="block"
           renderLabel={<ScreenReaderContent>Search</ScreenReaderContent>}
-          renderBeforeInput={() => <IconSearchLine inline={false} />}
+          renderBeforeInput={() => <SearchInstUIIcon inline={false} />}
           placeholder="Search..."
           onChange={(_event, value) => {
             this.setState({ searchInputValue: value })
@@ -397,7 +397,7 @@ class PlaygroundExample extends React.Component {
       extraActionItems: 'In "smallViewport" mode, when there is not enough room to list all the action items, they will be accessible via a dropdown menu at the end of the list',
       actionItemVariant: 'In "smallViewport" mode all items are displayed as `variant="icon"` due to the lack of space',
       userVariant: 'In "smallViewport" mode it will always display as text (with or without avatar)',
-      disableMenuItem: 'e.g.: "Settings" menu item',
+      disableMenuItem: 'e.g.: "Overview" menu item',
       disableMenuItemWithSubmenu: 'e.g.: "Admin" menu item',
       disableSubmenuItem: 'e.g.: "Item Bank" menu item under "Admin"',
       disableAction: 'e.g.: "Info" action',
@@ -482,7 +482,7 @@ class PlaygroundExample extends React.Component {
           <View as="div" margin="large medium small">
             <Button
               onClick={() => { this.setState({ isModalOpen: false }) }}
-              renderIcon={IconXSolid}
+              renderIcon={XInstUIIcon}
             >
               Close TopNavBar Fullscreen Example
             </Button>
@@ -633,7 +633,7 @@ class PlaygroundExample extends React.Component {
                   renderHiddenItemsMenuTriggerLabel={(
                     hiddenChildrenCount
                   ) => `${hiddenChildrenCount} More`}
-                  renderHiddenItemsMenuTriggerAriaLabel={(
+                  renderHiddenItemsMenuTriggerTooltip={(
                     hiddenChildrenCount
                   ) => `${hiddenChildrenCount} more menu items`}
                 >
@@ -642,7 +642,7 @@ class PlaygroundExample extends React.Component {
                       key={item.id}
                       id={item.id}
 
-                      {...this.state.disableMenuItem && item.label === 'Settings' && {
+                      {...this.state.disableMenuItem && item.label === 'Overview' && {
                         status: 'disabled'
                       }}
                       {...this.state.disableMenuItemWithSubmenu && item.label === 'Admin' && {
@@ -693,7 +693,7 @@ class PlaygroundExample extends React.Component {
                 >
                   <TopNavBar.Item
                     id="Search1"
-                    renderIcon={<IconSearchLine />}
+                    renderIcon={<SearchInstUIIcon />}
                     aria-label="Open to search in the page"
                     {...actionItemSettings}
                     {...(currentLayout === 'desktop'
@@ -720,7 +720,7 @@ class PlaygroundExample extends React.Component {
 
                   <TopNavBar.Item
                     id="Info"
-                    renderIcon={<IconQuestionLine />}
+                    renderIcon={<CircleQuestionMarkInstUIIcon />}
                     aria-label="info menu"
                     renderSubmenu={this.generateSubmenu({
                       id: 'Info',
@@ -742,9 +742,9 @@ class PlaygroundExample extends React.Component {
 
                   {this.state.extraActionItems &&
                     [
-                      { name: 'Alerts', icon: <IconAlertsLine /> },
-                      { name: 'Calendar', icon: <IconCalendarMonthLine /> },
-                      { name: 'Discussion', icon: <IconDiscussionLine /> },
+                      { name: 'Alerts', icon: <BellInstUIIcon /> },
+                      { name: 'Calendar', icon: <CalendarDaysInstUIIcon /> },
+                      { name: 'Discussion', icon: <MessagesSquareInstUIIcon /> },
                     ].map(({ name, icon }) => {
                       return (
                         <TopNavBar.Item
@@ -786,9 +786,9 @@ class PlaygroundExample extends React.Component {
                       : this.generateSubmenu({
                         id: 'Info',
                         submenu: [
-                          { label: 'Profile', icon: IconUserLine },
-                          { label: 'Personal settings', icon: IconSettingsLine },
-                          { label: 'Log out', icon: IconXLine },
+                          { label: 'Profile', icon: UserInstUIIcon },
+                          { label: 'Personal settings', icon: SettingsInstUIIcon },
+                          { label: 'Log out', icon: XInstUIIcon },
                         ].map(item => ({
                           id: item.label.replace(' ', '').toLowerCase(),
                           label: item.label,
@@ -1107,11 +1107,9 @@ type: example
             <TopNavBar.Brand
               screenReaderLabel="Brand name"
               renderIcon={(
-                <IconBoldLine
-                  size="small"
-                  color="primary-inverse"
-                  height="2.5rem"
-                  width="2.5rem"
+                <BoldInstUIIcon
+                  size="2xl"
+                  color="inverseColor"
                 />
               )}
               iconBackground="#0097D3"
@@ -1355,7 +1353,7 @@ type: example
                 id="AlertsAction1"
                 variant="icon"
                 tooltip="Alerts"
-                renderIcon={<IconAlertsLine />}
+                renderIcon={<BellInstUIIcon />}
                 onClick={() => {
                   console.log('Alerts')
                 }}
@@ -1366,7 +1364,7 @@ type: example
                 id="SearchAction"
                 variant="icon"
                 tooltip="Search"
-                renderIcon={<IconSearchLine />}
+                renderIcon={<SearchInstUIIcon />}
                 customPopoverConfig={{
                   on: 'click',
                   children: (
@@ -1376,7 +1374,7 @@ type: example
                         width="100%"
                         display="block"
                         renderLabel={<ScreenReaderContent>Search</ScreenReaderContent>}
-                        renderBeforeInput={() => <IconSearchLine inline={false} />}
+                        renderBeforeInput={() => <SearchInstUIIcon inline={false} />}
                         placeholder="Search..."
                         onChange={(_event, value) => {
                           console.log(value)
@@ -1398,7 +1396,7 @@ type: example
               </TopNavBar.Item>
               <TopNavBar.Item
                 id="ForumAction1"
-                renderIcon={<IconDiscussionLine />}
+                renderIcon={<MessagesSquareInstUIIcon />}
                 onClick={() => {
                   console.log('Forum')
                 }}
@@ -1409,7 +1407,7 @@ type: example
                 id="InfoAction1"
                 variant="icon"
                 tooltip="Info"
-                renderIcon={<IconQuestionLine />}
+                renderIcon={<CircleQuestionMarkInstUIIcon />}
                 href="/#TopNavBar"
               >
                 Info
@@ -1685,11 +1683,9 @@ class LayoutExample extends React.Component {
                       <TopNavBar.Brand
                         screenReaderLabel="Brand name"
                         renderIcon={inverseColor ? undefined : (
-                          <IconBoldLine
-                            size="small"
-                            color="primary-inverse"
-                            height="2.5rem"
-                            width="2.5rem"
+                          <BoldInstUIIcon
+                            size="2xl"
+                            color="inverseColor"
                           />
                         )}
                         iconBackground="#0097D3"
@@ -1756,7 +1752,7 @@ class LayoutExample extends React.Component {
                           id="InfoAction3"
                           variant="icon"
                           tooltip="Info"
-                          renderIcon={<IconQuestionLine />}
+                          renderIcon={<CircleQuestionMarkInstUIIcon />}
                           onClick={() => {
                             console.log('Info')
                           }}
@@ -1767,7 +1763,7 @@ class LayoutExample extends React.Component {
                           id="AlertsAction3"
                           variant="icon"
                           tooltip="Alerts"
-                          renderIcon={<IconAlertsLine />}
+                          renderIcon={<BellInstUIIcon />}
                           onClick={() => {
                             console.log('Alerts')
                           }}
@@ -1817,7 +1813,7 @@ class LayoutExample extends React.Component {
               }}
             />
 
-            <View as="div" minHeight='10rem' padding="medium">
+            <View background="primary" as="div" minHeight='10rem' padding="medium">
               <Heading as="p" level="h2" margin="medium 0">
                 Page Content
               </Heading>
@@ -1866,7 +1862,7 @@ In small viewport mode, items in `<TopNavBar.User>` and `<TopNavBar.MenuItems>` 
 type: example
 ---
 
-<View as="div" background="primary-inverse" padding="medium">
+<View as="div" css={{ background: '#334450' }}padding="medium">
   <Flex wrap="wrap">
     <Flex.Item padding="small">
       <TopNavBar.Item
@@ -1878,7 +1874,7 @@ type: example
     <Flex.Item padding="small">
       <TopNavBar.Item
         id="defaultIcon"
-        renderIcon={<IconDiscussionLine />}
+        renderIcon={<MessagesSquareInstUIIcon />}
       >
         Default with icon
       </TopNavBar.Item>
@@ -1906,7 +1902,7 @@ type: example
       <TopNavBar.Item
         id="buttonIcon"
         variant="button"
-        renderIcon={<IconDiscussionLine />}
+        renderIcon={<MessagesSquareInstUIIcon />}
       >
         Button with icon
       </TopNavBar.Item>
@@ -1927,7 +1923,7 @@ type: example
       <TopNavBar.Item
         id="iconItem"
         variant="icon"
-        renderIcon={<IconDiscussionLine />}
+        renderIcon={<MessagesSquareInstUIIcon />}
         tooltip="Icon variant"
       >
         Icon variant
@@ -2033,7 +2029,7 @@ type: example
               renderHiddenItemsMenuTriggerLabel={(
                 hiddenChildrenCount
               ) => `${hiddenChildrenCount} More`}
-             renderHiddenItemsMenuTriggerTooltip={(
+             renderHiddenItemsMenuTriggerAriaLabel={(
                hiddenChildrenCount
              ) => `${hiddenChildrenCount} more menu items`}
             >
@@ -2044,7 +2040,7 @@ type: example
                   renderTip: "Settings action",
                   placement: 'bottom end',
                 }}
-                renderIcon={<IconSettingsLine />}
+                renderIcon={<SettingsInstUIIcon />}
               >
                 Action Item with tooltip
               </TopNavBar.Item>
@@ -2053,7 +2049,7 @@ type: example
                 variant="icon"
                 showSubmenuChevron={false}
                 tooltip="Open for Content info"
-                renderIcon={<IconQuestionLine />}
+                renderIcon={<CircleQuestionMarkInstUIIcon />}
                 customPopoverConfig={{
                   on: 'click',
                   placement: 'bottom end',
@@ -2143,35 +2139,45 @@ class InPlaceDialogExample extends React.Component {
                   shouldContainFocus: false,
                   content: ({ closeInPlaceDialog }) => (
                     <View as="div" padding="x-small">
-                      <TextInput
-                        id="searchInput"
-                        width="100%"
-                        display="block"
-                        renderLabel={<ScreenReaderContent>Search</ScreenReaderContent>}
-                        renderBeforeInput={() => <IconSearchLine inline={false} />}
-                        placeholder="Search..."
-                        onChange={(_event, value) => {
-                          this.setState({ searchInputValue: value })
-                        }}
-                        value={this.state.searchInputValue}
-                        onKeyDown={(event) => {
-                          if (event.key === 'Enter') {
-                            event.preventDefault()
-                            event.stopPropagation()
-
-                            console.log(`Search input submitted value "${this.state.searchInputValue}".`)
-
-                            this.setState({ searchInputValue: '' })
-
-                            if (currentLayout === 'smallViewport' && typeof closeInPlaceDialog === 'function') {
-                              closeInPlaceDialog()
+                      <InstUISettingsProvider
+                        theme={(currentTheme) => ({
+                          newTheme: {
+                            sharedTokens: {
+                              focusOutline: {
+                                ...currentTheme?.newTheme?.sharedTokens?.focusOutline,
+                                infoColor: 'white'
+                              }
                             }
                           }
-                        }}
-                        themeOverride={(_theme, globalTheme) => ({
-                          focusOutlineColor: globalTheme.colors.borderLightest
                         })}
-                      />
+                      >
+                        <TextInput
+                          id="searchInput"
+                          width="100%"
+                          display="block"
+                          renderLabel={<ScreenReaderContent>Search</ScreenReaderContent>}
+                          renderBeforeInput={() => <SearchInstUIIcon inline={false} />}
+                          placeholder="Search..."
+                          onChange={(_event, value) => {
+                            this.setState({ searchInputValue: value })
+                          }}
+                          value={this.state.searchInputValue}
+                          onKeyDown={(event) => {
+                            if (event.key === 'Enter') {
+                              event.preventDefault()
+                              event.stopPropagation()
+
+                              console.log(`Search input submitted value "${this.state.searchInputValue}".`)
+
+                              this.setState({ searchInputValue: '' })
+
+                              if (currentLayout === 'smallViewport' && typeof closeInPlaceDialog === 'function') {
+                                closeInPlaceDialog()
+                              }
+                            }
+                          }}
+                        />
+                      </InstUISettingsProvider>
                     </View>
                   )
                 }
@@ -2188,7 +2194,7 @@ class InPlaceDialogExample extends React.Component {
                 >
                   <TopNavBar.Item
                     id="Search2"
-                    renderIcon={<IconSearchLine />}
+                    renderIcon={<SearchInstUIIcon />}
                     tooltip="Opens search dialog"
                     onClick={() => {
                       this.toggleSearch(true)
@@ -2251,11 +2257,9 @@ type: example
               <TopNavBar.Brand
                 screenReaderLabel="Brand name"
                 renderIcon={inverseColor ? undefined : (
-                  <IconBoldLine
-                    size="small"
-                    color="primary-inverse"
-                    height="2.5rem"
-                    width="2.5rem"
+                  <BoldInstUIIcon
+                    size="sm"
+                    color="inverseColor"
                   />
                 )}
                 iconBackground="#0097D3"
@@ -2322,7 +2326,7 @@ type: example
                   id="InfoAction3"
                   variant="icon"
                   tooltip="Info"
-                  renderIcon={<IconQuestionLine />}
+                  renderIcon={<CircleQuestionMarkInstUIIcon />}
                   onClick={() => {
                     console.log('Info')
                   }}
@@ -2333,7 +2337,7 @@ type: example
                   id="AlertsAction3"
                   variant="icon"
                   tooltip="Alerts"
-                  renderIcon={<IconAlertsLine />}
+                  renderIcon={<BellInstUIIcon />}
                   onClick={() => {
                     console.log('Alerts')
                   }}

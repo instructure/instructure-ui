@@ -32,10 +32,10 @@ import {
 } from '@instructure/ui-react-utils'
 import { warn, error } from '@instructure/console'
 
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
-import { Drilldown } from '@instructure/ui-drilldown/v11_6'
-import { IconMoreLine } from '@instructure/ui-icons'
+import { Drilldown } from '@instructure/ui-drilldown/latest'
+import { MoreVerticalInstUIIcon } from '@instructure/ui-icons'
 import { TruncateList } from '@instructure/ui-truncate-list'
 
 import { TopNavBarItem } from '../TopNavBarItem'
@@ -50,7 +50,6 @@ import type { RenderOptionContent } from '../utils/mapItemsForDrilldown'
 import { TopNavBarContext } from '../TopNavBarContext'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import { allowedProps, TopNavBarActionItemsStyleProps } from './props'
 import type {
@@ -66,7 +65,7 @@ id: TopNavBar.ActionItems
 @module TopNavBarActionItems
 **/
 @withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, 'TopNavBarActionItems')
 class TopNavBarActionItems extends Component<
   TopNavBarActionItemsProps,
   TopNavBarActionItemsState
@@ -211,7 +210,7 @@ class TopNavBarActionItems extends Component<
     return (
       <TopNavBarItem
         id={this._hiddenActionItemsMenuTriggerId}
-        renderIcon={IconMoreLine}
+        renderIcon={MoreVerticalInstUIIcon}
         variant="icon"
         tooltip={tooltip}
         showSubmenuChevron={false}
