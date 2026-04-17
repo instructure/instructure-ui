@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { TopNavBarLayoutDesktopTheme } from '@instructure/shared-types'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import type {
   TopNavBarDesktopLayoutProps,
   TopNavBarDesktopLayoutStyleProps,
@@ -40,8 +40,9 @@ import type {
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: TopNavBarLayoutDesktopTheme,
+  componentTheme: NewComponentTypes['TopNavBarLayout'],
   _props: TopNavBarDesktopLayoutProps,
+  _sharedTokens: SharedTokens,
   state: TopNavBarDesktopLayoutStyleProps
 ): TopNavBarDesktopLayoutStyle => {
   const { inverseColor, hasBrandBlock, hasActionItemsBlock, hasUserBlock } =
@@ -101,7 +102,7 @@ const generateStyle = (
       marginInline: componentTheme.desktopActionItemsContainerInlineMargin
     },
     spacer: {
-      flexGrow: '1'
+      flexGrow: 1
     },
     userContainer: {
       label: 'topNavBarDesktopLayout__userContainer',

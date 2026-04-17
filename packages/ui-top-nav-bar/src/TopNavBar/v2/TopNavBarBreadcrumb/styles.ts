@@ -29,7 +29,9 @@ import {
 } from './props'
 
 const generateStyle = (
+  _componentTheme: null,
   _props: TopNavBarBreadcrumbProps,
+  _sharedTokens: null,
   _state: TopNavBarBreadcrumbStyleProps
 ): TopNavBarBreadcrumbStyle => {
   return {

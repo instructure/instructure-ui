@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { TopNavBarItemTheme } from '@instructure/shared-types'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import type {
   TopNavBarItemProps,
   TopNavBarItemStyleProps,
@@ -40,8 +40,9 @@ import type {
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: TopNavBarItemTheme,
+  componentTheme: NewComponentTypes['TopNavBarItem'],
   props: TopNavBarItemProps,
+  _sharedTokens: SharedTokens,
   state: TopNavBarItemStyleProps
 ): TopNavBarItemStyle => {
   const { status, variant, renderSubmenu, renderAvatar, customPopoverConfig } =

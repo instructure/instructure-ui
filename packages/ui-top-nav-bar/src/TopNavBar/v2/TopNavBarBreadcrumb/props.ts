@@ -23,14 +23,14 @@
  */
 
 import { ComponentElement } from 'react'
-import type { ViewOwnProps } from '@instructure/ui-view/v11_6'
+import type { ViewOwnProps } from '@instructure/ui-view/latest'
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 import { TopNavBarContextType } from '../TopNavBarContext'
 import { ChildrenOfType, OtherHTMLAttributes } from '@instructure/shared-types'
 import TopNavBarBreadcrumb from './index'
 
-import { Breadcrumb } from '@instructure/ui-breadcrumb/v11_6'
-import type { BreadcrumbProps } from '@instructure/ui-breadcrumb/v11_6'
+import { Breadcrumb } from '@instructure/ui-breadcrumb/latest'
+import type { BreadcrumbProps } from '@instructure/ui-breadcrumb/latest'
 
 type TopNavBarBreadcrumbProps = TopNavBarBreadcrumbOwnProps &
   WithStyleProps<null, TopNavBarBreadcrumbStyle> &

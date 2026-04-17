@@ -31,9 +31,9 @@ import {
 } from '@instructure/ui-react-utils'
 import { warn, error } from '@instructure/console'
 
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
-import { Drilldown } from '@instructure/ui-drilldown/v11_6'
+import { Drilldown } from '@instructure/ui-drilldown/latest'
 import { TruncateList } from '@instructure/ui-truncate-list'
 
 import { TopNavBarContext } from '../TopNavBarContext'
@@ -48,7 +48,6 @@ import {
 import type { RenderOptionContent } from '../utils/mapItemsForDrilldown'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import { allowedProps } from './props'
 import type { TopNavBarMenuItemsProps, TopNavBarMenuItemsState } from './props'
@@ -61,7 +60,7 @@ id: TopNavBar.MenuItems
 @module TopNavBarMenuItems
 **/
 @withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, 'TopNavBarMenuItems')
 class TopNavBarMenuItems extends Component<
   TopNavBarMenuItemsProps,
   TopNavBarMenuItemsState
@@ -248,7 +247,13 @@ class TopNavBarMenuItems extends Component<
   }
 
   render() {
-    const { listLabel, styles } = this.props
+    const {
+      listLabel,
+      styles,
+      renderHiddenItemsMenuTriggerLabel,
+      renderHiddenItemsMenuTriggerAriaLabel,
+      ...restProps
+    } = this.props
 
     if (!this.childrenArray.length) {
       return null
@@ -261,7 +266,7 @@ class TopNavBarMenuItems extends Component<
 
     return (
       <TruncateList
-        {...omitProps(this.props, allowedProps)}
+        {...omitProps(restProps, allowedProps)}
         key={this.state.key} // rerender if child count changes
         elementRef={this.handleRef}
         css={styles?.topNavBarMenuItems}

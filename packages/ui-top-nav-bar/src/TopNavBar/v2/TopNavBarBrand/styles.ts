@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { TopNavBarBrandTheme } from '@instructure/shared-types'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import type {
   TopNavBarBrandProps,
   TopNavBarBrandStyle,
@@ -40,8 +40,9 @@ import type {
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: TopNavBarBrandTheme,
+  componentTheme: NewComponentTypes['TopNavBarBrand'],
   props: TopNavBarBrandProps,
+  _sharedTokens: SharedTokens,
   state: TopNavBarBrandStyleProps
 ): TopNavBarBrandStyle => {
   const { iconBackground } = props

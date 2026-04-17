@@ -26,10 +26,10 @@ import React from 'react'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 import type {
-  TopNavBarActionItemsTheme,
   OtherHTMLAttributes,
   ChildrenOfType
 } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
 import type {
   ItemChild,
@@ -93,7 +93,10 @@ type PropKeys = keyof TopNavBarActionItemsOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TopNavBarActionItemsProps = TopNavBarActionItemsOwnProps &
-  WithStyleProps<TopNavBarActionItemsTheme, TopNavBarActionItemsStyle> &
+  WithStyleProps<
+    NewComponentTypes['TopNavBarActionItems'],
+    TopNavBarActionItemsStyle
+  > &
   OtherHTMLAttributes<TopNavBarActionItemsOwnProps> &
   WithDeterministicIdProps
 

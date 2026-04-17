@@ -27,18 +27,18 @@ import React from 'react'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 import type {
-  TopNavBarItemTheme,
   OtherHTMLAttributes,
   Renderable,
   AsElementType
 } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
-import { Drilldown } from '@instructure/ui-drilldown/v11_6'
-import type { DrilldownProps } from '@instructure/ui-drilldown/v11_6'
-import type { PopoverProps } from '@instructure/ui-popover/v11_6'
-import type { TooltipProps } from '@instructure/ui-tooltip/v11_6'
-import type { BaseButtonOwnProps } from '@instructure/ui-buttons/v11_6'
-import type { ViewOwnProps, ViewProps } from '@instructure/ui-view/v11_6'
+import { Drilldown } from '@instructure/ui-drilldown/latest'
+import type { DrilldownProps } from '@instructure/ui-drilldown/latest'
+import type { PopoverProps } from '@instructure/ui-popover/latest'
+import type { TooltipProps } from '@instructure/ui-tooltip/latest'
+import type { BaseButtonOwnProps } from '@instructure/ui-buttons/latest'
+import type { ViewOwnProps, ViewProps } from '@instructure/ui-view/latest'
 
 import { TopNavBarContextType } from '../TopNavBarContext'
 import { TopNavBarItem } from './index'
@@ -252,7 +252,7 @@ type PropKeys = keyof TopNavBarItemOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TopNavBarItemProps = TopNavBarItemOwnProps &
-  WithStyleProps<TopNavBarItemTheme, TopNavBarItemStyle> &
+  WithStyleProps<NewComponentTypes['TopNavBarItem'], TopNavBarItemStyle> &
   OtherHTMLAttributes<TopNavBarItemOwnProps> &
   WithDeterministicIdProps
 
@@ -266,7 +266,7 @@ type TopNavBarItemStyle = ComponentStyle<
   | 'submenuIcon'
 > & {
   focusOutlineOffset: string | 0
-  itemInlinePadding: string | 0
+  itemInlinePadding: string
 }
 
 type TopNavBarItemState = {

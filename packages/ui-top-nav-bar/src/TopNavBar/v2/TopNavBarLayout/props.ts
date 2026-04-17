@@ -25,10 +25,8 @@
 import React from 'react'
 
 import type { WithStyleProps } from '@instructure/emotion'
-import type {
-  TopNavBarLayoutTheme,
-  OtherHTMLAttributes
-} from '@instructure/shared-types'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
 import type { ActionItemsChild } from '../TopNavBarActionItems/props'
 import type { BrandChild } from '../TopNavBarBrand/props'
@@ -118,7 +116,7 @@ type SmallViewportAllowedPropKeys = Readonly<Array<SmallViewportPropKeys>>
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TopNavBarLayoutProps = TopNavBarLayoutOwnProps &
-  WithStyleProps<TopNavBarLayoutTheme, null> &
+  WithStyleProps<NewComponentTypes['TopNavBarLayout'], null> &
   OtherHTMLAttributes<TopNavBarLayoutOwnProps>
 
 const commonAllowedProps: CommonAllowedPropKeys = [
@@ -131,7 +129,7 @@ const commonAllowedProps: CommonAllowedPropKeys = [
   'elementRef'
 ]
 
-const desktopAllowedProps: DesktopAllowedPropKeys = ['hideActionsUserSeparator']
+const desktopAllowedProps: DesktopAllowedPropKeys = []
 
 const smallViewportAllowedProps: SmallViewportAllowedPropKeys = [
   'dropdownMenuToggleButtonLabel',

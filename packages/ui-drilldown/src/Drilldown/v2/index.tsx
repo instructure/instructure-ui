@@ -1307,22 +1307,36 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       isSelected
     }
 
-    // we need to bind our own option props the render functions
+    // Pre-fill drilldown option props into the render functions
     if (
       typeof optionProps.renderBeforeLabel === 'function' &&
       !optionProps.renderBeforeLabel?.prototype?.isReactComponent
     ) {
-      optionProps.renderBeforeLabel = (
-        optionProps.renderBeforeLabel as (args: any) => ReactNode
-      ).bind(null, renderLabelProps)
+      const _fn = optionProps.renderBeforeLabel as (
+        drilldownProps: any,
+        itemProps: any
+      ) => ReactNode
+      const _props = renderLabelProps
+      optionProps.renderBeforeLabel = function DrilldownBeforeLabel(
+        itemProps: any
+      ) {
+        return _fn(_props, itemProps)
+      }
     }
     if (
       typeof optionProps.renderAfterLabel === 'function' &&
       !optionProps.renderAfterLabel?.prototype?.isReactComponent
     ) {
-      optionProps.renderAfterLabel = (
-        optionProps.renderAfterLabel as (args: any) => ReactNode
-      ).bind(null, renderLabelProps)
+      const _fn = optionProps.renderAfterLabel as (
+        drilldownProps: any,
+        itemProps: any
+      ) => ReactNode
+      const _props = renderLabelProps
+      optionProps.renderAfterLabel = function DrilldownAfterLabel(
+        itemProps: any
+      ) {
+        return _fn(_props, itemProps)
+      }
     }
 
     const labelInfo =

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Component } from 'react'
+import { Component, createElement } from 'react'
 
 import {
   omitProps,
@@ -88,18 +88,24 @@ class Item extends Component<OptionsItemProps> {
   ) {
     const { styles, variant, as, role, children } = this.props
 
+    let labelContent: React.ReactNode
+    if (typeof renderLabel === 'function') {
+      labelContent = createElement(
+        renderLabel as React.ComponentType<any>,
+        { variant, as, role },
+        children as React.ReactNode
+      )
+    } else {
+      labelContent = renderLabel as React.ReactNode
+    }
+
     return (
       <span
         css={[styles?.content, contentVariant]}
         role="presentation"
         aria-hidden="true"
       >
-        {callRenderProp(renderLabel, {
-          variant,
-          as,
-          role,
-          children
-        })}
+        {labelContent}
       </span>
     )
   }

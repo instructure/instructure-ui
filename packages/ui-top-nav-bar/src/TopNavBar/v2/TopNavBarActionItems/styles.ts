@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { TopNavBarActionItemsTheme } from '@instructure/shared-types'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import type {
   TopNavBarActionItemsProps,
   TopNavBarActionItemsStyleProps,
@@ -40,8 +40,9 @@ import type {
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: TopNavBarActionItemsTheme,
+  componentTheme: NewComponentTypes['TopNavBarActionItems'],
   _props: TopNavBarActionItemsProps,
+  _sharedTokens: SharedTokens,
   state: TopNavBarActionItemsStyleProps
 ): TopNavBarActionItemsStyle => {
   const dropdownMenuOptionStyle = {

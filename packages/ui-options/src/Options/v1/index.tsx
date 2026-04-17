@@ -22,12 +22,11 @@
  * SOFTWARE.
  */
 
-import { ComponentElement, Component, Children } from 'react'
+import { ComponentElement, Component, Children, createElement } from 'react'
 
 import {
   omitProps,
   matchComponentTypes,
-  callRenderProp,
   safeCloneElement,
   withDeterministicId
 } from '@instructure/ui-react-utils'
@@ -101,6 +100,14 @@ class Options extends Component<OptionsProps> {
 
   renderLabel() {
     const { renderLabel, styles } = this.props
+
+    let labelContent: React.ReactNode
+    if (typeof renderLabel === 'function') {
+      labelContent = createElement(renderLabel as React.ComponentType<any>, {})
+    } else {
+      labelContent = renderLabel as React.ReactNode
+    }
+
     return (
       <span
         id={this._labelId}
@@ -109,7 +116,7 @@ class Options extends Component<OptionsProps> {
         aria-hidden={isAndroidOrIOS() ? 'false' : 'true'}
         css={styles?.label}
       >
-        {callRenderProp(renderLabel)}
+        {labelContent}
       </span>
     )
   }

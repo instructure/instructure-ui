@@ -26,15 +26,14 @@ import { Component } from 'react'
 
 import { getElementType, omitProps } from '@instructure/ui-react-utils'
 
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyle, InstUISettingsProvider } from '@instructure/emotion'
 
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
-import { View } from '@instructure/ui-view/v11_6'
+import { View } from '@instructure/ui-view/latest'
 
 import { TopNavBarContext } from '../TopNavBarContext'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import { allowedProps } from './props'
 import type { TopNavBarBrandProps, TopNavBarBrandStyleProps } from './props'
@@ -46,7 +45,7 @@ id: TopNavBar.Brand
 ---
 @module TopNavBarBrand
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, 'TopNavBarBrand')
 class TopNavBarBrand extends Component<TopNavBarBrandProps> {
   static readonly componentId = 'TopNavBar.Brand'
   // TODO: add to the docs: making it static on parent and jsdocs parent/module settings, dont export child on its own
@@ -70,20 +69,6 @@ class TopNavBarBrand extends Component<TopNavBarBrandProps> {
   }
 
   componentDidMount() {
-    // TODO: Remove this in v10!
-    if ('renderName' in this.props) {
-      console.error(
-        'Warning: `renderName` prop on [TopNavBar.Brand] is deprecated, please remove it from your code. Further info: https://instructure.design/#v9-upgrade-guide/#deprecated-properties'
-      )
-    }
-
-    // TODO: Remove this in v10!
-    if ('nameBackground' in this.props) {
-      console.error(
-        'Warning: `nameBackground` prop on [TopNavBar.Brand] is deprecated, please remove it from your code. Further info: https://instructure.design/#v9-upgrade-guide/#deprecated-properties'
-      )
-    }
-
     this.props.makeStyles?.(this.makeStylesVariables)
   }
 
@@ -109,29 +94,43 @@ class TopNavBarBrand extends Component<TopNavBarBrandProps> {
         data-cid="TopNavBarBrand"
       >
         {renderIcon && (
-          <View
-            {...omitProps(this.props, allowedProps)}
-            css={styles?.container}
-            as={ElementType}
-            href={href}
-            onClick={onClick}
-            position="relative"
-            focusColor={this.context.inverseColor ? 'info' : 'inverse'}
-            focusPosition="inset"
-            borderRadius="medium"
-            themeOverride={{ focusOutlineInset: styles?.focusOutlineInset }}
+          <InstUISettingsProvider
+            theme={(currentTheme: any) =>
+              ({
+                newTheme: {
+                  sharedTokens: {
+                    focusOutline: {
+                      ...currentTheme?.newTheme?.sharedTokens?.focusOutline,
+                      inset: styles?.focusOutlineInset
+                    }
+                  }
+                }
+              } as any)
+            }
           >
-            <ScreenReaderContent>{screenReaderLabel}</ScreenReaderContent>
-            {renderIcon && this.context.layout !== 'smallViewport' && (
-              <div
-                css={styles?.iconContainer}
-                role="presentation"
-                aria-hidden="true"
-              >
-                {renderIcon}
-              </div>
-            )}
-          </View>
+            <View
+              {...omitProps(this.props, allowedProps)}
+              css={styles?.container}
+              as={ElementType}
+              href={href}
+              onClick={onClick}
+              position="relative"
+              focusColor={this.context.inverseColor ? 'info' : 'inverse'}
+              focusPosition="inset"
+              borderRadius="medium"
+            >
+              <ScreenReaderContent>{screenReaderLabel}</ScreenReaderContent>
+              {renderIcon && this.context.layout !== 'smallViewport' && (
+                <div
+                  css={styles?.iconContainer}
+                  role="presentation"
+                  aria-hidden="true"
+                >
+                  {renderIcon}
+                </div>
+              )}
+            </View>
+          </InstUISettingsProvider>
         )}
       </div>
     )

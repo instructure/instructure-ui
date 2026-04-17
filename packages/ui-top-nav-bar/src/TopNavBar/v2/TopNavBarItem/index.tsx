@@ -35,30 +35,26 @@ import {
 import { createChainedFunction } from '@instructure/ui-utils'
 import { warn, error } from '@instructure/console'
 
-import {
-  withStyleLegacy as withStyle,
-  InstUISettingsProvider
-} from '@instructure/emotion'
+import { withStyle, InstUISettingsProvider } from '@instructure/emotion'
 
 import {
-  IconArrowOpenDownSolid,
-  IconArrowOpenUpSolid
+  ChevronDownInstUIIcon,
+  ChevronUpInstUIIcon
 } from '@instructure/ui-icons'
-import { Avatar } from '@instructure/ui-avatar/v11_6'
-import { BaseButton } from '@instructure/ui-buttons/v11_6'
-import type { BaseButtonProps } from '@instructure/ui-buttons/v11_6'
-import { Tooltip } from '@instructure/ui-tooltip/v11_6'
-import type { TooltipProps } from '@instructure/ui-tooltip/v11_6'
-import { Popover } from '@instructure/ui-popover/v11_6'
-import type { PopoverProps } from '@instructure/ui-popover/v11_6'
-import { Drilldown } from '@instructure/ui-drilldown/v11_6'
-import type { DrilldownProps } from '@instructure/ui-drilldown/v11_6'
+import { Avatar } from '@instructure/ui-avatar/latest'
+import { BaseButton } from '@instructure/ui-buttons/latest'
+import type { BaseButtonProps } from '@instructure/ui-buttons/latest'
+import { Tooltip } from '@instructure/ui-tooltip/latest'
+import type { TooltipProps } from '@instructure/ui-tooltip/latest'
+import { Popover } from '@instructure/ui-popover/latest'
+import type { PopoverProps } from '@instructure/ui-popover/latest'
+import { Drilldown } from '@instructure/ui-drilldown/latest'
+import type { DrilldownProps } from '@instructure/ui-drilldown/latest'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
 import { TopNavBarContext } from '../TopNavBarContext'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import { allowedProps } from './props'
 import type {
@@ -81,7 +77,7 @@ id: TopNavBar.Item
 @module TopNavBarItem
 **/
 @withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, 'TopNavBarItem')
 class TopNavBarItem extends Component<TopNavBarItemProps, TopNavBarItemState> {
   static readonly componentId = 'TopNavBar.Item'
 
@@ -265,9 +261,9 @@ class TopNavBarItem extends Component<TopNavBarItemProps, TopNavBarItemState> {
       <span css={this.props.styles?.submenuIcon}>
         {(this.shouldRenderSubmenu && this.state.isSubmenuOpen) ||
         (this.shouldRenderPopover && this.state.isPopoverOpen) ? (
-          <IconArrowOpenUpSolid />
+          <ChevronUpInstUIIcon />
         ) : (
-          <IconArrowOpenDownSolid />
+          <ChevronDownInstUIIcon />
         )}
       </span>
     )
@@ -283,14 +279,12 @@ class TopNavBarItem extends Component<TopNavBarItemProps, TopNavBarItemState> {
     }
 
     if (this.hasAvatar) {
-      themeOverride.mediumPaddingTop = '0.125rem'
-      themeOverride.mediumPaddingBottom = '0.125rem'
+      themeOverride.paddingVertical = '0.125rem'
     }
 
     if (this.isAvatarOnlyVariant && !this.submenuIcon) {
       themeOverride.mediumPaddingHorizontal = '0'
-      themeOverride.mediumPaddingTop = '0'
-      themeOverride.mediumPaddingBottom = '0'
+      themeOverride.paddingVertical = '0'
     }
 
     return Object.keys(themeOverride).length > 0 ? themeOverride : undefined

@@ -24,10 +24,8 @@
 
 import React from 'react'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
-import type {
-  TopNavBarLayoutDesktopTheme,
-  OtherHTMLAttributes
-} from '@instructure/shared-types'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { TopNavBarContextType } from '../../TopNavBarContext'
 import { commonAllowedProps, desktopAllowedProps } from '../props'
 import type { CommonTopNavBarLayoutProps } from '../props'
@@ -39,12 +37,7 @@ type DesktopLayoutChild = React.ComponentElement<
   TopNavBarDesktopLayout
 >
 
-type DesktopLayoutOwnProps = {
-  /**
-   * Hides the separator between the action items and the user block.
-   */
-  hideActionsUserSeparator?: boolean
-}
+type DesktopLayoutOwnProps = Record<never, never>
 
 type TopNavBarDesktopLayoutOwnProps = CommonTopNavBarLayoutProps &
   DesktopLayoutOwnProps
@@ -54,7 +47,10 @@ type PropKeys = keyof TopNavBarDesktopLayoutOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TopNavBarDesktopLayoutProps = TopNavBarDesktopLayoutOwnProps &
-  WithStyleProps<TopNavBarLayoutDesktopTheme, TopNavBarDesktopLayoutStyle> &
+  WithStyleProps<
+    NewComponentTypes['TopNavBarLayout'],
+    TopNavBarDesktopLayoutStyle
+  > &
   OtherHTMLAttributes<TopNavBarDesktopLayoutOwnProps>
 
 type TopNavBarDesktopLayoutStyle = ComponentStyle<

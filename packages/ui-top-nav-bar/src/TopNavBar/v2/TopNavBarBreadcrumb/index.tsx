@@ -29,15 +29,12 @@ import {
   allowedProps
 } from './props'
 import TopNavBar from '../index'
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import generateStyle from '../TopNavBarBreadcrumb/styles'
-import {
-  IconArrowOpenStartLine,
-  IconHamburgerLine
-} from '@instructure/ui-icons'
+import { ChevronLeftInstUIIcon, MenuInstUIIcon } from '@instructure/ui-icons'
 import TopNavBarContext from '../TopNavBarContext'
 import { error } from '@instructure/console'
-import { Link } from '@instructure/ui-link/v11_6'
+import { Link } from '@instructure/ui-link/latest'
 
 /**
 ---
@@ -46,7 +43,7 @@ id: TopNavBar.Breadcrumb
 ---
 @module TopNavBarBreadcrumb
  **/
-@withStyle(generateStyle, null)
+@withStyle(generateStyle)
 class TopNavBarBreadcrumb extends Component<
   TopNavBarBreadcrumbProps,
   TopNavBarBreadcrumbState
@@ -84,7 +81,7 @@ class TopNavBarBreadcrumb extends Component<
         <TopNavBar.Item
           id="iconItem"
           variant="icon"
-          renderIcon={<IconHamburgerLine />}
+          renderIcon={<MenuInstUIIcon />}
           onClick={onClick}
         >
           Hamburger menu
@@ -130,8 +127,9 @@ class TopNavBarBreadcrumb extends Component<
             {lastButOneLink && (
               <Link
                 href={lastButOneLink.props.href}
-                isWithinText={false}
-                renderIcon={IconArrowOpenStartLine}
+                variant="standalone"
+                size="medium"
+                renderIcon={ChevronLeftInstUIIcon}
               >
                 {lastButOneLink.props.children}
               </Link>

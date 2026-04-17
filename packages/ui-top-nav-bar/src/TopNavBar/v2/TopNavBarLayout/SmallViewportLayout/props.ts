@@ -25,12 +25,10 @@
 import React from 'react'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
-import type {
-  TopNavBarLayoutSmallViewportTheme,
-  OtherHTMLAttributes
-} from '@instructure/shared-types'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
-import type { DrilldownProps } from '@instructure/ui-drilldown/v11_6'
+import type { DrilldownProps } from '@instructure/ui-drilldown/latest'
 import type { TopNavBarItemTooltipType } from '../../TopNavBarItem/props'
 import type { TopNavBarContextType } from '../../TopNavBarContext'
 
@@ -121,7 +119,7 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TopNavBarSmallViewportLayoutProps = TopNavBarSmallViewportLayoutOwnProps &
   WithStyleProps<
-    TopNavBarLayoutSmallViewportTheme,
+    NewComponentTypes['TopNavBarLayout'],
     TopNavBarSmallViewportLayoutStyle
   > &
   OtherHTMLAttributes<TopNavBarSmallViewportLayoutOwnProps> &

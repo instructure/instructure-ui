@@ -25,11 +25,11 @@
 import React from 'react'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
-  TopNavBarBrandTheme,
   OtherHTMLAttributes,
   AsElementType
 } from '@instructure/shared-types'
-import type { ViewOwnProps } from '@instructure/ui-view/v11_6'
+import type { NewComponentTypes } from '@instructure/ui-themes'
+import type { ViewOwnProps } from '@instructure/ui-view/latest'
 import type { TopNavBarContextType } from '../TopNavBarContext'
 
 import { TopNavBarBrand } from './index'
@@ -80,13 +80,13 @@ type PropKeys = keyof TopNavBarBrandOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TopNavBarBrandProps = TopNavBarBrandOwnProps &
-  WithStyleProps<TopNavBarBrandTheme, TopNavBarBrandStyle> &
+  WithStyleProps<NewComponentTypes['TopNavBarBrand'], TopNavBarBrandStyle> &
   OtherHTMLAttributes<TopNavBarBrandOwnProps>
 
 type TopNavBarBrandStyle = ComponentStyle<
   'topNavBarBrand' | 'container' | 'name' | 'iconContainer' | 'icon'
 > &
-  Pick<TopNavBarBrandTheme, 'focusOutlineInset'>
+  Pick<NewComponentTypes['TopNavBarBrand'], 'focusOutlineInset'>
 
 type TopNavBarBrandStyleProps = {
   layout: TopNavBarContextType['layout']

@@ -37,19 +37,19 @@ import {
 } from '@instructure/ui-dom-utils'
 import type { RequestAnimationFrameType } from '@instructure/ui-dom-utils'
 
-import { withStyleLegacy as withStyle, Global } from '@instructure/emotion'
+import { withStyle, Global } from '@instructure/emotion'
 
-import { Tray } from '@instructure/ui-tray/v11_6'
+import { Tray } from '@instructure/ui-tray/latest'
 import {
-  IconXLine,
-  IconHamburgerLine,
-  IconArrowOpenDownSolid,
-  IconArrowOpenUpSolid
+  XInstUIIcon,
+  MenuInstUIIcon,
+  ChevronDownInstUIIcon,
+  ChevronUpInstUIIcon
 } from '@instructure/ui-icons'
-import { Avatar } from '@instructure/ui-avatar/v11_6'
+import { Avatar } from '@instructure/ui-avatar/latest'
 import { Dialog } from '@instructure/ui-dialog'
-import { Drilldown } from '@instructure/ui-drilldown/v11_6'
-import type { DrilldownPageChildren } from '@instructure/ui-drilldown/v11_6'
+import { Drilldown } from '@instructure/ui-drilldown/latest'
+import type { DrilldownPageChildren } from '@instructure/ui-drilldown/latest'
 
 import { TopNavBarItem } from '../../TopNavBarItem'
 import type { ItemChild, TopNavBarItemProps } from '../../TopNavBarItem/props'
@@ -63,7 +63,6 @@ import type { RenderOptionContent } from '../../utils/mapItemsForDrilldown'
 import { TopNavBarContext } from '../../TopNavBarContext'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import { allowedProps } from './props'
 import type {
@@ -78,7 +77,7 @@ private: true
 ---
 **/
 @withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, 'TopNavBarLayout')
 class TopNavBarSmallViewportLayout extends Component<
   TopNavBarSmallViewportLayoutProps,
   TopNavBarSmallViewportLayoutState
@@ -414,9 +413,9 @@ class TopNavBarSmallViewportLayout extends Component<
               aria-label={dropdownMenuToggleButtonLabel}
             >
               {isDropdownMenuOpen ? (
-                <IconArrowOpenUpSolid {...alternativeTitleIconProps} />
+                <ChevronUpInstUIIcon {...alternativeTitleIconProps} />
               ) : (
-                <IconArrowOpenDownSolid {...alternativeTitleIconProps} />
+                <ChevronDownInstUIIcon {...alternativeTitleIconProps} />
               )}
               {alternativeTitle}
             </TopNavBarItem>
@@ -425,7 +424,7 @@ class TopNavBarSmallViewportLayout extends Component<
               {...itemProps}
               variant="icon"
               renderIcon={
-                isDropdownMenuOpen ? <IconXLine /> : <IconHamburgerLine />
+                isDropdownMenuOpen ? <XInstUIIcon /> : <MenuInstUIIcon />
               }
             >
               {dropdownMenuToggleButtonLabel}
@@ -548,7 +547,6 @@ class TopNavBarSmallViewportLayout extends Component<
           trayMountNode || document.getElementById(this._trayContainerId)
         }
         defaultFocusElement={() => document.getElementById(this._drilldownId)}
-        themeOverride={{ position: 'absolute' }}
       >
         {this.renderDropdownMenu()}
       </Tray>
@@ -603,7 +601,7 @@ class TopNavBarSmallViewportLayout extends Component<
           <div css={styles?.inPlaceDialogContainerButton}>
             <TopNavBarItem
               id={this._inPlaceDialogCloseButtonId}
-              renderIcon={IconXLine}
+              renderIcon={XInstUIIcon}
               variant="icon"
               onClick={handleClose}
             >

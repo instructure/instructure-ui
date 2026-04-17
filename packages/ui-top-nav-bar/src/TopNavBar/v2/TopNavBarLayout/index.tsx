@@ -24,7 +24,7 @@
 
 import { Component } from 'react'
 
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import type {
   TopNavBarLayoutDesktopTheme,
@@ -32,8 +32,6 @@ import type {
 } from '@instructure/shared-types'
 
 import { TopNavBarContext } from '../TopNavBarContext'
-
-import generateComponentTheme from './theme'
 
 import { TopNavBarSmallViewportLayout } from './SmallViewportLayout'
 import type { TopNavBarSmallViewportLayoutProps } from './SmallViewportLayout/props'
@@ -50,7 +48,7 @@ id: TopNavBar.Layout
 ---
 @module TopNavBarLayout
 **/
-@withStyle(null, generateComponentTheme)
+@withStyle(null)
 class TopNavBarLayout extends Component<TopNavBarLayoutProps> {
   static readonly componentId = 'TopNavBar.Layout'
 

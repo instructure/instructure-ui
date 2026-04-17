@@ -32,10 +32,10 @@ import type {
 import type {
   ToProp,
   AsElementType,
-  BaseButtonTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { Cursor } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { ViewProps } from '@instructure/ui-view/latest'
 import { Renderable } from '@instructure/shared-types'
 
@@ -179,7 +179,7 @@ type PropKeys = keyof BaseButtonOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type BaseButtonProps = BaseButtonOwnProps &
-  WithStyleProps<BaseButtonTheme, BaseButtonStyle> &
+  WithStyleProps<NewComponentTypes['BaseButton'], BaseButtonStyle> &
   OtherHTMLAttributes<BaseButtonOwnProps> &
   ToProp
 

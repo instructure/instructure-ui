@@ -22,14 +22,14 @@
  * SOFTWARE.
  */
 
-import { Drilldown } from '@instructure/ui-drilldown/v11_6'
+import { Drilldown } from '@instructure/ui-drilldown/latest'
 import {
-  IconQuestionLine,
-  IconAlertsLine,
-  IconConfigureLine,
-  IconSearchLine,
-  IconDiscussionLine,
-  IconDashboardLine
+  CircleQuestionMarkInstUIIcon,
+  BellInstUIIcon,
+  Settings2InstUIIcon,
+  SearchInstUIIcon,
+  MessagesSquareInstUIIcon,
+  GaugeInstUIIcon
 } from '@instructure/ui-icons'
 
 import type { TopNavBarBrandProps } from '../TopNavBarBrand/props'
@@ -44,7 +44,7 @@ import type { TopNavBarContextType } from '../TopNavBarContext'
 
 import { TopNavBar } from '../index'
 import { elevateIcon } from './exampleSvgFiles'
-import { Breadcrumb } from '@instructure/ui-breadcrumb/v11_6'
+import { Breadcrumb } from '@instructure/ui-breadcrumb/latest'
 
 type ChildrenFuncProps = {
   currentLayout: TopNavBarContextType['layout']
@@ -221,12 +221,12 @@ const getMenuItems = (config: VariantConfig = {}) => {
 
 const getActionItems = (config: VariantConfig = {}) => {
   const items = [
-    { label: 'Search', icon: IconSearchLine },
-    { label: 'Info', icon: IconQuestionLine },
-    { label: 'Alerts', icon: IconAlertsLine },
-    { label: 'Discussions', icon: IconDiscussionLine },
-    { label: 'Dashboard', icon: IconDashboardLine },
-    { label: 'Settings', icon: IconConfigureLine }
+    { label: 'Search', icon: SearchInstUIIcon },
+    { label: 'Info', icon: CircleQuestionMarkInstUIIcon },
+    { label: 'Alerts', icon: BellInstUIIcon },
+    { label: 'Discussions', icon: MessagesSquareInstUIIcon },
+    { label: 'Dashboard', icon: GaugeInstUIIcon },
+    { label: 'Settings', icon: Settings2InstUIIcon }
   ]
   const count =
     typeof config.actionItemsCount !== 'undefined' ? config.actionItemsCount : 3
