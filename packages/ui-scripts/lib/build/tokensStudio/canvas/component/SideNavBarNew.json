@@ -79,7 +79,7 @@
       "type": "borderRadius"
     },
     "borderColor": {
-      "value": "{color.stroke.strong}",
+      "value": "{color.stroke.base}",
       "type": "color"
     },
     "borderWidth": {
@@ -104,7 +104,7 @@
         "type": "spacing"
       },
       "verticalPadding": {
-        "value": "0.25rem",
+        "value": "0.375rem",
         "type": "spacing"
       },
       "fontColor": {
@@ -139,7 +139,15 @@
         "value": "{color.background.base}",
         "type": "color"
       },
+      "selectedAccountBackgroundColor": {
+        "value": "{color.background.interactive.action.tertiary.active}",
+        "type": "color"
+      },
       "selectedFontColor": {
+        "value": "{color.text.interactive.navigation.primary.base}",
+        "type": "color"
+      },
+      "selectedAccountFontColor": {
         "value": "{color.text.interactive.navigation.primary.base}",
         "type": "color"
       },

@@ -139,8 +139,16 @@
         "value": "{color.background.brand}",
         "type": "color"
       },
+      "selectedAccountBackgroundColor": {
+        "value": "{color.background.interactive.action.tertiary.active}",
+        "type": "color"
+      },
       "selectedFontColor": {
         "value": "{color.text.inverse}",
+        "type": "color"
+      },
+      "selectedAccountFontColor": {
+        "value": "{color.text.base}",
         "type": "color"
       },
       "innerFocusOutlineColor": {
