@@ -12,7 +12,7 @@
       "value": "{color.stroke.muted}",
       "type": "color"
     },
-    "fontColor": {
+    "textColor": {
       "value": "{color.text.base}",
       "type": "color"
     },
@@ -123,6 +123,14 @@
         "value": "{fontWeight.body.base}",
         "type": "fontWeights"
       },
+      "innerFocusOutlineColor": {
+        "value": "{color.stroke.interactive.focusRing.base}",
+        "type": "color"
+      },
+      "outerFocusOutlineColor": {
+        "value": "{color.transparentColor}",
+        "type": "color"
+      },
       "hoverBackgroundColor": {
         "value": "{color.background.interactive.action.tertiary.hover}",
         "type": "color"
@@ -135,32 +143,28 @@
         "value": "none",
         "type": "other"
       },
-      "selectedBackgroundColor": {
+      "currentBackgroundColor": {
         "value": "{color.background.brand}",
+        "type": "color"
+      },
+      "selectedBackgroundColor": {
+        "value": "{color.background.interactive.action.tertiary.active}",
+        "type": "color"
+      },
+      "currentTextColor": {
+        "value": "{color.text.inverse}",
         "type": "color"
       },
       "selectedAccountBackgroundColor": {
         "value": "{color.background.interactive.action.tertiary.active}",
         "type": "color"
       },
-      "selectedFontColor": {
-        "value": "{color.text.inverse}",
-        "type": "color"
-      },
       "selectedAccountFontColor": {
         "value": "{color.text.base}",
         "type": "color"
       },
-      "innerFocusOutlineColor": {
-        "value": "{color.stroke.interactive.focusRing.base}",
-        "type": "color"
-      },
       "selectedInnerFocusOutlineColor": {
         "value": "{color.icon.inverse}",
-        "type": "color"
-      },
-      "outerFocusOutlineColor": {
-        "value": "{color.transparentColor}",
         "type": "color"
       },
       "selectedOuterFocusOutlineColor": {
@@ -173,19 +177,73 @@
         "value": "{color.transparentColor}",
         "type": "color"
       },
+      "hoverBackgroundColor": {
+        "value": "{color.background.interactive.action.tertiary.hover}",
+        "type": "color"
+      },
+      "selectedBackgroundColor": {
+        "value": "{color.background.brand}",
+        "type": "color"
+      },
       "textColor": {
         "value": "{color.text.base}",
+        "type": "color"
+      },
+      "selectedTextColor": {
+        "value": "{color.text.inverse}",
         "type": "color"
       },
       "logoutTextColor": {
         "value": "{color.text.error}",
         "type": "color"
+      },
+      "borderRadius": {
+        "value": "{borderRadius.lg}",
+        "type": "borderRadius"
       }
     },
-    "collapseButton": {
+    "button": {
       "textColor": {
         "value": "{color.text.base}",
         "type": "color"
+      }
+    },
+    "subNav": {
+      "strokeColor": {
+        "value": "{color.stroke.muted}",
+        "type": "color"
+      },
+      "textColor": {
+        "value": "{color.text.base}",
+        "type": "color"
+      },
+      "padding": {
+        "value": "{spacing.spaceMd}",
+        "type": "spacing"
+      },
+      "gap": {
+        "value": "{spacing.spaceSm}",
+        "type": "spacing"
+      }
+    },
+    "institutionLogo": {
+      "textColor": {
+        "value": "{color.text.base}",
+        "type": "color"
+      },
+      "strokeColor": {
+        "value": "{color.stroke.muted}",
+        "type": "color"
+      }
+    },
+    "insitutionLogo": {
+      "padding": {
+        "value": "{spacing.spaceSm}",
+        "type": "spacing"
+      },
+      "gap": {
+        "value": "{spacing.spaceMd}",
+        "type": "spacing"
       }
     }
   }
