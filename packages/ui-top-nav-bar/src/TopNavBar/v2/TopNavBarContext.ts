@@ -21,40 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/// <reference types="@emotion/react/types/css-prop" />
 
-export * from '@emotion/react'
+import { createContext } from 'react'
 
-export { useComputedTheme } from './useComputedTheme'
-export { InstUISettingsProvider } from './InstUISettingsProvider'
-export { withStyleLegacy } from './withStyleLegacy'
-export { getComponentThemeOverride } from './getComponentThemeOverride'
-export { withStyle } from './withStyle'
-export {
-  ThemeablePropValues,
-  makeThemeVars,
-  getShorthandPropValue,
-  mirrorShorthandCorners,
-  mirrorShorthandEdges,
-  calcSpacingFromShorthand,
-  calcFocusOutlineStyles
-} from './styleUtils'
+type TopNavBarLayouts = 'desktop' | 'smallViewport'
 
-export { useStyleLegacy } from './useStyleLegacy'
-export { useStyle } from './useStyle'
-export { useTheme } from './useTheme'
+type TopNavBarContextType = {
+  layout: TopNavBarLayouts
+  inverseColor: boolean
+}
 
-export type { ComponentStyle, StyleObject, Overrides } from './EmotionTypes'
-export type { WithStyleProps } from './withStyleLegacy'
-export type { ThemeOverrideValue } from './useStyle'
-export type {
-  SpacingValues,
-  Spacing,
-  Shadow,
-  Stacking,
-  Background,
-  BorderRadiiValues,
-  BorderRadii,
-  BorderWidthValues,
-  BorderWidth
-} from './styleUtils'
+/**
+---
+private: true
+---
+@module TopNavBarContext
+**/
+const TopNavBarContext = createContext<TopNavBarContextType>({
+  layout: 'desktop',
+  inverseColor: false
+})
+
+export default TopNavBarContext
+export { TopNavBarContext }
+export type { TopNavBarLayouts, TopNavBarContextType }
