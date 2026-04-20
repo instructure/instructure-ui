@@ -25,7 +25,11 @@
 import type { SyntheticEvent, InputHTMLAttributes } from 'react'
 import type { FormMessage } from '@instructure/ui-form-field/latest'
 import type { OtherHTMLAttributes, Renderable } from '@instructure/shared-types'
-import type { Spacing } from '@instructure/emotion'
+import type {
+  ComponentStyle,
+  Spacing,
+  ThemeOverrideValue
+} from '@instructure/emotion'
 
 type DateInputOwnProps = {
   /**
@@ -181,11 +185,26 @@ type DateInputOwnProps = {
    * A function that provides a reference to the inner input element
    */
   inputRef?: (inputElement: HTMLInputElement | null) => void
+
+  /**
+   * Maximum height of the calendar popover. When the calendar content exceeds
+   * this height it becomes scrollable. Defaults to `'100vh'`.
+   */
+  popoverMaxHeight?: string
 }
 
-type DateInputProps = DateInputOwnProps &
-  OtherHTMLAttributes<
+type DateInputStyleParams = {
+  calculatedPopoverMaxHeight: string | undefined
+  popoverMaxHeight: string
+  isHeightCalculated: boolean
+}
+
+type DateInputStyle = ComponentStyle<'popoverContentContainer'>
+
+type DateInputProps = DateInputOwnProps & {
+  themeOverride?: ThemeOverrideValue
+} & OtherHTMLAttributes<
     DateInputOwnProps,
     InputHTMLAttributes<DateInputOwnProps & Element>
   >
-export type { DateInputProps }
+export type { DateInputProps, DateInputStyle, DateInputStyleParams }
