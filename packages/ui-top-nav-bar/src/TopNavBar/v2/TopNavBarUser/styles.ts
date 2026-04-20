@@ -21,40 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/// <reference types="@emotion/react/types/css-prop" />
 
-export * from '@emotion/react'
+import type { TopNavBarUserStyle } from './props'
 
-export { useComputedTheme } from './useComputedTheme'
-export { InstUISettingsProvider } from './InstUISettingsProvider'
-export { withStyleLegacy } from './withStyleLegacy'
-export { getComponentThemeOverride } from './getComponentThemeOverride'
-export { withStyle } from './withStyle'
-export {
-  ThemeablePropValues,
-  makeThemeVars,
-  getShorthandPropValue,
-  mirrorShorthandCorners,
-  mirrorShorthandEdges,
-  calcSpacingFromShorthand,
-  calcFocusOutlineStyles
-} from './styleUtils'
+/**
+ * ---
+ * private: true
+ * ---
+ * Generates the style object from the theme and provided additional information
+ * @param  {Object} componentTheme The theme variable object.
+ * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
+ */
+const generateStyle = (): TopNavBarUserStyle => {
+  return {
+    topNavBarUser: {
+      label: 'topNavBarUser',
+      flex: '0 0',
+      display: 'flex'
+    }
+  }
+}
 
-export { useStyleLegacy } from './useStyleLegacy'
-export { useStyle } from './useStyle'
-export { useTheme } from './useTheme'
-
-export type { ComponentStyle, StyleObject, Overrides } from './EmotionTypes'
-export type { WithStyleProps } from './withStyleLegacy'
-export type { ThemeOverrideValue } from './useStyle'
-export type {
-  SpacingValues,
-  Spacing,
-  Shadow,
-  Stacking,
-  Background,
-  BorderRadiiValues,
-  BorderRadii,
-  BorderWidthValues,
-  BorderWidth
-} from './styleUtils'
+export default generateStyle
