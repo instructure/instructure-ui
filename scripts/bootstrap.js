@@ -1,5 +1,4 @@
 #! /usr/bin/env node
-/* eslint-disable no-console */
 
 /*
  * The MIT License (MIT)
@@ -38,7 +37,14 @@ function buildProject() {
   }
 
   execSync('pnpm --filter @instructure/ui-icons prepare-build', opts)
-  execSync('pnpm --filter @instructure/ui-codemods prepare-build', opts)
+
+  // Executes a ui-codemods script to generate a versioned components list
+  // from the ui metapackage's latest re-export file. This is required for
+  // the updateInstUIImportVersions codemod's diagnose mode.
+  execSync(
+    'pnpm --filter @instructure/ui-codemods generate:versioned-exports',
+    opts
+  )
 
   console.info('Building packages with Babel...')
   try {

@@ -1394,10 +1394,11 @@ It is worth adding `--extensions=ts,tsx` for TypeScript codebases. Also exclude 
 ---
 type: code
 ---
-npx jscodeshift@latest ... \
+npx jscodeshift@latest node_modules/@instructure/ui-codemods/lib/updateInstUIImportVersions.ts <path> \
   --extensions=ts,tsx \
   --ignore-pattern="**/node_modules/**" \
-  --ignore-pattern="**/*.d.ts"
+  --ignore-pattern="**/*.d.ts" \
+  --diagnose=true
 ```
 
 **Diagnose** — inspect which components are imported and at what version, without modifying files:
