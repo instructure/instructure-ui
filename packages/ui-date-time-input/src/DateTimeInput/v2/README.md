@@ -32,7 +32,13 @@ type: example
           dateRenderLabel="Date"
           timeRenderLabel="Time"
           invalidDateTimeMessage="Invalid date!"
-          screenReaderLabels={{ calendarIcon: 'Open calendar', prevMonthButton: 'Previous month', nextMonthButton: 'Next month' }}
+          screenReaderLabels={{
+            calendarIcon: 'Open calendar',
+            prevMonthButton: 'Previous month',
+            nextMonthButton: 'Next month',
+            datePickerDialog: 'Date picker dialog',
+            selectedLabel: 'Selected'
+          }}
           defaultValue="2018-01-18T13:30"
           layout="columns"
         />
@@ -91,7 +97,13 @@ type: example
             datePlaceholder="Choose"
             dateRenderLabel="Date"
             timeRenderLabel="Time"
-            screenReaderLabels={{ calendarIcon: 'Open calendar', prevMonthButton: 'Previous month', nextMonthButton: 'Next month' }}
+            screenReaderLabels={{
+              calendarIcon: 'Open calendar',
+              prevMonthButton: 'Previous month',
+              nextMonthButton: 'Next month',
+              datePickerDialog: 'Date picker dialog',
+              selectedLabel: 'Selected'
+            }}
             onChange={onChange}
             layout="stacked"
             value={value}
@@ -119,7 +131,13 @@ type: example
   datePlaceholder="Choose a date"
   dateRenderLabel="Date"
   timeRenderLabel="Time"
-  screenReaderLabels={{ calendarIcon: 'Open calendar', prevMonthButton: 'Previous month', nextMonthButton: 'Next month' }}
+  screenReaderLabels={{
+    calendarIcon: 'Open calendar',
+    prevMonthButton: 'Previous month',
+    nextMonthButton: 'Next month',
+    datePickerDialog: 'Date picker dialog',
+    selectedLabel: 'Selected'
+  }}
   invalidDateTimeMessage={(dvalue) => { return `'${dvalue} is not valid.` }}
   layout="columns"
   defaultValue="2018-01-18T13:30"
@@ -142,7 +160,13 @@ type: example
             datePlaceholder="Choose a date"
             dateRenderLabel="Date"
             timeRenderLabel="Time"
-            screenReaderLabels={{ calendarIcon: 'Open calendar', prevMonthButton: 'Previous month', nextMonthButton: 'Next month' }}
+            screenReaderLabels={{
+              calendarIcon: 'Open calendar',
+              prevMonthButton: 'Previous month',
+              nextMonthButton: 'Next month',
+              datePickerDialog: 'Date picker dialog',
+              selectedLabel: 'Selected'
+            }}
             invalidDateTimeMessage={(dvalue) => {
               return `'${dvalue} is not valid.`
             }}
@@ -170,7 +194,13 @@ type: example
   timeRenderLabel="Time"
   invalidDateTimeMessage="Invalid date"
   disabledDateTimeMessage="Disabled date"
-  screenReaderLabels={{ calendarIcon: 'Open calendar', prevMonthButton: 'Previous month', nextMonthButton: 'Next month' }}
+  screenReaderLabels={{
+    calendarIcon: 'Open calendar',
+    prevMonthButton: 'Previous month',
+    nextMonthButton: 'Next month',
+    datePickerDialog: 'Date picker dialog',
+    selectedLabel: 'Selected'
+  }}
   defaultValue="2022-04-08T13:30"
   layout="columns"
   disabledDates={['2022-04-01T13:30', '2022-04-03T13:30', '2022-04-04T13:30']}
@@ -213,7 +243,13 @@ type: example
           disabledDateTimeMessage={(rawDateValue) =>
             'Disabled date: ' + rawDateValue
           }
-          screenReaderLabels={{ calendarIcon: 'Open calendar', prevMonthButton: 'Previous month', nextMonthButton: 'Next month' }}
+          screenReaderLabels={{
+            calendarIcon: 'Open calendar',
+            prevMonthButton: 'Previous month',
+            nextMonthButton: 'Next month',
+            datePickerDialog: 'Date picker dialog',
+            selectedLabel: 'Selected'
+          }}
           defaultValue="2022-04-08T13:30"
           layout="columns"
           disabledDates={getDisabledDates}
@@ -247,7 +283,13 @@ type: example
           dateRenderLabel="Date"
           timeRenderLabel="Time"
           invalidDateTimeMessage="Invalid date!"
-          screenReaderLabels={{ calendarIcon: 'Open calendar', prevMonthButton: 'Previous month', nextMonthButton: 'Next month' }}
+          screenReaderLabels={{
+            calendarIcon: 'Open calendar',
+            prevMonthButton: 'Previous month',
+            nextMonthButton: 'Next month',
+            datePickerDialog: 'Date picker dialog',
+            selectedLabel: 'Selected'
+          }}
           value={date}
           onChange={(e, newDate) => setDate(newDate)}
           reset={(reset) => (resetFn.current = reset)}

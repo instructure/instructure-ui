@@ -422,26 +422,43 @@ class Calendar extends Component<CalendarProps, CalendarState> {
       `[Calendar] should have exactly ${Calendar.DAY_COUNT} children. ${length} provided.`
     )
 
-    return childrenArr
-      .reduce((days: ReactElement<any>[][], day, i) => {
-        const index = Math.floor(i / 7)
-        if (!days[index]) days.push([])
-        days[index].push(day)
-        return days // 7xN 2D array of `Day`s
-      }, [])
-      .map((row) => (
-        <tr key={`row${row[0].props.date}`} role={role}>
-          {row.map((day, i) => (
-            <td key={day.props.date} role={role}>
-              {role === 'presentation'
-                ? safeCloneElement(day, {
-                    'aria-describedby': this._weekdayHeaderIds[i]
-                  })
-                : day}
-            </td>
-          ))}
-        </tr>
-      ))
+    return (
+      childrenArr
+        .reduce((days: ReactElement<any>[][], day, i) => {
+          const index = Math.floor(i / 7)
+          if (!days[index]) days.push([])
+          days[index].push(day)
+          return days // 7xN 2D array of `Day`s
+        }, [])
+        // TODO: Implement proper WAI-ARIA grid pattern for table mode to enable aria-selected on days.
+        // Currently in table mode, days use role="button" which does not support aria-selected
+        // (axe violation), so selection is announced via selectedLabel text only.
+        //
+        // To implement properly (per https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/examples/datepicker-dialog/):
+        //   1. Add role="grid" to the <table> in table mode (renderBody)
+        //   2. Add role="row" to each <tr>
+        //   3. Set role="gridcell" + aria-selected on each <td> (not on the Day)
+        //   4. Keep Day as role="button" inside the gridcell
+        // This allows aria-selected to live on the <td role="gridcell"> which is spec-correct,
+        // while the Day button remains the interactive element.
+        .map((row) => (
+          <tr key={`row${row[0].props.date}`} role={role}>
+            {row.map((day, i) => (
+              <td key={day.props.date} role={role}>
+                {role === 'presentation'
+                  ? safeCloneElement(day, {
+                      'aria-describedby': this._weekdayHeaderIds[i],
+                      role: 'option'
+                    })
+                  : safeCloneElement(day, {
+                      'aria-describedby': this._weekdayHeaderIds[i],
+                      role: 'button'
+                    })}
+              </td>
+            ))}
+          </tr>
+        ))
+    )
   }
 
   locale(): string {
@@ -524,6 +541,7 @@ class Calendar extends Component<CalendarProps, CalendarState> {
           isToday={date.isSame(today, 'day')}
           isOutsideMonth={!date.isSame(visibleMonth, 'month')}
           label={date.format('D MMMM YYYY')} // used by screen readers
+          selectedLabel={this.props.selectedLabel}
           onClick={this.handleDayClick}
           interaction={this.isDisabledDate(date) ? 'disabled' : 'enabled'}
         >

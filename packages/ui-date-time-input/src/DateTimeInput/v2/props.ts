@@ -38,13 +38,14 @@ type DateTimeInputProps = {
    **/
   dateRenderLabel: Renderable
   /**
-   * Accessible labels for the calendar icon button, month navigation buttons, and date picker dialog.
+   * Accessible labels for the calendar icon button, month navigation buttons, selected date, and date picker dialog.
    */
   screenReaderLabels: {
     calendarIcon: string
     prevMonthButton: string
     nextMonthButton: string
-    datePickerDialog?: string
+    datePickerDialog: string
+    selectedLabel: string
   }
   /**
    * HTML placeholder text to display when the date input has no value.
