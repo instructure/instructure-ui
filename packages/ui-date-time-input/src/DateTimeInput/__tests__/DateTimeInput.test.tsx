@@ -59,7 +59,9 @@ describe('<DateTimeInput />', () => {
         screenReaderLabels={{
           calendarIcon: 'Open calendar',
           prevMonthButton: 'Previous month',
-          nextMonthButton: 'Next month'
+          nextMonthButton: 'Next month',
+          datePickerDialog: 'Date picker dialog',
+          selectedLabel: 'Selected date'
         }}
         dateRenderLabel="date-input"
         timeRenderLabel="time-input"
@@ -88,7 +90,9 @@ describe('<DateTimeInput />', () => {
         screenReaderLabels={{
           calendarIcon: 'Open calendar',
           prevMonthButton: 'Previous month',
-          nextMonthButton: 'Next month'
+          nextMonthButton: 'Next month',
+          datePickerDialog: 'Date picker dialog',
+          selectedLabel: 'Selected date'
         }}
         dateRenderLabel="date-input"
         timeRenderLabel="time-input"
@@ -119,7 +123,9 @@ describe('<DateTimeInput />', () => {
         screenReaderLabels={{
           calendarIcon: 'Open calendar',
           prevMonthButton: 'Previous month',
-          nextMonthButton: 'Next month'
+          nextMonthButton: 'Next month',
+          datePickerDialog: 'Date picker dialog',
+          selectedLabel: 'Selected date'
         }}
         dateRenderLabel="date-input"
         timeRenderLabel="time-input"
@@ -151,7 +157,9 @@ describe('<DateTimeInput />', () => {
         screenReaderLabels={{
           calendarIcon: 'Open calendar',
           prevMonthButton: 'Previous month',
-          nextMonthButton: 'Next month'
+          nextMonthButton: 'Next month',
+          datePickerDialog: 'Date picker dialog',
+          selectedLabel: 'Selected date'
         }}
         timeRenderLabel="time-input"
         invalidDateTimeMessage="whoops"
@@ -177,7 +185,9 @@ describe('<DateTimeInput />', () => {
         screenReaderLabels={{
           calendarIcon: 'Open calendar',
           prevMonthButton: 'Previous month',
-          nextMonthButton: 'Next month'
+          nextMonthButton: 'Next month',
+          datePickerDialog: 'Date picker dialog',
+          selectedLabel: 'Selected date'
         }}
         timeRenderLabel="time-input"
         locale="en-US"
@@ -207,7 +217,9 @@ describe('<DateTimeInput />', () => {
         screenReaderLabels={{
           calendarIcon: 'Open calendar',
           prevMonthButton: 'Previous month',
-          nextMonthButton: 'Next month'
+          nextMonthButton: 'Next month',
+          datePickerDialog: 'Date picker dialog',
+          selectedLabel: 'Selected date'
         }}
         timeRenderLabel="time-input"
         locale="en-US"
@@ -241,7 +253,9 @@ describe('<DateTimeInput />', () => {
         screenReaderLabels={{
           calendarIcon: 'Open calendar',
           prevMonthButton: 'Previous month',
-          nextMonthButton: 'Next month'
+          nextMonthButton: 'Next month',
+          datePickerDialog: 'Date picker dialog',
+          selectedLabel: 'Selected date'
         }}
         timeRenderLabel="time-input"
         invalidDateTimeMessage="whoops"
@@ -271,7 +285,9 @@ describe('<DateTimeInput />', () => {
         screenReaderLabels={{
           calendarIcon: 'Open calendar',
           prevMonthButton: 'Previous month',
-          nextMonthButton: 'Next month'
+          nextMonthButton: 'Next month',
+          datePickerDialog: 'Date picker dialog',
+          selectedLabel: 'Selected date'
         }}
         timeRenderLabel="time-input"
         invalidDateTimeMessage="whoops"
@@ -301,7 +317,9 @@ describe('<DateTimeInput />', () => {
         screenReaderLabels={{
           calendarIcon: 'Open calendar',
           prevMonthButton: 'Previous month',
-          nextMonthButton: 'Next month'
+          nextMonthButton: 'Next month',
+          datePickerDialog: 'Date picker dialog',
+          selectedLabel: 'Selected date'
         }}
         timeRenderLabel="time-input"
         invalidDateTimeMessage="whoops"
@@ -326,7 +344,9 @@ describe('<DateTimeInput />', () => {
         screenReaderLabels={{
           calendarIcon: 'Open calendar',
           prevMonthButton: 'Previous month',
-          nextMonthButton: 'Next month'
+          nextMonthButton: 'Next month',
+          datePickerDialog: 'Date picker dialog',
+          selectedLabel: 'Selected date'
         }}
         timeRenderLabel="time-input"
         invalidDateTimeMessage="whoops"
@@ -349,7 +369,9 @@ describe('<DateTimeInput />', () => {
         screenReaderLabels={{
           calendarIcon: 'Open calendar',
           prevMonthButton: 'Previous month',
-          nextMonthButton: 'Next month'
+          nextMonthButton: 'Next month',
+          datePickerDialog: 'Date picker dialog',
+          selectedLabel: 'Selected date'
         }}
         timeRenderLabel="time-input"
         invalidDateTimeMessage="whoops"
@@ -381,7 +403,9 @@ describe('<DateTimeInput />', () => {
       screenReaderLabels: {
         calendarIcon: 'Open calendar',
         prevMonthButton: 'Previous month',
-        nextMonthButton: 'Next month'
+        nextMonthButton: 'Next month',
+        datePickerDialog: 'Date picker dialog',
+        selectedLabel: 'Selected date'
       },
       dateRenderLabel: 'date',
       timeRenderLabel: 'time',
@@ -411,7 +435,9 @@ describe('<DateTimeInput />', () => {
       screenReaderLabels: {
         calendarIcon: 'Open calendar',
         prevMonthButton: 'Previous month',
-        nextMonthButton: 'Next month'
+        nextMonthButton: 'Next month',
+        datePickerDialog: 'Date picker dialog',
+        selectedLabel: 'Selected date'
       },
       timeRenderLabel: 'time-input',
       invalidDateTimeMessage: 'whoops',
@@ -439,7 +465,9 @@ describe('<DateTimeInput />', () => {
       screenReaderLabels: {
         calendarIcon: 'Open calendar',
         prevMonthButton: 'Previous month',
-        nextMonthButton: 'Next month'
+        nextMonthButton: 'Next month',
+        datePickerDialog: 'Date picker dialog',
+        selectedLabel: 'Selected date'
       },
       timeRenderLabel: 'time-input',
       invalidDateTimeMessage: 'whoops',
@@ -464,7 +492,9 @@ describe('<DateTimeInput />', () => {
         screenReaderLabels={{
           calendarIcon: 'Open calendar',
           prevMonthButton: 'Previous month',
-          nextMonthButton: 'Next month'
+          nextMonthButton: 'Next month',
+          datePickerDialog: 'Date picker dialog',
+          selectedLabel: 'Selected date'
         }}
         timeRenderLabel="time-input"
         invalidDateTimeMessage="whoops"
@@ -487,7 +517,9 @@ describe('<DateTimeInput />', () => {
         screenReaderLabels={{
           calendarIcon: 'Open calendar',
           prevMonthButton: 'Previous month',
-          nextMonthButton: 'Next month'
+          nextMonthButton: 'Next month',
+          datePickerDialog: 'Date picker dialog',
+          selectedLabel: 'Selected date'
         }}
         timeRenderLabel="time-input"
         invalidDateTimeMessage="whoops"
@@ -512,7 +544,9 @@ describe('<DateTimeInput />', () => {
       screenReaderLabels: {
         calendarIcon: 'Open calendar',
         prevMonthButton: 'Previous month',
-        nextMonthButton: 'Next month'
+        nextMonthButton: 'Next month',
+        datePickerDialog: 'Date picker dialog',
+        selectedLabel: 'Selected date'
       },
       timeRenderLabel: 'time-input',
       invalidDateTimeMessage: 'whoops',
@@ -542,7 +576,9 @@ describe('<DateTimeInput />', () => {
       screenReaderLabels: {
         calendarIcon: 'Open calendar',
         prevMonthButton: 'Previous month',
-        nextMonthButton: 'Next month'
+        nextMonthButton: 'Next month',
+        datePickerDialog: 'Date picker dialog',
+        selectedLabel: 'Selected date'
       },
       timeRenderLabel: 'time-input',
       invalidDateTimeMessage: 'whoops',
@@ -578,7 +614,9 @@ describe('<DateTimeInput />', () => {
       screenReaderLabels: {
         calendarIcon: 'Open calendar',
         prevMonthButton: 'Previous month',
-        nextMonthButton: 'Next month'
+        nextMonthButton: 'Next month',
+        datePickerDialog: 'Date picker dialog',
+        selectedLabel: 'Selected date'
       },
       timeRenderLabel: 'time-input',
       invalidDateTimeMessage: 'whoops',
@@ -635,7 +673,9 @@ describe('<DateTimeInput />', () => {
           screenReaderLabels={{
             calendarIcon: 'Open calendar',
             prevMonthButton: 'Previous month',
-            nextMonthButton: 'Next month'
+            nextMonthButton: 'Next month',
+            datePickerDialog: 'Date picker dialog',
+            selectedLabel: 'Selected date'
           }}
           timeRenderLabel="time-input"
           invalidDateTimeMessage="whoops"
@@ -657,7 +697,9 @@ describe('<DateTimeInput />', () => {
       screenReaderLabels: {
         calendarIcon: 'Open calendar',
         prevMonthButton: 'Previous month',
-        nextMonthButton: 'Next month'
+        nextMonthButton: 'Next month',
+        datePickerDialog: 'Date picker dialog',
+        selectedLabel: 'Selected date'
       },
       timeRenderLabel: 'time-input',
       invalidDateTimeMessage: 'whoops',
@@ -702,7 +744,9 @@ describe('<DateTimeInput />', () => {
       screenReaderLabels: {
         calendarIcon: 'Open calendar',
         prevMonthButton: 'Previous month',
-        nextMonthButton: 'Next month'
+        nextMonthButton: 'Next month',
+        datePickerDialog: 'Date picker dialog',
+        selectedLabel: 'Selected date'
       },
       timeRenderLabel: 'time-input',
       invalidDateTimeMessage: 'whoops',
@@ -733,7 +777,9 @@ describe('<DateTimeInput />', () => {
       screenReaderLabels: {
         calendarIcon: 'Open calendar',
         prevMonthButton: 'Previous month',
-        nextMonthButton: 'Next month'
+        nextMonthButton: 'Next month',
+        datePickerDialog: 'Date picker dialog',
+        selectedLabel: 'Selected date'
       },
       timeRenderLabel: 'time-input',
       invalidDateTimeMessage: 'whoops',
@@ -768,7 +814,9 @@ describe('<DateTimeInput />', () => {
         screenReaderLabels={{
           calendarIcon: 'Open calendar',
           prevMonthButton: 'Previous month',
-          nextMonthButton: 'Next month'
+          nextMonthButton: 'Next month',
+          datePickerDialog: 'Date picker dialog',
+          selectedLabel: 'Selected date'
         }}
         timeRenderLabel="time-input"
         invalidDateTimeMessage="whoops"
@@ -801,7 +849,9 @@ describe('<DateTimeInput />', () => {
         screenReaderLabels={{
           calendarIcon: 'Open calendar',
           prevMonthButton: 'Previous month',
-          nextMonthButton: 'Next month'
+          nextMonthButton: 'Next month',
+          datePickerDialog: 'Date picker dialog',
+          selectedLabel: 'Selected date'
         }}
         timeRenderLabel="time-input"
         invalidDateTimeMessage="whoops"
@@ -838,7 +888,9 @@ describe('<DateTimeInput />', () => {
         screenReaderLabels={{
           calendarIcon: 'Open calendar',
           prevMonthButton: 'Previous month',
-          nextMonthButton: 'Next month'
+          nextMonthButton: 'Next month',
+          datePickerDialog: 'Date picker dialog',
+          selectedLabel: 'Selected date'
         }}
         timeRenderLabel="time-input"
         invalidDateTimeMessage="whoops"
@@ -868,7 +920,9 @@ describe('<DateTimeInput />', () => {
         screenReaderLabels={{
           calendarIcon: 'Open calendar',
           prevMonthButton: 'Previous month',
-          nextMonthButton: 'Next month'
+          nextMonthButton: 'Next month',
+          datePickerDialog: 'Date picker dialog',
+          selectedLabel: 'Selected date'
         }}
         invalidDateTimeMessage="whoops"
         locale="en-US"
@@ -908,7 +962,9 @@ describe('<DateTimeInput />', () => {
         screenReaderLabels={{
           calendarIcon: 'Open calendar',
           prevMonthButton: 'Previous month',
-          nextMonthButton: 'Next month'
+          nextMonthButton: 'Next month',
+          datePickerDialog: 'Date picker dialog',
+          selectedLabel: 'Selected date'
         }}
         invalidDateTimeMessage="whoops"
         locale={locale}
@@ -951,7 +1007,9 @@ describe('<DateTimeInput />', () => {
         screenReaderLabels={{
           calendarIcon: 'Open calendar',
           prevMonthButton: 'Previous month',
-          nextMonthButton: 'Next month'
+          nextMonthButton: 'Next month',
+          datePickerDialog: 'Date picker dialog',
+          selectedLabel: 'Selected date'
         }}
         invalidDateTimeMessage="whoops"
         locale="en-US"
@@ -986,7 +1044,9 @@ describe('<DateTimeInput />', () => {
           screenReaderLabels={{
             calendarIcon: 'Open calendar',
             prevMonthButton: 'Previous month',
-            nextMonthButton: 'Next month'
+            nextMonthButton: 'Next month',
+            datePickerDialog: 'Date picker dialog',
+            selectedLabel: 'Selected date'
           }}
           invalidDateTimeMessage="whoops"
           locale="en-US"
@@ -1065,7 +1125,9 @@ describe('<DateTimeInput />', () => {
         screenReaderLabels={{
           calendarIcon: 'Open calendar',
           prevMonthButton: 'Previous month',
-          nextMonthButton: 'Next month'
+          nextMonthButton: 'Next month',
+          datePickerDialog: 'Date picker dialog',
+          selectedLabel: 'Selected date'
         }}
         invalidDateTimeMessage="whoops"
         locale="en-US"
@@ -1099,7 +1161,9 @@ describe('<DateTimeInput />', () => {
         screenReaderLabels={{
           calendarIcon: 'Open calendar',
           prevMonthButton: 'Previous month',
-          nextMonthButton: 'Next month'
+          nextMonthButton: 'Next month',
+          datePickerDialog: 'Date picker dialog',
+          selectedLabel: 'Selected date'
         }}
         dateRenderLabel="date-input"
         timeRenderLabel="time-input"
@@ -1127,7 +1191,9 @@ describe('<DateTimeInput />', () => {
       screenReaderLabels: {
         calendarIcon: 'Open calendar',
         prevMonthButton: 'Previous month',
-        nextMonthButton: 'Next month'
+        nextMonthButton: 'Next month',
+        datePickerDialog: 'Date picker dialog',
+        selectedLabel: 'Selected date'
       },
       dateRenderLabel: 'date-input',
       timeRenderLabel: 'time-input',

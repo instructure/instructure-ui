@@ -207,6 +207,7 @@ class Example extends React.Component {
           isToday={date.isSame(todayDate, 'day')}
           isOutsideMonth={!date.isSame(renderedDate, 'month')}
           label={`${date.format('D')} ${date.format('MMMM')} ${date.format('YYYY')}`}
+          selectedLabel="Selected"
           onClick={this.handleDayClick}
         >
           {date.format('D')}

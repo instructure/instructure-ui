@@ -34,6 +34,7 @@ type: example
           invalidDateTimeMessage="Invalid date!"
           prevMonthLabel="Previous month"
           nextMonthLabel="Next month"
+          selectedLabel="Selected"
           defaultValue="2018-01-18T13:30"
           layout="columns"
         />
@@ -92,6 +93,7 @@ type: example
             timeRenderLabel="Time"
             prevMonthLabel="Previous month"
             nextMonthLabel="Next month"
+            selectedLabel="Selected"
             onChange={onChange}
             layout="stacked"
             value={value}
@@ -145,6 +147,7 @@ type: example
             timeRenderLabel="Time"
             prevMonthLabel="Previous month"
             nextMonthLabel="Next month"
+            selectedLabel="Selected"
             invalidDateTimeMessage={(dvalue) => {
               return `'${dvalue} is not valid.`
             }}
@@ -218,6 +221,7 @@ type: example
           }
           prevMonthLabel="Previous month"
           nextMonthLabel="Next month"
+          selectedLabel="Selected"
           defaultValue="2022-04-08T13:30"
           layout="columns"
           disabledDates={getDisabledDates}
@@ -253,6 +257,7 @@ type: example
           invalidDateTimeMessage="Invalid date!"
           prevMonthLabel="Previous month"
           nextMonthLabel="Next month"
+          selectedLabel="Selected"
           value={date}
           onChange={(e, newDate) => setDate(newDate)}
           reset={(reset) => (resetFn.current = reset)}
