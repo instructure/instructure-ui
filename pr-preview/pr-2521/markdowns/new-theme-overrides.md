@@ -91,8 +91,8 @@ type: example
           infoIconBackground: 'purple'
         },
         Pill: {
-          primaryBackground: 'purple',
-          primaryBorderColor: 'purple'
+          baseTextColor: 'purple',
+          baseBorderColor: 'purple'
         }
       }
     }}
@@ -278,7 +278,7 @@ Individual component instances accept a `themeOverride` prop for one-off styling
 ---
 type: example
 ---
-<InstUISettingsProvider theme={canvas}>
+<div>
   <Alert variant="info" margin="small">
     Default info Alert.
   </Alert>
@@ -292,7 +292,7 @@ type: example
   >
     This specific Alert has crimson info styling.
   </Alert>
-</InstUISettingsProvider>
+</div>
 ```
 
 #### Function form
