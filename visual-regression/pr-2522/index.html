@@ -19,7 +19,12 @@
   .new { background: #ddf4ff; color: #0969da; }
   .gone { background: #fff1e5; color: #9a6700; }
   .meta { font-size: 12px; color: #666; }
-  .filter button { font-size: 12px; margin-right: 6px; padding: 4px 10px; border: 1px solid #ddd; background: #fff; border-radius: 4px; cursor: pointer; }
+  .filter { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 8px; }
+  .filter button { font-size: 12px; padding: 4px 10px; border: 1px solid #ddd; background: #fff; border-radius: 4px; cursor: pointer; }
+  .filter button.active { background: #0969da; color: #fff; border-color: #0969da; }
+  .filter input[type=search] { flex: 1; min-width: 180px; max-width: 320px; margin-left: auto; padding: 4px 10px; border: 1px solid #ddd; border-radius: 4px; font: inherit; }
+  .source-link { font-size: 12px; color: #0969da; text-decoration: none; margin-left: auto; }
+  .source-link:hover { text-decoration: underline; }
   [data-hidden] { display: none; }
   .thumb { cursor: zoom-in; }
 
@@ -47,147 +52,148 @@
     </div>
     <div class="counts">
       <span>Total: 32</span>
-      <span style="color:#1a7f37;">OK: 31</span>
-      <span style="color:#cf222e;">Changed: 1</span>
+      <span style="color:#1a7f37;">OK: 0</span>
+      <span style="color:#cf222e;">Changed: 32</span>
       <span style="color:#0969da;">New: 0</span>
       <span style="color:#9a6700;">Removed: 0</span>
     </div>
-    <div class="filter" style="margin-top:8px;">
-      <button data-filter="all">All</button>
+    <div class="filter">
+      <button data-filter="all" class="active">All</button>
       <button data-filter="changed">Changed</button>
       <button data-filter="added">New</button>
       <button data-filter="removed">Removed</button>
       <button data-filter="unchanged">Unchanged</button>
+      <input id="search" type="search" placeholder="Filter by name…" autocomplete="off" />
     </div>
   </header>
   <main>
-    <section class="row" data-status="unchanged" data-name="alert.png" data-has-both="true">
-      <header><h2>alert.png</h2><span class="pill pass">ok</span></header>
-      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/alert.png" data-name="alert.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/alert.png" data-name="alert.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
+    <section class="row" data-status="changed" data-name="alert.png" data-has-both="true">
+      <header><h2>alert.png</h2><span class="pill fail">changed</span><div class="meta">16275 pixels differ</div><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/feat/self-hosted-visual-regression/regression-test/src/app/alert/page.tsx" target="_blank" rel="noopener">alert/page.tsx</a></header>
+      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/alert.png" data-name="alert.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/alert.png" data-name="alert.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption><img loading="lazy" src="diff/alert.png" data-name="alert.png" data-mode="diff" class="thumb" /></figure></div>
     </section>
-    <section class="row" data-status="unchanged" data-name="avatar.png" data-has-both="true">
-      <header><h2>avatar.png</h2><span class="pill pass">ok</span></header>
-      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/avatar.png" data-name="avatar.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/avatar.png" data-name="avatar.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
+    <section class="row" data-status="changed" data-name="avatar.png" data-has-both="true">
+      <header><h2>avatar.png</h2><span class="pill fail">changed</span><div class="meta">16275 pixels differ</div><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/feat/self-hosted-visual-regression/regression-test/src/app/avatar/page.tsx" target="_blank" rel="noopener">avatar/page.tsx</a></header>
+      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/avatar.png" data-name="avatar.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/avatar.png" data-name="avatar.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption><img loading="lazy" src="diff/avatar.png" data-name="avatar.png" data-mode="diff" class="thumb" /></figure></div>
     </section>
-    <section class="row" data-status="unchanged" data-name="badge.png" data-has-both="true">
-      <header><h2>badge.png</h2><span class="pill pass">ok</span></header>
-      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/badge.png" data-name="badge.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/badge.png" data-name="badge.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
+    <section class="row" data-status="changed" data-name="badge.png" data-has-both="true">
+      <header><h2>badge.png</h2><span class="pill fail">changed</span><div class="meta">16275 pixels differ</div><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/feat/self-hosted-visual-regression/regression-test/src/app/badge/page.tsx" target="_blank" rel="noopener">badge/page.tsx</a></header>
+      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/badge.png" data-name="badge.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/badge.png" data-name="badge.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption><img loading="lazy" src="diff/badge.png" data-name="badge.png" data-mode="diff" class="thumb" /></figure></div>
     </section>
-    <section class="row" data-status="unchanged" data-name="billboard.png" data-has-both="true">
-      <header><h2>billboard.png</h2><span class="pill pass">ok</span></header>
-      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/billboard.png" data-name="billboard.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/billboard.png" data-name="billboard.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
+    <section class="row" data-status="changed" data-name="billboard.png" data-has-both="true">
+      <header><h2>billboard.png</h2><span class="pill fail">changed</span><div class="meta">21105 pixels differ · size mismatch</div><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/feat/self-hosted-visual-regression/regression-test/src/app/billboard/page.tsx" target="_blank" rel="noopener">billboard/page.tsx</a></header>
+      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/billboard.png" data-name="billboard.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/billboard.png" data-name="billboard.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption><img loading="lazy" src="diff/billboard.png" data-name="billboard.png" data-mode="diff" class="thumb" /></figure></div>
     </section>
-    <section class="row" data-status="unchanged" data-name="breadcrumb.png" data-has-both="true">
-      <header><h2>breadcrumb.png</h2><span class="pill pass">ok</span></header>
-      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/breadcrumb.png" data-name="breadcrumb.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/breadcrumb.png" data-name="breadcrumb.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
+    <section class="row" data-status="changed" data-name="breadcrumb.png" data-has-both="true">
+      <header><h2>breadcrumb.png</h2><span class="pill fail">changed</span><div class="meta">16275 pixels differ</div><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/feat/self-hosted-visual-regression/regression-test/src/app/breadcrumb/page.tsx" target="_blank" rel="noopener">breadcrumb/page.tsx</a></header>
+      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/breadcrumb.png" data-name="breadcrumb.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/breadcrumb.png" data-name="breadcrumb.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption><img loading="lazy" src="diff/breadcrumb.png" data-name="breadcrumb.png" data-mode="diff" class="thumb" /></figure></div>
     </section>
     <section class="row" data-status="changed" data-name="button-and-derivatives.png" data-has-both="true">
-      <header><h2>button-and-derivatives.png</h2><span class="pill fail">changed</span><div class="meta">8208 pixels differ</div></header>
+      <header><h2>button-and-derivatives.png</h2><span class="pill fail">changed</span><div class="meta">35247 pixels differ · size mismatch</div><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/feat/self-hosted-visual-regression/regression-test/src/app/button/page.tsx" target="_blank" rel="noopener">button/page.tsx</a></header>
       <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/button-and-derivatives.png" data-name="button-and-derivatives.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/button-and-derivatives.png" data-name="button-and-derivatives.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption><img loading="lazy" src="diff/button-and-derivatives.png" data-name="button-and-derivatives.png" data-mode="diff" class="thumb" /></figure></div>
     </section>
-    <section class="row" data-status="unchanged" data-name="byline.png" data-has-both="true">
-      <header><h2>byline.png</h2><span class="pill pass">ok</span></header>
-      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/byline.png" data-name="byline.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/byline.png" data-name="byline.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
+    <section class="row" data-status="changed" data-name="byline.png" data-has-both="true">
+      <header><h2>byline.png</h2><span class="pill fail">changed</span><div class="meta">16275 pixels differ</div><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/feat/self-hosted-visual-regression/regression-test/src/app/byline/page.tsx" target="_blank" rel="noopener">byline/page.tsx</a></header>
+      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/byline.png" data-name="byline.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/byline.png" data-name="byline.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption><img loading="lazy" src="diff/byline.png" data-name="byline.png" data-mode="diff" class="thumb" /></figure></div>
     </section>
-    <section class="row" data-status="unchanged" data-name="calendar.png" data-has-both="true">
-      <header><h2>calendar.png</h2><span class="pill pass">ok</span></header>
-      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/calendar.png" data-name="calendar.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/calendar.png" data-name="calendar.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
+    <section class="row" data-status="changed" data-name="calendar.png" data-has-both="true">
+      <header><h2>calendar.png</h2><span class="pill fail">changed</span><div class="meta">16275 pixels differ · size mismatch</div><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/feat/self-hosted-visual-regression/regression-test/src/app/calendar/page.tsx" target="_blank" rel="noopener">calendar/page.tsx</a></header>
+      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/calendar.png" data-name="calendar.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/calendar.png" data-name="calendar.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption><img loading="lazy" src="diff/calendar.png" data-name="calendar.png" data-mode="diff" class="thumb" /></figure></div>
     </section>
-    <section class="row" data-status="unchanged" data-name="checkbox.png" data-has-both="true">
-      <header><h2>checkbox.png</h2><span class="pill pass">ok</span></header>
-      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/checkbox.png" data-name="checkbox.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/checkbox.png" data-name="checkbox.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
+    <section class="row" data-status="changed" data-name="checkbox.png" data-has-both="true">
+      <header><h2>checkbox.png</h2><span class="pill fail">changed</span><div class="meta">16448 pixels differ · size mismatch</div><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/feat/self-hosted-visual-regression/regression-test/src/app/checkbox/page.tsx" target="_blank" rel="noopener">checkbox/page.tsx</a></header>
+      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/checkbox.png" data-name="checkbox.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/checkbox.png" data-name="checkbox.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption><img loading="lazy" src="diff/checkbox.png" data-name="checkbox.png" data-mode="diff" class="thumb" /></figure></div>
     </section>
-    <section class="row" data-status="unchanged" data-name="checkboxgroup.png" data-has-both="true">
-      <header><h2>checkboxgroup.png</h2><span class="pill pass">ok</span></header>
-      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/checkboxgroup.png" data-name="checkboxgroup.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/checkboxgroup.png" data-name="checkboxgroup.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
+    <section class="row" data-status="changed" data-name="checkboxgroup.png" data-has-both="true">
+      <header><h2>checkboxgroup.png</h2><span class="pill fail">changed</span><div class="meta">16275 pixels differ</div><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/feat/self-hosted-visual-regression/regression-test/src/app/checkboxgroup/page.tsx" target="_blank" rel="noopener">checkboxgroup/page.tsx</a></header>
+      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/checkboxgroup.png" data-name="checkboxgroup.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/checkboxgroup.png" data-name="checkboxgroup.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption><img loading="lazy" src="diff/checkboxgroup.png" data-name="checkboxgroup.png" data-mode="diff" class="thumb" /></figure></div>
     </section>
-    <section class="row" data-status="unchanged" data-name="colorpicker.png" data-has-both="true">
-      <header><h2>colorpicker.png</h2><span class="pill pass">ok</span></header>
-      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/colorpicker.png" data-name="colorpicker.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/colorpicker.png" data-name="colorpicker.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
+    <section class="row" data-status="changed" data-name="colorpicker.png" data-has-both="true">
+      <header><h2>colorpicker.png</h2><span class="pill fail">changed</span><div class="meta">97548 pixels differ · size mismatch</div><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/feat/self-hosted-visual-regression/regression-test/src/app/colorpicker/page.tsx" target="_blank" rel="noopener">colorpicker/page.tsx</a></header>
+      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/colorpicker.png" data-name="colorpicker.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/colorpicker.png" data-name="colorpicker.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption><img loading="lazy" src="diff/colorpicker.png" data-name="colorpicker.png" data-mode="diff" class="thumb" /></figure></div>
     </section>
-    <section class="row" data-status="unchanged" data-name="contextview.png" data-has-both="true">
-      <header><h2>contextview.png</h2><span class="pill pass">ok</span></header>
-      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/contextview.png" data-name="contextview.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/contextview.png" data-name="contextview.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
+    <section class="row" data-status="changed" data-name="contextview.png" data-has-both="true">
+      <header><h2>contextview.png</h2><span class="pill fail">changed</span><div class="meta">16275 pixels differ</div><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/feat/self-hosted-visual-regression/regression-test/src/app/contextview/page.tsx" target="_blank" rel="noopener">contextview/page.tsx</a></header>
+      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/contextview.png" data-name="contextview.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/contextview.png" data-name="contextview.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption><img loading="lazy" src="diff/contextview.png" data-name="contextview.png" data-mode="diff" class="thumb" /></figure></div>
     </section>
-    <section class="row" data-status="unchanged" data-name="custom-and-lucide-icons.png" data-has-both="true">
-      <header><h2>custom-and-lucide-icons.png</h2><span class="pill pass">ok</span></header>
-      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/custom-and-lucide-icons.png" data-name="custom-and-lucide-icons.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/custom-and-lucide-icons.png" data-name="custom-and-lucide-icons.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
+    <section class="row" data-status="changed" data-name="custom-and-lucide-icons.png" data-has-both="true">
+      <header><h2>custom-and-lucide-icons.png</h2><span class="pill fail">changed</span><div class="meta">173423 pixels differ · size mismatch</div><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/feat/self-hosted-visual-regression/regression-test/src/app/custom-icons/page.tsx" target="_blank" rel="noopener">custom-icons/page.tsx</a></header>
+      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/custom-and-lucide-icons.png" data-name="custom-and-lucide-icons.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/custom-and-lucide-icons.png" data-name="custom-and-lucide-icons.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption><img loading="lazy" src="diff/custom-and-lucide-icons.png" data-name="custom-and-lucide-icons.png" data-mode="diff" class="thumb" /></figure></div>
     </section>
-    <section class="row" data-status="unchanged" data-name="dateinput-dateinput2.png" data-has-both="true">
-      <header><h2>dateinput-dateinput2.png</h2><span class="pill pass">ok</span></header>
-      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/dateinput-dateinput2.png" data-name="dateinput-dateinput2.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/dateinput-dateinput2.png" data-name="dateinput-dateinput2.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
+    <section class="row" data-status="changed" data-name="dateinput-dateinput2.png" data-has-both="true">
+      <header><h2>dateinput-dateinput2.png</h2><span class="pill fail">changed</span><div class="meta">16275 pixels differ</div><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/feat/self-hosted-visual-regression/regression-test/src/app/dateinput/page.tsx" target="_blank" rel="noopener">dateinput/page.tsx</a></header>
+      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/dateinput-dateinput2.png" data-name="dateinput-dateinput2.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/dateinput-dateinput2.png" data-name="dateinput-dateinput2.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption><img loading="lazy" src="diff/dateinput-dateinput2.png" data-name="dateinput-dateinput2.png" data-mode="diff" class="thumb" /></figure></div>
     </section>
-    <section class="row" data-status="unchanged" data-name="datetimeinput.png" data-has-both="true">
-      <header><h2>datetimeinput.png</h2><span class="pill pass">ok</span></header>
-      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/datetimeinput.png" data-name="datetimeinput.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/datetimeinput.png" data-name="datetimeinput.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
+    <section class="row" data-status="changed" data-name="datetimeinput.png" data-has-both="true">
+      <header><h2>datetimeinput.png</h2><span class="pill fail">changed</span><div class="meta">18533 pixels differ · size mismatch</div><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/feat/self-hosted-visual-regression/regression-test/src/app/datetimeinput/page.tsx" target="_blank" rel="noopener">datetimeinput/page.tsx</a></header>
+      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/datetimeinput.png" data-name="datetimeinput.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/datetimeinput.png" data-name="datetimeinput.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption><img loading="lazy" src="diff/datetimeinput.png" data-name="datetimeinput.png" data-mode="diff" class="thumb" /></figure></div>
     </section>
-    <section class="row" data-status="unchanged" data-name="drilldown.png" data-has-both="true">
-      <header><h2>drilldown.png</h2><span class="pill pass">ok</span></header>
-      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/drilldown.png" data-name="drilldown.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/drilldown.png" data-name="drilldown.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
+    <section class="row" data-status="changed" data-name="drilldown.png" data-has-both="true">
+      <header><h2>drilldown.png</h2><span class="pill fail">changed</span><div class="meta">17702 pixels differ · size mismatch</div><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/feat/self-hosted-visual-regression/regression-test/src/app/drilldown/page.tsx" target="_blank" rel="noopener">drilldown/page.tsx</a></header>
+      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/drilldown.png" data-name="drilldown.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/drilldown.png" data-name="drilldown.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption><img loading="lazy" src="diff/drilldown.png" data-name="drilldown.png" data-mode="diff" class="thumb" /></figure></div>
     </section>
-    <section class="row" data-status="unchanged" data-name="filedrop.png" data-has-both="true">
-      <header><h2>filedrop.png</h2><span class="pill pass">ok</span></header>
-      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/filedrop.png" data-name="filedrop.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/filedrop.png" data-name="filedrop.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
+    <section class="row" data-status="changed" data-name="filedrop.png" data-has-both="true">
+      <header><h2>filedrop.png</h2><span class="pill fail">changed</span><div class="meta">24015 pixels differ · size mismatch</div><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/feat/self-hosted-visual-regression/regression-test/src/app/filedrop/page.tsx" target="_blank" rel="noopener">filedrop/page.tsx</a></header>
+      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/filedrop.png" data-name="filedrop.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/filedrop.png" data-name="filedrop.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption><img loading="lazy" src="diff/filedrop.png" data-name="filedrop.png" data-mode="diff" class="thumb" /></figure></div>
     </section>
-    <section class="row" data-status="unchanged" data-name="form-errors.png" data-has-both="true">
-      <header><h2>form-errors.png</h2><span class="pill pass">ok</span></header>
-      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/form-errors.png" data-name="form-errors.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/form-errors.png" data-name="form-errors.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
+    <section class="row" data-status="changed" data-name="form-errors.png" data-has-both="true">
+      <header><h2>form-errors.png</h2><span class="pill fail">changed</span><div class="meta">29064 pixels differ · size mismatch</div><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/feat/self-hosted-visual-regression/regression-test/src/app/form-errors/page.tsx" target="_blank" rel="noopener">form-errors/page.tsx</a></header>
+      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/form-errors.png" data-name="form-errors.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/form-errors.png" data-name="form-errors.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption><img loading="lazy" src="diff/form-errors.png" data-name="form-errors.png" data-mode="diff" class="thumb" /></figure></div>
     </section>
-    <section class="row" data-status="unchanged" data-name="heading.png" data-has-both="true">
-      <header><h2>heading.png</h2><span class="pill pass">ok</span></header>
-      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/heading.png" data-name="heading.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/heading.png" data-name="heading.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
+    <section class="row" data-status="changed" data-name="heading.png" data-has-both="true">
+      <header><h2>heading.png</h2><span class="pill fail">changed</span><div class="meta">17692 pixels differ · size mismatch</div><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/feat/self-hosted-visual-regression/regression-test/src/app/heading/page.tsx" target="_blank" rel="noopener">heading/page.tsx</a></header>
+      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/heading.png" data-name="heading.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/heading.png" data-name="heading.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption><img loading="lazy" src="diff/heading.png" data-name="heading.png" data-mode="diff" class="thumb" /></figure></div>
     </section>
-    <section class="row" data-status="unchanged" data-name="img.png" data-has-both="true">
-      <header><h2>img.png</h2><span class="pill pass">ok</span></header>
-      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/img.png" data-name="img.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/img.png" data-name="img.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
+    <section class="row" data-status="changed" data-name="img.png" data-has-both="true">
+      <header><h2>img.png</h2><span class="pill fail">changed</span><div class="meta">688527 pixels differ · size mismatch</div><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/feat/self-hosted-visual-regression/regression-test/src/app/img/page.tsx" target="_blank" rel="noopener">img/page.tsx</a></header>
+      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/img.png" data-name="img.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/img.png" data-name="img.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption><img loading="lazy" src="diff/img.png" data-name="img.png" data-mode="diff" class="thumb" /></figure></div>
     </section>
-    <section class="row" data-status="unchanged" data-name="link.png" data-has-both="true">
-      <header><h2>link.png</h2><span class="pill pass">ok</span></header>
-      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/link.png" data-name="link.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/link.png" data-name="link.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
+    <section class="row" data-status="changed" data-name="link.png" data-has-both="true">
+      <header><h2>link.png</h2><span class="pill fail">changed</span><div class="meta">16275 pixels differ · size mismatch</div><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/feat/self-hosted-visual-regression/regression-test/src/app/link/page.tsx" target="_blank" rel="noopener">link/page.tsx</a></header>
+      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/link.png" data-name="link.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/link.png" data-name="link.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption><img loading="lazy" src="diff/link.png" data-name="link.png" data-mode="diff" class="thumb" /></figure></div>
     </section>
-    <section class="row" data-status="unchanged" data-name="menu.png" data-has-both="true">
-      <header><h2>menu.png</h2><span class="pill pass">ok</span></header>
-      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/menu.png" data-name="menu.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/menu.png" data-name="menu.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
+    <section class="row" data-status="changed" data-name="menu.png" data-has-both="true">
+      <header><h2>menu.png</h2><span class="pill fail">changed</span><div class="meta">16275 pixels differ</div><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/feat/self-hosted-visual-regression/regression-test/src/app/menu/page.tsx" target="_blank" rel="noopener">menu/page.tsx</a></header>
+      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/menu.png" data-name="menu.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/menu.png" data-name="menu.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption><img loading="lazy" src="diff/menu.png" data-name="menu.png" data-mode="diff" class="thumb" /></figure></div>
     </section>
-    <section class="row" data-status="unchanged" data-name="metric-pill-tag-timeselect-text.png" data-has-both="true">
-      <header><h2>metric-pill-tag-timeselect-text.png</h2><span class="pill pass">ok</span></header>
-      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/metric-pill-tag-timeselect-text.png" data-name="metric-pill-tag-timeselect-text.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/metric-pill-tag-timeselect-text.png" data-name="metric-pill-tag-timeselect-text.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
+    <section class="row" data-status="changed" data-name="metric-pill-tag-timeselect-text.png" data-has-both="true">
+      <header><h2>metric-pill-tag-timeselect-text.png</h2><span class="pill fail">changed</span><div class="meta">22635 pixels differ · size mismatch</div><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/feat/self-hosted-visual-regression/regression-test/src/app/small-components/page.tsx" target="_blank" rel="noopener">small-components/page.tsx</a></header>
+      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/metric-pill-tag-timeselect-text.png" data-name="metric-pill-tag-timeselect-text.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/metric-pill-tag-timeselect-text.png" data-name="metric-pill-tag-timeselect-text.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption><img loading="lazy" src="diff/metric-pill-tag-timeselect-text.png" data-name="metric-pill-tag-timeselect-text.png" data-mode="diff" class="thumb" /></figure></div>
     </section>
-    <section class="row" data-status="unchanged" data-name="options.png" data-has-both="true">
-      <header><h2>options.png</h2><span class="pill pass">ok</span></header>
-      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/options.png" data-name="options.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/options.png" data-name="options.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
+    <section class="row" data-status="changed" data-name="options.png" data-has-both="true">
+      <header><h2>options.png</h2><span class="pill fail">changed</span><div class="meta">21338 pixels differ · size mismatch</div><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/feat/self-hosted-visual-regression/regression-test/src/app/options/page.tsx" target="_blank" rel="noopener">options/page.tsx</a></header>
+      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/options.png" data-name="options.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/options.png" data-name="options.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption><img loading="lazy" src="diff/options.png" data-name="options.png" data-mode="diff" class="thumb" /></figure></div>
     </section>
-    <section class="row" data-status="unchanged" data-name="pagination.png" data-has-both="true">
-      <header><h2>pagination.png</h2><span class="pill pass">ok</span></header>
-      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/pagination.png" data-name="pagination.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/pagination.png" data-name="pagination.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
+    <section class="row" data-status="changed" data-name="pagination.png" data-has-both="true">
+      <header><h2>pagination.png</h2><span class="pill fail">changed</span><div class="meta">16275 pixels differ · size mismatch</div><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/feat/self-hosted-visual-regression/regression-test/src/app/pagination/page.tsx" target="_blank" rel="noopener">pagination/page.tsx</a></header>
+      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/pagination.png" data-name="pagination.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/pagination.png" data-name="pagination.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption><img loading="lazy" src="diff/pagination.png" data-name="pagination.png" data-mode="diff" class="thumb" /></figure></div>
     </section>
-    <section class="row" data-status="unchanged" data-name="progressbar.png" data-has-both="true">
-      <header><h2>progressbar.png</h2><span class="pill pass">ok</span></header>
-      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/progressbar.png" data-name="progressbar.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/progressbar.png" data-name="progressbar.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
+    <section class="row" data-status="changed" data-name="progressbar.png" data-has-both="true">
+      <header><h2>progressbar.png</h2><span class="pill fail">changed</span><div class="meta">90852 pixels differ · size mismatch</div><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/feat/self-hosted-visual-regression/regression-test/src/app/progressbar/page.tsx" target="_blank" rel="noopener">progressbar/page.tsx</a></header>
+      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/progressbar.png" data-name="progressbar.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/progressbar.png" data-name="progressbar.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption><img loading="lazy" src="diff/progressbar.png" data-name="progressbar.png" data-mode="diff" class="thumb" /></figure></div>
     </section>
-    <section class="row" data-status="unchanged" data-name="select-simpleselect.png" data-has-both="true">
-      <header><h2>select-simpleselect.png</h2><span class="pill pass">ok</span></header>
-      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/select-simpleselect.png" data-name="select-simpleselect.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/select-simpleselect.png" data-name="select-simpleselect.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
+    <section class="row" data-status="changed" data-name="select-simpleselect.png" data-has-both="true">
+      <header><h2>select-simpleselect.png</h2><span class="pill fail">changed</span><div class="meta">16275 pixels differ</div><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/feat/self-hosted-visual-regression/regression-test/src/app/select/page.tsx" target="_blank" rel="noopener">select/page.tsx</a></header>
+      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/select-simpleselect.png" data-name="select-simpleselect.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/select-simpleselect.png" data-name="select-simpleselect.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption><img loading="lazy" src="diff/select-simpleselect.png" data-name="select-simpleselect.png" data-mode="diff" class="thumb" /></figure></div>
     </section>
-    <section class="row" data-status="unchanged" data-name="table.png" data-has-both="true">
-      <header><h2>table.png</h2><span class="pill pass">ok</span></header>
-      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/table.png" data-name="table.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/table.png" data-name="table.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
+    <section class="row" data-status="changed" data-name="table.png" data-has-both="true">
+      <header><h2>table.png</h2><span class="pill fail">changed</span><div class="meta">16275 pixels differ</div><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/feat/self-hosted-visual-regression/regression-test/src/app/table/page.tsx" target="_blank" rel="noopener">table/page.tsx</a></header>
+      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/table.png" data-name="table.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/table.png" data-name="table.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption><img loading="lazy" src="diff/table.png" data-name="table.png" data-mode="diff" class="thumb" /></figure></div>
     </section>
-    <section class="row" data-status="unchanged" data-name="tabs.png" data-has-both="true">
-      <header><h2>tabs.png</h2><span class="pill pass">ok</span></header>
-      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/tabs.png" data-name="tabs.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/tabs.png" data-name="tabs.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
+    <section class="row" data-status="changed" data-name="tabs.png" data-has-both="true">
+      <header><h2>tabs.png</h2><span class="pill fail">changed</span><div class="meta">16275 pixels differ</div><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/feat/self-hosted-visual-regression/regression-test/src/app/tabs/page.tsx" target="_blank" rel="noopener">tabs/page.tsx</a></header>
+      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/tabs.png" data-name="tabs.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/tabs.png" data-name="tabs.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption><img loading="lazy" src="diff/tabs.png" data-name="tabs.png" data-mode="diff" class="thumb" /></figure></div>
     </section>
-    <section class="row" data-status="unchanged" data-name="tooltip.png" data-has-both="true">
-      <header><h2>tooltip.png</h2><span class="pill pass">ok</span></header>
-      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/tooltip.png" data-name="tooltip.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/tooltip.png" data-name="tooltip.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
+    <section class="row" data-status="changed" data-name="tooltip.png" data-has-both="true">
+      <header><h2>tooltip.png</h2><span class="pill fail">changed</span><div class="meta">173504 pixels differ · size mismatch</div><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/feat/self-hosted-visual-regression/regression-test/src/app/tooltip/page.tsx" target="_blank" rel="noopener">tooltip/page.tsx</a></header>
+      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/tooltip.png" data-name="tooltip.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/tooltip.png" data-name="tooltip.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption><img loading="lazy" src="diff/tooltip.png" data-name="tooltip.png" data-mode="diff" class="thumb" /></figure></div>
     </section>
-    <section class="row" data-status="unchanged" data-name="treebrowser.png" data-has-both="true">
-      <header><h2>treebrowser.png</h2><span class="pill pass">ok</span></header>
-      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/treebrowser.png" data-name="treebrowser.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/treebrowser.png" data-name="treebrowser.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
+    <section class="row" data-status="changed" data-name="treebrowser.png" data-has-both="true">
+      <header><h2>treebrowser.png</h2><span class="pill fail">changed</span><div class="meta">16137 pixels differ · size mismatch</div><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/feat/self-hosted-visual-regression/regression-test/src/app/treebrowser/page.tsx" target="_blank" rel="noopener">treebrowser/page.tsx</a></header>
+      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/treebrowser.png" data-name="treebrowser.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/treebrowser.png" data-name="treebrowser.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption><img loading="lazy" src="diff/treebrowser.png" data-name="treebrowser.png" data-mode="diff" class="thumb" /></figure></div>
     </section>
-    <section class="row" data-status="unchanged" data-name="view.png" data-has-both="true">
-      <header><h2>view.png</h2><span class="pill pass">ok</span></header>
-      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/view.png" data-name="view.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/view.png" data-name="view.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
+    <section class="row" data-status="changed" data-name="view.png" data-has-both="true">
+      <header><h2>view.png</h2><span class="pill fail">changed</span><div class="meta">101577 pixels differ · size mismatch</div><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/feat/self-hosted-visual-regression/regression-test/src/app/view/page.tsx" target="_blank" rel="noopener">view/page.tsx</a></header>
+      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/view.png" data-name="view.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/view.png" data-name="view.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption><img loading="lazy" src="diff/view.png" data-name="view.png" data-mode="diff" class="thumb" /></figure></div>
     </section></main>
 
   <div class="lightbox" id="lb" aria-hidden="true">
@@ -209,14 +215,33 @@
 
   <script>
     (function () {
+      const state = { filter: 'all', query: '' }
+
+      function applyFilters() {
+        const q = state.query.toLowerCase()
+        document.querySelectorAll('.row').forEach(r => {
+          const matchesFilter = state.filter === 'all' || r.dataset.status === state.filter
+          const matchesQuery = !q || r.dataset.name.toLowerCase().includes(q)
+          if (matchesFilter && matchesQuery) r.removeAttribute('data-hidden')
+          else r.setAttribute('data-hidden', '')
+        })
+      }
+
       document.querySelectorAll('.filter button').forEach(btn => {
         btn.addEventListener('click', () => {
-          const f = btn.dataset.filter
-          document.querySelectorAll('.row').forEach(r => {
-            if (f === 'all' || r.dataset.status === f) r.removeAttribute('data-hidden')
-            else r.setAttribute('data-hidden', '')
-          })
+          state.filter = btn.dataset.filter
+          document.querySelectorAll('.filter button').forEach(b => b.classList.toggle('active', b === btn))
+          applyFilters()
         })
+      })
+
+      let searchTimer
+      document.getElementById('search').addEventListener('input', (e) => {
+        clearTimeout(searchTimer)
+        searchTimer = setTimeout(() => {
+          state.query = e.target.value.trim()
+          applyFilters()
+        }, 150)
       })
 
       const lb = document.getElementById('lb')
