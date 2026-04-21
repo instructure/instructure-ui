@@ -357,6 +357,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
       prevMonthLabel,
       nextMonthLabel,
       datePickerDialog,
+      selectedLabel,
       disabledDates,
       withYearPicker
     } = this.props
@@ -395,7 +396,8 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
             calendarIcon,
             prevMonthButton: prevMonthLabel,
             nextMonthButton: nextMonthLabel,
-            datePickerDialog
+            datePickerDialog,
+            selectedLabel
           }}
           withYearPicker={withYearPicker}
           value={this.state.dateInputText}

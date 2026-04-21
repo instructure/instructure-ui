@@ -253,6 +253,11 @@ type DateInputOwnProps = {
     startYear: number
     endYear: number
   }
+  /**
+   * Screen reader label appended to the date label when the day is selected.
+   * Used to announce the selected state to assistive technologies.
+   */
+  selectedLabel?: string
 }
 
 type PropKeys = keyof DateInputOwnProps
@@ -302,7 +307,9 @@ const allowedProps: AllowedPropKeys = [
   'disabledDateErrorMessage',
   'invalidDateErrorMessage',
   'locale',
-  'timezone'
+  'timezone',
+  'withYearPicker',
+  'selectedLabel'
 ]
 
 type DateInputState = {

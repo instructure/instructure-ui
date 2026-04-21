@@ -40,6 +40,7 @@ const generateDays = (count = Calendar.DAY_COUNT) => {
         key={date.toISOString()}
         date={date.toISOString()}
         label={date.toISOString()}
+        selectedLabel="Selected"
         isOutsideMonth={date.getMonth() !== 7}
       >
         {date.getDate()}
@@ -71,14 +72,14 @@ describe('<Calendar />', () => {
 
   describe('with minimal config', () => {
     it('should render 44 buttons without config', async () => {
-      render(<Calendar />)
+      render(<Calendar selectedLabel="Selected" />)
       const buttons = document.getElementsByTagName('button')
 
       expect(buttons.length).toEqual(44)
     })
 
     it('should render proper week names by default', async () => {
-      const { container } = render(<Calendar />)
+      const { container } = render(<Calendar selectedLabel="Selected" />)
       const thead = container.querySelector('thead')
 
       expect(thead).toHaveTextContent(
@@ -87,7 +88,9 @@ describe('<Calendar />', () => {
     })
 
     it('should render proper week names if locale is set', async () => {
-      const { container } = render(<Calendar locale="hu" />)
+      const { container } = render(
+        <Calendar locale="hu" selectedLabel="Selected" />
+      )
       const thead = container.querySelector('thead')
 
       expect(thead).toHaveTextContent(
@@ -100,6 +103,7 @@ describe('<Calendar />', () => {
         <Calendar
           currentDate="2023-12-15"
           disabledDates={['2023-12-22', '2023-12-12', '2023-12-11']}
+          selectedLabel="Selected"
         />
       )
       const buttons = container.querySelectorAll('button[disabled]')
@@ -115,23 +119,29 @@ describe('<Calendar />', () => {
     })
 
     it('should indicate selected day', async () => {
-      render(<Calendar currentDate="2023-12-15" selectedDate="2023-12-22" />)
+      render(
+        <Calendar
+          currentDate="2023-12-15"
+          selectedDate="2023-12-22"
+          selectedLabel="Selected"
+        />
+      )
 
-      const selectedDay =
-        screen.queryByText('22 December 2023')?.parentElement?.parentElement
+      const selectedDay = screen.queryByText('22 December 2023, Selected')
+        ?.parentElement?.parentElement
 
       expect(selectedDay).toBeDefined()
-      if (selectedDay) {
-        expect(window.getComputedStyle(selectedDay)?.background).toBe(
-          'rgb(3, 137, 61)'
-        )
-      }
+      expect(window.getComputedStyle(selectedDay!).background).toBe(
+        'rgb(3, 137, 61)'
+      )
     })
   })
 
   it('should render children', async () => {
     const { container } = render(
-      <Calendar renderWeekdayLabels={weekdayLabels}>{generateDays()}</Calendar>
+      <Calendar renderWeekdayLabels={weekdayLabels} selectedLabel="Selected">
+        {generateDays()}
+      </Calendar>
     )
 
     const calendarDays = container.querySelectorAll(
@@ -145,7 +155,7 @@ describe('<Calendar />', () => {
     const count = Calendar.DAY_COUNT - 1
 
     render(
-      <Calendar renderWeekdayLabels={weekdayLabels}>
+      <Calendar renderWeekdayLabels={weekdayLabels} selectedLabel="Selected">
         {generateDays(count)}
       </Calendar>
     )
@@ -160,7 +170,9 @@ describe('<Calendar />', () => {
 
   it('should render weekday labels', async () => {
     const { container, rerender } = render(
-      <Calendar renderWeekdayLabels={weekdayLabels}>{generateDays()}</Calendar>
+      <Calendar renderWeekdayLabels={weekdayLabels} selectedLabel="Selected">
+        {generateDays()}
+      </Calendar>
     )
 
     const originalHeaders = container.querySelectorAll('th')
@@ -182,7 +194,10 @@ describe('<Calendar />', () => {
 
     // Set prop: renderWeekdayLabels
     rerender(
-      <Calendar renderWeekdayLabels={functionalWeekdayLabels}>
+      <Calendar
+        renderWeekdayLabels={functionalWeekdayLabels}
+        selectedLabel="Selected"
+      >
         {generateDays()}
       </Calendar>
     )
@@ -196,7 +211,11 @@ describe('<Calendar />', () => {
   })
 
   it('should warn if 7 weekday labels are not provided', async () => {
-    render(<Calendar renderWeekdayLabels={[]}>{generateDays()}</Calendar>)
+    render(
+      <Calendar renderWeekdayLabels={[]} selectedLabel="Selected">
+        {generateDays()}
+      </Calendar>
+    )
 
     const expectedErrorMessage =
       '`renderWeekdayLabels` should be an array with 7 labels (one for each weekday). 0 provided.'
@@ -209,7 +228,9 @@ describe('<Calendar />', () => {
 
   it('should format the weekday labels and days correctly', async () => {
     const { container } = render(
-      <Calendar renderWeekdayLabels={weekdayLabels}>{generateDays()}</Calendar>
+      <Calendar renderWeekdayLabels={weekdayLabels} selectedLabel="Selected">
+        {generateDays()}
+      </Calendar>
     )
 
     const headerRow = container.querySelectorAll('thead > tr')
@@ -239,6 +260,7 @@ describe('<Calendar />', () => {
       <Calendar
         renderWeekdayLabels={weekdayLabels}
         renderNavigationLabel={navLabel}
+        selectedLabel="Selected"
       >
         {generateDays()}
       </Calendar>
@@ -254,6 +276,7 @@ describe('<Calendar />', () => {
       <Calendar
         renderWeekdayLabels={weekdayLabels}
         renderNavigationLabel={() => navLabel}
+        selectedLabel="Selected"
       >
         {generateDays()}
       </Calendar>
@@ -267,7 +290,9 @@ describe('<Calendar />', () => {
 
   it('should render next and prev buttons', async () => {
     const { rerender } = render(
-      <Calendar renderWeekdayLabels={weekdayLabels}>{generateDays()}</Calendar>
+      <Calendar renderWeekdayLabels={weekdayLabels} selectedLabel="Selected">
+        {generateDays()}
+      </Calendar>
     )
     const defaultPrevButton = screen.getByText('Previous month')
     const defaultNextButton = screen.getByText('Next month')
@@ -280,6 +305,7 @@ describe('<Calendar />', () => {
         renderWeekdayLabels={weekdayLabels}
         renderPrevMonthButton={<button>test-prev</button>}
         renderNextMonthButton={<button>test-next</button>}
+        selectedLabel="Selected"
       >
         {generateDays()}
       </Calendar>
@@ -295,6 +321,7 @@ describe('<Calendar />', () => {
         renderWeekdayLabels={weekdayLabels}
         renderPrevMonthButton={() => <button>func-test-prev</button>}
         renderNextMonthButton={() => <button>func-test-next</button>}
+        selectedLabel="Selected"
       >
         {generateDays()}
       </Calendar>
@@ -317,6 +344,7 @@ describe('<Calendar />', () => {
         renderNextMonthButton={<button>next month</button>}
         onRequestRenderPrevMonth={onRequestRenderPrevMonth}
         onRequestRenderNextMonth={onRequestRenderNextMonth}
+        selectedLabel="Selected"
       >
         {generateDays()}
       </Calendar>
@@ -340,7 +368,11 @@ describe('<Calendar />', () => {
   describe('when role="listbox"', () => {
     it('should set role="listbox" on table root and role="presentation" on the correct elements', async () => {
       const { container } = render(
-        <Calendar renderWeekdayLabels={weekdayLabels} role="listbox">
+        <Calendar
+          renderWeekdayLabels={weekdayLabels}
+          role="listbox"
+          selectedLabel="Selected"
+        >
           {generateDays()}
         </Calendar>
       )
@@ -361,7 +393,11 @@ describe('<Calendar />', () => {
 
     it("should link each day with it's weekday header via `aria-describedby`", async () => {
       const { container } = render(
-        <Calendar renderWeekdayLabels={weekdayLabels} role="listbox">
+        <Calendar
+          renderWeekdayLabels={weekdayLabels}
+          role="listbox"
+          selectedLabel="Selected"
+        >
           {generateDays()}
         </Calendar>
       )
@@ -379,11 +415,119 @@ describe('<Calendar />', () => {
         )
       })
     })
+
+    it('should set role="option" and aria-selected on each day', async () => {
+      const { container } = render(
+        <Calendar
+          renderWeekdayLabels={weekdayLabels}
+          role="listbox"
+          currentDate="2019-08-01"
+          selectedDate="2019-08-02"
+          selectedLabel="Selected"
+        >
+          {generateDays()}
+        </Calendar>
+      )
+
+      const days = container.querySelectorAll('tbody [data-cid="Calendar.Day"]')
+      expect(days.length).toBe(Calendar.DAY_COUNT)
+      days.forEach((day) => {
+        expect(day).toHaveAttribute('role', 'option')
+        expect(day).toHaveAttribute('aria-selected')
+      })
+    })
+
+    it('should announce selected state via accessible label when selectedLabel is provided', async () => {
+      const { container } = render(
+        <Calendar
+          renderWeekdayLabels={weekdayLabels}
+          role="listbox"
+          currentDate="2019-08-01"
+          selectedDate="2019-08-02"
+          selectedLabel="selected"
+        />
+      )
+
+      const days = container.querySelectorAll('tbody [data-cid="Calendar.Day"]')
+
+      // Check that the selected day's accessible label includes "selected"
+      const selectedDay = Array.from(days).find((day) => {
+        const screenReaderContent = day.querySelector(
+          '[class*="-screenReaderContent"]'
+        )
+        return screenReaderContent?.textContent?.includes('selected')
+      })
+      expect(selectedDay).toBeDefined()
+
+      // Unselected days should not have "selected" in their label
+      const unselectedDays = Array.from(days).filter((day) => {
+        const screenReaderContent = day.querySelector(
+          '[class*="-screenReaderContent"]'
+        )
+        return !screenReaderContent?.textContent?.includes('selected')
+      })
+      expect(unselectedDays.length).toBe(Calendar.DAY_COUNT - 1)
+    })
+  })
+
+  describe('when role="table" (default)', () => {
+    it('should set role="button" on each day and not set aria-selected', async () => {
+      const { container } = render(
+        <Calendar
+          renderWeekdayLabels={weekdayLabels}
+          currentDate="2019-08-01"
+          selectedDate="2019-08-02"
+          selectedLabel="Selected"
+        />
+      )
+
+      const days = container.querySelectorAll('tbody [data-cid="Calendar.Day"]')
+      expect(days.length).toBe(Calendar.DAY_COUNT)
+      days.forEach((day) => {
+        expect(day).toHaveAttribute('role', 'button')
+        expect(day).not.toHaveAttribute('aria-selected')
+      })
+    })
+
+    it('should announce selected state via accessible label when selectedLabel is provided', async () => {
+      const { container } = render(
+        <Calendar
+          renderWeekdayLabels={weekdayLabels}
+          currentDate="2019-08-01"
+          selectedDate="2019-08-02"
+          selectedLabel="selected"
+        />
+      )
+
+      const days = container.querySelectorAll('tbody [data-cid="Calendar.Day"]')
+
+      // Check that the selected day's accessible label includes "selected"
+      const selectedDay = Array.from(days).find((day) => {
+        const screenReaderContent = day.querySelector(
+          '[class*="-screenReaderContent"]'
+        )
+        return screenReaderContent?.textContent?.includes('selected')
+      })
+      expect(selectedDay).toBeDefined()
+
+      // Unselected days should not have "selected" in their label
+      const unselectedDays = Array.from(days).filter((day) => {
+        const screenReaderContent = day.querySelector(
+          '[class*="-screenReaderContent"]'
+        )
+        return !screenReaderContent?.textContent?.includes('selected')
+      })
+      expect(unselectedDays.length).toBe(Calendar.DAY_COUNT - 1)
+    })
   })
 
   it('should render root as designated by the `as` prop', async () => {
     render(
-      <Calendar renderWeekdayLabels={weekdayLabels} as="ul">
+      <Calendar
+        renderWeekdayLabels={weekdayLabels}
+        as="ul"
+        selectedLabel="Selected"
+      >
         {generateDays()}
       </Calendar>
     )

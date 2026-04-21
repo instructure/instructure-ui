@@ -33,6 +33,7 @@ type: example
         currentDate="2023-12-15"
         disabledDates={['2023-12-22', '2023-12-12', '2023-12-11']}
         selectedDate={selectedDate}
+        selectedLabel="selected"
         onRequestRenderNextMonth={(_e, requestedMonth) =>
           setVisibleMonth(requestedMonth)
         }
@@ -64,6 +65,7 @@ type: example
         currentDate="2024-02-29"
         disabledDates={['2023-12-22', '2023-12-12', '2023-12-11']}
         selectedDate={selectedDate}
+        selectedLabel="selected"
         onRequestRenderNextMonth={(_e, requestedMonth) =>
           setVisibleMonth(requestedMonth)
         }

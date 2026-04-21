@@ -131,6 +131,11 @@ type CalendarOwnProps = {
    */
   selectedDate?: string
   /**
+   * Screen reader label appended to the date label when the day is selected.
+   * Used to announce the selected state to assistive technologies.
+   */
+  selectedLabel: string
+  /**
    * A timezone identifier in the format: *Area/Location*
    *
    * See [List of tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for the list
@@ -194,6 +199,7 @@ const allowedProps: AllowedPropKeys = [
   'renderWeekdayLabels',
   'role',
   'selectedDate',
+  'selectedLabel',
   'timezone',
   'visibleMonth'
 ]

@@ -250,6 +250,11 @@ type DateTimeInputProps = {
    * NOTE: this won't call onChange, so you have to reset the value manually when calling reset
    */
   reset?: (reset: () => void) => void
+  /**
+   * Screen reader label appended to the date label when the day is selected.
+   * Used to announce the selected state to assistive technologies.
+   */
+  selectedLabel?: string
 }
 
 type DateTimeInputState = {
@@ -309,7 +314,8 @@ const allowedProps: AllowedPropKeys = [
   'disabledDates',
   'disabledDateTimeMessage',
   'allowNonStepInput',
-  'reset'
+  'reset',
+  'selectedLabel'
 ]
 
 export type { DateTimeInputProps, DateTimeInputState }

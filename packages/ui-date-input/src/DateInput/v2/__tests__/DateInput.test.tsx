@@ -42,7 +42,9 @@ const DateInputExample = () => {
       screenReaderLabels={{
         calendarIcon: 'Calendar',
         nextMonthButton: 'Next month',
-        prevMonthButton: 'Previous month'
+        prevMonthButton: 'Previous month',
+        datePickerDialog: 'Date picker',
+        selectedLabel: 'Selected'
       }}
       value={inputValue}
       onChange={(_e, inputValue, _dateString) => {
@@ -92,7 +94,9 @@ describe('<DateInput />', () => {
         screenReaderLabels={{
           calendarIcon: 'Calendar',
           nextMonthButton: 'Next month',
-          prevMonthButton: 'Previous month'
+          prevMonthButton: 'Previous month',
+          datePickerDialog: 'Date picker',
+          selectedLabel: 'Selected'
         }}
         placeholder={placeholder}
         value=""
@@ -111,7 +115,9 @@ describe('<DateInput />', () => {
         screenReaderLabels={{
           calendarIcon: iconLabel,
           nextMonthButton: 'Next month',
-          prevMonthButton: 'Previous month'
+          prevMonthButton: 'Previous month',
+          datePickerDialog: 'Date picker',
+          selectedLabel: 'Selected'
         }}
         value=""
       />
@@ -135,7 +141,9 @@ describe('<DateInput />', () => {
         screenReaderLabels={{
           calendarIcon: 'Calendar',
           nextMonthButton: 'Next month',
-          prevMonthButton: 'Previous month'
+          prevMonthButton: 'Previous month',
+          datePickerDialog: 'Date picker',
+          selectedLabel: 'Selected'
         }}
       />
     )
@@ -153,7 +161,9 @@ describe('<DateInput />', () => {
         screenReaderLabels={{
           calendarIcon: iconLabel,
           nextMonthButton: 'Next month',
-          prevMonthButton: 'Previous month'
+          prevMonthButton: 'Previous month',
+          datePickerDialog: 'Date picker',
+          selectedLabel: 'Selected'
         }}
         value=""
         renderCalendarIcon={<HeartInstUIIcon />}
@@ -197,7 +207,9 @@ describe('<DateInput />', () => {
         screenReaderLabels={{
           calendarIcon: 'Calendar',
           nextMonthButton: nextMonthLabel,
-          prevMonthButton: prevMonthLabel
+          prevMonthButton: prevMonthLabel,
+          datePickerDialog: 'Date picker',
+          selectedLabel: 'Selected'
         }}
         value=""
       />
@@ -243,7 +255,9 @@ describe('<DateInput />', () => {
         screenReaderLabels={{
           calendarIcon: 'Calendar',
           nextMonthButton: 'Next month',
-          prevMonthButton: 'Previous month'
+          prevMonthButton: 'Previous month',
+          datePickerDialog: 'Date picker',
+          selectedLabel: 'Selected'
         }}
         locale="en-GB"
         timezone="UTC"
@@ -264,7 +278,9 @@ describe('<DateInput />', () => {
         screenReaderLabels={{
           calendarIcon: 'Calendar',
           nextMonthButton: 'Next month',
-          prevMonthButton: 'Previous month'
+          prevMonthButton: 'Previous month',
+          datePickerDialog: 'Date picker',
+          selectedLabel: 'Selected'
         }}
         value=""
         interaction={interactionDisabled}
@@ -283,7 +299,9 @@ describe('<DateInput />', () => {
         screenReaderLabels={{
           calendarIcon: 'Calendar',
           nextMonthButton: 'Next month',
-          prevMonthButton: 'Previous month'
+          prevMonthButton: 'Previous month',
+          datePickerDialog: 'Date picker',
+          selectedLabel: 'Selected'
         }}
         value=""
         interaction={interactionReadOnly}
@@ -311,7 +329,9 @@ describe('<DateInput />', () => {
         screenReaderLabels={{
           calendarIcon: 'Calendar',
           nextMonthButton: 'Next month',
-          prevMonthButton: 'Previous month'
+          prevMonthButton: 'Previous month',
+          datePickerDialog: 'Date picker',
+          selectedLabel: 'Selected'
         }}
         value=""
         isRequired
@@ -330,7 +350,9 @@ describe('<DateInput />', () => {
         screenReaderLabels={{
           calendarIcon: 'Calendar',
           nextMonthButton: 'Next month',
-          prevMonthButton: 'Previous month'
+          prevMonthButton: 'Previous month',
+          datePickerDialog: 'Date picker',
+          selectedLabel: 'Selected'
         }}
         value=""
         onBlur={onBlur}
@@ -356,7 +378,9 @@ describe('<DateInput />', () => {
           screenReaderLabels={{
             calendarIcon: 'Calendar',
             nextMonthButton: 'Next month',
-            prevMonthButton: 'Previous month'
+            prevMonthButton: 'Previous month',
+            datePickerDialog: 'Date picker',
+            selectedLabel: 'Selected'
           }}
           value={inputValue}
           onChange={(_e, inputValue, _dateString) => {
@@ -398,7 +422,9 @@ describe('<DateInput />', () => {
         screenReaderLabels={{
           calendarIcon: 'Calendar',
           nextMonthButton: 'Next month',
-          prevMonthButton: 'Previous month'
+          prevMonthButton: 'Previous month',
+          datePickerDialog: 'Date picker',
+          selectedLabel: 'Selected'
         }}
         value=""
         messages={messages}
@@ -425,7 +451,8 @@ describe('<DateInput />', () => {
           calendarIcon: 'Calendar',
           nextMonthButton: 'Next month',
           prevMonthButton: 'Previous month',
-          datePickerDialog: datePickerLabel
+          datePickerDialog: datePickerLabel,
+          selectedLabel: 'Selected'
         }}
         value=""
       />

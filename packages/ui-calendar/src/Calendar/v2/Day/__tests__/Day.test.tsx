@@ -31,7 +31,11 @@ import { Day } from '../index'
 describe('Day', () => {
   it('should render children', async () => {
     const { rerender } = render(
-      <Day date="2019-08-02" label="1 August 2019 Friday">
+      <Day
+        date="2019-08-02"
+        label="1 August 2019 Friday"
+        selectedLabel="Selected"
+      >
         8
       </Day>
     )
@@ -40,7 +44,11 @@ describe('Day', () => {
     expect(child).toBeInTheDocument()
 
     rerender(
-      <Day date="2019-08-02" label="1 August 2019 Friday">
+      <Day
+        date="2019-08-02"
+        label="1 August 2019 Friday"
+        selectedLabel="Selected"
+      >
         31
       </Day>
     )
@@ -52,7 +60,7 @@ describe('Day', () => {
   it('should have an accessible label', async () => {
     const label = '1 August 2019 Friday'
     const { container } = render(
-      <Day date="2019-08-02" label={label}>
+      <Day date="2019-08-02" label={label} selectedLabel="Selected">
         8
       </Day>
     )
@@ -66,7 +74,12 @@ describe('Day', () => {
 
   it('should set aria-current="date" when `isToday`', async () => {
     const { container, rerender } = render(
-      <Day date="2019-08-02" label="1 August 2019 Friday" isToday>
+      <Day
+        date="2019-08-02"
+        label="1 August 2019 Friday"
+        selectedLabel="Selected"
+        isToday
+      >
         8
       </Day>
     )
@@ -75,7 +88,12 @@ describe('Day', () => {
     expect(today).toHaveAttribute('aria-current', 'date')
 
     rerender(
-      <Day date="2019-08-02" label="1 August 2019 Friday" isToday={false}>
+      <Day
+        date="2019-08-02"
+        label="1 August 2019 Friday"
+        selectedLabel="Selected"
+        isToday={false}
+      >
         8
       </Day>
     )
@@ -86,7 +104,11 @@ describe('Day', () => {
 
   it('should not set aria-selected without a role', async () => {
     const { container, rerender } = render(
-      <Day date="2019-08-02" label="1 August 2019 Friday">
+      <Day
+        date="2019-08-02"
+        label="1 August 2019 Friday"
+        selectedLabel="Selected"
+      >
         8
       </Day>
     )
@@ -95,7 +117,12 @@ describe('Day', () => {
     expect(day).not.toHaveAttribute('aria-selected')
 
     rerender(
-      <Day date="2019-08-02" label="1 August 2019 Friday" isSelected={true}>
+      <Day
+        date="2019-08-02"
+        label="1 August 2019 Friday"
+        selectedLabel="Selected"
+        isSelected={true}
+      >
         8
       </Day>
     )
@@ -106,7 +133,12 @@ describe('Day', () => {
 
   it('should set aria-selected="true/false" when `isSelected` and `role` is `option` or `gridcell`', async () => {
     const { container, rerender } = render(
-      <Day date="2019-08-02" label="1 August 2019 Friday" role="option">
+      <Day
+        date="2019-08-02"
+        label="1 August 2019 Friday"
+        selectedLabel="Selected"
+        role="option"
+      >
         8
       </Day>
     )
@@ -117,6 +149,7 @@ describe('Day', () => {
       <Day
         date="2019-08-02"
         label="1 August 2019 Friday"
+        selectedLabel="Selected"
         role="option"
         isSelected={true}
       >
@@ -130,6 +163,7 @@ describe('Day', () => {
       <Day
         date="2019-08-02"
         label="1 August 2019 Friday"
+        selectedLabel="Selected"
         role="gridcell"
         isSelected={false}
       >
@@ -143,6 +177,7 @@ describe('Day', () => {
       <Day
         date="2019-08-02"
         label="1 August 2019 Friday"
+        selectedLabel="Selected"
         role="gridcell"
         isSelected={true}
       >
@@ -158,7 +193,12 @@ describe('Day', () => {
     const date = '2019-08-02'
 
     const { container } = render(
-      <Day date={date} label="1 August 2019 Friday" onClick={onClick}>
+      <Day
+        date={date}
+        label="1 August 2019 Friday"
+        selectedLabel="Selected"
+        onClick={onClick}
+      >
         8
       </Day>
     )
@@ -182,6 +222,7 @@ describe('Day', () => {
       <Day
         date={date}
         label="1 August 2019 Friday"
+        selectedLabel="Selected"
         onKeyDown={onKeyDown}
         onClick={() => {}}
       >
@@ -208,6 +249,7 @@ describe('Day', () => {
       <Day
         date="2019-08-02"
         label="1 August 2019 Friday"
+        selectedLabel="Selected"
         onClick={onClick}
         interaction="disabled"
       >
@@ -233,6 +275,7 @@ describe('Day', () => {
       <Day
         date="2019-08-02"
         label="1 August 2019 Friday"
+        selectedLabel="Selected"
         elementRef={elementRef}
       >
         8
@@ -246,7 +289,11 @@ describe('Day', () => {
   describe('element type', () => {
     it('should render as a span by default', async () => {
       const { container } = render(
-        <Day date="2019-08-02" label="1 August 2019 Friday">
+        <Day
+          date="2019-08-02"
+          label="1 August 2019 Friday"
+          selectedLabel="Selected"
+        >
           8
         </Day>
       )
@@ -257,7 +304,12 @@ describe('Day', () => {
 
     it('should render as a button when onClick is provided', async () => {
       const { container } = render(
-        <Day date="2019-08-02" label="1 August 2019 Friday" onClick={() => {}}>
+        <Day
+          date="2019-08-02"
+          label="1 August 2019 Friday"
+          selectedLabel="Selected"
+          onClick={() => {}}
+        >
           8
         </Day>
       )
@@ -271,6 +323,7 @@ describe('Day', () => {
         <Day
           date="2019-08-02"
           label="1 August 2019 Friday"
+          selectedLabel="Selected"
           onClick={() => {}}
           as="li"
         >

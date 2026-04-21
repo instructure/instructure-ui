@@ -328,7 +328,8 @@ class DateInput extends Component<DateInputProps, DateInputState> {
       value,
       onChange,
       disabledDates,
-      currentDate
+      currentDate,
+      selectedLabel
     } = this.props
 
     const isValidDate = value
@@ -365,7 +366,8 @@ class DateInput extends Component<DateInputProps, DateInputState> {
           renderNavigationLabel,
           renderWeekdayLabels,
           renderNextMonthButton: this.renderMonthNavigationButton('next'),
-          renderPrevMonthButton: this.renderMonthNavigationButton('prev')
+          renderPrevMonthButton: this.renderMonthNavigationButton('prev'),
+          selectedLabel
         }) as CalendarProps)}
         {...noChildrenProps}
       >
