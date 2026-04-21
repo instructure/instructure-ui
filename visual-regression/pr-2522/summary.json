@@ -1,0 +1,139 @@
+{
+  "summary": {
+    "total": 32,
+    "unchanged": 0,
+    "changed": 0,
+    "added": 32,
+    "removed": 0
+  },
+  "results": [
+    {
+      "name": "alert.png",
+      "status": "added"
+    },
+    {
+      "name": "avatar.png",
+      "status": "added"
+    },
+    {
+      "name": "badge.png",
+      "status": "added"
+    },
+    {
+      "name": "billboard.png",
+      "status": "added"
+    },
+    {
+      "name": "breadcrumb.png",
+      "status": "added"
+    },
+    {
+      "name": "button-and-derivatives.png",
+      "status": "added"
+    },
+    {
+      "name": "byline.png",
+      "status": "added"
+    },
+    {
+      "name": "calendar.png",
+      "status": "added"
+    },
+    {
+      "name": "checkbox.png",
+      "status": "added"
+    },
+    {
+      "name": "checkboxgroup.png",
+      "status": "added"
+    },
+    {
+      "name": "colorpicker.png",
+      "status": "added"
+    },
+    {
+      "name": "contextview.png",
+      "status": "added"
+    },
+    {
+      "name": "custom-and-lucide-icons.png",
+      "status": "added"
+    },
+    {
+      "name": "dateinput-dateinput2.png",
+      "status": "added"
+    },
+    {
+      "name": "datetimeinput.png",
+      "status": "added"
+    },
+    {
+      "name": "drilldown.png",
+      "status": "added"
+    },
+    {
+      "name": "filedrop.png",
+      "status": "added"
+    },
+    {
+      "name": "form-errors.png",
+      "status": "added"
+    },
+    {
+      "name": "heading.png",
+      "status": "added"
+    },
+    {
+      "name": "img.png",
+      "status": "added"
+    },
+    {
+      "name": "link.png",
+      "status": "added"
+    },
+    {
+      "name": "menu.png",
+      "status": "added"
+    },
+    {
+      "name": "metric-pill-tag-timeselect-text.png",
+      "status": "added"
+    },
+    {
+      "name": "options.png",
+      "status": "added"
+    },
+    {
+      "name": "pagination.png",
+      "status": "added"
+    },
+    {
+      "name": "progressbar.png",
+      "status": "added"
+    },
+    {
+      "name": "select-simpleselect.png",
+      "status": "added"
+    },
+    {
+      "name": "table.png",
+      "status": "added"
+    },
+    {
+      "name": "tabs.png",
+      "status": "added"
+    },
+    {
+      "name": "tooltip.png",
+      "status": "added"
+    },
+    {
+      "name": "treebrowser.png",
+      "status": "added"
+    },
+    {
+      "name": "view.png",
+      "status": "added"
+    }
+  ]
+}
