@@ -1,8 +1,8 @@
 {
   "summary": {
     "total": 32,
-    "unchanged": 32,
-    "changed": 0,
+    "unchanged": 31,
+    "changed": 1,
     "added": 0,
     "removed": 0
   },
@@ -39,8 +39,8 @@
     },
     {
       "name": "button-and-derivatives.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 5595,
       "sizeMismatch": false
     },
     {
