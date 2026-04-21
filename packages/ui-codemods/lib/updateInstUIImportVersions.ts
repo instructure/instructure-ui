@@ -53,6 +53,9 @@ function normalizeVersion(raw: string): string {
   return raw.replace(/\./g, '_')
 }
 
+// parseImportPath('@instructure/ui-button')         → { base: '@instructure/ui-button', version: '' }
+// parseImportPath('@instructure/ui-button/v11_7')       → { base: '@instructure/ui-button', version: 'v11_7' }
+// parseImportPath('react')                           → null
 function parseImportPath(importPath: string): ParsedImportPath | null {
   const match = importPath.match(/^(@instructure\/[^/]+)(\/(.+))?$/)
   if (!match) return null
@@ -63,18 +66,28 @@ function buildImportPath(packageName: string, version: string): string {
   return version ? `${packageName}/${version}` : packageName
 }
 
+// detectQuoteStyle(`import { Foo } from "@instructure/ui-button"`) → 'double'
+// detectQuoteStyle(`import { Foo } from '@instructure/ui-button'`) → 'single'
 function detectQuoteStyle(source: string): 'single' | 'double' {
   const match = source.match(/from\s+(['"])@instructure\//)
   return match?.[1] === '"' ? 'double' : 'single'
 }
 
+// detectSemi(`import { Foo } from '@instructure/ui-button';`) → true
+// detectSemi(`import { Foo } from '@instructure/ui-button'`)  → false
 function detectSemi(source: string): boolean {
-  const match = source.match(/^import\b.*?from\s+['"][^'"]+['"]\s*(;?)\s*$/m)
-  return match?.[1] === ';'
+  const importLine = source.match(
+    /^import\b[^'"\n]*from[ \t]+['"][^'"]+['"][^\n]*/m
+  )?.[0]
+  return importLine ? /;[ \t]*$/.test(importLine) : false
 }
 
+// stripImportSemis(`import { Foo } from '@instructure/ui-button';`) → `import { Foo } from '@instructure/ui-button'`
 function stripImportSemis(source: string): string {
-  return source.replace(/^(import\b.*?from\s+['"][^'"]+['"]\s*);$/gm, '$1')
+  return source.replace(
+    /^(import\b[^'"\n]*from[ \t]+['"][^'"]+['"][ \t]*);$/gm,
+    '$1'
+  )
 }
 
 function parseComponents(raw: unknown): string[] | undefined {
@@ -165,15 +178,19 @@ const updateInstUIImportVersionsCodemod =
 
         const line = path.node.loc?.start.line ?? 0
 
-        if (remaining.length === 0) {
-          // All specifiers match — simple path rewrite
+        if (remaining.length === 0 || parsed.base === '@instructure/ui') {
+          // Simple path rewrite: either all specifiers match, or the source
+          // is @instructure/ui whose version files re-export every
+          // symbol (including non-component utilities like canvas) — no split
+          // needed. Individual @instructure/* packages are split below because
+          // they don't have version files for their non-component exports.
           // eslint-disable-next-line no-param-reassign
           path.node.source.value = newPath
           report?.(`${filePath}:${line}  '${importPath}'  →  '${newPath}'`)
         } else {
-          // Mixed import — split into two declarations:
+          // Mixed import from an individual @instructure package — split:
           // keep non-matching specifiers at the original path,
-          // move matching specifiers to the new versioned path.
+          // move matching specifiers to the versioned path.
           // eslint-disable-next-line no-param-reassign
           path.node.specifiers = remaining
           const newDecl = j.importDeclaration(
