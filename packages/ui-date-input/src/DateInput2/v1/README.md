@@ -29,7 +29,8 @@ type: example
             calendarIcon: 'Calendar',
             nextMonthButton: 'Next month',
             prevMonthButton: 'Previous month',
-            datePickerDialog: 'Date picker'
+            datePickerDialog: 'Date picker',
+            selectedLabel: 'Selected'
           }}
           value={inputValue}
           width="20rem"
@@ -79,7 +80,8 @@ const Example = () => {
           calendarIcon: 'Calendar',
           nextMonthButton: 'Next month',
           prevMonthButton: 'Previous month',
-          datePickerDialog: 'Date picker'
+          datePickerDialog: 'Date picker',
+          selectedLabel: 'Selected'
         }}
         width="20rem"
         value={value}
@@ -93,7 +95,8 @@ const Example = () => {
           calendarIcon: 'Calendar',
           nextMonthButton: 'Next month',
           prevMonthButton: 'Previous month',
-          datePickerDialog: 'Date picker'
+          datePickerDialog: 'Date picker',
+          selectedLabel: 'Selected'
         }}
         width="20rem"
         value={value2}
@@ -108,7 +111,8 @@ const Example = () => {
           calendarIcon: 'Calendar',
           nextMonthButton: 'Next month',
           prevMonthButton: 'Previous month',
-          datePickerDialog: 'Date picker'
+          datePickerDialog: 'Date picker',
+          selectedLabel: 'Selected'
         }}
         width="20rem"
         value={value3}
@@ -160,7 +164,8 @@ type: example
             calendarIcon: 'Calendar',
             nextMonthButton: 'Next month',
             prevMonthButton: 'Previous month',
-            datePickerDialog: 'Date picker'
+            datePickerDialog: 'Date picker',
+            selectedLabel: 'Selected'
           }}
           value={inputValue}
           width="20rem"
@@ -230,7 +235,8 @@ const Example = () => {
         calendarIcon: 'Calendar',
         nextMonthButton: 'Next month',
         prevMonthButton: 'Previous month',
-        datePickerDialog: 'Date picker'
+        datePickerDialog: 'Date picker',
+        selectedLabel: 'Selected'
       }}
       width="20rem"
       value={value}
@@ -272,7 +278,8 @@ const Example = () => {
         calendarIcon: 'Calendar',
         nextMonthButton: 'Next month',
         prevMonthButton: 'Previous month',
-        datePickerDialog: 'Date picker'
+        datePickerDialog: 'Date picker',
+        selectedLabel: 'Selected'
       }}
       value={inputValue}
       locale="en-us"

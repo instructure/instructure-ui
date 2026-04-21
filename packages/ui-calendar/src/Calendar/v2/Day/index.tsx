@@ -116,6 +116,7 @@ class Day extends Component<CalendarDayProps> {
       interaction,
       isOutsideMonth,
       isSelected,
+      selectedLabel,
       isToday,
       onClick,
       onKeyDown,
@@ -163,7 +164,11 @@ class Day extends Component<CalendarDayProps> {
         data-cid="Calendar.Day"
       >
         <span css={styles?.day}>
-          <AccessibleContent alt={label}>
+          <AccessibleContent
+            alt={
+              selectedLabel && isSelected ? `${label}, ${selectedLabel}` : label
+            }
+          >
             {callRenderProp(children)}
           </AccessibleContent>
         </span>

@@ -436,9 +436,13 @@ class Calendar extends Component<CalendarProps, CalendarState> {
             <td key={day.props.date} role={role}>
               {role === 'presentation'
                 ? safeCloneElement(day, {
-                    'aria-describedby': this._weekdayHeaderIds[i]
+                    'aria-describedby': this._weekdayHeaderIds[i],
+                    role: 'option'
                   })
-                : day}
+                : safeCloneElement(day, {
+                    'aria-describedby': this._weekdayHeaderIds[i],
+                    role: 'button'
+                  })}
             </td>
           ))}
         </tr>
@@ -488,7 +492,7 @@ class Calendar extends Component<CalendarProps, CalendarState> {
   }
 
   renderDefaultdays() {
-    const { selectedDate } = this.props
+    const { selectedDate, selectedLabel } = this.props
     const { visibleMonth, today } = this.state
     // Sets it to the first local day of the week counting back from the start of the month.
     // Note that first day depends on the locale, e.g. it's Sunday in the US and
@@ -525,6 +529,7 @@ class Calendar extends Component<CalendarProps, CalendarState> {
           isToday={date.isSame(today, 'day')}
           isOutsideMonth={!date.isSame(visibleMonth, 'month')}
           label={date.format('D MMMM YYYY')} // used by screen readers
+          selectedLabel={selectedLabel}
           onClick={this.handleDayClick}
           interaction={this.isDisabledDate(date) ? 'disabled' : 'enabled'}
         >

@@ -306,6 +306,7 @@ const DateInput = forwardRef(
               withYearPicker={withYearPicker}
               onDateSelected={handleDateSelected}
               selectedDate={selectedDate}
+              selectedLabel={screenReaderLabels.selectedLabel}
               disabledDates={disabledDates}
               visibleMonth={selectedDate}
               locale={userLocale}

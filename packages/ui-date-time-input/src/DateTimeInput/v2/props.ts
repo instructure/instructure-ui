@@ -52,7 +52,11 @@ type DateTimeInputProps = {
   /**
    * Screen reader label for the date picker dialog.
    */
-  datePickerDialog?: string
+  datePickerDialog: string
+  /**
+   * Screen reader label for the selected date state in the calendar.
+   */
+  selectedLabel: string
   /**
    * HTML placeholder text to display when the date input has no value.
    * This should be hint text, not a label replacement.
@@ -300,7 +304,8 @@ const allowedProps: AllowedPropKeys = [
   'disabledDateTimeMessage',
   'allowNonStepInput',
   'reset',
-  'withYearPicker'
+  'withYearPicker',
+  'selectedLabel'
 ]
 
 export type { DateTimeInputProps, DateTimeInputState }

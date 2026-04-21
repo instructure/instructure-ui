@@ -60,6 +60,8 @@ describe('<DateTimeInput />', () => {
         calendarIcon="Open calendar"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
+        datePickerDialog="Date picker dialog"
+        selectedLabel="Selected date"
         dateRenderLabel="date-input"
         timeRenderLabel="time-input"
         invalidDateTimeMessage="whoops"
@@ -87,6 +89,8 @@ describe('<DateTimeInput />', () => {
         calendarIcon="Open calendar"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
+        datePickerDialog="Date picker dialog"
+        selectedLabel="Selected date"
         dateRenderLabel="date-input"
         timeRenderLabel="time-input"
         invalidDateTimeMessage="whoops"
@@ -116,6 +120,8 @@ describe('<DateTimeInput />', () => {
         calendarIcon="Open calendar"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
+        datePickerDialog="Date picker dialog"
+        selectedLabel="Selected date"
         dateRenderLabel="date-input"
         timeRenderLabel="time-input"
         invalidDateTimeMessage="whoops"
@@ -146,6 +152,8 @@ describe('<DateTimeInput />', () => {
         calendarIcon="Open calendar"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
+        datePickerDialog="Date picker dialog"
+        selectedLabel="Selected date"
         timeRenderLabel="time-input"
         invalidDateTimeMessage="whoops"
         locale={locale}
@@ -170,6 +178,8 @@ describe('<DateTimeInput />', () => {
         calendarIcon="Open calendar"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
+        datePickerDialog="Date picker dialog"
+        selectedLabel="Selected date"
         timeRenderLabel="time-input"
         locale="en-US"
         timezone="US/Eastern"
@@ -198,6 +208,8 @@ describe('<DateTimeInput />', () => {
         calendarIcon="Open calendar"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
+        datePickerDialog="Date picker dialog"
+        selectedLabel="Selected date"
         timeRenderLabel="time-input"
         locale="en-US"
         timezone="US/Eastern"
@@ -230,6 +242,8 @@ describe('<DateTimeInput />', () => {
         calendarIcon="Open calendar"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
+        datePickerDialog="Date picker dialog"
+        selectedLabel="Selected date"
         timeRenderLabel="time-input"
         invalidDateTimeMessage="whoops"
         locale={locale}
@@ -258,6 +272,8 @@ describe('<DateTimeInput />', () => {
         calendarIcon="Open calendar"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
+        datePickerDialog="Date picker dialog"
+        selectedLabel="Selected date"
         timeRenderLabel="time-input"
         invalidDateTimeMessage="whoops"
         locale="en-US"
@@ -286,6 +302,8 @@ describe('<DateTimeInput />', () => {
         calendarIcon="Open calendar"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
+        datePickerDialog="Date picker dialog"
+        selectedLabel="Selected date"
         timeRenderLabel="time-input"
         invalidDateTimeMessage="whoops"
         locale={locale}
@@ -309,6 +327,8 @@ describe('<DateTimeInput />', () => {
         calendarIcon="Open calendar"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
+        datePickerDialog="Date picker dialog"
+        selectedLabel="Selected date"
         timeRenderLabel="time-input"
         invalidDateTimeMessage="whoops"
         locale={locale}
@@ -330,6 +350,8 @@ describe('<DateTimeInput />', () => {
         calendarIcon="Open calendar"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
+        datePickerDialog="Date picker dialog"
+        selectedLabel="Selected date"
         timeRenderLabel="time-input"
         invalidDateTimeMessage="whoops"
         locale="en-US"
@@ -360,6 +382,8 @@ describe('<DateTimeInput />', () => {
       calendarIcon: 'Open calendar',
       prevMonthLabel: 'Previous month',
       nextMonthLabel: 'Next month',
+      datePickerDialog: 'Date picker dialog',
+      selectedLabel: 'Selected date',
       dateRenderLabel: 'date',
       timeRenderLabel: 'time',
       invalidDateTimeMessage: 'whoops',
@@ -388,6 +412,8 @@ describe('<DateTimeInput />', () => {
       calendarIcon: 'Open calendar',
       prevMonthLabel: 'Previous month',
       nextMonthLabel: 'Next month',
+      datePickerDialog: 'Date picker dialog',
+      selectedLabel: 'Selected date',
       timeRenderLabel: 'time-input',
       invalidDateTimeMessage: 'whoops',
       locale,
@@ -414,6 +440,8 @@ describe('<DateTimeInput />', () => {
       calendarIcon: 'Open calendar',
       prevMonthLabel: 'Previous month',
       nextMonthLabel: 'Next month',
+      datePickerDialog: 'Date picker dialog',
+      selectedLabel: 'Selected date',
       timeRenderLabel: 'time-input',
       invalidDateTimeMessage: 'whoops',
       locale,
@@ -437,6 +465,8 @@ describe('<DateTimeInput />', () => {
         calendarIcon="Open calendar"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
+        datePickerDialog="Date picker dialog"
+        selectedLabel="Selected date"
         timeRenderLabel="time-input"
         invalidDateTimeMessage="whoops"
         value="totally not a date"
@@ -458,6 +488,8 @@ describe('<DateTimeInput />', () => {
         calendarIcon="Open calendar"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
+        datePickerDialog="Date picker dialog"
+        selectedLabel="Selected date"
         timeRenderLabel="time-input"
         invalidDateTimeMessage="whoops"
         defaultValue="totally not a date"
@@ -481,6 +513,8 @@ describe('<DateTimeInput />', () => {
       calendarIcon: 'Open calendar',
       prevMonthLabel: 'Previous month',
       nextMonthLabel: 'Next month',
+      datePickerDialog: 'Date picker dialog',
+      selectedLabel: 'Selected date',
       timeRenderLabel: 'time-input',
       invalidDateTimeMessage: 'whoops',
       locale,
@@ -509,6 +543,8 @@ describe('<DateTimeInput />', () => {
       calendarIcon: 'Open calendar',
       prevMonthLabel: 'Previous month',
       nextMonthLabel: 'Next month',
+      datePickerDialog: 'Date picker dialog',
+      selectedLabel: 'Selected date',
       timeRenderLabel: 'time-input',
       invalidDateTimeMessage: 'whoops',
       locale,
@@ -543,6 +579,8 @@ describe('<DateTimeInput />', () => {
       calendarIcon: 'Open calendar',
       prevMonthLabel: 'Previous month',
       nextMonthLabel: 'Next month',
+      datePickerDialog: 'Date picker dialog',
+      selectedLabel: 'Selected date',
       timeRenderLabel: 'time-input',
       invalidDateTimeMessage: 'whoops',
       locale,
@@ -598,6 +636,8 @@ describe('<DateTimeInput />', () => {
           calendarIcon="Open calendar"
           prevMonthLabel="Previous month"
           nextMonthLabel="Next month"
+          datePickerDialog="Date picker dialog"
+          selectedLabel="Selected date"
           timeRenderLabel="time-input"
           invalidDateTimeMessage="whoops"
           value={dateTime.toISOString()}
@@ -618,6 +658,8 @@ describe('<DateTimeInput />', () => {
       calendarIcon: 'Open calendar',
       prevMonthLabel: 'Previous month',
       nextMonthLabel: 'Next month',
+      datePickerDialog: 'Date picker dialog',
+      selectedLabel: 'Selected date',
       timeRenderLabel: 'time-input',
       invalidDateTimeMessage: 'whoops',
       value: dateTime.toISOString(),
@@ -652,6 +694,8 @@ describe('<DateTimeInput />', () => {
       calendarIcon: 'Open calendar',
       prevMonthLabel: 'Previous month',
       nextMonthLabel: 'Next month',
+      datePickerDialog: 'Date picker dialog',
+      selectedLabel: 'Selected date',
       timeRenderLabel: 'time-input',
       invalidDateTimeMessage: 'whoops',
       value: dateTime.toISOString(),
@@ -681,6 +725,8 @@ describe('<DateTimeInput />', () => {
       calendarIcon: 'Open calendar',
       prevMonthLabel: 'Previous month',
       nextMonthLabel: 'Next month',
+      datePickerDialog: 'Date picker dialog',
+      selectedLabel: 'Selected date',
       timeRenderLabel: 'time-input',
       invalidDateTimeMessage: 'whoops',
       locale,
@@ -715,6 +761,8 @@ describe('<DateTimeInput />', () => {
         calendarIcon="Open calendar"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
+        datePickerDialog="Date picker dialog"
+        selectedLabel="Selected date"
         timeRenderLabel="time-input"
         invalidDateTimeMessage="whoops"
         locale={'en-US'}
@@ -746,6 +794,8 @@ describe('<DateTimeInput />', () => {
         calendarIcon="Open calendar"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
+        datePickerDialog="Date picker dialog"
+        selectedLabel="Selected date"
         timeRenderLabel="time-input"
         invalidDateTimeMessage="whoops"
         locale={'en-US'}
@@ -781,6 +831,8 @@ describe('<DateTimeInput />', () => {
         calendarIcon="Open calendar"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
+        datePickerDialog="Date picker dialog"
+        selectedLabel="Selected date"
         timeRenderLabel="time-input"
         invalidDateTimeMessage="whoops"
         defaultValue={defaultValue}
@@ -809,6 +861,8 @@ describe('<DateTimeInput />', () => {
         calendarIcon="Open calendar"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
+        datePickerDialog="Date picker dialog"
+        selectedLabel="Selected date"
         invalidDateTimeMessage="whoops"
         locale="en-US"
         timezone="US/Eastern"
@@ -847,6 +901,8 @@ describe('<DateTimeInput />', () => {
         calendarIcon="Open calendar"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
+        datePickerDialog="Date picker dialog"
+        selectedLabel="Selected date"
         invalidDateTimeMessage="whoops"
         locale={locale}
         timezone={timezone}
@@ -888,6 +944,8 @@ describe('<DateTimeInput />', () => {
         calendarIcon="Open calendar"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
+        datePickerDialog="Date picker dialog"
+        selectedLabel="Selected date"
         invalidDateTimeMessage="whoops"
         locale="en-US"
         timezone="US/Eastern"
@@ -921,6 +979,8 @@ describe('<DateTimeInput />', () => {
           calendarIcon="Open calendar"
           prevMonthLabel="Previous month"
           nextMonthLabel="Next month"
+          datePickerDialog="Date picker dialog"
+          selectedLabel="Selected date"
           invalidDateTimeMessage="whoops"
           locale="en-US"
           timezone="US/Eastern"
@@ -998,6 +1058,8 @@ describe('<DateTimeInput />', () => {
         calendarIcon="Open calendar"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
+        datePickerDialog="Date picker dialog"
+        selectedLabel="Selected date"
         invalidDateTimeMessage="whoops"
         locale="en-US"
         timezone="US/Eastern"
@@ -1030,6 +1092,8 @@ describe('<DateTimeInput />', () => {
         calendarIcon="Open calendar"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
+        datePickerDialog="Date picker dialog"
+        selectedLabel="Selected date"
         dateRenderLabel="date-input"
         timeRenderLabel="time-input"
         invalidDateTimeMessage="whoops"
@@ -1056,6 +1120,8 @@ describe('<DateTimeInput />', () => {
       calendarIcon: 'Open calendar',
       prevMonthLabel: 'Previous month',
       nextMonthLabel: 'Next month',
+      datePickerDialog: 'Date picker dialog',
+      selectedLabel: 'Selected date',
       dateRenderLabel: 'date-input',
       timeRenderLabel: 'time-input',
       invalidDateTimeMessage: 'whoops'

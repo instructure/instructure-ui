@@ -33,7 +33,7 @@ type DateInput2OwnProps = {
    */
   renderLabel: Renderable
   /**
-   * Accessible labels for the calendar button, month navigation buttons, and date picker dialog.
+   * Accessible labels for the calendar button, month navigation buttons, date picker dialog, and selected date state.
    */
   screenReaderLabels: {
     calendarIcon: string
@@ -41,6 +41,7 @@ type DateInput2OwnProps = {
     nextMonthButton: string
     // TODO: Make this field required in the next version. Currently optional to avoid breaking change.
     datePickerDialog?: string
+    selectedLabel?: string
   }
   /**
    * Specifies the input value.
