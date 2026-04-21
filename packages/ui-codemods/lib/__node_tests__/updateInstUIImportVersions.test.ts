@@ -100,15 +100,25 @@ describe('updateInstUIImportVersions', () => {
   })
 
   it('returns null for non-@instructure imports', () => {
-    const result = updateInstUIImportVersions(
-      makeFileInfo(`import { something } from 'some-lib'`),
-      makeApi() as Parameters<typeof updateInstUIImportVersions>[1],
-      { versionTo: 'v11.7' }
-    )
-    expect(result).toBeNull()
+    // Includes component names that are in versionedExports but come from other packages —
+    // the codemod must check the package, not just the import name.
+    const cases = [
+      `import { something } from 'some-lib'`,
+      `import { Button } from 'react-bootstrap'`,
+      `import { Button } from '@mui/material'`,
+      `import { Alert } from 'antd'`
+    ]
+    for (const source of cases) {
+      const result = updateInstUIImportVersions(
+        makeFileInfo(source),
+        makeApi() as Parameters<typeof updateInstUIImportVersions>[1],
+        { versionTo: 'v11.7' }
+      )
+      expect(result, source).toBeNull()
+    }
   })
 
-  it('does not rewrite non-component symbols when no --components given', () => {
+  it('does not rewrite non-versioned components', () => {
     // 'withStyle' is not in versionedExports, so it should be skipped
     const result = updateInstUIImportVersions(
       makeFileInfo(`import { withStyle } from '@instructure/ui'`),
@@ -118,24 +128,38 @@ describe('updateInstUIImportVersions', () => {
     expect(result).toBeNull()
   })
 
-  it('splits mixed import: non-component stays at original path, component moves to versioned path', () => {
+  it('does not split mixed @instructure/ui import: moves all specifiers to versioned path', () => {
+    // @instructure/ui version files re-export everything including non-component
+    // symbols (e.g. canvas), so splitting is unnecessary — rewrite the whole import.
     runInlineTest(
       updateInstUIImportVersions,
       { versionTo: 'v11.7' },
       makeFileInfo(`import {canvas, Button} from "@instructure/ui"`),
-      // canvas is not in versionedExports, Button is → split into two imports
-      // (Prettier normalises to single quotes and adds spaces inside braces)
-      `import { canvas } from '@instructure/ui'\nimport { Button } from '@instructure/ui/v11_7'`
+      `import { canvas, Button } from '@instructure/ui/v11_7'`
+    )
+  })
+
+  it('splits mixed import from an individual @instructure package: non-component stays, component moves', () => {
+    // TestComponent is not in versionedExports, Button is → triggers a split
+    runInlineTest(
+      updateInstUIImportVersions,
+      { versionTo: 'v11.7' },
+      makeFileInfo(
+        `import {TestComponent, Button} from "@instructure/ui-button"`
+      ),
+      // TestComponent is not in versionedExports, Button is → split
+      `import { TestComponent } from '@instructure/ui-button'\nimport { Button } from '@instructure/ui-button/v11_7'`
     )
   })
 
   it('does not add semicolons to split imports when usePrettier=false and file has no semis', () => {
-    // canvas is not in versionedExports (utility), Button is → triggers a split
     runInlineTest(
       updateInstUIImportVersions,
       { versionTo: 'v11.7', usePrettier: false },
-      makeFileInfo(`import {canvas, Button} from '@instructure/ui'`),
-      `import { canvas } from '@instructure/ui'\nimport { Button } from '@instructure/ui/v11_7'`
+      makeFileInfo(
+        `import {TestComponent, Button} from '@instructure/ui-button'`
+      ),
+      `import { TestComponent } from '@instructure/ui-button'\nimport { Button } from '@instructure/ui-button/v11_7'`
     )
   })
 
@@ -143,8 +167,10 @@ describe('updateInstUIImportVersions', () => {
     runInlineTest(
       updateInstUIImportVersions,
       { versionTo: 'v11.7', usePrettier: false },
-      makeFileInfo(`import {canvas, Button} from '@instructure/ui';`),
-      `import { canvas } from '@instructure/ui';\nimport { Button } from '@instructure/ui/v11_7';`
+      makeFileInfo(
+        `import {TestComponent, Button} from '@instructure/ui-button';`
+      ),
+      `import { TestComponent } from '@instructure/ui-button';\nimport { Button } from '@instructure/ui-button/v11_7';`
     )
   })
 
@@ -158,15 +184,16 @@ describe('updateInstUIImportVersions', () => {
     )
   })
 
-  it('keeps type-only specifier at original path when name is not in components', () => {
+  it('moves all specifiers to versioned path when source is @instructure/ui, even with --components filter', () => {
+    // ButtonProps is not in the components filter, but @instructure/ui
+    // version files re-export everything — no split, whole import moves.
     runInlineTest(
       updateInstUIImportVersions,
       { versionTo: 'v11.7', components: 'Button' },
       makeFileInfo(
         `import { Button, type ButtonProps } from '@instructure/ui'`
       ),
-      // ButtonProps not in components list → split
-      `import { type ButtonProps } from '@instructure/ui'\nimport { Button } from '@instructure/ui/v11_7'`
+      `import { Button, type ButtonProps } from '@instructure/ui/v11_7'`
     )
   })
 
@@ -232,5 +259,76 @@ describe('updateInstUIImportVersions', () => {
 
     expect(reported).toHaveLength(1)
     expect(reported[0]).toContain('oldest')
+  })
+
+  it('rewrites all matching imports in a file with 10+ @instructure imports', () => {
+    const input = [
+      `import React from 'react'`,
+      `import { Alert } from '@instructure/ui'`,
+      `import { Avatar } from '@instructure/ui'`,
+      `import { Badge } from '@instructure/ui'`,
+      `import { Button } from '@instructure/ui'`,
+      `import { Checkbox } from '@instructure/ui'`,
+      `import { Flex, FlexItem } from '@instructure/ui'`,
+      `import { Heading } from '@instructure/ui'`,
+      `import { Modal, ModalBody, ModalFooter } from '@instructure/ui'`,
+      `import { Select } from '@instructure/ui'`,
+      `import { Spinner } from '@instructure/ui'`,
+      `import { Text } from '@instructure/ui'`,
+      `import { TextInput } from '@instructure/ui'`,
+      `import type { SomeType } from 'some-lib'`
+    ].join('\n')
+
+    const expected = [
+      `import React from 'react'`,
+      `import { Alert } from '@instructure/ui/v11_7'`,
+      `import { Avatar } from '@instructure/ui/v11_7'`,
+      `import { Badge } from '@instructure/ui/v11_7'`,
+      `import { Button } from '@instructure/ui/v11_7'`,
+      `import { Checkbox } from '@instructure/ui/v11_7'`,
+      `import { Flex, FlexItem } from '@instructure/ui/v11_7'`,
+      `import { Heading } from '@instructure/ui/v11_7'`,
+      `import { Modal, ModalBody, ModalFooter } from '@instructure/ui/v11_7'`,
+      `import { Select } from '@instructure/ui/v11_7'`,
+      `import { Spinner } from '@instructure/ui/v11_7'`,
+      `import { Text } from '@instructure/ui/v11_7'`,
+      `import { TextInput } from '@instructure/ui/v11_7'`,
+      `import type { SomeType } from 'some-lib'`
+    ].join('\n')
+
+    runInlineTest(
+      updateInstUIImportVersions,
+      { versionTo: 'v11.7' },
+      makeFileInfo(input),
+      expected
+    )
+  })
+
+  it('rewrites named imports from individual @instructure packages', () => {
+    runInlineTest(
+      updateInstUIImportVersions,
+      { versionTo: 'v11.7' },
+      makeFileInfo(
+        [
+          `import { Button } from '@instructure/ui-button'`,
+          `import { Alert } from '@instructure/ui-alerts'`,
+          `import { Spinner } from '@instructure/ui-spinner'`
+        ].join('\n')
+      ),
+      [
+        `import { Button } from '@instructure/ui-button/v11_7'`,
+        `import { Alert } from '@instructure/ui-alerts/v11_7'`,
+        `import { Spinner } from '@instructure/ui-spinner/v11_7'`
+      ].join('\n')
+    )
+  })
+
+  it('does not rewrite default imports from @instructure packages', () => {
+    const result = updateInstUIImportVersions(
+      makeFileInfo(`import Button from '@instructure/ui-button'`),
+      makeApi() as Parameters<typeof updateInstUIImportVersions>[1],
+      { versionTo: 'v11.7' }
+    )
+    expect(result).toBeNull()
   })
 })
