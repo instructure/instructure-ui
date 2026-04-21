@@ -58,6 +58,11 @@ type CalendarDayOwnProps = {
    */
   isSelected?: boolean
   /**
+   * Screen reader label appended to the date label when the day is selected.
+   * Used to announce the selected state to assistive technologies.
+   */
+  selectedLabel?: string
+  /**
    * Is the `<Calendar.Day />` today
    */
   isToday?: boolean
@@ -114,6 +119,7 @@ const allowedProps: AllowedPropKeys = [
   'label',
   'interaction',
   'isSelected',
+  'selectedLabel',
   'isToday',
   'isOutsideMonth',
   'onClick',

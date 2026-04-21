@@ -427,6 +427,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
   }
 
   renderDays() {
+    const { selectedLabel } = this.props
     const renderedDate = this.state.renderedDate
     // Sets it to the first local day of the week counting back from the start of the month.
     // Note that first day depends on the locale, e.g. it's Sunday in the US and
@@ -467,6 +468,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
           )}
           isOutsideMonth={!date.isSame(renderedDate, 'month')}
           label={date.format('D MMMM YYYY')} // used by screen readers
+          selectedLabel={selectedLabel}
           onClick={this.handleDayClick}
           interaction={this.isDisabledDate(date) ? 'disabled' : 'enabled'}
         >
