@@ -24,10 +24,10 @@
 
 import type {
   AsElementType,
-  AppNavItemTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { Cursor } from '@instructure/shared-types'
 import React from 'react'
 import { Renderable } from '@instructure/shared-types'
@@ -82,7 +82,7 @@ type PropKeys = keyof AppNavItemOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type AppNavItemProps = AppNavItemOwnProps &
-  WithStyleProps<AppNavItemTheme, AppNavItemStyle> &
+  WithStyleProps<ReturnType<NewComponentTypes['AppNavItem']>, AppNavItemStyle> &
   OtherHTMLAttributes<AppNavItemOwnProps>
 
 type AppNavItemStyle = ComponentStyle<'item' | 'label'>

@@ -30,6 +30,7 @@
     "@instructure/shared-types": "workspace:*",
     "@instructure/ui-dom-utils": "workspace:*",
     "@instructure/ui-react-utils": "workspace:*",
+    "@instructure/ui-themes": "workspace:*",
     "@instructure/ui-utils": "workspace:*",
     "escape-html": "^1.0.3"
   },
@@ -38,7 +39,6 @@
     "@instructure/ui-babel-preset": "workspace:*",
     "@instructure/ui-color-utils": "workspace:*",
     "@instructure/ui-text": "workspace:*",
-    "@instructure/ui-themes": "workspace:*",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "15.0.7",
     "@types/escape-html": "^1.0.4",

@@ -23,11 +23,9 @@
  */
 
 import React from 'react'
-import type {
-  ModalFooterTheme,
-  OtherHTMLAttributes
-} from '@instructure/shared-types'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
 type ModalFooterOwnProps = {
   children?: React.ReactNode
@@ -40,7 +38,10 @@ type PropKeys = keyof ModalFooterOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type ModalFooterProps = ModalFooterOwnProps &
-  WithStyleProps<ModalFooterTheme, ModalFooterStyle> &
+  WithStyleProps<
+    ReturnType<NewComponentTypes['ModalFooter']>,
+    ModalFooterStyle
+  > &
   OtherHTMLAttributes<ModalFooterOwnProps>
 
 type ModalFooterStyle = ComponentStyle<'modalFooter'>

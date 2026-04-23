@@ -24,10 +24,8 @@
 
 import React from 'react'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
-import type {
-  OtherHTMLAttributes,
-  ColorContrastTheme
-} from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 
 type HeadingLevel<U extends keyof React.JSX.IntrinsicElements> = U
 
@@ -134,7 +132,10 @@ type PropKeys = keyof ColorContrastOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type ColorContrastProps = ColorContrastOwnProps &
-  WithStyleProps<ColorContrastTheme, ColorContrastStyle> &
+  WithStyleProps<
+    ReturnType<NewComponentTypes['ColorContrast']>,
+    ColorContrastStyle
+  > &
   OtherHTMLAttributes<ColorContrastOwnProps>
 
 type ColorContrastStyle = ComponentStyle<

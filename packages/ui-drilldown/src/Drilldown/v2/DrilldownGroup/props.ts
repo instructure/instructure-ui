@@ -26,7 +26,6 @@ import React from 'react'
 
 import type {
   OtherHTMLAttributes,
-  OptionsTheme,
   AsElementType
 } from '@instructure/shared-types'
 import type { WithStyleProps } from '@instructure/emotion'
@@ -34,6 +33,7 @@ import type { WithStyleProps } from '@instructure/emotion'
 import Drilldown from '../index'
 import type { DrilldownOptionValue } from '../DrilldownOption/props'
 import type { OptionChild, SeparatorChild } from '../props'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
 type GroupChildren = OptionChild | SeparatorChild
 
@@ -113,7 +113,7 @@ type PropKeys = keyof DrilldownGroupOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type DrilldownGroupProps = DrilldownGroupOwnProps &
-  WithStyleProps<OptionsTheme, null> &
+  WithStyleProps<ReturnType<NewComponentTypes['Options']>, null> &
   OtherHTMLAttributes<DrilldownGroupOwnProps>
 const allowedProps: AllowedPropKeys = [
   'id',

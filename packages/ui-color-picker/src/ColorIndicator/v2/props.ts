@@ -23,10 +23,8 @@
  */
 
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
-import type {
-  OtherHTMLAttributes,
-  ColorIndicatorTheme
-} from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 
 type ColorIndicatorOwnProps = {
   /**
@@ -48,7 +46,10 @@ type PropKeys = keyof ColorIndicatorOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type ColorIndicatorProps = ColorIndicatorOwnProps &
-  WithStyleProps<ColorIndicatorTheme, ColorIndicatorStyle> &
+  WithStyleProps<
+    ReturnType<NewComponentTypes['ColorIndicator']>,
+    ColorIndicatorStyle
+  > &
   OtherHTMLAttributes<ColorIndicatorOwnProps>
 
 type ColorIndicatorStyle = ComponentStyle<'colorIndicator'>

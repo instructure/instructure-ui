@@ -23,7 +23,8 @@
  */
 
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
-import type { GridTheme, OtherHTMLAttributes } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 import type { GridBreakpoints } from '../../utils/v1/GridTypes'
 
 type ColWidths = 'auto' | number
@@ -66,7 +67,7 @@ type PropKeys = keyof GridColOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type GridColProps = GridColOwnProps &
-  WithStyleProps<GridTheme, GridColStyle> &
+  WithStyleProps<ReturnType<NewComponentTypes['GridCol']>, GridColStyle> &
   OtherHTMLAttributes<GridColOwnProps>
 
 type GridColStyle = ComponentStyle<'gridCol'>

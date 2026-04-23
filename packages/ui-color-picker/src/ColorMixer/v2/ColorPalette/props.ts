@@ -23,11 +23,9 @@
  */
 
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
-import type {
-  OtherHTMLAttributes,
-  ColorMixerPaletteTheme
-} from '@instructure/shared-types'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 import type { HSVType } from '@instructure/ui-color-utils'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
@@ -52,7 +50,7 @@ type PropKeys = keyof ColorPaletteOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type ColorPaletteProps = ColorPaletteOwnProps &
-  WithStyleProps<ColorMixerPaletteTheme, ColorPaletteStyle> &
+  WithStyleProps<ReturnType<NewComponentTypes['Palette']>, ColorPaletteStyle> &
   OtherHTMLAttributes<ColorPaletteOwnProps> &
   WithDeterministicIdProps
 

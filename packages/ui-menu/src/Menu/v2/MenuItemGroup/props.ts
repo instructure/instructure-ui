@@ -26,11 +26,9 @@ import React from 'react'
 
 import { MenuItem } from '../MenuItem'
 
-import type {
-  MenuGroupTheme,
-  OtherHTMLAttributes
-} from '@instructure/shared-types'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { MenuItemProps } from '../MenuItem/props'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
@@ -79,7 +77,7 @@ type PropKeys = keyof MenuGroupOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type MenuGroupProps = MenuGroupOwnProps &
-  WithStyleProps<MenuGroupTheme, MenuGroupStyle> &
+  WithStyleProps<ReturnType<NewComponentTypes['MenuGroup']>, MenuGroupStyle> &
   OtherHTMLAttributes<MenuGroupOwnProps> &
   WithDeterministicIdProps
 

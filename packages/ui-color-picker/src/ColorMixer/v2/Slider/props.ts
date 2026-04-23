@@ -23,10 +23,8 @@
  */
 
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
-import type {
-  OtherHTMLAttributes,
-  ColorMixerSliderTheme
-} from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 
 type SliderOwnProps = {
   isColorSlider?: boolean
@@ -46,7 +44,7 @@ type PropKeys = keyof SliderOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type SliderProps = SliderOwnProps &
-  WithStyleProps<ColorMixerSliderTheme, SliderStyle> &
+  WithStyleProps<ReturnType<NewComponentTypes['Slider']>, SliderStyle> &
   OtherHTMLAttributes<SliderOwnProps>
 
 type SliderStyleProps = {

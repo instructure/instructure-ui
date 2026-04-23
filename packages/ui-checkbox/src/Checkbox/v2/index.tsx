@@ -42,11 +42,6 @@ import generateStyle from './styles'
 import { allowedProps } from './props'
 import type { CheckboxProps, CheckboxState } from './props'
 
-import type {
-  CheckboxFacadeTheme,
-  ToggleFacadeTheme
-} from '@instructure/shared-types'
-
 /**
 ---
 category: components
@@ -231,7 +226,9 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
           checked={this.checked}
           readOnly={readOnly}
           labelPlacement={labelPlacement}
-          themeOverride={themeOverride as Partial<ToggleFacadeTheme>}
+          // @ts-ignore TODO: This will lead to buggy overrides, `Toggle`'s
+          //  styles should be a superset of Checkbox's styles
+          themeOverride={themeOverride}
           invalid={this.invalid}
         >
           {label}
@@ -256,7 +253,7 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
           checked={this.checked}
           readOnly={readOnly}
           indeterminate={indeterminate}
-          themeOverride={themeOverride as Partial<CheckboxFacadeTheme>}
+          themeOverride={themeOverride}
           invalid={this.invalid}
         >
           {label}

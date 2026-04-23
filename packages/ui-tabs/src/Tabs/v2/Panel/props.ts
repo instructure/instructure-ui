@@ -28,10 +28,8 @@ import type {
   WithStyleProps,
   ComponentStyle
 } from '@instructure/emotion'
-import type {
-  OtherHTMLAttributes,
-  TabsPanelTheme
-} from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 
 type TabsPanelOwnProps = {
   /**
@@ -74,7 +72,7 @@ type PropKeys = keyof TabsPanelOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TabsPanelProps = TabsPanelOwnProps &
-  WithStyleProps<TabsPanelTheme, TabsPanelStyle> &
+  WithStyleProps<ReturnType<NewComponentTypes['TabsPanel']>, TabsPanelStyle> &
   OtherHTMLAttributes<TabsPanelOwnProps>
 
 type TabsPanelStyle = ComponentStyle<'panel' | 'content'>

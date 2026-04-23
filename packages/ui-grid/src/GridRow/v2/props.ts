@@ -24,8 +24,9 @@
 
 import React from 'react'
 
-import type { GridTheme, OtherHTMLAttributes } from '@instructure/shared-types'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { GridBreakpoints } from '../../utils/v1/GridTypes'
 
 type GridRowOwnProps = {
@@ -47,7 +48,7 @@ type PropKeys = keyof GridRowOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type GridRowProps = GridRowOwnProps &
-  WithStyleProps<GridTheme, GridRowStyle> &
+  WithStyleProps<ReturnType<NewComponentTypes['GridRow']>, GridRowStyle> &
   OtherHTMLAttributes<GridRowOwnProps>
 
 type GridRowStyle = ComponentStyle<'gridRow'>

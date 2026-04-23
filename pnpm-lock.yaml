@@ -1017,6 +1017,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-view':
         specifier: workspace:*
         version: link:../ui-view
@@ -1030,9 +1033,6 @@ importers:
       '@instructure/ui-color-utils':
         specifier: workspace:*
         version: link:../ui-color-utils
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -1154,6 +1154,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-view':
         specifier: workspace:*
         version: link:../ui-view
@@ -1164,9 +1167,6 @@ importers:
       '@instructure/ui-babel-preset':
         specifier: workspace:*
         version: link:../ui-babel-preset
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -1197,6 +1197,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-view':
         specifier: workspace:*
         version: link:../ui-view
@@ -1213,9 +1216,6 @@ importers:
       '@instructure/ui-icons':
         specifier: workspace:*
         version: link:../ui-icons
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -1249,6 +1249,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-tooltip':
         specifier: workspace:*
         version: link:../ui-tooltip
@@ -1271,9 +1274,6 @@ importers:
       '@instructure/ui-scripts':
         specifier: workspace:*
         version: link:../ui-scripts
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -1319,6 +1319,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-tooltip':
         specifier: workspace:*
         version: link:../ui-tooltip
@@ -1338,9 +1341,6 @@ importers:
       '@instructure/ui-babel-preset':
         specifier: workspace:*
         version: link:../ui-babel-preset
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -1368,6 +1368,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-view':
         specifier: workspace:*
         version: link:../ui-view
@@ -1381,9 +1384,6 @@ importers:
       '@instructure/ui-color-utils':
         specifier: workspace:*
         version: link:../ui-color-utils
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -1426,6 +1426,9 @@ importers:
       '@instructure/ui-simple-select':
         specifier: workspace:*
         version: link:../ui-simple-select
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-utils':
         specifier: workspace:*
         version: link:../ui-utils
@@ -1442,9 +1445,6 @@ importers:
       '@instructure/ui-color-utils':
         specifier: workspace:*
         version: link:../ui-color-utils
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -1487,6 +1487,9 @@ importers:
       '@instructure/ui-svg-images':
         specifier: workspace:*
         version: link:../ui-svg-images
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-utils':
         specifier: workspace:*
         version: link:../ui-utils
@@ -1509,9 +1512,6 @@ importers:
       '@instructure/ui-color-utils':
         specifier: workspace:*
         version: link:../ui-color-utils
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -1892,6 +1892,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-utils':
         specifier: workspace:*
         version: link:../ui-utils
@@ -1908,9 +1911,6 @@ importers:
       '@instructure/ui-buttons':
         specifier: workspace:*
         version: link:../ui-buttons
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -1956,6 +1956,9 @@ importers:
       '@instructure/ui-selectable':
         specifier: workspace:*
         version: link:../ui-selectable
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-utils':
         specifier: workspace:*
         version: link:../ui-utils
@@ -1975,9 +1978,6 @@ importers:
       '@instructure/ui-scripts':
         specifier: workspace:*
         version: link:../ui-scripts
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -2112,6 +2112,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-utils':
         specifier: workspace:*
         version: link:../ui-utils
@@ -2131,9 +2134,6 @@ importers:
       '@instructure/ui-babel-preset':
         specifier: workspace:*
         version: link:../ui-babel-preset
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -2161,6 +2161,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-view':
         specifier: workspace:*
         version: link:../ui-view
@@ -2171,9 +2174,6 @@ importers:
       '@instructure/ui-babel-preset':
         specifier: workspace:*
         version: link:../ui-babel-preset
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -2253,6 +2253,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-utils':
         specifier: workspace:*
         version: link:../ui-utils
@@ -2266,9 +2269,6 @@ importers:
       '@instructure/ui-babel-preset':
         specifier: workspace:*
         version: link:../ui-babel-preset
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -2299,6 +2299,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-utils':
         specifier: workspace:*
         version: link:../ui-utils
@@ -2309,9 +2312,6 @@ importers:
       '@instructure/ui-color-utils':
         specifier: workspace:*
         version: link:../ui-color-utils
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -2342,6 +2342,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-view':
         specifier: workspace:*
         version: link:../ui-view
@@ -2352,9 +2355,6 @@ importers:
       '@instructure/ui-babel-preset':
         specifier: workspace:*
         version: link:../ui-babel-preset
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -2526,6 +2526,9 @@ importers:
       '@instructure/ui-text':
         specifier: workspace:*
         version: link:../ui-text
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-view':
         specifier: workspace:*
         version: link:../ui-view
@@ -2539,9 +2542,6 @@ importers:
       '@instructure/ui-color-utils':
         specifier: workspace:*
         version: link:../ui-color-utils
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -2581,6 +2581,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-utils':
         specifier: workspace:*
         version: link:../ui-utils
@@ -2594,9 +2597,6 @@ importers:
       '@instructure/ui-babel-preset':
         specifier: workspace:*
         version: link:../ui-babel-preset
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -2627,6 +2627,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-view':
         specifier: workspace:*
         version: link:../ui-view
@@ -2640,9 +2643,6 @@ importers:
       '@instructure/ui-color-utils':
         specifier: workspace:*
         version: link:../ui-color-utils
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -2685,6 +2685,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-utils':
         specifier: workspace:*
         version: link:../ui-utils
@@ -2704,9 +2707,6 @@ importers:
       '@instructure/ui-color-utils':
         specifier: workspace:*
         version: link:../ui-color-utils
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -2737,6 +2737,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
     devDependencies:
       '@instructure/ui-axe-check':
         specifier: workspace:*
@@ -2747,9 +2750,6 @@ importers:
       '@instructure/ui-color-utils':
         specifier: workspace:*
         version: link:../ui-color-utils
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -2795,6 +2795,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-utils':
         specifier: workspace:*
         version: link:../ui-utils
@@ -2811,9 +2814,6 @@ importers:
       '@instructure/ui-position':
         specifier: workspace:*
         version: link:../ui-position
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -2844,6 +2844,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-utils':
         specifier: workspace:*
         version: link:../ui-utils
@@ -2851,9 +2854,6 @@ importers:
       '@instructure/ui-babel-preset':
         specifier: workspace:*
         version: link:../ui-babel-preset
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -2905,6 +2905,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-tooltip':
         specifier: workspace:*
         version: link:../ui-tooltip
@@ -2930,9 +2933,6 @@ importers:
       '@instructure/ui-scripts':
         specifier: workspace:*
         version: link:../ui-scripts
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -2969,6 +2969,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-utils':
         specifier: workspace:*
         version: link:../ui-utils
@@ -2985,9 +2988,6 @@ importers:
       '@instructure/ui-scripts':
         specifier: workspace:*
         version: link:../ui-scripts
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -3018,6 +3018,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-utils':
         specifier: workspace:*
         version: link:../ui-utils
@@ -3034,9 +3037,6 @@ importers:
       '@instructure/ui-color-utils':
         specifier: workspace:*
         version: link:../ui-color-utils
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -3094,6 +3094,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-tooltip':
         specifier: workspace:*
         version: link:../ui-tooltip
@@ -3113,9 +3116,6 @@ importers:
       '@instructure/ui-babel-preset':
         specifier: workspace:*
         version: link:../ui-babel-preset
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -3152,6 +3152,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-utils':
         specifier: workspace:*
         version: link:../ui-utils
@@ -3165,9 +3168,6 @@ importers:
       '@instructure/ui-color-utils':
         specifier: workspace:*
         version: link:../ui-color-utils
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -3344,6 +3344,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-utils':
         specifier: workspace:*
         version: link:../ui-utils
@@ -3366,9 +3369,6 @@ importers:
       '@instructure/ui-color-utils':
         specifier: workspace:*
         version: link:../ui-color-utils
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -3442,6 +3442,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-utils':
         specifier: workspace:*
         version: link:../ui-utils
@@ -3455,9 +3458,6 @@ importers:
       '@instructure/ui-color-utils':
         specifier: workspace:*
         version: link:../ui-color-utils
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -3491,6 +3491,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-view':
         specifier: workspace:*
         version: link:../ui-view
@@ -3501,9 +3504,6 @@ importers:
       '@instructure/ui-babel-preset':
         specifier: workspace:*
         version: link:../ui-babel-preset
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -3537,6 +3537,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
     devDependencies:
       '@instructure/ui-axe-check':
         specifier: workspace:*
@@ -3547,9 +3550,6 @@ importers:
       '@instructure/ui-color-utils':
         specifier: workspace:*
         version: link:../ui-color-utils
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -3592,6 +3592,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-utils':
         specifier: workspace:*
         version: link:../ui-utils
@@ -3608,9 +3611,6 @@ importers:
       '@instructure/ui-babel-preset':
         specifier: workspace:*
         version: link:../ui-babel-preset
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -3650,6 +3650,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-view':
         specifier: workspace:*
         version: link:../ui-view
@@ -3660,9 +3663,6 @@ importers:
       '@instructure/ui-babel-preset':
         specifier: workspace:*
         version: link:../ui-babel-preset
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -3846,6 +3846,9 @@ importers:
       '@instructure/ui-text-input':
         specifier: workspace:*
         version: link:../ui-text-input
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-utils':
         specifier: workspace:*
         version: link:../ui-utils
@@ -3865,9 +3868,6 @@ importers:
       '@instructure/ui-scripts':
         specifier: workspace:*
         version: link:../ui-scripts
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -3950,6 +3950,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-tooltip':
         specifier: workspace:*
         version: link:../ui-tooltip
@@ -3963,9 +3966,6 @@ importers:
       '@instructure/ui-color-utils':
         specifier: workspace:*
         version: link:../ui-color-utils
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -4145,6 +4145,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-utils':
         specifier: workspace:*
         version: link:../ui-utils
@@ -4161,9 +4164,6 @@ importers:
       '@instructure/ui-babel-preset':
         specifier: workspace:*
         version: link:../ui-babel-preset
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -4188,6 +4188,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-utils':
         specifier: workspace:*
         version: link:../ui-utils
@@ -4198,9 +4201,6 @@ importers:
       '@instructure/ui-babel-preset':
         specifier: workspace:*
         version: link:../ui-babel-preset
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -4240,6 +4240,9 @@ importers:
       '@instructure/ui-simple-select':
         specifier: workspace:*
         version: link:../ui-simple-select
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-utils':
         specifier: workspace:*
         version: link:../ui-utils
@@ -4256,9 +4259,6 @@ importers:
       '@instructure/ui-color-utils':
         specifier: workspace:*
         version: link:../ui-color-utils
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -4304,6 +4304,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-utils':
         specifier: workspace:*
         version: link:../ui-utils
@@ -4326,9 +4329,6 @@ importers:
       '@instructure/ui-color-utils':
         specifier: workspace:*
         version: link:../ui-color-utils
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -4368,6 +4368,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-view':
         specifier: workspace:*
         version: link:../ui-view
@@ -4378,9 +4381,6 @@ importers:
       '@instructure/ui-babel-preset':
         specifier: workspace:*
         version: link:../ui-babel-preset
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -4414,6 +4414,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
     devDependencies:
       '@instructure/ui-axe-check':
         specifier: workspace:*
@@ -4421,9 +4424,6 @@ importers:
       '@instructure/ui-babel-preset':
         specifier: workspace:*
         version: link:../ui-babel-preset
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -4457,6 +4457,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-utils':
         specifier: workspace:*
         version: link:../ui-utils
@@ -4473,9 +4476,6 @@ importers:
       '@instructure/ui-color-utils':
         specifier: workspace:*
         version: link:../ui-color-utils
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -4657,6 +4657,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-utils':
         specifier: workspace:*
         version: link:../ui-utils
@@ -4673,9 +4676,6 @@ importers:
       '@instructure/ui-babel-preset':
         specifier: workspace:*
         version: link:../ui-babel-preset
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -4709,6 +4709,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-utils':
         specifier: workspace:*
         version: link:../ui-utils
@@ -4722,9 +4725,6 @@ importers:
       '@instructure/ui-scripts':
         specifier: workspace:*
         version: link:../ui-scripts
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -4788,6 +4788,9 @@ importers:
       '@instructure/ui-responsive':
         specifier: workspace:*
         version: link:../ui-responsive
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-tooltip':
         specifier: workspace:*
         version: link:../ui-tooltip
@@ -4816,9 +4819,6 @@ importers:
       '@instructure/ui-scripts':
         specifier: workspace:*
         version: link:../ui-scripts
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -4867,6 +4867,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-utils':
         specifier: workspace:*
         version: link:../ui-utils
@@ -4874,9 +4877,6 @@ importers:
       '@instructure/ui-babel-preset':
         specifier: workspace:*
         version: link:../ui-babel-preset
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -4910,6 +4910,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-utils':
         specifier: workspace:*
         version: link:../ui-utils
@@ -4926,9 +4929,6 @@ importers:
       '@instructure/ui-color-utils':
         specifier: workspace:*
         version: link:../ui-color-utils
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -5011,6 +5011,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-utils':
         specifier: workspace:*
         version: link:../ui-utils
@@ -5030,9 +5033,6 @@ importers:
       '@instructure/ui-text':
         specifier: workspace:*
         version: link:../ui-text
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -5115,6 +5115,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
     devDependencies:
       '@instructure/ui-axe-check':
         specifier: workspace:*
@@ -5122,9 +5125,6 @@ importers:
       '@instructure/ui-babel-preset':
         specifier: workspace:*
         version: link:../ui-babel-preset
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1

@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import type { FormFieldMessagesTheme } from '@instructure/shared-types'
 import type { FormFieldMessagesProps, FormFieldMessagesStyle } from './props'
 
 /**
@@ -30,12 +29,12 @@ import type { FormFieldMessagesProps, FormFieldMessagesStyle } from './props'
  * private: true
  * ---
  * Generates the style object from the theme and provided additional information
- * @param  {Object} componentTheme The theme variable object.
+ * @param  {Object} _componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  _componentTheme: FormFieldMessagesTheme,
+  _componentTheme: never,
   props: FormFieldMessagesProps
 ): FormFieldMessagesStyle => {
   return {

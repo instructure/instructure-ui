@@ -23,12 +23,9 @@
  */
 
 import type { FormMessage } from '@instructure/ui-form-field/latest'
-import type {
-  CheckboxFacadeTheme,
-  OtherHTMLAttributes,
-  ToggleFacadeTheme
-} from '@instructure/shared-types'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 type CheckboxOwnProps = {
@@ -85,7 +82,7 @@ type PropKeys = keyof CheckboxOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type CheckboxProps = CheckboxOwnProps &
-  WithStyleProps<CheckboxFacadeTheme | ToggleFacadeTheme, CheckboxStyle> &
+  WithStyleProps<ReturnType<NewComponentTypes['Checkbox']>, CheckboxStyle> &
   OtherHTMLAttributes<CheckboxOwnProps> &
   WithDeterministicIdProps
 

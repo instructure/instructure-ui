@@ -25,8 +25,8 @@
 import React from 'react'
 
 import type { CollectionData } from '../props'
-import type { TreeBrowserCollectionTheme } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import { CollectionProps, TreeBrowserBaseProps } from '../props'
 
 type TreeBrowserCollectionOwnProps = {
@@ -45,7 +45,10 @@ type PropKeys = keyof TreeBrowserCollectionOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TreeBrowserCollectionProps = TreeBrowserCollectionOwnProps &
-  WithStyleProps<TreeBrowserCollectionTheme, TreeBrowserCollectionStyle>
+  WithStyleProps<
+    ReturnType<NewComponentTypes['TreeBrowserTreeCollection']>,
+    TreeBrowserCollectionStyle
+  >
 
 type TreeBrowserCollectionStyle = ComponentStyle<
   'treeCollection' | 'list' | 'item'

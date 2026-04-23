@@ -27,9 +27,9 @@ import type {
   WithStyleProps,
   ComponentStyle
 } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type {
   AsElementType,
-  ProgressCircleTheme,
   OtherHTMLAttributes,
   Renderable
 } from '@instructure/shared-types'
@@ -108,7 +108,10 @@ type PropKeys = keyof ProgressCircleOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type ProgressCircleProps = ProgressCircleOwnProps &
-  WithStyleProps<ProgressCircleTheme, ProgressCircleStyle> &
+  WithStyleProps<
+    ReturnType<NewComponentTypes['ProgressCircle']>,
+    ProgressCircleStyle
+  > &
   OtherHTMLAttributes<ProgressCircleOwnProps>
 
 type ProgressCircleStyle = ComponentStyle<

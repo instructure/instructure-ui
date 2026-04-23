@@ -44,7 +44,7 @@ export { useStyle } from './useStyle'
 export { useTheme } from './useTheme'
 
 export type { ComponentStyle, StyleObject, Overrides } from './EmotionTypes'
-export type { WithStyleProps } from './withStyleLegacy'
+export type { WithStyleProps } from './withStyle'
 export type { ThemeOverrideValue } from './useStyle'
 export type {
   SpacingValues,

@@ -28,10 +28,8 @@ import type {
   WithStyleProps,
   ComponentStyle
 } from '@instructure/emotion'
-import type {
-  BylineTheme,
-  OtherHTMLAttributes
-} from '@instructure/shared-types'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
 type BylineOwnProps = {
   /**
@@ -71,7 +69,7 @@ type PropKeys = keyof BylineOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type BylineProps = BylineOwnProps &
-  WithStyleProps<BylineTheme, BylineStyle> &
+  WithStyleProps<ReturnType<NewComponentTypes['Byline']>, BylineStyle> &
   OtherHTMLAttributes<BylineOwnProps>
 
 type BylineStyle = ComponentStyle<

@@ -23,12 +23,13 @@
  */
 
 import React from 'react'
-import type { AsElementType, BadgeTheme } from '@instructure/shared-types'
+import type { AsElementType } from '@instructure/shared-types'
 import type {
   Spacing,
   WithStyleProps,
   ComponentStyle
 } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { PlacementPropValues } from '@instructure/ui-position'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 import type { PropsWithChildren } from 'react'
@@ -87,7 +88,7 @@ type PropKeys = keyof BadgeOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type BadgeProps = BadgeOwnProps &
-  WithStyleProps<BadgeTheme, BadgeStyle> &
+  WithStyleProps<ReturnType<NewComponentTypes['Badge']>, BadgeStyle> &
   WithDeterministicIdProps
 
 type BadgeStyle = ComponentStyle<'badge' | 'wrapper'>

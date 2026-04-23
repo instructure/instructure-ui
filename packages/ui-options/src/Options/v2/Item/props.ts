@@ -24,12 +24,12 @@
 
 import type {
   AsElementType,
-  OptionsItemTheme,
   OtherHTMLAttributes,
   Renderable
 } from '@instructure/shared-types'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
 type OptionsItemRenderProps = {
   children?: Renderable
@@ -103,7 +103,10 @@ type PropKeys = keyof OptionsItemOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type OptionsItemProps = OptionsItemOwnProps &
-  WithStyleProps<OptionsItemTheme, OptionsItemStyle> &
+  WithStyleProps<
+    ReturnType<NewComponentTypes['OptionsItem']>,
+    OptionsItemStyle
+  > &
   WithDeterministicIdProps &
   OtherHTMLAttributes<OptionsItemOwnProps>
 

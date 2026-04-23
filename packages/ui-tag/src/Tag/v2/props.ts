@@ -29,7 +29,8 @@ import type {
   WithStyleProps,
   ComponentStyle
 } from '@instructure/emotion'
-import type { OtherHTMLAttributes, TagTheme } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 
 type TagOwnProps = {
   className?: string
@@ -71,7 +72,7 @@ type PropKeys = keyof TagOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TagProps = TagOwnProps &
-  WithStyleProps<TagTheme, TagStyle> &
+  WithStyleProps<ReturnType<NewComponentTypes['Tag']>, TagStyle> &
   OtherHTMLAttributes<TagOwnProps>
 
 type TagStyle = ComponentStyle<'tag' | 'text' | 'icon'>

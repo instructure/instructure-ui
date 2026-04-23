@@ -24,10 +24,10 @@
 
 import type {
   AsElementType,
-  OptionsSeparatorTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import { AllHTMLAttributes } from 'react'
 
 type OptionsSeparatorOwnProps = {
@@ -42,7 +42,10 @@ type PropKeys = keyof OptionsSeparatorOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type OptionsSeparatorProps = OptionsSeparatorOwnProps &
-  WithStyleProps<OptionsSeparatorTheme, OptionsSeparatorStyle> &
+  WithStyleProps<
+    ReturnType<NewComponentTypes['OptionsSeparator']>,
+    OptionsSeparatorStyle
+  > &
   OtherHTMLAttributes<OptionsSeparatorOwnProps, AllHTMLAttributes<any>>
 
 type OptionsSeparatorStyle = ComponentStyle<'separator'>

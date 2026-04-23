@@ -26,7 +26,6 @@ import React from 'react'
 
 import type {
   AsElementType,
-  TooltipTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type {
@@ -35,6 +34,7 @@ import type {
   PositionMountNode
 } from '@instructure/ui-position'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { PopoverOwnProps } from '@instructure/ui-popover/latest'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 import { Renderable } from '@instructure/shared-types'
@@ -183,7 +183,7 @@ type PropsPassableToPopover = Omit<
 
 type TooltipProps = PropsPassableToPopover &
   TooltipOwnProps &
-  WithStyleProps<TooltipTheme, TooltipStyle> &
+  WithStyleProps<ReturnType<NewComponentTypes['Tooltip']>, TooltipStyle> &
   // the OtherHTMLAttributes might be passed to the trigger or Popover
   OtherHTMLAttributes<TooltipOwnProps> &
   WithDeterministicIdProps
