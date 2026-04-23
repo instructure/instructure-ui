@@ -27,9 +27,9 @@ import type {
   WithStyleProps,
   ComponentStyle
 } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type {
   AsElementType,
-  ProgressBarTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
 import { Renderable } from '@instructure/shared-types'
@@ -125,7 +125,10 @@ type PropKeys = keyof ProgressBarOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type ProgressBarProps = ProgressBarOwnProps &
-  WithStyleProps<ProgressBarTheme, ProgressBarStyle> &
+  WithStyleProps<
+    ReturnType<NewComponentTypes['ProgressBar']>,
+    ProgressBarStyle
+  > &
   OtherHTMLAttributes<ProgressBarOwnProps>
 
 type ProgressBarStyle = ComponentStyle<

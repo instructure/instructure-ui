@@ -29,6 +29,7 @@
     "@instructure/ui-heading": "workspace:*",
     "@instructure/ui-img": "workspace:*",
     "@instructure/ui-react-utils": "workspace:*",
+    "@instructure/ui-themes": "workspace:*",
     "@instructure/ui-view": "workspace:*"
   },
   "devDependencies": {
@@ -36,7 +37,6 @@
     "@instructure/ui-babel-preset": "workspace:*",
     "@instructure/ui-color-utils": "workspace:*",
     "@instructure/ui-icons": "workspace:*",
-    "@instructure/ui-themes": "workspace:*",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "15.0.7",
     "@testing-library/user-event": "^14.6.1",

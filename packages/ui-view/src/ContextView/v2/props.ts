@@ -25,7 +25,6 @@
 import React from 'react'
 import type {
   AsElementType,
-  ContextViewTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { PlacementPropValues } from '@instructure/ui-position'
@@ -36,6 +35,7 @@ import type {
   WithStyleProps,
   ComponentStyle
 } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
 type ContextViewOwnProps = {
   as?: AsElementType
@@ -63,7 +63,10 @@ type PropKeys = keyof ContextViewOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type ContextViewProps = ContextViewOwnProps &
-  WithStyleProps<ContextViewTheme, ContextViewStyle> &
+  WithStyleProps<
+    ReturnType<NewComponentTypes['ContextView']>,
+    ContextViewStyle
+  > &
   OtherHTMLAttributes<ContextViewOwnProps>
 
 type ContextViewStyle = ComponentStyle<

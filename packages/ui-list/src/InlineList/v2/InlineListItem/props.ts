@@ -29,10 +29,8 @@ import type {
   WithStyleProps,
   ComponentStyle
 } from '@instructure/emotion'
-import type {
-  InlineListItemTheme,
-  OtherHTMLAttributes
-} from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 
 type InlineListItemOwnProps = {
   /**
@@ -80,7 +78,10 @@ type PropKeys = keyof InlineListItemOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type InlineListItemProps = InlineListItemOwnProps &
-  WithStyleProps<InlineListItemTheme, InlineListItemStyle> &
+  WithStyleProps<
+    ReturnType<NewComponentTypes['InlineListItem']>,
+    InlineListItemStyle
+  > &
   OtherHTMLAttributes<InlineListItemOwnProps>
 
 type InlineListItemStyle = ComponentStyle<'inlineListItem' | 'delimiter'>

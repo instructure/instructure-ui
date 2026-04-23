@@ -1198,7 +1198,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
 
     // track as valid active option if not the title and the map doesn't already contain the id
     if (id !== this._headerTitleId && !this._activeOptionsMap[id]) {
-      // store index to know the order of ids later; js objects doesn't preserve order
+      // store index to know the order of ids later; js objects don't preserve order
       this._activeOptionsMap[id] = {
         ...option,
         ...optionData,

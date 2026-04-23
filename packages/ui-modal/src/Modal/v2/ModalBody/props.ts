@@ -28,9 +28,9 @@ import type {
   WithStyleProps,
   ComponentStyle
 } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type {
   AsElementType,
-  ModalBodyTheme,
   OtherHTMLAttributes,
   UIElement
 } from '@instructure/shared-types'
@@ -50,7 +50,7 @@ type PropKeys = keyof ModalBodyOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type ModalBodyProps = ModalBodyOwnProps &
-  WithStyleProps<ModalBodyTheme, ModalBodyStyle> &
+  WithStyleProps<ReturnType<NewComponentTypes['ModalBody']>, ModalBodyStyle> &
   OtherHTMLAttributes<ModalBodyOwnProps>
 
 type ModalBodyStyle = ComponentStyle<'modalBody'>

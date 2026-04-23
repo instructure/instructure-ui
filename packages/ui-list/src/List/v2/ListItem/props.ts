@@ -29,10 +29,8 @@ import type {
   WithStyleProps,
   ComponentStyle
 } from '@instructure/emotion'
-import type {
-  ListItemTheme,
-  OtherHTMLAttributes
-} from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 
 type ListItemOwnProps = {
   /**
@@ -76,7 +74,7 @@ type PropKeys = keyof ListItemOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type ListItemProps = ListItemOwnProps &
-  WithStyleProps<ListItemTheme, ListItemStyle> &
+  WithStyleProps<ReturnType<NewComponentTypes['ListItem']>, ListItemStyle> &
   OtherHTMLAttributes<ListItemOwnProps>
 
 type ListItemStyle = ComponentStyle<'listItem'>

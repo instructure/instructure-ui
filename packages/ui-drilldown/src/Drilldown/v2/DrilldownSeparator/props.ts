@@ -25,11 +25,11 @@
 import type {
   OtherHTMLAttributes,
   PickPropsWithExceptions,
-  AsElementType,
-  OptionsSeparatorTheme
+  AsElementType
 } from '@instructure/shared-types'
 import type { WithStyleProps } from '@instructure/emotion'
 import type { OptionsSeparatorProps } from '@instructure/ui-options'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
 type DrilldownSeparatorOwnProps = {
   id: string
@@ -48,7 +48,7 @@ type DrilldownSeparatorProps =
   // we are passing all props to Options.Separator
   PickPropsWithExceptions<OptionsSeparatorProps, 'as'> &
     DrilldownSeparatorOwnProps &
-    WithStyleProps<OptionsSeparatorTheme, null> &
+    WithStyleProps<ReturnType<NewComponentTypes['OptionsSeparator']>, null> &
     OtherHTMLAttributes<DrilldownSeparatorOwnProps>
 const allowedProps: AllowedPropKeys = ['id', 'as']
 

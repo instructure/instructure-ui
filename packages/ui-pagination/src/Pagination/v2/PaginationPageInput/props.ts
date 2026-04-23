@@ -23,7 +23,7 @@
  */
 
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
-import type { PaginationPageInputTheme } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import React from 'react'
 type PaginationPageInputOwnProps = {
   /**
@@ -67,7 +67,10 @@ type PropKeys = keyof PaginationPageInputOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type PaginationPageInputProps = PaginationPageInputOwnProps &
-  WithStyleProps<PaginationPageInputTheme, PaginationPageInputStyle>
+  WithStyleProps<
+    ReturnType<NewComponentTypes['PaginationPageInput']>,
+    PaginationPageInputStyle
+  >
 
 type PaginationPageInputStyle = ComponentStyle<
   'paginationPageInput' | 'numberInput' | 'inputLabel'

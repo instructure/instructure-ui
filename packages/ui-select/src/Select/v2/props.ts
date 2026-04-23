@@ -282,8 +282,7 @@ type PropKeys = keyof SelectOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type SelectProps = SelectOwnProps &
-  //@ts-expect-error TODO-theme-types
-  WithStyleProps<NewComponentTypes['Select'], SelectStyle> &
+  WithStyleProps<ReturnType<NewComponentTypes['Select']>, SelectStyle> &
   OtherHTMLAttributes<
     SelectOwnProps,
     InputHTMLAttributes<SelectOwnProps & Element>

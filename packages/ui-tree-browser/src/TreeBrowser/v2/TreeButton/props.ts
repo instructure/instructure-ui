@@ -24,7 +24,7 @@
 
 import React from 'react'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
-import type { TreeBrowserButtonTheme } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { TreeBrowserCommonProps } from '../props'
 
 type TreeBrowserButtonOwnProps = {
@@ -58,7 +58,10 @@ type PropKeys = keyof TreeBrowserButtonOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TreeBrowserButtonProps = TreeBrowserButtonOwnProps &
-  WithStyleProps<TreeBrowserButtonTheme, TreeBrowserButtonStyle>
+  WithStyleProps<
+    ReturnType<NewComponentTypes['TreeBrowserTreeButton']>,
+    TreeBrowserButtonStyle
+  >
 
 type TreeBrowserButtonStyle = ComponentStyle<
   | 'treeButton'

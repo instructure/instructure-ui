@@ -23,12 +23,9 @@
  */
 
 import React from 'react'
-import type {
-  OtherHTMLAttributes,
-  Renderable,
-  TabsTabTheme
-} from '@instructure/shared-types'
+import type { OtherHTMLAttributes, Renderable } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { ViewOwnProps } from '@instructure/ui-view/latest'
 
 type TabsTabOwnProps = {
@@ -58,7 +55,7 @@ type PropKeys = keyof TabsTabOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TabsTabProps = TabsTabOwnProps &
-  WithStyleProps<TabsTabTheme, TabsTabStyle> &
+  WithStyleProps<ReturnType<NewComponentTypes['TabsTab']>, TabsTabStyle> &
   OtherHTMLAttributes<TabsTabOwnProps>
 
 type TabsTabStyle = ComponentStyle<'tab'>

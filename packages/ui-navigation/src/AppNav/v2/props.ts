@@ -28,10 +28,8 @@ import type {
   WithStyleProps,
   ComponentStyle
 } from '@instructure/emotion'
-import type {
-  AppNavTheme,
-  OtherHTMLAttributes
-} from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 import { Renderable } from '@instructure/shared-types'
 
 type AppNavOwnProps = {
@@ -89,7 +87,7 @@ type PropKeys = keyof AppNavOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type AppNavProps = AppNavOwnProps &
-  WithStyleProps<AppNavTheme, AppNavStyle> &
+  WithStyleProps<ReturnType<NewComponentTypes['AppNav']>, AppNavStyle> &
   OtherHTMLAttributes<AppNavOwnProps>
 
 type AppNavStyle = ComponentStyle<'appNav' | 'alignCenter' | 'list'> & {

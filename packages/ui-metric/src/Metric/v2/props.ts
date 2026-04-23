@@ -22,12 +22,9 @@
  * SOFTWARE.
  */
 
-import type {
-  MetricTheme,
-  OtherHTMLAttributes,
-  Renderable
-} from '@instructure/shared-types'
+import type { OtherHTMLAttributes, Renderable } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import { ThemeOverrideValue } from '@instructure/emotion'
 
 type MetricOwnProps = {
@@ -46,7 +43,7 @@ type PropKeys = keyof MetricOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type MetricProps = MetricOwnProps &
-  WithStyleProps<MetricTheme, MetricStyle> &
+  WithStyleProps<ReturnType<NewComponentTypes['Metric']>, MetricStyle> &
   OtherHTMLAttributes<MetricOwnProps> & {
     themeOverride?: ThemeOverrideValue
   }

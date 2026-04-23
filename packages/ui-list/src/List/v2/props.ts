@@ -29,7 +29,8 @@ import type {
   WithStyleProps,
   ComponentStyle
 } from '@instructure/emotion'
-import type { ListTheme, OtherHTMLAttributes } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 
 type ListOwnProps = {
   /**
@@ -76,7 +77,7 @@ type PropKeys = keyof ListOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type ListProps = ListOwnProps &
-  WithStyleProps<ListTheme, ListStyle> &
+  WithStyleProps<ReturnType<NewComponentTypes['List']>, ListStyle> &
   OtherHTMLAttributes<ListOwnProps>
 
 type ListStyle = ComponentStyle<'list'>

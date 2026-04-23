@@ -23,11 +23,9 @@
  */
 import React from 'react'
 
-import type {
-  SideNavBarTheme,
-  OtherHTMLAttributes
-} from '@instructure/shared-types'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
 type SideNavBarOwnProps = {
   /**
@@ -73,7 +71,7 @@ type PropKeys = keyof SideNavBarOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type SideNavBarProps = SideNavBarOwnProps &
-  WithStyleProps<SideNavBarTheme, SideNavBarStyle> &
+  WithStyleProps<ReturnType<NewComponentTypes['SideNavBar']>, SideNavBarStyle> &
   OtherHTMLAttributes<SideNavBarOwnProps>
 
 type SideNavBarStyle = ComponentStyle<

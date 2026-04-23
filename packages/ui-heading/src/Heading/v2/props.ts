@@ -25,7 +25,6 @@
 import React from 'react'
 import type {
   AsElementType,
-  HeadingTheme,
   OtherHTMLAttributes,
   Renderable
 } from '@instructure/shared-types'
@@ -34,6 +33,7 @@ import type {
   WithStyleProps,
   ComponentStyle
 } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
 type HeadingLevel<U extends keyof React.JSX.IntrinsicElements> = U
 
@@ -111,7 +111,7 @@ type PropKeys = keyof HeadingOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type HeadingProps = HeadingOwnProps &
-  WithStyleProps<HeadingTheme, HeadingStyle> &
+  WithStyleProps<ReturnType<NewComponentTypes['Heading']>, HeadingStyle> &
   OtherHTMLAttributes<HeadingOwnProps>
 
 type HeadingStyle = ComponentStyle<

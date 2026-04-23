@@ -28,10 +28,8 @@ import type {
   WithStyleProps,
   ComponentStyle
 } from '@instructure/emotion'
-import type {
-  FileDropTheme,
-  OtherHTMLAttributes
-} from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 import { Renderable } from '@instructure/shared-types'
 type RenderLabelProps = {
@@ -173,7 +171,7 @@ type PropKeys = keyof FileDropOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type FileDropProps = FileDropOwnProps &
-  WithStyleProps<FileDropTheme, FileDropStyle> &
+  WithStyleProps<ReturnType<NewComponentTypes['FileDrop']>, FileDropStyle> &
   OtherHTMLAttributes<FileDropOwnProps> &
   WithDeterministicIdProps
 

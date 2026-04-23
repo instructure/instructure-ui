@@ -32,13 +32,13 @@
     "@instructure/ui-badge": "workspace:*",
     "@instructure/ui-icons": "workspace:*",
     "@instructure/ui-react-utils": "workspace:*",
+    "@instructure/ui-themes": "workspace:*",
     "@instructure/ui-tooltip": "workspace:*"
   },
   "devDependencies": {
     "@instructure/ui-axe-check": "workspace:*",
     "@instructure/ui-babel-preset": "workspace:*",
     "@instructure/ui-color-utils": "workspace:*",
-    "@instructure/ui-themes": "workspace:*",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "15.0.7",
     "@testing-library/user-event": "^14.6.1",

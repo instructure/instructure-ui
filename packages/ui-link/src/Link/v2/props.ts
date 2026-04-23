@@ -26,7 +26,6 @@ import React from 'react'
 import type {
   ToProp,
   AsElementType,
-  LinkTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type {
@@ -34,6 +33,7 @@ import type {
   WithStyleProps,
   ComponentStyle
 } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { ViewOwnProps } from '@instructure/ui-view/latest'
 import { Renderable } from '@instructure/shared-types'
 
@@ -154,7 +154,7 @@ type LinkState = {
 }
 
 type LinkProps = LinkOwnProps &
-  WithStyleProps<LinkTheme, LinkStyle> &
+  WithStyleProps<ReturnType<NewComponentTypes['Link']>, LinkStyle> &
   OtherHTMLAttributes<LinkOwnProps> &
   ToProp
 

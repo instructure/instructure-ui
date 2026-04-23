@@ -24,8 +24,9 @@
 
 import React from 'react'
 
-import type { MenuTheme, OtherHTMLAttributes } from '@instructure/shared-types'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type {
   PlacementPropValues,
   PositionConstraint,
@@ -171,7 +172,7 @@ type PropKeys = keyof MenuOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type MenuProps = MenuOwnProps &
-  WithStyleProps<MenuTheme, MenuStyle> &
+  WithStyleProps<ReturnType<NewComponentTypes['Menu']>, MenuStyle> &
   // controls can be passed in renderChildren and used later as aria-controls
   Omit<OtherHTMLAttributes<MenuOwnProps>, 'controls'> & {
     controls?: React.AriaAttributes['aria-controls']

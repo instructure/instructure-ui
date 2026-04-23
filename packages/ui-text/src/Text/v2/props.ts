@@ -25,10 +25,10 @@
 import React from 'react'
 import type {
   AsElementType,
-  TextTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
 type TextOwnProps = {
   /**
@@ -113,7 +113,7 @@ type PropKeys = keyof TextOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TextProps = TextOwnProps &
-  WithStyleProps<TextTheme, TextStyle> &
+  WithStyleProps<ReturnType<NewComponentTypes['Text']>, TextStyle> &
   OtherHTMLAttributes<TextOwnProps>
 
 type TextStyle = ComponentStyle<'text'>

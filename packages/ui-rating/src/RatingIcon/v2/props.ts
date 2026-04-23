@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import type { RatingIconTheme } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
 type RatingIconOwnProps = {
   animationDelay?: number
@@ -41,7 +41,7 @@ type PropKeys = keyof RatingIconOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type RatingIconProps = RatingIconOwnProps &
-  WithStyleProps<RatingIconTheme, RatingIconStyle>
+  WithStyleProps<ReturnType<NewComponentTypes['RatingIcon']>, RatingIconStyle>
 
 type RatingIconStyle = ComponentStyle<'ratingIcon' | 'icon'>
 const allowedProps: AllowedPropKeys = [

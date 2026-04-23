@@ -30,6 +30,7 @@
     "@instructure/ui-color-utils": "workspace:*",
     "@instructure/ui-form-field": "workspace:*",
     "@instructure/ui-react-utils": "workspace:*",
+    "@instructure/ui-themes": "workspace:*",
     "@instructure/ui-utils": "workspace:*",
     "@instructure/ui-view": "workspace:*",
     "@instructure/uid": "workspace:*",
@@ -38,7 +39,6 @@
   "devDependencies": {
     "@instructure/ui-axe-check": "workspace:*",
     "@instructure/ui-babel-preset": "workspace:*",
-    "@instructure/ui-themes": "workspace:*",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "15.0.7",
     "vitest": "^3.2.2"

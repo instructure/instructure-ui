@@ -23,6 +23,7 @@
  */
 import React from 'react'
 import { BorderWidth } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
 import type { Shadow, Stacking, WithStyleProps } from '@instructure/emotion'
 
@@ -36,8 +37,7 @@ import type { TextDirectionContextConsumerProps } from '@instructure/ui-i18n'
 import type {
   LiveRegion,
   UIElement,
-  Renderable,
-  PopoverTheme
+  Renderable
 } from '@instructure/shared-types'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
@@ -289,7 +289,7 @@ type PopoverOwnProps = {
 type PopoverProps = PopoverOwnProps &
   TextDirectionContextConsumerProps &
   WithDeterministicIdProps &
-  WithStyleProps<PopoverTheme, PopoverStyle>
+  WithStyleProps<ReturnType<NewComponentTypes['Popover']>, PopoverStyle>
 
 type PopoverState = {
   placement: PopoverOwnProps['placement']

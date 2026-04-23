@@ -24,11 +24,9 @@
 
 import React from 'react'
 
-import type {
-  OtherHTMLAttributes,
-  ToggleDetailsTheme
-} from '@instructure/shared-types'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { ViewProps } from '@instructure/ui-view/latest'
 
 type ToggleDetailsOwnProps = {
@@ -80,7 +78,10 @@ type PropKeys = keyof ToggleDetailsOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type ToggleDetailsProps = ToggleDetailsOwnProps &
-  WithStyleProps<ToggleDetailsTheme, ToggleDetailsStyle> &
+  WithStyleProps<
+    ReturnType<NewComponentTypes['ToggleDetails']>,
+    ToggleDetailsStyle
+  > &
   OtherHTMLAttributes<ToggleDetailsOwnProps>
 
 type ToggleDetailsStyle = ComponentStyle<

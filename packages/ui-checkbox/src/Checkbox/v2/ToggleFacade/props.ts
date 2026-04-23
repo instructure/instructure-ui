@@ -23,8 +23,8 @@
  */
 
 import React from 'react'
-import type { ToggleFacadeTheme } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
 type ToggleFacadeOwnProps = {
   children: React.ReactNode
@@ -46,7 +46,7 @@ type PropKeys = keyof ToggleFacadeOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type ToggleFacadeProps = ToggleFacadeOwnProps &
-  WithStyleProps<ToggleFacadeTheme, ToggleFacadeStyle>
+  WithStyleProps<ReturnType<NewComponentTypes['Toggle']>, ToggleFacadeStyle>
 
 type ToggleFacadeStyle = ComponentStyle<
   'toggleFacade' | 'facade' | 'icon' | 'iconToggle' | 'label'

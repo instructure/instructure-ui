@@ -112,18 +112,18 @@ const MemoedOption = memo(
   (prevProps, nextProps) => {
     return (
       prevProps.selectOption.props.isHighlighted ===
-      nextProps.selectOption.props.isHighlighted &&
+        nextProps.selectOption.props.isHighlighted &&
       prevProps.selectOption.props.isSelected ===
-      nextProps.selectOption.props.isSelected &&
+        nextProps.selectOption.props.isSelected &&
       prevProps.selectOption.props.isDisabled ===
-      nextProps.selectOption.props.isDisabled &&
+        nextProps.selectOption.props.isDisabled &&
       prevProps.selectOption.props.children ===
-      nextProps.selectOption.props.children &&
+        nextProps.selectOption.props.children &&
       prevProps.selectOption.props.id === nextProps.selectOption.props.id &&
       prevProps.selectOption.props.renderBeforeLabel ===
-      nextProps.selectOption.props.renderBeforeLabel &&
+        nextProps.selectOption.props.renderBeforeLabel &&
       prevProps.selectOption.props.renderAfterLabel ===
-      nextProps.selectOption.props.renderAfterLabel &&
+        nextProps.selectOption.props.renderAfterLabel &&
       prevProps.children === nextProps.children
     )
   }
@@ -334,59 +334,59 @@ class Select extends Component<SelectProps> {
 
     return this.interaction === 'enabled'
       ? {
-        onRequestShowOptions: (event) => {
-          onRequestShowOptions?.(event)
-          const selectedOptionId = this.selectedOptionId
+          onRequestShowOptions: (event) => {
+            onRequestShowOptions?.(event)
+            const selectedOptionId = this.selectedOptionId
 
-          if (selectedOptionId && !Array.isArray(selectedOptionId)) {
-            // highlight selected option on show
-            this.highlightOption(event, selectedOptionId)
-          }
-        },
-        onRequestHideOptions: (event) => {
-          onRequestHideOptions?.(event)
-        },
-        onRequestHighlightOption: (
-          event,
-          { id, direction }: { id?: string; direction?: number }
-        ) => {
-          if (!isShowingOptions) return
+            if (selectedOptionId && !Array.isArray(selectedOptionId)) {
+              // highlight selected option on show
+              this.highlightOption(event, selectedOptionId)
+            }
+          },
+          onRequestHideOptions: (event) => {
+            onRequestHideOptions?.(event)
+          },
+          onRequestHighlightOption: (
+            event,
+            { id, direction }: { id?: string; direction?: number }
+          ) => {
+            if (!isShowingOptions) return
 
-          const highlightedOptionId = this.highlightedOptionId
-          // if id exists, use that
-          let highlightId = this._optionIds.indexOf(id!) > -1 ? id : undefined
-          if (!highlightId) {
-            if (!highlightedOptionId) {
-              // nothing highlighted yet, highlight first option
-              highlightId = this._optionIds[0]
-            } else {
-              // find next id based on direction
-              const index = this._optionIds.indexOf(highlightedOptionId)
-              highlightId =
-                index > -1 ? this._optionIds[index + direction!] : undefined
+            const highlightedOptionId = this.highlightedOptionId
+            // if id exists, use that
+            let highlightId = this._optionIds.indexOf(id!) > -1 ? id : undefined
+            if (!highlightId) {
+              if (!highlightedOptionId) {
+                // nothing highlighted yet, highlight first option
+                highlightId = this._optionIds[0]
+              } else {
+                // find next id based on direction
+                const index = this._optionIds.indexOf(highlightedOptionId)
+                highlightId =
+                  index > -1 ? this._optionIds[index + direction!] : undefined
+              }
+            }
+            if (highlightId) {
+              // only highlight if id exists as a valid option
+              this.highlightOption(event, highlightId)
+            }
+          },
+          onRequestHighlightFirstOption: (event) => {
+            this.highlightOption(event, this._optionIds[0])
+          },
+          onRequestHighlightLastOption: (event) => {
+            this.highlightOption(
+              event,
+              this._optionIds[this._optionIds.length - 1]
+            )
+          },
+          onRequestSelectOption: (event, { id }) => {
+            if (id && this._optionIds.indexOf(id) !== -1) {
+              // only select if id exists as a valid option
+              onRequestSelectOption?.(event, { id })
             }
           }
-          if (highlightId) {
-            // only highlight if id exists as a valid option
-            this.highlightOption(event, highlightId)
-          }
-        },
-        onRequestHighlightFirstOption: (event) => {
-          this.highlightOption(event, this._optionIds[0])
-        },
-        onRequestHighlightLastOption: (event) => {
-          this.highlightOption(
-            event,
-            this._optionIds[this._optionIds.length - 1]
-          )
-        },
-        onRequestSelectOption: (event, { id }) => {
-          if (id && this._optionIds.indexOf(id) !== -1) {
-            // only select if id exists as a valid option
-            onRequestSelectOption?.(event, { id })
-          }
         }
-      }
       : {}
   }
 
@@ -413,12 +413,12 @@ class Select extends Component<SelectProps> {
       return typeof renderOptionLabel === 'function' &&
         !renderOptionLabel?.prototype?.isReactComponent
         ? (renderOptionLabel as any).bind(null, {
-          id,
-          isDisabled,
-          isSelected,
-          isHighlighted,
-          children
-        })
+            id,
+            isDisabled,
+            isSelected,
+            isHighlighted,
+            children
+          })
         : (renderOptionLabel as React.ReactNode)
     }
 
@@ -539,18 +539,18 @@ class Select extends Component<SelectProps> {
 
     const viewProps: Partial<ViewProps> = isShowingOptions
       ? {
-        display: 'block',
-        overflowY: 'auto',
-        maxHeight:
-          optionsMaxHeight ||
-          this._optionHeight * visibleOptionsCount! -
-          // in Chrome, we need to prevent scrolling when the bottom area of last item is hovered
-          (utils.isChromium() ? this.SCROLL_TOLERANCE : 0),
-        maxWidth: optionsMaxWidth || this.width,
-        background: 'primary',
-        elementRef: (node: Element | null) => (this._listView = node),
-        borderRadius: 'inherit'
-      }
+          display: 'block',
+          overflowY: 'auto',
+          maxHeight:
+            optionsMaxHeight ||
+            this._optionHeight * visibleOptionsCount! -
+              // in Chrome, we need to prevent scrolling when the bottom area of last item is hovered
+              (utils.isChromium() ? this.SCROLL_TOLERANCE : 0),
+          maxWidth: optionsMaxWidth || this.width,
+          background: 'primary',
+          elementRef: (node: Element | null) => (this._listView = node),
+          borderRadius: 'inherit'
+        }
       : { maxHeight: 0 }
 
     return (
@@ -560,30 +560,30 @@ class Select extends Component<SelectProps> {
         >
           {isShowingOptions
             ? Children.map(children as SelectChildren, (child, index) => {
-              if (!child || !matchComponentTypes(child, [Group, Option])) {
-                return // ignore invalid children
-              }
-              if (matchComponentTypes<OptionChild>(child, [Option])) {
-                lastWasGroup = false
-                return this.renderOption(child, {
-                  getOptionProps,
-                  getDisabledOptionProps
-                })
-              }
-              if (matchComponentTypes<GroupChild>(child, [Group])) {
-                const afterGroup = lastWasGroup
-                lastWasGroup = true
-                return this.renderGroup(child, {
-                  getOptionProps,
-                  getDisabledOptionProps,
-                  // for rendering separators appropriately
-                  isFirstChild: index === 0,
-                  isLastChild: index === Children.count(children) - 1,
-                  afterGroup
-                })
-              }
-              return
-            })
+                if (!child || !matchComponentTypes(child, [Group, Option])) {
+                  return // ignore invalid children
+                }
+                if (matchComponentTypes<OptionChild>(child, [Option])) {
+                  lastWasGroup = false
+                  return this.renderOption(child, {
+                    getOptionProps,
+                    getDisabledOptionProps
+                  })
+                }
+                if (matchComponentTypes<GroupChild>(child, [Group])) {
+                  const afterGroup = lastWasGroup
+                  lastWasGroup = true
+                  return this.renderGroup(child, {
+                    getOptionProps,
+                    getDisabledOptionProps,
+                    // for rendering separators appropriately
+                    isFirstChild: index === 0,
+                    isLastChild: index === Children.count(children) - 1,
+                    afterGroup
+                  })
+                }
+                return
+              })
             : null}
         </Options>
       </View>
@@ -622,8 +622,8 @@ class Select extends Component<SelectProps> {
             return position === 'before'
               ? option.props.renderBeforeLabel
               : option.props.renderAfterLabel
-                ? option.props.renderAfterLabel
-                : this.renderIcon()
+              ? option.props.renderAfterLabel
+              : this.renderIcon()
           }
         }
       } else {
@@ -632,8 +632,8 @@ class Select extends Component<SelectProps> {
           return position === 'before'
             ? child.props.renderBeforeLabel
             : child.props.renderAfterLabel
-              ? child.props.renderAfterLabel
-              : this.renderIcon()
+            ? child.props.renderAfterLabel
+            : this.renderIcon()
         }
       }
     }
@@ -730,26 +730,26 @@ class Select extends Component<SelectProps> {
     // popup buttons rather than comboboxes.
     const overrideProps: Partial<TextInputProps> = !isEditable
       ? {
-        // We need role="combobox" for the 'open list' button shortcut to work
-        // with desktop screenreaders.
-        // But desktop Safari with Voiceover does not support proper combobox
-        // handling, a 'button' role is set as a workaround.
-        // See https://bugs.webkit.org/show_bug.cgi?id=236881
-        // Also on iOS Chrome with role='combobox' it announces unnecessarily
-        // that its 'read-only' and that this is a 'textfield', see INSTUI-4500
-        role:
-          utils.isSafari() ||
+          // We need role="combobox" for the 'open list' button shortcut to work
+          // with desktop screenreaders.
+          // But desktop Safari with Voiceover does not support proper combobox
+          // handling, a 'button' role is set as a workaround.
+          // See https://bugs.webkit.org/show_bug.cgi?id=236881
+          // Also on iOS Chrome with role='combobox' it announces unnecessarily
+          // that its 'read-only' and that this is a 'textfield', see INSTUI-4500
+          role:
+            utils.isSafari() ||
             utils.isAndroidOrIOS() ||
             (interaction === 'disabled' && utils.isChromium())
-            ? 'button'
-            : 'combobox',
-        title: inputValue,
-        'aria-autocomplete': undefined,
-        'aria-readonly': true
-      }
+              ? 'button'
+              : 'combobox',
+          title: inputValue,
+          'aria-autocomplete': undefined,
+          'aria-readonly': true
+        }
       : interaction === 'disabled' && utils.isChromium()
-        ? { role: 'button' }
-        : {}
+      ? { role: 'button' }
+      : {}
 
     // backdoor to autocomplete attr to work around chrome autofill issues
     if (passthroughProps['autoComplete']) {
@@ -796,8 +796,8 @@ class Select extends Component<SelectProps> {
         typeof onInputChange === 'function'
           ? onInputChange
           : inputValue
-            ? () => { }
-            : undefined,
+          ? () => {}
+          : undefined,
 
       onFocus,
       onBlur: utils.createChainedFunction(onBlur, onRequestHideOptions),
@@ -811,11 +811,10 @@ class Select extends Component<SelectProps> {
         suppressHydrationWarning
         {...(interaction === 'enabled' &&
           !isEditable && {
-          themeOverride: (componentTheme) => ({
-            //@ts-expect-error TODO-theme-types
-            backgroundReadonlyColor: componentTheme.backgroundColor
-          })
-        })}
+            themeOverride: (componentTheme) => ({
+              backgroundReadonlyColor: componentTheme.backgroundColor
+            })
+          })}
       />
     )
   }
@@ -872,8 +871,8 @@ class Select extends Component<SelectProps> {
                 mountNode !== undefined
                   ? mountNode
                   : utils.isAndroidOrIOS()
-                    ? this.ref
-                    : undefined
+                  ? this.ref
+                  : undefined
               }
               positionTarget={this._inputContainer}
               isShowingContent={isShowingOptions}

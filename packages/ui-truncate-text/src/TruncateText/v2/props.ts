@@ -24,8 +24,8 @@
 
 import { ReactNode } from 'react'
 
-import type { TruncateTextTheme } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
 type CleanDataOptions = {
   /**
@@ -79,7 +79,10 @@ type PropKeys = keyof TruncateTextOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TruncateTextProps = TruncateTextOwnProps &
-  WithStyleProps<TruncateTextTheme, TruncateTextStyle>
+  WithStyleProps<
+    ReturnType<NewComponentTypes['TruncateText']>,
+    TruncateTextStyle
+  >
 
 type TruncateTextStyle = ComponentStyle<
   'truncateText' | 'auto' | 'spacer' | 'lineHeight'

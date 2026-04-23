@@ -23,10 +23,8 @@
  */
 
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
-import type {
-  OtherHTMLAttributes,
-  ColorPresetTheme
-} from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 import type { RGBAType } from '@instructure/ui-color-utils'
 
 type ContrastStrength = 'min' | 'mid' | 'max'
@@ -125,7 +123,10 @@ type PropKeys = keyof ColorPresetOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type ColorPresetProps = ColorPresetOwnProps &
-  WithStyleProps<ColorPresetTheme, ColorPresetStyle> &
+  WithStyleProps<
+    ReturnType<NewComponentTypes['ColorPreset']>,
+    ColorPresetStyle
+  > &
   OtherHTMLAttributes<ColorPresetOwnProps>
 
 type ColorPresetStyle = ComponentStyle<

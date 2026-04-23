@@ -23,10 +23,8 @@
  */
 
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
-import type {
-  MenuSeparatorTheme,
-  OtherHTMLAttributes
-} from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 
 // keeping here to keep the structure of props.ts
 // eslint-disable-next-line
@@ -37,7 +35,10 @@ type PropKeys = keyof MenuSeparatorOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type MenuSeparatorProps = MenuSeparatorOwnProps &
-  WithStyleProps<MenuSeparatorTheme, MenuSeparatorStyle> &
+  WithStyleProps<
+    ReturnType<NewComponentTypes['MenuSeparator']>,
+    MenuSeparatorStyle
+  > &
   OtherHTMLAttributes<MenuSeparatorOwnProps>
 
 type MenuSeparatorStyle = ComponentStyle<'menuItemSeparator'>
