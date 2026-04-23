@@ -112,6 +112,7 @@ const generateStyle = (
   }
 
   const colorVariants = {
+    inherit: {},
     primary: { color: componentTheme.baseColor },
     secondary: { color: componentTheme.mutedColor },
     'primary-inverse': { color: componentTheme.inverseColor },

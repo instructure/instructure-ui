@@ -34,6 +34,9 @@ type: example
 type: example
 ---
 <div>
+  <span style={{color: 'red'}}>
+    <Text color="inherit">I inherit my color from the 'color' CSS property</Text>
+  </span><br/>
   <Text color="primary">I&#39;m primary text</Text><br/>
   <Text color="secondary">I&#39;m secondary text</Text><br/>
   <Text color="brand">I&#39;m brand text</Text><br />
