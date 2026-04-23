@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.2](https://github.com/instructure/instructure-ui/compare/v11.7.1...v11.7.2) (2026-04-23)
+
+
+### Features
+
+* **ui-rating,ui-icons:** rework Rating ([af97f0c](https://github.com/instructure/instructure-ui/commit/af97f0c0bc3a5d8324d99f23645b428192152193))
+
+
+### BREAKING CHANGES
+
+* **ui-rating,ui-icons:** the component got a new version in this release
+
+INSTUI-4806
+
+
+
+
+
 ## [11.7.1](https://github.com/instructure/instructure-ui/compare/v11.7.0...v11.7.1) (2026-03-20)
 
 **Note:** Version bump only for package @instructure/ui-rating

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.2](https://github.com/instructure/instructure-ui/compare/v11.7.1...v11.7.2) (2026-04-23)
+
+
+### Bug Fixes
+
+* **many:** fix doc component previews, update dark theme text and code block styles, and replace old icons ([d4e48d3](https://github.com/instructure/instructure-ui/commit/d4e48d3f739decb13b76c863c8f01685f0788dd6))
+
+
+
+
+
 ## [11.7.1](https://github.com/instructure/instructure-ui/compare/v11.7.0...v11.7.1) (2026-03-20)
 
 **Note:** Version bump only for package @instructure/ui-avatar

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.2](https://github.com/instructure/instructure-ui/compare/v11.7.1...v11.7.2) (2026-04-23)
+
+
+### Features
+
+* **ui-codemods:** add codemod to support versioned import updates ([04f6686](https://github.com/instructure/instructure-ui/commit/04f668683e252df9b063902acbbf8e9c504f0bc7))
+
+
+
+
+
 ## [11.7.1](https://github.com/instructure/instructure-ui/compare/v11.7.0...v11.7.1) (2026-03-20)
 
 **Note:** Version bump only for package @instructure/ui-codemods

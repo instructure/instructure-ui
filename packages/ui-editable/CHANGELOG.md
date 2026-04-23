@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.2](https://github.com/instructure/instructure-ui/compare/v11.7.1...v11.7.2) (2026-04-23)
+
+
+### Features
+
+* **ui-text,ui-editable:** rework InPlaceEdit and Editable ([10f637b](https://github.com/instructure/instructure-ui/commit/10f637b938d49e23ceddc6b52535f927dd91e37b))
+
+
+### BREAKING CHANGES
+
+* **ui-text,ui-editable:** the component got a new version in this release
+
+INSTUI-4969
+
+
+
+
+
 ## [11.7.1](https://github.com/instructure/instructure-ui/compare/v11.7.0...v11.7.1) (2026-03-20)
 
 **Note:** Version bump only for package @instructure/ui-editable

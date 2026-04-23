@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.2](https://github.com/instructure/instructure-ui/compare/v11.7.1...v11.7.2) (2026-04-23)
+
+
+### Features
+
+* **ui-instructure:** rework DataPermissionLevels and NutritionFacts ([36c02c6](https://github.com/instructure/instructure-ui/commit/36c02c6b3e0badcf257a9697ea095ad07cd03d49))
+
+
+
+
+
 ## [11.7.1](https://github.com/instructure/instructure-ui/compare/v11.7.0...v11.7.1) (2026-03-20)
 
 **Note:** Version bump only for package @instructure/ui-instructure

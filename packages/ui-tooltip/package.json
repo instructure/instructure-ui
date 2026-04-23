@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-tooltip",
-  "version": "11.7.1",
+  "version": "11.7.2",
   "description": "A component for showing small text-only overlays on hover/focus.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",

@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.2](https://github.com/instructure/instructure-ui/compare/v11.7.1...v11.7.2) (2026-04-23)
+
+
+### Bug Fixes
+
+* **many:** small fixes for doc and fix component directory mapping in "dev" script ([39f0c99](https://github.com/instructure/instructure-ui/commit/39f0c991315e39d30e1f24b3142b986d5b9041ee))
+
+
+### Features
+
+* **ui-overlays:** rework Mask ([335cc5b](https://github.com/instructure/instructure-ui/commit/335cc5b00b1a2e346343c79001606f1782ceb9a1))
+
+
+
+
+
 ## [11.7.1](https://github.com/instructure/instructure-ui/compare/v11.7.0...v11.7.1) (2026-03-20)
 
 **Note:** Version bump only for package @instructure/ui-overlays

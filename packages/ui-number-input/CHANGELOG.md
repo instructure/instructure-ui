@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.2](https://github.com/instructure/instructure-ui/compare/v11.7.1...v11.7.2) (2026-04-23)
+
+
+### Bug Fixes
+
+* **ui-text-area,ui-radio-input,ui-number-input:** fix Tooltip placements ([034c163](https://github.com/instructure/instructure-ui/commit/034c16362ca78db3f5af2f277b2f013851faa46a))
+
+
+
+
+
 ## [11.7.1](https://github.com/instructure/instructure-ui/compare/v11.7.0...v11.7.1) (2026-03-20)
 
 **Note:** Version bump only for package @instructure/ui-number-input
