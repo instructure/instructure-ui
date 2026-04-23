@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.2](https://github.com/instructure/instructure-ui/compare/v11.7.1...v11.7.2) (2026-04-23)
+
+
+### Bug Fixes
+
+* **many:** small fixes for doc and fix component directory mapping in "dev" script ([39f0c99](https://github.com/instructure/instructure-ui/commit/39f0c991315e39d30e1f24b3142b986d5b9041ee))
+* **ui-scripts,emotion:** fix primitives and semantics override functionality ([d72df52](https://github.com/instructure/instructure-ui/commit/d72df52242fdf5ecd13fa38e19f254da1be9a8dc))
+
+
+### Features
+
+* **many:** fix issues ([9d623ed](https://github.com/instructure/instructure-ui/commit/9d623ed9ba2be49549b625d1e436edc230a4df41))
+* **ui-themes,ui-alerts,emotion:** fix primitives and semantics overrides and add freeze functionlionality to old components ([336fde9](https://github.com/instructure/instructure-ui/commit/336fde9952698eda020db4916f276e8532ed1669))
+* **ui,ui-options,ui-drilldown:** rework Drilldown ([0562fe2](https://github.com/instructure/instructure-ui/commit/0562fe2b43e3235fc78c4981ada504c1a2f10d1a))
+
+
+### BREAKING CHANGES
+
+* **ui,ui-options,ui-drilldown:** the component got a new version in this release
+
+INSTUI-4792
+
+
+
+
+
 ## [11.7.1](https://github.com/instructure/instructure-ui/compare/v11.7.0...v11.7.1) (2026-03-20)
 
 **Note:** Version bump only for package docs-app

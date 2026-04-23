@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.2](https://github.com/instructure/instructure-ui/compare/v11.7.1...v11.7.2) (2026-04-23)
+
+
+### Bug Fixes
+
+* **ui-scripts,emotion:** fix primitives and semantics override functionality ([d72df52](https://github.com/instructure/instructure-ui/commit/d72df52242fdf5ecd13fa38e19f254da1be9a8dc))
+
+
+### Features
+
+* **many:** fix issues ([9d623ed](https://github.com/instructure/instructure-ui/commit/9d623ed9ba2be49549b625d1e436edc230a4df41))
+
+
+
+
+
 ## [11.7.1](https://github.com/instructure/instructure-ui/compare/v11.7.0...v11.7.1) (2026-03-20)
 
 **Note:** Version bump only for package @instructure/ui-scripts
