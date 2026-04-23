@@ -25,10 +25,10 @@
 import React from 'react'
 import type {
   AsElementType,
-  SideNavBarItemTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
 type SideNavBarItemOwnProps = {
   /**
@@ -70,7 +70,10 @@ type PropKeys = keyof SideNavBarItemOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type SideNavBarItemProps = SideNavBarItemOwnProps &
-  WithStyleProps<SideNavBarItemTheme, SideNavBarItemStyle> &
+  WithStyleProps<
+    ReturnType<NewComponentTypes['SideNavBarItem']>,
+    SideNavBarItemStyle
+  > &
   OtherHTMLAttributes<SideNavBarItemOwnProps>
 
 type SideNavBarItemStyle = ComponentStyle<'navigationItem' | 'icon' | 'label'>

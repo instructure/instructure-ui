@@ -23,8 +23,9 @@
  */
 
 import React from 'react'
-import type { MaskTheme, OtherHTMLAttributes } from '@instructure/shared-types'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
 type MaskOwnProps = {
   children?: React.ReactNode
@@ -42,7 +43,7 @@ type PropKeys = keyof MaskOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type MaskProps = MaskOwnProps &
-  WithStyleProps<MaskTheme, MaskStyle> &
+  WithStyleProps<ReturnType<NewComponentTypes['Mask']>, MaskStyle> &
   OtherHTMLAttributes<MaskOwnProps>
 
 type MaskStyle = ComponentStyle<'mask'>

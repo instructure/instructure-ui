@@ -24,7 +24,6 @@
 
 import type {
   AsElementType,
-  FlexTheme,
   OtherHTMLAttributes,
   Renderable
 } from '@instructure/shared-types'
@@ -33,6 +32,7 @@ import type {
   WithStyleProps,
   ComponentStyle
 } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
 type FlexOwnProps = {
   /**
@@ -127,7 +127,7 @@ type PropKeys = keyof FlexOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type FlexProps = FlexOwnProps &
-  WithStyleProps<FlexTheme, FlexStyle> &
+  WithStyleProps<ReturnType<NewComponentTypes['Flex']>, FlexStyle> &
   OtherHTMLAttributes<FlexOwnProps>
 
 type FlexStyle = ComponentStyle<'flex'>

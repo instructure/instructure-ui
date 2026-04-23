@@ -66,14 +66,14 @@ type WithStylePrivateProps<
 > = Style extends null
   ? object
   : {
-    styles?: Style
-    makeStyles?: (extraArgs?: Record<string, unknown>) => void
-  }
+      styles?: Style
+      makeStyles?: (extraArgs?: Record<string, unknown>) => void
+    }
 
 type ThemeOverrideProp<Theme extends ComponentTheme | null = ComponentTheme> = {
   themeOverride?:
-  | Partial<Theme>
-  | ((componentTheme: Theme, currentTheme: BaseTheme) => Partial<Theme>)
+    | Partial<Theme>
+    | ((componentTheme: Theme, currentTheme: BaseTheme) => Partial<Theme>)
 }
 
 type WithStyleProps<
@@ -87,7 +87,7 @@ declare const process: Record<string, any> | undefined
 
 const defaultValues = {
   styles: {},
-  makeStyles: () => { }
+  makeStyles: () => {}
 }
 
 /**
@@ -175,7 +175,7 @@ const withStyle = decorator(
       if (frozenTheme && !frozenTheme[themeKey]) {
         console.error(
           `The version of ${displayName} you are using does not support the currently applied "${themeKey}" theme. ` +
-          `Please upgrade to the latest version of ${displayName}.`
+            `Please upgrade to the latest version of ${displayName}.`
         )
       }
 
@@ -231,7 +231,7 @@ const withStyle = decorator(
         theme.newTheme.sharedTokens?.(semantics),
         sharedTokensOverrides
       )
-
+      // Note: Some components do not have a theme, e.g., FormFieldMessages
       const baseComponentTheme =
         theme.newTheme.components[componentId as keyof NewComponentTypes]?.(
           semantics
@@ -247,9 +247,9 @@ const withStyle = decorator(
         // @ts-ignore TODO-theme-types: fix typing
         typeof componentOverridesFromThemeOverrideProp === 'function'
           ? componentOverridesFromThemeOverrideProp(
-            componentThemeFromSettingsProvider,
-            themeInContext
-          )
+              componentThemeFromSettingsProvider,
+              themeInContext
+            )
           : componentOverridesFromThemeOverrideProp
       )
 
@@ -257,7 +257,7 @@ const withStyle = decorator(
       const [styles, setStyles] = useState(
         generateStyle
           ? // @ts-ignore TODO-theme-types: fix typing
-          generateStyle(componentTheme, componentProps, sharedTokens, {})
+            generateStyle(componentTheme, componentProps, sharedTokens, {})
           : {}
       )
 

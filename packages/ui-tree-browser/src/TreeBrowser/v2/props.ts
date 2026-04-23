@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import type { TreeBrowserTheme } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import React, { ReactElement } from 'react'
 import type { TreeBrowserButtonProps } from './TreeButton/props'
 import { Renderable } from '@instructure/shared-types'
@@ -141,7 +141,7 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 // For now it doesn't need the OtherHTMLAttributes, because the extra props
 // get passed to TreeCollection and it doesn't handle them
 type TreeBrowserProps = TreeBrowserOwnProps &
-  WithStyleProps<TreeBrowserTheme, TreeBrowserStyle>
+  WithStyleProps<ReturnType<NewComponentTypes['TreeBrowser']>, TreeBrowserStyle>
 
 type TreeBrowserStyle = ComponentStyle<'treeBrowser'>
 

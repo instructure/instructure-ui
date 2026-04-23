@@ -24,10 +24,10 @@
 
 import type {
   AsElementType,
-  CalendarDayTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import { KeyboardEvent, MouseEvent } from 'react'
 import type { ViewProps } from '@instructure/ui-view/latest'
 import { Renderable } from '@instructure/shared-types'
@@ -104,7 +104,10 @@ type PropKeys = keyof CalendarDayOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type CalendarDayProps = CalendarDayOwnProps &
-  WithStyleProps<CalendarDayTheme, CalendarDayStyle> &
+  WithStyleProps<
+    ReturnType<NewComponentTypes['CalendarDay']>,
+    CalendarDayStyle
+  > &
   OtherHTMLAttributes<CalendarDayOwnProps>
 
 type CalendarDayStyle = ComponentStyle<'calendarDay' | 'day'>

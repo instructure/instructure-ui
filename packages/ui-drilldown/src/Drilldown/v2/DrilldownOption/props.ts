@@ -25,7 +25,6 @@
 import React from 'react'
 import type {
   OtherHTMLAttributes,
-  OptionsItemTheme,
   AsElementType
 } from '@instructure/shared-types'
 import type { WithStyleProps } from '@instructure/emotion'
@@ -36,6 +35,7 @@ import type {
 
 import Drilldown from '../index'
 import { Renderable } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
 type DrilldownOptionValue = string | number | undefined
 
@@ -182,7 +182,7 @@ type PropKeys = keyof DrilldownOptionOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type DrilldownOptionProps = DrilldownOptionOwnProps &
-  WithStyleProps<OptionsItemTheme, null> &
+  WithStyleProps<ReturnType<NewComponentTypes['OptionsItem']>, null> &
   OtherHTMLAttributes<DrilldownOptionOwnProps>
 const allowedProps: AllowedPropKeys = [
   'id',

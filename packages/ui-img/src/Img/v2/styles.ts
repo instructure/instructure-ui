@@ -32,11 +32,10 @@ import type { ImgProps, ImgStyle } from './props'
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['Img'],
+  componentTheme: ReturnType<NewComponentTypes['Img']>,
   props: ImgProps
 ): ImgStyle => {
   const { overlay, withBlur, withGrayscale, constrain } = props
@@ -47,25 +46,22 @@ const generateStyle = (
   // if overlay or filters are updated via props,
   // make the transition look smooth
   const transitionStyle = {
-    //@ts-expect-error TODO-theme-types
     transition: `all ${componentTheme.effectTransitionDuration}`
   }
 
   const getFilterStyle = () => {
     const filters = []
-
-    //@ts-expect-error TODO-theme-types
     withBlur && filters.push(`blur(${componentTheme.imageBlurAmount})`)
     withGrayscale && filters.push('grayscale(1)')
 
     return filters.length > 0
       ? {
-        ...transitionStyle,
-        filter: filters.join(' ')
-      }
+          ...transitionStyle,
+          filter: filters.join(' ')
+        }
       : {
-        filter: 'none'
-      }
+          filter: 'none'
+        }
   }
 
   const fillContainer = {

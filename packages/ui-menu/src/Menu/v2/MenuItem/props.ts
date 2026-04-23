@@ -27,10 +27,10 @@ import MenuItem from '../MenuItem'
 
 import type {
   AsElementType,
-  MenuItemTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 type OnMenuItemSelect = (
@@ -100,7 +100,7 @@ type PropKeys = keyof MenuItemOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type MenuItemProps = MenuItemOwnProps &
-  WithStyleProps<MenuItemTheme, MenuItemStyle> &
+  WithStyleProps<ReturnType<NewComponentTypes['MenuItem']>, MenuItemStyle> &
   OtherHTMLAttributes<MenuItemOwnProps> &
   WithDeterministicIdProps
 

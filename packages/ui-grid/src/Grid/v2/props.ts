@@ -22,8 +22,9 @@
  * SOFTWARE.
  */
 
-import type { GridTheme, OtherHTMLAttributes } from '@instructure/shared-types'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { GridBreakpoints } from '../../utils/v1/GridTypes'
 
 type GridOwnProps = {
@@ -44,7 +45,7 @@ type PropKeys = keyof GridOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type GridProps = GridOwnProps &
-  WithStyleProps<GridTheme, GridStyle> &
+  WithStyleProps<ReturnType<NewComponentTypes['Grid']>, GridStyle> &
   OtherHTMLAttributes<GridOwnProps>
 
 type GridStyle = ComponentStyle<'grid'>

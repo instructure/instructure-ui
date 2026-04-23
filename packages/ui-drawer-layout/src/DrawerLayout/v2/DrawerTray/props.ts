@@ -26,8 +26,8 @@ import React from 'react'
 import type { PositionMountNode } from '@instructure/ui-position'
 import type { TextDirectionContextConsumerProps } from '@instructure/ui-i18n'
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type {
-  DrawerLayoutTrayTheme,
   LiveRegion,
   OtherHTMLAttributes,
   UIElement
@@ -183,7 +183,10 @@ type PropKeys = keyof DrawerLayoutTrayOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type DrawerLayoutTrayProps = DrawerLayoutTrayOwnProps &
-  WithStyleProps<DrawerLayoutTrayTheme, DrawerLayoutTrayStyle> &
+  WithStyleProps<
+    ReturnType<NewComponentTypes['DrawerLayoutTray']>,
+    DrawerLayoutTrayStyle
+  > &
   OtherHTMLAttributes<DrawerLayoutTrayOwnProps>
 
 type DrawerLayoutTrayStyle = ComponentStyle<

@@ -24,7 +24,6 @@
 
 import type {
   AsElementType,
-  FormFieldGroupTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
@@ -73,7 +72,7 @@ type PropKeys = keyof FormFieldGroupOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type FormFieldGroupProps = FormFieldGroupOwnProps &
-  WithStyleProps<FormFieldGroupTheme, FormFieldGroupStyle> &
+  WithStyleProps<null, FormFieldGroupStyle> &
   OtherHTMLAttributes<FormFieldGroupOwnProps> &
   // Adding other props that can be passed to FormFieldLayout,
   // excluding the ones we set manually

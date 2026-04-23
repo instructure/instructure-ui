@@ -27,9 +27,9 @@ import type {
   WithStyleProps,
   ComponentStyle
 } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type {
   AsElementType,
-  BillboardTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { ViewProps } from '@instructure/ui-view/latest'
@@ -102,7 +102,7 @@ type PropKeys = keyof BillboardOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type BillboardProps = BillboardOwnProps &
-  WithStyleProps<BillboardTheme, BillboardStyle> &
+  WithStyleProps<ReturnType<NewComponentTypes['Billboard']>, BillboardStyle> &
   OtherHTMLAttributes<BillboardOwnProps>
 
 type BillboardStyle = ComponentStyle<

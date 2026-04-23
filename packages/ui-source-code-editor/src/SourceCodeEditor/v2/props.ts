@@ -24,15 +24,13 @@
 
 import type { TagStyle } from '@codemirror/language'
 
-import type {
-  CodeEditorTheme,
-  OtherHTMLAttributes
-} from '@instructure/shared-types'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 import type {
   WithStyleProps,
   StyleObject,
   ComponentStyle
 } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 import type { TextDirectionContextConsumerProps } from '@instructure/ui-i18n'
 import type { SearchConfig } from './SearchPanel'
@@ -213,7 +211,7 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type SourceCodeEditorProps = SourceCodeEditorOwnProps &
   WithStyleProps<
-    CodeEditorTheme,
+    ReturnType<NewComponentTypes['SourceCodeEditor']>,
     // The highlightStyle is a unique one, not compatible with our style syntax,
     // but isn't used for the css prop anyway
     Record<keyof SourceCodeEditorStyle, any>

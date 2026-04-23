@@ -27,11 +27,11 @@ import React from 'react'
 import {
   AsElementType,
   OtherHTMLAttributes,
-  Renderable,
-  ToggleGroupTheme
+  Renderable
 } from '@instructure/shared-types'
 
 import type { WithStyleProps } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
 type ToggleGroupOwnProps = {
   /**
@@ -94,7 +94,7 @@ type ToggleGroupStyle = { borderColor: string }
 
 type ToggleGroupProps = ToggleGroupOwnProps &
   OtherHTMLAttributes<ToggleGroupOwnProps> &
-  WithStyleProps<ToggleGroupTheme, ToggleGroupStyle>
+  WithStyleProps<ReturnType<NewComponentTypes['ToggleGroup']>, ToggleGroupStyle>
 const allowedProps: AllowedPropKeys = [
   'children',
   'summary',

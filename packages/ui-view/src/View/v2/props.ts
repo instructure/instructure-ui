@@ -26,8 +26,7 @@ import React from 'react'
 import type { Cursor } from '@instructure/shared-types'
 import type {
   AsElementType,
-  OtherHTMLAttributes,
-  ViewTheme
+  OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type {
   WithStyleProps,
@@ -39,6 +38,7 @@ import type {
   ComponentStyle,
   StyleObject
 } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
 type BorderColor =
   | string
@@ -223,7 +223,7 @@ type ViewOwnProps = {
 type PropKeys = keyof ViewOwnProps
 
 type ViewProps = ViewOwnProps &
-  WithStyleProps<ViewTheme, ViewStyle> &
+  WithStyleProps<ReturnType<NewComponentTypes['View']>, ViewStyle> &
   OtherHTMLAttributes<ViewOwnProps>
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>

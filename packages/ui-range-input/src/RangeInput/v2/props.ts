@@ -26,11 +26,14 @@ import React from 'react'
 
 import type {
   OtherHTMLAttributes,
-  RangeInputTheme,
   PickPropsWithExceptions
 } from '@instructure/shared-types'
-import type { FormFieldOwnProps, FormMessage } from '@instructure/ui-form-field/latest'
+import type {
+  FormFieldOwnProps,
+  FormMessage
+} from '@instructure/ui-form-field/latest'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { InputHTMLAttributes } from 'react'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
@@ -110,7 +113,10 @@ type RangeInputProps =
     'label' | 'inline' | 'id' | 'elementRef'
   > &
     RangeInputOwnProps &
-    WithStyleProps<RangeInputTheme, RangeInputStyle> &
+    WithStyleProps<
+      ReturnType<NewComponentTypes['RangeInput']>,
+      RangeInputStyle
+    > &
     OtherHTMLAttributes<
       RangeInputOwnProps,
       InputHTMLAttributes<RangeInputOwnProps & Element>

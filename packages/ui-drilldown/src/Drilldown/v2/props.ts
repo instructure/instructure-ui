@@ -33,7 +33,6 @@ import type {
   PositionMountNode
 } from '@instructure/ui-position'
 import type {
-  DrilldownTheme,
   OtherHTMLAttributes,
   AsElementType
 } from '@instructure/shared-types'
@@ -51,6 +50,7 @@ import { DrilldownSeparator } from './DrilldownSeparator'
 import type { DrilldownSeparatorProps } from './DrilldownSeparator/props'
 
 import { Drilldown } from './index'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
 type PageChild = React.ComponentElement<DrilldownPageProps, DrilldownPage>
 type GroupChild = React.ComponentElement<DrilldownGroupProps, DrilldownGroup>
@@ -273,7 +273,7 @@ type PropKeys = keyof DrilldownOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type DrilldownProps = DrilldownOwnProps &
-  WithStyleProps<DrilldownTheme, DrilldownStyle> &
+  WithStyleProps<ReturnType<NewComponentTypes['Drilldown']>, DrilldownStyle> &
   WithDeterministicIdProps &
   OtherHTMLAttributes<DrilldownOwnProps>
 

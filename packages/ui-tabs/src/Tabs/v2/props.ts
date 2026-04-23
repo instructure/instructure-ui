@@ -27,7 +27,8 @@ import type {
   WithStyleProps,
   ComponentStyle
 } from '@instructure/emotion'
-import type { OtherHTMLAttributes, TabsTheme } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 import type { TextDirectionContextConsumerProps } from '@instructure/ui-i18n'
 import type { ViewOwnProps } from '@instructure/ui-view/latest'
 
@@ -85,7 +86,7 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TabsProps = TabsOwnProps &
   TextDirectionContextConsumerProps &
-  WithStyleProps<TabsTheme, TabsStyle> &
+  WithStyleProps<ReturnType<NewComponentTypes['Tabs']>, TabsStyle> &
   OtherHTMLAttributes<TabsOwnProps>
 
 type TabsStyle = ComponentStyle<

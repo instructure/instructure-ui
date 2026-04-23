@@ -27,7 +27,6 @@ import { Dialog } from '@instructure/ui-dialog'
 
 import type {
   AsElementType,
-  ModalTheme,
   OtherHTMLAttributes,
   LiveRegion,
   UIElement
@@ -35,6 +34,7 @@ import type {
 import type { PositionMountNode } from '@instructure/ui-position'
 import type { TransitionType } from '@instructure/ui-motion'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
 type ModalPropsForPortal = {
   /**
@@ -180,7 +180,7 @@ type PropKeys = keyof ModalOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type ModalProps = ModalOwnProps &
-  WithStyleProps<ModalTheme, ModalStyle> &
+  WithStyleProps<ReturnType<NewComponentTypes['Modal']>, ModalStyle> &
   OtherHTMLAttributes<ModalOwnProps>
 
 type ModalStyle = ComponentStyle<

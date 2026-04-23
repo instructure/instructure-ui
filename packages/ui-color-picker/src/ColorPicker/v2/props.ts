@@ -29,10 +29,8 @@ import type {
   ComponentStyle,
   Spacing
 } from '@instructure/emotion'
-import type {
-  ColorPickerTheme,
-  OtherHTMLAttributes
-} from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 type ContrastStrength = 'min' | 'mid' | 'max'
 
 type ColorPickerOwnProps = {
@@ -253,7 +251,10 @@ type PropKeys = keyof ColorPickerOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type ColorPickerProps = ColorPickerOwnProps &
-  WithStyleProps<ColorPickerTheme, ColorPickerStyle> &
+  WithStyleProps<
+    ReturnType<NewComponentTypes['ColorPicker']>,
+    ColorPickerStyle
+  > &
   OtherHTMLAttributes<ColorPickerOwnProps>
 
 type ColorPickerStyle = ComponentStyle<

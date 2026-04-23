@@ -24,10 +24,10 @@
 import React from 'react'
 import type {
   AsElementType,
-  OptionsTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 import { Renderable } from '@instructure/shared-types'
 
@@ -59,7 +59,7 @@ type PropKeys = keyof OptionsOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type OptionsProps = OptionsOwnProps &
-  WithStyleProps<OptionsTheme, OptionsStyle> &
+  WithStyleProps<ReturnType<NewComponentTypes['Options']>, OptionsStyle> &
   OtherHTMLAttributes<OptionsOwnProps> &
   WithDeterministicIdProps
 

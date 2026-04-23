@@ -24,11 +24,9 @@
 
 import { AriaRole } from 'react'
 
-import type {
-  DrawerLayoutContentTheme,
-  OtherHTMLAttributes
-} from '@instructure/shared-types'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
 type DrawerContentSize = { width: number; height?: number }
 
@@ -52,7 +50,10 @@ type PropKeys = keyof DrawerLayoutContentOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type DrawerLayoutContentProps = DrawerLayoutContentOwnProps &
-  WithStyleProps<DrawerLayoutContentTheme, DrawerLayoutContentStyle> &
+  WithStyleProps<
+    ReturnType<NewComponentTypes['DrawerLayoutContent']>,
+    DrawerLayoutContentStyle
+  > &
   OtherHTMLAttributes<DrawerLayoutContentOwnProps>
 
 type DrawerLayoutContentStyle = ComponentStyle<'drawerContent'>

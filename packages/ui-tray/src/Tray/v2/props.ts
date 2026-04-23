@@ -24,9 +24,9 @@
 
 import React from 'react'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type {
   OtherHTMLAttributes,
-  TrayTheme,
   LiveRegion,
   UIElement
 } from '@instructure/shared-types'
@@ -166,7 +166,7 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TrayProps = TrayOwnProps &
   TextDirectionContextConsumerProps &
-  WithStyleProps<TrayTheme, TrayStyle> &
+  WithStyleProps<ReturnType<NewComponentTypes['Tray']>, TrayStyle> &
   OtherHTMLAttributes<TrayOwnProps>
 
 type TrayStyle = ComponentStyle<'tray' | 'content'>

@@ -23,11 +23,9 @@
  */
 
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
-import type {
-  OtherHTMLAttributes,
-  ColorMixerRGBAInputTheme
-} from '@instructure/shared-types'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 import type { RGBAType } from '@instructure/ui-color-utils'
 
 type RGBAInputOwnProps = {
@@ -53,7 +51,7 @@ type PropKeys = keyof RGBAInputOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type RGBAInputProps = RGBAInputOwnProps &
-  WithStyleProps<ColorMixerRGBAInputTheme, RGBAInputStyle> &
+  WithStyleProps<ReturnType<NewComponentTypes['RgbaInput']>, RGBAInputStyle> &
   OtherHTMLAttributes<RGBAInputOwnProps>
 
 type RGBAInputStyle = ComponentStyle<

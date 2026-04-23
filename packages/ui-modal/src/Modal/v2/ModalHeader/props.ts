@@ -23,11 +23,9 @@
  */
 
 import React from 'react'
-import type {
-  ModalHeaderTheme,
-  OtherHTMLAttributes
-} from '@instructure/shared-types'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
 type ModalHeaderOwnProps = {
   children?: React.ReactNode
@@ -44,7 +42,10 @@ type PropKeys = keyof ModalHeaderOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type ModalHeaderProps = ModalHeaderOwnProps &
-  WithStyleProps<ModalHeaderTheme, ModalHeaderStyle> &
+  WithStyleProps<
+    ReturnType<NewComponentTypes['ModalHeader']>,
+    ModalHeaderStyle
+  > &
   OtherHTMLAttributes<ModalHeaderOwnProps>
 
 type ModalHeaderStyle = ComponentStyle<'modalHeader'>

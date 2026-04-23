@@ -22,10 +22,7 @@
  * SOFTWARE.
  */
 
-import type {
-  FormFieldMessagesTheme,
-  OtherHTMLAttributes
-} from '@instructure/shared-types'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { FormMessage } from '../../utils/v1/FormPropTypes'
 
@@ -49,7 +46,7 @@ type PropKeys = keyof FormFieldMessagesOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type FormFieldMessagesProps = FormFieldMessagesOwnProps &
-  WithStyleProps<FormFieldMessagesTheme, FormFieldMessagesStyle> &
+  WithStyleProps<null, FormFieldMessagesStyle> &
   OtherHTMLAttributes<FormFieldMessagesOwnProps>
 
 type FormFieldMessagesStyle = ComponentStyle<'formFieldMessages' | 'message'>
