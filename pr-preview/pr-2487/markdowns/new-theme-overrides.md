@@ -512,7 +512,40 @@ type: example
 </InstUISettingsProvider>
 ```
 
-### 13. Per-component `themeOverride` prop overriding provider-level child overrides
+### 13. Targeted override for a parent component
+
+You can use the parent component's name (e.g. `Button`) in `themeOverride.components` to override its internal child component's tokens. When both `BaseButton` and `Button` overrides are present, the `Button` override should take precedence for `Button` instances, while `BaseButton` stays unaffected.
+
+```js
+---
+type: example
+---
+<InstUISettingsProvider theme={canvas}>
+  <InstUISettingsProvider
+    themeOverride={{
+      components: {
+        BaseButton: {
+          primaryBackground: 'rebeccapurple',
+          primaryBorderColor: 'rebeccapurple'
+        },
+        Button: {
+          primaryBackground: 'deeppink',
+          primaryBorderColor: 'deeppink'
+        }
+      }
+    }}
+  >
+    <BaseButton color="primary" margin="small">
+      BaseButton - still purple (BaseButton override)
+    </BaseButton>
+    <Button color="primary" margin="small">
+      Button - deeppink (Button override wins)
+    </Button>
+  </InstUISettingsProvider>
+</InstUISettingsProvider>
+```
+
+### 14. Per-component `themeOverride` prop overriding provider-level child overrides
 
 When a provider sets `components.BaseButton` overrides, a specific `Button` instance can override those via its own `themeOverride` prop. The per-component prop has the highest priority.
 
@@ -551,7 +584,7 @@ type: example
 </InstUISettingsProvider>
 ```
 
-### 14. Overrides on functional (`useStyle`) components
+### 15. Overrides on functional (`useStyle`) components
 
 All override patterns work identically on functional components that use the `useStyle` hook. Here, Avatar tokens are overridden the same way as class-based components using `withStyle`.
 
@@ -578,7 +611,7 @@ type: example
 </InstUISettingsProvider>
 ```
 
-### 15. Function form `themeOverride` on functional components
+### 16. Function form `themeOverride` on functional components
 
 The function form also works on `useStyle` components. The function receives the component's calculated theme as the first argument, letting you derive overrides from existing token values.
 
