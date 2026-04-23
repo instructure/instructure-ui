@@ -1175,9 +1175,10 @@ type: embed
 
 ### Text
 
+- The default `color` prop value has been changed from `undefined` (inherit) to `primary` meaning if you don't set any value, it will have the `primary` color instead of the inherited color.
+- Added three new colors: `primary-on` and `secondary-on`, these are used for colored surfaces; `inherit` inherits the color from its ancestor.
 - `alert` color has been removed. Please use `primary` instead.
 - Some prop values have been deprecated, see [Text](/Text) for more details.
-- `color` has 2 new values: `primary-on` and `secondary-on`, these are used for colored surfaces.
 
 ### TextArea
 

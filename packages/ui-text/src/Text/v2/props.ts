@@ -39,6 +39,7 @@ type TextOwnProps = {
    * Color of the text
    */
   color?:
+    | 'inherit'
     | 'primary'
     | 'secondary'
     | 'brand'
