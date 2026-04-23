@@ -76,22 +76,22 @@ type: example
 ---
 
 <InstUISettingsProvider dir="ltr">
-  <div>LTR text</div>
+  <div><Text>LTR text</Text></div>
   <Badge count={105} countUntil={100} margin="small medium 0 0">
     <Button>LTR Badge</Button>
   </Badge>
 
   <InstUISettingsProvider dir="rtl">
     <View as="div">
-      <div>Nested RTL text</div>
+      <div><Text>Nested RTL text</Text></div>
       <Badge count={105} countUntil={100} margin="small medium 0 0">
         <Button>Nested RTL Badge</Button>
       </Badge>
     </View>
   </InstUISettingsProvider>
 
-  <div>LTR text</div>
-  <div>LTR text</div>
+  <div><Text>LTR text</Text></div>
+  <div><Text>LTR text</Text></div>
 </InstUISettingsProvider>
 ```
 
@@ -102,6 +102,7 @@ type: example
 |-----------|------|------|----------|---------|-------------|
 | InstUISettingsProvider | children | `React.ReactNode` | No | - |  |
 | InstUISettingsProvider | theme | `\| BaseThemeOrOverride \| ((theme: BaseTheme) => BaseThemeOrOverride)` | No | `{}` | A full theme or an override object |
+| InstUISettingsProvider | themeOverride | `any` | No | - | An override object for the new theming system. |
 | InstUISettingsProvider | instanceCounterMap | `DeterministicIdProviderValue` | No | - | @deprecated the `instanceCounterMap` prop is deprecated. You don't need to supply the `instanceCounterMap` to the component. It handles it internally. A [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) which keeps track of specific InstUI components. (generally this is used for deterministic id generation for [SSR](/#server-side-rendering)) |
 
 ### Usage
