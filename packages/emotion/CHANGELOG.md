@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.2](https://github.com/instructure/instructure-ui/compare/v11.7.1...v11.7.2) (2026-04-23)
+
+
+### Bug Fixes
+
+* **emotion:** fix getShortHandValue not trimming input string ([75eac6f](https://github.com/instructure/instructure-ui/commit/75eac6f122623fe4c7d750fde8739864402ecaaf))
+* **many:** fix doc component previews, update dark theme text and code block styles, and replace old icons ([d4e48d3](https://github.com/instructure/instructure-ui/commit/d4e48d3f739decb13b76c863c8f01685f0788dd6))
+* **ui-scripts,emotion:** fix primitives and semantics override functionality ([d72df52](https://github.com/instructure/instructure-ui/commit/d72df52242fdf5ecd13fa38e19f254da1be9a8dc))
+
+
+### Features
+
+* **emotion:** add helper for accessing computed theme (useComputedTheme.ts in the emotion package) ([6d3c649](https://github.com/instructure/instructure-ui/commit/6d3c64912304bf863e3bc720cdb29c88165bfe81))
+* **many:** fix issues ([9d623ed](https://github.com/instructure/instructure-ui/commit/9d623ed9ba2be49549b625d1e436edc230a4df41))
+* **ui-themes,ui-alerts,emotion:** fix primitives and semantics overrides and add freeze functionlionality to old components ([336fde9](https://github.com/instructure/instructure-ui/commit/336fde9952698eda020db4916f276e8532ed1669))
+
+
+
+
+
 ## [11.7.1](https://github.com/instructure/instructure-ui/compare/v11.7.0...v11.7.1) (2026-03-20)
 
 **Note:** Version bump only for package @instructure/emotion

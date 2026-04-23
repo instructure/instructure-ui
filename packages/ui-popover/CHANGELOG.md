@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.2](https://github.com/instructure/instructure-ui/compare/v11.7.1...v11.7.2) (2026-04-23)
+
+
+### Bug Fixes
+
+* **many:** small fixes for doc and fix component directory mapping in "dev" script ([39f0c99](https://github.com/instructure/instructure-ui/commit/39f0c991315e39d30e1f24b3142b986d5b9041ee))
+
+
+### Features
+
+* **many:** rework Select, SimpleSelect and TimeSelect ([fb95519](https://github.com/instructure/instructure-ui/commit/fb9551958326bdc8e95d55075c27c7e078c0c69c))
+
+
+### BREAKING CHANGES
+
+* **many:** the component got a new version in this release
+
+INSTUI-4807
+
+
+
+
+
 ## [11.7.1](https://github.com/instructure/instructure-ui/compare/v11.7.0...v11.7.1) (2026-03-20)
 
 **Note:** Version bump only for package @instructure/ui-popover

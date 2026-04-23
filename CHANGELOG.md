@@ -3,6 +3,64 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.2](https://github.com/instructure/instructure-ui/compare/v11.7.1...v11.7.2) (2026-04-23)
+
+
+### Bug Fixes
+
+* **emotion:** fix getShortHandValue not trimming input string ([75eac6f](https://github.com/instructure/instructure-ui/commit/75eac6f122623fe4c7d750fde8739864402ecaaf))
+* **many:** fix checkbox toggle variant icons and resolve border radius inheritance issues in DateInput and Menu from View ([ab2c8c2](https://github.com/instructure/instructure-ui/commit/ab2c8c2ba7f5b3944f7977244e37f4a4c916422a))
+* **many:** fix doc component previews, update dark theme text and code block styles, and replace old icons ([d4e48d3](https://github.com/instructure/instructure-ui/commit/d4e48d3f739decb13b76c863c8f01685f0788dd6))
+* **many:** small fixes for doc and fix component directory mapping in "dev" script ([39f0c99](https://github.com/instructure/instructure-ui/commit/39f0c991315e39d30e1f24b3142b986d5b9041ee))
+* **ui-date-input:** voicover: read only textinput label, ignore children ([cd26015](https://github.com/instructure/instructure-ui/commit/cd26015f8d759e1dab931b0f691e345006ecb4b8))
+* **ui-scripts,emotion:** fix primitives and semantics override functionality ([d72df52](https://github.com/instructure/instructure-ui/commit/d72df52242fdf5ecd13fa38e19f254da1be9a8dc))
+* **ui-source-code-editor:** preserve scroll position in controlled mode ([49dd754](https://github.com/instructure/instructure-ui/commit/49dd754ffd5518219cec5e55d65e9ca86dfc5868))
+* **ui-text-area,ui-radio-input,ui-number-input:** fix Tooltip placements ([034c163](https://github.com/instructure/instructure-ui/commit/034c16362ca78db3f5af2f277b2f013851faa46a))
+
+
+### Features
+
+* **emotion:** add helper for accessing computed theme (useComputedTheme.ts in the emotion package) ([6d3c649](https://github.com/instructure/instructure-ui/commit/6d3c64912304bf863e3bc720cdb29c88165bfe81))
+* **many:** rework Select, SimpleSelect and TimeSelect ([fb95519](https://github.com/instructure/instructure-ui/commit/fb9551958326bdc8e95d55075c27c7e078c0c69c))
+* **many:** rework TopNavBar ([bf40e4f](https://github.com/instructure/instructure-ui/commit/bf40e4f380dce5edc45a0f0bc83d5a5070d3be2b))
+* **ui-byline:** rework Byline ([066524f](https://github.com/instructure/instructure-ui/commit/066524ff00c2417b29ac4bd9716f559c023f503e))
+* **ui-codemods:** add codemod to support versioned import updates ([04f6686](https://github.com/instructure/instructure-ui/commit/04f668683e252df9b063902acbbf8e9c504f0bc7))
+* **ui-expandable:** rework Expandable ([af31b5a](https://github.com/instructure/instructure-ui/commit/af31b5a3760e689590379e483ab8629d533065fc))
+* **ui-img:** rework Img ([5e7a355](https://github.com/instructure/instructure-ui/commit/5e7a3556401ac3155a8ff58baad9359095f654ff))
+* **ui-instructure:** rework DataPermissionLevels and NutritionFacts ([36c02c6](https://github.com/instructure/instructure-ui/commit/36c02c6b3e0badcf257a9697ea095ad07cd03d49))
+* **ui-overlays:** rework Mask ([335cc5b](https://github.com/instructure/instructure-ui/commit/335cc5b00b1a2e346343c79001606f1782ceb9a1))
+* **ui-rating,ui-icons:** rework Rating ([af97f0c](https://github.com/instructure/instructure-ui/commit/af97f0c0bc3a5d8324d99f23645b428192152193))
+* **ui-table:** add screen reader announcements for column sorting ([6b23662](https://github.com/instructure/instructure-ui/commit/6b236623f3818007f17aa73a124ec5627467ece6))
+* **ui-text,ui-editable:** rework InPlaceEdit and Editable ([10f637b](https://github.com/instructure/instructure-ui/commit/10f637b938d49e23ceddc6b52535f927dd91e37b))
+* **ui-themes,ui-alerts,emotion:** fix primitives and semantics overrides and add freeze functionlionality to old components ([336fde9](https://github.com/instructure/instructure-ui/commit/336fde9952698eda020db4916f276e8532ed1669))
+* **ui,ui-options,ui-drilldown:** rework Drilldown ([0562fe2](https://github.com/instructure/instructure-ui/commit/0562fe2b43e3235fc78c4981ada504c1a2f10d1a))
+
+
+### BREAKING CHANGES
+
+* **ui-top-nav-bar:** the component got a new version in this release
+
+INSTUI-4967
+* **ui-select:** the component got a new version in this release
+
+INSTUI-4807
+* **ui-img:** the component got a new version in this release
+
+INSTUI-4970
+* **ui-text,ui-editable:** the component got a new version in this release
+
+INSTUI-4969
+* **ui-rating,ui-icons:** the component got a new version in this release
+
+INSTUI-4806
+* **ui,ui-options,ui-drilldown:** the component got a new version in this release
+
+INSTUI-4792
+
+
+
+
+
 ## [11.7.1](https://github.com/instructure/instructure-ui/compare/v11.7.0...v11.7.1) (2026-03-20)
 
 

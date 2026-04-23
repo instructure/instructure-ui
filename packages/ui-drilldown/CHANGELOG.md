@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.2](https://github.com/instructure/instructure-ui/compare/v11.7.1...v11.7.2) (2026-04-23)
+
+
+### Features
+
+* **many:** rework TopNavBar ([bf40e4f](https://github.com/instructure/instructure-ui/commit/bf40e4f380dce5edc45a0f0bc83d5a5070d3be2b))
+* **ui,ui-options,ui-drilldown:** rework Drilldown ([0562fe2](https://github.com/instructure/instructure-ui/commit/0562fe2b43e3235fc78c4981ada504c1a2f10d1a))
+
+
+### BREAKING CHANGES
+
+* **many:** the component got a new version in this release
+
+INSTUI-4967
+* **ui,ui-options,ui-drilldown:** the component got a new version in this release
+
+INSTUI-4792
+
+
+
+
+
 ## [11.7.1](https://github.com/instructure/instructure-ui/compare/v11.7.0...v11.7.1) (2026-03-20)
 
 **Note:** Version bump only for package @instructure/ui-drilldown
