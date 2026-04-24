@@ -24,6 +24,7 @@
 
 import type { Renderable, OtherHTMLAttributes } from '@instructure/shared-types'
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
 type TableRowHeaderOwnProps = {
   /**
@@ -38,7 +39,10 @@ type PropKeys = keyof TableRowHeaderOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TableRowHeaderProps = TableRowHeaderOwnProps &
-  WithStyleProps<null, TableRowHeaderStyle> &
+  WithStyleProps<
+    ReturnType<NewComponentTypes['TableRowHeader']>,
+    TableRowHeaderStyle
+  > &
   OtherHTMLAttributes<TableRowHeaderOwnProps>
 
 type TableRowHeaderStyle = ComponentStyle<'rowHeader'>

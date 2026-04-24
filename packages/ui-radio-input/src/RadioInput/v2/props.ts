@@ -25,8 +25,9 @@
 import React from 'react'
 import type { InputHTMLAttributes } from 'react'
 import type { OtherHTMLAttributes } from '@instructure/shared-types'
-import type { ComponentStyle, ThemeOverrideValue } from '@instructure/emotion'
+import type { ComponentStyle, NewThemeOverrideProp } from '@instructure/emotion'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
 type RadioInputOwnProps = {
   /**
@@ -92,9 +93,9 @@ type PropKeys = keyof RadioInputOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type RadioInputProps = RadioInputOwnProps & {
-  themeOverride?: ThemeOverrideValue
-} & OtherHTMLAttributes<
+type RadioInputProps = RadioInputOwnProps &
+  NewThemeOverrideProp<ReturnType<NewComponentTypes['RadioInput']>> &
+  OtherHTMLAttributes<
     RadioInputOwnProps,
     InputHTMLAttributes<RadioInputOwnProps & Element>
   > &

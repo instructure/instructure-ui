@@ -24,6 +24,7 @@
 import React from 'react'
 import type { OtherHTMLAttributes } from '@instructure/shared-types'
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
 type TableBodyOwnProps = {
   /**
@@ -40,7 +41,7 @@ type PropKeys = keyof TableBodyOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TableBodyProps = TableBodyOwnProps &
-  WithStyleProps<null, TableBodyStyle> &
+  WithStyleProps<ReturnType<NewComponentTypes['TableBody']>, TableBodyStyle> &
   OtherHTMLAttributes<TableBodyOwnProps>
 
 type TableBodyStyle = ComponentStyle<'body'>
