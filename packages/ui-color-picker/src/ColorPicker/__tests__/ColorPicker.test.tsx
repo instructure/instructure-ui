@@ -392,6 +392,133 @@ describe('<ColorPicker />', () => {
 
       expect(inputRef).toHaveBeenCalledWith(input)
     })
+
+    describe('paste behavior', () => {
+      it('should strip leading # from pasted value', async () => {
+        render(<SimpleExample />)
+        const input = screen.getByRole('textbox') as HTMLInputElement
+
+        fireEvent.paste(input, {
+          clipboardData: { getData: () => '#FF0000' }
+        })
+
+        await waitFor(() => {
+          expect(input).toHaveValue('FF0000')
+        })
+      })
+
+      it('should block pasted value that exceeds 6 characters', async () => {
+        render(<SimpleExample />)
+        const input = screen.getByRole('textbox') as HTMLInputElement
+
+        fireEvent.paste(input, {
+          clipboardData: { getData: () => 'FF00001' }
+        })
+
+        await waitFor(() => {
+          expect(input).toHaveValue('')
+        })
+      })
+
+      it('should block pasted value with invalid hex characters', async () => {
+        render(<SimpleExample />)
+        const input = screen.getByRole('textbox') as HTMLInputElement
+
+        fireEvent.paste(input, {
+          clipboardData: { getData: () => 'ZZZZZZ' }
+        })
+
+        await waitFor(() => {
+          expect(input).toHaveValue('')
+        })
+      })
+
+      it('should replace entirely selected text when pasting', async () => {
+        render(<SimpleExample />)
+        const input = screen.getByRole('textbox') as HTMLInputElement
+
+        fireEvent.change(input, { target: { value: 'FF0000' } })
+        await waitFor(() => expect(input).toHaveValue('FF0000'))
+
+        input.setSelectionRange(0, 6)
+        fireEvent.paste(input, {
+          clipboardData: { getData: () => 'AABBCC' }
+        })
+
+        await waitFor(() => {
+          expect(input).toHaveValue('AABBCC')
+        })
+      })
+
+      it('should replace partially selected text when pasting', async () => {
+        render(<SimpleExample />)
+        const input = screen.getByRole('textbox') as HTMLInputElement
+
+        fireEvent.change(input, { target: { value: 'FF0000' } })
+        await waitFor(() => expect(input).toHaveValue('FF0000'))
+
+        // select the two middle zeros (positions 2–4), paste FF → FFFF00
+        input.setSelectionRange(2, 4)
+        fireEvent.paste(input, {
+          clipboardData: { getData: () => 'FF' }
+        })
+
+        await waitFor(() => {
+          expect(input).toHaveValue('FFFF00')
+        })
+      })
+
+      it('should insert pasted text at cursor start position', async () => {
+        render(<SimpleExample />)
+        const input = screen.getByRole('textbox') as HTMLInputElement
+
+        fireEvent.change(input, { target: { value: '0000' } })
+        await waitFor(() => expect(input).toHaveValue('0000'))
+
+        input.setSelectionRange(0, 0)
+        fireEvent.paste(input, {
+          clipboardData: { getData: () => 'FF' }
+        })
+
+        await waitFor(() => {
+          expect(input).toHaveValue('FF0000')
+        })
+      })
+
+      it('should insert pasted text at cursor middle position', async () => {
+        render(<SimpleExample />)
+        const input = screen.getByRole('textbox') as HTMLInputElement
+
+        fireEvent.change(input, { target: { value: 'FF00' } })
+        await waitFor(() => expect(input).toHaveValue('FF00'))
+
+        input.setSelectionRange(2, 2)
+        fireEvent.paste(input, {
+          clipboardData: { getData: () => 'AB' }
+        })
+
+        await waitFor(() => {
+          expect(input).toHaveValue('FFAB00')
+        })
+      })
+
+      it('should insert pasted text at cursor end position', async () => {
+        render(<SimpleExample />)
+        const input = screen.getByRole('textbox') as HTMLInputElement
+
+        fireEvent.change(input, { target: { value: '0000' } })
+        await waitFor(() => expect(input).toHaveValue('0000'))
+
+        input.setSelectionRange(4, 4)
+        fireEvent.paste(input, {
+          clipboardData: { getData: () => 'FF' }
+        })
+
+        await waitFor(() => {
+          expect(input).toHaveValue('0000FF')
+        })
+      })
+    })
   })
 
   describe('complex mode', () => {
