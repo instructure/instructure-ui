@@ -81,7 +81,7 @@ type: example
           <br />
           {text}
         </div>
-        <Text>* required field</Text>
+        <Text>Fields marked with an asterisk <span aria-hidden="true">(*)</span> are required.</Text>
         <div style={{ height: '14rem' }}>
           <DateTimeInput
             description={

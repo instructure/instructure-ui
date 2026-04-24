@@ -1,7 +1,7 @@
 
 ## Required Fields
 
-InstUI form components display an asterisk (`*`) next to labels when the `isRequired` (or `required`) prop is set. Whenever a form contains required fields, you **must include a note** explaining what the asterisk means — typically `* required field`.
+InstUI form components display an asterisk (`*`) next to labels when the `isRequired` (or `required`) prop is set. Whenever a form contains required fields, you **must include a note** explaining what the asterisk means — typically "Fields marked with an asterisk (\*) are required."
 
 > **Exception:** You can omit this note when the form's purpose is entirely self-evident — for example, a standard login screen where it is obvious that both the email and password fields are required.
 
@@ -12,7 +12,7 @@ type: example
 const RequiredFieldsExample = () => {
   return (
     <FormFieldGroup description="Contact Information" rowSpacing="small" layout="stacked">
-      <Text>* required field</Text>
+      <Text>Fields marked with an asterisk <span aria-hidden="true">(*)</span> are required.</Text>
       <TextInput renderLabel="Full Name" isRequired />
       <TextInput renderLabel="Email Address" isRequired />
       <TextInput renderLabel="Phone Number" />
@@ -104,7 +104,7 @@ const Example = () => {
       </CheckboxGroup>
       <div style={{display: 'flex', gap: '2rem', marginTop: '3rem', flexDirection: 'column'}}>
 
-        {isRequired && <Text>* required field</Text>}
+        {isRequired && <Text>Fields marked with an asterisk <span aria-hidden="true">(*)</span> are required.</Text>}
 
         <TextInput renderLabel="TextInput" messages={messages} isRequired={isRequired}/>
 

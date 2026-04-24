@@ -1,6 +1,6 @@
 # Instructure UI (InstUI) - React Component Library
 
-- version 11.7.1 
+- version 11.7.2 
 
 - Instructure UI (InstUI) is a comprehensive React component library.
 
@@ -21,6 +21,7 @@
 - [Form errors](./form-errors.md): InstUI form components use a `messages` prop for error/hint/success messages. Required fields now show an asterisk automatically. Examples provided for various form components like TextInput, Checkbox, and DateTimeInput.
 - [Layout spacing](./layout-spacing.md): InstUI provides semantic spacing tokens (e.g., buttons, tags) for consistent layouts. Apply spacing via `margin` prop, container `gap`, or importing from theme. Legacy tokens are available for compatibility but not recommended for new layouts.
 - [Module federation](./module-federation.md): InstUI supports module federation with specific version requirements. For v10.14+, use local themes (`canvasThemeLocal`). For older hosts, guest apps must use v10.14+ and local themes. Global theme overrides don't apply to local themes.
+- [New theme overrides](./new-theme-overrides.md)
 - [Server side rendering](./server-side-rendering.md): SSR with Next.js requires wrapping the app with `InstUISettingsProvider` for deterministic ID generation. Avoid `@instructure/ui` meta-package; install only needed packages. CodeEditor isn't SSR-compatible and must be dynamically imported.
 - [Typography system](./typography-system.md): Use `<Text>` and `<Heading>` components with semantic variants for consistent typography. Variants define font style, weight, size, and line height. Legacy tokens (e.g., fontSizeXSmall) are deprecated and should not be used in new designs.
 - [Using icons](./UsingIcons.md): Guidelines for using icons with proper accessibility roles, size variants, and color options. Line icons for light backgrounds, solid for dark backgrounds. Icons scale with parent font-size by default.
@@ -114,7 +115,6 @@
 #### utilities
 
 - [Dialog](./Dialog.md): A utility component for accessibility in modals, popovers, and trays. Manages focus trapping, screen reader visibility, and keyboard navigation. Essential for WCAG-compliant modal interactions.
-- [Expandable](./Expandable.md): Handles expand/collapse functionality for components like ToggleDetails and ToggleGroup. Provides props for accessibility and event handling. Manages state for expanded content visibility.
 - [Focusable](./Focusable.md): A utility component that detects when elements receive focus. Provides render props for creating accessible focus-based interactions, such as skip-to-content links or focus-triggered tooltips. Ensures WCAG compliance for focus management.
 - [Transition](./Transition.md): A wrapper component for transitioning elements in and out of the UI. Supports fade, scale, and slide transitions with customizable directions. Handles mount/unmount transitions and supports RTL mirroring for slide animations.
 - [Portal](./Portal.md): Renders a React subtree into a different DOM element. Useful for modal-like components that need to break out of parent containers. Typically used with Overlay, Modal, or other components that need to render outside their parent hierarchy.
@@ -124,6 +124,7 @@
 - [SVGIcon](./SVGIcon.md): Renders accessible inline SVG icons. Supports custom sizing, color theming, rotation, and display properties. Accepts SVG content via children or external source strings.
 - [TruncateList](./TruncateList.md): A utility component that truncates items when space is limited, commonly used in navigation bars. Controls visible item count and provides dropdown for hidden items with customizable spacing and menu triggers.
 - [BaseButton](./BaseButton.md): Low-level utility component for composing Instructure UI buttons. Not intended for direct use; developers should use Button, CloseButton, IconButton, or CondensedButton instead.
+- [Expandable](./Expandable.md): Handles expand/collapse functionality for components like ToggleDetails and ToggleGroup. Provides props for accessibility and event handling. Manages state for expanded content visibility.
 - [Options](./Options.md): A view-only component for building option lists or menus. Supports variants (default, highlighted, selected, disabled), icons, nesting, and custom roles. Does not manage state—requires external event handling.
 - [Mask](./Mask.md): A component that covers its nearest positioned parent element. Can be used fullscreen within a Portal and supports click-to-close functionality. Useful for overlays and blocking UI interactions.
 

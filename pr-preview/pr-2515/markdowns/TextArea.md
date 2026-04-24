@@ -108,7 +108,7 @@ A required `TextArea`:
 type: example
 ---
 <View as="div">
-  <Text>* required field</Text>
+  <Text>Fields marked with an asterisk <span aria-hidden="true">(*)</span> are required.</Text>
   <TextArea label="Description" required />
 </View>
 ```

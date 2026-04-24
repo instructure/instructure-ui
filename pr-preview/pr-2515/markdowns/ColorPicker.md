@@ -200,7 +200,7 @@ type: example
 
     return (
       <View as="div">
-        {isRequired && <Text>* required field</Text>}
+        {isRequired && <Text>Fields marked with an asterisk <span aria-hidden="true">(*)</span> are required.</Text>}
         <ColorPicker
           onChange={(val) => setValue(val)}
           value={value}

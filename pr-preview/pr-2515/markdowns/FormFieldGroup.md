@@ -101,7 +101,7 @@ type: example
 
 ### Required Fields
 
-Whenever a `FormFieldGroup` contains required fields, you must include a note explaining what the asterisk means — typically `* required field`.
+Whenever a `FormFieldGroup` contains required fields, you must include a note explaining what the asterisk means — typically "Fields marked with an asterisk (\*) are required."
 
 ```js
 ---
@@ -112,7 +112,7 @@ type: example
   rowSpacing="small"
   layout="stacked"
 >
-  <Text>* required field</Text>
+  <Text>Fields marked with an asterisk <span aria-hidden="true">(*)</span> are required.</Text>
   <TextInput renderLabel="Full Name" isRequired />
   <TextInput renderLabel="Email Address" isRequired />
   <TextInput renderLabel="Phone Number" />

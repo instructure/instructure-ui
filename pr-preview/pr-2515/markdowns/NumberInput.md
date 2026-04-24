@@ -124,7 +124,7 @@ const Example = () => {
         label="Inline display"
         onChange={toggleInline}
       />
-      <Text>* required field</Text>
+      <Text>Fields marked with an asterisk <span aria-hidden="true">(*)</span> are required.</Text>
       <NumberInput
         renderLabel={`How old are you? (${MIN}-${MAX})`}
         display={inline ? 'inline-block' : null}

@@ -221,14 +221,14 @@ type: example
 
 ### Required Fields
 
-Whenever a `RadioInputGroup` contains required fields, you must include a note explaining what the asterisk means — typically `* required field`.
+Whenever a `RadioInputGroup` contains required fields, you must include a note explaining what the asterisk means — typically "Fields marked with an asterisk (\*) are required."
 
 ```js
 ---
 type: example
 ---
 <FormFieldGroup description="Preferences" rowSpacing="small" layout="stacked">
-  <Text>* required field</Text>
+  <Text>Fields marked with an asterisk <span aria-hidden="true">(*)</span> are required.</Text>
   <RadioInputGroup name="frequency" description="Notification Frequency" isRequired>
     <RadioInput label="Daily" value="daily" />
     <RadioInput label="Weekly" value="weekly" />
