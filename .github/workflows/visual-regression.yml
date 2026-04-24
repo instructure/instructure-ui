@@ -1,37 +1,88 @@
-name: "Chromatic"
+name: Visual regression
 
-on: [pull_request]
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+
+concurrency:
+  group: gh-pages
+  cancel-in-progress: false
 
 jobs:
-  cypress:
-    name: Run Cypress for visual regression testing
+  cleanup:
+    name: Remove report from gh-pages
+    if: github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+
+      - name: Remove report directory
+        run: |
+          DIR="visual-regression/pr-${{ github.event.pull_request.number }}"
+          if [ -d "$DIR" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git rm -rf "$DIR"
+            git commit -m "visual-regression: remove report for PR #${{ github.event.pull_request.number }}"
+            git push origin gh-pages
+          else
+            echo "Nothing to clean up — $DIR does not exist"
+          fi
+
+  visual-regression:
+    name: Capture, diff, and publish report
+    if: github.event.action != 'closed'
     runs-on: ubuntu-latest
     container:
       image: cypress/browsers:latest
       options: --user 1001
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
           cache: 'pnpm'
+
       - name: Cache Cypress binary
         uses: actions/cache@v4
         with:
           path: ~/.cache/Cypress
           key: ${{ runner.os }}-cypress-${{ hashFiles('regression-test/package-lock.json') }}
+
       - name: Build InstUI
         run: pnpm install --frozen-lockfile && pnpm run bootstrap
+
       - name: Install regression-test dependencies
         run: npm ci
         working-directory: regression-test
+
       - name: Install Cypress binary
         run: npx cypress install
         working-directory: regression-test
-      - name: Run Cypress tests
+
+      - name: Fetch baselines
+        run: |
+          mkdir -p regression-test/.baselines
+          if git fetch origin visual-baselines 2>/dev/null; then
+            git worktree add /tmp/baselines-wt origin/visual-baselines
+            cp -r /tmp/baselines-wt/screenshots/. regression-test/.baselines/ 2>/dev/null || echo "::warning::baselines branch has no screenshots/ dir"
+            git worktree remove --force /tmp/baselines-wt
+          else
+            echo "::warning::visual-baselines branch does not exist — first run, everything will be 'added'"
+          fi
+
+      - name: Run Cypress
         uses: cypress-io/github-action@v6
         env:
           ELECTRON_EXTRA_LAUNCH_ARGS: "--remote-debugging-port=9222"
@@ -40,42 +91,95 @@ jobs:
           build: npm run build
           start: npm start
           working-directory: regression-test
-      - name: Upload cypress artifact for chromatic
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-results
-          path: regression-test/cypress/downloads
-          retention-days: 30
 
-  chromatic:
-    name: Run Chromatic
-    needs: cypress
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 24
-          cache: 'pnpm'
-      - name: Build InstUI
-        run: pnpm install --frozen-lockfile && pnpm run bootstrap
-      - name: Install regression-test dependencies
-        run: npm ci
+      - name: Flatten screenshots
+        run: |
+          mkdir -p regression-test/.actual
+          find regression-test/cypress/screenshots -name '*.png' -exec cp {} regression-test/.actual/ \;
+
+      - name: Diff and generate report
+        id: diff
         working-directory: regression-test
-      - name: Download Cypress test results
-        uses: actions/download-artifact@v4
+        run: >
+          npx ui-scripts visual-diff
+          --actual-dir .actual
+          --baseline-dir .baselines
+          --output-dir .report
+          --no-fail-on-missing-baseline
+          --pr-number ${{ github.event.pull_request.number }}
+          --pr-url ${{ github.event.pull_request.html_url }}
+          --meta cypress/meta.json
+          --source-base-url https://github.com/${{ github.repository }}/blob/${{ github.head_ref }}/regression-test/src/app
+        continue-on-error: true
+
+      - name: Publish report to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          name: test-results
-          path: regression-test/cypress/downloads
-      - name: Run Chromatic
-        uses: chromaui/action@latest
-        with:
-          cypress: true
-          projectToken: ${{ secrets.CHROMATIC_APP_CODE }}
-          workingDir: regression-test
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: regression-test/.report
+          publish_branch: gh-pages
+          destination_dir: visual-regression/pr-${{ github.event.pull_request.number }}
+          keep_files: true
+          commit_message: "visual-regression: PR #${{ github.event.pull_request.number }} (${{ github.sha }})"
+
+      - name: Read summary
+        id: summary
         env:
-          CHROMATIC_ARCHIVE_LOCATION: ./cypress/downloads
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          node -e "
+            const fs = require('fs');
+            const { summary: s, results } = JSON.parse(fs.readFileSync('regression-test/.report/summary.json', 'utf8'));
+            const base = 'https://instructure.design/visual-regression/pr-' + process.env.PR_NUMBER;
+            const interesting = results.filter(r => r.status === 'changed' || r.status === 'removed');
+            let md = '';
+            if (interesting.length) {
+              md = '<details>\n<summary>Diff images (' + interesting.length + ')</summary>\n\n';
+              for (const r of interesting) {
+                if (r.status === 'changed') {
+                  md += '#### ' + r.name + ' — ' + r.numDiff + ' pixels differ\n\n';
+                  md += '![](' + base + '/diff/' + r.name + ')\n\n';
+                } else {
+                  md += '#### ' + r.name + ' — baseline no longer produced\n\n';
+                }
+              }
+              md += '</details>';
+            }
+            const lines = [
+              'total=' + s.total,
+              'unchanged=' + s.unchanged,
+              'changed=' + s.changed,
+              'added=' + s.added,
+              'removed=' + s.removed,
+              'status=' + (s.changed > 0 || s.removed > 0 ? '⚠️ **Changes detected.**' : '✅ **No changes.**')
+            ];
+            let out = lines.join('\n') + '\n';
+            out += 'diff_images<<DIFFIMAGES_EOF\n' + md + '\nDIFFIMAGES_EOF\n';
+            fs.appendFileSync(process.env.GITHUB_OUTPUT, out);
+          "
+
+      - name: Post PR comment
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: visual-regression
+          message: |
+            ## Visual regression report
+
+            ${{ steps.summary.outputs.status }}
+
+            | Status | Count |
+            |---|---|
+            | Unchanged | ${{ steps.summary.outputs.unchanged }} |
+            | Changed | ${{ steps.summary.outputs.changed }} |
+            | New | ${{ steps.summary.outputs.added }} |
+            | Removed | ${{ steps.summary.outputs.removed }} |
+
+            📊 **[View full report](https://instructure.design/visual-regression/pr-${{ github.event.pull_request.number }}/index.html)**
+
+            ${{ steps.summary.outputs.diff_images }}
+
+            <sub>Baselines come from the `visual-baselines` branch. They refresh on every merge to `master`.</sub>
+
+      - name: Fail if regressions
+        if: steps.diff.outcome == 'failure'
+        run: exit 1

@@ -40,9 +40,28 @@
 // Import commands.js using ES2015 syntax:
 import './commands'
 
-import '@chromatic-com/cypress/support'
-
 import 'cypress-axe'
+
+function slugify(s: string) {
+  return s
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '')
+}
+
+afterEach(function () {
+  const test = this.currentTest
+  if (!test || test.state === 'failed') return
+  const name = slugify(test.title)
+  cy.location('pathname', { log: false }).then((pagePath) => {
+    cy.task('recordMeta', { name, pagePath }, { log: false })
+  })
+  cy.screenshot(name, {
+    capture: 'fullPage',
+    overwrite: true,
+    disableTimersAndAnimations: true
+  })
+})
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')

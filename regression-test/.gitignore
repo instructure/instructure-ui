@@ -16,6 +16,7 @@
 /build
 /src/.next/
 /.next/
+/out/
 
 
 # misc
@@ -39,6 +40,12 @@ next-env.d.ts
 # cypress
 /cypress/downloads
 /cypress/screenshots
+/cypress/meta.json
+
+# visual regression local runs
+/.actual
+/.baselines
+/.report
 
 # claude
 .claude/settings.local.json
