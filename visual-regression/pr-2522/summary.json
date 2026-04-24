@@ -1,0 +1,203 @@
+{
+  "summary": {
+    "total": 32,
+    "unchanged": 31,
+    "changed": 1,
+    "added": 0,
+    "removed": 0
+  },
+  "results": [
+    {
+      "name": "alert.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
+    },
+    {
+      "name": "avatar.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
+    },
+    {
+      "name": "badge.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
+    },
+    {
+      "name": "billboard.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
+    },
+    {
+      "name": "breadcrumb.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
+    },
+    {
+      "name": "button-and-derivatives.png",
+      "status": "changed",
+      "numDiff": 5595,
+      "sizeMismatch": false
+    },
+    {
+      "name": "byline.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
+    },
+    {
+      "name": "calendar.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
+    },
+    {
+      "name": "checkbox.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
+    },
+    {
+      "name": "checkboxgroup.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
+    },
+    {
+      "name": "colorpicker.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
+    },
+    {
+      "name": "contextview.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
+    },
+    {
+      "name": "custom-and-lucide-icons.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
+    },
+    {
+      "name": "dateinput-dateinput2.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
+    },
+    {
+      "name": "datetimeinput.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
+    },
+    {
+      "name": "drilldown.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
+    },
+    {
+      "name": "filedrop.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
+    },
+    {
+      "name": "form-errors.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
+    },
+    {
+      "name": "heading.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
+    },
+    {
+      "name": "img.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
+    },
+    {
+      "name": "link.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
+    },
+    {
+      "name": "menu.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
+    },
+    {
+      "name": "metric-pill-tag-timeselect-text.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
+    },
+    {
+      "name": "options.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
+    },
+    {
+      "name": "pagination.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
+    },
+    {
+      "name": "progressbar.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
+    },
+    {
+      "name": "select-simpleselect.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
+    },
+    {
+      "name": "table.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
+    },
+    {
+      "name": "tabs.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
+    },
+    {
+      "name": "tooltip.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
+    },
+    {
+      "name": "treebrowser.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
+    },
+    {
+      "name": "view.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
+    }
+  ]
+}
