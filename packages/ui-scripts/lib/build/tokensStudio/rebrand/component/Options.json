@@ -36,7 +36,7 @@
       "type": "color"
     },
     "descriptionColor": {
-      "value": "{color.text.muted}",
+      "value": "{color.text.base}",
       "type": "color"
     },
     "descriptionFontSize": {
