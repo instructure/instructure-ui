@@ -181,6 +181,10 @@
         "value": "{color.background.interactive.action.primary.hover}",
         "type": "color"
       },
+      "activeBackgroundColor": {
+        "value": "{color.background.interactive.action.primary.active}",
+        "type": "color"
+      },
       "selectedBackgroundColor": {
         "value": "{color.background.brand}",
         "type": "color"
