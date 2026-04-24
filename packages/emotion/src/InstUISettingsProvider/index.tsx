@@ -32,22 +32,61 @@ import { getTheme } from '../getTheme'
 
 import type { ThemeOrLegacyOverride } from '../EmotionTypes'
 import type { DeterministicIdProviderValue } from '@instructure/ui-react-utils'
+import type { NewThemeOverrideObject, Theme } from '@instructure/ui-themes'
 declare const process: Record<string, any> | undefined
 
 type InstUIProviderProps = {
   children?: React.ReactNode
 
   /**
-   * A full theme or an override object
+   * A full theme or an override object. The override only works for legacy
+   * (v11.6 or earlier) themes, for newer ones use the `themeOverride` prop.
    */
   theme?: ThemeOrLegacyOverride
 
-  // TODO-theme-types: fix override typing
-  // TODO explain the usage of this override object. It will be deep merged into theme.themeOverride and the shape has to be a partial of the "newTheme" object
   /**
-   * An override object for the new theming system.
+   * An override object for the new theming system. It will be deep merged into
+   * the theme. One can override primitives, semantics and individual component's
+   * themes, for example:
+   * ```js
+   * themeOverride={{
+   *   semantics: {
+   *     color: {
+   *       stroke: {
+   *         error: 'purple'
+   *       }
+   *     }
+   *   },
+   *   primitives: {
+   *     color: {
+   *       blue: {
+   *         blue100: 'yellow'
+   *       }
+   *     }
+   *   },
+   *   components: {
+   *     Alert: {
+   *       background: 'brown',
+   *       infoIconBackground: 'darkblue',
+   *       borderWidth: '0.5rem'
+   *     },
+   *     Pill: {
+   *       baseTextColor: 'purple',
+   *       baseBorderColor: 'purple'
+   *     }
+   *   },
+   *   sharedTokens: {
+   *     focusOutline: {
+   *       width: '0.55rem',
+   *       infoColor: 'deeppink'
+   *     }
+   *   }
+   * }}
+   * ```
    */
-  themeOverride?: any
+  themeOverride?:
+    | NewThemeOverrideObject
+    | ((theme: Theme) => NewThemeOverrideObject)
 
   /**
    * @deprecated the `instanceCounterMap` prop is deprecated. You don't need to supply the
@@ -100,7 +139,6 @@ function InstUISettingsProvider({
    * For backward compatibility reasons, the old way of passing a partial theme to the theme prop is still supported, however only for
    * legacy (pre v11_7) components. Overriding the newTheme this way could break the system.
    */
-
   let providers = (
     <DeterministicIdContextProvider instanceCounterMap={instanceCounterMap}>
       <ThemeProvider theme={getTheme(theme, themeOverride)}>
@@ -120,3 +158,4 @@ function InstUISettingsProvider({
 
 export default InstUISettingsProvider
 export { InstUISettingsProvider }
+export type { InstUIProviderProps }

@@ -28,6 +28,7 @@ import type {
   WithStyleProps
 } from '@instructure/emotion'
 import type { OtherHTMLAttributes } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
 type RowChild = React.ReactElement<{ children: React.ReactElement }>
 
@@ -76,7 +77,7 @@ type PropKeys = keyof TableOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TableProps = TableOwnProps &
-  WithStyleProps<null, TableStyle> &
+  WithStyleProps<ReturnType<NewComponentTypes['Table']>, TableStyle> &
   OtherHTMLAttributes<TableOwnProps>
 
 type TableStyle = ComponentStyle<'table' | 'liveRegion'>

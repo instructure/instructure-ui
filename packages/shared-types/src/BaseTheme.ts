@@ -175,6 +175,9 @@ type Size = {
 type Radius = Size
 type StrokeWidth = Size
 
+/**
+ * Theme variables used in old (11.6 and earlier) themes
+ */
 type BaseThemeVariables = {
   borders: Border
   breakpoints: Breakpoints
@@ -204,7 +207,6 @@ type BaseThemeVariableKeys = [
 type BaseTheme = {
   key: string
   description?: string
-  themeOverride?: { primitives: any; semantics: any }
 } & BaseThemeVariables
 
 export type {

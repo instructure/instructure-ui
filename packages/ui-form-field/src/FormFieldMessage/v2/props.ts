@@ -22,11 +22,12 @@
  * SOFTWARE.
  */
 
-import type { ComponentStyle, ThemeOverrideValue } from '@instructure/emotion'
+import type { ComponentStyle, NewThemeOverrideProp } from '@instructure/emotion'
 import type {
   FormMessageType,
   FormMessageChild
 } from '../../utils/v1/FormPropTypes'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
 type FormFieldMessageOwnProps = {
   variant?: FormMessageType
@@ -37,9 +38,8 @@ type PropKeys = keyof FormFieldMessageOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type FormFieldMessageProps = FormFieldMessageOwnProps & {
-  themeOverride?: ThemeOverrideValue
-}
+type FormFieldMessageProps = FormFieldMessageOwnProps &
+  NewThemeOverrideProp<ReturnType<NewComponentTypes['FormFieldMessage']>>
 
 type FormFieldMessageStyle = ComponentStyle<'formFieldMessage' | 'icon'>
 const allowedProps: AllowedPropKeys = ['variant', 'children']

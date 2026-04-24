@@ -234,7 +234,7 @@ const withStyleForDocs = decorator(
         theme,
         displayName,
         ComposedComponent.componentId,
-        componentProps,
+        (componentProps as ThemeOverrideProp).themeOverride,
         componentTheme
       )
 

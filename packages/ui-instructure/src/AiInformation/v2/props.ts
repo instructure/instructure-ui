@@ -21,10 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import type { ComponentStyle, ThemeOverrideValue } from '@instructure/emotion'
+
+import type { ComponentStyle, NewThemeOverrideProp } from '@instructure/emotion'
 import type { OtherHTMLAttributes, Renderable } from '@instructure/shared-types'
 import type { NutritionFactsProps } from '../../NutritionFacts/v1/props'
 import type { DataPermissionLevelsProps } from '../../DataPermissionLevels/v1/props'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
 type AiInformationOwnProps = {
   /**
@@ -119,9 +121,9 @@ type PropKeys = keyof AiInformationOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type AiInformationProps = AiInformationOwnProps & {
-  themeOverride?: ThemeOverrideValue
-} & OtherHTMLAttributes<AiInformationOwnProps>
+type AiInformationProps = AiInformationOwnProps &
+  NewThemeOverrideProp<ReturnType<NewComponentTypes['AiInformation']>> &
+  OtherHTMLAttributes<AiInformationOwnProps>
 
 type AiInformationStyle = ComponentStyle<
   | 'aiInformation'

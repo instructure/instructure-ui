@@ -34,6 +34,7 @@ import type {
 } from '@instructure/shared-types'
 import type { PaginationPageProps } from './PaginationButton/props'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 type ChildPage = React.ReactElement<PaginationPageProps>
 
 type PaginationOwnProps = {
@@ -200,7 +201,7 @@ type PropKeys = keyof PaginationOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type PaginationProps = PaginationOwnProps &
-  WithStyleProps<null, PaginationStyle> &
+  WithStyleProps<ReturnType<NewComponentTypes['Pagination']>, PaginationStyle> &
   OtherHTMLAttributes<PaginationOwnProps> &
   WithDeterministicIdProps
 

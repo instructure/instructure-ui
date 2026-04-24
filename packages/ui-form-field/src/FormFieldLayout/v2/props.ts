@@ -28,11 +28,12 @@ import type {
 } from '@instructure/shared-types'
 import type {
   ComponentStyle,
-  Spacing,
-  ThemeOverrideValue
+  NewThemeOverrideProp,
+  Spacing
 } from '@instructure/emotion'
 import type { FormMessage } from '../../utils/v1/FormPropTypes'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
 type FormFieldLayoutOwnProps = {
   label: React.ReactNode
@@ -111,9 +112,9 @@ type PropKeys = keyof FormFieldLayoutOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type FormFieldLayoutProps = FormFieldLayoutOwnProps & {
-  themeOverride?: ThemeOverrideValue
-} & OtherHTMLAttributes<FormFieldLayoutOwnProps> &
+type FormFieldLayoutProps = FormFieldLayoutOwnProps &
+  NewThemeOverrideProp<ReturnType<NewComponentTypes['FormFieldLayout']>> &
+  OtherHTMLAttributes<FormFieldLayoutOwnProps> &
   WithDeterministicIdProps
 
 type FormFieldLayoutStyle = ComponentStyle<

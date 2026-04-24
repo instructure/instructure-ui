@@ -37,7 +37,8 @@ import type {
   Primitives,
   AdditionalPrimitives,
   DataVisualization,
-  UI
+  UI,
+  DeepPartial
 } from '@instructure/shared-types'
 
 import canvasHighContrast from './themes/canvasHighContrast'
@@ -70,11 +71,23 @@ type ThemeMap = {
 
 type ThemeKeys = keyof ThemeMap
 
+// converts `AA: (semantics: any) => AA` to `AA: AA`
+type NewComponentsAsValue = {
+  [K in keyof NewComponentTypes]: ReturnType<NewComponentTypes[K]>
+}
+
+type NewThemeOverrideObject = {
+  primitives?: Record<string, any>
+  semantics?: Record<string, any>
+  sharedTokens?: DeepPartial<SharedTokens>
+  components?: DeepPartial<NewComponentsAsValue>
+}
+
 type Theme<
   NewThemeType extends NewBaseTheme = NewBaseTheme,
   K extends ThemeKeys = ThemeKeys
-> = BaseTheme & { newTheme: NewThemeType } & {
-  key: K
+> = BaseTheme & { newTheme: NewThemeType } & { key: K } & {
+  themeOverride?: NewThemeOverrideObject
 } & Partial<CanvasBrandVariables>
 
 type ThemeSpecificStyle<ComponentTheme> = {
@@ -113,6 +126,7 @@ export type {
   Light,
   NewComponentTypes,
   NewBaseTheme,
+  NewThemeOverrideObject,
   TokenBoxshadowValueInst,
   TokenTypographyValueInst,
   SharedTokens

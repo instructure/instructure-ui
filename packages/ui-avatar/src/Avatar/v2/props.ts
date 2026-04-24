@@ -27,13 +27,14 @@ import { SyntheticEvent } from 'react'
 import type {
   Spacing,
   ComponentStyle,
-  ThemeOverrideValue
+  NewThemeOverrideProp
 } from '@instructure/emotion'
 import type {
   AsElementType,
   OtherHTMLAttributes,
   Renderable
 } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
 const avatarSizeToIconSize = {
   'xx-small': 'xs',
@@ -112,9 +113,9 @@ type PropKeys = keyof AvatarOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type AvatarProps = AvatarOwnProps & {
-  themeOverride?: ThemeOverrideValue
-} & OtherHTMLAttributes<AvatarOwnProps>
+type AvatarProps = AvatarOwnProps &
+  NewThemeOverrideProp<ReturnType<NewComponentTypes['Avatar']>> &
+  OtherHTMLAttributes<AvatarOwnProps>
 
 type AvatarStyle = ComponentStyle<'avatar' | 'image'>
 

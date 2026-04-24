@@ -22,8 +22,9 @@
  * SOFTWARE.
  */
 
-import type { ComponentStyle, ThemeOverrideValue } from '@instructure/emotion'
+import type { ComponentStyle, NewThemeOverrideProp } from '@instructure/emotion'
 import type { OtherHTMLAttributes } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
 type BlockType = {
   blockTitle: string
@@ -74,9 +75,9 @@ type PropKeys = keyof NutritionFactsOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type NutritionFactsProps = NutritionFactsOwnProps & {
-  themeOverride?: ThemeOverrideValue
-} & OtherHTMLAttributes<NutritionFactsOwnProps>
+type NutritionFactsProps = NutritionFactsOwnProps &
+  NewThemeOverrideProp<ReturnType<NewComponentTypes['NutritionFacts']>> &
+  OtherHTMLAttributes<NutritionFactsOwnProps>
 
 type NutritionFactsStyle = ComponentStyle<
   | 'segmentCard'

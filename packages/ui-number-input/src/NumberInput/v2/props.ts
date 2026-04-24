@@ -31,8 +31,8 @@ import type {
 } from '@instructure/shared-types'
 import type {
   ComponentStyle,
-  Spacing,
-  ThemeOverrideValue
+  NewThemeOverrideProp,
+  Spacing
 } from '@instructure/emotion'
 import type {
   FormFieldOwnProps,
@@ -43,6 +43,7 @@ import type {
   WithDeterministicIdProps
 } from '@instructure/ui-react-utils'
 import { Renderable } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
 type NumberInputOwnProps = {
   /**
@@ -194,9 +195,9 @@ type NumberInputProps =
     FormFieldOwnProps,
     'label' | 'inline' | 'id' | 'elementRef'
   > &
-    NumberInputOwnProps & {
-      themeOverride?: ThemeOverrideValue
-    } & OtherHTMLAttributes<
+    NumberInputOwnProps &
+    NewThemeOverrideProp<ReturnType<NewComponentTypes['TextInput']>> &
+    OtherHTMLAttributes<
       NumberInputOwnProps,
       InputHTMLAttributes<NumberInputOwnProps & Element>
     > &

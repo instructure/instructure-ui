@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
-import type { NutritionFactsProps, NutritionFactsStyle } from './props'
+import type { NewComponentTypes } from '@instructure/ui-themes'
+import type { NutritionFactsStyle } from './props'
 
 /**
  * ---
@@ -31,14 +31,10 @@ import type { NutritionFactsProps, NutritionFactsStyle } from './props'
  * ---
  * Generates the style object from the theme and provided additional information
  * @param componentTheme The theme variable object.
- * @param params Additional parameters to customize the style.
- * @param sharedTokens Shared token object that stores common values for the theme.
  * @return The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: ReturnType<NewComponentTypes['NutritionFacts']>,
-  _params: NutritionFactsProps,
-  _sharedTokens: SharedTokens
+  componentTheme: ReturnType<NewComponentTypes['NutritionFacts']>
 ): NutritionFactsStyle => {
   return {
     segmentCard: {

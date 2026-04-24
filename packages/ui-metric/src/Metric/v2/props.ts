@@ -23,9 +23,8 @@
  */
 
 import type { OtherHTMLAttributes, Renderable } from '@instructure/shared-types'
-import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { ComponentStyle, NewThemeOverrideProp } from '@instructure/emotion'
 import type { NewComponentTypes } from '@instructure/ui-themes'
-import { ThemeOverrideValue } from '@instructure/emotion'
 
 type MetricOwnProps = {
   textAlign?: 'start' | 'center' | 'end'
@@ -43,10 +42,8 @@ type PropKeys = keyof MetricOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type MetricProps = MetricOwnProps &
-  WithStyleProps<ReturnType<NewComponentTypes['Metric']>, MetricStyle> &
-  OtherHTMLAttributes<MetricOwnProps> & {
-    themeOverride?: ThemeOverrideValue
-  }
+  OtherHTMLAttributes<MetricOwnProps> &
+  NewThemeOverrideProp<ReturnType<NewComponentTypes['Metric']>>
 
 type MetricStyle = ComponentStyle<'metric' | 'label' | 'value'>
 const allowedProps: AllowedPropKeys = [

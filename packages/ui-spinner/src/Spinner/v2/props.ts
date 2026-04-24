@@ -25,11 +25,12 @@
 import type {
   Spacing,
   ComponentStyle,
-  ThemeOverrideValue
+  NewThemeOverrideProp
 } from '@instructure/emotion'
 import type { OtherHTMLAttributes } from '@instructure/shared-types'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 import { Renderable } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
 type SpinnerOwnProps = {
   /**
@@ -60,9 +61,9 @@ type PropKeys = keyof SpinnerOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type SpinnerProps = SpinnerOwnProps & {
-  themeOverride?: ThemeOverrideValue
-} & OtherHTMLAttributes<SpinnerOwnProps> &
+type SpinnerProps = SpinnerOwnProps &
+  NewThemeOverrideProp<ReturnType<NewComponentTypes['Spinner']>> &
+  OtherHTMLAttributes<SpinnerOwnProps> &
   WithDeterministicIdProps
 
 type SpinnerStyle = ComponentStyle<

@@ -25,8 +25,8 @@
 import { useTheme } from './useTheme'
 import { mergeDeep } from '@instructure/ui-utils'
 import type {
-  SharedTokens,
   NewComponentTypes,
+  SharedTokens,
   Theme
 } from '@instructure/ui-themes'
 
@@ -34,89 +34,84 @@ import type {
 type SecondParameter<T extends (...args: any) => any> =
   Parameters<T>[1] extends undefined ? never : Parameters<T>[1]
 
-type GenerateStyleParams =
-  | ((componentTheme: any, params: any, sharedTokens: SharedTokens) => any)
-  | ((componentTheme: any, params: any) => any)
-  | ((componentTheme: any) => any)
+type NewThemeOverrideProp<
+  ComponentTheme extends ReturnType<NewComponentTypes[keyof NewComponentTypes]>
+> = {
+  themeOverride?:
+    | Partial<ComponentTheme>
+    | ((compTheme: ComponentTheme, theme: Theme) => Partial<ComponentTheme>)
+}
 
-/**
- * Type for a theme override
- */
-type ThemeOverrideValue =
-  | Partial<Theme>
+type GenerateStyleFn<ComponentTheme> =
   | ((
-    componentTheme: Theme,
-    currentTheme: NewComponentTypes[keyof NewComponentTypes]
-  ) => Partial<Theme>)
+      componentTheme: ComponentTheme,
+      params: any,
+      sharedTokens: SharedTokens
+    ) => any)
+  | ((componentTheme: ComponentTheme, params: any) => any)
+  | ((componentTheme: ComponentTheme) => any)
 
 /**
- * new useStyle syntax, use this with v12 themes
+ * new useStyle syntax, use this with v11.7+ themes
  */
-
 // TODO: improve useStyle to handle generateStyle functions that don't
 // have a theme.
-const useStyle = <P extends GenerateStyleParams>(useStyleParams: {
-  generateStyle: P
-  params?: SecondParameter<P>
+const useStyle = <
+  ComponentTheme extends ReturnType<NewComponentTypes[keyof NewComponentTypes]>,
+  GenerateStyle extends GenerateStyleFn<ComponentTheme>
+>(useStyleParams: {
+  generateStyle: GenerateStyle
+  params?: SecondParameter<GenerateStyle>
   // needs to be a string too because it might be a child component
   componentId: keyof NewComponentTypes | string
-  themeOverride: ThemeOverrideValue | undefined
+  themeOverride?: NewThemeOverrideProp<ComponentTheme>['themeOverride']
   displayName?: string
-  //in case of a child component needed to use it's parent's tokens, provide parent's name
+  //in case of a child component needed to use its parent's tokens, provide parent's name
   useTokensFrom?: keyof NewComponentTypes
-}): ReturnType<P> => {
+}): ReturnType<GenerateStyle> => {
   const { generateStyle, params, componentId, themeOverride } = useStyleParams
   const useTokensFrom = useStyleParams.useTokensFrom
   const themeInContext = useTheme() as Theme
 
   const themeOverrideFromProvider = themeInContext.themeOverride
-  const componentWithTokensId = useTokensFrom ?? componentId
+  const componentWithTokensId =
+    useTokensFrom ?? (componentId as keyof NewComponentTypes)
 
   // resolving the theming functions and applying the overrides
   const primitiveOverrides = themeOverrideFromProvider?.primitives
   const semanticsOverrides = themeOverrideFromProvider?.semantics
-  // @ts-ignore TODO-theme-types: fix typing
   const sharedTokensOverrides = themeOverrideFromProvider?.sharedTokens
   const componentOverridesFromSettingsProvider =
-    // @ts-ignore TODO-theme-types: fix typing
-    themeOverrideFromProvider?.components?.[
-    componentWithTokensId as keyof NewComponentTypes
-    ]
+    themeOverrideFromProvider?.components?.[componentWithTokensId]
 
   const primitives = mergeDeep(
     themeInContext.newTheme.primitives,
-    primitiveOverrides
+    primitiveOverrides!
   )
 
   const semantics = mergeDeep(
     themeInContext.newTheme.semantics?.(primitives),
-    semanticsOverrides
+    semanticsOverrides!
   )
 
   const sharedTokens = mergeDeep(
     themeInContext.newTheme.sharedTokens?.(semantics),
-    sharedTokensOverrides
+    sharedTokensOverrides as Record<string, unknown>
   )
 
   const baseComponentTheme =
-    themeInContext.newTheme.components[
-      componentWithTokensId as keyof NewComponentTypes
-    ]?.(semantics)
+    themeInContext.newTheme.components[componentWithTokensId]?.(semantics)
 
   const componentThemeFromSettingsProvider = mergeDeep(
     baseComponentTheme,
-    componentOverridesFromSettingsProvider
-  )
+    componentOverridesFromSettingsProvider as Record<string, unknown>
+  ) as ComponentTheme
 
   const componentTheme = mergeDeep(
     componentThemeFromSettingsProvider,
-    // @ts-ignore TODO-theme-types: fix typing
     typeof themeOverride === 'function'
-      ? themeOverride(
-        componentThemeFromSettingsProvider as Theme,
-        themeInContext as any
-      )
-      : themeOverride
+      ? themeOverride(componentThemeFromSettingsProvider, themeInContext)
+      : themeOverride!
   )
 
   // @ts-ignore TODO-theme-types: fix typing
@@ -125,4 +120,4 @@ const useStyle = <P extends GenerateStyleParams>(useStyleParams: {
 
 export default useStyle
 export { useStyle }
-export type { ThemeOverrideValue }
+export type { NewThemeOverrideProp }
