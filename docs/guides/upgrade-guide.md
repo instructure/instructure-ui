@@ -243,6 +243,54 @@ Now that InstUI supports component versioning, we no longer need the separate `D
 - **[DateInput v1](/v11_6/DateInput)** (up to v11.6) — the original component. **Deprecated.** Does not support the new theming system.
 - **[DateInput2 v1](/v11_6/DateInput2)** — **Deprecated.** Will not get a v2 and does not support the new theming system. If you're using `DateInput2`, switch your import to `DateInput` (from v11.7) — the API is identical, no other code changes needed.
 
+### DateTimeInput
+
+<!-- TODO: add a codemod for the removed/renamed props (prevMonthLabel, nextMonthLabel → screenReaderLabels) -->
+
+**Removed props:**
+
+| Removed prop          | Replacement                          |
+| --------------------- | ------------------------------------ |
+| `renderWeekdayLabels` | Built in — no replacement needed     |
+| `prevMonthLabel`      | `screenReaderLabels.prevMonthButton` |
+| `nextMonthLabel`      | `screenReaderLabels.nextMonthButton` |
+
+**Changed props:**
+
+| Prop         | old API                               | new API                                                   |
+| ------------ | ------------------------------------- | --------------------------------------------------------- |
+| `dateFormat` | Moment.js format string (e.g. `'LL'`) | Locale string (e.g. `'en-US'`) or `{ parser, formatter }` |
+
+If you were passing a Moment format string like `dateFormat="LL"`, replace it with a locale string or a custom `{ parser, formatter }` object. If you were relying on the default `'LL'` format, note that v2 now uses the locale's default date format (e.g. `1/18/2018` in `en-US`) instead of the long format (e.g. `January 18, 2018`). To preserve the long format, pass a custom `{ parser, formatter }` object.
+
+**New props:**
+
+| New prop             | Description                                                                                                                   |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `screenReaderLabels` | **Required.** Object containing accessible labels: `calendarIcon`, `prevMonthButton`, `nextMonthButton`, `datePickerDialog?`. |
+| `withYearPicker`     | Optional. Enables a year dropdown in the calendar.                                                                            |
+
+```js
+---
+type: code
+---
+// old API
+<DateTimeInput
+  prevMonthLabel="Previous month"
+  nextMonthLabel="Next month"
+/>
+
+// new API
+<DateTimeInput
+  screenReaderLabels={{
+    calendarIcon: 'Open calendar',
+    prevMonthButton: 'Previous month',
+    nextMonthButton: 'Next month',
+    datePickerDialog: 'Date picker' // optional
+  }}
+/>
+```
+
 ### DataPermissionLevels
 
 ```js
