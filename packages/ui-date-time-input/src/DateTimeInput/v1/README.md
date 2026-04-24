@@ -32,7 +32,8 @@ type: example
           dateRenderLabel="Date"
           timeRenderLabel="Time"
           invalidDateTimeMessage="Invalid date!"
-          screenReaderLabels={{ calendarIcon: 'Open calendar', prevMonthButton: 'Previous month', nextMonthButton: 'Next month' }}
+          prevMonthLabel="Previous month"
+          nextMonthLabel="Next month"
           defaultValue="2018-01-18T13:30"
           layout="columns"
         />
@@ -77,11 +78,9 @@ type: example
     return (
       <div>
         <div style={{ marginBottom: '1em', fontStyle: 'italic' }}>
-          <Text>
-            You entered:
-            <br />
-            {text}
-          </Text>
+          You entered:
+          <br />
+          {text}
         </div>
         <div style={{ height: '14rem' }}>
           <DateTimeInput
@@ -91,7 +90,8 @@ type: example
             datePlaceholder="Choose"
             dateRenderLabel="Date"
             timeRenderLabel="Time"
-            screenReaderLabels={{ calendarIcon: 'Open calendar', prevMonthButton: 'Previous month', nextMonthButton: 'Next month' }}
+            prevMonthLabel="Previous month"
+            nextMonthLabel="Next month"
             onChange={onChange}
             layout="stacked"
             value={value}
@@ -119,7 +119,8 @@ type: example
   datePlaceholder="Choose a date"
   dateRenderLabel="Date"
   timeRenderLabel="Time"
-  screenReaderLabels={{ calendarIcon: 'Open calendar', prevMonthButton: 'Previous month', nextMonthButton: 'Next month' }}
+  prevMonthLabel='Previous month'
+  nextMonthLabel='Next month'
   invalidDateTimeMessage={(dvalue) => { return `'${dvalue} is not valid.` }}
   layout="columns"
   defaultValue="2018-01-18T13:30"
@@ -142,7 +143,8 @@ type: example
             datePlaceholder="Choose a date"
             dateRenderLabel="Date"
             timeRenderLabel="Time"
-            screenReaderLabels={{ calendarIcon: 'Open calendar', prevMonthButton: 'Previous month', nextMonthButton: 'Next month' }}
+            prevMonthLabel="Previous month"
+            nextMonthLabel="Next month"
             invalidDateTimeMessage={(dvalue) => {
               return `'${dvalue} is not valid.`
             }}
@@ -170,7 +172,8 @@ type: example
   timeRenderLabel="Time"
   invalidDateTimeMessage="Invalid date"
   disabledDateTimeMessage="Disabled date"
-  screenReaderLabels={{ calendarIcon: 'Open calendar', prevMonthButton: 'Previous month', nextMonthButton: 'Next month' }}
+  prevMonthLabel="Previous month"
+  nextMonthLabel="Next month"
   defaultValue="2022-04-08T13:30"
   layout="columns"
   disabledDates={['2022-04-01T13:30', '2022-04-03T13:30', '2022-04-04T13:30']}
@@ -213,7 +216,8 @@ type: example
           disabledDateTimeMessage={(rawDateValue) =>
             'Disabled date: ' + rawDateValue
           }
-          screenReaderLabels={{ calendarIcon: 'Open calendar', prevMonthButton: 'Previous month', nextMonthButton: 'Next month' }}
+          prevMonthLabel="Previous month"
+          nextMonthLabel="Next month"
           defaultValue="2022-04-08T13:30"
           layout="columns"
           disabledDates={getDisabledDates}
@@ -247,13 +251,14 @@ type: example
           dateRenderLabel="Date"
           timeRenderLabel="Time"
           invalidDateTimeMessage="Invalid date!"
-          screenReaderLabels={{ calendarIcon: 'Open calendar', prevMonthButton: 'Previous month', nextMonthButton: 'Next month' }}
+          prevMonthLabel="Previous month"
+          nextMonthLabel="Next month"
           value={date}
           onChange={(e, newDate) => setDate(newDate)}
           reset={(reset) => (resetFn.current = reset)}
         />
         <Button onClick={() => resetFn.current()}>Clear</Button>
-        <Text as="p">{date}</Text>
+        <p>{date}</p>
       </div>
     )
   }

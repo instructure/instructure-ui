@@ -23,7 +23,7 @@
  */
 
 import { SyntheticEvent } from 'react'
-import type { FormMessage } from '@instructure/ui-form-field/latest'
+import type { FormMessage } from '@instructure/ui-form-field/v11_6'
 import type { InteractionType } from '@instructure/ui-react-utils'
 import type { Moment } from '@instructure/ui-i18n'
 import type { Renderable } from '@instructure/shared-types'
@@ -38,14 +38,15 @@ type DateTimeInputProps = {
    **/
   dateRenderLabel: Renderable
   /**
-   * Accessible labels for the calendar icon button, month navigation buttons, and date picker dialog.
+   * The screen reader label for the calendar navigation header's prev month
+   * button
    */
-  screenReaderLabels: {
-    calendarIcon: string
-    prevMonthButton: string
-    nextMonthButton: string
-    datePickerDialog?: string
-  }
+  prevMonthLabel: string
+  /**
+   * The screen reader label for the calendar navigation header's next month
+   * button
+   */
+  nextMonthLabel: string
   /**
    * HTML placeholder text to display when the date input has no value.
    * This should be hint text, not a label replacement.
@@ -58,17 +59,15 @@ type DateTimeInputProps = {
    **/
   timePlaceholder?: string
   /**
-   * Controls how the date is displayed in the input and parsed when the user types.
-   * When omitted, the locale determines the format.
-   * Pass a locale string (e.g. `"en-US"`) to use an alternate locale's format,
-   * or pass `{ parser, formatter }` functions for fully custom behaviour.
+   * The format of the date shown in the `DateInput` when a date is selected.
+   * Valid formats are compatible with
+   * [Moment formats](https://momentjs.com/docs/#/displaying/format/),
+   * including localized formats.
+   *
+   * If omitted, it will use 'LL' which is a localized date with full month,
+   * e.g. "August 6, 2014"
    **/
-  dateFormat?:
-    | {
-        parser: (input: string) => Date | null
-        formatter: (date: Date) => string
-      }
-    | string
+  dateFormat?: string
   /**
    * The label over the time input
    **/
@@ -165,18 +164,25 @@ type DateTimeInputProps = {
    **/
   defaultValue?: string
   /**
-   * If set, years can be picked from a dropdown in the calendar.
-   * screenReaderLabel: string // e.g.: i18n("pick a year")
-   * onRequestYearChange?: (e: React.SyntheticEvent, requestedYear: number) => void
-   * startYear: number // e.g.: 2001, sets the start year of the selectable list
-   * endYear: number // e.g.: 2030, sets the end year of the selectable list
+   * An array of labels containing the name of each day of the week. The visible
+   * portion of the label should be abbreviated (no longer than three characters).
+   * Note that screen readers will read this content preceding each date as the
+   * `<Calendar />` is navigated. Consider using
+   * [AccessibleContent](AccessibleContent) with the `alt` prop containing the
+   * full day name for assistive technologies and the children containing the
+   * abbreviation. ex. `[<AccessibleContent alt="Monday">Mon</AccessibleContent>, ...]`
+   *
+   * You must render set the starting day of the week to the one specified by
+   * the current locale (e.g. Sunday in the US, Monday in Germany),
+   * dates are already displayed this way.
+   *
+   * By default it will render accessible, localized, abbreviated weekdays
+   * with week starts according to the current locale.
    */
-  withYearPicker?: {
-    screenReaderLabel: string
-    onRequestYearChange?: (e: SyntheticEvent, requestedYear: number) => void
-    startYear: number
-    endYear: number
-  }
+  renderWeekdayLabels?: (
+    | React.ReactNode
+    | ((...args: any[]) => React.ReactNode)
+  )[]
   /**
    * Specifies if the input is required (its passed down to the native DOM
    * elements). If its `true` then an empty input will produce an error message
@@ -249,6 +255,14 @@ type DateTimeInputProps = {
 type DateTimeInputState = {
   // the time and date currently selected
   iso?: Moment
+  // set when the user types text into the DateInput
+  dateInputTextChanged: boolean
+  // The currently selected dateTime in the calendar. Will be final when
+  // the calendar closes.
+  calendarSelectedDate?: Moment
+  // the date rendered by the opened calendar. Not selected just determines
+  // which month/year to show
+  renderedDate: Moment
   // The value currently displayed in the dateInput component.
   // Just the date part is visible
   dateInputText: string
@@ -256,6 +270,8 @@ type DateTimeInputState = {
   timeSelectValue?: string
   // The message (success/error) shown below the component
   message?: FormMessage
+  // Whether the calendar is open
+  isShowingCalendar?: boolean
 }
 
 type PropKeys = keyof DateTimeInputProps
@@ -264,7 +280,8 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 const allowedProps: AllowedPropKeys = [
   'description',
   'dateRenderLabel',
-  'screenReaderLabels',
+  'prevMonthLabel',
+  'nextMonthLabel',
   'datePlaceholder',
   'timePlaceholder',
   'dateFormat',
@@ -283,6 +300,7 @@ const allowedProps: AllowedPropKeys = [
   'colSpacing',
   'value',
   'defaultValue',
+  'renderWeekdayLabels',
   'isRequired',
   'onChange',
   'dateInputRef',
@@ -291,8 +309,7 @@ const allowedProps: AllowedPropKeys = [
   'disabledDates',
   'disabledDateTimeMessage',
   'allowNonStepInput',
-  'reset',
-  'withYearPicker'
+  'reset'
 ]
 
 export type { DateTimeInputProps, DateTimeInputState }

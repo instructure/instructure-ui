@@ -22,14 +22,21 @@
  * SOFTWARE.
  */
 
-import { Component, SyntheticEvent } from 'react'
+import { Component, SyntheticEvent, MouseEvent } from 'react'
 import { Locale, DateTime, ApplyLocaleContext } from '@instructure/ui-i18n'
 import type { Moment } from '@instructure/ui-i18n'
-import { FormFieldGroup } from '@instructure/ui-form-field/latest'
-import type { FormMessage } from '@instructure/ui-form-field/latest'
+import { FormFieldGroup } from '@instructure/ui-form-field/v11_6'
+import type { FormMessage } from '@instructure/ui-form-field/v11_6'
 
-import { DateInput } from '@instructure/ui-date-input/latest'
-import { TimeSelect } from '@instructure/ui-time-select/latest'
+import { DateInput } from '@instructure/ui-date-input/v11_6'
+import { TimeSelect } from '@instructure/ui-time-select/v11_6'
+import { Calendar } from '@instructure/ui-calendar/v11_6'
+import { AccessibleContent } from '@instructure/ui-a11y-content'
+import { IconButton } from '@instructure/ui-buttons/v11_6'
+import {
+  IconArrowOpenEndSolid,
+  IconArrowOpenStartSolid
+} from '@instructure/ui-icons'
 import type { DateTimeInputProps, DateTimeInputState } from './props'
 import { allowedProps } from './props'
 import { error } from '@instructure/console'
@@ -51,6 +58,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
     showMessages: true,
     messageFormat: DateTimeInput.DEFAULT_MESSAGE_FORMAT,
     isRequired: false,
+    dateFormat: 'LL', // Localized date with full month, e.g. "August 6, 2014"
     allowNonStepInput: false
   } as const
 
@@ -157,19 +165,25 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
           errorMsg = text ? { text, type: 'error' } : undefined
           return {
             iso: parsed.clone(),
-            dateInputText: this.formatDateInput(parsed.toDate()),
+            calendarSelectedDate: parsed.clone(),
+            dateInputTextChanged: false,
+            dateInputText: parsed.format(this.dateFormat),
             message: errorMsg,
-            timeSelectValue: newTimeSelectValue
+            timeSelectValue: newTimeSelectValue,
+            renderedDate: parsed.clone()
           }
         }
         return {
           iso: parsed.clone(),
-          dateInputText: this.formatDateInput(parsed.toDate()),
+          calendarSelectedDate: parsed.clone(),
+          dateInputTextChanged: false,
+          dateInputText: parsed.format(this.dateFormat),
           message: {
             type: 'success',
             text: parsed.format(this.props.messageFormat)
           },
-          timeSelectValue: newTimeSelectValue
+          timeSelectValue: newTimeSelectValue,
+          renderedDate: parsed.clone()
         }
       }
     }
@@ -182,7 +196,10 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
         }
     return {
       iso: undefined,
+      calendarSelectedDate: undefined,
       dateInputText: dateStr ? dateStr : '',
+      renderedDate: DateTime.now(this.locale(), this.timezone()),
+      dateInputTextChanged: false,
       ...clearTimeSelect
     }
   }
@@ -207,19 +224,8 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
     return DateTime.browserTimeZone()
   }
 
-  private formatDateInput(date: Date): string {
-    const { dateFormat } = this.props
-    if (typeof dateFormat !== 'string' && dateFormat?.formatter) {
-      return dateFormat.formatter(date)
-    }
-    return date.toLocaleDateString(
-      typeof dateFormat === 'string' ? dateFormat : this.locale(),
-      {
-        timeZone: this.timezone(),
-        calendar: 'gregory',
-        numberingSystem: 'latn'
-      }
-    )
+  get dateFormat() {
+    return this.props.dateFormat
   }
 
   isDisabledDate(date: Moment) {
@@ -238,32 +244,62 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
     return disabledDates(date.toISOString())
   }
 
-  handleDateTextChange = (
-    _event: SyntheticEvent,
-    inputValue: string,
-    _utcDateString: string
-  ) => {
-    this.setState({ dateInputText: inputValue })
+  // Called when the user enters text into dateInput
+  handleDateTextChange = (_event: SyntheticEvent, date: { value: string }) => {
+    const dateParsed = this.tryParseDate(date.value)
+    this.setState({
+      dateInputText: date.value,
+      dateInputTextChanged: true,
+      calendarSelectedDate: dateParsed ? dateParsed : undefined,
+      renderedDate: dateParsed
+        ? dateParsed.clone()
+        : DateTime.now(this.locale(), this.timezone())
+    })
   }
 
-  handleDateValidated = (
-    event: SyntheticEvent,
-    _inputValue: string,
-    utcDateString: string
-  ) => {
-    let newState: DateTimeInputState
+  tryParseDate(val: string) {
+    const parsed = DateTime.parse(val, this.locale(), this.timezone())
+    return parsed.isValid() ? parsed : null
+  }
+
+  // date is returned es a ISO string, like 2021-09-14T22:00:00.000Z
+  handleDayClick = (event: MouseEvent<any>, { date }: { date: string }) => {
+    const dateParsed = DateTime.parse(date, this.locale(), this.timezone())
+    this.updateStateBasedOnDateInput(dateParsed, event)
+  }
+
+  handleHideCalendar = (event: SyntheticEvent) => {
+    // prevent event pooling https://reactjs.org/docs/legacy-event-pooling.html
+    // Remove if React 16 is no longer supported
+    event.persist()
+    // timeout is needed here because handleDayClick could be called in the same
+    // frame, and it updates calendarSelectedDate which is read in here.
+    setTimeout(() => {
+      if ((event as React.KeyboardEvent).key === 'Enter') {
+        // user pressed enter, use the selected value in the calendar
+        this.updateStateBasedOnDateInput(this.state.calendarSelectedDate, event)
+      } else {
+        // user clicked outside/tabbed away/pressed esc, try to use the value in dateInputText
+        const dateParsed = this.tryParseDate(this.state.dateInputText)
+        this.updateStateBasedOnDateInput(dateParsed, event)
+      }
+      this.setState({ isShowingCalendar: false, dateInputTextChanged: false })
+    }, 0)
+  }
+
+  updateStateBasedOnDateInput(
+    dateParsed: Moment | null | undefined,
+    event: SyntheticEvent
+  ) {
+    let newState
     if (
-      utcDateString &&
+      dateParsed &&
       this.state.timeSelectValue &&
-      (!this.state.dateInputText || this.state.dateInputText === '')
+      (!this.state.dateInputText || this.state.dateInputText == '')
     ) {
+      // There is already a selected time, but no date. Adjust the time too
       const timeParsed = DateTime.parse(
         this.state.timeSelectValue,
-        this.locale(),
-        this.timezone()
-      )
-      const dateParsed = DateTime.parse(
-        utcDateString,
         this.locale(),
         this.timezone()
       )
@@ -276,11 +312,11 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
         false,
         false
       )
-    } else if (!utcDateString) {
-      // invalid date — pass raw text so error message is shown
+    } else if (!dateParsed) {
+      // if the text in the dateInput is not readable display error
       newState = this.recalculateState(this.state.dateInputText, false, true)
     } else {
-      newState = this.recalculateState(utcDateString, false, true)
+      newState = this.recalculateState(dateParsed?.toISOString(), false, true)
     }
     this.changeStateIfNeeded(newState, event)
   }
@@ -342,6 +378,168 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
     }
   }
 
+  handleShowCalendar = (_event: SyntheticEvent) => {
+    this.setState({ isShowingCalendar: true })
+  }
+
+  handleSelectNextDay = (_event: SyntheticEvent) => {
+    let toAlter
+    if (this.state.calendarSelectedDate) {
+      toAlter = this.state.calendarSelectedDate.clone()
+    } else if (this.state.iso) {
+      toAlter = this.state.iso.clone()
+    } else {
+      toAlter = DateTime.now(this.locale(), this.timezone())
+    }
+    toAlter.add({ days: 1 })
+    this.setState({
+      calendarSelectedDate: toAlter,
+      renderedDate: toAlter.clone()
+    })
+  }
+
+  handleSelectPrevDay = (_event: SyntheticEvent) => {
+    let toAlter
+    if (this.state.calendarSelectedDate) {
+      toAlter = this.state.calendarSelectedDate.clone()
+    } else if (this.state.iso) {
+      toAlter = this.state.iso.clone()
+    } else {
+      toAlter = DateTime.now(this.locale(), this.timezone())
+    }
+    toAlter.subtract({ days: 1 })
+    this.setState({
+      calendarSelectedDate: toAlter,
+      renderedDate: toAlter.clone()
+    })
+  }
+
+  handleRenderNextMonth = (_event: SyntheticEvent) => {
+    this.setState({
+      renderedDate: this.state.renderedDate.clone().add({ months: 1 })
+    })
+  }
+
+  handleRenderPrevMonth = (_event: SyntheticEvent) => {
+    this.setState({
+      renderedDate: this.state.renderedDate.clone().subtract({ months: 1 })
+    })
+  }
+
+  renderDays() {
+    const renderedDate = this.state.renderedDate
+    // Sets it to the first local day of the week counting back from the start of the month.
+    // Note that first day depends on the locale, e.g. it's Sunday in the US and
+    // Monday in most of the EU.
+    const currDate = DateTime.getFirstDayOfWeek(renderedDate.startOf('month'))
+    const arr: Moment[] = []
+    for (let i = 0; i < Calendar.DAY_COUNT; i++) {
+      // This workaround is needed because moment's `.add({days: 1})` function has a bug that happens when the date added lands perfectly onto the DST cutoff,
+      // in these cases adding 1 day results in 23 hours added instead,
+      // so `moment.tz('2024-09-07T00:00:00', 'America/Santiago').add({days: 1})` results
+      // in "Sat Sep 07 2024 23:00:00 GMT-0400" instead of "Sun Sep 08 2024 00:00:00 GMT-0400".
+      // which would cause duplicate dates in the calendar.
+      // More info on the bug: https://github.com/moment/moment/issues/4743
+      // Please note that this causes one hour of time difference in the affected timezones/dates and to
+      // fully solve this bug we need to change to something like luxon which handles this properly
+      if (currDate.clone().format('HH') === '23') {
+        arr.push(currDate.clone().add({ hours: 1 }))
+      } else {
+        arr.push(currDate.clone())
+      }
+
+      currDate.add({ days: 1 })
+    }
+    return arr.map((date) => {
+      const dateStr = date.toISOString()
+      return (
+        <DateInput.Day
+          key={dateStr}
+          date={dateStr}
+          isSelected={
+            this.state.calendarSelectedDate
+              ? date.isSame(this.state.calendarSelectedDate, 'day')
+              : false
+          }
+          isToday={date.isSame(
+            DateTime.now(this.locale(), this.timezone()),
+            'day'
+          )}
+          isOutsideMonth={!date.isSame(renderedDate, 'month')}
+          label={date.format('D MMMM YYYY')} // used by screen readers
+          onClick={this.handleDayClick}
+          interaction={this.isDisabledDate(date) ? 'disabled' : 'enabled'}
+        >
+          {date.format('DD')}
+        </DateInput.Day>
+      )
+    })
+  }
+
+  // The default weekdays rendered in the calendar
+  get defaultWeekdays() {
+    if (!this.state.isShowingCalendar) {
+      // this is an expensive function, only execute if the calendar is open
+      return []
+    }
+    const shortDayNames = DateTime.getLocalDayNamesOfTheWeek(
+      this.locale(),
+      'short'
+    )
+    const longDayNames = DateTime.getLocalDayNamesOfTheWeek(
+      this.locale(),
+      'long'
+    )
+    return [
+      <AccessibleContent key={1} alt={longDayNames[0]}>
+        {shortDayNames[0]}
+      </AccessibleContent>,
+      <AccessibleContent key={2} alt={longDayNames[1]}>
+        {shortDayNames[1]}
+      </AccessibleContent>,
+      <AccessibleContent key={3} alt={longDayNames[2]}>
+        {shortDayNames[2]}
+      </AccessibleContent>,
+      <AccessibleContent key={4} alt={longDayNames[3]}>
+        {shortDayNames[3]}
+      </AccessibleContent>,
+      <AccessibleContent key={5} alt={longDayNames[4]}>
+        {shortDayNames[4]}
+      </AccessibleContent>,
+      <AccessibleContent key={6} alt={longDayNames[5]}>
+        {shortDayNames[5]}
+      </AccessibleContent>,
+      <AccessibleContent key={7} alt={longDayNames[6]}>
+        {shortDayNames[6]}
+      </AccessibleContent>
+    ]
+  }
+
+  renderNextPrevMonthButton(type: 'prev' | 'next') {
+    if (!this.state.isShowingCalendar) {
+      return
+    }
+    return (
+      <IconButton
+        size="small"
+        withBackground={false}
+        withBorder={false}
+        renderIcon={
+          type === 'prev' ? (
+            <IconArrowOpenStartSolid color="primary" />
+          ) : (
+            <IconArrowOpenEndSolid color="primary" />
+          )
+        }
+        screenReaderLabel={
+          type === 'prev'
+            ? this.props.prevMonthLabel
+            : this.props.nextMonthLabel
+        }
+      />
+    )
+  }
+
   render() {
     const {
       description,
@@ -362,10 +560,8 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
       colSpacing,
       isRequired,
       interaction,
-      allowNonStepInput,
-      screenReaderLabels,
-      disabledDates,
-      withYearPicker
+      renderWeekdayLabels,
+      allowNonStepInput
     } = this.props
 
     const allMessages = [
@@ -397,23 +593,37 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
         data-cid="DateTimeInput"
       >
         <DateInput
-          renderLabel={dateRenderLabel}
-          screenReaderLabels={screenReaderLabels}
-          withYearPicker={withYearPicker}
+          display="block"
           value={this.state.dateInputText}
           onChange={this.handleDateTextChange}
-          onRequestValidateDate={this.handleDateValidated}
-          onBlur={(e) => this.handleBlur(e)}
+          onBlur={this.handleBlur}
           inputRef={dateInputRef}
           placeholder={datePlaceholder}
+          renderLabel={dateRenderLabel}
+          renderWeekdayLabels={
+            renderWeekdayLabels ? renderWeekdayLabels : this.defaultWeekdays
+          }
+          onRequestShowCalendar={this.handleShowCalendar}
+          onRequestHideCalendar={this.handleHideCalendar}
+          isShowingCalendar={this.state.isShowingCalendar}
+          renderNextMonthButton={this.renderNextPrevMonthButton('next')}
+          renderPrevMonthButton={this.renderNextPrevMonthButton('prev')}
+          onRequestSelectNextDay={this.handleSelectNextDay}
+          onRequestSelectPrevDay={this.handleSelectPrevDay}
+          onRequestRenderNextMonth={this.handleRenderNextMonth}
+          onRequestRenderPrevMonth={this.handleRenderPrevMonth}
           isRequired={isRequired}
           messages={subComponentMessages}
           interaction={interaction}
-          locale={locale}
-          timezone={timezone}
-          disabledDates={disabledDates}
-          dateFormat={this.props.dateFormat}
-        />
+          renderNavigationLabel={
+            <span>
+              <div>{this.state.renderedDate.format('MMMM')}</div>
+              <div>{this.state.renderedDate.format('y')}</div>
+            </span>
+          }
+        >
+          {this.renderDays()}
+        </DateInput>
         <TimeSelect
           value={this.state.timeSelectValue}
           onChange={this.updateStateBasedOnTimeSelect}
