@@ -116,11 +116,27 @@ type: example
     </Alert>
 
     <InstUISettingsProvider
-      theme={{
-        componentOverrides: {
+      themeOverride={{
+        components:{
           Alert: {
             infoIconBackground: "darkblue",
             infoBorderColor: "darkblue"
+          },
+          Pill:{
+
+          }
+        }
+      }}
+    >
+    <InstUISettingsProvider
+      themeOverride={{
+        components:{
+          Alert: {
+            infoIconBackground: "darkblue",
+            infoBorderColor: "darkblue"
+          },
+          Pill:{
+            infoTextColor:"red"
           }
         }
       }}
@@ -128,6 +144,14 @@ type: example
       <Alert variant="info" margin="small">
         My icon background and border should be dark blue in any theme.
       </Alert>
+       <Pill
+    statusLabel="Status"
+    color="info"
+    margin="x-small"
+  >
+    Draft
+  </Pill>
+    </InstUISettingsProvider>
     </InstUISettingsProvider>
 
     <InstUISettingsProvider
@@ -231,7 +255,7 @@ type: example
     <InstUISettingsProvider
       theme={{
         componentOverrides: {
-          TextInput: { backgroundColor: "yellow" }
+          TextInput: { background: "yellow" }
         }
       }}
     >

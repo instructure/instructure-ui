@@ -1,6 +1,6 @@
 # Instructure UI (InstUI) - React Component Library
 
-- version 11.7.1 
+- version 11.7.2 
 
 - Instructure UI (InstUI) is a comprehensive React component library.
 
@@ -21,6 +21,7 @@
 - [Form errors](https://instructure.design/markdowns/form-errors.md): InstUI form components use a `messages` prop for error/hint/success messages. Required fields now show an asterisk automatically. Examples provided for various form components like TextInput, Checkbox, and DateTimeInput.
 - [Layout spacing](https://instructure.design/markdowns/layout-spacing.md): InstUI provides semantic spacing tokens (e.g., buttons, tags) for consistent layouts. Apply spacing via `margin` prop, container `gap`, or importing from theme. Legacy tokens are available for compatibility but not recommended for new layouts.
 - [Module federation](https://instructure.design/markdowns/module-federation.md): InstUI supports module federation with specific version requirements. For v10.14+, use local themes (`canvasThemeLocal`). For older hosts, guest apps must use v10.14+ and local themes. Global theme overrides don't apply to local themes.
+- [New theme overrides](https://instructure.design/markdowns/new-theme-overrides.md)
 - [Server side rendering](https://instructure.design/markdowns/server-side-rendering.md): SSR with Next.js requires wrapping the app with `InstUISettingsProvider` for deterministic ID generation. Avoid `@instructure/ui` meta-package; install only needed packages. CodeEditor isn't SSR-compatible and must be dynamically imported.
 - [Typography system](https://instructure.design/markdowns/typography-system.md): Use `<Text>` and `<Heading>` components with semantic variants for consistent typography. Variants define font style, weight, size, and line height. Legacy tokens (e.g., fontSizeXSmall) are deprecated and should not be used in new designs.
 - [Using icons](https://instructure.design/markdowns/UsingIcons.md): Guidelines for using icons with proper accessibility roles, size variants, and color options. Line icons for light backgrounds, solid for dark backgrounds. Icons scale with parent font-size by default.
@@ -59,8 +60,8 @@
 - [DateTimeInput](https://instructure.design/markdowns/DateTimeInput.md): Combines DateInput and TimeSelect for entering date-time values. Supports localization, validation, disabled dates, and layout options (stacked or columns). Includes reset functionality and context-aware formatting.
 - [DrawerLayout](https://instructure.design/markdowns/DrawerLayout.md): A responsive layout component with a collapsible tray and content area. Tray can be placed at start or end and switches to overlay on small screens. Supports nested layouts and accessibility features.
 - [Drilldown](https://instructure.design/markdowns/Drilldown.md): A hierarchical navigation component for tree structures. Supports pages, groups, selectable options, and in-place editing. Replaces flyout menus and TreeBrowser for better responsiveness and accessibility.
-- [Editable](https://instructure.design/markdowns/Editable.md): Enables in-place editing of content. Manages state and transitions between view and edit modes. Provides render props for custom UI implementation. Used by InPlaceEdit.
 - [InPlaceEdit](https://instructure.design/markdowns/InPlaceEdit.md): Enables inline editing of content with smooth transitions between view and edit modes. Provides controlled component pattern for mode management, custom renderers for viewer/editor components, and support for various layouts and read-only states.
+- [Editable](https://instructure.design/markdowns/Editable.md): Enables in-place editing of content. Manages state and transitions between view and edit modes. Provides render props for custom UI implementation. Used by InPlaceEdit.
 - [FileDrop](https://instructure.design/markdowns/FileDrop.md): A drag-and-drop file upload component with browse functionality. Supports file type validation via MIME types/extensions, multiple file uploads, and visual feedback for accepted/rejected files. Includes accessibility features and customizable rendering for labels and error messages.
 - [Flex](https://instructure.design/markdowns/Flex.md): A flexbox-based layout component for creating responsive multi-column designs. Supports directional layouts, gap control, item sizing (grow/shrink), alignment, and overflow handling. Includes visual debugging tools and common layout patterns like header-button combinations.
 - [FormField](https://instructure.design/markdowns/FormField.md): A foundational component for building form inputs with consistent styling and layout. Supports stacked and inline layouts, validation messages, and accessibility features. Typically used internally by other form components rather than directly.
