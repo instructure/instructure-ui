@@ -1,6 +1,6 @@
 # Instructure UI (InstUI) - React Component Library
 
-- version 11.7.1 
+- version 11.7.2 
 
 - Instructure UI (InstUI) is a comprehensive React component library.
 
@@ -62,8 +62,8 @@
 - [Drilldown](./Drilldown.md): A hierarchical navigation component for tree structures. Supports pages, groups, selectable options, and in-place editing. Replaces flyout menus and TreeBrowser for better responsiveness and accessibility.
 - [Editable](./Editable.md): Enables in-place editing of content. Manages state and transitions between view and edit modes. Provides render props for custom UI implementation. Used by InPlaceEdit.
 - [InPlaceEdit](./InPlaceEdit.md): Enables inline editing of content with smooth transitions between view and edit modes. Provides controlled component pattern for mode management, custom renderers for viewer/editor components, and support for various layouts and read-only states.
-- [Flex](./Flex.md): A flexbox-based layout component for creating responsive multi-column designs. Supports directional layouts, gap control, item sizing (grow/shrink), alignment, and overflow handling. Includes visual debugging tools and common layout patterns like header-button combinations.
 - [FileDrop](./FileDrop.md): A drag-and-drop file upload component with browse functionality. Supports file type validation via MIME types/extensions, multiple file uploads, and visual feedback for accepted/rejected files. Includes accessibility features and customizable rendering for labels and error messages.
+- [Flex](./Flex.md): A flexbox-based layout component for creating responsive multi-column designs. Supports directional layouts, gap control, item sizing (grow/shrink), alignment, and overflow handling. Includes visual debugging tools and common layout patterns like header-button combinations.
 - [FormField](./FormField.md): A foundational component for building form inputs with consistent styling and layout. Supports stacked and inline layouts, validation messages, and accessibility features. Typically used internally by other form components rather than directly.
 - [FormFieldGroup](./FormFieldGroup.md): Organizes multiple form fields into cohesive groups with consistent spacing and alignment. Supports various layouts (inline, columns, stacked) and provides validation messaging at the group level. Includes accessibility guidance against placeholder text.
 - [Grid](./Grid.md): A 12-column grid system for creating responsive layouts. Features breakpoint-based stacking, customizable column widths, spacing control, and alignment options. Supports visual debugging and common patterns like responsive header layouts.
