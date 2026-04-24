@@ -102,8 +102,11 @@ export default function FormErrorsPage() {
           dateRenderLabel="Date"
           timeRenderLabel="Time"
           invalidDateTimeMessage="Invalid date!"
-          prevMonthLabel="Previous month"
-          nextMonthLabel="Next month"
+          screenReaderLabels={{
+            calendarIcon: 'Open calendar',
+            prevMonthButton: 'Previous month',
+            nextMonthButton: 'Next month'
+          }}
           defaultValue="2018-01-18T13:30"
           layout="columns"
           isRequired
@@ -116,8 +119,11 @@ export default function FormErrorsPage() {
           dateRenderLabel="Date"
           timeRenderLabel="Time"
           invalidDateTimeMessage="Invalid date!"
-          prevMonthLabel="Previous month"
-          nextMonthLabel="Next month"
+          screenReaderLabels={{
+            calendarIcon: 'Open calendar',
+            prevMonthButton: 'Previous month',
+            nextMonthButton: 'Next month'
+          }}
           defaultValue="2018-01-18T13:30"
           layout="stacked"
           isRequired
