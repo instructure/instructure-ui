@@ -87,6 +87,165 @@ type: embed
 
 ```
 
+### BaseButton
+
+All button components (Button, IconButton, CondensedButton) share BaseButton's theme tokens.
+
+#### New `size` prop values
+
+The `size` prop now accepts two additional values: `'condensedSmall'` and `'condensedMedium'`. These compact sizes are designed for use inside other components (e.g., a password-reveal button inside a `TextInput`). Available on Button, BaseButton, IconButton, and CondensedButton.
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  added={[
+    {name:"paddingVertical",note:"replaces per-size paddingTop/paddingBottom"},
+    {name:"gapButtonContentSm",note:"replaces iconTextGap and iconTextGapCondensed"},
+    {name:"gapButtonContentMd",note:"replaces iconTextGap"},
+    {name:"gapButtonContentLg",note:"replaces iconTextGap"},
+    {name:"borderRadiusFull",note:"for circle shape"},
+    {name:"borderRadiusSm",note:"for condensed variants"},
+    {name:"heightXs",note:"for condensedMedium size"},
+    {name:"heightXxs",note:"for condensedSmall size"},
+    {name:"opacityBase",note:""},
+    {name:"opacityDisabled",note:""},
+    {name:"tertiaryActiveBorderColor",note:"for ghost primary variant"},
+    {name:"tertiaryActiveTextColor",note:"for ghost primary variant"},
+    {name:"tertiaryDisabledBorderColor",note:"for ghost primary variant"},
+    {name:"tertiaryDisabledTextColor",note:"for ghost primary variant"},
+    {name:"tertiaryHoverBorderColor",note:"for ghost primary variant"},
+    {name:"tertiaryHoverTextColor",note:"for ghost primary variant"},
+    {name:"primaryActiveTextColor",note:""},
+    {name:"primaryActiveBorderColor",note:""},
+    {name:"primaryDisabledBackgroundColor",note:""},
+    {name:"primaryDisabledBorderColor",note:""},
+    {name:"primaryDisabledTextColor",note:""},
+    {name:"primaryHoverBorderColor",note:""},
+    {name:"primaryHoverTextColor",note:""},
+    {name:"primaryOnColorActiveBorderColor",note:"for primary-inverse with background"},
+    {name:"primaryOnColorActiveTextColor",note:"for primary-inverse with background"},
+    {name:"primaryOnColorDisabledBackgroundColor",note:"for primary-inverse with background"},
+    {name:"primaryOnColorDisabledBorderColor",note:"for primary-inverse with background"},
+    {name:"primaryOnColorDisabledTextColor",note:"for primary-inverse with background"},
+    {name:"primaryOnColorHoverBorderColor",note:"for primary-inverse with background"},
+    {name:"primaryOnColorHoverTextColor",note:"for primary-inverse with background"},
+    {name:"secondaryActiveTextColor",note:""},
+    {name:"secondaryActiveBorderColor",note:""},
+    {name:"secondaryDisabledBackgroundColor",note:""},
+    {name:"secondaryDisabledBorderColor",note:""},
+    {name:"secondaryDisabledTextColor",note:""},
+    {name:"secondaryHoverBorderColor",note:""},
+    {name:"secondaryHoverTextColor",note:""},
+    {name:"secondaryOnColorActiveBorderColor",note:"for primary-inverse ghost variant"},
+    {name:"secondaryOnColorActiveTextColor",note:"for primary-inverse ghost variant"},
+    {name:"secondaryOnColorDisabledBorderColor",note:"for primary-inverse ghost variant"},
+    {name:"secondaryOnColorDisabledTextColor",note:"for primary-inverse ghost variant"},
+    {name:"secondaryOnColorHoverBorderColor",note:"for primary-inverse ghost variant"},
+    {name:"secondaryOnColorHoverTextColor",note:"for primary-inverse ghost variant"},
+    {name:"successActiveTextColor",note:""},
+    {name:"successActiveBorderColor",note:""},
+    {name:"successDisabledBackgroundColor",note:""},
+    {name:"successDisabledBorderColor",note:""},
+    {name:"successDisabledTextColor",note:""},
+    {name:"successHoverBorderColor",note:""},
+    {name:"successHoverTextColor",note:""},
+    {name:"successSecondaryActiveBorderColor",note:"for success ghost variant"},
+    {name:"successSecondaryActiveTextColor",note:"for success ghost variant"},
+    {name:"successSecondaryDisabledBorderColor",note:"for success ghost variant"},
+    {name:"successSecondaryDisabledTextColor",note:"for success ghost variant"},
+    {name:"successSecondaryHoverBorderColor",note:"for success ghost variant"},
+    {name:"successSecondaryHoverTextColor",note:"for success ghost variant"},
+    {name:"destructiveActiveBorderColor",note:"for danger with background"},
+    {name:"destructiveActiveTextColor",note:"for danger with background"},
+    {name:"destructiveDisabledBackgroundColor",note:"for danger with background"},
+    {name:"destructiveDisabledBorderColor",note:"for danger with background"},
+    {name:"destructiveDisabledTextColor",note:"for danger with background"},
+    {name:"destructiveHoverBorderColor",note:"for danger with background"},
+    {name:"destructiveHoverTextColor",note:"for danger with background"},
+    {name:"destructiveSecondaryActiveBorderColor",note:"for danger ghost variant"},
+    {name:"destructiveSecondaryActiveTextColor",note:"for danger ghost variant"},
+    {name:"destructiveSecondaryDisabledBorderColor",note:"for danger ghost variant"},
+    {name:"destructiveSecondaryDisabledTextColor",note:"for danger ghost variant"},
+    {name:"destructiveSecondaryHoverBorderColor",note:"for danger ghost variant"},
+    {name:"destructiveSecondaryHoverTextColor",note:"for danger ghost variant"},
+    {name:"aiBaseTextColor",note:""},
+    {name:"aiActiveTextColor",note:""},
+    {name:"aiActiveBackgroundTopGradientColor",note:""},
+    {name:"aiActiveBackgroundBottomGradientColor",note:""},
+    {name:"aiActiveBorderTopGradientColor",note:""},
+    {name:"aiActiveBorderBottomGradientColor",note:""},
+    {name:"aiHoverTextColor",note:""},
+    {name:"aiHoverBackgroundTopGradientColor",note:""},
+    {name:"aiHoverBackgroundBottomGradientColor",note:""},
+    {name:"aiHoverBorderTopGradientColor",note:""},
+    {name:"aiHoverBorderBottomGradientColor",note:""},
+    {name:"aiDisabledBackgroundColor",note:""},
+    {name:"aiDisabledBorderColor",note:""},
+    {name:"aiDisabledTextColor",note:""},
+    {name:"aiSecondaryActiveBackgroundTopGradientColor",note:""},
+    {name:"aiSecondaryActiveBackgroundBottomGradientColor",note:""},
+    {name:"aiSecondaryHoverBackgroundTopGradientColor",note:""},
+    {name:"aiSecondaryHoverBackgroundBottomGradientColor",note:""},
+    {name:"aiSecondaryTextTopGradientColor",note:""},
+    {name:"aiSecondaryTextBottomGradientColor",note:""},
+    {name:"aiSecondaryDisabledBorderColor",note:""},
+    {name:"aiSecondaryDisabledTextColor",note:""}
+  ]}
+  removed={[
+    {name:"smallPaddingTop",note:"replaced by paddingVertical"},
+    {name:"smallPaddingBottom",note:"replaced by paddingVertical"},
+    {name:"mediumPaddingTop",note:"replaced by paddingVertical"},
+    {name:"mediumPaddingBottom",note:"replaced by paddingVertical"},
+    {name:"largePaddingTop",note:"replaced by paddingVertical"},
+    {name:"largePaddingBottom",note:"replaced by paddingVertical"},
+    {name:"iconSizeSmall",note:"icon sizing handled by Lucide icon system"},
+    {name:"iconSizeMedium",note:"icon sizing handled by Lucide icon system"},
+    {name:"iconSizeLarge",note:"icon sizing handled by Lucide icon system"},
+    {name:"iconTextGap",note:"replaced by gapButtonContentSm/Md/Lg"},
+    {name:"iconTextGapCondensed",note:"replaced by gapButtonContentSm"},
+    {name:"primaryActiveBoxShadow",note:""},
+    {name:"primaryGhostActiveBoxShadow",note:""},
+    {name:"primaryGhostBoxShadow",note:""},
+    {name:"primaryGhostHoverBoxShadow",note:""},
+    {name:"secondaryActiveBackground",note:""},
+    {name:"secondaryActiveBoxShadow",note:""},
+    {name:"secondaryGhostActiveBoxShadow",note:""},
+    {name:"successActiveBoxShadow",note:""},
+    {name:"successGhostActiveBoxShadow",note:""},
+    {name:"dangerActiveBackground",note:""},
+    {name:"dangerActiveBoxShadow",note:""},
+    {name:"dangerGhostActiveBoxShadow",note:""},
+    {name:"primaryInverseActiveBoxShadow",note:""},
+    {name:"primaryInverseGhostActiveBoxShadow",note:""},
+    {name:"primaryInverseGhostBoxShadow",note:""},
+    {name:"primaryInverseGhostHoverBoxShadow",note:""},
+    {name:"aiActiveBoxShadow",note:"replaced by granular AI tokens"}
+  ]}
+/>
+
+```
+
+### CloseButton
+
+CloseButton no longer has its own dedicated theme tokens in v2. Offset spacing now uses `sharedTokens.spacing`, and visual styling comes from BaseButton tokens.
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"offsetMedium",note:"now uses sharedTokens.spacing"},
+    {name:"offsetSmall",note:"now uses sharedTokens.spacing"},
+    {name:"offsetXSmall",note:"now uses sharedTokens.spacing"},
+    {name:"zIndex",note:"hardcoded to 1"}
+  ]}
+/>
+
+```
+
 ### Breadcrumb
 
 ```js
