@@ -43,6 +43,7 @@ export { useStyleLegacy } from './useStyleLegacy'
 export { useStyle } from './useStyle'
 export { useTheme } from './useTheme'
 
+export type { InstUIProviderProps } from './InstUISettingsProvider'
 export type { ComponentStyle, StyleObject, Overrides } from './EmotionTypes'
 export type { WithStyleProps } from './withStyle'
 export type { ThemeOverrideValue } from './useStyle'

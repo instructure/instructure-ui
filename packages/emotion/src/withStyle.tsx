@@ -49,7 +49,11 @@ import type {
   Props
 } from './EmotionTypes'
 
-import type { NewComponentTypes, Theme } from '@instructure/ui-themes'
+import type {
+  NewComponentTypes,
+  SharedTokens,
+  Theme
+} from '@instructure/ui-themes'
 
 // Extract is needed because it would allow number otherwise
 // https://stackoverflow.com/a/51808262/319473
@@ -154,7 +158,7 @@ const withStyle = decorator(
   ) => {
     const displayName = ComposedComponent.displayName || ComposedComponent.name
 
-    const componentId =
+    const componentId: keyof NewComponentTypes =
       useTokensFrom ?? ComposedComponent.componentId?.replace('.', '')
 
     const WithStyle: ForwardRefExoticComponent<
@@ -208,38 +212,34 @@ const withStyle = decorator(
       // resolving the theming functions and applying the overrides
       const primitiveOverrides = themeOverride?.primitives
       const semanticsOverrides = themeOverride?.semantics
-      // @ts-ignore TODO-theme-types: fix typing
       const sharedTokensOverrides = themeOverride?.sharedTokens
       const componentOverridesFromSettingsProvider =
-        // @ts-ignore TODO-theme-types: fix typing
-        themeOverride?.components?.[componentId as keyof NewComponentTypes]
+        themeOverride?.components?.[componentId]
       const componentOverridesFromThemeOverrideProp = (
         componentProps as ThemeOverrideProp
       ).themeOverride
 
       const primitives = mergeDeep(
         theme.newTheme.primitives,
-        primitiveOverrides
+        primitiveOverrides!
       )
 
       const semantics = mergeDeep(
         theme.newTheme.semantics?.(primitives),
-        semanticsOverrides
+        semanticsOverrides!
       )
 
       const sharedTokens = mergeDeep(
         theme.newTheme.sharedTokens?.(semantics),
-        sharedTokensOverrides
-      )
+        sharedTokensOverrides as Record<string, unknown>
+      ) as SharedTokens
       // Note: Some components do not have a theme, e.g., FormFieldMessages
       const baseComponentTheme =
-        theme.newTheme.components[componentId as keyof NewComponentTypes]?.(
-          semantics
-        )
+        theme.newTheme.components[componentId]?.(semantics)
 
       const componentThemeFromSettingsProvider = mergeDeep(
         baseComponentTheme,
-        componentOverridesFromSettingsProvider
+        componentOverridesFromSettingsProvider as Record<string, unknown>
       )
 
       const componentTheme = mergeDeep(

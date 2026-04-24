@@ -45,9 +45,9 @@ type GenerateStyleParams =
 type ThemeOverrideValue =
   | Partial<Theme>
   | ((
-    componentTheme: Theme,
-    currentTheme: NewComponentTypes[keyof NewComponentTypes]
-  ) => Partial<Theme>)
+      componentTheme: Theme,
+      currentTheme: NewComponentTypes[keyof NewComponentTypes]
+    ) => Partial<Theme>)
 
 /**
  * new useStyle syntax, use this with v12 themes
@@ -70,42 +70,37 @@ const useStyle = <P extends GenerateStyleParams>(useStyleParams: {
   const themeInContext = useTheme() as Theme
 
   const themeOverrideFromProvider = themeInContext.themeOverride
-  const componentWithTokensId = useTokensFrom ?? componentId
+  const componentWithTokensId =
+    useTokensFrom ?? (componentId as keyof NewComponentTypes)
 
   // resolving the theming functions and applying the overrides
   const primitiveOverrides = themeOverrideFromProvider?.primitives
   const semanticsOverrides = themeOverrideFromProvider?.semantics
-  // @ts-ignore TODO-theme-types: fix typing
   const sharedTokensOverrides = themeOverrideFromProvider?.sharedTokens
   const componentOverridesFromSettingsProvider =
-    // @ts-ignore TODO-theme-types: fix typing
-    themeOverrideFromProvider?.components?.[
-    componentWithTokensId as keyof NewComponentTypes
-    ]
+    themeOverrideFromProvider?.components?.[componentWithTokensId]
 
   const primitives = mergeDeep(
     themeInContext.newTheme.primitives,
-    primitiveOverrides
+    primitiveOverrides!
   )
 
   const semantics = mergeDeep(
     themeInContext.newTheme.semantics?.(primitives),
-    semanticsOverrides
+    semanticsOverrides!
   )
 
   const sharedTokens = mergeDeep(
     themeInContext.newTheme.sharedTokens?.(semantics),
-    sharedTokensOverrides
+    sharedTokensOverrides as Record<string, unknown>
   )
 
   const baseComponentTheme =
-    themeInContext.newTheme.components[
-      componentWithTokensId as keyof NewComponentTypes
-    ]?.(semantics)
+    themeInContext.newTheme.components[componentWithTokensId]?.(semantics)
 
   const componentThemeFromSettingsProvider = mergeDeep(
     baseComponentTheme,
-    componentOverridesFromSettingsProvider
+    componentOverridesFromSettingsProvider as Record<string, unknown>
   )
 
   const componentTheme = mergeDeep(
@@ -113,9 +108,9 @@ const useStyle = <P extends GenerateStyleParams>(useStyleParams: {
     // @ts-ignore TODO-theme-types: fix typing
     typeof themeOverride === 'function'
       ? themeOverride(
-        componentThemeFromSettingsProvider as Theme,
-        themeInContext as any
-      )
+          componentThemeFromSettingsProvider as Theme,
+          themeInContext as any
+        )
       : themeOverride
   )
 
