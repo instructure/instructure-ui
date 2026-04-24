@@ -431,7 +431,14 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
       return event.preventDefault()
     }
 
-    const newHex = `${this.state.hexCode}${toPaste}`
+    const input = event.target as HTMLInputElement
+    const currentHex = this.state.hexCode
+    const selectionStart = input.selectionStart ?? currentHex.length
+    const selectionEnd = input.selectionEnd ?? currentHex.length
+    const newHex =
+      currentHex.slice(0, selectionStart) +
+      toPaste +
+      currentHex.slice(selectionEnd)
     if (isValid(newHex)) {
       if (typeof this.props.onChange === 'function') {
         this.props.onChange(`#${newHex}`)
