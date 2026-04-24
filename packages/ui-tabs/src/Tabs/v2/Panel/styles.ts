@@ -28,7 +28,6 @@ import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 type StyleParams = {
   maxHeight: TabsPanelProps['maxHeight']
   isSelected: TabsPanelProps['isSelected']
-  isHidden: boolean
 }
 
 /**
@@ -43,9 +42,11 @@ type StyleParams = {
 const generateStyle = (
   componentTheme: ReturnType<NewComponentTypes['TabsPanel']>,
   params: StyleParams,
-  sharedTokens: SharedTokens
+  sharedTokens: SharedTokens,
+  state: { isHidden: boolean }
 ): TabsPanelStyle => {
-  const { maxHeight, isSelected, isHidden } = params
+  const { maxHeight, isSelected } = params
+  const { isHidden } = state
 
   return {
     panel: {

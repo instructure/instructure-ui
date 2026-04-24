@@ -112,6 +112,26 @@ describe('<Tabs/>', () => {
     cy.wrap(onChange).its('lastCall.args[1].index').should('equal', 1)
   })
 
+  it('should keep non-selected panel hidden when unmountOnExit is false', () => {
+    cy.mount(
+      <Tabs>
+        <Tabs.Panel renderTitle="First Tab" unmountOnExit={false}>
+          Tab 1 content
+        </Tabs.Panel>
+        <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
+      </Tabs>
+    )
+
+    cy.get('[role="tabpanel"]').should('have.length', 2)
+
+    cy.get('[role="tabpanel"]').eq(0).should('not.have.css', 'display', 'none')
+    cy.get('[role="tabpanel"]').eq(1).should('have.css', 'display', 'none')
+
+    cy.contains('[role="tab"]', 'Second Tab').click()
+    cy.get('[role="tabpanel"]').eq(1).should('not.have.css', 'display', 'none')
+    cy.get('[role="tabpanel"]').eq(0).should('have.css', 'display', 'none')
+  })
+
   it('should render a fade-out gradient when tabOverflow set to scroll and Tabs overflow', async () => {
     const Example = ({ width }: { width: string }) => (
       <div style={{ width }}>
