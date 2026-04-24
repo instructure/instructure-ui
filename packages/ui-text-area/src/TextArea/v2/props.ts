@@ -28,13 +28,17 @@ import type {
   OtherHTMLAttributes,
   PickPropsWithExceptions
 } from '@instructure/shared-types'
-import type { FormMessage, FormFieldOwnProps } from '@instructure/ui-form-field/latest'
+import type {
+  FormMessage,
+  FormFieldOwnProps
+} from '@instructure/ui-form-field/latest'
 import type {
   ComponentStyle,
-  Spacing,
-  ThemeOverrideValue
+  NewThemeOverrideProp,
+  Spacing
 } from '@instructure/emotion'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
+import { NewComponentTypes } from '@instructure/ui-themes'
 
 type TextAreaOwnProps = {
   label: React.ReactNode
@@ -124,9 +128,9 @@ type TextAreaProps =
     FormFieldOwnProps,
     'label' | 'inline' | 'id' | 'elementRef'
   > &
-    TextAreaOwnProps & {
-      themeOverride?: ThemeOverrideValue
-    } & OtherHTMLAttributes<
+    TextAreaOwnProps &
+    NewThemeOverrideProp<ReturnType<NewComponentTypes['TextArea']>> &
+    OtherHTMLAttributes<
       TextAreaOwnProps,
       TextareaHTMLAttributes<TextAreaOwnProps & Element>
     > &

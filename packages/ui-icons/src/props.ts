@@ -22,8 +22,9 @@
  * SOFTWARE.
  */
 
-import type { ComponentStyle, ThemeOverrideValue } from '@instructure/emotion'
+import type { ComponentStyle, NewThemeOverrideProp } from '@instructure/emotion'
 import type { OtherHTMLAttributes } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
 /**
  * SVGIcon size tokens (legacy) - DEPRECATED
@@ -170,13 +171,13 @@ type InstUIIconOwnProps = {
 
 /**
  * Full props: InstUI semantic + theme support + SVG attributes.
- * OtherHTMLAttributes provides SVG props for backward compatibility.
+ * `OtherHTMLAttributes` provides SVG props for backward compatibility.
  * children, style, and className are explicitly omitted.
  */
 type InstUIIconProps = Omit<
-  InstUIIconOwnProps & {
-    themeOverride?: ThemeOverrideValue
-  } & OtherHTMLAttributes<InstUIIconOwnProps>,
+  InstUIIconOwnProps &
+    NewThemeOverrideProp<ReturnType<NewComponentTypes['Icon']>> &
+    OtherHTMLAttributes<InstUIIconOwnProps>,
   'children' | 'style' | 'className'
 >
 

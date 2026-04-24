@@ -22,8 +22,9 @@
  * SOFTWARE.
  */
 
-import type { ComponentStyle, ThemeOverrideValue } from '@instructure/emotion'
+import type { ComponentStyle, NewThemeOverrideProp } from '@instructure/emotion'
 import type { OtherHTMLAttributes } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
 type DataPermissionLevelsOwnProps = {
   /**
@@ -73,9 +74,9 @@ type PropKeys = keyof DataPermissionLevelsOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type DataPermissionLevelsProps = DataPermissionLevelsOwnProps & {
-  themeOverride?: ThemeOverrideValue
-} & OtherHTMLAttributes<DataPermissionLevelsOwnProps>
+type DataPermissionLevelsProps = DataPermissionLevelsOwnProps &
+  NewThemeOverrideProp<ReturnType<NewComponentTypes['DataPermissionLevels']>> &
+  OtherHTMLAttributes<DataPermissionLevelsOwnProps>
 
 type DataPermissionLevelsStyle = ComponentStyle<
   | 'dataPermissionLevels'

@@ -24,6 +24,7 @@
 
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 import type { Renderable, OtherHTMLAttributes } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
 type TableCellOwnProps = {
   /**
@@ -44,7 +45,7 @@ type PropKeys = keyof TableCellOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TableCellProps = TableCellOwnProps &
-  WithStyleProps<null, TableCellStyle> &
+  WithStyleProps<ReturnType<NewComponentTypes['TableCell']>, TableCellStyle> &
   OtherHTMLAttributes<TableCellOwnProps>
 
 type TableCellStyle = ComponentStyle<'cell'>

@@ -22,11 +22,8 @@
  * SOFTWARE.
  */
 
-import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
-import type {
-  DataPermissionLevelsProps,
-  DataPermissionLevelsStyle
-} from './props'
+import type { NewComponentTypes } from '@instructure/ui-themes'
+import type { DataPermissionLevelsStyle } from './props'
 
 /**
  * ---
@@ -34,14 +31,10 @@ import type {
  * ---
  * Generates the style object from the theme and provided additional information
  * @param componentTheme The theme variable object.
- * @param params Additional parameters to customize the style.
- * @param sharedTokens Shared token object that stores common values for the theme.
  * @return The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: ReturnType<NewComponentTypes['DataPermissionLevels']>,
-  _params: DataPermissionLevelsProps,
-  _sharedTokens: SharedTokens
+  componentTheme: ReturnType<NewComponentTypes['DataPermissionLevels']>
 ): DataPermissionLevelsStyle => {
   return {
     dataPermissionLevels: {

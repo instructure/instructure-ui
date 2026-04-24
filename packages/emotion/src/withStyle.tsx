@@ -37,11 +37,7 @@ import { decorator } from '@instructure/ui-decorator'
 
 import { useTheme } from './useTheme'
 
-import type {
-  BaseTheme,
-  ComponentTheme,
-  InstUIComponent
-} from '@instructure/shared-types'
+import type { ComponentTheme, InstUIComponent } from '@instructure/shared-types'
 import type {
   ComponentStyle,
   ComponentOverride,
@@ -49,7 +45,11 @@ import type {
   Props
 } from './EmotionTypes'
 
-import type { NewComponentTypes, Theme } from '@instructure/ui-themes'
+import type {
+  NewComponentTypes,
+  SharedTokens,
+  Theme
+} from '@instructure/ui-themes'
 
 // Extract is needed because it would allow number otherwise
 // https://stackoverflow.com/a/51808262/319473
@@ -70,18 +70,20 @@ type WithStylePrivateProps<
       makeStyles?: (extraArgs?: Record<string, unknown>) => void
     }
 
-type ThemeOverrideProp<Theme extends ComponentTheme | null = ComponentTheme> = {
+type ThemeOverrideProp<
+  CompTheme extends ComponentTheme | null = ComponentTheme
+> = {
   themeOverride?:
-    | Partial<Theme>
-    | ((componentTheme: Theme, currentTheme: BaseTheme) => Partial<Theme>)
+    | Partial<CompTheme>
+    | ((componentTheme: CompTheme, currentTheme: Theme) => Partial<CompTheme>)
 }
 
 type WithStyleProps<
-  Theme extends ComponentTheme | null = ComponentTheme,
+  CompTheme extends ComponentTheme | null = ComponentTheme,
   Style extends ComponentStyle | null = ComponentStyle
 > = Theme extends null
   ? WithStylePrivateProps<Style>
-  : WithStylePrivateProps<Style> & ThemeOverrideProp<Theme>
+  : WithStylePrivateProps<Style> & ThemeOverrideProp<CompTheme>
 
 declare const process: Record<string, any> | undefined
 
@@ -154,7 +156,7 @@ const withStyle = decorator(
   ) => {
     const displayName = ComposedComponent.displayName || ComposedComponent.name
 
-    const componentId =
+    const componentId: keyof NewComponentTypes =
       useTokensFrom ?? ComposedComponent.componentId?.replace('.', '')
 
     const WithStyle: ForwardRefExoticComponent<
@@ -208,38 +210,34 @@ const withStyle = decorator(
       // resolving the theming functions and applying the overrides
       const primitiveOverrides = themeOverride?.primitives
       const semanticsOverrides = themeOverride?.semantics
-      // @ts-ignore TODO-theme-types: fix typing
       const sharedTokensOverrides = themeOverride?.sharedTokens
       const componentOverridesFromSettingsProvider =
-        // @ts-ignore TODO-theme-types: fix typing
-        themeOverride?.components?.[componentId as keyof NewComponentTypes]
+        themeOverride?.components?.[componentId]
       const componentOverridesFromThemeOverrideProp = (
         componentProps as ThemeOverrideProp
       ).themeOverride
 
       const primitives = mergeDeep(
         theme.newTheme.primitives,
-        primitiveOverrides
+        primitiveOverrides!
       )
 
       const semantics = mergeDeep(
         theme.newTheme.semantics?.(primitives),
-        semanticsOverrides
+        semanticsOverrides!
       )
 
       const sharedTokens = mergeDeep(
         theme.newTheme.sharedTokens?.(semantics),
-        sharedTokensOverrides
-      )
+        sharedTokensOverrides as Record<string, unknown>
+      ) as SharedTokens
       // Note: Some components do not have a theme, e.g., FormFieldMessages
       const baseComponentTheme =
-        theme.newTheme.components[componentId as keyof NewComponentTypes]?.(
-          semantics
-        )
+        theme.newTheme.components[componentId]?.(semantics)
 
       const componentThemeFromSettingsProvider = mergeDeep(
         baseComponentTheme,
-        componentOverridesFromSettingsProvider
+        componentOverridesFromSettingsProvider as Record<string, unknown>
       )
 
       const componentTheme = mergeDeep(

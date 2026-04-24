@@ -25,6 +25,7 @@ import { ThHTMLAttributes } from 'react'
 
 import type { OtherHTMLAttributes } from '@instructure/shared-types'
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
 type TableColHeaderOwnProps = {
   /**
@@ -69,7 +70,10 @@ type PropKeys = keyof TableColHeaderOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TableColHeaderProps = TableColHeaderOwnProps &
-  WithStyleProps<null, TableColHeaderStyle> &
+  WithStyleProps<
+    ReturnType<NewComponentTypes['TableColHeader']>,
+    TableColHeaderStyle
+  > &
   OtherHTMLAttributes<
     TableColHeaderOwnProps,
     ThHTMLAttributes<TableColHeaderOwnProps>

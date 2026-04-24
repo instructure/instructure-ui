@@ -29,7 +29,7 @@ import type {
 } from './EmotionTypes'
 import type { ComponentTheme } from '@instructure/shared-types'
 import { ThemeOverrideProp } from './withStyle'
-import { ThemeOverrideValue } from './useStyle'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
 type ComponentName = keyof ComponentOverride | undefined
 
@@ -51,8 +51,10 @@ const getComponentThemeOverride = (
   theme: ThemeOverride,
   displayName: string,
   componentId?: string,
-  // ThemeOverrideProp is the old type, ThemeOverrideValue is the new one
-  themeOverride?: ThemeOverrideProp['themeOverride'] | ThemeOverrideValue,
+  // ThemeOverrideProp['themeOverride'] is the old type
+  themeOverride?:
+    | ThemeOverrideProp['themeOverride']
+    | ReturnType<NewComponentTypes[keyof NewComponentTypes]>,
   componentTheme?: ComponentTheme
 ): Partial<ComponentTheme> => {
   const name = displayName as ComponentName
