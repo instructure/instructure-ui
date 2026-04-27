@@ -168,6 +168,9 @@ class Dialog extends Component<DialogProps> {
         {...omitProps(this.props, Dialog.allowedProps)}
         role={role}
         aria-label={this.props.label}
+        aria-modal={
+          role === 'dialog' && this.props.shouldContainFocus ? true : undefined
+        }
         className={this.props.className} // TODO in V2 remove className, there is no usage of it.
         style={{ borderRadius: 'inherit' }} // ensure the dialog inherits border radius from View
         ref={this.getRef}

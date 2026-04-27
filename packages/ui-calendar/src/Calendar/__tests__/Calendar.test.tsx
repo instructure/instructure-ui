@@ -294,8 +294,12 @@ describe('<Calendar />', () => {
         {generateDays()}
       </Calendar>
     )
-    const defaultPrevButton = screen.getByText('Previous month')
-    const defaultNextButton = screen.getByText('Next month')
+    const defaultPrevButton = screen.getByRole('button', {
+      name: /^Previous month/
+    })
+    const defaultNextButton = screen.getByRole('button', {
+      name: /^Next month/
+    })
 
     expect(defaultPrevButton).toBeInTheDocument()
     expect(defaultNextButton).toBeInTheDocument()
@@ -535,5 +539,53 @@ describe('<Calendar />', () => {
 
     expect(calendar.tagName).toBe('UL')
     expect(calendar).toHaveTextContent(weekdayLabels.join(''))
+  })
+
+  describe('navigation button targetMonthSrLabel', () => {
+    it('should include the target month in the default button screen reader labels', () => {
+      render(
+        <Calendar
+          renderWeekdayLabels={weekdayLabels}
+          visibleMonth="2023-12-01"
+          locale="en"
+          selectedLabel="Selected"
+        >
+          {generateDays()}
+        </Calendar>
+      )
+
+      expect(
+        screen.getByRole('button', { name: 'Previous month, November 2023' })
+      ).toBeInTheDocument()
+      expect(
+        screen.getByRole('button', { name: 'Next month, January 2024' })
+      ).toBeInTheDocument()
+    })
+
+    it('should pass targetMonthSrLabel to function render props', () => {
+      render(
+        <Calendar
+          renderWeekdayLabels={weekdayLabels}
+          visibleMonth="2023-12-01"
+          locale="en"
+          selectedLabel="Selected"
+          renderPrevMonthButton={({ targetMonthSrLabel }) => (
+            <button aria-label={`Go to ${targetMonthSrLabel}`}>prev</button>
+          )}
+          renderNextMonthButton={({ targetMonthSrLabel }) => (
+            <button aria-label={`Go to ${targetMonthSrLabel}`}>next</button>
+          )}
+        >
+          {generateDays()}
+        </Calendar>
+      )
+
+      expect(
+        screen.getByRole('button', { name: 'Go to November 2023' })
+      ).toBeInTheDocument()
+      expect(
+        screen.getByRole('button', { name: 'Go to January 2024' })
+      ).toBeInTheDocument()
+    })
   })
 })
