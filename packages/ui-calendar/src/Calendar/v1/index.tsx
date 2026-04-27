@@ -175,28 +175,41 @@ class Calendar extends Component<CalendarProps, CalendarState> {
 
   renderMonthNavigationButtons = () => {
     const { renderNextMonthButton, renderPrevMonthButton } = this.props
+    const { visibleMonth } = this.state
+    const prevMonthName = visibleMonth
+      .clone()
+      .subtract({ months: 1 })
+      .format('MMMM YYYY')
+    const nextMonthName = visibleMonth
+      .clone()
+      .add({ months: 1 })
+      .format('MMMM YYYY')
 
     return {
       prevButton: renderPrevMonthButton ? (
-        callRenderProp(renderPrevMonthButton)
+        callRenderProp(renderPrevMonthButton, {
+          targetMonthSrLabel: prevMonthName
+        })
       ) : (
         <IconButton
           size="small"
           withBackground={false}
           withBorder={false}
           renderIcon={<IconArrowOpenStartSolid color="primary" />}
-          screenReaderLabel="Previous month"
+          screenReaderLabel={`Previous month, ${prevMonthName}`}
         />
       ),
       nextButton: renderNextMonthButton ? (
-        callRenderProp(renderNextMonthButton)
+        callRenderProp(renderNextMonthButton, {
+          targetMonthSrLabel: nextMonthName
+        })
       ) : (
         <IconButton
           size="small"
           withBackground={false}
           withBorder={false}
           renderIcon={<IconArrowOpenEndSolid color="primary" />}
-          screenReaderLabel="Next month"
+          screenReaderLabel={`Next month, ${nextMonthName}`}
         />
       )
     }
@@ -299,12 +312,12 @@ class Calendar extends Component<CalendarProps, CalendarState> {
           {renderNavigationLabel ? (
             callRenderProp(renderNavigationLabel)
           ) : (
-            <span>
+            <div aria-live="polite" aria-atomic="true">
               <div>{visibleMonth.format('MMMM')}</div>
               {!withYearPicker ? (
                 <div>{visibleMonth.format('YYYY')}</div>
               ) : null}
-            </span>
+            </div>
           )}
           {nextButton &&
             cloneButton(nextButton, this.handleMonthChange('next'))}
