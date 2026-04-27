@@ -451,9 +451,8 @@ class Nav extends Component<NavProps, NavState> {
         themeSelected = themeSelected || isSelected
 
         const renderThemeName = (rawName: string) => {
-          if (rawName !== 'canvas' && rawName !== 'canvas-high-contrast') {
-            return `${rawName} (beta)`
-          }
+          if (rawName === 'canvas') return 'legacy-canvas'
+          if (rawName === 'canvas-high-contrast') return 'legacy-canvas-high-contrast'
           return rawName
         }
 

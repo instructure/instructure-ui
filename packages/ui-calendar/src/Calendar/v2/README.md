@@ -174,23 +174,26 @@ type: example
 
     const date = parseDate(renderedDate)
 
-    const buttonProps = (type = 'prev') => ({
-      size: 'small',
-      withBackground: false,
-      withBorder: false,
-      renderIcon:
-        type === 'prev' ? (
-          <ChevronLeftInstUIIcon color="baseColor" />
-        ) : (
-          <ChevronRightInstUIIcon color="baseColor" />
-        ),
-      screenReaderLabel: type === 'prev' ? 'Previous month' : 'Next month'
-    })
+    const renderMonthButton = (type = 'prev') => ({ targetMonthSrLabel }) => (
+      <IconButton
+        size="small"
+        withBackground={false}
+        withBorder={false}
+        renderIcon={
+          type === 'prev' ? (
+            <ChevronLeftInstUIIcon color="baseColor" />
+          ) : (
+            <ChevronRightInstUIIcon color="baseColor" />
+          )
+        }
+        screenReaderLabel={`${type === 'prev' ? 'Previous month' : 'Next month'}, ${targetMonthSrLabel}`}
+      />
+    )
 
     return (
       <Calendar
-        renderPrevMonthButton={<IconButton {...buttonProps('prev')} />}
-        renderNextMonthButton={<IconButton {...buttonProps('next')} />}
+        renderPrevMonthButton={renderMonthButton('prev')}
+        renderNextMonthButton={renderMonthButton('next')}
         renderNavigationLabel={
           <span>
             <div>{date.format('MMMM')}</div>
@@ -251,7 +254,4 @@ the abbreviation. ex. `[<AccessibleContent alt="Sunday">Sun</AccessibleContent>,
 
 #### Rendering next and previous month buttons
 
-The `renderNextMonthButton` and `renderPrevMonthButton` can be supplied using the
-[IconButton](IconButton) component with the `size` prop set to
-`small`, the `withBackground` and `withBorder` props both set to `false`, and the `renderIcon` prop set to `ChevronLeftInstUIIcon` or
-`ChevronRightInstUIIcon`.
+The `renderNextMonthButton` and `renderPrevMonthButton` can be supplied as a function that receives `{ targetMonthSrLabel }` — a pre-formatted screen reader label for the target month (e.g. "November 2023"). Use this to compose an [IconButton](IconButton) component with the `size` prop set to `small`, the `withBackground` and `withBorder` props both set to `false`, and the `renderIcon` prop set to `ChevronLeftInstUIIcon` or `ChevronRightInstUIIcon`. The `screenReaderLabel` should include the target month for better accessibility: e.g. "Previous month, November 2023".
