@@ -311,24 +311,24 @@ const DateInput = forwardRef(
               visibleMonth={selectedDate}
               locale={userLocale}
               timezone={userTimezone}
-              renderNextMonthButton={
+              renderNextMonthButton={({ targetMonthSrLabel }) => (
                 <IconButton
                   size="small"
                   withBackground={false}
                   withBorder={false}
                   renderIcon={<ChevronRightInstUIIcon color="baseColor" />}
-                  screenReaderLabel={screenReaderLabels.nextMonthButton}
+                  screenReaderLabel={`${screenReaderLabels.nextMonthButton}, ${targetMonthSrLabel}`}
                 />
-              }
-              renderPrevMonthButton={
+              )}
+              renderPrevMonthButton={({ targetMonthSrLabel }) => (
                 <IconButton
                   size="small"
                   withBackground={false}
                   withBorder={false}
                   renderIcon={<ChevronLeftInstUIIcon color="baseColor" />}
-                  screenReaderLabel={screenReaderLabels.prevMonthButton}
+                  screenReaderLabel={`${screenReaderLabels.prevMonthButton}, ${targetMonthSrLabel}`}
                 />
-              }
+              )}
             />
           </Popover>
         }

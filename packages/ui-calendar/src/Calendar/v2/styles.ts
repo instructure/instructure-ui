@@ -63,6 +63,12 @@ const generateStyle = (
       maxWidth: componentTheme.maxHeaderWidth,
       lineHeight: componentTheme.lineHeight
     },
+    navigationLabel: {
+      label: 'calendar__navigation-label',
+      margin: 0,
+      fontSize: 'inherit',
+      fontWeight: 'inherit'
+    },
     yearPicker: {
       display: 'flex',
       justifyContent: 'center',
