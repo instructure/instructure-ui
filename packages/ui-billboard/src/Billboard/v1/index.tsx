@@ -32,7 +32,7 @@ import {
   getElementType
 } from '@instructure/ui-react-utils'
 
-import { withStyleLegacy } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -46,7 +46,7 @@ import type { ViewProps } from '@instructure/ui-view/v11_6'
 category: components
 ---
 **/
-@withStyleLegacy(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme)
 class Billboard extends Component<BillboardProps> {
   static readonly componentId = 'Billboard'
 

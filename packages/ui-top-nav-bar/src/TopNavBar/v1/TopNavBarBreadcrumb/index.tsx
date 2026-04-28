@@ -29,7 +29,7 @@ import {
   allowedProps
 } from './props'
 import TopNavBar from '../index'
-import { withStyleLegacy } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import generateStyle from '../TopNavBarBreadcrumb/styles'
 import {
   IconArrowOpenStartLine,
@@ -46,7 +46,7 @@ id: TopNavBar.Breadcrumb
 ---
 @module TopNavBarBreadcrumb
  **/
-@withStyleLegacy(generateStyle, null)
+@withStyle(generateStyle, null)
 class TopNavBarBreadcrumb extends Component<
   TopNavBarBreadcrumbProps,
   TopNavBarBreadcrumbState

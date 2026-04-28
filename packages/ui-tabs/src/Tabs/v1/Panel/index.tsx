@@ -28,7 +28,7 @@ import { View } from '@instructure/ui-view/v11_6'
 import { passthroughProps } from '@instructure/ui-react-utils'
 import { Transition } from '@instructure/ui-motion'
 
-import { withStyleLegacy } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -41,7 +41,7 @@ parent: Tabs
 id: Tabs.Panel
 ---
 **/
-@withStyleLegacy(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme)
 class Panel extends Component<TabsPanelProps> {
   static readonly componentId = 'Tabs.Panel'
 

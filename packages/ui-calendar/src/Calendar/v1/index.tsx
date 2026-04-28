@@ -35,7 +35,7 @@ import { createChainedFunction } from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'
 import { AccessibleContent } from '@instructure/ui-a11y-content'
 
-import { withStyleLegacy } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import { Locale, DateTime, ApplyLocaleContext } from '@instructure/ui-i18n'
 import type { Moment } from '@instructure/ui-i18n'
@@ -63,7 +63,7 @@ category: components
 ---
 **/
 @withDeterministicId()
-@withStyleLegacy(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme)
 class Calendar extends Component<CalendarProps, CalendarState> {
   static readonly componentId = 'Calendar'
 

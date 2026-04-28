@@ -33,7 +33,7 @@ import {
 
 import { View } from '@instructure/ui-view/v11_6'
 
-import { withStyleLegacy } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyles from './styles'
 import generateComponentTheme from './theme'
@@ -58,7 +58,7 @@ category: components/utilities
 ---
 **/
 @withDeterministicId()
-@withStyleLegacy(generateStyles, generateComponentTheme)
+@withStyle(generateStyles, generateComponentTheme)
 class Options extends Component<OptionsProps> {
   static readonly componentId = 'Options'
 

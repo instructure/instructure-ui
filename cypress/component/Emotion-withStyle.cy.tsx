@@ -27,7 +27,7 @@ import { expect } from 'chai'
 import {
   InstUISettingsProvider,
   WithStyleProps,
-  withStyleNew
+  withStyle
 } from '@instructure/emotion/src/index'
 
 import '../support/component'
@@ -99,7 +99,7 @@ const generateStyle = function (
   }
 }
 
-@withStyleLegacy(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme)
 class ThemeableComponent extends Component<Props, State> {
   static defaultTypes = {
     inverse: false

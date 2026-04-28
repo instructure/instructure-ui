@@ -24,7 +24,7 @@
 
 import { Component } from 'react'
 
-import { withStyleLegacy } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import { optionsSeparatorThemeGenerator } from '@instructure/ui-options'
 
 import { allowedProps } from './props'
@@ -39,7 +39,7 @@ id: Drilldown.Separator
 **/
 // needed for listing the available theme variables on docs page,
 // we pass the themeOverrides to Options.Separator
-@withStyleLegacy(null, optionsSeparatorThemeGenerator)
+@withStyle(null, optionsSeparatorThemeGenerator)
 class DrilldownSeparator extends Component<DrilldownSeparatorProps> {
   static readonly componentId = 'Drilldown.Separator'
 

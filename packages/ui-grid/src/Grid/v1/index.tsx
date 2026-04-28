@@ -35,7 +35,7 @@ import { GridRow } from '../../GridRow/v1'
 import type { GridRowProps } from '../../GridRow/v1/props'
 import { GridCol } from '../../GridCol/v1'
 
-import { withStyleLegacy } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -48,7 +48,7 @@ import type { GridProps } from './props'
 category: components
 ---
 **/
-@withStyleLegacy(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme)
 class Grid extends Component<GridProps> {
   static readonly componentId = 'Grid'
 

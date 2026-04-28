@@ -28,7 +28,7 @@ import { debounce } from '@instructure/debounce'
 import type { Debounced } from '@instructure/debounce'
 import { getBoundingClientRect } from '@instructure/ui-dom-utils'
 import { omitProps } from '@instructure/ui-react-utils'
-import { withStyleLegacy } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -45,7 +45,7 @@ parent: DrawerLayout
 id: DrawerLayout.Content
 ---
 **/
-@withStyleLegacy(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme)
 class DrawerContent extends Component<DrawerLayoutContentProps> {
   static readonly componentId = 'DrawerLayout.Content'
 

@@ -28,7 +28,7 @@ import { safeCloneElement, omitProps } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view/v11_6'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
-import { withStyleLegacy } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -51,7 +51,7 @@ import { error } from '@instructure/console'
 category: components
 ---
 **/
-@withStyleLegacy(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme)
 class Table extends Component<TableProps> {
   static readonly componentId = 'Table'
 

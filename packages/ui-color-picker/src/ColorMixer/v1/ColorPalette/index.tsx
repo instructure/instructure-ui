@@ -24,7 +24,7 @@
 
 import { Component } from 'react'
 
-import { withStyleLegacy } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import { addEventListener } from '@instructure/ui-dom-utils'
 import type { HSVType } from '@instructure/ui-color-utils'
 
@@ -47,7 +47,7 @@ private: true
 ---
 **/
 @withDeterministicId()
-@withStyleLegacy(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme)
 class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
   static allowedProps = allowedProps
   static readonly componentId = 'ColorMixer.Palette'

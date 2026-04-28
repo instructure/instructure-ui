@@ -114,7 +114,7 @@ const defaultValues = {
  * category: utilities/themes
  * ---
  *
- * Same as `withStyleLegacy`, used only for the docs app.
+ * Same as `withStyle`, used only for the docs app.
  *
  * A decorator or higher order component that makes a component themeable.
  *

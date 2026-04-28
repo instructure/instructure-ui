@@ -24,7 +24,7 @@
 
 import { Component, ContextType, ReactElement, SyntheticEvent } from 'react'
 
-import { withStyleLegacy } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import { safeCloneElement } from '@instructure/ui-react-utils'
 
 import { TreeButton } from '../TreeButton'
@@ -45,7 +45,7 @@ parent: TreeBrowser
 id: TreeBrowser.Collection
 ---
 **/
-@withStyleLegacy(generateStyles, generateComponentTheme)
+@withStyle(generateStyles, generateComponentTheme)
 class TreeCollection extends Component<
   TreeBrowserCollectionProps,
   TreeCollectionState

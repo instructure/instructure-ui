@@ -28,7 +28,7 @@ import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
 import { IconWarningSolid } from '@instructure/ui-icons'
 
-import { withStyleLegacy } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -51,7 +51,7 @@ type: example
 <FormFieldMessage variant="error">Invalid value</FormFieldMessage>
 ```
 **/
-@withStyleLegacy(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme)
 class FormFieldMessage extends Component<FormFieldMessageProps> {
   static readonly componentId = 'FormFieldMessage'
 
