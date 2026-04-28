@@ -162,6 +162,14 @@
       "grey180": {
         "value": "#1C222B",
         "type": "color"
+      },
+      "grey190": {
+        "value": "#171B21",
+        "type": "color"
+      },
+      "grey200": {
+        "value": "#10141A",
+        "type": "color"
       }
     },
     "blue": {
@@ -234,7 +242,15 @@
         "type": "color"
       },
       "blue180": {
+        "value": "#112335",
+        "type": "color"
+      },
+      "blue190": {
         "value": "#0A1C2D",
+        "type": "color"
+      },
+      "blue200": {
+        "value": "#00142A",
         "type": "color"
       }
     },
@@ -308,7 +324,15 @@
         "type": "color"
       },
       "red180": {
+        "value": "#38160D",
+        "type": "color"
+      },
+      "red190": {
         "value": "#311007",
+        "type": "color"
+      },
+      "red200": {
+        "value": "#270903",
         "type": "color"
       }
     },
@@ -382,7 +406,15 @@
         "type": "color"
       },
       "orange180": {
+        "value": "#321B0B",
+        "type": "color"
+      },
+      "orange190": {
         "value": "#2B1405",
+        "type": "color"
+      },
+      "orange200": {
+        "value": "#230D00",
         "type": "color"
       }
     },
@@ -456,7 +488,15 @@
         "type": "color"
       },
       "plum180": {
+        "value": "#351428",
+        "type": "color"
+      },
+      "plum190": {
         "value": "#2F0E23",
+        "type": "color"
+      },
+      "plum200": {
+        "value": "#26051A",
         "type": "color"
       }
     },
@@ -530,7 +570,15 @@
         "type": "color"
       },
       "violet180": {
+        "value": "#2C1834",
+        "type": "color"
+      },
+      "violet190": {
         "value": "#26132E",
+        "type": "color"
+      },
+      "violet200": {
+        "value": "#1D0A25",
         "type": "color"
       }
     },
@@ -604,7 +652,15 @@
         "type": "color"
       },
       "stone180": {
+        "value": "#222222",
+        "type": "color"
+      },
+      "stone190": {
         "value": "#1A1A1A",
+        "type": "color"
+      },
+      "stone200": {
+        "value": "#141414",
         "type": "color"
       }
     },
@@ -678,7 +734,15 @@
         "type": "color"
       },
       "sky180": {
+        "value": "#0E2431",
+        "type": "color"
+      },
+      "sky190": {
         "value": "#071D29",
+        "type": "color"
+      },
+      "sky200": {
+        "value": "#001623",
         "type": "color"
       }
     },
@@ -752,7 +816,15 @@
         "type": "color"
       },
       "honey180": {
+        "value": "#2A200C",
+        "type": "color"
+      },
+      "honey190": {
         "value": "#221905",
+        "type": "color"
+      },
+      "honey200": {
+        "value": "#1C1200",
         "type": "color"
       }
     },
@@ -826,7 +898,15 @@
         "type": "color"
       },
       "sea180": {
+        "value": "#0D262A",
+        "type": "color"
+      },
+      "sea190": {
         "value": "#051E22",
+        "type": "color"
+      },
+      "sea200": {
+        "value": "#00181B",
         "type": "color"
       }
     },
@@ -900,7 +980,15 @@
         "type": "color"
       },
       "aurora180": {
+        "value": "#0D271D",
+        "type": "color"
+      },
+      "aurora190": {
         "value": "#051F15",
+        "type": "color"
+      },
+      "aurora200": {
+        "value": "#00190F",
         "type": "color"
       }
     },
@@ -974,7 +1062,15 @@
         "type": "color"
       },
       "navy180": {
+        "value": "#0D2338",
+        "type": "color"
+      },
+      "navy190": {
         "value": "#061C30",
+        "type": "color"
+      },
+      "navy200": {
+        "value": "#00152A",
         "type": "color"
       }
     },

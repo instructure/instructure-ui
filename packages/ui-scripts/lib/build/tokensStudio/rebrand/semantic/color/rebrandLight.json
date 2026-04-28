@@ -118,7 +118,7 @@
               "type": "color"
             },
             "active": {
-              "value": "{color.navy.navy180}",
+              "value": "{color.navy.navy190}",
               "type": "color"
             },
             "disabled": {
@@ -484,7 +484,7 @@
               "type": "color"
             },
             "active": {
-              "value": "{color.navy.navy180}",
+              "value": "{color.navy.navy190}",
               "type": "color"
             },
             "disabled": {
