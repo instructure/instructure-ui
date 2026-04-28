@@ -51,7 +51,7 @@ import {
   CheckInstUIIcon
 } from '@instructure/ui-icons'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 
 import { DrilldownSeparator } from './DrilldownSeparator'
 import { DrilldownOption } from './DrilldownOption'
@@ -100,7 +100,7 @@ category: components
 ---
 **/
 @withDeterministicId()
-@withStyle(generateStyle)
+@withStyleNew(generateStyle)
 class Drilldown extends Component<DrilldownProps, DrilldownState> {
   static readonly componentId = 'Drilldown'
 

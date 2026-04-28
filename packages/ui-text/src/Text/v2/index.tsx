@@ -26,7 +26,7 @@ import { Component } from 'react'
 
 import { passthroughProps, getElementType } from '@instructure/ui-react-utils'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 import generateStyle from './styles'
 import type { TextProps } from './props'
 import { allowedProps } from './props'
@@ -36,7 +36,7 @@ import { allowedProps } from './props'
 category: components
 ---
 **/
-@withStyle(generateStyle)
+@withStyleNew(generateStyle)
 class Text extends Component<TextProps> {
   static readonly componentId = 'Text'
 

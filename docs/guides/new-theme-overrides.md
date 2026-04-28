@@ -592,7 +592,7 @@ type: example
 
 ### 15. Overrides on functional (`useStyle`) components
 
-All override patterns work identically on functional components that use the `useStyle` hook. Here, Avatar tokens are overridden the same way as class-based components using `withStyle`.
+All override patterns work identically on functional components that use the `useStyle` hook. Here, Avatar tokens are overridden the same way as class-based components using `withStyleNew`.
 
 ```js
 ---

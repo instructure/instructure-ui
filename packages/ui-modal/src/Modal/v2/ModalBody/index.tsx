@@ -28,7 +28,7 @@ import { View } from '@instructure/ui-view/latest'
 import { omitProps } from '@instructure/ui-react-utils'
 import { getCSSStyleDeclaration } from '@instructure/ui-dom-utils'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 import generateStyle from './styles'
 
 import { allowedProps } from './props'
@@ -42,7 +42,7 @@ parent: Modal
 id: Modal.Body
 ---
 **/
-@withStyle(generateStyle, 'ModalBody')
+@withStyleNew(generateStyle, 'ModalBody')
 class ModalBody extends Component<ModalBodyProps> {
   static readonly componentId = 'Modal.Body'
 

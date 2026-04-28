@@ -28,7 +28,7 @@ import { passthroughProps } from '@instructure/ui-react-utils'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { combineDataCid } from '@instructure/ui-utils'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 import { BaseButton } from '../../BaseButton/v2'
 
 import { allowedProps } from './props'
@@ -41,7 +41,7 @@ category: components
 **/
 
 // needed for listing the available theme variables on docs page
-@withStyle(null, 'BaseButton')
+@withStyleNew(null, 'BaseButton')
 class IconButton extends Component<IconButtonProps> {
   static readonly componentId = 'IconButton'
 

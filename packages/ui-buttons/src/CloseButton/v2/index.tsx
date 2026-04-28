@@ -28,7 +28,7 @@ import { XInstUIIcon } from '@instructure/ui-icons'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { getInteraction, passthroughProps } from '@instructure/ui-react-utils'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import { BaseButton } from '../../BaseButton/v2'
@@ -41,7 +41,7 @@ import type { CloseButtonProps } from './props'
 category: components
 ---
 **/
-@withStyle(generateStyle, 'BaseButton')
+@withStyleNew(generateStyle, 'BaseButton')
 class CloseButton extends Component<CloseButtonProps> {
   static readonly componentId = 'CloseButton'
 

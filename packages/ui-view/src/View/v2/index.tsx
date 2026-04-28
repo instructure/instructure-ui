@@ -33,7 +33,7 @@ import {
   pickProps,
   passthroughProps
 } from '@instructure/ui-react-utils'
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 
 import generateStyle from './styles'
 
@@ -49,7 +49,7 @@ category: components
 @module View
 **/
 @textDirectionContextConsumer()
-@withStyle(generateStyle)
+@withStyleNew(generateStyle)
 class View extends Component<ViewProps> {
   static componentId = 'View'
   static allowedProps = allowedProps
@@ -85,7 +85,7 @@ class View extends Component<ViewProps> {
     Component: ComponentType<any>
   ) => {
     // We don't want the theming and styling props to pass
-    // (these are added and handled by the `@withStyle` decorator)
+    // (these are added and handled by the `@withStyleNew` decorator)
     const propsToOmit = [
       ...View.allowedProps,
       'styles',

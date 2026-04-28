@@ -30,7 +30,7 @@ import {
   renderIconWithProps
 } from '@instructure/ui-icons'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 
 import generateStyle from './styles'
 
@@ -42,7 +42,7 @@ import type { ToggleFacadeProps } from './props'
 parent: Checkbox
 ---
 **/
-@withStyle(generateStyle, 'Toggle')
+@withStyleNew(generateStyle, 'Toggle')
 class ToggleFacade extends Component<ToggleFacadeProps> {
   static readonly componentId = 'ToggleFacade'
 

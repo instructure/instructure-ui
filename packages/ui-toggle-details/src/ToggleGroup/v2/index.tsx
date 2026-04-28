@@ -44,7 +44,7 @@ import {
 import type { ToggleGroupProps } from './props'
 import { allowedProps } from './props'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 
 import generateStyle from './styles'
 
@@ -59,7 +59,7 @@ const toggleGroupSizeToIconSize = {
 category: components
 ---
 **/
-@withStyle(generateStyle)
+@withStyleNew(generateStyle)
 class ToggleGroup extends Component<ToggleGroupProps> {
   static readonly componentId = 'ToggleGroup'
 

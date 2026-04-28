@@ -5,42 +5,27 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [11.7.2](https://github.com/instructure/instructure-ui/compare/v11.7.1...v11.7.2) (2026-04-23)
 
-
 ### Bug Fixes
 
-* **many:** small fixes for doc and fix component directory mapping in "dev" script ([39f0c99](https://github.com/instructure/instructure-ui/commit/39f0c991315e39d30e1f24b3142b986d5b9041ee))
-
+- **many:** small fixes for doc and fix component directory mapping in "dev" script ([39f0c99](https://github.com/instructure/instructure-ui/commit/39f0c991315e39d30e1f24b3142b986d5b9041ee))
 
 ### Features
 
-* **ui,ui-options,ui-drilldown:** rework Drilldown ([0562fe2](https://github.com/instructure/instructure-ui/commit/0562fe2b43e3235fc78c4981ada504c1a2f10d1a))
-
+- **ui,ui-options,ui-drilldown:** rework Drilldown ([0562fe2](https://github.com/instructure/instructure-ui/commit/0562fe2b43e3235fc78c4981ada504c1a2f10d1a))
 
 ### BREAKING CHANGES
 
-* **ui,ui-options,ui-drilldown:** the component got a new version in this release
+- **ui,ui-options,ui-drilldown:** the component got a new version in this release
 
 INSTUI-4792
-
-
-
-
 
 ## [11.7.1](https://github.com/instructure/instructure-ui/compare/v11.7.0...v11.7.1) (2026-03-20)
 
 **Note:** Version bump only for package @instructure/ui
 
-
-
-
-
 # [11.7.0](https://github.com/instructure/instructure-ui/compare/v11.6.0...v11.7.0) (2026-03-18)
 
 **Note:** Version bump only for package @instructure/ui
-
-
-
-
 
 # [11.6.0](https://github.com/instructure/instructure-ui/compare/v11.5.0...v11.6.0) (2026-02-18)
 
@@ -681,7 +666,7 @@ It has similar look and features to the [Menu](#Menu), [Select](#Select) and [Tr
 
 ### Bug Fixes
 
-- **ui:** export `EmotionThemeProvider` and `withStyle` from ui package ([61e153c](https://github.com/instructure/instructure-ui/commit/61e153c8a27c27ad850e59959a599b10b2c36b67))
+- **ui:** export `EmotionThemeProvider` and `withStyleNew` from ui package ([61e153c](https://github.com/instructure/instructure-ui/commit/61e153c8a27c27ad850e59959a599b10b2c36b67))
 
 ## [8.2.1](https://github.com/instructure/instructure-ui/compare/v8.2.0...v8.2.1) (2021-04-22)
 

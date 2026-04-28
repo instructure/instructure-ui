@@ -66,16 +66,16 @@ type WithStylePrivateProps<
 > = Style extends null
   ? object
   : {
-      styles?: Style
-      makeStyles?: (extraArgs?: Record<string, unknown>) => void
-    }
+    styles?: Style
+    makeStyles?: (extraArgs?: Record<string, unknown>) => void
+  }
 
 type ThemeOverrideProp<
   CompTheme extends ComponentTheme | null = ComponentTheme
 > = {
   themeOverride?:
-    | Partial<CompTheme>
-    | ((componentTheme: CompTheme, currentTheme: Theme) => Partial<CompTheme>)
+  | Partial<CompTheme>
+  | ((componentTheme: CompTheme, currentTheme: Theme) => Partial<CompTheme>)
 }
 
 type WithStyleProps<
@@ -89,7 +89,7 @@ declare const process: Record<string, any> | undefined
 
 const defaultValues = {
   styles: {},
-  makeStyles: () => {}
+  makeStyles: () => { }
 }
 
 /**
@@ -104,10 +104,10 @@ const defaultValues = {
  * As a HOC:
  *
  * ```js-code
- * import { withStyle } from '@instructure/emotion'
+ * import { withStyleNew } from '@instructure/emotion'
  * import generateStyle from './styles'
  *
- * export default withStyle(generateStyle)(ExampleComponent)
+ * export default withStyleNew(generateStyle)(ExampleComponent)
  * ```
  *
  * Themeable components inject their themed styles into the document
@@ -142,12 +142,12 @@ const defaultValues = {
  * </InstUISettingsProvider>
  * ```
  *
- * @module withStyle
+ * @module withStyleNew
  *
  * @param {function} generateStyle - The function that returns the component's style object
  * @returns {ReactElement} The decorated WithStyle Component
  */
-const withStyle = decorator(
+const withStyleNew = decorator(
   (
     ComposedComponent: any,
     generateStyle: GenerateStyleRework,
@@ -177,7 +177,7 @@ const withStyle = decorator(
       if (frozenTheme && !frozenTheme[themeKey]) {
         console.error(
           `The version of ${displayName} you are using does not support the currently applied "${themeKey}" theme. ` +
-            `Please upgrade to the latest version of ${displayName}.`
+          `Please upgrade to the latest version of ${displayName}.`
         )
       }
 
@@ -190,7 +190,7 @@ const withStyle = decorator(
       if (props.styles) {
         warn(
           false,
-          `Manually passing the "styles" property is not allowed on the ${displayName} component. Using the default styles calculated by the @withStyle decorator instead.\n`,
+          `Manually passing the "styles" property is not allowed on the ${displayName} component. Using the default styles calculated by the @withStyleNew decorator instead.\n`,
           props.styles
         )
       }
@@ -198,7 +198,7 @@ const withStyle = decorator(
       if (props.makeStyles) {
         warn(
           false,
-          `Manually passing the "makeStyles" property is not allowed on the ${displayName} component. Styles are calculated by the @withStyle decorator.`
+          `Manually passing the "makeStyles" property is not allowed on the ${displayName} component. Styles are calculated by the @withStyleNew decorator.`
         )
       }
 
@@ -245,9 +245,9 @@ const withStyle = decorator(
         // @ts-ignore TODO-theme-types: fix typing
         typeof componentOverridesFromThemeOverrideProp === 'function'
           ? componentOverridesFromThemeOverrideProp(
-              componentThemeFromSettingsProvider,
-              themeInContext
-            )
+            componentThemeFromSettingsProvider,
+            themeInContext
+          )
           : componentOverridesFromThemeOverrideProp
       )
 
@@ -255,7 +255,7 @@ const withStyle = decorator(
       const [styles, setStyles] = useState(
         generateStyle
           ? // @ts-ignore TODO-theme-types: fix typing
-            generateStyle(componentTheme, componentProps, sharedTokens, {})
+          generateStyle(componentTheme, componentProps, sharedTokens, {})
           : {}
       )
 
@@ -311,6 +311,6 @@ const withStyle = decorator(
   }
 )
 
-export default withStyle
-export { withStyle }
+export default withStyleNew
+export { withStyleNew }
 export type { WithStyleProps, ThemeOverrideProp }

@@ -25,7 +25,7 @@
 import { Component } from 'react'
 import noScroll from 'no-scroll'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 import type { ComponentStyle } from '@instructure/emotion'
 import { ensureSingleChild, omitProps } from '@instructure/ui-react-utils'
 
@@ -40,7 +40,7 @@ import MaskCounter from './MaskCounter'
 category: components/utilities
 ---
 **/
-@withStyle(generateStyle)
+@withStyleNew(generateStyle)
 class Mask extends Component<MaskProps> {
   static readonly componentId = 'Mask'
 

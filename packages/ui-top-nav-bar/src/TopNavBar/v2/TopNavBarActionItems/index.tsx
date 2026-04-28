@@ -32,7 +32,7 @@ import {
 } from '@instructure/ui-react-utils'
 import { warn, error } from '@instructure/console'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 
 import { Drilldown } from '@instructure/ui-drilldown/latest'
 import { MoreVerticalInstUIIcon } from '@instructure/ui-icons'
@@ -65,7 +65,7 @@ id: TopNavBar.ActionItems
 @module TopNavBarActionItems
 **/
 @withDeterministicId()
-@withStyle(generateStyle, 'TopNavBarActionItems')
+@withStyleNew(generateStyle, 'TopNavBarActionItems')
 class TopNavBarActionItems extends Component<
   TopNavBarActionItemsProps,
   TopNavBarActionItemsState

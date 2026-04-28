@@ -34,7 +34,7 @@ import { View } from '@instructure/ui-view/latest'
 import { omitProps, withDeterministicId } from '@instructure/ui-react-utils'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { findTabbable, getActiveElement } from '@instructure/ui-dom-utils'
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 
 import { PaginationButton } from './PaginationButton'
 import { PaginationArrowButton } from './PaginationArrowButton'
@@ -85,7 +85,7 @@ category: components
 ---
 **/
 @withDeterministicId()
-@withStyle(generateStyle)
+@withStyleNew(generateStyle)
 class Pagination extends Component<PaginationProps> {
   static readonly componentId = 'Pagination'
 

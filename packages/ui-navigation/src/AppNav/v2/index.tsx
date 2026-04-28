@@ -24,7 +24,7 @@
 
 import { ComponentElement, Component } from 'react'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 
 import { callRenderProp, omitProps } from '@instructure/ui-react-utils'
 
@@ -44,7 +44,7 @@ import { TruncateList } from '@instructure/ui-truncate-list'
 category: components
 ---
 **/
-@withStyle(generateStyle)
+@withStyleNew(generateStyle)
 class AppNav extends Component<AppNavProps> {
   static readonly componentId = 'AppNav'
 

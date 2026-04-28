@@ -24,7 +24,7 @@
 
 import { Component } from 'react'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 import shallowCompare from '../utils/shallowCompare'
 
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
@@ -40,7 +40,7 @@ import generateStyle from './styles'
 private: true
 ---
 **/
-@withStyle(generateStyle, 'RgbaInput')
+@withStyleNew(generateStyle, 'RgbaInput')
 class RGBAInput extends Component<RGBAInputProps, RGBAInputState> {
   static allowedProps = allowedProps
   static readonly componentId = 'ColorMixer.RGBAInput'

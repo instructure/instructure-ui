@@ -24,7 +24,7 @@
 
 import { Component } from 'react'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 import { omitProps } from '@instructure/ui-react-utils'
 
 import { View } from '../../View/v2'
@@ -39,7 +39,7 @@ category: components
 ---
 **/
 
-@withStyle(generateStyle)
+@withStyleNew(generateStyle)
 class ContextView extends Component<ContextViewProps> {
   static readonly componentId = 'ContextView'
   static allowedProps = allowedProps

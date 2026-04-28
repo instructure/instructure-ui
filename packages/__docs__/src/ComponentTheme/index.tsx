@@ -24,7 +24,7 @@
 
 import { Component } from 'react'
 
-import { withStyleForDocs as withStyle } from '../withStyleForDocs'
+import { withStyleForDocs as withStyleNew } from '../withStyleForDocs'
 import { Table } from '@instructure/ui-table'
 import { View } from '@instructure/ui-view'
 
@@ -36,7 +36,7 @@ import type { ComponentThemeProps } from './props'
 
 type ThemeEntry = { name: string; value: string | number }
 
-@withStyle(generateStyle, null)
+@withStyleNew(generateStyle, null)
 class ComponentTheme extends Component<ComponentThemeProps> {
   static allowedProps = allowedProps
 

@@ -37,7 +37,7 @@ import { ModalHeader } from './ModalHeader'
 import { ModalBody } from './ModalBody'
 import { ModalFooter } from './ModalFooter'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 
 import generateStyle from './styles'
 
@@ -56,7 +56,7 @@ category: components
 tags: overlay, portal, dialog
 ---
 **/
-@withStyle(generateStyle)
+@withStyleNew(generateStyle)
 class Modal extends Component<ModalProps, ModalState> {
   static readonly componentId = 'Modal'
 

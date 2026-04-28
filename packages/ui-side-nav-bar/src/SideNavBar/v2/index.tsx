@@ -30,7 +30,7 @@ import {
   renderIconWithProps
 } from '@instructure/ui-icons'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 
 import { SideNavBarItem } from './SideNavBarItem'
 
@@ -47,7 +47,7 @@ const navMinimized = ({ minimized }: { minimized: boolean }) => ({
 category: components
 ---
 **/
-@withStyle(generateStyle)
+@withStyleNew(generateStyle)
 class SideNavBar extends Component<SideNavBarProps, SideNavBarState> {
   static readonly componentId = 'SideNavBar'
 
