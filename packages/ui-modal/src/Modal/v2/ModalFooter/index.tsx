@@ -25,7 +25,7 @@
 import { Component } from 'react'
 
 import { passthroughProps } from '@instructure/ui-react-utils'
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 import generateStyle from './styles'
 
 import { allowedProps } from './props'
@@ -37,7 +37,7 @@ parent: Modal
 id: Modal.Footer
 ---
 **/
-@withStyle(generateStyle, 'ModalFooter')
+@withStyleNew(generateStyle, 'ModalFooter')
 class ModalFooter extends Component<ModalFooterProps> {
   static readonly componentId = 'Modal.Footer'
 

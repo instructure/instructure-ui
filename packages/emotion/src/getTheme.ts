@@ -49,7 +49,7 @@ declare const process: Record<string, any> | undefined
  * @param themeOverride - if provided, it means it's a new theming-system override.
  * This will be merged into theme.themeOverride and will be treated separately
  * from the old way of applying overrides. This override will be applied in the
- * `withStyle.ts` decorator
+ * `withStyleNew.ts` decorator
  * @returns A function that returns with the theme object for the [ThemeProvider](https://emotion.sh/docs/theming#themeprovider-reactcomponenttype)
  *    This function is called by Emotion on theme provider creation, where
  *    `ancestorTheme` is a theme object from an ancestor `ThemeProvider`

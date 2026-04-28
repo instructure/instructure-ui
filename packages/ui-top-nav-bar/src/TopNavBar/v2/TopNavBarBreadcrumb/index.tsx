@@ -29,7 +29,7 @@ import {
   allowedProps
 } from './props'
 import TopNavBar from '../index'
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 import generateStyle from '../TopNavBarBreadcrumb/styles'
 import { ChevronLeftInstUIIcon, MenuInstUIIcon } from '@instructure/ui-icons'
 import TopNavBarContext from '../TopNavBarContext'
@@ -43,7 +43,7 @@ id: TopNavBar.Breadcrumb
 ---
 @module TopNavBarBreadcrumb
  **/
-@withStyle(generateStyle)
+@withStyleNew(generateStyle)
 class TopNavBarBreadcrumb extends Component<
   TopNavBarBreadcrumbProps,
   TopNavBarBreadcrumbState

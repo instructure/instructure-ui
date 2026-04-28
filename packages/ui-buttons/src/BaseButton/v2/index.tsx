@@ -41,7 +41,7 @@ import type { ViewProps } from '@instructure/ui-view/latest'
 import { isSafari } from '@instructure/ui-utils'
 import { combineDataCid } from '@instructure/ui-utils'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 
 import generateStyles from './styles'
 
@@ -71,7 +71,7 @@ const buttonColorToIconColor = {
 category: components/utilities
 ---
 **/
-@withStyle(generateStyles)
+@withStyleNew(generateStyles)
 class BaseButton extends Component<BaseButtonProps> {
   static readonly componentId = 'BaseButton'
 

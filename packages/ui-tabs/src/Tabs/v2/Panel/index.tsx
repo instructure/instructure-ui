@@ -28,7 +28,7 @@ import { View } from '@instructure/ui-view/latest'
 import { passthroughProps } from '@instructure/ui-react-utils'
 import { Transition } from '@instructure/ui-motion'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import type { TabsPanelProps } from './props'
@@ -40,7 +40,7 @@ parent: Tabs
 id: Tabs.Panel
 ---
 **/
-@withStyle(generateStyle)
+@withStyleNew(generateStyle)
 class Panel extends Component<TabsPanelProps> {
   static readonly componentId = 'Tabs.Panel'
 

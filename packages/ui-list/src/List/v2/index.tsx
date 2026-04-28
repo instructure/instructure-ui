@@ -26,7 +26,7 @@ import { Children, Component, ReactElement } from 'react'
 
 import { View } from '@instructure/ui-view/latest'
 import { passthroughProps, safeCloneElement } from '@instructure/ui-react-utils'
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 
 import { ListItem } from './ListItem'
 import generateStyle from './styles'
@@ -38,7 +38,7 @@ import type { ListProps } from './props'
 category: components
 ---
 **/
-@withStyle(generateStyle)
+@withStyleNew(generateStyle)
 class List extends Component<ListProps> {
   static readonly componentId = 'List'
 

@@ -32,7 +32,7 @@ import {
 
 import { safeCloneElement, omitProps } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view/latest'
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import type { TableBodyProps } from './props'
@@ -45,7 +45,7 @@ parent: Table
 id: Table.Body
 ---
 **/
-@withStyle(generateStyle)
+@withStyleNew(generateStyle)
 class Body extends Component<TableBodyProps> {
   static readonly componentId = 'Table.Body'
   static contextType = TableContext

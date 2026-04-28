@@ -31,7 +31,7 @@ import {
   renderIconWithProps
 } from '@instructure/ui-icons'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 
 import generateStyle from './styles'
 
@@ -116,7 +116,7 @@ const levelToAIHorizontalIconSize: Record<
 category: components
 ---
 **/
-@withStyle(generateStyle)
+@withStyleNew(generateStyle)
 class Heading extends Component<HeadingProps> {
   static readonly componentId = 'Heading'
 

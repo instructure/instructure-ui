@@ -119,9 +119,9 @@ describe('updateInstUIImportVersions', () => {
   })
 
   it('does not rewrite non-versioned components', () => {
-    // 'withStyle' is not in versionedExports, so it should be skipped
+    // 'withStyleNew' is not in versionedExports, so it should be skipped
     const result = updateInstUIImportVersions(
-      makeFileInfo(`import { withStyle } from '@instructure/ui'`),
+      makeFileInfo(`import { withStyleNew } from '@instructure/ui'`),
       makeApi() as Parameters<typeof updateInstUIImportVersions>[1],
       { versionTo: 'v11.7' }
     )

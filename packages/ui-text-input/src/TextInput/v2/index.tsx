@@ -33,7 +33,7 @@ import {
 } from '@instructure/ui-react-utils'
 import { isActiveElement, addEventListener } from '@instructure/ui-dom-utils'
 import { FormField } from '@instructure/ui-form-field/latest'
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import type { TextInputProps, TextInputStyleProps } from './props'
@@ -47,7 +47,7 @@ tags: form, field, input
 ---
 **/
 @withDeterministicId()
-@withStyle(generateStyle)
+@withStyleNew(generateStyle)
 class TextInput extends Component<TextInputProps> {
   static readonly componentId = 'TextInput'
 

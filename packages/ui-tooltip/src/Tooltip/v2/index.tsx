@@ -34,7 +34,7 @@ import {
 } from '@instructure/ui-react-utils'
 import { Popover } from '@instructure/ui-popover/latest'
 import type { PopoverProps } from '@instructure/ui-popover/latest'
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 
 import generateStyle from './styles'
 
@@ -47,7 +47,7 @@ category: components
 ---
 **/
 @withDeterministicId()
-@withStyle(generateStyle)
+@withStyleNew(generateStyle)
 class Tooltip extends Component<TooltipProps, TooltipState> {
   static readonly componentId = 'Tooltip'
 

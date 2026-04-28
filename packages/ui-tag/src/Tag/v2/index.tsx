@@ -29,7 +29,7 @@ import { View } from '@instructure/ui-view/latest'
 import type { ViewProps } from '@instructure/ui-view/latest'
 import { omitProps } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import type { TagProps } from './props'
@@ -41,7 +41,7 @@ category: components
 ---
 **/
 
-@withStyle(generateStyle)
+@withStyleNew(generateStyle)
 class Tag extends Component<TagProps> {
   static readonly componentId = 'Tag'
 

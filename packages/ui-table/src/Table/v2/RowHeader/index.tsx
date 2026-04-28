@@ -27,7 +27,7 @@ import { Component, ContextType } from 'react'
 import { omitProps, callRenderProp } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view/latest'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import type { TableRowHeaderProps } from './props'
@@ -40,7 +40,7 @@ parent: Table
 id: Table.RowHeader
 ---
 **/
-@withStyle(generateStyle)
+@withStyleNew(generateStyle)
 class RowHeader extends Component<TableRowHeaderProps> {
   static readonly componentId = 'Table.RowHeader'
   static contextType = TableContext

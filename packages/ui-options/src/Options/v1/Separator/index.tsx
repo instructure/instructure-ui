@@ -66,7 +66,7 @@ class Separator extends Component<OptionsSeparatorProps> {
     return (
       <ElementType role="none">
         <div
-          // we need to omit the withStyle props
+          // we need to omit the withStyleNew props
           {...omitProps(rest, ['styles', 'makeStyles', 'themeOverride'])}
           css={styles?.separator}
           role="presentation"

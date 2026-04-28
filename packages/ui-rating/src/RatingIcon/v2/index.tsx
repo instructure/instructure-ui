@@ -29,7 +29,7 @@ import { requestAnimationFrame } from '@instructure/ui-dom-utils'
 import type { RequestAnimationFrameType } from '@instructure/ui-dom-utils'
 import { Transition } from '@instructure/ui-motion'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 import generateStyle from './styles'
 import type { RatingIconProps, RatingIconState } from './props'
 import { allowedProps } from './props'
@@ -46,7 +46,7 @@ parent: Rating
 id: Rating.Icon
 ---
 **/
-@withStyle(generateStyle)
+@withStyleNew(generateStyle)
 class RatingIcon extends Component<RatingIconProps, RatingIconState> {
   static readonly componentId = 'Rating.Icon'
 

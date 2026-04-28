@@ -24,9 +24,9 @@
 
 import { Component } from 'react'
 import generateStyle from './styles'
-import { withStyleForDocs as withStyle } from '../withStyleForDocs'
+import { withStyleForDocs as withStyleNew } from '../withStyleForDocs'
 import type { LoadingScreenProps } from './props'
-@withStyle(generateStyle, null)
+@withStyleNew(generateStyle, null)
 class LoadingScreen extends Component<LoadingScreenProps> {
   componentDidMount() {
     this.props.makeStyles?.()

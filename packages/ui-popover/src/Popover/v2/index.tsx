@@ -59,7 +59,7 @@ import type { ViewProps, ContextViewProps } from '@instructure/ui-view/latest'
 import type { PositionProps } from '@instructure/ui-position'
 import type { DialogProps } from '@instructure/ui-dialog'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 
 import generateStyle from './styles'
 
@@ -74,7 +74,7 @@ tags: overlay, portal, dialog
 **/
 @withDeterministicId()
 @textDirectionContextConsumer()
-@withStyle(generateStyle)
+@withStyleNew(generateStyle)
 class Popover extends Component<PopoverProps, PopoverState> {
   static readonly componentId = 'Popover'
 

@@ -123,11 +123,11 @@ const defaultValues = {
  * As a HOC:
  *
  * ```js-code
- * import { withStyleForDocs as withStyle } from '@instructure/emotion'
+ * import { withStyleForDocs as withStyleNew } from '@instructure/emotion'
  * import generateStyle from './styles'
  * import generateComponentTheme from './theme'
  *
- * export default withStyle(generateStyle, generateComponentTheme)(ExampleComponent)
+ * export default withStyleNew(generateStyle, generateComponentTheme)(ExampleComponent)
  * ```
  *
  * Themeable components inject their themed styles into the document
@@ -180,7 +180,7 @@ const defaultValues = {
  * </InstUISettingsProvider>
  * ```
  *
- * @module withStyle
+ * @module withStyleNew
  *
  * @param {function} generateStyle - The function that returns the component's style object
  * @param {function} generateComponentTheme - The function that returns the component's theme variables object
@@ -207,7 +207,7 @@ const withStyleForDocs = decorator(
       if (props.styles) {
         warn(
           false,
-          `Manually passing the "styles" property is not allowed on the ${displayName} component. Using the default styles calculated by the @withStyle decorator instead.\n`,
+          `Manually passing the "styles" property is not allowed on the ${displayName} component. Using the default styles calculated by the @withStyleNew decorator instead.\n`,
           props.styles
         )
       }
@@ -215,7 +215,7 @@ const withStyleForDocs = decorator(
       if (props.makeStyles) {
         warn(
           false,
-          `Manually passing the "makeStyles" property is not allowed on the ${displayName} component. Styles are calculated by the @withStyle decorator.`
+          `Manually passing the "makeStyles" property is not allowed on the ${displayName} component. Styles are calculated by the @withStyleNew decorator.`
         )
       }
 
