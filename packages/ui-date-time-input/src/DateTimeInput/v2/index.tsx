@@ -22,418 +22,322 @@
  * SOFTWARE.
  */
 
-import { Component, SyntheticEvent } from 'react'
-import { Locale, DateTime, ApplyLocaleContext } from '@instructure/ui-i18n'
-import type { Moment } from '@instructure/ui-i18n'
+import { useEffect, useRef, useState } from 'react'
+import type { SyntheticEvent } from 'react'
+import { getLocale, getTimezone } from '@instructure/ui-i18n'
 import { FormFieldGroup } from '@instructure/ui-form-field/latest'
 import type { FormMessage } from '@instructure/ui-form-field/latest'
-
 import { DateInput } from '@instructure/ui-date-input/latest'
 import { TimeSelect } from '@instructure/ui-time-select/latest'
-import type { DateTimeInputProps, DateTimeInputState } from './props'
+
+import type { DateTimeInputProps } from './props'
 import { allowedProps } from './props'
-import { error } from '@instructure/console'
+import {
+  combineDateAndTime,
+  defaultMessageFormat,
+  parseIsoInTz,
+  sameDayInTz,
+  setWallTime
+} from './utils'
 
-/**
----
-category: components
----
-**/
-class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
-  // extra verbose localized date and time
-  private static readonly DEFAULT_MESSAGE_FORMAT = 'LLLL'
-  static allowedProps = allowedProps
-  static defaultProps = {
-    layout: 'inline',
-    colSpacing: 'medium',
-    rowSpacing: 'small',
-    timeStep: 30,
+type Snapshot = {
+  iso: string | undefined
+  dateInputText: string
+  timeSelectValue: string | undefined
+  message: FormMessage | undefined
+}
+
+const emptySnapshot: Snapshot = {
+  iso: undefined,
+  dateInputText: '',
+  timeSelectValue: '',
+  message: undefined
+}
+
+const DateTimeInput = (incomingProps: DateTimeInputProps) => {
+  const props = {
+    layout: 'inline' as const,
+    colSpacing: 'medium' as const,
+    rowSpacing: 'small' as const,
+    timeStep: 30 as const,
     showMessages: true,
-    messageFormat: DateTimeInput.DEFAULT_MESSAGE_FORMAT,
+    messageFormat: defaultMessageFormat,
     isRequired: false,
-    allowNonStepInput: false
-  } as const
-
-  declare context: React.ContextType<typeof ApplyLocaleContext>
-  static contextType = ApplyLocaleContext
-
-  ref: Element | null = null // This is used by Tooltip for positioning
-
-  handleRef = (el: Element | null) => {
-    this.ref = el
+    allowNonStepInput: false,
+    ...incomingProps
   }
 
-  constructor(props: DateTimeInputProps) {
-    super(props)
-    // State needs to be calculated because render could be called before
-    // componentDidMount()
-    this.state = this.recalculateState(props.value || props.defaultValue)
-  }
+  const locale = props.locale ?? getLocale()
+  const timezone = props.timezone ?? getTimezone()
 
-  componentDidMount() {
-    // we'll need to recalculate the state because the context value is
-    // set at this point (and it might change locale & timezone)
-    const initState = this.recalculateState(
-      this.props.value || this.props.defaultValue
-    )
-    this.setState(initState)
-    this.props.reset?.(this.reset)
-  }
+  const formatMessage = (iso: string): string =>
+    props.messageFormat(new Date(iso), locale, timezone)
 
-  componentDidUpdate(prevProps: Readonly<DateTimeInputProps>): void {
-    const valueChanged =
-      prevProps.value !== this.props.value ||
-      prevProps.defaultValue !== this.props.defaultValue
-    const isUpdated =
-      valueChanged ||
-      prevProps.locale !== this.props.locale ||
-      prevProps.timezone !== this.props.timezone ||
-      prevProps.dateFormat !== this.props.dateFormat ||
-      prevProps.messageFormat !== this.props.messageFormat ||
-      prevProps.invalidDateTimeMessage !== this.props.invalidDateTimeMessage
-
-    if (isUpdated) {
-      this.setState((_prevState: DateTimeInputState) => {
-        return {
-          ...this.recalculateState(this.props.value || this.props.defaultValue)
-        }
-      })
-    }
-  }
-
-  recalculateState(
-    dateStr?: string,
-    doNotChangeDate = false,
-    doNotChangeTime = false
-  ): DateTimeInputState {
-    let errorMsg: FormMessage | undefined
-    if (dateStr) {
-      const parsed = DateTime.parse(dateStr, this.locale(), this.timezone())
-      if (parsed.isValid()) {
-        if (doNotChangeTime && this.state.timeSelectValue) {
-          // There is a selected time, adjust the parsed date to its value
-          const timeParsed = DateTime.parse(
-            this.state.timeSelectValue,
-            this.locale(),
-            this.timezone()
-          )
-          parsed.hour(timeParsed.hour()).minute(timeParsed.minute())
-        }
-        if (doNotChangeDate && this.state.iso) {
-          parsed
-            .date(this.state.iso.date())
-            .month(this.state.iso.month())
-            .year(this.state.iso.year())
-        }
-        if (this.props.initialTimeForNewDate && !this.state?.timeSelectValue) {
-          const hour = Number(this.props.initialTimeForNewDate.slice(0, 2))
-          const minute = Number(this.props.initialTimeForNewDate.slice(3, 5))
-          if (isNaN(hour) || isNaN(minute)) {
-            error(
-              false,
-              `[DateTimeInput] initialTimeForNewDate prop is not in the correct format. Please use HH:MM format.`
-            )
-          } else if (hour < 0 || hour > 23 || minute > 59 || minute < 0) {
-            error(
-              false,
-              `[DateTimeInput] 0 <= hour < 24 and 0 <= minute < 60 for initialTimeForNewDate prop.`
-            )
-          } else {
-            parsed.hour(hour).minute(minute)
-          }
-        }
-        const newTimeSelectValue = parsed.toISOString()
-        if (this.isDisabledDate(parsed)) {
-          let text =
-            typeof this.props.disabledDateTimeMessage === 'function'
-              ? this.props.disabledDateTimeMessage(parsed.toISOString(true))
-              : this.props.disabledDateTimeMessage
-          if (!text) {
-            text =
-              typeof this.props.invalidDateTimeMessage === 'function'
-                ? this.props.invalidDateTimeMessage(parsed.toISOString(true))
-                : this.props.invalidDateTimeMessage
-          }
-          errorMsg = text ? { text, type: 'error' } : undefined
-          return {
-            iso: parsed.clone(),
-            dateInputText: this.formatDateInput(parsed.toDate()),
-            message: errorMsg,
-            timeSelectValue: newTimeSelectValue
-          }
-        }
-        return {
-          iso: parsed.clone(),
-          dateInputText: this.formatDateInput(parsed.toDate()),
-          message: {
-            type: 'success',
-            text: parsed.format(this.props.messageFormat)
-          },
-          timeSelectValue: newTimeSelectValue
-        }
-      }
-    }
-    // if there is no date string clear TimeSelect value
-    const clearTimeSelect: Partial<DateTimeInputState> = dateStr
-      ? {}
-      : {
-          timeSelectValue: '',
-          message: undefined
-        }
-    return {
-      iso: undefined,
-      dateInputText: dateStr ? dateStr : '',
-      ...clearTimeSelect
-    }
-  }
-
-  reset = () => this.setState(this.recalculateState())
-
-  locale(): string {
-    if (this.props.locale) {
-      return this.props.locale
-    } else if (this.context && this.context.locale) {
-      return this.context.locale
-    }
-    return Locale.browserLocale()
-  }
-
-  timezone() {
-    if (this.props.timezone) {
-      return this.props.timezone
-    } else if (this.context && this.context.timezone) {
-      return this.context.timezone
-    }
-    return DateTime.browserTimeZone()
-  }
-
-  private formatDateInput(date: Date): string {
-    const { dateFormat } = this.props
-    if (typeof dateFormat !== 'string' && dateFormat?.formatter) {
-      return dateFormat.formatter(date)
+  const formatDateInput = (iso: string): string => {
+    const date = new Date(iso)
+    if (typeof props.dateFormat !== 'string' && props.dateFormat?.formatter) {
+      return props.dateFormat.formatter(date)
     }
     return date.toLocaleDateString(
-      typeof dateFormat === 'string' ? dateFormat : this.locale(),
-      {
-        timeZone: this.timezone(),
-        calendar: 'gregory',
-        numberingSystem: 'latn'
-      }
+      typeof props.dateFormat === 'string' ? props.dateFormat : locale,
+      { timeZone: timezone, calendar: 'gregory', numberingSystem: 'latn' }
     )
   }
 
-  isDisabledDate(date: Moment) {
-    const disabledDates = this.props.disabledDates
-    if (!disabledDates) {
-      return false
-    }
-    if (Array.isArray(disabledDates)) {
-      for (const aDisabledDate of disabledDates) {
-        if (date.isSame(aDisabledDate, 'day')) {
-          return true
-        }
-      }
-      return false
-    }
-    return disabledDates(date.toISOString())
+  const isDisabled = (iso: string): boolean => {
+    const { disabledDates } = props
+    if (!disabledDates) return false
+    if (typeof disabledDates === 'function') return disabledDates(iso)
+    const target = new Date(iso)
+    return disabledDates.some((d) => sameDayInTz(target, new Date(d), timezone))
   }
 
-  handleDateTextChange = (
+  const buildErrorMessage = (rawValue: string): FormMessage | undefined => {
+    const { disabledDateTimeMessage, invalidDateTimeMessage } = props
+    let text =
+      typeof disabledDateTimeMessage === 'function'
+        ? disabledDateTimeMessage(rawValue)
+        : disabledDateTimeMessage
+    if (!text) {
+      text =
+        typeof invalidDateTimeMessage === 'function'
+          ? invalidDateTimeMessage(rawValue)
+          : invalidDateTimeMessage
+    }
+    return text ? { type: 'error', text } : undefined
+  }
+
+  // Returns `iso` unchanged if `initialTimeForNewDate` is malformed.
+  const applyInitialTime = (iso: string): string => {
+    const initial = props.initialTimeForNewDate
+    if (!initial) return iso
+    const hour = Number(initial.slice(0, 2))
+    const minute = Number(initial.slice(3, 5))
+    if (Number.isNaN(hour) || Number.isNaN(minute)) {
+      console.error(
+        'Warning: [DateTimeInput] initialTimeForNewDate prop is not in the correct format. Please use HH:MM format.'
+      )
+      return iso
+    }
+    if (hour < 0 || hour > 23 || minute < 0 || minute > 59) {
+      console.error(
+        'Warning: [DateTimeInput] 0 <= hour < 24 and 0 <= minute < 60 for initialTimeForNewDate prop.'
+      )
+      return iso
+    }
+    return setWallTime(iso, hour, minute, timezone)
+  }
+
+  const snapshotForValidIso = (iso: string): Snapshot => {
+    const errorMsg = isDisabled(iso) ? buildErrorMessage(iso) : undefined
+    return {
+      iso,
+      dateInputText: formatDateInput(iso),
+      timeSelectValue: iso,
+      message: errorMsg ?? { type: 'success', text: formatMessage(iso) }
+    }
+  }
+
+  const snapshotFromExternalValue = (raw: string | undefined): Snapshot => {
+    if (!raw) return emptySnapshot
+    const parsed = parseIsoInTz(raw, timezone)
+    if (!parsed) {
+      // Surface the raw text so an on-blur error can be raised; clear the
+      // time so a stale TimeSelect value doesn't survive an external reset.
+      return {
+        ...emptySnapshot,
+        dateInputText: raw,
+        timeSelectValue: undefined
+      }
+    }
+    return snapshotForValidIso(parsed.toISOString())
+  }
+
+  // `utcDateString` is empty when the typed text didn't parse — DateInput v2's
+  // locale parser is the sole authority on what's accepted.
+  const snapshotFromDateChange = (
+    utcDateString: string,
+    rawText: string,
+    prev: Snapshot
+  ): Snapshot => {
+    if (!utcDateString) {
+      return {
+        iso: undefined,
+        dateInputText: rawText,
+        timeSelectValue: prev.timeSelectValue,
+        message: undefined
+      }
+    }
+    const merged = prev.timeSelectValue
+      ? combineDateAndTime(utcDateString, prev.timeSelectValue, timezone)
+      : applyInitialTime(utcDateString)
+    return snapshotForValidIso(merged)
+  }
+
+  const snapshotFromTimeChange = (
+    timeIso: string | undefined,
+    prev: Snapshot
+  ): Snapshot => {
+    if (!timeIso) {
+      // Clearing the time wipes the selection (matches v1 behavior).
+      return emptySnapshot
+    }
+    if (prev.iso) {
+      const merged = combineDateAndTime(prev.iso, timeIso, timezone)
+      return { ...snapshotForValidIso(merged), timeSelectValue: timeIso }
+    }
+    return {
+      iso: undefined,
+      dateInputText: prev.dateInputText,
+      timeSelectValue: timeIso,
+      message: undefined
+    }
+  }
+
+  const ensureRequiredOrInvalidError = (next: Snapshot): Snapshot => {
+    const dateText = next.dateInputText
+    const needsError =
+      !next.iso && (props.isRequired || (dateText && dateText.length > 0))
+    if (!needsError) return next
+    const text =
+      typeof props.invalidDateTimeMessage === 'function'
+        ? props.invalidDateTimeMessage(dateText ?? '')
+        : props.invalidDateTimeMessage
+    return text ? { ...next, message: { type: 'error', text } } : next
+  }
+
+  const [snapshot, setSnapshot] = useState<Snapshot>(() =>
+    snapshotFromExternalValue(props.value ?? props.defaultValue)
+  )
+
+  // Skip the first effect run so the initializer above isn't redone.
+  const isFirstRun = useRef(true)
+  useEffect(() => {
+    if (isFirstRun.current) {
+      isFirstRun.current = false
+      return
+    }
+    setSnapshot(snapshotFromExternalValue(props.value ?? props.defaultValue))
+  }, [
+    props.value,
+    props.defaultValue,
+    locale,
+    timezone,
+    props.dateFormat,
+    props.messageFormat,
+    props.invalidDateTimeMessage
+  ])
+
+  useEffect(() => {
+    props.reset?.(() => setSnapshot(emptySnapshot))
+  }, [])
+
+  // Read prior state from a ref instead of via setState updaters so we can
+  // call props.onChange after committing — keeping side effects out of state
+  // updaters (which React may invoke twice under StrictMode).
+  const snapshotRef = useRef(snapshot)
+  snapshotRef.current = snapshot
+
+  const handleDateTextChange = (
     _event: SyntheticEvent,
     inputValue: string,
     _utcDateString: string
   ) => {
-    this.setState({ dateInputText: inputValue })
+    setSnapshot({ ...snapshotRef.current, dateInputText: inputValue })
   }
 
-  handleDateValidated = (
+  const handleDateValidated = (
     event: SyntheticEvent,
-    _inputValue: string,
+    inputValue: string,
     utcDateString: string
   ) => {
-    let newState: DateTimeInputState
-    if (
-      utcDateString &&
-      this.state.timeSelectValue &&
-      (!this.state.dateInputText || this.state.dateInputText === '')
-    ) {
-      const timeParsed = DateTime.parse(
-        this.state.timeSelectValue,
-        this.locale(),
-        this.timezone()
-      )
-      const dateParsed = DateTime.parse(
-        utcDateString,
-        this.locale(),
-        this.timezone()
-      )
-      const dateParsedAdjusted = dateParsed.set({
-        hour: timeParsed.hour(),
-        minute: timeParsed.minute()
-      })
-      newState = this.recalculateState(
-        dateParsedAdjusted.toISOString(),
-        false,
-        false
-      )
-    } else if (!utcDateString) {
-      // invalid date — pass raw text so error message is shown
-      newState = this.recalculateState(this.state.dateInputText, false, true)
-    } else {
-      newState = this.recalculateState(utcDateString, false, true)
-    }
-    this.changeStateIfNeeded(newState, event)
+    const prev = snapshotRef.current
+    const next = ensureRequiredOrInvalidError(
+      snapshotFromDateChange(utcDateString, inputValue, prev)
+    )
+    setSnapshot(next)
+    if (prev.iso !== next.iso) props.onChange?.(event, next.iso)
   }
 
-  updateStateBasedOnTimeSelect = (
+  const handleTimeChange = (
     event: SyntheticEvent,
     option: { value?: string; inputText: string }
   ) => {
-    // this.state.iso is undefined if date is invalid or not set.
-    // in this case recalculate with the dateInput's text which will result in
-    // an empty valid date (if isRequired is false) or an invalid date.
-    const newValue = this.state.iso ? option.value : this.state.dateInputText
-    const newState = this.recalculateState(newValue, true, false)
-    this.changeStateIfNeeded(newState, event)
-    this.setState({ timeSelectValue: option.value })
-  }
-
-  changeStateIfNeeded = (newState: DateTimeInputState, e: SyntheticEvent) => {
-    const dateStr = newState.dateInputText
-    if (
-      (this.props.isRequired && !newState.iso) ||
-      (dateStr && dateStr.length > 0 && !newState.iso)
-    ) {
-      const text =
-        typeof this.props.invalidDateTimeMessage === 'function'
-          ? this.props.invalidDateTimeMessage(dateStr ? dateStr : '')
-          : this.props.invalidDateTimeMessage
-      // eslint-disable-next-line no-param-reassign
-      newState.message = { text: text, type: 'error' }
-    }
-    if (this.areDifferentDates(this.state.iso, newState.iso)) {
-      if (typeof this.props.onChange === 'function') {
-        const newDate = newState.iso?.toISOString()
-        // Timeout is needed here because users might change value in the
-        // onChange event lister, which might not execute properly
-        setTimeout(() => {
-          this.props.onChange?.(e, newDate)
-        }, 0)
-      }
-    }
-    this.setState(newState)
-  }
-
-  areDifferentDates = (d1?: Moment, d2?: Moment) => {
-    if (!d1 && !d2) {
-      return false
-    }
-    return !d1 || !d2 || !d1.isSame(d2)
-  }
-
-  handleBlur = (e: SyntheticEvent) => {
-    // when TABbing from the DateInput to TimeInput or visa-versa, the blur
-    // happens on the target before the relatedTarget gets focus.
-    // The timeout gives it a moment for that to happen
-    if (typeof this.props.onBlur === 'function') {
-      setTimeout(() => {
-        this.props.onBlur?.(e)
-      }, 0)
-    }
-  }
-
-  render() {
-    const {
-      description,
-      datePlaceholder,
-      timePlaceholder,
-      dateRenderLabel,
-      dateInputRef,
-      timeRenderLabel,
-      timeFormat,
-      timeStep,
-      timeInputRef,
-      locale,
-      timezone,
-      showMessages,
-      messages,
-      layout,
-      rowSpacing,
-      colSpacing,
-      isRequired,
-      interaction,
-      allowNonStepInput,
-      screenReaderLabels,
-      disabledDates,
-      withYearPicker
-    } = this.props
-
-    const allMessages = [
-      ...(showMessages && this.state.message ? [this.state.message] : []),
-      ...(messages || [])
-    ]
-
-    const hasError = allMessages.find(
-      (m) => m.type === 'newError' || m.type === 'error'
+    const prev = snapshotRef.current
+    const next = ensureRequiredOrInvalidError(
+      snapshotFromTimeChange(option.value, prev)
     )
-    // if the component is in error state, create an empty error message to pass down to the subcomponents (DateInput and TimeInput) so they get a red outline and red required asterisk
-    const subComponentMessages: FormMessage[] = hasError
-      ? [{ type: 'error', text: '' }]
-      : []
-
-    return (
-      <FormFieldGroup
-        description={description}
-        layout={layout}
-        rowSpacing={rowSpacing}
-        colSpacing={colSpacing}
-        vAlign="top"
-        elementRef={this.handleRef}
-        isGroup={false}
-        messages={[
-          ...(showMessages && this.state.message ? [this.state.message] : []),
-          ...(messages || [])
-        ]}
-        data-cid="DateTimeInput"
-      >
-        <DateInput
-          renderLabel={dateRenderLabel}
-          screenReaderLabels={screenReaderLabels}
-          withYearPicker={withYearPicker}
-          value={this.state.dateInputText}
-          onChange={this.handleDateTextChange}
-          onRequestValidateDate={this.handleDateValidated}
-          onBlur={(e) => this.handleBlur(e)}
-          inputRef={dateInputRef}
-          placeholder={datePlaceholder}
-          isRequired={isRequired}
-          messages={subComponentMessages}
-          interaction={interaction}
-          locale={locale}
-          timezone={timezone}
-          disabledDates={disabledDates}
-          dateFormat={this.props.dateFormat}
-        />
-        <TimeSelect
-          value={this.state.timeSelectValue}
-          onChange={this.updateStateBasedOnTimeSelect}
-          placeholder={timePlaceholder}
-          onBlur={this.handleBlur}
-          renderLabel={timeRenderLabel}
-          locale={locale}
-          format={timeFormat}
-          step={timeStep}
-          timezone={timezone}
-          inputRef={timeInputRef}
-          interaction={interaction}
-          allowNonStepInput={allowNonStepInput}
-          isRequired={isRequired}
-          messages={subComponentMessages}
-        />
-      </FormFieldGroup>
-    )
+    setSnapshot(next)
+    if (prev.iso !== next.iso) props.onChange?.(event, next.iso)
   }
+
+  const handleBlur = (event: SyntheticEvent) => {
+    props.onBlur?.(event)
+  }
+
+  const allMessages: FormMessage[] = [
+    ...(props.showMessages && snapshot.message ? [snapshot.message] : []),
+    ...(props.messages ?? [])
+  ]
+  const hasError = allMessages.some(
+    (m) => m.type === 'error' || m.type === 'newError'
+  )
+  // Sub-components only need a sentinel error to pick up the red outline /
+  // required asterisk styling — the actual text lives on the FormFieldGroup.
+  const subComponentMessages: FormMessage[] = hasError
+    ? [{ type: 'error', text: '' }]
+    : []
+
+  return (
+    <FormFieldGroup
+      description={props.description}
+      layout={props.layout}
+      rowSpacing={props.rowSpacing}
+      colSpacing={props.colSpacing}
+      vAlign="top"
+      isGroup={false}
+      messages={allMessages}
+      data-cid="DateTimeInput"
+    >
+      <DateInput
+        renderLabel={props.dateRenderLabel}
+        screenReaderLabels={props.screenReaderLabels}
+        withYearPicker={props.withYearPicker}
+        value={snapshot.dateInputText}
+        onChange={handleDateTextChange}
+        onRequestValidateDate={handleDateValidated}
+        onBlur={handleBlur}
+        inputRef={props.dateInputRef}
+        placeholder={props.datePlaceholder}
+        isRequired={props.isRequired}
+        messages={subComponentMessages}
+        interaction={props.interaction}
+        locale={props.locale}
+        timezone={props.timezone}
+        disabledDates={props.disabledDates}
+        dateFormat={props.dateFormat}
+      />
+      <TimeSelect
+        value={snapshot.timeSelectValue}
+        onChange={handleTimeChange}
+        placeholder={props.timePlaceholder}
+        onBlur={handleBlur}
+        renderLabel={props.timeRenderLabel}
+        locale={props.locale}
+        format={props.timeFormat}
+        step={props.timeStep}
+        timezone={props.timezone}
+        inputRef={props.timeInputRef}
+        interaction={props.interaction}
+        allowNonStepInput={props.allowNonStepInput}
+        isRequired={props.isRequired}
+        messages={subComponentMessages}
+      />
+    </FormFieldGroup>
+  )
 }
+
+DateTimeInput.allowedProps = allowedProps
 
 export default DateTimeInput
 export { DateTimeInput }
