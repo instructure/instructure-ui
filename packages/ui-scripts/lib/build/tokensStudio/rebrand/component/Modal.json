@@ -5,7 +5,7 @@
       "type": "sizing"
     },
     "backgroundColor": {
-      "value": "{color.background.container}",
+      "value": "{color.background.elevatedSurface.base}",
       "type": "color"
     },
     "borderColor": {
@@ -77,7 +77,7 @@
   },
   "modalHeader": {
     "backgroundColor": {
-      "value": "{color.background.container}",
+      "value": "{color.background.elevatedSurface.base}",
       "type": "color"
     },
     "inverseBackgroundColor": {
@@ -137,7 +137,7 @@
       "type": "borderWidth"
     },
     "backgroundColor": {
-      "value": "{color.background.container}",
+      "value": "{color.background.elevatedSurface.base}",
       "type": "color"
     },
     "inverseBackgroundColor": {
