@@ -78,7 +78,15 @@
         "type": "color"
       },
       "green180": {
+        "value": "#0D2812",
+        "type": "color"
+      },
+      "green190": {
         "value": "#051F09",
+        "type": "color"
+      },
+      "green200": {
+        "value": "#011A05",
         "type": "color"
       }
     },
