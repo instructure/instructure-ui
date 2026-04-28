@@ -2,7 +2,7 @@
   "color": {
     "background": {
       "base": {
-        "value": "{color.grey.grey180}",
+        "value": "{color.grey.grey200}",
         "type": "color"
       },
       "muted": {
@@ -14,11 +14,11 @@
         "type": "color"
       },
       "page": {
-        "value": "{color.grey.grey180}",
+        "value": "{color.grey.grey200}",
         "type": "color"
       },
       "container": {
-        "value": "{color.grey.grey170}",
+        "value": "{color.grey.grey180}",
         "type": "color"
       },
       "onColor": {
@@ -87,7 +87,7 @@
       "interactive": {
         "input": {
           "base": {
-            "value": "{color.grey.grey180}",
+            "value": "{color.grey.grey190}",
             "type": "color"
           },
           "hover": {
@@ -362,7 +362,7 @@
       },
       "elevatedSurface": {
         "base": {
-          "value": "{color.grey.grey170}",
+          "value": "{color.grey.grey180}",
           "type": "color"
         },
         "inverse": {
