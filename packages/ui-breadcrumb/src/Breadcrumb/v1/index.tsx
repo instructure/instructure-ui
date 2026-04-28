@@ -32,7 +32,7 @@ import {
 
 import { View } from '@instructure/ui-view/v11_6'
 
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyleLegacy } from '@instructure/emotion'
 import { IconArrowOpenEndSolid } from '@instructure/ui-icons'
 import { BreadcrumbLink } from './BreadcrumbLink'
 
@@ -48,7 +48,7 @@ category: components
 ---
 **/
 
-@withStyle(generateStyle, generateComponentTheme)
+@withStyleLegacy(generateStyle, generateComponentTheme)
 class Breadcrumb extends Component<BreadcrumbProps> {
   static readonly componentId = 'Breadcrumb'
 

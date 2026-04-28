@@ -37,7 +37,7 @@ import {
 import { accepts, getAcceptList } from './utils/accepts'
 import { getEventFiles } from './utils/getEventFiles'
 
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyleLegacy } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
@@ -54,7 +54,7 @@ category: components
 ---
 **/
 @withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
+@withStyleLegacy(generateStyle, generateComponentTheme)
 class FileDrop extends Component<FileDropProps, FileDropState> {
   static readonly componentId = 'FileDrop'
 

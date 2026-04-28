@@ -37,7 +37,7 @@ import {
 import { combineDataCid } from '@instructure/ui-utils'
 import { logWarn as warn } from '@instructure/console'
 
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyleLegacy } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
@@ -51,7 +51,7 @@ import type { ViewOwnProps } from '@instructure/ui-view/v11_6'
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyleLegacy(generateStyle, generateComponentTheme)
 class Link extends Component<LinkProps, LinkState> {
   static readonly componentId = 'Link'
 

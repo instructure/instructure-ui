@@ -34,7 +34,7 @@ import { logError as error } from '@instructure/console'
 
 import { Page } from './Page'
 
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyleLegacy } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
@@ -49,7 +49,7 @@ category: components
 ---
 **/
 @withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
+@withStyleLegacy(generateStyle, generateComponentTheme)
 class Pages extends Component<PagesProps, PagesState> {
   static readonly componentId = 'Pages'
 

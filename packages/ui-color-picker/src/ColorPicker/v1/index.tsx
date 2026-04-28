@@ -24,10 +24,7 @@
 
 import { Component } from 'react'
 
-import {
-  withStyleLegacy as withStyle,
-  InstUISettingsProvider
-} from '@instructure/emotion'
+import { withStyleLegacy, InstUISettingsProvider } from '@instructure/emotion'
 import { warn, error } from '@instructure/console'
 import { omitProps } from '@instructure/ui-react-utils'
 import { isValid, contrast as getContrast } from '@instructure/ui-color-utils'
@@ -90,7 +87,7 @@ const acceptedCharactersForHEX = [
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyleLegacy(generateStyle, generateComponentTheme)
 class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
   static allowedProps = allowedProps
   static readonly componentId = 'ColorPicker'

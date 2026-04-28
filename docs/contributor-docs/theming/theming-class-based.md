@@ -25,7 +25,7 @@ import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-@withStyle(generateStyle, generateComponentTheme)
+@withStyleLegacy(generateStyle, generateComponentTheme)
 class Button extends React.Component {
   componentDidMount() {
     this.props.makeStyles()

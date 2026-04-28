@@ -34,7 +34,7 @@ import {
 } from '@instructure/ui-react-utils'
 import { Popover } from '@instructure/ui-popover/v11_6'
 import type { PopoverProps } from '@instructure/ui-popover/v11_6'
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyleLegacy } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -48,7 +48,7 @@ category: components
 ---
 **/
 @withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
+@withStyleLegacy(generateStyle, generateComponentTheme)
 class Tooltip extends Component<TooltipProps, TooltipState> {
   static readonly componentId = 'Tooltip'
 

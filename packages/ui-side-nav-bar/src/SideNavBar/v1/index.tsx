@@ -26,7 +26,7 @@ import { Component, Children, ReactElement, isValidElement } from 'react'
 import { omitProps, safeCloneElement } from '@instructure/ui-react-utils'
 import { IconMoveStartLine } from '@instructure/ui-icons'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyleLegacy } from '@instructure/emotion'
 
 import { SideNavBarItem } from './SideNavBarItem'
 
@@ -44,7 +44,7 @@ const navMinimized = ({ minimized }: { minimized: boolean }) => ({
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyleLegacy(generateStyle, generateComponentTheme)
 class SideNavBar extends Component<SideNavBarProps, SideNavBarState> {
   static readonly componentId = 'SideNavBar'
 

@@ -41,7 +41,7 @@ import type { ViewProps } from '@instructure/ui-view/v11_6'
 import { isSafari } from '@instructure/ui-utils'
 import { combineDataCid } from '@instructure/ui-utils'
 
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyleLegacy } from '@instructure/emotion'
 
 import generateStyles from './styles'
 import generateComponentTheme from './theme'
@@ -55,7 +55,7 @@ category: components/utilities
 ---
 **/
 
-@withStyle(generateStyles, generateComponentTheme)
+@withStyleLegacy(generateStyles, generateComponentTheme)
 class BaseButton extends Component<BaseButtonProps> {
   static readonly componentId = 'BaseButton'
 

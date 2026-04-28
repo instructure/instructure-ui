@@ -27,7 +27,7 @@ import { Component } from 'react'
 import { omitProps, withDeterministicId } from '@instructure/ui-react-utils'
 import { combineDataCid } from '@instructure/ui-utils'
 
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyleLegacy } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -41,7 +41,7 @@ category: components/utilities
 ---
 **/
 @withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
+@withStyleLegacy(generateStyle, generateComponentTheme)
 class InlineSVG extends Component<InlineSVGProps> {
   static readonly componentId = 'InlineSVG'
 
