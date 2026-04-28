@@ -98,19 +98,23 @@ type CalendarOwnProps = {
    */
   renderNavigationLabel?: Renderable
   /**
-   * A button to render in the navigation header. The recommendation is to
-   * compose it with the [IconButton](IconButton) component by setting the `size`
-   * prop to `small`, `withBorder` and `withBackground` to `false`, and setting
-   * `renderIcon` to [IconArrowOpenEnd](icons).
+   * A button to render in the navigation header.
+   * When passed as a function, receives `{ targetMonthSrLabel }` —
+   * a pre-formatted screen reader label for the target month (e.g. "November 2023").
+   * The recommendation is to compose it with the [IconButton](Button) component
+   * by setting the `size` prop to `small`, `withBorder` and `withBackground` to `false`,
+   * and setting `renderIcon` to [IconArrowOpenStart](icons).
    */
-  renderNextMonthButton?: Renderable
+  renderNextMonthButton?: Renderable<{ targetMonthSrLabel: string }>
   /**
-   * A button to render in the navigation header. The recommendation is to
-   * compose it with the [IconButton](Button) component by setting the `size`
-   * prop to `small`, `withBorder` and `withBackground` to `false`, and setting
-   * `renderIcon` to [IconArrowOpenStart](icons).
+   * A button to render in the navigation header.
+   * When passed as a function, receives `{ targetMonthSrLabel }` —
+   * a pre-formatted screen reader label for the target month (e.g. "November 2023").
+   * The recommendation is to compose it with the [IconButton](Button) component
+   * by setting the `size` prop to `small`, `withBorder` and `withBackground` to `false`,
+   * and setting `renderIcon` to [IconArrowOpenStart](icons).
    */
-  renderPrevMonthButton?: Renderable
+  renderPrevMonthButton?: Renderable<{ targetMonthSrLabel: string }>
   /**
    * An array of labels containing the name of each day of the week. The visible
    * portion of the label should be abbreviated (no longer than three characters).

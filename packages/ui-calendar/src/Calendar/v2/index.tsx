@@ -174,28 +174,41 @@ class Calendar extends Component<CalendarProps, CalendarState> {
 
   renderMonthNavigationButtons = () => {
     const { renderNextMonthButton, renderPrevMonthButton } = this.props
+    const { visibleMonth } = this.state
+    const prevMonthName = visibleMonth
+      .clone()
+      .subtract({ months: 1 })
+      .format('MMMM YYYY')
+    const nextMonthName = visibleMonth
+      .clone()
+      .add({ months: 1 })
+      .format('MMMM YYYY')
 
     return {
       prevButton: renderPrevMonthButton ? (
-        callRenderProp(renderPrevMonthButton)
+        callRenderProp(renderPrevMonthButton, {
+          targetMonthSrLabel: prevMonthName
+        })
       ) : (
         <IconButton
           size="small"
           withBackground={false}
           withBorder={false}
           renderIcon={<ChevronLeftInstUIIcon color="baseColor" />}
-          screenReaderLabel="Previous month"
+          screenReaderLabel={`Previous month, ${prevMonthName}`}
         />
       ),
       nextButton: renderNextMonthButton ? (
-        callRenderProp(renderNextMonthButton)
+        callRenderProp(renderNextMonthButton, {
+          targetMonthSrLabel: nextMonthName
+        })
       ) : (
         <IconButton
           size="small"
           withBackground={false}
           withBorder={false}
           renderIcon={<ChevronRightInstUIIcon color="baseColor" />}
-          screenReaderLabel="Next month"
+          screenReaderLabel={`Next month, ${nextMonthName}`}
         />
       )
     }
@@ -298,12 +311,12 @@ class Calendar extends Component<CalendarProps, CalendarState> {
           {renderNavigationLabel ? (
             callRenderProp(renderNavigationLabel)
           ) : (
-            <span>
-              <div>{visibleMonth.format('MMMM')}</div>
+            <div aria-live="polite" aria-atomic="true">
+              <h2 css={styles?.navigationLabel}>{visibleMonth.format('MMMM')}</h2>
               {!withYearPicker ? (
-                <div>{visibleMonth.format('YYYY')}</div>
+                <h2 css={styles?.navigationLabel}>{visibleMonth.format('YYYY')}</h2>
               ) : null}
-            </span>
+            </div>
           )}
           {nextButton &&
             cloneButton(nextButton, this.handleMonthChange('next'))}
@@ -312,7 +325,7 @@ class Calendar extends Component<CalendarProps, CalendarState> {
         {withYearPicker ? (
           <div css={styles?.yearPicker}>
             <SimpleSelect
-              width="90px"
+              width="95px"
               renderLabel=""
               placeholder="--"
               assistiveText={withYearPicker.screenReaderLabel}

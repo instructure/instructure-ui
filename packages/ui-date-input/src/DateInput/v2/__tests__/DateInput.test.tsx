@@ -220,20 +220,14 @@ describe('<DateInput />', () => {
 
     await waitFor(() => {
       const prevMonthButton = screen.getByRole('button', {
-        name: prevMonthLabel
+        name: new RegExp(`^${prevMonthLabel}`)
       })
       const nextMonthButton = screen.getByRole('button', {
-        name: nextMonthLabel
+        name: new RegExp(`^${nextMonthLabel}`)
       })
 
       expect(prevMonthButton).toBeInTheDocument()
       expect(nextMonthButton).toBeInTheDocument()
-
-      const prevButtonLabel = screen.getByText(prevMonthLabel)
-      const nextButtonLabel = screen.getByText(nextMonthLabel)
-
-      expect(prevButtonLabel).toBeInTheDocument()
-      expect(nextButtonLabel).toBeInTheDocument()
 
       const prevMonthIcon = prevMonthButton.querySelector(
         'svg[name="ChevronLeft"]'
