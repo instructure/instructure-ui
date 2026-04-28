@@ -25,7 +25,7 @@
 import { Component } from 'react'
 
 import { omitProps, getElementType } from '@instructure/ui-react-utils'
-import { withStyleLegacy } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -51,7 +51,7 @@ type: example
  @deprecated since version 10. This is an internal component that will be
  removed in the future
 **/
-@withStyleLegacy(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme)
 class FormFieldLabel extends Component<FormFieldLabelProps> {
   static readonly componentId = 'FormFieldLabel'
 

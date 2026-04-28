@@ -26,7 +26,7 @@ import { Component } from 'react'
 
 import { getElementType, omitProps } from '@instructure/ui-react-utils'
 
-import { withStyleLegacy } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { View } from '@instructure/ui-view/v11_6'
@@ -46,7 +46,7 @@ id: TopNavBar.Brand
 ---
 @module TopNavBarBrand
 **/
-@withStyleLegacy(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme)
 class TopNavBarBrand extends Component<TopNavBarBrandProps> {
   static readonly componentId = 'TopNavBar.Brand'
   // TODO: add to the docs: making it static on parent and jsdocs parent/module settings, dont export child on its own

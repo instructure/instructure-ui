@@ -28,7 +28,7 @@ import { View } from '@instructure/ui-view/v11_6'
 import { omitProps } from '@instructure/ui-react-utils'
 import { getCSSStyleDeclaration } from '@instructure/ui-dom-utils'
 
-import { withStyleLegacy } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
@@ -43,7 +43,7 @@ parent: Modal
 id: Modal.Body
 ---
 **/
-@withStyleLegacy(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme)
 class ModalBody extends Component<ModalBodyProps> {
   static readonly componentId = 'Modal.Body'
 

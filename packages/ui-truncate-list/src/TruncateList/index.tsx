@@ -33,7 +33,7 @@ import {
   getCSSStyleDeclaration
 } from '@instructure/ui-dom-utils'
 
-import { withStyleLegacy } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 
@@ -45,7 +45,7 @@ import type { TruncateListProps, TruncateListState } from './props'
 category: components/utilities
 ---
 **/
-@withStyleLegacy(generateStyle, null)
+@withStyle(generateStyle, null)
 class TruncateList extends Component<TruncateListProps, TruncateListState> {
   static readonly componentId = 'TruncateList'
 

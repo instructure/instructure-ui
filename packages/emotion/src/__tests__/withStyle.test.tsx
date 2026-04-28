@@ -29,11 +29,7 @@ import type { MockInstance } from 'vitest'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
-import {
-  withStyleLegacy,
-  InstUISettingsProvider,
-  WithStyleProps
-} from '../index'
+import { withStyle, InstUISettingsProvider, WithStyleProps } from '../index'
 
 type Props = {
   inverse?: boolean
@@ -59,7 +55,7 @@ type ComponentTheme = {
 }
 
 //TODO-rework write revised tests for this asap
-describe.skip('@withStyleLegacy', () => {
+describe.skip('@withStyle', () => {
   const grey1111 = 'rgb(0, 128, 0)'
   const green4570 = 'rgb(10, 10, 10)'
   const blue4570 = 'rgb(255, 255, 0)'
@@ -103,7 +99,7 @@ describe.skip('@withStyleLegacy', () => {
     }
   }
 
-  @withStyleLegacy(generateStyle, generateComponentTheme)
+  @withStyle(generateStyle, generateComponentTheme)
   class ThemeableComponent extends Component<Props, State> {
     static defaultTypes = {
       inverse: false
@@ -346,7 +342,7 @@ describe.skip('@withStyleLegacy', () => {
         </InstUISettingsProvider>
       )
 
-      const expectedWarningMessage = `Warning: Manually passing the "styles" property is not allowed on the ThemeableComponent component. Using the default styles calculated by the @withStyleLegacy decorator instead.`
+      const expectedWarningMessage = `Warning: Manually passing the "styles" property is not allowed on the ThemeableComponent component. Using the default styles calculated by the @withStyle decorator instead.`
 
       expect(consoleWarningMock).toHaveBeenCalledWith(
         expect.stringContaining(expectedWarningMessage),
@@ -368,7 +364,7 @@ describe.skip('@withStyleLegacy', () => {
         </InstUISettingsProvider>
       )
 
-      const expectedWarningMessage = `Manually passing the "makeStyles" property is not allowed on the ThemeableComponent component. Styles are calculated by the @withStyleLegacy decorator.`
+      const expectedWarningMessage = `Manually passing the "makeStyles" property is not allowed on the ThemeableComponent component. Styles are calculated by the @withStyle decorator.`
 
       expect(consoleWarningMock).toHaveBeenCalledWith(
         expect.stringContaining(expectedWarningMessage),

@@ -24,7 +24,7 @@
 
 import { Component, ReactInstance } from 'react'
 
-import { withStyleLegacy } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import { InlineSVG } from '../InlineSVG'
 
@@ -40,7 +40,7 @@ import { SVGIconTheme } from '@instructure/shared-types'
 category: components/utilities
 ---
 **/
-@withStyleLegacy(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme)
 class SVGIcon extends Component<SVGIconProps> {
   static readonly componentId = 'SVGIcon'
 

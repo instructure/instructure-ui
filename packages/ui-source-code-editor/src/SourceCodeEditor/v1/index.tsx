@@ -87,7 +87,7 @@ import type { RequestAnimationFrameType } from '@instructure/ui-dom-utils'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { textDirectionContextConsumer } from '@instructure/ui-i18n'
 
-import { withStyleLegacy } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import customSearch from './SearchPanel'
 
@@ -105,7 +105,7 @@ category: components
 ---
 **/
 @withDeterministicId()
-@withStyleLegacy(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme)
 @textDirectionContextConsumer()
 class SourceCodeEditor extends Component<SourceCodeEditorProps> {
   static readonly componentId = 'SourceCodeEditor'

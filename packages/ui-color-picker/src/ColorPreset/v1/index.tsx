@@ -24,7 +24,7 @@
 
 import { Component } from 'react'
 
-import { withStyleLegacy } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import { omitProps } from '@instructure/ui-react-utils'
 import conversions from '@instructure/ui-color-utils'
 
@@ -52,7 +52,7 @@ import { allowedProps } from './props'
 category: components
 ---
 **/
-@withStyleLegacy(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme)
 class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
   static allowedProps = allowedProps
   static readonly componentId = 'ColorPreset'

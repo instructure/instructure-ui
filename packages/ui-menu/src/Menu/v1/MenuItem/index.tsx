@@ -34,7 +34,7 @@ import {
 } from '@instructure/ui-react-utils'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { isActiveElement, findDOMNode } from '@instructure/ui-dom-utils'
-import { withStyleLegacy } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import { MenuContext } from '../../../utils/v1/MenuContext'
 
@@ -51,7 +51,7 @@ id: Menu.Item
 ---
 **/
 @withDeterministicId()
-@withStyleLegacy(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme)
 class MenuItem extends Component<MenuItemProps, MenuItemState> {
   static readonly componentId = 'Menu.Item'
 

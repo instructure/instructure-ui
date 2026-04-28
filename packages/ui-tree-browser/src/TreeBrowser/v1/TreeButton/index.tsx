@@ -26,7 +26,7 @@ import { Component, ContextType } from 'react'
 
 import { Img } from '@instructure/ui-img/v11_6'
 import { callRenderProp } from '@instructure/ui-react-utils'
-import { withStyleLegacy } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyles from './styles'
 import generateComponentTheme from './theme'
@@ -42,7 +42,7 @@ parent: TreeBrowser
 id: TreeBrowser.Button
 ---
 **/
-@withStyleLegacy(generateStyles, generateComponentTheme)
+@withStyle(generateStyles, generateComponentTheme)
 class TreeButton extends Component<TreeBrowserButtonProps> {
   static readonly componentId = 'TreeBrowser.Button'
 

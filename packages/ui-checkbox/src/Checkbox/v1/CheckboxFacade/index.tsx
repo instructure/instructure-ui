@@ -27,7 +27,7 @@ import { Component } from 'react'
 import { SVGIcon } from '@instructure/ui-svg-images'
 import { IconCheckMarkSolid } from '@instructure/ui-icons'
 
-import { withStyleLegacy } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -40,7 +40,7 @@ import type { CheckboxFacadeProps } from './props'
 parent: Checkbox
 ---
 **/
-@withStyleLegacy(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme)
 class CheckboxFacade extends Component<CheckboxFacadeProps> {
   static readonly componentId = 'CheckboxFacade'
 
