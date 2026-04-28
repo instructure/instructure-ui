@@ -25,7 +25,6 @@
 import { SyntheticEvent } from 'react'
 import type { FormMessage } from '@instructure/ui-form-field/latest'
 import type { InteractionType } from '@instructure/ui-react-utils'
-import type { Moment } from '@instructure/ui-i18n'
 import type { Renderable } from '@instructure/shared-types'
 
 type DateTimeInputProps = {
@@ -87,10 +86,7 @@ type DateTimeInputProps = {
    **/
   timeFormat?: string
   /**
-   * A standard language identifier.
-   *
-   * See [Moment.js](https://momentjs.com/timezone/docs/#/using-timezones/parsing-in-zone/) for
-   * more details.
+   * A standard language identifier (BCP 47, e.g. `"en-US"`, `"fr"`).
    *
    * This property can also be set via a context property and if both are set
    * then the component property takes precedence over the context property.
@@ -136,11 +132,12 @@ type DateTimeInputProps = {
    */
   messages?: FormMessage[]
   /**
-   * This format of the composite date-time when displayed in messages.
-   * Valid formats are defined in the
-   * [Moment docs](https://momentjs.com/docs/#/displaying/format/)
+   * Formatter used for the success message shown below the inputs.
+   * Receives the parsed date plus the active locale and timezone, returns the
+   * string to display. Defaults to a long localized weekday + date + time
+   * (e.g. `"Monday, May 1, 2017 1:30 PM"` in `en-US`).
    **/
-  messageFormat?: string
+  messageFormat?: (date: Date, locale: string, timezone: string) => string
   /**
    * The layout of this component.
    * Vertically stacked, horizontally arranged in 2 columns, or inline (default).
@@ -159,17 +156,17 @@ type DateTimeInputProps = {
    * An ISO 8601 formatted date string representing the current date-time
    * (must be accompanied by an onChange prop).
    **/
-  value?: string // TODO: controllable(I18nPropTypes.iso8601, 'onChange')
+  value?: string
   /**
    * An ISO 8601 formatted date string to use if `value` isn't provided.
    **/
   defaultValue?: string
   /**
    * If set, years can be picked from a dropdown in the calendar.
-   * screenReaderLabel: string // e.g.: i18n("pick a year")
-   * onRequestYearChange?: (e: React.SyntheticEvent, requestedYear: number) => void
-   * startYear: number // e.g.: 2001, sets the start year of the selectable list
-   * endYear: number // e.g.: 2030, sets the end year of the selectable list
+   *
+   * - `screenReaderLabel`: accessible label for the year picker (e.g. `"Pick a year"`).
+   * - `onRequestYearChange`: when provided, only this is called on year change; no internal state change happens.
+   * - `startYear` / `endYear`: inclusive bounds of the selectable range.
    */
   withYearPicker?: {
     screenReaderLabel: string
@@ -247,12 +244,11 @@ type DateTimeInputProps = {
 }
 
 type DateTimeInputState = {
-  // the time and date currently selected
-  iso?: Moment
-  // The value currently displayed in the dateInput component.
-  // Just the date part is visible
+  // UTC ISO of the currently selected date+time
+  iso?: string
+  // What's displayed in the date input (formatted date or in-progress raw text)
   dateInputText: string
-  // The value currently displayed in the timeSelect component as ISO datetime
+  // UTC ISO held by the time picker
   timeSelectValue?: string
   // The message (success/error) shown below the component
   message?: FormMessage

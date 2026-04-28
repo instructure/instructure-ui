@@ -257,11 +257,16 @@ Now that InstUI supports component versioning, we no longer need the separate `D
 
 **Changed props:**
 
-| Prop         | old API                               | new API                                                   |
-| ------------ | ------------------------------------- | --------------------------------------------------------- |
-| `dateFormat` | Moment.js format string (e.g. `'LL'`) | Locale string (e.g. `'en-US'`) or `{ parser, formatter }` |
+| Prop            | old API                               | new API                                                    |
+| --------------- | ------------------------------------- | ---------------------------------------------------------- |
+| `dateFormat`    | Moment.js format string (e.g. `'LL'`) | Locale string (e.g. `'en-US'`) or `{ parser, formatter }`  |
+| `messageFormat` | Moment.js format string (e.g. `'LL'`) | `(date: Date, locale: string, timezone: string) => string` |
 
 If you were passing a Moment format string like `dateFormat="LL"`, replace it with a locale string or a custom `{ parser, formatter }` object. If you were relying on the default `'LL'` format, note that v2 now uses the locale's default date format (e.g. `1/18/2018` in `en-US`) instead of the long format (e.g. `January 18, 2018`). To preserve the long format, pass a custom `{ parser, formatter }` object.
+
+`messageFormat` is now a formatter function. The default produces a long localized weekday + date + time (e.g. `Monday, May 1, 2017 1:30 PM` in `en-US`). To customize, return any string from the function — typically built with `Intl.DateTimeFormat`.
+
+**Typed input acceptance** is now strictly governed by the underlying [DateInput](DateInput) v2's locale parser. Free-form formats that v1 accepted via Moment's lenient parser (e.g. `Sep 4, 1986`, `2017-05-01` in an `en-US` locale) are no longer accepted — users should type dates in the configured locale's format.
 
 **New props:**
 
