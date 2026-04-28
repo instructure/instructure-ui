@@ -30,7 +30,7 @@ import { Tabs } from '@instructure/ui-tabs'
 import type { TabsProps } from '@instructure/ui-tabs'
 import type { NewBaseTheme } from '@instructure/ui-themes'
 import { SourceCodeEditor } from '@instructure/ui-source-code-editor'
-import { withStyleForDocs as withStyle } from '../withStyleForDocs'
+import { withStyleForDocs as withStyleNew } from '../withStyleForDocs'
 
 import generateStyle from './styles'
 
@@ -47,7 +47,7 @@ import { AppContext } from '../appContext'
 import { allowedProps } from './props'
 import type { DocumentProps, DocumentState, DocDataType } from './props'
 
-@withStyle(generateStyle)
+@withStyleNew(generateStyle)
 class Document extends Component<DocumentProps, DocumentState> {
   static allowedProps = allowedProps
   static contextType = AppContext

@@ -26,7 +26,7 @@ import { Children, Component } from 'react'
 
 import { omitProps } from '@instructure/ui-react-utils'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 
 import { TopNavBarContext } from '../../TopNavBarContext'
 
@@ -43,7 +43,7 @@ import type {
 private: true
 ---
 **/
-@withStyle(generateStyle, 'TopNavBarLayout')
+@withStyleNew(generateStyle, 'TopNavBarLayout')
 class TopNavBarDesktopLayout extends Component<TopNavBarDesktopLayoutProps> {
   static readonly componentId = 'TopNavBar.DesktopLayout'
 

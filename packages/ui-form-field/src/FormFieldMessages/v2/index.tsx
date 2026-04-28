@@ -26,7 +26,7 @@ import { Component } from 'react'
 
 import { omitProps } from '@instructure/ui-react-utils'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 
 import { FormFieldMessage } from '../../FormFieldMessage/v2'
 
@@ -53,7 +53,7 @@ type: example
 ]} />
 ```
 **/
-@withStyle(generateStyle)
+@withStyleNew(generateStyle)
 class FormFieldMessages extends Component<FormFieldMessagesProps> {
   static readonly componentId = 'FormFieldMessages'
 

@@ -32,7 +32,7 @@ import { Expandable } from '@instructure/ui-expandable'
 import { omitProps, pickProps } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 import generateStyle from './styles'
 import type { ToggleDetailsProps } from './props'
 import { allowedProps } from './props'
@@ -44,7 +44,7 @@ import type { ViewProps } from '@instructure/ui-view/latest'
 category: components
 ---
 **/
-@withStyle(generateStyle)
+@withStyleNew(generateStyle)
 class ToggleDetails extends Component<ToggleDetailsProps> {
   static readonly componentId = 'ToggleDetails'
   static allowedProps = allowedProps

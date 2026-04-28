@@ -30,7 +30,7 @@ import type { IconButtonProps } from '@instructure/ui-buttons/latest'
 import { PencilInstUIIcon } from '@instructure/ui-icons'
 import { logWarn as warn } from '@instructure/console'
 import { createChainedFunction } from '@instructure/ui-utils'
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 import { View } from '@instructure/ui-view/latest'
 
 import { Editable } from '../../Editable/v1'
@@ -45,7 +45,7 @@ import type { EditableRenderProps } from '../../Editable/v1/props'
 category: components
 ---
 **/
-@withStyle(generateStyle)
+@withStyleNew(generateStyle)
 class InPlaceEdit extends Component<InPlaceEditProps> {
   static readonly componentId = 'InPlaceEdit'
   static allowedProps = allowedProps

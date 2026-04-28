@@ -27,7 +27,7 @@ import { isValidElement, Children, Component, ReactElement } from 'react'
 import { View } from '@instructure/ui-view/latest'
 import { safeCloneElement } from '@instructure/ui-react-utils'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 import { ChevronRightInstUIIcon } from '@instructure/ui-icons'
 import { BreadcrumbLink } from './BreadcrumbLink'
 
@@ -42,7 +42,7 @@ category: components
 ---
 **/
 
-@withStyle(generateStyle)
+@withStyleNew(generateStyle)
 class Breadcrumb extends Component<BreadcrumbProps> {
   static readonly componentId = 'Breadcrumb'
 

@@ -26,7 +26,7 @@ import { Component } from 'react'
 
 import { omitProps } from '@instructure/ui-react-utils'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 import { logWarn as warn } from '@instructure/console'
 
 import generateStyle from './styles'
@@ -40,7 +40,7 @@ parent: Grid
 id: Grid.Col
 ---
 **/
-@withStyle(generateStyle)
+@withStyleNew(generateStyle)
 class GridCol extends Component<GridColProps> {
   static readonly componentId = 'Grid.Col'
 

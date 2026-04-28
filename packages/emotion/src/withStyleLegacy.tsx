@@ -118,7 +118,7 @@ const withStyleLegacy = decorator(
       if (props.styles) {
         warn(
           false,
-          `Manually passing the "styles" property is not allowed on the ${displayName} component. Using the default styles calculated by the @withStyle decorator instead.\n`,
+          `Manually passing the "styles" property is not allowed on the ${displayName} component. Using the default styles calculated by the @withStyleNew decorator instead.\n`,
           props.styles
         )
       }
@@ -126,7 +126,7 @@ const withStyleLegacy = decorator(
       if (props.makeStyles) {
         warn(
           false,
-          `Manually passing the "makeStyles" property is not allowed on the ${displayName} component. Styles are calculated by the @withStyle decorator.`
+          `Manually passing the "makeStyles" property is not allowed on the ${displayName} component. Styles are calculated by the @withStyleNew decorator.`
         )
       }
 

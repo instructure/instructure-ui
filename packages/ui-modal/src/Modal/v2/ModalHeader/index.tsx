@@ -29,7 +29,7 @@ import {
   passthroughProps
 } from '@instructure/ui-react-utils'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 
 import { CloseButton } from '@instructure/ui-buttons/latest'
 import type { CloseButtonProps } from '@instructure/ui-buttons/latest'
@@ -48,7 +48,7 @@ parent: Modal
 id: Modal.Header
 ---
 **/
-@withStyle(generateStyle, 'ModalHeader')
+@withStyleNew(generateStyle, 'ModalHeader')
 class ModalHeader extends Component<ModalHeaderProps> {
   static readonly componentId = 'Modal.Header'
 

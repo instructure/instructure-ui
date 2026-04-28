@@ -26,7 +26,7 @@ import { Component } from 'react'
 
 import { omitProps, callRenderProp } from '@instructure/ui-react-utils'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import type { TableColHeaderProps } from './props'
@@ -43,7 +43,7 @@ parent: Table
 id: Table.ColHeader
 ---
 **/
-@withStyle(generateStyle)
+@withStyleNew(generateStyle)
 class ColHeader extends Component<TableColHeaderProps> {
   static readonly componentId = 'Table.ColHeader'
 

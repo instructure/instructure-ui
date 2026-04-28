@@ -33,7 +33,7 @@ import {
 } from '@instructure/ui-react-utils'
 import { renderIconWithProps } from '@instructure/ui-icons'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 
 import generateStyle from './styles'
 
@@ -53,7 +53,7 @@ const billboardSizeToIconSize = {
 category: components
 ---
 **/
-@withStyle(generateStyle)
+@withStyleNew(generateStyle)
 class Billboard extends Component<
   BillboardProps,
   { isHovered: boolean; isActive: boolean }

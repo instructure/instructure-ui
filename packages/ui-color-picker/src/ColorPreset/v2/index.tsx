@@ -24,7 +24,7 @@
 
 import { Component } from 'react'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 import { omitProps } from '@instructure/ui-react-utils'
 import conversions from '@instructure/ui-color-utils'
 
@@ -51,7 +51,7 @@ import { allowedProps } from './props'
 category: components
 ---
 **/
-@withStyle(generateStyle)
+@withStyleNew(generateStyle)
 class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
   static allowedProps = allowedProps
   static readonly componentId = 'ColorPreset'
@@ -279,8 +279,7 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
           <ColorIndicator color={color} shape="rectangle" role="presentation" />
           {this.isSelectedColor(color) && (
             <div css={this.props?.styles?.selectedIndicator}>
-              <CheckInstUIIcon size="sm" color="dark"
-              />
+              <CheckInstUIIcon size="sm" color="dark" />
             </div>
           )}
         </div>

@@ -29,7 +29,7 @@ export { useComputedTheme } from './useComputedTheme'
 export { InstUISettingsProvider } from './InstUISettingsProvider'
 export { withStyleLegacy } from './withStyleLegacy'
 export { getComponentThemeOverride } from './getComponentThemeOverride'
-export { withStyle } from './withStyle'
+export { withStyleNew } from './withStyleNew'
 export {
   ThemeablePropValues,
   makeThemeVars,

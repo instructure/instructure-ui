@@ -31,7 +31,7 @@ import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { CheckInstUIIcon } from '@instructure/ui-icons'
 import { warn } from '@instructure/console'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 
 import generateStyle from './styles'
 
@@ -47,7 +47,7 @@ parent: Table
 id: Table.Head
 ---
 **/
-@withStyle(generateStyle)
+@withStyleNew(generateStyle)
 class Head extends Component<TableHeadProps> {
   static readonly componentId = 'Table.Head'
   static contextType = TableContext

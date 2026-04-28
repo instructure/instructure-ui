@@ -27,7 +27,7 @@ import { expect } from 'chai'
 import {
   InstUISettingsProvider,
   WithStyleProps,
-  withStyle
+  withStyleNew
 } from '@instructure/emotion/src/index'
 
 import '../support/component'
@@ -126,7 +126,7 @@ class ThemeableComponent extends Component<Props, State> {
   render() {
     const { styles } = this.props
     return (
-      <div data-testId="withStyle-testComp" css={styles!.exampleComponent}>
+      <div data-testId="withStyleNew-testComp" css={styles!.exampleComponent}>
         <p>Hello World</p>
         <button onClick={this.handleClick}>Button</button>
       </div>
@@ -134,7 +134,7 @@ class ThemeableComponent extends Component<Props, State> {
   }
 }
 
-describe('withStyle should apply bi-directional polyfill on styles object', () => {
+describe('withStyleNew should apply bi-directional polyfill on styles object', () => {
   it('in default "ltr" mode', () => {
     cy.mount(
       <InstUISettingsProvider theme={exampleTheme}>
@@ -142,7 +142,7 @@ describe('withStyle should apply bi-directional polyfill on styles object', () =
       </InstUISettingsProvider>
     )
 
-    cy.get('[data-testid="withStyle-testComp"]').then(($el) => {
+    cy.get('[data-testid="withStyleNew-testComp"]').then(($el) => {
       const computedStyle = getComputedStyle($el[0])
 
       // `inset-inline-start` should be transformed to 'left' in 'ltr' mode
@@ -158,7 +158,7 @@ describe('withStyle should apply bi-directional polyfill on styles object', () =
       </InstUISettingsProvider>
     )
 
-    cy.get('[data-testid="withStyle-testComp"]').then(($el) => {
+    cy.get('[data-testid="withStyleNew-testComp"]').then(($el) => {
       const computedStyle = getComputedStyle($el[0])
 
       // `inset-inline-start` should be transformed to 'right' in 'rtl' mode

@@ -2,7 +2,7 @@
 describes: InstUISettingsProvider
 ---
 
-The `<InstUISettingsProvider/>` component provides a way to add global configuration to our app. It can be used to apply and handle themes (for all themeable child components that use the [withStyle](withStyle) decorator), setting the global text direction, etc.
+The `<InstUISettingsProvider/>` component provides a way to add global configuration to our app. It can be used to apply and handle themes (for all themeable child components that use the [withStyleNew](withStyleNew) decorator), setting the global text direction, etc.
 
 Note that `<InstUISettingsProvider/>` components can be nested!
 

@@ -26,7 +26,7 @@ import { Component } from 'react'
 
 import { View } from '@instructure/ui-view/latest'
 import { passthroughProps } from '@instructure/ui-react-utils'
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import { allowedProps } from './props'
@@ -38,7 +38,7 @@ parent: InlineList
 id: InlineList.Item
 ---
 **/
-@withStyle(generateStyle)
+@withStyleNew(generateStyle)
 class InlineListItem extends Component<InlineListItemProps> {
   static readonly componentId = 'InlineList.Item'
 
