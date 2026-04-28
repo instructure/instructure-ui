@@ -28,7 +28,7 @@ import keycode from 'keycode'
 import { IconFolderLine, IconDocumentLine } from '@instructure/ui-icons'
 
 import { omitProps, pickProps } from '@instructure/ui-react-utils'
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyleLegacy } from '@instructure/emotion'
 
 import { TreeCollection } from './TreeCollection'
 import { TreeButton } from './TreeButton'
@@ -51,7 +51,7 @@ import TreeBrowserContext from './TreeBrowserContext'
 category: components
 ---
 **/
-@withStyle(generateStyles, generateComponentTheme)
+@withStyleLegacy(generateStyles, generateComponentTheme)
 class TreeBrowser extends Component<TreeBrowserProps, TreeBrowserState> {
   static readonly componentId = 'TreeBrowser'
 

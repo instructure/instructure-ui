@@ -24,7 +24,7 @@
 
 import { Component } from 'react'
 
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyleLegacy } from '@instructure/emotion'
 
 import type {
   TopNavBarLayoutDesktopTheme,
@@ -50,7 +50,7 @@ id: TopNavBar.Layout
 ---
 @module TopNavBarLayout
 **/
-@withStyle(null, generateComponentTheme)
+@withStyleLegacy(null, generateComponentTheme)
 class TopNavBarLayout extends Component<TopNavBarLayoutProps> {
   static readonly componentId = 'TopNavBar.Layout'
 

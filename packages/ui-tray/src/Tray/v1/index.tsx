@@ -33,7 +33,7 @@ import type { PortalNode } from '@instructure/ui-portal'
 import { mirrorHorizontalPlacement } from '@instructure/ui-position'
 import { Transition } from '@instructure/ui-motion'
 import type { TransitionType } from '@instructure/ui-motion'
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyleLegacy } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import { allowedProps } from './props'
@@ -45,7 +45,7 @@ import { Mask } from '@instructure/ui-overlays/v11_6'
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyleLegacy(generateStyle, generateComponentTheme)
 @textDirectionContextConsumer()
 class Tray extends Component<TrayProps> {
   static readonly componentId = 'Tray'

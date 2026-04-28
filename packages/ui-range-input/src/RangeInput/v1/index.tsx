@@ -28,7 +28,7 @@ import { warn } from '@instructure/console'
 import { ContextView } from '@instructure/ui-view/v11_6'
 import { FormField } from '@instructure/ui-form-field/v11_6'
 import { addEventListener } from '@instructure/ui-dom-utils'
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyleLegacy } from '@instructure/emotion'
 import {
   omitProps,
   pickProps,
@@ -47,7 +47,7 @@ category: components
 ---
 **/
 @withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
+@withStyleLegacy(generateStyle, generateComponentTheme)
 class RangeInput extends Component<RangeInputProps, RangeInputState> {
   static readonly componentId = 'RangeInput'
   static outputLocatorAttribute = 'data-range-output'

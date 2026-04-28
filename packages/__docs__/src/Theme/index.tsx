@@ -23,7 +23,7 @@
  */
 
 import React, { Component } from 'react'
-import { withStyleForDocs as withStyle } from '../withStyleForDocs'
+import { withStyleForDocs } from '../withStyleForDocs'
 
 import { px } from '@instructure/ui-utils'
 
@@ -45,7 +45,7 @@ import { BaseTheme, Colors, Primitives } from '@instructure/shared-types'
 
 type valueof<X> = X[keyof X]
 
-@withStyle(generateStyle, generateComponentTheme)
+@withStyleForDocs(generateStyle, generateComponentTheme)
 class Theme extends Component<ThemeProps> {
   static defaultProps = {
     description: undefined

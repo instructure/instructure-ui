@@ -37,7 +37,7 @@ import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { RadioInput } from '../../RadioInput/v1'
 import type { RadioInputProps } from '../../RadioInput/v1/props'
 
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyleLegacy } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -53,7 +53,7 @@ category: components
 ---
 **/
 @withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
+@withStyleLegacy(generateStyle, generateComponentTheme)
 class RadioInputGroup extends Component<
   RadioInputGroupProps,
   RadioInputGroupState

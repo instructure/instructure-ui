@@ -32,7 +32,7 @@ import { isActiveElement } from '@instructure/ui-dom-utils'
 import { omitProps, withDeterministicId } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view/v11_6'
 
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyleLegacy } from '@instructure/emotion'
 
 import { CheckboxFacade } from './CheckboxFacade'
 import { ToggleFacade } from './ToggleFacade'
@@ -56,7 +56,7 @@ tags: toggle, switch
 **/
 
 @withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
+@withStyleLegacy(generateStyle, generateComponentTheme)
 class Checkbox extends Component<CheckboxProps, CheckboxState> {
   static readonly componentId = 'Checkbox'
 

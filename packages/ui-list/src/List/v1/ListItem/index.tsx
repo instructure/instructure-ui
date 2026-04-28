@@ -27,7 +27,7 @@ import { Component } from 'react'
 import { View } from '@instructure/ui-view/v11_6'
 import { passthroughProps } from '@instructure/ui-react-utils'
 
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyleLegacy } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -41,7 +41,7 @@ parent: List
 id: List.Item
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyleLegacy(generateStyle, generateComponentTheme)
 class ListItem extends Component<ListItemProps> {
   static readonly componentId = 'List.Item'
 

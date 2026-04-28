@@ -26,7 +26,7 @@ import { Component } from 'react'
 
 import { omitProps } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view/latest'
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyleLegacy } from '@instructure/emotion'
 
 import generateStyle from './styles'
 
@@ -39,7 +39,7 @@ parent: Flex
 id: Flex.Item
 ---
 **/
-@withStyle(generateStyle, null)
+@withStyleLegacy(generateStyle, null)
 class Item extends Component<FlexItemProps> {
   static readonly componentId = 'Flex.Item'
 

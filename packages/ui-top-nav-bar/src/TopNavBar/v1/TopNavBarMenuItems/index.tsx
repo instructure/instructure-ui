@@ -31,7 +31,7 @@ import {
 } from '@instructure/ui-react-utils'
 import { warn, error } from '@instructure/console'
 
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyleLegacy } from '@instructure/emotion'
 
 import { Drilldown } from '@instructure/ui-drilldown/v11_6'
 import { TruncateList } from '@instructure/ui-truncate-list'
@@ -61,7 +61,7 @@ id: TopNavBar.MenuItems
 @module TopNavBarMenuItems
 **/
 @withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
+@withStyleLegacy(generateStyle, generateComponentTheme)
 class TopNavBarMenuItems extends Component<
   TopNavBarMenuItemsProps,
   TopNavBarMenuItemsState

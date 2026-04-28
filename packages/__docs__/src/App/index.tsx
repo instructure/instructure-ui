@@ -48,7 +48,7 @@ import {
   IconXSolid
 } from '@instructure/ui-icons'
 
-import { withStyleForDocs as withStyle } from '../withStyleForDocs'
+import { withStyleForDocs } from '../withStyleForDocs'
 import { ContentWrap } from '../ContentWrap'
 import { Document } from '../Document'
 import { Header } from '../Header'
@@ -88,7 +88,7 @@ import type { NewComponentTypes } from '@instructure/ui-themes'
 import { FocusRegion } from '@instructure/ui-a11y-utils'
 import { AppContext } from '../appContext'
 
-@withStyle(generateStyle, generateComponentTheme)
+@withStyleForDocs(generateStyle, generateComponentTheme)
 class App extends Component<AppProps, AppState> {
   static allowedProps = allowedProps
   static contextType = AppContext

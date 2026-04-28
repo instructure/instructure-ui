@@ -33,7 +33,7 @@ import {
   pickProps,
   passthroughProps
 } from '@instructure/ui-react-utils'
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyleLegacy } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -50,7 +50,7 @@ category: components
 @module View
 **/
 @textDirectionContextConsumer()
-@withStyle(generateStyle, generateComponentTheme)
+@withStyleLegacy(generateStyle, generateComponentTheme)
 class View extends Component<ViewProps> {
   static componentId = 'View'
   static allowedProps = allowedProps

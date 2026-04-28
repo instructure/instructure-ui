@@ -39,7 +39,7 @@ import {
 } from '@instructure/ui-react-utils'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyleLegacy } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -59,7 +59,7 @@ id: NumberInput
 ---
 **/
 @withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
+@withStyleLegacy(generateStyle, generateComponentTheme)
 class NumberInput extends Component<NumberInputProps, NumberInputState> {
   static readonly componentId = 'NumberInput'
   static allowedProps = allowedProps

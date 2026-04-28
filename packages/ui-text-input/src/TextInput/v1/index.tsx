@@ -36,7 +36,7 @@ import {
   getCSSStyleDeclaration
 } from '@instructure/ui-dom-utils'
 import { FormField } from '@instructure/ui-form-field/v11_6'
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyleLegacy } from '@instructure/emotion'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 
 import generateStyle from './styles'
@@ -55,7 +55,7 @@ tags: form, field
 ---
 **/
 @withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
+@withStyleLegacy(generateStyle, generateComponentTheme)
 class TextInput extends Component<TextInputProps, TextInputState> {
   static readonly componentId = 'TextInput'
 

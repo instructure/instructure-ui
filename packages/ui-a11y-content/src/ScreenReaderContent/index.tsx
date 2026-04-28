@@ -26,7 +26,7 @@ import { Component } from 'react'
 
 import { passthroughProps, getElementType } from '@instructure/ui-react-utils'
 
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyleLegacy } from '@instructure/emotion'
 
 import generateStyle from './styles'
 
@@ -39,7 +39,7 @@ category: utilities/a11y
 ---
 @module ScreenReaderContent
 **/
-@withStyle(generateStyle, null)
+@withStyleLegacy(generateStyle, null)
 class ScreenReaderContent extends Component<ScreenReaderContentProps> {
   static readonly componentId = 'ScreenReaderContent'
 

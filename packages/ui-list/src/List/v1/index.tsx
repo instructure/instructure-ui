@@ -29,7 +29,7 @@ import { passthroughProps, safeCloneElement } from '@instructure/ui-react-utils'
 
 import { ListItem } from './ListItem'
 
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyleLegacy } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -42,7 +42,7 @@ import type { ListProps } from './props'
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyleLegacy(generateStyle, generateComponentTheme)
 class List extends Component<ListProps> {
   static readonly componentId = 'List'
 

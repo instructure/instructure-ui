@@ -59,7 +59,7 @@ import type {
   SelectableRender
 } from '@instructure/ui-selectable'
 
-import { withStyleLegacy as withStyle, BorderWidth } from '@instructure/emotion'
+import { withStyleLegacy, BorderWidth } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -129,7 +129,7 @@ tags: autocomplete, typeahead, combobox, dropdown, search, form
 ---
 **/
 @withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
+@withStyleLegacy(generateStyle, generateComponentTheme)
 class Select extends Component<SelectProps> {
   static readonly componentId = 'Select'
   private readonly SCROLL_TOLERANCE = 0.5

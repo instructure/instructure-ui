@@ -25,14 +25,14 @@
 import { Component } from 'react'
 
 import { isValid } from '@instructure/ui-color-utils'
-import { withStyleForDocs as withStyle } from '../withStyleForDocs'
+import { withStyleForDocs } from '../withStyleForDocs'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import { allowedProps } from './props'
 import type { ColorSwatchProps } from './props'
 
-@withStyle(generateStyle, generateComponentTheme)
+@withStyleForDocs(generateStyle, generateComponentTheme)
 class ColorSwatch extends Component<ColorSwatchProps> {
   static allowedProps = allowedProps
   componentDidMount() {
