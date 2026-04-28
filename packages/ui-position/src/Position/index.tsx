@@ -39,7 +39,7 @@ import type { Debounced } from '@instructure/debounce'
 import { deepEqual, shallowEqual, combineDataCid } from '@instructure/ui-utils'
 import { debounce } from '@instructure/debounce'
 import { Portal } from '@instructure/ui-portal'
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyleLegacy } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -55,7 +55,7 @@ category: components/utilities
 ---
 **/
 @withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
+@withStyleLegacy(generateStyle, generateComponentTheme)
 class Position extends Component<PositionProps, PositionState> {
   static readonly componentId = 'Position'
 

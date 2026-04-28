@@ -27,7 +27,7 @@ import { Component, Children } from 'react'
 import { error } from '@instructure/console'
 import { omitProps } from '@instructure/ui-react-utils'
 
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyleLegacy } from '@instructure/emotion'
 
 import { TopNavBarContext } from '../TopNavBarContext'
 import type { ItemChild, TopNavBarItemProps } from '../TopNavBarItem/props'
@@ -44,7 +44,7 @@ id: TopNavBar.User
 ---
 @module TopNavBarUser
 **/
-@withStyle(generateStyle, null)
+@withStyleLegacy(generateStyle, null)
 class TopNavBarUser extends Component<TopNavBarUserProps> {
   static readonly componentId = 'TopNavBar.User'
 

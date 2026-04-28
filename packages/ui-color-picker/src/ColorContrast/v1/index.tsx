@@ -30,7 +30,7 @@ import {
   contrastWithAlpha,
   validateContrast
 } from '@instructure/ui-color-utils'
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyleLegacy } from '@instructure/emotion'
 
 import { Text } from '@instructure/ui-text/v11_6'
 import { Heading } from '@instructure/ui-heading/v11_6'
@@ -49,7 +49,7 @@ import generateComponentTheme from './theme'
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyleLegacy(generateStyle, generateComponentTheme)
 class ColorContrast extends Component<ColorContrastProps, ColorContrastState> {
   static allowedProps = allowedProps
   static readonly componentId = 'ColorContrast'

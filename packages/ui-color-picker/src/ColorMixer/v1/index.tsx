@@ -24,7 +24,7 @@
 
 import { Component } from 'react'
 
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyleLegacy } from '@instructure/emotion'
 import { omitProps } from '@instructure/ui-react-utils'
 import { isValid } from '@instructure/ui-color-utils'
 import conversions from '@instructure/ui-color-utils'
@@ -43,7 +43,7 @@ import generateStyle from './styles'
 category: components
 ---
 **/
-@withStyle(generateStyle, null)
+@withStyleLegacy(generateStyle, null)
 class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
   static allowedProps = allowedProps
   static readonly componentId = 'ColorMixer'

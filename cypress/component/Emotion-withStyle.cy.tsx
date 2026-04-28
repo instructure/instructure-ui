@@ -99,7 +99,7 @@ const generateStyle = function (
   }
 }
 
-@withStyle(generateStyle, generateComponentTheme)
+@withStyleLegacy(generateStyle, generateComponentTheme)
 class ThemeableComponent extends Component<Props, State> {
   static defaultTypes = {
     inverse: false

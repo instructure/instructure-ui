@@ -25,7 +25,7 @@
 import { Component } from 'react'
 
 import { addEventListener } from '@instructure/ui-dom-utils'
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyleLegacy } from '@instructure/emotion'
 
 import { View } from '@instructure/ui-view/v11_6'
 import type { ViewOwnProps } from '@instructure/ui-view/v11_6'
@@ -41,7 +41,7 @@ import generateComponentTheme from './theme'
 private: true
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyleLegacy(generateStyle, generateComponentTheme)
 class Slider extends Component<SliderProps> {
   static allowedProps = allowedProps
   static readonly componentId = 'ColorMixer.Slider'

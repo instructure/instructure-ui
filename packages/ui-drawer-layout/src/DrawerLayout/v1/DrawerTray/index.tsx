@@ -24,7 +24,7 @@
 
 import { Component } from 'react'
 
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyleLegacy } from '@instructure/emotion'
 import { textDirectionContextConsumer } from '@instructure/ui-i18n'
 import { Transition } from '@instructure/ui-motion'
 import type { TransitionType } from '@instructure/ui-motion'
@@ -53,7 +53,7 @@ parent: DrawerLayout
 id: DrawerLayout.Tray
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyleLegacy(generateStyle, generateComponentTheme)
 @textDirectionContextConsumer()
 class DrawerTray extends Component<
   DrawerLayoutTrayProps,

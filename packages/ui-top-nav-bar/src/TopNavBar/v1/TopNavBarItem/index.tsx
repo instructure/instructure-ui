@@ -35,10 +35,7 @@ import {
 import { createChainedFunction } from '@instructure/ui-utils'
 import { warn, error } from '@instructure/console'
 
-import {
-  withStyleLegacy as withStyle,
-  InstUISettingsProvider
-} from '@instructure/emotion'
+import { withStyleLegacy, InstUISettingsProvider } from '@instructure/emotion'
 
 import {
   IconArrowOpenDownSolid,
@@ -81,7 +78,7 @@ id: TopNavBar.Item
 @module TopNavBarItem
 **/
 @withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
+@withStyleLegacy(generateStyle, generateComponentTheme)
 class TopNavBarItem extends Component<TopNavBarItemProps, TopNavBarItemState> {
   static readonly componentId = 'TopNavBar.Item'
 

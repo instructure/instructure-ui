@@ -48,7 +48,7 @@ import {
 
 import { DateTime, ApplyLocaleContext, Locale } from '@instructure/ui-i18n'
 
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyleLegacy } from '@instructure/emotion'
 
 import generateStyle from './styles'
 
@@ -61,7 +61,7 @@ import type { FormMessage } from '@instructure/ui-form-field/v11_6'
 category: components
 ---
 **/
-@withStyle(generateStyle, null)
+@withStyleLegacy(generateStyle, null)
 class DateInput extends Component<DateInputProps, DateInputState> {
   static readonly componentId = 'DateInput'
   static Day = Calendar.Day

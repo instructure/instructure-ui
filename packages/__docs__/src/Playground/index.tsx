@@ -34,7 +34,7 @@ import { Flex } from '@instructure/ui-flex'
 import { IconButton, CloseButton } from '@instructure/ui-buttons'
 import { IconXLine } from '@instructure/ui-icons'
 
-import { withStyleForDocs as withStyle } from '../withStyleForDocs'
+import { withStyleForDocs } from '../withStyleForDocs'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -52,7 +52,7 @@ const fullScreenIconPath = (
   <path d="M12,0v2h8.6L8.3,14.3l1.4,1.4L22,3.4v8.5h2V0H12z M18,22H2V6h10l2-2H0v20h20V10l-2,2V22z" />
 )
 
-@withStyle(generateStyle, generateComponentTheme)
+@withStyleForDocs(generateStyle, generateComponentTheme)
 class Playground extends Component<PlaygroundProps, PlaygroundState> {
   static allowedProps = allowedProps
   static defaultProps = {

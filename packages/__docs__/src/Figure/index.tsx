@@ -34,7 +34,7 @@ import { List } from '@instructure/ui-list'
 import { Responsive } from '@instructure/ui-responsive'
 import { View } from '@instructure/ui-view'
 
-import { withStyleForDocs as withStyle } from '../withStyleForDocs'
+import { withStyleForDocs } from '../withStyleForDocs'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -57,7 +57,7 @@ class FigureItem extends Component<PropsWithChildren> {
   }
 }
 
-@withStyle(generateStyle, generateComponentTheme)
+@withStyleForDocs(generateStyle, generateComponentTheme)
 class Figure extends Component<FigureProps> {
   static allowedProps = allowedProps
 

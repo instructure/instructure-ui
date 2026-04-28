@@ -31,7 +31,7 @@ import {
   withDeterministicId
 } from '@instructure/ui-react-utils'
 
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyleLegacy } from '@instructure/emotion'
 
 import generateStyles from './styles'
 import generateComponentTheme from './theme'
@@ -45,7 +45,7 @@ id: Options.Item
 ---
 **/
 @withDeterministicId()
-@withStyle(generateStyles, generateComponentTheme)
+@withStyleLegacy(generateStyles, generateComponentTheme)
 class Item extends Component<OptionsItemProps> {
   static readonly componentId = 'Options.Item'
 
