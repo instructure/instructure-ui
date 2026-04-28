@@ -27,7 +27,7 @@ import { Component } from 'react'
 
 import { ms } from '@instructure/ui-utils'
 
-import { withStyleLegacy, Global } from '@instructure/emotion'
+import { withStyle, Global } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -43,7 +43,7 @@ category: components/utilities
 ---
 @module Transition
 **/
-@withStyleLegacy(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme)
 class Transition extends Component<TransitionProps> {
   static readonly componentId = 'Transition'
 

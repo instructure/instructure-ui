@@ -24,7 +24,7 @@
 
 import { Component } from 'react'
 
-import { withStyleLegacy } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import { omitProps } from '@instructure/ui-react-utils'
 
 import generateStyle from './styles'
@@ -40,7 +40,7 @@ id: Menu.Separator
 ---
 @module MenuItemSeparator
 **/
-@withStyleLegacy(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme)
 class MenuItemSeparator extends Component<MenuSeparatorProps> {
   static readonly componentId = 'Menu.Separator'
 

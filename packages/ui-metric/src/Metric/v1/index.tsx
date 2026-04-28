@@ -24,7 +24,7 @@
 
 import { Component } from 'react'
 
-import { withStyleLegacy } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
 
 import generateStyle from './styles'
@@ -38,7 +38,7 @@ import type { MetricProps } from './props'
 category: components
 ---
 **/
-@withStyleLegacy(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme)
 class Metric extends Component<MetricProps> {
   static readonly componentId = 'Metric'
 

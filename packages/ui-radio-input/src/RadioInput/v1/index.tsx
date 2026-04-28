@@ -27,7 +27,7 @@ import { Component } from 'react'
 import { omitProps, withDeterministicId } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 
-import { withStyleLegacy } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -41,7 +41,7 @@ category: components
 ---
 **/
 @withDeterministicId()
-@withStyleLegacy(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme)
 class RadioInput extends Component<RadioInputProps, RadioInputState> {
   static readonly componentId = 'RadioInput'
 

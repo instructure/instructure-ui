@@ -28,7 +28,7 @@ import { passthroughProps } from '@instructure/ui-react-utils'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { combineDataCid } from '@instructure/ui-utils'
 
-import { withStyleLegacy } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateComponentTheme from './theme'
 import { BaseButton } from '../../BaseButton/v1'
@@ -43,7 +43,7 @@ category: components
 **/
 
 // needed for listing the available theme variables on docs page
-@withStyleLegacy(null, generateComponentTheme)
+@withStyle(null, generateComponentTheme)
 class IconButton extends Component<IconButtonProps> {
   static readonly componentId = 'IconButton'
 

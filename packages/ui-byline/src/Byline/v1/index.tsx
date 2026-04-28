@@ -27,7 +27,7 @@ import { Component } from 'react'
 import { omitProps } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view/v11_6'
 
-import { withStyleLegacy } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -41,7 +41,7 @@ category: components
 ---
 **/
 
-@withStyleLegacy(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme)
 class Byline extends Component<BylineProps> {
   static readonly componentId = 'Byline'
 

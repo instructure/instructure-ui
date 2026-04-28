@@ -26,7 +26,7 @@ import { Component } from 'react'
 
 import { IconCheckSolid, IconXSolid } from '@instructure/ui-icons'
 
-import { withStyleLegacy } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -39,7 +39,7 @@ import type { ToggleFacadeProps } from './props'
 parent: Checkbox
 ---
 **/
-@withStyleLegacy(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme)
 class ToggleFacade extends Component<ToggleFacadeProps> {
   static readonly componentId = 'ToggleFacade'
 

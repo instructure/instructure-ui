@@ -33,7 +33,7 @@ import {
 import type { RequestAnimationFrameType } from '@instructure/ui-dom-utils'
 import { debounce } from '@instructure/debounce'
 import type { Debounced } from '@instructure/debounce'
-import { withStyleLegacy } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import { px } from '@instructure/ui-utils'
 import {
   omitProps,
@@ -53,7 +53,7 @@ category: components
 ---
 **/
 @withDeterministicId()
-@withStyleLegacy(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme)
 class TextArea extends Component<TextAreaProps> {
   static readonly componentId = 'TextArea'
 

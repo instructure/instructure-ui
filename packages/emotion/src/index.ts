@@ -27,7 +27,7 @@ export * from '@emotion/react'
 
 export { useComputedTheme } from './useComputedTheme'
 export { InstUISettingsProvider } from './InstUISettingsProvider'
-export { withStyleLegacy } from './withStyleLegacy'
+export { withStyle } from './withStyle'
 export { getComponentThemeOverride } from './getComponentThemeOverride'
 export { withStyleNew } from './withStyleNew'
 export {

@@ -31,7 +31,7 @@ import {
   IconMiniArrowDoubleLine
 } from '@instructure/ui-icons'
 
-import { withStyleLegacy } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -44,7 +44,7 @@ parent: Table
 id: Table.ColHeader
 ---
 **/
-@withStyleLegacy(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme)
 class ColHeader extends Component<TableColHeaderProps> {
   static readonly componentId = 'Table.ColHeader'
 
