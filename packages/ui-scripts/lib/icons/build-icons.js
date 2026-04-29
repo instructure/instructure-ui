@@ -32,6 +32,7 @@ import generateIconFonts from './generate-icon-fonts.js'
 import generateLegacyIconsData from './generate-legacy-icons-data.js'
 import generateLucideIndex from './generate-lucide-index.ts'
 import generateCustomIndex from './generate-custom-index.ts'
+import generateParchmentIndex from './generate-parchment-index.ts'
 import { pathToFileURL } from 'url'
 
 export default {
@@ -123,7 +124,7 @@ export default {
     })
 
     // write legacy-icons-data.json for the docs gallery
-    const legacyIconsData = generateLegacyIconsData()
+    const legacyIconsData = generateLegacyIconsData(svgSourceDir)
     const legacyOutputDir = path.join(
       process.cwd(),
       `${config.destination}/legacy/`
@@ -143,9 +144,12 @@ export default {
     )
 
     // generate Lucide icon index (src/generated/lucide/index.ts)
-    generateLucideIndex()
+    generateLucideIndex(svgSourceDir)
 
     // generate custom icon index (src/generated/custom/index.ts)
-    generateCustomIndex()
+    generateCustomIndex(svgSourceDir)
+
+    // generate parchment icon index (src/generated/parchment/index.tsx)
+    generateParchmentIndex(svgSourceDir)
   }
 }

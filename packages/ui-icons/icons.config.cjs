@@ -23,7 +23,7 @@
  */
 const libraryName = 'InstructureIcons'
 const packageName = '@instructure/ui-icons'
-const source = 'svg/'
+const source = '../ui-icons-svg/svg/'
 const destination = './src/generated/'
 
 const svg = {

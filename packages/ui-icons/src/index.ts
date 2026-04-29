@@ -32,9 +32,17 @@ export * from './generated/lucide'
 // Custom/brand icons
 export * from './generated/custom'
 
+// Parchment categories: themable icons, multi-color graphics, multi-color vectors
+export * from './generated/parchment/icons'
+export * from './generated/parchment/graphics'
+export * from './generated/parchment/vectors'
+
 // Re-export legacy icons for backwards compatibility
 export * from './generated'
 
 // Re-export as namespaces for cases where distinction is needed (e.g., icon gallery)
 export * as CustomIcons from './generated/custom'
 export * as LucideIcons from './generated/lucide'
+export * as ParchmentIcons from './generated/parchment/icons'
+export * as ParchmentGraphics from './generated/parchment/graphics'
+export * as ParchmentVectors from './generated/parchment/vectors'

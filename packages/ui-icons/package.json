@@ -29,6 +29,7 @@
   "license": "MIT",
   "devDependencies": {
     "@instructure/ui-babel-preset": "workspace:*",
+    "@instructure/ui-icons-svg": "workspace:*",
     "@types/node": "^22.5.4"
   },
   "dependencies": {

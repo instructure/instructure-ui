@@ -2381,9 +2381,14 @@ importers:
       '@instructure/ui-babel-preset':
         specifier: workspace:*
         version: link:../ui-babel-preset
+      '@instructure/ui-icons-svg':
+        specifier: workspace:*
+        version: link:../ui-icons-svg
       '@types/node':
         specifier: ^22.5.4
         version: 22.19.15
+
+  packages/ui-icons-svg: {}
 
   packages/ui-img:
     dependencies:

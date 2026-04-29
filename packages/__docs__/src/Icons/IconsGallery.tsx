@@ -22,7 +22,14 @@
  * SOFTWARE.
  */
 
-import { useState, memo, useCallback, useMemo, useRef } from 'react'
+import {
+  useState,
+  memo,
+  useCallback,
+  useMemo,
+  useRef,
+  type SyntheticEvent
+} from 'react'
 import type { ChangeEvent } from 'react'
 
 import { Heading } from '@instructure/ui-heading'
@@ -36,13 +43,26 @@ import {
 } from '@instructure/ui-a11y-content'
 import { Modal } from '@instructure/ui-modal'
 import { SourceCodeEditor } from '@instructure/ui-source-code-editor'
-import { LucideIcons, CustomIcons } from '@instructure/ui-icons'
+import {
+  LucideIcons,
+  CustomIcons,
+  ParchmentGraphics,
+  ParchmentIcons,
+  ParchmentVectors
+} from '@instructure/ui-icons'
 import { XInstUIIcon } from '@instructure/ui-icons'
 import { Flex } from '@instructure/ui-flex'
+import { SimpleSelect } from '@instructure/ui-simple-select'
+
+type OrgType = 'Instructure' | 'Parchment'
+
+type IconCategory = 'Icons' | 'Graphics' | 'Vectors'
 
 type IconInfo = {
   name: string
   component: React.ComponentType<any>
+  org: OrgType
+  iconCategory?: IconCategory
   importPath: string
 }
 
@@ -56,11 +76,34 @@ const allIcons: IconInfo[] = [
   ...Object.entries(LucideIcons).map(([name, component]) => ({
     name,
     component: component as React.ComponentType<any>,
+    org: 'Instructure' as OrgType,
     importPath: '@instructure/ui-icons'
   })),
   ...Object.entries(CustomIcons).map(([name, component]) => ({
     name,
     component: component as React.ComponentType<any>,
+    org: 'Instructure' as OrgType,
+    importPath: '@instructure/ui-icons'
+  })),
+  ...Object.entries(ParchmentGraphics).map(([name, component]) => ({
+    name,
+    component: component as React.ComponentType<any>,
+    org: 'Parchment' as OrgType,
+    iconCategory: 'Graphics',
+    importPath: '@instructure/ui-icons'
+  })),
+  ...Object.entries(ParchmentIcons).map(([name, component]) => ({
+    name,
+    component: component as React.ComponentType<any>,
+    org: 'Parchment' as OrgType,
+    iconCategory: 'Icons',
+    importPath: '@instructure/ui-icons'
+  })),
+  ...Object.entries(ParchmentVectors).map(([name, component]) => ({
+    name,
+    component: component as React.ComponentType<any>,
+    org: 'Parchment' as OrgType,
+    iconCategory: 'Vectors',
     importPath: '@instructure/ui-icons'
   }))
 ]
@@ -156,7 +199,12 @@ const IconTile = memo(
 IconTile.displayName = 'IconTile'
 
 const IconsGallery = () => {
+  const orgs = ['Instructure', 'Parchment'] as OrgType[]
   const [searchQuery, setSearchQuery] = useState<string>('')
+  const [selectedOrg, setSelectedOrg] = useState<OrgType>('Instructure')
+  const [selectedCategory, setSelectedCategory] = useState<
+    IconCategory | undefined
+  >(undefined)
   const [selectedIcon, setSelectedIcon] = useState<IconInfo | null>(null)
   const [rtl, setRtl] = useState<boolean>(false)
   const searchTimeoutId = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -178,6 +226,26 @@ const IconsGallery = () => {
     }, 500)
   }
 
+  const handleOrgChange = useCallback(
+    (_e: SyntheticEvent, { value }: { value?: string | number }) => {
+      setSelectedOrg(value as OrgType)
+
+      if (value === 'Parchment') {
+        setSelectedCategory('Icons')
+      } else {
+        setSelectedCategory(undefined)
+      }
+    },
+    []
+  )
+
+  const handleCategoryChange = useCallback(
+    (_e: SyntheticEvent, { value }: { value?: string | number }) => {
+      setSelectedCategory(value as IconCategory)
+    },
+    []
+  )
+
   const handleBidirectionToggle = useCallback((e: ChangeEvent<any>) => {
     setRtl(e.target.checked)
   }, [])
@@ -191,10 +259,18 @@ const IconsGallery = () => {
   }, [])
 
   const filteredIcons = useMemo(() => {
-    if (!searchQuery) return allIcons
-    const query = searchQuery.toLowerCase()
-    return allIcons.filter((icon) => icon.name.toLowerCase().includes(query))
-  }, [searchQuery])
+    const iconsByOrgAndCategory = allIcons
+      .filter((icon) => icon.org === selectedOrg)
+      .filter(
+        (icon) => !selectedCategory || icon.iconCategory === selectedCategory
+      )
+
+    return searchQuery
+      ? iconsByOrgAndCategory.filter((icon) =>
+          icon.name.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+      : iconsByOrgAndCategory
+  }, [searchQuery, selectedCategory, selectedOrg])
 
   return (
     <div>
@@ -208,6 +284,17 @@ const IconsGallery = () => {
           onChange={handleSearchChange}
           renderLabel={<ScreenReaderContent>Icon Name</ScreenReaderContent>}
         />
+        <SimpleSelect
+          name="org-select"
+          renderLabel={<ScreenReaderContent>Icon Format</ScreenReaderContent>}
+          onChange={handleOrgChange}
+        >
+          {orgs.map((org) => (
+            <SimpleSelect.Option value={org} id={org} key={org}>
+              {`${org} Icons`}
+            </SimpleSelect.Option>
+          ))}
+        </SimpleSelect>
         <Checkbox
           label={
             <AccessibleContent alt="Render icons with right-to-left text direction">
@@ -219,6 +306,30 @@ const IconsGallery = () => {
           onChange={handleBidirectionToggle}
         />
       </FormFieldGroup>
+      {selectedOrg === 'Parchment' && (
+        <>
+          <br />
+          <SimpleSelect
+            name="category-select"
+            renderLabel={
+              <ScreenReaderContent>
+                Icon Category (only for Parchment)
+              </ScreenReaderContent>
+            }
+            onChange={handleCategoryChange}
+          >
+            {['Icons', 'Graphics', 'Vectors'].map((category) => (
+              <SimpleSelect.Option
+                value={category}
+                id={category}
+                key={category}
+              >
+                {category}
+              </SimpleSelect.Option>
+            ))}
+          </SimpleSelect>
+        </>
+      )}
 
       <div
         css={{

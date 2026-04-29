@@ -58,15 +58,18 @@ const HEADER = `/*
  */
 `
 
-export default function generateLucideIndex() {
+export default function generateLucideIndex(svgSourceDir: string) {
   // Custom icons automatically shadow Lucide icons of the same name.
-  // Derived at build time from svg/Custom/ so it stays in sync automatically.
-  const customSvgDir = path.join(process.cwd(), 'svg/Custom')
+  // Parchment is intentionally NOT shadowed here: its exports are unsuffixed
+  // (e.g. `Phone`), so they don't collide with Lucide's `PhoneInstUIIcon`.
+  const customSvgDir = path.join(svgSourceDir, 'Custom')
   const EXCLUDED_ICONS = new Set(
-    fs
-      .readdirSync(customSvgDir)
-      .filter((f) => f.endsWith('.svg'))
-      .map((f) => toPascalCase(f.replace('.svg', '')))
+    fs.existsSync(customSvgDir)
+      ? fs
+          .readdirSync(customSvgDir)
+          .filter((f) => f.endsWith('.svg'))
+          .map((f) => toPascalCase(f.replace('.svg', '')))
+      : []
   )
 
   const allLucideIcons = Object.keys(lucideReact).filter((key) => {
