@@ -39,8 +39,8 @@ import { promisify } from 'node:util'
 export const transformThemes = (themes: any, input: any) =>
   //TODO-rework the Primitive theme is a hackaround for design and only for the duration of the v12 work. This should be removed before the release (.filter(t=>t!=="Primitive"))
   themes
-    .filter((t) => t.name !== 'Primitive')
-    .reduce((acc, theme) => {
+    .filter((t: any) => t.name !== 'Primitive')
+    .reduce((acc: any, theme: any) => {
       const tokenSets = Object.entries(theme.selectedTokenSets).reduce(
         (acc, [path, status]) => {
           const value = path
@@ -63,7 +63,7 @@ export const transformThemes = (themes: any, input: any) =>
           }
           return acc
         },
-        { primitives: null, semantic: [], components: [] }
+        { primitives: null, semantic: [], components: [] } as any
       )
 
       return { ...acc, [theme.name]: tokenSets }
@@ -145,15 +145,14 @@ const setupThemes = async (targetPath: string, input: any): Promise<void> => {
       const rawComponentName = component.name
       // e.g. ['tabs', 'tabsPanel', 'tabsTab']
       const componentAndSubComponents = Object.keys(component.data)
-      const componentNameDict = {}
+      const componentNameDict: Record<string, boolean> = {}
       for (let i = 0; i < componentAndSubComponents.length; i++) {
         // e.g. 'tag' or 'menuSeparator'
         const fullComponentName = componentAndSubComponents[i]
         if (componentNameDict[fullComponentName]) {
           throw new Error(
-            'Component names must be unique. The following name' +
-              ' appears more than once: ',
-            fullComponentName
+            'Component names must be unique. The following name appears more than once: ' +
+              fullComponentName
           )
         } else {
           componentNameDict[fullComponentName] = true
@@ -380,7 +379,7 @@ const setupThemes = async (targetPath: string, input: any): Promise<void> => {
       console.error('[dprint error]:', stderr)
     }
   } catch (error) {
-    throw new Error('dprint: ' + error.message)
+    throw new Error('dprint: ' + (error as any).message)
   }
 }
 

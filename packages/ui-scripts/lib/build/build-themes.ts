@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+// @ts-ignore -- package ships JS source without type declarations
 import { themeTokens } from '@instructure/instructure-design-tokens'
 import setupThemes from './buildThemes/setupThemes.ts'
 

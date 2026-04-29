@@ -94,7 +94,7 @@ export const resolveTypeReferences = (semantics: any, key?: any): string => {
     return `Primitives${value
       .slice(1, -1)
       .split('.')
-      .map((val) => `['${val}']`)
+      .map((val: string) => `['${val}']`)
       .join('')}, `
   }
 
