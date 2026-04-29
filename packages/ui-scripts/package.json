@@ -22,6 +22,7 @@
   "dependencies": {
     "@babel/cli": "^7.27.2",
     "@instructure/command-utils": "workspace:*",
+    "@instructure/instructure-design-tokens": "github:instructure/instructure-design-tokens",
     "@instructure/pkg-utils": "workspace:*",
     "@lerna/project": "^6.4.1",
     "dprint": "^0.53.2",

@@ -28,7 +28,7 @@ import { generatePrimitives, generateType } from './generatePrimitives.js'
 import generateSemantics, {
   generateSemanticsType,
   mergeSemanticSets
-} from './generateSemantics.js'
+} from './generateSemantics.ts'
 import generateComponent, {
   generateComponentType
 } from './generateComponents.js'
@@ -36,34 +36,45 @@ import { exec } from 'child_process'
 import { promisify } from 'node:util'
 
 // transform to an object for easier handling
-export const transformThemes = (themes) =>
+export const transformThemes = (themes: any, input: any) =>
   //TODO-rework the Primitive theme is a hackaround for design and only for the duration of the v12 work. This should be removed before the release (.filter(t=>t!=="Primitive"))
   themes
     .filter((t) => t.name !== 'Primitive')
     .reduce((acc, theme) => {
-      const tokenSets = Object.keys(theme.selectedTokenSets).reduce(
-        (acc, tokenSet) => {
-          if (tokenSet.includes('primitives')) {
-            return { ...acc, primitives: tokenSet }
+      const tokenSets = Object.entries(theme.selectedTokenSets).reduce(
+        (acc, [path, status]) => {
+          const value = path
+            .split('/')
+            .reduce((node, key) => node?.[key], input)
+          if (path.includes('primitives')) {
+            return { ...acc, primitives: value }
           }
-          if (tokenSet.includes('semantic')) {
-            return { ...acc, semantic: [...acc.semantic, tokenSet] }
+          if (path.includes('semantic')) {
+            return { ...acc, semantic: [...acc.semantic, value] }
           }
-          if (theme.selectedTokenSets[tokenSet] === 'enabled') {
-            return { ...acc, components: [...acc.components, tokenSet] }
+          if (status === 'enabled') {
+            return {
+              ...acc,
+              components: [
+                ...acc.components,
+                { name: path.split('/').at(-1), data: value }
+              ]
+            }
           }
           return acc
         },
-        { primitives: '', semantic: '', components: [] }
+        { primitives: null, semantic: [], components: [] }
       )
 
       return { ...acc, [theme.name]: tokenSets }
     }, {})
 
-const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1)
-const unCapitalize = (str) => str.charAt(0).toLowerCase() + str.slice(1)
+const capitalize = (str: string): string =>
+  str.charAt(0).toUpperCase() + str.slice(1)
+const unCapitalize = (str: string): string =>
+  str.charAt(0).toLowerCase() + str.slice(1)
 
-const getTypeImports = (componentTypes, theme) => {
+const getTypeImports = (componentTypes: any, theme: any): string => {
   let imports = ''
   if (componentTypes.includes(`Semantics[`)) {
     imports =
@@ -86,7 +97,7 @@ const getTypeImports = (componentTypes, theme) => {
   return imports
 }
 
-const setupThemes = async (targetPath, input) => {
+const setupThemes = async (targetPath: string, input: any): Promise<void> => {
   //clear old themes
   await promises.rm(targetPath, { recursive: true, force: true })
   //make new root folder
@@ -95,7 +106,7 @@ const setupThemes = async (targetPath, input) => {
   // we need to put sharedTokensTypes to the commonTypes where it makes sense, however it comes from token studio as a component. This variable is seen by both parts of the code
   let sharedTokensTypes = ''
 
-  const themeData = transformThemes(input['$themes'])
+  const themeData = transformThemes(input['$themes'], input)
   //TODO-rework the Primitive theme is a hackaround for design and only for the duration of the v12 work. This should be removed before the release (.filter(t=>t!=="Primitive"))
   const themes = Object.keys(themeData).filter((t) => t !== 'Primitive')
   for (let themeIndex = 0; themeIndex < themes.length; themeIndex++) {
@@ -104,7 +115,7 @@ const setupThemes = async (targetPath, input) => {
     await promises.mkdir(themePath, { recursive: true })
 
     // primitives
-    const primitives = generatePrimitives(input[themeData[theme].primitives])
+    const primitives = generatePrimitives(themeData[theme].primitives)
     const primitiveTypes = generateType(primitives)
     const primitivesFileContent = `
           export type Primitives = ${primitiveTypes}
@@ -115,10 +126,7 @@ const setupThemes = async (targetPath, input) => {
     await createFile(`${themePath}/primitives.ts`, primitivesFileContent)
 
     // semantics
-    const mergedSemanticData = mergeSemanticSets(
-      input,
-      themeData[theme].semantic
-    )
+    const mergedSemanticData = mergeSemanticSets(themeData[theme].semantic)
     const semantics = generateSemantics(mergedSemanticData)
     const semanticsTypes = generateSemanticsType(mergedSemanticData)
     const semanticsFileContent = `
@@ -133,11 +141,10 @@ const setupThemes = async (targetPath, input) => {
 
     const componentAndSubcomponentNames = []
     //components
-    for (const componentpath of themeData[theme].components) {
-      const rawComponentName =
-        componentpath.split('/')[componentpath.split('/').length - 1]
+    for (const component of themeData[theme].components) {
+      const rawComponentName = component.name
       // e.g. ['tabs', 'tabsPanel', 'tabsTab']
-      const componentAndSubComponents = Object.keys(input[componentpath])
+      const componentAndSubComponents = Object.keys(component.data)
       const componentNameDict = {}
       for (let i = 0; i < componentAndSubComponents.length; i++) {
         // e.g. 'tag' or 'menuSeparator'
@@ -155,11 +162,11 @@ const setupThemes = async (targetPath, input) => {
           componentAndSubcomponentNames.push(fullComponentName)
         }
         const componentThemeVars = generateComponent(
-          input[componentpath][fullComponentName]
+          component.data[fullComponentName]
         )
 
         const componentTypes = generateComponentType(
-          input[componentpath][fullComponentName]
+          component.data[fullComponentName]
         )
         const usesSemantic = componentThemeVars.includes('semantics.')
 
@@ -368,7 +375,6 @@ const setupThemes = async (targetPath, input) => {
     const { stdout, stderr } = await execAsync(
       "dprint fmt '" + targetPath + "/**/*.*'"
     )
-    // eslint-disable-next-line no-console
     console.log('[dprint]', stdout)
     if (stderr) {
       console.error('[dprint error]:', stderr)

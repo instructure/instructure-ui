@@ -70,10 +70,10 @@ importers:
         version: 18.3.1
       '@vitejs/plugin-react':
         specifier: ^4.5.1
-        version: 4.7.0(vite@7.3.1(@types/node@22.19.15)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.3))
+        version: 4.7.0(vite@7.3.1(@types/node@22.19.15)(jiti@2.6.1)(terser@5.46.2)(yaml@2.8.3))
       '@vitest/eslint-plugin':
         specifier: ^1.6.14
-        version: 1.6.14(@typescript-eslint/eslint-plugin@8.58.0(@typescript-eslint/parser@8.58.0(eslint@9.39.4(jiti@2.6.1))(typescript@6.0.2))(eslint@9.39.4(jiti@2.6.1))(typescript@6.0.2))(eslint@9.39.4(jiti@2.6.1))(typescript@6.0.2)(vitest@3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3))
+        version: 1.6.14(@typescript-eslint/eslint-plugin@8.58.0(@typescript-eslint/parser@8.58.0(eslint@9.39.4(jiti@2.6.1))(typescript@6.0.2))(eslint@9.39.4(jiti@2.6.1))(typescript@6.0.2))(eslint@9.39.4(jiti@2.6.1))(typescript@6.0.2)(vitest@3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3))
       babel-plugin-add-import-extension:
         specifier: ^1.6.0
         version: 1.6.0(@babel/core@7.29.0)
@@ -154,7 +154,7 @@ importers:
         version: 8.58.0(eslint@9.39.4(jiti@2.6.1))(typescript@6.0.2)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
       webpack:
         specifier: ^5.105.4
         version: 5.105.4(esbuild@0.27.7)
@@ -421,7 +421,7 @@ importers:
         version: link:../ui-view
       babel-loader:
         specifier: ^10.0.0
-        version: 10.1.1(@babel/core@7.29.0)(webpack@5.105.4(esbuild@0.27.7))
+        version: 10.1.1(@babel/core@7.29.0)(webpack@5.106.2(esbuild@0.27.7))
       buffer:
         specifier: ^6.0.3
         version: 6.0.3
@@ -470,7 +470,7 @@ importers:
         version: 3.6.0
       css-loader:
         specifier: ^4.0.0
-        version: 4.3.0(webpack@5.105.4(esbuild@0.27.7))
+        version: 4.3.0(webpack@5.106.2(esbuild@0.27.7))
       globby:
         specifier: ^14.1.0
         version: 14.1.0
@@ -479,19 +479,19 @@ importers:
         version: 4.0.3
       html-webpack-plugin:
         specifier: ^5.6.3
-        version: 5.6.6(webpack@5.105.4(esbuild@0.27.7))
+        version: 5.6.6(webpack@5.106.2(esbuild@0.27.7))
       mkdirp:
         specifier: ^3.0.1
         version: 3.0.1
       raw-loader:
         specifier: ^4.0.2
-        version: 4.0.2(webpack@5.105.4(esbuild@0.27.7))
+        version: 4.0.2(webpack@5.106.2(esbuild@0.27.7))
       react-docgen:
         specifier: ^8.0.0
         version: 8.0.3
       style-loader:
         specifier: ^4.0.0
-        version: 4.0.0(webpack@5.105.4(esbuild@0.27.7))
+        version: 4.0.0(webpack@5.106.2(esbuild@0.27.7))
       svg-inline-loader:
         specifier: ^0.8.2
         version: 0.8.2
@@ -620,7 +620,7 @@ importers:
         version: 18.3.1(react@18.3.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/pkg-utils:
     dependencies:
@@ -891,7 +891,7 @@ importers:
         version: 15.0.7(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-a11y-utils:
     dependencies:
@@ -934,7 +934,7 @@ importers:
         version: 15.0.7(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-alerts:
     dependencies:
@@ -998,7 +998,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-avatar:
     dependencies:
@@ -1041,7 +1041,7 @@ importers:
         version: 15.0.7(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-axe-check:
     dependencies:
@@ -1111,7 +1111,7 @@ importers:
         version: link:../browserslist-config-instui
       babel-loader:
         specifier: ^10.0.0
-        version: 10.1.1(@babel/core@7.29.0)(webpack@5.105.4(esbuild@0.27.7))
+        version: 10.1.1(@babel/core@7.29.0)(webpack@5.106.2(esbuild@0.27.7))
       babel-plugin-dynamic-import-node:
         specifier: ^2.3.3
         version: 2.3.3
@@ -1175,7 +1175,7 @@ importers:
         version: 15.0.7(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-billboard:
     dependencies:
@@ -1227,7 +1227,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-breadcrumb:
     dependencies:
@@ -1282,7 +1282,7 @@ importers:
         version: 15.0.7(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-buttons:
     dependencies:
@@ -1352,7 +1352,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-byline:
     dependencies:
@@ -1392,7 +1392,7 @@ importers:
         version: 15.0.7(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-calendar:
     dependencies:
@@ -1456,7 +1456,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-checkbox:
     dependencies:
@@ -1523,7 +1523,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-codemods:
     dependencies:
@@ -1551,7 +1551,7 @@ importers:
         version: 0.25.12
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-color-picker:
     dependencies:
@@ -1639,7 +1639,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-color-utils:
     dependencies:
@@ -1722,7 +1722,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-date-time-input:
     dependencies:
@@ -1780,7 +1780,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-decorator:
     dependencies:
@@ -1827,7 +1827,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-dom-utils:
     dependencies:
@@ -1852,7 +1852,7 @@ importers:
         version: 15.0.7(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-drawer-layout:
     dependencies:
@@ -1919,7 +1919,7 @@ importers:
         version: 15.0.7(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-drilldown:
     dependencies:
@@ -1989,7 +1989,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-editable:
     dependencies:
@@ -2047,7 +2047,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-expandable:
     dependencies:
@@ -2087,7 +2087,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-file-drop:
     dependencies:
@@ -2142,7 +2142,7 @@ importers:
         version: 15.0.7(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-flex:
     dependencies:
@@ -2182,7 +2182,7 @@ importers:
         version: 15.0.7(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-focusable:
     dependencies:
@@ -2222,7 +2222,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-form-field:
     dependencies:
@@ -2277,7 +2277,7 @@ importers:
         version: 15.0.7(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-grid:
     dependencies:
@@ -2320,7 +2320,7 @@ importers:
         version: 15.0.7(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-heading:
     dependencies:
@@ -2363,7 +2363,7 @@ importers:
         version: 15.0.7(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-i18n:
     dependencies:
@@ -2409,7 +2409,7 @@ importers:
         version: 18.3.1(react@18.3.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-icons:
     dependencies:
@@ -2489,7 +2489,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-instructure:
     dependencies:
@@ -2550,7 +2550,7 @@ importers:
         version: 15.0.7(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-link:
     dependencies:
@@ -2608,7 +2608,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-list:
     dependencies:
@@ -2651,7 +2651,7 @@ importers:
         version: 15.0.7(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-menu:
     dependencies:
@@ -2718,7 +2718,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-metric:
     dependencies:
@@ -2758,7 +2758,7 @@ importers:
         version: 15.0.7(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-modal:
     dependencies:
@@ -2825,7 +2825,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-motion:
     dependencies:
@@ -2862,7 +2862,7 @@ importers:
         version: 15.0.7(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-navigation:
     dependencies:
@@ -2944,7 +2944,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-number-input:
     dependencies:
@@ -2999,7 +2999,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-options:
     dependencies:
@@ -3048,7 +3048,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-overlays:
     dependencies:
@@ -3130,7 +3130,7 @@ importers:
         version: 2.1.2
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-pages:
     dependencies:
@@ -3179,7 +3179,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-pagination:
     dependencies:
@@ -3252,7 +3252,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-pill:
     dependencies:
@@ -3310,7 +3310,7 @@ importers:
         version: 15.0.7(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-popover:
     dependencies:
@@ -3380,7 +3380,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-portal:
     dependencies:
@@ -3417,7 +3417,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-position:
     dependencies:
@@ -3466,7 +3466,7 @@ importers:
         version: 15.0.7(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-progress:
     dependencies:
@@ -3512,7 +3512,7 @@ importers:
         version: 15.0.7(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-radio-input:
     dependencies:
@@ -3561,7 +3561,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-range-input:
     dependencies:
@@ -3619,7 +3619,7 @@ importers:
         version: 15.0.7(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-rating:
     dependencies:
@@ -3671,7 +3671,7 @@ importers:
         version: 15.0.7(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-react-utils:
     dependencies:
@@ -3711,7 +3711,7 @@ importers:
         version: 15.0.7(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-responsive:
     dependencies:
@@ -3751,7 +3751,7 @@ importers:
         version: 15.0.7(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-scripts:
     dependencies:
@@ -3761,6 +3761,9 @@ importers:
       '@instructure/command-utils':
         specifier: workspace:*
         version: link:../command-utils
+      '@instructure/instructure-design-tokens':
+        specifier: github:instructure/instructure-design-tokens
+        version: https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/d87b92d37b45aba8fb40707c2bbde69ec7bcc7bd
       '@instructure/pkg-utils':
         specifier: workspace:*
         version: link:../pkg-utils
@@ -3793,10 +3796,10 @@ importers:
         version: 4.4.0
       webpack-cli:
         specifier: ^7.0.2
-        version: 7.0.2(webpack-bundle-analyzer@4.10.2)(webpack-dev-server@5.2.3)(webpack@5.105.4)
+        version: 7.0.2(webpack-bundle-analyzer@4.10.2)(webpack-dev-server@5.2.3)(webpack@5.106.2)
       webpack-dev-server:
         specifier: ^5.2.3
-        version: 5.2.3(webpack-cli@7.0.2)(webpack@5.105.4)
+        version: 5.2.3(webpack-cli@7.0.2)(webpack@5.106.2)
       yargs:
         specifier: ^17.7.2
         version: 17.7.2
@@ -3879,7 +3882,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-selectable:
     dependencies:
@@ -3919,7 +3922,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-side-nav-bar:
     dependencies:
@@ -3977,7 +3980,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-simple-select:
     dependencies:
@@ -4026,7 +4029,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-source-code-editor:
     dependencies:
@@ -4123,7 +4126,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-spinner:
     dependencies:
@@ -4172,7 +4175,7 @@ importers:
         version: 15.0.7(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-svg-images:
     dependencies:
@@ -4212,7 +4215,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-table:
     dependencies:
@@ -4270,7 +4273,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-tabs:
     dependencies:
@@ -4340,7 +4343,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-tag:
     dependencies:
@@ -4392,7 +4395,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-text:
     dependencies:
@@ -4487,7 +4490,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-text-input:
     dependencies:
@@ -4542,7 +4545,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-theme-tokens:
     dependencies:
@@ -4577,7 +4580,7 @@ importers:
         version: 15.0.7(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-time-select:
     dependencies:
@@ -4623,7 +4626,7 @@ importers:
         version: 0.6.1
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-toggle-details:
     dependencies:
@@ -4687,7 +4690,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-tooltip:
     dependencies:
@@ -4736,7 +4739,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-top-nav-bar:
     dependencies:
@@ -4830,7 +4833,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-tray:
     dependencies:
@@ -4888,7 +4891,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-tree-browser:
     dependencies:
@@ -4937,7 +4940,7 @@ importers:
         version: 15.0.7(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-truncate-list:
     dependencies:
@@ -4986,7 +4989,7 @@ importers:
         version: 15.0.7(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-truncate-text:
     dependencies:
@@ -5044,7 +5047,7 @@ importers:
         version: 1.0.4
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-utils:
     dependencies:
@@ -5084,7 +5087,7 @@ importers:
         version: 15.0.7(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-view:
     dependencies:
@@ -5133,7 +5136,7 @@ importers:
         version: 15.0.7(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
   packages/ui-webpack-config:
     dependencies:
@@ -5173,7 +5176,7 @@ importers:
         version: 6.9.1
       vitest:
         specifier: ^3.2.2
-        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+        version: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
 
 packages:
 
@@ -6632,6 +6635,10 @@ packages:
       '@types/node':
         optional: true
 
+  '@instructure/instructure-design-tokens@https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/d87b92d37b45aba8fb40707c2bbde69ec7bcc7bd':
+    resolution: {tarball: https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/d87b92d37b45aba8fb40707c2bbde69ec7bcc7bd}
+    version: 1.0.0
+
   '@isaacs/cliui@8.0.2':
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
     engines: {node: '>=12'}
@@ -7690,7 +7697,7 @@ packages:
   '@xmldom/xmldom@0.7.13':
     resolution: {integrity: sha512-lm2GW5PkosIzccsaZIz7tp8cPADSIlIHWDFTR1N0SzfinhhYgeIQjFMz4rYzanCScr3DqQLeomUDArp6MWKm+g==}
     engines: {node: '>=10.0.0'}
-    deprecated: this version has critical issues, please update to the latest version
+    deprecated: this version is no longer supported, please update to at least 0.8.*
 
   '@xtuc/ieee754@1.2.0':
     resolution: {integrity: sha512-DX8nKgqcGwsc0eJSqYt5lwP4DH5FlHnmuWWBRy7X0NcaGR0ZtuyeESgMwTYVEtxmsNGY+qit4QYT/MIYTOTPeA==}
@@ -9124,6 +9131,10 @@ packages:
     resolution: {integrity: sha512-Qohcme7V1inbAfvjItgw0EaxVX5q2rdVEZHRBrEQdRZTssLDGsL8Lwrznl8oQ/6kuTJONLaDcGjkNP247XEhcA==}
     engines: {node: '>=10.13.0'}
 
+  enhanced-resolve@5.21.0:
+    resolution: {integrity: sha512-otxSQPw4lkOZWkHpB3zaEQs6gWYEsmX4xQF68ElXC/TWvGxGMSGOvoNbaLXm6/cS/fSfHtsEdw90y20PCd+sCA==}
+    engines: {node: '>=10.13.0'}
+
   enquirer@2.3.6:
     resolution: {integrity: sha512-yjNnPr315/FjS4zIsUxYguYUPP2e1NK4d7E7ZOLiyYCcbFBiTMyID+2wvm2w6+pZ/odMA7cRkjhsPbltwBOrLg==}
     engines: {node: '>=8.6'}
@@ -9195,6 +9206,9 @@ packages:
 
   es-module-lexer@2.0.0:
     resolution: {integrity: sha512-5POEcUuZybH7IdmGsD8wlf0AI55wMecM9rVBTI/qEAy2c1kTOm3DjFYjrBdI2K3BaJjJYfYFeRtM0t9ssnRuxw==}
+
+  es-module-lexer@2.1.0:
+    resolution: {integrity: sha512-n27zTYMjYu1aj4MjCWzSP7G9r75utsaoc8m61weK+W8JMBGGQybd43GstCXZ3WNmSFtGT9wi59qQTW6mhTR5LQ==}
 
   es-object-atoms@1.1.1:
     resolution: {integrity: sha512-FGgH2h8zKNim9ljj7dankFPcICIK9Cp5bm+c2gQSYePhpaG5+esrLODihIorn+Pe6FGJzWhXQotPv73jTaldXA==}
@@ -10856,6 +10870,10 @@ packages:
 
   loader-runner@4.3.1:
     resolution: {integrity: sha512-IWqP2SCPhyVFTBtRcgMHdzlf9ul25NwaFx4wCEH/KjAXuuHY4yNjvPXsBokp8jCB936PyWRaPKUNh8NvylLp2Q==}
+    engines: {node: '>=6.11.5'}
+
+  loader-runner@4.3.2:
+    resolution: {integrity: sha512-DFEqQ3ihfS9blba08cLfYf1NRAIEm+dDjic073DRDc3/JspI/8wYmtDsHwd3+4hwvdxSK7PGaElfTmm0awWJ4w==}
     engines: {node: '>=6.11.5'}
 
   loader-utils@1.4.2:
@@ -12903,6 +12921,10 @@ packages:
     resolution: {integrity: sha512-1MOpMXuhGzGL5TTCZFItxCc0AARf1EZFQkGqMm7ERKj8+Hgr5oLvJOVFcC+lRmR8hCe2S3jC4T5D7Vg/d7/fhA==}
     engines: {node: '>=6'}
 
+  tapable@2.3.3:
+    resolution: {integrity: sha512-uxc/zpqFg6x7C8vOE7lh6Lbda8eEL9zmVm/PLeTPBRhh1xCgdWaQ+J1CUieGpIfm2HdtsUpRv+HshiasBMcc6A==}
+    engines: {node: '>=6'}
+
   tar-fs@1.16.6:
     resolution: {integrity: sha512-JkOgFt3FxM/2v2CNpAVHqMW2QASjc/Hxo7IGfNd3MHaDYSW/sBFiS7YVmmhmr8x6vwN1VFQDQGdT2MWpmIuVKA==}
 
@@ -12947,8 +12969,29 @@ packages:
       uglify-js:
         optional: true
 
+  terser-webpack-plugin@5.5.0:
+    resolution: {integrity: sha512-UYhptBwhWvfIjKd/UuFo6D8uq9xpGLDK+z8EDsj/zWhrTaH34cKEbrkMKfV5YWqGBvAYA3tlzZbs2R+qYrbQJA==}
+    engines: {node: '>= 10.13.0'}
+    peerDependencies:
+      '@swc/core': '*'
+      esbuild: '*'
+      uglify-js: '*'
+      webpack: ^5.1.0
+    peerDependenciesMeta:
+      '@swc/core':
+        optional: true
+      esbuild:
+        optional: true
+      uglify-js:
+        optional: true
+
   terser@5.46.1:
     resolution: {integrity: sha512-vzCjQO/rgUuK9sf8VJZvjqiqiHFaZLnOiimmUuOKODxWL8mm/xua7viT7aqX7dgPY60otQjUotzFMmCB4VdmqQ==}
+    engines: {node: '>=10'}
+    hasBin: true
+
+  terser@5.46.2:
+    resolution: {integrity: sha512-uxfo9fPcSgLDYob/w1FuL0c99MWiJDnv+5qXSQc5+Ki5NjVNsYi66INnMFBjf6uFz6OnX12piJQPF4IpjJTNTw==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -13512,8 +13555,22 @@ packages:
     resolution: {integrity: sha512-7tP1PdV4vF+lYPnkMR0jMY5/la2ub5Fc/8VQrrU+lXkiM6C4TjVfGw7iKfyhnTQOsD+6Q/iKw0eFciziRgD58Q==}
     engines: {node: '>=10.13.0'}
 
+  webpack-sources@3.4.0:
+    resolution: {integrity: sha512-gHwIe1cgBvvfLeu1Yz/dcFpmHfKDVxxyqI+kzqmuxZED81z2ChxpyqPaWcNqigPywhaEke7AjSGga+kxY55gjQ==}
+    engines: {node: '>=10.13.0'}
+
   webpack@5.105.4:
     resolution: {integrity: sha512-jTywjboN9aHxFlToqb0K0Zs9SbBoW4zRUlGzI2tYNxVYcEi/IPpn+Xi4ye5jTLvX2YeLuic/IvxNot+Q1jMoOw==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
+    peerDependencies:
+      webpack-cli: '*'
+    peerDependenciesMeta:
+      webpack-cli:
+        optional: true
+
+  webpack@5.106.2:
+    resolution: {integrity: sha512-wGN3qcrBQIFmQ/c0AiOAQBvrZ5lmY8vbbMv4Mxfgzqd/B6+9pXtLo73WuS1dSGXM5QYY3hZnIbvx+K1xxe6FyA==}
     engines: {node: '>=10.13.0'}
     hasBin: true
     peerDependencies:
@@ -15404,6 +15461,10 @@ snapshots:
     optionalDependencies:
       '@types/node': 22.19.15
 
+  '@instructure/instructure-design-tokens@https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/d87b92d37b45aba8fb40707c2bbde69ec7bcc7bd':
+    dependencies:
+      glob: 13.0.6
+
   '@isaacs/cliui@8.0.2':
     dependencies:
       string-width: 5.1.2
@@ -16534,7 +16595,7 @@ snapshots:
       '@typescript-eslint/types': 8.58.0
       eslint-visitor-keys: 5.0.1
 
-  '@vitejs/plugin-react@4.7.0(vite@7.3.1(@types/node@22.19.15)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.3))':
+  '@vitejs/plugin-react@4.7.0(vite@7.3.1(@types/node@22.19.15)(jiti@2.6.1)(terser@5.46.2)(yaml@2.8.3))':
     dependencies:
       '@babel/core': 7.29.0
       '@babel/plugin-transform-react-jsx-self': 7.27.1(@babel/core@7.29.0)
@@ -16542,11 +16603,11 @@ snapshots:
       '@rolldown/pluginutils': 1.0.0-beta.27
       '@types/babel__core': 7.20.5
       react-refresh: 0.17.0
-      vite: 7.3.1(@types/node@22.19.15)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.3)
+      vite: 7.3.1(@types/node@22.19.15)(jiti@2.6.1)(terser@5.46.2)(yaml@2.8.3)
     transitivePeerDependencies:
       - supports-color
 
-  '@vitest/eslint-plugin@1.6.14(@typescript-eslint/eslint-plugin@8.58.0(@typescript-eslint/parser@8.58.0(eslint@9.39.4(jiti@2.6.1))(typescript@6.0.2))(eslint@9.39.4(jiti@2.6.1))(typescript@6.0.2))(eslint@9.39.4(jiti@2.6.1))(typescript@6.0.2)(vitest@3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3))':
+  '@vitest/eslint-plugin@1.6.14(@typescript-eslint/eslint-plugin@8.58.0(@typescript-eslint/parser@8.58.0(eslint@9.39.4(jiti@2.6.1))(typescript@6.0.2))(eslint@9.39.4(jiti@2.6.1))(typescript@6.0.2))(eslint@9.39.4(jiti@2.6.1))(typescript@6.0.2)(vitest@3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3))':
     dependencies:
       '@typescript-eslint/scope-manager': 8.58.0
       '@typescript-eslint/utils': 8.58.0(eslint@9.39.4(jiti@2.6.1))(typescript@6.0.2)
@@ -16554,7 +16615,7 @@ snapshots:
     optionalDependencies:
       '@typescript-eslint/eslint-plugin': 8.58.0(@typescript-eslint/parser@8.58.0(eslint@9.39.4(jiti@2.6.1))(typescript@6.0.2))(eslint@9.39.4(jiti@2.6.1))(typescript@6.0.2)
       typescript: 6.0.2
-      vitest: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3)
+      vitest: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3)
     transitivePeerDependencies:
       - supports-color
 
@@ -16566,13 +16627,13 @@ snapshots:
       chai: 5.3.3
       tinyrainbow: 2.0.0
 
-  '@vitest/mocker@3.2.4(vite@7.3.1(@types/node@22.19.15)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.3))':
+  '@vitest/mocker@3.2.4(vite@7.3.1(@types/node@22.19.15)(jiti@2.6.1)(terser@5.46.2)(yaml@2.8.3))':
     dependencies:
       '@vitest/spy': 3.2.4
       estree-walker: 3.0.3
       magic-string: 0.30.21
     optionalDependencies:
-      vite: 7.3.1(@types/node@22.19.15)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.3)
+      vite: 7.3.1(@types/node@22.19.15)(jiti@2.6.1)(terser@5.46.2)(yaml@2.8.3)
 
   '@vitest/pretty-format@3.2.4':
     dependencies:
@@ -16987,12 +17048,12 @@ snapshots:
     dependencies:
       '@babel/core': 7.29.0
 
-  babel-loader@10.1.1(@babel/core@7.29.0)(webpack@5.105.4(esbuild@0.27.7)):
+  babel-loader@10.1.1(@babel/core@7.29.0)(webpack@5.106.2(esbuild@0.27.7)):
     dependencies:
       '@babel/core': 7.29.0
       find-up: 5.0.0
     optionalDependencies:
-      webpack: 5.105.4(esbuild@0.27.7)
+      webpack: 5.106.2(esbuild@0.27.7)
 
   babel-plugin-add-import-extension@1.6.0(@babel/core@7.29.0):
     dependencies:
@@ -17806,7 +17867,7 @@ snapshots:
 
   crypto-random-string@1.0.0: {}
 
-  css-loader@4.3.0(webpack@5.105.4(esbuild@0.27.7)):
+  css-loader@4.3.0(webpack@5.106.2(esbuild@0.27.7)):
     dependencies:
       camelcase: 6.3.0
       cssesc: 3.0.0
@@ -17820,7 +17881,7 @@ snapshots:
       postcss-value-parser: 4.2.0
       schema-utils: 2.7.1
       semver: 7.7.4
-      webpack: 5.105.4(esbuild@0.27.7)
+      webpack: 5.106.2(esbuild@0.27.7)
 
   css-loader@7.1.4(webpack@5.105.4(esbuild@0.27.7)):
     dependencies:
@@ -18258,6 +18319,11 @@ snapshots:
       graceful-fs: 4.2.11
       tapable: 2.3.2
 
+  enhanced-resolve@5.21.0:
+    dependencies:
+      graceful-fs: 4.2.11
+      tapable: 2.3.3
+
   enquirer@2.3.6:
     dependencies:
       ansi-colors: 4.1.3
@@ -18375,6 +18441,8 @@ snapshots:
   es-module-lexer@1.7.0: {}
 
   es-module-lexer@2.0.0: {}
+
+  es-module-lexer@2.1.0: {}
 
   es-object-atoms@1.1.1:
     dependencies:
@@ -19450,7 +19518,7 @@ snapshots:
       relateurl: 0.2.7
       terser: 5.46.1
 
-  html-webpack-plugin@5.6.6(webpack@5.105.4(esbuild@0.27.7)):
+  html-webpack-plugin@5.6.6(webpack@5.106.2(esbuild@0.27.7)):
     dependencies:
       '@types/html-minifier-terser': 6.1.0
       html-minifier-terser: 6.1.0
@@ -19458,7 +19526,7 @@ snapshots:
       pretty-error: 4.0.0
       tapable: 2.3.2
     optionalDependencies:
-      webpack: 5.105.4(esbuild@0.27.7)
+      webpack: 5.106.2(esbuild@0.27.7)
 
   htmlparser2@6.1.0:
     dependencies:
@@ -20435,6 +20503,8 @@ snapshots:
       type-fest: 0.6.0
 
   loader-runner@4.3.1: {}
+
+  loader-runner@4.3.2: {}
 
   loader-utils@1.4.2:
     dependencies:
@@ -21916,11 +21986,11 @@ snapshots:
       iconv-lite: 0.4.24
       unpipe: 1.0.0
 
-  raw-loader@4.0.2(webpack@5.105.4(esbuild@0.27.7)):
+  raw-loader@4.0.2(webpack@5.106.2(esbuild@0.27.7)):
     dependencies:
       loader-utils: 2.0.4
       schema-utils: 3.3.0
-      webpack: 5.105.4(esbuild@0.27.7)
+      webpack: 5.106.2(esbuild@0.27.7)
 
   rc@1.2.8:
     dependencies:
@@ -22807,6 +22877,10 @@ snapshots:
     dependencies:
       webpack: 5.105.4(esbuild@0.27.7)
 
+  style-loader@4.0.0(webpack@5.106.2(esbuild@0.27.7)):
+    dependencies:
+      webpack: 5.106.2(esbuild@0.27.7)
+
   style-mod@4.1.3: {}
 
   stylis@4.2.0: {}
@@ -22866,6 +22940,8 @@ snapshots:
   systeminformation@5.31.5: {}
 
   tapable@2.3.2: {}
+
+  tapable@2.3.3: {}
 
   tar-fs@1.16.6:
     dependencies:
@@ -22928,17 +23004,34 @@ snapshots:
     optionalDependencies:
       esbuild: 0.27.7
 
-  terser-webpack-plugin@5.4.0(esbuild@0.27.7)(webpack@5.105.4):
+  terser-webpack-plugin@5.5.0(esbuild@0.27.7)(webpack@5.106.2(esbuild@0.27.7)):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.31
       jest-worker: 27.5.1
       schema-utils: 4.3.3
-      terser: 5.46.1
-      webpack: 5.105.4(esbuild@0.27.7)(webpack-cli@7.0.2)
+      terser: 5.46.2
+      webpack: 5.106.2(esbuild@0.27.7)
+    optionalDependencies:
+      esbuild: 0.27.7
+
+  terser-webpack-plugin@5.5.0(esbuild@0.27.7)(webpack@5.106.2):
+    dependencies:
+      '@jridgewell/trace-mapping': 0.3.31
+      jest-worker: 27.5.1
+      schema-utils: 4.3.3
+      terser: 5.46.2
+      webpack: 5.106.2(esbuild@0.27.7)(webpack-cli@7.0.2)
     optionalDependencies:
       esbuild: 0.27.7
 
   terser@5.46.1:
+    dependencies:
+      '@jridgewell/source-map': 0.3.11
+      acorn: 8.16.0
+      commander: 2.20.3
+      source-map-support: 0.5.21
+
+  terser@5.46.2:
     dependencies:
       '@jridgewell/source-map': 0.3.11
       acorn: 8.16.0
@@ -23327,13 +23420,13 @@ snapshots:
       core-util-is: 1.0.2
       extsprintf: 1.3.0
 
-  vite-node@3.2.4(@types/node@22.19.15)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.3):
+  vite-node@3.2.4(@types/node@22.19.15)(jiti@2.6.1)(terser@5.46.2)(yaml@2.8.3):
     dependencies:
       cac: 6.7.14
       debug: 4.4.3(supports-color@8.1.1)
       es-module-lexer: 1.7.0
       pathe: 2.0.3
-      vite: 7.3.1(@types/node@22.19.15)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.3)
+      vite: 7.3.1(@types/node@22.19.15)(jiti@2.6.1)(terser@5.46.2)(yaml@2.8.3)
     transitivePeerDependencies:
       - '@types/node'
       - jiti
@@ -23348,7 +23441,7 @@ snapshots:
       - tsx
       - yaml
 
-  vite@7.3.1(@types/node@22.19.15)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.3):
+  vite@7.3.1(@types/node@22.19.15)(jiti@2.6.1)(terser@5.46.2)(yaml@2.8.3):
     dependencies:
       esbuild: 0.27.7
       fdir: 6.5.0(picomatch@4.0.4)
@@ -23360,14 +23453,14 @@ snapshots:
       '@types/node': 22.19.15
       fsevents: 2.3.3
       jiti: 2.6.1
-      terser: 5.46.1
+      terser: 5.46.2
       yaml: 2.8.3
 
-  vitest@3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.1)(yaml@2.8.3):
+  vitest@3.2.4(@types/node@22.19.15)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.46.2)(yaml@2.8.3):
     dependencies:
       '@types/chai': 5.2.3
       '@vitest/expect': 3.2.4
-      '@vitest/mocker': 3.2.4(vite@7.3.1(@types/node@22.19.15)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.3))
+      '@vitest/mocker': 3.2.4(vite@7.3.1(@types/node@22.19.15)(jiti@2.6.1)(terser@5.46.2)(yaml@2.8.3))
       '@vitest/pretty-format': 3.2.4
       '@vitest/runner': 3.2.4
       '@vitest/snapshot': 3.2.4
@@ -23385,8 +23478,8 @@ snapshots:
       tinyglobby: 0.2.15
       tinypool: 1.1.1
       tinyrainbow: 2.0.0
-      vite: 7.3.1(@types/node@22.19.15)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.3)
-      vite-node: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.3)
+      vite: 7.3.1(@types/node@22.19.15)(jiti@2.6.1)(terser@5.46.2)(yaml@2.8.3)
+      vite-node: 3.2.4(@types/node@22.19.15)(jiti@2.6.1)(terser@5.46.2)(yaml@2.8.3)
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 22.19.15
@@ -23446,7 +23539,7 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  webpack-cli@7.0.2(webpack-bundle-analyzer@4.10.2)(webpack-dev-server@5.2.3)(webpack@5.105.4):
+  webpack-cli@7.0.2(webpack-bundle-analyzer@4.10.2)(webpack-dev-server@5.2.3)(webpack@5.106.2):
     dependencies:
       '@discoveryjs/json-ext': 1.0.0
       commander: 14.0.3
@@ -23456,13 +23549,13 @@ snapshots:
       import-local: 3.2.0
       interpret: 3.1.1
       rechoir: 0.8.0
-      webpack: 5.105.4(esbuild@0.27.7)(webpack-cli@7.0.2)
+      webpack: 5.106.2(esbuild@0.27.7)(webpack-cli@7.0.2)
       webpack-merge: 6.0.1
     optionalDependencies:
       webpack-bundle-analyzer: 4.10.2
-      webpack-dev-server: 5.2.3(webpack-cli@7.0.2)(webpack@5.105.4)
+      webpack-dev-server: 5.2.3(webpack-cli@7.0.2)(webpack@5.106.2)
 
-  webpack-dev-middleware@7.4.5(webpack@5.105.4):
+  webpack-dev-middleware@7.4.5(webpack@5.106.2):
     dependencies:
       colorette: 2.0.20
       memfs: 4.57.1
@@ -23471,9 +23564,9 @@ snapshots:
       range-parser: 1.2.1
       schema-utils: 4.3.3
     optionalDependencies:
-      webpack: 5.105.4(esbuild@0.27.7)(webpack-cli@7.0.2)
+      webpack: 5.106.2(esbuild@0.27.7)(webpack-cli@7.0.2)
 
-  webpack-dev-server@5.2.3(webpack-cli@7.0.2)(webpack@5.105.4):
+  webpack-dev-server@5.2.3(webpack-cli@7.0.2)(webpack@5.106.2):
     dependencies:
       '@types/bonjour': 3.5.13
       '@types/connect-history-api-fallback': 1.5.4
@@ -23501,11 +23594,11 @@ snapshots:
       serve-index: 1.9.2
       sockjs: 0.3.24
       spdy: 4.0.2
-      webpack-dev-middleware: 7.4.5(webpack@5.105.4)
+      webpack-dev-middleware: 7.4.5(webpack@5.106.2)
       ws: 8.20.0
     optionalDependencies:
-      webpack: 5.105.4(esbuild@0.27.7)(webpack-cli@7.0.2)
-      webpack-cli: 7.0.2(webpack-bundle-analyzer@4.10.2)(webpack-dev-server@5.2.3)(webpack@5.105.4)
+      webpack: 5.106.2(esbuild@0.27.7)(webpack-cli@7.0.2)
+      webpack-cli: 7.0.2(webpack-bundle-analyzer@4.10.2)(webpack-dev-server@5.2.3)(webpack@5.106.2)
     transitivePeerDependencies:
       - bufferutil
       - debug
@@ -23519,6 +23612,8 @@ snapshots:
       wildcard: 2.0.1
 
   webpack-sources@3.3.4: {}
+
+  webpack-sources@3.4.0: {}
 
   webpack@5.105.4(esbuild@0.27.7):
     dependencies:
@@ -23552,7 +23647,7 @@ snapshots:
       - esbuild
       - uglify-js
 
-  webpack@5.105.4(esbuild@0.27.7)(webpack-cli@7.0.2):
+  webpack@5.106.2(esbuild@0.27.7):
     dependencies:
       '@types/eslint-scope': 3.7.7
       '@types/estree': 1.0.8
@@ -23564,23 +23659,53 @@ snapshots:
       acorn-import-phases: 1.0.4(acorn@8.16.0)
       browserslist: 4.28.2
       chrome-trace-event: 1.0.4
-      enhanced-resolve: 5.20.1
-      es-module-lexer: 2.0.0
+      enhanced-resolve: 5.21.0
+      es-module-lexer: 2.1.0
       eslint-scope: 5.1.1
       events: 3.3.0
       glob-to-regexp: 0.4.1
       graceful-fs: 4.2.11
-      json-parse-even-better-errors: 2.3.1
-      loader-runner: 4.3.1
-      mime-types: 2.1.35
+      loader-runner: 4.3.2
+      mime-db: 1.54.0
       neo-async: 2.6.2
       schema-utils: 4.3.3
-      tapable: 2.3.2
-      terser-webpack-plugin: 5.4.0(esbuild@0.27.7)(webpack@5.105.4)
+      tapable: 2.3.3
+      terser-webpack-plugin: 5.5.0(esbuild@0.27.7)(webpack@5.106.2(esbuild@0.27.7))
       watchpack: 2.5.1
-      webpack-sources: 3.3.4
+      webpack-sources: 3.4.0
+    transitivePeerDependencies:
+      - '@swc/core'
+      - esbuild
+      - uglify-js
+
+  webpack@5.106.2(esbuild@0.27.7)(webpack-cli@7.0.2):
+    dependencies:
+      '@types/eslint-scope': 3.7.7
+      '@types/estree': 1.0.8
+      '@types/json-schema': 7.0.15
+      '@webassemblyjs/ast': 1.14.1
+      '@webassemblyjs/wasm-edit': 1.14.1
+      '@webassemblyjs/wasm-parser': 1.14.1
+      acorn: 8.16.0
+      acorn-import-phases: 1.0.4(acorn@8.16.0)
+      browserslist: 4.28.2
+      chrome-trace-event: 1.0.4
+      enhanced-resolve: 5.21.0
+      es-module-lexer: 2.1.0
+      eslint-scope: 5.1.1
+      events: 3.3.0
+      glob-to-regexp: 0.4.1
+      graceful-fs: 4.2.11
+      loader-runner: 4.3.2
+      mime-db: 1.54.0
+      neo-async: 2.6.2
+      schema-utils: 4.3.3
+      tapable: 2.3.3
+      terser-webpack-plugin: 5.5.0(esbuild@0.27.7)(webpack@5.106.2)
+      watchpack: 2.5.1
+      webpack-sources: 3.4.0
     optionalDependencies:
-      webpack-cli: 7.0.2(webpack-bundle-analyzer@4.10.2)(webpack-dev-server@5.2.3)(webpack@5.105.4)
+      webpack-cli: 7.0.2(webpack-bundle-analyzer@4.10.2)(webpack-dev-server@5.2.3)(webpack@5.106.2)
     transitivePeerDependencies:
       - '@swc/core'
       - esbuild
