@@ -1,5 +1,38 @@
 {
   "baseButton": {
+    "primaryBackground": {
+      "value": "{color.institutional.brandButtonPrimaryBgd}",
+      "type": "color"
+    },
+    "primaryColor": {
+      "value": "{color.institutional.brandButtonPrimaryText}",
+      "type": "color"
+    },
+    "primaryBorderColor": {
+      "value": "{color.institutional.brandButtonPrimaryBgd}",
+      "type": "color"
+    },
+    "primaryHoverBackground": {
+      "value": "{color.institutional.brandButtonPrimaryBgd}",
+      "type": "color",
+      "$extensions": {
+        "studio.tokens": {
+          "modify": {
+            "type": "darken",
+            "value": "0.1",
+            "space": "hsl"
+          }
+        }
+      }
+    },
+    "primaryHoverBorderColor": {
+      "value": "{color.stroke.interactive.action.primary.hover}",
+      "type": "color"
+    },
+    "primaryHoverTextColor": {
+      "value": "{color.text.interactive.action.primary.hover}",
+      "type": "color"
+    },
     "primaryActiveBackground": {
       "value": "{color.background.interactive.action.primary.active}",
       "type": "color"
@@ -10,18 +43,6 @@
     },
     "primaryActiveTextColor": {
       "value": "{color.text.interactive.action.primary.active}",
-      "type": "color"
-    },
-    "primaryBackground": {
-      "value": "{color.institutional.brandButtonPrimaryBgd}",
-      "type": "color"
-    },
-    "primaryBorderColor": {
-      "value": "{color.institutional.brandButtonPrimaryBgd}",
-      "type": "color"
-    },
-    "primaryColor": {
-      "value": "{color.institutional.brandButtonPrimaryText}",
       "type": "color"
     },
     "primaryDisabledBackgroundColor": {
@@ -50,18 +71,6 @@
     },
     "primaryGhostHoverBackground": {
       "value": "{color.background.interactive.action.tertiary.hover}",
-      "type": "color"
-    },
-    "primaryHoverBackground": {
-      "value": "{color.background.interactive.action.primary.hover}",
-      "type": "color"
-    },
-    "primaryHoverBorderColor": {
-      "value": "{color.stroke.interactive.action.primary.hover}",
-      "type": "color"
-    },
-    "primaryHoverTextColor": {
-      "value": "{color.text.interactive.action.primary.hover}",
       "type": "color"
     },
     "primaryInverseActiveBackground": {
