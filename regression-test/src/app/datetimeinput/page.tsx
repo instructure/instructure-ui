@@ -46,8 +46,11 @@ export default function DateTimeInputPage() {
         dateRenderLabel="Date"
         timeRenderLabel="Time"
         invalidDateTimeMessage="Invalid date!"
-        prevMonthLabel="Previous month"
-        nextMonthLabel="Next month"
+        screenReaderLabels={{
+          calendarIcon: 'Open calendar',
+          prevMonthButton: 'Previous month',
+          nextMonthButton: 'Next month'
+        }}
         defaultValue="2018-01-18T13:30"
         layout="columns"
       />
@@ -59,8 +62,11 @@ export default function DateTimeInputPage() {
         datePlaceholder="Choose"
         dateRenderLabel="Date"
         timeRenderLabel="Time"
-        prevMonthLabel="Previous month"
-        nextMonthLabel="Next month"
+        screenReaderLabels={{
+          calendarIcon: 'Open calendar',
+          prevMonthButton: 'Previous month',
+          nextMonthButton: 'Next month'
+        }}
         onChange={(_e: any, isoDate?: string) => {
           let messages: any[] = []
           if (!isoDate) {
@@ -89,8 +95,11 @@ export default function DateTimeInputPage() {
         datePlaceholder="Choose a date"
         dateRenderLabel="Date"
         timeRenderLabel="Time"
-        prevMonthLabel="Previous month"
-        nextMonthLabel="Next month"
+        screenReaderLabels={{
+          calendarIcon: 'Open calendar',
+          prevMonthButton: 'Previous month',
+          nextMonthButton: 'Next month'
+        }}
         invalidDateTimeMessage={(dvalue: string) => `'${dvalue} is not valid.`}
         layout="columns"
         defaultValue="2018-01-18T13:30"

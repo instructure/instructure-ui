@@ -44,8 +44,7 @@ import { TextInput } from '@instructure/ui-text-input/latest'
 import { Options } from '@instructure/ui-options/latest'
 import {
   ChevronDownInstUIIcon,
-  ChevronUpInstUIIcon,
-  CheckInstUIIcon
+  ChevronUpInstUIIcon
 } from '@instructure/ui-icons'
 
 import type { ViewProps } from '@instructure/ui-view/latest'
@@ -422,13 +421,6 @@ class Select extends Component<SelectProps> {
         : (renderOptionLabel as React.ReactNode)
     }
 
-    const { isOptionContentAppliedToInput, size = 'medium' } = this.props
-    const iconSize = selectSizeToIconSize[size]
-    const checkIcon =
-      isSelected && !isOptionContentAppliedToInput ? (
-        <CheckInstUIIcon inline={false} size={iconSize} color="inverseColor" />
-      ) : null
-
     let optionProps: Partial<OptionsItemProps> = {
       // passthrough props
       ...omitProps(option.props, [
@@ -439,7 +431,7 @@ class Select extends Component<SelectProps> {
       ...getOptionProps({ id }),
       // Options.Item props
       renderBeforeLabel: getRenderOptionLabel(renderBeforeLabel),
-      renderAfterLabel: checkIcon ?? getRenderOptionLabel(renderAfterLabel)
+      renderAfterLabel: getRenderOptionLabel(renderAfterLabel)
     }
     // should option be treated as highlighted or selected
     if (isSelected && isHighlighted) {
