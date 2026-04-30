@@ -24,7 +24,7 @@
 
 import { Component, ReactInstance } from 'react'
 
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import { InlineSVG } from '../InlineSVG'
 

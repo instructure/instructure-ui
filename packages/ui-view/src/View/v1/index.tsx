@@ -33,7 +33,7 @@ import {
   pickProps,
   passthroughProps
 } from '@instructure/ui-react-utils'
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -86,7 +86,7 @@ class View extends Component<ViewProps> {
     Component: ComponentType<any>
   ) => {
     // We don't want the theming and styling props to pass
-    // (these are added and handled by the `@withStyle` decorator)
+    // (these are added and handled by the `@withStyleNew` decorator)
     const propsToOmit = [
       ...View.allowedProps,
       'styles',

@@ -30,7 +30,7 @@ import {
   renderIconWithProps
 } from '@instructure/ui-icons'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 
 import generateStyle from './styles'
 
@@ -42,7 +42,7 @@ import type { CheckboxFacadeProps } from './props'
 parent: Checkbox
 ---
 **/
-@withStyle(generateStyle, 'Checkbox')
+@withStyleNew(generateStyle, 'Checkbox')
 class CheckboxFacade extends Component<CheckboxFacadeProps> {
   static readonly componentId = 'CheckboxFacade'
 

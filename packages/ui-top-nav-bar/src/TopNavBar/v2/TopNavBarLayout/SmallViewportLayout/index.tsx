@@ -37,7 +37,7 @@ import {
 } from '@instructure/ui-dom-utils'
 import type { RequestAnimationFrameType } from '@instructure/ui-dom-utils'
 
-import { withStyle, Global } from '@instructure/emotion'
+import { withStyleNew, Global } from '@instructure/emotion'
 
 import { Tray } from '@instructure/ui-tray/latest'
 import {
@@ -77,7 +77,7 @@ private: true
 ---
 **/
 @withDeterministicId()
-@withStyle(generateStyle, 'TopNavBarLayout')
+@withStyleNew(generateStyle, 'TopNavBarLayout')
 class TopNavBarSmallViewportLayout extends Component<
   TopNavBarSmallViewportLayoutProps,
   TopNavBarSmallViewportLayoutState

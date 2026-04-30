@@ -24,7 +24,7 @@
 
 import { Component } from 'react'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 import { Text } from '@instructure/ui-text/latest'
 import { NumberInput } from '@instructure/ui-number-input/latest'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
@@ -43,7 +43,7 @@ parent: Pagination
 id: Pagination.PageInput
 ---
 **/
-@withStyle(generateStyle, 'PaginationPageInput')
+@withStyleNew(generateStyle, 'PaginationPageInput')
 class PaginationPageInput extends Component<
   PaginationPageInputProps,
   PaginationPageInputState

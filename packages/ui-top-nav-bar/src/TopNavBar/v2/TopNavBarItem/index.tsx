@@ -35,7 +35,7 @@ import {
 import { createChainedFunction } from '@instructure/ui-utils'
 import { warn, error } from '@instructure/console'
 
-import { withStyle, InstUISettingsProvider } from '@instructure/emotion'
+import { withStyleNew, InstUISettingsProvider } from '@instructure/emotion'
 
 import {
   ChevronDownInstUIIcon,
@@ -77,7 +77,7 @@ id: TopNavBar.Item
 @module TopNavBarItem
 **/
 @withDeterministicId()
-@withStyle(generateStyle, 'TopNavBarItem')
+@withStyleNew(generateStyle, 'TopNavBarItem')
 class TopNavBarItem extends Component<TopNavBarItemProps, TopNavBarItemState> {
   static readonly componentId = 'TopNavBar.Item'
 

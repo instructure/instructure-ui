@@ -31,46 +31,25 @@ import type {
 
 import hoistNonReactStatics from 'hoist-non-react-statics'
 
-import { deepEqual as isEqual } from '@instructure/ui-utils'
+import { deepEqual as isEqual, mergeDeep } from '@instructure/ui-utils'
 import { warn } from '@instructure/console'
 import { decorator } from '@instructure/ui-decorator'
 
-import { getComponentThemeOverride } from '@instructure/emotion'
-import { useTheme } from '@instructure/emotion'
+import { useTheme } from './useTheme'
+
+import type { ComponentTheme, InstUIComponent } from '@instructure/shared-types'
 import type {
-  BaseTheme,
-  ComponentTheme,
-  DeepPartial,
-  ComponentThemeMap,
-  InstUIComponent
-} from '@instructure/shared-types'
+  ComponentStyle,
+  ComponentOverride,
+  GenerateStyleRework,
+  Props
+} from './EmotionTypes'
 
-import type { ComponentStyle } from '@instructure/emotion'
-import { StyleObject } from '@instructure/emotion'
-
-/**
- * A theme object where every prop is optional
- */
-type PartialTheme = DeepPartial<Omit<BaseTheme, 'key'>>
-type Props = Record<string, unknown>
-type State = Record<string, unknown>
-type GenerateComponentTheme = (
-  theme: BaseTheme | PartialTheme
-) => ComponentTheme
-
-type GenerateStyle = (
-  componentTheme: ComponentTheme,
-  props: Props,
-  state?: State
-) => StyleObject
-
-/**
- * Keys are component IDs, values are their theme props.
- * Key can be an arbitrary string to support custom components
- */
-type ComponentOverride = {
-  [otherComponent: string]: ComponentTheme
-} & DeepPartial<ComponentThemeMap>
+import type {
+  NewComponentTypes,
+  SharedTokens,
+  Theme
+} from '@instructure/ui-themes'
 
 // Extract is needed because it would allow number otherwise
 // https://stackoverflow.com/a/51808262/319473
@@ -87,34 +66,36 @@ type WithStylePrivateProps<
 > = Style extends null
   ? object
   : {
-      styles?: Style
-      makeStyles?: (extraArgs?: Record<string, unknown>) => void
-    }
+    styles?: Style
+    makeStyles?: (extraArgs?: Record<string, unknown>) => void
+  }
 
-type ThemeOverrideProp<Theme extends ComponentTheme | null = ComponentTheme> = {
+type ThemeOverrideProp<
+  CompTheme extends ComponentTheme | null = ComponentTheme
+> = {
   themeOverride?:
-    | Partial<Theme>
-    | ((componentTheme: Theme, currentTheme: BaseTheme) => Partial<Theme>)
+  | Partial<CompTheme>
+  | ((componentTheme: CompTheme, currentTheme: Theme) => Partial<CompTheme>)
 }
 
 type WithStyleProps<
-  Theme extends ComponentTheme | null = ComponentTheme,
+  CompTheme extends ComponentTheme | null = ComponentTheme,
   Style extends ComponentStyle | null = ComponentStyle
 > = Theme extends null
   ? WithStylePrivateProps<Style>
-  : WithStylePrivateProps<Style> & ThemeOverrideProp<Theme>
+  : WithStylePrivateProps<Style> & ThemeOverrideProp<CompTheme>
+
+declare const process: Record<string, any> | undefined
 
 const defaultValues = {
   styles: {},
-  makeStyles: () => {}
+  makeStyles: () => { }
 }
 
 /**
  * ---
  * category: utilities/themes
  * ---
- *
- * Same as `withStyle`, used only for the docs app.
  *
  * A decorator or higher order component that makes a component themeable.
  *
@@ -123,11 +104,10 @@ const defaultValues = {
  * As a HOC:
  *
  * ```js-code
- * import { withStyleForDocs as withStyleNew } from '@instructure/emotion'
+ * import { withStyleNew } from '@instructure/emotion'
  * import generateStyle from './styles'
- * import generateComponentTheme from './theme'
  *
- * export default withStyleNew(generateStyle, generateComponentTheme)(ExampleComponent)
+ * export default withStyleNew(generateStyle)(ExampleComponent)
  * ```
  *
  * Themeable components inject their themed styles into the document
@@ -145,24 +125,6 @@ const defaultValues = {
  * With the `themeOverride` prop you can directly set/override the component theme variables declared in theme.js. It accepts an object or a function. The function has the component's theme and the currently active main theme as its parameter.
  *
  * See more about the overrides on the [Using theme overrides](/#using-theme-overrides) docs page.
- *
- * ```js-code
- * // ExampleComponent/theme.js
- * const generateComponentTheme = (theme) => {
- *   const { colors } = theme
- *
- *   const componentVariables = {
- *     background: colors?.backgroundMedium,
- *     color: colors?.textDarkest,
- *
- *     hoverColor: colors?.textLightest,
- *     hoverBackground: colors?.backgroundDarkest
- *   }
- *
- *   return componentVariables
- * }
- * export default generateComponentTheme
- * ```
  *
  * ```jsx-code
  * {// global theme override}
@@ -183,26 +145,47 @@ const defaultValues = {
  * @module withStyleNew
  *
  * @param {function} generateStyle - The function that returns the component's style object
- * @param {function} generateComponentTheme - The function that returns the component's theme variables object
  * @returns {ReactElement} The decorated WithStyle Component
  */
-const withStyleForDocs = decorator(
+const withStyleNew = decorator(
   (
-    ComposedComponent: WithStyleComponent,
-    generateStyle: GenerateStyle,
-    generateComponentTheme: GenerateComponentTheme
+    ComposedComponent: any,
+    generateStyle: GenerateStyleRework,
+    useTokensFrom?: keyof NewComponentTypes,
+    frozenTheme?: any
   ) => {
     const displayName = ComposedComponent.displayName || ComposedComponent.name
+
+    const componentId: keyof NewComponentTypes =
+      useTokensFrom ?? ComposedComponent.componentId?.replace('.', '')
 
     const WithStyle: ForwardRefExoticComponent<
       PropsWithoutRef<Props> & RefAttributes<any>
     > & {
-      generateComponentTheme?: GenerateComponentTheme
       allowedProps?: string[]
       originalType?: WithStyleComponent
       defaultProps?: Partial<any>
     } = forwardRef((props, ref) => {
-      const theme = useTheme()
+      const themeInContext = useTheme() as Theme
+      const themeKey = themeInContext.key
+
+      // this is for the new overrides. theme.themeOverride has all the overrides
+      const themeOverride = themeInContext.themeOverride
+
+      // if a new theme has been added to the lib since this component version has been frozen, it can't be used with this
+      // theme, so we throw an error. Solution: upgrade to the latest version, it will support it
+      if (frozenTheme && !frozenTheme[themeKey]) {
+        console.error(
+          `The version of ${displayName} you are using does not support the currently applied "${themeKey}" theme. ` +
+          `Please upgrade to the latest version of ${displayName}.`
+        )
+      }
+
+      // if this component is an older component version but still uses the new theming system, it'll have a frozenTheme
+      // object passed to it. We use that instead of the current theme so backward compatibility stays intact
+      const theme = frozenTheme
+        ? { newTheme: frozenTheme[themeKey] }
+        : themeInContext
 
       if (props.styles) {
         warn(
@@ -224,30 +207,64 @@ const withStyleForDocs = decorator(
         ...props,
         ...defaultValues
       }
+      // resolving the theming functions and applying the overrides
+      const primitiveOverrides = themeOverride?.primitives
+      const semanticsOverrides = themeOverride?.semantics
+      const sharedTokensOverrides = themeOverride?.sharedTokens
+      const componentOverridesFromSettingsProvider =
+        themeOverride?.components?.[componentId]
+      const componentOverridesFromThemeOverrideProp = (
+        componentProps as ThemeOverrideProp
+      ).themeOverride
 
-      let componentTheme: ComponentTheme =
-        typeof generateComponentTheme === 'function'
-          ? generateComponentTheme(theme as BaseTheme)
-          : {}
-
-      const themeOverride = getComponentThemeOverride(
-        theme,
-        displayName,
-        ComposedComponent.componentId,
-        (componentProps as ThemeOverrideProp).themeOverride,
-        componentTheme
+      const primitives = mergeDeep(
+        theme.newTheme.primitives,
+        primitiveOverrides!
       )
 
-      componentTheme = { ...componentTheme, ...themeOverride }
+      const semantics = mergeDeep(
+        theme.newTheme.semantics?.(primitives),
+        semanticsOverrides!
+      )
 
+      const sharedTokens = mergeDeep(
+        theme.newTheme.sharedTokens?.(semantics),
+        sharedTokensOverrides as Record<string, unknown>
+      ) as SharedTokens
+      // Note: Some components do not have a theme, e.g., FormFieldMessages
+      const baseComponentTheme =
+        theme.newTheme.components[componentId]?.(semantics)
+
+      const componentThemeFromSettingsProvider = mergeDeep(
+        baseComponentTheme,
+        componentOverridesFromSettingsProvider as Record<string, unknown>
+      )
+
+      const componentTheme = mergeDeep(
+        componentThemeFromSettingsProvider,
+        // @ts-ignore TODO-theme-types: fix typing
+        typeof componentOverridesFromThemeOverrideProp === 'function'
+          ? componentOverridesFromThemeOverrideProp(
+            componentThemeFromSettingsProvider,
+            themeInContext
+          )
+          : componentOverridesFromThemeOverrideProp
+      )
+
+      // TODO do not call here generateStyle, it does not receive the extraArgs
       const [styles, setStyles] = useState(
-        generateStyle ? generateStyle(componentTheme, componentProps, {}) : {}
+        generateStyle
+          ? // @ts-ignore TODO-theme-types: fix typing
+          generateStyle(componentTheme, componentProps, sharedTokens, {})
+          : {}
       )
 
       const makeStyleHandler: WithStyleProps['makeStyles'] = (extraArgs) => {
         const calculatedStyles = generateStyle(
           componentTheme,
           componentProps,
+          // @ts-ignore TODO-theme-types: fix typing
+          sharedTokens,
           extraArgs
         )
         if (!isEqual(calculatedStyles, styles)) {
@@ -261,10 +278,6 @@ const withStyleForDocs = decorator(
           {...props}
           makeStyles={makeStyleHandler}
           styles={styles}
-          // passing themeOverrides is needed for components like Button
-          // that have no makeStyles of their own and only pass themeOverrides
-          // to the underlying component (e.g.: BaseButton)
-          themeOverride={themeOverride}
         />
       )
     })
@@ -279,9 +292,6 @@ const withStyleForDocs = decorator(
     // These static fields exist on InstUI components
     WithStyle.allowedProps = ComposedComponent.allowedProps
 
-    // we are exposing the theme generator for the docs generation
-    WithStyle.generateComponentTheme = generateComponentTheme
-
     // we have to add defaults to makeStyles and styles added by this decorator
     // eslint-disable-next-line no-param-reassign
     ComposedComponent.defaultProps = {
@@ -290,12 +300,17 @@ const withStyleForDocs = decorator(
       styles: defaultValues.styles
     }
 
-    WithStyle.displayName = `WithStyle(${displayName})`
+    if (
+      typeof process !== 'undefined' &&
+      process?.env?.NODE_ENV !== 'production'
+    ) {
+      WithStyle.displayName = `WithStyle(${displayName})`
+    }
 
     return WithStyle
   }
 )
 
-export default withStyleForDocs
-export { withStyleForDocs }
-export type { WithStyleProps }
+export default withStyleNew
+export { withStyleNew }
+export type { WithStyleProps, ThemeOverrideProp }

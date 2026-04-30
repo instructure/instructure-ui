@@ -27,7 +27,7 @@ import { Component } from 'react'
 
 import { ms } from '@instructure/ui-utils'
 
-import { withStyleLegacy as withStyle, Global } from '@instructure/emotion'
+import { withStyle, Global } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

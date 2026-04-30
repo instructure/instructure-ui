@@ -25,7 +25,7 @@
 import { Component } from 'react'
 import { DIRECTION, TextDirectionContext } from '@instructure/ui-i18n'
 import { InstUISettingsProvider } from '@instructure/emotion'
-import { withStyleForDocs as withStyle } from '../withStyleForDocs'
+import { withStyleForDocs } from '../withStyleForDocs'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import { compileAndRenderExample } from '../compileAndRenderExample'
@@ -34,7 +34,7 @@ import type { PreviewProps, PreviewState } from './props'
 import * as themes from '@instructure/ui-themes'
 import { camelize } from '@instructure/ui-utils'
 
-@withStyle(generateStyle, generateComponentTheme)
+@withStyleForDocs(generateStyle, generateComponentTheme)
 class Preview extends Component<PreviewProps, PreviewState> {
   static allowedProps = allowedProps
 

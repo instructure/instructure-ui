@@ -25,7 +25,7 @@
 import { Component } from 'react'
 
 import { omitProps } from '@instructure/ui-react-utils'
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 
 import generateStyle from './styles'
 
@@ -37,7 +37,7 @@ import { allowedProps } from './props'
 category: components
 ---
 **/
-@withStyle(generateStyle)
+@withStyleNew(generateStyle)
 class ColorIndicator extends Component<ColorIndicatorProps> {
   static allowedProps = allowedProps
   static readonly componentId = 'ColorIndicator'

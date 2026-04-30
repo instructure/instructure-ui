@@ -43,7 +43,7 @@ import {
 } from '@instructure/ui-icons'
 import { Transition } from '@instructure/ui-motion'
 import { logError as error } from '@instructure/console'
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 
 import generateStyle from './styles'
 
@@ -56,7 +56,7 @@ category: components
 ---
 **/
 @withDeterministicId()
-@withStyle(generateStyle)
+@withStyleNew(generateStyle)
 class Alert extends Component<AlertProps, AlertState> {
   static readonly componentId = 'Alert'
 
@@ -299,9 +299,9 @@ class Alert extends Component<AlertProps, AlertState> {
 
     return open
       ? ReactDOM.createPortal(
-        <div id={this.srid}>{this.createScreenreaderContentNode()}</div>,
-        liveRegion
-      )
+          <div id={this.srid}>{this.createScreenreaderContentNode()}</div>,
+          liveRegion
+        )
       : null
   }
 

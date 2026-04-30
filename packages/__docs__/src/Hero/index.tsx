@@ -35,7 +35,7 @@ import { IconGithubSolid, IconCheckMarkSolid } from '@instructure/ui-icons'
 import { AccessibleContent } from '@instructure/ui-a11y-content'
 import { InlineSVG, SVGIcon } from '@instructure/ui-svg-images'
 
-import { withStyleForDocs as withStyle } from '../withStyleForDocs'
+import { withStyleForDocs } from '../withStyleForDocs'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -51,7 +51,7 @@ import { allowedProps } from './props'
 //@ts-expect-error ts complains for no real reason
 import logo from '../../logo.svg'
 
-@withStyle(generateStyle, generateComponentTheme)
+@withStyleForDocs(generateStyle, generateComponentTheme)
 class Hero extends Component<HeroProps> {
   static allowedProps = allowedProps
   static defaultProps = {

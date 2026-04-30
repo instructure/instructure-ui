@@ -8,7 +8,7 @@ order: 4
 
 ### Component Properties
 
-- All components should pass through additional props down to the root DOM element using the `passthroughProps` utility. (e.g. `<div {...passthroughProps(this.props)}>`). Note that in addition to allowing only valid DOM node attributes, `passthroughProps` will remove the `className` and `style` props to prevent unexpected style issues. These need to be set explicitly and used with caution. It also removes the `styles` and `makesStyles` properties added by the [withStyle](withStyle) decorator.
+- All components should pass through additional props down to the root DOM element using the `passthroughProps` utility. (e.g. `<div {...passthroughProps(this.props)}>`). Note that in addition to allowing only valid DOM node attributes, `passthroughProps` will remove the `className` and `style` props to prevent unexpected style issues. These need to be set explicitly and used with caution. It also removes the `styles` and `makesStyles` properties added by the [withStyleNew](withStyleNew) decorator.
 - Avoid props that could be computed from other props. (e.g. prefer `<Select filter={handleFilter} />` over `<Select shouldFilter filter={handleFilter} />`. Prefer determining whether filtering should happen based on the presence of the `filter` function prop.)
 - Avoid situations where certain prop combinations are not supported. Prefer splitting the component into separate components with fewer props.
 - Set default prop values for non-required props when possible.

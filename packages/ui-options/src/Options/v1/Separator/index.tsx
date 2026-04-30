@@ -26,7 +26,7 @@ import { Component } from 'react'
 
 import { getElementType, omitProps } from '@instructure/ui-react-utils'
 
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyles from './styles'
 import generateComponentTheme from './theme'
@@ -66,7 +66,7 @@ class Separator extends Component<OptionsSeparatorProps> {
     return (
       <ElementType role="none">
         <div
-          // we need to omit the withStyle props
+          // we need to omit the withStyleNew props
           {...omitProps(rest, ['styles', 'makeStyles', 'themeOverride'])}
           css={styles?.separator}
           role="presentation"

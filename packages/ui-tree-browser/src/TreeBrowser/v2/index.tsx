@@ -31,7 +31,7 @@ import {
 } from '@instructure/ui-icons'
 
 import { omitProps, pickProps } from '@instructure/ui-react-utils'
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 
 import { TreeCollection } from './TreeCollection'
 import { TreeButton } from './TreeButton'
@@ -53,7 +53,7 @@ import TreeBrowserContext from './TreeBrowserContext'
 category: components
 ---
 **/
-@withStyle(generateStyles)
+@withStyleNew(generateStyles)
 class TreeBrowser extends Component<TreeBrowserProps, TreeBrowserState> {
   static readonly componentId = 'TreeBrowser'
 

@@ -28,7 +28,7 @@ import { View } from '@instructure/ui-view/latest'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { omitProps } from '@instructure/ui-react-utils'
 import { RatingIcon } from '../../RatingIcon/v2'
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 import generateStyle from './styles'
 import type { RatingProps } from './props'
 import { allowedProps } from './props'
@@ -38,7 +38,7 @@ import { allowedProps } from './props'
 category: components
 ---
 **/
-@withStyle(generateStyle)
+@withStyleNew(generateStyle)
 class Rating extends Component<RatingProps> {
   static readonly componentId = 'Rating'
 

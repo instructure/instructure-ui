@@ -31,7 +31,7 @@ import {
   callRenderProp
 } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view/v11_6'
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import { Item } from './Item'
 import type { FlexItemProps } from './Item/props'

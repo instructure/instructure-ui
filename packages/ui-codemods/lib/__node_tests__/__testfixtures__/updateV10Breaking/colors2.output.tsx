@@ -16,7 +16,7 @@ import {
   Heading,
   CloseButton,
   Avatar,
-  withStyleLegacy as withStyle,
+  withStyle as withStyleNew,
   IconButton,
   IconSearchLine,
   IconArrowOpenDownLine,
@@ -731,4 +731,7 @@ const HeaderSearchItem = React.memo<HeaderSearchItemProps>(
 )
 HeaderSearchItem.displayName = 'HeaderSearchItem'
 
-export default withStyle(generateStyle, generateComponentTheme)(Header as any)
+export default withStyleNew(
+  generateStyle,
+  generateComponentTheme
+)(Header as any)

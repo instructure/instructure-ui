@@ -26,7 +26,7 @@ import { Component, Children, ReactElement, AriaAttributes } from 'react'
 
 import { Grid } from '@instructure/ui-grid/v11_6'
 import { pickProps, omitProps } from '@instructure/ui-react-utils'
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import { allowedProps as FormFieldLayoutAllowedProps } from '../../FormFieldLayout/v1/props'
 

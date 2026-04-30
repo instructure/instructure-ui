@@ -24,7 +24,7 @@
 
 import { Children, Component, ReactElement } from 'react'
 
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import { passthroughProps, safeCloneElement } from '@instructure/ui-react-utils'
 
 import generateStyle from './styles'

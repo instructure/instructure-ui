@@ -30,7 +30,7 @@ import type { IconButtonProps } from '@instructure/ui-buttons/v11_6'
 import { IconEditLine } from '@instructure/ui-icons'
 import { logWarn as warn } from '@instructure/console'
 import { createChainedFunction } from '@instructure/ui-utils'
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import { View } from '@instructure/ui-view/v11_6'
 
 import { Editable } from '../../Editable/v1'

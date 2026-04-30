@@ -25,7 +25,7 @@
 import { Component } from 'react'
 
 import { addEventListener } from '@instructure/ui-dom-utils'
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import { View } from '@instructure/ui-view/v11_6'
 import type { ViewOwnProps } from '@instructure/ui-view/v11_6'

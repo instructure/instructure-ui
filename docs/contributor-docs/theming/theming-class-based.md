@@ -6,7 +6,7 @@ order: 3
 
 ## Making class-based themed components
 
-Make a component themeable with the [withStyle](withStyle) decorator. It adds a `makeStyles` function and the generated `styles` object to the decorated Component's props.
+Make a component themeable with the [withStyleNew](withStyleNew) decorator. It adds a `makeStyles` function and the generated `styles` object to the decorated Component's props.
 
 Import the style generator (`generateStyle`) from `styles.js` and the component theme generator (`generateComponentTheme`) from `theme.js`, and pass them to the decorator.
 
@@ -21,7 +21,7 @@ type: code
 // Button/index.js
 
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 

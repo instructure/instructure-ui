@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-export { InstUISettingsProvider, withStyle } from '@instructure/emotion'
+export { InstUISettingsProvider, withStyleNew } from '@instructure/emotion'
 export {
   AccessibleContent,
   PresentationContent,

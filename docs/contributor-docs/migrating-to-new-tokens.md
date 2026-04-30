@@ -17,10 +17,10 @@ Changes needed:
 - Import token types from `@instructure/ui-themes` instead of `@instructure/shared-types`
 - Update `generateStyle` function to use `NewComponentTypes['ComponentName']` for the theme parameter
 - Replace old theme tokens with new token names from the design system
-- Replace `@withStyleLegacy` decorator with `@withStyle` and remove `generateComponentTheme`
+- Replace `@withStyle` decorator with `@withStyleNew` and remove `generateComponentTheme`
 - delete `theme.ts`
 
-If tokens are from a different (usually parent) components, add the `componentID` of that component as second paramater of `@withStyle` and use that name in the `generateStyle` function in `style.ts`: `NewComponentTypes['ParentComponentNameWithTheTokens']`
+If tokens are from a different (usually parent) components, add the `componentID` of that component as second paramater of `@withStyleNew` and use that name in the `generateStyle` function in `style.ts`: `NewComponentTypes['ParentComponentNameWithTheTokens']`
 
 `generateStyle` accepts a third parameter as well, which are the `sharedTokens`. These provide tokens for shared behaviors such as focus rings, shadows or margins. `'@instructure/emotion'` has various util functions that uses these, such as `calcSpacingFromShorthand` and `calcFocusOutlineStyles`.
 

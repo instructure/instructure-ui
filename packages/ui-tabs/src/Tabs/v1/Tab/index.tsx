@@ -28,7 +28,7 @@ import { passthroughProps, callRenderProp } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view/v11_6'
 import type { ViewOwnProps } from '@instructure/ui-view/v11_6'
 
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

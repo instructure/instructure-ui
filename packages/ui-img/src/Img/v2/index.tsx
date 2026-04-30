@@ -27,7 +27,7 @@ import { Component } from 'react'
 import { View } from '@instructure/ui-view/latest'
 import { passthroughProps } from '@instructure/ui-react-utils'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 
 import generateStyle from './styles'
 
@@ -39,7 +39,7 @@ import type { ImgProps } from './props'
 category: components
 ---
 **/
-@withStyle(generateStyle)
+@withStyleNew(generateStyle)
 class Img extends Component<ImgProps> {
   static readonly componentId = 'Img'
 

@@ -24,7 +24,7 @@
 
 import { ComponentElement, Children, Component } from 'react'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 import {
   omitProps,
   safeCloneElement,
@@ -56,7 +56,7 @@ id: Menu.Group
 ---
 **/
 @withDeterministicId()
-@withStyle(generateStyle)
+@withStyleNew(generateStyle)
 class MenuItemGroup extends Component<MenuGroupProps, MenuGroupState> {
   static readonly componentId = 'Menu.Group'
 

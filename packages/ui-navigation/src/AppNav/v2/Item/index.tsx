@@ -36,7 +36,7 @@ import { View } from '@instructure/ui-view/latest'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import type { ScreenReaderContentProps } from '@instructure/ui-a11y-content'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleNew } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import type { AppNavItemProps } from './props'
@@ -49,7 +49,7 @@ id: AppNav.Item
 ---
 @module Item
 **/
-@withStyle(generateStyle)
+@withStyleNew(generateStyle)
 class Item extends Component<AppNavItemProps> {
   static readonly componentId = 'AppNav.Item'
 

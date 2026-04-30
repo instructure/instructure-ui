@@ -27,13 +27,13 @@ import { Component } from 'react'
 import { Flex } from '@instructure/ui-flex'
 import { View } from '@instructure/ui-view'
 
-import { withStyleForDocs as withStyle } from '../withStyleForDocs'
+import { withStyleForDocs } from '../withStyleForDocs'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import { allowedProps } from './props'
 import type { ColorBandProps } from './props'
 
-@withStyle(generateStyle, generateComponentTheme)
+@withStyleForDocs(generateStyle, generateComponentTheme)
 class ColorBand extends Component<ColorBandProps> {
   static allowedProps = allowedProps
   componentDidMount() {

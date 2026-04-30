@@ -48,7 +48,7 @@ import {
 
 import { DateTime, ApplyLocaleContext, Locale } from '@instructure/ui-i18n'
 
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 

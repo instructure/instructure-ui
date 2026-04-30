@@ -24,7 +24,7 @@
 
 import { Component } from 'react'
 
-import { withStyleForDocs as withStyle } from '../withStyleForDocs'
+import { withStyleForDocs } from '../withStyleForDocs'
 import { IconSearchLine } from '@instructure/ui-icons'
 
 import generateStyle from './styles'
@@ -32,7 +32,7 @@ import generateComponentTheme from './theme'
 
 import type { SearchStatusProps } from './props'
 
-@withStyle(generateStyle, generateComponentTheme)
+@withStyleForDocs(generateStyle, generateComponentTheme)
 class SearchStatus extends Component<SearchStatusProps> {
   static defaultProps = {
     size: '1.25rem',

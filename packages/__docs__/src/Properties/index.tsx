@@ -25,7 +25,7 @@
 import { Component } from 'react'
 
 import { Table } from '@instructure/ui-table'
-import { withStyleForDocs as withStyle } from '../withStyleForDocs'
+import { withStyleForDocs as withStyleNew } from '../withStyleForDocs'
 
 import generateStyle from './styles'
 import { compileMarkdown } from '../compileMarkdown'
@@ -42,7 +42,7 @@ import type {
 import { Heading } from '@instructure/ui-heading'
 import { View } from '@instructure/ui-view'
 
-@withStyle(generateStyle, null)
+@withStyleNew(generateStyle, null)
 class Properties extends Component<PropertiesProps> {
   static defaultProps = {
     layout: 'small'
