@@ -428,14 +428,6 @@
       "type": "fontSizes"
     }
   },
-  "visibleInCanvas": {
-    "value": "false",
-    "type": "boolean"
-  },
-  "visibleInRebrand": {
-    "value": "true",
-    "type": "boolean"
-  },
   "opacity": {
     "base": {
       "value": "{opacity100}",
