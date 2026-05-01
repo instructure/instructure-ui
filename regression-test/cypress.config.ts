@@ -22,19 +22,21 @@
  * SOFTWARE.
  */
 import { defineConfig } from 'cypress'
-import { installPlugin } from '@chromatic-com/cypress'
+import { existsSync, readFileSync, writeFileSync } from 'node:fs'
+
+const META_FILE = 'cypress/meta.json'
 
 export default defineConfig({
-  env: {
-    delay: 100 // Chromatic snapshot delay time
-  },
+  screenshotsFolder: 'cypress/screenshots',
+  trashAssetsBeforeRuns: true,
+  video: false,
   e2e: {
+    viewportWidth: 1280,
+    viewportHeight: 800,
     setupNodeEvents(on, config) {
-      installPlugin(on, config)
-
-      // This registers a log task as seen in the Cypress docs for cy.task as well
-      // as a table task for sending tabular data to the terminal.
-      // More info: https://www.npmjs.com/package/cypress-axe
+      on('before:run', () => {
+        writeFileSync(META_FILE, '{}')
+      })
       on('task', {
         log(message) {
           console.log(message)
@@ -42,6 +44,14 @@ export default defineConfig({
         },
         table(message) {
           console.table(message)
+          return null
+        },
+        recordMeta({ name, pagePath }: { name: string; pagePath: string }) {
+          const data = existsSync(META_FILE)
+            ? JSON.parse(readFileSync(META_FILE, 'utf8'))
+            : {}
+          data[name] = pagePath
+          writeFileSync(META_FILE, JSON.stringify(data, null, 2))
           return null
         }
       })

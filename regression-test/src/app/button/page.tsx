@@ -53,7 +53,7 @@ export default function ButtonPage() {
   return (
     <main className="flex gap-8 p-8 flex-col items-start axe-test">
       <div style={{ display: 'flex', gap: '0.5rem' }}>
-        <Button>Button</Button>
+        <Button>trivial change</Button>
         {colors.map((color) => (
           <Button key={'color' + color} color={color}>
             {color} color

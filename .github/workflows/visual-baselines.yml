@@ -1,0 +1,73 @@
+name: Update visual baselines
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+concurrency:
+  group: visual-baselines
+  cancel-in-progress: false
+
+jobs:
+  baselines:
+    name: Capture and publish baselines
+    runs-on: ubuntu-latest
+    container:
+      image: cypress/browsers:latest
+      options: --user 1001
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'pnpm'
+
+      - name: Cache Cypress binary
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/Cypress
+          key: ${{ runner.os }}-cypress-${{ hashFiles('regression-test/package-lock.json') }}
+
+      - name: Build InstUI
+        run: pnpm install --frozen-lockfile && pnpm run bootstrap
+
+      - name: Install regression-test dependencies
+        run: npm ci
+        working-directory: regression-test
+
+      - name: Install Cypress binary
+        run: npx cypress install
+        working-directory: regression-test
+
+      - name: Run Cypress
+        uses: cypress-io/github-action@v6
+        env:
+          ELECTRON_EXTRA_LAUNCH_ARGS: "--remote-debugging-port=9222"
+        with:
+          install: false
+          build: npm run build
+          start: npm start
+          working-directory: regression-test
+
+      - name: Flatten screenshots
+        run: |
+          mkdir -p baseline-publish/screenshots
+          find regression-test/cypress/screenshots -name '*.png' -exec cp {} baseline-publish/screenshots/ \;
+
+      - name: Push baselines to visual-baselines branch
+        run: |
+          cd baseline-publish
+          git init -b visual-baselines
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add screenshots/
+          git commit -m "update baselines from ${GITHUB_SHA}"
+          git remote add origin "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git"
+          git push --force origin visual-baselines
