@@ -24,7 +24,7 @@
 
 import { Component, ReactElement } from 'react'
 
-import { getClassList, findDOMNode } from '@instructure/ui-dom-utils'
+import { getClassList } from '@instructure/ui-dom-utils'
 import {
   ensureSingleChild,
   safeCloneElement
@@ -333,19 +333,23 @@ class BaseTransition extends Component<
   }
 
   renderChildren() {
-    return this.props.children
-      ? safeCloneElement(
-          ensureSingleChild(this.props.children) as ReactElement,
-          {
-            'aria-hidden': !this.props.in ? true : undefined,
-            ref: (el: React.ReactInstance | null) => {
-              const ref = (findDOMNode(el) as Element) || null
+    if (!this.props.children) return null
 
-              this.handleRef(ref)
+    const child = ensureSingleChild(this.props.children) as ReactElement
+    const isInstUIComponent = !!(child.type as any)?.componentId
+
+    return safeCloneElement(child, {
+      'aria-hidden': !this.props.in ? true : undefined,
+      ...(isInstUIComponent
+        ? { elementRef: this.handleRef }
+        : {
+            ref: (el: unknown) => {
+              if (el instanceof Element) {
+                this.handleRef(el)
+              }
             }
-          }
-        )
-      : null
+          })
+    })
   }
 
   render() {
