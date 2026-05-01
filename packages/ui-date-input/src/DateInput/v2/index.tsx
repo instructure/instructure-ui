@@ -22,7 +22,14 @@
  * SOFTWARE.
  */
 
-import { useState, useEffect, forwardRef, ForwardedRef } from 'react'
+import {
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+  forwardRef,
+  ForwardedRef
+} from 'react'
 import type { SyntheticEvent } from 'react'
 import { Calendar } from '@instructure/ui-calendar/latest'
 import { IconButton } from '@instructure/ui-buttons/latest'
@@ -33,9 +40,11 @@ import {
 } from '@instructure/ui-icons'
 import { Popover } from '@instructure/ui-popover/latest'
 import { TextInput } from '@instructure/ui-text-input/latest'
+import { useStyle } from '@instructure/emotion'
 import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
 import { getLocale, getTimezone } from '@instructure/ui-i18n'
 
+import generateStyle from './styles'
 import type { DateInputProps } from './props'
 import type { FormMessage } from '@instructure/ui-form-field/latest'
 import type { Moment } from '@instructure/ui-i18n'
@@ -147,6 +156,8 @@ const DateInput = forwardRef(
       renderCalendarIcon,
       margin,
       inputRef,
+      popoverMaxHeight = '100vh',
+      themeOverride,
       ...rest
     }: DateInputProps,
     ref: ForwardedRef<TextInput>
@@ -158,6 +169,58 @@ const DateInput = forwardRef(
       messages || []
     )
     const [showPopover, setShowPopover] = useState<boolean>(false)
+    const [calculatedPopoverMaxHeight, setCalculatedPopoverMaxHeight] =
+      useState<string | undefined>(undefined)
+    const [isHeightCalculated, setIsHeightCalculated] = useState<boolean>(false)
+
+    const popoverContentRef = useRef<HTMLDivElement | null>(null)
+
+    const handlePopoverPositioned = useCallback(
+      (position?: { placement?: string }) => {
+        if (!popoverContentRef.current) return
+        // Double requestAnimationFrame ensures measurements happen after all child components
+        // (Calendar) complete their mount lifecycle and Emotion finishes injecting CSS-in-JS
+        // styles. A single rAF was insufficient as styles are injected dynamically in
+        // componentDidMount(). This timing issue only manifested when StrictMode was disabled,
+        // since StrictMode's double-rendering provided an accidental second measurement pass.
+        requestAnimationFrame(() => {
+          // First frame: DOM structure is laid out
+          requestAnimationFrame(() => {
+            // Second frame: styles injected, child components mounted, dimensions stable
+            if (!popoverContentRef.current) return
+            const rect = popoverContentRef.current.getBoundingClientRect()
+            const placement = position?.placement || ''
+            const isPositionedAbove = placement.startsWith('top')
+            // When opening upward: available space is from viewport top to popover bottom.
+            // This is the space where the popover can expand within the viewport.
+            // When opening downward: available space is from popover top to viewport bottom.
+            // Subtract a small buffer (16px) for padding/margin.
+            const availableHeight = isPositionedAbove
+              ? rect.top + rect.height - 16
+              : window.innerHeight - rect.top - 16
+            const calculatedMaxHeight =
+              popoverMaxHeight !== '100vh'
+                ? popoverMaxHeight
+                : `${Math.max(100, availableHeight)}px`
+            setCalculatedPopoverMaxHeight(calculatedMaxHeight)
+            setIsHeightCalculated(true)
+          })
+        })
+      },
+      [popoverMaxHeight]
+    )
+
+    const styles = useStyle({
+      generateStyle,
+      params: {
+        calculatedPopoverMaxHeight,
+        popoverMaxHeight,
+        isHeightCalculated
+      },
+      componentId: 'DateInput',
+      themeOverride,
+      displayName: 'DateInput'
+    })
 
     useEffect(() => {
       // don't set input messages if there is an internal error set already
@@ -294,41 +357,49 @@ const DateInput = forwardRef(
               </IconButton>
             }
             isShowingContent={showPopover}
-            onShowContent={() => setShowPopover(true)}
+            onShowContent={() => {
+              setShowPopover(true)
+              setCalculatedPopoverMaxHeight(undefined)
+              setIsHeightCalculated(false)
+            }}
             onHideContent={() => setShowPopover(false)}
             on="click"
             shouldContainFocus
             shouldReturnFocus
             shouldCloseOnDocumentClick
             screenReaderLabel={screenReaderLabels.datePickerDialog}
+            onPositioned={handlePopoverPositioned}
+            onPositionChanged={handlePopoverPositioned}
           >
-            <Calendar
-              withYearPicker={withYearPicker}
-              onDateSelected={handleDateSelected}
-              selectedDate={selectedDate}
-              disabledDates={disabledDates}
-              visibleMonth={selectedDate}
-              locale={userLocale}
-              timezone={userTimezone}
-              renderNextMonthButton={
-                <IconButton
-                  size="small"
-                  withBackground={false}
-                  withBorder={false}
-                  renderIcon={<ChevronRightInstUIIcon color="baseColor" />}
-                  screenReaderLabel={screenReaderLabels.nextMonthButton}
-                />
-              }
-              renderPrevMonthButton={
-                <IconButton
-                  size="small"
-                  withBackground={false}
-                  withBorder={false}
-                  renderIcon={<ChevronLeftInstUIIcon color="baseColor" />}
-                  screenReaderLabel={screenReaderLabels.prevMonthButton}
-                />
-              }
-            />
+            <div ref={popoverContentRef} css={styles?.popoverContentContainer}>
+              <Calendar
+                withYearPicker={withYearPicker}
+                onDateSelected={handleDateSelected}
+                selectedDate={selectedDate}
+                disabledDates={disabledDates}
+                visibleMonth={selectedDate}
+                locale={userLocale}
+                timezone={userTimezone}
+                renderNextMonthButton={
+                  <IconButton
+                    size="small"
+                    withBackground={false}
+                    withBorder={false}
+                    renderIcon={<ChevronRightInstUIIcon color="baseColor" />}
+                    screenReaderLabel={screenReaderLabels.nextMonthButton}
+                  />
+                }
+                renderPrevMonthButton={
+                  <IconButton
+                    size="small"
+                    withBackground={false}
+                    withBorder={false}
+                    renderIcon={<ChevronLeftInstUIIcon color="baseColor" />}
+                    screenReaderLabel={screenReaderLabels.prevMonthButton}
+                  />
+                }
+              />
+            </div>
           </Popover>
         }
       />
