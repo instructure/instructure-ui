@@ -20,7 +20,7 @@ pnpm run cy:component
 Run specific test file:
 
 ```
-pnpm run cy:component -- --spec "cypress/component/Alerts.cy.tsx"
+pnpm run cy:component --spec "cypress/component/Alerts.cy.tsx"
 ```
 
 ### Creating new tests

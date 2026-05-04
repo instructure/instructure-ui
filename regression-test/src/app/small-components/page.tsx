@@ -134,7 +134,7 @@ export default function SmallComponentsPage() {
         <Text variant="contentImportant"> contentImportant </Text>
       </div>
       <div>
-        <span style={{ color: 'red' }}>
+        <span style={{ color: '#AA0000' }}>
           <Text color="inherit"> inherit </Text>
         </span>
         <Text variant="contentQuote"> contentQuote </Text>
