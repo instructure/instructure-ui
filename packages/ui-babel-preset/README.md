@@ -31,7 +31,6 @@ module.exports = {
     [
       require('@instructure/ui-babel-preset'),
       {
-        coverage: true,
         esModules: true,
         removeConsole: false,
         transformImports: false

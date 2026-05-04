@@ -27,7 +27,6 @@ import baseConfig from '@instructure/ui-webpack-config'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import { merge } from 'webpack-merge'
 import webpack from 'webpack'
-import TerserPlugin from 'terser-webpack-plugin'
 
 const ENV = process.env.NODE_ENV || 'production'
 const DEBUG = process.env.DEBUG || ENV === 'development'
@@ -42,7 +41,6 @@ const config = merge(baseConfig, {
     main: './src/index.tsx',
   },
   module: {
-    exprContextCritical: false,
     rules: [
       {
         test: /\.svg/,

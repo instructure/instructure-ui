@@ -46,12 +46,6 @@ import ReactDOM from "react-dom"
 import moment from 'moment'
 import 'moment/min/locales'
 `
-    let importExampleIcon = ''
-    if (this.props.code.includes('iconExample(')) {
-      importExampleIcon =
-        'import iconExample from "!svg-inline-loader!./heart_lg.svg"'
-    }
-
     // import sample media
     const neededSampleMedia: string[] = []
     if (this.props.code.includes('avatarSquare')) {
@@ -113,7 +107,6 @@ import 'moment/min/locales'
       title: this.props.title,
       js:
         importStatements +
-        importExampleIcon +
         importSampleMedia +
         importClasses +
         renderStatement +
