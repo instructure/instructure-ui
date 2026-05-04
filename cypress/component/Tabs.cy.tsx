@@ -128,6 +128,7 @@ describe('<Tabs/>', () => {
     cy.get('[role="tabpanel"]').eq(1).should('have.css', 'display', 'none')
 
     cy.contains('[role="tab"]', 'Second Tab').click()
+    cy.wait(100)
     cy.get('[role="tabpanel"]').eq(1).should('not.have.css', 'display', 'none')
     cy.get('[role="tabpanel"]').eq(0).should('have.css', 'display', 'none')
   })

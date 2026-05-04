@@ -27,7 +27,6 @@ module.exports = {
     [
       require('@instructure/ui-babel-preset'),
       {
-        coverage: Boolean(process.env.COVERAGE),
         esModules: Boolean(process.env.ES_MODULES),
         transformImports: Boolean(process.env.TRANSFORM_IMPORTS),
 

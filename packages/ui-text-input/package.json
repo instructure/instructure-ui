@@ -33,7 +33,7 @@
     "vitest": "^3.2.2"
   },
   "dependencies": {
-    "@babel/runtime": "^7.27.6",
+    "@babel/runtime": "^7.29.2",
     "@instructure/emotion": "workspace:*",
     "@instructure/shared-types": "workspace:*",
     "@instructure/ui-a11y-utils": "workspace:*",

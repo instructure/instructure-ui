@@ -22,24 +22,9 @@
  * SOFTWARE.
  */
 
-import TerserWebpackPlugin from 'terser-webpack-plugin'
-
 export default {
-  splitChunks: {
-    chunks: 'all'
-  },
-  sideEffects: true,
-  /** @type {Array<any>} */
-  minimizer: [
-    new TerserWebpackPlugin({
-      parallel: true,
-      // sourceMap: true, // this breaks storybook in production env
-      terserOptions: {
-        mangle: false,
-        output: {
-          semicolons: false
-        }
-      }
-    })
-  ]
+  // Tells webpack to recognize the sideEffects flag in package.json or rules to
+  // skip over modules which are flagged to contain no side effects when exports
+  // are not used
+  sideEffects: true
 }
