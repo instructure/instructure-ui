@@ -1,8 +1,8 @@
 {
   "summary": {
     "total": 32,
-    "unchanged": 31,
-    "changed": 1,
+    "unchanged": 29,
+    "changed": 3,
     "added": 0,
     "removed": 0
   },
@@ -141,8 +141,8 @@
     },
     {
       "name": "metric-pill-tag-timeselect-text.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 960,
       "sizeMismatch": false
     },
     {
@@ -189,8 +189,8 @@
     },
     {
       "name": "treebrowser.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 7852,
       "sizeMismatch": false
     },
     {
