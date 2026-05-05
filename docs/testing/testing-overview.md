@@ -22,10 +22,10 @@ For more information about our unit tests you can check out our [detailed guides
 
 For more information check out our [detailed guides and examples.](cypress-component-testing)
 
-#### Visual Regression Testing with Cypress and Chromatic:
+#### Visual Regression Testing with Cypress:
 
-We use [Cypress](https://docs.cypress.io/app/tooling/visual-testing) end-to-end (e2e) tests to generate structured layouts and capture screenshots of components. [Chromatic](https://www.chromatic.com/docs/diff-inspector/) handles the visual diffing and review process. It's especially effective for catching layout shifts, styling regressions, or broken UI elements that don’t trigger functional test failures. Tests are run after changes are pushed to remote, comparing the new screenshots to a baseline stored from a previously verified state. When differences are detected, the test fails and provides side-by-side diffs for easy review.
+We use [Cypress](https://docs.cypress.io/app/tooling/visual-testing) end-to-end (e2e) tests to capture screenshots of every component showcase page in the `regression-test` Next.js app. A custom [pixelmatch](https://github.com/mapbox/pixelmatch)-based `ui-scripts visual-diff` command compares each capture against a baseline stored on the `visual-baselines` branch and publishes an interactive HTML report to GitHub Pages for every PR. Tests are run after changes are pushed to remote; when differences are detected, the job fails and the sticky PR comment links to the report with inline diff images.
 
-These e2e tests also run [Axe](https://github.com/dequelabs/axe-core) accessibility checks and monitors `console.error`s.
+These e2e tests also run [Axe](https://github.com/dequelabs/axe-core) accessibility checks and monitor `console.error`s.
 
-You can read about these in the [README](https://github.com/instructure/instructure-ui/blob/master/regression-test/README.md) of the regression testing suite.
+For the full workflow, local dev loop, and how to add a new page, see the [visual regression testing guide](visual-regression).

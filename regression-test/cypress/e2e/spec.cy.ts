@@ -276,7 +276,7 @@ describe('visual regression test', () => {
 
   it('TreeBrowser', () => {
     cy.visit('http://localhost:3000/treebrowser')
-    cy.wait(600) // large timeout is needed for CI (to finish animation?)
+    cy.wait(1000) // large timeout is needed for CI (to finish animation?)
     // TODO axe fails with color contrast issues, try to remove animations from TreeBrowser
     //cy.injectAxe()
     //cy.checkA11y('.axe-test', axeOptions, terminalLog)

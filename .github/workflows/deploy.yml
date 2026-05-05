@@ -7,6 +7,9 @@ on:
       - v9_maintenance
       - v10_maintenance
   workflow_dispatch:
+concurrency:
+  group: gh-pages
+  cancel-in-progress: false
 jobs:
   deploy-release:
     if: startsWith(github.event.head_commit.message, 'chore(release)')
@@ -55,6 +58,7 @@ jobs:
             v9
             v10
             latest
+            visual-regression
           force: false
   deploy-latest:
     runs-on: ubuntu-latest
