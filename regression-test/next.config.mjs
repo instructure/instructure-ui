@@ -30,6 +30,13 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Fully static export: no SSR, no hydration mismatches that can cause
+  // screenshot flakiness. `next build` writes a plain static site to `out/`.
+  output: 'export',
+  // Emits out/<route>/index.html so any static server (including http-server)
+  // resolves /route without needing a .html fallback config.
+  trailingSlash: true,
+  images: { unoptimized: true },
   // strict mode needs to be disabled, so deterministic ID generation
   // works. If its enabled, client side double rendering causes IDs to
   // come out of sync. TODO fix

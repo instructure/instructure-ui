@@ -30,6 +30,8 @@
     "lerna": "9.0.7",
     "lodash.isplainobject": "^4.0.6",
     "mocha": "^10.7.3",
+    "pixelmatch": "^6.0.0",
+    "pngjs": "^7.0.0",
     "semver": "^7.7.4",
     "style-dictionary": "4.4.0",
     "webpack-cli": "^7.0.2",
@@ -45,6 +47,8 @@
     "access": "public"
   },
   "devDependencies": {
+    "@types/pixelmatch": "^5.2.6",
+    "@types/pngjs": "^6.0.5",
     "fantasticon": "^3.0.0",
     "svgo": "^3.3.2"
   }

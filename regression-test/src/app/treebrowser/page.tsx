@@ -58,6 +58,7 @@ export default function TreeBrowserPage() {
     <main className="flex gap-12 p-8 flex-col items-start axe-test">
       <section>
         <TreeBrowser
+          animation={false}
           size="large"
           collections={{
             1: {
@@ -106,6 +107,7 @@ export default function TreeBrowserPage() {
       {/* Customizing icons example */}
       <section>
         <TreeBrowser
+          animation={false}
           collections={{
             1: { id: 1, name: 'Grades', collections: [], items: [1, 2, 3] }
           }}
@@ -126,6 +128,7 @@ export default function TreeBrowserPage() {
       {/* Different icons per item via getItemProps */}
       <section>
         <TreeBrowser
+          animation={false}
           collections={{
             1: { id: 1, name: 'Saved', collections: [], items: [1, 2, 3] }
           }}
