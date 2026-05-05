@@ -496,6 +496,7 @@ const generateStyle = (
       width: '100%',
       display: 'flex',
       alignItems: 'center',
+      justifyContent: textAlign === 'center' ? 'center' : 'flex-start',
       direction: 'inherit',
       userSelect: 'none',
       transition: 'background 0.2s, transform 0.2s',
