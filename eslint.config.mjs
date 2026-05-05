@@ -82,7 +82,9 @@ const finalConfig = tseslint.config(
       "/regression-test/**",
       "/coverage/**",
       "**/stylelint.config.js",
-      "**/babel.config.js"
+      "**/babel.config.js",
+      "**/.next/**",
+      "**/next-env.d.ts"
     ]
   },
   eslint.configs.recommended,

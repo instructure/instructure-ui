@@ -138,7 +138,6 @@ export default {
       JSON.stringify(legacyIconsData, null, 2),
       'utf8'
     )
-    // eslint-disable-next-line no-console
     console.log(
       `Generated ${legacyOutputPath} (${legacyIconsData.length} icons)`
     )
