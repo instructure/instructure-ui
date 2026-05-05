@@ -262,7 +262,6 @@ class Alert extends Component<AlertProps, AlertState> {
 
   renderAlert() {
     // prevent onDismiss from being passed to the View component
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const {
       margin,
       styles,

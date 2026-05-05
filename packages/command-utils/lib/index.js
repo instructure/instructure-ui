@@ -33,7 +33,7 @@ import { sync, spawn } from 'cross-spawn'
 const require = createRequire(import.meta.url)
 
 function info(...args) {
-  console.info(chalk.blue(...args)) // eslint-disable-line no-console
+  console.info(chalk.blue(...args))
 }
 
 function warn(...args) {
@@ -163,6 +163,7 @@ function resolveBin(
   let pathFromWhich
   try {
     pathFromWhich = fs.realpathSync(which.sync(executable))
+    // eslint-disable-next-line no-unused-vars
   } catch (_error) {
     // ignore _error
   }
