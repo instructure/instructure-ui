@@ -240,6 +240,25 @@ describe('<Checkbox />', () => {
     })
   })
 
+  it('reflects checked state changes via data-checked attribute', async () => {
+    renderCheckbox({ defaultChecked: false })
+    const input = screen.getByRole('checkbox')
+
+    expect(input).toHaveAttribute('data-checked', 'false')
+
+    userEvent.click(input)
+    await waitFor(() => {
+      expect(input).toHaveAttribute('data-checked', 'true')
+    })
+  })
+
+  it('sets data-checked to mixed when indeterminate', () => {
+    renderCheckbox({ indeterminate: true })
+    const input = screen.getByRole('checkbox')
+
+    expect(input).toHaveAttribute('data-checked', 'mixed')
+  })
+
   describe('for a11y', () => {
     it('`simple` variant should meet standards', async () => {
       const { container } = renderCheckbox({ variant: 'simple' })

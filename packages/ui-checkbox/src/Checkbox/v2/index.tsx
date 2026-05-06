@@ -328,6 +328,7 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
       >
         <div css={styles?.container}>
           <input
+            data-checked={indeterminate ? 'mixed' : this.checked}
             {...props}
             id={this.id}
             value={value}
