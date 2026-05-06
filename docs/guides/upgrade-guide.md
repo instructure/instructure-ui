@@ -585,6 +585,8 @@ type: embed
 
 `error` or `success` messages are no longer displayed when the component is `readOnly` or `disabled`.
 
+Setting `disabled` on `FormFieldGroup` now also disables its children. Previously, the `disabled` prop only applied disabled styles to the group container while leaving child inputs interactive.
+
 ```js
 ---
 type: embed

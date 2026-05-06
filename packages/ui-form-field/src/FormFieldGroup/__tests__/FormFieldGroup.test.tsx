@@ -157,6 +157,52 @@ describe('<FormFieldGroup />', () => {
     expect(legend).toHaveTextContent(description)
   })
 
+  it('disables children when disabled', () => {
+    const TestComponent = ({ disabled }: { disabled?: boolean }) => (
+      <input data-testid="test-input" disabled={disabled} />
+    )
+
+    render(
+      <FormFieldGroup description="Test group" disabled>
+        <TestComponent />
+      </FormFieldGroup>
+    )
+
+    expect(screen.getByTestId('test-input')).toBeDisabled()
+  })
+
+  it('disables all children when disabled', () => {
+    const TestComponent = ({ disabled }: { disabled?: boolean }) => (
+      <input data-testid="test-input" disabled={disabled} />
+    )
+
+    render(
+      <FormFieldGroup description="Test group" disabled>
+        <TestComponent data-testid="first" />
+        <TestComponent data-testid="second" />
+        <TestComponent data-testid="third" />
+      </FormFieldGroup>
+    )
+
+    screen.getAllByTestId('test-input').forEach((input) => {
+      expect(input).toBeDisabled()
+    })
+  })
+
+  it('does not disable children when not disabled', () => {
+    const TestComponent = ({ disabled }: { disabled?: boolean }) => (
+      <input data-testid="test-input" disabled={disabled} />
+    )
+
+    render(
+      <FormFieldGroup description="Test group">
+        <TestComponent />
+      </FormFieldGroup>
+    )
+
+    expect(screen.getByTestId('test-input')).not.toBeDisabled()
+  })
+
   it('should meet a11y standards', async () => {
     const { container } = render(
       <FormFieldGroup description="Please enter your full name">

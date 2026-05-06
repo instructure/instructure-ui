@@ -48,7 +48,8 @@ type FormFieldGroupOwnProps = {
    */
   messagesId?: string
   /**
-   * Whether the field group is disabled. When true, error and success messages will be hidden.
+   * Whether the field group is disabled. When true, the disabled prop is propagated to all
+   * child components, error and success messages will be hidden.
    */
   disabled?: boolean
   /**

@@ -22,10 +22,20 @@
  * SOFTWARE.
  */
 
-import { Component, Children, ReactElement, AriaAttributes } from 'react'
+import {
+  Component,
+  Children,
+  ReactElement,
+  AriaAttributes,
+  isValidElement
+} from 'react'
 
 import { Grid } from '@instructure/ui-grid/latest'
-import { pickProps, omitProps } from '@instructure/ui-react-utils'
+import {
+  pickProps,
+  omitProps,
+  safeCloneElement
+} from '@instructure/ui-react-utils'
 import { withStyleNew } from '@instructure/emotion'
 
 import { allowedProps as formFieldLayoutAllowedProps } from '../../FormFieldLayout/v2/props'
@@ -86,20 +96,22 @@ class FormFieldGroup extends Component<FormFieldGroupProps> {
   }
 
   renderColumns() {
+    const { disabled } = this.props
     return Children.map(this.props.children, (child, index) => {
-      return child ? (
+      if (!child) return null
+      const el = child as ReactElement<any>
+      const renderedChild =
+        disabled && isValidElement(el)
+          ? safeCloneElement(el, { disabled: true })
+          : child
+      return (
         <Grid.Col
-          width={
-            (child as ReactElement).props &&
-            (child as ReactElement<any>).props.width
-              ? 'auto'
-              : undefined
-          }
+          width={el.props && el.props.width ? 'auto' : undefined}
           key={index}
         >
-          {child}
+          {renderedChild}
         </Grid.Col>
-      ) : null
+      )
     })
   }
 
