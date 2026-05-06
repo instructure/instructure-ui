@@ -33,7 +33,7 @@ import clean from '../build/clean.js'
 import build from '../build/babel.js'
 import generateAllTokens from '../build/generate-all-tokens.js'
 import buildIcons from '../icons/build-icons.js'
-import buildThemes from '../build/build-themes.js'
+import buildThemes from '../build/build-themes.ts'
 import createComponentVersion from './create-component-version.ts'
 
 export const yargCommands = [

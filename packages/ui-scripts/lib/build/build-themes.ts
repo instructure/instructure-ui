@@ -22,31 +22,14 @@
  * SOFTWARE.
  */
 
-import path, { dirname } from 'path'
-import { fileURLToPath } from 'url'
-import { promises } from 'fs'
-import pkg from 'glob'
-import setupThemes from './buildThemes/setupThemes.js'
-
-const { glob } = pkg
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
+// @ts-ignore -- package ships JS source without type declarations
+import { themeTokens } from '@instructure/instructure-design-tokens'
+import setupThemes from './buildThemes/setupThemes.ts'
 
 export default {
   command: 'build-themes',
   desc: 'Generate themes',
   handler: async () => {
-    const tokensStudioDir = path.join(__dirname, 'tokensStudio')
-    const jsonFiles = glob.sync('**/*.json', { cwd: tokensStudioDir })
-
-    const themeTokens = {}
-    for (const filePath of jsonFiles) {
-      const fullPath = path.join(tokensStudioDir, filePath)
-      const rawData = await promises.readFile(fullPath, 'utf8')
-      const relativePath = filePath.replace('.json', '')
-      themeTokens[relativePath] = JSON.parse(rawData)
-    }
-
     await setupThemes(
       'packages/ui-themes/src/themes/newThemeTokens',
       themeTokens

@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
-const isReference = (expression) =>
+const isReference = (expression: any): boolean =>
   expression[0] === '{' && expression[expression.length - 1] === '}'
 
-const formatSemantic = (collection, key) => {
+const formatSemantic = (collection: any, key?: any): any => {
   const value = key ? collection[key] : collection
   if (typeof value === 'object' && !value.value && !value.type) {
     return Object.keys(value).reduce((acc, key) => {
@@ -35,7 +35,7 @@ const formatSemantic = (collection, key) => {
   return value.value
 }
 
-const formatReference = (reference) => {
+const formatReference = (reference: string): string => {
   const referenceArr = reference.slice(1, -1).split('.')
   const lastElement = referenceArr[referenceArr.length - 1]
 
@@ -47,7 +47,7 @@ const formatReference = (reference) => {
   return `primitives.${reference.slice(1, -1)},\n`
 }
 
-export const resolveReferences = (semantics, key) => {
+export const resolveReferences = (semantics: any, key?: any): string => {
   const value = key ? semantics[key] : semantics
   if (typeof value === 'object' && !value.value && !value.type) {
     return Object.keys(value).reduce((acc, key, index) => {
@@ -74,7 +74,7 @@ export const resolveReferences = (semantics, key) => {
   return `"${value}",\n`
 }
 
-export const resolveTypeReferences = (semantics, key) => {
+export const resolveTypeReferences = (semantics: any, key?: any): string => {
   const value = key ? semantics[key] : semantics
   if (typeof value === 'object') {
     return Object.keys(value).reduce((acc, key, index) => {
@@ -94,7 +94,7 @@ export const resolveTypeReferences = (semantics, key) => {
     return `Primitives${value
       .slice(1, -1)
       .split('.')
-      .map((val) => `['${val}']`)
+      .map((val: string) => `['${val}']`)
       .join('')}, `
   }
 
@@ -104,16 +104,16 @@ export const resolveTypeReferences = (semantics, key) => {
   return `${typeof value}, `
 }
 
-export const mergeSemanticSets = (data, semanticList) =>
-  semanticList.reduce((acc, semantic) => ({ ...acc, ...data[semantic] }), {})
+export const mergeSemanticSets = (semanticList: any[]) =>
+  semanticList.reduce((acc, semantic) => ({ ...acc, ...semantic }), {})
 
-const generateSemantics = (data) => {
+const generateSemantics = (data: any): string => {
   const formattedSemantic = formatSemantic(data)
 
   return resolveReferences(formattedSemantic)
 }
 
-export const generateSemanticsType = (data) => {
+export const generateSemanticsType = (data: any): string => {
   const formattedSemantic = formatSemantic(data)
 
   return `{${resolveTypeReferences(formattedSemantic)}}`
