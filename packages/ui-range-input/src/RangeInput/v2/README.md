@@ -10,14 +10,9 @@ type: example
 ---
 const Example = () => {
   const [size, setSize] = useState('small')
-  const [thumbVariant, setThumbVariant] = useState('accessible')
 
   const handleSizeChange = (event, value) => {
     setSize(value)
-  }
-
-  const handleThumbVariantChange = (event, value) => {
-    setThumbVariant(value)
   }
 
   return (
@@ -29,7 +24,6 @@ const Example = () => {
           max={100}
           min={0}
           size={size}
-          thumbVariant={thumbVariant}
         />
       </View>
 
@@ -52,16 +46,6 @@ const Example = () => {
             <RadioInput label="small" value="small" />
             <RadioInput label="medium" value="medium" />
             <RadioInput label="large" value="large" />
-          </RadioInputGroup>
-
-          <RadioInputGroup
-            onChange={handleThumbVariantChange}
-            name="thumbVariant"
-            value={thumbVariant}
-            description="Thumb variant"
-          >
-            <RadioInput label="accessible" value="accessible" />
-            <RadioInput label="deprecated" value="deprecated" />
           </RadioInputGroup>
         </FormFieldGroup>
       </View>

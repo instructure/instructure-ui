@@ -24,7 +24,6 @@
 
 import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import type { RangeInputProps, RangeInputStyle } from './props'
-import { darken, alpha } from '@instructure/ui-color-utils'
 import { boxShadowObjectsToCSSString } from '@instructure/ui-themes'
 
 /**
@@ -42,7 +41,7 @@ const generateStyle = (
   props: RangeInputProps,
   sharedTokens: SharedTokens
 ): RangeInputStyle => {
-  const { size, thumbVariant } = props
+  const { size } = props
   const valueSizeVariants = {
     small: {
       fontSize: componentTheme.valueSmallFontSize,
@@ -76,30 +75,19 @@ const generateStyle = (
 
   const borderedHandleSize = `calc(${componentTheme.handleSize} + (${componentTheme.handleBorderSize} * 2))`
 
-  const thumbVariantStyle = {
-    deprecated: {
-      width: componentTheme.handleSize,
-      height: componentTheme.handleSize,
-      boxShadow: `0 0.0625rem 0 ${darken(componentTheme.handleShadowColor)}`
-    },
-    accessible: {
-      width: borderedHandleSize,
-      height: borderedHandleSize,
-      borderWidth: componentTheme.handleBorderSize,
-      borderColor: componentTheme.handleBorderColor,
-      borderStyle: 'solid',
-      boxSizing: 'border-box',
-      boxShadow: boxShadowObjectsToCSSString(componentTheme.boxShadow)
-    }
-  }
-
   const thumbStyle = {
     appearance: 'none',
     borderRadius: '50%',
     cursor: 'pointer',
     transition: 'all 0.15s ease-in-out',
     background: componentTheme.handleBackground,
-    ...thumbVariantStyle[thumbVariant!],
+    width: borderedHandleSize,
+    height: borderedHandleSize,
+    borderWidth: componentTheme.handleBorderSize,
+    borderColor: componentTheme.handleBorderColor,
+    borderStyle: 'solid',
+    boxSizing: 'border-box',
+    boxShadow: boxShadowObjectsToCSSString(componentTheme.boxShadow),
 
     '&:hover': {
       background: componentTheme.handleHoverBackground
@@ -108,31 +96,15 @@ const generateStyle = (
 
   // Center the thumb vertically on the track by accounting for the track borders
   const thumbPosition = {
-    deprecated: {
-      marginTop: `calc(-1 * ${componentTheme.handleSize} / 4 - ${trackBorderWidth})`
-    },
-    accessible: {
-      marginTop: `calc(-1 * ${borderedHandleSize} / 4 - ${trackBorderWidth})`
-    }
+    marginTop: `calc(-1 * ${borderedHandleSize} / 4 - ${trackBorderWidth})`
   }
 
   const thumbFocusActiveStyle = {
-    deprecated: {
-      background: componentTheme.handleFocusBackground,
-      boxShadow: `0 0.0625rem 0 ${darken(
-        componentTheme.handleShadowColor
-      )}, 0 0 0 ${componentTheme.handleFocusOutlineWidth} ${alpha(
-        componentTheme.handleFocusOutlineColor,
-        40
-      )}`
-    },
-    accessible: {
-      background: componentTheme.handleFocusBackground,
-      boxShadow:
-        `${boxShadowObjectsToCSSString(componentTheme.boxShadow)}, ` +
-        `inset 0 0 0 ${componentTheme.handleFocusInset} ${componentTheme.handleFocusBackground}, ` +
-        `inset 0 0 0 calc(${componentTheme.handleFocusInset} + ${sharedTokens.focusOutline.width}) ${sharedTokens.focusOutline.onColor}`
-    }
+    background: componentTheme.handleFocusBackground,
+    boxShadow:
+      `${boxShadowObjectsToCSSString(componentTheme.boxShadow)}, ` +
+      `inset 0 0 0 ${componentTheme.handleFocusInset} ${componentTheme.handleFocusBackground}, ` +
+      `inset 0 0 0 calc(${componentTheme.handleFocusInset} + ${sharedTokens.focusOutline.width}) ${sharedTokens.focusOutline.onColor}`
   }
 
   return {
@@ -155,13 +127,13 @@ const generateStyle = (
 
       '&::-webkit-slider-thumb': {
         ...thumbStyle,
-        ...thumbPosition[thumbVariant!]
+        ...thumbPosition
       },
       '&::-moz-range-thumb': thumbStyle,
       '&:focus, &:active': {
         outline: 'none',
-        '&::-webkit-slider-thumb': thumbFocusActiveStyle[thumbVariant!],
-        '&::-moz-range-thumb': thumbFocusActiveStyle[thumbVariant!]
+        '&::-webkit-slider-thumb': thumbFocusActiveStyle,
+        '&::-moz-range-thumb': thumbFocusActiveStyle
       },
       // remove outline in FF
       '&::-moz-focus-inner, &::-moz-focus-outer': {
