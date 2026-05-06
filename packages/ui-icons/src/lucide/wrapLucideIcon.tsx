@@ -23,7 +23,7 @@
  */
 
 import React, { useId, useContext } from 'react'
-import { useStyle } from '@instructure/emotion'
+import { useStyleNew } from '@instructure/emotion'
 import { passthroughProps } from '@instructure/ui-react-utils'
 import type { LucideIcon } from 'lucide-react'
 
@@ -63,7 +63,7 @@ export function wrapLucideIcon(
       if (typeof elementRef === 'function') elementRef(el)
     }
 
-    const styles = useStyle({
+    const styles = useStyleNew({
       componentId: 'Icon',
       generateStyle,
       themeOverride,

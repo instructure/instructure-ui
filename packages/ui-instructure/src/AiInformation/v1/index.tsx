@@ -28,7 +28,7 @@ import { Heading } from '@instructure/ui-heading/v11_6'
 import { Text } from '@instructure/ui-text/v11_6'
 import { Link } from '@instructure/ui-link/v11_6'
 import { IconExternalLinkLine } from '@instructure/ui-icons'
-import { useStyleLegacy as useStyle } from '@instructure/emotion'
+import { useStyle as useStyleNew } from '@instructure/emotion'
 import { NutritionFacts } from '../../NutritionFacts/v1'
 import { DataPermissionLevels } from '../../DataPermissionLevels/v1'
 
@@ -64,7 +64,7 @@ const AiInformation = ({
 }: AiInformationProps) => {
   const [open, setOpen] = useState(false)
 
-  const styles = useStyle({
+  const styles = useStyleNew({
     generateStyle,
     generateComponentTheme,
     componentId: 'AiInformation',

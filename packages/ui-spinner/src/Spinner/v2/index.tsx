@@ -24,7 +24,7 @@
 
 import { useState, useEffect, forwardRef } from 'react'
 
-import { useStyle } from '@instructure/emotion'
+import { useStyleNew } from '@instructure/emotion'
 import {
   callRenderProp,
   omitProps,
@@ -59,7 +59,7 @@ const Spinner = forwardRef<HTMLDivElement, SpinnerProps>((props, ref) => {
     setTitleId(getId())
   }, [])
 
-  const styles = useStyle({
+  const styles = useStyleNew({
     generateStyle,
     themeOverride,
     params: {

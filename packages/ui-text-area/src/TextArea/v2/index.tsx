@@ -43,7 +43,7 @@ import type { RequestAnimationFrameType } from '@instructure/ui-dom-utils'
 import { debounce } from '@instructure/debounce'
 import type { Debounced } from '@instructure/debounce'
 
-import { useStyle } from '@instructure/emotion'
+import { useStyleNew } from '@instructure/emotion'
 import { generateId, px } from '@instructure/ui-utils'
 
 import {
@@ -129,7 +129,7 @@ const TextArea = forwardRef<TextAreaElement, TextAreaProps>((props, ref) => {
   }, [messages])
 
   // Use styles
-  const styles = useStyle({
+  const styles = useStyleNew({
     generateStyle,
     themeOverride,
     params: {
