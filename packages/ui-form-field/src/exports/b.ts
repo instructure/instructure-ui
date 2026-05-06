@@ -34,7 +34,6 @@ export type {
   FormMessage,
   FormMessageChild
 } from '../utils/v1/FormPropTypes'
-
 export type { FormFieldOwnProps, FormFieldProps } from '../FormField/v2/props'
 export type { FormFieldLabelProps } from '../FormFieldLabel/v2/props'
 export type { FormFieldMessageProps } from '../FormFieldMessage/v2/props'
