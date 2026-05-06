@@ -590,9 +590,9 @@ type: example
 </InstUISettingsProvider>
 ```
 
-### 15. Overrides on functional (`useStyle`) components
+### 15. Overrides on functional (`useStyleNew`) components
 
-All override patterns work identically on functional components that use the `useStyle` hook. Here, Avatar tokens are overridden the same way as class-based components using `withStyleNew`.
+All override patterns work identically on functional components that use the `useStyleNew` hook. Here, Avatar tokens are overridden the same way as class-based components using `withStyleNew`.
 
 ```js
 ---
@@ -619,7 +619,7 @@ type: example
 
 ### 16. Function form `themeOverride` on functional components
 
-The function form also works on `useStyle` components. The function receives the component's calculated theme as the first argument, letting you derive overrides from existing token values.
+The function form also works on `useStyleNew` components. The function receives the component's calculated theme as the first argument, letting you derive overrides from existing token values.
 
 ```js
 ---

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { useStyle } from '@instructure/emotion'
+import { useStyleNew } from '@instructure/emotion'
 import { useState, useEffect, forwardRef, SyntheticEvent } from 'react'
 
 import { passthroughProps } from '@instructure/ui-react-utils'
@@ -65,7 +65,7 @@ const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
     } = props
     const [loaded, setLoaded] = useState(false)
 
-    const styles = useStyle({
+    const styles = useStyleNew({
       generateStyle,
       themeOverride,
       params: {

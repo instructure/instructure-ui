@@ -46,7 +46,7 @@ import {
   passthroughProps
 } from '@instructure/ui-react-utils'
 
-import { useStyle } from '@instructure/emotion'
+import { useStyleNew } from '@instructure/emotion'
 
 import generateStyle from './styles'
 
@@ -134,9 +134,9 @@ const NumberInput = forwardRef<NumberInputHandle, NumberInputProps>(
       setUpButtonState('actionSecondaryBaseColor')
       setDownButtonState('actionSecondaryBaseColor')
     }
-    // Styles - useStyle will pass these to generateStyle(componentTheme, params as props, params as state)
+    // Styles - useStyleNew will pass these to generateStyle(componentTheme, params as props, params as state)
     // We need to provide all values that generateStyle needs from both props and state
-    const styles = useStyle({
+    const styles = useStyleNew({
       generateStyle,
       themeOverride,
       params: {
