@@ -21,12 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 export { TreeBrowser } from '../TreeBrowser/v1'
 export { TreeButton } from '../TreeBrowser/v1/TreeButton'
 export { TreeCollection } from '../TreeBrowser/v1/TreeCollection'
 export { TreeNode } from '../TreeBrowser/v1/TreeNode'
 
-export type { TreeBrowserProps } from '../TreeBrowser/v1/props'
+export type {
+  TreeBrowserProps,
+  Collection,
+  CollectionData
+} from '../TreeBrowser/v1/props'
 export type { TreeBrowserButtonProps } from '../TreeBrowser/v1/TreeButton/props'
 export type { TreeBrowserCollectionProps } from '../TreeBrowser/v1/TreeCollection/props'
 export type { TreeBrowserNodeProps } from '../TreeBrowser/v1/TreeNode/props'

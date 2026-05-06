@@ -41,6 +41,7 @@ export type {
   TopNavBarBrandOwnProps
 } from '../TopNavBar/v2/TopNavBarBrand/props'
 export type {
+  ItemChild,
   TopNavBarItemProps,
   TopNavBarItemOwnProps,
   TopNavBarItemTooltipType
