@@ -1100,6 +1100,8 @@ type: embed
 
 ### RangeInput
 
+- `thumbVariant` prop has been removed. The component now always renders the previously-`accessible` thumb (better color contrast, border, and inset focus ring).
+
 ```js
 ---
 type: embed
