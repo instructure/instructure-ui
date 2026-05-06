@@ -162,6 +162,10 @@ type: example
 />
 ```
 
+### Querying checked state from the DOM
+
+The underlying `<input>` has a `data-checked` attribute (`"true"`, `"false"`, or `"mixed"` when indeterminate) that can be queried from the DOM to read the current state.
+
 ### Guidelines
 
 ```js
