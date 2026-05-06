@@ -26,11 +26,11 @@ type: code
 // index.tsx
 
 // /** @jsx jsx */
-import { jsx, useStyle } from '@instructure/emotion'
+import { jsx, useStyleNew } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 const InstUIComponent = (props: PropsType)=> {
-  const styles = useStyle({
+  const styles = useStyleNew({
     generateStyle,
     generateComponentTheme,
     componentId: "InstUIComponent_id",
@@ -59,7 +59,7 @@ type: code
 const generateStyle = (
   componentTheme: componentThemeType,
   params:ParamType): AvatarStyle => {
-  const { color, variant } = params // assuming you passed the `color` and `variant` to the useStyle hook
+  const { color, variant } = params // assuming you passed the `color` and `variant` to the useStyleNew hook
   const variantStyles = {
     circle: {
       width: '2.5em',
@@ -109,14 +109,14 @@ export default generateComponentTheme
 
 Let's take a look at the key parts of the examples:
 
-The `useStyle` hook calculates the styles for the component. It needs an object with:
+The `useStyleNew` hook calculates the styles for the component. It needs an object with:
 
 - `generateStyle` function, this function contains all the `css` information (`style.ts` file in the example).
 - `generateComponentTheme` is an optional param. This provides variables that act as the theme of the components. These can be derived from the global theme object or hardcoded. All can be overridden.
 - `componentId` depends on `generateComponentTheme`. It's mandatory if `generateComponentTheme` is provided. It must be a unique string to identify the component by and used for [component level overrides](https://instructure.design/#using-theme-overrides/#Overriding%20theme%20for%20a%20specific%20component%20in%20a%20subtree).
 - `params` is an optional object with any data you need to pass to `generateStyle`. To enable themeOverrides on the component, you must pass the `themeOverride` prop to `params`.
 
-`useStyle` returns an object with the css classes. Pass it to the DOM through emotion's `css` prop (see example).
+`useStyleNew` returns an object with the css classes. Pass it to the DOM through emotion's `css` prop (see example).
 
 #### The `generateComponentTheme`
 
@@ -125,5 +125,5 @@ The `generateComponentTheme` defines, calculates and exposes variables that are 
 
 #### The `generateStyle`
 
-You define the css in the `generateStyle` method. It has access to the themes, defined in the `generateComponentTheme` (in the example: `componentTheme`) and the `params` which are passed to the `useStyle` hook.
+You define the css in the `generateStyle` method. It has access to the themes, defined in the `generateComponentTheme` (in the example: `componentTheme`) and the `params` which are passed to the `useStyleNew` hook.
 Note: if you set the `label` to a unique value for every css class, it makes testing and debugging much easier because emotion appends to the end of the hashed class name it generates.

@@ -38,7 +38,7 @@ import {
 } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 
-import { useStyle } from '@instructure/emotion'
+import { useStyleNew } from '@instructure/emotion'
 
 import generateStyle from './styles'
 
@@ -90,7 +90,7 @@ const RadioInput = forwardRef<RadioInputHandle, RadioInputProps>(
       typeof checkedProp === 'undefined' ? internalChecked : checkedProp
 
     // Styles - pass props with defaults applied for generateStyle
-    const styles = useStyle({
+    const styles = useStyleNew({
       generateStyle,
       themeOverride,
       params: {

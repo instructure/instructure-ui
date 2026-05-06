@@ -28,11 +28,7 @@ import type { MockInstance } from 'vitest'
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
-import {
-  InstUISettingsProvider,
-  WithStyleProps,
-  useStyleLegacy
-} from '../index'
+import { InstUISettingsProvider, WithStyleProps, useStyle } from '../index'
 
 type Props = {
   inverse?: boolean
@@ -106,7 +102,7 @@ describe('useStyle', () => {
   const ThemedComponent = ({ inverse = false, themeOverride }: Props) => {
     const [clearBackground, setClearBackground] = useState(false)
 
-    const styles = useStyleLegacy({
+    const styles = useStyle({
       generateStyle,
       generateComponentTheme,
       componentId: 'ThemedComponent',

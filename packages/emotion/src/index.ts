@@ -40,14 +40,14 @@ export {
   calcFocusOutlineStyles
 } from './styleUtils'
 
-export { useStyleLegacy } from './useStyleLegacy'
 export { useStyle } from './useStyle'
+export { useStyleNew } from './useStyleNew'
 export { useTheme } from './useTheme'
 
 export type { InstUIProviderProps } from './InstUISettingsProvider'
 export type { ComponentStyle, StyleObject, Overrides } from './EmotionTypes'
 export type { WithStyleProps } from './withStyle'
-export type { NewThemeOverrideProp } from './useStyle'
+export type { NewThemeOverrideProp } from './useStyleNew'
 export type {
   SpacingValues,
   Spacing,

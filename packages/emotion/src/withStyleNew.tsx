@@ -66,16 +66,16 @@ type WithStylePrivateProps<
 > = Style extends null
   ? object
   : {
-    styles?: Style
-    makeStyles?: (extraArgs?: Record<string, unknown>) => void
-  }
+      styles?: Style
+      makeStyles?: (extraArgs?: Record<string, unknown>) => void
+    }
 
 type ThemeOverrideProp<
   CompTheme extends ComponentTheme | null = ComponentTheme
 > = {
   themeOverride?:
-  | Partial<CompTheme>
-  | ((componentTheme: CompTheme, currentTheme: Theme) => Partial<CompTheme>)
+    | Partial<CompTheme>
+    | ((componentTheme: CompTheme, currentTheme: Theme) => Partial<CompTheme>)
 }
 
 type WithStyleProps<
@@ -89,7 +89,7 @@ declare const process: Record<string, any> | undefined
 
 const defaultValues = {
   styles: {},
-  makeStyles: () => { }
+  makeStyles: () => {}
 }
 
 /**
@@ -152,7 +152,8 @@ const withStyleNew = decorator(
     ComposedComponent: any,
     generateStyle: GenerateStyleRework,
     useTokensFrom?: keyof NewComponentTypes,
-    frozenTheme?: any
+    frozenTheme?: any,
+    generateComponentTheme?: any
   ) => {
     const displayName = ComposedComponent.displayName || ComposedComponent.name
 
@@ -177,7 +178,7 @@ const withStyleNew = decorator(
       if (frozenTheme && !frozenTheme[themeKey]) {
         console.error(
           `The version of ${displayName} you are using does not support the currently applied "${themeKey}" theme. ` +
-          `Please upgrade to the latest version of ${displayName}.`
+            `Please upgrade to the latest version of ${displayName}.`
         )
       }
 
@@ -232,8 +233,13 @@ const withStyleNew = decorator(
         sharedTokensOverrides as Record<string, unknown>
       ) as SharedTokens
       // Note: Some components do not have a theme, e.g., FormFieldMessages
-      const baseComponentTheme =
-        theme.newTheme.components[componentId]?.(semantics)
+      const baseComponentTheme = generateComponentTheme
+        ? generateComponentTheme({
+            primitives,
+            semantics,
+            sharedTokens
+          })
+        : theme.newTheme.components[componentId]?.(semantics)
 
       const componentThemeFromSettingsProvider = mergeDeep(
         baseComponentTheme,
@@ -245,9 +251,9 @@ const withStyleNew = decorator(
         // @ts-ignore TODO-theme-types: fix typing
         typeof componentOverridesFromThemeOverrideProp === 'function'
           ? componentOverridesFromThemeOverrideProp(
-            componentThemeFromSettingsProvider,
-            themeInContext
-          )
+              componentThemeFromSettingsProvider,
+              themeInContext
+            )
           : componentOverridesFromThemeOverrideProp
       )
 
@@ -255,7 +261,7 @@ const withStyleNew = decorator(
       const [styles, setStyles] = useState(
         generateStyle
           ? // @ts-ignore TODO-theme-types: fix typing
-          generateStyle(componentTheme, componentProps, sharedTokens, {})
+            generateStyle(componentTheme, componentProps, sharedTokens, {})
           : {}
       )
 

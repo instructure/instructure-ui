@@ -27,7 +27,7 @@ import { Button, CloseButton } from '@instructure/ui-buttons/v11_6'
 import { Heading } from '@instructure/ui-heading/v11_6'
 import { Text } from '@instructure/ui-text/v11_6'
 import { Link } from '@instructure/ui-link/v11_6'
-import { useStyleLegacy as useStyle } from '@instructure/emotion'
+import { useStyle as useStyleNew } from '@instructure/emotion'
 
 import { DataPermissionLevelsProps } from './props'
 import generateStyle from './styles'
@@ -51,7 +51,7 @@ const DataPermissionLevels = ({
 }: DataPermissionLevelsProps) => {
   const [open, setOpen] = useState(false)
 
-  const styles = useStyle({
+  const styles = useStyleNew({
     generateStyle,
     generateComponentTheme,
     componentId: 'DataPermissionLevels',

@@ -27,7 +27,7 @@ import { expect } from 'chai'
 import {
   InstUISettingsProvider,
   WithStyleProps,
-  useStyle
+  useStyleNew
 } from '@instructure/emotion/src/index'
 
 import '../support/component'
@@ -104,7 +104,7 @@ const generateStyle = function (
 const ThemedComponent = ({ inverse = false, themeOverride }: Props) => {
   const [clearBackground, setClearBackground] = useState(false)
 
-  const styles = useStyle({
+  const styles = useStyleNew({
     generateStyle,
     generateComponentTheme,
     componentId: 'ThemedComponent',
@@ -116,14 +116,14 @@ const ThemedComponent = ({ inverse = false, themeOverride }: Props) => {
   }
 
   return (
-    <div data-testid="useStyle-testComp" css={styles!.exampleComponent}>
+    <div data-testid="useStyleNew-testComp" css={styles!.exampleComponent}>
       <p>Hello World</p>
       <button onClick={handleClick}>Button</button>
     </div>
   )
 }
 
-describe('useStyle should apply bi-directional polyfill on styles object', () => {
+describe('useStyleNew should apply bi-directional polyfill on styles object', () => {
   it('in default "ltr" mode', async () => {
     cy.mount(
       <InstUISettingsProvider theme={exampleTheme}>
@@ -131,7 +131,7 @@ describe('useStyle should apply bi-directional polyfill on styles object', () =>
       </InstUISettingsProvider>
     )
 
-    cy.get('[data-testid="useStyle-testComp"]').then(($el) => {
+    cy.get('[data-testid="useStyleNew-testComp"]').then(($el) => {
       const computedStyle = getComputedStyle($el[0])
 
       // `inset-inline-start` becomes 'left' in LTR mode
@@ -146,7 +146,7 @@ describe('useStyle should apply bi-directional polyfill on styles object', () =>
         <ThemedComponent />
       </InstUISettingsProvider>
     )
-    cy.get('[data-testid="useStyle-testComp"]').then(($el) => {
+    cy.get('[data-testid="useStyleNew-testComp"]').then(($el) => {
       const computedStyle = getComputedStyle($el[0])
 
       // `inset-inline-start` should be transformed to 'right' in 'rtl' mode

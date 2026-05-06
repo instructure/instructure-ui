@@ -31,7 +31,7 @@ import {
   CheckCircle2InstUIIcon
 } from '@instructure/ui-icons'
 
-import { useStyle } from '@instructure/emotion'
+import { useStyleNew } from '@instructure/emotion'
 import generateStyle from './styles'
 
 import type { FormFieldMessageProps } from './props'
@@ -53,7 +53,7 @@ type: example
 **/
 const FormFieldMessage = forwardRef<HTMLSpanElement, FormFieldMessageProps>(
   ({ variant = 'hint', children, themeOverride }, ref) => {
-    const styles = useStyle({
+    const styles = useStyleNew({
       generateStyle,
       themeOverride,
       params: {

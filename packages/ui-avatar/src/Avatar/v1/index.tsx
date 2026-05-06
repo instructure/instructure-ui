@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { useStyleLegacy as useStyle } from '@instructure/emotion'
+import { useStyle as useStyleNew } from '@instructure/emotion'
 import {
   useState,
   SyntheticEvent,
@@ -69,7 +69,7 @@ const Avatar = forwardRef(
     const imgRef = useRef<HTMLImageElement>(null)
     const [loaded, setLoaded] = useState(false)
 
-    const styles = useStyle({
+    const styles = useStyleNew({
       generateStyle,
       generateComponentTheme,
       params: {

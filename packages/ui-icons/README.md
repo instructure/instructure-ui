@@ -159,7 +159,7 @@ Both scripts are **not** part of the normal build — run them manually when:
 export const SearchInstUIIcon = wrapLucideIcon(Lucide.Search)
 ```
 
-At render time `wrapLucideIcon` calls `useStyle()` to resolve semantic tokens, then delegates to
+At render time `wrapLucideIcon` calls `useStyleNew()` to resolve semantic tokens, then delegates to
 the Lucide component via `size`, `color`, `strokeWidth`, and `absoluteStrokeWidth` props.
 
 **Custom icons** — the generated index embeds a flat `iconNode` array parsed from the SVG:
@@ -172,7 +172,7 @@ export const AiInfoInstUIIcon = wrapCustomIcon(
 )
 ```
 
-At render time `wrapCustomIcon` calls `useStyle()` then builds the SVG manually with
+At render time `wrapCustomIcon` calls `useStyleNew()` then builds the SVG manually with
 `React.createElement`. Stroke width is converted from CSS units to SVG user units:
 `strokeWidth = numericStrokeWidth / (numericSize / viewBoxWidth)`.
 

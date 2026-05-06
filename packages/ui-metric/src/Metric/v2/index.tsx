@@ -24,7 +24,7 @@
 
 import { forwardRef } from 'react'
 
-import { useStyle } from '@instructure/emotion'
+import { useStyleNew } from '@instructure/emotion'
 import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
 
 import generateStyle from './styles'
@@ -45,7 +45,7 @@ const Metric = forwardRef<HTMLDivElement, MetricProps>((props, ref) => {
     themeOverride
   } = props
 
-  const styles = useStyle({
+  const styles = useStyleNew({
     generateStyle,
     themeOverride,
     params: {
