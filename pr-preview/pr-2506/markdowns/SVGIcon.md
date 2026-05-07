@@ -3,9 +3,7 @@
 
 SVGIcon renders an accessible SVG icon inline in the HTML document.
 
-In this example `iconExample` is the SVG source loaded as a string. You can use a webpack
-loader like [svg-inline-loader](https://github.com/webpack-contrib/svg-inline-loader) to import
-the SVG source into your react component.
+In this example `iconExample` is the SVG source loaded as a string.
 
 The SVGIcon component will add title and description elements for you if you set the `title`
 and `description` props. See the [InlineSVG](InlineSVG) component for more props and
