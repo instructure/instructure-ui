@@ -1,7 +1,7 @@
 {
   "name": "@instructure/ui-babel-preset",
   "private": true,
-  "version": "11.7.2",
+  "version": "11.7.3",
   "description": "A UI babel preset made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -17,18 +17,18 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/runtime": "^7.29.2",
     "@babel/core": "^7.29.0",
-    "babel-loader": "^10.1.1",
-    "@babel/plugin-transform-runtime": "^7.29.0",
-    "core-js": "3.49.0",
-    "@babel/preset-env": "^7.29.3",
-    "@babel/preset-typescript": "^7.28.5",
-    "@babel/preset-react": "^7.28.5",
     "@babel/plugin-proposal-decorators": "^7.29.0",
-    "babel-plugin-transform-remove-console": "^6.9.4",
+    "@babel/plugin-transform-runtime": "^7.29.0",
+    "@babel/preset-env": "^7.29.3",
+    "@babel/preset-react": "^7.28.5",
+    "@babel/preset-typescript": "^7.28.5",
+    "@babel/runtime": "^7.29.2",
     "@instructure/babel-plugin-transform-imports": "workspace:*",
-    "@instructure/browserslist-config-instui": "workspace:*"
+    "@instructure/browserslist-config-instui": "workspace:*",
+    "babel-loader": "^10.1.1",
+    "babel-plugin-transform-remove-console": "^6.9.4",
+    "core-js": "3.49.0"
   },
   "//dependency-comments": {
     "core-js": "If you upgrade coreJS, you must also upgrade the version in the Babel preset"
