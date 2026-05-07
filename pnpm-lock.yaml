@@ -422,18 +422,12 @@ importers:
       babel-loader:
         specifier: ^10.1.1
         version: 10.1.1(@babel/core@7.29.0)(webpack@5.106.2(esbuild@0.28.0))
-      buffer:
-        specifier: ^6.0.3
-        version: 6.0.3
       codesandbox:
         specifier: ^2.2.3
         version: 2.2.3
       lorem-ipsum:
         specifier: ^3.0.0
         version: 3.0.0
-      marked:
-        specifier: ^18.0.3
-        version: 18.0.3
       marked-react:
         specifier: ^4.0.0
         version: 4.0.0(react@18.3.1)
@@ -446,9 +440,6 @@ importers:
       react-dom:
         specifier: 18.3.1
         version: 18.3.1(react@18.3.1)
-      semver:
-        specifier: 7.7.4
-        version: 7.7.4
       uuid:
         specifier: ^14.0.0
         version: 14.0.0
@@ -1653,9 +1644,6 @@ importers:
       '@instructure/ui-utils':
         specifier: workspace:*
         version: link:../ui-utils
-      moment-timezone:
-        specifier: ^0.6.2
-        version: 0.6.2
     devDependencies:
       '@instructure/ui-babel-preset':
         specifier: workspace:*
@@ -11107,11 +11095,6 @@ packages:
 
   marked@17.0.6:
     resolution: {integrity: sha512-gB0gkNafnonOw0obSTEGZTT86IuhILt2Wfx0mWH/1Au83kybTayroZ/V6nS25mN7u8ASy+5fMhgB3XPNrOZdmA==}
-    engines: {node: '>= 20'}
-    hasBin: true
-
-  marked@18.0.3:
-    resolution: {integrity: sha512-7VT90JOkDeaRWpfjOReRGPEKn0ecdARBkDGL+tT1wZY0efPPqkUxLUSmzy/C7TIylQYJC9STISEsCHrqb/7VIA==}
     engines: {node: '>= 20'}
     hasBin: true
 
@@ -20663,8 +20646,6 @@ snapshots:
       react: 18.3.1
 
   marked@17.0.6: {}
-
-  marked@18.0.3: {}
 
   math-intrinsics@1.1.0: {}
 
