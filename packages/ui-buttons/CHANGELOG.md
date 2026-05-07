@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.3](https://github.com/instructure/instructure-ui/compare/v11.7.2...v11.7.3) (2026-05-07)
+
+
+### Bug Fixes
+
+* **many:** update dependencies, remove lots of Babel plugins, remove Webpack 4 support ([f916fca](https://github.com/instructure/instructure-ui/commit/f916fcafdddcb2d7de401f93e8ff92cfdfa47bba))
+* **ui-buttons:** fix textAlign center on Buttons without icon ([b46ddb7](https://github.com/instructure/instructure-ui/commit/b46ddb788696bf1c556291d3a09a1ba659c6959f))
+
+
+
+
+
 ## [11.7.2](https://github.com/instructure/instructure-ui/compare/v11.7.1...v11.7.2) (2026-04-23)
 
 

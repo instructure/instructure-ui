@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.3](https://github.com/instructure/instructure-ui/compare/v11.7.2...v11.7.3) (2026-05-07)
+
+
+### Bug Fixes
+
+* **many:** update dependencies, remove lots of Babel plugins, remove Webpack 4 support ([f916fca](https://github.com/instructure/instructure-ui/commit/f916fcafdddcb2d7de401f93e8ff92cfdfa47bba))
+
+
+
+
+
 ## [11.7.2](https://github.com/instructure/instructure-ui/compare/v11.7.1...v11.7.2) (2026-04-23)
 
 **Note:** Version bump only for package @instructure/ui-responsive

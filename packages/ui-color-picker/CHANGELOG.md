@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.3](https://github.com/instructure/instructure-ui/compare/v11.7.2...v11.7.3) (2026-05-07)
+
+
+### Bug Fixes
+
+* **many:** update dependencies, remove lots of Babel plugins, remove Webpack 4 support ([f916fca](https://github.com/instructure/instructure-ui/commit/f916fcafdddcb2d7de401f93e8ff92cfdfa47bba))
+
+
+### Features
+
+* **ui-color-picker:** improve ColorPicker paste behavior ([e5c279d](https://github.com/instructure/instructure-ui/commit/e5c279dbf8ac9918f104e223b9625b3b50322f23))
+
+
+
+
+
 ## [11.7.2](https://github.com/instructure/instructure-ui/compare/v11.7.1...v11.7.2) (2026-04-23)
 
 

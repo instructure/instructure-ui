@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.3](https://github.com/instructure/instructure-ui/compare/v11.7.2...v11.7.3) (2026-05-07)
+
+
+### Bug Fixes
+
+* **many:** update dependencies, remove lots of Babel plugins, remove Webpack 4 support ([f916fca](https://github.com/instructure/instructure-ui/commit/f916fcafdddcb2d7de401f93e8ff92cfdfa47bba))
+
+
+### Features
+
+* **many:** add a way for consumers to pass their own component theme definition so they can build their own components with InstUI ([ce01c3e](https://github.com/instructure/instructure-ui/commit/ce01c3eedc46aa2588f4c8309a6eabf4461aaec7))
+
+
+
+
+
 ## [11.7.2](https://github.com/instructure/instructure-ui/compare/v11.7.1...v11.7.2) (2026-04-23)
 
 **Note:** Version bump only for package @instructure/ui-spinner

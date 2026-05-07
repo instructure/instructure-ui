@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.3](https://github.com/instructure/instructure-ui/compare/v11.7.2...v11.7.3) (2026-05-07)
+
+### Bug Fixes
+
+- **[v11.7] ui-buttons:** fix textAlign center on Buttons without icon ([b46ddb7](https://github.com/instructure/instructure-ui/commit/b46ddb788696bf1c556291d3a09a1ba659c6959f))
+- **[v11.6, v11.7] ui-date-time-input,ui-date-input,ui-calendar:** set missing aria-selected on calendar days, BREAKING CHANGE: add mandatory prop selectedLabel, change datePickerDialog prop to mandatory ([08abed5](https://github.com/instructure/instructure-ui/commit/08abed5e8c8b29aecab0368e01e8e4ffd0c7fda7))
+- **[v11.7] ui-tabs:** fix tabs panel layout when `unmountOnExit` is false ([826ff62](https://github.com/instructure/instructure-ui/commit/826ff62fba56bc0cadd6995b366e3ca505b1b6c1))
+- **[v11.6, v11.7] ui-tree-browser,ui-top-nav-bar,ui-form-field:** add back some missing exports
+
+### Features
+
+- **many:** update dependencies, remove lots of Babel plugins, remove Webpack 4 support ([f916fca](https://github.com/instructure/instructure-ui/commit/f916fcafdddcb2d7de401f93e8ff92cfdfa47bba))
+- **[v11.7] many:** add a way for consumers to pass their own component theme definition so they can build their own components with InstUI ([ce01c3e](https://github.com/instructure/instructure-ui/commit/ce01c3eedc46aa2588f4c8309a6eabf4461aaec7))
+- **[v11.7] ui-checkbox:** add `data-checked` attribute to reflect checked state ([a790019](https://github.com/instructure/instructure-ui/commit/a790019ed2b47064a01b7ec532494cc723943241))
+- **[v11.6, v11.7] ui-color-picker:** improve ColorPicker paste behavior ([e5c279d](https://github.com/instructure/instructure-ui/commit/e5c279dbf8ac9918f104e223b9625b3b50322f23))
+- **[v11.7] ui-range-input:** remove deprecated thumb variant ([ca4a3fb](https://github.com/instructure/instructure-ui/commit/ca4a3fb45885fbcc9807566dadd3d027a17b8f72))
+- **[v11.7] ui-select,ui-date-time-input:** rework DateTimeInput and replace DateInput v1 with DateInput v2 in DateTimeInput ([7717fc6](https://github.com/instructure/instructure-ui/commit/7717fc6db4d2a733c8349eb583d37a85a4137cf7))
+- **ui-scripts:** use design tokens from external repo and convert JS to TS ([a03e0cb](https://github.com/instructure/instructure-ui/commit/a03e0cb24cdf1a2f5debbe707f73ce50ec4a666a))
+
+### BREAKING CHANGES
+
+- **[v11.7] ui-select,ui-date-time-input:** `renderWeekdayLabels` prop removed, `calendarIcon` is a new required prop
+- **[v11.7] ui-range-input:** `thumbVariant` prop removed from RangeInput
+- **[v11.7] ui-select,ui-date-time-input:** `prevMonthLabel` prop removed (use `screenReaderLabels.prevMonthButton` instead)
+  - `nextMonthLabel` prop removed (use screenReaderLabels.nextMonthButton instead)
+  - `renderWeekdayLabels` prop removed
+  - `dateFormat` type changed
+  - `screenReaderLabels` is a new required prop
+  - `dateFormat` default changed: Moment's 'LL' (long month name) → locale's default date format
+
 ## [11.7.2](https://github.com/instructure/instructure-ui/compare/v11.7.1...v11.7.2) (2026-04-23)
 
 ### Bug Fixes

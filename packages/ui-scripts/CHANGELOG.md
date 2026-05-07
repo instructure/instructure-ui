@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.3](https://github.com/instructure/instructure-ui/compare/v11.7.2...v11.7.3) (2026-05-07)
+
+
+### Features
+
+* **ui-scripts:** use tokens from external repo and convert JS to TS ([a03e0cb](https://github.com/instructure/instructure-ui/commit/a03e0cb24cdf1a2f5debbe707f73ce50ec4a666a))
+
+
+
+
+
 ## [11.7.2](https://github.com/instructure/instructure-ui/compare/v11.7.1...v11.7.2) (2026-04-23)
 
 
