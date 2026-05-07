@@ -102,6 +102,18 @@ type: example
   render(<Example />)
 ```
 
+A required `TextArea`:
+
+```js
+---
+type: example
+---
+<View as="div">
+  <Text>Fields marked with an asterisk <span aria-hidden="true">(*)</span> are required.</Text>
+  <TextArea label="Description" required />
+</View>
+```
+
 ### Guidelines
 
 ```js
