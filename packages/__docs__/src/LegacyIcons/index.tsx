@@ -247,6 +247,15 @@ const LegacyIconsPage = ({ iconData }: LegacyIconsPageProps) => {
         New icon set is available, please only use it with InstUI v11.7 or newer
         components: <Link href="/icons">Icons (beta)</Link>
       </Alert>
+      <Alert variant="info" margin="0 0 medium">
+        Our legacy icon components are rendered through Emotion, so server-side
+        rendering inlines <code>&lt;style data-emotion=…&gt;</code> blocks
+        alongside each <code>&lt;svg&gt;</code>, which can break consumers that
+        expect a plain SVG string. Follow{' '}
+        <Link href="https://emotion.sh/docs/ssr">Emotion&apos;s SSR guide</Link>{' '}
+        to extract those styles, or strip them post-render. The new icon set
+        linked above does not have this issue.
+      </Alert>
       <FormFieldGroup
         layout="columns"
         colSpacing="small"

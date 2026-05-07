@@ -48,7 +48,7 @@ const IconsPage = () => {
         }
       >
         <Alert variant="info" margin="0 0 medium">
-          New incon set, currently in beta. Currently supported icons:{' '}
+          New icon set, currently in beta. Currently supported icons:{' '}
           <Link href="/legacy-icons">Icons</Link>
         </Alert>
         <Alert variant="info" margin="0 0 medium">
