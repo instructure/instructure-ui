@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.3](https://github.com/instructure/instructure-ui/compare/v11.7.2...v11.7.3) (2026-05-07)
+
+
+### Bug Fixes
+
+* **many:** update dependencies, remove lots of Babel plugins, remove Webpack 4 support ([f916fca](https://github.com/instructure/instructure-ui/commit/f916fcafdddcb2d7de401f93e8ff92cfdfa47bba))
+* **ui-date-time-input,ui-date-input,ui-calendar:** set missing aria-selected on calendar days, BREAKING CHANGE: add mandatory prop selectedLabel, change datePickerDialog prop to mandatory ([08abed5](https://github.com/instructure/instructure-ui/commit/08abed5e8c8b29aecab0368e01e8e4ffd0c7fda7))
+
+
+### Features
+
+* **ui-select,ui-date-time-input:** rework DateTimeInput and replace DateInput v1 with DateInput v2 in DateTimeInput ([5a9405c](https://github.com/instructure/instructure-ui/commit/5a9405c0a19ea9fc6a34b2f34c60c582f96ec2af))
+
+
+### BREAKING CHANGES
+
+* **ui-select,ui-date-time-input:** prevMonthLabel prop removed (use screenReaderLabels.prevMonthButton instead)
+
+nextMonthLabel prop removed (use screenReaderLabels.nextMonthButton instead)
+
+renderWeekdayLabels prop removed
+
+dateFormat type changed: string → string
+
+{ parser: (input: string) => Date
+
+null, formatter: (date: Date) => string }
+
+screenReaderLabels is a new required prop
+
+dateFormat default changed: Moment's 'LL' (long month name) → locale's default date format
+
+INSTUI-4791
+
+
+
+
+
 ## [11.7.2](https://github.com/instructure/instructure-ui/compare/v11.7.1...v11.7.2) (2026-04-23)
 
 **Note:** Version bump only for package @instructure/ui-date-time-input
