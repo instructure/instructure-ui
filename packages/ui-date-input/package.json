@@ -35,8 +35,7 @@
     "@instructure/ui-react-utils": "workspace:*",
     "@instructure/ui-selectable": "workspace:*",
     "@instructure/ui-text-input": "workspace:*",
-    "@instructure/ui-utils": "workspace:*",
-    "moment-timezone": "^0.6.2"
+    "@instructure/ui-utils": "workspace:*"
   },
   "devDependencies": {
     "@instructure/ui-babel-preset": "workspace:*",
