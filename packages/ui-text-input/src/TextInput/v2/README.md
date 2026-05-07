@@ -317,6 +317,14 @@ type: example
       placeholder="placeholder"
       size='small'
     />
+    <View as="div">
+      <Text>Fields marked with an asterisk <span aria-hidden="true">(*)</span> are required.</Text>
+      <TextInput
+        renderLabel='required'
+        placeholder="placeholder"
+        isRequired
+      />
+    </View>
   </Flex>
 ```
 

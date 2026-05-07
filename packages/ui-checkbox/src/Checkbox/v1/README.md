@@ -162,6 +162,20 @@ type: example
 />
 ```
 
+### Required Fields
+
+Whenever a `Checkbox` is required, you must include a note explaining what the asterisk means — typically "Fields marked with an asterisk (\*) are required."
+
+```js
+---
+type: example
+---
+<FormFieldGroup description="Terms" rowSpacing="small" layout="stacked">
+  <Text>Fields marked with an asterisk <span aria-hidden="true">(*)</span> are required.</Text>
+  <Checkbox label="I agree to the terms and conditions" value="terms" isRequired />
+</FormFieldGroup>
+```
+
 ### Guidelines
 
 ```js
