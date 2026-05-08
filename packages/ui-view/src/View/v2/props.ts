@@ -202,17 +202,6 @@ type ViewOwnProps = {
    */
   overscrollBehavior?: 'auto' | 'contain' | 'none'
   /**
-   * DEPRECATED, this prop does nothing. Use the focusOutlineOffset theme
-   * variable
-   *
-   * Sets the radius of the focus border ring.
-   *
-   * For offset type, the given value is increased by the difference between the focus ring' offset and the focus ring's width.
-   *
-   * For inset type, the given value is decreased by the sum of the focus ring' offset and the focus ring's width.
-   */
-  focusRingBorderRadius?: string
-  /**
    * Display the focus ring when any of the descendants is focused.
    * (uses the [:focus-within](https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-within)
    * CSS selector)
@@ -270,7 +259,6 @@ const allowedProps: AllowedPropKeys = [
   'width',
   'withFocusOutline',
   'withVisualDebug',
-  'focusRingBorderRadius',
   'focusWithin'
 ]
 

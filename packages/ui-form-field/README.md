@@ -12,7 +12,6 @@ The `ui-form-field` package contains the following:
 
 - [FormField](FormField)
 - [FormFieldGroup](FormFieldGroup)
-- [FormFieldLabel](FormFieldLabel)
 - [FormFieldLayout](FormFieldLayout)
 - [FormFieldMessage](FormFieldMessage)
 - [FormFieldMessages](FormFieldMessages)

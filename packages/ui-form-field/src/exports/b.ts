@@ -23,7 +23,6 @@
  */
 
 export { FormField } from '../FormField/v2'
-export { FormFieldLabel } from '../FormFieldLabel/v2'
 export { FormFieldMessage } from '../FormFieldMessage/v2'
 export { FormFieldMessages } from '../FormFieldMessages/v2'
 export { FormFieldLayout } from '../FormFieldLayout/v2'
@@ -35,7 +34,6 @@ export type {
   FormMessageChild
 } from '../utils/v1/FormPropTypes'
 export type { FormFieldOwnProps, FormFieldProps } from '../FormField/v2/props'
-export type { FormFieldLabelProps } from '../FormFieldLabel/v2/props'
 export type { FormFieldMessageProps } from '../FormFieldMessage/v2/props'
 export type { FormFieldMessagesProps } from '../FormFieldMessages/v2/props'
 export type { FormFieldLayoutProps } from '../FormFieldLayout/v2/props'

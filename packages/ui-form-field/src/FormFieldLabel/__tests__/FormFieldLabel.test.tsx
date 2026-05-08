@@ -25,7 +25,7 @@
 import { render } from '@testing-library/react'
 import { vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
-import { FormFieldLabel } from '@instructure/ui-form-field/latest'
+import { FormFieldLabel } from '@instructure/ui-form-field/v11_6'
 import '@testing-library/jest-dom'
 
 describe('<FormFieldLabel />', () => {

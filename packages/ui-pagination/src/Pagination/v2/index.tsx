@@ -131,14 +131,6 @@ class Pagination extends Component<PaginationProps> {
     this._labelId = props.deterministicId!()
   }
 
-  get _root() {
-    console.warn(
-      '_root property is deprecated and will be removed in v9, please use ref instead'
-    )
-
-    return this.ref
-  }
-
   get inputMode() {
     return this.props.variant === 'input'
   }

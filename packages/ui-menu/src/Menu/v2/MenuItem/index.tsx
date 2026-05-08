@@ -79,14 +79,6 @@ class MenuItem extends Component<MenuItemProps, MenuItemState> {
     this.labelId = props.deterministicId!('MenuItem__label')
   }
 
-  get _node() {
-    console.warn(
-      '_node property is deprecated and will be removed in v9, please use ref instead'
-    )
-
-    return this.ref
-  }
-
   labelId: string
   ref: Element | null = null
 

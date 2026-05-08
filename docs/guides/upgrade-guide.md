@@ -519,6 +519,10 @@ type: embed
 
 ```
 
+### DrawerLayout
+
+- Previously deprecated `_content` prop has been removed from `DrawerLayout.Tray` and `DrawerLayout.Content`. Use `ref` instead.
+
 ### Drilldown
 
 Drilldown itself has no token changes. However, its sub-components share tokens with Options components, so the token changes listed under Options apply here as well:
@@ -580,6 +584,8 @@ type: embed
 ```
 
 ### FormField
+
+- Previously deprecated `FormFieldLabel` has been removed.
 
 #### FormFieldGroup
 
@@ -711,6 +717,8 @@ type: embed
 
 The default value of the `color` prop has changed from `'inherit'` to `'primary'`. If you need to preserve the previous behavior, explicitly set `color="inherit"`.
 
+- Previously deprecated `'ai'` value of the `color` prop has been removed. Use the `aiVariant` prop instead.
+
 ```js
 ---
 type: embed
@@ -744,6 +752,8 @@ type: embed
 ### Link
 
 - `isWithinText` prop has been removed.
+- Previously deprecated `_link` prop has been removed. Use `ref` instead.
+- `'inline-small'` and `'standalone-small'` values of the `variant` prop have been removed. Use `variant="inline"` or `variant="standalone"` with `size="small"` instead.
 
 #### New `size` prop
 
@@ -752,13 +762,6 @@ A new `size` prop has been added to control the font size, line height, and icon
 - `'small'`
 - `'medium'` (default)
 - `'large'`
-
-#### Deprecated variant values
-
-The following variant values have been **deprecated** and will be removed in a future version (still supported but warn):
-
-- `'inline-small'`
-- `'standalone-small'`
 
 ```js
 ---
@@ -812,6 +815,8 @@ type: embed
 ```
 
 #### Menu.Item
+
+- Previously deprecated `_node` prop has been removed. Use `ref` instead.
 
 ```js
 ---
@@ -1031,6 +1036,10 @@ type: embed
 
 ```
 
+### Pagination
+
+- Previously deprecated `_root` prop has been removed. Use `ref` instead.
+
 ### Pill
 
 #### Deprecated color prop values
@@ -1191,7 +1200,10 @@ type: embed
 <V12ChangelogTable
   removed={[
     {name:"handleFocusRingSize",note:"style uses sharedTokens.focusOutline.width token"},
-    {name:"handleFocusRingColor",note:"style uses sharedTokens.focusOutline.onColor token"}
+    {name:"handleFocusRingColor",note:"style uses sharedTokens.focusOutline.onColor token"},
+    {name:"handleFocusOutlineColor",note:"only used by the removed deprecated thumb variant"},
+    {name:"handleFocusOutlineWidth",note:"only used by the removed deprecated thumb variant"},
+    {name:"handleShadowColor",note:"only used by the removed deprecated thumb variant"}
   ]}
   changed={[
     {oldName:"handleShadow",newName:"boxShadow",note:""},
@@ -1257,6 +1269,10 @@ type: embed
 />
 
 ```
+
+### SimpleSelect
+
+- Previously deprecated `_select` prop has been removed. Use `ref` instead.
 
 ### SourceCodeEditor
 
@@ -1396,6 +1412,8 @@ type: embed
 
 ### Tag
 
+- Previously deprecated `title` prop has been removed.
+
 ```js
 ---
 type: embed
@@ -1488,6 +1506,10 @@ type: embed
 
 ```
 
+### TimeSelect
+
+- Previously deprecated `_select` prop has been removed. Use `ref` instead.
+
 ### ToggleDetails
 
 ```js
@@ -1529,11 +1551,17 @@ type: embed
 
 ### TopNavBar
 
+#### TopNavBar.Layout
+
+- `hideActionsUserSeparator` prop has been removed.
+
 #### TopNavBar.Brand
 
 The deprecated `renderName` and `nameBackground` props have been removed. Please remove them from your code.
 
 ### TreeBrowser
+
+- Previously deprecated `_root` prop has been removed. Use `ref` instead.
 
 #### Icon system migration
 
@@ -1577,7 +1605,14 @@ type: embed
 
 ```
 
+### TruncateText
+
+- Previously deprecated `_ref` prop has been removed. Use `ref` instead.
+
 ### View
+
+- Previously deprecated `_element` prop has been removed. Use `ref` instead.
+- Previously deprecated `focusRingBorderRadius` prop has been removed. Use the `borderRadius` prop instead.
 
 ```js
 ---
