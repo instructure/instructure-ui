@@ -130,8 +130,8 @@
     {
       "name": "link.png",
       "status": "changed",
-      "numDiff": 4468,
-      "sizeMismatch": true
+      "numDiff": 1691,
+      "sizeMismatch": false
     },
     {
       "name": "menu.png",
