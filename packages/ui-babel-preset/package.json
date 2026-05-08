@@ -27,11 +27,7 @@
     "@instructure/babel-plugin-transform-imports": "workspace:*",
     "@instructure/browserslist-config-instui": "workspace:*",
     "babel-loader": "^10.1.1",
-    "babel-plugin-transform-remove-console": "^6.9.4",
-    "core-js": "3.49.0"
-  },
-  "//dependency-comments": {
-    "core-js": "If you upgrade coreJS, you must also upgrade the version in the Babel preset"
+    "babel-plugin-transform-remove-console": "^6.9.4"
   },
   "publishConfig": {
     "access": "public"
