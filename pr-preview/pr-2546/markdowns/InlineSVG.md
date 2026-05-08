@@ -63,7 +63,6 @@ type: example
 | InlineSVG | inline | `boolean` | No | `true` |  |
 | InlineSVG | color | `\| 'inherit' \| 'primary' \| 'secondary' \| 'primary-inverse' \| 'secondary-inverse' \| 'success' \| 'error' \| 'alert' \| 'warning' \| 'brand' \| 'auto'` | No | `'inherit'` |  |
 | InlineSVG | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
-| InlineSVG | unsafeRenderRawSrc | `boolean` | No | - | Skip the built-in SVG sanitizer and inject `src` verbatim. Only use this when `src` is known to come from a fully trusted source. The default sanitizer strips `<script>`/`<foreignObject>` elements, `on*` event- handler attributes, and `javascript:`/`data:`/`vbscript:` schemes from `href`/`xlink:href`. Passing untrusted SVG with this flag enabled is an XSS vulnerability. |
 
 ### Usage
 

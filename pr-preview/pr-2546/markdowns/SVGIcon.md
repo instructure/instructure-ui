@@ -145,7 +145,6 @@ type: example
 | SVGIcon | inline | `boolean` | No | - |  |
 | SVGIcon | color | `\| 'inherit' \| 'primary' \| 'secondary' \| 'primary-inverse' \| 'secondary-inverse' \| 'success' \| 'error' \| 'alert' \| 'warning' \| 'brand' \| 'auto'` | No | - |  |
 | SVGIcon | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
-| SVGIcon | unsafeRenderRawSrc | `boolean` | No | - | Skip the built-in SVG sanitizer and inject `src` verbatim. Only use this when `src` is known to come from a fully trusted source. The default sanitizer strips `<script>`/`<foreignObject>` elements, `on*` event- handler attributes, and `javascript:`/`data:`/`vbscript:` schemes from `href`/`xlink:href`. Passing untrusted SVG with this flag enabled is an XSS vulnerability. |
 | SVGIcon | rotate | `'0' \| '90' \| '180' \| '270'` | No | `'0'` |  |
 | SVGIcon | size | `'x-small' \| 'small' \| 'medium' \| 'large' \| 'x-large'` | No | - |  |
 | SVGIcon | bidirectional | `boolean` | No | `false` |  |
