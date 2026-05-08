@@ -102,11 +102,12 @@ export default function LinkPage() {
           <Text variant="contentSmall">
             In a line of text, where the text is smaller, use the{' '}
             <Link
-              variant="inline-small"
+              variant="inline"
+              size="small"
               renderIcon={<IconUserLine />}
               href="https://instructure.github.io/instructure-ui/"
             >
-              inline-small
+              inline + size=&quot;small&quot;
             </Link>{' '}
             link variant
           </Text>
@@ -125,14 +126,15 @@ export default function LinkPage() {
         </div>
         <br />
         <div>
-          If the link is standalone (not in a text), but smaller, use the{' '}
-          <code>standalone-small</code>{' '}
+          If the link is standalone (not in a text), but smaller, use{' '}
+          <code>standalone</code> with <code>size=&quot;small&quot;</code>{' '}
           <Link
             display="block"
-            variant="standalone-small"
+            variant="standalone"
+            size="small"
             href="https://instructure.github.io/instructure-ui/"
           >
-            standalone-small
+            standalone + size=&quot;small&quot;
           </Link>
         </div>
       </section>

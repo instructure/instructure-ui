@@ -65,13 +65,6 @@ class Link extends Component<LinkProps, LinkState> {
 
   state = { hasFocus: false }
 
-  get _link() {
-    console.warn(
-      '_link property is deprecated and will be removed in v9, please use ref instead'
-    )
-
-    return this.ref
-  }
   ref: Element | null = null
 
   componentDidMount() {
@@ -86,31 +79,11 @@ class Link extends Component<LinkProps, LinkState> {
     variant?: LinkProps['variant']
     size?: LinkProps['size']
   } => {
-    const { variant: variantProp, size: sizeProp } = this.props
+    const { variant, size: sizeProp } = this.props
 
-    // Handle deprecated variant values by mapping them to new variant + size props
-    let variant: 'inline' | 'standalone' | undefined = variantProp as any
     let size = sizeProp
 
-    if (variantProp === 'inline-small' || variantProp === 'standalone-small') {
-      warn(
-        false,
-        `[Link] The variant value "${variantProp}" is deprecated. Use variant="${variantProp.replace(
-          '-small',
-          ''
-        )}" with size="small" instead.`
-      )
-      variant = variantProp.replace('-small', '') as 'inline' | 'standalone'
-      // Only set size from deprecated variant if size prop is not explicitly provided
-      if (!sizeProp) {
-        size = 'small'
-      }
-    } else if (
-      (variantProp === 'inline' || variantProp === 'standalone') &&
-      !sizeProp
-    ) {
-      // When using new variant values without explicit size, default to medium
-      // This maintains the old behavior where 'inline' and 'standalone' were medium-sized
+    if ((variant === 'inline' || variant === 'standalone') && !sizeProp) {
       size = 'medium'
     }
 
@@ -225,12 +198,7 @@ class Link extends Component<LinkProps, LinkState> {
   }
 
   renderIcon() {
-    const {
-      display,
-      renderIcon,
-      variant: variantProp,
-      size: sizeProp
-    } = this.props
+    const { display, renderIcon, variant, size: sizeProp } = this.props
 
     warn(
       // if display prop is used, warn about icon or TruncateText
@@ -238,14 +206,8 @@ class Link extends Component<LinkProps, LinkState> {
       '[Link] Using the display property with an icon may cause layout issues.'
     )
 
-    // Determine the actual size being used (considering deprecated variants)
     let size = sizeProp
-    if (variantProp === 'inline-small' || variantProp === 'standalone-small') {
-      size = sizeProp || 'small'
-    } else if (
-      (variantProp === 'inline' || variantProp === 'standalone') &&
-      !sizeProp
-    ) {
+    if ((variant === 'inline' || variant === 'standalone') && !sizeProp) {
       size = 'medium'
     }
 

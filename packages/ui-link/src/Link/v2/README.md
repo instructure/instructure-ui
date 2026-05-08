@@ -97,28 +97,6 @@ type: example
 </div>
 ```
 
-#### Deprecated variant values
-
-**The following variant values are deprecated and will be removed in a future version:**
-
-- `inline-small`
-- `standalone-small`
-
-These deprecated values are still supported for backward compatibility but will trigger console warnings. Please update your code to use the new `variant` + `size` prop combination.
-
-```js
----
-type: code
----
-// Deprecated (still works but triggers warning)
-<Link variant="inline-small" href="#">Link</Link>
-<Link variant="standalone-small" href="#">Link</Link>
-
-// Recommended
-<Link variant="inline" size="small" href="#">Link</Link>
-<Link variant="standalone" size="small" href="#">Link</Link>
-```
-
 ### Adding margin
 
 Use the `margin` prop to add space to the left or right of the Link. Because

@@ -126,7 +126,6 @@ class Tag extends Component<TagProps> {
       disabled,
       readOnly,
       text,
-      title,
       onClick,
       margin,
       styles,
@@ -160,7 +159,7 @@ class Tag extends Component<TagProps> {
         {...(onClick && { onClick: this.handleClick })}
         disabled={disabled || readOnly}
         display={undefined}
-        title={title || (typeof text === 'string' ? text : undefined)}
+        title={typeof text === 'string' ? text : undefined}
         data-cid="Tag"
         onMouseEnter={this.handleIconMouseEnter}
         onMouseLeave={this.handleIconMouseLeave}
