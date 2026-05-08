@@ -109,13 +109,6 @@ class TreeBrowser extends Component<TreeBrowserProps, TreeBrowserState> {
     this.props.makeStyles?.()
   }
 
-  get _root() {
-    console.warn(
-      '_root property is deprecated and will be removed in v9, please use ref instead'
-    )
-    return this.ref
-  }
-
   handleCollectionClick = (
     e: SyntheticEvent,
     collection: CollectionData,

@@ -129,17 +129,7 @@ const generateStyle = (
     'primary-inverse': { color: componentTheme.inverseColor },
     'secondary-inverse': { color: componentTheme.inverseColor },
     'primary-on': { color: componentTheme.baseOnColor },
-    'secondary-on': { color: componentTheme.mutedOnColor },
-    ai: {
-      background: `
-        linear-gradient(to bottom, ${componentTheme.aiTextTopGradientColor} 0%, ${componentTheme.aiTextBottomGradientColor} 100%) text`,
-      border: 'solid transparent',
-      WebkitTextFillColor: 'transparent',
-      '@media print': {
-        background: 'transparent',
-        WebkitTextFillColor: 'unset'
-      }
-    }
+    'secondary-on': { color: componentTheme.mutedOnColor }
   }
 
   const borderStyles = {

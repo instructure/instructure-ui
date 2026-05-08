@@ -62,15 +62,6 @@ class TopNavBarLayout extends Component<TopNavBarLayoutProps> {
 
   ref: HTMLElement | null = null
 
-  componentDidMount() {
-    // TODO: Remove this in v10!
-    if ('desktopConfig' in this.props) {
-      console.error(
-        'Warning: `desktopConfig` prop on [TopNavBar.Layout] is deprecated, please remove it from your code. Further info: https://instructure.design/#v9-upgrade-guide/#deprecated-properties'
-      )
-    }
-  }
-
   handleRef = (el: HTMLElement | null) => {
     const { elementRef } = this.props
 

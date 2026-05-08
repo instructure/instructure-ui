@@ -127,12 +127,8 @@ type LinkOwnProps = {
    * Sets pre-defined values for the component to achieve specific roles for the component
    * - `inline`
    * - `standalone`
-   *
-   * __Deprecated values:__
-   * - `inline-small`
-   * - `standalone-small`
    */
-  variant?: 'inline' | 'standalone' | 'inline-small' | 'standalone-small'
+  variant?: 'inline' | 'standalone'
 
   /**
    * Sets the size of the link (font size, line height, and icon gap)

@@ -101,13 +101,6 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
     this.ref && this.ref.blur()
   }
 
-  get _select() {
-    console.warn(
-      '_select property is deprecated and will be removed in v9, please use ref instead'
-    )
-    return this.ref
-  }
-
   get isControlled() {
     return typeof this.props.value !== 'undefined'
   }

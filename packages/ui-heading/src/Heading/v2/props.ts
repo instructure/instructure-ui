@@ -51,7 +51,7 @@ type HeadingOwnProps = {
    */
   border?: 'none' | 'top' | 'bottom'
   /**
-   * The font color to render, NOTE: `ai` color is deprecated. Use the `aiVariant` prop instead
+   * The font color to render
    */
   color?:
     | 'primary'
@@ -61,7 +61,6 @@ type HeadingOwnProps = {
     | 'inherit'
     | 'primary-on'
     | 'secondary-on'
-    | 'ai'
   /**
    * The level of the heading in the DOM: h1 is largest; h6 is smallest.
    */
