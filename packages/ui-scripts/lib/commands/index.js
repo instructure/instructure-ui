@@ -27,6 +27,7 @@ import server from './server.js'
 import tag from './tag.js'
 import deprecate from './deprecate.js'
 import publish from './publish.js'
+import publishPrivate from './publish-private.js'
 import visualDiff from './visual-diff.ts'
 import lint from '../test/lint.js'
 import bundle from '../build/webpack.js'
@@ -43,6 +44,7 @@ export const yargCommands = [
   tag,
   deprecate,
   publish,
+  publishPrivate,
   visualDiff,
   lint,
   bundle,

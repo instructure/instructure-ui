@@ -39,6 +39,7 @@
     "create-component-version": "ui-scripts create-component-version",
     "bump": "ui-scripts bump",
     "release": "ui-scripts publish",
+    "publish-private": "ui-scripts publish-private",
     "husky:pre-commit": "lint-staged && node scripts/checkTSReferences.js",
     "postinstall": "husky",
     "ts:check": "pnpm -r --stream ts:check"
