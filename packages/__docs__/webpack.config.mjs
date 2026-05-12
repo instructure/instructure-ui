@@ -32,7 +32,14 @@ const ENV = process.env.NODE_ENV || 'production'
 const DEBUG = process.env.DEBUG || ENV === 'development'
 const GITHUB_PULL_REQUEST_PREVIEW = process.env.GITHUB_PULL_REQUEST_PREVIEW || 'false'
 const PR_NUMBER = process.env.PR_NUMBER
-const PUBLIC_PATH = process.env.PUBLIC_PATH
+// The URL prefix this build is deployed under. Must end with a trailing
+// slash. Fed into output.publicPath (which webpack exposes at runtime as
+// __webpack_public_path__) and into the HTML template's <base href> and
+// 404 SPA-redirect script. Keeping a single source here means a new deploy
+// target only needs to set this one env var.
+const PUBLIC_PATH =
+  process.env.PUBLIC_PATH ||
+  (PR_NUMBER ? `/pr-preview/pr-${PR_NUMBER}/` : '/')
 
 const outputPath = resolvePath(import.meta.dirname, '__build__')
 
@@ -51,9 +58,7 @@ const config = merge(baseConfig, {
   output: {
     path: outputPath,
     filename: '[name].js',
-    // Builds deployed to subdirectories on GitHub Pages (e.g. /pr-preview/pr-123/
-    // or /latest/) need a matching publicPath so script tags resolve correctly.
-    publicPath: PUBLIC_PATH || (PR_NUMBER ? `/pr-preview/pr-${PR_NUMBER}/` : '/'),
+    publicPath: PUBLIC_PATH,
   },
   devServer: {
     static: {
@@ -69,6 +74,7 @@ const config = merge(baseConfig, {
     new HtmlWebpackPlugin({
       template: './src/index.html',
       chunks: ['main'],
+      templateParameters: { PUBLIC_PATH },
     }),
     new webpack.DefinePlugin({
       'process.env.GITHUB_PULL_REQUEST_PREVIEW': JSON.stringify(GITHUB_PULL_REQUEST_PREVIEW),

@@ -22,36 +22,48 @@
  * SOFTWARE.
  */
 
+// Webpack-injected; equals output.publicPath.
+// Examples: '/', '/latest/', '/pr-preview/pr-123/'.
+declare const __webpack_public_path__: string
+
 const MINOR_VERSION_REGEX = /^v\d+_\d+$/
 
 type ParsedUrl = {
-  prPrefix: string
+  basePrefix: string
   minorVersion: string | null
   page: string
   sectionId: string | undefined
 }
 
+/**
+ * Returns '' for a root deploy, '/latest' on instructure.design,
+ * '/pr-preview/pr-<n>' for PR previews. For sub-host deployments it can be
+ * '/<repo>/pr-preview/pr-<n>'.
+ */
+function getDeployBase(): string {
+  if (typeof __webpack_public_path__ === 'string' && __webpack_public_path__) {
+    return __webpack_public_path__.replace(/\/+$/, '')
+  }
+  return ''
+}
+
 function parseCurrentUrl(): ParsedUrl {
   const { pathname, hash } = window.location
-  const cleanPath = pathname.replace(/^\/+|\/+$/g, '')
-  const segments = cleanPath.split('/').filter(Boolean)
 
-  let prPrefix = ''
-  let idx = 0
-
-  // Detect PR preview prefix: /pr-preview/pr-123
-  if (
-    segments.length >= 2 &&
-    segments[0] === 'pr-preview' &&
-    segments[1].startsWith('pr-')
-  ) {
-    prPrefix = `/${segments[0]}/${segments[1]}`
-    idx = 2
+  const deployBase = getDeployBase()
+  let rest = pathname
+  if (deployBase && rest.startsWith(deployBase)) {
+    rest = rest.slice(deployBase.length)
   }
 
-  // Detect /latest/ prefix
-  if (idx === 0 && segments[idx] === 'latest') {
-    prPrefix = '/latest'
+  const cleanPath = rest.replace(/^\/+|\/+$/g, '')
+  const segments = cleanPath.split('/').filter(Boolean)
+
+  let appPrefix = ''
+  let idx = 0
+
+  if (segments[idx] === 'latest') {
+    appPrefix = '/latest'
     idx++
   }
 
@@ -71,7 +83,7 @@ function parseCurrentUrl(): ParsedUrl {
     sectionId = decodeURI(hash.replace(/^#+/, ''))
   }
 
-  return { prPrefix, minorVersion, page, sectionId }
+  return { basePrefix: deployBase + appPrefix, minorVersion, page, sectionId }
 }
 
 type BuildUrlOptions = {
@@ -80,13 +92,13 @@ type BuildUrlOptions = {
 }
 
 function buildUrl(targetPage: string, options?: BuildUrlOptions): string {
-  const { prPrefix } = parseCurrentUrl()
+  const parsed = parseCurrentUrl()
   const minorVersion =
     options?.minorVersion !== undefined
       ? options.minorVersion
-      : parseCurrentUrl().minorVersion
+      : parsed.minorVersion
 
-  let url = prPrefix
+  let url = parsed.basePrefix
 
   if (minorVersion) {
     url += `/${minorVersion}`
@@ -123,7 +135,7 @@ function navigateToVersion(version: string | null): void {
  * On PR previews this is e.g. `/pr-preview/pr-2425`, otherwise empty string.
  */
 function getAssetBasePath(): string {
-  return parseCurrentUrl().prPrefix
+  return getDeployBase()
 }
 
 export {
