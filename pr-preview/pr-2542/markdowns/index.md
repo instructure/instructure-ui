@@ -1,6 +1,6 @@
 # Instructure UI (InstUI) - React Component Library
 
-- version 11.7.2 
+- version 11.7.3 
 
 - Instructure UI (InstUI) is a comprehensive React component library.
 
@@ -13,12 +13,18 @@
 - [Theming components](./theming-components.md): InstUI has two themes: `canvas` (default) and `canvas-high-contrast`. Colors are layered: primitives (base), contrasts (theme-specific), and UI (curated tokens). Use `InstUISettingsProvider` to set themes. Overrides allow customization but must maintain accessibility.
 - [Usage](./usage.md): Quick start: Create a React app, add `@instructure/ui`, wrap with `InstUISettingsProvider`, and use components. Integrate with existing projects by adding the dependency and provider. Read about theme overrides and accessibility for best practices.
 
+#### Patterns
+
+- [Content alignment](./ContentAlignment.md): Guidelines for main content area alignment with maximum width (948px) for readability, minimum width (320px) for accessibility, and responsive padding (24px/12px). Ensures proper centering, avoids two-dimensional scrolling, and allows exceptions for complex data displays.
+- [Destroy action](./DestroyAction.md): A modal used for irreversible actions like deletion. Includes guidelines for usage: use clear language, avoid vague confirmations, and use a danger button for the destructive action.
+- [Search](./Search.md): Provides search input patterns including auto-activated, activated, and autocomplete search. Includes guidelines, accessibility support, and clear state management examples.
+
 #### Guides
 
 - [Accessing the dom](./accessing-the-dom.md): Guidance for properly accessing DOM elements in React components using refs instead of findDOMNode to avoid warnings. Examples show good and bad patterns for component ref handling.
 - [Color system](./color-system.md): Color system divided into primitive (hex values) and semantic (contextual) colors. Includes data visualization palette with primary and secondary hues for charts and graphs on white backgrounds.
 - [Focus management](./focus-management.md): Comprehensive focus management system for dialogs, modals, and popovers. Uses Dialog component with FocusRegion and FocusRegionManager to trap focus, handle escape keys, and manage screen reader accessibility.
-- [Form errors](./form-errors.md): InstUI form components use a `messages` prop for error/hint/success messages. Required fields now show an asterisk automatically. Examples provided for various form components like TextInput, Checkbox, and DateTimeInput.
+- [Forms](./forms.md): InstUI form components use a `messages` prop for error/hint/success messages. Required fields now show an asterisk automatically. Examples provided for various form components like TextInput, Checkbox, and DateTimeInput.
 - [Layout spacing](./layout-spacing.md): InstUI provides semantic spacing tokens (e.g., buttons, tags) for consistent layouts. Apply spacing via `margin` prop, container `gap`, or importing from theme. Legacy tokens are available for compatibility but not recommended for new layouts.
 - [Module federation](./module-federation.md): InstUI supports module federation with specific version requirements. For v10.14+, use local themes (`canvasThemeLocal`). For older hosts, guest apps must use v10.14+ and local themes. Global theme overrides don't apply to local themes.
 - [New theme overrides](./new-theme-overrides.md)
@@ -26,12 +32,6 @@
 - [Typography system](./typography-system.md): Use `<Text>` and `<Heading>` components with semantic variants for consistent typography. Variants define font style, weight, size, and line height. Legacy tokens (e.g., fontSizeXSmall) are deprecated and should not be used in new designs.
 - [Using icons](./UsingIcons.md): Guidelines for using icons with proper accessibility roles, size variants, and color options. Line icons for light backgrounds, solid for dark backgrounds. Icons scale with parent font-size by default.
 - [Using theme overrides](./using-theme-overrides.md): Customize components via theme overrides while ensuring WCAG compliance. Use nested `InstUISettingsProvider` for subtree themes, override global or component themes, and leverage branding variables for user customization. Deprecated global theming causes issues with multiple InstUI versions.
-
-#### Patterns
-
-- [Content alignment](./ContentAlignment.md): Guidelines for main content area alignment with maximum width (948px) for readability, minimum width (320px) for accessibility, and responsive padding (24px/12px). Ensures proper centering, avoids two-dimensional scrolling, and allows exceptions for complex data displays.
-- [Destroy action](./DestroyAction.md): A modal used for irreversible actions like deletion. Includes guidelines for usage: use clear language, avoid vague confirmations, and use a danger button for the destructive action.
-- [Search](./Search.md): Provides search input patterns including auto-activated, activated, and autocomplete search. Includes guidelines, accessibility support, and clear state management examples.
 
 ### Components
 
@@ -41,12 +41,12 @@
 - [Badge](./Badge.md): Displays numeric counts or notifications with accessibility features. Supports count limits, various placements, standalone usage, and color variants. Requires formatOutput prop for screen reader context beyond simple numbers.
 - [Billboard](./Billboard.md): Used for empty states, 404 pages, and redirects. Supports various sizes, hero icons, and interactive behaviors (button or link). Can be disabled and includes structured messaging with headings and calls to action.
 - [Breadcrumb](./Breadcrumb.md): Shows navigation path location with automatic text truncation. Best for tablet+ screens; use Link for mobile. Supports multiple sizes, icons, and accessibility with aria-current attribute for current page indication.
-- [Byline](./Byline.md): Combines visual elements (avatars, icons) with descriptive captions. Supports titles, various sizes, content alignment options, and margin control. Useful for author attribution or content metadata displays.
 - [Button](./Button.md): Triggers actions or changes with multiple color schemes, sizes, and display options. Supports icons, text wrapping control, and backgroundless variants. Includes specific AI button styles with gradients and icons.
 - [CloseButton](./CloseButton.md): Specialized button for closing modals, dialogs, or containers. Supports absolute positioning with placement options (start/end/static) and offset control. Built with accessibility in mind using IconButton with X icon and screen reader labels.
 - [CondensedButton](./CondensedButton.md): Button variant without padding for tight spaces or alignment with other content. Ideal for table cells or areas where standard button padding would disrupt layout. Maintains button functionality while minimizing visual footprint.
 - [IconButton](./IconButton.md): A button component designed specifically for icon-only actions. Requires screen reader labels for accessibility, supports various shapes (rectangle/circle), and can remove background/border for minimalist designs. Works well with Tooltip for additional context.
 - [ToggleButton](./ToggleButton.md): Controlled button for toggling between two states (on/off), featuring icon support, tooltips, inverse variants for dark backgrounds, and accessibility labels. Perfect for status toggles like lock/unlock.
+- [Byline](./Byline.md): Combines visual elements (avatars, icons) with descriptive captions. Supports titles, various sizes, content alignment options, and margin control. Useful for author attribution or content metadata displays.
 - [Calendar](./Calendar.md): Visual date selection component with configurable month navigation, disabled dates, selection handling, and optional year picker. Supports custom date libraries and accessibility features with proper weekday labels and screen reader support.
 - [Checkbox](./Checkbox.md): Custom styled checkbox component supporting standard, toggle, and indeterminate states. Includes size variants, accessibility features with aria-labelledby, and proper grouping for parent-child relationships. Guidelines recommend vertical stacking for multiple options.
 - [CheckboxGroup](./CheckboxGroup.md): Groups multiple Checkbox components with shared name and value management. Supports vertical or horizontal layouts, toggle variants, and group-level disabled/readonly states. Handles validation messages and maintains consistent state across all checkboxes.
