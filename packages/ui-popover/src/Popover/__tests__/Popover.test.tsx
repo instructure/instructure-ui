@@ -306,4 +306,43 @@ describe('<Popover />', () => {
 
     expect(popover).toHaveStyle('display: block')
   })
+
+  describe('shouldScrollContent', () => {
+    it('does not wrap content when the prop is unset', async () => {
+      render(
+        <Popover
+          isShowingContent
+          on="click"
+          renderTrigger={<button>Trigger</button>}
+        >
+          <h2 data-testid="content">Popover content</h2>
+        </Popover>
+      )
+      const content = await screen.findByTestId('content')
+      expect(
+        content.closest('[class*="popover__scrollContainer"]')
+      ).toBeNull()
+    })
+
+    it('wraps content in an overflow:auto + auto-fit max-height container when set', async () => {
+      render(
+        <Popover
+          isShowingContent
+          on="click"
+          renderTrigger={<button>Trigger</button>}
+          shouldScrollContent
+        >
+          <h2 data-testid="content">Popover content</h2>
+        </Popover>
+      )
+      const content = await screen.findByTestId('content')
+      const wrapper = content.closest(
+        '[class*="popover__scrollContainer"]'
+      ) as HTMLElement
+      expect(wrapper).not.toBeNull()
+      const computed = getComputedStyle(wrapper)
+      expect(computed.overflowY).toBe('auto')
+      expect(computed.maxHeight).toContain('--ui-position-available-height')
+    })
+  })
 })
