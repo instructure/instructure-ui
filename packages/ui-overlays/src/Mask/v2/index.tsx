@@ -37,7 +37,7 @@ import MaskCounter from './MaskCounter'
 
 /**
 ---
-category: components/utilities
+category: components/Util Components
 ---
 **/
 @withStyleNew(generateStyle)

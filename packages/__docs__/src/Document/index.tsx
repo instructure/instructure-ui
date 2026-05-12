@@ -94,7 +94,10 @@ class Document extends Component<DocumentProps, DocumentState> {
     const isLegacyTheme = this.context?.componentVersion == 'v11_6'
     // new theme
     if (!isLegacyTheme) {
-      const newThemeEntry = themeVariables?.newTheme?.components?.[themeKey]
+      // resolvedComponents contains pre-computed plain objects (built at build time)
+      const resolvedComponents = (themeVariables as Record<string, unknown>)
+        ?.resolvedComponents as Record<string, unknown> | undefined
+      const newThemeEntry = resolvedComponents?.[themeKey as string]
       const componentInstance =
         selectedId === doc.id
           ? doc?.componentInstance
@@ -104,7 +107,9 @@ class Document extends Component<DocumentProps, DocumentState> {
         typeof componentInstance?.generateComponentTheme !== 'function'
       ) {
         // new theme - use pre-computed theme object directly
-        this.setState({ componentTheme: newThemeEntry })
+        this.setState({
+          componentTheme: newThemeEntry as DocumentState['componentTheme']
+        })
         return
       }
     }
@@ -198,7 +203,7 @@ class Document extends Component<DocumentProps, DocumentState> {
           <View margin="small 0" display="block">
             The easiest way to do this is to utilize the{' '}
             <code>themeOverride</code> property. See the{' '}
-            <Link href="#using-theme-overrides">Using theme overrides</Link>{' '}
+            <Link href="#legacy-theme-overrides">Legacy theme overrides</Link>{' '}
             guide for more info and alternative methods.
           </View>
 
@@ -373,7 +378,10 @@ import { ${importName} } from '${esPath}'
         {this.renderProps(doc)}
         {this.renderTheme(doc)}
       </div>
-    ) : null
+    ) : (
+      // Props-free components (e.g. Menu.Separator) still need their theme section rendered
+      this.renderTheme(doc)
+    )
   }
 
   hasDetails(doc: DocDataType) {

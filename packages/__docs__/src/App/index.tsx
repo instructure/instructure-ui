@@ -56,6 +56,7 @@ import { Heading } from '../Heading'
 import { Hero } from '../Hero'
 import { Nav } from '../Nav'
 import { Theme } from '../Theme'
+import { ComponentTheme } from '../ComponentTheme'
 import { Select } from '../Select'
 import { Section } from '../Section'
 import IconsPage from '../Icons'
@@ -85,6 +86,8 @@ import type { ParsedDocSummary } from '../../buildScripts/DataTypes.mjs'
 import { logError } from '@instructure/console'
 import type { Spacing } from '@instructure/emotion'
 import type { NewComponentTypes } from '@instructure/ui-themes'
+import { boxShadowObjectsToCSSString } from '@instructure/ui-themes'
+import type { ComponentTheme as ComponentThemeType } from '@instructure/shared-types'
 import { FocusRegion } from '@instructure/ui-a11y-utils'
 import { AppContext } from '../appContext'
 
@@ -201,11 +204,14 @@ class App extends Component<AppProps, AppState> {
     updateGlobalsForVersion(newVersion)
 
     // Clear current data to show loading screen, update selected version
+    // themeKey must be reset to avoid a stale value being passed to Select
+    // before the new version's data (and its valid theme keys) arrive
     this.setState({
       docsData: null,
       currentDocData: undefined,
       changelogData: undefined,
-      selectedMinorVersion: newVersion
+      selectedMinorVersion: newVersion,
+      themeKey: undefined
     })
 
     // Update URL to reflect new version
@@ -551,9 +557,16 @@ class App extends Component<AppProps, AppState> {
     const showNewThemes = this.state.selectedMinorVersion !== 'v11_6'
 
     const themeKeys = showNewThemes
-      ? allThemeKeys
-      : ['canvas', 'canvas-high-contrast']
-    const smallScreen = this.state.layout === 'small'
+      ? allThemeKeys.filter(
+          (k) =>
+            k !== 'shared-tokens' &&
+            k !== 'legacy-canvas' &&
+            k !== 'legacy-canvas-high-contrast'
+        )
+      : allThemeKeys.filter(
+          (k) => k === 'canvas' || k === 'canvas-high-contrast'
+        )
+
     const displayThemeName = (themeKey: string) => {
       if (
         showNewThemes &&
@@ -563,6 +576,12 @@ class App extends Component<AppProps, AppState> {
       }
       return themeKey
     }
+
+    const smallScreen = this.state.layout === 'small'
+    const currentThemeKey =
+      this.state.themeKey && themeKeys.includes(this.state.themeKey)
+        ? this.state.themeKey
+        : themeKeys[0]
 
     return themeKeys.length > 1 ? (
       <Flex
@@ -574,7 +593,7 @@ class App extends Component<AppProps, AppState> {
             name="theme"
             renderLabel="Theme"
             onChange={this.handleThemeChange}
-            value={this.state.themeKey}
+            value={currentThemeKey}
             width="16.5rem"
           >
             {themeKeys.map((themeKey) => {
@@ -590,8 +609,26 @@ class App extends Component<AppProps, AppState> {
     ) : null
   }
 
+  renderNewThemePageAlert(subject = 'This theme') {
+    const v11_7Href = window.location.pathname.match(/v\d+_\d+/)
+      ? window.location.pathname.replace(/v\d+_\d+/, 'v11_7')
+      : `/v11_7${window.location.pathname}`
+    return (
+      <Alert variant="info" margin="0 0 medium">
+        {subject} is designed for components for <strong>v11.7</strong> and
+        later. If you are viewing an older version,{' '}
+        <Link href={v11_7Href}>switch to v11.7</Link>
+      </Alert>
+    )
+  }
+
   renderTheme(themeKey: string) {
     const theme = this.state.docsData!.themes[themeKey]
+    const isNewThemePage =
+      themeKey === 'light' ||
+      themeKey === 'dark' ||
+      themeKey === 'canvas' ||
+      themeKey === 'canvas-high-contrast'
 
     const { layout } = this.state
     const smallerScreens = layout === 'small' || layout === 'medium'
@@ -605,11 +642,62 @@ class App extends Component<AppProps, AppState> {
         <Heading level="h1" as="h2" margin="0 0 medium 0">
           Theme: {themeKey}
         </Heading>
+        {isNewThemePage && this.renderNewThemePageAlert()}
         <Theme themeKey={themeKey} variables={theme.resource} />
       </View>
     )
     return (
       <Section id={themeKey}>{this.renderWrappedContent(themeContent)}</Section>
+    )
+  }
+
+  renderSharedTokens() {
+    const { layout } = this.state
+    const smallerScreens = layout === 'small' || layout === 'medium'
+
+    const raw = this.state.docsData?.themes['shared-tokens']?.resource || {}
+
+    // Compose CSS box-shadow strings for elevation tokens so each elevation
+    // appears as a single readable row instead of individual x/y/blur/… entries
+    const processedData: Record<string, any> = { ...raw }
+    if (processedData.boxShadow) {
+      const composed: Record<string, string> = {}
+      for (const [elevation, shadows] of Object.entries(
+        processedData.boxShadow as Record<string, Record<string, any>>
+      )) {
+        composed[elevation] = boxShadowObjectsToCSSString(shadows)
+      }
+      processedData.boxShadow = composed
+    }
+
+    const content = (
+      <View
+        as="div"
+        padding={
+          smallerScreens ? 'x-large none none large' : 'x-large none none'
+        }
+      >
+        <Heading level="h1" as="h2" margin="0 0 medium 0">
+          Shared Tokens
+        </Heading>
+        {this.renderNewThemePageAlert('Shared tokens')}
+        <Text as="p">
+          Use these tokens when building custom solutions to ensure your
+          components respond correctly to theme changes, including dark mode and
+          high contrast.
+        </Text>
+        {Object.entries(processedData).map(([section, data]) => (
+          <View key={section} as="div" margin="0 0 large">
+            <Heading as="h3" level="h3" margin="0 0 small">
+              {section}
+            </Heading>
+            <ComponentTheme componentTheme={data as ComponentThemeType} />
+          </View>
+        ))}
+      </View>
+    )
+    return (
+      <Section id="shared-tokens">{this.renderWrappedContent(content)}</Section>
     )
   }
 
@@ -625,7 +713,7 @@ class App extends Component<AppProps, AppState> {
         }
       >
         <Heading level="h1" as="h2" margin="0 0 medium">
-          Icons (beta)
+          Icons
         </Heading>
         <IconsPage />
       </View>
@@ -863,6 +951,16 @@ class App extends Component<AppProps, AppState> {
           as={'div'}
         >
           {this.renderLegacyIcons(key)}
+        </View>
+      )
+    } else if (key === 'shared-tokens') {
+      return (
+        <View
+          elementRef={this.mainContentRef}
+          tabIndex={0}
+          aria-label="shared tokens page main content"
+        >
+          {this.renderSharedTokens()}
         </View>
       )
     } else if (theme) {

@@ -1,6 +1,6 @@
 ---
-title: Usage
-category: Getting Started
+title: Getting Started
+category: Guides
 order: 1
 relevantForAI: true
 ---
@@ -90,5 +90,5 @@ https://instructure.design/llms.txt
 
 ## Further reading
 
-- To use a different theme or customize one read about [Using theme overrides](using-theme-overrides)
+- To use a different theme or customize one read about [New Theme Overrides](new-theme-overrides)
 - Make sure you read about [Accessibility](accessibility) with InstUI.

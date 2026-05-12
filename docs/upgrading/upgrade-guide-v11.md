@@ -1,6 +1,6 @@
 ---
 title: Upgrade Guide for Version 11
-category: Guides
+category: Upgrading
 order: 1
 ---
 

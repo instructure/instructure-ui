@@ -68,7 +68,7 @@ const buttonColorToIconColor = {
 
 /**
 ---
-category: components/utilities
+category: components/Util Components
 ---
 **/
 @withStyleNew(generateStyles)

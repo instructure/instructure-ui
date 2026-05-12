@@ -42,7 +42,7 @@ type HTMLElementWithType = HTMLElement & {
 
 /**
 ---
-category: components/utilities
+category: components/Util Components
 ---
 **/
 class Focusable extends Component<FocusableProps, FocusableState> {

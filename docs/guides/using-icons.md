@@ -1,5 +1,5 @@
 ---
-title: Using Icons (beta)
+title: Using Icons
 category: Guides
 id: UsingIcons
 relevantForAI: true

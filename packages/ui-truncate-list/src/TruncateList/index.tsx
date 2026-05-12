@@ -42,7 +42,7 @@ import type { TruncateListProps, TruncateListState } from './props'
 
 /**
 ---
-category: components/utilities
+category: components/Util Components
 ---
 **/
 @withStyle(generateStyle, null)

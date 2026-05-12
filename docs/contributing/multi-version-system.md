@@ -1,7 +1,7 @@
 ---
 title: Multi-Version System
-category: Contributor Guides
-order: 8
+category: Contributing
+order: 4
 ---
 
 # Multi-Version System

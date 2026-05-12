@@ -3,6 +3,7 @@ title: Accessibility
 category: Getting Started
 order: 6
 relevantForAI: true
+isWIP: true
 ---
 
 ## Accessibility

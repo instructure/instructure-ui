@@ -26,7 +26,7 @@ import UAParser from 'ua-parser-js'
 
 /**
  * ---
- * category: utilities/utils
+ * category: utilities/Misc
  * ---
  * A utility module using the [ua-parser-js](https://www.npmjs.com/package/ua-parser-js) browser
  * detection library.

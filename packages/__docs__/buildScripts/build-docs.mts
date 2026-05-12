@@ -31,7 +31,9 @@ import {
   canvas,
   canvasHighContrast,
   dark,
-  light
+  light,
+  legacyCanvas,
+  legacyCanvasHighContrast
 } from '@instructure/ui-themes'
 import type {
   LibraryOptions,
@@ -360,12 +362,78 @@ function tryParseReadme(dirName: string) {
   return undefined
 }
 
+function resolveComponents(theme: typeof legacyCanvas | typeof legacyCanvasHighContrast) {
+  const sem = theme.semantics(theme.primitives)
+  const resolved: Record<string, any> = {}
+  for (const [key, fn] of Object.entries(theme.components)) {
+    if (typeof fn === 'function') {
+      resolved[key] = fn(sem)
+    }
+  }
+  return resolved
+}
+
+/** Recursively flatten a nested color object, keeping only string values, using the innermost key (e.g. grey.grey10 → grey10) */
+function flattenPrimitiveColors(obj: Record<string, any>): Record<string, string> {
+  const result: Record<string, string> = {}
+  for (const [key, value] of Object.entries(obj)) {
+    if (typeof value === 'string') {
+      result[key] = value
+    } else if (value !== null && typeof value === 'object') {
+      Object.assign(result, flattenPrimitiveColors(value))
+    }
+  }
+  return result
+}
+
+/** Flatten a nested object using camelCase prefix concatenation for the keys */
+function flattenSemanticColors(obj: Record<string, any>, prefix = ''): Record<string, string> {
+  const result: Record<string, string> = {}
+  for (const [key, value] of Object.entries(obj)) {
+    const fullKey = prefix
+      ? `${prefix}${key.charAt(0).toUpperCase()}${key.slice(1)}`
+      : key
+    if (typeof value === 'string') {
+      result[fullKey] = value
+    } else if (value !== null && typeof value === 'object') {
+      Object.assign(result, flattenSemanticColors(value, fullKey))
+    }
+  }
+  return result
+}
+
+function resolveNewThemeColors(newThemeObj: typeof legacyCanvas) {
+  const sem = newThemeObj.semantics(newThemeObj.primitives)
+  return {
+    primitives: flattenPrimitiveColors(newThemeObj.primitives.color),
+    semantic: flattenSemanticColors(sem.color)
+  }
+}
+
 function parseThemes() {
   const parsed: MainDocsData['themes'] = {}
-  parsed[canvas.key] = { resource: canvas }
-  parsed[canvasHighContrast.key] = { resource: canvasHighContrast }
-  parsed[light.key] = { resource: light }
-  parsed[dark.key] = { resource: dark }
+  // legacy-canvas first so it becomes the default rendering theme
+  // resolvedComponents/resolvedColors: pre-computed plain objects (functions can't survive JSON.stringify)
+  parsed['legacy-canvas'] = {
+    resource: { ...canvas, resolvedComponents: resolveComponents(legacyCanvas) }
+  }
+  parsed['legacy-canvas-high-contrast'] = {
+    resource: { ...canvasHighContrast, resolvedComponents: resolveComponents(legacyCanvasHighContrast) }
+  }
+  parsed['canvas'] = {
+    resource: { ...legacyCanvas, resolvedColors: resolveNewThemeColors(legacyCanvas) }
+  }
+  parsed['canvas-high-contrast'] = {
+    resource: { ...legacyCanvasHighContrast, resolvedColors: resolveNewThemeColors(legacyCanvasHighContrast) }
+  }
+  parsed[light.key] = {
+    resource: { ...light, resolvedColors: resolveNewThemeColors(light.newTheme as typeof legacyCanvas) }
+  }
+  parsed[dark.key] = {
+    resource: { ...dark, resolvedColors: resolveNewThemeColors(dark.newTheme as typeof legacyCanvas) }
+  }
+  const canvasSemantics = legacyCanvas.semantics(legacyCanvas.primitives)
+  parsed['shared-tokens'] = { resource: legacyCanvas.sharedTokens(canvasSemantics) }
   return parsed
 }
 

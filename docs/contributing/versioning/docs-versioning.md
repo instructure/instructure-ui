@@ -1,7 +1,8 @@
 ---
 title: Docs Versioning
-category: Contributor Guides
+category: Contributing/Versioning
 order: 7
+isWIP: true
 ---
 
 # Multi-Version Documentation
@@ -50,11 +51,11 @@ If a component (e.g. `Checkbox`) needs a breaking change for v11_23:
 
 ## Key files
 
-| File | Purpose |
-|------|---------|
-| `packages/__docs__/versioned-components.ts` | Hand-maintained version → component map + `getComponentsForVersion()` |
-| `packages/__docs__/globals.ts` | Populates global scope for interactive examples |
-| `packages/__docs__/src/App/index.tsx` | Docs app — handles version switching |
-| `packages/__docs__/src/versionData.ts` | Fetches version manifest at runtime |
-| `packages/__docs__/buildScripts/build-docs.mts` | Build pipeline — generates per-version JSON |
+| File                                                       | Purpose                                                                                                                |
+| ---------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `packages/__docs__/versioned-components.ts`                | Hand-maintained version → component map + `getComponentsForVersion()`                                                  |
+| `packages/__docs__/globals.ts`                             | Populates global scope for interactive examples                                                                        |
+| `packages/__docs__/src/App/index.tsx`                      | Docs app — handles version switching                                                                                   |
+| `packages/__docs__/src/versionData.ts`                     | Fetches version manifest at runtime                                                                                    |
+| `packages/__docs__/buildScripts/build-docs.mts`            | Build pipeline — generates per-version JSON                                                                            |
 | `packages/__docs__/buildScripts/utils/buildVersionMap.mts` | Discovers versions from package exports + shared filtering utilities (`isDocIncludedInVersion`, `getPackageShortName`) |

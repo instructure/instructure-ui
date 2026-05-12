@@ -1,6 +1,6 @@
 ---
-title: Testing
-category: Contributor Guides/Testing
+title: Overview
+category: Contributing/Testing
 order: 1
 ---
 

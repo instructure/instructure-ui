@@ -55,6 +55,7 @@ import {
 import dataVisualization from './legacySharedThemeTokens/colors/dataVisualization'
 import { boxShadowObjectsToCSSString } from './utils/boxShadowObjectToString'
 
+import { legacyCanvas, legacyCanvasHighContrast } from './themes/newThemeTokens'
 import type {
   LegacyCanvas as NewCanvas,
   LegacyCanvasHighContrast as NewCanvasHighContrast,
@@ -99,6 +100,8 @@ export {
   light,
   canvas,
   canvasHighContrast,
+  legacyCanvas,
+  legacyCanvasHighContrast,
   primitives,
   additionalPrimitives,
   dataVisualization,

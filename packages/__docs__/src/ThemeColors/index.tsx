@@ -47,23 +47,26 @@ class ThemeColors extends Component<ThemeColorsProps, ThemeColorsState> {
   groupColors() {
     const { colors } = this.props
 
-    return Object.keys(colors).reduce((res: any, color) => {
-      const category = color
+    const getCategory = (colorName: string): string => {
+      // Primitive-style names (e.g. grey11, blue45): group by prefix before first digit
+      const digitIndex = colorName.split('').findIndex((c) => !isNaN(Number(c)))
+      if (digitIndex > 0) {
+        return colorName.slice(0, digitIndex)
+      }
+      // CamelCase semantic names (e.g. surfacePagePrimary, textBrand): group by first word
+      const upperIndex = colorName
         .split('')
-        .reduce(
-          (acc: { hadNumber: boolean; res: string[] }, char: any) => {
-            if (acc.hadNumber) {
-              return acc
-            }
-            if (isNaN(char)) {
-              return { ...acc, res: [...acc.res, char] }
-            }
-            return { ...acc, hadNumber: true }
-          },
-          { hadNumber: false, res: [] }
+        .findIndex(
+          (c, i) => i > 0 && c === c.toUpperCase() && c !== c.toLowerCase()
         )
-        .res.join('')
+      if (upperIndex > 0) {
+        return colorName.slice(0, upperIndex)
+      }
+      return colorName
+    }
 
+    return Object.keys(colors).reduce((res: any, color) => {
+      const category = getCategory(color)
       return {
         ...res,
         [category]: [...(res[category] ? res[category] : []), color]

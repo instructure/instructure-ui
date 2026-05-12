@@ -1,11 +1,20 @@
 ---
-title: New Theme Override Patterns
-category: Guides
+title: New theme overrides
+category: Theming
 order: 6
 relevantForAI: true
 ---
 
 ## New Theme Override Patterns
+
+```js
+---
+type: embed
+---
+<Alert variant="warning" margin="0 0 medium">
+  The examples on this page use the <strong>new theming system</strong> and require <strong>v11.7+</strong> components. If you are viewing the v11.6 version, <Link href={window.location.pathname.match(/v\d+_\d+/) ? window.location.pathname.replace(/v\d+_\d+/, 'v11_7') : `/v11_7${window.location.pathname}`}>switch to v11.7</Link> to see the examples working correctly.
+</Alert>
+```
 
 This guide covers all the override patterns available in the new theming system (v11.7+). The new system uses a layered token architecture: **primitives** (raw values) -> **semantics** (meaning) -> **components** (per-component tokens).
 

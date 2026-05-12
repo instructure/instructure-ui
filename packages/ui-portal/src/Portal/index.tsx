@@ -34,7 +34,7 @@ import type { PortalNode, PortalProps, PortalState } from './props'
 
 /**
 ---
-category: components/utilities
+category: components/Util Components
 ---
 @module Portal
 **/

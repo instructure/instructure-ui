@@ -26,7 +26,7 @@ import type { ComponentClass } from 'react'
 
 /**
  * ---
- * category: utilities/utils
+ * category: utilities/Misc
  * ---
  * DEPRECATED This is an old TypeScript style decorator and will be removed
  * in the future.

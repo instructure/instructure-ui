@@ -26,7 +26,7 @@ import { camelize } from './camelize'
 
 /**
  * ---
- * category: utilities/utils
+ * category: utilities/Misc
  * ---
  * Converts a hyphenated or camel cased string to pascal case
  *

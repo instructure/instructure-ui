@@ -24,7 +24,6 @@
 
 // This is the format of the saved JSON files
 import type { Documentation } from 'react-docgen'
-import type { Theme } from '@instructure/ui-themes'
 
 type ProcessedFile =
   Documentation &
@@ -139,7 +138,8 @@ type Glyph = {
 type LegacyIconsData = Glyph[]
 
 type MainDocsData = {
-  themes: Record<string, { resource: Theme }>
+  // resource is `any` to support both old BaseTheme and new token objects
+  themes: Record<string, { resource: any }>
   library: LibraryOptions
 } & ParsedDoc
 
