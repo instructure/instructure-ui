@@ -135,6 +135,17 @@ export type ElementPosition = {
   }
 }
 
+/**
+ * The full output of `calculateElementPosition`, including the available
+ * space numbers driving `--ui-position-available-{height,width}`. Kept
+ * separate from `ElementPosition` so `PositionState` (which extends
+ * `ElementPosition`) doesn't falsely advertise these fields
+ */
+export type ElementPositionWithAvailableSpace = ElementPosition & {
+  availableHeight?: number
+  availableWidth?: number
+}
+
 export type PositionElement = UIElement
 
 export type Offset<Type extends number | string | undefined = number> = {

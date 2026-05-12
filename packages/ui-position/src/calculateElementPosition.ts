@@ -33,7 +33,6 @@ import {
 } from '@instructure/ui-dom-utils'
 import type { RectType } from '@instructure/ui-dom-utils'
 import { mirrorPlacement } from './mirrorPlacement'
-// @ts-expect-error will be needed for fix in the `offsetToPx` method
 import { px } from '@instructure/ui-utils'
 
 import type {
@@ -42,6 +41,7 @@ import type {
   PositionConstraint,
   PositionMountNode,
   ElementPosition,
+  ElementPositionWithAvailableSpace,
   PositionElement,
   Size,
   Overflow,
@@ -95,7 +95,7 @@ function calculateElementPosition(
   element?: PositionElement,
   target?: PositionElement,
   options: Options = {}
-): ElementPosition {
+): ElementPositionWithAvailableSpace {
   if (!element || options.placement === 'offscreen') {
     // hide offscreen content at the bottom of the DOM from screenreaders
     // unless content is contained somewhere else
@@ -113,10 +113,13 @@ function calculateElementPosition(
   }
 
   const pos = new PositionData(element, target, options)
+  const { height: availableHeight, width: availableWidth } = pos.availableSpace
 
   return {
     placement: pos.placement,
-    style: pos.style
+    style: pos.style,
+    availableHeight,
+    availableWidth
   }
 }
 
@@ -304,7 +307,7 @@ class PositionData {
   ) {
     this.options = options || {}
 
-    const { container, constrain, placement, over } = this.options
+    const { container, placement, over } = this.options
 
     if (!element || placement === 'offscreen') return
 
@@ -320,16 +323,9 @@ class PositionData {
       over ? this.element.placement : this.element.mirroredPlacement
     )
 
-    if (constrain === 'window') {
-      this.constrainTo(ownerWindow(element))
-    } else if (constrain === 'scroll-parent') {
-      this.constrainTo(getScrollParents(this.target.node)[0])
-    } else if (constrain === 'parent') {
-      this.constrainTo(this.container)
-    } else if (typeof constrain === 'function') {
-      this.constrainTo(findDOMNode(constrain.call(null)))
-    } else if (typeof constrain === 'object') {
-      this.constrainTo(findDOMNode(constrain))
+    const constraintNode = this.resolveConstraintNode()
+    if (constraintNode) {
+      this.constrainTo(constraintNode)
     }
   }
 
@@ -541,6 +537,96 @@ class PositionData {
           this.target.placement[0] = 'end'
         }
       }
+    }
+  }
+
+  // Resolves the `constrain` option (`'window'`, `'scroll-parent'`,
+  // `'parent'`, a function, or an element) to the DOM node it points at.
+  resolveConstraintNode(): Node | Window | null {
+    const { constrain } = this.options
+    const elementNode = this.element?.node
+    if (!elementNode) return null
+
+    if (constrain === 'window') return ownerWindow(elementNode) ?? null
+    if (constrain === 'scroll-parent') {
+      return getScrollParents(this.target?.node)[0] ?? null
+    }
+    if (constrain === 'parent') return findDOMNode(this.container) ?? null
+    if (typeof constrain === 'function') {
+      return findDOMNode(constrain.call(null)) ?? null
+    }
+    if (typeof constrain === 'object' && constrain) {
+      return findDOMNode(constrain) ?? null
+    }
+    return null
+  }
+
+  /**
+   * Maximum height/width (in CSS px) the positioned element can occupy in
+   * the resolved placement before crossing the constraint. Drives the
+   * `--ui-position-available-{height,width}` CSS variables
+   */
+  get availableSpace(): { height: number; width: number } {
+    const targetNode = this.target?.node as Element | undefined
+    const constraintNode = this.resolveConstraintNode()
+    if (
+      !this.element ||
+      !targetNode?.getBoundingClientRect ||
+      !constraintNode
+    ) {
+      return { height: Infinity, width: Infinity }
+    }
+
+    const targetRect = targetNode.getBoundingClientRect()
+    let constraintRect: RectType
+    if ('getBoundingClientRect' in constraintNode) {
+      constraintRect = (constraintNode as Element).getBoundingClientRect()
+    } else {
+      const win =
+        'defaultView' in constraintNode
+          ? (constraintNode as Document).defaultView
+          : (constraintNode as Window)
+      if (!win) return { height: Infinity, width: Infinity }
+      constraintRect = {
+        top: 0,
+        left: 0,
+        right: win.innerWidth,
+        bottom: win.innerHeight,
+        width: win.innerWidth,
+        height: win.innerHeight
+      }
+    }
+
+    // `offsetX` / `offsetY` always push the popover *away* from the trigger
+    // so on the primary axis they consume available space.
+    const elementNode = this.element.node
+    const offsetY = px(this.element._offset.top, elementNode)
+    const offsetX = px(this.element._offset.left, elementNode)
+    const [primary] = this.element.placement
+
+    let height: number
+    if (primary === 'bottom') {
+      height = constraintRect.bottom - targetRect.bottom - offsetY
+    } else if (primary === 'top') {
+      height = targetRect.top - constraintRect.top - offsetY
+    } else {
+      height = constraintRect.height
+    }
+
+    let width: number
+    if (primary === 'end') {
+      width = constraintRect.right - targetRect.right - offsetX
+    } else if (primary === 'start') {
+      width = targetRect.left - constraintRect.left - offsetX
+    } else {
+      width = constraintRect.width
+    }
+
+    // Floor at 16px so a consumer's `max-height` doesn't collapse to 0 in the
+    // frame(s) before placement flips when the trigger sits right at the edge.
+    return {
+      height: Math.max(16, height),
+      width: Math.max(16, width)
     }
   }
 }
