@@ -25,7 +25,12 @@ import React from 'react'
 import { BorderWidth } from '@instructure/emotion'
 import type { NewComponentTypes } from '@instructure/ui-themes'
 
-import type { Shadow, Stacking, WithStyleProps } from '@instructure/emotion'
+import type {
+  Shadow,
+  Stacking,
+  StyleObject,
+  WithStyleProps
+} from '@instructure/emotion'
 
 import type {
   PlacementPropValues,
@@ -284,6 +289,12 @@ type PopoverOwnProps = {
    * otherwise its calculated automatically based on whether the content is shown.
    */
   shouldSetAriaExpanded?: boolean
+  /**
+   * When `true`, wraps the popover content in a container that caps its
+   * height to the available viewport space and scrolls when content
+   * overflows.
+   */
+  shouldScrollContent?: boolean
 }
 
 type PopoverProps = PopoverOwnProps &
@@ -302,7 +313,11 @@ type PropKeys = keyof PopoverOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type PopoverStyle = { borderRadius: string; borderColor: string }
+type PopoverStyle = {
+  borderRadius: string
+  borderColor: string
+  scrollContainer: StyleObject
+}
 const allowedProps: AllowedPropKeys = [
   'isShowingContent',
   'defaultIsShowingContent',
@@ -347,7 +362,8 @@ const allowedProps: AllowedPropKeys = [
   'children',
   'elementRef',
   'borderWidth',
-  'shouldSetAriaExpanded'
+  'shouldSetAriaExpanded',
+  'shouldScrollContent'
 ]
 
 export type { PopoverOwnProps, PopoverProps, PopoverState, PopoverStyle }

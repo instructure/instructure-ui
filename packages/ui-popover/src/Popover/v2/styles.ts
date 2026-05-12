@@ -38,7 +38,13 @@ const generateStyle = (
 ): PopoverStyle => {
   return {
     borderColor: componentTheme.borderColor,
-    borderRadius: componentTheme.borderRadius
+    borderRadius: componentTheme.borderRadius,
+    scrollContainer: {
+      label: 'popover__scrollContainer',
+      maxHeight: 'var(--ui-position-available-height, 100vh)',
+      overflowY: 'auto',
+      overflowX: 'hidden'
+    }
   }
 }
 

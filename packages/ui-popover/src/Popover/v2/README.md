@@ -425,6 +425,37 @@ const Example = () => {
 render(<Example />)
 ```
 
+#### Scrolling content (`shouldScrollContent`)
+
+When the popover content can grow taller than the available viewport space, set `shouldScrollContent` to wrap the content in a scroll container that fits to the room between the trigger element and the viewport edge. To try the example below, zoom in until the available space becomes small enough that a scrollbar is displayed in the Popover.
+
+```js
+---
+type: example
+---
+const fpo = lorem.paragraphs(8)
+class Example extends React.Component {
+  state = { isOpen: false }
+  render () {
+    return (
+      <Popover
+        on="click"
+        placement="bottom start"
+        isShowingContent={this.state.isOpen}
+        onShowContent={() => this.setState({ isOpen: true })}
+        onHideContent={() => this.setState({ isOpen: false })}
+        shouldScrollContent
+        screenReaderLabel="A long popover"
+        renderTrigger={<Button>Open scrollable popover</Button>}
+      >
+        <View as="div" padding="small" maxWidth="22rem">{fpo}</View>
+      </Popover>
+    )
+  }
+}
+render(<Example />)
+```
+
 ### Guidelines
 
 ```js

@@ -519,6 +519,12 @@ class Popover extends Component<PopoverProps, PopoverState> {
   renderContent() {
     let content = callRenderProp(this.props.children)
 
+    if (this.props.shouldScrollContent) {
+      content = (
+        <div css={this.props.styles?.scrollContainer}>{content}</div>
+      )
+    }
+
     if (this.shown && !this.isTooltip) {
       // if popover is NOT being used as a tooltip, create a Dialog
       // to manage the content FocusRegion, when showing
