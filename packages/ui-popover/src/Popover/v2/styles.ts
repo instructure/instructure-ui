@@ -43,7 +43,8 @@ const generateStyle = (
       label: 'popover__scrollContainer',
       maxHeight: 'var(--ui-position-available-height, 100vh)',
       overflowY: 'auto',
-      overflowX: 'hidden'
+      overflowX: 'hidden',
+      borderRadius: componentTheme.borderRadius
     }
   }
 }
