@@ -300,6 +300,7 @@ const DateInput = forwardRef(
             shouldContainFocus
             shouldReturnFocus
             shouldCloseOnDocumentClick
+            shouldScrollContent
             screenReaderLabel={screenReaderLabels.datePickerDialog}
           >
             <Calendar
