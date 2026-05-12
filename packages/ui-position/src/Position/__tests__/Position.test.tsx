@@ -583,4 +583,25 @@ describe('<Position />', () => {
       expect(style.display).toEqual('block')
     })
   })
+
+  it('writes --ui-position-available-{height,width} on the content node', async () => {
+    render(
+      <Position
+        constrain="window"
+        placement="bottom"
+        renderTarget={<button data-testid="target">Target</button>}
+      >
+        <div data-testid="content">Content</div>
+      </Position>
+    )
+    const content = screen.getByTestId('content')
+    await waitFor(() => {
+      expect(
+        content.style.getPropertyValue('--ui-position-available-height')
+      ).not.toBe('')
+      expect(
+        content.style.getPropertyValue('--ui-position-available-width')
+      ).not.toBe('')
+    })
+  })
 })

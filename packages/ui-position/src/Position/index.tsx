@@ -80,9 +80,13 @@ class Position extends Component<PositionProps, PositionState> {
   constructor(props: PositionProps) {
     super(props)
 
+    const initial = this.calculatePosition(props)
+    this._availableHeight = initial.availableHeight
+    this._availableWidth = initial.availableWidth
     this.state = {
       positioned: false,
-      ...this.calculatePosition(props)
+      placement: initial.placement,
+      style: initial.style
     }
     this.position = debounce(this.position, 0, {
       leading: false,
@@ -98,6 +102,8 @@ class Position extends Component<PositionProps, PositionState> {
   _listener: PositionChangeListenerType | null = null
   _content?: PositionElement
   _target?: PositionElement
+  _availableHeight?: number
+  _availableWidth?: number
 
   handleRef = (el: Element | null) => {
     const { elementRef } = this.props
@@ -220,6 +226,22 @@ class Position extends Component<PositionProps, PositionState> {
     )
   }
 
+  // Write `--ui-position-available-{height,width}` directly on the content
+  // node's inline style
+  applyAvailableSpaceCustomProperties() {
+    const node = findDOMNode(this._content) as HTMLElement | null
+    if (!node?.style) return
+    const set = (name: string, value: number | undefined) => {
+      if (typeof value === 'number' && Number.isFinite(value)) {
+        node.style.setProperty(name, `${value}px`)
+      } else {
+        node.style.removeProperty(name)
+      }
+    }
+    set('--ui-position-available-height', this._availableHeight)
+    set('--ui-position-available-width', this._availableWidth)
+  }
+
   calculatePosition(props: PositionProps) {
     return calculateElementPosition(this._content, this._target, {
       placement: props.placement,
@@ -232,10 +254,12 @@ class Position extends Component<PositionProps, PositionState> {
   }
 
   position = () => {
-    this.setState({
-      positioned: true,
-      ...this.calculatePosition(this.props)
-    })
+    const { placement, style, availableHeight, availableWidth } =
+      this.calculatePosition(this.props)
+    this._availableHeight = availableHeight
+    this._availableWidth = availableWidth
+    this.applyAvailableSpaceCustomProperties()
+    this.setState({ positioned: true, placement, style })
   }
 
   startTracking() {
