@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <base href="/" />
-    <!-- GitHub Pages SPA redirect for subdirectory deployments.
-         When serving this page as 404.html, redirect deep links under
-         /pr-preview/pr-N/ or /latest/ back to the subdirectory root with
-         the route encoded as a query parameter. No-op for root paths. -->
+    <base href="<%= PUBLIC_PATH %>" />
+    <!-- When GH Pages serves this as 404.html, redirect the deep link to the
+         deploy base -->
     <script>
       ;(function () {
+        var base = '<%= PUBLIC_PATH %>'
         var l = window.location
-        var m = l.pathname.match(/^(\/pr-preview\/pr-\d+|\/latest)(\/.*)$/)
-        if (m && m[2] !== '/') {
-          l.replace(
-            m[1] + '/?__spa_route=' + encodeURIComponent(m[2] + l.hash)
-          )
-        }
+        if (l.pathname === base) return
+        if (l.pathname + '/' === base) return
+        if (l.pathname.indexOf(base) !== 0) return
+        var rest = l.pathname.slice(base.length)
+        l.replace(
+          base + '?__spa_route=' + encodeURIComponent('/' + rest + l.hash)
+        )
       })()
     </script>
     <meta charset="utf-8" />
