@@ -562,9 +562,9 @@ class PositionData {
   }
 
   /**
-   * Maximum height/width (in CSS px) the positioned element can occupy in
-   * the resolved placement before crossing the constraint. Drives the
-   * `--ui-position-available-{height,width}` CSS variables
+   * Maximum height/width (in CSS px) an *inner* box inside the positioned
+   * element can occupy before the wrapper crosses the constraint edge.
+   * Drives the `--ui-position-available-{height,width}` CSS variables.
    */
   get availableSpace(): { height: number; width: number } {
     const targetNode = this.target?.node as Element | undefined
@@ -622,11 +622,29 @@ class PositionData {
       width = constraintRect.width
     }
 
-    // Floor at 16px so a consumer's `max-height` doesn't collapse to 0 in the
-    // frame(s) before placement flips when the trigger sits right at the edge.
+    // Measure the wrapper's frame
+    let vFrame = 0
+    let hFrame = 0
+    if (elementNode && 'ownerDocument' in elementNode) {
+      const view = (elementNode as Element).ownerDocument?.defaultView
+      if (view) {
+        const cs = view.getComputedStyle(elementNode as Element)
+        vFrame =
+          (parseFloat(cs.borderTopWidth) || 0) +
+          (parseFloat(cs.borderBottomWidth) || 0) +
+          (parseFloat(cs.paddingTop) || 0) +
+          (parseFloat(cs.paddingBottom) || 0)
+        hFrame =
+          (parseFloat(cs.borderLeftWidth) || 0) +
+          (parseFloat(cs.borderRightWidth) || 0) +
+          (parseFloat(cs.paddingLeft) || 0) +
+          (parseFloat(cs.paddingRight) || 0)
+      }
+    }
+
     return {
-      height: Math.max(16, height),
-      width: Math.max(16, width)
+      height: Math.max(0, Math.floor(height - vFrame - 1)),
+      width: Math.max(0, Math.floor(width - hFrame - 1))
     }
   }
 }
