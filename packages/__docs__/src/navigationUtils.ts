@@ -29,16 +29,14 @@ declare const __webpack_public_path__: string
 const MINOR_VERSION_REGEX = /^v\d+_\d+$/
 
 type ParsedUrl = {
-  basePrefix: string
   minorVersion: string | null
   page: string
   sectionId: string | undefined
 }
 
 /**
- * Returns '' for a root deploy, '/latest' on instructure.design,
- * '/pr-preview/pr-<n>' for PR previews. For sub-host deployments it can be
- * '/<repo>/pr-preview/pr-<n>'.
+ * Returns webpack's `output.publicPath` with the trailing slash stripped.
+ * Always begins with `/`, or is empty for a root deploy.
  */
 function getDeployBase(): string {
   if (typeof __webpack_public_path__ === 'string' && __webpack_public_path__) {
@@ -52,20 +50,17 @@ function parseCurrentUrl(): ParsedUrl {
 
   const deployBase = getDeployBase()
   let rest = pathname
-  if (deployBase && rest.startsWith(deployBase)) {
+  if (
+    deployBase &&
+    (rest === deployBase || rest.startsWith(deployBase + '/'))
+  ) {
     rest = rest.slice(deployBase.length)
   }
 
   const cleanPath = rest.replace(/^\/+|\/+$/g, '')
   const segments = cleanPath.split('/').filter(Boolean)
 
-  let appPrefix = ''
   let idx = 0
-
-  if (segments[idx] === 'latest') {
-    appPrefix = '/latest'
-    idx++
-  }
 
   // Detect minor version prefix: /v11_7
   let minorVersion: string | null = null
@@ -83,7 +78,7 @@ function parseCurrentUrl(): ParsedUrl {
     sectionId = decodeURI(hash.replace(/^#+/, ''))
   }
 
-  return { basePrefix: deployBase + appPrefix, minorVersion, page, sectionId }
+  return { minorVersion, page, sectionId }
 }
 
 type BuildUrlOptions = {
@@ -98,7 +93,7 @@ function buildUrl(targetPage: string, options?: BuildUrlOptions): string {
       ? options.minorVersion
       : parsed.minorVersion
 
-  let url = parsed.basePrefix
+  let url = getDeployBase()
 
   if (minorVersion) {
     url += `/${minorVersion}`
@@ -130,20 +125,12 @@ function navigateToVersion(version: string | null): void {
   window.dispatchEvent(new PopStateEvent('popstate'))
 }
 
-/**
- * Returns the base path prefix for fetching static assets.
- * On PR previews this is e.g. `/pr-preview/pr-2425`, otherwise empty string.
- */
-function getAssetBasePath(): string {
-  return getDeployBase()
-}
-
 export {
   parseCurrentUrl,
   buildUrl,
   navigateTo,
   navigateToVersion,
-  getAssetBasePath,
+  getDeployBase,
   MINOR_VERSION_REGEX
 }
 export type { ParsedUrl }

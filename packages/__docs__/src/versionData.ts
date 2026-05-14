@@ -55,7 +55,7 @@ const fetchVersionData = async (signal: AbortSignal) => {
 }
 
 import type { MinorVersionData } from '../buildScripts/DataTypes.mts'
-import { getAssetBasePath } from './navigationUtils'
+import { getDeployBase } from './navigationUtils'
 
 /**
  * Fetches minor version data from docs-versions.json.
@@ -66,7 +66,9 @@ const fetchMinorVersionData = async (
   signal: AbortSignal
 ): Promise<MinorVersionData | undefined> => {
   try {
-    const result = await fetch(`${getAssetBasePath()}/docs-versions.json`, { signal })
+    const result = await fetch(`${getDeployBase()}/docs-versions.json`, {
+      signal
+    })
     if (!result.ok) {
       return undefined
     }
