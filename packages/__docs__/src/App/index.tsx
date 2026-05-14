@@ -70,7 +70,7 @@ import {
 import {
   parseCurrentUrl,
   navigateToVersion,
-  getAssetBasePath,
+  getDeployBase,
   MINOR_VERSION_REGEX
 } from '../navigationUtils'
 
@@ -136,7 +136,7 @@ class App extends Component<AppProps, AppState> {
   }
 
   getDocsBasePath = () => {
-    const base = getAssetBasePath()
+    const base = getDeployBase()
     const { selectedMinorVersion } = this.state
     if (selectedMinorVersion) {
       return `${base}/docs/${selectedMinorVersion}/`
@@ -212,13 +212,13 @@ class App extends Component<AppProps, AppState> {
     navigateToVersion(newVersion)
 
     this.fetchMainDocsData(
-      `${getAssetBasePath()}/docs/${newVersion}/markdown-and-sources-data.json`,
+      `${getDeployBase()}/docs/${newVersion}/markdown-and-sources-data.json`,
       signal
     ).catch(errorHandler)
 
     // Icons are not version-specific; only re-fetch if not already loaded
     if (!this.state.legacyIconsData) {
-      fetch(`${getAssetBasePath()}/legacy-icons-data.json`, { signal })
+      fetch(`${getDeployBase()}/legacy-icons-data.json`, { signal })
         .then((response) => response.json())
         .then((legacyIconsData) => {
           this.setState({ legacyIconsData })
@@ -282,7 +282,7 @@ class App extends Component<AppProps, AppState> {
     this.fetchVersionData(signal).catch(errorHandler)
     document.addEventListener('keydown', this.handleTabKey)
 
-    fetch(`${getAssetBasePath()}/legacy-icons-data.json`, { signal })
+    fetch(`${getDeployBase()}/legacy-icons-data.json`, { signal })
       .then((response) => response.json())
       .then((iconsData) => this.setState({ legacyIconsData: iconsData }))
       .catch(errorHandler)
@@ -304,13 +304,13 @@ class App extends Component<AppProps, AppState> {
             selectedMinorVersion
           })
           return this.fetchMainDocsData(
-            `${getAssetBasePath()}/docs/${selectedMinorVersion}/markdown-and-sources-data.json`,
+            `${getDeployBase()}/docs/${selectedMinorVersion}/markdown-and-sources-data.json`,
             signal
           )
         }
         // No minor versions available, fetch from root path
         return this.fetchMainDocsData(
-          `${getAssetBasePath()}/markdown-and-sources-data.json`,
+          `${getDeployBase()}/markdown-and-sources-data.json`,
           signal
         )
       })
@@ -360,23 +360,21 @@ class App extends Component<AppProps, AppState> {
   getPathInfo = () => {
     const { hash, pathname } = window.location
 
-    const cleanPath = pathname.replace(/^\/+|\/+$/g, '')
+    // Strip the deploy base (e.g. '/latest', '/pr-preview/pr-123',
+    // '/<repo>/pr-preview/pr-N') before parsing app segments.
+    const deployBase = getDeployBase()
+    let rest = pathname
+    if (
+      deployBase &&
+      (rest === deployBase || rest.startsWith(deployBase + '/'))
+    ) {
+      rest = rest.slice(deployBase.length)
+    }
+
+    const cleanPath = rest.replace(/^\/+|\/+$/g, '')
     const segments = cleanPath.split('/').filter(Boolean)
 
-    // Skip PR preview prefix
     let idx = 0
-    if (
-      segments.length >= 2 &&
-      segments[0] === 'pr-preview' &&
-      segments[1].startsWith('pr-')
-    ) {
-      idx = 2
-    }
-
-    // Skip /latest/ prefix
-    if (idx === 0 && segments[idx] === 'latest') {
-      idx++
-    }
 
     // Skip minor version prefix (e.g. v11_7)
     if (idx < segments.length && MINOR_VERSION_REGEX.test(segments[idx])) {

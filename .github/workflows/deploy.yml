@@ -30,18 +30,24 @@ jobs:
           case "${{ github.ref }}" in
             "refs/heads/master")
               echo "::set-output name=deploy_dir::./"
+              echo "::set-output name=public_path::/"
               ;;
             "refs/heads/v8_maintenance")
               echo "::set-output name=deploy_dir::v8"
+              echo "::set-output name=public_path::/v8/"
               ;;
             "refs/heads/v9_maintenance")
               echo "::set-output name=deploy_dir::v9"
+              echo "::set-output name=public_path::/v9/"
               ;;
             "refs/heads/v10_maintenance")
               echo "::set-output name=deploy_dir::v10"
+              echo "::set-output name=public_path::/v10/"
               ;;
           esac
       - name: Build docs-app
+        env:
+          PUBLIC_PATH: ${{ steps.set-build-dir.outputs.public_path }}
         run: pnpm run build:docs
       - name: Copy index.html to 404.html for GitHub Pages
         run: cp ./packages/__docs__/__build__/index.html ./packages/__docs__/__build__/404.html

@@ -6,14 +6,15 @@
          deploy base -->
     <script>
       ;(function () {
-        var base = '<%= PUBLIC_PATH %>'
-        var l = window.location
-        if (l.pathname === base) return
-        if (l.pathname + '/' === base) return
-        if (l.pathname.indexOf(base) !== 0) return
-        var rest = l.pathname.slice(base.length)
-        l.replace(
-          base + '?__spa_route=' + encodeURIComponent('/' + rest + l.hash)
+        const base = '<%= PUBLIC_PATH %>'
+        const { pathname, search, hash } = window.location
+        if (pathname === base || pathname + '/' === base) return
+        if (!pathname.startsWith(base)) return
+        const rest = pathname.slice(base.length)
+        window.location.replace(
+          base +
+            '?__spa_route=' +
+            encodeURIComponent('/' + rest + search + hash)
         )
       })()
     </script>

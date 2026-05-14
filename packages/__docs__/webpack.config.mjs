@@ -31,15 +31,19 @@ import webpack from 'webpack'
 const ENV = process.env.NODE_ENV || 'production'
 const DEBUG = process.env.DEBUG || ENV === 'development'
 const GITHUB_PULL_REQUEST_PREVIEW = process.env.GITHUB_PULL_REQUEST_PREVIEW || 'false'
-const PR_NUMBER = process.env.PR_NUMBER
-// The URL prefix this build is deployed under. Must end with a trailing
+// The URL prefix this build is deployed under. Must begin and end with a
 // slash. Fed into output.publicPath (which webpack exposes at runtime as
 // __webpack_public_path__) and into the HTML template's <base href> and
-// 404 SPA-redirect script. Keeping a single source here means a new deploy
-// target only needs to set this one env var.
-const PUBLIC_PATH =
-  process.env.PUBLIC_PATH ||
-  (PR_NUMBER ? `/pr-preview/pr-${PR_NUMBER}/` : '/')
+// 404 SPA-redirect script. Every CI workflow sets this explicitly; the
+// fallback to '/' only exists for local dev (`pnpm dev`).
+const PUBLIC_PATH = process.env.PUBLIC_PATH || '/'
+
+if (!/^\/([^?#]*\/)?$/.test(PUBLIC_PATH)) {
+  throw new Error(
+    `PUBLIC_PATH must begin and end with a slash and contain no query or fragment (got: "${PUBLIC_PATH}"). ` +
+    `Examples: "/", "/latest/", "/pr-preview/pr-123/", "/repo/pr-preview/pr-123/"`
+  )
+}
 
 const outputPath = resolvePath(import.meta.dirname, '__build__')
 
