@@ -110,13 +110,17 @@ git checkout -b release
 
 ##### 3. Run Pnpm Bump Command
 
-- This will propose new version numbers.
+- This will propose new version numbers. It can be forced to generate certain versions: patch, minor, major. Also has a prerelease option that'll produce a security postfixed release for private, security releases.
 
 ```bash
 ---
 type: code
 ---
 pnpm run bump
+pnpm run bump:patch
+pnpm run bump:minor
+pnpm run bump:major
+pnpm run bump:prerelease
 ```
 
 - Check if the proposed version numbers are correct. If they are, accept them.

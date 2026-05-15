@@ -44,18 +44,18 @@ const calcNextVersionType = () => {
 
 export default {
   command: 'bump',
-  desc: 'bump version in all package.json-s, generate changelogs and commit this change',
+  desc: "bump version in all package.json-s, generate changelogs and commit this change. Use the releaseType param to explicitely tell lerna what version to bump to. (patch, minor, major, prerelease. Prerelease means that it'll publish a security postfixed version)",
   builder: (yargs) => {
     yargs.option('releaseType', {
       type: 'string',
       describe:
-        'optional release type/version argument: major, minor, patch, [version]'
+        'optional release type/version argument: major, minor, patch, prerelease, [version]'
     })
   },
   handler: async (argv) => {
     const pkgJSON = pkgUtils.getPackageJSON(undefined)
-    // optional release type/version argument: major, minor, patch, [version]
-    // e.g. ui-scripts bump major
+    // optional release type/version argument: major, minor, patch, prerelease [version]
+    // e.g. ui-scripts bump --releaseType=major
     await bump(pkgJSON.name, argv.releaseType)
   }
 }

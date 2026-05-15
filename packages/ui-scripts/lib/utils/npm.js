@@ -59,7 +59,7 @@ export async function bumpPackages(packageName, requestedVersion) {
   let bumpVersion = requestedVersion
 
   if (bumpVersion) {
-    if (!['major', 'minor', 'patch'].includes(bumpVersion)) {
+    if (!['major', 'minor', 'patch', 'prerelease'].includes(bumpVersion)) {
       bumpVersion = semver.valid(bumpVersion)
 
       if (!bumpVersion) {
@@ -88,7 +88,8 @@ export async function bumpPackages(packageName, requestedVersion) {
       '--no-push', // do not execute `git push`
       '--no-git-tag-version', // do not add git tag or commit
       '--force-publish=*', // bump all packages even if they have no changes
-      '--conventional-commits' // determines new version and updates Changelog
+      '--conventional-commits', // determines new version and updates Changelog
+      '--preid=SECURITY' // postfixes releases if type is prerelease
     ])
 
     releaseVersion = await syncRootPackageVersion(true)
