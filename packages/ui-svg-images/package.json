@@ -29,7 +29,8 @@
     "@instructure/ui-react-utils": "workspace:*",
     "@instructure/ui-themes": "workspace:*",
     "@instructure/ui-utils": "workspace:*",
-    "@instructure/uid": "workspace:*"
+    "@instructure/uid": "workspace:*",
+    "dompurify": "^3.4.2"
   },
   "devDependencies": {
     "@instructure/ui-babel-preset": "workspace:*",

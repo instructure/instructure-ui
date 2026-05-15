@@ -413,4 +413,51 @@ describe('with `as` prop', () => {
       expect(link).not.toHaveAttribute('role', 'button')
     })
   })
+
+  describe('href safety', () => {
+    it('strips javascript: schemes from href', async () => {
+      render(<Link href="javascript:alert(1)">Hello</Link>)
+      const el = screen.getByText('Hello')
+      expect(el).not.toHaveAttribute('href', 'javascript:alert(1)')
+      expect(el).not.toHaveAttribute('href')
+    })
+
+    it('strips data: schemes from href', async () => {
+      render(<Link href="data:text/html,<x>">Hello</Link>)
+      const el = screen.getByText('Hello')
+      expect(el).not.toHaveAttribute('href')
+    })
+
+    it('preserves safe https hrefs', async () => {
+      render(<Link href="https://example.com">Hello</Link>)
+      const link = screen.getByRole('link')
+      expect(link).toHaveAttribute('href', 'https://example.com')
+    })
+
+    it('defaults rel to noopener noreferrer for target=_blank', async () => {
+      render(
+        <Link href="https://example.com" target="_blank">
+          Hello
+        </Link>
+      )
+      const link = screen.getByRole('link')
+      expect(link).toHaveAttribute('rel', 'noopener noreferrer')
+    })
+
+    it('does not override consumer-supplied rel', async () => {
+      render(
+        <Link href="https://example.com" target="_blank" rel="external">
+          Hello
+        </Link>
+      )
+      const link = screen.getByRole('link')
+      expect(link).toHaveAttribute('rel', 'external')
+    })
+
+    it('does not add rel when target is not _blank', async () => {
+      render(<Link href="https://example.com">Hello</Link>)
+      const link = screen.getByRole('link')
+      expect(link).not.toHaveAttribute('rel')
+    })
+  })
 })

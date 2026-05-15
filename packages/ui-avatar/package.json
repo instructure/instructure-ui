@@ -29,6 +29,7 @@
     "@instructure/ui-icons": "workspace:*",
     "@instructure/ui-react-utils": "workspace:*",
     "@instructure/ui-themes": "workspace:*",
+    "@instructure/ui-utils": "workspace:*",
     "@instructure/ui-view": "workspace:*"
   },
   "devDependencies": {

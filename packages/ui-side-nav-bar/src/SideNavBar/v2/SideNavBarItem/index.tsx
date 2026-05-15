@@ -25,6 +25,7 @@
 import { Component } from 'react'
 
 import { omitProps, getElementType } from '@instructure/ui-react-utils'
+import { safeLinkProps } from '@instructure/ui-utils'
 import { Tooltip } from '@instructure/ui-tooltip/latest'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { withStyleNew } from '@instructure/emotion'
@@ -74,7 +75,14 @@ class SideNavBarItem extends Component<SideNavBarItemProps> {
   renderLink(addRef: boolean) {
     const ElementType = getElementType(SideNavBarItem, this.props)
 
-    const { href, onClick, icon, label } = this.props
+    const { href: rawHref, onClick, icon, label } = this.props
+    const { href, rel } = safeLinkProps({
+      attr: 'href',
+      tag: typeof ElementType === 'string' ? ElementType : 'a',
+      href: rawHref,
+      target: (this.props as { target?: string }).target,
+      rel: (this.props as { rel?: string }).rel
+    })
 
     const props = omitProps(this.props, SideNavBarItem.allowedProps)
 
@@ -82,6 +90,7 @@ class SideNavBarItem extends Component<SideNavBarItemProps> {
       <ElementType
         {...props}
         href={href}
+        rel={rel}
         onClick={onClick}
         ref={addRef ? this.handleRef : undefined}
         css={this.props.styles?.navigationItem}

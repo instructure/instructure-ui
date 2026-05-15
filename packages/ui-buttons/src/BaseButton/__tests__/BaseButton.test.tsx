@@ -443,4 +443,28 @@ describe('<BaseButton/>', () => {
       })
     })
   })
+
+  describe('href safety', () => {
+    it('strips javascript: schemes from href', () => {
+      render(<BaseButton href="javascript:alert(1)">Hi</BaseButton>)
+      const el = screen.getByText('Hi').closest('a, button')
+      expect(el).not.toHaveAttribute('href')
+    })
+
+    it('preserves safe https hrefs', () => {
+      render(<BaseButton href="https://example.com">Hi</BaseButton>)
+      const link = screen.getByRole('link')
+      expect(link).toHaveAttribute('href', 'https://example.com')
+    })
+
+    it('defaults rel for target=_blank', () => {
+      render(
+        <BaseButton href="https://example.com" target="_blank">
+          Hi
+        </BaseButton>
+      )
+      const link = screen.getByRole('link')
+      expect(link).toHaveAttribute('rel', 'noopener noreferrer')
+    })
+  })
 })

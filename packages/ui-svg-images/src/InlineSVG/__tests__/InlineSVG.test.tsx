@@ -146,4 +146,43 @@ describe('<InlineSVG />', () => {
     expect(svg).toHaveAttribute('stroke', 'currentColor')
     expect(svg).toHaveAttribute('stroke-width', '2')
   })
+
+  describe('sanitization', () => {
+    it('strips <script> tags from src', () => {
+      const malicious = `<svg><script>window.__pwn=1</script><circle/></svg>`
+      const { container } = render(<InlineSVG src={malicious} />)
+      const group = container.querySelector('g[role="presentation"]')
+      expect(group?.innerHTML).not.toContain('<script')
+      expect(group?.querySelector('circle')).toBeInTheDocument()
+    })
+
+    it('strips on* event-handler attributes from inner SVG content', () => {
+      const malicious = `<svg><circle onload="window.__pwn=1" cx="10"/></svg>`
+      const { container } = render(<InlineSVG src={malicious} />)
+      const group = container.querySelector('g[role="presentation"]')
+      expect(group?.innerHTML.toLowerCase()).not.toContain('onload')
+    })
+
+    it('strips javascript: schemes from xlink:href', () => {
+      const malicious = `<svg><use xlink:href="javascript:alert(1)"/></svg>`
+      const { container } = render(<InlineSVG src={malicious} />)
+      const group = container.querySelector('g[role="presentation"]')
+      expect(group?.innerHTML.toLowerCase()).not.toContain('javascript:')
+    })
+
+    it('strips on* attributes from the outer <svg> element', () => {
+      const malicious = `<svg onload="window.__pwn=1"><circle/></svg>`
+      const { container } = render(<InlineSVG src={malicious} />)
+      const svg = container.querySelector('svg')
+      expect(svg).not.toHaveAttribute('onload')
+    })
+
+    it('preserves the SVG when src is benign', () => {
+      const benign = `<svg viewBox="0 0 24 24"><path d="M0 0L10 10"/></svg>`
+      const { container } = render(<InlineSVG src={benign} />)
+      const svg = container.querySelector('svg')
+      expect(svg).toHaveAttribute('viewBox', '0 0 24 24')
+      expect(svg?.querySelector('path')).toHaveAttribute('d', 'M0 0L10 10')
+    })
+  })
 })

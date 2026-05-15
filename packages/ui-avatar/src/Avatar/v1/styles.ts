@@ -23,7 +23,15 @@
  */
 
 import type { AvatarTheme } from '@instructure/shared-types'
+import { safeHref } from '@instructure/ui-utils'
 import { AvatarProps, AvatarStyle } from './props.js'
+
+// Escape characters that could break out of a CSS single-quoted url() string.
+const escapeCssUrl = (value: string) =>
+  value
+    .replace(/\\/g, '\\\\')
+    .replace(/'/g, "\\'")
+    .replace(/[\r\n]/g, '')
 
 type StyleParams = {
   loaded: boolean
@@ -50,6 +58,11 @@ const generateStyle = (
 ): AvatarStyle => {
   const { loaded, size, color, hasInverseColor, shape, src, showBorder } =
     params
+
+  const safeSrc = safeHref(src, 'img', 'src')
+  const backgroundImageValue = safeSrc
+    ? `url('${escapeCssUrl(safeSrc)}')`
+    : undefined
 
   // TODO: this is a temporary solution and should be revised on component update
   // NOTE: this is needed due to design changes. The size of the component is calculated from "em" which means it is
@@ -209,7 +222,7 @@ const generateStyle = (
       ...shapeStyles[shape!],
       ...(loaded
         ? {
-            backgroundImage: `url('${src}')`,
+            backgroundImage: backgroundImageValue,
             ...(showBorder !== 'always' && {
               border: 0
             }),

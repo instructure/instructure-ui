@@ -21,32 +21,40 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { capitalizeFirstLetter } from './capitalizeFirstLetter.js'
-export { cloneArray } from './cloneArray.js'
-export { createChainedFunction } from './createChainedFunction.js'
-export { deepEqual } from './deepEqual.js'
-export { hash } from './hash.js'
-export { generateId } from './generateId.js'
-export { isEmpty } from './isEmpty.js'
-export { mergeDeep } from './mergeDeep.js'
-export { ms } from './ms.js'
-export { parseUnit } from './parseUnit.js'
-export { px } from './px.js'
-export { safeHref } from './safeHref.js'
-export { safeLinkProps } from './safeLinkProps.js'
-export { shallowEqual } from './shallowEqual.js'
-export { within } from './within.js'
-export { camelize } from './camelize.js'
-export { pascalize } from './pascalize.js'
-export { isBaseTheme } from './isBaseTheme.js'
-export {
-  getBrowser,
-  isSafari,
-  isEdge,
-  isIE,
-  isFirefox,
-  isChromium,
-  isAndroidOrIOS,
-  isMac
-} from './getBrowser.js'
-export { combineDataCid } from './combineDataCid.js'
+
+import { safeHref } from './safeHref.js'
+
+/**
+ * ---
+ * category: utilities/utils
+ * ---
+ * Centralizes the security-related normalization for link-rendering
+ * components: validates `href`, and supplies a safe default `rel` when
+ * `target="_blank"` is in use.
+ *
+ * @module safeLinkProps
+ */
+type SafeLinkInput = {
+  href?: string | null
+  target?: string
+  rel?: string
+  tag: string
+  attr: string
+}
+
+type SafeLinkOutput = {
+  href: string | undefined
+  target: string | undefined
+  rel: string | undefined
+}
+
+function safeLinkProps(input: SafeLinkInput): SafeLinkOutput {
+  const { target, rel, tag, attr } = input
+  const href = safeHref(input.href, tag, attr)
+  const finalRel =
+    target === '_blank' && rel == null ? 'noopener noreferrer' : rel
+  return { href, target, rel: finalRel }
+}
+
+export default safeLinkProps
+export { safeLinkProps }

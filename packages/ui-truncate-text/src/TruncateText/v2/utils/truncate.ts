@@ -224,7 +224,7 @@ class Truncator {
         let attributes = ''
         for (let j = 0; j < attr.length; j++) {
           const att = attr[j]
-          attributes += ` ${att.nodeName}="${att.nodeValue}"`
+          attributes += ` ${att.nodeName}="${escapeHtml(att.nodeValue ?? '')}"`
         }
         html += `<${name}${attributes}>${safeText}</${name}>`
       } else if (mapItem.node.nodeType === 3) {

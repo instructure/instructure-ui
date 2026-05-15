@@ -32,7 +32,7 @@ import {
   withDeterministicId,
   callRenderProp
 } from '@instructure/ui-react-utils'
-import { createChainedFunction } from '@instructure/ui-utils'
+import { createChainedFunction, safeLinkProps } from '@instructure/ui-utils'
 import { isActiveElement, findDOMNode } from '@instructure/ui-dom-utils'
 import { withStyle } from '@instructure/emotion'
 
@@ -235,11 +235,26 @@ class MenuItem extends Component<MenuItemProps, MenuItemState> {
   }
 
   render() {
-    const { disabled, controls, onKeyDown, onKeyUp, type, href, target } =
-      this.props
+    const {
+      disabled,
+      controls,
+      onKeyDown,
+      onKeyUp,
+      type,
+      href: rawHref,
+      target
+    } = this.props
 
     const props = omitProps(this.props, MenuItem.allowedProps)
     const ElementType = this.elementType
+
+    const { href, rel } = safeLinkProps({
+      tag: typeof ElementType === 'string' ? ElementType : 'a',
+      attr: 'href',
+      href: rawHref,
+      target,
+      rel: (this.props as { rel?: string }).rel
+    })
 
     return (
       <ElementType
@@ -247,6 +262,7 @@ class MenuItem extends Component<MenuItemProps, MenuItemState> {
         {...props}
         href={href}
         target={target}
+        rel={rel}
         role={this.role}
         aria-labelledby={this.labelId}
         aria-disabled={disabled ? 'true' : undefined}

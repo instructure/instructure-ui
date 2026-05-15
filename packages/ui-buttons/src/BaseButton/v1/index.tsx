@@ -38,7 +38,7 @@ import type { ViewProps } from '@instructure/ui-view/v11_6'
 
 // TODO these have to be imported in separate lines because otherwise `isSafari` will be missing from the babel build
 // this bug is very likely caused by `babel-plugin-transform-imports` and can be reverted once it is removed from the codebase
-import { isSafari } from '@instructure/ui-utils'
+import { isSafari, safeLinkProps } from '@instructure/ui-utils'
 import { combineDataCid } from '@instructure/ui-utils'
 
 import { withStyle } from '@instructure/emotion'
@@ -239,7 +239,7 @@ class BaseButton extends Component<BaseButtonProps> {
       size,
       elementRef,
       as,
-      href,
+      href: rawHref,
       color,
       focusColor,
       textAlign,
@@ -258,8 +258,15 @@ class BaseButton extends Component<BaseButtonProps> {
       withFocusOutline,
       ...props
     } = this.props
-
     const { isDisabled, isReadOnly, elementType } = this
+    const { href, rel } = safeLinkProps({
+      tag: typeof elementType == 'string' ? elementType : 'button',
+      attr: 'href',
+      href: rawHref,
+      target: (props as { target?: string }).target,
+      rel: (props as { rel?: string }).rel
+    })
+
     // only add 0 tabIndex value if it doesn't have it by default, see
     // https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex
     let needsZeroTabIndex = true
@@ -303,6 +310,7 @@ class BaseButton extends Component<BaseButtonProps> {
         margin={margin}
         cursor={isDisabled ? 'not-allowed' : cursor}
         href={href}
+        rel={rel}
         type={href ? undefined : type}
         elementRef={this.handleElementRef}
         onClick={this.handleClick}

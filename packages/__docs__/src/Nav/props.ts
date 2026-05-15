@@ -39,7 +39,7 @@ type NavProps = OtherHTMLAttributes<NavOwnProps> & NavOwnProps
 
 const allowedProps: AllowedPropKeys = ['docs', 'sections', 'selected', 'themes']
 type NavState = {
-  query: string | RegExp | null
+  query: string | null
   expandedSections: Record<string, boolean>
   userToggling: boolean
   queryStr?: string

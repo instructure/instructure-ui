@@ -34,6 +34,7 @@ import generateComponentTheme from './theme.js'
 
 import { allowedProps } from './props.js'
 import type { InlineSVGProps } from './props'
+import { sanitizeSvg } from './sanitizeSvg'
 
 /**
 ---
@@ -127,14 +128,14 @@ class InlineSVG extends Component<InlineSVGProps> {
     return ids.length > 0 ? ids.join(' ') : undefined
   }
 
-  renderContent() {
-    if (this.props.src) {
-      const src = InlineSVG.prepareSrc(this.props.src)
+  renderContent(safeSrc: string) {
+    if (safeSrc) {
+      const safeBody = InlineSVG.prepareSrc(safeSrc)
       return (
         <g
           role="presentation"
           // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{ __html: src }}
+          dangerouslySetInnerHTML={{ __html: safeBody }}
         />
       )
     } else {
@@ -159,6 +160,7 @@ class InlineSVG extends Component<InlineSVGProps> {
   render() {
     const { style, title, description, focusable, src, styles, ...props } =
       this.props
+    const safeSrc = typeof src === 'string' && src ? sanitizeSvg(src) : ''
 
     // if width or height are 'auto', don't supply anything to the SVG
     const width =
@@ -171,7 +173,7 @@ class InlineSVG extends Component<InlineSVGProps> {
         : this.numberToNumberType(this.props.height)
     return (
       <svg
-        {...parseAttributes(src)}
+        {...parseAttributes(safeSrc)}
         {...omitProps(this.props, InlineSVG.allowedProps, ['inline'])}
         style={{
           ...style,
@@ -191,7 +193,7 @@ class InlineSVG extends Component<InlineSVGProps> {
       >
         {this.renderTitle()}
         {this.renderDesc(description)}
-        {this.renderContent()}
+        {this.renderContent(safeSrc)}
       </svg>
     )
   }
@@ -215,7 +217,7 @@ function parseAttributes(src: InlineSVGProps['src']) {
     while (match != null) {
       if (excludes.indexOf(match[1]) === -1) {
         // match[1] = attribute name, match[2] = quoted value, match[3] = unquoted value
-        attributes[match[1]] = match[2] || match[3]
+        attributes[match[1]] = match[2] || match[3] || ''
       }
       match = namesAndValuesRegExp.exec(attributesString)
     }

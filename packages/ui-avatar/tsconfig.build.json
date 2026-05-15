@@ -33,6 +33,7 @@
     },
     {
       "path": "../ui-icons/tsconfig.build.json"
-    }
+    },
+    { "path": "../ui-utils/tsconfig.build.json" }
   ]
 }
