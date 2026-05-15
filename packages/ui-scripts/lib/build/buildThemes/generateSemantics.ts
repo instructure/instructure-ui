@@ -104,8 +104,27 @@ export const resolveTypeReferences = (semantics: any, key?: any): string => {
   return `${typeof value}, `
 }
 
+const deepMerge = (target: any, source: any): any => {
+  const result = { ...target }
+  for (const key of Object.keys(source)) {
+    if (
+      typeof source[key] === 'object' &&
+      source[key] !== null &&
+      !Array.isArray(source[key]) &&
+      typeof target[key] === 'object' &&
+      target[key] !== null &&
+      !Array.isArray(target[key])
+    ) {
+      result[key] = deepMerge(target[key], source[key])
+    } else {
+      result[key] = source[key]
+    }
+  }
+  return result
+}
+
 export const mergeSemanticSets = (semanticList: any[]) =>
-  semanticList.reduce((acc, semantic) => ({ ...acc, ...semantic }), {})
+  semanticList.reduce((acc, semantic) => deepMerge(acc, semantic), {})
 
 const generateSemantics = (data: any): string => {
   const formattedSemantic = formatSemantic(data)
