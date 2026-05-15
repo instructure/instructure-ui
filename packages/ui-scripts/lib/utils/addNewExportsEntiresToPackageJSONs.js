@@ -35,12 +35,15 @@ import pkgUtils from './pkg-utils/index.js'
  * @param {string} version - Semver string (e.g. "11.9.0")
  */
 export const addNewExportsEntiresToPackageJSONs = async (version) => {
+  if (version.includes('SECURITY')) {
+    return
+  }
   const formattedVersion = `v${version.split('.').slice(0, 2).join('_')}`
   const packages = await pkgUtils.getDetailedPackageList()
 
   const res = packages.map(({ data, path }) => {
     //if no exports field, do nothing
-    if (!data.exports) {
+    if (!data?.exports) {
       return
     }
     //if the currently releasing version is already exists, do nothing
