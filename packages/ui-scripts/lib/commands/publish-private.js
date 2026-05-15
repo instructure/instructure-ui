@@ -103,7 +103,7 @@ async function publishPrivate({ skipConfirm }) {
   try {
     for (let i = 0; i < packages.length; i++) {
       const pkg = packages[i]
-      await publishPackage(pkg, npmrcPath)
+      await publishPackage(pkg, npmrcPath, registryUrl)
       info(
         `📦  ${pkg.name}@${pkg.version} published to ${registryUrl.hostname}`
       )
@@ -146,9 +146,18 @@ function writeTempNpmrc(registryUrl, token) {
   const authPath = registryUrl.pathname.endsWith('/')
     ? registryUrl.pathname
     : `${registryUrl.pathname}/`
-  const authLine = `//${registryUrl.host}${authPath}:_authToken=${token}`
-  const registryLine = `registry=${registryUrl.toString()}`
-  fs.writeFileSync(file, `${registryLine}\n${authLine}\n`, { mode: 0o600 })
+  const registryStr = registryUrl.toString()
+  const lines = [
+    `registry=${registryStr}`,
+    // Override the @instructure scope mapping in case the operator's
+    // ~/.npmrc has `@instructure:registry=https://registry.npmjs.org/`
+    // from a prior `npm login`. Without this line, pnpm's scoped lookup
+    // for @instructure/* finds the npmjs mapping first and silently
+    // retargets the publish to npmjs (where auth then fails).
+    `@instructure:registry=${registryStr}`,
+    `//${registryUrl.host}${authPath}:_authToken=${token}`
+  ]
+  fs.writeFileSync(file, lines.join('\n') + '\n', { mode: 0o600 })
   return file
 }
 
@@ -160,15 +169,16 @@ function cleanupTempNpmrc(npmrcPath) {
   }
 }
 
-async function publishPackage(pkg, npmrcPath) {
+async function publishPackage(pkg, npmrcPath, registryUrl) {
   const childEnv = { NPM_CONFIG_USERCONFIG: npmrcPath }
+  const registryStr = registryUrl.toString()
 
   // Skip if this version is already on the private registry.
   let versions = []
   try {
     const { stdout } = await runCommandAsync(
       'pnpm',
-      ['info', pkg.name, '--json'],
+      ['info', pkg.name, '--registry', registryStr, '--json'],
       childEnv,
       { stdio: 'pipe' }
     )
@@ -188,11 +198,16 @@ async function publishPackage(pkg, npmrcPath) {
     [
       'publish',
       pkg.location,
+      '--registry',
+      registryStr,
       '--tag',
       PRIVATE_TAG,
       '--no-git-checks'
       // Provenance is npmjs-only; omitted for non-npmjs registries.
-      // Registry + auth come from the temp .npmrc via NPM_CONFIG_USERCONFIG.
+      // --registry is passed explicitly so the publish lands at the
+      // private registry regardless of any scope/registry mapping in
+      // the operator's ~/.npmrc. Auth still resolves from the temp
+      // .npmrc via NPM_CONFIG_USERCONFIG (matched by host).
     ],
     childEnv
   )
