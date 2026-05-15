@@ -33,7 +33,8 @@
     "@instructure/ui-icons": "workspace:*",
     "@instructure/ui-react-utils": "workspace:*",
     "@instructure/ui-themes": "workspace:*",
-    "@instructure/ui-tooltip": "workspace:*"
+    "@instructure/ui-tooltip": "workspace:*",
+    "@instructure/ui-utils": "workspace:*"
   },
   "devDependencies": {
     "@instructure/ui-axe-check": "workspace:*",

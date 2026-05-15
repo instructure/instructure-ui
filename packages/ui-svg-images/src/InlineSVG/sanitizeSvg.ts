@@ -21,32 +21,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { capitalizeFirstLetter } from './capitalizeFirstLetter.js'
-export { cloneArray } from './cloneArray.js'
-export { createChainedFunction } from './createChainedFunction.js'
-export { deepEqual } from './deepEqual.js'
-export { hash } from './hash.js'
-export { generateId } from './generateId.js'
-export { isEmpty } from './isEmpty.js'
-export { mergeDeep } from './mergeDeep.js'
-export { ms } from './ms.js'
-export { parseUnit } from './parseUnit.js'
-export { px } from './px.js'
-export { safeHref } from './safeHref.js'
-export { safeLinkProps } from './safeLinkProps.js'
-export { shallowEqual } from './shallowEqual.js'
-export { within } from './within.js'
-export { camelize } from './camelize.js'
-export { pascalize } from './pascalize.js'
-export { isBaseTheme } from './isBaseTheme.js'
-export {
-  getBrowser,
-  isSafari,
-  isEdge,
-  isIE,
-  isFirefox,
-  isChromium,
-  isAndroidOrIOS,
-  isMac
-} from './getBrowser.js'
-export { combineDataCid } from './combineDataCid.js'
+
+import DOMPurify from 'dompurify'
+
+// Sanitize a full `<svg>...</svg>` string. DOMPurify only operates when a DOM
+// is available (i.e. in the browser); on the server it returns empty so unsafe
+// content never lands in SSR output. Callers should pass the complete SVG —
+// outer attributes are filtered in the same pass as the inner content.
+function sanitizeSvg(src: string) {
+  if (typeof src !== 'string' || src === '') return src
+  if (!DOMPurify.isSupported) return ''
+  DOMPurify.setConfig({ USE_PROFILES: { svg: true, svgFilters: true } })
+  return DOMPurify.sanitize(src)
+}
+
+export default sanitizeSvg
+export { sanitizeSvg }

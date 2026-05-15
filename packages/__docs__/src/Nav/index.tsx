@@ -92,7 +92,7 @@ class Nav extends Component<NavProps, NavState> {
     this.searchTimeout = setTimeout(() => {
       this.setState(
         {
-          query: value ? new RegExp(value, 'i') : null,
+          query: value ? value.toLowerCase() : null,
           queryStr: value,
           expandedSections,
           userToggling: false
@@ -146,9 +146,8 @@ class Nav extends Component<NavProps, NavState> {
 
   matchQuery(str: string): boolean {
     const { query } = this.state
-    return query && typeof (query as RegExp).test === 'function'
-      ? (query as RegExp).test(str)
-      : true
+    if (!query) return true
+    return str.toLowerCase().includes(query)
   }
 
   createNavToggle({

@@ -56,6 +56,12 @@ function mergeSourceIntoTarget(
     const merged = { ...target }
 
     keys.forEach((key: any) => {
+      // Block prototype-pollution payloads. These keys can arrive via
+      // JSON.parse or other deserialization in consumer-supplied
+      // themeOverride props.
+      if (key === '__proto__' || key === 'prototype' || key === 'constructor') {
+        return
+      }
       if (isObject(target[key]) && isObject(source[key])) {
         merged[key] = mergeSourceIntoTarget(target[key], source[key])
       } else if (isArray(source[key]) && isArray(target[key])) {

@@ -84,6 +84,15 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
     this.props.makeStyles?.(this.makeStyleProps())
   }
 
+  componentWillUnmount() {
+    // Release any preview blob URLs we minted; otherwise the browser pins
+    // each File in memory until the document goes away.
+    this._objectUrls.forEach((url) => window.URL.revokeObjectURL(url))
+    this._objectUrls = []
+  }
+
+  _objectUrls: string[] = []
+
   convertToFile(fileLikeItem: DataTransferItem | File) {
     if (fileLikeItem instanceof DataTransferItem)
       return fileLikeItem.getAsFile()
@@ -154,9 +163,11 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
       list = this.props.shouldAllowMultiple ? list : [list[0]]
     }
     if (shouldEnablePreview) {
-      return list.map((file: File) =>
-        Object.assign(file, { preview: window.URL.createObjectURL(file) })
-      )
+      return list.map((file: File) => {
+        const preview = window.URL.createObjectURL(file)
+        this._objectUrls.push(preview)
+        return Object.assign(file, { preview })
+      })
     }
     return list
   }

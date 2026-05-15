@@ -19,6 +19,7 @@
     { "path": "../ui-badge/tsconfig.build.json" },
     { "path": "../ui-icons/tsconfig.build.json" },
     { "path": "../ui-react-utils/tsconfig.build.json" },
-    { "path": "../ui-tooltip/tsconfig.build.json" }
+    { "path": "../ui-tooltip/tsconfig.build.json" },
+    { "path": "../ui-utils/tsconfig.build.json" }
   ]
 }

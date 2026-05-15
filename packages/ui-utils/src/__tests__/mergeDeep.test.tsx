@@ -130,4 +130,21 @@ describe('mergeDeep', () => {
     const func = new TestType()
     expect(mergeDeep(func)).toEqual(func)
   })
+
+  it('should not allow prototype pollution via __proto__', () => {
+    const malicious = JSON.parse('{"__proto__":{"polluted":"yes"}}')
+    const result = mergeDeep({}, malicious) as Record<string, unknown>
+    expect(({} as Record<string, unknown>).polluted).toBeUndefined()
+    expect(Object.prototype.hasOwnProperty.call(result, 'polluted')).toBe(false)
+    // also check it didn't end up nested
+    expect(Object.getPrototypeOf(result)).toBe(Object.prototype)
+  })
+
+  it('should not allow prototype pollution via constructor.prototype', () => {
+    const malicious = JSON.parse(
+      '{"constructor":{"prototype":{"polluted":"yes"}}}'
+    )
+    mergeDeep({}, malicious)
+    expect(({} as Record<string, unknown>).polluted).toBeUndefined()
+  })
 })

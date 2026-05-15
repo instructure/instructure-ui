@@ -34,7 +34,7 @@ import {
   passthroughProps,
   callRenderProp
 } from '@instructure/ui-react-utils'
-import { combineDataCid } from '@instructure/ui-utils'
+import { combineDataCid, safeLinkProps } from '@instructure/ui-utils'
 import { logWarn as warn } from '@instructure/console'
 
 import { withStyle } from '@instructure/emotion'
@@ -213,13 +213,20 @@ class Link extends Component<LinkProps, LinkState> {
       onClick,
       onMouseEnter,
       color,
-      href,
+      href: rawHref,
       margin,
       renderIcon,
       iconPlacement,
       isWithinText,
       ...props
     } = this.props
+    const { href, rel } = safeLinkProps({
+      attr: 'href',
+      tag: typeof this.element === 'string' ? this.element : 'a',
+      href: rawHref,
+      target: (props as { target?: string }).target,
+      rel: (props as { rel?: string }).rel
+    })
 
     const { interaction } = this
 
@@ -240,6 +247,7 @@ class Link extends Component<LinkProps, LinkState> {
         display={this.display}
         margin={margin}
         href={href}
+        rel={rel}
         onMouseEnter={onMouseEnter}
         onClick={this.handleClick}
         onFocus={this.handleFocus}

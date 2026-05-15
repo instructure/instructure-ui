@@ -31,6 +31,7 @@ import {
   matchComponentTypes,
   passthroughProps
 } from '@instructure/ui-react-utils'
+import { safeLinkProps } from '@instructure/ui-utils'
 
 import { View } from '@instructure/ui-view/v11_6'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
@@ -98,8 +99,21 @@ class Item extends Component<AppNavItemProps> {
   render() {
     const ElementType = getElementType(Item, this.props)
 
-    const { renderIcon, renderLabel, href, renderAfter, cursor, isDisabled } =
-      this.props
+    const {
+      renderIcon,
+      renderLabel,
+      href: rawHref,
+      renderAfter,
+      cursor,
+      isDisabled
+    } = this.props
+    const { href, rel } = safeLinkProps({
+      attr: 'href',
+      tag: typeof ElementType === 'string' ? ElementType : 'a',
+      href: rawHref,
+      target: (this.props as { target?: string }).target,
+      rel: (this.props as { rel?: string }).rel
+    })
 
     const icon = callRenderProp(renderIcon)
     const label = callRenderProp(renderLabel)
@@ -120,6 +134,7 @@ class Item extends Component<AppNavItemProps> {
         {...passthroughProps(this.props)}
         as={ElementType}
         href={href}
+        rel={rel}
         onClick={this.handleClick}
         disabled={isDisabled}
         elementRef={this.handleRef}
