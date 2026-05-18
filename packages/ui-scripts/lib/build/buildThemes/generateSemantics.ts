@@ -21,7 +21,65 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { mergeDeep } from '@instructure/ui-utils'
+
+//////////////////////////////////////////////////////////////////////////////////
+// START OF MERGFEDEEP
+//////////////////////////////////////////////////////////////////////////////////
+//This is needed because scripts can't have dependencies (e.g. ui-utils) because it needs to be resolved before build
+
+function mergeDeep(...args: Record<string, unknown>[]): Record<string, any> {
+  // note: This could be typed as the union of its args, but since
+  // its barely used its not worth the effort currently
+  let target = {}
+  args.forEach((arg) => {
+    target = mergeSourceIntoTarget(target, arg)
+  })
+  return target
+}
+
+function mergeSourceIntoTarget(
+  target: Record<string, any>,
+  source: Record<string, any>
+) {
+  if (isObject(source)) {
+    const keys = [
+      ...Object.keys(source),
+      ...Object.getOwnPropertySymbols(source)
+    ]
+    const merged = { ...target }
+
+    keys.forEach((key: any) => {
+      if (isObject(target[key]) && isObject(source[key])) {
+        merged[key] = mergeSourceIntoTarget(target[key], source[key])
+      } else if (isArray(source[key]) && isArray(target[key])) {
+        merged[key] = [...new Set([...target[key], ...source[key]])]
+      } else if (isArray(target[key])) {
+        merged[key] = [...new Set([...target[key], ...[source[key]]])]
+      } else {
+        merged[key] = source[key]
+      }
+    })
+    return merged
+  } else {
+    return { ...target }
+  }
+}
+
+function isObject(item: unknown) {
+  return (
+    item &&
+    (typeof item === 'object' || typeof item === 'function') &&
+    !Array.isArray(item)
+  )
+}
+
+function isArray(item: unknown): boolean {
+  return Array.isArray(item)
+}
+
+//////////////////////////////////////////////////////////////////////////////////
+// END OF MERGFEDEEP
+//////////////////////////////////////////////////////////////////////////////////
 
 const isReference = (expression: any): boolean =>
   expression[0] === '{' && expression[expression.length - 1] === '}'
@@ -106,7 +164,9 @@ export const resolveTypeReferences = (semantics: any, key?: any): string => {
 }
 
 export const mergeSemanticSets = (semanticList: any[]) => {
-  return semanticList.reduce((acc, semantic) => mergeDeep(acc, semantic), {})
+  return semanticList.reduce((acc, semantic) => {
+    return mergeDeep(acc, semantic)
+  }, {})
 }
 
 const generateSemantics = (data: any): string => {

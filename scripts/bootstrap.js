@@ -28,6 +28,17 @@ const path = require('path')
 
 const opts = { stdio: 'inherit' }
 function buildProject() {
+  console.info('Fetching design tokens...')
+  try {
+    execSync('pnpm update @instructure/instructure-design-tokens -r', opts)
+  } catch (error) {
+    console.error(
+      "'pnpm update @instructure/instructure-design-tokens -r' failed",
+      error
+    )
+    process.exit(1)
+  }
+
   console.info('Building themes...')
   try {
     execSync('pnpm run build:themes', opts)
