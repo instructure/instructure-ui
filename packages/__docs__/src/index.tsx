@@ -31,8 +31,9 @@ import { InstUISettingsProvider } from '@instructure/emotion'
 import '../globals'
 
 // Restore the original URL after a GitHub Pages 404 -> SPA redirect.
-// The 404.html (built in deploy.yml) redirects PR preview sub-routes to
-// /pr-preview/pr-{N}/?__spa_route=/path, and this code restores the clean URL.
+// 404.html (a copy of index.html, made in deploy.yml) rewrites any deep
+// link under the deploy base (e.g. /latest/, /v10/, /pr-preview/pr-N/) to
+// <PUBLIC_PATH>?__spa_route=/path. This restores the clean URL on load.
 const spaRouteParam = new URLSearchParams(window.location.search).get(
   '__spa_route'
 )
