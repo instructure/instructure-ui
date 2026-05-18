@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { mergeDeep } from '@instructure/ui-utils'
 
 const isReference = (expression: any): boolean =>
   expression[0] === '{' && expression[expression.length - 1] === '}'
@@ -104,8 +105,9 @@ export const resolveTypeReferences = (semantics: any, key?: any): string => {
   return `${typeof value}, `
 }
 
-export const mergeSemanticSets = (semanticList: any[]) =>
-  semanticList.reduce((acc, semantic) => ({ ...acc, ...semantic }), {})
+export const mergeSemanticSets = (semanticList: any[]) => {
+  return semanticList.reduce((acc, semantic) => mergeDeep(acc, semantic), {})
+}
 
 const generateSemantics = (data: any): string => {
   const formattedSemantic = formatSemantic(data)

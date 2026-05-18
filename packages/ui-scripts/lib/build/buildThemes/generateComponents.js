@@ -40,9 +40,9 @@ const formatReference = (reference) => {
   const lastElement = referenceArr[referenceArr.length - 1]
 
   if (!isNaN(Number(lastElement))) {
-    return `semantics.${referenceArr.slice(0, -1).join('.')}[${lastElement}],\n`
+    return `${referenceArr.slice(0, -1).join('.')}[${lastElement}],\n`
   }
-  return `semantics.${reference.slice(1, -1)},\n`
+  return `${reference.slice(1, -1)},\n`
 }
 
 export const resolveReferences = (semantics, key) => {
