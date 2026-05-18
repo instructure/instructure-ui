@@ -126,7 +126,10 @@ const setupThemes = async (targetPath: string, input: any): Promise<void> => {
     await createFile(`${themePath}/primitives.ts`, primitivesFileContent)
 
     // semantics
-    const mergedSemanticData = mergeSemanticSets(themeData[theme].semantic)
+    const mergedSemanticData = mergeSemanticSets(
+      themeData[theme].semantic
+    ).semantic
+
     const semantics = generateSemantics(mergedSemanticData)
     const semanticsTypes = generateSemanticsType(mergedSemanticData)
     const semanticsFileContent = `
@@ -167,7 +170,8 @@ const setupThemes = async (targetPath: string, input: any): Promise<void> => {
         const componentTypes = generateComponentType(
           component.data[fullComponentName]
         )
-        const usesSemantic = componentThemeVars.includes('semantics.')
+
+        const usesSemantic = componentThemeVars.includes('semantic.')
 
         // SharedTokens have to be at the component level in the input data
         // because of Figma, but it should be one level higher for our purposes
@@ -180,7 +184,7 @@ const setupThemes = async (targetPath: string, input: any): Promise<void> => {
           )} } from '../../componentTypes/${fullComponentName}'
 
           const ${fullComponentName} = (${
-            usesSemantic ? 'semantics: Semantics' : ''
+            usesSemantic ? 'semantic: Semantics' : ''
           }): ${capitalize(fullComponentName)} => ({${componentThemeVars}})
           export default ${fullComponentName}
             `
@@ -195,9 +199,9 @@ const setupThemes = async (targetPath: string, input: any): Promise<void> => {
           const componentFileContent = `
 
         import { SharedTokens } from '../commonTypes'
-        import { Semantics } from "./semantics"
+        import type { Semantics } from "./semantics"
 
-        const ${fullComponentName} = (semantics: Semantics): ${capitalize(
+        const ${fullComponentName} = (semantic: Semantics): ${capitalize(
             fullComponentName
           )} => ({${componentThemeVars}})
         export default ${fullComponentName}
@@ -281,7 +285,7 @@ const setupThemes = async (targetPath: string, input: any): Promise<void> => {
           (
             componentName // TODO type better
           ) =>
-            `${capitalize(componentName)}: (semantics: any) => ${capitalize(
+            `${capitalize(componentName)}: (semantic: any) => ${capitalize(
               componentName
             )}`
         )
@@ -336,7 +340,7 @@ const setupThemes = async (targetPath: string, input: any): Promise<void> => {
   export type BaseTheme<P = any, S = any> = {
     primitives: P
     semantics: (primitives: P) => S
-    sharedTokens: (semantics: S) => SharedTokens
+    sharedTokens: (semantic: S) => SharedTokens
     components: ComponentTypes
   }
   `

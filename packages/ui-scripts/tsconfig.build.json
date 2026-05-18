@@ -15,6 +15,7 @@
     },
     {
       "path": "../pkg-utils/tsconfig.build.json"
-    }
+    },
+    { "path": "../ui-utils/tsconfig.build.json" }
   ]
 }
