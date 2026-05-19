@@ -2032,7 +2032,7 @@ type: example
               renderHiddenItemsMenuTriggerLabel={(
                 hiddenChildrenCount
               ) => `${hiddenChildrenCount} More`}
-             renderHiddenItemsMenuTriggerAriaLabel={(
+             renderHiddenItemsMenuTriggerTooltip={(
                hiddenChildrenCount
              ) => `${hiddenChildrenCount} more menu items`}
             >

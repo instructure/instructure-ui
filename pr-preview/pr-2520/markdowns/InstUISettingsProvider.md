@@ -1,7 +1,7 @@
 # InstUISettingsProvider
 
 @module InstUISettingsProvider
-The `<InstUISettingsProvider/>` component provides a way to add global configuration to our app. It can be used to apply and handle themes (for all themeable child components that use the [withStyle](withStyle) decorator), setting the global text direction, etc.
+The `<InstUISettingsProvider/>` component provides a way to add global configuration to our app. It can be used to apply and handle themes (for all themeable child components that use the [withStyleNew](withStyleNew) decorator), setting the global text direction, etc.
 
 Note that `<InstUISettingsProvider/>` components can be nested!
 
@@ -76,22 +76,22 @@ type: example
 ---
 
 <InstUISettingsProvider dir="ltr">
-  <div>LTR text</div>
+  <div><Text>LTR text</Text></div>
   <Badge count={105} countUntil={100} margin="small medium 0 0">
     <Button>LTR Badge</Button>
   </Badge>
 
   <InstUISettingsProvider dir="rtl">
     <View as="div">
-      <div>Nested RTL text</div>
+      <div><Text>Nested RTL text</Text></div>
       <Badge count={105} countUntil={100} margin="small medium 0 0">
         <Button>Nested RTL Badge</Button>
       </Badge>
     </View>
   </InstUISettingsProvider>
 
-  <div>LTR text</div>
-  <div>LTR text</div>
+  <div><Text>LTR text</Text></div>
+  <div><Text>LTR text</Text></div>
 </InstUISettingsProvider>
 ```
 
@@ -101,7 +101,8 @@ type: example
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
 | InstUISettingsProvider | children | `React.ReactNode` | No | - |  |
-| InstUISettingsProvider | theme | `\| BaseThemeOrOverride \| ((theme: BaseTheme) => BaseThemeOrOverride)` | No | `{}` | A full theme or an override object |
+| InstUISettingsProvider | theme | `\| BaseThemeOrOverride \| ((theme: BaseTheme) => BaseThemeOrOverride)` | No | `{}` | A full theme or an override object. The override only works for legacy (v11.6 or earlier) themes, for newer ones use the `themeOverride` prop. |
+| InstUISettingsProvider | themeOverride | `\| NewThemeOverrideObject \| ((theme: Theme) => NewThemeOverrideObject)` | No | - | An override object for the new theming system. It will be deep merged into the theme. One can override primitives, semantics and individual component's themes, for example: ```js themeOverride={{ semantics: { color: { stroke: { error: 'purple' } } }, primitives: { color: { blue: { blue100: 'yellow' } } }, components: { Alert: { background: 'brown', infoIconBackground: 'darkblue', borderWidth: '0.5rem' }, Pill: { baseTextColor: 'purple', baseBorderColor: 'purple' } }, sharedTokens: { focusOutline: { width: '0.55rem', infoColor: 'deeppink' } } }} ``` |
 | InstUISettingsProvider | instanceCounterMap | `DeterministicIdProviderValue` | No | - | @deprecated the `instanceCounterMap` prop is deprecated. You don't need to supply the `instanceCounterMap` to the component. It handles it internally. A [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) which keeps track of specific InstUI components. (generally this is used for deterministic id generation for [SSR](/#server-side-rendering)) |
 
 ### Usage
