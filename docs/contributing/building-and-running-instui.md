@@ -1,5 +1,5 @@
 ---
-title: Agentic coding
+title: Building and running InstUI
 category: Contributing
 order: 2
 ---

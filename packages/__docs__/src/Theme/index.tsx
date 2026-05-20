@@ -31,6 +31,8 @@ import { Table } from '@instructure/ui-table'
 
 import { View } from '@instructure/ui-view'
 import { Alert } from '@instructure/ui-alerts'
+import { Spinner } from '@instructure/ui-spinner'
+import { Link } from '@instructure/ui-link'
 
 import { Heading } from '../Heading'
 import { Description } from '../Description'
@@ -45,18 +47,30 @@ import { BaseTheme, Colors } from '@instructure/shared-types'
 
 type valueof<X> = X[keyof X]
 
+type ThemeState = { showColors: boolean }
+
 @withStyleForDocs(generateStyle, generateComponentTheme)
-class Theme extends Component<ThemeProps> {
+class Theme extends Component<ThemeProps, ThemeState> {
   static defaultProps = {
     description: undefined
   }
 
+  state: ThemeState = { showColors: false }
+
   componentDidMount() {
     this.props.makeStyles?.()
+    // Defer color card rendering so the initial page paint is not blocked
+    requestAnimationFrame(() => this.setState({ showColors: true }))
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps: ThemeProps) {
     this.props.makeStyles?.()
+    if (prevProps.themeKey !== this.props.themeKey) {
+      // Reset on theme change so navigation feels instant
+      this.setState({ showColors: false }, () => {
+        requestAnimationFrame(() => this.setState({ showColors: true }))
+      })
+    }
   }
 
   _colorMap: Record<string, string> = {}
@@ -275,7 +289,7 @@ class Theme extends Component<ThemeProps> {
       themeKey === 'legacy-canvas' || themeKey === 'legacy-canvas-high-contrast'
     const sortedKeys = Object.keys(variables).sort((a, b) =>
       a === 'colors' ? -1 : b === 'colors' ? 1 : 0
-    ) as Array<keyof BaseTheme>
+    ) as Array<string & keyof BaseTheme>
     if (isLegacyTheme) {
       for (const name of sortedKeys) {
         const value = variables[name]
@@ -288,6 +302,16 @@ class Theme extends Component<ThemeProps> {
 
     return (
       <div>
+        {isLegacyTheme && (
+          <Alert variant="info" margin="0 0 medium">
+            This theme is used by <strong>InstUI v11.6</strong> components. For
+            v11.7 and later, use the{' '}
+            <Link href={`#${themeKey.replace('legacy-', '')}`}>
+              {themeKey.replace('legacy-', '')}
+            </Link>{' '}
+            theme instead.
+          </Alert>
+        )}
         {variables.description && (
           <Alert variant="info" margin="0 0 medium">
             {variables.description}
@@ -369,7 +393,17 @@ ${'```'}
           title={`${themeKey} Theme Usage in applications`}
         />
 
-        {isLegacyTheme ? sections : this.renderNewThemeColors()}
+        {this.state.showColors ? (
+          isLegacyTheme ? (
+            sections
+          ) : (
+            this.renderNewThemeColors()
+          )
+        ) : (
+          <View as="div" textAlign="center" padding="large">
+            <Spinner renderTitle="Loading colors..." size="medium" />
+          </View>
+        )}
       </div>
     )
   }

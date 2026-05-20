@@ -35,21 +35,51 @@ class ColorCard extends Component<ColorCardProps> {
     minimal: false
   }
 
-  hexToRgb(hex: string) {
-    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
-    if (!result) {
-      return
+  parseColor(value: string) {
+    // 6-digit hex: #RRGGBB
+    const hex6 = /^#([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(value)
+    if (hex6) {
+      return {
+        hex: value.toUpperCase(),
+        rgb: `${parseInt(hex6[1], 16)},${parseInt(hex6[2], 16)},${parseInt(
+          hex6[3],
+          16
+        )}`
+      }
     }
-    const rgb = {
-      r: parseInt(result[1], 16),
-      g: parseInt(result[2], 16),
-      b: parseInt(result[3], 16)
+    // 8-digit hex with alpha: #RRGGBBAA
+    const hex8 = /^#([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(
+      value
+    )
+    if (hex8) {
+      const alpha = Math.round((parseInt(hex8[4], 16) / 255) * 100)
+      return {
+        hex: value.toUpperCase(),
+        rgb: `${parseInt(hex8[1], 16)},${parseInt(hex8[2], 16)},${parseInt(
+          hex8[3],
+          16
+        )}`,
+        alpha: `${alpha}%`
+      }
     }
-    return `${rgb.r},${rgb.g},${rgb.b}`
+    // rgba(r,g,b,a)
+    const rgba =
+      /^rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)(?:\s*,\s*([\d.]+))?\s*\)/i.exec(
+        value
+      )
+    if (rgba) {
+      const alpha =
+        rgba[4] !== undefined
+          ? `${Math.round(parseFloat(rgba[4]) * 100)}%`
+          : undefined
+      return { rgb: `${rgba[1]},${rgba[2]},${rgba[3]}`, alpha }
+    }
+    return null
   }
 
   render() {
     const { name, hex, minimal } = this.props
+    const parsed = this.parseColor(hex)
     return (
       <View
         as="figure"
@@ -76,12 +106,21 @@ class ColorCard extends Component<ColorCardProps> {
               lineHeight="double"
               name={name.charAt(0).toUpperCase() + name.slice(1)}
             />
-            <Text as="div" size="x-small">
-              <strong>HEX:</strong> {hex}
-            </Text>
-            <Text as="div" size="x-small">
-              <strong>RGB:</strong> {this.hexToRgb(hex)}
-            </Text>
+            {parsed?.hex && (
+              <Text as="div" size="x-small">
+                <strong>HEX:</strong> {parsed.hex}
+              </Text>
+            )}
+            {parsed?.rgb && (
+              <Text as="div" size="x-small">
+                <strong>RGB:</strong> {parsed.rgb}
+              </Text>
+            )}
+            {parsed?.alpha && (
+              <Text as="div" size="x-small">
+                <strong>Alpha:</strong> {parsed.alpha}
+              </Text>
+            )}
           </div>
         </div>
       </View>

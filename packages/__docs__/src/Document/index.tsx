@@ -116,7 +116,6 @@ class Document extends Component<DocumentProps, DocumentState> {
     // old theme - use generateComponentTheme function
     if (selectedId === doc.id) {
       generateTheme = doc?.componentInstance?.generateComponentTheme
-      // TODO functional components do not work, e.g. Avatar
     } else {
       generateTheme = childDoc?.componentInstance?.generateComponentTheme
     }

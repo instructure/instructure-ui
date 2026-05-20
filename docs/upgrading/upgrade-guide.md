@@ -1,7 +1,7 @@
 ---
-title: Upgrade Guide for multi version
+title: Upgrade guide for v11.7
 category: Upgrading
-order: 9999999
+order: 2
 ---
 
 # Upgrade Guide for multi version support
@@ -52,7 +52,7 @@ type: example
 >
   <TextInput
     renderLabel="Name"
-    placeholder="Note: Change example when the old theme is renamed!"
+    placeholder="Focus me!"
   />
 </InstUISettingsProvider>
 ```

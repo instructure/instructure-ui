@@ -175,10 +175,11 @@ const Avatar = forwardRef(
     )
   }
 )
+// Ensures React DevTools shows "Avatar" instead of "ForwardRef"
 Avatar.displayName = 'Avatar'
 
-// TODO - why is this needed?
-Avatar.displayName = 'Avatar'
+// expose generateComponentTheme so Document can render "Default Theme Variables" for v11.6
+;(Avatar as typeof Avatar & { generateComponentTheme: typeof generateComponentTheme }).generateComponentTheme = generateComponentTheme
 
 export default Avatar
 export { Avatar }

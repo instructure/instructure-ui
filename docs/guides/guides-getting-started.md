@@ -15,7 +15,6 @@ The following steps will create a React app that uses Instructure UI. Recommende
 ---
 type: code
 ---
-
 npm create vite@latest my-cool-app
 ```
 
@@ -63,7 +62,7 @@ export default App
 
 What does this code do?
 
-- [InstUISettingsProvider](InstUISettingsProvider) allows to specify the text direction (default is the direction that the user's browser supplies) and the theme to your application. InstUI components require a theme to work, all components are themeable, and themes control their look and feel. There are 2 built-in themes: [`canvas`](canvas) and [`canvasHighContrast`](canvas-high-contrast). The component examples seen throughout the documentation use the [canvas theme](canvas) by default.
+- [InstUISettingsProvider](InstUISettingsProvider) allows to specify the text direction (default is the direction that the user's browser supplies) and the theme to your application. InstUI components require a theme to work, all components are themeable, and themes control their look and feel. Starting from v11.7 there are 4 built-in themes: [`canvas`](canvas), [`canvas-high-contrast`](canvas-high-contrast), [`light`](light) and [`dark`](dark). For v11.6 components the legacy themes [`legacy-canvas`](legacy-canvas) and [`legacy-canvas-high-contrast`](legacy-canvas-high-contrast) are available. The component examples seen throughout the documentation use the [canvas theme](canvas) by default.
 - [Button](Button) is an Instructure UI button component
 
 Finally, run `pnpm run dev` to start up a basic development server.

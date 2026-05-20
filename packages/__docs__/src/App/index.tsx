@@ -56,11 +56,11 @@ import { Heading } from '../Heading'
 import { Hero } from '../Hero'
 import { Nav } from '../Nav'
 import { Theme } from '../Theme'
-import { ComponentTheme } from '../ComponentTheme'
 import { Select } from '../Select'
 import { Section } from '../Section'
 import IconsPage from '../Icons'
 import LegacyIconsPage from '../LegacyIcons'
+import { SharedTokensPage } from '../SharedTokensPage'
 import { compileMarkdown } from '../compileMarkdown'
 
 import {
@@ -85,9 +85,11 @@ import { allowedProps } from './props'
 import type { ParsedDocSummary } from '../../buildScripts/DataTypes.mjs'
 import { logError } from '@instructure/console'
 import type { Spacing } from '@instructure/emotion'
-import type { NewComponentTypes } from '@instructure/ui-themes'
-import { boxShadowObjectsToCSSString } from '@instructure/ui-themes'
-import type { ComponentTheme as ComponentThemeType } from '@instructure/shared-types'
+import type {
+  NewComponentTypes,
+  Theme as ThemeType
+} from '@instructure/ui-themes'
+import type { BaseTheme } from '@instructure/shared-types'
 import { FocusRegion } from '@instructure/ui-a11y-utils'
 import { AppContext } from '../appContext'
 
@@ -610,14 +612,13 @@ class App extends Component<AppProps, AppState> {
   }
 
   renderNewThemePageAlert(subject = 'This theme') {
-    const v11_7Href = window.location.pathname.match(/v\d+_\d+/)
-      ? window.location.pathname.replace(/v\d+_\d+/, 'v11_7')
-      : `/v11_7${window.location.pathname}`
+    if (!window.location.pathname.includes('v11_6')) return null
+    const v11_7Href = window.location.pathname.replace('v11_6', 'v11_7')
     return (
       <Alert variant="info" margin="0 0 medium">
         {subject} is designed for components for <strong>v11.7</strong> and
-        later. If you are viewing an older version,{' '}
-        <Link href={v11_7Href}>switch to v11.7</Link>
+        later.{' '}
+        <Link href={v11_7Href}>Switch to v11.7</Link>
       </Alert>
     )
   }
@@ -643,61 +644,11 @@ class App extends Component<AppProps, AppState> {
           Theme: {themeKey}
         </Heading>
         {isNewThemePage && this.renderNewThemePageAlert()}
-        <Theme themeKey={themeKey} variables={theme.resource} />
+        <Theme themeKey={themeKey} variables={theme.resource as BaseTheme} />
       </View>
     )
     return (
       <Section id={themeKey}>{this.renderWrappedContent(themeContent)}</Section>
-    )
-  }
-
-  renderSharedTokens() {
-    const { layout } = this.state
-    const smallerScreens = layout === 'small' || layout === 'medium'
-
-    const raw = this.state.docsData?.themes['shared-tokens']?.resource || {}
-
-    // Compose CSS box-shadow strings for elevation tokens so each elevation
-    // appears as a single readable row instead of individual x/y/blur/… entries
-    const processedData: Record<string, any> = { ...raw }
-    if (processedData.boxShadow) {
-      const composed: Record<string, string> = {}
-      for (const [elevation, shadows] of Object.entries(
-        processedData.boxShadow as Record<string, Record<string, any>>
-      )) {
-        composed[elevation] = boxShadowObjectsToCSSString(shadows)
-      }
-      processedData.boxShadow = composed
-    }
-
-    const content = (
-      <View
-        as="div"
-        padding={
-          smallerScreens ? 'x-large none none large' : 'x-large none none'
-        }
-      >
-        <Heading level="h1" as="h2" margin="0 0 medium 0">
-          Shared Tokens
-        </Heading>
-        {this.renderNewThemePageAlert('Shared tokens')}
-        <Text as="p">
-          Use these tokens when building custom solutions to ensure your
-          components respond correctly to theme changes, including dark mode and
-          high contrast.
-        </Text>
-        {Object.entries(processedData).map(([section, data]) => (
-          <View key={section} as="div" margin="0 0 large">
-            <Heading as="h3" level="h3" margin="0 0 small">
-              {section}
-            </Heading>
-            <ComponentTheme componentTheme={data as ComponentThemeType} />
-          </View>
-        ))}
-      </View>
-    )
-    return (
-      <Section id="shared-tokens">{this.renderWrappedContent(content)}</Section>
     )
   }
 
@@ -789,7 +740,7 @@ class App extends Component<AppProps, AppState> {
     // Always pass the full theme so old-style generateComponentTheme
     // can access colors, typography, spacing etc.
     // New-theme components are looked up via themeVariables.newTheme.components
-    const themeVariables = themes[themeKey!].resource
+    const themeVariables = themes[themeKey!].resource as ThemeType
     const heading = currentData.extension !== '.md' ? currentData.title : ''
     const documentContent = (
       <View as="div" padding="x-large none none">
@@ -960,7 +911,12 @@ class App extends Component<AppProps, AppState> {
           tabIndex={0}
           aria-label="shared tokens page main content"
         >
-          {this.renderSharedTokens()}
+          <SharedTokensPage
+            layout={this.state.layout}
+            rawTokens={
+              this.state.docsData?.themes['shared-tokens']?.resource || {}
+            }
+          />
         </View>
       )
     } else if (theme) {

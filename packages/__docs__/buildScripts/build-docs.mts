@@ -421,10 +421,10 @@ function parseThemes() {
     resource: { ...canvasHighContrast, resolvedComponents: resolveComponents(legacyCanvasHighContrast) }
   }
   parsed['canvas'] = {
-    resource: { ...legacyCanvas, resolvedColors: resolveNewThemeColors(legacyCanvas) }
+    resource: { ...legacyCanvas, resolvedColors: resolveNewThemeColors(legacyCanvas), description: canvas.description }
   }
   parsed['canvas-high-contrast'] = {
-    resource: { ...legacyCanvasHighContrast, resolvedColors: resolveNewThemeColors(legacyCanvasHighContrast) }
+    resource: { ...legacyCanvasHighContrast, resolvedColors: resolveNewThemeColors(legacyCanvasHighContrast), description: canvasHighContrast.description }
   }
   parsed[light.key] = {
     resource: { ...light, resolvedColors: resolveNewThemeColors(light.newTheme as typeof legacyCanvas) }

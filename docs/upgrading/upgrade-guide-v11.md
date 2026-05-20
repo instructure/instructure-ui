@@ -1,10 +1,10 @@
 ---
-title: Upgrade Guide for Version 11
+title: Upgrade guide for v10 -> v11
 category: Upgrading
 order: 1
 ---
 
-# Upgrade Guide for Version 11
+# Upgrade guide for v10 -> v11
 
 ## InstUI and React
 

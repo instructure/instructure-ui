@@ -143,5 +143,8 @@ const NutritionFacts = ({
   )
 }
 
+// expose generateComponentTheme so Document can render "Default Theme Variables" for v11.6
+;(NutritionFacts as typeof NutritionFacts & { generateComponentTheme: typeof generateComponentTheme }).generateComponentTheme = generateComponentTheme
+
 export default NutritionFacts
 export { NutritionFacts }

@@ -24,6 +24,13 @@
 
 // This is the format of the saved JSON files
 import type { Documentation } from 'react-docgen'
+import type { BaseTheme } from '@instructure/shared-types'
+import type {
+  NewBaseTheme,
+  LightTheme,
+  DarkTheme,
+  SharedTokens
+} from '@instructure/ui-themes'
 
 type ProcessedFile =
   Documentation &
@@ -137,8 +144,21 @@ type Glyph = {
 
 type LegacyIconsData = Glyph[]
 
+type ResolvedColors = {
+  primitives: Record<string, string>
+  semantic: Record<string, string>
+}
+
+type ThemeResource =
+  | (BaseTheme & { resolvedComponents: Record<string, any> })   // legacy-canvas, legacy-canvas-high-contrast
+  | (NewBaseTheme & { resolvedColors: ResolvedColors })          // canvas, canvas-high-contrast
+  | (LightTheme & { resolvedColors: ResolvedColors })
+  | (DarkTheme & { resolvedColors: ResolvedColors })
+  | SharedTokens
+
 type MainDocsData = {
-  // resource is `any` to support both old BaseTheme and new token objects
+  // `any` instead of ThemeResource: the union breaks property access (.key, .description)
+  // and typed function calls in consumers — would need type guards throughout to fix properly
   themes: Record<string, { resource: any }>
   library: LibraryOptions
 } & ParsedDoc
@@ -172,6 +192,8 @@ export type {
   JsDocResult,
   MinorVersionData,
   Section,
+  ThemeResource,
+  ResolvedColors,
   VersionMapEntry,
   VersionMap
 }

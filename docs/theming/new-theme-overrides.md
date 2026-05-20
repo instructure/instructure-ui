@@ -527,9 +527,9 @@ type: example
 </InstUISettingsProvider>
 ```
 
-### 13. Targeted override for a parent component
+### 13. Provider-level overrides cannot target a child component selectively
 
-You can use the parent component's name (e.g. `Button`) in `themeOverride.components` to override its internal child component's tokens. When both `BaseButton` and `Button` overrides are present, the `Button` override should take precedence for `Button` instances, while `BaseButton` stays unaffected.
+Because `Button` uses `BaseButton`'s theme internally, a `components.Button` entry in the provider's `themeOverride` does **not** override `BaseButton`'s tokens for `Button` instances only. Both `BaseButton` and `Button` share the same `BaseButton` theme variables, so a `components.BaseButton` override affects both, regardless of whether a separate `components.Button` entry is also present.
 
 ```js
 ---
@@ -551,14 +551,16 @@ type: example
     }}
   >
     <BaseButton color="primary" margin="small">
-      BaseButton - still purple (BaseButton override)
+      BaseButton - purple (BaseButton override)
     </BaseButton>
     <Button color="primary" margin="small">
-      Button - deeppink (Button override wins)
+      Button - also purple (Button uses BaseButton's theme; deeppink has no effect)
     </Button>
   </InstUISettingsProvider>
 </InstUISettingsProvider>
 ```
+
+To override a specific `Button` instance without affecting others, use the per-component `themeOverride` prop instead (see section 14).
 
 ### 14. Per-component `themeOverride` prop overriding provider-level child overrides
 
@@ -596,54 +598,6 @@ type: example
       Button - deeppink (per-component themeOverride wins)
     </Button>
   </InstUISettingsProvider>
-</InstUISettingsProvider>
-```
-
-### 15. Overrides on functional (`useStyleNew`) components
-
-All override patterns work identically on functional components that use the `useStyleNew` hook. Here, Avatar tokens are overridden the same way as class-based components using `withStyleNew`.
-
-```js
----
-type: example
----
-<InstUISettingsProvider theme={light}>
-  <Avatar name="Default" color="accent1" margin="0 small 0 0" />
-
-  <InstUISettingsProvider
-    themeOverride={{
-      components: {
-        Avatar: {
-          backgroundColor: 'navy',
-          blueTextColor: 'lime'
-        }
-      }
-    }}
-  >
-    <Avatar name="Overridden" color="accent1" margin="0 small 0 0" />
-    <Avatar name="Unaffected" color="accent2" />
-  </InstUISettingsProvider>
-</InstUISettingsProvider>
-```
-
-### 16. Function form `themeOverride` on functional components
-
-The function form also works on `useStyleNew` components. The function receives the component's calculated theme as the first argument, letting you derive overrides from existing token values.
-
-```js
----
-type: example
----
-<InstUISettingsProvider theme={light}>
-  <Avatar name="Default Blue" color="accent1" margin="0 small 0 0" />
-  <Avatar
-    name="Swapped to Green"
-    color="accent1"
-    themeOverride={(componentTheme) => ({
-      backgroundColor: componentTheme.greenBackgroundColor,
-      blueTextColor: componentTheme.greenTextColor
-    })}
-  />
 </InstUISettingsProvider>
 ```
 
