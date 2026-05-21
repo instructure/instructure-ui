@@ -36,8 +36,8 @@
 ### Components
 
 - [InstUISettingsProvider](./InstUISettingsProvider.md): A global configuration component for applying themes and text direction settings across an application. It wraps Emotion's ThemeProvider and supports nested providers for theme inheritance and overrides. Also manages text direction (LTR/RTL) via context for descendant components.
-- [Avatar](./Avatar.md): Displays user avatars with fallback to initials or icons. Supports circle/rectangle shapes, multiple sizes, colors, and inverse styling. Includes special AI avatar variant and accessibility considerations with aria-hidden attribute.
 - [Alert](./Alert.md): Notifies users with contextual variants (success, info, error, warning). Supports dismissible dialogs, automatic timeout dismissal, live regions for screen readers, and inline usage without shadows. Includes accessibility guidelines for proper implementation.
+- [Avatar](./Avatar.md): Displays user avatars with fallback to initials or icons. Supports circle/rectangle shapes, multiple sizes, colors, and inverse styling. Includes special AI avatar variant and accessibility considerations with aria-hidden attribute.
 - [Badge](./Badge.md): Displays numeric counts or notifications with accessibility features. Supports count limits, various placements, standalone usage, and color variants. Requires formatOutput prop for screen reader context beyond simple numbers.
 - [Billboard](./Billboard.md): Used for empty states, 404 pages, and redirects. Supports various sizes, hero icons, and interactive behaviors (button or link). Can be disabled and includes structured messaging with headings and calls to action.
 - [Breadcrumb](./Breadcrumb.md): Shows navigation path location with automatic text truncation. Best for tablet+ screens; use Link for mobile. Supports multiple sizes, icons, and accessibility with aria-current attribute for current page indication.
