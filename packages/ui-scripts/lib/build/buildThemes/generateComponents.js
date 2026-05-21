@@ -32,6 +32,12 @@ const formatComponent = (collection, key) => {
       return { ...acc, [key]: formatComponent(value, key) }
     }, {})
   }
+  if (value['$extensions']) {
+    return {
+      value: value.value,
+      modify: value['$extensions']['studio.tokens'].modify
+    }
+  }
   return value.value
 }
 

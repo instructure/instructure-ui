@@ -36,6 +36,7 @@ import { warn } from '@instructure/console'
 import { decorator } from '@instructure/ui-decorator'
 
 import { useTheme } from './useTheme'
+import { applyColorModifiers } from './styleUtils/applyColorModifiers'
 
 import type { ComponentTheme, InstUIComponent } from '@instructure/shared-types'
 import type {
@@ -233,14 +234,15 @@ const withStyleNew = decorator(
         sharedTokensOverrides as Record<string, unknown>
       ) as SharedTokens
       // Note: Some components do not have a theme, e.g., FormFieldMessages
-      const baseComponentTheme = generateComponentTheme
-        ? generateComponentTheme({
-            primitives,
-            semantics,
-            sharedTokens
-          })
-        : theme.newTheme.components[componentId]?.(semantics)
-
+      const baseComponentTheme = applyColorModifiers(
+        generateComponentTheme
+          ? generateComponentTheme({
+              primitives,
+              semantics,
+              sharedTokens
+            })
+          : theme.newTheme.components[componentId]?.(semantics)
+      )
       const componentThemeFromSettingsProvider = mergeDeep(
         baseComponentTheme,
         componentOverridesFromSettingsProvider as Record<string, unknown>

@@ -24,6 +24,7 @@
 
 import { useTheme } from './useTheme'
 import { mergeDeep } from '@instructure/ui-utils'
+import { applyColorModifiers } from './styleUtils/applyColorModifiers'
 import type {
   NewComponentTypes,
   SharedTokens,
@@ -121,9 +122,11 @@ const useStyleNew = <
     sharedTokensOverrides as Record<string, unknown>
   )
 
-  const baseComponentTheme = generateComponentTheme
-    ? generateComponentTheme({ primitives, semantics, sharedTokens })
-    : theme.newTheme.components[componentWithTokensId]?.(semantics)
+  const baseComponentTheme = applyColorModifiers(
+    generateComponentTheme
+      ? generateComponentTheme({ primitives, semantics, sharedTokens })
+      : theme.newTheme.components[componentWithTokensId]?.(semantics)
+  )
 
   const componentThemeFromSettingsProvider = mergeDeep(
     baseComponentTheme,
