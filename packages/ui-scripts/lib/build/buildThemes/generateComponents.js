@@ -32,6 +32,10 @@ const formatComponent = (collection, key) => {
       return { ...acc, [key]: formatComponent(value, key) }
     }, {})
   }
+  // `$extensions` is the Design Tokens Format spec's escape hatch for tool-specific
+  // metadata. Tokens Studio writes color modifiers there under `studio.tokens.modify`
+  // (e.g. `{ type: 'darken', value: 0.1 }`); we forward that payload so the runtime
+  // (`applyColorModifiers`) can resolve the final color at theme apply time.
   if (value['$extensions']) {
     return {
       value: value.value,
