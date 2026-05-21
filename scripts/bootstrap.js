@@ -30,10 +30,13 @@ const opts = { stdio: 'inherit' }
 function buildProject() {
   console.info('Fetching design tokens...')
   try {
-    execSync('pnpm update @instructure/instructure-design-tokens -r', opts)
+    execSync(
+      'pnpm --filter @instructure/ui-scripts update @instructure/instructure-design-tokens',
+      opts
+    )
   } catch (error) {
     console.error(
-      "'pnpm update @instructure/instructure-design-tokens -r' failed",
+      "'pnpm --filter @instructure/ui-scripts update @instructure/instructure-design-tokens' failed",
       error
     )
     process.exit(1)

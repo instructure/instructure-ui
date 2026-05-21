@@ -166,7 +166,6 @@ const setupThemes = async (targetPath: string, input: any): Promise<void> => {
         const componentThemeVars = generateComponent(
           component.data[fullComponentName]
         )
-
         const componentTypes = generateComponentType(
           component.data[fullComponentName]
         )
@@ -179,13 +178,10 @@ const setupThemes = async (targetPath: string, input: any): Promise<void> => {
           const componentFileContent = `
 
           ${usesSemantic ? "import type { Semantics} from '../semantics'" : ''}
-          import type { ${capitalize(
-            fullComponentName
-          )} } from '../../componentTypes/${fullComponentName}'
 
           const ${fullComponentName} = (${
             usesSemantic ? 'semantic: Semantics' : ''
-          }): ${capitalize(fullComponentName)} => ({${componentThemeVars}})
+          }) => ({${componentThemeVars}})
           export default ${fullComponentName}
             `
           await createFile(

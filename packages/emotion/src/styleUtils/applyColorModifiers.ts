@@ -52,39 +52,56 @@ const formatHsla = (h: number, s: number, l: number, a: number): string => {
     : `hsl(${hh}, ${ss}%, ${ll}%)`
 }
 
+const isModifyColor = (val: unknown): val is ModifyColor =>
+  typeof val === 'object' &&
+  val !== null &&
+  typeof (val as ModifyColor).value === 'string' &&
+  typeof (val as ModifyColor).modify === 'object' &&
+  (val as ModifyColor).modify !== null
+
+const resolveModifyColor = ({ value, modify }: ModifyColor): string => {
+  if (modify.type === 'darken' || modify.type === 'lighten') {
+    const { h, s, l, a } = colorToHsla(value)
+    const newL = modifyLightness(l, modify.value, modify.type)
+    return formatHsla(h, s, newL, a)
+  }
+  return value
+}
+
 /**
  * Resolves a component theme object by applying color modifiers to any entries
  * shaped as `{ value, modify: { type, value } }`. Entries with `modify.type` of
  * `'darken'` or `'lighten'` are transformed in HSL space using the same math
  * Tokens Studio applies (`space: "hsl"`): `amount` is a 0–1 fraction of the
- * remaining distance to black/white. Plain string values and unrecognized
- * modifier types are passed through unchanged.
+ * remaining distance to black/white. Plain values and unrecognized modifier
+ * types are passed through unchanged. Nested plain objects are walked
+ * recursively so modifiers anywhere in the tree get resolved.
  *
- * @param componentTheme - Theme map whose values are either plain CSS color strings
- *   or `ModifyColor` objects describing a base color and a darken/lighten modifier.
- * @returns A new theme object with the same keys, where modifier objects have been
- *   collapsed to their final resolved color string.
+ * @param componentTheme - Theme map whose values can be CSS strings, `ModifyColor`
+ *   objects, or nested theme objects containing the same.
+ * @returns A new theme object mirroring the input shape, with every `ModifyColor`
+ *   collapsed to its final resolved color string.
  */
 const applyColorModifiers = (
-  componentTheme: Record<string, string | ModifyColor> | undefined | null
-) => {
+  componentTheme: Record<string, unknown> | undefined | null
+): Record<string, unknown> => {
   if (componentTheme == null) return {}
-  return Object.keys(componentTheme).reduce<Record<string, string>>(
-    (res, k) => {
-      const entry = componentTheme[k]
-      if (typeof entry === 'object' && entry !== null) {
-        const { value, modify } = entry
-        if (modify.type === 'darken' || modify.type === 'lighten') {
-          const { h, s, l, a } = colorToHsla(value)
-          const newL = modifyLightness(l, modify.value, modify.type)
-          return { ...res, [k]: formatHsla(h, s, newL, a) }
-        }
-        return { ...res, [k]: value }
-      }
-      return { ...res, [k]: entry }
-    },
-    {}
-  )
+  const result: Record<string, unknown> = {}
+  for (const key of Object.keys(componentTheme)) {
+    const entry = componentTheme[key]
+    if (isModifyColor(entry)) {
+      result[key] = resolveModifyColor(entry)
+    } else if (
+      typeof entry === 'object' &&
+      entry !== null &&
+      !Array.isArray(entry)
+    ) {
+      result[key] = applyColorModifiers(entry as Record<string, unknown>)
+    } else {
+      result[key] = entry
+    }
+  }
+  return result
 }
 
 export default applyColorModifiers
