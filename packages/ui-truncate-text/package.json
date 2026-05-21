@@ -31,8 +31,7 @@
     "@instructure/ui-dom-utils": "workspace:*",
     "@instructure/ui-react-utils": "workspace:*",
     "@instructure/ui-themes": "workspace:*",
-    "@instructure/ui-utils": "workspace:*",
-    "escape-html": "^1.0.3"
+    "@instructure/ui-utils": "workspace:*"
   },
   "devDependencies": {
     "@instructure/ui-axe-check": "workspace:*",
@@ -41,7 +40,6 @@
     "@instructure/ui-text": "workspace:*",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "16.3.2",
-    "@types/escape-html": "^1.0.4",
     "vitest": "^4.1.9"
   },
   "peerDependencies": {
