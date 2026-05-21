@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import escapeHtml from 'escape-html'
-
 import { cloneArray } from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'
 import {
@@ -210,35 +208,32 @@ class Truncator {
     return nodeDataIndexes
   }
 
-  domString(data: string[][]) {
-    let html = ''
-
-    for (let i = 0; i < data.length; i++) {
-      const mapItem = this._nodeMap[i]
-      const text = data[i].join('')
-      const safeText = escapeHtml(text)
-
-      if (mapItem.node.nodeType === Node.ELEMENT_NODE) {
-        const name = mapItem.node.nodeName
-        const attr = (mapItem.node as Element).attributes
-        let attributes = ''
-        for (let j = 0; j < attr.length; j++) {
-          const att = attr[j]
-          attributes += ` ${att.nodeName}="${escapeHtml(att.nodeValue ?? '')}"`
-        }
-        html += `<${name}${attributes}>${safeText}</${name}>`
-      } else if (mapItem.node.nodeType === 3) {
-        html += safeText
-      }
-    }
-    return html
-  }
-
   checkFit(data: string[][]) {
-    const html = this.domString(data)
     const node = this._options.maxLines === 'auto' ? this._stage : this._parent
     let fits = true
-    this._stage.innerHTML = html
+
+    while (this._stage.firstChild) {
+      this._stage.removeChild(this._stage.firstChild)
+    }
+
+    for (let i = 0; i < data.length; i++) {
+      const { node: mapNode } = this._nodeMap[i]
+      const text = data[i].join('')
+
+      if (mapNode.nodeType === Node.ELEMENT_NODE) {
+        const el = document.createElement(mapNode.nodeName)
+        const attr = (mapNode as Element).attributes
+        for (let j = 0; j < attr.length; j++) {
+          const att = attr[j]
+          el.setAttribute(att.nodeName, att.nodeValue ?? '')
+        }
+        el.textContent = text
+        this._stage.appendChild(el)
+      } else if (mapNode.nodeType === Node.TEXT_NODE) {
+        this._stage.appendChild(document.createTextNode(text))
+      }
+    }
+
     // allow a 0.5 px margin of error for browser calculation discrepancies
     if (getBoundingClientRect(node).height - this._maxHeight > 0.5) {
       fits = false
