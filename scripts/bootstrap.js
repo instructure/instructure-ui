@@ -23,71 +23,75 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const { execSync, fork } = require('child_process')
+const { execSync } = require('child_process')
 const path = require('path')
 
 const opts = { stdio: 'inherit' }
-function buildProject() {
-  console.info('Fetching design tokens...')
-  try {
-    execSync(
-      'pnpm --filter @instructure/ui-scripts update @instructure/instructure-design-tokens',
-      opts
-    )
-  } catch (error) {
-    console.error(
-      "'pnpm --filter @instructure/ui-scripts update @instructure/instructure-design-tokens' failed",
-      error
-    )
-    process.exit(1)
-  }
 
-  console.info('Building themes...')
-  try {
-    execSync('pnpm run build:themes', opts)
-  } catch (error) {
-    console.error("'pnpm run build:themes' failed", error)
-    process.exit(1)
-  }
-
-  execSync('pnpm --filter @instructure/ui-icons prepare-build', opts)
-
-  // Executes a ui-codemods script to generate a versioned components list
-  // from the ui metapackage's latest re-export file. This is required for
-  // the updateInstUIImportVersions codemod's diagnose mode.
-  execSync(
-    'pnpm --filter @instructure/ui-codemods generate:versioned-exports',
-    opts
-  )
-
-  console.info('Building packages with Babel...')
-  try {
-    execSync('pnpm run build', opts)
-  } catch (error) {
-    console.error("'pnpm run build' failed", error)
-    process.exit(1)
-  }
-
-  console.info('Generating tokens...')
-  try {
-    execSync('pnpm run build:tokens', opts)
-  } catch (error) {
-    console.error("'pnpm run build:tokens' failed", error)
-    process.exit(1)
-  }
-
-  console.info('Building TypeScript declarations...')
-  try {
-    execSync('pnpm run build:types', opts)
-  } catch (error) {
-    console.error("'pnpm run build:types' failed", error)
-    process.exit(1)
-  }
+function format(ms) {
+  return `${(ms / 1000).toFixed(1)}s`
 }
 
-function bootstrap() {
-  execSync(path.resolve('scripts/clean.js'), opts)
-  buildProject()
+function mark(name) {
+  console.log(`\n================================================`)
+  console.log(`${name}...`)
+  if (steps.length) {
+    steps[steps.length - 1].duration =
+      Date.now() - steps[steps.length - 1].start
+  }
+  steps.push({ name, start: Date.now(), duration: 0 })
 }
 
-bootstrap()
+const steps = []
+const bootstrapStart = Date.now()
+
+mark('Deleting build artifacts')
+execSync(path.resolve('scripts/clean.js'), opts)
+
+mark('Fetching design tokens')
+execSync(
+  'pnpm --filter @instructure/ui-scripts update @instructure/instructure-design-tokens',
+  opts
+)
+
+mark('Building themes')
+execSync('pnpm run build:themes', opts)
+
+mark('Preparing icons')
+execSync('pnpm --filter @instructure/ui-icons prepare-build', opts)
+
+mark('Generating package list for codemods')
+execSync(
+  'pnpm --filter @instructure/ui-codemods generate:versioned-exports',
+  opts
+)
+
+mark('Building packages with Babel')
+execSync('pnpm run build', opts)
+
+mark('Generating design tokens')
+execSync('pnpm run build:tokens', opts)
+
+mark('Building TypeScript declarations')
+execSync('pnpm run build:types', opts)
+
+// Log build time summary. Assumes that the build is not parallel
+steps[steps.length - 1].duration = Date.now() - steps[steps.length - 1].start
+
+const total = Date.now() - bootstrapStart
+const nameW = Math.max(...steps.map((s) => s.name.length))
+const durW = Math.max(
+  ...steps.map((s) => format(s.duration).length),
+  format(total).length
+)
+const tableWidth = nameW + durW + 7
+
+console.log('\n' + '='.repeat(tableWidth))
+console.log(' Bootstrap Summary')
+console.log('='.repeat(tableWidth))
+for (const s of steps) {
+  console.log(` ${s.name.padEnd(nameW)}  ${format(s.duration).padStart(durW)}`)
+}
+console.log('-'.repeat(tableWidth))
+console.log(` ${'Total'.padEnd(nameW)}  ${format(total).padStart(durW)}`)
+console.log('='.repeat(tableWidth))
