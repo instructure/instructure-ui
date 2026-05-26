@@ -14,7 +14,6 @@
     "packages/*"
   ],
   "scripts": {
-    "build:themes": "ui-scripts build-themes",
     "prestart": "pnpm run bootstrap",
     "start": "pnpm --filter docs-app start",
     "start:watch": "pnpm --filter docs-app start:watch",
@@ -30,6 +29,7 @@
     "build": "pnpm -r --stream build",
     "build:watch": "pnpm -r --stream build:watch",
     "build:docs": "pnpm --filter docs-app bundle",
+    "build:themes": "ui-scripts build-themes",
     "build:tokens": "ui-scripts generate-all-tokens",
     "build:types": "tsc -b tsconfig.references.json",
     "build:ts": "pnpm --filter @instructure/ui-icons prepare-build && pnpm run build:types",

@@ -28,12 +28,10 @@ const path = require('path')
 const { execSync } = require('child_process')
 
 const NODE_PACKAGES = [
-  'ui-icons-build',
   'ui-babel-preset',
   'ui-codemods',
   'ui-scripts',
   'command-utils',
-  'instui-cli',
   'babel-plugin-transform-imports',
   'pkg-utils'
 ]
@@ -61,7 +59,7 @@ async function deleteDirs(dirs = []) {
   )
 }
 
-// deletes built files from tooling packages (NODE_PACKAGES const)
+// deletes build artifacts from all packages
 async function clean() {
   const packagesPath = path.resolve('./packages')
   const packageDirs = await fs.readdir(packagesPath, { withFileTypes: true })
@@ -88,7 +86,7 @@ async function clean() {
 function removeNodeModules() {
   try {
     // Use native find command - 10-100x faster than Node.js recursive scan
-    console.error('Finding node_modules directories...')
+    console.info('Finding node_modules directories...')
     execSync(
       'find . -name "node_modules" -type d -prune -exec rm -rf {} + 2>/dev/null || true',
       { stdio: 'inherit' }
@@ -100,17 +98,17 @@ function removeNodeModules() {
 }
 
 async function main() {
-  console.error('Deleting built files from tooling packages...')
+  console.info('Deleting build artifacts...')
   await clean()
 
   const args = process.argv.slice(2)
   if (args.length > 0 && args[0] === '--nuke_node') {
-    console.error('Deleting node_modules recursively...')
+    console.info('Deleting node_modules recursively...')
     removeNodeModules()
   }
 }
 
 main().catch((error) => {
-  console.error('Clean script failed:', error)
+  console.info('clean.js failed:', error)
   process.exit(1)
 })

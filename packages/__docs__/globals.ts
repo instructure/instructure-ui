@@ -36,9 +36,7 @@ import { LoremIpsum } from 'lorem-ipsum'
 import moment from 'moment'
 // @ts-expect-error no type declarations for moment locales side-effect import
 import 'moment/min/locales'
-
 import { mirrorHorizontalPlacement } from '@instructure/ui-position'
-
 import { getComponentsForVersion } from './versioned-components'
 import { dark, light } from '@instructure/ui-themes'
 import { debounce } from '@instructure/debounce'
