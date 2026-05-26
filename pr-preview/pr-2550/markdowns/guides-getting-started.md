@@ -9,7 +9,6 @@ The following steps will create a React app that uses Instructure UI. Recommende
 ---
 type: code
 ---
-
 npm create vite@latest my-cool-app
 ```
 
