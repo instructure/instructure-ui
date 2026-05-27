@@ -23,45 +23,43 @@
  */
 
 import path from 'path'
+import { pathToFileURL } from 'url'
 import { error } from '@instructure/command-utils'
 import { handleMapJSTokensToSource } from '../utils/handle-map-js-tokens-to-source.js'
 import { handleGenerateTokens } from '../utils/handle-generate-tokens.js'
-import { createRequire } from 'node:module'
-
-const require = createRequire(import.meta.url)
 
 const tokenScriptsConfig = [
   {
     themeKey: 'canvas',
-    sourceTokens: '@instructure/ui-themes/lib/themes/canvas',
+    sourceTokens: '@instructure/ui-themes/es/themes/canvas',
     outputPackage: '@instructure/ui-theme-tokens',
     groupOutput: true
   },
   {
     themeKey: 'canvas',
-    sourceTokens: '@instructure/ui-themes/lib/themes/canvas',
+    sourceTokens: '@instructure/ui-themes/es/themes/canvas',
     outputPackage: '@instructure/canvas-theme'
   },
   {
     themeKey: 'canvas',
-    sourceTokens: '@instructure/ui-themes/lib/themes/canvas',
+    sourceTokens: '@instructure/ui-themes/es/themes/canvas',
     outputPackage: '@instructure/ui-themes',
     groupOutput: true
   },
   {
     themeKey: 'canvas-high-contrast',
-    sourceTokens: '@instructure/ui-themes/lib/themes/canvasHighContrast',
+    sourceTokens: '@instructure/ui-themes/es/themes/canvasHighContrast',
     outputPackage: '@instructure/ui-theme-tokens',
     groupOutput: true
   },
   {
     themeKey: 'canvas-high-contrast',
-    sourceTokens: '@instructure/ui-themes/lib/themes/canvasHighContrast',
+    sourceTokens: '@instructure/ui-themes/es/themes/canvasHighContrast',
     outputPackage: '@instructure/canvas-high-contrast-theme'
   },
   {
     themeKey: 'canvas-high-contrast',
-    sourceTokens: '@instructure/ui-themes/lib/themes/canvasHighContrast',
+    sourceTokens: '@instructure/ui-themes/es/themes/canvasHighContrast',
     outputPackage: '@instructure/ui-theme-tokens',
     groupOutput: true
   }
@@ -100,7 +98,10 @@ export default {
         error(`Failed to resolve ${sourceTokens}: ${err.message}`)
         process.exit(1)
       }
-      const tokens = require(resolvedSource).default
+      // es/ output ships as ESM; load via dynamic import. Need /index.js
+      // since Node ESM doesn't auto-resolve directories.
+      const indexPath = path.join(resolvedSource, 'index.js')
+      const tokens = (await import(pathToFileURL(indexPath).href)).default
 
       if (Object.keys(tokens).indexOf('colors') < 0) {
         error('Invalid token source')

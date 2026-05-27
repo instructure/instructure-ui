@@ -48,12 +48,6 @@ const bootstrapStart = Date.now()
 mark('Deleting build artifacts')
 execSync(path.resolve('scripts/clean.js'), opts)
 
-mark('Fetching design tokens')
-execSync(
-  'pnpm --filter @instructure/ui-scripts update @instructure/instructure-design-tokens',
-  opts
-)
-
 mark('Building themes')
 execSync('pnpm run build:themes', opts)
 
