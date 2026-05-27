@@ -1,10 +1,10 @@
 {
   "name": "@instructure/ui-icons",
   "version": "11.6.0",
+  "type": "module",
   "description": "Icon set for Instructure, Inc. products",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
-  "main": "./lib/index.js",
   "types": "./types/index.d.ts",
   "repository": {
     "type": "git",
@@ -17,7 +17,7 @@
     "prepare-build": "pnpm run build-icons",
     "build-icons": "pnpm exec ui-scripts build-icons --skipOptimization --config icons.config.cjs",
     "build-icons:optimize": "pnpm exec ui-scripts build-icons --svgoConfig svgo.config.cjs --config icons.config.cjs",
-    "build": "ui-scripts build __build__ --copy-files --modules es,cjs",
+    "build": "ui-scripts build __build__ --copy-files",
     "export": "pnpm run build-icons:optimize && pnpm run build:types",
     "build:types": "tsc -p tsconfig.build.json",
     "ts:check": "tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false"
@@ -41,10 +41,8 @@
     ".": {
       "types": "./types/index.d.ts",
       "import": "./es/index.js",
-      "require": "./lib/index.js",
       "default": "./es/index.js"
     },
-    "./lib/*": "./lib/*",
     "./es/*": "./es/*",
     "./types/*": "./types/*",
     "./package.json": "./package.json",

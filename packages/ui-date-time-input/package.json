@@ -1,10 +1,10 @@
 {
   "name": "@instructure/ui-date-time-input",
   "version": "11.6.0",
+  "type": "module",
   "description": "A UI component that allows to select date and time.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
-  "main": "./lib/index.js",
   "types": "./types/index.d.ts",
   "repository": {
     "type": "git",
@@ -16,7 +16,7 @@
     "lint": "ui-scripts lint",
     "lint:fix": "ui-scripts lint --fix",
     "clean": "ui-scripts clean",
-    "build": "ui-scripts build --modules es,cjs",
+    "build": "ui-scripts build",
     "build:watch": "pnpm run ts:check -- --watch & ui-scripts build --watch",
     "build:types": "tsc -p tsconfig.build.json",
     "ts:check": "tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false"
@@ -55,10 +55,8 @@
     ".": {
       "types": "./types/index.d.ts",
       "import": "./es/index.js",
-      "require": "./lib/index.js",
       "default": "./es/index.js"
     },
-    "./lib/*": "./lib/*",
     "./es/*": "./es/*",
     "./types/*": "./types/*",
     "./package.json": "./package.json",
