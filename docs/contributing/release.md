@@ -1,6 +1,6 @@
 ---
 title: Release process
-category: Contributor Guides
+category: Contributing
 order: 5
 ---
 

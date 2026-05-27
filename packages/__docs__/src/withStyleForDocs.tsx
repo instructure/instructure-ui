@@ -140,11 +140,11 @@ const defaultValues = {
  * explicitly via its `themeOverride` prop.
  *
  * InstUISettingsProvider provides a theme object (e.g. the [canvas theme](/#canvas)).
- * These variables are mapped to the component's own variables in `theme.js` (see [theming](theming-basics) for more info).
+ * These variables are mapped to the component's own variables in `theme.js`.
  *
  * With the `themeOverride` prop you can directly set/override the component theme variables declared in theme.js. It accepts an object or a function. The function has the component's theme and the currently active main theme as its parameter.
  *
- * See more about the overrides on the [Using theme overrides](/#using-theme-overrides) docs page.
+ * See more about the overrides on the [Legacy theme overrides](/#legacy-theme-overrides) docs page.
  *
  * ```js-code
  * // ExampleComponent/theme.js

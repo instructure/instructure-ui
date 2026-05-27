@@ -1,7 +1,7 @@
 ---
 title: Adding new icons
-category: Contributor Guides
-order: 9
+category: Contributing
+order: 3
 ---
 
 ## Lucide Icons

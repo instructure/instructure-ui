@@ -60,6 +60,7 @@ import { Select } from '../Select'
 import { Section } from '../Section'
 import IconsPage from '../Icons'
 import LegacyIconsPage from '../LegacyIcons'
+import { SharedTokensPage } from '../SharedTokensPage'
 import { compileMarkdown } from '../compileMarkdown'
 
 import {
@@ -84,7 +85,11 @@ import { allowedProps } from './props'
 import type { ParsedDocSummary } from '../../buildScripts/DataTypes.mjs'
 import { logError } from '@instructure/console'
 import type { Spacing } from '@instructure/emotion'
-import type { NewComponentTypes } from '@instructure/ui-themes'
+import type {
+  NewComponentTypes,
+  Theme as ThemeType
+} from '@instructure/ui-themes'
+import type { BaseTheme } from '@instructure/shared-types'
 import { FocusRegion } from '@instructure/ui-a11y-utils'
 import { AppContext } from '../appContext'
 
@@ -202,11 +207,14 @@ class App extends Component<AppProps, AppState> {
     updateGlobalsForVersion(newVersion)
 
     // Clear current data to show loading screen, update selected version
+    // themeKey must be reset to avoid a stale value being passed to Select
+    // before the new version's data (and its valid theme keys) arrive
     this.setState({
       docsData: null,
       currentDocData: undefined,
       changelogData: undefined,
-      selectedMinorVersion: newVersion
+      selectedMinorVersion: newVersion,
+      themeKey: undefined
     })
 
     // Update URL to reflect new version
@@ -550,9 +558,16 @@ class App extends Component<AppProps, AppState> {
     const showNewThemes = this.state.selectedMinorVersion !== 'v11_6'
 
     const themeKeys = showNewThemes
-      ? allThemeKeys
-      : ['canvas', 'canvas-high-contrast']
-    const smallScreen = this.state.layout === 'small'
+      ? allThemeKeys.filter(
+          (k) =>
+            k !== 'shared-tokens' &&
+            k !== 'legacy-canvas' &&
+            k !== 'legacy-canvas-high-contrast'
+        )
+      : allThemeKeys.filter(
+          (k) => k === 'canvas' || k === 'canvas-high-contrast'
+        )
+
     const displayThemeName = (themeKey: string) => {
       if (
         showNewThemes &&
@@ -562,6 +577,12 @@ class App extends Component<AppProps, AppState> {
       }
       return themeKey
     }
+
+    const smallScreen = this.state.layout === 'small'
+    const currentThemeKey =
+      this.state.themeKey && themeKeys.includes(this.state.themeKey)
+        ? this.state.themeKey
+        : themeKeys[0]
 
     return themeKeys.length > 1 ? (
       <Flex
@@ -573,7 +594,7 @@ class App extends Component<AppProps, AppState> {
             name="theme"
             renderLabel="Theme"
             onChange={this.handleThemeChange}
-            value={this.state.themeKey}
+            value={currentThemeKey}
             width="16.5rem"
           >
             {themeKeys.map((themeKey) => {
@@ -589,8 +610,24 @@ class App extends Component<AppProps, AppState> {
     ) : null
   }
 
+  renderNewThemePageAlert(subject = 'This theme') {
+    if (!window.location.pathname.includes('v11_6')) return null
+    const v11_7Href = window.location.pathname.replace('v11_6', 'v11_7')
+    return (
+      <Alert variant="info" margin="0 0 medium">
+        {subject} is designed for components for <strong>v11.7</strong> and
+        later. <Link href={v11_7Href}>Switch to v11.7</Link>
+      </Alert>
+    )
+  }
+
   renderTheme(themeKey: string) {
     const theme = this.state.docsData!.themes[themeKey]
+    const isNewThemePage =
+      themeKey === 'light' ||
+      themeKey === 'dark' ||
+      themeKey === 'canvas' ||
+      themeKey === 'canvas-high-contrast'
 
     const { layout } = this.state
     const smallerScreens = layout === 'small' || layout === 'medium'
@@ -604,7 +641,8 @@ class App extends Component<AppProps, AppState> {
         <Heading level="h1" as="h2" margin="0 0 medium 0">
           Theme: {themeKey}
         </Heading>
-        <Theme themeKey={themeKey} variables={theme.resource} />
+        {isNewThemePage && this.renderNewThemePageAlert()}
+        <Theme themeKey={themeKey} variables={theme.resource as BaseTheme} />
       </View>
     )
     return (
@@ -624,7 +662,7 @@ class App extends Component<AppProps, AppState> {
         }
       >
         <Heading level="h1" as="h2" margin="0 0 medium">
-          Icons (beta)
+          Icons
         </Heading>
         <IconsPage />
       </View>
@@ -700,7 +738,7 @@ class App extends Component<AppProps, AppState> {
     // Always pass the full theme so old-style generateComponentTheme
     // can access colors, typography, spacing etc.
     // New-theme components are looked up via themeVariables.newTheme.components
-    const themeVariables = themes[themeKey!].resource
+    const themeVariables = themes[themeKey!].resource as ThemeType
     const heading = currentData.extension !== '.md' ? currentData.title : ''
     const documentContent = (
       <View as="div" padding="x-large none none">
@@ -862,6 +900,21 @@ class App extends Component<AppProps, AppState> {
           as={'div'}
         >
           {this.renderLegacyIcons(key)}
+        </View>
+      )
+    } else if (key === 'shared-tokens') {
+      return (
+        <View
+          elementRef={this.mainContentRef}
+          tabIndex={0}
+          aria-label="shared tokens page main content"
+        >
+          <SharedTokensPage
+            layout={this.state.layout}
+            rawTokens={
+              this.state.docsData?.themes['shared-tokens']?.resource || {}
+            }
+          />
         </View>
       )
     } else if (theme) {

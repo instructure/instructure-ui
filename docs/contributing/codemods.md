@@ -1,7 +1,7 @@
 ---
 title: Writing codemods
-category: Contributor Guides
-order: 11
+category: Contributing
+order: 6
 ---
 
 ## Codemods

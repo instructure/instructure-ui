@@ -35,7 +35,7 @@ import type { DialogProps } from './props'
 
 /**
 ---
-category: components/utilities
+category: components/Util Components
 ---
 @module Dialog
 **/

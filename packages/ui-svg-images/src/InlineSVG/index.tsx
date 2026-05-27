@@ -37,7 +37,7 @@ import type { InlineSVGProps } from './props'
 
 /**
 ---
-category: components/utilities
+category: components/Util Components
 ---
 **/
 @withDeterministicId()

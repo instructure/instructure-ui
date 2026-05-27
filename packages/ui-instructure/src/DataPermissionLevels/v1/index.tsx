@@ -133,5 +133,12 @@ const DataPermissionLevels = ({
   )
 }
 
+// expose generateComponentTheme so Document can render "Default Theme Variables" for v11.6
+;(
+  DataPermissionLevels as typeof DataPermissionLevels & {
+    generateComponentTheme: typeof generateComponentTheme
+  }
+).generateComponentTheme = generateComponentTheme
+
 export default DataPermissionLevels
 export { DataPermissionLevels }

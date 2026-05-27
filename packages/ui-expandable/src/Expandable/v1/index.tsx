@@ -36,7 +36,7 @@ const toggleExpanded = ({ expanded }: { expanded: boolean }) => ({
 
 /**
 ---
-category: components/utilities
+category: components/Util Components
 ---
 **/
 @withDeterministicId()

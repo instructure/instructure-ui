@@ -51,7 +51,7 @@ import { PositionElement } from '../PositionPropTypes.js'
 
 /**
 ---
-category: components/utilities
+category: components/Util Components
 ---
 **/
 @withDeterministicId()

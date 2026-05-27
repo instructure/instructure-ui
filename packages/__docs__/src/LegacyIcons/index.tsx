@@ -241,11 +241,15 @@ const LegacyIconsPage = ({ iconData }: LegacyIconsPageProps) => {
   return (
     <div>
       <Heading level="h1" as="h2" margin="0 0 medium">
-        Icons
+        Legacy Icons
       </Heading>
+      <Alert variant="warning" margin="0 0 medium">
+        These legacy icons are for old (pre v11.7) components only. Do not use
+        them with the new theming system.
+      </Alert>
       <Alert variant="info" margin="0 0 medium">
         New icon set is available, please only use it with InstUI v11.7 or newer
-        components: <Link href="/icons">Icons (beta)</Link>
+        components: <Link href="/icons">Icons</Link>
       </Alert>
       <Alert variant="info" margin="0 0 medium">
         Our legacy icon components are rendered through Emotion, so server-side
