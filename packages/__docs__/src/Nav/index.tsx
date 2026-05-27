@@ -177,7 +177,7 @@ class Nav extends Component<NavProps, NavState> {
         <NavToggle
           variant={variant}
           summary={title}
-          onToggle={(_e, toggleExpanded) => {
+          onToggle={(_e: any, toggleExpanded: boolean) => {
             this.handleToggleSection(id, toggleExpanded)
           }}
           expanded={expandedSections[id]}
@@ -318,7 +318,12 @@ class Nav extends Component<NavProps, NavState> {
     this.matchingSectionsInSection(sectionId, markExpanded).forEach(
       (sectionId: string) => {
         const title = capitalizeFirstLetter(sections[sectionId].title)
-        children[title!] = { section: true, id: sectionId, order: '__' }
+        // 'zz' prefix pushes 'Misc' after all '__'-prefixed sections in alphabetical sort
+        children[title!] = {
+          section: true,
+          id: sectionId,
+          order: title === 'Misc' ? 'zz' : '__'
+        }
       }
     )
 
@@ -431,7 +436,8 @@ class Nav extends Component<NavProps, NavState> {
       .filter((sectionId) => {
         return (
           this.props.sections[sectionId].level === 0 &&
-          this.sectionHasMatches(sectionId)
+          this.sectionHasMatches(sectionId) &&
+          sectionId !== 'Theming'
         )
       })
       .map((sectionId) => this.renderSectionLink(sectionId))
@@ -440,8 +446,25 @@ class Nav extends Component<NavProps, NavState> {
   renderThemes() {
     let themeSelected = false
 
+    const themingSection =
+      this.props.sections['Theming'] &&
+      (this.matchQuery('Theming') || this.sectionHasMatches('Theming'))
+        ? this.renderSectionLink(
+            'Theming',
+            () => {
+              this.markExpanded(this._themeId)
+            },
+            'category'
+          )
+        : null
+
     const themeLinks = Object.keys(this.props.themes!)
-      .sort()
+      .sort((a, b) => {
+        const isLegacyA = a.startsWith('legacy-')
+        const isLegacyB = b.startsWith('legacy-')
+        if (isLegacyA !== isLegacyB) return isLegacyA ? 1 : -1
+        return a.localeCompare(b)
+      })
       .filter(
         (themeKey) => this.matchQuery(themeKey) || this.matchQuery('Themes')
       )
@@ -451,28 +474,34 @@ class Nav extends Component<NavProps, NavState> {
 
         themeSelected = themeSelected || isSelected
 
-        const renderThemeName = (rawName: string) => {
-          if (rawName === 'canvas') return 'legacy-canvas'
-          if (rawName === 'canvas-high-contrast') return 'legacy-canvas-high-contrast'
-          return rawName
-        }
-
         return (
           <View
+            as="li"
             display="block"
             key={themeKey}
             margin="xx-small none xx-small"
             padding="none none none x-small"
-            borderWidth={isSelected ? 'none none none large' : 'none'}
-            borderColor="brand"
+            position="relative"
           >
+            {isSelected && (
+              <View
+                aria-hidden="true"
+                display="block"
+                position="absolute"
+                insetInlineStart="0"
+                insetBlockStart="0"
+                insetBlockEnd="0"
+                width="0.25rem"
+                background="brand"
+              />
+            )}
             <Link
               display="block"
               onClick={(e: any) => this.handleInternalNavigation(themeKey, e)}
               variant="standalone"
               href={buildUrl(themeKey)}
             >
-              {renderThemeName(themeKey)}
+              {themeKey}
             </Link>
           </View>
         )
@@ -482,10 +511,18 @@ class Nav extends Component<NavProps, NavState> {
       this.markExpanded(this._themeId)
     }
 
+    const hasContent = themingSection || themeLinks.length > 0
+    if (!hasContent) return []
+
     const link = this.createNavToggle({
       id: this._themeId,
       title: 'Themes',
-      children: themeLinks
+      children: (
+        <ul style={{ paddingLeft: '0px', margin: '0px' }}>
+          {themingSection}
+          {themeLinks}
+        </ul>
+      )
     })
 
     return link ? [link] : []
@@ -494,22 +531,12 @@ class Nav extends Component<NavProps, NavState> {
   render() {
     const sections = this.renderSections()
     const themes = this.renderThemes()
-    //delist from the navbar until full release
-    // const icons = (
-    //   <NavToggle
-    //     key="Icons button"
-    //     summary="Icons"
-    //     onToggle={(e: any) => this.handleInternalNavigation('icons', e)}
-    //     href="icons"
-    //     shouldBlur={true}
-    //   />
-    // )
     const legacyIcons = (
       <NavToggle
-        key="Legacy Icons button"
+        key="Icons button"
         summary="Icons"
-        onToggle={(e: any) => this.handleInternalNavigation('legacy-icons', e)}
-        href="legacy-icons"
+        onToggle={(e: any) => this.handleInternalNavigation('icons', e)}
+        href="icons"
         shouldBlur={true}
       />
     )

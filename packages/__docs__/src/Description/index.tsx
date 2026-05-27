@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Component, ReactElement } from 'react'
+import { Component } from 'react'
 
 import { compileMarkdown } from '../compileMarkdown'
 
@@ -32,20 +32,11 @@ import type { DescriptionProps } from './props'
 class Description extends Component<DescriptionProps> {
   static displayName = 'Description'
   static allowedProps = allowedProps
-  compiledMarkdown: ReactElement | null = null
-
-  constructor(props: DescriptionProps) {
-    super(props)
-    this.compiledMarkdown = compileMarkdown(
-      this.props.content,
-      this.props.title
-    )
-  }
 
   render() {
-    const { id } = this.props
+    const { id, content, title } = this.props
 
-    return <div id={id}>{this.compiledMarkdown}</div>
+    return <div id={id}>{compileMarkdown(content, title)}</div>
   }
 }
 

@@ -26,7 +26,7 @@ import { parseUnit } from './parseUnit.js'
 
 /**
  * ---
- * category: utilities/utils
+ * category: utilities/Misc
  * ---
  * Converts a unit value time combination (s, ms) to a number representing ms
  *

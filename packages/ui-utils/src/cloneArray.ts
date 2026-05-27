@@ -24,7 +24,7 @@
 
 /**
  * ---
- * category: utilities/utils
+ * category: utilities/Misc
  * ---
  * Deep clones an array with sub arrays
  * @module cloneArray

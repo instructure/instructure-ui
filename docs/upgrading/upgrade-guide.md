@@ -1,7 +1,7 @@
 ---
-title: Upgrade Guide for multi version (beta)
-category: Guides
-order: 9999999
+title: Upgrade guide for v11.7
+category: Upgrading
+order: 2
 ---
 
 # Upgrade Guide for multi version support
@@ -40,18 +40,20 @@ Focus rings are now styled in a central pseudo-component called `SharedTokens`. 
 type: example
 ---
 <InstUISettingsProvider
-  theme={{
-    newTheme: { // TODO remove this when we remove the old theme
-      sharedTokens: {
-        focusOutline: {
-          infoColor: 'green',
-          width: '0.4rem',
-          offset: '0rem'
+  themeOverride={{
+    sharedTokens: {
+      focusOutline: {
+        infoColor: 'green',
+        width: '0.4rem',
+        offset: '0rem'
         }
       }
-    }
-  }}>
-  <TextInput renderLabel="Name" placeholder="Note: Change example when the old theme is renamed!"/>
+  }}
+>
+  <TextInput
+    renderLabel="Name"
+    placeholder="Focus me!"
+  />
 </InstUISettingsProvider>
 ```
 
@@ -65,23 +67,6 @@ type: embed
   removed={[
     {name:"boxShadow",note:"now uses sharedTokens.boxShadow.elevation4"},
     {name:"contentPadding",note:"split into contentPaddingVertical and contentPaddingHorizontal"}
-  ]}
-/>
-
-```
-
-### Billboard
-
-```js
----
-type: embed
----
-<V12ChangelogTable
-  removed={[
-    {name:"iconHoverColorInverse",note:""},
-    {name:"iconHoverColor",note:""},
-    {name:"iconColor",note:""},
-    {name:"messageColorInverse",note:""}
   ]}
 />
 
@@ -227,9 +212,7 @@ type: embed
 
 ```
 
-### CloseButton
-
-CloseButton no longer has its own dedicated theme tokens in v2. Offset spacing now uses `sharedTokens.spacing`, and visual styling comes from BaseButton tokens.
+### Billboard
 
 ```js
 ---
@@ -237,10 +220,10 @@ type: embed
 ---
 <V12ChangelogTable
   removed={[
-    {name:"offsetMedium",note:"now uses sharedTokens.spacing"},
-    {name:"offsetSmall",note:"now uses sharedTokens.spacing"},
-    {name:"offsetXSmall",note:"now uses sharedTokens.spacing"},
-    {name:"zIndex",note:"hardcoded to 1"}
+    {name:"iconHoverColorInverse",note:""},
+    {name:"iconHoverColor",note:""},
+    {name:"iconColor",note:""},
+    {name:"messageColorInverse",note:""}
   ]}
 />
 
@@ -390,6 +373,62 @@ type: embed
 
 ```
 
+### CloseButton
+
+CloseButton no longer has its own dedicated theme tokens in v2. Offset spacing now uses `sharedTokens.spacing`, and visual styling comes from BaseButton tokens.
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"offsetMedium",note:"now uses sharedTokens.spacing"},
+    {name:"offsetSmall",note:"now uses sharedTokens.spacing"},
+    {name:"offsetXSmall",note:"now uses sharedTokens.spacing"},
+    {name:"zIndex",note:"hardcoded to 1"}
+  ]}
+/>
+
+```
+
+### ColorPicker
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"warningIconColor",note:""},
+    {name:"errorIconColor",note:""},
+    {name:"successIconColor",note:""},
+    {name:"spacing",note:"now uses sharedTokens.spacing"}
+  ]}
+/>
+
+```
+
+### DataPermissionLevels
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  added={[
+    {name:"contentContainerBorderRadius",note:""},
+    {name:"contentContainerColor",note:""}
+  ]}
+  removed={[
+    {name:"cardPadding",note:""},
+    {name:"cardExplainerContainerBottomMargin",note:""},
+    {name:"cardGap",note:""}
+  ]}
+/>
+
+```
+
 ### DateInput / DateInput2
 
 **Short version:** Use [`DateInput`](/v11_7/DateInput). Forget `DateInput2` exists.
@@ -450,26 +489,6 @@ type: code
 />
 ```
 
-### DataPermissionLevels
-
-```js
----
-type: embed
----
-<V12ChangelogTable
-  added={[
-    {name:"contentContainerBorderRadius",note:""},
-    {name:"contentContainerColor",note:""}
-  ]}
-  removed={[
-    {name:"cardPadding",note:""},
-    {name:"cardExplainerContainerBottomMargin",note:""},
-    {name:"cardGap",note:""}
-  ]}
-/>
-
-```
-
 #### DateTimeInput v1 → v2 API changes
 
 **Removed props:**
@@ -500,23 +519,6 @@ type: embed
   calendarIcon="Open calendar"
   datePickerDialog="Date picker"  // optional
 />
-```
-
-### ColorPicker
-
-```js
----
-type: embed
----
-<V12ChangelogTable
-  removed={[
-    {name:"warningIconColor",note:""},
-    {name:"errorIconColor",note:""},
-    {name:"successIconColor",note:""},
-    {name:"spacing",note:"now uses sharedTokens.spacing"}
-  ]}
-/>
-
 ```
 
 ### DrawerLayout
@@ -1173,22 +1175,6 @@ type: embed
 
 ```
 
-### Rating
-
-```js
----
-type: embed
----
-<V12ChangelogTable
-  removed={[
-    {name:"smallIconFontSize",note:""},
-    {name:"mediumIconFontSize",note:""},
-    {name:"largeIconFontSize",note:""}
-  ]}
-/>
-
-```
-
 ### RangeInput
 
 - `thumbVariant` prop has been removed. The component now always renders the previously-`accessible` thumb (better color contrast, border, and inset focus ring).
@@ -1210,6 +1196,22 @@ type: embed
     {oldName:"valueSmallPadding",newName:"valueSmallPadding",note:"now only sets horizontal padding of the value"},
     {oldName:"valueMediumPadding",newName:"valueMediumPadding",note:"now only sets horizontal padding of the value"},
     {oldName:"valueLargePadding",newName:"valueLargePadding",note:"now only sets horizontal padding of the value"}
+  ]}
+/>
+
+```
+
+### Rating
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"smallIconFontSize",note:""},
+    {name:"mediumIconFontSize",note:""},
+    {name:"largeIconFontSize",note:""}
   ]}
 />
 
@@ -1526,6 +1528,16 @@ type: embed
 
 ```
 
+### TopNavBar
+
+#### TopNavBar.Brand
+
+The deprecated `renderName` and `nameBackground` props have been removed. Please remove them from your code.
+
+#### TopNavBar.Layout
+
+- `hideActionsUserSeparator` prop has been removed.
+
 ### Tray
 
 ```js
@@ -1548,16 +1560,6 @@ type: embed
 />
 
 ```
-
-### TopNavBar
-
-#### TopNavBar.Layout
-
-- `hideActionsUserSeparator` prop has been removed.
-
-#### TopNavBar.Brand
-
-The deprecated `renderName` and `nameBackground` props have been removed. Please remove them from your code.
 
 ### TreeBrowser
 

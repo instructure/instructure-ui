@@ -24,7 +24,7 @@
 
 /**
  * ---
- * category: utilities/utils
+ * category: utilities/Misc
  * ---
  * Converts a CSS unit value combination into an array of type [ value, unit ]
  *

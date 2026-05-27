@@ -28,7 +28,7 @@ import React from 'react'
 
 /**
  * ---
- * category: utilities/utils
+ * category: utilities/Misc
  * ---
  * Converts a unit value size combination (em, rem, px) to a number representing px
  *

@@ -32,7 +32,7 @@ const dictionaryLengthMinus1 = dictionary.length - 1
 
 /**
  * ---
- * category: utilities/utils
+ * category: utilities/Misc
  * ---
  * Generate a unique (CSS-safe) id string
  *

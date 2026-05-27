@@ -48,12 +48,11 @@ const IconsPage = () => {
         }
       >
         <Alert variant="info" margin="0 0 medium">
-          New icon set, currently in beta. Currently supported icons:{' '}
-          <Link href="/legacy-icons">Icons</Link>
-        </Alert>
-        <Alert variant="info" margin="0 0 medium">
-          These icons are only meant to be used with the new theming system
-          (beta), please do not use them with the old (pre v11.7) components
+          The version selector does not affect this page. For icons compatible
+          with older versions, use{' '}
+          <Link href="/legacy-icons">Legacy Icons</Link>. These icons are only
+          meant to be used with the new theming system, please do not use them
+          with the old (pre v11.7) components.
         </Alert>
         <IconsGallery />
       </Suspense>

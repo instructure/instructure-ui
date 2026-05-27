@@ -1,6 +1,6 @@
 ---
 title: Visual Regression Testing
-category: Contributor Guides/Testing
+category: Contributing/Testing
 order: 4
 ---
 
@@ -59,17 +59,17 @@ open .report/index.html
 
 `npm run visual-diff` invokes the same `ui-scripts visual-diff` command CI uses. Pass extra flags to override the defaults:
 
-| Flag | Default | Description |
-|---|---|---|
-| `--actual-dir <dir>` | `cypress/screenshots` | Newly captured screenshots. |
-| `--baseline-dir <dir>` | `.baselines` | Baselines to compare against. |
-| `--output-dir <dir>` | `visual-report` | Where the HTML report + diff PNGs are written. |
-| `--threshold <0..1>` | `0.1` | Per-pixel YIQ color threshold. Lower is stricter. |
-| `--fail-on-missing-baseline` / `--no-fail-on-missing-baseline` | on | Whether to exit 1 when actual screenshots have no baseline. |
-| `--pr-number <n>` | — | Rendered in the report header as a link to the PR. |
-| `--pr-url <url>` | — | Target of the PR link. |
-| `--meta <file>` | — | JSON mapping screenshot slug → visited URL path. Enables per-row source-file links in the report. Produced automatically by `spec.cy.ts` via `cy.task('recordMeta', ...)`. |
-| `--source-base-url <url>` | — | GitHub blob URL of `regression-test/src/app` on the branch being reviewed. Combined with `--meta` to build links like `treebrowser/page.tsx`. |
+| Flag                                                           | Default               | Description                                                                                                                                                                |
+| -------------------------------------------------------------- | --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--actual-dir <dir>`                                           | `cypress/screenshots` | Newly captured screenshots.                                                                                                                                                |
+| `--baseline-dir <dir>`                                         | `.baselines`          | Baselines to compare against.                                                                                                                                              |
+| `--output-dir <dir>`                                           | `visual-report`       | Where the HTML report + diff PNGs are written.                                                                                                                             |
+| `--threshold <0..1>`                                           | `0.1`                 | Per-pixel YIQ color threshold. Lower is stricter.                                                                                                                          |
+| `--fail-on-missing-baseline` / `--no-fail-on-missing-baseline` | on                    | Whether to exit 1 when actual screenshots have no baseline.                                                                                                                |
+| `--pr-number <n>`                                              | —                     | Rendered in the report header as a link to the PR.                                                                                                                         |
+| `--pr-url <url>`                                               | —                     | Target of the PR link.                                                                                                                                                     |
+| `--meta <file>`                                                | —                     | JSON mapping screenshot slug → visited URL path. Enables per-row source-file links in the report. Produced automatically by `spec.cy.ts` via `cy.task('recordMeta', ...)`. |
+| `--source-base-url <url>`                                      | —                     | GitHub blob URL of `regression-test/src/app` on the branch being reviewed. Combined with `--meta` to build links like `treebrowser/page.tsx`.                              |
 
 ### Interpreting the report
 
@@ -89,40 +89,40 @@ Top-bar controls:
 
 1. Create `regression-test/src/app/<component-name>/page.tsx`. The page component must start with `'use client'` and render meaningful variations of the component you're covering.
 
-    ```tsx
-    ---
-    type: code
-    ---
-    'use client'
-    import { Button } from '@instructure/ui/latest'
+   ```tsx
+   ---
+   type: code
+   ---
+   'use client'
+   import { Button } from '@instructure/ui/latest'
 
-    export default function Page() {
-      return (
-        <main className="axe-test p-8 flex flex-col gap-4 items-start">
-          <Button>Default</Button>
-          <Button color="primary">Primary</Button>
-          <Button disabled>Disabled</Button>
-        </main>
-      )
-    }
-    ```
+   export default function Page() {
+     return (
+       <main className="axe-test p-8 flex flex-col gap-4 items-start">
+         <Button>Default</Button>
+         <Button color="primary">Primary</Button>
+         <Button disabled>Disabled</Button>
+       </main>
+     )
+   }
+   ```
 
-    The outer `axe-test` class is required — the axe-core accessibility check runs against elements inside it.
+   The outer `axe-test` class is required — the axe-core accessibility check runs against elements inside it.
 
 2. Add a test block in `regression-test/cypress/e2e/spec.cy.ts`:
 
-    ```ts
-    ---
-    type: code
-    ---
-    it('MyComponent', () => {
-      cy.visit('http://localhost:3000/my-component')
-      cy.injectAxe()
-      cy.checkA11y('.axe-test', axeOptions, terminalLog)
-    })
-    ```
+   ```ts
+   ---
+   type: code
+   ---
+   it('MyComponent', () => {
+     cy.visit('http://localhost:3000/my-component')
+     cy.injectAxe()
+     cy.checkA11y('.axe-test', axeOptions, terminalLog)
+   })
+   ```
 
-    If the component renders with an animation or asynchronous layout pass, add a `cy.wait(<ms>)` before `injectAxe()`. Keep waits as short as works — excessive waits compound across the suite.
+   If the component renders with an animation or asynchronous layout pass, add a `cy.wait(<ms>)` before `injectAxe()`. Keep waits as short as works — excessive waits compound across the suite.
 
 3. Commit the test page and the spec. On the first PR run the new screenshot will show up as `New`; it becomes a baseline automatically once the PR is merged.
 

@@ -24,7 +24,13 @@
 
 // This is the format of the saved JSON files
 import type { Documentation } from 'react-docgen'
-import type { Theme } from '@instructure/ui-themes'
+import type { BaseTheme } from '@instructure/shared-types'
+import type {
+  NewBaseTheme,
+  LightTheme,
+  DarkTheme,
+  SharedTokens
+} from '@instructure/ui-themes'
 
 type ProcessedFile =
   Documentation &
@@ -138,8 +144,27 @@ type Glyph = {
 
 type LegacyIconsData = Glyph[]
 
+type ResolvedColors = {
+  primitives: Record<string, string>
+  semantic: Record<string, string>
+}
+
+type ThemeResource =
+  | (BaseTheme & { resolvedComponents: Record<string, any> })   // legacy-canvas, legacy-canvas-high-contrast
+  | (NewBaseTheme & { resolvedColors: ResolvedColors })          // canvas, canvas-high-contrast
+  | (LightTheme & { resolvedColors: ResolvedColors })
+  | (DarkTheme & { resolvedColors: ResolvedColors })
+  | SharedTokens
+
 type MainDocsData = {
-  themes: Record<string, { resource: Theme }>
+  // ThemeResource is a union where not all members have `key` or `description`
+  // (e.g. NewBaseTheme and SharedTokens lack them). Intersecting with { key?, description? }
+  // distributes over the union — each branch gets these optional fields — so consumers can
+  // safely access resource.key / resource.description without type guards or `any`.
+  //   (BaseTheme & { resolvedComponents })  →  has key ✓
+  //   (NewBaseTheme & { resolvedColors })   →  gains key? via intersection ✓
+  //   SharedTokens                          →  gains key? via intersection ✓
+  themes: Record<string, { resource: ThemeResource & { key?: string; description?: string } }>
   library: LibraryOptions
 } & ParsedDoc
 
@@ -172,6 +197,8 @@ export type {
   JsDocResult,
   MinorVersionData,
   Section,
+  ThemeResource,
+  ResolvedColors,
   VersionMapEntry,
   VersionMap
 }

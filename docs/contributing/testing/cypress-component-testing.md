@@ -1,6 +1,6 @@
 ---
 title: Cypress component testing
-category: Contributor Guides/Testing
+category: Contributing/Testing
 order: 3
 ---
 

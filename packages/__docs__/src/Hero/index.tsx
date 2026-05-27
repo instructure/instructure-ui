@@ -234,10 +234,10 @@ class Hero extends Component<HeroProps> {
           <Text size="large">
             Check out our{' '}
             <Link
-              href="usage"
+              href="guides-getting-started"
               onClick={(e: any) => {
                 e.preventDefault()
-                navigateTo('usage')
+                navigateTo('guides-getting-started')
               }}
             >
               Developer Quick Start
@@ -268,6 +268,27 @@ class Hero extends Component<HeroProps> {
           </List.Item>
         </List>
         <Heading as="h3" level="h2" margin="none none medium">
+          Accessibility
+        </Heading>
+        <View as="p" margin="none none x-large">
+          <Text size="large">
+            Instructure UI components are designed to be accessible to everyone,
+            including users with vision, hearing, cognitive, or motor
+            impairments. Instructure UI targets WCAG 2.1 Level AA and Level AAA
+            success criteria, aiming to deliver highly usable components and a
+            seamless user experience.{' '}
+            <Link
+              href="accessibility"
+              onClick={(e: any) => {
+                e.preventDefault()
+                navigateTo('accessibility')
+              }}
+            >
+              Learn more about accessibility
+            </Link>
+          </Text>
+        </View>
+        <Heading as="h3" level="h2" margin="none none medium">
           Contribute
         </Heading>
         <View as="p" margin="none none small">
@@ -279,10 +300,10 @@ class Hero extends Component<HeroProps> {
         <List margin="none none large" itemSpacing="xx-small">
           <List.Item>
             <Link
-              href="contributing"
+              href="contributing-getting-started"
               onClick={(e: any) => {
                 e.preventDefault()
-                navigateTo('contributing')
+                navigateTo('contributing-getting-started')
               }}
             >
               Contributing Guidelines
@@ -458,12 +479,12 @@ class Hero extends Component<HeroProps> {
                       <Button
                         withBackground={false}
                         color="primary-inverse"
-                        href="usage"
+                        href="guides-getting-started"
                         margin="0 x-small x-small 0"
                         size={bigScreen ? 'large' : 'medium'}
                         onClick={(e: any) => {
                           e.preventDefault()
-                          navigateTo('usage')
+                          navigateTo('guides-getting-started')
                         }}
                       >
                         Developer Quick Start

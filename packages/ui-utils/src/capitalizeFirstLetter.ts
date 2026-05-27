@@ -24,7 +24,7 @@
 
 /**
  * ---
- * category: utilities/utils
+ * category: utilities/Misc
  * ---
  * Capitalize the first letter in a string
  * @module capitalizeFirstLetter

@@ -37,7 +37,7 @@ import { SVGIconTheme } from '@instructure/shared-types'
 
 /**
 ---
-category: components/utilities
+category: components/Util Components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)

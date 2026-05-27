@@ -39,7 +39,7 @@ import type { TransitionProps } from './props'
 
 /**
 ---
-category: components/utilities
+category: components/Util Components
 ---
 @module Transition
 **/

@@ -28,9 +28,11 @@ import { withStyleForDocs } from '../withStyleForDocs'
 import { px } from '@instructure/ui-utils'
 
 import { Table } from '@instructure/ui-table'
-import { Text } from '@instructure/ui-text'
+
 import { View } from '@instructure/ui-view'
 import { Alert } from '@instructure/ui-alerts'
+import { Spinner } from '@instructure/ui-spinner'
+import { Link } from '@instructure/ui-link'
 
 import { Heading } from '../Heading'
 import { Description } from '../Description'
@@ -41,23 +43,35 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import { ThemeProps } from './props'
-import { BaseTheme, Colors, Primitives } from '@instructure/shared-types'
+import { BaseTheme, Colors } from '@instructure/shared-types'
 
 type valueof<X> = X[keyof X]
 
+type ThemeState = { showColors: boolean }
+
 @withStyleForDocs(generateStyle, generateComponentTheme)
-class Theme extends Component<ThemeProps> {
+  class Theme extends Component<ThemeProps, ThemeState> {
   static displayName = 'Theme'
   static defaultProps = {
     description: undefined
   }
 
+  state: ThemeState = { showColors: false }
+
   componentDidMount() {
     this.props.makeStyles?.()
+    // Defer color card rendering so the initial page paint is not blocked
+    requestAnimationFrame(() => this.setState({ showColors: true }))
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps: ThemeProps) {
     this.props.makeStyles?.()
+    if (prevProps.themeKey !== this.props.themeKey) {
+      // Reset on theme change so navigation feels instant
+      this.setState({ showColors: false }, () => {
+        requestAnimationFrame(() => this.setState({ showColors: true }))
+      })
+    }
   }
 
   _colorMap: Record<string, string> = {}
@@ -179,52 +193,40 @@ class Theme extends Component<ThemeProps> {
     )
   }
 
-  renderSection(name: string, data: valueof<BaseTheme>) {
-    const subSections = []
-    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-    let baseColors: Primitives | {} = {}
-    //const newData = Object.assign({}, data)
-    if (name === 'colors' && (data as Colors).primitives) {
-      baseColors = (data as Colors).primitives
+  renderSection(
+    name: string,
+    data: valueof<BaseTheme>
+  ): React.ReactElement | null {
+    if (name === 'colors') {
+      const colors = data as Colors
       this._colorMap = this.mapColors({
-        ...baseColors,
-        ...(data as Colors).additionalPrimitives
+        ...(colors.primitives as Record<string, string>),
+        ...(colors.additionalPrimitives as Record<string, string>)
       })
-      subSections.push(<ThemeColors colors={baseColors} label="primitives" />)
-    }
-    return // TODO fix it, it breaks for new themes
-    /*
-    Object.keys(newData).forEach((key) => {
-      //primitives are the color palette above
-      if (
-        key === 'primitives' ||
-        key === 'additionalPrimitives' ||
-        key === 'dataVisualization'
-      ) {
-        return
-      }
-      // @ts-ignore TODO type later
-      const item = data![key]
-      if (typeof item === 'object') {
-        const subData: Record<string, { text: string; color: string }> = {}
-        const subKeys = Object.keys(item) as string[]
-        subKeys.forEach((subKey, i) => {
-          const val: string = item[subKey]
-          subData[subKeys[i]] = {
-            text: val.charAt(0) === '#' ? this._colorMap[val] : val,
-            color: val.charAt(0) === '#' ? val : ''
-          }
-        })
-        // sub categories
-        subSections.push(this.renderTable(key, this.renderRows(subData), true))
-      }
-    })
 
-    if (subSections.length > 0) {
+      const groups: { label: string; data: Record<string, string> }[] = [
+        {
+          label: 'primitives',
+          data: {
+            ...(colors.primitives as Record<string, string>),
+            ...(colors.additionalPrimitives as Record<string, string>)
+          }
+        },
+        {
+          label: 'contrasts',
+          data: colors.contrasts as unknown as Record<string, string>
+        },
+        { label: 'ui', data: colors.ui as unknown as Record<string, string> },
+        {
+          label: 'data visualization',
+          data: colors.dataVisualization as unknown as Record<string, string>
+        }
+      ]
+
       return (
-        <View key={name + 'variables'}>
+        <View key="colors">
           <Heading as="h3" level="h2">
-            {name}
+            Colors
           </Heading>
           <View
             background="secondary"
@@ -233,36 +235,88 @@ class Theme extends Component<ThemeProps> {
             margin="small none large"
             borderRadius="medium"
           >
-            {React.Children.map(subSections, (sub) => sub)}
+            {groups.map(({ label, data: groupData }) =>
+              groupData && Object.keys(groupData).length > 0 ? (
+                <ThemeColors key={label} colors={groupData} label={label} />
+              ) : null
+            )}
           </View>
         </View>
       )
-    } else {
-      return this.renderTable(name, this.renderRows(data as any))
     }
-    */
+
+    const flatData: Record<string, string | number> = {}
+    for (const [key, val] of Object.entries(data as Record<string, unknown>)) {
+      if (typeof val === 'string' || typeof val === 'number') {
+        flatData[key] = val
+      }
+    }
+    const rows = this.renderRows(flatData)
+    if (rows.length === 0) return null
+    return this.renderTable(name, rows) as React.ReactElement
+  }
+
+  renderNewThemeColors(): React.ReactElement | null {
+    const { variables } = this.props
+    const resolvedColors = (variables as any).resolvedColors as
+      | { primitives: Record<string, string>; semantic: Record<string, string> }
+      | undefined
+    if (!resolvedColors) return null
+
+    return (
+      <View key="colors">
+        <Heading as="h3" level="h2">
+          Colors
+        </Heading>
+        <View
+          background="secondary"
+          as="div"
+          padding="none"
+          margin="small none large"
+          borderRadius="medium"
+        >
+          <ThemeColors colors={resolvedColors.primitives} label="primitives" />
+          <ThemeColors colors={resolvedColors.semantic} label="semantic" />
+        </View>
+      </View>
+    )
   }
 
   render() {
     const sections: React.ReactElement[] = []
 
     const { themeKey, variables } = this.props
+    const isLegacyTheme =
+      themeKey === 'legacy-canvas' || themeKey === 'legacy-canvas-high-contrast'
     const sortedKeys = Object.keys(variables).sort((a, b) =>
       a === 'colors' ? -1 : b === 'colors' ? 1 : 0
-    ) as Array<keyof BaseTheme>
-    for (const name of sortedKeys) {
-      const value = variables[name]
-      if (value && typeof value === 'object') {
-        //sections.push(this.renderSection(name, value))
+    ) as Array<string & keyof BaseTheme>
+    if (isLegacyTheme) {
+      for (const name of sortedKeys) {
+        const value = variables[name]
+        if (value && typeof value === 'object') {
+          const section = this.renderSection(name, value)
+          if (section) sections.push(section)
+        }
       }
     }
 
     return (
       <div>
+        {isLegacyTheme && (
+          <Alert variant="info" margin="0 0 medium">
+            This theme is used by <strong>InstUI v11.6</strong> components. For
+            v11.7 and later, use the{' '}
+            <Link href={`#${themeKey.replace('legacy-', '')}`}>
+              {themeKey.replace('legacy-', '')}
+            </Link>{' '}
+            theme instead.
+          </Alert>
+        )}
         {variables.description && (
-          <Text size="medium" as="p">
+          <Alert variant="info" margin="0 0 medium">
             {variables.description}
-          </Text>
+          </Alert>
         )}
 
         <Alert margin="large 0">
@@ -270,8 +324,6 @@ class Theme extends Component<ThemeProps> {
           <code>1rem={px('1rem')}px</code>. The <code>rem</code> unit represents
           the font-size of the root <code>&lt;html&gt;</code> element.
         </Alert>
-
-        {sections}
 
         <Description
           id={`${themeKey}ApplicationUsage`}
@@ -294,7 +346,7 @@ ReactDOM.render(
 ${'```'}
 
 
-> You can read more about how our theming system works and how to use it [here](/#using-theme-overrides)
+> You can read more about how our theming system works and how to use it [here](/#legacy-theme-overrides)
           `}
           title={`${themeKey} Theme Usage in applications`}
         />
@@ -341,6 +393,18 @@ ${'```'}
           `}
           title={`${themeKey} Theme Usage in applications`}
         />
+
+        {this.state.showColors ? (
+          isLegacyTheme ? (
+            sections
+          ) : (
+            this.renderNewThemeColors()
+          )
+        ) : (
+          <View as="div" textAlign="center" padding="large">
+            <Spinner renderTitle="Loading colors..." size="medium" />
+          </View>
+        )}
       </div>
     )
   }

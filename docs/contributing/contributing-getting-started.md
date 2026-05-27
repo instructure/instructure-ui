@@ -1,6 +1,6 @@
 ---
-title: Contributing
-category: Contributor Guides
+title: Getting Started
+category: Contributing
 order: 1
 ---
 
@@ -23,7 +23,7 @@ constructed from the existing ones. For these reasons adding a new component has
 
 ### Building InstUI from the source
 
-Please follow the steps on the [how to build guide page](building-instui).
+Please follow the steps on the [how to build guide page](building-and-running-instui).
 
 ### Running the documentation app
 

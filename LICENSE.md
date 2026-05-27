@@ -2,6 +2,7 @@
 title: The MIT License (MIT)
 category: Getting Started
 order: 9
+isWIP: true
 ---
 
 # The MIT License (MIT)

@@ -24,7 +24,7 @@
 
 /**
  * ---
- * category: utilities/utils
+ * category: utilities/Misc
  * ---
  * Converts a hyphenated string to camel case
  *

@@ -1,6 +1,6 @@
 ---
 title: Vitest unit testing
-category: Contributor Guides/Testing
+category: Contributing/Testing
 order: 2
 ---
 
