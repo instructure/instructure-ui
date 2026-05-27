@@ -42,6 +42,11 @@ type DialogOwnProps = {
   as?: AsElementType
   display?: 'auto' | 'block' | 'inline-block'
   /**
+   * Inline styles applied to the root element. Merged with the default
+   * `borderRadius: inherit` so consumers can override it.
+   */
+  style?: React.CSSProperties
+  /**
    * The aria-label to read for screen reader. When specified, it will automatically set role="dialog".
    */
   label?: string
@@ -77,7 +82,8 @@ const allowedProps: AllowedPropKeys = [
   'shouldCloseOnDocumentClick',
   'shouldCloseOnEscape',
   'shouldFocusOnOpen',
-  'elementRef'
+  'elementRef',
+  'style'
 ]
 
 export type { DialogProps }
