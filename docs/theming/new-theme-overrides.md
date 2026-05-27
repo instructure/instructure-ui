@@ -527,9 +527,52 @@ type: example
 </InstUISettingsProvider>
 ```
 
-### 13. Provider-level overrides cannot target a child component selectively
+### 13. Independent overrides for child parts of compound components
 
-Because `Button` uses `BaseButton`'s theme internally, a `components.Button` entry in the provider's `themeOverride` does **not** override `BaseButton`'s tokens for `Button` instances only. Both `BaseButton` and `Button` share the same `BaseButton` theme variables, so a `components.BaseButton` override affects both, regardless of whether a separate `components.Button` entry is also present.
+Most compound components expose each part as a separate component with its own `componentId`. This means you can independently override each part via `components` — both overrides take effect:
+
+```js
+---
+type: example
+---
+<InstUISettingsProvider theme={canvas}>
+  <InstUISettingsProvider
+    themeOverride={{
+      components: {
+        TableColHeader: {
+          background: 'rebeccapurple',
+          color: 'gold'
+        },
+        TableRowHeader: {
+          background: 'deeppink',
+          color: 'white'
+        }
+      }
+    }}
+  >
+    <Table caption="Independent overrides: ColHeader purple, RowHeader deeppink">
+      <Table.Head>
+        <Table.Row>
+          <Table.ColHeader id="h-row">TableColHeader — purple</Table.ColHeader>
+          <Table.ColHeader id="h-col">TableColHeader — purple</Table.ColHeader>
+        </Table.Row>
+      </Table.Head>
+      <Table.Body>
+        <Table.Row>
+          <Table.RowHeader>TableRowHeader — deeppink</Table.RowHeader>
+          <Table.Cell>TableCell — unchanged</Table.Cell>
+        </Table.Row>
+                <Table.Row>
+          <Table.RowHeader>TableRowHeader — deeppink</Table.RowHeader>
+          <Table.Cell>TableCell — unchanged</Table.Cell>
+        </Table.Row>
+      </Table.Body>
+    </Table>
+  </InstUISettingsProvider>
+</InstUISettingsProvider>
+```
+
+**Exception — `Button` and `BaseButton`:** `Button` uses `BaseButton`'s `componentId` internally, so `components.Button` has no effect. A `components.BaseButton` override affects all `BaseButton` instances including those rendered inside `Button` — there is no way to target only one:
 
 ```js
 ---

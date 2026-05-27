@@ -31,8 +31,6 @@ type HeaderOwnProps = {
     previousVersions: string[]
   }
   minorVersionsData?: MinorVersionData
-  selectedMinorVersion?: string
-  onMinorVersionChange?: (version: string) => void
 }
 
 type PropKeys = keyof HeaderOwnProps
@@ -43,9 +41,7 @@ type HeaderProps = HeaderOwnProps
 const allowedProps: AllowedPropKeys = [
   'version',
   'versionsData',
-  'minorVersionsData',
-  'selectedMinorVersion',
-  'onMinorVersionChange'
+  'minorVersionsData'
 ]
 
 export type { HeaderProps }
