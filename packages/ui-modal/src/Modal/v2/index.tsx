@@ -213,13 +213,11 @@ class Modal extends Component<ModalProps, ModalState> {
       shouldCloseOnDocumentClick,
       shouldReturnFocus,
       liveRegion,
-      size,
       constrain,
       as,
       styles
     } = this.props
 
-    const isFullScreen = size === 'fullscreen'
     const dialog = (
       <Dialog
         {...passthroughProps(props)}
@@ -234,6 +232,7 @@ class Modal extends Component<ModalProps, ModalState> {
         liveRegion={liveRegion}
         onDismiss={onDismiss}
         css={styles?.modal}
+        style={{ borderRadius: styles?.borderRadius as string }}
         ref={this.contentRef}
         // aria-modal="true" see VO bug https://bugs.webkit.org/show_bug.cgi?id=174667
       >
@@ -242,13 +241,7 @@ class Modal extends Component<ModalProps, ModalState> {
     )
 
     return (
-      <Mask
-        placement={this.maskPlacement}
-        fullscreen={constrain === 'window'}
-        themeOverride={
-          isFullScreen ? { borderRadius: '0em', borderWidth: '0em' } : {}
-        }
-      >
+      <Mask placement={this.maskPlacement} fullscreen={constrain === 'window'}>
         {dialog}
       </Mask>
     )

@@ -73,9 +73,7 @@ const generateStyle = (
       flex: 1,
       width: '100%',
       height: '100%',
-      boxShadow: 'none',
-      border: 'none',
-      borderRadius: 0
+      margin: componentTheme.fullScreenMargin
     }
   }
   const backgroundStyles =
@@ -123,7 +121,8 @@ const generateStyle = (
         overflowY: 'auto',
         maxHeight: '20rem'
       }
-    }
+    },
+    borderRadius: componentTheme.borderRadius
   }
 }
 

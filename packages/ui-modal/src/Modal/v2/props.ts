@@ -184,7 +184,7 @@ type ModalProps = ModalOwnProps &
   OtherHTMLAttributes<ModalOwnProps>
 
 type ModalStyle = ComponentStyle<
-  'modal' | 'constrainContext' | 'joinedHeaderAndBody'
+  'modal' | 'constrainContext' | 'joinedHeaderAndBody' | 'borderRadius'
 >
 
 type ModalState = {
