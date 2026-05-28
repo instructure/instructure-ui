@@ -24,7 +24,28 @@
 
 import DOMPurify from 'dompurify'
 
-const SAFE_SCHEMES = ['http:', 'https:', 'mailto:', 'tel:', 'ftp:']
+const SAFE_SCHEMES = [
+  'http:',
+  'https:',
+  'ftp:',
+  'ftps:',
+  'mailto:',
+  'tel:',
+  'sms:',
+  'callto:',
+  'cid:',
+  'xmpp:',
+  'webcal:',
+  'feed:',
+  'geo:'
+]
+
+// Extract the scheme from a URL-ish value, or `null` if it has none.
+function extractScheme(value: string): string | null {
+  const normalized = value.replace(/[\t\n\r]/g, '').trim()
+  const schemeMatch = normalized.match(/^([a-zA-Z][a-zA-Z0-9+.-]*):/)
+  return schemeMatch ? schemeMatch[1].toLowerCase() + ':' : null
+}
 
 // (tag, attr) pairs that may legitimately carry a `data:` URI — matches
 // DOMPurify's defaults so the SSR fallback doesn't reject inline images that
@@ -44,9 +65,8 @@ function ssrSafeHref(value: string, tag: string, attr: string): boolean {
   if (normalized === '') return true
   const firstChar = normalized.charAt(0)
   if (firstChar === '#' || firstChar === '/' || firstChar === '?') return true
-  const schemeMatch = normalized.match(/^([a-zA-Z][a-zA-Z0-9+.-]*):/)
-  if (!schemeMatch) return true
-  const scheme = schemeMatch[1].toLowerCase() + ':'
+  const scheme = extractScheme(normalized)
+  if (!scheme) return true
   if (SAFE_SCHEMES.includes(scheme)) return true
   if (
     scheme === 'data:' &&
@@ -79,6 +99,12 @@ function safeHref(
 ): string | undefined {
   if (href == null) return undefined
   const value = String(href)
+
+  // Pre-check our scheme allowlist before DOMPurify, since DOMPurify's default
+  // ALLOWED_URI_REGEXP rejects schemes like `webcal:` that we treat as safe.
+  const scheme = extractScheme(value)
+  if (scheme && SAFE_SCHEMES.includes(scheme)) return href
+
   DOMPurify.setConfig({ USE_PROFILES: { html: true } })
   const isSafe = DOMPurify.isSupported
     ? DOMPurify.isValidAttribute(tag, attr, value)
