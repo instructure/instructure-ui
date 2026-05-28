@@ -191,6 +191,7 @@ type ModalState = {
   transitioning: boolean
   open: boolean
   windowHeight: number
+  windowWidth: number
   /**
    * The `aria-label` on the Modal's body if it's scrollable.
    */

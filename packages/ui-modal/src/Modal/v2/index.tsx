@@ -84,6 +84,7 @@ class Modal extends Component<ModalProps, ModalState> {
       transitioning: false,
       open: props.open ?? false,
       windowHeight: 99999,
+      windowWidth: 99999,
       bodyScrollAriaLabel: undefined
     }
   }
@@ -99,7 +100,7 @@ class Modal extends Component<ModalProps, ModalState> {
 
   componentDidMount() {
     this.props.makeStyles?.()
-    window.addEventListener('resize', this.updateHeight)
+    window.addEventListener('resize', this.updateSize)
   }
 
   componentDidUpdate(prevProps: ModalProps) {
@@ -110,11 +111,14 @@ class Modal extends Component<ModalProps, ModalState> {
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.updateHeight)
+    window.removeEventListener('resize', this.updateSize)
   }
 
-  updateHeight = () => {
-    this.setState({ windowHeight: window.innerHeight })
+  updateSize = () => {
+    this.setState({
+      windowHeight: window.innerHeight,
+      windowWidth: window.innerWidth
+    })
   }
 
   get defaultFocusElement() {
@@ -215,8 +219,14 @@ class Modal extends Component<ModalProps, ModalState> {
       liveRegion,
       constrain,
       as,
+      size,
       styles
     } = this.props
+
+    const isFullScreen = size === 'fullscreen'
+    const isSmallScreen = this.state.windowWidth < 480 // 30em at 16px base
+    const borderRadius =
+      isFullScreen && isSmallScreen ? '0' : (styles?.borderRadius as string) // fullscreen modals on small screens remove border radius so the modal fills edge-to-edge
 
     const dialog = (
       <Dialog
@@ -232,7 +242,7 @@ class Modal extends Component<ModalProps, ModalState> {
         liveRegion={liveRegion}
         onDismiss={onDismiss}
         css={styles?.modal}
-        style={{ borderRadius: styles?.borderRadius as string }}
+        style={{ borderRadius }}
         ref={this.contentRef}
         // aria-modal="true" see VO bug https://bugs.webkit.org/show_bug.cgi?id=174667
       >

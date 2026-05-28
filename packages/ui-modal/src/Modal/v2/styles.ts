@@ -71,9 +71,14 @@ const generateStyle = (
     },
     fullscreen: {
       flex: 1,
-      width: '100%',
-      height: '100%',
-      margin: componentTheme.fullScreenMargin
+      margin: componentTheme.fullScreenMargin,
+      '@media (max-width: 30em)': {
+        // small breakpoint = 480px
+        margin: 0,
+        boxShadow: 'none',
+        border: 'none',
+        borderRadius: 0
+      }
     }
   }
   const backgroundStyles =
