@@ -52,6 +52,35 @@ describe('safeHref', () => {
     expect(safeHref('ftp://example.com', 'a', 'href')).toBe('ftp://example.com')
   })
 
+  it('passes through webcal: URLs for calendar subscriptions', () => {
+    expect(safeHref('webcal://example.com/cal.ics', 'a', 'href')).toBe(
+      'webcal://example.com/cal.ics'
+    )
+    expect(safeHref('WEBCAL://example.com/cal.ics', 'a', 'href')).toBe(
+      'WEBCAL://example.com/cal.ics'
+    )
+    expect(consoleErrorSpy).not.toHaveBeenCalled()
+  })
+
+  it('passes through additional safe schemes', () => {
+    expect(safeHref('sms:+15551234', 'a', 'href')).toBe('sms:+15551234')
+    expect(safeHref('callto:+15551234', 'a', 'href')).toBe('callto:+15551234')
+    expect(safeHref('xmpp:user@example.com', 'a', 'href')).toBe(
+      'xmpp:user@example.com'
+    )
+    expect(safeHref('cid:image-123', 'img', 'src')).toBe('cid:image-123')
+    expect(safeHref('ftps://example.com', 'a', 'href')).toBe(
+      'ftps://example.com'
+    )
+    expect(safeHref('feed:https://example.com/rss.xml', 'a', 'href')).toBe(
+      'feed:https://example.com/rss.xml'
+    )
+    expect(safeHref('geo:37.786971,-122.399677', 'a', 'href')).toBe(
+      'geo:37.786971,-122.399677'
+    )
+    expect(consoleErrorSpy).not.toHaveBeenCalled()
+  })
+
   it('passes through anchors, root-relative, and query-only refs', () => {
     expect(safeHref('#section', 'a', 'href')).toBe('#section')
     expect(safeHref('/foo/bar', 'a', 'href')).toBe('/foo/bar')
