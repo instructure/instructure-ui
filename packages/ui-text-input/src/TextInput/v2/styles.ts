@@ -206,7 +206,9 @@ const generateStyle = (
       flexDirection: 'row'
     },
     beforeElement: {
-      ...(interaction === 'disabled' && { opacity: 0.5 }),
+      ...(interaction === 'disabled'
+        ? { opacity: 0.5 }
+        : { display: 'contents' }),
       label: 'textInput__beforeElement'
     },
     afterElement: {
