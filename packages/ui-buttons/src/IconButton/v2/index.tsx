@@ -45,6 +45,8 @@ category: components
 class IconButton extends Component<IconButtonProps> {
   static displayName = 'IconButton'
   static readonly componentId = 'IconButton'
+  // Uses BaseButton's tokens; tell Document where to look for theme variables
+  static readonly themeId = 'BaseButton'
 
   static allowedProps = allowedProps
   static defaultProps = {

@@ -84,6 +84,7 @@ class TopNavBarSmallViewportLayout extends Component<
 > {
   static displayName = 'TopNavBarSmallViewportLayout'
   static readonly componentId = 'TopNavBar.SmallViewportLayout'
+  static readonly themeId = 'TopNavBarLayout'
 
   static allowedProps = allowedProps
   static defaultProps = {}

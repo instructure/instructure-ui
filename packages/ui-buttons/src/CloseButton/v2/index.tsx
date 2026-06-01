@@ -45,6 +45,8 @@ category: components
 class CloseButton extends Component<CloseButtonProps> {
   static displayName = 'CloseButton'
   static readonly componentId = 'CloseButton'
+  // Uses BaseButton's tokens; tell Document where to look for theme variables
+  static readonly themeId = 'BaseButton'
 
   static allowedProps = allowedProps
   static defaultProps = {

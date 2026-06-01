@@ -29,6 +29,7 @@ import { View } from '@instructure/ui-view'
 import { Tabs } from '@instructure/ui-tabs'
 import type { TabsProps } from '@instructure/ui-tabs'
 import type { NewBaseTheme } from '@instructure/ui-themes'
+import type { ComponentTheme as ComponentThemeData } from '@instructure/shared-types'
 import { SourceCodeEditor } from '@instructure/ui-source-code-editor'
 import { withStyleForDocs as withStyleNew } from '../withStyleForDocs'
 
@@ -80,47 +81,48 @@ class Document extends Component<DocumentProps, DocumentState> {
 
   fetchGenerateComponentTheme = async () => {
     const { doc, themeVariables } = this.props
-    let generateTheme
-    // Doc IDs use dot notation (e.g. "Menu.Item") but theme component keys
-    // use PascalCase without dots (e.g. "MenuItem").
-    // New-theme entries are in themeVariables.newTheme.components.
     const selectedId = this.state.selectedDetailsTabId
     type ComponentKey = keyof NewBaseTheme['components']
+    // When a child tab is selected, work from the child's doc/component;
+    // otherwise from the main doc's.
     const childDoc =
       selectedId !== doc.id
         ? doc?.children?.find((value) => value.id === selectedId)
         : null
-    // in case of some components, we need to display the theme variables of other components based on themeId (like displaying the theme variables of Options in Drillsdown.Group)
+    const currentComponentInstance =
+      selectedId === doc.id
+        ? doc?.componentInstance
+        : childDoc?.componentInstance
+    // Resolve the theme registry key. Default: doc id with dots stripped
+    // (e.g. "Menu.Item" → "MenuItem"). Two ways to override the default:
+    //  - `themeId:` in YAML frontmatter (read from childDoc.themeId) — used
+    //    when a doc page wants to show another component's tokens
+    //    (e.g. Drilldown.Group → 'Options').
+    //  - `static themeId` on the component class — used when a component
+    //    borrows another's tokens via `useTokensFrom` at runtime
+    //    (e.g. Button → 'BaseButton', ColorMixer.Slider → 'Slider').
     const themeKey: ComponentKey = (childDoc?.themeId ||
+      currentComponentInstance?.themeId ||
       selectedId?.replace(/\./g, '')) as ComponentKey
     const isLegacyTheme = this.context?.componentVersion == 'v11_6'
-    // new theme
+    // New theme: tokens are pre-resolved into plain objects at build time
+    // (the build emits JSON, so generator functions can't be carried through).
     if (!isLegacyTheme) {
-      // resolvedComponents contains pre-computed plain objects (built at build time)
       const resolvedComponents = (themeVariables as Record<string, unknown>)
         ?.resolvedComponents as Record<string, unknown> | undefined
       const newThemeEntry = resolvedComponents?.[themeKey as string]
-      const componentInstance =
-        selectedId === doc.id
-          ? doc?.componentInstance
-          : childDoc?.componentInstance
       if (
         newThemeEntry &&
-        typeof componentInstance?.generateComponentTheme !== 'function'
+        typeof currentComponentInstance?.generateComponentTheme !== 'function'
       ) {
-        // new theme - use pre-computed theme object directly
         this.setState({
           componentTheme: newThemeEntry as DocumentState['componentTheme']
         })
         return
       }
     }
-    // old theme - use generateComponentTheme function
-    if (selectedId === doc.id) {
-      generateTheme = doc?.componentInstance?.generateComponentTheme
-    } else {
-      generateTheme = childDoc?.componentInstance?.generateComponentTheme
-    }
+    // Legacy theme: call the component's generateComponentTheme directly.
+    const generateTheme = currentComponentInstance?.generateComponentTheme
     if (typeof generateTheme === 'function' && themeVariables) {
       this.setState({ componentTheme: generateTheme(themeVariables) })
     } else {
@@ -158,6 +160,19 @@ class Document extends Component<DocumentProps, DocumentState> {
 
     const themeVariableKeys = componentTheme && Object.keys(componentTheme)
 
+    // The displayed token list comes from another component's registry when
+    // `themeId` (YAML frontmatter) or the component class's `static themeId`
+    // points at a different key than the doc's own id. In that case some of
+    // the listed tokens may not actually be used by this component.
+    const isLegacyTheme = this.context?.componentVersion === 'v11_6'
+    const dotStrippedId = doc.id?.replace(/\./g, '')
+    const borrowedThemeId =
+      doc.themeId || doc.componentInstance?.themeId
+    const borrowsTokens =
+      !isLegacyTheme &&
+      borrowedThemeId &&
+      borrowedThemeId !== dotStrippedId
+
     return themeVariables &&
       componentTheme &&
       themeVariableKeys &&
@@ -166,6 +181,14 @@ class Document extends Component<DocumentProps, DocumentState> {
         <Heading level="h2" as="h3" id={`${doc.id}Theme`} margin="0 0 small 0">
           Default Theme Variables
         </Heading>
+        {borrowsTokens ? (
+          <View as="div" margin="0 0 small 0">
+            Note: <code>{doc.id}</code> shares its theme tokens with{' '}
+            <code>{borrowedThemeId}</code>, so the table below lists every
+            token of <code>{borrowedThemeId}</code>. Some of these may not
+            actually be used by <code>{doc.id}</code>.
+          </View>
+        ) : null}
         {doc.themePath ? (
           <View as="div" margin="0 0 x-small 0">
             See which global theme variables are mapped to the component here:{' '}
@@ -181,9 +204,7 @@ class Document extends Component<DocumentProps, DocumentState> {
             </code>
           </View>
         ) : null}
-        <ComponentTheme
-          componentTheme={componentTheme as any /* TODO-theme-types check */}
-        />
+        <ComponentTheme componentTheme={componentTheme as ComponentThemeData} />
 
         <View margin="x-large 0 0" display="block">
           <Heading

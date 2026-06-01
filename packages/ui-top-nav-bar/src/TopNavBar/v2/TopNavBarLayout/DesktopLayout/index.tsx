@@ -47,6 +47,7 @@ private: true
 class TopNavBarDesktopLayout extends Component<TopNavBarDesktopLayoutProps> {
   static displayName = 'TopNavBarDesktopLayout'
   static readonly componentId = 'TopNavBar.DesktopLayout'
+  static readonly themeId = 'TopNavBarLayout'
 
   static allowedProps = allowedProps
   static defaultProps = {}

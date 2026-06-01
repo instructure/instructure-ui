@@ -43,6 +43,7 @@ id: SideNavBar.Item
 class SideNavBarItem extends Component<SideNavBarItemProps> {
   static displayName = 'SideNavBarItem'
   static readonly componentId = 'SideNavBar.Item'
+  static readonly themeId = 'SideNavBarItem'
 
   static allowedProps = allowedProps
 

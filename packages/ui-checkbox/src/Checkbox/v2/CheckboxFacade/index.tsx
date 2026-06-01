@@ -46,6 +46,7 @@ parent: Checkbox
 class CheckboxFacade extends Component<CheckboxFacadeProps> {
   static displayName = 'CheckboxFacade'
   static readonly componentId = 'CheckboxFacade'
+  static readonly themeId = 'Checkbox'
 
   static allowedProps = allowedProps
   static defaultProps = {

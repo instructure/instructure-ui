@@ -149,11 +149,14 @@ type ResolvedColors = {
   semantic: Record<string, string>
 }
 
+// At runtime, build-docs.mts also attaches `resolvedComponents` (and on
+// canvas / canvas-high-contrast: `key`, `description`) to the new-system
+// entries. Not declared per-branch; surfaced as optional on `MainDocsData.themes`.
 type ThemeResource =
   | (BaseTheme & { resolvedComponents: Record<string, any> })   // legacy-canvas, legacy-canvas-high-contrast
   | (NewBaseTheme & { resolvedColors: ResolvedColors })          // canvas, canvas-high-contrast
-  | (LightTheme & { resolvedColors: ResolvedColors })
-  | (DarkTheme & { resolvedColors: ResolvedColors })
+  | (LightTheme & { resolvedColors: ResolvedColors })            // light
+  | (DarkTheme & { resolvedColors: ResolvedColors })             // dark
   | SharedTokens
 
 type MainDocsData = {

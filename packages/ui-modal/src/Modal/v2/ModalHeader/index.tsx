@@ -52,6 +52,7 @@ id: Modal.Header
 class ModalHeader extends Component<ModalHeaderProps> {
   static displayName = 'ModalHeader'
   static readonly componentId = 'Modal.Header'
+  static readonly themeId = 'ModalHeader'
 
   static allowedProps = allowedProps
   static defaultProps = {

@@ -42,6 +42,8 @@ category: components
 class CondensedButton extends Component<CondensedButtonProps> {
   static displayName = 'CondensedButton'
   static readonly componentId = 'CondensedButton'
+  // Uses BaseButton's tokens; tell Document where to look for theme variables
+  static readonly themeId = 'BaseButton'
 
   static allowedProps = allowedProps
   static defaultProps = {

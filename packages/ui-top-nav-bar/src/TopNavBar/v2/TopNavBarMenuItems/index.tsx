@@ -67,6 +67,7 @@ class TopNavBarMenuItems extends Component<
 > {
   static displayName = 'TopNavBarMenuItems'
   static readonly componentId = 'TopNavBar.MenuItems'
+  static readonly themeId = 'TopNavBarMenuItems'
 
   static allowedProps = allowedProps
   static defaultProps = {}
