@@ -41,6 +41,7 @@ id: Modal.Footer
 class ModalFooter extends Component<ModalFooterProps> {
   static displayName = 'ModalFooter'
   static readonly componentId = 'Modal.Footer'
+  static readonly themeId = 'ModalFooter'
 
   static allowedProps = allowedProps
   static defaultProps = {

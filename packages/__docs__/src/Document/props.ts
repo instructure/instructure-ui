@@ -46,12 +46,16 @@ type DocumentProps = DocumentOwnProps & WithStyleProps<null, DocumentStyle>
 
 type DocumentStyle = ComponentStyle<'githubCornerOctoArm' | 'githubCorner'>
 
+type ResolvedNewComponentTheme = ReturnType<
+  NewBaseTheme['components'][keyof NewBaseTheme['components']]
+>
+
 type DocumentState = {
   selectedDetailsTabId: string | undefined
   pageRef: HTMLDivElement | null
   componentTheme:
     | ThemeVariables[keyof ThemeVariables]
-    | NewBaseTheme['components'][keyof NewBaseTheme['components']]
+    | ResolvedNewComponentTheme
     | undefined
 }
 

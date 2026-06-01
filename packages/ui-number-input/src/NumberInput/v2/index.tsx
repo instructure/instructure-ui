@@ -371,6 +371,8 @@ const NumberInput = forwardRef<NumberInputHandle, NumberInputProps>(
 )
 
 NumberInput.displayName = 'NumberInput'
+// Uses TextInput's tokens; tell Document where to look for theme variables
+;(NumberInput as typeof NumberInput & { themeId: string }).themeId = 'TextInput'
 
 export interface NumberInputHandle {
   focus: () => void

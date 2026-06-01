@@ -46,6 +46,7 @@ parent: Checkbox
 class ToggleFacade extends Component<ToggleFacadeProps> {
   static displayName = 'ToggleFacade'
   static readonly componentId = 'ToggleFacade'
+  static readonly themeId = 'Toggle'
 
   static allowedProps = allowedProps
   static defaultProps = {

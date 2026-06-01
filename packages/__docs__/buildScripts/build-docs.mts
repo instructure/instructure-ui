@@ -420,17 +420,44 @@ function parseThemes() {
   parsed['legacy-canvas-high-contrast'] = {
     resource: { ...canvasHighContrast, resolvedComponents: resolveComponents(legacyCanvasHighContrast) }
   }
+  // `key` is read by Document.tsx's `componentDidUpdate` to detect theme
+  // changes and refetch the Default Theme Variables. `legacyCanvas` /
+  // `legacyCanvasHighContrast` from `newThemeTokens` do not include a `key`
+  // field (unlike `light` / `dark`, which come through wrappers that set it).
+  // Without it, switching e.g. canvas (legacy) → canvas-high-contrast (legacy)
+  // on v11_7 leaves `themeVariables.key` `undefined` on both sides, so
+  // `undefined !== undefined` is false and the refetch never fires.
   parsed['canvas'] = {
-    resource: { ...legacyCanvas, resolvedColors: resolveNewThemeColors(legacyCanvas), description: canvas.description }
+    resource: {
+      ...legacyCanvas,
+      key: 'canvas',
+      resolvedColors: resolveNewThemeColors(legacyCanvas),
+      resolvedComponents: resolveComponents(legacyCanvas),
+      description: canvas.description
+    }
   }
   parsed['canvas-high-contrast'] = {
-    resource: { ...legacyCanvasHighContrast, resolvedColors: resolveNewThemeColors(legacyCanvasHighContrast), description: canvasHighContrast.description }
+    resource: {
+      ...legacyCanvasHighContrast,
+      key: 'canvas-high-contrast',
+      resolvedColors: resolveNewThemeColors(legacyCanvasHighContrast),
+      resolvedComponents: resolveComponents(legacyCanvasHighContrast),
+      description: canvasHighContrast.description
+    }
   }
   parsed[light.key] = {
-    resource: { ...light, resolvedColors: resolveNewThemeColors(light.newTheme as typeof legacyCanvas) }
+    resource: {
+      ...light,
+      resolvedColors: resolveNewThemeColors(light.newTheme as typeof legacyCanvas),
+      resolvedComponents: resolveComponents(light.newTheme as typeof legacyCanvas)
+    }
   }
   parsed[dark.key] = {
-    resource: { ...dark, resolvedColors: resolveNewThemeColors(dark.newTheme as typeof legacyCanvas) }
+    resource: {
+      ...dark,
+      resolvedColors: resolveNewThemeColors(dark.newTheme as typeof legacyCanvas),
+      resolvedComponents: resolveComponents(dark.newTheme as typeof legacyCanvas)
+    }
   }
   const canvasSemantics = legacyCanvas.semantics(legacyCanvas.primitives)
   parsed['shared-tokens'] = { resource: legacyCanvas.sharedTokens(canvasSemantics) }

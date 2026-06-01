@@ -42,6 +42,8 @@ category: components
 class Button extends Component<ButtonProps> {
   static displayName = 'Button'
   static readonly componentId = 'Button'
+  // Button v2 uses BaseButton's tokens; tell Document where to look for theme variables
+  static readonly themeId = 'BaseButton'
 
   static allowedProps = allowedProps
   static defaultProps = {

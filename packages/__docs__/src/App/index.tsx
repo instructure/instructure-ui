@@ -602,6 +602,13 @@ class App extends Component<AppProps, AppState> {
     const allThemeKeys = Object.keys(this.state.docsData!.themes)
     const showNewThemes = selectedMinorVersion !== 'v11_6'
 
+    // The `parsed.themes` map in build-docs.mts contains both:
+    //   - `canvas` / `canvas-high-contrast` → new-system resources (primitives/semantics/sharedTokens/components`)
+    //   - `legacy-canvas` / `legacy-canvas-high-contrast` → legacy wrappers (full theme object)
+    // v11_6 components' `generateComponentTheme(theme)` reads `theme.colors`,
+    // `theme.spacing`, etc., so v11_6 MUST be backed by the legacy wrappers.
+    // We pick `legacy-*` as the actual selected keys, and strip the prefix for
+    // display so the user still sees "canvas" / "canvas-high-contrast".
     const themeKeys = showNewThemes
       ? allThemeKeys.filter(
           (k) =>
@@ -610,7 +617,7 @@ class App extends Component<AppProps, AppState> {
             k !== 'legacy-canvas-high-contrast'
         )
       : allThemeKeys.filter(
-          (k) => k === 'canvas' || k === 'canvas-high-contrast'
+          (k) => k === 'legacy-canvas' || k === 'legacy-canvas-high-contrast'
         )
 
     const displayThemeName = (themeKey: string) => {
@@ -619,6 +626,10 @@ class App extends Component<AppProps, AppState> {
         (themeKey === 'canvas' || themeKey === 'canvas-high-contrast')
       ) {
         return `${themeKey} (legacy)`
+      }
+      // On v11_6 strip the `legacy-` prefix so the user sees the plain names.
+      if (!showNewThemes) {
+        return themeKey.replace(/^legacy-/, '')
       }
       return themeKey
     }

@@ -81,6 +81,7 @@ id: TopNavBar.Item
 class TopNavBarItem extends Component<TopNavBarItemProps, TopNavBarItemState> {
   static displayName = 'TopNavBarItem'
   static readonly componentId = 'TopNavBar.Item'
+  static readonly themeId = 'TopNavBarItem'
 
   static allowedProps = allowedProps
   static defaultProps = {

@@ -46,6 +46,7 @@ id: Modal.Body
 class ModalBody extends Component<ModalBodyProps> {
   static displayName = 'ModalBody'
   static readonly componentId = 'Modal.Body'
+  static readonly themeId = 'ModalBody'
 
   static allowedProps = allowedProps
   static defaultProps = {

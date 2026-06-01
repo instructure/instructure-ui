@@ -51,6 +51,7 @@ class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
   static displayName = 'ColorPalette'
   static allowedProps = allowedProps
   static readonly componentId = 'ColorMixer.Palette'
+  static readonly themeId = 'Palette'
 
   constructor(props: ColorPaletteProps) {
     super(props)

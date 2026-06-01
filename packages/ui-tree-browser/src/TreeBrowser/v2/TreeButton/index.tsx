@@ -55,6 +55,7 @@ class TreeButton extends Component<
 > {
   static displayName = 'TreeButton'
   static readonly componentId = 'TreeBrowser.Button'
+  static readonly themeId = 'TreeBrowserTreeButton'
 
   static allowedProps = allowedProps
 

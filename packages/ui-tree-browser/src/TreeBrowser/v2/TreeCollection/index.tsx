@@ -51,6 +51,7 @@ class TreeCollection extends Component<
 > {
   static displayName = 'TreeCollection'
   static readonly componentId = 'TreeBrowser.Collection'
+  static readonly themeId = 'TreeBrowserTreeCollection'
 
   static allowedProps = allowedProps
 

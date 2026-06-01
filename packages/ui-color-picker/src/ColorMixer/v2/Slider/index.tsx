@@ -45,6 +45,7 @@ class Slider extends Component<SliderProps> {
   static displayName = 'Slider'
   static allowedProps = allowedProps
   static readonly componentId = 'ColorMixer.Slider'
+  static readonly themeId = 'Slider'
 
   static defaultProps = {
     isColorSlider: false
