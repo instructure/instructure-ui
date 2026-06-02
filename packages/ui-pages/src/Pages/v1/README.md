@@ -348,7 +348,7 @@ const Example = () => {
                       <Byline description={user.name}>
                         <Avatar name={user.name} />
                       </Byline>
-                      <Table caption="User details">
+                      <Table caption={() => "User details"}>
                         <Table.Body>
                           <Table.Row>
                             <Table.RowHeader>Age</Table.RowHeader>
@@ -357,7 +357,7 @@ const Example = () => {
                         </Table.Body>
                       </Table>
                       {user.email && (
-                        <Table caption="User details">
+                        <Table caption={() => "User details"}>
                           <Table.Body>
                             <Table.Row>
                               <Table.RowHeader>Email</Table.RowHeader>
@@ -367,7 +367,7 @@ const Example = () => {
                         </Table>
                       )}
                       {!isNaN(user.spouse) && (
-                        <Table caption="User details">
+                        <Table caption={() => "User details"}>
                           <Table.Body>
                             <Table.Row>
                               <Table.RowHeader>Spouse</Table.RowHeader>
@@ -379,7 +379,7 @@ const Example = () => {
                         </Table>
                       )}
                       {Array.isArray(user.parents) && (
-                        <Table caption="User details">
+                        <Table caption={() => "User details"}>
                           <Table.Body>
                             <Table.Row>
                               <Table.RowHeader>Parents</Table.RowHeader>

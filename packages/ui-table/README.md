@@ -29,7 +29,7 @@ import { Table } from '@instructure/ui-table'
 
 const MyTable = () => {
   return (
-    <Table caption='Top rated movies'>
+    <Table caption={() => 'Top rated movies'}>
       <Table.Head>
         <Table.Row>
           <Table.ColHeader>Rank</Table.ColHeader>

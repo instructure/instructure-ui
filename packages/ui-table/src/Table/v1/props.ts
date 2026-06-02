@@ -31,12 +31,21 @@ import type { OtherHTMLAttributes, TableTheme } from '@instructure/shared-types'
 
 type RowChild = React.ReactElement<{ children: React.ReactElement }>
 
+type TableCaption = (
+  sortByHeader: string,
+  sortDirection: 'none' | 'ascending' | 'descending'
+) => string
+
 type TableOwnProps = {
   /**
    * Provide a screen reader friendly description. Anything passed to this
    * prop will be wrapped by `<ScreenReaderContent>` when it is rendered.
+   *
+   * A plain `ReactNode` (e.g. a string) is rendered as-is and the sort state
+   * is ignored. Pass a function (see {@link TableCaption}) to build a
+   * localized caption that also reflects the current sort state.
    */
-  caption: React.ReactNode
+  caption: React.ReactNode | TableCaption
   /**
    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
@@ -92,6 +101,7 @@ const allowedProps: AllowedPropKeys = [
 export type {
   TableProps,
   TableStyle,
+  TableCaption,
   // children
   RowChild
 }
