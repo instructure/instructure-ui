@@ -95,18 +95,14 @@ class TopNavBarBrand extends Component<TopNavBarBrandProps> {
       >
         {renderIcon && (
           <InstUISettingsProvider
-            theme={(currentTheme: any) =>
-              ({
-                newTheme: {
-                  sharedTokens: {
-                    focusOutline: {
-                      ...currentTheme?.newTheme?.sharedTokens?.focusOutline,
-                      inset: styles?.focusOutlineInset
-                    }
-                  }
+            themeOverride={(currentTheme: any) => ({
+              sharedTokens: {
+                focusOutline: {
+                  ...currentTheme?.newTheme?.sharedTokens?.focusOutline,
+                  inset: styles?.focusOutlineInset
                 }
-              } as any)
-            }
+              }
+            })}
           >
             <View
               {...omitProps(this.props, allowedProps)}
