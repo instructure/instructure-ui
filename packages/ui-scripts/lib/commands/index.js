@@ -29,6 +29,7 @@ import deprecate from './deprecate.js'
 import publish from './publish.js'
 import publishPrivate from './publish-private.js'
 import visualDiff from './visual-diff.ts'
+import transpileDiff from './transpile-diff.ts'
 import lint from '../test/lint.js'
 import bundle from '../build/webpack.js'
 import clean from '../build/clean.js'
@@ -46,6 +47,7 @@ export const yargCommands = [
   publish,
   publishPrivate,
   visualDiff,
+  transpileDiff,
   lint,
   bundle,
   clean,
