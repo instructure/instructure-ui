@@ -48,7 +48,7 @@ describe('<Table />', async () => {
 
   const renderTable = (props?: TableProps) =>
     render(
-      <Table caption="Test table" {...props}>
+      <Table caption={() => 'Test table'} {...props}>
         <Table.Head>
           <Table.Row>
             <Table.ColHeader id="foo">ColHeader</Table.ColHeader>
@@ -82,7 +82,7 @@ describe('<Table />', async () => {
   it('applies a fixed column layout', async () => {
     await renderTable({
       layout: 'fixed',
-      caption: 'Test table'
+      caption: () => 'Test table'
     })
     const table = screen.getByRole('table')
 
@@ -92,7 +92,7 @@ describe('<Table />', async () => {
   it('passes hover to table row', async () => {
     renderTable({
       hover: true,
-      caption: 'Test table'
+      caption: () => 'Test table'
     })
     const tableRows = screen.getAllByRole('row')
 
@@ -123,7 +123,7 @@ describe('<Table />', async () => {
   it('can render table in stacked layout', async () => {
     renderTable({
       layout: 'stacked',
-      caption: 'Test table'
+      caption: () => 'Test table'
     })
     const stackedTable = screen.getByRole('table')
 
@@ -135,7 +135,7 @@ describe('<Table />', async () => {
 
   it('can handle non-existent head in stacked layout', async () => {
     render(
-      <Table caption="Test table" layout="stacked">
+      <Table caption={() => 'Test table'} layout="stacked">
         <Table.Body></Table.Body>
       </Table>
     )
@@ -146,7 +146,7 @@ describe('<Table />', async () => {
 
   it('can handle empty head in stacked layout', async () => {
     render(
-      <Table caption="Test table" layout="stacked">
+      <Table caption={() => 'Test table'} layout="stacked">
         <Table.Head></Table.Head>
       </Table>
     )
@@ -157,7 +157,7 @@ describe('<Table />', async () => {
 
   it('can handle invalid header in stacked layout', async () => {
     render(
-      <Table caption="Test table" layout="stacked">
+      <Table caption={() => 'Test table'} layout="stacked">
         <Table.Head>
           <Table.Row>
             <Table.Cell>Foo</Table.Cell>
@@ -189,7 +189,7 @@ describe('<Table />', async () => {
 
   it('does not crash for invalid children in stacked layout', async () => {
     render(
-      <Table caption="Test table" layout="stacked">
+      <Table caption={() => 'Test table'} layout="stacked">
         test1
         <span>test</span>
         {/* @ts-ignore error is normal here */}
@@ -233,7 +233,7 @@ describe('<Table />', async () => {
       layout: TableProps['layout'] = 'auto'
     ) =>
       render(
-        <Table caption="Sortable table" layout={layout}>
+        <Table caption={() => 'Sortable table'} layout={layout}>
           <Table.Head>
             <Table.Row>
               <Table.ColHeader id="foo" {...props} {...handlers}>
@@ -348,6 +348,39 @@ describe('<Table />', async () => {
 
       expect(header).toHaveAttribute('aria-sort', 'descending')
     })
+
+    it('calls the caption function with the sorted header and direction', async () => {
+      const caption = vi.fn((header: string, direction: string) =>
+        header ? `Movies, sorted by ${header} ${direction}` : 'Movies'
+      )
+      const { container } = render(
+        <Table caption={caption}>
+          <Table.Head>
+            <Table.Row>
+              <Table.ColHeader id="foo" sortDirection="ascending">
+                Foo
+              </Table.ColHeader>
+              <Table.ColHeader id="bar">Bar</Table.ColHeader>
+            </Table.Row>
+          </Table.Head>
+          <Table.Body>
+            <Table.Row></Table.Row>
+          </Table.Body>
+        </Table>
+      )
+
+      expect(caption).toHaveBeenCalledWith('Foo', 'ascending')
+      expect(container.querySelector('caption')).toHaveTextContent(
+        'Movies, sorted by Foo ascending'
+      )
+    })
+
+    it('calls the caption function with an empty header and "none" when nothing is sorted', async () => {
+      const caption = vi.fn(() => 'Movies')
+      renderTable({ caption } as Partial<TableProps> as TableProps)
+
+      expect(caption).toHaveBeenCalledWith('', 'none')
+    })
   })
 
   describe('when using custom components', () => {
@@ -369,7 +402,7 @@ describe('<Table />', async () => {
         }
       }
       const table = render(
-        <Table caption="Test custom table">
+        <Table caption={() => 'Test custom table'}>
           <Table.Head>
             <Table.Row>
               <Table.ColHeader id="foo">ColHeader</Table.ColHeader>
@@ -410,7 +443,7 @@ describe('<Table />', async () => {
       }
 
       const table = render(
-        <Table caption="Test custom table">
+        <Table caption={() => 'Test custom table'}>
           <Table.Head>
             <CustomTableRow>
               <CustomTableCell id="foo">ColHeader</CustomTableCell>

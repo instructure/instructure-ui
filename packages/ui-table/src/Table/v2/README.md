@@ -54,7 +54,7 @@ const Example = () => {
   return (
     <div>
       {renderOptions()}
-      <Table caption="Top rated movies" layout={layout} hover={hover}>
+      <Table caption={() => 'Top rated movies'} layout={layout} hover={hover}>
         <Table.Head>
           <Table.Row>
             <Table.ColHeader id="Rank">Rank</Table.ColHeader>
@@ -114,7 +114,7 @@ const Example = ({ headers, rows }) => {
     >
       {({ layout }) => (
         <div>
-          <Table caption="Top rated movies" layout={layout}>
+          <Table caption={() => 'Top rated movies'} layout={layout}>
             <Table.Head>
               <Table.Row>
                 {(headers || []).map(({ id, text, width, textAlign }) => (
@@ -298,7 +298,7 @@ const SortableTable = ({ caption, headers, rows }) => {
       summary="Set text-align for columns"
       background="default"
     >
-      <Table caption="Set text-align for columns">
+      <Table caption={() => 'Set text-align for columns'}>
         <Table.Head>{renderHeaderRow()}</Table.Head>
         <Table.Body>
           <Table.Row>
@@ -375,7 +375,11 @@ const SortableTable = ({ caption, headers, rows }) => {
 
 render(
   <SortableTable
-    caption="Top rated movies"
+    caption={(sortBy, sortDirection) =>
+      sortBy
+        ? `Top rated movies, sorted by ${sortBy} (${sortDirection})`
+        : 'Top rated movies'
+    }
     headers={[
       {
         id: 'rank',
@@ -682,7 +686,11 @@ const renderRating = (rating) => (
 
 render(
   <SortableTable
-    caption="Top rated movies"
+    caption={(sortBy, sortDirection) =>
+      sortBy
+        ? `Top rated movies, sorted by ${sortBy} (${sortDirection})`
+        : 'Top rated movies'
+    }
     headers={[
       {
         id: 'Rank',
@@ -809,7 +817,7 @@ const Example = () => {
   return (
     <div>
       {renderOptions()}
-      <Table caption="Top rated movies" layout={layout} hover={hover}>
+      <Table caption={() => 'Top rated movies'} layout={layout} hover={hover}>
         <Table.Head>
           <Table.Row>
             <Table.ColHeader id="Rank">Rank</Table.ColHeader>
@@ -918,7 +926,7 @@ const Example = () => {
   return (
     <div>
       {renderOptions()}
-      <Table caption="Top rated movies" layout={layout} hover={hover}>
+      <Table caption={() => 'Top rated movies'} layout={layout} hover={hover}>
         <Table.Head>
           <CustomTableRow>
             <CustomTableCell scope="col">Rank</CustomTableCell>
@@ -1062,7 +1070,7 @@ const Example = () => {
   return (
     <div>
       {renderOptions()}
-      <Table caption="Top rated movies" layout={layout} hover={hover}>
+      <Table caption={() => 'Top rated movies'} layout={layout} hover={hover}>
         <Table.Head>
           <CustomTableRow>
             <CustomTableCell scope="col">Rank</CustomTableCell>

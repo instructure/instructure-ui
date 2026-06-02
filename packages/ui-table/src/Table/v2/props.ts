@@ -32,12 +32,20 @@ import type { NewComponentTypes } from '@instructure/ui-themes'
 
 type RowChild = React.ReactElement<{ children: React.ReactElement }>
 
+type TableCaption = (
+  sortByHeader: string,
+  sortDirection: 'none' | 'ascending' | 'descending'
+) => string
+
 type TableOwnProps = {
   /**
-   * Provide a screen reader friendly description. Anything passed to this
-   * prop will be wrapped by `<ScreenReaderContent>` when it is rendered.
+   * Provide a screen reader friendly description. The returned string is
+   * wrapped by `<ScreenReaderContent>` when it is rendered.
+   *
+   * This is a function so consumers can build a localized caption that also
+   * reflects the current sort state. See {@link TableCaption}.
    */
-  caption: React.ReactNode
+  caption: TableCaption
   /**
    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
@@ -93,6 +101,7 @@ const allowedProps: AllowedPropKeys = [
 export type {
   TableProps,
   TableStyle,
+  TableCaption,
   // children
   RowChild
 }

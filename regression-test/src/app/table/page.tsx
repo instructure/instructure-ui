@@ -32,7 +32,7 @@ export default function TablePage() {
   return (
     <main className="flex gap-12 p-8 flex-col items-start axe-test">
       <section>
-        <Table caption="Top rated movies" layout="auto">
+        <Table caption={() => 'Top rated movies'} layout="auto">
           <Table.Head>
             <Table.Row>
               <Table.ColHeader id="Rank">Rank</Table.ColHeader>
@@ -65,7 +65,11 @@ export default function TablePage() {
       </section>
 
       <section>
-        <Table caption="Top rated movies (fixed layout)" layout="fixed" hover>
+        <Table
+          caption={() => 'Top rated movies (fixed layout)'}
+          layout="fixed"
+          hover
+        >
           <Table.Head>
             <Table.Row>
               <Table.ColHeader id="Title" width="40%" textAlign="start">

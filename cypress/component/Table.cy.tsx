@@ -35,7 +35,7 @@ describe('<Table/>', () => {
     setHoverStateTo?: boolean
     hover?: boolean
   }) => (
-    <Table caption="Test table" hover={hover}>
+    <Table caption={() => 'Test table'} hover={hover}>
       <Table.Head>
         <Table.Row data-testid="target-row" setHoverStateTo={setHoverStateTo}>
           <Table.ColHeader id="foo">ColHeader</Table.ColHeader>
@@ -54,7 +54,7 @@ describe('<Table/>', () => {
   it('can render table head as a combobox when in stacked layout', () => {
     const sortFoo = cy.stub()
     cy.mount(
-      <Table caption="Sortable table" layout="stacked">
+      <Table caption={() => 'Sortable table'} layout="stacked">
         <Table.Head>
           <Table.Row>
             <Table.ColHeader id="id" onRequestSort={sortFoo}>

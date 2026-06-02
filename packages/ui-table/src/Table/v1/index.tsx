@@ -93,11 +93,18 @@ class Table extends Component<TableProps> {
     // so we use an aria-live region as a workaround
     const prevSortInfo = this.getSortedHeaderInfo(prevProps)
     const currentSortInfo = this.getSortedHeaderInfo(this.props)
-    // Only announce if sorting actually changed
+    // Only announce if sorting actually changed. A plain ReactNode caption
+    // ignores the sort state (see `getCaptionText`), so we only announce sort
+    // changes when `caption` is a function that can describe them.
     const sortingChanged =
       prevSortInfo?.header !== currentSortInfo?.header ||
       prevSortInfo?.direction !== currentSortInfo?.direction
-    if (sortingChanged && currentSortInfo && this._liveRegionRef) {
+    if (
+      sortingChanged &&
+      currentSortInfo &&
+      // typeof this.props.caption === 'function' &&
+      this._liveRegionRef
+    ) {
       // Clear any pending announcement
       clearTimeout(this._announcementTimeout)
       // Clear the live region first (part of the clear-then-set pattern)
@@ -154,7 +161,7 @@ class Table extends Component<TableProps> {
         const headerText =
           typeof colHeader.props.children === 'string'
             ? colHeader.props.children
-            : colHeader.props.children?.props?.children ?? ''
+            : (colHeader.props.children?.props?.children ?? '')
         return { header: headerText, direction: colHeader.props.sortDirection }
       }
     }
@@ -162,10 +169,13 @@ class Table extends Component<TableProps> {
   }
 
   getCaptionText(props: TableProps) {
+    const { caption } = props
     const sortInfo = this.getSortedHeaderInfo(props)
-    const caption = props.caption as string
-    if (!sortInfo) return caption
-    const sortText = ` Sorted by ${sortInfo.header} (${sortInfo.direction})`
+    if (typeof caption === 'function') {
+      return caption(sortInfo?.header ?? '', sortInfo?.direction ?? 'none')
+    }
+    const sortText = ` Sorted by ${sortInfo?.header} (${sortInfo?.direction})`
+
     return caption ? caption + sortText : sortText.trim()
   }
 

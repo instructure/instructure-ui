@@ -162,19 +162,15 @@ class Table extends Component<TableProps> {
 
   getCaptionText(props: TableProps) {
     const sortInfo = this.getSortedHeaderInfo(props)
-    const caption = props.caption as string
-    if (!sortInfo) return caption
-    const sortText = ` Sorted by ${sortInfo.header} (${sortInfo.direction})`
-    return caption ? caption + sortText : sortText.trim()
+    return props.caption(sortInfo?.header ?? '', sortInfo?.direction ?? 'none')
   }
 
   render() {
-    const { margin, layout, caption, children, hover, styles, minWidth } =
-      this.props
+    const { margin, layout, children, hover, styles, minWidth } = this.props
     const isStacked = layout === 'stacked'
     const captionText = this.getCaptionText(this.props)
 
-    if (!caption) {
+    if (!captionText) {
       error(false, `[Table] required prop caption is not set.`)
     }
 
@@ -213,7 +209,7 @@ class Table extends Component<TableProps> {
           aria-label={captionText}
         >
           {/* Caption for visual display and semantic HTML */}
-          {!isStacked && caption && (
+          {!isStacked && captionText && (
             <caption>
               <ScreenReaderContent>{captionText}</ScreenReaderContent>
             </caption>
