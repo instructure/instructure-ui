@@ -1,7 +1,7 @@
 ---
 title: Accessing the DOM
 category: Guides
-order: 3
+order: 4
 relevantForAI: true
 ---
 

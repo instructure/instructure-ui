@@ -303,9 +303,10 @@ class App extends Component<AppProps, AppState> {
     fetchMinorVersionData(signal)
       .then((minorVersionsData) => {
         if (minorVersionsData && minorVersionsData.libraryVersions.length > 0) {
-          // If URL has a version, use it; otherwise use default
-          const selectedMinorVersion =
-            urlMinorVersion ?? minorVersionsData.defaultVersion
+          const { libraryVersions } = minorVersionsData
+          const latestVersion = libraryVersions[libraryVersions.length - 1]
+          // If URL has a version, use it; otherwise use the latest version
+          const selectedMinorVersion = urlMinorVersion ?? latestVersion
           // Update globals before fetching docs so renders use correct components
           updateGlobalsForVersion(selectedMinorVersion)
           this.setState({
@@ -342,6 +343,48 @@ class App extends Component<AppProps, AppState> {
       prevState.layout !== this.state.layout
     ) {
       this.handleNavigationFocusRegion()
+    }
+
+    if (prevState.key !== this.state.key) {
+      this.handleMinorVersionForPage(this.state.key)
+    }
+
+    if (!prevState.minorVersionsData && this.state.minorVersionsData) {
+      this.handleMinorVersionForPage(this.state.key)
+    }
+  }
+
+  getLatestMinorVersion = () => {
+    const { minorVersionsData } = this.state
+    if (!minorVersionsData) return undefined
+    const { libraryVersions } = minorVersionsData
+    return libraryVersions[libraryVersions.length - 1]
+  }
+
+  handleMinorVersionForPage = (key: string | undefined) => {
+    const { selectedMinorVersion, minorVersionsData, docsData } = this.state
+    if (!minorVersionsData || !selectedMinorVersion || !key) return
+
+    const latestVersion = this.getLatestMinorVersion()!
+
+    if (key === 'legacy-theme-overrides') {
+      if (selectedMinorVersion !== 'v11_6') {
+        this.handleMinorVersionChange('v11_6')
+      }
+    } else if (key === 'new-theme-overrides') {
+      if (selectedMinorVersion !== latestVersion) {
+        this.handleMinorVersionChange(latestVersion)
+      }
+    } else {
+      const category = docsData?.docs[key]?.category
+      const isGuidePage =
+        !!category &&
+        !category.startsWith('components') &&
+        !category.startsWith('utilities')
+      if (isGuidePage && selectedMinorVersion !== latestVersion) {
+        // Guide pages (.md) always show with the latest version
+        this.handleMinorVersionChange(latestVersion)
+      }
     }
   }
 
@@ -554,8 +597,9 @@ class App extends Component<AppProps, AppState> {
   }
 
   renderThemeSelect() {
+    const { minorVersionsData, selectedMinorVersion } = this.state
     const allThemeKeys = Object.keys(this.state.docsData!.themes)
-    const showNewThemes = this.state.selectedMinorVersion !== 'v11_6'
+    const showNewThemes = selectedMinorVersion !== 'v11_6'
 
     const themeKeys = showNewThemes
       ? allThemeKeys.filter(
@@ -578,17 +622,56 @@ class App extends Component<AppProps, AppState> {
       return themeKey
     }
 
+    const formatMinorVersion = (version: string) => {
+      if (version === 'v11_6') return 'v1 (legacy)'
+      if (version === 'v11_7') return 'v2'
+      return version.replace(/_/g, '.')
+    }
+
     const smallScreen = this.state.layout === 'small'
     const currentThemeKey =
       this.state.themeKey && themeKeys.includes(this.state.themeKey)
         ? this.state.themeKey
         : themeKeys[0]
 
+    const { key, docsData } = this.state
+    const versionLockedPages = ['legacy-theme-overrides', 'new-theme-overrides']
+    if (versionLockedPages.includes(key ?? '')) return null
+
+    // Only show on Components pages — other categories (guides, utilities,
+    // themes, etc.) don't need theme or component-version switching.
+    const category = key ? docsData?.docs[key]?.category : undefined
+    if (!category || !category.startsWith('components')) return null
+
+    const showMinorVersionSelect =
+      minorVersionsData && minorVersionsData.libraryVersions.length > 1
+
     return themeKeys.length > 1 ? (
       <Flex
         margin={smallScreen ? 'none none medium' : 'none none x-small'}
         justifyItems={!smallScreen ? 'end' : 'start'}
+        wrap="wrap"
+        gap="small"
       >
+        {showMinorVersionSelect && (
+          <Flex.Item shouldGrow={smallScreen} shouldShrink={smallScreen}>
+            <Select
+              name="minorVersion"
+              renderLabel="Component version"
+              onChange={(_e, { value }) => {
+                if (value) this.handleMinorVersionChange(value as string)
+              }}
+              value={selectedMinorVersion ?? this.getLatestMinorVersion()}
+              width="16.5rem"
+            >
+              {[...minorVersionsData!.libraryVersions].reverse().map((ver) => (
+                <option key={ver} value={ver}>
+                  {formatMinorVersion(ver)}
+                </option>
+              ))}
+            </Select>
+          </Flex.Item>
+        )}
         <Flex.Item shouldGrow={smallScreen} shouldShrink={smallScreen}>
           <Select
             name="theme"
@@ -740,9 +823,19 @@ class App extends Component<AppProps, AppState> {
     // New-theme components are looked up via themeVariables.newTheme.components
     const themeVariables = themes[themeKey!].resource as ThemeType
     const heading = currentData.extension !== '.md' ? currentData.title : ''
+    const isGuidePage = currentData.extension === '.md'
     const documentContent = (
       <View as="div" padding="x-large none none">
         {this.renderThemeSelect()}
+        {isGuidePage && (
+          <Alert variant="info" margin="xx-large 0">
+            This page is made for the latest version (
+            {this.getLatestMinorVersion()?.replace('_', '.')}) of InstUI.{' '}
+            <Link href="component-versioning">
+              Learn more about the versioning system
+            </Link>
+          </Alert>
+        )}
         <View
           elementRef={this.mainContentRef}
           tabIndex={0}
@@ -996,8 +1089,6 @@ class App extends Component<AppProps, AppState> {
           version={version}
           versionsData={versionsData}
           minorVersionsData={this.state.minorVersionsData}
-          selectedMinorVersion={this.state.selectedMinorVersion}
-          onMinorVersionChange={this.handleMinorVersionChange}
         />
 
         <Nav
