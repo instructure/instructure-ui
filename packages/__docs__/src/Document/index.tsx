@@ -276,7 +276,7 @@ class Document extends Component<DocumentProps, DocumentState> {
   }
 
   renderUsage() {
-    const { esPath, id, displayName, packageName, title, componentVersion } =
+    const { id, displayName, packageName, title, componentVersion } =
       this.props.doc
     const { selectedMinorVersion } = this.props
     const importName = displayName || id
@@ -288,23 +288,17 @@ class Document extends Component<DocumentProps, DocumentState> {
         ? `${packageName}/${selectedMinorVersion}`
         : packageName
 
-    const example = []
+    if (!versionedPackageName) return
 
-    if (versionedPackageName) {
-      example.push(`\
-/*** ES Modules (with tree shaking) ***/
-import { ${importName} } from '${versionedPackageName}'
-`)
-    }
+    const example = `\
+import { ${importName} } from '${versionedPackageName}'`
 
-    if (esPath) {
-      example.push(`\
-/*** ES Modules (without tree shaking) ***/
-import { ${importName} } from '${esPath}'
-`)
-    }
-
-    if (example.length === 0) return
+    const versionLabel =
+      selectedMinorVersion === 'v11_6'
+        ? 'v1 (legacy)'
+        : selectedMinorVersion === 'v11_7'
+        ? 'v2'
+        : selectedMinorVersion?.replace(/_/g, '.')
 
     return (
       <View margin="xx-large 0" display="block">
@@ -321,10 +315,17 @@ import { ${importName} } from '${esPath}'
         </View>
         <SourceCodeEditor
           label={`How to use ${title}`}
-          defaultValue={example.join('\n')}
+          defaultValue={example}
           language="javascript"
           readOnly
         />
+        <View as="div" margin="small 0 0 0">
+          This import is pinned to the selected version (
+          <code>{selectedMinorVersion}</code> ↔ <code>{versionLabel}</code> in
+          the selector above); future breaking changes land at new paths. For
+          other import styles, see the{' '}
+          <Link href="component-versioning">Component versioning</Link> guide.
+        </View>
       </View>
     )
   }
