@@ -8,7 +8,67 @@ order: 2
 
 ## New theming system
 
-NOTE: this section is under development, will be updated soon
+InstUI v11.7 introduces a new theming engine. Components imported from `/v11_7` (the `v2` label in the docs "Component version" selector) consume design tokens directly from the active theme. Components imported from `/v11_6` (the `v1` label) continue to use the legacy `generateComponentTheme` approach. **Both engines run side-by-side in the same app without conflict** — you can migrate component-by-component on your own schedule.
+
+### What's different
+
+- **Layered token model.** Tokens are organized as **primitives** (raw values like colors and spacings) → **semantics** (contextual mappings like `color.text.base`) → **components** (per-component tokens). Cross-component concerns such as focus rings and box shadows live in `sharedTokens`. Most overrides happen at the component layer.
+- **No per-component `theme.ts`.** v2 components don't define a `generateComponentTheme` function, their tokens are emitted by the active theme rather than computed by the component itself.
+
+### New themes
+
+The new engine ships four themes:
+
+- **`legacyCanvas`** — visually identical to the old `canvas`, on the new engine. Recommended for apps migrating without a visual redesign.
+- **`legacyCanvasHighContrast`** — visual parity with old `canvasHighContrast`.
+- **`light`** — new light theme.
+- **`dark`** — new dark theme.
+
+The legacy `canvas` and `canvasHighContrast` themes still exist and remain the correct choice for v1 components.
+
+### Override mechanism
+
+The two entry points are the same as in the legacy system:
+
+- **Provider-scoped** — `themeOverride` prop on `InstUISettingsProvider`, applied to its subtree.
+- **Per-component** — `themeOverride` prop directly on a single component instance. Has the highest priority and overrides any provider-level setting for that instance.
+
+What changed:
+- **Theme overrides**: in v11.7 `InstUISettingsProvider`'s theme prop only accepts a full theme object. For v11.7 or later use the new `themeOverride` prop
+- **Token names/values**: Lots of components had their theme tokens changed -- removed, added or renamed. Check the rest of this guide for the full list of changes.
+
+`themeOverride` remains separate from the `theme` prop — `theme` swaps the active theme entirely, `themeOverride` layers changes on top. See [New theme overrides](new-theme-overrides) for subtree-scoped overrides, primitives / semantics overrides, shared tokens, and priority rules.
+
+### Migrating an app
+
+Because the legacy and new engines run side-by-side, **you don't have to migrate everything at once**. Reasonable strategies:
+
+- A few components first (e.g. `Alert` and `Button`), leaving the rest on `/v11_6`.
+- A whole route or feature subtree at a time, scoped via a local `InstUISettingsProvider` with the new theme.
+- The whole app in a single sweep.
+
+The recommended path uses the **`updateInstUIImportVersions` codemod**
+
+1. **Inspect first.** Run the codemod in **diagnose mode** (`--diagnose=true`) to list every versioned `@instructure/*` import in your codebase and the version each is pinned to. No files are modified.
+
+2. **Bump import paths.** Same codemod, now in update mode:
+
+   - All versioned components at once: `--versionTo=v11.7`.
+   - Only specific components: `--versionTo=v11.7 --components=Button,Alert` (useful for incremental migration).
+   - Only imports already at a specific version: `--versionFrom=v11.6 --versionTo=v11.7`.
+
+   Imports that mix versioned components with other symbols are split into two declarations automatically. Utilities and non-versioned exports are left untouched.
+
+   Learn more in the **Codemod** section ([full command reference below](upgrade-guide#Codemods))
+
+3. **Switch the theme.** Replace `canvas` with `legacyCanvas` wherever the bumped components live — visuals stay identical and the new override surface becomes available. Use `light` or `dark` for a redesign. The `theme` prop on `InstUISettingsProvider` can scope this to a subtree.
+
+4. **Update per-component theme overrides.** Many v2 components have renamed / added / removed tokens — see the component-specific sections below for the exact changes.
+
+### Further reading
+
+- **[Component versioning](component-versioning)** — how the two engines coexist, import paths, and which themes work with which version.
+- **[New theme overrides](new-theme-overrides)** — full guide to the new override structure with worked examples.
 
 ## New icons
 
