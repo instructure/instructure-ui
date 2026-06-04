@@ -22,31 +22,9 @@
  * SOFTWARE.
  */
 
-const path = require('path')
-const getPackages = require('./get-packages')
-const childProcess = require('child_process')
+//this file prepares for the merge of the pkg-utils package into this folder
+import getDetailedPackageList from './get-detailed-package-list.ts'
 
-/**
- * @param [commitIsh] {string}
- * @param [allPackages] {any[]}
- */
-module.exports = function getChangedPackages(
-  commitIsh = 'HEAD^1',
-  allPackages
-) {
-  allPackages = allPackages || getPackages() // eslint-disable-line no-param-reassign
-
-  const result = childProcess
-    .execSync('git diff ' + commitIsh + ' --name-only', { stdio: 'pipe' })
-    .toString()
-  const changedFiles = result.split('\n')
-
-  return allPackages.filter((pkg) => {
-    const relativePath = path.relative('.', pkg.location) + path.sep
-    return (
-      changedFiles.findIndex((changedFile) =>
-        changedFile.startsWith(relativePath)
-      ) >= 0
-    )
-  })
+export default {
+  getDetailedPackageList
 }

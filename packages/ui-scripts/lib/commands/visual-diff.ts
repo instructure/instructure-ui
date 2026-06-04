@@ -57,7 +57,8 @@ type Args = {
 
 type Meta = Record<string, string>
 
-function sourceLinkFor(
+/** @internal — exported only for tests; not part of the package's public API. */
+export function sourceLinkFor(
   name: string,
   meta: Meta | null,
   sourceBaseUrl?: string
@@ -83,7 +84,8 @@ function walk(dir: string): string[] {
   return out
 }
 
-function indexByName(files: string[]): Map<string, { path: string }> {
+/** @internal — exported only for tests; not part of the package's public API. */
+export function indexByName(files: string[]): Map<string, { path: string }> {
   const map = new Map<string, { path: string }>()
   for (const f of files) map.set(basename(f), { path: f })
   return map
@@ -121,7 +123,8 @@ function copyInto(src: string, destDir: string, name: string) {
   copyFileSync(src, join(destDir, name))
 }
 
-function badgeFor(s: Status): string {
+/** @internal — exported only for tests; not part of the package's public API. */
+export function badgeFor(s: Status): string {
   return {
     unchanged: '<span class="pill pass">ok</span>',
     changed: '<span class="pill fail">changed</span>',
@@ -130,7 +133,8 @@ function badgeFor(s: Status): string {
   }[s]
 }
 
-function thumb(mode: string, name: string): string {
+/** @internal — exported only for tests; not part of the package's public API. */
+export function thumb(mode: string, name: string): string {
   return `<img loading="lazy" src="${mode}/${name}" data-name="${name}" data-mode="${mode}" class="thumb" />`
 }
 
@@ -140,13 +144,19 @@ function row(r: Result, meta: Meta | null, sourceBaseUrl?: string): string {
   const d = r.status === 'changed' ? thumb('diff', r.name) : ''
   const pixelMeta =
     r.status === 'changed'
-      ? `<div class="meta">${r.numDiff} pixels differ${r.sizeMismatch ? ' · size mismatch' : ''}</div>`
+      ? `<div class="meta">${r.numDiff} pixels differ${
+          r.sizeMismatch ? ' · size mismatch' : ''
+        }</div>`
       : ''
   const source = sourceLinkFor(r.name, meta, sourceBaseUrl)
   const hasBoth = r.status === 'changed' || r.status === 'unchanged'
   return `
-    <section class="row" data-status="${r.status}" data-name="${r.name}" data-has-both="${hasBoth}">
-      <header><h2>${r.name}</h2>${badgeFor(r.status)}${pixelMeta}${source}</header>
+    <section class="row" data-status="${r.status}" data-name="${
+    r.name
+  }" data-has-both="${hasBoth}">
+      <header><h2>${r.name}</h2>${badgeFor(
+    r.status
+  )}${pixelMeta}${source}</header>
       <div class="grid"><figure><figcaption>Baseline</figcaption>${b}</figure><figure><figcaption>Actual</figcaption>${a}</figure><figure><figcaption>Diff</figcaption>${d}</figure></div>
     </section>`
 }
@@ -163,8 +173,8 @@ function renderHtml(
     prNumber && prUrl
       ? `<a href="${prUrl}" style="font-weight:600;color:#0969da;text-decoration:none;">PR #${prNumber}</a>`
       : prNumber
-        ? `<span style="font-weight:600;">PR #${prNumber}</span>`
-        : ''
+      ? `<span style="font-weight:600;">PR #${prNumber}</span>`
+      : ''
   return `<!doctype html>
 <html><head><meta charset="utf-8"><title>Visual regression report</title>
 <style>
@@ -233,7 +243,9 @@ function renderHtml(
       <input id="search" type="search" placeholder="Filter by name…" autocomplete="off" />
     </div>
   </header>
-  <main>${results.map(r => row(r, meta ?? null, sourceBaseUrl)).join('')}</main>
+  <main>${results
+    .map((r) => row(r, meta ?? null, sourceBaseUrl))
+    .join('')}</main>
 
   <div class="lightbox" id="lb" aria-hidden="true">
     <div class="bar">
@@ -414,7 +426,13 @@ function renderHtml(
 }
 
 function run(args: Args): number {
-  const { actualDir, baselineDir, outputDir, threshold, failOnMissingBaseline } = args
+  const {
+    actualDir,
+    baselineDir,
+    outputDir,
+    threshold,
+    failOnMissingBaseline
+  } = args
 
   mkdirSync(outputDir, { recursive: true })
   const actuals = indexByName(walk(actualDir))
@@ -444,20 +462,25 @@ function run(args: Args): number {
 
     const baseline = loadPng(b.path)
     const actual = loadPng(a.path)
-    const { diff, numDiff, sizeMismatch } = diffPair(baseline, actual, threshold)
+    const { diff, numDiff, sizeMismatch } = diffPair(
+      baseline,
+      actual,
+      threshold
+    )
     mkdirSync(join(outputDir, 'diff'), { recursive: true })
     writeFileSync(join(outputDir, 'diff', name), PNG.sync.write(diff))
 
-    const status: Status = numDiff === 0 && !sizeMismatch ? 'unchanged' : 'changed'
+    const status: Status =
+      numDiff === 0 && !sizeMismatch ? 'unchanged' : 'changed'
     results.push({ name, status, numDiff, sizeMismatch })
   }
 
   const summary = {
     total: results.length,
-    unchanged: results.filter(r => r.status === 'unchanged').length,
-    changed: results.filter(r => r.status === 'changed').length,
-    added: results.filter(r => r.status === 'added').length,
-    removed: results.filter(r => r.status === 'removed').length
+    unchanged: results.filter((r) => r.status === 'unchanged').length,
+    changed: results.filter((r) => r.status === 'changed').length,
+    added: results.filter((r) => r.status === 'added').length,
+    removed: results.filter((r) => r.status === 'removed').length
   }
 
   writeFileSync(
@@ -475,7 +498,14 @@ function run(args: Args): number {
 
   writeFileSync(
     join(outputDir, 'index.html'),
-    renderHtml(results, summary, args.prNumber, args.prUrl, meta, args.sourceBaseUrl)
+    renderHtml(
+      results,
+      summary,
+      args.prNumber,
+      args.prUrl,
+      meta,
+      args.sourceBaseUrl
+    )
   )
 
   console.log(
@@ -503,7 +533,8 @@ export default {
     },
     'output-dir': {
       type: 'string',
-      describe: 'Directory to write the HTML report, diff PNGs, and summary.json',
+      describe:
+        'Directory to write the HTML report, diff PNGs, and summary.json',
       default: 'visual-report'
     },
     threshold: {
@@ -526,11 +557,13 @@ export default {
     },
     meta: {
       type: 'string',
-      describe: 'Path to a JSON file mapping screenshot slug to the visited URL path'
+      describe:
+        'Path to a JSON file mapping screenshot slug to the visited URL path'
     },
     'source-base-url': {
       type: 'string',
-      describe: 'Base URL for source-file links in the report (e.g. GitHub blob URL of the app root)'
+      describe:
+        'Base URL for source-file links in the report (e.g. GitHub blob URL of the app root)'
     }
   },
   handler: (argv: Args) => {

@@ -22,31 +22,38 @@
  * SOFTWARE.
  */
 
-const path = require('path')
-const getPackages = require('./get-packages')
-const childProcess = require('child_process')
+import bump from './bump.ts'
+import server from './server.ts'
+import tag from './tag.ts'
+import deprecate from './deprecate.ts'
+import publish from './publish.ts'
+import publishPrivate from './publish-private.ts'
+import visualDiff from './visual-diff.ts'
+import transpileDiff from './transpile-diff.ts'
+import lint from '../test/lint.ts'
+import bundle from '../build/webpack.ts'
+import clean from '../build/clean.ts'
+import build from '../build/babel.ts'
+import generateAllTokens from '../build/generate-all-tokens.ts'
+import buildIcons from '../icons/build-icons.ts'
+import buildThemes from '../build/build-themes.ts'
+import createComponentVersion from './create-component-version.ts'
 
-/**
- * @param [commitIsh] {string}
- * @param [allPackages] {any[]}
- */
-module.exports = function getChangedPackages(
-  commitIsh = 'HEAD^1',
-  allPackages
-) {
-  allPackages = allPackages || getPackages() // eslint-disable-line no-param-reassign
-
-  const result = childProcess
-    .execSync('git diff ' + commitIsh + ' --name-only', { stdio: 'pipe' })
-    .toString()
-  const changedFiles = result.split('\n')
-
-  return allPackages.filter((pkg) => {
-    const relativePath = path.relative('.', pkg.location) + path.sep
-    return (
-      changedFiles.findIndex((changedFile) =>
-        changedFile.startsWith(relativePath)
-      ) >= 0
-    )
-  })
-}
+export const yargCommands = [
+  bump,
+  server,
+  tag,
+  deprecate,
+  publish,
+  publishPrivate,
+  visualDiff,
+  transpileDiff,
+  lint,
+  bundle,
+  clean,
+  build,
+  generateAllTokens,
+  buildIcons,
+  buildThemes,
+  createComponentVersion
+]

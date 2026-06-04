@@ -21,32 +21,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { runCommandSync, resolveBin } from '@instructure/command-utils'
 
-const path = require('path')
-const getPackages = require('./get-packages')
-const childProcess = require('child_process')
-
-/**
- * @param [commitIsh] {string}
- * @param [allPackages] {any[]}
- */
-module.exports = function getChangedPackages(
-  commitIsh = 'HEAD^1',
-  allPackages
-) {
-  allPackages = allPackages || getPackages() // eslint-disable-line no-param-reassign
-
-  const result = childProcess
-    .execSync('git diff ' + commitIsh + ' --name-only', { stdio: 'pipe' })
-    .toString()
-  const changedFiles = result.split('\n')
-
-  return allPackages.filter((pkg) => {
-    const relativePath = path.relative('.', pkg.location) + path.sep
-    return (
-      changedFiles.findIndex((changedFile) =>
-        changedFile.startsWith(relativePath)
-      ) >= 0
+export default {
+  command: 'server',
+  desc: 'Starts a HTTP server serving the __build__ folder',
+  builder: {
+    port: {
+      alias: 'p',
+      type: 'number',
+      describe: 'port to use.',
+      default: 9090
+    }
+  },
+  handler: (argv: any) => {
+    process.exit(
+      runCommandSync(resolveBin('http-server'), ['__build__', '-p', argv.port])
+        .status
     )
-  })
+  }
 }

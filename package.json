@@ -114,7 +114,7 @@
     "git-raw-commits>dargs": "Force dargs@7.0.0 (CommonJS) for git-raw-commits@3.0.0 used by lerna. pnpm hoisting was causing ESM dargs@8.1.0 to be resolved instead, breaking 'pnpm run bump' with 'TypeError: dargs is not a function'"
   },
   "engines": {
-    "node": ">=22",
+    "node": ">=22.18.0",
     "npm": "Use pnpm instead.",
     "pnpm": ">=10"
   },

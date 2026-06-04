@@ -1,0 +1,93 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 - present Instructure, Inc.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+import { execSync } from 'node:child_process'
+import * as pkgUtils from '@instructure/pkg-utils'
+import { error, info } from '@instructure/command-utils'
+import type { Argv } from 'yargs'
+import { addNewExportsEntiresToPackageJSONs } from '../utils/addNewExportsEntiresToPackageJSONs.ts'
+import { addNewExportFileToMetaPackage } from '../utils/addNewExportFileToMetaPackage.ts'
+
+import {
+  commitVersionBump,
+  checkWorkingDirectory,
+  getCommitsSinceLastRelease
+} from '../utils/git.ts'
+import { bumpPackages } from '../utils/npm.ts'
+
+const calcNextVersionType = () => {
+  if (getCommitsSinceLastRelease().includes('BREAKING CHANGE')) {
+    return 'minor'
+  }
+  return 'patch'
+}
+
+export default {
+  command: 'bump',
+  desc: "bump version in all package.json-s, generate changelogs and commit this change. Use the releaseType param to explicitely tell lerna what version to bump to. (patch, minor, major, prerelease. Prerelease means that it'll publish a security postfixed version)",
+  builder: (yargs: Argv) => {
+    yargs.option('releaseType', {
+      type: 'string',
+      describe:
+        'optional release type/version argument: major, minor, patch, prerelease, [version]'
+    })
+  },
+  handler: async (argv: any) => {
+    const pkgJSON = pkgUtils.getPackageJSON()
+    // optional release type/version argument: major, minor, patch, prerelease [version]
+    // e.g. ui-scripts bump --releaseType=major
+    await bump(pkgJSON.name, argv.releaseType)
+  }
+}
+
+async function bump(packageName: string, requestedVersion: string) {
+  const newVersionType = requestedVersion ?? calcNextVersionType()
+  checkWorkingDirectory()
+
+  let releaseVersion
+  try {
+    releaseVersion = await bumpPackages(packageName, newVersionType)
+    info('📦 Running pnpm install to update pnpm-lock.yaml!')
+    execSync('pnpm install', { stdio: 'inherit' })
+  } catch (err) {
+    error(err)
+    process.exit(1)
+  }
+  info(
+    `💾  Committing version bump commit for ${packageName} ${releaseVersion}...`
+  )
+  if (newVersionType !== 'patch') {
+    await addNewExportsEntiresToPackageJSONs(releaseVersion)
+    await addNewExportFileToMetaPackage(releaseVersion)
+  }
+
+  try {
+    commitVersionBump(releaseVersion)
+  } catch (err) {
+    error(err)
+    process.exit(1)
+  }
+
+  info(`💾  Version bump for ${packageName} to ${releaseVersion} complete!`)
+}

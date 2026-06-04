@@ -21,32 +21,40 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import path from 'path'
+import getGlyphData from './get-glyph-data.ts'
 
-const path = require('path')
-const getPackages = require('./get-packages')
-const childProcess = require('child_process')
+export default function generateLegacyIconsData() {
+  const svgDir = path.join(process.cwd(), 'svg/')
+  const bidirectionalList: string[] = []
 
-/**
- * @param [commitIsh] {string}
- * @param [allPackages] {any[]}
- */
-module.exports = function getChangedPackages(
-  commitIsh = 'HEAD^1',
-  allPackages
-) {
-  allPackages = allPackages || getPackages() // eslint-disable-line no-param-reassign
+  const glyphsRaw = getGlyphData(svgDir, bidirectionalList, 'Icon')
 
-  const result = childProcess
-    .execSync('git diff ' + commitIsh + ' --name-only', { stdio: 'pipe' })
-    .toString()
-  const changedFiles = result.split('\n')
+  // Group by glyphName to merge Line and Solid variants
+  type LegacyIconData = {
+    name: string
+    glyphName: string
+    bidirectional: boolean
+    lineSrc?: string
+    solidSrc?: string
+  }
 
-  return allPackages.filter((pkg) => {
-    const relativePath = path.relative('.', pkg.location) + path.sep
-    return (
-      changedFiles.findIndex((changedFile) =>
-        changedFile.startsWith(relativePath)
-      ) >= 0
+  return Object.values(
+    glyphsRaw.reduce<Record<string, LegacyIconData>>(
+      (acc, { name, glyphName, variant, src, bidirectional }) => {
+        const existing: LegacyIconData = acc[glyphName] || {
+          name,
+          glyphName,
+          bidirectional
+        }
+        const updated: LegacyIconData = { ...existing }
+
+        if (variant === 'Line') updated.lineSrc = src
+        if (variant === 'Solid') updated.solidSrc = src
+
+        return { ...acc, [glyphName]: updated }
+      },
+      {}
     )
-  })
+  )
 }

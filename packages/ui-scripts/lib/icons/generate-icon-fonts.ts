@@ -22,31 +22,34 @@
  * SOFTWARE.
  */
 
-const path = require('path')
-const getPackages = require('./get-packages')
-const childProcess = require('child_process')
+import { generateFonts, FontAssetType, OtherAssetType } from 'fantasticon'
 
-/**
- * @param [commitIsh] {string}
- * @param [allPackages] {any[]}
- */
-module.exports = function getChangedPackages(
-  commitIsh = 'HEAD^1',
-  allPackages
-) {
-  allPackages = allPackages || getPackages() // eslint-disable-line no-param-reassign
+const config = {
+  // inputDir: './src/icons',  // Directory where SVG files are located
+  // outputDir: './dist/fonts',  // Directory where fonts will be generated
+  // prefix: 'icon',  // Prefix for icon CSS classes
+  // name: 'my-icon-font',  // Name of the generated font
+  fontTypes: [FontAssetType.WOFF2], // Font formats to generate
+  assetTypes: [OtherAssetType.CSS], // Additional assets like CSS, HTML preview
+  normalize: true // Normalize SVG sizes
+}
 
-  const result = childProcess
-    .execSync('git diff ' + commitIsh + ' --name-only', { stdio: 'pipe' })
-    .toString()
-  const changedFiles = result.split('\n')
-
-  return allPackages.filter((pkg) => {
-    const relativePath = path.relative('.', pkg.location) + path.sep
-    return (
-      changedFiles.findIndex((changedFile) =>
-        changedFile.startsWith(relativePath)
-      ) >= 0
-    )
-  })
+export default function generateIconFonts({
+  inputDir,
+  outputDir,
+  prefix,
+  name
+}: {
+  inputDir: string
+  outputDir: string
+  prefix: string
+  name: string
+}) {
+  generateFonts({ ...config, inputDir, outputDir, prefix, name })
+    .then((_result) => {
+      //console.log('Icon font generated:', result)
+    })
+    .catch((error) => {
+      console.error('Error generating icon font:', error)
+    })
 }

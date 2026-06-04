@@ -24,7 +24,7 @@
 
 /**
  * Generates a list of all versioned components based on the @instructure/ui meta package
- * Run with: node --experimental-strip-types scripts/generateVersionedExports.ts
+ * Run with: node scripts/generateVersionedExports.ts
  * from the packages/ui-codemods directory.
  */
 

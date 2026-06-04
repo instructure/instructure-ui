@@ -16,7 +16,7 @@
     "lint": "ui-scripts lint",
     "lint:fix": "ui-scripts lint --fix",
     "ts:check": "tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false",
-    "generate:versioned-exports": "node --experimental-strip-types scripts/generateVersionedExports.ts"
+    "generate:versioned-exports": "node scripts/generateVersionedExports.ts"
   },
   "license": "MIT",
   "dependencies": {
