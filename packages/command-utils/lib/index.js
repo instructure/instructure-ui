@@ -76,7 +76,7 @@ class Command {
 /**
  * @param bin {string}  The binary name, e.g. `pwd`
  * @param args {string[]} command arguments
- * @param envVars {Object.<string, string>} Environment variables
+ * @param [envVars] {Object.<string, string>} Environment variables
  */
 function getCommand(bin, args, envVars) {
   return new Command(bin, args, envVars)

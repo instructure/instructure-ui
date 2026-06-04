@@ -24,7 +24,7 @@
 
 import fs from 'fs'
 import path from 'path'
-import { svg2jsx } from './svg2jsx.js'
+import { svg2jsx } from './svg2jsx.ts'
 
 const HEADER = `/*
  * The MIT License (MIT)

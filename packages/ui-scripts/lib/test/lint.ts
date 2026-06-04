@@ -21,32 +21,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { runCommandSync } from '@instructure/command-utils'
+import type { Argv } from 'yargs'
 
-const path = require('path')
-const getPackages = require('./get-packages')
-const childProcess = require('child_process')
+export default {
+  command: 'lint',
+  desc: 'lint files',
+  builder: (yargs: Argv) => {
+    yargs.option('fix', { boolean: true, desc: 'Fix lint issues' })
+    yargs.strictOptions(true)
+  },
+  handler: async (argv: any) => {
+    const paths = argv._.slice(1)
+    let jspaths = ['.']
 
-/**
- * @param [commitIsh] {string}
- * @param [allPackages] {any[]}
- */
-module.exports = function getChangedPackages(
-  commitIsh = 'HEAD^1',
-  allPackages
-) {
-  allPackages = allPackages || getPackages() // eslint-disable-line no-param-reassign
-
-  const result = childProcess
-    .execSync('git diff ' + commitIsh + ' --name-only', { stdio: 'pipe' })
-    .toString()
-  const changedFiles = result.split('\n')
-
-  return allPackages.filter((pkg) => {
-    const relativePath = path.relative('.', pkg.location) + path.sep
-    return (
-      changedFiles.findIndex((changedFile) =>
-        changedFile.startsWith(relativePath)
-      ) >= 0
-    )
-  })
+    if (paths.length) {
+      jspaths = paths.filter((path: string) =>
+        ['js', 'jsx', 'ts', 'tsx'].some(
+          (ext) => path.split('.').slice(-1)[0] === ext
+        )
+      )
+    }
+    if (jspaths.length) {
+      runCommandSync('eslint', argv.fix ? [...jspaths, '--fix'] : jspaths)
+    }
+  }
 }

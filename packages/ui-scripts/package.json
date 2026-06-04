@@ -4,7 +4,7 @@
   "version": "11.7.3",
   "description": "A UI build scripts library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
-  "main": "./lib/index.js",
+  "main": "./lib/index.ts",
   "type": "module",
   "repository": {
     "type": "git",
@@ -12,11 +12,12 @@
   },
   "homepage": "https://instructure.github.io/instructure-ui/",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
-  "bin": "./lib/index.js",
+  "bin": "./lib/index.ts",
   "scripts": {
     "lint": "ui-scripts lint",
     "lint:fix": "ui-scripts lint --fix",
-    "help": "ui-scripts help"
+    "help": "ui-scripts help",
+    "ts:check": "tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false"
   },
   "license": "MIT",
   "dependencies": {
@@ -48,8 +49,10 @@
     "access": "public"
   },
   "devDependencies": {
+    "@types/lodash.isplainobject": "^4.0.9",
     "@types/pixelmatch": "^5.2.6",
     "@types/pngjs": "^6.0.5",
+    "@types/semver": "^7.7.1",
     "fantasticon": "^4.1.0",
     "svgo": "^4.0.1",
     "@types/yargs": "^17.0.35"

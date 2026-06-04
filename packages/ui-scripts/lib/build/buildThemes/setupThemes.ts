@@ -23,15 +23,15 @@
  */
 
 import { promises } from 'fs'
-import createFile from './createFile.js'
-import { generatePrimitives, generateType } from './generatePrimitives.js'
+import createFile from './createFile.ts'
+import { generatePrimitives, generateType } from './generatePrimitives.ts'
 import generateSemantics, {
   generateSemanticsType,
   mergeSemanticSets
 } from './generateSemantics.ts'
 import generateComponent, {
   generateComponentType
-} from './generateComponents.js'
+} from './generateComponents.ts'
 import { resolveBin, runCommandAsync } from '@instructure/command-utils'
 
 // transform to an object for easier handling

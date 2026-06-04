@@ -22,31 +22,38 @@
  * SOFTWARE.
  */
 
-const path = require('path')
-const getPackages = require('./get-packages')
-const childProcess = require('child_process')
+import { readdir, readFile } from 'node:fs/promises'
+import { join } from 'node:path'
+
+const root = process.cwd()
+
+type DetailedPackage = {
+  data: any | null
+  path: string
+}
 
 /**
- * @param [commitIsh] {string}
- * @param [allPackages] {any[]}
+ * Reads all ui-* package directories and returns their parsed package.json
+ * contents alongside the file path. Packages with unreadable/invalid
+ * package.json files are silently excluded.
  */
-module.exports = function getChangedPackages(
-  commitIsh = 'HEAD^1',
-  allPackages
-) {
-  allPackages = allPackages || getPackages() // eslint-disable-line no-param-reassign
+const getDetailedPackageList = async (): Promise<DetailedPackage[]> => {
+  const entries = await readdir(join(root, 'packages'), { withFileTypes: true })
+  const uiDirs = entries.filter(
+    (e) => e.isDirectory() && e.name.startsWith('ui-')
+  )
 
-  const result = childProcess
-    .execSync('git diff ' + commitIsh + ' --name-only', { stdio: 'pipe' })
-    .toString()
-  const changedFiles = result.split('\n')
-
-  return allPackages.filter((pkg) => {
-    const relativePath = path.relative('.', pkg.location) + path.sep
-    return (
-      changedFiles.findIndex((changedFile) =>
-        changedFile.startsWith(relativePath)
-      ) >= 0
+  return (
+    await Promise.all(
+      uiDirs.map(async (d) => {
+        const path = join(root, 'packages', d.name, 'package.json')
+        const data = await readFile(path, 'utf-8')
+          .then(JSON.parse)
+          .catch(() => null)
+        return { data, path }
+      })
     )
-  })
+  ).filter(Boolean)
 }
+
+export default getDetailedPackageList

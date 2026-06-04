@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 /*
  * The MIT License (MIT)
  *
@@ -22,31 +24,11 @@
  * SOFTWARE.
  */
 
-const path = require('path')
-const getPackages = require('./get-packages')
-const childProcess = require('child_process')
+import yargs from 'yargs'
+import { yargCommands } from './commands/index.ts'
+import { hideBin } from 'yargs/helpers'
 
-/**
- * @param [commitIsh] {string}
- * @param [allPackages] {any[]}
- */
-module.exports = function getChangedPackages(
-  commitIsh = 'HEAD^1',
-  allPackages
-) {
-  allPackages = allPackages || getPackages() // eslint-disable-line no-param-reassign
-
-  const result = childProcess
-    .execSync('git diff ' + commitIsh + ' --name-only', { stdio: 'pipe' })
-    .toString()
-  const changedFiles = result.split('\n')
-
-  return allPackages.filter((pkg) => {
-    const relativePath = path.relative('.', pkg.location) + path.sep
-    return (
-      changedFiles.findIndex((changedFile) =>
-        changedFile.startsWith(relativePath)
-      ) >= 0
-    )
-  })
-}
+// https://github.com/yargs/yargs/blob/main/docs/advanced.md#example-command-hierarchy-using-indexmjs
+yargs(hideBin(process.argv))
+  .strictOptions(true)
+  .command(yargCommands as any).argv

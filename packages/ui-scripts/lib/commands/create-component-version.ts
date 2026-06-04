@@ -194,8 +194,9 @@ function discoverComponents(repoRoot: string): ComponentInfo[] {
 
 /**
  * Simple fuzzy match: all query characters must appear in order.
+ * @internal — exported only for tests; not part of the package's public API.
  */
-function fuzzyMatch(
+export function fuzzyMatch(
   components: ComponentInfo[],
   query: string
 ): ComponentInfo[] {

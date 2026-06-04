@@ -27,6 +27,9 @@ const path = require('path')
 const readPkgUp = require('read-pkg-up')
 const Package = require('@lerna/package').Package
 
+/**
+ * @param [options] {readPkgUp.NormalizeOptions}
+ */
 exports.getPackage = function getPackage(options) {
   const result = readPackage(options)
   return new Package(result.packageJson, path.dirname(result.path))
@@ -34,7 +37,7 @@ exports.getPackage = function getPackage(options) {
 
 /**
  * Reads a package.json
- * @param options {readPkgUp.NormalizeOptions}
+ * @param [options] {readPkgUp.NormalizeOptions}
  * @returns {readPkgUp.NormalizedPackageJson}
  */
 exports.getPackageJSON = function getPackageJSON(options) {
