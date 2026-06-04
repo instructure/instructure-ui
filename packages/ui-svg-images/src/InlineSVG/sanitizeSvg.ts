@@ -22,7 +22,16 @@
  * SOFTWARE.
  */
 
-import DOMPurify from 'dompurify'
+import createDOMPurify from 'dompurify'
+
+// Use a dedicated DOMPurify instance instead of the shared singleton so that
+// our SVG profile never leaks onto the global instance other code relies on,
+// and our sanitization stays correct even if someone else mutates the
+// singleton via setConfig(). `window` is guarded for SSR; passing `undefined`
+// yields an unsupported instance whose `sanitize` we never reach.
+const purify = createDOMPurify(
+  typeof window === 'undefined' ? undefined : window
+)
 
 // Sanitize a full `<svg>...</svg>` string. DOMPurify only operates when a DOM
 // is available (i.e. in the browser); on the server it returns empty so unsafe
@@ -30,9 +39,8 @@ import DOMPurify from 'dompurify'
 // outer attributes are filtered in the same pass as the inner content.
 function sanitizeSvg(src: string) {
   if (typeof src !== 'string' || src === '') return src
-  if (!DOMPurify.isSupported) return ''
-  DOMPurify.setConfig({ USE_PROFILES: { svg: true, svgFilters: true } })
-  return DOMPurify.sanitize(src)
+  if (!purify.isSupported) return ''
+  return purify.sanitize(src, { USE_PROFILES: { svg: true, svgFilters: true } })
 }
 
 export default sanitizeSvg

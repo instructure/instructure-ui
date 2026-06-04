@@ -24,6 +24,7 @@
 
 import '@testing-library/jest-dom'
 import { vi } from 'vitest'
+import DOMPurifySingleton from 'dompurify'
 import { safeHref } from '../safeHref'
 
 describe('safeHref', () => {
@@ -124,5 +125,32 @@ describe('safeHref', () => {
     expect(safeHref('javascript:alert(1)', 'img', 'src')).toBeUndefined()
     expect(safeHref('javascript:alert(1)', 'a', 'href')).toBeUndefined()
     expect(safeHref('javascript:alert(1)', 'form', 'action')).toBeUndefined()
+  })
+
+  describe('global DOMPurify singleton isolation', () => {
+    afterEach(() => {
+      DOMPurifySingleton.clearConfig()
+    })
+
+    it('keeps validating correctly when the global singleton is restricted via setConfig', () => {
+      DOMPurifySingleton.setConfig({ USE_PROFILES: { svg: true } })
+
+      expect(safeHref('https://example.com', 'a', 'href')).toBe(
+        'https://example.com'
+      )
+      expect(safeHref('mailto:a@b.com', 'a', 'href')).toBe('mailto:a@b.com')
+      expect(safeHref('javascript:alert(1)', 'a', 'href')).toBeUndefined()
+    })
+
+    it('does not mutate the global singleton config', () => {
+      safeHref('javascript:alert(1)', 'a', 'href')
+
+      const out = DOMPurifySingleton.sanitize(
+        '<svg><circle r="5"></circle></svg>'
+      )
+
+      expect(out).toContain('<svg')
+      expect(out).toContain('<circle')
+    })
   })
 })
