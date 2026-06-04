@@ -23,6 +23,7 @@
  */
 
 import '@testing-library/jest-dom'
+import DOMPurifySingleton from 'dompurify'
 import { sanitizeSvg } from '../sanitizeSvg'
 
 describe('sanitizeSvg', () => {
@@ -136,5 +137,31 @@ describe('sanitizeSvg', () => {
     expect(sanitizeSvg('')).toBe('')
     // @ts-expect-error - testing runtime safety
     expect(sanitizeSvg(undefined)).toBeUndefined()
+  })
+
+  describe('global DOMPurify singleton isolation', () => {
+    afterEach(() => {
+      DOMPurifySingleton.clearConfig()
+    })
+
+    it('sanitizes correctly when the global singleton is restricted via setConfig', () => {
+      DOMPurifySingleton.setConfig({ USE_PROFILES: { html: true } })
+
+      const out = sanitizeSvg(
+        `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="red" /></svg>`
+      )
+
+      expect(out).toMatch(/<circle\b[^>]*cx="50"/)
+      expect(out).toMatch(/fill="red"/)
+    })
+
+    it('does not mutate the global singleton config', () => {
+      sanitizeSvg(`<svg><circle cx="0"/></svg>`)
+
+      const out = DOMPurifySingleton.sanitize('<p>text</p><h2>heading</h2>')
+
+      expect(out).toContain('<p>')
+      expect(out).toContain('<h2>')
+    })
   })
 })

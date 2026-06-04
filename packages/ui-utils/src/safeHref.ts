@@ -22,7 +22,20 @@
  * SOFTWARE.
  */
 
-import DOMPurify from 'dompurify'
+import createDOMPurify from 'dompurify'
+
+// Use a dedicated DOMPurify instance instead of the shared singleton so our
+// HTML profile never leaks onto the global instance other code relies on, and
+// our validation stays correct even if someone else mutates the singleton via
+// setConfig(). `window` is guarded for SSR; passing `undefined` yields an
+// unsupported instance, in which case we fall back to `ssrSafeHref`.
+const purify = createDOMPurify(
+  typeof window === 'undefined' ? undefined : window
+)
+
+if (purify.isSupported) {
+  purify.setConfig({ USE_PROFILES: { html: true } })
+}
 
 const SAFE_SCHEMES = [
   'http:',
@@ -105,9 +118,8 @@ function safeHref(
   const scheme = extractScheme(value)
   if (scheme && SAFE_SCHEMES.includes(scheme)) return href
 
-  DOMPurify.setConfig({ USE_PROFILES: { html: true } })
-  const isSafe = DOMPurify.isSupported
-    ? DOMPurify.isValidAttribute(tag, attr, value)
+  const isSafe = purify.isSupported
+    ? purify.isValidAttribute(tag, attr, value)
     : ssrSafeHref(value, tag, attr)
 
   if (!isSafe) {
