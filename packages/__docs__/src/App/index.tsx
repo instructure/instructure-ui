@@ -827,15 +827,16 @@ class App extends Component<AppProps, AppState> {
     const documentContent = (
       <View as="div" padding="x-large none none">
         {this.renderThemeSelect()}
-        {isGuidePage && (
-          <Alert variant="info" margin="xx-large 0">
-            This page is made for the latest version (
-            {this.getLatestMinorVersion()?.replace('_', '.')}) of InstUI.{' '}
-            <Link href="component-versioning">
-              Learn more about the versioning system
-            </Link>
-          </Alert>
-        )}
+        {isGuidePage &&
+          (currentData.id as string) !== 'legacy-theme-overrides' && (
+            <Alert variant="info" margin="xx-large 0">
+              This page is made for the latest version (
+              {this.getLatestMinorVersion()?.replace('_', '.')}) of InstUI.{' '}
+              <Link href="component-versioning">
+                Learn more about the versioning system
+              </Link>
+            </Alert>
+          )}
         <View
           elementRef={this.mainContentRef}
           tabIndex={0}
