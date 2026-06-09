@@ -1,0 +1,39 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)",
+      "Bash(git branch:*)",
+      "Bash(git blame:*)",
+      "Bash(git stash list:*)",
+      "Bash(pnpm run lint)",
+      "Bash(pnpm run lint:changes)",
+      "Bash(pnpm run lint:commits)",
+      "Bash(pnpm run ts:check)",
+      "Bash(pnpm run test:vitest)",
+      "Bash(pnpm run test:vitest *)",
+      "Bash(pnpm list:*)",
+      "Bash(pnpm why:*)",
+      "Bash(ls:*)",
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "Bash(rg:*)",
+      "Bash(tree:*)",
+      "Bash(wc:*)",
+      "Bash(pwd)",
+      "Bash(node --version)",
+      "Bash(pnpm --version)",
+      "Bash(gh pr view:*)",
+      "Bash(gh pr list:*)",
+      "Bash(gh pr diff:*)",
+      "Bash(gh pr checks:*)",
+      "Bash(gh issue view:*)",
+      "Bash(gh issue list:*)",
+      "Bash(gh api:*)",
+      "Bash(gh --help)",
+      "Bash(gh * --help)"
+    ]
+  }
+}
