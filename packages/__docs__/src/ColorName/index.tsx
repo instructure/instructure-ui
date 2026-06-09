@@ -25,11 +25,17 @@
 import { Component } from 'react'
 
 import { Text } from '@instructure/ui-text'
-import { TruncateText } from '@instructure/ui-truncate-text'
 import { Tooltip } from '@instructure/ui-tooltip'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
-import type { ColorNameProps, ColorNameState } from './props'
+
+import { withStyleForDocs } from '../withStyleForDocs'
+import generateStyle from './styles'
+
 import { allowedProps } from './props'
+import type { ColorNameProps, ColorNameState } from './props'
+
+// CSS truncation instead of heavy TruncateText
+@withStyleForDocs(generateStyle, () => ({}))
 class ColorName extends Component<ColorNameProps, ColorNameState> {
   static displayName = 'ColorName'
   static allowedProps = allowedProps
@@ -41,18 +47,38 @@ class ColorName extends Component<ColorNameProps, ColorNameState> {
     isTruncated: false
   }
 
-  handleUpdate = (isTruncated: boolean) => {
+  private strongRef: HTMLElement | null = null
+
+  componentDidMount() {
+    this.props.makeStyles?.()
+    this.checkTruncation()
+  }
+
+  componentDidUpdate(prevProps: ColorNameProps) {
+    this.props.makeStyles?.()
+    if (prevProps.name !== this.props.name) {
+      this.checkTruncation()
+    }
+  }
+
+  checkTruncation = () => {
+    if (!this.strongRef) return
+    const isTruncated = this.strongRef.scrollWidth > this.strongRef.clientWidth
     if (this.state.isTruncated !== isTruncated) {
       this.setState({ isTruncated })
     }
   }
 
+  handleStrongRef = (el: HTMLElement | null) => {
+    this.strongRef = el
+  }
+
   renderText() {
-    const { name, ...passthrough } = this.props
+    const { name, styles, makeStyles, ...passthrough } = this.props
     return (
       <Text {...passthrough}>
-        <strong aria-hidden>
-          <TruncateText onUpdate={this.handleUpdate}>{name}</TruncateText>
+        <strong aria-hidden ref={this.handleStrongRef} css={styles?.truncate}>
+          {name}
         </strong>
         <ScreenReaderContent>{name}</ScreenReaderContent>
       </Text>

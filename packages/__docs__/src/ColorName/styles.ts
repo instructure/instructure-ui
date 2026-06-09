@@ -21,23 +21,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import type { ColorNameStyle } from './props'
 
-import type { AsElementType } from '@instructure/shared-types'
-import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
-
-type ColorNameOwnProps = {
-  name: string
-  as?: AsElementType
-  lineHeight?: 'default' | 'fit' | 'condensed' | 'double'
+/**
+ * Generates the style object from the theme and provided additional information
+ * @return {Object} The final style object, which will be used in the component
+ */
+const generateStyle = (): ColorNameStyle => {
+  return {
+    truncate: {
+      label: 'colorName__truncate',
+      display: 'block',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap'
+    }
+  }
 }
-type PropKeys = keyof ColorNameOwnProps
-type AllowedPropKeys = Readonly<Array<PropKeys>>
-type ColorNameProps = ColorNameOwnProps & WithStyleProps<null, ColorNameStyle>
 
-const allowedProps: AllowedPropKeys = ['name', 'as', 'lineHeight']
-type ColorNameState = {
-  isTruncated: boolean
-}
-type ColorNameStyle = ComponentStyle<'truncate'>
-export { allowedProps }
-export type { ColorNameState, ColorNameProps, ColorNameStyle }
+export default generateStyle
