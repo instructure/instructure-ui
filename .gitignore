@@ -29,6 +29,7 @@ tsconfig.node.build.tsbuildinfo
 .claude/settings.local.json
 .claude/cache/
 .claude/*.local.*
+CLAUDE.local.md
 
 # Ignore all commands except shared ones
 .claude/commands/*

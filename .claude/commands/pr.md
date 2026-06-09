@@ -2,55 +2,50 @@
 description: Create a pull request following InstUI conventions
 ---
 
-Create a pull request following Instructure UI conventions:
+Open a PR for the current branch.
 
-## PR Requirements
+## Steps
 
-All PRs must include:
+1. `git status` — confirm branch + remote tracking. **Abort** if on `master` or if the branch has no commits ahead of `master` (`git rev-list --count master..HEAD` is 0) — there's nothing to open a PR for.
+2. `git log master..HEAD` and `git diff master...HEAD` — read **all** commits in the branch (not just the latest) so the summary covers everything that's changed.
+3. If not pushed: `git push -u origin <branch>`.
+4. Create the PR (see invocation below).
+5. Return the PR URL.
 
-1. **Summary**: Brief description of changes (1-3 bullet points)
-2. **Test Plan**: Clear steps for reviewers to test the changes
-3. **Jira Reference**: Include relevant Jira ticket number if applicable (e.g., `Fixes INST-1234`)
-4. **AI Disclosure**: Must clearly indicate this was created with AI assistance
+If the branch name or any commit references a Jira ticket (e.g. `INSTUI-1234`), include it. If you can't find one, ask the user once before opening — don't invent one.
 
-## Draft vs Ready
+## gh invocation
 
-- Open as **draft** when work is in progress or not ready for review
-- Mark as **ready for review** only when complete and all requirements met
+Use `--body-file -` with a heredoc on stdin. This avoids shell-quoting issues and is the form supported by current `gh` versions. If unsure about flags, run `gh pr create --help` first — do **not** fall back to older forms like `gh pr create -t ... -b ...` with inline `-b`.
 
-## Process
+```bash
+gh pr create --title "<title>" --body-file - <<'EOF'
+<body>
+EOF
+```
 
-1. Run `git status` to check current branch and remote tracking
-2. Run `git log master..HEAD` to see all commits that will be in the PR
-3. Run `git diff master...HEAD` to see full diff from base branch
-4. Analyze changes across ALL commits (not just latest)
-5. Draft PR summary covering all changes
-6. **If Jira ticket number is unknown, ask the user for it before creating the PR**
-7. Push to remote if needed: `git push -u origin <branch>`
-8. Create PR with `gh pr create --title "title" --body "$(cat <<'EOF'
+Open as draft (`--draft`) if the work is in progress.
 
+## Body format
+
+Keep it **short**. No preamble, no restating the title, no "this PR does X" filler.
+
+```
 ## Summary
-
-- Bullet point 1
-- Bullet point 2
+- <one line per logically distinct change; 1–4 bullets total>
 
 ## Test Plan
+- <only manual / non-CI checks a reviewer should do>
 
-- [ ] Step 1
-- [ ] Step 2
-
-## Jira Reference
-
-Fixes INST-XXXX (or omit this section if not applicable)
+Fixes INSTUI-XXXX
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)
-EOF
-)"` 9. Return the PR URL
+```
 
-**Important**:
+Rules:
 
-- Base branch is usually `master` (not main)
-- Analyze ALL commits in the branch, not just the latest one
-- Use markdown checklists for test plan
-- Include AI attribution footer
-- Always confirm Jira ticket number with user if not found in commits or branch name
+- **Summary**: terse bullets. Each bullet is one change, not a paragraph. Skip context the diff already shows.
+- **Test Plan**: only what CI **doesn't** cover — manual UI checks, RTL, a11y spot-checks, visual regression cases to look at, edge cases worth poking. Never include "tests pass", "lint passes", "types check", "build succeeds" — CI runs those.
+- If there's genuinely nothing to manually verify (e.g. pure refactor with full test coverage), write `- No manual verification needed; covered by existing tests.` and move on.
+- Omit the `Fixes` line entirely if no ticket applies. Don't write `Fixes INSTUI-XXXX (or omit if not applicable)`.
+- Keep the Claude Code footer.

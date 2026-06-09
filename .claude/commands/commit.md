@@ -2,63 +2,41 @@
 description: Create a commit following InstUI conventions with HUSKY=0
 ---
 
-Create a commit following the Instructure UI commit conventions:
+Commit staged + relevant unstaged changes using Conventional Commits.
 
-## Format Requirements
-
-Use Conventional Commits format:
+## Format
 
 ```
-type(scope): subject
+type(scope): imperative subject
 
-[optional body]
-Document any breaking changes here with BREAKING CHANGE: prefix
+<optional body>
 
-[optional footer]
-```
+BREAKING CHANGE: <only if applicable>
 
-**Types**: feat, fix, docs, style, refactor, test, chore
-
-**Scope**: Full package name as-is (e.g., ui-button, ui-select). Use comma-separated for multiple packages, `many` for many packages, or omit for repo-wide changes.
-
-**Subject**: Brief imperative description (e.g., "add loading state", not "adds" or "added")
-
-## Breaking Changes
-
-Mark breaking changes with an exclamation mark after scope and document in body:
-
-```
-feat(ui-select)!: remove deprecated onOpen prop
-
-BREAKING CHANGE: The onOpen prop has been removed. Use onShowOptions instead.
-```
-
-Breaking changes include:
-
-- Removing/renaming props or components
-- Changing prop types or behavior
-- Changing defaults that affect behavior
-- Removing theme variables or exports
-
-## Commit Footer
-
-Always include:
-
-```
 🤖 Generated with [Claude Code](https://claude.com/claude-code)
 
 Co-Authored-By: Claude <noreply@anthropic.com>
 ```
 
-## Process
+- **type**: one of `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert`. `commitlint.config.js` extends [`@commitlint/config-conventional`](https://www.npmjs.com/package/@commitlint/config-conventional), which defines the allowed set — pick the type that genuinely matches the change (`feat`/`fix` only for actual features/bug fixes).
+- **scope**: full package name (`ui-button`, `ui-select`). Comma-separate for a few, use `many` for several, omit for repo-wide.
+- **subject**: imperative ("add loading state", not "added"). Must start with a lowercase letter (commitlint's `subject-case` rejects sentence/Start/PascalCase). No trailing period.
+- **Body lines: hard-wrap at 100 characters.** Commitlint (`body-max-line-length: 100`) runs in CI and will reject longer lines. The footer lines (Claude Code attribution, Co-Authored-By) are exempt.
+- **Breaking changes**: add a `BREAKING CHANGE:` line in the body describing what breaks. See CLAUDE.md for what counts as breaking.
 
-1. Run `git status` and `git diff` to see changes
-2. Analyze the changes and draft appropriate commit message
-3. Add files to staging if needed: `git add <files>`
-4. Create commit with `HUSKY=0 git commit -m "$(cat <<'EOF'
-[commit message here with proper footer]
-EOF
-)"`
-5. Run `git status` after to verify
+## Steps
 
-**Important**: Use HUSKY=0 prefix to skip interactive prompt since AI can't interact with it.
+1. `git status` + `git diff` (and `git diff --staged` if anything's staged). **Abort if on `master`** — commit on a feature branch instead.
+2. Stage the files that belong in this commit — be specific, don't `git add -A`.
+3. Commit with `HUSKY=0` to skip the interactive husky prompt:
+
+   ```bash
+   HUSKY=0 git commit -m "$(cat <<'EOF'
+   <message>
+   EOF
+   )"
+   ```
+
+4. `git status` to confirm.
+
+If the husky hook fails, fix the underlying issue and create a **new** commit — never `--amend` after a failed hook.

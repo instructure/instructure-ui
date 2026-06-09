@@ -1,201 +1,48 @@
-# Instructure UI - Claude Code Documentation
+# Instructure UI
 
-## Project Overview
+React component library and design system. A pnpm + Lerna monorepo, ~100 packages under `/packages/ui-*`.
 
-InstUI is a React component library and design system. **Lerna 8 monorepo** with 100+ packages.
+External docs (preferred over guessing component APIs): https://instructure.design/llms.txt — per-component markdown at `https://instructure.design/markdowns/<Component>.md`.
 
-**Key Resources:**
+## Commands
 
-- Website: https://instructure.design
-- AI docs: https://instructure.design/llms.txt
-- Component docs: https://instructure.design/markdowns/[ComponentName].md
-  - Example: https://instructure.design/markdowns/Alert.md
-  - Example: https://instructure.design/markdowns/Button.md
+- `pnpm run bootstrap` — required first time and after `pnpm run clean`. Builds icons, compiles, generates tokens. Plain `pnpm install` is **not** enough.
+- `pnpm run dev` — docs app at http://localhost:9090 (hot-reloads component changes).
+- `pnpm run test:vitest <pkg>` — run a single package's unit tests, e.g. `pnpm run test:vitest ui-radio-input`. Without an argument it runs everything (slow).
+- `pnpm run cy:component` — Cypress component tests.
+- Visual regression lives in `/regression-test` (separate Next.js app, port 3000). See `/regression-test/README.md`.
 
-**Tech Stack:** Node.js >=22, pnpm, React 18.3.1+, TypeScript 5.8.3, Emotion (CSS-in-JS), Vitest, Cypress, Chromatic
+## Code conventions
 
-## Repository Structure
+- **Never hardcode user-facing strings.** All UI text must come from props for i18n. This is the most common review comment.
+- **New components: functional + hooks only.** Class components exist in legacy code — don't extend that pattern.
+- Styling is Emotion CSS-in-JS via `theme.ts` files co-located with each component.
 
-```
-/packages                      # 100+ packages
-  /ui-*                        # Component packages (ui-button, ui-select, etc.)
-  /canvas-theme                # Theme packages
-  /__docs__                    # Documentation app
-/docs                          # Documentation source files
-/regression-test               # Visual & a11y testing (Next.js 15 app)
-/cypress                       # Component tests
-/scripts                       # Build scripts
-```
+## Component versioning (v1/v2)
 
-**Important file locations:**
+Some components ship in two versions during a migration period — a legacy **v1** and a newer **v2** (e.g. `DateInput`). v2 is the preferred implementation for new work; v1 is deprecated and gets removed in a later major release. Don't assume a component has only one version: check its README and the package exports to see which versions exist and which is current before using or changing one.
 
-- Component source: `/packages/ui-*/src/`
-- Component tests: Co-located with components
-- Theme types: `/packages/shared-types/src/ComponentThemeVariables.ts`
-- Visual/a11y tests: `/regression-test/`
-- Testing docs: `/docs/testing/testing-overview.md`
+## Testing gotchas
 
-## Quick Start
+- Prefer `vitest` fake timers in unit tests.
+- If `fireEvent.click` doesn't trigger handlers, pass `{ button: 0, detail: 1 }`. `FocusRegion.ts` inspects `event.detail`/`event.button` to distinguish real mouse clicks from synthetic events.
+- Every component needs: unit tests (`*.test.tsx`, co-located), a page under `/regression-test/src/app/<name>/page.tsx`, a Cypress entry in `/regression-test/cypress/e2e/spec.cy.ts`, WCAG 2.1 AA compliance, and RTL support.
 
-```bash
-pnpm run bootstrap  # First time setup (clean, build icons, compile, generate tokens)
-pnpm run dev        # Start dev server at http://localhost:9090
-```
+## Finding component info
 
-Most changes hot-reload automatically when dev server is running.
+1. **Start with the component README**: `/packages/<pkg>/src/<Component>/README.md` — this is the source for the published docs and has examples + prop descriptions.
+2. Props: `props.ts` next to the component. Theme variables: `theme.ts` next to the component.
+3. Shared theme types: `/packages/shared-types/src/ComponentThemeVariables.ts`.
 
-## Essential Commands
+If you add/change a prop, update the component's README in the same change — that file is what ships to instructure.design.
 
-```bash
-# Development
-pnpm run dev          # Dev server (http://localhost:9090)
-pnpm run build:types  # Build TypeScript declarations
+## Breaking changes
 
-# Testing
-pnpm run test:vitest  # Unit tests
-pnpm run test:vitest ui-radio-input # Run tests for a single package
-pnpm run cy:component # Cypress component tests
+Avoid them unless the user explicitly asks. Breaking = removing/renaming a prop, component, theme variable, or exported util; changing a prop's type or a default that alters behavior. Adding optional props, new components, or new theme variables is fine. When a break is intentional, put `BREAKING CHANGE:` in the commit body — `/commit` handles the format.
 
-# Linting
-pnpm run lint:fix     # Auto-fix linting issues
-pnpm run ts:check     # TypeScript references check
+## Workflow
 
-# Troubleshooting
-pnpm run clean && pnpm run bootstrap       # Fix build issues
-pnpm run clean-node && pnpm install        # Nuclear option (removes all node_modules)
-```
-
-## Code Style
-
-**IMPORTANT: Always use functional components with React hooks for new code.**
-
-- ✅ Functional components with hooks (useState, useEffect, etc.)
-- ❌ No class components for new code (legacy codebase has them)
-- ❌ **Never hardcode text** - all user-facing text must come from props (for i18n)
-- ✅ Support accessibility (WCAG 2.1 AA), RTL languages
-- ✅ Use TypeScript for all new code
-- ✅ Use Emotion for styling (CSS-in-JS)
-
-## Finding Component Information
-
-**To find available components and their packages:**
-
-- Check `/packages/__docs__/src/components.ts` - lists all components with their package locations
-
-**Each component has two READMEs:**
-
-1. **Component README**: `/packages/[package]/src/[Component]/README.md` ⭐
-
-   - What the component does and usage examples
-   - **Check this first** - it has the detailed information
-   - These READMEs are also used to render the component documentation pages on instructure.design
-
-2. **Package README**: `/packages/[package]/README.md`
-   - Package overview, installation, exports
-
-**For complete API details of a component:**
-
-- Props: Check `props.ts` files in component source
-- Theme variables: Check `theme.ts` files in component source
-
-## Component Development Workflow
-
-1. Find component in `/packages/ui-[name]/src/[Component]/`
-2. Check Component README for API details
-3. Make changes
-4. Run tests: `pnpm run test:vitest`
-5. Update README if the functionality has changed (e.g., a new prop was added)
-6. Use `/commit` to create commit
-
-## Breaking Changes
-
-**IMPORTANT: Avoid breaking changes unless explicitly requested by the user.**
-
-A change is **breaking** if it requires consumers to modify their code:
-
-**Breaking changes (avoid):**
-
-- ❌ Removing or renaming a prop
-- ❌ Changing a prop's type or behavior
-- ❌ Removing or renaming a component
-- ❌ Changing default values that affect behavior
-- ❌ Removing or renaming theme variables
-- ❌ Removing exported utilities or functions
-
-**Not breaking changes (preferred):**
-
-- ✅ Adding new optional props
-- ✅ Adding new components
-- ✅ Bug fixes that restore intended behavior
-- ✅ Internal refactoring without API changes
-- ✅ Adding new theme variables
-- ✅ Deprecating features with warnings (without removing)
-- ✅ Documentation updates
-
-When a breaking change is explicitly requested, document it clearly in the commit message with `BREAKING CHANGE:` in the body.
-
-## Testing Requirements
-
-All components **MUST**:
-
-1. Have unit tests (Vitest + React Testing Library in `*.test.tsx`)
-2. Have visual regression tests in `/regression-test`
-3. Pass accessibility audits (WCAG 2.1 AA)
-4. Support RTL languages
-
-### Writing tests
-
-- Try to use `vitest`'s fake timers in unit tests
-- When simulating mouse events (e.g., `fireEvent.click`), use `{ button: 0, detail: 1 }` if the click events don't seem to work. This is needed because `FocusRegion.ts/handleDocumentClick` uses `event.detail` and `event.button` to determine if the event was a mouse/touch click.
-
-### Running Tests
-
-```bash
-pnpm run test:vitest  # Unit tests
-pnpm run cy:component # Cypress tests
-pnpm run test:vitest ui-radio-input # Run tests for a single package
-
-# Visual regression tests (in regression-test directory)
-cd regression-test
-pnpm run dev              # Start at localhost:3000
-pnpm run cypress-chrome   # Run with GUI
-```
-
-### Adding Visual Regression Test
-
-1. Create test page: `/regression-test/src/app/[component-name]/page.tsx`
-2. Add Cypress test: `/regression-test/cypress/e2e/spec.cy.ts`
-
-See `/regression-test/README.md` for detailed instructions.
-
-## Writing Documentation
-
-InstUI uses custom markdown with special code blocks (using [gray-matter](https://github.com/jonschlinkert/gray-matter) YAML syntax) for interactive examples.
-
-**Code block types:**
-
-- `type: code` - Syntax highlighting only
-- `type: embed` - Rendered component only
-- `type: example` - Interactive (rendered + editable) ⭐ Most common
-
-**IMPORTANT:**
-
-- Always write functional component examples with hooks
-- All InstUI components are available without imports in examples
-
-See `/docs/contributing/writing-docs.md` for complete guidelines and syntax.
-
-## Naming Conventions
-
-- **Packages**: `ui-[component-name]` (kebab-case)
-- **Components**: PascalCase (Button, Select)
-- **Props**: camelCase with prefixes (onClick, isDisabled)
-- **Theme variables**: camelCase
-
-## Committing & PRs
-
-Use `/commit` and `/pr` slash commands - they follow InstUI conventions automatically.
-
-**Branch naming:** Create feature branches from `master`
-
-**PR merging:** PRs are typically squashed when merged
+- Use `/commit` and `/pr` — they follow InstUI conventions (Conventional Commits with package-name scopes, PR body with an `INSTUI-` Jira ref). Husky pre-commit runs lint-staged + a TS references check; `/commit` sets `HUSKY=0` to skip the interactive prompt.
+- Branch from `master`. PRs are squash-merged.
+- **Integrate `master` by rebasing, not merging** — use `git rebase master` (or `git pull --rebase`) to update a branch. Don't create merge commits; keep branch history linear since PRs are squash-merged anyway.
+- **Docs structure:** the site is generated from source code (JSDoc + `react-docgen` for prop types) plus `.md` files. Markdown docs use fenced code blocks with a gray-matter `type:` header that controls rendering: `type: code` (syntax-highlighted, not executed), `type: embed` (renders the JSX live into the page), and `type: example` (interactive, editable playground). Full reference: `/docs/contributing/writing-docs.md`.
