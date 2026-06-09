@@ -40,6 +40,8 @@ import { MenuContext } from '../../../utils/v1/MenuContext'
 
 import generateStyle from './styles'
 
+import { resolveItemSelected } from '../behavior'
+
 import { allowedProps } from './props'
 import type { MenuItemProps, MenuItemState } from './props'
 
@@ -212,9 +214,7 @@ class MenuItem extends Component<MenuItemProps, MenuItemState> {
   }
 
   get selected() {
-    return typeof this.props.selected === 'undefined'
-      ? this.state.selected
-      : this.props.selected
+    return resolveItemSelected(this.props.selected, this.state.selected)
   }
 
   get focused() {

@@ -26,7 +26,6 @@ import { Children, Component, ReactElement, ReactNode } from 'react'
 
 import { warn, error } from '@instructure/console'
 import { contains, containsActiveElement } from '@instructure/ui-dom-utils'
-import { deepEqual } from '@instructure/ui-utils'
 import {
   callRenderProp,
   matchComponentTypes,
@@ -55,7 +54,6 @@ import { withStyleNew } from '@instructure/emotion'
 
 import { DrilldownSeparator } from './DrilldownSeparator'
 import { DrilldownOption } from './DrilldownOption'
-import type { DrilldownOptionValue } from './DrilldownOption/props'
 import { DrilldownGroup } from './DrilldownGroup'
 import type { DrilldownGroupProps, GroupChildren } from './DrilldownGroup/props'
 import { DrilldownPage } from './DrilldownPage'
@@ -63,7 +61,21 @@ import type { DrilldownPageProps, PageChildren } from './DrilldownPage/props'
 
 import generateStyle from './styles'
 
-import { allowedProps, SelectedGroupOptionsMap } from './props'
+import {
+  computeInitialSelectionMap,
+  computeControlledSelectionUpdate,
+  reduceGroupSelection,
+  selectedValuesInGroup,
+  reduceGoToPage,
+  reduceHighlight
+} from './behavior'
+import type {
+  NeutralPageData,
+  NeutralGroupData,
+  NeutralOptionData
+} from './types'
+
+import { allowedProps } from './props'
 
 import type {
   DrilldownProps,
@@ -234,55 +246,15 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       })
     }
 
-    // This block syncs the internal state if the selectedOptions prop changes
-    // selectedOptions prop values always win over internal state.
-    let shouldUpdateState = false
-    const nextSelectionMap: SelectedGroupOptionsMap = {
-      ...this.state.selectedGroupOptionsMap
-    }
-
-    this.pages.forEach((page) => {
-      this.getChildrenArray(page.props.children).forEach((child) => {
-        if (matchComponentTypes<GroupChild>(child, [DrilldownGroup])) {
-          const {
-            id: groupId,
-            selectableType,
-            selectedOptions,
-            children: groupChildren
-          } = child.props
-
-          if (!selectableType || !Array.isArray(selectedOptions)) return
-
-          const newGroupMap = new Map()
-
-          this.getChildrenArray(groupChildren)?.forEach((groupChild) => {
-            if (
-              matchComponentTypes<OptionChild>(groupChild, [DrilldownOption])
-            ) {
-              const { id: optionId, value: optionValue } = groupChild.props
-              if (selectedOptions.includes(optionValue)) {
-                newGroupMap.set(optionId, optionValue)
-              }
-            }
-          })
-
-          const currentGroupMapInState =
-            this.state.selectedGroupOptionsMap[groupId] || new Map()
-
-          if (
-            !deepEqual(
-              this.getNormalizedMap(newGroupMap),
-              this.getNormalizedMap(currentGroupMapInState)
-            )
-          ) {
-            nextSelectionMap[groupId] = newGroupMap
-            shouldUpdateState = true
-          }
-        }
-      })
-    })
-    if (shouldUpdateState) {
-      this.setState({ selectedGroupOptionsMap: nextSelectionMap })
+    // This block syncs the internal state if the selectedOptions prop changes.
+    // selectedOptions prop values always win over internal state. The recompute
+    // and change detection live in the framework-neutral behavior layer.
+    const { next, changed } = computeControlledSelectionUpdate(
+      this.getNeutralPages(),
+      this.state.selectedGroupOptionsMap
+    )
+    if (changed) {
+      this.setState({ selectedGroupOptionsMap: next })
     }
   }
 
@@ -395,10 +367,6 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
     return id ? this._activeOptionsMap[id] : undefined
   }
 
-  getNormalizedMap(map: Map<string, DrilldownOptionValue>) {
-    return Array.from(map.entries())
-  }
-
   /**
    * Initializes the map of selected options for each group on initial render.
    *
@@ -418,44 +386,33 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
    * values are Maps of the selected { optionId: optionValue } pairs for that group.
    */
   getSelectedGroupOptionsMap() {
-    const selectedGroupOptionsMap: SelectedGroupOptionsMap = {}
-    this.pages.forEach((page) => {
-      const { children } = page.props
+    return computeInitialSelectionMap(this.getNeutralPages(), (message) =>
+      error(false, message)
+    )
+  }
 
-      this.getChildrenArray(children).forEach((child) => {
+  /**
+   * Walks the React children into the framework-neutral `NeutralPageData[]`
+   * shape that the pure selection reducers in ./behavior consume. This is the
+   * React-children -> plain-data boundary: the selection precedence, validation
+   * and controlled-prop sync logic itself lives in ./behavior and is shared
+   * (as a single source of truth) with the Lit adapter in ui-web-core.
+   */
+  getNeutralPages(): NeutralPageData[] {
+    return this.pages.map((page): NeutralPageData => {
+      const groups: NeutralGroupData[] = []
+
+      this.getChildrenArray(page.props.children).forEach((child) => {
         if (matchComponentTypes<GroupChild>(child, [DrilldownGroup])) {
           const {
             id: groupId,
             selectableType,
             selectedOptions,
-            defaultSelected = [],
+            defaultSelected,
             children: groupChildren
           } = child.props
 
-          if (!selectableType) return
-
-          selectedGroupOptionsMap[groupId] = new Map()
-
-          if (selectableType === 'single') {
-            if (Array.isArray(selectedOptions) && selectedOptions.length > 1) {
-              error(
-                false,
-                `Radio type selectable groups can have only one item selected! Group "${groupId}" has multiple values: [${selectedOptions.join(
-                  ', '
-                )}]!`
-              )
-              return
-            }
-            if (defaultSelected.length > 1) {
-              error(
-                false,
-                `Radio type selectable groups can have only one default item selected! Group "${groupId}" has multiple values: [${defaultSelected.join(
-                  ', '
-                )}]!`
-              )
-              return
-            }
-          }
+          const options: NeutralOptionData[] = []
 
           this.getChildrenArray(groupChildren)?.forEach((groupChild) => {
             if (
@@ -463,36 +420,29 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
             ) {
               const {
                 id: optionId,
-                value: optionValue,
+                value,
                 defaultSelected: optionDefaultSelected
               } = groupChild.props
-
-              if (optionValue == null) return
-
-              let isSelected = false
-              // If the group is controlled via the `selectedOptions` prop, it is the source of truth.
-              // `defaultSelected` values are ignored.
-              if (Array.isArray(selectedOptions)) {
-                isSelected = selectedOptions.includes(optionValue)
-                // Second strongest is the `defaultSelected` value on the option itself.
-              } else if (optionDefaultSelected === false) {
-                isSelected = false
-              } else {
-                // Last is the `defaultSelected` array on the group.
-                const isGroupDefaultSelected =
-                  defaultSelected.includes(optionValue)
-                isSelected = optionDefaultSelected || isGroupDefaultSelected
-              }
-
-              if (isSelected) {
-                selectedGroupOptionsMap[groupId].set(optionId, optionValue)
-              }
+              options.push({
+                optionId,
+                value,
+                defaultSelected: optionDefaultSelected
+              })
             }
+          })
+
+          groups.push({
+            groupId,
+            selectableType,
+            selectedOptions,
+            defaultSelected,
+            options
           })
         }
       })
+
+      return { pageId: page.props.id, groups }
     })
-    return selectedGroupOptionsMap
   }
 
   get selectedGroupOptionIdsArray() {
@@ -677,89 +627,49 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
     _event: React.SyntheticEvent,
     { id, direction }: { id?: string; direction?: -1 | 1 }
   ) => {
-    const { rotateFocus } = this.props
-    const { highlightedOptionId } = this.state
-
-    // if id exists, use that, or calculate from direction
-    let highlightId = this.getPageChildById(id) ? id : undefined
-
-    if (!highlightId) {
-      if (!highlightedOptionId) {
-        // nothing highlighted yet, highlight first option
-        highlightId = this.activeOptionIds[0]
-      } else if (direction) {
-        // if it has direction, find next id based on it
-        const index = this.activeOptionIds.indexOf(highlightedOptionId)
-        const newIndex = index + direction
-
-        highlightId = index > -1 ? this.activeOptionIds[newIndex] : undefined
-
-        if (rotateFocus) {
-          const lastOptionsIndex = this.activeOptionIds.length - 1
-
-          if (newIndex < 0) {
-            highlightId = this.activeOptionIds[lastOptionsIndex]
-          }
-          if (newIndex > lastOptionsIndex) {
-            highlightId = this.activeOptionIds[0]
-          }
-        }
-      }
-    }
+    // the next-highlight index math lives in the framework-neutral behavior
+    // layer; the adapter validates the requested id and performs DOM focus
+    const highlightId = reduceHighlight({
+      activeOptionIds: this.activeOptionIds,
+      highlightedOptionId: this.state.highlightedOptionId,
+      requestedId: this.getPageChildById(id) ? id : undefined,
+      direction,
+      rotateFocus: !!this.props.rotateFocus
+    })
 
     if (highlightId) {
       // only highlight if id exists as a valid option
       this.setState({ highlightedOptionId: highlightId }, () => {
-        this.focusOption(highlightId!)
+        this.focusOption(highlightId)
       })
     }
   }
 
   // Navigates to the page and also returns the new and old pageIds
   public goToPage = (newPageId: string) => {
-    if (!newPageId) {
-      warn(false, `Cannot go to page because there was no page id provided.`)
+    // history math + validation live in the framework-neutral behavior layer
+    const result = reduceGoToPage(
+      [...this._pageHistory],
+      newPageId,
+      !!this.pageMap?.[newPageId]
+    )
+
+    if ('warning' in result) {
+      warn(false, result.warning)
       return undefined
     }
 
-    // TS complains that it cannot be true, but since it is an exposed method,
-    // it is better if we provide a warning for this case too
-    if (typeof newPageId !== 'string') {
-      warn(
-        false,
-        `Cannot go to page because parameter newPageId has to be string (valid page id). Current newPageId is "${typeof newPageId}".`
-      )
-      return undefined
-    }
-
-    if (!this.pageMap?.[newPageId]) {
-      warn(
-        false,
-        `Cannot go to page because page with id: "${newPageId}" doesn't exist.`
-      )
-      return undefined
-    }
-
-    // the last page id in the history is the current one,
-    // it will become the "prevPage"
-    const prevPageId = this._pageHistory[this._pageHistory.length - 1]
-    const idxInHistory = this._pageHistory.indexOf(newPageId)
-
-    if (idxInHistory < 0) {
-      // if it is not in the page history, we have to add it
-      this._pageHistory.push(newPageId)
-    } else {
-      // if it was already in the history, we go back to that page,
-      // and clear the rest from the history
-      this._pageHistory.splice(idxInHistory + 1, this._pageHistory.length - 1)
-    }
+    // mutate the existing history array in place to preserve its identity
+    // (it is `readonly` and held elsewhere via spread-copy)
+    this._pageHistory.length = 0
+    this._pageHistory.push(...result.history)
 
     this.setState({
-      activePageId: newPageId,
+      activePageId: result.newPageId,
       highlightedOptionId: undefined
     })
 
-    return { prevPageId, newPageId }
+    return { prevPageId: result.prevPageId, newPageId: result.newPageId }
   }
 
   public goToPreviousPage = () => {
@@ -793,47 +703,29 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
     event: React.SyntheticEvent,
     selectedOption: MappedOption
   ) {
+    const { id: optionId, value } = selectedOption.props
+    const { id: groupId, selectableType } = selectedOption.groupProps!
+
     this.setState(
-      (oldState) => {
-        const { id: optionId, value } = selectedOption.props
-        const { id: groupId, selectableType } = selectedOption.groupProps!
-
-        let newState = new Map(oldState.selectedGroupOptionsMap[groupId])
-
-        if (
-          selectableType === 'multiple' &&
-          Boolean(oldState.selectedGroupOptionsMap[groupId]?.has(optionId))
-        ) {
-          // toggle off, if already selected
-          newState.delete(optionId)
-        } else {
-          if (selectableType === 'multiple') {
-            // "checkbox"
-            newState.set(optionId, value)
-          } else if (selectableType === 'single') {
-            // "radio"
-            newState = new Map()
-            newState.set(optionId, value)
-          }
-        }
-        return {
-          ...oldState,
-          selectedGroupOptionsMap: {
-            ...oldState.selectedGroupOptionsMap,
-            [groupId]: newState
-          }
-        }
-      },
+      (oldState) => ({
+        ...oldState,
+        // the single/multiple toggle reducer lives in the behavior layer
+        selectedGroupOptionsMap: reduceGroupSelection(
+          oldState.selectedGroupOptionsMap,
+          { groupId, optionId, value, selectableType: selectableType! }
+        )
+      }),
       () => {
-        const { value } = selectedOption.props
-        const { id: groupId, onSelect: groupOnSelect } =
-          selectedOption.groupProps!
+        const { onSelect: groupOnSelect } = selectedOption.groupProps!
 
         const { onSelect } = this.props
         const { groupProps, ...option } = selectedOption
-        const selectedOptionValuesInGroup = [
-          ...this.state.selectedGroupOptionsMap[groupId].values()
-        ]
+        // callbacks always receive the full array of selected values in the
+        // group (even for single-select) — the array contract lives in behavior
+        const selectedOptionValuesInGroup = selectedValuesInGroup(
+          this.state.selectedGroupOptionsMap,
+          groupId
+        )
 
         if (typeof groupOnSelect === 'function') {
           groupOnSelect(event, {

@@ -1,0 +1,92 @@
+{
+  "name": "@instructure/ui-web-core",
+  "version": "11.7.3",
+  "private": true,
+  "description": "InstUI primitives delivered as Lit-based Web Components, plus SSR/theming utilities.",
+  "author": "Instructure, Inc. Engineering and Product Design",
+  "module": "./es/index.js",
+  "type": "module",
+  "files": [
+    "es",
+    "src",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/instructure/instructure-ui.git"
+  },
+  "homepage": "https://instructure.github.io/instructure-ui/",
+  "bugs": "https://github.com/instructure/instructure-ui/issues",
+  "scripts": {
+    "lint": "ui-scripts lint",
+    "lint:fix": "ui-scripts lint --fix",
+    "clean": "ui-scripts clean",
+    "build": "vite build",
+    "build:watch": "vite build --watch",
+    "build:types": "echo 'ui-web-core: multi-entry .d.ts emission is a tracked follow-up (see README); runtime bundle is produced by build'",
+    "ts:check": "tsc -p tsconfig.json --noEmit --emitDeclarationOnly false",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@lit/react": "^1.0.8",
+    "lit": "^3.3.3"
+  },
+  "devDependencies": {
+    "@instructure/ui-babel-preset": "workspace:*",
+    "@instructure/ui-scripts": "workspace:*",
+    "@microsoft/api-extractor": "^7.58.8",
+    "@storybook/addon-a11y": "^10.4.1",
+    "@storybook/addon-docs": "^10.4.1",
+    "@storybook/web-components-vite": "^10.4.1",
+    "storybook": "^10.4.1",
+    "vite": "^7.0.0",
+    "vite-plugin-dts": "^5.0.2"
+  },
+  "peerDependencies": {
+    "@angular/common": ">=17",
+    "@angular/core": ">=17",
+    "react": ">=18 <=19",
+    "react-dom": ">=18 <=19"
+  },
+  "peerDependenciesMeta": {
+    "@angular/common": {
+      "optional": true
+    },
+    "@angular/core": {
+      "optional": true
+    },
+    "react": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": true,
+  "exports": {
+    "./package.json": "./package.json",
+    "./es/*": "./es/*",
+    "./types/*": "./types/*",
+    "./src/*": "./src/*",
+    ".": {
+      "src": "./src/index.ts",
+      "import": "./es/index.js",
+      "default": "./es/index.js"
+    },
+    "./react": {
+      "src": "./src/react/index.ts",
+      "import": "./es/react/index.js",
+      "default": "./es/react/index.js"
+    },
+    "./ssr": {
+      "src": "./src/ssr/index.ts",
+      "import": "./es/ssr/index.js",
+      "default": "./es/ssr/index.js"
+    }
+  }
+}

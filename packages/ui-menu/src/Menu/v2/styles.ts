@@ -23,7 +23,8 @@
  */
 
 import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
-import type { MenuStyle, MenuProps } from './props'
+import type { MenuStyle } from './props'
+import type { MenuStyleInputs } from './types'
 import { calcFocusOutlineStyles } from '@instructure/emotion'
 
 /**
@@ -38,7 +39,7 @@ import { calcFocusOutlineStyles } from '@instructure/emotion'
  */
 const generateStyle = (
   componentTheme: ReturnType<NewComponentTypes['Menu']>,
-  props: MenuProps,
+  props: MenuStyleInputs,
   sharedTokens: SharedTokens
 ): MenuStyle => {
   const maxHeight = props.maxHeight

@@ -24,7 +24,6 @@
 
 import { Fragment, Component } from 'react'
 import ReactDOM from 'react-dom'
-import keycode from 'keycode'
 
 import {
   callRenderProp,
@@ -49,6 +48,15 @@ import generateStyle from './styles'
 
 import { allowedProps } from './props'
 import type { AlertProps, AlertState } from './props'
+
+import {
+  AlertLiveRegionController,
+  createDismissTimer,
+  describeScreenReaderContent,
+  resolveLiveRegion,
+  shouldCloseOnKey,
+  type DismissTimer
+} from './behavior'
 
 /**
 ---
@@ -81,10 +89,22 @@ class Alert extends Component<AlertProps, AlertState> {
     this.state = {
       open: true
     }
+
+    // Behavior layer wiring. Callbacks (rather than captured values) so the
+    // controller always reads the consumer's current props — matches the
+    // original `initLiveRegion`/`handleTimeout` behavior of reading
+    // `this.props.*` at call time.
+    this.timer = createDismissTimer(this.props.timeout!, () => this.close())
+    this.liveRegionController = new AlertLiveRegionController(
+      () => resolveLiveRegion(this.props.liveRegion),
+      () => this.props.liveRegionPoliteness!,
+      () => this.props.isLiveRegionAtomic!
+    )
   }
 
-  _timeouts: ReturnType<typeof setTimeout>[] = []
   srid: string
+  private timer: DismissTimer
+  private liveRegionController: AlertLiveRegionController
 
   variantUI = {
     error: XCircleInstUIIcon,
@@ -99,19 +119,12 @@ class Alert extends Component<AlertProps, AlertState> {
     this.ref = el
   }
 
-  handleTimeout = () => {
-    if (this.props.timeout! > 0) {
-      this._timeouts.push(
-        setTimeout(() => {
-          this.close()
-        }, this.props.timeout)
-      )
-    }
-  }
-
-  clearTimeouts() {
-    this._timeouts.forEach((timeout) => clearTimeout(timeout))
-    this._timeouts = []
+  // Kept for backward compatibility — historically present but not invoked
+  // from React's render flow (the SR content goes through `createScreenReader-
+  // Portal`). Delegates to the behavior-layer controller so call sites that
+  // still reach for it get the unchanged DOM effect.
+  createScreenreaderAlert() {
+    this.liveRegionController.appendContent(this.srid)
   }
 
   onExitTransition = () => {
@@ -121,8 +134,8 @@ class Alert extends Component<AlertProps, AlertState> {
   }
 
   close = () => {
-    this.clearTimeouts()
-    this.removeScreenreaderAlert()
+    this.timer.clear()
+    this.liveRegionController.refresh(this.srid)
     this.setState({ open: false }, () => {
       if (
         this.props.onDismiss &&
@@ -133,96 +146,38 @@ class Alert extends Component<AlertProps, AlertState> {
     })
   }
 
-  // duck type for a dom node
-  isDOMNode(n: Element | null | undefined) {
-    return n && typeof n === 'object' && n.nodeType === 1
-  }
-
+  // Preserved as a thin wrapper for compatibility with any tests or external
+  // call sites that referenced this method on the instance.
   getLiveRegion() {
-    const lr =
-      typeof this.props.liveRegion === 'function'
-        ? this.props.liveRegion()
-        : this.props.liveRegion
-
-    return this.isDOMNode(lr) ? lr : null
-  }
-
-  initLiveRegion(liveRegion: Element) {
-    error(
-      liveRegion.getAttribute('role') === 'alert',
-      `[Alert] live region must have role='alert' set on page load in order to announce content`
-    )
-
-    if (liveRegion) {
-      liveRegion.setAttribute('aria-live', this.props.liveRegionPoliteness!)
-      // indicates what notifications the user agent will trigger when the
-      // accessibility tree within a live region is modified.
-      // additions: elements are added, text: Text content is added
-      liveRegion.setAttribute('aria-relevant', 'additions text')
-      liveRegion.setAttribute(
-        'aria-atomic',
-        `${this.props.isLiveRegionAtomic!}`
-      )
-    }
+    return resolveLiveRegion(this.props.liveRegion)
   }
 
   createScreenreaderContentNode() {
+    const { label, children } = describeScreenReaderContent({
+      variantScreenReaderLabel: this.props.variantScreenReaderLabel,
+      children: this.props.children
+    })
     return (
       <ScreenReaderContent>
-        {this.props.variantScreenReaderLabel || ''} {this.props.children}
+        {label} {children}
       </ScreenReaderContent>
     )
   }
 
-  createScreenreaderAlert() {
-    const liveRegion = this.getLiveRegion()
-    if (liveRegion) {
-      const div = document.createElement('div')
-      div.setAttribute('id', this.srid)
-
-      liveRegion.appendChild(div)
-    }
-  }
-
-  removeScreenreaderAlert() {
-    const liveRegion = this.getLiveRegion()
-    if (liveRegion) {
-      const div = document.getElementById(this.srid!)
-      if (div) {
-        // Accessibility attributes must be removed for the deletion of the node
-        // and then reapplied because JAWS/IE will not respect the
-        // "aria-relevant" attribute and read when the node is deleted if
-        // the attributes are in place
-        liveRegion.removeAttribute('aria-live')
-        liveRegion.removeAttribute('aria-relevant')
-        liveRegion.removeAttribute('aria-atomic')
-
-        this.initLiveRegion(liveRegion)
-      }
-    }
-  }
-
   handleKeyUp = (event: React.KeyboardEvent<ViewOwnProps>) => {
-    if (
-      this.props.renderCloseButtonLabel &&
-      event.keyCode === keycode.codes.esc
-    ) {
+    if (shouldCloseOnKey(event, !!this.props.renderCloseButtonLabel)) {
       this.close()
     }
   }
 
   componentDidMount() {
     this.props.makeStyles?.()
-    const liveRegion = this.getLiveRegion()
-    if (liveRegion) {
-      this.initLiveRegion(liveRegion)
-    }
-
-    this.handleTimeout()
+    this.liveRegionController.init()
+    this.timer.arm()
   }
 
   componentWillUnmount() {
-    this.clearTimeouts()
+    this.timer.clear()
   }
 
   componentDidUpdate(prevProps: AlertProps) {

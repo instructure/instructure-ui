@@ -650,6 +650,29 @@ class App extends Component<AppProps, AppState> {
     return <Section id={key}>{this.renderWrappedContent(iconContent)}</Section>
   }
 
+  renderParchmentStorybook(key: string) {
+    // The ui-web-core Storybook (Lit + Web Components) is built by the docs
+    // app's `build:storybooks` script and copied to
+    // `__build__/storybook/parchment/` during `bundle`. If that step hasn't
+    // run locally (e.g. `pnpm run dev`), the iframe will 404 — expected for
+    // the unbundled dev path.
+    const src = `${getDeployBase()}/storybook/parchment/`
+    const content = (
+      <View as="div" height="100vh" width="100%">
+        <iframe
+          src={src}
+          title="Parchment InstUI Storybook"
+          style={{
+            border: 0,
+            width: '100%',
+            height: '100%'
+          }}
+        />
+      </View>
+    )
+    return <Section id={key}>{content}</Section>
+  }
+
   renderDocument(docId: keyof NewComponentTypes, repository: string) {
     const { parents } = this.state.docsData!
     const children: any[] = []
@@ -861,6 +884,17 @@ class App extends Component<AppProps, AppState> {
           as={'div'}
         >
           {this.renderLegacyIcons(key)}
+        </View>
+      )
+    } else if (key === 'parchment') {
+      return (
+        <View
+          elementRef={this.mainContentRef}
+          tabIndex={0}
+          aria-label="parchment instui page main content"
+          as={'div'}
+        >
+          {this.renderParchmentStorybook(key)}
         </View>
       )
     } else if (theme) {

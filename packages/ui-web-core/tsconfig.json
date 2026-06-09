@@ -1,0 +1,17 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "paths": {
+      "@alerts/*": ["../ui-alerts/src/*"],
+      "@drilldown/*": ["../ui-drilldown/src/*"],
+      "@popover/*": ["../ui-popover/src/*"],
+      "@position/*": ["../ui-position/src/*"],
+      "@a11y/*": ["../ui-a11y-utils/src/*"],
+      "@menu/*": ["../ui-menu/src/*"]
+    }
+  },
+  "include": ["src", ".storybook"],
+  "exclude": ["node_modules", "storybook-static", "es", "lib", "types"]
+}

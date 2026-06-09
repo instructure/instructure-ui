@@ -23,21 +23,28 @@
  */
 import { boxShadowObjectsToCSSString } from '@instructure/ui-themes'
 import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
-import type { AlertProps, AlertStyle } from './props'
+import type { AlertStyle } from './props'
+import type { AlertStyleInputs } from './types'
 
 /**
  * ---
  * private: true
  * ---
- * Generates the style object from the theme and provided additional information
+ * Generates the style object from the theme and provided additional information.
+ *
+ * The `props` parameter is typed as the narrow `AlertStyleInputs` (the actual
+ * fields this function reads) rather than the React-flavored `AlertProps`, so
+ * non-React adapters can call this without importing React. The full React
+ * `AlertProps` is structurally assignable to `AlertStyleInputs`, so existing
+ * call sites keep working unchanged.
+ *
  * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
   componentTheme: ReturnType<NewComponentTypes['Alert']>,
-  props: AlertProps,
+  props: AlertStyleInputs,
   sharedTokens: SharedTokens
 ): AlertStyle => {
   const { variant, hasShadow } = props

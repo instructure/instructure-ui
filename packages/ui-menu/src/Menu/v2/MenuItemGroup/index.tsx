@@ -40,6 +40,12 @@ import type { MenuSeparatorProps } from '../MenuItemSeparator/props'
 
 import generateStyle from './styles'
 
+import {
+  updateGroupSelection,
+  resolveGroupSelectedValues,
+  itemTypeForGroup
+} from '../behavior'
+
 import { allowedProps } from './props'
 import type { MenuGroupProps, MenuGroupState } from './props'
 
@@ -123,18 +129,13 @@ class MenuItemGroup extends Component<MenuGroupProps, MenuGroupState> {
     selected: MenuItemProps['selected'],
     item: MenuItem
   ) => {
-    const { allowMultiple } = this.props
-    let updated = allowMultiple ? [...items] : []
-    const location = updated.indexOf(value!)
-
-    if (selected === true && location < 0) {
-      updated.push(value!)
-    } else if (selected === false && location !== -1) {
-      updated.splice(location, 1)
-    } else if (!allowMultiple && updated.length < 1) {
-      // don't allow nothing selected if it's not allowMultiple/checkbox
-      updated = [...items]
-    }
+    // the value-array reducer lives in the framework-neutral behavior layer
+    const updated = updateGroupSelection(
+      items,
+      value!,
+      selected!,
+      !!this.props.allowMultiple
+    )
 
     if (typeof this.props.onSelect === 'function') {
       this.props.onSelect(e, updated, selected, item)
@@ -166,16 +167,7 @@ class MenuItemGroup extends Component<MenuGroupProps, MenuGroupState> {
   }
 
   get selected() {
-    if (
-      typeof this.props.selected === 'undefined' &&
-      typeof this.state.selected === 'undefined'
-    ) {
-      return []
-    } else {
-      return typeof this.props.selected === 'undefined'
-        ? [...this.state.selected]
-        : [...this.props.selected]
-    }
+    return resolveGroupSelectedValues(this.props.selected, this.state.selected)
   }
 
   renderLabel() {
@@ -207,7 +199,7 @@ class MenuItemGroup extends Component<MenuGroupProps, MenuGroupState> {
           controls,
           value,
           children: child.props.children,
-          type: allowMultiple ? 'checkbox' : 'radio',
+          type: itemTypeForGroup(allowMultiple),
           ref: this.props.itemRef,
           disabled: disabled || child.props.disabled,
           selected: this.selected.indexOf(value) > -1,

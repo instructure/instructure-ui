@@ -110,8 +110,8 @@ class Nav extends Component<NavProps, NavState> {
       count === -1
         ? 'Search cleared'
         : count === 0
-        ? 'No results'
-        : `${count} ${count === 1 ? 'result' : 'results'} available below`
+          ? 'No results'
+          : `${count} ${count === 1 ? 'result' : 'results'} available below`
     setTimeout(() => {
       this.setState({
         announcement: message
@@ -452,7 +452,8 @@ class Nav extends Component<NavProps, NavState> {
 
         const renderThemeName = (rawName: string) => {
           if (rawName === 'canvas') return 'legacy-canvas'
-          if (rawName === 'canvas-high-contrast') return 'legacy-canvas-high-contrast'
+          if (rawName === 'canvas-high-contrast')
+            return 'legacy-canvas-high-contrast'
           return rawName
         }
 
@@ -512,7 +513,16 @@ class Nav extends Component<NavProps, NavState> {
         shouldBlur={true}
       />
     )
-    const matches = [...sections, ...themes, legacyIcons]
+    const parchmentStorybook = (
+      <NavToggle
+        key="Parchment InstUI button"
+        summary="Parchment InstUI"
+        onToggle={(e: any) => this.handleInternalNavigation('parchment', e)}
+        href="parchment"
+        shouldBlur={true}
+      />
+    )
+    const matches = [...sections, ...themes, legacyIcons, parchmentStorybook]
     const hasMatches = matches.length > 0
     const errorMessage = [
       { text: `No matches for '${this.state.queryStr}'`, type: 'hint' as const }

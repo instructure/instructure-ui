@@ -45,6 +45,8 @@ import { withStyleNew } from '@instructure/emotion'
 
 import generateStyle from './styles'
 
+import { nextFocusIndex } from './behavior'
+
 import { allowedProps } from './props'
 import type { MenuProps } from './props'
 
@@ -283,14 +285,14 @@ class Menu extends Component<MenuProps> {
 
   moveFocus(step: number) {
     const count = this.menuItems ? this.menuItems.length : 0
+    // roving-index math lives in the framework-neutral behavior layer
+    const nextIndex = nextFocusIndex(this.focusedIndex, count, step)
 
-    if (count <= 0) {
+    if (nextIndex === null) {
       return
     }
 
-    const current = this.focusedIndex < 0 && step < 0 ? 0 : this.focusedIndex
-
-    const nextItem = this.menuItems[(current + count + step) % count]
+    const nextItem = this.menuItems[nextIndex]
 
     error(
       typeof nextItem !== 'undefined' && typeof nextItem.focus !== 'undefined',

@@ -63,6 +63,16 @@ import { withStyleNew } from '@instructure/emotion'
 
 import generateStyle from './styles'
 
+import {
+  resolveShown,
+  resolveShowIntent,
+  resolveHideIntent,
+  resolveToggleIntent,
+  resolveActiveTriggers,
+  isTooltip,
+  resolvePlacement
+} from './behavior'
+
 import type { PopoverProps, PopoverState } from './props'
 import { allowedProps } from './props'
 import type { Renderable } from '@instructure/shared-types'
@@ -169,12 +179,7 @@ class Popover extends Component<PopoverProps, PopoverState> {
   }
 
   get isTooltip() {
-    return (
-      this.props.shouldRenderOffscreen &&
-      !this.props.shouldReturnFocus &&
-      !this.props.shouldContainFocus &&
-      !this.props.shouldFocusContentOnTriggerBlur
-    )
+    return isTooltip(this.props)
   }
 
   componentDidMount() {
@@ -284,16 +289,16 @@ class Popover extends Component<PopoverProps, PopoverState> {
   }
 
   get placement(): PopoverProps['placement'] {
-    let { placement } = this.props
-    const { dir } = this.props
-    const isRtl = dir === textDirectionContextConsumer.DIRECTION.rtl
-    if (isRtl) {
-      placement = mirrorHorizontalPlacement(placement!, ' ')
-    }
-
-    return !this.shown && this.props.shouldRenderOffscreen
-      ? 'offscreen'
-      : placement
+    const isRtl = this.props.dir === textDirectionContextConsumer.DIRECTION.rtl
+    return resolvePlacement(
+      {
+        placement: this.props.placement,
+        isRtl,
+        shown: !!this.shown,
+        shouldRenderOffscreen: this.props.shouldRenderOffscreen
+      },
+      (p) => mirrorHorizontalPlacement(p, ' ')
+    )
   }
 
   get positionProps(): Partial<PositionProps> {
@@ -314,9 +319,10 @@ class Popover extends Component<PopoverProps, PopoverState> {
   }
 
   get shown() {
-    return typeof this.props.isShowingContent === 'undefined'
-      ? this.state.isShowingContent
-      : this.props.isShowingContent
+    return resolveShown(
+      this.props.isShowingContent,
+      this.state.isShowingContent
+    )
   }
 
   get defaultFocusElement() {
@@ -324,34 +330,52 @@ class Popover extends Component<PopoverProps, PopoverState> {
   }
 
   show = (event: React.UIEvent | React.FocusEvent) => {
-    if (typeof this.props.isShowingContent === 'undefined') {
-      this.setState({ isShowingContent: true })
+    // controlled/uncontrolled decision lives in the framework-neutral behavior
+    const intent = resolveShowIntent(
+      typeof this.props.isShowingContent !== 'undefined'
+    )
+    if (intent.setStateShown !== null) {
+      this.setState({ isShowingContent: intent.setStateShown })
     }
-    this.props.onShowContent?.(event)
+    if (intent.fireShow) {
+      this.props.onShowContent?.(event)
+    }
   }
 
   hide = (event: React.UIEvent | React.FocusEvent, documentClick = false) => {
     const { onHideContent, isShowingContent } = this.props
+    const isControlled = typeof isShowingContent !== 'undefined'
 
-    if (typeof isShowingContent === 'undefined') {
-      // uncontrolled, set state, fire callbacks
-      this.setState(({ isShowingContent }) => {
-        if (isShowingContent) {
+    if (!isControlled) {
+      // uncontrolled, set state, fire callbacks — keep firing inside the
+      // functional setState so timing matches (reads the committed snapshot)
+      this.setState(({ isShowingContent: stateShown }) => {
+        const intent = resolveHideIntent({
+          isControlled: false,
+          currentShown: !!stateShown
+        })
+        if (intent.fireHide) {
           onHideContent?.(event, { documentClick })
         }
-        return { isShowingContent: false }
+        return { isShowingContent: intent.setStateShown as boolean }
       })
-    } else if (isShowingContent) {
-      // controlled, fire callback
-      onHideContent?.(event, { documentClick })
+    } else {
+      // controlled, fire callback only when it was showing
+      const intent = resolveHideIntent({
+        isControlled: true,
+        currentShown: !!isShowingContent
+      })
+      if (intent.fireHide) {
+        onHideContent?.(event, { documentClick })
+      }
     }
   }
 
   toggle = (event: React.MouseEvent) => {
-    if (this.shown) {
-      this.hide(event)
-    } else {
+    if (resolveToggleIntent(!!this.shown) === 'show') {
       this.show(event)
+    } else {
+      this.hide(event)
     }
   }
 
@@ -452,13 +476,16 @@ class Popover extends Component<PopoverProps, PopoverState> {
       let onMouseOver: React.MouseEventHandler | undefined = undefined
       let expanded: string | undefined
 
-      if (on && on.indexOf('click') > -1) {
+      // which interaction handlers to attach is decided in the behavior layer
+      const triggers = resolveActiveTriggers(on)
+
+      if (triggers.click) {
         onClick = (event: React.MouseEvent) => {
           this.toggle(event)
         }
       }
 
-      if (on && on.indexOf('hover') > -1) {
+      if (triggers.hover) {
         error(
           !(on === 'hover'),
           '[Popover] Specifying only the `"hover"` trigger limits the visibility' +
@@ -469,7 +496,7 @@ class Popover extends Component<PopoverProps, PopoverState> {
         onMouseOut = this._handleMouseOut
       }
 
-      if (on && on.indexOf('focus') > -1) {
+      if (triggers.focus) {
         onFocus = (event: React.FocusEvent) => {
           this.show(event)
         }
@@ -520,9 +547,7 @@ class Popover extends Component<PopoverProps, PopoverState> {
     let content = callRenderProp(this.props.children)
 
     if (this.props.shouldScrollContent) {
-      content = (
-        <div css={this.props.styles?.scrollContainer}>{content}</div>
-      )
+      content = <div css={this.props.styles?.scrollContainer}>{content}</div>
     }
 
     if (this.shown && !this.isTooltip) {

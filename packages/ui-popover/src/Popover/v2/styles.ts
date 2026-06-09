@@ -22,20 +22,26 @@
  * SOFTWARE.
  */
 
-import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { PopoverStyle } from './props'
+import type { PopoverStyleInputs } from './types'
 
 /**
  * ---
  * private: true
  * ---
- * Generates the style object from the theme and provided additional information
+ * Generates the style object from the theme and provided additional information.
+ *
+ * `componentTheme` is typed as the narrow, framework-neutral `PopoverStyleInputs`
+ * (the only fields this function reads) rather than the React-flavored
+ * `ReturnType<NewComponentTypes['Popover']>`, so non-React adapters (e.g.
+ * @instructure/ui-web-core's Lit Popover) can call this without importing React.
+ * The full React theme stays structurally assignable, so existing call sites
+ * keep working unchanged.
+ *
  * @param  {Object} componentTheme The theme variable object.
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (
-  componentTheme: ReturnType<NewComponentTypes['Popover']>
-): PopoverStyle => {
+const generateStyle = (componentTheme: PopoverStyleInputs): PopoverStyle => {
   return {
     borderColor: componentTheme.borderColor,
     borderRadius: componentTheme.borderRadius,

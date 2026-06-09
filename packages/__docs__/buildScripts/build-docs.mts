@@ -105,6 +105,9 @@ const pathsToIgnore = [
   '**/ui-theme-tokens/**',
   '**/ui-test-*/src/**',
   '**/ui-scripts/src/**',
+  // ui-web-core ships Lit Web Components with their own embedded Storybook at
+  // /parchment; the React docs builder's per-component shape doesn't apply.
+  '**/ui-web-core/**',
 
   // large generated files:
   '**/lucide/**', // Lucide icons directory (large generated file)

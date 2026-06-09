@@ -23,7 +23,8 @@
  */
 
 import type { NewComponentTypes } from '@instructure/ui-themes'
-import type { MenuItemProps, MenuItemStyle } from './props'
+import type { MenuItemStyle } from './props'
+import type { MenuItemStyleInputs } from '../types'
 
 /**
  * ---
@@ -37,7 +38,7 @@ import type { MenuItemProps, MenuItemStyle } from './props'
  */
 const generateStyle = (
   componentTheme: ReturnType<NewComponentTypes['MenuItem']>,
-  props: MenuItemProps
+  props: MenuItemStyleInputs
 ): MenuItemStyle => {
   const { type, disabled, selected } = props
 

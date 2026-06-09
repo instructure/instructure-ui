@@ -23,26 +23,31 @@
  */
 
 import type { NewComponentTypes } from '@instructure/ui-themes'
-import type {
-  DrilldownProps,
-  DrilldownStyleProps,
-  DrilldownStyle
-} from './props'
+import type { DrilldownStyle } from './props'
+import type { DrilldownStyleInputs } from './types'
 
 /**
  * ---
  * private: true
  * ---
- * Generates the style object from the theme and provided additional information
+ * Generates the style object from the theme and provided additional information.
+ *
+ * The `state` parameter is typed as the narrow, framework-neutral
+ * `DrilldownStyleInputs` (the only field this function reads) rather than the
+ * React-flavored `DrilldownStyleProps`, and `_props` is left untyped, so
+ * non-React adapters (e.g. @instructure/ui-web-core's Lit Drilldown) can call
+ * this without importing React. The structurally-identical React types stay
+ * assignable, so existing call sites keep working unchanged.
+ *
  * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} _props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
+ * @param  {Object} _props the props of the component (unused by this generator)
+ * @param  {Object} state the style inputs the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
   componentTheme: ReturnType<NewComponentTypes['Drilldown']>,
-  _props: DrilldownProps,
-  state: DrilldownStyleProps
+  _props: unknown,
+  state: DrilldownStyleInputs
 ): DrilldownStyle => {
   const { hasHighlightedOption } = state
 
