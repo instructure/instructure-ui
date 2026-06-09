@@ -29,6 +29,71 @@ import { View } from '@instructure/ui-view'
 import { ColorName } from '../ColorName'
 import type { ColorCardProps } from './props'
 import { allowedProps } from './props'
+
+type ParsedColor = {
+  hex?: string
+  rgb?: string
+  alpha?: string
+} | null
+
+// Cache parsed results so theme re-renders skip the regex work.
+const colorCache = new Map<string, ParsedColor>()
+
+function parseColor(value: string): ParsedColor {
+  if (colorCache.has(value)) return colorCache.get(value)!
+
+  // 6-digit hex: #RRGGBB
+  const hex6 = /^#([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(value)
+  if (hex6) {
+    const result: ParsedColor = {
+      hex: value.toUpperCase(),
+      rgb: `${parseInt(hex6[1], 16)},${parseInt(hex6[2], 16)},${parseInt(
+        hex6[3],
+        16
+      )}`
+    }
+    colorCache.set(value, result)
+    return result
+  }
+  // 8-digit hex with alpha: #RRGGBBAA
+  const hex8 = /^#([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(
+    value
+  )
+  if (hex8) {
+    const alpha = Math.round((parseInt(hex8[4], 16) / 255) * 100)
+    const result: ParsedColor = {
+      hex: value.toUpperCase(),
+      rgb: `${parseInt(hex8[1], 16)},${parseInt(hex8[2], 16)},${parseInt(
+        hex8[3],
+        16
+      )}`,
+      alpha: `${alpha}%`
+    }
+    colorCache.set(value, result)
+    return result
+  }
+  // rgba(r,g,b,a)
+  const rgba =
+    /^rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)(?:\s*,\s*([\d.]+))?\s*\)/i.exec(
+      value
+    )
+  if (rgba) {
+    const alpha =
+      rgba[4] !== undefined
+        ? `${Math.round(parseFloat(rgba[4]) * 100)}%`
+        : undefined
+    const result: ParsedColor = {
+      rgb: `${rgba[1]},${rgba[2]},${rgba[3]}`,
+      alpha
+    }
+    colorCache.set(value, result)
+    return result
+  }
+
+  colorCache.set(value, null)
+  return null
+}
+
 class ColorCard extends Component<ColorCardProps> {
   static displayName = 'ColorCard'
   static allowedProps = allowedProps
@@ -36,51 +101,9 @@ class ColorCard extends Component<ColorCardProps> {
     minimal: false
   }
 
-  parseColor(value: string) {
-    // 6-digit hex: #RRGGBB
-    const hex6 = /^#([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(value)
-    if (hex6) {
-      return {
-        hex: value.toUpperCase(),
-        rgb: `${parseInt(hex6[1], 16)},${parseInt(hex6[2], 16)},${parseInt(
-          hex6[3],
-          16
-        )}`
-      }
-    }
-    // 8-digit hex with alpha: #RRGGBBAA
-    const hex8 = /^#([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(
-      value
-    )
-    if (hex8) {
-      const alpha = Math.round((parseInt(hex8[4], 16) / 255) * 100)
-      return {
-        hex: value.toUpperCase(),
-        rgb: `${parseInt(hex8[1], 16)},${parseInt(hex8[2], 16)},${parseInt(
-          hex8[3],
-          16
-        )}`,
-        alpha: `${alpha}%`
-      }
-    }
-    // rgba(r,g,b,a)
-    const rgba =
-      /^rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)(?:\s*,\s*([\d.]+))?\s*\)/i.exec(
-        value
-      )
-    if (rgba) {
-      const alpha =
-        rgba[4] !== undefined
-          ? `${Math.round(parseFloat(rgba[4]) * 100)}%`
-          : undefined
-      return { rgb: `${rgba[1]},${rgba[2]},${rgba[3]}`, alpha }
-    }
-    return null
-  }
-
   render() {
     const { name, hex, minimal } = this.props
-    const parsed = this.parseColor(hex)
+    const parsed = parseColor(hex)
     return (
       <View
         as="figure"
