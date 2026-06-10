@@ -98,11 +98,9 @@ const defaultValues = {
  * category: utilities/themes
  * ---
  *
- * A decorator or higher order component that makes a component themeable.
- *
- * It adds a `makeStyles` function and the generated `styles` object to the decorated Component's props. If it has an own theme, it also adds the `themeOverride` prop to the component.
- *
- * As a HOC:
+ * Decorator (or HOC) that makes a component themeable using InstUI's new
+ * theming system. Injects a `makeStyles` function and the
+ * generated `styles` object as props.
  *
  * ```js-code
  * import { withStyleNew } from '@instructure/emotion'
@@ -111,42 +109,18 @@ const defaultValues = {
  * export default withStyleNew(generateStyle)(ExampleComponent)
  * ```
  *
- * Themeable components inject their themed styles into the document
- * when they are mounted.
+ * Optionally pass a `useTokensFrom` key as the second argument to consume
+ * another component's tokens (e.g. `withStyleNew(generateStyle, 'BaseButton')`).
  *
- * ### Applying themes
- *
- * A themeable component’s theme can be configured via wrapping it in an
- * [InstUISettingsProvider](InstUISettingsProvider) component, and/or set
- * explicitly via its `themeOverride` prop.
- *
- * InstUISettingsProvider provides a theme object (e.g. the [canvas theme](/#canvas)).
- * These variables are mapped to the component's own variables in `theme.js` (see [theming](theming-basics) for more info).
- *
- * With the `themeOverride` prop you can directly set/override the component theme variables declared in theme.js. It accepts an object or a function. The function has the component's theme and the currently active main theme as its parameter.
- *
- * See more about the overrides on the [Using theme overrides](/#using-theme-overrides) docs page.
- *
- * ```jsx-code
- * {// global theme override}
- * <InstUISettingsProvider theme={{
- *   colors: { backgroundMedium: '#888' }
- * }}>
- *  {// component theme override}
- *   <ExampleComponent themeOverride={{ hoverColor: '#eee' }} />
- *
- *  {// component theme override with function}
- *   <ExampleComponent themeOverride={(componentTheme, currentTheme) => ({
- *     hoverBackground: componentTheme.background,
- *     activeBackground: currentTheme.colors.backgroundBrand
- *   })} />
- * </InstUISettingsProvider>
- * ```
+ * Override patterns (provider-scoped, per-component, primitives / semantics /
+ * sharedTokens layers, priority rules) are documented on the
+ * [New theme overrides](/#new-theme-overrides) docs page.
  *
  * @module withStyleNew
  *
- * @param {function} generateStyle - The function that returns the component's style object
- * @returns {ReactElement} The decorated WithStyle Component
+ * @param {function} generateStyle - Returns the component's style object
+ * @param {string}   [useTokensFrom] - Key of another component whose tokens this one should consume
+ * @returns {ReactElement} The decorated component
  */
 const withStyleNew = decorator(
   (

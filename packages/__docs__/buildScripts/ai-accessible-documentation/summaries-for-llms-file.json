@@ -465,8 +465,12 @@
     "summary": "Quick start: Create a React app, add `@instructure/ui`, wrap with `InstUISettingsProvider`, and use components. Integrate with existing projects by adding the dependency and provider. Read about theme overrides and accessibility for best practices."
   },
   {
-    "title": "using-theme-overrides",
-    "summary": "Customize components via theme overrides while ensuring WCAG compliance. Use nested `InstUISettingsProvider` for subtree themes, override global or component themes, and leverage branding variables for user customization. Deprecated global theming causes issues with multiple InstUI versions."
+    "title": "legacy-theme-overrides",
+    "summary": "Theme overrides for version `/v11_6` and earlier. Apply via `themeOverride` on `InstUISettingsProvider` for a subtree or per-component `themeOverride` prop (component's own flat theme-variable map, object or function form)."
+  },
+  {
+    "title": "new-theme-overrides",
+    "summary": "Theme overrides for version `/v11_7` and later on the new token-based theming. Layered model: `primitives` → `semantics` → `components`, plus `sharedTokens` for cross-component patterns (focus rings, box shadows). Apply via structured `themeOverride` on `InstUISettingsProvider` keyed by token layer, or per-component `themeOverride` prop (object or `(componentTheme) => ({...})` function). Per-component overrides have highest priority."
   },
   {
     "title": "Upgrade Guide for Version 11",

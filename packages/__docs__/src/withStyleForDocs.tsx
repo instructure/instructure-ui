@@ -114,77 +114,27 @@ const defaultValues = {
  * category: utilities/themes
  * ---
  *
- * Same as `withStyle`, used only for the docs app.
- *
- * A decorator or higher order component that makes a component themeable.
- *
- * It adds a `makeStyles` function and the generated `styles` object to the decorated Component's props. If it has an own theme, it also adds the `themeOverride` prop to the component.
- *
- * As a HOC:
+ * Same shape as the legacy `withStyle` decorator, used only by the docs app.
+ * Injects a `makeStyles` function and the generated `styles` object as props,
+ * and forwards a `themeOverride` prop to the component.
  *
  * ```js-code
- * import { withStyleForDocs as withStyleNew } from '@instructure/emotion'
+ * import { withStyleForDocs } from '../withStyleForDocs'
  * import generateStyle from './styles'
  * import generateComponentTheme from './theme'
  *
- * export default withStyleNew(generateStyle, generateComponentTheme)(ExampleComponent)
+ * export default withStyleForDocs(generateStyle, generateComponentTheme)(ExampleComponent)
  * ```
  *
- * Themeable components inject their themed styles into the document
- * when they are mounted.
+ * Override patterns (provider-scoped, per-component, function form) are
+ * documented on the [Legacy theme overrides](/#legacy-theme-overrides) docs
+ * page — `withStyleForDocs` follows the same model.
  *
- * ### Applying themes
+ * @module withStyleForDocs
  *
- * A themeable component’s theme can be configured via wrapping it in an
- * [InstUISettingsProvider](InstUISettingsProvider) component, and/or set
- * explicitly via its `themeOverride` prop.
- *
- * InstUISettingsProvider provides a theme object (e.g. the [canvas theme](/#canvas)).
- * These variables are mapped to the component's own variables in `theme.js`.
- *
- * With the `themeOverride` prop you can directly set/override the component theme variables declared in theme.js. It accepts an object or a function. The function has the component's theme and the currently active main theme as its parameter.
- *
- * See more about the overrides on the [Legacy theme overrides](/#legacy-theme-overrides) docs page.
- *
- * ```js-code
- * // ExampleComponent/theme.js
- * const generateComponentTheme = (theme) => {
- *   const { colors } = theme
- *
- *   const componentVariables = {
- *     background: colors?.backgroundMedium,
- *     color: colors?.textDarkest,
- *
- *     hoverColor: colors?.textLightest,
- *     hoverBackground: colors?.backgroundDarkest
- *   }
- *
- *   return componentVariables
- * }
- * export default generateComponentTheme
- * ```
- *
- * ```jsx-code
- * {// global theme override}
- * <InstUISettingsProvider theme={{
- *   colors: { backgroundMedium: '#888' }
- * }}>
- *  {// component theme override}
- *   <ExampleComponent themeOverride={{ hoverColor: '#eee' }} />
- *
- *  {// component theme override with function}
- *   <ExampleComponent themeOverride={(componentTheme, currentTheme) => ({
- *     hoverBackground: componentTheme.background,
- *     activeBackground: currentTheme.colors.backgroundBrand
- *   })} />
- * </InstUISettingsProvider>
- * ```
- *
- * @module withStyleNew
- *
- * @param {function} generateStyle - The function that returns the component's style object
- * @param {function} generateComponentTheme - The function that returns the component's theme variables object
- * @returns {ReactElement} The decorated WithStyle Component
+ * @param {function} generateStyle - Returns the component's style object
+ * @param {function} generateComponentTheme - Returns the component's theme variables object
+ * @returns {ReactElement} The decorated component
  */
 const withStyleForDocs = decorator(
   (

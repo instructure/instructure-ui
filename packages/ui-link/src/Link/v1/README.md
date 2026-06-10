@@ -10,24 +10,9 @@ describes: Link
 ---
 type: example
 ---
-  <div>
-<Text>The quick brown fox <Link href="https://instructure.github.io/instructure-ui/"
-                                themeOverride={{
-                                  focusOutlineColor: 'pink'
-                                }}>jumps</Link> over the lazy dog.</Text>
-<Link color="link-inverse" href="https://instructure.github.io/instructure-ui/">jumps</Link>
-</div>
-```
-
-```js
----
-type: example
----
-<View background="primary-inverse" as="div">
-  <Text color="primary-inverse">The quick brown fox <Link color="link-inverse" href="https://instructure.github.io/instructure-ui/" themeOverride={{
-    focusInverseIconOutlineColor: 'pink'
-  }}>jumps</Link> over the lazy dog.</Text>
-</View>
+<Link href="https://instructure.github.io/instructure-ui/" target="_blank">
+  Link text
+</Link>
 ```
 
 ### Controlled navigation
@@ -164,7 +149,7 @@ type: example
 
 ### Theme overrides
 
-Examples showing how theme overrides work for Link:
+Examples showing how [theme overrides](legacy-theme-overrides) work for Link:
 
 ```js
 ---
