@@ -168,7 +168,7 @@ type: example
 
 ### Theme overrides
 
-Examples showing how [theme overrides](using-theme-overrides) work for Link:
+Examples showing how [theme overrides](new-theme-overrides) work for Link:
 
 ```js
 ---
@@ -176,13 +176,11 @@ type: example
 ---
 <div>
   <InstUISettingsProvider
-    theme={{
-      newTheme: {
-        sharedTokens: {
-          focusOutline: {
-            infoColor: 'pink',
-            width: '0.5rem',
-          }
+    themeOverride={{
+      sharedTokens: {
+        focusOutline: {
+          infoColor: 'pink',
+          width: '0.5rem'
         }
       }
     }}

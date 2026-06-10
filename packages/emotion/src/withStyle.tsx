@@ -94,7 +94,11 @@ const defaultValues = {
  * ---
  * category: utilities/themes
  * ---
- * used for old (v11 and eariler) theming system
+ * Legacy decorator for the pre-v11.7 theming system. New components should use
+ * `withStyleNew` instead. Override patterns for components decorated with
+ * `withStyle` are documented on the
+ * [Legacy theme overrides](/#legacy-theme-overrides) docs page.
+ *
  * TODO delete when the theme migration is complete
  */
 const withStyle = decorator(

@@ -58,20 +58,39 @@ type ThemeState = { showColors: boolean }
 
   state: ThemeState = { showColors: false }
 
+  private _showColorsRafId: number | null = null
+
   componentDidMount() {
     this.props.makeStyles?.()
     // Defer color card rendering so the initial page paint is not blocked
-    requestAnimationFrame(() => this.setState({ showColors: true }))
+    this.scheduleShowColors()
   }
 
   componentDidUpdate(prevProps: ThemeProps) {
     this.props.makeStyles?.()
     if (prevProps.themeKey !== this.props.themeKey) {
       // Reset on theme change so navigation feels instant
-      this.setState({ showColors: false }, () => {
-        requestAnimationFrame(() => this.setState({ showColors: true }))
-      })
+      this.setState({ showColors: false }, this.scheduleShowColors)
     }
+  }
+
+  componentWillUnmount() {
+    // Avoid a setState-on-unmounted warning when the user navigates away
+    // before the deferred frame fires.
+    if (this._showColorsRafId !== null) {
+      cancelAnimationFrame(this._showColorsRafId)
+      this._showColorsRafId = null
+    }
+  }
+
+  scheduleShowColors = () => {
+    if (this._showColorsRafId !== null) {
+      cancelAnimationFrame(this._showColorsRafId)
+    }
+    this._showColorsRafId = requestAnimationFrame(() => {
+      this._showColorsRafId = null
+      this.setState({ showColors: true })
+    })
   }
 
   _colorMap: Record<string, string> = {}
@@ -344,9 +363,6 @@ ReactDOM.render(
   element
 )
 ${'```'}
-
-
-> You can read more about how our theming system works and how to use it [here](/#legacy-theme-overrides)
           `}
           title={`${themeKey} Theme Usage in applications`}
         />

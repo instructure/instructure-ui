@@ -39,7 +39,10 @@ ReactDOM.render(
 )
 ```
 
-> You can read more about how our theming system works and how to use it [here](/#using-theme-overrides)
+> You can read more about how our theming system works and how to use it:
+
+- [Legacy theme overrides](/#legacy-theme-overrides).
+- [New theme overrides](/#new-theme-overrides).
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-themes.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-themes
