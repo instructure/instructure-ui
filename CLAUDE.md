@@ -183,7 +183,7 @@ InstUI uses custom markdown with special code blocks (using [gray-matter](https:
 - Always write functional component examples with hooks
 - All InstUI components are available without imports in examples
 
-See `/docs/contributor-docs/writing-docs.md` for complete guidelines and syntax.
+See `/docs/contributing/writing-docs.md` for complete guidelines and syntax.
 
 ## Naming Conventions
 
