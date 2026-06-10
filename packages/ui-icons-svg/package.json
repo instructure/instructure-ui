@@ -1,0 +1,23 @@
+{
+  "name": "@instructure/ui-icons-svg",
+  "version": "11.7.2",
+  "description": "Raw SVG source files for the Instructure UI icon set.",
+  "author": "Instructure, Inc. Engineering and Product Design",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/instructure/instructure-ui.git"
+  },
+  "homepage": "https://instructure.github.io/instructure-ui/",
+  "bugs": "https://github.com/instructure/instructure-ui/issues",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "svg"
+  ],
+  "exports": {
+    "./*": "./svg/*",
+    "./package.json": "./package.json"
+  }
+}

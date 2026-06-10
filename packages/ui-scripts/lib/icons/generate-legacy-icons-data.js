@@ -21,18 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import path from 'path'
 import getGlyphData from './get-glyph-data.js'
 
-export default function generateLegacyIconsData() {
-  const svgDir = path.join(process.cwd(), 'svg/')
+export default function generateLegacyIconsData(svgSourceDir) {
   const bidirectionalList = []
 
-  const glyphsRaw = getGlyphData(
-    svgDir,
-    bidirectionalList,
-    'Icon'
-  )
+  const glyphsRaw = getGlyphData(svgSourceDir, bidirectionalList, 'Icon')
 
   // Group by glyphName to merge Line and Solid variants
   return Object.values(

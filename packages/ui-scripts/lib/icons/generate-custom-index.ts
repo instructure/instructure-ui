@@ -90,8 +90,8 @@ function fileNameToIconName(fileName: string): string {
     .join('')
 }
 
-export default function generateCustomIndex() {
-  const svgDir = path.join(process.cwd(), 'svg/Custom')
+export default function generateCustomIndex(svgSourceDir: string) {
+  const svgDir = path.join(svgSourceDir, 'Custom')
 
   if (!fs.existsSync(svgDir)) {
     throw new Error(`SVG directory not found: ${svgDir}`)
