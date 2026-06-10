@@ -461,7 +461,7 @@
     "summary": "v10 introduces a new color system. Upgrade step-by-step through major versions. Remove Instructure theme; use `canvas` or `canvas-high-contrast`. Migrate color overrides using new contrast values (e.g., `blue4570`). Theme-level overrides require per-component updates."
   },
   {
-    "title": "usage",
+    "title": "guides-getting-started",
     "summary": "Quick start: Create a React app, add `@instructure/ui`, wrap with `InstUISettingsProvider`, and use components. Integrate with existing projects by adding the dependency and provider. Read about theme overrides and accessibility for best practices."
   },
   {
