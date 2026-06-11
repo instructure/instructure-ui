@@ -43,6 +43,7 @@ import { TableOfContents } from '../TableOfContents'
 import { Heading } from '../Heading'
 
 import { AppContext } from '../appContext'
+import { navigateTo } from '../navigationUtils'
 
 import { allowedProps } from './props'
 import type { DocumentProps, DocumentState, DocDataType } from './props'
@@ -203,7 +204,15 @@ class Document extends Component<DocumentProps, DocumentState> {
           <View margin="small 0" display="block">
             The easiest way to do this is to utilize the{' '}
             <code>themeOverride</code> property. See the{' '}
-            <Link href="#legacy-theme-overrides">Legacy theme overrides</Link>{' '}
+            <Link
+              href="legacy-theme-overrides"
+              onClick={(e) => {
+                e.preventDefault()
+                navigateTo('legacy-theme-overrides')
+              }}
+            >
+              Legacy theme overrides
+            </Link>{' '}
             guide for more info and alternative methods.
           </View>
 
@@ -307,7 +316,16 @@ import { ${importName} } from '${versionedPackageName}'`
         <View as="div" margin="small 0 0 0">
           This import is pinned to the selected component version; future
           breaking changes land at new paths. For other import styles, see the{' '}
-          <Link href="component-versioning">Component versioning</Link> guide.
+          <Link
+            href="component-versioning"
+            onClick={(e) => {
+              e.preventDefault()
+              navigateTo('component-versioning')
+            }}
+          >
+            Component versioning
+          </Link>{' '}
+          guide.
         </View>
       </View>
     )
