@@ -53,6 +53,7 @@ type: example
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class FormFieldLabel extends Component<FormFieldLabelProps> {
+  static displayName = 'FormFieldLabel'
   static readonly componentId = 'FormFieldLabel'
 
   static allowedProps = allowedProps

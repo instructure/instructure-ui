@@ -29,6 +29,7 @@ import type { ParamsProps } from './props'
 import { Heading } from '@instructure/ui-heading'
 
 class Params extends Component<ParamsProps> {
+  static displayName = 'Params'
   static defaultProps = {
     layout: 'small'
   }

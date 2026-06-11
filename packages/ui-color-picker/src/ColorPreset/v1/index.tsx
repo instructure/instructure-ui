@@ -54,6 +54,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
+  static displayName = 'ColorPreset'
   static allowedProps = allowedProps
   static readonly componentId = 'ColorPreset'
 

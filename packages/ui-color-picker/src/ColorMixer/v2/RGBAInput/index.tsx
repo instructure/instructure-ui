@@ -42,6 +42,7 @@ private: true
 **/
 @withStyleNew(generateStyle, 'RgbaInput')
 class RGBAInput extends Component<RGBAInputProps, RGBAInputState> {
+  static displayName = 'RGBAInput'
   static allowedProps = allowedProps
   static readonly componentId = 'ColorMixer.RGBAInput'
 

@@ -40,6 +40,7 @@ category: components/utilities
 **/
 @textDirectionContextConsumer()
 class Portal extends Component<PortalProps, PortalState> {
+  static displayName = 'Portal'
   static allowedProps = allowedProps
   static defaultProps = {
     open: false,

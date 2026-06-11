@@ -31,6 +31,7 @@ import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import type { ColorNameProps, ColorNameState } from './props'
 import { allowedProps } from './props'
 class ColorName extends Component<ColorNameProps, ColorNameState> {
+  static displayName = 'ColorName'
   static allowedProps = allowedProps
   static defaultProps = {
     as: 'span'

@@ -47,6 +47,7 @@ category: components
 **/
 @withStyleNew(generateStyle)
 class InPlaceEdit extends Component<InPlaceEditProps> {
+  static displayName = 'InPlaceEdit'
   static readonly componentId = 'InPlaceEdit'
   static allowedProps = allowedProps
   static defaultProps = {

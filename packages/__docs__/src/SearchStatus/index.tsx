@@ -34,6 +34,7 @@ import type { SearchStatusProps } from './props'
 
 @withStyleForDocs(generateStyle, generateComponentTheme)
 class SearchStatus extends Component<SearchStatusProps> {
+  static displayName = 'SearchStatus'
   static defaultProps = {
     size: '1.25rem',
     status: 'inactive'

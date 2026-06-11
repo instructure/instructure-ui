@@ -55,6 +55,7 @@ category: components
 @withDeterministicId()
 @withStyleNew(generateStyle)
 class FileDrop extends Component<FileDropProps, FileDropState> {
+  static displayName = 'FileDrop'
   static readonly componentId = 'FileDrop'
 
   static allowedProps = allowedProps

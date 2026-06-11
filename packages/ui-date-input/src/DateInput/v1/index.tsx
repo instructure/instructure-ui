@@ -63,6 +63,7 @@ category: components
 **/
 @withStyle(generateStyle, null)
 class DateInput extends Component<DateInputProps, DateInputState> {
+  static displayName = 'DateInput'
   static readonly componentId = 'DateInput'
   static Day = Calendar.Day
   declare context: React.ContextType<typeof ApplyLocaleContext>

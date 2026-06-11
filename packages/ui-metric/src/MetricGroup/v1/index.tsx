@@ -40,6 +40,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class MetricGroup extends Component<MetricGroupProps> {
+  static displayName = 'MetricGroup'
   static readonly componentId = 'MetricGroup'
 
   static allowedProps = allowedProps

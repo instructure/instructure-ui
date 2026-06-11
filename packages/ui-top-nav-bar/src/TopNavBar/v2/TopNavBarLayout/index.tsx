@@ -50,6 +50,7 @@ id: TopNavBar.Layout
 **/
 @withStyleNew(null)
 class TopNavBarLayout extends Component<TopNavBarLayoutProps> {
+  static displayName = 'TopNavBarLayout'
   static readonly componentId = 'TopNavBar.Layout'
 
   static allowedProps = allowedProps

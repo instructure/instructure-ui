@@ -51,6 +51,7 @@ category: components
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
 class Pages extends Component<PagesProps, PagesState> {
+  static displayName = 'Pages'
   static readonly componentId = 'Pages'
 
   static allowedProps = allowedProps

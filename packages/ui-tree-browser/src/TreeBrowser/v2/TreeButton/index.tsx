@@ -53,6 +53,7 @@ class TreeButton extends Component<
   TreeBrowserButtonProps,
   { isHovered: boolean }
 > {
+  static displayName = 'TreeButton'
   static readonly componentId = 'TreeBrowser.Button'
 
   static allowedProps = allowedProps

@@ -58,6 +58,7 @@ tags: toggle, switch
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
 class Checkbox extends Component<CheckboxProps, CheckboxState> {
+  static displayName = 'Checkbox'
   static readonly componentId = 'Checkbox'
 
   static allowedProps = allowedProps

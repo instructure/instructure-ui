@@ -42,6 +42,7 @@ category: components/utilities
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class SVGIcon extends Component<SVGIconProps> {
+  static displayName = 'SVGIcon'
   static readonly componentId = 'SVGIcon'
 
   static allowedProps = allowedProps

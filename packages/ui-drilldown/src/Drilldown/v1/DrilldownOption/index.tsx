@@ -41,6 +41,7 @@ id: Drilldown.Option
 // we pass the themeOverrides to Options.Item
 @withStyle(null, optionsItemThemeGenerator)
 class DrilldownOption extends Component<DrilldownOptionProps> {
+  static displayName = 'DrilldownOption'
   static readonly componentId = 'Drilldown.Option'
 
   static allowedProps = allowedProps

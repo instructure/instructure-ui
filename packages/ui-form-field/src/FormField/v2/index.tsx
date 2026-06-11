@@ -39,6 +39,7 @@ category: components
 ---
 **/
 class FormField extends Component<FormFieldProps> {
+  static displayName = 'FormField'
   static readonly componentId = 'FormField'
 
   static allowedProps = allowedProps

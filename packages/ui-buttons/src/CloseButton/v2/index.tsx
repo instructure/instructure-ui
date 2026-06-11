@@ -43,6 +43,7 @@ category: components
 **/
 @withStyleNew(generateStyle, 'BaseButton')
 class CloseButton extends Component<CloseButtonProps> {
+  static displayName = 'CloseButton'
   static readonly componentId = 'CloseButton'
 
   static allowedProps = allowedProps

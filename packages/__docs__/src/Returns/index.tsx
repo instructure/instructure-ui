@@ -28,6 +28,7 @@ import type { ReturnsProps } from './props'
 import Markdown from 'marked-react'
 
 class Returns extends Component<ReturnsProps> {
+  static displayName = 'Returns'
   render() {
     return (
       <Table caption="Returns" margin="0 0 large">

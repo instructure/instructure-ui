@@ -87,6 +87,7 @@ category: components
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
 class Pagination extends Component<PaginationProps> {
+  static displayName = 'Pagination'
   static readonly componentId = 'Pagination'
 
   static allowedProps = allowedProps

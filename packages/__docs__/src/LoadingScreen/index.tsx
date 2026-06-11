@@ -28,6 +28,7 @@ import { withStyleForDocs as withStyleNew } from '../withStyleForDocs'
 import type { LoadingScreenProps } from './props'
 @withStyleNew(generateStyle, null)
 class LoadingScreen extends Component<LoadingScreenProps> {
+  static displayName = 'LoadingScreen'
   componentDidMount() {
     this.props.makeStyles?.()
   }

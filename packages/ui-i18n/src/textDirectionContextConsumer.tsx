@@ -110,6 +110,7 @@ const textDirectionContextConsumer: TextDirectionContextConsumerType =
       }
     ) => {
       class TextDirectionContextConsumerComponent extends Component<TextDirectionContextConsumerInternalProps> {
+        static displayName = 'TextDirectionContextConsumerComponent'
         render() {
           const { forwardedRef, ...rest } = this.props
           // Quite complex code, this is the priority order of applying the `dir` prop:

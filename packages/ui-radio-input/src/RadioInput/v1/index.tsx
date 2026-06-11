@@ -43,6 +43,7 @@ category: components
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
 class RadioInput extends Component<RadioInputProps, RadioInputState> {
+  static displayName = 'RadioInput'
   static readonly componentId = 'RadioInput'
 
   static allowedProps = allowedProps

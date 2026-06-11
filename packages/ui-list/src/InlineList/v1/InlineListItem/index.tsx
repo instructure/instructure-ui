@@ -43,6 +43,7 @@ id: InlineList.Item
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class InlineListItem extends Component<InlineListItemProps> {
+  static displayName = 'InlineListItem'
   static readonly componentId = 'InlineList.Item'
 
   static allowedProps = allowedProps

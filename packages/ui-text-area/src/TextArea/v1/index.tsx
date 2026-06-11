@@ -55,6 +55,7 @@ category: components
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
 class TextArea extends Component<TextAreaProps> {
+  static displayName = 'TextArea'
   static readonly componentId = 'TextArea'
 
   static allowedProps = allowedProps

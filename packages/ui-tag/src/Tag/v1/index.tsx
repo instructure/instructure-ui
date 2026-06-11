@@ -44,6 +44,7 @@ category: components
 
 @withStyle(generateStyle, generateComponentTheme)
 class Tag extends Component<TagProps> {
+  static displayName = 'Tag'
   static readonly componentId = 'Tag'
 
   static allowedProps = allowedProps

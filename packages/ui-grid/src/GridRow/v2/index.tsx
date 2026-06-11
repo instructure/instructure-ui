@@ -49,6 +49,7 @@ id: Grid.Row
 **/
 @withStyleNew(generateStyle)
 class GridRow extends Component<GridRowProps> {
+  static displayName = 'GridRow'
   static readonly componentId = 'Grid.Row'
 
   static allowedProps = allowedProps

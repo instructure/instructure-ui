@@ -28,6 +28,7 @@ import { View } from '@instructure/ui-view'
 import type { ParagraphProps } from './props'
 
 class Paragraph extends Component<ParagraphProps> {
+  static displayName = 'Paragraph'
   static defaultProps = {
     children: null
   }

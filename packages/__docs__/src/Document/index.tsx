@@ -49,6 +49,7 @@ import type { DocumentProps, DocumentState, DocDataType } from './props'
 
 @withStyleNew(generateStyle)
 class Document extends Component<DocumentProps, DocumentState> {
+  static displayName = 'Document'
   static allowedProps = allowedProps
   static contextType = AppContext
   declare context: React.ContextType<typeof AppContext>

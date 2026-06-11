@@ -49,6 +49,7 @@ tags: form, field, input
 @withDeterministicId()
 @withStyleNew(generateStyle)
 class TextInput extends Component<TextInputProps> {
+  static displayName = 'TextInput'
   static readonly componentId = 'TextInput'
 
   static allowedProps = allowedProps

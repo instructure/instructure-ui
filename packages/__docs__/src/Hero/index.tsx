@@ -53,6 +53,7 @@ import logo from '../../logo.svg'
 
 @withStyleForDocs(generateStyle, generateComponentTheme)
 class Hero extends Component<HeroProps> {
+  static displayName = 'Hero'
   static allowedProps = allowedProps
   static defaultProps = {
     docs: null

@@ -44,6 +44,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class List extends Component<ListProps> {
+  static displayName = 'List'
   static readonly componentId = 'List'
 
   static allowedProps = allowedProps

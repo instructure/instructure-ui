@@ -47,6 +47,7 @@ category: components
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
 class Spinner extends Component<SpinnerProps, SpinnerState> {
+  static displayName = 'Spinner'
   static readonly componentId = 'Spinner'
   static allowedProps = allowedProps
   static defaultProps = {

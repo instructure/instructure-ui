@@ -50,6 +50,7 @@ category: components
 
 @withDeterministicId()
 class CheckboxGroup extends Component<CheckboxGroupProps, CheckboxGroupState> {
+  static displayName = 'CheckboxGroup'
   static readonly componentId = 'CheckboxGroup'
 
   static allowedProps = allowedProps

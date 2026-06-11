@@ -37,6 +37,7 @@ import type { SearchProps, SearchState, OptionType } from './props'
 import { debounce } from '@instructure/debounce'
 
 class Search extends Component<SearchProps, SearchState> {
+  static displayName = 'Search'
   static defaultProps = {
     options: undefined
   }

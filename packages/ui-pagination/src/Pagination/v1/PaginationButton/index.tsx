@@ -38,6 +38,7 @@ id: Pagination.Page
 **/
 
 class PaginationButton extends Component<PaginationPageProps> {
+  static displayName = 'PaginationButton'
   static readonly componentId = 'Pagination.Page'
 
   static allowedProps = allowedProps

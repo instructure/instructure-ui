@@ -43,6 +43,7 @@ category: components
 
 @withStyle(generateStyle, generateComponentTheme)
 class Byline extends Component<BylineProps> {
+  static displayName = 'Byline'
   static readonly componentId = 'Byline'
 
   static allowedProps = allowedProps

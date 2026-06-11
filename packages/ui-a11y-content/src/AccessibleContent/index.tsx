@@ -41,6 +41,7 @@ import type { AccessibleContentProps } from './props'
  * @module AccessibleContent
  */
 class AccessibleContent extends Component<AccessibleContentProps> {
+  static displayName = 'AccessibleContent'
   static allowedProps = allowedProps
   static defaultProps = {
     as: 'span',

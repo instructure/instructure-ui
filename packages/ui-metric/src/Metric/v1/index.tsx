@@ -40,6 +40,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Metric extends Component<MetricProps> {
+  static displayName = 'Metric'
   static readonly componentId = 'Metric'
 
   static allowedProps = allowedProps

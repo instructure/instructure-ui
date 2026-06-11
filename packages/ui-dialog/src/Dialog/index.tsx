@@ -40,6 +40,7 @@ category: components/utilities
 @module Dialog
 **/
 class Dialog extends Component<DialogProps> {
+  static displayName = 'Dialog'
   static readonly componentId = 'Dialog'
 
   static allowedProps = allowedProps

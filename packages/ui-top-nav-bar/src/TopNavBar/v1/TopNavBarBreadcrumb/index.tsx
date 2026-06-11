@@ -51,6 +51,7 @@ class TopNavBarBreadcrumb extends Component<
   TopNavBarBreadcrumbProps,
   TopNavBarBreadcrumbState
 > {
+  static displayName = 'TopNavBarBreadcrumb'
   static allowedProps = allowedProps
   static defaultProps = {}
 

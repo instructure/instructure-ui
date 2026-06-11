@@ -47,6 +47,7 @@ category: components/utilities
 **/
 @withStyle(generateStyle, null)
 class TruncateList extends Component<TruncateListProps, TruncateListState> {
+  static displayName = 'TruncateList'
   static readonly componentId = 'TruncateList'
 
   static allowedProps = allowedProps

@@ -42,6 +42,7 @@ id: Tabs.Panel
 **/
 @withStyleNew(generateStyle)
 class Panel extends Component<TabsPanelProps> {
+  static displayName = 'Panel'
   static readonly componentId = 'Tabs.Panel'
 
   static allowedProps = allowedProps

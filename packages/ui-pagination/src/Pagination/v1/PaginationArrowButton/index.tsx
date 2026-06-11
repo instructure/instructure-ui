@@ -44,6 +44,7 @@ id: Pagination.Navigation
 ---
 **/
 class PaginationArrowButton extends Component<PaginationNavigationProps> {
+  static displayName = 'PaginationArrowButton'
   static readonly componentId = 'Pagination.Navigation'
 
   static allowedProps = allowedProps

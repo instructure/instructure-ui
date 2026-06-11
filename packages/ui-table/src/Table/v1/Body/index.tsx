@@ -48,6 +48,7 @@ id: Table.Body
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Body extends Component<TableBodyProps> {
+  static displayName = 'Body'
   static readonly componentId = 'Table.Body'
   static contextType = TableContext
   declare context: ContextType<typeof TableContext>

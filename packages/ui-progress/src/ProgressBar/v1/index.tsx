@@ -42,6 +42,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class ProgressBar extends Component<ProgressBarProps> {
+  static displayName = 'ProgressBar'
   static readonly componentId = 'ProgressBar'
 
   static allowedProps = allowedProps

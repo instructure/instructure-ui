@@ -57,6 +57,7 @@ category: components/utilities
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
 class Position extends Component<PositionProps, PositionState> {
+  static displayName = 'Position'
   static readonly componentId = 'Position'
 
   static allowedProps = allowedProps

@@ -34,6 +34,7 @@ import type { ColorSwatchProps } from './props'
 
 @withStyleForDocs(generateStyle, generateComponentTheme)
 class ColorSwatch extends Component<ColorSwatchProps> {
+  static displayName = 'ColorSwatch'
   static allowedProps = allowedProps
   componentDidMount() {
     this.props.makeStyles?.()

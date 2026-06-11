@@ -59,6 +59,7 @@ category: components/utilities
 @withDeterministicId()
 @withStyleNew(generateStyles)
 class Options extends Component<OptionsProps> {
+  static displayName = 'Options'
   static readonly componentId = 'Options'
 
   static allowedProps = allowedProps

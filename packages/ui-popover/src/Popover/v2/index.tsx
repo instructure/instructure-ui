@@ -76,6 +76,7 @@ tags: overlay, portal, dialog
 @textDirectionContextConsumer()
 @withStyleNew(generateStyle)
 class Popover extends Component<PopoverProps, PopoverState> {
+  static displayName = 'Popover'
   static readonly componentId = 'Popover'
 
   static allowedProps = allowedProps

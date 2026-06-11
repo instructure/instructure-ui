@@ -44,6 +44,7 @@ parent: Checkbox
 **/
 @withStyleNew(generateStyle, 'Toggle')
 class ToggleFacade extends Component<ToggleFacadeProps> {
+  static displayName = 'ToggleFacade'
   static readonly componentId = 'ToggleFacade'
 
   static allowedProps = allowedProps

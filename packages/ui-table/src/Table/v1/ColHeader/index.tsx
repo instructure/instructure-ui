@@ -46,6 +46,7 @@ id: Table.ColHeader
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class ColHeader extends Component<TableColHeaderProps> {
+  static displayName = 'ColHeader'
   static readonly componentId = 'Table.ColHeader'
 
   static allowedProps = allowedProps

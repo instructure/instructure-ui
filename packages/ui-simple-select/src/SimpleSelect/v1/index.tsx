@@ -70,6 +70,7 @@ tags: form, field, dropdown
 **/
 @withDeterministicId()
 class SimpleSelect extends Component<SimpleSelectProps, SimpleSelectState> {
+  static displayName = 'SimpleSelect'
   static readonly componentId = 'SimpleSelect'
 
   static Option = Option

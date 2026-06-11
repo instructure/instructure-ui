@@ -42,6 +42,7 @@ tags: autocomplete, typeahead, combobox, dropdown, search
 **/
 @withDeterministicId()
 class Selectable extends Component<SelectableProps> {
+  static displayName = 'Selectable'
   static allowedProps = allowedProps
 
   static defaultProps = {

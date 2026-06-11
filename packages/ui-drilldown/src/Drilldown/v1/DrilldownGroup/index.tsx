@@ -42,6 +42,7 @@ id: Drilldown.Group
 // we pass the themeOverrides to Options
 @withStyle(null, optionsThemeGenerator)
 class DrilldownGroup extends Component<DrilldownGroupProps> {
+  static displayName = 'DrilldownGroup'
   static readonly componentId = 'Drilldown.Group'
 
   static allowedProps = allowedProps

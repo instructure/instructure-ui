@@ -41,6 +41,7 @@ id: Flex.Item
 **/
 @withStyle(generateStyle, null)
 class Item extends Component<FlexItemProps> {
+  static displayName = 'Item'
   static readonly componentId = 'Flex.Item'
 
   componentDidMount() {

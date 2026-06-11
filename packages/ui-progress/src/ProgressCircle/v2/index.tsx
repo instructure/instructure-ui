@@ -44,6 +44,7 @@ class ProgressCircle extends Component<
   ProgressCircleProps,
   ProgressCircleState
 > {
+  static displayName = 'ProgressCircle'
   static readonly componentId = 'ProgressCircle'
 
   static allowedProps = allowedProps

@@ -43,6 +43,7 @@ id: Tabs.Tab
 **/
 @withStyleNew(generateStyle)
 class Tab extends Component<TabsTabProps> {
+  static displayName = 'Tab'
   static readonly componentId = 'Tabs.Tab'
 
   static allowedProps = allowedProps

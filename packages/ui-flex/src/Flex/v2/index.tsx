@@ -49,6 +49,7 @@ category: components
 **/
 @withStyleNew(generateStyle)
 class Flex extends Component<FlexProps> {
+  static displayName = 'Flex'
   static readonly componentId = 'Flex'
 
   componentDidMount() {

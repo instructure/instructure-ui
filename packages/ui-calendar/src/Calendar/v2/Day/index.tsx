@@ -48,6 +48,7 @@ id: Calendar.Day
  **/
 @withStyleNew(generateStyle)
 class Day extends Component<CalendarDayProps> {
+  static displayName = 'Day'
   static readonly componentId = 'Calendar.Day'
 
   static allowedProps = allowedProps

@@ -42,6 +42,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Img extends Component<ImgProps> {
+  static displayName = 'Img'
   static readonly componentId = 'Img'
 
   static allowedProps = allowedProps

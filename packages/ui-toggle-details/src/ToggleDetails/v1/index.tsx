@@ -47,6 +47,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class ToggleDetails extends Component<ToggleDetailsProps> {
+  static displayName = 'ToggleDetails'
   static readonly componentId = 'ToggleDetails'
   static allowedProps = allowedProps
 

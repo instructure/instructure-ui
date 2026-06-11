@@ -43,6 +43,7 @@ category: components
 
 @withStyleNew(generateStyle)
 class Tag extends Component<TagProps> {
+  static displayName = 'Tag'
   static readonly componentId = 'Tag'
 
   static allowedProps = allowedProps

@@ -43,6 +43,7 @@ category: components/utilities
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
 class InlineSVG extends Component<InlineSVGProps> {
+  static displayName = 'InlineSVG'
   static readonly componentId = 'InlineSVG'
 
   static allowedProps = allowedProps

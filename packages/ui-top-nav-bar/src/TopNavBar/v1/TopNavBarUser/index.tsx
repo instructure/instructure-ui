@@ -46,6 +46,7 @@ id: TopNavBar.User
 **/
 @withStyle(generateStyle, null)
 class TopNavBarUser extends Component<TopNavBarUserProps> {
+  static displayName = 'TopNavBarUser'
   static readonly componentId = 'TopNavBar.User'
 
   static allowedProps = allowedProps

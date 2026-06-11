@@ -72,6 +72,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Tabs extends Component<TabsProps, TabsState> {
+  static displayName = 'Tabs'
   static readonly componentId = 'Tabs'
 
   static allowedProps = allowedProps

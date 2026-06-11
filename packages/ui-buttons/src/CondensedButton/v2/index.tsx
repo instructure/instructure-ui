@@ -40,6 +40,7 @@ category: components
 // needed for listing the available theme variables on docs page
 @withStyleNew(null, 'BaseButton')
 class CondensedButton extends Component<CondensedButtonProps> {
+  static displayName = 'CondensedButton'
   static readonly componentId = 'CondensedButton'
 
   static allowedProps = allowedProps

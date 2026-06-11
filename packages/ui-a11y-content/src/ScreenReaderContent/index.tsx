@@ -41,6 +41,7 @@ category: utilities/a11y
 **/
 @withStyle(generateStyle, null)
 class ScreenReaderContent extends Component<ScreenReaderContentProps> {
+  static displayName = 'ScreenReaderContent'
   static readonly componentId = 'ScreenReaderContent'
 
   static allowedProps = allowedProps

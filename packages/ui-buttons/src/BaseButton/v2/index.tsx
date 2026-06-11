@@ -73,6 +73,7 @@ category: components/utilities
 **/
 @withStyleNew(generateStyles)
 class BaseButton extends Component<BaseButtonProps> {
+  static displayName = 'BaseButton'
   static readonly componentId = 'BaseButton'
 
   static allowedProps = allowedProps

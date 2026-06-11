@@ -58,6 +58,7 @@ class RadioInputGroup extends Component<
   RadioInputGroupProps,
   RadioInputGroupState
 > {
+  static displayName = 'RadioInputGroup'
   static readonly componentId = 'RadioInputGroup'
 
   static allowedProps = allowedProps

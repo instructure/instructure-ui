@@ -29,6 +29,7 @@ import { Heading } from '../Heading'
 import type { SectionProps } from './props'
 
 class Section extends Component<SectionProps> {
+  static displayName = 'Section'
   static defaultProps = {
     children: null,
     id: undefined,

@@ -31,6 +31,7 @@ import { ColorSwatch } from '../ColorSwatch'
 import { ColorTableProps } from './props'
 
 class ColorTable extends Component<ColorTableProps> {
+  static displayName = 'ColorTable'
   renderRows() {
     const colorMap: Record<string, string> = Object.keys(
       this.props.colorNames

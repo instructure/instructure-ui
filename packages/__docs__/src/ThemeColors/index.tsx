@@ -34,6 +34,7 @@ import { Heading } from '../Heading'
 import type { ThemeColorsProps, ThemeColorsState } from './props'
 
 class ThemeColors extends Component<ThemeColorsProps, ThemeColorsState> {
+  static displayName = 'ThemeColors'
   constructor(props: ThemeColorsProps) {
     super(props)
     const first = props.colors[Object.keys(props.colors)[0]]

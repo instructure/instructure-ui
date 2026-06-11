@@ -131,6 +131,7 @@ tags: autocomplete, typeahead, combobox, dropdown, search, form
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
 class Select extends Component<SelectProps> {
+  static displayName = 'Select'
   static readonly componentId = 'Select'
   private readonly SCROLL_TOLERANCE = 0.5
 

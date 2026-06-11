@@ -48,6 +48,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class TruncateText extends Component<TruncateTextProps, TruncateTextState> {
+  static displayName = 'TruncateText'
   static readonly componentId = 'TruncateText'
 
   static allowedProps = allowedProps

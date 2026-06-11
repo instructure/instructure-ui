@@ -82,6 +82,7 @@ class TopNavBarSmallViewportLayout extends Component<
   TopNavBarSmallViewportLayoutProps,
   TopNavBarSmallViewportLayoutState
 > {
+  static displayName = 'TopNavBarSmallViewportLayout'
   static readonly componentId = 'TopNavBar.SmallViewportLayout'
 
   static allowedProps = allowedProps

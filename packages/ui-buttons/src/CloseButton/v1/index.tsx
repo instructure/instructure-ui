@@ -44,6 +44,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class CloseButton extends Component<CloseButtonProps> {
+  static displayName = 'CloseButton'
   static readonly componentId = 'CloseButton'
 
   static allowedProps = allowedProps

@@ -47,6 +47,7 @@ type valueof<X> = X[keyof X]
 
 @withStyleForDocs(generateStyle, generateComponentTheme)
 class Theme extends Component<ThemeProps> {
+  static displayName = 'Theme'
   static defaultProps = {
     description: undefined
   }

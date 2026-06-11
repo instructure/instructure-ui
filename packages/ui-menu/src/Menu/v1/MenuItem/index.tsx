@@ -53,6 +53,7 @@ id: Menu.Item
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
 class MenuItem extends Component<MenuItemProps, MenuItemState> {
+  static displayName = 'MenuItem'
   static readonly componentId = 'Menu.Item'
 
   static allowedProps = allowedProps

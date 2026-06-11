@@ -29,6 +29,7 @@ import { Select as UISelect } from '@instructure/ui-select'
 import type { SelectProps, SelectState } from './props'
 
 class Select extends Component<SelectProps, SelectState> {
+  static displayName = 'Select'
   static defaultProps = {
     id: undefined,
     value: undefined,
