@@ -78,6 +78,14 @@ module.exports = {
   mode: 'development',
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
+    // Source carries explicit `.js` extensions on relative imports (added for
+    // native-ESM library output). When bundling `.ts`/`.tsx` source directly,
+    // map a `.js` specifier back to its TypeScript source.
+    extensionAlias: {
+      '.js': ['.ts', '.tsx', '.js'],
+      '.jsx': ['.tsx', '.jsx'],
+      '.mjs': ['.mts', '.mjs']
+    },
     alias: getWorkspaceAliases(),
     fallback: {
       fs: false,

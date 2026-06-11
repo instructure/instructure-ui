@@ -49,7 +49,16 @@ const config = {
       path: false,
       process: false // needed for Sinon 12+
     },
-    extensions: ['.ts', '.tsx', '.js', '.json']
+    extensions: ['.ts', '.tsx', '.js', '.json'],
+    // Source now carries explicit `.js` extensions on relative imports (added
+    // for native-ESM library output). When bundling the `.ts`/`.tsx` source
+    // directly, map a `.js` specifier back to its TypeScript source so webpack
+    // can resolve e.g. `import '../globals.js'` to `globals.ts`.
+    extensionAlias: {
+      '.js': ['.ts', '.tsx', '.js'],
+      '.jsx': ['.tsx', '.jsx'],
+      '.mjs': ['.mts', '.mjs']
+    }
   }
 }
 
