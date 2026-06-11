@@ -259,8 +259,10 @@ function findAttribute(
  * again a `JSXText` with `"  \n"`. This function removes the empty text nodes.
  * This does not modify the input array.
  */
-function getVisibleChildren(nodes?: JSXElement['children']) {
-  const result: JSXElement['children'] = []
+function getVisibleChildren(
+  nodes?: JSXElement['children']
+): NonNullable<JSXElement['children']> {
+  const result: NonNullable<JSXElement['children']> = []
   if (!nodes) {
     return result
   }

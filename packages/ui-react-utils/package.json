@@ -35,7 +35,8 @@
     "@instructure/ui-babel-preset": "workspace:*",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "15.0.7",
-    "vitest": "^3.2.2"
+    "vitest": "^3.2.2",
+    "@types/hoist-non-react-statics": "^3.3.7"
   },
   "peerDependencies": {
     "react": ">=18 <=19",

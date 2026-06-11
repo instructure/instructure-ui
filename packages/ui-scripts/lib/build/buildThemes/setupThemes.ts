@@ -32,8 +32,7 @@ import generateSemantics, {
 import generateComponent, {
   generateComponentType
 } from './generateComponents.js'
-import { exec } from 'child_process'
-import { promisify } from 'node:util'
+import { resolveBin, runCommandAsync } from '@instructure/command-utils'
 
 // transform to an object for easier handling
 export const transformThemes = (themes: any, input: any) =>
@@ -369,11 +368,12 @@ const setupThemes = async (targetPath: string, input: any): Promise<void> => {
     }
   `
   await createFile(`${targetPath}/index.ts`, exportIndexFileContent)
-  const execAsync = promisify(exec)
   try {
-    const { stdout, stderr } = await execAsync(
-      "dprint fmt '" + targetPath + "/**/*.*'"
-    )
+    const dprintBin = resolveBin('dprint')
+    const { stdout, stderr } = await runCommandAsync(dprintBin, [
+      'fmt',
+      `${targetPath}/**/*.*`
+    ])
     console.log('[dprint]', stdout)
     if (stderr) {
       console.error('[dprint error]:', stderr)

@@ -25,6 +25,7 @@ const { defineConfig } = require('cypress')
 const webpackConfig = require('./cypress/webpack.config.cjs')
 
 module.exports = defineConfig({
+  allowCypressEnv: false,
   numTestsKeptInMemory: 1,
   defaultCommandTimeout: 10000,
   pageLoadTimeout: 120000,

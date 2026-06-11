@@ -25,7 +25,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { execSync } from 'node:child_process'
-// @ts-expect-error no types for inquirer 8.x
 import inquirer from 'inquirer'
 import { info, error } from '@instructure/command-utils'
 import type { Argv } from 'yargs'
@@ -143,10 +142,7 @@ async function detectOrPromptComponent(
 /**
  * Detect if cwd is inside a component directory (has v1/v2 subdirs).
  */
-function detectComponentFromCwd(
-  repoRoot: string,
-  cwd: string
-): string | null {
+function detectComponentFromCwd(repoRoot: string, cwd: string): string | null {
   let dir = cwd
   while (dir.startsWith(repoRoot) && dir !== repoRoot) {
     // Check if this directory has version subdirectories
@@ -199,7 +195,10 @@ function discoverComponents(repoRoot: string): ComponentInfo[] {
 /**
  * Simple fuzzy match: all query characters must appear in order.
  */
-function fuzzyMatch(components: ComponentInfo[], query: string): ComponentInfo[] {
+function fuzzyMatch(
+  components: ComponentInfo[],
+  query: string
+): ComponentInfo[] {
   const q = query.toLowerCase()
   return components.filter((c) => {
     const target = `${c.pkg} ${c.name}`.toLowerCase()
