@@ -290,16 +290,17 @@ const renderer = (title: string) => ({
         // Markdown links can point to a specific version of a component,
         // e.g. href="/v11_7/DateInput". navigateTo() expects the page
         // name and version as separate arguments, so we need to split
-        // them apart. Plain links like "DateInput" are passed through
-        // as-is.
-        const path = href.replace(/^\/+/, '') // "/v11_7/DateInput" -> "v11_7/DateInput"
+        // them apart. Plain links like "DateInput", "/DateInput", and
+        // legacy hash-routing links like "/#DateInput" are normalised
+        // to the bare page name.
+        const path = href.replace(/^\/+/, '').replace(/^#+/, '')
         const [first, second] = path.split('/')
         const isVersionedLink = MINOR_VERSION_REGEX.test(first) && second
 
         if (isVersionedLink) {
           navigateTo(second, { minorVersion: first })
         } else {
-          navigateTo(href)
+          navigateTo(path || 'index')
         }
       }}
     >
