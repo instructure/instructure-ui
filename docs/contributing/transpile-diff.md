@@ -1,6 +1,7 @@
 ---
 title: Comparing Transpiled Output
-category: Contributor Guides
+category: Contributing
+order: 8
 ---
 
 # Comparing Transpiled Output
