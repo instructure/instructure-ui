@@ -45,9 +45,9 @@ import { Transition } from '@instructure/ui-motion'
 import { logError as error } from '@instructure/console'
 import { withStyleNew } from '@instructure/emotion'
 
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { AlertProps, AlertState } from './props'
 
 /**

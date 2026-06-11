@@ -23,7 +23,7 @@
  */
 
 import '@testing-library/jest-dom'
-import { mergeDeep } from '../mergeDeep'
+import { mergeDeep } from '../mergeDeep.js'
 
 describe('mergeDeep', () => {
   it('should merge object properties without affecting any object', () => {

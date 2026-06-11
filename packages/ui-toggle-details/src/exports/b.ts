@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-export { ToggleDetails } from '../ToggleDetails/v2'
-export { ToggleGroup } from '../ToggleGroup/v2'
+export { ToggleDetails } from '../ToggleDetails/v2/index.js'
+export { ToggleGroup } from '../ToggleGroup/v2/index.js'
 
 export type { ToggleDetailsProps } from '../ToggleDetails/v2/props'
 export type { ToggleGroupProps } from '../ToggleGroup/v2/props'

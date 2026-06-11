@@ -28,7 +28,7 @@ import type { MockInstance } from 'vitest'
 
 import '@testing-library/jest-dom'
 import { canvasHighContrast } from '@instructure/ui-themes'
-import { InstUISettingsProvider } from '../index'
+import { InstUISettingsProvider } from '../index.js'
 
 describe('<InstUISettingsProvider />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>

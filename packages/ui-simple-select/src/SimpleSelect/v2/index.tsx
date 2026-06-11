@@ -42,17 +42,17 @@ import {
 import { Select } from '@instructure/ui-select/latest'
 import type { SelectProps } from '@instructure/ui-select/latest'
 
-import { Option } from './Option'
+import { Option } from './Option/index.js'
 import type {
   SimpleSelectOptionProps,
   RenderSimpleSelectOptionLabel
 } from './Option/props'
 
-import { Group } from './Group'
+import { Group } from './Group/index.js'
 import type { SimpleSelectGroupProps } from './Group/props'
 
 import type { SimpleSelectProps } from './props'
-import { allowedProps, SimpleSelectState } from './props'
+import { allowedProps, SimpleSelectState } from './props.js'
 
 type OptionChild = ComponentElement<SimpleSelectOptionProps, Option>
 type GroupChild = ComponentElement<SimpleSelectGroupProps, Group>

@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { contains } from './contains'
+import { contains } from './contains.js'
 
 /**
  * ---

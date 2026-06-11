@@ -22,13 +22,13 @@
  * SOFTWARE.
  */
 
-export { Options } from '../Options/v1'
-export { Item as OptionItem } from '../Options/v1/Item'
-export { Separator as OptionSeparator } from '../Options/v1/Separator'
+export { Options } from '../Options/v1/index.js'
+export { Item as OptionItem } from '../Options/v1/Item/index.js'
+export { Separator as OptionSeparator } from '../Options/v1/Separator/index.js'
 
-export { optionsThemeGenerator } from '../Options/v1/theme'
-export { optionsItemThemeGenerator } from '../Options/v1/Item/theme'
-export { optionsSeparatorThemeGenerator } from '../Options/v1/Separator/theme'
+export { optionsThemeGenerator } from '../Options/v1/theme.js'
+export { optionsItemThemeGenerator } from '../Options/v1/Item/theme.js'
+export { optionsSeparatorThemeGenerator } from '../Options/v1/Separator/theme.js'
 
 export type { OptionsProps } from '../Options/v1/props'
 export type {

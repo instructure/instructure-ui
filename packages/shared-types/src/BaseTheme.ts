@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Colors } from './Colors'
+import { Colors } from './Colors.js'
 
 type Border = {
   radiusSmall: string | 0

@@ -33,7 +33,7 @@ import type {
   OptionsItemProps
 } from '@instructure/ui-options'
 
-import Drilldown from '../index'
+import Drilldown from '../index.js'
 import { Renderable } from '@instructure/shared-types'
 import type { NewComponentTypes } from '@instructure/ui-themes'
 

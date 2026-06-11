@@ -28,7 +28,7 @@ import type { MockInstance } from 'vitest'
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
-import { InstUISettingsProvider, WithStyleProps, useStyle } from '../index'
+import { InstUISettingsProvider, WithStyleProps, useStyle } from '../index.js'
 
 type Props = {
   inverse?: boolean

@@ -53,17 +53,17 @@ import {
 
 import { withStyleNew } from '@instructure/emotion'
 
-import { DrilldownSeparator } from './DrilldownSeparator'
-import { DrilldownOption } from './DrilldownOption'
+import { DrilldownSeparator } from './DrilldownSeparator/index.js'
+import { DrilldownOption } from './DrilldownOption/index.js'
 import type { DrilldownOptionValue } from './DrilldownOption/props'
-import { DrilldownGroup } from './DrilldownGroup'
+import { DrilldownGroup } from './DrilldownGroup/index.js'
 import type { DrilldownGroupProps, GroupChildren } from './DrilldownGroup/props'
-import { DrilldownPage } from './DrilldownPage'
+import { DrilldownPage } from './DrilldownPage/index.js'
 import type { DrilldownPageProps, PageChildren } from './DrilldownPage/props'
 
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 
-import { allowedProps, SelectedGroupOptionsMap } from './props'
+import { allowedProps, SelectedGroupOptionsMap } from './props.js'
 
 import type {
   DrilldownProps,

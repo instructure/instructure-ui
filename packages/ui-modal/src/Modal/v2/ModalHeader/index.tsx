@@ -34,11 +34,11 @@ import { withStyleNew } from '@instructure/emotion'
 import { CloseButton } from '@instructure/ui-buttons/latest'
 import type { CloseButtonProps } from '@instructure/ui-buttons/latest'
 
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { ModalHeaderProps, ModalHeaderStyleProps } from './props'
-import ModalContext from '../ModalContext'
+import ModalContext from '../ModalContext.js'
 
 type CloseButtonChild = ComponentElement<CloseButtonProps, CloseButton>
 

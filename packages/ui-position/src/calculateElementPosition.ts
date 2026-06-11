@@ -32,7 +32,7 @@ import {
   ownerWindow
 } from '@instructure/ui-dom-utils'
 import type { RectType } from '@instructure/ui-dom-utils'
-import { mirrorPlacement } from './mirrorPlacement'
+import { mirrorPlacement } from './mirrorPlacement.js'
 import { px } from '@instructure/ui-utils'
 
 import type {

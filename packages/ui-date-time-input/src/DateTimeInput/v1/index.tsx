@@ -38,7 +38,7 @@ import {
   IconArrowOpenStartSolid
 } from '@instructure/ui-icons'
 import type { DateTimeInputProps, DateTimeInputState } from './props'
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import { error } from '@instructure/console'
 
 /**

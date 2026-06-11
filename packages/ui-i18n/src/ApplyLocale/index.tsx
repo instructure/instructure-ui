@@ -23,8 +23,8 @@
  */
 
 import { ensureSingleChild } from '@instructure/ui-react-utils'
-import { ApplyLocaleContext } from './ApplyLocaleContext'
-import { ApplyLocaleProps } from './props'
+import { ApplyLocaleContext } from './ApplyLocaleContext.js'
+import { ApplyLocaleProps } from './props.js'
 
 /**
 ---

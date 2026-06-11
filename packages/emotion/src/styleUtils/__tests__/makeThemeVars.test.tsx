@@ -23,7 +23,7 @@
  */
 
 import { expect } from 'vitest'
-import { makeThemeVars } from '../makeThemeVars'
+import { makeThemeVars } from '../makeThemeVars.js'
 
 describe('makeThemeVars', () => {
   it('given a list of variables, should append a prefix and camel case each key', () => {

@@ -23,7 +23,7 @@
  */
 import '@testing-library/jest-dom'
 import { expect } from 'vitest'
-import { DateTime } from '../DateTime'
+import { DateTime } from '../DateTime.js'
 
 const {
   now,

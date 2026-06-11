@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-import { findDOMNode } from './findDOMNode'
-import { ownerWindow } from './ownerWindow'
-import { canUseDOM } from './canUseDOM'
+import { findDOMNode } from './findDOMNode.js'
+import { ownerWindow } from './ownerWindow.js'
+import { canUseDOM } from './canUseDOM.js'
 import type { UIElement } from '@instructure/shared-types'
 
 /**

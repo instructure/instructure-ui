@@ -24,7 +24,7 @@
 
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import { findTabbable } from '../findTabbable'
+import { findTabbable } from '../findTabbable.js'
 
 describe('findTabbable', () => {
   describe('tabbable content', () => {

@@ -27,7 +27,7 @@ import { Component } from 'react'
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
-import { callRenderProp } from '../callRenderProp'
+import { callRenderProp } from '../callRenderProp.js'
 
 describe('callRenderProp', () => {
   it('strings', () => {

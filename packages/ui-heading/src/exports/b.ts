@@ -22,5 +22,5 @@
  * SOFTWARE.
  */
 
-export { Heading } from '../Heading/v2'
+export { Heading } from '../Heading/v2/index.js'
 export type { HeadingProps } from '../Heading/v2/props'

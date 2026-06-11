@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-export { DeterministicIdContextProvider } from './DeterministicIdContextProvider'
-export { DeterministicIdContext } from './DeterministicIdContext'
-export { withDeterministicId } from './withDeterministicId'
-export { useDeterministicId } from './useDeterministicId'
+export { DeterministicIdContextProvider } from './DeterministicIdContextProvider.js'
+export { DeterministicIdContext } from './DeterministicIdContext.js'
+export { withDeterministicId } from './withDeterministicId.js'
+export { useDeterministicId } from './useDeterministicId.js'
 export type { DeterministicIdProviderValue } from './DeterministicIdContextProvider'
 export type { WithDeterministicIdProps } from './withDeterministicId'

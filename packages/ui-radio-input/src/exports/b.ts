@@ -21,8 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { RadioInput } from '../RadioInput/v2'
-export { RadioInputGroup } from '../RadioInputGroup/v2'
+export { RadioInput } from '../RadioInput/v2/index.js'
+export { RadioInputGroup } from '../RadioInputGroup/v2/index.js'
 
 export type { RadioInputProps } from '../RadioInput/v2/props'
 export type { RadioInputGroupProps } from '../RadioInputGroup/v2/props'

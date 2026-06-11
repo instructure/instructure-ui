@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import runAxeCheck from './runAxeCheck'
+import runAxeCheck from './runAxeCheck.js'
 import type { AxeCheckOptions } from './runAxeCheck'
 
 export type { AxeCheckOptions }

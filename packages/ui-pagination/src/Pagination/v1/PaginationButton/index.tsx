@@ -27,7 +27,7 @@ import { Component } from 'react'
 import { BaseButton } from '@instructure/ui-buttons/v11_6'
 import { omitProps } from '@instructure/ui-react-utils'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { PaginationPageProps } from './props'
 
 /**

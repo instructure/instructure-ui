@@ -27,9 +27,9 @@ import { Component } from 'react'
 import { passthroughProps } from '@instructure/ui-react-utils'
 
 import { Tooltip } from '@instructure/ui-tooltip/latest'
-import { IconButton } from '../../IconButton/v2'
+import { IconButton } from '../../IconButton/v2/index.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { ToggleButtonProps, ToggleButtonState } from './props'
 
 /**

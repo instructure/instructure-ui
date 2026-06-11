@@ -22,5 +22,5 @@
  * SOFTWARE.
  */
 
-export { Pill } from '../Pill/v1'
+export { Pill } from '../Pill/v1/index.js'
 export type { PillProps } from '../Pill/v1/props'

@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import MenuItem from '../MenuItem'
+import MenuItem from '../MenuItem/index.js'
 
 import type {
   AsElementType,

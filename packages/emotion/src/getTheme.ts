@@ -31,7 +31,7 @@ import type {
   ThemeOrLegacyOverride,
   SpecificThemeOverride
 } from './EmotionTypes'
-import { InstUIProviderProps } from './InstUISettingsProvider'
+import { InstUIProviderProps } from './InstUISettingsProvider/index.js'
 declare const process: Record<string, any> | undefined
 
 /**

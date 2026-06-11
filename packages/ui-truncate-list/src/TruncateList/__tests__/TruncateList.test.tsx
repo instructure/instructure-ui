@@ -27,7 +27,7 @@ import { vi } from 'vitest'
 import '@testing-library/jest-dom'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
-import { TruncateList } from '../index'
+import { TruncateList } from '../index.js'
 
 describe('<TruncateList />', () => {
   it('should return ref with elementRef prop', async () => {

@@ -24,7 +24,7 @@
 
 import { render, screen, waitFor, fireEvent, act } from '@testing-library/react'
 import { vi } from 'vitest'
-import DrawerLayoutFixture from '../v2/__fixtures__/DrawerLayout.fixture'
+import DrawerLayoutFixture from '../v2/__fixtures__/DrawerLayout.fixture.js'
 import { Button } from '@instructure/ui-buttons/latest'
 import { DrawerLayout } from '@instructure/ui-drawer-layout/latest'
 import { View } from '@instructure/ui-view/latest'

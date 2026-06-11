@@ -27,9 +27,9 @@ import { useState, useEffect, forwardRef, SyntheticEvent } from 'react'
 
 import { passthroughProps } from '@instructure/ui-react-utils'
 import { renderIconWithProps } from '@instructure/ui-icons'
-import { AvatarProps, avatarSizeToIconSize } from './props'
+import { AvatarProps, avatarSizeToIconSize } from './props.js'
 
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 
 const ICON_COLOR_MAP = {
   accent1: 'accentBlueColor',

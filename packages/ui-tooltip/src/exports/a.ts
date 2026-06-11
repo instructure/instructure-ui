@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { Tooltip } from '../Tooltip/v1'
+export { Tooltip } from '../Tooltip/v1/index.js'
 export type {
   TooltipProps,
   TooltipRenderChildrenArgs

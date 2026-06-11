@@ -29,12 +29,12 @@ import { withStyle } from '@instructure/emotion'
 import type { ComponentStyle } from '@instructure/emotion'
 import { ensureSingleChild, omitProps } from '@instructure/ui-react-utils'
 
-import generateStyle from './styles'
-import generateComponentTheme from './theme'
+import generateStyle from './styles.js'
+import generateComponentTheme from './theme.js'
 
 import type { MaskProps } from './props'
-import { allowedProps } from './props'
-import MaskCounter from './MaskCounter'
+import { allowedProps } from './props.js'
+import MaskCounter from './MaskCounter.js'
 
 /**
 ---

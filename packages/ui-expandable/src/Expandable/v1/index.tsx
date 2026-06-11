@@ -24,7 +24,7 @@
 import { Component } from 'react'
 import { createChainedFunction } from '@instructure/ui-utils'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { ExpandableProps, ExpandableState } from './props'
 import type { ViewProps } from '@instructure/ui-view/latest'
 

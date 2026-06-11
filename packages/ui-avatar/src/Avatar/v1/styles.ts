@@ -23,7 +23,7 @@
  */
 
 import type { AvatarTheme } from '@instructure/shared-types'
-import { AvatarProps, AvatarStyle } from './props'
+import { AvatarProps, AvatarStyle } from './props.js'
 
 type StyleParams = {
   loaded: boolean

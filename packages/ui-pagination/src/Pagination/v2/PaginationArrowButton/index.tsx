@@ -36,7 +36,7 @@ import {
 } from '@instructure/ui-icons'
 
 import type { PaginationNavigationProps } from './props'
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 
 /**
 ---

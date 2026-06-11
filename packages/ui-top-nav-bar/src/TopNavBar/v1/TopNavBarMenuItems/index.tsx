@@ -36,21 +36,21 @@ import { withStyle } from '@instructure/emotion'
 import { Drilldown } from '@instructure/ui-drilldown/v11_6'
 import { TruncateList } from '@instructure/ui-truncate-list'
 
-import { TopNavBarContext } from '../TopNavBarContext'
-import { TopNavBarItem } from '../TopNavBarItem'
+import { TopNavBarContext } from '../TopNavBarContext.js'
+import { TopNavBarItem } from '../TopNavBarItem/index.js'
 import type { ItemChild } from '../TopNavBarItem/props'
 
 import {
   mapItemsForDrilldown,
   renderMappedItemDrilldownSubpages,
   renderMappedItemsAsDrilldownOptions
-} from '../utils/mapItemsForDrilldown'
+} from '../utils/mapItemsForDrilldown.js'
 import type { RenderOptionContent } from '../utils/mapItemsForDrilldown'
 
-import generateStyle from './styles'
-import generateComponentTheme from './theme'
+import generateStyle from './styles.js'
+import generateComponentTheme from './theme.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { TopNavBarMenuItemsProps, TopNavBarMenuItemsState } from './props'
 
 /**

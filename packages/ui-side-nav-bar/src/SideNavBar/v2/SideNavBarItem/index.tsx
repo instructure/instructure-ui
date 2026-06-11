@@ -29,9 +29,9 @@ import { Tooltip } from '@instructure/ui-tooltip/latest'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { withStyleNew } from '@instructure/emotion'
 
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 import type { SideNavBarItemProps } from './props'
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 
 /**
 ---

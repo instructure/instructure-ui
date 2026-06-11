@@ -32,10 +32,10 @@ import {
   isVisible
 } from '@instructure/ui-dom-utils'
 
-import measureText from './measureText'
-import cleanString from './cleanString'
-import cleanData from './cleanData'
-import { TruncateTextCommonProps } from '../props'
+import measureText from './measureText.js'
+import cleanString from './cleanString.js'
+import cleanData from './cleanData.js'
+import { TruncateTextCommonProps } from '../props.js'
 
 export type TruncatorOptions = {
   parent?: Node

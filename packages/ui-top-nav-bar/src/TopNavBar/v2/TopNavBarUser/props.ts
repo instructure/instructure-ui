@@ -30,7 +30,7 @@ import type {
 } from '@instructure/shared-types'
 import type { ItemChild } from '../TopNavBarItem/props'
 
-import { TopNavBarUser } from './index'
+import { TopNavBarUser } from './index.js'
 
 type UserChild = React.ComponentElement<TopNavBarUserProps, TopNavBarUser>
 

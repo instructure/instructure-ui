@@ -35,7 +35,7 @@ import { Transition } from '@instructure/ui-motion'
 import type { TransitionType } from '@instructure/ui-motion'
 
 import type { OverlayProps, OverlayState } from './props'
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 
 /**
 ---

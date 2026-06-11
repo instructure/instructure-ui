@@ -23,7 +23,7 @@
  */
 import { px } from '@instructure/ui-utils'
 
-import { Query, ValidQueryKey } from './QueryType'
+import { Query, ValidQueryKey } from './QueryType.js'
 import React from 'react'
 
 /**

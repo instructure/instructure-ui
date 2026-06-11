@@ -51,20 +51,20 @@ import { Dialog } from '@instructure/ui-dialog'
 import { Drilldown } from '@instructure/ui-drilldown/latest'
 import type { DrilldownPageChildren } from '@instructure/ui-drilldown/latest'
 
-import { TopNavBarItem } from '../../TopNavBarItem'
+import { TopNavBarItem } from '../../TopNavBarItem/index.js'
 import type { ItemChild, TopNavBarItemProps } from '../../TopNavBarItem/props'
 import {
   mapItemsForDrilldown,
   renderMappedItemDrilldownSubpages,
   renderMappedItemsAsDrilldownOptions
-} from '../../utils/mapItemsForDrilldown'
+} from '../../utils/mapItemsForDrilldown.js'
 import type { RenderOptionContent } from '../../utils/mapItemsForDrilldown'
 
-import { TopNavBarContext } from '../../TopNavBarContext'
+import { TopNavBarContext } from '../../TopNavBarContext.js'
 
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type {
   TopNavBarSmallViewportLayoutProps,
   TopNavBarSmallViewportLayoutState,

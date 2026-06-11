@@ -26,7 +26,7 @@ import { expect } from 'vitest'
 import {
   mirrorShorthandCorners,
   mirrorShorthandEdges
-} from '../mirrorShorthand'
+} from '../mirrorShorthand.js'
 
 describe('convertRtlShorthandEdges', () => {
   it('should not modify 1 value syntax', () => {

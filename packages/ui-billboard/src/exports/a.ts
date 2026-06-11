@@ -21,5 +21,5 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { Billboard } from '../Billboard/v1'
+export { Billboard } from '../Billboard/v1/index.js'
 export type { BillboardProps } from '../Billboard/v1/props'

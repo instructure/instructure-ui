@@ -26,9 +26,9 @@ import { Component } from 'react'
 
 import { omitProps, pickProps } from '@instructure/ui-react-utils'
 
-import { FormFieldLayout } from '../../FormFieldLayout/v1'
+import { FormFieldLayout } from '../../FormFieldLayout/v1/index.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { FormFieldProps } from './props'
 
 /**

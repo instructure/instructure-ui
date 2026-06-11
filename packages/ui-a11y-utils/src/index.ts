@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
-export { FocusRegion } from './FocusRegion'
-export { FocusRegionManager } from './FocusRegionManager'
-export { hasVisibleChildren } from './hasVisibleChildren'
-export { KeyboardFocusRegion } from './KeyboardFocusRegion'
-export { scopeTab } from './scopeTab'
-export { ScreenReaderFocusRegion } from './ScreenReaderFocusRegion'
+export { FocusRegion } from './FocusRegion.js'
+export { FocusRegionManager } from './FocusRegionManager.js'
+export { hasVisibleChildren } from './hasVisibleChildren.js'
+export { KeyboardFocusRegion } from './KeyboardFocusRegion.js'
+export { scopeTab } from './scopeTab.js'
+export { ScreenReaderFocusRegion } from './ScreenReaderFocusRegion.js'
 export type { FocusRegionOptions } from './FocusRegionOptions'

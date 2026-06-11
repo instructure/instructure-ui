@@ -27,9 +27,9 @@ import { Component } from 'react'
 import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
 
 import { Tooltip } from '@instructure/ui-tooltip/v11_6'
-import { IconButton } from '../../IconButton/v1'
+import { IconButton } from '../../IconButton/v1/index.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { ToggleButtonProps, ToggleButtonState } from './props'
 
 /**

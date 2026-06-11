@@ -29,10 +29,10 @@ import type {
   OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { TopNavBarContextType } from '../../TopNavBarContext'
-import { commonAllowedProps, desktopAllowedProps } from '../props'
+import { commonAllowedProps, desktopAllowedProps } from '../props.js'
 import type { CommonTopNavBarLayoutProps } from '../props'
 
-import { TopNavBarDesktopLayout } from './index'
+import { TopNavBarDesktopLayout } from './index.js'
 
 type DesktopLayoutChild = React.ComponentElement<
   TopNavBarDesktopLayoutProps,

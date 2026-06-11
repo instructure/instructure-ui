@@ -30,10 +30,10 @@ import { withStyleNew } from '@instructure/emotion'
 import { View } from '@instructure/ui-view/latest'
 import type { ViewOwnProps } from '@instructure/ui-view/latest'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { SliderProps, SliderStyleProps } from './props'
 
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 
 /**
 ---

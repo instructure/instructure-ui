@@ -26,9 +26,9 @@ import { Children, Component, ReactElement } from 'react'
 import { View } from '@instructure/ui-view/latest'
 import { passthroughProps, safeCloneElement } from '@instructure/ui-react-utils'
 
-import { InlineListItem } from './InlineListItem'
+import { InlineListItem } from './InlineListItem/index.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { InlineListProps } from './props'
 
 /**

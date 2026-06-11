@@ -21,5 +21,5 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { Dialog } from './Dialog'
+export { Dialog } from './Dialog/index.js'
 export type { DialogProps } from './Dialog/props'

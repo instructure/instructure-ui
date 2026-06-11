@@ -26,9 +26,9 @@ import React, { useId, useContext } from 'react'
 import { useStyleNew } from '@instructure/emotion'
 import { passthroughProps } from '@instructure/ui-react-utils'
 
-import { IconPropsContext } from '../IconPropsProvider'
+import { IconPropsContext } from '../IconPropsProvider/index.js'
 import type { InstUIIconProps } from '../props'
-import generateStyle from '../styles'
+import generateStyle from '../styles.js'
 
 /**
  * Unified wrapper for custom icons (both stroke and filled) rendered from a

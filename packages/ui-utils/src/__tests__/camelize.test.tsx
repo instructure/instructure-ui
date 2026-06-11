@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import '@testing-library/jest-dom'
-import { camelize } from '../camelize'
+import { camelize } from '../camelize.js'
 
 describe('convertCase', () => {
   describe('camelize', () => {

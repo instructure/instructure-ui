@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { camelize } from './camelize'
-import { pascalize } from './pascalize'
+import { camelize } from './camelize.js'
+import { pascalize } from './pascalize.js'
 
 export { camelize, pascalize }

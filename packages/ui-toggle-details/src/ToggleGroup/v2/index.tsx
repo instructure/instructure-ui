@@ -42,11 +42,11 @@ import {
   renderIconWithProps
 } from '@instructure/ui-icons'
 import type { ToggleGroupProps } from './props'
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 
 import { withStyleNew } from '@instructure/emotion'
 
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 
 const toggleGroupSizeToIconSize = {
   small: 'md',

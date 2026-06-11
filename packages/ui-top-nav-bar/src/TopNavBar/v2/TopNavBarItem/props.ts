@@ -40,8 +40,8 @@ import type { TooltipProps } from '@instructure/ui-tooltip/latest'
 import type { BaseButtonOwnProps } from '@instructure/ui-buttons/latest'
 import type { ViewOwnProps, ViewProps } from '@instructure/ui-view/latest'
 
-import { TopNavBarContextType } from '../TopNavBarContext'
-import { TopNavBarItem } from './index'
+import { TopNavBarContextType } from '../TopNavBarContext.js'
+import { TopNavBarItem } from './index.js'
 
 type ItemChild = React.ComponentElement<TopNavBarItemProps, TopNavBarItem>
 type DrilldownSubmenu = React.ComponentElement<DrilldownProps, Drilldown>

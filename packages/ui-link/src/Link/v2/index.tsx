@@ -38,9 +38,9 @@ import { logWarn as warn } from '@instructure/console'
 import { renderIconWithProps } from '@instructure/ui-icons'
 
 import { withStyleNew } from '@instructure/emotion'
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { LinkProps, LinkState, LinkStyleProps } from './props'
 
 import type { ViewOwnProps } from '@instructure/ui-view/latest'

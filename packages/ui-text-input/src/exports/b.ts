@@ -21,5 +21,5 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { TextInput } from '../TextInput/v2'
+export { TextInput } from '../TextInput/v2/index.js'
 export type { TextInputProps } from '../TextInput/v2/props'

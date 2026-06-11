@@ -52,11 +52,11 @@ import { Drilldown } from '@instructure/ui-drilldown/latest'
 import type { DrilldownProps } from '@instructure/ui-drilldown/latest'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
-import { TopNavBarContext } from '../TopNavBarContext'
+import { TopNavBarContext } from '../TopNavBarContext.js'
 
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type {
   TopNavBarItemProps,
   TopNavBarItemState,

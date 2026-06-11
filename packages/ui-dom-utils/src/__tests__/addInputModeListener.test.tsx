@@ -25,7 +25,7 @@
 import { render, fireEvent, screen } from '@testing-library/react'
 import { vi } from 'vitest'
 import '@testing-library/jest-dom'
-import { addInputModeListener } from '../addInputModeListener'
+import { addInputModeListener } from '../addInputModeListener.js'
 
 describe('addInputModeListener', () => {
   it('should handle input mode changes', () => {

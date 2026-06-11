@@ -22,14 +22,14 @@
  * SOFTWARE.
  */
 
-import legacySharedThemeTokens from '../../legacySharedThemeTokens'
+import legacySharedThemeTokens from '../../legacySharedThemeTokens/index.js'
 import { Colors } from '@instructure/shared-types'
-import { colors } from './colors'
+import { colors } from './colors.js'
 import {
   legacyCanvasHighContrast as newCanvasHighContrast,
   type LegacyCanvasHighContrast as NewCanvasHighContrast
-} from '../newThemeTokens'
-import { Theme } from '../../index'
+} from '../newThemeTokens/index.js'
+import { Theme } from '../../index.js'
 
 const key = 'canvas-high-contrast'
 

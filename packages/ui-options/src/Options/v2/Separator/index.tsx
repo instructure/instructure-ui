@@ -28,9 +28,9 @@ import { getElementType, omitProps } from '@instructure/ui-react-utils'
 
 import { withStyleNew } from '@instructure/emotion'
 
-import generateStyles from './styles'
+import generateStyles from './styles.js'
 import type { OptionsSeparatorProps } from './props'
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 
 /**
 ---

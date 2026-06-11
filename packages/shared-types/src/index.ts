@@ -22,12 +22,12 @@
  * SOFTWARE.
  */
 
-export * from './BaseTheme'
-export * from './Colors'
-export * from './ComponentThemeMap'
-export * from './ComponentThemeVariables'
-export * from './CommonTypes'
-export * from './CommonProps'
+export * from './BaseTheme.js'
+export * from './Colors.js'
+export * from './ComponentThemeMap.js'
+export * from './ComponentThemeVariables.js'
+export * from './CommonTypes.js'
+export * from './CommonProps.js'
 export type {
   DeepPartial,
   PartialRecord,

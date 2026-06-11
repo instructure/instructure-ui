@@ -26,7 +26,7 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { vi } from 'vitest'
 import '@testing-library/jest-dom'
 
-import { FocusRegion } from '../FocusRegion'
+import { FocusRegion } from '../FocusRegion.js'
 
 describe('FocusRegion', () => {
   let container: HTMLElement

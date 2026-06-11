@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { jsonToMediaQuery } from './jsonToMediaQuery'
-import { BreakpointQueries } from './QueryType'
+import { jsonToMediaQuery } from './jsonToMediaQuery.js'
+import { BreakpointQueries } from './QueryType.js'
 
 const ResponsivePropTypes = {
   /**

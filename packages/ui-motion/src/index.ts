@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { Transition } from './Transition'
-export { BaseTransition } from './Transition/BaseTransition'
+export { Transition } from './Transition/index.js'
+export { BaseTransition } from './Transition/BaseTransition/index.js'
 export type { TransitionProps, TransitionType } from './Transition/props'
 export type { BaseTransitionStatesType } from './Transition/BaseTransition/props'

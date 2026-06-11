@@ -21,5 +21,5 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { Focusable } from './Focusable'
+export { Focusable } from './Focusable/index.js'
 export type { FocusableProps } from './Focusable/props'

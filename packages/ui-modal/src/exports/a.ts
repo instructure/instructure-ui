@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { Modal, ModalBody, ModalFooter, ModalHeader } from '../Modal/v1'
+export { Modal, ModalBody, ModalFooter, ModalHeader } from '../Modal/v1/index.js'
 
 export type { ModalProps } from '../Modal/v1/props'
 export type { ModalBodyProps } from '../Modal/v1/ModalBody/props'

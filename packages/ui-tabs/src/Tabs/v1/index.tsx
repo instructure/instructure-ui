@@ -50,13 +50,13 @@ import { px } from '@instructure/ui-utils'
 
 import { withStyle } from '@instructure/emotion'
 
-import generateStyle from './styles'
-import generateComponentTheme from './theme'
+import generateStyle from './styles.js'
+import generateComponentTheme from './theme.js'
 
-import { Tab } from './Tab'
-import { Panel } from './Panel'
+import { Tab } from './Tab/index.js'
+import { Panel } from './Panel/index.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { TabsProps, TabsState } from './props'
 
 import type { TabsTabProps } from './Tab/props'

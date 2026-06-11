@@ -22,12 +22,12 @@
  * SOFTWARE.
  */
 
-export { Responsive } from '../Responsive/v1'
-export { addElementQueryMatchListener } from '../utils/v1/addElementQueryMatchListener'
-export { addMediaQueryMatchListener } from '../utils/v1/addMediaQueryMatchListener'
-export { parseQuery } from '../utils/v1/parseQuery'
-export { jsonToMediaQuery } from '../utils/v1/jsonToMediaQuery'
-export { ResponsivePropTypes } from '../utils/v1/ResponsivePropTypes'
+export { Responsive } from '../Responsive/v1/index.js'
+export { addElementQueryMatchListener } from '../utils/v1/addElementQueryMatchListener.js'
+export { addMediaQueryMatchListener } from '../utils/v1/addMediaQueryMatchListener.js'
+export { parseQuery } from '../utils/v1/parseQuery.js'
+export { jsonToMediaQuery } from '../utils/v1/jsonToMediaQuery.js'
+export { ResponsivePropTypes } from '../utils/v1/ResponsivePropTypes.js'
 
 export type {
   ResponsiveProps,

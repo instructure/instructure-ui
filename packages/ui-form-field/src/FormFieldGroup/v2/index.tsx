@@ -38,13 +38,13 @@ import {
 } from '@instructure/ui-react-utils'
 import { withStyleNew } from '@instructure/emotion'
 
-import { allowedProps as formFieldLayoutAllowedProps } from '../../FormFieldLayout/v2/props'
+import { allowedProps as formFieldLayoutAllowedProps } from '../../FormFieldLayout/v2/props.js'
 
-import { FormFieldLayout } from '../../FormFieldLayout/v2'
+import { FormFieldLayout } from '../../FormFieldLayout/v2/index.js'
 
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { FormFieldGroupProps } from './props'
 
 /**

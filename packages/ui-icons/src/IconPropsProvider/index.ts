@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-export { IconPropsProvider } from './IconPropsProvider'
-export { IconPropsContext } from './IconPropsContext'
-export { useIconProps } from './useIconProps'
-export { renderIconWithProps } from './renderIconWithProps'
+export { IconPropsProvider } from './IconPropsProvider.js'
+export { IconPropsContext } from './IconPropsContext.js'
+export { useIconProps } from './useIconProps.js'
+export { renderIconWithProps } from './renderIconWithProps.js'
 export type { IconPropsContextValue } from './IconPropsProvider'

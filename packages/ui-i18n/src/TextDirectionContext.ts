@@ -23,7 +23,7 @@
  */
 
 import { createContext } from 'react'
-import { getTextDirection } from './getTextDirection'
+import { getTextDirection } from './getTextDirection.js'
 
 /**
  * ---

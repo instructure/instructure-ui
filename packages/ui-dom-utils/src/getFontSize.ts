@@ -21,9 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { canUseDOM } from './canUseDOM'
-import { ownerDocument } from './ownerDocument'
-import { getCSSStyleDeclaration } from './getCSSStyleDeclaration'
+import { canUseDOM } from './canUseDOM.js'
+import { ownerDocument } from './ownerDocument.js'
+import { getCSSStyleDeclaration } from './getCSSStyleDeclaration.js'
 import React from 'react'
 
 const COMPUTED_CACHE: WeakMap<any, number> = new WeakMap()

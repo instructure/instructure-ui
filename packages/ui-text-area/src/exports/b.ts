@@ -21,5 +21,5 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { TextArea } from '../TextArea/v2'
+export { TextArea } from '../TextArea/v2/index.js'
 export type { TextAreaProps } from '../TextArea/v2/props'

@@ -34,12 +34,12 @@ import { View } from '@instructure/ui-view/v11_6'
 
 import { withStyle } from '@instructure/emotion'
 import { IconArrowOpenEndSolid } from '@instructure/ui-icons'
-import { BreadcrumbLink } from './BreadcrumbLink'
+import { BreadcrumbLink } from './BreadcrumbLink/index.js'
 
-import generateStyle from './styles'
-import generateComponentTheme from './theme'
+import generateStyle from './styles.js'
+import generateComponentTheme from './theme.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { BreadcrumbProps } from './props'
 
 /**

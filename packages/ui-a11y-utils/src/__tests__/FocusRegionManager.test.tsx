@@ -25,7 +25,7 @@
 import { render, screen, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
-import { FocusRegionManager } from '../FocusRegionManager'
+import { FocusRegionManager } from '../FocusRegionManager.js'
 
 describe('FocusRegionManager', () => {
   beforeEach(async () => {

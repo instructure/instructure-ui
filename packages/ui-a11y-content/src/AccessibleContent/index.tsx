@@ -26,10 +26,10 @@ import { Component } from 'react'
 
 import { passthroughProps, getElementType } from '@instructure/ui-react-utils'
 
-import { PresentationContent } from '../PresentationContent'
-import { ScreenReaderContent } from '../ScreenReaderContent'
+import { PresentationContent } from '../PresentationContent/index.js'
+import { ScreenReaderContent } from '../ScreenReaderContent/index.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { AccessibleContentProps } from './props'
 
 /**

@@ -50,9 +50,9 @@ import { DateTime, ApplyLocaleContext, Locale } from '@instructure/ui-i18n'
 
 import { withStyle } from '@instructure/emotion'
 
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { DateInputProps, DateInputState } from './props'
 import type { FormMessage } from '@instructure/ui-form-field/v11_6'
 

@@ -26,7 +26,7 @@ import { fireEvent, render, screen } from '@testing-library/react'
 import { vi } from 'vitest'
 import '@testing-library/jest-dom'
 
-import { Expandable } from '../index'
+import { Expandable } from '../index.js'
 
 describe('<Expandable />', () => {
   it('should set expanded to false by default', () => {

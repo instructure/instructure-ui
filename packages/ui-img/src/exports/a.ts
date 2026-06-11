@@ -21,5 +21,5 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { Img } from '../Img/v1'
+export { Img } from '../Img/v1/index.js'
 export type { ImgProps } from '../Img/v1/props'

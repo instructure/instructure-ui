@@ -23,8 +23,8 @@
  */
 import { matchMedia as defaultMatchMedia } from '@instructure/ui-dom-utils'
 
-import { QueriesMatching, QueryMatchListener } from './QueryType'
-import { jsonToMediaQuery } from './jsonToMediaQuery'
+import { QueriesMatching, QueryMatchListener } from './QueryType.js'
+import { jsonToMediaQuery } from './jsonToMediaQuery.js'
 
 /**
  * ---

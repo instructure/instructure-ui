@@ -31,14 +31,14 @@ import {
   pickProps
 } from '@instructure/ui-react-utils'
 
-import { GridCol } from '../../GridCol/v2/'
+import { GridCol } from '../../GridCol/v2/index.js'
 import type { GridColProps } from '../../GridCol/v2/props'
 
 import { withStyleNew } from '@instructure/emotion'
 
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { GridRowProps } from './props'
 
 /**

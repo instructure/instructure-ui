@@ -35,9 +35,9 @@ import {
 
 import { withStyle } from '@instructure/emotion'
 
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { TruncateListProps, TruncateListState } from './props'
 
 /**

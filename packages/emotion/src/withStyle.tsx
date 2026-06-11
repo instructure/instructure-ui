@@ -35,8 +35,8 @@ import { deepEqual as isEqual } from '@instructure/ui-utils'
 import { warn } from '@instructure/console'
 import { decorator } from '@instructure/ui-decorator'
 
-import { getComponentThemeOverride } from './getComponentThemeOverride'
-import { useTheme } from './useTheme'
+import { getComponentThemeOverride } from './getComponentThemeOverride.js'
+import { useTheme } from './useTheme.js'
 
 import type {
   BaseTheme,

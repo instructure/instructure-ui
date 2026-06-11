@@ -28,9 +28,9 @@ import { omitProps } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view/v11_6'
 import { withStyle } from '@instructure/emotion'
 
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { FlexItemProps } from './props'
 
 /**

@@ -24,7 +24,7 @@
 
 import '@testing-library/jest-dom'
 
-import { within } from '../within'
+import { within } from '../within.js'
 
 describe('within', () => {
   it('returns true when values are within range', () => {

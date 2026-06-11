@@ -31,9 +31,9 @@ import { omitProps } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { withStyleNew } from '@instructure/emotion'
 
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 import type { TagProps } from './props'
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 
 /**
 ---

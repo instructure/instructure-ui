@@ -32,11 +32,11 @@ import {
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { withStyleNew } from '@instructure/emotion'
 
-import { SideNavBarItem } from './SideNavBarItem'
+import { SideNavBarItem } from './SideNavBarItem/index.js'
 
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 import type { SideNavBarProps, SideNavBarState } from './props'
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 
 const navMinimized = ({ minimized }: { minimized: boolean }) => ({
   minimized: !minimized

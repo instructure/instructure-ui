@@ -29,12 +29,12 @@ import { Text } from '@instructure/ui-text/v11_6'
 import { Link } from '@instructure/ui-link/v11_6'
 import { IconExternalLinkLine } from '@instructure/ui-icons'
 import { useStyle as useStyleNew } from '@instructure/emotion'
-import { NutritionFacts } from '../../NutritionFacts/v1'
-import { DataPermissionLevels } from '../../DataPermissionLevels/v1'
+import { NutritionFacts } from '../../NutritionFacts/v1/index.js'
+import { DataPermissionLevels } from '../../DataPermissionLevels/v1/index.js'
 
-import { AiInformationProps } from './props'
-import generateStyle from './styles'
-import generateComponentTheme from './theme'
+import { AiInformationProps } from './props.js'
+import generateStyle from './styles.js'
+import generateComponentTheme from './theme.js'
 
 /**
 ---

@@ -36,10 +36,10 @@ import { Popover } from '@instructure/ui-popover/latest'
 import type { PopoverProps } from '@instructure/ui-popover/latest'
 import { withStyleNew } from '@instructure/emotion'
 
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 
 import type { TooltipProps, TooltipState } from './props'
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 
 /**
 ---

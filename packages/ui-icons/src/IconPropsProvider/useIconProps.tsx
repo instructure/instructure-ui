@@ -23,7 +23,7 @@
  */
 
 import { useContext } from 'react'
-import { IconPropsContext } from './IconPropsContext'
+import { IconPropsContext } from './IconPropsContext.js'
 
 function useIconProps() {
   return useContext(IconPropsContext)

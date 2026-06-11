@@ -24,7 +24,7 @@
 
 import type { Renderable, OtherHTMLAttributes } from '@instructure/shared-types'
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
-import { RowChild } from '../props'
+import { RowChild } from '../props.js'
 import type { NewComponentTypes } from '@instructure/ui-themes'
 
 type TableHeadOwnProps = {

@@ -33,11 +33,11 @@ import {
 import { omitProps, pickProps } from '@instructure/ui-react-utils'
 import { withStyleNew } from '@instructure/emotion'
 
-import { TreeCollection } from './TreeCollection'
-import { TreeButton } from './TreeButton'
-import { TreeNode } from './TreeNode'
+import { TreeCollection } from './TreeCollection/index.js'
+import { TreeButton } from './TreeButton/index.js'
+import { TreeNode } from './TreeNode/index.js'
 
-import generateStyles from './styles'
+import generateStyles from './styles.js'
 import type {
   Collection,
   CollectionData,
@@ -45,8 +45,8 @@ import type {
   TreeBrowserProps,
   TreeBrowserState
 } from './props'
-import { allowedProps } from './props'
-import TreeBrowserContext from './TreeBrowserContext'
+import { allowedProps } from './props.js'
+import TreeBrowserContext from './TreeBrowserContext.js'
 
 /**
 ---

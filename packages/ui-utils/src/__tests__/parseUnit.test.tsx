@@ -23,7 +23,7 @@
  */
 
 import '@testing-library/jest-dom'
-import { parseUnit } from '../parseUnit'
+import { parseUnit } from '../parseUnit.js'
 
 describe('parseUnit', () => {
   it('unitless', () => {

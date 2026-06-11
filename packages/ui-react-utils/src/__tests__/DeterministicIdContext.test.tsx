@@ -30,7 +30,7 @@ import '@testing-library/jest-dom'
 import {
   withDeterministicId,
   DeterministicIdContextProvider
-} from '../DeterministicIdContext'
+} from '../DeterministicIdContext/index.js'
 import type { WithDeterministicIdProps } from '../DeterministicIdContext'
 
 @withDeterministicId()

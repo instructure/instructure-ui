@@ -45,10 +45,10 @@ import { Transition } from '@instructure/ui-motion'
 import { logError as error } from '@instructure/console'
 import { withStyle } from '@instructure/emotion'
 
-import generateStyle from './styles'
-import generateComponentTheme from './theme'
+import generateStyle from './styles.js'
+import generateComponentTheme from './theme.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { AlertProps, AlertState } from './props'
 
 /**

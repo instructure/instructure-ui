@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { findFocusable } from './findFocusable'
+import { findFocusable } from './findFocusable.js'
 import { UIElement } from '@instructure/shared-types'
 
 /**

@@ -27,9 +27,9 @@ import { Component } from 'react'
 import { passthroughProps, getElementType } from '@instructure/ui-react-utils'
 
 import { withStyleNew } from '@instructure/emotion'
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 import type { TextProps } from './props'
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 
 /**
 ---

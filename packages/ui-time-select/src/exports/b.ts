@@ -22,5 +22,5 @@
  * SOFTWARE.
  */
 
-export { TimeSelect } from '../TimeSelect/v2'
+export { TimeSelect } from '../TimeSelect/v2/index.js'
 export type { TimeSelectProps } from '../TimeSelect/v2/props'

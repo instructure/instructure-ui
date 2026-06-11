@@ -25,16 +25,16 @@
 import { Component } from 'react'
 
 import { withStyle } from '@instructure/emotion'
-import shallowCompare from '../utils/shallowCompare'
+import shallowCompare from '../utils/shallowCompare.js'
 
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { TextInput } from '@instructure/ui-text-input/v11_6'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { RGBAInputProps, RGBAInputState } from './props'
 
-import generateStyle from './styles'
-import generateComponentTheme from './theme'
+import generateStyle from './styles.js'
+import generateComponentTheme from './theme.js'
 
 /**
 ---

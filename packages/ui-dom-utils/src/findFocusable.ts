@@ -37,7 +37,7 @@
 // or even better use the native <dialog> component.
 // tabbable has issues with scrollable containers, e.g.
 // https://github.com/focus-trap/tabbable/issues/167
-import { getCSSStyleDeclaration, findDOMNode } from './'
+import { getCSSStyleDeclaration, findDOMNode } from './index.js'
 import type { UIElement } from '@instructure/shared-types'
 
 const focusableSelector = [

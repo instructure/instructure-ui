@@ -29,7 +29,7 @@ import {
   info,
   assert,
   debug
-} from './console'
+} from './console.js'
 
 export {
   error,

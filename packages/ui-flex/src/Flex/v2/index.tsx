@@ -33,12 +33,12 @@ import {
 import { View } from '@instructure/ui-view/latest'
 import { withStyleNew } from '@instructure/emotion'
 
-import { Item } from './Item'
+import { Item } from './Item/index.js'
 import type { FlexItemProps } from './Item/props'
 
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { FlexProps } from './props'
 
 /**

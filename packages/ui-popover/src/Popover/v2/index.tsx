@@ -61,10 +61,10 @@ import type { DialogProps } from '@instructure/ui-dialog'
 
 import { withStyleNew } from '@instructure/emotion'
 
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 
 import type { PopoverProps, PopoverState } from './props'
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { Renderable } from '@instructure/shared-types'
 /**
 ---

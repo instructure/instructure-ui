@@ -34,7 +34,7 @@ import type {
   OptionsItemProps
 } from '@instructure/ui-options/v11_6'
 
-import Drilldown from '../index'
+import Drilldown from '../index.js'
 import { Renderable } from '@instructure/shared-types'
 
 type DrilldownOptionValue = string | number | undefined

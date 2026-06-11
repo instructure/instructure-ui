@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-export { AppNav } from '../AppNav/v1'
-export { Item as AppNavItem } from '../AppNav/v1/Item'
+export { AppNav } from '../AppNav/v1/index.js'
+export { Item as AppNavItem } from '../AppNav/v1/Item/index.js'
 
 export type { AppNavProps } from '../AppNav/v1/props'
 export type { AppNavItemProps } from '../AppNav/v1/Item/props'

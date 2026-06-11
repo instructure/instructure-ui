@@ -23,7 +23,7 @@
  */
 
 import { Children, ReactElement, ReactNode } from 'react'
-import { safeCloneElement } from './safeCloneElement'
+import { safeCloneElement } from './safeCloneElement.js'
 
 /**
  * ---

@@ -29,7 +29,7 @@ import { Link } from '@instructure/ui-link/v11_6'
 import { omitProps } from '@instructure/ui-react-utils'
 import { Tooltip } from '@instructure/ui-tooltip/v11_6'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { BreadcrumbLinkProps, BreadcrumbLinkState } from './props'
 
 /**

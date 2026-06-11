@@ -27,8 +27,8 @@ import type { MockInstance } from 'vitest'
 import { canvas, canvasHighContrast } from '@instructure/ui-themes'
 import '@testing-library/jest-dom'
 
-import { useTheme } from '../useTheme'
-import { InstUISettingsProvider } from '../InstUISettingsProvider'
+import { useTheme } from '../useTheme.js'
+import { InstUISettingsProvider } from '../InstUISettingsProvider/index.js'
 import type { ThemeOrLegacyOverride } from '../EmotionTypes'
 
 type Props = {

@@ -27,9 +27,9 @@ import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { omitProps, useDeterministicId } from '@instructure/ui-react-utils'
 
 import { useStyleNew } from '@instructure/emotion'
-import { FormFieldMessages } from '../../FormFieldMessages/v2'
-import generateStyle from './styles'
-import { allowedProps } from './props'
+import { FormFieldMessages } from '../../FormFieldMessages/v2/index.js'
+import generateStyle from './styles.js'
+import { allowedProps } from './props.js'
 import type { FormFieldLayoutProps } from './props'
 
 /**

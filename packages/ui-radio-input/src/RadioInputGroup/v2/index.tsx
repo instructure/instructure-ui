@@ -33,11 +33,11 @@ import {
   withDeterministicId
 } from '@instructure/ui-react-utils'
 
-import { RadioInput } from '../../RadioInput/v2'
+import { RadioInput } from '../../RadioInput/v2/index.js'
 import type { RadioInputProps } from '../../RadioInput/v2/props'
 
 import type { RadioInputGroupProps, RadioInputGroupState } from './props'
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 
 type RadioInputChild = ComponentElement<RadioInputProps, any>
 

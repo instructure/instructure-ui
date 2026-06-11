@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-export { Options } from '../Options/v2'
-export { Item as OptionItem } from '../Options/v2/Item'
-export { Separator as OptionSeparator } from '../Options/v2/Separator'
+export { Options } from '../Options/v2/index.js'
+export { Item as OptionItem } from '../Options/v2/Item/index.js'
+export { Separator as OptionSeparator } from '../Options/v2/Separator/index.js'
 
 export type { OptionsProps } from '../Options/v2/props'
 export type {

@@ -24,7 +24,7 @@
 
 import { px } from '@instructure/ui-utils'
 import type { NewComponentTypes } from '@instructure/ui-themes'
-import { IconStyle, InstUIIconProps } from './props'
+import { IconStyle, InstUIIconProps } from './props.js'
 
 type StyleParams = {
   size?: InstUIIconProps['size']

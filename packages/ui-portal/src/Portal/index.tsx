@@ -29,7 +29,7 @@ import { passthroughProps } from '@instructure/ui-react-utils'
 import { textDirectionContextConsumer } from '@instructure/ui-i18n'
 import { canUseDOM } from '@instructure/ui-dom-utils'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { PortalNode, PortalProps, PortalState } from './props'
 
 /**

@@ -22,11 +22,11 @@
  * SOFTWARE.
  */
 
-export { Drilldown } from '../Drilldown/v2'
-export { DrilldownGroup } from '../Drilldown/v2/DrilldownGroup'
-export { DrilldownOption } from '../Drilldown/v2/DrilldownOption'
-export { DrilldownPage } from '../Drilldown/v2/DrilldownPage'
-export { DrilldownSeparator } from '../Drilldown/v2/DrilldownSeparator'
+export { Drilldown } from '../Drilldown/v2/index.js'
+export { DrilldownGroup } from '../Drilldown/v2/DrilldownGroup/index.js'
+export { DrilldownOption } from '../Drilldown/v2/DrilldownOption/index.js'
+export { DrilldownPage } from '../Drilldown/v2/DrilldownPage/index.js'
+export { DrilldownSeparator } from '../Drilldown/v2/DrilldownSeparator/index.js'
 
 export type {
   DrilldownProps,

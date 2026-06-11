@@ -28,7 +28,7 @@ import '@testing-library/jest-dom'
 import {
   useDeterministicId,
   DeterministicIdContextProvider
-} from '../DeterministicIdContext'
+} from '../DeterministicIdContext/index.js'
 
 // Test component using the hook
 const TestComponent = ({ componentName }: { componentName: string }) => {

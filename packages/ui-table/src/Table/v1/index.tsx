@@ -30,20 +30,20 @@ import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
 import { withStyle } from '@instructure/emotion'
 
-import generateStyle from './styles'
-import generateComponentTheme from './theme'
+import generateStyle from './styles.js'
+import generateComponentTheme from './theme.js'
 
-import { Head } from './Head'
-import { Body } from './Body'
-import { Row } from './Row'
-import { ColHeader } from './ColHeader'
-import { RowHeader } from './RowHeader'
-import { Cell } from './Cell'
+import { Head } from './Head/index.js'
+import { Body } from './Body/index.js'
+import { Row } from './Row/index.js'
+import { ColHeader } from './ColHeader/index.js'
+import { RowHeader } from './RowHeader/index.js'
+import { Cell } from './Cell/index.js'
 
 import type { TableProps } from './props'
 
-import { allowedProps } from './props'
-import TableContext from './TableContext'
+import { allowedProps } from './props.js'
+import TableContext from './TableContext.js'
 import { error } from '@instructure/console'
 
 /**

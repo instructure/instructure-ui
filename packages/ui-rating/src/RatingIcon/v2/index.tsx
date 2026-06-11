@@ -30,9 +30,9 @@ import type { RequestAnimationFrameType } from '@instructure/ui-dom-utils'
 import { Transition } from '@instructure/ui-motion'
 
 import { withStyleNew } from '@instructure/emotion'
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 import type { RatingIconProps, RatingIconState } from './props'
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 
 const ratingIconSizeToIconSize = {
   small: 'md',

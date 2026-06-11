@@ -43,9 +43,9 @@ import { combineDataCid } from '@instructure/ui-utils'
 
 import { withStyleNew } from '@instructure/emotion'
 
-import generateStyles from './styles'
+import generateStyles from './styles.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { BaseButtonProps, BaseButtonStyleProps } from './props'
 
 const buttonSizeToIconSize = {

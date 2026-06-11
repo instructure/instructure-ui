@@ -22,5 +22,5 @@
  * SOFTWARE.
  */
 
-export { Tag } from '../Tag/v1'
+export { Tag } from '../Tag/v1/index.js'
 export type { TagProps } from '../Tag/v1/props'

@@ -35,9 +35,9 @@ import { isActiveElement, addEventListener } from '@instructure/ui-dom-utils'
 import { FormField } from '@instructure/ui-form-field/latest'
 import { withStyleNew } from '@instructure/emotion'
 
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 import type { TextInputProps, TextInputStyleProps } from './props'
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { Renderable } from '@instructure/shared-types'
 
 /**

@@ -27,7 +27,7 @@ import { forwardRef } from 'react'
 import { useStyleNew } from '@instructure/emotion'
 import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
 
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 
 import type { MetricProps } from './props'
 

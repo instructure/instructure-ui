@@ -27,10 +27,10 @@ import { Component } from 'react'
 import { withStyleNew } from '@instructure/emotion'
 import { omitProps } from '@instructure/ui-react-utils'
 
-import { View } from '../../View/v2'
+import { View } from '../../View/v2/index.js'
 
-import generateStyle from './styles'
-import { allowedProps } from './props'
+import generateStyle from './styles.js'
+import { allowedProps } from './props.js'
 import type { ContextViewProps } from './props'
 
 /**

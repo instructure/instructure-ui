@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { findDOMNode } from './findDOMNode'
-import { ownerDocument } from './ownerDocument'
+import { findDOMNode } from './findDOMNode.js'
+import { ownerDocument } from './ownerDocument.js'
 import { UIElement } from '@instructure/shared-types'
 
 /**

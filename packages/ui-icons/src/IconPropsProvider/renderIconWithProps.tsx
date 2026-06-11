@@ -25,8 +25,8 @@
 import React from 'react'
 import type { Renderable } from '@instructure/shared-types'
 
-import { IconPropsProvider } from './IconPropsProvider'
-import { InstUIIconOwnProps } from '../props'
+import { IconPropsProvider } from './IconPropsProvider.js'
+import { InstUIIconOwnProps } from '../props.js'
 
 /**
  * Renders an icon wrapped in IconPropsProvider to apply size and color via React context.

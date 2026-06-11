@@ -24,7 +24,7 @@
 
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import { getScrollParents } from '../getScrollParents'
+import { getScrollParents } from '../getScrollParents.js'
 
 describe('getScrollParents', () => {
   const node = (

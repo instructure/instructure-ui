@@ -23,7 +23,7 @@
  */
 
 import '@testing-library/jest-dom'
-import { ms } from '../ms'
+import { ms } from '../ms.js'
 
 describe('ms', () => {
   it('handles ms unit', () => {

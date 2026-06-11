@@ -27,10 +27,10 @@ import { Component } from 'react'
 import { withStyle } from '@instructure/emotion'
 import { omitProps } from '@instructure/ui-react-utils'
 
-import generateStyle from './styles'
-import generateComponentTheme from './theme'
+import generateStyle from './styles.js'
+import generateComponentTheme from './theme.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { MenuSeparatorProps } from './props'
 
 /**

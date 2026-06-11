@@ -23,7 +23,7 @@
  */
 
 import '@testing-library/jest-dom'
-import { omitProps } from '../omitProps'
+import { omitProps } from '../omitProps.js'
 
 describe('omitProps', () => {
   it('should work with an input of a list allowed prop names', () => {

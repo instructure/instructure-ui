@@ -41,13 +41,13 @@ import { debounce } from '@instructure/debounce'
 import { Portal } from '@instructure/ui-portal'
 import { withStyle } from '@instructure/emotion'
 
-import generateStyle from './styles'
-import generateComponentTheme from './theme'
+import generateStyle from './styles.js'
+import generateComponentTheme from './theme.js'
 import type { PositionProps, PositionState } from './props'
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 
-import { calculateElementPosition } from '../calculateElementPosition'
-import { PositionElement } from '../PositionPropTypes'
+import { calculateElementPosition } from '../calculateElementPosition.js'
+import { PositionElement } from '../PositionPropTypes.js'
 
 /**
 ---

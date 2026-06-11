@@ -23,7 +23,7 @@
  */
 
 import '@testing-library/jest-dom'
-import { pickProps } from '../pickProps'
+import { pickProps } from '../pickProps.js'
 
 describe('pickProps', () => {
   it('should work with an input of a list allowed prop names', () => {

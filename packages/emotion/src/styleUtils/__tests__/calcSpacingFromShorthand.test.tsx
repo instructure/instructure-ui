@@ -23,7 +23,7 @@
  */
 
 import { describe, it, expect, vi } from 'vitest'
-import { calcSpacingFromShorthand } from '../calcSpacingFromShorthand'
+import { calcSpacingFromShorthand } from '../calcSpacingFromShorthand.js'
 
 describe('calcSpacingFromShorthand', () => {
   const spacingMap = {

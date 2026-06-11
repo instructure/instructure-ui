@@ -23,7 +23,7 @@
  */
 
 import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
-import { TextInputProps, TextInputStyle, TextInputStyleProps } from './props'
+import { TextInputProps, TextInputStyle, TextInputStyleProps } from './props.js'
 import { calcFocusOutlineStyles } from '@instructure/emotion'
 
 /**

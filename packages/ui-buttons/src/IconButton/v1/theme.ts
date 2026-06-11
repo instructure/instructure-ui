@@ -22,4 +22,4 @@
  * SOFTWARE.
  */
 
-export { default } from '../../BaseButton/v1/theme'
+export { default } from '../../BaseButton/v1/theme.js'

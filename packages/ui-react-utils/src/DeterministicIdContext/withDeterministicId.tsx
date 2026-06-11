@@ -29,7 +29,7 @@ import type {
 } from 'react'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 
-import { DeterministicIdContext } from './DeterministicIdContext'
+import { DeterministicIdContext } from './DeterministicIdContext.js'
 import { decorator } from '@instructure/ui-decorator'
 import { generateId } from '@instructure/ui-utils'
 

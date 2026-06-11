@@ -32,8 +32,8 @@ import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
 import '@testing-library/jest-dom'
 
-import { Transition } from '../index'
-import { getClassNames } from '../styles'
+import { Transition } from '../index.js'
+import { getClassNames } from '../styles.js'
 
 import type { TransitionStyle, TransitionType } from '../props'
 

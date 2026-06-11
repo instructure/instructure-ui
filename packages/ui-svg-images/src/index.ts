@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-export { InlineSVG } from './InlineSVG'
-export { SVGIcon } from './SVGIcon'
+export { InlineSVG } from './InlineSVG/index.js'
+export { SVGIcon } from './SVGIcon/index.js'
 
 export type { InlineSVGProps } from './InlineSVG/props'
 export type { SVGIconProps } from './SVGIcon/props'

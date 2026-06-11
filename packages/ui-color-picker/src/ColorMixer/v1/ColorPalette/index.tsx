@@ -33,13 +33,13 @@ import type { ViewOwnProps } from '@instructure/ui-view/v11_6'
 import { px } from '@instructure/ui-utils'
 import { withDeterministicId } from '@instructure/ui-react-utils'
 
-import shallowCompare from '../utils/shallowCompare'
+import shallowCompare from '../utils/shallowCompare.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { ColorPaletteProps, ColorPaletteState } from './props'
 
-import generateStyle from './styles'
-import generateComponentTheme from './theme'
+import generateStyle from './styles.js'
+import generateComponentTheme from './theme.js'
 
 /**
 ---

@@ -27,8 +27,8 @@ import { vi } from 'vitest'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
-import { Selectable } from '../index'
-import { SelectableRender } from '../props'
+import { Selectable } from '../index.js'
+import { SelectableRender } from '../props.js'
 
 const defaultOptions = ['foo', 'bar', 'baz']
 

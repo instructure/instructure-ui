@@ -22,5 +22,5 @@
  * SOFTWARE.
  */
 
-export { Portal } from './Portal'
+export { Portal } from './Portal/index.js'
 export type { PortalProps, PortalNode } from './Portal/props'

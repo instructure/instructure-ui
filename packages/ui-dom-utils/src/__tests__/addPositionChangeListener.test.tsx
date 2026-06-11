@@ -25,7 +25,7 @@
 import { render, waitFor } from '@testing-library/react'
 import { vi } from 'vitest'
 import '@testing-library/jest-dom'
-import { addPositionChangeListener } from '../addPositionChangeListener'
+import { addPositionChangeListener } from '../addPositionChangeListener.js'
 
 const mockRect = {
   top: 0,

@@ -31,16 +31,16 @@ import type {
   TopNavBarLayoutSmallViewportTheme
 } from '@instructure/shared-types'
 
-import { TopNavBarContext } from '../TopNavBarContext'
+import { TopNavBarContext } from '../TopNavBarContext.js'
 
-import generateComponentTheme from './theme'
+import generateComponentTheme from './theme.js'
 
-import { TopNavBarSmallViewportLayout } from './SmallViewportLayout'
+import { TopNavBarSmallViewportLayout } from './SmallViewportLayout/index.js'
 import type { TopNavBarSmallViewportLayoutProps } from './SmallViewportLayout/props'
-import { TopNavBarDesktopLayout } from './DesktopLayout'
+import { TopNavBarDesktopLayout } from './DesktopLayout/index.js'
 import type { TopNavBarDesktopLayoutProps } from './DesktopLayout/props'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { TopNavBarLayoutProps } from './props'
 
 /**

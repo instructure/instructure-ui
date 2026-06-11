@@ -34,13 +34,13 @@ import {
   withDeterministicId
 } from '@instructure/ui-react-utils'
 
-import { accepts, getAcceptList } from './utils/accepts'
-import { getEventFiles } from './utils/getEventFiles'
+import { accepts, getAcceptList } from './utils/accepts.js'
+import { getEventFiles } from './utils/getEventFiles.js'
 
 import { withStyleNew } from '@instructure/emotion'
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { FileDropProps, FileDropState } from './props'
 import type { StyleParams } from './styles'
 function keyEventIsClickButton(e: React.KeyboardEvent) {

@@ -33,9 +33,9 @@ import {
 
 import { withStyleNew } from '@instructure/emotion'
 
-import generateStyles from './styles'
+import generateStyles from './styles.js'
 import type { OptionsItemProps, OptionsItemStyle } from './props'
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 
 /**
 ---

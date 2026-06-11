@@ -39,11 +39,11 @@ import type { TopNavBarUserProps } from '../TopNavBarUser/props'
 import type { TopNavBarItemProps, ItemChild } from '../TopNavBarItem/props'
 import type { TopNavBarLayoutProps } from '../TopNavBarLayout/props'
 
-import { TopNavBarContext } from '../TopNavBarContext'
+import { TopNavBarContext } from '../TopNavBarContext.js'
 import type { TopNavBarContextType } from '../TopNavBarContext'
 
-import { TopNavBar } from '../index'
-import { elevateIcon } from './exampleSvgFiles'
+import { TopNavBar } from '../index.js'
+import { elevateIcon } from './exampleSvgFiles.js'
 import { Breadcrumb } from '@instructure/ui-breadcrumb/v11_6'
 
 type ChildrenFuncProps = {

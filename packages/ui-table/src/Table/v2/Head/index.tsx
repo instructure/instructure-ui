@@ -33,13 +33,13 @@ import { warn } from '@instructure/console'
 
 import { withStyleNew } from '@instructure/emotion'
 
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 
 import type { TableColHeaderProps } from '../ColHeader/props'
 import type { TableHeadProps } from './props'
 import type { RowChild } from '../props'
-import { allowedProps } from './props'
-import TableContext from '../TableContext'
+import { allowedProps } from './props.js'
+import TableContext from '../TableContext.js'
 
 /**
 ---

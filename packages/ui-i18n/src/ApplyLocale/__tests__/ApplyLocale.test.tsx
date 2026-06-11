@@ -25,8 +25,8 @@ import { Component } from 'react'
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { expect } from 'vitest'
-import { ApplyLocale } from '../index'
-import { ApplyLocaleContext } from '../ApplyLocaleContext'
+import { ApplyLocale } from '../index.js'
+import { ApplyLocaleContext } from '../ApplyLocaleContext.js'
 
 class LocalizableComponent extends Component {
   declare context: React.ContextType<typeof ApplyLocaleContext>

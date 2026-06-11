@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-export { Flex, FlexItem } from '../Flex/v1'
+export { Flex, FlexItem } from '../Flex/v1/index.js'
 
 export type { FlexProps } from '../Flex/v1/props'
 export type { FlexItemProps } from '../Flex/v1/Item/props'

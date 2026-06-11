@@ -25,9 +25,9 @@
 import {
   primitives,
   additionalPrimitives
-} from '../../legacySharedThemeTokens/colors/primitives'
-import dataVisualization from '../../legacySharedThemeTokens/colors/dataVisualization'
-import getUIColors from '../../utils/getUIColors'
+} from '../../legacySharedThemeTokens/colors/primitives.js'
+import dataVisualization from '../../legacySharedThemeTokens/colors/dataVisualization.js'
+import getUIColors from '../../utils/getUIColors.js'
 
 import type { UI, Contrasts } from '@instructure/shared-types'
 

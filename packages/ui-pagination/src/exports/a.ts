@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-export { Pagination, PaginationButton } from '../Pagination/v1'
+export { Pagination, PaginationButton } from '../Pagination/v1/index.js'
 
 export type { PaginationProps } from '../Pagination/v1/props'
 export type { PaginationPageProps } from '../Pagination/v1/PaginationButton/props'

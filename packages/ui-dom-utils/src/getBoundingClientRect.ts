@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
-import { findDOMNode } from './findDOMNode'
-import { canUseDOM } from './canUseDOM'
-import { contains } from './contains'
-import { ownerDocument } from './ownerDocument'
+import { findDOMNode } from './findDOMNode.js'
+import { canUseDOM } from './canUseDOM.js'
+import { contains } from './contains.js'
+import { ownerDocument } from './ownerDocument.js'
 import { UIElement } from '@instructure/shared-types'
 
 type RectType = {

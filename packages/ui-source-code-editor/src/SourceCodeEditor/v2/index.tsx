@@ -89,13 +89,13 @@ import { textDirectionContextConsumer } from '@instructure/ui-i18n'
 
 import { withStyleNew } from '@instructure/emotion'
 
-import customSearch from './SearchPanel'
+import customSearch from './SearchPanel.js'
 
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 
-import { rtlHorizontalArrowKeymap } from './customKeybinding'
+import { rtlHorizontalArrowKeymap } from './customKeybinding.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { SourceCodeEditorProps } from './props'
 
 /**

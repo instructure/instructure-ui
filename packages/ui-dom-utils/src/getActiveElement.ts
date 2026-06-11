@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { isDefinedCustomElement } from './isDefinedCustomElement'
+import { isDefinedCustomElement } from './isDefinedCustomElement.js'
 
 /**
  * ---

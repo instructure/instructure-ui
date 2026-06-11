@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-export { ProgressBar } from '../ProgressBar/v1'
-export { ProgressCircle } from '../ProgressCircle/v1'
+export { ProgressBar } from '../ProgressBar/v1/index.js'
+export { ProgressCircle } from '../ProgressCircle/v1/index.js'
 
 export type { ProgressBarProps } from '../ProgressBar/v1/props'
 export type { ProgressCircleProps } from '../ProgressCircle/v1/props'

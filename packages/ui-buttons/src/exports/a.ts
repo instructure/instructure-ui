@@ -22,12 +22,12 @@
  * SOFTWARE.
  */
 
-export { BaseButton } from '../BaseButton/v1'
-export { Button } from '../Button/v1'
-export { CloseButton } from '../CloseButton/v1'
-export { CondensedButton } from '../CondensedButton/v1'
-export { IconButton } from '../IconButton/v1'
-export { ToggleButton } from '../ToggleButton/v1'
+export { BaseButton } from '../BaseButton/v1/index.js'
+export { Button } from '../Button/v1/index.js'
+export { CloseButton } from '../CloseButton/v1/index.js'
+export { CondensedButton } from '../CondensedButton/v1/index.js'
+export { IconButton } from '../IconButton/v1/index.js'
+export { ToggleButton } from '../ToggleButton/v1/index.js'
 
 export type {
   BaseButtonProps,

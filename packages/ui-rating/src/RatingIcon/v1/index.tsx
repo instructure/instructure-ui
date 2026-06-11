@@ -30,10 +30,10 @@ import type { RequestAnimationFrameType } from '@instructure/ui-dom-utils'
 import { Transition } from '@instructure/ui-motion'
 
 import { withStyle } from '@instructure/emotion'
-import generateStyle from './styles'
-import generateComponentTheme from './theme'
+import generateStyle from './styles.js'
+import generateComponentTheme from './theme.js'
 import type { RatingIconProps, RatingIconState } from './props'
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 
 /**
 ---

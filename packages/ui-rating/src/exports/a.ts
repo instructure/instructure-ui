@@ -21,8 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { Rating } from '../Rating/v1'
-export { RatingIcon } from '../RatingIcon/v1'
+export { Rating } from '../Rating/v1/index.js'
+export { RatingIcon } from '../RatingIcon/v1/index.js'
 
 export type { RatingProps } from '../Rating/v1/props'
 export type { RatingIconProps } from '../RatingIcon/v1/props'

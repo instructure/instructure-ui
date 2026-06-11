@@ -25,8 +25,8 @@
 import type { Theme } from '@instructure/ui-themes'
 import type { TopNavBarLayoutTheme } from '@instructure/shared-types'
 
-import desktopTheme from './DesktopLayout/theme'
-import smallViewportTheme from './SmallViewportLayout/theme'
+import desktopTheme from './DesktopLayout/theme.js'
+import smallViewportTheme from './SmallViewportLayout/theme.js'
 
 /**
  * Generates the theme object for the component from the theme and provided additional information

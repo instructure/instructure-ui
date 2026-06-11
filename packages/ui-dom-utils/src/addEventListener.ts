@@ -24,7 +24,7 @@
 
 import React from 'react'
 
-import { findDOMNode } from './findDOMNode'
+import { findDOMNode } from './findDOMNode.js'
 
 type ReactEvent = <T extends Event>(event: T) => void
 

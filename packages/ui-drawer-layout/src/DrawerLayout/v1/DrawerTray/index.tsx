@@ -35,11 +35,11 @@ import { Portal } from '@instructure/ui-portal'
 import type { PortalNode } from '@instructure/ui-portal'
 import { mirrorHorizontalPlacement } from '@instructure/ui-position'
 
-import generateStyle from './styles'
-import generateComponentTheme from './theme'
-import { DrawerLayoutContext } from '../index'
+import generateStyle from './styles.js'
+import generateComponentTheme from './theme.js'
+import { DrawerLayoutContext } from '../index.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type {
   DrawerLayoutTrayProps,
   DrawerLayoutTrayState,

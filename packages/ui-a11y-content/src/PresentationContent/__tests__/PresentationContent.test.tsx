@@ -27,7 +27,7 @@ import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
 import '@testing-library/jest-dom'
 import { runAxeCheck } from '@instructure/ui-axe-check'
-import { PresentationContent } from '../index'
+import { PresentationContent } from '../index.js'
 
 describe('<PresentationContent />', () => {
   let consoleErrorMock: ReturnType<typeof vi.spyOn>

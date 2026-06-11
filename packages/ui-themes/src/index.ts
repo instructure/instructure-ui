@@ -41,19 +41,19 @@ import type {
   DeepPartial
 } from '@instructure/shared-types'
 
-import canvasHighContrast from './themes/canvasHighContrast'
-import canvas from './themes/canvas'
+import canvasHighContrast from './themes/canvasHighContrast/index.js'
+import canvas from './themes/canvas/index.js'
 
-import dark from './themes/dark'
+import dark from './themes/dark/index.js'
 
-import light from './themes/light'
+import light from './themes/light/index.js'
 
 import {
   primitives,
   additionalPrimitives
-} from './legacySharedThemeTokens/colors/primitives'
-import dataVisualization from './legacySharedThemeTokens/colors/dataVisualization'
-import { boxShadowObjectsToCSSString } from './utils/boxShadowObjectToString'
+} from './legacySharedThemeTokens/colors/primitives.js'
+import dataVisualization from './legacySharedThemeTokens/colors/dataVisualization.js'
+import { boxShadowObjectsToCSSString } from './utils/boxShadowObjectToString.js'
 
 import type {
   LegacyCanvas as NewCanvas,

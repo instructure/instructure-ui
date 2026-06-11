@@ -35,15 +35,15 @@ import { View } from '@instructure/ui-view/latest'
 
 import { withStyleNew } from '@instructure/emotion'
 
-import generateStyles from './styles'
+import generateStyles from './styles.js'
 
-import { Item } from './Item'
+import { Item } from './Item/index.js'
 import type { OptionsItemProps } from './Item/props'
-import { Separator } from './Separator'
+import { Separator } from './Separator/index.js'
 import type { OptionsSeparatorProps } from './Separator/props'
 
 import type { OptionsProps } from './props'
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import { isAndroidOrIOS } from '@instructure/ui-utils'
 
 type ItemChild = ComponentElement<OptionsItemProps, Item>

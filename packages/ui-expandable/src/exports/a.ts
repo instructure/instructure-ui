@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { Expandable } from '../Expandable/v1'
+export { Expandable } from '../Expandable/v1/index.js'
 export type {
   ExpandableProps,
   RenderExpandable,

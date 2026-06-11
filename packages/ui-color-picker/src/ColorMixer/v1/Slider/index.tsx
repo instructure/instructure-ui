@@ -30,11 +30,11 @@ import { withStyle } from '@instructure/emotion'
 import { View } from '@instructure/ui-view/v11_6'
 import type { ViewOwnProps } from '@instructure/ui-view/v11_6'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { SliderProps, SliderStyleProps } from './props'
 
-import generateStyle from './styles'
-import generateComponentTheme from './theme'
+import generateStyle from './styles.js'
+import generateComponentTheme from './theme.js'
 
 /**
 ---

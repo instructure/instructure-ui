@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
-import legacySharedThemeTokens from '../../legacySharedThemeTokens'
-import { colors } from '../canvas/colors'
-import { light } from '../newThemeTokens'
-import { Theme } from '../../index'
+import legacySharedThemeTokens from '../../legacySharedThemeTokens/index.js'
+import { colors } from '../canvas/colors.js'
+import { light } from '../newThemeTokens/index.js'
+import { Theme } from '../../index.js'
 
 import type { Colors } from '@instructure/shared-types'
 import type { Light } from '../newThemeTokens'

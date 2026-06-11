@@ -26,7 +26,7 @@ import { render, screen } from '@testing-library/react'
 import { vi } from 'vitest'
 
 import '@testing-library/jest-dom'
-import { PaginationArrowButton } from '../v2/PaginationArrowButton'
+import { PaginationArrowButton } from '../v2/PaginationArrowButton/index.js'
 
 describe('<PaginationArrowButton />', () => {
   it('should render', async () => {

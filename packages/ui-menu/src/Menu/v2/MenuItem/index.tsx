@@ -36,11 +36,11 @@ import { createChainedFunction } from '@instructure/ui-utils'
 import { isActiveElement, findDOMNode } from '@instructure/ui-dom-utils'
 import { withStyleNew } from '@instructure/emotion'
 
-import { MenuContext } from '../../../utils/v1/MenuContext'
+import { MenuContext } from '../../../utils/v1/MenuContext.js'
 
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { MenuItemProps, MenuItemState } from './props'
 
 /**

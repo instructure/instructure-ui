@@ -27,14 +27,14 @@ import { Component, ContextType, ReactElement, SyntheticEvent } from 'react'
 import { withStyleNew } from '@instructure/emotion'
 import { safeCloneElement } from '@instructure/ui-react-utils'
 
-import { TreeButton } from '../TreeButton'
+import { TreeButton } from '../TreeButton/index.js'
 
-import generateStyles from './styles'
+import generateStyles from './styles.js'
 import type { TreeBrowserCollectionProps, TreeCollectionState } from './props'
 import type { CompareObject } from '../props'
-import { allowedProps } from './props'
-import { CollectionItem, CollectionProps, CollectionData } from '../props'
-import TreeBrowserContext from '../TreeBrowserContext'
+import { allowedProps } from './props.js'
+import { CollectionItem, CollectionProps, CollectionData } from '../props.js'
+import TreeBrowserContext from '../TreeBrowserContext.js'
 
 type AriaSelectedType = { 'aria-selected'?: boolean }
 

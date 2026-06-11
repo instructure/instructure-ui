@@ -35,9 +35,9 @@ import {
 
 import { withStyleNew } from '@instructure/emotion'
 
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { CalendarDayProps, CalendarDayStyleProps } from './props'
 
 /**

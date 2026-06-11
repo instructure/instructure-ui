@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import { px } from '@instructure/ui-utils'
-import { BreakpointQueries, ValidQueryKey } from './QueryType'
+import { BreakpointQueries, ValidQueryKey } from './QueryType.js'
 
 /**
  * An object consisting of query names and boolean true false if it matches

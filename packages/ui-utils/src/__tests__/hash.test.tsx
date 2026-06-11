@@ -23,7 +23,7 @@
  */
 
 import '@testing-library/jest-dom'
-import { hash } from '../hash'
+import { hash } from '../hash.js'
 
 describe('hash', () => {
   it('should error if supplied value is undefined', () => {

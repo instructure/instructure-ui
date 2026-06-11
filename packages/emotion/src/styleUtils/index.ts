@@ -22,13 +22,13 @@
  * SOFTWARE.
  */
 
-export { ThemeablePropValues } from './ThemeablePropValues'
-export { makeThemeVars } from './makeThemeVars'
-export { getShorthandPropValue } from './getShorthandPropValue'
-export { mirrorShorthandCorners } from './mirrorShorthandCorners'
-export { mirrorShorthandEdges } from './mirrorShorthandEdges'
-export { calcSpacingFromShorthand } from './calcSpacingFromShorthand'
-export { calcFocusOutlineStyles } from './calcFocusOutlineStyles'
+export { ThemeablePropValues } from './ThemeablePropValues.js'
+export { makeThemeVars } from './makeThemeVars.js'
+export { getShorthandPropValue } from './getShorthandPropValue.js'
+export { mirrorShorthandCorners } from './mirrorShorthandCorners.js'
+export { mirrorShorthandEdges } from './mirrorShorthandEdges.js'
+export { calcSpacingFromShorthand } from './calcSpacingFromShorthand.js'
+export { calcFocusOutlineStyles } from './calcFocusOutlineStyles.js'
 
 export type {
   SpacingValues,

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { getDisplayName } from './getDisplayName'
+import { getDisplayName } from './getDisplayName.js'
 import { ComponentType, ReactElement, ReactNode } from 'react'
 
 /**

@@ -21,8 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { capitalizeFirstLetter } from './capitalizeFirstLetter'
-import { camelize } from './camelize'
+import { capitalizeFirstLetter } from './capitalizeFirstLetter.js'
+import { camelize } from './camelize.js'
 
 /**
  * ---
