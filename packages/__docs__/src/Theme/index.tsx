@@ -34,6 +34,7 @@ import { Alert } from '@instructure/ui-alerts'
 import { Spinner } from '@instructure/ui-spinner'
 import { Link } from '@instructure/ui-link'
 
+import { navigateTo } from '../navigationUtils'
 import { Heading } from '../Heading'
 import { Description } from '../Description'
 import { ColorSwatch } from '../ColorSwatch'
@@ -326,7 +327,13 @@ type ThemeState = { showColors: boolean }
           <Alert variant="info" margin="0 0 medium">
             This theme is used by <strong>InstUI v11.6</strong> components. For
             v11.7 and later, use the{' '}
-            <Link href={`#${themeKey.replace('legacy-', '')}`}>
+            <Link
+              href={themeKey.replace('legacy-', '')}
+              onClick={(e) => {
+                e.preventDefault()
+                navigateTo(themeKey.replace('legacy-', ''))
+              }}
+            >
               {themeKey.replace('legacy-', '')}
             </Link>{' '}
             theme instead.
