@@ -31,8 +31,8 @@ import type { MockInstance } from 'vitest'
 import {
   textDirectionContextConsumer,
   TextDirectionContextConsumerProps
-} from '../textDirectionContextConsumer'
-import { TextDirectionContext } from '../TextDirectionContext'
+} from '../textDirectionContextConsumer.js'
+import { TextDirectionContext } from '../TextDirectionContext.js'
 
 @textDirectionContextConsumer()
 class TextDirectionContextConsumerComponent extends Component<TextDirectionContextConsumerProps> {

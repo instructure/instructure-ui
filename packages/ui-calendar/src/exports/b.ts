@@ -21,8 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { Calendar } from '../Calendar/v2'
-export { Day as CalendarDay } from '../Calendar/v2/Day'
+export { Calendar } from '../Calendar/v2/index.js'
+export { Day as CalendarDay } from '../Calendar/v2/Day/index.js'
 
 export type { CalendarProps } from '../Calendar/v2/props'
 export type { CalendarDayProps } from '../Calendar/v2/Day/props'

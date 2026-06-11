@@ -21,8 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { Pages } from '../Pages/v1'
-export { Page as PagesPage } from '../Pages/v1/Page'
+export { Pages } from '../Pages/v1/index.js'
+export { Page as PagesPage } from '../Pages/v1/Page/index.js'
 
 export type { PagesProps } from '../Pages/v1/props'
 export type { PagesPageProps } from '../Pages/v1/Page/props'

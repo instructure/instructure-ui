@@ -28,10 +28,10 @@ import { Img } from '@instructure/ui-img/latest'
 import { withStyleNew } from '@instructure/emotion'
 import { renderIconWithProps } from '@instructure/ui-icons'
 
-import generateStyles from '../TreeButton/styles'
+import generateStyles from '../TreeButton/styles.js'
 import type { TreeBrowserNodeProps } from './props'
-import { allowedProps } from './props'
-import TreeBrowserContext from '../TreeBrowserContext'
+import { allowedProps } from './props.js'
+import TreeBrowserContext from '../TreeBrowserContext.js'
 
 // Map TreeBrowser size tokens to icon size tokens
 const treeBrowserSizeToIconSize = {

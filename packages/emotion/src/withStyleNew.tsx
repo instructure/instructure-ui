@@ -35,8 +35,8 @@ import { deepEqual as isEqual, mergeDeep } from '@instructure/ui-utils'
 import { warn } from '@instructure/console'
 import { decorator } from '@instructure/ui-decorator'
 
-import { useTheme } from './useTheme'
-import { applyColorModifiers } from './styleUtils/applyColorModifiers'
+import { useTheme } from './useTheme.js'
+import { applyColorModifiers } from './styleUtils/applyColorModifiers.js'
 
 import type { ComponentTheme, InstUIComponent } from '@instructure/shared-types'
 import type {

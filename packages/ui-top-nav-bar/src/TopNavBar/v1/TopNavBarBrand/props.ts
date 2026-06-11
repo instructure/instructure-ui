@@ -32,7 +32,7 @@ import type {
 import type { ViewOwnProps } from '@instructure/ui-view/v11_6'
 import type { TopNavBarContextType } from '../TopNavBarContext'
 
-import { TopNavBarBrand } from './index'
+import { TopNavBarBrand } from './index.js'
 
 type BrandChild = React.ComponentElement<TopNavBarBrandProps, TopNavBarBrand>
 

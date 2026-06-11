@@ -27,11 +27,11 @@ import { Component } from 'react'
 import { View } from '@instructure/ui-view/latest'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { omitProps } from '@instructure/ui-react-utils'
-import { RatingIcon } from '../../RatingIcon/v2'
+import { RatingIcon } from '../../RatingIcon/v2/index.js'
 import { withStyleNew } from '@instructure/emotion'
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 import type { RatingProps } from './props'
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 
 /**
 ---

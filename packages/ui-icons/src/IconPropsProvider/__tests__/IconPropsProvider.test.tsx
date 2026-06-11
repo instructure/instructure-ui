@@ -26,7 +26,7 @@ import { useContext } from 'react'
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
-import { IconPropsProvider, IconPropsContext } from '../'
+import { IconPropsProvider, IconPropsContext } from '../index.js'
 
 // Test component that exposes context values
 const TestComponentWithHook = () => {

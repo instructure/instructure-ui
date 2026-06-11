@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { findDOMNode } from './findDOMNode'
-import { getActiveElement } from './getActiveElement'
+import { findDOMNode } from './findDOMNode.js'
+import { getActiveElement } from './getActiveElement.js'
 import { UIElement } from '@instructure/shared-types'
 
 /**

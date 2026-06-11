@@ -40,7 +40,7 @@ import { isActiveElement } from '@instructure/ui-dom-utils'
 
 import { useStyleNew } from '@instructure/emotion'
 
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 
 import type { RadioInputProps } from './props'
 

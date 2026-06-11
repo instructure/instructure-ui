@@ -34,10 +34,10 @@ import {
 
 import { withStyle } from '@instructure/emotion'
 
-import generateStyle from './styles'
-import generateComponentTheme from './theme'
+import generateStyle from './styles.js'
+import generateComponentTheme from './theme.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { BillboardProps, HeroIconSize } from './props'
 import type { ViewProps } from '@instructure/ui-view/v11_6'
 

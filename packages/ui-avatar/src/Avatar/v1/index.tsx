@@ -36,8 +36,8 @@ import { View } from '@instructure/ui-view/v11_6'
 import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
 import type { AvatarProps } from './props'
 
-import generateStyle from './styles'
-import generateComponentTheme from './theme'
+import generateStyle from './styles.js'
+import generateComponentTheme from './theme.js'
 
 /**
 ---

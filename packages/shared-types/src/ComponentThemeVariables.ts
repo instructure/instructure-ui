@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Colors } from './Colors'
+import { Colors } from './Colors.js'
 import {
   Border,
   Breakpoints,
@@ -33,7 +33,7 @@ import {
   Stacking,
   Transitions,
   Typography
-} from './BaseTheme'
+} from './BaseTheme.js'
 
 export interface ComponentTheme {
   // it can have multiple levels in SharedTokens

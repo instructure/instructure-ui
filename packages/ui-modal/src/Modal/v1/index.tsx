@@ -33,23 +33,23 @@ import type { PortalNode } from '@instructure/ui-portal'
 import { Dialog } from '@instructure/ui-dialog'
 import { Mask } from '@instructure/ui-overlays/v11_6'
 
-import { ModalHeader } from './ModalHeader'
-import { ModalBody } from './ModalBody'
-import { ModalFooter } from './ModalFooter'
+import { ModalHeader } from './ModalHeader/index.js'
+import { ModalBody } from './ModalBody/index.js'
+import { ModalFooter } from './ModalFooter/index.js'
 
 import { withStyle } from '@instructure/emotion'
 
-import generateStyle from './styles'
-import generateComponentTheme from './theme'
+import generateStyle from './styles.js'
+import generateComponentTheme from './theme.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type {
   ModalProps,
   ModalState,
   ModalPropsForPortal,
   ModalPropsForTransition
 } from './props'
-import ModalContext from './ModalContext'
+import ModalContext from './ModalContext.js'
 
 /**
 ---

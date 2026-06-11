@@ -30,7 +30,7 @@ import type {
 } from '@instructure/shared-types'
 import type { WithStyleProps } from '@instructure/emotion'
 
-import Drilldown from '../index'
+import Drilldown from '../index.js'
 import type { DrilldownOptionValue } from '../DrilldownOption/props'
 import type { OptionChild, SeparatorChild } from '../props'
 import type { NewComponentTypes } from '@instructure/ui-themes'

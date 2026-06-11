@@ -40,9 +40,9 @@ import { logError as error } from '@instructure/console'
 
 import keycode from 'keycode'
 
-import { scopeTab } from './scopeTab'
+import { scopeTab } from './scopeTab.js'
 import type { UIElement } from '@instructure/shared-types'
-import { FocusRegionOptions } from './FocusRegionOptions'
+import { FocusRegionOptions } from './FocusRegionOptions.js'
 
 /**
  * ---

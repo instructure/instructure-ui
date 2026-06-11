@@ -23,7 +23,7 @@
  */
 
 import '@testing-library/jest-dom'
-import { isDefinedCustomElement } from '../isDefinedCustomElement'
+import { isDefinedCustomElement } from '../isDefinedCustomElement.js'
 
 class TestElement extends HTMLElement {}
 

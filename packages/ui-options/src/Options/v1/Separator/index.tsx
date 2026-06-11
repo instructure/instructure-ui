@@ -28,10 +28,10 @@ import { getElementType, omitProps } from '@instructure/ui-react-utils'
 
 import { withStyle } from '@instructure/emotion'
 
-import generateStyles from './styles'
-import generateComponentTheme from './theme'
+import generateStyles from './styles.js'
+import generateComponentTheme from './theme.js'
 import type { OptionsSeparatorProps } from './props'
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 
 /**
 ---

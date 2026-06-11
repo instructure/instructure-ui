@@ -30,13 +30,13 @@ import { isValid } from '@instructure/ui-color-utils'
 import conversions from '@instructure/ui-color-utils'
 import { logWarn as warn } from '@instructure/console'
 import type { HSVType } from '@instructure/ui-color-utils'
-import ColorPalette from './ColorPalette'
-import Slider from './Slider'
-import RGBAInput from './RGBAInput'
+import ColorPalette from './ColorPalette/index.js'
+import Slider from './Slider/index.js'
+import RGBAInput from './RGBAInput/index.js'
 
 import type { ColorMixerProps, ColorMixerState } from './props'
-import { allowedProps } from './props'
-import generateStyle from './styles'
+import { allowedProps } from './props.js'
+import generateStyle from './styles.js'
 
 /**
 ---

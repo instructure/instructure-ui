@@ -24,7 +24,7 @@
 
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import { getFontSize } from '../getFontSize'
+import { getFontSize } from '../getFontSize.js'
 
 describe('getFontSize', () => {
   it('should return font size as a number', () => {

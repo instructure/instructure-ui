@@ -37,18 +37,18 @@ import { logError as error } from '@instructure/console'
 import { mirrorHorizontalPlacement } from '@instructure/ui-position'
 import type { PlacementPropValues } from '@instructure/ui-position'
 
-import { DrawerContent } from './DrawerContent'
+import { DrawerContent } from './DrawerContent/index.js'
 import type {
   DrawerLayoutContentProps,
   DrawerContentSize
 } from './DrawerContent/props'
-import { DrawerTray } from './DrawerTray'
+import { DrawerTray } from './DrawerTray/index.js'
 import type { DrawerLayoutTrayProps } from './DrawerTray/props'
 
 import { withStyleNew } from '@instructure/emotion'
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { DrawerLayoutProps, DrawerLayoutState } from './props'
 
 type TrayChild = ComponentElement<

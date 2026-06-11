@@ -30,7 +30,7 @@ import { isActiveElement } from '@instructure/ui-dom-utils'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'
 import type { SelectableProps } from './props'
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 
 import { withDeterministicId } from '@instructure/ui-react-utils'
 

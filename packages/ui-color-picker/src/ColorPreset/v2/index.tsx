@@ -37,14 +37,14 @@ import { Drilldown } from '@instructure/ui-drilldown/latest'
 import type { DrilldownProps } from '@instructure/ui-drilldown/latest'
 import { PlusInstUIIcon, CheckInstUIIcon } from '@instructure/ui-icons'
 
-import { ColorIndicator } from '../../ColorIndicator/v2'
-import { ColorMixer } from '../../ColorMixer/v2'
-import { ColorContrast } from '../../ColorContrast/v2'
+import { ColorIndicator } from '../../ColorIndicator/v2/index.js'
+import { ColorMixer } from '../../ColorMixer/v2/index.js'
+import { ColorContrast } from '../../ColorContrast/v2/index.js'
 
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 
 import type { ColorPresetProps, ColorPresetState } from './props'
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 
 /**
 ---

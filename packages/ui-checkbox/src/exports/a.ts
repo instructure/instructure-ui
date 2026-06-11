@@ -21,8 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { Checkbox, CheckboxFacade, ToggleFacade } from '../Checkbox/v1'
-export { CheckboxGroup } from '../CheckboxGroup/v1'
+export { Checkbox, CheckboxFacade, ToggleFacade } from '../Checkbox/v1/index.js'
+export { CheckboxGroup } from '../CheckboxGroup/v1/index.js'
 
 export type { CheckboxProps } from '../Checkbox/v1/props'
 export type { CheckboxFacadeProps } from '../Checkbox/v1/CheckboxFacade/props'

@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { addEventListener } from './addEventListener'
-import { canUseDOM } from './canUseDOM'
+import { addEventListener } from './addEventListener.js'
+import { canUseDOM } from './canUseDOM.js'
 
 import type { MouseEvent, PointerEvent, TouchEvent } from 'react'
 

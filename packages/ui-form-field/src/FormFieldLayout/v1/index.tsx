@@ -31,11 +31,11 @@ import {
 } from '@instructure/ui-react-utils'
 
 import { withStyle } from '@instructure/emotion'
-import { FormFieldMessages } from '../../FormFieldMessages/v1'
-import generateStyle from './styles'
-import { allowedProps, FormFieldStyleProps } from './props'
+import { FormFieldMessages } from '../../FormFieldMessages/v1/index.js'
+import generateStyle from './styles.js'
+import { allowedProps, FormFieldStyleProps } from './props.js'
 import type { FormFieldLayoutProps } from './props'
-import generateComponentTheme from './theme'
+import generateComponentTheme from './theme.js'
 
 /**
 ---

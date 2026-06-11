@@ -29,9 +29,9 @@ import { Text } from '@instructure/ui-text/latest'
 import { NumberInput } from '@instructure/ui-number-input/latest'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type {
   PaginationPageInputProps,
   PaginationPageInputState

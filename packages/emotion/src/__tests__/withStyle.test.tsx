@@ -29,7 +29,7 @@ import type { MockInstance } from 'vitest'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
-import { withStyle, InstUISettingsProvider, WithStyleProps } from '../index'
+import { withStyle, InstUISettingsProvider, WithStyleProps } from '../index.js'
 
 type Props = {
   inverse?: boolean

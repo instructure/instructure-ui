@@ -21,5 +21,5 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { Text } from '../Text/v1'
+export { Text } from '../Text/v1/index.js'
 export type { TextProps } from '../Text/v1/props'

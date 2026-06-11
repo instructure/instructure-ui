@@ -26,7 +26,7 @@ import {
   TopNavBarBreadcrumbProps,
   TopNavBarBreadcrumbStyle,
   TopNavBarBreadcrumbStyleProps
-} from './props'
+} from './props.js'
 
 const generateStyle = (
   _componentTheme: null,

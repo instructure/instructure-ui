@@ -21,5 +21,5 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { Selectable } from './Selectable'
+export { Selectable } from './Selectable/index.js'
 export type { SelectableProps, SelectableRender } from './Selectable/props'

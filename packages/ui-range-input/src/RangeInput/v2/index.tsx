@@ -35,10 +35,10 @@ import {
   withDeterministicId
 } from '@instructure/ui-react-utils'
 
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 
 import type { RangeInputProps, RangeInputState } from './props'
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 
 /**
 ---

@@ -27,7 +27,7 @@ import { Component } from 'react'
 import { withStyle } from '@instructure/emotion'
 import { optionsSeparatorThemeGenerator } from '@instructure/ui-options'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { DrilldownSeparatorProps } from './props'
 
 /**

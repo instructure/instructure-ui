@@ -52,7 +52,7 @@ import {
   DeterministicIdContext
 } from '@instructure/ui-react-utils'
 
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 import type { TextAreaProps } from './props'
 
 export type TextAreaElement = {

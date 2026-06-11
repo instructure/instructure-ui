@@ -21,22 +21,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { capitalizeFirstLetter } from './capitalizeFirstLetter'
-export { cloneArray } from './cloneArray'
-export { createChainedFunction } from './createChainedFunction'
-export { deepEqual } from './deepEqual'
-export { hash } from './hash'
-export { generateId } from './generateId'
-export { isEmpty } from './isEmpty'
-export { mergeDeep } from './mergeDeep'
-export { ms } from './ms'
-export { parseUnit } from './parseUnit'
-export { px } from './px'
-export { shallowEqual } from './shallowEqual'
-export { within } from './within'
-export { camelize } from './camelize'
-export { pascalize } from './pascalize'
-export { isBaseTheme } from './isBaseTheme'
+export { capitalizeFirstLetter } from './capitalizeFirstLetter.js'
+export { cloneArray } from './cloneArray.js'
+export { createChainedFunction } from './createChainedFunction.js'
+export { deepEqual } from './deepEqual.js'
+export { hash } from './hash.js'
+export { generateId } from './generateId.js'
+export { isEmpty } from './isEmpty.js'
+export { mergeDeep } from './mergeDeep.js'
+export { ms } from './ms.js'
+export { parseUnit } from './parseUnit.js'
+export { px } from './px.js'
+export { shallowEqual } from './shallowEqual.js'
+export { within } from './within.js'
+export { camelize } from './camelize.js'
+export { pascalize } from './pascalize.js'
+export { isBaseTheme } from './isBaseTheme.js'
 export {
   getBrowser,
   isSafari,
@@ -46,5 +46,5 @@ export {
   isChromium,
   isAndroidOrIOS,
   isMac
-} from './getBrowser'
-export { combineDataCid } from './combineDataCid'
+} from './getBrowser.js'
+export { combineDataCid } from './combineDataCid.js'

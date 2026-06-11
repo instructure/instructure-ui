@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { TokenBoxshadowValueInst } from '../themes/newThemeTokens/commonTypes'
+import { TokenBoxshadowValueInst } from '../themes/newThemeTokens/commonTypes.js'
 
 /**
  * Converts a BoxShadowObject from Token Studio to a CSS box-shadow string

@@ -27,14 +27,14 @@ import { Children, Component, ReactElement } from 'react'
 import { View } from '@instructure/ui-view/v11_6'
 import { passthroughProps, safeCloneElement } from '@instructure/ui-react-utils'
 
-import { ListItem } from './ListItem'
+import { ListItem } from './ListItem/index.js'
 
 import { withStyle } from '@instructure/emotion'
 
-import generateStyle from './styles'
-import generateComponentTheme from './theme'
+import generateStyle from './styles.js'
+import generateComponentTheme from './theme.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { ListProps } from './props'
 
 /**

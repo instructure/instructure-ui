@@ -34,9 +34,9 @@ import {
 import { uid } from '@instructure/uid'
 import { logError as error } from '@instructure/console'
 
-import { ScreenReaderFocusRegion } from './ScreenReaderFocusRegion'
-import { KeyboardFocusRegion } from './KeyboardFocusRegion'
-import { FocusRegionOptions } from './FocusRegionOptions'
+import { ScreenReaderFocusRegion } from './ScreenReaderFocusRegion.js'
+import { KeyboardFocusRegion } from './KeyboardFocusRegion.js'
+import { FocusRegionOptions } from './FocusRegionOptions.js'
 
 /**
  * ---

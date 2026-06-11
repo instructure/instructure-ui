@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { canUseDOM } from './canUseDOM'
+import { canUseDOM } from './canUseDOM.js'
 
 type RequestAnimationFrameType = { cancel: () => void }
 

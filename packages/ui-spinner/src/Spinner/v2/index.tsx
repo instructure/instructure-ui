@@ -32,9 +32,9 @@ import {
 } from '@instructure/ui-react-utils'
 import { logError as error } from '@instructure/console'
 
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 import type { SpinnerProps } from './props'
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 
 /**
 ---

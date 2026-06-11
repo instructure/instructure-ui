@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { mirrorShorthandEdges } from './mirrorShorthand'
+import { mirrorShorthandEdges } from './mirrorShorthand.js'
 
 export default mirrorShorthandEdges
 export { mirrorShorthandEdges }

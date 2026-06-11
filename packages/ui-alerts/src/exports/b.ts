@@ -21,5 +21,5 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { Alert } from '../Alert/v2'
+export { Alert } from '../Alert/v2/index.js'
 export type { AlertProps } from '../Alert/v2/props'

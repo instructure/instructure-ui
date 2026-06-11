@@ -26,12 +26,12 @@ import { Component, ReactInstance } from 'react'
 
 import { withStyle } from '@instructure/emotion'
 
-import { InlineSVG } from '../InlineSVG'
+import { InlineSVG } from '../InlineSVG/index.js'
 
-import generateStyle from './styles'
-import generateComponentTheme from './theme'
+import generateStyle from './styles.js'
+import generateComponentTheme from './theme.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { SVGIconProps } from './props'
 import { SVGIconTheme } from '@instructure/shared-types'
 

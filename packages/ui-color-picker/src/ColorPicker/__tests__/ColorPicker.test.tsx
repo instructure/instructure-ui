@@ -30,7 +30,7 @@ import '@testing-library/jest-dom'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import conversions from '@instructure/ui-color-utils'
 
-import { ContrastStrength } from '../v2/props'
+import { ContrastStrength } from '../v2/props.js'
 import { ColorPicker } from '@instructure/ui-color-picker/latest'
 import type { ColorPickerProps } from '@instructure/ui-color-picker/latest'
 

@@ -33,9 +33,9 @@ import {
   withDeterministicId
 } from '@instructure/ui-react-utils'
 
-import { Checkbox } from '../../Checkbox/v2'
+import { Checkbox } from '../../Checkbox/v2/index.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type {
   CheckboxGroupProps,
   CheckboxGroupState,

@@ -26,7 +26,7 @@ import { render, screen } from '@testing-library/react'
 import { vi } from 'vitest'
 
 import '@testing-library/jest-dom'
-import { PaginationPageInput } from '../v2/PaginationPageInput'
+import { PaginationPageInput } from '../v2/PaginationPageInput/index.js'
 
 const defaultSRLabel = (currentPage: number, numberOfPages: number) =>
   `Select page (${currentPage} of ${numberOfPages})`

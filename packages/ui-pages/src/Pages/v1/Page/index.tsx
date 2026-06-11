@@ -28,9 +28,9 @@ import { findDOMNode, findTabbable } from '@instructure/ui-dom-utils'
 import { logError as error } from '@instructure/console'
 import { View } from '@instructure/ui-view/v11_6'
 
-import { PagesContext } from '../PagesContext'
+import { PagesContext } from '../PagesContext.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { PagesPageProps } from './props'
 
 /**

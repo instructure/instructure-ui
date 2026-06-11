@@ -35,17 +35,17 @@ import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { findTabbable, getActiveElement } from '@instructure/ui-dom-utils'
 import { withStyle } from '@instructure/emotion'
 
-import { PaginationButton } from './PaginationButton'
-import { PaginationArrowButton } from './PaginationArrowButton'
-import { PaginationPageInput } from './PaginationPageInput'
+import { PaginationButton } from './PaginationButton/index.js'
+import { PaginationArrowButton } from './PaginationArrowButton/index.js'
+import { PaginationPageInput } from './PaginationPageInput/index.js'
 
-import generateStyle from './styles'
-import generateComponentTheme from './theme'
+import generateStyle from './styles.js'
+import generateComponentTheme from './theme.js'
 
 import type { PaginationPageProps } from './PaginationButton/props'
 import type { PaginationArrowDirections } from './PaginationArrowButton/props'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { PaginationProps, PaginationSnapshot, ChildPage } from './props'
 
 /** This is an [].findIndex optimized to work on really big, but sparse, arrays */

@@ -21,8 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { Mask } from '../Mask/v1'
-export { Overlay } from '../Overlay/v1'
+export { Mask } from '../Mask/v1/index.js'
+export { Overlay } from '../Overlay/v1/index.js'
 
 export type { MaskProps } from '../Mask/v1/props'
 export type { OverlayProps } from '../Overlay/v1/props'

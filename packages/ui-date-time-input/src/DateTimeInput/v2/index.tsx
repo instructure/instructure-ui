@@ -31,7 +31,7 @@ import type { FormMessage } from '@instructure/ui-form-field/latest'
 import { DateInput } from '@instructure/ui-date-input/latest'
 import { TimeSelect } from '@instructure/ui-time-select/latest'
 import type { DateTimeInputProps, DateTimeInputState } from './props'
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import { error } from '@instructure/console'
 
 /**

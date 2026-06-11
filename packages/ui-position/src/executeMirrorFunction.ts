@@ -27,7 +27,7 @@ import {
   PlacementValueArray,
   PlacementValues,
   PlacementStringValues
-} from './PositionPropTypes'
+} from './PositionPropTypes.js'
 
 function executeMirrorFunction<D extends string | undefined = undefined>(
   placement: PlacementValueArray | PlacementStringValues,

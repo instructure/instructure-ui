@@ -34,16 +34,16 @@ import {
 } from '@instructure/ui-react-utils'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 
-import { RadioInput } from '../../RadioInput/v1'
+import { RadioInput } from '../../RadioInput/v1/index.js'
 import type { RadioInputProps } from '../../RadioInput/v1/props'
 
 import { withStyle } from '@instructure/emotion'
 
-import generateStyle from './styles'
-import generateComponentTheme from './theme'
+import generateStyle from './styles.js'
+import generateComponentTheme from './theme.js'
 
 import type { RadioInputGroupProps, RadioInputGroupState } from './props'
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 
 type RadioInputChild = ComponentElement<RadioInputProps, RadioInput>
 

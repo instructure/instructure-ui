@@ -34,19 +34,19 @@ import {
 import { logError as error } from '@instructure/console'
 import { containsActiveElement } from '@instructure/ui-dom-utils'
 
-import { MenuContext } from '../../utils/v1/MenuContext'
-import { MenuItem } from './MenuItem'
+import { MenuContext } from '../../utils/v1/MenuContext.js'
+import { MenuItem } from './MenuItem/index.js'
 import type { MenuItemProps } from './MenuItem/props'
-import { MenuItemGroup } from './MenuItemGroup'
+import { MenuItemGroup } from './MenuItemGroup/index.js'
 import type { MenuGroupProps } from './MenuItemGroup/props'
-import { MenuItemSeparator } from './MenuItemSeparator'
+import { MenuItemSeparator } from './MenuItemSeparator/index.js'
 import type { MenuSeparatorProps } from './MenuItemSeparator/props'
 import { withStyle } from '@instructure/emotion'
 
-import generateStyle from './styles'
-import generateComponentTheme from './theme'
+import generateStyle from './styles.js'
+import generateComponentTheme from './theme.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { MenuProps } from './props'
 
 type MenuChild = ComponentElement<MenuProps, Menu>

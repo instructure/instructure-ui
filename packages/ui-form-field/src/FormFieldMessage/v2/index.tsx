@@ -32,7 +32,7 @@ import {
 } from '@instructure/ui-icons'
 
 import { useStyleNew } from '@instructure/emotion'
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 
 import type { FormFieldMessageProps } from './props'
 

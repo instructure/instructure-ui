@@ -22,5 +22,5 @@
  * SOFTWARE.
  */
 
-export { FileDrop } from '../FileDrop/v2'
+export { FileDrop } from '../FileDrop/v2/index.js'
 export type { FileDropProps } from '../FileDrop/v2/props'

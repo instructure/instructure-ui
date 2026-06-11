@@ -23,7 +23,7 @@
  */
 
 import { expect } from 'vitest'
-import { getShorthandPropValue } from '../getShorthandPropValue'
+import { getShorthandPropValue } from '../getShorthandPropValue.js'
 
 const theme = {
   small: '0rem',

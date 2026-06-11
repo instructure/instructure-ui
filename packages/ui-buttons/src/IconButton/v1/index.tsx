@@ -30,10 +30,10 @@ import { combineDataCid } from '@instructure/ui-utils'
 
 import { withStyle } from '@instructure/emotion'
 
-import generateComponentTheme from './theme'
-import { BaseButton } from '../../BaseButton/v1'
+import generateComponentTheme from './theme.js'
+import { BaseButton } from '../../BaseButton/v1/index.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { IconButtonProps } from './props'
 
 /**

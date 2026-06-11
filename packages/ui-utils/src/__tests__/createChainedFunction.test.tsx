@@ -24,7 +24,7 @@
 
 import '@testing-library/jest-dom'
 import { vi } from 'vitest'
-import { createChainedFunction } from '../createChainedFunction'
+import { createChainedFunction } from '../createChainedFunction.js'
 
 describe('createChainedFunction', () => {
   it('should return null if no function provided', () => {

@@ -24,7 +24,7 @@
 
 import { Component } from 'react'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { DrilldownPageProps } from './props'
 
 /**

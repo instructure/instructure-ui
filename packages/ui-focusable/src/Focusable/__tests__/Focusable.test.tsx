@@ -29,7 +29,7 @@ import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
 import '@testing-library/jest-dom'
 
-import { Focusable } from '../index'
+import { Focusable } from '../index.js'
 import type { FocusableRenderOptions } from '../props'
 
 describe('<Focusable />', () => {

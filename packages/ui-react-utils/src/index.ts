@@ -23,23 +23,23 @@
  */
 
 /* list utils in alphabetical order */
-export { callRenderProp } from './callRenderProp'
-export { ensureSingleChild } from './ensureSingleChild'
-export { getDisplayName } from './getDisplayName'
-export { getElementType } from './getElementType'
-export { getInteraction } from './getInteraction'
-export { matchComponentTypes } from './matchComponentTypes'
-export { omitProps } from './omitProps'
-export { passthroughProps } from './passthroughProps'
-export { pickProps } from './pickProps'
-export { safeCloneElement } from './safeCloneElement'
-export { windowMessageListener } from './windowMessageListener'
+export { callRenderProp } from './callRenderProp.js'
+export { ensureSingleChild } from './ensureSingleChild.js'
+export { getDisplayName } from './getDisplayName.js'
+export { getElementType } from './getElementType.js'
+export { getInteraction } from './getInteraction.js'
+export { matchComponentTypes } from './matchComponentTypes.js'
+export { omitProps } from './omitProps.js'
+export { passthroughProps } from './passthroughProps.js'
+export { pickProps } from './pickProps.js'
+export { safeCloneElement } from './safeCloneElement.js'
+export { windowMessageListener } from './windowMessageListener.js'
 export {
   DeterministicIdContext,
   DeterministicIdContextProvider,
   withDeterministicId,
   useDeterministicId
-} from './DeterministicIdContext'
+} from './DeterministicIdContext/index.js'
 
 export type { GetInteractionOptions } from './getInteraction'
 export type { InteractionType } from './getInteraction'

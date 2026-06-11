@@ -48,7 +48,7 @@ import {
 
 import { useStyleNew } from '@instructure/emotion'
 
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 
 import type { NumberInputProps } from './props'
 import { Renderable } from '@instructure/shared-types'

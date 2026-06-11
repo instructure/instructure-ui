@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-export { Metric } from '../Metric/v1'
-export { MetricGroup } from '../MetricGroup/v1'
+export { Metric } from '../Metric/v1/index.js'
+export { MetricGroup } from '../MetricGroup/v1/index.js'
 
 export type { MetricProps } from '../Metric/v1/props'
 export type { MetricGroupProps } from '../MetricGroup/v1/props'

@@ -28,11 +28,11 @@ import { omitProps } from '@instructure/ui-react-utils'
 
 import { withStyleNew } from '@instructure/emotion'
 
-import { FormFieldMessage } from '../../FormFieldMessage/v2'
+import { FormFieldMessage } from '../../FormFieldMessage/v2/index.js'
 
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { FormFieldMessagesProps } from './props'
 
 /**

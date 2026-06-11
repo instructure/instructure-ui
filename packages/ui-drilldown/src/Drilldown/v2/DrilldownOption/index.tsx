@@ -26,7 +26,7 @@ import { Component } from 'react'
 
 import { withStyleNew } from '@instructure/emotion'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { DrilldownOptionProps } from './props'
 
 /**

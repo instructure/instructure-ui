@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-import { findDOMNode } from './findDOMNode'
-import { contains } from './contains'
-import { getActiveElement } from './getActiveElement'
+import { findDOMNode } from './findDOMNode.js'
+import { contains } from './contains.js'
+import { getActiveElement } from './getActiveElement.js'
 import { UIElement } from '@instructure/shared-types'
 
 /**

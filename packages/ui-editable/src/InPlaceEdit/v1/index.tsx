@@ -33,10 +33,10 @@ import { createChainedFunction } from '@instructure/ui-utils'
 import { withStyle } from '@instructure/emotion'
 import { View } from '@instructure/ui-view/v11_6'
 
-import { Editable } from '../../Editable/v1'
-import generateStyle from './styles'
+import { Editable } from '../../Editable/v1/index.js'
+import generateStyle from './styles.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { InPlaceEditProps } from './props'
 import type { EditableRenderProps } from '../../Editable/v1/props'
 

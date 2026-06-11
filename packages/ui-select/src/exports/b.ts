@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-export { Select } from '../Select/v2'
-export { Group as SelectGroup } from '../Select/v2/Group'
-export { Option as SelectOption } from '../Select/v2/Option'
+export { Select } from '../Select/v2/index.js'
+export { Group as SelectGroup } from '../Select/v2/Group/index.js'
+export { Option as SelectOption } from '../Select/v2/Option/index.js'
 
 export type { SelectProps, SelectOwnProps } from '../Select/v2/props'
 export type { SelectGroupProps } from '../Select/v2/Group/props'

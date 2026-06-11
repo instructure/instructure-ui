@@ -61,16 +61,16 @@ import type {
 
 import { withStyle, BorderWidth } from '@instructure/emotion'
 
-import generateStyle from './styles'
-import generateComponentTheme from './theme'
+import generateStyle from './styles.js'
+import generateComponentTheme from './theme.js'
 
-import { Group } from './Group'
+import { Group } from './Group/index.js'
 import type { SelectGroupProps } from './Group/props'
-import { Option } from './Option'
+import { Option } from './Option/index.js'
 import type { SelectOptionProps, RenderSelectOptionLabel } from './Option/props'
 
 import type { SelectProps } from './props'
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import { Renderable } from '@instructure/shared-types'
 
 type GroupChild = ComponentElement<SelectGroupProps, Group>

@@ -24,7 +24,7 @@
 
 import { waitFor } from '@testing-library/react'
 import { vi } from 'vitest'
-import { requestAnimationFrame } from '../requestAnimationFrame'
+import { requestAnimationFrame } from '../requestAnimationFrame.js'
 
 describe('requestAnimationFrame', () => {
   it('should provide a cancel method', async () => {

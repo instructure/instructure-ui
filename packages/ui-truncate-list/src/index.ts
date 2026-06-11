@@ -22,5 +22,5 @@
  * SOFTWARE.
  */
 
-export { TruncateList } from './TruncateList'
+export { TruncateList } from './TruncateList/index.js'
 export type { TruncateListProps } from './TruncateList/props'

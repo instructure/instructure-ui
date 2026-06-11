@@ -34,7 +34,7 @@ import type { MenuItemsChild } from '../TopNavBarMenuItems/props'
 import type { UserChild } from '../TopNavBarUser/props'
 import type { BreadcrumbChild } from '../TopNavBarBreadcrumb/props'
 
-import { TopNavBarLayout } from './index'
+import { TopNavBarLayout } from './index.js'
 import type { DesktopLayoutOwnProps } from './DesktopLayout/props'
 import type { SmallViewportLayoutOwnProps } from './SmallViewportLayout/props'
 

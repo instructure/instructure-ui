@@ -28,14 +28,14 @@ import { Grid } from '@instructure/ui-grid/v11_6'
 import { pickProps, omitProps } from '@instructure/ui-react-utils'
 import { withStyle } from '@instructure/emotion'
 
-import { allowedProps as FormFieldLayoutAllowedProps } from '../../FormFieldLayout/v1/props'
+import { allowedProps as FormFieldLayoutAllowedProps } from '../../FormFieldLayout/v1/props.js'
 
-import { FormFieldLayout } from '../../FormFieldLayout/v1'
+import { FormFieldLayout } from '../../FormFieldLayout/v1/index.js'
 
-import generateStyle from './styles'
-import generateComponentTheme from './theme'
+import generateStyle from './styles.js'
+import generateComponentTheme from './theme.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { FormFieldGroupProps, FormFieldGroupStyleProps } from './props'
 
 /**

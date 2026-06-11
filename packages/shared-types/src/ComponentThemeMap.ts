@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { ThemeVariables } from './ComponentThemeVariables'
+import { ThemeVariables } from './ComponentThemeVariables.js'
 
 type ComponentTheme<Type> = {
   [Key in keyof Type]: Type[Key]

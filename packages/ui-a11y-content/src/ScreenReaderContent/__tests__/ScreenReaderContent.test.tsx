@@ -23,7 +23,7 @@
  */
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import { ScreenReaderContent } from '../index'
+import { ScreenReaderContent } from '../index.js'
 
 describe('<ScreenReaderContent />', () => {
   it('should render the specified tag when `as` prop is set', async () => {

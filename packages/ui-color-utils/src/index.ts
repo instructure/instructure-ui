@@ -22,21 +22,21 @@
  * SOFTWARE.
  */
 
-export { alpha } from './alpha'
-export { darken } from './darken'
-export { lighten } from './lighten'
-export { contrast } from './contrast'
-export { isValid } from './isValid'
-export { overlayColors } from './overlayColors'
-export { contrastWithAlpha } from './contrastWithAlpha'
-export { validateContrast } from './validateContrast'
+export { alpha } from './alpha.js'
+export { darken } from './darken.js'
+export { lighten } from './lighten.js'
+export { contrast } from './contrast.js'
+export { isValid } from './isValid.js'
+export { overlayColors } from './overlayColors.js'
+export { contrastWithAlpha } from './contrastWithAlpha.js'
+export { validateContrast } from './validateContrast.js'
 export {
   color2hex,
   colorToHex8,
   colorToHsva,
   colorToHsla,
   colorToRGB
-} from './conversions'
+} from './conversions.js'
 
 import {
   color2hex,
@@ -44,7 +44,7 @@ import {
   colorToHsva,
   colorToHsla,
   colorToRGB
-} from './conversions'
+} from './conversions.js'
 
 // TODO remove when we get rid of babel-plugin-transform-imports
 // This default export is needed because babel-plugin-transform-imports will

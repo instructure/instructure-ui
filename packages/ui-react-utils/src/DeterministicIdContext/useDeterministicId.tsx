@@ -24,7 +24,7 @@
 
 import { useContext } from 'react'
 import { generateId } from '@instructure/ui-utils'
-import { DeterministicIdContext } from './DeterministicIdContext'
+import { DeterministicIdContext } from './DeterministicIdContext.js'
 
 /**
  * A React hook that provides deterministic ID generation for functional components.

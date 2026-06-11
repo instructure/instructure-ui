@@ -28,7 +28,7 @@ import { ThemeProvider } from '@emotion/react'
 import { TextDirectionContext } from '@instructure/ui-i18n'
 import { DeterministicIdContextProvider } from '@instructure/ui-react-utils'
 
-import { getTheme } from '../getTheme'
+import { getTheme } from '../getTheme.js'
 
 import type { ThemeOrLegacyOverride } from '../EmotionTypes'
 import type { DeterministicIdProviderValue } from '@instructure/ui-react-utils'

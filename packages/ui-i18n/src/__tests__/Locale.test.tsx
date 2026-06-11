@@ -24,7 +24,7 @@
 
 import '@testing-library/jest-dom'
 import { expect } from 'vitest'
-import { Locale } from '../Locale'
+import { Locale } from '../Locale.js'
 
 describe('browserLocale', () => {
   it('returns the navigator language if a navigator is explicity passed', () => {

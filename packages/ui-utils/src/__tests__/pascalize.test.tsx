@@ -23,7 +23,7 @@
  */
 
 import '@testing-library/jest-dom'
-import { pascalize } from '../pascalize'
+import { pascalize } from '../pascalize.js'
 
 describe('convertCase', () => {
   describe('pascalize', () => {

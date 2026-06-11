@@ -25,11 +25,11 @@
 
 export * from '@emotion/react'
 
-export { useComputedTheme } from './useComputedTheme'
-export { InstUISettingsProvider } from './InstUISettingsProvider'
-export { withStyle } from './withStyle'
-export { getComponentThemeOverride } from './getComponentThemeOverride'
-export { withStyleNew } from './withStyleNew'
+export { useComputedTheme } from './useComputedTheme.js'
+export { InstUISettingsProvider } from './InstUISettingsProvider/index.js'
+export { withStyle } from './withStyle.js'
+export { getComponentThemeOverride } from './getComponentThemeOverride.js'
+export { withStyleNew } from './withStyleNew.js'
 export {
   ThemeablePropValues,
   makeThemeVars,
@@ -38,11 +38,11 @@ export {
   mirrorShorthandEdges,
   calcSpacingFromShorthand,
   calcFocusOutlineStyles
-} from './styleUtils'
+} from './styleUtils/index.js'
 
-export { useStyle } from './useStyle'
-export { useStyleNew } from './useStyleNew'
-export { useTheme } from './useTheme'
+export { useStyle } from './useStyle.js'
+export { useStyleNew } from './useStyleNew.js'
+export { useTheme } from './useTheme.js'
 
 export type { InstUIProviderProps } from './InstUISettingsProvider'
 export type { ComponentStyle, StyleObject, Overrides } from './EmotionTypes'

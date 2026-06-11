@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { parseQuery, Size } from './parseQuery'
+import { parseQuery, Size } from './parseQuery.js'
 
 import { findDOMNode, getBoundingClientRect } from '@instructure/ui-dom-utils'
 import { debounce } from '@instructure/debounce'
@@ -30,7 +30,7 @@ import {
   BreakpointQueries,
   QueriesMatching,
   QueryMatchListener
-} from './QueryType'
+} from './QueryType.js'
 import { UIElement } from '@instructure/shared-types'
 
 /**

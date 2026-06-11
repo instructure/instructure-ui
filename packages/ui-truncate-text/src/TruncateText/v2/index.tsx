@@ -34,10 +34,10 @@ import {
 import { logError as error } from '@instructure/console'
 import { withStyleNew } from '@instructure/emotion'
 
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 
-import truncate from './utils/truncate'
-import { allowedProps, TruncateTextState } from './props'
+import truncate from './utils/truncate.js'
+import { allowedProps, TruncateTextState } from './props.js'
 import type { TruncateTextProps } from './props'
 
 /**

@@ -23,8 +23,8 @@
  */
 import '@testing-library/jest-dom'
 
-import { cloneArray } from '../cloneArray'
-import { deepEqual } from '../deepEqual'
+import { cloneArray } from '../cloneArray.js'
+import { deepEqual } from '../deepEqual.js'
 
 describe('cloneArray', () => {
   it('should return an array', () => {

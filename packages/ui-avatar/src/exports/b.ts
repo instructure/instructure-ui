@@ -21,5 +21,5 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { Avatar } from '../Avatar/v2'
+export { Avatar } from '../Avatar/v2/index.js'
 export type { AvatarProps } from '../Avatar/v2/props'

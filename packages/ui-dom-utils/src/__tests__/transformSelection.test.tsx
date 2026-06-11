@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { transformSelection, transformCursor } from '../transformSelection'
+import { transformSelection, transformCursor } from '../transformSelection.js'
 
 describe('transformSelection', () => {
   it('should work with transformCursor', () => {

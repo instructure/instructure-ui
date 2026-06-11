@@ -22,5 +22,5 @@
  * SOFTWARE.
  */
 
-export { Badge } from '../Badge/v2'
+export { Badge } from '../Badge/v2/index.js'
 export type { BadgeProps } from '../Badge/v2/props'

@@ -30,18 +30,18 @@ import { matchComponentTypes } from '@instructure/ui-react-utils'
 
 import { Responsive } from '@instructure/ui-responsive/v11_6'
 
-import { TopNavBarActionItems } from './TopNavBarActionItems'
-import { TopNavBarBrand } from './TopNavBarBrand'
-import { TopNavBarItem } from './TopNavBarItem'
-import { TopNavBarLayout } from './TopNavBarLayout'
-import { TopNavBarMenuItems } from './TopNavBarMenuItems'
-import { TopNavBarUser } from './TopNavBarUser'
-import { TopNavBarBreadcrumb } from './TopNavBarBreadcrumb'
+import { TopNavBarActionItems } from './TopNavBarActionItems/index.js'
+import { TopNavBarBrand } from './TopNavBarBrand/index.js'
+import { TopNavBarItem } from './TopNavBarItem/index.js'
+import { TopNavBarLayout } from './TopNavBarLayout/index.js'
+import { TopNavBarMenuItems } from './TopNavBarMenuItems/index.js'
+import { TopNavBarUser } from './TopNavBarUser/index.js'
+import { TopNavBarBreadcrumb } from './TopNavBarBreadcrumb/index.js'
 
-import { TopNavBarContext } from './TopNavBarContext'
+import { TopNavBarContext } from './TopNavBarContext.js'
 import type { TopNavBarLayouts } from './TopNavBarContext'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { TopNavBarProps } from './props'
 
 /**

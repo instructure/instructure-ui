@@ -23,7 +23,7 @@
  */
 
 import '@testing-library/jest-dom'
-import { getInteraction, InteractionType } from '../getInteraction'
+import { getInteraction, InteractionType } from '../getInteraction.js'
 
 describe('getInteraction', () => {
   it("should return 'enabled' when `interaction`, `disabled`, and `readOnly` are not provided", () => {

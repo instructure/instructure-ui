@@ -24,7 +24,7 @@
 
 import { Component } from 'react'
 import type { SelectGroupProps } from './props'
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 
 /**
 ---

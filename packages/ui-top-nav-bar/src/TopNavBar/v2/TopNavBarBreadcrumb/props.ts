@@ -25,9 +25,9 @@
 import { ComponentElement } from 'react'
 import type { ViewOwnProps } from '@instructure/ui-view/latest'
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
-import { TopNavBarContextType } from '../TopNavBarContext'
+import { TopNavBarContextType } from '../TopNavBarContext.js'
 import { ChildrenOfType, OtherHTMLAttributes } from '@instructure/shared-types'
-import TopNavBarBreadcrumb from './index'
+import TopNavBarBreadcrumb from './index.js'
 
 import { Breadcrumb } from '@instructure/ui-breadcrumb/latest'
 import type { BreadcrumbProps } from '@instructure/ui-breadcrumb/latest'

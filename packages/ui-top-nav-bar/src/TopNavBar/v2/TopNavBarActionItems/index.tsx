@@ -38,20 +38,20 @@ import { Drilldown } from '@instructure/ui-drilldown/latest'
 import { MoreVerticalInstUIIcon } from '@instructure/ui-icons'
 import { TruncateList } from '@instructure/ui-truncate-list'
 
-import { TopNavBarItem } from '../TopNavBarItem'
+import { TopNavBarItem } from '../TopNavBarItem/index.js'
 import type { ItemChild } from '../TopNavBarItem/props'
 import {
   mapItemsForDrilldown,
   renderMappedItemDrilldownSubpages,
   renderMappedItemsAsDrilldownOptions
-} from '../utils/mapItemsForDrilldown'
+} from '../utils/mapItemsForDrilldown.js'
 import type { RenderOptionContent } from '../utils/mapItemsForDrilldown'
 
-import { TopNavBarContext } from '../TopNavBarContext'
+import { TopNavBarContext } from '../TopNavBarContext.js'
 
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 
-import { allowedProps, TopNavBarActionItemsStyleProps } from './props'
+import { allowedProps, TopNavBarActionItemsStyleProps } from './props.js'
 import type {
   TopNavBarActionItemsProps,
   TopNavBarActionItemsState

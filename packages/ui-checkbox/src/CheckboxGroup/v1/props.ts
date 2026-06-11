@@ -27,7 +27,7 @@ import type { FormMessage } from '@instructure/ui-form-field/v11_6'
 import type { OtherHTMLAttributes } from '@instructure/shared-types'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
-import { Checkbox } from '../../Checkbox/v1'
+import { Checkbox } from '../../Checkbox/v1/index.js'
 import type { CheckboxProps } from '../../Checkbox/v1/props'
 
 type CheckboxChild = React.ComponentElement<CheckboxProps, Checkbox>

@@ -38,10 +38,10 @@ import { combineDataCid } from '@instructure/ui-utils'
 import { logWarn as warn } from '@instructure/console'
 
 import { withStyle } from '@instructure/emotion'
-import generateStyle from './styles'
-import generateComponentTheme from './theme'
+import generateStyle from './styles.js'
+import generateComponentTheme from './theme.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { LinkProps, LinkState, LinkStyleProps } from './props'
 
 import type { ViewOwnProps } from '@instructure/ui-view/v11_6'

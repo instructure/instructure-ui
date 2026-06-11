@@ -22,12 +22,12 @@
  * SOFTWARE.
  */
 
-import { findDOMNode } from './findDOMNode'
-import { getBoundingClientRect } from './getBoundingClientRect'
+import { findDOMNode } from './findDOMNode.js'
+import { getBoundingClientRect } from './getBoundingClientRect.js'
 import {
   requestAnimationFrame,
   RequestAnimationFrameType
-} from './requestAnimationFrame'
+} from './requestAnimationFrame.js'
 import { UIElement } from '@instructure/shared-types'
 
 type PositionChangeListenerType = { remove: () => void }

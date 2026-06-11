@@ -21,9 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { NutritionFacts } from '../NutritionFacts/v2'
-export { DataPermissionLevels } from '../DataPermissionLevels/v2'
-export { AiInformation } from '../AiInformation/v2'
+export { NutritionFacts } from '../NutritionFacts/v2/index.js'
+export { DataPermissionLevels } from '../DataPermissionLevels/v2/index.js'
+export { AiInformation } from '../AiInformation/v2/index.js'
 export type { NutritionFactsProps } from '../NutritionFacts/v2/props'
 export type { DataPermissionLevelsProps } from '../DataPermissionLevels/v2/props'
 export type { AiInformationProps } from '../AiInformation/v2/props'

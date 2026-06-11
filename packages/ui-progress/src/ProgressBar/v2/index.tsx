@@ -29,10 +29,10 @@ import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
 
 import { withStyleNew } from '@instructure/emotion'
 
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 
 import type { ProgressBarProps, Values } from './props'
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 
 /**
 ---

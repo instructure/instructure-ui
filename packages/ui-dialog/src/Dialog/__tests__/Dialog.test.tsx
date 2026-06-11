@@ -34,7 +34,7 @@ import { vi } from 'vitest'
 import { userEvent } from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
-import { Dialog } from '../index'
+import { Dialog } from '../index.js'
 import type { DialogProps } from '../props'
 
 const TEST_TEXT = 'test-text'

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-export { SideNavBar, SideNavBarItem } from '../SideNavBar/v2'
+export { SideNavBar, SideNavBarItem } from '../SideNavBar/v2/index.js'
 
 export type { SideNavBarProps } from '../SideNavBar/v2/props'
 export type { SideNavBarItemProps } from '../SideNavBar/v2/SideNavBarItem/props'

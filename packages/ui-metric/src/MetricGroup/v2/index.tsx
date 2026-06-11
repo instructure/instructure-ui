@@ -26,7 +26,7 @@ import { Children, forwardRef, ReactElement } from 'react'
 
 import { passthroughProps, safeCloneElement } from '@instructure/ui-react-utils'
 
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 
 import type { MetricGroupProps } from './props'
 

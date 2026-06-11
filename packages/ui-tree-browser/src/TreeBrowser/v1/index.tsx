@@ -30,12 +30,12 @@ import { IconFolderLine, IconDocumentLine } from '@instructure/ui-icons'
 import { omitProps, pickProps } from '@instructure/ui-react-utils'
 import { withStyle } from '@instructure/emotion'
 
-import { TreeCollection } from './TreeCollection'
-import { TreeButton } from './TreeButton'
-import { TreeNode } from './TreeNode'
+import { TreeCollection } from './TreeCollection/index.js'
+import { TreeButton } from './TreeButton/index.js'
+import { TreeNode } from './TreeNode/index.js'
 
-import generateStyles from './styles'
-import generateComponentTheme from './theme'
+import generateStyles from './styles.js'
+import generateComponentTheme from './theme.js'
 import type {
   Collection,
   CollectionData,
@@ -43,8 +43,8 @@ import type {
   TreeBrowserProps,
   TreeBrowserState
 } from './props'
-import { allowedProps } from './props'
-import TreeBrowserContext from './TreeBrowserContext'
+import { allowedProps } from './props.js'
+import TreeBrowserContext from './TreeBrowserContext.js'
 
 /**
 ---

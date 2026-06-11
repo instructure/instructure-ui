@@ -23,8 +23,8 @@
  */
 
 import { logError as error } from '@instructure/console'
-import { FocusRegion } from './FocusRegion'
-import { FocusRegionOptions } from './FocusRegionOptions'
+import { FocusRegion } from './FocusRegion.js'
+import { FocusRegionOptions } from './FocusRegionOptions.js'
 
 type Entry = {
   id: string

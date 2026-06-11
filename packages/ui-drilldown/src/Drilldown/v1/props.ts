@@ -38,19 +38,19 @@ import type {
   AsElementType
 } from '@instructure/shared-types'
 
-import { DrilldownPage } from './DrilldownPage'
+import { DrilldownPage } from './DrilldownPage/index.js'
 import type { DrilldownPageProps } from './DrilldownPage/props'
-import { DrilldownGroup } from './DrilldownGroup'
+import { DrilldownGroup } from './DrilldownGroup/index.js'
 import type { DrilldownGroupProps } from './DrilldownGroup/props'
-import { DrilldownOption } from './DrilldownOption'
+import { DrilldownOption } from './DrilldownOption/index.js'
 import type {
   DrilldownOptionProps,
   DrilldownOptionValue
 } from './DrilldownOption/props'
-import { DrilldownSeparator } from './DrilldownSeparator'
+import { DrilldownSeparator } from './DrilldownSeparator/index.js'
 import type { DrilldownSeparatorProps } from './DrilldownSeparator/props'
 
-import { Drilldown } from './index'
+import { Drilldown } from './index.js'
 
 type PageChild = React.ComponentElement<DrilldownPageProps, DrilldownPage>
 type GroupChild = React.ComponentElement<DrilldownGroupProps, DrilldownGroup>

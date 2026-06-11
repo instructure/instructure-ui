@@ -24,7 +24,7 @@
 
 import { expect } from 'vitest'
 import '@testing-library/jest-dom'
-import cleanString from '../v2/utils/cleanString'
+import cleanString from '../v2/utils/cleanString.js'
 
 describe('cleanSring', () => {
   it('should remove spaces from start and end of string', async () => {

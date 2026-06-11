@@ -24,7 +24,7 @@
 
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import { getOffsetParents } from '../getOffsetParents'
+import { getOffsetParents } from '../getOffsetParents.js'
 
 describe('getOffsetParents', () => {
   // At rendering, we receive the node_wrapper and the body as extra offsetParents

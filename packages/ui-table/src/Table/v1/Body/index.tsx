@@ -34,11 +34,11 @@ import { safeCloneElement, omitProps } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view/v11_6'
 import { withStyle } from '@instructure/emotion'
 
-import generateStyle from './styles'
-import generateComponentTheme from './theme'
+import generateStyle from './styles.js'
+import generateComponentTheme from './theme.js'
 import type { TableBodyProps } from './props'
-import { allowedProps } from './props'
-import TableContext from '../TableContext'
+import { allowedProps } from './props.js'
+import TableContext from '../TableContext.js'
 
 /**
 ---

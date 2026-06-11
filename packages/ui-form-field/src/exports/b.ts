@@ -22,11 +22,11 @@
  * SOFTWARE.
  */
 
-export { FormField } from '../FormField/v2'
-export { FormFieldMessage } from '../FormFieldMessage/v2'
-export { FormFieldMessages } from '../FormFieldMessages/v2'
-export { FormFieldLayout } from '../FormFieldLayout/v2'
-export { FormFieldGroup } from '../FormFieldGroup/v2'
+export { FormField } from '../FormField/v2/index.js'
+export { FormFieldMessage } from '../FormFieldMessage/v2/index.js'
+export { FormFieldMessages } from '../FormFieldMessages/v2/index.js'
+export { FormFieldLayout } from '../FormFieldLayout/v2/index.js'
+export { FormFieldGroup } from '../FormFieldGroup/v2/index.js'
 
 export type {
   FormMessageType,

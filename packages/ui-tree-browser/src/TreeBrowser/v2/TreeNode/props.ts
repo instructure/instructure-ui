@@ -30,7 +30,7 @@ import type {
   TreeBrowserButtonProps,
   TreeBrowserButtonStyle
 } from '../TreeButton/props'
-import { CollectionData } from '../props'
+import { CollectionData } from '../props.js'
 
 type TreeBrowserNodeOwnProps = Pick<
   TreeBrowserButtonProps,

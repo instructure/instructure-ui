@@ -41,7 +41,7 @@ import type {
   TimeSelectOptions
 } from './props'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 
 type GetOption = <F extends keyof TimeSelectOptions>(
   field: F,

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { IconPropsContext } from './IconPropsContext'
+import { IconPropsContext } from './IconPropsContext.js'
 import type { InstUIIconOwnProps } from '../props'
 
 type IconPropsContextValue = Pick<InstUIIconOwnProps, 'size' | 'color'>

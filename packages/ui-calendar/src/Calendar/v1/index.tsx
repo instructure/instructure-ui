@@ -40,12 +40,12 @@ import { withStyle } from '@instructure/emotion'
 import { Locale, DateTime, ApplyLocaleContext } from '@instructure/ui-i18n'
 import type { Moment } from '@instructure/ui-i18n'
 
-import generateStyle from './styles'
-import generateComponentTheme from './theme'
+import generateStyle from './styles.js'
+import generateComponentTheme from './theme.js'
 
-import { Day } from './Day'
+import { Day } from './Day/index.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { CalendarProps, CalendarState } from './props'
 import { Renderable } from '@instructure/shared-types'
 

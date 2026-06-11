@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { findDOMNode } from './findDOMNode'
-import { canUseDOM } from './canUseDOM'
+import { findDOMNode } from './findDOMNode.js'
+import { canUseDOM } from './canUseDOM.js'
 import { UIElement } from '@instructure/shared-types'
 
 function containsWithDOM(context: UIElement, el: UIElement) {

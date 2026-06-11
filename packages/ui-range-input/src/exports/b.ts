@@ -22,5 +22,5 @@
  * SOFTWARE.
  */
 
-export { RangeInput } from '../RangeInput/v2'
+export { RangeInput } from '../RangeInput/v2/index.js'
 export type { RangeInputProps } from '../RangeInput/v2/props'

@@ -25,7 +25,7 @@
 import '@testing-library/jest-dom'
 import { getFontSize } from '@instructure/ui-dom-utils'
 
-import { px } from '../px'
+import { px } from '../px.js'
 
 describe('px', () => {
   let node: HTMLDivElement | null

@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-export { Tabs } from '../Tabs/v2'
-export { Panel as TabsPanel } from '../Tabs/v2/Panel'
-export { Tab as TabsTab } from '../Tabs/v2/Tab'
+export { Tabs } from '../Tabs/v2/index.js'
+export { Panel as TabsPanel } from '../Tabs/v2/Panel/index.js'
+export { Tab as TabsTab } from '../Tabs/v2/Tab/index.js'
 
 export type { TabsProps } from '../Tabs/v2/props'
 export type { TabsPanelProps } from '../Tabs/v2/Panel/props'

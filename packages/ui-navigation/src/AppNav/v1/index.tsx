@@ -30,13 +30,13 @@ import { callRenderProp, omitProps } from '@instructure/ui-react-utils'
 
 import { View } from '@instructure/ui-view/v11_6'
 import { Menu } from '@instructure/ui-menu/v11_6'
-import { Item } from './Item'
+import { Item } from './Item/index.js'
 
-import generateStyle from './styles'
-import generateComponentTheme from './theme'
+import generateStyle from './styles.js'
+import generateComponentTheme from './theme.js'
 import type { AppNavProps } from './props'
-import { allowedProps } from './props'
-import { AppNavItemProps } from './Item/props'
+import { allowedProps } from './props.js'
+import { AppNavItemProps } from './Item/props.js'
 
 import { TruncateList } from '@instructure/ui-truncate-list'
 

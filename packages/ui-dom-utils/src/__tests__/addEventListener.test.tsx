@@ -25,7 +25,7 @@
 import { fireEvent, render } from '@testing-library/react'
 import { vi } from 'vitest'
 import '@testing-library/jest-dom'
-import { addEventListener } from '../addEventListener'
+import { addEventListener } from '../addEventListener.js'
 
 describe('addEventListener', () => {
   it('should add an event listener and provide a remove method', () => {

@@ -35,9 +35,9 @@ import {
 } from '@instructure/ui-react-utils'
 import { withStyleNew } from '@instructure/emotion'
 
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { ViewProps } from './props'
 
 declare const process: Record<string, any> | undefined

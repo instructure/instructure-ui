@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import '@testing-library/jest-dom'
-import { generateId } from '../generateId'
+import { generateId } from '../generateId.js'
 
 describe('generateId', () => {
   it('should generate unique ids for the same instance', () => {

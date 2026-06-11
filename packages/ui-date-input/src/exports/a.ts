@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-export { DateInput } from '../DateInput/v1'
-export { DateInput2 } from '../DateInput2/v1'
+export { DateInput } from '../DateInput/v1/index.js'
+export { DateInput2 } from '../DateInput2/v1/index.js'
 export type { DateInputProps } from '../DateInput/v1/props'
 export type { DateInput2Props } from '../DateInput2/v1/props'

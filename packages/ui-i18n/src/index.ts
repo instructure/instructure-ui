@@ -22,18 +22,18 @@
  * SOFTWARE.
  */
 
-export { ApplyLocale } from './ApplyLocale'
-export { ApplyLocaleContext } from './ApplyLocale/ApplyLocaleContext'
+export { ApplyLocale } from './ApplyLocale/index.js'
+export { ApplyLocaleContext } from './ApplyLocale/ApplyLocaleContext.js'
 
-export { textDirectionContextConsumer } from './textDirectionContextConsumer'
-export { DateTime } from './DateTime'
-export { getTextDirection } from './getTextDirection'
+export { textDirectionContextConsumer } from './textDirectionContextConsumer.js'
+export { DateTime } from './DateTime.js'
+export { getTextDirection } from './getTextDirection.js'
 
-export { Locale } from './Locale' // TODO delete this and only keep the ones below
-export { getLocale } from './getLocale'
-export { getTimezone } from './getTimezone'
+export { Locale } from './Locale.js' // TODO delete this and only keep the ones below
+export { getLocale } from './getLocale.js'
+export { getTimezone } from './getTimezone.js'
 
-export { DIRECTION, TextDirectionContext } from './TextDirectionContext'
+export { DIRECTION, TextDirectionContext } from './TextDirectionContext.js'
 
 export type { Moment } from './DateTime'
 export type { TextDirectionContextConsumerProps } from './textDirectionContextConsumer'

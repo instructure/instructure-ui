@@ -22,14 +22,14 @@
  * SOFTWARE.
  */
 
-export { TopNavBar } from '../TopNavBar/v1'
-export { TopNavBarActionItems } from '../TopNavBar/v1/TopNavBarActionItems'
-export { TopNavBarBrand } from '../TopNavBar/v1/TopNavBarBrand'
-export { TopNavBarBreadcrumb } from '../TopNavBar/v1/TopNavBarBreadcrumb'
-export { TopNavBarItem } from '../TopNavBar/v1/TopNavBarItem'
-export { TopNavBarLayout } from '../TopNavBar/v1/TopNavBarLayout'
-export { TopNavBarMenuItems } from '../TopNavBar/v1/TopNavBarMenuItems'
-export { TopNavBarUser } from '../TopNavBar/v1/TopNavBarUser'
+export { TopNavBar } from '../TopNavBar/v1/index.js'
+export { TopNavBarActionItems } from '../TopNavBar/v1/TopNavBarActionItems/index.js'
+export { TopNavBarBrand } from '../TopNavBar/v1/TopNavBarBrand/index.js'
+export { TopNavBarBreadcrumb } from '../TopNavBar/v1/TopNavBarBreadcrumb/index.js'
+export { TopNavBarItem } from '../TopNavBar/v1/TopNavBarItem/index.js'
+export { TopNavBarLayout } from '../TopNavBar/v1/TopNavBarLayout/index.js'
+export { TopNavBarMenuItems } from '../TopNavBar/v1/TopNavBarMenuItems/index.js'
+export { TopNavBarUser } from '../TopNavBar/v1/TopNavBarUser/index.js'
 
 export type { TopNavBarProps, TopNavBarOwnProps } from '../TopNavBar/v1/props'
 export type {

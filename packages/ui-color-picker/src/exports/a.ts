@@ -21,11 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { ColorPicker } from '../ColorPicker/v1'
-export { ColorMixer } from '../ColorMixer/v1'
-export { ColorPreset } from '../ColorPreset/v1'
-export { ColorContrast } from '../ColorContrast/v1'
-export { ColorIndicator } from '../ColorIndicator/v1'
+export { ColorPicker } from '../ColorPicker/v1/index.js'
+export { ColorMixer } from '../ColorMixer/v1/index.js'
+export { ColorPreset } from '../ColorPreset/v1/index.js'
+export { ColorContrast } from '../ColorContrast/v1/index.js'
+export { ColorIndicator } from '../ColorIndicator/v1/index.js'
 
 export type { ColorPickerProps } from '../ColorPicker/v1/props'
 export type { ColorMixerProps } from '../ColorMixer/v1/props'

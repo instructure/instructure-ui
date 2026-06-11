@@ -22,5 +22,5 @@
  * SOFTWARE.
  */
 
-export { Tray } from '../Tray/v1'
+export { Tray } from '../Tray/v1/index.js'
 export type { TrayProps } from '../Tray/v1/props'

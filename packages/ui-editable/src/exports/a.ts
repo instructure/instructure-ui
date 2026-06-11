@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-export { Editable } from '../Editable/v1'
-export { InPlaceEdit } from '../InPlaceEdit/v1'
+export { Editable } from '../Editable/v1/index.js'
+export { InPlaceEdit } from '../InPlaceEdit/v1/index.js'
 
 export type { EditableProps } from '../Editable/v1/props'
 export type { InPlaceEditProps } from '../InPlaceEdit/v1/props'

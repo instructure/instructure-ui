@@ -30,11 +30,11 @@ import { getInteraction, passthroughProps } from '@instructure/ui-react-utils'
 
 import { withStyle } from '@instructure/emotion'
 
-import generateStyle from './styles'
-import generateComponentTheme from './theme'
-import { BaseButton } from '../../BaseButton/v1'
+import generateStyle from './styles.js'
+import generateComponentTheme from './theme.js'
+import { BaseButton } from '../../BaseButton/v1/index.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { CloseButtonProps } from './props'
 
 /**

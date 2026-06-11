@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-export { InlineList } from '../InlineList/v2'
-export { List, ListItem } from '../List/v2'
-export { InlineListItem } from '../InlineList/v2/InlineListItem'
+export { InlineList } from '../InlineList/v2/index.js'
+export { List, ListItem } from '../List/v2/index.js'
+export { InlineListItem } from '../InlineList/v2/InlineListItem/index.js'
 
 export type { InlineListProps } from '../InlineList/v2/props'
 export type { InlineListItemProps } from '../InlineList/v2/InlineListItem/props'

@@ -24,7 +24,7 @@
 
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import { isVisible } from '../isVisible'
+import { isVisible } from '../isVisible.js'
 
 describe('isVisible', () => {
   it('should recognize visible elements', () => {

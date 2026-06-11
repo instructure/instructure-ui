@@ -27,7 +27,7 @@ import { Component } from 'react'
 import { withStyle } from '@instructure/emotion'
 import { optionsThemeGenerator } from '@instructure/ui-options'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { DrilldownGroupProps } from './props'
 import { isMac, isFirefox } from '@instructure/ui-utils'
 

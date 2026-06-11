@@ -22,4 +22,4 @@
  * SOFTWARE.
  */
 
-export { DateTimeInput } from '../DateTimeInput/v1'
+export { DateTimeInput } from '../DateTimeInput/v1/index.js'

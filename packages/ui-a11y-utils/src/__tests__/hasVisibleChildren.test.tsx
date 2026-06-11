@@ -25,7 +25,7 @@
 import '@testing-library/jest-dom'
 
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
-import { hasVisibleChildren } from '../hasVisibleChildren'
+import { hasVisibleChildren } from '../hasVisibleChildren.js'
 
 describe('hasVisibleChildren', () => {
   it('should not count ScreenReaderContent as visible content', async () => {

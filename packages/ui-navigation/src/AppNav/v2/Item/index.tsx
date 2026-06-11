@@ -38,9 +38,9 @@ import type { ScreenReaderContentProps } from '@instructure/ui-a11y-content'
 
 import { withStyleNew } from '@instructure/emotion'
 
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 import type { AppNavItemProps } from './props'
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 
 /**
 ---

@@ -23,7 +23,7 @@
  */
 
 import { logWarn as warn } from '@instructure/console'
-import { FocusRegionOptions } from './FocusRegionOptions'
+import { FocusRegionOptions } from './FocusRegionOptions.js'
 
 function isElement(elem: Node): elem is Element {
   return elem instanceof Element

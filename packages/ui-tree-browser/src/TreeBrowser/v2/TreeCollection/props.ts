@@ -27,7 +27,7 @@ import React from 'react'
 import type { CollectionData } from '../props'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { NewComponentTypes } from '@instructure/ui-themes'
-import { CollectionProps, TreeBrowserBaseProps } from '../props'
+import { CollectionProps, TreeBrowserBaseProps } from '../props.js'
 
 type TreeBrowserCollectionOwnProps = {
   level: number

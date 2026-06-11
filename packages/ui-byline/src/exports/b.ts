@@ -21,5 +21,5 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { Byline } from '../Byline/v2'
+export { Byline } from '../Byline/v2/index.js'
 export type { BylineProps } from '../Byline/v2/props'

@@ -28,9 +28,9 @@ import { View } from '@instructure/ui-view/latest'
 import { passthroughProps, safeCloneElement } from '@instructure/ui-react-utils'
 import { withStyleNew } from '@instructure/emotion'
 
-import { ListItem } from './ListItem'
-import generateStyle from './styles'
-import { allowedProps } from './props'
+import { ListItem } from './ListItem/index.js'
+import generateStyle from './styles.js'
+import { allowedProps } from './props.js'
 import type { ListProps } from './props'
 
 /**

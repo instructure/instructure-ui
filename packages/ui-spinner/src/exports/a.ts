@@ -22,5 +22,5 @@
  * SOFTWARE.
  */
 
-export { Spinner } from '../Spinner/v1'
+export { Spinner } from '../Spinner/v1/index.js'
 export type { SpinnerProps } from '../Spinner/v1/props'

@@ -29,9 +29,9 @@ import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { combineDataCid } from '@instructure/ui-utils'
 
 import { withStyleNew } from '@instructure/emotion'
-import { BaseButton } from '../../BaseButton/v2'
+import { BaseButton } from '../../BaseButton/v2/index.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { IconButtonProps } from './props'
 
 /**

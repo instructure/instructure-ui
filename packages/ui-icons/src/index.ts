@@ -24,17 +24,17 @@
 
 // Shared icon utilities
 export type { InstUIIconProps } from './props'
-export { renderIconWithProps } from './IconPropsProvider'
+export { renderIconWithProps } from './IconPropsProvider/index.js'
 
 // Lucide icons
-export * from './generated/lucide'
+export * from './generated/lucide/index.js'
 
 // Custom/brand icons
-export * from './generated/custom'
+export * from './generated/custom/index.js'
 
 // Re-export legacy icons for backwards compatibility
-export * from './generated'
+export * from './generated/index.js'
 
 // Re-export as namespaces for cases where distinction is needed (e.g., icon gallery)
-export * as CustomIcons from './generated/custom'
-export * as LucideIcons from './generated/lucide'
+export * as CustomIcons from './generated/custom/index.js'
+export * as LucideIcons from './generated/lucide/index.js'

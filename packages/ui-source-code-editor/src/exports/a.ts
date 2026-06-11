@@ -21,5 +21,5 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { SourceCodeEditor } from '../SourceCodeEditor/v1'
+export { SourceCodeEditor } from '../SourceCodeEditor/v1/index.js'
 export type { SourceCodeEditorProps } from '../SourceCodeEditor/v1/props'

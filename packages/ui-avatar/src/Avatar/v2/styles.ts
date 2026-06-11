@@ -24,7 +24,7 @@
 
 import { calcSpacingFromShorthand } from '@instructure/emotion'
 import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
-import { AvatarProps, AvatarStyle } from './props'
+import { AvatarProps, AvatarStyle } from './props.js'
 
 type StyleParams = {
   loaded: boolean

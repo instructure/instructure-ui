@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-export { SimpleSelect } from '../SimpleSelect/v2'
-export { Group as SimpleSelectGroup } from '../SimpleSelect/v2/Group'
-export { Option as SimpleSelectOption } from '../SimpleSelect/v2/Option'
+export { SimpleSelect } from '../SimpleSelect/v2/index.js'
+export { Group as SimpleSelectGroup } from '../SimpleSelect/v2/Group/index.js'
+export { Option as SimpleSelectOption } from '../SimpleSelect/v2/Option/index.js'
 
 export type { SimpleSelectProps } from '../SimpleSelect/v2/props'
 export type { SimpleSelectGroupProps } from '../SimpleSelect/v2/Group/props'

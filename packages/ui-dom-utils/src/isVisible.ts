@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { findDOMNode } from './findDOMNode'
-import { getCSSStyleDeclaration } from './getCSSStyleDeclaration'
+import { findDOMNode } from './findDOMNode.js'
+import { getCSSStyleDeclaration } from './getCSSStyleDeclaration.js'
 import { UIElement } from '@instructure/shared-types'
 
 /**

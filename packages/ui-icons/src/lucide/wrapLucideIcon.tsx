@@ -27,9 +27,9 @@ import { useStyleNew } from '@instructure/emotion'
 import { passthroughProps } from '@instructure/ui-react-utils'
 import type { LucideIcon } from 'lucide-react'
 
-import { IconPropsContext } from '../IconPropsProvider'
+import { IconPropsContext } from '../IconPropsProvider/index.js'
 import type { InstUIIconProps } from '../props'
-import generateStyle from '../styles'
+import generateStyle from '../styles.js'
 
 /**
  * Wraps a Lucide icon with InstUI theming, RTL support, and semantic sizing.

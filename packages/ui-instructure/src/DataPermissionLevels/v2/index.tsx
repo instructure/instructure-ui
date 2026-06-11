@@ -29,8 +29,8 @@ import { Text } from '@instructure/ui-text/latest'
 import { Link } from '@instructure/ui-link/latest'
 import { useStyleNew } from '@instructure/emotion'
 
-import { DataPermissionLevelsProps } from './props'
-import generateStyle from './styles'
+import { DataPermissionLevelsProps } from './props.js'
+import generateStyle from './styles.js'
 
 /**
 ---

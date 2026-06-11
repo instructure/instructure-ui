@@ -24,7 +24,7 @@
 
 import { Component } from 'react'
 import type { SimpleSelectOptionProps } from './props'
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 
 /**
 ---

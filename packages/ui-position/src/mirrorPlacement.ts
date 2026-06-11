@@ -27,9 +27,9 @@ import {
   PlacementPropValues,
   PlacementStringValues,
   mirrorMap
-} from './PositionPropTypes'
+} from './PositionPropTypes.js'
 
-import executeMirrorFunction from './executeMirrorFunction'
+import executeMirrorFunction from './executeMirrorFunction.js'
 
 /**
  * ---

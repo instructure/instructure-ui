@@ -37,7 +37,7 @@ import type {
 } from '../TopNavBarItem/props'
 import type { TopNavBarContextType } from '../TopNavBarContext'
 
-import { TopNavBarActionItems } from './index'
+import { TopNavBarActionItems } from './index.js'
 
 type ActionItemsChild = React.ComponentElement<
   TopNavBarActionItemsProps,

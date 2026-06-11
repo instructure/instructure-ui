@@ -28,7 +28,7 @@ import type {
   TableHeadTheme
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
-import { RowChild } from '../props'
+import { RowChild } from '../props.js'
 
 type TableHeadOwnProps = {
   /**

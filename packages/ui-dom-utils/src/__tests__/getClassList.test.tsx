@@ -24,7 +24,7 @@
 
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import { getClassList } from '../getClassList'
+import { getClassList } from '../getClassList.js'
 
 describe('getClassList', () => {
   it('should provide classlist methods', () => {

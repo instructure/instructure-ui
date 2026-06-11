@@ -34,12 +34,12 @@ import { View } from '@instructure/ui-view/latest'
 
 import { withStyleNew } from '@instructure/emotion'
 
-import { CheckboxFacade } from './CheckboxFacade'
-import { ToggleFacade } from './ToggleFacade'
+import { CheckboxFacade } from './CheckboxFacade/index.js'
+import { ToggleFacade } from './ToggleFacade/index.js'
 
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { CheckboxProps, CheckboxState } from './props'
 
 /**

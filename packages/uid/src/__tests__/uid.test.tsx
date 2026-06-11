@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import '@testing-library/jest-dom'
-import { uid } from '../uid'
+import { uid } from '../uid.js'
 
 describe('uid', () => {
   it('generates a specified length', () => {

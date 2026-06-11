@@ -35,7 +35,7 @@ import type {
 import type { Popover } from '@instructure/ui-popover/latest'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
-import { MenuItem } from './MenuItem'
+import { MenuItem } from './MenuItem/index.js'
 import type { Menu } from './index'
 import type { MenuItemProps } from './MenuItem/props'
 

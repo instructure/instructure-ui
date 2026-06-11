@@ -27,7 +27,7 @@ import { vi } from 'vitest'
 import '@testing-library/jest-dom'
 import { within } from '@instructure/ui-utils'
 
-import { Position } from '../index'
+import { Position } from '../index.js'
 
 describe('<Position />', () => {
   const parentDefaults = {

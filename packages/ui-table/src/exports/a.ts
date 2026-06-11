@@ -21,14 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { Table } from '../Table/v1'
-export { TableContext } from '../Table/v1/TableContext'
-export { Body as TableBody } from '../Table/v1/Body'
-export { Cell as TableCell } from '../Table/v1/Cell'
-export { ColHeader as TableColHeader } from '../Table/v1/ColHeader'
-export { Head as TableHead } from '../Table/v1/Head'
-export { Row as TableRow } from '../Table/v1/Row'
-export { RowHeader as TableRowHeader } from '../Table/v1/RowHeader'
+export { Table } from '../Table/v1/index.js'
+export { TableContext } from '../Table/v1/TableContext.js'
+export { Body as TableBody } from '../Table/v1/Body/index.js'
+export { Cell as TableCell } from '../Table/v1/Cell/index.js'
+export { ColHeader as TableColHeader } from '../Table/v1/ColHeader/index.js'
+export { Head as TableHead } from '../Table/v1/Head/index.js'
+export { Row as TableRow } from '../Table/v1/Row/index.js'
+export { RowHeader as TableRowHeader } from '../Table/v1/RowHeader/index.js'
 
 export type { TableProps } from '../Table/v1/props'
 export type { TableBodyProps } from '../Table/v1/Body/props'

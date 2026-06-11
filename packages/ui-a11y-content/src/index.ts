@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-export { AccessibleContent } from './AccessibleContent'
-export { PresentationContent } from './PresentationContent'
-export { ScreenReaderContent } from './ScreenReaderContent'
+export { AccessibleContent } from './AccessibleContent/index.js'
+export { PresentationContent } from './PresentationContent/index.js'
+export { ScreenReaderContent } from './ScreenReaderContent/index.js'
 
 export type { AccessibleContentProps } from './AccessibleContent/props'
 export type { PresentationContentProps } from './PresentationContent/props'

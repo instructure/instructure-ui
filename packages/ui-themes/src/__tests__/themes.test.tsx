@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { canvas, canvasHighContrast } from '..'
+import { canvas, canvasHighContrast } from '../index.js'
 import '@testing-library/jest-dom'
 
 const themes = [canvas, canvasHighContrast]

@@ -24,7 +24,7 @@
 
 import '@testing-library/jest-dom'
 import { vi } from 'vitest'
-import { getCSSStyleDeclaration } from '../getCSSStyleDeclaration'
+import { getCSSStyleDeclaration } from '../getCSSStyleDeclaration.js'
 
 describe('getCSSStyleDeclaration', () => {
   it('returns a CSSStyleDeclaration for a valid element with correct CSS values', () => {

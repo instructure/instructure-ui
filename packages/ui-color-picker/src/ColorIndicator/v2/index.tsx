@@ -27,10 +27,10 @@ import { Component } from 'react'
 import { omitProps } from '@instructure/ui-react-utils'
 import { withStyleNew } from '@instructure/emotion'
 
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 
 import type { ColorIndicatorProps } from './props'
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 
 /**
 ---

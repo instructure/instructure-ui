@@ -30,10 +30,10 @@ import type { ViewOwnProps } from '@instructure/ui-view/latest'
 
 import { withStyleNew } from '@instructure/emotion'
 
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 
 import type { TabsTabProps } from './props'
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 
 /**
 ---

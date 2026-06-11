@@ -32,10 +32,10 @@ import type { DrilldownProps } from '@instructure/ui-drilldown/latest'
 import type { TopNavBarItemTooltipType } from '../../TopNavBarItem/props'
 import type { TopNavBarContextType } from '../../TopNavBarContext'
 
-import { commonAllowedProps, smallViewportAllowedProps } from '../props'
+import { commonAllowedProps, smallViewportAllowedProps } from '../props.js'
 import type { CommonTopNavBarLayoutProps } from '../props'
 
-import { TopNavBarSmallViewportLayout } from './index'
+import { TopNavBarSmallViewportLayout } from './index.js'
 
 type SmallViewportLayoutChild = React.ComponentElement<
   TopNavBarSmallViewportLayoutProps,

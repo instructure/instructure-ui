@@ -29,12 +29,12 @@ import { omitProps } from '@instructure/ui-react-utils'
 
 import { withStyleNew } from '@instructure/emotion'
 
-import { TopNavBarContext } from '../TopNavBarContext'
+import { TopNavBarContext } from '../TopNavBarContext.js'
 import type { ItemChild, TopNavBarItemProps } from '../TopNavBarItem/props'
 
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { TopNavBarUserProps } from './props'
 
 /**

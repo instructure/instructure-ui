@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import { useContext } from 'react'
-import { ApplyLocaleContext } from '.'
+import { ApplyLocaleContext } from './index.js'
 
 // TODO: this is a better replacement for `ui-i18n/src/Locale.ts` which should be deleted in the future
 export function getLocale(defaultLocale = 'en-US') {

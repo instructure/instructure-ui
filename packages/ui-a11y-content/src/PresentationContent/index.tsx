@@ -26,7 +26,7 @@ import { Component } from 'react'
 
 import { passthroughProps, getElementType } from '@instructure/ui-react-utils'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { PresentationContentProps } from './props'
 
 /**

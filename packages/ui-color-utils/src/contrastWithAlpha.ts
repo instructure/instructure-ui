@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-import { colorToRGB, colorToHex8 } from './conversions'
-import { overlayColors } from './overlayColors'
-import { contrast } from './contrast'
+import { colorToRGB, colorToHex8 } from './conversions.js'
+import { overlayColors } from './overlayColors.js'
+import { contrast } from './contrast.js'
 
 /**
  * ---

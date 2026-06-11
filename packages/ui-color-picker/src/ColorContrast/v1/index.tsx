@@ -36,13 +36,13 @@ import { Text } from '@instructure/ui-text/v11_6'
 import { Heading } from '@instructure/ui-heading/v11_6'
 import { Pill } from '@instructure/ui-pill/v11_6'
 
-import ColorIndicator from '../../ColorIndicator/v1'
+import ColorIndicator from '../../ColorIndicator/v1/index.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { ColorContrastProps, ColorContrastState } from './props'
 
-import generateStyle from './styles'
-import generateComponentTheme from './theme'
+import generateStyle from './styles.js'
+import generateComponentTheme from './theme.js'
 
 /**
 ---

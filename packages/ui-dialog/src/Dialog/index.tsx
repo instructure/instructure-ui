@@ -30,7 +30,7 @@ import { logError as error } from '@instructure/console'
 import { FocusRegion, FocusRegionManager } from '@instructure/ui-a11y-utils'
 import type { RequestAnimationFrameType } from '@instructure/ui-dom-utils'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { DialogProps } from './props'
 
 /**

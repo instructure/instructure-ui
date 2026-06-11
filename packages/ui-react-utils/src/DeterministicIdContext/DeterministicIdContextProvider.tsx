@@ -25,7 +25,7 @@
 import {
   DeterministicIdContext,
   defaultDeterministicIDMap
-} from './DeterministicIdContext'
+} from './DeterministicIdContext.js'
 
 type DeterministicIdProviderValue = Map<string, number>
 type DeterministicIdProviderProps = React.PropsWithChildren<{

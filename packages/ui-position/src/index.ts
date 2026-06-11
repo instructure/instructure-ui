@@ -21,13 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { Position } from './Position'
+export { Position } from './Position/index.js'
 
-export { calculateElementPosition } from './calculateElementPosition'
-export { executeMirrorFunction } from './executeMirrorFunction'
-export { mirrorHorizontalPlacement } from './mirrorHorizontalPlacement'
-export { mirrorPlacement } from './mirrorPlacement'
-export { parsePlacement } from './parsePlacement'
+export { calculateElementPosition } from './calculateElementPosition.js'
+export { executeMirrorFunction } from './executeMirrorFunction.js'
+export { mirrorHorizontalPlacement } from './mirrorHorizontalPlacement.js'
+export { mirrorPlacement } from './mirrorPlacement.js'
+export { parsePlacement } from './parsePlacement.js'
 
 export type {
   PlacementPropValues,

@@ -30,20 +30,20 @@ import { logError as error, warn } from '@instructure/console'
 import {
   addElementQueryMatchListener,
   updateElementMatches
-} from '../../utils/v1/addElementQueryMatchListener'
-import { addMediaQueryMatchListener } from '../../utils/v1/addMediaQueryMatchListener'
+} from '../../utils/v1/addElementQueryMatchListener.js'
+import { addMediaQueryMatchListener } from '../../utils/v1/addMediaQueryMatchListener.js'
 import {
   BreakpointQueries,
   QueriesMatching,
   UpdateMatches
-} from '../../utils/v1/QueryType'
+} from '../../utils/v1/QueryType.js'
 import { findDOMNode } from '@instructure/ui-dom-utils'
 import type {
   ResponsiveByBreakpointProps,
   ResponsiveProps,
   ResponsivePropsObject
 } from './props'
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 
 /**
 ---

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { breakpoints } from './breakpoints'
+import { breakpoints } from './breakpoints.js'
 import { Media } from '@instructure/shared-types'
 
 const media: Media = Object.freeze<Media>({

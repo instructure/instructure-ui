@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { Breadcrumb, BreadcrumbLink } from '../Breadcrumb/v1'
+export { Breadcrumb, BreadcrumbLink } from '../Breadcrumb/v1/index.js'
 
 export type { BreadcrumbProps } from '../Breadcrumb/v1/props'
 export type { BreadcrumbLinkProps } from '../Breadcrumb/v1/BreadcrumbLink/props'

@@ -21,5 +21,5 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { Popover } from '../Popover/v2'
+export { Popover } from '../Popover/v2/index.js'
 export type { PopoverOwnProps, PopoverProps } from '../Popover/v2/props'

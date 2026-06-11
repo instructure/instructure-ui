@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-import { useTheme } from './useTheme'
+import { useTheme } from './useTheme.js'
 import { mergeDeep } from '@instructure/ui-utils'
-import { applyColorModifiers } from './styleUtils/applyColorModifiers'
+import { applyColorModifiers } from './styleUtils/applyColorModifiers.js'
 import type {
   NewComponentTypes,
   SharedTokens,

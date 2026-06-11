@@ -22,12 +22,12 @@
  * SOFTWARE.
  */
 
-import { mirrorPlacement } from '../mirrorPlacement'
+import { mirrorPlacement } from '../mirrorPlacement.js'
 import {
   PlacementPropValues,
   placementPropValues,
   PlacementValueArray
-} from '../PositionPropTypes'
+} from '../PositionPropTypes.js'
 import '@testing-library/jest-dom'
 
 const mirrorVertiallyAsArrayMap = [

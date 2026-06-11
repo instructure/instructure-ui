@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
-export { TreeBrowser } from '../TreeBrowser/v2'
-export { TreeButton } from '../TreeBrowser/v2/TreeButton'
-export { TreeCollection } from '../TreeBrowser/v2/TreeCollection'
-export { TreeNode } from '../TreeBrowser/v2/TreeNode'
+export { TreeBrowser } from '../TreeBrowser/v2/index.js'
+export { TreeButton } from '../TreeBrowser/v2/TreeButton/index.js'
+export { TreeCollection } from '../TreeBrowser/v2/TreeCollection/index.js'
+export { TreeNode } from '../TreeBrowser/v2/TreeNode/index.js'
 
 export type {
   TreeBrowserProps,

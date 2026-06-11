@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { Grid, GridRow, GridCol } from '../Grid/v2'
+export { Grid, GridRow, GridCol } from '../Grid/v2/index.js'
 
 export type { GridBreakpoints } from '../utils/v1/GridTypes'
 

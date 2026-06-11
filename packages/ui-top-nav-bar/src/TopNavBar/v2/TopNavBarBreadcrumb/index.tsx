@@ -27,12 +27,12 @@ import {
   TopNavBarBreadcrumbProps,
   TopNavBarBreadcrumbState,
   allowedProps
-} from './props'
-import TopNavBar from '../index'
+} from './props.js'
+import TopNavBar from '../index.js'
 import { withStyleNew } from '@instructure/emotion'
-import generateStyle from '../TopNavBarBreadcrumb/styles'
+import generateStyle from '../TopNavBarBreadcrumb/styles.js'
 import { ChevronLeftInstUIIcon, MenuInstUIIcon } from '@instructure/ui-icons'
-import TopNavBarContext from '../TopNavBarContext'
+import TopNavBarContext from '../TopNavBarContext.js'
 import { error } from '@instructure/console'
 import { Link } from '@instructure/ui-link/latest'
 

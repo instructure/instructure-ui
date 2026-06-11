@@ -33,7 +33,7 @@ import type {
 import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { ItemChild } from '../TopNavBarItem/props'
 
-import { TopNavBarMenuItems } from './index'
+import { TopNavBarMenuItems } from './index.js'
 
 type MenuItemsChild = React.ComponentElement<
   TopNavBarMenuItemsProps,

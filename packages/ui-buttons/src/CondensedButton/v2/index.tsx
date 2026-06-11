@@ -27,9 +27,9 @@ import { Component } from 'react'
 import { passthroughProps } from '@instructure/ui-react-utils'
 
 import { withStyleNew } from '@instructure/emotion'
-import { BaseButton } from '../../BaseButton/v2'
+import { BaseButton } from '../../BaseButton/v2/index.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { CondensedButtonProps } from './props'
 
 /**

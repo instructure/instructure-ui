@@ -29,12 +29,12 @@ import { omitProps } from '@instructure/ui-react-utils'
 import { getCSSStyleDeclaration } from '@instructure/ui-dom-utils'
 
 import { withStyleNew } from '@instructure/emotion'
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { ModalBodyProps } from './props'
 import { UIElement } from '@instructure/shared-types'
-import ModalContext from '../ModalContext'
+import ModalContext from '../ModalContext.js'
 
 /**
 ---

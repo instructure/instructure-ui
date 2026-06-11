@@ -35,7 +35,7 @@ import type {
   DrilldownOptionProps
 } from '@instructure/ui-drilldown/v11_6'
 
-import { TopNavBarItem } from '../TopNavBarItem'
+import { TopNavBarItem } from '../TopNavBarItem/index.js'
 import type { ItemChild, TopNavBarItemProps } from '../TopNavBarItem/props'
 
 type ItemMappedForDrilldownOption = {

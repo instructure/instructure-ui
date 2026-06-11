@@ -30,7 +30,7 @@ import {
   safeCloneElement
 } from '@instructure/ui-react-utils'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type {
   BaseTransitionProps,
   BaseTransitionState,

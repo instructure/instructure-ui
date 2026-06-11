@@ -29,7 +29,7 @@ import { createChainedFunction } from '@instructure/ui-utils'
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
-import { safeCloneElement } from '../safeCloneElement'
+import { safeCloneElement } from '../safeCloneElement.js'
 
 describe('safeCloneElement', () => {
   const SafeClone = function <P extends { style?: unknown }>({

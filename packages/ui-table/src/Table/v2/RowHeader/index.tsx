@@ -29,10 +29,10 @@ import { View } from '@instructure/ui-view/latest'
 
 import { withStyleNew } from '@instructure/emotion'
 
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 import type { TableRowHeaderProps } from './props'
-import { allowedProps } from './props'
-import TableContext from '../TableContext'
+import { allowedProps } from './props.js'
+import TableContext from '../TableContext.js'
 
 /**
 ---

@@ -29,7 +29,7 @@ import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
-import { Portal } from '../index'
+import { Portal } from '../index.js'
 
 describe(`<Portal />`, () => {
   it('should render', async () => {

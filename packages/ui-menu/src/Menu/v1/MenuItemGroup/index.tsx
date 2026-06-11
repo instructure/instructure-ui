@@ -33,15 +33,15 @@ import {
 } from '@instructure/ui-react-utils'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 
-import { MenuItem } from '../MenuItem'
+import { MenuItem } from '../MenuItem/index.js'
 import type { OnMenuItemSelect, MenuItemProps } from '../MenuItem/props'
-import { MenuItemSeparator } from '../MenuItemSeparator'
+import { MenuItemSeparator } from '../MenuItemSeparator/index.js'
 import type { MenuSeparatorProps } from '../MenuItemSeparator/props'
 
-import generateStyle from './styles'
-import generateComponentTheme from './theme'
+import generateStyle from './styles.js'
+import generateComponentTheme from './theme.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { MenuGroupProps, MenuGroupState } from './props'
 
 type MenuItemChild = ComponentElement<MenuItemProps, MenuItem>

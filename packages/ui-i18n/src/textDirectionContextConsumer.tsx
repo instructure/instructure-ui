@@ -34,7 +34,7 @@ import type {
   RefAttributes
 } from 'react'
 import { decorator } from '@instructure/ui-decorator'
-import { DIRECTION, TextDirectionContext } from './TextDirectionContext'
+import { DIRECTION, TextDirectionContext } from './TextDirectionContext.js'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 
 // This is a workaround because TS cannot take type information from

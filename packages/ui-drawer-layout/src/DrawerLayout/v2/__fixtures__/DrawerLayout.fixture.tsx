@@ -24,7 +24,7 @@
 
 import { Component } from 'react'
 
-import { DrawerLayout } from '../index'
+import { DrawerLayout } from '../index.js'
 import type { DrawerLayoutProps } from '../props'
 import type { DrawerLayoutTrayProps } from '../DrawerTray/props'
 

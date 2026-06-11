@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-export { ContextView } from '../ContextView/v1'
-export { View } from '../View/v1'
+export { ContextView } from '../ContextView/v1/index.js'
+export { View } from '../View/v1/index.js'
 
 export type { ContextViewProps } from '../ContextView/v1/props'
 export type { ViewProps, ViewOwnProps } from '../View/v1/props'

@@ -24,7 +24,7 @@
 
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import { InlineSVG } from '../index'
+import { InlineSVG } from '../index.js'
 
 const SVG_SRC = `<svg><circle cx="50" cy="50" r="40" /></svg>`
 

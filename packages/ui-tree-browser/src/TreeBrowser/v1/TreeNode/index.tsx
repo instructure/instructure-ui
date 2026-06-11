@@ -28,11 +28,11 @@ import { Img } from '@instructure/ui-img/v11_6'
 import { callRenderProp } from '@instructure/ui-react-utils'
 import { withStyle } from '@instructure/emotion'
 
-import generateStyles from '../TreeButton/styles'
-import generateComponentTheme from '../TreeButton/theme'
+import generateStyles from '../TreeButton/styles.js'
+import generateComponentTheme from '../TreeButton/theme.js'
 import type { TreeBrowserNodeProps } from './props'
-import { allowedProps } from './props'
-import TreeBrowserContext from '../TreeBrowserContext'
+import { allowedProps } from './props.js'
+import TreeBrowserContext from '../TreeBrowserContext.js'
 
 // Todo: merge TreeButton and TreeNode: TreeButton should be a special type of TreeNode
 

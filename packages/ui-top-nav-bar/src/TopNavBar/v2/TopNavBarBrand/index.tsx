@@ -31,11 +31,11 @@ import { withStyleNew, InstUISettingsProvider } from '@instructure/emotion'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { View } from '@instructure/ui-view/latest'
 
-import { TopNavBarContext } from '../TopNavBarContext'
+import { TopNavBarContext } from '../TopNavBarContext.js'
 
-import generateStyle from './styles'
+import generateStyle from './styles.js'
 
-import { allowedProps } from './props'
+import { allowedProps } from './props.js'
 import type { TopNavBarBrandProps, TopNavBarBrandStyleProps } from './props'
 
 /**

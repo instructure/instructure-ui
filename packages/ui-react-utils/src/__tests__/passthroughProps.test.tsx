@@ -23,7 +23,7 @@
  */
 
 import '@testing-library/jest-dom'
-import { passthroughProps } from '../passthroughProps'
+import { passthroughProps } from '../passthroughProps.js'
 
 describe('passthroughProps', () => {
   it('should passthrough standard dom attributes', () => {

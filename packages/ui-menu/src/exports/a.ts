@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { Menu, MenuItem, MenuItemGroup, MenuItemSeparator } from '../Menu/v1'
+export { Menu, MenuItem, MenuItemGroup, MenuItemSeparator } from '../Menu/v1/index.js'
 
 export type { MenuProps } from '../Menu/v1/props'
 export type { MenuItemProps } from '../Menu/v1/MenuItem/props'
