@@ -22,6 +22,9 @@
     "ts:check": "tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false"
   },
   "license": "MIT",
+  "dependencies": {
+    "@babel/runtime": "^7.29.2"
+  },
   "devDependencies": {
     "@instructure/ui-babel-preset": "workspace:*"
   },

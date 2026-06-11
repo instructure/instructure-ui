@@ -1,2 +1,19 @@
 packages:
   - 'packages/*'
+allowBuilds:
+  # These are small projects, that we dont trust 100%, so they are not allowed to run scripts
+  # used by style-dictionary
+  '@bundled-es-modules/glob': false
+  # used by fantasticon
+  es5-ext: false
+  cypress: true
+  dprint: true
+  esbuild: true
+  nx: true
+  style-dictionary: true
+  ttf2woff2: true
+overrides:
+  "react": "18.3.1"
+  "react-dom": "18.3.1"
+  "@types/react": "18.3.26"
+  "git-raw-commits>dargs": "7.0.0"

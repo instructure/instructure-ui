@@ -27,7 +27,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/standalone": "^7.29.3",
     "@instructure/canvas-high-contrast-theme": "workspace:*",
     "@instructure/canvas-theme": "workspace:*",
     "@instructure/console": "workspace:*",
@@ -114,6 +113,8 @@
     "@instructure/ui-utils": "workspace:*",
     "@instructure/ui-view": "workspace:*",
     "babel-loader": "^10.1.1",
+    "@babel/runtime": "^7.29.2",
+    "@babel/standalone": "^7.29.3",
     "codesandbox": "^2.2.3",
     "lorem-ipsum": "^3.0.0",
     "marked-react": "^4.0.0",
@@ -121,7 +122,9 @@
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "uuid": "^14.0.0",
-    "webpack-merge": "^6.0.1"
+    "webpack-merge": "^6.0.1",
+    "hoist-non-react-statics": "^3.3.2",
+    "buffer": "^6.0.3"
   },
   "devDependencies": {
     "@instructure/ui-babel-preset": "workspace:*",
@@ -135,7 +138,9 @@
     "mkdirp": "3.0.1",
     "react-docgen": "8.0.3",
     "style-loader": "4.0.0",
-    "webpack-bundle-analyzer": "5.3.0"
+    "thread-loader": "^4.0.4",
+    "webpack-bundle-analyzer": "5.3.0",
+    "@types/hoist-non-react-statics": "^3.3.7"
   },
   "//dependency-comments": {
     "chokidar": "4.0.1 seems to have issues watching an array of paths. Check later if fixed..."

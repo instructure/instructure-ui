@@ -50,16 +50,11 @@
     "ts:check": "pnpm -r --stream ts:check"
   },
   "license": "MIT",
-  "pnpm": {
-    "overrides": {
-      "react": "18.3.1",
-      "react-dom": "18.3.1",
-      "@types/react": "18.3.26",
-      "git-raw-commits>dargs": "7.0.0"
-    }
-  },
   "devDependencies": {
     "@babel/cli": "^7.27.2",
+    "babel-loader": "^10.1.1",
+    "@babel/runtime": "^7.29.2",
+    "moment-timezone": "^0.6.2",
     "@commitlint/cli": "^20.5.3",
     "@commitlint/config-conventional": "^20.5.3",
     "@emotion/cache": "^11.14.0",
@@ -140,5 +135,5 @@
   "browserslist": [
     "extends @instructure/browserslist-config-instui"
   ],
-  "packageManager": "pnpm@10.23.0+sha512.21c4e5698002ade97e4efe8b8b4a89a8de3c85a37919f957e7a0f30f38fbc5bbdd05980ffe29179b2fb6e6e691242e098d945d1601772cad0fef5fb6411e2a4b"
+  "packageManager": "pnpm@11.5.3+sha512.7ac1c919341c213a34dc0d02afb7143c5c26ac26ee8c4782deea821b8ac64d2134a081fd8941dae6e29bbb48f58dfc2b7fbceeccc07cb2f09d219d342a4969ed"
 }

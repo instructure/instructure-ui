@@ -28,6 +28,7 @@
     "vitest": "^3.2.2"
   },
   "dependencies": {
+    "@babel/runtime": "^7.29.2",
     "@instructure/shared-types": "workspace:*",
     "@tokens-studio/types": "^0.5.2"
   },
