@@ -132,56 +132,9 @@ const defaultValues = {
  *
  * @module withStyleForDocs
  *
- * A themeable component’s theme can be configured via wrapping it in an
- * [InstUISettingsProvider](InstUISettingsProvider) component, and/or set
- * explicitly via its `themeOverride` prop.
- *
- * InstUISettingsProvider provides a theme object (e.g. the [canvas theme](/#canvas)).
- * These variables are mapped to the component's own variables in `theme.js`.
- *
- * With the `themeOverride` prop you can directly set/override the component theme variables declared in theme.js. It accepts an object or a function. The function has the component's theme and the currently active main theme as its parameter.
- *
- * See more about the overrides on the [Legacy theme overrides](/#legacy-theme-overrides) docs page.
- *
- * ```js-code
- * // ExampleComponent/theme.js
- * const generateComponentTheme = (theme) => {
- *   const { colors } = theme
- *
- *   const componentVariables = {
- *     background: colors?.backgroundMedium,
- *     color: colors?.textDarkest,
- *
- *     hoverColor: colors?.textLightest,
- *     hoverBackground: colors?.backgroundDarkest
- *   }
- *
- *   return componentVariables
- * }
- * export default generateComponentTheme
- * ```
- *
- * ```jsx-code
- * {// global theme override}
- * <InstUISettingsProvider theme={{
- *   colors: { backgroundMedium: '#888' }
- * }}>
- *  {// component theme override}
- *   <ExampleComponent themeOverride={{ hoverColor: '#eee' }} />
- *
- *  {// component theme override with function}
- *   <ExampleComponent themeOverride={(componentTheme, currentTheme) => ({
- *     hoverBackground: componentTheme.background,
- *     activeBackground: currentTheme.colors.backgroundBrand
- *   })} />
- * </InstUISettingsProvider>
- * ```
- *
- * @module withStyleNew
- *
- * @param {function} generateStyle - The function that returns the component's style object
- * @param {function} generateComponentTheme - The function that returns the component's theme variables object
- * @returns {ReactElement} The decorated WithStyle Component
+ * @param {function} generateStyle - Returns the component's style object
+ * @param {function} generateComponentTheme - Returns the component's theme variables object
+ * @returns {ReactElement} The decorated component
  */
 const withStyleForDocs = decorator(
   (
