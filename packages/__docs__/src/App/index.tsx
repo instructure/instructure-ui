@@ -623,9 +623,9 @@ class App extends Component<AppProps, AppState> {
     }
 
     const formatMinorVersion = (version: string) => {
-      if (version === 'v11_6') return 'v1 (legacy)'
-      if (version === 'v11_7') return 'v2'
-      return version.replace(/_/g, '.')
+      const formatted = version.replace(/_/g, '.')
+      if (version === 'v11_6') return `${formatted} (legacy theming)`
+      return formatted
     }
 
     const smallScreen = this.state.layout === 'small'

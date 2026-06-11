@@ -10,8 +10,6 @@ When InstUI needs to make a breaking change to a component (renamed props, chang
 
 New component versions appear with InstUI **minor** version bumps (e.g. `11.7` → `11.8`). Patch releases never include breaking changes.
 
-> The docs UI "Component version" selector labels library `v11_6` as **`v1 (legacy)`** and library `v11_7` as **`v2`**. This page uses the `v11_X` form because it matches the actual NPM import paths.
-
 ## Import paths
 
 Every InstUI component package supports three import styles:
@@ -70,26 +68,41 @@ The same three path styles (default / `/v11_X` / `/latest`) work on the umbrella
 
 InstUI is in the middle of a transition between two theming systems. Which engine a component uses depends on which version you import:
 
-- **`v1`** (library `v11_6` and earlier) — legacy theming. Components are configured through the Canvas theme variables and the `themeOverride` prop, which accepts a function or object that maps to the component's own theme map. See the [Legacy theme overrides](legacy-theme-overrides) guide.
+- **`v11_6` and earlier** — legacy theming. Components are configured through the Canvas theme variables and the `themeOverride` prop, which accepts a function or object that maps to the component's own theme map. See the [Legacy theme overrides](legacy-theme-overrides) guide.
 
-- **`v2`** (library `v11_7` and newer) — new theming system. Components consume pre-resolved design tokens, and theming is done through the new token override structure. See the [New theme overrides](new-theme-overrides) guide.
+- **`v11_7` and newer** — new theming system. Components consume pre-resolved design tokens, and theming is done through the new token override structure. See the [New theme overrides](new-theme-overrides) guide.
 
 Mixing imports from both groups in the same app is fully supported — the two engines run side-by-side without conflict.
 
 ### Supported themes per version
 
-Each version of the library is only compatible with the themes built for its theming engine:
+You import themes the same way as before — from `@instructure/ui-themes` — and pass them to `InstUISettingsProvider`:
 
-- **`v1`** (library `v11_6` and earlier) supports the legacy themes:
+```js
+---
+type: code
+---
+import { canvas } from '@instructure/ui-themes'
 
-  - `canvas`
-  - `canvasHighContrast`
+<InstUISettingsProvider theme={canvas}>
+  <App />
+</InstUISettingsProvider>
+```
 
-- **`v2`** (library `v11_7` and newer) supports themes built on the new token system. The legacy Canvas looks are preserved (re-implemented on the new engine) and two brand-new themes are added:
+The `canvas` (and `canvasHighContrast`) export works for **both `v11_6` and `v11_7+` components in the same app** — internally it carries the data each engine needs. You don't need to switch theme objects when you bump a component import to `/v11_7`.
 
-  - `legacyCanvas` — same visual style as the old `canvas`, but on the new engine
-  - `legacyCanvasHighContrast` — same visual style as the old `canvasHighContrast`, on the new engine
+- **`v11_6` and earlier** — supports the original two themes:
+
+  - `canvas` — default theme used by Canvas products
+  - `canvasHighContrast` — same as `canvas`, with colors WCAG-tuned for high-contrast accessibility
+
+- **`v11_7` and newer** — supports the same two themes (rendered through the new engine, labelled `(legacy)` in the docs UI Theme selector) plus two brand-new ones:
+
+  - `canvas` — same import as above, now driven by the new engine (labelled as `(legacy)`)
+  - `canvasHighContrast` — same import as above, now driven by the new engine (labelled as `(legacy)`)
   - `light` — new light theme
   - `dark` — new dark theme
 
-This means that when you move a component import from `/v11_6` to `/v11_7` you don't have to change anything visually — you can stay on the `legacyCanvas` theme and opt in to `light` or `dark` only when you're ready.
+This means that when you move a component import from `/v11_6` to `/v11_7`, you can continue using the `canvas` theme to maintain a familiar look and feel, and opt in to `light` or `dark` only when you're ready.
+
+> The `@instructure/ui-themes` package also exports `legacyCanvas` and `legacyCanvasHighContrast`. These are the raw new-engine forms that `canvas` / `canvasHighContrast` wrap internally — most consumers don't need to import them directly.
