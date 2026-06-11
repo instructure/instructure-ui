@@ -293,26 +293,11 @@ class Document extends Component<DocumentProps, DocumentState> {
     const example = `\
 import { ${importName} } from '${versionedPackageName}'`
 
-    const versionLabel =
-      selectedMinorVersion === 'v11_6'
-        ? 'v1 (legacy)'
-        : selectedMinorVersion === 'v11_7'
-        ? 'v2'
-        : selectedMinorVersion?.replace(/_/g, '.')
-
     return (
       <View margin="xx-large 0" display="block">
         <Heading level="h2" as="h3" id={`${id}Usage`} margin="0 0 small 0">
           Usage
         </Heading>
-        <View margin="0 0 small 0" display="block">
-          <SourceCodeEditor
-            label={`How to install ${title}`}
-            defaultValue={`npm install ${packageName}`}
-            language="shell"
-            readOnly
-          />
-        </View>
         <SourceCodeEditor
           label={`How to use ${title}`}
           defaultValue={example}
@@ -320,10 +305,8 @@ import { ${importName} } from '${versionedPackageName}'`
           readOnly
         />
         <View as="div" margin="small 0 0 0">
-          This import is pinned to the selected version (
-          <code>{selectedMinorVersion}</code> ↔ <code>{versionLabel}</code> in
-          the selector above); future breaking changes land at new paths. For
-          other import styles, see the{' '}
+          This import is pinned to the selected component version; future
+          breaking changes land at new paths. For other import styles, see the{' '}
           <Link href="component-versioning">Component versioning</Link> guide.
         </View>
       </View>
@@ -436,9 +419,9 @@ import { ${importName} } from '${versionedPackageName}'`
       >
         {doc.extension !== '.md' && this.renderSrcLink()}
         {pageRef && <TableOfContents doc={doc} pageElement={pageRef} />}
+        {['.js', '.ts', '.tsx'].includes(doc.extension) && this.renderUsage()}
         {this.renderDescription(doc, this.props.description)}
         {details}
-        {['.js', '.ts', '.tsx'].includes(doc.extension) && this.renderUsage()}
         {this.renderEditOnGithub()}
         {repository && layout !== 'small' && (
           <div css={this.props.styles?.githubCorner}>
