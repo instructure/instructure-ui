@@ -544,8 +544,8 @@ type: example
     <Table caption="Independent overrides: ColHeader purple, RowHeader deeppink">
       <Table.Head>
         <Table.Row>
-          <Table.ColHeader id="h-row">TableColHeader — purple</Table.ColHeader>
-          <Table.ColHeader id="h-col">TableColHeader — purple</Table.ColHeader>
+          <Table.ColHeader id="row-headers">Row headers column - purple</Table.ColHeader>
+          <Table.ColHeader id="cells">Cells column - purple</Table.ColHeader>
         </Table.Row>
       </Table.Head>
       <Table.Body>
@@ -553,7 +553,7 @@ type: example
           <Table.RowHeader>TableRowHeader — deeppink</Table.RowHeader>
           <Table.Cell>TableCell — unchanged</Table.Cell>
         </Table.Row>
-                <Table.Row>
+        <Table.Row>
           <Table.RowHeader>TableRowHeader — deeppink</Table.RowHeader>
           <Table.Cell>TableCell — unchanged</Table.Cell>
         </Table.Row>

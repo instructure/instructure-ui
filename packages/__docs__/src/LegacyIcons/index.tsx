@@ -42,6 +42,7 @@ import { SourceCodeEditor } from '@instructure/ui-source-code-editor'
 import * as InstIcons from '@instructure/ui-icons'
 import { IconXSolid } from '@instructure/ui-icons'
 import { Link } from '@instructure/ui-link'
+import { navigateTo } from '../navigationUtils'
 import { Flex } from '@instructure/ui-flex'
 import type { Glyph, LegacyIconsData } from '../../buildScripts/DataTypes.mjs'
 
@@ -249,7 +250,16 @@ const LegacyIconsPage = ({ iconData }: LegacyIconsPageProps) => {
       </Alert>
       <Alert variant="info" margin="0 0 medium">
         New icon set is available, please only use it with InstUI v11.7 or newer
-        components: <Link href="/icons">Icons</Link>
+        components:{' '}
+        <Link
+          href="icons"
+          onClick={(e) => {
+            e.preventDefault()
+            navigateTo('icons')
+          }}
+        >
+          Icons
+        </Link>
       </Alert>
       <Alert variant="info" margin="0 0 medium">
         Our legacy icon components are rendered through Emotion, so server-side

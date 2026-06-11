@@ -27,6 +27,7 @@ import { Spinner } from '@instructure/ui-spinner'
 import { View } from '@instructure/ui-view'
 import { Alert } from '@instructure/ui-alerts'
 import { Link } from '@instructure/ui-link'
+import { navigateTo } from '../navigationUtils'
 
 // Lazy load icons gallery component
 const IconsGallery = lazy(() => import('./IconsGallery'))
@@ -50,9 +51,17 @@ const IconsPage = () => {
         <Alert variant="info" margin="0 0 medium">
           The version selector does not affect this page. For icons compatible
           with older versions, use{' '}
-          <Link href="/legacy-icons">Legacy Icons</Link>. These icons are only
-          meant to be used with the new theming system, please do not use them
-          with the old (pre v11.7) components.
+          <Link
+            href="legacy-icons"
+            onClick={(e) => {
+              e.preventDefault()
+              navigateTo('legacy-icons')
+            }}
+          >
+            Legacy Icons
+          </Link>
+          . These icons are only meant to be used with the new theming system,
+          please do not use them with the old (pre v11.7) components.
         </Alert>
         <IconsGallery />
       </Suspense>

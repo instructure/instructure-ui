@@ -70,6 +70,7 @@ import {
 } from '../versionData'
 import {
   parseCurrentUrl,
+  navigateTo,
   navigateToVersion,
   getDeployBase,
   MINOR_VERSION_REGEX
@@ -699,7 +700,16 @@ class App extends Component<AppProps, AppState> {
     return (
       <Alert variant="info" margin="0 0 medium">
         {subject} is designed for components for <strong>v11.7</strong> and
-        later. <Link href={v11_7Href}>Switch to v11.7</Link>
+        later.{' '}
+        <Link
+          href={v11_7Href}
+          onClick={(e) => {
+            e.preventDefault()
+            this.handleMinorVersionChange('v11_7')
+          }}
+        >
+          Switch to v11.7
+        </Link>
       </Alert>
     )
   }
@@ -832,7 +842,13 @@ class App extends Component<AppProps, AppState> {
             <Alert variant="info" margin="xx-large 0">
               This page is made for the latest version (
               {this.getLatestMinorVersion()?.replace('_', '.')}) of InstUI.{' '}
-              <Link href="component-versioning">
+              <Link
+                href="component-versioning"
+                onClick={(e) => {
+                  e.preventDefault()
+                  navigateTo('component-versioning')
+                }}
+              >
                 Learn more about the versioning system
               </Link>
             </Alert>
