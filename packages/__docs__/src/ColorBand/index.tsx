@@ -35,6 +35,7 @@ import type { ColorBandProps } from './props'
 
 @withStyleForDocs(generateStyle, generateComponentTheme)
 class ColorBand extends Component<ColorBandProps> {
+  static displayName = 'ColorBand'
   static allowedProps = allowedProps
   componentDidMount() {
     this.props.makeStyles?.()

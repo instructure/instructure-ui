@@ -45,6 +45,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class FormFieldGroup extends Component<FormFieldGroupProps> {
+  static displayName = 'FormFieldGroup'
   static readonly componentId = 'FormFieldGroup'
 
   static allowedProps = allowedProps

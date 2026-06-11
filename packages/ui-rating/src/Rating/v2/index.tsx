@@ -40,6 +40,7 @@ category: components
 **/
 @withStyleNew(generateStyle)
 class Rating extends Component<RatingProps> {
+  static displayName = 'Rating'
   static readonly componentId = 'Rating'
 
   static allowedProps = allowedProps

@@ -38,6 +38,7 @@ category: components
 
 **/
 class InlineList extends Component<InlineListProps> {
+  static displayName = 'InlineList'
   static allowedProps = allowedProps
   static defaultProps = {
     itemSpacing: 'none',

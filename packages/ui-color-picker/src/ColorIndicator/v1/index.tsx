@@ -40,6 +40,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class ColorIndicator extends Component<ColorIndicatorProps> {
+  static displayName = 'ColorIndicator'
   static allowedProps = allowedProps
   static readonly componentId = 'ColorIndicator'
 

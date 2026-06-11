@@ -41,6 +41,7 @@ id: Options.Separator
 **/
 @withStyleNew(generateStyles)
 class Separator extends Component<OptionsSeparatorProps> {
+  static displayName = 'Separator'
   static readonly componentId = 'Options.Separator'
 
   static allowedProps = allowedProps

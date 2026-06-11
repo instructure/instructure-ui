@@ -61,6 +61,7 @@ id: NumberInput
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
 class NumberInput extends Component<NumberInputProps, NumberInputState> {
+  static displayName = 'NumberInput'
   static readonly componentId = 'NumberInput'
   static allowedProps = allowedProps
   static defaultProps = {

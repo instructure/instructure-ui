@@ -48,6 +48,7 @@ id: Rating.Icon
 **/
 @withStyleNew(generateStyle)
 class RatingIcon extends Component<RatingIconProps, RatingIconState> {
+  static displayName = 'RatingIcon'
   static readonly componentId = 'Rating.Icon'
 
   static allowedProps = allowedProps

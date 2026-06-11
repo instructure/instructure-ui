@@ -40,6 +40,7 @@ id: Pages.Page
 ---
 **/
 class Page extends Component<PagesPageProps> {
+  static displayName = 'Page'
   static readonly componentId = 'Pages.Page'
 
   static allowedProps = allowedProps

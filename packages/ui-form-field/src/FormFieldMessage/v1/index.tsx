@@ -53,6 +53,7 @@ type: example
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class FormFieldMessage extends Component<FormFieldMessageProps> {
+  static displayName = 'FormFieldMessage'
   static readonly componentId = 'FormFieldMessage'
 
   static allowedProps = allowedProps

@@ -88,6 +88,7 @@ category: components
 **/
 @withStyleNew(generateStyle)
 class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
+  static displayName = 'ColorPicker'
   static allowedProps = allowedProps
   static readonly componentId = 'ColorPicker'
 

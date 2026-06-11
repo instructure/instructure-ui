@@ -42,6 +42,7 @@ import { allowedProps } from './props'
 import logo from '../../full_logo.svg'
 
 class Header extends Component<HeaderProps> {
+  static displayName = 'Header'
   static allowedProps = allowedProps
   static defaultProps = {
     version: undefined,

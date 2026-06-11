@@ -50,6 +50,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Flex extends Component<FlexProps> {
+  static displayName = 'Flex'
   static readonly componentId = 'Flex'
 
   componentDidMount() {

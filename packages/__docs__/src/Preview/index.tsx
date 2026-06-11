@@ -36,6 +36,7 @@ import { camelize } from '@instructure/ui-utils'
 
 @withStyleForDocs(generateStyle, generateComponentTheme)
 class Preview extends Component<PreviewProps, PreviewState> {
+  static displayName = 'Preview'
   static allowedProps = allowedProps
 
   static defaultProps = {

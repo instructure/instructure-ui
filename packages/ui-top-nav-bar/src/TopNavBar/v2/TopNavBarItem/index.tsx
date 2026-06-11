@@ -79,6 +79,7 @@ id: TopNavBar.Item
 @withDeterministicId()
 @withStyleNew(generateStyle, 'TopNavBarItem')
 class TopNavBarItem extends Component<TopNavBarItemProps, TopNavBarItemState> {
+  static displayName = 'TopNavBarItem'
   static readonly componentId = 'TopNavBar.Item'
 
   static allowedProps = allowedProps

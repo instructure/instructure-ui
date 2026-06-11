@@ -45,6 +45,7 @@ private: true
 **/
 @withStyleNew(generateStyle, 'TopNavBarLayout')
 class TopNavBarDesktopLayout extends Component<TopNavBarDesktopLayoutProps> {
+  static displayName = 'TopNavBarDesktopLayout'
   static readonly componentId = 'TopNavBar.DesktopLayout'
 
   static allowedProps = allowedProps

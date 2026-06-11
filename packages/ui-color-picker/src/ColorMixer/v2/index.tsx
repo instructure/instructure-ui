@@ -45,6 +45,7 @@ category: components
 **/
 @withStyleNew(generateStyle)
 class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
+  static displayName = 'ColorMixer'
   static allowedProps = allowedProps
   static readonly componentId = 'ColorMixer'
 

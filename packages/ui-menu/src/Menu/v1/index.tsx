@@ -65,6 +65,7 @@ category: components
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
 class Menu extends Component<MenuProps> {
+  static displayName = 'Menu'
   static readonly componentId = 'Menu'
   static allowedProps = allowedProps
   static defaultProps = {

@@ -50,6 +50,7 @@ category: components
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
 class Tooltip extends Component<TooltipProps, TooltipState> {
+  static displayName = 'Tooltip'
   static readonly componentId = 'Tooltip'
 
   static allowedProps = allowedProps

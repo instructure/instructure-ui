@@ -50,6 +50,7 @@ id: Table.Head
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Head extends Component<TableHeadProps> {
+  static displayName = 'Head'
   static readonly componentId = 'Table.Head'
   static contextType = TableContext
   declare context: ContextType<typeof TableContext>

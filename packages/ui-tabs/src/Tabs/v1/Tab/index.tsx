@@ -44,6 +44,7 @@ id: Tabs.Tab
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Tab extends Component<TabsTabProps> {
+  static displayName = 'Tab'
   static readonly componentId = 'Tabs.Tab'
 
   static allowedProps = allowedProps

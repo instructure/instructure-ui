@@ -42,6 +42,7 @@ id: Table.Cell
 **/
 @withStyleNew(generateStyle)
 class Cell extends Component<TableCellProps> {
+  static displayName = 'Cell'
   static readonly componentId = 'Table.Cell'
   static contextType = TableContext
   declare context: ContextType<typeof TableContext>

@@ -52,6 +52,7 @@ category: components
 
 **/
 class Responsive extends Component<ResponsiveProps> {
+  static displayName = 'Responsive'
   static allowedProps = allowedProps
 
   static defaultProps = {

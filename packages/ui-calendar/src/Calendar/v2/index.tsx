@@ -64,6 +64,7 @@ category: components
 @withDeterministicId()
 @withStyleNew(generateStyle)
 class Calendar extends Component<CalendarProps, CalendarState> {
+  static displayName = 'Calendar'
   static readonly componentId = 'Calendar'
 
   declare context: React.ContextType<typeof ApplyLocaleContext>

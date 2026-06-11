@@ -59,6 +59,7 @@ id: Menu.Group
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
 class MenuItemGroup extends Component<MenuGroupProps, MenuGroupState> {
+  static displayName = 'MenuItemGroup'
   static readonly componentId = 'Menu.Group'
 
   static allowedProps = allowedProps

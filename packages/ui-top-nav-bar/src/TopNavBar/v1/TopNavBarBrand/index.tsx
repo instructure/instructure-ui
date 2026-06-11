@@ -48,6 +48,7 @@ id: TopNavBar.Brand
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class TopNavBarBrand extends Component<TopNavBarBrandProps> {
+  static displayName = 'TopNavBarBrand'
   static readonly componentId = 'TopNavBar.Brand'
   // TODO: add to the docs: making it static on parent and jsdocs parent/module settings, dont export child on its own
 

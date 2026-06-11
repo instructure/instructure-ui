@@ -59,6 +59,7 @@ class DrawerTray extends Component<
   DrawerLayoutTrayProps,
   DrawerLayoutTrayState
 > {
+  static displayName = 'DrawerTray'
   static readonly componentId = 'DrawerLayout.Tray' as const
 
   static locatorAttribute = 'data-drawer-tray'

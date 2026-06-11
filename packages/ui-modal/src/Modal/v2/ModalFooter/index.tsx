@@ -39,6 +39,7 @@ id: Modal.Footer
 **/
 @withStyleNew(generateStyle, 'ModalFooter')
 class ModalFooter extends Component<ModalFooterProps> {
+  static displayName = 'ModalFooter'
   static readonly componentId = 'Modal.Footer'
 
   static allowedProps = allowedProps

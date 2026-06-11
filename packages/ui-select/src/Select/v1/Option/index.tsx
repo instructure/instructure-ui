@@ -34,6 +34,7 @@ id: Select.Option
 @module Option
 **/
 class Option extends Component<SelectOptionProps> {
+  static displayName = 'Option'
   static readonly componentId = 'Select.Option'
 
   static allowedProps = allowedProps

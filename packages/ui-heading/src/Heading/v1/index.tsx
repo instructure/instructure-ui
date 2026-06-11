@@ -60,6 +60,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Heading extends Component<HeadingProps> {
+  static displayName = 'Heading'
   static readonly componentId = 'Heading'
 
   static allowedProps = allowedProps

@@ -52,6 +52,7 @@ category: components
 **/
 @withStyleNew(generateStyle)
 class Link extends Component<LinkProps, LinkState> {
+  static displayName = 'Link'
   static readonly componentId = 'Link'
 
   static allowedProps = allowedProps

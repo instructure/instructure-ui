@@ -38,6 +38,7 @@ category: components
 **/
 @withStyleNew(generateStyle)
 class Text extends Component<TextProps> {
+  static displayName = 'Text'
   static readonly componentId = 'Text'
 
   static allowedProps = allowedProps

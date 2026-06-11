@@ -70,6 +70,7 @@ category: components
 @withStyle(generateStyle, null)
 @textDirectionContextConsumer()
 class DrawerLayout extends Component<DrawerLayoutProps, DrawerLayoutState> {
+  static displayName = 'DrawerLayout'
   static readonly componentId = 'DrawerLayout'
 
   static locatorAttribute = 'data-drawer-layout'

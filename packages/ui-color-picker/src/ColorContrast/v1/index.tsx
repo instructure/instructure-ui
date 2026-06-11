@@ -51,6 +51,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class ColorContrast extends Component<ColorContrastProps, ColorContrastState> {
+  static displayName = 'ColorContrast'
   static allowedProps = allowedProps
   static readonly componentId = 'ColorContrast'
 

@@ -44,6 +44,7 @@ import { View } from '@instructure/ui-view'
 
 @withStyleNew(generateStyle, null)
 class Properties extends Component<PropertiesProps> {
+  static displayName = 'Properties'
   static defaultProps = {
     layout: 'small'
   }

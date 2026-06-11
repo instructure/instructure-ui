@@ -33,6 +33,7 @@ id: SimpleSelect.Option
 ---
 **/
 class Option extends Component<SimpleSelectOptionProps> {
+  static displayName = 'Option'
   static readonly componentId = 'SimpleSelect.Option'
 
   static allowedProps = allowedProps

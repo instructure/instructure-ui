@@ -41,6 +41,7 @@ category: components/utilities
 **/
 @withDeterministicId()
 class Expandable extends Component<ExpandableProps, ExpandableState> {
+  static displayName = 'Expandable'
   static allowedProps = allowedProps
   static defaultProps = {
     defaultExpanded: false

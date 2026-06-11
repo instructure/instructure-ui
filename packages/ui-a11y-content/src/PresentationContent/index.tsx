@@ -36,6 +36,7 @@ category: utilities/a11y
 @module PresentationContent
 **/
 class PresentationContent extends Component<PresentationContentProps> {
+  static displayName = 'PresentationContent'
   static allowedProps = allowedProps
   static defaultProps = {
     as: 'span',

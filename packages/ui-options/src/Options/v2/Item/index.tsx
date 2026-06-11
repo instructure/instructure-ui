@@ -46,6 +46,7 @@ id: Options.Item
 @withDeterministicId()
 @withStyleNew(generateStyles)
 class Item extends Component<OptionsItemProps> {
+  static displayName = 'Item'
   static readonly componentId = 'Options.Item'
 
   static allowedProps = allowedProps

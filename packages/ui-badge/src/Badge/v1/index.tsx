@@ -46,6 +46,7 @@ category: components
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
 class Badge extends Component<BadgeProps> {
+  static displayName = 'Badge'
   static readonly componentId = 'Badge'
 
   static allowedProps = allowedProps

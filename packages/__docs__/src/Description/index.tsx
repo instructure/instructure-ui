@@ -30,6 +30,7 @@ import { allowedProps } from './props'
 import type { DescriptionProps } from './props'
 
 class Description extends Component<DescriptionProps> {
+  static displayName = 'Description'
   static allowedProps = allowedProps
   compiledMarkdown: ReactElement | null = null
 

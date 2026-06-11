@@ -35,6 +35,7 @@ id: Drilldown.Page
 @module DrilldownPage
 **/
 class DrilldownPage extends Component<DrilldownPageProps> {
+  static displayName = 'DrilldownPage'
   static readonly componentId = 'Drilldown.Page'
 
   static allowedProps = allowedProps

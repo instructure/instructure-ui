@@ -48,6 +48,7 @@ class PaginationPageInput extends Component<
   PaginationPageInputProps,
   PaginationPageInputState
 > {
+  static displayName = 'PaginationPageInput'
   static readonly componentId = 'Pagination.PageInput'
 
   static allowedProps = allowedProps

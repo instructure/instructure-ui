@@ -50,6 +50,7 @@ id: Grid.Row
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class GridRow extends Component<GridRowProps> {
+  static displayName = 'GridRow'
   static readonly componentId = 'Grid.Row'
 
   static allowedProps = allowedProps

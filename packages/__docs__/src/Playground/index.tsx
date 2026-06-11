@@ -54,6 +54,7 @@ const fullScreenIconPath = (
 
 @withStyleForDocs(generateStyle, generateComponentTheme)
 class Playground extends Component<PlaygroundProps, PlaygroundState> {
+  static displayName = 'Playground'
   static allowedProps = allowedProps
   static defaultProps = {
     readOnly: false,

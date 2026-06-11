@@ -42,6 +42,7 @@ id: Table.RowHeader
 **/
 @withStyleNew(generateStyle)
 class RowHeader extends Component<TableRowHeaderProps> {
+  static displayName = 'RowHeader'
   static readonly componentId = 'Table.RowHeader'
   static contextType = TableContext
   declare context: ContextType<typeof TableContext>

@@ -43,6 +43,7 @@ class BreadcrumbLink extends Component<
   BreadcrumbLinkProps,
   BreadcrumbLinkState
 > {
+  static displayName = 'BreadcrumbLink'
   static readonly componentId = 'Breadcrumb.Link'
 
   static allowedProps = allowedProps

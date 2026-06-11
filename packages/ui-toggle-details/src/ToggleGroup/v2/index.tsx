@@ -61,6 +61,7 @@ category: components
 **/
 @withStyleNew(generateStyle)
 class ToggleGroup extends Component<ToggleGroupProps> {
+  static displayName = 'ToggleGroup'
   static readonly componentId = 'ToggleGroup'
 
   static allowedProps = allowedProps

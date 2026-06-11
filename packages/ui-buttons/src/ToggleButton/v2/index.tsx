@@ -39,6 +39,7 @@ category: components
 **/
 
 class ToggleButton extends Component<ToggleButtonProps, ToggleButtonState> {
+  static displayName = 'ToggleButton'
   static readonly componentId = 'ToggleButton'
 
   static allowedProps = allowedProps

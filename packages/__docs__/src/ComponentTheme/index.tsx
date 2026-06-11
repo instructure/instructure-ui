@@ -38,6 +38,7 @@ type ThemeEntry = { name: string; value: string | number }
 
 @withStyleNew(generateStyle, null)
 class ComponentTheme extends Component<ComponentThemeProps> {
+  static displayName = 'ComponentTheme'
   static allowedProps = allowedProps
 
   renderValueCell(value: undefined | string | number) {

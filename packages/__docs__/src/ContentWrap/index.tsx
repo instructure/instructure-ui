@@ -29,6 +29,7 @@ import { allowedProps } from './props'
 import type { ContentWrapProps } from './props'
 
 class ContentWrap extends Component<ContentWrapProps> {
+  static displayName = 'ContentWrap'
   static allowedProps = allowedProps
   static defaultProps = {
     children: null,

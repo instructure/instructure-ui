@@ -50,6 +50,7 @@ id: Table.Row
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Row extends Component<TableRowProps> {
+  static displayName = 'Row'
   static readonly componentId = 'Table.Row'
   static contextType = TableContext
   declare context: ContextType<typeof TableContext>

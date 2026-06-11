@@ -31,6 +31,7 @@ import { Paragraph } from './Paragraph'
 import type { ToggleBlockquoteProps } from './props'
 
 class ToggleBlockquote extends Component<ToggleBlockquoteProps> {
+  static displayName = 'ToggleBlockquote'
   static defaultProps = {
     children: null
   }

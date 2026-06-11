@@ -58,6 +58,7 @@ class Billboard extends Component<
   BillboardProps,
   { isHovered: boolean; isActive: boolean }
 > {
+  static displayName = 'Billboard'
   static readonly componentId = 'Billboard'
 
   static allowedProps = allowedProps

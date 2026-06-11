@@ -33,6 +33,7 @@ import { allowedProps } from './props'
 import type { CodeSandboxButtonProps } from './props'
 
 class CodeSandboxButton extends Component<CodeSandboxButtonProps> {
+  static displayName = 'CodeSandboxButton'
   static allowedProps = allowedProps
   static defaultProps = {
     options: {},

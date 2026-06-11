@@ -42,6 +42,7 @@ parent: Checkbox
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class CheckboxFacade extends Component<CheckboxFacadeProps> {
+  static displayName = 'CheckboxFacade'
   static readonly componentId = 'CheckboxFacade'
 
   static allowedProps = allowedProps

@@ -52,6 +52,7 @@ id: AppNav.Item
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Item extends Component<AppNavItemProps> {
+  static displayName = 'Item'
   static readonly componentId = 'AppNav.Item'
 
   static allowedProps = allowedProps

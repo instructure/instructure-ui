@@ -43,6 +43,7 @@ category: components/utilities
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Mask extends Component<MaskProps> {
+  static displayName = 'Mask'
   static readonly componentId = 'Mask'
 
   static allowedProps = allowedProps

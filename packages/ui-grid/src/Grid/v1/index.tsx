@@ -50,6 +50,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Grid extends Component<GridProps> {
+  static displayName = 'Grid'
   static readonly componentId = 'Grid'
 
   static allowedProps = allowedProps

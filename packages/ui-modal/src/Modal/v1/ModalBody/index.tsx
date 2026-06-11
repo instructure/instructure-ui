@@ -45,6 +45,7 @@ id: Modal.Body
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class ModalBody extends Component<ModalBodyProps> {
+  static displayName = 'ModalBody'
   static readonly componentId = 'Modal.Body'
 
   static allowedProps = allowedProps

@@ -48,6 +48,7 @@ category: components
 **/
 class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
   // extra verbose localized date and time
+  static displayName = 'DateTimeInput'
   private static readonly DEFAULT_MESSAGE_FORMAT = 'LLLL'
   static allowedProps = allowedProps
   static defaultProps = {

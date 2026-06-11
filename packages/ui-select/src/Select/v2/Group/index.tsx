@@ -34,6 +34,7 @@ id: Select.Group
 @module Group
 **/
 class Group extends Component<SelectGroupProps> {
+  static displayName = 'Group'
   static readonly componentId = 'Select.Group'
 
   static allowedProps = allowedProps

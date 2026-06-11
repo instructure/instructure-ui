@@ -43,6 +43,7 @@ id: List.Item
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class ListItem extends Component<ListItemProps> {
+  static displayName = 'ListItem'
   static readonly componentId = 'List.Item'
 
   static allowedProps = allowedProps

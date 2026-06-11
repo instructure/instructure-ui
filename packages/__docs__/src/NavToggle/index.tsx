@@ -32,6 +32,7 @@ import type { NavToggleProps } from './props'
 import { allowedProps } from './props'
 
 class NavToggle extends Component<NavToggleProps> {
+  static displayName = 'NavToggle'
   static allowedProps = allowedProps
   static defaultProps = {
     variant: 'section',

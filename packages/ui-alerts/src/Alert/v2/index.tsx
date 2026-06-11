@@ -58,6 +58,7 @@ category: components
 @withDeterministicId()
 @withStyleNew(generateStyle)
 class Alert extends Component<AlertProps, AlertState> {
+  static displayName = 'Alert'
   static readonly componentId = 'Alert'
 
   static allowedProps = allowedProps

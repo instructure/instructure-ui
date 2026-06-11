@@ -108,6 +108,7 @@ category: components
 @withStyle(generateStyle, generateComponentTheme)
 @textDirectionContextConsumer()
 class SourceCodeEditor extends Component<SourceCodeEditorProps> {
+  static displayName = 'SourceCodeEditor'
   static readonly componentId = 'SourceCodeEditor'
 
   static allowedProps = allowedProps

@@ -47,6 +47,7 @@ category: components
 @withStyleNew(generateStyle)
 @textDirectionContextConsumer()
 class Tray extends Component<TrayProps> {
+  static displayName = 'Tray'
   static readonly componentId = 'Tray'
 
   static allowedProps = allowedProps

@@ -51,6 +51,7 @@ category: components
 @textDirectionContextConsumer()
 @withStyleNew(generateStyle)
 class View extends Component<ViewProps> {
+  static displayName = 'View'
   static componentId = 'View'
   static allowedProps = allowedProps
   static defaultProps = {

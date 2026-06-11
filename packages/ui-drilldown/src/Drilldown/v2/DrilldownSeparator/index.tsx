@@ -41,6 +41,7 @@ themeId: OptionsSeparator
 // we pass the themeOverrides to Options.Separator
 @withStyleNew(null)
 class DrilldownSeparator extends Component<DrilldownSeparatorProps> {
+  static displayName = 'DrilldownSeparator'
   static readonly componentId = 'Drilldown.Separator'
 
   static allowedProps = allowedProps

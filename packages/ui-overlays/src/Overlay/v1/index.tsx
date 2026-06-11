@@ -43,6 +43,7 @@ category: components
 ---
 **/
 class Overlay extends Component<OverlayProps, OverlayState> {
+  static displayName = 'Overlay'
   static allowedProps = allowedProps
 
   static defaultProps = {

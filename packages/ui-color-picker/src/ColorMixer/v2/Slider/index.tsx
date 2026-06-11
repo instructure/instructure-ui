@@ -42,6 +42,7 @@ private: true
 **/
 @withStyleNew(generateStyle, 'Slider')
 class Slider extends Component<SliderProps> {
+  static displayName = 'Slider'
   static allowedProps = allowedProps
   static readonly componentId = 'ColorMixer.Slider'
 

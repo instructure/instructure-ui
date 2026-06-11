@@ -44,6 +44,7 @@ category: components
 
 @withStyleNew(generateStyle)
 class Pill extends Component<PillProps, PillState> {
+  static displayName = 'Pill'
   static readonly componentId = 'Pill'
 
   static allowedProps = allowedProps

@@ -48,6 +48,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Billboard extends Component<BillboardProps> {
+  static displayName = 'Billboard'
   static readonly componentId = 'Billboard'
 
   static allowedProps = allowedProps

@@ -45,6 +45,7 @@ category: components
 // needed for listing the available theme variables on docs page
 @withStyle(null, generateComponentTheme)
 class IconButton extends Component<IconButtonProps> {
+  static displayName = 'IconButton'
   static readonly componentId = 'IconButton'
 
   static allowedProps = allowedProps

@@ -34,6 +34,7 @@ id: SimpleSelect.Group
 ---
 **/
 class Group extends Component<SimpleSelectGroupProps> {
+  static displayName = 'Group'
   static readonly componentId = 'SimpleSelect.Group'
 
   static allowedProps = allowedProps

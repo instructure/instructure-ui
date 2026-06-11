@@ -53,6 +53,7 @@ category: components
 **/
 @withStyle(generateStyles, generateComponentTheme)
 class TreeBrowser extends Component<TreeBrowserProps, TreeBrowserState> {
+  static displayName = 'TreeBrowser'
   static readonly componentId = 'TreeBrowser'
 
   static allowedProps = allowedProps

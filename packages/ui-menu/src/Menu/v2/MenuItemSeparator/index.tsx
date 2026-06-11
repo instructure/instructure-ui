@@ -41,6 +41,7 @@ id: Menu.Separator
 **/
 @withStyleNew(generateStyle)
 class MenuItemSeparator extends Component<MenuSeparatorProps> {
+  static displayName = 'MenuItemSeparator'
   static readonly componentId = 'Menu.Separator'
 
   static allowedProps = allowedProps

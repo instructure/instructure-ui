@@ -52,6 +52,7 @@ in the TreeBrowser.
 **/
 @withStyleNew(generateStyles, 'TreeBrowserTreeButton')
 class TreeNode extends Component<TreeBrowserNodeProps, { isHovered: boolean }> {
+  static displayName = 'TreeNode'
   static readonly componentId = 'TreeBrowser.Node'
 
   static allowedProps = allowedProps

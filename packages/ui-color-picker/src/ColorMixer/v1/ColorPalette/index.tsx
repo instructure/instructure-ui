@@ -49,6 +49,7 @@ private: true
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
 class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
+  static displayName = 'ColorPalette'
   static allowedProps = allowedProps
   static readonly componentId = 'ColorMixer.Palette'
 

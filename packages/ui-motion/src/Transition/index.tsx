@@ -45,6 +45,7 @@ category: components/utilities
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Transition extends Component<TransitionProps> {
+  static displayName = 'Transition'
   static readonly componentId = 'Transition'
 
   static allowedProps = allowedProps

@@ -44,6 +44,7 @@ id: TreeBrowser.Button
 **/
 @withStyle(generateStyles, generateComponentTheme)
 class TreeButton extends Component<TreeBrowserButtonProps> {
+  static displayName = 'TreeButton'
   static readonly componentId = 'TreeBrowser.Button'
 
   static allowedProps = allowedProps

@@ -43,6 +43,7 @@ id: Grid.Col
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class GridCol extends Component<GridColProps> {
+  static displayName = 'GridCol'
   static readonly componentId = 'Grid.Col'
 
   static allowedProps = allowedProps

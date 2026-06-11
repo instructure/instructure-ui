@@ -56,6 +56,7 @@ class BaseTransition extends Component<
   BaseTransitionProps,
   BaseTransitionState
 > {
+  static displayName = 'BaseTransition'
   static allowedProps = allowedProps
   static defaultProps = {
     in: false,

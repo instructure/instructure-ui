@@ -39,6 +39,7 @@ import { Alert } from '@instructure/ui-alerts'
 import type { Section } from '../../buildScripts/DataTypes.mjs'
 
 class Nav extends Component<NavProps, NavState> {
+  static displayName = 'Nav'
   _themeId: string
   searchTimeout: ReturnType<typeof setTimeout> | null
   _textInput?: HTMLElement

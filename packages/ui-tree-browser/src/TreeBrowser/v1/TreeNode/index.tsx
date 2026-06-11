@@ -46,6 +46,7 @@ in the TreeBrowser.
 **/
 @withStyle(generateStyles, generateComponentTheme)
 class TreeNode extends Component<TreeBrowserNodeProps> {
+  static displayName = 'TreeNode'
   static readonly componentId = 'TreeBrowser.Node'
 
   static allowedProps = allowedProps

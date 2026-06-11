@@ -37,6 +37,7 @@ type DrawerLayoutFixtureProps = {
 }
 
 export default class DrawerLayoutFixture extends Component<DrawerLayoutFixtureProps> {
+  static displayName = 'DrawerLayoutFixture'
   static defaultProps = {
     layoutWidth: '600px',
     trayWidth: '200px',

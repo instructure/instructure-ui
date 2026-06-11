@@ -28,6 +28,7 @@ import type { GuidelinesProps } from './props'
 import { allowedProps } from './props'
 
 class Guidelines extends Component<GuidelinesProps> {
+  static displayName = 'Guidelines'
   static allowedProps = allowedProps
   static defaultProps = {
     children: null

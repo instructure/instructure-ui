@@ -45,6 +45,7 @@ class TableOfContents extends Component<
   TableOfContentsProps,
   TableOfContentsState
 > {
+  static displayName = 'TableOfContents'
   static allowedProps = allowedProps
 
   constructor(props: TableOfContentsProps) {

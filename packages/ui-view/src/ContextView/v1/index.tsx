@@ -42,6 +42,7 @@ category: components
 
 @withStyle(generateStyle, generateComponentTheme)
 class ContextView extends Component<ContextViewProps> {
+  static displayName = 'ContextView'
   static readonly componentId = 'ContextView'
   static allowedProps = allowedProps
   static defaultProps = {

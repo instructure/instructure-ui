@@ -47,6 +47,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class AppNav extends Component<AppNavProps> {
+  static displayName = 'AppNav'
   static readonly componentId = 'AppNav'
 
   static allowedProps = allowedProps

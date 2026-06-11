@@ -90,6 +90,7 @@ import { AppContext } from '../appContext'
 
 @withStyleForDocs(generateStyle, generateComponentTheme)
 class App extends Component<AppProps, AppState> {
+  static displayName = 'App'
   static allowedProps = allowedProps
   static contextType = AppContext
   declare context: React.ContextType<typeof AppContext>

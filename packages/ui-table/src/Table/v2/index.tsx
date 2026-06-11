@@ -52,6 +52,7 @@ category: components
 **/
 @withStyleNew(generateStyle)
 class Table extends Component<TableProps> {
+  static displayName = 'Table'
   static readonly componentId = 'Table'
 
   static allowedProps = allowedProps

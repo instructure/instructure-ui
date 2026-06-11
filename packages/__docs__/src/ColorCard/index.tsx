@@ -30,6 +30,7 @@ import { ColorName } from '../ColorName'
 import type { ColorCardProps } from './props'
 import { allowedProps } from './props'
 class ColorCard extends Component<ColorCardProps> {
+  static displayName = 'ColorCard'
   static allowedProps = allowedProps
   static defaultProps = {
     minimal: false

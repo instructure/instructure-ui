@@ -103,6 +103,7 @@ category: components
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
 class Drilldown extends Component<DrilldownProps, DrilldownState> {
+  static displayName = 'Drilldown'
   static readonly componentId = 'Drilldown'
 
   static allowedProps = allowedProps

@@ -50,6 +50,7 @@ category: components
 
 @withStyle(generateStyle, generateComponentTheme)
 class Breadcrumb extends Component<BreadcrumbProps> {
+  static displayName = 'Breadcrumb'
   static readonly componentId = 'Breadcrumb'
 
   static allowedProps = allowedProps

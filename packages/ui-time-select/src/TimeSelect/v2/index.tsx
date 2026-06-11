@@ -58,6 +58,7 @@ A component used to select a time value.
  **/
 @withDeterministicId()
 class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
+  static displayName = 'TimeSelect'
   declare context: React.ContextType<typeof ApplyLocaleContext>
 
   static readonly componentId = 'TimeSelect'

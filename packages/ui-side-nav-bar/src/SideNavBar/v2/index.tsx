@@ -49,6 +49,7 @@ category: components
 **/
 @withStyleNew(generateStyle)
 class SideNavBar extends Component<SideNavBarProps, SideNavBarState> {
+  static displayName = 'SideNavBar'
   static readonly componentId = 'SideNavBar'
 
   static allowedProps = allowedProps

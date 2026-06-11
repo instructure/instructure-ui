@@ -48,6 +48,7 @@ category: components
 @withDeterministicId()
 @withStyleNew(generateStyle)
 class RangeInput extends Component<RangeInputProps, RangeInputState> {
+  static displayName = 'RangeInput'
   static readonly componentId = 'RangeInput'
   static outputLocatorAttribute = 'data-range-output'
 

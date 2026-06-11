@@ -47,6 +47,7 @@ id: DrawerLayout.Content
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class DrawerContent extends Component<DrawerLayoutContentProps> {
+  static displayName = 'DrawerContent'
   static readonly componentId = 'DrawerLayout.Content'
 
   static locatorAttribute = 'data-drawer-content'
