@@ -16,7 +16,7 @@
 - [Accessing the dom](./accessing-the-dom.md): Guidance for properly accessing DOM elements in React components using refs instead of findDOMNode to avoid warnings. Examples show good and bad patterns for component ref handling.
 - [Focus management](./focus-management.md): Comprehensive focus management system for dialogs, modals, and popovers. Uses Dialog component with FocusRegion and FocusRegionManager to trap focus, handle escape keys, and manage screen reader accessibility.
 - [Forms](./forms.md): InstUI form components use a `messages` prop for error/hint/success messages. Required fields now show an asterisk automatically. Examples provided for various form components like TextInput, Checkbox, and DateTimeInput.
-- [Guides getting started](./guides-getting-started.md)
+- [Guides getting started](./guides-getting-started.md): Quick start: Create a React app, add `@instructure/ui`, wrap with `InstUISettingsProvider`, and use components. Integrate with existing projects by adding the dependency and provider. Read about theme overrides and accessibility for best practices.
 - [Module federation](./module-federation.md): InstUI supports module federation with specific version requirements. For v10.14+, use local themes (`canvasThemeLocal`). For older hosts, guest apps must use v10.14+ and local themes. Global theme overrides don't apply to local themes.
 - [Using icons](./UsingIcons.md): Guidelines for using icons with proper accessibility roles, size variants, and color options. Line icons for light backgrounds, solid for dark backgrounds. Icons scale with parent font-size by default.
 
@@ -125,5 +125,5 @@
 #### AI Components
 
 - [AiInformation](./AiInformation.md): Displays AI-related data in Instructure products. Composed from NutritionFacts and DataPermissionLevels components with prefixed APIs. Supports fullscreen modals for mobile viewports with comprehensive data structure for AI feature information.
-- [DataPermissionLevels](./DataPermissionLevels.md): Displays AI-related data permissions in Instructure products. Shows hierarchical permission levels with titles and descriptions. Includes a modal interface with close functionality and supports highlighting specific levels for emphasis.
 - [NutritionFacts](./NutritionFacts.md): A specialized modal component for displaying AI-related data in structured blocks. Includes model info, privacy/compliance details, and output metrics. Features a trigger button and modal presentation.
+- [DataPermissionLevels](./DataPermissionLevels.md): Displays AI-related data permissions in Instructure products. Shows hierarchical permission levels with titles and descriptions. Includes a modal interface with close functionality and supports highlighting specific levels for emphasis.
