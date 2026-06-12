@@ -8,12 +8,12 @@ order: 2
 
 ## New theming system
 
-InstUI v11.7 introduces a new theming engine. Components imported from `/v11_7` (the `v2` label in the docs "Component version" selector) consume design tokens directly from the active theme. Components imported from `/v11_6` (the `v1` label) continue to use the legacy `generateComponentTheme` approach. **Both engines run side-by-side in the same app without conflict** — you can migrate component-by-component on your own schedule.
+InstUI v11.7 introduces a new theming engine. Components imported from `/v11_7` consume design tokens directly from the active theme. Components imported from `/v11_6` continue to use the legacy `generateComponentTheme` approach. **Both engines run side-by-side in the same app without conflict** — you can migrate component-by-component on your own schedule.
 
 ### What's different
 
 - **Layered token model.** Tokens are organized as **primitives** (raw values like colors and spacings) → **semantics** (contextual mappings like `color.text.base`) → **components** (per-component tokens). Cross-component concerns such as focus rings and box shadows live in `sharedTokens`. Most overrides happen at the component layer.
-- **No per-component `theme.ts`.** v2 components don't define a `generateComponentTheme` function, their tokens are emitted by the active theme rather than computed by the component itself.
+- **No per-component `theme.ts`.** v11.7 components don't define a `generateComponentTheme` function, their tokens are emitted by the active theme rather than computed by the component itself.
 
 ### New themes
 
@@ -24,7 +24,7 @@ The new engine ships four themes:
 - **`light`** — new light theme.
 - **`dark`** — new dark theme.
 
-The legacy `canvas` and `canvasHighContrast` themes still exist and remain the correct choice for v1 components.
+The legacy `canvas` and `canvasHighContrast` themes still exist and remain the correct choice for v11.6 components.
 
 ### Override mechanism
 
@@ -34,8 +34,22 @@ The two entry points are the same as in the legacy system:
 - **Per-component** — `themeOverride` prop directly on a single component instance. Has the highest priority and overrides any provider-level setting for that instance.
 
 What changed:
+
 - **Theme overrides**: in v11.7 `InstUISettingsProvider`'s theme prop only accepts a full theme object. For v11.7 or later use the new `themeOverride` prop
 - **Token names/values**: Lots of components had their theme tokens changed -- removed, added or renamed. Check the rest of this guide for the full list of changes.
+- **Branding (`ic-brand-*` variables)**: the legacy Canvas `ic-brand-*` variables are now exposed under `semantics.color.institutional.*` in the new theming system. Branding overrides are supported on the `canvas` (legacy) theme. Support for the new `light` and `dark` themes is coming soon. High-contrast themes will never accept branding overrides, by design.
+
+| Legacy variable                                     | New semantic token                      |
+| --------------------------------------------------- | --------------------------------------- |
+| `ic-brand-primary`                                  | `brandPrimary`                          |
+| `ic-brand-font-color-dark`                          | `brandFontColorDark`                    |
+| `ic-link-color`                                     | `linkColor`                             |
+| `ic-brand-button--primary-bgd`                      | `brandButtonPrimaryBgd`                 |
+| `ic-brand-button--primary-text`                     | `brandButtonPrimaryText`                |
+| `ic-brand-global-nav-bgd`                           | `brandGlobalNavBgd`                     |
+| `ic-global-nav-link-hover`                          | `globalNavLinkHover`                    |
+| `ic-brand-global-nav-menu-item__text-color`         | `brandGlobalNavMenuItemTextColor`       |
+| `ic-brand-global-nav-menu-item__text-color--active` | `brandGlobalNavMenuItemTextColorActive` |
 
 `themeOverride` remains separate from the `theme` prop — `theme` swaps the active theme entirely, `themeOverride` layers changes on top. See [New theme overrides](new-theme-overrides) for subtree-scoped overrides, primitives / semantics overrides, shared tokens, and priority rules.
 
@@ -63,7 +77,7 @@ The recommended path uses the **`updateInstUIImportVersions` codemod**
 
 3. **Switch the theme.** Replace `canvas` with `legacyCanvas` wherever the bumped components live — visuals stay identical and the new override surface becomes available. Use `light` or `dark` for a redesign. The `theme` prop on `InstUISettingsProvider` can scope this to a subtree.
 
-4. **Update per-component theme overrides.** Many v2 components have renamed / added / removed tokens — see the component-specific sections below for the exact changes.
+4. **Update per-component theme overrides.** Many v11.7 components have renamed / added / removed tokens — see the component-specific sections below for the exact changes.
 
 ### Further reading
 
@@ -435,7 +449,7 @@ type: embed
 
 ### CloseButton
 
-CloseButton no longer has its own dedicated theme tokens in v2. Offset spacing now uses `sharedTokens.spacing`, and visual styling comes from BaseButton tokens.
+CloseButton no longer has its own dedicated theme tokens in v11.7. Offset spacing now uses `sharedTokens.spacing`, and visual styling comes from BaseButton tokens.
 
 ```js
 ---
@@ -497,9 +511,9 @@ type: embed
 
 Now that InstUI supports component versioning, we no longer need the separate `DateInput2` name. Instead:
 
-- **[DateInput v2](/v11_7/DateInput)** (from v11.7) — the recommended version. Same component that was previously `DateInput2`, same API. **This is the only version that will receive the new theming.**
-- **[DateInput v1](/v11_6/DateInput)** (up to v11.6) — the original component. **Deprecated.** Does not support the new theming system.
-- **[DateInput2 v1](/v11_6/DateInput2)** — **Deprecated.** Will not get a v2 and does not support the new theming system. If you're using `DateInput2`, switch your import to `DateInput` (from v11.7) — the API is identical, no other code changes needed.
+- **[DateInput (v11.7)](/v11_7/DateInput)** — the recommended version. Same component that was previously `DateInput2`, same API. **This is the only version that will receive the new theming.**
+- **[DateInput (v11.6)](/v11_6/DateInput)** — the original component. **Deprecated.** Does not support the new theming system.
+- **[DateInput2 (v11.6)](/v11_6/DateInput2)** — **Deprecated.** Will not get a v11.7 version and does not support the new theming system. If you're using `DateInput2`, switch your import to `DateInput` (in v11.7) — the API is identical, no other code changes needed.
 
 ### DateTimeInput
 
@@ -519,7 +533,7 @@ Now that InstUI supports component versioning, we no longer need the separate `D
 | ------------ | ------------------------------------- | --------------------------------------------------------- |
 | `dateFormat` | Moment.js format string (e.g. `'LL'`) | Locale string (e.g. `'en-US'`) or `{ parser, formatter }` |
 
-If you were passing a Moment format string like `dateFormat="LL"`, replace it with a locale string or a custom `{ parser, formatter }` object. If you were relying on the default `'LL'` format, note that v2 now uses the locale's default date format (e.g. `1/18/2018` in `en-US`) instead of the long format (e.g. `January 18, 2018`). To preserve the long format, pass a custom `{ parser, formatter }` object.
+If you were passing a Moment format string like `dateFormat="LL"`, replace it with a locale string or a custom `{ parser, formatter }` object. If you were relying on the default `'LL'` format, note that v11.7 now uses the locale's default date format (e.g. `1/18/2018` in `en-US`) instead of the long format (e.g. `January 18, 2018`). To preserve the long format, pass a custom `{ parser, formatter }` object.
 
 **New props:**
 
@@ -549,7 +563,7 @@ type: code
 />
 ```
 
-#### DateTimeInput v1 → v2 API changes
+#### DateTimeInput v11.6 → v11.7 API changes
 
 **Removed props:**
 
@@ -557,7 +571,7 @@ type: code
 | --------------------- | -------------------------------- |
 | `renderWeekdayLabels` | Built in — no replacement needed |
 
-**New props in v2:**
+**New props in v11.7:**
 
 | New prop           | Description                                                                                |
 | ------------------ | ------------------------------------------------------------------------------------------ |
@@ -566,13 +580,13 @@ type: code
 | `withYearPicker`   | Optional. Enables a year dropdown in the calendar.                                         |
 
 ```jsx
-// v1
+// v11.6
 <DateTimeInput
   prevMonthLabel="Previous month"
   nextMonthLabel="Next month"
 />
 
-// v2
+// v11.7
 <DateTimeInput
   prevMonthLabel="Previous month"
   nextMonthLabel="Next month"
