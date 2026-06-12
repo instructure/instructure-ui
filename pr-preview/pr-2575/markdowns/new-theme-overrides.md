@@ -599,6 +599,13 @@ type: example
 
 The new theming system exposes the equivalents of the legacy Canvas `ic-brand-*` variables under `semantics.color.institutional.*`. Overriding these has the same broad effect as Canvas's [Theme Editor](https://community.canvaslms.com/t5/Admin-Guide/How-do-I-create-a-theme-for-an-account-using-the-Theme-Editor/ta-p/242) — the Button family, `SideNavBar`, `Link`, `Billboard`, and several other components consume them automatically.
 
+> **Theme support for branding:**
+>
+> - **`canvas` (legacy)** — branding overrides are supported.
+> - **`light`** — branding support is coming soon.
+> - **`dark`** — branding support is coming soon.
+> - **High-contrast themes** — branding will **never** be available, by design. These themes maintain WCAG-compliant color contrast at all times, so user-customizable colors cannot override them.
+
 | Legacy variable                                     | New semantic token                      |
 | --------------------------------------------------- | --------------------------------------- |
 | `ic-brand-primary`                                  | `brandPrimary`                          |
@@ -627,11 +634,32 @@ A handful of legacy variables are not in the new system, for two different reaso
 type: example
 ---
 const Example = () => {
-  const [brandPrimary, setBrandPrimary] = useState(canvas['ic-brand-primary'])
-  const [brandFontColorDark, setBrandFontColorDark] = useState(canvas['ic-brand-font-color-dark'])
+  // Branding overrides work the same way across all new-system themes.
+  // Switch the "Base theme" selector to verify the override applies to canvas, light, and dark.
+  const themes = { canvas, light }
+  const [themeName, setThemeName] = useState('canvas')
+
+  const defaults = canvas.newTheme.semantics(canvas.newTheme.primitives).color.institutional
+  const [brandPrimary, setBrandPrimary] = useState(defaults.brandPrimary)
+  const [brandFontColorDark, setBrandFontColorDark] = useState(defaults.brandFontColorDark)
 
   return (
     <div>
+      <View as="div" margin="0 0 small">
+        <SimpleSelect
+          renderLabel="Base theme"
+          value={themeName}
+          onChange={(_e, { value }) => setThemeName(value)}
+        >
+          <SimpleSelect.Option id="canvas" value="canvas">canvas</SimpleSelect.Option>
+          <SimpleSelect.Option id="light" value="light" isDisabled>
+            light (coming soon)
+          </SimpleSelect.Option>
+          <SimpleSelect.Option id="dark" value="dark" isDisabled>
+            dark (coming soon)
+          </SimpleSelect.Option>
+        </SimpleSelect>
+      </View>
       <Flex gap="small">
         <Flex.Item size="45%">
           <TextInput
@@ -651,7 +679,7 @@ const Example = () => {
         </Flex.Item>
       </Flex>
       <hr style={{width:'100%', margin:'2rem 0 1rem'}}/>
-      <InstUISettingsProvider theme={canvas}>
+      <InstUISettingsProvider theme={themes[themeName]}>
         <InstUISettingsProvider
           themeOverride={{
             semantics: {
@@ -694,11 +722,30 @@ These semantics only affect the `primary` color `Button`.
 type: example
 ---
 const Example = () => {
-  const [brandButtonPrimaryBgd, setBrandButtonPrimaryBgd] = useState(canvas['ic-brand-button--primary-bgd'])
-  const [brandButtonPrimaryText, setBrandButtonPrimaryText] = useState(canvas['ic-brand-button--primary-text'])
+  const themes = { canvas, light }
+  const [themeName, setThemeName] = useState('canvas')
+
+  const defaults = canvas.newTheme.semantics(canvas.newTheme.primitives).color.institutional
+  const [brandButtonPrimaryBgd, setBrandButtonPrimaryBgd] = useState(defaults.brandButtonPrimaryBgd)
+  const [brandButtonPrimaryText, setBrandButtonPrimaryText] = useState(defaults.brandButtonPrimaryText)
 
   return (
     <div>
+      <View as="div" margin="0 0 small">
+        <SimpleSelect
+          renderLabel="Base theme"
+          value={themeName}
+          onChange={(_e, { value }) => setThemeName(value)}
+        >
+          <SimpleSelect.Option id="canvas" value="canvas">canvas</SimpleSelect.Option>
+          <SimpleSelect.Option id="light" value="light" isDisabled>
+            light (coming soon)
+          </SimpleSelect.Option>
+          <SimpleSelect.Option id="dark" value="dark" isDisabled>
+            dark (coming soon)
+          </SimpleSelect.Option>
+        </SimpleSelect>
+      </View>
       <Flex gap="small">
         <Flex.Item size="45%">
           <TextInput
@@ -718,7 +765,7 @@ const Example = () => {
         </Flex.Item>
       </Flex>
       <hr style={{width:'100%', margin:'2rem 0 1rem'}}/>
-      <InstUISettingsProvider theme={canvas}>
+      <InstUISettingsProvider theme={themes[themeName]}>
         <InstUISettingsProvider
           themeOverride={{
             semantics: {
@@ -747,10 +794,29 @@ render(<Example/>)
 type: example
 ---
 const Example = () => {
-  const [linkColor, setLinkColor] = useState(canvas['ic-link-color'])
+  const themes = { canvas, light }
+  const [themeName, setThemeName] = useState('canvas')
+
+  const defaults = canvas.newTheme.semantics(canvas.newTheme.primitives).color.institutional
+  const [linkColor, setLinkColor] = useState(defaults.linkColor)
 
   return (
     <div>
+      <View as="div" margin="0 0 small">
+        <SimpleSelect
+          renderLabel="Base theme"
+          value={themeName}
+          onChange={(_e, { value }) => setThemeName(value)}
+        >
+          <SimpleSelect.Option id="canvas" value="canvas">canvas</SimpleSelect.Option>
+          <SimpleSelect.Option id="light" value="light" isDisabled>
+            light (coming soon)
+          </SimpleSelect.Option>
+          <SimpleSelect.Option id="dark" value="dark" isDisabled>
+            dark (coming soon)
+          </SimpleSelect.Option>
+        </SimpleSelect>
+      </View>
       <Flex gap="small">
         <Flex.Item size="60%">
           <TextInput
@@ -762,7 +828,7 @@ const Example = () => {
         </Flex.Item>
       </Flex>
       <hr style={{width:'100%', margin:'2rem 0 1rem'}}/>
-      <InstUISettingsProvider theme={canvas}>
+      <InstUISettingsProvider theme={themes[themeName]}>
         <InstUISettingsProvider
           themeOverride={{
             semantics: {
@@ -803,13 +869,32 @@ These semantics control the `SideNavBar` background, hover state, and menu item 
 type: example
 ---
 const Example = () => {
-  const [brandGlobalNavBgd, setBrandGlobalNavBgd] = useState(canvas['ic-brand-global-nav-bgd'])
-  const [globalNavLinkHover, setGlobalNavLinkHover] = useState(canvas['ic-global-nav-link-hover'])
-  const [brandGlobalNavMenuItemTextColor, setBrandGlobalNavMenuItemTextColor] = useState(canvas['ic-brand-global-nav-menu-item__text-color'])
-  const [brandGlobalNavMenuItemTextColorActive, setBrandGlobalNavMenuItemTextColorActive] = useState(canvas['ic-brand-global-nav-menu-item__text-color--active'])
+  const themes = { canvas, light }
+  const [themeName, setThemeName] = useState('canvas')
+
+  const defaults = canvas.newTheme.semantics(canvas.newTheme.primitives).color.institutional
+  const [brandGlobalNavBgd, setBrandGlobalNavBgd] = useState(defaults.brandGlobalNavBgd)
+  const [globalNavLinkHover, setGlobalNavLinkHover] = useState(defaults.globalNavLinkHover)
+  const [brandGlobalNavMenuItemTextColor, setBrandGlobalNavMenuItemTextColor] = useState(defaults.brandGlobalNavMenuItemTextColor)
+  const [brandGlobalNavMenuItemTextColorActive, setBrandGlobalNavMenuItemTextColorActive] = useState(defaults.brandGlobalNavMenuItemTextColorActive)
 
   return (
     <div>
+      <View as="div" margin="0 0 small">
+        <SimpleSelect
+          renderLabel="Base theme"
+          value={themeName}
+          onChange={(_e, { value }) => setThemeName(value)}
+        >
+          <SimpleSelect.Option id="canvas" value="canvas">canvas</SimpleSelect.Option>
+          <SimpleSelect.Option id="light" value="light" isDisabled>
+            light (coming soon)
+          </SimpleSelect.Option>
+          <SimpleSelect.Option id="dark" value="dark" isDisabled>
+            dark (coming soon)
+          </SimpleSelect.Option>
+        </SimpleSelect>
+      </View>
       <Flex gap="small">
         <Flex.Item size="45%">
           <TextInput renderLabel="brandGlobalNavBgd" value={brandGlobalNavBgd} onChange={(e, v) => setBrandGlobalNavBgd(v)}/>
@@ -821,7 +906,7 @@ const Example = () => {
         </Flex.Item>
       </Flex>
       <hr style={{width:'100%', margin:'2rem 0 1rem'}}/>
-      <InstUISettingsProvider theme={canvas}>
+      <InstUISettingsProvider theme={themes[themeName]}>
         <InstUISettingsProvider
           themeOverride={{
             semantics: {
