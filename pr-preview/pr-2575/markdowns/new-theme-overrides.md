@@ -679,32 +679,31 @@ const Example = () => {
         </Flex.Item>
       </Flex>
       <hr style={{width:'100%', margin:'2rem 0 1rem'}}/>
-      <InstUISettingsProvider theme={themes[themeName]}>
-        <InstUISettingsProvider
-          themeOverride={{
-            semantics: {
-              color: {
-                institutional: { brandPrimary, brandFontColorDark }
-              }
+      <InstUISettingsProvider
+        theme={themes[themeName]}
+        themeOverride={{
+          semantics: {
+            color: {
+              institutional: { brandPrimary, brandFontColorDark }
             }
-          }}
-        >
-          <Tabs>
-            <Tabs.Panel id="tabA" renderTitle="Tab A" isSelected={true}></Tabs.Panel>
-            <Tabs.Panel id="tabB" renderTitle="Tab B"></Tabs.Panel>
-            <Tabs.Panel id="tabC" renderTitle="Tab C"></Tabs.Panel>
-          </Tabs>
-          <Flex gap="medium" margin="medium 0 0 0">
-            <Flex.Item>
-              <Badge count={42} countUntil={100} margin="0 medium 0 0">
-                <Button color="secondary">Notifications</Button>
-              </Badge>
-            </Flex.Item>
-            <Flex.Item shouldGrow>
-              <Text>Default body text — uses brandFontColorDark.</Text>
-            </Flex.Item>
-          </Flex>
-        </InstUISettingsProvider>
+          }
+        }}
+      >
+        <Tabs>
+          <Tabs.Panel id="tabA" renderTitle="Tab A" isSelected={true}></Tabs.Panel>
+          <Tabs.Panel id="tabB" renderTitle="Tab B"></Tabs.Panel>
+          <Tabs.Panel id="tabC" renderTitle="Tab C"></Tabs.Panel>
+        </Tabs>
+        <Flex gap="medium" margin="medium 0 0 0">
+          <Flex.Item>
+            <Badge count={42} countUntil={100} margin="0 medium 0 0">
+              <Button color="secondary">Notifications</Button>
+            </Badge>
+          </Flex.Item>
+          <Flex.Item shouldGrow>
+            <Text>Default body text — uses brandFontColorDark.</Text>
+          </Flex.Item>
+        </Flex>
       </InstUISettingsProvider>
     </div>
   )
@@ -765,18 +764,17 @@ const Example = () => {
         </Flex.Item>
       </Flex>
       <hr style={{width:'100%', margin:'2rem 0 1rem'}}/>
-      <InstUISettingsProvider theme={themes[themeName]}>
-        <InstUISettingsProvider
-          themeOverride={{
-            semantics: {
-              color: {
-                institutional: { brandButtonPrimaryBgd, brandButtonPrimaryText }
-              }
+      <InstUISettingsProvider
+        theme={themes[themeName]}
+        themeOverride={{
+          semantics: {
+            color: {
+              institutional: { brandButtonPrimaryBgd, brandButtonPrimaryText }
             }
-          }}
-        >
-          <Button color="primary">I'm a 'primary' color button</Button>
-        </InstUISettingsProvider>
+          }
+        }}
+      >
+        <Button color="primary">I'm a 'primary' color button</Button>
       </InstUISettingsProvider>
     </div>
   )
@@ -828,30 +826,29 @@ const Example = () => {
         </Flex.Item>
       </Flex>
       <hr style={{width:'100%', margin:'2rem 0 1rem'}}/>
-      <InstUISettingsProvider theme={themes[themeName]}>
-        <InstUISettingsProvider
-          themeOverride={{
-            semantics: {
-              color: {
-                institutional: { linkColor }
-              }
+      <InstUISettingsProvider
+        theme={themes[themeName]}
+        themeOverride={{
+          semantics: {
+            color: {
+              institutional: { linkColor }
             }
-          }}
-        >
-          <Flex gap="small">
-            <Flex.Item size="50%">
-              <Link href="https://instructure.github.io/instructure-ui/">normal link</Link>
-            </Flex.Item>
-            <Flex.Item size="50%">
-              <Billboard
-                margin="small"
-                message="Billboard with link"
-                href="http://instructure.com"
-                hero={(size) => <IconGradebookLine size={size} />}
-              />
-            </Flex.Item>
-          </Flex>
-        </InstUISettingsProvider>
+          }
+        }}
+      >
+        <Flex gap="small">
+          <Flex.Item size="50%">
+            <Link href="https://instructure.github.io/instructure-ui/">normal link</Link>
+          </Flex.Item>
+          <Flex.Item size="50%">
+            <Billboard
+              margin="small"
+              message="Billboard with link"
+              href="http://instructure.com"
+              hero={(size) => <IconGradebookLine size={size} />}
+            />
+          </Flex.Item>
+        </Flex>
       </InstUISettingsProvider>
     </div>
   )
@@ -906,34 +903,33 @@ const Example = () => {
         </Flex.Item>
       </Flex>
       <hr style={{width:'100%', margin:'2rem 0 1rem'}}/>
-      <InstUISettingsProvider theme={themes[themeName]}>
-        <InstUISettingsProvider
-          themeOverride={{
-            semantics: {
-              color: {
-                institutional: {
-                  brandGlobalNavBgd,
-                  globalNavLinkHover,
-                  brandGlobalNavMenuItemTextColor,
-                  brandGlobalNavMenuItemTextColorActive
-                }
+      <InstUISettingsProvider
+        theme={themes[themeName]}
+        themeOverride={{
+          semantics: {
+            color: {
+              institutional: {
+                brandGlobalNavBgd,
+                globalNavLinkHover,
+                brandGlobalNavMenuItemTextColor,
+                brandGlobalNavMenuItemTextColorActive
               }
             }
+          }
+        }}
+      >
+        <SideNavBar
+          label="Main navigation"
+          toggleLabel={{
+            expandedLabel: 'Minimize SideNavBar',
+            minimizedLabel: 'Expand SideNavBar'
           }}
         >
-          <SideNavBar
-            label="Main navigation"
-            toggleLabel={{
-              expandedLabel: 'Minimize SideNavBar',
-              minimizedLabel: 'Expand SideNavBar'
-            }}
-          >
-            <SideNavBar.Item icon={<IconUserLine />} label="Home" href="#" />
-            <SideNavBar.Item icon={<IconAdminLine />} label="Admin" href="#" />
-            <SideNavBar.Item selected icon={<IconDashboardLine />} label="Dashboard" href="#" />
-            <SideNavBar.Item icon={<IconInboxLine />} label="Inbox" href="#" />
-          </SideNavBar>
-        </InstUISettingsProvider>
+          <SideNavBar.Item icon={<IconUserLine />} label="Home" href="#" />
+          <SideNavBar.Item icon={<IconAdminLine />} label="Admin" href="#" />
+          <SideNavBar.Item selected icon={<IconDashboardLine />} label="Dashboard" href="#" />
+          <SideNavBar.Item icon={<IconInboxLine />} label="Inbox" href="#" />
+        </SideNavBar>
       </InstUISettingsProvider>
     </div>
   )
