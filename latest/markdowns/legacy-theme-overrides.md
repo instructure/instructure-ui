@@ -1,6 +1,15 @@
 
 ## Using theme overrides
 
+```js
+---
+type: embed
+---
+<Alert variant="warning" margin="0 0 medium">
+  The examples on this page use the <strong>legacy theming system</strong> and are designed for <strong>v11.6</strong> components. If you are viewing the v11.7 version, <Link href={window.location.pathname.match(/v\d+_\d+/) ? window.location.pathname.replace(/v\d+_\d+/, 'v11_6') : `/v11_6${window.location.pathname}`}>switch to v11.6</Link> to see the examples working correctly.
+</Alert>
+```
+
 This document gives an overview on how you can customize Instructure UI components by tweaking their theme variables.
 While this gives you a level of flexibility on the look and feel of the components you should be aware of 2 things:
 
@@ -334,7 +343,7 @@ type: example
 
 Every themeable component has its own "theme map". This map defines the components own theme variables (used by this component only), and maps them to values in the global theme object. These local variables are then passed to the component and used in the styles object.
 
-See the [theming dev guide](/#theming-basics), and [InstUISettingsProvider](/#InstUISettingsProvider) docs pages for more info and examples.
+See the [InstUISettingsProvider](/#InstUISettingsProvider) docs page for more info and examples.
 
 Either you set up the themes globally, or you use the `InstUISettingsProvider` to set up themes, the component's `theme.js` will map it to theme variables:
 
