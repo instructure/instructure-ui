@@ -1,15 +1,6 @@
 
 ## New Theme Override Patterns
 
-```js
----
-type: embed
----
-<Alert variant="warning" margin="0 0 medium">
-  The examples on this page use the <strong>new theming system</strong> and require <strong>v11.7+</strong> components. If you are viewing the v11.6 version, <Link href={window.location.pathname.match(/v\d+_\d+/) ? window.location.pathname.replace(/v\d+_\d+/, 'v11_7') : `/v11_7${window.location.pathname}`}>switch to v11.7</Link> to see the examples working correctly.
-</Alert>
-```
-
 This guide covers all the override patterns available in the new theming system (v11.7+). The new system uses a layered token architecture: **primitives** (raw values) -> **semantics** (meaning) -> **components** (per-component tokens).
 
 Overrides are applied via the `themeOverride` prop on `InstUISettingsProvider`, which is separate from the `theme` prop. The `theme` prop replaces the active theme entirely; `themeOverride` layers modifications on top.
@@ -521,9 +512,52 @@ type: example
 </InstUISettingsProvider>
 ```
 
-### 13. Provider-level overrides cannot target a child component selectively
+### 13. Independent overrides for child parts of compound components
 
-Because `Button` uses `BaseButton`'s theme internally, a `components.Button` entry in the provider's `themeOverride` does **not** override `BaseButton`'s tokens for `Button` instances only. Both `BaseButton` and `Button` share the same `BaseButton` theme variables, so a `components.BaseButton` override affects both, regardless of whether a separate `components.Button` entry is also present.
+Most compound components expose each part as a separate component with its own `componentId`. This means you can independently override each part via `components` — both overrides take effect:
+
+```js
+---
+type: example
+---
+<InstUISettingsProvider theme={canvas}>
+  <InstUISettingsProvider
+    themeOverride={{
+      components: {
+        TableColHeader: {
+          background: 'rebeccapurple',
+          color: 'gold'
+        },
+        TableRowHeader: {
+          background: 'deeppink',
+          color: 'white'
+        }
+      }
+    }}
+  >
+    <Table caption="Independent overrides: ColHeader purple, RowHeader deeppink">
+      <Table.Head>
+        <Table.Row>
+          <Table.ColHeader id="row-headers">Row headers column - purple</Table.ColHeader>
+          <Table.ColHeader id="cells">Cells column - purple</Table.ColHeader>
+        </Table.Row>
+      </Table.Head>
+      <Table.Body>
+        <Table.Row>
+          <Table.RowHeader>TableRowHeader — deeppink</Table.RowHeader>
+          <Table.Cell>TableCell — unchanged</Table.Cell>
+        </Table.Row>
+        <Table.Row>
+          <Table.RowHeader>TableRowHeader — deeppink</Table.RowHeader>
+          <Table.Cell>TableCell — unchanged</Table.Cell>
+        </Table.Row>
+      </Table.Body>
+    </Table>
+  </InstUISettingsProvider>
+</InstUISettingsProvider>
+```
+
+**Exception — `Button` and `BaseButton`:** `Button` uses `BaseButton`'s `componentId` internally, so `components.Button` has no effect. A `components.BaseButton` override affects all `BaseButton` instances including those rendered inside `Button` — there is no way to target only one:
 
 ```js
 ---
