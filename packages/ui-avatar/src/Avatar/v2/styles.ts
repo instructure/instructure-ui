@@ -158,7 +158,7 @@ const generateStyle = (
       label: 'avatar',
       boxSizing: 'border-box',
       border: getBorder(),
-      borderRadius: shape === 'circle' ? '50%' : 0,
+      borderRadius: shape === 'circle' ? '50%' : componentTheme.rectangleRadius,
       ...sizeStyles[size!],
       background:
         hasInverseColor || color === 'ai'
