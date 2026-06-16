@@ -31,6 +31,8 @@
       "Bash(gh pr checks:*)",
       "Bash(gh issue view:*)",
       "Bash(gh issue list:*)",
+      "Bash(gh search prs:*)",
+      "Bash(gh repo view:*)",
       "Bash(gh api:*)",
       "Bash(gh --help)",
       "Bash(gh * --help)"
