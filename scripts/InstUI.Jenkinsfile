@@ -83,8 +83,7 @@ pipeline {
                         echo "Building documentation for ${params.PROJECT_REPO} with refspec: ${env.GIT_COMMIT} ==> Deploying to ${targetEnv}"
                         build(job: 'Restructure/Documentation Portal/Workers/DocSync',
                             parameters: [
-                                string(name: 'TARGET_ENV', value: "test"),
-                                // string(name: 'TARGET_ENV', value: targetEnv),
+                                string(name: 'TARGET_ENV', value: targetEnv),
                                 string(name: 'SOURCE_KIND', value: "git"),
                                 string(name: 'SOURCE_PROJECT', value: "${params.PROJECT_REPO}"),
                                 string(name: 'SOURCE_PROJECT_REFSPEC', value: env.GIT_COMMIT),
