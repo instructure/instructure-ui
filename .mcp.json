@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "atlassian": {
+      "type": "sse",
+      "url": "https://mcp.atlassian.com/v1/sse"
+    },
+    "slack": {
+      "command": "sh",
+      "args": [
+        "-c",
+        "set -a; [ -f ./.env ] && . ./.env; set +a; exec npx -y @modelcontextprotocol/server-slack"
+      ]
+    },
+    "chrome-devtools": {
+      "command": "npx",
+      "args": ["-y", "chrome-devtools-mcp@latest"]
+    }
+  }
+}

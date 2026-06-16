@@ -26,7 +26,9 @@ Co-Authored-By: Claude <noreply@anthropic.com>
 
 ## Steps
 
-1. `git status` + `git diff` (and `git diff --staged` if anything's staged). **Abort if on `master`** — commit on a feature branch instead.
+1. `git status` + `git diff` (and `git diff --staged` if anything's staged), and **check the current branch is the right place for this commit**:
+   - **Never commit on `master`/`main`.** If you're on it, stop and **offer to create a feature branch** from the current HEAD — `git switch -c <type>/<short-desc>` carries the uncommitted changes onto the new branch — then commit there. Don't proceed on `master` even if the user didn't mention branching; confirm first.
+   - If you're on a feature branch, glance at its name. If it looks **unrelated** to the change you're about to commit, flag it and offer to branch off (so you don't pile an unrelated commit onto someone else's WIP); otherwise proceed.
 2. Stage the files that belong in this commit — be specific, don't `git add -A`.
 3. Commit with `HUSKY=0` to skip the interactive husky prompt:
 

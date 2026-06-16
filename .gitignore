@@ -35,6 +35,9 @@ CLAUDE.local.md
 .claude/commands/*
 !.claude/commands/commit.md
 !.claude/commands/pr.md
+!.claude/commands/slack-triage.md
+!.claude/commands/slack-setup.md
+!.claude/commands/implement.md
 
 # Playwright MCP
 .playwright-mcp
