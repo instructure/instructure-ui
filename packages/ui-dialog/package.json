@@ -27,7 +27,8 @@
     "@instructure/shared-types": "workspace:*",
     "@instructure/ui-a11y-utils": "workspace:*",
     "@instructure/ui-dom-utils": "workspace:*",
-    "@instructure/ui-react-utils": "workspace:*"
+    "@instructure/ui-react-utils": "workspace:*",
+    "@instructure/emotion": "workspace:*"
   },
   "devDependencies": {
     "@instructure/console": "workspace:*",
