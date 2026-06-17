@@ -65,6 +65,15 @@ const PasswordExample = () => {
 render(<PasswordExample/>)
 ```
 
+```js
+---
+type: embed
+---
+<Alert variant="warning" margin="0 0 medium">
+  The following section describes behavior introduced in <strong>v11.7</strong>: the updated <code>error</code> type and the required asterisk feature. If you are viewing the v11.6 version, <Link href={window.location.pathname.match(/v\d+_\d+/) ? window.location.pathname.replace(/v\d+_\d+/, 'v11_7') : `/v11_7${window.location.pathname}`}>switch to v11.7</Link> to see these features working correctly.
+</Alert>
+```
+
 The `error` type has been updated to meet accessibility requirements with proper icons and visual styling. Previously, there was a `newError` type that provided this enhanced behavior, but it has been consolidated into the standard `error` type for consistency. `newError` has been deprecated.
 
 We also introduced the "required asterisk" which displays an `*` character next to field labels that are required. This update applies to **all** InstUI form components, so if you were relying on a custom solution for this feature before, you need to remove that to avoid having double asterisks.
