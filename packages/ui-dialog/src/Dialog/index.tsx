@@ -23,6 +23,7 @@
  */
 
 import { Component } from 'react'
+import { css } from '@instructure/emotion'
 
 import { omitProps, getElementType } from '@instructure/ui-react-utils'
 import { findDOMNode, requestAnimationFrame } from '@instructure/ui-dom-utils'
@@ -173,7 +174,9 @@ class Dialog extends Component<DialogProps> {
           role === 'dialog' && this.props.shouldContainFocus ? true : undefined
         }
         className={this.props.className} // TODO in V2 remove className, there is no usage of it.
-        style={{ borderRadius: 'inherit' }} // ensure the dialog inherits border radius from View
+        css={css`
+          border-radius: inherit;
+        `} //making sure it inherits from containers if nothing is specified from outside and use the outside specifiers if they are present, e.g.:modal
         ref={this.getRef}
       >
         {this.props.children}
