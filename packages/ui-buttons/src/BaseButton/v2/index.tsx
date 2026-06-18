@@ -228,7 +228,10 @@ class BaseButton extends Component<BaseButtonProps> {
 
     const { hasOnlyIconVisible } = this
     const iconSize = buttonSizeToIconSize[size!]
-    const iconColor = buttonColorToIconColor[color!]
+    const iconColor =
+      this.isDisabled && color === 'ai-secondary'
+        ? 'inherit'
+        : buttonColorToIconColor[color!]
     const wrappedIcon = (
       <span css={styles?.iconSVG}>
         {renderIconWithProps(renderIcon, iconSize, iconColor)}
