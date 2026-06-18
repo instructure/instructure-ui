@@ -269,7 +269,9 @@ const generateStyle = (
             boxShadow: componentTheme.secondaryGhostHoverBoxShadow
           },
           disabled: {
-            background: 'transparent'
+            background: 'transparent',
+            borderColor: componentTheme.secondaryDisabledBorderColor,
+            color: componentTheme.secondaryDisabledTextColor
           }
         },
 
@@ -425,70 +427,76 @@ const generateStyle = (
   }
 
   return {
-    baseButton: isEnabled
-      ? {
-          label: 'baseButton',
-          appearance: 'none',
-          textDecoration: 'none' /* for links styled as buttons */,
-          touchAction: 'manipulation',
-          // This sets the focus ring's border radius displayed by the `View`
-          borderRadius:
-            size === 'condensedSmall' || size === 'condensedMedium'
-              ? componentTheme.borderRadiusSm
-              : componentTheme.borderRadius,
-          ...shapeVariants[shape!],
-          // Prevents vertical stretching in flex parents with fixed height
-          // Avoids background/focus ring distortion
-          height: 'fit-content',
+    baseButton: {
+      ...(isEnabled
+        ? {
+            label: 'baseButton',
+            appearance: 'none',
+            textDecoration: 'none' /* for links styled as buttons */,
+            touchAction: 'manipulation',
+            // This sets the focus ring's border radius displayed by the `View`
+            borderRadius:
+              size === 'condensedSmall' || size === 'condensedMedium'
+                ? componentTheme.borderRadiusSm
+                : componentTheme.borderRadius,
+            ...shapeVariants[shape!],
+            // Prevents vertical stretching in flex parents with fixed height
+            // Avoids background/focus ring distortion
+            height: 'fit-content',
 
-          '&::-moz-focus-inner': {
-            border: '0' /* removes default dotted focus outline in Firefox */
-          },
-          '*': {
-            pointerEvents:
-              'none' /* Ensures that button or link is always the event target */
-          },
-          '&:focus': {
-            textDecoration: 'none'
-          },
-          '&:hover > [class$=-baseButton__content]':
-            colorVariants[color!].hover,
-          '&:active > [class$=-baseButton__content]':
-            colorVariants[color!].active,
+            '&::-moz-focus-inner': {
+              border: '0' /* removes default dotted focus outline in Firefox */
+            },
+            '*': {
+              pointerEvents:
+                'none' /* Ensures that button or link is always the event target */
+            },
+            '&:focus': {
+              textDecoration: 'none'
+            },
+            '&:hover > [class$=-baseButton__content]':
+              colorVariants[color!].hover,
+            '&:active > [class$=-baseButton__content]':
+              colorVariants[color!].active
+          }
+        : // When not enabled (disabled/readonly) skip all interactive styles (hover/active/focus)
+          {
+            textDecoration: 'none',
+            label: 'baseButton',
+            appearance: 'none'
+          }),
 
-          //TODO not the greatest solution. Must be stronger than the same &&& enforcement of <View>
-          ...(color === 'ai-secondary'
-            ? {
-                '&&&&&&&&&&': {
-                  padding: componentTheme.borderWidth,
-                  ...(shape !== 'circle'
-                    ? {
-                        borderRadius: `calc(${componentTheme.borderRadius} + ${componentTheme.borderWidth})`
-                      }
-                    : { borderRadius: componentTheme.borderRadiusFull }),
-                  '&::before': {
-                    content: '""',
-                    position: 'absolute',
-                    inset: '0',
-                    borderRadius: 'inherit',
-                    padding: componentTheme.borderWidth,
-                    background: `linear-gradient(to bottom, ${componentTheme.aiBorderTopGradientColor} 0%, ${componentTheme.aiBorderBottomGradientColor} 100%)`,
-                    WebkitMask:
-                      'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-                    WebkitMaskComposite: 'xor',
-                    mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-                    maskComposite: 'exclude',
-                    pointerEvents: 'none'
+      //TODO not the greatest solution. Must be stronger than the same &&& enforcement of <View>
+      // The ai-secondary border must render in both enabled and disabled states.
+      ...(color === 'ai-secondary'
+        ? {
+            '&&&&&&&&&&': {
+              padding: componentTheme.borderWidth,
+              ...(shape !== 'circle'
+                ? {
+                    borderRadius: `calc(${componentTheme.borderRadius} + ${componentTheme.borderWidth})`
                   }
-                }
+                : { borderRadius: componentTheme.borderRadiusFull }),
+              '&::before': {
+                content: '""',
+                position: 'absolute',
+                inset: '0',
+                borderRadius: 'inherit',
+                padding: componentTheme.borderWidth,
+                background: isDisabled
+                  ? componentTheme.aiSecondaryDisabledBorderColor
+                  : `linear-gradient(to bottom, ${componentTheme.aiBorderTopGradientColor} 0%, ${componentTheme.aiBorderBottomGradientColor} 100%)`,
+                WebkitMask:
+                  'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                WebkitMaskComposite: 'xor',
+                mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                maskComposite: 'exclude',
+                pointerEvents: 'none'
               }
-            : {})
-        }
-      : {
-          textDecoration: 'none',
-          label: 'baseButton',
-          appearance: 'none'
-        },
+            }
+          }
+        : {})
+    },
     content: {
       label: 'baseButton__content',
       opacity: componentTheme.opacityBase,
