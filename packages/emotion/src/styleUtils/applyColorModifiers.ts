@@ -26,7 +26,7 @@ import { colorToHsla } from '@instructure/ui-color-utils'
 type ModifyColor = {
   value: string
   modify: {
-    type: 'lighten' | 'darken'
+    type: 'lighten' | 'darken' | 'alpha'
     value: number
   }
 }
@@ -65,6 +65,11 @@ const resolveModifyColor = ({ value, modify }: ModifyColor): string => {
     const newL = modifyLightness(l, modify.value, modify.type)
     return formatHsla(h, s, newL, a)
   }
+  if (modify.type === 'alpha') {
+    const { h, s, l } = colorToHsla(value)
+    const newA = Math.min(1, Math.max(0, Number(modify.value)))
+    return formatHsla(h, s, l, newA)
+  }
   return value
 }
 
@@ -73,9 +78,11 @@ const resolveModifyColor = ({ value, modify }: ModifyColor): string => {
  * shaped as `{ value, modify: { type, value } }`. Entries with `modify.type` of
  * `'darken'` or `'lighten'` are transformed in HSL space using the same math
  * Tokens Studio applies (`space: "hsl"`): `amount` is a 0–1 fraction of the
- * remaining distance to black/white. Plain values and unrecognized modifier
- * types are passed through unchanged. Nested plain objects are walked
- * recursively so modifiers anywhere in the tree get resolved.
+ * remaining distance to black/white. Entries with `modify.type` of `'alpha'`
+ * have their alpha channel replaced by `modify.value` (clamped to 0–1), matching
+ * Tokens Studio's `alpha` modifier. Plain values and unrecognized modifier types
+ * are passed through unchanged. Nested plain objects are walked recursively so
+ * modifiers anywhere in the tree get resolved.
  *
  * @param componentTheme - Theme map whose values can be CSS strings, `ModifyColor`
  *   objects, or nested theme objects containing the same.
