@@ -9467,8 +9467,8 @@ packages:
     engines: {node: '>=0.10.0'}
     hasBin: true
 
-  electron-to-chromium@1.5.376:
-    resolution: {integrity: sha512-cUVA7/RvbFTEuw/i3obUwDTRIXojaxkResf+ibByPFxjc6XK3VNtcQXV0NSbAlJ0FMjcJGgftVVB4Qo184EXvA==}
+  electron-to-chromium@1.5.378:
+    resolution: {integrity: sha512-VinvOAuuPmdD1guEgGv5f2Qp7/vlfqOrUOMYNnOD4wj3pit8kRsQHzfIf6teyUGWo15Tg5+bOJaRunvyltpVWQ==}
 
   emoji-regex@10.6.0:
     resolution: {integrity: sha512-toUI84YS5YmxW219erniWD0CIVOo46xGKColeNQRgOzDorgBi1v4D71/OFzgD9GO2UGKIv1C3Sp8DAn0+j5w7A==}
@@ -11647,8 +11647,8 @@ packages:
     engines: {node: ^20.17.0 || >=22.9.0}
     hasBin: true
 
-  node-releases@2.0.48:
-    resolution: {integrity: sha512-1uz8041X6LoI6ZSdZacM9lVY28vuzDlSKitnpbSNK0RfKoIJkX29NBPVEFXhnuSuEOA9Ww0xnPJ+ILWbGAv8DA==}
+  node-releases@2.0.49:
+    resolution: {integrity: sha512-f06bl1D+8ZDkn2oOQQKAh5/otFWqVnM1Q5oerA8Pex7UfT66Tx4IPHIqVVFKqFT3FUtaDstdgkM7yT7JWhqxfw==}
     engines: {node: '>=18'}
 
   nopt@8.1.0:
@@ -17514,8 +17514,8 @@ snapshots:
     dependencies:
       baseline-browser-mapping: 2.10.38
       caniuse-lite: 1.0.30001799
-      electron-to-chromium: 1.5.376
-      node-releases: 2.0.48
+      electron-to-chromium: 1.5.378
+      node-releases: 2.0.49
       update-browserslist-db: 1.2.3(browserslist@4.28.4)
 
   buffer-alloc-unsafe@1.1.0: {}
@@ -18550,7 +18550,7 @@ snapshots:
     dependencies:
       jake: 10.9.4
 
-  electron-to-chromium@1.5.376: {}
+  electron-to-chromium@1.5.378: {}
 
   emoji-regex@10.6.0: {}
 
@@ -21249,7 +21249,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  node-releases@2.0.48: {}
+  node-releases@2.0.49: {}
 
   nopt@8.1.0:
     dependencies:

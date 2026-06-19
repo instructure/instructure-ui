@@ -107,6 +107,14 @@ class Modal extends Component<ModalProps, ModalState> {
   componentDidUpdate(prevProps: ModalProps) {
     if (this.props.open !== prevProps.open) {
       this.setState({ transitioning: true, open: !!this.props.open })
+      // When closing, release focus from the Dialog.
+      // The Dialog stays open so its content can fade out, but the
+      // Transition marks the exiting subtree aria-hidden -- keeping focus inside
+      // it would hide a focused element from assistive tech resulting in a
+      // console warning
+      if (prevProps.open && !this.props.open) {
+        this._content?.blur()
+      }
     }
     this.props.makeStyles?.()
   }
@@ -284,31 +292,31 @@ class Modal extends Component<ModalProps, ModalState> {
         onOpen={this.handlePortalOpen}
         data-cid="Modal"
       >
-        <Transition
-          in={open}
-          transitionOnMount
-          type={transition}
-          onEnter={onEnter}
-          onEntering={onEntering}
-          onEntered={createChainedFunction(
-            this.handleTransitionComplete,
-            onEntered,
-            onOpen
-          )}
-          onExit={onExit}
-          onExiting={onExiting}
-          onExited={createChainedFunction(
-            this.handleTransitionComplete,
-            onExited,
-            onClose
-          )}
+        <ModalContext.Provider
+          value={{
+            bodyScrollAriaLabel: this.state.bodyScrollAriaLabel,
+            setBodyScrollAriaLabel: (txt: string) =>
+              this.setState({ bodyScrollAriaLabel: txt })
+          }}
         >
-          <ModalContext.Provider
-            value={{
-              bodyScrollAriaLabel: this.state.bodyScrollAriaLabel,
-              setBodyScrollAriaLabel: (txt: string) =>
-                this.setState({ bodyScrollAriaLabel: txt })
-            }}
+          <Transition
+            in={open}
+            transitionOnMount
+            type={transition}
+            onEnter={onEnter}
+            onEntering={onEntering}
+            onEntered={createChainedFunction(
+              this.handleTransitionComplete,
+              onEntered,
+              onOpen
+            )}
+            onExit={onExit}
+            onExiting={onExiting}
+            onExited={createChainedFunction(
+              this.handleTransitionComplete,
+              onExited,
+              onClose
+            )}
           >
             {constrain === 'parent' ? (
               <span css={this.props.styles?.constrainContext}>
@@ -317,8 +325,8 @@ class Modal extends Component<ModalProps, ModalState> {
             ) : (
               this.renderDialog(passthroughProps)
             )}
-          </ModalContext.Provider>
-        </Transition>
+          </Transition>
+        </ModalContext.Provider>
       </Portal>
     )
   }
