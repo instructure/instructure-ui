@@ -166,7 +166,7 @@ describe('<Avatar />', () => {
         <Avatar name="Avatar Name" shape="rectangle" />
       )
       const avatarDiv = container.querySelector('div')
-      expect(avatarDiv).toHaveStyle('border-radius: 0')
+      expect(avatarDiv).toHaveStyle('border-radius: 0rem')
     })
   })
 
