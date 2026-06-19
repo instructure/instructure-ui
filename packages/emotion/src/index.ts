@@ -45,7 +45,14 @@ export { useStyleNew } from './useStyleNew.js'
 export { useTheme } from './useTheme.js'
 
 export type { InstUIProviderProps } from './InstUISettingsProvider'
-export type { ComponentStyle, StyleObject, Overrides } from './EmotionTypes'
+export type {
+  ComponentStyle,
+  StyleObject,
+  Overrides,
+  ThemeOverride,
+  ComponentOverride,
+  ThemeOrLegacyOverride
+} from './EmotionTypes'
 export type { WithStyleProps } from './withStyle'
 export type { NewThemeOverrideProp } from './useStyleNew'
 export type {
