@@ -23,6 +23,14 @@
  */
 
 export { InstUISettingsProvider, withStyleNew } from '@instructure/emotion'
+export type {
+  ComponentStyle,
+  StyleObject,
+  Overrides,
+  ThemeOverride,
+  ComponentOverride,
+  ThemeOrLegacyOverride
+} from '@instructure/emotion'
 export {
   AccessibleContent,
   PresentationContent,
@@ -165,7 +173,8 @@ export type {
   FormFieldOwnProps,
   FormFieldProps,
   FormMessage,
-  FormMessageType
+  FormMessageType,
+  FormMessageChild
 } from '@instructure/ui-form-field/v11_7'
 export { Grid, GridRow, GridCol } from '@instructure/ui-grid/v11_7'
 export type {
@@ -461,6 +470,10 @@ export type {
   TopNavBarActionItemsOwnProps,
   TopNavBarBrandProps,
   TopNavBarBrandOwnProps,
+  /**
+   * This is an alias for the `ItemChild` type in `TopNavBarItem`
+   */
+  ItemChild as TopNavBarItemChild,
   TopNavBarItemProps,
   TopNavBarItemOwnProps,
   TopNavBarItemTooltipType,
@@ -487,6 +500,14 @@ export {
 } from '@instructure/ui-tree-browser/v11_7'
 export type {
   TreeBrowserButtonProps,
+  /**
+   * This is an alias for the `Collection` type in `TreeBrowser`
+   */
+  Collection as TreeBrowserCollection,
+  /**
+   * This is an alias for the `CollectionData` type in `TreeBrowser`
+   */
+  CollectionData as TreeBrowserCollectionData,
   TreeBrowserProps,
   TreeBrowserCollectionProps,
   TreeBrowserNodeProps
