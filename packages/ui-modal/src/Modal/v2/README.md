@@ -618,16 +618,14 @@ You can do this with the `insertAt` prop or a theme override:
   type: code
 ---
 <InstUISettingsProvider
-      theme={{
-        themeOverrides: {
-            componentOverrides: {
-              Mask: {
-                zIndex: 555,
-              }
-            }
-          }
-      }}
-    >
+  themeOverride={{
+    components: {
+      Mask: {
+        zIndex: 555
+      }
+    }
+  }}
+>
   <Modal />
 </InstUISettingsProvider>
 ```
