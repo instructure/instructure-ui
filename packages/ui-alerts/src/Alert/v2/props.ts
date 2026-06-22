@@ -110,6 +110,11 @@ type AlertOwnProps = {
    * An icon, or function that returns an icon. Setting it will override the variant's icon.
    */
   renderCustomIcon?: Renderable
+
+  /**
+   * provides a reference to the underlying html root element
+   */
+  elementRef?: (element: Element | null) => void
 }
 
 type PropKeys = keyof AlertOwnProps
@@ -138,7 +143,8 @@ const allowedProps: AllowedPropKeys = [
   'transition',
   'open',
   'hasShadow',
-  'renderCustomIcon'
+  'renderCustomIcon',
+  'elementRef'
 ]
 
 type AlertState = {
