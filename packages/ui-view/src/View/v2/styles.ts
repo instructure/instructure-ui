@@ -52,10 +52,28 @@ const processBorderRadiusValue = (
     if (v === 'circle') return '100%'
     if (v === 'pill') return '999em'
 
+    // Handle legacy values
+    if (v === 'small') return sharedTokens.legacy.radiusSmall
+    if (v === 'medium') return sharedTokens.legacy.radiusMedium
+    if (v === 'large') return sharedTokens.legacy.radiusLarge
+
     // Handle SharedTokens values
-    if (v === 'small') return sharedTokens.legacy.radiusSmall // 2px in Canvas
-    if (v === 'medium') return sharedTokens.legacy.radiusMedium // 4px in Canvas
-    if (v === 'large') return sharedTokens.legacy.radiusLarge // 8px in Canvas
+    if (v === 'xxl') return sharedTokens.borderRadius.xxl
+    if (v === 'xl') return sharedTokens.borderRadius.xl
+    if (v === 'lg') return sharedTokens.borderRadius.lg
+    if (v === 'md') return sharedTokens.borderRadius.md
+    if (v === 'sm') return sharedTokens.borderRadius.sm
+    if (v === 'xs') return sharedTokens.borderRadius.xs
+    if (v === 'full') return sharedTokens.borderRadius.full
+    if (v === 'card.nestedContainer.sm')
+      return sharedTokens.borderRadius.card.nestedContainer.sm
+    if (v === 'card.nestedContainer.md')
+      return sharedTokens.borderRadius.card.nestedContainer.md
+    if (v === 'card.nestedContainer.lg')
+      return sharedTokens.borderRadius.card.nestedContainer.lg
+    if (v === 'card.sm') return sharedTokens.borderRadius.card.sm
+    if (v === 'card.md') return sharedTokens.borderRadius.card.md
+    if (v === 'card.lg') return sharedTokens.borderRadius.card.lg
 
     // Pass through CSS values (1rem, 12px, etc.)
     return v
@@ -78,10 +96,15 @@ const processBorderWidthValue = (
     if (v === 'auto' || v === '0') return v
     if (v === 'none') return '0'
 
-    // Handle SharedTokens values
+    // Handle legacy values
     if (v === 'small') return sharedTokens.strokeWidth.sm
     if (v === 'medium') return sharedTokens.strokeWidth.md
     if (v === 'large') return sharedTokens.strokeWidth.lg
+
+    // Handle SharedTokens values
+    if (v === 'sm') return sharedTokens.strokeWidth.sm
+    if (v === 'md') return sharedTokens.strokeWidth.md
+    if (v === 'lg') return sharedTokens.strokeWidth.lg
 
     // Pass through CSS values (1rem, 2px, etc.)
     return v
@@ -336,6 +359,7 @@ const generateStyle = (
   }
 
   const borderColorVariants: Record<BorderColor, { borderColor: string }> = {
+    //legacy colors
     transparent: {
       borderColor: componentTheme.borderColorTransparent
     },
@@ -362,6 +386,52 @@ const generateStyle = (
     },
     danger: {
       borderColor: componentTheme.borderColorDanger
+    },
+    //new colors
+    strongColor: {
+      borderColor: sharedTokens.stroke.strongColor
+    },
+    visualSeparator: {
+      borderColor: sharedTokens.stroke.visualSeparator
+    },
+    accentAsh: {
+      borderColor: sharedTokens.stroke.accentAsh
+    },
+    accentAurora: {
+      borderColor: sharedTokens.stroke.accentAurora
+    },
+    accentBlue: {
+      borderColor: sharedTokens.stroke.accentBlue
+    },
+    accentGreen: {
+      borderColor: sharedTokens.stroke.accentGreen
+    },
+    accentGrey: {
+      borderColor: sharedTokens.stroke.accentGrey
+    },
+    accentHoney: {
+      borderColor: sharedTokens.stroke.accentHoney
+    },
+    accentOrange: {
+      borderColor: sharedTokens.stroke.accentOrange
+    },
+    accentPlum: {
+      borderColor: sharedTokens.stroke.accentPlum
+    },
+    accentRed: {
+      borderColor: sharedTokens.stroke.accentRed
+    },
+    accentSea: {
+      borderColor: sharedTokens.stroke.accentSea
+    },
+    accentSky: {
+      borderColor: sharedTokens.stroke.accentSky
+    },
+    accentStone: {
+      borderColor: sharedTokens.stroke.accentStone
+    },
+    accentViolet: {
+      borderColor: sharedTokens.stroke.accentViolet
     }
   }
 
@@ -425,6 +495,7 @@ const generateStyle = (
   }
 
   const shadowVariants = {
+    //legacy
     topmost: {
       boxShadow: boxShadowObjectsToCSSString(sharedTokens.boxShadow.elevation4)
     },
@@ -434,7 +505,20 @@ const generateStyle = (
     above: {
       boxShadow: boxShadowObjectsToCSSString(sharedTokens.boxShadow.elevation2)
     },
-    none: {}
+    none: {},
+    //new
+    elevation1: {
+      boxShadow: boxShadowObjectsToCSSString(sharedTokens.boxShadow.elevation1)
+    },
+    elevation2: {
+      boxShadow: boxShadowObjectsToCSSString(sharedTokens.boxShadow.elevation2)
+    },
+    elevation3: {
+      boxShadow: boxShadowObjectsToCSSString(sharedTokens.boxShadow.elevation3)
+    },
+    elevation4: {
+      boxShadow: boxShadowObjectsToCSSString(sharedTokens.boxShadow.elevation4)
+    }
   }
 
   const {

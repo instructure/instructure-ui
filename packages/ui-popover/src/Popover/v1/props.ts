@@ -24,7 +24,7 @@
 import React from 'react'
 import { BorderWidth } from '@instructure/emotion'
 
-import type { Shadow, Stacking, WithStyleProps } from '@instructure/emotion'
+import type { Stacking, WithStyleProps } from '@instructure/emotion'
 
 import type {
   PlacementPropValues,
@@ -70,7 +70,7 @@ type PopoverOwnProps = {
   /**
    * Controls the shadow depth for the `<Popover />`
    */
-  shadow?: Shadow
+  shadow?: 'resting' | 'above' | 'topmost' | 'none'
 
   /**
    * Controls the z-index depth for the `<Popover />` content

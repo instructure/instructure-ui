@@ -33,8 +33,6 @@ import type {
   WithStyleProps,
   Spacing,
   BorderWidth,
-  BorderRadii,
-  Shadow,
   Stacking,
   ComponentStyle,
   StyleObject
@@ -182,11 +180,11 @@ type ViewOwnProps = {
    * assigned to individual corners in CSS shorthand style (e.g., `"medium large none pill"`).
    * Also accepts valid CSS length values like `1rem` or `12px`
    */
-  borderRadius?: BorderRadii
+  borderRadius?: string
   /**
    * Controls the shadow depth for the `<View />`
    */
-  shadow?: Shadow
+  shadow?: 'resting' | 'above' | 'topmost' | 'none'
 
   /**
    * Controls the z-index depth for the `<View />`

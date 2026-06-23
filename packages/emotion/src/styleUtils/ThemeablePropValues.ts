@@ -29,7 +29,11 @@ const ThemeablePropValues = {
     resting: 'resting',
     above: 'above',
     topmost: 'topmost',
-    none: 'none'
+    none: 'none',
+    elevation1: 'elevation1',
+    elevation2: 'elevation2',
+    elevation3: 'elevation3',
+    elevation4: 'elevation4'
   },
 
   STACKING_TYPES: {
@@ -178,12 +182,6 @@ type Stacking = (typeof ThemeablePropValues.STACKING_TYPES)[StackingKeys]
 type BackgroundKeys = keyof typeof ThemeablePropValues.BACKGROUNDS
 type Background = (typeof ThemeablePropValues.BACKGROUNDS)[BackgroundKeys]
 
-// BORDER_RADII
-type BorderRadiiKeys = keyof typeof ThemeablePropValues.BORDER_RADII
-type BorderRadiiValues =
-  (typeof ThemeablePropValues.BORDER_RADII)[BorderRadiiKeys]
-type BorderRadii = CSSShorthandValue<BorderRadiiValues | string> // TODO type better for actual values like '12px'
-
 // BORDER_WIDTHS
 type BorderWidthKeys = keyof typeof ThemeablePropValues.BORDER_WIDTHS
 type BorderWidthValues =
@@ -199,8 +197,6 @@ export type {
   Shadow,
   Stacking,
   Background,
-  BorderRadiiValues,
-  BorderRadii,
   BorderWidthValues,
   BorderWidth
 }

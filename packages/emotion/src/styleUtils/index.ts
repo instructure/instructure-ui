@@ -36,8 +36,6 @@ export type {
   Shadow,
   Stacking,
   Background,
-  BorderRadiiValues,
-  BorderRadii,
   BorderWidthValues,
   BorderWidth
 } from './ThemeablePropValues'

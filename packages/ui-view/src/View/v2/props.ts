@@ -31,14 +31,13 @@ import type {
 import type {
   WithStyleProps,
   Spacing,
-  BorderWidth,
-  BorderRadii,
   Shadow,
   Stacking,
   ComponentStyle,
   StyleObject
 } from '@instructure/emotion'
 import type { NewComponentTypes } from '@instructure/ui-themes'
+import type { CSSShorthandValue } from '@instructure/shared-types'
 
 type BorderColor =
   | string
@@ -51,6 +50,21 @@ type BorderColor =
   | 'warning'
   | 'alert'
   | 'danger'
+  | 'strongColor'
+  | 'visualSeparator'
+  | 'accentAsh'
+  | 'accentAurora'
+  | 'accentBlue'
+  | 'accentGreen'
+  | 'accentGrey'
+  | 'accentHoney'
+  | 'accentOrange'
+  | 'accentPlum'
+  | 'accentRed'
+  | 'accentSea'
+  | 'accentSky'
+  | 'accentStone'
+  | 'accentViolet'
 
 type ViewOwnProps = {
   /**
@@ -176,13 +190,15 @@ type ViewOwnProps = {
    * Accepts the familiar CSS shorthand to designate border widths corresponding
    * to edges
    */
-  borderWidth?: BorderWidth
+  borderWidth?: CSSShorthandValue<
+    '0' | 'none' | 'small' | 'medium' | 'large' | 'sm' | 'md' | 'lg'
+  >
   /**
    * Accepts `small`, `medium`, `large`, `circle`, and `pill`. Border radius can be
    * assigned to individual corners in CSS shorthand style (e.g., `"medium large none pill"`).
    * Also accepts valid CSS length values like `1rem` or `12px`
    */
-  borderRadius?: BorderRadii
+  borderRadius?: string
   /**
    * Controls the shadow depth for the `<View />`
    */

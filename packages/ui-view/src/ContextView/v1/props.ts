@@ -30,7 +30,6 @@ import type {
 } from '@instructure/shared-types'
 import type { PlacementPropValues } from '@instructure/ui-position'
 import type {
-  Shadow,
   Spacing,
   Stacking,
   WithStyleProps,
@@ -52,7 +51,7 @@ type ContextViewOwnProps = {
   debug?: boolean
   margin?: Spacing
   padding?: Spacing
-  shadow?: Shadow
+  shadow?: 'resting' | 'above' | 'topmost' | 'none'
   stacking?: Stacking
   placement?: PlacementPropValues
   borderColor?: string
