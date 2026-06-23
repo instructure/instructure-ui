@@ -66,16 +66,21 @@ execSync(
   opts
 )
 
-mark('Building packages with Babel')
-execSync('pnpm run build', opts)
+// The Babel build and the TypeScript declaration build
+// (tsc -b, src -> .d.ts) are mutually independent, so we
+// run them concurrently. `--kill-others-on-fail` aborts the whole step (and
+// thus bootstrap) the moment either branch fails.
+mark('Building packages + types (parallel)')
+execSync(
+  'pnpm exec concurrently --kill-others-on-fail -n build,types -c blue,green ' +
+    '"pnpm run build" "pnpm run build:types"',
+  opts
+)
 
 mark('Generating design tokens')
 execSync('pnpm run build:tokens', opts)
 
-mark('Building TypeScript declarations')
-execSync('pnpm run build:types', opts)
-
-// Log build time summary. Assumes that the build is not parallel
+// Log build time summary (the parallel build above is measured as one section).
 steps[steps.length - 1].duration = Date.now() - steps[steps.length - 1].start
 
 const total = Date.now() - bootstrapStart
