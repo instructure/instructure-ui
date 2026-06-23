@@ -17,3 +17,4 @@ overrides:
   "react-dom": "18.3.1"
   "@types/react": "18.3.26"
   "git-raw-commits>dargs": "7.0.0"
+  "browserslist": "4.28.4" # its here only because 4.28.3 is broken. Remove after July 2026
