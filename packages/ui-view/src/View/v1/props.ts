@@ -34,7 +34,6 @@ import type {
   Spacing,
   BorderWidth,
   BorderRadii,
-  Shadow,
   Stacking,
   ComponentStyle,
   StyleObject
@@ -186,7 +185,7 @@ type ViewOwnProps = {
   /**
    * Controls the shadow depth for the `<View />`
    */
-  shadow?: Shadow
+  shadow?: 'resting' | 'above' | 'topmost' | 'none'
 
   /**
    * Controls the z-index depth for the `<View />`
