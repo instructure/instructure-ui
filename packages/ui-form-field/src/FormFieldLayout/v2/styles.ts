@@ -127,10 +127,9 @@ const generateStyle = (
       // when inline add a small padding between the label and the control
       paddingRight: componentTheme.gapPrimitives,
       // and use the horizontal alignment prop
-      [`@media screen and (width >= ${componentTheme.stackedOrInlineBreakpoint})`]:
-        {
-          textAlign: labelAlign
-        }
+      [`@media screen and (width >= ${sharedTokens.breakpoints.md})`]: {
+        textAlign: labelAlign
+      }
     })
   }
 
@@ -158,17 +157,16 @@ const generateStyle = (
       verticalAlign: 'middle', // removes margin in inline layouts
       gridTemplateColumns: gridTemplateColumns,
       gridTemplateAreas: gridTemplateAreas,
-      [`@media screen and (width < ${componentTheme.stackedOrInlineBreakpoint})`]:
-        {
-          // for small screens use the stacked layout
-          gridTemplateColumns: '100%',
-          gridTemplateAreas: generateGridLayout(
-            false,
-            hasErrorMsgAndIsGroup,
-            hasVisibleLabel,
-            hasMessages
-          )
-        },
+      [`@media screen and (width < ${sharedTokens.breakpoints.md})`]: {
+        // for small screens use the stacked layout
+        gridTemplateColumns: '100%',
+        gridTemplateAreas: generateGridLayout(
+          false,
+          hasErrorMsgAndIsGroup,
+          hasVisibleLabel,
+          hasMessages
+        )
+      },
       columnGap: '0.375rem',
       rowGap: hasNonEmptyMessages ? componentTheme.gapPrimitives : '0',
       width: '100%',
@@ -193,10 +191,9 @@ const generateStyle = (
       ...(hasMessages && hasErrorMsgAndIsGroup && { marginTop: '0.375rem' }),
       ...(isInlineLayout &&
         inline && {
-          [`@media screen and (width >= ${componentTheme.stackedOrInlineBreakpoint})`]:
-            {
-              justifySelf: 'start'
-            }
+          [`@media screen and (width >= ${sharedTokens.breakpoints.md})`]: {
+            justifySelf: 'start'
+          }
         })
     },
     requiredAsterisk: {

@@ -33,15 +33,7 @@ import type { DocDataType } from '../Document/props'
 import type { Theme } from '@instructure/ui-themes'
 import type { ThemeVariables } from '@instructure/shared-types'
 
-type AppOwnProps = {
-  trayWidth: number
-}
-
-type PropKeys = keyof AppOwnProps
-type AllowedPropKeys = Readonly<Array<PropKeys>>
-type AppProps = AppOwnProps & WithStyleProps<AppTheme, AppStyle>
-
-const allowedProps: AllowedPropKeys = ['trayWidth']
+type AppProps = WithStyleProps<AppTheme, AppStyle>
 
 type AppStyle = ComponentStyle<
   | 'app'
@@ -73,7 +65,7 @@ type AppTheme = {
   navBorderWidth: string | 0
 }
 
-type LayoutSize = 'small' | 'medium' | 'large' | 'x-large'
+type LayoutSize = 'small' | 'medium' | 'large'
 
 type AppState = {
   themeKey?: string
@@ -112,4 +104,3 @@ type DocData = ProcessedFile & {
 }
 
 export type { AppProps, AppState, DocData, LayoutSize, AppStyle, AppTheme }
-export { allowedProps }

@@ -94,17 +94,7 @@ const generateStyle = (componentTheme: AppTheme): AppStyle => {
     globalStyles: {
       html: {
         height: '100%',
-        fontSize: '85%'
-      },
-      '@media screen and (min-width: 600px)': {
-        html: {
-          fontSize: '92%'
-        }
-      },
-      '@media screen and (min-width: 900px)': {
-        html: {
-          fontSize: '100%'
-        }
+        fontSize: '100%'
       },
       body: {
         height: '100%',

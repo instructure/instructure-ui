@@ -42,68 +42,131 @@ export default function ButtonPage() {
   useEffect(() => {
     myElementRef?.current?.focus()
   })
-  const colors = [
-    'primary',
-    'primary-inverse',
-    'secondary',
-    'success',
-    'danger'
-  ] as const
-  const sizes = ['small', 'medium', 'large'] as const
   return (
     <main className="flex gap-8 p-8 flex-col items-start axe-test">
       <div style={{ display: 'flex', gap: '0.5rem' }}>
         <Button>Button</Button>
-        {colors.map((color) => (
-          <Button key={'color' + color} color={color}>
-            {color} color
+        <Button color="primary">primary</Button>
+        <View
+          display="inline-block"
+          background="primary-inverse"
+          padding="small"
+        >
+          <Button color="primary-inverse">primary-inverse</Button>
+        </View>
+        <Button color="secondary">secondary</Button>
+        <Button color="success">success</Button>
+        <Button color="danger">danger</Button>
+      </div>
+      withBackground = false:
+      <div style={{ display: 'flex', gap: '0.5rem' }}>
+        <Button withBackground={false}>Button</Button>
+        <Button color="primary" withBackground={false}>
+          primary
+        </Button>
+        <View
+          display="inline-block"
+          background="primary-inverse"
+          padding="small"
+        >
+          <Button color="primary-inverse" withBackground={false}>
+            primary-inverse
           </Button>
-        ))}
+        </View>
+        <Button color="secondary" withBackground={false}>
+          secondary
+        </Button>
+        <Button color="success" withBackground={false}>
+          success
+        </Button>
+        <Button color="danger" withBackground={false}>
+          danger
+        </Button>
       </div>
       <div style={{ display: 'flex', gap: '0.5rem' }}>
-        {sizes.map((size) => (
-          <Button key={'size' + size} size={size}>
-            {size} size
-          </Button>
-        ))}
+        <Button size="small">small</Button>
+        <Button size="medium">medium</Button>
+        <Button size="large">large</Button>
       </div>
       <Button renderIcon={<IconAddLine />}>Icon Button</Button>
-      <Button disabled>Disabled Button</Button>
+      Disabled:
+      <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+        <Button disabled>Button</Button>
+        <Button disabled withBackground={false}>
+          no bg
+        </Button>
+        <Button disabled color="ai-primary">
+          AI
+        </Button>
+        <Button disabled color="danger">
+          danger
+        </Button>
+        <Button disabled color="danger" withBackground={false}>
+          danger no bg
+        </Button>
+        <View
+          display="inline-block"
+          background="primary-inverse"
+          padding="small"
+        >
+          <Button disabled color="primary-inverse">
+            primary-inverse
+          </Button>
+          <Button disabled withBackground={false} color="primary-inverse">
+            primary-inverse no bg
+          </Button>
+        </View>
+      </div>
       <Button ref={myElementRef}>focused button</Button>
       <CondensedButton>CondensedButton</CondensedButton>
-      {/* Positioned CloseButton (placement=end, offset=small) */}
-      <View
-        display="block"
-        position="relative"
-        height="5rem"
-        width="10rem"
-        background="primary"
-        shadow="resting"
-      >
-        <CloseButton placement="end" offset="small" screenReaderLabel="Close" />
-      </View>
-
-      <View
-        display="block"
-        position="relative"
-        background="primary"
-        shadow="resting"
-      >
-        <Flex
-          height="6rem"
-          justifyItems="space-between"
-          alignItems="center"
-          padding="medium"
-        >
-          <Flex.Item shouldShrink shouldGrow>
-            <h2>A heading</h2>
-          </Flex.Item>
-          <Flex.Item padding="none none none medium">
-            <CloseButton size="medium" screenReaderLabel="Close" />
-          </Flex.Item>
-        </Flex>
-      </View>
       <div style={{ display: 'flex', gap: '0.5rem' }}>
+        <View
+          display="block"
+          position="relative"
+          height="5rem"
+          width="10rem"
+          background="primary"
+          shadow="resting"
+        >
+          <CloseButton
+            placement="end"
+            offset="small"
+            screenReaderLabel="Close"
+          />
+        </View>
+
+        <View
+          display="block"
+          position="relative"
+          background="primary"
+          shadow="resting"
+        >
+          <Flex
+            height="6rem"
+            justifyItems="space-between"
+            alignItems="center"
+            padding="medium"
+          >
+            <Flex.Item shouldShrink shouldGrow>
+              <h2>A heading</h2>
+            </Flex.Item>
+            <Flex.Item padding="none none none medium">
+              <CloseButton size="medium" screenReaderLabel="Close" />
+            </Flex.Item>
+          </Flex>
+        </View>
+      </div>
+      <div style={{ display: 'flex', gap: '0.5rem' }}>
+        <Button color="ai-primary" renderIcon={<IconAiSolid />} margin="small">
+          AI Primary
+        </Button>
+        <Button
+          color="ai-secondary"
+          renderIcon={<IconAiColoredSolid />}
+          margin="small"
+        >
+          AI Secondary
+        </Button>
         <IconButton screenReaderLabel="Add User">
           <IconAddLine />
         </IconButton>
@@ -113,6 +176,8 @@ export default function ButtonPage() {
         <IconButton screenReaderLabel="View user profile">
           <IconUserLine />
         </IconButton>
+      </div>
+      <div style={{ display: 'flex', gap: '0.5rem' }}>
         <IconButton
           color="ai-primary"
           screenReaderLabel="AI button"

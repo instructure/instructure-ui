@@ -24,7 +24,7 @@
 
 import { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 import type { ThemeVariables } from '@instructure/shared-types'
-import { DocData } from '../App/props'
+import type { DocData, LayoutSize } from '../App/props'
 import type { Theme, NewBaseTheme } from '@instructure/ui-themes'
 
 type DocDataType = DocData & { legacyGitBranch?: string }
@@ -34,7 +34,7 @@ type DocumentOwnProps = {
   description: string
   themeVariables?: Theme
   repository?: string
-  layout?: 'small' | 'medium' | 'large' | 'x-large'
+  layout?: LayoutSize
   selectedMinorVersion?: string
 }
 

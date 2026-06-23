@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { NewComponentTypes } from '@instructure/ui-themes'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import type { GridBreakpoints } from '../../utils/v1/GridTypes'
 import type { GridRowProps, GridRowStyle } from './props'
 
@@ -31,14 +31,15 @@ import type { GridRowProps, GridRowStyle } from './props'
  * private: true
  * ---
  * Generates the style object from the theme and provided additional information
- * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
- * @return {Object} The final style object, which will be used in the component
+ * @param componentTheme The theme variable object.
+ * @param props the props of the component, the style is applied to
+ * @param sharedTokens Shared token object that stores common values for the theme.
+ * @return The final style object, which will be used in the component
  */
 const generateStyle = (
   componentTheme: ReturnType<NewComponentTypes['GridRow']>,
-  props: GridRowProps
+  props: GridRowProps,
+  sharedTokens: SharedTokens
 ): GridRowStyle => {
   const {
     hAlign,
@@ -102,13 +103,13 @@ const generateStyle = (
 
       ...getStartAtVariants('small'),
 
-      [`@media screen and (min-width: ${componentTheme.mediumMin})`]: {
+      [`@media screen and (min-width: ${sharedTokens.breakpoints.md})`]: {
         ...getStartAtVariants('medium')
       },
-      [`@media screen and (min-width: ${componentTheme.largeMin})`]: {
+      [`@media screen and (min-width: ${sharedTokens.breakpoints.lg})`]: {
         ...getStartAtVariants('large')
       },
-      [`@media screen and (min-width: ${componentTheme.xLargeMin})`]: {
+      [`@media screen and (min-width: ${sharedTokens.breakpoints.xl})`]: {
         ...getStartAtVariants('x-large')
       },
 

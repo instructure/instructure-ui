@@ -22,11 +22,12 @@
  * SOFTWARE.
  */
 import type { DocDataType } from '../Document/props'
+import type { LayoutSize } from '../App/props'
 
 type ParamsOwnProp = {
   params: DocDataType['params']
   genericParameters: DocDataType['genericParameters']
-  layout?: 'small' | 'medium' | 'large' | 'x-large'
+  layout?: LayoutSize
 }
 type PropKeys = keyof ParamsOwnProp
 type AllowedPropKeys = Readonly<Array<PropKeys>>
