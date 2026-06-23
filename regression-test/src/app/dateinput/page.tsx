@@ -72,7 +72,7 @@ export default function DateInputExamplesPage() {
         <DateInput
           locale="en-us"
           dateFormat="de-de"
-          renderLabel="Choose a date (with year picker)"
+          renderLabel="Choose a date (with year picker)!!!!!!!!!!!!!!!!!"
           screenReaderLabels={{
             calendarIcon: 'Calendar',
             nextMonthButton: 'Next month',
@@ -95,7 +95,7 @@ export default function DateInputExamplesPage() {
         <DateInput
           locale="en-us"
           dateFormat="en-us"
-          renderLabel="Choose a date (with disabled dates)"
+          renderLabel="Choose a date (with disabled dates)!!!!!!!!!!!!!!!!!"
           disabledDates={['2025-02-11', '2025-02-12', '2025-02-13']}
           screenReaderLabels={{
             calendarIcon: 'Calendar',
