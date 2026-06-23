@@ -695,7 +695,8 @@ type: embed
   removed={[
     {name:"spacing",note:""},
     {name:"inlinePadding",note:""},
-    {name:"asteriskColor",note:""}
+    {name:"asteriskColor",note:""},
+    {name:"stackedOrInlineBreakpoint",note:"uses now sharedTokens.breakpoints.md"}
   ]}
   changed={[
     {oldName:"color",newName:"textColor",note:""}
@@ -746,10 +747,10 @@ type: embed
 type: embed
 ---
 <V12ChangelogTable
-  changed={[
-    {oldName:"mediumMin",newName:"mediumMin",note:"now only provides the value, not the full media query (e.g., '768px' instead of 'min-width: 768px'). The component now adds the `min-width:` prefix automatically in the generated styles."},
-    {oldName:"largeMin",newName:"largeMin",note:"now only provides the value, not the full media query (e.g., '1024px' instead of 'min-width: 1024px'). The component now adds the `min-width:` prefix automatically in the generated styles."},
-    {oldName:"xLargeMin",newName:"xLargeMin",note:"now only provides the value, not the full media query (e.g., '1440px' instead of 'min-width: 1440px'). The component now adds the `min-width:` prefix automatically in the generated styles."}
+  removed={[
+    {name:"mediumMin",note:"value is read from sharedTokens.breakpoints.md"},
+    {name:"largeMin",note:"value is read from sharedTokens.breakpoints.lg. Its value is now 64em instead of 62em."},
+    {name:"xLargeMin",note:"value is read from sharedTokens.breakpoints.xl. Its value is now 80em instead of 75em."}
   ]}
 />
 
@@ -762,10 +763,10 @@ type: embed
 type: embed
 ---
 <V12ChangelogTable
-  changed={[
-    {oldName:"mediumMin",newName:"mediumMin",note:"now only provides the value, not the full media query (e.g., '768px' instead of 'min-width: 768px'). The component now adds the `min-width:` prefix automatically in the generated styles."},
-    {oldName:"largeMin",newName:"largeMin",note:"now only provides the value, not the full media query (e.g., '1024px' instead of 'min-width: 1024px'). The component now adds the `min-width:` prefix automatically in the generated styles."},
-    {oldName:"xLargeMin",newName:"xLargeMin",note:"now only provides the value, not the full media query (e.g., '1440px' instead of 'min-width: 1440px'). The component now adds the `min-width:` prefix automatically in the generated styles."}
+  removed={[
+    {name:"mediumMin",note:"value is read from sharedTokens.breakpoints.md"},
+    {name:"largeMin",note:"value is read from sharedTokens.breakpoints.lg"},
+    {name:"xLargeMin",note:"value is read from sharedTokens.breakpoints.xl"}
   ]}
 />
 
@@ -778,10 +779,10 @@ type: embed
 type: embed
 ---
 <V12ChangelogTable
-  changed={[
-    {oldName:"mediumMin",newName:"mediumMin",note:"now only provides the value, not the full media query (e.g., '768px' instead of 'min-width: 768px'). The component now adds the `min-width:` prefix automatically in the generated styles."},
-    {oldName:"largeMin",newName:"largeMin",note:"now only provides the value, not the full media query (e.g., '1024px' instead of 'min-width: 1024px'). The component now adds the `min-width:` prefix automatically in the generated styles."},
-    {oldName:"xLargeMin",newName:"xLargeMin",note:"now only provides the value, not the full media query (e.g., '1440px' instead of 'min-width: 1440px'). The component now adds the `min-width:` prefix automatically in the generated styles."}
+  removed={[
+    {name:"mediumMin",note:"value is read from sharedTokens.breakpoints.md"},
+    {name:"largeMin",note:"value is read from sharedTokens.breakpoints.lg"},
+    {name:"xLargeMin",note:"value is read from sharedTokens.breakpoints.xl"}
   ]}
 />
 

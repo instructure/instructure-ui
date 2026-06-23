@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { NewComponentTypes } from '@instructure/ui-themes'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import type { GridBreakpoints } from '../../utils/v1/GridTypes'
 import type { GridColProps, GridColStyle } from './props'
 
@@ -33,14 +33,15 @@ type BreakPoints = NonNullable<GridBreakpoints>
  * private: true
  * ---
  * Generates the style object from the theme and provided additional information
- * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
- * @return {Object} The final style object, which will be used in the component
+ * @param componentTheme The theme variable object.
+ * @param props the props of the component, the style is applied to
+ * @param sharedTokens Shared token object that stores common values for the theme.
+ * @return The final style object, which will be used in the component
  */
 const generateStyle = (
   componentTheme: ReturnType<NewComponentTypes['GridCol']>,
-  props: GridColProps
+  props: GridColProps,
+  sharedTokens: SharedTokens
 ): GridColStyle => {
   const {
     vAlign,
@@ -203,13 +204,13 @@ const generateStyle = (
 
       ...getBreakpointStyles('small'),
 
-      [`@media screen and (min-width: ${componentTheme.mediumMin})`]: {
+      [`@media screen and (min-width: ${sharedTokens.breakpoints.md})`]: {
         ...getBreakpointStyles('medium')
       },
-      [`@media screen and (min-width: ${componentTheme.largeMin})`]: {
+      [`@media screen and (min-width: ${sharedTokens.breakpoints.lg})`]: {
         ...getBreakpointStyles('large')
       },
-      [`@media screen and (min-width: ${componentTheme.xLargeMin})`]: {
+      [`@media screen and (min-width: ${sharedTokens.breakpoints.xl})`]: {
         ...getBreakpointStyles('x-large')
       },
 

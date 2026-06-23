@@ -177,7 +177,7 @@ class Hero extends Component<HeroProps> {
       </InlineSVG>
     )
 
-    const bigScreen = layout === 'large' || layout === 'x-large'
+    const bigScreen = layout === 'large'
     const contentMaxWidth = '84rem'
     const checkmark = <IconCheckMarkSolid inline={false} color="success" />
 

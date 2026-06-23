@@ -33,7 +33,7 @@ class ContentWrap extends Component<ContentWrapProps> {
   static allowedProps = allowedProps
   static defaultProps = {
     children: null,
-    maxWidth: '64rem',
+    maxWidth: '80rem',
     padding: 'none medium'
   }
 

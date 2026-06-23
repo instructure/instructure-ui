@@ -82,7 +82,6 @@ import { LoadingScreen } from '../LoadingScreen'
 import { getComponentsForVersion } from '../../versioned-components'
 import { updateGlobalsForVersion } from '../../globals'
 import type { AppProps, AppState, DocData, LayoutSize } from './props'
-import { allowedProps } from './props'
 import type { ParsedDocSummary } from '../../buildScripts/DataTypes.mjs'
 import { logError } from '@instructure/console'
 import type { Spacing } from '@instructure/emotion'
@@ -97,16 +96,12 @@ import { AppContext } from '../appContext'
 @withStyleForDocs(generateStyle, generateComponentTheme)
 class App extends Component<AppProps, AppState> {
   static displayName = 'App'
-  static allowedProps = allowedProps
   static contextType = AppContext
   declare context: React.ContextType<typeof AppContext>
 
   private navRef = createRef<HTMLElement>()
   private navFocusRegion: FocusRegion | null = null
 
-  static defaultProps = {
-    trayWidth: 300
-  }
   _content?: HTMLDivElement | null
   _menuTrigger?: HTMLButtonElement
   _mediaQueryListener?: ReturnType<typeof addMediaQueryMatchListener>
@@ -119,18 +114,10 @@ class App extends Component<AppProps, AppState> {
 
   constructor(props: AppProps) {
     super(props)
-    // determine what page we're loading
-    const [page] = this.getPathInfo()
-
-    // if there's room for the tray + 700px, load with the tray open (unless it's the homepage)
-    const smallerScreen = window.matchMedia(
-      `(max-width: ${props.trayWidth + 700}px)`
-    ).matches
-    const isHomepage = page === 'index' || typeof page === 'undefined'
-    const showTrayOnPageLoad = !smallerScreen && !isHomepage
-
+    // Only show the Tray on larger screens
+    const smallerScreen = window.matchMedia(`(max-width: 1024px)`).matches
     this.state = {
-      showMenu: showTrayOnPageLoad,
+      showMenu: !smallerScreen,
       themeKey: undefined,
       layout: 'large',
       docsData: null,
@@ -269,11 +256,11 @@ class App extends Component<AppProps, AppState> {
 
     // TODO: Replace with the Responsive component later
     // Using this method directly for now instead to avoid a call to findDOMNode
+    // em values match the ones in SharedTokens.breakpoints
     this._mediaQueryListener = addMediaQueryMatchListener(
       {
-        medium: { minWidth: 700 },
-        large: { minWidth: 1100 },
-        'x-large': { minWidth: 1300 }
+        medium: { minWidth: '48em' }, // 768px usually
+        large: { minWidth: '64em' } // 1024px
       },
       this._content!,
       this.updateLayout
@@ -326,13 +313,6 @@ class App extends Component<AppProps, AppState> {
         )
       })
       .catch(errorHandler)
-
-    const [page] = this.getPathInfo()
-    const isHomepage = page === 'index' || typeof page === 'undefined'
-    if (isHomepage) {
-      this.setState({ showMenu: false })
-    }
-
     document.addEventListener('focusin', this.handleFocusChange)
   }
 
@@ -471,8 +451,6 @@ class App extends Component<AppProps, AppState> {
         layout = 'medium'
       } else if (matches.includes('large') && matches.length === 2) {
         layout = 'large'
-      } else if (matches.includes('x-large')) {
-        layout = 'x-large'
       }
     }
     this.setState({ layout })
@@ -520,17 +498,9 @@ class App extends Component<AppProps, AppState> {
     })
   }
 
-  handleShowTrayOnURLChange = (key: string | undefined, showMenu: boolean) => {
-    const userIsComingFromHomepage =
-      key === 'index' || typeof key === 'undefined'
-
-    const { layout } = this.state
-
-    // if the user is coming from the homepage, make the tray show if the layout is large enough
-    if (layout === 'small') {
+  handleShowTrayOnURLChange = (_key: string | undefined, showMenu: boolean) => {
+    if (this.state.layout === 'small') {
       return false
-    } else if (userIsComingFromHomepage) {
-      return true
     } else {
       return showMenu
     }

@@ -23,11 +23,12 @@
  */
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 import type { ParsedDocSummary } from '../../buildScripts/DataTypes.mjs'
+import type { LayoutSize } from '../App/props'
 
 type HeroOwnProps = {
   repository: string
   version: string
-  layout: 'small' | 'medium' | 'large' | 'x-large'
+  layout: LayoutSize
   docs: ParsedDocSummary
 }
 
