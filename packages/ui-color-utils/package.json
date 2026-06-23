@@ -1,10 +1,10 @@
 {
   "name": "@instructure/ui-color-utils",
   "version": "11.7.3",
+  "type": "module",
   "description": "A color utility library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
-  "main": "./lib/index.js",
   "types": "./types/index.d.ts",
   "repository": {
     "type": "git",
@@ -16,7 +16,7 @@
     "lint": "ui-scripts lint",
     "lint:fix": "ui-scripts lint --fix",
     "clean": "ui-scripts clean",
-    "build": "ui-scripts build --modules es,cjs",
+    "build": "ui-scripts build",
     "build:watch": "ui-scripts build --watch",
     "build:types": "tsc -p tsconfig.build.json"
   },
@@ -38,10 +38,8 @@
       "src": "./src/index.ts",
       "types": "./types/index.d.ts",
       "import": "./es/index.js",
-      "require": "./lib/index.js",
       "default": "./es/index.js"
     },
-    "./lib/*": "./lib/*",
     "./es/*": "./es/*",
     "./types/*": "./types/*",
     "./package.json": "./package.json",
