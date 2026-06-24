@@ -1,8 +1,8 @@
 {
   "summary": {
     "total": 32,
-    "unchanged": 32,
-    "changed": 0,
+    "unchanged": 29,
+    "changed": 3,
     "added": 0,
     "removed": 0
   },
@@ -87,14 +87,14 @@
     },
     {
       "name": "dateinput-dateinput2.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 13505,
       "sizeMismatch": false
     },
     {
       "name": "datetimeinput.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 16476,
       "sizeMismatch": false
     },
     {
@@ -111,8 +111,8 @@
     },
     {
       "name": "form-errors.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 7982,
       "sizeMismatch": false
     },
     {
