@@ -17,7 +17,7 @@ type: example
     screenReaderLabel="Loading completion"
     valueNow={40}
     valueMax={60}
-    margin="0 small 0 0"
+    margin="0 general.spaceMd 0 0"
     shouldAnimateOnMount
   />
   <ProgressCircle
@@ -25,7 +25,7 @@ type: example
     screenReaderLabel="Loading completion"
     valueNow={40}
     valueMax={60}
-    margin="0 small 0 0"
+    margin="0 general.spaceMd 0 0"
     shouldAnimateOnMount
     animationDelay={2000}
   />
@@ -33,7 +33,7 @@ type: example
     screenReaderLabel="Loading completion"
     valueNow={40}
     valueMax={60}
-    margin="0 small 0 0"
+    margin="0 general.spaceMd 0 0"
     shouldAnimateOnMount
     animationDelay={4000}
     formatScreenReaderValue={function ({ valueNow, valueMax }) {
@@ -114,35 +114,35 @@ type: example
     meterColor="info"
     valueNow={40}
     valueMax={60}
-    margin="0 0 small"
+    margin="0 0 general.spaceMd"
   />
   <ProgressCircle
     screenReaderLabel="Loading completion"
     meterColor="success"
     valueNow={40}
     valueMax={60}
-    margin="0 0 small"
+    margin="0 0 general.spaceMd"
   />
   <ProgressCircle
     screenReaderLabel="Loading completion"
     meterColor="alert"
     valueNow={40}
     valueMax={60}
-    margin="0 0 small"
+    margin="0 0 general.spaceMd"
   />
   <ProgressCircle
     screenReaderLabel="Loading completion"
     meterColor="warning"
     valueNow={40}
     valueMax={60}
-    margin="0 0 small"
+    margin="0 0 general.spaceMd"
   />
   <ProgressCircle
     screenReaderLabel="Loading completion"
     meterColor="danger"
     valueNow={40}
     valueMax={60}
-    margin="0 0 small"
+    margin="0 0 general.spaceMd"
   />
 </div>
 ```

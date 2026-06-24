@@ -13,7 +13,7 @@ Variant covers almost all use cases for headings on pages. Their name reflects t
 type: embed
 ---
 <Alert variant="info">
-  <List margin="0 0 medium">
+  <List margin="0 0 general.spaceXl">
     <List.Item>For legacy reasons, each <code>variant</code> has a default <code>level</code> set. This is not the recommended way and will be removed in a later major release. Please always specify the <code>level</code>!</List.Item>
     <List.Item>When <code>variant</code> is set the <code>as</code> prop is ignored</List.Item>
     <List.Item>A11Y GUIDELINE: There can be only one <code>h1</code> tag in a page</List.Item>
@@ -71,7 +71,7 @@ The `variant` and `level` props sets its appearance in this order.
 type: example
 ---
 <div>
-  <Heading level="h1" as="h3" margin="0 0 x-small">This renders as <code>&lt;h3&gt;</code></Heading>
+  <Heading level="h1" as="h3" margin="0 0 general.spaceSm">This renders as <code>&lt;h3&gt;</code></Heading>
 </div>
 ```
 
@@ -123,7 +123,7 @@ add either `top` or `bottom` borders to your heading.
 type: example
 ---
 <div>
-  <Heading margin="0 0 medium" border="bottom">I have a bottom border</Heading>
+  <Heading margin="0 0 general.spaceXl" border="bottom">I have a bottom border</Heading>
   <Heading border="top">I have a top border</Heading>
 </div>
 ```

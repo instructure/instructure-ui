@@ -141,10 +141,10 @@ type: example
           padding="x-small"
           style={{ flexDirection: 'row-reverse' }}
         >
-          <Button onClick={handleAdd} color="primary" margin="xx-small">
+          <Button onClick={handleAdd} color="primary" margin="general.spaceXs">
             Add
           </Button>
-          <Button onClick={handleClose} color="secondary" margin="xx-small">
+          <Button onClick={handleClose} color="secondary" margin="general.spaceXs">
             Close
           </Button>
         </View>

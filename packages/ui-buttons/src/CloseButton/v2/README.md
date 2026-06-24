@@ -48,7 +48,7 @@ type: example
         size="small"
         withBackground={false}
         withBorder={false}
-        margin="small"
+        margin="general.spaceMd"
       />
     </Flex.Item>
   </Flex>

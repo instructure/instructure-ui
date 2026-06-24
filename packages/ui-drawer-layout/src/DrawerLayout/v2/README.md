@@ -41,7 +41,7 @@ type: example
               as="div"
               maxWidth="16rem"
               textAlign="center"
-              margin="large auto"
+              margin="general.space2xl auto"
               padding="small"
             >
               <CloseButton
@@ -50,7 +50,7 @@ type: example
                 onClick={handleTrayDismiss}
                 screenReaderLabel="Close"
               />
-              <Avatar name="foo bar" margin="0 0 small 0" />
+              <Avatar name="foo bar" margin="0 0 general.spaceMd 0" />
               <Text as="div" size="x-small">
                 Hello from start tray with a small amount of placeholder content
               </Text>
@@ -64,7 +64,7 @@ type: example
                   <Grid.Row>
                     <Grid.Col>
                       <Button
-                        margin="small 0"
+                        margin="general.spaceMd 0"
                         size="small"
                         onClick={() => {
                           setOpen(true)
@@ -119,7 +119,7 @@ type: example
               as="div"
               maxWidth="48rem"
               textAlign="center"
-              margin="large auto"
+              margin="general.space2xl auto"
               padding="large"
               background="primary"
             >
@@ -150,7 +150,7 @@ type: example
                   as="div"
                   maxWidth="16rem"
                   textAlign="center"
-                  margin="large auto"
+                  margin="general.space2xl auto"
                   padding="small"
                 >
                   <CloseButton
@@ -161,7 +161,7 @@ type: example
                     }}
                     screenReaderLabel="Close"
                   />
-                  <Avatar name="foo bar" margin="0 0 small 0" />
+                  <Avatar name="foo bar" margin="0 0 general.spaceMd 0" />
                   <Text as="div" size="x-small">
                     Hello from start tray with a small amount of placeholder
                     content
@@ -176,7 +176,7 @@ type: example
                       <Grid.Row>
                         <Grid.Col>
                           <Button
-                            margin="small 0"
+                            margin="general.spaceMd 0"
                             size="small"
                             onClick={() => {
                               setStartOpen(true)
@@ -188,7 +188,7 @@ type: example
                         </Grid.Col>
                         <Grid.Col width="auto">
                           <Button
-                            margin="small 0"
+                            margin="general.spaceMd 0"
                             size="small"
                             onClick={() => {
                               setEndOpen(true)

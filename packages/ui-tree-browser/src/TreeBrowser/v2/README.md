@@ -21,7 +21,7 @@ const Example = () => {
 
   return (
     <>
-      <View display="block" margin="none none medium">
+      <View display="block" margin="none none general.spaceXl">
         <RadioInputGroup
           name="treeBrowserSize"
           defaultValue="medium"
@@ -317,7 +317,7 @@ type: example
     if (props.level > 1) {
       return <div style={{ display: 'flex', alignItems: 'flex-end', padding: '0.6rem 0 0.6rem 1rem', color: 'darkorange' }}>
         <span>{props.name}</span>
-        <Tag text="done" size="small" margin="0 xx-small 0 xx-small"/>
+        <Tag text="done" size="small" margin="0 general.spaceXs 0 general.spaceXs"/>
         <Tag text="class A" size="small"/>
       </div>
     }
@@ -387,7 +387,7 @@ const Example = () => {
             screenReaderLabel="Cancel"
             onClick={(e) => handleExpandToggle(e, false)}
             onKeyDown={(e) => handleKeyPress(e, false)}
-            margin="0 0 0 small"
+            margin="0 0 0 general.spaceMd"
           >
             <XInstUIIcon />
           </IconButton>
@@ -395,7 +395,7 @@ const Example = () => {
             screenReaderLabel="Add new group"
             onClick={(e) => handleExpandToggle(e, false)}
             onKeyDown={(e) => handleKeyPress(e, false)}
-            margin="0 0 0 small"
+            margin="0 0 0 general.spaceMd"
           >
             <CheckInstUIIcon />
           </IconButton>
@@ -480,7 +480,7 @@ const Example = () => {
 
   return (
     <>
-      <View display="block" margin="none none medium">
+      <View display="block" margin="none none general.spaceXl">
         <FormFieldGroup description="Turn on/off sorting">
           <Checkbox checked={sorted} label="Sort" onChange={toggleSort} />
         </FormFieldGroup>
@@ -633,7 +633,7 @@ const Example = () => {
 
   return (
     <>
-      <View display="block" margin="none none medium">
+      <View display="block" margin="none none general.spaceXl">
         <Checkbox
           label="showRootCollection"
           variant="toggle"

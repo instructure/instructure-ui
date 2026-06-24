@@ -271,6 +271,27 @@ export default function ViewPage() {
           <div>Paragraph-like content</div>
         </section>
       </section>
+
+      {/* Current (era-3) spacing tokens via dot-path notation */}
+      <section>
+        <View as="div" margin="general.spaceMd" padding="small" withVisualDebug>
+          margin=&quot;general.spaceMd&quot;
+        </View>
+        <View
+          as="div"
+          margin="general.spaceLg auto general.spaceXl"
+          padding="small"
+          withVisualDebug
+        >
+          margin=&quot;general.spaceLg auto general.spaceXl&quot;
+        </View>
+        <View as="div" margin="gap.cards.md" padding="small" withVisualDebug>
+          margin=&quot;gap.cards.md&quot;
+        </View>
+        <View as="div" margin="padding.card.lg" padding="small" withVisualDebug>
+          margin=&quot;padding.card.lg&quot;
+        </View>
+      </section>
     </main>
   )
 }

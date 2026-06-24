@@ -25,7 +25,7 @@ setting the `alignContent` prop.
 type: example
 ---
 <Byline
-  margin="x-large auto"
+  margin="general.space2xl auto"
   size="small"
   alignContent="top"
   title="Graham Taylor"
@@ -41,7 +41,7 @@ type: example
 ---
 <Byline
   description={
-    <View display="block" margin="0 0 0 x-small">
+    <View display="block" margin="0 0 0 general.spaceSm">
       <Heading level="h2">
         <Link href="#">Clickable Heading</Link>
       </Heading>

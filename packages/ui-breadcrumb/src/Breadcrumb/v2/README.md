@@ -52,7 +52,7 @@ Change the `size` prop to control the font-size of the breadcrumbs (default is `
 type: example
 ---
 <div>
-  <Breadcrumb size="small" label="breadcrumb" margin="none none medium">
+  <Breadcrumb size="small" label="breadcrumb" margin="none none general.spaceXl">
     <Breadcrumb.Link href="https://instructure.github.io/instructure-ui/">English 204</Breadcrumb.Link>
       <Breadcrumb.Link
         onClick={function () {
@@ -65,7 +65,7 @@ type: example
     <Breadcrumb.Link>Rabbit Is Rich</Breadcrumb.Link>
   </Breadcrumb>
   <View as="div" width="40rem">
-    <Breadcrumb label="breadcrumb" margin="none none medium">
+    <Breadcrumb label="breadcrumb" margin="none none general.spaceXl">
       <Breadcrumb.Link href="https://instructure.github.io/instructure-ui/">English 204</Breadcrumb.Link>
         <Breadcrumb.Link
           onClick={function () {

@@ -19,9 +19,9 @@ type: example
 type: example
 ---
 <View display="block">
-  <IconButton size="small" screenReaderLabel="Add" margin="small"><PlusInstUIIcon /></IconButton>
-  <IconButton size="medium" screenReaderLabel="Add" margin="small"><PlusInstUIIcon /></IconButton>
-  <IconButton size="large" screenReaderLabel="Add" margin="small"><PlusInstUIIcon /></IconButton>
+  <IconButton size="small" screenReaderLabel="Add" margin="general.spaceMd"><PlusInstUIIcon /></IconButton>
+  <IconButton size="medium" screenReaderLabel="Add" margin="general.spaceMd"><PlusInstUIIcon /></IconButton>
+  <IconButton size="large" screenReaderLabel="Add" margin="general.spaceMd"><PlusInstUIIcon /></IconButton>
 </View>
 ```
 
@@ -91,8 +91,8 @@ type: example
 type: example
 ---
 <View display="block">
-  <IconButton color="ai-primary" screenReaderLabel="AI button" margin="small"><IgniteaiLogoInstUIIcon/></IconButton>
-  <IconButton color="ai-secondary" screenReaderLabel="AI button"  margin="small"><IgniteaiLogoInstUIIcon/></IconButton>
+  <IconButton color="ai-primary" screenReaderLabel="AI button" margin="general.spaceMd"><IgniteaiLogoInstUIIcon/></IconButton>
+  <IconButton color="ai-secondary" screenReaderLabel="AI button"  margin="general.spaceMd"><IgniteaiLogoInstUIIcon/></IconButton>
 </View>
 ```
 
@@ -105,8 +105,8 @@ The `shape` prop specifies if the IconButton will render as a `rectangle` or `ci
 type: example
 ---
 <View display="block">
-  <IconButton shape="rectangle" screenReaderLabel="Delete tag" margin="small"><XInstUIIcon /></IconButton>
-  <IconButton shape="circle" screenReaderLabel="Delete tag" margin="small"><XInstUIIcon /></IconButton>
+  <IconButton shape="rectangle" screenReaderLabel="Delete tag" margin="general.spaceMd"><XInstUIIcon /></IconButton>
+  <IconButton shape="circle" screenReaderLabel="Delete tag" margin="general.spaceMd"><XInstUIIcon /></IconButton>
 </View>
 ```
 
@@ -120,7 +120,7 @@ type: example
 ---
 <View display="block">
   <View display="inline-block" background="primary">
-    <IconButton withBackground={false} withBorder={false} screenReaderLabel="Delete tag" margin="large">
+    <IconButton withBackground={false} withBorder={false} screenReaderLabel="Delete tag" margin="general.space2xl">
       <XInstUIIcon />
     </IconButton>
   </View>

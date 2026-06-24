@@ -36,7 +36,7 @@ type: example
 ---
 <View as="div" width="400px" withVisualDebug>
   <Billboard
-    margin="large"
+    margin="general.space2xl"
     heading="404"
     message="Billboard is now a button"
     size="small"
@@ -54,7 +54,7 @@ type: example
 ---
 <View as="div" width="600px" withVisualDebug>
   <Billboard
-    margin="large"
+    margin="general.space2xl"
     message="Click this link"
     href="http://instructure.com"
     hero={(size) => <BookCheckInstUIIcon size={size} />}

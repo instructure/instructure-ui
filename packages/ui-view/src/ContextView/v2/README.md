@@ -17,14 +17,14 @@ type: example
 <div>
   <ContextView
     padding="small"
-    margin="large"
+    margin="general.space2xl"
     placement="end top"
     shadow="resting"
   >
     <Heading level="h3">Hello World</Heading>
   </ContextView>
   <ContextView
-    margin="0 large 0 0"
+    margin="0 general.space2xl 0 0"
     padding="small"
     placement="top"
   >
@@ -32,7 +32,7 @@ type: example
     <Text size="small">Some informational text that is helpful</Text>
   </ContextView>
   <ContextView
-    margin="0 large 0 0"
+    margin="0 general.space2xl 0 0"
     padding="small"
     textAlign="end"
     placement="start"
@@ -45,7 +45,7 @@ type: example
     padding="medium"
     background="inverse"
     width="30rem"
-    margin="x-large 0 0"
+    margin="general.space2xl 0 0"
   >
       This ContextView uses the inverse background and medium padding. Its width prop is set to `30rem`, which causes long strings like this to wrap. It also has top margin to separate it from the ContextViews above it.
   </ContextView>
