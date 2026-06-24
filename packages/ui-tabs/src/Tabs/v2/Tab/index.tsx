@@ -112,7 +112,7 @@ class Tab extends Component<TabsTabProps> {
         aria-controls={controls}
         tabIndex={isSelected && !isDisabled ? 0 : undefined}
         position="relative"
-        focusPosition="inset"
+        focusPosition="offset"
       >
         {callRenderProp(children)}
       </View>
