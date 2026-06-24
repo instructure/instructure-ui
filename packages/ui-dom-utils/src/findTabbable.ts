@@ -41,6 +41,10 @@ import { UIElement } from '@instructure/shared-types'
  * @param { boolean } shouldSearchRootNode - should the root node be included in the search
  * @returns { Array } array of all tabbable children
  */
+// Attributes that affect tabbability:
+//   tabindex, href, type, contenteditable, disabled - read directly by findFocusable
+//   class, style, hidden - read indirectly, via the computed display/position
+//                          (visibility) checks in findFocusable
 function findTabbable(el?: UIElement, shouldSearchRootNode?: boolean) {
   return findFocusable(
     el,

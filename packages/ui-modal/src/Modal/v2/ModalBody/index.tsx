@@ -26,7 +26,7 @@ import { Component } from 'react'
 
 import { View } from '@instructure/ui-view/latest'
 import { omitProps } from '@instructure/ui-react-utils'
-import { getCSSStyleDeclaration } from '@instructure/ui-dom-utils'
+import { getCSSStyleDeclaration, findTabbable } from '@instructure/ui-dom-utils'
 
 import { withStyleNew } from '@instructure/emotion'
 import generateStyle from './styles.js'
@@ -56,6 +56,8 @@ class ModalBody extends Component<ModalBodyProps> {
   }
 
   ref: UIElement | null = null
+  private resizeObserver?: ResizeObserver
+  private mutationObserver?: MutationObserver
 
   handleRef = (el: UIElement | null) => {
     const { elementRef } = this.props
@@ -87,10 +89,37 @@ class ModalBody extends Component<ModalBodyProps> {
     if (isFirefox) {
       this.setState({ isFirefox })
     }
+
+    const finalRef = this.getFinalRef(this.ref)
+    if (finalRef && typeof ResizeObserver !== 'undefined') {
+      this.resizeObserver = new ResizeObserver(() => this.forceUpdate())
+      this.resizeObserver.observe(finalRef)
+      this.mutationObserver = new MutationObserver(() => this.forceUpdate())
+      this.mutationObserver.observe(finalRef, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: [
+          'disabled',
+          'tabindex',
+          'hidden',
+          'href',
+          'contenteditable',
+          'type',
+          'class',
+          'style'
+        ]
+      })
+    }
   }
 
   componentDidUpdate() {
     this.props.makeStyles?.()
+  }
+
+  componentWillUnmount() {
+    this.resizeObserver?.disconnect()
+    this.mutationObserver?.disconnect()
   }
 
   getFinalRef(el: UIElement): Element | undefined {
@@ -133,6 +162,8 @@ class ModalBody extends Component<ModalBodyProps> {
         (finalRef.scrollHeight ?? 0) -
           (finalRef.getBoundingClientRect()?.height ?? 0)
       ) > 1
+    const hasTabbableChildren = !!finalRef && findTabbable(finalRef).length > 0
+    const needsTabIndex = hasScrollbar && !hasTabbableChildren
     return (
       <ModalContext.Consumer>
         {(value) => (
@@ -146,8 +177,9 @@ class ModalBody extends Component<ModalBodyProps> {
             as={as}
             css={this.props.styles?.modalBody}
             padding={spacing ? undefined : padding}
-            // check if there is a scrollbar, if so, the element has to be tabbable
-            {...(hasScrollbar
+            // check if there is a scrollbar and no focusable children, if so, the
+            // element has to be tabbable
+            {...(needsTabIndex
               ? {
                   tabIndex: 0,
                   'aria-label': value.bodyScrollAriaLabel

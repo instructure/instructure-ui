@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { render } from '@testing-library/react'
-import { vi } from 'vitest'
+import { render, waitFor } from '@testing-library/react'
+import { vi, beforeEach, afterEach } from 'vitest'
 import '@testing-library/jest-dom'
 
 import { color2hex } from '@instructure/ui-color-utils'
@@ -112,6 +112,102 @@ describe('<ModalBody />', () => {
           consoleErrorSpy.mockRestore()
         })
       }
+    })
+  })
+
+  describe('tab stop on a scrollable body', () => {
+    let scrollHeightSpy: ReturnType<typeof vi.spyOn>
+    let rectSpy: ReturnType<typeof vi.spyOn>
+    let originalResizeObserver: typeof globalThis.ResizeObserver
+
+    const mockScrollable = (scrollable: boolean) => {
+      scrollHeightSpy = vi
+        .spyOn(HTMLElement.prototype, 'scrollHeight', 'get')
+        .mockReturnValue(scrollable ? 500 : 50)
+      rectSpy = vi
+        .spyOn(HTMLElement.prototype, 'getBoundingClientRect')
+        .mockReturnValue({
+          height: 50,
+          width: 100,
+          top: 0,
+          left: 0,
+          right: 100,
+          bottom: 50,
+          x: 0,
+          y: 0,
+          toJSON: () => {}
+        } as DOMRect)
+    }
+
+    beforeEach(() => {
+      originalResizeObserver = globalThis.ResizeObserver
+      globalThis.ResizeObserver = class {
+        cb: ResizeObserverCallback
+        constructor(cb: ResizeObserverCallback) {
+          this.cb = cb
+        }
+        observe() {
+          Promise.resolve().then(() =>
+            this.cb([], this as unknown as ResizeObserver)
+          )
+        }
+        unobserve() {}
+        disconnect() {}
+      } as unknown as typeof globalThis.ResizeObserver
+    })
+
+    afterEach(() => {
+      scrollHeightSpy?.mockRestore()
+      rectSpy?.mockRestore()
+      globalThis.ResizeObserver = originalResizeObserver
+    })
+
+    it('is a tab stop when scrollable and it has no focusable children', async () => {
+      mockScrollable(true)
+      const { findByText } = render(<ModalBody>{BODY_TEXT}</ModalBody>)
+      const body = await findByText(BODY_TEXT)
+
+      await waitFor(() => expect(body).toHaveAttribute('tabindex', '0'))
+    })
+
+    it('is not a tab stop when scrollable but it has a focusable child', async () => {
+      mockScrollable(true)
+      const { findByText } = render(
+        <ModalBody>
+          <button>focusable</button>
+          {BODY_TEXT}
+        </ModalBody>
+      )
+      const body = await findByText(BODY_TEXT)
+
+      await waitFor(() => expect(body).not.toHaveAttribute('tabindex'))
+    })
+
+    it('is not a tab stop when it is not scrollable', async () => {
+      mockScrollable(false)
+      const { findByText } = render(<ModalBody>{BODY_TEXT}</ModalBody>)
+      const body = await findByText(BODY_TEXT)
+
+      await waitFor(() => expect(body).toBeInTheDocument())
+      expect(body).not.toHaveAttribute('tabindex')
+    })
+
+    it('drops the tab stop when a focusable child is added later', async () => {
+      mockScrollable(true)
+      const { findByText, rerender } = render(
+        <ModalBody>{BODY_TEXT}</ModalBody>
+      )
+      const body = await findByText(BODY_TEXT)
+      await waitFor(() => expect(body).toHaveAttribute('tabindex', '0'))
+
+      rerender(
+        <ModalBody>
+          <button>focusable</button>
+          {BODY_TEXT}
+        </ModalBody>
+      )
+
+      await waitFor(() => expect(body).not.toHaveAttribute('tabindex'))
     })
   })
 })
