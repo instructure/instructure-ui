@@ -10,28 +10,16 @@
 #### Getting Started
 
 - [Accessibility](https://instructure.design/markdowns/accessibility.md): Instructure UI targets WCAG 2.1 AA/AAA standards with proper color contrast, keyboard navigation, screen reader support, and ARIA compliance. Components are perceivable, operable, understandable, and robust.
-- [Theming components](https://instructure.design/markdowns/theming-components.md): InstUI has two themes: `canvas` (default) and `canvas-high-contrast`. Colors are layered: primitives (base), contrasts (theme-specific), and UI (curated tokens). Use `InstUISettingsProvider` to set themes. Overrides allow customization but must maintain accessibility.
-- [Usage](https://instructure.design/markdowns/usage.md): Quick start: Create a React app, add `@instructure/ui`, wrap with `InstUISettingsProvider`, and use components. Integrate with existing projects by adding the dependency and provider. Read about theme overrides and accessibility for best practices.
 
 #### Guides
 
 - [Accessing the dom](https://instructure.design/markdowns/accessing-the-dom.md): Guidance for properly accessing DOM elements in React components using refs instead of findDOMNode to avoid warnings. Examples show good and bad patterns for component ref handling.
-- [Color system](https://instructure.design/markdowns/color-system.md): Color system divided into primitive (hex values) and semantic (contextual) colors. Includes data visualization palette with primary and secondary hues for charts and graphs on white backgrounds.
+- [Component versioning](https://instructure.design/markdowns/component-versioning.md)
 - [Focus management](https://instructure.design/markdowns/focus-management.md): Comprehensive focus management system for dialogs, modals, and popovers. Uses Dialog component with FocusRegion and FocusRegionManager to trap focus, handle escape keys, and manage screen reader accessibility.
 - [Forms](https://instructure.design/markdowns/forms.md): InstUI form components use a `messages` prop for error/hint/success messages. Required fields now show an asterisk automatically. Examples provided for various form components like TextInput, Checkbox, and DateTimeInput.
-- [Layout spacing](https://instructure.design/markdowns/layout-spacing.md): InstUI provides semantic spacing tokens (e.g., buttons, tags) for consistent layouts. Apply spacing via `margin` prop, container `gap`, or importing from theme. Legacy tokens are available for compatibility but not recommended for new layouts.
+- [Guides getting started](https://instructure.design/markdowns/guides-getting-started.md): Quick start: Create a React app, add `@instructure/ui`, wrap with `InstUISettingsProvider`, and use components. Integrate with existing projects by adding the dependency and provider. Read about theme overrides and accessibility for best practices.
 - [Module federation](https://instructure.design/markdowns/module-federation.md): InstUI supports module federation with specific version requirements. For v10.14+, use local themes (`canvasThemeLocal`). For older hosts, guest apps must use v10.14+ and local themes. Global theme overrides don't apply to local themes.
-- [New theme overrides](https://instructure.design/markdowns/new-theme-overrides.md)
-- [Server side rendering](https://instructure.design/markdowns/server-side-rendering.md): SSR with Next.js requires wrapping the app with `InstUISettingsProvider` for deterministic ID generation. Avoid `@instructure/ui` meta-package; install only needed packages. CodeEditor isn't SSR-compatible and must be dynamically imported.
-- [Typography system](https://instructure.design/markdowns/typography-system.md): Use `<Text>` and `<Heading>` components with semantic variants for consistent typography. Variants define font style, weight, size, and line height. Legacy tokens (e.g., fontSizeXSmall) are deprecated and should not be used in new designs.
 - [Using icons](https://instructure.design/markdowns/UsingIcons.md): Guidelines for using icons with proper accessibility roles, size variants, and color options. Line icons for light backgrounds, solid for dark backgrounds. Icons scale with parent font-size by default.
-- [Using theme overrides](https://instructure.design/markdowns/using-theme-overrides.md): Customize components via theme overrides while ensuring WCAG compliance. Use nested `InstUISettingsProvider` for subtree themes, override global or component themes, and leverage branding variables for user customization. Deprecated global theming causes issues with multiple InstUI versions.
-
-#### Patterns
-
-- [Content alignment](https://instructure.design/markdowns/ContentAlignment.md): Guidelines for main content area alignment with maximum width (948px) for readability, minimum width (320px) for accessibility, and responsive padding (24px/12px). Ensures proper centering, avoids two-dimensional scrolling, and allows exceptions for complex data displays.
-- [Destroy action](https://instructure.design/markdowns/DestroyAction.md): A modal used for irreversible actions like deletion. Includes guidelines for usage: use clear language, avoid vague confirmations, and use a danger button for the destructive action.
-- [Search](https://instructure.design/markdowns/Search.md): Provides search input patterns including auto-activated, activated, and autocomplete search. Includes guidelines, accessibility support, and clear state management examples.
 
 ### Components
 
@@ -112,7 +100,7 @@
 - [ContextView](https://instructure.design/markdowns/ContextView.md): A container that renders inline with an arrow pointing to another element. It displays contextual information without being a popover. Supports padding, text alignment, and margin customization. Often used with components like RangeInput and internally by Popover.
 - [View](https://instructure.design/markdowns/View.md): The foundational visual component providing styling for backgrounds, borders, shadows, positioning, and focus states. Supports visual debugging and semantic HTML elements via the 'as' prop.
 
-#### utilities
+#### Util Components
 
 - [Dialog](https://instructure.design/markdowns/Dialog.md): A utility component for accessibility in modals, popovers, and trays. Manages focus trapping, screen reader visibility, and keyboard navigation. Essential for WCAG-compliant modal interactions.
 - [Focusable](https://instructure.design/markdowns/Focusable.md): A utility component that detects when elements receive focus. Provides render props for creating accessible focus-based interactions, such as skip-to-content links or focus-triggered tooltips. Ensures WCAG compliance for focus management.

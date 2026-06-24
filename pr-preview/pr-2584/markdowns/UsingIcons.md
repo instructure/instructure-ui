@@ -1,5 +1,12 @@
 
-Note: These icons are only meant to be used with the new theming system (beta), please don't use them with the old (pre v11.7) components
+```js
+---
+type: embed
+---
+<Alert variant="info" margin="0 0 medium">
+  These icons are only meant to be used with the new theming system, please do not use them with the old (pre v11.7)
+</Alert>
+```
 
 ## Using Icons
 
