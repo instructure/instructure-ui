@@ -264,7 +264,8 @@ const DateInput = forwardRef(
         {...passthroughProps(rest)}
         ref={ref}
         inputRef={inputRef}
-        renderLabel={renderLabel}
+        themeOverride={{ borderWidth: '0.25rem' }}
+        renderLabel={<>{callRenderProp(renderLabel)} !!!!!!!!</>}
         aria-label={callRenderProp(renderLabel)}
         onChange={handleInputChange}
         onBlur={handleBlur}

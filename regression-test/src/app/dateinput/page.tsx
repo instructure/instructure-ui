@@ -67,7 +67,7 @@ export default function DateInputExamplesPage() {
         </p>
       </section>
 
-      {/* DateInput - with year picker */}
+      {/* aDateInput - with year picker */}
       <section>
         <DateInput
           locale="en-us"
