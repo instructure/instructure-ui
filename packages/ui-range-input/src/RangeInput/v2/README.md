@@ -27,7 +27,7 @@ const Example = () => {
         />
       </View>
 
-      <View as="div" margin="medium 0 0">
+      <View as="div" margin="general.spaceXl 0 0">
         <FormFieldGroup
           description={
             <ScreenReaderContent>

@@ -162,7 +162,7 @@ const Example = () => {
     return (
       <Flex alignItems="start">
         {options.map(({ name, values }) => (
-          <Flex.Item margin="small" key={name}>
+          <Flex.Item margin="general.spaceMd" key={name}>
             <RadioInputGroup
               name={name}
               description={name}
@@ -175,7 +175,7 @@ const Example = () => {
             </RadioInputGroup>
           </Flex.Item>
         ))}
-        <Flex.Item margin="small">
+        <Flex.Item margin="general.spaceMd">
           <Checkbox
             label="fluidWidth"
             checked={fluidWidth}

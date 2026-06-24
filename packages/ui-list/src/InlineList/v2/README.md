@@ -26,25 +26,25 @@ The `delimiter` prop lets you display a separator between Items in the List. The
 type: example
 ---
 <div>
-  <InlineList delimiter="none" margin="large 0">
+  <InlineList delimiter="none" margin="general.space2xl 0">
     <InlineList.Item>{lorem.sentence()}</InlineList.Item>
     <InlineList.Item>10pts</InlineList.Item>
     <InlineList.Item><b>Due:</b> Oct 1, 2019</InlineList.Item>
     <InlineList.Item><Link href="#">No Separator</Link></InlineList.Item>
   </InlineList>
-  <InlineList delimiter="pipe" margin="large 0">
+  <InlineList delimiter="pipe" margin="general.space2xl 0">
     <InlineList.Item>{lorem.sentence()}</InlineList.Item>
     <InlineList.Item>10pts</InlineList.Item>
     <InlineList.Item><b>Due:</b> Oct 1, 2019</InlineList.Item>
     <InlineList.Item><Link href="#">Pipe Separator</Link></InlineList.Item>
   </InlineList>
-  <InlineList delimiter="slash" margin="large 0">
+  <InlineList delimiter="slash" margin="general.space2xl 0">
     <InlineList.Item>{lorem.sentence()}</InlineList.Item>
     <InlineList.Item>10pts</InlineList.Item>
     <InlineList.Item><b>Due:</b> Oct 1, 2019</InlineList.Item>
     <InlineList.Item><Link href="#">Slash Separator</Link></InlineList.Item>
   </InlineList>
-  <InlineList delimiter="arrow" margin="large 0">
+  <InlineList delimiter="arrow" margin="general.space2xl 0">
     <InlineList.Item>{lorem.sentence()}</InlineList.Item>
     <InlineList.Item>10pts</InlineList.Item>
     <InlineList.Item><b>Due:</b> Oct 1, 2019</InlineList.Item>
@@ -62,19 +62,19 @@ The `size` prop lets you adjust the font-size of the List. The predefined values
 type: example
 ---
 <div>
-  <InlineList size="small" margin="large 0">
+  <InlineList size="small" margin="general.space2xl 0">
     <InlineList.Item>{lorem.sentence()}</InlineList.Item>
     <InlineList.Item>Small Size</InlineList.Item>
     <InlineList.Item><b>Due:</b> Oct 1, 2019</InlineList.Item>
     <InlineList.Item><Link href="#">Submitted</Link></InlineList.Item>
   </InlineList>
-  <InlineList margin="large 0">
+  <InlineList margin="general.space2xl 0">
     <InlineList.Item>{lorem.sentence()}</InlineList.Item>
     <InlineList.Item>Medium (default) Size</InlineList.Item>
     <InlineList.Item><b>Due:</b> Oct 1, 2019</InlineList.Item>
     <InlineList.Item><Link href="#">Submitted</Link></InlineList.Item>
   </InlineList>
-  <InlineList size="large" margin="large 0">
+  <InlineList size="large" margin="general.space2xl 0">
     <InlineList.Item>{lorem.sentence()}</InlineList.Item>
     <InlineList.Item>Large Size</InlineList.Item>
     <InlineList.Item><b>Due:</b> Oct 1, 2019</InlineList.Item>

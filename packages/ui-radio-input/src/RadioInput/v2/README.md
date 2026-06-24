@@ -13,7 +13,7 @@ type: example
 ---
 <InstUISettingsProvider>
 <Flex>
-  <Flex direction="column" margin="medium" gap="medium">
+  <Flex direction="column" margin="general.spaceXl" gap="medium">
     <RadioInput
       label="small"
       value="foo"
@@ -46,7 +46,7 @@ type: example
       readOnly
     />
   </Flex>
-  <Flex direction="column" margin="medium" gap="medium">
+  <Flex direction="column" margin="general.spaceXl" gap="medium">
     <RadioInput
       label="small"
       value="foo6"

@@ -121,9 +121,9 @@ type PaginationOwnProps = {
   variant?: 'full' | 'compact' | 'input'
 
   /**
-   * Spacing token values can be found here: [Spacing Tokens](https://instructure.design/#layout-spacing/%23Tokens)
-   *
-   * Apply these values via familiar CSS-like shorthand. For example: `margin="space8 0 space12"`.
+   * Valid values are `0`, `none`, `auto`, and Spacing token values,
+   * see https://instructure.design/layout-spacing. Apply these values via
+   * familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`.
    */
   margin?: Spacing
 

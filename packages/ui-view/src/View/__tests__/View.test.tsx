@@ -233,6 +233,45 @@ describe('<View />', () => {
     expect(newStyles.maxWidth).toEqual('200px')
   })
 
+  it('should resolve current (era-3) spacing tokens for the margin prop', () => {
+    const { container } = render(
+      <View margin="general.spaceMd">
+        <h1>View Content</h1>
+      </View>
+    )
+
+    const view = container.querySelector("span[class$='-view']")
+    const styles = getComputedStyle(view!)
+
+    // general.spaceMd resolves to 0.75rem (12px)
+    expect(styles.marginTop).toEqual('0.75rem')
+    expect(styles.marginRight).toEqual('0.75rem')
+    expect(styles.marginBottom).toEqual('0.75rem')
+    expect(styles.marginLeft).toEqual('0.75rem')
+
+    // a known token should not emit the "not found in theme" warning
+    expect(consoleWarningMock).not.toHaveBeenCalledWith(
+      expect.stringContaining('not found in theme')
+    )
+  })
+
+  it('should resolve era-3 tokens via CSS-like shorthand for the margin prop', () => {
+    const { container } = render(
+      <View margin="general.spaceLg auto general.spaceXl">
+        <h1>View Content</h1>
+      </View>
+    )
+
+    const view = container.querySelector("span[class$='-view']")
+    const styles = getComputedStyle(view!)
+
+    // 3-value shorthand: top | left+right | bottom
+    expect(styles.marginTop).toEqual('1rem') // general.spaceLg
+    expect(styles.marginRight).toEqual('auto')
+    expect(styles.marginBottom).toEqual('1.5rem') // general.spaceXl
+    expect(styles.marginLeft).toEqual('auto')
+  })
+
   it('should meet a11y standards', async () => {
     const { container } = render(<View>View Content</View>)
 

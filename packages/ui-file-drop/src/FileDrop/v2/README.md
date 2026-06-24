@@ -72,7 +72,7 @@ type: example
     }
     display="inline-block"
     width="24rem"
-    margin="x-small"
+    margin="general.spaceSm"
   />
   <FileDrop
     accept="video/*"
@@ -87,7 +87,7 @@ type: example
     }
     display="inline-block"
     width="12rem"
-    margin="x-small"
+    margin="general.spaceSm"
   />
 </div>
 ```
@@ -131,7 +131,7 @@ type: example
     console.log(`Files accepted ${files.map((f) => f.name).join(',')}`)
   }}
   renderLabel={
-    <View as="div" textAlign="center" padding="large" margin="large 0 0 0">
+    <View as="div" textAlign="center" padding="large" margin="general.space2xl 0 0 0">
       <IconAnnotateLine color="brand" size="large" />
       <Text as="div" color="brand">
         Drag and Drop or Click to Browser your Computer
@@ -140,7 +140,7 @@ type: example
   }
   width="18rem"
   height="16rem"
-  margin="x-small"
+  margin="general.spaceSm"
 />
 ```
 

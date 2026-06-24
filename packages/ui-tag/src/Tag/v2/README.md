@@ -8,7 +8,7 @@ Use `<Tag />` to represent a category or group in a form.
 ---
 type: example
 ---
-<Tag text="Static" margin="0 xx-small 0 0" />
+<Tag text="Static" margin="0 general.spaceXs 0 0" />
 ```
 
 ### Dismissible
@@ -28,7 +28,7 @@ type: example
     </AccessibleContent>
   }
   dismissible
-  margin="0 xx-small 0 0"
+  margin="0 general.spaceXs 0 0"
   onClick={function () {
     alert("This Tag was dismissed")
   }}
@@ -47,7 +47,7 @@ type: example
   text="Dismissible Disabled"
   dismissible
   disabled
-  margin="0 xx-small 0 0"
+  margin="0 general.spaceXs 0 0"
   onClick={function () {
     alert("This Tag was dismissed. This shouldn't happen")
   }}
@@ -63,9 +63,9 @@ type: example
 type: example
 ---
 <div>
-  <Tag text="Small" size="small" margin="0 xx-small 0 0" />
-  <Tag text="Medium" margin="0 xx-small 0 0" />
-  <Tag text="Large" size="large" margin="0 xx-small 0 0" />
+  <Tag text="Small" size="small" margin="0 general.spaceXs 0 0" />
+  <Tag text="Medium" margin="0 general.spaceXs 0 0" />
+  <Tag text="Large" size="large" margin="0 general.spaceXs 0 0" />
 </div>
 ```
 

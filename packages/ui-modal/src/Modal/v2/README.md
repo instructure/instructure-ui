@@ -65,7 +65,7 @@ const Example = () => {
           <Text lineHeight="double">{fpo}</Text>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={handleButtonClick} margin="0 x-small 0 0">
+          <Button onClick={handleButtonClick} margin="0 general.spaceSm 0 0">
             Close
           </Button>
           <Button color="primary" type="submit">
@@ -130,13 +130,13 @@ const Example = () => {
           <Heading>This Modal is constrained to a parent</Heading>
         </Modal.Header>
         <Modal.Body>
-          <View as="p" margin="none none small">
+          <View as="p" margin="none none general.spaceMd">
             <Text>{fpo}</Text>
           </View>
           <ModalAutoCompleteExample renderLabel="Choose a state" />
         </Modal.Body>
         <Modal.Footer spacing="compact">
-          <Button onClick={handleButtonClick} margin="0 x-small 0 0">
+          <Button onClick={handleButtonClick} margin="0 general.spaceSm 0 0">
             Close
           </Button>
           <Button onClick={handleButtonClick} color="primary" type="submit">
@@ -146,7 +146,7 @@ const Example = () => {
       </Modal>
       <View
         background="primary-inverse"
-        margin="medium auto none"
+        margin="general.spaceXl auto none"
         display="block"
         width="25rem"
         height="25rem"
@@ -340,7 +340,7 @@ const Example = () => {
           <RadioInput label="auto" value="auto" />
         </RadioInputGroup>
       </FormFieldGroup>
-      <Button onClick={handleButtonClick} margin="medium 0 0">
+      <Button onClick={handleButtonClick} margin="general.spaceXl 0 0">
         {open ? 'Close' : 'Open'} the Modal
       </Button>
       <Modal
@@ -358,7 +358,7 @@ const Example = () => {
           <Flex>
             <Flex.Item shouldGrow shouldShrink>
               <Flex alignItems="center">
-                <Flex.Item margin="0 x-small 0 0">
+                <Flex.Item margin="0 general.spaceSm 0 0">
                   <HeartInstUIIcon size={'xl'} />
                 </Flex.Item>
                 <Flex.Item shouldGrow shouldShrink>
@@ -375,7 +375,7 @@ const Example = () => {
                 withBorder={false}
                 renderIcon={<PrinterInstUIIcon/>}
                 screenReaderLabel="Print This Image"
-                margin="0 x-small 0 0"
+                margin="0 general.spaceSm 0 0"
               />
               <IconButton
                 color="primary-inverse"
@@ -383,7 +383,7 @@ const Example = () => {
                 withBorder={false}
                 renderIcon={<DownloadInstUIIcon/>}
                 screenReaderLabel="Download This Image"
-                margin="0 x-small 0 0"
+                margin="0 general.spaceSm 0 0"
               />
               <IconButton
                 color="primary-inverse"
@@ -456,7 +456,7 @@ const Example = () => {
       </Button>
       <Button
         onClick={toggleViewport}
-        margin="0 0 0 small"
+        margin="0 0 0 general.spaceMd"
         id="toggleViewportButton"
       >
         Toggle viewport
@@ -485,12 +485,12 @@ const Example = () => {
           )}
         </Modal.Header>
         <Modal.Body>
-          <View as="p" margin="none none small">
+          <View as="p" margin="none none general.spaceMd">
             <Text>{fpo}</Text>
           </View>
         </Modal.Body>
         <Modal.Footer spacing={smallViewport ? 'compact' : 'default'}>
-          <Button onClick={toggleOpen} margin="0 x-small 0 0">
+          <Button onClick={toggleOpen} margin="0 general.spaceSm 0 0">
             Close
           </Button>
           <Button onClick={toggleOpen} color="primary" type="submit">
@@ -501,7 +501,7 @@ const Example = () => {
 
       <View
         background="primary-inverse"
-        margin="medium auto none"
+        margin="general.spaceXl auto none"
         display="block"
         width={smallViewport ? '20rem' : '50rem'}
         height="37.5rem"
@@ -579,7 +579,7 @@ class Example extends React.Component {
           </WrappedModalBody>
           <View
             as="div"
-            margin="small"
+            margin="general.spaceMd"
             padding="large"
             background="primary">
             <Heading level='h3'>This View child does not inherit the variant and overflow properties</Heading>

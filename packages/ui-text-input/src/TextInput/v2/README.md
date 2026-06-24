@@ -72,7 +72,7 @@ type: example
             onChange={toggleInline}
           />
         </FormFieldGroup>
-        <View display="block" margin="medium 0 0">
+        <View display="block" margin="general.spaceXl 0 0">
           <TextInput
             renderLabel="What is your favorite band?"
             display={inline ? 'inline-block' : null}
@@ -126,28 +126,28 @@ type: example
                 {this.state.value !== '' && (
                   <Tag
                     text={this.state.value}
-                    margin="xxx-small xx-small xxx-small none"
+                    margin="general.space2xs general.spaceXs general.space2xs none"
                     onClick={() => console.log(this.state.value)}
                   />
                 )}
                 <Tag
                   text="Rocky road"
-                  margin="xxx-small xx-small xxx-small none"
+                  margin="general.space2xs general.spaceXs general.space2xs none"
                   onClick={() => console.log('Rocky road')}
                 />
                 <Tag
                   text="Vanilla"
-                  margin="xxx-small xx-small xxx-small none"
+                  margin="general.space2xs general.spaceXs general.space2xs none"
                   onClick={() => console.log('Vanilla')}
                 />
                 <Tag
                   text="Coffee"
-                  margin="xxx-small xx-small xxx-small none"
+                  margin="general.space2xs general.spaceXs general.space2xs none"
                   onClick={() => console.log('Coffee')}
                 />
                 <Tag
                   text="Strawberry"
-                  margin="xxx-small xx-small xxx-small none"
+                  margin="general.space2xs general.spaceXs general.space2xs none"
                   onClick={() => console.log('Strawberry')}
                 />
               </>
@@ -239,18 +239,18 @@ type: example
     renderAfterInput={<Avatar name="Paula Panda" src={avatarSquare} size="x-small" />}
     shouldNotWrap
   />
-  <View as="div" margin="medium none none">
+  <View as="div" margin="general.spaceXl none none">
     <TextInput
       renderLabel="I will wrap"
       renderBeforeInput={
         <>
           <Tag
             text="English 101"
-            margin="xx-small xxx-small"
+            margin="general.spaceXs general.space2xs"
           />
           <Tag
             text="History 205"
-            margin="xx-small xxx-small"
+            margin="general.spaceXs general.space2xs"
           />
         </>
       }

@@ -20,12 +20,12 @@ The `color` prop will change the Button's color scheme.
 type: example
 ---
 <View display="block">
-  <Button color="primary" margin="small">Primary</Button>
-  <Button color="secondary" margin="small">Secondary</Button>
-  <Button color="success" margin="small">Success</Button>
-  <Button color="danger" margin="small">Danger</Button>
-  <Button color="ai-primary" margin="small">AI Primary</Button>
-  <Button color="ai-secondary" margin="small">AI Secondary</Button>
+  <Button color="primary" margin="general.spaceMd">Primary</Button>
+  <Button color="secondary" margin="general.spaceMd">Secondary</Button>
+  <Button color="success" margin="general.spaceMd">Success</Button>
+  <Button color="danger" margin="general.spaceMd">Danger</Button>
+  <Button color="ai-primary" margin="general.spaceMd">AI Primary</Button>
+  <Button color="ai-secondary" margin="general.spaceMd">AI Secondary</Button>
 </View>
 ```
 
@@ -38,7 +38,7 @@ The `primary-inverse` color is designed for use on colored backgrounds. It provi
 type: example
 ---
 <View display="block" background="info" padding="small">
-  <Button color="primary-inverse" margin="small">Primary Inverse</Button>
+  <Button color="primary-inverse" margin="general.spaceMd">Primary Inverse</Button>
 </View>
 ```
 
@@ -51,12 +51,12 @@ There is a specific need for `AI buttons`, which has an icon and gradient colors
 type: example
 ---
 <View display="block">
-  <Button color="ai-primary" renderIcon={IgniteaiLogoInstUIIcon} margin="small">AI Primary</Button>
-  <Button color="ai-secondary" renderIcon={IgniteaiLogoInstUIIcon} margin="small">AI Secondary</Button>
-  <IconButton color="ai-primary" screenReaderLabel="AI button" margin="small"><IgniteaiLogoInstUIIcon/></IconButton>
-  <IconButton  shape='circle' color="ai-secondary" screenReaderLabel="AI button"  margin="small"><IgniteaiLogoInstUIIcon/></IconButton>
-  <IconButton   shape='circle' color="ai-primary" screenReaderLabel="AI button" margin="small"><IgniteaiLogoInstUIIcon/></IconButton>
-  <IconButton color="ai-secondary" screenReaderLabel="AI button"  margin="small"><IgniteaiLogoInstUIIcon/></IconButton>
+  <Button color="ai-primary" renderIcon={IgniteaiLogoInstUIIcon} margin="general.spaceMd">AI Primary</Button>
+  <Button color="ai-secondary" renderIcon={IgniteaiLogoInstUIIcon} margin="general.spaceMd">AI Secondary</Button>
+  <IconButton color="ai-primary" screenReaderLabel="AI button" margin="general.spaceMd"><IgniteaiLogoInstUIIcon/></IconButton>
+  <IconButton  shape='circle' color="ai-secondary" screenReaderLabel="AI button"  margin="general.spaceMd"><IgniteaiLogoInstUIIcon/></IconButton>
+  <IconButton   shape='circle' color="ai-primary" screenReaderLabel="AI button" margin="general.spaceMd"><IgniteaiLogoInstUIIcon/></IconButton>
+  <IconButton color="ai-secondary" screenReaderLabel="AI button"  margin="general.spaceMd"><IgniteaiLogoInstUIIcon/></IconButton>
 </View>
 ```
 
@@ -69,9 +69,9 @@ To specify the Button `size`, set the size prop to `small`, `medium` (default) o
 type: example
 ---
 <View display="block">
-  <Button size="small" margin="small">Small</Button>
-  <Button margin="small">Medium</Button>
-  <Button size="large" margin="small">Large</Button>
+  <Button size="small" margin="general.spaceMd">Small</Button>
+  <Button margin="general.spaceMd">Medium</Button>
+  <Button size="large" margin="general.spaceMd">Large</Button>
 </View>
 ```
 
@@ -82,8 +82,8 @@ There are also two condensed size variants for compact layouts: `condensedSmall`
 type: example
 ---
 <View display="block">
-  <Button size="condensedSmall" margin="small">Condensed Small</Button>
-  <Button size="condensedMedium" margin="small">Condensed Medium</Button>
+  <Button size="condensedSmall" margin="general.spaceMd">Condensed Small</Button>
+  <Button size="condensedMedium" margin="general.spaceMd">Condensed Medium</Button>
 </View>
 ```
 
@@ -109,7 +109,7 @@ type: example
 <View
   display="block"
   width="10rem"
-  margin="small"
+  margin="general.spaceMd"
   padding="small none"
   withVisualDebug
 >
@@ -146,7 +146,7 @@ type: example
       <View
         display="block"
         width="10rem"
-        margin="small"
+        margin="general.spaceMd"
         padding="small none"
         withVisualDebug
       >
@@ -178,7 +178,7 @@ type: example
 <View
   display="block"
   width="30rem"
-  margin="small"
+  margin="general.spaceMd"
   padding="small none"
   withVisualDebug
 >
@@ -202,7 +202,7 @@ Use backgroundless buttons when there is a need to deemphasize the button. Be su
 type: example
 ---
 <View display="block">
-  <Button renderIcon={PlusInstUIIcon} withBackground={false} color="primary" margin="small">Click here</Button>
+  <Button renderIcon={PlusInstUIIcon} withBackground={false} color="primary" margin="general.spaceMd">Click here</Button>
 </View>
 ```
 
@@ -261,7 +261,7 @@ type: example
               onChange={this.toggleWithBackground}
             />
           </FormFieldGroup>
-          <View display="block" margin="small none">
+          <View display="block" margin="general.spaceMd none">
             <RadioInputGroup
               name="color"
               defaultValue="secondary"
@@ -273,7 +273,7 @@ type: example
               <RadioInput label="secondary" value="secondary" />
             </RadioInputGroup>
           </View>
-          <Flex margin="none none medium" gap="medium">
+          <Flex margin="none none general.spaceXl" gap="medium">
             <Flex.Item>
               <Button withBackground={this.state.withBackground}
                       color={this.state.color}

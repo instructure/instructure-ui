@@ -21,9 +21,9 @@ the image a block-level element.
 type: example
 ---
 <View textAlign="center" as="div">
-  <Img margin="small" alt="A placeholder image" src={placeholderImage(300, 200)} />
-  <Img margin="small" src={placeholderImage(200, 200)} />
-  <Img display="block" margin="small auto" src={placeholderImage(400, 200)} />
+  <Img margin="general.spaceMd" alt="A placeholder image" src={placeholderImage(300, 200)} />
+  <Img margin="general.spaceMd" src={placeholderImage(200, 200)} />
+  <Img display="block" margin="general.spaceMd auto" src={placeholderImage(400, 200)} />
 </View>
 ```
 
@@ -40,19 +40,19 @@ type: example
       src={placeholderImage(200, 200)}
       overlay={{color: '#0374B5', opacity: 9, blend: 'overlay'}}
       alt="A placeholder image"
-      margin="x-small"
+      margin="general.spaceSm"
     />
     <Img
       src={placeholderImage(200, 200)}
       overlay={{color: '#0374B5', opacity: 6, blend: 'multiply'}}
       alt="A placeholder image"
-      margin="x-small"
+      margin="general.spaceSm"
     />
     <Img
       src={placeholderImage(200, 200)}
       overlay={{color: '#0374B5', opacity: 3}}
       alt="A placeholder image"
-      margin="x-small"
+      margin="general.spaceSm"
     />
   </View>
 ```
@@ -98,13 +98,13 @@ type: example
       withGrayscale
       src={avatarSquare}
       alt="A placeholder image"
-      margin="x-small"
+      margin="general.spaceSm"
     />
     <Img
       withBlur
       src={avatarSquare}
       alt="A placeholder image"
-      margin="x-small"
+      margin="general.spaceSm"
     />
   </View>
 ```

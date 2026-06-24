@@ -113,9 +113,9 @@ class PlaygroundExample extends React.Component {
           >
             <Heading level="h3">Contact information</Heading>
             <p>{lorem.sentence()}</p>
-            <Button color="primary" margin="x-small 0 small">Help Center</Button>
+            <Button color="primary" margin="general.spaceSm 0 general.spaceMd">Help Center</Button>
             <hr aria-hidden="true" />
-            <View as="div" margin="medium 0 0">
+            <View as="div" margin="general.spaceXl 0 0">
               <Text weight="bold">
                 <div>Contact person</div>
                 <Link href="/#TopNavBar" isWithinText={false}>
@@ -404,10 +404,10 @@ class PlaygroundExample extends React.Component {
     }
 
     return (
-      <View as="div" margin="medium 0 large">
+      <View as="div" margin="general.spaceXl 0 general.space2xl">
         <FormFieldGroup
           description={(
-            <Heading as="p" level="h3" margin="0 0 large">
+            <Heading as="p" level="h3" margin="0 0 general.space2xl">
               Example Settings
             </Heading>
           )}
@@ -479,7 +479,7 @@ class PlaygroundExample extends React.Component {
       <View overflowY='auto' as="div">
         <View as="div" maxWidth="75rem" margin="0 auto">
 
-          <View as="div" margin="large medium small">
+          <View as="div" margin="general.space2xl general.spaceXl general.spaceMd">
             <Button
               onClick={() => { this.setState({ isModalOpen: false }) }}
               renderIcon={XInstUIIcon}
@@ -488,8 +488,8 @@ class PlaygroundExample extends React.Component {
             </Button>
           </View>
 
-          <View as="div" margin="large medium 0">
-            <Heading as="p" level="h2" margin="0 0 x-small">
+          <View as="div" margin="general.space2xl general.spaceXl 0">
+            <Heading as="p" level="h2" margin="0 0 general.spaceSm">
               {this.state.breadcrumbs[this.state.breadcrumbs.length - 1]}
             </Heading>
 
@@ -540,7 +540,7 @@ class PlaygroundExample extends React.Component {
                     padding="small medium medium"
                   >
                     {Array.from(Array(5)).map((_i, idx) => (
-                      <View as="div" margin="medium 0" key={idx}>
+                      <View as="div" margin="general.spaceXl 0" key={idx}>
                         {this.fillerText}
                       </View>
                     ))}
@@ -1094,7 +1094,7 @@ Use the brand logo over the primary brand color.
 type: example
 ---
 <div>
-  <View as="div" margin="medium 0">
+  <View as="div" margin="general.spaceXl 0">
     <TopNavBar>
       {() => (
         <TopNavBar.Layout
@@ -1121,7 +1121,7 @@ type: example
     </TopNavBar>
   </View>
 
-  <View as="div" margin="medium 0">
+  <View as="div" margin="general.spaceXl 0">
     <TopNavBar>
       {() => (
         <TopNavBar.Layout
@@ -1166,7 +1166,7 @@ In small viewport mode, a link is shown for the last but one element of the `<Br
 type: example
 ---
   <div>
-    <View as="div" margin="medium 0">
+    <View as="div" margin="general.spaceXl 0">
       <TopNavBar inverseColor>
         {() => (
           <TopNavBar.Layout
@@ -1208,7 +1208,7 @@ The current page is highlighted, if it's id is passed via the `currentPageId` pr
 type: example
 ---
 <div>
-  <View as="div" margin="medium 0">
+  <View as="div" margin="general.spaceXl 0">
     <TopNavBar breakpoint="10rem">
       {() => (
         <TopNavBar.Layout
@@ -1259,7 +1259,7 @@ type: example
     </TopNavBar>
   </View>
 
-  <View as="div" margin="medium 0">
+  <View as="div" margin="general.spaceXl 0">
     <TopNavBar breakpoint="10rem">
       {() => (
         <TopNavBar.Layout
@@ -1333,7 +1333,7 @@ Action items can have submenus and popovers too. It is also recommended to add h
 type: example
 ---
 <div>
-  <View as="div" margin="medium 0">
+  <View as="div" margin="general.spaceXl 0">
     <TopNavBar>
       {() => (
         <TopNavBar.Layout
@@ -1441,7 +1441,7 @@ type: example
 type: example
 ---
 <div>
-  <View as="div" margin="medium 0">
+  <View as="div" margin="general.spaceXl 0">
     <TopNavBar breakpoint="10rem">
       {() => (
         <TopNavBar.Layout
@@ -1465,7 +1465,7 @@ type: example
     </TopNavBar>
   </View>
 
-  <View as="div" margin="medium 0">
+  <View as="div" margin="general.spaceXl 0">
     <TopNavBar breakpoint="10rem">
       {() => (
         <TopNavBar.Layout
@@ -1490,7 +1490,7 @@ type: example
     </TopNavBar>
   </View>
 
-  <View as="div" margin="medium 0">
+  <View as="div" margin="general.spaceXl 0">
     <TopNavBar breakpoint="10rem">
       {() => (
         <TopNavBar.Layout
@@ -1528,7 +1528,7 @@ type: example
     </TopNavBar>
   </View>
 
-  <View as="div" margin="medium 0">
+  <View as="div" margin="general.spaceXl 0">
     <TopNavBar breakpoint="10rem">
       {() => (
         <TopNavBar.Layout
@@ -1567,7 +1567,7 @@ type: example
     </TopNavBar>
   </View>
 
-  <View as="div" margin="medium 0">
+  <View as="div" margin="general.spaceXl 0">
     <TopNavBar breakpoint="10rem">
       {() => (
         <TopNavBar.Layout
@@ -1650,7 +1650,7 @@ class LayoutExample extends React.Component {
           </FormFieldGroup>
         </View>
 
-        <View as="div" margin="medium 0 0" width={this.state.exampleWidth}>
+        <View as="div" margin="general.spaceXl 0 0" width={this.state.exampleWidth}>
           <div
             style={{
               height: '100%',
@@ -1814,7 +1814,7 @@ class LayoutExample extends React.Component {
             />
 
             <View background="primary" as="div" minHeight='10rem' padding="medium">
-              <Heading as="p" level="h2" margin="medium 0">
+              <Heading as="p" level="h2" margin="general.spaceXl 0">
                 Page Content
               </Heading>
 
@@ -1974,7 +1974,7 @@ type: example
 ---
 
 <div>
-  <View as="div" margin="medium 0">
+  <View as="div" margin="general.spaceXl 0">
     <TopNavBar breakpoint="10rem">
       {() => (
         <TopNavBar.Layout
@@ -2064,9 +2064,9 @@ type: example
                     >
                       <Heading level="h3">Contact information</Heading>
                       <p>{lorem.sentence()}</p>
-                      <Button color="primary" margin="x-small 0 small">Help Center</Button>
+                      <Button color="primary" margin="general.spaceSm 0 general.spaceMd">Help Center</Button>
                       <hr aria-hidden="true" />
-                      <View as="div" margin="medium 0 0">
+                      <View as="div" margin="general.spaceXl 0 0">
                         <Text weight="bold">
                           <div>Contact person</div>
                           <Link href="/#TopNavBar" isWithinText={false}>
@@ -2115,7 +2115,7 @@ class InPlaceDialogExample extends React.Component {
 
   render() {
     return (
-      <View as="div" margin="medium 0" maxWidth="29rem">
+      <View as="div" margin="general.spaceXl 0" maxWidth="29rem">
         <TopNavBar breakpoint="30rem" mediaQueryMatch="element">
           {({ currentLayout }) => (
             <TopNavBar.Layout
@@ -2234,7 +2234,7 @@ type: example
     },
   }
 }}>
-  <View as="div" margin="medium 0 0" width={1000}>
+  <View as="div" margin="general.spaceXl 0 0" width={1000}>
     <TopNavBar
       breakpoint='650'
       mediaQueryMatch='element'

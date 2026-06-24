@@ -10,7 +10,7 @@ type: example
 ---
 <View
   padding="large"
-  margin="medium"
+  margin="general.spaceXl"
   textAlign="center"
   as="div"
   style={{ position: 'relative' }}

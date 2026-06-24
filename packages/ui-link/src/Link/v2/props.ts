@@ -82,7 +82,7 @@ type LinkOwnProps = {
   /**
    * Valid values are `0`, `none`, `auto`, and Spacing token values,
    * see https://instructure.design/layout-spacing. Apply these values via
-   * familiar CSS-like shorthand. For example, `margin="small auto large"`.
+   * familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`.
    */
   margin?: Spacing
 

@@ -26,7 +26,7 @@ const Example = () => {
   return (
     <Pagination
       as="nav"
-      margin="small"
+      margin="general.spaceMd"
       variant="compact"
       labelNext="Next Page"
       labelPrev="Previous Page"
@@ -54,7 +54,7 @@ const Example = () => {
   return (
     <Pagination
       as="nav"
-      margin="small"
+      margin="general.spaceMd"
       variant="compact"
       labelNext="Next Page"
       labelPrev="Previous Page"
@@ -84,7 +84,7 @@ const Example = () => {
   return (
     <Pagination
       as="nav"
-      margin="small"
+      margin="general.spaceMd"
       variant="full"
       labelNext="Next Page"
       labelPrev="Previous Page"
@@ -114,7 +114,7 @@ const Example = () => {
   return (
     <Pagination
       as="nav"
-      margin="small"
+      margin="general.spaceMd"
       variant="full"
       labelNext="Next Page"
       labelPrev="Previous Page"
@@ -143,7 +143,7 @@ const Example = () => {
   return (
     <Pagination
       as="nav"
-      margin="small"
+      margin="general.spaceMd"
       variant="input"
       labelNext="Next Page"
       labelPrev="Previous Page"
@@ -196,7 +196,7 @@ class Example extends React.Component {
     return (
       <Pagination
         as="nav"
-        margin="small"
+        margin="general.spaceMd"
         variant="compact"
         labelNext="Next Page"
         labelPrev="Previous Page"
@@ -248,7 +248,7 @@ class Example extends React.Component {
     return (
       <Pagination
         as="nav"
-        margin="small"
+        margin="general.spaceMd"
         variant="compact"
         labelNext="Next Page"
         labelPrev="Previous Page"
@@ -304,7 +304,7 @@ class Example extends React.Component {
     return (
       <Pagination
         as="nav"
-        margin="small"
+        margin="general.spaceMd"
         variant="input"
         labelFirst="First Page"
         labelPrev="Previous Page"
@@ -371,7 +371,7 @@ class Example extends React.Component {
 
         <Pagination
           as="nav"
-          margin="large small small"
+          margin="general.space2xl general.spaceMd general.spaceMd"
           variant="compact"
           labelNext="Next Page"
           labelPrev="Previous Page"

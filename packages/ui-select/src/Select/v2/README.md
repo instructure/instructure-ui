@@ -713,7 +713,7 @@ const GroupSelectExample = ({ options }) => {
           type="notification"
           variant={variant}
           standalone
-          margin="0 x-small xxx-small 0"
+          margin="0 general.spaceSm general.space2xs 0"
         />
         {text}
       </span>
@@ -764,7 +764,7 @@ const GroupSelectExample = ({ options }) => {
                 : 'primary'
             }
             standalone
-            margin="0 0 xxx-small 0"
+            margin="0 0 general.space2xs 0"
           />
         }
         inputRef={(el) => {

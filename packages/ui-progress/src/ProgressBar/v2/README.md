@@ -17,7 +17,7 @@ type: example
     screenReaderLabel="Loading completion"
     valueNow={40}
     valueMax={60}
-    margin="0 0 small"
+    margin="0 0 general.spaceMd"
     renderValue={({ valueNow, valueMax }) => {
     return (
       <span>
@@ -34,7 +34,7 @@ type: example
     screenReaderLabel="Loading completion"
     valueNow={40}
     valueMax={60}
-    margin="0 0 small"
+    margin="0 0 general.spaceMd"
     renderValue={({ valueNow, valueMax }) => {
     return (
       <span>
@@ -50,7 +50,7 @@ type: example
     screenReaderLabel="Loading completion"
     valueNow={40}
     valueMax={60}
-    margin="0 0 small"
+    margin="0 0 general.spaceMd"
     renderValue={({ valueNow, valueMax }) => {
     return (
       <span>
@@ -124,7 +124,7 @@ type: example
     meterColor="info"
     valueNow={40}
     valueMax={60}
-    margin="0 0 small"
+    margin="0 0 general.spaceMd"
     renderValue={({ valueNow, valueMax }) => {
     return (
       <span>
@@ -141,7 +141,7 @@ type: example
     meterColor="success"
     valueNow={40}
     valueMax={60}
-    margin="0 0 small"
+    margin="0 0 general.spaceMd"
     renderValue={({ valueNow, valueMax }) => {
     return (
       <span>
@@ -158,7 +158,7 @@ type: example
     meterColor="alert"
     valueNow={40}
     valueMax={60}
-    margin="0 0 small"
+    margin="0 0 general.spaceMd"
     renderValue={({ valueNow, valueMax }) => {
     return (
       <span>
@@ -175,7 +175,7 @@ type: example
     meterColor="warning"
     valueNow={40}
     valueMax={60}
-    margin="0 0 small"
+    margin="0 0 general.spaceMd"
     renderValue={({ valueNow, valueMax }) => {
     return (
       <span>
@@ -192,7 +192,7 @@ type: example
     meterColor="danger"
     valueNow={40}
     valueMax={60}
-    margin="0 0 small"
+    margin="0 0 general.spaceMd"
     renderValue={({ valueNow, valueMax }) => {
     return (
       <span>
@@ -326,7 +326,7 @@ const Example = () => {
         as="div"
         background="primary"
         padding="medium"
-        margin="0 0 large 0"
+        margin="0 0 general.space2xl 0"
       >
         <FormFieldGroup
           description={<ScreenReaderContent>Settings</ScreenReaderContent>}

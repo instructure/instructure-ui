@@ -90,7 +90,18 @@ const ThemeablePropValues = {
 
 // SPACING
 type OldSpacingKeys = keyof typeof ThemeablePropValues.SPACING
+/**
+ * @deprecated Era-1 (legacy) spacing keywords. Still resolved at runtime, but
+ * prefer the current `CurrentSpacingValues` dot-path tokens (e.g. `general.spaceMd`).
+ * See https://instructure.design/layout-spacing.
+ */
 type OldSpacingValues = (typeof ThemeablePropValues.SPACING)[OldSpacingKeys]
+/**
+ * @deprecated Era-2 spacing tokens (the `space0`–`space60` and flat semantic set)
+ * have been phased out. Still resolved at runtime, but prefer the current
+ * `CurrentSpacingValues` dot-path tokens (e.g. `general.spaceMd`, `gap.cards.md`).
+ * See https://instructure.design/layout-spacing.
+ */
 type NewSpacingValues =
   | 'space0'
   | 'space2'
@@ -120,7 +131,38 @@ type NewSpacingValues =
   | 'tags'
   | 'statusIndicators'
   | 'dataPoints'
-type SpacingValues = OldSpacingValues | NewSpacingValues
+/**
+ * Current (era-3) spacing tokens. Referenced via dot-path notation and resolved
+ * against the new theme's `sharedTokens.spacing` map (see
+ * `@instructure/ui-themes` `newThemeTokens`). These are the recommended values
+ * for the `margin`/`padding` props. See https://instructure.design/layout-spacing.
+ */
+type CurrentSpacingValues =
+  // general t-shirt scale
+  | 'general.spaceNone'
+  | 'general.space2xs'
+  | 'general.spaceXs'
+  | 'general.spaceSm'
+  | 'general.spaceMd'
+  | 'general.spaceLg'
+  | 'general.spaceXl'
+  | 'general.space2xl'
+  // semantic gap tokens
+  | 'gap.sections'
+  | 'gap.buttons'
+  | 'gap.cards.sm'
+  | 'gap.cards.md'
+  | 'gap.cards.lg'
+  | 'gap.cards.nestedContainers.sm'
+  | 'gap.cards.nestedContainers.md'
+  | 'gap.cards.nestedContainers.lg'
+  | 'gap.inputs.horizontal'
+  | 'gap.inputs.vertical'
+  // semantic padding tokens
+  | 'padding.card.sm'
+  | 'padding.card.md'
+  | 'padding.card.lg'
+type SpacingValues = CurrentSpacingValues | OldSpacingValues | NewSpacingValues
 // adding `(string & {})` allows to use any string while still allowing specific string values to be suggested by IDEs
 type Spacing = SpacingValues | (string & {})
 
@@ -152,6 +194,7 @@ export default ThemeablePropValues
 export { ThemeablePropValues }
 export type {
   SpacingValues,
+  CurrentSpacingValues,
   Spacing,
   Shadow,
   Stacking,

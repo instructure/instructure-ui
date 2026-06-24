@@ -29,7 +29,7 @@ const Example = () => {
 
   const renderOptions = () => (
     <Flex alignItems="start">
-      <Flex.Item margin="small">
+      <Flex.Item margin="general.spaceMd">
         <RadioInputGroup
           name="layout"
           description="layout"
@@ -41,7 +41,7 @@ const Example = () => {
           <RadioInput label="stacked" value="stacked" />
         </RadioInputGroup>
       </Flex.Item>
-      <Flex.Item margin="small">
+      <Flex.Item margin="general.spaceMd">
         <Checkbox
           label="hover"
           checked={hover}
@@ -312,7 +312,7 @@ const SortableTable = ({ caption, headers, rows }) => {
                   }
                   name={`columnTextAlign_${headerId}`}
                   value={textAlign}
-                  margin="0 0 small"
+                  margin="0 0 general.spaceMd"
                   size="small"
                   onChange={(e, value) =>
                     handleColTextAlignChange(headerId, value)
@@ -346,7 +346,7 @@ const SortableTable = ({ caption, headers, rows }) => {
       {(props) => (
         <div>
           {props.layout !== 'stacked' && (
-            <View display="block" margin="0 0 medium">
+            <View display="block" margin="0 0 general.spaceXl">
               {renderOptions()}
             </View>
           )}
@@ -618,7 +618,7 @@ const PaginatedTable = ({
           variant="compact"
           labelNext="Next Page"
           labelPrev="Previous Page"
-          margin="large"
+          margin="general.space2xl"
         >
           {Array.from(Array(pageCount), (item, index) => (
             <Pagination.Page
@@ -792,7 +792,7 @@ const Example = () => {
 
   const renderOptions = () => (
     <Flex alignItems="start">
-      <Flex.Item margin="small">
+      <Flex.Item margin="general.spaceMd">
         <RadioInputGroup
           name="layout2"
           description="layout2"
@@ -804,7 +804,7 @@ const Example = () => {
           <RadioInput label="stacked" value="stacked" />
         </RadioInputGroup>
       </Flex.Item>
-      <Flex.Item margin="small">
+      <Flex.Item margin="general.spaceMd">
         <Checkbox
           label="hover"
           checked={hover}
@@ -902,7 +902,7 @@ const Example = () => {
 
   const renderOptions = () => (
     <Flex alignItems="start">
-      <Flex.Item margin="small">
+      <Flex.Item margin="general.spaceMd">
         <RadioInputGroup
           name="Layout"
           description="Layout"
@@ -913,7 +913,7 @@ const Example = () => {
           <RadioInput label="fixed" value="fixed" />
         </RadioInputGroup>
       </Flex.Item>
-      <Flex.Item margin="small">
+      <Flex.Item margin="general.spaceMd">
         <Checkbox
           label="hover"
           checked={hover}
@@ -1045,7 +1045,7 @@ const Example = () => {
 
   const renderOptions = () => (
     <Flex alignItems="start">
-      <Flex.Item margin="small">
+      <Flex.Item margin="general.spaceMd">
         <RadioInputGroup
           name="customStackedLayout"
           description="Layout"
@@ -1057,7 +1057,7 @@ const Example = () => {
           <RadioInput label="stacked" value="stacked" />
         </RadioInputGroup>
       </Flex.Item>
-      <Flex.Item margin="small">
+      <Flex.Item margin="general.spaceMd">
         <Checkbox
           label="hover"
           checked={hover}

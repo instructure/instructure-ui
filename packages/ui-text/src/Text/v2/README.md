@@ -154,7 +154,7 @@ exceed the bounds of their containers.
 type: example
 ---
 <div>
-  <View as="div" maxWidth="300px" margin="none none small" debug>
+  <View as="div" maxWidth="300px" margin="none none general.spaceMd" debug>
     <Text>
       superlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstring
     </Text>

@@ -140,7 +140,7 @@ type: embed
 <Guidelines>
   <Alert
     variant="info"
-    margin="small"
+    margin="general.spaceMd"
   >
     Every non-listed prop will be passed down to the underlying 'textarea' element, such as 'onBlur' and any other prop
   </Alert>

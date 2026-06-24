@@ -24,7 +24,7 @@ type: example
   <Alert
     variant="success"
     renderCloseButtonLabel="Close"
-    margin="small"
+    margin="general.spaceMd"
     transition="none"
     variantScreenReaderLabel="Success, "
   >
@@ -33,7 +33,7 @@ type: example
   <Alert
     variant="info"
     renderCloseButtonLabel="Close"
-    margin="small"
+    margin="general.spaceMd"
     variantScreenReaderLabel="Information, "
   >
     Sample info text. I will fade out if you close me.
@@ -41,7 +41,7 @@ type: example
   <Alert
     variant="error"
     renderCloseButtonLabel="Close"
-    margin="small"
+    margin="general.spaceMd"
     variantScreenReaderLabel="Error, "
   >
     Sample error text that continues for a while
@@ -51,7 +51,7 @@ type: example
   </Alert>
   <Alert
     variant="warning"
-    margin="small"
+    margin="general.spaceMd"
     variantScreenReaderLabel="Warning, "
   >
     Sample warning text. This alert is not dismissible and cannot be closed.
@@ -67,7 +67,7 @@ type: example
 ---
 <Alert
   variant="info"
-  margin="small"
+  margin="general.spaceMd"
   timeout={5000}
   variantScreenReaderLabel="Information, "
 >
@@ -119,14 +119,14 @@ const Example = () => {
       <Button onClick={addAlert}>Add Alert</Button>
       {alerts.map((alert) => {
         return (
-          <View key={alert.key} display="block" margin="small 0">
+          <View key={alert.key} display="block" margin="general.spaceMd 0">
             <Alert
               variant={alert.variant}
               renderCloseButtonLabel="Close"
               onDismiss={() => closeAlert(alert.key)}
               liveRegion={() => document.getElementById('flash-messages')}
               liveRegionPoliteness={alert.politeness}
-              margin="small 0"
+              margin="general.spaceMd 0"
             >
               This is {alert.politeness === 'polite' ? 'a' : 'an'}{' '}
               {alert.politeness} {alert.variant} alert
@@ -164,7 +164,7 @@ const Example = () => {
   return (
     <div>
       <Button onClick={changeMessage}>Change Message</Button>
-      <Button onClick={clearMessage} margin="0 0 0 small">
+      <Button onClick={clearMessage} margin="0 0 0 general.spaceMd">
         Clear Message
       </Button>
       <Alert
@@ -194,13 +194,13 @@ type: example
     padding="small medium"
     borderWidth="small"
     borderRadius="small"
-    margin="x-small 0"
+    margin="general.spaceSm 0"
   >
     {lorem.paragraph()}
   </View>
   <Alert
     variant="info"
-    margin="x-small 0"
+    margin="general.spaceSm 0"
     renderCloseButtonLabel="Close"
     hasShadow={false}
   >
@@ -212,7 +212,7 @@ type: example
     padding="small medium"
     borderWidth="small"
     borderRadius="small"
-    margin="x-small 0"
+    margin="general.spaceSm 0"
   >
     {lorem.paragraph()}
   </View>

@@ -1225,7 +1225,7 @@ type: example
       return (
         <span>
           <PlusInstUIIcon />
-          <View as="span" margin="0 0 0 x-small">
+          <View as="span" margin="0 0 0 general.spaceSm">
             New {label}
           </View>
         </span>
@@ -1290,7 +1290,7 @@ type: example
           }}
         >
           <Trash2InstUIIcon size="md"/>
-          <View as="span" margin="0 0 0 x-small">
+          <View as="span" margin="0 0 0 general.spaceSm">
             Delete {label}
           </View>
         </Drilldown.Option>

@@ -107,7 +107,7 @@ to add margin to the top or bottom of Link, wrap it inside a `<View />`.
 ---
 type: example
 ---
-<Text>The quick brown fox <Link href="https://instructure.github.io/instructure-ui/" margin="0 small">jumps</Link> over the lazy dog.</Text>
+<Text>The quick brown fox <Link href="https://instructure.github.io/instructure-ui/" margin="0 general.spaceMd">jumps</Link> over the lazy dog.</Text>
 ```
 
 ### Truncating text
@@ -138,12 +138,12 @@ render a Link with just an icon. Don't forget to add text for screen readers, th
 type: example
 ---
 <div>
-  <View as="div" margin="0 0 small">
+  <View as="div" margin="0 0 general.spaceMd">
     <Text>
       <Link href="https://instructure.design" renderIcon={<DiamondInstUIIcon />}>Icon before text</Link> with the quick brown fox
     </Text>
   </View>
-  <View as="div" margin="0 0 small">
+  <View as="div" margin="0 0 general.spaceMd">
     <Text>
       This Link has an icon and displays inline with text.
       <Link

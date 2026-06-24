@@ -43,7 +43,7 @@ const AppNavExample = () => {
         <IconButton
           onClick={() => console.log('Add')}
           renderIcon={<PlusInstUIIcon/>}
-          margin="0 0 0 x-small"
+          margin="0 0 0 general.spaceSm"
           screenReaderLabel="Add something"
           withBorder={false}
           withBackground={false}
