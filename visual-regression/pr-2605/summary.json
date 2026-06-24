@@ -1,8 +1,8 @@
 {
   "summary": {
     "total": 32,
-    "unchanged": 31,
-    "changed": 1,
+    "unchanged": 32,
+    "changed": 0,
     "added": 0,
     "removed": 0
   },
@@ -87,8 +87,8 @@
     },
     {
       "name": "dateinput-dateinput2.png",
-      "status": "changed",
-      "numDiff": 556,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
