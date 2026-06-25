@@ -33,23 +33,18 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
 // Dynamically import build functions and shared version utilities
-const { processSingleFile } = await import('../lib/build-docs.mjs')
+const { parseAndWriteFile } = await import('../lib/parseSingleFile.mjs')
 const { buildVersionMap, getPackageShortName, isDocIncludedInVersion } = await import('../lib/utils/buildVersionMap.mjs')
 
 const projectRoot = resolvePath(__dirname, '../../../')
 const buildDir = resolvePath(__dirname, '../__build__/')
 
-console.log('[MARKDOWN WATCHER] Starting markdown file watcher...')
-
 // Load the version map once at startup
 let versionMap = null
 try {
   versionMap = await buildVersionMap(projectRoot)
-  console.log(
-    `[MARKDOWN WATCHER] Loaded version map with versions: ${versionMap.libraryVersions.join(', ')}`
-  )
 } catch (error) {
-  console.warn('[MARKDOWN WATCHER] Could not load version map, falling back to root-only writes:', error.message)
+  console.warn('Could not load version map, falling back to root-only writes:', error.message)
 }
 
 /**
@@ -88,10 +83,7 @@ const ignore = [
 ]
 const cwd = resolvePath(__dirname, '../../../')
 
-console.log('[MARKDOWN WATCHER] Searching for markdown files...')
 const paths = await globby(patterns, { cwd, absolute: true, ignore })
-
-console.log(`[MARKDOWN WATCHER] Found ${paths.length} markdown files to watch`)
 
 // Debounce file changes to avoid processing the same file multiple times
 const processedFilesMap = new Map()
@@ -108,10 +100,10 @@ function debouncedProcess(filePath) {
   processedFilesMap.set(filePath, now)
 
   try {
-    console.log(`[MARKDOWN WATCHER] File changed: ${filePath}`)
-    const docObject = processSingleFile(filePath)
+    console.log(`File changed: ${filePath}`)
+    const docObject = parseAndWriteFile(filePath, buildDir)
     if (!docObject) {
-      console.log(`[MARKDOWN WATCHER] No doc output for: ${filePath}`)
+      console.log(`No doc output for: ${filePath}`)
       return
     }
 
@@ -127,13 +119,13 @@ function debouncedProcess(filePath) {
 
     if (targetVersionDirs.length > 0) {
       console.log(
-        `[MARKDOWN WATCHER] Wrote to version dirs: ${targetVersionDirs.join(', ')}`
+        `Wrote to version dirs: ${targetVersionDirs.join(', ')}`
       )
     }
 
-    console.log(`[MARKDOWN WATCHER] Successfully processed: ${filePath}`)
+    console.log(`Successfully processed: ${filePath}`)
   } catch (error) {
-    console.error(`[MARKDOWN WATCHER] Error processing file: ${filePath}`, error)
+    console.error(`Error processing file: ${filePath}`, error)
   }
 }
 
@@ -149,18 +141,18 @@ const watcher = chokidar.watch(paths, {
 
 watcher
   .on('ready', () => {
-    console.log(`[MARKDOWN WATCHER] Now watching ${paths.length} markdown files for changes`)
+    console.log(`Watching ${paths.length} markdown files`)
   })
   .on('change', (filePath) => {
     debouncedProcess(filePath)
   })
   .on('error', (error) => {
-    console.error('[MARKDOWN WATCHER] Watcher error:', error)
+    console.error('Watcher error:', error)
   })
 
 // Handle graceful shutdown
 const shutdown = () => {
-  console.log('\n[MARKDOWN WATCHER] Shutting down...')
+  console.log('\nShutting down...')
   watcher.close()
   process.exit(0)
 }

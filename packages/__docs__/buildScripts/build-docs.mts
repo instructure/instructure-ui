@@ -24,8 +24,10 @@
 
 import { globby } from 'globby'
 import path from 'path'
+import os from 'os'
+import { Worker } from 'worker_threads'
 import { getClientProps } from './utils/getClientProps.mjs'
-import { processFile } from './processFile.mjs'
+import { parseSingleFile, projectRoot, library } from './parseSingleFile.mjs'
 import fs from 'fs'
 import {
   canvas,
@@ -36,28 +38,20 @@ import {
   legacyCanvasHighContrast
 } from '@instructure/ui-themes'
 import type {
-  LibraryOptions,
   MainDocsData,
   ProcessedFile,
   VersionMap
 } from './DataTypes.mjs'
-import { getFrontMatter } from './utils/getFrontMatter.mjs'
 import { buildVersionMap, getPackageShortName, isDocIncludedInVersion } from './utils/buildVersionMap.mjs'
 import { fileURLToPath, pathToFileURL } from 'url'
 import { generateAIAccessibleMarkdowns } from './ai-accessible-documentation/generate-ai-accessible-markdowns.mjs'
 import { generateAIAccessibleLlmsFile } from './ai-accessible-documentation/generate-ai-accessible-llms-file.mjs'
-import packageJson from '../package.json' with { type: "json" }
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 const buildDir = './__build__/'
-const projectRoot = path.resolve(__dirname, '../../../')
 const packagesDir = '../..'
-const library: LibraryOptions = {
-  version: packageJson.version,
-  repository: packageJson.repository.url
-}
 
 // TODO this misses:
 // ui-react-utils/src/DeterministicIDContext.ts and some others
@@ -144,22 +138,14 @@ function filterDocsForVersion(
 }
 
 async function buildDocs() {
-  // eslint-disable-next-line no-console
-  console.log('Start building application data')
-  console.time('docs build time')
+  const startedAt = Date.now()
 
   const { COPY_VERSIONS_JSON = '1' } = process.env
   const shouldDoTheVersionCopy = Boolean(parseInt(COPY_VERSIONS_JSON))
 
   try {
     // Build the version map first
-    // eslint-disable-next-line no-console
-    console.log('Building version map...')
     const versionMap = await buildVersionMap(projectRoot)
-    // eslint-disable-next-line no-console
-    console.log(
-      `Found library versions: ${versionMap.libraryVersions.join(', ')}`
-    )
 
     // globby needs the posix format
     const files = pathsToProcess.map((file) =>
@@ -171,13 +157,9 @@ async function buildDocs() {
     const matches = await globby(files, { ignore })
 
     fs.mkdirSync(buildDir + 'docs/', { recursive: true })
-    // eslint-disable-next-line no-console
-    console.log(
-      'Parsing markdown and source files... (' + matches.length + ' files)'
+    const allDocs = await parseFilesInParallel(
+      matches.map((relativePath) => path.resolve(relativePath))
     )
-    const allDocs = matches
-      .map((relativePath) => parseSingleFile(path.resolve(relativePath)))
-      .filter(Boolean) as ProcessedFile[]
 
     const themes = parseThemes()
     const { defaultVersion } = versionMap
@@ -190,9 +172,7 @@ async function buildDocs() {
 
       const versionDocs = filterDocsForVersion(allDocs, libVersion, versionMap)
       // eslint-disable-next-line no-console
-      console.log(
-        `Building docs for ${libVersion}: ${versionDocs.length} docs`
-      )
+      console.log(`Generated docs for ${libVersion} (${versionDocs.length} entries)`)
 
       const clientProps = getClientProps(versionDocs)
       const mainDocsData: MainDocsData = {
@@ -245,8 +225,6 @@ async function buildDocs() {
       buildDir + 'docs-versions.json',
       JSON.stringify(docsVersionsManifest)
     )
-    // eslint-disable-next-line no-console
-    console.log('Wrote docs-versions.json')
 
     // Generate AI accessible documentation from default version
     const defaultVersionDocsDir = buildDir + 'docs/' + defaultVersion + '/'
@@ -264,21 +242,15 @@ async function buildDocs() {
       }
     )
 
-    // eslint-disable-next-line no-console
-    console.log('Copying legacy icons data...')
     fs.copyFileSync(
       projectRoot + '/packages/ui-icons/src/generated/legacy/legacy-icons-data.json',
       buildDir + 'legacy-icons-data.json'
     )
 
     // eslint-disable-next-line no-console
-    console.log('Finished building documentation data')
-
-    console.timeEnd('docs build time')
+    console.log(`Docs built in ${((Date.now() - startedAt) / 1000).toFixed(1)}s`)
 
     if (shouldDoTheVersionCopy) {
-      // eslint-disable-next-line no-console
-      console.log('Copying versions.json into __build__ folder')
       const versionFilePath = path.resolve(__dirname, '..', 'versions.json')
       const buildDirPath = path.resolve(__dirname, '..', '__build__')
 
@@ -296,70 +268,127 @@ async function buildDocs() {
 }
 
 /**
- * Parses a single file and returns a ProcessedFile, or undefined if it
- * should be skipped. Pure parsing — no file writes.
+ * Reports parse progress as files complete, returning a `tick` to call once per
+ * file. Renders a single growing line — `Parsing documentation sources....... done`
+ * — appending one dot per ~10% completed. We use `process.stdout.write` (not
+ * `console.log`, and no `\r` redraws) because under `pnpm dev` our stdout is
+ * piped through `concurrently`: a carriage return would clobber its `[docs]`
+ * line prefix, whereas appended dots keep building up on the one line. In
+ * verbose mode the per-file `Processing …` logs (see processFile) are the
+ * progress indicator, so this is suppressed.
  */
-function parseSingleFile(fullPath: string) {
-  let docObject
-  const dirName = path.dirname(fullPath)
-  const fileName = path.parse(fullPath).name
-  if (fileName === 'index') {
-    docObject = processFile(fullPath, projectRoot, library)
-    if (!docObject) {
-      return
-    }
-    // Some Components (e.g. Alert) store their descriptions in README.md files.
-    // Add this to the final JSON if it's edited
-    const readmeDesc = tryParseReadme(dirName)
-    docObject.description = readmeDesc
-      ? docObject.description + readmeDesc
-      : docObject.description
-  } else if (fileName === 'README') {
-    // if we edit a README, we'll need to add the changes to the components JSON
-    let componentIndexFile: string | undefined
-    if (fs.existsSync(path.join(dirName, 'index.tsx'))) {
-      componentIndexFile = path.join(dirName, 'index.tsx')
-    } else if (fs.existsSync(path.join(dirName, 'index.ts'))) {
-      componentIndexFile = path.join(dirName, 'index.ts')
-    }
-    if (componentIndexFile) {
-      docObject = processFile(componentIndexFile, projectRoot, library)!
-      const readmeDesc = tryParseReadme(dirName)
-      docObject.description = readmeDesc ? readmeDesc : docObject.description
-    } else {
-      // just a README.md, has no index file
-      docObject = processFile(fullPath, projectRoot, library)
-    }
-  } else {
-    // documentation .md files, utils ts and tsx files
-    docObject = processFile(fullPath, projectRoot, library)
+function createProgressReporter(total: number) {
+  if (process.env.DOCS_VERBOSE) {
+    return () => {}
   }
-  return docObject
+
+  const totalDots = 25
+  let done = 0
+  let dots = 0
+
+  return () => {
+    done += 1
+    if (done === 1) {
+      process.stdout.write('Parsing documentation sources')
+      // manually printing the first 2 dots so it feels more immediate before the actual progress starts
+      setTimeout(() => {
+        process.stdout.write('.')
+      }, 400)
+      setTimeout(() => {
+        process.stdout.write('.')
+      }, 800)
+    }
+    const target = Math.floor((done / total) * totalDots)
+    while (dots < target) {
+      process.stdout.write('.')
+      dots += 1
+    }
+    if (done === total) {
+      process.stdout.write(` done (${total} files)\n`)
+    }
+  }
 }
 
 /**
- * Parses a file and writes its JSON to the root build dir.
- * Used by the Webpack watcher for incremental rebuilds.
+ * Parses every file across a pool of worker threads, then reassembles the
+ * results into the exact same order a serial `matches.map(parseSingleFile)`
+ * would produce. react-docgen/babel parsing is CPU-bound and single-threaded,
+ * so fanning the ~1700 files out across cores is the dominant startup win.
+ *
+ * Each worker returns its docs as a JSON string keyed by original index; the
+ * parent slots them back by index, so the final output matches the serial build
+ * regardless of which worker finishes first. Workers also post a `tick` per
+ * file to drive the progress bar.
  */
-function processSingleFile(fullPath: string) {
-  const docObject = parseSingleFile(fullPath)
-  if (!docObject) {
-    return
-  }
-  const docJSON = JSON.stringify(docObject)
-  fs.writeFileSync(buildDir + 'docs/' + docObject.id + '.json', docJSON)
-  return docObject
-}
+async function parseFilesInParallel(
+  absPaths: string[]
+): Promise<ProcessedFile[]> {
+  const cpuCount =
+    typeof os.availableParallelism === 'function'
+      ? os.availableParallelism()
+      : os.cpus().length
+  const workerCount = Math.max(1, Math.min(cpuCount - 1, absPaths.length))
+  const tick = createProgressReporter(absPaths.length)
 
-function tryParseReadme(dirName: string) {
-  const readme = path.join(dirName, 'README.md')
-  if (fs.existsSync(readme)) {
-    const data = fs.readFileSync(readme)
-    const frontMatter = getFrontMatter(data)
-    return frontMatter.description
-    // TODO here the 'describes' field was used to pair them, remove it
+  // For tiny inputs the worker spin-up cost dominates; parse in-process.
+  if (workerCount <= 1 || absPaths.length < 50) {
+    return absPaths
+      .map((p) => {
+        const doc = parseSingleFile(p, projectRoot, library)
+        tick()
+        return doc
+      })
+      .filter(Boolean) as ProcessedFile[]
   }
-  return undefined
+
+  // Round-robin into chunks for even load (some files are far heavier than
+  // others); the carried index restores serial ordering afterwards.
+  const chunks: [number, string][][] = Array.from(
+    { length: workerCount },
+    () => []
+  )
+  absPaths.forEach((p, index) => {
+    chunks[index % workerCount].push([index, p])
+  })
+
+  const workerURL = new URL('./parse-worker.mjs', import.meta.url)
+  const slots: (ProcessedFile | null)[] = new Array(absPaths.length).fill(null)
+
+  await Promise.all(
+    chunks.map(
+      (items) =>
+        new Promise<void>((resolve, reject) => {
+          const worker = new Worker(workerURL, {
+            workerData: { items }
+          })
+          worker.on(
+            'message',
+            (msg: { t: 'tick' } | { t: 'done'; data: string }) => {
+              if (msg.t === 'tick') {
+                tick()
+              } else {
+                const entries = JSON.parse(msg.data) as [
+                  number,
+                  ProcessedFile | null
+                ][]
+                for (const [index, doc] of entries) {
+                  slots[index] = doc
+                }
+                resolve()
+              }
+            }
+          )
+          worker.once('error', reject)
+          worker.once('exit', (code) => {
+            if (code !== 0) {
+              reject(new Error(`Parse worker stopped with exit code ${code}`))
+            }
+          })
+        })
+    )
+  )
+
+  return slots.filter(Boolean) as ProcessedFile[]
 }
 
 function resolveComponents(theme: typeof legacyCanvas | typeof legacyCanvasHighContrast) {
@@ -467,8 +496,6 @@ function parseThemes() {
 export {
   pathsToProcess,
   pathsToIgnore,
-  parseSingleFile,
-  processSingleFile,
   buildDocs,
   filterDocsForVersion
 }

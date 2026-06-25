@@ -93,7 +93,15 @@ module.exports = function (
       require('@babel/plugin-transform-runtime').default,
       {
         ...babelHelperVersion,
-        useESModules: opts.esModules
+        useESModules: opts.esModules,
+        // When `inlineHelpers` is set, don't externalize Babel helpers to
+        // `@babel/runtime`; emit them inline in each module instead. This avoids
+        // a CJS/ESM mismatch in consumers that compile to CommonJS but resolve
+        // `@babel/runtime` via the `import` condition (which serves the ESM
+        // helper), where `_interopRequireDefault(...)` would be a namespace
+        // object rather than a function. Off by default so library builds keep
+        // sharing helpers via `@babel/runtime`.
+        ...(opts.inlineHelpers ? { helpers: false } : {})
       }
     ]
   ])
