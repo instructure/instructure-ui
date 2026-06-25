@@ -160,7 +160,7 @@ const AiInformation = ({
                     />
                   </div>
                   <div css={styles?.modelNameText}>
-                    <Heading level="h3" variant="label">
+                    <Heading level="h4" variant="label">
                       {' '}
                       {modelNameText}{' '}
                     </Heading>
