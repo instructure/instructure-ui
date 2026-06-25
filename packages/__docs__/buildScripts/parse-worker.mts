@@ -22,21 +22,26 @@
  * SOFTWARE.
  */
 
-import uiBabelPreset from '@instructure/ui-babel-preset'
+import { parentPort, workerData } from 'worker_threads'
+import { parseSingleFile, projectRoot, library } from './parseSingleFile.mjs'
 
-export default {
-  presets: [
-    [
-      uiBabelPreset,
-      {
-        transformImports: false, // needed for webpack reload on change to work
-        // Inline Babel helpers instead of importing them from `@babel/runtime`.
-        // The dev build compiles `@instructure/*` from raw `src` to CommonJS,
-        // but webpack's `import` condition resolves `@babel/runtime` helpers to
-        // their ESM build — a mismatch that crashes with
-        // "_interopRequireDefault is not a function". Inlining sidesteps it.
-        inlineHelpers: true
-      }
-    ]
-  ]
+interface WorkerInput {
+  // [originalIndex, absolutePath] pairs; the index lets the parent reassemble
+  // results into the exact same order as a serial parse.
+  items: [number, string][]
 }
+
+const { items } = workerData as WorkerInput
+
+// Each parsed doc is paired with its original index so the parent can restore
+// serial order. The whole chunk is sent back as one JSON string (one
+// structured-clone, cheap to re-parse) rather than postMessaging each doc
+// individually. A `tick` is posted per file so the parent can drive the
+// progress bar.
+const results: [number, unknown][] = items.map(([index, fullPath]) => {
+  const doc = parseSingleFile(fullPath, projectRoot, library) ?? null
+  parentPort!.postMessage({ t: 'tick' })
+  return [index, doc]
+})
+
+parentPort!.postMessage({ t: 'done', data: JSON.stringify(results) })

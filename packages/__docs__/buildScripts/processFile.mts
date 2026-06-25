@@ -33,8 +33,12 @@ export function processFile(
   projectRoot: string,
   library: LibraryOptions
 ): ProcessedFile | undefined {
-  // eslint-disable-next-line no-console
-  console.info(`Processing ${fullPath}`)
+  // One line per file floods the dev-server startup (~1700 files); opt in with
+  // DOCS_VERBOSE=1 when debugging a parse hang on a specific file.
+  if (process.env.DOCS_VERBOSE) {
+    // eslint-disable-next-line no-console
+    console.info(`Processing ${fullPath}`)
+  }
   const source = fs.readFileSync(fullPath)
   const dirName = path.dirname(fullPath) || process.cwd()
   const pathInfo = getPathInfo(fullPath, projectRoot, library)

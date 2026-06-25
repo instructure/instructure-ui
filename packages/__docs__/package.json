@@ -13,7 +13,7 @@
   "scripts": {
     "prestart": "pnpm run build:scripts:ts && node lib/build-docs.mjs",
     "start": "pnpm run prestart && ui-scripts bundle && ui-scripts server -p 8001",
-    "start:watch": "pnpm run prestart && concurrently -n markdown,webpack -c cyan,yellow \"node buildScripts/watch-markdown.mjs\" \"ui-scripts bundle --watch\"",
+    "start:watch": "pnpm run build:scripts:ts && concurrently --success first -n \"docs,markdown watcher,webpack\" -c green,cyan,yellow \"node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON lib/build-docs.mjs\" \"node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON buildScripts/watch-markdown.mjs\" \"ui-scripts bundle --watch\"",
     "start-watch-just-app": "ui-scripts bundle --watch",
     "watch:markdown": "node buildScripts/watch-markdown.mjs",
     "bundle": "pnpm run prestart && ui-scripts bundle",
