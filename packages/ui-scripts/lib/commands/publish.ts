@@ -49,16 +49,32 @@ export default {
       describe: 'If true pnpm publish will use vXYZ-pr-snapshot as version',
       default: false
     })
+
+    yargs.option('customVersion', {
+      type: 'string',
+      describe:
+        'Publish all packages at this exact semver prerelease version (e.g. 11.7.3-SECURITY.0) instead of the version in package.json. Must be combined with --distTag.',
+      default: ''
+    })
+
+    yargs.option('distTag', {
+      type: 'string',
+      describe:
+        'Override the npm dist-tag used for this release. Required with --customVersion. Cannot be "latest".',
+      default: ''
+    })
   },
   handler: async (argv: any) => {
-    const { isMaintenance, prRelease } = argv
+    const { isMaintenance, prRelease, customVersion, distTag } = argv
     try {
       const pkgJSON = pkgUtils.getPackageJSON()
       await publish({
         packageName: pkgJSON.name,
         version: pkgJSON.version,
         isMaintenance,
-        prRelease
+        prRelease,
+        customVersion,
+        distTag
       })
     } catch (err) {
       error(err)
@@ -71,14 +87,20 @@ async function publish({
   packageName,
   version,
   isMaintenance,
-  prRelease
+  prRelease,
+  customVersion,
+  distTag
 }: {
   packageName: string
   version: string
   isMaintenance: boolean
   prRelease: boolean
+  customVersion: string
+  distTag: string
 }) {
   const isRegularRelease = isReleaseCommit(version)
+
+  validateCustomVersionInputs({ customVersion, distTag, isRegularRelease })
 
   checkNpmAuth()
 
@@ -98,18 +120,69 @@ async function publish({
         packages
       })
     } else {
-      const tag = prRelease ? 'pr-snapshot' : 'snapshot'
-      info(`📦  Version: ${version}, Tag: ${tag}`)
+      const tag = distTag || (prRelease ? 'pr-snapshot' : 'snapshot')
+      info(`📦  Version: ${customVersion || version}, Tag: ${tag}`)
       await publishSnapshotVersion({
         version,
         packageName,
         packages,
         tag,
-        prRelease
+        prRelease,
+        customVersion
       })
     }
   } finally {
     cleanupNPMRCFile()
+  }
+}
+
+/**
+ * Validates the optional --customVersion / --distTag pair used to mirror a
+ * private security release onto the public registry under a non-latest tag.
+ * Throws if the inputs are inconsistent or unsafe.
+ */
+function validateCustomVersionInputs({
+  customVersion,
+  distTag,
+  isRegularRelease
+}: {
+  customVersion: string
+  distTag: string
+  isRegularRelease: boolean
+}) {
+  if (!customVersion && !distTag) return
+
+  // These inputs only affect the snapshot/prerelease path. On a release commit
+  // they would be silently ignored, so fail loudly instead of publishing the
+  // wrong version under the wrong tag.
+  if (isRegularRelease) {
+    throw new Error(
+      '--customVersion / --distTag are only supported for snapshot releases, but this is a release commit. Aborting to avoid silently ignoring them.'
+    )
+  }
+
+  if (distTag === 'latest') {
+    throw new Error('--distTag cannot be "latest".')
+  }
+
+  if (customVersion) {
+    if (!semver.valid(customVersion)) {
+      throw new Error(
+        `--customVersion must be a valid semver, got: "${customVersion}"`
+      )
+    }
+    if (!semver.prerelease(customVersion)) {
+      throw new Error(
+        `--customVersion must be a prerelease (e.g. 11.7.3-SECURITY.0); got "${customVersion}". Refusing to take over a stable version slot.`
+      )
+    }
+    if (!distTag) {
+      throw new Error('--distTag is required when --customVersion is set.')
+    }
+  } else if (distTag) {
+    // distTag on its own would override the tag while still auto-computing the
+    // version — almost certainly not what the operator intended.
+    throw new Error('--distTag can only be used together with --customVersion.')
   }
 }
 
@@ -124,13 +197,14 @@ async function publishRegularVersion(arg: any) {
 }
 
 /**
- * Calculates the new snapshot version based on the latest tag
- * and the current commit, then publishes each package to npm
- * with the new snapshot version.
+ * Bumps packages to a snapshot/prerelease version (either operator-supplied
+ * via --customVersion, or auto-computed from the commit history) and
+ * publishes them under the given dist-tag.
  */
 async function publishSnapshotVersion(arg: any) {
-  const { version, packageName, packages, tag, prRelease } = arg
-  const snapshotVersion = calculateNextSnapshotVersion(version, prRelease)
+  const { version, packageName, packages, tag, prRelease, customVersion } = arg
+  const snapshotVersion =
+    customVersion || calculateNextSnapshotVersion(version, prRelease)
 
   info(`applying new snapshot version (${snapshotVersion}) to each package`)
 

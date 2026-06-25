@@ -14,6 +14,16 @@ on:
           - manual
           - pr-snapshot
         default: 'manual'
+      custom_version:
+        description: 'Optional: exact semver prerelease version to publish (pr-snapshot only). Overrides the auto-computed snapshot version. Example: 11.7.3-SECURITY.0'
+        required: false
+        type: string
+        default: ''
+      dist_tag:
+        description: 'Optional: npm dist-tag override (pr-snapshot only). Required when custom_version is set. Cannot be "latest".'
+        required: false
+        type: string
+        default: ''
 
 permissions:
   id-token: write    # Required for OIDC token generation
@@ -38,10 +48,15 @@ jobs:
       contents: write
     secrets: inherit
 
-  # PR snapshot release
+  # PR snapshot release. Optionally accepts custom_version + dist_tag to mirror
+  # a previously-published private security release onto the public registry
+  # under a non-latest dist-tag.
   pr-release:
     if: github.event_name == 'workflow_dispatch' && inputs.release_type == 'pr-snapshot'
     uses: ./.github/workflows/_pr-release-reusable.yml
+    with:
+      custom_version: ${{ inputs.custom_version }}
+      dist_tag: ${{ inputs.dist_tag }}
     permissions:
       id-token: write
       contents: write
