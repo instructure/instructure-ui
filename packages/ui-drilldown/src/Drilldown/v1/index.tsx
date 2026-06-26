@@ -1258,13 +1258,9 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
         optionProps.role = customRole || 'menuitemcheckbox'
       }
     }
-    // display option as highlighted
-    if (id === this.state.highlightedOptionId) {
+    // display option as highlighted, but never highlight disabled options
+    if (id === this.state.highlightedOptionId && !isOptionDisabled) {
       optionProps.variant = 'highlighted'
-
-      if (isOptionDisabled) {
-        optionProps.variant = 'highlighted-disabled'
-      }
     }
 
     if (href) {
