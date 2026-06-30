@@ -671,6 +671,7 @@ type: embed
     <Figure.Item>Modals should be able to be closed by clicking away, esc key and/or a close button</Figure.Item>
     <Figure.Item>We recommend that modals begin with a heading (typically H2)</Figure.Item>
     <Figure.Item>The Modal's header currently becomes non-sticky when the window height is too small, improving navigation of the Modal.Body, e.g., at higher zoom levels</Figure.Item>
+    <Figure.Item>`Modal.Body` automatically becomes a keyboard tab stop (its `tabIndex` is set to `0`) when it is vertically scrollable and contains no focusable elements, so it can be scrolled by keyboard-only users. This is re-evaluated dynamically as the body's content or size changes.</Figure.Item>
   </Figure>
 </Guidelines>
 ```
