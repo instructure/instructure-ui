@@ -1,0 +1,11 @@
+# Reviewer roster for the /pr skill — one GitHub handle per line.
+# This is a plain data file, NOT a GitHub CODEOWNERS file, so listing
+# someone here does not make them a code owner or auto-request them on PRs.
+# Refresh manually as the team changes. Lines starting with # are ignored;
+# a leading @ is optional.
+matyasf
+ToMESSKa
+joyenjoyer
+balzss
+git-nandor
+HerrTopi

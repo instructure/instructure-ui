@@ -45,6 +45,7 @@
     "bump:private": "ui-scripts bump --releaseType=prerelease",
     "release": "ui-scripts publish",
     "publish-private": "ui-scripts publish-private",
+    "commit": "cz",
     "husky:pre-commit": "lint-staged && node scripts/checkTSReferences.js",
     "postinstall": "husky",
     "ts:check": "pnpm -r --stream ts:check"

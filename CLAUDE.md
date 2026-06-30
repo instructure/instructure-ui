@@ -42,7 +42,7 @@ Avoid them unless the user explicitly asks. Breaking = removing/renaming a prop,
 
 ## Workflow
 
-- Use `/commit` and `/pr` — they follow InstUI conventions (Conventional Commits with package-name scopes, PR body with an `INSTUI-` Jira ref). Husky pre-commit runs lint-staged + a TS references check; `/commit` sets `HUSKY=0` to skip the interactive prompt.
+- Use `/commit` and `/pr` — they follow InstUI conventions (Conventional Commits with package-name scopes, PR body with an `INSTUI-` Jira ref). Husky `pre-commit` runs lint-staged + a TS references check and `commit-msg` runs commitlint; both fire on a normal `git commit`. The interactive Commitizen prompt is **not** a git hook — run `pnpm run commit` for the guided flow. Don't use `HUSKY=0` to bypass failing hooks; fix the cause.
 - Branch from `master`. PRs are squash-merged.
 - **Integrate `master` by rebasing, not merging** — use `git rebase master` (or `git pull --rebase`) to update a branch. Don't create merge commits; keep branch history linear since PRs are squash-merged anyway.
 - **Docs structure:** the site is generated from source code (JSDoc + `react-docgen` for prop types) plus `.md` files. Markdown docs use fenced code blocks with a gray-matter `type:` header that controls rendering: `type: code` (syntax-highlighted, not executed), `type: embed` (renders the JSX live into the page), and `type: example` (interactive, editable playground). Full reference: `/docs/contributing/writing-docs.md`.
