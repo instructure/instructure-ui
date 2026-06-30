@@ -13,7 +13,7 @@ Open a PR for the current branch.
 5. **Suggest reviewers (required — do not skip).** `/pr` is **not complete** until you've run the **Reviewer assignment** flow and presented the ranked list to the user. Creating the PR is only half the job; do this every time, even on a long session.
 6. Return the PR URL and the assigned reviewer (if any).
 
-If the branch name or any commit references a Jira ticket (e.g. `INSTUI-1234`), include it. If you can't find one, ask the user once before opening — don't invent one.
+If the branch name or any commit references a Jira ticket (e.g. `INSTUI-1234`), include it. If you can't find one, ask the user once before opening — don't invent one. If they don't have a ticket and the work warrants one, offer `/ticket` to create it first (it can add the `Fixes` line back to the PR afterward).
 
 ## gh invocation
 
