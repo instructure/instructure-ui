@@ -24,7 +24,6 @@
 
 import type { OtherHTMLAttributes } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
-import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { GridBreakpoints } from '../../utils/v1/GridTypes'
 
 type GridOwnProps = {
@@ -45,7 +44,7 @@ type PropKeys = keyof GridOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type GridProps = GridOwnProps &
-  WithStyleProps<ReturnType<NewComponentTypes['Grid']>, GridStyle> &
+  WithStyleProps<null, GridStyle> &
   OtherHTMLAttributes<GridOwnProps>
 
 type GridStyle = ComponentStyle<'grid'>
