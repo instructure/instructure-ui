@@ -1,5 +1,14 @@
 
-# Layout Spacing
+## Layout Spacing
+
+```js
+---
+type: embed
+---
+<Alert variant="warning" margin="0 0 medium">
+  The spacing tokens documented on this page (such as <code>general.spaceMd</code>) require <strong>v11.7+</strong> components and are applied through the <code>margin</code> and <code>padding</code> props. If you are viewing the v11.6 version, <Link href={window.location.pathname.match(/v\d+_\d+/) ? window.location.pathname.replace(/v\d+_\d+/, 'v11_7') : `/v11_7${window.location.pathname}`}>switch to v11.7</Link> to see the examples working correctly.
+</Alert>
+```
 
 Our design system provides a set of spacing tokens for consistent layouts and components. The current tokens are organized into a general t-shirt scale plus a handful of semantic tokens. Some tokens share a value but carry different meaning — prefer the semantically correct token for the context (e.g. use `gap.buttons` for spacing between buttons).
 
@@ -9,83 +18,62 @@ The `margin` and `padding` props on InstUI components accept these tokens via **
 
 ### General scale
 
-| Key                  | Value    | Value in pixels |
-| -------------------- | -------- | --------------- |
-| general.spaceNone    | 0rem     | 0px             |
-| general.space2xs     | 0.125rem | 2px             |
-| general.spaceXs      | 0.25rem  | 4px             |
-| general.spaceSm      | 0.5rem   | 8px             |
-| general.spaceMd      | 0.75rem  | 12px            |
-| general.spaceLg      | 1rem     | 16px            |
-| general.spaceXl      | 1.5rem   | 24px            |
-| general.space2xl     | 2rem     | 32px            |
+| Key               | Value    | Value in pixels |
+| ----------------- | -------- | --------------- |
+| general.spaceNone | 0rem     | 0px             |
+| general.space2xs  | 0.125rem | 2px             |
+| general.spaceXs   | 0.25rem  | 4px             |
+| general.spaceSm   | 0.5rem   | 8px             |
+| general.spaceMd   | 0.75rem  | 12px            |
+| general.spaceLg   | 1rem     | 16px            |
+| general.spaceXl   | 1.5rem   | 24px            |
+| general.space2xl  | 2rem     | 32px            |
 
 ### Semantic tokens
 
-| Key                                | Value    | Value in pixels |
-| ---------------------------------- | -------- | --------------- |
-| gap.sections                       | 3rem     | 48px            |
-| gap.buttons                        | 0.75rem  | 12px            |
-| gap.cards.sm                       | 0.75rem  | 12px            |
-| gap.cards.md                       | 1rem     | 16px            |
-| gap.cards.lg                       | 1.5rem   | 24px            |
-| gap.cards.nestedContainers.sm      | 0.5rem   | 8px             |
-| gap.cards.nestedContainers.md      | 0.75rem  | 12px            |
-| gap.cards.nestedContainers.lg      | 1rem     | 16px            |
-| gap.inputs.horizontal              | 0.75rem  | 12px            |
-| gap.inputs.vertical                | 1rem     | 16px            |
-| padding.card.sm                    | 0.5rem   | 8px             |
-| padding.card.md                    | 0.75rem  | 12px            |
-| padding.card.lg                    | 1rem     | 16px            |
+| Key                           | Value   | Value in pixels |
+| ----------------------------- | ------- | --------------- |
+| gap.sections                  | 3rem    | 48px            |
+| gap.buttons                   | 0.75rem | 12px            |
+| gap.cards.sm                  | 0.75rem | 12px            |
+| gap.cards.md                  | 1rem    | 16px            |
+| gap.cards.lg                  | 1.5rem  | 24px            |
+| gap.cards.nestedContainers.sm | 0.5rem  | 8px             |
+| gap.cards.nestedContainers.md | 0.75rem | 12px            |
+| gap.cards.nestedContainers.lg | 1rem    | 16px            |
+| gap.inputs.horizontal         | 0.75rem | 12px            |
+| gap.inputs.vertical           | 1rem    | 16px            |
+| padding.card.sm               | 0.5rem  | 8px             |
+| padding.card.md               | 0.75rem | 12px            |
+| padding.card.lg               | 1rem    | 16px            |
 
-## Applying Spacing
+## Applying spacing
 
-There are three main ways to apply spacing in our component library:
+### Using the `margin` prop
 
-### 1. Using the `margin` Prop
+Most components support a `margin` prop that works like the CSS `margin` property. Pass a single token or use the 1–4 value shorthand to fine-tune individual edges.
 
-Most components in the library support a `margin` prop that works similarly to the CSS margin property. You can specify a single value or fine-tune individual margins (e.g., top, right, bottom, left).
-
-```ts
+```js
 ---
 type: example
 ---
-<div>
+<View as="div" display="block" borderWidth="small" padding="general.spaceSm">
   <Button margin="0 general.spaceSm 0 0">Button 1</Button>
   <Button>Button 2</Button>
-</div>
+</View>
 ```
 
-### 2. Using a Container Component with the `gap` Prop
+### Using the `padding` prop
 
-For layouts, container components like `Flex` and `Grid` can be used with the gap prop to manage spacing between child elements.
+Components that render their own surface accept a `padding` prop, which resolves the same tokens. Semantic `padding.card.*` tokens are a good fit for card-like containers.
 
-```ts
+```js
 ---
 type: example
 ---
-<Flex gap="buttons">
-  <Button>Button 1</Button>
-  <Button>Button 2</Button>
-</Flex>
-```
-
-### 3. Importing Values from the Theme
-
-If you need to directly reference spacing values, you can import them from the theme. This approach is useful for applying spacing in inline styles or custom components.
-
-```ts
----
-type: code
----
-// import the canvas theme
-import canvas from '@instructure/ui-themes'
-
-// use spacing values
-<div style={{display: 'flex', gap: canvas.spacing.buttons}}>
-  <button>Button 1</button>
-  <button>Button 2</button>
-</div>
+<View as="div" display="block" borderWidth="small" padding="padding.card.lg">
+  This container uses <code>padding.card.lg</code>.
+</View>
 ```
 
 ## Deprecated tokens
