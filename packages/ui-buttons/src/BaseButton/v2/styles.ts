@@ -55,6 +55,12 @@ const generateStyle = (
     condensedMedium: componentTheme.gapButtonContentSm
   }
 
+  const heightForAiSize = {
+    small: componentTheme.smallHeight,
+    medium: componentTheme.mediumHeight,
+    large: componentTheme.largeHeight
+  }
+
   const shapeVariants = {
     circle: { borderRadius: componentTheme.borderRadiusFull },
     rectangle: {}
@@ -560,7 +566,16 @@ const generateStyle = (
       }),
       ...(!withBorder && {
         borderStyle: 'none'
-      })
+      }),
+      // ai-secondary uses padding to render its gradient border, which increases
+      // the outer size. Reduce the content size to keep dimensions consistent.
+      ...(color === 'ai-secondary' &&
+        (size === 'small' || size === 'medium' || size === 'large') && {
+          minHeight: `calc(${heightForAiSize[size]} - ${componentTheme.borderWidth} * 2)`,
+          ...(hasOnlyIconVisible && {
+            width: `calc(${heightForAiSize[size]} - ${componentTheme.borderWidth} * 2)`
+          })
+        })
     },
 
     children: {
