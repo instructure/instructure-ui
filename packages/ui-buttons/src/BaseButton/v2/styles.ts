@@ -55,6 +55,26 @@ const generateStyle = (
     condensedMedium: componentTheme.gapButtonContentSm
   }
 
+  // Outer height token per size, keyed like `sizeVariants`. Used to compensate
+  // the ai-secondary gradient-border padding.
+  const heightForSize = {
+    small: componentTheme.smallHeight,
+    medium: componentTheme.mediumHeight,
+    large: componentTheme.largeHeight,
+    condensedSmall: componentTheme.heightXxs,
+    condensedMedium: componentTheme.heightXs
+  }
+
+  // ai-secondary draws its gradient "border" as a ::before ring whose space is
+  // reserved by padding on the button wrapper (see the `&&&&&&&&&&` block below).
+  // That padding is additive to the content box, so an ai-secondary button ends
+  // up 2 × borderWidth taller — and, when icon-only, wider — than the same button
+  // in any other color. Shrink the content box by the same amount to compensate.
+  const aiSecondaryContentSize =
+    color === 'ai-secondary'
+      ? `calc(${heightForSize[size!]} - ${componentTheme.borderWidth} * 2)`
+      : undefined
+
   const shapeVariants = {
     circle: { borderRadius: componentTheme.borderRadiusFull },
     rectangle: {}
@@ -560,6 +580,14 @@ const generateStyle = (
       }),
       ...(!withBorder && {
         borderStyle: 'none'
+      }),
+      // ai-secondary uses padding to render its gradient border, which increases
+      // the outer size. Reduce the content size to keep dimensions consistent.
+      ...(aiSecondaryContentSize && {
+        ...(size === 'condensedSmall' || size === 'condensedMedium'
+          ? { height: aiSecondaryContentSize }
+          : { minHeight: aiSecondaryContentSize }),
+        ...(hasOnlyIconVisible && { width: aiSecondaryContentSize })
       })
     },
 

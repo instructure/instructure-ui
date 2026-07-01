@@ -237,6 +237,37 @@ export default function ButtonPage() {
           </IconButton>
         </View>
       </div>
+      {/*
+        Unlike every other color, ai-secondary has no real CSS border — it fakes
+        its gradient "border" with a ::before ring whose space is reserved by
+        padding on the wrapper. That padding inflates the outer size, so the
+        content box has to be shrunk back by a hand-written, per-size calc
+        (2 × borderWidth) to stay identical to the other colors. Because that
+        compensation is manual and size-specific, it's easy to miss a size or
+        variant.
+      */}
+      ai-secondary size parity (all sizes):
+      {(
+        ['small', 'medium', 'large', 'condensedSmall', 'condensedMedium'] as const
+      ).map((size) => (
+        <div
+          key={size}
+          style={{ display: 'flex', gap: '0.5rem', alignItems: 'flex-start' }}
+        >
+          <Button size={size} color="secondary">
+            {size}
+          </Button>
+          <Button size={size} color="ai-secondary">
+            {size}
+          </Button>
+          <IconButton size={size} color="secondary" screenReaderLabel="Add">
+            <IconAddLine />
+          </IconButton>
+          <IconButton size={size} color="ai-secondary" screenReaderLabel="AI">
+            <IconAiColoredSolid />
+          </IconButton>
+        </div>
+      ))}
     </main>
   )
 }
