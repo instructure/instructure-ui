@@ -122,6 +122,13 @@ type TextInputOwnProps = {
   shouldNotWrap?: boolean
 
   /**
+   * How wrapped `renderBeforeInput` content (e.g. tags) is spaced.
+   * - `'default'`: wrapped rows are not evenly padded.
+   * - `'even'`: wrapped rows get even padding.
+   */
+  contentSpacing?: 'default' | 'even'
+
+  /**
    * Html placeholder text to display when the input has no value. This should be hint text, not a label replacement.
    */
   placeholder?: string
@@ -216,6 +223,7 @@ const allowedProps: AllowedPropKeys = [
   'htmlSize',
   'display',
   'shouldNotWrap',
+  'contentSpacing',
   'placeholder',
   'isRequired',
   'elementRef',

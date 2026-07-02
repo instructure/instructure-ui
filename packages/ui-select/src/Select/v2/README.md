@@ -364,7 +364,7 @@ type: example
 
 #### Highlighting and selecting options
 
-To mark an option as "highlighted", use the option's `isHighlighted` prop. Note that only one highlighted option is permitted. Similarly, use `isSelected` to mark an option or multiple options as "selected". When allowing multiple selections, it's best to render a [Tag](Tag) with [AccessibleContent](AccessibleContent) for each selected option via the `renderBeforeInput` prop.
+To mark an option as "highlighted", use the option's `isHighlighted` prop. Note that only one highlighted option is permitted. Similarly, use `isSelected` to mark an option or multiple options as "selected". When allowing multiple selections, it's best to render a [Tag](Tag) with [AccessibleContent](AccessibleContent) for each selected option via the `renderBeforeInput` prop. Set `contentSpacing="even"` so wrapped tags are evenly padded as they wrap to multiple rows.
 
 ```js
 ---
@@ -534,9 +534,6 @@ type: example
               {getOptionById(id).label}
             </AccessibleContent>
           }
-          margin={
-            index > 0 ? 'xxx-small xx-small xxx-small 0' : '0 xx-small 0 0'
-          }
           onClick={(e) => dismissTag(e, id)}
         />
       ))
@@ -546,6 +543,7 @@ type: example
       <div>
         <Select
           renderLabel="Multiple Select"
+          contentSpacing="even"
           assistiveText="Type or use arrow keys to navigate options. Multiple selections allowed."
           inputValue={inputValue}
           isShowingOptions={isShowingOptions}

@@ -249,6 +249,13 @@ type PropsFromTextInput = {
   shouldNotWrap?: boolean
 
   /**
+   How wrapped `renderBeforeInput` content (e.g. tags) is spaced.
+   * - `'default'`: wrapped rows are not evenly padded.
+   * - `'even'`: wrapped rows get even padding.
+   */
+  contentSpacing?: 'default' | 'even'
+
+  /**
    * In `stacked` mode the input is below the label.
    *
    * In `inline` mode the input is to the right/left (depending on text direction) of the label,
@@ -325,6 +332,7 @@ const allowedProps: AllowedPropKeys = [
   'renderAfterInput',
   'children',
   'shouldNotWrap',
+  'contentSpacing',
   'scrollToHighlightedOption',
   'layout'
 ]

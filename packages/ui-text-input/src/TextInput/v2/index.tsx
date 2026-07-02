@@ -61,6 +61,7 @@ class TextInput extends Component<TextInputProps> {
     isRequired: false,
     display: 'block',
     shouldNotWrap: false,
+    contentSpacing: 'default',
     size: 'medium',
     textAlign: 'start',
     messages: []
