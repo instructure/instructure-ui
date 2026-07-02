@@ -9,7 +9,7 @@ Use [Button](Button), [CloseButton](CloseButton), [IconButton](IconButton), or [
 ---
 type: example
 ---
-<View display="block" margin="medium">
+<View display="block" margin="general.spaceXl">
   <BaseButton>Click me</BaseButton>
 </View>
 ```

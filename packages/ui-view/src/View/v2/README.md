@@ -20,7 +20,7 @@ type: example
 ---
 <View
   as="div"
-  margin="small"
+  margin="general.spaceMd"
   padding="large"
   textAlign="center"
   background="primary"
@@ -42,7 +42,7 @@ type: example
     as="div"
     display="inline-block"
     maxWidth="10rem"
-    margin="small"
+    margin="general.spaceMd"
     padding="small"
     background="transparent"
   >
@@ -52,7 +52,7 @@ type: example
     as="div"
     display="inline-block"
     maxWidth="10rem"
-    margin="small"
+    margin="general.spaceMd"
     padding="small"
     background="primary"
   >
@@ -62,7 +62,7 @@ type: example
     as="div"
     display="inline-block"
     maxWidth="10rem"
-    margin="small"
+    margin="general.spaceMd"
     padding="small"
     background="secondary"
   >
@@ -72,7 +72,7 @@ type: example
     as="div"
     display="inline-block"
     maxWidth="10rem"
-    margin="small"
+    margin="general.spaceMd"
     padding="small"
     background="primary-inverse"
   >
@@ -82,7 +82,7 @@ type: example
     as="div"
     display="inline-block"
     maxWidth="10rem"
-    margin="small"
+    margin="general.spaceMd"
     padding="small"
     background="brand"
   >
@@ -92,7 +92,7 @@ type: example
     as="div"
     display="inline-block"
     maxWidth="10rem"
-    margin="small"
+    margin="general.spaceMd"
     padding="small"
     background="alert"
   >
@@ -102,7 +102,7 @@ type: example
     as="div"
     display="inline-block"
     maxWidth="10rem"
-    margin="small"
+    margin="general.spaceMd"
     padding="small"
     background="success"
   >
@@ -112,7 +112,7 @@ type: example
     as="div"
     display="inline-block"
     maxWidth="10rem"
-    margin="small"
+    margin="general.spaceMd"
     padding="small"
     background="danger"
   >
@@ -122,7 +122,7 @@ type: example
     as="div"
     display="inline-block"
     maxWidth="10rem"
-    margin="small"
+    margin="general.spaceMd"
     padding="small"
     background="warning"
   >
@@ -144,7 +144,7 @@ type: example
     as="span"
     display="inline-block"
     maxWidth="10rem"
-    margin="small"
+    margin="general.spaceMd"
     padding="large"
     background="primary"
     shadow="resting"
@@ -155,7 +155,7 @@ type: example
     as="span"
     display="inline-block"
     maxWidth="10rem"
-    margin="small"
+    margin="general.spaceMd"
     padding="large"
     background="primary"
     shadow="above"
@@ -166,7 +166,7 @@ type: example
     as="span"
     display="inline-block"
     maxWidth="10rem"
-    margin="small"
+    margin="general.spaceMd"
     padding="large"
     background="primary"
     shadow="topmost"
@@ -191,7 +191,7 @@ type: example
     as="span"
     display="inline-block"
     maxWidth="10rem"
-    margin="small"
+    margin="general.spaceMd"
     padding="small"
     background="primary"
     borderWidth="small"
@@ -202,7 +202,7 @@ type: example
     as="span"
     display="inline-block"
     maxWidth="10rem"
-    margin="small"
+    margin="general.spaceMd"
     padding="small"
     background="primary"
     borderWidth="medium"
@@ -213,7 +213,7 @@ type: example
     as="span"
     display="inline-block"
     maxWidth="10rem"
-    margin="small"
+    margin="general.spaceMd"
     padding="small"
     background="primary"
     borderWidth="large none"
@@ -222,7 +222,7 @@ type: example
   </View>
   <View
     as="div"
-    margin="small"
+    margin="general.spaceMd"
     padding="small"
     background="primary"
     borderWidth="none none small none"
@@ -244,7 +244,7 @@ type: example
   <View
     as="span"
     display="inline-block"
-    margin="small"
+    margin="general.spaceMd"
     padding="small"
     background="primary"
     borderWidth="large"
@@ -254,7 +254,7 @@ type: example
   <View
     as="span"
     display="inline-block"
-    margin="small"
+    margin="general.spaceMd"
     padding="small"
     background="primary"
     borderWidth="large"
@@ -265,7 +265,7 @@ type: example
   <View
     as="span"
     display="inline-block"
-    margin="small"
+    margin="general.spaceMd"
     padding="small"
     background="primary"
     borderWidth="large"
@@ -276,7 +276,7 @@ type: example
   <View
     as="span"
     display="inline-block"
-    margin="small"
+    margin="general.spaceMd"
     padding="small"
     background="primary"
     borderWidth="large"
@@ -287,7 +287,7 @@ type: example
   <View
     as="span"
     display="inline-block"
-    margin="small"
+    margin="general.spaceMd"
     padding="small"
     background="primary"
     borderWidth="large"
@@ -298,7 +298,7 @@ type: example
   <View
     as="span"
     display="inline-block"
-    margin="small"
+    margin="general.spaceMd"
     padding="small"
     background="primary"
     borderWidth="large"
@@ -309,7 +309,7 @@ type: example
   <View
     as="span"
     display="inline-block"
-    margin="small"
+    margin="general.spaceMd"
     padding="small"
     background="primary"
     borderWidth="large"
@@ -335,7 +335,7 @@ type: example
     as="span"
     display="inline-block"
     maxWidth="10rem"
-    margin="small"
+    margin="general.spaceMd"
     padding="medium"
     background="primary-inverse"
     borderRadius="medium"
@@ -347,7 +347,7 @@ type: example
     as="span"
     display="inline-block"
     maxWidth="10rem"
-    margin="small"
+    margin="general.spaceMd"
     padding="medium"
     background="primary-inverse"
     borderRadius="large large none none"
@@ -359,7 +359,7 @@ type: example
     as="span"
     display="inline-block"
     maxWidth="10rem"
-    margin="small"
+    margin="general.spaceMd"
     padding="medium"
     background="primary-inverse"
     borderRadius="none none large large"
@@ -371,7 +371,7 @@ type: example
     display="inline-block"
     width="6rem"
     height="6rem"
-    margin="small"
+    margin="general.spaceMd"
     padding="medium"
     background="primary-inverse"
     borderRadius="circle"
@@ -382,7 +382,7 @@ type: example
   <View
     display="inline-block"
     width="10rem"
-    margin="small"
+    margin="general.spaceMd"
     padding="medium"
     background="primary-inverse"
     borderRadius="pill"
@@ -471,7 +471,7 @@ const FocusedExample = () => {
         as="div"
         background="primary"
         padding="small"
-        margin="0 0 small"
+        margin="0 0 general.spaceMd"
         borderWidth="small"
       >
         <FormFieldGroup
@@ -514,7 +514,7 @@ const FocusedExample = () => {
         <code>borderRadius =</code>
         <View
           display="inline-block"
-          margin="small"
+          margin="general.spaceMd"
           padding="small"
           background="primary"
           borderRadius="small"
@@ -528,7 +528,7 @@ const FocusedExample = () => {
         </View>
         <View
           display="inline-block"
-          margin="small"
+          margin="general.spaceMd"
           padding="small"
           background="primary"
           borderRadius="medium"
@@ -542,7 +542,7 @@ const FocusedExample = () => {
         </View>
         <View
           display="inline-block"
-          margin="small"
+          margin="general.spaceMd"
           padding="small"
           background="primary"
           borderRadius="large"
@@ -558,7 +558,7 @@ const FocusedExample = () => {
           display="inline-block"
           height="100px"
           width="100px"
-          margin="small"
+          margin="general.spaceMd"
           background="primary"
           borderRadius="circle"
           borderWidth="small"
@@ -583,7 +583,7 @@ const FocusedExample = () => {
         >
           <View
             display="block"
-            margin="small"
+            margin="general.spaceMd"
             padding="small"
             background="primary-inverse"
             borderRadius="large"
@@ -599,7 +599,7 @@ const FocusedExample = () => {
         </View>
         <View
           display="inline-block"
-          margin="small"
+          margin="general.spaceMd"
           padding="small"
           background="primary"
           borderRadius="pill"
@@ -616,7 +616,7 @@ const FocusedExample = () => {
         </View>
         <View
           display="inline-block"
-          margin="small"
+          margin="general.spaceMd"
           padding="small"
           background="primary"
           borderWidth="small"
@@ -695,7 +695,7 @@ const OverflowExample = () => {
         as="div"
         height="7rem"
         width="20rem"
-        margin="medium none x-large"
+        margin="general.spaceXl none general.space2xl"
         overflowY={overflowY}
         overflowX={overflowX}
         withVisualDebug
@@ -736,7 +736,7 @@ type: example
   >
     <View
       as="div"
-      margin="small"
+      margin="general.spaceMd"
       padding="small"
       withVisualDebug
     >
@@ -744,7 +744,7 @@ type: example
     </View>
     <View
       as="div"
-      margin="small"
+      margin="general.spaceMd"
       padding="small"
       withVisualDebug
     >
@@ -772,7 +772,7 @@ type: example
 >
   <View
     as="header"
-    margin="0 0 medium"
+    margin="0 0 general.spaceXl"
     withVisualDebug
   >
     <Text>
@@ -799,7 +799,7 @@ type: example
     display="inline-block"
     withVisualDebug
     textAlign="end"
-    margin="large auto"
+    margin="general.space2xl auto"
     padding="0 small 0 0"
   >
     <Text>

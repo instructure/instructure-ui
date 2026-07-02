@@ -17,7 +17,7 @@ const Example = () => {
 
   return (
     <Tabs
-      margin="large auto"
+      margin="general.space2xl auto"
       padding="medium"
       onRequestTabChange={handleTabChange}
     >
@@ -139,7 +139,7 @@ const Example = () => {
 
   return (
     <Tabs
-      margin="large auto"
+      margin="general.space2xl auto"
       padding="medium"
       onRequestTabChange={handleTabChange}
       tabOverflow="scroll"
@@ -249,7 +249,7 @@ const Example = () => {
 
   return (
     <>
-      <View display="block" margin="none none medium">
+      <View display="block" margin="none none general.spaceXl">
         <RadioInputGroup
           name="tabsHeightOptions"
           defaultValue="fixHeight: 100%"
@@ -271,7 +271,7 @@ const Example = () => {
 
       <View {...containerProps}>
         <Tabs
-          margin="large auto"
+          margin="general.space2xl auto"
           padding="medium"
           onRequestTabChange={handleTabChange}
           {...heightOptions[heightOption]}
@@ -345,7 +345,7 @@ const Outlet = () => {
 
   return (
     <div>
-      <Heading level="h1" as="h1" margin="0 0 x-small">
+      <Heading level="h1" as="h1" margin="0 0 general.spaceSm">
         {show ? 'Hello Developer' : 'Simulating network call...'}
       </Heading>
       {show ? (
@@ -373,7 +373,7 @@ const Example = () => {
 
   return (
     <Tabs
-      margin="large auto"
+      margin="general.space2xl auto"
       padding="medium"
       onRequestTabChange={handleTabChange}
     >
@@ -439,7 +439,7 @@ const Example = () => {
 
   return (
     <Tabs
-      margin="large auto"
+      margin="general.space2xl auto"
       padding="medium"
       onRequestTabChange={handleTabChange}
     >
@@ -504,7 +504,7 @@ const Example = () => {
 
   return (
     <Tabs
-      margin="large auto"
+      margin="general.space2xl auto"
       padding="medium"
       onRequestTabChange={handleTabChange}
     >

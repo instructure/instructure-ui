@@ -239,4 +239,70 @@ describe('calcSpacingFromShorthand', () => {
       consoleWarnSpy.mockRestore()
     })
   })
+
+  // Era-3 (current) tokens are referenced via dot-path notation and resolved
+  // against the new theme's nested `sharedTokens.spacing` map. This block mirrors
+  // that shape to verify the real consumer syntax (e.g. `margin="general.spaceMd"`).
+  describe('era-3 (current) spacing tokens', () => {
+    const eraThreeMap = {
+      general: {
+        spaceNone: '0rem',
+        space2xs: '0.125rem',
+        spaceXs: '0.25rem',
+        spaceSm: '0.5rem',
+        spaceMd: '0.75rem',
+        spaceLg: '1rem',
+        spaceXl: '1.5rem',
+        space2xl: '2rem'
+      },
+      gap: {
+        sections: '3rem',
+        buttons: '0.75rem',
+        cards: {
+          sm: '0.75rem',
+          md: '1rem',
+          lg: '1.5rem',
+          nestedContainers: { sm: '0.5rem', md: '0.75rem', lg: '1rem' }
+        },
+        inputs: { horizontal: '0.75rem', vertical: '1rem' }
+      },
+      padding: {
+        card: { sm: '0.5rem', md: '0.75rem', lg: '1rem' }
+      }
+    }
+
+    it('resolves a general scale token', () => {
+      expect(calcSpacingFromShorthand('general.spaceMd', eraThreeMap)).toBe('0.75rem')
+    })
+
+    it('resolves general.spaceNone', () => {
+      expect(calcSpacingFromShorthand('general.spaceNone', eraThreeMap)).toBe('0rem')
+    })
+
+    it('resolves a deeply nested semantic gap token', () => {
+      expect(
+        calcSpacingFromShorthand('gap.cards.nestedContainers.md', eraThreeMap)
+      ).toBe('0.75rem')
+    })
+
+    it('resolves a semantic padding token', () => {
+      expect(calcSpacingFromShorthand('padding.card.lg', eraThreeMap)).toBe('1rem')
+    })
+
+    it('handles CSS-like shorthand mixing the general scale with auto', () => {
+      const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
+
+      expect(
+        calcSpacingFromShorthand('general.spaceLg auto general.spaceXl', eraThreeMap)
+      ).toBe('1rem auto 1.5rem')
+
+      consoleWarnSpy.mockRestore()
+    })
+
+    it('mixes semantic gap and padding tokens', () => {
+      expect(
+        calcSpacingFromShorthand('gap.cards.sm padding.card.md', eraThreeMap)
+      ).toBe('0.75rem 0.75rem')
+    })
+  })
 })

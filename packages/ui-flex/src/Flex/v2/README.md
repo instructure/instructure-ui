@@ -19,19 +19,19 @@ Flex defaults to a `direction` of `row`, creating a horizontal layout. Change `d
 type: example
 ---
 <div>
-  <Flex withVisualDebug margin="none none large">
+  <Flex withVisualDebug margin="none none general.space2xl">
     <Flex.Item><Text>One</Text></Flex.Item>
     <Flex.Item><Text>Two</Text></Flex.Item>
     <Flex.Item><Text>Three</Text></Flex.Item>
     <Flex.Item><Text>Four</Text></Flex.Item>
   </Flex>
-  <Flex withVisualDebug direction="column" margin="none none large">
+  <Flex withVisualDebug direction="column" margin="none none general.space2xl">
     <Flex.Item><Text>One</Text></Flex.Item>
     <Flex.Item><Text>Two</Text></Flex.Item>
     <Flex.Item><Text>Three</Text></Flex.Item>
     <Flex.Item><Text>Four</Text></Flex.Item>
   </Flex>
-  <Flex withVisualDebug direction="row-reverse" margin="none none large">
+  <Flex withVisualDebug direction="row-reverse" margin="none none general.space2xl">
     <Flex.Item><Text>One</Text></Flex.Item>
     <Flex.Item><Text>Two</Text></Flex.Item>
     <Flex.Item><Text>Three</Text></Flex.Item>
@@ -55,19 +55,19 @@ Flex items will have no gap by default. You can set the gap between Flex.Items b
 type: example
 ---
 <div>
-  <Flex withVisualDebug margin="none none large" gap="small">
+  <Flex withVisualDebug margin="none none general.space2xl" gap="small">
     <Flex.Item><Text>One</Text></Flex.Item>
     <Flex.Item><Text>Two</Text></Flex.Item>
     <Flex.Item><Text>Three</Text></Flex.Item>
     <Flex.Item><Text>Four</Text></Flex.Item>
   </Flex>
-  <Flex withVisualDebug direction="column" margin="none none large" gap="medium">
+  <Flex withVisualDebug direction="column" margin="none none general.space2xl" gap="medium">
     <Flex.Item><Text>One</Text></Flex.Item>
     <Flex.Item><Text>Two</Text></Flex.Item>
     <Flex.Item><Text>Three</Text></Flex.Item>
     <Flex.Item><Text>Four</Text></Flex.Item>
   </Flex>
-  <Flex withVisualDebug direction="row-reverse" margin="none none large" gap="medium">
+  <Flex withVisualDebug direction="row-reverse" margin="none none general.space2xl" gap="medium">
     <Flex.Item><Text>One</Text></Flex.Item>
     <Flex.Item><Text>Two</Text></Flex.Item>
     <Flex.Item><Text>Three</Text></Flex.Item>
@@ -89,25 +89,25 @@ You can also set the gap between rows and columns by using the `gap` property. M
 type: example
 ---
 <div>
-  <Flex withVisualDebug margin="none none large" gap="small" wrap="wrap">
+  <Flex withVisualDebug margin="none none general.space2xl" gap="small" wrap="wrap">
     <Flex.Item size='25rem'><Text>One</Text></Flex.Item>
     <Flex.Item size='25rem'><Text>Two</Text></Flex.Item>
     <Flex.Item size='25rem'><Text>Three</Text></Flex.Item>
     <Flex.Item size='25rem'><Text>Four</Text></Flex.Item>
   </Flex>
-  <Flex withVisualDebug margin="none none large" gap="small large" wrap="wrap">
+  <Flex withVisualDebug margin="none none general.space2xl" gap="small large" wrap="wrap">
     <Flex.Item size='25rem'><Text>One</Text></Flex.Item>
     <Flex.Item size='25rem'><Text>Two</Text></Flex.Item>
     <Flex.Item size='25rem'><Text>Three</Text></Flex.Item>
     <Flex.Item size='25rem'><Text>Four</Text></Flex.Item>
   </Flex>
-  <Flex withVisualDebug margin="none none large" gap="small" wrap="wrap-reverse">
+  <Flex withVisualDebug margin="none none general.space2xl" gap="small" wrap="wrap-reverse">
     <Flex.Item size='25rem'><Text>One</Text></Flex.Item>
     <Flex.Item size='25rem'><Text>Two</Text></Flex.Item>
     <Flex.Item size='25rem'><Text>Three</Text></Flex.Item>
     <Flex.Item size='25rem'><Text>Four</Text></Flex.Item>
   </Flex>
-  <Flex withVisualDebug margin="none none large" gap="small large" wrap="wrap-reverse">
+  <Flex withVisualDebug margin="none none general.space2xl" gap="small large" wrap="wrap-reverse">
     <Flex.Item size='25rem'><Text>One</Text></Flex.Item>
     <Flex.Item size='25rem'><Text>Two</Text></Flex.Item>
     <Flex.Item size='25rem'><Text>Three</Text></Flex.Item>
@@ -238,7 +238,7 @@ Use the `justifyItems` property to change the justification of Flex.Items.
 type: example
 ---
 <div>
-  <Flex justifyItems="center" margin="0 0 large" withVisualDebug>
+  <Flex justifyItems="center" margin="0 0 general.space2xl" withVisualDebug>
     <Flex.Item>
       <Avatar name="Sarah Robinson" size="large" src={avatarSquare} />
     </Flex.Item>
@@ -250,7 +250,7 @@ type: example
     </Flex.Item>
   </Flex>
 
-  <Flex justifyItems="space-between" withVisualDebug margin="0 0 large">
+  <Flex justifyItems="space-between" withVisualDebug margin="0 0 general.space2xl">
     <Flex.Item>
       <Avatar name="Sarah Robinson" size="large" src={avatarSquare} />
     </Flex.Item>
@@ -316,7 +316,7 @@ type: example
     <Heading>Lorem ipsum dolor sit amet consectetur dolor sit</Heading>
   </Flex.Item>
   <Flex.Item>
-    <Button margin="none x-small none none">
+    <Button margin="none general.spaceSm none none">
       Cancel
     </Button>
     <Button color="success" renderIcon={UserInstUIIcon}>
@@ -335,9 +335,9 @@ type: example
 <Flex height="32rem" justifyItems="center" padding="large" withVisualDebug>
   <Flex.Item shouldShrink shouldGrow textAlign="center">
 
-    <Heading level="h1" margin="0 0 medium">An amazing thing!</Heading>
+    <Heading level="h1" margin="0 0 general.spaceXl">An amazing thing!</Heading>
 
-    <Flex withVisualDebug wrap="wrap" justifyItems="space-around" margin="0 0 medium">
+    <Flex withVisualDebug wrap="wrap" justifyItems="space-around" margin="0 0 general.spaceXl">
       <Flex.Item padding="small">
         <HeartInstUIIcon size="medium" title="Icon Example" color="primary" />
         <Text weight="bold" size="large" as="div">We love you!</Text>

@@ -13,14 +13,14 @@ type: example
 ---
 <div>
   <Pill
-    margin="x-small"
+    margin="general.spaceSm"
   >
     Excused
   </Pill>
   <Pill
     statusLabel="Status"
     color="info"
-    margin="x-small"
+    margin="general.spaceSm"
   >
     Draft
   </Pill>
@@ -28,21 +28,21 @@ type: example
     statusLabel="Status"
     renderIcon={<CheckInstUIIcon size="sm" />}
     color="success"
-    margin="x-small"
+    margin="general.spaceSm"
   >
     Checked In
   </Pill>
   <Pill
     renderIcon={<Clock4InstUIIcon size="sm" />}
     color="warning"
-    margin="x-small"
+    margin="general.spaceSm"
   >
     Late
   </Pill>
   <Pill
     renderIcon={<MailInstUIIcon size="sm" />}
     color="error"
-    margin="x-small"
+    margin="general.spaceSm"
   >
     Notification
   </Pill>

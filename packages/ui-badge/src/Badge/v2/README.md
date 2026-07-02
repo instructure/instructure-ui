@@ -16,7 +16,7 @@ type: example
     <Badge
       count={99}
       pulse
-      margin="0 medium 0 0"
+      margin="0 general.spaceXl 0 0"
       formatOutput={function (formattedCount) {
         return (
           <AccessibleContent alt={`You have ${formattedCount} new edits to review`}>
@@ -59,7 +59,7 @@ Use the `countUntil` prop to set a limit for the count. The default for `formatO
 type: example
 ---
 <div>
-  <Badge count={105} countUntil={100} margin="0 medium 0 0">
+  <Badge count={105} countUntil={100} margin="0 general.spaceXl 0 0">
     <Button>Inbox</Button>
   </Badge>
   <Badge count={250} countUntil={100}>
@@ -80,7 +80,7 @@ type: example
 ---
 <div>
   <Flex padding='small' display='inline-flex' alignItems="center">
-    <Badge standalone count={6} margin='0 small 0 0' />
+    <Badge standalone count={6} margin='0 general.spaceMd 0 0' />
     <Badge
       type="notification"
       standalone
@@ -90,7 +90,7 @@ type: example
     />
   </Flex>
   <Flex padding='small' display='inline-flex' alignItems="center">
-    <Badge standalone variant="success" count={12} margin='0 small 0 0' />
+    <Badge standalone variant="success" count={12} margin='0 general.spaceMd 0 0' />
     <Badge
       variant="success"
       type="notification"
@@ -101,7 +101,7 @@ type: example
     />
   </Flex>
   <Flex padding='small' display='inline-flex' alignItems="center">
-    <Badge standalone variant="danger" count={18} countUntil={10} margin='0 small 0 0' />
+    <Badge standalone variant="danger" count={18} countUntil={10} margin='0 general.spaceMd 0 0' />
     <Badge
       variant="danger"
       type="notification"
@@ -113,7 +113,7 @@ type: example
   </Flex>
   <View display='inline-flex' background='primary-inverse'>
     <Flex padding='small' display='inline-flex' alignItems="center" background='primary-inverse'>
-      <Badge standalone variant="inverse" count={8} margin='0 small 0 0' />
+      <Badge standalone variant="inverse" count={8} margin='0 general.spaceMd 0 0' />
       <Badge
         variant="inverse"
         type="notification"
@@ -146,20 +146,20 @@ const EditButton = () => (
 
 const Example = () => (
   <div>
-    <View as="div" margin="0 0 medium">
-      <Badge count={21} margin="0 large 0 0" placement="top start">
+    <View as="div" margin="0 0 general.spaceXl">
+      <Badge count={21} margin="0 general.space2xl 0 0" placement="top start">
         <EditButton />
       </Badge>
-      <Badge count={21} margin="0 large 0 0">
+      <Badge count={21} margin="0 general.space2xl 0 0">
         <EditButton />
       </Badge>
-      <Badge count={21} margin="0 large 0 0" placement="bottom start">
+      <Badge count={21} margin="0 general.space2xl 0 0" placement="bottom start">
         <EditButton />
       </Badge>
-      <Badge count={21} margin="0 large 0 0" placement="bottom end">
+      <Badge count={21} margin="0 general.space2xl 0 0" placement="bottom end">
         <EditButton />
       </Badge>
-      <Badge count={21} margin="0 large 0 0" placement="start center">
+      <Badge count={21} margin="0 general.space2xl 0 0" placement="start center">
         <EditButton />
       </Badge>
       <Badge count={21} placement="end center">
@@ -169,7 +169,7 @@ const Example = () => (
     <View as="div">
       <Badge
         type="notification"
-        margin="0 large 0 0"
+        margin="0 general.space2xl 0 0"
         placement="top start"
         formatOutput={function () {
           return (
@@ -183,7 +183,7 @@ const Example = () => (
       </Badge>
       <Badge
         type="notification"
-        margin="0 large 0 0"
+        margin="0 general.space2xl 0 0"
         formatOutput={function () {
           return (
             <ScreenReaderContent>
@@ -196,7 +196,7 @@ const Example = () => (
       </Badge>
       <Badge
         type="notification"
-        margin="0 large 0 0"
+        margin="0 general.space2xl 0 0"
         placement="bottom start"
         formatOutput={function () {
           return (
@@ -210,7 +210,7 @@ const Example = () => (
       </Badge>
       <Badge
         type="notification"
-        margin="0 large 0 0"
+        margin="0 general.space2xl 0 0"
         placement="bottom end"
         formatOutput={function () {
           return (
@@ -224,7 +224,7 @@ const Example = () => (
       </Badge>
       <Badge
         type="notification"
-        margin="0 large 0 0"
+        margin="0 general.space2xl 0 0"
         placement="start center"
         formatOutput={function () {
           return (

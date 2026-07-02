@@ -65,7 +65,7 @@ type: example
       iconCount={5}
       valueNow={3.76}
       valueMax={5}
-      margin="small"/>
+      margin="general.spaceMd"/>
     <Text>4/5</Text>
   </Flex>
   <Flex>
@@ -74,7 +74,7 @@ type: example
       iconCount={5}
       valueNow={30}
       valueMax={100}
-      margin="small"
+      margin="general.spaceMd"
     />
     <Text>2/5</Text>
   </Flex>
@@ -86,7 +86,7 @@ type: example
       iconCount={5}
       valueNow={8}
       valueMax={8}
-      margin="small"/>
+      margin="general.spaceMd"/>
     <Text>5/5</Text>
   </Flex>
 </Flex>

@@ -41,7 +41,7 @@ const Example = () => {
           onChange={toggleAlignArrow}
         />
       </FormFieldGroup>
-      <View display="block" margin="small none">
+      <View display="block" margin="general.spaceMd none">
         <RadioInputGroup
           name="color"
           defaultValue="primary"
@@ -54,7 +54,7 @@ const Example = () => {
           <RadioInput label="Primary inverse" value="primary-inverse" />
         </RadioInputGroup>
       </View>
-      <View display="block" as="div" margin="small">
+      <View display="block" as="div" margin="general.spaceMd">
         <Popover
           renderTrigger={
             <Link aria-describedby="tip">Hover or focus me</Link>
@@ -209,7 +209,7 @@ const Example = () => {
       style={{ paddingBottom: 50, display: 'flex', justifyContent: 'center' }}
     >
       <Popover
-        renderTrigger={<Button margin="small">Focus Me</Button>}
+        renderTrigger={<Button margin="general.spaceMd">Focus Me</Button>}
         isShowingContent={isShowingContent}
         onShowContent={() => {
           setIsShowingContent(true)
@@ -221,10 +221,10 @@ const Example = () => {
         shouldContainFocus={false}
         shouldFocusContentOnTriggerBlur={false}
       >
-        <Button margin="small">Focus Me When Trigger Blurs</Button>
+        <Button margin="general.spaceMd">Focus Me When Trigger Blurs</Button>
       </Popover>
       <div id="container" />
-      <Button id="next" margin="small">
+      <Button id="next" margin="general.spaceMd">
         Focus Me Next
       </Button>
     </div>
@@ -320,7 +320,7 @@ const Example = () => {
 
   return (
     <View as="div" background="primary" padding="small">
-      <Flex margin="small small large" justifyItems="space-around">
+      <Flex margin="general.spaceMd general.spaceMd general.space2xl" justifyItems="space-around">
         <Flex.Item align="start">
           <FormFieldGroup description="Popover Example">
             <Checkbox
@@ -358,7 +358,7 @@ const Example = () => {
               ))}
             </SimpleSelect>
           </View>
-          <View as="div" margin="medium none" maxWidth="15rem">
+          <View as="div" margin="general.spaceXl none" maxWidth="15rem">
             <SimpleSelect
               value={shadow}
               onChange={changeShadow}

@@ -13,12 +13,12 @@ describes: List
 type: example
 ---
 <div>
-  <List margin="0 0 medium">
+  <List margin="0 0 general.spaceXl">
     <List.Item>List item 1</List.Item>
     <List.Item>List item 2</List.Item>
     <List.Item>List item 3</List.Item>
   </List>
-  <List as="ol" margin="0 0 medium">
+  <List as="ol" margin="0 0 general.spaceXl">
     <List.Item>List item 1</List.Item>
     <List.Item>List item 2</List.Item>
     <List.Item>List item 3</List.Item>
@@ -40,17 +40,17 @@ The `delimiter` lets you set a separator between items of the list. The predefin
 type: example
 ---
 <div>
-  <List delimiter="none" margin="large 0">
+  <List delimiter="none" margin="general.space2xl 0">
     <List.Item>{lorem.sentence()}</List.Item>
     <List.Item>{lorem.sentence()}</List.Item>
     <List.Item>{lorem.sentence()}</List.Item>
   </List>
-  <List delimiter="solid" isUnstyled margin="large 0">
+  <List delimiter="solid" isUnstyled margin="general.space2xl 0">
     <List.Item>{lorem.sentence()}</List.Item>
     <List.Item>{lorem.sentence()}</List.Item>
     <List.Item>{lorem.sentence()}</List.Item>
   </List>
-  <List delimiter="dashed" as="ol" margin="large 0">
+  <List delimiter="dashed" as="ol" margin="general.space2xl 0">
     <List.Item>{lorem.sentence()}</List.Item>
     <List.Item>{lorem.sentence()}</List.Item>
     <List.Item>{lorem.sentence()}</List.Item>
@@ -67,17 +67,17 @@ The `size` prop lets you adjust the font-size of the List. The predefined values
 type: example
 ---
 <div>
-  <List size="small" margin="large 0">
+  <List size="small" margin="general.space2xl 0">
     <List.Item>{lorem.sentence()}</List.Item>
     <List.Item>Small Size</List.Item>
     <List.Item><b>Due:</b> Oct 1, 2019</List.Item>
   </List>
-  <List margin="large 0">
+  <List margin="general.space2xl 0">
     <List.Item>{lorem.sentence()}</List.Item>
     <List.Item>Medium (default) Size</List.Item>
     <List.Item><b>Due:</b> Oct 1, 2019</List.Item>
   </List>
-  <List size="large" margin="large 0">
+  <List size="large" margin="general.space2xl 0">
     <List.Item>{lorem.sentence()}</List.Item>
     <List.Item>Large Size</List.Item>
     <List.Item><b>Due:</b> Oct 1, 2019</List.Item>
@@ -135,7 +135,7 @@ List.Items also accept the same `margin` prop as List, in the event you need dif
 type: example
 ---
 <List isUnstyled itemSpacing="small">
-  <List.Item margin="x-large 0"><Link href="https://www.canvaslms.com/try-canvas">Canvas by Instructure</Link></List.Item>
+  <List.Item margin="general.space2xl 0"><Link href="https://www.canvaslms.com/try-canvas">Canvas by Instructure</Link></List.Item>
   <List.Item><Link href="https://www.getbridge.com">Bridge by Instructure</Link></List.Item>
   <List.Item><Link href="https://www.arcmedia.com">Arc by Instructure</Link></List.Item>
 </List>
