@@ -39,7 +39,6 @@ import {
   IconArrowOpenUpLine,
   IconSearchLine
 } from '@instructure/ui-icons'
-import { createRoot } from 'react-dom/client'
 
 export type SearchConfig = {
   placeholder: string
@@ -47,7 +46,18 @@ export type SearchConfig = {
   prevResultLabel: string
 }
 
-function SearchPanel({
+
+export type SearchPanelHandlers = {
+  onMount: (dom: HTMLElement, view: EditorView) => void
+  onDestroy: (dom: HTMLElement) => void
+}
+
+/**
+ * ---
+ * private: true
+ * ---
+ */
+export function SearchPanel({
   view,
   searchConfig
 }: {
@@ -135,15 +145,24 @@ function SearchPanel({
   )
 }
 
-export default function customSearch(searchConfig: SearchConfig | undefined) {
+export default function customSearch(
+  searchConfig: SearchConfig | undefined,
+  handlers: SearchPanelHandlers
+) {
   return searchConfig
     ? search({
         createPanel: (view) => {
           const dom = document.createElement('div')
           dom.style.padding = '8px'
-          const root = createRoot(dom)
-          root.render(<SearchPanel view={view} searchConfig={searchConfig} />)
-          return { dom }
+          return {
+            dom,
+            mount() {
+              handlers.onMount(dom, view)
+            },
+            destroy() {
+              handlers.onDestroy(dom)
+            }
+          }
         }
       })
     : []
