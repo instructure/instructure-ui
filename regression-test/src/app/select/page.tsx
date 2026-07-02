@@ -28,6 +28,8 @@ import {
   Select as sl,
   SimpleSelect as ss,
   View as vw,
+  Tag as tg,
+  AccessibleContent as ac,
   IconUserSolid as ius,
   IconUserLine as iul,
   IconSearchLine as isl
@@ -36,6 +38,8 @@ import {
 const Select = sl as any
 const SimpleSelect = ss as any
 const View = vw as any
+const Tag = tg as any
+const AccessibleContent = ac as any
 const IconUserSolid = ius as any
 const IconUserLine = iul as any
 const IconSearchLine = isl as any
@@ -306,6 +310,38 @@ function GroupSelectExample({
   )
 }
 
+
+function MultipleSelectExample({ selected }: { selected: string[] }) {
+  return (
+    <View display="block">
+      <Select
+        renderLabel="Multiple Select"
+        width="450px"
+        renderBeforeInputElementGap="even"
+        assistiveText="Multiple selections allowed."
+        inputValue=""
+        isShowingOptions={false}
+        onRequestShowOptions={() => {}}
+        onRequestHideOptions={() => {}}
+        onRequestHighlightOption={() => {}}
+        onRequestSelectOption={() => {}}
+        renderBeforeInput={selected.map((label, i) => (
+          <Tag
+            key={i}
+            dismissible
+            text={<AccessibleContent alt={`Remove ${label}`}>{label}</AccessibleContent>}
+            onClick={() => {}}
+          />
+        ))}
+      >
+        <Select.Option id="more-option" key="more-option">
+          Connecticut
+        </Select.Option>
+      </Select>
+    </View>
+  )
+}
+
 export default function SelectPage() {
   const basicOptions: OptionT[] = [
     { id: 'opt1', label: 'Alaska' },
@@ -341,6 +377,16 @@ export default function SelectPage() {
       <SingleSelectExample options={basicOptions} />
       <AutocompleteExample options={autoOptions} />
       <GroupSelectExample options={grouped} />
+      <MultipleSelectExample
+        selected={[
+          'Alabama',
+          'Alaska',
+          'Arizona',
+          'Arkansas',
+          'California',
+          'Colorado'
+        ]}
+      />
     </main>
   )
 }

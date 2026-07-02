@@ -97,7 +97,10 @@ type: example
 
 TextInput accepts focusable and non-focusable content before and/or after
 the input text. A common use case is adding an icon or avatar to the input.
-Focusable content will be focused separately from the input itself.
+Focusable content will be focused separately from the input itself. When
+rendering multiple elements before the input (such as tags), set
+`renderBeforeInputElementGap="even"` to evenly space them, including as they
+wrap to multiple rows.
 
 ```js
 ---
@@ -121,33 +124,29 @@ type: example
             renderLabel="What are Paula Panda's favorite ice cream flavors?"
             value={this.state.value}
             onChange={this.handleChange}
+            renderBeforeInputElementGap="even"
             renderBeforeInput={
               <>
                 {this.state.value !== '' && (
                   <Tag
                     text={this.state.value}
-                    margin="general.space2xs general.spaceXs general.space2xs none"
                     onClick={() => console.log(this.state.value)}
                   />
                 )}
                 <Tag
                   text="Rocky road"
-                  margin="general.space2xs general.spaceXs general.space2xs none"
                   onClick={() => console.log('Rocky road')}
                 />
                 <Tag
                   text="Vanilla"
-                  margin="general.space2xs general.spaceXs general.space2xs none"
                   onClick={() => console.log('Vanilla')}
                 />
                 <Tag
                   text="Coffee"
-                  margin="general.space2xs general.spaceXs general.space2xs none"
                   onClick={() => console.log('Coffee')}
                 />
                 <Tag
                   text="Strawberry"
-                  margin="general.space2xs general.spaceXs general.space2xs none"
                   onClick={() => console.log('Strawberry')}
                 />
               </>

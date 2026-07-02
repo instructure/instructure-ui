@@ -122,6 +122,14 @@ type TextInputOwnProps = {
   shouldNotWrap?: boolean
 
   /**
+   * Whether to apply a gap between the elements rendered via `renderBeforeInput`
+   * (a CSS flex container), e.g. tags.
+   * - `'default'`: no gap is applied between the elements.
+   * - `'even'`: wrapped rows are evenly spaced with a vertical and horizontal gap.
+   */
+  renderBeforeInputElementGap?: 'default' | 'even'
+
+  /**
    * Html placeholder text to display when the input has no value. This should be hint text, not a label replacement.
    */
   placeholder?: string
@@ -216,6 +224,7 @@ const allowedProps: AllowedPropKeys = [
   'htmlSize',
   'display',
   'shouldNotWrap',
+  'renderBeforeInputElementGap',
   'placeholder',
   'isRequired',
   'elementRef',

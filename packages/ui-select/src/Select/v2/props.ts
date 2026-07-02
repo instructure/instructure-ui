@@ -249,6 +249,14 @@ type PropsFromTextInput = {
   shouldNotWrap?: boolean
 
   /**
+   * Whether to apply a gap between the elements rendered via `renderBeforeInput`
+   * (a CSS flex container), e.g. tags.
+   * - `'default'`: no gap is applied between the elements.
+   * - `'even'`: wrapped rows are evenly spaced with a vertical and horizontal gap.
+   */
+  renderBeforeInputElementGap?: 'default' | 'even'
+
+  /**
    * In `stacked` mode the input is below the label.
    *
    * In `inline` mode the input is to the right/left (depending on text direction) of the label,
@@ -325,6 +333,7 @@ const allowedProps: AllowedPropKeys = [
   'renderAfterInput',
   'children',
   'shouldNotWrap',
+  'renderBeforeInputElementGap',
   'scrollToHighlightedOption',
   'layout'
 ]

@@ -43,24 +43,49 @@ const generateStyle = (
   sharedTokens: SharedTokens,
   state: TextInputStyleProps
 ): TextInputStyle => {
-  const { size, textAlign, shouldNotWrap } = props
+  const { size, textAlign, shouldNotWrap, renderBeforeInputElementGap } = props
   const { interaction, success, invalid, beforeElementExists } = state
+
+  const isEvenSpacing = renderBeforeInputElementGap === 'even'
+
+  const contentGap = {
+    small: sharedTokens.spacing.general.spaceXs,
+    medium: sharedTokens.spacing.general.spaceXs,
+    large: sharedTokens.spacing.general.spaceSm
+  }[size!]
+
+  const contentPaddingBlock = {
+    small: sharedTokens.spacing.general.space2xs,
+    medium: sharedTokens.spacing.general.space2xs,
+    large: sharedTokens.spacing.general.spaceXs
+  }[size!]
+
+  const heightTokens = {
+    small: componentTheme.heightSm,
+    medium: componentTheme.heightMd,
+    large: componentTheme.heightLg
+  }
+
+  const inputHeightStyle = (sizeHeight: string) =>
+    isEvenSpacing
+      ? { height: 'auto' }
+      : {
+          height: `calc(${sizeHeight} - (2 * ${componentTheme.borderWidth}))`,
+          lineHeight: `calc(${sizeHeight} - (2 * ${componentTheme.borderWidth}))`
+        }
 
   const sizeVariants = {
     small: {
       fontSize: componentTheme.fontSizeSm,
-      height: `calc(${componentTheme.heightSm} - (2 * ${componentTheme.borderWidth}))`,
-      lineHeight: `calc(${componentTheme.heightSm} - (2 * ${componentTheme.borderWidth}))`
+      ...inputHeightStyle(componentTheme.heightSm)
     },
     medium: {
       fontSize: componentTheme.fontSizeMd,
-      height: `calc(${componentTheme.heightMd} - (2 * ${componentTheme.borderWidth}))`,
-      lineHeight: `calc(${componentTheme.heightMd} - (2 * ${componentTheme.borderWidth}))`
+      ...inputHeightStyle(componentTheme.heightMd)
     },
     large: {
       fontSize: componentTheme.fontSizeLg,
-      height: `calc(${componentTheme.heightLg} - (2 * ${componentTheme.borderWidth}))`,
-      lineHeight: `calc(${componentTheme.heightLg} - (2 * ${componentTheme.borderWidth}))`
+      ...inputHeightStyle(componentTheme.heightLg)
     }
   }
   const paddingHorizontalVariants = {
@@ -194,6 +219,11 @@ const generateStyle = (
       // left padding of the `renderBeforeInput` element
       ...(beforeElementExists && {
         paddingInlineStart: paddingHorizontalVariants[size!]
+      }),
+      ...(isEvenSpacing && {
+        minHeight: heightTokens[size!],
+        paddingBlock: contentPaddingBlock,
+        gap: contentGap
       })
     },
     inputLayout: {
@@ -206,10 +236,12 @@ const generateStyle = (
       flexDirection: 'row'
     },
     beforeElement: {
-      ...(interaction === 'disabled'
+      label: 'textInput__beforeElement',
+      ...(interaction === 'disabled' && !isEvenSpacing
         ? { opacity: 0.5 }
         : { display: 'contents' }),
-      label: 'textInput__beforeElement'
+      ...(interaction === 'disabled' &&
+        isEvenSpacing && { '& > *': { opacity: 0.5 } })
     },
     afterElement: {
       ...(interaction === 'disabled' && { opacity: 0.5 }),

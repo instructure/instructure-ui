@@ -340,7 +340,7 @@ type: example
 
 #### Highlighting and selecting options
 
-To mark an option as "highlighted", use the option's `isHighlighted` prop. Note that only one highlighted option is permitted. Similarly, use `isSelected` to mark an option or multiple options as "selected". When allowing multiple selections, it's best to render a [Tag](Tag) with [AccessibleContent](AccessibleContent) for each selected option via the `renderBeforeInput` prop.
+To mark an option as "highlighted", use the option's `isHighlighted` prop. Note that only one highlighted option is permitted. Similarly, use `isSelected` to mark an option or multiple options as "selected". When allowing multiple selections, it's best to render a [Tag](Tag) with [AccessibleContent](AccessibleContent) for each selected option via the `renderBeforeInput` prop. Set `renderBeforeInputElementGap="even"` so wrapped tags are evenly spaced even as they wrap to multiple rows.
 
 > **Accessibility:** set an explicit `aria-label` on the `Select` (matching `renderLabel`) and list the selected options in the `assistiveText` (e.g. `"Alaska Selected, …"`), as the example below does. This keeps the combobox's accessible name limited to the field label, while screen reader users still hear which options are selected. Each pill's `"Remove …"` label is only announced when that pill receives focus.
 
@@ -491,9 +491,6 @@ type: example
               {getOptionById(id).label}
             </AccessibleContent>
           }
-          margin={
-            index > 0 ? 'xxx-small xx-small xxx-small 0' : '0 xx-small 0 0'
-          }
           onClick={(e) => dismissTag(e, id)}
         />
       ))
@@ -518,6 +515,7 @@ type: example
           renderLabel="Multiple Select"
           aria-label="Multiple Select"
           assistiveText={assistiveText}
+          renderBeforeInputElementGap="even"
           inputValue={inputValue}
           isShowingOptions={isShowingOptions}
           inputRef={(el) => {
@@ -531,6 +529,7 @@ type: example
           onRequestSelectOption={handleSelectOption}
           onKeyDown={handleKeyDown}
           renderBeforeInput={selectedOptionId.length > 0 ? renderTags() : null}
+          htmlSize={2}
         >
           {filteredOptions.length > 0 ? (
             filteredOptions.map((option, index) => {
