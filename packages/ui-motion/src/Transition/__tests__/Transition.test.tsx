@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Component, createRef, RefObject } from 'react'
+import { Component, forwardRef, memo, useCallback } from 'react'
 import {
   render,
   waitFor,
@@ -47,17 +47,82 @@ const getClass = (
   return classNames[phase]
 }
 
-class ExampleComponent extends Component<any, any> {
-  private ref: RefObject<any>
+// A non-InstUI forwardRef component: exposes the DOM node via React's
+// built-in ref forwarding only. Intentionally does not spread all props
+// onto the DOM so unrecognized props (like the InstUI-convention
+// `elementRef` BaseTransition also passes) don't leak as DOM attributes.
+const ExampleComponent = forwardRef<HTMLDivElement>((_props, ref) => {
+  return <div ref={ref}>{COMPONENT_TEXT}</div>
+})
+ExampleComponent.displayName = 'ExampleComponent'
 
-  constructor(props: any) {
-    super(props)
-    this.ref = createRef()
-  }
+// Mirrors the InstUI functional-component pattern: exposes the DOM node via
+// an `elementRef` prop rather than via React's built-in ref forwarding.
+type InstUIStyleComponentProps = {
+  elementRef?: (el: Element | null) => void
+}
+const InstUIStyleComponent = ({ elementRef }: InstUIStyleComponentProps) => {
+  return (
+    <div
+      ref={(el) => {
+        if (elementRef) elementRef(el)
+      }}
+    >
+      {COMPONENT_TEXT}
+    </div>
+  )
+}
+
+// Mirrors an InstUI v1 class component: exposes the DOM node only via
+// `elementRef`, not via React's built-in ref.
+class InstUIStyleClassComponent extends Component<InstUIStyleComponentProps> {
   render() {
-    return <div ref={this.ref}>{COMPONENT_TEXT}</div>
+    const { elementRef } = this.props
+    return (
+      <div
+        ref={(el) => {
+          if (elementRef) elementRef(el)
+        }}
+      >
+        {COMPONENT_TEXT}
+      </div>
+    )
   }
 }
+
+// Honors both `ref` (via forwardRef) and `elementRef` (InstUI convention),
+// letting us verify BaseTransition doesn't fire its ref bookkeeping twice
+// when a child wires up both.
+const DualRefComponent = forwardRef<HTMLDivElement, InstUIStyleComponentProps>(
+  ({ elementRef }, ref) => {
+    // Memoized to avoid a fresh ref callback on every render, which would
+    // cause React to detach/reattach the ref and muddy the dedupe assertion.
+    const setRef = useCallback(
+      (el: HTMLDivElement | null) => {
+        if (typeof ref === 'function') {
+          ref(el)
+        } else if (ref) {
+          // eslint-disable-next-line no-param-reassign
+          ref.current = el
+        }
+        if (elementRef) elementRef(el)
+      },
+      [ref, elementRef]
+    )
+    return <div ref={setRef}>{COMPONENT_TEXT}</div>
+  }
+)
+DualRefComponent.displayName = 'DualRefComponent'
+
+// memo(forwardRef(...)) — a common third-party shape. BaseTransition must
+// unwrap the memo layer to detect the forwardRef underneath, otherwise the
+// DOM node isn't captured.
+const MemoForwardRefComponent = memo(
+  forwardRef<HTMLDivElement>((_props, ref) => {
+    return <div ref={ref}>{COMPONENT_TEXT}</div>
+  })
+)
+MemoForwardRefComponent.displayName = 'MemoForwardRefComponent'
 
 describe('<Transition />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
@@ -103,6 +168,33 @@ describe('<Transition />', () => {
       const { getByText } = render(
         <Transition type={type} in={true}>
           <ExampleComponent />
+        </Transition>
+      )
+      const element = getByText(COMPONENT_TEXT)
+
+      expect(element).toHaveClass(getClass(type, 'entered'))
+      // BaseTransition passes both `ref` and `elementRef` to component
+      // children so InstUI and non-InstUI forwardRef components both work.
+      // A well-behaved forwardRef child must not leak the unrecognized
+      // `elementRef` prop onto the DOM (React would warn in dev).
+      expect(consoleErrorMock).not.toHaveBeenCalled()
+    })
+
+    it(`should correctly apply classes for '${type}' with a component that only exposes elementRef`, () => {
+      const { getByText } = render(
+        <Transition type={type} in={true}>
+          <InstUIStyleComponent />
+        </Transition>
+      )
+      const element = getByText(COMPONENT_TEXT)
+
+      expect(element).toHaveClass(getClass(type, 'entered'))
+    })
+
+    it(`should correctly apply classes for '${type}' with a class component that only exposes elementRef`, () => {
+      const { getByText } = render(
+        <Transition type={type} in={true}>
+          <InstUIStyleClassComponent />
         </Transition>
       )
       const element = getByText(COMPONENT_TEXT)
@@ -274,5 +366,79 @@ describe('<Transition />', () => {
       expect(onExiting).toHaveBeenCalled()
       expect(onExited).toHaveBeenCalled()
     })
+  })
+
+  it("should forward the child's rendered DOM element to Transition's elementRef", () => {
+    const transitionElementRef = vi.fn()
+
+    const { getByText } = render(
+      <Transition type="fade" in={true} elementRef={transitionElementRef}>
+        <InstUIStyleComponent />
+      </Transition>
+    )
+    const element = getByText(COMPONENT_TEXT)
+
+    expect(transitionElementRef).toHaveBeenCalledWith(element)
+  })
+
+  it('should not double-fire elementRef when the child honors both ref and elementRef', () => {
+    const transitionElementRef = vi.fn()
+
+    render(
+      <Transition type="fade" in={true} elementRef={transitionElementRef}>
+        <DualRefComponent />
+      </Transition>
+    )
+
+    const calls = transitionElementRef.mock.calls.filter(
+      ([arg]) => arg instanceof Element
+    )
+    expect(calls).toHaveLength(1)
+  })
+
+  it('should capture the DOM of a memo(forwardRef(...)) child', () => {
+    const transitionElementRef = vi.fn()
+
+    const { getByText } = render(
+      <Transition type="fade" in={true} elementRef={transitionElementRef}>
+        <MemoForwardRefComponent />
+      </Transition>
+    )
+    const element = getByText(COMPONENT_TEXT)
+
+    expect(element).toHaveClass(getClass('fade', 'entered'))
+    expect(transitionElementRef).toHaveBeenCalledWith(element)
+  })
+
+  it("should chain the consumer's own elementRef with Transition's", () => {
+    const transitionElementRef = vi.fn()
+    const childElementRef = vi.fn()
+
+    const { getByText } = render(
+      <Transition type="fade" in={true} elementRef={transitionElementRef}>
+        <InstUIStyleComponent elementRef={childElementRef} />
+      </Transition>
+    )
+    const element = getByText(COMPONENT_TEXT)
+
+    expect(transitionElementRef).toHaveBeenCalledWith(element)
+    expect(childElementRef).toHaveBeenCalledWith(element)
+  })
+
+  it('should not throw when the child has a non-callback elementRef prop', () => {
+    // Some consumers may pass a RefObject instead of a callback. InstUI's
+    // convention is callback-style, but a runtime throw would be worse than
+    // quietly ignoring the unsupported shape.
+    const objectRef = { current: null }
+
+    expect(() =>
+      render(
+        <Transition type="fade" in={true}>
+          <InstUIStyleComponent
+            elementRef={objectRef as unknown as (el: Element | null) => void}
+          />
+        </Transition>
+      )
+    ).not.toThrow()
   })
 })
