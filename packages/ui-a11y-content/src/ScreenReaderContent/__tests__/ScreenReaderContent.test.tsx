@@ -51,4 +51,13 @@ describe('<ScreenReaderContent />', () => {
 
     expect(children).toBeInTheDocument()
   })
+
+  it('should not be selectable so its text is excluded from clipboard copies', async () => {
+    render(
+      <ScreenReaderContent data-testid="src">hidden text</ScreenReaderContent>
+    )
+    const screenReaderContent = screen.getByTestId('src')
+
+    expect(screenReaderContent).toHaveStyle({ userSelect: 'none' })
+  })
 })

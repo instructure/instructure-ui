@@ -45,7 +45,8 @@ const generateStyle = (): ScreenReaderContentStyle => {
       whiteSpace: 'nowrap',
       overflow: 'hidden !important',
       clip: 'rect(0 0 0 0) !important',
-      border: '0 !important'
+      border: '0 !important',
+      userSelect: 'none'
     }
   }
 }
