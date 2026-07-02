@@ -28,11 +28,18 @@ const {
   getPackageJSON,
   getPackagePath
 } = require('./get-package')
+// Keep these `require`s out of the `module.exports` object literal below.
+// Inline `require()` calls in the literal defeat cjs-module-lexer's static
+// analysis, so ESM consumers doing `import * as pkgUtils` only see the first
+// export and get `undefined` for the rest (e.g. getPackageJSON).
+const getPackages = require('./get-packages')
+const getChangedPackages = require('./get-changed-packages')
+const readPkgUp = require('read-pkg-up')
 
 module.exports = {
-  getPackages: require('./get-packages'),
-  getChangedPackages: require('./get-changed-packages'),
-  readPkgUp: require('read-pkg-up'),
+  getPackages,
+  getChangedPackages,
+  readPkgUp,
   readPkg: getPackageJSON,
   readPackage,
   getPackage,
