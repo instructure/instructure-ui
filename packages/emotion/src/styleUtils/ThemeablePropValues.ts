@@ -29,7 +29,11 @@ const ThemeablePropValues = {
     resting: 'resting',
     above: 'above',
     topmost: 'topmost',
-    none: 'none'
+    none: 'none',
+    elevation1: 'elevation1',
+    elevation2: 'elevation2',
+    elevation3: 'elevation3',
+    elevation4: 'elevation4'
   },
 
   STACKING_TYPES: {
@@ -45,7 +49,10 @@ const ThemeablePropValues = {
     none: 'none',
     small: 'small',
     medium: 'medium',
-    large: 'large'
+    large: 'large',
+    sm: 'sm',
+    md: 'md',
+    lg: 'lg'
   },
 
   BORDER_RADII: {

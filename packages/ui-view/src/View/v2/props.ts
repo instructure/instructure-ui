@@ -51,6 +51,21 @@ type BorderColor =
   | 'warning'
   | 'alert'
   | 'danger'
+  | 'strongColor'
+  | 'visualSeparator'
+  | 'accentAsh'
+  | 'accentAurora'
+  | 'accentBlue'
+  | 'accentGreen'
+  | 'accentGrey'
+  | 'accentHoney'
+  | 'accentOrange'
+  | 'accentPlum'
+  | 'accentRed'
+  | 'accentSea'
+  | 'accentSky'
+  | 'accentStone'
+  | 'accentViolet'
 
 type ViewOwnProps = {
   /**

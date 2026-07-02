@@ -24,19 +24,14 @@
 
 import { JSX } from 'react'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
-import type { ViewProps } from '@instructure/ui-view/latest'
 
 type ExpandableToggleProps = (props?: {
-  onClick?: (
-    event: React.KeyboardEvent<ViewProps> | React.MouseEvent<ViewProps>
-  ) => void
+  onClick?: (event: React.KeyboardEvent<any> | React.MouseEvent<any>) => void
   [key: string]: unknown
 }) => {
   'aria-controls': string
   'aria-expanded': boolean
-  onClick: (
-    event: React.KeyboardEvent<ViewProps> | React.MouseEvent<ViewProps>
-  ) => void
+  onClick: (event: React.KeyboardEvent<any> | React.MouseEvent<any>) => void
   [key: string]: unknown
 }
 
@@ -70,7 +65,7 @@ type ExpandableOwnProps = {
    * Function invoked when this component is expanded/collapsed
    */
   onToggle?: (
-    event: React.KeyboardEvent<ViewProps> | React.MouseEvent<ViewProps>,
+    event: React.KeyboardEvent<any> | React.MouseEvent<any>,
     expanded: boolean
   ) => void
 
