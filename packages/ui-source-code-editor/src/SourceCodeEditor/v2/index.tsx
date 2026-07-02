@@ -23,6 +23,7 @@
  */
 
 import { Component } from 'react'
+import { createPortal } from 'react-dom'
 import { deepEqual as isEqual } from '@instructure/ui-utils'
 
 import { EditorSelection, EditorState, StateEffect } from '@codemirror/state'
@@ -89,7 +90,7 @@ import { textDirectionContextConsumer } from '@instructure/ui-i18n'
 
 import { withStyleNew } from '@instructure/emotion'
 
-import customSearch from './SearchPanel.js'
+import customSearch, { SearchPanel } from './SearchPanel.js'
 
 import generateStyle from './styles.js'
 
@@ -97,6 +98,16 @@ import { rtlHorizontalArrowKeymap } from './customKeybinding.js'
 
 import { allowedProps } from './props.js'
 import type { SourceCodeEditorProps } from './props'
+
+type SearchPanelInstance = {
+  id: number
+  dom: HTMLElement
+  view: EditorView
+}
+
+type SourceCodeEditorState = {
+  searchPanels: SearchPanelInstance[]
+}
 
 /**
 ---
@@ -106,7 +117,10 @@ category: components
 @withDeterministicId()
 @withStyleNew(generateStyle)
 @textDirectionContextConsumer()
-class SourceCodeEditor extends Component<SourceCodeEditorProps> {
+class SourceCodeEditor extends Component<
+  SourceCodeEditorProps,
+  SourceCodeEditorState
+> {
   static displayName = 'SourceCodeEditor'
   static readonly componentId = 'SourceCodeEditor'
 
@@ -133,12 +147,34 @@ class SourceCodeEditor extends Component<SourceCodeEditorProps> {
 
   ref: HTMLDivElement | null = null
 
+  state: SourceCodeEditorState = { searchPanels: [] }
+
   private _containerRef?: HTMLDivElement
   private _editorView?: EditorView
 
   private _raf: RequestAnimationFrameType[] = []
 
+  private _searchPanelId = 0
+  private _isUnmounting = false
+
   private _newSelectionAfterValueChange?: EditorSelection
+
+  handleSearchPanelMount = (dom: HTMLElement, view: EditorView) => {
+    this.setState((state) => ({
+      searchPanels: [
+        ...state.searchPanels,
+        { id: ++this._searchPanelId, dom, view }
+      ]
+    }))
+  }
+
+  handleSearchPanelDestroy = (dom: HTMLElement) => {
+    if (this._isUnmounting) return
+
+    this.setState((state) => ({
+      searchPanels: state.searchPanels.filter((panel) => panel.dom !== dom)
+    }))
+  }
 
   handleRef = (el: HTMLDivElement | null) => {
     const { elementRef } = this.props
@@ -310,6 +346,7 @@ class SourceCodeEditor extends Component<SourceCodeEditorProps> {
   }
 
   componentWillUnmount() {
+    this._isUnmounting = true
     this._editorView?.destroy()
 
     this.cancelAnimationFrames()
@@ -349,7 +386,8 @@ class SourceCodeEditor extends Component<SourceCodeEditorProps> {
       'indentWithTab',
       'indentUnit',
       'highlightActiveLine',
-      'attachment'
+      'attachment',
+      'searchConfig'
     ]
 
     for (const prop of propsToObserve) {
@@ -438,7 +476,10 @@ class SourceCodeEditor extends Component<SourceCodeEditorProps> {
       crosshairCursor(),
       highlightSelectionMatches(),
       indentOnInput(),
-      customSearch(this.props.searchConfig),
+      customSearch(this.props.searchConfig, {
+        onMount: this.handleSearchPanelMount,
+        onDestroy: this.handleSearchPanelDestroy
+      }),
       keymap.of(this.keymaps)
     ]
   }
@@ -669,7 +710,7 @@ class SourceCodeEditor extends Component<SourceCodeEditorProps> {
   }
 
   render() {
-    const { label, styles, ...restProps } = this.props
+    const { label, styles, searchConfig, ...restProps } = this.props
 
     return (
       <div
@@ -687,6 +728,14 @@ class SourceCodeEditor extends Component<SourceCodeEditorProps> {
             css={styles?.codeEditorContainer}
           />
         </label>
+        {searchConfig &&
+          this.state.searchPanels.map(({ id, dom, view }) =>
+            createPortal(
+              <SearchPanel view={view} searchConfig={searchConfig} />,
+              dom,
+              String(id)
+            )
+          )}
       </div>
     )
   }

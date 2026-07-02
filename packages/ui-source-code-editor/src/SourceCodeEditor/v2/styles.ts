@@ -160,6 +160,10 @@ const generateStyle = (
       '.cm-placeholder': {
         // for better contrast
         color: componentTheme.placeholderBackgroundColor
+      },
+      '.cm-panels': {
+        backgroundColor: componentTheme.background,
+        color: componentTheme.color
       }
     },
 
