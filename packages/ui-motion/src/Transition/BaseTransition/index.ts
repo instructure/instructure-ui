@@ -22,13 +22,14 @@
  * SOFTWARE.
  */
 
-import { Component, ReactElement } from 'react'
+import { Component, ReactElement, ReactInstance } from 'react'
 
 import { getClassList, findDOMNode } from '@instructure/ui-dom-utils'
 import {
   ensureSingleChild,
   safeCloneElement
 } from '@instructure/ui-react-utils'
+import { createChainedFunction } from '@instructure/ui-utils'
 
 import { allowedProps } from './props.js'
 import type {
@@ -334,19 +335,43 @@ class BaseTransition extends Component<
   }
 
   renderChildren() {
-    return this.props.children
-      ? safeCloneElement(
-          ensureSingleChild(this.props.children) as ReactElement,
-          {
-            'aria-hidden': !this.props.in ? true : undefined,
-            ref: (el: React.ReactInstance | null) => {
-              const ref = (findDOMNode(el) as Element) || null
+    if (!this.props.children) {
+      return null
+    }
 
-              this.handleRef(ref)
-            }
+    const child = ensureSingleChild(this.props.children) as ReactElement
+
+    const elementOnlyRef = (el: ReactInstance | Element | null) => {
+      if (el instanceof Element) {
+        this.handleRef(el)
+      }
+    }
+
+    // `typeof type === 'object'` => forwardRef wrapper (withStyle-decorated InstUI components)
+    const refProps =
+      typeof child.type === 'object'
+        ? {
+            // chain so the child's own elementRef still fires instead of being overwritten
+            elementRef: createChainedFunction(
+              (child.props as { elementRef?: (el: Element | null) => void })
+                ?.elementRef,
+              this.handleRef
+            ),
+            // fallback for forwardRef children that expose their node via `ref`, not elementRef
+            ref: elementOnlyRef
           }
-        )
-      : null
+        : {
+            // for host el / plain class|fn: findDOMNode is the fallback
+            ref: (el: ReactInstance | Element | null) =>
+              this.handleRef(
+                el instanceof Element ? el : (findDOMNode(el) as Element) ?? null
+              )
+          }
+
+    return safeCloneElement(child, {
+      'aria-hidden': !this.props.in ? true : undefined,
+      ...refProps
+    })
   }
 
   render() {
