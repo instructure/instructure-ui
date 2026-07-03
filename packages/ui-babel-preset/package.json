@@ -23,7 +23,7 @@
     "@babel/preset-env": "^7.29.3",
     "@babel/preset-react": "^7.28.5",
     "@babel/preset-typescript": "^7.28.5",
-    "@babel/runtime": "^7.29.2",
+    "@babel/runtime": "^7.29.7",
     "@instructure/babel-plugin-transform-imports": "workspace:*",
     "@instructure/browserslist-config-instui": "workspace:*",
     "babel-loader": "^10.1.1",

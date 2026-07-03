@@ -27,7 +27,8 @@ import '@testing-library/jest-dom'
 import { getOffsetParents } from '../getOffsetParents.js'
 
 describe('getOffsetParents', () => {
-  // At rendering, we receive the node_wrapper and the body as extra offsetParents
+  // getOffsetParents returns only transformed or non-statically-positioned
+  // ancestors, plus the document body (always included as the last entry).
   const node = (
     <div data-testid="node">
       <div
@@ -62,7 +63,7 @@ describe('getOffsetParents', () => {
     const parent = getByTestId('child_1_wrapper_parent')
     const offsetParents = getOffsetParents(child)
 
-    expect(offsetParents[1]).toBe(parent)
+    expect(offsetParents[0]).toBe(parent)
   })
 
   it('should ignore static parents when absolute', () => {
@@ -70,7 +71,7 @@ describe('getOffsetParents', () => {
     const child = getByTestId('child-2')
     const offsetParents = getOffsetParents(child)
 
-    expect(offsetParents.length).toBe(5)
+    expect(offsetParents.length).toBe(3)
   })
 
   it('should handle fixed', () => {
@@ -78,6 +79,6 @@ describe('getOffsetParents', () => {
     const child = getByTestId('child-3')
     const offsetParents = getOffsetParents(child)
 
-    expect(offsetParents.length).toBe(4)
+    expect(offsetParents.length).toBe(1)
   })
 })

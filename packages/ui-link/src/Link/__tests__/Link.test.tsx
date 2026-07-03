@@ -25,7 +25,7 @@
 /** jsxImportSource @emotion/react */
 import { Component, PropsWithChildren } from 'react'
 import { userEvent } from '@testing-library/user-event'
-import { render, screen, waitFor } from '@testing-library/react'
+import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { expect, vi } from 'vitest'
 
@@ -126,7 +126,7 @@ describe('<Link />', () => {
     render(<Link onClick={onClick}>Hello World</Link>)
     const link = screen.getByRole('button')
 
-    userEvent.click(link)
+    fireEvent.click(link, { button: 0, detail: 1 })
 
     await waitFor(() => {
       expect(onClick).toHaveBeenCalledTimes(1)

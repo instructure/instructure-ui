@@ -23,7 +23,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/runtime": "^7.29.2",
+    "@babel/runtime": "^7.29.7",
     "@instructure/console": "workspace:*",
     "@instructure/emotion": "workspace:*",
     "@instructure/shared-types": "workspace:*",
@@ -40,8 +40,8 @@
   "devDependencies": {
     "@instructure/ui-axe-check": "workspace:*",
     "@instructure/ui-babel-preset": "workspace:*",
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "15.0.7",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "16.3.2",
     "vitest": "^3.2.2"
   },
   "peerDependencies": {

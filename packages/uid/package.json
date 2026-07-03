@@ -22,11 +22,11 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/runtime": "^7.29.2"
+    "@babel/runtime": "^7.29.7"
   },
   "devDependencies": {
     "@instructure/ui-babel-preset": "workspace:*",
-    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/jest-dom": "^6.9.1",
     "vitest": "^3.2.2"
   },
   "publishConfig": {

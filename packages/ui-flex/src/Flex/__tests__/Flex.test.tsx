@@ -187,7 +187,7 @@ describe('<Flex />', () => {
     const item1Style = window.getComputedStyle(item1)
     const item2Style = window.getComputedStyle(item2)
 
-    expect(item1Style.flexGrow).toBe('')
+    expect(item1Style.flexGrow).toBe('0')
     expect(item2Style.flexGrow).toBe('1')
   })
 
@@ -222,7 +222,7 @@ describe('<Flex />', () => {
     const item2Style = window.getComputedStyle(item2)
     const item3Style = window.getComputedStyle(item3)
 
-    expect(item2Style.flexBasis).toBe('')
+    expect(item2Style.flexBasis).toBe('auto')
     expect(item3Style.flexBasis).toBe('100px')
     expect(item3Style.minWidth).toBe('100px')
   })
