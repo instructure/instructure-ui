@@ -25,7 +25,55 @@
 const fs = require('fs')
 const path = require('path')
 const readPkgUp = require('read-pkg-up')
-const Package = require('@lerna/package').Package
+
+class Package {
+  /**
+   * @param pkg {Object} the parsed package.json contents
+   * @param location {string} the directory containing the package.json
+   */
+  constructor(pkg, location) {
+    this._pkg = pkg
+    this._location = location
+  }
+
+  get name() {
+    return this._pkg.name
+  }
+
+  get location() {
+    return this._location
+  }
+
+  get private() {
+    return Boolean(this._pkg.private)
+  }
+
+  get version() {
+    return this._pkg.version
+  }
+
+  set version(version) {
+    this._pkg.version = version
+  }
+
+  get manifestLocation() {
+    return path.join(this._location, 'package.json')
+  }
+
+  /**
+   * Write manifest changes back to disk
+   * @returns {Promise<Package>} resolves when the write finishes
+   */
+  async serialize() {
+    await fs.promises.writeFile(
+      this.manifestLocation,
+      JSON.stringify(this._pkg, null, 2) + '\n'
+    )
+    return this
+  }
+}
+
+exports.Package = Package
 
 /**
  * @param [options] {readPkgUp.NormalizeOptions}
@@ -45,8 +93,7 @@ exports.getPackageJSON = function getPackageJSON(options) {
 }
 
 exports.getPackagePath = function getPackagePath(options) {
-  const packageJson = readPackage(options)
-  return packageJson.path
+  return readPackage(options).path
 }
 
 /**
@@ -60,15 +107,9 @@ function readPackage(options) {
     normalize: false,
     ...options
   }
-
-  const pkg = readPkgUp.sync({
+  return readPkgUp.sync({
     cwd: fs.realpathSync(opts.cwd),
     normalize: opts.normalize
   })
-
-  // for backwards compat:
-  pkg.pkg = pkg?.packageJson
-
-  return pkg
 }
 exports.readPackage = readPackage

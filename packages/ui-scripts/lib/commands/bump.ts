@@ -23,7 +23,7 @@
  */
 
 import { execSync } from 'node:child_process'
-import * as pkgUtils from '@instructure/pkg-utils'
+import pkgUtils from '@instructure/pkg-utils'
 import { error, info } from '@instructure/command-utils'
 import type { Argv } from 'yargs'
 import { addNewExportsEntiresToPackageJSONs } from '../utils/addNewExportsEntiresToPackageJSONs.ts'

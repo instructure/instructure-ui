@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import semver from 'semver'
-import * as pkgUtils from '@instructure/pkg-utils'
+import pkgUtils from '@instructure/pkg-utils'
 import {
   runCommandAsync,
   runCommandSync,
@@ -35,8 +35,8 @@ import fs from 'fs'
 const syncRootPackageVersion = async () => {
   const rootPkg = pkgUtils.getPackage()
   const projectVersion = getLernaJsonVersion()
-  if (projectVersion !== rootPkg.get('version')) {
-    rootPkg.set('version', projectVersion)
+  if (projectVersion !== rootPkg.version) {
+    rootPkg.version = projectVersion
     await rootPkg.serialize()
   }
   return projectVersion

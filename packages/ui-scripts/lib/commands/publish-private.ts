@@ -27,7 +27,7 @@ import path from 'node:path'
 import fs from 'node:fs'
 import readline from 'node:readline/promises'
 
-import * as pkgUtils from '@instructure/pkg-utils'
+import pkgUtils from '@instructure/pkg-utils'
 import { error, info, runCommandAsync } from '@instructure/command-utils'
 import type { Argv } from 'yargs'
 

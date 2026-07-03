@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import * as pkgUtils from '@instructure/pkg-utils'
+import pkgUtils from '@instructure/pkg-utils'
 import { error, info, runCommandAsync } from '@instructure/command-utils'
 
 import {
