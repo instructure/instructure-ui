@@ -29,30 +29,35 @@ import {
   error,
   info
 } from '@instructure/command-utils'
+import path from 'node:path'
+import fs from 'fs'
 
-// @ts-expect-error no types published for @lerna/project
-import { Project } from '@lerna/project'
-const syncRootPackageVersion = async (useProjectVersion: boolean) => {
-  const project = new Project(process.cwd())
+const syncRootPackageVersion = async () => {
   const rootPkg = pkgUtils.getPackage()
-
-  let projectVersion
-
-  if (project.isIndependent() || useProjectVersion) {
-    projectVersion = project.version
-  } else {
-    // unfortunately lerna doesn't update lerna.json for canary releases,
-    // so we have to do this:
-    const pkgs = pkgUtils.getChangedPackages()
-    projectVersion = pkgs[0].version
-  }
-
+  const projectVersion = getLernaJsonVersion()
   if (projectVersion !== rootPkg.get('version')) {
     rootPkg.set('version', projectVersion)
     await rootPkg.serialize()
   }
-
   return projectVersion
+}
+
+const getLernaJsonVersion = () => {
+  let dir = path.resolve(process.cwd())
+  // walk up the directory tree until we find a lerna.json
+  while (true) {
+    const lernaConfigPath = path.join(dir, 'lerna.json')
+    if (fs.existsSync(lernaConfigPath)) {
+      const config = JSON.parse(fs.readFileSync(lernaConfigPath, 'utf-8'))
+      return config.version
+    }
+    const parent = path.dirname(dir)
+    if (parent === dir) {
+      error('No lerna.json found, cannot read project version')
+      process.exit(1)
+    }
+    dir = parent
+  }
 }
 
 export async function bumpPackages(
@@ -96,7 +101,7 @@ export async function bumpPackages(
       '--preid=SECURITY' // postfixes releases if type is prerelease
     ])
 
-    releaseVersion = await syncRootPackageVersion(true)
+    releaseVersion = await syncRootPackageVersion()
 
     info(`📦  Done bumping ${packageName} to ${releaseVersion}!`)
   } catch (err) {

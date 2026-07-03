@@ -25,7 +25,6 @@
     "@instructure/command-utils": "workspace:*",
     "@instructure/instructure-design-tokens": "github:instructure/instructure-design-tokens#v1.3.0",
     "@instructure/pkg-utils": "workspace:*",
-    "@lerna/project": "^6.4.1",
     "dprint": "^0.55.1",
     "http-server": "^14.1.1",
     "lerna": "9.0.7",
