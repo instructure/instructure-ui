@@ -83,7 +83,7 @@ class TextArea extends Component<TextAreaProps> {
   private _manuallyResized = false
   private _highlightRef: HTMLSpanElement | null = null
   private myObserver: ResizeObserver | null = null
-  private resizeTimeout?: NodeJS.Timeout
+  private resizeTimeout?: ReturnType<typeof setTimeout>
 
   ref: Element | null = null
 
@@ -94,7 +94,7 @@ class TextArea extends Component<TextAreaProps> {
 
     //mock ResizeObserver for ssr
     if (typeof window === 'undefined') {
-      global.ResizeObserver = class ResizeObserver {
+      globalThis.ResizeObserver = class ResizeObserver {
         observe() {
           // do nothing
         }

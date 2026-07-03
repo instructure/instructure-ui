@@ -99,7 +99,7 @@ class Position extends Component<PositionProps, PositionState> {
 
   ref: Element | null = null
   _id: string
-  _timeouts: NodeJS.Timeout[] = []
+  _timeouts: ReturnType<typeof setTimeout>[] = []
   _listener: PositionChangeListenerType | null = null
   _content?: PositionElement
   _target?: PositionElement

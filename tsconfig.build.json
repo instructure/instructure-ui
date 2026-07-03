@@ -22,7 +22,7 @@
     "noFallthroughCasesInSwitch": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "lib": ["ES2019", "DOM", "DOM.Iterable"],
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
     "allowSyntheticDefaultImports": true
   },
   "exclude": [

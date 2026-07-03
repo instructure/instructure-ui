@@ -146,7 +146,7 @@ const TextArea = forwardRef<TextAreaElement, TextAreaProps>((props, ref) => {
   // Mock ResizeObserver for SSR
   useEffect(() => {
     if (typeof window === 'undefined') {
-      global.ResizeObserver = class ResizeObserver {
+      globalThis.ResizeObserver = class ResizeObserver {
         observe() {
           // do nothing
         }

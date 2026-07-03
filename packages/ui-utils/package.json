@@ -35,7 +35,10 @@
     "@instructure/ui-babel-preset": "workspace:*",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "16.3.2",
-    "vitest": "^3.2.2"
+    "vitest": "^4.1.9"
+  },
+  "//dependency-comments": {
+    "ua-parser-js": "Do not upgrade to 2.x, it has a problematic license"
   },
   "peerDependencies": {
     "react": ">=18 <=19",

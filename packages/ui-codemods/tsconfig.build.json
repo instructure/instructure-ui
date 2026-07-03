@@ -5,7 +5,8 @@
     "module": "esnext",
     "moduleResolution": "bundler",
     "composite": true,
-    "rootDir": "./lib"
+    "rootDir": "./lib",
+    "types": ["node"]
   },
   "include": ["lib"],
   "exclude": ["lib/__node_tests__/__testfixtures__"],

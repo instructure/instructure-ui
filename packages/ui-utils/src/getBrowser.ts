@@ -28,12 +28,11 @@ import UAParser from 'ua-parser-js'
  * ---
  * category: utilities/Misc
  * ---
- * A utility module using the [ua-parser-js](https://www.npmjs.com/package/ua-parser-js) browser
- * detection library.
+ * A utility module using the 1.x [ua-parser-js](https://www.npmjs.com/package/ua-parser-js)
+ * browser detection library.
  *
  * @module getBrowser
  */
-
 const getBrowser = (): UAParser.IBrowser => {
   const parser = new UAParser()
   const { browser } = parser.getResult()

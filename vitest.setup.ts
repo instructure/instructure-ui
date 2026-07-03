@@ -31,11 +31,13 @@ import { vi } from 'vitest'
 const originalResizeObserver = global.ResizeObserver
 
 beforeAll(() => {
-  const ResizeObserverMock = vi.fn(() => ({
-    observe: vi.fn(),
-    unobserve: vi.fn(),
-    disconnect: vi.fn()
-  }))
+  const ResizeObserverMock = vi.fn(function () {
+    return {
+      observe: vi.fn(),
+      unobserve: vi.fn(),
+      disconnect: vi.fn()
+    }
+  })
   vi.stubGlobal('ResizeObserver', ResizeObserverMock)
   // This is needed because getFontSize() reads the font size from here, and
   // jest-dom does not give this a value, so getFontSize() will return NaN

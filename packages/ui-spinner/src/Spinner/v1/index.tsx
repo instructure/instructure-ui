@@ -58,7 +58,7 @@ class Spinner extends Component<SpinnerProps, SpinnerState> {
 
   ref: Element | null = null
   private readonly titleId?: string
-  private delayTimeout?: NodeJS.Timeout
+  private delayTimeout?: ReturnType<typeof setTimeout>
 
   handleRef = (el: Element | null) => {
     const { elementRef } = this.props
