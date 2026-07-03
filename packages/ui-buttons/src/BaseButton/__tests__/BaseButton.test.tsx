@@ -187,7 +187,7 @@ describe('<BaseButton/>', () => {
 
     const button = screen.getByRole('button', { name: 'Hello World' })
 
-    expect(elementRef).toBeCalledWith(button)
+    expect(elementRef).toHaveBeenCalledWith(button)
   })
 
   it('should not be underlined when disabled with a href', () => {
