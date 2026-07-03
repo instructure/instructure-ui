@@ -2507,8 +2507,8 @@ importers:
         specifier: workspace:*
         version: link:../ui-utils
       lucide-react:
-        specifier: 1.7.0
-        version: 1.7.0(react@18.3.1)
+        specifier: 1.23.0
+        version: 1.23.0(react@18.3.1)
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -3939,8 +3939,8 @@ importers:
         specifier: ^4.0.6
         version: 4.0.6
       lucide-react:
-        specifier: 1.7.0
-        version: 1.7.0(react@18.3.1)
+        specifier: 1.23.0
+        version: 1.23.0(react@18.3.1)
       pixelmatch:
         specifier: ^7.2.0
         version: 7.2.0
@@ -10981,8 +10981,8 @@ packages:
   lru-queue@0.1.0:
     resolution: {integrity: sha512-BpdYkt9EvGl8OfWHDQPISVpcl5xZthb+XPsbELj5AQXxIC8IriDZIQYjBJPEm5rS420sjZ0TLEzRcq5KdBhYrQ==}
 
-  lucide-react@1.7.0:
-    resolution: {integrity: sha512-yI7BeItCLZJTXikmK4KNUGCKoGzSvbKlfCvw44bU4fXAL6v3gYS4uHD1jzsLkfwODYwI6Drw5Tu9Z5ulDe0TSg==}
+  lucide-react@1.23.0:
+    resolution: {integrity: sha512-38BpJcD0JhFosxHApP/BYsBetLpQFRoTRzEzstM/XCc3jsAG7wqaY1lgVwxiUe3xqYE+lNxo2PkCmYwXWrwwIw==}
     peerDependencies:
       react: 18.3.1
 
@@ -19849,7 +19849,7 @@ snapshots:
     dependencies:
       es5-ext: 0.10.64
 
-  lucide-react@1.7.0(react@18.3.1):
+  lucide-react@1.23.0(react@18.3.1):
     dependencies:
       react: 18.3.1
 
