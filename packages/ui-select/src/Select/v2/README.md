@@ -366,7 +366,7 @@ type: example
 
 To mark an option as "highlighted", use the option's `isHighlighted` prop. Note that only one highlighted option is permitted. Similarly, use `isSelected` to mark an option or multiple options as "selected". When allowing multiple selections, it's best to render a [Tag](Tag) with [AccessibleContent](AccessibleContent) for each selected option via the `renderBeforeInput` prop.
 
-> **Accessibility:** always list the selected options in the `assistiveText` (e.g. `"Alaska Selected, …"`), as the example below does, so screen reader users hear what is selected when they reach the `Select`. The `Select` automatically keeps the pills' `"Remove …"` labels out of the combobox's accessible name, so those are only announced when a user navigates to a pill itself.
+> **Accessibility:** set an explicit `aria-label` on the `Select` (matching `renderLabel`) and list the selected options in the `assistiveText` (e.g. `"Alaska Selected, …"`), as the example below does. This keeps the combobox's accessible name limited to the field label, while screen reader users still hear which options are selected. Each pill's `"Remove …"` label is only announced when that pill receives focus.
 
 ```js
 ---
@@ -561,6 +561,7 @@ type: example
       <div>
         <Select
           renderLabel="Multiple Select"
+          aria-label="Multiple Select"
           assistiveText={assistiveText}
           inputValue={inputValue}
           isShowingOptions={isShowingOptions}

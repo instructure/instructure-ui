@@ -30,8 +30,7 @@ import {
   matchComponentTypes,
   omitProps,
   getInteraction,
-  withDeterministicId,
-  callRenderProp
+  withDeterministicId
 } from '@instructure/ui-react-utils'
 import {
   getBoundingClientRect,
@@ -184,9 +183,6 @@ class Select extends Component<SelectProps> {
   ref: HTMLSpanElement | null = null
   _input: HTMLInputElement | null = null
   private _defaultId = this.props.deterministicId!()
-  // Dedicated id for a hidden label element used as the combobox's accessible
-  // name when content is rendered before the input (e.g. multiple-select pills).
-  private _labelId = this.props.deterministicId!()
   private _inputContainer: HTMLSpanElement | null = null
   private _listView: Element | null = null
   // temporarily stores actionable options
@@ -753,17 +749,6 @@ class Select extends Component<SelectProps> {
       overrideProps.autoComplete = passthroughProps['autoComplete']
     }
 
-    // When content is rendered before the input via `renderBeforeInput` (e.g.
-    // the dismissible Tag "pills" of a multiple select), that content lives
-    // inside the wrapping <label> and would otherwise be pulled into the
-    // combobox's accessible name (announced as e.g.
-    // "Multiple Select Remove Alaska Remove American Samoa ..."). Point the
-    // input's name at a dedicated hidden label element holding only the field
-    // label, so the pills are only read when focused directly.
-    if (renderBeforeInput != null) {
-      overrideProps['aria-labelledby'] = this._labelId
-    }
-
     const inputProps: Partial<TextInputProps> = {
       id: this.id,
       renderLabel,
@@ -869,17 +854,6 @@ class Select extends Component<SelectProps> {
             <span {...getDescriptionProps()} css={styles?.assistiveText}>
               {assistiveText}
             </span>
-            {/* Hidden label referenced via `aria-labelledby` on the input when
-              content (e.g. multiple-select pills) is rendered before the input.
-              It mirrors the field label so the combobox's accessible name does
-              not include the pills. `aria-labelledby` resolves referenced
-              elements even when hidden, so the shared `assistiveText`
-              (display: none) style is reused here. */}
-            {this.props.renderBeforeInput != null && (
-              <span id={this._labelId} css={styles?.assistiveText}>
-                {callRenderProp(this.props.renderLabel)}
-              </span>
-            )}
             <Popover
               constrain={constrain}
               placement={placement}

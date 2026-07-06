@@ -364,10 +364,26 @@ describe('<Select />', () => {
   })
 
   describe('accessible name with content rendered before the input', () => {
-    it('keeps the "before input" pills out of the combobox accessible name while the pill itself still announces "Remove"', async () => {
+    it('keeps meaningful renderBeforeInput content in the accessible name', async () => {
+      // e.g. a country dial-code prefix rendered before the input: the Select
+      // must not strip it from the name (it is the only place it is exposed).
+      const { container } = render(
+        <Select renderLabel="Country code" renderBeforeInput={<span>+1</span>}>
+          {getOptions()}
+        </Select>
+      )
+      const input = container.querySelector('input')!
+
+      // the component does not force the name to the label only
+      expect(input).not.toHaveAttribute('aria-labelledby')
+      expect(input).toHaveAccessibleName(/\+1/)
+    })
+
+    it('lets a consumer keep decorative pills out of the name via aria-label, while each pill still announces "Remove"', async () => {
       const { container } = render(
         <Select
-          renderLabel="Choose an option"
+          renderLabel="Multiple Select"
+          aria-label="Multiple Select"
           renderBeforeInput={
             // a dismissible Tag renders as a button named "Remove foo"
             <button type="button">Remove foo</button>
@@ -377,28 +393,13 @@ describe('<Select />', () => {
         </Select>
       )
 
-      // The combobox name is pointed at a dedicated label element that mirrors
-      // the field label and excludes the pill's "Remove ...".
+      // the consumer-provided aria-label becomes the name, excluding the pill
       const input = container.querySelector('input')!
-      const labelledby = input.getAttribute('aria-labelledby')
-      expect(labelledby).toBeTruthy()
+      expect(input).toHaveAccessibleName('Multiple Select')
 
-      const labelEl = document.getElementById(labelledby!)
-      expect(labelEl).toHaveTextContent('Choose an option')
-      expect(labelEl).not.toHaveTextContent('Remove')
-
-      // The pill itself keeps its "Remove ..." accessible name, so a screen
-      // reader announces that it can be removed when the user navigates to it.
+      // the pill keeps its own "Remove ..." accessible name
       const pill = screen.getByRole('button', { name: 'Remove foo' })
       expect(pill).toHaveAccessibleName('Remove foo')
-    })
-
-    it('does not set aria-labelledby when nothing is rendered before the input', async () => {
-      const { container } = render(
-        <Select renderLabel="Choose an option">{getOptions()}</Select>
-      )
-      const input = container.querySelector('input')!
-      expect(input).not.toHaveAttribute('aria-labelledby')
     })
   })
 
