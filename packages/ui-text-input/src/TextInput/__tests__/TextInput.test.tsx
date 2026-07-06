@@ -182,5 +182,36 @@ describe('<TextInput/>', () => {
 
       expect(input).toHaveAttribute('aria-invalid')
     })
+
+    it('associates messages with the input as its description, not its accessible name', async () => {
+      render(
+        <TextInput
+          renderLabel="Name"
+          messages={[{ type: 'error', text: 'some error message' }]}
+        />
+      )
+      const input = screen.getByRole('textbox')
+
+      // messages are referenced as the input's description
+      const describedById = input.getAttribute('aria-describedby')
+      expect(describedById).toBeTruthy()
+      expect(document.getElementById(describedById!)).toHaveTextContent(
+        'some error message'
+      )
+
+      // the accessible name points at the label text only, excluding messages
+      const labelledById = input.getAttribute('aria-labelledby')
+      expect(labelledById).toBeTruthy()
+      const labelEl = document.getElementById(labelledById!)
+      expect(labelEl).toHaveTextContent('Name')
+      expect(labelEl).not.toHaveTextContent('some error message')
+    })
+
+    it('does not override the accessible name with aria-labelledby when there are no messages', async () => {
+      render(<TextInput renderLabel="Name" />)
+      const input = screen.getByRole('textbox')
+
+      expect(input).not.toHaveAttribute('aria-labelledby')
+    })
   })
 })

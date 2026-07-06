@@ -128,6 +128,14 @@ const TextArea = forwardRef<TextAreaElement, TextAreaProps>((props, ref) => {
     return { isInvalid, isSuccess }
   }, [messages])
 
+  // Messages live inside the wrapping <label>. Reference them from the textarea
+  // via `aria-describedby` and point the accessible name at the label text only
+  // via `aria-labelledby`, so the messages are announced as a description
+  // rather than as part of the control's name.
+  const hasMessages = !!messages && messages.length > 0
+  const messagesId = `${id}-messages`
+  const labelId = `${id}-label`
+
   // Use styles
   const styles = useStyleNew({
     generateStyle,
@@ -393,6 +401,22 @@ const TextArea = forwardRef<TextAreaElement, TextAreaProps>((props, ref) => {
       required={required}
       aria-required={required}
       aria-invalid={isInvalid ? 'true' : undefined}
+      aria-describedby={
+        [
+          (rest as Record<string, unknown>)['aria-describedby'],
+          hasMessages ? messagesId : null
+        ]
+          .filter(Boolean)
+          .join(' ') || undefined
+      }
+      aria-labelledby={
+        hasMessages
+          ? ((rest as Record<string, unknown>)['aria-labelledby'] as string) ||
+            labelId
+          : ((rest as Record<string, unknown>)['aria-labelledby'] as
+              | string
+              | undefined)
+      }
       disabled={disabled}
       readOnly={readOnly}
       css={styles?.textArea}
@@ -404,6 +428,8 @@ const TextArea = forwardRef<TextAreaElement, TextAreaProps>((props, ref) => {
     <FormField
       {...pickProps(props, FormField.allowedProps)}
       label={label}
+      messagesId={messagesId}
+      labelId={labelId}
       vAlign="top"
       id={id}
       elementRef={(el) => {

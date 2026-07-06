@@ -48,6 +48,7 @@ const FormFieldLayout = forwardRef<Element, FormFieldLayoutProps>(
       label,
       messages,
       messagesId: messagesIdProp,
+      labelId: labelIdProp,
       children,
       width,
       elementRef,
@@ -69,7 +70,12 @@ const FormFieldLayout = forwardRef<Element, FormFieldLayoutProps>(
     }, [])
 
     const messagesId = messagesIdProp || deterministicId
-    const labelId = deterministicId ? `${deterministicId}-Label` : undefined
+    // The label element gets an id so that single form controls can point their
+    // `aria-labelledby` at the label text only. This keeps `messages` (which
+    // live inside the wrapping <label>) out of the control's accessible name
+    // while preserving the native click-on-label focus behavior.
+    const labelId =
+      labelIdProp || (deterministicId ? `${deterministicId}-Label` : undefined)
 
     // Filter out error and success messages when disabled or readOnly
     const filteredMessages =
@@ -183,7 +189,13 @@ const FormFieldLayout = forwardRef<Element, FormFieldLayoutProps>(
             </legend>
           )
         }
-        return <span css={styles?.formFieldLabel}>{labelContent}</span>
+        // `id` lets single form controls reference just the label text via
+        // `aria-labelledby`, keeping `messages` out of their accessible name.
+        return (
+          <span css={styles?.formFieldLabel} id={labelId}>
+            {labelContent}
+          </span>
+        )
       } else if (label) {
         if (ElementType === 'fieldset') {
           return (

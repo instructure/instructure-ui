@@ -84,8 +84,12 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
     }
 
     this._defaultId = props.deterministicId!()
+    this._messagesId = props.deterministicId!('Checkbox-messages')
+    this._labelId = props.deterministicId!('Checkbox-label')
   }
   private readonly _defaultId: string
+  private readonly _messagesId: string
+  private readonly _labelId: string
   private _input: HTMLInputElement | null = null
 
   ref: Element | null = null
@@ -186,6 +190,10 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
     )
   }
 
+  get hasMessages() {
+    return !!this.props.messages && this.props.messages.length > 0
+  }
+
   get invalid() {
     return !!this.props.messages?.find(
       (m) => m.type === 'newError' || m.type === 'error'
@@ -217,6 +225,24 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
       `[Checkbox] The \`simple\` variant does not support the \`labelPlacement\` property.  Use the \`toggle\` variant instead.`
     )
 
+    // The label text gets its own id so that, when there are messages, the
+    // input's accessible name can point at the label only (via
+    // `aria-labelledby`) instead of also including the message text.
+    const labelContent = (
+      <span id={this._labelId}>
+        {label}
+        {isRequired && label && (
+          <span
+            css={this.invalid ? styles?.requiredInvalid : {}}
+            aria-hidden={true}
+          >
+            {' '}
+            *
+          </span>
+        )}
+      </span>
+    )
+
     if (variant === 'toggle') {
       return (
         <ToggleFacade
@@ -232,16 +258,7 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
           themeOverride={themeOverride}
           invalid={this.invalid}
         >
-          {label}
-          {isRequired && label && (
-            <span
-              css={this.invalid ? styles?.requiredInvalid : {}}
-              aria-hidden={true}
-            >
-              {' '}
-              *
-            </span>
-          )}
+          {labelContent}
         </ToggleFacade>
       )
     } else {
@@ -257,16 +274,7 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
           themeOverride={themeOverride}
           invalid={this.invalid}
         >
-          {label}
-          {isRequired && label && (
-            <span
-              css={this.invalid ? styles?.requiredInvalid : {}}
-              aria-hidden={true}
-            >
-              {' '}
-              *
-            </span>
-          )}
+          {labelContent}
         </CheckboxFacade>
       )
     }
@@ -286,7 +294,7 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
             : styles?.indentedError)
         }
       >
-        <FormFieldMessages messages={messages} />
+        <FormFieldMessages id={this._messagesId} messages={messages} />
       </View>
     ) : null
   }
@@ -338,6 +346,24 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
             aria-readonly={readOnly ? true : undefined}
             aria-checked={indeterminate ? 'mixed' : undefined}
             aria-invalid={this.invalid ? 'true' : undefined}
+            // Keep messages in the description so the accessible name contains only the label.
+            aria-labelledby={
+              this.hasMessages
+                ? ((props as Record<string, unknown>)[
+                    'aria-labelledby'
+                  ] as string) || this._labelId
+                : ((props as Record<string, unknown>)['aria-labelledby'] as
+                    | string
+                    | undefined)
+            }
+            aria-describedby={
+              [
+                (props as Record<string, unknown>)['aria-describedby'],
+                this.hasMessages ? this._messagesId : null
+              ]
+                .filter(Boolean)
+                .join(' ') || undefined
+            }
             css={styles?.input}
             onClickCapture={(e) => {
               if (readOnly) {

@@ -120,6 +120,14 @@ const NumberInput = forwardRef<NumberInputHandle, NumberInputProps>(
     const success =
       !!messages && messages.some((message) => message.type === 'success')
 
+    // Messages live inside the wrapping <label>. Reference them from the input
+    // via `aria-describedby` and point the accessible name at the label text
+    // only via `aria-labelledby`, so the messages are announced as a
+    // description rather than as part of the control's name.
+    const hasMessages = !!messages && messages.length > 0
+    const messagesId = id ? `${id}-messages` : undefined
+    const labelId = id ? `${id}-label` : undefined
+
     const interaction = getInteraction({ props })
     if (
       interaction === 'disabled' &&
@@ -331,6 +339,8 @@ const NumberInput = forwardRef<NumberInputHandle, NumberInputProps>(
       <FormField
         {...pickProps(props, FormField.allowedProps)}
         label={label}
+        messagesId={messagesId}
+        labelId={labelId}
         inline={display === 'inline-block'}
         id={id}
         elementRef={handleRef}
@@ -346,6 +356,19 @@ const NumberInput = forwardRef<NumberInputHandle, NumberInputProps>(
               {...passedProps}
               css={styles?.input}
               aria-invalid={invalid ? 'true' : undefined}
+              aria-describedby={
+                [
+                  passedProps['aria-describedby'],
+                  hasMessages ? messagesId : null
+                ]
+                  .filter(Boolean)
+                  .join(' ') || undefined
+              }
+              aria-labelledby={
+                hasMessages
+                  ? (passedProps['aria-labelledby'] as string) || labelId
+                  : (passedProps['aria-labelledby'] as string | undefined)
+              }
               id={id}
               type={allowStringValue ? 'text' : 'number'}
               inputMode={inputMode}

@@ -211,5 +211,35 @@ describe('TextArea', () => {
 
       expect(input).toHaveAttribute('aria-invalid')
     })
+
+    it('associates messages with the textarea as its description, not its accessible name', async () => {
+      render(
+        <TextArea
+          label="Name"
+          autoGrow={false}
+          messages={[{ type: 'error', text: 'some error message' }]}
+        />
+      )
+      const input = screen.getByRole('textbox')
+
+      const describedById = input.getAttribute('aria-describedby')
+      expect(describedById).toBeTruthy()
+      expect(document.getElementById(describedById!)).toHaveTextContent(
+        'some error message'
+      )
+
+      const labelledById = input.getAttribute('aria-labelledby')
+      expect(labelledById).toBeTruthy()
+      const labelEl = document.getElementById(labelledById!)
+      expect(labelEl).toHaveTextContent('Name')
+      expect(labelEl).not.toHaveTextContent('some error message')
+    })
+
+    it('does not override the accessible name with aria-labelledby when there are no messages', async () => {
+      render(<TextArea label="Name" autoGrow={false} />)
+      const input = screen.getByRole('textbox')
+
+      expect(input).not.toHaveAttribute('aria-labelledby')
+    })
   })
 })

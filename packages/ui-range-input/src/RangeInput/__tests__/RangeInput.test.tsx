@@ -211,6 +211,41 @@ describe('<RangeInput />', () => {
       expect(axeCheck).toBe(true)
     })
 
+    it('associates messages with the input as its description, not its accessible name', async () => {
+      const { container } = render(
+        <RangeInput
+          label="Opacity"
+          name="opacity"
+          max={100}
+          min={0}
+          defaultValue={50}
+          messages={[{ type: 'error', text: 'some error message' }]}
+        />
+      )
+      const input = container.querySelector('input')!
+
+      const describedById = input.getAttribute('aria-describedby')
+      expect(describedById).toBeTruthy()
+      expect(document.getElementById(describedById!)).toHaveTextContent(
+        'some error message'
+      )
+
+      const labelledById = input.getAttribute('aria-labelledby')
+      expect(labelledById).toBeTruthy()
+      const labelEl = document.getElementById(labelledById!)
+      expect(labelEl).toHaveTextContent('Opacity')
+      expect(labelEl).not.toHaveTextContent('some error message')
+    })
+
+    it('does not override the accessible name with aria-labelledby when there are no messages', async () => {
+      const { container } = render(
+        <RangeInput label="Opacity" name="opacity" max={100} min={0} />
+      )
+      const input = container.querySelector('input')!
+
+      expect(input).not.toHaveAttribute('aria-labelledby')
+    })
+
     it('formats the aria-valuetext attribute', async () => {
       const { container } = render(
         <RangeInput

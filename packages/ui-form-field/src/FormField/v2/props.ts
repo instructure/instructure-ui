@@ -46,6 +46,11 @@ type FormFieldOwnProps = {
    * id for the form field messages
    */
   messagesId?: string
+  /**
+   * id for the label element, so a single form control can reference just the
+   * label text via `aria-labelledby` (keeping messages out of its accessible name)
+   */
+  labelId?: string
   children?: React.ReactNode
   inline?: boolean
   layout?: 'stacked' | 'inline'
@@ -86,6 +91,7 @@ const allowedProps: AllowedPropKeys = [
   'id',
   'messages',
   'messagesId',
+  'labelId',
   'children',
   'inline',
   'layout',

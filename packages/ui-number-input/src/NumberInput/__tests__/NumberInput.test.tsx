@@ -304,4 +304,33 @@ describe('<NumberInput />', () => {
       expect(onDecrement).toHaveBeenCalledTimes(1)
     })
   })
+
+  it('associates messages with the input as its description, not its accessible name', async () => {
+    render(
+      <NumberInput
+        renderLabel="Label"
+        messages={[{ type: 'error', text: 'some error message' }]}
+      />
+    )
+    const input = screen.getByRole('spinbutton')
+
+    const describedById = input.getAttribute('aria-describedby')
+    expect(describedById).toBeTruthy()
+    expect(document.getElementById(describedById!)).toHaveTextContent(
+      'some error message'
+    )
+
+    const labelledById = input.getAttribute('aria-labelledby')
+    expect(labelledById).toBeTruthy()
+    const labelEl = document.getElementById(labelledById!)
+    expect(labelEl).toHaveTextContent('Label')
+    expect(labelEl).not.toHaveTextContent('some error message')
+  })
+
+  it('does not override the accessible name with aria-labelledby when there are no messages', async () => {
+    render(<NumberInput renderLabel="Label" />)
+    const input = screen.getByRole('spinbutton')
+
+    expect(input).not.toHaveAttribute('aria-labelledby')
+  })
 })

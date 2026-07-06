@@ -56,6 +56,11 @@ type FormFieldLayoutOwnProps = {
    * id for the form field messages
    */
   messagesId?: string
+  /**
+   * id for the label element, so a single form control can reference just the
+   * label text via `aria-labelledby` (keeping messages out of its accessible name)
+   */
+  labelId?: string
   children?: React.ReactNode
   /**
    * If `true` use an inline layout -- content will flow on the left/right side
@@ -129,6 +134,7 @@ const allowedProps: AllowedPropKeys = [
   'as',
   'messages',
   'messagesId',
+  'labelId',
   'children',
   'inline',
   'layout',

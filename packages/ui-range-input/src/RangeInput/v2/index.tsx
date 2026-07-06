@@ -184,14 +184,27 @@ class RangeInput extends Component<RangeInputProps, RangeInputState> {
   }
 
   render() {
-    const { formatValue, disabled, readOnly } = this.props
+    const { formatValue, disabled, readOnly, messages } = this.props
 
-    const props = omitProps(this.props, RangeInput.allowedProps)
+    const props = omitProps(this.props, RangeInput.allowedProps) as Record<
+      string,
+      unknown
+    >
+
+    // Messages live inside the wrapping <label>. Reference them from the input
+    // via `aria-describedby` and point the accessible name at the label text
+    // only via `aria-labelledby`, so the messages are announced as a
+    // description rather than as part of the control's name.
+    const hasMessages = !!messages && messages.length > 0
+    const messagesId = `${this.id}-messages`
+    const labelId = `${this.id}-label`
 
     return (
       <FormField
         {...pickProps(this.props, FormField.allowedProps)}
         label={this.props.label}
+        messagesId={messagesId}
+        labelId={labelId}
         id={this.id}
         elementRef={this.handleRef}
         data-cid="RangeInput"
@@ -211,6 +224,16 @@ class RangeInput extends Component<RangeInputProps, RangeInputState> {
             {...props}
             disabled={disabled || readOnly}
             aria-disabled={disabled || readOnly ? 'true' : undefined}
+            aria-describedby={
+              [props['aria-describedby'], hasMessages ? messagesId : null]
+                .filter(Boolean)
+                .join(' ') || undefined
+            }
+            aria-labelledby={
+              hasMessages
+                ? (props['aria-labelledby'] as string) || labelId
+                : (props['aria-labelledby'] as string | undefined)
+            }
           />
           {this.renderValue()}
         </div>

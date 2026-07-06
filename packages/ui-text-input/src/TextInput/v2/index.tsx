@@ -70,6 +70,7 @@ class TextInput extends Component<TextInputProps> {
     super(props)
     this._defaultId = props.deterministicId!()
     this._messagesId = props.deterministicId!('TextInput-messages')
+    this._labelId = props.deterministicId!('TextInput-label')
   }
 
   ref: Element | null = null
@@ -78,6 +79,7 @@ class TextInput extends Component<TextInputProps> {
 
   private readonly _defaultId: string
   private readonly _messagesId: string
+  private readonly _labelId: string
 
   private _focusListener: { remove(): void } | null = null
 
@@ -231,6 +233,19 @@ class TextInput extends Component<TextInputProps> {
     if (props['aria-describedby']) {
       descriptionIds = `${props['aria-describedby']}`
     }
+    // When there are messages, associate them with the input as its description
+    // (they are rendered by FormField with `id={this._messagesId}`) and point
+    // the accessible name at the label text only via `aria-labelledby`. This
+    // keeps the messages — which live inside the wrapping <label> — out of the
+    // control's name while preserving the click-on-label focus behavior.
+    // Any consumer-provided `aria-labelledby` takes precedence.
+    let labelledById = props['aria-labelledby'] as string | undefined
+    if (this.hasMessages) {
+      descriptionIds = [descriptionIds, this._messagesId]
+        .filter(Boolean)
+        .join(' ')
+      labelledById = labelledById || this._labelId
+    }
 
     return (
       <input
@@ -247,6 +262,7 @@ class TextInput extends Component<TextInputProps> {
         disabled={interaction === 'disabled'}
         readOnly={interaction === 'readonly'}
         aria-describedby={descriptionIds !== '' ? descriptionIds : undefined}
+        aria-labelledby={labelledById}
         size={htmlSize}
         onChange={this.handleChange}
         onBlur={this.handleBlur}
@@ -283,6 +299,7 @@ class TextInput extends Component<TextInputProps> {
         id={this.id}
         label={label}
         messagesId={this._messagesId}
+        labelId={this._labelId}
         messages={messages}
         inline={display === 'inline-block'}
         width={width}

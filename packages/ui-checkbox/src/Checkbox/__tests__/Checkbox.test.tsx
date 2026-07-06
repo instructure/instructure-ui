@@ -289,5 +289,35 @@ describe('<Checkbox />', () => {
 
       expect(axeCheck).toBe(true)
     })
+
+    it('associates messages with the checkbox as its description, not its accessible name', async () => {
+      render(
+        <Checkbox
+          label="Accept terms"
+          value="v"
+          messages={[{ type: 'error', text: 'You must accept' }]}
+        />
+      )
+      const input = screen.getByRole('checkbox')
+
+      const describedById = input.getAttribute('aria-describedby')
+      expect(describedById).toBeTruthy()
+      expect(document.getElementById(describedById!)).toHaveTextContent(
+        'You must accept'
+      )
+
+      const labelledById = input.getAttribute('aria-labelledby')
+      expect(labelledById).toBeTruthy()
+      const labelEl = document.getElementById(labelledById!)
+      expect(labelEl).toHaveTextContent('Accept terms')
+      expect(labelEl).not.toHaveTextContent('You must accept')
+    })
+
+    it('does not set aria-labelledby when there are no messages', async () => {
+      render(<Checkbox label="Accept terms" value="v" />)
+      const input = screen.getByRole('checkbox')
+
+      expect(input).not.toHaveAttribute('aria-labelledby')
+    })
   })
 })
