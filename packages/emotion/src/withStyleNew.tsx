@@ -132,8 +132,10 @@ const withStyleNew = decorator(
   ) => {
     const displayName = ComposedComponent.displayName || ComposedComponent.name
 
-    const componentId: keyof NewComponentTypes =
-      useTokensFrom ?? ComposedComponent.componentId?.replace('.', '')
+    const rawComponentId: keyof NewComponentTypes =
+      ComposedComponent.componentId?.replace('.', '')
+
+    const componentId: keyof NewComponentTypes = useTokensFrom ?? rawComponentId
 
     const WithStyle: ForwardRefExoticComponent<
       PropsWithoutRef<Props> & RefAttributes<any>
@@ -188,7 +190,7 @@ const withStyleNew = decorator(
       const semanticsOverrides = themeOverride?.semantics
       const sharedTokensOverrides = themeOverride?.sharedTokens
       const componentOverridesFromSettingsProvider =
-        themeOverride?.components?.[componentId]
+        themeOverride?.components?.[rawComponentId]
       const componentOverridesFromThemeOverrideProp = (
         componentProps as ThemeOverrideProp
       ).themeOverride
@@ -198,14 +200,15 @@ const withStyleNew = decorator(
         primitiveOverrides!
       )
 
-      const semantics = mergeDeep(
-        theme.newTheme.semantics?.(primitives),
-        semanticsOverrides!
+      const semantics = applyColorModifiers(
+        mergeDeep(theme.newTheme.semantics?.(primitives), semanticsOverrides!)
       )
 
-      const sharedTokens = mergeDeep(
-        theme.newTheme.sharedTokens?.(semantics),
-        sharedTokensOverrides as Record<string, unknown>
+      const sharedTokens = applyColorModifiers(
+        mergeDeep(
+          theme.newTheme.sharedTokens?.(semantics),
+          sharedTokensOverrides as Record<string, unknown>
+        )
       ) as SharedTokens
       // Note: Some components do not have a theme, e.g., FormFieldMessages
       const baseComponentTheme = applyColorModifiers(

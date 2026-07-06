@@ -108,18 +108,21 @@ const useStyleNew = <
   const semanticsOverrides = themeOverrideFromProvider?.semantics
   const sharedTokensOverrides = themeOverrideFromProvider?.sharedTokens
   const componentOverridesFromSettingsProvider =
-    themeOverrideFromProvider?.components?.[componentWithTokensId]
+    themeOverrideFromProvider?.components?.[
+      componentId as keyof NewComponentTypes
+    ]
 
   const primitives = mergeDeep(theme.newTheme.primitives, primitiveOverrides!)
 
-  const semantics = mergeDeep(
-    theme.newTheme.semantics?.(primitives),
-    semanticsOverrides!
+  const semantics = applyColorModifiers(
+    mergeDeep(theme.newTheme.semantics?.(primitives), semanticsOverrides!)
   )
 
-  const sharedTokens = mergeDeep(
-    theme.newTheme.sharedTokens?.(semantics),
-    sharedTokensOverrides as Record<string, unknown>
+  const sharedTokens = applyColorModifiers(
+    mergeDeep(
+      theme.newTheme.sharedTokens?.(semantics),
+      sharedTokensOverrides as Record<string, unknown>
+    )
   )
 
   const baseComponentTheme = applyColorModifiers(

@@ -36,7 +36,11 @@ const formatComponent = (collection: any, key?: string): any => {
   // metadata. Tokens Studio writes color modifiers there under `studio.tokens.modify`
   // (e.g. `{ type: 'darken', value: 0.1 }`); we forward that payload so the runtime
   // (`applyColorModifiers`) can resolve the final color at theme apply time.
-  if (value['$extensions']) {
+  if (
+    value['$extensions'] &&
+    value['$extensions']['studio.tokens'] &&
+    value['$extensions']['studio.tokens'].modify
+  ) {
     return {
       value: value.value,
       modify: value['$extensions']['studio.tokens'].modify

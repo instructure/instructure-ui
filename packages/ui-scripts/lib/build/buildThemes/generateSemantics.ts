@@ -91,6 +91,20 @@ const formatSemantic = (collection: any, key?: any): any => {
       return { ...acc, [key]: formatSemantic(value, key) }
     }, {})
   }
+  // `$extensions` is the Design Tokens Format spec's escape hatch for tool-specific
+  // metadata. Tokens Studio writes color modifiers there under `studio.tokens.modify`
+  // (e.g. `{ type: 'darken', value: 0.1 }`); we forward that payload so the runtime
+  // (`applyColorModifiers`) can resolve the final color at theme apply time.
+  if (
+    value['$extensions'] &&
+    value['$extensions']['studio.tokens'] &&
+    value['$extensions']['studio.tokens'].modify
+  ) {
+    return {
+      value: value.value,
+      modify: value['$extensions']['studio.tokens'].modify
+    }
+  }
   return value.value
 }
 
@@ -108,7 +122,7 @@ const formatReference = (reference: string): string => {
 
 export const resolveReferences = (semantics: any, key?: any): string => {
   const value = key ? semantics[key] : semantics
-  if (typeof value === 'object' && !value.value && !value.type) {
+  if (typeof value === 'object') {
     return Object.keys(value).reduce((acc, key, index) => {
       if (typeof value[key] === 'object') {
         return (

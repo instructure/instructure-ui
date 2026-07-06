@@ -197,8 +197,8 @@ const setupThemes = async (targetPath: string, input: any): Promise<void> => {
         import type { Semantics } from "./semantics"
 
         const ${fullComponentName} = (semantic: Semantics): ${capitalize(
-            fullComponentName
-          )} => ({${componentThemeVars}})
+          fullComponentName
+        )} => ({${componentThemeVars}})
         export default ${fullComponentName}
           `
 

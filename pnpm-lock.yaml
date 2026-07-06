@@ -3915,8 +3915,8 @@ importers:
         specifier: workspace:*
         version: link:../command-utils
       '@instructure/instructure-design-tokens':
-        specifier: github:instructure/instructure-design-tokens#v1.3.0
-        version: https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/9247c67f8155f0dc7575bbfb8a284da5b99d5089
+        specifier: github:instructure/instructure-design-tokens#v1.4.0
+        version: https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/0db8a8645f1c483daf4fac81394cb7dbc0f3f227
       dprint:
         specifier: ^0.55.1
         version: 0.55.1
@@ -7078,8 +7078,8 @@ packages:
       '@types/node':
         optional: true
 
-  '@instructure/instructure-design-tokens@https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/9247c67f8155f0dc7575bbfb8a284da5b99d5089':
-    resolution: {gitHosted: true, integrity: sha512-K2HIznIUXZzTzndm1bzpJPFWYepQ10BETnNzlk18fB4+EUAiaz4F7+T/oSqt+rZ/Db9k2AC3ibHQ9JjpPZmqmQ==, tarball: https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/9247c67f8155f0dc7575bbfb8a284da5b99d5089}
+  '@instructure/instructure-design-tokens@https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/0db8a8645f1c483daf4fac81394cb7dbc0f3f227':
+    resolution: {gitHosted: true, integrity: sha512-NWck8He8l+xyS9OrwbFLXD0oMZGtkFs+m2jgxNGOD5gllDFLMEOZ4KT59BPxYcY5T2dNm5Y+/SSsrzU1K7eDVw==, tarball: https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/0db8a8645f1c483daf4fac81394cb7dbc0f3f227}
     version: 1.0.0
 
   '@isaacs/cliui@8.0.2':
@@ -15161,7 +15161,7 @@ snapshots:
     optionalDependencies:
       '@types/node': 22.19.15
 
-  '@instructure/instructure-design-tokens@https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/9247c67f8155f0dc7575bbfb8a284da5b99d5089':
+  '@instructure/instructure-design-tokens@https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/0db8a8645f1c483daf4fac81394cb7dbc0f3f227':
     dependencies:
       glob: 13.0.6
 

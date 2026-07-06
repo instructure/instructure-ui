@@ -23,6 +23,7 @@
  */
 
 import { useTheme } from '@emotion/react'
+import { applyColorModifiers } from './styleUtils/applyColorModifiers.js'
 
 /**
  * ---
@@ -40,23 +41,25 @@ import { useTheme } from '@emotion/react'
  *          `components` and `sharedTokens` of the current theme.
  */
 export const useComputedTheme = () => {
-    const rawTheme = (useTheme() as any).newTheme
+  const rawTheme = (useTheme() as any).newTheme
 
-    const primitives = rawTheme?.primitives
-    const semantics = rawTheme?.semantics?.(primitives)
-    const components = Object.keys(rawTheme?.components).reduce(
-        (acc, component) => ({
-            ...acc,
-            [component]: rawTheme.components[component]?.(semantics)
-        }),
-        {}
+  const primitives = rawTheme?.primitives
+  const semantics = applyColorModifiers(rawTheme?.semantics?.(primitives))
+  const components = applyColorModifiers(
+    Object.keys(rawTheme?.components).reduce(
+      (acc, component) => ({
+        ...acc,
+        [component]: rawTheme.components[component]?.(semantics)
+      }),
+      {}
     )
-    const sharedTokens = rawTheme?.sharedTokens?.(semantics)
+  )
+  const sharedTokens = applyColorModifiers(rawTheme?.sharedTokens?.(semantics))
 
-    return {
-        primitives,
-        semantics,
-        components,
-        sharedTokens
-    }
+  return {
+    primitives,
+    semantics,
+    components,
+    sharedTokens
+  }
 }

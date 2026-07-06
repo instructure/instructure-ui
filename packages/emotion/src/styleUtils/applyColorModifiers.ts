@@ -21,7 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { colorToHsla } from '@instructure/ui-color-utils'
+import {
+  colorToHsla,
+  color2hex,
+  colorToHex8
+} from '@instructure/ui-color-utils'
 
 type ModifyColor = {
   value: string
@@ -43,13 +47,11 @@ const modifyLightness = (
     ? Math.max(0, l - l * amount)
     : Math.min(1, l + (1 - l) * amount)
 
-const formatHsla = (h: number, s: number, l: number, a: number): string => {
-  const hh = Math.round(h)
-  const ss = +(s * 100).toFixed(2)
-  const ll = +(l * 100).toFixed(2)
-  return a < 1
-    ? `hsla(${hh}, ${ss}%, ${ll}%, ${a})`
-    : `hsl(${hh}, ${ss}%, ${ll}%)`
+const formatColor = (h: number, s: number, l: number, a: number): string => {
+  const hsla = `hsla(${Math.round(h)}, ${+(s * 100).toFixed(2)}%, ${+(
+    l * 100
+  ).toFixed(2)}%, ${a})`
+  return a < 1 ? colorToHex8(hsla) : color2hex(hsla)
 }
 
 const isModifyColor = (val: unknown): val is ModifyColor =>
@@ -63,12 +65,12 @@ const resolveModifyColor = ({ value, modify }: ModifyColor): string => {
   if (modify.type === 'darken' || modify.type === 'lighten') {
     const { h, s, l, a } = colorToHsla(value)
     const newL = modifyLightness(l, modify.value, modify.type)
-    return formatHsla(h, s, newL, a)
+    return formatColor(h, s, newL, a)
   }
   if (modify.type === 'alpha') {
     const { h, s, l } = colorToHsla(value)
     const newA = Math.min(1, Math.max(0, Number(modify.value)))
-    return formatHsla(h, s, l, newA)
+    return formatColor(h, s, l, newA)
   }
   return value
 }
