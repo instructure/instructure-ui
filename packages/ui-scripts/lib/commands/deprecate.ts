@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import pkgUtils from '@instructure/pkg-utils'
+import { getPackageJSON, getPackages } from '../utils/pkg-utils/index.ts'
 import {
   runCommandAsync,
   error,
@@ -44,7 +44,7 @@ export default {
       describe:
         'The version number to deprecate, e.g. "8.11.0". Defaults to the ' +
         'current version.',
-      default: pkgUtils.getPackageJSON().version
+      default: getPackageJSON()!.version
     })
     yargs.option('fixVersion', {
       type: 'string',
@@ -80,7 +80,7 @@ async function doDeprecate(versionToDeprecate: string, fixVersion: string) {
       new Promise((resolve) => {
         setTimeout(resolve, delay)
       })
-    const allPackages = pkgUtils.getPackages()
+    const allPackages = getPackages()
     for (const pkg of allPackages) {
       if (pkg.private) {
         info(`${pkg.name} is private.`)

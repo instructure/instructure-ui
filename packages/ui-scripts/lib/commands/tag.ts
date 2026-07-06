@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import pkgUtils from '@instructure/pkg-utils'
+import { getPackageJSON, getPackages } from '../utils/pkg-utils/index.ts'
 import {
   runCommandAsync,
   error,
@@ -44,7 +44,7 @@ export default {
     yargs.option('versionToTag', {
       type: 'string',
       describe: 'version to tag',
-      default: pkgUtils.getPackageJSON().version
+      default: getPackageJSON()!.version
     })
     yargs.option('tag', {
       type: 'string',
@@ -78,7 +78,7 @@ async function distTag(command: string, versionToTag: string, tag: string) {
       new Promise((resolve) => {
         setTimeout(resolve, delay)
       })
-    const allPackages = pkgUtils.getPackages()
+    const allPackages = getPackages()
     for (const pkg of allPackages) {
       if (pkg.private) {
         info(`${pkg.name} is private.`)

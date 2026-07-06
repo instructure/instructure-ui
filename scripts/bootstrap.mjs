@@ -23,8 +23,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const { execSync } = require('child_process')
-const path = require('path')
+import { execSync } from 'child_process'
+import path from 'path'
 
 const opts = { stdio: 'inherit' }
 
@@ -46,7 +46,7 @@ const steps = []
 const bootstrapStart = Date.now()
 
 mark('Deleting build artifacts')
-execSync(path.resolve('scripts/clean.js'), opts)
+execSync(path.resolve('scripts/clean.mjs'), opts)
 
 mark('Building themes')
 execSync('pnpm run build:themes', opts)

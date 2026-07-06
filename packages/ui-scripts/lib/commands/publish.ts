@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import pkgUtils from '@instructure/pkg-utils'
+import { getPackageJSON, getPackages } from '../utils/pkg-utils/index.ts'
 import { error, info, runCommandAsync } from '@instructure/command-utils'
 
 import {
@@ -53,10 +53,10 @@ export default {
   handler: async (argv: any) => {
     const { isMaintenance, prRelease } = argv
     try {
-      const pkgJSON = pkgUtils.getPackageJSON()
+      const pkgJSON = getPackageJSON()!
       await publish({
-        packageName: pkgJSON.name,
-        version: pkgJSON.version,
+        packageName: pkgJSON.name!,
+        version: pkgJSON.version!,
         isMaintenance,
         prRelease
       })
@@ -84,7 +84,7 @@ async function publish({
 
   try {
     checkWorkingDirectory()
-    const packages = pkgUtils.getPackages().filter((pkg: any) => !pkg.private)
+    const packages = getPackages().filter((pkg: any) => !pkg.private)
 
     if (isRegularRelease) {
       // If on legacy branch, and it is a release, its tag should say vx_maintenance

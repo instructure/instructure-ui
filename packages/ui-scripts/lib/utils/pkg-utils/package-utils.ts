@@ -22,16 +22,20 @@
  * SOFTWARE.
  */
 
-const fs = require('fs')
-const path = require('path')
-const readPkgUp = require('read-pkg-up')
+import fs from 'fs'
+import path from 'path'
+import { readPackageUpSync } from 'read-package-up'
+import type { PackageJson, NormalizeOptions } from 'read-package-up'
+import childProcess from 'child_process'
 
-class Package {
+export class Package {
+  private _pkg: any
+  private _location: any
   /**
    * @param pkg {Object} the parsed package.json contents
    * @param location {string} the directory containing the package.json
    */
-  constructor(pkg, location) {
+  constructor(pkg: any, location: any) {
     this._pkg = pkg
     this._location = location
   }
@@ -73,43 +77,50 @@ class Package {
   }
 }
 
-exports.Package = Package
-
-/**
- * @param [options] {readPkgUp.NormalizeOptions}
- */
-exports.getPackage = function getPackage(options) {
+export function getPackage(options?: NormalizeOptions) {
   const result = readPackage(options)
-  return new Package(result.packageJson, path.dirname(result.path))
+  return new Package(
+    result?.packageJson,
+    path.dirname(result ? result.path : '')
+  )
 }
 
 /**
  * Reads a package.json
- * @param [options] {readPkgUp.NormalizeOptions}
- * @returns {readPkgUp.NormalizedPackageJson}
  */
-exports.getPackageJSON = function getPackageJSON(options) {
-  return readPackage(options).packageJson
+export function getPackageJSON(
+  options?: NormalizeOptions
+): PackageJson | undefined {
+  return readPackage(options)?.packageJson
+}
+/**
+ * Calls lerna list --json, which will parse all of our packages and
+ * gives back meta information about them.
+ * @returns packages information
+ */
+export function getPackages() {
+  const result = childProcess
+    .execSync('lerna list --json', { stdio: 'pipe' })
+    .toString()
+  const packageData = JSON.parse(result)
+  return packageData.map(({ location }: any) => getPackage({ cwd: location }))
 }
 
-exports.getPackagePath = function getPackagePath(options) {
-  return readPackage(options).path
+export function getPackagePath(options: NormalizeOptions) {
+  return readPackage(options)?.path
 }
 
 /**
  * Returns the closest Node project in the path upward
- * @param options {readPkgUp.NormalizeOptions}
- * @returns {readPkgUp.NormalizedReadResult}
  */
-function readPackage(options) {
+function readPackage(options?: NormalizeOptions) {
   const opts = {
     cwd: process.cwd(),
     normalize: false,
     ...options
   }
-  return readPkgUp.sync({
+  return readPackageUpSync({
     cwd: fs.realpathSync(opts.cwd),
     normalize: opts.normalize
   })
 }
-exports.readPackage = readPackage

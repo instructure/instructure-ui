@@ -23,17 +23,16 @@
  * SOFTWARE.
  */
 
-const fs = require('fs').promises
-const path = require('path')
-const { execSync } = require('child_process')
+import { promises } from 'fs'
+import { resolve, join } from 'path'
+import { execSync } from 'child_process'
 
 const NODE_PACKAGES = [
   'ui-babel-preset',
   'ui-codemods',
   'ui-scripts',
   'command-utils',
-  'babel-plugin-transform-imports',
-  'pkg-utils'
+  'babel-plugin-transform-imports'
 ]
 
 const DIRS_TO_DELETE = [
@@ -52,7 +51,7 @@ async function deleteDirs(dirs = []) {
   // Delete all in parallel with error handling
   await Promise.all(
     dirs.map((dir) =>
-      fs.rm(dir, { force: true, recursive: true }).catch(() => {
+      promises.rm(dir, { force: true, recursive: true }).catch(() => {
         // Silently ignore errors (file doesn't exist, etc)
       })
     )
@@ -61,19 +60,19 @@ async function deleteDirs(dirs = []) {
 
 // deletes build artifacts from all packages
 async function clean() {
-  const packagesPath = path.resolve('./packages')
-  const packageDirs = await fs.readdir(packagesPath, { withFileTypes: true })
+  const packagesPath = resolve('./packages')
+  const packageDirs = await promises.readdir(packagesPath, { withFileTypes: true })
 
   // Process all packages in parallel
   const deletions = packageDirs
     .filter((dir) => dir.isDirectory())
     .map(async (packageDir) => {
       const rmDirs = DIRS_TO_DELETE.map((dir) =>
-        path.join(packagesPath, packageDir.name, dir)
+        join(packagesPath, packageDir.name, dir)
       )
 
       if (!NODE_PACKAGES.includes(packageDir.name)) {
-        rmDirs.push(path.join(packagesPath, packageDir.name, 'lib'))
+        rmDirs.push(join(packagesPath, packageDir.name, 'lib'))
       }
 
       return deleteDirs(rmDirs)

@@ -29,23 +29,27 @@
  *
  * If there is any it will print out the differences to the console and exits the current process with code 1.
  */
-const path = require('path')
-const chalk = require('chalk')
-const fs = require('fs')
+import path from 'path'
+import fs from 'fs'
+import chalk from 'chalk'
+
+const readJson = (filePath) =>
+  JSON.parse(fs.readFileSync(filePath, 'utf8'))
+
 const referencesFile = path.resolve('./tsconfig.references.json')
-const tsReferences = require(referencesFile).references
+const tsReferences = readJson(referencesFile).references
 
 const packageDepsAndRefs = tsReferences.map((reference) => {
-  const [, dir, package] = reference.path.split('/')
-  const packageJson = require(path.resolve(`./${dir}/${package}/package.json`))
-  const tsConfigJson = require(path.resolve(`${reference.path}`))
+  const [, dir, pkg] = reference.path.split('/')
+  const packageJson = readJson(path.resolve(`./${dir}/${pkg}/package.json`))
+  const tsConfigJson = readJson(path.resolve(`${reference.path}`))
   const { devDependencies, dependencies } = packageJson
 
   const tsConfigReferencies = new Set(
     (tsConfigJson.references || []).map((obj) => {
-      const [, package] = obj.path.split('/')
+      const [, pkg] = obj.path.split('/')
 
-      return package
+      return pkg
     })
   )
 
@@ -54,9 +58,9 @@ const packageDepsAndRefs = tsReferences.map((reference) => {
       .filter(([depName]) => depName.includes('@instructure'))
 
       .map(([depName]) => {
-        const [, package] = depName.split('/')
+        const [, pkg] = depName.split('/')
 
-        return package
+        return pkg
       })
       .filter((depName) => {
         // check if the dependent package is a ts package at all
@@ -67,7 +71,7 @@ const packageDepsAndRefs = tsReferences.map((reference) => {
   )
 
   return {
-    package,
+    package: pkg,
     packageDependencies: packageJsonDependencies,
     tsConfigReferencies
   }
@@ -80,9 +84,10 @@ const depsAndRefsWithDiff = packageDepsAndRefs.filter(
 
 if (depsAndRefsWithDiff.length > 0) {
   for (let packageInfo of depsAndRefsWithDiff) {
-    const { packageDependencies, tsConfigReferencies, package } = packageInfo
+    const { packageDependencies, tsConfigReferencies, package: pkg } =
+      packageInfo
 
-    console.warn(`\n Dependency mismatch in package: ${chalk.red(package)}!`)
+    console.warn(`\n Dependency mismatch in package: ${chalk.red(pkg)}!`)
     console.warn(
       `Please make sure the package.json 'dependencies' and 'devDependencies' entries and the tsconfig.build.json 'references' are synchronized!`
     )

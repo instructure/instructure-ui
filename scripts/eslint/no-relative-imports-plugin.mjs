@@ -23,8 +23,9 @@
  */
 
 import path from 'path'
-import pkgUtils from '@instructure/pkg-utils'
-import { default as resolve } from 'eslint-module-utils/resolve.js'
+import { readPackageUpSync } from 'read-package-up'
+import { default as resolve } from 'eslint-module-utils/resolve'
+import fs from 'fs'
 
 /**
  * An ESLint plugin that checks against local relative imports from another package
@@ -64,7 +65,10 @@ const plugin = {
 }
 
 function findNamedPackage(filePath) {
-  const found = pkgUtils.readPackage({ cwd: filePath })
+  const found = readPackageUpSync({
+    cwd: fs.realpathSync(filePath),
+    normalize: false
+  })
   if (found.packageJson && !found.packageJson.name) {
     return findNamedPackage(path.join(found.path, '../..'))
   }
@@ -142,6 +146,16 @@ Object.assign(plugin.configs, {
   recommended: [{
     plugins: {
       "@instructure": plugin
+    },
+    settings: {
+      // The rule resolves import paths via eslint-module-utils. Without
+      // TypeScript extensions the default node resolver can't resolve .ts/.tsx
+      // files, resolve.default() returns undefined and the rule silently bails.
+      "import/resolver": {
+        node: {
+          extensions: [".js", ".jsx", ".ts", ".tsx", ".json"]
+        }
+      }
     },
     rules: {
       "@instructure/no-relative-imports": "error"

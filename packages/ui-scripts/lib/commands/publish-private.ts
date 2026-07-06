@@ -27,7 +27,7 @@ import path from 'node:path'
 import fs from 'node:fs'
 import readline from 'node:readline/promises'
 
-import pkgUtils from '@instructure/pkg-utils'
+import { getPackages } from '../utils/pkg-utils/index.ts'
 import { error, info, runCommandAsync } from '@instructure/command-utils'
 import type { Argv } from 'yargs'
 
@@ -80,7 +80,7 @@ async function publishPrivate({ skipConfirm }: { skipConfirm: boolean }) {
     process.exit(1)
   }
 
-  const packages = pkgUtils.getPackages().filter((pkg: any) => !pkg.private)
+  const packages = getPackages().filter((pkg: any) => !pkg.private)
   if (packages.length === 0) {
     error('No publishable (non-private) packages found.')
     process.exit(1)

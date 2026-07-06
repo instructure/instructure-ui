@@ -19,9 +19,6 @@
       "path": "./packages/emotion/tsconfig.build.json"
     },
     {
-      "path": "./packages/pkg-utils/tsconfig.build.json"
-    },
-    {
       "path": "./packages/shared-types/tsconfig.build.json"
     },
     {

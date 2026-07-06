@@ -23,7 +23,7 @@
  */
 
 import { execSync } from 'node:child_process'
-import pkgUtils from '@instructure/pkg-utils'
+import { getPackageJSON } from '../utils/pkg-utils/index.ts'
 import { error, info } from '@instructure/command-utils'
 import type { Argv } from 'yargs'
 import { addNewExportsEntiresToPackageJSONs } from '../utils/addNewExportsEntiresToPackageJSONs.ts'
@@ -54,10 +54,10 @@ export default {
     })
   },
   handler: async (argv: any) => {
-    const pkgJSON = pkgUtils.getPackageJSON()
+    const pkgJSON = getPackageJSON()
     // optional release type/version argument: major, minor, patch, prerelease [version]
     // e.g. ui-scripts bump --releaseType=major
-    await bump(pkgJSON.name, argv.releaseType)
+    await bump(pkgJSON!.name!, argv.releaseType)
   }
 }
 

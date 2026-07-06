@@ -65,8 +65,7 @@ const NODE_PACKAGES = [
   'ui-webpack-config',
   'command-utils',
   'instui-cli',
-  'babel-plugin-transform-imports',
-  'pkg-utils'
+  'babel-plugin-transform-imports'
 ].join("|")
 
 const finalConfig = tseslint.config(

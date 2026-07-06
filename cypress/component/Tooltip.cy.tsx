@@ -158,7 +158,7 @@ describe('<Tooltip/>', () => {
     })
   })
 
-  it('should close when Esc key is pressed', async () => {
+  it('should close when Esc key is pressed', () => {
     cy.mount(
       <Tooltip renderTip={<h2>Hello</h2>}>
         <a data-testid="trigger" href="example.html">
@@ -173,15 +173,17 @@ describe('<Tooltip/>', () => {
 
       cy.get(tooltip).should('not.be.visible')
 
-      cy.contains('Hover me!').realHover()
+      cy.get('[data-testid="trigger"]').focus()
 
-      cy.get(tooltip).should('be.visible').realPress('Escape')
+      cy.get(tooltip).should('be.visible')
+
+      cy.get('[data-testid="trigger"]').realPress('Escape')
 
       cy.get(tooltip).should('not.be.visible')
     })
   })
 
-  it('should close when Esc key is pressed and Tooltip is hovered over', async () => {
+  it('should close when Esc key is pressed and Tooltip is hovered over', () => {
     cy.mount(
       <Tooltip renderTip={<h2>Hello</h2>}>
         <a data-testid="trigger" href="example.html">
@@ -256,7 +258,6 @@ describe('<Tooltip/>', () => {
         .realPress('Escape')
         .then(() => {
           cy.get(tooltip).should('not.be.visible')
-          cy.wait(300)
           cy.get('[role="dialog"]').should('be.visible')
         })
 

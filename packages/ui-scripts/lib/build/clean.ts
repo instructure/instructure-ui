@@ -24,7 +24,7 @@
 
 import fs from 'fs'
 
-// TODO merge this with/scripts/clean.js
+// TODO merge this with/scripts/clean.mjs
 
 export default {
   command: 'clean',

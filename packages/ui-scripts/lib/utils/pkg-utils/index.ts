@@ -22,9 +22,20 @@
  * SOFTWARE.
  */
 
-//this file prepares for the merge of the pkg-utils package into this folder
 import getDetailedPackageList from './get-detailed-package-list.ts'
+import {
+  Package,
+  getPackage,
+  getPackageJSON,
+  getPackagePath,
+  getPackages
+} from './package-utils.ts'
 
-export default {
-  getDetailedPackageList
+export {
+  getDetailedPackageList,
+  Package,
+  getPackage,
+  getPackages,
+  getPackageJSON,
+  getPackagePath
 }

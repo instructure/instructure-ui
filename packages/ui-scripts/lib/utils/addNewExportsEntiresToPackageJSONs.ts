@@ -24,7 +24,7 @@
 
 import { execSync } from 'node:child_process'
 import { writeFile } from 'node:fs/promises'
-import pkgUtils from './pkg-utils/index.ts'
+import { getDetailedPackageList } from './pkg-utils/index.ts'
 
 /**
  * Adds a new versioned export entry (e.g. `./v11_9`) to every ui-* package's
@@ -39,7 +39,7 @@ export const addNewExportsEntiresToPackageJSONs = async (version: string) => {
     return
   }
   const formattedVersion = `v${version.split('.').slice(0, 2).join('_')}`
-  const packages = await pkgUtils.getDetailedPackageList()
+  const packages = await getDetailedPackageList()
 
   const res = packages.map(({ data, path }) => {
     //if no exports field, do nothing
