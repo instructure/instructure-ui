@@ -34,7 +34,7 @@ import '@fontsource/lato/300.css'
 import '@fontsource/lato/400.css'
 import '@fontsource/lato/700.css'
 import './globals.css'
-import { InstUISettingsProvider } from '@instructure/ui/latest'
+import { InstUISettingsProvider, dark } from '@instructure/ui/latest'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -50,7 +50,7 @@ export default function RootLayout({
       <head>
         <title>Component visual and regression test suite</title>
       </head>
-      <InstUISettingsProvider instanceCounterMap={new Map()}>
+      <InstUISettingsProvider theme={dark} instanceCounterMap={new Map()}>
         <body className={inter.className}>{children}</body>
       </InstUISettingsProvider>
     </html>
