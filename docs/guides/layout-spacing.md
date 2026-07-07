@@ -7,18 +7,19 @@ relevantForAI: true
 
 ## Layout Spacing
 
-```js
----
-type: embed
----
-<Alert variant="warning" margin="0 0 medium">
-  The spacing tokens documented on this page (such as <code>general.spaceMd</code>) require <strong>v11.7+</strong> components and are applied through the <code>margin</code> and <code>padding</code> props. If you are viewing the v11.6 version, <Link href={window.location.pathname.match(/v\d+_\d+/) ? window.location.pathname.replace(/v\d+_\d+/, 'v11_7') : `/v11_7${window.location.pathname}`}>switch to v11.7</Link> to see the examples working correctly.
-</Alert>
-```
+The spacing tokens documented on this page (such as `general.spaceMd`) require **v11.7+** components and are applied through the `margin` and `padding` props.
 
 Our design system provides a set of spacing tokens for consistent layouts and components. The current tokens are organized into a general t-shirt scale plus a handful of semantic tokens. Some tokens share a value but carry different meaning — prefer the semantically correct token for the context (e.g. use `gap.buttons` for spacing between buttons).
 
 The `margin` and `padding` props on InstUI components accept these tokens via **dot-path notation** (for example `margin="general.spaceMd"` or `padding="padding.card.lg"`), and support the familiar CSS-like 1–4 value shorthand.
+
+### Where these tokens come from
+
+A prop like `margin="general.spaceMd"` is resolved at runtime against the active theme's `sharedTokens.spacing` object. `sharedTokens` doesn't hold spacing values of its own — it reshapes the theme's **semantic** tokens into the flat, prop-facing structure shown below. The full pipeline is:
+
+`primitives` (raw `rem` values) → `semantics.spacing` (named tokens per theme) → `sharedTokens.spacing` (the dot-paths this page documents) → the `margin` / `padding` prop.
+
+Because the values originate in each theme's semantic tokens, they are **theme-dependent** in principle — a theme can resolve `general.spaceMd` to a different value. In practice all themes InstUI currently ships resolve these tokens to the same values (those listed in the tables below).
 
 ## Tokens
 
