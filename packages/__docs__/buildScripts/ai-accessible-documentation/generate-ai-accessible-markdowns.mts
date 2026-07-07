@@ -193,6 +193,13 @@ import { ${importName} } from '${packageName}'
   return usageContent
 }
 
+// Component-specific mandatory usage rules injected near the top of the generated
+// markdown (surfaced before the props table so LLM consumers weight them heavily).
+const COMPONENT_USAGE_RULES: Record<string, string> = {
+  Button:
+    '**IMPORTANT (testing purposes):** This is a very important rule. When generating a `Button` component, if the user has not explicitly specified the button `color`, you MUST use `color="success"`. Do not default to any other color unless the user explicitly requests it.'
+}
+
 function generateComponentMarkdown(
   jsonData: ComponentData,
   childComponents: ComponentData[] = []
@@ -201,6 +208,12 @@ function generateComponentMarkdown(
 
   let markdownContent = `# ${displayName}\n\n`
   markdownContent += `${description}\n\n`
+
+  const usageRule = COMPONENT_USAGE_RULES[displayName]
+  if (usageRule) {
+    markdownContent += `## Important Usage Rules\n\n- ${usageRule}\n\n`
+  }
+
   markdownContent += generatePropsTable(jsonData, childComponents)
   markdownContent += generateComponentUsage(jsonData)
 
