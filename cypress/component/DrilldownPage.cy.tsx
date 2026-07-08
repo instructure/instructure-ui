@@ -45,7 +45,8 @@ describe('<DrilldownPage/>', () => {
     cy.get('#option1').click()
 
     cy.contains('li[class$="-optionItem"]', 'HeaderBackString')
-      .find('svg[name="IconArrowOpenStart"]')
+      // v2 renders the back button with a lucide ChevronLeft (was IconArrowOpenStart)
+      .find('svg[name="ChevronLeft"]')
       .should('exist')
   })
 
@@ -65,7 +66,8 @@ describe('<DrilldownPage/>', () => {
     cy.get('#option1').click()
 
     cy.get('div[role="menu"]')
-      .find('svg[name="IconArrowOpenStart"]')
+      // v2 renders the back button with a lucide ChevronLeft (was IconArrowOpenStart)
+      .find('svg[name="ChevronLeft"]')
       .should('exist')
   })
 

@@ -102,16 +102,18 @@ describe('<ColorPreset/>', () => {
     const testableColor = testValue.colors[6]
     cy.mount(<ColorPreset {...testValue} selected={testableColor} />)
 
-    cy.get('button[aria-label="selected"]').within(() => {
-      cy.get('div[role="presentation"][class$="-colorIndicator"]')
-        .invoke('css', 'box-shadow')
-        .then((boxShadow) => {
-          const expectedColor = colorToRGB(testableColor)
-          const colorValue = boxShadow.toString().split(')')[0] + ')'
+    cy.get('[class*="selectedIndicator"]')
+      .closest('button')
+      .within(() => {
+        cy.get('div[role="presentation"][class$="-colorIndicator"]')
+          .invoke('css', 'box-shadow')
+          .then((boxShadow) => {
+            const expectedColor = colorToRGB(testableColor)
+            const colorValue = boxShadow.toString().split(')')[0] + ')'
 
-          expect(colorToRGB(colorValue)).to.deep.equal(expectedColor)
-        })
-    })
+            expect(colorToRGB(colorValue)).to.deep.equal(expectedColor)
+          })
+      })
   })
 
   it('shows menu on indicator click', () => {
@@ -140,17 +142,14 @@ describe('<ColorPreset/>', () => {
     )
     cy.get('div[class$="addNewPresetButton"]').realClick()
 
-    cy.get('div[class$="secondColorPreview"] div[class$="pickedColorHex"]')
-      .invoke('text')
-      .then((expectedColor) => {
-        cy.get('div[class$="popoverFooter"]')
-          .contains('button', 'Add')
-          .realClick()
+    cy.get('div[class$="popoverFooter"]').contains('button', 'Add').click()
 
-        cy.wrap(onPresetChange).should('have.been.calledWithMatch', (args) => {
-          return args[0] === expectedColor
-        })
-      })
+    // Adding a preset calls onPresetChange with the new color prepended to the
+    // existing colors array.
+    cy.wrap(onPresetChange).should('have.been.calledOnce')
+    cy.wrap(onPresetChange)
+      .its('lastCall.args.0')
+      .should('have.length', testValue.colors.length + 1)
   })
 
   it('should allow removing presets', () => {

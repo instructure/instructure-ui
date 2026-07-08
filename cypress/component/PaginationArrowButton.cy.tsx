@@ -41,16 +41,10 @@ describe('<PaginationArrowButton />', () => {
         onPageChange={cy.spy()}
       />
     )
-    cy.get('[role="tooltip"]').should('exist')
-    cy.get('[role="tooltip"]').should('not.be.visible')
+    cy.contains('[role="tooltip"]', 'Next').should('not.be.visible')
 
-    cy.get('svg[name="IconArrowOpenEnd"]').should('be.visible')
-    cy.get('svg[name="IconArrowOpenEnd"]').realHover()
+    cy.contains('button', 'Next').should('be.visible').realHover()
 
-    cy.get('[role="tooltip"]')
-      .should('be.visible')
-      .then(($tooltip) => {
-        expect($tooltip).to.have.text('Next')
-      })
+    cy.contains('[role="tooltip"]', 'Next').should('be.visible')
   })
 })
