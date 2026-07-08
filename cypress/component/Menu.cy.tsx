@@ -27,6 +27,12 @@ import '../support/component'
 import { Menu, MenuItem } from '@instructure/ui/latest'
 
 describe('<Menu/>', () => {
+  // Park the leftover real cursor off-component so a prior test's hover on the
+  // Flyout trigger doesn't leak into the keyboard-driven tests.
+  beforeEach(() => {
+    cy.get('body').realMouseMove(0, 0, { position: 'bottomRight' })
+  })
+
   it('should move focus properly', () => {
     cy.mount(
       <Menu label="Settings">
