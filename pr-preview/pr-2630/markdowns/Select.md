@@ -255,9 +255,6 @@ type: example
       setHighlightedOptionId(newOptions.length > 0 ? newOptions[0].id : null)
       setIsShowingOptions(true)
       setSelectedOptionId(value === '' ? null : selectedOptionId)
-      // Announce the number of matches as the list filters. The result count
-      // is not conveyed by aria-* attributes, so it is pushed to a screen
-      // reader live region.
       setAnnouncement(`${newOptions.length} options available.`)
     }
 
