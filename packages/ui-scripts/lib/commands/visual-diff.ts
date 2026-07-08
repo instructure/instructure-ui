@@ -53,6 +53,7 @@ type Args = {
   prUrl?: string
   meta?: string
   sourceBaseUrl?: string
+  facets?: string
 }
 
 type Meta = Record<string, string>
@@ -95,7 +96,14 @@ function loadPng(path: string): PNG {
   return PNG.sync.read(readFileSync(path))
 }
 
-function diffPair(baseline: PNG, actual: PNG, threshold: number) {
+// Highlight color for changed-region boxes (matches the report's accent).
+const HIGHLIGHT = { r: 255, g: 0, b: 128 }
+
+type Box = { x: number; y: number; w: number; h: number }
+
+// Compare two images and return a per-pixel changed mask (1 = differs), padding
+// the smaller image so both share the max dimensions.
+function diffMask(baseline: PNG, actual: PNG, threshold: number) {
   const { width: bw, height: bh } = baseline
   const { width: aw, height: ah } = actual
   const width = Math.max(bw, aw)
@@ -110,12 +118,148 @@ function diffPair(baseline: PNG, actual: PNG, threshold: number) {
 
   const b = pad(baseline, width, height)
   const a = pad(actual, width, height)
-  const diff = new PNG({ width, height })
-  const numDiff = pixelmatch(b.data, a.data, diff.data, width, height, {
+  const out = new PNG({ width, height })
+  const numDiff = pixelmatch(b.data, a.data, out.data, width, height, {
     threshold,
-    includeAA: false
+    includeAA: false,
+    diffMask: true
   })
-  return { diff, numDiff, sizeMismatch: bw !== aw || bh !== ah }
+  // With diffMask:true, changed pixels are opaque and the rest transparent.
+  const changed = new Uint8Array(width * height)
+  for (let i = 0; i < width * height; i++) {
+    changed[i] = out.data[i * 4 + 3] > 0 ? 1 : 0
+  }
+  return {
+    changed,
+    width,
+    height,
+    numDiff,
+    sizeMismatch: bw !== aw || bh !== ah,
+    actual: a
+  }
+}
+
+// Group changed pixels into bounding boxes so the report can outline *where*
+// things changed instead of scattering red specks. Works on a coarse cell grid
+// (adjacent hit cells, 8-connected, become one box), which naturally merges
+// nearby changes and collapses a fully-changed image into a single box.
+/** @internal — exported only for tests; not part of the package's public API. */
+export function boxesFromMask(
+  changed: ArrayLike<number>,
+  width: number,
+  height: number,
+  cell = 8,
+  minPixels = 3
+): Box[] {
+  const cols = Math.ceil(width / cell)
+  const rows = Math.ceil(height / cell)
+  const hit = new Uint8Array(cols * rows)
+  const count = new Int32Array(cols * rows)
+  for (let y = 0; y < height; y++) {
+    for (let x = 0; x < width; x++) {
+      if (changed[y * width + x]) {
+        const ci = Math.floor(y / cell) * cols + Math.floor(x / cell)
+        hit[ci] = 1
+        count[ci]++
+      }
+    }
+  }
+
+  const seen = new Uint8Array(cols * rows)
+  const stack: number[] = []
+  const boxes: Box[] = []
+  for (let start = 0; start < cols * rows; start++) {
+    if (!hit[start] || seen[start]) continue
+    stack.length = 0
+    stack.push(start)
+    seen[start] = 1
+    let minC = cols
+    let maxC = 0
+    let minR = rows
+    let maxR = 0
+    let pixels = 0
+    while (stack.length) {
+      const ci = stack.pop() as number
+      const c = ci % cols
+      const r = (ci - c) / cols
+      if (c < minC) minC = c
+      if (c > maxC) maxC = c
+      if (r < minR) minR = r
+      if (r > maxR) maxR = r
+      pixels += count[ci]
+      for (let dr = -1; dr <= 1; dr++) {
+        for (let dc = -1; dc <= 1; dc++) {
+          if (!dr && !dc) continue
+          const nc = c + dc
+          const nr = r + dr
+          if (nc < 0 || nr < 0 || nc >= cols || nr >= rows) continue
+          const ni = nr * cols + nc
+          if (hit[ni] && !seen[ni]) {
+            seen[ni] = 1
+            stack.push(ni)
+          }
+        }
+      }
+    }
+    if (pixels < minPixels) continue
+    const x = minC * cell
+    const y = minR * cell
+    boxes.push({
+      x,
+      y,
+      w: Math.min((maxC + 1) * cell, width) - x,
+      h: Math.min((maxR + 1) * cell, height) - y
+    })
+  }
+  return boxes
+}
+
+// Draw the actual screenshot with a bright outline (and faint fill) around each
+// changed region, so a reviewer can see what changed in context.
+function highlightImage(actual: PNG, boxes: Box[]): PNG {
+  const { width, height } = actual
+  const out = new PNG({ width, height })
+  actual.data.copy(out.data)
+  const { r: HR, g: HG, b: HB } = HIGHLIGHT
+  const border = 2
+  const fillAlpha = 0.1
+
+  const paint = (x: number, y: number) => {
+    if (x < 0 || y < 0 || x >= width || y >= height) return
+    const i = (y * width + x) * 4
+    out.data[i] = HR
+    out.data[i + 1] = HG
+    out.data[i + 2] = HB
+    out.data[i + 3] = 255
+  }
+  const tint = (x: number, y: number) => {
+    if (x < 0 || y < 0 || x >= width || y >= height) return
+    const i = (y * width + x) * 4
+    out.data[i] = Math.round(out.data[i] * (1 - fillAlpha) + HR * fillAlpha)
+    out.data[i + 1] = Math.round(
+      out.data[i + 1] * (1 - fillAlpha) + HG * fillAlpha
+    )
+    out.data[i + 2] = Math.round(
+      out.data[i + 2] * (1 - fillAlpha) + HB * fillAlpha
+    )
+  }
+
+  for (const { x, y, w, h } of boxes) {
+    for (let yy = y; yy < y + h; yy++) {
+      for (let xx = x; xx < x + w; xx++) tint(xx, yy)
+    }
+    for (let t = 0; t < border; t++) {
+      for (let xx = x; xx < x + w; xx++) {
+        paint(xx, y + t)
+        paint(xx, y + h - 1 - t)
+      }
+      for (let yy = y; yy < y + h; yy++) {
+        paint(x + t, yy)
+        paint(x + w - 1 - t, yy)
+      }
+    }
+  }
+  return out
 }
 
 function copyInto(src: string, destDir: string, name: string) {
@@ -152,11 +296,11 @@ function row(r: Result, meta: Meta | null, sourceBaseUrl?: string): string {
   const hasBoth = r.status === 'changed' || r.status === 'unchanged'
   return `
     <section class="row" data-status="${r.status}" data-name="${
-    r.name
-  }" data-has-both="${hasBoth}">
+      r.name
+    }" data-has-both="${hasBoth}">
       <header><h2>${r.name}</h2>${badgeFor(
-    r.status
-  )}${pixelMeta}${source}</header>
+        r.status
+      )}${pixelMeta}${source}</header>
       <div class="grid"><figure><figcaption>Baseline</figcaption>${b}</figure><figure><figcaption>Actual</figcaption>${a}</figure><figure><figcaption>Diff</figcaption>${d}</figure></div>
     </section>`
 }
@@ -167,14 +311,15 @@ function renderHtml(
   prNumber?: string,
   prUrl?: string,
   meta?: Meta | null,
-  sourceBaseUrl?: string
+  sourceBaseUrl?: string,
+  facets: string[] = []
 ): string {
   const prBadge =
     prNumber && prUrl
       ? `<a href="${prUrl}" style="font-weight:600;color:#0969da;text-decoration:none;">PR #${prNumber}</a>`
       : prNumber
-      ? `<span style="font-weight:600;">PR #${prNumber}</span>`
-      : ''
+        ? `<span style="font-weight:600;">PR #${prNumber}</span>`
+        : ''
   return `<!doctype html>
 <html><head><meta charset="utf-8"><title>Visual regression report</title>
 <style>
@@ -234,14 +379,23 @@ function renderHtml(
       <span style="color:#0969da;">New: ${summary.added}</span>
       <span style="color:#9a6700;">Removed: ${summary.removed}</span>
     </div>
-    <div class="filter">
+    <div class="filter" id="status-filter">
       <button data-filter="all" class="active">All</button>
       <button data-filter="changed">Changed</button>
       <button data-filter="added">New</button>
       <button data-filter="removed">Removed</button>
       <button data-filter="unchanged">Unchanged</button>
       <input id="search" type="search" placeholder="Filter by name…" autocomplete="off" />
-    </div>
+    </div>${
+      facets.length
+        ? `
+    <div class="filter" id="facet-filter">
+      <span style="font-size:12px;color:#666;">Theme:</span>
+      <button data-facet="all" class="active">All</button>
+      ${facets.map((f) => `<button data-facet="${f}">${f}</button>`).join('')}
+    </div>`
+        : ''
+    }
   </header>
   <main>${results
     .map((r) => row(r, meta ?? null, sourceBaseUrl))
@@ -266,22 +420,31 @@ function renderHtml(
 
   <script>
     (function () {
-      const listState = { filter: 'all', query: '' }
+      const listState = { filter: 'all', query: '', facet: 'all' }
 
       function applyFilters() {
         const q = listState.query.toLowerCase()
         document.querySelectorAll('.row').forEach(r => {
           const matchesFilter = listState.filter === 'all' || r.dataset.status === listState.filter
           const matchesQuery = !q || r.dataset.name.toLowerCase().includes(q)
-          if (matchesFilter && matchesQuery) r.removeAttribute('data-hidden')
+          const matchesFacet = listState.facet === 'all' || r.dataset.name.includes('-' + listState.facet + '.')
+          if (matchesFilter && matchesQuery && matchesFacet) r.removeAttribute('data-hidden')
           else r.setAttribute('data-hidden', '')
         })
       }
 
-      document.querySelectorAll('.filter button').forEach(btn => {
+      document.querySelectorAll('#status-filter button').forEach(btn => {
         btn.addEventListener('click', () => {
           listState.filter = btn.dataset.filter
-          document.querySelectorAll('.filter button').forEach(b => b.classList.toggle('active', b === btn))
+          document.querySelectorAll('#status-filter button').forEach(b => b.classList.toggle('active', b === btn))
+          applyFilters()
+        })
+      })
+
+      document.querySelectorAll('#facet-filter button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          listState.facet = btn.dataset.facet
+          document.querySelectorAll('#facet-filter button').forEach(b => b.classList.toggle('active', b === btn))
           applyFilters()
         })
       })
@@ -462,16 +625,25 @@ function run(args: Args): number {
 
     const baseline = loadPng(b.path)
     const actual = loadPng(a.path)
-    const { diff, numDiff, sizeMismatch } = diffPair(
-      baseline,
-      actual,
-      threshold
-    )
-    mkdirSync(join(outputDir, 'diff'), { recursive: true })
-    writeFileSync(join(outputDir, 'diff', name), PNG.sync.write(diff))
+    const {
+      changed,
+      width,
+      height,
+      numDiff,
+      sizeMismatch,
+      actual: padded
+    } = diffMask(baseline, actual, threshold)
 
     const status: Status =
       numDiff === 0 && !sizeMismatch ? 'unchanged' : 'changed'
+
+    if (status === 'changed') {
+      const boxes = boxesFromMask(changed, width, height)
+      const highlight = highlightImage(padded, boxes)
+      mkdirSync(join(outputDir, 'diff'), { recursive: true })
+      writeFileSync(join(outputDir, 'diff', name), PNG.sync.write(highlight))
+    }
+
     results.push({ name, status, numDiff, sizeMismatch })
   }
 
@@ -496,6 +668,11 @@ function run(args: Args): number {
     }
   }
 
+  const facets = (args.facets ?? '')
+    .split(',')
+    .map((s) => s.trim())
+    .filter(Boolean)
+
   writeFileSync(
     join(outputDir, 'index.html'),
     renderHtml(
@@ -504,7 +681,8 @@ function run(args: Args): number {
       args.prNumber,
       args.prUrl,
       meta,
-      args.sourceBaseUrl
+      args.sourceBaseUrl,
+      facets
     )
   )
 
@@ -564,6 +742,11 @@ export default {
       type: 'string',
       describe:
         'Base URL for source-file links in the report (e.g. GitHub blob URL of the app root)'
+    },
+    facets: {
+      type: 'string',
+      describe:
+        'Comma-separated facet suffixes (e.g. "canvas,light,dark") rendered as one-click filter chips that match screenshots named "<name>-<facet>"'
     }
   },
   handler: (argv: Args) => {

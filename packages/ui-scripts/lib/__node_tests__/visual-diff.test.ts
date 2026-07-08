@@ -27,8 +27,24 @@ import {
   badgeFor,
   thumb,
   indexByName,
-  sourceLinkFor
+  sourceLinkFor,
+  boxesFromMask
 } from '../commands/visual-diff.ts'
+
+// Build a w*h changed-mask with the given filled rectangles set to 1.
+function mask(
+  w: number,
+  h: number,
+  rects: Array<{ x: number; y: number; w: number; h: number }>
+) {
+  const m = new Uint8Array(w * h)
+  for (const r of rects) {
+    for (let y = r.y; y < r.y + r.h; y++) {
+      for (let x = r.x; x < r.x + r.w; x++) m[y * w + x] = 1
+    }
+  }
+  return m
+}
 
 describe('badgeFor', () => {
   it('returns the OK pill for unchanged status', () => {
@@ -153,5 +169,57 @@ describe('sourceLinkFor', () => {
     )
     expect(html).toContain('target="_blank"')
     expect(html).toContain('rel="noopener"')
+  })
+})
+
+describe('boxesFromMask', () => {
+  it('returns no boxes for an unchanged mask', () => {
+    expect(boxesFromMask(mask(32, 32, []), 32, 32)).toEqual([])
+  })
+
+  it('wraps a single changed cluster in one box that contains it', () => {
+    const boxes = boxesFromMask(
+      mask(32, 32, [{ x: 4, y: 4, w: 10, h: 10 }]),
+      32,
+      32
+    )
+    expect(boxes).toHaveLength(1)
+    const [b] = boxes
+    // the box must fully contain the changed region
+    expect(b.x).toBeLessThanOrEqual(4)
+    expect(b.y).toBeLessThanOrEqual(4)
+    expect(b.x + b.w).toBeGreaterThanOrEqual(14)
+    expect(b.y + b.h).toBeGreaterThanOrEqual(14)
+  })
+
+  it('separates two distant clusters into two boxes', () => {
+    const boxes = boxesFromMask(
+      mask(64, 64, [
+        { x: 0, y: 0, w: 6, h: 6 },
+        { x: 50, y: 50, w: 6, h: 6 }
+      ]),
+      64,
+      64
+    )
+    expect(boxes).toHaveLength(2)
+  })
+
+  it('drops specks smaller than minPixels', () => {
+    // a single changed pixel is below the default minPixels threshold
+    expect(
+      boxesFromMask(mask(32, 32, [{ x: 5, y: 5, w: 1, h: 1 }]), 32, 32)
+    ).toEqual([])
+  })
+
+  it('never lets a box exceed the image bounds', () => {
+    const boxes = boxesFromMask(
+      mask(20, 20, [{ x: 0, y: 0, w: 20, h: 20 }]),
+      20,
+      20
+    )
+    expect(boxes).toHaveLength(1)
+    const [b] = boxes
+    expect(b.x + b.w).toBeLessThanOrEqual(20)
+    expect(b.y + b.h).toBeLessThanOrEqual(20)
   })
 })
