@@ -26,7 +26,6 @@ type: example
     const [isShowingOptions, setIsShowingOptions] = useState(false)
     const [highlightedOptionId, setHighlightedOptionId] = useState(null)
     const [selectedOptionId, setSelectedOptionId] = useState(options[0].id)
-    const [announcement, setAnnouncement] = useState(null)
     const inputRef = useRef()
 
     const focusInput = () => {
@@ -61,7 +60,6 @@ type: example
       setIsShowingOptions(false)
       setHighlightedOptionId(null)
       setSelectedOptionId(selectedOptionId ? option : '')
-      setAnnouncement('List collapsed.')
     }
 
     const handleBlur = (event) => {
@@ -70,14 +68,8 @@ type: example
 
     const handleHighlightOption = (event, { id }) => {
       event.persist()
-      const optionsAvailable = `${options.length} options available.`
-      const nowOpen = !isShowingOptions
-        ? `List expanded. ${optionsAvailable}`
-        : ''
-      const option = getOptionById(id)?.label
       setHighlightedOptionId(id)
       setInputValue(inputValue)
-      setAnnouncement(`${option} ${nowOpen}`)
     }
 
     const handleSelectOption = (event, { id }) => {
@@ -86,7 +78,6 @@ type: example
       setSelectedOptionId(id)
       setInputValue(option)
       setIsShowingOptions(false)
-      setAnnouncement(`"${option}" selected. List collapsed.`)
     }
 
     return (
@@ -177,22 +168,6 @@ type: example
       return options.find(({ id }) => id === queryId)
     }
 
-    const getOptionsChangedMessage = (newOptions) => {
-      let message =
-        newOptions.length !== filteredOptions.length
-          ? `${newOptions.length} options available.` // options changed, announce new total
-          : null // options haven't changed, don't announce
-      if (message && newOptions.length > 0) {
-        // options still available
-        if (highlightedOptionId !== newOptions[0].id) {
-          // highlighted option hasn't been announced
-          const option = getOptionById(newOptions[0].id).label
-          message = `${option}. ${message}`
-        }
-      }
-      return message
-    }
-
     const filterOptions = (value) => {
       return options.filter((option) =>
         option.label.toLowerCase().startsWith(value.toLowerCase())
@@ -231,9 +206,6 @@ type: example
 
     const handleShowOptions = (event) => {
       setIsShowingOptions(true)
-      setAnnouncement(
-        `List expanded. ${filteredOptions.length} options available.`
-      )
       if (inputValue || selectedOptionId || options.length === 0) return
 
       if ('key' in event) {
@@ -251,7 +223,6 @@ type: example
     const handleHideOptions = (event) => {
       setIsShowingOptions(false)
       setHighlightedOptionId(false)
-      setAnnouncement('List collapsed.')
       matchValue()
     }
 
@@ -265,7 +236,6 @@ type: example
       if (!option) return // prevent highlighting of empty option
       setHighlightedOptionId(id)
       setInputValue(inputValue)
-      setAnnouncement(option.label)
     }
 
     const handleSelectOption = (event, { id }) => {
@@ -276,7 +246,6 @@ type: example
       setInputValue(option.label)
       setIsShowingOptions(false)
       setFilteredOptions(options)
-      setAnnouncement(`${option.label} selected. List collapsed.`)
     }
 
     const handleInputChange = (event) => {
@@ -287,7 +256,7 @@ type: example
       setHighlightedOptionId(newOptions.length > 0 ? newOptions[0].id : null)
       setIsShowingOptions(true)
       setSelectedOptionId(value === '' ? null : selectedOptionId)
-      setAnnouncement(getOptionsChangedMessage(newOptions))
+      setAnnouncement(`${newOptions.length} options available.`)
     }
 
     return (
@@ -335,6 +304,13 @@ type: example
             </Select.Option>
           )}
         </Select>
+        <Alert
+          liveRegion={() => document.getElementById('flash-messages')}
+          liveRegionPoliteness="assertive"
+          screenReaderOnly
+        >
+          {announcement}
+        </Alert>
       </div>
     )
   }
@@ -378,7 +354,6 @@ type: example
     const [highlightedOptionId, setHighlightedOptionId] = useState(null)
     const [selectedOptionId, setSelectedOptionId] = useState(['opt1', 'opt6'])
     const [filteredOptions, setFilteredOptions] = useState(options)
-    const [announcement, setAnnouncement] = useState(null)
     const inputRef = useRef()
 
     const focusInput = () => {
@@ -390,22 +365,6 @@ type: example
 
     const getOptionById = (queryId) => {
       return options.find(({ id }) => id === queryId)
-    }
-
-    const getOptionsChangedMessage = (newOptions) => {
-      let message =
-        newOptions.length !== filteredOptions.length
-          ? `${newOptions.length} options available.` // options changed, announce new total
-          : null // options haven't changed, don't announce
-      if (message && newOptions.length > 0) {
-        // options still available
-        if (highlightedOptionId !== newOptions[0].id) {
-          // highlighted option hasn't been announced
-          const option = getOptionById(newOptions[0].id).label
-          message = `${option}. ${message}`
-        }
-      }
-      return message
     }
 
     const filterOptions = (value) => {
@@ -475,7 +434,6 @@ type: example
       if (!option) return // prevent highlighting empty option
       setHighlightedOptionId(id)
       setInputValue(inputValue)
-      setAnnouncement(option.label)
     }
 
     const handleSelectOption = (event, { id }) => {
@@ -487,7 +445,6 @@ type: example
       setFilteredOptions(filterOptions(''))
       setInputValue('')
       setIsShowingOptions(false)
-      setAnnouncement(`${option.label} selected. List collapsed.`)
     }
 
     const handleInputChange = (event) => {
@@ -497,7 +454,6 @@ type: example
       setFilteredOptions(newOptions)
       setHighlightedOptionId(newOptions.length > 0 ? newOptions[0].id : null)
       setIsShowingOptions(true)
-      setAnnouncement(getOptionsChangedMessage(newOptions))
     }
 
     const handleKeyDown = (event) => {
@@ -521,7 +477,6 @@ type: example
 
       setSelectedOptionId(newSelection)
       setHighlightedOptionId(null)
-      setAnnouncement(`${getOptionById(tag).label} removed`)
 
       inputRef.current.focus()
     }
@@ -628,7 +583,6 @@ const GroupSelectExample = ({ options }) => {
   const [selectedOptionId, setSelectedOptionId] = useState(
     options['Western'][0].id
   )
-  const [announcement, setAnnouncement] = useState(null)
   const inputRef = useRef()
 
   const focusInput = () => {
@@ -652,15 +606,6 @@ const GroupSelectExample = ({ options }) => {
       }
     })
     return match
-  }
-
-  const getGroupChangedMessage = (newOption) => {
-    const currentOption = getOptionById(highlightedOptionId)
-    const isNewGroup =
-      !currentOption || currentOption.group !== newOption.group
-    let message = isNewGroup ? `Group ${newOption.group} entered. ` : ''
-    message += newOption.label
-    return message
   }
 
   const handleShowOptions = (event) => {
@@ -694,10 +639,8 @@ const GroupSelectExample = ({ options }) => {
 
   const handleHighlightOption = (event, { id }) => {
     event.persist()
-    const newOption = getOptionById(id)
     setHighlightedOptionId(id)
     setInputValue(inputValue)
-    setAnnouncement(getGroupChangedMessage(newOption))
   }
 
   const handleSelectOption = (event, { id }) => {
@@ -705,7 +648,6 @@ const GroupSelectExample = ({ options }) => {
     setSelectedOptionId(id)
     setInputValue(getOptionById(id).label)
     setIsShowingOptions(false)
-    setAnnouncement(`${getOptionById(id).label} selected.`)
   }
 
   const renderLabel = (text, variant) => {
@@ -997,7 +939,6 @@ const AsyncExample = ({ options }) => {
   const [selectedOptionId, setSelectedOptionId] = useState(null)
   const [selectedOptionLabel, setSelectedOptionLabel] = useState('')
   const [filteredOptions, setFilteredOptions] = useState([])
-  const [announcement, setAnnouncement] = useState(null)
   const inputRef = useRef()
 
   const focusInput = () => {
@@ -1050,7 +991,6 @@ const AsyncExample = ({ options }) => {
   const handleHideOptions = (event) => {
     setIsShowingOptions(false)
     setHighlightedOptionId(null)
-    setAnnouncement('List collapsed.')
     matchValue()
   }
 
@@ -1065,7 +1005,6 @@ const AsyncExample = ({ options }) => {
 
     setHighlightedOptionId(id)
     setInputValue(inputValue)
-    setAnnouncement(option.label)
   }
 
   const handleSelectOption = (event, { id }) => {
@@ -1076,7 +1015,6 @@ const AsyncExample = ({ options }) => {
     setSelectedOptionLabel(option.label)
     setInputValue(option.label)
     setIsShowingOptions(false)
-    setAnnouncement(`${option.label} selected. List collapsed.`)
     setFilteredOptions([getOptionById(id)])
   }
 
@@ -1097,13 +1035,11 @@ const AsyncExample = ({ options }) => {
       setIsShowingOptions(true)
       setFilteredOptions([])
       setHighlightedOptionId(null)
-      setAnnouncement('Loading options.')
 
       timeoutId = setTimeout(() => {
         const newOptions = filterOptions(value)
         setFilteredOptions(newOptions)
         setIsLoading(false)
-        setAnnouncement(`${newOptions.length} options available.`)
       }, 1500)
     }
   }
@@ -1196,7 +1132,6 @@ const SingleSelectExample = ({ options }) => {
   const [isShowingOptions, setIsShowingOptions] = useState(false)
   const [highlightedOptionId, setHighlightedOptionId] = useState(null)
   const [selectedOptionId, setSelectedOptionId] = useState(options[0].id)
-  const [announcement, setAnnouncement] = useState(null)
   const inputRef = useRef()
 
   const focusInput = () => {
@@ -1232,7 +1167,6 @@ const SingleSelectExample = ({ options }) => {
     setIsShowingOptions(false)
     setHighlightedOptionId(null)
     setInputValue(selectedOptionId ? option : '')
-    setAnnouncement('List collapsed.')
   }
 
   const handleBlur = (event) => {
@@ -1241,14 +1175,8 @@ const SingleSelectExample = ({ options }) => {
 
   const handleHighlightOption = (event, { id }) => {
     event.persist()
-    const optionsAvailable = `${options.length} options available.`
-    const nowOpen = !isShowingOptions
-      ? `List expanded. ${optionsAvailable}`
-      : ''
-    const option = getOptionById(id).label
     setHighlightedOptionId(id)
     setInputValue(inputValue)
-    setAnnouncement(`${option} ${nowOpen}`)
   }
 
   const handleSelectOption = (event, { id }) => {
@@ -1257,7 +1185,6 @@ const SingleSelectExample = ({ options }) => {
     setSelectedOptionId(id)
     setInputValue(option)
     setIsShowingOptions(false)
-    setAnnouncement(`"${option}" selected. List collapsed.`)
   }
 
   return (
