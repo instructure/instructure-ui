@@ -1,10 +1,10 @@
 {
   "summary": {
-    "total": 50,
+    "total": 32,
     "unchanged": 0,
-    "changed": 14,
-    "added": 18,
-    "removed": 18
+    "changed": 32,
+    "added": 0,
+    "removed": 0
   },
   "results": [
     {
@@ -27,7 +27,9 @@
     },
     {
       "name": "billboard.png",
-      "status": "removed"
+      "status": "changed",
+      "numDiff": 19647,
+      "sizeMismatch": true
     },
     {
       "name": "breadcrumb.png",
@@ -37,11 +39,15 @@
     },
     {
       "name": "button-and-derivatives.png",
-      "status": "removed"
+      "status": "changed",
+      "numDiff": 163118,
+      "sizeMismatch": true
     },
     {
       "name": "byline.png",
-      "status": "removed"
+      "status": "changed",
+      "numDiff": 7737,
+      "sizeMismatch": false
     },
     {
       "name": "calendar.png",
@@ -51,11 +57,15 @@
     },
     {
       "name": "checkbox.png",
-      "status": "removed"
+      "status": "changed",
+      "numDiff": 31960,
+      "sizeMismatch": true
     },
     {
       "name": "checkboxgroup.png",
-      "status": "removed"
+      "status": "changed",
+      "numDiff": 14954,
+      "sizeMismatch": false
     },
     {
       "name": "colorpicker.png",
@@ -77,11 +87,15 @@
     },
     {
       "name": "dateinput-dateinput2.png",
-      "status": "removed"
+      "status": "changed",
+      "numDiff": 75558,
+      "sizeMismatch": false
     },
     {
       "name": "datetimeinput.png",
-      "status": "removed"
+      "status": "changed",
+      "numDiff": 220305,
+      "sizeMismatch": true
     },
     {
       "name": "drilldown.png",
@@ -91,15 +105,21 @@
     },
     {
       "name": "filedrop.png",
-      "status": "removed"
+      "status": "changed",
+      "numDiff": 567116,
+      "sizeMismatch": true
     },
     {
       "name": "form-errors.png",
-      "status": "removed"
+      "status": "changed",
+      "numDiff": 247922,
+      "sizeMismatch": true
     },
     {
       "name": "heading.png",
-      "status": "removed"
+      "status": "changed",
+      "numDiff": 28501,
+      "sizeMismatch": false
     },
     {
       "name": "img.png",
@@ -109,7 +129,9 @@
     },
     {
       "name": "link.png",
-      "status": "removed"
+      "status": "changed",
+      "numDiff": 21497,
+      "sizeMismatch": false
     },
     {
       "name": "menu.png",
@@ -119,7 +141,9 @@
     },
     {
       "name": "metric-pill-tag-timeselect-text.png",
-      "status": "removed"
+      "status": "changed",
+      "numDiff": 68059,
+      "sizeMismatch": true
     },
     {
       "name": "options.png",
@@ -129,15 +153,21 @@
     },
     {
       "name": "pagination.png",
-      "status": "removed"
+      "status": "changed",
+      "numDiff": 27220,
+      "sizeMismatch": true
     },
     {
       "name": "progressbar.png",
-      "status": "removed"
+      "status": "changed",
+      "numDiff": 163207,
+      "sizeMismatch": true
     },
     {
       "name": "select-simpleselect.png",
-      "status": "removed"
+      "status": "changed",
+      "numDiff": 58883,
+      "sizeMismatch": false
     },
     {
       "name": "table.png",
@@ -147,11 +177,15 @@
     },
     {
       "name": "tabs.png",
-      "status": "removed"
+      "status": "changed",
+      "numDiff": 1936,
+      "sizeMismatch": false
     },
     {
       "name": "tooltip.png",
-      "status": "removed"
+      "status": "changed",
+      "numDiff": 238273,
+      "sizeMismatch": true
     },
     {
       "name": "treebrowser.png",
@@ -161,79 +195,9 @@
     },
     {
       "name": "view.png",
-      "status": "removed"
-    },
-    {
-      "name": "visual regression test -- Billboard (failed).png",
-      "status": "added"
-    },
-    {
-      "name": "visual regression test -- Button and derivatives (failed).png",
-      "status": "added"
-    },
-    {
-      "name": "visual regression test -- Byline (failed).png",
-      "status": "added"
-    },
-    {
-      "name": "visual regression test -- Checkbox (failed).png",
-      "status": "added"
-    },
-    {
-      "name": "visual regression test -- Checkboxgroup (failed).png",
-      "status": "added"
-    },
-    {
-      "name": "visual regression test -- DateTimeInput (failed).png",
-      "status": "added"
-    },
-    {
-      "name": "visual regression test -- Dateinput, DateInput2 (failed).png",
-      "status": "added"
-    },
-    {
-      "name": "visual regression test -- Filedrop (failed).png",
-      "status": "added"
-    },
-    {
-      "name": "visual regression test -- Form errors (failed).png",
-      "status": "added"
-    },
-    {
-      "name": "visual regression test -- Heading (failed).png",
-      "status": "added"
-    },
-    {
-      "name": "visual regression test -- Link (failed).png",
-      "status": "added"
-    },
-    {
-      "name": "visual regression test -- Metric, Pill, Tag, TimeSelect, Text (failed).png",
-      "status": "added"
-    },
-    {
-      "name": "visual regression test -- Pagination (failed).png",
-      "status": "added"
-    },
-    {
-      "name": "visual regression test -- Progressbar (failed).png",
-      "status": "added"
-    },
-    {
-      "name": "visual regression test -- Select, SimpleSelect (failed).png",
-      "status": "added"
-    },
-    {
-      "name": "visual regression test -- Tabs (failed).png",
-      "status": "added"
-    },
-    {
-      "name": "visual regression test -- Tooltip (failed).png",
-      "status": "added"
-    },
-    {
-      "name": "visual regression test -- View (failed).png",
-      "status": "added"
+      "status": "changed",
+      "numDiff": 168507,
+      "sizeMismatch": false
     }
   ]
 }
