@@ -132,10 +132,13 @@ describe('<Select/>', () => {
       </Select>
     )
 
-    cy.get('ul[role="listbox"]').should(($listbox) => {
-      const style = window.getComputedStyle($listbox[0])
-      expect(style.height).to.equal('72px')
-    })
+    // In v2 the maxHeight clamp lives on the scrollable View wrapping the
+    // listbox, not on the <ul> itself; two options => 2 * option height (44px).
+    cy.get('ul[role="listbox"]')
+      .closest('[class$="view--block"]')
+      .should(($view) => {
+        expect(window.getComputedStyle($view[0]).height).to.equal('88px')
+      })
   })
 
   it('should override maxHeight with optionsMaxHeight, even if visibleOptionsCount is set', () => {
@@ -150,10 +153,11 @@ describe('<Select/>', () => {
       </Select>
     )
 
-    cy.get('ul[role="listbox"]').should(($listbox) => {
-      const style = window.getComputedStyle($listbox[0])
-      expect(style.height).to.equal('50px')
-    })
+    cy.get('ul[role="listbox"]')
+      .closest('[class$="view--block"]')
+      .should(($view) => {
+        expect(window.getComputedStyle($view[0]).height).to.equal('50px')
+      })
   })
 
   it('should fire onRequestHighlightOption when up/down arrows are pressed', () => {
