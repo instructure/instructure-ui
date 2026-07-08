@@ -57,13 +57,18 @@
       <span style="color:#0969da;">New: 96</span>
       <span style="color:#9a6700;">Removed: 32</span>
     </div>
-    <div class="filter">
+    <div class="filter" id="status-filter">
       <button data-filter="all" class="active">All</button>
       <button data-filter="changed">Changed</button>
       <button data-filter="added">New</button>
       <button data-filter="removed">Removed</button>
       <button data-filter="unchanged">Unchanged</button>
       <input id="search" type="search" placeholder="Filter by name…" autocomplete="off" />
+    </div>
+    <div class="filter" id="facet-filter">
+      <span style="font-size:12px;color:#666;">Theme:</span>
+      <button data-facet="all" class="active">All</button>
+      <button data-facet="canvas">canvas</button><button data-facet="light">light</button><button data-facet="dark">dark</button>
     </div>
   </header>
   <main>
@@ -599,22 +604,31 @@
 
   <script>
     (function () {
-      const listState = { filter: 'all', query: '' }
+      const listState = { filter: 'all', query: '', facet: 'all' }
 
       function applyFilters() {
         const q = listState.query.toLowerCase()
         document.querySelectorAll('.row').forEach(r => {
           const matchesFilter = listState.filter === 'all' || r.dataset.status === listState.filter
           const matchesQuery = !q || r.dataset.name.toLowerCase().includes(q)
-          if (matchesFilter && matchesQuery) r.removeAttribute('data-hidden')
+          const matchesFacet = listState.facet === 'all' || r.dataset.name.includes('-' + listState.facet + '.')
+          if (matchesFilter && matchesQuery && matchesFacet) r.removeAttribute('data-hidden')
           else r.setAttribute('data-hidden', '')
         })
       }
 
-      document.querySelectorAll('.filter button').forEach(btn => {
+      document.querySelectorAll('#status-filter button').forEach(btn => {
         btn.addEventListener('click', () => {
           listState.filter = btn.dataset.filter
-          document.querySelectorAll('.filter button').forEach(b => b.classList.toggle('active', b === btn))
+          document.querySelectorAll('#status-filter button').forEach(b => b.classList.toggle('active', b === btn))
+          applyFilters()
+        })
+      })
+
+      document.querySelectorAll('#facet-filter button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          listState.facet = btn.dataset.facet
+          document.querySelectorAll('#facet-filter button').forEach(b => b.classList.toggle('active', b === btn))
           applyFilters()
         })
       })
