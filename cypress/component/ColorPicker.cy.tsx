@@ -35,6 +35,15 @@ import 'cypress-real-events'
 
 import { colorToRGB, color2hex } from '@instructure/ui-color-utils'
 
+// Resolve the RGBA <input> from its (screen-reader) label via the label's
+// `for` association, instead of relying on the TextInput's internal DOM
+// nesting (which changed and broke `label.siblings('span').find('input')`).
+const rgbaInput = (labelText: string) =>
+  cy
+    .contains('label', labelText)
+    .invoke('attr', 'for')
+    .then((id) => cy.get(`#${id}`))
+
 const colorPreset = [
   '#ffffff',
   '#0CBF94',
@@ -289,29 +298,10 @@ describe('<ColorPicker/>', () => {
     cy.get('input[id^="TextInput_"]').type(testColor)
     cy.get('button').realClick()
 
-    cy.get('label')
-      .contains('Input field for red')
-      .siblings('span')
-      .find('input')
-      .should('have.value', expectedColor.r)
-
-    cy.get('label')
-      .contains('Input field for green')
-      .siblings('span')
-      .find('input')
-      .should('have.value', expectedColor.g)
-
-    cy.get('label')
-      .contains('Input field for blue')
-      .siblings('span')
-      .find('input')
-      .should('have.value', expectedColor.b)
-
-    cy.get('label')
-      .contains('Input field for alpha')
-      .siblings('span')
-      .find('input')
-      .should('have.value', '100')
+    rgbaInput('Input field for red').should('have.value', expectedColor.r)
+    rgbaInput('Input field for green').should('have.value', expectedColor.g)
+    rgbaInput('Input field for blue').should('have.value', expectedColor.b)
+    rgbaInput('Input field for alpha').should('have.value', '100')
   })
 
   it('should trigger onChange when selected color is added from colorMixer in custom popover mode', () => {
@@ -346,23 +336,9 @@ describe('<ColorPicker/>', () => {
     )
     cy.get('button').click()
 
-    cy.get('label')
-      .contains('Input field for red')
-      .siblings('span')
-      .find('input')
-      .type(rgb.r.toString())
-
-    cy.get('label')
-      .contains('Input field for green')
-      .siblings('span')
-      .find('input')
-      .type(rgb.g.toString())
-
-    cy.get('label')
-      .contains('Input field for blue')
-      .siblings('span')
-      .find('input')
-      .type(rgb.b.toString())
+    rgbaInput('Input field for red').type(rgb.r.toString())
+    rgbaInput('Input field for green').type(rgb.g.toString())
+    rgbaInput('Input field for blue').type(rgb.b.toString())
 
     cy.contains('button', 'add').realClick()
     cy.wrap(onChange).should('have.been.calledWith', color2hex(rgb))

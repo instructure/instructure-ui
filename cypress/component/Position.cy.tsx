@@ -58,10 +58,12 @@ describe('<Position/>', () => {
     cy.get('[data-testid="target"]').then(($target) => {
       const targetRect = $target[0].getBoundingClientRect()
 
-      cy.get('[data-testid="content"]').then(($content) => {
-        const contentRect = $content[0].getBoundingClientRect()
+      cy.wrap(onPositionChanged).should('have.been.called')
 
-        cy.wrap(onPositionChanged).should('have.been.called')
+      // `.should` retries: re-measure until positioning has been applied
+      // (the content mounts unpositioned at top:0 and is positioned async).
+      cy.get('[data-testid="content"]').should(($content) => {
+        const contentRect = $content[0].getBoundingClientRect()
 
         expect(
           within(Math.floor(contentRect.top), Math.floor(targetRect.top), 1)
@@ -118,34 +120,45 @@ describe('<Position/>', () => {
           </Position>
         )
 
-        cy.get('[data-testid="content"]').then(($content) => {
-          const contentRect = $content[0].getBoundingClientRect()
-          const { top, left } = contentRect
-          cy.wrap(onPositionChanged).should('have.been.called')
+        cy.wrap(onPositionChanged).should('have.been.called')
 
-          // Set new offset props
-          cy.mount(
-            <Position
-              offsetX={offset}
-              offsetY={offset}
-              constrain="none"
-              placement={placement}
-              onPositionChanged={onPositionChanged}
-              renderTarget={<button data-testid="target">Target</button>}
-            >
-              <div data-testid="content-updated">
-                <div>Content</div>
-              </div>
-            </Position>
-          )
-
-          cy.wrap(onPositionChanged).should('have.callCount', 2)
-
-          cy.get('[data-testid="content-updated"]').then(($updatedContent) => {
-            const newContentRect = $updatedContent[0].getBoundingClientRect()
-
-            assertion(newContentRect, top, left)
+        // Capture the baseline position only after positioning has actually
+        // been applied. The content mounts unpositioned at top:0 and is
+        // positioned asynchronously, so `.should` retries until it settles.
+        const baseline = { top: 0, left: 0 }
+        cy.get('[data-testid="content"]')
+          .should(($content) => {
+            expect($content[0].getBoundingClientRect().top).to.not.equal(0)
           })
+          .then(($content) => {
+            const rect = $content[0].getBoundingClientRect()
+            baseline.top = rect.top
+            baseline.left = rect.left
+          })
+
+        // Set new offset props
+        cy.mount(
+          <Position
+            offsetX={offset}
+            offsetY={offset}
+            constrain="none"
+            placement={placement}
+            onPositionChanged={onPositionChanged}
+            renderTarget={<button data-testid="target">Target</button>}
+          >
+            <div data-testid="content-updated">
+              <div>Content</div>
+            </div>
+          </Position>
+        )
+
+        cy.wrap(onPositionChanged).should('have.callCount', 2)
+
+        // `.should` retries: re-measure until the offset has been applied.
+        cy.get('[data-testid="content-updated"]').should(($updatedContent) => {
+          const newContentRect = $updatedContent[0].getBoundingClientRect()
+
+          assertion(newContentRect, baseline.top, baseline.left)
         })
       })
     }
