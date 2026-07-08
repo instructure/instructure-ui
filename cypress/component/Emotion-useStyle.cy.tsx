@@ -124,7 +124,7 @@ const ThemedComponent = ({ inverse = false, themeOverride }: Props) => {
 }
 
 describe('useStyleNew should apply bi-directional polyfill on styles object', () => {
-  it('in default "ltr" mode', async () => {
+  it('in default "ltr" mode', () => {
     cy.mount(
       <InstUISettingsProvider theme={exampleTheme}>
         <ThemedComponent />
@@ -140,7 +140,7 @@ describe('useStyleNew should apply bi-directional polyfill on styles object', ()
     })
   })
 
-  it('in "rtl" mode', async () => {
+  it('in "rtl" mode', () => {
     cy.mount(
       <InstUISettingsProvider theme={exampleTheme} dir="rtl">
         <ThemedComponent />

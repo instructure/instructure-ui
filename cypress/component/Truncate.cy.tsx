@@ -38,7 +38,7 @@ describe('truncate', () => {
     letterSpacing: 'normal'
   }
 
-  it('should truncate text when no options are given', async () => {
+  it('should truncate text when no options are given', () => {
     cy.mount(
       <div id="stage" style={{ ...baseStyle, width: '200px' }}>
         {defaultText}
@@ -56,7 +56,7 @@ describe('truncate', () => {
     cy.get('#stage').should('have.text', 'Hello world! This is a long…')
   })
 
-  it('should truncate in the middle of a string', async () => {
+  it('should truncate in the middle of a string', () => {
     cy.mount(
       <div id="stage" style={{ ...baseStyle, width: '200px' }}>
         {defaultText}
@@ -76,7 +76,7 @@ describe('truncate', () => {
     cy.get('#stage').should('have.text', 'Hello world! …ould truncate')
   })
 
-  it('should truncate at words', async () => {
+  it('should truncate at words', () => {
     cy.mount(
       <div id="stage" style={{ ...baseStyle, width: '220px' }}>
         {defaultText}
@@ -95,7 +95,7 @@ describe('truncate', () => {
     cy.get('#stage').should('have.text', 'Hello world! This is a long …')
   })
 
-  it('should allow custom ellipsis', async () => {
+  it('should allow custom ellipsis', () => {
     cy.mount(
       <div id="stage" style={{ ...baseStyle, width: '200px' }}>
         {defaultText}
@@ -112,7 +112,7 @@ describe('truncate', () => {
     cy.get('#stage').should('have.text', 'Hello world! This is a lon(...)')
   })
 
-  it('should preserve node structure', async () => {
+  it('should preserve node structure', () => {
     cy.mount(
       <div style={{ ...baseStyle, width: '200px' }}>
         <p id="stage" className="testClass">
@@ -136,7 +136,7 @@ describe('truncate', () => {
     cy.get('#stage').should('have.text', 'Hello world! This is a lon…')
   })
 
-  it('should preserve attributes on nodes', async () => {
+  it('should preserve attributes on nodes', () => {
     cy.mount(
       <div style={{ ...baseStyle, width: '200px' }}>
         <span id="stage">
@@ -164,7 +164,7 @@ describe('truncate', () => {
     })
   })
 
-  it('should calculate max width properly', async () => {
+  it('should calculate max width properly', () => {
     cy.mount(
       <div style={{ ...baseStyle, width: 'auto' }}>
         <div>
@@ -188,7 +188,7 @@ describe('truncate', () => {
     })
   })
 
-  it('should calculate `maxLines: auto` correctly', async () => {
+  it('should calculate `maxLines: auto` correctly', () => {
     cy.mount(
       <div
         style={{
@@ -212,7 +212,7 @@ describe('truncate', () => {
     })
   })
 
-  it('should calculate height correctly when `maxLines` is not `auto`', async () => {
+  it('should calculate height correctly when `maxLines` is not `auto`', () => {
     cy.mount(
       <div
         style={{
@@ -237,7 +237,7 @@ describe('truncate', () => {
     })
   })
 
-  it('should escape node content', async () => {
+  it('should escape node content', () => {
     cy.spy(console, 'log').as('consoleLogSpy')
     const content = '"><img src=a onerror=console.log("hello world") />'
 
@@ -255,7 +255,7 @@ describe('truncate', () => {
     })
   })
 
-  it('should truncate when visually hidden', async () => {
+  it('should truncate when visually hidden', () => {
     cy.mount(
       <div
         id="stage-wrapper"
@@ -277,7 +277,7 @@ describe('truncate', () => {
     cy.get('#stage').should('have.text', 'Hello world! This is a long…')
   })
 
-  it('should account for font size styles', async () => {
+  it('should account for font size styles', () => {
     cy.mount(
       <div
         id="stage"

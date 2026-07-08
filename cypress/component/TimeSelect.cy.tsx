@@ -30,7 +30,7 @@ import { TimeSelect } from '@instructure/ui/latest'
 import { DateTime } from '@instructure/ui-i18n'
 
 describe('<TimeSelect/>', () => {
-  it('should render an input and list', async () => {
+  it('should render an input and list', () => {
     cy.mount(<TimeSelect renderLabel="Choose a time" />)
 
     cy.get('input[id^="Select_"]').as('input')
@@ -41,7 +41,7 @@ describe('<TimeSelect/>', () => {
     cy.get('ul[id^="Selectable_"]').should('exist')
   })
 
-  it('should fire onChange when selected option changes', async () => {
+  it('should fire onChange when selected option changes', () => {
     const onChange = cy.spy()
     cy.mount(
       <TimeSelect
@@ -70,7 +70,7 @@ describe('<TimeSelect/>', () => {
       })
   })
 
-  it('should fire onChange when input field is cleared and blurred and allowClearingSelection is true', async () => {
+  it('should fire onChange when input field is cleared and blurred and allowClearingSelection is true', () => {
     const onChange = cy.spy()
     cy.mount(
       <TimeSelect
@@ -98,7 +98,7 @@ describe('<TimeSelect/>', () => {
       })
   })
 
-  it('should behave uncontrolled', async () => {
+  it('should behave uncontrolled', () => {
     const onChange = cy.spy()
     cy.mount(<TimeSelect renderLabel="Choose a time" onChange={onChange} />)
 
@@ -114,7 +114,7 @@ describe('<TimeSelect/>', () => {
     cy.get('@input').should('have.value', '00:00')
   })
 
-  it('should behave controlled', async () => {
+  it('should behave controlled', () => {
     const onChange = cy.spy()
     let selectedValue = ''
     const initialTestValue = moment
@@ -164,7 +164,7 @@ describe('<TimeSelect/>', () => {
       })
   })
 
-  it('Pressing ESC should reset the value in controlled mode', async () => {
+  it('Pressing ESC should reset the value in controlled mode', () => {
     const onChange = cy.spy()
     const onKeyDown = cy.spy()
     const handleInputChange = cy.spy()
@@ -191,7 +191,7 @@ describe('<TimeSelect/>', () => {
     cy.get('@input').should('have.value', '')
   })
 
-  it('value should not be changeable via user input in controlled mode', async () => {
+  it('value should not be changeable via user input in controlled mode', () => {
     const dateTime = DateTime.parse('2017-05-01T17:30Z', 'en-US', 'GMT')
     cy.mount(
       <TimeSelect
@@ -211,7 +211,7 @@ describe('<TimeSelect/>', () => {
     cy.get('@input').should('have.value', '1:30 PM')
   })
 
-  it('should keep selection when value changes', async () => {
+  it('should keep selection when value changes', () => {
     const onChange = cy.spy()
     const locale = 'en-US'
     const timezone = 'US/Eastern'
@@ -243,7 +243,7 @@ describe('<TimeSelect/>', () => {
     cy.get('@input2').should('have.value', '15:00')
   })
 
-  it('should accept values that are not divisible by step', async () => {
+  it('should accept values that are not divisible by step', () => {
     const onChange = cy.spy()
     cy.mount(
       <TimeSelect
@@ -275,7 +275,7 @@ describe('<TimeSelect/>', () => {
     cy.get('@input').should('have.attr', 'value', '01:02')
   })
 
-  it('should use the specified step value', async () => {
+  it('should use the specified step value', () => {
     const value = moment.tz(
       '1986-05-17T18:00:00.000Z',
       moment.ISO_8601,
@@ -302,7 +302,7 @@ describe('<TimeSelect/>', () => {
     cy.get('@option2').should('have.text', '00:15')
   })
 
-  it('should not allow non-step value when allowNonStepInput=false', async () => {
+  it('should not allow non-step value when allowNonStepInput=false', () => {
     const onChange = cy.spy()
     cy.mount(
       <TimeSelect
@@ -323,7 +323,7 @@ describe('<TimeSelect/>', () => {
     cy.get('@input').should('have.value', '')
   })
 
-  it('should allow non-step value when allowNonStepInput=true', async () => {
+  it('should allow non-step value when allowNonStepInput=true', () => {
     const onChange = cy.spy()
     cy.mount(
       <TimeSelect
@@ -347,7 +347,7 @@ describe('<TimeSelect/>', () => {
       })
   })
 
-  it('should round down seconds when applicable', async () => {
+  it('should round down seconds when applicable', () => {
     const onChange = cy.spy()
     cy.mount(
       <TimeSelect

@@ -249,7 +249,7 @@ const RtlExample = (props) => {
 }
 
 describe('<DateInput/>', () => {
-  it('should have screen reader labels for weekday headers', async () => {
+  it('should have screen reader labels for weekday headers', () => {
     const expectedWeekdays = [
       'Monday',
       'Tuesday',
@@ -270,7 +270,7 @@ describe('<DateInput/>', () => {
     })
   })
 
-  it('should have screen reader labels for calendar days', async () => {
+  it('should have screen reader labels for calendar days', () => {
     cy.mount(<DateInputExample />)
 
     // set system date to 2022 march
@@ -302,7 +302,7 @@ describe('<DateInput/>', () => {
     })
   })
 
-  it('should open and close calendar properly and set value when select date from calendar', async () => {
+  it('should open and close calendar properly and set value when select date from calendar', () => {
     cy.mount(<DateInputExample />)
 
     cy.get('input').should('have.value', '')
@@ -317,7 +317,7 @@ describe('<DateInput/>', () => {
     cy.get('table').should('not.exist')
   })
 
-  it('should select and highlight the correct day on Calendar when value is set', async () => {
+  it('should select and highlight the correct day on Calendar when value is set', () => {
     cy.mount(
       <DateInputExample
         initialValue="17/03/2022"
@@ -354,7 +354,7 @@ describe('<DateInput/>', () => {
     })
   })
 
-  it('should call onChange with the new typed value', async () => {
+  it('should call onChange with the new typed value', () => {
     const newValue = '26/03/2021'
     const expectedDateIsoString = new Date(Date.UTC(2021, 2, 26)).toISOString()
     const onChange = cy.spy()
@@ -373,7 +373,7 @@ describe('<DateInput/>', () => {
     )
   })
 
-  it('should respect given local and timezone', async () => {
+  it('should respect given local and timezone', () => {
     const expectedFormattedValue = '17/10/2022'
     const expectedDateIsoString = '2022-10-16T21:00:00.000Z' // Africa/Nairobi is GMT +3
     const onChange = cy.spy()
@@ -416,7 +416,7 @@ describe('<DateInput/>', () => {
     )
   })
 
-  it('should read local and timezone information from environment context', async () => {
+  it('should read local and timezone information from environment context', () => {
     const expectedFormattedValue = '2022. 10. 17.'
     const expectedDateIsoString = '2022-10-17T00:00:00.000Z'
     const onChange = cy.spy()
@@ -643,7 +643,7 @@ describe('<DateInput/>', () => {
     })
   })
 
-  it('should change separators according to locale', async () => {
+  it('should change separators according to locale', () => {
     cy.mount(<DateInputExample locale={'hu'} />)
 
     cy.get('input').as('input')
@@ -656,7 +656,7 @@ describe('<DateInput/>', () => {
     cy.get('input').should('have.value', '2022. 03. 26.')
   })
 
-  it('should change leading zero according to locale', async () => {
+  it('should change leading zero according to locale', () => {
     cy.mount(<DateInputExample locale={'es-ES'} />)
 
     cy.get('input').as('input')
@@ -679,7 +679,7 @@ describe('<DateInput/>', () => {
     cy.get('input').should('have.value', '2022-03-06')
   })
 
-  it('should dateFormat prop respect the provided local', async () => {
+  it('should dateFormat prop respect the provided local', () => {
     const Example = () => {
       const [value, setValue] = useState('')
 
@@ -776,7 +776,7 @@ describe('<DateInput/>', () => {
     })
   })
 
-  it('should set custom value through formatter callback', async () => {
+  it('should set custom value through formatter callback', () => {
     const customValue = 'customValue'
     const date = new Date(2020, 10, 10)
 
@@ -812,7 +812,7 @@ describe('<DateInput/>', () => {
     cy.get('input').should('have.value', customValue)
   })
 
-  it('should render year picker based on the withYearPicker prop', async () => {
+  it('should render year picker based on the withYearPicker prop', () => {
     cy.mount(
       <DateInput
         renderLabel="Choose a date"
@@ -858,7 +858,7 @@ describe('<DateInput/>', () => {
     cy.get('@options').eq(2).should('contain.text', '2022')
   })
 
-  it('should set correct value using calendar year picker', async () => {
+  it('should set correct value using calendar year picker', () => {
     const Example = () => {
       const [value, setValue] = useState('')
 
@@ -911,7 +911,7 @@ describe('<DateInput/>', () => {
     cy.get('input').should('have.value', '17/03/2022')
   })
 
-  it('should display correct year in year picker after date is typed into input', async () => {
+  it('should display correct year in year picker after date is typed into input', () => {
     const Example = () => {
       const [value, setValue] = useState('')
 
@@ -951,7 +951,7 @@ describe('<DateInput/>', () => {
     cy.get('@yearPicker').should('have.value', '2021')
   })
 
-  it('should display -- sign in yearPicker if no date value or date is out of range', async () => {
+  it('should display -- sign in yearPicker if no date value or date is out of range', () => {
     const Example = () => {
       const [value, setValue] = useState('')
 
@@ -1001,7 +1001,7 @@ describe('<DateInput/>', () => {
     cy.get('@yearPicker').should('have.attr', 'placeholder', '--')
   })
 
-  it('should trigger onRequestValidateDate callback on date selection or blur event', async () => {
+  it('should trigger onRequestValidateDate callback on date selection or blur event', () => {
     const dateValidationSpy = cy.spy()
 
     cy.mount(<DateInputExample onRequestValidateDate={dateValidationSpy} />)
@@ -1020,7 +1020,7 @@ describe('<DateInput/>', () => {
     cy.wrap(dateValidationSpy).should('have.been.calledTwice')
   })
 
-  it('should pass necessary props to parser and formatter via dateFormat prop', async () => {
+  it('should pass necessary props to parser and formatter via dateFormat prop', () => {
     const userDate = '26/03/2021'
     const parserReturnedDate = new Date(1111, 11, 11)
 
@@ -1060,7 +1060,7 @@ describe('<DateInput/>', () => {
     cy.wrap(formatterSpy).should('have.been.calledWith', parserReturnedDate)
   })
 
-  it('should onRequestValidateDate prop pass necessary props to the callback when input value is not a valid date', async () => {
+  it('should onRequestValidateDate prop pass necessary props to the callback when input value is not a valid date', () => {
     const dateValidationSpy = cy.spy()
     const newValue = 'not a date'
     const expectedDateIsoString = ''
@@ -1078,7 +1078,7 @@ describe('<DateInput/>', () => {
     )
   })
 
-  it('should onRequestValidateDate prop pass necessary props to the callback when input value is a valid date', async () => {
+  it('should onRequestValidateDate prop pass necessary props to the callback when input value is a valid date', () => {
     const dateValidationSpy = cy.spy()
     const newValue = '26/03/2021'
     const expectedDateIsoString = new Date(Date.UTC(2021, 2, 26)).toISOString()

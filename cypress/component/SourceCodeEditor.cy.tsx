@@ -32,7 +32,7 @@ const LONG_TEXT =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in aliquam erat, sit amet imperdiet arcu. Curabitur cursus et diam in pharetra.'
 
 describe('<SourceCodeEditor/>', () => {
-  it('should behave uncontrolled', async () => {
+  it('should behave uncontrolled', () => {
     const onChangeSpy = cy.spy().as('onChangeSpy')
     cy.mount(
       <SourceCodeEditor
@@ -51,7 +51,7 @@ describe('<SourceCodeEditor/>', () => {
     cy.get('[role="textbox"]').invoke('text').should('contain', 'hello world')
   })
 
-  it('should behave controlled', async () => {
+  it('should behave controlled', () => {
     const onChangeSpy = cy.spy().as('onChangeSpy')
     cy.mount(
       <SourceCodeEditor label="foo" value="hello" onChange={onChangeSpy} />
@@ -76,12 +76,12 @@ describe('<SourceCodeEditor/>', () => {
     cy.get('[role="textbox"]').invoke('text').should('eq', 'hello world')
   })
 
-  it('should focus editor on load', async () => {
+  it('should focus editor on load', () => {
     cy.mount(<SourceCodeEditor label="foo" autofocus />)
     cy.get('[role="textbox"]').should('have.focus')
   })
 
-  it("shouldn't update value when typing if readOnly", async () => {
+  it("shouldn't update value when typing if readOnly", () => {
     cy.mount(<SourceCodeEditor label="foo" readOnly />)
 
     cy.get('[role="textbox"]').should('not.contain.text', 'w')
@@ -122,7 +122,7 @@ describe('<SourceCodeEditor/>', () => {
       })
   })
 
-  it('should apply and update width', async () => {
+  it('should apply and update width', () => {
     const testValue1 = '300px'
     const testValue2 = '500px'
 
@@ -156,7 +156,7 @@ describe('<SourceCodeEditor/>', () => {
     cy.get('[role="textbox"]').should('have.css', 'width', testValue2)
   })
 
-  it('should apply and update height', async () => {
+  it('should apply and update height', () => {
     const testValue1 = '300px'
     const testValue2 = '500px'
 

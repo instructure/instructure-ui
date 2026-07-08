@@ -52,7 +52,7 @@ function mountDrilldown(selectableType, defaultSelected) {
 }
 
 describe('<DrilldownGroup/>', () => {
-  it('should toggle the selected option only when selectableType is multiple', async () => {
+  it('should toggle the selected option only when selectableType is multiple', () => {
     const selectedValues = ['item0', 'item1', 'item2']
     const selectableType = 'multiple'
 
@@ -75,7 +75,7 @@ describe('<DrilldownGroup/>', () => {
       .should('have.attr', 'aria-checked', 'true')
   })
 
-  it('should toggle options in radio fashion when selectableType is single', async () => {
+  it('should toggle options in radio fashion when selectableType is single', () => {
     const selectedValues = ['item0']
     const selectableType = 'single'
 
@@ -104,7 +104,7 @@ describe('<DrilldownGroup/>', () => {
       .should('have.attr', 'aria-checked', 'false')
   })
 
-  it('should themeOverride prop passed to the Options component', async () => {
+  it('should themeOverride prop passed to the Options component', () => {
     cy.mount(
       <Drilldown rootPageId="page0">
         <Drilldown.Page id="page0">

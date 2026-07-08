@@ -51,7 +51,7 @@ describe('<Table/>', () => {
     </Table>
   )
 
-  it('can render table head as a combobox when in stacked layout', async () => {
+  it('can render table head as a combobox when in stacked layout', () => {
     const sortFoo = cy.stub()
     cy.mount(
       <Table caption="Sortable table" layout="stacked">

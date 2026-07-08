@@ -27,7 +27,7 @@ import { deepEqual } from '@instructure/ui-utils'
 import '../support/component'
 
 describe('<Responsive/>', () => {
-  it('should merge props correctly when more than one breakpoint is applied', async () => {
+  it('should merge props correctly when more than one breakpoint is applied', () => {
     const renderSpy = cy.spy()
     const props = {
       small: { withBorder: true, background: 'transparent' },
@@ -63,7 +63,7 @@ describe('<Responsive/>', () => {
       })
   })
 
-  it('should provide correct props in case of multiple breakpoints in query', async () => {
+  it('should provide correct props in case of multiple breakpoints in query', () => {
     const renderSpy = cy.spy()
     const props = {
       small: { withBorder: true, background: 'transparent' },

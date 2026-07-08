@@ -32,7 +32,7 @@ const HEIGHT = '200px'
 const SVG_SRC = `<svg><circle cx="50" cy="50" r="40" /></svg>`
 
 describe('<InlineSVG />', () => {
-  it('should set custom width and height properly', async () => {
+  it('should set custom width and height properly', () => {
     cy.mount(<InlineSVG src={SVG_SRC} width={WIDTH} height={HEIGHT} />)
 
     cy.get('svg')
@@ -48,7 +48,7 @@ describe('<InlineSVG />', () => {
     })
   })
 
-  it('should not set width/height attributes and styles when value is auto', async () => {
+  it('should not set width/height attributes and styles when value is auto', () => {
     cy.mount(<InlineSVG src={SVG_SRC} width="auto" height="auto" />)
 
     cy.get('svg').then(($svg) => {
@@ -60,13 +60,13 @@ describe('<InlineSVG />', () => {
     })
   })
 
-  it('should display block when inline is false', async () => {
+  it('should display block when inline is false', () => {
     cy.mount(<InlineSVG src={SVG_SRC} inline={false} />)
 
     cy.get('svg').should('have.css', 'display', 'block')
   })
 
-  it('should change the SVG color property', async () => {
+  it('should change the SVG color property', () => {
     cy.mount(<InlineSVG src={SVG_SRC} color="success" />)
 
     cy.get('svg').then(($successSvg) => {
@@ -83,7 +83,7 @@ describe('<InlineSVG />', () => {
     })
   })
 
-  it('should allow passing in the svg src as a string', async () => {
+  it('should allow passing in the svg src as a string', () => {
     cy.mount(<InlineSVG src={`<svg><circle cx="50" cy="50" r="40" /></svg>`} />)
 
     cy.get('svg').should('exist')

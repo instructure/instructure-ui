@@ -41,7 +41,7 @@ describe('<TextInput/>', () => {
       <circle cx="50" cy="50" r="40" />
     </svg>
   )
-  it('should prepend and append content', async () => {
+  it('should prepend and append content', () => {
     cy.mount(
       <TextInput
         renderLabel="Name"
@@ -69,7 +69,7 @@ describe('<TextInput/>', () => {
     cy.get('svg').should('have.length', 2)
   })
 
-  it('should have no padding on empty before/after content', async () => {
+  it('should have no padding on empty before/after content', () => {
     cy.mount(
       <TextInput
         renderLabel="Name"

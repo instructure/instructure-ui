@@ -287,7 +287,7 @@ describe('<DateInput/>', () => {
       })
   })
 
-  it("should change value of TimeSelect to initialTimeForNewDate prop's value", async () => {
+  it("should change value of TimeSelect to initialTimeForNewDate prop's value", () => {
     const locale = 'en-US'
     const timezone = 'US/Eastern'
 

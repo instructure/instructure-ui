@@ -47,7 +47,7 @@ const testScreenReaderLabels = {
 }
 
 describe('<ColorMixer/>', () => {
-  it('should change hue value when click at the middle of the slider', async () => {
+  it('should change hue value when click at the middle of the slider', () => {
     const onChange = cy.spy()
     cy.mount(
       <ColorMixer
@@ -66,7 +66,7 @@ describe('<ColorMixer/>', () => {
     cy.wrap(onChange).should('have.been.called')
   })
 
-  it('should change hue value when click at the end of the slider', async () => {
+  it('should change hue value when click at the end of the slider', () => {
     const onChange = cy.spy()
     cy.mount(
       <ColorMixer
@@ -87,7 +87,7 @@ describe('<ColorMixer/>', () => {
     cy.wrap(onChange).should('have.been.called')
   })
 
-  it('should change hue value when click at the beginning of the slider', async () => {
+  it('should change hue value when click at the beginning of the slider', () => {
     const onChange = cy.spy()
     cy.mount(
       <ColorMixer
@@ -109,7 +109,7 @@ describe('<ColorMixer/>', () => {
     cy.wrap(onChange).should('have.been.calledTwice')
   })
 
-  it('should change hue value when click at the outside of the slider to the left', async () => {
+  it('should change hue value when click at the outside of the slider to the left', () => {
     const onChange = cy.spy()
     cy.mount(
       <ColorMixer
@@ -130,7 +130,7 @@ describe('<ColorMixer/>', () => {
     cy.wrap(onChange).should('have.been.calledTwice')
   })
 
-  it('should change hue value when click at the outside of the slider to the right', async () => {
+  it('should change hue value when click at the outside of the slider to the right', () => {
     const onChange = cy.spy()
     cy.mount(
       <ColorMixer
@@ -154,7 +154,7 @@ describe('<ColorMixer/>', () => {
     cy.wrap(onChange).should('have.been.calledTwice')
   })
 
-  it(`should hue value change with 'a' key pressed`, async () => {
+  it(`should hue value change with 'a' key pressed`, () => {
     const onChange = cy.spy()
 
     cy.mount(
@@ -175,7 +175,7 @@ describe('<ColorMixer/>', () => {
     cy.wrap(onChange).should('have.been.calledTwice')
   })
 
-  it(`should hue value change with 'd' key pressed`, async () => {
+  it(`should hue value change with 'd' key pressed`, () => {
     const onChange = cy.spy()
 
     cy.mount(
@@ -196,7 +196,7 @@ describe('<ColorMixer/>', () => {
     cy.wrap(onChange).should('have.been.calledTwice')
   })
 
-  it(`should hue value change with 'ArrowLeft' key pressed`, async () => {
+  it(`should hue value change with 'ArrowLeft' key pressed`, () => {
     const onChange = cy.spy()
 
     cy.mount(
@@ -217,7 +217,7 @@ describe('<ColorMixer/>', () => {
     cy.wrap(onChange).should('have.been.calledTwice')
   })
 
-  it(`should hue value change with 'ArrowRight' key pressed`, async () => {
+  it(`should hue value change with 'ArrowRight' key pressed`, () => {
     const onChange = cy.spy()
 
     cy.mount(
@@ -306,7 +306,7 @@ describe('<ColorMixer/>', () => {
       })
   })
 
-  it('should not move the hue indicator when reach the left border', async () => {
+  it('should not move the hue indicator when reach the left border', () => {
     const onChange = cy.spy()
     cy.mount(
       <ColorMixer
@@ -340,7 +340,7 @@ describe('<ColorMixer/>', () => {
       })
   })
 
-  it('should not move the hue indicator when reach the right border', async () => {
+  it('should not move the hue indicator when reach the right border', () => {
     const onChange = cy.spy()
     cy.mount(
       <ColorMixer
@@ -378,7 +378,7 @@ describe('<ColorMixer/>', () => {
       })
   })
 
-  it('should change alpha value when click at the beginning of the bar', async () => {
+  it('should change alpha value when click at the beginning of the bar', () => {
     const onChange = cy.spy()
     cy.mount(
       <ColorMixer
@@ -400,7 +400,7 @@ describe('<ColorMixer/>', () => {
     cy.wrap(onChange).should('have.been.calledTwice')
   })
 
-  it('should change alpha value when click at the end of the bar', async () => {
+  it('should change alpha value when click at the end of the bar', () => {
     const onChange = cy.spy()
     cy.mount(
       <ColorMixer
@@ -422,7 +422,7 @@ describe('<ColorMixer/>', () => {
     cy.wrap(onChange).should('have.been.calledTwice')
   })
 
-  it('should change alpha value when click at the outside of the bar to the left', async () => {
+  it('should change alpha value when click at the outside of the bar to the left', () => {
     const onChange = cy.spy()
     cy.mount(
       <ColorMixer
@@ -444,7 +444,7 @@ describe('<ColorMixer/>', () => {
     cy.wrap(onChange).should('have.been.calledTwice')
   })
 
-  it('should change alpha value when click at the outside of the bar to the right', async () => {
+  it('should change alpha value when click at the outside of the bar to the right', () => {
     const onChange = cy.spy()
     cy.mount(
       <ColorMixer
@@ -469,7 +469,7 @@ describe('<ColorMixer/>', () => {
     cy.wrap(onChange).should('have.been.calledTwice')
   })
 
-  it('should change alpha value when click at the middle of the slider', async () => {
+  it('should change alpha value when click at the middle of the slider', () => {
     const onChange = cy.spy()
     cy.mount(
       <ColorMixer
@@ -490,7 +490,7 @@ describe('<ColorMixer/>', () => {
     cy.wrap(onChange).should('have.been.calledTwice')
   })
 
-  it(`should alpha value change with 'ArrowRight' key pressed`, async () => {
+  it(`should alpha value change with 'ArrowRight' key pressed`, () => {
     const onChange = cy.spy()
 
     cy.mount(
@@ -512,7 +512,7 @@ describe('<ColorMixer/>', () => {
     cy.wrap(onChange).should('have.been.calledTwice')
   })
 
-  it(`should alpha value change with 'ArrowLeft' key pressed`, async () => {
+  it(`should alpha value change with 'ArrowLeft' key pressed`, () => {
     const onChange = cy.spy()
 
     cy.mount(
@@ -534,7 +534,7 @@ describe('<ColorMixer/>', () => {
     cy.wrap(onChange).should('have.been.calledTwice')
   })
 
-  it(`should alpha value change with 'a' key pressed`, async () => {
+  it(`should alpha value change with 'a' key pressed`, () => {
     const onChange = cy.spy()
 
     cy.mount(
@@ -556,7 +556,7 @@ describe('<ColorMixer/>', () => {
     cy.wrap(onChange).should('have.been.calledTwice')
   })
 
-  it(`should alpha value change with 'd' key pressed`, async () => {
+  it(`should alpha value change with 'd' key pressed`, () => {
     const onChange = cy.spy()
 
     cy.mount(
@@ -578,7 +578,7 @@ describe('<ColorMixer/>', () => {
     cy.wrap(onChange).should('have.been.calledTwice')
   })
 
-  it('should not move the alpha indicator when reach the left border', async () => {
+  it('should not move the alpha indicator when reach the left border', () => {
     const onChange = cy.spy()
     cy.mount(
       <ColorMixer
@@ -613,7 +613,7 @@ describe('<ColorMixer/>', () => {
       })
   })
 
-  it('should not move the alpha indicator when reach the right border', async () => {
+  it('should not move the alpha indicator when reach the right border', () => {
     const onChange = cy.spy()
     cy.mount(
       <ColorMixer
@@ -647,7 +647,7 @@ describe('<ColorMixer/>', () => {
       })
   })
 
-  it('should palette change the color when mousedown event is received inside the palette', async () => {
+  it('should palette change the color when mousedown event is received inside the palette', () => {
     const onChange = cy.spy()
     cy.mount(
       <ColorMixer
@@ -667,7 +667,7 @@ describe('<ColorMixer/>', () => {
     cy.wrap(onChange).should('have.been.calledWith', '#7D3E3EFF')
   })
 
-  it('should palette change the color when mousedown event is received at the top border', async () => {
+  it('should palette change the color when mousedown event is received at the top border', () => {
     const onChange = cy.spy()
     cy.mount(
       <ColorMixer
@@ -688,7 +688,7 @@ describe('<ColorMixer/>', () => {
     cy.wrap(onChange).should('have.been.called')
   })
 
-  it('should palette change the color when mousedown event is received at the bottom border', async () => {
+  it('should palette change the color when mousedown event is received at the bottom border', () => {
     const onChange = cy.spy()
     cy.mount(
       <ColorMixer
@@ -708,7 +708,7 @@ describe('<ColorMixer/>', () => {
     cy.wrap(onChange).should('have.been.called')
   })
 
-  it('should palette change the color when mousedown event is received at the left border', async () => {
+  it('should palette change the color when mousedown event is received at the left border', () => {
     const onChange = cy.spy()
     cy.mount(
       <ColorMixer
@@ -728,7 +728,7 @@ describe('<ColorMixer/>', () => {
     cy.wrap(onChange).should('have.been.called')
   })
 
-  it('should palette change the color when mousedown event is received at the right border', async () => {
+  it('should palette change the color when mousedown event is received at the right border', () => {
     const onChange = cy.spy()
     cy.mount(
       <ColorMixer
@@ -748,7 +748,7 @@ describe('<ColorMixer/>', () => {
     cy.wrap(onChange).should('have.been.called')
   })
 
-  it('should palette change the color when mousedown event is received at the top left corner', async () => {
+  it('should palette change the color when mousedown event is received at the top left corner', () => {
     const onChange = cy.spy()
     cy.mount(
       <ColorMixer
@@ -767,7 +767,7 @@ describe('<ColorMixer/>', () => {
     cy.wrap(onChange).should('have.been.called')
   })
 
-  it('should palette change the color when mousedown event is received at the top right corner', async () => {
+  it('should palette change the color when mousedown event is received at the top right corner', () => {
     const onChange = cy.spy()
     cy.mount(
       <ColorMixer
@@ -787,7 +787,7 @@ describe('<ColorMixer/>', () => {
     cy.wrap(onChange).should('have.been.called')
   })
 
-  it('should palette change the color when mousedown event is received at the bottom right corner', async () => {
+  it('should palette change the color when mousedown event is received at the bottom right corner', () => {
     const onChange = cy.spy()
     cy.mount(
       <ColorMixer
@@ -807,7 +807,7 @@ describe('<ColorMixer/>', () => {
     cy.wrap(onChange).should('have.been.called')
   })
 
-  it('should palette change the color when mousedown event is received at the bottom left corner', async () => {
+  it('should palette change the color when mousedown event is received at the bottom left corner', () => {
     const onChange = cy.spy()
     cy.mount(
       <ColorMixer
@@ -827,7 +827,7 @@ describe('<ColorMixer/>', () => {
     cy.wrap(onChange).should('have.been.called')
   })
 
-  it(`should onChange is call when the palette receive event from keyboard 'a'`, async () => {
+  it(`should onChange is call when the palette receive event from keyboard 'a'`, () => {
     const onChange = cy.spy()
     cy.mount(
       <ColorMixer
@@ -848,7 +848,7 @@ describe('<ColorMixer/>', () => {
     cy.wrap(onChange).should('have.been.calledTwice')
   })
 
-  it(`should onChange is call when the palette receive event from keyboard 'w'`, async () => {
+  it(`should onChange is call when the palette receive event from keyboard 'w'`, () => {
     const onChange = cy.spy()
     cy.mount(
       <ColorMixer
@@ -869,7 +869,7 @@ describe('<ColorMixer/>', () => {
     cy.wrap(onChange).should('have.been.calledTwice')
   })
 
-  it(`should onChange is call when the palette receive event from keyboard 's'`, async () => {
+  it(`should onChange is call when the palette receive event from keyboard 's'`, () => {
     const onChange = cy.spy()
     cy.mount(
       <ColorMixer
@@ -890,7 +890,7 @@ describe('<ColorMixer/>', () => {
     cy.wrap(onChange).should('have.been.calledTwice')
   })
 
-  it(`should onChange is call when the palette receive event from keyboard 'd'`, async () => {
+  it(`should onChange is call when the palette receive event from keyboard 'd'`, () => {
     const onChange = cy.spy()
     cy.mount(
       <ColorMixer
@@ -911,7 +911,7 @@ describe('<ColorMixer/>', () => {
     cy.wrap(onChange).should('have.been.calledTwice')
   })
 
-  it(`should onChange is call when the palette receive event from keyboard 'ArrowLeft'`, async () => {
+  it(`should onChange is call when the palette receive event from keyboard 'ArrowLeft'`, () => {
     const onChange = cy.spy()
     cy.mount(
       <ColorMixer
@@ -932,7 +932,7 @@ describe('<ColorMixer/>', () => {
     cy.wrap(onChange).should('have.been.calledTwice')
   })
 
-  it(`should onChange is call when the palette receive event from keyboard 'ArrowRight'`, async () => {
+  it(`should onChange is call when the palette receive event from keyboard 'ArrowRight'`, () => {
     const onChange = cy.spy()
     cy.mount(
       <ColorMixer
@@ -953,7 +953,7 @@ describe('<ColorMixer/>', () => {
     cy.wrap(onChange).should('have.been.calledTwice')
   })
 
-  it(`should onChange is call when the palette receive event from keyboard 'ArrowUp'`, async () => {
+  it(`should onChange is call when the palette receive event from keyboard 'ArrowUp'`, () => {
     const onChange = cy.spy()
     cy.mount(
       <ColorMixer
@@ -974,7 +974,7 @@ describe('<ColorMixer/>', () => {
     cy.wrap(onChange).should('have.been.calledTwice')
   })
 
-  it(`should onChange is call when the palette receive event from keyboard 'ArrowDown'`, async () => {
+  it(`should onChange is call when the palette receive event from keyboard 'ArrowDown'`, () => {
     const onChange = cy.spy()
     cy.mount(
       <ColorMixer

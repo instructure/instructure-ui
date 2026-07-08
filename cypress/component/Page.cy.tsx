@@ -27,7 +27,7 @@ import '../support/component'
 import 'cypress-real-events'
 
 describe('<Page/>', () => {
-  it('should focus default element', async () => {
+  it('should focus default element', () => {
     const Example = () => {
       const [activePageIndex, setActivePageIndex] = useState(0)
       let inputRef

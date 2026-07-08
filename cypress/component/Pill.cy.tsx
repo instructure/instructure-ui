@@ -28,14 +28,14 @@ import '../support/component'
 import 'cypress-real-events'
 
 describe('<Pill/>', () => {
-  it('should render without a Tooltip when text does not overflow max-width', async () => {
+  it('should render without a Tooltip when text does not overflow max-width', () => {
     cy.mount(<Pill>hello</Pill>)
 
     cy.contains('div', 'hello').realHover().wait(100)
     cy.get('body').find('span[role="tooltip"]').should('not.exist')
   })
 
-  it('should render a Tooltip when text overflows max-width', async () => {
+  it('should render a Tooltip when text overflows max-width', () => {
     const text =
       'some really super incredibly long text that will force overflow'
     cy.mount(<Pill>{text}</Pill>)

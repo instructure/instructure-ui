@@ -108,7 +108,7 @@ describe('<Modal/>', () => {
     cy.get('[data-testid="modal-content"]').should('not.exist')
   })
 
-  it('should not close with shouldCloseOnDocumentClick when Tooltip inside is clicked on', async () => {
+  it('should not close with shouldCloseOnDocumentClick when Tooltip inside is clicked on', () => {
     const TestModal = () => {
       const [open, setOpen] = useState(false)
 
@@ -168,7 +168,7 @@ describe('<Modal/>', () => {
     })
   })
 
-  it('should not close with shouldCloseOnDocumentClick when inside Tooltip has renderTip with HTML content', async () => {
+  it('should not close with shouldCloseOnDocumentClick when inside Tooltip has renderTip with HTML content', () => {
     const TestModal = () => {
       const [open, setOpen] = useState(false)
 
@@ -234,7 +234,7 @@ describe('<Modal/>', () => {
     })
   })
 
-  it('should not close with shouldCloseOnDocumentClick when ToolTip button is focused and Tooltip is clicked', async () => {
+  it('should not close with shouldCloseOnDocumentClick when ToolTip button is focused and Tooltip is clicked', () => {
     const TestModal = () => {
       const [open, setOpen] = useState(false)
 

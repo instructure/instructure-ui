@@ -74,7 +74,7 @@ const testColorMixerSettings = {
 }
 
 describe('<ColorPreset/>', () => {
-  it('should display color indicators for all colors', async () => {
+  it('should display color indicators for all colors', () => {
     cy.mount(<ColorPreset colors={testValue.colors} onSelect={cy.spy()} />)
 
     cy.get('div[role="presentation"][class$="-colorIndicator"]')
@@ -91,14 +91,14 @@ describe('<ColorPreset/>', () => {
       })
   })
 
-  it('empty string should leave all unselected', async () => {
+  it('empty string should leave all unselected', () => {
     cy.mount(<ColorPreset {...testValue} selected="" />)
 
     cy.get('button[aria-label="selected"]').should('not.exist')
     cy.get('div[class$="__selectedIndicator"]').should('not.exist')
   })
 
-  it('should select proper color', async () => {
+  it('should select proper color', () => {
     const testableColor = testValue.colors[6]
     cy.mount(<ColorPreset {...testValue} selected={testableColor} />)
 
@@ -114,7 +114,7 @@ describe('<ColorPreset/>', () => {
     })
   })
 
-  it('shows menu on indicator click', async () => {
+  it('shows menu on indicator click', () => {
     cy.mount(
       <ColorPreset {...testValue} colorMixerSettings={testColorMixerSettings} />
     )
@@ -130,7 +130,7 @@ describe('<ColorPreset/>', () => {
       .and('contain', testColorMixerSettings.removeColorLabel)
   })
 
-  it('should allow adding presets', async () => {
+  it('should allow adding presets', () => {
     const onPresetChange = cy.spy()
     cy.mount(
       <ColorPreset
@@ -153,7 +153,7 @@ describe('<ColorPreset/>', () => {
       })
   })
 
-  it('should allow removing presets', async () => {
+  it('should allow removing presets', () => {
     const onPresetChange = cy.spy()
     cy.mount(
       <ColorPreset
@@ -171,7 +171,7 @@ describe('<ColorPreset/>', () => {
     cy.wrap(onPresetChange).should('have.been.calledWithMatch', expectedColors)
   })
 
-  it('should allow selecting presets', async () => {
+  it('should allow selecting presets', () => {
     const testableIdx = 3
     const onSelect = cy.spy()
     cy.mount(

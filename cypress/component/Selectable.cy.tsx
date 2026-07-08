@@ -53,7 +53,7 @@ const getSelectable = (selectable) => (
 )
 
 describe('<Selectable />', () => {
-  it('should fire onRequestHideOptions when escape is pressed', async () => {
+  it('should fire onRequestHideOptions when escape is pressed', () => {
     const onRequestHideOptions = cy.stub()
     let defaultPrevented = false
 
@@ -83,7 +83,7 @@ describe('<Selectable />', () => {
       })
   })
 
-  it('should fire onRequestHideOptions when options are hovered', async () => {
+  it('should fire onRequestHideOptions when options are hovered', () => {
     const onRequestHighlightOption = cy.stub()
 
     cy.mount(
@@ -111,7 +111,7 @@ describe('<Selectable />', () => {
       })
   })
 
-  it('should fire onRequestHideOptions when up/down arrows are pressed', async () => {
+  it('should fire onRequestHideOptions when up/down arrows are pressed', () => {
     const onRequestShowOptions = cy.stub()
     const onRequestHighlightOption = cy.stub()
 
@@ -171,7 +171,7 @@ describe('<Selectable />', () => {
       })
   })
 
-  it('should fire onRequestHideOptions when home/end is pressed', async () => {
+  it('should fire onRequestHideOptions when home/end is pressed', () => {
     const onRequestHighlightOption = cy.stub()
     const onRequestHighlightFirstOption = cy.stub()
     const onRequestHighlightLastOption = cy.stub()
@@ -197,7 +197,7 @@ describe('<Selectable />', () => {
     cy.wrap(onRequestHighlightOption).should('not.have.been.called')
   })
 
-  it('should fire onRequestSelectOption when enter is pressed', async () => {
+  it('should fire onRequestSelectOption when enter is pressed', () => {
     const onRequestSelectOption = cy.stub()
 
     cy.mount(
@@ -219,7 +219,7 @@ describe('<Selectable />', () => {
       })
   })
 
-  it('should fire onRequestSelectOption when options are clicked', async () => {
+  it('should fire onRequestSelectOption when options are clicked', () => {
     const onRequestSelectOption = cy.stub()
 
     cy.mount(
@@ -241,7 +241,7 @@ describe('<Selectable />', () => {
       })
   })
 
-  it('getRootProps() should allow supplemental onKeyDown behavior', async () => {
+  it('getRootProps() should allow supplemental onKeyDown behavior', () => {
     const onKeyDown = cy.stub()
     const onRequestHighlightOption = cy.stub()
 
@@ -272,7 +272,7 @@ describe('<Selectable />', () => {
     cy.wrap(onKeyDown).should('have.been.calledTwice')
   })
 
-  it('getTriggerProps() should allow supplemental onKeyDown behavior', async () => {
+  it('getTriggerProps() should allow supplemental onKeyDown behavior', () => {
     const onKeyDown = cy.stub()
     const onRequestHighlightOption = cy.stub()
 
@@ -304,7 +304,7 @@ describe('<Selectable />', () => {
     cy.wrap(onKeyDown).should('have.been.calledThrice')
   })
 
-  it('getOptionProps() should allow supplemental onMouseOver behavior', async () => {
+  it('getOptionProps() should allow supplemental onMouseOver behavior', () => {
     const onMouseOver = cy.stub()
     const onRequestHighlightOption = cy.stub()
 

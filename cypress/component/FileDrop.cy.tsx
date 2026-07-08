@@ -30,7 +30,7 @@ import { FileDrop } from '@instructure/ui/latest'
 
 describe('<FileDrop/>', () => {
   describe('file-type checking when onDrop', () => {
-    it('responds to drop event', async () => {
+    it('responds to drop event', () => {
       const onDrop = cy.spy()
       cy.mount(<FileDrop renderLabel="fake label" onDrop={onDrop} />)
 
@@ -39,7 +39,7 @@ describe('<FileDrop/>', () => {
       cy.wrap(onDrop).should('have.been.calledWithMatch')
     })
 
-    it('responds to change event', async () => {
+    it('responds to change event', () => {
       const onDrop = cy.spy()
       cy.mount(<FileDrop renderLabel="fake label" onDrop={onDrop} />)
 
@@ -48,7 +48,7 @@ describe('<FileDrop/>', () => {
       cy.wrap(onDrop).should('have.been.called')
     })
 
-    it('accepts correct files using mimetypes', async () => {
+    it('accepts correct files using mimetypes', () => {
       const onDrop = cy.spy()
       const onDropAccepted = cy.spy()
       const onDropRejected = cy.spy()
@@ -83,7 +83,7 @@ describe('<FileDrop/>', () => {
       cy.wrap(onDropRejected).should('not.have.been.called')
     })
 
-    it('rejects incorrect files using mimetypes and shouldEnablePreview', async () => {
+    it('rejects incorrect files using mimetypes and shouldEnablePreview', () => {
       const onDrop = cy.spy()
       const onDropAccepted = cy.spy()
       const onDropRejected = cy.spy()
@@ -119,7 +119,7 @@ describe('<FileDrop/>', () => {
       cy.wrap(onDropRejected).should('have.been.called')
     })
 
-    it('accepts correct files using mimetypes and enablePreview', async () => {
+    it('accepts correct files using mimetypes and enablePreview', () => {
       const onDrop = cy.spy()
       const onDropAccepted = cy.spy()
       const onDropRejected = cy.spy()
@@ -155,7 +155,7 @@ describe('<FileDrop/>', () => {
       cy.wrap(onDropRejected).should('not.have.been.called')
     })
 
-    it('accepts correct files using extensions', async () => {
+    it('accepts correct files using extensions', () => {
       const onDrop = cy.spy()
       const onDropAccepted = cy.spy()
       const onDropRejected = cy.spy()
@@ -190,7 +190,7 @@ describe('<FileDrop/>', () => {
       cy.wrap(onDropRejected).should('not.have.been.called')
     })
 
-    it('rejects incorrect files using mimetypes', async () => {
+    it('rejects incorrect files using mimetypes', () => {
       const onDrop = cy.spy()
       const onDropAccepted = cy.spy()
       const onDropRejected = cy.spy()
@@ -225,7 +225,7 @@ describe('<FileDrop/>', () => {
       cy.wrap(onDropRejected).should('have.been.called')
     })
 
-    it('rejects incorrect files using extensions', async () => {
+    it('rejects incorrect files using extensions', () => {
       const onDrop = cy.spy()
       const onDropAccepted = cy.spy()
       const onDropRejected = cy.spy()
@@ -262,7 +262,7 @@ describe('<FileDrop/>', () => {
   })
 
   describe('onDrag events', () => {
-    it('responds to onDragEnter event', async () => {
+    it('responds to onDragEnter event', () => {
       const onDragEnter = cy.spy()
       cy.mount(<FileDrop renderLabel="fake label" onDragEnter={onDragEnter} />)
 
@@ -271,7 +271,7 @@ describe('<FileDrop/>', () => {
       cy.wrap(onDragEnter).should('have.been.called')
     })
 
-    it('responds to onDragOver event', async () => {
+    it('responds to onDragOver event', () => {
       const onDragOver = cy.spy()
       cy.mount(<FileDrop renderLabel="fake label" onDragOver={onDragOver} />)
 
@@ -280,7 +280,7 @@ describe('<FileDrop/>', () => {
       cy.wrap(onDragOver).should('have.been.called')
     })
 
-    it('responds to onDragLeave event', async () => {
+    it('responds to onDragLeave event', () => {
       const onDragLeave = cy.spy()
       cy.mount(<FileDrop renderLabel="fake label" onDragLeave={onDragLeave} />)
 
@@ -290,7 +290,7 @@ describe('<FileDrop/>', () => {
     })
   })
 
-  it('stops propagation when the ESC key is released and file browser is open', async () => {
+  it('stops propagation when the ESC key is released and file browser is open', () => {
     cy.mount(<FileDrop renderLabel="fake label" />)
 
     cy.get('label').click()

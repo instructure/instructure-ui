@@ -30,7 +30,7 @@ import '../support/component'
 import 'cypress-real-events'
 
 describe('<Tabs/>', () => {
-  it('should preserve Tab.Panel keys', async () => {
+  it('should preserve Tab.Panel keys', () => {
     const createElementSpy = cy.spy(React, 'createElement')
     cy.mount(
       <Tabs>
@@ -71,7 +71,7 @@ describe('<Tabs/>', () => {
       })
   })
 
-  it('should call onRequestTabChange with keyboard arrow keys', async () => {
+  it('should call onRequestTabChange with keyboard arrow keys', () => {
     const onChange = cy.stub()
 
     cy.mount(
@@ -133,7 +133,7 @@ describe('<Tabs/>', () => {
     cy.get('[role="tabpanel"]').eq(0).should('have.css', 'display', 'none')
   })
 
-  it('should render a fade-out gradient when tabOverflow set to scroll and Tabs overflow', async () => {
+  it('should render a fade-out gradient when tabOverflow set to scroll and Tabs overflow', () => {
     const Example = ({ width }: { width: string }) => (
       <div style={{ width }}>
         <Tabs tabOverflow="scroll">

@@ -40,7 +40,7 @@ const colorTestCases = {
 }
 
 describe('<ColorIndicator/>', () => {
-  it('should display empty by default', async () => {
+  it('should display empty by default', () => {
     cy.mount(<ColorIndicator />)
 
     cy.get('div[class$="-colorIndicator"]')
@@ -49,7 +49,7 @@ describe('<ColorIndicator/>', () => {
   })
 
   Object.entries(colorTestCases).forEach(([testCase, testColor]) => {
-    it(`should display ${testCase} color`, async () => {
+    it(`should display ${testCase} color`, () => {
       const expectedColor = colorToRGB(testColor)
 
       cy.mount(<ColorIndicator color={testColor} />)
@@ -66,7 +66,7 @@ describe('<ColorIndicator/>', () => {
   })
 
   // needs to be checked separately, the alpha is rounded different
-  it('should display 8 digit hexa color', async () => {
+  it('should display 8 digit hexa color', () => {
     const testColor = '#06AD8580'
     const expectedColor = colorToHex8(testColor)
 
@@ -82,7 +82,7 @@ describe('<ColorIndicator/>', () => {
       })
   })
 
-  it('should display circle by default', async () => {
+  it('should display circle by default', () => {
     cy.mount(<ColorIndicator />)
 
     cy.get('div[class$="-colorIndicator"]')
@@ -96,7 +96,7 @@ describe('<ColorIndicator/>', () => {
       })
   })
 
-  it('should display rectangle version', async () => {
+  it('should display rectangle version', () => {
     cy.mount(<ColorIndicator shape="rectangle" />)
 
     cy.get('div[class$="-colorIndicator"]')

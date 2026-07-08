@@ -28,7 +28,7 @@ import '../support/component'
 import 'cypress-real-events'
 
 describe('<PaginationPageInput />', () => {
-  it('should update the number in the input on typing a number', async () => {
+  it('should update the number in the input on typing a number', () => {
     cy.mount(
       <Pagination
         as="nav"
@@ -48,7 +48,7 @@ describe('<PaginationPageInput />', () => {
     cy.get('input').should('have.value', '6')
   })
 
-  it('should not update the input on typing a letter', async () => {
+  it('should not update the input on typing a letter', () => {
     cy.mount(
       <Pagination
         as="nav"
@@ -67,7 +67,7 @@ describe('<PaginationPageInput />', () => {
     cy.get('input').should('have.value', '')
   })
 
-  it("shouldn't call onChange on input typing ", async () => {
+  it("shouldn't call onChange on input typing ", () => {
     const onChange = cy.spy()
 
     cy.mount(
@@ -87,7 +87,7 @@ describe('<PaginationPageInput />', () => {
     cy.wrap(onChange).should('not.have.been.called')
   })
 
-  it('should keep the number in the input, on input and Enter ', async () => {
+  it('should keep the number in the input, on input and Enter ', () => {
     cy.mount(
       <Pagination
         as="nav"
@@ -105,7 +105,7 @@ describe('<PaginationPageInput />', () => {
     cy.get('input').should('have.value', '6')
   })
 
-  it('should call onChange on successful update, on input and Enter', async () => {
+  it('should call onChange on successful update, on input and Enter', () => {
     const onChange = cy.spy()
 
     cy.mount(
@@ -127,7 +127,7 @@ describe('<PaginationPageInput />', () => {
     cy.wrap(onChange).should('have.been.calledWithMatch', 6)
   })
 
-  it('should set MAX value on too big number, on input and Enter', async () => {
+  it('should set MAX value on too big number, on input and Enter', () => {
     const onChange = cy.spy()
 
     cy.mount(
@@ -148,7 +148,7 @@ describe('<PaginationPageInput />', () => {
     cy.wrap(onChange).should('have.been.calledWithMatch', 10)
   })
 
-  it('should set MIN value on too small number, on input and Enter', async () => {
+  it('should set MIN value on too small number, on input and Enter', () => {
     const onChange = cy.spy()
 
     cy.mount(
@@ -169,7 +169,7 @@ describe('<PaginationPageInput />', () => {
     cy.wrap(onChange).should('have.been.calledWithMatch', 1)
   })
 
-  it('should reset current value and not call onChange on empty string, on input and Enter', async () => {
+  it('should reset current value and not call onChange on empty string, on input and Enter', () => {
     const onChange = cy.spy()
 
     cy.mount(
@@ -190,7 +190,7 @@ describe('<PaginationPageInput />', () => {
     cy.wrap(onChange).should('not.have.been.called')
   })
 
-  it('should increment value and call onChange on up arrow', async () => {
+  it('should increment value and call onChange on up arrow', () => {
     const onChange = cy.spy()
 
     cy.mount(
@@ -212,7 +212,7 @@ describe('<PaginationPageInput />', () => {
     cy.wrap(onChange).should('have.been.calledWithMatch', 5)
   })
 
-  it('should decrement value and call onChange on down arrow', async () => {
+  it('should decrement value and call onChange on down arrow', () => {
     const onChange = cy.spy()
 
     cy.mount(

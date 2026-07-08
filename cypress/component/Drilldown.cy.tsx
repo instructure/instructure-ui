@@ -43,7 +43,7 @@ const renderOptions = (page: string) => {
 }
 
 describe('<Drilldown/>', () => {
-  it('should disabled prop prevent option actions', async () => {
+  it('should disabled prop prevent option actions', () => {
     cy.mount(
       <Drilldown rootPageId="page0" disabled>
         <Drilldown.Page id="page0" renderActionLabel="Action">
@@ -62,7 +62,7 @@ describe('<Drilldown/>', () => {
     cy.contains('Option-1').should('be.visible')
   })
 
-  it('should disabled trigger, if disabled prop provided', async () => {
+  it('should disabled trigger, if disabled prop provided', () => {
     cy.mount(
       <Drilldown
         rootPageId="page0"
@@ -84,7 +84,7 @@ describe('<Drilldown/>', () => {
     cy.get('#page0option').should('not.exist')
   })
 
-  it('should rotate focus in the drilldown by default', async () => {
+  it('should rotate focus in the drilldown by default', () => {
     cy.mount(
       <Drilldown rootPageId="page0">
         <Drilldown.Page id="page0">
@@ -106,7 +106,7 @@ describe('<Drilldown/>', () => {
     cy.focused().should('have.id', 'option01')
   })
 
-  it('should prevent focus rotation in the drilldown with "false"', async () => {
+  it('should prevent focus rotation in the drilldown with "false"', () => {
     cy.mount(
       <Drilldown rootPageId="page0" rotateFocus={false}>
         <Drilldown.Page id="page0">
@@ -128,7 +128,7 @@ describe('<Drilldown/>', () => {
     cy.focused().should('have.id', 'option02')
   })
 
-  it('should set the width of the drilldown', async () => {
+  it('should set the width of the drilldown', () => {
     cy.mount(
       <Drilldown rootPageId="page0" width="320px">
         <Drilldown.Page id="page0">
@@ -139,7 +139,7 @@ describe('<Drilldown/>', () => {
     cy.get('[role="menu"]').should('have.css', 'width', '320px')
   })
 
-  it('should set the width of the drilldown in the popover', async () => {
+  it('should set the width of the drilldown in the popover', () => {
     cy.mount(
       <Drilldown
         rootPageId="page0"
@@ -159,7 +159,7 @@ describe('<Drilldown/>', () => {
     )
   })
 
-  it('should be overruled by maxWidth prop', async () => {
+  it('should be overruled by maxWidth prop', () => {
     cy.mount(
       <Drilldown rootPageId="page0" width="300px" maxWidth="160px">
         <Drilldown.Page id="page0">
@@ -174,7 +174,7 @@ describe('<Drilldown/>', () => {
     )
   })
 
-  it('should be affected by overflowX prop', async () => {
+  it('should be affected by overflowX prop', () => {
     cy.mount(
       <Drilldown rootPageId="page0" width="320px" overflowX="auto">
         <Drilldown.Page id="page0">
@@ -197,7 +197,7 @@ describe('<Drilldown/>', () => {
       })
   })
 
-  it('should set minWidth in popover mode', async () => {
+  it('should set minWidth in popover mode', () => {
     cy.mount(
       <Drilldown
         rootPageId="page0"
@@ -218,7 +218,7 @@ describe('<Drilldown/>', () => {
     )
   })
 
-  it('should set the height of the drilldown', async () => {
+  it('should set the height of the drilldown', () => {
     cy.mount(
       <Drilldown rootPageId="page0" height="320px">
         <Drilldown.Page id="page0">
@@ -233,7 +233,7 @@ describe('<Drilldown/>', () => {
     )
   })
 
-  it('should set the height of the drilldown in the popover', async () => {
+  it('should set the height of the drilldown in the popover', () => {
     cy.mount(
       <Drilldown
         rootPageId="page0"
@@ -253,7 +253,7 @@ describe('<Drilldown/>', () => {
     )
   })
 
-  it('should be overruled by maxHeight prop', async () => {
+  it('should be overruled by maxHeight prop', () => {
     cy.mount(
       <Drilldown rootPageId="page0" height="300px" maxHeight="160px">
         <Drilldown.Page id="page0">
@@ -268,7 +268,7 @@ describe('<Drilldown/>', () => {
     )
   })
 
-  it('should be affected by overflowY prop', async () => {
+  it('should be affected by overflowY prop', () => {
     cy.mount(
       <Drilldown rootPageId="page0" height="160px" overflowY="auto">
         <Drilldown.Page id="page0">
@@ -292,7 +292,7 @@ describe('<Drilldown/>', () => {
       })
   })
 
-  it('should minHeight prop set height', async () => {
+  it('should minHeight prop set height', () => {
     cy.mount(
       <Drilldown rootPageId="page0" minHeight="336px">
         <Drilldown.Page id="page0">
@@ -307,7 +307,7 @@ describe('<Drilldown/>', () => {
     )
   })
 
-  it('should minHeight prop set height in popover mode', async () => {
+  it('should minHeight prop set height in popover mode', () => {
     cy.mount(
       <Drilldown
         rootPageId="page0"
@@ -328,7 +328,7 @@ describe('<Drilldown/>', () => {
     )
   })
 
-  it('should call onDismiss when Drilldown is closed', async () => {
+  it('should call onDismiss when Drilldown is closed', () => {
     const onDismiss = cy.spy()
     cy.mount(
       <Drilldown
@@ -355,7 +355,7 @@ describe('<Drilldown/>', () => {
       )
   })
 
-  it('should shouldHideOnSelect prop be true by default', async () => {
+  it('should shouldHideOnSelect prop be true by default', () => {
     cy.mount(
       <Drilldown
         rootPageId="page0"
@@ -372,7 +372,7 @@ describe('<Drilldown/>', () => {
     cy.get('#option01').should('not.exist')
   })
 
-  it('should not close on subPage nav, even if shouldHideOnSelect is "true"', async () => {
+  it('should not close on subPage nav, even if shouldHideOnSelect is "true"', () => {
     cy.mount(
       <Drilldown
         rootPageId="page0"
@@ -399,7 +399,7 @@ describe('<Drilldown/>', () => {
     cy.get('#option11').should('exist')
   })
 
-  it('should not close on Back nav, even if shouldHideOnSelect is "true"', async () => {
+  it('should not close on Back nav, even if shouldHideOnSelect is "true"', () => {
     cy.mount(
       <Drilldown
         rootPageId="page0"
@@ -430,7 +430,7 @@ describe('<Drilldown/>', () => {
     cy.contains('Option01').should('be.visible')
   })
 
-  it('should prevent closing when shouldHideOnSelect is "false"', async () => {
+  it('should prevent closing when shouldHideOnSelect is "false"', () => {
     cy.mount(
       <Drilldown
         rootPageId="page0"
@@ -450,7 +450,7 @@ describe('<Drilldown/>', () => {
     cy.contains('Option01').should('be.visible')
   })
 
-  it('should be able to navigate between options with up/down arrows', async () => {
+  it('should be able to navigate between options with up/down arrows', () => {
     cy.mount(
       <Drilldown rootPageId="page0">
         <Drilldown.Page id="page0">
@@ -477,7 +477,7 @@ describe('<Drilldown/>', () => {
     cy.get('#opt_1').should('have.focus')
   })
 
-  it('should be able to navigate forward between pages with right arrow', async () => {
+  it('should be able to navigate forward between pages with right arrow', () => {
     cy.mount(
       <Drilldown rootPageId="page0">
         <Drilldown.Page id="page0" renderTitle={'Page 0'}>
@@ -524,7 +524,7 @@ describe('<Drilldown/>', () => {
     cy.contains('[id^="DrilldownHeader-Title_"]', 'Page 2').should('be.visible')
   })
 
-  it('should be able to navigate back to previous page with left arrow', async () => {
+  it('should be able to navigate back to previous page with left arrow', () => {
     cy.mount(
       <Drilldown rootPageId="page0">
         <Drilldown.Page id="page0" renderTitle={'Page 0'}>
@@ -562,7 +562,7 @@ describe('<Drilldown/>', () => {
     cy.contains('[id^="DrilldownHeader-Title_"]', 'Page 0').should('be.visible')
   })
 
-  it('should close the drilldown on root page and left arrow is pressed', async () => {
+  it('should close the drilldown on root page and left arrow is pressed', () => {
     cy.mount(
       <Drilldown
         rootPageId="page0"
@@ -597,7 +597,7 @@ describe('<Drilldown/>', () => {
     cy.contains('div[role="menu"]').should('not.exist')
   })
 
-  it('should correctly return focus when "trigger" and "shouldReturnFocus" is set', async () => {
+  it('should correctly return focus when "trigger" and "shouldReturnFocus" is set', () => {
     cy.mount(
       <Drilldown
         rootPageId="page0"

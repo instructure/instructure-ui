@@ -36,7 +36,7 @@ describe('<TruncateText />', () => {
     letterSpacing: 'normal'
   }
 
-  it('should truncate text', async () => {
+  it('should truncate text', () => {
     cy.mount(
       <div style={{ ...baseStyle, width: '200px' }}>
         <TruncateText>{defaultText}</TruncateText>
@@ -49,7 +49,7 @@ describe('<TruncateText />', () => {
       .and('contain', '\u2026')
   })
 
-  it('should recalculate when parent width changes', async () => {
+  it('should recalculate when parent width changes', () => {
     cy.mount(
       <div style={{ ...baseStyle, width: '200px' }} data-testid="container">
         <TruncateText>{defaultText}</TruncateText>
@@ -81,7 +81,7 @@ describe('<TruncateText />', () => {
     })
   })
 
-  it('should preserve node structure', async () => {
+  it('should preserve node structure', () => {
     cy.mount(
       <div style={{ ...baseStyle, width: '200px' }}>
         <TruncateText>
@@ -107,7 +107,7 @@ describe('<TruncateText />', () => {
     })
   })
 
-  it('should recalculate if props change', async () => {
+  it('should recalculate if props change', () => {
     cy.mount(
       <div style={{ ...baseStyle, width: '200px' }}>
         <TruncateText>{defaultText}</TruncateText>
@@ -132,7 +132,7 @@ describe('<TruncateText />', () => {
       })
   })
 
-  it('should re-render with new children if children change', async () => {
+  it('should re-render with new children if children change', () => {
     cy.mount(
       <TruncateText>
         <span style={{ ...baseStyle }}>{defaultText}</span>
@@ -157,7 +157,7 @@ describe('<TruncateText />', () => {
       })
   })
 
-  it('should call onUpdate when text changes', async () => {
+  it('should call onUpdate when text changes', () => {
     const onUpdate = cy.stub()
 
     cy.mount(
@@ -182,7 +182,7 @@ describe('<TruncateText />', () => {
     cy.wrap(onUpdate).should('have.been.calledWith', false)
   })
 
-  it('should render text at any size with no lineHeight set', async () => {
+  it('should render text at any size with no lineHeight set', () => {
     cy.mount(
       <div data-testid="container" style={{ ...baseStyle, width: '200px' }}>
         <span>

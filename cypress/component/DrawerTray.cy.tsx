@@ -31,7 +31,7 @@ import {
 import { InstUISettingsProvider } from '@instructure/emotion'
 
 describe('<DrawerTray/>', () => {
-  it('should render tray content when open', async () => {
+  it('should render tray content when open', () => {
     cy.mount(
       <DrawerTray
         label="DrawerTray Example"
@@ -47,7 +47,7 @@ describe('<DrawerTray/>', () => {
     )
   })
 
-  it('should not render tray content when closed', async () => {
+  it('should not render tray content when closed', () => {
     cy.mount(
       <DrawerTray
         label="DrawerTray Example"
@@ -59,7 +59,7 @@ describe('<DrawerTray/>', () => {
     cy.get('div[class$="-drawerTray__content"]').should('not.exist')
   })
 
-  it(`should place the tray correctly with placement=start`, async () => {
+  it(`should place the tray correctly with placement=start`, () => {
     cy.mount(
       <DrawerTray
         label="DrawerTray Example"
@@ -75,7 +75,7 @@ describe('<DrawerTray/>', () => {
       .should('have.css', 'left', '0px')
   })
 
-  it(`should place the tray correctly with placement=end`, async () => {
+  it(`should place the tray correctly with placement=end`, () => {
     cy.mount(
       <DrawerTray
         label="DrawerTray Example"
@@ -91,7 +91,7 @@ describe('<DrawerTray/>', () => {
       .should('have.css', 'right', '0px')
   })
 
-  it('should apply theme overrides when open', async () => {
+  it('should apply theme overrides when open', () => {
     cy.mount(
       <DrawerTray
         label="DrawerTray Example"
@@ -107,7 +107,7 @@ describe('<DrawerTray/>', () => {
       .should('have.css', 'z-index', '333')
   })
 
-  it('drops a shadow if the prop is set, and it is overlaying content', async () => {
+  it('drops a shadow if the prop is set, and it is overlaying content', () => {
     const onEntered = cy.spy()
     cy.mount(
       <DrawerLayoutContext.Provider value={true}>

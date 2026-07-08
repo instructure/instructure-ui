@@ -28,7 +28,7 @@ import '../support/component'
 import 'cypress-real-events'
 
 describe('<PaginationArrowButton />', () => {
-  it('should display tooltips', async () => {
+  it('should display tooltips', () => {
     cy.mount(
       <Pagination
         as="nav"

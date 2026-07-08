@@ -42,7 +42,7 @@ const getOptions = (disabled?: ExampleOption) =>
   ))
 
 describe('<SimpleSelect/>', () => {
-  it('should have role button in Safari', async () => {
+  it('should have role button in Safari', () => {
     let originalUserAgent
 
     // Save the original userAgent and mock it to Safari
@@ -70,7 +70,7 @@ describe('<SimpleSelect/>', () => {
     })
   })
 
-  it('should have role combobox in different browsers than Safari', async () => {
+  it('should have role combobox in different browsers than Safari', () => {
     cy.mount(
       <SimpleSelect renderLabel="Choose an option">{getOptions()}</SimpleSelect>
     )
@@ -78,7 +78,7 @@ describe('<SimpleSelect/>', () => {
     cy.get('input').should('have.attr', 'role', 'combobox')
   })
 
-  it('should fire onChange when selected option changes', async () => {
+  it('should fire onChange when selected option changes', () => {
     const onChange = cy.spy()
     cy.mount(
       <SimpleSelect renderLabel="Choose an option" onChange={onChange}>
@@ -94,7 +94,7 @@ describe('<SimpleSelect/>', () => {
       .should('equal', defaultOptions[1])
   })
 
-  it('should behave uncontrolled', async () => {
+  it('should behave uncontrolled', () => {
     const onChange = cy.spy()
     cy.mount(
       <SimpleSelect renderLabel="Choose an option" onChange={onChange}>
@@ -113,7 +113,7 @@ describe('<SimpleSelect/>', () => {
       .should('equal', defaultOptions[1])
   })
 
-  it('should behave controlled', async () => {
+  it('should behave controlled', () => {
     const onChange = cy.spy()
 
     cy.mount(

@@ -29,7 +29,7 @@ import '../support/component'
 import 'cypress-real-events'
 
 describe('<Tray />', () => {
-  it('should apply theme overrides when open', async () => {
+  it('should apply theme overrides when open', () => {
     cy.mount(
       <Tray
         label="Tray Example"
@@ -47,7 +47,7 @@ describe('<Tray />', () => {
       .and('have.css', 'width', '160px')
   })
 
-  it('should call onDismiss prop when Esc key pressed', async () => {
+  it('should call onDismiss prop when Esc key pressed', () => {
     const onDismiss = cy.stub()
     cy.mount(
       <Tray
@@ -68,7 +68,7 @@ describe('<Tray />', () => {
     cy.wrap(onDismiss).should('have.been.called')
   })
 
-  it.only('should handle focus properly in complex cases', async () => {
+  it.only('should handle focus properly in complex cases', () => {
     const Example = () => {
       const [showTray, setShowTray] = React.useState(false)
       const [showOverlay, setShowOverlay] = React.useState(false)

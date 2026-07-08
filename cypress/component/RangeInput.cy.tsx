@@ -29,7 +29,7 @@ import '../support/component'
 import 'cypress-real-events'
 
 describe('<RangeInput/>', () => {
-  it('should update the value displayed', async () => {
+  it('should update the value displayed', () => {
     cy.mount(
       <RangeInput
         label="Opacity"
@@ -47,7 +47,7 @@ describe('<RangeInput/>', () => {
     cy.get('@output').should('have.text', '30')
   })
 
-  it('should call the onChange prop', async () => {
+  it('should call the onChange prop', () => {
     const onChange = cy.spy()
 
     cy.mount(
@@ -71,7 +71,7 @@ describe('<RangeInput/>', () => {
       })
   })
 
-  it('should update the input value when the value prop is uncontrolled', async () => {
+  it('should update the input value when the value prop is uncontrolled', () => {
     cy.mount(
       <RangeInput
         label="Opacity"
@@ -91,7 +91,7 @@ describe('<RangeInput/>', () => {
     cy.get('@rangeInput').should('have.value', '51')
   })
 
-  it('should not update the input value when the value prop is controlled', async () => {
+  it('should not update the input value when the value prop is controlled', () => {
     cy.mount(
       <RangeInput
         label="Opacity"
@@ -111,7 +111,7 @@ describe('<RangeInput/>', () => {
     cy.get('@rangeInput').should('have.value', '50')
   })
 
-  it('should show messages', async () => {
+  it('should show messages', () => {
     const message = 'Invalid'
 
     cy.mount(

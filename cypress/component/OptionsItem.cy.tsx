@@ -29,7 +29,7 @@ import { Options } from '@instructure/ui/latest'
 import { IconCheckSolid } from '@instructure/ui-icons'
 
 describe('<OptionsItem/>', () => {
-  it('should allow label to recieve focus', async () => {
+  it('should allow label to recieve focus', () => {
     const onFocus = cy.spy()
     cy.mount(
       <Options.Item tabIndex={-1} onFocus={onFocus}>
@@ -43,7 +43,7 @@ describe('<OptionsItem/>', () => {
     cy.contains('Hello World').should('be.focused')
   })
 
-  it('should render colored icon before label', async () => {
+  it('should render colored icon before label', () => {
     cy.mount(
       <Options.Item
         renderBeforeLabel={(props) => {
@@ -66,7 +66,7 @@ describe('<OptionsItem/>', () => {
       })
   })
 
-  it('should render colored icon after highlighted label', async () => {
+  it('should render colored icon after highlighted label', () => {
     cy.mount(
       <Options.Item
         variant="highlighted"

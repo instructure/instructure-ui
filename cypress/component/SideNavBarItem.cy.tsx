@@ -29,7 +29,7 @@ import { IconAdminLine } from '@instructure/ui/latest'
 import '../support/component'
 
 describe('<SideNavBarItem/>', () => {
-  it('should show a tooltip when the nav is minimized ', async () => {
+  it('should show a tooltip when the nav is minimized ', () => {
     const onClick = cy.spy()
     cy.mount(
       <div data-testid="navBarItemWrapper" style={{ width: 300 }}>

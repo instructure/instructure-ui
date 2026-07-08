@@ -86,7 +86,7 @@ const element = (
 )
 
 describe('ScreenReaderFocusRegion', () => {
-  it('should hide the body element of any iframes present on the page', async () => {
+  it('should hide the body element of any iframes present on the page', () => {
     cy.mount(element)
 
     const getIframeBody = (iframe) => {
@@ -156,7 +156,7 @@ describe('ScreenReaderFocusRegion', () => {
     })
   })
 
-  it('should restore all iframe bodies after deactivate', async () => {
+  it('should restore all iframe bodies after deactivate', () => {
     cy.mount(element)
 
     const getIframeBody = (iframe) => {

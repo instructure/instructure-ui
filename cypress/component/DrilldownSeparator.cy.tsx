@@ -28,7 +28,7 @@ import { Drilldown } from '@instructure/ui/latest'
 import '../support/component'
 
 describe('<DrilldownSeparator/>', () => {
-  it('themeOverride prop should pass overrides to Option.Separator', async () => {
+  it('themeOverride prop should pass overrides to Option.Separator', () => {
     cy.mount(
       <Drilldown rootPageId="page0">
         <Drilldown.Page id="page0">

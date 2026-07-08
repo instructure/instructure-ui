@@ -28,7 +28,7 @@ import '../support/component'
 import 'cypress-real-events'
 
 describe('<AppNav/>', () => {
-  it('should hide and show items based on the containing element width', async () => {
+  it('should hide and show items based on the containing element width', () => {
     const onUpdate = cy.spy()
     const itemWidth = 70
 

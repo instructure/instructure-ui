@@ -29,7 +29,7 @@ import '../support/component'
 import 'cypress-real-events'
 
 describe('<TruncateList />', () => {
-  it('should pass how many items should be visible with `onUpdate` prop', async () => {
+  it('should pass how many items should be visible with `onUpdate` prop', () => {
     const onUpdate = cy.stub()
     cy.mount(
       <TruncateList onUpdate={onUpdate} style={{ width: '100px' }}>
@@ -46,7 +46,7 @@ describe('<TruncateList />', () => {
     })
   })
 
-  it('should behave controlled', async () => {
+  it('should behave controlled', () => {
     const initialItemNumber = 2
     const updatedItemNumber = 9
 
@@ -77,7 +77,7 @@ describe('<TruncateList />', () => {
     cy.get('@items').should('have.length', updatedItemNumber)
   })
 
-  it('should renderHiddenItemMenu callback return hidden children', async () => {
+  it('should renderHiddenItemMenu callback return hidden children', () => {
     const renderHiddenItemMenu = cy.stub()
     cy.mount(
       <TruncateList
@@ -110,7 +110,7 @@ describe('<TruncateList />', () => {
       })
   })
 
-  it('should have no item spacing by default', async () => {
+  it('should have no item spacing by default', () => {
     cy.mount(
       <TruncateList>
         <div>Item 1</div>
@@ -130,7 +130,7 @@ describe('<TruncateList />', () => {
     })
   })
 
-  it('should add itemSpacing', async () => {
+  it('should add itemSpacing', () => {
     cy.mount(
       <TruncateList
         itemSpacing={'1rem'}
@@ -155,7 +155,7 @@ describe('<TruncateList />', () => {
     })
   })
 
-  it('should resize list when itemSpacing changed in runtime', async () => {
+  it('should resize list when itemSpacing changed in runtime', () => {
     const Example = ({ itemSpacing }) => {
       const [itemsCount, setItemsCount] = useState(5)
 
@@ -200,7 +200,7 @@ describe('<TruncateList />', () => {
     })
   })
 
-  it('should add fix width to the trigger li item via fixMenuTriggerWidth prop', async () => {
+  it('should add fix width to the trigger li item via fixMenuTriggerWidth prop', () => {
     cy.mount(
       <TruncateList
         fixMenuTriggerWidth="320px"
@@ -218,7 +218,7 @@ describe('<TruncateList />', () => {
     cy.get('@trigger').should('have.css', 'width', '320px')
   })
 
-  it('when not set, should be the width of its content', async () => {
+  it('when not set, should be the width of its content', () => {
     cy.mount(
       <TruncateList
         visibleItemsCount={1}
@@ -239,7 +239,7 @@ describe('<TruncateList />', () => {
     cy.get('@trigger').should('have.css', 'width', '80px')
   })
 
-  it('should resize list when fixMenuTriggerWidth changed in runtime', async () => {
+  it('should resize list when fixMenuTriggerWidth changed in runtime', () => {
     const Example = ({ fixMenuTriggerWidth }) => {
       const [itemsCount, setItemsCount] = useState(Number)
 

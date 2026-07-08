@@ -33,7 +33,7 @@ const IMAGE =
   'data:image/gif;base64,R0lGODlhFAAUAJEAAP/9/fYQEPytrflWViH5BAAAAAAALAAAAAAUABQAQAJKhI+pGe09lnhBnEETfodatVHNh1BR+ZzH9LAOCYrVYpiAfWWJOxrC/5MASbyZT4d6AUIBlUYGoR1FsAXUuTN5YhxAEYbrpKRkQwEAOw=='
 
 describe('<Img />', () => {
-  it('has a container with matching height and width when constrain="cover" is used with overlay', async () => {
+  it('has a container with matching height and width when constrain="cover" is used with overlay', () => {
     cy.mount(
       <div style={{ width: WIDTH, height: HEIGHT }}>
         <Img
@@ -52,7 +52,7 @@ describe('<Img />', () => {
     cy.get('img').should('have.attr', 'alt', ALT)
   })
 
-  it('has a container with matching height and not matching width when constrain="contain" is used with overlay', async () => {
+  it('has a container with matching height and not matching width when constrain="contain" is used with overlay', () => {
     cy.mount(
       <div style={{ width: WIDTH, height: HEIGHT }}>
         <Img

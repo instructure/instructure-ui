@@ -26,14 +26,14 @@ import '../support/component'
 import 'cypress-real-events'
 
 describe('getTextDirection', () => {
-  it('defaults the dir of <html>', async () => {
+  it('defaults the dir of <html>', () => {
     const expectedDir = getComputedStyle(document.documentElement).direction
     const actualDir = getTextDirection()
 
     expect(actualDir).to.equal(expectedDir)
   })
 
-  it('defaults to the dir of <html> when passed an element', async () => {
+  it('defaults to the dir of <html> when passed an element', () => {
     cy.mount(
       <div data-testid="test">
         <h1>Hello</h1>
@@ -47,7 +47,7 @@ describe('getTextDirection', () => {
     })
   })
 
-  it('returns "rtl" if the `dir` of the element is "rtl"', async () => {
+  it('returns "rtl" if the `dir` of the element is "rtl"', () => {
     cy.mount(
       <div data-testid="test" dir="rtl">
         <h1>Hello</h1>
@@ -61,7 +61,7 @@ describe('getTextDirection', () => {
     })
   })
 
-  it('inherits value set by ancestor', async () => {
+  it('inherits value set by ancestor', () => {
     cy.mount(
       <div data-testid="test" dir="rtl">
         <h1>Hello</h1>

@@ -28,7 +28,7 @@ import { Drilldown } from '@instructure/ui/latest'
 import '../support/component'
 
 describe('<DrilldownOption/>', () => {
-  it('should allow controlled behaviour', async () => {
+  it('should allow controlled behaviour', () => {
     const options = ['one', 'two', 'three']
     const Example = ({
       opts,
@@ -84,7 +84,7 @@ describe('<DrilldownOption/>', () => {
       .should('have.attr', 'aria-checked', 'true')
   })
 
-  it('should navigate to subPage on select', async () => {
+  it('should navigate to subPage on select', () => {
     cy.mount(
       <Drilldown rootPageId="page0">
         <Drilldown.Page id="page0">
@@ -106,7 +106,7 @@ describe('<DrilldownOption/>', () => {
     cy.contains('Option01').should('not.exist')
   })
 
-  it('should disabled prop apply disabled css style', async () => {
+  it('should disabled prop apply disabled css style', () => {
     cy.mount(
       <Drilldown rootPageId="page0">
         <Drilldown.Page id="page0">
@@ -121,7 +121,7 @@ describe('<DrilldownOption/>', () => {
       .and('have.css', 'cursor', 'not-allowed')
   })
 
-  it('should navigate to url on Focus + Space', async () => {
+  it('should navigate to url on Focus + Space', () => {
     cy.mount(
       <Drilldown rootPageId="page0">
         <Drilldown.Page id="page0">
@@ -136,7 +136,7 @@ describe('<DrilldownOption/>', () => {
     cy.url().should('include', '#helloWorld')
   })
 
-  it('should navigate to url on Click', async () => {
+  it('should navigate to url on Click', () => {
     cy.mount(
       <Drilldown rootPageId="page0">
         <Drilldown.Page id="page0">
@@ -150,7 +150,7 @@ describe('<DrilldownOption/>', () => {
     cy.url().should('include', '#helloWorld')
   })
 
-  it("shouldn't navigate to url, if disabled", async () => {
+  it("shouldn't navigate to url, if disabled", () => {
     cy.mount(
       <Drilldown rootPageId="page0">
         <Drilldown.Page id="page0">
@@ -165,7 +165,7 @@ describe('<DrilldownOption/>', () => {
     cy.url().should('not.include', '#helloWorld')
   })
 
-  it('should renderLabelInfo prop affected by afterLabelContentVAlign prop', async () => {
+  it('should renderLabelInfo prop affected by afterLabelContentVAlign prop', () => {
     cy.mount(
       <Drilldown rootPageId="page0">
         <Drilldown.Page id="page0">
@@ -186,7 +186,7 @@ describe('<DrilldownOption/>', () => {
     )
   })
 
-  it('should provide goToPreviousPage method that goes back to the previous page', async () => {
+  it('should provide goToPreviousPage method that goes back to the previous page', () => {
     cy.mount(
       <Drilldown rootPageId="page0">
         <Drilldown.Page id="page0">
@@ -220,7 +220,7 @@ describe('<DrilldownOption/>', () => {
     cy.contains('Option11').should('not.exist')
   })
 
-  it('should provide goToPage method that can be used to go back a page', async () => {
+  it('should provide goToPage method that can be used to go back a page', () => {
     cy.mount(
       <Drilldown rootPageId="page0">
         <Drilldown.Page id="page0">
@@ -254,7 +254,7 @@ describe('<DrilldownOption/>', () => {
     cy.contains('Option11').should('not.exist')
   })
 
-  it('should provide goToPage method that can be used to go to a new, existing page', async () => {
+  it('should provide goToPage method that can be used to go to a new, existing page', () => {
     cy.mount(
       <Drilldown rootPageId="page0">
         <Drilldown.Page id="page0">
@@ -281,7 +281,7 @@ describe('<DrilldownOption/>', () => {
     cy.contains('Option11').should('be.visible')
   })
 
-  it('should themeOverride prop passed to the Options.Item component', async () => {
+  it('should themeOverride prop passed to the Options.Item component', () => {
     cy.mount(
       <Drilldown rootPageId="page0">
         <Drilldown.Page id="page0">

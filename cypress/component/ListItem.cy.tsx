@@ -28,7 +28,7 @@ import { ListItem } from '@instructure/ui/latest'
 import '../support/component'
 
 describe('<ListItem/>', () => {
-  it('should not render delimiter by default', async () => {
+  it('should not render delimiter by default', () => {
     cy.mount(
       <div>
         <ListItem>List item 1</ListItem>
@@ -39,7 +39,7 @@ describe('<ListItem/>', () => {
     cy.contains('List item 2').should('have.css', 'border-top-style', 'none')
   })
 
-  it('should render delimiter', async () => {
+  it('should render delimiter', () => {
     cy.mount(
       <div>
         <ListItem>List item 1</ListItem>

@@ -60,7 +60,7 @@ const SimpleExample = (props) => {
 }
 
 describe('<ColorPicker/>', () => {
-  it('should display the color which was typed in simple input mode', async () => {
+  it('should display the color which was typed in simple input mode', () => {
     const testColor = '0CBF2D'
     const expectedColor = colorToRGB(testColor)
 
@@ -78,7 +78,7 @@ describe('<ColorPicker/>', () => {
       })
   })
 
-  it('should display the color in the trigger button in complex mode', async () => {
+  it('should display the color in the trigger button in complex mode', () => {
     const testColor = '0374B5'
     const expectedColor = colorToRGB(testColor)
 
@@ -112,7 +112,7 @@ describe('<ColorPicker/>', () => {
       })
   })
 
-  it('should display the list of colors passed to it in complex mode', async () => {
+  it('should display the list of colors passed to it in complex mode', () => {
     cy.mount(
       <SimpleExample
         colorMixerSettings={{
@@ -151,7 +151,7 @@ describe('<ColorPicker/>', () => {
       })
   })
 
-  it('should correctly set the color when picked from the list of colors in complex mode', async () => {
+  it('should correctly set the color when picked from the list of colors in complex mode', () => {
     cy.mount(
       <SimpleExample
         colorMixerSettings={{
@@ -186,7 +186,7 @@ describe('<ColorPicker/>', () => {
     )
   })
 
-  it('should correctly call onChange with the color when picked from the list of colors in complex mode', async () => {
+  it('should correctly call onChange with the color when picked from the list of colors in complex mode', () => {
     const onChange = cy.spy()
     cy.mount(
       <SimpleExample
@@ -220,7 +220,7 @@ describe('<ColorPicker/>', () => {
     cy.wrap(onChange).should('have.been.calledWith', colorPreset[1])
   })
 
-  it('should display the text passed to ColorContrast in complex mode', async () => {
+  it('should display the text passed to ColorContrast in complex mode', () => {
     cy.mount(
       <SimpleExample
         colorMixerSettings={{
@@ -258,7 +258,7 @@ describe('<ColorPicker/>', () => {
       .and('contain', 'Graphics text')
   })
 
-  it('should display the correct color in the colormixer when the input is prefilled in custom popover mode', async () => {
+  it('should display the correct color in the colormixer when the input is prefilled in custom popover mode', () => {
     const testColor = '0374B5'
     const expectedColor = colorToRGB(`#${testColor}`)
 
@@ -314,7 +314,7 @@ describe('<ColorPicker/>', () => {
       .should('have.value', '100')
   })
 
-  it('should trigger onChange when selected color is added from colorMixer in custom popover mode', async () => {
+  it('should trigger onChange when selected color is added from colorMixer in custom popover mode', () => {
     const onChange = cy.spy()
     const rgb = { r: 131, g: 6, b: 25, a: 1 }
 
@@ -368,7 +368,7 @@ describe('<ColorPicker/>', () => {
     cy.wrap(onChange).should('have.been.calledWith', color2hex(rgb))
   })
 
-  it('should display the color in the trigger button in custom popover mode', async () => {
+  it('should display the color in the trigger button in custom popover mode', () => {
     const testColor = '0374B5'
     const expectedColor = colorToRGB(testColor)
 
@@ -409,7 +409,7 @@ describe('<ColorPicker/>', () => {
       })
   })
 
-  it('should display the list of colors passed to it in custom popover mode', async () => {
+  it('should display the list of colors passed to it in custom popover mode', () => {
     cy.mount(
       <SimpleExample>
         {(value, onChange, handleAdd, handleClose) => (
@@ -444,7 +444,7 @@ describe('<ColorPicker/>', () => {
       })
   })
 
-  it('should correctly set the color when picked from the list of colors in custom popover mode', async () => {
+  it('should correctly set the color when picked from the list of colors in custom popover mode', () => {
     cy.mount(
       <SimpleExample>
         {(value, onChange, handleAdd, handleClose) => (
@@ -475,7 +475,7 @@ describe('<ColorPicker/>', () => {
     )
   })
 
-  it('should correctly call onChange with the color when picked from the list of colors in custom popover mode', async () => {
+  it('should correctly call onChange with the color when picked from the list of colors in custom popover mode', () => {
     const onChange = cy.spy()
 
     cy.mount(
@@ -507,7 +507,7 @@ describe('<ColorPicker/>', () => {
     cy.wrap(onChange).should('have.been.calledWith', colorPreset[3])
   })
 
-  it('should display the text passed to ColorContrast in custom popover mode', async () => {
+  it('should display the text passed to ColorContrast in custom popover mode', () => {
     cy.mount(
       <SimpleExample>
         {(value, onChange, handleAdd, handleClose) => (

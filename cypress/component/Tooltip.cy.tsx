@@ -29,7 +29,7 @@ import { IconInfoLine } from '@instructure/ui-icons'
 import '../support/component'
 
 describe('<Tooltip/>', () => {
-  it('should render the tip offscreen', async () => {
+  it('should render the tip offscreen', () => {
     cy.mount(
       <div>
         <button>For dismiss</button>
@@ -64,7 +64,7 @@ describe('<Tooltip/>', () => {
     })
   })
 
-  it('should show tip by default when defaultIsShowingContent is true', async () => {
+  it('should show tip by default when defaultIsShowingContent is true', () => {
     cy.mount(
       <Tooltip renderTip="Hello" defaultIsShowingContent>
         <a data-testid="trigger" href="example.html">
@@ -85,7 +85,7 @@ describe('<Tooltip/>', () => {
     })
   })
 
-  it('should show tip when isShowingContent is true', async () => {
+  it('should show tip when isShowingContent is true', () => {
     cy.mount(
       <Tooltip renderTip={<h2>Hello</h2>} isShowingContent>
         <a data-testid="trigger" href="example.html">
@@ -105,7 +105,7 @@ describe('<Tooltip/>', () => {
     })
   })
 
-  it('should call onShowContent and on onHideContent', async () => {
+  it('should call onShowContent and on onHideContent', () => {
     const onShowContent = cy.spy()
     const onHideContent = cy.spy()
 
@@ -133,7 +133,7 @@ describe('<Tooltip/>', () => {
     cy.wrap(onHideContent).should('have.been.calledOnce')
   })
 
-  it('should remain visible when Tooltip is hovered over', async () => {
+  it('should remain visible when Tooltip is hovered over', () => {
     cy.mount(
       <Tooltip renderTip={<h2>Hello</h2>}>
         <a data-testid="trigger" href="example.html">
@@ -269,7 +269,7 @@ describe('<Tooltip/>', () => {
     })
   })
 
-  it('should allow closing modal with Esc when the modal trigger button has a Tooltip', async () => {
+  it('should allow closing modal with Esc when the modal trigger button has a Tooltip', () => {
     const TestModal = () => {
       const [open, setOpen] = useState(false)
 
@@ -309,7 +309,7 @@ describe('<Tooltip/>', () => {
       })
   })
 
-  it('should not trap focus when Modal closing button has a Tooltip', async () => {
+  it('should not trap focus when Modal closing button has a Tooltip', () => {
     const TestModal = () => {
       const [open, setOpen] = useState(false)
 

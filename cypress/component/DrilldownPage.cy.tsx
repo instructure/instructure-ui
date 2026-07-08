@@ -28,7 +28,7 @@ import { Drilldown } from '@instructure/ui/latest'
 import '../support/component'
 
 describe('<DrilldownPage/>', () => {
-  it('should have a back arrow in header back navigation', async () => {
+  it('should have a back arrow in header back navigation', () => {
     cy.mount(
       <Drilldown rootPageId="page0">
         <Drilldown.Page id="page0">
@@ -49,7 +49,7 @@ describe('<DrilldownPage/>', () => {
       .should('exist')
   })
 
-  it('should still display the back icon in header back navigation, even if function has no return value', async () => {
+  it('should still display the back icon in header back navigation, even if function has no return value', () => {
     cy.mount(
       <Drilldown rootPageId="page0">
         <Drilldown.Page id="page0" renderTitle="Page Title">
@@ -69,7 +69,7 @@ describe('<DrilldownPage/>', () => {
       .should('exist')
   })
 
-  it('should fire onBackButtonClicked on header back navigation click', async () => {
+  it('should fire onBackButtonClicked on header back navigation click', () => {
     const backNavCallback = cy.spy()
     cy.mount(
       <Drilldown rootPageId="page0">
@@ -90,7 +90,7 @@ describe('<DrilldownPage/>', () => {
     cy.wrap(backNavCallback).should('have.been.called')
   })
 
-  it('should go back one page on click', async () => {
+  it('should go back one page on click', () => {
     cy.mount(
       <Drilldown rootPageId="page0">
         <Drilldown.Page id="page0" renderTitle="Page Title">

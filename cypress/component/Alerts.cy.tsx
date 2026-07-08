@@ -28,7 +28,7 @@ import '../support/component'
 import 'cypress-real-events'
 
 describe('<Alerts/>', () => {
-  it('should have shadow by default', async () => {
+  it('should have shadow by default', () => {
     cy.mount(
       <Alert variant="info" transition="none">
         Success: Sample alert text.
@@ -39,7 +39,7 @@ describe('<Alerts/>', () => {
       .and('not.equal', 'none')
   })
 
-  it("shouldn't have shadow, when `hasShadow` is set to false", async () => {
+  it("shouldn't have shadow, when `hasShadow` is set to false", () => {
     cy.mount(
       <Alert variant="info" transition="none" hasShadow={false}>
         Success: Sample alert text.

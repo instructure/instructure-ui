@@ -51,7 +51,7 @@ describe('<DrawerLayout/>', () => {
     })
   })
 
-  it(`with no overlay, layout content should have margin equal to tray width with placement=end`, async () => {
+  it(`with no overlay, layout content should have margin equal to tray width with placement=end`, () => {
     cy.mount(
       <DrawerLayoutFixture
         open={true}
@@ -73,7 +73,7 @@ describe('<DrawerLayout/>', () => {
     })
   })
 
-  it(`with overlay, layout content should have a margin of zero with placement=start`, async () => {
+  it(`with overlay, layout content should have a margin of zero with placement=start`, () => {
     cy.mount(
       <DrawerLayoutFixture
         open={true}
@@ -90,7 +90,7 @@ describe('<DrawerLayout/>', () => {
     })
   })
 
-  it(`with overlay, layout content should have a margin of zero with placement=end`, async () => {
+  it(`with overlay, layout content should have a margin of zero with placement=end`, () => {
     cy.mount(
       <DrawerLayoutFixture
         open={true}
@@ -107,7 +107,7 @@ describe('<DrawerLayout/>', () => {
     })
   })
 
-  it('the tray should overlay the content when the content is less than the minWidth', async () => {
+  it('the tray should overlay the content when the content is less than the minWidth', () => {
     const onOverlayTrayChange = cy.spy()
 
     cy.mount(
@@ -130,7 +130,7 @@ describe('<DrawerLayout/>', () => {
     cy.wrap(onOverlayTrayChange).should('have.been.calledWith', true)
   })
 
-  it('the tray should stop overlaying the content when there is enough space for the content', async () => {
+  it('the tray should stop overlaying the content when there is enough space for the content', () => {
     const onOverlayTrayChange = cy.spy()
 
     cy.mount(
@@ -153,7 +153,7 @@ describe('<DrawerLayout/>', () => {
     cy.wrap(onOverlayTrayChange).should('have.been.calledWith', false)
   })
 
-  it('the tray should be set to overlay when it is opened and there is not enough space', async () => {
+  it('the tray should be set to overlay when it is opened and there is not enough space', () => {
     const onOverlayTrayChange = cy.spy()
 
     cy.mount(
@@ -176,7 +176,7 @@ describe('<DrawerLayout/>', () => {
     cy.wrap(onOverlayTrayChange).should('have.been.calledWith', true)
   })
 
-  it('the tray should not overlay on open when there is enough space', async () => {
+  it('the tray should not overlay on open when there is enough space', () => {
     const onOverlayTrayChange = cy.spy()
 
     cy.mount(

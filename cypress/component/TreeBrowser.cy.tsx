@@ -38,7 +38,7 @@ const ITEMS_DATA = {
 }
 
 describe('<TreeBrowser/>', () => {
-  it('should persist the state of expanded children when parent collapsed', async () => {
+  it('should persist the state of expanded children when parent collapsed', () => {
     cy.mount(
       <TreeBrowser
         collections={COLLECTIONS_DATA}
@@ -69,7 +69,7 @@ describe('<TreeBrowser/>', () => {
     cy.get('[role="treeitem"]').should('have.length', 5)
   })
 
-  it('should not update expanded on click when set as explicit prop', async () => {
+  it('should not update expanded on click when set as explicit prop', () => {
     cy.mount(
       <TreeBrowser
         collections={COLLECTIONS_DATA}
@@ -100,7 +100,7 @@ describe('<TreeBrowser/>', () => {
     )
   })
 
-  it('should call onCollectionToggle on arrow key expansion or collapse', async () => {
+  it('should call onCollectionToggle on arrow key expansion or collapse', () => {
     const onCollectionToggle = cy.spy()
 
     cy.mount(
@@ -122,7 +122,7 @@ describe('<TreeBrowser/>', () => {
     cy.wrap(onCollectionToggle).should('have.been.calledTwice')
   })
 
-  it('should move focus with the up/down arrow keys', async () => {
+  it('should move focus with the up/down arrow keys', () => {
     cy.mount(
       <TreeBrowser
         collections={COLLECTIONS_DATA}
@@ -153,7 +153,7 @@ describe('<TreeBrowser/>', () => {
     cy.contains('[role="treeitem"]', 'Sub Root 1').should('be.focused')
   })
 
-  it('should move focus via keyboard shortcuts', async () => {
+  it('should move focus via keyboard shortcuts', () => {
     cy.mount(
       <TreeBrowser
         collections={COLLECTIONS_DATA}
@@ -184,7 +184,7 @@ describe('<TreeBrowser/>', () => {
     cy.contains('[role="treeitem"]', 'Sub Root 1').should('be.focused')
   })
 
-  it('should open collapsed collection with right arrow', async () => {
+  it('should open collapsed collection with right arrow', () => {
     cy.mount(
       <TreeBrowser
         collections={COLLECTIONS_DATA}
@@ -203,7 +203,7 @@ describe('<TreeBrowser/>', () => {
     cy.get('[role="treeitem"]').should('have.length', 4)
   })
 
-  it('should move focus down when right arrow is pressed on expanded collection', async () => {
+  it('should move focus down when right arrow is pressed on expanded collection', () => {
     cy.mount(
       <TreeBrowser
         collections={COLLECTIONS_DATA}
@@ -227,7 +227,7 @@ describe('<TreeBrowser/>', () => {
     cy.get('[role="treeitem"]').should('have.length', 4)
   })
 
-  it('should collapse expanded collection when left arrow is pressed', async () => {
+  it('should collapse expanded collection when left arrow is pressed', () => {
     cy.mount(
       <TreeBrowser
         collections={COLLECTIONS_DATA}
@@ -249,7 +249,7 @@ describe('<TreeBrowser/>', () => {
     cy.get('[role="treeitem"]').should('have.length', 1)
   })
 
-  it('should move focus up when left arrow is pressed on collapsed collection', async () => {
+  it('should move focus up when left arrow is pressed on collapsed collection', () => {
     cy.mount(
       <TreeBrowser
         collections={COLLECTIONS_DATA}
@@ -273,7 +273,7 @@ describe('<TreeBrowser/>', () => {
     cy.get('[role="treeitem"]').should('have.length', 4)
   })
 
-  it('should select the node on enter or space if selectionType is not "none"', async () => {
+  it('should select the node on enter or space if selectionType is not "none"', () => {
     cy.mount(
       <TreeBrowser
         collections={COLLECTIONS_DATA}
@@ -308,7 +308,7 @@ describe('<TreeBrowser/>', () => {
     )
   })
 
-  it('should not expand the node on enter or space if selectionType is not "none"', async () => {
+  it('should not expand the node on enter or space if selectionType is not "none"', () => {
     cy.mount(
       <TreeBrowser
         collections={COLLECTIONS_DATA}
@@ -328,7 +328,7 @@ describe('<TreeBrowser/>', () => {
     cy.get('[role="treeitem"]').should('have.length', 1)
   })
 
-  it('should move to the top node without expanding/collapsing anything when home is pressed', async () => {
+  it('should move to the top node without expanding/collapsing anything when home is pressed', () => {
     cy.mount(
       <TreeBrowser
         collections={COLLECTIONS_DATA}
@@ -353,7 +353,7 @@ describe('<TreeBrowser/>', () => {
     cy.get('[role="treeitem"]').should('have.length', 4)
   })
 
-  it('should move to the bottom node without expanding/collapsing anything when end is pressed', async () => {
+  it('should move to the bottom node without expanding/collapsing anything when end is pressed', () => {
     cy.mount(
       <TreeBrowser
         collections={COLLECTIONS_DATA}
@@ -376,7 +376,7 @@ describe('<TreeBrowser/>', () => {
   })
 
   describe('TreeNode', () => {
-    it('should take the selected CSS props if it is selected', async () => {
+    it('should take the selected CSS props if it is selected', () => {
       const pink = 'rgb(255, 0, 255)'
 
       cy.mount(
@@ -394,7 +394,7 @@ describe('<TreeBrowser/>', () => {
         .and('have.css', 'background-color', pink)
     })
 
-    it('should take the focused class if it is focused', async () => {
+    it('should take the focused class if it is focused', () => {
       cy.mount(
         <TreeNode id="1" focused={true}>
           <input />

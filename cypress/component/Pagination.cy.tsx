@@ -27,7 +27,7 @@ import '../support/component'
 import 'cypress-real-events'
 
 describe('<Pagination/>', () => {
-  it('should render no additional space when label text is hidden', async () => {
+  it('should render no additional space when label text is hidden', () => {
     cy.mount(
       <Pagination
         as="nav"

@@ -204,7 +204,7 @@ describe('<Popover/>', () => {
       })
   })
 
-  it('should close the popover via trigger before dismissing via documentClick', async () => {
+  it('should close the popover via trigger before dismissing via documentClick', () => {
     const hideContentFn = cy.spy()
     cy.mount(<PopoverContainer onHideFn={hideContentFn} />)
 
@@ -217,7 +217,7 @@ describe('<Popover/>', () => {
     cy.wrap(hideContentFn).should('have.been.calledWith', true)
   })
 
-  it('should call onHideContent when clicking outside', async () => {
+  it('should call onHideContent when clicking outside', () => {
     const hideContentFn = cy.spy()
 
     cy.mount(

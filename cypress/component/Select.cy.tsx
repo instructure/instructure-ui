@@ -84,7 +84,7 @@ const optionsWithAfterContent = [
 ]
 
 describe('<Select/>', () => {
-  it('should render dynamically colored icons before option', async () => {
+  it('should render dynamically colored icons before option', () => {
     const renderBeforeLabel = (props: any) => {
       return (
         <IconCheckSolid color={props.isHighlighted ? 'warning' : 'brand'} />
@@ -120,7 +120,7 @@ describe('<Select/>', () => {
       })
   })
 
-  it('should set maxHeight according to the visibleOptionsCount prop', async () => {
+  it('should set maxHeight according to the visibleOptionsCount prop', () => {
     cy.mount(
       <Select
         renderLabel="Choose an option"
@@ -137,7 +137,7 @@ describe('<Select/>', () => {
     })
   })
 
-  it('should override maxHeight with optionsMaxHeight, even if visibleOptionsCount is set', async () => {
+  it('should override maxHeight with optionsMaxHeight, even if visibleOptionsCount is set', () => {
     cy.mount(
       <Select
         renderLabel="Choose an option"
@@ -155,7 +155,7 @@ describe('<Select/>', () => {
     })
   })
 
-  it('should fire onRequestHighlightOption when up/down arrows are pressed', async () => {
+  it('should fire onRequestHighlightOption when up/down arrows are pressed', () => {
     const onRequestShowOptions = cy.spy()
     const onRequestHighlightOption = cy.spy()
 
@@ -259,7 +259,7 @@ describe('<Select/>', () => {
       .should('equal', defaultOptions[0])
   })
 
-  it('should fire onRequestHighlightOption when home/end is pressed', async () => {
+  it('should fire onRequestHighlightOption when home/end is pressed', () => {
     const onRequestHighlightOption = cy.spy()
 
     cy.mount(
@@ -299,7 +299,7 @@ describe('<Select/>', () => {
       .should('equal', defaultOptions[2])
   })
 
-  it('should fire onRequestHighlightOption when onRequestShowOptions is called with selected options', async () => {
+  it('should fire onRequestHighlightOption when onRequestShowOptions is called with selected options', () => {
     const onRequestHighlightOption = cy.spy()
 
     cy.mount(
@@ -317,7 +317,7 @@ describe('<Select/>', () => {
       .should('equal', defaultOptions[1])
   })
 
-  it('should fire onRequestSelectOption when enter is pressed', async () => {
+  it('should fire onRequestSelectOption when enter is pressed', () => {
     const onRequestSelectOption = cy.spy()
 
     cy.mount(
@@ -336,7 +336,7 @@ describe('<Select/>', () => {
       .should('equal', defaultOptions[1])
   })
 
-  it('should fire onRequestSelectOption when options are clicked', async () => {
+  it('should fire onRequestSelectOption when options are clicked', () => {
     const onRequestSelectOption = cy.spy()
 
     cy.mount(
@@ -355,7 +355,7 @@ describe('<Select/>', () => {
       .should('equal', defaultOptions[1])
   })
 
-  it('should fire onKeyDown while preserving default behavior', async () => {
+  it('should fire onKeyDown while preserving default behavior', () => {
     const onRequestHighlightOption = cy.spy()
     const onKeyDown = cy.spy()
 
@@ -377,7 +377,7 @@ describe('<Select/>', () => {
     cy.wrap(onKeyDown).should('have.been.calledTwice')
   })
 
-  it("should render the selected option's before content in the input field", async () => {
+  it("should render the selected option's before content in the input field", () => {
     const MyTestComponent = () => {
       const [selectedOptionId, setSelectedOptionId] = React.useState<string>(
         optionsWithBeforeContent[0].id
@@ -450,7 +450,7 @@ describe('<Select/>', () => {
     )
   })
 
-  it("should render the selected option's after content in the input field", async () => {
+  it("should render the selected option's after content in the input field", () => {
     const MyTestComponent = () => {
       const [selectedOptionId, setSelectedOptionId] = React.useState<string>(
         optionsWithAfterContent[0].id

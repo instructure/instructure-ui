@@ -36,7 +36,7 @@ const parentDefaults = {
 }
 
 describe('<Position/>', () => {
-  it('should render top stretched inside of target', async () => {
+  it('should render top stretched inside of target', () => {
     const onPositionChanged = cy.spy()
     cy.mount(
       <div style={{ padding: '50px' }}>
@@ -102,7 +102,7 @@ describe('<Position/>', () => {
       offset: number | string,
       assertion: (newContentRect: DOMRect, top: number, left: number) => void
     ) {
-      it(`should render offset for ${placement}`, async () => {
+      it(`should render offset for ${placement}`, () => {
         const onPositionChanged = cy.spy()
 
         cy.mount(

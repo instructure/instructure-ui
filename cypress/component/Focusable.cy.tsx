@@ -28,7 +28,7 @@ import '../support/component'
 import 'cypress-real-events'
 
 describe('<Focusable/>', () => {
-  it('should populate the focusVisible argument', async () => {
+  it('should populate the focusVisible argument', () => {
     const renderSpy = cy.spy()
 
     cy.mount(

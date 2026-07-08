@@ -28,7 +28,7 @@ import '../support/component'
 import 'cypress-real-events'
 
 describe('<NumberInput/>', () => {
-  it('focuses the input when up arrow spinbutton is clicked', async () => {
+  it('focuses the input when up arrow spinbutton is clicked', () => {
     cy.mount(<NumberInput renderLabel="Label" />)
 
     cy.get('input[class$="-numberInput_input"]').as('input')
@@ -48,7 +48,7 @@ describe('<NumberInput/>', () => {
     cy.get('@input').should('be.focused')
   })
 
-  it('focuses the input when down arrow spinbutton is clicked', async () => {
+  it('focuses the input when down arrow spinbutton is clicked', () => {
     cy.mount(<NumberInput renderLabel="Label" />)
 
     cy.get('input[class$="-numberInput_input"]').as('input')
@@ -68,7 +68,7 @@ describe('<NumberInput/>', () => {
     cy.get('@input').should('be.focused')
   })
 
-  it('calls onIncrement when up arrow key is pressed', async () => {
+  it('calls onIncrement when up arrow key is pressed', () => {
     const onIncrement = cy.stub()
     cy.mount(<NumberInput renderLabel="Label" onIncrement={onIncrement} />)
 
@@ -79,7 +79,7 @@ describe('<NumberInput/>', () => {
     cy.wrap(onIncrement).should('have.been.calledOnce')
   })
 
-  it('calls onDecrement when down arrow key is pressed', async () => {
+  it('calls onDecrement when down arrow key is pressed', () => {
     const onDecrement = cy.stub()
     cy.mount(<NumberInput renderLabel="Label" onDecrement={onDecrement} />)
 
