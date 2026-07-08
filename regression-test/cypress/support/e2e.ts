@@ -42,34 +42,8 @@ import './commands'
 
 import 'cypress-axe'
 
-function slugify(s: string) {
-  return s
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/(^-|-$)/g, '')
-}
-
-afterEach(function () {
-  const test = this.currentTest
-  // Capture the screenshot even when the test failed (e.g. an axe a11y
-  // violation). The a11y assertion still fails the run as a gate, but the
-  // page itself rendered fine, so we always want its visual baseline rather
-  // than a missing/blank image.
-  if (!test) return
-  const name = slugify(test.title)
-  cy.location('pathname', { log: false }).then((pagePath) => {
-    cy.task('recordMeta', { name, pagePath }, { log: false })
-  })
-  // Wait until web fonts have finished loading before capturing. Otherwise the
-  // screenshot can be taken mid-load, when text is still rendered in a fallback
-  // font with different metrics — producing inconsistent, flaky baselines.
-  cy.document({ log: false }).then((doc) => doc.fonts.ready)
-  cy.screenshot(name, {
-    capture: 'fullPage',
-    overwrite: true,
-    disableTimersAndAnimations: true
-  })
-})
+// Screenshots and meta recording are driven per-theme from the spec itself
+// (cypress/e2e/spec.cy.ts), so there is no global screenshot afterEach here.
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')

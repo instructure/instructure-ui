@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 'use client'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Inter } from 'next/font/google'
 // Self-host Lato so InstUI's `LatoWeb, Lato, ...` font stack resolves to a real,
 // bundled font in every environment. Without this the stack falls back to
@@ -34,23 +34,56 @@ import '@fontsource/lato/300.css'
 import '@fontsource/lato/400.css'
 import '@fontsource/lato/700.css'
 import './globals.css'
-import { InstUISettingsProvider, dark } from '@instructure/ui/latest'
+import {
+  InstUISettingsProvider,
+  canvas,
+  canvasHighContrast,
+  light,
+  dark
+} from '@instructure/ui/latest'
 
 const inter = Inter({ subsets: ['latin'] })
+
+// Themes the suite can render. The `?theme=` query param selects one; the
+// visual regression spec drives a screenshot per theme via that param.
+const themes = {
+  canvas,
+  'canvas-high-contrast': canvasHighContrast,
+  light,
+  dark
+}
+
+type ThemeKey = keyof typeof themes
 
 export default function RootLayout({
   children
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  // Render `canvas` on the server and for the first client paint so the static
+  // export and hydration agree, then switch to the requested theme in an effect.
+  // Switching after mount (rather than during render) avoids a hydration
+  // mismatch; the `data-theme` attribute lets the spec wait until the requested
+  // theme is actually applied before screenshotting.
+  const [themeKey, setThemeKey] = useState<ThemeKey>('canvas')
+  useEffect(() => {
+    const requested = new URLSearchParams(window.location.search).get('theme')
+    if (requested && requested in themes) {
+      setThemeKey(requested as ThemeKey)
+    }
+  }, [])
+
   return (
     // we need to make a new Map to reset counting on the server side
     // on each page refresh TODO fix
-    <html lang="en">
+    <html lang="en" data-theme={themeKey}>
       <head>
         <title>Component visual and regression test suite</title>
       </head>
-      <InstUISettingsProvider theme={dark} instanceCounterMap={new Map()}>
+      <InstUISettingsProvider
+        theme={themes[themeKey]}
+        instanceCounterMap={new Map()}
+      >
         <body className={inter.className}>{children}</body>
       </InstUISettingsProvider>
     </html>
