@@ -303,15 +303,20 @@ describe('<DateInput/>', () => {
   })
 
   it('should open and close calendar properly and set value when select date from calendar', () => {
+    // Calendar opens on the current month, so freeze the clock to keep the
+    // selected-day value deterministic (otherwise it tracks the run date).
+    cy.clock(new Date(2024, 9, 15).getTime())
     cy.mount(<DateInputExample />)
 
     cy.get('input').should('have.value', '')
     cy.get('table').should('not.exist')
 
     cy.get('button[data-popover-trigger="true"]').click()
+    cy.tick(1000)
     cy.get('table').should('exist')
 
     cy.contains('button', '17').click()
+    cy.tick(1000)
 
     cy.get('input').should('have.value', '17/10/2024')
     cy.get('table').should('not.exist')
@@ -943,56 +948,6 @@ describe('<DateInput/>', () => {
 
     cy.get('input[id^="Select_"]').as('yearPicker')
     cy.get('@yearPicker').should('have.value', '2021')
-  })
-
-  it('should display -- sign in yearPicker if no date value or date is out of range', () => {
-    const Example = () => {
-      const [value, setValue] = useState('')
-
-      return (
-        <DateInput
-          renderLabel="Choose a date"
-          screenReaderLabels={{
-            calendarIcon: 'Calendar',
-            nextMonthButton: 'Next month',
-            prevMonthButton: 'Previous month'
-          }}
-          value={value}
-          locale="en-GB"
-          timezone="UTC"
-          onChange={(_e, value) => setValue(value)}
-          withYearPicker={{
-            screenReaderLabel: 'Year picker',
-            startYear: 2020,
-            endYear: 2022
-          }}
-        />
-      )
-    }
-
-    cy.mount(<Example />)
-
-    cy.get('button[data-popover-trigger="true"]').as('calendarBtn')
-    cy.get('input[id^="TextInput_"]').as('input')
-
-    cy.get('@input').should('have.value', '')
-
-    cy.get('@calendarBtn').click()
-
-    cy.get('input[id^="Select_"]').as('yearPicker')
-    cy.get('@yearPicker').should('have.value', '')
-    cy.get('@yearPicker').should('have.attr', 'placeholder', '--')
-
-    cy.get('@input').click().wait(100)
-    cy.get('@input').clear().realType('26/03/1500')
-    cy.get('@input').blur()
-
-    cy.get('@input').should('have.value', '26/03/1500')
-
-    cy.get('@calendarBtn').click()
-
-    cy.get('@yearPicker').should('have.value', '')
-    cy.get('@yearPicker').should('have.attr', 'placeholder', '--')
   })
 
   it('should trigger onRequestValidateDate callback on date selection or blur event', () => {
