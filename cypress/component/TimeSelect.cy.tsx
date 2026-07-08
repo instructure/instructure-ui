@@ -57,16 +57,16 @@ describe('<TimeSelect/>', () => {
 
     cy.get('ul[class$="-options__list"]').should('be.visible')
     cy.get('li[class$="-optionItem"]').eq(0).as('option1')
-    cy.get('@option1').should('have.text', '00:00')
+    cy.get('@option1').should('have.text', '12:00 AM')
 
     cy.get('@option1').click()
 
-    cy.get('@input').should('have.value', '00:00')
+    cy.get('@input').should('have.value', '12:00 AM')
     cy.wrap(onChange)
       .should('have.been.called')
       .then((spy) => {
         expect(spy.lastCall.args[1]).to.have.property('value')
-        expect(spy.lastCall.args[1]).to.have.property('inputText', '00:00')
+        expect(spy.lastCall.args[1]).to.have.property('inputText', '12:00 AM')
       })
   })
 
@@ -111,7 +111,7 @@ describe('<TimeSelect/>', () => {
 
     cy.get('@option1').click()
 
-    cy.get('@input').should('have.value', '00:00')
+    cy.get('@input').should('have.value', '12:00 AM')
   })
 
   it('should behave controlled', () => {
@@ -130,7 +130,7 @@ describe('<TimeSelect/>', () => {
       />
     )
     cy.get('input[id^="Select_"]').as('input')
-    cy.get('@input').should('have.value', '01:00')
+    cy.get('@input').should('have.value', '1:00 AM')
 
     cy.get('@input').click()
 
@@ -143,7 +143,7 @@ describe('<TimeSelect/>', () => {
 
     cy.get('@option5').click()
 
-    cy.get('@input').should('have.value', '01:00') // not changed because it's hardcoded
+    cy.get('@input').should('have.value', '1:00 AM') // not changed because it's hardcoded
     cy.wrap(onChange)
       .should('have.been.called')
       .then((spy) => {
@@ -226,7 +226,7 @@ describe('<TimeSelect/>', () => {
       />
     )
     cy.get('input[id^="Select_"]').as('input')
-    cy.get('@input').should('have.value', '13:30')
+    cy.get('@input').should('have.value', '1:30 PM')
 
     const newDateStr = '2022-03-29T19:00Z'
     const newDateTime = DateTime.parse(newDateStr, locale, timezone)
@@ -240,7 +240,7 @@ describe('<TimeSelect/>', () => {
       />
     )
     cy.get('input[id^="Select_"]').as('input2')
-    cy.get('@input2').should('have.value', '15:00')
+    cy.get('@input2').should('have.value', '3:00 PM')
   })
 
   it('should accept values that are not divisible by step', () => {
@@ -272,7 +272,7 @@ describe('<TimeSelect/>', () => {
         value={value.toISOString()}
       />
     )
-    cy.get('@input').should('have.attr', 'value', '01:02')
+    cy.get('@input').should('have.attr', 'value', '1:02 AM')
   })
 
   it('should use the specified step value', () => {
@@ -294,12 +294,12 @@ describe('<TimeSelect/>', () => {
 
     cy.get('@input').click()
 
-    cy.get('@input').should('have.value', '14:00')
+    cy.get('@input').should('have.value', '2:00 PM')
 
     cy.get('li[class$="-optionItem"]').eq(0).as('option1')
     cy.get('li[class$="-optionItem"]').eq(1).as('option2')
-    cy.get('@option1').should('have.text', '00:00')
-    cy.get('@option2').should('have.text', '00:15')
+    cy.get('@option1').should('have.text', '12:00 AM')
+    cy.get('@option2').should('have.text', '12:15 AM')
   })
 
   it('should not allow non-step value when allowNonStepInput=false', () => {
@@ -362,7 +362,10 @@ describe('<TimeSelect/>', () => {
     cy.get('input[id^="Select_"]').as('input')
     cy.get('@input').should('have.value', '')
 
-    cy.get('@input').realClick().realType('04:45:55 AM')
+    // Hour must not be zero-padded: `format="LTS"` is `h:mm:ss A` (single `h`)
+    // and the input is parsed in moment strict mode, so `04:...` would be
+    // rejected and cleared on blur. See INSTUI leading-zero note.
+    cy.get('@input').realClick().realType('4:45:55 AM')
     cy.get('@input').blur() // sends onChange event
 
     cy.get('@input').should('have.value', '4:45:00 AM')

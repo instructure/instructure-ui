@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+import React from 'react'
 import { Select } from '@instructure/ui/latest'
 import { IconCheckSolid, IconEyeSolid } from '@instructure/ui-icons'
 import 'cypress-real-events'
@@ -169,7 +170,8 @@ describe('<Select/>', () => {
       </Select>
     )
 
-    cy.get('input').realPress('ArrowDown')
+    cy.get('input').focus()
+    cy.realPress('ArrowDown')
     cy.wrap(onRequestShowOptions).should('have.been.calledOnce')
     cy.wrap(onRequestHighlightOption).should('not.have.been.called')
 
@@ -185,9 +187,10 @@ describe('<Select/>', () => {
       </Select>
     )
 
-    cy.get('input').realPress('ArrowDown')
+    cy.get('input').focus()
+    cy.realPress('ArrowDown')
     cy.wrap(onRequestHighlightOption)
-      .its('lastCall.args.0.id')
+      .its('lastCall.args.1.id')
       .should('equal', defaultOptions[0])
 
     // Set prop children
@@ -202,7 +205,8 @@ describe('<Select/>', () => {
       </Select>
     )
 
-    cy.get('input').realPress('ArrowDown')
+    cy.get('input').focus()
+    cy.realPress('ArrowDown')
     cy.wrap(onRequestHighlightOption)
       .its('lastCall.args.1.id')
       .should('equal', defaultOptions[1])
@@ -219,7 +223,8 @@ describe('<Select/>', () => {
       </Select>
     )
 
-    cy.get('input').realPress('ArrowUp')
+    cy.get('input').focus()
+    cy.realPress('ArrowUp')
     cy.wrap(onRequestHighlightOption)
       .its('lastCall.args.1.id')
       .should('equal', defaultOptions[0])
@@ -236,7 +241,8 @@ describe('<Select/>', () => {
       </Select>
     )
 
-    cy.get('input').realPress('ArrowDown')
+    cy.get('input').focus()
+    cy.realPress('ArrowDown')
     cy.wrap(onRequestHighlightOption)
       .its('lastCall.args.1.id')
       .should('equal', defaultOptions[2])
@@ -253,7 +259,8 @@ describe('<Select/>', () => {
       </Select>
     )
 
-    cy.get('input').realPress('ArrowUp')
+    cy.get('input').focus()
+    cy.realPress('ArrowUp')
     cy.wrap(onRequestHighlightOption)
       .its('lastCall.args.1.id')
       .should('equal', defaultOptions[0])
@@ -272,12 +279,14 @@ describe('<Select/>', () => {
       </Select>
     )
 
-    cy.get('input').realPress('Home')
+    cy.get('input').focus()
+    cy.realPress('Home')
     cy.wrap(onRequestHighlightOption)
       .its('lastCall.args.1.id')
       .should('equal', defaultOptions[0])
 
-    cy.get('input').realPress('End')
+    cy.get('input').focus()
+    cy.realPress('End')
     cy.wrap(onRequestHighlightOption)
       .its('lastCall.args.1.id')
       .should('equal', defaultOptions[2])
@@ -293,10 +302,13 @@ describe('<Select/>', () => {
       </Select>
     )
 
-    cy.get('input').realPress('End')
+    cy.get('input').focus()
+    cy.realPress('End')
+    // `baz` (defaultOptions[2]) is disabled here, so End highlights the last
+    // *enabled* option, `bar` (defaultOptions[1]).
     cy.wrap(onRequestHighlightOption)
       .its('lastCall.args.1.id')
-      .should('equal', defaultOptions[2])
+      .should('equal', defaultOptions[1])
   })
 
   it('should fire onRequestHighlightOption when onRequestShowOptions is called with selected options', () => {
@@ -330,7 +342,8 @@ describe('<Select/>', () => {
       </Select>
     )
 
-    cy.get('input').realPress('Enter')
+    cy.get('input').focus()
+    cy.realPress('Enter')
     cy.wrap(onRequestSelectOption)
       .its('lastCall.args.1.id')
       .should('equal', defaultOptions[1])
@@ -370,8 +383,10 @@ describe('<Select/>', () => {
       </Select>
     )
 
-    cy.get('input').realPress('ArrowDown')
-    cy.get('input').realPress('a')
+    cy.get('input').focus()
+    cy.realPress('ArrowDown')
+    cy.get('input').focus()
+    cy.realPress('a')
 
     cy.wrap(onRequestHighlightOption).should('have.been.calledOnce')
     cy.wrap(onKeyDown).should('have.been.calledTwice')

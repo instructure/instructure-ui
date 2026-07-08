@@ -68,12 +68,15 @@ const exampleTheme: Theme = {
   }
 }
 
-const generateComponentTheme = function (theme: Theme): ComponentTheme {
-  const { colors } = theme
+// `useStyleNew` calls this with `{ primitives, semantics, sharedTokens }` (the
+// new theming system), not the legacy `{ colors: { contrasts } }` shape. This
+// test only asserts the bi-directional polyfill, so the color values are
+// arbitrary — return them statically rather than reading a removed theme shape.
+const generateComponentTheme = function (): ComponentTheme {
   return {
-    textColor: colors.contrasts.grey1111,
-    textColorInverse: colors.contrasts.green4570,
-    backgroundColor: colors.contrasts.blue4570
+    textColor: grey1111,
+    textColorInverse: green4570,
+    backgroundColor: blue4570
   }
 }
 
