@@ -85,6 +85,7 @@ jobs:
           --pr-url ${{ github.event.pull_request.html_url }}
           --meta cypress/meta.json
           --source-base-url https://github.com/${{ github.repository }}/blob/${{ github.head_ref }}/regression-test/src/app
+          --facets canvas,light,dark
         continue-on-error: true
 
       - name: Publish report to gh-pages
