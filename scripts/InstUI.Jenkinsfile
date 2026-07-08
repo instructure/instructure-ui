@@ -120,7 +120,7 @@ def isChangeRelevant(String projectUrl, String refSpec, String docFolder) {
     sh "mkdir -p ${tempDir}"
 
     echo "Cloning ${projectUrl} with refspec: ${refSpec}. Checking for changes in ${docFolder} folder"
-    withCredentials([gitUsernamePassword(credentialsId: 'github-api-credentials', gitToolName: 'git-tool')]) {
+    withCredentials([gitUsernamePassword(credentialsId: 'instructure-jenkins-instructure-org', gitToolName: 'git-tool')]) {
         sh "git clone ${projectUrl} ${tempDir} && cd ${tempDir} && git checkout ${refSpec}"
     }
 
