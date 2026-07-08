@@ -160,6 +160,14 @@ describe('<DrilldownOption/>', () => {
         </Drilldown.Page>
       </Drilldown>
     )
+    // Prior tests navigate to `#helloWorld` and the URL hash persists across
+    // tests; clear it so this test truly verifies the disabled option does not
+    // navigate (rather than passing/failing on leftover state).
+    cy.window().then((win) => {
+      const { location } = win
+      location.hash = ''
+    })
+
     cy.get('#option1').realClick()
 
     cy.url().should('not.include', '#helloWorld')

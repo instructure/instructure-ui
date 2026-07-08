@@ -399,10 +399,7 @@ describe('<DateInput/>', () => {
     cy.get('thead th')
       .eq(2)
       .within(() => {
-        cy.get('.plugin-cache-1sr5vj2-screenReaderContent').should(
-          'have.text',
-          'mercredi'
-        )
+        cy.get('[class*="screenReaderContent"]').should('have.text', 'mercredi')
         cy.get('[aria-hidden="true"]').should('have.text', 'me')
       })
 
@@ -441,10 +438,7 @@ describe('<DateInput/>', () => {
     cy.get('thead th')
       .eq(2)
       .within(() => {
-        cy.get('.plugin-cache-1sr5vj2-screenReaderContent').should(
-          'have.text',
-          'szerda'
-        )
+        cy.get('[class*="screenReaderContent"]').should('have.text', 'szerda')
         cy.get('[aria-hidden="true"]').should('have.text', 'sze')
       })
 
