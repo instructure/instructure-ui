@@ -51,7 +51,11 @@ function slugify(s: string) {
 
 afterEach(function () {
   const test = this.currentTest
-  if (!test || test.state === 'failed') return
+  // Capture the screenshot even when the test failed (e.g. an axe a11y
+  // violation). The a11y assertion still fails the run as a gate, but the
+  // page itself rendered fine, so we always want its visual baseline rather
+  // than a missing/blank image.
+  if (!test) return
   const name = slugify(test.title)
   cy.location('pathname', { log: false }).then((pagePath) => {
     cy.task('recordMeta', { name, pagePath }, { log: false })
