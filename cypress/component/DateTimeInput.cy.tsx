@@ -312,7 +312,7 @@ describe('<DateInput/>', () => {
     cy.get('input[id^="TextInput_"]').as('dateInput')
     cy.get('input[id^="Select_"]').as('timeInput')
 
-    cy.get('@dateInput').clear().type(`May 1, 2017{enter}`)
+    cy.get('@dateInput').clear().type(`May 1, 2017`).blur()
 
     cy.get('@timeInput').should('have.value', '5:05 AM')
   })
