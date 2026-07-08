@@ -1,0 +1,10 @@
+{
+  "name": "instui",
+  "description": "Claude Code tooling for Instructure UI (InstUI) — starting with documentation lookup from instructure.design's plaintext docs.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Instructure",
+    "url": "https://instructure.design"
+  },
+  "homepage": "https://instructure.design"
+}

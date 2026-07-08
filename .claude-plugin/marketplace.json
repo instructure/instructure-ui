@@ -1,0 +1,18 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "instructure-ui",
+  "description": "Claude Code plugins for working with Instructure UI (InstUI).",
+  "owner": {
+    "name": "Instructure",
+    "url": "https://instructure.design"
+  },
+  "plugins": [
+    {
+      "name": "instui",
+      "description": "Claude Code tooling for Instructure UI (InstUI) — starting with documentation lookup from instructure.design's plaintext docs.",
+      "source": "./plugins/instui",
+      "category": "documentation",
+      "homepage": "https://instructure.design"
+    }
+  ]
+}
