@@ -6,6 +6,8 @@ A small Next.js app that imports `@instructure/ui` locally and exposes one page 
 - **Detect a11y issues** — axe-core runs against every page.
 - **Detect unexpected console errors** — the spec's `afterEach` hook asserts `console.error` was not called.
 
+Each page is captured once **per theme** (`canvas`, `light`, `dark`), so screenshots are named `<slug>-<theme>.png`. The theme is selected with the `?theme=<key>` query param, which `src/app/layout.tsx` reads and applies via `InstUISettingsProvider`. Add or remove themes with the `THEMES` array in `cypress/e2e/spec.cy.ts` (this multiplies the screenshot/baseline count).
+
 See the [visual regression testing guide](../docs/testing/visual-regression.md) for the full CI pipeline, the diff report UI, and tuning notes.
 
 ## Why npm instead of pnpm?
@@ -41,6 +43,7 @@ Run the Cypress suite against the running server:
 ## Adding a new component
 
 1. Create `src/app/<component-name>/page.tsx`. Start the file with `'use client'` and wrap the rendered markup in an element with the `axe-test` class — that's what the axe-core check selects against.
-2. Add a corresponding `it(...)` block in `cypress/e2e/spec.cy.ts` that visits `http://localhost:3000/<component-name>`, calls `cy.injectAxe()`, and `cy.checkA11y('.axe-test', axeOptions, terminalLog)`.
-3. If the component animates or loads content asynchronously, add a `cy.wait(<ms>)` before `injectAxe()`.
-4. Commit and push. The first PR run will show the new screenshot as "New"; merging the PR promotes it to a baseline automatically.
+2. Add an entry to the `PAGES` array in `cypress/e2e/spec.cy.ts` with the page's `slug` and a human-readable `title`. The suite generates the visit, per-theme screenshots, and the axe check for you.
+   - If the component animates or loads content asynchronously, set `wait: <ms>`.
+   - If the page has a known a11y issue, set `a11y: false` with an `a11ySkipReason` (ticket or short note) until it's fixed.
+3. Commit and push. The first PR run will show the new screenshots (one per theme) as "New"; merging the PR promotes them to baselines automatically.

@@ -72,219 +72,144 @@ const axeOptions: { runOnly: RunOnly } = {
   }
 }
 
+const BASE_URL = 'http://localhost:3000'
+
+// Themes to capture. Each page is screenshotted once per theme (see the
+// `?theme=` handling in src/app/layout.tsx). Adding a theme here multiplies the
+// screenshot/baseline count by one.
+const THEMES = ['canvas', 'light', 'dark'] as const
+
+type PageSpec = {
+  // URL segment and page directory under src/app/<slug>/page.tsx
+  slug: string
+  // Human-readable Cypress test title
+  title: string
+  // Extra settle time (ms) for pages with async/animated content
+  wait?: number
+  // Run the axe a11y check for this page (default true). Some pages have known
+  // issues tracked separately and opt out until fixed.
+  a11y?: boolean
+  // Reason/ticket for skipping a11y, for the record
+  a11ySkipReason?: string
+}
+
+const PAGES: PageSpec[] = [
+  { slug: 'small-components', title: 'Metric, Pill, Tag, TimeSelect, Text' },
+  { slug: 'alert', title: 'Alert' },
+  { slug: 'avatar', title: 'Avatar', wait: 300 },
+  { slug: 'badge', title: 'Badge' },
+  { slug: 'billboard', title: 'Billboard' },
+  {
+    slug: 'breadcrumb',
+    title: 'Breadcrumb',
+    wait: 300,
+    a11y: false,
+    a11ySkipReason: 'INSTUI-4676'
+  },
+  { slug: 'button', title: 'Button and derivatives', wait: 100 },
+  { slug: 'byline', title: 'Byline' },
+  { slug: 'calendar', title: 'Calendar' },
+  { slug: 'checkbox', title: 'Checkbox', wait: 100 },
+  { slug: 'checkboxgroup', title: 'Checkboxgroup', wait: 300 },
+  {
+    slug: 'colorpicker',
+    title: 'ColorPicker',
+    wait: 300,
+    a11y: false,
+    a11ySkipReason:
+      'ColorMixer ARIA violations (aria-allowed-attr, aria-prohibited-attr)'
+  },
+  { slug: 'contextview', title: 'Contextview' },
+  { slug: 'custom-icons', title: 'Custom and Lucide icons' },
+  { slug: 'dateinput', title: 'Dateinput, DateInput2', wait: 400 },
+  { slug: 'datetimeinput', title: 'DateTimeInput', wait: 400 },
+  { slug: 'drilldown', title: 'Drilldown', wait: 300 },
+  { slug: 'filedrop', title: 'Filedrop' },
+  { slug: 'form-errors', title: 'Form errors', wait: 300 },
+  { slug: 'heading', title: 'Heading' },
+  { slug: 'img', title: 'Img', wait: 100 },
+  { slug: 'link', title: 'Link' },
+  {
+    slug: 'menu',
+    title: 'Menu',
+    wait: 300,
+    a11y: false,
+    a11ySkipReason: 'INSTUI-4677'
+  },
+  { slug: 'options', title: 'Options' },
+  { slug: 'pagination', title: 'Pagination', wait: 400 },
+  { slug: 'progressbar', title: 'Progressbar' },
+  { slug: 'select', title: 'Select, SimpleSelect', wait: 300 },
+  { slug: 'table', title: 'Table' },
+  { slug: 'tabs', title: 'Tabs' },
+  { slug: 'tooltip', title: 'Tooltip', wait: 300 },
+  {
+    slug: 'treebrowser',
+    title: 'TreeBrowser',
+    wait: 1000,
+    a11y: false,
+    a11ySkipReason: 'axe color-contrast failures; animations'
+  },
+  { slug: 'view', title: 'View' }
+]
+
+const SCREENSHOT_OPTIONS = {
+  capture: 'fullPage',
+  overwrite: true,
+  disableTimersAndAnimations: true
+} as const
+
 describe('visual regression test', () => {
-  it('Metric, Pill, Tag, TimeSelect, Text', () => {
-    cy.visit('http://localhost:3000/small-components')
-    cy.injectAxe()
-    cy.checkA11y('.axe-test', axeOptions, terminalLog)
-  })
+  PAGES.forEach(({ slug, title, wait, a11y = true }) => {
+    it(title, () => {
+      // Track a11y violations across all themes so a violation in one theme does
+      // not abort the others (skipFailures below). We assert the total at the end
+      // to keep a11y as a gate while still capturing every screenshot.
+      let violationCount = 0
 
-  it('Alert', () => {
-    cy.visit('http://localhost:3000/alert')
-    cy.injectAxe()
-    cy.checkA11y('.axe-test', axeOptions, terminalLog)
-  })
+      THEMES.forEach((theme) => {
+        cy.visit(`${BASE_URL}/${slug}?theme=${theme}`)
+        // Wait until the requested theme has actually been applied before doing
+        // anything else (layout.tsx sets data-theme in an effect after mount).
+        cy.get(`html[data-theme="${theme}"]`)
+        if (wait) {
+          cy.wait(wait)
+        }
 
-  it('Avatar', () => {
-    cy.visit('http://localhost:3000/avatar')
-    cy.wait(300) // images render a frame later, Chromatic needs a bit more delay
-    cy.injectAxe()
-    cy.checkA11y('.axe-test', axeOptions, terminalLog)
-  })
+        const name = `${slug}-${theme}`
+        cy.task('recordMeta', { name, pagePath: `/${slug}` }, { log: false })
+        // Wait until web fonts have finished loading before capturing. Otherwise
+        // the screenshot can be taken mid-load, when text is still rendered in a
+        // fallback font with different metrics — producing inconsistent, flaky
+        // baselines.
+        cy.document({ log: false }).then((doc) => doc.fonts.ready)
+        // Screenshot BEFORE the a11y check so an a11y failure can never leave a
+        // page without a visual baseline.
+        cy.screenshot(name, SCREENSHOT_OPTIONS)
 
-  it('Badge', () => {
-    cy.visit('http://localhost:3000/badge')
-    cy.injectAxe()
-    cy.checkA11y('.axe-test', axeOptions, terminalLog)
-  })
+        if (a11y) {
+          cy.injectAxe()
+          cy.checkA11y(
+            '.axe-test',
+            axeOptions,
+            (violations) => {
+              terminalLog(violations)
+              violationCount += violations.length
+            },
+            // skipFailures: don't throw here — collect and assert once at the end
+            true
+          )
+        }
+      })
 
-  it('Billboard', () => {
-    cy.visit('http://localhost:3000/billboard')
-    cy.injectAxe()
-    cy.checkA11y('.axe-test', axeOptions, terminalLog)
-  })
-
-  it('Breadcrumb', () => {
-    cy.visit('http://localhost:3000/breadcrumb')
-    cy.wait(300) // wait for text to be truncated
-    //TODO There are a11y issues, fix INSTUI-4676 before uncommenting
-    //cy.injectAxe()
-    //cy.checkA11y('.axe-test', axeOptions, terminalLog)
-  })
-
-  it('Button and derivatives', () => {
-    cy.visit('http://localhost:3000/button')
-    cy.wait(100)
-    cy.injectAxe()
-    cy.checkA11y('.axe-test', axeOptions, terminalLog)
-  })
-
-  it('Byline', () => {
-    cy.visit('http://localhost:3000/byline')
-    cy.injectAxe()
-    cy.checkA11y('.axe-test', axeOptions, terminalLog)
-  })
-
-  it('Calendar', () => {
-    cy.visit('http://localhost:3000/calendar')
-    cy.injectAxe()
-    cy.checkA11y('.axe-test', axeOptions, terminalLog)
-  })
-
-  it('Checkbox', () => {
-    cy.visit('http://localhost:3000/checkbox')
-    cy.wait(100) // needed so checkbox dont trigger axe check fails
-    cy.injectAxe()
-    cy.checkA11y('.axe-test', axeOptions, terminalLog)
-  })
-
-  it('Checkboxgroup', () => {
-    cy.visit('http://localhost:3000/checkboxgroup')
-    cy.wait(300)
-    cy.injectAxe()
-    cy.checkA11y('.axe-test', axeOptions, terminalLog)
-  })
-
-  it('ColorPicker', () => {
-    cy.visit('http://localhost:3000/colorpicker')
-    cy.wait(300)
-    cy.injectAxe()
-    // TODO: Fix ARIA violations before enabling a11y check
-    // - aria-allowed-attr (critical): 1 node
-    // - aria-prohibited-attr (serious): 3 nodes
-    // ColorMixer has aria-disabled on plain div without proper role
-    // cy.checkA11y('.axe-test', axeOptions, terminalLog)
-  })
-
-  it('Contextview', () => {
-    cy.visit('http://localhost:3000/contextview')
-    cy.injectAxe()
-    cy.checkA11y('.axe-test', axeOptions, terminalLog)
-  })
-
-  it('Custom and Lucide icons', () => {
-    cy.visit('http://localhost:3000/custom-icons')
-    cy.injectAxe()
-    cy.checkA11y('.axe-test', axeOptions, terminalLog)
-  })
-
-  it('Dateinput, DateInput2', () => {
-    cy.visit('http://localhost:3000/dateinput')
-    cy.wait(400)
-    cy.injectAxe()
-    cy.checkA11y('.axe-test', axeOptions, terminalLog)
-  })
-
-  it('DateTimeInput', () => {
-    cy.visit('http://localhost:3000/datetimeinput')
-    cy.wait(400)
-    cy.injectAxe()
-    cy.checkA11y('.axe-test', axeOptions, terminalLog)
-  })
-
-  it('Drilldown', () => {
-    cy.visit('http://localhost:3000/drilldown')
-    cy.wait(300) // Drilldown dropdown renders a frame later, Chromatic needs a bit more delay
-    cy.injectAxe()
-    cy.checkA11y('.axe-test', axeOptions, terminalLog)
-  })
-
-  it('Filedrop', () => {
-    cy.visit('http://localhost:3000/filedrop')
-    cy.injectAxe()
-    cy.checkA11y('.axe-test', axeOptions, terminalLog)
-  })
-
-  it('Form errors', () => {
-    cy.visit('http://localhost:3000/form-errors')
-    cy.wait(300)
-    cy.injectAxe()
-    cy.checkA11y('.axe-test', axeOptions, terminalLog)
-  })
-
-  it('Heading', () => {
-    cy.visit('http://localhost:3000/heading')
-    cy.injectAxe()
-    cy.checkA11y('.axe-test', axeOptions, terminalLog)
-  })
-
-  it('Img', () => {
-    cy.visit('http://localhost:3000/img')
-    cy.wait(100) // images may render a frame later
-    cy.injectAxe()
-    cy.checkA11y('.axe-test', axeOptions, terminalLog)
-  })
-
-  it('Link', () => {
-    cy.visit('http://localhost:3000/link')
-    cy.injectAxe()
-    cy.checkA11y('.axe-test', axeOptions, terminalLog)
-  })
-
-  it('Menu', () => {
-    cy.visit('http://localhost:3000/menu')
-    cy.wait(300)
-    // TODO Fix INSTUI-4677 before enabling this
-    //cy.injectAxe()
-    //cy.checkA11y('.axe-test', axeOptions, terminalLog)
-  })
-
-  it('Options', () => {
-    cy.visit('http://localhost:3000/options')
-    cy.injectAxe()
-    cy.checkA11y('.axe-test', axeOptions, terminalLog)
-  })
-
-  it('Pagination', () => {
-    cy.visit('http://localhost:3000/pagination')
-    cy.wait(400) // needed so tooltips dont trigger axe check fails
-    cy.injectAxe()
-    cy.checkA11y('.axe-test', axeOptions, terminalLog)
-  })
-
-  it('Progressbar', () => {
-    cy.visit('http://localhost:3000/progressbar')
-    cy.injectAxe()
-    cy.checkA11y('.axe-test', axeOptions, terminalLog)
-  })
-
-  it('Select, SimpleSelect', () => {
-    cy.visit('http://localhost:3000/select')
-    cy.wait(300)
-    cy.injectAxe()
-    cy.checkA11y('.axe-test', axeOptions, terminalLog)
-  })
-
-  it('Table', () => {
-    cy.visit('http://localhost:3000/table')
-    cy.injectAxe()
-    cy.checkA11y('.axe-test', axeOptions, terminalLog)
-  })
-
-  it('Tabs', () => {
-    cy.visit('http://localhost:3000/tabs')
-    cy.injectAxe()
-    cy.checkA11y('.axe-test', axeOptions, terminalLog)
-  })
-
-  it('Tooltip', () => {
-    cy.visit('http://localhost:3000/tooltip')
-    cy.wait(300) // tooltips render a frame later, Chromatic needs a bit more delay
-    cy.injectAxe()
-    cy.checkA11y('.axe-test', axeOptions, terminalLog)
-  })
-
-  it('TreeBrowser', () => {
-    cy.visit('http://localhost:3000/treebrowser')
-    cy.wait(1000) // large timeout is needed for CI (to finish animation?)
-    // TODO axe fails with color contrast issues, try to remove animations from TreeBrowser
-    //cy.injectAxe()
-    //cy.checkA11y('.axe-test', axeOptions, terminalLog)
-  })
-
-  it('View', () => {
-    cy.visit('http://localhost:3000/view')
-    cy.injectAxe()
-    cy.checkA11y('.axe-test', axeOptions, terminalLog)
+      if (a11y) {
+        cy.then(() => {
+          expect(
+            violationCount,
+            'total a11y violations across themes'
+          ).to.equal(0)
+        })
+      }
+    })
   })
 })
