@@ -43,7 +43,6 @@ const generateStyle = (
   props: OptionsItemProps
 ): OptionsItemStyle => {
   const {
-    variant,
     children,
     renderBeforeLabel: hasContentBeforeLabel,
     renderAfterLabel: hasContentAfterLabel,
@@ -106,6 +105,20 @@ const generateStyle = (
 
   const linkStyles = { textDecoration: 'none', color: 'currentColor' }
 
+  // Apply the variant-dependent styles through a static `data-variant` attribute
+  // selector. This keeps the generated Emotion class STABLE across variant changes,
+  // no longer triggers a re-render (swap the highlight class)
+  // which made VoiceOver restart the option announcement. See INSTUI-5082.
+  const dataVariantSelectors = (extra: Record<string, unknown> = {}) =>
+    Object.fromEntries(
+      (Object.keys(variantVariants) as (keyof typeof variantVariants)[]).map(
+        (key): [string, object] => [
+          `&[data-variant="${key}"]`,
+          { ...variantVariants[key], ...extra }
+        ]
+      )
+    )
+
   return {
     item: {
       label: 'optionItem',
@@ -122,7 +135,7 @@ const generateStyle = (
       outline: 'none',
       position: 'relative',
       userSelect: 'none',
-      ...variantVariants[variant!],
+      ...dataVariantSelectors(),
       ...(containsList && { cursor: 'default' }),
 
       // for nested items
@@ -195,9 +208,9 @@ const generateStyle = (
       fontSize: componentTheme.descriptionFontSize,
       lineHeight: componentTheme.descriptionLineHeight,
       color: componentTheme.descriptionColor,
+      background: 'none', // needed to clear variant background
 
-      ...variantVariants[variant!],
-      background: 'none' // needed to clear variant background
+      ...dataVariantSelectors({ background: 'none' })
     }
   }
 }

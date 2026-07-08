@@ -572,6 +572,39 @@ describe('<Select />', () => {
       expect(input).not.toHaveAttribute('aria-activedescendant')
     })
 
+    // a11y issue: When the highlight moved, the option's <li role="none"> ancestor
+    // used to swap its Emotion class, and VoiceOver restarted the announcement.
+    // Moving the highlight must change aria-activedescendant + data-variant WITHOUT
+    // swapping the class on the active option's ancestor.
+    it('does not swap the option class when the highlight moves', () => {
+      const { rerender } = render(
+        <Select renderLabel="Choose an option" isShowingOptions>
+          {getOptions(defaultOptions[0])}
+        </Select>
+      )
+      const input = screen.getByLabelText('Choose an option')
+
+      // 'bar' is not highlighted yet
+      const barItem = screen
+        .getByRole('option', { name: 'bar' })
+        .closest('[class$="-optionItem"]')!
+      expect(barItem).toHaveAttribute('role', 'none')
+      expect(barItem).toHaveAttribute('data-variant', 'default')
+      const barClassBeforeHighlight = barItem.getAttribute('class')
+
+      // move the highlight onto 'bar'
+      rerender(
+        <Select renderLabel="Choose an option" isShowingOptions>
+          {getOptions(defaultOptions[1])}
+        </Select>
+      )
+
+      expect(input).toHaveAttribute('aria-activedescendant', 'bar')
+      expect(barItem).toHaveAttribute('data-variant', 'highlighted')
+      // class hash is unchanged -> no ancestor mutation for VoiceOver to re-announce
+      expect(barItem.getAttribute('class')).toBe(barClassBeforeHighlight)
+    })
+
     it('should allow assistive text', () => {
       render(
         <Select renderLabel="Choose an option" assistiveText="hello world">

@@ -117,6 +117,7 @@ class Item extends Component<OptionsItemProps> {
       href,
       role,
       styles,
+      variant,
       description,
       descriptionRole,
       renderBeforeLabel,
@@ -142,6 +143,7 @@ class Item extends Component<OptionsItemProps> {
       <ElementType
         role={voiceoverRoleBugWorkaround ? role : 'none'}
         data-cid="Options.Item"
+        data-variant={variant}
         css={styles?.item}
         ref={(element: Element | null) => {
           this.ref = element
@@ -169,6 +171,7 @@ class Item extends Component<OptionsItemProps> {
               css={styles?.description}
               role={descriptionRole}
               id={this._descriptionId}
+              data-variant={variant}
             >
               {descriptionContent}
             </span>

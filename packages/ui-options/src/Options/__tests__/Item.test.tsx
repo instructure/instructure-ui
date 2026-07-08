@@ -208,4 +208,48 @@ describe('<Item />', () => {
     expect(link).toHaveAttribute('href', '/helloWorld')
     expect(link?.tagName).toBe('A')
   })
+
+  // VoiceOver double-announces options because the highlight used to
+  // be a variant-dependent Emotion class. The variant is now expressed
+  // through a stable `data-variant` attribute + static CSS, so the class must NOT
+  // change when the variant does.
+  describe('variant applied via a stable data-variant attribute', () => {
+    it('exposes the variant through a data-variant attribute on the outer element', async () => {
+      const { container } = render(
+        <Item as="li" role="option" variant="highlighted">
+          Hello World
+        </Item>
+      )
+      const item = container.querySelector('[class$="-optionItem"]')
+
+      expect(item).toHaveAttribute('data-variant', 'highlighted')
+    })
+
+    it('does not swap the outer element class when the variant changes', async () => {
+      const { container, rerender } = render(
+        <Item as="li" role="option" variant="default">
+          Hello World
+        </Item>
+      )
+      const item = container.querySelector('[class$="-optionItem"]')!
+      const classBeforeHighlight = item.getAttribute('class')
+
+      expect(item).toHaveAttribute('data-variant', 'default')
+
+      rerender(
+        <Item as="li" role="option" variant="highlighted">
+          Hello World
+        </Item>
+      )
+      const itemAfterHighlight = container.querySelector(
+        '[class$="-optionItem"]'
+      )!
+
+      expect(itemAfterHighlight).toHaveAttribute('data-variant', 'highlighted')
+      // class hash is stable -> no ancestor mutation for VoiceOver to re-announce
+      expect(itemAfterHighlight.getAttribute('class')).toBe(
+        classBeforeHighlight
+      )
+    })
+  })
 })
