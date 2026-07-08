@@ -28,6 +28,13 @@ import '../support/component'
 import 'cypress-real-events'
 
 describe('<Pill/>', () => {
+  // cypress-real-events keeps the real cursor where the previous test left it,
+  // so a test that ends hovering the Pill would leave the next test's tooltip
+  // already visible. Park the cursor away (viewport bottom-right) before each.
+  beforeEach(() => {
+    cy.get('body').realMouseMove(0, 0, { position: 'bottomRight' })
+  })
+
   it('should render without a Tooltip when text does not overflow max-width', () => {
     cy.mount(<Pill>hello</Pill>)
 

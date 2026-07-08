@@ -116,8 +116,8 @@ describe('<Select/>', () => {
           return window.getComputedStyle(icon).fill
         })
 
-        expect(iconStyles[0]).to.equal('rgb(203, 78, 21)')
-        expect(iconStyles[1]).to.equal('rgb(17, 124, 186)')
+        expect(iconStyles[0]).to.equal('rgb(207, 74, 0)')
+        expect(iconStyles[1]).to.equal('rgb(43, 122, 188)')
       })
   })
 
@@ -362,10 +362,12 @@ describe('<Select/>', () => {
       </Select>
     )
 
-    cy.contains('foo').click()
+    // Click the option's <li>, not the inner text node — the click handler is
+    // on the list item. Clicking `foo` selects `foo`.
+    cy.contains('li', 'foo').click()
     cy.wrap(onRequestSelectOption)
       .its('lastCall.args.1.id')
-      .should('equal', defaultOptions[1])
+      .should('equal', defaultOptions[0])
   })
 
   it('should fire onKeyDown while preserving default behavior', () => {

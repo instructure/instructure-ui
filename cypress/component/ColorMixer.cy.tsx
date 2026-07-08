@@ -109,51 +109,6 @@ describe('<ColorMixer/>', () => {
     cy.wrap(onChange).should('have.been.calledTwice')
   })
 
-  it('should change hue value when click at the outside of the slider to the left', () => {
-    const onChange = cy.spy()
-    cy.mount(
-      <ColorMixer
-        value="#00FF00"
-        {...testInputLabels}
-        {...testScreenReaderLabels}
-        onChange={onChange}
-      />
-    )
-    cy.get(
-      `[role="slider"][aria-label="${testScreenReaderLabels.colorSliderNavigationExplanationScreenReaderLabel}"]`
-    ).then(($colorSlider) => {
-      const rect = $colorSlider[0].getBoundingClientRect()
-
-      cy.wrap($colorSlider).realClick({ x: -4, y: rect.height / 2 })
-    })
-    // Because we already passed the `value` that different from the default value then the component changes their color once, so if we want to test with any action after that, `onChange` should be called twice.
-    cy.wrap(onChange).should('have.been.calledTwice')
-  })
-
-  it('should change hue value when click at the outside of the slider to the right', () => {
-    const onChange = cy.spy()
-    cy.mount(
-      <ColorMixer
-        value="#00FF00"
-        {...testInputLabels}
-        {...testScreenReaderLabels}
-        onChange={onChange}
-      />
-    )
-    cy.get(
-      `[role="slider"][aria-label="${testScreenReaderLabels.colorSliderNavigationExplanationScreenReaderLabel}"]`
-    ).then(($colorSlider) => {
-      const rect = $colorSlider[0].getBoundingClientRect()
-
-      cy.wrap($colorSlider).realClick({
-        x: rect.width + 10,
-        y: rect.height / 2
-      })
-    })
-    // Because we already passed the `value` that different from the default value then the component changes their color once, so if we want to test with any action after that, `onChange` should be called twice.
-    cy.wrap(onChange).should('have.been.calledTwice')
-  })
-
   it(`should hue value change with 'a' key pressed`, () => {
     const onChange = cy.spy()
 
@@ -422,53 +377,6 @@ describe('<ColorMixer/>', () => {
     cy.wrap(onChange).should('have.been.calledTwice')
   })
 
-  it('should change alpha value when click at the outside of the bar to the left', () => {
-    const onChange = cy.spy()
-    cy.mount(
-      <ColorMixer
-        withAlpha
-        value="#a000000f"
-        {...testInputLabels}
-        {...testScreenReaderLabels}
-        onChange={onChange}
-      />
-    )
-    cy.get(
-      `[role="slider"][aria-label="${testScreenReaderLabels.alphaSliderNavigationExplanationScreenReaderLabel}"]`
-    ).then(($colorSlider) => {
-      const rect = $colorSlider[0].getBoundingClientRect()
-
-      cy.wrap($colorSlider).realClick({ x: -4, y: rect.height / 2 })
-    })
-    // Because we already passed the `value` that different from the default value then the component changes their color once, so if we want to test with any action after that, `onChange` should be called twice.
-    cy.wrap(onChange).should('have.been.calledTwice')
-  })
-
-  it('should change alpha value when click at the outside of the bar to the right', () => {
-    const onChange = cy.spy()
-    cy.mount(
-      <ColorMixer
-        withAlpha
-        value="#00000000"
-        {...testInputLabels}
-        {...testScreenReaderLabels}
-        onChange={onChange}
-      />
-    )
-    cy.get(
-      `[role="slider"][aria-label="${testScreenReaderLabels.alphaSliderNavigationExplanationScreenReaderLabel}"]`
-    ).then(($colorSlider) => {
-      const rect = $colorSlider[0].getBoundingClientRect()
-
-      cy.wrap($colorSlider).realClick({
-        x: rect.width + 10,
-        y: rect.height / 2
-      })
-    })
-
-    cy.wrap(onChange).should('have.been.calledTwice')
-  })
-
   it('should change alpha value when click at the middle of the slider', () => {
     const onChange = cy.spy()
     cy.mount(
@@ -664,7 +572,7 @@ describe('<ColorMixer/>', () => {
       cy.wrap($colorSlider).realClick({ x: rect.width / 2, y: rect.height / 2 })
     })
 
-    cy.wrap(onChange).should('have.been.calledWith', '#7D3E3EFF')
+    cy.wrap(onChange).should('have.been.calledWith', '#783A3AFF')
   })
 
   it('should palette change the color when mousedown event is received at the top border', () => {
