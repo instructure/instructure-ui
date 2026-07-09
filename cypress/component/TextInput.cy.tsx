@@ -69,7 +69,11 @@ describe('<TextInput/>', () => {
     cy.get('svg').should('have.length', 2)
   })
 
-  it('should have no padding on empty before/after content', () => {
+  // Providing a renderBeforeInput/renderAfterInput slot applies the horizontal
+  // gap padding based on the slot's *existence*, not its contents — an empty
+  // slot still gets the gap.
+  it('should apply horizontal padding when before/after content is provided', () => {
+    // even empty slots get the gap
     cy.mount(
       <TextInput
         renderLabel="Name"
@@ -78,15 +82,15 @@ describe('<TextInput/>', () => {
       />
     )
 
-    cy.get('[class*="__beforeElement"]').should(
+    cy.get('[class*="__layout"]').should(
       'have.css',
       'padding-inline-start',
-      '0px'
+      '12px'
     )
     cy.get('[class*="__afterElement"]').should(
       'have.css',
       'padding-inline-end',
-      '0px'
+      '12px'
     )
 
     cy.get('[data-cy-root]').then(() => {
@@ -99,7 +103,7 @@ describe('<TextInput/>', () => {
       )
     })
 
-    cy.get('[class*="__beforeElement"]').should(
+    cy.get('[class*="__layout"]').should(
       'have.css',
       'padding-inline-start',
       '12px'
