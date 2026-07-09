@@ -1,16 +1,16 @@
 {
   "summary": {
     "total": 32,
-    "unchanged": 31,
-    "changed": 1,
+    "unchanged": 3,
+    "changed": 29,
     "added": 0,
     "removed": 0
   },
   "results": [
     {
       "name": "alert.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 3444,
       "sizeMismatch": false
     },
     {
@@ -21,62 +21,62 @@
     },
     {
       "name": "badge.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 1300,
       "sizeMismatch": false
     },
     {
       "name": "billboard.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 10930,
       "sizeMismatch": false
     },
     {
       "name": "breadcrumb.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 9136,
       "sizeMismatch": false
     },
     {
       "name": "button-and-derivatives.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 13604,
       "sizeMismatch": false
     },
     {
       "name": "byline.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 5878,
       "sizeMismatch": false
     },
     {
       "name": "calendar.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 7170,
       "sizeMismatch": false
     },
     {
       "name": "checkbox.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 5095,
       "sizeMismatch": false
     },
     {
       "name": "checkboxgroup.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 8807,
       "sizeMismatch": false
     },
     {
       "name": "colorpicker.png",
-      "status": "unchanged",
-      "numDiff": 0,
-      "sizeMismatch": false
+      "status": "changed",
+      "numDiff": 26341,
+      "sizeMismatch": true
     },
     {
       "name": "contextview.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 9344,
       "sizeMismatch": false
     },
     {
@@ -87,38 +87,38 @@
     },
     {
       "name": "dateinput-dateinput2.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 3755,
       "sizeMismatch": false
     },
     {
       "name": "datetimeinput.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 4776,
       "sizeMismatch": false
     },
     {
       "name": "drilldown.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 9731,
       "sizeMismatch": false
     },
     {
       "name": "filedrop.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 20401,
       "sizeMismatch": false
     },
     {
       "name": "form-errors.png",
-      "status": "unchanged",
-      "numDiff": 0,
-      "sizeMismatch": false
+      "status": "changed",
+      "numDiff": 34246,
+      "sizeMismatch": true
     },
     {
       "name": "heading.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 17393,
       "sizeMismatch": false
     },
     {
@@ -129,74 +129,74 @@
     },
     {
       "name": "link.png",
-      "status": "unchanged",
-      "numDiff": 0,
-      "sizeMismatch": false
+      "status": "changed",
+      "numDiff": 21258,
+      "sizeMismatch": true
     },
     {
       "name": "menu.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 4949,
       "sizeMismatch": false
     },
     {
       "name": "metric-pill-tag-timeselect-text.png",
-      "status": "unchanged",
-      "numDiff": 0,
-      "sizeMismatch": false
+      "status": "changed",
+      "numDiff": 21956,
+      "sizeMismatch": true
     },
     {
       "name": "options.png",
-      "status": "unchanged",
-      "numDiff": 0,
-      "sizeMismatch": false
+      "status": "changed",
+      "numDiff": 96793,
+      "sizeMismatch": true
     },
     {
       "name": "pagination.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 1692,
       "sizeMismatch": false
     },
     {
       "name": "progressbar.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 1421,
       "sizeMismatch": false
     },
     {
       "name": "select-simpleselect.png",
       "status": "changed",
-      "numDiff": 2945,
+      "numDiff": 7058,
       "sizeMismatch": false
     },
     {
       "name": "table.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 8866,
       "sizeMismatch": false
     },
     {
       "name": "tabs.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 2863,
       "sizeMismatch": false
     },
     {
       "name": "tooltip.png",
-      "status": "unchanged",
-      "numDiff": 0,
-      "sizeMismatch": false
+      "status": "changed",
+      "numDiff": 44534,
+      "sizeMismatch": true
     },
     {
       "name": "treebrowser.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 6805,
       "sizeMismatch": false
     },
     {
       "name": "view.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 17107,
       "sizeMismatch": false
     }
   ]
