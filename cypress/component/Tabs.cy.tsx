@@ -24,58 +24,11 @@
 
 import React from 'react'
 import { Tabs } from '@instructure/ui/latest'
-import { expect } from 'chai'
 
 import '../support/component'
 import 'cypress-real-events'
 
 describe('<Tabs/>', () => {
-  // TODO(INSTUI): outdated approach — spies on React.createElement and inspects
-  // args for `key`, but under the automatic JSX runtime / emotion `jsx` pragma
-  // JSX no longer compiles to React.createElement (spy captures nothing), and
-  // `key` isn't exposed on props anyway. Needs a rewrite that asserts observable
-  // key-preservation behavior. Skipped pending that.
-  it.skip('should preserve Tab.Panel keys', () => {
-    const createElementSpy = cy.spy(React, 'createElement')
-    cy.mount(
-      <Tabs>
-        <Tabs.Panel renderTitle="foo" key="foo-key" />
-      </Tabs>
-    )
-
-    cy.wrap(createElementSpy)
-      .should('have.been.called')
-      .then((spy) => {
-        const createFooTabCall = spy
-          .getCalls()
-          .filter((call) => call.args[1]?.renderTitle === 'foo')[0]
-
-        expect(createFooTabCall.args[1].key).to.equal('foo-key')
-
-        // Set two child
-        cy.mount(
-          <Tabs>
-            <Tabs.Panel renderTitle="foo" key="foo-key" />
-            <Tabs.Panel renderTitle="bar" key="bar-key" />
-          </Tabs>
-        )
-
-        cy.wrap(createElementSpy)
-          .should('have.been.called')
-          .then((updatedSpy) => {
-            const createFooTabCall = updatedSpy
-              .getCalls()
-              .filter((call) => call.args[1]?.renderTitle === 'foo')[0]
-            const createBarTabCall = updatedSpy
-              .getCalls()
-              .filter((call) => call.args[1]?.renderTitle === 'bar')[0]
-
-            expect(createFooTabCall.args[1].key).to.equal('foo-key')
-            expect(createBarTabCall.args[1].key).to.equal('bar-key')
-          })
-      })
-  })
-
   it('should call onRequestTabChange with keyboard arrow keys', () => {
     const onChange = cy.stub()
 
@@ -117,19 +70,32 @@ describe('<Tabs/>', () => {
     cy.wrap(onChange).its('lastCall.args[1].index').should('equal', 1)
   })
 
-  // TODO(INSTUI): the tab click does not switch the panel under cypress-real-
-  // events (panel stays display:none after clicking the second tab; neither
-  // native .click() nor .realClick() switches it, and the tab exposes no
-  // aria-selected to assert against). Needs interaction/DOM investigation.
-  it.skip('should keep non-selected panel hidden when unmountOnExit is false', () => {
-    cy.mount(
-      <Tabs>
-        <Tabs.Panel renderTitle="First Tab" unmountOnExit={false}>
-          Tab 1 content
-        </Tabs.Panel>
-        <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
-      </Tabs>
-    )
+  it('should keep non-selected panel hidden when unmountOnExit is false', () => {
+    // Tabs is a controlled component: a tab click only fires onRequestTabChange,
+    // so the parent must own the selected index for the panel to actually switch.
+    const Example = () => {
+      const [selectedIndex, setSelectedIndex] = React.useState(0)
+      return (
+        <Tabs
+          onRequestTabChange={(_event: unknown, { index }: { index: number }) =>
+            setSelectedIndex(index)
+          }
+        >
+          <Tabs.Panel
+            renderTitle="First Tab"
+            isSelected={selectedIndex === 0}
+            unmountOnExit={false}
+          >
+            Tab 1 content
+          </Tabs.Panel>
+          <Tabs.Panel renderTitle="Second Tab" isSelected={selectedIndex === 1}>
+            Tab 2 content
+          </Tabs.Panel>
+        </Tabs>
+      )
+    }
+
+    cy.mount(<Example />)
 
     cy.get('[role="tabpanel"]').should('have.length', 2)
 
@@ -137,7 +103,6 @@ describe('<Tabs/>', () => {
     cy.get('[role="tabpanel"]').eq(1).should('have.css', 'display', 'none')
 
     cy.contains('[role="tab"]', 'Second Tab').click()
-    cy.wait(100)
     cy.get('[role="tabpanel"]').eq(1).should('not.have.css', 'display', 'none')
     cy.get('[role="tabpanel"]').eq(0).should('have.css', 'display', 'none')
   })

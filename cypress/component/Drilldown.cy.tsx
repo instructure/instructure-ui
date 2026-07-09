@@ -43,6 +43,10 @@ const renderOptions = (page: string) => {
 }
 
 describe('<Drilldown/>', () => {
+  beforeEach(() => {
+    cy.get('body').realMouseMove(0, 0, { position: 'bottomRight' })
+  })
+
   it('should disabled prop prevent option actions', () => {
     cy.mount(
       <Drilldown rootPageId="page0" disabled>
@@ -57,10 +61,6 @@ describe('<Drilldown/>', () => {
       </Drilldown>
     )
     cy.contains('Option-0').realClick()
-
-    // `disabled` prevents the option action, so clicking Option-0 must NOT
-    // navigate to its subPage — Option-1 (on page1) should never appear and
-    // we stay on page0.
     cy.contains('Option-0').should('be.visible')
     cy.contains('Option-1').should('not.exist')
   })
@@ -96,8 +96,7 @@ describe('<Drilldown/>', () => {
         </Drilldown.Page>
       </Drilldown>
     )
-    cy.get('body').realClick()
-    cy.get('body').realPress('Tab')
+    cy.get('div[role="menu"]').focus()
 
     cy.realPress('ArrowDown')
     cy.focused().should('have.id', 'option01')
@@ -109,12 +108,7 @@ describe('<Drilldown/>', () => {
     cy.focused().should('have.id', 'option01')
   })
 
-  // TODO(INSTUI): flaky under cypress-real-events keyboard navigation with
-  // retries:0. cy `.focus()` on the menu isn't honored by CDP key dispatch and
-  // `realClick`+`Tab` is non-deterministic. Needs the component's real focus
-  // model mapped (post-Tab focus target, how ArrowDown enters options) to make
-  // it reliably deterministic. Skipped pending that work.
-  it.skip('should prevent focus rotation in the drilldown with "false"', () => {
+  it('should prevent focus rotation in the drilldown with "false"', () => {
     cy.mount(
       <Drilldown rootPageId="page0" rotateFocus={false}>
         <Drilldown.Page id="page0">
@@ -123,8 +117,7 @@ describe('<Drilldown/>', () => {
         </Drilldown.Page>
       </Drilldown>
     )
-    cy.get('body').realClick()
-    cy.get('body').realPress('Tab')
+    cy.get('div[role="menu"]').focus()
 
     cy.realPress('ArrowDown')
     cy.focused().should('have.id', 'option01')
@@ -461,10 +454,7 @@ describe('<Drilldown/>', () => {
     cy.contains('Option01').should('be.visible')
   })
 
-  // TODO(INSTUI): flaky under cypress-real-events keyboard navigation with
-  // retries:0 (see the skipped focus-rotation test above). Skipped pending a
-  // deterministic real-events focus approach.
-  it.skip('should be able to navigate between options with up/down arrows', () => {
+  it('should be able to navigate between options with up/down arrows', () => {
     cy.mount(
       <Drilldown rootPageId="page0">
         <Drilldown.Page id="page0">
@@ -491,10 +481,7 @@ describe('<Drilldown/>', () => {
     cy.get('#opt_1').should('have.focus')
   })
 
-  // TODO(INSTUI): flaky under cypress-real-events keyboard navigation with
-  // retries:0 (see the skipped focus-rotation test above). Skipped pending a
-  // deterministic real-events focus approach.
-  it.skip('should be able to navigate forward between pages with right arrow', () => {
+  it('should be able to navigate forward between pages with right arrow', () => {
     cy.mount(
       <Drilldown rootPageId="page0">
         <Drilldown.Page id="page0" renderTitle={'Page 0'}>
@@ -532,7 +519,7 @@ describe('<Drilldown/>', () => {
     // next arrowDown should skip the header Title and focus on 'To Page 2' option
     cy.realPress('ArrowDown')
     cy.contains('[id^="DrilldownHeader-Title_"]', 'Page 1').should('be.visible')
-    cy.contains('[role="button"]', 'To Page 2').should('have.focus')
+    cy.get('#opt5').should('have.focus').and('have.text', 'To Page 2')
 
     // go to Page 2
     cy.realPress('ArrowRight')
