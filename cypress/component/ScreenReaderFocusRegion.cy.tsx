@@ -152,6 +152,10 @@ describe('ScreenReaderFocusRegion', () => {
             'true'
           )
         })
+
+        cy.then(() => {
+          screenReaderFocusRegion.deactivate()
+        })
       })
     })
   })
@@ -159,7 +163,7 @@ describe('ScreenReaderFocusRegion', () => {
   it('should restore all iframe bodies after deactivate', () => {
     cy.mount(element)
 
-    const getIframeBody = (iframe) => {
+    const getIframeBody = (iframe: any) => {
       return cy
         .wrap(iframe)
         .its('0.contentDocument')
