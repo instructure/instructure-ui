@@ -82,6 +82,12 @@ describe('<Dialog/>', () => {
 
         cy.mount(<NestedDialogExample defaultInput={'one'} onBlur={onBlur} />)
 
+        // Wait for the Dialog's initial focus (a requestAnimationFrame in
+        // KeyboardFocusRegion) to land on the defaultFocusElement before
+        // clicking the other input. Otherwise that pending rAF can fire after
+        // the click and steal focus back, which flakes on slower CI runners.
+        cy.get('[data-testid="nested-input-one"]').should('have.focus')
+
         cy.get('[data-testid="nested-input-two"]').click().wait(500)
 
         cy.get('[data-testid="nested-input-two"]').should('have.focus')
@@ -96,6 +102,12 @@ describe('<Dialog/>', () => {
         const onBlur = cy.spy()
 
         cy.mount(<NestedDialogExample defaultInput={'two'} onBlur={onBlur} />)
+
+        // Wait for the Dialog's initial focus (a requestAnimationFrame in
+        // KeyboardFocusRegion) to land on the defaultFocusElement before
+        // clicking the other input. Otherwise that pending rAF can fire after
+        // the click and steal focus back, which flakes on slower CI runners.
+        cy.get('[data-testid="nested-input-two"]').should('have.focus')
 
         cy.get('[data-testid="nested-input-one"]').click().wait(500)
 
