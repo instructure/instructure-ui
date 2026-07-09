@@ -190,7 +190,7 @@ const withStyleNew = decorator(
       const semanticsOverrides = themeOverride?.semantics
       const sharedTokensOverrides = themeOverride?.sharedTokens
       const componentOverridesFromSettingsProvider =
-        themeOverride?.components?.[rawComponentId]
+        themeOverride?.components?.[rawComponentId] ?? {}
       const componentOverridesFromThemeOverrideProp = (
         componentProps as ThemeOverrideProp
       ).themeOverride
@@ -225,15 +225,23 @@ const withStyleNew = decorator(
         componentOverridesFromSettingsProvider as Record<string, unknown>
       )
 
-      const componentTheme = mergeDeep(
-        componentThemeFromSettingsProvider,
-        // @ts-ignore TODO-theme-types: fix typing
-        typeof componentOverridesFromThemeOverrideProp === 'function'
+      const resolvedComponentOverrideFromThemeOverrideProp =
+        (typeof componentOverridesFromThemeOverrideProp === 'function'
           ? componentOverridesFromThemeOverrideProp(
               componentThemeFromSettingsProvider,
               themeInContext
             )
-          : componentOverridesFromThemeOverrideProp
+          : componentOverridesFromThemeOverrideProp) ?? {}
+
+      const componentTheme = mergeDeep(
+        componentThemeFromSettingsProvider,
+        // @ts-ignore TODO-theme-types: fix typing
+        resolvedComponentOverrideFromThemeOverrideProp
+      )
+
+      const derivedComponentOverride = mergeDeep(
+        componentOverridesFromSettingsProvider,
+        resolvedComponentOverrideFromThemeOverrideProp
       )
 
       // TODO do not call here generateStyle, it does not receive the extraArgs
@@ -263,6 +271,7 @@ const withStyleNew = decorator(
           {...props}
           makeStyles={makeStyleHandler}
           styles={styles}
+          themeOverride={derivedComponentOverride}
         />
       )
     })

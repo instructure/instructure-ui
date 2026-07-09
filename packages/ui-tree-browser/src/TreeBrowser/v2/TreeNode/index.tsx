@@ -54,7 +54,7 @@ in the TreeBrowser.
 class TreeNode extends Component<TreeBrowserNodeProps, { isHovered: boolean }> {
   static displayName = 'TreeNode'
   static readonly componentId = 'TreeBrowser.Node'
-  static readonly themeId = 'TreeBrowserTreeButton'
+  static readonly themeId = 'TreeBrowserTreeNode'
 
   static allowedProps = allowedProps
 
