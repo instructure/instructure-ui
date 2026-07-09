@@ -46,7 +46,6 @@ import { mount } from 'cypress/react'
 
 import { CacheProvider } from '@emotion/react'
 import createCache from '@emotion/cache'
-import { ROOT_SELECTOR } from 'cypress/mount-utils'
 
 // Augment the Cypress namespace to include type definitions for
 // your custom command.
@@ -67,7 +66,7 @@ Cypress.Commands.add('mount', (component, options) => {
 
   const myCache = createCache({
     key: 'plugin-cache',
-    container: document.querySelector<HTMLElement>(ROOT_SELECTOR)!
+    container: document.querySelector<HTMLElement>('[data-cy-root]')!
   })
 
   return mount(

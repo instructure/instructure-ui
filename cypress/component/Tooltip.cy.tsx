@@ -30,10 +30,7 @@ import '../support/component'
 
 describe('<Tooltip/>', () => {
   // cypress-real-events keeps the real cursor where the previous test left it.
-  // A test that ends hovering the trigger would leave the next freshly-mounted
-  // tooltip already visible, breaking its initial `not.be.visible` assertion.
-  // Park the cursor in the viewport's bottom-right (away from the top-left
-  // mounted trigger) before each test.
+  // Park the cursor in the viewport's bottom-right before each test.
   beforeEach(() => {
     cy.get('body').realMouseMove(0, 0, { position: 'bottomRight' })
   })

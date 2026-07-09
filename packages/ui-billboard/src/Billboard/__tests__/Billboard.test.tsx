@@ -147,13 +147,13 @@ describe('<Billboard />', () => {
       expect(link).toHaveAttribute('aria-disabled', 'true')
     })
 
-    it('should not be clickable', () => {
+    it('should not be clickable', async () => {
       const onClick = vi.fn()
 
       render(<Billboard onClick={onClick} readOnly />)
       const button = screen.getByRole('button')
 
-      userEvent.click(button)
+      await userEvent.click(button)
 
       expect(onClick).not.toHaveBeenCalled()
     })

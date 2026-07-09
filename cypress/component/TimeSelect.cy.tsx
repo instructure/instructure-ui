@@ -354,7 +354,7 @@ describe('<TimeSelect/>', () => {
         renderLabel="Choose a time"
         allowNonStepInput={true}
         locale="en_AU"
-        format="LTS" // shows seconds
+        format="LTS" // `h:mm:ss A`
         timezone="US/Eastern"
         onChange={onChange}
       />
@@ -362,9 +362,6 @@ describe('<TimeSelect/>', () => {
     cy.get('input[id^="Select_"]').as('input')
     cy.get('@input').should('have.value', '')
 
-    // Hour must not be zero-padded: `format="LTS"` is `h:mm:ss A` (single `h`)
-    // and the input is parsed in moment strict mode, so `04:...` would be
-    // rejected and cleared on blur. See INSTUI leading-zero note.
     cy.get('@input').realClick().realType('4:45:55 AM')
     cy.get('@input').blur() // sends onChange event
 

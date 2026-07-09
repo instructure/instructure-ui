@@ -36,7 +36,7 @@ describe('<TruncateText />', () => {
     letterSpacing: 'normal'
   }
   // TODO unskip these, when the lineHeight style token issue is fixed.
-  // (either allow truncate.ts to accept '150%' and '3rem' or restrict the style token to a number like 1.5)
+  // (it should accept strings like '150%' and divide them by 100)
   it.skip('should truncate text', () => {
     cy.mount(
       <div style={{ ...baseStyle, width: '200px' }}>

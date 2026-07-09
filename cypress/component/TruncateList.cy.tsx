@@ -27,6 +27,7 @@ import { expect } from 'chai'
 
 import '../support/component'
 import 'cypress-real-events'
+import type { TruncateListProps } from '@instructure/ui-truncate-list'
 
 describe('<TruncateList />', () => {
   it('should pass how many items should be visible with `onUpdate` prop', () => {
@@ -240,13 +241,17 @@ describe('<TruncateList />', () => {
   })
 
   it('should resize list when fixMenuTriggerWidth changed in runtime', () => {
-    const Example = ({ fixMenuTriggerWidth }) => {
-      const [itemsCount, setItemsCount] = useState(Number)
+    const Example = ({
+      fixMenuTriggerWidth
+    }: {
+      fixMenuTriggerWidth: TruncateListProps['fixMenuTriggerWidth']
+    }) => {
+      const [itemsCount, setItemsCount] = useState(0)
 
       return (
         <TruncateList
           fixMenuTriggerWidth={fixMenuTriggerWidth}
-          onUpdate={({ visibleItemsCount }) => {
+          onUpdate={({ visibleItemsCount }: { visibleItemsCount: number }) => {
             setItemsCount(visibleItemsCount)
           }}
           visibleItemsCount={itemsCount}

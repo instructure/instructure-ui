@@ -29,7 +29,7 @@ import { Options } from '@instructure/ui/latest'
 import { IconCheckSolid } from '@instructure/ui-icons'
 
 describe('<OptionsItem/>', () => {
-  it('should allow label to recieve focus', () => {
+  it('should allow label to receive focus', () => {
     const onFocus = cy.spy()
     cy.mount(
       <Options.Item tabIndex={-1} onFocus={onFocus}>

@@ -36,7 +36,7 @@ describe('<Tray />', () => {
         open
         size="small"
         placement="start"
-        themeOverride={{ smallWidth: '10em' }}
+        themeOverride={{ widthSm: '165px' }}
       >
         <div>Hello</div>
       </Tray>
@@ -44,7 +44,8 @@ describe('<Tray />', () => {
 
     cy.get('[aria-label="Tray Example"]')
       .should('have.attr', 'role', 'dialog')
-      .and('have.css', 'width', '160px')
+      .parent()
+      .should('have.css', 'width', '165px')
   })
 
   it('should call onDismiss prop when Esc key pressed', () => {
@@ -68,7 +69,7 @@ describe('<Tray />', () => {
     cy.wrap(onDismiss).should('have.been.called')
   })
 
-  it.only('should handle focus properly in complex cases', () => {
+  it('should handle focus properly in complex cases', () => {
     const Example = () => {
       const [showTray, setShowTray] = React.useState(false)
       const [showOverlay, setShowOverlay] = React.useState(false)

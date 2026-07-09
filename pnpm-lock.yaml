@@ -108,6 +108,9 @@ importers:
       esbuild:
         specifier: ^0.28.1
         version: 0.28.1
+      esbuild-loader:
+        specifier: ^4.5.0
+        version: 4.5.0(webpack@5.107.2(esbuild@0.28.1))
       eslint:
         specifier: ^9.39.4
         version: 9.39.4(jiti@2.6.1)(supports-color@8.1.1)
@@ -434,7 +437,7 @@ importers:
         version: link:../ui-view
       babel-loader:
         specifier: ^10.1.1
-        version: 10.1.1(@babel/core@7.29.0)(webpack@5.107.2(esbuild@0.28.1)(postcss@8.5.8))
+        version: 10.1.1(@babel/core@7.29.0)(webpack@5.107.2(esbuild@0.28.1))
       buffer:
         specifier: ^6.0.3
         version: 6.0.3
@@ -483,7 +486,7 @@ importers:
         version: 3.6.0
       css-loader:
         specifier: 7.1.4
-        version: 7.1.4(webpack@5.107.2(esbuild@0.28.1)(postcss@8.5.8))
+        version: 7.1.4(webpack@5.107.2(esbuild@0.28.1))
       globby:
         specifier: ^16.2.0
         version: 16.2.0
@@ -492,7 +495,7 @@ importers:
         version: 4.0.3
       html-webpack-plugin:
         specifier: ^5.6.7
-        version: 5.6.7(webpack@5.107.2(esbuild@0.28.1)(postcss@8.5.8))
+        version: 5.6.7(webpack@5.107.2(esbuild@0.28.1))
       mkdirp:
         specifier: 3.0.1
         version: 3.0.1
@@ -501,10 +504,10 @@ importers:
         version: 8.0.3
       style-loader:
         specifier: 4.0.0
-        version: 4.0.0(webpack@5.107.2(esbuild@0.28.1)(postcss@8.5.8))
+        version: 4.0.0(webpack@5.107.2(esbuild@0.28.1))
       thread-loader:
         specifier: ^4.0.4
-        version: 4.0.4(webpack@5.107.2(esbuild@0.28.1)(postcss@8.5.8))
+        version: 4.0.4(webpack@5.107.2(esbuild@0.28.1))
       webpack-bundle-analyzer:
         specifier: 5.3.0
         version: 5.3.0
@@ -5403,16 +5406,16 @@ importers:
         version: 6.0.3
       css-loader:
         specifier: ^7.1.4
-        version: 7.1.4(webpack@5.107.2(esbuild@0.28.1))
+        version: 7.1.4(webpack@5.107.2(esbuild@0.28.1)(postcss@8.5.8))
       style-loader:
         specifier: ^4.0.0
-        version: 4.0.0(webpack@5.107.2(esbuild@0.28.1))
+        version: 4.0.0(webpack@5.107.2(esbuild@0.28.1)(postcss@8.5.8))
       thread-loader:
         specifier: ^4.0.4
-        version: 4.0.4(webpack@5.107.2(esbuild@0.28.1))
+        version: 4.0.4(webpack@5.107.2(esbuild@0.28.1)(postcss@8.5.8))
       webpack:
         specifier: 5.107.2
-        version: 5.107.2(esbuild@0.28.1)
+        version: 5.107.2(esbuild@0.28.1)(postcss@8.5.8)
 
   packages/uid:
     dependencies:
@@ -8546,6 +8549,9 @@ packages:
   bidi-js@1.0.3:
     resolution: {integrity: sha512-RKshQI1R3YQ+n9YJz2QQ147P66ELpa1FQEg20Dk8oW9t2KgLbpDLLp9aGZ7y8WHSshDknG0bknqGw5/tyCs5tw==}
 
+  big.js@5.2.2:
+    resolution: {integrity: sha512-vyL2OymJxmarO8gxMr0mhChsO9QGwhynfuu4+MHTAW6czfq9humCB7rKpUjDd9YUiDPU4mzpyupFSvOClAwbmQ==}
+
   bin-links@5.0.0:
     resolution: {integrity: sha512-sdleLVfCjBtgO5cNjA2HVRvWBJAHs4zwenaCPMNJAJU0yNxpzj80IpjOIimkpkr+mhlA+how5poQtt53PygbHA==}
     engines: {node: ^18.17.0 || >=20.5.0}
@@ -9381,6 +9387,10 @@ packages:
   emoji-regex@9.2.2:
     resolution: {integrity: sha512-L18DaJsXSUk2+42pv8mLs5jJT2hqFkFE4j21wOmgbUqsZ2hL72NsUU785g9RXgo3s0ZNgVl42TiHp3ZtOv/Vyg==}
 
+  emojis-list@3.0.0:
+    resolution: {integrity: sha512-/kyM18EfinwXZbno9FyUGeFh87KC8HRQBQGildHZbEuRyWFOmv1U10o9BBp8XVZDVNNuQKyIGIu5ZYAAXJ0V2Q==}
+    engines: {node: '>= 4'}
+
   encodeurl@2.0.0:
     resolution: {integrity: sha512-Q0n9HRi4m6JuGIV1eFlmvJB7ZEVxu93IrMyiMsGC0lrMJMWzRgx6WGquyfQgZVb31vhGgXnfmPNNXmxnOkRBrg==}
     engines: {node: '>= 0.8'}
@@ -9489,6 +9499,11 @@ packages:
 
   es6-weak-map@2.0.3:
     resolution: {integrity: sha512-p5um32HOTO1kP+w7PRnB+5lQ43Z6muuMuIMffvDN8ZB4GcnjLBV6zGStpbASIMk4DCAvEaamhe2zhyCb/QXXsA==}
+
+  esbuild-loader@4.5.0:
+    resolution: {integrity: sha512-rVYe97IN1+VoealVHQ3STEPbfTm+vvPk7AZPrL53Pt6JUGBhHTnIqyaow7EveMFlmQ2A1bLp7q19sP4PppaCDQ==}
+    peerDependencies:
+      webpack: ^4.40.0 || ^5.0.0
 
   esbuild@0.27.7:
     resolution: {integrity: sha512-IxpibTjyVnmrIQo5aqNpCgoACA/dTKLTlhMHihVHhdkxKyPO1uBBthumT0rdHmcsk9uMonIWS0m4FljWzILh3w==}
@@ -9942,6 +9957,9 @@ packages:
   get-symbol-description@1.1.0:
     resolution: {integrity: sha512-w9UMqWwJxHNOvoNzSJ2oPF5wvYcvP7jUvYzhp67yEhTi17ZDBBC1z9pTdGuzjD+EFIqLSYRweZjqfiPzQ06Ebg==}
     engines: {node: '>= 0.4'}
+
+  get-tsconfig@4.14.0:
+    resolution: {integrity: sha512-yTb+8DXzDREzgvYmh6s9vHsSVCHeC0G3PI5bEXNBHtmshPnO+S5O7qgLEOn0I5QvMy6kpZN8K1NKGyilLb93wA==}
 
   getpass@0.1.7:
     resolution: {integrity: sha512-0fzj9JxOLfJ+XGLhR8ze3unN0KZCgZwiSSDz168VERjK8Wl8kVSdcu2kspd4s4wtAa1y/qrVRiAA0WclVsu0ng==}
@@ -10868,6 +10886,10 @@ packages:
   loader-runner@4.3.2:
     resolution: {integrity: sha512-DFEqQ3ihfS9blba08cLfYf1NRAIEm+dDjic073DRDc3/JspI/8wYmtDsHwd3+4hwvdxSK7PGaElfTmm0awWJ4w==}
     engines: {node: '>=6.11.5'}
+
+  loader-utils@2.0.4:
+    resolution: {integrity: sha512-xXqpXoINfFhgua9xiqD8fPFHgkoq1mmmpE92WlDbm9rNRd/EbRb+Gqf908T2DMfuHjjJlksiK2RbHVOdD/MqSw==}
+    engines: {node: '>=8.9.0'}
 
   locate-path@2.0.0:
     resolution: {integrity: sha512-NCI2kiDkyR7VeEKm27Kda/iQHyKJe1Bu0FlTbYp3CqJu+9IFe9bLyAjMxf5ZDDbEg+iMPzB5zYyUTSm8wVTKmA==}
@@ -12052,6 +12074,9 @@ packages:
   resolve-from@5.0.0:
     resolution: {integrity: sha512-qYg9KP24dD5qka9J47d0aVky0N+b4fTU89LN9iDnjB5waksiC49rvMB0PrUJQGoTmH50XPiqOvAjDfaijGxYZw==}
     engines: {node: '>=8'}
+
+  resolve-pkg-maps@1.0.0:
+    resolution: {integrity: sha512-seS2Tj26TBVOC2NIc2rOe2y2ZO7efxITtLZcGSOnHHNOQ7CkiUBfw0Iw2ck6xkIhPwLhKNLS8BO+hEpngQlqzw==}
 
   resolve.exports@2.0.3:
     resolution: {integrity: sha512-OcXjMsGdhL4XnbShKpAcSqPMzQoYkYyhbEaeSko47MjRP9NfEQMhZkXL1DoFlt9LWQn4YttrdnV6X2OiyzBi+A==}
@@ -16742,13 +16767,6 @@ snapshots:
 
   axobject-query@4.1.0: {}
 
-  babel-loader@10.1.1(@babel/core@7.29.0)(webpack@5.107.2(esbuild@0.28.1)(postcss@8.5.8)):
-    dependencies:
-      '@babel/core': 7.29.0
-      find-up: 5.0.0
-    optionalDependencies:
-      webpack: 5.107.2(esbuild@0.28.1)(postcss@8.5.8)
-
   babel-loader@10.1.1(@babel/core@7.29.0)(webpack@5.107.2(esbuild@0.28.1)):
     dependencies:
       '@babel/core': 7.29.0
@@ -16831,6 +16849,8 @@ snapshots:
   bidi-js@1.0.3:
     dependencies:
       require-from-string: 2.0.2
+
+  big.js@5.2.2: {}
 
   bin-links@5.0.0:
     dependencies:
@@ -17795,6 +17815,8 @@ snapshots:
 
   emoji-regex@9.2.2: {}
 
+  emojis-list@3.0.0: {}
+
   encodeurl@2.0.0: {}
 
   encoding@0.1.13:
@@ -17967,6 +17989,14 @@ snapshots:
       es5-ext: 0.10.64
       es6-iterator: 2.0.3
       es6-symbol: 3.1.4
+
+  esbuild-loader@4.5.0(webpack@5.107.2(esbuild@0.28.1)):
+    dependencies:
+      esbuild: 0.28.1
+      get-tsconfig: 4.14.0
+      loader-utils: 2.0.4
+      webpack: 5.107.2(esbuild@0.28.1)
+      webpack-sources: 3.5.0
 
   esbuild@0.27.7:
     optionalDependencies:
@@ -18614,6 +18644,10 @@ snapshots:
       es-errors: 1.3.0
       get-intrinsic: 1.3.0
 
+  get-tsconfig@4.14.0:
+    dependencies:
+      resolve-pkg-maps: 1.0.0
+
   getpass@0.1.7:
     dependencies:
       assert-plus: 1.0.0
@@ -18867,7 +18901,7 @@ snapshots:
       relateurl: 0.2.7
       terser: 5.46.2
 
-  html-webpack-plugin@5.6.7(webpack@5.107.2(esbuild@0.28.1)(postcss@8.5.8)):
+  html-webpack-plugin@5.6.7(webpack@5.107.2(esbuild@0.28.1)):
     dependencies:
       '@types/html-minifier-terser': 6.1.0
       html-minifier-terser: 6.1.0
@@ -18875,7 +18909,7 @@ snapshots:
       pretty-error: 4.0.0
       tapable: 2.3.3
     optionalDependencies:
-      webpack: 5.107.2(esbuild@0.28.1)(postcss@8.5.8)
+      webpack: 5.107.2(esbuild@0.28.1)
 
   htmlparser2@6.1.0:
     dependencies:
@@ -19725,6 +19759,12 @@ snapshots:
       type-fest: 0.6.0
 
   loader-runner@4.3.2: {}
+
+  loader-utils@2.0.4:
+    dependencies:
+      big.js: 5.2.2
+      emojis-list: 3.0.0
+      json5: 2.2.3
 
   locate-path@2.0.0:
     dependencies:
@@ -21028,6 +21068,8 @@ snapshots:
   resolve-from@4.0.0: {}
 
   resolve-from@5.0.0: {}
+
+  resolve-pkg-maps@1.0.0: {}
 
   resolve.exports@2.0.3: {}
 

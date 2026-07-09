@@ -617,27 +617,29 @@ describe('<DateInput/>', () => {
 
         cy.get('table').should('be.visible')
 
-        cy.contains('button', dayForSelect)
-          .should('be.enabled')
-          .click()
-          .wait(500)
+        cy.contains('button', dayForSelect).should('be.enabled').click()
 
-        cy.get('input')
-          .invoke('val')
-          .then((inputValue) => {
-            const inputValueRTLFree = removeRtlMarkers(inputValue)
-            const hasCorrectDirection =
-              (textDirection === 'rtl') === hasRtlMarkers(inputValue as string)
+        // Retryable assertion instead of a fixed `.wait(500)` + one-shot
+        // `.then()` read: Cypress re-runs this callback until the input value
+        // settles after the click-driven onChange/state update.
+        cy.get('input').should(($input) => {
+          const inputValue = $input.val() as string
+          const inputValueRTLFree = removeRtlMarkers(inputValue)
+          const hasCorrectDirection =
+            (textDirection === 'rtl') === hasRtlMarkers(inputValue)
 
-            cy.wrap(hasCorrectDirection).should('be.true')
-            cy.wrap(inputValueRTLFree).should('equal', expectedFormattedValue)
-            cy.wrap(onChange).should(
-              'have.been.calledWith',
-              Cypress.sinon.match.any,
-              expectedOnChangeValue,
-              expectedDateIsoString
-            )
-          })
+          expect(hasCorrectDirection, 'text direction matches locale').to.equal(
+            true
+          )
+          expect(inputValueRTLFree).to.equal(expectedFormattedValue)
+        })
+
+        cy.wrap(onChange).should(
+          'have.been.calledWith',
+          Cypress.sinon.match.any,
+          expectedOnChangeValue,
+          expectedDateIsoString
+        )
       })
     })
   })

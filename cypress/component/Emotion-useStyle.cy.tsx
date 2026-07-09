@@ -58,6 +58,7 @@ const grey1111 = 'rgb(0, 128, 0)'
 const green4570 = 'rgb(10, 10, 10)'
 const blue4570 = 'rgb(255, 255, 0)'
 const exampleTheme: Theme = {
+  // TODO update to the new theme syntax
   key: 'exampleTheme',
   colors: {
     contrasts: {

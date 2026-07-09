@@ -76,6 +76,15 @@ function getWorkspaceAliases() {
 
 module.exports = {
   mode: 'development',
+  // Persist compilation to disk. The first run is cold;
+  // subsequent runs reuse the cache and start almost instantly.
+  cache: {
+    type: 'filesystem',
+    cacheDirectory: path.resolve(__dirname, '../node_modules/.cache/cypress-webpack'),
+    buildDependencies: {
+      config: [__filename]
+    }
+  },
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
     // Source carries explicit `.js` extensions on relative imports (added for
@@ -99,7 +108,22 @@ module.exports = {
       {
         test: /\.(tsx?|js)$/,
         exclude: /node_modules/,
-        use: 'babel-loader'
+        use: {
+          // ESBuild loader is much faster
+          loader: 'esbuild-loader',
+          options: {
+            target: 'es2022',
+            format: 'esm',
+            jsx: 'automatic',
+            jsxImportSource: '@emotion/react',
+            tsconfigRaw: {
+              compilerOptions: {
+                experimentalDecorators: true,
+                useDefineForClassFields: false
+              }
+            }
+          }
+        }
       }
     ]
   }
