@@ -2181,9 +2181,6 @@ class InPlaceDialogExample extends React.Component {
                   renderHiddenItemsMenuTriggerLabel={(
                     hiddenChildrenCount
                   ) => `${hiddenChildrenCount} More`}
-                 renderHiddenItemsMenuTriggerAriaLabel={(
-                   hiddenChildrenCount
-                 ) => `${hiddenChildrenCount} more menu items`}
                 >
                   <TopNavBar.Item
                     id="Search2"
