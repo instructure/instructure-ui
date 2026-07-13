@@ -23,7 +23,7 @@
  */
 
 import { boxShadowObjectsToCSSString } from '@instructure/ui-themes'
-import type { NewComponentTypes } from '@instructure/ui-themes'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import type { ModalProps, ModalStyle } from './props'
 
 /**
@@ -39,9 +39,11 @@ import type { ModalProps, ModalStyle } from './props'
  */
 const generateStyle = (
   componentTheme: ReturnType<NewComponentTypes['Modal']>,
-  props: ModalProps
+  props: ModalProps,
+  sharedTokens: SharedTokens
 ): ModalStyle => {
   const { size, variant, overflow } = props
+  const boxShadow = boxShadowObjectsToCSSString(componentTheme.boxShadow)
 
   const commonSizeStyleExceptForFullscreen = {
     maxWidth: '95%',
@@ -75,7 +77,17 @@ const generateStyle = (
       height: '100%',
       boxShadow: 'none',
       border: 'none',
-      borderRadius: 0
+      borderRadius: 0,
+      // On larger screens, inset the fullscreen modal from the viewport edge
+      // for a11y: the Mask flex-centers it, so `flex: 1` + `alignSelf: stretch`
+      // (auto height) gap it evenly via the margin; corners/shadow restored too.
+      [`@media screen and (min-width: ${sharedTokens.breakpoints.md})`]: {
+        margin: componentTheme.fullScreenMargin,
+        height: 'auto',
+        alignSelf: 'stretch',
+        borderRadius: componentTheme.borderRadius,
+        boxShadow
+      }
     }
   }
   const backgroundStyles =
@@ -100,7 +112,7 @@ const generateStyle = (
       flexDirection: 'column',
       position: 'relative',
       boxSizing: 'border-box',
-      boxShadow: boxShadowObjectsToCSSString(componentTheme.boxShadow),
+      boxShadow,
       borderRadius: componentTheme.borderRadius,
       overflow: 'hidden',
       ...sizeStyles[size!],

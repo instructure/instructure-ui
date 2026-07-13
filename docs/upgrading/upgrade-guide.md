@@ -962,6 +962,7 @@ type: embed
   added={[
     {name:"borderWidth",note:""},
     {name:"inverseBorderColor",note:""},
+    {name:"fullScreenMargin",note:""},
   ]}
   changed={[
     {oldName:"background",newName:"backgroundColor",note:""},
