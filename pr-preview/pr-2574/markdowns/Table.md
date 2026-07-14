@@ -374,7 +374,7 @@ const SortableTable = ({ caption, headers, rows }) => {
 
 render(
   <SortableTable
-    caption={(sortedBy,sortDirection)=>`Sorted by ${sortedBy}, ${sortDirection}`}
+    caption="Top rated movies"
     headers={[
       {
         id: 'rank',
@@ -681,7 +681,7 @@ const renderRating = (rating) => (
 
 render(
   <SortableTable
-    caption={(sortedBy,sortDirection)=>`Sorted by ${sortedBy}, ${sortDirection}`}
+    caption="Top rated movies"
     headers={[
       {
         id: 'Rank',
