@@ -24,6 +24,15 @@
 'use client'
 import React from 'react'
 import { Inter } from 'next/font/google'
+// Self-host Lato so InstUI's `LatoWeb, Lato, ...` font stack resolves to a real,
+// bundled font in every environment. Without this the stack falls back to
+// whatever sans-serif the OS provides (Helvetica Neue locally, DejaVu Sans in
+// the Linux CI container), which changes text metrics and makes layout-driven
+// components render at different heights — breaking the visual baseline.
+// InstUI uses weights 300/400/700.
+import '@fontsource/lato/300.css'
+import '@fontsource/lato/400.css'
+import '@fontsource/lato/700.css'
 import './globals.css'
 import { InstUISettingsProvider } from '@instructure/ui/latest'
 

@@ -21,10 +21,11 @@
     "axe-core": "4.12.1",
     "cypress": "15.18.0",
     "cypress-axe": "1.7.0",
-    "typescript": "6.0.3",
-    "http-server": "14.1.1"
+    "http-server": "14.1.1",
+    "typescript": "6.0.3"
   },
   "dependencies": {
+    "@fontsource/lato": "^5.2.7",
     "@instructure/ui": "file:../packages/ui",
     "@instructure/ui-icons": "file:../packages/ui-icons",
     "@instructure/ui-scripts": "file:../packages/ui-scripts",

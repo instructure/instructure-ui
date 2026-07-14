@@ -56,6 +56,10 @@ afterEach(function () {
   cy.location('pathname', { log: false }).then((pagePath) => {
     cy.task('recordMeta', { name, pagePath }, { log: false })
   })
+  // Wait until web fonts have finished loading before capturing. Otherwise the
+  // screenshot can be taken mid-load, when text is still rendered in a fallback
+  // font with different metrics — producing inconsistent, flaky baselines.
+  cy.document({ log: false }).then((doc) => doc.fonts.ready)
   cy.screenshot(name, {
     capture: 'fullPage',
     overwrite: true,
