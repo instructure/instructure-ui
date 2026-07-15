@@ -1,0 +1,24 @@
+{
+  "$schema": "../node_modules/oxlint/configuration_schema.json",
+  "extends": ["../.oxlintrc.json"],
+  "jsPlugins": [
+    {
+      "name": "react-js",
+      "specifier": "eslint-plugin-react"
+    },
+    "../scripts/oxlint/no-relative-imports-plugin.mjs",
+    "../scripts/oxlint/notice-plugin.mjs"
+  ],
+  "settings": {
+    "react": {
+      "version": "19.2.7"
+    }
+  },
+  "ignorePatterns": [
+    "**/node_modules/**",
+    "**/.next/**",
+    "**/next-env.d.ts",
+    "out/**",
+    "coverage/**"
+  ]
+}
