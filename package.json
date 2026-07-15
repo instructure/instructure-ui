@@ -63,7 +63,6 @@
     "@commitlint/config-conventional": "^21.2.0",
     "@emotion/cache": "^11.14.0",
     "@emotion/react": "^11.14.0",
-    "@eslint/js": "^9.39.4",
     "@instructure/browserslist-config-instui": "workspace:*",
     "@instructure/ui-babel-preset": "workspace:*",
     "@instructure/ui-scripts": "workspace:*",
@@ -78,7 +77,6 @@
     "@vitejs/plugin-react": "^5.2.0",
     "@vitest/browser": "4.1.9",
     "@vitest/browser-playwright": "4.1.9",
-    "@vitest/eslint-plugin": "^1.6.20",
     "@vitest/ui": "4.1.9",
     "babel-loader": "^10.1.1",
     "babel-plugin-add-import-extension": "^1.6.0",
@@ -92,15 +90,7 @@
     "cz-git": "^1.13.1",
     "esbuild": "^0.28.1",
     "esbuild-loader": "^4.5.0",
-    "eslint": "^9.39.4",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-import-resolver-node": "^0.4.0",
-    "eslint-module-utils": "2.13.0",
-    "eslint-plugin-compat": "^7.0.2",
-    "eslint-plugin-jsx-a11y": "^6.10.2",
-    "eslint-plugin-notice": "^1.0.0",
     "eslint-plugin-react": "^7.37.5",
-    "globals": "^17.7.0",
     "husky": "^9.1.7",
     "jsdom": "^29.1.1",
     "lerna": "9.0.7",
@@ -112,7 +102,6 @@
     "react": "18.3.1",
     "read-package-up": "^12.0.0",
     "typescript": "6.0.3",
-    "typescript-eslint": "^8.62.1",
     "vitest": "^4.1.9",
     "vitest-browser-react": "2.2.0",
     "webpack": "^5.107.2"
@@ -121,8 +110,6 @@
     "scripts": "The '--' at the end of commands is needed so user parameters are passed forward",
     "danger": "^11.3.1 -- add this back if we use it in pr-validation.yml",
     "tar": "Lerna 8 needs tar for this fixed(?) bug: https://github.com/lerna/lerna/issues/4005",
-    "eslint-import-resolver-typescript": "^3.6.1 not supported by ESLint 9",
-    "eslint-plugin-import-x": "^3.1.0 not supported by ESLint 9",
     "@types/jest": "needed because https://github.com/testing-library/jest-dom/issues/544 recheck if fixed",
     "git-raw-commits>dargs": "Force dargs@7.0.0 (CommonJS) for git-raw-commits@3.0.0 used by lerna. pnpm hoisting was causing ESM dargs@8.1.0 to be resolved instead, breaking 'pnpm run bump' with 'TypeError: dargs is not a function'"
   },
@@ -138,7 +125,7 @@
   },
   "lint-staged": {
     "*.{js,ts,tsx}": [
-      "eslint --quiet",
+      "oxlint -c .oxlintrc.json --fix",
       "prettier --write"
     ],
     "*.{json,jsx,md,mdx,html}": [

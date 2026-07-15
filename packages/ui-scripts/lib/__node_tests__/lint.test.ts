@@ -40,7 +40,7 @@ describe('lint handler', () => {
 
   it('lints "." when no positional paths are provided', async () => {
     await lint.handler({ _: ['lint'] })
-    expect(runMock).toHaveBeenCalledWith('eslint', ['.'])
+    expect(runMock).toHaveBeenCalledWith('oxlint', ['.'])
   })
 
   it('keeps only .js, .jsx, .ts, .tsx paths', async () => {
@@ -56,23 +56,23 @@ describe('lint handler', () => {
     expect(runMock).not.toHaveBeenCalled()
   })
 
-  it('passes --fix to eslint when argv.fix is true', async () => {
+  it('passes --fix to oxlint when argv.fix is true', async () => {
     await lint.handler({ _: ['lint', 'a.ts'], fix: true })
-    expect(runMock).toHaveBeenCalledWith('eslint', ['a.ts', '--fix'])
+    expect(runMock).toHaveBeenCalledWith('oxlint', ['a.ts', '--fix'])
   })
 
   it('does not pass --fix when argv.fix is false', async () => {
     await lint.handler({ _: ['lint', 'a.ts'], fix: false })
-    expect(runMock).toHaveBeenCalledWith('eslint', ['a.ts'])
+    expect(runMock).toHaveBeenCalledWith('oxlint', ['a.ts'])
   })
 
   it('does not pass --fix when argv.fix is undefined', async () => {
     await lint.handler({ _: ['lint', 'a.ts'] })
-    expect(runMock).toHaveBeenCalledWith('eslint', ['a.ts'])
+    expect(runMock).toHaveBeenCalledWith('oxlint', ['a.ts'])
   })
 
   it('appends --fix even when linting the default "." path', async () => {
     await lint.handler({ _: ['lint'], fix: true })
-    expect(runMock).toHaveBeenCalledWith('eslint', ['.', '--fix'])
+    expect(runMock).toHaveBeenCalledWith('oxlint', ['.', '--fix'])
   })
 })

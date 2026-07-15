@@ -43,7 +43,7 @@ export default {
       )
     }
     if (jspaths.length) {
-      runCommandSync('eslint', argv.fix ? [...jspaths, '--fix'] : jspaths)
+      runCommandSync('oxlint', argv.fix ? [...jspaths, '--fix'] : jspaths)
     }
   }
 }
