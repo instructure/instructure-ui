@@ -84,9 +84,7 @@ type TruncateTextProps = TruncateTextOwnProps &
     TruncateTextStyle
   >
 
-type TruncateTextStyle = ComponentStyle<
-  'truncateText' | 'auto' | 'spacer' | 'lineHeight'
->
+type TruncateTextStyle = ComponentStyle<'truncateText' | 'auto' | 'spacer'>
 
 type TruncateTextState = {
   isTruncated: boolean

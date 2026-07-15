@@ -39,13 +39,13 @@ import { TruncateTextCommonProps } from '../props.js'
 
 export type TruncatorOptions = {
   parent?: Node
-  lineHeight?: number
 } & TruncateTextCommonProps
 
 type NodeMapData = {
   node: Node
   data: string[]
 }
+const DEFAULT_LINE_HEIGHT = 1.5
 
 /**
  * ---
@@ -89,6 +89,7 @@ class Truncator {
     const parentElement = element?.parentElement
       ? element?.parentElement
       : undefined
+
     this._options = {
       parent: options.parent || parentElement,
       maxLines: options.maxLines || 1,
@@ -96,7 +97,6 @@ class Truncator {
       truncate: options.truncate || 'character',
       ellipsis: options.ellipsis || '\u2026',
       ignore: options.ignore || [' ', '.', ','],
-      lineHeight: options.lineHeight || 1.2,
       shouldTruncateWhenInvisible: !!options.shouldTruncateWhenInvisible
     }
 
@@ -128,11 +128,11 @@ class Truncator {
       return
     }
 
-    const { maxLines, truncate, lineHeight } = this._options
+    const { maxLines, truncate } = this._options
     // if no explicit lineHeight is inherited, use lineHeight multiplier for calculations
     const actualLineHeight =
       style.lineHeight === 'normal'
-        ? lineHeight * parseFloat(style.fontSize)
+        ? DEFAULT_LINE_HEIGHT * parseFloat(style.fontSize)
         : parseFloat(style.lineHeight)
     const node = (this._stage.firstChild as Element).children
       ? this._stage.firstChild!
@@ -192,8 +192,8 @@ class Truncator {
                   textContent.match(/.*?[\.\s\/]+?/g)!
                 : ['']
               : shouldTruncate
-              ? node.textContent!.split('')
-              : []
+                ? node.textContent!.split('')
+                : []
         })
       }
     })

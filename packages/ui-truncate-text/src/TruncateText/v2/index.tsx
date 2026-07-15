@@ -209,8 +209,7 @@ class TruncateText extends Component<TruncateTextProps, TruncateTextState> {
     if (canUseDOM) {
       const result = truncate(this._stage!, {
         ...this.props,
-        parent: this.ref ? this.ref : undefined,
-        lineHeight: this.props.styles?.lineHeight as number
+        parent: this.ref ? this.ref : undefined
       })
       if (result) {
         const element = this.renderChildren(
