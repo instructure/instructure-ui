@@ -28,7 +28,7 @@ vi.mock('@instructure/command-utils', () => ({
   runCommandSync: vi.fn()
 }))
 
-import lint from '../test/lint.ts'
+import lint from '../commands/lint.ts'
 import { runCommandSync } from '@instructure/command-utils'
 
 const runMock = vi.mocked(runCommandSync)
