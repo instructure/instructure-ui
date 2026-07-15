@@ -31,7 +31,7 @@ import canvas from '@instructure/ui-themes'
 import { View } from '@instructure/ui-view/latest'
 import type { ViewOwnProps } from '@instructure/ui-view/latest'
 
-import { ModalBody } from '@instructure/ui-modal/latest'
+import { Modal, ModalBody, ModalHeader } from '@instructure/ui-modal/latest'
 
 const BODY_TEXT = 'Modal-body-text'
 
@@ -208,6 +208,37 @@ describe('<ModalBody />', () => {
       )
 
       await waitFor(() => expect(body).not.toHaveAttribute('tabindex'))
+    })
+
+    it('labels the scrollable body from the header with a space between adjacent text nodes', async () => {
+      mockScrollable(true)
+      // The header reproduces what a `Heading` with `aiVariant="stacked"`
+      // renders: a decorative "IgniteAI" text node immediately followed by the
+      // title, with no whitespace between them. The body's aria-label must not
+      // collapse these into "IgniteAI Nutrition Facts".
+      const { findByText } = render(
+        <Modal
+          open
+          label="AI information"
+          size="small"
+          shouldReturnFocus={false}
+          onDismiss={() => {}}
+        >
+          <ModalHeader>
+            <span aria-hidden="true">IgniteAI</span>
+            {'AI Nutrition Facts'}
+          </ModalHeader>
+          <ModalBody>{BODY_TEXT}</ModalBody>
+        </Modal>
+      )
+      const body = await findByText(BODY_TEXT)
+
+      await waitFor(() =>
+        expect(body).toHaveAttribute(
+          'aria-label',
+          'IgniteAI AI Nutrition Facts'
+        )
+      )
     })
   })
 })

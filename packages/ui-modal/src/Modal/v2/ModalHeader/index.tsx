@@ -75,12 +75,19 @@ class ModalHeader extends Component<ModalHeaderProps> {
           : NodeFilter.FILTER_ACCEPT
       }
     })
-    let text = ''
+    const textParts: string[] = []
     let current
     while ((current = walker.nextNode())) {
-      text += current.nodeValue
+      // Trim each text node and drop empty ones so adjacent text nodes from
+      // different elements (e.g. the decorative "IgniteAI" span a `Heading`
+      // with `aiVariant` renders before its title) are separated by a single
+      // space instead of being concatenated into "IgniteAI Nutrition Facts".
+      const value = current.nodeValue?.trim()
+      if (value) {
+        textParts.push(value)
+      }
     }
-    return text
+    return textParts.join(' ')
   }
 
   handleRef = (el: HTMLDivElement | null) => {
