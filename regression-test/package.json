@@ -7,7 +7,7 @@
     "dev": "next dev --webpack",
     "build": "next build --webpack",
     "start": "http-server out -p 3000 -s --no-dotfiles",
-    "lint": "eslint .",
+    "lint": "oxlint .",
     "cypress": "ELECTRON_EXTRA_LAUNCH_ARGS=--remote-debugging-port=9222 cypress run",
     "cypress-chrome": "cypress open --browser chrome"
   },
