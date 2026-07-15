@@ -42,11 +42,11 @@ import { dark, light } from '@instructure/ui-themes'
 import { debounce } from '@instructure/debounce'
 
 // @ts-expect-error no type declarations for CSS side-effect import
-// eslint-disable-next-line @instructure/no-relative-imports
+// eslint-disable-next-line instructure/no-relative-imports
 import '../ui-icons/src/generated/icon-font/Solid/InstructureIcons-Solid.css'
 
 // @ts-expect-error no type declarations for CSS side-effect import
-// eslint-disable-next-line @instructure/no-relative-imports
+// eslint-disable-next-line instructure/no-relative-imports
 import '../ui-icons/src/generated/icon-font/Line/InstructureIcons-Line.css'
 
 import { DateTime } from '@instructure/ui-i18n'

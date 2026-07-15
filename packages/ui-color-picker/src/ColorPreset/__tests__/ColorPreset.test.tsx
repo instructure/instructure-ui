@@ -89,7 +89,7 @@ describe('<ColorPreset />', () => {
     })
   })
 
-  it('should default to using the hex code as aria-label when colorScreenReaderLabel is not provided ', async () => {
+  it('should default to using the hex code as aria-label when colorScreenReaderLabel is not provided', async () => {
     render(<ColorPreset {...testValue} />)
     const buttons = screen.getAllByRole('button')
 
