@@ -349,16 +349,12 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
             // Keep messages in the description so the accessible name contains only the label.
             aria-labelledby={
               this.hasMessages
-                ? ((props as Record<string, unknown>)[
-                    'aria-labelledby'
-                  ] as string) || this._labelId
-                : ((props as Record<string, unknown>)['aria-labelledby'] as
-                    | string
-                    | undefined)
+                ? props['aria-labelledby'] || this._labelId
+                : props['aria-labelledby']
             }
             aria-describedby={
               [
-                (props as Record<string, unknown>)['aria-describedby'],
+                props['aria-describedby'],
                 this.hasMessages ? this._messagesId : null
               ]
                 .filter(Boolean)

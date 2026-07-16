@@ -132,7 +132,9 @@ const TextArea = forwardRef<TextAreaElement, TextAreaProps>((props, ref) => {
   // via `aria-describedby` and point the accessible name at the label text only
   // via `aria-labelledby`, so the messages are announced as a description
   // rather than as part of the control's name.
-  const hasMessages = !!messages && messages.length > 0
+  // Only when a message actually renders (has text); FormField skips empty-text
+  // messages, so otherwise aria-describedby would dangle.
+  const hasMessages = !!messages?.some((m) => !!m.text)
   const messagesId = `${id}-messages`
   const labelId = `${id}-label`
 
@@ -402,20 +404,14 @@ const TextArea = forwardRef<TextAreaElement, TextAreaProps>((props, ref) => {
       aria-required={required}
       aria-invalid={isInvalid ? 'true' : undefined}
       aria-describedby={
-        [
-          (rest as Record<string, unknown>)['aria-describedby'],
-          hasMessages ? messagesId : null
-        ]
+        [rest['aria-describedby'], hasMessages ? messagesId : null]
           .filter(Boolean)
           .join(' ') || undefined
       }
       aria-labelledby={
         hasMessages
-          ? ((rest as Record<string, unknown>)['aria-labelledby'] as string) ||
-            labelId
-          : ((rest as Record<string, unknown>)['aria-labelledby'] as
-              | string
-              | undefined)
+          ? rest['aria-labelledby'] || labelId
+          : rest['aria-labelledby']
       }
       disabled={disabled}
       readOnly={readOnly}

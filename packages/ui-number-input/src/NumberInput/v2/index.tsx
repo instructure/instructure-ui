@@ -124,7 +124,9 @@ const NumberInput = forwardRef<NumberInputHandle, NumberInputProps>(
     // via `aria-describedby` and point the accessible name at the label text
     // only via `aria-labelledby`, so the messages are announced as a
     // description rather than as part of the control's name.
-    const hasMessages = !!messages && messages.length > 0
+    // Only when a message actually renders (has text); FormField skips
+    // empty-text messages, so otherwise aria-describedby would dangle.
+    const hasMessages = !!messages?.some((m) => !!m.text)
     const messagesId = id ? `${id}-messages` : undefined
     const labelId = id ? `${id}-label` : undefined
 
@@ -328,7 +330,9 @@ const NumberInput = forwardRef<NumberInputHandle, NumberInputProps>(
 
     const label = callRenderProp(renderLabel)
 
-    const passedProps = passthroughProps(rest)
+    // `passthroughProps` is typed with `unknown` values; widen once here so the
+    // aria-* reads below don't each need a cast.
+    const passedProps = passthroughProps(rest) as Record<string, any>
 
     // Don't render until we have an ID
     if (!id) {
@@ -366,8 +370,8 @@ const NumberInput = forwardRef<NumberInputHandle, NumberInputProps>(
               }
               aria-labelledby={
                 hasMessages
-                  ? (passedProps['aria-labelledby'] as string) || labelId
-                  : (passedProps['aria-labelledby'] as string | undefined)
+                  ? passedProps['aria-labelledby'] || labelId
+                  : passedProps['aria-labelledby']
               }
               id={id}
               type={allowStringValue ? 'text' : 'number'}
