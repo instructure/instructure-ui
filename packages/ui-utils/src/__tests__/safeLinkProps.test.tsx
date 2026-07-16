@@ -24,7 +24,7 @@
 
 import '@testing-library/jest-dom'
 import { vi } from 'vitest'
-import { safeLinkProps } from '../safeLinkProps'
+import { safeLinkProps } from '../safeLinkProps.js'
 
 describe('safeLinkProps', () => {
   let consoleErrorSpy: ReturnType<typeof vi.spyOn>

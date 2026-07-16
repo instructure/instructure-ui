@@ -25,7 +25,7 @@
 import '@testing-library/jest-dom'
 import { vi } from 'vitest'
 import DOMPurifySingleton from 'dompurify'
-import { safeHref } from '../safeHref'
+import { safeHref } from '../safeHref.js'
 
 describe('safeHref', () => {
   let consoleErrorSpy: ReturnType<typeof vi.spyOn>

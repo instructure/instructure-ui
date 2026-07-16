@@ -24,7 +24,7 @@
 
 import '@testing-library/jest-dom'
 import DOMPurifySingleton from 'dompurify'
-import { sanitizeSvg } from '../sanitizeSvg'
+import { sanitizeSvg } from '../sanitizeSvg.js'
 
 describe('sanitizeSvg', () => {
   it('preserves benign SVG content', () => {

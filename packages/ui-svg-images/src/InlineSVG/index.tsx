@@ -34,7 +34,7 @@ import generateComponentTheme from './theme.js'
 
 import { allowedProps } from './props.js'
 import type { InlineSVGProps } from './props'
-import { sanitizeSvg } from './sanitizeSvg'
+import { sanitizeSvg } from './sanitizeSvg.js'
 
 /**
 ---
