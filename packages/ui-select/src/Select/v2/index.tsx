@@ -801,6 +801,7 @@ class Select extends Component<SelectProps> {
     // suppressHydrationWarning is needed because `role` depends on the browser type
     return (
       <TextInput
+        forcePlaceholder
         {...triggerProps}
         {...getInputProps(inputProps)}
         suppressHydrationWarning

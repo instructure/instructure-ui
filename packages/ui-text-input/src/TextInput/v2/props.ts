@@ -74,6 +74,7 @@ type TextInputOwnProps = {
    * When "disabled", the input changes visibly to indicate that it cannot
    * receive user interactions. When "readonly" the input still cannot receive
    * user interactions but it keeps the same styles as if it were enabled.
+   * Note: placeholder is only displayed when interaction is enabled. You can force it with forcePlaceholder prop
    */
   interaction?: InteractionType
 
@@ -138,6 +139,11 @@ type TextInputOwnProps = {
    * Whether or not the text input is required.
    */
   isRequired?: boolean
+
+  /**
+   * Always displays placeholder when textInput is empty, regardless of interaction type
+   */
+  forcePlaceholder?: boolean
 
   /**
    * provides a reference to the underlying html root element
@@ -229,6 +235,7 @@ const allowedProps: AllowedPropKeys = [
   'renderBeforeInputElementGap',
   'placeholder',
   'isRequired',
+  'forcePlaceholder',
   'elementRef',
   'inputRef',
   'inputContainerRef',
