@@ -1136,7 +1136,7 @@ type: embed
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| Table | caption | `React.ReactNode` | Yes | - | Provide a screen reader friendly description. Anything passed to this prop will be wrapped by `<ScreenReaderContent>` when it is rendered. |
+| Table | caption | `React.ReactNode \| TableCaption` | Yes | - | Provide a screen reader friendly description. Anything passed to this prop will be wrapped by `<ScreenReaderContent>` when it is rendered. A plain `ReactNode` (e.g. a string) is rendered as-is and the sort state is ignored. Pass a function (see {@link TableCaption}) to build a localized caption that also reflects the current sort state. |
 | Table | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
 | Table | elementRef | `(element: Element \| null) => void` | No | - | Provide a reference to the underlying html element |
 | Table | hover | `boolean` | No | `false` | Highlight each row on hover |
