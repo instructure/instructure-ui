@@ -333,6 +333,7 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
             required={isRequired}
             disabled={disabled || readOnly}
             aria-checked={indeterminate ? 'mixed' : undefined}
+            aria-invalid={this.invalid ? 'true' : undefined}
             css={styles?.input}
             onChange={this.handleChange}
             onKeyDown={createChainedFunction(onKeyDown, this.handleKeyDown)}

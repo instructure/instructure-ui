@@ -337,6 +337,7 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
             readOnly={readOnly}
             aria-readonly={readOnly ? true : undefined}
             aria-checked={indeterminate ? 'mixed' : undefined}
+            aria-invalid={this.invalid ? 'true' : undefined}
             css={styles?.input}
             onClickCapture={(e) => {
               if (readOnly) {

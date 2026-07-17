@@ -259,6 +259,22 @@ describe('<Checkbox />', () => {
     expect(input).toHaveAttribute('data-checked', 'mixed')
   })
 
+  it('should set aria-invalid when errors prop is set', () => {
+    renderCheckbox({
+      messages: [{ type: 'error', text: 'This field is required' }]
+    })
+    const input = screen.getByRole('checkbox')
+
+    expect(input).toHaveAttribute('aria-invalid', 'true')
+  })
+
+  it('should not set aria-invalid when there are no error messages', () => {
+    renderCheckbox({ messages: [{ type: 'hint', text: 'This is a hint' }] })
+    const input = screen.getByRole('checkbox')
+
+    expect(input).not.toHaveAttribute('aria-invalid')
+  })
+
   describe('for a11y', () => {
     it('`simple` variant should meet standards', async () => {
       const { container } = renderCheckbox({ variant: 'simple' })
