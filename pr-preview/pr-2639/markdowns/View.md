@@ -834,8 +834,8 @@ type: example
 | View | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
 | View | padding | `Spacing` | No | - | Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `padding="small x-large large"`. |
 | View | borderWidth | `BorderWidth` | No | - | Accepts the familiar CSS shorthand to designate border widths corresponding to edges |
-| View | borderRadius | `BorderRadii` | No | - | Accepts `small`, `medium`, `large`, `circle`, and `pill`. Border radius can be assigned to individual corners in CSS shorthand style (e.g., `"medium large none pill"`). Also accepts valid CSS length values like `1rem` or `12px` |
-| View | shadow | `Shadow` | No | - | Controls the shadow depth for the `<View />` |
+| View | borderRadius | `string` | No | - | Accepts `small`, `medium`, `large`, `circle`, and `pill`. Border radius can be assigned to individual corners in CSS shorthand style (e.g., `"medium large none pill"`). Also accepts valid CSS length values like `1rem` or `12px` |
+| View | shadow | `'resting' \| 'above' \| 'topmost' \| 'none'` | No | - | Controls the shadow depth for the `<View />` |
 | View | stacking | `Stacking` | No | - | Controls the z-index depth for the `<View />` |
 | View | cursor | `Cursor` | No | - | Specify a mouse cursor to use when hovering over the `<View />` |
 | View | overscrollBehavior | `'auto' \| 'contain' \| 'none'` | No | `'auto'` | Sets what a browser does when reaching the boundary of a scrolling area. Valid values are `auto`, `contain`, `none`. |
