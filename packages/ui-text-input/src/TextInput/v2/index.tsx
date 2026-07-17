@@ -59,6 +59,7 @@ class TextInput extends Component<TextInputProps> {
     // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
     interaction: undefined,
     isRequired: false,
+    forcePlaceholder: false,
     display: 'block',
     shouldNotWrap: false,
     size: 'medium',
@@ -219,6 +220,7 @@ class TextInput extends Component<TextInputProps> {
       value,
       defaultValue,
       isRequired,
+      forcePlaceholder,
       onFocus,
       ...rest
     } = this.props
@@ -238,7 +240,11 @@ class TextInput extends Component<TextInputProps> {
         css={this.props.styles?.textInput}
         defaultValue={defaultValue}
         value={value}
-        placeholder={interaction === 'enabled' ? placeholder : undefined}
+        placeholder={
+          forcePlaceholder || interaction === 'enabled'
+            ? placeholder
+            : undefined
+        }
         ref={this.handleInputRef}
         type={type}
         id={this.id}
