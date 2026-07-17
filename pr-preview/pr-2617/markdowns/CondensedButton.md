@@ -18,7 +18,7 @@ In the following example, CondensedButton is used so that the button content can
 ---
 type: example
 ---
-<Table caption='Tallest Roller Coasters'>
+<Table caption={() => 'Tallest Roller Coasters'}>
   <Table.Head>
     <Table.Row>
       <Table.ColHeader id="Roller Coaster">
