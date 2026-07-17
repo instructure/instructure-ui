@@ -68,7 +68,7 @@ describe('<Tag />', async () => {
 
     const button = screen.getByTestId('summer-button')
 
-    userEvent.click(button)
+    await userEvent.click(button)
 
     await waitFor(() => {
       expect(onClick).toHaveBeenCalledTimes(1)

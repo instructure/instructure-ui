@@ -79,7 +79,7 @@ describe('<RadioInputGroup />', () => {
     )
     const input = container.querySelector('input')
 
-    userEvent.click(input!)
+    await userEvent.click(input!)
 
     await waitFor(() => {
       expect(onChange).toHaveBeenCalled()
@@ -153,7 +153,7 @@ describe('<RadioInputGroup />', () => {
 
     expect(orange).toHaveAttribute('checked')
 
-    userEvent.click(banana!)
+    await userEvent.click(banana!)
 
     await waitFor(() => {
       expect(orange).toHaveAttribute('checked')

@@ -91,7 +91,7 @@ describe('<NumberInput />', () => {
     render(<NumberInput renderLabel="Label" onChange={onChange} />)
     const input = screen.getByRole('spinbutton')
 
-    userEvent.type(input, '5')
+    await userEvent.type(input, '5')
 
     await waitFor(() => {
       const event = onChange.mock.calls[0][0]
@@ -107,7 +107,7 @@ describe('<NumberInput />', () => {
     render(<NumberInput renderLabel="Label" onKeyDown={onKeyDown} />)
     const input = screen.getByRole('spinbutton')
 
-    userEvent.type(input, '5')
+    await userEvent.type(input, '5')
 
     await waitFor(() => {
       expect(onKeyDown).toHaveBeenCalledTimes(1)
@@ -118,8 +118,8 @@ describe('<NumberInput />', () => {
     const onBlur = vi.fn()
     render(<NumberInput renderLabel="Label" onBlur={onBlur} />)
 
-    userEvent.tab()
-    userEvent.tab()
+    await userEvent.tab()
+    await userEvent.tab()
 
     await waitFor(() => {
       expect(onBlur).toHaveBeenCalledTimes(1)
@@ -167,7 +167,7 @@ describe('<NumberInput />', () => {
       'button[class$="-numberInput_arrow"]'
     )
 
-    userEvent.click(buttons[0])
+    await userEvent.click(buttons[0])
 
     await waitFor(() => {
       expect(onIncrement).toHaveBeenCalledTimes(1)
@@ -187,7 +187,7 @@ describe('<NumberInput />', () => {
       'button[class$="-numberInput_arrow"]'
     )
 
-    userEvent.click(buttons[0])
+    await userEvent.click(buttons[0])
 
     await waitFor(() => {
       expect(onIncrement).toHaveBeenCalledTimes(0)
@@ -203,7 +203,7 @@ describe('<NumberInput />', () => {
       'button[class$="-numberInput_arrow"]'
     )
 
-    userEvent.click(buttons[0])
+    await userEvent.click(buttons[0])
 
     await waitFor(() => {
       expect(onIncrement).toHaveBeenCalledTimes(0)
@@ -220,7 +220,7 @@ describe('<NumberInput />', () => {
       'button[class$="-numberInput_arrow"]'
     )
 
-    userEvent.click(buttons[1])
+    await userEvent.click(buttons[1])
 
     await waitFor(() => {
       expect(onDecrement).toHaveBeenCalledTimes(1)
@@ -240,7 +240,7 @@ describe('<NumberInput />', () => {
       'button[class$="-numberInput_arrow"]'
     )
 
-    userEvent.click(buttons[1])
+    await userEvent.click(buttons[1])
 
     await waitFor(() => {
       expect(onDecrement).toHaveBeenCalledTimes(0)
@@ -256,7 +256,7 @@ describe('<NumberInput />', () => {
       'button[class$="-numberInput_arrow"]'
     )
 
-    userEvent.click(buttons[1])
+    await userEvent.click(buttons[1])
 
     await waitFor(() => {
       expect(onDecrement).toHaveBeenCalledTimes(0)
@@ -294,12 +294,12 @@ describe('<NumberInput />', () => {
       'button[class$="-numberInput_arrow"]'
     )
 
-    userEvent.click(buttons[0])
+    await userEvent.click(buttons[0])
     await waitFor(() => {
       expect(onIncrement).toHaveBeenCalledTimes(1)
     })
 
-    userEvent.click(buttons[1])
+    await userEvent.click(buttons[1])
     await waitFor(() => {
       expect(onDecrement).toHaveBeenCalledTimes(1)
     })

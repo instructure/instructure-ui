@@ -232,7 +232,7 @@ describe('Day', () => {
 
     const day = container.querySelector('[class*="-calendarDay"]')!
 
-    userEvent.type(day, '{enter}')
+    await userEvent.type(day, '{enter}')
 
     await waitFor(() => {
       const args = onKeyDown.mock.calls[0][1]
@@ -258,7 +258,7 @@ describe('Day', () => {
     )
     const day = container.querySelector('[class*="-calendarDay"]')!
 
-    userEvent.click(day)
+    await userEvent.click(day)
 
     await waitFor(() => {
       expect(onClick).not.toHaveBeenCalled()

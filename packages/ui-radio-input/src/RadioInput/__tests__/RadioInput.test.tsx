@@ -29,7 +29,10 @@ import { vi } from 'vitest'
 
 import '@testing-library/jest-dom'
 import { runAxeCheck } from '@instructure/ui-axe-check'
-import { RadioInput, type RadioInputHandle } from '@instructure/ui-radio-input/latest'
+import {
+  RadioInput,
+  type RadioInputHandle
+} from '@instructure/ui-radio-input/latest'
 
 describe('<RadioInput />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
@@ -91,7 +94,7 @@ describe('<RadioInput />', () => {
 
       const input = container.querySelector('input')
 
-      userEvent.click(input!)
+      await userEvent.click(input!)
 
       await waitFor(() => {
         expect(onClick).toHaveBeenCalled()
@@ -159,7 +162,7 @@ describe('<RadioInput />', () => {
 
       const input = container.querySelector('input')
 
-      userEvent.click(input!)
+      await userEvent.click(input!)
 
       await waitFor(() => {
         expect(onChange).toHaveBeenCalled()

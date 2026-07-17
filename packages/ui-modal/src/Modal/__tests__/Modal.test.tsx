@@ -299,8 +299,8 @@ describe.skip('<Modal />', () => {
 
     expect(modalBody).toBeInTheDocument()
 
+    await userEvent.click(document.body)
     await waitFor(() => {
-      userEvent.click(document.body)
       expect(onDismiss).toHaveBeenCalled()
     })
   })
@@ -331,7 +331,7 @@ describe.skip('<Modal />', () => {
 
     expect(dialog).toBeInTheDocument()
 
-    userEvent.click(getByTestId('outer-element'))
+    await userEvent.click(getByTestId('outer-element'))
 
     await waitFor(() => {
       expect(onClickOuter).toHaveBeenCalled()

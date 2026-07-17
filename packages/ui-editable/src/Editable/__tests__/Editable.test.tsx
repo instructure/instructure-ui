@@ -145,7 +145,7 @@ describe('<Editable />', () => {
     )
     const childContainer = screen.getByTestId('child-container')
 
-    userEvent.click(childContainer)
+    await userEvent.click(childContainer)
 
     await waitFor(() => expect(onChangeModeSpy).toHaveBeenCalledWith('edit'))
   })

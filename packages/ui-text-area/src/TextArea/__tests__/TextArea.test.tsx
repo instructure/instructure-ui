@@ -170,8 +170,8 @@ describe('TextArea', () => {
       const onBlur = vi.fn()
       render(<TextArea label="Name" autoGrow={false} onBlur={onBlur} />)
 
-      userEvent.tab()
-      userEvent.tab()
+      await userEvent.tab()
+      await userEvent.tab()
 
       await waitFor(() => {
         expect(onBlur).toHaveBeenCalled()

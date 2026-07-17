@@ -140,7 +140,7 @@ describe('<Link />', () => {
     )
     const link = container.querySelector('span[class*="-link"]')!
 
-    userEvent.hover(link)
+    await userEvent.hover(link)
 
     await waitFor(() => {
       expect(onMouseEnter).toHaveBeenCalledTimes(1)

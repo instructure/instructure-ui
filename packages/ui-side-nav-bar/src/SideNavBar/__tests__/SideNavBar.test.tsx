@@ -188,7 +188,7 @@ describe('<SideNavBar />', () => {
     expect(nav).toHaveTextContent('Minimize SideNavBar')
     expect(toggleBtn).toHaveAttribute('aria-expanded', 'true')
 
-    userEvent.click(toggleBtn)
+    await userEvent.click(toggleBtn)
 
     await waitFor(() => {
       const updatedToggleBtn = screen.getByRole('button')

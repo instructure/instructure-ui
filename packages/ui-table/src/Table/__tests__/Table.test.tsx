@@ -283,7 +283,7 @@ describe('<Table />', async () => {
       )
       const button = screen.getByRole('button', { name: 'Foo' })
 
-      userEvent.click(button)
+      await userEvent.click(button)
 
       await waitFor(() => {
         expect(onRequestSort).toHaveBeenCalledTimes(1)
@@ -303,7 +303,7 @@ describe('<Table />', async () => {
       )
       const input = screen.getByRole('combobox')
 
-      userEvent.click(input)
+      await userEvent.click(input)
 
       await waitFor(async () => {
         const options = screen.getAllByRole('option')

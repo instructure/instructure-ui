@@ -89,7 +89,7 @@ describe('<Checkbox />', () => {
 
     expect(svgElement).not.toBeInTheDocument()
 
-    userEvent.click(checkboxElement!)
+    await userEvent.click(checkboxElement!)
     await waitFor(() => {
       const svgElementAfterClick = container.querySelector('svg')
       expect(svgElementAfterClick).toBeInTheDocument()
@@ -120,7 +120,7 @@ describe('<Checkbox />', () => {
       renderCheckbox({ onClick, onChange })
       const checkboxElement = screen.getByRole('checkbox')
 
-      userEvent.click(checkboxElement)
+      await userEvent.click(checkboxElement)
 
       await waitFor(() => {
         expect(onClick).toHaveBeenCalled()
@@ -172,7 +172,7 @@ describe('<Checkbox />', () => {
       renderCheckbox({ onChange })
       const checkboxElement = screen.getByRole('checkbox')
 
-      userEvent.type(checkboxElement, '{enter}')
+      await userEvent.type(checkboxElement, '{enter}')
 
       await waitFor(() => {
         expect(onChange).toHaveBeenCalled()
@@ -183,8 +183,8 @@ describe('<Checkbox />', () => {
       const onBlur = vi.fn()
       renderCheckbox({ onBlur })
 
-      userEvent.tab()
-      userEvent.tab()
+      await userEvent.tab()
+      await userEvent.tab()
 
       await waitFor(() => {
         expect(onBlur).toHaveBeenCalled()
@@ -195,7 +195,7 @@ describe('<Checkbox />', () => {
       const onFocus = vi.fn()
       renderCheckbox({ onFocus })
 
-      userEvent.tab()
+      await userEvent.tab()
 
       await waitFor(() => {
         expect(onFocus).toHaveBeenCalled()
@@ -219,7 +219,7 @@ describe('<Checkbox />', () => {
       renderCheckbox({ onMouseOver })
       const checkboxElement = screen.getByRole('checkbox')
 
-      userEvent.hover(checkboxElement)
+      await userEvent.hover(checkboxElement)
 
       await waitFor(() => {
         expect(onMouseOver).toHaveBeenCalled()
@@ -231,8 +231,8 @@ describe('<Checkbox />', () => {
       renderCheckbox({ onMouseOut })
       const checkboxElement = screen.getByRole('checkbox')
 
-      userEvent.hover(checkboxElement)
-      userEvent.unhover(checkboxElement)
+      await userEvent.hover(checkboxElement)
+      await userEvent.unhover(checkboxElement)
 
       await waitFor(() => {
         expect(onMouseOut).toHaveBeenCalled()
@@ -246,7 +246,7 @@ describe('<Checkbox />', () => {
 
     expect(input).toHaveAttribute('data-checked', 'false')
 
-    userEvent.click(input)
+    await userEvent.click(input)
     await waitFor(() => {
       expect(input).toHaveAttribute('data-checked', 'true')
     })

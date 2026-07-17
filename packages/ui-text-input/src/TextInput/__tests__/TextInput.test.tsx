@@ -112,8 +112,8 @@ describe('<TextInput/>', () => {
       const onBlur = vi.fn()
       render(<TextInput renderLabel="Name" onBlur={onBlur} />)
 
-      userEvent.tab()
-      userEvent.tab()
+      await userEvent.tab()
+      await userEvent.tab()
 
       await waitFor(() => {
         expect(onBlur).toHaveBeenCalled()

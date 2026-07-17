@@ -176,8 +176,8 @@ describe('<Dialog />', () => {
     const onDismiss = vi.fn()
     renderDialog({ onDismiss, shouldCloseOnDocumentClick: true })
 
-    await waitFor(() => {
-      userEvent.click(document.body)
+    await waitFor(async () => {
+      await userEvent.click(document.body)
       expect(onDismiss).toHaveBeenCalled()
     })
   })
@@ -199,7 +199,7 @@ describe('<Dialog />', () => {
       )
       const nonTabbableContent = getByTestId('non-tabbable')
 
-      userEvent.tab()
+      await userEvent.tab()
       await waitFor(() => {
         expect(document.activeElement).toBe(nonTabbableContent)
       })
@@ -350,8 +350,8 @@ describe('<Dialog />', () => {
           expect(document.activeElement).toBe(inputTwo)
         })
 
-        await waitFor(() => {
-          userEvent.tab()
+        await waitFor(async () => {
+          await userEvent.tab()
           expect(onBlur).not.toHaveBeenCalled()
           expect(document.activeElement).toBe(inputOne)
         })

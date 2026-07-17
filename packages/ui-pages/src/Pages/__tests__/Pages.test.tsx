@@ -132,7 +132,7 @@ describe('<Pages />', () => {
 
     const button = container.querySelector('button')!
 
-    userEvent.click(button)
+    await userEvent.click(button)
 
     await waitFor(() => {
       expect(onPageIndexChange).toHaveBeenCalledTimes(1)

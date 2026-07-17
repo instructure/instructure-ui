@@ -86,7 +86,7 @@ describe('<Alert />', () => {
     )
     const closeButton = screen.getByRole('button')
 
-    userEvent.click(closeButton)
+    await userEvent.click(closeButton)
 
     await waitFor(() => {
       expect(onDismiss).toHaveBeenCalled()

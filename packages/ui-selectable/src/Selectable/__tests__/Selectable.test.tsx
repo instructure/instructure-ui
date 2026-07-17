@@ -78,7 +78,7 @@ describe('<Selectable />', () => {
 
     expect(document.activeElement).not.toBe(input)
 
-    userEvent.click(label)
+    await userEvent.click(label)
 
     await waitFor(() => {
       expect(document.activeElement).toBe(input)
@@ -117,7 +117,7 @@ describe('<Selectable />', () => {
 
     expect(document.activeElement).not.toBe(input)
 
-    userEvent.click(label)
+    await userEvent.click(label)
 
     await waitFor(() => {
       expect(onFocus).toHaveBeenCalledTimes(1)
@@ -158,7 +158,7 @@ describe('<Selectable />', () => {
     const list = screen.getByRole('listbox')
 
     input.focus()
-    userEvent.click(list)
+    await userEvent.click(list)
 
     await waitFor(() => {
       expect(document.activeElement).toBe(input)
@@ -208,7 +208,7 @@ describe('<Selectable />', () => {
     const option = screen.getByText('foo')
 
     input.focus()
-    userEvent.click(option)
+    await userEvent.click(option)
 
     await waitFor(() => {
       expect(document.activeElement).toBe(input)
@@ -253,7 +253,7 @@ describe('<Selectable />', () => {
     )
     const button = screen.getByText('Selected')
 
-    userEvent.click(button)
+    await userEvent.click(button)
     await userEvent.type(button, '{enter}')
 
     await waitFor(() => {
@@ -278,7 +278,7 @@ describe('<Selectable />', () => {
         )
         const label = screen.getByText('Selectable')
 
-        userEvent.click(label)
+        await userEvent.click(label)
 
         await waitFor(() => {
           expect(onRequestShowOptions).toHaveBeenCalledTimes(1)
@@ -294,7 +294,7 @@ describe('<Selectable />', () => {
           </Selectable>
         )
 
-        userEvent.click(label)
+        await userEvent.click(label)
 
         await waitFor(() => {
           expect(onRequestShowOptions).toHaveBeenCalledTimes(1)
@@ -314,7 +314,7 @@ describe('<Selectable />', () => {
         )
         const input = screen.getByRole('combobox')
 
-        userEvent.click(input)
+        await userEvent.click(input)
 
         await waitFor(() => {
           expect(onRequestShowOptions).toHaveBeenCalledTimes(1)
@@ -329,7 +329,7 @@ describe('<Selectable />', () => {
           </Selectable>
         )
 
-        userEvent.click(input)
+        await userEvent.click(input)
 
         await waitFor(() => {
           expect(onRequestShowOptions).toHaveBeenCalledTimes(1)
@@ -1198,8 +1198,8 @@ describe('<Selectable />', () => {
       const option_0 = screen.getByText(defaultOptions[0])
       const option_1 = screen.getByText(defaultOptions[1])
 
-      userEvent.click(option_0)
-      userEvent.click(option_1)
+      await userEvent.click(option_0)
+      await userEvent.click(option_1)
 
       await waitFor(() => {
         expect(onRequestSelectOption).toHaveBeenCalledTimes(2)

@@ -137,12 +137,12 @@ describe('<Item />', () => {
       '[class$="-optionItem__container"]'
     )
 
-    userEvent.click(optionItem!)
+    await userEvent.click(optionItem!)
     await waitFor(() => {
       expect(onClick).not.toHaveBeenCalled()
     })
 
-    userEvent.click(optionItemContainer!)
+    await userEvent.click(optionItemContainer!)
     await waitFor(() => {
       expect(onClick).toHaveBeenCalledTimes(1)
     })

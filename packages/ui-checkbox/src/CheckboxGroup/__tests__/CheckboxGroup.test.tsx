@@ -138,10 +138,10 @@ describe('<CheckboxGroup />', () => {
     expect(checkboxes[0]).not.toBeChecked()
     expect(checkboxes[1]).not.toBeChecked()
 
-    userEvent.click(checkboxes[0])
+    await userEvent.click(checkboxes[0])
 
     await waitFor(() => {
-      expect(onChange).not.toHaveBeenCalled()
+      expect(onChange).toHaveBeenCalledWith(['tester', 'test-value-1'])
       expect(checkboxes[0]).not.toBeChecked()
       expect(checkboxes[1]).not.toBeChecked()
     })
@@ -155,8 +155,8 @@ describe('<CheckboxGroup />', () => {
     expect(checkboxes[0]).not.toBeChecked()
     expect(checkboxes[1]).not.toBeChecked()
 
-    userEvent.click(checkboxes[0])
-    userEvent.click(checkboxes[1])
+    await userEvent.click(checkboxes[0])
+    await userEvent.click(checkboxes[1])
 
     await waitFor(() => {
       expect(checkboxes[0]).toBeChecked()
@@ -183,7 +183,7 @@ describe('<CheckboxGroup />', () => {
     expect(checkboxes[0]).toBeChecked()
     expect(checkboxes[1]).toBeChecked()
 
-    userEvent.click(checkboxes[0])
+    await userEvent.click(checkboxes[0])
 
     await waitFor(() => {
       expect(checkboxes[0]).not.toBeChecked()
@@ -201,7 +201,7 @@ describe('<CheckboxGroup />', () => {
     expect(checkboxes[0]).not.toBeChecked()
     expect(checkboxes[1]).toBeChecked()
 
-    userEvent.click(checkboxes[0])
+    await userEvent.click(checkboxes[0])
 
     await waitFor(() => {
       expect(checkboxes[0]).toBeChecked()
