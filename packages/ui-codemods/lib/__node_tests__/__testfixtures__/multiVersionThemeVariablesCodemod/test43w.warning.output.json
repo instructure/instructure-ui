@@ -1,0 +1,3 @@
+[
+  "`Spinner` has a spread (`{...}`) and no explicit `themeOverride`. If the spread sets a `themeOverride`, its theme tokens could not be inspected and were not migrated - review it manually."
+]

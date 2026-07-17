@@ -1,0 +1,3 @@
+[
+  "Theme-specific overrides (`theme.themeOverrides.<themeName>`) are no longer supported - the new theming system applies `themeOverride` unconditionally, with no per-theme equivalent. Left unchanged; migrate it manually."
+]

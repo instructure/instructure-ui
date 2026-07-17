@@ -31,6 +31,7 @@ import warnTableCaptionMissing from './warnTableCaptionMissing'
 import warnCodeEditorRemoved from './warnCodeEditorRemoved'
 import migrateToNewIcons from './migrateToNewIcons'
 import updateInstUIImportVersions from './updateInstUIImportVersions'
+import multiVersionThemeVariablesCodemod from './multiVersionThemeVariablesCodemod/multiVersionThemeVariablesCodemod'
 
 export {
   updateV10Breaking,
@@ -41,5 +42,6 @@ export {
   warnTableCaptionMissing,
   warnCodeEditorRemoved,
   migrateToNewIcons,
-  updateInstUIImportVersions
+  updateInstUIImportVersions,
+  multiVersionThemeVariablesCodemod
 }

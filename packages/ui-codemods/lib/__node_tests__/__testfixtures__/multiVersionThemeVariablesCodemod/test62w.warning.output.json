@@ -1,0 +1,3 @@
+[
+  "`componentOverrides` could not be moved to the `themeOverride.components` prop because this InstUISettingsProvider already has a `themeOverride` whose value is not an object literal, so the two could not be merged. Please move the overrides manually."
+]

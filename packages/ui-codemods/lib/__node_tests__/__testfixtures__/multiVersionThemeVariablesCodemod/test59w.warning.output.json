@@ -1,0 +1,4 @@
+[
+  "Component overrides were moved from `theme.componentOverrides` to `themeOverride.components`. Components imported from v11.6 or earlier still read the legacy `theme.componentOverrides` channel, so any such component inside this provider will no longer receive its override - upgrade those components to v11.7 or `latest`.",
+  "Duplicate `strokeWidthXs` override for `Spinner`: the relocated `theme.componentOverrides` and the existing `themeOverride.components` both set it. Kept the first value and dropped this one - these overrides can no longer differ for `strokeWidthXs`, so reconcile it manually."
+]

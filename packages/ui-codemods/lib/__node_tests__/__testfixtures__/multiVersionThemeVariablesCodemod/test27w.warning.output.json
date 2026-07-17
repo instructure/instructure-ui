@@ -1,0 +1,3 @@
+[
+  "`boxShadow` is now an object (`{ 0: {…}, 1: {…} }`) instead of a CSS string; update any string override."
+]

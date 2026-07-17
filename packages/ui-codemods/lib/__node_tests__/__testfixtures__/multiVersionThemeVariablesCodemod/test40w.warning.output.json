@@ -1,0 +1,3 @@
+[
+  "Variant-dependent theme variables for Checkbox could not be migrated because the `variant` prop could not be read statically (they map to different tokens for the `toggle` vs `simple` variant); left unchanged - update these manually: `checkedBackground`."
+]

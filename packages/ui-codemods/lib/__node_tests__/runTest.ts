@@ -37,10 +37,9 @@ import { expect, vi } from 'vitest'
  * @param codemod The codemod to run
  */
 export function runTest(codemod: Transform) {
-  const entries = fs.readdirSync(
-    `${__dirname}/__testfixtures__/${codemod.name}`,
-    { withFileTypes: true }
-  )
+  // Fixtures live in `./__testfixtures__/[codemod name]/`.
+  const fixturesDir = `${__dirname}/__testfixtures__/${codemod.name}`
+  const entries = fs.readdirSync(fixturesDir, { withFileTypes: true })
 
   let fixturesRun = 0
   entries.forEach((entry) => {
@@ -66,7 +65,11 @@ export function runTest(codemod: Transform) {
 
       if (isWarningTest) {
         const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
-
+        // Isolate this fixture's warnings: transform fixtures run above (via
+        // runInlineTest) don't spy console.warn, and depending on directory
+        // enumeration order their warnings can be attributed to this spy. Clear
+        // any pre-run calls so the count reflects only this fixture's codemod run.
+        warnSpy.mockClear()
         try {
           const j = jscodeshift.withParser('tsx')
           const fileInfo = { path: inputPath, source: input }

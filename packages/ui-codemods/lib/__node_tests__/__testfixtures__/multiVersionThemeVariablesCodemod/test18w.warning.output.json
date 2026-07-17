@@ -1,0 +1,3 @@
+[
+  "InstUISettingsProvider 'theme' is set dynamically and may override component theme variables that have changed. These could not be updated automatically - please review and update them manually."
+]

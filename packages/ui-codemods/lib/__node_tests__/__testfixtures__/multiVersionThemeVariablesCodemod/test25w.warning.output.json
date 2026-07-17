@@ -1,0 +1,4 @@
+[
+  "`padding` has been removed. Use `paddingHorizontal` for left/right padding",
+  "`fontFamily` has been removed. Use `valueFontFamily` and `labelFontFamily` for setting the value and label font families"
+]

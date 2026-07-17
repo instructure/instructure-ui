@@ -1,0 +1,5 @@
+[
+  "`smallSize` has been removed; use `containerSizeSm` (outer container) and `spinnerSizeSm` (the circle).",
+  "Theme variables for Text could not be migrated automatically because a dynamic expression is used in themeOverride prop. Manually check these affected tokens in the expression: `primaryColor`, `secondaryColor`, `primaryInverseColor`, `secondaryInverseColor`, `brandColor`, `dangerColor`, `weightImportant`, `weightRegular`, `alertColor`.",
+  "Component overrides were moved from `theme.componentOverrides` to `themeOverride.components`. Components imported from v11.6 or earlier still read the legacy `theme.componentOverrides` channel, so any such component inside this provider will no longer receive its override - upgrade those components to v11.7 or `latest`."
+]

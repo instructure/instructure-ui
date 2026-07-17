@@ -1,0 +1,3 @@
+[
+  "`smallSize` has been removed; use `containerSizeSm` (outer container) and `spinnerSizeSm` (the circle)."
+]

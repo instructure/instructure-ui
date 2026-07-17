@@ -1570,6 +1570,9 @@ importers:
       '@types/prettier':
         specifier: ^2.7.3
         version: 2.7.3
+      ast-types:
+        specifier: ^0.16.1
+        version: 0.16.1
       vitest:
         specifier: ^4.1.9
         version: 4.1.9(@types/node@24.1.0)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))

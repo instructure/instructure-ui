@@ -146,6 +146,36 @@ type: embed
 
 ```
 
+### Avatar
+
+The `color` prop values changed from `shamrock`/`barney`/`crimson`/`fire`/`licorice`/`ash` to `accent1`-`accent6`, and each color now has a separate background and text token.
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"boxShadowColor",note:"replaced by a single boxShadow object token"},
+    {name:"boxShadowBlur",note:"replaced by a single boxShadow object token"},
+    {name:"color",note:"color system reworked to accent1-6; use blueBackgroundColor/blueTextColor"},
+    {name:"colorShamrock",note:"color system reworked to accent1-6; use greenBackgroundColor/greenTextColor"},
+    {name:"colorBarney",note:"color system reworked to accent1-6; use blueBackgroundColor/blueTextColor"},
+    {name:"colorCrimson",note:"color system reworked to accent1-6; use redBackgroundColor/redTextColor"},
+    {name:"colorFire",note:"color system reworked to accent1-6; use orangeBackgroundColor/orangeTextColor"},
+    {name:"colorLicorice",note:"color system reworked to accent1-6; use ashBackgroundColor/ashTextColor"},
+    {name:"colorAsh",note:"color system reworked to accent1-6; use greyBackgroundColor/greyTextColor"},
+    {name:"aiFontColor",note:"the AI variant text now uses textOnColor"}
+  ]}
+  changed={[
+    {oldName:"background",newName:"backgroundColor",note:""},
+    {oldName:"borderWidthSmall",newName:"borderWidthSm",note:""},
+    {oldName:"borderWidthMedium",newName:"borderWidthMd",note:""}
+  ]}
+/>
+
+```
+
 ### BaseButton
 
 All button components (Button, IconButton, CondensedButton) share BaseButton's theme tokens.
@@ -266,21 +296,17 @@ type: embed
     {name:"iconTextGapCondensed",note:"replaced by gapButtonContentSm"},
     {name:"primaryActiveBoxShadow",note:""},
     {name:"primaryGhostActiveBoxShadow",note:""},
-    {name:"primaryGhostBoxShadow",note:""},
-    {name:"primaryGhostHoverBoxShadow",note:""},
-    {name:"secondaryActiveBackground",note:""},
+    {name:"primaryGhostBoxShadow",note:"unused token"},
+    {name:"primaryGhostHoverBoxShadow",note:"unused token"},
     {name:"secondaryActiveBoxShadow",note:""},
     {name:"secondaryGhostActiveBoxShadow",note:""},
     {name:"successActiveBoxShadow",note:""},
     {name:"successGhostActiveBoxShadow",note:""},
-    {name:"dangerActiveBackground",note:""},
     {name:"dangerActiveBoxShadow",note:""},
     {name:"dangerGhostActiveBoxShadow",note:""},
     {name:"primaryInverseActiveBoxShadow",note:""},
     {name:"primaryInverseGhostActiveBoxShadow",note:""},
-    {name:"primaryInverseGhostBoxShadow",note:""},
-    {name:"primaryInverseGhostHoverBoxShadow",note:""},
-    {name:"aiActiveBoxShadow",note:"replaced by granular AI tokens"}
+    {name:"aiActiveBoxShadow",note:"unused token"}
   ]}
 />
 
@@ -316,14 +342,14 @@ type: embed
     {name:"gapLg",note:"Gap spacing for large size breadcrumbs"}
   ]}
   removed={[
-    {name:"fontFamily",note:"handled in link component"},
-    {name:"separatorColor",note:"handled in link component"},
-    {name:"smallSeparatorFontSize",note:"handled in link component"},
-    {name:"smallFontSize",note:"handled in link component"},
-    {name:"mediumSeparatorFontSize",note:"handled in link component"},
-    {name:"mediumFontSize",note:"handled in link component"},
-    {name:"largeSeparatorFontSize",note:"handled in link component"},
-    {name:"largeFontSize",note:"handled in link component"}
+    {name:"fontFamily",note:"handled in Link component"},
+    {name:"separatorColor",note:"handled in Link component"},
+    {name:"smallSeparatorFontSize",note:"handled in Link component"},
+    {name:"smallFontSize",note:"handled in Link component"},
+    {name:"mediumSeparatorFontSize",note:"handled in Link component"},
+    {name:"mediumFontSize",note:"handled in Link component"},
+    {name:"largeSeparatorFontSize",note:"handled in Link component"},
+    {name:"largeFontSize",note:"handled in Link component"}
   ]}
 />
 
@@ -362,6 +388,9 @@ type: embed
     {name:"padding",note:""},
     {name:"checkedLabelColor",note:""},
     {name:"color",note:""},
+    {name:"focusBorderStyle",note:""},
+    {name:"focusBorderWidth",note:""},
+    {name:"focusBorderColor",note:""},
     {name:"checkErrorInsetWidth",note:"split into new size variants"},
     {name:"toggleErrorInsetWidth",note:"custom calculation added"},
   ]}
@@ -378,7 +407,6 @@ type: embed
     {oldName:"checkedBorderColor",newName:"borderCheckedColor",note:""},
     {oldName:"hoverBorderColor",newName:"borderHoverColor",note:""},
     {oldName:"labelColor",newName:"labelBaseColor",note:""},
-    {oldName:"checkedLabelColor",newName:"labelBaseColor",note:""},
     {oldName:"labelFontFamily",newName:"fontFamily",note:""},
     {oldName:"labelFontWeight",newName:"fontWeight",note:""},
     {oldName:"labelLineHeight",newName:"lineHeight",note:""},
@@ -407,12 +435,12 @@ type: embed
     {name:"errorBackgroundHoverColor",note:""},
     {name:"borderHoverColor",note:""},
     {name:"borderDisabledColor",note:""},
-    {name:"borderReadOnlyColor",note:""},
+    {name:"borderReadonlyColor",note:""},
     {name:"errorBorderColor",note:""},
     {name:"checkedBorderColor",note:""},
     {name:"checkedBorderHoverColor",note:""},
     {name:"checkedBorderDisabledColor",note:""},
-    {name:"checkedBorderReadOnlyColor",note:""},
+    {name:"checkedBorderReadonlyColor",note:""},
     {name:"checkedBackgroundHoverColor",note:""},
     {name:"checkedBackgroundDisabledColor",note:""},
     {name:"checkedBackgroundReadonlyColor",note:""},
@@ -423,7 +451,6 @@ type: embed
     {name:"checkedIconBorderHoverColor",note:""},
     {name:"checkedIconBorderDisabledColor",note:""},
     {name:"checkedIconBorderReadonlyColor",note:""},
-    {name:"checkedIconBorderReadonlyColor",note:""},
     {name:"disabledOpacity",note:""},
   ]}
   removed={[
@@ -433,14 +460,13 @@ type: embed
     {name:"focusOutlineColor",note:""},
     {name:"focusBorderWidth",note:""},
     {name:"focusBorderStyle",note:""},
-    {name:"focusBorderStyle",note:""},
     {name:"labelLineHeight",note:"split into new size variants"},
   ]}
   changed={[
     {oldName:"labelFontSizeSmall",newName:"labelFontSizeSm",note:""},
     {oldName:"labelFontSizeMedium",newName:"labelFontSizeMd",note:""},
     {oldName:"labelFontSizeLarge",newName:"labelFontSizeLg",note:""},
-    {oldName:"background",newName:"toggleBackground",note:""},
+    {oldName:"background",newName:"backgroundColor",note:""},
     {oldName:"checkedBackground",newName:"checkedBackgroundColor",note:""},
   ]}
 />
@@ -679,7 +705,8 @@ type: embed
     {name:"errorFieldsPadding",note:""},
     {name:"borderColor",note:""},
     {name:"borderStyle",note:""},
-    {name:"borderWidth",note:""}
+    {name:"borderWidth",note:""},
+    {name:"borderRadius",note:""}
   ]}
 />
 
@@ -695,9 +722,8 @@ type: embed
   removed={[
     {name:"spacing",note:""},
     {name:"inlinePadding",note:""},
-    {name:"asteriskColor",note:""},
     {name:"stackedOrInlineBreakpoint",note:"uses now sharedTokens.breakpoints.md"}
-  ]}
+ ]}
   changed={[
     {oldName:"color",newName:"textColor",note:""}
   ]}
@@ -861,12 +887,37 @@ type: embed
     {name:"iconSize",note:""},
     {name:"iconPlusTextMargin",note:""},
     {name:"iconPlusTextMarginSmall",note:""},
-    {name:"textUnderlineOffset",note:""}
+    {name:"textUnderlineOffset",note:""},
+    {name:"hoverTextDecorationWithinText",note:""},
+    {name:"hoverTextDecorationOutsideText",note:""},
+    {name:"textDecorationWithinText",note:""},
+    {name:"textDecorationOutsideText",note:""}
   ]}
   changed={[
     {oldName:"color",newName:"textColor",note:""},
     {oldName:"hoverColor",newName:"textHoverColor",note:""},
     {oldName:"colorInverse",newName:"onColorTextColor",note:""}
+  ]}
+/>
+
+```
+
+### Mask
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"zIndex",note:""},
+    {name:"borderColor",note:""},
+    {name:"focusBorderColor",note:""},
+    {name:"borderRadius",note:""},
+    {name:"borderWidth",note:""}
+  ]}
+  changed={[
+    {oldName:"background",newName:"backgroundColor",note:""}
   ]}
 />
 
@@ -885,7 +936,9 @@ type: embed
     {name:"focusBorderStyle",note:"style uses sharedTokens.focusOutline"},
     {name:"focusBorderWidth",note:"style uses sharedTokens.focusOutline"},
     {name:"focusBorderColor",note:"style uses sharedTokens.focusOutline"},
-    {name:"focusBorderRadius",note:"style uses sharedTokens.focusOutline"}
+    {name:"focusBorderRadius",note:"style uses sharedTokens.focusOutline"},
+    {name:"background",note:""},
+    {name:"borderRadius",note:""}
   ]}
 />
 
@@ -918,6 +971,20 @@ type: embed
 <V12ChangelogTable
   removed={[
     {name:"padding",note:"split into paddingVertical and paddingHorizontal"}
+  ]}
+/>
+
+```
+
+#### Menu.Separator
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"margin",note:"split into marginVertical and marginHorizontal"}
   ]}
 />
 
@@ -967,6 +1034,7 @@ type: embed
   changed={[
     {oldName:"background",newName:"backgroundColor",note:""},
     {oldName:"inverseBackground",newName:"inverseBackgroundColor",note:""},
+    {oldName:"boxShadow",newName:"boxShadow",note:"now an object ({ 0: {…}, 1: {…} }) instead of a CSS string"},
   ]}
 />
 
@@ -1044,15 +1112,18 @@ type: embed
     {name:"focusOutlineWidth",note:""},
     {name:"focusOutlineStyle",note:""},
     {name:"focusOutlineColor",note:""},
-    {name:"requiredInvalidColor",note:""}
+    {name:"requiredInvalidColor",note:""},
+    {name:"arrowsColor",note:""},
+    {name:"arrowsActiveBoxShadow",note:""}
   ]}
   changed={[
     {oldName:"mediumFontSize",newName:"fontSizeMd",note:""},
     {oldName:"largeFontSize",newName:"fontSizeLg",note:""},
     {oldName:"mediumHeight",newName:"heightMd",note:""},
-    {oldName:"largeHeight",newName:"textColor",note:""},
+    {oldName:"largeHeight",newName:"heightLg",note:""},
     {oldName:"color",newName:"textColor",note:""},
-    {oldName:"background",newName:"backgroundColor",note:""}
+    {oldName:"background",newName:"backgroundColor",note:""},
+    {oldName:"arrowsHoverBackgroundColor",newName:"arrowsBackgroundHoverColor",note:""}
   ]}
 />
 
@@ -1173,9 +1244,8 @@ type: embed
     {name:"borderColorInverse",note:"full border color for light and dark themes"}
   ]}
   removed={[
-    {name:"lineHeight",note:""},
-    {name:"meterBorderColorInverse",note:""},
-    {name:"meterBorderWidthInverse",note:""},
+    {name:"meterBorderColorInverse",note:"unused token"},
+    {name:"meterBorderWidthInverse",note:"unused token"},
   ]}
 />
 
@@ -1207,11 +1277,11 @@ type: embed
     {name:"controlVerticalMargin",note:""},
   ]}
   removed={[
-    {name:"controlSize",note:""},
     {name:"focusBorderColor",note:"focus outline is now controlled via sharedTokens"},
     {name:"focusBorderWidth",note:"focus outline is now controlled via sharedTokens"},
     {name:"focusBorderStyle",note:"focus outline is now controlled via sharedTokens"},
     {name:"labelLineHeight",note:"split into size-specific lineHeightSm, lineHeightMd, lineHeightLg"},
+    {name:"controlSize",note:"unused token"},
   ]}
   changed={[
     {oldName:"background",newName:"backgroundColor",note:""},
@@ -1228,7 +1298,8 @@ type: embed
     {oldName:"simpleCheckedInsetLarge",newName:"checkedInsetLg",note:""},
     {oldName:"simpleFontSizeSmall",newName:"fontSizeSm",note:""},
     {oldName:"simpleFontSizeMedium",newName:"fontSizeMd",note:""},
-    {oldName:"simpleFontSizeLarge",newName:"fontSizeLg",note:""}
+    {oldName:"simpleFontSizeLarge",newName:"fontSizeLg",note:""},
+    {oldName:"toggleShadow",newName:"toggleShadow",note:"now an object ({ 0: {…}, 1: {…} }) instead of a CSS string"}
   ]}
 />
 ```
@@ -1265,10 +1336,11 @@ type: embed
     {name:"handleFocusRingColor",note:"style uses sharedTokens.focusOutline.onColor token"},
     {name:"handleFocusOutlineColor",note:"only used by the removed deprecated thumb variant"},
     {name:"handleFocusOutlineWidth",note:"only used by the removed deprecated thumb variant"},
-    {name:"handleShadowColor",note:"only used by the removed deprecated thumb variant"}
+    {name:"handleShadowColor",note:"only used by the removed deprecated thumb variant"},
+    {name:"valueColor",note:"unused token"}
   ]}
   changed={[
-    {oldName:"handleShadow",newName:"boxShadow",note:""},
+    {oldName:"handleShadow",newName:"boxShadow",note:"now an object ({ 0: {…}, 1: {…} }) instead of a CSS string"},
     {oldName:"valueSmallPadding",newName:"valueSmallPadding",note:"now only sets horizontal padding of the value"},
     {oldName:"valueMediumPadding",newName:"valueMediumPadding",note:"now only sets horizontal padding of the value"},
     {oldName:"valueLargePadding",newName:"valueLargePadding",note:"now only sets horizontal padding of the value"}
@@ -1311,11 +1383,11 @@ type: embed
 
   ]}
   removed={[
-    {name:"focusOutlineInnerWidth",note:""},
-    {name:"focusOutlineOuterWidth",note:""},
-    {name:"focusOutlineInnerColor",note:""},
-    {name:"focusOutlineOuterColor",note:""},
-    {name:"marginBottom",note:""},
+    {name:"focusOutlineInnerWidth",note:"unused token"},
+    {name:"focusOutlineOuterWidth",note:"unused token"},
+    {name:"focusOutlineInnerColor",note:"unused token"},
+    {name:"focusOutlineOuterColor",note:"unused token"},
+    {name:"marginBottom",note:"unused token"},
   ]}
 />
 
@@ -1371,6 +1443,27 @@ type: embed
 - `as` prop has been removed, `Spinner` will always render as a `<div>` element.
 - `elementRef` prop has been removed, use the `ref` prop instead.
 
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"xSmallSize",note:"`xSmallSize` has been removed; use `containerSizeXs` (outer container) and `spinnerSizeXs` (the circle)."},
+    {name:"smallSize",note:"`smallSize` has been removed; use `containerSizeSm` (outer container) and `spinnerSizeSm` (the circle)."},
+    {name:"mediumSize",note:"`mediumSize` has been removed; use `containerSizeMd` (outer container) and `spinnerSizeMd` (the circle)."},
+    {name:"largeSize",note:"`largeSize` has been removed; use `containerSizeLg` (outer container) and `spinnerSizeLg` (the circle)."}
+  ]}
+  changed={[
+    {oldName:"xSmallBorderWidth",newName:"strokeWidthXs",note:""},
+    {oldName:"smallBorderWidth",newName:"strokeWidthSm",note:""},
+    {oldName:"mediumBorderWidth",newName:"strokeWidthMd",note:""},
+    {oldName:"largeBorderWidth",newName:"strokeWidthLg",note:""}
+  ]}
+/>
+
+```
+
 ### Table
 
 #### Table.Cell
@@ -1386,7 +1479,7 @@ type: embed
   ]}
   removed={[
     {name:"padding",note:"split into paddingVertical and paddingHorizontal"},
-    {name:"borderColor",note:""}
+    {name:"borderColor",note:"unused token"}
   ]}
 />
 
@@ -1405,12 +1498,12 @@ type: embed
   ]}
   removed={[
     {name:"padding",note:"split into paddingVertical and paddingHorizontal"},
-    {name:"borderColor",note:""},
     {name:"focusOutlineColor",note:""},
     {name:"focusOutlineStyle",note:""},
     {name:"focusOutlineWidth",note:""},
     {name:"sortedIconColor",note:""},
-    {name:"unsortedIconColor",note:""}
+    {name:"unSortedIconColor",note:""},
+    {name:"borderColor",note:"unused token"}
   ]}
 />
 
@@ -1462,7 +1555,8 @@ type: embed
 ---
 <V12ChangelogTable
   removed={[
-    {name:"focusOutlineColor",note:"style uses sharedTokens.focusOutline.infoColor"}
+    {name:"focusOutlineColor",note:"style uses sharedTokens.focusOutline.infoColor"},
+    {name:"borderStyle",note:""}
   ]}
   changed={[
     {oldName:"color",newName:"textColor",note:""}
@@ -1478,11 +1572,9 @@ type: embed
 type: embed
 ---
 <V12ChangelogTable
-  removed={[
-    {name:"defaultHoverBorderColor",note:"was unused"}
-  ]}
   changed={[
-    {oldName:"defaultColor",newName:"defaultTextColor",note:""}
+    {oldName:"defaultColor",newName:"defaultTextColor",note:""},
+    {oldName:"secondaryColor",newName:"secondaryTextColor",note:""}
   ]}
 />
 
@@ -1500,8 +1592,6 @@ type: embed
   removed={[
     {name:"defaultIconColor",note:""},
     {name:"defaultIconHoverColor",note:""},
-    {name:"inlineIconColor",note:""},
-    {name:"inlineIconHoverColor",note:""},
     {name:"focusOutlineColor",note:""},
     {name:"focusOutlineStyle",note:""},
     {name:"focusOutlineWidth",note:""},
@@ -1518,6 +1608,28 @@ type: embed
 - Added three new colors: `primary-on` and `secondary-on`, these are used for colored surfaces; `inherit` inherits the color from its ancestor.
 - `alert` color has been removed. Please use `primary` instead.
 - Some prop values have been deprecated, see [Text](/Text) for more details.
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"alertColor",note:""}
+  ]}
+  changed={[
+    {oldName:"primaryColor",newName:"baseColor",note:""},
+    {oldName:"secondaryColor",newName:"mutedColor",note:""},
+    {oldName:"primaryInverseColor",newName:"inverseColor",note:""},
+    {oldName:"secondaryInverseColor",newName:"inverseColor",note:""},
+    {oldName:"brandColor",newName:"primaryColor",note:"primaryColor now holds the brand color"},
+    {oldName:"dangerColor",newName:"errorColor",note:""},
+    {oldName:"weightImportant",newName:"fontWeightImportant",note:""},
+    {oldName:"weightRegular",newName:"fontWeightRegular",note:""}
+  ]}
+/>
+
+```
 
 ### TextArea
 
@@ -1542,7 +1654,7 @@ type: embed
   changed={[
     {oldName:"smallFontSize",newName:"fontSizeSm",note:""},
     {oldName:"mediumFontSize",newName:"fontSizeMd",note:""},
-    {oldName:"largeFontMedium",newName:"fontSizeLg",note:""},
+    {oldName:"largeFontSize",newName:"fontSizeLg",note:""},
     {oldName:"color",newName:"textColor",note:""},
     {oldName:"background",newName:"backgroundColor",note:""}
   ]}
@@ -1564,7 +1676,7 @@ type: embed
   removed={[
     {name:"padding",note:""},
     {name:"borderStyle",note:""},
-    {name:"errorOutlineColor",note:""},
+    {name:"errorOutlineColor",note:"unused token"},
     {name:"focusOutlineWidth",note:""},
     {name:"focusOutlineStyle",note:""},
     {name:"focusOutlineColor",note:""},
@@ -1576,7 +1688,7 @@ type: embed
     {oldName:"largeFontSize",newName:"fontSizeLg",note:""},
     {oldName:"smallHeight",newName:"heightSm",note:""},
     {oldName:"mediumHeight",newName:"heightMd",note:""},
-    {oldName:"largeHeight",newName:"textColor",note:""},
+    {oldName:"largeHeight",newName:"heightLg",note:""},
     {oldName:"color",newName:"textColor",note:""},
     {oldName:"background",newName:"backgroundColor",note:""}
   ]}
@@ -1595,10 +1707,13 @@ type: embed
 type: embed
 ---
 <V12ChangelogTable
+  removed={[
+    {name:"toggleFocusBorderColor",note:""}
+  ]}
   changed={[
-    {oldName:"smallIconSize",newName:"contentPaddingSmall",note:""},
-    {oldName:"mediumIconSize",newName:"contentPaddingMedium",note:""},
-    {oldName:"largeIconSize",newName:"contentPaddingLarge",note:""}
+    {oldName:"smallIconSize",newName:"contentPaddingSmall",note:"icon is now self-sized; only controls content padding"},
+    {oldName:"mediumIconSize",newName:"contentPaddingMedium",note:"icon is now self-sized; only controls content padding"},
+    {oldName:"largeIconSize",newName:"contentPaddingLarge",note:"icon is now self-sized; only controls content padding"}
   ]}
 />
 
@@ -1629,9 +1744,10 @@ type: embed
     {oldName:"background",newName:"backgroundColor",note:""},
     {oldName:"xSmallWidth",newName:"widthXs",note:""},
     {oldName:"smallWidth",newName:"widthSm",note:""},
-    {oldName:"regularWidth",newName:"widthMg",note:""},
+    {oldName:"regularWidth",newName:"widthMd",note:""},
     {oldName:"mediumWidth",newName:"widthLg",note:""},
-    {oldName:"largeWidth",newName:"widthXl",note:""}
+    {oldName:"largeWidth",newName:"widthXl",note:""},
+    {oldName:"boxShadow",newName:"boxShadow",note:"now an object ({ 0: {…}, 1: {…} }) instead of a CSS string"}
   ]}
 />
 
@@ -1675,9 +1791,9 @@ type: embed
     {name:"focusOutlineWidth",note:"handled by sharedTokens"},
     {name:"focusOutlineStyle",note:"handled by sharedTokens"},
     {name:"focusOutlineColor",note:"handled by sharedTokens"},
-    {name:"selectedOutlineWidth",note:"handled by sharedTokens"},
+    {name:"selectedOutlineWidth",note:"unused token"},
     {name:"iconColor",note:""},
-    {name:"iconsMarginRight",note:""}
+    {name:"iconsMarginRight",note:"unused token"}
   ]}
 />
 
@@ -1698,7 +1814,7 @@ type: embed
 ---
 <V12ChangelogTable
   removed={[
-    {name:"arrowSize",note:"Moved to ContextView component"},
+    {name:"arrowSize",note:"unused token"},
     {name:"marginXxxSmall",note:"Use sharedTokens.spacing"},
     {name:"marginXxSmall",note:"Use sharedTokens.spacing"},
     {name:"marginXSmall",note:"Use sharedTokens.spacing"},
@@ -1715,9 +1831,9 @@ type: embed
     {name:"paddingLarge",note:"Use sharedTokens.spacing"},
     {name:"paddingXLarge",note:"Use sharedTokens.spacing"},
     {name:"paddingXxLarge",note:"Use sharedTokens.spacing"},
-    {name:"shadowDepth1",note:"Use sharedTokens.boxShadow.elevation1/2/3"},
-    {name:"shadowDepth2",note:"Use sharedTokens.boxShadow.elevation1/2/3"},
-    {name:"shadowDepth3",note:"Use sharedTokens.boxShadow.elevation1/2/3"},
+    {name:"shadowDepth1",note:"unused token"},
+    {name:"shadowDepth2",note:"unused token"},
+    {name:"shadowDepth3",note:"unused token"},
     {name:"shadowResting",note:"Use sharedTokens.boxShadow.elevation*"},
     {name:"shadowAbove",note:"Use sharedTokens.boxShadow.elevation*"},
     {name:"shadowTopmost",note:"Use sharedTokens.boxShadow.elevation*"},
@@ -1726,7 +1842,15 @@ type: embed
     {name:"borderRadiusLarge",note:"Use sharedTokens.radius*"},
     {name:"borderWidthSmall",note:"Use sharedTokens.width*"},
     {name:"borderWidthMedium",note:"Use sharedTokens.width*"},
-    {name:"borderWidthLarge",note:"Use sharedTokens.width*"}
+    {name:"borderWidthLarge",note:"Use sharedTokens.width*"},
+    {name:"focusOutlineStyle",note:"focus outline is now controlled via sharedTokens.focusOutline"},
+    {name:"focusOutlineWidth",note:"focus outline is now controlled via sharedTokens.focusOutline"},
+    {name:"focusOutlineOffset",note:"focus outline is now controlled via sharedTokens.focusOutline"},
+    {name:"focusOutlineInset",note:"focus outline is now controlled via sharedTokens.focusOutline"},
+    {name:"focusColorInfo",note:"focus outline is now controlled via sharedTokens.focusOutline"},
+    {name:"focusColorDanger",note:"focus outline is now controlled via sharedTokens.focusOutline"},
+    {name:"focusColorSuccess",note:"focus outline is now controlled via sharedTokens.focusOutline"},
+    {name:"focusColorInverse",note:"focus outline is now controlled via sharedTokens.focusOutline"}
   ]}
 />
 

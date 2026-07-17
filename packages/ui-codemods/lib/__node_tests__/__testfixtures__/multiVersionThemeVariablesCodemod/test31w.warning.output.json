@@ -1,0 +1,3 @@
+[
+  "Multiple tokens (`primaryInverseColor`, `secondaryInverseColor`) rename to `inverseColor`; left unchanged - consolidate them into a single `inverseColor` manually."
+]

@@ -1,0 +1,3 @@
+[
+  "InstUISettingsProvider 'theme' spreads an object (`...`) that may set component theme variables that have changed. These could not be updated automatically - please review and update them manually."
+]

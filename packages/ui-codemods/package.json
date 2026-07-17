@@ -28,7 +28,8 @@
     "@types/jscodeshift": "^17.3.0",
     "@types/prettier": "^2.7.3",
     "@types/node": "24.1.0",
-    "vitest": "^4.1.9"
+    "vitest": "^4.1.9",
+    "ast-types": "^0.16.1"
   },
   "publishConfig": {
     "access": "public"

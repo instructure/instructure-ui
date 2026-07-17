@@ -173,6 +173,7 @@ const generateStyle = (
         : colorVariants[color!].text,
       borderColor: componentTheme.borderColor,
       fontWeight: componentTheme.fontWeight,
+      fontFamily: componentTheme.fontFamily,
       overflow: 'hidden',
       // TODO handle the merging on tokens inside the util
       margin: calcSpacingFromShorthand(margin, {

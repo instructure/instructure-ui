@@ -78,7 +78,15 @@ function findElement(
   j: JSCodeshift,
   root: Collection,
   tagName: string,
-  withAttributes?: Attribute | Attribute[]
+  withAttributes?: Attribute | Attribute[],
+  // When true, the generic spread warning is suppressed for elements that
+  // already have the searched-for attribute (e.g. an explicit `themeOverride`
+  // the caller will migrate itself). It is still emitted when the attribute is
+  // absent, since the value could then be hidden inside the spread.
+  skipSpreadWarningIfAttributePresent = false,
+  // Optional override for the spread warning text, so a caller can give a
+  // domain-specific message instead of the generic one.
+  spreadWarningMessage?: string
 ) {
   let elements
   if (tagName.includes('.')) {
@@ -113,6 +121,17 @@ function findElement(
     })
   }
   elements.find(j.JSXSpreadAttribute).forEach((path) => {
+    if (skipSpreadWarningIfAttributePresent) {
+      const parent = path.parent?.value
+      if (
+        parent?.type === 'JSXOpeningElement' &&
+        checkIfAttributeExist(filePath, parent.attributes, withAttributes)
+      ) {
+        // Element already has the attribute we're migrating (e.g. an explicit
+        // `themeOverride`); a spread alongside it isn't a concern - don't warn.
+        return
+      }
+    }
     const line = filePath + '_' + path.value.loc?.start.line
     if (!warningsMap[line]) {
       // prevent displaying the same warning multiple times
@@ -120,8 +139,9 @@ function findElement(
       printWarning(
         filePath,
         path.value.loc?.start.line,
-        'Spread attribute (`...`) detected. Please double check the ' +
-          'result, I cannot see what is inside a spread object. '
+        spreadWarningMessage ??
+          'Spread attribute (`...`) detected. Please double check the ' +
+            'result, I cannot see what is inside a spread object. '
       )
     }
   })

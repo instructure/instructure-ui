@@ -1,0 +1,3 @@
+[
+  "Theme variables for Metric could not be migrated automatically because a dynamic expression is used in themeOverride prop. Manually check these affected tokens in the expression: `padding`, `fontFamily`."
+]

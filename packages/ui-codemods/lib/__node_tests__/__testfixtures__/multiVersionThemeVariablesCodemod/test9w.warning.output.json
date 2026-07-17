@@ -1,0 +1,4 @@
+[
+  "`padding` has been removed. Use `paddingHorizontal` for left/right padding",
+  "Theme variables for Metric could not be migrated automatically because a spread element (`...`) is used in themeOverride prop. Manually check these affected tokens in the expression: `padding`, `fontFamily`."
+]

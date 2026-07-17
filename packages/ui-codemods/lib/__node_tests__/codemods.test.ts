@@ -38,6 +38,7 @@ import {
   type MockInstance,
   vi
 } from 'vitest'
+import multiVersionThemeVariablesCodemod from '../multiVersionThemeVariablesCodemod/multiVersionThemeVariablesCodemod'
 
 describe('test codemods', () => {
   let consoleLogMock: ReturnType<typeof vi.spyOn>
@@ -85,5 +86,12 @@ describe('test codemods', () => {
 
   it('test migrating legacy icons to lucide/custom icons', () => {
     runTest(migrateToNewIcons)
+  })
+
+  // All fixtures run through the full `multiVersionThemeVariablesCodemod` (both
+  // legs: token renames + provider override relocation), so every `.output` is
+  // the real end-to-end result a user gets - no single-leg intermediate states.
+  it('test multi-version theme variables codemod (end-to-end)', () => {
+    runTest(multiVersionThemeVariablesCodemod)
   })
 })
