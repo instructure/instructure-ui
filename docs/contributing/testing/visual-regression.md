@@ -12,7 +12,7 @@ InstUI runs visual regression tests on every pull request. They guard against un
 
 On every PR:
 
-1. **Build & capture.** GitHub Actions builds InstUI, builds the `regression-test` Next.js app as a static site, and serves it. Cypress visits every page under `regression-test/src/app/*`, waits for it to render, and calls `cy.screenshot()` in an `afterEach` hook, producing one PNG per test case.
+1. **Build & capture.** GitHub Actions builds InstUI, builds the `regression-test` Next.js app as a static site, and serves it. Cypress visits every page under `regression-test/src/app/*` once per theme (via the `?theme=` query param), waits for each to render, and calls `cy.screenshot()` directly in the spec, producing one PNG per page/theme combination.
 2. **Diff.** The `ui-scripts visual-diff` command compares each screenshot against the matching baseline fetched from the `visual-baselines` branch of the repo. It uses [pixelmatch](https://github.com/mapbox/pixelmatch) with antialiasing detection enabled, so typical font-rendering noise doesn't register as a diff.
 3. **Publish.** The diff script writes an HTML report (with baseline / actual / diff for every row, plus a lightbox viewer) and the action publishes it to the `gh-pages` branch under `visual-regression/pr-<N>/`. The report is reachable at `https://instructure.design/visual-regression/pr-<N>/index.html`.
 4. **Comment.** A sticky PR comment summarizes the result, links to the report, and inlines each changed row's diff image inside a collapsed `<details>` block.

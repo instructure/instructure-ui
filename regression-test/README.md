@@ -8,7 +8,7 @@ A small Next.js app that imports `@instructure/ui` locally and exposes one page 
 
 Each page is captured once **per theme** (`canvas`, `light`, `dark`), so screenshots are named `<slug>-<theme>.png`. The theme is selected with the `?theme=<key>` query param, which `src/app/layout.tsx` reads and applies via `InstUISettingsProvider`. Add or remove themes with the `THEMES` array in `cypress/e2e/spec.cy.ts` (this multiplies the screenshot/baseline count).
 
-See the [visual regression testing guide](../docs/testing/visual-regression.md) for the full CI pipeline, the diff report UI, and tuning notes.
+See the [visual regression testing guide](../docs/contributing/testing/visual-regression.md) for the full CI pipeline, the diff report UI, and tuning notes.
 
 ## Why npm instead of pnpm?
 

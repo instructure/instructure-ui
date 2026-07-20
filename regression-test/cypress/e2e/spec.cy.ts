@@ -26,18 +26,33 @@ import type { Result, RunOnly } from 'axe-core'
 
 type ConsoleErrorStub = Cypress.Agent<sinon.SinonStub<any[], any>>
 let windowErrorSpy: ConsoleErrorStub | undefined
+// Running total of console.error calls across every visit in the current test.
+// Each test visits the page once per theme; each cy.visit replaces
+// windowErrorSpy with a fresh stub, so we fold the outgoing stub's count into
+// this total before it's lost. Without this, the afterEach assertion would only
+// observe errors from the test's final visit.
+let consoleErrorCount = 0
 
 Cypress.on('window:before:load', (win) => {
   // Stub console.error before your application code runs
   // This allows you to capture errors even if they happen very early
+  if (windowErrorSpy) {
+    consoleErrorCount += windowErrorSpy.callCount
+  }
   windowErrorSpy = cy.stub(win.console, 'error')
 })
 
+beforeEach(() => {
+  consoleErrorCount = 0
+  windowErrorSpy = undefined
+})
+
 afterEach(() => {
-  // After each test, assert that console.error was not called
+  // After each test, assert that console.error was not called on any visit.
   // Add a small wait if your application might log errors asynchronously
   cy.wait(100).then(() => {
-    expect(windowErrorSpy).to.have.callCount(0)
+    const total = consoleErrorCount + (windowErrorSpy?.callCount ?? 0)
+    expect(total, 'console.error call count across all visits').to.equal(0)
   })
 })
 

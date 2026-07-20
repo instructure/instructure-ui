@@ -31,9 +31,9 @@ export default defineConfig({
   trashAssetsBeforeRuns: true,
   video: false,
   // Never capture Cypress' automatic failure screenshots (the error overlay).
-  // Visual regression baselines come solely from the deterministic afterEach
-  // `cy.screenshot`; a failure screenshot has a different filename and would
-  // otherwise leak into the diff as a spurious "new" image.
+  // Visual regression baselines come solely from the deterministic
+  // `cy.screenshot` calls in the spec; a failure screenshot has a different
+  // filename and would otherwise leak into the diff as a spurious "new" image.
   screenshotOnRunFailure: false,
   e2e: {
     viewportWidth: 1280,
