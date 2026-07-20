@@ -40,10 +40,9 @@ const pulseAnimation = keyframes`
  * private: true
  * ---
  * Generates the style object from the theme and provided additional information
- * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
- * @return {Object} The final style object, which will be used in the component
+ * @param  componentTheme The theme variable object.
+ * @param  props the props of the component, the style is applied to
+ * @return The final style object, which will be used in the component
  */
 const generateStyle = (
   componentTheme: ReturnType<NewComponentTypes['Badge']>,
@@ -78,7 +77,7 @@ const generateStyle = (
     },
     primary: {
       badge: {
-        color: componentTheme.color,
+        color: componentTheme.primaryTextColor,
         backgroundColor: componentTheme.colorPrimary
       },
       pulseBorder: {

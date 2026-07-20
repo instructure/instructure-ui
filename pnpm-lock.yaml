@@ -3909,8 +3909,8 @@ importers:
         specifier: workspace:*
         version: link:../command-utils
       '@instructure/instructure-design-tokens':
-        specifier: github:instructure/instructure-design-tokens#v1.4.0
-        version: https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/0db8a8645f1c483daf4fac81394cb7dbc0f3f227
+        specifier: github:instructure/instructure-design-tokens#v1.5.0
+        version: https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/ae8f600e8ad4cbadddbaad857f0b6477c4a1e1d6
       dprint:
         specifier: ^0.55.1
         version: 0.55.1
@@ -7072,8 +7072,8 @@ packages:
       '@types/node':
         optional: true
 
-  '@instructure/instructure-design-tokens@https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/0db8a8645f1c483daf4fac81394cb7dbc0f3f227':
-    resolution: {gitHosted: true, integrity: sha512-NWck8He8l+xyS9OrwbFLXD0oMZGtkFs+m2jgxNGOD5gllDFLMEOZ4KT59BPxYcY5T2dNm5Y+/SSsrzU1K7eDVw==, tarball: https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/0db8a8645f1c483daf4fac81394cb7dbc0f3f227}
+  '@instructure/instructure-design-tokens@https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/ae8f600e8ad4cbadddbaad857f0b6477c4a1e1d6':
+    resolution: {gitHosted: true, tarball: https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/ae8f600e8ad4cbadddbaad857f0b6477c4a1e1d6}
     version: 1.0.0
 
   '@isaacs/cliui@8.0.2':
@@ -15177,7 +15177,7 @@ snapshots:
     optionalDependencies:
       '@types/node': 22.19.15
 
-  '@instructure/instructure-design-tokens@https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/0db8a8645f1c483daf4fac81394cb7dbc0f3f227':
+  '@instructure/instructure-design-tokens@https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/ae8f600e8ad4cbadddbaad857f0b6477c4a1e1d6':
     dependencies:
       glob: 13.0.6
 
@@ -20658,7 +20658,7 @@ snapshots:
 
   path-scurry@2.0.2:
     dependencies:
-      lru-cache: 11.2.7
+      lru-cache: 11.5.1
       minipass: 7.1.3
 
   path-to-regexp@0.1.13: {}
