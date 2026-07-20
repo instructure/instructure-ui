@@ -23,11 +23,8 @@
  */
 import { Component } from 'react'
 import { createChainedFunction } from '@instructure/ui-utils'
-
 import { allowedProps } from './props.js'
 import type { ExpandableProps, ExpandableState } from './props'
-import type { ViewProps } from '@instructure/ui-view/latest'
-
 import { withDeterministicId } from '@instructure/ui-react-utils'
 
 const toggleExpanded = ({ expanded }: { expanded: boolean }) => ({
@@ -87,9 +84,7 @@ class Expandable extends Component<ExpandableProps, ExpandableState> {
     }
   }
 
-  handleToggle = (
-    event: React.MouseEvent<ViewProps> | React.KeyboardEvent<ViewProps>
-  ) => {
+  handleToggle = (event: React.MouseEvent<any> | React.KeyboardEvent<any>) => {
     if (!this.isControlled()) {
       this.setState(toggleExpanded)
     }
