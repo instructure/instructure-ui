@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { getShorthandPropValue, makeThemeVars } from '@instructure/emotion'
+import { calcSpacingFromShorthand } from '@instructure/emotion'
 import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import type { FlexProps, FlexStyle } from './props'
 
@@ -87,14 +87,6 @@ const generateStyle = (
     'row-reverse': 'row-reverse'
   }
 
-  // gap css prop
-  const gapValues = makeThemeVars('gap', {
-    ...sharedTokens.spacing,
-    ...sharedTokens.legacy.spacing
-  })
-  const getGapValue = (gap: FlexProps['gap'], values: Record<string, string>) =>
-    getShorthandPropValue('Flex', values, gap, 'gap')
-
   return {
     flex: {
       label: 'flex',
@@ -104,7 +96,10 @@ const generateStyle = (
       justifyContent: justifyItemsValues[justifyItems!],
       flexWrap: wrapValues[wrap!],
       flexDirection: flexDirectionValues[direction!],
-      gap: getGapValue(gap!, gapValues)
+      gap: calcSpacingFromShorthand(gap, {
+        ...sharedTokens.spacing,
+        ...sharedTokens.legacy.spacing
+      })
     }
   }
 }
