@@ -173,7 +173,30 @@ function generatePropsTable(
   return propsContent
 }
 
-function generateComponentUsage(doc: DocumentationData): string {
+
+interface VersionImportInfo {
+  version: string
+  versionedPackages: Set<string>
+}
+
+// Versioned packages import from the pinned version path (e.g.
+// `@instructure/ui-badge/v11_7`); non-versioned ones import from the plain
+// package name.
+function buildImportPath(
+  packageName: string,
+  versionImport?: VersionImportInfo
+): string {
+  if (!versionImport) return packageName
+  const shortName = packageName.replace(/^@instructure\//, '')
+  return versionImport.versionedPackages.has(shortName)
+    ? `${packageName}/${versionImport.version}`
+    : packageName
+}
+
+function generateComponentUsage(
+  doc: DocumentationData,
+  versionImport?: VersionImportInfo
+): string {
   if (!isComponent(doc)) return ''
 
   const { id, displayName, packageName } = doc
@@ -181,13 +204,15 @@ function generateComponentUsage(doc: DocumentationData): string {
 
   if (!packageName) return ''
 
+  const importPath = buildImportPath(packageName, versionImport)
+
   let usageContent = `### Usage\n\n`
 
   usageContent += `Install the package:\n\n\`\`\`shell\nnpm install ${packageName}\n\`\`\`\n\n`
 
   usageContent += `Import the component:\n\n\`\`\`javascript
 /*** ES Modules (with tree shaking) ***/
-import { ${importName} } from '${packageName}'
+import { ${importName} } from '${importPath}'
 \`\`\`\n\n`
 
   return usageContent
@@ -195,14 +220,15 @@ import { ${importName} } from '${packageName}'
 
 function generateComponentMarkdown(
   jsonData: ComponentData,
-  childComponents: ComponentData[] = []
+  childComponents: ComponentData[] = [],
+  versionImport?: VersionImportInfo
 ): string {
   const { displayName, description } = jsonData
 
   let markdownContent = `# ${displayName}\n\n`
   markdownContent += `${description}\n\n`
   markdownContent += generatePropsTable(jsonData, childComponents)
-  markdownContent += generateComponentUsage(jsonData)
+  markdownContent += generateComponentUsage(jsonData, versionImport)
 
   return markdownContent
 }
@@ -217,7 +243,9 @@ function generateGuideMarkdown(jsonData: GuideData): string {
 
 async function generateAIAccessibleMarkdowns(
   docsFolder: string,
-  outputDir: string
+  outputDir: string,
+  sourcesDataFilePath = './__build__/markdown-and-sources-data.json',
+  versionImport?: VersionImportInfo
 ): Promise<void> {
   if (!existsSync(outputDir)) {
     mkdirSync(outputDir, { recursive: true })
@@ -262,7 +290,8 @@ async function generateAIAccessibleMarkdowns(
     if (!component.parent) {
       const markdownContent = generateComponentMarkdown(
         component,
-        childComponents
+        childComponents,
+        versionImport
       )
       const fileName = `${
         component.id ||
@@ -273,9 +302,9 @@ async function generateAIAccessibleMarkdowns(
     }
   }
 
-  const buildDir = './__build__/'
-  // create an llms-like index file for docs in the zip
-  generateAIAccessibleLlmsFile(buildDir + 'markdown-and-sources-data.json', {
+  // create an llms-like index file for docs in the zip, from the same
+  // (latest) version's sources data used to generate the markdown files
+  generateAIAccessibleLlmsFile(sourcesDataFilePath, {
     outputFilePath: path.join(outputDir, 'index.md'),
     baseUrl: './',
     summariesFilePath:
@@ -292,3 +321,4 @@ async function generateAIAccessibleMarkdowns(
 }
 
 export { generateAIAccessibleMarkdowns }
+export type { VersionImportInfo }

@@ -2,6 +2,7 @@
 title: Component versioning
 category: Guides
 order: 2
+relevantForAI: true
 ---
 
 ## Why components are versioned

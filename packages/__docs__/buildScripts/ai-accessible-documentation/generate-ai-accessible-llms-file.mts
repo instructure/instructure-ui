@@ -72,6 +72,7 @@ function generateAIAccessibleLlmsFile(
 
   let LlmsMarkdownContent = `# Instructure UI (InstUI) - React Component Library\n\n- version ${version} \n\n`
   LlmsMarkdownContent += `- Instructure UI (InstUI) is a comprehensive React component library.\n\n`
+  LlmsMarkdownContent += `- All component documentation below always reflects the latest InstUI version noted above (${version}). Props, types, and examples describe this version.\n\n`
 
   // Add main Documentation section
   LlmsMarkdownContent += `## Documentation\n\n`

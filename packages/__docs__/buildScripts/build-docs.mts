@@ -226,21 +226,38 @@ async function buildDocs() {
       JSON.stringify(docsVersionsManifest)
     )
 
-    // Generate AI accessible documentation from default version
-    const defaultVersionDocsDir = buildDir + 'docs/' + defaultVersion + '/'
-    generateAIAccessibleMarkdowns(defaultVersionDocsDir, buildDir + 'markdowns/')
+    // Generate AI accessible documentation from the latest library version.
+    const latestVersion =
+      versionMap.libraryVersions[versionMap.libraryVersions.length - 1] ||
+      defaultVersion
+    const latestVersionDocsDir = buildDir + 'docs/' + latestVersion + '/'
+    const latestVersionSourcesData =
+      latestVersionDocsDir + 'markdown-and-sources-data.json'
 
-    generateAIAccessibleLlmsFile(
-      buildDir + 'markdown-and-sources-data.json',
-      {
-        outputFilePath: path.join(buildDir, 'llms.txt'),
-        baseUrl: 'https://instructure.design/markdowns/',
-        summariesFilePath: path.join(
-          __dirname,
-          '../buildScripts/ai-accessible-documentation/summaries-for-llms-file.json'
-        )
-      }
+    // The latest version plus its versioned packages (the version map's
+    // mapping keys), used to emit versioned import examples in the markdown.
+    const versionImport = {
+      version: latestVersion,
+      versionedPackages: new Set(
+        Object.keys(versionMap.mapping[latestVersion] || {})
+      )
+    }
+
+    await generateAIAccessibleMarkdowns(
+      latestVersionDocsDir,
+      buildDir + 'markdowns/',
+      latestVersionSourcesData,
+      versionImport
     )
+
+    generateAIAccessibleLlmsFile(latestVersionSourcesData, {
+      outputFilePath: path.join(buildDir, 'llms.txt'),
+      baseUrl: 'https://instructure.design/markdowns/',
+      summariesFilePath: path.join(
+        __dirname,
+        '../buildScripts/ai-accessible-documentation/summaries-for-llms-file.json'
+      )
+    })
 
     fs.copyFileSync(
       projectRoot + '/packages/ui-icons/src/generated/legacy/legacy-icons-data.json',
