@@ -267,6 +267,7 @@ type: embed
 | Alert | open | `boolean` | No | `true` | if open transitions from truthy to falsey, it's a signal to close and unmount the alert. This is necessary to close the alert from the outside and still run the transition. |
 | Alert | hasShadow | `boolean` | No | `true` | If the alert should have a shadow. |
 | Alert | renderCustomIcon | `Renderable` | No | - | An icon, or function that returns an icon. Setting it will override the variant's icon. |
+| Alert | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
 
 ### Usage
 
