@@ -1,6 +1,10 @@
 name: Visual regression
 
-on: [pull_request]
+on:
+  pull_request:
+    # `closed` is included so the cleanup job can remove the PR's published
+    # report from gh-pages; the capture job skips the `closed` event.
+    types: [opened, synchronize, reopened, closed]
 
 concurrency:
   group: gh-pages
@@ -9,6 +13,7 @@ concurrency:
 jobs:
   visual-regression:
     name: Capture, diff, and publish report
+    if: github.event.action != 'closed'
     runs-on: ubuntu-latest
     container:
       image: cypress/browsers:latest
@@ -86,6 +91,20 @@ jobs:
           --meta cypress/meta.json
           --source-base-url https://github.com/${{ github.repository }}/blob/${{ github.head_ref }}/regression-test/src/app
           --facets canvas,light,dark
+          --app-path app
+        continue-on-error: true
+
+      # Rebuild the app with a basePath matching its published location, then
+      # drop it next to the report so the report's "HTML" view can iframe the
+      # live rendered page. Best-effort: a build hiccup must not block the report
+      # (the HTML view would just 404 for that run).
+      - name: Build and bundle app for the report's HTML view
+        working-directory: regression-test
+        env:
+          REGRESSION_APP_BASE_PATH: /visual-regression/pr-${{ github.event.pull_request.number }}/app
+        run: |
+          npm run build
+          cp -r out .report/app
         continue-on-error: true
 
       - name: Publish report to gh-pages
@@ -159,3 +178,30 @@ jobs:
       - name: Fail if regressions or Cypress failed
         if: steps.diff.outcome == 'failure' || steps.cypress.outcome == 'failure'
         run: exit 1
+
+  cleanup-report:
+    name: Remove report when PR closes
+    if: github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: gh-pages
+          fetch-depth: 0
+      - name: Remove this PR's report directory
+        run: |
+          DIR="visual-regression/pr-${{ github.event.pull_request.number }}"
+          if [ ! -d "$DIR" ]; then
+            echo "No report directory ($DIR); nothing to remove."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm -rq "$DIR"
+          git commit -m "visual-regression: remove report for closed PR #${{ github.event.pull_request.number }}"
+          # gh-pages is written by several workflows; rebase before pushing in
+          # case it moved since checkout.
+          git pull --rebase origin gh-pages
+          git push

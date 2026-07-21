@@ -54,6 +54,7 @@ type Args = {
   meta?: string
   sourceBaseUrl?: string
   facets?: string
+  appPath?: string
 }
 
 type Meta = Record<string, string>
@@ -71,6 +72,37 @@ export function sourceLinkFor(
   const url = sourceBaseUrl.replace(/\/$/, '') + pagePath + '/page.tsx'
   const display = pagePath.replace(/^\//, '') + '/page.tsx'
   return `<a class="source-link" href="${url}" target="_blank" rel="noopener">${display}</a>`
+}
+
+/**
+ * Build the URL of the live rendered page for a screenshot, relative to the
+ * report root. The app (a static export of the regression-test Next app) is
+ * published under `appPath` next to the report, so a screenshot named
+ * `<slug>-<theme>.png` maps to `<appPath><pagePath>/?theme=<theme>` — e.g.
+ * `app/button/?theme=dark`. Returns '' when the app wasn't published, meta is
+ * missing, or the page path can't be resolved (the HTML view is then hidden).
+ *
+ * `meta` is keyed by the full screenshot name (minus `.png`), e.g.
+ * `button-dark → /button`; the theme is recovered by matching the name's
+ * trailing `-<facet>` against the known facets (facets may themselves contain
+ * hyphens, so a plain split won't do).
+ *
+ * @internal — exported only for tests; not part of the package's public API.
+ */
+export function appUrlFor(
+  name: string,
+  meta: Meta | null,
+  facets: string[],
+  appPath?: string
+): string {
+  if (!appPath || !meta) return ''
+  const slug = name.replace(/\.png$/, '')
+  const pagePath = meta[slug]
+  if (!pagePath) return ''
+  const facet = facets.find((f) => slug.endsWith('-' + f))
+  const base = appPath.replace(/\/$/, '')
+  const query = facet ? `?theme=${facet}` : ''
+  return `${base}${pagePath}/${query}`
 }
 
 function walk(dir: string): string[] {
@@ -282,7 +314,13 @@ export function thumb(mode: string, name: string): string {
   return `<img loading="lazy" src="${mode}/${name}" data-name="${name}" data-mode="${mode}" class="thumb" />`
 }
 
-function row(r: Result, meta: Meta | null, sourceBaseUrl?: string): string {
+function row(
+  r: Result,
+  meta: Meta | null,
+  sourceBaseUrl?: string,
+  facets: string[] = [],
+  appPath?: string
+): string {
   const b = r.status === 'added' ? '' : thumb('baseline', r.name)
   const a = r.status === 'removed' ? '' : thumb('actual', r.name)
   const d = r.status === 'changed' ? thumb('diff', r.name) : ''
@@ -294,10 +332,15 @@ function row(r: Result, meta: Meta | null, sourceBaseUrl?: string): string {
       : ''
   const source = sourceLinkFor(r.name, meta, sourceBaseUrl)
   const hasBoth = r.status === 'changed' || r.status === 'unchanged'
+  // A 'removed' screenshot has no current page to render, so offer the live
+  // HTML view only when the page still exists (added/changed/unchanged).
+  const htmlUrl =
+    r.status === 'removed' ? '' : appUrlFor(r.name, meta, facets, appPath)
+  const htmlAttr = htmlUrl ? ` data-html-url="${htmlUrl}"` : ''
   return `
     <section class="row" data-status="${r.status}" data-name="${
       r.name
-    }" data-has-both="${hasBoth}">
+    }" data-has-both="${hasBoth}"${htmlAttr}>
       <header><h2>${r.name}</h2>${badgeFor(
         r.status
       )}${pixelMeta}${source}</header>
@@ -312,7 +355,8 @@ function renderHtml(
   prUrl?: string,
   meta?: Meta | null,
   sourceBaseUrl?: string,
-  facets: string[] = []
+  facets: string[] = [],
+  appPath?: string
 ): string {
   const prBadge =
     prNumber && prUrl
@@ -360,6 +404,7 @@ function renderHtml(
   .lightbox .viewer.actual-size { align-items: flex-start; }
   .lightbox .viewer > img { display: block; background: #fff; max-width: 100%; max-height: 100%; object-fit: contain; }
   .lightbox .viewer.actual-size > img { max-width: none; max-height: none; image-rendering: pixelated; }
+  .lightbox .viewer > iframe { width: 100%; height: 100%; border: 0; background: #fff; }
   .lightbox .slider { position: relative; user-select: none; background: #fff; flex-shrink: 0; }
   .lightbox .slider img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
   .lightbox .slider .top { clip-path: inset(0 0 0 var(--split, 50%)); }
@@ -398,7 +443,7 @@ function renderHtml(
     }
   </header>
   <main>${results
-    .map((r) => row(r, meta ?? null, sourceBaseUrl))
+    .map((r) => row(r, meta ?? null, sourceBaseUrl, facets, appPath))
     .join('')}</main>
 
   <div class="lightbox" id="lb" aria-hidden="true">
@@ -409,6 +454,7 @@ function renderHtml(
         <button data-mode="actual">Actual</button>
         <button data-mode="diff">Diff</button>
         <button data-mode="slider" id="lb-slider-btn">Slider</button>
+        <button data-mode="html" id="lb-html-btn">HTML</button>
       </div>
       <button id="lb-zoom">1:1</button>
       <button id="lb-prev" aria-label="Previous">‹</button>
@@ -462,6 +508,7 @@ function renderHtml(
       const lbTitle = document.getElementById('lb-title')
       const lbViewer = document.getElementById('lb-viewer')
       const lbSliderBtn = document.getElementById('lb-slider-btn')
+      const lbHtmlBtn = document.getElementById('lb-html-btn')
       const lbZoomBtn = document.getElementById('lb-zoom')
       const state = { rows: [], idx: 0, mode: 'diff', zoom: false }
 
@@ -481,8 +528,10 @@ function renderHtml(
         const name = row.dataset.name
         const status = row.dataset.status
         const hasBoth = row.dataset.hasBoth === 'true'
+        const htmlUrl = row.dataset.htmlUrl || ''
         lbTitle.textContent = name + '  (' + (state.idx + 1) + '/' + state.rows.length + ') · ' + status
         lbSliderBtn.style.display = hasBoth ? '' : 'none'
+        lbHtmlBtn.style.display = htmlUrl ? '' : 'none'
 
         document.querySelectorAll('#lb-modes button').forEach(b => {
           b.classList.toggle('active', b.dataset.mode === state.mode)
@@ -492,7 +541,8 @@ function renderHtml(
           baseline: status !== 'added',
           actual: status !== 'removed',
           diff: status === 'changed',
-          slider: hasBoth
+          slider: hasBoth,
+          html: !!htmlUrl
         }
         if (!availableModes[state.mode]) state.mode = availableModes.diff ? 'diff' : (availableModes.actual ? 'actual' : 'baseline')
 
@@ -543,6 +593,8 @@ function renderHtml(
           window.addEventListener('mouseup', () => { dragging = false })
           wrap.addEventListener('touchstart', (e) => { onMove(e); e.preventDefault() }, { passive: false })
           wrap.addEventListener('touchmove', (e) => { onMove(e); e.preventDefault() }, { passive: false })
+        } else if (state.mode === 'html') {
+          lbViewer.innerHTML = '<iframe src="' + htmlUrl + '" title="' + name + '"></iframe>'
         } else {
           lbViewer.innerHTML = '<img src="' + state.mode + '/' + name + '" alt="' + name + '" />'
         }
@@ -682,7 +734,8 @@ function run(args: Args): number {
       args.prUrl,
       meta,
       args.sourceBaseUrl,
-      facets
+      facets,
+      args.appPath
     )
   )
 
@@ -747,6 +800,11 @@ export default {
       type: 'string',
       describe:
         'Comma-separated facet suffixes (e.g. "canvas,light,dark") rendered as one-click filter chips that match screenshots named "<name>-<facet>"'
+    },
+    'app-path': {
+      type: 'string',
+      describe:
+        'Path (relative to the report root) where the live app is published, e.g. "app". Enables an "HTML" view in the lightbox that iframes the rendered page for each screenshot.'
     }
   },
   handler: (argv: Args) => {
