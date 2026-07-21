@@ -226,7 +226,9 @@ type ColorPickerOwnProps = {
   withAlpha?: boolean
 
   /**
-   * Margin around the component. Accepts a `Spacing` token. See token values and example usage in [this guide](https://instructure.design/#layout-spacing).
+   * Valid values are `0`, `none`, `auto`, and Spacing token values,
+   * see https://instructure.design/layout-spacing. Apply these values via
+   * familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`.
    */
   margin?: Spacing
 

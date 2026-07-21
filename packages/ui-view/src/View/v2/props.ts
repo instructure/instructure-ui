@@ -181,9 +181,9 @@ type ViewOwnProps = {
    */
   margin?: Spacing
   /**
-   * Valid values are `0`, `none`, `auto`, and Spacing token values,
+   * Valid values are `0`, `none`, and Spacing token values,
    * see https://instructure.design/layout-spacing. Apply these values via
-   * familiar CSS-like shorthand. For example, `padding="small auto large"`.
+   * familiar CSS-like shorthand. For example, `padding="general.spaceMd general.spaceLg"`.
    */
   padding?: Spacing
   /**

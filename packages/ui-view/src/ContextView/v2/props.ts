@@ -50,7 +50,17 @@ type ContextViewOwnProps = {
   textAlign?: 'start' | 'center' | 'end'
   background?: 'default' | 'inverse'
   debug?: boolean
+  /**
+   * Valid values are `0`, `none`, `auto`, and Spacing token values,
+   * see https://instructure.design/layout-spacing. Apply these values via
+   * familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`.
+   */
   margin?: Spacing
+  /**
+   * Valid values are `0`, `none`, and Spacing token values,
+   * see https://instructure.design/layout-spacing. Apply these values via
+   * familiar CSS-like shorthand. For example, `padding="general.spaceMd general.spaceLg"`.
+   */
   padding?: Spacing
   shadow?: Shadow
   stacking?: Stacking

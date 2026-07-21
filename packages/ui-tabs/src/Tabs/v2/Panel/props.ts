@@ -45,6 +45,11 @@ type TabsPanelOwnProps = {
   minHeight?: string | number
   id?: string
   labelledBy?: string
+  /**
+   * Valid values are `0`, `none`, and Spacing token values,
+   * see https://instructure.design/layout-spacing. Apply these values via
+   * familiar CSS-like shorthand. For example, `padding="general.spaceMd general.spaceLg"`.
+   */
   padding?: Spacing
   textAlign?: 'start' | 'center' | 'end'
   /**

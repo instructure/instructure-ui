@@ -37,6 +37,11 @@ import type {
 
 type ModalBodyOwnProps = {
   children?: React.ReactNode
+  /**
+   * Valid values are `0`, `none`, and Spacing token values,
+   * see https://instructure.design/layout-spacing. Apply these values via
+   * familiar CSS-like shorthand. For example, `padding="general.spaceMd general.spaceLg"`.
+   */
   padding?: Spacing
   elementRef?: (element: UIElement | null) => void
   as?: AsElementType

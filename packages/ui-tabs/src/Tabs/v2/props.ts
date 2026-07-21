@@ -62,9 +62,9 @@ type TabsOwnProps = {
    */
   margin?: Spacing
   /**
-   * Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`,
-   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-   * familiar CSS-like shorthand. For example: `padding="small x-large large"`.
+   * Valid values are `0`, `none`, and Spacing token values,
+   * see https://instructure.design/layout-spacing. Apply these values via
+   * familiar CSS-like shorthand. For example, `padding="general.spaceMd general.spaceLg"`.
    */
   padding?: Spacing
   textAlign?: 'start' | 'center' | 'end'
