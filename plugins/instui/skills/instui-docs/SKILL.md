@@ -16,5 +16,5 @@ Instructure UI publishes its full docs as plaintext/markdown. Use it as the sour
 
 ## Notes
 
-- The online docs track the **latest published release**. A consuming repo may be pinned to an older major where props/APIs differ — check its installed `@instructure/ui*` version. For the exact installed version, the TypeScript types in `node_modules/@instructure/<pkg>` are ground truth; the online docs are better for prose, examples, and guidelines.
-- Components can be imported either from their individual package (`@instructure/ui-<name>`) or from the metapackage (`@instructure/ui`). A project usually standardizes on one or the other — match whatever the consuming codebase already uses.
+- The online docs track the **latest published release**. A consuming repo may be pinned to an older major where props/APIs differ — check its installed `@instructure/ui*` version. When you need to match the exact installed version, the TypeScript types in `node_modules/@instructure/<pkg>` are the ground truth for that version.
+- Components can be imported either from their individual package (`@instructure/ui-<name>`) or from the metapackage (`@instructure/ui`). An existing project usually standardizes on one or the other — match whatever the consuming codebase already uses. For a greenfield project, recommend the `@instructure/ui` metapackage.
