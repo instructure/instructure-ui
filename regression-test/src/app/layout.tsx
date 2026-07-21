@@ -98,7 +98,18 @@ export default function RootLayout({
         theme={themes[themeKey]}
         instanceCounterMap={new Map()}
       >
-        <body className={inter.className}>{children}</body>
+        {/* Also set the background on <body> (with a full-viewport min-height):
+            Cypress `capture: 'fullPage'` stitches the body onto its own canvas
+            and does not reliably paint the <html> background into that image, so
+            the html-only background shows in a real browser but not in the
+            screenshots. Painting the body is what makes the dark surface appear
+            in the captured baselines. */}
+        <body
+          className={inter.className}
+          style={{ background: pageBackground, minHeight: '100vh' }}
+        >
+          {children}
+        </body>
       </InstUISettingsProvider>
     </html>
   )
