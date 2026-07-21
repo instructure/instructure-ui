@@ -77,11 +77,16 @@ export default function RootLayout({
   // screenshotted the way it's actually used — most visibly, the dark theme
   // renders on its near-black surface rather than on white. The value comes from
   // the theme's semantic tokens (canvas → white, light → faint grey, dark →
-  // near-black), so it stays correct if those tokens change and needs no
-  // per-theme hardcoding. Fall back to `transparent` if the token is ever absent.
-  const pageBackground =
-    (themes[themeKey] as any)?.newTheme?.semantics?.color?.background?.page ??
-    'transparent'
+  // near-black), so it needs no per-theme hardcoding. `newTheme.semantics` is a
+  // factory that must be called with the theme's primitives to resolve the token
+  // objects — the same way the library resolves them internally (emotion's
+  // useComputedTheme). Fall back to `transparent` if the token is ever absent.
+  const newTheme = (themes[themeKey] as any)?.newTheme
+  const semantics =
+    typeof newTheme?.semantics === 'function'
+      ? newTheme.semantics(newTheme.primitives)
+      : newTheme?.semantics
+  const pageBackground = semantics?.color?.background?.page ?? 'transparent'
 
   return (
     // we need to make a new Map to reset counting on the server side
