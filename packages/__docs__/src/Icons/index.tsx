@@ -49,8 +49,7 @@ const IconsPage = () => {
         }
       >
         <Alert variant="info" margin="0 0 medium">
-          The version selector does not affect this page. For icons compatible
-          with older versions, use{' '}
+          For icons compatible with older versions, use{' '}
           <Link
             href="legacy-icons"
             onClick={(e) => {
