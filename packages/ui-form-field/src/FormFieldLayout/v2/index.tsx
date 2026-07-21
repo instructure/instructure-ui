@@ -70,10 +70,8 @@ const FormFieldLayout = forwardRef<Element, FormFieldLayoutProps>(
     }, [])
 
     const messagesId = messagesIdProp || deterministicId
-    // The label element gets an id so that single form controls can point their
-    // `aria-labelledby` at the label text only. This keeps `messages` (which
-    // live inside the wrapping <label>) out of the control's accessible name
-    // while preserving the native click-on-label focus behavior.
+    // Give the label an id so controls can reference only the label text via
+    // `aria-labelledby`, keeping messages out of the accessible name.
     const labelId =
       labelIdProp || (deterministicId ? `${deterministicId}-Label` : undefined)
 
@@ -189,8 +187,6 @@ const FormFieldLayout = forwardRef<Element, FormFieldLayoutProps>(
             </legend>
           )
         }
-        // `id` lets single form controls reference just the label text via
-        // `aria-labelledby`, keeping `messages` out of their accessible name.
         return (
           <span css={styles?.formFieldLabel} id={labelId}>
             {labelContent}

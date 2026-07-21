@@ -225,9 +225,7 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
       `[Checkbox] The \`simple\` variant does not support the \`labelPlacement\` property.  Use the \`toggle\` variant instead.`
     )
 
-    // The label text gets its own id so that, when there are messages, the
-    // input's accessible name can point at the label only (via
-    // `aria-labelledby`) instead of also including the message text.
+    // Give the label its own id so messages stay out of the accessible name.
     const labelContent = (
       <span id={this._labelId}>
         {label}

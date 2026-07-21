@@ -120,12 +120,6 @@ const NumberInput = forwardRef<NumberInputHandle, NumberInputProps>(
     const success =
       !!messages && messages.some((message) => message.type === 'success')
 
-    // Messages live inside the wrapping <label>. Reference them from the input
-    // via `aria-describedby` and point the accessible name at the label text
-    // only via `aria-labelledby`, so the messages are announced as a
-    // description rather than as part of the control's name.
-    // Only when a message actually renders (has text); FormField skips
-    // empty-text messages, so otherwise aria-describedby would dangle.
     const hasMessages = !!messages?.some((m) => !!m.text)
     const messagesId = id ? `${id}-messages` : undefined
     const labelId = id ? `${id}-label` : undefined
@@ -330,8 +324,6 @@ const NumberInput = forwardRef<NumberInputHandle, NumberInputProps>(
 
     const label = callRenderProp(renderLabel)
 
-    // `passthroughProps` is typed with `unknown` values; widen once here so the
-    // aria-* reads below don't each need a cast.
     const passedProps = passthroughProps(rest) as Record<string, any>
 
     // Don't render until we have an ID
@@ -360,6 +352,7 @@ const NumberInput = forwardRef<NumberInputHandle, NumberInputProps>(
               {...passedProps}
               css={styles?.input}
               aria-invalid={invalid ? 'true' : undefined}
+              // Keep messages in the description so the accessible name contains only the label.
               aria-describedby={
                 [
                   passedProps['aria-describedby'],

@@ -128,12 +128,6 @@ const TextArea = forwardRef<TextAreaElement, TextAreaProps>((props, ref) => {
     return { isInvalid, isSuccess }
   }, [messages])
 
-  // Messages live inside the wrapping <label>. Reference them from the textarea
-  // via `aria-describedby` and point the accessible name at the label text only
-  // via `aria-labelledby`, so the messages are announced as a description
-  // rather than as part of the control's name.
-  // Only when a message actually renders (has text); FormField skips empty-text
-  // messages, so otherwise aria-describedby would dangle.
   const hasMessages = !!messages?.some((m) => !!m.text)
   const messagesId = `${id}-messages`
   const labelId = `${id}-label`
@@ -403,6 +397,7 @@ const TextArea = forwardRef<TextAreaElement, TextAreaProps>((props, ref) => {
       required={required}
       aria-required={required}
       aria-invalid={isInvalid ? 'true' : undefined}
+      // Keep messages in the description so the accessible name contains only the label.
       aria-describedby={
         [rest['aria-describedby'], hasMessages ? messagesId : null]
           .filter(Boolean)
