@@ -6,7 +6,7 @@ A small Next.js app that imports `@instructure/ui` locally and exposes one page 
 - **Detect a11y issues** — axe-core runs against every page.
 - **Detect unexpected console errors** — the spec's `afterEach` hook asserts `console.error` was not called.
 
-Each page is captured once **per theme** (`canvas`, `light`, `dark`), so screenshots are named `<slug>-<theme>.png`. The theme is selected with the `?theme=<key>` query param, which `src/app/layout.tsx` reads and applies via `InstUISettingsProvider`. Add or remove themes with the `THEMES` array in `cypress/e2e/spec.cy.ts` (this multiplies the screenshot/baseline count).
+Each page is captured once **per theme** (`canvas`, `light`, `dark`), so screenshots are named `<slug>-<theme>.png`. The theme is selected with the `?theme=<key>` query param, which `src/app/layout.tsx` reads and applies via `InstUISettingsProvider`. The page background is painted from the active theme's own `background.page` semantic token, so each theme is captured on the surface it's actually used on — most visibly, the dark theme renders on its near-black surface rather than on white. Add or remove themes with the `THEMES` array in `cypress/e2e/spec.cy.ts` (this multiplies the screenshot/baseline count).
 
 See the [visual regression testing guide](../docs/contributing/testing/visual-regression.md) for the full CI pipeline, the diff report UI, and tuning notes.
 
