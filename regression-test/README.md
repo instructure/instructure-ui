@@ -2,7 +2,7 @@
 
 A small Next.js app that imports `@instructure/ui` locally and exposes one page per component. Cypress visits each page to:
 
-- **Detect visual changes** — screenshots are diffed against baselines by the `ui-scripts visual-diff` command; an interactive HTML report is published to GitHub Pages on every PR.
+- **Detect visual changes** — screenshots are diffed against baselines by the `ui-scripts visual-diff` command; an interactive HTML report is published to GitHub Pages on every PR. Each screenshot opens in a lightbox that switches between Baseline / Actual / Diff / Slider views and an **HTML** view that iframes the live rendered page (a static export of this app is published next to the report), so you can inspect the real DOM alongside the pixels.
 - **Detect a11y issues** — axe-core runs against every page.
 - **Detect unexpected console errors** — the spec's `afterEach` hook asserts `console.error` was not called.
 

@@ -28,11 +28,20 @@ import webpack from 'webpack'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
+// When the built app is published to GitHub Pages alongside the visual-diff
+// report (so the report's "HTML" view can iframe the live page), its assets
+// live under a subpath like `/visual-regression/pr-123/app`. Setting basePath
+// makes Next emit and reference `/_next/...` under that prefix so the published
+// copy resolves. Left empty for local dev and the Cypress capture build, where
+// the app is served from the root of http://localhost:3000.
+const basePath = process.env.REGRESSION_APP_BASE_PATH || ''
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Fully static export: no SSR, no hydration mismatches that can cause
   // screenshot flakiness. `next build` writes a plain static site to `out/`.
   output: 'export',
+  ...(basePath ? { basePath } : {}),
   // Emits out/<route>/index.html so any static server (including http-server)
   // resolves /route without needing a .html fallback config.
   trailingSlash: true,

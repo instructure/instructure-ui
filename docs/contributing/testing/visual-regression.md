@@ -70,6 +70,8 @@ open .report/index.html
 | `--pr-url <url>`                                               | —                     | Target of the PR link.                                                                                                                                                     |
 | `--meta <file>`                                                | —                     | JSON mapping screenshot slug → visited URL path. Enables per-row source-file links in the report. Produced automatically by `spec.cy.ts` via `cy.task('recordMeta', ...)`. |
 | `--source-base-url <url>`                                      | —                     | GitHub blob URL of `regression-test/src/app` on the branch being reviewed. Combined with `--meta` to build links like `treebrowser/page.tsx`.                              |
+| `--facets <list>`                                              | —                     | Comma-separated facet suffixes (e.g. `canvas,light,dark`) rendered as one-click filter chips that match screenshots named `<name>-<facet>`.                                |
+| `--app-path <path>`                                            | —                     | Path, relative to the report root, where a static export of the app is published (CI uses `app`). Enables the lightbox **HTML** view, which iframes the live rendered page. |
 
 ### Interpreting the report
 
@@ -82,6 +84,7 @@ Top-bar controls:
 - **Lightbox** — click any thumbnail to open a fullscreen viewer. Inside:
   - `Baseline`, `Actual`, `Diff` buttons switch between the three images.
   - `Slider` mode overlays baseline and actual with a drag handle so you can scrub the boundary back and forth.
+  - `HTML` mode iframes the live rendered page (a static export of the app published next to the report) so you can inspect the real DOM, computed styles, and text alongside the pixels. Shown only when the page still exists and the app was published (`--app-path`).
   - `1:1` / `Fit` toggles between native pixel size (scrollable) and fit-to-window.
   - `‹` / `›` step through visible rows (respects the current filter).
 

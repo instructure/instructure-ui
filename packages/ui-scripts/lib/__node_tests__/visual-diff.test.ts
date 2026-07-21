@@ -28,6 +28,7 @@ import {
   thumb,
   indexByName,
   sourceLinkFor,
+  appUrlFor,
   boxesFromMask
 } from '../commands/visual-diff.ts'
 
@@ -169,6 +170,45 @@ describe('sourceLinkFor', () => {
     )
     expect(html).toContain('target="_blank"')
     expect(html).toContain('rel="noopener"')
+  })
+})
+
+describe('appUrlFor', () => {
+  const facets = ['canvas', 'light', 'dark']
+  const meta = { 'button-dark': '/button', 'small-components-light': '/small-components' }
+
+  it('returns an empty string when appPath is not provided', () => {
+    expect(appUrlFor('button-dark.png', meta, facets)).toBe('')
+  })
+
+  it('returns an empty string when meta is null', () => {
+    expect(appUrlFor('button-dark.png', null, facets, 'app')).toBe('')
+  })
+
+  it('returns an empty string when meta has no entry for the screenshot', () => {
+    expect(appUrlFor('unknown-dark.png', meta, facets, 'app')).toBe('')
+  })
+
+  it('builds a relative app URL with the theme query from the trailing facet', () => {
+    expect(appUrlFor('button-dark.png', meta, facets, 'app')).toBe(
+      'app/button/?theme=dark'
+    )
+  })
+
+  it('matches facets even when the slug itself contains hyphens', () => {
+    expect(appUrlFor('small-components-light.png', meta, facets, 'app')).toBe(
+      'app/small-components/?theme=light'
+    )
+  })
+
+  it('omits the theme query when no facet matches the name', () => {
+    expect(appUrlFor('button-dark.png', meta, [], 'app')).toBe('app/button/')
+  })
+
+  it('strips a trailing slash from appPath', () => {
+    expect(appUrlFor('button-dark.png', meta, facets, 'app/')).toBe(
+      'app/button/?theme=dark'
+    )
   })
 })
 
