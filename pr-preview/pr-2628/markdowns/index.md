@@ -46,8 +46,8 @@
 - [ColorPreset](./ColorPreset.md): Color selection from predefined palettes with support for adding/removing colors. Includes visual color indicators, screen reader labels, and optional color mixer integration for custom color creation. Handles color management and selection callbacks.
 - [DateInput](./DateInput.md): A date input component with a calendar picker (uses Moment.js). Supports disabled dates, validation, and formatted display. Note: Being deprecated in favor of DateInput2 for better UX and accessibility.
 - [DateInput2](./DateInput2.md): An improved date input with easier configuration, better accessibility, and a year picker. Supports custom date parsing, timezone handling, validation, and disabled dates. Recommended over the original DateInput.
-- [DrawerLayout](./DrawerLayout.md): A responsive layout component with a collapsible tray and content area. Tray can be placed at start or end and switches to overlay on small screens. Supports nested layouts and accessibility features.
 - [DateTimeInput](./DateTimeInput.md): Combines DateInput and TimeSelect for entering date-time values. Supports localization, validation, disabled dates, and layout options (stacked or columns). Includes reset functionality and context-aware formatting.
+- [DrawerLayout](./DrawerLayout.md): A responsive layout component with a collapsible tray and content area. Tray can be placed at start or end and switches to overlay on small screens. Supports nested layouts and accessibility features.
 - [Drilldown](./Drilldown.md): A hierarchical navigation component for tree structures. Supports pages, groups, selectable options, and in-place editing. Replaces flyout menus and TreeBrowser for better responsiveness and accessibility.
 - [Editable](./Editable.md): Enables in-place editing of content. Manages state and transitions between view and edit modes. Provides render props for custom UI implementation. Used by InPlaceEdit.
 - [InPlaceEdit](./InPlaceEdit.md): Enables inline editing of content with smooth transitions between view and edit modes. Provides controlled component pattern for mode management, custom renderers for viewer/editor components, and support for various layouts and read-only states.
@@ -127,5 +127,5 @@
 #### AI Components
 
 - [AiInformation](./AiInformation.md): Displays AI-related data in Instructure products. Composed from NutritionFacts and DataPermissionLevels components with prefixed APIs. Supports fullscreen modals for mobile viewports with comprehensive data structure for AI feature information.
-- [NutritionFacts](./NutritionFacts.md): A specialized modal component for displaying AI-related data in structured blocks. Includes model info, privacy/compliance details, and output metrics. Features a trigger button and modal presentation.
 - [DataPermissionLevels](./DataPermissionLevels.md): Displays AI-related data permissions in Instructure products. Shows hierarchical permission levels with titles and descriptions. Includes a modal interface with close functionality and supports highlighting specific levels for emphasis.
+- [NutritionFacts](./NutritionFacts.md): A specialized modal component for displaying AI-related data in structured blocks. Includes model info, privacy/compliance details, and output metrics. Features a trigger button and modal presentation.
