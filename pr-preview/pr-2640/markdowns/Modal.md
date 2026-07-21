@@ -147,8 +147,8 @@ const Example = () => {
         background="primary-inverse"
         margin="general.spaceXl auto none"
         display="block"
-        width="25rem"
-        height="25rem"
+        width="30rem"
+        height="30rem"
         borderWidth="large"
         id="constrainExample"
       ></View>
@@ -463,6 +463,9 @@ const Example = () => {
       <Modal
         open={open}
         size={smallViewport ? 'fullscreen' : 'small'}
+        // Simulate real small-screen behavior by themeOverride.
+        // On actual small screens this happens automatically, so no theme override is needed.
+        themeOverride={smallViewport ? { fullScreenMargin: '0', borderRadius: '0' } : undefined}
         onDismiss={(event) => {
           if (event.target.id !== 'toggleViewportButton') {
             setOpen(false)

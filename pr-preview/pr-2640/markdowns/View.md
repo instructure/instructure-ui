@@ -146,7 +146,7 @@ type: example
     margin="general.spaceMd"
     padding="large"
     background="primary"
-    shadow="resting"
+    shadow="elevation1"
   >
     {lorem.sentence()}
   </View>
@@ -157,7 +157,7 @@ type: example
     margin="general.spaceMd"
     padding="large"
     background="primary"
-    shadow="above"
+    shadow="elevation2"
   >
     {lorem.sentence()}
   </View>
@@ -168,7 +168,17 @@ type: example
     margin="general.spaceMd"
     padding="large"
     background="primary"
-    shadow="topmost"
+    shadow="elevation3"
+  >
+    {lorem.sentence()}
+  </View><View
+    as="span"
+    display="inline-block"
+    maxWidth="10rem"
+    margin="small"
+    padding="large"
+    background="primary"
+    shadow="elevation4"
   >
     {lorem.sentence()}
   </View>
@@ -193,7 +203,7 @@ type: example
     margin="general.spaceMd"
     padding="small"
     background="primary"
-    borderWidth="small"
+    borderWidth="sm"
   >
     {lorem.sentence()}
   </View>
@@ -204,7 +214,7 @@ type: example
     margin="general.spaceMd"
     padding="small"
     background="primary"
-    borderWidth="medium"
+    borderWidth="md"
   >
     {lorem.sentence()}
   </View>
@@ -215,7 +225,7 @@ type: example
     margin="general.spaceMd"
     padding="small"
     background="primary"
-    borderWidth="large none"
+    borderWidth="lg none"
   >
     {lorem.sentence()}
   </View>
@@ -224,7 +234,7 @@ type: example
     margin="general.spaceMd"
     padding="small"
     background="primary"
-    borderWidth="none none small none"
+    borderWidth="none none sm none"
   >
     {lorem.sentence()}
   </View>
@@ -234,6 +244,12 @@ type: example
 ### `borderColor`
 
 Change the color of View's border for different contexts via the `borderColor` prop.
+In addition to the legacy contextual colors (`transparent`, `primary`, `secondary`, `brand`,
+`info`, `success`, `warning`, `alert`, `danger`), View accepts the shared design token
+stroke colors: `strongColor`, `visualSeparator`, and the accent palette (`accentAsh`,
+`accentAurora`, `accentBlue`, `accentGreen`, `accentGrey`, `accentHoney`, `accentOrange`,
+`accentPlum`, `accentRed`, `accentSea`, `accentSky`, `accentStone`, `accentViolet`).
+You can also pass any valid CSS color string (e.g. `"#FFFFFF"` or `"red"`).
 
 ```js
 ---
@@ -257,9 +273,9 @@ type: example
     padding="small"
     background="primary"
     borderWidth="large"
-    borderColor="info"
+    borderColor="accentBlue"
   >
-    info
+    accentBlue
   </View>
   <View
     as="span"
@@ -268,9 +284,9 @@ type: example
     padding="small"
     background="primary"
     borderWidth="large"
-    borderColor="warning"
+    borderColor="accentOrange"
   >
-    warning
+    accentOrange
   </View>
   <View
     as="span"
@@ -279,9 +295,9 @@ type: example
     padding="small"
     background="primary"
     borderWidth="large"
-    borderColor="danger"
+    borderColor="accentRed"
   >
-    danger
+    accentRed
   </View>
   <View
     as="span"
@@ -290,9 +306,9 @@ type: example
     padding="small"
     background="primary"
     borderWidth="large"
-    borderColor="alert"
+    borderColor="accentHoney"
   >
-    alert
+    accentHoney
   </View>
   <View
     as="span"
@@ -301,9 +317,9 @@ type: example
     padding="small"
     background="primary"
     borderWidth="large"
-    borderColor="success"
+    borderColor="accentGreen"
   >
-    success
+    accentGreen
   </View>
   <View
     as="span"
@@ -312,9 +328,42 @@ type: example
     padding="small"
     background="primary"
     borderWidth="large"
-    borderColor="brand"
+    borderColor="accentAurora"
   >
-    brand
+    accentAurora
+  </View>
+  <View
+    as="span"
+    display="inline-block"
+    margin="small"
+    padding="small"
+    background="primary"
+    borderWidth="large"
+    borderColor="strongColor"
+  >
+    strongColor
+  </View>
+  <View
+    as="span"
+    display="inline-block"
+    margin="small"
+    padding="small"
+    background="primary"
+    borderWidth="large"
+    borderColor="visualSeparator"
+  >
+    visualSeparator
+  </View>
+  <View
+    as="span"
+    display="inline-block"
+    margin="small"
+    padding="small"
+    background="primary"
+    borderWidth="large"
+    borderColor="accentViolet"
+  >
+    accentViolet
   </View>
 </div>
 ```
@@ -324,6 +373,12 @@ type: example
 Adjust the border radius using the `borderRadius` prop. Utilize
 [CSS shorthand style](https://developer.mozilla.org/en-US/docs/Web/CSS/Shorthand_properties)
 to apply different border radii to individual corners.
+
+In addition to the legacy values (`small`, `medium`, `large`, `circle`, `pill`), View
+accepts the shared design token radius scale — `xs`, `sm`, `md`, `lg`, `xl`, `xxl`, `full` —
+and the card radii `card.sm`, `card.md`, `card.lg`, `card.nestedContainer.sm`,
+`card.nestedContainer.md`, `card.nestedContainer.lg`. Valid CSS length values like `1rem`
+or `12px` are also accepted.
 
 ```js
 ---
@@ -337,7 +392,7 @@ type: example
     margin="general.spaceMd"
     padding="medium"
     background="primary-inverse"
-    borderRadius="medium"
+    borderRadius="md"
     textAlign="center"
   >
     medium
@@ -349,7 +404,31 @@ type: example
     margin="general.spaceMd"
     padding="medium"
     background="primary-inverse"
-    borderRadius="large large none none"
+    borderRadius="lg"
+    textAlign="center"
+  >
+    lg
+  </View>
+  <View
+    as="span"
+    display="inline-block"
+    maxWidth="10rem"
+    margin="small"
+    padding="medium"
+    background="primary-inverse"
+    borderRadius="card.md"
+    textAlign="center"
+  >
+    card.md
+  </View>
+  <View
+    as="span"
+    display="inline-block"
+    maxWidth="10rem"
+    margin="small"
+    padding="medium"
+    background="primary-inverse"
+    borderRadius="lg lg none none"
     textAlign="center"
   >
     large large none none
@@ -361,7 +440,7 @@ type: example
     margin="general.spaceMd"
     padding="medium"
     background="primary-inverse"
-    borderRadius="none none large large"
+    borderRadius="none none lg lg"
     textAlign="center"
   >
     none none large large
@@ -373,7 +452,7 @@ type: example
     margin="general.spaceMd"
     padding="medium"
     background="primary-inverse"
-    borderRadius="circle"
+    borderRadius="full"
     textAlign="center"
   >
     circle
@@ -384,7 +463,7 @@ type: example
     margin="general.spaceMd"
     padding="medium"
     background="primary-inverse"
-    borderRadius="pill"
+    borderRadius="full"
     textAlign="center"
   >
     pill
@@ -516,7 +595,7 @@ const FocusedExample = () => {
           margin="general.spaceMd"
           padding="small"
           background="primary"
-          borderRadius="small"
+          borderRadius="sm"
           borderWidth="small"
           position="relative"
           focusColor={focusColor}
@@ -530,7 +609,7 @@ const FocusedExample = () => {
           margin="general.spaceMd"
           padding="small"
           background="primary"
-          borderRadius="medium"
+          borderRadius="md"
           borderWidth="small"
           position="relative"
           withFocusOutline={isFocused}
@@ -544,7 +623,7 @@ const FocusedExample = () => {
           margin="general.spaceMd"
           padding="small"
           background="primary"
-          borderRadius="large"
+          borderRadius="lg"
           borderWidth="small"
           position="relative"
           withFocusOutline={isFocused}
@@ -559,7 +638,7 @@ const FocusedExample = () => {
           width="100px"
           margin="general.spaceMd"
           background="primary"
-          borderRadius="circle"
+          borderRadius="full"
           borderWidth="small"
           position="relative"
           withFocusOutline={isFocused}
@@ -585,7 +664,7 @@ const FocusedExample = () => {
             margin="general.spaceMd"
             padding="small"
             background="primary-inverse"
-            borderRadius="large"
+            borderRadius="lg"
             borderWidth="small"
             position="relative"
             withFocusOutline={isFocused}
@@ -601,7 +680,7 @@ const FocusedExample = () => {
           margin="general.spaceMd"
           padding="small"
           background="primary"
-          borderRadius="pill"
+          borderRadius="full"
           borderWidth="small"
           position="relative"
           focusColor="success"
@@ -619,7 +698,7 @@ const FocusedExample = () => {
           padding="small"
           background="primary"
           borderWidth="small"
-          borderRadius="none large"
+          borderRadius="none lg"
           focusColor="danger"
           position="relative"
           focusColor={focusColor}
@@ -827,7 +906,7 @@ type: example
 | View | minWidth | `string \| number` | No | - |  |
 | View | children | `React.ReactNode` | No | - | The children to render inside the <View /> |
 | View | textAlign | `'start' \| 'center' \| 'end'` | No | - | Designates the text alignment within the `<View />` |
-| View | borderColor | `\| string \| 'transparent' \| 'primary' \| 'secondary' \| 'brand' \| 'info' \| 'success' \| 'warning' \| 'alert' \| 'danger'` | No | `'primary'` | Sets the color of the View border. Accepts a color string value (e.g., "#FFFFFF", "red") or one of the predefined theme color options. |
+| View | borderColor | `\| string \| 'transparent' \| 'primary' \| 'secondary' \| 'brand' \| 'info' \| 'success' \| 'warning' \| 'alert' \| 'danger' \| 'strongColor' \| 'visualSeparator' \| 'accentAsh' \| 'accentAurora' \| 'accentBlue' \| 'accentGreen' \| 'accentGrey' \| 'accentHoney' \| 'accentOrange' \| 'accentPlum' \| 'accentRed' \| 'accentSea' \| 'accentSky' \| 'accentStone' \| 'accentViolet'` | No | `'primary'` | Sets the color of the View border. Accepts a color string value (e.g., "#FFFFFF", "red") or one of the predefined theme color options. |
 | View | background | `\| 'transparent' \| 'primary' \| 'secondary' \| 'primary-inverse' \| 'brand' \| 'info' \| 'alert' \| 'success' \| 'danger' \| 'warning'` | No | - | Designates the background style of the `<View />` |
 | View | position | `'static' \| 'absolute' \| 'relative' \| 'sticky' \| 'fixed'` | No | `'static'` | Specify a value for the CSS position property. Use `relative` if `focusable` will be true. |
 | View | insetInlineStart | `string` | No | - | The `left` CSS property in left-to-right interfaces. Will not do anything if `position === "static"`. |
@@ -841,8 +920,8 @@ type: example
 | View | withVisualDebug | `boolean` | No | `false` | Activate a dotted outline around the component to make building your layout easier |
 | View | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`. |
 | View | padding | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `padding="small auto large"`. |
-| View | borderWidth | `BorderWidth` | No | - | Accepts the familiar CSS shorthand to designate border widths corresponding to edges |
-| View | borderRadius | `BorderRadii` | No | - | Accepts `small`, `medium`, `large`, `circle`, and `pill`. Border radius can be assigned to individual corners in CSS shorthand style (e.g., `"medium large none pill"`). Also accepts valid CSS length values like `1rem` or `12px` |
+| View | borderWidth | `CSSShorthandValue< '0' \| 'none' \| 'small' \| 'medium' \| 'large' \| 'sm' \| 'md' \| 'lg' >` | No | - | Accepts the familiar CSS shorthand to designate border widths corresponding to edges |
+| View | borderRadius | `string` | No | - | Accepts `small`, `medium`, `large`, `circle`, and `pill`. Border radius can be assigned to individual corners in CSS shorthand style (e.g., `"medium large none pill"`). Also accepts valid CSS length values like `1rem` or `12px` |
 | View | shadow | `Shadow` | No | - | Controls the shadow depth for the `<View />` |
 | View | stacking | `Stacking` | No | - | Controls the z-index depth for the `<View />` |
 | View | cursor | `Cursor` | No | - | Specify a mouse cursor to use when hovering over the `<View />` |
