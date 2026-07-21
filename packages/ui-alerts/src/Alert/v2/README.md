@@ -187,11 +187,11 @@ When Alerts are used inline, the shadow can be removed with the `hasShadow` prop
 ---
 type: example
 ---
-<View as="div" background="primary" padding="large">
+<View as="div" background="primary" padding="general.space2xl">
   <View
     as="div"
     background="primary"
-    padding="small medium"
+    padding="general.spaceMd general.spaceXl"
     borderWidth="small"
     borderRadius="small"
     margin="general.spaceSm 0"
@@ -209,7 +209,7 @@ type: example
   <View
     as="div"
     background="primary"
-    padding="small medium"
+    padding="general.spaceMd general.spaceXl"
     borderWidth="small"
     borderRadius="small"
     margin="general.spaceSm 0"

@@ -8,7 +8,7 @@ CondensedButton is a button component that renders without padding. It is meant 
 ---
 type: example
 ---
-<View display="block" background="primary" padding="small">
+<View display="block" background="primary" padding="general.spaceMd">
   <CondensedButton>Click Me</CondensedButton>
 </View>
 ```

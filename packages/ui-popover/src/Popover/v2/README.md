@@ -69,7 +69,7 @@ const Example = () => {
           onShowContent={() => console.log('showing')}
           onHideContent={() => console.log('hidden')}
         >
-          <View padding="x-small" display="block" as="div" id="tip">
+          <View padding="general.spaceSm" display="block" as="div" id="tip">
             <Text color={color}>
               Hello World
             </Text>
@@ -120,7 +120,7 @@ const Example = () => {
         shouldCloseOnDocumentClick
         offsetY="16px"
       >
-        <View padding="medium" display="block" as="form">
+        <View padding="general.spaceXl" display="block" as="form">
           {renderCloseButton()}
           <FormFieldGroup description="Log In">
             <TextInput renderLabel="Username" ref={usernameRef} />
@@ -319,7 +319,7 @@ const Example = () => {
   }
 
   return (
-    <View as="div" background="primary" padding="small">
+    <View as="div" background="primary" padding="general.spaceMd">
       <Flex margin="general.spaceMd general.spaceMd general.space2xl" justifyItems="space-around">
         <Flex.Item align="start">
           <FormFieldGroup description="Popover Example">
@@ -392,7 +392,7 @@ const Example = () => {
           </View>
         </Flex.Item>
       </Flex>
-      <View as="div" display="block" padding="large" textAlign="center">
+      <View as="div" display="block" padding="general.space2xl" textAlign="center">
         <Popover
           renderTrigger={
             <div
@@ -448,7 +448,7 @@ class Example extends React.Component {
         screenReaderLabel="A long popover"
         renderTrigger={<Button>Open scrollable popover</Button>}
       >
-        <View as="div" padding="small" maxWidth="22rem">{fpo}</View>
+        <View as="div" padding="general.spaceMd" maxWidth="22rem">{fpo}</View>
       </Popover>
     )
   }

@@ -15,7 +15,7 @@ readonly: true
 ---
 
 <div>
-  <View display="block" padding="small medium" background="primary">
+  <View display="block" padding="general.spaceMd general.spaceXl" background="primary">
     <Avatar name="Arthur C. Clarke" />
     <Avatar name="James Arias" color="accent2" />
     <Avatar name="Charles Kimball" color="accent3" />
@@ -24,7 +24,7 @@ readonly: true
     <Avatar name="David Herbert" color="accent6" />
     <Avatar name="Isaac Asimov" color="accent1" />
   </View>
-  <View display="block" padding="small medium" background="primary">
+  <View display="block" padding="general.spaceMd general.spaceXl" background="primary">
     <Avatar name="Arthur C. Clarke" hasInverseColor />
     <Avatar name="James Arias" color="accent2" hasInverseColor />
     <Avatar name="Charles Kimball" color="accent3" hasInverseColor />
@@ -45,7 +45,7 @@ There is a need for special, `ai avatars`. These have a specific look. You can a
 type: example
 readonly: true
 ---
-<View display="block" padding="small medium" background="primary">
+<View display="block" padding="general.spaceMd general.spaceXl" background="primary">
   <Avatar size="xx-small" color="ai" name="AI Assistant" renderIcon={IgniteaiLogoInstUIIcon} />
   <Avatar size="x-small" color="ai" name="AI Assistant" renderIcon={IgniteaiLogoInstUIIcon} />
   <Avatar size="small" color="ai" name="AI Assistant" renderIcon={IgniteaiLogoInstUIIcon} />
@@ -65,7 +65,7 @@ Lucide icons in Avatar are automatically sized and colored according to the Avat
 type: example
 ---
 <div>
-  <View display="block" padding="small medium">
+  <View display="block" padding="general.spaceMd general.spaceXl">
     <Avatar name="User Avatar" size="xx-small" renderIcon={UserInstUIIcon} />
     <Avatar name="User Avatar" size="x-small" renderIcon={UserInstUIIcon} />
     <Avatar name="User Avatar" size="small" renderIcon={UserInstUIIcon} />
@@ -74,12 +74,12 @@ type: example
     <Avatar name="User Avatar" size="x-large" renderIcon={UserInstUIIcon} />
     <Avatar name="User Avatar" size="xx-large" renderIcon={UserInstUIIcon} />
   </View>
-  <View display="block" padding="small medium">
+  <View display="block" padding="general.spaceMd general.spaceXl">
     <Avatar name="Profile" size="small" color="accent2" renderIcon={<CircleUserInstUIIcon />} />
     <Avatar name="Group" size="medium" color="accent3" renderIcon={<UsersInstUIIcon />} />
     <Avatar name="Settings" size="large" color="accent4" renderIcon={<SettingsInstUIIcon />} />
   </View>
-  <View display="block" padding="small medium">
+  <View display="block" padding="general.spaceMd general.spaceXl">
     <Avatar name="Profile" size="large" color="accent4" renderIcon={()=><CircleUserInstUIIcon />} />
     <Avatar name="Group" size="x-large" color="accent5" renderIcon={()=><UsersInstUIIcon />} />
     <Avatar name="Settings" size="xx-large" color="accent6" renderIcon={()=><SettingsInstUIIcon />} />
@@ -96,7 +96,7 @@ The `size` prop allows you to select from `xx-small`, `x-small`, `small`, `mediu
 type: example
 ---
 <div>
-  <View display="block" padding="small medium">
+  <View display="block" padding="general.spaceMd general.spaceXl">
     <Avatar name="Arthur C. Clarke" size="xx-small" />
     <Avatar name="James Arias" size="x-small" />
     <Avatar name="Charles Kimball" size="small" />
@@ -105,7 +105,7 @@ type: example
     <Avatar name="David Herbert" size="x-large" />
     <Avatar name="Isaac Asimov" size="xx-large" />
   </View>
-  <View display="block" padding="small medium" background="primary">
+  <View display="block" padding="general.spaceMd general.spaceXl" background="primary">
     <Avatar name="Arthur C. Clarke" size="xx-small" src={avatarSquare} />
     <Avatar name="James Arias" size="x-small" src={avatarSquare} />
     <Avatar name="Charles Kimball" size="small" src={avatarSquare} />
@@ -114,7 +114,7 @@ type: example
     <Avatar name="David Herbert" size="x-large" src={avatarSquare} />
     <Avatar name="Isaac Asimov" size="xx-large" src={avatarSquare} />
   </View>
-  <View display="block" padding="small medium">
+  <View display="block" padding="general.spaceMd general.spaceXl">
     <Avatar name="Arthur C. Clarke" renderIcon={UsersInstUIIcon} size="xx-small" />
     <Avatar name="James Arias" renderIcon={UsersInstUIIcon} size="x-small" />
     <Avatar name="Charles Kimball" renderIcon={UsersInstUIIcon} size="small" />
@@ -135,7 +135,7 @@ The color of the initials and icons can be set with the `color` prop, and it all
 type: example
 ---
 <div>
-  <View display="block" padding="small medium">
+  <View display="block" padding="general.spaceMd general.spaceXl">
     <Avatar name="Arthur C. Clarke" />
     <Avatar name="James Arias" color="accent2" />
     <Avatar name="Charles Kimball" color="accent3" />
@@ -144,7 +144,7 @@ type: example
     <Avatar name="David Herbert" color="accent6" />
     <Avatar name="Isaac Asimov" color="accent1" />
   </View>
-  <View display="block" padding="small medium">
+  <View display="block" padding="general.spaceMd general.spaceXl">
     <Avatar renderIcon={UsersInstUIIcon} name="Arthur C. Clarke" />
     <Avatar renderIcon={UsersInstUIIcon} name="James Arias" color="accent2" />
     <Avatar renderIcon={UsersInstUIIcon} name="Charles Kimball" color="accent3" />
@@ -165,7 +165,7 @@ Inverted Avatars have **no border**.
 type: example
 ---
 <div>
-  <View display="block" padding="small medium" background="primary">
+  <View display="block" padding="general.spaceMd general.spaceXl" background="primary">
     <Avatar name="Arthur C. Clarke" hasInverseColor />
     <Avatar name="James Arias" color="accent2" hasInverseColor />
     <Avatar name="Charles Kimball" color="accent3" hasInverseColor />
@@ -174,7 +174,7 @@ type: example
     <Avatar name="David Herbert" color="accent6" hasInverseColor />
     <Avatar name="Isaac Asimov" color="accent1" hasInverseColor />
   </View>
-  <View display="block" padding="small medium" background="primary">
+  <View display="block" padding="general.spaceMd general.spaceXl" background="primary">
     <Avatar renderIcon={UsersInstUIIcon} name="Arthur C. Clarke" hasInverseColor />
     <Avatar renderIcon={UsersInstUIIcon} name="James Arias" color="accent2" hasInverseColor />
     <Avatar renderIcon={UsersInstUIIcon} name="Charles Kimball" color="accent3" hasInverseColor />

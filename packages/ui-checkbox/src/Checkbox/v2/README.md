@@ -75,7 +75,7 @@ type: example
           checked={value.length === 3}
           indeterminate={value.length > 0 && value.length < 3}
         />
-        <View as="div" padding="0 0 0 medium">
+        <View as="div" padding="0 0 0 general.spaceXl">
           <Checkbox
             aria-labelledby="groupLabel eng203Label"
             label={<span id="eng203Label">English 203</span>}
@@ -87,7 +87,7 @@ type: example
             checked={value.indexOf('eng203') !== -1}
           />
         </View>
-        <View as="div" padding="0 0 0 medium">
+        <View as="div" padding="0 0 0 general.spaceXl">
           <Checkbox
             aria-labelledby="groupLabel sci101Label"
             label={<span id="sci101Label">Science 101</span>}
@@ -99,7 +99,7 @@ type: example
             checked={value.indexOf('sci101') !== -1}
           />
         </View>
-        <View as="div" padding="0 0 0 medium">
+        <View as="div" padding="0 0 0 general.spaceXl">
           <Checkbox
             aria-labelledby="groupLabel hist101Label"
             label={<span id="hist101Label">History 111</span>}

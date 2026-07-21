@@ -17,8 +17,8 @@ type: example
   onDropAccepted={([file]) => { console.log(`File accepted ${file.name}`) }}
   onDropRejected={([file]) => { console.log(`File rejected ${file.name}`) }}
   renderLabel={
-    <View as="div" padding="xx-large large" background="primary">
-      <IconModuleLine size="large" />
+    <View as="div" padding="general.space2xl general.space2xl" background="primary">
+      <BoxesInstUIIcon size="illu-md" />
       <Heading>Drop files here to add them to module</Heading>
       <Text color="brand">
         Drag and drop, or click to browse your computer
@@ -61,8 +61,8 @@ type: example
     onDropAccepted={([file]) => { console.log(`File accepted ${file.name}`) }}
     onDropRejected={([file]) => { console.log(`File rejected ${file.name}`) }}
     renderLabel={
-      <View  background="secondary" as="div" textAlign="center" padding="x-large large">
-        <IconUploadSolid />
+      <View  background="secondary" as="div" textAlign="center" padding="general.space2xl general.space2xl">
+        <UploadInstUIIcon />
         <Text as="div" weight="bold">
           Upload document
         </Text>
@@ -82,7 +82,7 @@ type: example
       <Billboard
         size="small"
         message="All video file types"
-        hero={<IconVideoLine />}
+        hero={<VideoInstUIIcon />}
       />
     }
     display="inline-block"
@@ -109,7 +109,7 @@ type: example
     <Billboard
       size="small"
       message="Only .jpg files"
-      hero={<IconImageLine />}
+      hero={<ImageInstUIIcon />}
     />
   }
   maxWidth="15rem"
@@ -131,8 +131,8 @@ type: example
     console.log(`Files accepted ${files.map((f) => f.name).join(',')}`)
   }}
   renderLabel={
-    <View as="div" textAlign="center" padding="large" margin="general.space2xl 0 0 0">
-      <IconAnnotateLine color="brand" size="large" />
+    <View as="div" textAlign="center" padding="general.space2xl" margin="general.space2xl 0 0 0">
+      <PencilAnnotateInstUIIcon color="brand" size="illu-md" />
       <Text as="div" color="brand">
         Drag and Drop or Click to Browser your Computer
       </Text>
@@ -157,15 +157,15 @@ type: example
     height="100%"
     renderLabel={
       <Flex direction="column" height="100%" alignItems="center" justifyItems="center">
-        <Flex.Item padding="small">
-          <IconPdfLine size="large" />
+        <Flex.Item padding="general.spaceMd">
+          <FileTextInstUIIcon size="illu-md" />
         </Flex.Item>
-        <Flex.Item padding="small">
+        <Flex.Item padding="general.spaceMd">
           <Text size="large">
             Drag and Drop or Click to Browser your Computer
           </Text>
         </Flex.Item>
-        <Flex.Item padding="small">
+        <Flex.Item padding="general.spaceMd">
           <Text color="secondary" size="small">
             Accepted File Type is PDF
           </Text>

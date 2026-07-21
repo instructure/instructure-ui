@@ -155,7 +155,7 @@ You can see here most of the visual states of the component.
 ---
   type: example
 ---
-  <Flex gap='medium' direction='column'>
+  <Flex gap='general.spaceXl' direction='column'>
     <NumberInput
       renderLabel='normal'
       placeholder="placeholder"

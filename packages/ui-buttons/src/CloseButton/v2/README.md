@@ -22,11 +22,11 @@ If you need the `CloseButton` to work in a layout with other elements vs. absolu
 type: example
 ---
 <View display="block" position="relative" background="primary" shadow="resting">
-  <Flex height="6rem" justifyItems="space-between" alignItems="center" padding="medium">
+  <Flex height="6rem" justifyItems="space-between" alignItems="center" padding="general.spaceXl">
     <Flex.Item shouldShrink shouldGrow>
       <Heading level="h2">Some Heading Text</Heading>
     </Flex.Item>
-    <Flex.Item padding="none none none medium">
+    <Flex.Item padding="none none none general.spaceXl">
       <CloseButton size="medium" screenReaderLabel="Close" />
     </Flex.Item>
   </Flex>

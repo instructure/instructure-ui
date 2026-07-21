@@ -90,7 +90,7 @@ component. Set it to `primary-inverse` when the component is used on dark backgr
 ---
 type: example
 ---
-<View background="primary-inverse" padding="medium" as="div">
+<View background="primary-inverse" padding="general.spaceXl" as="div">
   <ProgressBar
     screenReaderLabel="Loading completion"
     color="primary-inverse"
@@ -325,7 +325,7 @@ const Example = () => {
       <View
         as="div"
         background="primary"
-        padding="medium"
+        padding="general.spaceXl"
         margin="0 0 general.space2xl 0"
       >
         <FormFieldGroup

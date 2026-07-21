@@ -17,7 +17,7 @@ type: example
     }
 
     return (
-      <View as="div" padding="x-large" id="toggleContainer">
+      <View as="div" padding="general.space2xl" id="toggleContainer">
         <ToggleButton
           status={locked ? 'pressed' : 'unpressed'}
           color={locked ? 'danger' : 'secondary'}
@@ -49,7 +49,7 @@ type: example
     return (
       <View
         as="div"
-        padding="xx-large"
+        padding="general.space2xl"
         background="info"
         id="inverseToggleContainer"
       >

@@ -138,7 +138,7 @@ type: example
           borderColor="primary"
           borderWidth="small 0 0 0"
           display="flex"
-          padding="x-small"
+          padding="general.spaceSm"
           style={{ flexDirection: 'row-reverse' }}
         >
           <Button onClick={handleAdd} color="primary" margin="general.spaceXs">

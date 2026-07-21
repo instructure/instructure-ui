@@ -496,7 +496,7 @@ const SelectableTable = ({
     >
       {(props) => (
         <div>
-          <View as="div" padding="small" background="primary-inverse">
+          <View as="div" padding="general.spaceMd" background="primary-inverse">
             {`${selected.size} of ${rowIds.length} selected`}
           </View>
           <Table caption={caption} {...props}>

@@ -9,7 +9,7 @@ A Mask component covers its closest positioned parent (either absolute or relati
 type: example
 ---
 <View
-  padding="large"
+  padding="general.space2xl"
   margin="general.spaceXl"
   textAlign="center"
   as="div"

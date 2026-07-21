@@ -47,7 +47,7 @@ type: example
     <Options.Item role="menuitem" variant="highlighted">
       Option two
     </Options.Item>
-    <Options.Item role="menuitem" renderAfterLabel={IconArrowOpenEndSolid}>
+    <Options.Item role="menuitem" renderAfterLabel={ChevronRightInstUIIcon}>
       Flyout menu option
     </Options.Item>
     <Options.Separator as="li" />
@@ -64,7 +64,7 @@ type: example
       <Options.Item
         role="menuitemradio"
         aria-checked="true"
-        renderBeforeLabel={IconCheckSolid}
+        renderBeforeLabel={CheckInstUIIcon}
       >
         Radio option one
       </Options.Item>
@@ -72,7 +72,7 @@ type: example
         role="menuitemradio"
         aria-checked="false"
         renderBeforeLabel={
-          <IconCheckLine style={{opacity: 0}} />
+          <CheckInstUIIcon style={{opacity: 0}} />
         }
       >
         Radio option two
@@ -256,27 +256,27 @@ render(
       {
         label: 'Default item',
         extraProps: {
-          renderBeforeLabel: IconCheckSolid
+          renderBeforeLabel: CheckInstUIIcon
         }
       },
       {
         label: 'Text is green',
         extraProps: {
-          renderBeforeLabel: IconCheckSolid,
+          renderBeforeLabel: CheckInstUIIcon,
           themeOverride: { color: '#0B874B' }
         }
       },
       {
         label: 'Highlighted text is black',
         extraProps: {
-          renderBeforeLabel: IconCheckSolid,
+          renderBeforeLabel: CheckInstUIIcon,
           themeOverride: { highlightedLabelColor: '#2D3B45' }
         }
       },
       {
         label: 'Highlighted background is purple',
         extraProps: {
-          renderBeforeLabel: IconCheckSolid,
+          renderBeforeLabel: CheckInstUIIcon,
           themeOverride: { highlightedBackground: '#BF32A4' }
         }
       },
@@ -285,7 +285,7 @@ render(
         extraProps: {
           renderBeforeLabel: (props) => {
             return (
-              <IconCheckSolid
+              <CheckInstUIIcon
                 {...(props.variant === 'default' && { color: 'warning' })}
               />
             )
@@ -319,8 +319,8 @@ const Example = () => {
           onMouseOver={() => handleMouseOver(1)}
           variant={highlighted === 1 ? 'highlighted' : 'default'}
           description="Curabitur fringilla, urna ut efficitur molestie, nibh lacus tincidunt elit, ut tempor ipsum nunc sit amet massa."
-          renderBeforeLabel={IconCheckSolid}
-          renderAfterLabel={IconArrowOpenEndSolid}
+          renderBeforeLabel={CheckInstUIIcon}
+          renderAfterLabel={ChevronRightInstUIIcon}
           beforeLabelContentVAlign="start"
           afterLabelContentVAlign="start"
         >
@@ -330,8 +330,8 @@ const Example = () => {
           onMouseOver={() => handleMouseOver(2)}
           variant={highlighted === 2 ? 'highlighted' : 'default'}
           description="Curabitur fringilla, urna ut efficitur molestie, nibh lacus tincidunt elit, ut tempor ipsum nunc sit amet massa."
-          renderBeforeLabel={IconCheckSolid}
-          renderAfterLabel={IconArrowOpenEndSolid}
+          renderBeforeLabel={CheckInstUIIcon}
+          renderAfterLabel={ChevronRightInstUIIcon}
           beforeLabelContentVAlign="center"
           afterLabelContentVAlign="center"
         >
@@ -341,8 +341,8 @@ const Example = () => {
           onMouseOver={() => handleMouseOver(3)}
           variant={highlighted === 3 ? 'highlighted' : 'default'}
           description="Curabitur fringilla, urna ut efficitur molestie, nibh lacus tincidunt elit, ut tempor ipsum nunc sit amet massa."
-          renderBeforeLabel={IconCheckSolid}
-          renderAfterLabel={IconArrowOpenEndSolid}
+          renderBeforeLabel={CheckInstUIIcon}
+          renderAfterLabel={ChevronRightInstUIIcon}
           beforeLabelContentVAlign="end"
           afterLabelContentVAlign="end"
         >

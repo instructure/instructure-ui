@@ -16,7 +16,7 @@ type: example
 ---
 <div>
   <ContextView
-    padding="small"
+    padding="general.spaceMd"
     margin="general.space2xl"
     placement="end top"
     shadow="resting"
@@ -25,7 +25,7 @@ type: example
   </ContextView>
   <ContextView
     margin="0 general.space2xl 0 0"
-    padding="small"
+    padding="general.spaceMd"
     placement="top"
   >
     <Heading level="h3">Hello World</Heading>
@@ -33,7 +33,7 @@ type: example
   </ContextView>
   <ContextView
     margin="0 general.space2xl 0 0"
-    padding="small"
+    padding="general.spaceMd"
     textAlign="end"
     placement="start"
   >
@@ -42,7 +42,7 @@ type: example
   </ContextView>
   <ContextView
     placement="end bottom"
-    padding="medium"
+    padding="general.spaceXl"
     background="inverse"
     width="30rem"
     margin="general.space2xl 0 0"

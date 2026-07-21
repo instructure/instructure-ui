@@ -55,25 +55,25 @@ Flex items will have no gap by default. You can set the gap between Flex.Items b
 type: example
 ---
 <div>
-  <Flex withVisualDebug margin="none none general.space2xl" gap="small">
+  <Flex withVisualDebug margin="none none general.space2xl" gap="general.spaceMd">
     <Flex.Item><Text>One</Text></Flex.Item>
     <Flex.Item><Text>Two</Text></Flex.Item>
     <Flex.Item><Text>Three</Text></Flex.Item>
     <Flex.Item><Text>Four</Text></Flex.Item>
   </Flex>
-  <Flex withVisualDebug direction="column" margin="none none general.space2xl" gap="medium">
+  <Flex withVisualDebug direction="column" margin="none none general.space2xl" gap="general.spaceXl">
     <Flex.Item><Text>One</Text></Flex.Item>
     <Flex.Item><Text>Two</Text></Flex.Item>
     <Flex.Item><Text>Three</Text></Flex.Item>
     <Flex.Item><Text>Four</Text></Flex.Item>
   </Flex>
-  <Flex withVisualDebug direction="row-reverse" margin="none none general.space2xl" gap="medium">
+  <Flex withVisualDebug direction="row-reverse" margin="none none general.space2xl" gap="general.spaceXl">
     <Flex.Item><Text>One</Text></Flex.Item>
     <Flex.Item><Text>Two</Text></Flex.Item>
     <Flex.Item><Text>Three</Text></Flex.Item>
     <Flex.Item><Text>Four</Text></Flex.Item>
   </Flex>
-  <Flex withVisualDebug direction="column-reverse" gap="small">
+  <Flex withVisualDebug direction="column-reverse" gap="general.spaceMd">
     <Flex.Item><Text>One</Text></Flex.Item>
     <Flex.Item><Text>Two</Text></Flex.Item>
     <Flex.Item><Text>Three</Text></Flex.Item>
@@ -89,25 +89,25 @@ You can also set the gap between rows and columns by using the `gap` property. M
 type: example
 ---
 <div>
-  <Flex withVisualDebug margin="none none general.space2xl" gap="small" wrap="wrap">
+  <Flex withVisualDebug margin="none none general.space2xl" gap="general.spaceMd" wrap="wrap">
     <Flex.Item size='25rem'><Text>One</Text></Flex.Item>
     <Flex.Item size='25rem'><Text>Two</Text></Flex.Item>
     <Flex.Item size='25rem'><Text>Three</Text></Flex.Item>
     <Flex.Item size='25rem'><Text>Four</Text></Flex.Item>
   </Flex>
-  <Flex withVisualDebug margin="none none general.space2xl" gap="small large" wrap="wrap">
+  <Flex withVisualDebug margin="none none general.space2xl" gap="general.spaceMd general.space2xl" wrap="wrap">
     <Flex.Item size='25rem'><Text>One</Text></Flex.Item>
     <Flex.Item size='25rem'><Text>Two</Text></Flex.Item>
     <Flex.Item size='25rem'><Text>Three</Text></Flex.Item>
     <Flex.Item size='25rem'><Text>Four</Text></Flex.Item>
   </Flex>
-  <Flex withVisualDebug margin="none none general.space2xl" gap="small" wrap="wrap-reverse">
+  <Flex withVisualDebug margin="none none general.space2xl" gap="general.spaceMd" wrap="wrap-reverse">
     <Flex.Item size='25rem'><Text>One</Text></Flex.Item>
     <Flex.Item size='25rem'><Text>Two</Text></Flex.Item>
     <Flex.Item size='25rem'><Text>Three</Text></Flex.Item>
     <Flex.Item size='25rem'><Text>Four</Text></Flex.Item>
   </Flex>
-  <Flex withVisualDebug margin="none none general.space2xl" gap="small large" wrap="wrap-reverse">
+  <Flex withVisualDebug margin="none none general.space2xl" gap="general.spaceMd general.space2xl" wrap="wrap-reverse">
     <Flex.Item size='25rem'><Text>One</Text></Flex.Item>
     <Flex.Item size='25rem'><Text>Two</Text></Flex.Item>
     <Flex.Item size='25rem'><Text>Three</Text></Flex.Item>
@@ -126,16 +126,16 @@ their container.
 type: example
 ---
 <Flex withVisualDebug>
-  <Flex.Item padding="x-small">
+  <Flex.Item padding="general.spaceSm">
     <Text>Villum dolore eu fugiat nulla pariatur.</Text>
   </Flex.Item>
-  <Flex.Item padding="x-small">
+  <Flex.Item padding="general.spaceSm">
     <Text>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</Text>
   </Flex.Item>
-  <Flex.Item padding="x-small">
+  <Flex.Item padding="general.spaceSm">
     <Text>Duis aute irure.</Text>
   </Flex.Item>
-  <Flex.Item padding="x-small">
+  <Flex.Item padding="general.spaceSm">
     <Text>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Text>
   </Flex.Item>
 </Flex>
@@ -149,16 +149,16 @@ container.
 type: example
 ---
 <Flex withVisualDebug>
-  <Flex.Item padding="x-small" shouldShrink>
+  <Flex.Item padding="general.spaceSm" shouldShrink>
     <Text>Villum dolore eu fugiat nulla pariatur.</Text>
   </Flex.Item>
-  <Flex.Item padding="x-small" shouldShrink>
+  <Flex.Item padding="general.spaceSm" shouldShrink>
     <Text>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</Text>
   </Flex.Item>
-  <Flex.Item padding="x-small" shouldShrink>
+  <Flex.Item padding="general.spaceSm" shouldShrink>
     <Text>Duis aute irure.</Text>
   </Flex.Item>
-  <Flex.Item padding="x-small" shouldShrink>
+  <Flex.Item padding="general.spaceSm" shouldShrink>
     <Text>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Text>
   </Flex.Item>
 </Flex>
@@ -171,7 +171,7 @@ The `shouldGrow` property forces the Flex.Item to expand to fill in any availabl
 type: example
 ---
 <Flex withVisualDebug>
-  <Flex.Item padding="x-small" shouldShrink shouldGrow>
+  <Flex.Item padding="general.spaceSm" shouldShrink shouldGrow>
     <Text>I am growing and shrinking!</Text>
   </Flex.Item>
   <Flex.Item>
@@ -190,13 +190,13 @@ shrink to less than their `size`.
 type: example
 ---
 <Flex withVisualDebug>
-  <Flex.Item padding="x-small" size="200px">
+  <Flex.Item padding="general.spaceSm" size="200px">
     <Text>I am always 200px.</Text>
   </Flex.Item>
-  <Flex.Item padding="x-small" shouldShrink shouldGrow size="200px">
+  <Flex.Item padding="general.spaceSm" shouldShrink shouldGrow size="200px">
     <Text>I can grow, and shrink down to 200px.</Text>
   </Flex.Item>
-  <Flex.Item padding="x-small" size="25%">
+  <Flex.Item padding="general.spaceSm" size="25%">
     <Text>I am always 25%.</Text>
   </Flex.Item>
 </Flex>
@@ -291,13 +291,13 @@ type: example
     withVisualDebug
     direction="column"
   >
-    <Flex.Item padding="small">
+    <Flex.Item padding="general.spaceMd">
       <Heading>Pandas are cute, right?</Heading>
     </Flex.Item>
     <Flex.Item>
       <TextInput name="name" renderLabel="If you dont add padding, the focus ring will be cut off!" />
     </Flex.Item>
-    <Flex.Item size="150px" padding="small">
+    <Flex.Item size="150px" padding="general.spaceMd">
       <Img src={avatarSquare} />
     </Flex.Item>
   </Flex>
@@ -312,7 +312,7 @@ type: example
 type: example
 ---
 <Flex>
-  <Flex.Item shouldGrow shouldShrink padding="none medium none none">
+  <Flex.Item shouldGrow shouldShrink padding="none general.spaceXl none none">
     <Heading>Lorem ipsum dolor sit amet consectetur dolor sit</Heading>
   </Flex.Item>
   <Flex.Item>
@@ -332,22 +332,22 @@ type: example
 ---
 type: example
 ---
-<Flex height="32rem" justifyItems="center" padding="large" withVisualDebug>
+<Flex height="32rem" justifyItems="center" padding="general.space2xl" withVisualDebug>
   <Flex.Item shouldShrink shouldGrow textAlign="center">
 
     <Heading level="h1" margin="0 0 general.spaceXl">An amazing thing!</Heading>
 
     <Flex withVisualDebug wrap="wrap" justifyItems="space-around" margin="0 0 general.spaceXl">
-      <Flex.Item padding="small">
-        <HeartInstUIIcon size="medium" title="Icon Example" color="primary" />
+      <Flex.Item padding="general.spaceMd">
+        <HeartInstUIIcon size="md" title="Icon Example" color="primary" />
         <Text weight="bold" size="large" as="div">We love you!</Text>
       </Flex.Item>
-      <Flex.Item padding="small">
-        <HeartInstUIIcon size="medium" title="Icon Example" color="primary" />
+      <Flex.Item padding="general.spaceMd">
+        <HeartInstUIIcon size="md" title="Icon Example" color="primary" />
         <Text weight="bold" size="large" as="div">We love you!</Text>
       </Flex.Item>
-      <Flex.Item padding="small">
-        <HeartInstUIIcon size="medium" title="Icon Example" color="primary" />
+      <Flex.Item padding="general.spaceMd">
+        <HeartInstUIIcon size="md" title="Icon Example" color="primary" />
         <Text weight="bold" size="large" as="div">We love you!</Text>
       </Flex.Item>
     </Flex>
@@ -369,15 +369,15 @@ type: example
 
 <Flex height="400px" width="300px" as="div" direction="column" withVisualDebug>
 
-  <Flex.Item padding="small" as="header" textAlign="center">
+  <Flex.Item padding="general.spaceMd" as="header" textAlign="center">
     <Heading level="h3">App</Heading>
   </Flex.Item>
 
-  <Flex.Item shouldGrow shouldShrink padding="small" as="main">
+  <Flex.Item shouldGrow shouldShrink padding="general.spaceMd" as="main">
     <Text>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</Text>
   </Flex.Item>
 
-  <Flex.Item padding="small" as="footer">
+  <Flex.Item padding="general.spaceMd" as="footer">
 
     <Flex withVisualDebug justifyItems="space-between">
       <Flex.Item>

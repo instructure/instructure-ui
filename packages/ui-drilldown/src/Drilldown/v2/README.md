@@ -416,7 +416,7 @@ const SelectContactsExample = (props) => {
 
   return (
     <Flex alignItems="start">
-      <Flex.Item width="20rem" textAlign="center" padding="x-small 0 0">
+      <Flex.Item width="20rem" textAlign="center" padding="general.spaceSm 0 0">
         <Drilldown
           rootPageId="contacts"
           width="18.5rem"
@@ -430,8 +430,8 @@ const SelectContactsExample = (props) => {
         </Drilldown>
       </Flex.Item>
 
-      <Flex.Item padding="0 0 0 large" shouldGrow shouldShrink>
-        <View as="div" padding="small" background="primary">
+      <Flex.Item padding="0 0 0 general.space2xl" shouldGrow shouldShrink>
+        <View as="div" padding="general.spaceMd" background="primary">
           <div>
             <Text weight="bold">
               Selected ({selected ? selected.length : 0}):
@@ -568,7 +568,7 @@ const BackNavigationExample = () => {
         </Drilldown>
       </Flex.Item>
 
-      <Flex.Item padding="0 0 0 large" shouldGrow shouldShrink>
+      <Flex.Item padding="0 0 0 general.space2xl" shouldGrow shouldShrink>
         <FormFieldGroup description="Drilldown Group example settings">
           <Checkbox
             checked={!showTitle ? false : showAlternativeBackLabel}
@@ -651,7 +651,7 @@ const GroupsExample = () => {
         </Drilldown>
       </Flex.Item>
 
-      <Flex.Item padding="0 0 0 large">
+      <Flex.Item padding="0 0 0 general.space2xl">
         <FormFieldGroup description="Drilldown Group example settings">
           <Checkbox
             checked={showSeparators}
@@ -785,7 +785,7 @@ const SelectMembersExample = (props) => {
 
   return (
     <Flex alignItems="start">
-      <Flex.Item width="20rem" textAlign="center" padding="x-small 0 0">
+      <Flex.Item width="20rem" textAlign="center" padding="general.spaceSm 0 0">
         <Drilldown
           rootPageId="root"
           width="18.5rem"
@@ -800,8 +800,8 @@ const SelectMembersExample = (props) => {
         </Drilldown>
       </Flex.Item>
 
-      <Flex.Item padding="0 0 0 large" shouldGrow shouldShrink>
-        <View as="div" padding="small" background="primary">
+      <Flex.Item padding="0 0 0 general.space2xl" shouldGrow shouldShrink>
+        <View as="div" padding="general.spaceMd" background="primary">
           <div>
             <Text weight="bold">Selected members:</Text>
           </div>
@@ -928,7 +928,7 @@ const DisabledExample = () => {
 
   return (
     <Flex alignItems="start">
-      <Flex.Item width="20rem" textAlign="center" padding="x-small 0 0">
+      <Flex.Item width="20rem" textAlign="center" padding="general.spaceSm 0 0">
         <View textAlign="start">
           <Drilldown
             rootPageId="root"
@@ -997,7 +997,7 @@ const DisabledExample = () => {
         </View>
       </Flex.Item>
 
-      <Flex.Item padding="0 0 0 large" shouldGrow shouldShrink>
+      <Flex.Item padding="0 0 0 general.space2xl" shouldGrow shouldShrink>
         <FormFieldGroup
           description={<ScreenReaderContent>Settings</ScreenReaderContent>}
           colSpacing="medium"

@@ -107,7 +107,7 @@ type: example
 ---
 const MyComponent = forwardRef((props, ref) => {
   return (
-    <View background="primary" padding='space12' {...props} ref={ref}>
+    <View background="primary" padding='general.spaceMd' {...props} ref={ref}>
       My custom component
     </View>
   )

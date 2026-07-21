@@ -232,7 +232,7 @@ type: example
       <Grid.Col width="auto">
         <Button>Cancel</Button>
         &nbsp;
-        <Button color="primary" renderIcon={IconAddSolid}>Widget</Button>
+        <Button color="primary" renderIcon={PlusInstUIIcon}>Widget</Button>
       </Grid.Col>
     </Grid.Row>
   </Grid>

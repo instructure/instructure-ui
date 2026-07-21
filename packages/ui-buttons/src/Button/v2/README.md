@@ -37,7 +37,7 @@ The `primary-inverse` color is designed for use on colored backgrounds. It provi
 ---
 type: example
 ---
-<View display="block" background="info" padding="small">
+<View display="block" background="info" padding="general.spaceMd">
   <Button color="primary-inverse" margin="general.spaceMd">Primary Inverse</Button>
 </View>
 ```
@@ -110,7 +110,7 @@ type: example
   display="block"
   width="10rem"
   margin="general.spaceMd"
-  padding="small none"
+  padding="general.spaceMd none"
   withVisualDebug
 >
   <Button color="primary">
@@ -147,7 +147,7 @@ type: example
         display="block"
         width="10rem"
         margin="general.spaceMd"
-        padding="small none"
+        padding="general.spaceMd none"
         withVisualDebug
       >
         {isTruncated ? (
@@ -179,7 +179,7 @@ type: example
   display="block"
   width="30rem"
   margin="general.spaceMd"
-  padding="small none"
+  padding="general.spaceMd none"
   withVisualDebug
 >
   <Button
@@ -273,7 +273,7 @@ type: example
               <RadioInput label="secondary" value="secondary" />
             </RadioInputGroup>
           </View>
-          <Flex margin="none none general.spaceXl" gap="medium">
+          <Flex margin="none none general.spaceXl" gap="general.spaceXl">
             <Flex.Item>
               <Button withBackground={this.state.withBackground}
                       color={this.state.color}

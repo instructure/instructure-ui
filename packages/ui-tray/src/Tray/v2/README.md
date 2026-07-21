@@ -45,7 +45,7 @@ const Example = () => {
         size="small"
         placement="start"
       >
-        <View as="div" padding="medium">
+        <View as="div" padding="general.spaceXl">
           {renderCloseButton()}
           <Text as="p" lineHeight="double">
             {FPO}

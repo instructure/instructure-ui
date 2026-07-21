@@ -16,7 +16,7 @@ type: example
 <div>
   <View
     as="div"
-    padding="xx-small none"
+    padding="general.spaceXs none"
     maxWidth="480px"
     withVisualDebug
   >
@@ -69,7 +69,7 @@ type: example
 <div>
   <View
     as="div"
-    padding="small none"
+    padding="general.spaceMd none"
     maxWidth="480px"
     withVisualDebug
   >
@@ -98,7 +98,7 @@ type: example
   <br />
   <View
     as="div"
-    padding="small none"
+    padding="general.spaceMd none"
     maxWidth="480px"
     withVisualDebug
   >
@@ -137,7 +137,7 @@ type: example
 <div>
   <View
     as="div"
-    padding="small none"
+    padding="general.spaceMd none"
     maxWidth="480px"
     withVisualDebug
   >
@@ -150,7 +150,7 @@ type: example
   <br />
   <View
     as="div"
-    padding="small none"
+    padding="general.spaceMd none"
     maxWidth="480px"
     withVisualDebug
   >
@@ -191,7 +191,7 @@ const Example = (props) => {
   )
 
   return (
-    <View as="div" padding="xx-small none" maxWidth="230px" withVisualDebug>
+    <View as="div" padding="general.spaceXs none" maxWidth="230px" withVisualDebug>
       {isTruncated ? (
         <Tooltip
           renderTip={props.message}

@@ -583,7 +583,7 @@ class Example extends React.Component {
           <View
             as="div"
             margin="general.spaceMd"
-            padding="large"
+            padding="general.space2xl"
             background="primary">
             <Heading level='h3'>This View child does not inherit the variant and overflow properties</Heading>
             <Text>{lorem.paragraphs(5)}</Text>

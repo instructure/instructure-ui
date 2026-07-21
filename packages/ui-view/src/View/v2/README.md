@@ -21,7 +21,7 @@ type: example
 <View
   as="div"
   margin="general.spaceMd"
-  padding="large"
+  padding="general.space2xl"
   textAlign="center"
   background="primary"
 >
@@ -43,7 +43,7 @@ type: example
     display="inline-block"
     maxWidth="10rem"
     margin="general.spaceMd"
-    padding="small"
+    padding="general.spaceMd"
     background="transparent"
   >
     {lorem.sentence()}
@@ -53,7 +53,7 @@ type: example
     display="inline-block"
     maxWidth="10rem"
     margin="general.spaceMd"
-    padding="small"
+    padding="general.spaceMd"
     background="primary"
   >
     {lorem.sentence()}
@@ -63,7 +63,7 @@ type: example
     display="inline-block"
     maxWidth="10rem"
     margin="general.spaceMd"
-    padding="small"
+    padding="general.spaceMd"
     background="secondary"
   >
     {lorem.sentence()}
@@ -73,7 +73,7 @@ type: example
     display="inline-block"
     maxWidth="10rem"
     margin="general.spaceMd"
-    padding="small"
+    padding="general.spaceMd"
     background="primary-inverse"
   >
     {lorem.sentence()}
@@ -83,7 +83,7 @@ type: example
     display="inline-block"
     maxWidth="10rem"
     margin="general.spaceMd"
-    padding="small"
+    padding="general.spaceMd"
     background="brand"
   >
     {lorem.sentence()}
@@ -93,7 +93,7 @@ type: example
     display="inline-block"
     maxWidth="10rem"
     margin="general.spaceMd"
-    padding="small"
+    padding="general.spaceMd"
     background="alert"
   >
     {lorem.sentence()}
@@ -103,7 +103,7 @@ type: example
     display="inline-block"
     maxWidth="10rem"
     margin="general.spaceMd"
-    padding="small"
+    padding="general.spaceMd"
     background="success"
   >
     {lorem.sentence()}
@@ -113,7 +113,7 @@ type: example
     display="inline-block"
     maxWidth="10rem"
     margin="general.spaceMd"
-    padding="small"
+    padding="general.spaceMd"
     background="danger"
   >
     {lorem.sentence()}
@@ -123,7 +123,7 @@ type: example
     display="inline-block"
     maxWidth="10rem"
     margin="general.spaceMd"
-    padding="small"
+    padding="general.spaceMd"
     background="warning"
   >
     {lorem.sentence()}
@@ -145,7 +145,7 @@ type: example
     display="inline-block"
     maxWidth="10rem"
     margin="general.spaceMd"
-    padding="large"
+    padding="general.space2xl"
     background="primary"
     shadow="elevation1"
   >
@@ -156,7 +156,7 @@ type: example
     display="inline-block"
     maxWidth="10rem"
     margin="general.spaceMd"
-    padding="large"
+    padding="general.space2xl"
     background="primary"
     shadow="elevation2"
   >
@@ -167,7 +167,7 @@ type: example
     display="inline-block"
     maxWidth="10rem"
     margin="general.spaceMd"
-    padding="large"
+    padding="general.space2xl"
     background="primary"
     shadow="elevation3"
   >
@@ -176,8 +176,8 @@ type: example
     as="span"
     display="inline-block"
     maxWidth="10rem"
-    margin="small"
-    padding="large"
+    margin="general.spaceMd"
+    padding="general.space2xl"
     background="primary"
     shadow="elevation4"
   >
@@ -202,7 +202,7 @@ type: example
     display="inline-block"
     maxWidth="10rem"
     margin="general.spaceMd"
-    padding="small"
+    padding="general.spaceMd"
     background="primary"
     borderWidth="sm"
   >
@@ -213,7 +213,7 @@ type: example
     display="inline-block"
     maxWidth="10rem"
     margin="general.spaceMd"
-    padding="small"
+    padding="general.spaceMd"
     background="primary"
     borderWidth="md"
   >
@@ -224,7 +224,7 @@ type: example
     display="inline-block"
     maxWidth="10rem"
     margin="general.spaceMd"
-    padding="small"
+    padding="general.spaceMd"
     background="primary"
     borderWidth="lg none"
   >
@@ -233,7 +233,7 @@ type: example
   <View
     as="div"
     margin="general.spaceMd"
-    padding="small"
+    padding="general.spaceMd"
     background="primary"
     borderWidth="none none sm none"
   >
@@ -261,7 +261,7 @@ type: example
     as="span"
     display="inline-block"
     margin="general.spaceMd"
-    padding="small"
+    padding="general.spaceMd"
     background="primary"
     borderWidth="large"
   >
@@ -271,7 +271,7 @@ type: example
     as="span"
     display="inline-block"
     margin="general.spaceMd"
-    padding="small"
+    padding="general.spaceMd"
     background="primary"
     borderWidth="large"
     borderColor="accentBlue"
@@ -282,7 +282,7 @@ type: example
     as="span"
     display="inline-block"
     margin="general.spaceMd"
-    padding="small"
+    padding="general.spaceMd"
     background="primary"
     borderWidth="large"
     borderColor="accentOrange"
@@ -293,7 +293,7 @@ type: example
     as="span"
     display="inline-block"
     margin="general.spaceMd"
-    padding="small"
+    padding="general.spaceMd"
     background="primary"
     borderWidth="large"
     borderColor="accentRed"
@@ -304,7 +304,7 @@ type: example
     as="span"
     display="inline-block"
     margin="general.spaceMd"
-    padding="small"
+    padding="general.spaceMd"
     background="primary"
     borderWidth="large"
     borderColor="accentHoney"
@@ -315,7 +315,7 @@ type: example
     as="span"
     display="inline-block"
     margin="general.spaceMd"
-    padding="small"
+    padding="general.spaceMd"
     background="primary"
     borderWidth="large"
     borderColor="accentGreen"
@@ -326,7 +326,7 @@ type: example
     as="span"
     display="inline-block"
     margin="general.spaceMd"
-    padding="small"
+    padding="general.spaceMd"
     background="primary"
     borderWidth="large"
     borderColor="accentAurora"
@@ -336,8 +336,8 @@ type: example
   <View
     as="span"
     display="inline-block"
-    margin="small"
-    padding="small"
+    margin="general.spaceMd"
+    padding="general.spaceMd"
     background="primary"
     borderWidth="large"
     borderColor="strongColor"
@@ -347,8 +347,8 @@ type: example
   <View
     as="span"
     display="inline-block"
-    margin="small"
-    padding="small"
+    margin="general.spaceMd"
+    padding="general.spaceMd"
     background="primary"
     borderWidth="large"
     borderColor="visualSeparator"
@@ -358,8 +358,8 @@ type: example
   <View
     as="span"
     display="inline-block"
-    margin="small"
-    padding="small"
+    margin="general.spaceMd"
+    padding="general.spaceMd"
     background="primary"
     borderWidth="large"
     borderColor="accentViolet"
@@ -391,7 +391,7 @@ type: example
     display="inline-block"
     maxWidth="10rem"
     margin="general.spaceMd"
-    padding="medium"
+    padding="general.spaceXl"
     background="primary-inverse"
     borderRadius="md"
     textAlign="center"
@@ -403,7 +403,7 @@ type: example
     display="inline-block"
     maxWidth="10rem"
     margin="general.spaceMd"
-    padding="medium"
+    padding="general.spaceXl"
     background="primary-inverse"
     borderRadius="lg"
     textAlign="center"
@@ -414,8 +414,8 @@ type: example
     as="span"
     display="inline-block"
     maxWidth="10rem"
-    margin="small"
-    padding="medium"
+    margin="general.spaceMd"
+    padding="general.spaceXl"
     background="primary-inverse"
     borderRadius="card.md"
     textAlign="center"
@@ -426,8 +426,8 @@ type: example
     as="span"
     display="inline-block"
     maxWidth="10rem"
-    margin="small"
-    padding="medium"
+    margin="general.spaceMd"
+    padding="general.spaceXl"
     background="primary-inverse"
     borderRadius="lg lg none none"
     textAlign="center"
@@ -439,7 +439,7 @@ type: example
     display="inline-block"
     maxWidth="10rem"
     margin="general.spaceMd"
-    padding="medium"
+    padding="general.spaceXl"
     background="primary-inverse"
     borderRadius="none none lg lg"
     textAlign="center"
@@ -451,7 +451,7 @@ type: example
     width="6rem"
     height="6rem"
     margin="general.spaceMd"
-    padding="medium"
+    padding="general.spaceXl"
     background="primary-inverse"
     borderRadius="full"
     textAlign="center"
@@ -462,7 +462,7 @@ type: example
     display="inline-block"
     width="10rem"
     margin="general.spaceMd"
-    padding="medium"
+    padding="general.spaceXl"
     background="primary-inverse"
     borderRadius="full"
     textAlign="center"
@@ -508,7 +508,7 @@ By default, if a `View` is rendered as a focusable element, a focus outline will
 ---
 type: example
 ---
-<Flex gap="medium" direction="column">
+<Flex gap="general.spaceXl" direction="column">
   <View tabIndex="0" role="button" cursor="pointer">
     <Text>
       Tab here to see the focus outline
@@ -549,7 +549,7 @@ const FocusedExample = () => {
       <View
         as="div"
         background="primary"
-        padding="small"
+        padding="general.spaceMd"
         margin="0 0 general.spaceMd"
         borderWidth="small"
       >
@@ -561,8 +561,8 @@ const FocusedExample = () => {
             </ScreenReaderContent>
           }
         >
-          <Flex gap="small" direction="row">
-            <Flex gap="small" direction="column" width="15rem">
+          <Flex gap="general.spaceMd" direction="row">
+            <Flex gap="general.spaceMd" direction="column" width="15rem">
               <Checkbox
                 label="withFocusOutline"
                 checked={isFocused}
@@ -594,7 +594,7 @@ const FocusedExample = () => {
         <View
           display="inline-block"
           margin="general.spaceMd"
-          padding="small"
+          padding="general.spaceMd"
           background="primary"
           borderRadius="sm"
           borderWidth="small"
@@ -608,7 +608,7 @@ const FocusedExample = () => {
         <View
           display="inline-block"
           margin="general.spaceMd"
-          padding="small"
+          padding="general.spaceMd"
           background="primary"
           borderRadius="md"
           borderWidth="small"
@@ -622,7 +622,7 @@ const FocusedExample = () => {
         <View
           display="inline-block"
           margin="general.spaceMd"
-          padding="small"
+          padding="general.spaceMd"
           background="primary"
           borderRadius="lg"
           borderWidth="small"
@@ -658,12 +658,12 @@ const FocusedExample = () => {
         <View
           background="primary-inverse"
           display="inline-block"
-          padding="small"
+          padding="general.spaceMd"
         >
           <View
             display="block"
             margin="general.spaceMd"
-            padding="small"
+            padding="general.spaceMd"
             background="primary-inverse"
             borderRadius="lg"
             borderWidth="small"
@@ -679,7 +679,7 @@ const FocusedExample = () => {
         <View
           display="inline-block"
           margin="general.spaceMd"
-          padding="small"
+          padding="general.spaceMd"
           background="primary"
           borderRadius="full"
           borderWidth="small"
@@ -696,7 +696,7 @@ const FocusedExample = () => {
         <View
           display="inline-block"
           margin="general.spaceMd"
-          padding="small"
+          padding="general.spaceMd"
           background="primary"
           borderWidth="small"
           borderRadius="none lg"
@@ -803,7 +803,7 @@ type: example
 <div>
   <View
     as="div"
-    padding="large"
+    padding="general.space2xl"
     withVisualDebug
   >
     <Text>{lorem.sentence()}</Text>
@@ -816,7 +816,7 @@ type: example
     <View
       as="div"
       margin="general.spaceMd"
-      padding="small"
+      padding="general.spaceMd"
       withVisualDebug
     >
       <Text>{lorem.sentence()}</Text>
@@ -824,7 +824,7 @@ type: example
     <View
       as="div"
       margin="general.spaceMd"
-      padding="small"
+      padding="general.spaceMd"
       withVisualDebug
     >
       <Text>{lorem.sentence()}</Text>
@@ -846,7 +846,7 @@ type: example
 ---
 <View
   as="section"
-  padding="small"
+  padding="general.spaceMd"
   withVisualDebug
 >
   <View
@@ -872,14 +872,14 @@ the View to display inline-block with other inline elements.
 ---
 type: example
 ---
-<View as="div" textAlign="center" padding="x-small" withVisualDebug>
+<View as="div" textAlign="center" padding="general.spaceSm" withVisualDebug>
   <View
     as="div"
     display="inline-block"
     withVisualDebug
     textAlign="end"
     margin="general.space2xl auto"
-    padding="0 small 0 0"
+    padding="0 general.spaceMd 0 0"
   >
     <Text>
     {lorem.sentence()}

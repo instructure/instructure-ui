@@ -366,7 +366,7 @@ const Example = () => {
       return (
         <View
           as="div"
-          padding="xx-small"
+          padding="general.spaceXs"
           onFocus={(e) => e.stopPropagation()}
           onClick={(e) => {
             e.stopPropagation()

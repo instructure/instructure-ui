@@ -17,7 +17,7 @@ const Example = () => {
 
   return (
     <div>
-      <View as="div" padding="medium" background="primary">
+      <View as="div" padding="general.spaceXl" background="primary">
         <RangeInput
           label="Grading range"
           defaultValue={30}

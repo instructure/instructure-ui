@@ -35,7 +35,7 @@ type: example
         <Link
           href="#"
           variant="standalone"
-          renderIcon={IconArrowOpenStartLine}
+          renderIcon={ChevronLeftInstUIIcon}
         >
           <TruncateText>University of Utah Colleges</TruncateText>
         </Link>
