@@ -73,10 +73,24 @@ export default function RootLayout({
     }
   }, [])
 
+  // Paint the page on the active theme's own page-surface color so each theme is
+  // screenshotted the way it's actually used — most visibly, the dark theme
+  // renders on its near-black surface rather than on white. The value comes from
+  // the theme's semantic tokens (canvas → white, light → faint grey, dark →
+  // near-black), so it stays correct if those tokens change and needs no
+  // per-theme hardcoding. Fall back to `transparent` if the token is ever absent.
+  const pageBackground =
+    (themes[themeKey] as any)?.newTheme?.semantics?.color?.background?.page ??
+    'transparent'
+
   return (
     // we need to make a new Map to reset counting on the server side
     // on each page refresh TODO fix
-    <html lang="en" data-theme={themeKey}>
+    <html
+      lang="en"
+      data-theme={themeKey}
+      style={{ background: pageBackground }}
+    >
       <head>
         <title>Component visual and regression test suite</title>
       </head>
