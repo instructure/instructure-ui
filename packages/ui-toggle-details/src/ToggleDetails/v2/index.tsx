@@ -28,7 +28,7 @@ import {
   ChevronRightInstUIIcon,
   ChevronDownInstUIIcon
 } from '@instructure/ui-icons'
-import { Expandable } from '@instructure/ui-expandable'
+import { Expandable } from '@instructure/ui-expandable/latest'
 import { omitProps, pickProps } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 
@@ -36,7 +36,7 @@ import { withStyleNew } from '@instructure/emotion'
 import generateStyle from './styles.js'
 import type { ToggleDetailsProps } from './props'
 import { allowedProps } from './props.js'
-import type { ExpandableToggleProps } from '@instructure/ui-expandable'
+import type { ExpandableToggleProps } from '@instructure/ui-expandable/latest'
 import type { ViewProps } from '@instructure/ui-view/latest'
 
 /**

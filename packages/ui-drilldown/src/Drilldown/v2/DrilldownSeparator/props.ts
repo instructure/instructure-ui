@@ -28,7 +28,7 @@ import type {
   AsElementType
 } from '@instructure/shared-types'
 import type { WithStyleProps } from '@instructure/emotion'
-import type { OptionsSeparatorProps } from '@instructure/ui-options'
+import type { OptionsSeparatorProps } from '@instructure/ui-options/latest'
 import type { NewComponentTypes } from '@instructure/ui-themes'
 
 type DrilldownSeparatorOwnProps = {
