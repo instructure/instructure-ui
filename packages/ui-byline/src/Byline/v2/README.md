@@ -54,6 +54,6 @@ type: example
       </Text>
     </View>
   }>
-  <HeartInstUIIcon size="md" color="successColor" />
+  <HeartInstUIIcon size="illu-sm" color="successColor" />
 </Byline>
 ```
