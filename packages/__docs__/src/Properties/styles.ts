@@ -76,7 +76,7 @@ const generateStyle = (): PropertiesStyle => {
 
     oneOf: {
       label: 'properties__oneOf',
-      fontWeight: 200,
+      fontWeight: 600,
       fontStyle: 'italic'
     },
 

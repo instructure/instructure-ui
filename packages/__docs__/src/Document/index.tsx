@@ -166,12 +166,19 @@ class Document extends Component<DocumentProps, DocumentState> {
     // the listed tokens may not actually be used by this component.
     const isLegacyTheme = this.context?.componentVersion === 'v11_6'
     const dotStrippedId = doc.id?.replace(/\./g, '')
-    const borrowedThemeId =
-      doc.themeId || doc.componentInstance?.themeId
+    const borrowedThemeId = doc.themeId || doc.componentInstance?.themeId
     const borrowsTokens =
-      !isLegacyTheme &&
-      borrowedThemeId &&
-      borrowedThemeId !== dotStrippedId
+      !isLegacyTheme && borrowedThemeId && borrowedThemeId !== dotStrippedId
+
+    // Point the theme-override guide link at the page that matches the
+    // selected component version: legacy theming (v11_6) vs. the new
+    // token-based system (v11_7+).
+    const themeOverridesPage = isLegacyTheme
+      ? 'legacy-theme-overrides'
+      : 'new-theme-overrides'
+    const themeOverridesLabel = isLegacyTheme
+      ? 'Legacy theme overrides'
+      : 'New theme overrides'
 
     return themeVariables &&
       componentTheme &&
@@ -184,9 +191,9 @@ class Document extends Component<DocumentProps, DocumentState> {
         {borrowsTokens ? (
           <View as="div" margin="0 0 small 0">
             Note: <code>{doc.id}</code> shares its theme tokens with{' '}
-            <code>{borrowedThemeId}</code>, so the table below lists every
-            token of <code>{borrowedThemeId}</code>. Some of these may not
-            actually be used by <code>{doc.id}</code>.
+            <code>{borrowedThemeId}</code>, so the table below lists every token
+            of <code>{borrowedThemeId}</code>. Some of these may not actually be
+            used by <code>{doc.id}</code>.
           </View>
         ) : null}
         {doc.themePath ? (
@@ -217,7 +224,7 @@ class Document extends Component<DocumentProps, DocumentState> {
 
           <View margin="small 0" display="block">
             In case you need to change the appearance of the{' '}
-            <code>{doc.id}</code> component, you can override it&apos;s
+            <code>{doc.id}</code> component, you can override its
             {doc.themePath
               ? this.renderThemeLink(doc, ' default theme variables.')
               : ' default theme variables.'}
@@ -226,13 +233,13 @@ class Document extends Component<DocumentProps, DocumentState> {
             The easiest way to do this is to utilize the{' '}
             <code>themeOverride</code> property. See the{' '}
             <Link
-              href="legacy-theme-overrides"
+              href={themeOverridesPage}
               onClick={(e) => {
                 e.preventDefault()
-                navigateTo('legacy-theme-overrides')
+                navigateTo(themeOverridesPage)
               }}
             >
-              Legacy theme overrides
+              {themeOverridesLabel}
             </Link>{' '}
             guide for more info and alternative methods.
           </View>
