@@ -160,11 +160,6 @@ class TextInput extends Component<TextInputProps> {
   }
 
   get hasMessages() {
-    // FormField only renders messages that have text, so only treat the field
-    // as having messages then. Otherwise the input's `aria-describedby` would
-    // reference a messages element that was never rendered — e.g. DateTimeInput
-    // passes an empty-text error message to its sub-inputs just to force the
-    // invalid styling.
     return !!this.props.messages?.some((m) => !!m.text)
   }
 
@@ -238,15 +233,8 @@ class TextInput extends Component<TextInputProps> {
     if (props['aria-describedby']) {
       descriptionIds = `${props['aria-describedby']}`
     }
-    // FormField renders this control and its `messages` inside a single wrapping
-    // <label>, so by default the messages' text becomes part of the control's
-    // accessible *name* (e.g. "Password Password must be at least 6 characters"),
-    // which is confusing and repeats on every announcement. Messages should be
-    // the field's *description* instead. So when there are messages, reference
-    // them via `aria-describedby` and pin the name to the label text only via
-    // `aria-labelledby`. Keeping the messages inside the <label> preserves the
-    // native click-on-label focus behavior. A consumer-provided `aria-labelledby`
-    // takes precedence.
+    // Keep messages in the description, not the accessible name.
+    // A consumer-provided aria-labelledby wins.
     let labelledById = props['aria-labelledby'] as string | undefined
     if (this.hasMessages) {
       descriptionIds = [descriptionIds, this._messagesId]
