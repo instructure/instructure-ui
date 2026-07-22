@@ -2137,16 +2137,13 @@ class InPlaceDialogExample extends React.Component {
                   content: ({ closeInPlaceDialog }) => (
                     <View as="div" padding="general.spaceSm">
                       <InstUISettingsProvider
-                        theme={(currentTheme) => ({
-                          newTheme: {
-                            sharedTokens: {
-                              focusOutline: {
-                                ...currentTheme?.newTheme?.sharedTokens?.focusOutline,
-                                infoColor: 'white'
-                              }
+                        themeOverride={{
+                          sharedTokens: {
+                            focusOutline: {
+                              infoColor: 'white'
                             }
                           }
-                        })}
+                        }}
                       >
                         <TextInput
                           id="searchInput"
