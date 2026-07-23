@@ -29,6 +29,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { Slider } from '@instructure/ui-color-picker'
+import { Slider } from '@instructure/ui-color-picker/v11_7'
 ```
 

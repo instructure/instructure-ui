@@ -4,6 +4,8 @@
 
 - Instructure UI (InstUI) is a comprehensive React component library.
 
+- All component documentation below always reflects the latest InstUI version noted above (11.7.3). Props, types, and examples describe this version.
+
 ## Documentation
 
 ### User Guides

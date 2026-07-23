@@ -40,7 +40,7 @@ const Example = () => {
           onChange={toggleAlignArrow}
         />
       </FormFieldGroup>
-      <View display="block" margin="small none">
+      <View display="block" margin="general.spaceMd none">
         <RadioInputGroup
           name="color"
           defaultValue="primary"
@@ -53,7 +53,7 @@ const Example = () => {
           <RadioInput label="Primary inverse" value="primary-inverse" />
         </RadioInputGroup>
       </View>
-      <View display="block" as="div" margin="small">
+      <View display="block" as="div" margin="general.spaceMd">
         <Popover
           renderTrigger={
             <Link aria-describedby="tip">Hover or focus me</Link>
@@ -69,7 +69,9 @@ const Example = () => {
           onHideContent={() => console.log('hidden')}
         >
           <View padding="x-small" display="block" as="div" id="tip">
-            Hello World
+            <Text color={color}>
+              Hello World
+            </Text>
           </View>
         </Popover>
       </View>
@@ -206,7 +208,7 @@ const Example = () => {
       style={{ paddingBottom: 50, display: 'flex', justifyContent: 'center' }}
     >
       <Popover
-        renderTrigger={<Button margin="small">Focus Me</Button>}
+        renderTrigger={<Button margin="general.spaceMd">Focus Me</Button>}
         isShowingContent={isShowingContent}
         onShowContent={() => {
           setIsShowingContent(true)
@@ -218,10 +220,10 @@ const Example = () => {
         shouldContainFocus={false}
         shouldFocusContentOnTriggerBlur={false}
       >
-        <Button margin="small">Focus Me When Trigger Blurs</Button>
+        <Button margin="general.spaceMd">Focus Me When Trigger Blurs</Button>
       </Popover>
       <div id="container" />
-      <Button id="next" margin="small">
+      <Button id="next" margin="general.spaceMd">
         Focus Me Next
       </Button>
     </div>
@@ -242,7 +244,9 @@ type: example
 const MyComponent = React.forwardRef((props, ref) => {
   return (
     <div {...props} ref={ref} style={{ width: '10rem' }}>
-      My custom component
+      <Text color="primary">
+        My custom component
+      </Text>
     </div>
   )
 })
@@ -315,7 +319,7 @@ const Example = () => {
 
   return (
     <View as="div" background="primary" padding="small">
-      <Flex margin="small small large" justifyItems="space-around">
+      <Flex margin="general.spaceMd general.spaceMd general.space2xl" justifyItems="space-around">
         <Flex.Item align="start">
           <FormFieldGroup description="Popover Example">
             <Checkbox
@@ -353,7 +357,7 @@ const Example = () => {
               ))}
             </SimpleSelect>
           </View>
-          <View as="div" margin="medium none" maxWidth="15rem">
+          <View as="div" margin="general.spaceXl none" maxWidth="15rem">
             <SimpleSelect
               value={shadow}
               onChange={changeShadow}
@@ -406,7 +410,7 @@ const Example = () => {
           shadow={shadow}
           color={color}
         >
-          <Heading>
+          <Heading color={color}>
             Small
             <br />
             Target
@@ -417,6 +421,37 @@ const Example = () => {
   )
 }
 
+render(<Example />)
+```
+
+#### Scrolling content (`shouldScrollContent`)
+
+When the popover content can grow taller than the available viewport space, set `shouldScrollContent` to wrap the content in a scroll container that fits to the room between the trigger element and the viewport edge. To try the example below, zoom in until the available space becomes small enough that a scrollbar is displayed in the Popover.
+
+```js
+---
+type: example
+---
+const fpo = lorem.paragraphs(8)
+class Example extends React.Component {
+  state = { isOpen: false }
+  render () {
+    return (
+      <Popover
+        on="click"
+        placement="bottom start"
+        isShowingContent={this.state.isOpen}
+        onShowContent={() => this.setState({ isOpen: true })}
+        onHideContent={() => this.setState({ isOpen: false })}
+        shouldScrollContent
+        screenReaderLabel="A long popover"
+        renderTrigger={<Button>Open scrollable popover</Button>}
+      >
+        <View as="div" padding="small" maxWidth="22rem">{fpo}</View>
+      </Popover>
+    )
+  }
+}
 render(<Example />)
 ```
 
@@ -463,7 +498,7 @@ type: embed
 | Popover | on | `('click' \| 'hover' \| 'focus') \| ('click' \| 'hover' \| 'focus')[]` | No | `['hover', 'focus']` | The action that causes the content to display (`click`, `hover`, `focus`) |
 | Popover | withArrow | `boolean` | No | `true` | Whether or not an arrow pointing to the trigger should be rendered |
 | Popover | color | `'primary' \| 'primary-inverse'` | No | `'primary'` | Color variant of the popover content |
-| Popover | shadow | `'resting' \| 'above' \| 'topmost' \| 'none'` | No | `'resting'` | Controls the shadow depth for the `<Popover />` |
+| Popover | shadow | `Shadow` | No | `'above'` | Controls the shadow depth for the `<Popover />` |
 | Popover | stacking | `Stacking` | No | `'topmost'` | Controls the z-index depth for the `<Popover />` content |
 | Popover | contentRef | `(contentElement: Element \| null) => void` | No | - | A function that returns a reference to the content element |
 | Popover | defaultFocusElement | `UIElement` | No | - | An element or a function returning an element to focus by default |
@@ -502,6 +537,7 @@ type: embed
 | Popover | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to the underlying HTML root element |
 | Popover | borderWidth | `BorderWidth` | No | - | Allowed values: 0, 'none', 'small', 'medium', 'large'. Accepts the familiar CSS shorthand to designate border widths corresponding to edges. (e.g. 'none large none large). Only applies to a Popover without an arrow. |
 | Popover | shouldSetAriaExpanded | `boolean` | No | `true` | If true (default), then the aria-expanded prop is added to the trigger. If its supplied via the aria-expanded prop then it takes the given value, otherwise its calculated automatically based on whether the content is shown. |
+| Popover | shouldScrollContent | `boolean` | No | - | When `true`, wraps the popover content in a container that caps its height to the available viewport space and scrolls when content overflows. |
 
 ### Usage
 
@@ -515,6 +551,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { Popover } from '@instructure/ui-popover'
+import { Popover } from '@instructure/ui-popover/v11_7'
 ```
 

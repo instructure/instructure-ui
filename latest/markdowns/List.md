@@ -12,12 +12,12 @@
 type: example
 ---
 <div>
-  <List margin="0 0 medium">
+  <List margin="0 0 general.spaceXl">
     <List.Item>List item 1</List.Item>
     <List.Item>List item 2</List.Item>
     <List.Item>List item 3</List.Item>
   </List>
-  <List as="ol" margin="0 0 medium">
+  <List as="ol" margin="0 0 general.spaceXl">
     <List.Item>List item 1</List.Item>
     <List.Item>List item 2</List.Item>
     <List.Item>List item 3</List.Item>
@@ -39,17 +39,17 @@ The `delimiter` lets you set a separator between items of the list. The predefin
 type: example
 ---
 <div>
-  <List delimiter="none" margin="large 0">
+  <List delimiter="none" margin="general.space2xl 0">
     <List.Item>{lorem.sentence()}</List.Item>
     <List.Item>{lorem.sentence()}</List.Item>
     <List.Item>{lorem.sentence()}</List.Item>
   </List>
-  <List delimiter="solid" isUnstyled margin="large 0">
+  <List delimiter="solid" isUnstyled margin="general.space2xl 0">
     <List.Item>{lorem.sentence()}</List.Item>
     <List.Item>{lorem.sentence()}</List.Item>
     <List.Item>{lorem.sentence()}</List.Item>
   </List>
-  <List delimiter="dashed" as="ol" margin="large 0">
+  <List delimiter="dashed" as="ol" margin="general.space2xl 0">
     <List.Item>{lorem.sentence()}</List.Item>
     <List.Item>{lorem.sentence()}</List.Item>
     <List.Item>{lorem.sentence()}</List.Item>
@@ -66,17 +66,17 @@ The `size` prop lets you adjust the font-size of the List. The predefined values
 type: example
 ---
 <div>
-  <List size="small" margin="large 0">
+  <List size="small" margin="general.space2xl 0">
     <List.Item>{lorem.sentence()}</List.Item>
     <List.Item>Small Size</List.Item>
     <List.Item><b>Due:</b> Oct 1, 2019</List.Item>
   </List>
-  <List margin="large 0">
+  <List margin="general.space2xl 0">
     <List.Item>{lorem.sentence()}</List.Item>
     <List.Item>Medium (default) Size</List.Item>
     <List.Item><b>Due:</b> Oct 1, 2019</List.Item>
   </List>
-  <List size="large" margin="large 0">
+  <List size="large" margin="general.space2xl 0">
     <List.Item>{lorem.sentence()}</List.Item>
     <List.Item>Large Size</List.Item>
     <List.Item><b>Due:</b> Oct 1, 2019</List.Item>
@@ -134,7 +134,7 @@ List.Items also accept the same `margin` prop as List, in the event you need dif
 type: example
 ---
 <List isUnstyled itemSpacing="small">
-  <List.Item margin="x-large 0"><Link href="https://www.canvaslms.com/try-canvas">Canvas by Instructure</Link></List.Item>
+  <List.Item margin="general.space2xl 0"><Link href="https://www.canvaslms.com/try-canvas">Canvas by Instructure</Link></List.Item>
   <List.Item><Link href="https://www.getbridge.com">Bridge by Instructure</Link></List.Item>
   <List.Item><Link href="https://www.arcmedia.com">Arc by Instructure</Link></List.Item>
 </List>
@@ -149,14 +149,14 @@ type: example
 | List | as | `'ul' \| 'ol'` | No | `'ul'` |  |
 | List | delimiter | `'none' \| 'dashed' \| 'solid'` | No | `'none'` | One of: none, dashed, solid |
 | List | isUnstyled | `boolean` | No | `false` | When set, renders the List Items without a list style type. |
-| List | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
+| List | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`. |
 | List | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` |  |
 | List | itemSpacing | `\| 'none' \| 'xxx-small' \| 'xx-small' \| 'x-small' \| 'small' \| 'medium' \| 'large' \| 'x-large' \| 'xx-large'` | No | `'none'` | Sets the margin separating each ListItem. |
 | List | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
 | List.ListItem | delimiter | `'none' \| 'dashed' \| 'solid'` | No | `'none'` | Inherits delimiter from the parent List component. |
 | List.ListItem | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` |  |
-| List.ListItem | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
-| List.ListItem | padding | `Spacing` | No | `'none'` | Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `padding="small x-large large"`. |
+| List.ListItem | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`. |
+| List.ListItem | padding | `Spacing` | No | `'none'` | Valid values are `0`, `none`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `padding="general.spaceMd general.spaceLg"`. |
 | List.ListItem | spacing | `\| 'none' \| 'xxx-small' \| 'xx-small' \| 'x-small' \| 'small' \| 'medium' \| 'large' \| 'x-large' \| 'xx-large'` | No | `'none'` | Inherits itemSpacing from the parent List component |
 | List.ListItem | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
 
@@ -172,6 +172,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { List } from '@instructure/ui-list'
+import { List } from '@instructure/ui-list/v11_7'
 ```
 

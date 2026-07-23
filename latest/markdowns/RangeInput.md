@@ -9,14 +9,9 @@ type: example
 ---
 const Example = () => {
   const [size, setSize] = useState('small')
-  const [thumbVariant, setThumbVariant] = useState('accessible')
 
   const handleSizeChange = (event, value) => {
     setSize(value)
-  }
-
-  const handleThumbVariantChange = (event, value) => {
-    setThumbVariant(value)
   }
 
   return (
@@ -28,11 +23,10 @@ const Example = () => {
           max={100}
           min={0}
           size={size}
-          thumbVariant={thumbVariant}
         />
       </View>
 
-      <View as="div" margin="medium 0 0">
+      <View as="div" margin="general.spaceXl 0 0">
         <FormFieldGroup
           description={
             <ScreenReaderContent>
@@ -51,16 +45,6 @@ const Example = () => {
             <RadioInput label="small" value="small" />
             <RadioInput label="medium" value="medium" />
             <RadioInput label="large" value="large" />
-          </RadioInputGroup>
-
-          <RadioInputGroup
-            onChange={handleThumbVariantChange}
-            name="thumbVariant"
-            value={thumbVariant}
-            description="Thumb variant"
-          >
-            <RadioInput label="accessible" value="accessible" />
-            <RadioInput label="deprecated" value="deprecated" />
           </RadioInputGroup>
         </FormFieldGroup>
       </View>
@@ -92,7 +76,6 @@ render(<Example />)
 | RangeInput | inline | `boolean` | No | `false` |  |
 | RangeInput | disabled | `boolean` | No | `false` |  |
 | RangeInput | readOnly | `boolean` | No | `false` |  |
-| RangeInput | thumbVariant | `\| 'deprecated' // TODO: deprecated, remove in V9. \| 'accessible'` | No | `'deprecated'` | The "deprecated" variant has an outer shadow on focus. The "accessible" variant has better color contrast, border and inset focus ring for better accessibility. |
 | RangeInput | inputRef | `(inputElement: HTMLInputElement \| null) => void` | No | - | A function that provides a reference to the actual underlying input element |
 
 ### Usage
@@ -107,6 +90,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { RangeInput } from '@instructure/ui-range-input'
+import { RangeInput } from '@instructure/ui-range-input/v11_7'
 ```
 

@@ -9,7 +9,7 @@ type: example
 ---
 <View
   padding="large"
-  margin="medium"
+  margin="general.spaceXl"
   textAlign="center"
   as="div"
   style={{ position: 'relative' }}
@@ -77,6 +77,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { Mask } from '@instructure/ui-overlays'
+import { Mask } from '@instructure/ui-overlays/v11_7'
 ```
 

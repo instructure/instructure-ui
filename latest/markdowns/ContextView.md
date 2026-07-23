@@ -16,14 +16,14 @@ type: example
 <div>
   <ContextView
     padding="small"
-    margin="large"
+    margin="general.space2xl"
     placement="end top"
     shadow="resting"
   >
     <Heading level="h3">Hello World</Heading>
   </ContextView>
   <ContextView
-    margin="0 large 0 0"
+    margin="0 general.space2xl 0 0"
     padding="small"
     placement="top"
   >
@@ -31,7 +31,7 @@ type: example
     <Text size="small">Some informational text that is helpful</Text>
   </ContextView>
   <ContextView
-    margin="0 large 0 0"
+    margin="0 general.space2xl 0 0"
     padding="small"
     textAlign="end"
     placement="start"
@@ -44,11 +44,9 @@ type: example
     padding="medium"
     background="inverse"
     width="30rem"
-    margin="x-large 0 0"
+    margin="general.space2xl 0 0"
   >
-    <Text size="small">
       This ContextView uses the inverse background and medium padding. Its width prop is set to `30rem`, which causes long strings like this to wrap. It also has top margin to separate it from the ContextViews above it.
-    </Text>
   </ContextView>
 </div>
 ```
@@ -70,9 +68,9 @@ type: example
 | ContextView | textAlign | `'start' \| 'center' \| 'end'` | No | `'start'` |  |
 | ContextView | background | `'default' \| 'inverse'` | No | `'default'` |  |
 | ContextView | debug | `boolean` | No | `false` |  |
-| ContextView | margin | `Spacing` | No | - |  |
-| ContextView | padding | `Spacing` | No | - |  |
-| ContextView | shadow | `'resting' \| 'above' \| 'topmost' \| 'none'` | No | `'resting'` |  |
+| ContextView | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`. |
+| ContextView | padding | `Spacing` | No | - | Valid values are `0`, `none`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `padding="general.spaceMd general.spaceLg"`. |
+| ContextView | shadow | `Shadow` | No | `'above'` |  |
 | ContextView | stacking | `Stacking` | No | - |  |
 | ContextView | placement | `PlacementPropValues` | No | `'center end'` |  |
 | ContextView | borderColor | `string` | No | - |  |
@@ -89,6 +87,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { ContextView } from '@instructure/ui-view'
+import { ContextView } from '@instructure/ui-view/v11_7'
 ```
 

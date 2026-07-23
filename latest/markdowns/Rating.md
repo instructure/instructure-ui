@@ -29,7 +29,7 @@ type: example
       valueNow={68.45}
       valueMax={100}
     />
-    <div>2/3</div>
+    <Text>2/3</Text>
   </Flex>
   <Flex gap="x-small">
     <Rating
@@ -42,7 +42,7 @@ type: example
       valueNow={68.45}
       valueMax={100}
     />
-    <div>3/5</div>
+    <Text>3/5</Text>
   </Flex>
 </Flex>
 ```
@@ -64,8 +64,8 @@ type: example
       iconCount={5}
       valueNow={3.76}
       valueMax={5}
-      margin="small"/>
-    <div>4/5</div>
+      margin="general.spaceMd"/>
+    <Text>4/5</Text>
   </Flex>
   <Flex>
     <Rating
@@ -73,9 +73,9 @@ type: example
       iconCount={5}
       valueNow={30}
       valueMax={100}
-      margin="small"
+      margin="general.spaceMd"
     />
-    <div>2/5</div>
+    <Text>2/5</Text>
   </Flex>
   <Flex>
     <Rating
@@ -85,8 +85,8 @@ type: example
       iconCount={5}
       valueNow={8}
       valueMax={8}
-      margin="small"/>
-    <div>5/5</div>
+      margin="general.spaceMd"/>
+    <Text>5/5</Text>
   </Flex>
 </Flex>
 ```
@@ -115,7 +115,7 @@ type: embed
 | Rating | valueMax | `number` | No | - | The maximum rating (defaults to iconCount) |
 | Rating | valueNow | `number` | No | `0` | The current rating |
 | Rating | animateFill | `boolean` | No | `false` | Set to make the icons animate when they become filled |
-| Rating | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
+| Rating | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`. |
 | Rating.RatingIcon | animationDelay | `number` | No | `200` |  |
 | Rating.RatingIcon | animateFill | `boolean` | No | `false` |  |
 | Rating.RatingIcon | filled | `boolean` | No | `false` |  |
@@ -133,6 +133,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { Rating } from '@instructure/ui-rating'
+import { Rating } from '@instructure/ui-rating/v11_7'
 ```
 

@@ -283,6 +283,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { Grid } from '@instructure/ui-grid'
+import { Grid } from '@instructure/ui-grid/v11_7'
 ```
 

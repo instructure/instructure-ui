@@ -19,13 +19,25 @@ The `color` prop will change the Button's color scheme.
 type: example
 ---
 <View display="block">
-  <Button color="primary" margin="small">Primary</Button>
-  <Button color="secondary" margin="small">Secondary</Button>
-  <Button color="success" margin="small">Success</Button>
-  <Button color="danger" margin="small">Danger</Button>
-  <Button color="primary-inverse" margin="small">Primary Inverse</Button>
-  <Button color="ai-primary" margin="small">AI Primary</Button>
-  <Button color="ai-secondary" margin="small">AI Secondary</Button>
+  <Button color="primary" margin="general.spaceMd">Primary</Button>
+  <Button color="secondary" margin="general.spaceMd">Secondary</Button>
+  <Button color="success" margin="general.spaceMd">Success</Button>
+  <Button color="danger" margin="general.spaceMd">Danger</Button>
+  <Button color="ai-primary" margin="general.spaceMd">AI Primary</Button>
+  <Button color="ai-secondary" margin="general.spaceMd">AI Secondary</Button>
+</View>
+```
+
+### Primary Inverse
+
+The `primary-inverse` color is designed for use on colored backgrounds. It provides adequate contrast when placed on colored surfaces.
+
+```js
+---
+type: example
+---
+<View display="block" background="info" padding="small">
+  <Button color="primary-inverse" margin="general.spaceMd">Primary Inverse</Button>
 </View>
 ```
 
@@ -38,12 +50,12 @@ There is a specific need for `AI buttons`, which has an icon and gradient colors
 type: example
 ---
 <View display="block">
-  <Button color="ai-primary" renderIcon={IconAiSolid} margin="small">AI Primary</Button>
-  <Button color="ai-secondary" renderIcon={IconAiColoredSolid} margin="small">AI Secondary</Button>
-  <IconButton color="ai-primary" screenReaderLabel="AI button" margin="small"><IconAiSolid/></IconButton>
-  <IconButton  shape='circle' color="ai-secondary" screenReaderLabel="AI button"  margin="small"><IconAiColoredSolid/></IconButton>
-  <IconButton   shape='circle' color="ai-primary" screenReaderLabel="AI button" margin="small"><IconAiSolid/></IconButton>
-  <IconButton color="ai-secondary" screenReaderLabel="AI button"  margin="small"><IconAiColoredSolid/></IconButton>
+  <Button color="ai-primary" renderIcon={IgniteaiLogoInstUIIcon} margin="general.spaceMd">AI Primary</Button>
+  <Button color="ai-secondary" renderIcon={IgniteaiLogoInstUIIcon} margin="general.spaceMd">AI Secondary</Button>
+  <IconButton color="ai-primary" screenReaderLabel="AI button" margin="general.spaceMd"><IgniteaiLogoInstUIIcon/></IconButton>
+  <IconButton  shape='circle' color="ai-secondary" screenReaderLabel="AI button"  margin="general.spaceMd"><IgniteaiLogoInstUIIcon/></IconButton>
+  <IconButton   shape='circle' color="ai-primary" screenReaderLabel="AI button" margin="general.spaceMd"><IgniteaiLogoInstUIIcon/></IconButton>
+  <IconButton color="ai-secondary" screenReaderLabel="AI button"  margin="general.spaceMd"><IgniteaiLogoInstUIIcon/></IconButton>
 </View>
 ```
 
@@ -56,9 +68,21 @@ To specify the Button `size`, set the size prop to `small`, `medium` (default) o
 type: example
 ---
 <View display="block">
-  <Button size="small" margin="small">Small</Button>
-  <Button margin="small">Medium</Button>
-  <Button size="large" margin="small">Large</Button>
+  <Button size="small" margin="general.spaceMd">Small</Button>
+  <Button margin="general.spaceMd">Medium</Button>
+  <Button size="large" margin="general.spaceMd">Large</Button>
+</View>
+```
+
+There are also two condensed size variants for compact layouts: `condensedSmall` and `condensedMedium`.
+
+```js
+---
+type: example
+---
+<View display="block">
+  <Button size="condensedSmall" margin="general.spaceMd">Condensed Small</Button>
+  <Button size="condensedMedium" margin="general.spaceMd">Condensed Medium</Button>
 </View>
 ```
 
@@ -70,7 +94,7 @@ An icon can be rendered alongside the Button content using the `renderIcon` prop
 ---
 type: example
 ---
-<Button renderIcon={IconAddLine}>Add Item</Button>
+<Button renderIcon={SaveInstUIIcon}>Save</Button>
 ```
 
 ### Text wrapping
@@ -84,7 +108,7 @@ type: example
 <View
   display="block"
   width="10rem"
-  margin="small"
+  margin="general.spaceMd"
   padding="small none"
   withVisualDebug
 >
@@ -121,7 +145,7 @@ type: example
       <View
         display="block"
         width="10rem"
-        margin="small"
+        margin="general.spaceMd"
         padding="small none"
         withVisualDebug
       >
@@ -153,12 +177,12 @@ type: example
 <View
   display="block"
   width="30rem"
-  margin="small"
+  margin="general.spaceMd"
   padding="small none"
   withVisualDebug
 >
   <Button
-    renderIcon={IconUserLine}
+    renderIcon={UserInstUIIcon}
     display="block"
     textAlign="center"
     color="success"
@@ -170,19 +194,14 @@ type: example
 
 ### Rendering Buttons without backgrounds
 
-Use backgroundless buttons for interfaces on dark backgrounds or when there is a need to deemphasize the button from another primary action on the page. Be sure to use border/text colors that meet the proper contrast ratios with whatever background they are placed on.
+Use backgroundless buttons when there is a need to deemphasize the button. Be sure to use border/text colors that meet the proper contrast ratios with whatever background they are placed on. Backgroundless buttons are sometimes called `tertiary` variant.
 
 ```js
 ---
 type: example
 ---
 <View display="block">
-  <View display="inline-block" background="primary">
-    <Button renderIcon={IconAddLine} withBackground={false} color="primary" margin="small">Click here</Button>
-  </View>
-  <View display="inline-block" background="primary-inverse">
-    <Button renderIcon={IconAddLine} withBackground={false} color="primary-inverse" margin="small">Click here</Button>
-  </View>
+  <Button renderIcon={PlusInstUIIcon} withBackground={false} color="primary" margin="general.spaceMd">Click here</Button>
 </View>
 ```
 
@@ -241,7 +260,7 @@ type: example
               onChange={this.toggleWithBackground}
             />
           </FormFieldGroup>
-          <View display="block" margin="small none">
+          <View display="block" margin="general.spaceMd none">
             <RadioInputGroup
               name="color"
               defaultValue="secondary"
@@ -253,7 +272,7 @@ type: example
               <RadioInput label="secondary" value="secondary" />
             </RadioInputGroup>
           </View>
-          <Flex margin="none none medium" gap="medium">
+          <Flex margin="none none general.spaceXl" gap="medium">
             <Flex.Item>
               <Button withBackground={this.state.withBackground}
                       color={this.state.color}
@@ -267,7 +286,7 @@ type: example
                           withBackground={this.state.withBackground}
                           color={this.state.color}
                           themeOverride={overrides}>
-                <IconUserLine />
+                <UserInstUIIcon />
               </IconButton>
             </Flex.Item>
           </Flex>
@@ -324,7 +343,7 @@ type: embed
 |-----------|------|------|----------|---------|-------------|
 | Button | children | `React.ReactNode` | No | - | Specifies the `Button` children. |
 | Button | type | `'button' \| 'submit' \| 'reset'` | No | `'button'` | Specifies the type of the `Button`'s underlying html element. |
-| Button | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` | The size of the `Button` |
+| Button | size | `'small' \| 'medium' \| 'large' \| 'condensedSmall' \| 'condensedMedium'` | No | `'medium'` | The size of the `Button` |
 | Button | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to the `Button`'s underlying html element. |
 | Button | as | `AsElementType` | No | `'button'` | The element to render as the component root, `Button` by default. |
 | Button | interaction | `'enabled' \| 'disabled' \| 'readonly'` | No | `undefined` | Specifies if interaction with the `Button` is enabled, disabled, or readonly. |
@@ -333,7 +352,7 @@ type: embed
 | Button | display | `'inline-block' \| 'block'` | No | `'inline-block'` | The `Button` display property. When set to `inline-block`, the `Button` displays inline with other elements. When set to block, the `Button` expands to fill the width of the container. |
 | Button | textAlign | `'start' \| 'center'` | No | `'center'` | Sets the alignment of the `Button` children and/or icon. |
 | Button | withBackground | `boolean` | No | `true` | Specifies if the `Button` should render with a solid background. When false, the background is transparent. |
-| Button | margin | `Spacing` | No | `'0'` | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
+| Button | margin | `Spacing` | No | `'0'` | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`. |
 | Button | cursor | `Cursor` | No | `'pointer'` | Specify a mouse cursor to use when hovering over the button. The `pointer` cursor is used by default. |
 | Button | href | `string` | No | - | Specifies an href attribute for the `Button`'s underlying html element. |
 | Button | renderIcon | `React.ReactNode \| (() => React.ReactNode)` | No | - | An icon, or function that returns an icon. |
@@ -351,6 +370,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { Button } from '@instructure/ui-buttons'
+import { Button } from '@instructure/ui-buttons/v11_7'
 ```
 
