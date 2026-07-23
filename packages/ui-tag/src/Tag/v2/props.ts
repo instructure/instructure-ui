@@ -59,7 +59,6 @@ type TagOwnProps = {
    */
   elementRef?: (element: Element | null) => void
   size?: 'small' | 'medium' | 'large'
-  variant?: 'default' | 'inline'
 }
 
 type PropKeys = keyof TagOwnProps
@@ -80,8 +79,7 @@ const allowedProps: AllowedPropKeys = [
   'margin',
   'onClick',
   'elementRef',
-  'size',
-  'variant'
+  'size'
 ]
 
 export type { TagProps, TagStyle }
