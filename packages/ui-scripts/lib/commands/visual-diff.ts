@@ -128,10 +128,8 @@ function loadPng(path: string): PNG {
   return PNG.sync.read(readFileSync(path))
 }
 
-// Highlight color for changed-region boxes (matches the report's accent).
+// Highlight color for changed pixels in the diff image (matches the report's accent).
 const HIGHLIGHT = { r: 255, g: 0, b: 128 }
-
-type Box = { x: number; y: number; w: number; h: number }
 
 // Compare two images and return a per-pixel changed mask (1 = differs), padding
 // the smaller image so both share the max dimensions.
@@ -171,125 +169,73 @@ function diffMask(baseline: PNG, actual: PNG, threshold: number) {
   }
 }
 
-// Group changed pixels into bounding boxes so the report can outline *where*
-// things changed instead of scattering red specks. Works on a coarse cell grid
-// (adjacent hit cells, 8-connected, become one box), which naturally merges
-// nearby changes and collapses a fully-changed image into a single box.
+// How much unchanged pixels are dimmed in the diff image so the changed pixels
+// stand out. DESAT blends each pixel toward its own grayscale (0 = keep color,
+// 1 = fully gray); DIM then scales brightness (0.5 = half).
+const DESAT = 0.7
+const DIM = 0.5
+
+// Grow a per-pixel changed mask by `radius` cells in every direction. A single
+// changed pixel is nearly invisible once painted, so we dilate the mask before
+// highlighting to give hairline diffs a legible footprint.
 /** @internal — exported only for tests; not part of the package's public API. */
-export function boxesFromMask(
+export function dilateMask(
   changed: ArrayLike<number>,
   width: number,
   height: number,
-  cell = 8,
-  minPixels = 3
-): Box[] {
-  const cols = Math.ceil(width / cell)
-  const rows = Math.ceil(height / cell)
-  const hit = new Uint8Array(cols * rows)
-  const count = new Int32Array(cols * rows)
+  radius = 1
+): Uint8Array {
+  const out = new Uint8Array(width * height)
+  if (radius <= 0) {
+    for (let i = 0; i < width * height; i++) out[i] = changed[i] ? 1 : 0
+    return out
+  }
   for (let y = 0; y < height; y++) {
     for (let x = 0; x < width; x++) {
-      if (changed[y * width + x]) {
-        const ci = Math.floor(y / cell) * cols + Math.floor(x / cell)
-        hit[ci] = 1
-        count[ci]++
+      if (!changed[y * width + x]) continue
+      const y0 = Math.max(0, y - radius)
+      const y1 = Math.min(height - 1, y + radius)
+      const x0 = Math.max(0, x - radius)
+      const x1 = Math.min(width - 1, x + radius)
+      for (let yy = y0; yy <= y1; yy++) {
+        for (let xx = x0; xx <= x1; xx++) out[yy * width + xx] = 1
       }
     }
   }
-
-  const seen = new Uint8Array(cols * rows)
-  const stack: number[] = []
-  const boxes: Box[] = []
-  for (let start = 0; start < cols * rows; start++) {
-    if (!hit[start] || seen[start]) continue
-    stack.length = 0
-    stack.push(start)
-    seen[start] = 1
-    let minC = cols
-    let maxC = 0
-    let minR = rows
-    let maxR = 0
-    let pixels = 0
-    while (stack.length) {
-      const ci = stack.pop() as number
-      const c = ci % cols
-      const r = (ci - c) / cols
-      if (c < minC) minC = c
-      if (c > maxC) maxC = c
-      if (r < minR) minR = r
-      if (r > maxR) maxR = r
-      pixels += count[ci]
-      for (let dr = -1; dr <= 1; dr++) {
-        for (let dc = -1; dc <= 1; dc++) {
-          if (!dr && !dc) continue
-          const nc = c + dc
-          const nr = r + dr
-          if (nc < 0 || nr < 0 || nc >= cols || nr >= rows) continue
-          const ni = nr * cols + nc
-          if (hit[ni] && !seen[ni]) {
-            seen[ni] = 1
-            stack.push(ni)
-          }
-        }
-      }
-    }
-    if (pixels < minPixels) continue
-    const x = minC * cell
-    const y = minR * cell
-    boxes.push({
-      x,
-      y,
-      w: Math.min((maxC + 1) * cell, width) - x,
-      h: Math.min((maxR + 1) * cell, height) - y
-    })
-  }
-  return boxes
+  return out
 }
 
-// Draw the actual screenshot with a bright outline (and faint fill) around each
-// changed region, so a reviewer can see what changed in context.
-function highlightImage(actual: PNG, boxes: Box[]): PNG {
-  const { width, height } = actual
+// Render the diff image Chromatic-style: dim and desaturate the actual
+// screenshot so it reads as a faint backdrop, then paint the exact changed
+// pixels (dilated for visibility) in a bright highlight color. This points the
+// reviewer's eye precisely at what changed instead of a coarse bounding box.
+function highlightImage(
+  actual: PNG,
+  changed: ArrayLike<number>,
+  width: number,
+  height: number
+): PNG {
   const out = new PNG({ width, height })
-  actual.data.copy(out.data)
   const { r: HR, g: HG, b: HB } = HIGHLIGHT
-  const border = 2
-  const fillAlpha = 0.1
+  const hits = dilateMask(changed, width, height)
 
-  const paint = (x: number, y: number) => {
-    if (x < 0 || y < 0 || x >= width || y >= height) return
-    const i = (y * width + x) * 4
-    out.data[i] = HR
-    out.data[i + 1] = HG
-    out.data[i + 2] = HB
-    out.data[i + 3] = 255
-  }
-  const tint = (x: number, y: number) => {
-    if (x < 0 || y < 0 || x >= width || y >= height) return
-    const i = (y * width + x) * 4
-    out.data[i] = Math.round(out.data[i] * (1 - fillAlpha) + HR * fillAlpha)
-    out.data[i + 1] = Math.round(
-      out.data[i + 1] * (1 - fillAlpha) + HG * fillAlpha
-    )
-    out.data[i + 2] = Math.round(
-      out.data[i + 2] * (1 - fillAlpha) + HB * fillAlpha
-    )
-  }
-
-  for (const { x, y, w, h } of boxes) {
-    for (let yy = y; yy < y + h; yy++) {
-      for (let xx = x; xx < x + w; xx++) tint(xx, yy)
+  for (let i = 0; i < width * height; i++) {
+    const o = i * 4
+    if (hits[i]) {
+      out.data[o] = HR
+      out.data[o + 1] = HG
+      out.data[o + 2] = HB
+      out.data[o + 3] = 255
+      continue
     }
-    for (let t = 0; t < border; t++) {
-      for (let xx = x; xx < x + w; xx++) {
-        paint(xx, y + t)
-        paint(xx, y + h - 1 - t)
-      }
-      for (let yy = y; yy < y + h; yy++) {
-        paint(x + t, yy)
-        paint(x + w - 1 - t, yy)
-      }
-    }
+    const r = actual.data[o]
+    const g = actual.data[o + 1]
+    const b = actual.data[o + 2]
+    const gray = 0.299 * r + 0.587 * g + 0.114 * b
+    out.data[o] = Math.round((r * (1 - DESAT) + gray * DESAT) * DIM)
+    out.data[o + 1] = Math.round((g * (1 - DESAT) + gray * DESAT) * DIM)
+    out.data[o + 2] = Math.round((b * (1 - DESAT) + gray * DESAT) * DIM)
+    out.data[o + 3] = 255
   }
   return out
 }
@@ -364,6 +310,16 @@ function renderHtml(
       : prNumber
         ? `<span style="font-weight:600;">PR #${prNumber}</span>`
         : ''
+  // Land on the "Changed" view by default so reviewers see regressions first,
+  // but fall back to "All" when nothing changed (otherwise the list is blank).
+  const defaultFilter = summary.changed > 0 ? 'changed' : 'all'
+  const statusFilters: [string, string][] = [
+    ['all', 'All'],
+    ['changed', 'Changed'],
+    ['added', 'New'],
+    ['removed', 'Removed'],
+    ['unchanged', 'Unchanged']
+  ]
   return `<!doctype html>
 <html><head><meta charset="utf-8"><title>Visual regression report</title>
 <style>
@@ -425,11 +381,14 @@ function renderHtml(
       <span style="color:#9a6700;">Removed: ${summary.removed}</span>
     </div>
     <div class="filter" id="status-filter">
-      <button data-filter="all" class="active">All</button>
-      <button data-filter="changed">Changed</button>
-      <button data-filter="added">New</button>
-      <button data-filter="removed">Removed</button>
-      <button data-filter="unchanged">Unchanged</button>
+      ${statusFilters
+        .map(
+          ([value, label]) =>
+            `<button data-filter="${value}"${
+              value === defaultFilter ? ' class="active"' : ''
+            }>${label}</button>`
+        )
+        .join('')}
       <input id="search" type="search" placeholder="Filter by name…" autocomplete="off" />
     </div>${
       facets.length
@@ -466,7 +425,7 @@ function renderHtml(
 
   <script>
     (function () {
-      const listState = { filter: 'all', query: '', facet: 'all' }
+      const listState = { filter: '${defaultFilter}', query: '', facet: 'all' }
 
       function applyFilters() {
         const q = listState.query.toLowerCase()
@@ -620,21 +579,28 @@ function renderHtml(
       document.querySelectorAll('.thumb').forEach(img => {
         img.addEventListener('click', () => open(img.dataset.name))
       })
+      function step(delta) {
+        if (!state.rows.length) return
+        state.idx = (state.idx + delta + state.rows.length) % state.rows.length
+        render()
+      }
+
       document.getElementById('lb-close').addEventListener('click', close)
-      document.getElementById('lb-prev').addEventListener('click', () => {
-        if (!state.rows.length) return
-        state.idx = (state.idx - 1 + state.rows.length) % state.rows.length
-        render()
-      })
-      document.getElementById('lb-next').addEventListener('click', () => {
-        if (!state.rows.length) return
-        state.idx = (state.idx + 1) % state.rows.length
-        render()
-      })
+      document.getElementById('lb-prev').addEventListener('click', () => step(-1))
+      document.getElementById('lb-next').addEventListener('click', () => step(1))
       document.querySelectorAll('#lb-modes button').forEach(b => {
         b.addEventListener('click', () => { state.mode = b.dataset.mode; render() })
       })
       lbZoomBtn.addEventListener('click', () => { state.zoom = !state.zoom; render() })
+
+      document.addEventListener('keydown', (e) => {
+        if (!lb.classList.contains('open')) return
+        if (e.key === 'Escape') close()
+        else if (e.key === 'ArrowLeft') step(-1)
+        else if (e.key === 'ArrowRight') step(1)
+      })
+
+      applyFilters()
     })()
   </script>
 </body></html>`
@@ -690,8 +656,7 @@ function run(args: Args): number {
       numDiff === 0 && !sizeMismatch ? 'unchanged' : 'changed'
 
     if (status === 'changed') {
-      const boxes = boxesFromMask(changed, width, height)
-      const highlight = highlightImage(padded, boxes)
+      const highlight = highlightImage(padded, changed, width, height)
       mkdirSync(join(outputDir, 'diff'), { recursive: true })
       writeFileSync(join(outputDir, 'diff', name), PNG.sync.write(highlight))
     }

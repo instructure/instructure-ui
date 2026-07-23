@@ -29,7 +29,7 @@ import {
   indexByName,
   sourceLinkFor,
   appUrlFor,
-  boxesFromMask
+  dilateMask
 } from '../commands/visual-diff.ts'
 
 // Build a w*h changed-mask with the given filled rectangles set to 1.
@@ -175,7 +175,10 @@ describe('sourceLinkFor', () => {
 
 describe('appUrlFor', () => {
   const facets = ['canvas', 'light', 'dark']
-  const meta = { 'button-dark': '/button', 'small-components-light': '/small-components' }
+  const meta = {
+    'button-dark': '/button',
+    'small-components-light': '/small-components'
+  }
 
   it('returns an empty string when appPath is not provided', () => {
     expect(appUrlFor('button-dark.png', meta, facets)).toBe('')
@@ -212,54 +215,47 @@ describe('appUrlFor', () => {
   })
 })
 
-describe('boxesFromMask', () => {
-  it('returns no boxes for an unchanged mask', () => {
-    expect(boxesFromMask(mask(32, 32, []), 32, 32)).toEqual([])
+describe('dilateMask', () => {
+  const countSet = (m: ArrayLike<number>) => {
+    let n = 0
+    for (let i = 0; i < m.length; i++) if (m[i]) n++
+    return n
+  }
+
+  it('leaves an empty mask empty', () => {
+    expect(countSet(dilateMask(mask(16, 16, []), 16, 16))).toBe(0)
   })
 
-  it('wraps a single changed cluster in one box that contains it', () => {
-    const boxes = boxesFromMask(
-      mask(32, 32, [{ x: 4, y: 4, w: 10, h: 10 }]),
-      32,
-      32
+  it('grows a single pixel into its 3x3 neighborhood by default', () => {
+    const out = dilateMask(mask(16, 16, [{ x: 8, y: 8, w: 1, h: 1 }]), 16, 16)
+    expect(countSet(out)).toBe(9)
+    // the neighbors around the original pixel are all set
+    for (let dy = -1; dy <= 1; dy++) {
+      for (let dx = -1; dx <= 1; dx++) {
+        expect(out[(8 + dy) * 16 + (8 + dx)]).toBe(1)
+      }
+    }
+  })
+
+  it('clamps the dilation at the image edges', () => {
+    // a corner pixel only has 3 in-bounds neighbors besides itself
+    const out = dilateMask(mask(16, 16, [{ x: 0, y: 0, w: 1, h: 1 }]), 16, 16)
+    expect(countSet(out)).toBe(4)
+  })
+
+  it('honors a custom radius', () => {
+    const out = dilateMask(
+      mask(16, 16, [{ x: 8, y: 8, w: 1, h: 1 }]),
+      16,
+      16,
+      2
     )
-    expect(boxes).toHaveLength(1)
-    const [b] = boxes
-    // the box must fully contain the changed region
-    expect(b.x).toBeLessThanOrEqual(4)
-    expect(b.y).toBeLessThanOrEqual(4)
-    expect(b.x + b.w).toBeGreaterThanOrEqual(14)
-    expect(b.y + b.h).toBeGreaterThanOrEqual(14)
+    expect(countSet(out)).toBe(25)
   })
 
-  it('separates two distant clusters into two boxes', () => {
-    const boxes = boxesFromMask(
-      mask(64, 64, [
-        { x: 0, y: 0, w: 6, h: 6 },
-        { x: 50, y: 50, w: 6, h: 6 }
-      ]),
-      64,
-      64
-    )
-    expect(boxes).toHaveLength(2)
-  })
-
-  it('drops specks smaller than minPixels', () => {
-    // a single changed pixel is below the default minPixels threshold
-    expect(
-      boxesFromMask(mask(32, 32, [{ x: 5, y: 5, w: 1, h: 1 }]), 32, 32)
-    ).toEqual([])
-  })
-
-  it('never lets a box exceed the image bounds', () => {
-    const boxes = boxesFromMask(
-      mask(20, 20, [{ x: 0, y: 0, w: 20, h: 20 }]),
-      20,
-      20
-    )
-    expect(boxes).toHaveLength(1)
-    const [b] = boxes
-    expect(b.x + b.w).toBeLessThanOrEqual(20)
-    expect(b.y + b.h).toBeLessThanOrEqual(20)
+  it('passes the mask through unchanged for radius 0', () => {
+    const src = mask(16, 16, [{ x: 3, y: 3, w: 2, h: 2 }])
+    const out = dilateMask(src, 16, 16, 0)
+    expect(countSet(out)).toBe(countSet(src))
   })
 })
