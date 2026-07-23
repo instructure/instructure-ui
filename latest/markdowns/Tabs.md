@@ -17,7 +17,7 @@ const Example = () => {
   return (
     <Tabs
       margin="general.space2xl auto"
-      padding="medium"
+      padding="general.spaceXl"
       onRequestTabChange={handleTabChange}
     >
       <Tabs.Panel
@@ -25,7 +25,7 @@ const Example = () => {
         tabIndex={-1}
         renderTitle="Tab A"
         textAlign="center"
-        padding="large"
+        padding="general.space2xl"
         isSelected={selectedIndex === 0}
       >
         <Button>Focus Me</Button>
@@ -139,7 +139,7 @@ const Example = () => {
   return (
     <Tabs
       margin="general.space2xl auto"
-      padding="medium"
+      padding="general.spaceXl"
       onRequestTabChange={handleTabChange}
       tabOverflow="scroll"
       maxWidth="20rem"
@@ -271,7 +271,7 @@ const Example = () => {
       <View {...containerProps}>
         <Tabs
           margin="general.space2xl auto"
-          padding="medium"
+          padding="general.spaceXl"
           onRequestTabChange={handleTabChange}
           {...heightOptions[heightOption]}
         >
@@ -280,7 +280,7 @@ const Example = () => {
             tabIndex={-1}
             renderTitle="Tab A"
             textAlign="center"
-            padding="large"
+            padding="general.space2xl"
             isSelected={selectedIndex === 0}
           >
             <Button>Focus Me</Button>
@@ -373,14 +373,14 @@ const Example = () => {
   return (
     <Tabs
       margin="general.space2xl auto"
-      padding="medium"
+      padding="general.spaceXl"
       onRequestTabChange={handleTabChange}
     >
       <Tabs.Panel
         id="tabA"
         renderTitle="Tab A"
         textAlign="center"
-        padding="large"
+        padding="general.space2xl"
         isSelected={selectedIndex === 0}
         active
         tabIndex={0}
@@ -439,7 +439,7 @@ const Example = () => {
   return (
     <Tabs
       margin="general.space2xl auto"
-      padding="medium"
+      padding="general.spaceXl"
       onRequestTabChange={handleTabChange}
     >
       <Tabs.Panel
@@ -447,7 +447,7 @@ const Example = () => {
         tabIndex={-1}
         renderTitle="I will persist"
         textAlign="center"
-        padding="large"
+        padding="general.space2xl"
         isSelected={selectedIndex === 0}
         unmountOnExit={false}
       >
@@ -459,7 +459,7 @@ const Example = () => {
         renderTitle="I will unmount"
         isSelected={selectedIndex === 1}
         textAlign="center"
-        padding="large"
+        padding="general.space2xl"
       >
         <Counter />
       </Tabs.Panel>
@@ -504,14 +504,14 @@ const Example = () => {
   return (
     <Tabs
       margin="general.space2xl auto"
-      padding="medium"
+      padding="general.spaceXl"
       onRequestTabChange={handleTabChange}
     >
       <Tabs.Panel
         id="tabA"
         renderTitle="Panel with button"
         textAlign="center"
-        padding="large"
+        padding="general.space2xl"
         isSelected={selectedIndex === 0}
         tabIndex={-1}
       >

@@ -19,8 +19,8 @@ this feature using the `animateFill` prop.
 ---
 type: example
 ---
-<Flex gap="large">
-  <Flex gap="x-small">
+<Flex gap="general.space2xl">
+  <Flex gap="general.spaceSm">
     <Rating
       formatValueText={function (currentRating, maxRating) {
         return currentRating + ' out of ' + maxRating
@@ -31,7 +31,7 @@ type: example
     />
     <Text>2/3</Text>
   </Flex>
-  <Flex gap="x-small">
+  <Flex gap="general.spaceSm">
     <Rating
       animateFill
       formatValueText={function (currentRating, maxRating) {
@@ -56,7 +56,7 @@ space around the actual rating.
 ---
 type: example
 ---
-<Flex gap="large">
+<Flex gap="general.space2xl">
   <Flex>
     <Rating
       label="Product rating"

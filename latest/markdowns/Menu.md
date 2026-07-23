@@ -35,7 +35,7 @@ const Example = () => {
   }
 
   return (
-    <View padding="medium" textAlign="center">
+    <View padding="general.spaceXl" textAlign="center">
       <Menu
         placement="bottom"
         trigger={<Button>Menu</Button>}

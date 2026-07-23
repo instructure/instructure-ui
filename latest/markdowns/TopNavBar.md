@@ -102,7 +102,7 @@ class PlaygroundExample extends React.Component {
         children: (
           <View
             as="div"
-            padding="medium"
+            padding="general.spaceXl"
             width="25rem"
             role="dialog"
             tabIndex={0}
@@ -235,7 +235,7 @@ class PlaygroundExample extends React.Component {
 
   renderSearch(currentLayout, closeInPlaceDialog) {
     return (
-      <View as="div" padding="x-small">
+      <View as="div" padding="general.spaceSm">
         <TextInput
           id="searchInput"
           width="100%"
@@ -530,13 +530,13 @@ class PlaygroundExample extends React.Component {
                 >
                   <Flex.Item
                     width={props.settingsWidth}
-                    padding="small medium medium"
+                    padding="general.spaceMd general.spaceXl general.spaceXl"
                   >
                     {this.renderExampleSettings()}
                   </Flex.Item>
                   <Flex.Item
                     width={props.textWidth}
-                    padding="small medium medium"
+                    padding="general.spaceMd general.spaceXl general.spaceXl"
                   >
                     {Array.from(Array(5)).map((_i, idx) => (
                       <View as="div" margin="general.spaceXl 0" key={idx}>
@@ -1300,7 +1300,7 @@ type: example
                   ) : undefined}
                   customPopoverConfig={idx === 6 ? {
                     children: (
-                      <View padding="medium" as="div">
+                      <View padding="general.spaceXl" as="div">
                         Example Custom Popover
                       </View>
                     ),
@@ -1367,7 +1367,7 @@ type: example
                 customPopoverConfig={{
                   on: 'click',
                   children: (
-                    <View as="div" padding="x-small">
+                    <View as="div" padding="general.spaceSm">
                       <TextInput
                         id="searchInput"
                         width="100%"
@@ -1620,7 +1620,7 @@ class LayoutExample extends React.Component {
   render() {
     return (
       <View as="div">
-        <View as="div" maxWidth="42rem" padding="small" background="primary">
+        <View as="div" maxWidth="42rem" padding="general.spaceMd" background="primary">
           <FormFieldGroup description="Example settings" layout="columns">
             <Checkbox
               variant="toggle"
@@ -1812,7 +1812,7 @@ class LayoutExample extends React.Component {
               }}
             />
 
-            <View background="primary" as="div" minHeight='10rem' padding="medium">
+            <View background="primary" as="div" minHeight='10rem' padding="general.spaceXl">
               <Heading as="p" level="h2" margin="general.spaceXl 0">
                 Page Content
               </Heading>
@@ -1861,16 +1861,16 @@ In small viewport mode, items in `<TopNavBar.User>` and `<TopNavBar.MenuItems>` 
 type: example
 ---
 
-<View as="div" css={{ background: '#334450' }}padding="medium">
+<View as="div" css={{ background: '#334450' }}padding="general.spaceXl">
   <Flex wrap="wrap">
-    <Flex.Item padding="small">
+    <Flex.Item padding="general.spaceMd">
       <TopNavBar.Item
         id="defaultText"
       >
         Default variant
       </TopNavBar.Item>
     </Flex.Item>
-    <Flex.Item padding="small">
+    <Flex.Item padding="general.spaceMd">
       <TopNavBar.Item
         id="defaultIcon"
         renderIcon={<MessagesSquareInstUIIcon />}
@@ -1878,7 +1878,7 @@ type: example
         Default with icon
       </TopNavBar.Item>
     </Flex.Item>
-    <Flex.Item padding="small">
+    <Flex.Item padding="general.spaceMd">
       <TopNavBar.Item
         id="defaultAvatar"
         renderAvatar={{ avatarName: 'User Name', avatarSrc: avatarSquare }}
@@ -1889,7 +1889,7 @@ type: example
   </Flex>
 
   <Flex wrap="wrap">
-    <Flex.Item padding="small">
+    <Flex.Item padding="general.spaceMd">
       <TopNavBar.Item
         id="buttonText"
         variant="button"
@@ -1897,7 +1897,7 @@ type: example
         Button variant
       </TopNavBar.Item>
     </Flex.Item>
-    <Flex.Item padding="small">
+    <Flex.Item padding="general.spaceMd">
       <TopNavBar.Item
         id="buttonIcon"
         variant="button"
@@ -1906,7 +1906,7 @@ type: example
         Button with icon
       </TopNavBar.Item>
     </Flex.Item>
-    <Flex.Item padding="small">
+    <Flex.Item padding="general.spaceMd">
       <TopNavBar.Item
         id="buttonAvatar"
         variant="button"
@@ -1918,7 +1918,7 @@ type: example
   </Flex>
 
   <Flex wrap="wrap">
-    <Flex.Item padding="small">
+    <Flex.Item padding="general.spaceMd">
       <TopNavBar.Item
         id="iconItem"
         variant="icon"
@@ -1931,7 +1931,7 @@ type: example
   </Flex>
 
   <Flex wrap="wrap">
-    <Flex.Item padding="small">
+    <Flex.Item padding="general.spaceMd">
       <TopNavBar.Item
         id="avatarItem"
         variant="avatar"
@@ -2053,7 +2053,7 @@ type: example
                   children: (
                     <View
                       as="div"
-                      padding="medium"
+                      padding="general.spaceXl"
                       width="25rem"
                       role="dialog"
                       tabIndex={0}
@@ -2134,7 +2134,7 @@ class InPlaceDialogExample extends React.Component {
                   shouldCloseOnDocumentClick: false,
                   shouldContainFocus: false,
                   content: ({ closeInPlaceDialog }) => (
-                    <View as="div" padding="x-small">
+                    <View as="div" padding="general.spaceSm">
                       <InstUISettingsProvider
                         theme={(currentTheme) => ({
                           newTheme: {

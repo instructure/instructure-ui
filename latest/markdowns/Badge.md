@@ -78,7 +78,7 @@ Setting `type="notification"` will render small circles that should not contain 
 type: example
 ---
 <div>
-  <Flex padding='small' display='inline-flex' alignItems="center">
+  <Flex padding='general.spaceMd' display='inline-flex' alignItems="center">
     <Badge standalone count={6} margin='0 general.spaceMd 0 0' />
     <Badge
       type="notification"
@@ -88,7 +88,7 @@ type: example
       }}
     />
   </Flex>
-  <Flex padding='small' display='inline-flex' alignItems="center">
+  <Flex padding='general.spaceMd' display='inline-flex' alignItems="center">
     <Badge standalone variant="success" count={12} margin='0 general.spaceMd 0 0' />
     <Badge
       variant="success"
@@ -99,7 +99,7 @@ type: example
       }}
     />
   </Flex>
-  <Flex padding='small' display='inline-flex' alignItems="center">
+  <Flex padding='general.spaceMd' display='inline-flex' alignItems="center">
     <Badge standalone variant="danger" count={18} countUntil={10} margin='0 general.spaceMd 0 0' />
     <Badge
       variant="danger"
@@ -111,7 +111,7 @@ type: example
     />
   </Flex>
   <View display='inline-flex' background='primary-inverse'>
-    <Flex padding='small' display='inline-flex' alignItems="center" background='primary-inverse'>
+    <Flex padding='general.spaceMd' display='inline-flex' alignItems="center" background='primary-inverse'>
       <Badge standalone variant="inverse" count={8} margin='0 general.spaceMd 0 0' />
       <Badge
         variant="inverse"
