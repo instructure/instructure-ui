@@ -41,7 +41,7 @@ const generateStyle = (
   props: TagProps,
   sharedTokens: SharedTokens
 ): TagStyle => {
-  const { variant, size, dismissible, onClick, disabled } = props
+  const { size, dismissible, onClick, disabled } = props
 
   const isButton = !!onClick
 
@@ -118,66 +118,6 @@ const generateStyle = (
       }
     : {}
 
-  const tagVariantVariants = {
-    default: {
-      tag: {
-        backgroundColor: componentTheme.defaultBackground,
-        border: `${componentTheme.defaultBorderWidth} ${componentTheme.defaultBorderStyle} ${componentTheme.defaultBorderColor}`,
-        borderRadius: componentTheme.defaultBorderRadius,
-        color: componentTheme.defaultColor,
-        ...(isButton && {
-          '&:hover': { backgroundColor: componentTheme.defaultBackgroundHover }
-        })
-      },
-      tagBefore: {
-        ...(isButton && {
-          borderRadius: componentTheme.defaultBorderRadius
-        })
-      }
-    },
-    inline: {
-      tag: {
-        backgroundColor: componentTheme.inlineBackground,
-        border: `${componentTheme.inlineBorderWidth} ${componentTheme.inlineBorderStyle} ${componentTheme.inlineBorderColor}`,
-        borderRadius: componentTheme.inlineBorderRadius,
-        color: componentTheme.inlineColor,
-        cursor: 'text',
-        margin: '0 0.1875rem 0.1875rem',
-        ...(isButton && {
-          '&:hover': { backgroundColor: componentTheme.inlineBackgroundHover }
-        })
-      },
-      tagBefore: {
-        ...(isButton && {
-          borderRadius: `calc(${componentTheme.inlineBorderRadius} * 1.5)`
-        })
-      }
-    }
-  }
-
-  const inlineIconVariant =
-    variant === 'inline' && dismissible
-      ? {
-          backgroundColor: componentTheme.inlineIconColor,
-          borderRadius: '50%',
-          padding: '0.25rem',
-          position: 'absolute',
-          insetInlineEnd: 0,
-          insetInlineStart: 'auto',
-          top: 0,
-          transform: 'translate(40%, -40%)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-
-          '[class$="-tag"]:hover > &': {
-            backgroundColor: componentTheme.inlineIconHoverColor
-          },
-
-          '[dir="rtl"] &': { transform: 'translate(-40%, -40%)' }
-        }
-      : {}
-
   return {
     tag: {
       label: 'tag',
@@ -188,13 +128,21 @@ const generateStyle = (
       textAlign: 'center',
       verticalAlign: 'middle',
       userSelect: 'none',
+      backgroundColor: componentTheme.defaultBackground,
+      border: `${componentTheme.defaultBorderWidth} ${componentTheme.defaultBorderStyle} ${componentTheme.defaultBorderColor}`,
+      borderRadius: componentTheme.defaultBorderRadius,
+      color: componentTheme.defaultColor,
+      ...(isButton && {
+        '&:hover': { backgroundColor: componentTheme.defaultBackgroundHover }
+      }),
       ...sizeVariants[size!].tag,
       ...buttonVariant.tag,
-      ...tagVariantVariants[variant!].tag,
 
       '&::before': {
         ...buttonVariant.tagBefore,
-        ...tagVariantVariants[variant!].tagBefore
+        ...(isButton && {
+          borderRadius: componentTheme.defaultBorderRadius
+        })
       }
     },
     text: {
@@ -210,8 +158,7 @@ const generateStyle = (
       marginInlineStart: componentTheme.iconMargin,
       marginInlineEnd: 0,
       transition: `all ${componentTheme.transitionTiming}`,
-      cursor: 'pointer',
-      ...inlineIconVariant
+      cursor: 'pointer'
     }
   }
 }

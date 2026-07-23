@@ -106,19 +106,6 @@ export default function SmallComponentsPage() {
           onClick={function () {}}
         />
       </div>
-      <p>
-        This is an
-        <Tag
-          dismissible
-          onClick={() => alert('Tag dismissed')}
-          size="large"
-          text={
-            <AccessibleContent alt="Remove 'inline'">inline</AccessibleContent>
-          }
-          variant="inline"
-        />
-        tag.
-      </p>
       <div>TimeSelect:</div>
       <TimeSelect
         renderLabel="Choose a time"

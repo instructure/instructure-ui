@@ -82,29 +82,6 @@ type: example
 />
 ```
 
-### Inline variant
-
-This variant is designed to look similar to the surrounding text.
-
-```js
----
-type: example
----
-<Text as="p">
-  This is an
-  <Tag
-    dismissible
-    onClick={() => alert('Tag dismissed')}
-    size="large"
-    text={<AccessibleContent alt="Remove 'inline'">
-      inline
-    </AccessibleContent>}
-    variant="inline"
-  />
-  tag.
-</Text>
-```
-
 ### Guidelines
 
 ```js

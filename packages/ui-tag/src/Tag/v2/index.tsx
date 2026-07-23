@@ -50,7 +50,6 @@ class Tag extends Component<TagProps> {
   static defaultProps = {
     size: 'medium',
     dismissible: false,
-    variant: 'default',
     disabled: false,
     readOnly: false
   }
@@ -105,11 +104,7 @@ class Tag extends Component<TagProps> {
   }
 
   getIconSize = () => {
-    const { size, variant } = this.props
-
-    if (variant === 'inline') {
-      return 'xs'
-    }
+    const { size } = this.props
 
     const sizeMap = {
       small: 'xs',
@@ -129,8 +124,7 @@ class Tag extends Component<TagProps> {
       text,
       onClick,
       margin,
-      styles,
-      variant
+      styles
     } = this.props
 
     const passthroughProps = View.omitViewProps(
@@ -141,9 +135,6 @@ class Tag extends Component<TagProps> {
     const getIconColor = () => {
       if (disabled) {
         return 'mutedColor'
-      }
-      if (variant === 'inline') {
-        return 'inverseColor'
       }
       return this.state.iconHovered ? 'actionSecondaryHoverColor' : 'baseColor'
     }

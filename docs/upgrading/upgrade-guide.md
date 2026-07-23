@@ -1583,6 +1583,7 @@ type: embed
 ### Tag
 
 - Previously deprecated `title` prop has been removed.
+- The `inline` variant has been removed along with the `variant` prop.
 
 ```js
 ---
