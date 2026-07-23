@@ -20,9 +20,9 @@ the image a block-level element.
 type: example
 ---
 <View textAlign="center" as="div">
-  <Img margin="small" alt="A placeholder image" src={placeholderImage(300, 200)} />
-  <Img margin="small" src={placeholderImage(200, 200)} />
-  <Img display="block" margin="small auto" src={placeholderImage(400, 200)} />
+  <Img margin="general.spaceMd" alt="A placeholder image" src={placeholderImage(300, 200)} />
+  <Img margin="general.spaceMd" src={placeholderImage(200, 200)} />
+  <Img display="block" margin="general.spaceMd auto" src={placeholderImage(400, 200)} />
 </View>
 ```
 
@@ -39,19 +39,19 @@ type: example
       src={placeholderImage(200, 200)}
       overlay={{color: '#0374B5', opacity: 9, blend: 'overlay'}}
       alt="A placeholder image"
-      margin="x-small"
+      margin="general.spaceSm"
     />
     <Img
       src={placeholderImage(200, 200)}
       overlay={{color: '#0374B5', opacity: 6, blend: 'multiply'}}
       alt="A placeholder image"
-      margin="x-small"
+      margin="general.spaceSm"
     />
     <Img
       src={placeholderImage(200, 200)}
       overlay={{color: '#0374B5', opacity: 3}}
       alt="A placeholder image"
-      margin="x-small"
+      margin="general.spaceSm"
     />
   </View>
 ```
@@ -97,13 +97,13 @@ type: example
       withGrayscale
       src={avatarSquare}
       alt="A placeholder image"
-      margin="x-small"
+      margin="general.spaceSm"
     />
     <Img
       withBlur
       src={avatarSquare}
       alt="A placeholder image"
-      margin="x-small"
+      margin="general.spaceSm"
     />
   </View>
 ```
@@ -131,7 +131,7 @@ type: embed
 | Img | alt | `string` | No | `''` |  |
 | Img | display | `'inline-block' \| 'block'` | No | `'inline-block'` |  |
 | Img | loading | `'eager' \| 'lazy'` | No | - | Gets passed down to the img component. Same as the native HTML img's loading attribute |
-| Img | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
+| Img | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`. |
 | Img | overlay | `{ color: string opacity: 0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6 \| 7 \| 8 \| 9 \| 10 blend?: 'normal' \| 'multiply' \| 'screen' \| 'overlay' \| 'color-burn' }` | No | - | Valid values for `opacity` are `0` - `10`. Valid values for `blend` are `normal` (default), `multiply`, `screen`, `overlay`, and `color-burn`. |
 | Img | withGrayscale | `boolean` | No | `false` |  |
 | Img | withBlur | `boolean` | No | `false` |  |
@@ -152,6 +152,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { Img } from '@instructure/ui-img'
+import { Img } from '@instructure/ui-img/v11_7'
 ```
 

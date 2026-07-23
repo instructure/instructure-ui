@@ -71,7 +71,7 @@ type: example
     }
     display="inline-block"
     width="24rem"
-    margin="x-small"
+    margin="general.spaceSm"
   />
   <FileDrop
     accept="video/*"
@@ -86,7 +86,7 @@ type: example
     }
     display="inline-block"
     width="12rem"
-    margin="x-small"
+    margin="general.spaceSm"
   />
 </div>
 ```
@@ -103,7 +103,7 @@ type: example
   accept=".jpg"
   onDropAccepted={([file]) => { console.log(`File accepted ${file.name}`) }}
   onDropRejected={([file]) => { console.log(`File rejected ${file.name}`) }}
-  messages={[{ text: 'Invalid file type', type: 'newError' }]}
+  messages={[{ text: 'Invalid file type', type: 'error' }]}
   renderLabel={
     <Billboard
       size="small"
@@ -130,7 +130,7 @@ type: example
     console.log(`Files accepted ${files.map((f) => f.name).join(',')}`)
   }}
   renderLabel={
-    <View as="div" textAlign="center" padding="large" margin="large 0 0 0">
+    <View as="div" textAlign="center" padding="large" margin="general.space2xl 0 0 0">
       <IconAnnotateLine color="brand" size="large" />
       <Text as="div" color="brand">
         Drag and Drop or Click to Browser your Computer
@@ -139,7 +139,7 @@ type: example
   }
   width="18rem"
   height="16rem"
-  margin="x-small"
+  margin="general.spaceSm"
 />
 ```
 
@@ -202,7 +202,7 @@ type: example
 | FileDrop | width | `string \| number` | No | - | Set the CSS `width` property on FileInput's outermost element |
 | FileDrop | maxWidth | `string \| number` | No | - | Set the CSS `maxWidth` property on FileInput's outermost element |
 | FileDrop | minWidth | `string \| number` | No | - | Set the CSS `minWidth` property on FileInput's outermost element |
-| FileDrop | margin | `Spacing` | No | - | Valid values are 0, none, auto, xxx-small, xx-small, x-small, small, medium, large, x-large, xx-large. Apply these values via familiar CSS-like shorthand. For example: margin="small auto large". |
+| FileDrop | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`. |
 | FileDrop | inputRef | `(inputElement: HTMLInputElement \| null) => void` | No | - | A function that provides a reference to the actual input element |
 
 ### Usage
@@ -217,6 +217,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { FileDrop } from '@instructure/ui-file-drop'
+import { FileDrop } from '@instructure/ui-file-drop/v11_7'
 ```
 

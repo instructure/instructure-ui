@@ -176,6 +176,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { Menu } from '@instructure/ui-menu'
+import { Menu } from '@instructure/ui-menu/v11_7'
 ```
 

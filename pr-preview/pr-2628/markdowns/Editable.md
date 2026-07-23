@@ -149,6 +149,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { Editable } from '@instructure/ui-editable'
+import { Editable } from '@instructure/ui-editable/v11_7'
 ```
 

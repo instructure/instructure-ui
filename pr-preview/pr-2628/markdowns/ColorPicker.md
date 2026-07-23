@@ -131,22 +131,22 @@ type: example
             secondColorLabel="Foreground"
           />
         </div>
-        <div
-          style={{
-            backgroundColor: '#F5F5F5',
-            display: 'flex',
-            flexDirection: 'row-reverse',
-            padding: '7px',
-            borderTop: 'solid 1px #C7CDD1'
-          }}
+        <View
+          as="div"
+          background="secondary"
+          borderColor="primary"
+          borderWidth="small 0 0 0"
+          display="flex"
+          padding="x-small"
+          style={{ flexDirection: 'row-reverse' }}
         >
-          <Button onClick={handleAdd} color="primary" margin="xx-small">
+          <Button onClick={handleAdd} color="primary" margin="general.spaceXs">
             Add
           </Button>
-          <Button onClick={handleClose} color="secondary" margin="xx-small">
+          <Button onClick={handleClose} color="secondary" margin="general.spaceXs">
             Close
           </Button>
-        </div>
+        </View>
       </div>
     )
 
@@ -434,7 +434,7 @@ type: example
 | ColorPicker | value | `string` | No | - | If set, the component will behave as controlled |
 | ColorPicker | width | `string` | No | `'22.5rem'` | The width of the input. |
 | ColorPicker | withAlpha | `boolean` | No | `false` | If true, alpha slider will be rendered. Defaults to false |
-| ColorPicker | margin | `Spacing` | No | - | Margin around the component. Accepts a `Spacing` token. See token values and example usage in [this guide](https://instructure.design/#layout-spacing). |
+| ColorPicker | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`. |
 | ColorPicker | inputRef | `(inputElement: HTMLInputElement \| null) => void` | No | - | A function that provides a reference to the input element |
 
 ### Usage
@@ -449,6 +449,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { ColorPicker } from '@instructure/ui-color-picker'
+import { ColorPicker } from '@instructure/ui-color-picker/v11_7'
 ```
 

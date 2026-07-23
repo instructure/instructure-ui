@@ -334,6 +334,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { DateInput2 } from '@instructure/ui-date-input'
+import { DateInput2 } from '@instructure/ui-date-input/v11_7'
 ```
 

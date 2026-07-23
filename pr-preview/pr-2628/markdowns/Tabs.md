@@ -16,7 +16,7 @@ const Example = () => {
 
   return (
     <Tabs
-      margin="large auto"
+      margin="general.space2xl auto"
       padding="medium"
       onRequestTabChange={handleTabChange}
     >
@@ -138,7 +138,7 @@ const Example = () => {
 
   return (
     <Tabs
-      margin="large auto"
+      margin="general.space2xl auto"
       padding="medium"
       onRequestTabChange={handleTabChange}
       tabOverflow="scroll"
@@ -248,7 +248,7 @@ const Example = () => {
 
   return (
     <>
-      <View display="block" margin="none none medium">
+      <View display="block" margin="none none general.spaceXl">
         <RadioInputGroup
           name="tabsHeightOptions"
           defaultValue="fixHeight: 100%"
@@ -270,7 +270,7 @@ const Example = () => {
 
       <View {...containerProps}>
         <Tabs
-          margin="large auto"
+          margin="general.space2xl auto"
           padding="medium"
           onRequestTabChange={handleTabChange}
           {...heightOptions[heightOption]}
@@ -344,7 +344,7 @@ const Outlet = () => {
 
   return (
     <div>
-      <Heading level="h1" as="h1" margin="0 0 x-small">
+      <Heading level="h1" as="h1" margin="0 0 general.spaceSm">
         {show ? 'Hello Developer' : 'Simulating network call...'}
       </Heading>
       {show ? (
@@ -372,7 +372,7 @@ const Example = () => {
 
   return (
     <Tabs
-      margin="large auto"
+      margin="general.space2xl auto"
       padding="medium"
       onRequestTabChange={handleTabChange}
     >
@@ -438,7 +438,7 @@ const Example = () => {
 
   return (
     <Tabs
-      margin="large auto"
+      margin="general.space2xl auto"
       padding="medium"
       onRequestTabChange={handleTabChange}
     >
@@ -503,7 +503,7 @@ const Example = () => {
 
   return (
     <Tabs
-      margin="large auto"
+      margin="general.space2xl auto"
       padding="medium"
       onRequestTabChange={handleTabChange}
     >
@@ -570,8 +570,8 @@ type: embed
 | Tabs | maxHeight | `string \| number` | No | - |  |
 | Tabs | minHeight | `string \| number` | No | - |  |
 | Tabs | fixHeight | `string \| number` | No | - |  |
-| Tabs | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
-| Tabs | padding | `Spacing` | No | - | Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `padding="small x-large large"`. |
+| Tabs | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`. |
+| Tabs | padding | `Spacing` | No | - | Valid values are `0`, `none`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `padding="general.spaceMd general.spaceLg"`. |
 | Tabs | textAlign | `'start' \| 'center' \| 'end'` | No | - |  |
 | Tabs | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
 | Tabs | tabOverflow | `'stack' \| 'scroll'` | No | `'stack'` | Choose whether Tabs should stack or scroll when they exceed the width of their container. |
@@ -585,7 +585,7 @@ type: embed
 | Tabs.Panel | minHeight | `string \| number` | No | - |  |
 | Tabs.Panel | id | `string` | No | - |  |
 | Tabs.Panel | labelledBy | `string` | No | - |  |
-| Tabs.Panel | padding | `Spacing` | No | `'small'` |  |
+| Tabs.Panel | padding | `Spacing` | No | `'small'` | Valid values are `0`, `none`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `padding="general.spaceMd general.spaceLg"`. |
 | Tabs.Panel | textAlign | `'start' \| 'center' \| 'end'` | No | `'start'` |  |
 | Tabs.Panel | elementRef | `(element: HTMLDivElement \| null) => void` | No | - | provides a reference to the underlying html root element |
 | Tabs.Panel | active | `boolean` | No | `false` | Only one `<Tabs.Panel />` can be marked as active. The marked panel's content is rendered for all the `<Tabs.Panel />`s. |
@@ -614,6 +614,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { Tabs } from '@instructure/ui-tabs'
+import { Tabs } from '@instructure/ui-tabs/v11_7'
 ```
 

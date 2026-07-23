@@ -47,9 +47,9 @@ type: example
           console.log(truncated, text)
         }}
       >
-        <span>
+        <Text>
           Regular sized text with <Link href="#">A Text Link </Link>and <Text weight="bold">some bold text.</Text>
-        </span>
+        </Text>
       </TruncateText>
     </div>
 
@@ -140,9 +140,11 @@ type: example
     maxWidth="480px"
     withVisualDebug
   >
-    <TruncateText position="middle">
-      <span>This line of text should be truncated from the middle of the string <strong>instead of the end.</strong></span>
-    </TruncateText>
+    <Text as="p">
+      <TruncateText position="middle">
+        <span>This line of text should be truncated from the middle of the string <strong>instead of the end.</strong></span>
+      </TruncateText>
+    </Text>
   </View>
   <br />
   <View
@@ -253,6 +255,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { TruncateText } from '@instructure/ui-truncate-text'
+import { TruncateText } from '@instructure/ui-truncate-text/v11_7'
 ```
 

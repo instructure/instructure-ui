@@ -445,6 +445,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { Options } from '@instructure/ui-options'
+import { Options } from '@instructure/ui-options/v11_7'
 ```
 

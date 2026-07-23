@@ -161,7 +161,7 @@ const Example = () => {
     return (
       <Flex alignItems="start">
         {options.map(({ name, values }) => (
-          <Flex.Item margin="small" key={name}>
+          <Flex.Item margin="general.spaceMd" key={name}>
             <RadioInputGroup
               name={name}
               description={name}
@@ -174,7 +174,7 @@ const Example = () => {
             </RadioInputGroup>
           </Flex.Item>
         ))}
-        <Flex.Item margin="small">
+        <Flex.Item margin="general.spaceMd">
           <Checkbox
             label="fluidWidth"
             checked={fluidWidth}
@@ -204,9 +204,9 @@ const Example = () => {
         size={size}
         variant={variant}
       >
-        <Text weight="bold">
+        <span>
           I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!
-        </Text>
+        </span>
       </ToggleDetails>
     </div>
   );
@@ -241,8 +241,8 @@ type: embed
 | ToggleDetails | expanded | `boolean` | No | - | Whether the content is expanded or hidden |
 | ToggleDetails | defaultExpanded | `boolean` | No | `false` | Whether the content is initially expanded or hidden (uncontrolled) |
 | ToggleDetails | onToggle | `( event: React.KeyboardEvent<ViewProps> \| React.MouseEvent<ViewProps>, expanded: boolean ) => void` | No | - |  |
-| ToggleDetails | icon | `(...args: any[]) => React.ReactElement` | No | `IconArrowOpenEndSolid` | The icon to display next to the summary text when content is hidden |
-| ToggleDetails | iconExpanded | `(...args: any[]) => React.ReactElement` | No | `IconArrowOpenDownSolid` | The icon to display when content is expanded |
+| ToggleDetails | icon | `(...args: any[]) => React.ReactElement` | No | `ChevronRightInstUIIcon` | The icon to display next to the summary text when content is hidden |
+| ToggleDetails | iconExpanded | `(...args: any[]) => React.ReactElement` | No | `ChevronDownInstUIIcon` | The icon to display when content is expanded |
 | ToggleDetails | iconPosition | `'start' \| 'end'` | No | `'start'` | Icon position at the start or end of the summary text |
 | ToggleDetails | fluidWidth | `boolean` | No | `false` | should the summary fill the width of its container |
 | ToggleDetails | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` | Choose a size for the expand/collapse icon |
@@ -260,6 +260,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { ToggleDetails } from '@instructure/ui-toggle-details'
+import { ToggleDetails } from '@instructure/ui-toggle-details/v11_7'
 ```
 

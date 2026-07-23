@@ -24,7 +24,7 @@ setting the `alignContent` prop.
 type: example
 ---
 <Byline
-  margin="x-large auto"
+  margin="general.space2xl auto"
   size="small"
   alignContent="top"
   title="Graham Taylor"
@@ -40,7 +40,7 @@ type: example
 ---
 <Byline
   description={
-    <View display="block" margin="0 0 0 x-small">
+    <View display="block" margin="0 0 0 general.spaceSm">
       <Heading level="h2">
         <Link href="#">Clickable Heading</Link>
       </Heading>
@@ -53,7 +53,7 @@ type: example
       </Text>
     </View>
   }>
-  <SVGIcon src={iconExample} title="love" size="small" color="success" />
+  <HeartInstUIIcon size="medium" color="successColor" />
 </Byline>
 ```
 
@@ -66,7 +66,7 @@ type: example
 | Byline | title | `React.ReactNode` | No | - | the Byline title |
 | Byline | description | `string \| React.ReactNode` | No | - | the Byline description |
 | Byline | alignContent | `'top' \| 'center'` | No | `'center'` | how should the title and description align |
-| Byline | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
+| Byline | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`. |
 | Byline | size | `'small' \| 'medium' \| 'large'` | No | - |  |
 | Byline | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to the underlying html root element |
 
@@ -82,6 +82,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { Byline } from '@instructure/ui-byline'
+import { Byline } from '@instructure/ui-byline/v11_7'
 ```
 

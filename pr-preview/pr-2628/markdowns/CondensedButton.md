@@ -80,12 +80,12 @@ type: example
 |-----------|------|------|----------|---------|-------------|
 | CondensedButton | children | `React.ReactNode` | No | - | Specifies the `CondensedButton` children. |
 | CondensedButton | type | `'button' \| 'submit' \| 'reset'` | No | `'button'` | Specifies the type of the `CondensedButton`'s underlying html element. |
-| CondensedButton | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` | The size of the `CondensedButton` |
+| CondensedButton | size | `'small' \| 'medium' \| 'large' \| 'condensedSmall' \| 'condensedMedium'` | No | `'medium'` | The size of the `CondensedButton` |
 | CondensedButton | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to the `CondensedButton`'s underlying html element. |
 | CondensedButton | as | `AsElementType` | No | `'button'` | The element to render as the component root, `button` by default. |
 | CondensedButton | interaction | `'enabled' \| 'disabled' \| 'readonly'` | No | `undefined` | Specifies if interaction with the `CondensedButton` is enabled, disabled, or readonly. |
 | CondensedButton | color | `'primary' \| 'primary-inverse' \| 'secondary'` | No | `'primary'` | Specifies the color for the `CondensedButton`. |
-| CondensedButton | margin | `Spacing` | No | `'0'` | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
+| CondensedButton | margin | `Spacing` | No | `'0'` | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`. |
 | CondensedButton | cursor | `Cursor` | No | `'pointer'` | Specify a mouse cursor to use when hovering over the button. The `pointer` cursor is used by default. |
 | CondensedButton | href | `string` | No | - | Specifies an href attribute for the `CondensedButton`'s underlying html element. |
 | CondensedButton | renderIcon | `React.ReactNode \| (() => React.ReactNode)` | No | - | An icon, or function that returns an icon. |
@@ -104,6 +104,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { CondensedButton } from '@instructure/ui-buttons'
+import { CondensedButton } from '@instructure/ui-buttons/v11_7'
 ```
 

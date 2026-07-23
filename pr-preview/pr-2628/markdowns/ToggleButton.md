@@ -20,7 +20,7 @@ type: example
         <ToggleButton
           status={locked ? 'pressed' : 'unpressed'}
           color={locked ? 'danger' : 'secondary'}
-          renderIcon={locked ? IconLockSolid : IconUnlockLine}
+          renderIcon={locked ? LockInstUIIcon : UnlockInstUIIcon}
           screenReaderLabel={locked ? 'Unlock assignment' : 'Lock assignment'}
           renderTooltipContent={locked ? 'Unlock' : 'Lock'}
           onClick={handleLocked}
@@ -49,13 +49,13 @@ type: example
       <View
         as="div"
         padding="xx-large"
-        background="primary-inverse"
+        background="info"
         id="inverseToggleContainer"
       >
         <ToggleButton
           status={locked ? 'pressed' : 'unpressed'}
           color="primary-inverse"
-          renderIcon={locked ? IconLockSolid : IconUnlockLine}
+          renderIcon={locked ? LockInstUIIcon : UnlockInstUIIcon}
           screenReaderLabel={locked ? 'Unlock assignment' : 'Lock assignment'}
           renderTooltipContent={locked ? 'Unlock' : 'Lock'}
           onClick={handleLocked}
@@ -115,6 +115,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { ToggleButton } from '@instructure/ui-buttons'
+import { ToggleButton } from '@instructure/ui-buttons/v11_7'
 ```
 

@@ -18,29 +18,29 @@ Flex defaults to a `direction` of `row`, creating a horizontal layout. Change `d
 type: example
 ---
 <div>
-  <Flex withVisualDebug margin="none none large">
-    <Flex.Item>One</Flex.Item>
-    <Flex.Item>Two</Flex.Item>
-    <Flex.Item>Three</Flex.Item>
-    <Flex.Item>Four</Flex.Item>
+  <Flex withVisualDebug margin="none none general.space2xl">
+    <Flex.Item><Text>One</Text></Flex.Item>
+    <Flex.Item><Text>Two</Text></Flex.Item>
+    <Flex.Item><Text>Three</Text></Flex.Item>
+    <Flex.Item><Text>Four</Text></Flex.Item>
   </Flex>
-  <Flex withVisualDebug direction="column" margin="none none large">
-    <Flex.Item>One</Flex.Item>
-    <Flex.Item>Two</Flex.Item>
-    <Flex.Item>Three</Flex.Item>
-    <Flex.Item>Four</Flex.Item>
+  <Flex withVisualDebug direction="column" margin="none none general.space2xl">
+    <Flex.Item><Text>One</Text></Flex.Item>
+    <Flex.Item><Text>Two</Text></Flex.Item>
+    <Flex.Item><Text>Three</Text></Flex.Item>
+    <Flex.Item><Text>Four</Text></Flex.Item>
   </Flex>
-  <Flex withVisualDebug direction="row-reverse" margin="none none large">
-    <Flex.Item>One</Flex.Item>
-    <Flex.Item>Two</Flex.Item>
-    <Flex.Item>Three</Flex.Item>
-    <Flex.Item>Four</Flex.Item>
+  <Flex withVisualDebug direction="row-reverse" margin="none none general.space2xl">
+    <Flex.Item><Text>One</Text></Flex.Item>
+    <Flex.Item><Text>Two</Text></Flex.Item>
+    <Flex.Item><Text>Three</Text></Flex.Item>
+    <Flex.Item><Text>Four</Text></Flex.Item>
   </Flex>
   <Flex withVisualDebug direction="column-reverse">
-    <Flex.Item>One</Flex.Item>
-    <Flex.Item>Two</Flex.Item>
-    <Flex.Item>Three</Flex.Item>
-    <Flex.Item>Four</Flex.Item>
+    <Flex.Item><Text>One</Text></Flex.Item>
+    <Flex.Item><Text>Two</Text></Flex.Item>
+    <Flex.Item><Text>Three</Text></Flex.Item>
+    <Flex.Item><Text>Four</Text></Flex.Item>
   </Flex>
 </div>
 ```
@@ -54,29 +54,29 @@ Flex items will have no gap by default. You can set the gap between Flex.Items b
 type: example
 ---
 <div>
-  <Flex withVisualDebug margin="none none large" gap="small">
-    <Flex.Item>One</Flex.Item>
-    <Flex.Item>Two</Flex.Item>
-    <Flex.Item>Three</Flex.Item>
-    <Flex.Item>Four</Flex.Item>
+  <Flex withVisualDebug margin="none none general.space2xl" gap="small">
+    <Flex.Item><Text>One</Text></Flex.Item>
+    <Flex.Item><Text>Two</Text></Flex.Item>
+    <Flex.Item><Text>Three</Text></Flex.Item>
+    <Flex.Item><Text>Four</Text></Flex.Item>
   </Flex>
-  <Flex withVisualDebug direction="column" margin="none none large" gap="medium">
-    <Flex.Item>One</Flex.Item>
-    <Flex.Item>Two</Flex.Item>
-    <Flex.Item>Three</Flex.Item>
-    <Flex.Item>Four</Flex.Item>
+  <Flex withVisualDebug direction="column" margin="none none general.space2xl" gap="medium">
+    <Flex.Item><Text>One</Text></Flex.Item>
+    <Flex.Item><Text>Two</Text></Flex.Item>
+    <Flex.Item><Text>Three</Text></Flex.Item>
+    <Flex.Item><Text>Four</Text></Flex.Item>
   </Flex>
-  <Flex withVisualDebug direction="row-reverse" margin="none none large" gap="medium">
-    <Flex.Item>One</Flex.Item>
-    <Flex.Item>Two</Flex.Item>
-    <Flex.Item>Three</Flex.Item>
-    <Flex.Item>Four</Flex.Item>
+  <Flex withVisualDebug direction="row-reverse" margin="none none general.space2xl" gap="medium">
+    <Flex.Item><Text>One</Text></Flex.Item>
+    <Flex.Item><Text>Two</Text></Flex.Item>
+    <Flex.Item><Text>Three</Text></Flex.Item>
+    <Flex.Item><Text>Four</Text></Flex.Item>
   </Flex>
   <Flex withVisualDebug direction="column-reverse" gap="small">
-    <Flex.Item>One</Flex.Item>
-    <Flex.Item>Two</Flex.Item>
-    <Flex.Item>Three</Flex.Item>
-    <Flex.Item>Four</Flex.Item>
+    <Flex.Item><Text>One</Text></Flex.Item>
+    <Flex.Item><Text>Two</Text></Flex.Item>
+    <Flex.Item><Text>Three</Text></Flex.Item>
+    <Flex.Item><Text>Four</Text></Flex.Item>
   </Flex>
 </div>
 ```
@@ -88,29 +88,29 @@ You can also set the gap between rows and columns by using the `gap` property. M
 type: example
 ---
 <div>
-  <Flex withVisualDebug margin="none none large" gap="small" wrap="wrap">
-    <Flex.Item size='25rem'>One</Flex.Item>
-    <Flex.Item size='25rem'>Two</Flex.Item>
-    <Flex.Item size='25rem'>Three</Flex.Item>
-    <Flex.Item size='25rem'>Four</Flex.Item>
+  <Flex withVisualDebug margin="none none general.space2xl" gap="small" wrap="wrap">
+    <Flex.Item size='25rem'><Text>One</Text></Flex.Item>
+    <Flex.Item size='25rem'><Text>Two</Text></Flex.Item>
+    <Flex.Item size='25rem'><Text>Three</Text></Flex.Item>
+    <Flex.Item size='25rem'><Text>Four</Text></Flex.Item>
   </Flex>
-  <Flex withVisualDebug margin="none none large" gap="small large" wrap="wrap">
-    <Flex.Item size='25rem'>One</Flex.Item>
-    <Flex.Item size='25rem'>Two</Flex.Item>
-    <Flex.Item size='25rem'>Three</Flex.Item>
-    <Flex.Item size='25rem'>Four</Flex.Item>
+  <Flex withVisualDebug margin="none none general.space2xl" gap="small large" wrap="wrap">
+    <Flex.Item size='25rem'><Text>One</Text></Flex.Item>
+    <Flex.Item size='25rem'><Text>Two</Text></Flex.Item>
+    <Flex.Item size='25rem'><Text>Three</Text></Flex.Item>
+    <Flex.Item size='25rem'><Text>Four</Text></Flex.Item>
   </Flex>
-  <Flex withVisualDebug margin="none none large" gap="small" wrap="wrap-reverse">
-    <Flex.Item size='25rem'>One</Flex.Item>
-    <Flex.Item size='25rem'>Two</Flex.Item>
-    <Flex.Item size='25rem'>Three</Flex.Item>
-    <Flex.Item size='25rem'>Four</Flex.Item>
+  <Flex withVisualDebug margin="none none general.space2xl" gap="small" wrap="wrap-reverse">
+    <Flex.Item size='25rem'><Text>One</Text></Flex.Item>
+    <Flex.Item size='25rem'><Text>Two</Text></Flex.Item>
+    <Flex.Item size='25rem'><Text>Three</Text></Flex.Item>
+    <Flex.Item size='25rem'><Text>Four</Text></Flex.Item>
   </Flex>
-  <Flex withVisualDebug margin="none none large" gap="small large" wrap="wrap-reverse">
-    <Flex.Item size='25rem'>One</Flex.Item>
-    <Flex.Item size='25rem'>Two</Flex.Item>
-    <Flex.Item size='25rem'>Three</Flex.Item>
-    <Flex.Item size='25rem'>Four</Flex.Item>
+  <Flex withVisualDebug margin="none none general.space2xl" gap="small large" wrap="wrap-reverse">
+    <Flex.Item size='25rem'><Text>One</Text></Flex.Item>
+    <Flex.Item size='25rem'><Text>Two</Text></Flex.Item>
+    <Flex.Item size='25rem'><Text>Three</Text></Flex.Item>
+    <Flex.Item size='25rem'><Text>Four</Text></Flex.Item>
   </Flex>
 </div>
 ```
@@ -126,16 +126,16 @@ type: example
 ---
 <Flex withVisualDebug>
   <Flex.Item padding="x-small">
-    Villum dolore eu fugiat nulla pariatur.
+    <Text>Villum dolore eu fugiat nulla pariatur.</Text>
   </Flex.Item>
   <Flex.Item padding="x-small">
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+    <Text>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</Text>
   </Flex.Item>
   <Flex.Item padding="x-small">
-    Duis aute irure.
+    <Text>Duis aute irure.</Text>
   </Flex.Item>
   <Flex.Item padding="x-small">
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    <Text>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Text>
   </Flex.Item>
 </Flex>
 ```
@@ -149,16 +149,16 @@ type: example
 ---
 <Flex withVisualDebug>
   <Flex.Item padding="x-small" shouldShrink>
-    Villum dolore eu fugiat nulla pariatur.
+    <Text>Villum dolore eu fugiat nulla pariatur.</Text>
   </Flex.Item>
   <Flex.Item padding="x-small" shouldShrink>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+    <Text>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</Text>
   </Flex.Item>
   <Flex.Item padding="x-small" shouldShrink>
-    Duis aute irure.
+    <Text>Duis aute irure.</Text>
   </Flex.Item>
   <Flex.Item padding="x-small" shouldShrink>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    <Text>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Text>
   </Flex.Item>
 </Flex>
 ```
@@ -171,10 +171,10 @@ type: example
 ---
 <Flex withVisualDebug>
   <Flex.Item padding="x-small" shouldShrink shouldGrow>
-    I am growing and shrinking!
+    <Text>I am growing and shrinking!</Text>
   </Flex.Item>
   <Flex.Item>
-    I am not shrinking or growing.
+    <Text>I am not shrinking or growing.</Text>
   </Flex.Item>
 </Flex>
 ```
@@ -190,13 +190,13 @@ type: example
 ---
 <Flex withVisualDebug>
   <Flex.Item padding="x-small" size="200px">
-    I am always 200px.
+    <Text>I am always 200px.</Text>
   </Flex.Item>
   <Flex.Item padding="x-small" shouldShrink shouldGrow size="200px">
-    I can grow, and shrink down to 200px.
+    <Text>I can grow, and shrink down to 200px.</Text>
   </Flex.Item>
   <Flex.Item padding="x-small" size="25%">
-    I am always 25%.
+    <Text>I am always 25%.</Text>
   </Flex.Item>
 </Flex>
 ```
@@ -217,13 +217,13 @@ type: example
     <Avatar name="Sarah Robinson" size="large" src={avatarSquare} />
   </Flex.Item>
   <Flex.Item shouldGrow shouldShrink>
-    I should be aligned to the bottom of the Avatar.
+    <Text>I should be aligned to the bottom of the Avatar.</Text>
   </Flex.Item>
   <Flex.Item>
-    Me, too.
+    <Text>Me, too.</Text>
   </Flex.Item>
   <Flex.Item align="start">
-    I am aligning myself to the top.
+    <Text>I am aligning myself to the top.</Text>
   </Flex.Item>
 </Flex>
 ```
@@ -237,27 +237,27 @@ Use the `justifyItems` property to change the justification of Flex.Items.
 type: example
 ---
 <div>
-  <Flex justifyItems="center" margin="0 0 large" withVisualDebug>
+  <Flex justifyItems="center" margin="0 0 general.space2xl" withVisualDebug>
     <Flex.Item>
       <Avatar name="Sarah Robinson" size="large" src={avatarSquare} />
     </Flex.Item>
     <Flex.Item>
-      We are all centered!
+      <Text>We are all centered!</Text>
     </Flex.Item>
     <Flex.Item>
-      Yeah!
+      <Text>Yeah!</Text>
     </Flex.Item>
   </Flex>
 
-  <Flex justifyItems="space-between" withVisualDebug margin="0 0 large">
+  <Flex justifyItems="space-between" withVisualDebug margin="0 0 general.space2xl">
     <Flex.Item>
       <Avatar name="Sarah Robinson" size="large" src={avatarSquare} />
     </Flex.Item>
     <Flex.Item>
-      Ah, a little more space.
+      <Text>Ah, a little more space.</Text>
     </Flex.Item>
     <Flex.Item>
-      Totally.
+      <Text>Totally.</Text>
     </Flex.Item>
   </Flex>
 
@@ -266,10 +266,10 @@ type: example
       <Avatar name="Sarah Robinson" size="large" src={avatarSquare} />
     </Flex.Item>
     <Flex.Item>
-      Smooshed again.
+      <Text>Smooshed again.</Text>
     </Flex.Item>
     <Flex.Item>
-      Ugh.
+      <Text>Ugh.</Text>
     </Flex.Item>
   </Flex>
 </div>
@@ -315,10 +315,10 @@ type: example
     <Heading>Lorem ipsum dolor sit amet consectetur dolor sit</Heading>
   </Flex.Item>
   <Flex.Item>
-    <Button margin="none x-small none none">
+    <Button margin="none general.spaceSm none none">
       Cancel
     </Button>
-    <Button color="success" renderIcon={IconUserSolid}>
+    <Button color="success" renderIcon={UserInstUIIcon}>
       Add user
     </Button>
   </Flex.Item>
@@ -334,19 +334,19 @@ type: example
 <Flex height="32rem" justifyItems="center" padding="large" withVisualDebug>
   <Flex.Item shouldShrink shouldGrow textAlign="center">
 
-    <Heading level="h1" margin="0 0 medium">An amazing thing!</Heading>
+    <Heading level="h1" margin="0 0 general.spaceXl">An amazing thing!</Heading>
 
-    <Flex withVisualDebug wrap="wrap" justifyItems="space-around" margin="0 0 medium">
+    <Flex withVisualDebug wrap="wrap" justifyItems="space-around" margin="0 0 general.spaceXl">
       <Flex.Item padding="small">
-        <SVGIcon src={iconExample} size="medium" title="Icon Example" />
+        <HeartInstUIIcon size="medium" title="Icon Example" color="primary" />
         <Text weight="bold" size="large" as="div">We love you!</Text>
       </Flex.Item>
       <Flex.Item padding="small">
-        <SVGIcon src={iconExample} size="medium" title="Icon Example" />
+        <HeartInstUIIcon size="medium" title="Icon Example" color="primary" />
         <Text weight="bold" size="large" as="div">We love you!</Text>
       </Flex.Item>
       <Flex.Item padding="small">
-        <SVGIcon src={iconExample} size="medium" title="Icon Example" />
+        <HeartInstUIIcon size="medium" title="Icon Example" color="primary" />
         <Text weight="bold" size="large" as="div">We love you!</Text>
       </Flex.Item>
     </Flex>
@@ -373,7 +373,7 @@ type: example
   </Flex.Item>
 
   <Flex.Item shouldGrow shouldShrink padding="small" as="main">
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    <Text>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</Text>
   </Flex.Item>
 
   <Flex.Item padding="small" as="footer">
@@ -381,7 +381,7 @@ type: example
     <Flex withVisualDebug justifyItems="space-between">
       <Flex.Item>
         <IconButton
-          renderIcon={IconEmailLine}
+          renderIcon={MailInstUIIcon}
           withBackground={false}
           withBorder={false}
           screenReaderLabel="Some app function"
@@ -389,7 +389,7 @@ type: example
       </Flex.Item>
       <Flex.Item>
         <IconButton
-          renderIcon={IconPrinterLine}
+          renderIcon={PrinterInstUIIcon}
           withBackground={false}
           withBorder={false}
           screenReaderLabel="Some app function"
@@ -397,7 +397,7 @@ type: example
       </Flex.Item>
       <Flex.Item>
         <IconButton
-          renderIcon={IconCalendarDayLine}
+          renderIcon={Calendar1InstUIIcon}
           withBackground={false}
           withBorder={false}
           screenReaderLabel="Some app function"
@@ -405,7 +405,7 @@ type: example
       </Flex.Item>
       <Flex.Item>
         <IconButton
-          renderIcon={IconSettingsLine}
+          renderIcon={SettingsInstUIIcon}
           withBackground={false}
           withBorder={false}
           screenReaderLabel="Some app function"
@@ -427,9 +427,9 @@ type: example
 | Flex | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
 | Flex | height | `string \| number` | No | - | Sets the height of the component's container (optional) |
 | Flex | width | `string \| number` | No | - | Sets the width of the component's container (optional) |
-| Flex | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
-| Flex | gap | `Spacing` | No | `'none'` | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `gap="small large"`. |
-| Flex | padding | `Spacing` | No | - | Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `padding="small x-large large"`. |
+| Flex | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`. |
+| Flex | gap | `Spacing` | No | `'none'` | Valid values are `0`, `none`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `gap="general.spaceMd general.spaceLg"`. |
+| Flex | padding | `Spacing` | No | - | Valid values are `0`, `none`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `padding="general.spaceMd general.spaceLg"`. |
 | Flex | display | `'flex' \| 'inline-flex'` | No | `'flex'` | Sets the CSS display rule for the component's container |
 | Flex | textAlign | `'start' \| 'center' \| 'end'` | No | - | Designates the text alignment |
 | Flex | direction | `'row' \| 'column' \| 'row-reverse' \| 'column-reverse'` | No | `'row'` | Sets the flex-direction to row (horizontal) or column (vertical) |
@@ -440,8 +440,8 @@ type: example
 | Flex.Item | children | `React.ReactNode` | No | - | The children to render inside the Item |
 | Flex.Item | as | `AsElementType` | No | `'span'` | the element type to render as |
 | Flex.Item | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
-| Flex.Item | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
-| Flex.Item | padding | `Spacing` | No | - | Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `padding="small x-large large"`. |
+| Flex.Item | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`. |
+| Flex.Item | padding | `Spacing` | No | - | Valid values are `0`, `none`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `padding="general.spaceMd general.spaceLg"`. |
 | Flex.Item | align | `'center' \| 'start' \| 'end' \| 'stretch'` | No | - | overrides the parent Flex's alignItems prop, if needed |
 | Flex.Item | direction | `'row' \| 'column'` | No | - | Inherits from the parent Flex component |
 | Flex.Item | textAlign | `'start' \| 'center' \| 'end'` | No | - | Designates the text alignment inside the Item |
@@ -465,6 +465,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { Flex } from '@instructure/ui-flex'
+import { Flex } from '@instructure/ui-flex/v11_7'
 ```
 

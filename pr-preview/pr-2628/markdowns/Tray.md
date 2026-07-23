@@ -145,6 +145,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { Tray } from '@instructure/ui-tray'
+import { Tray } from '@instructure/ui-tray/v11_7'
 ```
 

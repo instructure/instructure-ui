@@ -44,7 +44,7 @@ type: example
   name="sports2"
   layout="inline"
   messages={[
-    { text: 'Invalid name', type: 'newError' }
+    { text: 'Invalid name', type: 'error' }
   ]}
   onChange={function (value) { console.log(value) }}
   defaultValue={['soccer', 'volleyball']}
@@ -78,6 +78,10 @@ type: example
   <Checkbox label="Soccer" value="soccer" variant="toggle" />
 </CheckboxGroup>
 ```
+
+### Querying checked state from the DOM
+
+Each `<Checkbox>` in the group exposes a `data-checked` attribute (`"true"` or `"false"`) on its underlying `<input>` that can be queried from the DOM to read the current state, for example for analytics tracking tools.
 
 ### Guidelines
 
@@ -138,6 +142,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { CheckboxGroup } from '@instructure/ui-checkbox'
+import { CheckboxGroup } from '@instructure/ui-checkbox/v11_7'
 ```
 

@@ -272,8 +272,8 @@ type: example
           onRequestHideOptions={handleHideOptions}
           onRequestHighlightOption={handleHighlightOption}
           onRequestSelectOption={handleSelectOption}
-          renderBeforeInput={<IconUserSolid inline={false} />}
-          renderAfterInput={<IconSearchLine inline={false} />}
+          renderBeforeInput={<User2InstUIIcon inline={false} />}
+          renderAfterInput={<SearchInstUIIcon inline={false} />}
           inputRef={(el) => {
             inputRef.current = el
           }}
@@ -287,9 +287,7 @@ type: example
                   isHighlighted={option.id === highlightedOptionId}
                   isSelected={option.id === selectedOptionId}
                   isDisabled={option.disabled}
-                  renderBeforeLabel={
-                    !option.disabled ? IconUserSolid : IconUserLine
-                  }
+                  renderBeforeLabel={<User2InstUIIcon />}
                 >
                   {!option.disabled
                     ? option.label
@@ -342,6 +340,8 @@ type: example
 #### Highlighting and selecting options
 
 To mark an option as "highlighted", use the option's `isHighlighted` prop. Note that only one highlighted option is permitted. Similarly, use `isSelected` to mark an option or multiple options as "selected". When allowing multiple selections, it's best to render a [Tag](Tag) with [AccessibleContent](AccessibleContent) for each selected option via the `renderBeforeInput` prop.
+
+> **Accessibility:** set an explicit `aria-label` on the `Select` (matching `renderLabel`) and list the selected options in the `assistiveText` (e.g. `"Alaska Selected, …"`), as the example below does. This keeps the combobox's accessible name limited to the field label, while screen reader users still hear which options are selected. Each pill's `"Remove …"` label is only announced when that pill receives focus.
 
 ```js
 ---
@@ -498,11 +498,25 @@ type: example
       ))
     }
 
+    // Announce the current selection as part of the combobox's description, so
+    // navigating to the Select reads "Multiple Select, Alaska Selected, ..."
+    // rather than the "Remove ..." labels of the dismissible pills.
+    const selectedText = selectedOptionId
+      .map((id) => `${getOptionById(id).label} Selected`)
+      .join(', ')
+    const assistiveText = [
+      selectedText,
+      'Type or use arrow keys to navigate options. Multiple selections allowed.'
+    ]
+      .filter(Boolean)
+      .join('. ')
+
     return (
       <div>
         <Select
           renderLabel="Multiple Select"
-          assistiveText="Type or use arrow keys to navigate options. Multiple selections allowed."
+          aria-label="Multiple Select"
+          assistiveText={assistiveText}
           inputValue={inputValue}
           isShowingOptions={isShowingOptions}
           inputRef={(el) => {
@@ -656,7 +670,7 @@ const GroupSelectExample = ({ options }) => {
           type="notification"
           variant={variant}
           standalone
-          margin="0 x-small xxx-small 0"
+          margin="0 general.spaceSm general.space2xs 0"
         />
         {text}
       </span>
@@ -707,7 +721,7 @@ const GroupSelectExample = ({ options }) => {
                 : 'primary'
             }
             standalone
-            margin="0 0 xxx-small 0"
+            margin="0 0 general.space2xs 0"
           />
         }
         inputRef={(el) => {
@@ -1069,9 +1083,7 @@ const AsyncExample = ({ options }) => {
                 isHighlighted={option.id === highlightedOptionId}
                 isSelected={option.id === selectedOptionId}
                 isDisabled={option.disabled}
-                renderBeforeLabel={
-                  !option.disabled ? IconUserSolid : IconUserLine
-                }
+                renderBeforeLabel={<User2InstUIIcon />}
               >
                 {option.label}
               </Select.Option>
@@ -1232,17 +1244,17 @@ render(
         {
           id: 'opt2',
           label: 'Icon',
-          renderBeforeLabel: <IconCheckSolid />
+          renderBeforeLabel: <CheckInstUIIcon />
         },
         {
           id: 'opt3',
           label: 'Colored Icon',
           renderBeforeLabel: (props) => {
-            let color = 'brand'
-            if (props.isHighlighted) color = 'primary-inverse'
-            if (props.isSelected) color = 'primary'
-            if (props.isDisabled) color = 'warning'
-            return <IconInstructureSolid color={color} />
+            let color = 'infoColor'
+            if (props.isHighlighted) color = 'baseColor'
+            if (props.isSelected) color = 'inverseColor'
+            if (props.isDisabled) color = 'disabledBaseColor'
+            return <VerifiedInstUIIcon color={color}/>
           }
         }
       ]}
@@ -1333,6 +1345,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { Select } from '@instructure/ui-select'
+import { Select } from '@instructure/ui-select/v11_7'
 ```
 

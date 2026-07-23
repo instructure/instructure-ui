@@ -322,7 +322,7 @@ type: example
 
     return (
       <View display="block" padding="medium medium small" background="primary">
-        <View display="block" margin="small none large">
+        <View display="block" margin="general.spaceMd none general.space2xl">
           <FormFieldGroup description="Settings" rowSpacing="small">
             {Object.keys(settings).map((prop) => (
               <Checkbox
@@ -375,7 +375,7 @@ type: example
 
     return (
       <View display="block" padding="medium medium small" background="primary">
-        <View display="block" margin="small none large">
+        <View display="block" margin="general.spaceMd none general.space2xl">
           <FormFieldGroup description="Settings" rowSpacing="small">
             {[
               'lineNumbers',
@@ -487,7 +487,7 @@ type: example
 
     return (
       <View display="block" padding="medium medium small" background="primary">
-        <View display="block" margin="small none large">
+        <View display="block" margin="general.spaceMd none general.space2xl">
           <FormFieldGroup description="Settings">
             <Checkbox
               label="indentWithTab"
@@ -581,7 +581,7 @@ type: example
           padding="medium medium small"
           background="primary"
         >
-          <View display="block" margin="small none large">
+          <View display="block" margin="general.spaceMd none general.space2xl">
             <FormFieldGroup
               description="Settings"
               layout="columns"
@@ -669,7 +669,7 @@ type: example
 
     return (
       <View display="block" padding="medium medium small" background="primary">
-        <View display="block" margin="small none large">
+        <View display="block" margin="general.spaceMd none general.space2xl">
           <Button
             onClick={() => {
               console.log('manual focus')
@@ -722,7 +722,7 @@ type: example
 
     return (
       <View display="block" padding="medium medium small" background="primary">
-        <View display="block" margin="small none large">
+        <View display="block" margin="general.spaceMd none general.space2xl">
           <RadioInputGroup
             name="attachmentExample"
             value={attachment}
@@ -842,6 +842,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { SourceCodeEditor } from '@instructure/ui-source-code-editor'
+import { SourceCodeEditor } from '@instructure/ui-source-code-editor/v11_7'
 ```
 

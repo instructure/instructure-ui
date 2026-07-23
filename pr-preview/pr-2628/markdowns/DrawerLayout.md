@@ -40,7 +40,7 @@ type: example
               as="div"
               maxWidth="16rem"
               textAlign="center"
-              margin="large auto"
+              margin="general.space2xl auto"
               padding="small"
             >
               <CloseButton
@@ -49,21 +49,21 @@ type: example
                 onClick={handleTrayDismiss}
                 screenReaderLabel="Close"
               />
-              <Avatar name="foo bar" margin="0 0 small 0" />
+              <Avatar name="foo bar" margin="0 0 general.spaceMd 0" />
               <Text as="div" size="x-small">
                 Hello from start tray with a small amount of placeholder content
               </Text>
             </View>
           </DrawerLayout.Tray>
           <DrawerLayout.Content label="Drawer content example">
-            <div style={{ background: 'white', height: '100%' }}>
-              <View as="div" padding="x-large">
+            <View as="div" height="100%" background="primary">
+              <View as="div" padding="x-large" background="primary">
                 <Heading border="bottom">A simple drawer layout</Heading>
                 <Grid startAt="medium" vAlign="middle" colSpacing="none">
                   <Grid.Row>
                     <Grid.Col>
                       <Button
-                        margin="small 0"
+                        margin="general.spaceMd 0"
                         size="small"
                         onClick={() => {
                           setOpen(true)
@@ -83,7 +83,7 @@ type: example
                   <p>{lorem.paragraph()}</p>
                 </Text>
               </View>
-            </div>
+            </View>
           </DrawerLayout.Content>
         </DrawerLayout>
       </View>
@@ -118,8 +118,9 @@ type: example
               as="div"
               maxWidth="48rem"
               textAlign="center"
-              margin="large auto"
+              margin="general.space2xl auto"
               padding="large"
+              background="primary"
             >
               <CloseButton
                 placement="end"
@@ -148,7 +149,7 @@ type: example
                   as="div"
                   maxWidth="16rem"
                   textAlign="center"
-                  margin="large auto"
+                  margin="general.space2xl auto"
                   padding="small"
                 >
                   <CloseButton
@@ -159,7 +160,7 @@ type: example
                     }}
                     screenReaderLabel="Close"
                   />
-                  <Avatar name="foo bar" margin="0 0 small 0" />
+                  <Avatar name="foo bar" margin="0 0 general.spaceMd 0" />
                   <Text as="div" size="x-small">
                     Hello from start tray with a small amount of placeholder
                     content
@@ -167,14 +168,14 @@ type: example
                 </View>
               </DrawerLayout.Tray>
               <DrawerLayout.Content label="Drawer content example containing a responsive ">
-                <div style={{ background: 'white', height: '100%' }}>
-                  <View as="div" padding="x-large">
+                <View as="div" background="primary" height='100%'>
+                  <View as="div" padding="x-large"      background="primary">
                     <Heading border="bottom">A nested drawer layout</Heading>
                     <Grid startAt="medium" vAlign="middle" colSpacing="none">
                       <Grid.Row>
                         <Grid.Col>
                           <Button
-                            margin="small 0"
+                            margin="general.spaceMd 0"
                             size="small"
                             onClick={() => {
                               setStartOpen(true)
@@ -186,7 +187,7 @@ type: example
                         </Grid.Col>
                         <Grid.Col width="auto">
                           <Button
-                            margin="small 0"
+                            margin="general.spaceMd 0"
                             size="small"
                             onClick={() => {
                               setEndOpen(true)
@@ -216,7 +217,7 @@ type: example
                       <p>{lorem.paragraph()}</p>
                     </Text>
                   </View>
-                </div>
+                </View>
               </DrawerLayout.Content>
             </DrawerLayout>
           </DrawerLayout.Content>
@@ -279,6 +280,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { DrawerLayout } from '@instructure/ui-drawer-layout'
+import { DrawerLayout } from '@instructure/ui-drawer-layout/v11_7'
 ```
 

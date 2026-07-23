@@ -104,7 +104,7 @@ type: example
           value={value}
           inline={inline}
         />
-        <View as="div" margin="small 0">
+        <View as="div" margin="general.spaceMd 0">
           <Checkbox label="inline" checked={inline} onChange={onChangeLayout} />
         </View>
       </View>
@@ -312,7 +312,7 @@ type: example
     }
 
     return (
-      <View as="div">
+      <View as="div" background="primary">
         <InPlaceEdit
           renderViewer={renderView}
           renderEditor={renderEdit}
@@ -365,6 +365,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { InPlaceEdit } from '@instructure/ui-editable'
+import { InPlaceEdit } from '@instructure/ui-editable/v11_7'
 ```
 

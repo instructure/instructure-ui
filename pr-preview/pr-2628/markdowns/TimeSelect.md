@@ -135,6 +135,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { TimeSelect } from '@instructure/ui-time-select'
+import { TimeSelect } from '@instructure/ui-time-select/v11_7'
 ```
 
