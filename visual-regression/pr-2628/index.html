@@ -52,18 +52,14 @@
       <a href="https://github.com/instructure/instructure-ui/pull/2628" style="font-weight:600;color:#0969da;text-decoration:none;">PR #2628</a>
     </div>
     <div class="counts">
-      <span>Total: 128</span>
+      <span>Total: 129</span>
       <span style="color:#1a7f37;">OK: 0</span>
-      <span style="color:#cf222e;">Changed: 0</span>
+      <span style="color:#cf222e;">Changed: 1</span>
       <span style="color:#0969da;">New: 96</span>
       <span style="color:#9a6700;">Removed: 32</span>
     </div>
     <div class="filter" id="status-filter">
-      <button data-filter="all" class="active">All</button>
-      <button data-filter="changed">Changed</button>
-      <button data-filter="added">New</button>
-      <button data-filter="removed">Removed</button>
-      <button data-filter="unchanged">Unchanged</button>
+      <button data-filter="all">All</button><button data-filter="changed" class="active">Changed</button><button data-filter="added">New</button><button data-filter="removed">Removed</button><button data-filter="unchanged">Unchanged</button>
       <input id="search" type="search" placeholder="Filter by name…" autocomplete="off" />
     </div>
     <div class="filter" id="facet-filter">
@@ -312,6 +308,10 @@
     <section class="row" data-status="removed" data-name="datetimeinput.png" data-has-both="false">
       <header><h2>datetimeinput.png</h2><span class="pill gone">removed</span></header>
       <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/datetimeinput.png" data-name="datetimeinput.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption></figure><figure><figcaption>Diff</figcaption></figure></div>
+    </section>
+    <section class="row" data-status="changed" data-name="diff-demo.png" data-has-both="true">
+      <header><h2>diff-demo.png</h2><span class="pill fail">changed</span><div class="meta">6324 pixels differ</div></header>
+      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/diff-demo.png" data-name="diff-demo.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/diff-demo.png" data-name="diff-demo.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption><img loading="lazy" src="diff/diff-demo.png" data-name="diff-demo.png" data-mode="diff" class="thumb" /></figure></div>
     </section>
     <section class="row" data-status="added" data-name="drilldown-canvas.png" data-has-both="false" data-html-url="app/drilldown/?theme=canvas">
       <header><h2>drilldown-canvas.png</h2><span class="pill new">new</span><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/regression-test-dark-theme/regression-test/src/app/drilldown/page.tsx" target="_blank" rel="noopener">drilldown/page.tsx</a></header>
@@ -606,7 +606,7 @@
 
   <script>
     (function () {
-      const listState = { filter: 'all', query: '', facet: 'all' }
+      const listState = { filter: 'changed', query: '', facet: 'all' }
 
       function applyFilters() {
         const q = listState.query.toLowerCase()
@@ -760,21 +760,28 @@
       document.querySelectorAll('.thumb').forEach(img => {
         img.addEventListener('click', () => open(img.dataset.name))
       })
+      function step(delta) {
+        if (!state.rows.length) return
+        state.idx = (state.idx + delta + state.rows.length) % state.rows.length
+        render()
+      }
+
       document.getElementById('lb-close').addEventListener('click', close)
-      document.getElementById('lb-prev').addEventListener('click', () => {
-        if (!state.rows.length) return
-        state.idx = (state.idx - 1 + state.rows.length) % state.rows.length
-        render()
-      })
-      document.getElementById('lb-next').addEventListener('click', () => {
-        if (!state.rows.length) return
-        state.idx = (state.idx + 1) % state.rows.length
-        render()
-      })
+      document.getElementById('lb-prev').addEventListener('click', () => step(-1))
+      document.getElementById('lb-next').addEventListener('click', () => step(1))
       document.querySelectorAll('#lb-modes button').forEach(b => {
         b.addEventListener('click', () => { state.mode = b.dataset.mode; render() })
       })
       lbZoomBtn.addEventListener('click', () => { state.zoom = !state.zoom; render() })
+
+      document.addEventListener('keydown', (e) => {
+        if (!lb.classList.contains('open')) return
+        if (e.key === 'Escape') close()
+        else if (e.key === 'ArrowLeft') step(-1)
+        else if (e.key === 'ArrowRight') step(1)
+      })
+
+      applyFilters()
     })()
   </script>
 </body></html>
