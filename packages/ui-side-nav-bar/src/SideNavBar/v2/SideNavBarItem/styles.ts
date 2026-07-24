@@ -70,7 +70,7 @@ const generateStyle = (
             },
             '&:focus': {
               backgroundColor: componentTheme.selectedBackgroundColor,
-              boxShadow: `${componentTheme.selectedOuterFocusOutlineColor}, ${componentTheme.selectedInnerFocusOutlineColor}`,
+              boxShadow: `inset 0 0 0 0.125rem ${componentTheme.selectedOuterFocusOutlineColor}, inset 0 0 0 0.25rem ${componentTheme.selectedInnerFocusOutlineColor}`,
               outline: 'none'
             }
           }
