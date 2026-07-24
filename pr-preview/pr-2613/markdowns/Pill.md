@@ -12,43 +12,36 @@ type: example
 ---
 <div>
   <Pill
-    margin="x-small"
+    margin="general.spaceSm"
   >
     Excused
   </Pill>
   <Pill
     statusLabel="Status"
     color="info"
-    margin="x-small"
+    margin="general.spaceSm"
   >
     Draft
   </Pill>
   <Pill
     statusLabel="Status"
-    renderIcon={<IconCheckLine />}
+    renderIcon={<CheckInstUIIcon size="sm" />}
     color="success"
-    margin="x-small"
+    margin="general.spaceSm"
   >
     Checked In
   </Pill>
   <Pill
-    renderIcon={<IconEndLine />}
-    color="danger"
-    margin="x-small"
-  >
-    Missing
-  </Pill>
-  <Pill
-    renderIcon={<IconClockLine />}
+    renderIcon={<Clock4InstUIIcon size="sm" />}
     color="warning"
-    margin="x-small"
+    margin="general.spaceSm"
   >
     Late
   </Pill>
   <Pill
-    renderIcon={<IconMessageLine />}
-    color="alert"
-    margin="x-small"
+    renderIcon={<MailInstUIIcon size="sm" />}
+    color="error"
+    margin="general.spaceSm"
   >
     Notification
   </Pill>
@@ -91,9 +84,9 @@ type: embed
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
 | Pill | as | `AsElementType` | No | - |  |
-| Pill | color | `'primary' \| 'success' \| 'danger' \| 'info' \| 'warning' \| 'alert'` | No | `'primary'` |  |
+| Pill | color | `'primary' \| 'success' \| 'info' \| 'warning' \| 'error'` | No | `'primary'` |  |
 | Pill | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to the underlying HTML element |
-| Pill | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
+| Pill | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`. |
 | Pill | children | `React.ReactNode` | Yes | - |  |
 | Pill | statusLabel | `string` | No | - | Adds a status label to the left of the main text. |
 | Pill | renderIcon | `React.ReactNode` | No | - | An icon displayed to the left of the text. |
@@ -110,6 +103,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { Pill } from '@instructure/ui-pill'
+import { Pill } from '@instructure/ui-pill/v11_7'
 ```
 

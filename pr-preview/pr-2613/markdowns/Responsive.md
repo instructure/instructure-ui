@@ -151,6 +151,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { Responsive } from '@instructure/ui-responsive'
+import { Responsive } from '@instructure/ui-responsive/v11_7'
 ```
 

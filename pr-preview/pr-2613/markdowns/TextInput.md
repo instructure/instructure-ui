@@ -22,95 +22,6 @@ type: example
 ---
 type: example
 ---
-  class ControlledTextInputExample extends React.Component {
-    constructor(props) {
-      super(props)
-
-      this.state = {
-        value: 'Supertramp',
-        disabled: false,
-        readOnly: false,
-        inline: false,
-        messages: null
-      }
-    }
-
-    handleChange = (e, value) =>
-      this.setState({
-        value,
-        messages: null
-      })
-
-    handleBlur = (e) => {
-      if (this.state.value === 'Supertramp') {
-        this.setState({
-          messages: [
-            {
-              text: `Come on. There's no way your favorite band is really Supertramp.`,
-              type: 'newError'
-            }
-          ]
-        })
-      }
-    }
-
-    toggleDisabled = (e) => this.setState({ disabled: !this.state.disabled })
-    toggleReadOnly = (e) => this.setState({ readOnly: !this.state.readOnly })
-    toggleInline = (e) => this.setState({ inline: !this.state.inline })
-
-    render() {
-      return (
-        <div>
-          <FormFieldGroup
-            description="Controlled TextInput state"
-            layout="columns"
-          >
-            <Checkbox
-              checked={this.state.disabled}
-              label="disabled"
-              onChange={this.toggleDisabled}
-            />
-            <Checkbox
-              checked={this.state.readOnly}
-              label="readOnly"
-              onChange={this.toggleReadOnly}
-            />
-            <Checkbox
-              checked={this.state.inline}
-              label="inline display"
-              onChange={this.toggleInline}
-            />
-          </FormFieldGroup>
-          <View display="block" margin="medium 0 0">
-            <TextInput
-              renderLabel="What is your favorite band?"
-              display={this.state.inline ? 'inline-block' : null}
-              value={this.state.value}
-              onChange={this.handleChange}
-              onBlur={this.handleBlur}
-              interaction={
-                this.state.disabled
-                  ? 'disabled'
-                  : this.state.readOnly
-                  ? 'readonly'
-                  : 'enabled'
-              }
-              messages={this.state.messages}
-              renderAfterInput={<SVGIcon src={iconExample} />}
-            />
-          </View>
-        </div>
-      )
-    }
-  }
-
-  render(<ControlledTextInputExample />)
-```
-
-```js
----
-type: example
----
   const ControlledTextInputExample = () => {
     const [value, setValue] = useState('Supertramp')
     const [disabled, setDisabled] = useState(false)
@@ -128,7 +39,7 @@ type: example
         setMessages([
           {
             text: "Come on. There's no way your favorite band is really Supertramp.",
-            type: 'newError'
+            type: 'error'
           }
         ])
       }
@@ -160,7 +71,7 @@ type: example
             onChange={toggleInline}
           />
         </FormFieldGroup>
-        <View display="block" margin="medium 0 0">
+        <View display="block" margin="general.spaceXl 0 0">
           <TextInput
             renderLabel="What is your favorite band?"
             display={inline ? 'inline-block' : null}
@@ -171,7 +82,7 @@ type: example
               disabled ? 'disabled' : readOnly ? 'readonly' : 'enabled'
             }
             messages={messages}
-            renderAfterInput={<SVGIcon src={iconExample} />}
+            renderAfterInput={<HeartInstUIIcon />}
           />
         </View>
       </div>
@@ -185,7 +96,10 @@ type: example
 
 TextInput accepts focusable and non-focusable content before and/or after
 the input text. A common use case is adding an icon or avatar to the input.
-Focusable content will be focused separately from the input itself.
+Focusable content will be focused separately from the input itself. When
+rendering multiple elements before the input (such as tags), set
+`renderBeforeInputElementGap="even"` to evenly space them, including as they
+wrap to multiple rows.
 
 ```js
 ---
@@ -209,33 +123,29 @@ type: example
             renderLabel="What are Paula Panda's favorite ice cream flavors?"
             value={this.state.value}
             onChange={this.handleChange}
+            renderBeforeInputElementGap="even"
             renderBeforeInput={
               <>
                 {this.state.value !== '' && (
                   <Tag
                     text={this.state.value}
-                    margin="xxx-small xxx-small xxx-small none"
                     onClick={() => console.log(this.state.value)}
                   />
                 )}
                 <Tag
                   text="Rocky road"
-                  margin="xxx-small xxx-small xxx-small none"
                   onClick={() => console.log('Rocky road')}
                 />
                 <Tag
                   text="Vanilla"
-                  margin="xxx-small xxx-small xxx-small none"
                   onClick={() => console.log('Vanilla')}
                 />
                 <Tag
                   text="Coffee"
-                  margin="xxx-small xxx-small xxx-small none"
                   onClick={() => console.log('Coffee')}
                 />
                 <Tag
                   text="Strawberry"
-                  margin="xxx-small xxx-small xxx-small none"
                   onClick={() => console.log('Strawberry')}
                 />
               </>
@@ -252,64 +162,7 @@ type: example
   render(<ExtraContentExample />)
 ```
 
-```js
----
-type: example
----
-  const ExtraContentExample = () => {
-    const [value, setValue] = useState('')
-
-    const handleChange = (e, value) => setValue(value)
-
-    return (
-      <View as="div">
-        <TextInput
-          renderLabel="What are Paula Panda's favorite ice cream flavors?"
-          value={value}
-          onChange={handleChange}
-          renderBeforeInput={
-            <>
-              {value !== '' && (
-                <Tag
-                  text={value}
-                  margin="xxx-small xxx-small xxx-small none"
-                  onClick={() => console.log(value)}
-                />
-              )}
-              <Tag
-                text="Rocky road"
-                margin="xxx-small xxx-small xxx-small none"
-                onClick={() => console.log('Rocky road')}
-              />
-              <Tag
-                text="Vanilla"
-                margin="xxx-small xxx-small xxx-small none"
-                onClick={() => console.log('Vanilla')}
-              />
-              <Tag
-                text="Coffee"
-                margin="xxx-small xxx-small xxx-small none"
-                onClick={() => console.log('Coffee')}
-              />
-              <Tag
-                text="Strawberry"
-                margin="xxx-small xxx-small xxx-small none"
-                onClick={() => console.log('Strawberry')}
-              />
-            </>
-          }
-          renderAfterInput={() => (
-            <Avatar name="Paula Panda" src={avatarSquare} size="x-small" />
-          )}
-        />
-      </View>
-    )
-  }
-
-  render(<ExtraContentExample />)
-```
-
-Another common usecase is to add an `IconButton` at the end of a TextInput, e.g. for revealing the content of a password field. In these cases, please use the `withBorder={false}` and `withBackground={false}` props for the IconButton.
+Another common usecase is to add an [IconButton](IconButton) at the end of a TextInput, e.g. for revealing the content of a password field. Use the `condensedMedium` size together with `withBorder={false}` and `withBackground={false}` on the IconButton.
 
 ```js
 ---
@@ -319,18 +172,25 @@ const InputsWithButtonsExample = () => {
   const [passwordValue, setPasswordValue] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   return (
-    <TextInput
-      renderLabel="Password"
-      type={showPassword ? 'text' : 'password'}
-      placeholder="Find something..."
-      value={passwordValue}
-      onChange={(e, newValue) => setPasswordValue(newValue)}
-      renderAfterInput={
-        <IconButton withBorder={false} withBackground={false} onClick={() => setShowPassword(prevState => !prevState)} screenReaderLabel={showPassword ? 'Hide password' : 'Show password'}>
-          {showPassword ? <IconOffLine/> : <IconEyeLine/>}
-        </IconButton>
-      }
-    />
+    <View as="div" maxWidth="20rem">
+      <TextInput
+        renderLabel="Password"
+        type={showPassword ? 'text' : 'password'}
+        value={passwordValue}
+        onChange={(e, newValue) => setPasswordValue(newValue)}
+        renderAfterInput={
+          <IconButton
+            size="condensedMedium"
+            withBorder={false}
+            withBackground={false}
+            screenReaderLabel={showPassword ? 'Hide password' : 'Show password'}
+            onClick={() => setShowPassword((prev) => !prev)}
+          >
+            {showPassword ? <EyeOffInstUIIcon /> : <EyeInstUIIcon />}
+          </IconButton>
+        }
+      />
+    </View>
   )
 }
 render(<InputsWithButtonsExample />)
@@ -373,22 +233,22 @@ type: example
 <View as="div" maxWidth="250px">
   <TextInput
     renderLabel="I will not wrap"
-    renderBeforeInput={() => (<IconSearchLine inline={false} />)}
+    renderBeforeInput={<SearchInstUIIcon />}
     renderAfterInput={<Avatar name="Paula Panda" src={avatarSquare} size="x-small" />}
     shouldNotWrap
   />
-  <View as="div" margin="medium none none">
+  <View as="div" margin="general.spaceXl none none">
     <TextInput
       renderLabel="I will wrap"
       renderBeforeInput={
         <>
           <Tag
             text="English 101"
-            margin="xx-small xxx-small"
+            margin="general.spaceXs general.space2xs"
           />
           <Tag
             text="History 205"
-            margin="xx-small xxx-small"
+            margin="general.spaceXs general.space2xs"
           />
         </>
       }
@@ -396,6 +256,74 @@ type: example
     />
   </View>
 </View>
+```
+
+You can see here most of the visual states of the component:
+
+```js
+---
+type: example
+---
+  <Flex gap='general.spaceXl' direction='column'>
+    <TextInput
+      size="small"
+      renderAfterInput={<AlarmClockInstUIIcon />}
+      renderBeforeInput={<AlarmClockInstUIIcon />}
+      renderLabel='small'
+      placeholder="placeholder"
+    />
+    <TextInput
+      renderAfterInput={<AlarmClockInstUIIcon />}
+      renderBeforeInput={<AlarmClockInstUIIcon />}
+      renderLabel='normal'
+      placeholder="placeholder"
+    />
+    <TextInput
+      size="large"
+      renderAfterInput={<AlarmClockInstUIIcon />}
+      renderBeforeInput={<AlarmClockInstUIIcon />}
+      renderLabel='large'
+      placeholder="placeholder"
+    />
+    <TextInput
+      interaction='disabled'
+      renderLabel='disabled'
+      placeholder="placeholder"
+    />
+    <TextInput
+      interaction='readonly'
+      renderLabel='readonly'
+      placeholder="placeholder"
+    />
+    <TextInput
+      renderLabel='with error message'
+      placeholder="placeholder"
+      messages={[{ text: 'This is an error.', type: 'error' }]}
+    />
+    <TextInput
+      renderLabel='with success message'
+      placeholder="placeholder"
+      messages={[{ text: 'Great success!', type: 'success' }]}
+    />
+    <TextInput
+      renderLabel='large size (default is "medium")'
+      placeholder="placeholder"
+      size='large'
+    />
+    <TextInput
+      renderLabel='small size (default is "medium")'
+      placeholder="placeholder"
+      size='small'
+    />
+    <View as="div">
+      <Text>Fields marked with an asterisk <span aria-hidden="true">(*)</span> are required.</Text>
+      <TextInput
+        renderLabel='required'
+        placeholder="placeholder"
+        isRequired
+      />
+    </View>
+  </Flex>
 ```
 
 ### Guidelines
@@ -436,6 +364,7 @@ type: embed
 | TextInput | htmlSize | `number` | No | - | The width of the input (integer value 0 or higher), if a width is not explicitly provided via the `width` prop. Only applicable if `display="inline-block"`. For more see https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/size |
 | TextInput | display | `'inline-block' \| 'block'` | No | `'block'` | The display of the root element. |
 | TextInput | shouldNotWrap | `boolean` | No | `false` | Prevents the default behavior of wrapping the input and rendered content when available space is exceeded. |
+| TextInput | renderBeforeInputElementGap | `'default' \| 'even'` | No | `'default'` | Whether to apply a gap between the elements rendered via `renderBeforeInput` (a CSS flex container), e.g. tags. - `'default'`: no gap is applied between the elements. - `'even'`: wrapped rows are evenly spaced with a vertical and horizontal gap. |
 | TextInput | placeholder | `string` | No | - | Html placeholder text to display when the input has no value. This should be hint text, not a label replacement. |
 | TextInput | isRequired | `boolean` | No | `false` | Whether or not the text input is required. |
 | TextInput | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
@@ -446,7 +375,7 @@ type: embed
 | TextInput | onChange | `(event: React.ChangeEvent<HTMLInputElement>, value: string) => void` | No | - | Callback executed when the input fires a change event. @param {Object} event - the event object @param {string} value - the string value of the input |
 | TextInput | onBlur | `(event: React.FocusEvent<HTMLInputElement>) => void` | No | - | Callback fired when input loses focus. |
 | TextInput | onFocus | `(event: React.FocusEvent<HTMLInputElement>) => void` | No | - | Callback fired when input receives focus. |
-| TextInput | margin | `Spacing` | No | - | Margin around the component. Accepts a `Spacing` token. See token values and example usage in [this guide](https://instructure.design/#layout-spacing). |
+| TextInput | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`. |
 
 ### Usage
 
@@ -460,6 +389,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { TextInput } from '@instructure/ui-text-input'
+import { TextInput } from '@instructure/ui-text-input/v11_7'
 ```
 

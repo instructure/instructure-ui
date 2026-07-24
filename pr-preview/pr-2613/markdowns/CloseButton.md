@@ -21,18 +21,18 @@ If you need the `CloseButton` to work in a layout with other elements vs. absolu
 type: example
 ---
 <View display="block" position="relative" background="primary" shadow="resting">
-  <Flex height="6rem" justifyItems="space-between" alignItems="center" padding="medium">
+  <Flex height="6rem" justifyItems="space-between" alignItems="center" padding="general.spaceXl">
     <Flex.Item shouldShrink shouldGrow>
       <Heading level="h2">Some Heading Text</Heading>
     </Flex.Item>
-    <Flex.Item padding="none none none medium">
+    <Flex.Item padding="none none none general.spaceXl">
       <CloseButton size="medium" screenReaderLabel="Close" />
     </Flex.Item>
   </Flex>
 </View>
 ```
 
-If you need even more customization, note that you can always compose this component using the [IconButton](IconButton) directly. Supply the `renderIcon` prop with [IconXSolid](icons) and set the `withBorder` and `withBackground` props to `false`.
+If you need even more customization, note that you can always compose this component using the [IconButton](IconButton) directly. Supply the `renderIcon` prop with [XInstUIIcon](icons) and set the `withBorder` and `withBackground` props to `false`.
 
 ```js
 ---
@@ -43,11 +43,11 @@ type: example
     <Flex.Item>
       <IconButton
         screenReaderLabel="Close"
-        renderIcon={IconXSolid}
+        renderIcon={XInstUIIcon}
         size="small"
         withBackground={false}
         withBorder={false}
-        margin="small"
+        margin="general.spaceMd"
       />
     </Flex.Item>
   </Flex>
@@ -79,7 +79,7 @@ type: embed
 | CloseButton | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to the `CloseButton`'s underlying html element. |
 | CloseButton | size | `'small' \| 'medium' \| 'large'` | No | `'small'` | The size of the `CloseButton` |
 | CloseButton | onClick | `( event: React.KeyboardEvent<ViewProps> \| React.MouseEvent<ViewProps> ) => void` | No | - | Callback fired when the `CloseButton` is clicked. |
-| CloseButton | margin | `Spacing` | No | `'0'` | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
+| CloseButton | margin | `Spacing` | No | `'0'` | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`. |
 | CloseButton | placement | `'start' \| 'end' \| 'static'` | No | `'static'` | Specifies the placement of the `CloseButton` |
 | CloseButton | offset | `'none' \| 'x-small' \| 'small' \| 'medium'` | No | `'x-small'` | Specifies the offset distance for the `CloseButton` with respect to both the top and start/end of the container. Note that for this property to have an effect, the `placement` prop must be set to either `start` or `end`. The offset will also be created with respect to a positioned parent. If it does not appear to be working, try setting the `position` of the parent container to `relative`. |
 | CloseButton | type | `'button' \| 'submit' \| 'reset'` | No | `'button'` | Specifies the type of the `Button`'s underlying html element. |
@@ -100,6 +100,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { CloseButton } from '@instructure/ui-buttons'
+import { CloseButton } from '@instructure/ui-buttons/v11_7'
 ```
 

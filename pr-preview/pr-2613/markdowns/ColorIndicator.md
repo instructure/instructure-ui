@@ -9,38 +9,38 @@ A component displaying a circle with checkerboard background capable of displayi
 ---
 type: example
 ---
-<div style={{display:'flex', background:'white'}}>
-  <View margin='small'>
+<View as="div" background="primary" display='flex'>
+  <View margin='general.spaceMd'>
     <ColorIndicator color=''/>
   </View>
-  <View margin='small'>
+  <View margin='general.spaceMd'>
     <ColorIndicator color='#ff0000'/>
   </View>
-  <View margin='small'>
+  <View margin='general.spaceMd'>
     <ColorIndicator color='#ff000088'/>
   </View>
-  <View margin='small'>
+  <View margin='general.spaceMd'>
     <ColorIndicator color='#ff000000'/>
   </View>
-  <View margin='small'>
+  <View margin='general.spaceMd'>
     <ColorIndicator color='yellow'/>
   </View>
-  <View margin='small'>
+  <View margin='general.spaceMd'>
     <ColorIndicator color='rgb(155,55,82)'/>
   </View>
-  <View margin='small'>
+  <View margin='general.spaceMd'>
     <ColorIndicator color='rgba(155,55,82,.5)'/>
   </View>
-  <View margin='small'>
+  <View margin='general.spaceMd'>
     <ColorIndicator color='hsl(30, 100%, 50%)'/>
   </View>
-  <View margin='small'>
+  <View margin='general.spaceMd'>
     <ColorIndicator color='hsla(30, 100%, 50%, .3)'/>
   </View>
-  <View margin='small'>
+  <View margin='general.spaceMd'>
     <ColorIndicator color='hwb(1.5708rad 60% 0%)'/>
   </View>
-</div>
+</View>
 
 
 ```
@@ -53,14 +53,14 @@ type: example
 ---
 type: example
 ---
-<div style={{display:'flex', background:'white'}}>
-  <View margin='small'>
+<View as="div" background="primary" display='flex'>
+  <View margin='general.spaceMd'>
     <ColorIndicator color='#ff0000'/>
   </View>
-  <View margin='small'>
+  <View margin='general.spaceMd'>
     <ColorIndicator color='#ff0000' shape='rectangle'/>
   </View>
-</div>
+</View>
 ```
 
 ### Color Button Pattern
@@ -95,6 +95,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { ColorIndicator } from '@instructure/ui-color-picker'
+import { ColorIndicator } from '@instructure/ui-color-picker/v11_7'
 ```
 

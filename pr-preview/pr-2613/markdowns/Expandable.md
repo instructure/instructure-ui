@@ -53,6 +53,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { Expandable } from '@instructure/ui-expandable'
+import { Expandable } from '@instructure/ui-expandable/v11_7'
 ```
 

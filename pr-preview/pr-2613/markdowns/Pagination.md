@@ -25,7 +25,7 @@ const Example = () => {
   return (
     <Pagination
       as="nav"
-      margin="small"
+      margin="general.spaceMd"
       variant="compact"
       labelNext="Next Page"
       labelPrev="Previous Page"
@@ -53,7 +53,7 @@ const Example = () => {
   return (
     <Pagination
       as="nav"
-      margin="small"
+      margin="general.spaceMd"
       variant="compact"
       labelNext="Next Page"
       labelPrev="Previous Page"
@@ -83,7 +83,7 @@ const Example = () => {
   return (
     <Pagination
       as="nav"
-      margin="small"
+      margin="general.spaceMd"
       variant="full"
       labelNext="Next Page"
       labelPrev="Previous Page"
@@ -113,7 +113,7 @@ const Example = () => {
   return (
     <Pagination
       as="nav"
-      margin="small"
+      margin="general.spaceMd"
       variant="full"
       labelNext="Next Page"
       labelPrev="Previous Page"
@@ -142,7 +142,7 @@ const Example = () => {
   return (
     <Pagination
       as="nav"
-      margin="small"
+      margin="general.spaceMd"
       variant="input"
       labelNext="Next Page"
       labelPrev="Previous Page"
@@ -195,7 +195,7 @@ class Example extends React.Component {
     return (
       <Pagination
         as="nav"
-        margin="small"
+        margin="general.spaceMd"
         variant="compact"
         labelNext="Next Page"
         labelPrev="Previous Page"
@@ -247,7 +247,7 @@ class Example extends React.Component {
     return (
       <Pagination
         as="nav"
-        margin="small"
+        margin="general.spaceMd"
         variant="compact"
         labelNext="Next Page"
         labelPrev="Previous Page"
@@ -303,7 +303,7 @@ class Example extends React.Component {
     return (
       <Pagination
         as="nav"
-        margin="small"
+        margin="general.spaceMd"
         variant="input"
         labelFirst="First Page"
         labelPrev="Previous Page"
@@ -370,7 +370,7 @@ class Example extends React.Component {
 
         <Pagination
           as="nav"
-          margin="large small small"
+          margin="general.space2xl general.spaceMd general.spaceMd"
           variant="compact"
           labelNext="Next Page"
           labelPrev="Previous Page"
@@ -436,7 +436,7 @@ type: embed
 ) => `Select page (${currentPage} of ${numberOfPages})`` | ScreenReaderLabel for number input (__only__ for `input` variant) |
 | Pagination | screenReaderLabelPageButton | `( currentPage: number, totalPageNumber: number ) => string` | No | - | ScreenReaderLabel for page number buttons (__only__ for `full` and `compact variants) |
 | Pagination | variant | `'full' \| 'compact' \| 'input'` | No | `'full'` | The compact variant truncates the page navigation to show only the first, last, and pages immediately surrounding the current page. Fewer than 5 pages, no next/previous arrow buttons will be shown, and all pages will be listed |
-| Pagination | margin | `Spacing` | No | `'space8'` | Spacing token values can be found here: [Spacing Tokens](https://instructure.design/#layout-spacing/%23Tokens) Apply these values via familiar CSS-like shorthand. For example: `margin="space8 0 space12"`. |
+| Pagination | margin | `Spacing` | No | `'space8'` | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`. |
 | Pagination | as | `AsElementType` | No | `'div'` | the element type to render as |
 | Pagination | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
 | Pagination | inputRef | `(inputElement: HTMLInputElement \| null) => void` | No | - | provides a reference to the html input element (__only__ for `input` variant) |
@@ -477,6 +477,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { Pagination } from '@instructure/ui-pagination'
+import { Pagination } from '@instructure/ui-pagination/v11_7'
 ```
 

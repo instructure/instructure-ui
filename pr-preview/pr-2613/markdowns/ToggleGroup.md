@@ -15,7 +15,7 @@ type: example
   summary="This is the summary"
   background="default"
 >
-  <View display="block" padding="small">Here is the expanded content</View>
+  <View display="block" padding="general.spaceMd">Here is the expanded content</View>
 </ToggleGroup>
 ```
 
@@ -32,7 +32,7 @@ type: example
   summary="This is the summary"
   defaultExpanded
 >
-  <View display="block" padding="small">This content is expanded when the component renders</View>
+  <View display="block" padding="general.spaceMd">This content is expanded when the component renders</View>
 </ToggleGroup>
 ```
 
@@ -45,10 +45,10 @@ type: example
 <ToggleGroup
   toggleLabel="This is the toggle button label for screenreaders"
   summary="This is the summary"
-  iconExpanded={IconXSolid}
-  icon={IconPlusSolid}
+  iconExpanded={XInstUIIcon}
+  icon={PlusInstUIIcon}
 >
-  <View display="block" padding="small">Here is the expanded content</View>
+  <View display="block" padding="general.spaceMd">Here is the expanded content</View>
 </ToggleGroup>
 ```
 
@@ -63,7 +63,7 @@ type: example
   toggleLabel="This is the toggle button label for screenreaders"
   summary="This is the summary"
 >
-  <View display="block" padding="small">This content will not fade in</View>
+  <View display="block" padding="general.spaceMd">This content will not fade in</View>
 </ToggleGroup>
 ```
 
@@ -84,7 +84,7 @@ type: example
     summary="I am nested inside a parent ToggleGroup"
     border={false}
   >
-    <View display="block" padding="small">
+    <View display="block" padding="general.spaceMd">
       This is the details section of the nested ToggleGroup
     </View>
   </ToggleGroup>
@@ -105,8 +105,8 @@ type: example
 | ToggleGroup | expanded | `boolean` | No | - | Whether the content is expanded or hidden |
 | ToggleGroup | defaultExpanded | `boolean` | No | `false` | Whether the content is initially expanded or hidden (uncontrolled) |
 | ToggleGroup | onToggle | `(event: React.MouseEvent, expanded: boolean) => void` | No | - | Fired when the content display is toggled |
-| ToggleGroup | icon | `Renderable` | No | `IconArrowOpenEndSolid` | The icon displayed in the toggle button when the content is hidden |
-| ToggleGroup | iconExpanded | `Renderable` | No | `IconArrowOpenDownSolid` | The icon displayed in the toggle button when the content is showing |
+| ToggleGroup | icon | `Renderable` | No | `ChevronRightInstUIIcon` | The icon displayed in the toggle button when the content is hidden |
+| ToggleGroup | iconExpanded | `Renderable` | No | `ChevronDownInstUIIcon` | The icon displayed in the toggle button when the content is showing |
 | ToggleGroup | transition | `boolean` | No | `true` | Transition content into view |
 | ToggleGroup | border | `boolean` | No | `true` | Toggle the border around the component |
 
@@ -122,6 +122,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { ToggleGroup } from '@instructure/ui-toggle-details'
+import { ToggleGroup } from '@instructure/ui-toggle-details/v11_7'
 ```
 

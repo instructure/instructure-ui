@@ -33,10 +33,10 @@ type: example
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| Metric | textAlign | `'start' \| 'center' \| 'end'` | No | `'center'` |  |
+| Metric | textAlign | `'start' \| 'center' \| 'end'` | No | - |  |
 | Metric | renderLabel | `Renderable` | No | - |  |
 | Metric | renderValue | `Renderable` | No | - |  |
-| Metric | isGroupChild | `boolean` | No | `false` | Set to true when a child of MetricGroup so the appropriate aria labels get set |
+| Metric | isGroupChild | `boolean` | No | - | Set to true when a child of MetricGroup so the appropriate aria labels get set |
 
 ### Usage
 
@@ -50,6 +50,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { Metric } from '@instructure/ui-metric'
+import { Metric } from '@instructure/ui-metric/v11_7'
 ```
 
