@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.4](https://github.com/instructure/instructure-ui/compare/v11.7.3...v11.7.4) (2026-07-24)
+
+
+### Bug Fixes
+
+* **ui-babel-preset:** fix Cannot find package 'core-js' errors ([a46ce2e](https://github.com/instructure/instructure-ui/commit/a46ce2e8c517d1a30f7d159fe84f1a50ce5fdf75))
+
+
+### Performance Improvements
+
+* **__docs__,ui-babel-preset:** speed up and quiet the docs dev server ([849a012](https://github.com/instructure/instructure-ui/commit/849a01209b9e6310786402f10d9d69189dc99e1c))
+
+
+
+
+
 ## [11.7.3](https://github.com/instructure/instructure-ui/compare/v11.7.2...v11.7.3) (2026-05-07)
 
 

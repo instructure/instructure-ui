@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.4](https://github.com/instructure/instructure-ui/compare/v11.7.3...v11.7.4) (2026-07-24)
+
+
+### Bug Fixes
+
+* **many:** keep form field messages out of the control's accessible name ([409d077](https://github.com/instructure/instructure-ui/commit/409d077a3095b318fd7d2e150bb01bc2732c9bf5))
+* **many:** only reference rendered messages via aria-describedby ([ccc9516](https://github.com/instructure/instructure-ui/commit/ccc95165ec8dae6d06e001c0a20fcebef1cf9962))
+
+
+### Features
+
+* **ui-checkbox:** add aria-invalid attribute to Checkbox when validation errors are present ([8301bf9](https://github.com/instructure/instructure-ui/commit/8301bf9f2e2b5e498b601c064d02d9d3f8f4b863))
+
+
+
+
+
 ## [11.7.3](https://github.com/instructure/instructure-ui/compare/v11.7.2...v11.7.3) (2026-05-07)
 
 

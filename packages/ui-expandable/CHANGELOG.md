@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.4](https://github.com/instructure/instructure-ui/compare/v11.7.3...v11.7.4) (2026-07-24)
+
+
+### Bug Fixes
+
+* **ui-expandable:** remove unused cross-package dependencies ([444f067](https://github.com/instructure/instructure-ui/commit/444f067a10a825ed102be42c6947d5be3d6efbec))
+
+
+### Features
+
+* **many:** add prop most shared tokens to prop options in view ([a08bb3e](https://github.com/instructure/instructure-ui/commit/a08bb3e15759681c5247c8bf27b7a87fa0766dde))
+
+
+
+
+
 ## [11.7.3](https://github.com/instructure/instructure-ui/compare/v11.7.2...v11.7.3) (2026-05-07)
 
 

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.4](https://github.com/instructure/instructure-ui/compare/v11.7.3...v11.7.4) (2026-07-24)
+
+
+### Bug Fixes
+
+* **many:** do not allow javascript: and data: hrefs ([4a0ac03](https://github.com/instructure/instructure-ui/commit/4a0ac038c6a4102646e04d27c1c3251f97367822))
+* **ui-side-nav-bar:** show focus ring on selected item ([0dad569](https://github.com/instructure/instructure-ui/commit/0dad569e2d8e60481465893938ed93121c6d4d08))
+
+
+
+
+
 ## [11.7.3](https://github.com/instructure/instructure-ui/compare/v11.7.2...v11.7.3) (2026-05-07)
 
 

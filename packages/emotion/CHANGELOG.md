@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.4](https://github.com/instructure/instructure-ui/compare/v11.7.3...v11.7.4) (2026-07-24)
+
+
+### Bug Fixes
+
+* **emotion:** propagate resolved component theme override to wrapped component ([446e820](https://github.com/instructure/instructure-ui/commit/446e8205cb7eb8282af565530d5f82a9f2355dfa))
+
+
+### Features
+
+* **emotion,ui-scripts:** resolve tokens studio color modifiers and emit hex ([99141c0](https://github.com/instructure/instructure-ui/commit/99141c036c6a353c25200c57e2cd68a1bc1b8205))
+* **emotion:** support alpha color modifier in applyColorModifiers ([c1643b3](https://github.com/instructure/instructure-ui/commit/c1643b3de2f0be084a042d8fd9478b963907da77))
+* **many:** add prop most shared tokens to prop options in view ([a08bb3e](https://github.com/instructure/instructure-ui/commit/a08bb3e15759681c5247c8bf27b7a87fa0766dde))
+* **many:** support current spacing tokens in the margin prop for v2 components ([1b47c5f](https://github.com/instructure/instructure-ui/commit/1b47c5f23eaa60b532cdfd53c39bd71f0cf51aaa))
+* **ui-scripts:** refactor theme type generation and fix token fetching script ([ab0536f](https://github.com/instructure/instructure-ui/commit/ab0536f81ffe9ae60f8b8cdc5038f4f323314416))
+
+
+
+
+
 ## [11.7.3](https://github.com/instructure/instructure-ui/compare/v11.7.2...v11.7.3) (2026-05-07)
 
 

@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.4](https://github.com/instructure/instructure-ui/compare/v11.7.3...v11.7.4) (2026-07-24)
+
+
+### Bug Fixes
+
+* **many:** import cross-package deps from /latest in v2 components ([7ff3718](https://github.com/instructure/instructure-ui/commit/7ff3718be3f26188afd5027f4ebdbaf21bcdb1d4))
+* **ui-drilldown:** disabled options no longer show hover/focus styles ([9c9e8bb](https://github.com/instructure/instructure-ui/commit/9c9e8bbaa69f081708139a53797d263a9fc5266b))
+
+
+### Features
+
+* **many:** support current spacing tokens in the margin prop for v2 components ([1b47c5f](https://github.com/instructure/instructure-ui/commit/1b47c5f23eaa60b532cdfd53c39bd71f0cf51aaa))
+
+
+
+
+
 ## [11.7.3](https://github.com/instructure/instructure-ui/compare/v11.7.2...v11.7.3) (2026-05-07)
 
 

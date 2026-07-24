@@ -3,6 +3,56 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.4](https://github.com/instructure/instructure-ui/compare/v11.7.3...v11.7.4) (2026-07-24)
+
+
+### Bug Fixes
+
+* **emotion:** propagate resolved component theme override to wrapped component ([446e820](https://github.com/instructure/instructure-ui/commit/446e8205cb7eb8282af565530d5f82a9f2355dfa))
+
+
+### Features
+
+* **many:** remove deprecated v2 items ([eaf8876](https://github.com/instructure/instructure-ui/commit/eaf88767c9beb95c4e09ee5705c387dfd79e4cb7))
+* **many:** support current spacing tokens in the margin prop for v2 components ([1b47c5f](https://github.com/instructure/instructure-ui/commit/1b47c5f23eaa60b532cdfd53c39bd71f0cf51aaa))
+
+
+### BREAKING CHANGES
+
+* **many:** Removed FormFieldLabel component
+
+Removed _content prop from DrawerLayout.Tray and DrawerLayout.Content
+
+Removed _link prop from Link
+
+Removed _node prop from Menu.Item
+
+Removed _root prop from Pagination, TreeBrowser
+
+Removed _select prop from SimpleSelect and TimeSelect
+
+Removed _ref prop from TruncateText
+
+Removed _element prop from View
+
+Removed color="ai" from Heading
+
+Removed variant="inline-small" and variant="standalone-small" from Link
+
+Removed title prop from Tag
+
+Removed focusRingBorderRadius prop from View
+
+Removed hideActionsUserSeparator prop from TopNavBar.Layout
+
+Removed handleFocusOutlineColor, handleFocusOutlineWidth, handleShadowColor from RangeInput
+
+INSTUI-5025
+
+
+
+
+
 ## [11.7.3](https://github.com/instructure/instructure-ui/compare/v11.7.2...v11.7.3) (2026-05-07)
 
 

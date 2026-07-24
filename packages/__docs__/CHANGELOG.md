@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.4](https://github.com/instructure/instructure-ui/compare/v11.7.3...v11.7.4) (2026-07-24)
+
+
+### Bug Fixes
+
+* **docs-app:** version-aware theme-override link and prop-table readability ([d1ac78c](https://github.com/instructure/instructure-ui/commit/d1ac78cfaca5ad20eef2b7d2d195a477c5aeceb5))
+* **many:** do not allow javascript: and data: hrefs ([4a0ac03](https://github.com/instructure/instructure-ui/commit/4a0ac038c6a4102646e04d27c1c3251f97367822))
+* **ui-billboard:** point icons doc links at valid icons pages ([bcfd452](https://github.com/instructure/instructure-ui/commit/bcfd4526ba358731a923fef36dba7273069f1885))
+* **ui-dialog,ui-date-input,ui-calendar:** add aria-live to calendar header, descriptive nav button labels with target month, aria-modal on focused dialogs ([ac11880](https://github.com/instructure/instructure-ui/commit/ac11880013be74f148558671177ed25c9286204f))
+
+
+### Features
+
+* **ui-grid,ui-form-field:** breakpoints are set from sharedTokens ([3ac1e64](https://github.com/instructure/instructure-ui/commit/3ac1e64e00c5cb29c342879fd596b34f1b1fbb35))
+
+
+### Performance Improvements
+
+* **__docs__,ui-babel-preset:** speed up and quiet the docs dev server ([849a012](https://github.com/instructure/instructure-ui/commit/849a01209b9e6310786402f10d9d69189dc99e1c))
+
+
+
+
+
 ## [11.7.3](https://github.com/instructure/instructure-ui/compare/v11.7.2...v11.7.3) (2026-05-07)
 
 

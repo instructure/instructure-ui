@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.4](https://github.com/instructure/instructure-ui/compare/v11.7.3...v11.7.4) (2026-07-24)
+
+
+### Bug Fixes
+
+* **ui-date-input:** add missing Button dependency ([b9ff437](https://github.com/instructure/instructure-ui/commit/b9ff43752e8797a4f1ff6e61760626dee015e81c))
+* **ui-date-input:** add scrollbar to dateinput v2 ([84f11c1](https://github.com/instructure/instructure-ui/commit/84f11c1c5638f9a91946b29125869115f66c5f0f))
+* **ui-dialog,ui-date-input,ui-calendar:** add aria-live to calendar header, descriptive nav button labels with target month, aria-modal on focused dialogs ([ac11880](https://github.com/instructure/instructure-ui/commit/ac11880013be74f148558671177ed25c9286204f))
+
+
+
+
+
 ## [11.7.3](https://github.com/instructure/instructure-ui/compare/v11.7.2...v11.7.3) (2026-05-07)
 
 

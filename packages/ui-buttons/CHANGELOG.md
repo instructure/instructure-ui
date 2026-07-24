@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.4](https://github.com/instructure/instructure-ui/compare/v11.7.3...v11.7.4) (2026-07-24)
+
+
+### Bug Fixes
+
+* **many:** do not allow javascript: and data: hrefs ([4a0ac03](https://github.com/instructure/instructure-ui/commit/4a0ac038c6a4102646e04d27c1c3251f97367822))
+* **ui-buttons:** fix ai-secondary button size diff ([d559a3f](https://github.com/instructure/instructure-ui/commit/d559a3f5444ac70ef4f037f8810336825fb5e795))
+* **ui-buttons:** fix buttons disabled style and color ([2f2f7b0](https://github.com/instructure/instructure-ui/commit/2f2f7b04c7d666aef0e76054c9f722dab9f679e7))
+* **ui-table:** fix caption for table to be responsive to sorting ([aac2b17](https://github.com/instructure/instructure-ui/commit/aac2b1790f970a1e8e2d959723eb0e4248105dd2))
+
+
+### Features
+
+* **many:** support current spacing tokens in the margin prop for v2 components ([1b47c5f](https://github.com/instructure/instructure-ui/commit/1b47c5f23eaa60b532cdfd53c39bd71f0cf51aaa))
+
+
+
+
+
 ## [11.7.3](https://github.com/instructure/instructure-ui/compare/v11.7.2...v11.7.3) (2026-05-07)
 
 

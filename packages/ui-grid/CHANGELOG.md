@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.4](https://github.com/instructure/instructure-ui/compare/v11.7.3...v11.7.4) (2026-07-24)
+
+
+### Bug Fixes
+
+* **ui-grid:** drop removed Grid component type from v2 props ([d7510c8](https://github.com/instructure/instructure-ui/commit/d7510c819471f3bb0c783250234273412b38e8de))
+
+
+### Features
+
+* **ui-grid,ui-form-field:** breakpoints are set from sharedTokens ([3ac1e64](https://github.com/instructure/instructure-ui/commit/3ac1e64e00c5cb29c342879fd596b34f1b1fbb35))
+
+
+
+
+
 ## [11.7.3](https://github.com/instructure/instructure-ui/compare/v11.7.2...v11.7.3) (2026-05-07)
 
 
