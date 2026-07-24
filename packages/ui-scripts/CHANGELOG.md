@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.4](https://github.com/instructure/instructure-ui/compare/v11.7.3...v11.7.4) (2026-07-24)
+
+
+### Bug Fixes
+
+* **ui-badge,ui-scripts:** use primaryTextColor for primary badge text ([a1adc22](https://github.com/instructure/instructure-ui/commit/a1adc22e23a8ad4e102f3fb9fa3d6e8a9b6706a9))
+
+
+### Features
+
+* **emotion,ui-scripts:** resolve tokens studio color modifiers and emit hex ([99141c0](https://github.com/instructure/instructure-ui/commit/99141c036c6a353c25200c57e2cd68a1bc1b8205))
+* **ui-scripts:** add publish-private command for private-registry releases ([eefa5bd](https://github.com/instructure/instructure-ui/commit/eefa5bd7a97434ef90f4c1bc981dd3f23f0bd0d0))
+* **ui-scripts:** allow pr-snapshot to publish at an operator-supplied prerelease version ([c334beb](https://github.com/instructure/instructure-ui/commit/c334beb58bbe6f45b80de45f35f8f2b4ec2238f3))
+* **ui-scripts:** refactor theme type generation and fix token fetching script ([ab0536f](https://github.com/instructure/instructure-ui/commit/ab0536f81ffe9ae60f8b8cdc5038f4f323314416))
+
+
+
+
+
 ## [11.7.3](https://github.com/instructure/instructure-ui/compare/v11.7.2...v11.7.3) (2026-05-07)
 
 

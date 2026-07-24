@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.4](https://github.com/instructure/instructure-ui/compare/v11.7.3...v11.7.4) (2026-07-24)
+
+
+### Bug Fixes
+
+* **ui-modal:** add whitespace between header text nodes in scroll body aria-label ([350e841](https://github.com/instructure/instructure-ui/commit/350e841666bc5635a7e130bef1a82bd1583048be))
+* **ui-modal:** restore Modal open/close transition animation ([ef6b3d1](https://github.com/instructure/instructure-ui/commit/ef6b3d14de2db187934b4e7a54276ee38fce6b0b))
+* **ui-modal:** skip Modal.Body tab stop when it has focusable children ([25e4261](https://github.com/instructure/instructure-ui/commit/25e42617898fa6584da0b33eed589e2710875570))
+
+
+### Features
+
+* **many:** support current spacing tokens in the margin prop for v2 components ([1b47c5f](https://github.com/instructure/instructure-ui/commit/1b47c5f23eaa60b532cdfd53c39bd71f0cf51aaa))
+* **ui-modal:** on larger screens, inset the fullscreen modal from the viewport edge for a11y ([e36b2b5](https://github.com/instructure/instructure-ui/commit/e36b2b586ce24b38d77144f7118169f9249bad29))
+
+
+
+
+
 ## [11.7.3](https://github.com/instructure/instructure-ui/compare/v11.7.2...v11.7.3) (2026-05-07)
 
 

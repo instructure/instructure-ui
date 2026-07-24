@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-date-input",
-  "version": "11.7.3",
+  "version": "11.7.4",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -24,6 +24,8 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.29.7",
+    "@instructure/emotion": "workspace:*",
+    "@instructure/shared-types": "workspace:*",
     "@instructure/ui-buttons": "workspace:*",
     "@instructure/ui-calendar": "workspace:*",
     "@instructure/ui-form-field": "workspace:*",
@@ -34,9 +36,7 @@
     "@instructure/ui-react-utils": "workspace:*",
     "@instructure/ui-selectable": "workspace:*",
     "@instructure/ui-text-input": "workspace:*",
-    "@instructure/ui-utils": "workspace:*",
-    "@instructure/emotion": "workspace:*",
-    "@instructure/shared-types": "workspace:*"
+    "@instructure/ui-utils": "workspace:*"
   },
   "devDependencies": {
     "@instructure/ui-babel-preset": "workspace:*",

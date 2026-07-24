@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.4](https://github.com/instructure/instructure-ui/compare/v11.7.3...v11.7.4) (2026-07-24)
+
+
+### Bug Fixes
+
+* **ui-dialog,ui-date-input,ui-calendar:** add aria-live to calendar header, descriptive nav button labels with target month, aria-modal on focused dialogs ([ac11880](https://github.com/instructure/instructure-ui/commit/ac11880013be74f148558671177ed25c9286204f))
+* **ui-dialog:** allow consumers to override inherited border-radius ([68cb5ca](https://github.com/instructure/instructure-ui/commit/68cb5caccf982cd7f967e778dff5246490e76514))
+
+
+
+
+
 ## [11.7.3](https://github.com/instructure/instructure-ui/compare/v11.7.2...v11.7.3) (2026-05-07)
 
 

@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.4](https://github.com/instructure/instructure-ui/compare/v11.7.3...v11.7.4) (2026-07-24)
+
+
+### Bug Fixes
+
+* **ui-date-input:** add scrollbar to dateinput v2 ([84f11c1](https://github.com/instructure/instructure-ui/commit/84f11c1c5638f9a91946b29125869115f66c5f0f))
+
+
+### Features
+
+* **many:** add prop most shared tokens to prop options in view ([a08bb3e](https://github.com/instructure/instructure-ui/commit/a08bb3e15759681c5247c8bf27b7a87fa0766dde))
+* **many:** support current spacing tokens in the margin prop for v2 components ([1b47c5f](https://github.com/instructure/instructure-ui/commit/1b47c5f23eaa60b532cdfd53c39bd71f0cf51aaa))
+* **ui-popover:** add shouldScrollContent prop ([288c43a](https://github.com/instructure/instructure-ui/commit/288c43ac739035424417e56dbd6a4659f938a492))
+
+
+
+
+
 ## [11.7.3](https://github.com/instructure/instructure-ui/compare/v11.7.2...v11.7.3) (2026-05-07)
 
 

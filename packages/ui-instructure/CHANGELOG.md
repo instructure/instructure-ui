@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.4](https://github.com/instructure/instructure-ui/compare/v11.7.3...v11.7.4) (2026-07-24)
+
+
+### Bug Fixes
+
+* **ui-instructure:** align AiInformation lower-section heading levels to h4 ([d2b541b](https://github.com/instructure/instructure-ui/commit/d2b541b6b021db9aca201abdfd799921c64deb67))
+
+
+
+
+
 ## [11.7.3](https://github.com/instructure/instructure-ui/compare/v11.7.2...v11.7.3) (2026-05-07)
 
 

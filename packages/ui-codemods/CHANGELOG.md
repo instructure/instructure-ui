@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.4](https://github.com/instructure/instructure-ui/compare/v11.7.3...v11.7.4) (2026-07-24)
+
+
+### Features
+
+* **ui-codemods:** update tokens and move theme.componentOverrides to themeOverride.components ([7f94400](https://github.com/instructure/instructure-ui/commit/7f94400b25e32effc7b748d4c77ced7ecb1a70ef))
+
+
+
+
+
 ## [11.7.3](https://github.com/instructure/instructure-ui/compare/v11.7.2...v11.7.3) (2026-05-07)
 
 

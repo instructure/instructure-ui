@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.4](https://github.com/instructure/instructure-ui/compare/v11.7.3...v11.7.4) (2026-07-24)
+
+
+### Bug Fixes
+
+* **many:** do not allow javascript: and data: hrefs ([4a0ac03](https://github.com/instructure/instructure-ui/commit/4a0ac038c6a4102646e04d27c1c3251f97367822))
+
+
+### Features
+
+* **many:** support current spacing tokens in the margin prop for v2 components ([1b47c5f](https://github.com/instructure/instructure-ui/commit/1b47c5f23eaa60b532cdfd53c39bd71f0cf51aaa))
+
+
+
+
+
 ## [11.7.3](https://github.com/instructure/instructure-ui/compare/v11.7.2...v11.7.3) (2026-05-07)
 
 

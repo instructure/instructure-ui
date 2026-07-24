@@ -3,6 +3,58 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.4](https://github.com/instructure/instructure-ui/compare/v11.7.3...v11.7.4) (2026-07-24)
+
+
+### Bug Fixes
+
+* **many:** keep form field messages out of the control's accessible name ([409d077](https://github.com/instructure/instructure-ui/commit/409d077a3095b318fd7d2e150bb01bc2732c9bf5))
+* **ui-form-field:** disable child inputs when FormFieldGroup is disabled ([d30fc64](https://github.com/instructure/instructure-ui/commit/d30fc642a3586f708d86ab570ae73086107e2695))
+
+
+### Features
+
+* **many:** remove deprecated v2 items ([eaf8876](https://github.com/instructure/instructure-ui/commit/eaf88767c9beb95c4e09ee5705c387dfd79e4cb7))
+* **many:** support current spacing tokens in the margin prop for v2 components ([1b47c5f](https://github.com/instructure/instructure-ui/commit/1b47c5f23eaa60b532cdfd53c39bd71f0cf51aaa))
+* **ui-grid,ui-form-field:** breakpoints are set from sharedTokens ([3ac1e64](https://github.com/instructure/instructure-ui/commit/3ac1e64e00c5cb29c342879fd596b34f1b1fbb35))
+
+
+### BREAKING CHANGES
+
+* **many:** Removed FormFieldLabel component
+
+Removed _content prop from DrawerLayout.Tray and DrawerLayout.Content
+
+Removed _link prop from Link
+
+Removed _node prop from Menu.Item
+
+Removed _root prop from Pagination, TreeBrowser
+
+Removed _select prop from SimpleSelect and TimeSelect
+
+Removed _ref prop from TruncateText
+
+Removed _element prop from View
+
+Removed color="ai" from Heading
+
+Removed variant="inline-small" and variant="standalone-small" from Link
+
+Removed title prop from Tag
+
+Removed focusRingBorderRadius prop from View
+
+Removed hideActionsUserSeparator prop from TopNavBar.Layout
+
+Removed handleFocusOutlineColor, handleFocusOutlineWidth, handleShadowColor from RangeInput
+
+INSTUI-5025
+
+
+
+
+
 ## [11.7.3](https://github.com/instructure/instructure-ui/compare/v11.7.2...v11.7.3) (2026-05-07)
 
 

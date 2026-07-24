@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.4](https://github.com/instructure/instructure-ui/compare/v11.7.3...v11.7.4) (2026-07-24)
+
+
+### Bug Fixes
+
+* **ui-select:** don't strip renderBeforeInput from the combobox accessible name ([28d5e24](https://github.com/instructure/instructure-ui/commit/28d5e24e65a24b1e706fb67407523537d5db78b8))
+* **ui-select:** fix screen reader labels on multiple select ([6cc240f](https://github.com/instructure/instructure-ui/commit/6cc240f38af252171954078a9adc603e2e776eb1))
+
+
+### Features
+
+* **many:** support current spacing tokens in the margin prop for v2 components ([1b47c5f](https://github.com/instructure/instructure-ui/commit/1b47c5f23eaa60b532cdfd53c39bd71f0cf51aaa))
+* **ui-text-input,ui-select:** add contentSpacing prop for even wrapped-tag padding in multiple Select ([0969a00](https://github.com/instructure/instructure-ui/commit/0969a007a16c41eb2b5acec5ba1e4722b8ae0ed4))
+
+
+
+
+
 ## [11.7.3](https://github.com/instructure/instructure-ui/compare/v11.7.2...v11.7.3) (2026-05-07)
 
 

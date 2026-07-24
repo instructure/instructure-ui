@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.4](https://github.com/instructure/instructure-ui/compare/v11.7.3...v11.7.4) (2026-07-24)
+
+
+### Bug Fixes
+
+* **many:** do not allow javascript: and data: hrefs ([4a0ac03](https://github.com/instructure/instructure-ui/commit/4a0ac038c6a4102646e04d27c1c3251f97367822))
+* **ui-utils,ui-svg-images:** isolate DOMPurify config from the shared singleton ([60e71f3](https://github.com/instructure/instructure-ui/commit/60e71f36842a01ed874f7a89b39d7d03afcc52ae))
+
+
+
+
+
 ## [11.7.3](https://github.com/instructure/instructure-ui/compare/v11.7.2...v11.7.3) (2026-05-07)
 
 
