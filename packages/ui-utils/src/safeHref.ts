@@ -48,15 +48,24 @@ const SAFE_SCHEMES = [
   'callto:',
   'cid:',
   'xmpp:',
+  'matrix:',
   'webcal:',
   'feed:',
   'geo:'
 ]
 
+/**
+ * Remove all control characters (e.g. line break, tab, escape) and trim the
+ * string
+ */
+function normalizeValue(value: string) {
+  // eslint-disable-next-line no-control-regex
+  return value.replace(/[\u0000-\u001F\u007F]/g, '').trim()
+}
+
 // Extract the scheme from a URL-ish value, or `null` if it has none.
 function extractScheme(value: string): string | null {
-  const normalized = value.replace(/[\t\n\r]/g, '').trim()
-  const schemeMatch = normalized.match(/^([a-zA-Z][a-zA-Z0-9+.-]*):/)
+  const schemeMatch = normalizeValue(value).match(/^([a-zA-Z][a-zA-Z0-9+.-]*):/)
   return schemeMatch ? schemeMatch[1].toLowerCase() + ':' : null
 }
 
@@ -74,7 +83,7 @@ const DATA_URI_TAGS: ReadonlyArray<[string, string]> = [
 // isn't, validate the scheme directly so server-rendered components don't
 // silently drop every href.
 function ssrSafeHref(value: string, tag: string, attr: string): boolean {
-  const normalized = value.replace(/[\t\n\r]/g, '').trim()
+  const normalized = normalizeValue(value)
   if (normalized === '') return true
   const firstChar = normalized.charAt(0)
   if (firstChar === '#' || firstChar === '/' || firstChar === '?') return true
@@ -110,7 +119,7 @@ function safeHref(
   tag: string,
   attr: string
 ): string | undefined {
-  if (href == null) return undefined
+  if (href == null || typeof href === 'undefined') return undefined
   const value = String(href)
 
   // Pre-check our scheme allowlist before DOMPurify, since DOMPurify's default
