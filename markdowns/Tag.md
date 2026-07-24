@@ -7,7 +7,7 @@ Use `<Tag />` to represent a category or group in a form.
 ---
 type: example
 ---
-<Tag text="Static" margin="0 xx-small 0 0" />
+<Tag text="Static" margin="0 general.spaceXs 0 0" />
 ```
 
 ### Dismissible
@@ -27,7 +27,7 @@ type: example
     </AccessibleContent>
   }
   dismissible
-  margin="0 xx-small 0 0"
+  margin="0 general.spaceXs 0 0"
   onClick={function () {
     alert("This Tag was dismissed")
   }}
@@ -46,7 +46,7 @@ type: example
   text="Dismissible Disabled"
   dismissible
   disabled
-  margin="0 xx-small 0 0"
+  margin="0 general.spaceXs 0 0"
   onClick={function () {
     alert("This Tag was dismissed. This shouldn't happen")
   }}
@@ -62,9 +62,9 @@ type: example
 type: example
 ---
 <div>
-  <Tag text="Small" size="small" margin="0 xx-small 0 0" />
-  <Tag text="Medium" margin="0 xx-small 0 0" />
-  <Tag text="Large" size="large" margin="0 xx-small 0 0" />
+  <Tag text="Small" size="small" margin="0 general.spaceXs 0 0" />
+  <Tag text="Medium" margin="0 general.spaceXs 0 0" />
+  <Tag text="Large" size="large" margin="0 general.spaceXs 0 0" />
 </div>
 ```
 
@@ -79,29 +79,6 @@ type: example
 <Tag
   text="Long string of text designed to trigger overflow"
 />
-```
-
-### Inline variant
-
-This variant is designed to look similar to the surrounding text.
-
-```js
----
-type: example
----
-<p>
-  This is an
-  <Tag
-    dismissible
-    onClick={() => alert('Tag dismissed')}
-    size="large"
-    text={<AccessibleContent alt="Remove 'inline'">
-      inline
-    </AccessibleContent>}
-    variant="inline"
-  />
-  tag.
-</p>
 ```
 
 ### Guidelines
@@ -124,15 +101,13 @@ type: embed
 |-----------|------|------|----------|---------|-------------|
 | Tag | className | `string` | No | - |  |
 | Tag | text | `string \| React.ReactNode` | Yes | - |  |
-| Tag | title | `string` | No | - | @deprecated since version 10 Use of the title attribute is highly problematic due to accessibility concerns |
 | Tag | disabled | `boolean` | No | `false` | Whether or not to disable the tag |
 | Tag | readOnly | `boolean` | No | `false` | Works just like disabled but keeps the same styles as if it were active |
 | Tag | dismissible | `boolean` | No | `false` |  |
-| Tag | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
+| Tag | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`. |
 | Tag | onClick | `(event: React.MouseEvent<ViewProps & Element>) => void` | No | - | If you add an onClick prop, Tag renders as a clickable button |
 | Tag | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to the underlying html root element |
 | Tag | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` |  |
-| Tag | variant | `'default' \| 'inline'` | No | `'default'` |  |
 
 ### Usage
 
@@ -146,6 +121,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { Tag } from '@instructure/ui-tag'
+import { Tag } from '@instructure/ui-tag/v11_7'
 ```
 

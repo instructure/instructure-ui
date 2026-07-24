@@ -33,8 +33,8 @@ type: example
       return (
         <Link
           href="#"
-          isWithinText={false}
-          renderIcon={IconArrowOpenStartLine}
+          variant="standalone"
+          renderIcon={ChevronLeftInstUIIcon}
         >
           <TruncateText>University of Utah Colleges</TruncateText>
         </Link>
@@ -51,7 +51,7 @@ Change the `size` prop to control the font-size of the breadcrumbs (default is `
 type: example
 ---
 <div>
-  <Breadcrumb size="small" label="breadcrumb" margin="none none medium">
+  <Breadcrumb size="small" label="breadcrumb" margin="none none general.spaceXl">
     <Breadcrumb.Link href="https://instructure.github.io/instructure-ui/">English 204</Breadcrumb.Link>
       <Breadcrumb.Link
         onClick={function () {
@@ -64,7 +64,7 @@ type: example
     <Breadcrumb.Link>Rabbit Is Rich</Breadcrumb.Link>
   </Breadcrumb>
   <View as="div" width="40rem">
-    <Breadcrumb label="breadcrumb" margin="none none medium">
+    <Breadcrumb label="breadcrumb" margin="none none general.spaceXl">
       <Breadcrumb.Link href="https://instructure.github.io/instructure-ui/">English 204</Breadcrumb.Link>
         <Breadcrumb.Link
           onClick={function () {
@@ -101,9 +101,9 @@ You can include icons in `Breadcrumb.Link`:
 type: example
 ---
 <Breadcrumb label="Breadcrumb with icons">
-  <Breadcrumb.Link renderIcon={<IconBankLine size="small" />} href="#Breadcrumb">Item Bank</Breadcrumb.Link>
-  <Breadcrumb.Link renderIcon={<IconClockLine size="small" />} onClick={() => {}}>History</Breadcrumb.Link>
-  <Breadcrumb.Link renderIcon={IconPlusLine} iconPlacement="end">New Question</Breadcrumb.Link>
+  <Breadcrumb.Link renderIcon={<FolderOpenInstUIIcon />} href="#Breadcrumb">Item Bank</Breadcrumb.Link>
+  <Breadcrumb.Link renderIcon={<Clock4InstUIIcon />} onClick={() => {}}>History</Breadcrumb.Link>
+  <Breadcrumb.Link renderIcon={<PlusInstUIIcon />} iconPlacement="end">New Question</Breadcrumb.Link>
 </Breadcrumb>
 ```
 
@@ -147,7 +147,7 @@ type: embed
 | Breadcrumb | children | `React.ReactNode` | No | `null` | children of type Breadcrumb.Link |
 | Breadcrumb | label | `string` | Yes | - | An accessible label for the navigation |
 | Breadcrumb | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` | Sets the font-size of the breadcrumb text |
-| Breadcrumb | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
+| Breadcrumb | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`. |
 | Breadcrumb.BreadcrumbLink | children | `React.ReactNode` | Yes | - | Content to render as the crumb, generally should be text. |
 | Breadcrumb.BreadcrumbLink | href | `string` | No | - | Link the crumb should direct to; if an href is provided, the crumb will render as a link |
 | Breadcrumb.BreadcrumbLink | onClick | `(event: React.MouseEvent<ViewOwnProps, MouseEvent>) => void` | No | - | If the Breadcrumb.Link has an onClick prop (and no href), it will render as a button |
@@ -169,6 +169,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { Breadcrumb } from '@instructure/ui-breadcrumb'
+import { Breadcrumb } from '@instructure/ui-breadcrumb/v11_7'
 ```
 

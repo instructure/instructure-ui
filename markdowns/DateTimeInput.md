@@ -31,9 +31,13 @@ type: example
           dateRenderLabel="Date"
           timeRenderLabel="Time"
           invalidDateTimeMessage="Invalid date!"
-          prevMonthLabel="Previous month"
-          nextMonthLabel="Next month"
-          selectedLabel="Selected"
+          screenReaderLabels={{
+            calendarIcon: 'Open calendar',
+            prevMonthButton: 'Previous month',
+            nextMonthButton: 'Next month',
+            datePickerDialog: 'Date picker dialog',
+            selectedLabel: 'Selected'
+          }}
           defaultValue="2018-01-18T13:30"
           layout="columns"
         />
@@ -78,11 +82,12 @@ type: example
     return (
       <div>
         <div style={{ marginBottom: '1em', fontStyle: 'italic' }}>
-          You entered:
-          <br />
-          {text}
+          <Text>
+            You entered:
+            <br />
+            {text}
+          </Text>
         </div>
-        <Text>Fields marked with an asterisk <span aria-hidden="true">(*)</span> are required.</Text>
         <div style={{ height: '14rem' }}>
           <DateTimeInput
             description={
@@ -91,9 +96,13 @@ type: example
             datePlaceholder="Choose"
             dateRenderLabel="Date"
             timeRenderLabel="Time"
-            prevMonthLabel="Previous month"
-            nextMonthLabel="Next month"
-            selectedLabel="Selected"
+            screenReaderLabels={{
+              calendarIcon: 'Open calendar',
+              prevMonthButton: 'Previous month',
+              nextMonthButton: 'Next month',
+              datePickerDialog: 'Date picker dialog',
+              selectedLabel: 'Selected'
+            }}
             onChange={onChange}
             layout="stacked"
             value={value}
@@ -121,8 +130,13 @@ type: example
   datePlaceholder="Choose a date"
   dateRenderLabel="Date"
   timeRenderLabel="Time"
-  prevMonthLabel='Previous month'
-  nextMonthLabel='Next month'
+  screenReaderLabels={{
+    calendarIcon: 'Open calendar',
+    prevMonthButton: 'Previous month',
+    nextMonthButton: 'Next month',
+    datePickerDialog: 'Date picker dialog',
+    selectedLabel: 'Selected'
+  }}
   invalidDateTimeMessage={(dvalue) => { return `'${dvalue} is not valid.` }}
   layout="columns"
   defaultValue="2018-01-18T13:30"
@@ -145,9 +159,13 @@ type: example
             datePlaceholder="Choose a date"
             dateRenderLabel="Date"
             timeRenderLabel="Time"
-            prevMonthLabel="Previous month"
-            nextMonthLabel="Next month"
-            selectedLabel="Selected"
+            screenReaderLabels={{
+              calendarIcon: 'Open calendar',
+              prevMonthButton: 'Previous month',
+              nextMonthButton: 'Next month',
+              datePickerDialog: 'Date picker dialog',
+              selectedLabel: 'Selected'
+            }}
             invalidDateTimeMessage={(dvalue) => {
               return `'${dvalue} is not valid.`
             }}
@@ -175,8 +193,13 @@ type: example
   timeRenderLabel="Time"
   invalidDateTimeMessage="Invalid date"
   disabledDateTimeMessage="Disabled date"
-  prevMonthLabel="Previous month"
-  nextMonthLabel="Next month"
+  screenReaderLabels={{
+    calendarIcon: 'Open calendar',
+    prevMonthButton: 'Previous month',
+    nextMonthButton: 'Next month',
+    datePickerDialog: 'Date picker dialog',
+    selectedLabel: 'Selected'
+  }}
   defaultValue="2022-04-08T13:30"
   layout="columns"
   disabledDates={['2022-04-01T13:30', '2022-04-03T13:30', '2022-04-04T13:30']}
@@ -219,9 +242,13 @@ type: example
           disabledDateTimeMessage={(rawDateValue) =>
             'Disabled date: ' + rawDateValue
           }
-          prevMonthLabel="Previous month"
-          nextMonthLabel="Next month"
-          selectedLabel="Selected"
+          screenReaderLabels={{
+            calendarIcon: 'Open calendar',
+            prevMonthButton: 'Previous month',
+            nextMonthButton: 'Next month',
+            datePickerDialog: 'Date picker dialog',
+            selectedLabel: 'Selected'
+          }}
           defaultValue="2022-04-08T13:30"
           layout="columns"
           disabledDates={getDisabledDates}
@@ -255,15 +282,19 @@ type: example
           dateRenderLabel="Date"
           timeRenderLabel="Time"
           invalidDateTimeMessage="Invalid date!"
-          prevMonthLabel="Previous month"
-          nextMonthLabel="Next month"
-          selectedLabel="Selected"
+          screenReaderLabels={{
+            calendarIcon: 'Open calendar',
+            prevMonthButton: 'Previous month',
+            nextMonthButton: 'Next month',
+            datePickerDialog: 'Date picker dialog',
+            selectedLabel: 'Selected'
+          }}
           value={date}
           onChange={(e, newDate) => setDate(newDate)}
           reset={(reset) => (resetFn.current = reset)}
         />
         <Button onClick={() => resetFn.current()}>Clear</Button>
-        <p>{date}</p>
+        <Text as="p">{date}</Text>
       </div>
     )
   }
@@ -277,11 +308,10 @@ type: example
 |-----------|------|------|----------|---------|-------------|
 | DateTimeInput | description | `React.ReactNode` | Yes | - | The label over the composite `DateTimeInput` component |
 | DateTimeInput | dateRenderLabel | `Renderable` | Yes | - | The label over the DateInput |
-| DateTimeInput | prevMonthLabel | `string` | Yes | - | The screen reader label for the calendar navigation header's prev month button |
-| DateTimeInput | nextMonthLabel | `string` | Yes | - | The screen reader label for the calendar navigation header's next month button |
+| DateTimeInput | screenReaderLabels | `{ calendarIcon: string prevMonthButton: string nextMonthButton: string datePickerDialog: string selectedLabel: string }` | Yes | - | Accessible labels for the calendar icon button, month navigation buttons, selected date, and date picker dialog. |
 | DateTimeInput | datePlaceholder | `string` | No | - | HTML placeholder text to display when the date input has no value. This should be hint text, not a label replacement. |
 | DateTimeInput | timePlaceholder | `string` | No | - | HTML placeholder text to display when the time input has no value. This should be hint text, not a label replacement. |
-| DateTimeInput | dateFormat | `string` | No | `'LL'` | The format of the date shown in the `DateInput` when a date is selected. Valid formats are compatible with [Moment formats](https://momentjs.com/docs/#/displaying/format/), including localized formats. If omitted, it will use 'LL' which is a localized date with full month, e.g. "August 6, 2014" |
+| DateTimeInput | dateFormat | `\| { parser: (input: string) => Date \| null formatter: (date: Date) => string } \| string` | No | - | Controls how the date is displayed in the input and parsed when the user types. When omitted, the locale determines the format. Pass a locale string (e.g. `"en-US"`) to use an alternate locale's format, or pass `{ parser, formatter }` functions for fully custom behaviour. |
 | DateTimeInput | timeRenderLabel | `Renderable` | Yes | - | The label over the time input |
 | DateTimeInput | timeStep | `5 \| 10 \| 15 \| 20 \| 30 \| 60` | No | `30` | The number of minutes to increment by when generating the allowable time options. |
 | DateTimeInput | timeFormat | `string` | No | - | The format of the time shown in the `TimeSelect` when a time is selected. Valid formats are compatible with [Moment formats](https://momentjs.com/docs/#/displaying/format/), including localized formats. If omitted, defers to the underlying `TimeSelect`'s default. |
@@ -296,7 +326,7 @@ type: example
 | DateTimeInput | colSpacing | `'none' \| 'small' \| 'medium' \| 'large'` | No | `'medium'` | Controls the spacing between the inputs when they are in a horizontal layout. |
 | DateTimeInput | value | `string` | No | - | An ISO 8601 formatted date string representing the current date-time (must be accompanied by an onChange prop). |
 | DateTimeInput | defaultValue | `string` | No | - | An ISO 8601 formatted date string to use if `value` isn't provided. |
-| DateTimeInput | renderWeekdayLabels | `( \| React.ReactNode \| ((...args: any[]) => React.ReactNode) )[]` | No | - | An array of labels containing the name of each day of the week. The visible portion of the label should be abbreviated (no longer than three characters). Note that screen readers will read this content preceding each date as the `<Calendar />` is navigated. Consider using [AccessibleContent](AccessibleContent) with the `alt` prop containing the full day name for assistive technologies and the children containing the abbreviation. ex. `[<AccessibleContent alt="Monday">Mon</AccessibleContent>, ...]` You must render set the starting day of the week to the one specified by the current locale (e.g. Sunday in the US, Monday in Germany), dates are already displayed this way. By default it will render accessible, localized, abbreviated weekdays with week starts according to the current locale. |
+| DateTimeInput | withYearPicker | `{ screenReaderLabel: string onRequestYearChange?: (e: SyntheticEvent, requestedYear: number) => void startYear: number endYear: number }` | No | - | If set, years can be picked from a dropdown in the calendar. screenReaderLabel: string // e.g.: i18n("pick a year") onRequestYearChange?: (e: React.SyntheticEvent, requestedYear: number) => void startYear: number // e.g.: 2001, sets the start year of the selectable list endYear: number // e.g.: 2030, sets the end year of the selectable list |
 | DateTimeInput | isRequired | `boolean` | No | `false` | Specifies if the input is required (its passed down to the native DOM elements). If its `true` then an empty input will produce an error message (`invalidDateTimeMessage`) |
 | DateTimeInput | interaction | `InteractionType` | No | - | Specifies if interaction with the input is enabled, disabled, or readonly. When "disabled", the input changes visibly to indicate that it cannot receive user interactions. When "readonly" the input still cannot receive user interactions but it keeps the same styles as if it were enabled. |
 | DateTimeInput | onChange | `(event: SyntheticEvent, isoValue?: string) => void` | No | - | Called when the date-time value has changed. The passed in parameters are: - *event*: The triggering event (which may be from the underlying `DateInput` or `TimeSelect`) - *isoValue*: The new date value in ISO8601 format, undefined if its invalid |
@@ -308,7 +338,6 @@ type: example
 | DateTimeInput | allowNonStepInput | `boolean` | No | `false` | Whether to allow the user to enter non-step divisible values in the time input field. Note that even if this is set to false one can enter non-step divisible values programmatically. The user will need to enter the value exactly (except for lower/uppercase) as specified by the `timeFormat` prop for it to be accepted. Default is `undefined` which equals to `false` |
 | DateTimeInput | initialTimeForNewDate | `string` | No | - | The default time to be prefilled if a day is selected. The time input has to be empty for this to be applied. An error is thrown if the time format is not HH:MM. |
 | DateTimeInput | reset | `(reset: () => void) => void` | No | - | Used for getting the internal reset function of DateTimeInput. If that function is called, the component will reset to its default inner state. The callback function will be called in componentDidMount NOTE: this won't call onChange, so you have to reset the value manually when calling reset |
-| DateTimeInput | selectedLabel | `string` | No | - | Screen reader label appended to the date label when the day is selected. Used to announce the selected state to assistive technologies. |
 
 ### Usage
 
@@ -322,6 +351,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { DateTimeInput } from '@instructure/ui-date-time-input'
+import { DateTimeInput } from '@instructure/ui-date-time-input/v11_7'
 ```
 

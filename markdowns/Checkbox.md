@@ -74,7 +74,7 @@ type: example
           checked={value.length === 3}
           indeterminate={value.length > 0 && value.length < 3}
         />
-        <View as="div" padding="0 0 0 medium">
+        <View as="div" padding="0 0 0 general.spaceXl">
           <Checkbox
             aria-labelledby="groupLabel eng203Label"
             label={<span id="eng203Label">English 203</span>}
@@ -86,7 +86,7 @@ type: example
             checked={value.indexOf('eng203') !== -1}
           />
         </View>
-        <View as="div" padding="0 0 0 medium">
+        <View as="div" padding="0 0 0 general.spaceXl">
           <Checkbox
             aria-labelledby="groupLabel sci101Label"
             label={<span id="sci101Label">Science 101</span>}
@@ -98,7 +98,7 @@ type: example
             checked={value.indexOf('sci101') !== -1}
           />
         </View>
-        <View as="div" padding="0 0 0 medium">
+        <View as="div" padding="0 0 0 general.spaceXl">
           <Checkbox
             aria-labelledby="groupLabel hist101Label"
             label={<span id="hist101Label">History 111</span>}
@@ -160,6 +160,10 @@ type: example
   variant="toggle"
 />
 ```
+
+### Querying checked state from the DOM
+
+The underlying `<input>` has a `data-checked` attribute (`"true"`, `"false"`, or `"mixed"` when indeterminate) that can be queried from the DOM to read the current state.
 
 ### Required Fields
 
@@ -233,6 +237,8 @@ type: embed
 | Checkbox | inputRef | `(inputElement: HTMLInputElement \| null) => void` | No | - | A function that provides a reference to the actual underlying input element |
 | Checkbox.CheckboxFacade | children | `React.ReactNode` | Yes | - |  |
 | Checkbox.CheckboxFacade | checked | `boolean` | No | `false` |  |
+| Checkbox.CheckboxFacade | disabled | `boolean` | No | `false` |  |
+| Checkbox.CheckboxFacade | readOnly | `boolean` | No | `false` |  |
 | Checkbox.CheckboxFacade | focused | `boolean` | No | `false` |  |
 | Checkbox.CheckboxFacade | hovered | `boolean` | No | `false` |  |
 | Checkbox.CheckboxFacade | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` |  |
@@ -243,6 +249,7 @@ type: embed
 | Checkbox.ToggleFacade | disabled | `boolean` | No | `false` |  |
 | Checkbox.ToggleFacade | readOnly | `boolean` | No | `false` |  |
 | Checkbox.ToggleFacade | focused | `boolean` | No | `false` |  |
+| Checkbox.ToggleFacade | hovered | `boolean` | No | `false` |  |
 | Checkbox.ToggleFacade | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` |  |
 | Checkbox.ToggleFacade | labelPlacement | `'top' \| 'start' \| 'end'` | No | `'end'` |  |
 | Checkbox.ToggleFacade | invalid | `boolean` | No | - | Indicate if the parent component (`Checkbox`) is invalid to set the style accordingly. |
@@ -259,6 +266,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { Checkbox } from '@instructure/ui-checkbox'
+import { Checkbox } from '@instructure/ui-checkbox/v11_7'
 ```
 

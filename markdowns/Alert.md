@@ -13,11 +13,17 @@ space above or below the alert.
 ---
 type: example
 ---
-<div>
+<InstUISettingsProvider theme={{
+    componentOverrides: {
+      "Alert": {
+        dangerIconBackground: 'purple'
+      }
+    }
+}}>
   <Alert
     variant="success"
     renderCloseButtonLabel="Close"
-    margin="small"
+    margin="general.spaceMd"
     transition="none"
     variantScreenReaderLabel="Success, "
   >
@@ -26,7 +32,7 @@ type: example
   <Alert
     variant="info"
     renderCloseButtonLabel="Close"
-    margin="small"
+    margin="general.spaceMd"
     variantScreenReaderLabel="Information, "
   >
     Sample info text. I will fade out if you close me.
@@ -34,7 +40,7 @@ type: example
   <Alert
     variant="error"
     renderCloseButtonLabel="Close"
-    margin="small"
+    margin="general.spaceMd"
     variantScreenReaderLabel="Error, "
   >
     Sample error text that continues for a while
@@ -44,12 +50,12 @@ type: example
   </Alert>
   <Alert
     variant="warning"
-    margin="small"
+    margin="general.spaceMd"
     variantScreenReaderLabel="Warning, "
   >
     Sample warning text. This alert is not dismissible and cannot be closed.
   </Alert>
-</div>
+</InstUISettingsProvider>
 ```
 
 The `timeout` prop can be used to automatically dismiss an alert after a time.
@@ -60,7 +66,7 @@ type: example
 ---
 <Alert
   variant="info"
-  margin="small"
+  margin="general.spaceMd"
   timeout={5000}
   variantScreenReaderLabel="Information, "
 >
@@ -112,14 +118,14 @@ const Example = () => {
       <Button onClick={addAlert}>Add Alert</Button>
       {alerts.map((alert) => {
         return (
-          <View key={alert.key} display="block" margin="small 0">
+          <View key={alert.key} display="block" margin="general.spaceMd 0">
             <Alert
               variant={alert.variant}
               renderCloseButtonLabel="Close"
               onDismiss={() => closeAlert(alert.key)}
               liveRegion={() => document.getElementById('flash-messages')}
               liveRegionPoliteness={alert.politeness}
-              margin="small 0"
+              margin="general.spaceMd 0"
             >
               This is {alert.politeness === 'polite' ? 'a' : 'an'}{' '}
               {alert.politeness} {alert.variant} alert
@@ -157,7 +163,7 @@ const Example = () => {
   return (
     <div>
       <Button onClick={changeMessage}>Change Message</Button>
-      <Button onClick={clearMessage} margin="0 0 0 small">
+      <Button onClick={clearMessage} margin="0 0 0 general.spaceMd">
         Clear Message
       </Button>
       <Alert
@@ -180,20 +186,20 @@ When Alerts are used inline, the shadow can be removed with the `hasShadow` prop
 ---
 type: example
 ---
-<View as="div" background="primary" padding="large">
+<View as="div" background="primary" padding="general.space2xl">
   <View
     as="div"
     background="primary"
-    padding="small medium"
+    padding="general.spaceMd general.spaceXl"
     borderWidth="small"
     borderRadius="small"
-    margin="x-small 0"
+    margin="general.spaceSm 0"
   >
     {lorem.paragraph()}
   </View>
   <Alert
     variant="info"
-    margin="x-small 0"
+    margin="general.spaceSm 0"
     renderCloseButtonLabel="Close"
     hasShadow={false}
   >
@@ -202,10 +208,10 @@ type: example
   <View
     as="div"
     background="primary"
-    padding="small medium"
+    padding="general.spaceMd general.spaceXl"
     borderWidth="small"
     borderRadius="small"
-    margin="x-small 0"
+    margin="general.spaceSm 0"
   >
     {lorem.paragraph()}
   </View>
@@ -260,13 +266,14 @@ type: embed
 | Alert | isLiveRegionAtomic | `boolean` | No | `false` | Value for the `aria-atomic` attribute. `aria-atomic` controls how much is read when a change happens. Should only the specific thing that changed be read or should the entire element be read. |
 | Alert | screenReaderOnly | `boolean` | No | `false` | If the alert should only be visible to screen readers |
 | Alert | timeout | `number` | No | `0` | Milliseconds until the Alert is dismissed automatically |
-| Alert | margin | `Spacing` | No | `'x-small 0'` | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
+| Alert | margin | `Spacing` | No | `'x-small 0'` | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`. |
 | Alert | renderCloseButtonLabel | `Renderable` | No | - | Close button label. Can be a React component |
 | Alert | onDismiss | `() => void` | No | - | Callback after the alert is closed |
 | Alert | transition | `'none' \| 'fade'` | No | `'fade'` | Transition used to make the alert appear and disappear |
 | Alert | open | `boolean` | No | `true` | if open transitions from truthy to falsey, it's a signal to close and unmount the alert. This is necessary to close the alert from the outside and still run the transition. |
 | Alert | hasShadow | `boolean` | No | `true` | If the alert should have a shadow. |
 | Alert | renderCustomIcon | `Renderable` | No | - | An icon, or function that returns an icon. Setting it will override the variant's icon. |
+| Alert | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
 
 ### Usage
 
@@ -280,6 +287,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { Alert } from '@instructure/ui-alerts'
+import { Alert } from '@instructure/ui-alerts/v11_7'
 ```
 

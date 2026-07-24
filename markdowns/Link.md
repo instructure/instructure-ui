@@ -9,24 +9,9 @@
 ---
 type: example
 ---
-  <div>
-<Text>The quick brown fox <Link href="https://instructure.github.io/instructure-ui/"
-                                themeOverride={{
-                                  focusOutlineColor: 'pink'
-                                }}>jumps</Link> over the lazy dog.</Text>
-<Link color="link-inverse" href="https://instructure.github.io/instructure-ui/">jumps</Link>
-</div>
-```
-
-```js
----
-type: example
----
-<View background="primary-inverse" as="div">
-  <Text color="primary-inverse">The quick brown fox <Link color="link-inverse" href="https://instructure.github.io/instructure-ui/" themeOverride={{
-    focusInverseIconOutlineColor: 'pink'
-  }}>jumps</Link> over the lazy dog.</Text>
-</View>
+<Link href="https://instructure.github.io/instructure-ui/" target="_blank">
+  Link text
+</Link>
 ```
 
 ### Controlled navigation
@@ -48,34 +33,66 @@ type: example
 </Link>
 ```
 
-### Variant
-
-In order to make it easy to get the most commonly used links, we have the variant prop. It will set all the necessary styles (fontSize, lineHeight, and textDecoration).
+If neither `href` nor `onClick` is provided, the Link will render as plain text (a `<span>` element) without interactive styling:
 
 ```js
 ---
 type: example
 ---
 <div>
-<div>
-In a line of text you should use the <Link variant="inline" renderIcon={<IconUserLine />} href="https://instructure.github.io/instructure-ui/">inline</Link> link variant.
+  <Text>This is a Link with no href or onClick: <Link>I look like plain text</Link></Text>
 </div>
+```
 
-<br></br>
-<div>
-<Text variant="contentSmall">In a line of text, where the text is smaller, use the <Link variant="inline-small"  renderIcon={<IconUserLine />} href="https://instructure.github.io/instructure-ui/">inline-small</Link> link variant
-</Text>
-</div>
+### Size
 
-<br></br>
-<div>
-If the link is standalone (not in a text), use the <code>standalone</code> <Link display="block" variant="standalone" renderIcon={<IconUserLine />} href="https://instructure.github.io/instructure-ui/">standalone</Link>
-</div>
+The `size` prop controls the font size, line height, and icon size, icon gap. Available sizes are `small`, `medium`, and `large`.
 
-<br></br>
+```js
+---
+type: example
+---
 <div>
-If the link is standalone (not in a text), but smaller, use the <code>standalone-small</code> <Link display="block" variant="standalone-small"  renderIcon={<IconUserLine />} href="https://instructure.github.io/instructure-ui/">standalone-small</Link>
+  <div>
+    <Link renderIcon={<DiamondInstUIIcon />} variant="standalone" href="https://instructure.github.io/instructure-ui/" size="small">
+      Link small
+    </Link>
+  </div>
+  <br />
+  <div>
+    <Link renderIcon={<DiamondInstUIIcon />} variant="standalone" href="https://instructure.github.io/instructure-ui/" size="medium">
+      Link medium
+    </Link>
+  </div>
+  <br />
+  <div>
+    <Link renderIcon={<DiamondInstUIIcon />} variant="standalone" href="https://instructure.github.io/instructure-ui/" size="large">
+      Link large
+    </Link>
+  </div>
+  <br />
 </div>
+```
+
+### Variant
+
+The `variant` prop controls the text decoration and intended use case. Available variants are `inline` (underlined, for use within text) and `standalone` (no underline, for standalone links).
+
+Use the `variant` prop in combination with the `size` prop to control both the appearance and size of the link.
+
+```js
+---
+type: example
+---
+<div>
+  <Text>
+    In a line of text you should use the <Link variant="inline" size="medium" renderIcon={<DiamondInstUIIcon />} href="https://instructure.github.io/instructure-ui/">inline</Link> link variant.
+  </Text>
+  <br />
+  <Text>
+    If the link is standalone (not in a text), use the <code>standalone</code> variant:
+    <Link variant="standalone" size="medium" renderIcon={<DiamondInstUIIcon />} href="https://instructure.github.io/instructure-ui/">standalone</Link>
+  </Text>
 </div>
 ```
 
@@ -89,24 +106,7 @@ to add margin to the top or bottom of Link, wrap it inside a `<View />`.
 ---
 type: example
 ---
-<Text>The quick brown fox <Link href="https://instructure.github.io/instructure-ui/" margin="0 small">jumps</Link> over the lazy dog.</Text>
-```
-
-### Underlines
-
-Link's primary use is inline with other content, which is why it is underlined by default. For rare situations where Link needs
-to appear without surrounding text, the default underline can be configured to only show on hover by making `isWithinText={false}`. **Note: this only applies when outside high contrast mode. When inside high contrast mode, the link will always have an underline.**
-
-```js
----
-type: example
----
-<Link
-  href="http://instructure.design"
-  isWithinText={false}
->
-  I have no default underline
-</Link>
+<Text>The quick brown fox <Link href="https://instructure.github.io/instructure-ui/" margin="0 general.spaceMd">jumps</Link> over the lazy dog.</Text>
 ```
 
 ### Truncating text
@@ -120,8 +120,7 @@ type: example
 ---
 <Link
   onClick={() => console.log('clicked')}
-  isWithinText={false}
-  renderIcon={<IconUserLine size="small" />}
+  renderIcon={<DiamondInstUIIcon />}
 >
   <TruncateText>{lorem.paragraph()}</TruncateText>
 </Link>
@@ -133,52 +132,67 @@ Use the `renderIcon` property to put an [icon](icons) inside a Link. To position
 icon _after_ the link text, change the `iconPlacement` property to `end`. You can also
 render a Link with just an icon. Don't forget to add text for screen readers, though.
 
-NOTE: if you want the icon to have the same `font-size` as the link, do not specify its `size`!
-
 ```js
 ---
 type: example
 ---
 <div>
-  <View as="div" margin="0 0 small">
-    <Link href="https://instructure.design" renderIcon={<IconUserLine size="small" />}>Icon before text</Link> with the quick brown fox
+  <View as="div" margin="0 0 general.spaceMd">
+    <Text>
+      <Link href="https://instructure.design" renderIcon={<DiamondInstUIIcon />}>Icon before text</Link> with the quick brown fox
+    </Text>
   </View>
-  <View as="div" margin="0 0 small">
-    This Link has an icon and displays inline with text. <Link
-      href="https://instructure.design"
-      renderIcon={<IconUserLine />}
-      iconPlacement="end"
-    >
-      Icon appears after Link text
-    </Link>. This is more text after the link.
+  <View as="div" margin="0 0 general.spaceMd">
+    <Text>
+      This Link has an icon and displays inline with text.
+      <Link
+        href="https://instructure.design"
+        renderIcon={<DiamondInstUIIcon />}
+        iconPlacement="end"
+      >
+        Icon appears after Link text
+      </Link>. This is more text after the link.
+    </Text>
   </View>
   <View as="div">
-    This Link consists of only an icon&nbsp;
-    <Link onClick={() => console.log('clicked!')} renderIcon={IconUserLine}>
-      <ScreenReaderContent>Descriptive text</ScreenReaderContent>
-    </Link>.
+    <Text>
+      This Link consists of only an icon&nbsp;
+      <Link onClick={() => console.log('clicked!')} renderIcon={<DiamondInstUIIcon />}>
+        <ScreenReaderContent>Descriptive text</ScreenReaderContent>
+      </Link>.
+    </Text>
   </View>
 </div>
 ```
 
 ### Theme overrides
 
-Examples showing how theme overrides work for Link:
+Examples showing how [theme overrides](new-theme-overrides) work for Link:
 
 ```js
 ---
 type: example
 ---
 <div>
-  <Text>The quick brown fox <Link
-    href="https://instructure.github.io/instructure-ui/"
+  <InstUISettingsProvider
     themeOverride={{
-      focusOutlineWidth: '0.5rem',
-      focusOutlineStyle: 'dashed',
-      focusOutlineBorderRadius: '0',
-      focusOutlineColor: 'pink'
-    }}>jumps</Link> over the lazy dog.
-  </Text>
+      sharedTokens: {
+        focusOutline: {
+          infoColor: 'pink',
+          width: '0.5rem'
+        }
+      }
+    }}
+  >
+    <Text>The quick brown fox <Link
+      href="https://instructure.github.io/instructure-ui/"
+      themeOverride={{
+        textColor: 'red',
+        textHoverColor: 'green',
+        fontWeight: 700
+      }}>jumps</Link> over the lazy dog.
+    </Text>
+  </InstUISettingsProvider>
 </div>
 ```
 
@@ -188,25 +202,27 @@ type: example
 ---
 <View background="primary-inverse" as="div">
   <Text color="primary-inverse">The quick brown fox <Link
-    color="link-inverse"
     href="https://instructure.github.io/instructure-ui/"
+    color="link"
     themeOverride={{
-      focusOutlineWidth: '0.5rem',
-      focusOutlineStyle: 'dashed',
-      focusOutlineBorderRadius: '0',
-      focusInverseOutlineColor: 'green'
+      textColor: 'red',
+      textHoverColor: 'magenta',
+      onColorTextColor: 'orange',
+      onColorTextHoverColor: 'lime',
+      fontWeight: 700
   }}
   >jumps</Link> over the lazy dog.</Text>
   <br />
   <Text color="primary-inverse">The quick brown fox <Link
-    color="link-inverse"
     href="https://instructure.github.io/instructure-ui/"
-    renderIcon={<IconUserLine />}
+    renderIcon={<LogOutInstUIIcon />}
+    color="link-inverse"
     themeOverride={{
-      focusOutlineWidth: '0.5rem',
-      focusOutlineStyle: 'dashed',
-      focusOutlineBorderRadius: '0',
-      focusInverseIconOutlineColor: 'red'
+      textColor: 'red',
+      textHoverColor: 'magenta',
+      onColorTextColor: 'orange',
+      onColorTextHoverColor: 'lime',
+      fontWeight: 700
   }}
   >jumps</Link> over the lazy dog.</Text>
 </View>
@@ -239,16 +255,16 @@ type: embed
 | Link | role | `string` | No | - | The ARIA role of the element. |
 | Link | forceButtonRole | `boolean` | No | `true` | If the Link has an onClick handler but is not a button element, force ARIA role to be "button". |
 | Link | interaction | `'enabled' \| 'disabled'` | No | `undefined` | Determines if the link is enabled or disabled |
-| Link | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
-| Link | renderIcon | `Renderable` | No | - | Add an SVG icon to the Link. Do not add icons directly as children. |
+| Link | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`. |
+| Link | renderIcon | `Renderable` | No | - | Add an SVG icon to the Link. Do not add icons directly as children. When using Lucide icons, Link will automatically pass the appropriate size prop based on the Link's size. |
 | Link | iconPlacement | `'start' \| 'end'` | No | `'start'` | Place the icon before or after the text in the Link. |
 | Link | display | `'auto' \| 'block' \| 'inline-block' \| 'flex' \| 'inline-flex'` | No | - | Set the CSS display property of the Link element. 'auto' sets no display property. |
-| Link | isWithinText | `boolean` | No | `true` | Set `false` to remove default underline if Link does not appear inline with text |
 | Link | onBlur | `(event: React.FocusEvent<ViewOwnProps>) => void` | No | - | Fires when the Link loses focus |
 | Link | onClick | `(event: React.MouseEvent<ViewOwnProps>) => void` | No | - | Fires when the Link is clicked |
 | Link | onFocus | `(event: React.FocusEvent<ViewOwnProps>) => void` | No | - | Fires when the Link gains focus |
 | Link | onMouseEnter | `(event: React.MouseEvent<ViewOwnProps>) => void` | No | - | Fires when the Link is hovered |
-| Link | variant | `'inline' \| 'inline-small' \| 'standalone' \| 'standalone-small'` | No | - | Sets pre-defined values for the component to achieve specific roles for the component |
+| Link | variant | `'inline' \| 'standalone'` | No | - | Sets pre-defined values for the component to achieve specific roles for the component - `inline` - `standalone` |
+| Link | size | `'small' \| 'medium' \| 'large'` | No | - | Sets the size of the link (font size, line height, and icon gap) |
 
 ### Usage
 
@@ -262,6 +278,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { Link } from '@instructure/ui-link'
+import { Link } from '@instructure/ui-link/v11_7'
 ```
 

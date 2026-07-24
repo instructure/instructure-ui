@@ -28,7 +28,7 @@ const Example = () => {
 
   const renderOptions = () => (
     <Flex alignItems="start">
-      <Flex.Item margin="small">
+      <Flex.Item margin="general.spaceMd">
         <RadioInputGroup
           name="layout"
           description="layout"
@@ -40,7 +40,7 @@ const Example = () => {
           <RadioInput label="stacked" value="stacked" />
         </RadioInputGroup>
       </Flex.Item>
-      <Flex.Item margin="small">
+      <Flex.Item margin="general.spaceMd">
         <Checkbox
           label="hover"
           checked={hover}
@@ -53,7 +53,7 @@ const Example = () => {
   return (
     <div>
       {renderOptions()}
-      <Table caption="Top rated movies" layout={layout} hover={hover}>
+      <Table caption={() => 'Top rated movies'} layout={layout} hover={hover}>
         <Table.Head>
           <Table.Row>
             <Table.ColHeader id="Rank">Rank</Table.ColHeader>
@@ -113,7 +113,7 @@ const Example = ({ headers, rows }) => {
     >
       {({ layout }) => (
         <div>
-          <Table caption="Top rated movies" layout={layout}>
+          <Table caption={() => 'Top rated movies'} layout={layout}>
             <Table.Head>
               <Table.Row>
                 {(headers || []).map(({ id, text, width, textAlign }) => (
@@ -297,7 +297,7 @@ const SortableTable = ({ caption, headers, rows }) => {
       summary="Set text-align for columns"
       background="default"
     >
-      <Table caption="Set text-align for columns">
+      <Table caption={() => 'Set text-align for columns'}>
         <Table.Head>{renderHeaderRow()}</Table.Head>
         <Table.Body>
           <Table.Row>
@@ -311,7 +311,7 @@ const SortableTable = ({ caption, headers, rows }) => {
                   }
                   name={`columnTextAlign_${headerId}`}
                   value={textAlign}
-                  margin="0 0 small"
+                  margin="0 0 general.spaceMd"
                   size="small"
                   onChange={(e, value) =>
                     handleColTextAlignChange(headerId, value)
@@ -345,7 +345,7 @@ const SortableTable = ({ caption, headers, rows }) => {
       {(props) => (
         <div>
           {props.layout !== 'stacked' && (
-            <View display="block" margin="0 0 medium">
+            <View display="block" margin="0 0 general.spaceXl">
               {renderOptions()}
             </View>
           )}
@@ -374,7 +374,11 @@ const SortableTable = ({ caption, headers, rows }) => {
 
 render(
   <SortableTable
-    caption="Top rated movies"
+    caption={(sortBy, sortDirection) =>
+      sortBy
+        ? `Top rated movies, sorted by ${sortBy} (${sortDirection})`
+        : 'Top rated movies'
+    }
     headers={[
       {
         id: 'rank',
@@ -491,7 +495,7 @@ const SelectableTable = ({
     >
       {(props) => (
         <div>
-          <View as="div" padding="small" background="primary-inverse">
+          <View as="div" padding="general.spaceMd" background="primary-inverse">
             {`${selected.size} of ${rowIds.length} selected`}
           </View>
           <Table caption={caption} {...props}>
@@ -613,7 +617,7 @@ const PaginatedTable = ({
           variant="compact"
           labelNext="Next Page"
           labelPrev="Previous Page"
-          margin="large"
+          margin="general.space2xl"
         >
           {Array.from(Array(pageCount), (item, index) => (
             <Pagination.Page
@@ -681,7 +685,11 @@ const renderRating = (rating) => (
 
 render(
   <SortableTable
-    caption="Top rated movies"
+    caption={(sortBy, sortDirection) =>
+      sortBy
+        ? `Top rated movies, sorted by ${sortBy} (${sortDirection})`
+        : 'Top rated movies'
+    }
     headers={[
       {
         id: 'Rank',
@@ -783,7 +791,7 @@ const Example = () => {
 
   const renderOptions = () => (
     <Flex alignItems="start">
-      <Flex.Item margin="small">
+      <Flex.Item margin="general.spaceMd">
         <RadioInputGroup
           name="layout2"
           description="layout2"
@@ -795,7 +803,7 @@ const Example = () => {
           <RadioInput label="stacked" value="stacked" />
         </RadioInputGroup>
       </Flex.Item>
-      <Flex.Item margin="small">
+      <Flex.Item margin="general.spaceMd">
         <Checkbox
           label="hover"
           checked={hover}
@@ -808,7 +816,7 @@ const Example = () => {
   return (
     <div>
       {renderOptions()}
-      <Table caption="Top rated movies" layout={layout} hover={hover}>
+      <Table caption={() => 'Top rated movies'} layout={layout} hover={hover}>
         <Table.Head>
           <Table.Row>
             <Table.ColHeader id="Rank">Rank</Table.ColHeader>
@@ -893,7 +901,7 @@ const Example = () => {
 
   const renderOptions = () => (
     <Flex alignItems="start">
-      <Flex.Item margin="small">
+      <Flex.Item margin="general.spaceMd">
         <RadioInputGroup
           name="Layout"
           description="Layout"
@@ -904,7 +912,7 @@ const Example = () => {
           <RadioInput label="fixed" value="fixed" />
         </RadioInputGroup>
       </Flex.Item>
-      <Flex.Item margin="small">
+      <Flex.Item margin="general.spaceMd">
         <Checkbox
           label="hover"
           checked={hover}
@@ -917,7 +925,7 @@ const Example = () => {
   return (
     <div>
       {renderOptions()}
-      <Table caption="Top rated movies" layout={layout} hover={hover}>
+      <Table caption={() => 'Top rated movies'} layout={layout} hover={hover}>
         <Table.Head>
           <CustomTableRow>
             <CustomTableCell scope="col">Rank</CustomTableCell>
@@ -1036,7 +1044,7 @@ const Example = () => {
 
   const renderOptions = () => (
     <Flex alignItems="start">
-      <Flex.Item margin="small">
+      <Flex.Item margin="general.spaceMd">
         <RadioInputGroup
           name="customStackedLayout"
           description="Layout"
@@ -1048,7 +1056,7 @@ const Example = () => {
           <RadioInput label="stacked" value="stacked" />
         </RadioInputGroup>
       </Flex.Item>
-      <Flex.Item margin="small">
+      <Flex.Item margin="general.spaceMd">
         <Checkbox
           label="hover"
           checked={hover}
@@ -1061,7 +1069,7 @@ const Example = () => {
   return (
     <div>
       {renderOptions()}
-      <Table caption="Top rated movies" layout={layout} hover={hover}>
+      <Table caption={() => 'Top rated movies'} layout={layout} hover={hover}>
         <Table.Head>
           <CustomTableRow>
             <CustomTableCell scope="col">Rank</CustomTableCell>
@@ -1136,8 +1144,8 @@ type: embed
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| Table | caption | `React.ReactNode` | Yes | - | Provide a screen reader friendly description. Anything passed to this prop will be wrapped by `<ScreenReaderContent>` when it is rendered. |
-| Table | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
+| Table | caption | `( sortByHeader: string, sortDirection: 'none' \| 'ascending' \| 'descending' ) => string` | Yes | - | Provide a screen reader friendly description. The returned string is wrapped by `<ScreenReaderContent>` when it is rendered. This is a function so consumers can build a localized caption that also reflects the current sort state. See {@link TableCaption}. |
+| Table | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`. |
 | Table | elementRef | `(element: Element \| null) => void` | No | - | Provide a reference to the underlying html element |
 | Table | hover | `boolean` | No | `false` | Highlight each row on hover |
 | Table | layout | `'auto' \| 'fixed' \| 'stacked'` | No | `'auto'` | `auto` lets the browser determine table column widths based on cell content, while `fixed` forces columns of equal width (sets the [tableLayout](https://developer.mozilla.org/en-US/docs/Web/CSS/table-layout) CSS prop to `fixed`). `stacked` renders table in one column to be more readable on narrow screens |
@@ -1174,6 +1182,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { Table } from '@instructure/ui-table'
+import { Table } from '@instructure/ui-table/v11_7'
 ```
 

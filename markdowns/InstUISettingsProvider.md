@@ -61,7 +61,10 @@ ReactDOM.render(
 
 #### Theme overrides
 
-There are multiple ways to override themes in InstUI. You can read about how these work on the dedicated docs page: [Using theme overrides](/#using-theme-overrides).
+There are multiple ways to override themes in InstUI. You can read about how these work on the dedicated docs pages:
+
+- [Legacy theme overrides](/#legacy-theme-overrides).
+- [New theme overrides](/#new-theme-overrides).
 
 ### Text direction management
 

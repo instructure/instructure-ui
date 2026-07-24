@@ -46,7 +46,7 @@ type: example
       on={['click', 'hover', 'focus']}
     >
       <IconButton
-        renderIcon={IconInfoLine}
+        renderIcon={<InfoInstUIIcon color="baseColor"/>}
         withBackground={false}
         withBorder={false}
         screenReaderLabel="Toggle Tooltip"
@@ -106,9 +106,9 @@ type: example
 ---
 const MyComponent = forwardRef((props, ref) => {
   return (
-    <div {...props} ref={ref} style={{ width: '10rem' }}>
+    <View background="primary" padding='general.spaceMd' {...props} ref={ref}>
       My custom component
-    </div>
+    </View>
   )
 })
 
@@ -175,6 +175,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { Tooltip } from '@instructure/ui-tooltip'
+import { Tooltip } from '@instructure/ui-tooltip/v11_7'
 ```
 

@@ -105,6 +105,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { Overlay } from '@instructure/ui-overlays'
+import { Overlay } from '@instructure/ui-overlays/v11_7'
 ```
 

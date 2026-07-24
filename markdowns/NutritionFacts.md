@@ -123,6 +123,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { NutritionFacts } from '@instructure/ui-instructure'
+import { NutritionFacts } from '@instructure/ui-instructure/v11_7'
 ```
 

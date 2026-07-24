@@ -30,6 +30,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { RGBAInput } from '@instructure/ui-color-picker'
+import { RGBAInput } from '@instructure/ui-color-picker/v11_7'
 ```
 
