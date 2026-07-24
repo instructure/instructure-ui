@@ -81,29 +81,6 @@ type: example
 />
 ```
 
-### Inline variant
-
-This variant is designed to look similar to the surrounding text.
-
-```js
----
-type: example
----
-<Text as="p">
-  This is an
-  <Tag
-    dismissible
-    onClick={() => alert('Tag dismissed')}
-    size="large"
-    text={<AccessibleContent alt="Remove 'inline'">
-      inline
-    </AccessibleContent>}
-    variant="inline"
-  />
-  tag.
-</Text>
-```
-
 ### Guidelines
 
 ```js
@@ -131,7 +108,6 @@ type: embed
 | Tag | onClick | `(event: React.MouseEvent<ViewProps & Element>) => void` | No | - | If you add an onClick prop, Tag renders as a clickable button |
 | Tag | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to the underlying html root element |
 | Tag | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` |  |
-| Tag | variant | `'default' \| 'inline'` | No | `'default'` |  |
 
 ### Usage
 
