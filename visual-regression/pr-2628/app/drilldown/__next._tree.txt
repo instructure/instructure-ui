@@ -1,3 +1,0 @@
-:HL["/visual-regression/pr-2628/app/_next/static/media/e4af272ccee01ff0-s.p.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
-:HL["/visual-regression/pr-2628/app/_next/static/css/41eca48bf803ed71.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"drilldown","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"SNhfwBy0ZuGXWu_xiLtLp"}
