@@ -23,10 +23,13 @@
  */
 import { useState } from 'react'
 import { Modal } from '@instructure/ui-modal/latest'
-import { Button, CloseButton } from '@instructure/ui-buttons/latest'
+import {
+  Button,
+  CloseButton,
+  CondensedButton
+} from '@instructure/ui-buttons/latest'
 import { Heading } from '@instructure/ui-heading/latest'
 import { Text } from '@instructure/ui-text/latest'
-import { Link } from '@instructure/ui-link/latest'
 import { useStyleNew } from '@instructure/emotion'
 
 import { DataPermissionLevelsProps } from './props.js'
@@ -60,17 +63,9 @@ const DataPermissionLevels = ({
 
   return (
     <div>
-      <Link
-        variant="standalone"
-        onClick={(e) => {
-          e.preventDefault()
-          setOpen(true)
-        }}
-        forceButtonRole={false}
-        href="#"
-      >
+      <CondensedButton onClick={() => setOpen(true)} aria-haspopup="dialog">
         {triggerText}
-      </Link>
+      </CondensedButton>
       <Modal
         size={fullscreen ? 'fullscreen' : 'medium'}
         open={open}
