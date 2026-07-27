@@ -303,7 +303,7 @@ render(<Example />)
 ---
 type: embed
 ---
-<PropEditor component={Button} config={{ sampleChildren: 'Click me' }} />
+<PropEditor componentId="Button" config={{ sampleChildren: 'Click me' }} />
 ```
 
 ### Guidelines

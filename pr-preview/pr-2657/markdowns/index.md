@@ -1,10 +1,10 @@
 # Instructure UI (InstUI) - React Component Library
 
-- version 11.7.3 
+- version 11.7.4 
 
 - Instructure UI (InstUI) is a comprehensive React component library.
 
-- All component documentation below always reflects the latest InstUI version noted above (11.7.3). Props, types, and examples describe this version.
+- All component documentation below always reflects the latest InstUI version noted above (11.7.4). Props, types, and examples describe this version.
 
 ## Documentation
 
@@ -78,8 +78,8 @@
 - [ProgressCircle](./ProgressCircle.md): Circular progress indicator with accessibility features. Supports sizes, colors, animations on mount, and custom value rendering. Meter color can be function-based. Useful for showing completion percentages in a compact visual format.
 - [RadioInput](./RadioInput.md): Custom styled radio button component. Typically used within RadioInputGroup for proper grouping and behavior. Supports different sizes and should always be used in groups rather than individually.
 - [RadioInputGroup](./RadioInputGroup.md): Manages groups of radio buttons with shared name attribute. Supports various layouts (default, inline, columns), toggle variant, disabled states, and accessibility. Handles selection state and change events for the entire group.
-- [Rating](./Rating.md): Displays 3- or 5-star ratings based on valueNow and valueMax props. Supports rounding decimals, customizable sizes, animations, and accessibility-compliant text formatting for screen readers.
 - [RangeInput](./RangeInput.md): An HTML5 range input/slider component with customizable size and thumb variants. Supports React class and functional component implementations with interactive examples for real-time updates.
+- [Rating](./Rating.md): Displays 3- or 5-star ratings based on valueNow and valueMax props. Supports rounding decimals, customizable sizes, animations, and accessibility-compliant text formatting for screen readers.
 - [Responsive](./Responsive.md): Renders components differently based on element or viewport size. Supports breakpoint-based props and conditional rendering. Use sparingly to avoid performance issues.
 - [Select](./Select.md): Accessible combobox component for single or multiple selections. Supports autocomplete, grouping, async loading, icons, and screen reader announcements. Fully controllable with extensive state management examples.
 - [SideNavBar](./SideNavBar.md): Experimental top-level navigation component with toggleable minimized/expanded states. Supports icons, Avatars, badges, and theming. API may change significantly.
