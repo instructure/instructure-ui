@@ -41,7 +41,7 @@ type: example
               maxWidth="16rem"
               textAlign="center"
               margin="general.space2xl auto"
-              padding="small"
+              padding="general.spaceMd"
             >
               <CloseButton
                 placement="end"
@@ -57,7 +57,7 @@ type: example
           </DrawerLayout.Tray>
           <DrawerLayout.Content label="Drawer content example">
             <View as="div" height="100%" background="primary">
-              <View as="div" padding="x-large" background="primary">
+              <View as="div" padding="general.space2xl" background="primary">
                 <Heading border="bottom">A simple drawer layout</Heading>
                 <Grid startAt="medium" vAlign="middle" colSpacing="none">
                   <Grid.Row>
@@ -119,7 +119,7 @@ type: example
               maxWidth="48rem"
               textAlign="center"
               margin="general.space2xl auto"
-              padding="large"
+              padding="general.space2xl"
               background="primary"
             >
               <CloseButton
@@ -150,7 +150,7 @@ type: example
                   maxWidth="16rem"
                   textAlign="center"
                   margin="general.space2xl auto"
-                  padding="small"
+                  padding="general.spaceMd"
                 >
                   <CloseButton
                     placement="end"
@@ -169,7 +169,7 @@ type: example
               </DrawerLayout.Tray>
               <DrawerLayout.Content label="Drawer content example containing a responsive ">
                 <View as="div" background="primary" height='100%'>
-                  <View as="div" padding="x-large"      background="primary">
+                  <View as="div" padding="general.space2xl"      background="primary">
                     <Heading border="bottom">A nested drawer layout</Heading>
                     <Grid startAt="medium" vAlign="middle" colSpacing="none">
                       <Grid.Row>

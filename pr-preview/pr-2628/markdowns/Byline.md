@@ -53,7 +53,7 @@ type: example
       </Text>
     </View>
   }>
-  <HeartInstUIIcon size="medium" color="successColor" />
+  <HeartInstUIIcon size="illu-sm" color="successColor" />
 </Byline>
 ```
 

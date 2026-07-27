@@ -96,7 +96,10 @@ type: example
 
 TextInput accepts focusable and non-focusable content before and/or after
 the input text. A common use case is adding an icon or avatar to the input.
-Focusable content will be focused separately from the input itself.
+Focusable content will be focused separately from the input itself. When
+rendering multiple elements before the input (such as tags), set
+`renderBeforeInputElementGap="even"` to evenly space them, including as they
+wrap to multiple rows.
 
 ```js
 ---
@@ -120,33 +123,29 @@ type: example
             renderLabel="What are Paula Panda's favorite ice cream flavors?"
             value={this.state.value}
             onChange={this.handleChange}
+            renderBeforeInputElementGap="even"
             renderBeforeInput={
               <>
                 {this.state.value !== '' && (
                   <Tag
                     text={this.state.value}
-                    margin="general.space2xs general.spaceXs general.space2xs none"
                     onClick={() => console.log(this.state.value)}
                   />
                 )}
                 <Tag
                   text="Rocky road"
-                  margin="general.space2xs general.spaceXs general.space2xs none"
                   onClick={() => console.log('Rocky road')}
                 />
                 <Tag
                   text="Vanilla"
-                  margin="general.space2xs general.spaceXs general.space2xs none"
                   onClick={() => console.log('Vanilla')}
                 />
                 <Tag
                   text="Coffee"
-                  margin="general.space2xs general.spaceXs general.space2xs none"
                   onClick={() => console.log('Coffee')}
                 />
                 <Tag
                   text="Strawberry"
-                  margin="general.space2xs general.spaceXs general.space2xs none"
                   onClick={() => console.log('Strawberry')}
                 />
               </>
@@ -265,7 +264,7 @@ You can see here most of the visual states of the component:
 ---
 type: example
 ---
-  <Flex gap='medium' direction='column'>
+  <Flex gap='general.spaceXl' direction='column'>
     <TextInput
       size="small"
       renderAfterInput={<AlarmClockInstUIIcon />}
@@ -365,6 +364,7 @@ type: embed
 | TextInput | htmlSize | `number` | No | - | The width of the input (integer value 0 or higher), if a width is not explicitly provided via the `width` prop. Only applicable if `display="inline-block"`. For more see https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/size |
 | TextInput | display | `'inline-block' \| 'block'` | No | `'block'` | The display of the root element. |
 | TextInput | shouldNotWrap | `boolean` | No | `false` | Prevents the default behavior of wrapping the input and rendered content when available space is exceeded. |
+| TextInput | renderBeforeInputElementGap | `'default' \| 'even'` | No | `'default'` | Whether to apply a gap between the elements rendered via `renderBeforeInput` (a CSS flex container), e.g. tags. - `'default'`: no gap is applied between the elements. - `'even'`: wrapped rows are evenly spaced with a vertical and horizontal gap. |
 | TextInput | placeholder | `string` | No | - | Html placeholder text to display when the input has no value. This should be hint text, not a label replacement. |
 | TextInput | isRequired | `boolean` | No | `false` | Whether or not the text input is required. |
 | TextInput | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |

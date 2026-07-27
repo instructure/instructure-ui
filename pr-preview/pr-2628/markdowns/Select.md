@@ -339,7 +339,7 @@ type: example
 
 #### Highlighting and selecting options
 
-To mark an option as "highlighted", use the option's `isHighlighted` prop. Note that only one highlighted option is permitted. Similarly, use `isSelected` to mark an option or multiple options as "selected". When allowing multiple selections, it's best to render a [Tag](Tag) with [AccessibleContent](AccessibleContent) for each selected option via the `renderBeforeInput` prop.
+To mark an option as "highlighted", use the option's `isHighlighted` prop. Note that only one highlighted option is permitted. Similarly, use `isSelected` to mark an option or multiple options as "selected". When allowing multiple selections, it's best to render a [Tag](Tag) with [AccessibleContent](AccessibleContent) for each selected option via the `renderBeforeInput` prop. Set `renderBeforeInputElementGap="even"` so wrapped tags are evenly spaced even as they wrap to multiple rows.
 
 > **Accessibility:** set an explicit `aria-label` on the `Select` (matching `renderLabel`) and list the selected options in the `assistiveText` (e.g. `"Alaska Selected, …"`), as the example below does. This keeps the combobox's accessible name limited to the field label, while screen reader users still hear which options are selected. Each pill's `"Remove …"` label is only announced when that pill receives focus.
 
@@ -490,9 +490,6 @@ type: example
               {getOptionById(id).label}
             </AccessibleContent>
           }
-          margin={
-            index > 0 ? 'xxx-small xx-small xxx-small 0' : '0 xx-small 0 0'
-          }
           onClick={(e) => dismissTag(e, id)}
         />
       ))
@@ -517,6 +514,7 @@ type: example
           renderLabel="Multiple Select"
           aria-label="Multiple Select"
           assistiveText={assistiveText}
+          renderBeforeInputElementGap="even"
           inputValue={inputValue}
           isShowingOptions={isShowingOptions}
           inputRef={(el) => {
@@ -530,6 +528,7 @@ type: example
           onRequestSelectOption={handleSelectOption}
           onKeyDown={handleKeyDown}
           renderBeforeInput={selectedOptionId.length > 0 ? renderTags() : null}
+          htmlSize={2}
         >
           {filteredOptions.length > 0 ? (
             filteredOptions.map((option, index) => {
@@ -1319,6 +1318,7 @@ type: embed
 | Select | renderBeforeInput | `Renderable` | No | - | Content to display before the text input. This will commonly be an icon or tags to show multiple selections. |
 | Select | renderAfterInput | `Renderable` | No | - | Content to display after the text input. This content will replace the default arrow icons. |
 | Select | shouldNotWrap | `boolean` | No | `false` | Prevents the default behavior of wrapping the input and rendered content when available space is exceeded. |
+| Select | renderBeforeInputElementGap | `'default' \| 'even'` | No | - | Whether to apply a gap between the elements rendered via `renderBeforeInput` (a CSS flex container), e.g. tags. - `'default'`: no gap is applied between the elements. - `'even'`: wrapped rows are evenly spaced with a vertical and horizontal gap. |
 | Select | layout | `'stacked' \| 'inline'` | No | - | In `stacked` mode the input is below the label. In `inline` mode the input is to the right/left (depending on text direction) of the label, and the layout will look like `stacked` for small screens. |
 | Select | placement | `PlacementPropValues` | No | `'bottom stretch'` | The placement of the options list. |
 | Select | constrain | `PositionConstraint` | No | `'window'` | The parent in which to constrain the placement. |
