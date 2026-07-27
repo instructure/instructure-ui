@@ -124,6 +124,7 @@ const PAGES: PageSpec[] = [
   { slug: 'button', title: 'Button and derivatives', wait: 100 },
   { slug: 'byline', title: 'Byline' },
   { slug: 'calendar', title: 'Calendar' },
+  { slug: 'card', title: 'Card' },
   { slug: 'checkbox', title: 'Checkbox', wait: 100 },
   { slug: 'checkboxgroup', title: 'Checkboxgroup', wait: 300 },
   {
