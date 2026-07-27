@@ -163,5 +163,111 @@ describe('sanitizeSvg', () => {
       expect(out).toContain('<p>')
       expect(out).toContain('<h2>')
     })
+
+    it('does not install its <use> fragment-only hook on the global singleton', () => {
+      // Our fragment-only <use> rule is a hook on our instance.
+      // The singleton must be unaffected, keeping non-fragment hrefs.
+      sanitizeSvg(`<svg><use href="#icon"/></svg>`, { allowUseElement: true })
+
+      const out = DOMPurifySingleton.sanitize(
+        `<svg><use href="https://example.com/icons.svg#icon"/></svg>`,
+        {
+          USE_PROFILES: { svg: true },
+          ADD_TAGS: ['use'],
+          ADD_ATTR: ['href']
+        }
+      )
+
+      expect(out).toMatch(/href="https:\/\/example\.com\/icons\.svg#icon"/)
+    })
+  })
+
+  describe('allowUseElement option', () => {
+    it('strips <use> elements by default', () => {
+      const out = sanitizeSvg(
+        `<svg><defs><path id="icon" d="M0 0L10 10"/></defs><use xlink:href="#icon"/></svg>`
+      )
+      expect(out).not.toMatch(/<use\b/i)
+      expect(out).toMatch(/<path\b/)
+    })
+
+    it('allows <use> with fragment reference when allowUseElement is true', () => {
+      const out = sanitizeSvg(
+        `<svg><defs><path id="icon" d="M0 0L10 10"/></defs><use xlink:href="#icon"/></svg>`,
+        { allowUseElement: true }
+      )
+      expect(out).toMatch(/<use\b/)
+      expect(out).toMatch(/xlink:href="#icon"/)
+      expect(out).toMatch(/<path\b/)
+    })
+
+    it('allows href attribute when allowUseElement is true', () => {
+      const out = sanitizeSvg(
+        `<svg><defs><path id="icon" d="M0 0"/></defs><use href="#icon"/></svg>`,
+        { allowUseElement: true }
+      )
+      expect(out).toMatch(/<use\b/)
+      expect(out).toMatch(/href="#icon"/)
+    })
+
+    it('strips external URLs from href even when allowUseElement is true', () => {
+      const out = sanitizeSvg(
+        `<svg><use href="https://example.com/icons.svg#icon"/></svg>`,
+        { allowUseElement: true }
+      )
+      // Fragment reference with external URL should be stripped
+      expect(out).not.toMatch(/href="https:/)
+    })
+
+    it('strips data: URIs from href when allowUseElement is true', () => {
+      const out = sanitizeSvg(
+        `<svg><use href="data:image/svg+xml,<svg>..."/></svg>`,
+        { allowUseElement: true }
+      )
+      expect(out).not.toMatch(/href="data:/)
+      // <use> tag remains without href (safe but useless)
+      expect(out).toMatch(/<use\b/)
+    })
+
+    it('strips javascript: scheme from href when allowUseElement is true', () => {
+      const out = sanitizeSvg(`<svg><use href="javascript:alert(1)"/></svg>`, {
+        allowUseElement: true
+      })
+      expect(out).not.toMatch(/javascript:/)
+      // <use> tag remains without href (safe but useless)
+      expect(out).toMatch(/<use\b/)
+    })
+
+    it('preserves multiple <use> elements with fragment refs when allowUseElement is true', () => {
+      const out = sanitizeSvg(
+        `<svg><defs><symbol id="a"/><symbol id="b"/></defs><use xlink:href="#a"/><use xlink:href="#b"/></svg>`,
+        { allowUseElement: true }
+      )
+      expect(out).toMatch(/xlink:href="#a"/)
+      expect(out).toMatch(/xlink:href="#b"/)
+      const useCount = (out.match(/<use\b/g) || []).length
+      expect(useCount).toBe(2)
+    })
+
+    it('preserves non-URI attributes everywhere when allowUseElement is true', () => {
+      const out = sanitizeSvg(
+        `<svg viewBox="0 0 120 40"><defs><circle id="dot" cx="20" cy="20" r="18"/></defs><use href="#dot" x="40" fill="red"/></svg>`,
+        { allowUseElement: true }
+      )
+      expect(out).toMatch(/viewBox="0 0 120 40"/)
+      expect(out).toMatch(/<circle\b[^>]*cx="20"[^>]*cy="20"[^>]*r="18"/)
+      expect(out).toMatch(/<use\b[^>]*x="40"/)
+      expect(out).toMatch(/<use\b[^>]*fill="red"/)
+    })
+
+    it('preserves valid SVG attributes on <use> elements when allowUseElement is true', () => {
+      const out = sanitizeSvg(
+        `<svg><defs><path id="icon"/></defs><use xlink:href="#icon" class="my-icon"/></svg>`,
+        { allowUseElement: true }
+      )
+      expect(out).toMatch(/xlink:href="#icon"/)
+      // <use> tag is rendered with the fragment reference
+      expect(out).toMatch(/<use\b/)
+    })
   })
 })

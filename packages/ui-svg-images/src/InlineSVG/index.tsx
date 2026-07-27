@@ -158,9 +158,20 @@ class InlineSVG extends Component<InlineSVGProps> {
   }
 
   render() {
-    const { style, title, description, focusable, src, styles, ...props } =
-      this.props
-    const safeSrc = typeof src === 'string' && src ? sanitizeSvg(src) : ''
+    const {
+      style,
+      title,
+      description,
+      focusable,
+      src,
+      styles,
+      allowUseElement,
+      ...props
+    } = this.props
+    const safeSrc =
+      typeof src === 'string' && src
+        ? sanitizeSvg(src, { allowUseElement })
+        : ''
 
     // if width or height are 'auto', don't supply anything to the SVG
     const width =

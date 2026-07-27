@@ -63,6 +63,12 @@ type InlineSVGOwnProps = {
    * provides a reference to the underlying html root element
    */
   elementRef?: (element: Element | null) => void
+  /**
+   * Allow `<use>` elements with `href`/`xlink:href` attributes. When enabled,
+   * only same-document fragment references (e.g. `#my-symbol`) are permitted;
+   * external URLs are blocked.
+   */
+  allowUseElement?: boolean
 }
 
 type PropKeys = keyof InlineSVGOwnProps
@@ -85,7 +91,8 @@ const allowedProps: AllowedPropKeys = [
   'height',
   'inline',
   'color',
-  'elementRef'
+  'elementRef',
+  'allowUseElement'
 ]
 
 export type { InlineSVGProps, InlineSVGOwnProps, InlineSVGStyle }
