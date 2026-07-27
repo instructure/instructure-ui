@@ -48,3 +48,38 @@ type: example
   </InlineSVG>
 </View>
 ```
+
+### Using SVG sprite sheets with `<use>` elements
+
+By default, `<use>` elements are stripped for security. When rendering SVG
+sprite sheets that use `<use xlink:href="#id">` references to `<symbol>` or
+`<path>` definitions, set `allowUseElement` to allow same-document fragment
+references. External URLs are blocked for security.
+
+```js
+---
+type: example
+---
+const spriteSvg = `<svg viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <circle id="dot" cx="20" cy="20" r="18" />
+  </defs>
+  <use href="#dot" x="0" fill="#0374B5" />
+  <use href="#dot" x="40" fill="#03893D" />
+  <use href="#dot" x="80" fill="#E62429" />
+</svg>`
+
+render(
+  <div>
+    <p>
+      <code>allowUseElement</code> set: the three circles render:
+    </p>
+    <InlineSVG src={spriteSvg} width="9rem" height="3rem" allowUseElement />
+    <p>
+      Without <code>allowUseElement</code>: the <code>&lt;use&gt;</code>{' '}
+      elements are stripped, so nothing is drawn:
+    </p>
+    <InlineSVG src={spriteSvg} width="9rem" height="3rem" />
+  </div>
+)
+```
