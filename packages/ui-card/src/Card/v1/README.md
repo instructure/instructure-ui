@@ -105,27 +105,29 @@ type: example
   <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
     <Card variant="nested">
       <Heading level="h3" margin="0 0 x-small 0">
-        Course settings
+        Lorem ipsum
       </Heading>
       <Text variant="content">
-        Control who can see this course and when it becomes available to
-        students.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+        eiusmod tempor incididunt ut labore.
       </Text>
     </Card>
     <Card variant="nested">
       <Heading level="h3" margin="0 0 x-small 0">
-        Grading
+        Dolor sit amet
       </Heading>
       <Text variant="content">
-        Choose the grading scheme and decide how final grades are calculated.
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+        nisi ut aliquip ex ea commodo.
       </Text>
     </Card>
     <Card variant="nested">
       <Heading level="h3" margin="0 0 x-small 0">
-        Notifications
+        Consectetur adipiscing
       </Heading>
       <Text variant="content">
-        Pick which course events should send an alert to enrolled users.
+        Duis aute irure dolor in reprehenderit in voluptate velit esse
+        cillum dolore eu fugiat nulla.
       </Text>
     </Card>
   </div>
