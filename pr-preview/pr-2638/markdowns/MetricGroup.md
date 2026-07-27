@@ -19,7 +19,7 @@ type: example
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| MetricGroup | children | `React.ReactNode` | No | `null` | children of type `Metric` |
+| MetricGroup | children | `React.ReactNode` | No | - | children of type `Metric` |
 
 ### Usage
 
@@ -33,6 +33,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { MetricGroup } from '@instructure/ui-metric'
+import { MetricGroup } from '@instructure/ui-metric/v11_7'
 ```
 

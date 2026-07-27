@@ -16,7 +16,7 @@ type: example
     screenReaderLabel="Loading completion"
     valueNow={40}
     valueMax={60}
-    margin="0 small 0 0"
+    margin="0 general.spaceMd 0 0"
     shouldAnimateOnMount
   />
   <ProgressCircle
@@ -24,7 +24,7 @@ type: example
     screenReaderLabel="Loading completion"
     valueNow={40}
     valueMax={60}
-    margin="0 small 0 0"
+    margin="0 general.spaceMd 0 0"
     shouldAnimateOnMount
     animationDelay={2000}
   />
@@ -32,7 +32,7 @@ type: example
     screenReaderLabel="Loading completion"
     valueNow={40}
     valueMax={60}
-    margin="0 small 0 0"
+    margin="0 general.spaceMd 0 0"
     shouldAnimateOnMount
     animationDelay={4000}
     formatScreenReaderValue={function ({ valueNow, valueMax }) {
@@ -113,35 +113,35 @@ type: example
     meterColor="info"
     valueNow={40}
     valueMax={60}
-    margin="0 0 small"
+    margin="0 0 general.spaceMd"
   />
   <ProgressCircle
     screenReaderLabel="Loading completion"
     meterColor="success"
     valueNow={40}
     valueMax={60}
-    margin="0 0 small"
+    margin="0 0 general.spaceMd"
   />
   <ProgressCircle
     screenReaderLabel="Loading completion"
     meterColor="alert"
     valueNow={40}
     valueMax={60}
-    margin="0 0 small"
+    margin="0 0 general.spaceMd"
   />
   <ProgressCircle
     screenReaderLabel="Loading completion"
     meterColor="warning"
     valueNow={40}
     valueMax={60}
-    margin="0 0 small"
+    margin="0 0 general.spaceMd"
   />
   <ProgressCircle
     screenReaderLabel="Loading completion"
     meterColor="danger"
     valueNow={40}
     valueMax={60}
-    margin="0 0 small"
+    margin="0 0 general.spaceMd"
   />
 </div>
 ```
@@ -232,7 +232,7 @@ type: embed
 | ProgressCircle | color | `'primary' \| 'primary-inverse'` | No | `'primary'` | Controls the overall color scheme of the component |
 | ProgressCircle | meterColor | `\| ((values: Values) => ProgressCircleMeterColor) \| ProgressCircleMeterColor` | No | `({ valueNow, valueMax }: Values) =>
 valueNow / valueMax >= 1 ? 'success' : 'brand'` | Control the color of the progress meter. Defaults to showing theme success color on completion, based on `valueNow` and `valueMax`. |
-| ProgressCircle | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
+| ProgressCircle | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`. |
 | ProgressCircle | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to the component's root HTML element |
 | ProgressCircle | as | `AsElementType` | No | `'div'` | Set the element type of the component's root |
 | ProgressCircle | shouldAnimateOnMount | `boolean` | No | `false` |  |
@@ -250,6 +250,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { ProgressCircle } from '@instructure/ui-progress'
+import { ProgressCircle } from '@instructure/ui-progress/v11_7'
 ```
 

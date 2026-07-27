@@ -203,7 +203,7 @@ type: example
           </RadioInputGroup>
         </Flex.Item>
 
-        <Flex.Item padding="0 0 0 large" shouldGrow shouldShrink>
+        <Flex.Item padding="0 0 0 general.space2xl" shouldGrow shouldShrink>
           <FormField label="SourceCodeEditor with syntax highlight">
             <SourceCodeEditor
               label={`${currentLanguage} SourceCodeEditor with syntax highlight`}
@@ -248,7 +248,7 @@ type: example
     return (
       <View display="block" background="primary">
         <Flex alignItems="start">
-          <Flex.Item shouldGrow shouldShrink padding="0 large 0 0">
+          <Flex.Item shouldGrow shouldShrink padding="0 general.space2xl 0 0">
             <FormField
               label="Controlled code editor"
               id="controlledCodeEditor"
@@ -272,7 +272,7 @@ type: example
               />
             </FormField>
           </Flex.Item>
-          <Flex.Item size="50%" padding="0 0 0 large">
+          <Flex.Item size="50%" padding="0 0 0 general.space2xl">
             <FormFieldGroup
               description="Set value from the outside"
               name="setValue"
@@ -321,8 +321,8 @@ type: example
     })
 
     return (
-      <View display="block" padding="medium medium small" background="primary">
-        <View display="block" margin="small none large">
+      <View display="block" padding="general.spaceXl general.spaceXl general.spaceMd" background="primary">
+        <View display="block" margin="general.spaceMd none general.space2xl">
           <FormFieldGroup description="Settings" rowSpacing="small">
             {Object.keys(settings).map((prop) => (
               <Checkbox
@@ -374,8 +374,8 @@ type: example
     })
 
     return (
-      <View display="block" padding="medium medium small" background="primary">
-        <View display="block" margin="small none large">
+      <View display="block" padding="general.spaceXl general.spaceXl general.spaceMd" background="primary">
+        <View display="block" margin="general.spaceMd none general.space2xl">
           <FormFieldGroup description="Settings" rowSpacing="small">
             {[
               'lineNumbers',
@@ -486,8 +486,8 @@ type: example
     }
 
     return (
-      <View display="block" padding="medium medium small" background="primary">
-        <View display="block" margin="small none large">
+      <View display="block" padding="general.spaceXl general.spaceXl general.spaceMd" background="primary">
+        <View display="block" margin="general.spaceMd none general.space2xl">
           <FormFieldGroup description="Settings">
             <Checkbox
               label="indentWithTab"
@@ -578,10 +578,10 @@ type: example
       >
         <View
           display="block"
-          padding="medium medium small"
+          padding="general.spaceXl general.spaceXl general.spaceMd"
           background="primary"
         >
-          <View display="block" margin="small none large">
+          <View display="block" margin="general.spaceMd none general.space2xl">
             <FormFieldGroup
               description="Settings"
               layout="columns"
@@ -668,8 +668,8 @@ type: example
     const editorRef = useRef(null)
 
     return (
-      <View display="block" padding="medium medium small" background="primary">
-        <View display="block" margin="small none large">
+      <View display="block" padding="general.spaceXl general.spaceXl general.spaceMd" background="primary">
+        <View display="block" margin="general.spaceMd none general.space2xl">
           <Button
             onClick={() => {
               console.log('manual focus')
@@ -717,12 +717,12 @@ type: example
     const viewProps = {
       as: 'div',
       background: 'primary-inverse',
-      padding: 'small'
+      padding: 'general.spaceMd'
     }
 
     return (
-      <View display="block" padding="medium medium small" background="primary">
-        <View display="block" margin="small none large">
+      <View display="block" padding="general.spaceXl general.spaceXl general.spaceMd" background="primary">
+        <View display="block" margin="general.spaceMd none general.space2xl">
           <RadioInputGroup
             name="attachmentExample"
             value={attachment}
@@ -842,6 +842,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { SourceCodeEditor } from '@instructure/ui-source-code-editor'
+import { SourceCodeEditor } from '@instructure/ui-source-code-editor/v11_7'
 ```
 

@@ -137,6 +137,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { ColorPreset } from '@instructure/ui-color-picker'
+import { ColorPreset } from '@instructure/ui-color-picker/v11_7'
 ```
 

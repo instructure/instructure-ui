@@ -19,8 +19,8 @@ type: example
 ---
 <View
   as="div"
-  margin="small"
-  padding="large"
+  margin="general.spaceMd"
+  padding="general.space2xl"
   textAlign="center"
   background="primary"
 >
@@ -41,8 +41,8 @@ type: example
     as="div"
     display="inline-block"
     maxWidth="10rem"
-    margin="small"
-    padding="small"
+    margin="general.spaceMd"
+    padding="general.spaceMd"
     background="transparent"
   >
     {lorem.sentence()}
@@ -51,8 +51,8 @@ type: example
     as="div"
     display="inline-block"
     maxWidth="10rem"
-    margin="small"
-    padding="small"
+    margin="general.spaceMd"
+    padding="general.spaceMd"
     background="primary"
   >
     {lorem.sentence()}
@@ -61,8 +61,8 @@ type: example
     as="div"
     display="inline-block"
     maxWidth="10rem"
-    margin="small"
-    padding="small"
+    margin="general.spaceMd"
+    padding="general.spaceMd"
     background="secondary"
   >
     {lorem.sentence()}
@@ -71,8 +71,8 @@ type: example
     as="div"
     display="inline-block"
     maxWidth="10rem"
-    margin="small"
-    padding="small"
+    margin="general.spaceMd"
+    padding="general.spaceMd"
     background="primary-inverse"
   >
     {lorem.sentence()}
@@ -81,8 +81,8 @@ type: example
     as="div"
     display="inline-block"
     maxWidth="10rem"
-    margin="small"
-    padding="small"
+    margin="general.spaceMd"
+    padding="general.spaceMd"
     background="brand"
   >
     {lorem.sentence()}
@@ -91,8 +91,8 @@ type: example
     as="div"
     display="inline-block"
     maxWidth="10rem"
-    margin="small"
-    padding="small"
+    margin="general.spaceMd"
+    padding="general.spaceMd"
     background="alert"
   >
     {lorem.sentence()}
@@ -101,8 +101,8 @@ type: example
     as="div"
     display="inline-block"
     maxWidth="10rem"
-    margin="small"
-    padding="small"
+    margin="general.spaceMd"
+    padding="general.spaceMd"
     background="success"
   >
     {lorem.sentence()}
@@ -111,8 +111,8 @@ type: example
     as="div"
     display="inline-block"
     maxWidth="10rem"
-    margin="small"
-    padding="small"
+    margin="general.spaceMd"
+    padding="general.spaceMd"
     background="danger"
   >
     {lorem.sentence()}
@@ -121,8 +121,8 @@ type: example
     as="div"
     display="inline-block"
     maxWidth="10rem"
-    margin="small"
-    padding="small"
+    margin="general.spaceMd"
+    padding="general.spaceMd"
     background="warning"
   >
     {lorem.sentence()}
@@ -143,10 +143,10 @@ type: example
     as="span"
     display="inline-block"
     maxWidth="10rem"
-    margin="small"
-    padding="large"
+    margin="general.spaceMd"
+    padding="general.space2xl"
     background="primary"
-    shadow="resting"
+    shadow="elevation1"
   >
     {lorem.sentence()}
   </View>
@@ -154,10 +154,10 @@ type: example
     as="span"
     display="inline-block"
     maxWidth="10rem"
-    margin="small"
-    padding="large"
+    margin="general.spaceMd"
+    padding="general.space2xl"
     background="primary"
-    shadow="above"
+    shadow="elevation2"
   >
     {lorem.sentence()}
   </View>
@@ -165,10 +165,20 @@ type: example
     as="span"
     display="inline-block"
     maxWidth="10rem"
-    margin="small"
-    padding="large"
+    margin="general.spaceMd"
+    padding="general.space2xl"
     background="primary"
-    shadow="topmost"
+    shadow="elevation3"
+  >
+    {lorem.sentence()}
+  </View><View
+    as="span"
+    display="inline-block"
+    maxWidth="10rem"
+    margin="general.spaceMd"
+    padding="general.space2xl"
+    background="primary"
+    shadow="elevation4"
   >
     {lorem.sentence()}
   </View>
@@ -190,10 +200,10 @@ type: example
     as="span"
     display="inline-block"
     maxWidth="10rem"
-    margin="small"
-    padding="small"
+    margin="general.spaceMd"
+    padding="general.spaceMd"
     background="primary"
-    borderWidth="small"
+    borderWidth="sm"
   >
     {lorem.sentence()}
   </View>
@@ -201,10 +211,10 @@ type: example
     as="span"
     display="inline-block"
     maxWidth="10rem"
-    margin="small"
-    padding="small"
+    margin="general.spaceMd"
+    padding="general.spaceMd"
     background="primary"
-    borderWidth="medium"
+    borderWidth="md"
   >
     {lorem.sentence()}
   </View>
@@ -212,19 +222,19 @@ type: example
     as="span"
     display="inline-block"
     maxWidth="10rem"
-    margin="small"
-    padding="small"
+    margin="general.spaceMd"
+    padding="general.spaceMd"
     background="primary"
-    borderWidth="large none"
+    borderWidth="lg none"
   >
     {lorem.sentence()}
   </View>
   <View
     as="div"
-    margin="small"
-    padding="small"
+    margin="general.spaceMd"
+    padding="general.spaceMd"
     background="primary"
-    borderWidth="none none small none"
+    borderWidth="none none sm none"
   >
     {lorem.sentence()}
   </View>
@@ -234,6 +244,12 @@ type: example
 ### `borderColor`
 
 Change the color of View's border for different contexts via the `borderColor` prop.
+In addition to the legacy contextual colors (`transparent`, `primary`, `secondary`, `brand`,
+`info`, `success`, `warning`, `alert`, `danger`), View accepts the shared design token
+stroke colors: `strongColor`, `visualSeparator`, and the accent palette (`accentAsh`,
+`accentAurora`, `accentBlue`, `accentGreen`, `accentGrey`, `accentHoney`, `accentOrange`,
+`accentPlum`, `accentRed`, `accentSea`, `accentSky`, `accentStone`, `accentViolet`).
+You can also pass any valid CSS color string (e.g. `"#FFFFFF"` or `"red"`).
 
 ```js
 ---
@@ -243,8 +259,8 @@ type: example
   <View
     as="span"
     display="inline-block"
-    margin="small"
-    padding="small"
+    margin="general.spaceMd"
+    padding="general.spaceMd"
     background="primary"
     borderWidth="large"
   >
@@ -253,68 +269,101 @@ type: example
   <View
     as="span"
     display="inline-block"
-    margin="small"
-    padding="small"
+    margin="general.spaceMd"
+    padding="general.spaceMd"
     background="primary"
     borderWidth="large"
-    borderColor="info"
+    borderColor="accentBlue"
   >
-    info
+    accentBlue
   </View>
   <View
     as="span"
     display="inline-block"
-    margin="small"
-    padding="small"
+    margin="general.spaceMd"
+    padding="general.spaceMd"
     background="primary"
     borderWidth="large"
-    borderColor="warning"
+    borderColor="accentOrange"
   >
-    warning
+    accentOrange
   </View>
   <View
     as="span"
     display="inline-block"
-    margin="small"
-    padding="small"
+    margin="general.spaceMd"
+    padding="general.spaceMd"
     background="primary"
     borderWidth="large"
-    borderColor="danger"
+    borderColor="accentRed"
   >
-    danger
+    accentRed
   </View>
   <View
     as="span"
     display="inline-block"
-    margin="small"
-    padding="small"
+    margin="general.spaceMd"
+    padding="general.spaceMd"
     background="primary"
     borderWidth="large"
-    borderColor="alert"
+    borderColor="accentHoney"
   >
-    alert
+    accentHoney
   </View>
   <View
     as="span"
     display="inline-block"
-    margin="small"
-    padding="small"
+    margin="general.spaceMd"
+    padding="general.spaceMd"
     background="primary"
     borderWidth="large"
-    borderColor="success"
+    borderColor="accentGreen"
   >
-    success
+    accentGreen
   </View>
   <View
     as="span"
     display="inline-block"
-    margin="small"
-    padding="small"
+    margin="general.spaceMd"
+    padding="general.spaceMd"
     background="primary"
     borderWidth="large"
-    borderColor="brand"
+    borderColor="accentAurora"
   >
-    brand
+    accentAurora
+  </View>
+  <View
+    as="span"
+    display="inline-block"
+    margin="general.spaceMd"
+    padding="general.spaceMd"
+    background="primary"
+    borderWidth="large"
+    borderColor="strongColor"
+  >
+    strongColor
+  </View>
+  <View
+    as="span"
+    display="inline-block"
+    margin="general.spaceMd"
+    padding="general.spaceMd"
+    background="primary"
+    borderWidth="large"
+    borderColor="visualSeparator"
+  >
+    visualSeparator
+  </View>
+  <View
+    as="span"
+    display="inline-block"
+    margin="general.spaceMd"
+    padding="general.spaceMd"
+    background="primary"
+    borderWidth="large"
+    borderColor="accentViolet"
+  >
+    accentViolet
   </View>
 </div>
 ```
@@ -325,6 +374,12 @@ Adjust the border radius using the `borderRadius` prop. Utilize
 [CSS shorthand style](https://developer.mozilla.org/en-US/docs/Web/CSS/Shorthand_properties)
 to apply different border radii to individual corners.
 
+In addition to the legacy values (`small`, `medium`, `large`, `circle`, `pill`), View
+accepts the shared design token radius scale — `xs`, `sm`, `md`, `lg`, `xl`, `xxl`, `full` —
+and the card radii `card.sm`, `card.md`, `card.lg`, `card.nestedContainer.sm`,
+`card.nestedContainer.md`, `card.nestedContainer.lg`. Valid CSS length values like `1rem`
+or `12px` are also accepted.
+
 ```js
 ---
 type: example
@@ -334,10 +389,10 @@ type: example
     as="span"
     display="inline-block"
     maxWidth="10rem"
-    margin="small"
-    padding="medium"
+    margin="general.spaceMd"
+    padding="general.spaceXl"
     background="primary-inverse"
-    borderRadius="medium"
+    borderRadius="md"
     textAlign="center"
   >
     medium
@@ -346,10 +401,34 @@ type: example
     as="span"
     display="inline-block"
     maxWidth="10rem"
-    margin="small"
-    padding="medium"
+    margin="general.spaceMd"
+    padding="general.spaceXl"
     background="primary-inverse"
-    borderRadius="large large none none"
+    borderRadius="lg"
+    textAlign="center"
+  >
+    lg
+  </View>
+  <View
+    as="span"
+    display="inline-block"
+    maxWidth="10rem"
+    margin="general.spaceMd"
+    padding="general.spaceXl"
+    background="primary-inverse"
+    borderRadius="card.md"
+    textAlign="center"
+  >
+    card.md
+  </View>
+  <View
+    as="span"
+    display="inline-block"
+    maxWidth="10rem"
+    margin="general.spaceMd"
+    padding="general.spaceXl"
+    background="primary-inverse"
+    borderRadius="lg lg none none"
     textAlign="center"
   >
     large large none none
@@ -358,10 +437,10 @@ type: example
     as="span"
     display="inline-block"
     maxWidth="10rem"
-    margin="small"
-    padding="medium"
+    margin="general.spaceMd"
+    padding="general.spaceXl"
     background="primary-inverse"
-    borderRadius="none none large large"
+    borderRadius="none none lg lg"
     textAlign="center"
   >
     none none large large
@@ -370,10 +449,10 @@ type: example
     display="inline-block"
     width="6rem"
     height="6rem"
-    margin="small"
-    padding="medium"
+    margin="general.spaceMd"
+    padding="general.spaceXl"
     background="primary-inverse"
-    borderRadius="circle"
+    borderRadius="full"
     textAlign="center"
   >
     circle
@@ -381,10 +460,10 @@ type: example
   <View
     display="inline-block"
     width="10rem"
-    margin="small"
-    padding="medium"
+    margin="general.spaceMd"
+    padding="general.spaceXl"
     background="primary-inverse"
-    borderRadius="pill"
+    borderRadius="full"
     textAlign="center"
   >
     pill
@@ -428,13 +507,17 @@ By default, if a `View` is rendered as a focusable element, a focus outline will
 ---
 type: example
 ---
-<Flex gap="medium" direction="column">
+<Flex gap="general.spaceXl" direction="column">
   <View tabIndex="0" role="button" cursor="pointer">
-    Tab here to see the focus outline
+    <Text>
+      Tab here to see the focus outline
+    </Text>
   </View>
   <View focusWithin>
-    if the <code>focusWithin</code> prop is <code>true</code>, the View will display the focus ring if any of its descendants receives focus
-    <div tabindex="0" role="button" style={{outline: 'none'}}>Tab here to see the focus outline</div>
+    <Text>
+      if the <code>focusWithin</code> prop is <code>true</code>, the View will display the focus ring if any of its descendants receives focus
+    </Text>
+    <div tabIndex="0" role="button" style={{outline: 'none'}}><Text>Tab here to see the focus outline</Text></div>
   </View>
 </Flex>
 ```
@@ -465,8 +548,8 @@ const FocusedExample = () => {
       <View
         as="div"
         background="primary"
-        padding="small"
-        margin="0 0 small"
+        padding="general.spaceMd"
+        margin="0 0 general.spaceMd"
         borderWidth="small"
       >
         <FormFieldGroup
@@ -477,8 +560,8 @@ const FocusedExample = () => {
             </ScreenReaderContent>
           }
         >
-          <Flex gap="small" direction="row">
-            <Flex gap="small" direction="column" width="15rem">
+          <Flex gap="general.spaceMd" direction="row">
+            <Flex gap="general.spaceMd" direction="column" width="15rem">
               <Checkbox
                 label="withFocusOutline"
                 checked={isFocused}
@@ -509,10 +592,10 @@ const FocusedExample = () => {
         <code>borderRadius =</code>
         <View
           display="inline-block"
-          margin="small"
-          padding="small"
+          margin="general.spaceMd"
+          padding="general.spaceMd"
           background="primary"
-          borderRadius="small"
+          borderRadius="sm"
           borderWidth="small"
           position="relative"
           focusColor={focusColor}
@@ -523,10 +606,10 @@ const FocusedExample = () => {
         </View>
         <View
           display="inline-block"
-          margin="small"
-          padding="small"
+          margin="general.spaceMd"
+          padding="general.spaceMd"
           background="primary"
-          borderRadius="medium"
+          borderRadius="md"
           borderWidth="small"
           position="relative"
           withFocusOutline={isFocused}
@@ -537,10 +620,10 @@ const FocusedExample = () => {
         </View>
         <View
           display="inline-block"
-          margin="small"
-          padding="small"
+          margin="general.spaceMd"
+          padding="general.spaceMd"
           background="primary"
-          borderRadius="large"
+          borderRadius="lg"
           borderWidth="small"
           position="relative"
           withFocusOutline={isFocused}
@@ -553,9 +636,9 @@ const FocusedExample = () => {
           display="inline-block"
           height="100px"
           width="100px"
-          margin="small"
+          margin="general.spaceMd"
           background="primary"
-          borderRadius="circle"
+          borderRadius="full"
           borderWidth="small"
           position="relative"
           withFocusOutline={isFocused}
@@ -574,14 +657,14 @@ const FocusedExample = () => {
         <View
           background="primary-inverse"
           display="inline-block"
-          padding="small"
+          padding="general.spaceMd"
         >
           <View
             display="block"
-            margin="small"
-            padding="small"
+            margin="general.spaceMd"
+            padding="general.spaceMd"
             background="primary-inverse"
-            borderRadius="large"
+            borderRadius="lg"
             borderWidth="small"
             position="relative"
             withFocusOutline={isFocused}
@@ -594,10 +677,10 @@ const FocusedExample = () => {
         </View>
         <View
           display="inline-block"
-          margin="small"
-          padding="small"
+          margin="general.spaceMd"
+          padding="general.spaceMd"
           background="primary"
-          borderRadius="pill"
+          borderRadius="full"
           borderWidth="small"
           position="relative"
           focusColor="success"
@@ -611,11 +694,11 @@ const FocusedExample = () => {
         </View>
         <View
           display="inline-block"
-          margin="small"
-          padding="small"
+          margin="general.spaceMd"
+          padding="general.spaceMd"
           background="primary"
           borderWidth="small"
-          borderRadius="none large"
+          borderRadius="none lg"
           focusColor="danger"
           position="relative"
           focusColor={focusColor}
@@ -690,7 +773,7 @@ const OverflowExample = () => {
         as="div"
         height="7rem"
         width="20rem"
-        margin="medium none x-large"
+        margin="general.spaceXl none general.space2xl"
         overflowY={overflowY}
         overflowX={overflowX}
         withVisualDebug
@@ -719,10 +802,10 @@ type: example
 <div>
   <View
     as="div"
-    padding="large"
+    padding="general.space2xl"
     withVisualDebug
   >
-    {lorem.sentence()}
+    <Text>{lorem.sentence()}</Text>
   </View>
   <View
     as="div"
@@ -731,19 +814,19 @@ type: example
   >
     <View
       as="div"
-      margin="small"
-      padding="small"
+      margin="general.spaceMd"
+      padding="general.spaceMd"
       withVisualDebug
     >
-      {lorem.sentence()}
+      <Text>{lorem.sentence()}</Text>
     </View>
     <View
       as="div"
-      margin="small"
-      padding="small"
+      margin="general.spaceMd"
+      padding="general.spaceMd"
       withVisualDebug
     >
-      {lorem.sentence()}
+      <Text>{lorem.sentence()}</Text>
     </View>
   </View>
 </div>
@@ -762,15 +845,17 @@ type: example
 ---
 <View
   as="section"
-  padding="small"
+  padding="general.spaceMd"
   withVisualDebug
 >
   <View
     as="header"
-    margin="0 0 medium"
+    margin="0 0 general.spaceXl"
     withVisualDebug
   >
-  Some header content
+    <Text>
+      Some header content
+    </Text>
   </View>
   <Text as="p">{lorem.paragraph()}</Text>
 </View>
@@ -786,16 +871,18 @@ the View to display inline-block with other inline elements.
 ---
 type: example
 ---
-<View as="div" textAlign="center" padding="x-small" withVisualDebug>
+<View as="div" textAlign="center" padding="general.spaceSm" withVisualDebug>
   <View
     as="div"
     display="inline-block"
     withVisualDebug
     textAlign="end"
-    margin="large auto"
-    padding="0 small 0 0"
+    margin="general.space2xl auto"
+    padding="0 general.spaceMd 0 0"
   >
+    <Text>
     {lorem.sentence()}
+    </Text>
   </View>
   <Button color="success">Some Action</Button>
 </View>
@@ -819,7 +906,7 @@ type: example
 | View | minWidth | `string \| number` | No | - |  |
 | View | children | `React.ReactNode` | No | - | The children to render inside the <View /> |
 | View | textAlign | `'start' \| 'center' \| 'end'` | No | - | Designates the text alignment within the `<View />` |
-| View | borderColor | `\| string \| 'transparent' \| 'primary' \| 'secondary' \| 'brand' \| 'info' \| 'success' \| 'warning' \| 'alert' \| 'danger'` | No | `'primary'` | Sets the color of the View border. Accepts a color string value (e.g., "#FFFFFF", "red") or one of the predefined theme color options. |
+| View | borderColor | `\| string \| 'transparent' \| 'primary' \| 'secondary' \| 'brand' \| 'info' \| 'success' \| 'warning' \| 'alert' \| 'danger' \| 'strongColor' \| 'visualSeparator' \| 'accentAsh' \| 'accentAurora' \| 'accentBlue' \| 'accentGreen' \| 'accentGrey' \| 'accentHoney' \| 'accentOrange' \| 'accentPlum' \| 'accentRed' \| 'accentSea' \| 'accentSky' \| 'accentStone' \| 'accentViolet'` | No | `'primary'` | Sets the color of the View border. Accepts a color string value (e.g., "#FFFFFF", "red") or one of the predefined theme color options. |
 | View | background | `\| 'transparent' \| 'primary' \| 'secondary' \| 'primary-inverse' \| 'brand' \| 'info' \| 'alert' \| 'success' \| 'danger' \| 'warning'` | No | - | Designates the background style of the `<View />` |
 | View | position | `'static' \| 'absolute' \| 'relative' \| 'sticky' \| 'fixed'` | No | `'static'` | Specify a value for the CSS position property. Use `relative` if `focusable` will be true. |
 | View | insetInlineStart | `string` | No | - | The `left` CSS property in left-to-right interfaces. Will not do anything if `position === "static"`. |
@@ -831,15 +918,14 @@ type: example
 | View | focusColor | `'info' \| 'inverse' \| 'success' \| 'danger'` | No | `'info'` | Determines the color of the focus outline |
 | View | shouldAnimateFocus | `boolean` | No | `true` | Determines if the focus ring should animate when it appears |
 | View | withVisualDebug | `boolean` | No | `false` | Activate a dotted outline around the component to make building your layout easier |
-| View | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
-| View | padding | `Spacing` | No | - | Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `padding="small x-large large"`. |
-| View | borderWidth | `BorderWidth` | No | - | Accepts the familiar CSS shorthand to designate border widths corresponding to edges |
-| View | borderRadius | `BorderRadii` | No | - | Accepts `small`, `medium`, `large`, `circle`, and `pill`. Border radius can be assigned to individual corners in CSS shorthand style (e.g., `"medium large none pill"`). Also accepts valid CSS length values like `1rem` or `12px` |
+| View | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`. |
+| View | padding | `Spacing` | No | - | Valid values are `0`, `none`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `padding="general.spaceMd general.spaceLg"`. |
+| View | borderWidth | `CSSShorthandValue< '0' \| 'none' \| 'small' \| 'medium' \| 'large' \| 'sm' \| 'md' \| 'lg' >` | No | - | Accepts the familiar CSS shorthand to designate border widths corresponding to edges |
+| View | borderRadius | `string` | No | - | Accepts `small`, `medium`, `large`, `circle`, and `pill`. Border radius can be assigned to individual corners in CSS shorthand style (e.g., `"medium large none pill"`). Also accepts valid CSS length values like `1rem` or `12px` |
 | View | shadow | `Shadow` | No | - | Controls the shadow depth for the `<View />` |
 | View | stacking | `Stacking` | No | - | Controls the z-index depth for the `<View />` |
 | View | cursor | `Cursor` | No | - | Specify a mouse cursor to use when hovering over the `<View />` |
 | View | overscrollBehavior | `'auto' \| 'contain' \| 'none'` | No | `'auto'` | Sets what a browser does when reaching the boundary of a scrolling area. Valid values are `auto`, `contain`, `none`. |
-| View | focusRingBorderRadius | `string` | No | - | DEPRECATED, this prop does nothing. Use the focusOutlineOffset theme variable Sets the radius of the focus border ring. For offset type, the given value is increased by the difference between the focus ring' offset and the focus ring's width. For inset type, the given value is decreased by the sum of the focus ring' offset and the focus ring's width. |
 | View | focusWithin | `boolean` | No | - | Display the focus ring when any of the descendants is focused. (uses the [:focus-within](https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-within) CSS selector) |
 
 ### Usage
@@ -854,6 +940,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { View } from '@instructure/ui-view'
+import { View } from '@instructure/ui-view/v11_7'
 ```
 

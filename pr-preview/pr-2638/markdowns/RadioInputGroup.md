@@ -211,7 +211,7 @@ type: example
   description={
     <ScreenReaderContent>Select a fruit</ScreenReaderContent>
   }
-  messages={[{ text: 'Invalid choice', type: 'newError' }]}
+  messages={[{ text: 'Invalid choice', type: 'error' }]}
 >
   <RadioInput label="Apple" value="apple" />
   <RadioInput label="Orange" value="orange" />
@@ -288,6 +288,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { RadioInputGroup } from '@instructure/ui-radio-input'
+import { RadioInputGroup } from '@instructure/ui-radio-input/v11_7'
 ```
 

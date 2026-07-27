@@ -16,12 +16,12 @@ type: example
     screenReaderLabel="Loading completion"
     valueNow={40}
     valueMax={60}
-    margin="0 0 small"
+    margin="0 0 general.spaceMd"
     renderValue={({ valueNow, valueMax }) => {
     return (
-      <Text>
+      <span>
         {Math.round(valueNow / valueMax * 100)}%
-      </Text>
+      </span>
     )
   }}
   formatScreenReaderValue={({ valueNow, valueMax }) => {
@@ -33,12 +33,12 @@ type: example
     screenReaderLabel="Loading completion"
     valueNow={40}
     valueMax={60}
-    margin="0 0 small"
+    margin="0 0 general.spaceMd"
     renderValue={({ valueNow, valueMax }) => {
     return (
-      <Text>
+      <span>
         {Math.round(valueNow / valueMax * 100)}%
-      </Text>
+      </span>
     )
   }}
   formatScreenReaderValue={({ valueNow, valueMax }) => {
@@ -49,12 +49,12 @@ type: example
     screenReaderLabel="Loading completion"
     valueNow={40}
     valueMax={60}
-    margin="0 0 small"
+    margin="0 0 general.spaceMd"
     renderValue={({ valueNow, valueMax }) => {
     return (
-      <Text>
+      <span>
         {Math.round(valueNow / valueMax * 100)}%
-      </Text>
+      </span>
     )
   }}
   formatScreenReaderValue={({ valueNow, valueMax }) => {
@@ -68,9 +68,9 @@ type: example
     valueMax={60}
     renderValue={({ valueNow, valueMax }) => {
     return (
-      <Text>
+      <span>
         {Math.round(valueNow / valueMax * 100)}%
-      </Text>
+      </span>
     )
   }}
   formatScreenReaderValue={({ valueNow, valueMax }) => {
@@ -89,7 +89,7 @@ component. Set it to `primary-inverse` when the component is used on dark backgr
 ---
 type: example
 ---
-<View background="primary-inverse" as="div">
+<View background="primary-inverse" padding="general.spaceXl" as="div">
   <ProgressBar
     screenReaderLabel="Loading completion"
     color="primary-inverse"
@@ -97,9 +97,9 @@ type: example
     valueMax={60}
     renderValue={({ valueNow, valueMax }) => {
     return (
-      <Text>
+      <span>
         {Math.round(valueNow / valueMax * 100)}%
-      </Text>
+      </span>
     )
   }}
   formatScreenReaderValue={({ valueNow, valueMax }) => {
@@ -123,12 +123,12 @@ type: example
     meterColor="info"
     valueNow={40}
     valueMax={60}
-    margin="0 0 small"
+    margin="0 0 general.spaceMd"
     renderValue={({ valueNow, valueMax }) => {
     return (
-      <Text>
+      <span>
         {Math.round(valueNow / valueMax * 100)}%
-      </Text>
+      </span>
     )
   }}
   formatScreenReaderValue={({ valueNow, valueMax }) => {
@@ -140,12 +140,12 @@ type: example
     meterColor="success"
     valueNow={40}
     valueMax={60}
-    margin="0 0 small"
+    margin="0 0 general.spaceMd"
     renderValue={({ valueNow, valueMax }) => {
     return (
-      <Text>
+      <span>
         {Math.round(valueNow / valueMax * 100)}%
-      </Text>
+      </span>
     )
   }}
   formatScreenReaderValue={({ valueNow, valueMax }) => {
@@ -157,12 +157,12 @@ type: example
     meterColor="alert"
     valueNow={40}
     valueMax={60}
-    margin="0 0 small"
+    margin="0 0 general.spaceMd"
     renderValue={({ valueNow, valueMax }) => {
     return (
-      <Text>
+      <span>
         {Math.round(valueNow / valueMax * 100)}%
-      </Text>
+      </span>
     )
   }}
   formatScreenReaderValue={({ valueNow, valueMax }) => {
@@ -174,12 +174,12 @@ type: example
     meterColor="warning"
     valueNow={40}
     valueMax={60}
-    margin="0 0 small"
+    margin="0 0 general.spaceMd"
     renderValue={({ valueNow, valueMax }) => {
     return (
-      <Text>
+      <span>
         {Math.round(valueNow / valueMax * 100)}%
-      </Text>
+      </span>
     )
   }}
   formatScreenReaderValue={({ valueNow, valueMax }) => {
@@ -191,12 +191,12 @@ type: example
     meterColor="danger"
     valueNow={40}
     valueMax={60}
-    margin="0 0 small"
+    margin="0 0 general.spaceMd"
     renderValue={({ valueNow, valueMax }) => {
     return (
-      <Text>
+      <span>
         {Math.round(valueNow / valueMax * 100)}%
-      </Text>
+      </span>
     )
   }}
   formatScreenReaderValue={({ valueNow, valueMax }) => {
@@ -229,9 +229,9 @@ type: example
   valueMax={60}
   renderValue={({ valueNow, valueMax }) => {
     return (
-      <Text>
+      <span>
         {Math.round(valueNow / valueMax * 100)}%
-      </Text>
+      </span>
     )
   }}
   formatScreenReaderValue={({ valueNow, valueMax }) => {
@@ -262,9 +262,9 @@ type: example
   }}
   renderValue={({ valueNow, valueMax }) => {
     return (
-      <Text>
+      <span>
         {Math.round(valueNow / valueMax * 100)}%
-      </Text>
+      </span>
     )
   }}
   valueMax={88}
@@ -324,8 +324,8 @@ const Example = () => {
       <View
         as="div"
         background="primary"
-        padding="medium"
-        margin="0 0 large 0"
+        padding="general.spaceXl"
+        margin="0 0 general.space2xl 0"
       >
         <FormFieldGroup
           description={<ScreenReaderContent>Settings</ScreenReaderContent>}
@@ -358,7 +358,7 @@ const Example = () => {
         valueMax={MAX}
         shouldAnimate={shouldAnimate}
         renderValue={({ valueNow, valueMax }) => {
-          return <Text>{Math.round((valueNow / valueMax) * 100)}%</Text>
+          return <span>{Math.round((valueNow / valueMax) * 100)}%</span>
         }}
         formatScreenReaderValue={({ valueNow, valueMax }) => {
           return Math.round((valueNow / valueMax) * 100) + ' percent'
@@ -398,7 +398,7 @@ type: embed
 | ProgressBar | meterColor | `\| ((values: Values) => ProgressBarMeterColor) \| ProgressBarMeterColor` | No | `({ valueNow, valueMax }: Values) =>
 valueNow / valueMax >= 1 ? 'success' : 'brand'` | Control the color of the progress meter. Defaults to showing theme success color on completion, based on `valueNow` and `valueMax`. |
 | ProgressBar | shouldAnimate | `boolean` | No | `false` | Whether the change of value should have a transition |
-| ProgressBar | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
+| ProgressBar | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`. |
 | ProgressBar | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to the component's root HTML element |
 | ProgressBar | as | `AsElementType` | No | `'div'` | Set the element type of the component's root |
 | ProgressBar | renderValueInside | `boolean` | No | - | If true, displays the `renderValue` inside the progress meter for customization. Note: This should not be used in most cases. When enabled, ensure `renderValue` is styled for proper legibility and alignment across themes and sizes. |
@@ -415,6 +415,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { ProgressBar } from '@instructure/ui-progress'
+import { ProgressBar } from '@instructure/ui-progress/v11_7'
 ```
 
