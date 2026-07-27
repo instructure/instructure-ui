@@ -38,6 +38,9 @@
       "path": "../ui-calendar/tsconfig.build.json"
     },
     {
+      "path": "../ui-card/tsconfig.build.json"
+    },
+    {
       "path": "../ui-checkbox/tsconfig.build.json"
     },
     {
