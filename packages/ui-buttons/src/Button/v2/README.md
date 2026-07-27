@@ -298,6 +298,15 @@ type: example
 render(<Example />)
 ```
 
+### Playground
+
+```js
+---
+type: embed
+---
+<PropEditor componentId="Button" config={{ sampleChildren: 'Click me' }} />
+```
+
 ### Guidelines
 
 ```js
