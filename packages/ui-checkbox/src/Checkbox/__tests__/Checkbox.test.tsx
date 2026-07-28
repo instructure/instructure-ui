@@ -352,4 +352,20 @@ describe('<Checkbox />', () => {
       expect(input).not.toHaveAttribute('aria-labelledby')
     })
   })
+
+  describe('margin prop', () => {
+    it('resolves spacing tokens and custom CSS values', async () => {
+      const { container } = await render(
+        <div>
+          <Checkbox label="A" value="a" margin="general.spaceMd" />
+          <Checkbox label="B" value="b" margin="30px" />
+        </div>
+      )
+      const boxes = container.querySelectorAll("[class$='-checkbox']")
+
+      // general.spaceMd = 0.75rem = 12px
+      expect(getComputedStyle(boxes[0]!).marginLeft).toBe('12px')
+      expect(getComputedStyle(boxes[1]!).marginLeft).toBe('30px')
+    })
+  })
 })

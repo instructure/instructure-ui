@@ -305,4 +305,20 @@ describe('<RadioInput />', () => {
       expect(axeCheck).toBe(true)
     })
   })
+
+  describe('margin prop', () => {
+    it('resolves spacing tokens and custom CSS values', async () => {
+      const { container } = await render(
+        <div>
+          <RadioInput label="A" value="a" name="n" margin="general.spaceMd" />
+          <RadioInput label="B" value="b" name="n" margin="30px" />
+        </div>
+      )
+      const inputs = container.querySelectorAll("[class$='-radioInput']")
+
+      // general.spaceMd = 0.75rem = 12px
+      expect(getComputedStyle(inputs[0]!).marginLeft).toBe('12px')
+      expect(getComputedStyle(inputs[1]!).marginLeft).toBe('30px')
+    })
+  })
 })

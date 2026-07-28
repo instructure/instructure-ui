@@ -225,4 +225,20 @@ describe('<FormFieldGroup />', () => {
 
     expect(axeCheck).toBe(true)
   })
+
+  describe('margin prop', () => {
+    it('forwards margin to the field layout, resolving spacing tokens', async () => {
+      const { container } = await render(
+        <FormFieldGroup description="Name" margin="general.spaceMd">
+          <label>
+            First: <input />
+          </label>
+        </FormFieldGroup>
+      )
+      const layout = container.querySelector("[class$='-formFieldLayout']")
+
+      // general.spaceMd = 0.75rem = 12px
+      expect(getComputedStyle(layout!).marginLeft).toBe('12px')
+    })
+  })
 })

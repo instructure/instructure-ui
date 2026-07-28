@@ -243,4 +243,20 @@ describe('<ToggleButton />', () => {
     await expect.element(tooltip).toBeVisible()
     await expect.element(tooltip).toHaveTextContent('Tooltip content')
   })
+
+  it('forwards the margin prop to the button', async () => {
+    const { container } = await render(
+      <ToggleButton
+        screenReaderLabel="Toggle"
+        renderIcon={icon}
+        renderTooltipContent="Toggle"
+        status="unpressed"
+        margin="general.spaceMd"
+      />
+    )
+    const button = container.querySelector('button')
+
+    // general.spaceMd (0.75rem) resolves to 12px
+    expect(getComputedStyle(button!).marginLeft).toBe('12px')
+  })
 })
