@@ -35,7 +35,7 @@ describe('cleanData', () => {
       ignore: [' ']
     }
     const newData = cleanData(data, options)
-    expect(newData[0].join('')).to.equal('Test...')
+    expect(newData[0].join('')).toEqual('Test...')
   })
 
   it('should remove spaces from the end of word data', async () => {
@@ -47,7 +47,7 @@ describe('cleanData', () => {
     }
 
     const newData = cleanData(data, options)
-    expect(newData[0].join('')).to.equal('Test...')
+    expect(newData[0].join('')).toEqual('Test...')
   })
 
   it('should remove spaces from the middle of character data', async () => {
@@ -61,7 +61,7 @@ describe('cleanData', () => {
     }
 
     const newData = cleanData(data, options)
-    expect(newData[0].join('')).to.equal('Hello...world')
+    expect(newData[0].join('')).toEqual('Hello...world')
   })
 
   it('should remove spaces from the middle of word data', async () => {
@@ -73,7 +73,7 @@ describe('cleanData', () => {
     }
 
     const newData = cleanData(data, options)
-    expect(newData[0].join('')).to.equal('Hello...world')
+    expect(newData[0].join('')).toEqual('Hello...world')
   })
 
   it('should do a thorough cleaning', async () => {
@@ -85,7 +85,7 @@ describe('cleanData', () => {
     }
 
     const newData = cleanData(data, options, true)
-    expect(newData[0].join('')).to.equal('Test...')
+    expect(newData[0].join('')).toEqual('Test...')
   })
 
   it('should remove spaces from the end of complex character data', async () => {
@@ -106,8 +106,8 @@ describe('cleanData', () => {
     newData = cleanData(data, options)
     const text2 = newData[0].join('') + newData[1].join('')
 
-    expect(text).to.equal('Hello...')
-    expect(text2).to.equal('Hello world...')
+    expect(text).toEqual('Hello...')
+    expect(text2).toEqual('Hello world...')
   })
 
   it('should remove spaces from the middle of complex word data', async () => {
@@ -125,7 +125,7 @@ describe('cleanData', () => {
     newData = cleanData(data, options)
     const text2 = newData[0].join('') + newData[1].join('')
 
-    expect(text).to.equal('Hello...world')
-    expect(text2).to.equal('Hello...world')
+    expect(text).toEqual('Hello...world')
+    expect(text2).toEqual('Hello...world')
   })
 })

@@ -367,13 +367,6 @@
       }
     },
     {
-      "files": ["packages/ui-truncate-text/src/TruncateText/__tests__/**"],
-      "plugins": ["vitest"],
-      "rules": {
-        "vitest/valid-expect": "off"
-      }
-    },
-    {
       "files": ["**/*"],
       "excludeFiles": ["**/__tests__/**"],
       "plugins": ["jsx-a11y"],

@@ -31,27 +31,27 @@ describe('cleanSring', () => {
     const string = ' Hello world '
 
     const newString = cleanString(string, [' '])
-    expect(newString).to.equal('Hello world')
+    expect(newString).toEqual('Hello world')
   })
 
   it('should remove spaces from only the end of string', async () => {
     const string = ' Hello world '
 
     const newString = cleanString(string, [' '], false)
-    expect(newString).to.equal(' Hello world')
+    expect(newString).toEqual(' Hello world')
   })
 
   it('should remove spaces and commas', async () => {
     const string = ' Hello world,'
 
     const newString = cleanString(string, [' ', ','])
-    expect(newString).to.equal('Hello world')
+    expect(newString).toEqual('Hello world')
   })
 
   it('should do a thorough cleaning', async () => {
     const string = 'Hello world. '
 
     const newString = cleanString(string, [' ', '.'], false, true, true)
-    expect(newString).to.equal('Hello world')
+    expect(newString).toEqual('Hello world')
   })
 })
