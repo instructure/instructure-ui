@@ -27,15 +27,12 @@
  * (https://oxc.rs/docs/guide/usage/linter/js-plugins.html) for this repo's exact config:
  *
  * ```js
- * 'notice/notice': ['error', { mustMatch: 'The MIT License', template: COPYRIGHT_NOTICE }]
+ * 'notice/notice': ['error', { template: COPYRIGHT_NOTICE }]
  * ```
  *
- * `eslint-plugin-notice`'s default behavior (see its `utils.js#resolveOptions`) that this
- * mirrors:
- *  - `chars` defaults to 1000: only the first 1000 characters of the file are checked.
- *  - a string `mustMatch` is compiled into a `RegExp` and tested against those characters.
- *  - `onNonMatchingHeader` defaults to "prepend": the fixer always inserts the template at the
- *    very start of the file, regardless of whether a (non-matching) header comment exists.
+ * this requires the file to start with the exact `COPYRIGHT_NOTICE` text - a
+ * header that merely resembles the real one (e.g. a subtly reworded clause)
+ * is treated as missing.
  *
  * Usage (in `.oxlintrc.json`):
  * ```json
@@ -70,15 +67,11 @@ export const COPYRIGHT_NOTICE = '/*\n' +
   ' * SOFTWARE.\n' +
   ' */'
 
-const MUST_MATCH = 'The MIT License'
-const CHARS = 1000
-
 /**
  * Pure rule logic, independent of oxlint's context/AST shape, so it can be unit-tested directly.
  */
 export function hasNoticeHeader(sourceText) {
-  const leading = String(sourceText).replace(/\r\n/g, '\n').slice(0, CHARS)
-  return new RegExp(MUST_MATCH).test(leading)
+  return String(sourceText).replace(/\r\n/g, '\n').startsWith(COPYRIGHT_NOTICE)
 }
 
 /**
@@ -89,9 +82,6 @@ export function insertNoticeHeader(sourceText) {
   return COPYRIGHT_NOTICE + '\n' + sourceText
 }
 
-// `meta.name` becomes the rule namespace prefix oxlint derives for a bare jsPlugins path entry,
-// chosen here as "notice" so the resulting rule id ("notice/notice") matches the original
-// `notice/notice` rule id from `eslint-plugin-notice` used in eslint.config.mjs.
 const plugin = {
   meta: {
     name: 'notice',
