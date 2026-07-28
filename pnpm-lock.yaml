@@ -72,9 +72,18 @@ importers:
       '@vitejs/plugin-react':
         specifier: ^5.2.0
         version: 5.2.0(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+      '@vitest/browser':
+        specifier: 4.1.9
+        version: 4.1.9(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))(vitest@4.1.9)
+      '@vitest/browser-playwright':
+        specifier: 4.1.9
+        version: 4.1.9(playwright@1.61.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))(vitest@4.1.9)
       '@vitest/eslint-plugin':
         specifier: ^1.6.20
-        version: 1.6.20(@typescript-eslint/eslint-plugin@8.62.1(@typescript-eslint/parser@8.62.1(eslint@9.39.4(jiti@2.6.1)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3))(eslint@9.39.4(jiti@2.6.1)(supports-color@8.1.1))(typescript@6.0.3))(eslint@9.39.4(jiti@2.6.1)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3)(vitest@4.1.9(@types/node@24.1.0)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0)))
+        version: 1.6.20(@typescript-eslint/eslint-plugin@8.62.1(@typescript-eslint/parser@8.62.1(eslint@9.39.4(jiti@2.6.1)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3))(eslint@9.39.4(jiti@2.6.1)(supports-color@8.1.1))(typescript@6.0.3))(eslint@9.39.4(jiti@2.6.1)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3)(vitest@4.1.9)
+      '@vitest/ui':
+        specifier: 4.1.9
+        version: 4.1.9(vitest@4.1.9)
       babel-loader:
         specifier: ^10.1.1
         version: 10.1.1(@babel/core@7.29.0)(webpack@5.107.2(esbuild@0.28.1))
@@ -153,6 +162,9 @@ importers:
       moment-timezone:
         specifier: ^0.6.2
         version: 0.6.2
+      playwright:
+        specifier: 1.61.1
+        version: 1.61.1
       prettier:
         specifier: 2.8.8
         version: 2.8.8
@@ -170,7 +182,10 @@ importers:
         version: 8.62.1(eslint@9.39.4(jiti@2.6.1)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@24.1.0)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@24.1.0)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+      vitest-browser-react:
+        specifier: 2.2.0
+        version: 2.2.0(@types/react-dom@18.3.1)(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vitest@4.1.9)
       webpack:
         specifier: ^5.107.2
         version: 5.107.2(esbuild@0.28.1)
@@ -649,7 +664,7 @@ importers:
         version: 18.3.1(react@18.3.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/shared-types:
     dependencies:
@@ -924,7 +939,7 @@ importers:
         version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@18.3.1)(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-a11y-utils:
     dependencies:
@@ -970,7 +985,7 @@ importers:
         version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@18.3.1)(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-alerts:
     dependencies:
@@ -1040,7 +1055,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-avatar:
     dependencies:
@@ -1089,7 +1104,7 @@ importers:
         version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@18.3.1)(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-axe-check:
     dependencies:
@@ -1184,7 +1199,7 @@ importers:
         version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@18.3.1)(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-billboard:
     dependencies:
@@ -1239,7 +1254,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-breadcrumb:
     dependencies:
@@ -1297,7 +1312,7 @@ importers:
         version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@18.3.1)(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-buttons:
     dependencies:
@@ -1370,7 +1385,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-byline:
     dependencies:
@@ -1413,7 +1428,7 @@ importers:
         version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@18.3.1)(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-calendar:
     dependencies:
@@ -1480,7 +1495,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-checkbox:
     dependencies:
@@ -1550,7 +1565,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-codemods:
     dependencies:
@@ -1578,7 +1593,7 @@ importers:
         version: 0.16.1
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@24.1.0)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@24.1.0)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-color-picker:
     dependencies:
@@ -1669,7 +1684,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-color-utils:
     dependencies:
@@ -1752,7 +1767,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-date-time-input:
     dependencies:
@@ -1813,7 +1828,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-decorator:
     dependencies:
@@ -1866,7 +1881,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-dom-utils:
     dependencies:
@@ -1897,7 +1912,7 @@ importers:
         version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@18.3.1)(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-drawer-layout:
     dependencies:
@@ -1967,7 +1982,7 @@ importers:
         version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@18.3.1)(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-drilldown:
     dependencies:
@@ -2040,7 +2055,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-editable:
     dependencies:
@@ -2104,7 +2119,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-expandable:
     dependencies:
@@ -2135,7 +2150,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-file-drop:
     dependencies:
@@ -2193,7 +2208,7 @@ importers:
         version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@18.3.1)(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-flex:
     dependencies:
@@ -2236,7 +2251,7 @@ importers:
         version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@18.3.1)(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-focusable:
     dependencies:
@@ -2279,7 +2294,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-form-field:
     dependencies:
@@ -2337,7 +2352,7 @@ importers:
         version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@18.3.1)(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-grid:
     dependencies:
@@ -2383,7 +2398,7 @@ importers:
         version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@18.3.1)(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-heading:
     dependencies:
@@ -2429,7 +2444,7 @@ importers:
         version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@18.3.1)(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-i18n:
     dependencies:
@@ -2478,7 +2493,7 @@ importers:
         version: 18.3.1(react@18.3.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-icons:
     dependencies:
@@ -2564,7 +2579,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-instructure:
     dependencies:
@@ -2628,7 +2643,7 @@ importers:
         version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@18.3.1)(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-link:
     dependencies:
@@ -2689,7 +2704,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-list:
     dependencies:
@@ -2735,7 +2750,7 @@ importers:
         version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@18.3.1)(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-menu:
     dependencies:
@@ -2805,7 +2820,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-metric:
     dependencies:
@@ -2848,7 +2863,7 @@ importers:
         version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@18.3.1)(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-modal:
     dependencies:
@@ -2918,7 +2933,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-motion:
     dependencies:
@@ -2958,7 +2973,7 @@ importers:
         version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@18.3.1)(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-navigation:
     dependencies:
@@ -3043,7 +3058,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-number-input:
     dependencies:
@@ -3101,7 +3116,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-options:
     dependencies:
@@ -3153,7 +3168,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-overlays:
     dependencies:
@@ -3238,7 +3253,7 @@ importers:
         version: 2.1.2
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-pages:
     dependencies:
@@ -3290,7 +3305,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-pagination:
     dependencies:
@@ -3366,7 +3381,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-pill:
     dependencies:
@@ -3427,7 +3442,7 @@ importers:
         version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@18.3.1)(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-popover:
     dependencies:
@@ -3500,7 +3515,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-portal:
     dependencies:
@@ -3543,7 +3558,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-position:
     dependencies:
@@ -3595,7 +3610,7 @@ importers:
         version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@18.3.1)(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-progress:
     dependencies:
@@ -3644,7 +3659,7 @@ importers:
         version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@18.3.1)(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-radio-input:
     dependencies:
@@ -3696,7 +3711,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-range-input:
     dependencies:
@@ -3757,7 +3772,7 @@ importers:
         version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@18.3.1)(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-rating:
     dependencies:
@@ -3812,7 +3827,7 @@ importers:
         version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@18.3.1)(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-react-utils:
     dependencies:
@@ -3861,7 +3876,7 @@ importers:
         version: 3.3.7(@types/react@18.3.26)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-responsive:
     dependencies:
@@ -3904,7 +3919,7 @@ importers:
         version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@18.3.1)(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-scripts:
     dependencies:
@@ -4065,7 +4080,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-selectable:
     dependencies:
@@ -4108,7 +4123,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-side-nav-bar:
     dependencies:
@@ -4172,7 +4187,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-simple-select:
     dependencies:
@@ -4224,7 +4239,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-source-code-editor:
     dependencies:
@@ -4327,7 +4342,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-spinner:
     dependencies:
@@ -4379,7 +4394,7 @@ importers:
         version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@18.3.1)(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-svg-images:
     dependencies:
@@ -4425,7 +4440,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-table:
     dependencies:
@@ -4486,7 +4501,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-tabs:
     dependencies:
@@ -4559,7 +4574,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-tag:
     dependencies:
@@ -4614,7 +4629,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-text:
     dependencies:
@@ -4715,7 +4730,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-text-input:
     dependencies:
@@ -4773,7 +4788,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-theme-tokens:
     dependencies:
@@ -4811,7 +4826,7 @@ importers:
         version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@18.3.1)(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-time-select:
     dependencies:
@@ -4860,7 +4875,7 @@ importers:
         version: 0.6.2
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-toggle-details:
     dependencies:
@@ -4927,7 +4942,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-tooltip:
     dependencies:
@@ -4979,7 +4994,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-top-nav-bar:
     dependencies:
@@ -5076,7 +5091,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-tray:
     dependencies:
@@ -5137,7 +5152,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-tree-browser:
     dependencies:
@@ -5189,7 +5204,7 @@ importers:
         version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@18.3.1)(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-truncate-list:
     dependencies:
@@ -5241,7 +5256,7 @@ importers:
         version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@18.3.1)(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-truncate-text:
     dependencies:
@@ -5296,7 +5311,7 @@ importers:
         version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@18.3.1)(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-utils:
     dependencies:
@@ -5345,7 +5360,7 @@ importers:
         version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@18.3.1)(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-view:
     dependencies:
@@ -5397,7 +5412,7 @@ importers:
         version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@18.3.1)(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-webpack-config:
     dependencies:
@@ -5431,7 +5446,7 @@ importers:
         version: 6.9.1
       vitest:
         specifier: ^4.1.9
-        version: 4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+        version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
 packages:
 
@@ -6084,6 +6099,9 @@ packages:
   '@babel/types@7.29.0':
     resolution: {integrity: sha512-LwdZHpScM4Qz8Xw2iKSzS+cfglZzJGvofQICy7W7v4caru4EaAmyUuO6BGrbyQ2mYV11W0U8j5mBhd14dd3B0A==}
     engines: {node: '>=6.9.0'}
+
+  '@blazediff/core@1.9.1':
+    resolution: {integrity: sha512-ehg3jIkYKulZh+8om/O25vkvSsXXwC+skXmyA87FFx6A/45eqOkZsBltMw/TVteb0mloiGT8oGRTcjRAz66zaA==}
 
   '@bramus/specificity@2.4.2':
     resolution: {integrity: sha512-ctxtJ/eA+t+6q2++vj5j7FYX3nRu311q1wfYH3xjlLOsczhlhxAg2FWNUXhpGvAw3BWo1xBcvOV6/YLc2r5FJw==}
@@ -8110,6 +8128,17 @@ packages:
     peerDependencies:
       vite: ^4.2.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0
 
+  '@vitest/browser-playwright@4.1.9':
+    resolution: {integrity: sha512-Bq1rOGf9waevzG3EOkO/dene6bvKTUsZMVg8S1i+WH3JcMjuXEjiahP9rAqZRELUqjBySOJsvvSWqK/B3wjKQw==}
+    peerDependencies:
+      playwright: '*'
+      vitest: 4.1.9
+
+  '@vitest/browser@4.1.9':
+    resolution: {integrity: sha512-j1BKtWmPcqpMhmx/L9EPLgAJpCb0zKfwoWLmqBbxaogCXHjOwHFSEoHCBfnGtx93xKQwilZ26m+UOsHqHMkRNg==}
+    peerDependencies:
+      vitest: 4.1.9
+
   '@vitest/eslint-plugin@1.6.20':
     resolution: {integrity: sha512-xRwWHFG0Utp6hXtbGiWk4VdKXCGdExD8kbWrrmFEiG5dk8anOJ+vbWbeOa8EbkocKQRTsx7JAWETccZiBgFp/Q==}
     engines: {node: '>=18'}
@@ -8151,6 +8180,11 @@ packages:
 
   '@vitest/spy@4.1.9':
     resolution: {integrity: sha512-fHpsS6mIi+PiEW+vcRVOMkX1oSaPKne3VOclSFICPcGOmfKgXPU5iAah+wcNcj2xPrCCmfq99IDGf+EojhhvhA==}
+
+  '@vitest/ui@4.1.9':
+    resolution: {integrity: sha512-U/cRvtqfEPj27FI1n9cyUvi4vXXdcLhjJiI+InYKdk8hP4VrS6RXOjGL7rfFaeBc37iRKANsR6eEzIoC7lmgBQ==}
+    peerDependencies:
+      vitest: 4.1.9
 
   '@vitest/utils@4.1.9':
     resolution: {integrity: sha512-A51o8ymO5PpqlWNnBP9ZHPXDIpuMtTLlGSjN7la4US+LJzoUMyhwjA5QXlm39JexgwHKW4Xjs8Z2d3dLCXOeuA==}
@@ -9778,6 +9812,9 @@ packages:
       picomatch:
         optional: true
 
+  fflate@0.8.3:
+    resolution: {integrity: sha512-tbZNuJrLwGUp3zshBtdy4W+ORxZuIh8a5ilyIEQDC5rY1f3U20JMry0Ll3WBzU58EZKsEuJFXhb5gwv8CsPvgA==}
+
   figures@3.2.0:
     resolution: {integrity: sha512-yaduQFRKLXYOGgEn6AZau90j3ggSOyiqXU0F9JZfeXYhNa+Jk4X+s45A2zg5jns87GAFa34BBm2kXw4XpNcbdg==}
     engines: {node: '>=8'}
@@ -9904,6 +9941,11 @@ packages:
 
   fs.realpath@1.0.0:
     resolution: {integrity: sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==}
+
+  fsevents@2.3.2:
+    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
+    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
+    os: [darwin]
 
   fsevents@2.3.3:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
@@ -11758,6 +11800,16 @@ packages:
     resolution: {integrity: sha512-emEcLuomt2j03vxD54giVB4SxTjnsqkU692xZOZXHDVoYyypEm+b3jpiTcc+Cf+myooc+/Ly0z01jqeNHVgJGw==}
     engines: {node: '>=16.0.0'}
 
+  playwright-core@1.61.1:
+    resolution: {integrity: sha512-h7Qlt6m4REp25qvIdvbDtVmD4LqVXfpRxhORv9L0jzETM05p4fuPJ3dKyuSXQxDSbXnmS79HAgi9589lGSpLkg==}
+    engines: {node: '>=18'}
+    hasBin: true
+
+  playwright@1.61.1:
+    resolution: {integrity: sha512-DWnY5o3YbLWK4GovuAVwpqL+1VwGNdUGrRr++8j8PtQQzvAVZUIMjKQ90fY689sEJZJBbZVw1rXaOKSTitkzPQ==}
+    engines: {node: '>=18'}
+    hasBin: true
+
   pngjs@7.0.0:
     resolution: {integrity: sha512-LKWqWJRhstyYo9pGvgor/ivk2w94eSjE3RGVuzLGlr3NmD8bf7RcYGze1mNdEHRP6TRP6rMuDHk5t44hnTRyow==}
     engines: {node: '>=14.19.0'}
@@ -13059,6 +13111,20 @@ packages:
       yaml:
         optional: true
 
+  vitest-browser-react@2.2.0:
+    resolution: {integrity: sha512-oY3KM6305kwJMa6nHo92vVtkOsih7mjEf12dLKuphaF+9ywWPEc+qanIBd394SZ6m5LadVEaG6dicvvizOzmjA==}
+    peerDependencies:
+      '@types/react': 18.3.26
+      '@types/react-dom': ^18.0.0 || ^19.0.0
+      react: 18.3.1
+      react-dom: 18.3.1
+      vitest: ^4.0.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      '@types/react-dom':
+        optional: true
+
   vitest@4.1.9:
     resolution: {integrity: sha512-nE3/LEyc0z87uHYLZebqCUOaJr2hdtuPp7BQ4BosVFnfltxgAvMG08NyrSGlPpOUWvR27c5flSmYFTNr78L9GQ==}
     engines: {node: ^20.0.0 || ^22.0.0 || >=24.0.0}
@@ -14252,6 +14318,8 @@ snapshots:
     dependencies:
       '@babel/helper-string-parser': 7.27.1
       '@babel/helper-validator-identifier': 7.28.5
+
+  '@blazediff/core@1.9.1': {}
 
   '@bramus/specificity@2.4.2':
     dependencies:
@@ -16381,7 +16449,37 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@vitest/eslint-plugin@1.6.20(@typescript-eslint/eslint-plugin@8.62.1(@typescript-eslint/parser@8.62.1(eslint@9.39.4(jiti@2.6.1)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3))(eslint@9.39.4(jiti@2.6.1)(supports-color@8.1.1))(typescript@6.0.3))(eslint@9.39.4(jiti@2.6.1)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3)(vitest@4.1.9(@types/node@24.1.0)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0)))':
+  '@vitest/browser-playwright@4.1.9(playwright@1.61.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))(vitest@4.1.9)':
+    dependencies:
+      '@vitest/browser': 4.1.9(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))(vitest@4.1.9)
+      '@vitest/mocker': 4.1.9(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+      playwright: 1.61.1
+      tinyrainbow: 3.1.0
+      vitest: 4.1.9(@types/node@24.1.0)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+    transitivePeerDependencies:
+      - bufferutil
+      - msw
+      - utf-8-validate
+      - vite
+
+  '@vitest/browser@4.1.9(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))(vitest@4.1.9)':
+    dependencies:
+      '@blazediff/core': 1.9.1
+      '@vitest/mocker': 4.1.9(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+      '@vitest/utils': 4.1.9
+      magic-string: 0.30.21
+      pngjs: 7.0.0
+      sirv: 3.0.2
+      tinyrainbow: 3.1.0
+      vitest: 4.1.9(@types/node@24.1.0)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+      ws: 8.20.0
+    transitivePeerDependencies:
+      - bufferutil
+      - msw
+      - utf-8-validate
+      - vite
+
+  '@vitest/eslint-plugin@1.6.20(@typescript-eslint/eslint-plugin@8.62.1(@typescript-eslint/parser@8.62.1(eslint@9.39.4(jiti@2.6.1)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3))(eslint@9.39.4(jiti@2.6.1)(supports-color@8.1.1))(typescript@6.0.3))(eslint@9.39.4(jiti@2.6.1)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3)(vitest@4.1.9)':
     dependencies:
       '@typescript-eslint/scope-manager': 8.59.2
       '@typescript-eslint/utils': 8.59.2(eslint@9.39.4(jiti@2.6.1)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3)
@@ -16389,7 +16487,7 @@ snapshots:
     optionalDependencies:
       '@typescript-eslint/eslint-plugin': 8.62.1(@typescript-eslint/parser@8.62.1(eslint@9.39.4(jiti@2.6.1)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3))(eslint@9.39.4(jiti@2.6.1)(supports-color@8.1.1))(typescript@6.0.3)
       typescript: 6.0.3
-      vitest: 4.1.9(@types/node@24.1.0)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+      vitest: 4.1.9(@types/node@24.1.0)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
     transitivePeerDependencies:
       - supports-color
 
@@ -16427,6 +16525,17 @@ snapshots:
       pathe: 2.0.3
 
   '@vitest/spy@4.1.9': {}
+
+  '@vitest/ui@4.1.9(vitest@4.1.9)':
+    dependencies:
+      '@vitest/utils': 4.1.9
+      fflate: 0.8.3
+      flatted: 3.4.2
+      pathe: 2.0.3
+      sirv: 3.0.2
+      tinyglobby: 0.2.15
+      tinyrainbow: 3.1.0
+      vitest: 4.1.9(@types/node@24.1.0)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   '@vitest/utils@4.1.9':
     dependencies:
@@ -18464,6 +18573,8 @@ snapshots:
     optionalDependencies:
       picomatch: 4.0.4
 
+  fflate@0.8.3: {}
+
   figures@3.2.0:
     dependencies:
       escape-string-regexp: 1.0.5
@@ -18596,6 +18707,9 @@ snapshots:
   fs-readdir-recursive@1.1.0: {}
 
   fs.realpath@1.0.0: {}
+
+  fsevents@2.3.2:
+    optional: true
 
   fsevents@2.3.3:
     optional: true
@@ -20737,6 +20851,14 @@ snapshots:
       pvutils: 1.1.5
       tslib: 2.8.1
 
+  playwright-core@1.61.1: {}
+
+  playwright@1.61.1:
+    dependencies:
+      playwright-core: 1.61.1
+    optionalDependencies:
+      fsevents: 2.3.2
+
   pngjs@7.0.0: {}
 
   portfinder@1.0.38(supports-color@8.1.1):
@@ -22129,7 +22251,16 @@ snapshots:
       terser: 5.48.0
       yaml: 2.9.0
 
-  vitest@4.1.9(@types/node@22.19.15)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0)):
+  vitest-browser-react@2.2.0(@types/react-dom@18.3.1)(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vitest@4.1.9):
+    dependencies:
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      vitest: 4.1.9(@types/node@24.1.0)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+    optionalDependencies:
+      '@types/react': 18.3.26
+      '@types/react-dom': 18.3.1
+
+  vitest@4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0)):
     dependencies:
       '@vitest/expect': 4.1.9
       '@vitest/mocker': 4.1.9(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
@@ -22153,11 +22284,13 @@ snapshots:
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 22.19.15
+      '@vitest/browser-playwright': 4.1.9(playwright@1.61.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))(vitest@4.1.9)
+      '@vitest/ui': 4.1.9(vitest@4.1.9)
       jsdom: 29.1.1
     transitivePeerDependencies:
       - msw
 
-  vitest@4.1.9(@types/node@24.1.0)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0)):
+  vitest@4.1.9(@types/node@24.1.0)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0)):
     dependencies:
       '@vitest/expect': 4.1.9
       '@vitest/mocker': 4.1.9(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
@@ -22181,6 +22314,8 @@ snapshots:
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 24.1.0
+      '@vitest/browser-playwright': 4.1.9(playwright@1.61.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))(vitest@4.1.9)
+      '@vitest/ui': 4.1.9(vitest@4.1.9)
       jsdom: 29.1.1
     transitivePeerDependencies:
       - msw

@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
-import { vi } from 'vitest'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect, vi } from 'vitest'
 
 import { scopeTab } from '../scopeTab.js'
 
@@ -33,7 +33,7 @@ MOCK_EVENT.preventDefault = () => {}
 
 describe('scopeTab', () => {
   it('should scope tab within container', async () => {
-    render(
+    await render(
       <div>
         <div data-testid="container">
           <input data-testid="first" />
@@ -42,39 +42,39 @@ describe('scopeTab', () => {
       </div>
     )
 
-    const container = screen.getByTestId('container')
-    const first = screen.getByTestId('first')
-    const second = screen.getByTestId('second')
+    const container = page.getByTestId('container').element()
+    const first = page.getByTestId('first').element()
+    const second = page.getByTestId('second').element()
 
     second.focus()
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(document.activeElement).toBe(second)
     })
 
     scopeTab(container, MOCK_EVENT as any)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(document.activeElement).toBe(first)
     })
   })
 
   it('should not attempt scoping when no tabbable children', async () => {
-    render(
+    await render(
       <div>
         <div data-testid="container">Hello</div>
         <input />
       </div>
     )
 
-    const input = screen.getByRole('textbox')
-    const container = screen.getByTestId('container')
+    const input = page.getByRole('textbox').element()
+    const container = page.getByTestId('container').element()
 
     input.focus()
 
     scopeTab(container, MOCK_EVENT as any)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(document.activeElement).toBe(input)
     })
   })
@@ -82,7 +82,7 @@ describe('scopeTab', () => {
   it('should execute callback when provided instead of default behavior', async () => {
     const cb = vi.fn()
 
-    render(
+    await render(
       <div>
         <div data-testid="container">
           <input />
@@ -90,14 +90,14 @@ describe('scopeTab', () => {
       </div>
     )
 
-    const input = screen.getByRole('textbox')
-    const container = screen.getByTestId('container')
+    const input = page.getByRole('textbox').element()
+    const container = page.getByTestId('container').element()
 
     input.focus()
 
     scopeTab(container, MOCK_EVENT as any, cb)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(cb).toHaveBeenCalled()
     })
   })

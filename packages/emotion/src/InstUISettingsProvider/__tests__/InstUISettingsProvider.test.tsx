@@ -22,12 +22,12 @@
  * SOFTWARE.
  */
 
-import { render, screen } from '@testing-library/react'
-import { vi } from 'vitest'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import type { MockInstance } from 'vitest'
 
-import '@testing-library/jest-dom'
-import { canvasHighContrast } from '@instructure/ui-themes'
+import canvas, { canvasHighContrast } from '@instructure/ui-themes'
 import { InstUISettingsProvider } from '../index.js'
 
 describe('<InstUISettingsProvider />', () => {
@@ -51,7 +51,7 @@ describe('<InstUISettingsProvider />', () => {
 
   it('passes the current theme if a function is passed to theme prop', async () => {
     const themeFn = vi.fn()
-    render(
+    await render(
       <InstUISettingsProvider theme={canvasHighContrast}>
         <InstUISettingsProvider theme={themeFn}></InstUISettingsProvider>
       </InstUISettingsProvider>
@@ -61,24 +61,55 @@ describe('<InstUISettingsProvider />', () => {
   })
 
   it('can handle text direction on native HTML elements', async () => {
-    const { rerender } = render(
+    const { rerender } = await render(
       <InstUISettingsProvider dir="rtl">
         <div data-testid="child">Should be RTL</div>
       </InstUISettingsProvider>
     )
 
-    let element = screen.getByTestId('child').parentElement!
+    let element = page.getByTestId('child').element().parentElement!
 
     expect(element).toHaveAttribute('dir', 'rtl')
 
     // Set prop: dir
-    rerender(
+    await rerender(
       <InstUISettingsProvider dir="ltr">
         <div data-testid="child">Should be RTL</div>
       </InstUISettingsProvider>
     )
-    element = screen.getByTestId('child').parentElement!
+    element = page.getByTestId('child').element().parentElement!
 
     expect(element).toHaveAttribute('dir', 'ltr')
+  })
+
+  describe('Component tests', () => {
+    it('can handle nested text direction setting changes', async () => {
+      const { rerender } = await render(
+        <InstUISettingsProvider theme={canvas} dir="rtl">
+          <InstUISettingsProvider>
+            <div data-testid="textDirAwareElement">hello world</div>
+          </InstUISettingsProvider>
+        </InstUISettingsProvider>
+      )
+
+      expect(
+        getComputedStyle(page.getByTestId('textDirAwareElement').element())
+          .direction
+      ).toEqual('rtl')
+
+      // Set prop: dir
+      await rerender(
+        <InstUISettingsProvider theme={canvas} dir="ltr">
+          <InstUISettingsProvider>
+            <div data-testid="textDirAwareElement">hello world</div>
+          </InstUISettingsProvider>
+        </InstUISettingsProvider>
+      )
+
+      expect(
+        getComputedStyle(page.getByTestId('textDirAwareElement').element())
+          .direction
+      ).toEqual('ltr')
+    })
   })
 })

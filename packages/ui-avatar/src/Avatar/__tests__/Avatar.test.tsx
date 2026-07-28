@@ -22,53 +22,54 @@
  * SOFTWARE.
  */
 
-import { fireEvent, render, screen } from '@testing-library/react'
-import { vi } from 'vitest'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { fireEvent } from '@testing-library/dom'
+import { describe, it, expect, vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 
-import '@testing-library/jest-dom'
 import { Avatar } from '@instructure/ui-avatar/latest'
 import { HeartInstUIIcon } from '@instructure/ui-icons'
 
 describe('<Avatar />', () => {
   describe('for a11y', () => {
     it('should be accessible', async () => {
-      const { container } = render(<Avatar name="Jessica Jones" />)
+      const { container } = await render(<Avatar name="Jessica Jones" />)
       const axeCheck = await runAxeCheck(container)
       expect(axeCheck).toBe(true)
     })
 
     it('initials should have aria-hidden=true', async () => {
-      render(<Avatar name="Jessica Jones" />)
-      const initials = screen.getByText('JJ')
+      await render(<Avatar name="Jessica Jones" />)
+      const initials = page.getByText('JJ').element()
       expect(initials).toHaveAttribute('aria-hidden', 'true')
     })
   })
 
   describe('with the default props', () => {
     it('should display as a circle', async () => {
-      const { container } = render(<Avatar name="Avatar Name" />)
+      const { container } = await render(<Avatar name="Avatar Name" />)
       const avatarDiv = container.querySelector('div')
       expect(avatarDiv).toHaveStyle('border-radius: 50%')
     })
 
     it('should render initials', async () => {
-      render(<Avatar name="Avatar Name" />)
-      const avatarWithInitials = await screen.findByText('AN')
-      expect(avatarWithInitials).toBeVisible()
+      await render(<Avatar name="Avatar Name" />)
+      const avatarWithInitials = page.getByText('AN')
+      await expect.element(avatarWithInitials).toBeVisible()
     })
 
     it('should have border and no box-shadow', async () => {
-      const { container } = render(<Avatar name="Avatar Name" />)
+      const { container } = await render(<Avatar name="Avatar Name" />)
       const element = container.querySelector('div')
       expect(element).not.toHaveStyle('border: none')
       const containerStyle = element && getComputedStyle(element)
-      expect(containerStyle?.boxShadow).toBe('')
+      expect(containerStyle?.boxShadow).toBe('none')
     })
 
     it('should display the initials in brand color', async () => {
-      render(<Avatar name="Jessica Jones" />)
-      const initials = screen.getByText('JJ')
+      await render(<Avatar name="Jessica Jones" />)
+      const initials = page.getByText('JJ').element()
       expect(getComputedStyle(initials).color).toBe('rgb(43, 122, 188)')
     })
 
@@ -79,7 +80,7 @@ describe('<Avatar />', () => {
 
   describe('when the renderIcon prop is provided', () => {
     it('should display a Lucide icon when passed as component reference', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Avatar name="avatar name" renderIcon={HeartInstUIIcon}>
           hello
         </Avatar>
@@ -89,7 +90,7 @@ describe('<Avatar />', () => {
     })
 
     it('should display correctly when an icon renderer is passed', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Avatar name="Jessica Jones" renderIcon={() => <HeartInstUIIcon />}>
           Hello World
         </Avatar>
@@ -99,7 +100,7 @@ describe('<Avatar />', () => {
     })
 
     it('should render Lucide icon when passed as JSX element', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Avatar
           name="avatar name"
           size="large"
@@ -112,7 +113,7 @@ describe('<Avatar />', () => {
     })
 
     it('should render Lucide icon from render function', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Avatar
           name="avatar name"
           size="small"
@@ -130,13 +131,15 @@ describe('<Avatar />', () => {
       'data:image/gif;base64,R0lGODlhFAAUAJEAAP/9/fYQEPytrflWViH5BAAAAAAALAAAAAAUABQAQAJKhI+pGe09lnhBnEETfodatVHNh1BR+ZzH9LAOCYrVYpiAfWWJOxrC/5MASbyZT4d6AUIBlUYGoR1FsAXUuTN5YhxAEYbrpKRkQwEAOw=='
 
     it('should display the image url provided', async () => {
-      const { container } = render(<Avatar name="avatar name" src={src} />)
+      const { container } = await render(
+        <Avatar name="avatar name" src={src} />
+      )
       const avatarImg = container.querySelector('img')
       expect(avatarImg).toHaveAttribute('src', src)
     })
 
     it('should display the image even if an icon is provided', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Avatar name="avatar name" src={src} renderIcon={HeartInstUIIcon} />
       )
       const avatarImg = container.querySelector('img')
@@ -145,7 +148,7 @@ describe('<Avatar />', () => {
 
     it('should call onImageLoaded once the image loads', async () => {
       const onImageLoaded = vi.fn()
-      const { container } = render(
+      const { container } = await render(
         <Avatar name="Avatar Name" src={src} onImageLoaded={onImageLoaded} />
       )
       const avatarImg = container.querySelector('img')
@@ -162,18 +165,18 @@ describe('<Avatar />', () => {
 
   describe('when shape is set to "rectangle"', () => {
     it('should display as a rectangle', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Avatar name="Avatar Name" shape="rectangle" />
       )
       const avatarDiv = container.querySelector('div')
-      expect(avatarDiv).toHaveStyle('border-radius: 0rem')
+      expect(avatarDiv).toHaveStyle('border-radius: 0px')
     })
   })
 
   describe('when the color is set to "shamrock"', () => {
     it('should display the initials in green (shamrock)', async () => {
-      render(<Avatar name="Jessica Jones" color="accent2" />)
-      const initials = screen.getByText('JJ')
+      await render(<Avatar name="Jessica Jones" color="accent2" />)
+      const initials = page.getByText('JJ').element()
       expect(getComputedStyle(initials).color).toBe('rgb(3, 137, 61)')
     })
 
@@ -185,23 +188,27 @@ describe('<Avatar />', () => {
   describe('when "hasInverseColor" is set', () => {
     describe('with initials', () => {
       it('should display the background in the color', async () => {
-        render(<Avatar name="Jessica Jones" color="accent2" hasInverseColor />)
-        const initials = screen.getByText('JJ')
+        await render(
+          <Avatar name="Jessica Jones" color="accent2" hasInverseColor />
+        )
+        const initials = page.getByText('JJ').element()
         expect(initials.parentNode).toHaveStyle({
           backgroundColor: 'rgb(3, 137, 61)'
         })
       })
 
       it('should display the initials in white', async () => {
-        render(<Avatar name="Jessica Jones" color="accent2" hasInverseColor />)
-        const initials = screen.getByText('JJ')
+        await render(
+          <Avatar name="Jessica Jones" color="accent2" hasInverseColor />
+        )
+        const initials = page.getByText('JJ').element()
         expect(initials).toHaveStyle({ color: 'rgb(255, 255, 255)' })
       })
     })
 
     describe('with icon', () => {
       it('should display the background in the color', async () => {
-        const { container } = render(
+        const { container } = await render(
           <Avatar
             name="Jessica Jones"
             color="accent2"
@@ -221,23 +228,23 @@ describe('<Avatar />', () => {
 
   describe('when the user name has no spaces', () => {
     it('should render a single initial', async () => {
-      render(<Avatar name="Jessica" />)
-      const initials = screen.getByText('J')
-      expect(initials).toBeInTheDocument()
+      await render(<Avatar name="Jessica" />)
+      const initials = page.getByText('J')
+      await expect.element(initials).toBeInTheDocument()
     })
   })
 
   describe('when the user name has leading spaces', () => {
     it('should skip them', async () => {
-      render(<Avatar name=" Jessica Jones" />)
-      const initials = screen.getByText('JJ')
+      await render(<Avatar name=" Jessica Jones" />)
+      const initials = page.getByText('JJ').element()
       expect(initials).toBeInTheDocument()
     })
   })
 
   describe('when the user name is empty', () => {
     it('should render', async () => {
-      const { container } = render(<Avatar name="" />)
+      const { container } = await render(<Avatar name="" />)
       const initials = container.querySelector('span')
       expect(initials).toBeInTheDocument()
       expect(initials).toHaveTextContent('')
@@ -246,8 +253,8 @@ describe('<Avatar />', () => {
 
   describe('when alt text is provided', () => {
     it('should render the text as an aria-label attribute', async () => {
-      render(<Avatar name="Jessica Jones" alt="This is a test" />)
-      const initials = screen.getByText('JJ')
+      await render(<Avatar name="Jessica Jones" alt="This is a test" />)
+      const initials = page.getByText('JJ').element()
       expect(initials.parentNode).toHaveAttribute(
         'aria-label',
         'This is a test'
@@ -255,8 +262,8 @@ describe('<Avatar />', () => {
     })
 
     it('should set the role attribute to img', async () => {
-      render(<Avatar name="Jessica Jones" alt="This is a test" />)
-      const initials = screen.getByText('JJ')
+      await render(<Avatar name="Jessica Jones" alt="This is a test" />)
+      const initials = page.getByText('JJ').element()
       expect(initials.parentNode).toHaveAttribute('role', 'img')
     })
   })

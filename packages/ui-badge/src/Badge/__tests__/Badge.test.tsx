@@ -22,13 +22,13 @@
  * SOFTWARE.
  */
 
-import { render, screen } from '@testing-library/react'
-import { vi } from 'vitest'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 
 import { Badge } from '@instructure/ui-badge/latest'
 import type { BadgeProps } from '@instructure/ui-badge/latest'
-import '@testing-library/jest-dom'
 
 const TEST_STRING = 'test'
 const renderBadge = (props: Partial<BadgeProps> = { count: 100 }) => {
@@ -60,29 +60,29 @@ describe.skip('<Badge />', () => {
   })
 
   it('should be accessible', async () => {
-    const { container } = renderBadge()
+    const { container } = await renderBadge()
     const axeCheck = await runAxeCheck(container)
 
     expect(axeCheck).toBe(true)
   })
 
-  it('should show the count', () => {
-    const { container } = renderBadge({ count: 100 })
+  it('should show the count', async () => {
+    const { container } = await renderBadge({ count: 100 })
 
     expect(container).toHaveTextContent('100')
   })
 
   it('should truncate the count via countUntil', async () => {
-    renderBadge({ count: 100, countUntil: 100 })
+    await renderBadge({ count: 100, countUntil: 100 })
 
-    const truncatedCount = await screen.findByText('99 +')
+    const truncatedCount = page.getByText('99 +')
 
-    expect(truncatedCount).toBeVisible()
+    await expect.element(truncatedCount).toBeVisible()
   })
 
-  it('should change position based on the placement prop', () => {
+  it('should change position based on the placement prop', async () => {
     const countOffset = '5px'
-    const { container } = renderBadge({
+    const { container } = await renderBadge({
       placement: 'bottom start',
       themeOverride: { countOffset }
     })
@@ -95,54 +95,57 @@ describe.skip('<Badge />', () => {
     expect(badgeStyle).toHaveProperty('inset-inline-start', 'calc(-1 * 5px)')
   })
 
-  it('should not render a wrapper for a standalone Badge', () => {
-    const { container } = renderBadge({ as: 'li', standalone: true })
+  it('should not render a wrapper for a standalone Badge', async () => {
+    const { container } = await renderBadge({ as: 'li', standalone: true })
     const liElement = container.querySelector('li')
 
     expect(liElement).toBeNull()
   })
 
-  it('should render a wrapper for a NONE standalone Badge', () => {
-    const { container } = renderBadge({ as: 'li', standalone: false })
+  it('should render a wrapper for a NONE standalone Badge', async () => {
+    const { container } = await renderBadge({ as: 'li', standalone: false })
     const liElement = container.querySelector('li')
 
     expect(liElement).not.toBeNull()
   })
 
-  it('should change its output via the formatOutput prop', () => {
+  it('should change its output via the formatOutput prop', async () => {
     const formatOutput = (formattedCount: string) => {
       return `${formattedCount}!`
     }
 
-    renderBadge({ count: 15, formatOutput })
-    const badgeElement = screen.getByText('15!')
+    await renderBadge({ count: 15, formatOutput })
+    const badgeElement = page.getByText('15!')
 
-    expect(badgeElement).toBeInTheDocument()
+    await expect.element(badgeElement).toBeInTheDocument()
   })
 
-  it('should render button child correctly', () => {
-    const { container } = renderBadge()
+  it('should render button child correctly', async () => {
+    const { container } = await renderBadge()
     const childBtnElement = container.querySelector('button')
 
     expect(childBtnElement).toBeInTheDocument()
     expect(container).toHaveTextContent(TEST_STRING)
   })
 
-  it('should call elementRef function', () => {
+  it('should call elementRef function', async () => {
     const refMock = vi.fn()
-    const { container } = renderBadge({ elementRef: refMock })
+    const { container } = await renderBadge({ elementRef: refMock })
 
     expect(refMock).toHaveBeenCalledWith(container.firstChild)
   })
 
-  it('should show the count when type is count', () => {
-    const { container } = renderBadge({ count: 100, type: 'count' })
+  it('should show the count when type is count', async () => {
+    const { container } = await renderBadge({ count: 100, type: 'count' })
 
     expect(container).toHaveTextContent('100')
   })
 
-  it('should NOT show the count when type is notification', () => {
-    const { container } = renderBadge({ count: 100, type: 'notification' })
+  it('should NOT show the count when type is notification', async () => {
+    const { container } = await renderBadge({
+      count: 100,
+      type: 'notification'
+    })
 
     expect(container).not.toHaveTextContent('100')
   })

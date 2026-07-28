@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import '@testing-library/jest-dom'
+import { describe, it, expect } from 'vitest'
 
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { hasVisibleChildren } from '../hasVisibleChildren.js'

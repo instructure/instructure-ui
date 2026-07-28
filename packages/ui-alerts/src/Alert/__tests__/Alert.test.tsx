@@ -22,11 +22,10 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
-import { vi } from 'vitest'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
 import { runAxeCheck } from '@instructure/ui-axe-check'
-import '@testing-library/jest-dom'
-import userEvent from '@testing-library/user-event'
 import { Alert } from '@instructure/ui-alerts/latest'
 import type { AlertProps } from '@instructure/ui-alerts/latest'
 import { GroupInstUIIcon } from '@instructure/ui-icons'
@@ -61,21 +60,21 @@ describe('<Alert />', () => {
   })
 
   it('should render', async () => {
-    render(<Alert variant="success">Success: Sample alert text.</Alert>)
-    const text = screen.getByText('Success: Sample alert text.')
-    expect(text).toBeInTheDocument()
+    await render(<Alert variant="success">Success: Sample alert text.</Alert>)
+    const text = page.getByText('Success: Sample alert text.')
+    await expect.element(text).toBeInTheDocument()
   })
 
   it('should not render the Close button when `renderCloseButtonLabel` is not provided', async () => {
-    render(<Alert variant="success">Success: Sample alert text.</Alert>)
-    const closeButton = screen.queryByRole('button')
+    await render(<Alert variant="success">Success: Sample alert text.</Alert>)
+    const closeButton = page.getByRole('button')
 
-    expect(closeButton).not.toBeInTheDocument()
+    await expect.element(closeButton).not.toBeInTheDocument()
   })
 
   it('should call `onDismiss` when the close button is clicked with renderCloseButtonLabel', async () => {
     const onDismiss = vi.fn()
-    render(
+    await render(
       <Alert
         variant="success"
         renderCloseButtonLabel={<div>Close</div>}
@@ -84,11 +83,11 @@ describe('<Alert />', () => {
         Success: Sample alert text.
       </Alert>
     )
-    const closeButton = screen.getByRole('button')
+    const closeButton = page.getByRole('button')
 
     await userEvent.click(closeButton)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onDismiss).toHaveBeenCalled()
     })
   })
@@ -110,7 +109,7 @@ describe('<Alert />', () => {
     ][]
   ).forEach(([variant, iconComponent]) => {
     it(`"${variant}" variant should have icon "${iconComponent}".`, async () => {
-      const { container } = render(
+      const { container } = await render(
         <Alert variant={variant} transition="none">
           Success: Sample alert text.
         </Alert>
@@ -122,7 +121,7 @@ describe('<Alert />', () => {
   })
 
   it('should meet a11y standards', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Alert variant="success" transition="none">
         Success: Sample alert text.
       </Alert>
@@ -133,7 +132,7 @@ describe('<Alert />', () => {
 
   it('should add alert text to aria live region, when present', async () => {
     const liveRegion = document.getElementById('_alertLiveRegion')!
-    render(
+    await render(
       <Alert
         variant="success"
         transition="none"
@@ -144,13 +143,15 @@ describe('<Alert />', () => {
       </Alert>
     )
 
-    expect(liveRegion).toHaveTextContent('Success: Sample alert text.')
+    await vi.waitFor(() => {
+      expect(liveRegion).toHaveTextContent('Success: Sample alert text.')
+    })
     expect(liveRegion).toHaveAttribute('aria-live', 'polite')
   })
 
   it('should accept a direct DOM element as liveRegion', async () => {
     const liveRegion = document.getElementById('_alertLiveRegion')!
-    render(
+    await render(
       <Alert
         variant="success"
         transition="none"
@@ -162,12 +163,14 @@ describe('<Alert />', () => {
       </Alert>
     )
 
-    expect(liveRegion).toHaveTextContent('Success: Sample alert text.')
+    await vi.waitFor(() => {
+      expect(liveRegion).toHaveTextContent('Success: Sample alert text.')
+    })
     expect(liveRegion).toHaveAttribute('aria-atomic', 'true')
   })
 
-  it('should render an icon when provided as the `renderIcon` prop', () => {
-    const { container } = render(
+  it('should render an icon when provided as the `renderIcon` prop', async () => {
+    const { container } = await render(
       <Alert renderCustomIcon={<GroupInstUIIcon />} />
     )
     const icon = container.querySelector('svg[class^="lucide"]')
@@ -179,7 +182,7 @@ describe('<Alert />', () => {
   describe('with `screenReaderOnly', () => {
     it('should not render anything when using `liveRegion`', async () => {
       const liveRegion = document.getElementById('_alertLiveRegion')!
-      const { container } = render(
+      const { container } = await render(
         <Alert
           variant="success"
           liveRegion={() => liveRegion}
@@ -190,7 +193,9 @@ describe('<Alert />', () => {
       )
 
       expect(container.children.length).toBe(0)
-      expect(liveRegion.children.length).toBe(1)
+      await vi.waitFor(() => {
+        expect(liveRegion.children.length).toBe(1)
+      })
     })
 
     it('should warn if `liveRegion` is not defined', async () => {
@@ -199,13 +204,13 @@ describe('<Alert />', () => {
         .mockImplementation(() => {})
       const warning =
         "Warning: [Alert] The 'screenReaderOnly' prop must be used in conjunction with 'liveRegion'."
-      render(
+      await render(
         <Alert variant="success" screenReaderOnly={true}>
           Success: Sample alert text.
         </Alert>
       )
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(consoleWarningSpy.mock.calls[0][0]).toEqual(
           expect.stringContaining(warning)
         )
@@ -214,7 +219,7 @@ describe('<Alert />', () => {
 
     it('should set aria-atomic to the aria live region when isLiveRegionAtomic is present', async () => {
       const liveRegion = document.getElementById('_alertLiveRegion')!
-      render(
+      await render(
         <Alert
           variant="success"
           transition="none"
@@ -226,35 +231,39 @@ describe('<Alert />', () => {
         </Alert>
       )
 
-      expect(liveRegion).toHaveTextContent('Success: Sample alert text.')
+      await vi.waitFor(() => {
+        expect(liveRegion).toHaveTextContent('Success: Sample alert text.')
+      })
       expect(liveRegion).toHaveAttribute('aria-atomic', 'true')
     })
 
     it('should close when told to, with transition', async () => {
       const liveRegion = document.getElementById('_alertLiveRegion')!
-      const { rerender } = render(
+      const { rerender } = await render(
         <Alert variant="success" liveRegion={() => liveRegion}>
           Success: Sample alert text.
         </Alert>
       )
 
-      expect(liveRegion.children.length).toBe(1)
+      await vi.waitFor(() => {
+        expect(liveRegion.children.length).toBe(1)
+      })
 
       //set open to false
-      rerender(
+      await rerender(
         <Alert variant="success" open={false} liveRegion={() => liveRegion}>
           Success: Sample alert text.
         </Alert>
       )
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(liveRegion.children.length).toBe(0)
       })
     })
 
     it('should close when told to, without transition', async () => {
       const liveRegion = document.getElementById('_alertLiveRegion')!
-      const { rerender, container } = render(
+      const { rerender, container } = await render(
         <Alert
           variant="success"
           transition="none"
@@ -264,10 +273,12 @@ describe('<Alert />', () => {
         </Alert>
       )
 
-      expect(liveRegion.children.length).toBe(1)
+      await vi.waitFor(() => {
+        expect(liveRegion.children.length).toBe(1)
+      })
 
       //set open to false
-      rerender(
+      await rerender(
         <Alert
           open={false}
           variant="success"
@@ -278,10 +289,39 @@ describe('<Alert />', () => {
         </Alert>
       )
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(container).not.toHaveTextContent('Success: Sample alert text.')
         expect(liveRegion.children.length).toBe(0)
       })
+    })
+  })
+
+  describe('Component tests', () => {
+    it('should have shadow by default', async () => {
+      const { container } = await render(
+        <Alert variant="info" transition="none">
+          Success: Sample alert text.
+        </Alert>
+      )
+      const view = container.querySelector<HTMLElement>(
+        'div[class$="-view-alert"]'
+      )!
+      const boxShadow = getComputedStyle(view).boxShadow
+      expect(boxShadow).not.toBe('none')
+    })
+
+    it("shouldn't have shadow, when `hasShadow` is set to false", async () => {
+      const { container } = await render(
+        <Alert variant="info" transition="none" hasShadow={false}>
+          Success: Sample alert text.
+        </Alert>
+      )
+      const view = container.querySelector<HTMLElement>(
+        'div[class$="-view-alert"]'
+      )!
+
+      const boxShadow = getComputedStyle(view).boxShadow
+      expect(boxShadow).toBe('none')
     })
   })
 })

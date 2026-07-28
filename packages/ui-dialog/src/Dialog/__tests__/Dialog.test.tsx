@@ -29,10 +29,9 @@ import {
   useRef,
   useState
 } from 'react'
-import { fireEvent, render, waitFor } from '@testing-library/react'
-import { vi } from 'vitest'
-import { userEvent } from '@testing-library/user-event'
-import '@testing-library/jest-dom'
+import { describe, it, expect, vi } from 'vitest'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
 
 import { Dialog } from '../index.js'
 import type { DialogProps } from '../props'
@@ -91,104 +90,72 @@ const DialogExample = forwardRef((props: DialogProps, ref: React.Ref<any>) => {
 })
 DialogExample.displayName = 'DialogExample'
 
-const NestedDialogExample = (props: DialogProps) => {
-  const [nestedOpen, setNestedOpen] = useState(false)
-  const handleTriggerClick = () => setNestedOpen(true)
-
-  return (
-    <div>
-      <Dialog open shouldReturnFocus label={TEST_LABEL} {...props}>
-        <div>
-          <div>
-            <input
-              onClick={handleTriggerClick}
-              type="text"
-              data-testid="nested-input-one"
-            />
-            <input
-              onClick={handleTriggerClick}
-              type="text"
-              data-testid="nested-input-two"
-            />
-          </div>
-          <Dialog open={nestedOpen} label={TEST_LABEL}>
-            {TEST_TEXT}
-          </Dialog>
-        </div>
-      </Dialog>
-    </div>
-  )
-}
-NestedDialogExample.displayName = 'NestedDialogExample'
-
 describe('<Dialog />', () => {
-  it('should render nothing when closed', () => {
-    const { container } = renderDialog({ open: false })
+  it('should render nothing when closed', async () => {
+    const { container } = await renderDialog({ open: false })
 
     expect(container.firstChild).not.toBeInTheDocument()
   })
 
   it('should render children when open', async () => {
-    const { container } = renderDialog({ open: true })
+    const { container } = await renderDialog({ open: true })
 
     expect(container.firstChild).toBeInTheDocument()
     expect(container.firstChild).toHaveTextContent(TEST_TEXT)
   })
 
-  it('should apply the a11y attributes', () => {
-    const { getByRole, getByLabelText } = renderDialog({ label: TEST_LABEL })
+  it('should apply the a11y attributes', async () => {
+    const { getByRole, getByLabelText } = await renderDialog({
+      label: TEST_LABEL
+    })
     const dialog = getByRole('dialog')
     const label = getByLabelText(TEST_LABEL)
 
-    expect(dialog).toBeInTheDocument()
-    expect(label).toBeInTheDocument()
+    await expect.element(dialog).toBeInTheDocument()
+    await expect.element(label).toBeInTheDocument()
   })
 
-  it('should apply the role attributes, if explicitly passed', () => {
-    const { getByRole, getByLabelText } = renderDialog({
+  it('should apply the role attributes, if explicitly passed', async () => {
+    const { getByRole, getByLabelText } = await renderDialog({
       label: TEST_LABEL,
       role: 'region'
     })
     const regionRole = getByRole('region')
     const label = getByLabelText(TEST_LABEL)
 
-    expect(regionRole).toBeInTheDocument()
-    expect(label).toBeInTheDocument()
+    await expect.element(regionRole).toBeInTheDocument()
+    await expect.element(label).toBeInTheDocument()
   })
 
   it('should call onDismiss prop when Esc key pressed', async () => {
     const onDismiss = vi.fn()
-    const { getByRole } = renderDialog({ onDismiss })
-    const dialog = getByRole('dialog')
+    await renderDialog({ onDismiss })
 
-    await waitFor(() => {
-      fireEvent.keyUp(dialog, {
-        key: 'Escape',
-        code: 'Escape',
-        keyCode: 27,
-        charCode: 27
-      })
+    await userEvent.keyboard('{Escape}')
+
+    await vi.waitFor(() => {
       expect(onDismiss).toHaveBeenCalled()
     })
   })
 
   it('should call onDismiss prop when the document is clicked', async () => {
     const onDismiss = vi.fn()
-    renderDialog({ onDismiss, shouldCloseOnDocumentClick: true })
+    await renderDialog({ onDismiss, shouldCloseOnDocumentClick: true })
 
-    await waitFor(async () => {
-      await userEvent.click(document.body)
+    await userEvent.click(document.body)
+
+    await vi.waitFor(() => {
       expect(onDismiss).toHaveBeenCalled()
     })
   })
 
   describe('managed focus', () => {
     it('should provide focus method', async () => {
-      const { getByTestId } = render(
+      await render(
         <div>
           <DialogExample
             open
-            contentElement={() => getByTestId('non-tabbable')}
+            contentElement={() => page.getByTestId('non-tabbable').element()}
           >
             {TEST_TEXT}
           </DialogExample>
@@ -197,20 +164,18 @@ describe('<Dialog />', () => {
           </div>
         </div>
       )
-      const nonTabbableContent = getByTestId('non-tabbable')
+      const nonTabbableContent = page.getByTestId('non-tabbable')
 
       await userEvent.tab()
-      await waitFor(() => {
-        expect(document.activeElement).toBe(nonTabbableContent)
-      })
+      await expect.element(nonTabbableContent).toHaveFocus()
     })
 
-    it('should warn when trying to focus or blur a closed dialog', () => {
+    it('should warn when trying to focus or blur a closed dialog', async () => {
       const consoleError = vi
         .spyOn(console, 'error')
         .mockImplementation(() => {})
-      let ref
-      render(<DialogExample open={false} ref={(el) => (ref = el)} />)
+      let ref: any
+      await render(<DialogExample open={false} ref={(el) => (ref = el)} />)
 
       ref!.focusDialog()
       expect(consoleError.mock.calls[0][0]).toBe(
@@ -226,68 +191,57 @@ describe('<Dialog />', () => {
     })
 
     it('should focus the first tabbable element by default', async () => {
-      const { getByTestId } = render(<DialogExample open />)
-      const inputOne = getByTestId('input-one')
+      await render(<DialogExample open />)
+      const inputOne = page.getByTestId('input-one')
 
-      await waitFor(() => {
-        expect(document.activeElement).toBe(inputOne)
-      })
+      await expect.element(inputOne).toHaveFocus()
     })
 
     it('should focus the first tabbable element when open prop becomes true', async () => {
-      const { rerender, getByTestId } = render(<DialogExample open={false} />)
-      const inputTrigger = getByTestId('input-trigger')
+      const { rerender } = await render(<DialogExample open={false} />)
+      const inputTrigger = page.getByTestId('input-trigger')
 
-      await waitFor(() => {
-        expect(document.activeElement).toBe(inputTrigger)
-      })
+      await expect.element(inputTrigger).toHaveFocus()
 
-      rerender(<DialogExample open={true} />)
-      const inputOne = getByTestId('input-one')
+      await rerender(<DialogExample open={true} />)
+      const inputOne = page.getByTestId('input-one')
 
-      await waitFor(() => {
-        expect(document.activeElement).toBe(inputOne)
-      })
+      await expect.element(inputOne).toHaveFocus()
     })
 
     it('should take a prop for finding default focus', async () => {
-      const { getByTestId } = render(
+      await render(
         <DialogExample
           open
-          defaultFocusElement={() => getByTestId('input-two')}
+          defaultFocusElement={() => page.getByTestId('input-two').element()}
         />
       )
-      const inputTwo = getByTestId('input-two')
 
-      await waitFor(() => {
-        expect(document.activeElement).toBe(inputTwo)
-      })
+      await expect.element(page.getByTestId('input-two')).toHaveFocus()
     })
 
     it('should still focus the defaultFocusElement when it is focusable but not tabbable', async () => {
-      const { getByTestId } = render(
+      await render(
         <DialogExample
           open
-          defaultFocusElement={() => getByTestId('non-tabbable')}
+          defaultFocusElement={() => page.getByTestId('non-tabbable').element()}
         >
           <div tabIndex={-1} data-testid="non-tabbable">
             {TEST_TEXT}
           </div>
         </DialogExample>
       )
-      const nonTabbableContent = getByTestId('non-tabbable')
+      const nonTabbableContent = page.getByTestId('non-tabbable')
 
-      await waitFor(() => {
-        expect(document.activeElement).toBe(nonTabbableContent)
-      })
+      await expect.element(nonTabbableContent).toHaveFocus()
     })
 
     it('should focus the contentElement by default if focusable and no defaultFocusElement is provided', async () => {
-      const { getByTestId } = render(
+      await render(
         <div>
           <DialogExample
             open
-            contentElement={() => getByTestId('non-tabbable')}
+            contentElement={() => page.getByTestId('non-tabbable').element()}
           >
             {TEST_TEXT}
           </DialogExample>
@@ -296,120 +250,98 @@ describe('<Dialog />', () => {
           </div>
         </div>
       )
-      const nonTabbableContent = getByTestId('non-tabbable')
+      const nonTabbableContent = page.getByTestId('non-tabbable')
 
-      await waitFor(() => {
-        expect(document.activeElement).toBe(nonTabbableContent)
-      })
+      await expect.element(nonTabbableContent).toHaveFocus()
     })
 
     it('should focus the document body if there is no defaultFocusElement, tabbable elements, or focusable contentElement', async () => {
-      const { rerender, getByTestId } = render(
+      const { rerender } = await render(
         <DialogExample open={false}>{TEST_TEXT}</DialogExample>
       )
-      const inputTrigger = getByTestId('input-trigger')
+      const inputTrigger = page.getByTestId('input-trigger').element()
       inputTrigger.focus()
 
-      rerender(<DialogExample open={true}>{TEST_TEXT}</DialogExample>)
+      await rerender(<DialogExample open={true}>{TEST_TEXT}</DialogExample>)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(document.activeElement).toBe(document.body)
       })
     })
 
     it('should return focus', async () => {
-      const { rerender, getByTestId } = render(<DialogExample open={false} />)
-      expect(document.activeElement).toBe(getByTestId('input-trigger'))
+      const { rerender } = await render(<DialogExample open={false} />)
+      await expect.element(page.getByTestId('input-trigger')).toHaveFocus()
 
-      rerender(<DialogExample open={true} />)
-      await waitFor(() => {
-        expect(document.activeElement).toBe(getByTestId('input-one'))
-      })
+      await rerender(<DialogExample open={true} />)
+      await expect.element(page.getByTestId('input-one')).toHaveFocus()
 
-      rerender(<DialogExample open={false} />)
-      await waitFor(() => {
-        expect(document.activeElement).toBe(getByTestId('input-trigger'))
-      })
+      await rerender(<DialogExample open={false} />)
+      await expect.element(page.getByTestId('input-trigger')).toHaveFocus()
     })
 
     describe('when focus leaves the first and last tabbable', () => {
       it(`should NOT call onBlur when shouldContainFocus=true and tab pressing last tabbable`, async () => {
         const onBlur = vi.fn()
-        const { getByTestId } = render(
+        await render(
           <DialogExample
             open
             onBlur={onBlur}
             shouldContainFocus
-            defaultFocusElement={() => getByTestId('input-two')}
+            defaultFocusElement={() => page.getByTestId('input-two').element()}
           />
         )
-        const inputOne = getByTestId('input-one')
-        const inputTwo = getByTestId('input-two')
+        const inputOne = page.getByTestId('input-one')
+        const inputTwo = page.getByTestId('input-two')
 
-        await waitFor(() => {
-          expect(document.activeElement).toBe(inputTwo)
-        })
+        await expect.element(inputTwo).toHaveFocus()
 
-        await waitFor(async () => {
-          await userEvent.tab()
-          expect(onBlur).not.toHaveBeenCalled()
-          expect(document.activeElement).toBe(inputOne)
-        })
+        await userEvent.tab()
+
+        expect(onBlur).not.toHaveBeenCalled()
+        await expect.element(inputOne).toHaveFocus()
       })
 
       it('should NOT call onBlur when shouldContainFocus=true and Shift+Tab pressing first tabbable', async () => {
         const onBlur = vi.fn()
 
-        const { getByTestId } = render(
+        await render(
           <DialogExample
             open
             shouldContainFocus
-            defaultFocusElement={() => getByTestId('input-one')}
+            defaultFocusElement={() => page.getByTestId('input-one').element()}
             onBlur={onBlur}
           />
         )
-        const inputOne = getByTestId('input-one')
-        const inputTwo = getByTestId('input-two')
+        const inputOne = page.getByTestId('input-one')
+        const inputTwo = page.getByTestId('input-two')
 
-        await waitFor(() => {
-          expect(document.activeElement).toBe(inputOne)
+        await expect.element(inputOne).toHaveFocus()
 
-          fireEvent.keyDown(inputOne, {
-            key: 'Tab',
-            code: 'Tab',
-            keyCode: 9,
-            charCode: 9,
-            shiftKey: true
-          })
+        await userEvent.tab({ shift: true })
 
-          expect(onBlur).not.toHaveBeenCalled()
-          expect(document.activeElement).toBe(inputTwo)
-        })
+        expect(onBlur).not.toHaveBeenCalled()
+        await expect.element(inputTwo).toHaveFocus()
       })
 
       it('should call onBlur when shouldContainFocus=false and tab pressing last tabbable', async () => {
         const onBlur = vi.fn()
 
-        const { getByTestId } = render(
+        await render(
           <DialogExample
             open
             shouldContainFocus={false}
-            defaultFocusElement={() => getByTestId('input-two')}
+            defaultFocusElement={() => page.getByTestId('input-two').element()}
             onBlur={onBlur}
           />
         )
-        const inputTwo = getByTestId('input-two')
-        inputTwo.focus()
+        const inputTwo = page.getByTestId('input-two')
 
-        await waitFor(() => {
-          expect(document.activeElement).toBe(inputTwo)
+        await expect.element(inputTwo).toHaveFocus()
 
-          fireEvent.keyDown(inputTwo, {
-            key: 'Tab',
-            code: 'Tab',
-            keyCode: 9,
-            charCode: 9
-          })
+        await userEvent.tab()
+
+        await vi.waitFor(() => {
           expect(onBlur).toHaveBeenCalled()
         })
       })
@@ -417,29 +349,155 @@ describe('<Dialog />', () => {
       it('should call onBlur when shouldContainFocus=false and pressing Shift+Tab on the first tabbable', async () => {
         const onBlur = vi.fn()
 
-        const { getByTestId } = render(
+        await render(
           <DialogExample
             open
             shouldContainFocus={false}
-            defaultFocusElement={() => getByTestId('input-one')}
+            defaultFocusElement={() => page.getByTestId('input-one').element()}
             onBlur={onBlur}
           />
         )
-        const inputOne = getByTestId('input-one')
-        inputOne.focus()
+        const inputOne = page.getByTestId('input-one')
 
-        await waitFor(() => {
-          expect(document.activeElement).toBe(inputOne)
+        await expect.element(inputOne).toHaveFocus()
 
-          fireEvent.keyDown(inputOne, {
-            key: 'Tab',
-            code: 'Tab',
-            keyCode: 9,
-            charCode: 9,
-            shiftKey: true
-          })
+        await userEvent.tab({ shift: true })
+
+        await vi.waitFor(() => {
           expect(onBlur).toHaveBeenCalled()
         })
+      })
+    })
+  })
+
+  type NestedDialogExampleProps = {
+    defaultInput?: 'one' | 'two'
+    onBlur?: (...args: any[]) => void
+    shouldContainFocus?: boolean
+  }
+
+  describe('Component tests', () => {
+    const NestedDialogFocusExample = ({
+      defaultInput = 'one',
+      onBlur,
+      shouldContainFocus = true
+    }: NestedDialogExampleProps) => {
+      const [nestedOpen, setNestedOpen] = useState(false)
+      const handleTriggerClick = () => setNestedOpen(true)
+      const inputOneRef = useRef<HTMLInputElement | null>(null)
+      const inputTwoRef = useRef<HTMLInputElement | null>(null)
+
+      return (
+        <div>
+          <Dialog
+            open
+            label={'label'}
+            shouldReturnFocus
+            shouldContainFocus={shouldContainFocus}
+            onBlur={onBlur}
+            defaultFocusElement={() =>
+              defaultInput === 'one' ? inputOneRef.current : inputTwoRef.current
+            }
+          >
+            <div>
+              <div>
+                <input
+                  ref={inputOneRef}
+                  onClick={handleTriggerClick}
+                  type="text"
+                  data-testid="nested-input-one"
+                />
+                <input
+                  ref={inputTwoRef}
+                  onClick={handleTriggerClick}
+                  type="text"
+                  data-testid="nested-input-two"
+                />
+              </div>
+              <Dialog open={nestedOpen} label={'test-label'}>
+                {'test-text'}
+              </Dialog>
+            </div>
+          </Dialog>
+        </div>
+      )
+    }
+
+    it('should contain focus when last tabbable element triggers dialog w/out focusable content', async () => {
+      const onBlur = vi.fn()
+      await render(
+        <NestedDialogFocusExample defaultInput={'one'} onBlur={onBlur} />
+      )
+
+      // Wait for the Dialog's initial focus (a requestAnimationFrame in
+      // KeyboardFocusRegion) to land on the defaultFocusElement before
+      // clicking the other input. Otherwise that pending rAF can fire after
+      // the click and steal focus back.
+      await expect.element(page.getByTestId('nested-input-one')).toHaveFocus()
+
+      await userEvent.click(page.getByTestId('nested-input-two'))
+      await expect.element(page.getByTestId('nested-input-two')).toHaveFocus()
+
+      await userEvent.tab()
+
+      await expect.element(page.getByTestId('nested-input-one')).toHaveFocus()
+      expect(onBlur).not.toHaveBeenCalled()
+    })
+
+    it('should contain focus when first tabbable element triggers dialog w/out focusable content', async () => {
+      const onBlur = vi.fn()
+      await render(
+        <NestedDialogFocusExample defaultInput={'two'} onBlur={onBlur} />
+      )
+
+      await expect.element(page.getByTestId('nested-input-two')).toHaveFocus()
+
+      await userEvent.click(page.getByTestId('nested-input-one'))
+      await expect.element(page.getByTestId('nested-input-one')).toHaveFocus()
+
+      await userEvent.tab({ shift: true })
+
+      await expect.element(page.getByTestId('nested-input-two')).toHaveFocus()
+      expect(onBlur).not.toHaveBeenCalled()
+    })
+
+    it('should call onBlur when shouldContainFocus=false and last tabbable element triggers dialog w/out focusable content', async () => {
+      const onBlur = vi.fn()
+      await render(
+        <NestedDialogFocusExample
+          defaultInput={'two'}
+          onBlur={onBlur}
+          shouldContainFocus={false}
+        />
+      )
+
+      await userEvent.click(page.getByTestId('nested-input-two'))
+      await expect.element(page.getByTestId('nested-input-two')).toHaveFocus()
+
+      await userEvent.tab()
+
+      await vi.waitFor(() => {
+        expect(onBlur).toHaveBeenCalled()
+      })
+    })
+
+    it('should call onBlur when shouldContainFocus=false and first tabbable element triggers dialog w/out focusable content', async () => {
+      const onBlur = vi.fn()
+      await render(
+        <NestedDialogFocusExample
+          defaultInput={'one'}
+          onBlur={onBlur}
+          shouldContainFocus={false}
+        />
+      )
+
+      await userEvent.click(page.getByTestId('nested-input-one'))
+      await expect.element(page.getByTestId('nested-input-one')).toHaveFocus()
+
+      await userEvent.tab({ shift: true })
+
+      await vi.waitFor(() => {
+        expect(onBlur).toHaveBeenCalled()
       })
     })
   })

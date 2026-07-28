@@ -1,5 +1,5 @@
 /*
- * The MIT License (MIT)
+ * The MIT License (MIT).
  *
  * Copyright (c) 2015 - present Instructure, Inc.
  *
@@ -22,30 +22,13 @@
  * SOFTWARE.
  */
 
-import { Alert } from '@instructure/ui/latest'
+// Setup for the `browser` project (real-browser tests via vitest-browser).
+import '@testing-library/jest-dom/vitest'
 
-import '../support/component'
-import 'cypress-real-events'
-
-describe('<Alerts/>', () => {
-  it('should have shadow by default', () => {
-    cy.mount(
-      <Alert variant="info" transition="none">
-        Success: Sample alert text.
-      </Alert>
-    )
-    cy.get('div[class$="-view-alert"]')
-      .should('have.css', 'box-shadow')
-      .and('not.equal', 'none')
-  })
-
-  it("shouldn't have shadow, when `hasShadow` is set to false", () => {
-    cy.mount(
-      <Alert variant="info" transition="none" hasShadow={false}>
-        Success: Sample alert text.
-      </Alert>
-    )
-
-    cy.get('div[class$="-view-alert"]').should('have.css', 'box-shadow', 'none')
-  })
-})
+// @instructure/console only outputs logs if process.env.NODE_ENV !== 'production'
+// these messages are sometimes used in test assertions
+if (typeof globalThis.process === 'undefined') {
+  ;(globalThis as any).process = { env: { NODE_ENV: 'test' } }
+} else if (!globalThis.process.env) {
+  globalThis.process.env = { NODE_ENV: 'test' }
+}

@@ -15,6 +15,7 @@ __build__
 .tmp/
 .pnpm-store/
 .transpile-diff/
+.vitest-attachments/
 
 tsconfig.build.tsbuildinfo
 tsconfig.node.build.tsbuildinfo

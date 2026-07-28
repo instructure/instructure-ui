@@ -22,8 +22,9 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect, beforeEach, vi } from 'vitest'
 
 import { FocusRegionManager } from '../FocusRegionManager.js'
 
@@ -33,7 +34,7 @@ describe('FocusRegionManager', () => {
   })
 
   it('should focus the first tabbable element when focused', async () => {
-    render(
+    await render(
       <div data-test-parent role="main" aria-label="test app" id="test-parent3">
         <div data-test-ignore role="alert">
           <span>test alert</span>
@@ -76,9 +77,9 @@ describe('FocusRegionManager', () => {
       </div>
     )
 
-    const button = screen.getByTestId('button')
-    const content = screen.getByTestId('content')
-    const firstTabbable = screen.getByTestId('first-tabbable')
+    const button = page.getByTestId('button').element()
+    const content = page.getByTestId('content').element()
+    const firstTabbable = page.getByTestId('first-tabbable').element()
 
     button.focus()
 
@@ -86,13 +87,13 @@ describe('FocusRegionManager', () => {
 
     FocusRegionManager.focusRegion(content)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(document.activeElement).toBe(firstTabbable)
     })
   })
 
   it('should return focus when blurred', async () => {
-    render(
+    await render(
       <div data-test-parent role="main" aria-label="test app" id="test-parent3">
         <div data-test-ignore role="alert">
           <span>test alert</span>
@@ -134,8 +135,8 @@ describe('FocusRegionManager', () => {
         <iframe id="frame" title="frame"></iframe>
       </div>
     )
-    const button = screen.getByTestId('button')
-    const content = screen.getByTestId('content')
+    const button = page.getByTestId('button').element()
+    const content = page.getByTestId('content').element()
 
     button.focus()
 
@@ -144,7 +145,7 @@ describe('FocusRegionManager', () => {
     FocusRegionManager.focusRegion(content)
     FocusRegionManager.blurRegion(content)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(document.activeElement).toBe(button)
     })
   })
