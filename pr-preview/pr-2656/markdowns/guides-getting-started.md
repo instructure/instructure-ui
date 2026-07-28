@@ -81,6 +81,22 @@ These files are designed to be used as context for AI coding agents.
 Additionally, an `llms.txt` file is available. This file contains a catalog of links pointing to the online markdown files for InstUI components and guides, which are also accessible to AI agents. It can be found at:
 https://instructure.design/llms.txt
 
+### Claude Code plugin
+
+If you use [Claude Code](https://claude.com/claude-code), InstUI ships a plugin that teaches it to answer your questions from these docs instead of guessing component APIs. Once installed, ask about any component ("how do I use `DateInput` with a controlled value?", "which props does `Modal` take?") and it looks up the relevant page and answers with citations.
+
+Install it from within Claude Code:
+
+```md
+---
+type: code
+---
+/plugin marketplace add instructure/instructure-ui
+/plugin install instui@instructure-ui
+```
+
+The plugin lives in the InstUI repo under [`plugins/instui`](https://github.com/instructure/instructure-ui/tree/master/plugins/instui). See its README for team-wide, zero-setup installation via a project's `.claude/settings.json`.
+
 ## Further reading
 
 - To use a different theme or customize one read about [New Theme Overrides](new-theme-overrides)
