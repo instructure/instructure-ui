@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { expect } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { makeThemeVars } from '../makeThemeVars.js'
 
 describe('makeThemeVars', () => {

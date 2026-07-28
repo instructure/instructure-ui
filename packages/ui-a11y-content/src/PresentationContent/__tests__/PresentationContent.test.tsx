@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
-import { render, screen } from '@testing-library/react'
-import { vi } from 'vitest'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import type { MockInstance } from 'vitest'
-import '@testing-library/jest-dom'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { PresentationContent } from '../index.js'
 
@@ -44,7 +44,7 @@ describe('<PresentationContent />', () => {
   })
 
   it('should render children with an aria-hidden attribute', async () => {
-    const { container } = render(
+    const { container } = await render(
       <PresentationContent>Hello World</PresentationContent>
     )
     const content = container.querySelector('[aria-hidden="true"]')
@@ -53,14 +53,14 @@ describe('<PresentationContent />', () => {
   })
 
   it('should render the specified tag when `as` prop is set', async () => {
-    render(<PresentationContent as="div" data-testid="pc" />)
-    const presentationContent = screen.getByTestId('pc')
+    await render(<PresentationContent as="div" data-testid="pc" />)
+    const presentationContent = page.getByTestId('pc').element()
 
     expect(presentationContent.tagName).toBe('DIV')
   })
 
   it('should meet a11y standards', async () => {
-    const { container } = render(
+    const { container } = await render(
       <PresentationContent>Hello World</PresentationContent>
     )
     const axeCheck = await runAxeCheck(container)

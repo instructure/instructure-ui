@@ -23,11 +23,10 @@
  */
 
 import { Component } from 'react'
-import { render, screen, waitFor } from '@testing-library/react'
-import { vi } from 'vitest'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import type { MockInstance } from 'vitest'
-import userEvent from '@testing-library/user-event'
-import '@testing-library/jest-dom'
 
 import { withStyle, InstUISettingsProvider, WithStyleProps } from '../index.js'
 
@@ -163,31 +162,31 @@ describe.skip('@withStyle', () => {
   })
 
   it('should render ThemeableComponent correctly', async () => {
-    render(<WrapperComponent />)
+    await render(<WrapperComponent />)
 
-    const foundComponent = screen.getByTestId('testComp')
+    const foundComponent = page.getByTestId('testComp').element()
     expect(foundComponent).toBeTruthy()
   })
 
   describe('with theme provided by InstUISettingsProvider', () => {
     it('should add css class suffixed with label', async () => {
-      render(
+      await render(
         <InstUISettingsProvider theme={exampleTheme}>
           <ThemeableComponent />
         </InstUISettingsProvider>
       )
       const emotionClassRegex = new RegExp(/^css-.+-exampleComponent$/)
-      const themeableComponent = screen.getAllByTestId('testComp')[0]!
+      const themeableComponent = page.getByTestId('testComp').first().element()
       expect(themeableComponent.classList[0]).toMatch(emotionClassRegex)
     })
 
     it('should apply correct css props', async () => {
-      render(
+      await render(
         <InstUISettingsProvider theme={exampleTheme}>
           <ThemeableComponent />
         </InstUISettingsProvider>
       )
-      const component = screen.getAllByTestId('testComp')[0]!
+      const component = page.getByTestId('testComp').first().element()
       const computedStyle = getComputedStyle(component)
 
       expect(computedStyle.color).toEqual('rgb(0, 128, 0)')
@@ -196,7 +195,7 @@ describe.skip('@withStyle', () => {
 
     describe('should allow configuration through the themeOverride prop', () => {
       it('when it is an object', async () => {
-        render(
+        await render(
           <InstUISettingsProvider theme={exampleTheme}>
             <ThemeableComponent
               themeOverride={{
@@ -205,7 +204,7 @@ describe.skip('@withStyle', () => {
             />
           </InstUISettingsProvider>
         )
-        const component = screen.getAllByTestId('testComp')[0]!
+        const component = page.getByTestId('testComp').first().element()
         const computedStyle = getComputedStyle(component)
 
         expect(computedStyle.color).toEqual('rgb(128, 0, 128)')
@@ -213,7 +212,7 @@ describe.skip('@withStyle', () => {
       })
 
       it('when it is a function', async () => {
-        render(
+        await render(
           <InstUISettingsProvider theme={exampleTheme}>
             <ThemeableComponent
               themeOverride={(componentTheme) => ({
@@ -222,7 +221,7 @@ describe.skip('@withStyle', () => {
             />
           </InstUISettingsProvider>
         )
-        const component = screen.getAllByTestId('testComp')[0]!
+        const component = page.getByTestId('testComp').first().element()
         const computedStyle = getComputedStyle(component)
 
         expect(computedStyle.color).toEqual('rgb(255, 255, 0)')
@@ -231,12 +230,12 @@ describe.skip('@withStyle', () => {
     })
 
     it('should ignore empty themeOverride props', async () => {
-      render(
+      await render(
         <InstUISettingsProvider theme={exampleTheme}>
           <ThemeableComponent themeOverride={{}} />
         </InstUISettingsProvider>
       )
-      const component = screen.getAllByTestId('testComp')[0]!
+      const component = page.getByTestId('testComp').first().element()
       const computedStyle = getComputedStyle(component)
 
       expect(computedStyle.color).toEqual('rgb(0, 128, 0)')
@@ -246,7 +245,7 @@ describe.skip('@withStyle', () => {
 
   describe('should update css props', () => {
     it('when props are updated', async () => {
-      const { rerender } = render(
+      const { rerender } = await render(
         <ThemeableComponent
           inverse={false}
           themeOverride={{
@@ -256,11 +255,11 @@ describe.skip('@withStyle', () => {
           }}
         />
       )
-      const component = screen.getAllByTestId('testComp')[0]!
+      const component = page.getByTestId('testComp').first().element()
       expect(getComputedStyle(component).color).toEqual(grey1111)
 
       // Set prop: inverse
-      rerender(
+      await rerender(
         <ThemeableComponent
           inverse={true}
           themeOverride={{
@@ -270,18 +269,18 @@ describe.skip('@withStyle', () => {
           }}
         />
       )
-      const updatedComponent = screen.getAllByTestId('testComp')[0]!
+      const updatedComponent = page.getByTestId('testComp').first().element()
       expect(getComputedStyle(updatedComponent).color).toEqual(blue4570)
     })
 
     it('when state is updated', async () => {
-      render(
+      await render(
         <InstUISettingsProvider theme={exampleTheme}>
           <ThemeableComponent />
         </InstUISettingsProvider>
       )
-      const component = screen.getAllByTestId('testComp')[0]!
-      const clearBackgroundButton = screen.getAllByText('Button')[0]
+      const component = page.getByTestId('testComp').first().element()
+      const clearBackgroundButton = page.getByText('Button').first()
 
       expect(getComputedStyle(component).backgroundColor).toEqual(
         'rgb(255, 255, 0)'
@@ -289,7 +288,7 @@ describe.skip('@withStyle', () => {
 
       await userEvent.click(clearBackgroundButton)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(getComputedStyle(component).backgroundColor).toEqual(
           'rgba(0, 0, 0, 0)'
         )
@@ -299,12 +298,12 @@ describe.skip('@withStyle', () => {
 
   describe('should not allow manually passing prop', () => {
     it('styles', async () => {
-      render(
+      await render(
         <InstUISettingsProvider theme={exampleTheme}>
           <ThemeableComponent styles={{ exampleComponent: { color: 'red' } }} />
         </InstUISettingsProvider>
       )
-      const component = screen.getAllByTestId('testComp')[0]!
+      const component = page.getByTestId('testComp').first().element()
       const computedStyle = getComputedStyle(component)
 
       expect(computedStyle.color).toEqual(grey1111)
@@ -313,7 +312,7 @@ describe.skip('@withStyle', () => {
     it('makeStyles', async () => {
       const consoleLog = vi.spyOn(console, 'log').mockImplementation(() => {})
 
-      render(
+      await render(
         <InstUISettingsProvider theme={exampleTheme}>
           <ThemeableComponent
             makeStyles={() => {
@@ -324,7 +323,7 @@ describe.skip('@withStyle', () => {
           />
         </InstUISettingsProvider>
       )
-      const component = screen.getAllByTestId('testComp')[0]!
+      const component = page.getByTestId('testComp').first().element()
       const computedStyle = getComputedStyle(component)
 
       expect(computedStyle.color).toEqual(grey1111)
@@ -336,7 +335,7 @@ describe.skip('@withStyle', () => {
 
   describe('should throw warning when manually passing prop', () => {
     it('styles', async () => {
-      render(
+      await render(
         <InstUISettingsProvider theme={exampleTheme}>
           <ThemeableComponent styles={{ exampleComponent: { color: 'red' } }} />
         </InstUISettingsProvider>
@@ -352,7 +351,7 @@ describe.skip('@withStyle', () => {
     })
 
     it('makeStyles', async () => {
-      render(
+      await render(
         <InstUISettingsProvider theme={exampleTheme}>
           <ThemeableComponent
             makeStyles={() => {
@@ -370,6 +369,111 @@ describe.skip('@withStyle', () => {
         expect.stringContaining(expectedWarningMessage),
         expect.any(String)
       )
+    })
+  })
+})
+
+describe('Component tests', () => {
+  const grey1111 = 'rgb(0, 128, 0)'
+  const green4570 = 'rgb(10, 10, 10)'
+  const blue4570 = 'rgb(255, 255, 0)'
+  const exampleTheme: Theme = {
+    key: 'exampleTheme',
+    colors: {
+      contrasts: {
+        grey1111,
+        green4570,
+        blue4570
+      }
+    }
+  }
+
+  const generateComponentTheme = function (theme: Theme): ComponentTheme {
+    const { colors } = theme
+    return {
+      textColor: colors.contrasts.grey1111,
+      textColorInverse: colors.contrasts.green4570,
+      backgroundColor: colors.contrasts.blue4570
+    }
+  }
+
+  const generateStyle = function (
+    componentTheme: ComponentTheme,
+    props: Props,
+    state: State
+  ) {
+    const { inverse } = props
+    const { clearBackground } = state
+
+    return {
+      exampleComponent: {
+        label: 'exampleComponent',
+        color: componentTheme.textColor,
+        background: componentTheme.backgroundColor,
+        insetInlineStart: '8px',
+        ...(inverse && { color: componentTheme.textColorInverse }),
+        ...(clearBackground && { background: 'transparent' })
+      }
+    }
+  }
+
+  @withStyle(generateStyle, generateComponentTheme)
+  class ThemeableComponent extends Component<Props, State> {
+    static defaultTypes = {
+      inverse: false
+    }
+
+    state = {
+      clearBackground: false
+    }
+
+    componentDidMount() {
+      this.props.makeStyles!({ clearBackground: this.state.clearBackground })
+    }
+
+    componentDidUpdate() {
+      this.props.makeStyles!({ clearBackground: this.state.clearBackground })
+    }
+
+    render() {
+      const { styles } = this.props
+      return (
+        <div data-testid="withStyleNew-testComp" css={styles!.exampleComponent}>
+          <p>Hello World</p>
+        </div>
+      )
+    }
+  }
+
+  describe('withStyleNew should apply bi-directional polyfill on styles object', () => {
+    it('in default "ltr" mode', async () => {
+      await render(
+        <InstUISettingsProvider theme={exampleTheme}>
+          <ThemeableComponent />
+        </InstUISettingsProvider>
+      )
+      const computedStyle = getComputedStyle(
+        page.getByTestId('withStyleNew-testComp').element()
+      )
+
+      // `inset-inline-start` should be transformed to 'left' in 'ltr' mode
+      expect(computedStyle.left).toEqual('8px')
+      expect(computedStyle.right).toEqual('auto')
+    })
+
+    it('in "rtl" mode', async () => {
+      await render(
+        <InstUISettingsProvider theme={exampleTheme} dir="rtl">
+          <ThemeableComponent />
+        </InstUISettingsProvider>
+      )
+      const computedStyle = getComputedStyle(
+        page.getByTestId('withStyleNew-testComp').element()
+      )
+
+      // `inset-inline-start` should be transformed to 'right' in 'rtl' mode
+      expect(computedStyle.left).toEqual('auto')
+      expect(computedStyle.right).toEqual('8px')
     })
   })
 })

@@ -37,6 +37,24 @@ jobs:
         run: pnpm run bootstrap
       - name: Run vitest unit tests
         run: pnpm run test:vitest
+  vitest-browser-tests:
+    name: Vitest browser tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: 'pnpm'
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Install Playwright browser
+        run: pnpm exec playwright install --with-deps chromium
+      - name: Bootstrap project
+        run: pnpm run bootstrap
+      - name: Run vitest browser tests
+        run: pnpm run test:browser
   cypress:
     name: Cypress component tests
     runs-on: ubuntu-latest

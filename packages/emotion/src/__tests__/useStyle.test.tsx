@@ -23,12 +23,16 @@
  */
 
 import { useState } from 'react'
-import { vi } from 'vitest'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import type { MockInstance } from 'vitest'
-import { render, screen, waitFor } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
-import '@testing-library/jest-dom'
-import { InstUISettingsProvider, WithStyleProps, useStyle } from '../index.js'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import {
+  InstUISettingsProvider,
+  WithStyleProps,
+  useStyle,
+  useStyleNew
+} from '../index.js'
 
 type Props = {
   inverse?: boolean
@@ -141,25 +145,25 @@ describe('useStyle', () => {
 
   describe('with theme provided by InstUISettingsProvider', () => {
     it('should add css class suffixed with label', async () => {
-      render(
+      await render(
         <InstUISettingsProvider theme={exampleTheme}>
           <ThemedComponent />
         </InstUISettingsProvider>
       )
       const emotionClassRegex = new RegExp(/^css-.+-exampleComponent$/)
 
-      const themedComponent = screen.getByTestId('testComp')!
+      const themedComponent = page.getByTestId('testComp').element()
 
       expect(themedComponent.classList[0]).toMatch(emotionClassRegex)
     })
 
     it('should apply correct css props', async () => {
-      render(
+      await render(
         <InstUISettingsProvider theme={exampleTheme}>
           <ThemedComponent />
         </InstUISettingsProvider>
       )
-      const component = screen.getByTestId('testComp')!
+      const component = page.getByTestId('testComp').element()
       const computedStyle = getComputedStyle(component)
 
       expect(computedStyle.color).toEqual('rgb(0, 128, 0)')
@@ -168,7 +172,7 @@ describe('useStyle', () => {
 
     describe('should allow configuration through the themeOverride prop', () => {
       it('when it is an object', async () => {
-        render(
+        await render(
           <InstUISettingsProvider theme={exampleTheme}>
             <ThemedComponent
               themeOverride={{
@@ -177,7 +181,7 @@ describe('useStyle', () => {
             />
           </InstUISettingsProvider>
         )
-        const component = screen.getByTestId('testComp')!
+        const component = page.getByTestId('testComp').element()
         const computedStyle = getComputedStyle(component)
 
         expect(computedStyle.color).toEqual('rgb(128, 0, 128)')
@@ -185,7 +189,7 @@ describe('useStyle', () => {
       })
 
       it('when it is a function', async () => {
-        render(
+        await render(
           <InstUISettingsProvider theme={exampleTheme}>
             <ThemedComponent
               themeOverride={(componentTheme) => ({
@@ -194,7 +198,7 @@ describe('useStyle', () => {
             />
           </InstUISettingsProvider>
         )
-        const component = screen.getByTestId('testComp')!
+        const component = page.getByTestId('testComp').element()
         const computedStyle = getComputedStyle(component)
 
         expect(computedStyle.color).toEqual('rgb(255, 255, 0)')
@@ -203,12 +207,12 @@ describe('useStyle', () => {
     })
 
     it('should ignore empty themeOverride props', async () => {
-      render(
+      await render(
         <InstUISettingsProvider theme={exampleTheme}>
           <ThemedComponent themeOverride={{}} />
         </InstUISettingsProvider>
       )
-      const component = screen.getByTestId('testComp')!
+      const component = page.getByTestId('testComp').element()
       const computedStyle = getComputedStyle(component)
 
       expect(computedStyle.color).toEqual('rgb(0, 128, 0)')
@@ -218,7 +222,7 @@ describe('useStyle', () => {
 
   describe('should update css props', () => {
     it('when props are updated', async () => {
-      const { rerender } = render(
+      const { rerender } = await render(
         <ThemedComponent
           inverse={false}
           themeOverride={{
@@ -228,11 +232,11 @@ describe('useStyle', () => {
           }}
         />
       )
-      const component = screen.getByTestId('testComp')!
+      const component = page.getByTestId('testComp').element()
       expect(getComputedStyle(component).color).toEqual(grey1111)
 
       // Set Prop: inverse
-      rerender(
+      await rerender(
         <ThemedComponent
           inverse={true}
           themeOverride={{
@@ -243,18 +247,18 @@ describe('useStyle', () => {
         />
       )
 
-      const updatedComponent = screen.getByTestId('testComp')!
+      const updatedComponent = page.getByTestId('testComp').element()
       expect(getComputedStyle(updatedComponent).color).toEqual(blue4570)
     })
 
     it('when state is updated', async () => {
-      render(
+      await render(
         <InstUISettingsProvider theme={exampleTheme}>
           <ThemedComponent />
         </InstUISettingsProvider>
       )
-      const component = screen.getByTestId('testComp')!
-      const clearBackgroundButton = screen.getByText('Button')
+      const component = page.getByTestId('testComp').element()
+      const clearBackgroundButton = page.getByText('Button')
 
       expect(getComputedStyle(component).backgroundColor).toEqual(
         'rgb(255, 255, 0)'
@@ -262,10 +266,71 @@ describe('useStyle', () => {
 
       await userEvent.click(clearBackgroundButton)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(getComputedStyle(component).backgroundColor).toEqual(
           'rgba(0, 0, 0, 0)'
         )
+      })
+    })
+  })
+
+  describe('Component tests', () => {
+    // `useStyleNew` calls this with `{ primitives, semantics, sharedTokens }` (the
+    // new theming system), not the legacy `{ colors: { contrasts } }` shape. This
+    // test only asserts the bi-directional polyfill, so the color values are
+    // arbitrary — return them statically rather than reading a removed theme shape.
+    const generateNewComponentTheme = (): ComponentTheme => ({
+      textColor: grey1111,
+      textColorInverse: green4570,
+      backgroundColor: blue4570
+    })
+
+    const ThemedComponentNew = ({ inverse = false, themeOverride }: Props) => {
+      const styles = useStyleNew({
+        // `useStyleNew` types these against the known component themes; this
+        // example component isn't one of them.
+        generateStyle: generateStyle as any,
+        generateComponentTheme: generateNewComponentTheme as any,
+        componentId: 'ThemedComponent',
+        params: { inverse, clearBackground: false, themeOverride }
+      })
+
+      return (
+        <div data-testid="useStyleNew-testComp" css={styles!.exampleComponent}>
+          <p>Hello World</p>
+        </div>
+      )
+    }
+
+    describe('useStyleNew should apply bi-directional polyfill on styles object', () => {
+      it('in default "ltr" mode', async () => {
+        await render(
+          <InstUISettingsProvider theme={exampleTheme}>
+            <ThemedComponentNew />
+          </InstUISettingsProvider>
+        )
+        const computedStyle = getComputedStyle(
+          page.getByTestId('useStyleNew-testComp').element()
+        )
+
+        // `inset-inline-start` becomes 'left' in LTR mode
+        expect(computedStyle.left).toEqual('8px')
+        expect(computedStyle.right).toEqual('auto')
+      })
+
+      it('in "rtl" mode', async () => {
+        await render(
+          <InstUISettingsProvider theme={exampleTheme} dir="rtl">
+            <ThemedComponentNew />
+          </InstUISettingsProvider>
+        )
+        const computedStyle = getComputedStyle(
+          page.getByTestId('useStyleNew-testComp').element()
+        )
+
+        // `inset-inline-start` should be transformed to 'right' in 'rtl' mode
+        expect(computedStyle.left).toEqual('auto')
+        expect(computedStyle.right).toEqual('8px')
       })
     })
   })

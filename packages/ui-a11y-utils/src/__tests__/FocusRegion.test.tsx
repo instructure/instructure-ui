@@ -22,9 +22,10 @@
  * SOFTWARE.
  */
 
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
-import { vi } from 'vitest'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { fireEvent } from '@testing-library/dom'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 import { FocusRegion } from '../FocusRegion.js'
 
@@ -32,14 +33,14 @@ describe('FocusRegion', () => {
   let container: HTMLElement
   let focusRegion: FocusRegion
 
-  beforeEach(() => {
-    render(
+  beforeEach(async () => {
+    await render(
       <div data-testid="container">
         <button data-testid="button1">Button 1</button>
         <button data-testid="button2">Button 2</button>
       </div>
     )
-    container = screen.getByTestId('container')
+    container = page.getByTestId('container').element()
   })
 
   afterEach(() => {
@@ -70,7 +71,7 @@ describe('FocusRegion', () => {
 
       fireEvent.click(outsideElement, { button: 0, detail: 1 })
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onDismiss).toHaveBeenCalledWith(expect.any(Object), true)
       })
 
@@ -110,7 +111,7 @@ describe('FocusRegion', () => {
 
       fireEvent.keyUp(document, { keyCode: 27 }) // ESC key
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onDismiss).toHaveBeenCalledWith(expect.any(Object), undefined)
       })
     })
@@ -146,20 +147,20 @@ describe('FocusRegion', () => {
 
       fireEvent(document, escapeEvent)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(stopPropagationSpy).toHaveBeenCalled()
         expect(onDismiss).toHaveBeenCalled()
       })
     })
 
     it('should handle file input focus with escape key', async () => {
-      const { container: fileContainer } = render(
+      const { container: fileContainer } = await render(
         <div data-testid="file-container">
           <input type="file" data-testid="file-input" />
         </div>
       )
 
-      const fileInput = screen.getByTestId('file-input')
+      const fileInput = page.getByTestId('file-input').element()
       const fileRegion = new FocusRegion(fileContainer, {
         shouldCloseOnEscape: true,
         onDismiss: vi.fn()
@@ -172,7 +173,7 @@ describe('FocusRegion', () => {
 
       fireEvent.keyUp(document, { keyCode: 27 })
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(blurSpy).toHaveBeenCalled()
       })
 
@@ -202,7 +203,7 @@ describe('FocusRegion', () => {
       focusRegion.activate()
       focusRegion.handleFrameClick(new MouseEvent('click') as any, iframe)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onDismiss).toHaveBeenCalledWith(expect.any(Object), true)
       })
 
@@ -295,9 +296,9 @@ describe('FocusRegion', () => {
       expect(focusRegion.keyboardFocusable).toBe(true)
     })
 
-    it('should return false for non-focusable containers', () => {
-      render(<div data-testid="empty"></div>)
-      const emptyElement = screen.getByTestId('empty')
+    it('should return false for non-focusable containers', async () => {
+      await render(<div data-testid="empty"></div>)
+      const emptyElement = page.getByTestId('empty').element()
 
       focusRegion = new FocusRegion(emptyElement, {})
 

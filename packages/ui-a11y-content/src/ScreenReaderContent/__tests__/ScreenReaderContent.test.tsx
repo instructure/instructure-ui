@@ -21,42 +21,43 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom'
+import { describe, it, expect } from 'vitest'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
 import { ScreenReaderContent } from '../index.js'
 
 describe('<ScreenReaderContent />', () => {
   it('should render the specified tag when `as` prop is set', async () => {
-    render(<ScreenReaderContent as="div" data-testid="src" />)
-    const screenReaderContent = screen.getByTestId('src')
+    await render(<ScreenReaderContent as="div" data-testid="src" />)
+    const screenReaderContent = page.getByTestId('src').element()
 
     expect(screenReaderContent.tagName).toBe('DIV')
   })
 
   it('accepts "passthrough" props', async () => {
-    render(<ScreenReaderContent hidden data-testid="src" />)
-    const screenReaderContent = screen.getByTestId('src')
+    await render(<ScreenReaderContent hidden data-testid="src" />)
+    const screenReaderContent = page.getByTestId('src').element()
 
     expect(screenReaderContent).toHaveAttribute('hidden')
   })
 
   it('renders children components', async () => {
-    render(
+    await render(
       <ScreenReaderContent>
         <span>Screenreader text</span>
       </ScreenReaderContent>
     )
 
-    const children = screen.getByText('Screenreader text')
+    const children = page.getByText('Screenreader text')
 
-    expect(children).toBeInTheDocument()
+    await expect.element(children).toBeInTheDocument()
   })
 
   it('should not be selectable so its text is excluded from clipboard copies', async () => {
-    render(
+    await render(
       <ScreenReaderContent data-testid="src">hidden text</ScreenReaderContent>
     )
-    const screenReaderContent = screen.getByTestId('src')
+    const screenReaderContent = page.getByTestId('src').element()
 
     expect(screenReaderContent).toHaveStyle({ userSelect: 'none' })
   })

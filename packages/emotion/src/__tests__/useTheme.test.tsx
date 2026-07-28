@@ -21,11 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { render } from '@testing-library/react'
-import { vi } from 'vitest'
+import { render } from 'vitest-browser-react'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import type { MockInstance } from 'vitest'
 import { canvas, canvasHighContrast } from '@instructure/ui-themes'
-import '@testing-library/jest-dom'
 
 import { useTheme } from '../useTheme.js'
 import { InstUISettingsProvider } from '../InstUISettingsProvider/index.js'
@@ -65,7 +64,7 @@ describe('useTheme hook', () => {
   describe('with using InstUISettingsProvider', () => {
     it('should use default canvas theme when no "theme" is provided', async () => {
       const callback = vi.fn()
-      render(
+      await render(
         <InstUISettingsProvider>
           <ExampleComponent callback={callback}></ExampleComponent>
         </InstUISettingsProvider>
@@ -76,7 +75,7 @@ describe('useTheme hook', () => {
 
     it('should default to canvas theme when no theme is provided', async () => {
       const callback = vi.fn()
-      render(
+      await render(
         <InstUISettingsProvider>
           <ExampleComponent callback={callback}></ExampleComponent>
         </InstUISettingsProvider>
@@ -86,7 +85,7 @@ describe('useTheme hook', () => {
 
     it('should use provided theme when theme is provided', async () => {
       const callback = vi.fn()
-      render(
+      await render(
         <InstUISettingsProvider theme={canvasHighContrast}>
           <ExampleComponent callback={callback}></ExampleComponent>
         </InstUISettingsProvider>
@@ -96,7 +95,7 @@ describe('useTheme hook', () => {
 
     it('should override the default theme when no other theme is available', async () => {
       const callback = vi.fn()
-      render(
+      await render(
         <InstUISettingsProvider
           theme={{
             colors: {
@@ -124,7 +123,7 @@ describe('useTheme hook', () => {
     it('should override the theme from context when provided', async () => {
       const callback = vi.fn()
 
-      render(
+      await render(
         <InstUISettingsProvider theme={canvasHighContrast}>
           <InstUISettingsProvider
             theme={{
@@ -156,7 +155,7 @@ describe('useTheme hook', () => {
 
     it('should use theme overrides correctly', async () => {
       const callback = vi.fn()
-      render(
+      await render(
         <InstUISettingsProvider theme={canvas}>
           <InstUISettingsProvider
             theme={{
@@ -190,7 +189,7 @@ describe('useTheme hook', () => {
   describe('without using InstUISettingsProvider', () => {
     it('should use default "canvas" theme when no theme is provided', async () => {
       const callback = vi.fn()
-      render(<ExampleComponent callback={callback}></ExampleComponent>)
+      await render(<ExampleComponent callback={callback}></ExampleComponent>)
       expect(callback).toHaveBeenCalledWith(canvas)
     })
   })
@@ -200,7 +199,7 @@ describe('useTheme hook', () => {
       const [cb2, cb4] = Array(2)
         .fill(0)
         .map(() => vi.fn())
-      render(
+      await render(
         <>
           <InstUISettingsProvider theme={canvas}>
             {/* theme provided -> canvas */}

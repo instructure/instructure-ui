@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
-import { render, screen } from '@testing-library/react'
-import { vi } from 'vitest'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import type { MockInstance } from 'vitest'
-import '@testing-library/jest-dom'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { AccessibleContent } from '../index.js'
 
@@ -44,7 +44,7 @@ describe('<AccessibleContent />', () => {
   })
 
   it('should render screen reader content', async () => {
-    const { container } = render(
+    const { container } = await render(
       <AccessibleContent alt="Screen Reader Content">
         Presentational Content
       </AccessibleContent>
@@ -56,27 +56,27 @@ describe('<AccessibleContent />', () => {
   })
 
   it('should render a presentational content', async () => {
-    render(
+    await render(
       <AccessibleContent alt="Screen Reader Content">
         Presentational Content
       </AccessibleContent>
     )
 
-    const presentational = screen.getByText('Presentational Content')
+    const presentational = page.getByText('Presentational Content')
 
-    expect(presentational).toBeVisible()
-    expect(presentational).toHaveAttribute('aria-hidden')
+    await expect.element(presentational).toBeVisible()
+    await expect.element(presentational).toHaveAttribute('aria-hidden')
   })
 
   it('should render with the specified tag when `as` prop is set', async () => {
-    render(<AccessibleContent as="div" data-testid="ac" />)
-    const accessibleContent = screen.getByTestId('ac')
+    await render(<AccessibleContent as="div" data-testid="ac" />)
+    const accessibleContent = page.getByTestId('ac').element()
 
     expect(accessibleContent.tagName).toBe('DIV')
   })
 
   it('should meet a11y standards', async () => {
-    const { container } = render(
+    const { container } = await render(
       <AccessibleContent alt="Screenreader test">
         Not screenreader text
       </AccessibleContent>

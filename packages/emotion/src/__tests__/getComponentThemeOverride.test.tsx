@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { vi } from 'vitest'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import type { MockInstance } from 'vitest'
 import canvas from '@instructure/ui-themes'
 import { getComponentThemeOverride } from '../getComponentThemeOverride.js'
