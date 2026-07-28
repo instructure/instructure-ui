@@ -49,4 +49,28 @@ describe('<Text />', () => {
 
     expect(text?.tagName).toBe('LI')
   })
+
+  describe('margin prop', () => {
+    it('resolves spacing tokens, custom CSS values, and shorthand', () => {
+      const { container } = render(
+        <div>
+          <Text margin="general.spaceMd">A</Text>
+          <Text margin="30px">B</Text>
+          <Text margin="general.spaceLg auto">C</Text>
+        </div>
+      )
+      const texts = container.querySelectorAll("[class$='-text']")
+
+      const token = getComputedStyle(texts[0]!)
+      expect(token.marginTop).toEqual('0.75rem') // general.spaceMd
+      expect(token.marginLeft).toEqual('0.75rem')
+
+      const custom = getComputedStyle(texts[1]!)
+      expect(custom.marginTop).toEqual('30px')
+
+      const shorthand = getComputedStyle(texts[2]!)
+      expect(shorthand.marginTop).toEqual('1rem') // general.spaceLg
+      expect(shorthand.marginRight).toEqual('auto')
+    })
+  })
 })

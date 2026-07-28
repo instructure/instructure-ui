@@ -91,6 +91,7 @@ class ToggleButton extends Component<ToggleButtonProps, ToggleButtonState> {
       status,
       placement,
       onClick,
+      margin,
       ...props
     } = this.props
 
@@ -124,6 +125,7 @@ class ToggleButton extends Component<ToggleButtonProps, ToggleButtonState> {
           aria-pressed={status === 'pressed'}
           data-cid="ToggleButton"
           renderIcon={renderIcon}
+          margin={margin}
         />
       </Tooltip>
     )

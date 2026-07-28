@@ -232,4 +232,13 @@ describe('<CheckboxGroup />', () => {
       expect(group).not.toHaveAttribute('aria-invalid')
     })
   })
+
+  describe('margin prop', () => {
+    it('forwards margin to the field layout, resolving spacing tokens', () => {
+      const { container } = renderCheckboxGroup({ margin: 'general.spaceMd' })
+      const layout = container.querySelector("[class$='-formFieldLayout']")
+
+      expect(getComputedStyle(layout!).marginTop).toEqual('0.75rem')
+    })
+  })
 })

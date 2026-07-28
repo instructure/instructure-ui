@@ -25,7 +25,11 @@
 import React from 'react'
 import type { InputHTMLAttributes } from 'react'
 import type { OtherHTMLAttributes } from '@instructure/shared-types'
-import type { ComponentStyle, NewThemeOverrideProp } from '@instructure/emotion'
+import type {
+  ComponentStyle,
+  NewThemeOverrideProp,
+  Spacing
+} from '@instructure/emotion'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 import type { NewComponentTypes } from '@instructure/ui-themes'
 
@@ -77,6 +81,12 @@ type RadioInputOwnProps = {
    * Sets the `display:inline-flex` in CSS
    */
   inline?: boolean
+  /**
+   * Valid values are `0`, `none`, `auto`, and Spacing token values,
+   * see https://instructure.design/layout-spacing. Apply these values via
+   * familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`.
+   */
+  margin?: Spacing
   onClick?: (event: React.MouseEvent<HTMLInputElement>) => void
   /**
    * Callback fired when the input fires a change event.
@@ -118,6 +128,7 @@ const allowedProps: AllowedPropKeys = [
   'size',
   'context',
   'inline',
+  'margin',
   'onClick',
   'onChange',
   'inputRef'

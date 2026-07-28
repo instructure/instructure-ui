@@ -27,7 +27,11 @@ import type {
   AsElementType,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
-import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type {
+  WithStyleProps,
+  ComponentStyle,
+  Spacing
+} from '@instructure/emotion'
 import type { NewComponentTypes } from '@instructure/ui-themes'
 
 type TextOwnProps = {
@@ -106,6 +110,12 @@ type TextOwnProps = {
    */
   weight?: 'normal' | 'light' | 'bold' | 'weightRegular' | 'weightImportant'
   wrap?: 'normal' | 'break-word'
+  /**
+   * Valid values are `0`, `none`, `auto`, and Spacing token values,
+   * see https://instructure.design/layout-spacing. Apply these values via
+   * familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`.
+   */
+  margin?: Spacing
   children?: React.ReactNode
 }
 
@@ -130,7 +140,8 @@ const allowedProps: AllowedPropKeys = [
   'transform',
   'variant',
   'weight',
-  'wrap'
+  'wrap',
+  'margin'
 ]
 
 export type { TextProps, TextStyle }

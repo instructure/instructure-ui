@@ -23,8 +23,9 @@
  */
 
 import type { TextProps, TextStyle } from './props'
-import type { NewComponentTypes } from '@instructure/ui-themes'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import type { TokenTypographyValueInst } from '@instructure/ui-themes'
+import { calcSpacingFromShorthand } from '@instructure/emotion'
 
 type StyleParams = {
   color: TextProps['color']
@@ -36,6 +37,7 @@ type StyleParams = {
   variant: TextProps['variant']
   weight: TextProps['weight']
   wrap: TextProps['wrap']
+  margin: TextProps['margin']
 }
 
 /**
@@ -45,11 +47,13 @@ type StyleParams = {
  * Generates the style object from the theme and provided additional information
  * @param componentTheme The theme variable object.
  * @param params Additional parameters to customize the style.
+ * @param sharedTokens Shared token object that stores common values for the theme.
  * @return The final style object, which will be used in the component
  */
 const generateStyle = (
   componentTheme: ReturnType<NewComponentTypes['Text']>,
-  params: StyleParams
+  params: StyleParams,
+  sharedTokens: SharedTokens
 ): TextStyle => {
   const {
     color,
@@ -60,7 +64,8 @@ const generateStyle = (
     size,
     variant,
     weight,
-    wrap
+    wrap,
+    margin
   } = params
 
   const variants: Record<
@@ -220,6 +225,11 @@ const generateStyle = (
       label: 'text',
       fontFamily: componentTheme.fontFamily,
       ...baseStyles,
+      // Resolves spacing tokens (or custom CSS values) into a margin shorthand.
+      margin: calcSpacingFromShorthand(margin, {
+        ...sharedTokens.spacing,
+        ...sharedTokens.legacy.spacing
+      }),
 
       // NOTE: needs separate groups for `:is()` and `:-webkit-any()` because
       // of css selector group validation (see https://www.w3.org/TR/selectors-3/#grouping)

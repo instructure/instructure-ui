@@ -25,7 +25,10 @@
 import type { RadioInputProps, RadioInputStyle } from './props'
 import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import { boxShadowObjectsToCSSString } from '@instructure/ui-themes'
-import { calcFocusOutlineStyles } from '@instructure/emotion'
+import {
+  calcFocusOutlineStyles,
+  calcSpacingFromShorthand
+} from '@instructure/emotion'
 
 type StyleParams = {
   disabled: RadioInputProps['disabled']
@@ -35,6 +38,7 @@ type StyleParams = {
   readOnly: RadioInputProps['readOnly']
   size: RadioInputProps['size']
   variant: RadioInputProps['variant']
+  margin: RadioInputProps['margin']
 }
 
 /**
@@ -52,7 +56,16 @@ const generateStyle = (
   params: StyleParams,
   sharedTokens: SharedTokens
 ): RadioInputStyle => {
-  const { disabled, inline, hovered, size, readOnly, variant, context } = params
+  const {
+    disabled,
+    inline,
+    hovered,
+    size,
+    readOnly,
+    variant,
+    context,
+    margin
+  } = params
 
   // 4*2 states: base, hover, disabled, readonly X none/selected
   const insetSizes = {
@@ -272,6 +285,11 @@ const generateStyle = (
       display: 'flex',
       alignItems: 'flex-start',
       width: inline ? 'auto' : '100%',
+      // Resolves spacing tokens (or custom CSS values) into a margin shorthand.
+      margin: calcSpacingFromShorthand(margin, {
+        ...sharedTokens.spacing,
+        ...sharedTokens.legacy.spacing
+      }),
       ...(inline && {
         display: 'inline-flex',
         verticalAlign: 'middle'

@@ -26,7 +26,11 @@ import type {
   AsElementType,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
-import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type {
+  WithStyleProps,
+  ComponentStyle,
+  Spacing
+} from '@instructure/emotion'
 import type { FormFieldLayoutOwnProps } from '../../FormFieldLayout/v2/props'
 import type { FormMessage } from '../../utils/v1/FormPropTypes'
 
@@ -63,6 +67,12 @@ type FormFieldGroupOwnProps = {
   vAlign?: 'top' | 'middle' | 'bottom'
   startAt?: 'small' | 'medium' | 'large' | 'x-large' | null
   /**
+   * Valid values are `0`, `none`, `auto`, and Spacing token values,
+   * see https://instructure.design/layout-spacing. Apply these values via
+   * familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`.
+   */
+  margin?: Spacing
+  /**
    * provides a reference to the underlying html root element
    */
   elementRef?: (element: Element | null) => void
@@ -96,6 +106,7 @@ const allowedProps: AllowedPropKeys = [
   'colSpacing',
   'vAlign',
   'startAt',
+  'margin',
   'elementRef'
 ]
 

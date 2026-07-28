@@ -195,4 +195,21 @@ describe('<ToggleButton />', () => {
       expect(onClick).toHaveBeenCalledTimes(1)
     })
   })
+
+  describe('margin prop', () => {
+    it('forwards margin to the button, resolving spacing tokens', () => {
+      render(
+        <ToggleButton
+          screenReaderLabel="label"
+          renderIcon={icon}
+          renderTooltipContent="tip"
+          status="unpressed"
+          margin="general.spaceMd"
+        />
+      )
+      const button = screen.getByRole('button')
+
+      expect(getComputedStyle(button).marginTop).toEqual('0.75rem')
+    })
+  })
 })
