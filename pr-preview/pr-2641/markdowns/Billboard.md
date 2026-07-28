@@ -25,7 +25,7 @@ type: example
   don't pass interactive content to the `message` prop if you have set the `href`
   or `onClick` props).
 - Use the `size` prop to adjust the size of the icon and text.
-- Pass [Instructure icons](icons-react) to the `hero` property via a function
+- Pass [Instructure icons](icons) to the `hero` property via a function
   _(see examples)_, and they will be sized correctly based on the Billboard's
   `size`.
 
@@ -35,14 +35,14 @@ type: example
 ---
 <View as="div" width="400px" withVisualDebug>
   <Billboard
-    margin="large"
+    margin="general.space2xl"
     heading="404"
     message="Billboard is now a button"
     size="small"
     onClick={function () {
       alert('This Billboard was clicked!')
     }}
-    hero={(size) => <IconUserLine size={size} />}
+    hero={(size) => <UserInstUIIcon size={size} />}
   />
 </View>
 ```
@@ -53,10 +53,10 @@ type: example
 ---
 <View as="div" width="600px" withVisualDebug>
   <Billboard
-    margin="large"
+    margin="general.space2xl"
     message="Click this link"
     href="http://instructure.com"
-    hero={(size) => <IconGradebookLine size={size} />}
+    hero={(size) => <BookCheckInstUIIcon size={size} />}
   />
 </View>
 ```
@@ -72,7 +72,7 @@ type: example
   onClick={function () {
     alert('This Billboard was clicked!')
   }}
-  hero={(size) => <IconPlusLine size={size} />}
+  hero={(size) => <PlusInstUIIcon size={size} />}
 />
 ```
 
@@ -88,7 +88,7 @@ type: example
   onClick={function () {
     alert('This Billboard was clicked!')
   }}
-  hero={(size) => <IconUserLine size={size} />}
+  hero={(size) => <UserInstUIIcon size={size} />}
   disabled
 />
 ```
@@ -98,7 +98,7 @@ type: example
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| Billboard | hero | `React.ReactElement \| ((iconSize: HeroIconSize) => React.ReactElement)` | No | - | Provide an <Img> component or Instructure Icon for the hero image |
+| Billboard | hero | `React.ReactElement \| ((iconSize?: HeroIconSize) => React.ReactElement)` | No | - | Provide an <Img> component or Instructure Icon for the hero image |
 | Billboard | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` | If you're using an icon, this prop will size it. Also sets the font-size of the headline and message. |
 | Billboard | as | `AsElementType` | No | `'span'` | the element type to render as |
 | Billboard | elementRef | `(element: Element \| null) => void` | No | `() => {}` | provides a reference to the underlying html root element |
@@ -110,7 +110,7 @@ type: example
 | Billboard | href | `string` | No | - | If `href` is provided, Billboard will render as a link |
 | Billboard | disabled | `boolean` | No | `false` | Whether or not to disable the billboard |
 | Billboard | readOnly | `boolean` | No | `false` | Works just like disabled but keeps the same styles as if it were active |
-| Billboard | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
+| Billboard | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`. |
 
 ### Usage
 
@@ -124,6 +124,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { Billboard } from '@instructure/ui-billboard'
+import { Billboard } from '@instructure/ui-billboard/v11_7'
 ```
 

@@ -37,7 +37,7 @@ type: example
 |-----------|------|------|----------|---------|-------------|
 | Expandable | expanded | `boolean` | No | - | Whether the content is expanded or hidden. Makes the component controlled, so if provided, the `onToggle` handler has to be provided too. |
 | Expandable | defaultExpanded | `boolean` | No | `false` | Whether the content is initially expanded or hidden (uncontrolled) |
-| Expandable | onToggle | `( event: React.KeyboardEvent<ViewProps> \| React.MouseEvent<ViewProps>, expanded: boolean ) => void` | No | - | Function invoked when this component is expanded/collapsed |
+| Expandable | onToggle | `( event: React.KeyboardEvent<any> \| React.MouseEvent<any>, expanded: boolean ) => void` | No | - | Function invoked when this component is expanded/collapsed |
 | Expandable | children | `(props: RenderProps) => JSX.Element` | No | - | Must be a function that returns a JSX element. It receives and object which contains whether its expanded and objects that need to be spread on the trigger and details elements. |
 | Expandable | render | `(props: RenderProps) => JSX.Element` | No | - | Must be a function that returns a JSX element. It receives and object which contains whether its expanded and objects that need to be spread on the trigger and details elements. Identical to children |
 
@@ -53,6 +53,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { Expandable } from '@instructure/ui-expandable'
+import { Expandable } from '@instructure/ui-expandable/v11_7'
 ```
 

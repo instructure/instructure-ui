@@ -437,6 +437,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { Pages } from '@instructure/ui-pages'
+import { Pages } from '@instructure/ui-pages/v11_7'
 ```
 

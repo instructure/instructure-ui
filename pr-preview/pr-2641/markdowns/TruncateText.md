@@ -15,7 +15,7 @@ type: example
 <div>
   <View
     as="div"
-    padding="xx-small none"
+    padding="general.spaceXs none"
     maxWidth="480px"
     withVisualDebug
   >
@@ -47,9 +47,9 @@ type: example
           console.log(truncated, text)
         }}
       >
-        <span>
+        <Text>
           Regular sized text with <Link href="#">A Text Link </Link>and <Text weight="bold">some bold text.</Text>
-        </span>
+        </Text>
       </TruncateText>
     </div>
 
@@ -68,7 +68,7 @@ type: example
 <div>
   <View
     as="div"
-    padding="small none"
+    padding="general.spaceMd none"
     maxWidth="480px"
     withVisualDebug
   >
@@ -97,7 +97,7 @@ type: example
   <br />
   <View
     as="div"
-    padding="small none"
+    padding="general.spaceMd none"
     maxWidth="480px"
     withVisualDebug
   >
@@ -136,18 +136,20 @@ type: example
 <div>
   <View
     as="div"
-    padding="small none"
+    padding="general.spaceMd none"
     maxWidth="480px"
     withVisualDebug
   >
-    <TruncateText position="middle">
-      <span>This line of text should be truncated from the middle of the string <strong>instead of the end.</strong></span>
-    </TruncateText>
+    <Text as="p">
+      <TruncateText position="middle">
+        <span>This line of text should be truncated from the middle of the string <strong>instead of the end.</strong></span>
+      </TruncateText>
+    </Text>
   </View>
   <br />
   <View
     as="div"
-    padding="small none"
+    padding="general.spaceMd none"
     maxWidth="480px"
     withVisualDebug
   >
@@ -188,7 +190,7 @@ const Example = (props) => {
   )
 
   return (
-    <View as="div" padding="xx-small none" maxWidth="230px" withVisualDebug>
+    <View as="div" padding="general.spaceXs none" maxWidth="230px" withVisualDebug>
       {isTruncated ? (
         <Tooltip
           renderTip={props.message}
@@ -253,6 +255,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { TruncateText } from '@instructure/ui-truncate-text'
+import { TruncateText } from '@instructure/ui-truncate-text/v11_7'
 ```
 

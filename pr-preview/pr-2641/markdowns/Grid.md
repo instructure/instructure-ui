@@ -231,7 +231,7 @@ type: example
       <Grid.Col width="auto">
         <Button>Cancel</Button>
         &nbsp;
-        <Button color="primary" renderIcon={IconAddSolid}>Widget</Button>
+        <Button color="primary" renderIcon={PlusInstUIIcon}>Widget</Button>
       </Grid.Col>
     </Grid.Row>
   </Grid>
@@ -283,6 +283,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { Grid } from '@instructure/ui-grid'
+import { Grid } from '@instructure/ui-grid/v11_7'
 ```
 

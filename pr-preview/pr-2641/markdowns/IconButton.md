@@ -8,7 +8,53 @@ It is not recommended to set the size of an icon inside an IconButton. Only use 
 ---
 type: example
 ---
-<IconButton screenReaderLabel="Add User"><IconAddLine /></IconButton>
+<IconButton screenReaderLabel="Add User"><PlusInstUIIcon /></IconButton>
+```
+
+### Sizes
+
+```js
+---
+type: example
+---
+<View display="block">
+  <IconButton size="small" screenReaderLabel="Add" margin="general.spaceMd"><PlusInstUIIcon /></IconButton>
+  <IconButton size="medium" screenReaderLabel="Add" margin="general.spaceMd"><PlusInstUIIcon /></IconButton>
+  <IconButton size="large" screenReaderLabel="Add" margin="general.spaceMd"><PlusInstUIIcon /></IconButton>
+</View>
+```
+
+There are also two condensed size variants for compact layouts: `condensedSmall` and `condensedMedium`. These are designed to be used inside other components, such as a [TextInput](TextInput).
+
+```js
+---
+type: example
+---
+const PasswordInput = () => {
+  const [showPassword, setShowPassword] = useState(false)
+
+  return (
+    <View as="div" maxWidth="20rem">
+    <TextInput
+      renderLabel="Password"
+      type={showPassword ? 'text' : 'password'}
+      renderAfterInput={
+        <IconButton
+          size="condensedMedium"
+          withBackground={false}
+          withBorder={false}
+          screenReaderLabel={showPassword ? 'Hide password' : 'Show password'}
+          onClick={() => setShowPassword(!showPassword)}
+        >
+          {showPassword ? <EyeOffInstUIIcon /> : <EyeInstUIIcon />}
+        </IconButton>
+      }
+    />
+    </View>
+  )
+}
+
+render(<PasswordInput />)
 ```
 
 ### Accessibility
@@ -19,7 +65,7 @@ Because the IconButton visually only renders an icon, a description is necessary
 ---
 type: example
 ---
-<IconButton color="primary" screenReaderLabel="Add blog post"><IconAddLine /></IconButton>
+<IconButton color="primary" screenReaderLabel="Add blog post"><PlusInstUIIcon /></IconButton>
 ```
 
 Using [Tooltip](Tooltip) in conjunction with IconButton can also provide necessary context when the IconButton alone would be insufficient.
@@ -33,7 +79,7 @@ type: example
   on={['hover', 'focus']}
   placement="bottom"
 >
-  <IconButton screenReaderLabel="View user profile"><IconUserLine /></IconButton>
+  <IconButton screenReaderLabel="View user profile"><UserInstUIIcon /></IconButton>
 </Tooltip>
 ```
 
@@ -44,8 +90,8 @@ type: example
 type: example
 ---
 <View display="block">
-  <IconButton color="ai-primary" screenReaderLabel="AI button" margin="small"><IconAiSolid/></IconButton>
-  <IconButton color="ai-secondary" screenReaderLabel="AI button"  margin="small"><IconAiColoredSolid/></IconButton>
+  <IconButton color="ai-primary" screenReaderLabel="AI button" margin="general.spaceMd"><IgniteaiLogoInstUIIcon/></IconButton>
+  <IconButton color="ai-secondary" screenReaderLabel="AI button"  margin="general.spaceMd"><IgniteaiLogoInstUIIcon/></IconButton>
 </View>
 ```
 
@@ -58,8 +104,8 @@ The `shape` prop specifies if the IconButton will render as a `rectangle` or `ci
 type: example
 ---
 <View display="block">
-  <IconButton shape="rectangle" screenReaderLabel="Delete tag" margin="small"><IconXSolid /></IconButton>
-  <IconButton shape="circle" screenReaderLabel="Delete tag" margin="small"><IconXSolid /></IconButton>
+  <IconButton shape="rectangle" screenReaderLabel="Delete tag" margin="general.spaceMd"><XInstUIIcon /></IconButton>
+  <IconButton shape="circle" screenReaderLabel="Delete tag" margin="general.spaceMd"><XInstUIIcon /></IconButton>
 </View>
 ```
 
@@ -73,13 +119,8 @@ type: example
 ---
 <View display="block">
   <View display="inline-block" background="primary">
-    <IconButton withBackground={false} withBorder={false} screenReaderLabel="Delete tag" margin="large">
-      <IconXSolid />
-    </IconButton>
-  </View>
-  <View display="inline-block" background="primary-inverse">
-    <IconButton withBackground={false} withBorder={false} color="primary-inverse" screenReaderLabel="Delete tag" margin="large">
-      <IconXSolid />
+    <IconButton withBackground={false} withBorder={false} screenReaderLabel="Delete tag" margin="general.space2xl">
+      <XInstUIIcon />
     </IconButton>
   </View>
 </View>
@@ -98,7 +139,7 @@ For an example see [Button](Button/#Styling%20buttons)
 | IconButton | renderIcon | `Renderable` | No | - | An icon, or function that returns an icon (identical to the `children` prop). |
 | IconButton | screenReaderLabel | `ReactNode` | Yes | - | An accessible label for the `IconButton`. |
 | IconButton | type | `'button' \| 'submit' \| 'reset'` | No | `'button'` | Specifies the type of the `IconButton`'s underlying html element. |
-| IconButton | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` | The size of the `IconButton` |
+| IconButton | size | `'small' \| 'medium' \| 'large' \| 'condensedSmall' \| 'condensedMedium'` | No | `'medium'` | The size of the `IconButton` |
 | IconButton | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to the `IconButton`'s underlying html element. |
 | IconButton | as | `AsElementType` | No | `'button'` | The element to render as the component root, `button` by default. |
 | IconButton | interaction | `'enabled' \| 'disabled' \| 'readonly'` | No | `undefined` | Specifies if interaction with the `IconButton` is enabled, disabled, or readonly. |
@@ -107,7 +148,7 @@ For an example see [Button](Button/#Styling%20buttons)
 | IconButton | shape | `'rectangle' \| 'circle'` | No | `'rectangle'` | Specifies if the `IconButton` shape should be a circle or rectangle. |
 | IconButton | withBackground | `boolean` | No | `true` | Specifies if the `IconButton` should render with a solid background. When false, the background is transparent. |
 | IconButton | withBorder | `boolean` | No | `true` | Specifies if the `IconButton` should render with a border. |
-| IconButton | margin | `Spacing` | No | `'0'` | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
+| IconButton | margin | `Spacing` | No | `'0'` | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`. |
 | IconButton | cursor | `Cursor` | No | `'pointer'` | Specify a mouse cursor to use when hovering over the button. The `pointer` cursor is used by default. |
 | IconButton | href | `string` | No | - | Specifies an href attribute for the `IconButton`'s underlying html element. |
 | IconButton | onClick | `( event: React.KeyboardEvent<ViewProps> \| React.MouseEvent<ViewProps> ) => void` | No | - | Callback fired when the `Button` is clicked. |
@@ -124,6 +165,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { IconButton } from '@instructure/ui-buttons'
+import { IconButton } from '@instructure/ui-buttons/v11_7'
 ```
 

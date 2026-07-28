@@ -28,6 +28,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { ColorPalette } from '@instructure/ui-color-picker'
+import { ColorPalette } from '@instructure/ui-color-picker/v11_7'
 ```
 

@@ -132,8 +132,8 @@ type: example
     <Drilldown.Option
       id="renderElementExampleOption1"
       description="Curabitur fringilla, urna ut efficitur molestie, nibh lacus tincidunt elit, ut tempor ipsum nunc sit amet massa."
-      renderBeforeLabel={IconCheckSolid}
-      renderAfterLabel={IconArrowOpenEndSolid}
+      renderBeforeLabel={<CheckInstUIIcon/>}
+      renderAfterLabel={<ChevronRightInstUIIcon/>}
       beforeLabelContentVAlign="start"
       afterLabelContentVAlign="start"
     >
@@ -142,8 +142,8 @@ type: example
     <Drilldown.Option
       id="renderElementExampleOption2"
       description="Curabitur fringilla, urna ut efficitur molestie, nibh lacus tincidunt elit, ut tempor ipsum nunc sit amet massa."
-      renderBeforeLabel={IconCheckSolid}
-      renderAfterLabel={IconArrowOpenEndSolid}
+      renderBeforeLabel={<CheckInstUIIcon/>}
+      renderAfterLabel={<ChevronRightInstUIIcon/>}
       beforeLabelContentVAlign="center"
       afterLabelContentVAlign="center"
     >
@@ -152,8 +152,8 @@ type: example
     <Drilldown.Option
       id="renderElementExampleOption3"
       description="Curabitur fringilla, urna ut efficitur molestie, nibh lacus tincidunt elit, ut tempor ipsum nunc sit amet massa."
-      renderBeforeLabel={IconCheckSolid}
-      renderAfterLabel={IconArrowOpenEndSolid}
+      renderBeforeLabel={<CheckInstUIIcon/>}
+      renderAfterLabel={<ChevronRightInstUIIcon/>}
       beforeLabelContentVAlign="end"
       afterLabelContentVAlign="end"
     >
@@ -176,7 +176,7 @@ const VideoSettingsExample = (props) => {
   const [isCommentsOn, setIsCommentsOn] = useState(true)
 
   const renderTrigger = () => {
-    return <Button renderIcon={IconSettingsSolid}>Video Settings</Button>
+    return <Button renderIcon={<SettingsInstUIIcon/>}>Video Settings</Button>
   }
 
   const renderSelected = (props, value) => {
@@ -415,7 +415,7 @@ const SelectContactsExample = (props) => {
 
   return (
     <Flex alignItems="start">
-      <Flex.Item width="20rem" textAlign="center" padding="x-small 0 0">
+      <Flex.Item width="20rem" textAlign="center" padding="general.spaceSm 0 0">
         <Drilldown
           rootPageId="contacts"
           width="18.5rem"
@@ -429,8 +429,8 @@ const SelectContactsExample = (props) => {
         </Drilldown>
       </Flex.Item>
 
-      <Flex.Item padding="0 0 0 large" shouldGrow shouldShrink>
-        <View as="div" padding="small" background="primary">
+      <Flex.Item padding="0 0 0 general.space2xl" shouldGrow shouldShrink>
+        <View as="div" padding="general.spaceMd" background="primary">
           <div>
             <Text weight="bold">
               Selected ({selected ? selected.length : 0}):
@@ -567,7 +567,7 @@ const BackNavigationExample = () => {
         </Drilldown>
       </Flex.Item>
 
-      <Flex.Item padding="0 0 0 large" shouldGrow shouldShrink>
+      <Flex.Item padding="0 0 0 general.space2xl" shouldGrow shouldShrink>
         <FormFieldGroup description="Drilldown Group example settings">
           <Checkbox
             checked={!showTitle ? false : showAlternativeBackLabel}
@@ -650,7 +650,7 @@ const GroupsExample = () => {
         </Drilldown>
       </Flex.Item>
 
-      <Flex.Item padding="0 0 0 large">
+      <Flex.Item padding="0 0 0 general.space2xl">
         <FormFieldGroup description="Drilldown Group example settings">
           <Checkbox
             checked={showSeparators}
@@ -784,7 +784,7 @@ const SelectMembersExample = (props) => {
 
   return (
     <Flex alignItems="start">
-      <Flex.Item width="20rem" textAlign="center" padding="x-small 0 0">
+      <Flex.Item width="20rem" textAlign="center" padding="general.spaceSm 0 0">
         <Drilldown
           rootPageId="root"
           width="18.5rem"
@@ -799,8 +799,8 @@ const SelectMembersExample = (props) => {
         </Drilldown>
       </Flex.Item>
 
-      <Flex.Item padding="0 0 0 large" shouldGrow shouldShrink>
-        <View as="div" padding="small" background="primary">
+      <Flex.Item padding="0 0 0 general.space2xl" shouldGrow shouldShrink>
+        <View as="div" padding="general.spaceMd" background="primary">
           <div>
             <Text weight="bold">Selected members:</Text>
           </div>
@@ -927,7 +927,7 @@ const DisabledExample = () => {
 
   return (
     <Flex alignItems="start">
-      <Flex.Item width="20rem" textAlign="center" padding="x-small 0 0">
+      <Flex.Item width="20rem" textAlign="center" padding="general.spaceSm 0 0">
         <View textAlign="start">
           <Drilldown
             rootPageId="root"
@@ -996,7 +996,7 @@ const DisabledExample = () => {
         </View>
       </Flex.Item>
 
-      <Flex.Item padding="0 0 0 large" shouldGrow shouldShrink>
+      <Flex.Item padding="0 0 0 general.space2xl" shouldGrow shouldShrink>
         <FormFieldGroup
           description={<ScreenReaderContent>Settings</ScreenReaderContent>}
           colSpacing="medium"
@@ -1066,7 +1066,7 @@ type: example
     </Drilldown.Group>
     <Drilldown.Option
       id="close"
-      renderBeforeLabel={<IconXLine />}
+      renderBeforeLabel={<XInstUIIcon />}
       onOptionClick={(_event, data) => {
         data.drilldown.hide()
       }}
@@ -1217,14 +1217,14 @@ type: example
     }
 
     const renderSelectedIcon = (isSelected) => {
-      return <IconCheckSolid style={{ opacity: isSelected ? 1 : 0 }} />
+      return <span style={{ visibility: isSelected ? 'visible' : 'hidden' }}><CheckInstUIIcon /></span>
     }
 
     const renderAddAction = (label) => {
       return (
         <span>
-          <IconAddSolid />
-          <View as="span" margin="0 0 0 x-small">
+          <PlusInstUIIcon />
+          <View as="span" margin="0 0 0 general.spaceSm">
             New {label}
           </View>
         </span>
@@ -1288,8 +1288,8 @@ type: example
             return { color: currentTheme.colors.textDanger }
           }}
         >
-          <IconTrashLine />
-          <View as="span" margin="0 0 0 x-small">
+          <Trash2InstUIIcon size="md"/>
+          <View as="span" margin="0 0 0 general.spaceSm">
             Delete {label}
           </View>
         </Drilldown.Option>
@@ -1543,6 +1543,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { Drilldown } from '@instructure/ui-drilldown'
+import { Drilldown } from '@instructure/ui-drilldown/v11_7'
 ```
 

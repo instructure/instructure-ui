@@ -104,6 +104,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { ColorMixer } from '@instructure/ui-color-picker'
+import { ColorMixer } from '@instructure/ui-color-picker/v11_7'
 ```
 

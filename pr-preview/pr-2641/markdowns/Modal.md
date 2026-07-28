@@ -64,7 +64,7 @@ const Example = () => {
           <Text lineHeight="double">{fpo}</Text>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={handleButtonClick} margin="0 x-small 0 0">
+          <Button onClick={handleButtonClick} margin="0 general.spaceSm 0 0">
             Close
           </Button>
           <Button color="primary" type="submit">
@@ -129,13 +129,13 @@ const Example = () => {
           <Heading>This Modal is constrained to a parent</Heading>
         </Modal.Header>
         <Modal.Body>
-          <View as="p" margin="none none small">
+          <View as="p" margin="none none general.spaceMd">
             <Text>{fpo}</Text>
           </View>
           <ModalAutoCompleteExample renderLabel="Choose a state" />
         </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={handleButtonClick} margin="0 x-small 0 0">
+        <Modal.Footer spacing="compact">
+          <Button onClick={handleButtonClick} margin="0 general.spaceSm 0 0">
             Close
           </Button>
           <Button onClick={handleButtonClick} color="primary" type="submit">
@@ -145,10 +145,10 @@ const Example = () => {
       </Modal>
       <View
         background="primary-inverse"
-        margin="medium auto none"
+        margin="general.spaceXl auto none"
         display="block"
-        width="25rem"
-        height="25rem"
+        width="30rem"
+        height="30rem"
         borderWidth="large"
         id="constrainExample"
       ></View>
@@ -239,7 +239,7 @@ const Example = () => {
         <Modal.Header>
           <Flex>
             <Flex.Item shouldGrow shouldShrink>
-              <Heading level="h2">
+              <Heading color="inverse" level="h2">
                 <TruncateText>A small image</TruncateText>
               </Heading>
             </Flex.Item>
@@ -261,7 +261,7 @@ const Example = () => {
             margin="0 auto"
           />
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer spacing="compact">
           <Button
             onClick={handleButtonClick}
             withBackground={false}
@@ -339,7 +339,7 @@ const Example = () => {
           <RadioInput label="auto" value="auto" />
         </RadioInputGroup>
       </FormFieldGroup>
-      <Button onClick={handleButtonClick} margin="medium 0 0">
+      <Button onClick={handleButtonClick} margin="general.spaceXl 0 0">
         {open ? 'Close' : 'Open'} the Modal
       </Button>
       <Modal
@@ -357,15 +357,11 @@ const Example = () => {
           <Flex>
             <Flex.Item shouldGrow shouldShrink>
               <Flex alignItems="center">
-                <Flex.Item margin="0 x-small 0 0">
-                  <SVGIcon
-                    src={iconExample}
-                    size="small"
-                    title="Icon Example"
-                  />
+                <Flex.Item margin="0 general.spaceSm 0 0">
+                  <HeartInstUIIcon size={'xl'} />
                 </Flex.Item>
                 <Flex.Item shouldGrow shouldShrink>
-                  <Heading level="h2">
+                  <Heading color="inverse" level="h2">
                     <TruncateText>This Modal Contains Media</TruncateText>
                   </Heading>
                 </Flex.Item>
@@ -376,23 +372,23 @@ const Example = () => {
                 color="primary-inverse"
                 withBackground={false}
                 withBorder={false}
-                renderIcon={IconPrinterSolid}
+                renderIcon={<PrinterInstUIIcon/>}
                 screenReaderLabel="Print This Image"
-                margin="0 x-small 0 0"
+                margin="0 general.spaceSm 0 0"
               />
               <IconButton
                 color="primary-inverse"
                 withBackground={false}
                 withBorder={false}
-                renderIcon={IconDownloadSolid}
+                renderIcon={<DownloadInstUIIcon/>}
                 screenReaderLabel="Download This Image"
-                margin="0 x-small 0 0"
+                margin="0 general.spaceSm 0 0"
               />
               <IconButton
                 color="primary-inverse"
                 withBackground={false}
                 withBorder={false}
-                renderIcon={IconXSolid}
+                renderIcon={<XInstUIIcon/>}
                 screenReaderLabel="Close"
                 onClick={handleButtonClick}
               />
@@ -402,7 +398,7 @@ const Example = () => {
         <Modal.Body padding="none">
           <Img src={avatarSquare} constrain={imageFit} display="block" />
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer spacing={modalSize === 'small' ? 'compact' : 'default'}>
           <Button
             onClick={handleButtonClick}
             withBackground={false}
@@ -459,7 +455,7 @@ const Example = () => {
       </Button>
       <Button
         onClick={toggleViewport}
-        margin="0 0 0 small"
+        margin="0 0 0 general.spaceMd"
         id="toggleViewportButton"
       >
         Toggle viewport
@@ -467,6 +463,9 @@ const Example = () => {
       <Modal
         open={open}
         size={smallViewport ? 'fullscreen' : 'small'}
+        // Simulate real small-screen behavior by themeOverride.
+        // On actual small screens this happens automatically, so no theme override is needed.
+        themeOverride={smallViewport ? { fullScreenMargin: '0', borderRadius: '0' } : undefined}
         onDismiss={(event) => {
           if (event.target.id !== 'toggleViewportButton') {
             setOpen(false)
@@ -488,12 +487,12 @@ const Example = () => {
           )}
         </Modal.Header>
         <Modal.Body>
-          <View as="p" margin="none none small">
+          <View as="p" margin="none none general.spaceMd">
             <Text>{fpo}</Text>
           </View>
         </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={toggleOpen} margin="0 x-small 0 0">
+        <Modal.Footer spacing={smallViewport ? 'compact' : 'default'}>
+          <Button onClick={toggleOpen} margin="0 general.spaceSm 0 0">
             Close
           </Button>
           <Button onClick={toggleOpen} color="primary" type="submit">
@@ -504,7 +503,7 @@ const Example = () => {
 
       <View
         background="primary-inverse"
-        margin="medium auto none"
+        margin="general.spaceXl auto none"
         display="block"
         width={smallViewport ? '20rem' : '50rem'}
         height="37.5rem"
@@ -574,16 +573,16 @@ class Example extends React.Component {
         >
           <Modal.Header>
             {this.renderCloseButton()}
-            <Heading>This is a Modal with a Modal.Body wrapped in to a HOC</Heading>
+            <Heading color="inverse">This is a Modal with a Modal.Body wrapped in to a HOC</Heading>
           </Modal.Header>
           <WrappedModalBody>
-            <Heading level='h3'>WrappedModalBody inherits the variant and overflow properties automatically</Heading>
-            <Text lineHeight="double">{lorem.paragraphs(5)}</Text>
+            <Heading color="inverse" level='h3'>WrappedModalBody inherits the variant and overflow properties automatically</Heading>
+            <Text color="inverse" lineHeight="double">{lorem.paragraphs(5)}</Text>
           </WrappedModalBody>
           <View
             as="div"
-            margin="small"
-            padding="large"
+            margin="general.spaceMd"
+            padding="general.space2xl"
             background="primary">
             <Heading level='h3'>This View child does not inherit the variant and overflow properties</Heading>
             <Text>{lorem.paragraphs(5)}</Text>
@@ -621,16 +620,14 @@ You can do this with the `insertAt` prop or a theme override:
   type: code
 ---
 <InstUISettingsProvider
-      theme={{
-        themeOverrides: {
-            componentOverrides: {
-              Mask: {
-                zIndex: 555,
-              }
-            }
-          }
-      }}
-    >
+  themeOverride={{
+    components: {
+      Mask: {
+        zIndex: 555
+      }
+    }
+  }}
+>
   <Modal />
 </InstUISettingsProvider>
 ```
@@ -707,13 +704,15 @@ type: embed
 | Modal | liveRegion | `LiveRegion` | No | - | An element, function returning an element, or array of elements that will not be hidden from the screen reader when the `<Modal />` is open |
 | Modal | defaultFocusElement | `UIElement` | No | - | An element or a function returning an element to focus by default |
 | Modal.ModalBody | children | `React.ReactNode` | No | - |  |
-| Modal.ModalBody | padding | `Spacing` | No | `'medium'` |  |
+| Modal.ModalBody | padding | `Spacing` | No | `'medium'` | Valid values are `0`, `none`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `padding="general.spaceMd general.spaceLg"`. |
 | Modal.ModalBody | elementRef | `(element: UIElement \| null) => void` | No | - |  |
 | Modal.ModalBody | as | `AsElementType` | No | `'div'` |  |
 | Modal.ModalBody | variant | `'default' \| 'inverse'` | No | `'default'` |  |
 | Modal.ModalBody | overflow | `'scroll' \| 'fit'` | No | - |  |
+| Modal.ModalBody | spacing | `'default' \| 'compact'` | No | - |  |
 | Modal.ModalFooter | children | `React.ReactNode` | No | - |  |
 | Modal.ModalFooter | variant | `'default' \| 'inverse'` | No | `'default'` |  |
+| Modal.ModalFooter | spacing | `'default' \| 'compact'` | No | - |  |
 | Modal.ModalHeader | children | `React.ReactNode` | No | - |  |
 | Modal.ModalHeader | variant | `'default' \| 'inverse'` | No | `'default'` |  |
 | Modal.ModalHeader | spacing | `'default' \| 'compact'` | No | `'default'` |  |
@@ -730,6 +729,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { Modal } from '@instructure/ui-modal'
+import { Modal } from '@instructure/ui-modal/v11_7'
 ```
 

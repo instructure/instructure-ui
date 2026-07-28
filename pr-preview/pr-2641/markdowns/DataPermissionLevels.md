@@ -72,6 +72,6 @@ Import the component:
 
 ```javascript
 /*** ES Modules (with tree shaking) ***/
-import { DataPermissionLevels } from '@instructure/ui-instructure'
+import { DataPermissionLevels } from '@instructure/ui-instructure/v11_7'
 ```
 
