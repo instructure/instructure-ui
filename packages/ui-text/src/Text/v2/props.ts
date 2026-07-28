@@ -36,7 +36,10 @@ type TextOwnProps = {
    */
   as?: AsElementType
   /**
-   * Color of the text
+   * Color of the text.
+   *
+   * `primary-on` and `secondary-on` are meant for use on colored surfaces
+   * (like `warning`) and keep the same color in dark and light themes.
    */
   color?:
     | 'inherit'
@@ -48,8 +51,8 @@ type TextOwnProps = {
     | 'warning'
     | 'primary-inverse'
     | 'secondary-inverse'
-    | 'primary-on' // used on colored surfaces like warning, same color in dark and light themes
-    | 'secondary-on' // used on colored surfaces like warning, same color in dark and light themes
+    | 'primary-on'
+    | 'secondary-on'
     | 'ai-highlight'
   /**
    * Provides a reference to the underlying HTML element
