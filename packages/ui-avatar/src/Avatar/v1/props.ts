@@ -59,7 +59,7 @@ type AvatarOwnProps = {
     | 'x-large'
     | 'xx-large'
   color?:
-    | 'default' // = brand
+    | 'default'
     | 'shamrock'
     | 'barney'
     | 'crimson'
