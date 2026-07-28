@@ -1,5 +1,5 @@
 /*
- * The MIT License (MIT).
+ * The MIT License (MIT)
  *
  * Copyright (c) 2015 - present Instructure, Inc.
  *
@@ -319,9 +319,7 @@ describe('<Popover />', () => {
         </Popover>
       )
       const content = await screen.findByTestId('content')
-      expect(
-        content.closest('[class*="popover__scrollContainer"]')
-      ).toBeNull()
+      expect(content.closest('[class*="popover__scrollContainer"]')).toBeNull()
     })
 
     it('wraps content in an overflow:auto + auto-fit max-height container when set', async () => {
