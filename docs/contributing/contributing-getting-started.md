@@ -45,10 +45,20 @@ See the [testing documentation](testing-overview) for details.
 
 ### Linters and Code Formatting
 
-Linters are run as part of the build. If you use VSCode, you can set up the following plugins to catch lint and formatting errors earlier.
+Linting is run as part of the build via [oxlint](https://oxc.rs/docs/guide/usage/linter).
 
-1. Install the _Eslint_ plugin [VSCode](https://github.com/Microsoft/vscode-eslint)
-1. Install the _Stylelint_ plugin [VSCode](https://github.com/stylelint/vscode-stylelint)
+Useful commands:
+
+- `pnpm run lint` — lint the whole workspace.
+- `pnpm run lint:fix` — lint the whole workspace and auto-fix what it can.
+- `pnpm run lint:changes` — lint only files changed since the last commit.
+- `pnpm --filter <package name> lint` / `lint:fix` — lint a single package.
+
+Lint errors are also fixed automatically on commit for staged files via `lint-staged` (see the `pre-commit` git hook).
+
+If you use VSCode, you can set up the following plugin to catch lint errors earlier.
+
+1. Install the _Oxc_ plugin [VSCode](https://marketplace.visualstudio.com/items?itemName=oxc.oxc-vscode)
 1. Run `pnpm install` to install the dependencies
 1. Restart your editor
 
