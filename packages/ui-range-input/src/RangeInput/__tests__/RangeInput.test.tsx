@@ -389,4 +389,20 @@ describe('<RangeInput />', () => {
       expect(messages).toHaveTextContent(message)
     })
   })
+
+  it('forwards the margin prop to the field layout', async () => {
+    const { container } = await render(
+      <RangeInput
+        label="Volume"
+        name="volume"
+        min={0}
+        max={100}
+        margin="general.spaceMd"
+      />
+    )
+    const layout = container.querySelector("[class$='-formFieldLayout']")
+
+    // general.spaceMd (0.75rem) resolves to 12px
+    expect(getComputedStyle(layout!).marginLeft).toBe('12px')
+  })
 })

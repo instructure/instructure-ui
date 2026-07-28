@@ -49,4 +49,20 @@ describe('<Text />', () => {
 
     expect(text?.tagName).toBe('LI')
   })
+
+  describe('margin prop', () => {
+    it('resolves spacing tokens and custom CSS values', async () => {
+      const { container } = await render(
+        <div>
+          <Text margin="general.spaceMd">A</Text>
+          <Text margin="30px">B</Text>
+        </div>
+      )
+      const texts = container.querySelectorAll("[class$='-text']")
+
+      // Text renders inline, so horizontal margins apply; general.spaceMd = 0.75rem = 12px
+      expect(getComputedStyle(texts[0]!).marginLeft).toBe('12px')
+      expect(getComputedStyle(texts[1]!).marginLeft).toBe('30px')
+    })
+  })
 })

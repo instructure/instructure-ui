@@ -57,6 +57,7 @@ const RadioInput = forwardRef<RadioInputHandle, RadioInputProps>(
       inline = false,
       context = 'success',
       readOnly = false,
+      margin,
       id: idProp,
       label,
       value,
@@ -95,7 +96,8 @@ const RadioInput = forwardRef<RadioInputHandle, RadioInputProps>(
         hovered,
         readOnly,
         size,
-        variant
+        variant,
+        margin
       },
       componentId: 'RadioInput',
       displayName: 'RadioInput'

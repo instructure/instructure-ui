@@ -25,7 +25,7 @@ function Example () {
     console.log(value)
   }
   return (
-    <RadioInputGroup onChange={handleChange} name="example1" defaultValue="foo" description="Select something">
+    <RadioInputGroup onChange={handleChange} name="example1" defaultValue="foo" description="Select something" margin="general.spaceMd 0">
       {inputs.map(input => <RadioInput key={input.value} value={input.value} label={input.label} />)}
     </RadioInputGroup>
   )

@@ -23,7 +23,8 @@
  */
 
 import type { CheckboxProps, CheckboxStyle } from './props'
-import type { NewComponentTypes } from '@instructure/ui-themes'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
+import { calcSpacingFromShorthand } from '@instructure/emotion'
 
 /**
  * ---
@@ -38,9 +39,10 @@ import type { NewComponentTypes } from '@instructure/ui-themes'
  */
 const generateStyle = (
   componentTheme: ReturnType<NewComponentTypes['Checkbox']>,
-  props: CheckboxProps
+  props: CheckboxProps,
+  sharedTokens: SharedTokens
 ): CheckboxStyle => {
-  const { inline, size, variant } = props
+  const { inline, size, variant, margin } = props
 
   // toggleFullWidth calculation based on Toggle facade width (1.625rem * 1.5) and the marginInlineEnd (0.75rem)
   const toggleFullWidth = `calc(1.625rem * 1.5 + 0.75rem)`
@@ -82,6 +84,11 @@ const generateStyle = (
       label: 'checkbox',
       position: 'relative',
       width: '100%',
+      // Resolves spacing tokens (or custom CSS values) into a margin shorthand.
+      margin: calcSpacingFromShorthand(margin, {
+        ...sharedTokens.spacing,
+        ...sharedTokens.legacy.spacing
+      }),
       ...(inline && {
         display: 'inline-block',
         verticalAlign: 'middle',

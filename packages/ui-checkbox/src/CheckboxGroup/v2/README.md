@@ -12,6 +12,7 @@ type: example
 ---
 <FormFieldGroup description={<ScreenReaderContent>CheckboxGroup examples</ScreenReaderContent>}>
   <CheckboxGroup name="sports"
+    margin="general.spaceMd 0"
     onChange={function (value) { console.log(value) }}
     defaultValue={['football', 'volleyball']}
     description="Select your favorite sports"

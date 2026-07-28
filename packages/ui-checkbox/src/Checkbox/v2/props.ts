@@ -24,7 +24,11 @@
 
 import type { FormMessage } from '@instructure/ui-form-field/latest'
 import type { OtherHTMLAttributes } from '@instructure/shared-types'
-import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type {
+  WithStyleProps,
+  ComponentStyle,
+  Spacing
+} from '@instructure/emotion'
 import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
@@ -72,6 +76,12 @@ type CheckboxOwnProps = {
   labelPlacement?: 'top' | 'start' | 'end'
   isRequired?: boolean
   /**
+   * Valid values are `0`, `none`, `auto`, and Spacing token values,
+   * see https://instructure.design/layout-spacing. Apply these values via
+   * familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`.
+   */
+  margin?: Spacing
+  /**
    * A function that provides a reference to the actual underlying input element
    */
   inputRef?: (inputElement: HTMLInputElement | null) => void
@@ -116,6 +126,7 @@ const allowedProps: AllowedPropKeys = [
   'inline',
   'labelPlacement',
   'isRequired',
+  'margin',
   'inputRef'
 ]
 
