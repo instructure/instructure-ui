@@ -3946,8 +3946,8 @@ importers:
         specifier: workspace:*
         version: link:../command-utils
       '@instructure/instructure-design-tokens':
-        specifier: github:instructure/instructure-design-tokens#v1.6.0
-        version: https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/4828298799329c972e8515ed959a789e8757906b
+        specifier: github:instructure/instructure-design-tokens#v1.7.0
+        version: https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/1200a1bdbcf1b05ad9ebe0fd466fe645e6b2156c
       dprint:
         specifier: ^0.55.1
         version: 0.55.1
@@ -7108,8 +7108,8 @@ packages:
       '@types/node':
         optional: true
 
-  '@instructure/instructure-design-tokens@https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/4828298799329c972e8515ed959a789e8757906b':
-    resolution: {gitHosted: true, tarball: https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/4828298799329c972e8515ed959a789e8757906b}
+  '@instructure/instructure-design-tokens@https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/1200a1bdbcf1b05ad9ebe0fd466fe645e6b2156c':
+    resolution: {gitHosted: true, tarball: https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/1200a1bdbcf1b05ad9ebe0fd466fe645e6b2156c}
     version: 1.0.0
 
   '@isaacs/cliui@8.0.2':
@@ -14908,7 +14908,7 @@ snapshots:
     optionalDependencies:
       '@types/node': 22.19.15
 
-  '@instructure/instructure-design-tokens@https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/4828298799329c972e8515ed959a789e8757906b':
+  '@instructure/instructure-design-tokens@https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/1200a1bdbcf1b05ad9ebe0fd466fe645e6b2156c':
     dependencies:
       glob: 13.0.6
 
