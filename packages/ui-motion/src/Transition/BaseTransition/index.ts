@@ -347,26 +347,39 @@ class BaseTransition extends Component<
       }
     }
 
-    // `typeof type === 'object'` => forwardRef wrapper (withStyle-decorated InstUI components)
-    const refProps =
-      typeof child.type === 'object'
-        ? {
-            // chain so the child's own elementRef still fires instead of being overwritten
-            elementRef: createChainedFunction(
-              (child.props as { elementRef?: (el: Element | null) => void })
-                ?.elementRef,
-              this.handleRef
-            ),
-            // fallback for forwardRef children that expose their node via `ref`, not elementRef
-            ref: elementOnlyRef
-          }
-        : {
-            // for host el / plain class|fn: findDOMNode is the fallback
-            ref: (el: ReactInstance | Element | null) =>
-              this.handleRef(
-                el instanceof Element ? el : (findDOMNode(el) as Element) ?? null
-              )
-          }
+    // `typeof type === 'object'` covers every forwardRef wrapper, not just
+    // withStyle-decorated InstUI components. `@emotion/react`'s wrapper matches
+    // too, and it forwards unknown props straight to the DOM node, so passing
+    // `elementRef` to it makes React warn about an unrecognized prop. Require
+    // the child to declare `elementRef` before handing it one; anything else
+    // gets a plain `ref`.
+    const acceptsElementRef =
+      typeof child.type === 'object' &&
+      Array.isArray(
+        (child.type as { allowedProps?: readonly string[] }).allowedProps
+      ) &&
+      (child.type as { allowedProps: readonly string[] }).allowedProps.includes(
+        'elementRef'
+      )
+
+    const refProps = acceptsElementRef
+      ? {
+          // chain so the child's own elementRef still fires instead of being overwritten
+          elementRef: createChainedFunction(
+            (child.props as { elementRef?: (el: Element | null) => void })
+              ?.elementRef,
+            this.handleRef
+          ),
+          // fallback for forwardRef children that expose their node via `ref`, not elementRef
+          ref: elementOnlyRef
+        }
+      : {
+          // for host el / plain class|fn: findDOMNode is the fallback
+          ref: (el: ReactInstance | Element | null) =>
+            this.handleRef(
+              el instanceof Element ? el : (findDOMNode(el) as Element) ?? null
+            )
+        }
 
     return safeCloneElement(child, {
       'aria-hidden': !this.props.in ? true : undefined,

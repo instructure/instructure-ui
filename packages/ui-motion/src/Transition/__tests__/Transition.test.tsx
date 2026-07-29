@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Component, createRef, RefObject } from 'react'
+import { Component, createRef, forwardRef, RefObject } from 'react'
 import {
   render,
   waitFor,
@@ -273,6 +273,79 @@ describe('<Transition />', () => {
       expect(onExit).toHaveBeenCalled()
       expect(onExiting).toHaveBeenCalled()
       expect(onExited).toHaveBeenCalled()
+    })
+  })
+
+  describe('ref forwarding to the child', () => {
+    // mirrors `@emotion/react`'s wrapper: a forwardRef component (so
+    // `typeof type === 'object'`) that spreads whatever it is given onto a
+    // host element
+    const SpreadingChild = forwardRef<HTMLDivElement, any>((props, ref) => (
+      <div ref={ref} {...props}>
+        {COMPONENT_TEXT}
+      </div>
+    ))
+    SpreadingChild.displayName = 'SpreadingChild'
+
+    const elementRefWarnings = (mock: ReturnType<typeof vi.spyOn>) =>
+      mock.mock.calls.filter((args: unknown[]) =>
+        args.join(' ').includes('elementRef')
+      )
+
+    it('does not pass elementRef to a child that does not accept it', async () => {
+      const { getByText } = render(
+        <Transition type="fade" in={true}>
+          <SpreadingChild />
+        </Transition>
+      )
+      const child = getByText(COMPONENT_TEXT)
+
+      expect(child).not.toHaveAttribute('elementref')
+      expect(elementRefWarnings(consoleErrorMock)).toHaveLength(0)
+    })
+
+    it('still finds the child node when elementRef is withheld', async () => {
+      const elementRef = vi.fn()
+      render(
+        <Transition type="fade" in={true} elementRef={elementRef}>
+          <SpreadingChild />
+        </Transition>
+      )
+
+      await waitFor(() => {
+        expect(elementRef).toHaveBeenCalledWith(expect.any(Element))
+      })
+    })
+
+    it('passes elementRef to a child that declares it in allowedProps', async () => {
+      const childElementRef = vi.fn()
+      const AcceptingChild = forwardRef<HTMLDivElement, any>(
+        ({ elementRef, ...rest }, ref) => (
+          <div
+            ref={(el) => {
+              elementRef?.(el)
+              if (typeof ref === 'function') ref(el)
+            }}
+            {...rest}
+          >
+            {COMPONENT_TEXT}
+          </div>
+        )
+      ) as any
+      AcceptingChild.displayName = 'AcceptingChild'
+      AcceptingChild.allowedProps = ['elementRef']
+
+      const { getByText } = render(
+        <Transition type="fade" in={true}>
+          <AcceptingChild elementRef={childElementRef} />
+        </Transition>
+      )
+
+      // the child's own elementRef is chained, not overwritten
+      await waitFor(() => {
+        expect(childElementRef).toHaveBeenCalledWith(expect.any(Element))
+      })
+      expect(getByText(COMPONENT_TEXT)).not.toHaveAttribute('elementref')
     })
   })
 })
