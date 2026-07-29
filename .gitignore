@@ -39,6 +39,7 @@ CLAUDE.local.md
 !.claude/commands/slack-setup.md
 !.claude/commands/implement.md
 !.claude/commands/ticket.md
+!.claude/commands/comprehension-check.md
 
 # Playwright MCP
 .playwright-mcp
