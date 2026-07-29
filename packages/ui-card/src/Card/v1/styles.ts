@@ -43,19 +43,33 @@ const generateStyle = (
 
   const boxShadow = boxShadowObjectsToCSSString(componentTheme.boxShadow)
 
+  // Width breakpoints only apply to `base`: a `nested` Card's available width
+  // is already constrained by its parent's padded content box, so enforcing
+  // the same breakpoints on `nested` could make it not fit inside `base`.
+  const widthVariants =
+    variant === 'base'
+      ? {
+          sm: { maxWidth: componentTheme.breakpoint.md },
+          md: {
+            minWidth: componentTheme.breakpoint.md,
+            maxWidth: componentTheme.breakpoint.lg
+          },
+          lg: { minWidth: componentTheme.breakpoint.lg }
+        }
+      : { sm: {}, md: {}, lg: {} }
+
   const sizeVariants = {
     sm: {
       padding: componentTheme.padding[variant].sm,
-      maxWidth: componentTheme.breakpoint.md
+      ...widthVariants.sm
     },
     md: {
       padding: componentTheme.padding[variant].md,
-      minWidth: componentTheme.breakpoint.md,
-      maxWidth: componentTheme.breakpoint.lg
+      ...widthVariants.md
     },
     lg: {
       padding: componentTheme.padding[variant].lg,
-      minWidth: componentTheme.breakpoint.lg
+      ...widthVariants.lg
     }
   }
 

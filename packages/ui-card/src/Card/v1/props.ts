@@ -39,9 +39,11 @@ type CardOwnProps = {
    */
   variant?: 'base' | 'nested'
   /**
-   * `sm` applies a max-width, `md` applies a min- and max-width, and `lg`
-   * applies a min-width, each based on breakpoint tokens. Padding and
-   * border radius also scale per size.
+   * Scales padding and border radius. For `variant="base"` only, `size`
+   * also applies min-/max-width breakpoints: `sm` applies a max-width, `md`
+   * applies a min- and max-width, and `lg` applies a min-width. `nested`
+   * doesn't enforce a width — its available space is already constrained
+   * by its parent `base` Card.
    */
   size?: 'sm' | 'md' | 'lg'
 }

@@ -19,9 +19,9 @@ type: example
 
 ### Sizes
 
-`size` controls padding, border radius, and the card's min-/max-width
-breakpoints: `sm` applies a max-width, `md` applies a min- and max-width, and
-`lg` applies a min-width.
+`size` controls padding and border radius. For `variant="base"`, it also
+controls the card's min-/max-width breakpoints: `sm` applies a max-width,
+`md` applies a min- and max-width, and `lg` applies a min-width.
 
 ```js
 ---
@@ -43,9 +43,12 @@ type: example
 ### Nested cards
 
 The `nested` variant is meant to be placed inside a `base` Card. It omits the
-background color and shadow, and uses a smaller border radius. A nested
-Card's `size` is independent of its parent's — choose it based on the nested
-content's own needs, not to match the parent.
+background color and shadow, and uses a smaller border radius. Unlike
+`base`, `nested` doesn't apply min-/max-width breakpoints — its width comes
+from its parent and the surrounding layout, since it's already constrained
+by the `base` Card's padded content area. A nested Card's `size` still
+scales its own padding and border radius independently of its parent's —
+choose it based on the nested content's own needs, not to match the parent.
 
 ```js
 ---
@@ -155,9 +158,9 @@ type: embed
       <code>base</code> Card's <code>size</code>
     </Figure.Item>
     <Figure.Item>
-      Give a row of <code>md</code>/<code>lg</code> <code>nested</code> Cards
-      enough width to fit their minimum widths, or let them wrap, when
-      placing several side by side
+      Use a wrapping flex or grid layout when placing several{' '}
+      <code>nested</code> Cards side by side, so they can reflow to fit the
+      available width
     </Figure.Item>
   </Figure>
   <Figure recommendation="no" title="Don't">

@@ -126,6 +126,18 @@ describe('<Card />', () => {
       expect(md).toBeLessThan(lg)
     })
 
+    // `nested` must never enforce a width: it lives inside a `base` Card's
+    // padded content box, so its available width is already smaller than
+    // the breakpoint tokens it would otherwise share with `base`.
+    it.each(['sm', 'md', 'lg'] as const)(
+      'nested should apply no width constraint at size %s',
+      (size) => {
+        const { style } = renderCard({ variant: 'nested', size })
+        expect(style.minWidth).toBe('auto')
+        expect(style.maxWidth).toBe('none')
+      }
+    )
+
     // The documented contract is that `nested` uses a smaller radius than
     // `base`. Absolute radii are deliberately not asserted: the legacy Canvas
     // themes flatten every radius token to the same value, so only the
