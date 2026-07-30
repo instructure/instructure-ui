@@ -25,6 +25,9 @@ import { defineConfig } from 'cypress'
 import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 
 const META_FILE = 'cypress/meta.json'
+// Accessibility violations captured per screenshot (`<slug>-<theme>`), consumed
+// by `ui-scripts visual-diff --a11y` to render a11y badges/details in the report.
+const A11Y_FILE = 'cypress/a11y.json'
 
 export default defineConfig({
   screenshotsFolder: 'cypress/screenshots',
@@ -41,6 +44,7 @@ export default defineConfig({
     setupNodeEvents(on, config) {
       on('before:run', () => {
         writeFileSync(META_FILE, '{}')
+        writeFileSync(A11Y_FILE, '{}')
       })
       on('task', {
         log(message) {
@@ -57,6 +61,20 @@ export default defineConfig({
             : {}
           data[name] = pagePath
           writeFileSync(META_FILE, JSON.stringify(data, null, 2))
+          return null
+        },
+        recordA11y({
+          name,
+          violations
+        }: {
+          name: string
+          violations: unknown[]
+        }) {
+          const data = existsSync(A11Y_FILE)
+            ? JSON.parse(readFileSync(A11Y_FILE, 'utf8'))
+            : {}
+          data[name] = violations
+          writeFileSync(A11Y_FILE, JSON.stringify(data, null, 2))
           return null
         }
       })
