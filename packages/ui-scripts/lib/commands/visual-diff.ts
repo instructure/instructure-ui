@@ -55,9 +55,32 @@ type Args = {
   sourceBaseUrl?: string
   facets?: string
   appPath?: string
+  a11y?: string
 }
 
 type Meta = Record<string, string>
+
+// Accessibility violations captured by the spec's axe run, keyed by screenshot
+// slug (name minus `.png`, e.g. `button-dark`). Written by the `recordA11y`
+// Cypress task; see regression-test/cypress.config.ts.
+type A11yNode = { target: string; html: string; summary: string }
+type A11yViolation = {
+  id: string
+  impact: string | null
+  help: string
+  helpUrl: string
+  nodes: A11yNode[]
+}
+type A11y = Record<string, A11yViolation[]>
+
+/** @internal — exported only for tests; not part of the package's public API. */
+export function esc(s: string): string {
+  return s
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+}
 
 /** @internal — exported only for tests; not part of the package's public API. */
 export function sourceLinkFor(
@@ -260,12 +283,62 @@ export function thumb(mode: string, name: string): string {
   return `<img loading="lazy" src="${mode}/${name}" data-name="${name}" data-mode="${mode}" class="thumb" />`
 }
 
+/**
+ * Build the a11y badge (for the row header) and the collapsible violation list
+ * (rule, impact, offending selector, and axe's failure summary) for a
+ * screenshot. Returns empty strings and count 0 when there are no violations.
+ *
+ * @internal — exported only for tests; not part of the package's public API.
+ */
+export function a11yFor(
+  name: string,
+  a11y: A11y | null
+): { badge: string; details: string; count: number } {
+  const slug = name.replace(/\.png$/, '')
+  const violations = a11y?.[slug] ?? []
+  const count = violations.length
+  if (!count) return { badge: '', details: '', count: 0 }
+
+  const plural = count === 1 ? '' : 's'
+  const badge = `<span class="pill a11y" title="${count} accessibility violation${plural}">⚠ ${count} a11y</span>`
+
+  const items = violations
+    .map((v) => {
+      const impact = v.impact
+        ? `<span class="a11y-impact ${esc(v.impact)}">${esc(v.impact)}</span> `
+        : ''
+      const rule = v.helpUrl
+        ? `<a href="${esc(
+            v.helpUrl
+          )}" target="_blank" rel="noopener"><code>${esc(v.id)}</code></a>`
+        : `<code>${esc(v.id)}</code>`
+      const nodes = v.nodes
+        .map(
+          (n) =>
+            `<li><code class="sel">${esc(n.target)}</code>${
+              n.summary
+                ? `<div class="a11y-summary">${esc(n.summary)}</div>`
+                : ''
+            }</li>`
+        )
+        .join('')
+      return `<li>${impact}${rule} — ${esc(
+        v.help
+      )}<ul class="a11y-nodes">${nodes}</ul></li>`
+    })
+    .join('')
+
+  const details = `<details class="a11y-details"><summary>${count} accessibility violation${plural}</summary><ul class="a11y-list">${items}</ul></details>`
+  return { badge, details, count }
+}
+
 function row(
   r: Result,
   meta: Meta | null,
   sourceBaseUrl?: string,
   facets: string[] = [],
-  appPath?: string
+  appPath?: string,
+  a11y: A11y | null = null
 ): string {
   const b = r.status === 'added' ? '' : thumb('baseline', r.name)
   const a = r.status === 'removed' ? '' : thumb('actual', r.name)
@@ -283,14 +356,20 @@ function row(
   const htmlUrl =
     r.status === 'removed' ? '' : appUrlFor(r.name, meta, facets, appPath)
   const htmlAttr = htmlUrl ? ` data-html-url="${htmlUrl}"` : ''
+  const {
+    badge: a11yBadge,
+    details: a11yDetails,
+    count: a11yCount
+  } = a11yFor(r.name, a11y)
   return `
     <section class="row" data-status="${r.status}" data-name="${
-      r.name
-    }" data-has-both="${hasBoth}"${htmlAttr}>
+    r.name
+  }" data-has-both="${hasBoth}" data-a11y="${a11yCount}"${htmlAttr}>
       <header><h2>${r.name}</h2>${badgeFor(
-        r.status
-      )}${pixelMeta}${source}</header>
+    r.status
+  )}${a11yBadge}${pixelMeta}${source}</header>
       <div class="grid"><figure><figcaption>Baseline</figcaption>${b}</figure><figure><figcaption>Actual</figcaption>${a}</figure><figure><figcaption>Diff</figcaption>${d}</figure></div>
+      ${a11yDetails}
     </section>`
 }
 
@@ -302,14 +381,15 @@ function renderHtml(
   meta?: Meta | null,
   sourceBaseUrl?: string,
   facets: string[] = [],
-  appPath?: string
+  appPath?: string,
+  a11y: A11y | null = null
 ): string {
   const prBadge =
     prNumber && prUrl
       ? `<a href="${prUrl}" style="font-weight:600;color:#0969da;text-decoration:none;">PR #${prNumber}</a>`
       : prNumber
-        ? `<span style="font-weight:600;">PR #${prNumber}</span>`
-        : ''
+      ? `<span style="font-weight:600;">PR #${prNumber}</span>`
+      : ''
   // Land on the "Changed" view by default so reviewers see regressions first,
   // but fall back to "All" when nothing changed (otherwise the list is blank).
   const defaultFilter = summary.changed > 0 ? 'changed' : 'all'
@@ -318,7 +398,8 @@ function renderHtml(
     ['changed', 'Changed'],
     ['added', 'New'],
     ['removed', 'Removed'],
-    ['unchanged', 'Unchanged']
+    ['unchanged', 'Unchanged'],
+    ['a11y', '⚠ A11y']
   ]
   return `<!doctype html>
 <html><head><meta charset="utf-8"><title>Visual regression report</title>
@@ -340,7 +421,19 @@ function renderHtml(
   .fail { background: #ffebe9; color: #cf222e; }
   .new { background: #ddf4ff; color: #0969da; }
   .gone { background: #fff1e5; color: #9a6700; }
+  .a11y { background: #fbefff; color: #8250df; }
   .meta { font-size: 12px; color: #666; }
+  .a11y-details { padding: 10px 16px; border-top: 1px solid #f0f0f0; font-size: 13px; }
+  .a11y-details > summary { cursor: pointer; color: #8250df; font-weight: 600; }
+  .a11y-list { margin: 10px 0 2px; padding-left: 18px; }
+  .a11y-list > li { margin-bottom: 8px; }
+  .a11y-nodes { margin: 4px 0 0; padding-left: 16px; list-style: circle; }
+  .a11y-nodes code.sel { font-size: 12px; color: #57606a; word-break: break-all; }
+  .a11y-summary { white-space: pre-wrap; color: #666; font-size: 12px; margin: 2px 0 6px; }
+  .a11y-impact { padding: 1px 6px; border-radius: 8px; font-size: 10px; font-weight: 700; text-transform: uppercase; color: #fff; }
+  .a11y-impact.critical, .a11y-impact.serious { background: #cf222e; }
+  .a11y-impact.moderate { background: #9a6700; }
+  .a11y-impact.minor { background: #57606a; }
   .filter { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 8px; }
   .filter button { font-size: 12px; padding: 4px 10px; border: 1px solid #ddd; background: #fff; border-radius: 4px; cursor: pointer; }
   .filter button.active { background: #0969da; color: #fff; border-color: #0969da; }
@@ -378,7 +471,12 @@ function renderHtml(
       <span style="color:#1a7f37;">OK: ${summary.unchanged}</span>
       <span style="color:#cf222e;">Changed: ${summary.changed}</span>
       <span style="color:#0969da;">New: ${summary.added}</span>
-      <span style="color:#9a6700;">Removed: ${summary.removed}</span>
+      <span style="color:#9a6700;">Removed: ${summary.removed}</span>${
+    summary.a11yPages
+      ? `
+      <span style="color:#8250df;">⚠ A11y: ${summary.a11yPages}</span>`
+      : ''
+  }
     </div>
     <div class="filter" id="status-filter">
       ${statusFilters
@@ -402,7 +500,7 @@ function renderHtml(
     }
   </header>
   <main>${results
-    .map((r) => row(r, meta ?? null, sourceBaseUrl, facets, appPath))
+    .map((r) => row(r, meta ?? null, sourceBaseUrl, facets, appPath, a11y))
     .join('')}</main>
 
   <div class="lightbox" id="lb" aria-hidden="true">
@@ -430,7 +528,8 @@ function renderHtml(
       function applyFilters() {
         const q = listState.query.toLowerCase()
         document.querySelectorAll('.row').forEach(r => {
-          const matchesFilter = listState.filter === 'all' || r.dataset.status === listState.filter
+          const matchesFilter = listState.filter === 'all'
+            || (listState.filter === 'a11y' ? Number(r.dataset.a11y) > 0 : r.dataset.status === listState.filter)
           const matchesQuery = !q || r.dataset.name.toLowerCase().includes(q)
           const matchesFacet = listState.facet === 'all' || r.dataset.name.includes('-' + listState.facet + '.')
           if (matchesFilter && matchesQuery && matchesFacet) r.removeAttribute('data-hidden')
@@ -664,12 +763,26 @@ function run(args: Args): number {
     results.push({ name, status, numDiff, sizeMismatch })
   }
 
+  let a11y: A11y | null = null
+  if (args.a11y && existsSync(args.a11y)) {
+    try {
+      a11y = JSON.parse(readFileSync(args.a11y, 'utf8'))
+    } catch {
+      a11y = null
+    }
+  }
+  const a11yEntries = a11y
+    ? Object.values(a11y).filter((v) => (v?.length ?? 0) > 0)
+    : []
+
   const summary = {
     total: results.length,
     unchanged: results.filter((r) => r.status === 'unchanged').length,
     changed: results.filter((r) => r.status === 'changed').length,
     added: results.filter((r) => r.status === 'added').length,
-    removed: results.filter((r) => r.status === 'removed').length
+    removed: results.filter((r) => r.status === 'removed').length,
+    a11yPages: a11yEntries.length,
+    a11yViolations: a11yEntries.reduce((n, v) => n + v.length, 0)
   }
 
   writeFileSync(
@@ -700,7 +813,8 @@ function run(args: Args): number {
       meta,
       args.sourceBaseUrl,
       facets,
-      args.appPath
+      args.appPath,
+      a11y
     )
   )
 
@@ -770,6 +884,11 @@ export default {
       type: 'string',
       describe:
         'Path (relative to the report root) where the live app is published, e.g. "app". Enables an "HTML" view in the lightbox that iframes the rendered page for each screenshot.'
+    },
+    a11y: {
+      type: 'string',
+      describe:
+        'Path to a JSON file of axe accessibility violations keyed by screenshot slug. Renders an a11y badge, an "⚠ A11y" filter, and a per-page violation list (rule, impact, selector, help link) in the report.'
     }
   },
   handler: (argv: Args) => {

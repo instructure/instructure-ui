@@ -29,7 +29,9 @@ import {
   indexByName,
   sourceLinkFor,
   appUrlFor,
-  dilateMask
+  dilateMask,
+  esc,
+  a11yFor
 } from '../commands/visual-diff.ts'
 
 // Build a w*h changed-mask with the given filled rectangles set to 1.
@@ -257,5 +259,75 @@ describe('dilateMask', () => {
     const src = mask(16, 16, [{ x: 3, y: 3, w: 2, h: 2 }])
     const out = dilateMask(src, 16, 16, 0)
     expect(countSet(out)).toBe(countSet(src))
+  })
+})
+
+describe('esc', () => {
+  it('escapes HTML-significant characters', () => {
+    expect(esc('<span class="x">a & b</span>')).toBe(
+      '&lt;span class=&quot;x&quot;&gt;a &amp; b&lt;/span&gt;'
+    )
+  })
+
+  it('leaves plain text untouched', () => {
+    expect(esc('color-contrast')).toBe('color-contrast')
+  })
+})
+
+describe('a11yFor', () => {
+  const a11y = {
+    'button-dark': [
+      {
+        id: 'color-contrast',
+        impact: 'serious',
+        help: 'Elements must meet minimum color contrast ratio thresholds',
+        helpUrl: 'https://dequeuniversity.com/rules/axe/color-contrast',
+        nodes: [
+          {
+            target: '.css-x-baseButton__children',
+            html: '<span>primary-inverse</span>',
+            summary: 'Expected 4.5:1 but got 1.13'
+          }
+        ]
+      }
+    ]
+  }
+
+  it('returns empty output and count 0 when there are no violations', () => {
+    expect(a11yFor('alert-dark.png', a11y)).toEqual({
+      badge: '',
+      details: '',
+      count: 0
+    })
+    expect(a11yFor('button-dark.png', null)).toEqual({
+      badge: '',
+      details: '',
+      count: 0
+    })
+  })
+
+  it('builds a badge and details keyed by slug (name minus .png)', () => {
+    const { badge, details, count } = a11yFor('button-dark.png', a11y)
+    expect(count).toBe(1)
+    expect(badge).toContain('class="pill a11y"')
+    expect(badge).toContain('⚠ 1 a11y')
+    // rule id links to the axe helpUrl, impact and selector are rendered
+    expect(details).toContain(
+      'href="https://dequeuniversity.com/rules/axe/color-contrast"'
+    )
+    expect(details).toContain('<code>color-contrast</code>')
+    expect(details).toContain('a11y-impact serious')
+    expect(details).toContain('.css-x-baseButton__children')
+    expect(details).toContain('Expected 4.5:1 but got 1.13')
+  })
+
+  it('pluralizes the violation count', () => {
+    const many = {
+      'x-dark': [...a11y['button-dark'], ...a11y['button-dark']]
+    }
+    expect(a11yFor('x-dark.png', many).badge).toContain('⚠ 2 a11y')
+    expect(a11yFor('x-dark.png', many).details).toContain(
+      '2 accessibility violations'
+    )
   })
 })
