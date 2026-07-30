@@ -4,7 +4,9 @@
     "unchanged": 0,
     "changed": 0,
     "added": 96,
-    "removed": 32
+    "removed": 32,
+    "a11yPages": 15,
+    "a11yViolations": 15
   },
   "results": [
     {
