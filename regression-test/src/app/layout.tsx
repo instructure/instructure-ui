@@ -87,6 +87,12 @@ export default function RootLayout({
       ? newTheme.semantics(newTheme.primitives)
       : newTheme?.semantics
   const pageBackground = semantics?.color?.background?.page ?? 'transparent'
+  // Pair the surface with the theme's own text color. Painting only the
+  // background leaves inherited text at its default dark value, which on the
+  // dark theme's near-black surface is a serious color-contrast violation for
+  // every plain label on these pages and for any component using
+  // `color="inherit"`.
+  const pageColor = semantics?.color?.text?.base ?? 'inherit'
 
   return (
     // we need to make a new Map to reset counting on the server side
@@ -94,7 +100,7 @@ export default function RootLayout({
     <html
       lang="en"
       data-theme={themeKey}
-      style={{ background: pageBackground }}
+      style={{ background: pageBackground, color: pageColor }}
     >
       <head>
         <title>Component visual and regression test suite</title>
@@ -111,7 +117,11 @@ export default function RootLayout({
             in the captured baselines. */}
         <body
           className={inter.className}
-          style={{ background: pageBackground, minHeight: '100vh' }}
+          style={{
+            background: pageBackground,
+            color: pageColor,
+            minHeight: '100vh'
+          }}
         >
           {children}
         </body>
