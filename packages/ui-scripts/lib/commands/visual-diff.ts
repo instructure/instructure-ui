@@ -328,7 +328,9 @@ export function a11yFor(
     })
     .join('')
 
-  const details = `<details class="a11y-details"><summary>${count} accessibility violation${plural}</summary><ul class="a11y-list">${items}</ul></details>`
+  // Expanded by default: the violations are the point of the a11y view, so
+  // don't make the reviewer click to reveal them.
+  const details = `<details class="a11y-details" open><summary>${count} accessibility violation${plural}</summary><ul class="a11y-list">${items}</ul></details>`
   return { badge, details, count }
 }
 
@@ -401,6 +403,17 @@ function renderHtml(
     ['unchanged', 'Unchanged'],
     ['a11y', '⚠ A11y']
   ]
+  // A11y data for the client, keyed by full screenshot name so the lightbox's
+  // HTML view can outline the offending nodes in the live iframe. `<` is escaped
+  // so the embedded JSON can't terminate the <script> block.
+  const a11yByName: Record<string, A11yViolation[]> = {}
+  if (a11y) {
+    for (const r of results) {
+      const v = a11y[r.name.replace(/\.png$/, '')]
+      if (v && v.length) a11yByName[r.name] = v
+    }
+  }
+  const a11yJson = JSON.stringify(a11yByName).replace(/</g, '\\u003c')
   return `<!doctype html>
 <html><head><meta charset="utf-8"><title>Visual regression report</title>
 <style>
@@ -449,11 +462,17 @@ function renderHtml(
   .lightbox .bar h3 { margin: 0; font-size: 14px; font-weight: 600; flex: 1; }
   .lightbox .bar button { background: transparent; color: #eee; border: 1px solid #555; padding: 4px 10px; border-radius: 4px; cursor: pointer; font: inherit; }
   .lightbox .bar button.active { background: #fff; color: #111; border-color: #fff; }
-  .lightbox .viewer { flex: 1; overflow: auto; display: flex; align-items: center; justify-content: center; padding: 16px; }
+  .lightbox .viewer { position: relative; flex: 1; overflow: auto; display: flex; align-items: center; justify-content: center; padding: 16px; }
   .lightbox .viewer.actual-size { align-items: flex-start; }
   .lightbox .viewer > img { display: block; background: #fff; max-width: 100%; max-height: 100%; object-fit: contain; }
   .lightbox .viewer.actual-size > img { max-width: none; max-height: none; image-rendering: pixelated; }
   .lightbox .viewer > iframe { width: 100%; height: 100%; border: 0; background: #fff; }
+  .a11y-legend { position: absolute; top: 12px; left: 12px; z-index: 5; max-width: min(46%, 520px); max-height: 72%; overflow: auto; background: rgba(20,20,20,0.94); color: #eee; border: 1px solid #444; border-radius: 6px; padding: 8px 10px; font-size: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.4); }
+  .a11y-legend .hd { font-weight: 700; color: #ffb3b3; margin-bottom: 6px; }
+  .a11y-legend button { display: block; width: 100%; text-align: left; background: transparent; color: #eee; border: 0; border-top: 1px solid #333; padding: 6px 4px; cursor: pointer; font: inherit; }
+  .a11y-legend button:hover { background: rgba(255,255,255,0.08); }
+  .a11y-legend code { color: #ffb3b3; }
+  .a11y-legend .sel { color: #9fb0c0; word-break: break-all; }
   .lightbox .slider { position: relative; user-select: none; background: #fff; flex-shrink: 0; }
   .lightbox .slider img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
   .lightbox .slider .top { clip-path: inset(0 0 0 var(--split, 50%)); }
@@ -521,9 +540,59 @@ function renderHtml(
     <div class="viewer" id="lb-viewer"></div>
   </div>
 
+  <script type="application/json" id="a11y-data">${a11yJson}</script>
   <script>
     (function () {
       const listState = { filter: '${defaultFilter}', query: '', facet: 'all' }
+
+      // A11y violations keyed by screenshot name (see --a11y). Used to outline
+      // the offending nodes inside the HTML view's live iframe.
+      let A11Y = {}
+      try { A11Y = JSON.parse(document.getElementById('a11y-data').textContent || '{}') } catch (e) {}
+      function escHtml(s) {
+        return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+      }
+      function a11yItems(name) {
+        return (A11Y[name] || []).flatMap(v =>
+          (v.nodes || []).map(n => ({ id: v.id, impact: v.impact, target: n.target, summary: n.summary }))
+        )
+      }
+      function outlineA11y(iframe, items) {
+        let doc
+        try { doc = iframe.contentDocument } catch (e) { return }
+        if (!doc) return
+        const paint = () => {
+          if (doc.head && !doc.getElementById('a11y-hl-style')) {
+            const st = doc.createElement('style')
+            st.id = 'a11y-hl-style'
+            st.textContent = '[data-a11y-hl]{outline:3px solid #cf222e !important;outline-offset:2px !important;}[data-a11y-hl].a11y-flash{box-shadow:0 0 0 6px rgba(207,34,46,0.45)!important;}'
+            doc.head.appendChild(st)
+          }
+          items.forEach((n, i) => {
+            let els = []
+            try { els = doc.querySelectorAll(n.target) } catch (e) {}
+            els.forEach(el => {
+              el.setAttribute('data-a11y-hl', String(i + 1))
+              if (!el.getAttribute('title')) el.setAttribute('title', n.id + (n.summary ? ' — ' + n.summary : ''))
+            })
+          })
+        }
+        // Re-apply after hydration: the app applies the theme in an effect after
+        // mount, so the target nodes may not exist at iframe 'load' time.
+        paint()
+        setTimeout(paint, 500)
+      }
+      function locateA11y(iframe, item) {
+        let doc
+        try { doc = iframe.contentDocument } catch (e) { return }
+        if (!doc) return
+        let el
+        try { el = doc.querySelector(item.target) } catch (e) {}
+        if (!el) return
+        el.scrollIntoView({ block: 'center', inline: 'center' })
+        el.classList.add('a11y-flash')
+        setTimeout(() => el.classList.remove('a11y-flash'), 1200)
+      }
 
       function applyFilters() {
         const q = listState.query.toLowerCase()
@@ -653,6 +722,19 @@ function renderHtml(
           wrap.addEventListener('touchmove', (e) => { onMove(e); e.preventDefault() }, { passive: false })
         } else if (state.mode === 'html') {
           lbViewer.innerHTML = '<iframe src="' + htmlUrl + '" title="' + name + '"></iframe>'
+          const iframe = lbViewer.querySelector('iframe')
+          const items = a11yItems(name)
+          if (items.length) {
+            const legend = document.createElement('div')
+            legend.className = 'a11y-legend'
+            legend.innerHTML = '<div class="hd">⚠ ' + items.length + ' a11y violation' + (items.length === 1 ? '' : 's') + ' — click to locate</div>' +
+              items.map((n, i) => '<button type="button" data-i="' + i + '"><b>' + (i + 1) + '.</b> <code>' + escHtml(n.id) + '</code> <span class="sel">' + escHtml(n.target) + '</span></button>').join('')
+            lbViewer.appendChild(legend)
+            legend.querySelectorAll('button').forEach(b => {
+              b.addEventListener('click', () => locateA11y(iframe, items[+b.dataset.i]))
+            })
+            iframe.addEventListener('load', () => outlineA11y(iframe, items))
+          }
         } else {
           lbViewer.innerHTML = '<img src="' + state.mode + '/' + name + '" alt="' + name + '" />'
         }
