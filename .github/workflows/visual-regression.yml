@@ -89,6 +89,7 @@ jobs:
           --pr-number ${{ github.event.pull_request.number }}
           --pr-url ${{ github.event.pull_request.html_url }}
           --meta cypress/meta.json
+          --a11y cypress/a11y.json
           --source-base-url https://github.com/${{ github.repository }}/blob/${{ github.head_ref }}/regression-test/src/app
           --facets canvas,light,dark
           --app-path app

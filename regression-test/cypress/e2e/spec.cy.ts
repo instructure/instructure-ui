@@ -210,6 +210,30 @@ describe('visual regression test', () => {
             (violations) => {
               terminalLog(violations)
               violationCount += violations.length
+              // Persist the violations for this screenshot so the visual-diff
+              // report can surface them (badge + details) per page and theme.
+              if (violations.length) {
+                cy.task(
+                  'recordA11y',
+                  {
+                    name,
+                    violations: violations.map((v) => ({
+                      id: v.id,
+                      impact: v.impact,
+                      help: v.help,
+                      helpUrl: v.helpUrl,
+                      nodes: v.nodes.map((n) => ({
+                        target: n.target
+                          .map((t) => (Array.isArray(t) ? t.join(' ') : t))
+                          .join(' '),
+                        html: n.html,
+                        summary: n.failureSummary ?? ''
+                      }))
+                    }))
+                  },
+                  { log: false }
+                )
+              }
             },
             // skipFailures: don't throw here — collect and assert once at the end
             true
