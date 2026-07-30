@@ -33,9 +33,46 @@ import type {
 
 /**
  * Props react-docgen surfaces that are internal plumbing rather than public
- * API — the same ones the docs props table hides (see `src/Properties`).
+ * API — the same ones the docs props table hides (see `src/Properties`) — plus
+ * the two that are editable but have no observable effect in a preview
+ * (`id`, `className`), so a reader can't mistake them for a broken control.
  */
-const INTERNAL_PROPS = ['styles', 'makeStyles', 'dir', 'elementRef']
+const INTERNAL_PROPS = [
+  'styles',
+  'makeStyles',
+  'dir',
+  'elementRef',
+  'id',
+  'className'
+]
+
+/**
+ * Props a component reads only while mounting, beyond the `default*` family:
+ * timers and animations started from `componentDidMount`. Setting one of these
+ * on an element that is already rendered does nothing.
+ */
+const MOUNT_ONLY_PROPS = [
+  // Alert's auto-dismiss timer.
+  'timeout',
+  // Spinner's show-after-delay timer (a `useEffect` on `delay` in v2, but
+  // mount-only in v1, which the docs still serve).
+  'delay',
+  // ProgressCircle seeds its mount animation from both of these in the
+  // constructor.
+  'shouldAnimateOnMount',
+  'animationDelay'
+]
+
+/**
+ * Whether a component only reads this prop at mount time. The preview has to be
+ * remounted for a new value to have any effect — see `PropEditor`'s
+ * `previewKey` — otherwise the control looks broken.
+ */
+function isMountOnly(name: string): boolean {
+  // The uncontrolled seeds: `defaultChecked`, `defaultValue`, `defaultExpanded`,
+  // `defaultPageIndex`, `defaultMinimized`, `defaultToFirstOption`, …
+  return name.startsWith('default') || MOUNT_ONLY_PROPS.includes(name)
+}
 
 /** Strips a single layer of surrounding single/double quotes. */
 function stripQuotes(raw: string): string {
@@ -47,7 +84,8 @@ function stripQuotes(raw: string): string {
  * `"'secondary'"`, `"true"`, `"42"`) into a concrete form value.
  */
 function parseDefault(raw: string | undefined, type: ControlType): PropValue {
-  if (raw === undefined || raw === 'undefined') return undefined
+  if (raw === undefined || raw === 'undefined' || raw === 'null')
+    return undefined
   if (type === 'boolean') return raw === 'true'
   if (type === 'number') {
     const n = Number(raw)
@@ -78,7 +116,15 @@ function inferControlType(prop: ReactDocgenProp): ControlType | null {
   if (tsName === 'boolean') return 'boolean'
   if (tsName === 'number') return 'number'
   if (tsName === 'union' && unionOptions(prop)) return 'select'
-  if (tsName === 'string' || tsName === 'ReactReactNode') return 'text'
+  // react-docgen spells a node type either way depending on how the component
+  // imports React (`React.ReactNode` vs a bare `ReactNode`); both take text.
+  if (
+    tsName === 'string' ||
+    tsName === 'ReactReactNode' ||
+    tsName === 'ReactNode'
+  ) {
+    return 'text'
+  }
   return null
 }
 
@@ -91,7 +137,7 @@ export function generateControls(
   docgenProps: ReactDocgenProps,
   config: PropEditorConfig = {}
 ): { controls: Control[]; skipped: string[] } {
-  const { include, exclude = [], sampleChildren, overrides = {} } = config
+  const { include, exclude = [], defaults = {}, overrides = {} } = config
 
   const names = Object.keys(docgenProps).filter((name) => {
     if (INTERNAL_PROPS.includes(name)) return false
@@ -118,15 +164,12 @@ export function generateControls(
         ? override.options ?? unionOptions(prop) ?? []
         : undefined
 
-    let initialValue =
-      override.default !== undefined
-        ? override.default
-        : parseDefault(prop.defaultValue?.value, type)
-
-    // `children` has no meaningful default — seed it so the preview isn't empty.
-    if (name === 'children' && initialValue === undefined) {
-      initialValue = sampleChildren
-    }
+    // A registered default wins over the component's own: it's there because
+    // the component renders nothing (or nothing useful) without it.
+    const seeded = defaults[name] !== undefined
+    const initialValue = seeded
+      ? defaults[name]
+      : parseDefault(prop.defaultValue?.value, type)
 
     controls.push({
       name,
@@ -134,7 +177,9 @@ export function generateControls(
       options,
       required: Boolean(prop.required),
       description: prop.description,
-      initialValue
+      initialValue,
+      seeded,
+      mountOnly: isMountOnly(name)
     })
   }
 
@@ -149,28 +194,27 @@ function attrString(value: string): string {
 }
 
 /**
- * Serializes the current form values into a JSX snippet for `<Name .../>`.
- * Props left at their default are omitted (so the snippet stays minimal and
- * the preview relies on the component's own defaults — which are identical).
+ * Serializes the current values into a JSX attribute string (no leading or
+ * trailing space, `children` excluded), e.g. `placement="bottom" disabled`.
+ *
+ * A prop still at the component's own default is omitted, so the snippet stays
+ * minimal and leans on the same defaults the preview does. A seeded prop is
+ * always written, even untouched: it's part of the authored example (often a
+ * required `label`), so leaving it out would print a snippet that doesn't
+ * render what the preview shows.
  */
-export function serializeJsx(
-  displayName: string,
+export function serializeAttrs(
   controls: Control[],
   values: Record<string, PropValue>
 ): string {
   const attrs: string[] = []
-  let childrenText = ''
 
   for (const control of controls) {
+    if (control.name === 'children') continue
+
     const value = values[control.name]
-
-    if (control.name === 'children') {
-      childrenText = value == null ? '' : String(value)
-      continue
-    }
-
     if (value === undefined || value === '') continue
-    if (value === control.initialValue) continue
+    if (value === control.initialValue && !control.seeded) continue
 
     if (control.type === 'boolean') {
       attrs.push(value === true ? control.name : `${control.name}={false}`)
@@ -181,9 +225,57 @@ export function serializeJsx(
     }
   }
 
-  const attrStr = attrs.length > 0 ? ` ${attrs.join(' ')}` : ''
+  return attrs.join(' ')
+}
+
+/**
+ * Serializes the current form values into a JSX snippet for `<Name .../>`.
+ */
+export function serializeJsx(
+  displayName: string,
+  controls: Control[],
+  values: Record<string, PropValue>
+): string {
+  const attrs = serializeAttrs(controls, values)
+  const attrStr = attrs ? ` ${attrs}` : ''
+
+  const childrenValue = controls.some((c) => c.name === 'children')
+    ? values.children
+    : undefined
+  const childrenText = childrenValue == null ? '' : String(childrenValue)
 
   return childrenText
     ? `<${displayName}${attrStr}>${childrenText}</${displayName}>`
     : `<${displayName}${attrStr} />`
+}
+
+/**
+ * Fills a composition template's `{{sectionId}}` placeholders with each
+ * section's live attributes. A placeholder with no attributes collapses to
+ * nothing, and the trailing-space cleanup keeps `<Menu {{Menu}}>` tidy as
+ * `<Menu>` when unset. `children` is authored statically in the template, so
+ * only attributes are injected here.
+ */
+export function serializeComposition(
+  template: string,
+  sections: Array<{ id: string; controls: Control[] }>,
+  values: Record<string, Record<string, PropValue>>
+): string {
+  let out = template
+
+  for (const section of sections) {
+    const attrs = serializeAttrs(section.controls, values[section.id] || {})
+    out = out.split(`{{${section.id}}}`).join(attrs)
+  }
+
+  return (
+    out
+      // Collapse the space left before a `>` when a placeholder expanded to
+      // empty (e.g. `<Menu >` → `<Menu>`); self-closing ` />` is untouched.
+      .replace(/ >/g, '>')
+      // A placeholder on its own line leaves an indented blank line behind
+      // when it expands to nothing.
+      .replace(/[ \t]+$/gm, '')
+      .replace(/\n{2,}/g, '\n')
+  )
 }
