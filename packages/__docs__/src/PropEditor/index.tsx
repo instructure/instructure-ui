@@ -26,6 +26,7 @@ import { useContext, useEffect, useMemo, useState } from 'react'
 
 import { View } from '@instructure/ui-view'
 import { Flex } from '@instructure/ui-flex'
+import { Button } from '@instructure/ui-buttons'
 import { Text } from '@instructure/ui-text'
 import { Spinner } from '@instructure/ui-spinner'
 import { Checkbox } from '@instructure/ui-checkbox'
@@ -38,13 +39,28 @@ import { AppContext } from '../appContext'
 import Preview from '../Preview'
 import { getDeployBase } from '../navigationUtils'
 
-import { generateControls, serializeJsx } from './propControls'
+import {
+  generateControls,
+  serializeComposition,
+  serializeJsx
+} from './propControls'
 import type {
   Control,
   PropEditorProps,
   PropValue,
   ReactDocgenProps
 } from './props'
+
+/** A section's resolved controls, ready to render and serialize. */
+type ResolvedSection = {
+  id: string
+  label: string
+  controls: Control[]
+  skipped: string[]
+}
+
+/** Per-section form values: `{ [sectionId]: { [propName]: value } }`. */
+type SectionValues = Record<string, Record<string, PropValue>>
 
 type Status = 'loading' | 'ready' | 'error'
 
@@ -59,22 +75,33 @@ const noop = () => {}
  *
  * @private used only by the docs app.
  */
-function PropEditor({ componentId, config = {} }: PropEditorProps) {
+function PropEditor({
+  componentId,
+  props: providedProps,
+  config: configProp,
+  sections: sectionInputs,
+  template
+}: PropEditorProps) {
   const { componentVersion, themeKey, themes } = useContext(AppContext)
   const name = componentId
 
-  const [docgenProps, setDocgenProps] = useState<ReactDocgenProps | null>(null)
-  const [status, setStatus] = useState<Status>('loading')
-  const [errorMsg, setErrorMsg] = useState('')
-  const [values, setValues] = useState<Record<string, PropValue>>({})
+  // Stabilize config: when it isn't passed (composition mode), the inline
+  // default would be a fresh object every render, thrashing the memo below and
+  // re-seeding (i.e. wiping) the form on every keystroke.
+  const config = useMemo(() => configProp ?? {}, [configProp])
 
-  // A theme override local to the preview, so a reader can flip themes without
-  // scrolling back to the page-level theme switcher. Seeded from the app's
-  // selected theme and reset to it whenever that changes.
-  const [selectedTheme, setSelectedTheme] = useState<string>(String(themeKey))
-  useEffect(() => {
-    setSelectedTheme(String(themeKey))
-  }, [themeKey])
+  // Composition mode: multiple elements edited against a template. Otherwise
+  // the single-element form, sourcing metadata from props or a runtime fetch.
+  const isComposition = Boolean(sectionInputs && template)
+
+  const [docgenProps, setDocgenProps] = useState<ReactDocgenProps | null>(
+    providedProps ?? null
+  )
+  const [status, setStatus] = useState<Status>(
+    providedProps || isComposition ? 'ready' : 'loading'
+  )
+  const [errorMsg, setErrorMsg] = useState('')
+  const [values, setValues] = useState<SectionValues>({})
 
   // The switchable themes, minus the shared-tokens bundle and the legacy
   // wrappers (v2 components use the new theming system).
@@ -86,8 +113,37 @@ function PropEditor({ componentId, config = {} }: PropEditorProps) {
     [themes]
   )
 
-  // Fetch the component's prop metadata (mirrors App.getDocsBasePath).
+  // `themeKey` is undefined until the reader picks one in the page-level theme
+  // switcher (`App` falls back to the first theme for its own select), so fall
+  // back the same way here — otherwise the select renders blank and the preview
+  // gets a theme name that resolves to nothing.
+  const appTheme = useMemo(
+    () =>
+      themeOptions.includes(String(themeKey))
+        ? String(themeKey)
+        : themeOptions[0] ?? '',
+    [themeKey, themeOptions]
+  )
+
+  // A theme override local to the preview, so a reader can flip themes without
+  // scrolling back to the page-level theme switcher. Seeded from the app's
+  // selected theme and reset to it whenever that changes.
+  const [selectedTheme, setSelectedTheme] = useState<string>(appTheme)
   useEffect(() => {
+    setSelectedTheme(appTheme)
+  }, [appTheme])
+
+  // Fetch the component's prop metadata (mirrors App.getDocsBasePath). Skipped
+  // when metadata is supplied via props (the auto-injected Document case) or in
+  // composition mode (each section carries its own metadata).
+  useEffect(() => {
+    if (isComposition) return
+    if (providedProps) {
+      setDocgenProps(providedProps)
+      setStatus('ready')
+      return
+    }
+
     let cancelled = false
     const base = getDeployBase()
     const versionSeg = componentVersion ? `/${componentVersion}` : ''
@@ -115,36 +171,99 @@ function PropEditor({ componentId, config = {} }: PropEditorProps) {
     return () => {
       cancelled = true
     }
-  }, [name, componentVersion])
+  }, [name, componentVersion, providedProps, isComposition])
 
-  const { controls, skipped } = useMemo(
+  // Resolve every section's controls. Simple mode is just a single section
+  // keyed by the component name; composition mode has one per template slot.
+  const sections = useMemo<ResolvedSection[]>(() => {
+    if (isComposition) {
+      return sectionInputs!.map((section) => {
+        const { controls, skipped } = generateControls(
+          section.props,
+          section.config || {}
+        )
+        return {
+          id: section.id,
+          label: section.label || section.id,
+          controls,
+          skipped
+        }
+      })
+    }
+    if (!docgenProps) return []
+    const { controls, skipped } = generateControls(docgenProps, config)
+    return [{ id: name, label: name, controls, skipped }]
+  }, [isComposition, sectionInputs, docgenProps, config, name])
+
+  // A structural signature of the sections/controls. Seeding keys off this
+  // rather than the `sections` array identity, so an unrelated re-render that
+  // produces an equivalent `sections` won't re-seed (and wipe) the form.
+  const sectionsKey = useMemo(
     () =>
-      docgenProps
-        ? generateControls(docgenProps, config)
-        : { controls: [] as Control[], skipped: [] as string[] },
-    [docgenProps, config]
+      sections
+        .map((s) => `${s.id}:${s.controls.map((c) => c.name).join(',')}`)
+        .join('|'),
+    [sections]
   )
 
   // Seed the form with each control's default whenever the controls change.
   useEffect(() => {
-    const initial: Record<string, PropValue> = {}
-    controls.forEach((control) => {
-      initial[control.name] = control.initialValue
+    const initial: SectionValues = {}
+    sections.forEach((section) => {
+      const sectionValues: Record<string, PropValue> = {}
+      section.controls.forEach((control) => {
+        sectionValues[control.name] = control.initialValue
+      })
+      initial[section.id] = sectionValues
     })
     setValues(initial)
-  }, [controls])
+    // Seeding is keyed on the structural signature; `sections` itself is
+    // intentionally not a dependency (its identity changes on every render).
+  }, [sectionsKey])
 
-  const code = useMemo(
-    () => serializeJsx(name, controls, values),
-    [name, controls, values]
-  )
+  const code = useMemo(() => {
+    if (isComposition) {
+      return serializeComposition(template!, sections, values)
+    }
+    const section = sections[0]
+    return section
+      ? serializeJsx(name, section.controls, values[section.id] || {})
+      : ''
+  }, [isComposition, template, sections, values, name])
 
-  const setValue = (propName: string, value: PropValue) => {
-    setValues((prev) => ({ ...prev, [propName]: value }))
+  // A reader-triggered remount, for state that lives inside the preview rather
+  // than in the form: an Alert that has already timed out, a checkbox toggled
+  // by hand, text typed into an input.
+  const [resetNonce, setResetNonce] = useState(0)
+
+  // Some props are only read while a component mounts — the uncontrolled
+  // `default*` seeds, Alert's `timeout`, ProgressCircle's mount animation — so
+  // handing the same element a new value does nothing and the control reads as
+  // broken. Keying the preview on those values swaps in a freshly mounted
+  // element instead. Only they are in the key: keying on everything would tear
+  // the preview down on each keystroke of an unrelated text control.
+  const previewKey = useMemo(() => {
+    const mountValues = sections.map((section) =>
+      section.controls
+        .filter((control) => control.mountOnly)
+        .map(
+          (control) =>
+            `${control.name}=${String(values[section.id]?.[control.name])}`
+        )
+        .join(',')
+    )
+    return `${resetNonce}|${mountValues.join('|')}`
+  }, [sections, values, resetNonce])
+
+  const setValue = (sectionId: string, propName: string, value: PropValue) => {
+    setValues((prev) => ({
+      ...prev,
+      [sectionId]: { ...prev[sectionId], [propName]: value }
+    }))
   }
 
-  const renderControl = (control: Control) => {
-    const value = values[control.name]
+  const renderControl = (sectionId: string, control: Control) => {
+    const value = values[sectionId]?.[control.name]
 
     if (control.type === 'boolean') {
       return (
@@ -153,7 +272,9 @@ function PropEditor({ componentId, config = {} }: PropEditorProps) {
           size="small"
           label={control.name}
           checked={value === true}
-          onChange={(event) => setValue(control.name, event.target.checked)}
+          onChange={(event) =>
+            setValue(sectionId, control.name, event.target.checked)
+          }
         />
       )
     }
@@ -164,18 +285,25 @@ function PropEditor({ componentId, config = {} }: PropEditorProps) {
           renderLabel={control.name}
           value={value == null ? '' : String(value)}
           onChange={(_event, { value: selected }) =>
-            setValue(control.name, selected === '' ? undefined : selected)
+            setValue(
+              sectionId,
+              control.name,
+              selected === '' ? undefined : selected
+            )
           }
         >
           {!control.required && (
-            <SimpleSelect.Option id={`${control.name}--unset`} value="">
+            <SimpleSelect.Option
+              id={`${sectionId}-${control.name}--unset`}
+              value=""
+            >
               (unset)
             </SimpleSelect.Option>
           )}
           {(control.options || []).map((option) => (
             <SimpleSelect.Option
               key={option}
-              id={`${control.name}--${option}`}
+              id={`${sectionId}-${control.name}--${option}`}
               value={option}
             >
               {option}
@@ -191,7 +319,11 @@ function PropEditor({ componentId, config = {} }: PropEditorProps) {
           renderLabel={control.name}
           value={value == null ? '' : String(value)}
           onChange={(_event, val) =>
-            setValue(control.name, val === '' ? undefined : Number(val))
+            setValue(
+              sectionId,
+              control.name,
+              val === '' ? undefined : Number(val)
+            )
           }
         />
       )
@@ -201,7 +333,7 @@ function PropEditor({ componentId, config = {} }: PropEditorProps) {
       <TextInput
         renderLabel={control.name}
         value={value == null ? '' : String(value)}
-        onChange={(_event, val) => setValue(control.name, val)}
+        onChange={(_event, val) => setValue(sectionId, control.name, val)}
       />
     )
   }
@@ -260,28 +392,57 @@ function PropEditor({ componentId, config = {} }: PropEditorProps) {
               </SimpleSelect>
             </View>
           )}
-          <Text weight="bold">Props</Text>
-          <View as="div" margin="small 0 0 0">
-            {controls.map((control) => (
-              <View key={control.name} as="div" margin="0 0 small 0">
-                {renderControl(control)}
-              </View>
-            ))}
-          </View>
-          {skipped.length > 0 && (
-            <View as="div" margin="small 0 0 0">
-              <Text size="small" color="secondary">
-                Not editable here: {skipped.join(', ')}
+          {sections.map((section, index) => (
+            <View
+              key={section.id}
+              as="div"
+              margin={index === 0 ? '0' : 'medium 0 0 0'}
+            >
+              {/* Single-section (simple) mode keeps the generic "Props" label;
+                  composition mode labels each group by its element. */}
+              <Text weight="bold">
+                {sections.length > 1 ? section.label : 'Props'}
               </Text>
+              <View as="div" margin="small 0 0 0">
+                {section.controls.map((control) => (
+                  <View key={control.name} as="div" margin="0 0 small 0">
+                    {renderControl(section.id, control)}
+                  </View>
+                ))}
+              </View>
+              {section.skipped.length > 0 && (
+                <View as="div" margin="small 0 0 0">
+                  <Text size="small" color="secondary">
+                    Not editable here: {section.skipped.join(', ')}
+                  </Text>
+                </View>
+              )}
             </View>
-          )}
+          ))}
         </Flex.Item>
 
         {/* Preview column: takes the remaining space beside the controls. */}
         <Flex.Item size="24rem" shouldGrow shouldShrink>
-          <Text weight="bold">Preview</Text>
+          <Flex alignItems="center" justifyItems="space-between">
+            <Flex.Item>
+              <Text weight="bold">Preview</Text>
+            </Flex.Item>
+            <Flex.Item>
+              <Button
+                size="small"
+                onClick={() => setResetNonce((nonce) => nonce + 1)}
+              >
+                Reset preview
+              </Button>
+            </Flex.Item>
+          </Flex>
           <View as="div" margin="small 0 0 0">
-            <Preview code={code} language="jsx" themeKey={selectedTheme} />
+            <Preview
+              key={previewKey}
+              code={code}
+              language="jsx"
+              themeKey={selectedTheme}
+            />
           </View>
 
           <View as="div" margin="medium 0 0 0">
