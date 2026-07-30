@@ -77,19 +77,6 @@ jobs:
           mkdir -p regression-test/.actual
           find regression-test/cypress/screenshots -name '*.png' -exec cp {} regression-test/.actual/ \;
 
-      # TEMP (remove before merge): this PR renames every screenshot with a
-      # `-<theme>` suffix, so nothing matches the old baselines and the report
-      # has zero "changed" rows — leaving the new diff visualization impossible
-      # to preview. Inject one synthetic baseline/actual pair that differs in a
-      # few localized spots so the report always has a "changed" example.
-      # Fixtures live in regression-test/cypress/diff-demo/. Delete this step
-      # and that directory to revert.
-      - name: TEMP inject diff-demo fixture
-        run: |
-          mkdir -p regression-test/.baselines regression-test/.actual
-          cp regression-test/cypress/diff-demo/baseline.png regression-test/.baselines/diff-demo.png
-          cp regression-test/cypress/diff-demo/actual.png regression-test/.actual/diff-demo.png
-
       - name: Diff and generate report
         id: diff
         working-directory: regression-test
@@ -173,7 +160,9 @@ jobs:
           message: |
             ## Visual regression report
 
-            ${{ steps.summary.outputs.status }}
+            **Cypress assertions (a11y + console errors):** ${{ steps.cypress.outcome == 'failure' && format('❌ **Failing** — see the [run logs]({0}/{1}/actions/runs/{2}).', github.server_url, github.repository, github.run_id) || '✅ Passing' }}
+
+            **Visual diff:** ${{ steps.summary.outputs.status }}
 
             | Status | Count |
             |---|---|
@@ -186,7 +175,7 @@ jobs:
 
             ${{ steps.summary.outputs.diff_images }}
 
-            <sub>Baselines come from the `visual-baselines` branch. They refresh on every merge to `master`.</sub>
+            <sub>Baselines come from the `visual-baselines` branch. They refresh on every merge to `master`. The <b>Cypress assertions</b> line above covers a11y (axe) and console-error checks — a ❌ there means the suite found real issues even if the visual diff is clean.</sub>
 
       - name: Fail if regressions or Cypress failed
         if: steps.diff.outcome == 'failure' || steps.cypress.outcome == 'failure'
