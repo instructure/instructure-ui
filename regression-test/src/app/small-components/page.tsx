@@ -121,7 +121,7 @@ export default function SmallComponentsPage() {
         <Text variant="contentImportant"> contentImportant </Text>
       </div>
       <div>
-        <span style={{ color: '#AA0000' }}>
+        <span style={{ color: '#AA0000', background: '#ffffff' }}>
           <Text color="inherit"> inherit </Text>
         </span>
         <Text variant="contentQuote"> contentQuote </Text>
@@ -138,10 +138,14 @@ export default function SmallComponentsPage() {
         <Text color="warning">I&#39;m warning text</Text>
         <Text color="danger">I&#39;m danger text</Text>
         <Text color="ai-highlight">I&#39;m an ai-highlight text</Text>
-        <Text color="primary-inverse">I&#39;m primary-inverse text</Text>
+        <span style={{ background: '#1c222b' }}>
+          <Text color="primary-inverse">I&#39;m primary-inverse text</Text>
+        </span>
       </div>
       <div>
-        <Text color="secondary-inverse">I&#39;m secondary-inverse text</Text>
+        <span style={{ background: '#1c222b' }}>
+          <Text color="secondary-inverse">I&#39;m secondary-inverse text</Text>
+        </span>
         <Text color="primary-on">I&#39;m primary-on text</Text>
         <Text color="secondary-on">I&#39;m secondary-on text</Text>
       </div>

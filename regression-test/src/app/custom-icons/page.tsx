@@ -97,7 +97,7 @@ function IconGrid({
           <Icon size={size} color={color} title={name} />
           <span
             style={{ fontSize: '15px' }}
-            className="text-gray-500 text-center leading-tight"
+            className="text-center leading-tight"
           >
             {name.replace('InstUIIcon_', '')}
           </span>
@@ -121,7 +121,7 @@ function SizeRow({
       {SIZES.map((size) => (
         <div key={size} className="flex flex-col items-center gap-1 p-1">
           <Icon size={size} color={color} title={name} />
-          <span style={{ fontSize: '15px' }} className="text-gray-500">
+          <span style={{ fontSize: '15px' }} className="">
             {size}
           </span>
         </div>
@@ -132,7 +132,7 @@ function SizeRow({
 
 function SectionHeader({ children }: { children: React.ReactNode }) {
   return (
-    <p className="text-xs font-bold mt-7 mb-2 pb-1 border-b border-gray-300 text-gray-700">
+    <p className="text-xs font-bold mt-7 mb-2 pb-1 border-b border-gray-300">
       {children}
     </p>
   )
