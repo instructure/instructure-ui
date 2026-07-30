@@ -42,7 +42,15 @@ jobs:
         run: npx cypress install
         working-directory: regression-test
 
+      # Capturing baselines is decoupled from the a11y/console assertions: the
+      # screenshots are valid renders regardless of whether those assertions
+      # pass, so a failing test must never block the baseline refresh (that's
+      # what silently froze the baselines branch before). We let Cypress fail
+      # here, always publish the screenshots below, then re-surface the failure
+      # in a trailing step so master still shows red and notifies.
       - name: Run Cypress
+        id: cypress
+        continue-on-error: true
         uses: cypress-io/github-action@v7
         env:
           ELECTRON_EXTRA_LAUNCH_ARGS: "--remote-debugging-port=9222"
@@ -53,11 +61,13 @@ jobs:
           working-directory: regression-test
 
       - name: Flatten screenshots
+        if: always()
         run: |
           mkdir -p baseline-publish/screenshots
           find regression-test/cypress/screenshots -name '*.png' -exec cp {} baseline-publish/screenshots/ \;
 
       - name: Push baselines to visual-baselines branch
+        if: always()
         run: |
           cd baseline-publish
           git init -b visual-baselines
@@ -67,3 +77,12 @@ jobs:
           git commit -m "update baselines from ${GITHUB_SHA}"
           git remote add origin "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git"
           git push --force origin visual-baselines
+
+      # Baselines have been refreshed by this point; now fail loudly if the
+      # suite had regressions (a11y/console violations or a broken page) so the
+      # failure is visible on master rather than silently swallowed.
+      - name: Fail if Cypress reported failures
+        if: steps.cypress.outcome == 'failure'
+        run: |
+          echo "::error::Baselines were published, but the regression suite had failing tests (a11y/console/spec). See the Run Cypress step logs."
+          exit 1
