@@ -47,7 +47,8 @@ function stripQuotes(raw: string): string {
  * `"'secondary'"`, `"true"`, `"42"`) into a concrete form value.
  */
 function parseDefault(raw: string | undefined, type: ControlType): PropValue {
-  if (raw === undefined || raw === 'undefined') return undefined
+  if (raw === undefined || raw === 'undefined' || raw === 'null')
+    return undefined
   if (type === 'boolean') return raw === 'true'
   if (type === 'number') {
     const n = Number(raw)
@@ -149,26 +150,21 @@ function attrString(value: string): string {
 }
 
 /**
- * Serializes the current form values into a JSX snippet for `<Name .../>`.
- * Props left at their default are omitted (so the snippet stays minimal and
- * the preview relies on the component's own defaults — which are identical).
+ * Serializes the non-default values into a JSX attribute string (no leading or
+ * trailing space, `children` excluded), e.g. `placement="bottom" disabled`.
+ * Props left at their default are omitted so the snippet stays minimal and the
+ * preview relies on the component's own defaults — which are identical.
  */
-export function serializeJsx(
-  displayName: string,
+export function serializeAttrs(
   controls: Control[],
   values: Record<string, PropValue>
 ): string {
   const attrs: string[] = []
-  let childrenText = ''
 
   for (const control of controls) {
+    if (control.name === 'children') continue
+
     const value = values[control.name]
-
-    if (control.name === 'children') {
-      childrenText = value == null ? '' : String(value)
-      continue
-    }
-
     if (value === undefined || value === '') continue
     if (value === control.initialValue) continue
 
@@ -181,9 +177,50 @@ export function serializeJsx(
     }
   }
 
-  const attrStr = attrs.length > 0 ? ` ${attrs.join(' ')}` : ''
+  return attrs.join(' ')
+}
+
+/**
+ * Serializes the current form values into a JSX snippet for `<Name .../>`.
+ */
+export function serializeJsx(
+  displayName: string,
+  controls: Control[],
+  values: Record<string, PropValue>
+): string {
+  const attrs = serializeAttrs(controls, values)
+  const attrStr = attrs ? ` ${attrs}` : ''
+
+  const childrenValue = controls.some((c) => c.name === 'children')
+    ? values.children
+    : undefined
+  const childrenText = childrenValue == null ? '' : String(childrenValue)
 
   return childrenText
     ? `<${displayName}${attrStr}>${childrenText}</${displayName}>`
     : `<${displayName}${attrStr} />`
+}
+
+/**
+ * Fills a composition template's `{{sectionId}}` placeholders with each
+ * section's live attributes. A placeholder with no attributes collapses to
+ * nothing, and the trailing-space cleanup keeps `<Menu {{Menu}}>` tidy as
+ * `<Menu>` when unset. `children` is authored statically in the template, so
+ * only attributes are injected here.
+ */
+export function serializeComposition(
+  template: string,
+  sections: Array<{ id: string; controls: Control[] }>,
+  values: Record<string, Record<string, PropValue>>
+): string {
+  let out = template
+
+  for (const section of sections) {
+    const attrs = serializeAttrs(section.controls, values[section.id] || {})
+    out = out.split(`{{${section.id}}}`).join(attrs)
+  }
+
+  // Collapse the space left before a `>` when a placeholder expanded to empty
+  // (e.g. `<Menu >` → `<Menu>`); self-closing ` />` is untouched.
+  return out.replace(/ >/g, '>')
 }

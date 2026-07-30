@@ -38,13 +38,28 @@ import { AppContext } from '../appContext'
 import Preview from '../Preview'
 import { getDeployBase } from '../navigationUtils'
 
-import { generateControls, serializeJsx } from './propControls'
+import {
+  generateControls,
+  serializeComposition,
+  serializeJsx
+} from './propControls'
 import type {
   Control,
   PropEditorProps,
   PropValue,
   ReactDocgenProps
 } from './props'
+
+/** A section's resolved controls, ready to render and serialize. */
+type ResolvedSection = {
+  id: string
+  label: string
+  controls: Control[]
+  skipped: string[]
+}
+
+/** Per-section form values: `{ [sectionId]: { [propName]: value } }`. */
+type SectionValues = Record<string, Record<string, PropValue>>
 
 type Status = 'loading' | 'ready' | 'error'
 
@@ -59,14 +74,33 @@ const noop = () => {}
  *
  * @private used only by the docs app.
  */
-function PropEditor({ componentId, config = {} }: PropEditorProps) {
+function PropEditor({
+  componentId,
+  props: providedProps,
+  config: configProp,
+  sections: sectionInputs,
+  template
+}: PropEditorProps) {
   const { componentVersion, themeKey, themes } = useContext(AppContext)
   const name = componentId
 
-  const [docgenProps, setDocgenProps] = useState<ReactDocgenProps | null>(null)
-  const [status, setStatus] = useState<Status>('loading')
+  // Stabilize config: when it isn't passed (composition mode), the inline
+  // default would be a fresh object every render, thrashing the memo below and
+  // re-seeding (i.e. wiping) the form on every keystroke.
+  const config = useMemo(() => configProp ?? {}, [configProp])
+
+  // Composition mode: multiple elements edited against a template. Otherwise
+  // the single-element form, sourcing metadata from props or a runtime fetch.
+  const isComposition = Boolean(sectionInputs && template)
+
+  const [docgenProps, setDocgenProps] = useState<ReactDocgenProps | null>(
+    providedProps ?? null
+  )
+  const [status, setStatus] = useState<Status>(
+    providedProps || isComposition ? 'ready' : 'loading'
+  )
   const [errorMsg, setErrorMsg] = useState('')
-  const [values, setValues] = useState<Record<string, PropValue>>({})
+  const [values, setValues] = useState<SectionValues>({})
 
   // A theme override local to the preview, so a reader can flip themes without
   // scrolling back to the page-level theme switcher. Seeded from the app's
@@ -86,8 +120,17 @@ function PropEditor({ componentId, config = {} }: PropEditorProps) {
     [themes]
   )
 
-  // Fetch the component's prop metadata (mirrors App.getDocsBasePath).
+  // Fetch the component's prop metadata (mirrors App.getDocsBasePath). Skipped
+  // when metadata is supplied via props (the auto-injected Document case) or in
+  // composition mode (each section carries its own metadata).
   useEffect(() => {
+    if (isComposition) return
+    if (providedProps) {
+      setDocgenProps(providedProps)
+      setStatus('ready')
+      return
+    }
+
     let cancelled = false
     const base = getDeployBase()
     const versionSeg = componentVersion ? `/${componentVersion}` : ''
@@ -115,36 +158,75 @@ function PropEditor({ componentId, config = {} }: PropEditorProps) {
     return () => {
       cancelled = true
     }
-  }, [name, componentVersion])
+  }, [name, componentVersion, providedProps, isComposition])
 
-  const { controls, skipped } = useMemo(
+  // Resolve every section's controls. Simple mode is just a single section
+  // keyed by the component name; composition mode has one per template slot.
+  const sections = useMemo<ResolvedSection[]>(() => {
+    if (isComposition) {
+      return sectionInputs!.map((section) => {
+        const { controls, skipped } = generateControls(
+          section.props,
+          section.config || {}
+        )
+        return {
+          id: section.id,
+          label: section.label || section.id,
+          controls,
+          skipped
+        }
+      })
+    }
+    if (!docgenProps) return []
+    const { controls, skipped } = generateControls(docgenProps, config)
+    return [{ id: name, label: name, controls, skipped }]
+  }, [isComposition, sectionInputs, docgenProps, config, name])
+
+  // A structural signature of the sections/controls. Seeding keys off this
+  // rather than the `sections` array identity, so an unrelated re-render that
+  // produces an equivalent `sections` won't re-seed (and wipe) the form.
+  const sectionsKey = useMemo(
     () =>
-      docgenProps
-        ? generateControls(docgenProps, config)
-        : { controls: [] as Control[], skipped: [] as string[] },
-    [docgenProps, config]
+      sections
+        .map((s) => `${s.id}:${s.controls.map((c) => c.name).join(',')}`)
+        .join('|'),
+    [sections]
   )
 
   // Seed the form with each control's default whenever the controls change.
   useEffect(() => {
-    const initial: Record<string, PropValue> = {}
-    controls.forEach((control) => {
-      initial[control.name] = control.initialValue
+    const initial: SectionValues = {}
+    sections.forEach((section) => {
+      const sectionValues: Record<string, PropValue> = {}
+      section.controls.forEach((control) => {
+        sectionValues[control.name] = control.initialValue
+      })
+      initial[section.id] = sectionValues
     })
     setValues(initial)
-  }, [controls])
+    // Seeding is keyed on the structural signature; `sections` itself is
+    // intentionally not a dependency (its identity changes on every render).
+  }, [sectionsKey])
 
-  const code = useMemo(
-    () => serializeJsx(name, controls, values),
-    [name, controls, values]
-  )
+  const code = useMemo(() => {
+    if (isComposition) {
+      return serializeComposition(template!, sections, values)
+    }
+    const section = sections[0]
+    return section
+      ? serializeJsx(name, section.controls, values[section.id] || {})
+      : ''
+  }, [isComposition, template, sections, values, name])
 
-  const setValue = (propName: string, value: PropValue) => {
-    setValues((prev) => ({ ...prev, [propName]: value }))
+  const setValue = (sectionId: string, propName: string, value: PropValue) => {
+    setValues((prev) => ({
+      ...prev,
+      [sectionId]: { ...prev[sectionId], [propName]: value }
+    }))
   }
 
-  const renderControl = (control: Control) => {
-    const value = values[control.name]
+  const renderControl = (sectionId: string, control: Control) => {
+    const value = values[sectionId]?.[control.name]
 
     if (control.type === 'boolean') {
       return (
@@ -153,7 +235,9 @@ function PropEditor({ componentId, config = {} }: PropEditorProps) {
           size="small"
           label={control.name}
           checked={value === true}
-          onChange={(event) => setValue(control.name, event.target.checked)}
+          onChange={(event) =>
+            setValue(sectionId, control.name, event.target.checked)
+          }
         />
       )
     }
@@ -164,18 +248,25 @@ function PropEditor({ componentId, config = {} }: PropEditorProps) {
           renderLabel={control.name}
           value={value == null ? '' : String(value)}
           onChange={(_event, { value: selected }) =>
-            setValue(control.name, selected === '' ? undefined : selected)
+            setValue(
+              sectionId,
+              control.name,
+              selected === '' ? undefined : selected
+            )
           }
         >
           {!control.required && (
-            <SimpleSelect.Option id={`${control.name}--unset`} value="">
+            <SimpleSelect.Option
+              id={`${sectionId}-${control.name}--unset`}
+              value=""
+            >
               (unset)
             </SimpleSelect.Option>
           )}
           {(control.options || []).map((option) => (
             <SimpleSelect.Option
               key={option}
-              id={`${control.name}--${option}`}
+              id={`${sectionId}-${control.name}--${option}`}
               value={option}
             >
               {option}
@@ -191,7 +282,11 @@ function PropEditor({ componentId, config = {} }: PropEditorProps) {
           renderLabel={control.name}
           value={value == null ? '' : String(value)}
           onChange={(_event, val) =>
-            setValue(control.name, val === '' ? undefined : Number(val))
+            setValue(
+              sectionId,
+              control.name,
+              val === '' ? undefined : Number(val)
+            )
           }
         />
       )
@@ -201,7 +296,7 @@ function PropEditor({ componentId, config = {} }: PropEditorProps) {
       <TextInput
         renderLabel={control.name}
         value={value == null ? '' : String(value)}
-        onChange={(_event, val) => setValue(control.name, val)}
+        onChange={(_event, val) => setValue(sectionId, control.name, val)}
       />
     )
   }
@@ -260,21 +355,33 @@ function PropEditor({ componentId, config = {} }: PropEditorProps) {
               </SimpleSelect>
             </View>
           )}
-          <Text weight="bold">Props</Text>
-          <View as="div" margin="small 0 0 0">
-            {controls.map((control) => (
-              <View key={control.name} as="div" margin="0 0 small 0">
-                {renderControl(control)}
-              </View>
-            ))}
-          </View>
-          {skipped.length > 0 && (
-            <View as="div" margin="small 0 0 0">
-              <Text size="small" color="secondary">
-                Not editable here: {skipped.join(', ')}
+          {sections.map((section, index) => (
+            <View
+              key={section.id}
+              as="div"
+              margin={index === 0 ? '0' : 'medium 0 0 0'}
+            >
+              {/* Single-section (simple) mode keeps the generic "Props" label;
+                  composition mode labels each group by its element. */}
+              <Text weight="bold">
+                {sections.length > 1 ? section.label : 'Props'}
               </Text>
+              <View as="div" margin="small 0 0 0">
+                {section.controls.map((control) => (
+                  <View key={control.name} as="div" margin="0 0 small 0">
+                    {renderControl(section.id, control)}
+                  </View>
+                ))}
+              </View>
+              {section.skipped.length > 0 && (
+                <View as="div" margin="small 0 0 0">
+                  <Text size="small" color="secondary">
+                    Not editable here: {section.skipped.join(', ')}
+                  </Text>
+                </View>
+              )}
             </View>
-          )}
+          ))}
         </Flex.Item>
 
         {/* Preview column: takes the remaining space beside the controls. */}

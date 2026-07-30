@@ -88,6 +88,25 @@ export type PropEditorConfig = {
   overrides?: Record<string, PropOverride>
 }
 
+/**
+ * One editable element in a composition playground. Each section becomes a
+ * labeled group of controls and contributes its serialized attributes to the
+ * matching `{{id}}` placeholder in the template.
+ */
+export type PropEditorSection = {
+  /**
+   * The element id, e.g. `"Menu"` or `"Menu.Item"`. Must match both the
+   * `{{id}}` placeholder in the template and the JSX tag it sits on.
+   */
+  id: string
+  /** Control-group label. Defaults to `id`. */
+  label?: string
+  /** Prop metadata for this element (from the component's/child's docgen). */
+  props: ReactDocgenProps
+  /** Per-section form config (typically an `include` list of props to expose). */
+  config?: PropEditorConfig
+}
+
 export type PropEditorProps = {
   /**
    * The component's name. Used both to fetch its prop metadata (the doc JSON
@@ -95,5 +114,25 @@ export type PropEditorProps = {
    * component registered in the docs globals (e.g. `"Button"`, `"Avatar"`).
    */
   componentId: string
+  /**
+   * Prop metadata to build the form from. When supplied (e.g. by the docs
+   * `Document` page, which already has it), the editor uses it directly and
+   * skips the runtime fetch. When omitted (the README-embed case), the editor
+   * fetches `<componentId>.json` itself.
+   */
+  props?: ReactDocgenProps
   config?: PropEditorConfig
+  /**
+   * Composition mode: edit several elements' props at once (e.g. a `Menu` plus
+   * a representative `Menu.Item`). When provided together with `template`, the
+   * editor renders one control group per section and skips the single-element
+   * form. Each section's live attributes fill its `{{id}}` placeholder.
+   */
+  sections?: PropEditorSection[]
+  /**
+   * JSX composition template used in composition mode. Contains one `{{id}}`
+   * placeholder per section, positioned where that element's attributes go —
+   * e.g. `<Menu {{Menu}}>\n  <Menu.Item {{Menu.Item}}>Item</Menu.Item>\n</Menu>`.
+   */
+  template?: string
 }

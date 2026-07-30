@@ -42,6 +42,14 @@ import { Returns } from '../Returns'
 import { ComponentTheme } from '../ComponentTheme'
 import { TableOfContents } from '../TableOfContents'
 import { Heading } from '../Heading'
+import { PropEditor } from '../PropEditor'
+import type { PropEditorSection, ReactDocgenProps } from '../PropEditor/props'
+import {
+  shouldAutoInject,
+  getAutoInjectConfig,
+  getCustomPlayground,
+  isForceSimple
+} from '../PropEditor/registry'
 
 import { AppContext } from '../appContext'
 import { navigateTo } from '../navigationUtils'
@@ -152,6 +160,84 @@ class Document extends Component<DocumentProps, DocumentState> {
     return props ? (
       <Properties props={props} layout={this.props.layout} />
     ) : null
+  }
+
+  renderPlayground(doc: DocDataType) {
+    const editor = this.getPlaygroundEditor(doc)
+    if (!editor) return null
+
+    return (
+      <View margin="x-large 0" display="block">
+        <Heading
+          level="h2"
+          as="h3"
+          id={`${doc.id}Playground`}
+          margin="0 0 small 0"
+        >
+          Playground
+        </Heading>
+        {editor}
+      </View>
+    )
+  }
+
+  // Which playground (if any) a component gets:
+  //  - a curated composition, when a custom playground is registered;
+  //  - the auto single-element form, for simple standalone components;
+  //  - none, for compound components without a custom entry (they lean on
+  //    their README examples) and anything the gate rejects.
+  getPlaygroundEditor(doc: DocDataType) {
+    const custom = getCustomPlayground(doc.id)
+
+    if (custom) {
+      const sections = custom.sections
+        .map<PropEditorSection | null>((section) => {
+          const sectionProps =
+            section.id === doc.id
+              ? doc.props
+              : doc.children?.find((child) => child.id === section.id)?.props
+          return sectionProps
+            ? {
+                id: section.id,
+                label: section.label,
+                props: sectionProps as ReactDocgenProps,
+                config: section.config
+              }
+            : null
+        })
+        .filter((section): section is PropEditorSection => section !== null)
+
+      // Bail if any section's metadata is missing rather than render a partial,
+      // broken composition.
+      if (sections.length !== custom.sections.length) return null
+
+      return (
+        <PropEditor
+          componentId={doc.id}
+          sections={sections}
+          template={custom.template}
+        />
+      )
+    }
+
+    // Real compound components (whose children are composable subcomponents
+    // with dotted ids like `Menu.Item`) fall back to examples when they have no
+    // custom playground. Components whose only "children" are internal facades
+    // (non-dotted ids, e.g. Checkbox's `CheckboxFacade`) are not composed by
+    // consumers, so they still get the simple single-element form.
+    const hasSubcomponents = doc.children?.some((child) =>
+      child.id?.includes('.')
+    )
+    if (hasSubcomponents && !isForceSimple(doc.id)) return null
+    if (!shouldAutoInject(doc)) return null
+
+    return (
+      <PropEditor
+        componentId={doc.id}
+        props={doc.props as ReactDocgenProps}
+        config={getAutoInjectConfig(doc.id)}
+      />
+    )
   }
 
   renderTheme(doc: DocDataType) {
@@ -467,6 +553,9 @@ import { ${importName} } from '${versionedPackageName}'`
         {pageRef && <TableOfContents doc={doc} pageElement={pageRef} />}
         {['.js', '.ts', '.tsx'].includes(doc.extension) && this.renderUsage()}
         {this.renderDescription(doc, this.props.description)}
+        {/* Playground sits above the per-subcomponent details tabs so it always
+            applies to the whole component, not the selected tab. */}
+        {this.renderPlayground(doc)}
         {details}
         {this.renderEditOnGithub()}
         {repository && layout !== 'small' && (
