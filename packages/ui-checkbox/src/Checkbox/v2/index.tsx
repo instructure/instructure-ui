@@ -343,6 +343,8 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
             readOnly={readOnly}
             aria-readonly={readOnly ? true : undefined}
             aria-checked={indeterminate ? 'mixed' : undefined}
+            role={variant === 'toggle' ? 'button' : undefined}
+            aria-pressed={variant === 'toggle' ? this.checked : undefined}
             aria-invalid={this.invalid ? 'true' : undefined}
             // Keep messages in the description so the accessible name contains only the label.
             aria-labelledby={
