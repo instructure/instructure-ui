@@ -34,7 +34,8 @@ import {
   IconUserLine,
   IconAiSolid,
   IconAiColoredSolid,
-  IconXSolid
+  IconXSolid,
+  Text
 } from '@instructure/ui/latest'
 
 export default function ButtonPage() {
@@ -58,7 +59,7 @@ export default function ButtonPage() {
         <Button color="success">success</Button>
         <Button color="danger">danger</Button>
       </div>
-      withBackground = false:
+      <Text>withBackground = false:</Text>
       <div style={{ display: 'flex', gap: '0.5rem' }}>
         <Button withBackground={false}>Button</Button>
         <Button color="primary" withBackground={false}>
@@ -89,7 +90,7 @@ export default function ButtonPage() {
         <Button size="large">large</Button>
       </div>
       <Button renderIcon={<IconAddLine />}>Icon Button</Button>
-      Disabled:
+      <Text>Disabled:</Text>
       <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
         <Button disabled>Button</Button>
         <Button disabled withBackground={false}>
@@ -246,9 +247,15 @@ export default function ButtonPage() {
         compensation is manual and size-specific, it's easy to miss a size or
         variant.
       */}
-      ai-secondary size parity (all sizes):
+      <Text>ai-secondary size parity (all sizes):</Text>
       {(
-        ['small', 'medium', 'large', 'condensedSmall', 'condensedMedium'] as const
+        [
+          'small',
+          'medium',
+          'large',
+          'condensedSmall',
+          'condensedMedium'
+        ] as const
       ).map((size) => (
         <div
           key={size}

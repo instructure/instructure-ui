@@ -83,7 +83,6 @@ Top-bar controls:
 - **Filter buttons** (`All`, `Changed`, `New`, `Removed`, `Unchanged`, `⚠ A11y`) — the active one is highlighted.
 - **Search input** — live, debounced substring filter on the screenshot name.
 - **Theme chips** — narrow to one theme's screenshots.
-- **Impact chips** and **Show markers on screenshots** — see below.
 - **Lightbox** — click any thumbnail to open a fullscreen viewer. Inside:
   - `Baseline`, `Actual`, `Diff` buttons switch between the three images.
   - `Slider` mode overlays baseline and actual with a drag handle so you can scrub the boundary back and forth.
@@ -99,13 +98,11 @@ axe runs against every page and theme, and the report shows what it found **on t
 While the page is still on screen, `spec.cy.ts` records each violating element's bounding box, a human-readable name for it, and — for contrast failures — the foreground/background colors and ratios axe computed (see `cypress/support/a11y-capture.ts`). The report then renders:
 
 - **A run-level overview** at the top of the page: one line per rule with its impact, how many elements it affects, and how many screenshots it appears on. The same rule tripping in `canvas`, `light`, and `dark` collapses to a single line. Click a rule to narrow the list to just the screenshots it affects.
-- **Numbered boxes on the “Actual” image**, colored by impact. The numbers match the cards below, so “#3” is the same finding everywhere it appears. Uncheck **Show markers on screenshots** when they get in the way of comparing pixels.
+- **A `⚠ N a11y` badge** in each affected screenshot's header, colored by the worst impact on it. That badge is the only a11y marking in the list — rows stay a clean three-up image comparison. **Click it** to open the lightbox's **A11y** view.
+- **The A11y view**: the screenshot at full size with every violating element boxed and numbered, colored by impact, and the findings listed beside it. Clicking a card highlights its box and vice versa. Findings are ordered worst-impact-first, so `#1` is always the most serious thing on that screenshot.
 - **One card per offending element**, leading with a plain-language headline ("Text contrast is too low") rather than the rule id, naming the element (`button “Archive this item”`), and suggesting a fix. Contrast failures show both colors as swatches with the measured and required ratios. The raw axe output — rule id, selector, and `failureSummary` — sits behind **Technical details**.
-- **Impact chips** (`critical` / `serious` / `moderate` / `minor`) that narrow both the list and the boxes on each image.
 
-Clicking a card's number badge opens the lightbox in **A11y** mode, scrolled to that finding. In that view, clicking a card highlights its box and vice versa.
-
-Findings are ordered worst-impact-first, so `#1` on a screenshot is always the most serious thing on it.
+The boxes and cards are rendered into an inert `<template>` inside each row and cloned when the A11y view opens, so there's one renderer rather than a server-side and a client-side copy.
 
 Plain-language copy comes from a rule dictionary in `packages/ui-scripts/lib/commands/visual-diff.ts` (`RULE_COPY`). A rule that isn't in it still renders correctly — it just falls back to axe's own `help` text. Add an entry when a new rule starts showing up.
 

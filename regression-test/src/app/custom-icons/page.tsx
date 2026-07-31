@@ -39,6 +39,10 @@ import {
   HeartInstUIIcon
 } from '@instructure/ui-icons'
 import type { InstUIIconProps } from '@instructure/ui-icons'
+import { Heading as hd, Text as tx } from '@instructure/ui/latest'
+
+const Heading = hd as any
+const Text = tx as any
 
 // This is just a React component, but that type doesn't work because
 // the main project uses a different React version
@@ -95,11 +99,10 @@ function IconGrid({
       {icons.map(([name, Icon]) => (
         <div key={name} className="flex flex-col items-center gap-1 p-1">
           <Icon size={size} color={color} title={name} />
-          <span
-            style={{ fontSize: '15px' }}
-            className="text-gray-500 text-center leading-tight"
-          >
-            {name.replace('InstUIIcon_', '')}
+          <span className="text-center leading-tight">
+            <Text color="secondary" variant="contentSmall">
+              {name.replace('InstUIIcon_', '')}
+            </Text>
           </span>
         </div>
       ))}
@@ -121,9 +124,9 @@ function SizeRow({
       {SIZES.map((size) => (
         <div key={size} className="flex flex-col items-center gap-1 p-1">
           <Icon size={size} color={color} title={name} />
-          <span style={{ fontSize: '15px' }} className="text-gray-500">
+          <Text color="secondary" variant="contentSmall">
             {size}
-          </span>
+          </Text>
         </div>
       ))}
     </div>
@@ -132,18 +135,22 @@ function SizeRow({
 
 function SectionHeader({ children }: { children: React.ReactNode }) {
   return (
-    <p className="text-xs font-bold mt-7 mb-2 pb-1 border-b border-gray-300 text-gray-700">
-      {children}
-    </p>
+    <div className="mt-7 mb-2">
+      <Heading level="h3" variant="label" border="bottom">
+        {children}
+      </Heading>
+    </div>
   )
 }
 
 export default function CustomIconsPage() {
   return (
     <main className="axe-test p-6 font-sans">
-      <h1 className="text-sm font-bold mb-1">
-        Custom icons (sample of {CUSTOM.length})
-      </h1>
+      <div className="mb-1">
+        <Heading level="h1" variant="titleCardMini">
+          Custom icons (sample of {CUSTOM.length})
+        </Heading>
+      </div>
 
       {COLORS.map((color) => (
         <React.Fragment key={color}>
@@ -170,9 +177,11 @@ export default function CustomIconsPage() {
         color="baseColor"
       />
 
-      <h1 className="text-sm font-bold mt-10 mb-1">
-        Lucide icons (sample of {LUCIDE.length})
-      </h1>
+      <div className="mt-10 mb-1">
+        <Heading level="h1" variant="titleCardMini">
+          Lucide icons (sample of {LUCIDE.length})
+        </Heading>
+      </div>
 
       {COLORS.map((color) => (
         <React.Fragment key={color}>

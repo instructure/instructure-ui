@@ -24,9 +24,14 @@
 
 'use client'
 import React, { useState } from 'react'
-import { DateInput as di, IconAddLine } from '@instructure/ui/latest'
+import {
+  DateInput as di,
+  IconAddLine,
+  Text as tx
+} from '@instructure/ui/latest'
 
 const DateInput = di as any
+const Text = tx as any
 
 export default function DateInputExamplesPage() {
   // DateInput states
@@ -40,7 +45,9 @@ export default function DateInputExamplesPage() {
 
   return (
     <main className="flex gap-10 p-12 flex-col items-start axe-test">
-      <div>DateInput:</div>
+      <div>
+        <Text>DateInput:</Text>
+      </div>
       <section>
         <DateInput
           locale="en-us"
@@ -61,9 +68,13 @@ export default function DateInputExamplesPage() {
           invalidDateErrorMessage="Invalid date"
         />
         <p>
-          Input Value: <code>{di2Value}</code>
+          <Text>
+            Input Value: <code>{di2Value}</code>
+          </Text>
           <br />
-          UTC Date String: <code>{di2DateString}</code>
+          <Text>
+            UTC Date String: <code>{di2DateString}</code>
+          </Text>
         </p>
       </section>
 
