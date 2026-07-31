@@ -278,6 +278,37 @@ describe('<Checkbox />', () => {
     expect(input).not.toHaveAttribute('aria-invalid')
   })
 
+  describe('`toggle` variant', () => {
+    it('should expose a button role and pressed state', () => {
+      renderCheckbox({ variant: 'toggle', defaultChecked: true })
+      const toggle = screen.getByRole('button')
+
+      expect(toggle).toHaveAttribute('aria-pressed', 'true')
+      expect(screen.queryByRole('checkbox')).not.toBeInTheDocument()
+    })
+
+    it('should update the pressed state when toggled', async () => {
+      renderCheckbox({ variant: 'toggle', defaultChecked: false })
+      const toggle = screen.getByRole('button')
+
+      expect(toggle).toHaveAttribute('aria-pressed', 'false')
+
+      await userEvent.click(toggle)
+
+      await waitFor(() => {
+        expect(toggle).toHaveAttribute('aria-pressed', 'true')
+      })
+    })
+
+    it('should leave the `simple` variant as a checkbox', () => {
+      renderCheckbox({ variant: 'simple' })
+      const input = screen.getByRole('checkbox')
+
+      expect(input).not.toHaveAttribute('role')
+      expect(input).not.toHaveAttribute('aria-pressed')
+    })
+  })
+
   describe('for a11y', () => {
     it('`simple` variant should meet standards', async () => {
       const { container } = await renderCheckbox({ variant: 'simple' })
