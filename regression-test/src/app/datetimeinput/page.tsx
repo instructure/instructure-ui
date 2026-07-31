@@ -26,11 +26,13 @@
 import React, { useRef, useState } from 'react'
 import {
   DateTimeInput as dti,
-  ScreenReaderContent as src
+  ScreenReaderContent as src,
+  Text as tx
 } from '@instructure/ui/latest'
 
 const DateTimeInput = dti as any
 const ScreenReaderContent = src as any
+const Text = tx as any
 
 export default function DateTimeInputPage() {
   // Example 2: required + hint if in past
@@ -39,7 +41,7 @@ export default function DateTimeInputPage() {
 
   return (
     <main className="flex gap-10 p-8 flex-col items-start axe-test">
-      1) Columns layout with default value
+      <Text>1) Columns layout with default value</Text>
       <DateTimeInput
         description="Pick a date and time"
         datePlaceholder="Choose a date"
@@ -54,7 +56,7 @@ export default function DateTimeInputPage() {
         defaultValue="2018-01-18T13:30"
         layout="columns"
       />
-      2) Required + hint when value is in the past, stacked layout
+      <Text>2) Required + hint when value is in the past, stacked layout</Text>
       <DateTimeInput
         description={
           <ScreenReaderContent>Pick a date and time</ScreenReaderContent>
@@ -89,7 +91,7 @@ export default function DateTimeInputPage() {
         allowNonStepInput
         isRequired
       />
-      3) Disabled DateTimeInput
+      <Text>3) Disabled DateTimeInput</Text>
       <DateTimeInput
         description="Pick a date and time"
         datePlaceholder="Choose a date"
@@ -106,7 +108,7 @@ export default function DateTimeInputPage() {
         interaction="disabled"
       />
       {/*
-      4) Disabled dates via string array
+      <Text>4) Disabled dates via string array</Text>
       <DateTimeInput
         description="Pick a date and time"
         datePlaceholder="Choose a date"

@@ -39,6 +39,7 @@ import {
   a11yBadge,
   a11yMarkers,
   a11yCards,
+  a11yTemplate,
   a11ySummary,
   a11yOverview
 } from '../commands/visual-diff.ts'
@@ -493,9 +494,13 @@ describe('a11yBadge', () => {
     expect(a11yBadge(findings)).toContain('data-impact="critical"')
   })
 
+  it('is a button, since it opens the A11y view', () => {
+    expect(a11yBadge(findings)).toContain('<button type="button"')
+  })
+
   it('pluralizes the tooltip', () => {
     expect(a11yBadge(findings.slice(0, 1))).toContain(
-      '1 accessibility issue, worst impact: critical'
+      '1 accessibility issue (worst: critical)'
     )
     expect(a11yBadge(findings)).toContain('2 accessibility issues')
   })
@@ -523,6 +528,10 @@ describe('a11yMarkers', () => {
     expect(a11yMarkers(findings, page)).toContain('data-impact="critical"')
   })
 
+  it('tags each box with its rule, since the cards it pairs with are inert', () => {
+    expect(a11yMarkers(findings, page)).toContain('data-rule="color-contrast"')
+  })
+
   it('renders nothing when the run recorded no page size', () => {
     expect(a11yMarkers(findings, null)).toBe('')
   })
@@ -530,6 +539,31 @@ describe('a11yMarkers', () => {
   it('skips findings whose element could not be measured', () => {
     const unmeasured = findings.map((f) => ({ ...f, rect: null }))
     expect(a11yMarkers(unmeasured, page)).toBe('')
+  })
+})
+
+describe('a11yTemplate', () => {
+  const { findings, page } = findingsFor(
+    'button-dark.png',
+    normalizeA11y(CAPTURE)
+  )
+
+  it('renders nothing when there are no findings', () => {
+    expect(a11yTemplate([], page)).toBe('')
+  })
+
+  it('parks the boxes and cards in an inert template', () => {
+    const html = a11yTemplate(findings, page)
+    expect(html.startsWith('<template class="a11y-findings">')).toBe(true)
+    expect(html.endsWith('</template>')).toBe(true)
+    expect(html).toContain('class="mk"')
+    expect(html).toContain('class="v-card"')
+  })
+
+  it('still emits the cards when there are no boxes to draw', () => {
+    const html = a11yTemplate(findings, null)
+    expect(html).not.toContain('class="mk"')
+    expect(html).toContain('class="v-card"')
   })
 })
 

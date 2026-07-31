@@ -40,7 +40,9 @@ export default function ProgressBarPage() {
   return (
     <main className="flex gap-12 p-8 flex-col items-start axe-test">
       <section style={{ width: '500px' }}>
-        <div>Sizes:</div>
+        <div>
+          <Text>Sizes:</Text>
+        </div>
         <ProgressBar
           size="x-small"
           screenReaderLabel="Loading completion"
@@ -94,7 +96,9 @@ export default function ProgressBarPage() {
       </section>
 
       <section style={{ width: '500px' }}>
-        <div>Inverse:</div>
+        <div>
+          <Text>Inverse:</Text>
+        </div>
         <View background="primary-inverse" as="div" padding="small">
           <ProgressBar
             screenReaderLabel="Loading completion"
@@ -112,7 +116,9 @@ export default function ProgressBarPage() {
       </section>
 
       <section style={{ width: '500px' }}>
-        <div>Colors:</div>
+        <div>
+          <Text>Colors:</Text>
+        </div>
         <ProgressBar
           screenReaderLabel="Loading completion"
           meterColor="info"
@@ -180,7 +186,9 @@ export default function ProgressBarPage() {
         />
       </section>
 
-      <div>ProgressCircle:</div>
+      <div>
+        <Text>ProgressCircle:</Text>
+      </div>
       <section style={{ width: '600px' }}>
         <ProgressCircle
           size="x-small"

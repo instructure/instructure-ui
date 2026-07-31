@@ -48,17 +48,23 @@ const Text = tx as any
 export default function SmallComponentsPage() {
   return (
     <main id="main" className="flex gap-8 p-8 flex-col items-start axe-test">
-      <div>Metric:</div>
+      <div>
+        <Text>Metric:</Text>
+      </div>
       <Metric textAlign="start" renderLabel="Grade" renderValue="80%" />
       <Metric renderLabel="Grade" renderValue="80%" />
       <Metric textAlign="end" renderLabel="Grade" renderValue="80%" />
-      <div>MetricGroup:</div>
+      <div>
+        <Text>MetricGroup:</Text>
+      </div>
       <MetricGroup>
         <Metric renderLabel="Grade" renderValue="80%" />
         <Metric renderLabel="Late" renderValue="4" />
         <Metric renderLabel="Missing" renderValue="2" />
       </MetricGroup>
-      <div>Pill:</div>
+      <div>
+        <Text>Pill:</Text>
+      </div>
       <div>
         <Pill margin="x-small">Excused</Pill>
         <Pill statusLabel="Status" color="info" margin="x-small">
@@ -82,7 +88,9 @@ export default function SmallComponentsPage() {
           Notification
         </Pill>
       </div>
-      <div>Tag:</div>
+      <div>
+        <Text>Tag:</Text>
+      </div>
       <div>
         <Tag text="Static" margin="0 xx-small 0 0" />
         <Tag
@@ -106,14 +114,18 @@ export default function SmallComponentsPage() {
           onClick={function () {}}
         />
       </div>
-      <div>TimeSelect:</div>
+      <div>
+        <Text>TimeSelect:</Text>
+      </div>
       <TimeSelect
         renderLabel="Choose a time"
         onChange={(e: any, { value }: any) => 3}
         onHideOptions={(e: any) => 5}
         defaultValue="2025-08-18T09:30:00+00:00"
       />
-      <div>Text:</div>
+      <div>
+        <Text>Text:</Text>
+      </div>
       <div>
         <Text variant="descriptionPage"> descriptionPage </Text>
         <Text variant="descriptionSection"> descriptionSection </Text>

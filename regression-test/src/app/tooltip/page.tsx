@@ -107,8 +107,10 @@ export default function TooltipPage() {
 
   /* eslint-disable react/jsx-key */
   const components = [
-    'just some text',
-    <a href="/">&apos;a&apos; tag</a>,
+    <Text>just some text</Text>,
+    <a href="/">
+      <Text>&apos;a&apos; tag</Text>
+    </a>,
 
     <Alert transition="none">Alert</Alert>,
     <Avatar name="Avatar" />,
@@ -140,9 +142,15 @@ export default function TooltipPage() {
       ContextView
     </ContextView>,
     <Flex withVisualDebug margin="none none small">
-      <Flex.Item>Flex One</Flex.Item>
-      <Flex.Item>Flex Two</Flex.Item>
-      <Flex.Item>Flex Three</Flex.Item>
+      <Flex.Item>
+        <Text>Flex One</Text>
+      </Flex.Item>
+      <Flex.Item>
+        <Text>Flex Two</Text>
+      </Flex.Item>
+      <Flex.Item>
+        <Text>Flex Three</Text>
+      </Flex.Item>
     </Flex>,
     <FormField id="foo" label="This is a FormField" width="200px">
       <input style={{ display: 'block', width: '100%' }} />
@@ -201,7 +209,9 @@ export default function TooltipPage() {
     <Text>Text component</Text>,
     <TextArea label="This is a TextArea" />,
     <TextInput renderLabel="This is a TextInput" />,
-    <View>This is a View</View>
+    <View>
+      <Text>This is a View</Text>
+    </View>
   ]
   /* eslint-enable react/jsx-key */
   return (
