@@ -186,7 +186,7 @@ jobs:
 
             **Accessibility (axe):** ${{ steps.summary.outputs.a11y }}
 
-            📊 **[View full report](https://instructure.design/visual-regression/pr-${{ github.event.pull_request.number }}/index.html)** — every violation is boxed and numbered on its screenshot, with the offending element named and contrast failures shown as color swatches.
+            📊 **[View full report](https://instructure.design/visual-regression/pr-${{ github.event.pull_request.number }}/index.html)** — click a screenshot's ⚠ badge to see each violation boxed on the image, with the offending element named and contrast failures shown as color swatches.
 
             ${{ steps.summary.outputs.diff_images }}
 

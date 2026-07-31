@@ -32,7 +32,8 @@ import {
   AccessibleContent as ac,
   IconUserSolid as ius,
   IconUserLine as iul,
-  IconSearchLine as isl
+  IconSearchLine as isl,
+  Text as tx
 } from '@instructure/ui/latest'
 
 const Select = sl as any
@@ -43,6 +44,7 @@ const AccessibleContent = ac as any
 const IconUserSolid = ius as any
 const IconUserLine = iul as any
 const IconSearchLine = isl as any
+const Text = tx as any
 
 type OptionT = { id: string; label: string; disabled?: boolean }
 
@@ -286,7 +288,9 @@ function GroupSelectExample({
           </Select.Group>
         ))}
       </Select>
-      <div>SimpleSelect:</div>
+      <div>
+        <Text>SimpleSelect:</Text>
+      </div>
       <div>
         <SimpleSelect renderLabel="Uncontrolled Select">
           <SimpleSelect.Option
@@ -310,7 +314,6 @@ function GroupSelectExample({
   )
 }
 
-
 function MultipleSelectExample({ selected }: { selected: string[] }) {
   return (
     <View display="block">
@@ -329,7 +332,11 @@ function MultipleSelectExample({ selected }: { selected: string[] }) {
           <Tag
             key={i}
             dismissible
-            text={<AccessibleContent alt={`Remove ${label}`}>{label}</AccessibleContent>}
+            text={
+              <AccessibleContent alt={`Remove ${label}`}>
+                {label}
+              </AccessibleContent>
+            }
             onClick={() => {}}
           />
         ))}

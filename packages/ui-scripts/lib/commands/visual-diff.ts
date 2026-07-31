@@ -658,7 +658,9 @@ export function findingsFor(
 }
 
 /**
- * Row-header pill, colored by the worst impact on the screenshot.
+ * Row-header pill, colored by the worst impact on the screenshot. It is the way
+ * into the findings: the row itself shows only this badge, and clicking it
+ * opens the lightbox's A11y view.
  *
  * @internal — exported only for tests; not part of the package's public API.
  */
@@ -669,17 +671,19 @@ export function a11yBadge(findings: Finding[]): string {
     'unknown'
   )
   const plural = findings.length === 1 ? '' : 's'
-  return `<span class="pill a11y" data-impact="${esc(worst)}" title="${
+  return `<button type="button" class="pill a11y" data-impact="${esc(
+    worst
+  )}" title="${findings.length} accessibility issue${plural} (worst: ${esc(
+    worst
+  )}) — click to review them on the screenshot">⚠ ${
     findings.length
-  } accessibility issue${plural}, worst impact: ${esc(worst)}">⚠ ${
-    findings.length
-  } a11y</span>`
+  } a11y</button>`
 }
 
 /**
- * Boxes to lay over the screenshot, positioned as percentages of the captured
- * page so one markup blob works at thumbnail size and full size alike. Returns
- * '' when the run predates rect capture (no page size recorded).
+ * Boxes to lay over the screenshot in the A11y view, positioned as percentages
+ * of the captured page so they hold at whatever size the image is rendered.
+ * Returns '' when the run predates rect capture (no page size recorded).
  *
  * @internal — exported only for tests; not part of the package's public API.
  */
@@ -694,8 +698,12 @@ export function a11yMarkers(
     .filter((f) => f.rect)
     .map((f) => {
       const r = f.rect!
-      return `<span class="mk" data-n="${f.n}" data-impact="${esc(
-        f.impact
+      // rule/impact live on the marker so the filters can hide boxes directly;
+      // the cards they pair with are in a <template> and can't be queried.
+      return `<span class="mk" data-n="${f.n}" data-rule="${esc(
+        f.rule
+      )}" data-impact="${esc(f.impact)}" title="${f.n}. ${esc(
+        f.title
       )}" style="--x:${pct(r.x, page.w)}%;--y:${pct(r.y, page.h)}%;--w:${pct(
         r.w,
         page.w
@@ -764,7 +772,27 @@ export function a11yCards(findings: Finding[]): string {
       </article>`
     })
     .join('')
-  return `<div class="v-cards">${cards}</div>`
+  return cards
+}
+
+/**
+ * Park a row's boxes and cards in an inert `<template>`. Nothing a11y-related
+ * is rendered in the row itself — it stays a three-up image comparison with a
+ * badge — and the lightbox's A11y view clones this content when opened, so the
+ * findings appear next to the pixels they describe rather than as a wall of
+ * text between screenshots.
+ *
+ * @internal — exported only for tests; not part of the package's public API.
+ */
+export function a11yTemplate(
+  findings: Finding[],
+  page: A11yPageSize | null
+): string {
+  if (!findings.length) return ''
+  return `<template class="a11y-findings">${a11yMarkers(
+    findings,
+    page
+  )}${a11yCards(findings)}</template>`
 }
 
 /** A rule rolled up across every screenshot in the run. */
@@ -847,7 +875,7 @@ export function a11yOverview(rules: RuleSummary[], screens: number): string {
   }</b> across ${screens} screenshot${screens === 1 ? '' : 's'} · ${
     rules.length
   } rule${rules.length === 1 ? '' : 's'}</summary>
-    <div class="ov-hint">Click a rule to see only the screenshots it affects. Numbered boxes on each “Actual” image mark where the issue is.</div>
+    <div class="ov-hint">Click a rule to see only the screenshots it affects. Click a screenshot’s ⚠ badge to see its issues boxed on the image.</div>
     <div class="ov-rules">${lines}</div>
   </details>`
 }
@@ -877,25 +905,20 @@ function row(
     r.status === 'removed' ? '' : appUrlFor(r.name, meta, facets, appPath)
   const htmlAttr = htmlUrl ? ` data-html-url="${htmlUrl}"` : ''
   const { findings, page } = findingsFor(r.name, a11y)
-  const markers = a11yMarkers(findings, page)
-  // Impacts present on this row, so the impact filter can hide it without
-  // walking its cards.
-  const impacts = [...new Set(findings.map((f) => f.impact))].join(' ')
+  // Which rules this row trips, so the overview's rule filter can hide the
+  // whole row without reaching into the findings.
   const rules = [...new Set(findings.map((f) => f.rule))].join(' ')
-  // The overlay lives on "Actual" — that's the render the findings were
-  // measured against.
-  const actual = markers ? `<div class="shot">${a}${markers}</div>` : a
   return `
     <section class="row" data-status="${r.status}" data-name="${
     r.name
   }" data-has-both="${hasBoth}" data-a11y="${
     findings.length
-  }" data-impacts="${impacts}" data-rules="${esc(rules)}"${htmlAttr}>
+  }" data-rules="${esc(rules)}"${htmlAttr}>
       <header><h2>${r.name}</h2>${badgeFor(r.status)}${a11yBadge(
     findings
   )}${pixelMeta}${source}</header>
-      <div class="grid"><figure><figcaption>Baseline</figcaption>${b}</figure><figure><figcaption>Actual</figcaption>${actual}</figure><figure><figcaption>Diff</figcaption>${d}</figure></div>
-      ${a11yCards(findings)}
+      <div class="grid"><figure><figcaption>Baseline</figcaption>${b}</figure><figure><figcaption>Actual</figcaption>${a}</figure><figure><figcaption>Diff</figcaption>${d}</figure></div>
+      ${a11yTemplate(findings, page)}
     </section>`
 }
 
@@ -927,28 +950,6 @@ function renderHtml(
     ['unchanged', 'Unchanged'],
     ['a11y', '⚠ A11y']
   ]
-  const impactFilters = ['critical', 'serious', 'moderate', 'minor']
-  // A11y data for the client, keyed by full screenshot name so the lightbox's
-  // HTML view can outline the offending nodes in the live iframe. Only the
-  // fields the client needs — the cards and overlay boxes are server-rendered
-  // and the lightbox clones them. `<` is escaped so the embedded JSON can't
-  // terminate the <script> block.
-  const a11yByName: Record<
-    string,
-    Array<{ n: number; rule: string; impact: string; target: string }>
-  > = {}
-  for (const r of results) {
-    const { findings } = findingsFor(r.name, a11y)
-    if (findings.length) {
-      a11yByName[r.name] = findings.map((f) => ({
-        n: f.n,
-        rule: f.rule,
-        impact: f.impact,
-        target: f.target
-      }))
-    }
-  }
-  const a11yJson = JSON.stringify(a11yByName).replace(/</g, '\\u003c')
   const overview = a11yOverview(a11ySummary(a11y), summary.a11yPages)
   return `<!doctype html>
 <html><head><meta charset="utf-8"><title>Visual regression report</title>
@@ -981,7 +982,10 @@ function renderHtml(
   [data-impact=minor], .impact.minor { --c: #4f7a9c; }
   [data-impact=unknown], .impact.unknown { --c: #57606a; }
   .impact { padding: 2px 7px; border-radius: 8px; font-size: 10px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; color: #fff; background: var(--c); flex-shrink: 0; }
-  .pill.a11y { color: #fff; background: var(--c, #8250df); }
+  /* The badge is the only a11y affordance on a row — it opens the A11y view. */
+  button.pill.a11y { font: inherit; font-size: 11px; font-weight: 600; text-transform: uppercase; border: 0; cursor: pointer; color: #fff; background: var(--c, #8250df); }
+  button.pill.a11y:hover { filter: brightness(1.15); }
+  button.pill.a11y:focus-visible { outline: 2px solid #0969da; outline-offset: 2px; }
 
   /* Overlay boxes. Positioned in % of the captured page so the same markup
      works on the thumbnail and blown up in the lightbox. */
@@ -990,11 +994,7 @@ function renderHtml(
   .mk > b { position: absolute; top: -8px; left: -8px; min-width: 16px; height: 16px; padding: 0 3px; box-sizing: border-box; background: var(--c); color: #fff; border-radius: 8px; font-size: 10px; line-height: 16px; text-align: center; font-weight: 700; box-shadow: 0 0 0 1.5px #fff; }
   .mk.pulse { animation: mkpulse 1.1s ease-out 2; }
   @keyframes mkpulse { 0%,100% { box-shadow: 0 0 0 0 transparent; } 40% { box-shadow: 0 0 0 6px color-mix(in srgb, var(--c) 45%, transparent); } }
-  body.no-markers .mk { display: none; }
 
-  /* Two-up on a wide screen: a page can easily trip a dozen findings, and a
-     single column pushes the next screenshot off the bottom of the report. */
-  .v-cards { border-top: 1px solid #f0f0f0; padding: 10px 16px 14px; display: grid; gap: 8px; grid-template-columns: repeat(auto-fill, minmax(420px, 1fr)); align-items: start; }
   .v-card { display: flex; gap: 10px; padding: 10px 12px; border: 1px solid #eaeaea; border-left: 4px solid var(--c); border-radius: 6px; background: #fcfcfc; }
   .v-card.pulse { background: #fff8e5; }
   .v-num { flex-shrink: 0; width: 20px; height: 20px; border-radius: 10px; background: var(--c); color: #fff; font-size: 11px; font-weight: 700; line-height: 20px; text-align: center; }
@@ -1036,7 +1036,6 @@ function renderHtml(
 
   .filter { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 8px; }
   .filter .lbl { font-size: 12px; color: #666; }
-  .filter label.toggle { display: flex; align-items: center; gap: 5px; font-size: 12px; color: #57606a; cursor: pointer; }
   #rule-chip { display: none; align-items: center; gap: 6px; font-size: 12px; padding: 3px 6px 3px 10px; border-radius: 12px; background: #ddf4ff; color: #0969da; }
   #rule-chip.on { display: inline-flex; }
   #rule-chip button { border: 0; background: transparent; color: inherit; cursor: pointer; font: inherit; padding: 0 2px; }
@@ -1059,13 +1058,6 @@ function renderHtml(
   .lightbox .viewer > img { display: block; background: #fff; max-width: 100%; max-height: 100%; object-fit: contain; }
   .lightbox .viewer.actual-size > img { max-width: none; max-height: none; image-rendering: pixelated; }
   .lightbox .viewer > iframe { width: 100%; height: 100%; border: 0; background: #fff; }
-  .a11y-legend { position: absolute; top: 12px; left: 12px; z-index: 5; max-width: min(46%, 520px); max-height: 72%; overflow: auto; background: rgba(20,20,20,0.94); color: #eee; border: 1px solid #444; border-radius: 6px; padding: 8px 10px; font-size: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.4); }
-  .a11y-legend .hd { font-weight: 700; color: #ffb3b3; margin-bottom: 6px; }
-  .a11y-legend button { display: flex; align-items: center; gap: 8px; width: 100%; text-align: left; background: transparent; color: #eee; border: 0; border-top: 1px solid #333; padding: 6px 4px; cursor: pointer; font: inherit; }
-  .a11y-legend button:hover { background: rgba(255,255,255,0.08); }
-  .a11y-legend .n { flex-shrink: 0; width: 18px; height: 18px; border-radius: 9px; background: var(--c); color: #fff; text-align: center; line-height: 18px; font-weight: 700; font-size: 11px; }
-  .a11y-legend .sel { color: #9fb0c0; word-break: break-all; }
-
   /* A11y mode: the screenshot with its boxes on the left, the same cards the
      row shows (cloned, so there is one renderer) docked on the right. */
   .lightbox .viewer.a11y { align-items: stretch; justify-content: stretch; padding: 0; }
@@ -1121,19 +1113,7 @@ function renderHtml(
       ${facets.map((f) => `<button data-facet="${f}">${f}</button>`).join('')}
     </div>`
         : ''
-    }${
-    summary.a11yPages
-      ? `
-    <div class="filter" id="impact-filter">
-      <span class="lbl">Impact:</span>
-      <button data-impact-filter="all" class="active">All</button>
-      ${impactFilters
-        .map((i) => `<button data-impact-filter="${i}">${i}</button>`)
-        .join('')}
-      <label class="toggle"><input type="checkbox" id="marker-toggle" checked /> Show markers on screenshots</label>
-    </div>`
-      : ''
-  }
+    }
   </header>
   <main>${overview}${results
     .map((r) => row(r, meta ?? null, sourceBaseUrl, facets, appPath, a11y))
@@ -1158,81 +1138,20 @@ function renderHtml(
     <div class="viewer" id="lb-viewer"></div>
   </div>
 
-  <script type="application/json" id="a11y-data">${a11yJson}</script>
   <script>
     (function () {
-      const listState = { filter: '${defaultFilter}', query: '', facet: 'all', impact: 'all', rule: 'all' }
-
-      // Flattened a11y findings keyed by screenshot name (see --a11y): number,
-      // rule, impact, selector. The cards and the boxes drawn on each
-      // screenshot are rendered server-side and cloned where needed, so this is
-      // only what the client can't get from the DOM — the selectors used to
-      // outline nodes inside the HTML view's live iframe.
-      let A11Y = {}
-      try { A11Y = JSON.parse(document.getElementById('a11y-data').textContent || '{}') } catch (e) {}
-      function escHtml(s) {
-        return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
-      }
-      function outlineA11y(iframe, items) {
-        let doc
-        try { doc = iframe.contentDocument } catch (e) { return }
-        if (!doc) return
-        const paint = () => {
-          if (doc.head && !doc.getElementById('a11y-hl-style')) {
-            const st = doc.createElement('style')
-            st.id = 'a11y-hl-style'
-            st.textContent = '[data-a11y-hl]{outline:3px solid #cf222e !important;outline-offset:2px !important;}[data-a11y-hl].a11y-flash{box-shadow:0 0 0 6px rgba(207,34,46,0.45)!important;}'
-            doc.head.appendChild(st)
-          }
-          items.forEach(n => {
-            let els = []
-            try { els = doc.querySelectorAll(n.target) } catch (e) {}
-            els.forEach(el => {
-              el.setAttribute('data-a11y-hl', String(n.n))
-              if (!el.getAttribute('title')) el.setAttribute('title', n.n + '. ' + n.rule)
-            })
-          })
-        }
-        // Re-apply after hydration: the app applies the theme in an effect after
-        // mount, so the target nodes may not exist at iframe 'load' time.
-        paint()
-        setTimeout(paint, 500)
-      }
-      function locateA11y(iframe, item) {
-        let doc
-        try { doc = iframe.contentDocument } catch (e) { return }
-        if (!doc) return
-        let el
-        try { el = doc.querySelector(item.target) } catch (e) {}
-        if (!el) return
-        el.scrollIntoView({ block: 'center', inline: 'center' })
-        el.classList.add('a11y-flash')
-        setTimeout(() => el.classList.remove('a11y-flash'), 1200)
-      }
+      const listState = { filter: '${defaultFilter}', query: '', facet: 'all', rule: 'all' }
 
       function applyFilters() {
         const q = listState.query.toLowerCase()
-        const impact = listState.impact
         const rule = listState.rule
         document.querySelectorAll('.row').forEach(r => {
           const matchesFilter = listState.filter === 'all'
             || (listState.filter === 'a11y' ? Number(r.dataset.a11y) > 0 : r.dataset.status === listState.filter)
           const matchesQuery = !q || r.dataset.name.toLowerCase().includes(q)
           const matchesFacet = listState.facet === 'all' || r.dataset.name.includes('-' + listState.facet + '.')
-          // The impact and rule filters are a11y-scoped: they narrow to rows
-          // carrying a matching finding, and grey out the cards that don't.
-          const matchesImpact = impact === 'all' || (r.dataset.impacts || '').split(' ').includes(impact)
           const matchesRule = rule === 'all' || (r.dataset.rules || '').split(' ').includes(rule)
-          const shown = new Set()
-          r.querySelectorAll('.v-card').forEach(c => {
-            const ok = (impact === 'all' || c.dataset.impact === impact) && (rule === 'all' || c.dataset.rule === rule)
-            c.toggleAttribute('data-hidden', !ok)
-            if (ok) shown.add(c.dataset.n)
-          })
-          // Keep the boxes on the screenshot in step with the cards, so the
-          // numbers you see on the image are the ones listed below it.
-          r.querySelectorAll('.mk').forEach(m => m.toggleAttribute('data-hidden', !shown.has(m.dataset.n)))
-          if (matchesFilter && matchesQuery && matchesFacet && matchesImpact && matchesRule) r.removeAttribute('data-hidden')
+          if (matchesFilter && matchesQuery && matchesFacet && matchesRule) r.removeAttribute('data-hidden')
           else r.setAttribute('data-hidden', '')
         })
       }
@@ -1256,24 +1175,6 @@ function renderHtml(
           applyFilters()
         })
       })
-
-      document.querySelectorAll('#impact-filter button').forEach(btn => {
-        btn.addEventListener('click', () => {
-          listState.impact = btn.dataset.impactFilter
-          document.querySelectorAll('#impact-filter button').forEach(b => b.classList.toggle('active', b === btn))
-          // Narrowing by impact only makes sense within screenshots that have
-          // findings, so pull the status filter along.
-          if (listState.impact !== 'all' && listState.filter !== 'a11y') setStatusFilter('a11y')
-          applyFilters()
-        })
-      })
-
-      const markerToggle = document.getElementById('marker-toggle')
-      if (markerToggle) {
-        markerToggle.addEventListener('change', () => {
-          document.body.classList.toggle('no-markers', !markerToggle.checked)
-        })
-      }
 
       // Overview: clicking a rule narrows the list to the screenshots it
       // affects; clicking it again (or the chip's ✕) clears it.
@@ -1372,8 +1273,10 @@ function renderHtml(
         lbViewer.classList.toggle('a11y', state.mode === 'a11y')
 
         if (state.mode === 'a11y') {
-          // Reuse the row's server-rendered boxes and cards rather than
-          // re-implementing the renderer in the browser.
+          // Boxes and cards are server-rendered into the row's inert
+          // <template>; clone them out rather than re-implementing the
+          // renderer in the browser.
+          const tpl = row.querySelector('.a11y-findings')
           lbViewer.innerHTML = ''
           const view = document.createElement('div')
           view.className = 'a11y-view'
@@ -1385,13 +1288,7 @@ function renderHtml(
           img.src = 'actual/' + name
           img.alt = name
           shot.appendChild(img)
-          // The lightbox shows the full picture regardless of the list filters,
-          // so drop the hidden flags the filters may have set on the originals.
-          row.querySelectorAll('.mk').forEach(m => {
-            const clone = m.cloneNode(true)
-            clone.removeAttribute('data-hidden')
-            shot.appendChild(clone)
-          })
+          tpl.content.querySelectorAll('.mk').forEach(m => shot.appendChild(m.cloneNode(true)))
           stage.appendChild(shot)
           const panel = document.createElement('aside')
           panel.className = 'a11y-panel'
@@ -1401,9 +1298,8 @@ function renderHtml(
           hd.textContent = a11yCount + ' issue' + (a11yCount === 1 ? '' : 's') +
             (shot.querySelector('.mk') ? ' — click one to find it on the screenshot' : '')
           panel.appendChild(hd)
-          row.querySelectorAll('.v-card').forEach(c => {
+          tpl.content.querySelectorAll('.v-card').forEach(c => {
             const clone = c.cloneNode(true)
-            clone.removeAttribute('data-hidden')
             clone.addEventListener('click', (e) => {
               // Leave the disclosure's own toggling alone.
               if (e.target.closest('.v-tech')) return
@@ -1467,22 +1363,9 @@ function renderHtml(
           wrap.addEventListener('touchstart', (e) => { onMove(e); e.preventDefault() }, { passive: false })
           wrap.addEventListener('touchmove', (e) => { onMove(e); e.preventDefault() }, { passive: false })
         } else if (state.mode === 'html') {
+          // Just the live page. A11y findings belong to the A11y view, which
+          // shows them against the pixels they were measured on.
           lbViewer.innerHTML = '<iframe src="' + htmlUrl + '" title="' + name + '"></iframe>'
-          const iframe = lbViewer.querySelector('iframe')
-          const items = A11Y[name] || []
-          if (items.length) {
-            const legend = document.createElement('div')
-            legend.className = 'a11y-legend'
-            // Numbers match the boxes in the A11y view and the cards in the
-            // list, so the same finding is "#3" everywhere.
-            legend.innerHTML = '<div class="hd">⚠ ' + items.length + ' a11y issue' + (items.length === 1 ? '' : 's') + ' — click to locate in the live page</div>' +
-              items.map((n, i) => '<button type="button" data-i="' + i + '" data-impact="' + escHtml(n.impact) + '"><span class="n">' + n.n + '</span> <code>' + escHtml(n.rule) + '</code> <span class="sel">' + escHtml(n.target) + '</span></button>').join('')
-            lbViewer.appendChild(legend)
-            legend.querySelectorAll('button').forEach(b => {
-              b.addEventListener('click', () => locateA11y(iframe, items[+b.dataset.i]))
-            })
-            iframe.addEventListener('load', () => outlineA11y(iframe, items))
-          }
         } else {
           lbViewer.innerHTML = '<img src="' + state.mode + '/' + name + '" alt="' + name + '" />'
         }
@@ -1510,15 +1393,10 @@ function renderHtml(
         img.addEventListener('click', () => open(img.dataset.name))
       })
 
-      // The number badge on a card is the handle for "where is this?" — it
-      // opens the A11y view already scrolled to that finding's box.
-      document.querySelectorAll('.row .v-num').forEach(num => {
-        num.title = 'Show on the screenshot'
-        num.style.cursor = 'pointer'
-        num.addEventListener('click', () => {
-          const card = num.closest('.v-card')
-          open(num.closest('.row').dataset.name, 'a11y', card.dataset.n)
-        })
+      // The row's a11y badge is the only entry point to the findings — it
+      // opens the lightbox straight into the A11y view.
+      document.querySelectorAll('.row button.pill.a11y').forEach(badge => {
+        badge.addEventListener('click', () => open(badge.closest('.row').dataset.name, 'a11y'))
       })
       function step(delta) {
         if (!state.rows.length) return

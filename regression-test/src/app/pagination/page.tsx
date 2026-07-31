@@ -24,10 +24,15 @@
 
 'use client'
 import React, { useMemo, useState } from 'react'
-import { Pagination as pg, View as vw } from '@instructure/ui/latest'
+import {
+  Pagination as pg,
+  View as vw,
+  Text as tx
+} from '@instructure/ui/latest'
 
 const Pagination = pg as any
 const View = vw as any
+const Text = tx as any
 
 export default function PaginationPage() {
   // New API states
@@ -123,7 +128,9 @@ export default function PaginationPage() {
           onPageChange={(nextPage: number) => setCurrentInput(nextPage)}
         />
       </section>
-      <div>Legacy API</div>
+      <div>
+        <Text>Legacy API</Text>
+      </div>
       {/* Legacy API: compact variant with children */}
       <section>
         <View as="div" display="block" margin="small 0">

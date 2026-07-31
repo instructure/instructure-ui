@@ -87,15 +87,17 @@ export default function LinkPage() {
       {/* Variants */}
       <section>
         <div>
-          In a line of text you should use the{' '}
-          <Link
-            variant="inline"
-            renderIcon={<IconUserLine />}
-            href="https://instructure.github.io/instructure-ui/"
-          >
-            inline
-          </Link>{' '}
-          link variant.
+          <Text>
+            In a line of text you should use the{' '}
+            <Link
+              variant="inline"
+              renderIcon={<IconUserLine />}
+              href="https://instructure.github.io/instructure-ui/"
+            >
+              inline
+            </Link>{' '}
+            link variant.
+          </Text>
         </div>
         <br />
         <div>
@@ -114,28 +116,32 @@ export default function LinkPage() {
         </div>
         <br />
         <div>
-          If the link is standalone (not in a text), use the{' '}
-          <code>standalone</code>{' '}
-          <Link
-            display="block"
-            variant="standalone"
-            href="https://instructure.github.io/instructure-ui/"
-          >
-            standalone
-          </Link>
+          <Text>
+            If the link is standalone (not in a text), use the{' '}
+            <code>standalone</code>{' '}
+            <Link
+              display="block"
+              variant="standalone"
+              href="https://instructure.github.io/instructure-ui/"
+            >
+              standalone
+            </Link>
+          </Text>
         </div>
         <br />
         <div>
-          If the link is standalone (not in a text), but smaller, use{' '}
-          <code>standalone</code> with <code>size=&quot;small&quot;</code>{' '}
-          <Link
-            display="block"
-            variant="standalone"
-            size="small"
-            href="https://instructure.github.io/instructure-ui/"
-          >
-            standalone + size=&quot;small&quot;
-          </Link>
+          <Text>
+            If the link is standalone (not in a text), but smaller, use{' '}
+            <code>standalone</code> with <code>size=&quot;small&quot;</code>{' '}
+            <Link
+              display="block"
+              variant="standalone"
+              size="small"
+              href="https://instructure.github.io/instructure-ui/"
+            >
+              standalone + size=&quot;small&quot;
+            </Link>
+          </Text>
         </div>
       </section>
 
