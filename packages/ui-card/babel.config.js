@@ -22,55 +22,15 @@
  * SOFTWARE.
  */
 
-'use client'
-import { Link } from '@instructure/ui/latest'
-
-const components = [
-  'small-components',
-  'custom-icons',
-  'alert',
-  'avatar',
-  'badge',
-  'billboard',
-  'breadcrumb',
-  'button',
-  'tooltip',
-  'byline',
-  'calendar',
-  'card',
-  'checkbox',
-  'checkboxgroup',
-  'colorpicker',
-  'contextview',
-  'dateinput',
-  'datetimeinput',
-  'drilldown',
-  'filedrop',
-  'form-errors',
-  'heading',
-  'img',
-  'link',
-  'menu',
-  'options',
-  'pagination',
-  'progressbar',
-  'select',
-  'table',
-  'tabs',
-  'treebrowser',
-  'view'
-]
-
-export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-6">
-      <ul>
-        {components.map((component) => (
-          <li key={component}>
-            <Link href={component}>{component}</Link>
-          </li>
-        ))}
-      </ul>
-    </main>
-  )
+module.exports = {
+  presets: [
+    [
+      require('@instructure/ui-babel-preset'),
+      {
+        esModules: Boolean(process.env.ES_MODULES),
+        removeConsole: process.env.NODE_ENV === 'production',
+        transformImports: Boolean(process.env.TRANSFORM_IMPORTS)
+      }
+    ]
+  ]
 }
