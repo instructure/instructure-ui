@@ -23,10 +23,13 @@
  */
 
 import { Component, createRef, RefObject } from 'react'
+import type { ComponentType } from 'react'
 import { render } from 'vitest-browser-react'
 import { page } from 'vitest/browser'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import type { MockInstance } from 'vitest'
+
+import { withStyle } from '@instructure/emotion'
 
 import { Transition } from '../index.js'
 import { getClassNames } from '../styles.js'
@@ -54,6 +57,22 @@ class ExampleComponent extends Component<any, any> {
     return <div ref={this.ref}>{COMPONENT_TEXT}</div>
   }
 }
+
+// stands in for a real InstUI component, which ui-motion can't import (they
+// depend on it)
+type StyledChildProps = { elementRef?: (el: Element | null) => void }
+
+class StyledChildBase extends Component<StyledChildProps> {
+  static allowedProps = ['elementRef']
+  render() {
+    return <div ref={this.props.elementRef}>{COMPONENT_TEXT}</div>
+  }
+}
+
+const StyledChild = withStyle(
+  () => ({}),
+  () => ({})
+)(StyledChildBase) as unknown as ComponentType<StyledChildProps>
 
 describe('<Transition />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
@@ -269,6 +288,74 @@ describe('<Transition />', () => {
       expect(onExit).toHaveBeenCalled()
       expect(onExiting).toHaveBeenCalled()
       expect(onExited).toHaveBeenCalled()
+    })
+  })
+
+  describe('capturing the child node', () => {
+    const warningsMatching = (mock: MockInstance, pattern: RegExp) =>
+      mock.mock.calls.filter((args: unknown[]) => pattern.test(args.join(' ')))
+
+    const elementRefWarnings = (mock: MockInstance) =>
+      warningsMatching(mock, /elementRef/)
+
+    const refIsNotAPropWarnings = (mock: MockInstance) =>
+      warningsMatching(mock, /`?ref`? is not a prop/)
+
+    it('does not leak elementRef onto an emotion-wrapped host element', async () => {
+      await render(
+        <Transition type="fade" in={true}>
+          <div css={{ color: 'red' }}>hello</div>
+        </Transition>
+      )
+      const element = page.getByText('hello').element()
+
+      expect(element).not.toHaveAttribute('elementref')
+      expect(elementRefWarnings(consoleErrorMock)).toHaveLength(0)
+    })
+
+    it('still captures an emotion-wrapped host element', async () => {
+      const elementRef = vi.fn()
+      await render(
+        <Transition type="fade" in={true} elementRef={elementRef}>
+          <div css={{ color: 'red' }}>hello</div>
+        </Transition>
+      )
+
+      // the node reached handleRef, so the transition classes could be applied
+      expect(page.getByText('hello').element()).toHaveClass(
+        getClass('fade', 'entered')
+      )
+      await vi.waitFor(() => {
+        expect(elementRef).toHaveBeenCalledWith(expect.any(Element))
+      })
+    })
+
+    // a withStyle child plus a running transition made React read `ref` off the
+    // element; both conditions are needed to reproduce it
+    it('does not read `ref` off a withStyle child mid-transition', async () => {
+      const childElementRef = vi.fn()
+      const transitionElementRef = vi.fn()
+
+      await render(
+        <Transition
+          type="fade"
+          in={false}
+          transitionOnMount
+          elementRef={transitionElementRef}
+        >
+          <StyledChild elementRef={childElementRef} />
+        </Transition>
+      )
+
+      await vi.waitFor(() => {
+        // the child's own elementRef is chained, not overwritten, and
+        // Transition still captured the node
+        expect(childElementRef).toHaveBeenCalledWith(expect.any(Element))
+        expect(transitionElementRef).toHaveBeenCalledWith(expect.any(Element))
+      })
+      await expect.element(page.getByText(COMPONENT_TEXT)).toBeInTheDocument()
+      expect(refIsNotAPropWarnings(consoleErrorMock)).toHaveLength(0)
+      expect(elementRefWarnings(consoleErrorMock)).toHaveLength(0)
     })
   })
 })
