@@ -63,17 +63,22 @@ export default defineConfig({
           writeFileSync(META_FILE, JSON.stringify(data, null, 2))
           return null
         },
+        // `page` carries the dimensions each violation's bounding box was
+        // measured against, so the report can position the boxes over the
+        // screenshot as percentages. See cypress/support/a11y-capture.ts.
         recordA11y({
           name,
+          page,
           violations
         }: {
           name: string
+          page: { w: number; h: number }
           violations: unknown[]
         }) {
           const data = existsSync(A11Y_FILE)
             ? JSON.parse(readFileSync(A11Y_FILE, 'utf8'))
             : {}
-          data[name] = violations
+          data[name] = { page, violations }
           writeFileSync(A11Y_FILE, JSON.stringify(data, null, 2))
           return null
         }
