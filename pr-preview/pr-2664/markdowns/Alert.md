@@ -249,6 +249,7 @@ type: embed
     <Figure.Item>aria-live="polite" alerts will only be announced if the user is not currently doing anything. Polite should be used in most situations involving live regions that present new info to users</Figure.Item>
     <Figure.Item>aria-live="assertive" alerts will be announced to the user as soon as possible, but not necessarily immediately. Assertive should be used if there is information that a user must know about right away, for example, a warning message in a form that does validation on the fly</Figure.Item>
     <Figure.Item>The aria-atomic=BOOLEAN is used to set whether or not the screen reader should always present the live region as a whole, even if only part of the region changes. The possible settings are: false or true. The default setting is false.</Figure.Item>
+    <Figure.Item>If the `liveRegion` element has a `role`, match it to the `liveRegionPoliteness` level: use `role="status"` for `polite` and `role="alert"` for `assertive`.</Figure.Item>
   </Figure>
 </Guidelines>
 ```
