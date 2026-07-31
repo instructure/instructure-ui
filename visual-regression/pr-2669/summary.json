@@ -6,7 +6,7 @@
     "added": 96,
     "removed": 32,
     "a11yPages": 15,
-    "a11yViolations": 15
+    "a11yViolations": 403
   },
   "results": [
     {
@@ -520,6 +520,16 @@
     {
       "name": "view.png",
       "status": "removed"
+    }
+  ],
+  "a11y": [
+    {
+      "rule": "color-contrast",
+      "impact": "serious",
+      "title": "Text contrast is too low",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/color-contrast?application=axeAPI",
+      "nodes": 403,
+      "screens": 15
     }
   ]
 }
