@@ -24,49 +24,48 @@
 
 import { render } from 'vitest-browser-react'
 import { page } from 'vitest/browser'
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect } from 'vitest'
+import { getTextDirection } from '../getTextDirection.js'
 
-import { ListItem } from '@instructure/ui-list/latest'
-
-describe('<ListItem />', () => {
-  it('should render children', async () => {
-    await render(<ListItem>hello</ListItem>)
-    const listItem = page.getByRole('listitem').element()
-
-    expect(listItem).toHaveTextContent('hello')
-  })
-
-  it('should call elementRef', async () => {
-    const elementRef = vi.fn()
-    await render(<ListItem elementRef={elementRef}>List item</ListItem>)
-    const listItem = page.getByRole('listitem').element()
-
-    expect(elementRef).toHaveBeenCalledWith(listItem)
-  })
-
+describe('getTextDirection', () => {
   describe('Component tests', () => {
-    it('should not render delimiter by default', async () => {
-      await render(
-        <div>
-          <ListItem>List item 1</ListItem>
-          <ListItem>List item 2</ListItem>
-        </div>
-      )
-      const listItem = page.getByText('List item 2').element()
+    it('defaults the dir of <html>', async () => {
+      const expectedDir = getComputedStyle(document.documentElement).direction
 
-      expect(getComputedStyle(listItem).borderTopStyle).toBe('none')
+      expect(getTextDirection()).toBe(expectedDir)
     })
 
-    it('should render delimiter', async () => {
+    it('defaults to the dir of <html> when passed an element', async () => {
       await render(
-        <div>
-          <ListItem>List item 1</ListItem>
-          <ListItem delimiter="solid">List item 2</ListItem>
+        <div data-testid="test">
+          <h1>Hello</h1>
         </div>
       )
-      const listItem = page.getByText('List item 2').element()
+      const el = page.getByTestId('test').element()
 
-      expect(getComputedStyle(listItem).borderTopStyle).toBe('solid')
+      expect(getTextDirection(el)).toBe('ltr')
+    })
+
+    it('returns "rtl" if the `dir` of the element is "rtl"', async () => {
+      await render(
+        <div data-testid="test" dir="rtl">
+          <h1>Hello</h1>
+        </div>
+      )
+      const el = page.getByTestId('test').element()
+
+      expect(getTextDirection(el)).toBe('rtl')
+    })
+
+    it('inherits value set by ancestor', async () => {
+      await render(
+        <div data-testid="test" dir="rtl">
+          <h1>Hello</h1>
+        </div>
+      )
+      const el = page.getByRole('heading').element()
+
+      expect(getTextDirection(el)).toBe('rtl')
     })
   })
 })

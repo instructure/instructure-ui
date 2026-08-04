@@ -155,4 +155,50 @@ describe('<AppNav />', () => {
       expect(items[2]).toHaveTextContent('I am sooo custom!')
     })
   })
+
+  describe('Component tests', () => {
+    it('should hide and show items based on the containing element width', async () => {
+      const onUpdate = vi.fn()
+      const itemWidth = 70
+
+      const Nav = ({ width }: { width: number }) => (
+        <div style={{ width }}>
+          <AppNav screenReaderLabel="App navigation" onUpdate={onUpdate}>
+            <AppNav.Item
+              renderLabel={<div style={{ width: itemWidth }}>coolLabel</div>}
+              href="http://instructure.design"
+            />
+            <AppNav.Item
+              renderLabel={<div style={{ width: itemWidth }}>coolLabel</div>}
+              href="http://instructure.design"
+            />
+            <AppNav.Item
+              renderLabel={<div style={{ width: itemWidth }}>coolLabel</div>}
+              href="http://instructure.design"
+            />
+            <AppNav.Item
+              renderLabel={<div style={{ width: itemWidth }}>coolLabel</div>}
+              href="http://instructure.design"
+            />
+          </AppNav>
+        </div>
+      )
+
+      const { rerender } = await render(<Nav width={800} />)
+
+      await vi.waitFor(() => {
+        expect(onUpdate).toHaveBeenCalledWith(
+          expect.objectContaining({ visibleItemsCount: 4 })
+        )
+      })
+
+      await rerender(<Nav width={400} />)
+
+      await vi.waitFor(() => {
+        expect(onUpdate).toHaveBeenCalledWith(
+          expect.objectContaining({ visibleItemsCount: 2 })
+        )
+      })
+    })
+  })
 })

@@ -794,4 +794,318 @@ describe('<Drilldown.Option />', () => {
       })
     })
   })
+
+  describe('Component tests', () => {
+    const optionItemWithText = (text: string) =>
+      Array.from(
+        document.querySelectorAll<HTMLElement>('li[class$="-optionItem"]')
+      ).find((item) => item.textContent?.includes(text))!
+
+    afterEach(() => {
+      // the href tests navigate via the hash, clear it so it doesn't leak
+      window.location.hash = ''
+    })
+
+    it('should allow controlled behaviour', async () => {
+      const options = ['one', 'two', 'three']
+      const Example = ({
+        opts,
+        selected
+      }: {
+        opts: typeof options
+        selected: string
+      }) => {
+        return (
+          <Drilldown rootPageId="page0">
+            <Drilldown.Page id="page0">
+              <Drilldown.Group id="group0">
+                {opts.map((opt) => {
+                  return (
+                    <Drilldown.Option
+                      key={opt}
+                      value={opt}
+                      name={opt}
+                      id={opt}
+                      selected={selected === opt}
+                    >
+                      {opt}
+                    </Drilldown.Option>
+                  )
+                })}
+              </Drilldown.Group>
+            </Drilldown.Page>
+          </Drilldown>
+        )
+      }
+      const { rerender } = await render(
+        <Example opts={options} selected="two" />
+      )
+
+      const menuItems = page.getByRole('menuitem').elements()
+
+      expect(menuItems[0]).toHaveAttribute('aria-checked', 'false')
+      expect(menuItems[1]).toHaveAttribute('aria-checked', 'true')
+      expect(menuItems[2]).toHaveAttribute('aria-checked', 'false')
+
+      await rerender(<Example opts={options} selected="three" />)
+
+      await vi.waitFor(() => {
+        const updatedMenuItems = page.getByRole('menuitem').elements()
+
+        expect(updatedMenuItems[0]).toHaveAttribute('aria-checked', 'false')
+        expect(updatedMenuItems[1]).toHaveAttribute('aria-checked', 'false')
+        expect(updatedMenuItems[2]).toHaveAttribute('aria-checked', 'true')
+      })
+    })
+
+    it('should navigate to subPage on select', async () => {
+      await render(
+        <Drilldown rootPageId="page0">
+          <Drilldown.Page id="page0">
+            <Drilldown.Option id="option01" subPageId="page1">
+              Option01
+            </Drilldown.Option>
+          </Drilldown.Page>
+          <Drilldown.Page id="page1">
+            <Drilldown.Option id="option11">Sub-Option</Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+      expect(page.getByText('Sub-Option').query()).not.toBeInTheDocument()
+      expect(page.getByText('Option01').element()).toBeVisible()
+
+      await userEvent.click(page.getByText('Option01'))
+
+      await vi.waitFor(() => {
+        expect(page.getByText('Sub-Option').element()).toBeVisible()
+        expect(page.getByText('Option01').query()).not.toBeInTheDocument()
+      })
+    })
+
+    it('should disabled prop apply disabled css style', async () => {
+      await render(
+        <Drilldown rootPageId="page0">
+          <Drilldown.Page id="page0">
+            <Drilldown.Option id="option1" disabled>
+              Option
+            </Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+      const option = document.querySelector<HTMLElement>('#option1')!
+
+      expect(option).toHaveAttribute('aria-disabled', 'true')
+      expect(getComputedStyle(option).cursor).toBe('not-allowed')
+    })
+
+    it('should navigate to url on Focus + Space', async () => {
+      await render(
+        <Drilldown rootPageId="page0">
+          <Drilldown.Page id="page0">
+            <Drilldown.Option id="option1" href="#helloWorld">
+              Option
+            </Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+      document.querySelector<HTMLElement>('#option1')!.focus()
+
+      await userEvent.keyboard(' ')
+
+      await vi.waitFor(() => {
+        expect(window.location.hash).toBe('#helloWorld')
+      })
+    })
+
+    it('should navigate to url on Click', async () => {
+      await render(
+        <Drilldown rootPageId="page0">
+          <Drilldown.Page id="page0">
+            <Drilldown.Option id="option1" href="#helloWorld">
+              Option
+            </Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+
+      await userEvent.click(page.getByText('Option'))
+
+      await vi.waitFor(() => {
+        expect(window.location.hash).toBe('#helloWorld')
+      })
+    })
+
+    it("shouldn't navigate to url, if disabled", async () => {
+      await render(
+        <Drilldown rootPageId="page0">
+          <Drilldown.Page id="page0">
+            <Drilldown.Option id="option1" href="#helloWorld" disabled>
+              Option
+            </Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+
+      await userEvent.click(page.getByText('Option'))
+
+      expect(window.location.hash).not.toBe('#helloWorld')
+    })
+
+    it('should renderLabelInfo prop affected by afterLabelContentVAlign prop', async () => {
+      await render(
+        <Drilldown rootPageId="page0">
+          <Drilldown.Page id="page0">
+            <Drilldown.Option
+              id="option1"
+              renderLabelInfo="Info"
+              afterLabelContentVAlign="end"
+            >
+              Option
+            </Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+      const labelInfo = document.querySelector<HTMLElement>(
+        '[class$=-drilldown__optionLabelInfo]'
+      )!
+
+      expect(labelInfo).toHaveTextContent('Info')
+      expect(getComputedStyle(labelInfo).alignSelf).toBe('flex-end')
+    })
+
+    it('should provide goToPreviousPage method that goes back to the previous page', async () => {
+      await render(
+        <Drilldown rootPageId="page0">
+          <Drilldown.Page id="page0">
+            <Drilldown.Option id="option01" subPageId="page1">
+              Option01
+            </Drilldown.Option>
+          </Drilldown.Page>
+
+          <Drilldown.Page id="page1">
+            <Drilldown.Option
+              id="option11"
+              onOptionClick={(_e, { goToPreviousPage }) => {
+                goToPreviousPage()
+              }}
+            >
+              Option11
+            </Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+      expect(page.getByText('Option01').element()).toBeVisible()
+
+      await userEvent.click(page.getByText('Option01'))
+
+      await vi.waitFor(() => {
+        expect(page.getByText('Option01').query()).not.toBeInTheDocument()
+        expect(page.getByText('Option11').element()).toBeVisible()
+      })
+
+      await userEvent.click(page.getByText('Option11'))
+
+      await vi.waitFor(() => {
+        expect(page.getByText('Option01').element()).toBeVisible()
+        expect(page.getByText('Option11').query()).not.toBeInTheDocument()
+      })
+    })
+
+    it('should provide goToPage method that can be used to go back a page', async () => {
+      await render(
+        <Drilldown rootPageId="page0">
+          <Drilldown.Page id="page0">
+            <Drilldown.Option id="option01" subPageId="page1">
+              Option01
+            </Drilldown.Option>
+          </Drilldown.Page>
+
+          <Drilldown.Page id="page1">
+            <Drilldown.Option
+              id="option11"
+              onOptionClick={(_e, { pageHistory, goToPage }) => {
+                goToPage(pageHistory[0])
+              }}
+            >
+              Option11
+            </Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+      expect(page.getByText('Option01').element()).toBeVisible()
+
+      await userEvent.click(page.getByText('Option01'))
+
+      await vi.waitFor(() => {
+        expect(page.getByText('Option01').query()).not.toBeInTheDocument()
+        expect(page.getByText('Option11').element()).toBeVisible()
+      })
+
+      await userEvent.click(page.getByText('Option11'))
+
+      await vi.waitFor(() => {
+        expect(page.getByText('Option01').element()).toBeVisible()
+        expect(page.getByText('Option11').query()).not.toBeInTheDocument()
+      })
+    })
+
+    it('should provide goToPage method that can be used to go to a new, existing page', async () => {
+      await render(
+        <Drilldown rootPageId="page0">
+          <Drilldown.Page id="page0">
+            <Drilldown.Option
+              id="option01"
+              onOptionClick={(_e, { goToPage }) => {
+                goToPage('page1')
+              }}
+            >
+              Option01
+            </Drilldown.Option>
+          </Drilldown.Page>
+
+          <Drilldown.Page id="page1">
+            <Drilldown.Option id="option11">Option11</Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+      expect(page.getByText('Option01').element()).toBeVisible()
+
+      await userEvent.click(page.getByText('Option01'))
+
+      await vi.waitFor(() => {
+        expect(page.getByText('Option01').query()).not.toBeInTheDocument()
+        expect(page.getByText('Option11').element()).toBeVisible()
+      })
+    })
+
+    it('should themeOverride prop passed to the Options.Item component', async () => {
+      await render(
+        <Drilldown rootPageId="page0">
+          <Drilldown.Page id="page0">
+            <Drilldown.Option
+              id="option01"
+              themeOverride={{
+                color: 'rgb(0, 0, 100)',
+                background: 'rgb(200, 200, 200)',
+                // If the Drilldown happens to take focus before we assert, the
+                // option switches to the `highlighted` variant, whose colours
+                // are applied after the two above and would win. Override them
+                // to the same values so the assertion does not depend on
+                // whether that focus lands first.
+                highlightedLabelColor: 'rgb(0, 0, 100)',
+                highlightedBackground: 'rgb(200, 200, 200)'
+              }}
+            >
+              Option01
+            </Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+      const optionItem = optionItemWithText('Option01')
+      const style = getComputedStyle(optionItem)
+
+      expect(style.color).toBe('rgb(0, 0, 100)')
+      expect(style.backgroundColor).toBe('rgb(200, 200, 200)')
+    })
+  })
 })

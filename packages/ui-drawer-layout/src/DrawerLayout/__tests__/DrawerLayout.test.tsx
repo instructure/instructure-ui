@@ -26,6 +26,7 @@ import { fireEvent } from '@testing-library/dom'
 import { render } from 'vitest-browser-react'
 import { page } from 'vitest/browser'
 import { describe, it, expect, vi } from 'vitest'
+import { px, within } from '@instructure/ui-utils'
 import DrawerLayoutFixture from '../v2/__fixtures__/DrawerLayout.fixture.js'
 import { Button } from '@instructure/ui-buttons/latest'
 import { DrawerLayout } from '@instructure/ui-drawer-layout/latest'
@@ -138,6 +139,195 @@ describe('<DrawerLayout />', () => {
     await rerender(<TestComponent />)
     await vi.waitFor(() => {
       expect(page.getByText(msg).query()).not.toBeInTheDocument()
+    })
+  })
+
+  describe('Component tests', () => {
+    const contentWrapper = (container: HTMLElement) =>
+      container.querySelector<HTMLElement>(
+        'div[class$="-drawerLayout__content"]'
+      )!
+
+    it('with no overlay, layout content should have margin equal to tray width with placement=start', async () => {
+      const { container } = await render(
+        <DrawerLayoutFixture
+          open={true}
+          layoutWidth="800px"
+          trayWidth="250px"
+          placement="start"
+        />
+      )
+      const tray = page.getByText('Hello from tray').element()
+
+      await vi.waitFor(() => {
+        const trayWidth = px(getComputedStyle(tray).width)
+        const marginLeft = px(
+          getComputedStyle(contentWrapper(container)).marginLeft
+        )
+
+        expect(within(marginLeft, 250, 2)).toBe(true)
+        expect(marginLeft).toBe(trayWidth)
+      })
+    })
+
+    it('with no overlay, layout content should have margin equal to tray width with placement=end', async () => {
+      const { container } = await render(
+        <DrawerLayoutFixture
+          open={true}
+          placement="end"
+          layoutWidth="800px"
+          trayWidth="250px"
+        />
+      )
+      const tray = page.getByText('Hello from tray').element()
+
+      await vi.waitFor(() => {
+        const trayWidth = px(getComputedStyle(tray).width)
+        const marginRight = px(
+          getComputedStyle(contentWrapper(container)).marginRight
+        )
+
+        expect(within(marginRight, 250, 2)).toBe(true)
+        expect(marginRight).toBe(trayWidth)
+      })
+    })
+
+    it('with overlay, layout content should have a margin of zero with placement=start', async () => {
+      const { container } = await render(
+        <DrawerLayoutFixture
+          open={true}
+          layoutWidth="700px"
+          trayWidth="250px"
+          placement="start"
+        />
+      )
+
+      await vi.waitFor(() => {
+        const marginLeft = px(
+          getComputedStyle(contentWrapper(container)).marginLeft
+        )
+
+        expect(marginLeft).toBe(0)
+      })
+    })
+
+    it('with overlay, layout content should have a margin of zero with placement=end', async () => {
+      const { container } = await render(
+        <DrawerLayoutFixture
+          open={true}
+          placement="end"
+          layoutWidth="700px"
+          trayWidth="250px"
+        />
+      )
+
+      await vi.waitFor(() => {
+        const marginRight = px(
+          getComputedStyle(contentWrapper(container)).marginRight
+        )
+
+        expect(marginRight).toBe(0)
+      })
+    })
+
+    it('the tray should overlay the content when the content is less than the minWidth', async () => {
+      const onOverlayTrayChange = vi.fn()
+
+      const { rerender } = await render(
+        <DrawerLayoutFixture
+          open={true}
+          layoutWidth="800px"
+          onOverlayTrayChange={onOverlayTrayChange}
+        />
+      )
+
+      // set prop layoutWidth
+      await rerender(
+        <DrawerLayoutFixture
+          open={true}
+          layoutWidth="295px"
+          onOverlayTrayChange={onOverlayTrayChange}
+        />
+      )
+
+      await vi.waitFor(() => {
+        expect(onOverlayTrayChange).toHaveBeenCalledWith(true)
+      })
+    })
+
+    it('the tray should stop overlaying the content when there is enough space for the content', async () => {
+      const onOverlayTrayChange = vi.fn()
+
+      const { rerender } = await render(
+        <DrawerLayoutFixture
+          open={true}
+          layoutWidth="400px"
+          onOverlayTrayChange={onOverlayTrayChange}
+        />
+      )
+
+      // set prop layoutWidth
+      await rerender(
+        <DrawerLayoutFixture
+          open={true}
+          layoutWidth="705px"
+          onOverlayTrayChange={onOverlayTrayChange}
+        />
+      )
+
+      await vi.waitFor(() => {
+        expect(onOverlayTrayChange).toHaveBeenCalledWith(false)
+      })
+    })
+
+    it('the tray should be set to overlay when it is opened and there is not enough space', async () => {
+      const onOverlayTrayChange = vi.fn()
+
+      const { rerender } = await render(
+        <DrawerLayoutFixture
+          open={true}
+          layoutWidth="295px"
+          onOverlayTrayChange={onOverlayTrayChange}
+        />
+      )
+
+      // set prop open
+      await rerender(
+        <DrawerLayoutFixture
+          open={true}
+          layoutWidth="295px"
+          onOverlayTrayChange={onOverlayTrayChange}
+        />
+      )
+
+      await vi.waitFor(() => {
+        expect(onOverlayTrayChange).toHaveBeenCalledWith(true)
+      })
+    })
+
+    it('the tray should not overlay on open when there is enough space', async () => {
+      const onOverlayTrayChange = vi.fn()
+
+      const { rerender } = await render(
+        <DrawerLayoutFixture
+          open={true}
+          layoutWidth="705px"
+          onOverlayTrayChange={onOverlayTrayChange}
+        />
+      )
+
+      // set prop open
+      await rerender(
+        <DrawerLayoutFixture
+          open={true}
+          layoutWidth="705px"
+          onOverlayTrayChange={onOverlayTrayChange}
+        />
+      )
+
+      await vi.waitFor(() => {
+        expect(onOverlayTrayChange).toHaveBeenCalledWith(false)
+      })
     })
   })
 })

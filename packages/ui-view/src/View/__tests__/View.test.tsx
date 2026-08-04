@@ -281,4 +281,27 @@ describe('<View />', () => {
 
     expect(axeCheck).toBe(true)
   })
+
+  describe('Component tests', () => {
+    it('should not pass all styles', async () => {
+      const styleProps = {
+        backgroundColor: 'red',
+        borderStyle: 'dotted',
+        opacity: '0.5'
+      }
+
+      const { container } = await render(
+        <View style={{ ...styleProps }}>
+          <h1>View Content</h1>
+        </View>
+      )
+
+      const view = container.querySelector("span[class$='-view']")
+      const styles = getComputedStyle(view!)
+
+      expect(styles.backgroundColor).toEqual('rgba(0, 0, 0, 0)')
+      expect(styles.borderStyle).toEqual('none')
+      expect(styles.opacity).toEqual('1')
+    })
+  })
 })

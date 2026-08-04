@@ -569,4 +569,283 @@ describe('<TreeBrowser />', () => {
       ])
     })
   })
+  describe('Component tests', () => {
+    // the `li` with the `aria-label` is the focusable tree item, the `button`
+    // inside it is what a user clicks on. An expanded collection shares its
+    // label with the group it renders, so match on the role too.
+    const treeItem = (name: string) => page.getByRole('treeitem', { name })
+    const treeButton = (name: string) => page.getByRole('button', { name })
+
+    it('should persist the state of expanded children when parent collapsed', async () => {
+      await render(
+        <TreeBrowser
+          collections={COLLECTIONS_DATA}
+          items={ITEMS_DATA}
+          rootId={2}
+        />
+      )
+      const treeitems = page.getByRole('treeitem')
+
+      await userEvent.click(treeButton('Root Directory'))
+      await vi.waitFor(() => expect(treeitems.elements()).toHaveLength(4))
+
+      await userEvent.click(treeButton('Sub Root 1'))
+      await vi.waitFor(() => expect(treeitems.elements()).toHaveLength(5))
+
+      await userEvent.click(treeButton('Root Directory'))
+      await vi.waitFor(() => expect(treeitems.elements()).toHaveLength(1))
+
+      await userEvent.click(treeButton('Root Directory'))
+      await vi.waitFor(() => expect(treeitems.elements()).toHaveLength(5))
+    })
+
+    it('should not update expanded on click when set as explicit prop', async () => {
+      await render(
+        <TreeBrowser
+          collections={COLLECTIONS_DATA}
+          items={ITEMS_DATA}
+          rootId={2}
+          expanded={[2]}
+        />
+      )
+      const treeitems = page.getByRole('treeitem')
+
+      expect(treeitems.elements()).toHaveLength(4)
+
+      await userEvent.click(treeButton('Root Directory'))
+
+      expect(treeitems.elements()).toHaveLength(4)
+
+      await userEvent.click(treeButton('Sub Root 1'))
+
+      expect(treeitems.elements()).toHaveLength(4)
+      expect(treeItem('Nested Sub Collection').query()).not.toBeInTheDocument()
+    })
+
+    it('should call onCollectionToggle on arrow key expansion or collapse', async () => {
+      const onCollectionToggle = vi.fn()
+
+      await render(
+        <TreeBrowser
+          collections={COLLECTIONS_DATA}
+          items={ITEMS_DATA}
+          rootId={2}
+          onCollectionToggle={onCollectionToggle}
+        />
+      )
+      treeItem('Root Directory').element().focus()
+
+      await userEvent.keyboard('{ArrowRight}')
+      await userEvent.keyboard('{ArrowLeft}')
+      await userEvent.keyboard('{ArrowLeft}')
+
+      await vi.waitFor(() =>
+        expect(onCollectionToggle).toHaveBeenCalledTimes(2)
+      )
+    })
+
+    it('should move focus with the up/down arrow keys', async () => {
+      await render(
+        <TreeBrowser
+          collections={COLLECTIONS_DATA}
+          items={ITEMS_DATA}
+          rootId={2}
+          defaultExpanded={[2]}
+        />
+      )
+      treeItem('Root Directory').element().focus()
+
+      await userEvent.keyboard('{ArrowDown}')
+      await expect.element(treeItem('Sub Root 1')).toHaveFocus()
+
+      await userEvent.keyboard('{ArrowDown}')
+      await expect.element(treeItem('Sub Root 2')).toHaveFocus()
+      expect(treeItem('Sub Root 1').element()).not.toHaveFocus()
+
+      await userEvent.keyboard('{ArrowUp}')
+      await expect.element(treeItem('Sub Root 1')).toHaveFocus()
+    })
+
+    it('should move focus via keyboard shortcuts', async () => {
+      await render(
+        <TreeBrowser
+          collections={COLLECTIONS_DATA}
+          items={ITEMS_DATA}
+          rootId={2}
+          defaultExpanded={[2]}
+        />
+      )
+      treeItem('Root Directory').element().focus()
+
+      await userEvent.keyboard('j')
+      await expect.element(treeItem('Sub Root 1')).toHaveFocus()
+
+      await userEvent.keyboard('j')
+      await expect.element(treeItem('Sub Root 2')).toHaveFocus()
+      expect(treeItem('Sub Root 1').element()).not.toHaveFocus()
+
+      await userEvent.keyboard('k')
+      await expect.element(treeItem('Sub Root 1')).toHaveFocus()
+    })
+
+    it('should open collapsed collection with right arrow', async () => {
+      await render(
+        <TreeBrowser
+          collections={COLLECTIONS_DATA}
+          items={ITEMS_DATA}
+          rootId={2}
+        />
+      )
+      const treeitems = page.getByRole('treeitem')
+
+      expect(treeitems.elements()).toHaveLength(1)
+
+      treeItem('Root Directory').element().focus()
+      await userEvent.keyboard('{ArrowRight}')
+
+      await vi.waitFor(() => expect(treeitems.elements()).toHaveLength(4))
+    })
+
+    it('should move focus down when right arrow is pressed on expanded collection', async () => {
+      await render(
+        <TreeBrowser
+          collections={COLLECTIONS_DATA}
+          items={ITEMS_DATA}
+          rootId={2}
+          defaultExpanded={[2]}
+        />
+      )
+      const treeitems = page.getByRole('treeitem')
+
+      expect(treeitems.elements()).toHaveLength(4)
+
+      treeItem('Root Directory').element().focus()
+      await userEvent.keyboard('{ArrowRight}')
+
+      await expect.element(treeItem('Sub Root 1')).toHaveFocus()
+      expect(treeitems.elements()).toHaveLength(4)
+    })
+
+    it('should collapse expanded collection when left arrow is pressed', async () => {
+      await render(
+        <TreeBrowser
+          collections={COLLECTIONS_DATA}
+          items={ITEMS_DATA}
+          rootId={2}
+          defaultExpanded={[2]}
+        />
+      )
+      const treeitems = page.getByRole('treeitem')
+
+      expect(treeitems.elements()).toHaveLength(4)
+
+      treeItem('Root Directory').element().focus()
+      await userEvent.keyboard('{ArrowLeft}')
+
+      await vi.waitFor(() => expect(treeitems.elements()).toHaveLength(1))
+      expect(treeItem('Root Directory').element()).toHaveFocus()
+    })
+
+    it('should move focus up when left arrow is pressed on collapsed collection', async () => {
+      await render(
+        <TreeBrowser
+          collections={COLLECTIONS_DATA}
+          items={ITEMS_DATA}
+          rootId={2}
+          defaultExpanded={[2]}
+        />
+      )
+      const treeitems = page.getByRole('treeitem')
+
+      expect(treeitems.elements()).toHaveLength(4)
+
+      treeItem('Sub Root 1').element().focus()
+      await userEvent.keyboard('{ArrowLeft}')
+
+      await expect.element(treeItem('Root Directory')).toHaveFocus()
+      expect(treeitems.elements()).toHaveLength(4)
+    })
+
+    it('should select the node on enter or space if selectionType is not "none"', async () => {
+      await render(
+        <TreeBrowser
+          collections={COLLECTIONS_DATA}
+          items={ITEMS_DATA}
+          rootId={2}
+          defaultExpanded={[2]}
+          selectionType="single"
+        />
+      )
+      treeItem('Root Directory').element().focus()
+      await userEvent.keyboard('{Enter}')
+
+      await expect
+        .element(treeItem('Root Directory'))
+        .toHaveAttribute('aria-selected', 'true')
+
+      treeItem('Sub Root 1').element().focus()
+      await userEvent.keyboard(' ')
+
+      await expect
+        .element(treeItem('Sub Root 1'))
+        .toHaveAttribute('aria-selected', 'true')
+    })
+
+    it('should not expand the node on enter or space if selectionType is not "none"', async () => {
+      await render(
+        <TreeBrowser
+          collections={COLLECTIONS_DATA}
+          items={ITEMS_DATA}
+          rootId={2}
+          selectionType="single"
+        />
+      )
+      const treeitems = page.getByRole('treeitem')
+
+      expect(treeitems.elements()).toHaveLength(1)
+
+      treeItem('Root Directory').element().focus()
+      await userEvent.keyboard('{Enter}')
+
+      expect(treeitems.elements()).toHaveLength(1)
+    })
+
+    it('should move to the top node without expanding/collapsing anything when home is pressed', async () => {
+      await render(
+        <TreeBrowser
+          collections={COLLECTIONS_DATA}
+          items={ITEMS_DATA}
+          rootId={2}
+          defaultExpanded={[2]}
+        />
+      )
+      const treeitems = page.getByRole('treeitem')
+
+      expect(treeitems.elements()).toHaveLength(4)
+
+      treeItem('Item 1').element().focus() // Last item
+      await userEvent.keyboard('{Home}')
+
+      await expect.element(treeItem('Root Directory')).toHaveFocus()
+      expect(treeitems.elements()).toHaveLength(4)
+    })
+
+    it('should move to the bottom node without expanding/collapsing anything when end is pressed', async () => {
+      await render(
+        <TreeBrowser
+          collections={COLLECTIONS_DATA}
+          items={ITEMS_DATA}
+          rootId={2}
+          defaultExpanded={[2]}
+        />
+      )
+      const treeitems = page.getByRole('treeitem')
+
+      treeItem('Root Directory').element().focus()
+      await userEvent.keyboard('{End}')
+
+      await expect.element(treeItem('Item 1')).toHaveFocus() // Last item
+      expect(treeitems.elements()).toHaveLength(4)
+    })
+  })
 })

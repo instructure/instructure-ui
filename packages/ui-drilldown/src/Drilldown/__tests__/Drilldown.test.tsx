@@ -22,7 +22,8 @@
  * SOFTWARE.
  */
 
-import { render } from 'vitest-browser-react'
+import { fireEvent } from '@testing-library/dom'
+import { render, cleanup } from 'vitest-browser-react'
 import { page, userEvent } from 'vitest/browser'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
@@ -1013,6 +1014,659 @@ describe('<Drilldown />', () => {
       const axeCheck = await runAxeCheck(container)
 
       expect(axeCheck).toBe(true)
+    })
+  })
+
+  describe('Component tests', () => {
+    const renderOptions = (pageName: string) =>
+      data.map((option) => (
+        <Drilldown.Option id={option.id} key={option.id}>
+          {option.label} - {pageName}
+        </Drilldown.Option>
+      ))
+
+    const menuEl = () => document.querySelector<HTMLElement>('div[role="menu"]')
+    const drilldownContainer = () =>
+      document.querySelector<HTMLElement>('[class$="-drilldown__container"]')!
+    const headerTitle = () =>
+      document.querySelector<HTMLElement>('[id^="DrilldownHeader-Title_"]')
+    const activeId = () => document.activeElement?.id
+
+    // The Popover's FocusRegion blurs the menu again shortly after mount, and a
+    // real key event sent in that window lands on `body` instead of the
+    // drilldown. So re-focus until the focus survives a frame.
+    const focusMenu = async () => {
+      await vi.waitFor(async () => {
+        menuEl()!.focus()
+        await new Promise((resolve) => requestAnimationFrame(resolve))
+        expect(menuEl()!.contains(document.activeElement)).toBe(true)
+      })
+    }
+
+    // Focus can still be stolen mid-sequence, which drops a move. Press, give
+    // the focus time to land, and only press again if it never did — checking
+    // too eagerly and re-pressing would overshoot the target instead.
+    const navPress = async (key: string, targetId: string) => {
+      for (let attempt = 0; attempt < 5; attempt++) {
+        if (activeId() === targetId) {
+          return
+        }
+        if (!menuEl()!.contains(document.activeElement)) {
+          await focusMenu()
+        }
+        await userEvent.keyboard(key)
+        try {
+          await vi.waitFor(() => expect(activeId()).toBe(targetId), {
+            timeout: 500
+          })
+          return
+        } catch {
+          // the key event never landed, press it again
+        }
+      }
+      expect(activeId()).toBe(targetId)
+    }
+
+    afterEach(async () => {
+      // the Popover's FocusRegion schedules an async focus return on unmount,
+      // let it drain so it can't disturb the next test's keyboard navigation
+      cleanup()
+      await new Promise((resolve) => setTimeout(resolve, 100))
+    })
+
+    it('should disabled prop prevent option actions', async () => {
+      await render(
+        <Drilldown rootPageId="page0" disabled>
+          <Drilldown.Page id="page0" renderActionLabel="Action">
+            <Drilldown.Option id="page0option" subPageId="page1">
+              Option-0
+            </Drilldown.Option>
+          </Drilldown.Page>
+          <Drilldown.Page id="page1">
+            <Drilldown.Option id="page1option">Option-1</Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+
+      await userEvent.click(page.getByText('Option-0'))
+
+      expect(page.getByText('Option-0').element()).toBeVisible()
+      expect(page.getByText('Option-1').query()).not.toBeInTheDocument()
+    })
+
+    it('should disabled trigger, if disabled prop provided', async () => {
+      await render(
+        <Drilldown
+          rootPageId="page0"
+          disabled
+          trigger={<button data-test-id="toggleButton">Toggle</button>}
+        >
+          <Drilldown.Page id="page0" renderActionLabel="Action">
+            <Drilldown.Option id="page0option">Option</Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+      const toggleButton = document.querySelector<HTMLButtonElement>(
+        '[data-test-id="toggleButton"]'
+      )!
+
+      expect(toggleButton).toHaveAttribute('aria-disabled', 'true')
+      expect(toggleButton).toBeDisabled()
+
+      // a real click can't be sent to a disabled button, so dispatch the event
+      fireEvent.click(toggleButton, { button: 0, detail: 1 })
+
+      expect(document.querySelector('#page0option')).not.toBeInTheDocument()
+    })
+
+    it('should rotate focus in the drilldown by default', async () => {
+      await render(
+        <Drilldown rootPageId="page0">
+          <Drilldown.Page id="page0">
+            <Drilldown.Option id="option01">Option1</Drilldown.Option>
+            <Drilldown.Option id="option02">Option2</Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+      await focusMenu()
+
+      await navPress('{ArrowDown}', 'option01')
+      await navPress('{ArrowDown}', 'option02')
+      await navPress('{ArrowDown}', 'option01')
+
+      // rotated back around to the first option
+      expect(activeId()).toBe('option01')
+    })
+
+    it('should prevent focus rotation in the drilldown with "false"', async () => {
+      await render(
+        <Drilldown rootPageId="page0" rotateFocus={false}>
+          <Drilldown.Page id="page0">
+            <Drilldown.Option id="option01">Option</Drilldown.Option>
+            <Drilldown.Option id="option02">Option</Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+      await focusMenu()
+      await navPress('{ArrowDown}', 'option02')
+      await navPress('{ArrowDown}', 'option02')
+      await navPress('{ArrowDown}', 'option02')
+      expect(activeId()).toBe('option02')
+    })
+
+    it('should set the width of the drilldown', async () => {
+      await render(
+        <Drilldown rootPageId="page0" width="320px">
+          <Drilldown.Page id="page0">
+            <Drilldown.Option id="option01">Option</Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+
+      expect(getComputedStyle(menuEl()!).width).toBe('320px')
+    })
+
+    it('should set the width of the drilldown in the popover', async () => {
+      await render(
+        <Drilldown
+          rootPageId="page0"
+          width="320px"
+          trigger={<button>Toggle</button>}
+          defaultShow
+        >
+          <Drilldown.Page id="page0">
+            <Drilldown.Option id="option01">Option</Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+
+      expect(getComputedStyle(drilldownContainer()).width).toBe('320px')
+    })
+
+    it('should be overruled by maxWidth prop', async () => {
+      await render(
+        <Drilldown rootPageId="page0" width="300px" maxWidth="160px">
+          <Drilldown.Page id="page0">
+            <Drilldown.Option id="option01">Option</Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+
+      expect(getComputedStyle(drilldownContainer()).width).toBe('160px')
+    })
+
+    it('should be affected by overflowX prop', async () => {
+      await render(
+        <Drilldown rootPageId="page0" width="320px" overflowX="auto">
+          <Drilldown.Page id="page0">
+            <Drilldown.Option id="option01">
+              <div style={{ whiteSpace: 'nowrap' }}>
+                Option with a very long label so that it has to break
+              </div>
+            </Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+      const container = drilldownContainer()
+      const style = getComputedStyle(container)
+
+      // 318px, not 320px: the container renders a 1px border each side
+      // (borderWidth="small") with box-sizing border-box, so the computed
+      // content width is 320 - 2 = 318.
+      expect(style.width).toBe('318px')
+      expect(style.overflowX).toBe('auto')
+      expect(container.scrollWidth).toBeGreaterThan(container.clientWidth)
+    })
+
+    it('should set minWidth in popover mode', async () => {
+      await render(
+        <Drilldown
+          rootPageId="page0"
+          minWidth="336px"
+          trigger={<button>Trigger</button>}
+          show
+          onToggle={vi.fn()}
+        >
+          <Drilldown.Page id="page0">
+            <Drilldown.Option id="option01">Option</Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+
+      expect(getComputedStyle(drilldownContainer()).width).toBe('336px')
+    })
+
+    it('should set the height of the drilldown', async () => {
+      await render(
+        <Drilldown rootPageId="page0" height="320px">
+          <Drilldown.Page id="page0">
+            <Drilldown.Option id="option01">Option</Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+
+      expect(getComputedStyle(drilldownContainer()).height).toBe('320px')
+    })
+
+    it('should set the height of the drilldown in the popover', async () => {
+      await render(
+        <Drilldown
+          rootPageId="page0"
+          height="320px"
+          trigger={<button>Toggle</button>}
+          defaultShow
+        >
+          <Drilldown.Page id="page0">
+            <Drilldown.Option id="option01">Option</Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+
+      expect(getComputedStyle(drilldownContainer()).height).toBe('320px')
+    })
+
+    it('should be overruled by maxHeight prop', async () => {
+      await render(
+        <Drilldown rootPageId="page0" height="300px" maxHeight="160px">
+          <Drilldown.Page id="page0">
+            <Drilldown.Option id="option01">Option</Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+
+      expect(getComputedStyle(drilldownContainer()).height).toBe('160px')
+    })
+
+    it('should be affected by overflowY prop', async () => {
+      await render(
+        <Drilldown rootPageId="page0" height="160px" overflowY="auto">
+          <Drilldown.Page id="page0">
+            <Drilldown.Option id="option01">Option</Drilldown.Option>
+            <Drilldown.Option id="option02">Option</Drilldown.Option>
+            <Drilldown.Option id="option03">Option</Drilldown.Option>
+            <Drilldown.Option id="option04">Option</Drilldown.Option>
+            <Drilldown.Option id="option05">Option</Drilldown.Option>
+            <Drilldown.Option id="option06">Option</Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+      const container = drilldownContainer()
+      const style = getComputedStyle(container)
+
+      expect(style.height).toBe('160px')
+      expect(style.overflowY).toBe('auto')
+      expect(container.scrollHeight).toBeGreaterThan(container.clientHeight)
+    })
+
+    it('should minHeight prop set height', async () => {
+      await render(
+        <Drilldown rootPageId="page0" minHeight="336px">
+          <Drilldown.Page id="page0">
+            <Drilldown.Option id="option01">Option</Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+
+      expect(getComputedStyle(drilldownContainer()).height).toBe('336px')
+    })
+
+    it('should minHeight prop set height in popover mode', async () => {
+      await render(
+        <Drilldown
+          rootPageId="page0"
+          minHeight="336px"
+          trigger={<button>Trigger</button>}
+          show
+          onToggle={vi.fn()}
+        >
+          <Drilldown.Page id="page0">
+            <Drilldown.Option id="option01">Option</Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+
+      expect(getComputedStyle(drilldownContainer()).height).toBe('336px')
+    })
+
+    it('should call onDismiss when Drilldown is closed', async () => {
+      const onDismiss = vi.fn()
+      await render(
+        <Drilldown
+          rootPageId="page0"
+          trigger={<button>Options</button>}
+          onDismiss={onDismiss}
+          defaultShow
+        >
+          <Drilldown.Page id="page0">
+            <Drilldown.Option id="option0">Option 0</Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+      await focusMenu()
+
+      await userEvent.keyboard('{Escape}')
+
+      await vi.waitFor(() => {
+        expect(onDismiss).toHaveBeenCalled()
+        expect(onDismiss.mock.calls[0][0]).toBeInstanceOf(Event)
+        expect(onDismiss.mock.calls[0][1]).toBe(false)
+      })
+    })
+
+    it('should shouldHideOnSelect prop be true by default', async () => {
+      await render(
+        <Drilldown
+          rootPageId="page0"
+          trigger={<button>Toggle</button>}
+          defaultShow
+        >
+          <Drilldown.Page id="page0">
+            <Drilldown.Option id="option01">Option-01</Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+      expect(document.querySelector('#option01')).toBeInTheDocument()
+
+      await userEvent.click(page.getByText('Option-01'))
+
+      await vi.waitFor(() => {
+        expect(document.querySelector('#option01')).not.toBeInTheDocument()
+      })
+    })
+
+    it('should not close on subPage nav, even if shouldHideOnSelect is "true"', async () => {
+      await render(
+        <Drilldown
+          rootPageId="page0"
+          trigger={<button>Toggle</button>}
+          defaultShow
+          shouldHideOnSelect={true}
+        >
+          <Drilldown.Page id="page0">
+            <Drilldown.Option id="option01" subPageId="page1">
+              Option
+            </Drilldown.Option>
+          </Drilldown.Page>
+          <Drilldown.Page id="page1">
+            <Drilldown.Option id="option11">Sub-Option</Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+      expect(document.querySelector('#option01')).toBeInTheDocument()
+      expect(document.querySelector('#option11')).not.toBeInTheDocument()
+
+      await userEvent.click(page.getByText('Option'))
+
+      await vi.waitFor(() => {
+        expect(document.querySelector('#option01')).not.toBeInTheDocument()
+        expect(document.querySelector('#option11')).toBeInTheDocument()
+      })
+    })
+
+    it('should not close on Back nav, even if shouldHideOnSelect is "true"', async () => {
+      await render(
+        <Drilldown
+          rootPageId="page0"
+          trigger={<button>Toggle</button>}
+          defaultShow
+          shouldHideOnSelect={true}
+        >
+          <Drilldown.Page id="page0">
+            <Drilldown.Option id="option01" subPageId="page1">
+              Option01
+            </Drilldown.Option>
+          </Drilldown.Page>
+          <Drilldown.Page id="page1">
+            <Drilldown.Option id="option11">Sub-Option</Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+      expect(page.getByText('Option01').element()).toBeVisible()
+
+      await userEvent.click(page.getByText('Option01'))
+
+      await vi.waitFor(() => {
+        expect(page.getByText('Option01').query()).not.toBeInTheDocument()
+        expect(page.getByText('Sub-Option').element()).toBeVisible()
+      })
+
+      await userEvent.click(page.getByText('Back'))
+
+      await vi.waitFor(() => {
+        expect(page.getByText('Sub-Option').query()).not.toBeInTheDocument()
+        expect(page.getByText('Option01').element()).toBeVisible()
+      })
+    })
+
+    it('should prevent closing when shouldHideOnSelect is "false"', async () => {
+      await render(
+        <Drilldown
+          rootPageId="page0"
+          trigger={<button>Toggle</button>}
+          defaultShow
+          shouldHideOnSelect={false}
+        >
+          <Drilldown.Page id="page0">
+            <Drilldown.Option id="option01">Option01</Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+      expect(page.getByText('Option01').element()).toBeVisible()
+
+      await userEvent.click(page.getByText('Option01'))
+
+      expect(page.getByText('Option01').element()).toBeVisible()
+    })
+
+    it('should be able to navigate between options with up/down arrows', async () => {
+      await render(
+        <Drilldown rootPageId="page0">
+          <Drilldown.Page id="page0">
+            {data.map((option) => (
+              <Drilldown.Option id={option.id} key={option.id}>
+                {option.label}
+              </Drilldown.Option>
+            ))}
+          </Drilldown.Page>
+        </Drilldown>
+      )
+      await focusMenu()
+
+      await navPress('{ArrowDown}', 'opt_0')
+      await navPress('{ArrowDown}', 'opt_1')
+      await navPress('{ArrowDown}', 'opt_2')
+
+      await navPress('{ArrowUp}', 'opt_1')
+
+      expect(activeId()).toBe('opt_1')
+    })
+
+    it('should be able to navigate forward between pages with right arrow', async () => {
+      await render(
+        <Drilldown rootPageId="page0">
+          <Drilldown.Page id="page0" renderTitle={'Page 0'}>
+            <Drilldown.Option id="opt0" subPageId="page1">
+              To Page 1
+            </Drilldown.Option>
+          </Drilldown.Page>
+          <Drilldown.Page id="page1" renderTitle={'Page 1'}>
+            {[
+              <Drilldown.Option key="opt5" id="opt5" subPageId="page2">
+                To Page 2
+              </Drilldown.Option>,
+              ...renderOptions('page 1')
+            ]}
+          </Drilldown.Page>
+
+          <Drilldown.Page id="page2" renderTitle="Page 2">
+            {renderOptions('page 2')}
+          </Drilldown.Page>
+        </Drilldown>
+      )
+      await focusMenu()
+
+      // the option which navigates to next page should be focused
+      await navPress('{ArrowDown}', 'opt0')
+      expect(document.activeElement).toHaveTextContent('To Page 1')
+
+      // go to Page 1
+      await userEvent.keyboard('{ArrowRight}')
+      await vi.waitFor(() => expect(headerTitle()).toHaveTextContent('Page 1'))
+
+      // focus takes a moment to land on the new page's menu
+      await focusMenu()
+
+      // on the Page 1 the 1st option is the `Back` button
+      await userEvent.keyboard('{ArrowDown}')
+      await vi.waitFor(() =>
+        expect(document.activeElement).toHaveTextContent('Back')
+      )
+
+      // next arrowDown should skip the header Title and focus on 'To Page 2' option
+      await navPress('{ArrowDown}', 'opt5')
+      expect(document.activeElement).toHaveTextContent('To Page 2')
+
+      // go to Page 2
+      await userEvent.keyboard('{ArrowRight}')
+
+      // on Page 2 the header title should be 'Page 2'
+      await vi.waitFor(() => expect(headerTitle()).toHaveTextContent('Page 2'))
+    })
+
+    it('should be able to navigate back to previous page with left arrow', async () => {
+      await render(
+        <Drilldown rootPageId="page0">
+          <Drilldown.Page id="page0" renderTitle={'Page 0'}>
+            <Drilldown.Option id="opt0" subPageId="page1">
+              To Page 1
+            </Drilldown.Option>
+          </Drilldown.Page>
+          <Drilldown.Page id="page1" renderTitle={'Page 1'}>
+            {[
+              <Drilldown.Option key="opt5" id="opt5" subPageId="page2">
+                To Page 2
+              </Drilldown.Option>,
+              ...renderOptions('page 1')
+            ]}
+          </Drilldown.Page>
+
+          <Drilldown.Page id="page2" renderTitle="Page 2">
+            {renderOptions('page 2')}
+          </Drilldown.Page>
+        </Drilldown>
+      )
+      await focusMenu()
+
+      // go to Page 1
+      await navPress('{ArrowDown}', 'opt0')
+      await userEvent.keyboard('{ArrowRight}')
+
+      // on Page 1 should be visible header title
+      await vi.waitFor(() => expect(headerTitle()).toHaveTextContent('Page 1'))
+
+      // focus takes a moment to land on the new page's menu
+      await focusMenu()
+
+      // go to Page 0
+      await userEvent.keyboard('{ArrowLeft}')
+
+      // on Page 0 should be visible header title
+      await vi.waitFor(() => expect(headerTitle()).toHaveTextContent('Page 0'))
+    })
+
+    it('should close the drilldown on root page and left arrow is pressed', async () => {
+      await render(
+        <Drilldown
+          rootPageId="page0"
+          trigger={<button>options</button>}
+          defaultShow
+        >
+          <Drilldown.Page id="page0" renderTitle={'Page 0'}>
+            <Drilldown.Option id="opt0" subPageId="page1">
+              To Page 1
+            </Drilldown.Option>
+          </Drilldown.Page>
+          <Drilldown.Page id="page1" renderTitle={'Page 1'}>
+            {[
+              <Drilldown.Option key="opt5" id="opt5" subPageId="page2">
+                To Page 2
+              </Drilldown.Option>,
+              ...renderOptions('page 1')
+            ]}
+          </Drilldown.Page>
+
+          <Drilldown.Page id="page2" renderTitle="Page 2">
+            {renderOptions('page 2')}
+          </Drilldown.Page>
+        </Drilldown>
+      )
+      await focusMenu()
+      expect(headerTitle()).toHaveTextContent('Page 0')
+
+      // on the root page ArrowLeft can only ever close the drilldown, so it is
+      // safe to re-press it until it is gone
+      await vi.waitFor(
+        async () => {
+          const menu = menuEl()
+
+          if (menu) {
+            if (!menu.contains(document.activeElement)) {
+              menu.focus()
+            }
+            await userEvent.keyboard('{ArrowLeft}')
+          }
+          expect(headerTitle()).not.toBeInTheDocument()
+          expect(menuEl()).not.toBeInTheDocument()
+        },
+        { timeout: 4000 }
+      )
+    })
+
+    it('should correctly return focus when "trigger" and "shouldReturnFocus" is set', async () => {
+      await render(
+        <Drilldown
+          rootPageId="page0"
+          trigger={<button>Options</button>}
+          shouldReturnFocus
+        >
+          <Drilldown.Page id="page0">
+            <Drilldown.Option id="option0">Option-0</Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+      const trigger = page
+        .getByRole('button', { name: 'Options' })
+        .element() as HTMLElement
+
+      // the focus can be taken away again right after mount, so make it stick
+      await vi.waitFor(async () => {
+        trigger.focus()
+        await new Promise((resolve) => requestAnimationFrame(resolve))
+        expect(document.activeElement).toBe(trigger)
+      })
+      expect(page.getByText('Option-0').query()).not.toBeInTheDocument()
+
+      // Space toggles the drilldown, so only press it while it is still closed
+      await vi.waitFor(
+        async () => {
+          if (!page.getByText('Option-0').query()) {
+            await userEvent.keyboard(' ')
+          }
+          expect(page.getByText('Option-0').element()).toBeVisible()
+        },
+        { timeout: 4000 }
+      )
+
+      await vi.waitFor(
+        async () => {
+          if (page.getByText('Option-0').query()) {
+            await userEvent.keyboard('{Escape}')
+          }
+          expect(page.getByText('Option-0').query()).not.toBeInTheDocument()
+          expect(document.activeElement).toBe(trigger)
+        },
+        { timeout: 4000 }
+      )
     })
   })
 })

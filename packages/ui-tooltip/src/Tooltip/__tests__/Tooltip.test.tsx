@@ -179,4 +179,224 @@ describe('<Tooltip />', () => {
       })
     })
   })
+
+  describe('Component tests', () => {
+    // The real pointer stays wherever an earlier test left it, so it can
+    // already sit on the trigger when a test renders and open the tooltip on
+    // its own. Every example below renders this spacer so the pointer can be
+    // parked away from the trigger first.
+    const ParkingSpot = () => (
+      <div data-testid="pointerParkingSpot" style={{ height: 200 }} />
+    )
+
+    const getTip = (trigger: Element) => {
+      const id = trigger.getAttribute('data-position-target')
+      return document.querySelector<HTMLElement>(
+        `span[data-position-content="${id}"]`
+      )!
+    }
+
+    it('should render the tip offscreen', async () => {
+      await render(
+        <div>
+          <Tooltip renderTip="Hello">
+            <a data-testid="trigger" href="example.html">
+              Hover or focus me
+            </a>
+          </Tooltip>
+          <ParkingSpot />
+        </div>
+      )
+      const trigger = page.getByTestId('trigger')
+      await userEvent.hover(page.getByTestId('pointerParkingSpot'))
+
+      const tip = getTip(trigger.element())
+
+      await vi.waitFor(() => {
+        expect(tip).toHaveTextContent('Hello')
+        expect(getComputedStyle(tip).display).toBe('none')
+        expect(getComputedStyle(tip).left).toBe('-159984px')
+      })
+
+      await userEvent.hover(trigger)
+
+      await vi.waitFor(() => {
+        expect(getComputedStyle(tip).display).toBe('block')
+        expect(getComputedStyle(tip).left).toBe('0px')
+      })
+    })
+
+    it('should show tip by default when defaultIsShowingContent is true', async () => {
+      await render(
+        <Tooltip renderTip="Hello" defaultIsShowingContent>
+          <a data-testid="trigger" href="example.html">
+            Hover or focus me
+          </a>
+        </Tooltip>
+      )
+      const tip = getTip(page.getByTestId('trigger').element())
+
+      await vi.waitFor(() => {
+        expect(tip).toHaveTextContent('Hello')
+        expect(getComputedStyle(tip).display).toBe('block')
+        expect(getComputedStyle(tip).left).toBe('0px')
+      })
+    })
+
+    it('should show tip when isShowingContent is true', async () => {
+      await render(
+        <Tooltip renderTip={<h2>Hello</h2>} isShowingContent>
+          <a data-testid="trigger" href="example.html">
+            Hover or focus me
+          </a>
+        </Tooltip>
+      )
+      const tip = getTip(page.getByTestId('trigger').element())
+
+      await vi.waitFor(() => {
+        expect(tip).toHaveTextContent('Hello')
+        expect(getComputedStyle(tip).display).toBe('block')
+        expect(getComputedStyle(tip).left).toBe('0px')
+      })
+    })
+
+    it('should call onShowContent and on onHideContent', async () => {
+      const onShowContent = vi.fn()
+      const onHideContent = vi.fn()
+
+      await render(
+        <div>
+          <button>For dismiss</button>
+          <Tooltip
+            renderTip={<h2>Hello</h2>}
+            onShowContent={onShowContent}
+            onHideContent={onHideContent}
+          >
+            <a data-testid="trigger" href="example.html">
+              Hover or focus me
+            </a>
+          </Tooltip>
+          <ParkingSpot />
+        </div>
+      )
+      const trigger = page.getByTestId('trigger')
+      await userEvent.hover(page.getByTestId('pointerParkingSpot'))
+
+      const tip = getTip(trigger.element())
+
+      await userEvent.hover(trigger)
+
+      await expect.element(page.getByText('Hello')).toBeVisible()
+      await vi.waitFor(() => {
+        expect(onShowContent).toHaveBeenCalledTimes(1)
+      })
+
+      await userEvent.hover(page.getByText('For dismiss'))
+
+      await vi.waitFor(() => {
+        expect(tip).not.toBeVisible()
+        expect(onHideContent).toHaveBeenCalledTimes(1)
+      })
+    })
+
+    it('should remain visible when Tooltip is hovered over', async () => {
+      await render(
+        <div>
+          <Tooltip renderTip={<h2>Hello</h2>}>
+            <a data-testid="trigger" href="example.html">
+              Hover me!
+            </a>
+          </Tooltip>
+          <ParkingSpot />
+        </div>
+      )
+      const trigger = page.getByTestId('trigger')
+      await userEvent.hover(page.getByTestId('pointerParkingSpot'))
+
+      const tip = getTip(trigger.element())
+
+      await vi.waitFor(() => {
+        expect(tip).not.toBeVisible()
+      })
+
+      await userEvent.hover(trigger)
+
+      await vi.waitFor(() => {
+        expect(tip).toBeVisible()
+      })
+
+      await userEvent.hover(page.getByText('Hello'))
+
+      await vi.waitFor(() => {
+        expect(tip).toBeVisible()
+      })
+    })
+
+    it('should close when Esc key is pressed', async () => {
+      await render(
+        <div>
+          <Tooltip renderTip={<h2>Hello</h2>}>
+            <a data-testid="trigger" href="example.html">
+              Hover me!
+            </a>
+          </Tooltip>
+          <ParkingSpot />
+        </div>
+      )
+      const trigger = page.getByTestId('trigger')
+      await userEvent.hover(page.getByTestId('pointerParkingSpot'))
+
+      const tip = getTip(trigger.element())
+
+      await vi.waitFor(() => {
+        expect(tip).not.toBeVisible()
+      })
+
+      trigger.element().focus()
+
+      await vi.waitFor(() => {
+        expect(tip).toBeVisible()
+      })
+
+      await userEvent.keyboard('{Escape}')
+
+      await vi.waitFor(() => {
+        expect(tip).not.toBeVisible()
+      })
+    })
+
+    it('should close when Esc key is pressed and Tooltip is hovered over', async () => {
+      await render(
+        <div>
+          <Tooltip renderTip={<h2>Hello</h2>}>
+            <a data-testid="trigger" href="example.html">
+              Hover me!
+            </a>
+          </Tooltip>
+          <ParkingSpot />
+        </div>
+      )
+      const trigger = page.getByTestId('trigger')
+      await userEvent.hover(page.getByTestId('pointerParkingSpot'))
+
+      const tip = getTip(trigger.element())
+
+      await vi.waitFor(() => {
+        expect(tip).not.toBeVisible()
+      })
+
+      await userEvent.hover(trigger)
+
+      await vi.waitFor(() => {
+        expect(tip).toBeVisible()
+      })
+
+      await userEvent.hover(page.getByText('Hello'))
+      await userEvent.keyboard('{Escape}')
+
+      await vi.waitFor(() => {
+        expect(tip).not.toBeVisible()
+      })
+    })
+  })
 })

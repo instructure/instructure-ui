@@ -23,7 +23,7 @@
  */
 
 import { render } from 'vitest-browser-react'
-import { page } from 'vitest/browser'
+import { page, userEvent } from 'vitest/browser'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
@@ -71,5 +71,36 @@ describe('<SideNavBarItem />', () => {
     const axeCheck = await runAxeCheck(container)
 
     expect(axeCheck).toBe(true)
+  })
+
+  describe('Component tests', () => {
+    it('should show a tooltip when the nav is minimized', async () => {
+      const onClick = vi.fn()
+
+      await render(
+        <div data-testid="navBarItemWrapper" style={{ width: 300 }}>
+          <SideNavBarItem
+            icon={<ShieldUserInstUIIcon />}
+            label="Admin"
+            onClick={onClick}
+            minimized={true}
+          />
+          <div data-testid="pointerParkingSpot" style={{ height: 200 }} />
+        </div>
+      )
+      const tooltip = page.getByRole('tooltip', { includeHidden: true })
+
+      await expect.element(tooltip).toHaveTextContent('Admin')
+
+      // The real pointer stays wherever an earlier test left it, so it can
+      // already sit on the nav item when this one renders and open the tooltip
+      // on its own. Move it off the item first.
+      await userEvent.hover(page.getByTestId('pointerParkingSpot'))
+      await expect.element(tooltip).not.toBeVisible()
+
+      await userEvent.hover(page.getByRole('button').element())
+
+      await expect.element(tooltip).toBeVisible()
+    })
   })
 })

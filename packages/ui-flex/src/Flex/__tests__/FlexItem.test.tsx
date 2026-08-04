@@ -71,4 +71,47 @@ describe('<Item />', () => {
       expect(item).not.toHaveStyle({ order: expect.anything() })
     })
   })
+
+  describe('Component tests', () => {
+    it('visually reorders items when order prop is set', async () => {
+      await render(
+        <Flex data-testid="flex-container-default">
+          <Item data-testid="item-1-default">FOO</Item>
+          <Item data-testid="item-2-default">BOO</Item>
+        </Flex>
+      )
+      const firstRect = page
+        .getByTestId('item-1-default')
+        .element()
+        .getBoundingClientRect()
+      const secondRect = page
+        .getByTestId('item-2-default')
+        .element()
+        .getBoundingClientRect()
+
+      expect(firstRect.left).toBeLessThan(secondRect.left)
+
+      // set order prop
+      await render(
+        <Flex data-testid="flex-container-ordered">
+          <Item order={2} data-testid="item-1-ordered">
+            FOO
+          </Item>
+          <Item order={1} data-testid="item-2-ordered">
+            BOO
+          </Item>
+        </Flex>
+      )
+      const firstOrderedRect = page
+        .getByTestId('item-1-ordered')
+        .element()
+        .getBoundingClientRect()
+      const secondOrderedRect = page
+        .getByTestId('item-2-ordered')
+        .element()
+        .getBoundingClientRect()
+
+      expect(secondOrderedRect.left).toBeLessThan(firstOrderedRect.left)
+    })
+  })
 })

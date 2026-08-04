@@ -23,7 +23,7 @@
  */
 
 import { render } from 'vitest-browser-react'
-import { page } from 'vitest/browser'
+import { page, userEvent } from 'vitest/browser'
 import { describe, it, vi, expect } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 
@@ -264,6 +264,129 @@ describe('<RangeInput />', () => {
 
       expect(input).toHaveAttribute('aria-valuetext', '40%')
       expect(output).toHaveTextContent('40%')
+    })
+  })
+
+  describe('Component tests', () => {
+    // the native setter is needed so that React picks up the new value
+    const setValue = (input: HTMLInputElement, value: string) => {
+      Object.getOwnPropertyDescriptor(
+        HTMLInputElement.prototype,
+        'value'
+      )!.set!.call(input, value)
+      input.dispatchEvent(new Event('input', { bubbles: true }))
+    }
+
+    it('should update the value displayed', async () => {
+      const { container } = await render(
+        <RangeInput
+          label="Opacity"
+          name="opacity"
+          max={100}
+          min={0}
+          defaultValue={50}
+        />
+      )
+      const input = container.querySelector<HTMLInputElement>(
+        'input[name="opacity"]'
+      )!
+
+      setValue(input, '30')
+
+      await vi.waitFor(() => {
+        const output = container.querySelector('[class$="-rangeInput__value"]')
+        expect(output).toHaveTextContent('30')
+      })
+    })
+
+    it('should call the onChange prop', async () => {
+      const onChange = vi.fn()
+      const { container } = await render(
+        <RangeInput
+          label="Opacity"
+          name="opacity"
+          max={100}
+          min={0}
+          defaultValue={50}
+          onChange={onChange}
+        />
+      )
+      const input = container.querySelector<HTMLInputElement>(
+        'input[name="opacity"]'
+      )!
+
+      setValue(input, '30')
+
+      await vi.waitFor(() => {
+        expect(onChange).toHaveBeenCalled()
+        expect(onChange.mock.calls[0][0]).toBe('30')
+      })
+    })
+
+    it('should update the input value when the value prop is uncontrolled', async () => {
+      const { container } = await render(
+        <RangeInput
+          label="Opacity"
+          name="opacity"
+          max={100}
+          min={0}
+          onChange={vi.fn()}
+          defaultValue={50}
+        />
+      )
+      const input = container.querySelector<HTMLInputElement>(
+        'input[name="opacity"]'
+      )!
+
+      expect(input).toHaveValue('50')
+
+      input.focus()
+      await userEvent.keyboard('{ArrowRight}')
+
+      await vi.waitFor(() => {
+        expect(input).toHaveValue('51')
+      })
+    })
+
+    it('should not update the input value when the value prop is controlled', async () => {
+      const { container } = await render(
+        <RangeInput
+          label="Opacity"
+          name="opacity"
+          max={100}
+          min={0}
+          onChange={vi.fn()}
+          value={50}
+        />
+      )
+      const input = container.querySelector<HTMLInputElement>(
+        'input[name="opacity"]'
+      )!
+
+      expect(input).toHaveValue('50')
+
+      input.focus()
+      await userEvent.keyboard('{ArrowRight}')
+
+      await vi.waitFor(() => {
+        expect(input).toHaveValue('50')
+      })
+    })
+
+    it('should show messages', async () => {
+      const message = 'Invalid'
+      const { container } = await render(
+        <RangeInput
+          label="Opacity"
+          name="opacity"
+          max={100}
+          min={0}
+          messages={[{ text: message, type: 'error' }]}
+        />
+      )
+      const messages = container.querySelector('[class$="-formFieldMessages"]')
+
+      expect(messages).toHaveTextContent(message)
     })
   })
 })

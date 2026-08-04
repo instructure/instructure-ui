@@ -252,4 +252,62 @@ describe('TextArea', () => {
       expect(input).not.toHaveAttribute('aria-labelledby')
     })
   })
+
+  describe('Component tests', () => {
+    const longText =
+      'Chartreuse celiac thundercats, distillery snackwave glossier pork belly tacos venmo fanny pack paleo portland. Migas 3 wolf moon typewriter, meditation pitchfork meh narwhal copper mug gluten-free vegan next level. Succulents keytar cronut, fanny pack kitsch hammock sustainable skateboard gochujang poutine la croix ennui cred quinoa. Fap copper mug pitchfork small batch hell of vice. Kickstarter small batch hexagon, scenester bushwick tacos cliche. Pickled flannel PBR&B, chartreuse next level vinyl echo park chambray pitchfork selfies actually tattooed blue bottle 3 wolf moon. Raw denim enamel pin tumeric retro fam scenester.'
+
+    it('should resize if autoGrow is true', async () => {
+      const { container } = await render(
+        <TextArea
+          label="Name"
+          autoGrow={true}
+          width="500px"
+          onChange={vi.fn()}
+        />
+      )
+      const input = page.getByRole('textbox').element()
+      const initialHeight = parseInt(getComputedStyle(input).height, 10)
+
+      await userEvent.fill(page.getByRole('textbox'), longText)
+
+      await vi.waitFor(() => {
+        const resizedHeight = parseInt(getComputedStyle(input).height, 10)
+
+        expect(resizedHeight).toBeGreaterThan(initialHeight)
+      })
+
+      const layout = container.querySelector('[class$="-textArea__layout"]')!
+      const layoutMinHeight = parseInt(
+        getComputedStyle(layout).getPropertyValue('min-height'),
+        10
+      )
+
+      expect(parseInt(getComputedStyle(input).height, 10)).toBe(layoutMinHeight)
+    })
+
+    it('should set a maxHeight', async () => {
+      const { container } = await render(
+        <TextArea
+          label="Name"
+          autoGrow={true}
+          maxHeight="160px"
+          onChange={vi.fn()}
+          value={`${longText} ${longText}`}
+        />
+      )
+      const input = page.getByRole('textbox').element()
+
+      expect(getComputedStyle(input).maxHeight).toBe('160px')
+
+      // ensure maxHeight is being applied to input container and not exceeded by minHeight style
+      const layout = container.querySelector('[class$="-textArea__layout"]')!
+      const layoutStyle = getComputedStyle(layout)
+      const layoutMaxHeight = parseInt(layoutStyle.maxHeight, 10)
+      const layoutMinHeight = parseInt(layoutStyle.minHeight, 10)
+
+      expect(layoutMaxHeight).toBe(160)
+      expect(layoutMaxHeight).toBeGreaterThan(layoutMinHeight)
+    })
+  })
 })

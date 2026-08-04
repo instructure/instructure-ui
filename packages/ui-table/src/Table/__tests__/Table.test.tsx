@@ -472,4 +472,142 @@ describe('<Table />', async () => {
       expect(container).toHaveTextContent('Cell2')
     })
   })
+
+  describe('Component tests', () => {
+    const TestTable = ({
+      setHoverStateTo,
+      hover
+    }: {
+      setHoverStateTo?: boolean
+      hover?: boolean
+    }) => (
+      <Table caption={() => 'Test table'} hover={hover}>
+        <Table.Head>
+          <Table.Row data-testid="target-row" setHoverStateTo={setHoverStateTo}>
+            <Table.ColHeader id="foo">ColHeader</Table.ColHeader>
+            <Table.ColHeader id="bar">Bar-header</Table.ColHeader>
+          </Table.Row>
+        </Table.Head>
+        <Table.Body>
+          <Table.Row data-testid="control-row">
+            <Table.RowHeader>RowHeader</Table.RowHeader>
+            <Table.Cell>Cell</Table.Cell>
+          </Table.Row>
+        </Table.Body>
+      </Table>
+    )
+
+    const borderLeftColorOf = (testId: string) =>
+      getComputedStyle(page.getByTestId(testId).element()).borderLeftColor
+
+    it('can render table head as a combobox when in stacked layout', async () => {
+      const sortFoo = vi.fn()
+
+      await render(
+        <Table caption={() => 'Sortable table'} layout="stacked">
+          <Table.Head>
+            <Table.Row>
+              <Table.ColHeader id="id" onRequestSort={sortFoo}>
+                Foo
+              </Table.ColHeader>
+              <Table.ColHeader id="bar" onRequestSort={sortFoo}>
+                Bar
+              </Table.ColHeader>
+            </Table.Row>
+          </Table.Head>
+          <Table.Body>
+            <Table.Row></Table.Row>
+            <Table.Row></Table.Row>
+          </Table.Body>
+        </Table>
+      )
+      const input = page.getByRole('combobox').element()
+
+      await userEvent.click(input)
+      await userEvent.click(page.getByRole('option').elements()[0])
+
+      await vi.waitFor(() => {
+        expect(sortFoo).toHaveBeenCalledOnce()
+      })
+    })
+
+    it('should highlight row when setHoverStateTo is set to true', async () => {
+      const { rerender } = await render(<TestTable />)
+      const initialTargetColor = borderLeftColorOf('target-row')
+      const initialControlColor = borderLeftColorOf('control-row')
+
+      await rerender(<TestTable setHoverStateTo={true} />)
+
+      await vi.waitFor(() => {
+        expect(borderLeftColorOf('target-row')).not.toBe(initialTargetColor)
+      })
+      expect(borderLeftColorOf('control-row')).toBe(initialControlColor)
+    })
+
+    it('should not highlight row when setHoverStateTo is set to false', async () => {
+      const { rerender } = await render(<TestTable />)
+      const initialTargetColor = borderLeftColorOf('target-row')
+      const initialControlColor = borderLeftColorOf('control-row')
+
+      await rerender(<TestTable setHoverStateTo={false} />)
+
+      expect(borderLeftColorOf('target-row')).toBe(initialTargetColor)
+      expect(borderLeftColorOf('control-row')).toBe(initialControlColor)
+    })
+
+    it('should not highlight table row when hover is true but setHoverStateTo is false', async () => {
+      await render(<TestTable setHoverStateTo={false} hover={true} />)
+
+      const initialTargetColor = borderLeftColorOf('target-row')
+      await userEvent.hover(page.getByTestId('target-row'))
+      expect(borderLeftColorOf('target-row')).toBe(initialTargetColor)
+
+      const initialControlColor = borderLeftColorOf('control-row')
+      await userEvent.hover(page.getByTestId('control-row'))
+      await vi.waitFor(() => {
+        expect(borderLeftColorOf('control-row')).not.toBe(initialControlColor)
+      })
+    })
+
+    it('should highlight table row when hover is false but setHoverStateTo is true', async () => {
+      const { rerender } = await render(<TestTable />)
+      const initialTargetColor = borderLeftColorOf('target-row')
+      const initialControlColor = borderLeftColorOf('control-row')
+
+      await rerender(<TestTable setHoverStateTo={true} hover={false} />)
+
+      await vi.waitFor(() => {
+        expect(borderLeftColorOf('target-row')).not.toBe(initialTargetColor)
+      })
+      expect(borderLeftColorOf('control-row')).toBe(initialControlColor)
+    })
+
+    it('should highlight table row when hover is true but setHoverStateTo is undefined', async () => {
+      await render(<TestTable setHoverStateTo={undefined} hover={true} />)
+
+      const initialTargetColor = borderLeftColorOf('target-row')
+      await userEvent.hover(page.getByTestId('target-row'))
+      await vi.waitFor(() => {
+        expect(borderLeftColorOf('target-row')).not.toBe(initialTargetColor)
+      })
+
+      const initialControlColor = borderLeftColorOf('control-row')
+      await userEvent.hover(page.getByTestId('control-row'))
+      await vi.waitFor(() => {
+        expect(borderLeftColorOf('control-row')).not.toBe(initialControlColor)
+      })
+    })
+
+    it('should not highlight table row when hover is false and setHoverStateTo is undefined', async () => {
+      await render(<TestTable setHoverStateTo={undefined} hover={false} />)
+
+      const initialTargetColor = borderLeftColorOf('target-row')
+      await userEvent.hover(page.getByTestId('target-row'))
+      expect(borderLeftColorOf('target-row')).toBe(initialTargetColor)
+
+      const initialControlColor = borderLeftColorOf('control-row')
+      await userEvent.hover(page.getByTestId('control-row'))
+      expect(borderLeftColorOf('control-row')).toBe(initialControlColor)
+    })
+  })
 })

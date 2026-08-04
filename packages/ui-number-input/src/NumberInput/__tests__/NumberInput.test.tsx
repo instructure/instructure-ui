@@ -328,4 +328,118 @@ describe('<NumberInput />', () => {
 
     expect(input).not.toHaveAttribute('aria-labelledby')
   })
+
+  describe('Component tests', () => {
+    const arrowButtons = (container: HTMLElement) =>
+      container.querySelectorAll<HTMLButtonElement>(
+        'button[class$="-numberInput_arrow"]'
+      )
+
+    it('focuses the input when up arrow spinbutton is clicked', async () => {
+      const { container } = await render(<NumberInput renderLabel="Label" />)
+      const input = page.getByRole('spinbutton').element()
+      const mouseDown = new MouseEvent('mousedown', {
+        bubbles: true,
+        cancelable: true
+      })
+
+      arrowButtons(container)[0].dispatchEvent(mouseDown)
+
+      expect(mouseDown.defaultPrevented).toBe(true)
+      await vi.waitFor(() => {
+        expect(input).toHaveFocus()
+      })
+    })
+
+    it('focuses the input when down arrow spinbutton is clicked', async () => {
+      const { container } = await render(<NumberInput renderLabel="Label" />)
+      const input = page.getByRole('spinbutton').element()
+      const mouseDown = new MouseEvent('mousedown', {
+        bubbles: true,
+        cancelable: true
+      })
+
+      arrowButtons(container)[1].dispatchEvent(mouseDown)
+
+      expect(mouseDown.defaultPrevented).toBe(true)
+      await vi.waitFor(() => {
+        expect(input).toHaveFocus()
+      })
+    })
+
+    it('calls onIncrement when up arrow key is pressed', async () => {
+      const onIncrement = vi.fn()
+      await render(
+        <NumberInput renderLabel="Label" onIncrement={onIncrement} />
+      )
+      const input = page.getByRole('spinbutton').element()
+
+      input.focus()
+      await userEvent.keyboard('{ArrowUp}')
+
+      await vi.waitFor(() => {
+        expect(onIncrement).toHaveBeenCalledTimes(1)
+      })
+    })
+
+    it('calls onDecrement when down arrow key is pressed', async () => {
+      const onDecrement = vi.fn()
+      await render(
+        <NumberInput renderLabel="Label" onDecrement={onDecrement} />
+      )
+      const input = page.getByRole('spinbutton').element()
+
+      input.focus()
+      await userEvent.keyboard('{ArrowDown}')
+
+      await vi.waitFor(() => {
+        expect(onDecrement).toHaveBeenCalledTimes(1)
+      })
+    })
+
+    it('does not move caret when up arrow key is pressed', async () => {
+      await render(<NumberInput renderLabel="Label" />)
+      const input = page.getByRole('spinbutton').element()
+      const keyDown = new KeyboardEvent('keydown', {
+        key: 'ArrowUp',
+        keyCode: 38,
+        bubbles: true,
+        cancelable: true
+      })
+
+      input.dispatchEvent(keyDown)
+
+      expect(keyDown.defaultPrevented).toBe(true)
+    })
+
+    it('does not move caret when down arrow key is pressed', async () => {
+      await render(<NumberInput renderLabel="Label" />)
+      const input = page.getByRole('spinbutton').element()
+      const keyDown = new KeyboardEvent('keydown', {
+        key: 'ArrowDown',
+        keyCode: 40,
+        bubbles: true,
+        cancelable: true
+      })
+
+      input.dispatchEvent(keyDown)
+
+      expect(keyDown.defaultPrevented).toBe(true)
+    })
+
+    it('handles other keyDown events normally', async () => {
+      await render(<NumberInput renderLabel="Label" />)
+      const input = page.getByRole('spinbutton').element()
+      const keyDown = new KeyboardEvent('keydown', {
+        key: 'h',
+        keyCode: 72,
+        bubbles: true,
+        cancelable: true
+      })
+
+      input.dispatchEvent(keyDown)
+
+      expect(keyDown.defaultPrevented).toBe(false)
+    })
+  })
 })

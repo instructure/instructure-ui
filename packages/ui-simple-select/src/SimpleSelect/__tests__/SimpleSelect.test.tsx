@@ -397,4 +397,116 @@ describe('<SimpleSelect />', () => {
       expect(input).toHaveValue('bar')
     })
   })
+
+  describe('Component tests', () => {
+    afterEach(() => {
+      vi.mocked(utils.isSafari).mockReturnValue(false)
+    })
+
+    it('should have role button in Safari', async () => {
+      vi.mocked(utils.isSafari).mockReturnValue(true)
+
+      const { container } = await render(
+        <SimpleSelect renderLabel="Choose an option">
+          {getOptions()}
+        </SimpleSelect>
+      )
+      const input = container.querySelector('input')
+
+      expect(input).toHaveAttribute('role', 'button')
+    })
+
+    it('should have role combobox in different browsers than Safari', async () => {
+      const { container } = await render(
+        <SimpleSelect renderLabel="Choose an option">
+          {getOptions()}
+        </SimpleSelect>
+      )
+      const input = container.querySelector('input')
+
+      expect(input).toHaveAttribute('role', 'combobox')
+    })
+
+    it('should fire onChange when selected option changes', async () => {
+      const onChange = vi.fn()
+
+      await render(
+        <SimpleSelect renderLabel="Choose an option" onChange={onChange}>
+          {getOptions()}
+        </SimpleSelect>
+      )
+      const input = page.getByLabelText('Choose an option').element()
+
+      await userEvent.click(input)
+      await userEvent.click(page.getByRole('option').elements()[1])
+
+      await vi.waitFor(() => {
+        expect(onChange).toHaveBeenCalledOnce()
+        expect(onChange.mock.lastCall![1].id).toBe(defaultOptions[1])
+      })
+    })
+
+    it('should behave uncontrolled', async () => {
+      const onChange = vi.fn()
+
+      await render(
+        <SimpleSelect renderLabel="Choose an option" onChange={onChange}>
+          {getOptions()}
+        </SimpleSelect>
+      )
+      const input = page.getByLabelText('Choose an option').element()
+
+      expect(input).toHaveValue(defaultOptions[0])
+
+      await userEvent.click(input)
+      await userEvent.click(page.getByRole('option').elements()[1])
+
+      await vi.waitFor(() => {
+        expect(input).toHaveValue(defaultOptions[1])
+        expect(onChange).toHaveBeenCalledOnce()
+        expect(onChange.mock.lastCall![1].id).toBe(defaultOptions[1])
+      })
+    })
+
+    it('should behave controlled', async () => {
+      const onChange = vi.fn()
+
+      const { rerender } = await render(
+        <SimpleSelect
+          renderLabel="Choose an option"
+          value={defaultOptions[1]}
+          onChange={onChange}
+        >
+          {getOptions()}
+        </SimpleSelect>
+      )
+      const input = page.getByLabelText('Choose an option').element()
+
+      expect(input).toHaveValue(defaultOptions[1])
+
+      await userEvent.click(input)
+      await userEvent.click(page.getByRole('option').elements()[2])
+
+      await vi.waitFor(() => {
+        expect(onChange).toHaveBeenCalledOnce()
+        expect(onChange.mock.lastCall![1].id).toBe(defaultOptions[2])
+      })
+      expect(input).toHaveValue(defaultOptions[1])
+
+      // Set prop: value
+      await rerender(
+        <SimpleSelect
+          renderLabel="Choose an option"
+          value={defaultOptions[2]}
+          onChange={onChange}
+        >
+          {getOptions()}
+        </SimpleSelect>
+      )
+
+      await vi.waitFor(() => {
+        expect(input).toHaveValue(defaultOptions[2])
+      })
+    })
+  })
 })

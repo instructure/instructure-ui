@@ -22,17 +22,86 @@
  * SOFTWARE.
  */
 
-import { fireEvent } from '@testing-library/dom'
 import { render } from 'vitest-browser-react'
 import { page, userEvent } from 'vitest/browser'
+import { fireEvent } from '@testing-library/dom'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
-import conversions from '@instructure/ui-color-utils'
+import conversions, { colorToRGB, color2hex } from '@instructure/ui-color-utils'
+import { Button } from '@instructure/ui-buttons/latest'
 
 import { ContrastStrength } from '../v2/props.js'
-import { ColorPicker } from '@instructure/ui-color-picker/latest'
+import {
+  ColorPicker,
+  ColorMixer,
+  ColorPreset,
+  ColorContrast
+} from '@instructure/ui-color-picker/latest'
 import type { ColorPickerProps } from '@instructure/ui-color-picker/latest'
+
+const colorPreset = [
+  '#ffffff',
+  '#0CBF94',
+  '#0C89BF',
+  '#BF0C6D',
+  '#BF8D0C',
+  '#ff0000',
+  '#576A66',
+  '#35423A',
+  '#35423F'
+]
+
+const colorMixerSettings = {
+  popoverAddButtonLabel: 'add',
+  popoverCloseButtonLabel: 'close',
+  colorMixer: {
+    withAlpha: false,
+    rgbRedInputScreenReaderLabel: 'Red input',
+    rgbBlueInputScreenReaderLabel: 'Blue input',
+    colorSliderNavigationExplanationScreenReaderLabel: '',
+    colorPaletteNavigationExplanationScreenReaderLabel: '',
+    rgbAlphaInputScreenReaderLabel: '',
+    alphaSliderNavigationExplanationScreenReaderLabel: '',
+    rgbGreenInputScreenReaderLabel: 'Green input'
+  }
+}
+
+const presetIndicators = () =>
+  Array.from(
+    document.querySelectorAll(
+      'div[role="presentation"][class$="-colorIndicator"]'
+    )
+  )
+
+const indicatorColor = (indicator: Element) => {
+  const boxShadow = getComputedStyle(indicator).boxShadow
+
+  return colorToRGB(boxShadow.split(')')[0] + ')')
+}
+
+// Resolve the RGBA <input> from its (screen-reader) label via the label's
+// `for` association, instead of relying on the TextInput's internal DOM nesting
+const rgbaInput = (labelText: string) => {
+  const label = Array.from(document.querySelectorAll('label')).find(
+    (candidate) => candidate.textContent?.startsWith(labelText)
+  )!
+
+  return document.getElementById(label.htmlFor) as HTMLInputElement
+}
+
+// real browsers only accept a DataTransfer as `clipboardData`
+const pasteInto = (input: HTMLInputElement, text: string) => {
+  const clipboardData = new DataTransfer()
+  clipboardData.setData('text/plain', text)
+  input.dispatchEvent(
+    new ClipboardEvent('paste', {
+      clipboardData,
+      bubbles: true,
+      cancelable: true
+    })
+  )
+}
 
 const SimpleExample = (props: Partial<ColorPickerProps>) => {
   return (
@@ -98,7 +167,7 @@ describe('<ColorPicker />', () => {
       const input = page.getByRole('textbox').element()
 
       await userEvent.type(input, color)
-      fireEvent.blur(input)
+      fireEvent.focusOut(input)
 
       await vi.waitFor(() => {
         expect(input).toHaveValue(color)
@@ -112,7 +181,7 @@ describe('<ColorPicker />', () => {
       const input = page.getByRole('textbox').element()
 
       await userEvent.type(input, color)
-      fireEvent.blur(input)
+      fireEvent.focusOut(input)
 
       await vi.waitFor(() => {
         expect(input).toHaveValue(color)
@@ -126,7 +195,7 @@ describe('<ColorPicker />', () => {
       const input = page.getByRole('textbox').element()
 
       await userEvent.type(input, color)
-      fireEvent.blur(input)
+      fireEvent.focusOut(input)
 
       await vi.waitFor(() => {
         expect(input).not.toHaveValue(color)
@@ -140,7 +209,7 @@ describe('<ColorPicker />', () => {
       const input = page.getByRole('textbox').element()
 
       await userEvent.type(input, color)
-      fireEvent.blur(input)
+      fireEvent.focusOut(input)
 
       await vi.waitFor(() => {
         expect(input).toHaveValue('0CBF2D')
@@ -173,7 +242,7 @@ describe('<ColorPicker />', () => {
         const input = page.getByRole('textbox').element()
 
         await userEvent.type(input, colorToCheck)
-        fireEvent.blur(input)
+        fireEvent.focusOut(input)
 
         await vi.waitFor(() => {
           expect(input).toHaveValue(colorToCheck)
@@ -202,7 +271,7 @@ describe('<ColorPicker />', () => {
         const input = page.getByRole('textbox').element()
 
         await userEvent.type(input, colorToCheck)
-        fireEvent.blur(input)
+        fireEvent.focusOut(input)
 
         await vi.waitFor(() => {
           expect(input).toHaveValue(colorToCheck)
@@ -231,7 +300,7 @@ describe('<ColorPicker />', () => {
         const input = page.getByRole('textbox').element()
 
         await userEvent.type(input, colorToCheck)
-        fireEvent.blur(input)
+        fireEvent.focusOut(input)
 
         await vi.waitFor(() => {
           expect(input).toHaveValue(colorToCheck)
@@ -262,7 +331,7 @@ describe('<ColorPicker />', () => {
         const input = page.getByRole('textbox').element()
 
         await userEvent.type(input, colorToCheck)
-        fireEvent.blur(input)
+        fireEvent.focusOut(input)
 
         await vi.waitFor(() => {
           const successMessage = page
@@ -290,7 +359,7 @@ describe('<ColorPicker />', () => {
         const input = page.getByRole('textbox').element()
 
         await userEvent.type(input, colorToCheck)
-        fireEvent.blur(input)
+        fireEvent.focusOut(input)
 
         await vi.waitFor(() => {
           const warningMessage = page
@@ -318,7 +387,7 @@ describe('<ColorPicker />', () => {
         const input = page.getByRole('textbox').element()
 
         await userEvent.type(input, colorToCheck)
-        fireEvent.blur(input)
+        fireEvent.focusOut(input)
 
         await vi.waitFor(() => {
           const errorMessage = page
@@ -338,7 +407,7 @@ describe('<ColorPicker />', () => {
       const input = page.getByRole('textbox').element()
 
       fireEvent.change(input, { target: { value: 'FFF' } })
-      fireEvent.blur(input)
+      fireEvent.focusOut(input)
 
       await vi.waitFor(() => {
         expect(onChange).toHaveBeenLastCalledWith('#FFF')
@@ -359,8 +428,8 @@ describe('<ColorPicker />', () => {
       )
       const input = page.getByRole('textbox').element()
 
-      fireEvent.focus(input)
-      fireEvent.blur(input)
+      fireEvent.focusIn(input)
+      fireEvent.focusOut(input)
 
       await vi.waitFor(() => {
         const requiredMessage = page
@@ -382,7 +451,7 @@ describe('<ColorPicker />', () => {
       const input = page.getByRole('textbox').element()
 
       await userEvent.type(input, 'F')
-      fireEvent.blur(input)
+      fireEvent.focusOut(input)
 
       await vi.waitFor(() => {
         const errorMessage = page
@@ -406,9 +475,7 @@ describe('<ColorPicker />', () => {
         await render(<SimpleExample />)
         const input = page.getByRole('textbox').element() as HTMLInputElement
 
-        fireEvent.paste(input, {
-          clipboardData: { getData: () => '#FF0000' }
-        })
+        pasteInto(input, '#FF0000')
 
         await vi.waitFor(() => {
           expect(input).toHaveValue('FF0000')
@@ -419,9 +486,7 @@ describe('<ColorPicker />', () => {
         await render(<SimpleExample />)
         const input = page.getByRole('textbox').element() as HTMLInputElement
 
-        fireEvent.paste(input, {
-          clipboardData: { getData: () => 'FF00001' }
-        })
+        pasteInto(input, 'FF00001')
 
         await vi.waitFor(() => {
           expect(input).toHaveValue('')
@@ -432,9 +497,7 @@ describe('<ColorPicker />', () => {
         await render(<SimpleExample />)
         const input = page.getByRole('textbox').element() as HTMLInputElement
 
-        fireEvent.paste(input, {
-          clipboardData: { getData: () => 'ZZZZZZ' }
-        })
+        pasteInto(input, 'ZZZZZZ')
 
         await vi.waitFor(() => {
           expect(input).toHaveValue('')
@@ -449,9 +512,7 @@ describe('<ColorPicker />', () => {
         await vi.waitFor(() => expect(input).toHaveValue('FF0000'))
 
         input.setSelectionRange(0, 6)
-        fireEvent.paste(input, {
-          clipboardData: { getData: () => 'AABBCC' }
-        })
+        pasteInto(input, 'AABBCC')
 
         await vi.waitFor(() => {
           expect(input).toHaveValue('AABBCC')
@@ -467,9 +528,7 @@ describe('<ColorPicker />', () => {
 
         // select the two middle zeros (positions 2–4), paste FF → FFFF00
         input.setSelectionRange(2, 4)
-        fireEvent.paste(input, {
-          clipboardData: { getData: () => 'FF' }
-        })
+        pasteInto(input, 'FF')
 
         await vi.waitFor(() => {
           expect(input).toHaveValue('FFFF00')
@@ -484,9 +543,7 @@ describe('<ColorPicker />', () => {
         await vi.waitFor(() => expect(input).toHaveValue('0000'))
 
         input.setSelectionRange(0, 0)
-        fireEvent.paste(input, {
-          clipboardData: { getData: () => 'FF' }
-        })
+        pasteInto(input, 'FF')
 
         await vi.waitFor(() => {
           expect(input).toHaveValue('FF0000')
@@ -501,9 +558,7 @@ describe('<ColorPicker />', () => {
         await vi.waitFor(() => expect(input).toHaveValue('FF00'))
 
         input.setSelectionRange(2, 2)
-        fireEvent.paste(input, {
-          clipboardData: { getData: () => 'AB' }
-        })
+        pasteInto(input, 'AB')
 
         await vi.waitFor(() => {
           expect(input).toHaveValue('FFAB00')
@@ -518,9 +573,7 @@ describe('<ColorPicker />', () => {
         await vi.waitFor(() => expect(input).toHaveValue('0000'))
 
         input.setSelectionRange(4, 4)
-        fireEvent.paste(input, {
-          clipboardData: { getData: () => 'FF' }
-        })
+        pasteInto(input, 'FF')
 
         await vi.waitFor(() => {
           expect(input).toHaveValue('0000FF')
@@ -637,7 +690,7 @@ describe('<ColorPicker />', () => {
       const trigger = page.getByRole('button').element()
 
       await userEvent.type(input, color)
-      fireEvent.blur(input)
+      fireEvent.focusOut(input)
       fireEvent.click(trigger)
 
       await vi.waitFor(() => {
@@ -727,11 +780,13 @@ describe('<ColorPicker />', () => {
       )
 
       await vi.waitFor(() => {
-        expect(consoleWarningMock.mock.calls[0][0]).toEqual(
-          expect.stringContaining(
-            'Warning: You should either use children, colorMixerSettings or neither, not both. In this case, the colorMixerSettings will be ignored.'
+        expect(
+          consoleWarningMock.mock.calls.some((call: unknown[]) =>
+            String(call[0]).includes(
+              'Warning: You should either use children, colorMixerSettings or neither, not both. In this case, the colorMixerSettings will be ignored.'
+            )
           )
-        )
+        ).toBe(true)
       })
     })
 
@@ -751,5 +806,375 @@ describe('<ColorPicker />', () => {
 
       expect(axeCheck).toBe(true)
     })
+  })
+
+  it('should display the color which was typed in simple input mode', async () => {
+    const testColor = '0CBF2D'
+    await render(<SimpleExample />)
+
+    await userEvent.fill(page.getByRole('textbox'), testColor)
+
+    const indicator = document.querySelector('div[class$="-colorIndicator"]')!
+
+    expect(indicator).toBeInTheDocument()
+    expect(indicatorColor(indicator)).toEqual(colorToRGB(testColor))
+  })
+
+  it('should display the color in the trigger button in complex mode', async () => {
+    const testColor = '0374B5'
+    await render(<SimpleExample colorMixerSettings={colorMixerSettings} />)
+
+    await userEvent.fill(page.getByRole('textbox'), testColor)
+
+    const indicator = document.querySelector('div[class$="-colorIndicator"]')!
+
+    expect(indicator).toBeInTheDocument()
+    expect(indicatorColor(indicator)).toEqual(colorToRGB(testColor))
+  })
+
+  it('should display the list of colors passed to it in complex mode', async () => {
+    await render(
+      <SimpleExample
+        colorMixerSettings={{
+          ...colorMixerSettings,
+          colorPreset: { label: 'colors', colors: colorPreset }
+        }}
+      />
+    )
+
+    await userEvent.click(page.getByRole('button'))
+
+    const indicators = document.querySelectorAll(
+      'div[role="presentation"][class$="-colorIndicator"]'
+    )
+
+    expect(indicators.length).toBe(colorPreset.length)
+
+    indicators.forEach((indicator, index) => {
+      expect(indicatorColor(indicator)).toEqual(colorToRGB(colorPreset[index]))
+    })
+  })
+
+  it('should correctly set the color when picked from the list of colors in complex mode', async () => {
+    await render(
+      <SimpleExample
+        colorMixerSettings={{
+          ...colorMixerSettings,
+          colorPreset: { label: 'colors', colors: colorPreset }
+        }}
+      />
+    )
+
+    await userEvent.click(page.getByRole('button'))
+    await userEvent.click(presetIndicators()[1])
+    await userEvent.click(page.getByRole('button', { name: 'add' }))
+
+    await expect
+      .element(page.getByRole('textbox'))
+      .toHaveValue(colorPreset[1].substring(1))
+  })
+
+  it('should correctly call onChange with the color when picked from the list of colors in complex mode', async () => {
+    const onChange = vi.fn()
+    await render(
+      <SimpleExample
+        onChange={onChange}
+        colorMixerSettings={{
+          ...colorMixerSettings,
+          colorPreset: { label: 'colors', colors: colorPreset }
+        }}
+      />
+    )
+
+    await userEvent.click(page.getByRole('button'))
+    await userEvent.click(presetIndicators()[1])
+    await userEvent.click(page.getByRole('button', { name: 'add' }))
+
+    await vi.waitFor(() => {
+      expect(onChange).toHaveBeenCalledWith(colorPreset[1])
+    })
+  })
+
+  it('should display the text passed to ColorContrast in complex mode', async () => {
+    await render(
+      <SimpleExample
+        colorMixerSettings={{
+          ...colorMixerSettings,
+          colorContrast: {
+            firstColor: '#FFFF00',
+            label: 'Color Contrast Ratio',
+            successLabel: 'PASS',
+            failureLabel: 'FAIL',
+            normalTextLabel: 'Normal text',
+            largeTextLabel: 'Large text',
+            graphicsTextLabel: 'Graphics text',
+            firstColorLabel: 'Background',
+            secondColorLabel: 'Foreground'
+          }
+        }}
+      />
+    )
+
+    await userEvent.click(page.getByRole('button'))
+
+    const colorContrast = document.querySelector('div[class$="-colorContrast"]')
+
+    expect(colorContrast).toHaveTextContent('Normal text')
+    expect(colorContrast).toHaveTextContent('Large text')
+    expect(colorContrast).toHaveTextContent('Graphics text')
+  })
+
+  it('should display the correct color in the colormixer when the input is prefilled in custom popover mode', async () => {
+    const testColor = '0374B5'
+    const expectedColor = colorToRGB(`#${testColor}`)
+
+    await render(
+      <SimpleExample>
+        {(value, onChange, handleAdd, handleClose) => (
+          <div>
+            <ColorMixer
+              withAlpha
+              value={value}
+              onChange={onChange}
+              rgbRedInputScreenReaderLabel="Input field for red"
+              rgbGreenInputScreenReaderLabel="Input field for green"
+              rgbBlueInputScreenReaderLabel="Input field for blue"
+              rgbAlphaInputScreenReaderLabel="Input field for alpha"
+              colorSliderNavigationExplanationScreenReaderLabel="Label"
+              alphaSliderNavigationExplanationScreenReaderLabel="Label"
+              colorPaletteNavigationExplanationScreenReaderLabel="Label"
+            />
+            <div>
+              <Button onClick={handleAdd}>add</Button>
+              <Button onClick={handleClose}>close</Button>
+            </div>
+          </div>
+        )}
+      </SimpleExample>
+    )
+
+    await userEvent.fill(page.getByRole('textbox'), testColor)
+    await userEvent.click(page.getByRole('button'))
+
+    await vi.waitFor(() => {
+      expect(rgbaInput('Input field for red')).toHaveValue(`${expectedColor.r}`)
+      expect(rgbaInput('Input field for green')).toHaveValue(
+        `${expectedColor.g}`
+      )
+      expect(rgbaInput('Input field for blue')).toHaveValue(
+        `${expectedColor.b}`
+      )
+      expect(rgbaInput('Input field for alpha')).toHaveValue('100')
+    })
+  })
+
+  it('should trigger onChange when selected color is added from colorMixer in custom popover mode', async () => {
+    const onChange = vi.fn()
+    const rgb = { r: 131, g: 6, b: 25, a: 1 }
+
+    await render(
+      <SimpleExample onChange={onChange}>
+        {(value, mixerOnChange, handleAdd, handleClose) => (
+          <div>
+            <ColorMixer
+              withAlpha
+              value={value}
+              onChange={mixerOnChange}
+              rgbRedInputScreenReaderLabel="Input field for red"
+              rgbGreenInputScreenReaderLabel="Input field for green"
+              rgbBlueInputScreenReaderLabel="Input field for blue"
+              rgbAlphaInputScreenReaderLabel="Input field for alpha"
+              colorSliderNavigationExplanationScreenReaderLabel="Label"
+              alphaSliderNavigationExplanationScreenReaderLabel="Label"
+              colorPaletteNavigationExplanationScreenReaderLabel="Label"
+            />
+            <div>
+              <Button onClick={handleAdd}>add</Button>
+              <Button onClick={handleClose}>close</Button>
+            </div>
+          </div>
+        )}
+      </SimpleExample>
+    )
+
+    await userEvent.click(page.getByRole('button'))
+
+    await userEvent.fill(rgbaInput('Input field for red'), `${rgb.r}`)
+    await userEvent.fill(rgbaInput('Input field for green'), `${rgb.g}`)
+    await userEvent.fill(rgbaInput('Input field for blue'), `${rgb.b}`)
+
+    await userEvent.click(page.getByRole('button', { name: 'add' }))
+
+    await vi.waitFor(() => {
+      expect(onChange).toHaveBeenCalledWith(color2hex(rgb))
+    })
+  })
+
+  it('should display the color in the trigger button in custom popover mode', async () => {
+    const testColor = '0374B5'
+
+    await render(
+      <SimpleExample>
+        {(value, onChange, handleAdd, handleClose) => (
+          <div>
+            <ColorMixer
+              withAlpha
+              value={value}
+              onChange={onChange}
+              rgbRedInputScreenReaderLabel="Label"
+              rgbGreenInputScreenReaderLabel="Label"
+              rgbBlueInputScreenReaderLabel="Label"
+              rgbAlphaInputScreenReaderLabel="Label"
+              colorSliderNavigationExplanationScreenReaderLabel="Label"
+              alphaSliderNavigationExplanationScreenReaderLabel="Label"
+              colorPaletteNavigationExplanationScreenReaderLabel="Label"
+            />
+            <div>
+              <Button onClick={handleAdd}>add</Button>
+              <Button onClick={handleClose}>close</Button>
+            </div>
+          </div>
+        )}
+      </SimpleExample>
+    )
+
+    await userEvent.fill(page.getByRole('textbox'), testColor)
+
+    const indicator = document.querySelector('div[class$="-colorIndicator"]')!
+
+    expect(indicator).toBeInTheDocument()
+    expect(indicatorColor(indicator)).toEqual(colorToRGB(testColor))
+  })
+
+  it('should display the list of colors passed to it in custom popover mode', async () => {
+    await render(
+      <SimpleExample>
+        {(value, onChange, handleAdd, handleClose) => (
+          <div>
+            <ColorPreset
+              label="Choose a color"
+              colors={colorPreset}
+              selected={value}
+              onSelect={onChange}
+            />
+            <div>
+              <Button onClick={handleAdd}>add</Button>
+              <Button onClick={handleClose}>close</Button>
+            </div>
+          </div>
+        )}
+      </SimpleExample>
+    )
+
+    await userEvent.click(page.getByRole('button'))
+
+    const indicators = presetIndicators()
+
+    expect(indicators.length).toBe(colorPreset.length)
+
+    indicators.forEach((indicator, index) => {
+      expect(indicatorColor(indicator)).toEqual(colorToRGB(colorPreset[index]))
+    })
+  })
+
+  it('should correctly set the color when picked from the list of colors in custom popover mode', async () => {
+    await render(
+      <SimpleExample>
+        {(value, onChange, handleAdd, handleClose) => (
+          <div>
+            <ColorPreset
+              label="Choose a color"
+              colors={colorPreset}
+              selected={value}
+              onSelect={onChange}
+            />
+            <div>
+              <Button onClick={handleAdd}>add</Button>
+              <Button onClick={handleClose}>close</Button>
+            </div>
+          </div>
+        )}
+      </SimpleExample>
+    )
+
+    await userEvent.click(page.getByRole('button'))
+    await userEvent.click(presetIndicators()[3])
+    await userEvent.click(page.getByRole('button', { name: 'add' }))
+
+    await expect
+      .element(page.getByRole('textbox'))
+      .toHaveValue(colorPreset[3].substring(1))
+  })
+
+  it('should correctly call onChange with the color when picked from the list of colors in custom popover mode', async () => {
+    const onChange = vi.fn()
+
+    await render(
+      <SimpleExample onChange={onChange}>
+        {(value, presetOnChange, handleAdd, handleClose) => (
+          <div>
+            <ColorPreset
+              label="Choose a color"
+              colors={colorPreset}
+              selected={value}
+              onSelect={presetOnChange}
+            />
+            <div>
+              <Button onClick={handleAdd}>add</Button>
+              <Button onClick={handleClose}>close</Button>
+            </div>
+          </div>
+        )}
+      </SimpleExample>
+    )
+
+    await userEvent.click(page.getByRole('button'))
+    await userEvent.click(presetIndicators()[3])
+    await userEvent.click(page.getByRole('button', { name: 'add' }))
+
+    await vi.waitFor(() => {
+      expect(onChange).toHaveBeenCalledWith(colorPreset[3])
+    })
+  })
+
+  it('should display the text passed to ColorContrast in custom popover mode', async () => {
+    await render(
+      <SimpleExample>
+        {(value, onChange, handleAdd, handleClose) => (
+          <div>
+            <ColorPreset
+              label="Choose a color"
+              colors={colorPreset}
+              selected={value}
+              onSelect={onChange}
+            />
+            <ColorContrast
+              firstColor="#FFFF00"
+              secondColor={value}
+              label="Color Contrast Ratio"
+              successLabel="PASS"
+              failureLabel="FAIL"
+              normalTextLabel="Normal text"
+              largeTextLabel="Large text"
+              graphicsTextLabel="Graphics text"
+              firstColorLabel="Background"
+              secondColorLabel="Foreground"
+            />
+            <div>
+              <Button onClick={handleAdd}>add</Button>
+              <Button onClick={handleClose}>close</Button>
+            </div>
+          </div>
+        )}
+      </SimpleExample>
+    )
+
+    await userEvent.click(page.getByRole('button'))
+
+    const colorContrast = document.querySelector('div[class$="-colorContrast"]')
+
+    expect(colorContrast).toHaveTextContent('Normal text')
+    expect(colorContrast).toHaveTextContent('Large text')
+    expect(colorContrast).toHaveTextContent('Graphics text')
   })
 })

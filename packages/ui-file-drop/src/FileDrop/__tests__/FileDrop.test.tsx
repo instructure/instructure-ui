@@ -22,7 +22,9 @@
  * SOFTWARE.
  */
 
+import { fireEvent } from '@testing-library/dom'
 import { render } from 'vitest-browser-react'
+import { userEvent } from 'vitest/browser'
 import { describe, it, expect, vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { FileDrop } from '@instructure/ui-file-drop/latest'
@@ -152,6 +154,261 @@ describe('<FileDrop/>', () => {
 
       expect(result.isDragAccepted).toBe(false)
       expect(result.isDragRejected).toBe(false)
+    })
+  })
+
+  describe('Component tests', () => {
+    // Chrome's `DragEvent` constructor ignores the `dataTransfer` passed in
+    // its init dict, so the drop event has to be assembled by hand
+    const dropFile = (target: Element, file: File) => {
+      const dataTransfer = new DataTransfer()
+      dataTransfer.items.add(file)
+      const event = new Event('drop', { bubbles: true, cancelable: true })
+      Object.defineProperty(event, 'dataTransfer', { value: dataTransfer })
+      target.dispatchEvent(event)
+    }
+
+    describe('file-type checking when onDrop', () => {
+      it('responds to drop event', async () => {
+        const onDrop = vi.fn()
+        const { container } = await render(
+          <FileDrop renderLabel="fake label" onDrop={onDrop} />
+        )
+
+        fireEvent.drop(container.querySelector('label')!)
+
+        expect(onDrop).toHaveBeenCalled()
+      })
+
+      it('responds to change event', async () => {
+        const onDrop = vi.fn()
+        const { container } = await render(
+          <FileDrop renderLabel="fake label" onDrop={onDrop} />
+        )
+
+        fireEvent.change(container.querySelector('input[type="file"]')!)
+
+        expect(onDrop).toHaveBeenCalled()
+      })
+
+      it('accepts correct files using mimetypes', async () => {
+        const onDrop = vi.fn()
+        const onDropAccepted = vi.fn()
+        const onDropRejected = vi.fn()
+        const { container } = await render(
+          <FileDrop
+            renderLabel="fake label"
+            accept="image/*"
+            onDrop={onDrop}
+            onDropAccepted={onDropAccepted}
+            onDropRejected={onDropRejected}
+          />
+        )
+        const file = new File([''], 'napoleon.png', { type: 'image/png' })
+
+        dropFile(container.querySelector('label')!, file)
+
+        expect(onDrop).toHaveBeenCalled()
+        const [accepted, rejected] = onDrop.mock.lastCall!
+        expect(accepted).toEqual([file])
+        expect(rejected).toEqual([])
+
+        expect(onDropAccepted).toHaveBeenCalled()
+        expect(onDropRejected).not.toHaveBeenCalled()
+      })
+
+      it('rejects incorrect files using mimetypes and shouldEnablePreview', async () => {
+        const onDrop = vi.fn()
+        const onDropAccepted = vi.fn()
+        const onDropRejected = vi.fn()
+        const { container } = await render(
+          <FileDrop
+            renderLabel="fake label"
+            shouldEnablePreview
+            accept="image/*"
+            onDrop={onDrop}
+            onDropAccepted={onDropAccepted}
+            onDropRejected={onDropRejected}
+          />
+        )
+        const file = new File([''], 'napoleon.pdf', {
+          type: 'application/pdf'
+        })
+
+        dropFile(container.querySelector('label')!, file)
+
+        expect(onDrop).toHaveBeenCalled()
+        const [accepted, rejected] = onDrop.mock.lastCall!
+        expect(accepted).toEqual([])
+        expect(rejected).toEqual([file])
+
+        expect(onDropAccepted).not.toHaveBeenCalled()
+        expect(onDropRejected).toHaveBeenCalled()
+      })
+
+      it('accepts correct files using mimetypes and enablePreview', async () => {
+        const onDrop = vi.fn()
+        const onDropAccepted = vi.fn()
+        const onDropRejected = vi.fn()
+        const { container } = await render(
+          <FileDrop
+            renderLabel="fake label"
+            accept="image/*"
+            shouldEnablePreview
+            onDrop={onDrop}
+            onDropAccepted={onDropAccepted}
+            onDropRejected={onDropRejected}
+          />
+        )
+        const file = new File([''], 'napoleon.png', { type: 'image/png' })
+
+        dropFile(container.querySelector('label')!, file)
+
+        expect(onDrop).toHaveBeenCalled()
+        const [accepted, rejected] = onDrop.mock.lastCall!
+        expect(accepted).toEqual([file])
+        expect(rejected).toEqual([])
+
+        expect(onDropAccepted).toHaveBeenCalled()
+        expect(onDropRejected).not.toHaveBeenCalled()
+      })
+
+      it('accepts correct files using extensions', async () => {
+        const onDrop = vi.fn()
+        const onDropAccepted = vi.fn()
+        const onDropRejected = vi.fn()
+        const { container } = await render(
+          <FileDrop
+            renderLabel="fake label"
+            accept="jpeg"
+            onDrop={onDrop}
+            onDropAccepted={onDropAccepted}
+            onDropRejected={onDropRejected}
+          />
+        )
+        const file = new File([''], 'napoleon.jpeg', { type: 'image/jpeg' })
+
+        dropFile(container.querySelector('label')!, file)
+
+        expect(onDrop).toHaveBeenCalled()
+        const [accepted, rejected] = onDrop.mock.lastCall!
+        expect(accepted).toEqual([file])
+        expect(rejected).toEqual([])
+
+        expect(onDropAccepted).toHaveBeenCalled()
+        expect(onDropRejected).not.toHaveBeenCalled()
+      })
+
+      it('rejects incorrect files using mimetypes', async () => {
+        const onDrop = vi.fn()
+        const onDropAccepted = vi.fn()
+        const onDropRejected = vi.fn()
+        const { container } = await render(
+          <FileDrop
+            renderLabel="fake label"
+            accept="image/*"
+            onDrop={onDrop}
+            onDropAccepted={onDropAccepted}
+            onDropRejected={onDropRejected}
+          />
+        )
+        const file = new File([''], 'napoleon.pdf', {
+          type: 'application/pdf'
+        })
+
+        dropFile(container.querySelector('label')!, file)
+
+        expect(onDrop).toHaveBeenCalled()
+        const [accepted, rejected] = onDrop.mock.lastCall!
+        expect(accepted).toEqual([])
+        expect(rejected).toEqual([file])
+
+        expect(onDropAccepted).not.toHaveBeenCalled()
+        expect(onDropRejected).toHaveBeenCalled()
+      })
+
+      it('rejects incorrect files using extensions', async () => {
+        const onDrop = vi.fn()
+        const onDropAccepted = vi.fn()
+        const onDropRejected = vi.fn()
+        const { container } = await render(
+          <FileDrop
+            renderLabel="fake label"
+            accept="jpeg"
+            onDrop={onDrop}
+            onDropAccepted={onDropAccepted}
+            onDropRejected={onDropRejected}
+          />
+        )
+        const file = new File([''], 'napoleon.pdf', {
+          type: 'application/pdf'
+        })
+
+        dropFile(container.querySelector('label')!, file)
+
+        expect(onDrop).toHaveBeenCalled()
+        const [accepted, rejected] = onDrop.mock.lastCall!
+        expect(accepted).toEqual([])
+        expect(rejected).toEqual([file])
+
+        expect(onDropAccepted).not.toHaveBeenCalled()
+        expect(onDropRejected).toHaveBeenCalled()
+      })
+    })
+
+    describe('onDrag events', () => {
+      it('responds to onDragEnter event', async () => {
+        const onDragEnter = vi.fn()
+        const { container } = await render(
+          <FileDrop renderLabel="fake label" onDragEnter={onDragEnter} />
+        )
+
+        fireEvent.dragEnter(container.querySelector('label')!)
+
+        expect(onDragEnter).toHaveBeenCalled()
+      })
+
+      it('responds to onDragOver event', async () => {
+        const onDragOver = vi.fn()
+        const { container } = await render(
+          <FileDrop renderLabel="fake label" onDragOver={onDragOver} />
+        )
+
+        fireEvent.dragOver(container.querySelector('label')!)
+
+        expect(onDragOver).toHaveBeenCalled()
+      })
+
+      it('responds to onDragLeave event', async () => {
+        const onDragLeave = vi.fn()
+        const { container } = await render(
+          <FileDrop renderLabel="fake label" onDragLeave={onDragLeave} />
+        )
+
+        fireEvent.dragLeave(container.querySelector('label')!)
+
+        expect(onDragLeave).toHaveBeenCalled()
+      })
+    })
+
+    it('stops propagation when the ESC key is released and file browser is open', async () => {
+      const { container } = await render(<FileDrop renderLabel="fake label" />)
+      const input = container.querySelector('input')!
+
+      // clicking the label would open the real file browser dialog, so the
+      // input's click handler (it flags the dialog as open) is fired directly
+      fireEvent.click(input, { button: 0, detail: 1 })
+      await vi.waitFor(() => expect(input).toHaveFocus())
+
+      const stopPropagationSpy = vi.fn()
+      input.addEventListener('keyup', (event) => {
+        // eslint-disable-next-line no-param-reassign
+        event.stopPropagation = stopPropagationSpy
+      })
+
+      await userEvent.keyboard('{Escape}')
+
+      expect(stopPropagationSpy).toHaveBeenCalled()
     })
   })
 })

@@ -24,7 +24,7 @@
 
 import { fireEvent } from '@testing-library/dom'
 import { render } from 'vitest-browser-react'
-import { page } from 'vitest/browser'
+import { page, userEvent } from 'vitest/browser'
 import { describe, it, expect, vi } from 'vitest'
 
 import { MenuItem } from '@instructure/ui-menu/latest'
@@ -160,5 +160,73 @@ describe('<MenuItem />', () => {
     const menuItem = container.querySelector("span[class$='-menuItem']")
 
     expect(menuItem).toHaveAttribute('role', 'menuitemradio')
+  })
+
+  describe('Component tests', () => {
+    it('should call onSelect after SPACE key is pressed', async () => {
+      const onSelect = vi.fn()
+      await render(
+        <MenuItem onSelect={onSelect} value="menu_item_value">
+          Menu Item Text
+        </MenuItem>
+      )
+      const menuItem = page.getByRole('menuitem').element() as HTMLElement
+
+      menuItem.focus()
+      await userEvent.keyboard(' ')
+
+      expect(onSelect).toHaveBeenCalledOnce()
+      expect(onSelect.mock.calls[0][1]).toEqual('menu_item_value')
+      expect(onSelect.mock.calls[0][2]).toEqual(true)
+
+      await userEvent.keyboard(' ')
+
+      expect(onSelect).toHaveBeenCalledTimes(2)
+      expect(onSelect.mock.calls[1][1]).toEqual('menu_item_value')
+      expect(onSelect.mock.calls[1][2]).toEqual(false)
+    })
+
+    it('should call onSelect after ENTER key is pressed', async () => {
+      const onSelect = vi.fn()
+      await render(
+        <MenuItem onSelect={onSelect} value="menu_item_value">
+          Menu Item Text
+        </MenuItem>
+      )
+      const menuItem = page.getByRole('menuitem').element() as HTMLElement
+
+      menuItem.focus()
+      await userEvent.keyboard('{Enter}')
+
+      expect(onSelect).toHaveBeenCalledOnce()
+      expect(onSelect.mock.calls[0][1]).toEqual('menu_item_value')
+      expect(onSelect.mock.calls[0][2]).toEqual(true)
+
+      await userEvent.keyboard('{Enter}')
+
+      expect(onSelect).toHaveBeenCalledTimes(2)
+      expect(onSelect.mock.calls[1][1]).toEqual('menu_item_value')
+      expect(onSelect.mock.calls[1][2]).toEqual(false)
+    })
+
+    it('should not be able to select when the disabled prop is set', async () => {
+      const onSelect = vi.fn()
+      await render(
+        <MenuItem onSelect={onSelect} disabled>
+          Menu Item Text
+        </MenuItem>
+      )
+      const menuItem = page.getByRole('menuitem').element() as HTMLElement
+
+      expect(menuItem).toHaveAttribute('aria-disabled', 'true')
+
+      // a real click can't be sent to the disabled item, so dispatch the event
+      fireEvent.click(menuItem, { button: 0, detail: 1 })
+      menuItem.focus()
+      await userEvent.keyboard('{Enter}')
+      await userEvent.keyboard(' ')
+
+      expect(onSelect).not.toHaveBeenCalled()
+    })
   })
 })

@@ -223,10 +223,11 @@ describe('<ColorMixer />', () => {
       expect(colorHex).toBe('#000000FF')
 
       await vi.waitFor(() => {
-        expect(consoleWarningMock.mock.calls[0][0]).toEqual(
+        expect(consoleWarningMock).toHaveBeenCalledWith(
           expect.stringContaining(
             'Warning: [ColorMixer] The passed color value is not valid.'
-          )
+          ),
+          expect.anything()
         )
       })
     })
@@ -617,5 +618,614 @@ describe('<ColorMixer />', () => {
         expect(inputs[3]).not.toHaveValue(invalidColor)
       })
     })
+  })
+
+  const hueSlider = () =>
+    document.querySelector<HTMLElement>(
+      `[role="slider"][aria-label="${testScreenReaderLabels.colorSliderNavigationExplanationScreenReaderLabel}"]`
+    )!
+
+  const alphaSlider = () =>
+    document.querySelector<HTMLElement>(
+      `[role="slider"][aria-label="${testScreenReaderLabels.alphaSliderNavigationExplanationScreenReaderLabel}"]`
+    )!
+
+  const palette = () =>
+    document.querySelector<HTMLElement>(
+      `[role="button"][aria-label="${testScreenReaderLabels.colorPaletteNavigationExplanationScreenReaderLabel}"]`
+    )!
+
+  const sliderIndicator = (slider: HTMLElement) =>
+    slider.querySelector('[class*=-colorMixerSlider__indicator]')!
+
+  const paletteIndicator = () =>
+    palette().querySelector('[class*=-ColorPalette__indicator]')!
+
+  // the component maps pointer coordinates against this inner element, so
+  // clicks are positioned relative to it
+  const paletteSurface = () =>
+    document.querySelector<HTMLElement>('[class*=-ColorPalette__palette]')!
+
+  it('should change hue value when click at the middle of the slider', async () => {
+    const onChange = vi.fn()
+    await render(
+      <ColorMixer
+        {...testInputLabels}
+        {...testScreenReaderLabels}
+        onChange={onChange}
+      />
+    )
+    const slider = hueSlider()
+    const rect = slider.getBoundingClientRect()
+
+    await userEvent.click(slider, {
+      position: { x: rect.width / 2, y: rect.height / 2 }
+    })
+
+    await vi.waitFor(() => {
+      expect(onChange).toHaveBeenCalled()
+    })
+  })
+
+  it('should change hue value when click at the end of the slider', async () => {
+    const onChange = vi.fn()
+    await render(
+      <ColorMixer
+        {...testInputLabels}
+        {...testScreenReaderLabels}
+        onChange={onChange}
+      />
+    )
+    const slider = hueSlider()
+    const rect = slider.getBoundingClientRect()
+
+    await userEvent.click(slider, {
+      position: { x: rect.width - 1, y: rect.height / 2 }
+    })
+
+    await vi.waitFor(() => {
+      expect(onChange).toHaveBeenCalled()
+    })
+  })
+
+  it('should change hue value when click at the beginning of the slider', async () => {
+    const onChange = vi.fn()
+    await render(
+      <ColorMixer
+        value="#00FF00"
+        {...testInputLabels}
+        {...testScreenReaderLabels}
+        onChange={onChange}
+      />
+    )
+    const slider = hueSlider()
+    const rect = slider.getBoundingClientRect()
+
+    await userEvent.click(slider, {
+      position: { x: 1, y: rect.height / 2 }
+    })
+
+    // Because we already passed the `value` that different from the default value then the component changes their color once, so if we want to test with any action after that, `onChange` should be called twice.
+    await vi.waitFor(() => {
+      expect(onChange).toHaveBeenCalledTimes(2)
+    })
+  })
+
+  for (const key of ['a', 'd', '{ArrowLeft}', '{ArrowRight}']) {
+    it(`should hue value change with '${key}' key pressed`, async () => {
+      const onChange = vi.fn()
+      await render(
+        <ColorMixer
+          {...testValue}
+          {...testInputLabels}
+          {...testScreenReaderLabels}
+          onChange={onChange}
+        />
+      )
+
+      hueSlider().focus()
+      await userEvent.keyboard(key)
+
+      await vi.waitFor(() => {
+        expect(onChange).toHaveBeenCalledTimes(2)
+      })
+    })
+  }
+
+  it('the hue indicator move left', async () => {
+    await render(
+      <ColorMixer
+        {...testValue}
+        {...testInputLabels}
+        {...testScreenReaderLabels}
+        onChange={vi.fn()}
+      />
+    )
+    const slider = hueSlider()
+    const indicator = sliderIndicator(slider)
+    const pos1 = indicator.getBoundingClientRect().x
+
+    slider.focus()
+    await userEvent.keyboard('a')
+    const pos2 = indicator.getBoundingClientRect().x
+    expect(pos2).toBeLessThan(pos1)
+
+    await userEvent.keyboard('{ArrowLeft}')
+    const pos3 = indicator.getBoundingClientRect().x
+    expect(pos3).toBeLessThan(pos2)
+  })
+
+  it('the hue indicator move right', async () => {
+    await render(
+      <ColorMixer
+        {...testValue}
+        {...testInputLabels}
+        {...testScreenReaderLabels}
+        onChange={vi.fn()}
+      />
+    )
+    const slider = hueSlider()
+    const indicator = sliderIndicator(slider)
+    const pos1 = indicator.getBoundingClientRect().x
+
+    slider.focus()
+    await userEvent.keyboard('d')
+    const pos2 = indicator.getBoundingClientRect().x
+    expect(pos2).toBeGreaterThan(pos1)
+
+    await userEvent.keyboard('{ArrowRight}')
+    const pos3 = indicator.getBoundingClientRect().x
+    expect(pos3).toBeGreaterThan(pos2)
+  })
+
+  it('should not move the hue indicator when reach the left border', async () => {
+    await render(
+      <ColorMixer
+        value={conversions.colorToHex8({ h: 0, s: 0.5, v: 0.5 })}
+        {...testInputLabels}
+        {...testScreenReaderLabels}
+        onChange={vi.fn()}
+      />
+    )
+    const slider = hueSlider()
+    const indicator = sliderIndicator(slider)
+    const pos1 = indicator.getBoundingClientRect().x
+
+    slider.focus()
+    await userEvent.keyboard('a')
+    const pos2 = indicator.getBoundingClientRect().x
+    expect(pos2).toEqual(pos1)
+
+    await userEvent.keyboard('{ArrowLeft}')
+    const pos3 = indicator.getBoundingClientRect().x
+    expect(pos3).toEqual(pos2)
+  })
+
+  it('should not move the hue indicator when reach the right border', async () => {
+    await render(
+      <ColorMixer
+        value="#FF0001"
+        {...testInputLabels}
+        {...testScreenReaderLabels}
+        onChange={vi.fn()}
+      />
+    )
+    const slider = hueSlider()
+
+    // Initial positioning to reach the right end of the slider
+    slider.focus()
+    await userEvent.keyboard('{ArrowRight}')
+    await userEvent.keyboard('{ArrowRight}')
+
+    const indicator = sliderIndicator(slider)
+    const pos1 = indicator.getBoundingClientRect().x
+
+    slider.focus()
+    await userEvent.keyboard('d')
+    const pos2 = indicator.getBoundingClientRect().x
+    expect(pos2).toEqual(pos1)
+
+    await userEvent.keyboard('{ArrowRight}')
+    const pos3 = indicator.getBoundingClientRect().x
+    expect(pos3).toEqual(pos2)
+  })
+
+  it('should change alpha value when click at the beginning of the bar', async () => {
+    const onChange = vi.fn()
+    await render(
+      <ColorMixer
+        withAlpha
+        value="#abcdefff"
+        {...testInputLabels}
+        {...testScreenReaderLabels}
+        onChange={onChange}
+      />
+    )
+    const slider = alphaSlider()
+    const rect = slider.getBoundingClientRect()
+
+    await userEvent.click(slider, { position: { x: 1, y: rect.height / 2 } })
+
+    await vi.waitFor(() => {
+      expect(onChange).toHaveBeenCalledTimes(2)
+    })
+  })
+
+  it('should change alpha value when click at the end of the bar', async () => {
+    const onChange = vi.fn()
+    await render(
+      <ColorMixer
+        withAlpha
+        value="#000000cc"
+        {...testInputLabels}
+        {...testScreenReaderLabels}
+        onChange={onChange}
+      />
+    )
+    const slider = alphaSlider()
+    const rect = slider.getBoundingClientRect()
+
+    await userEvent.click(slider, {
+      position: { x: rect.width - 1, y: rect.height / 2 }
+    })
+
+    await vi.waitFor(() => {
+      expect(onChange).toHaveBeenCalledTimes(2)
+    })
+  })
+
+  it('should change alpha value when click at the middle of the slider', async () => {
+    const onChange = vi.fn()
+    await render(
+      <ColorMixer
+        withAlpha
+        value="#00000000"
+        {...testInputLabels}
+        {...testScreenReaderLabels}
+        onChange={onChange}
+      />
+    )
+    const slider = alphaSlider()
+    const rect = slider.getBoundingClientRect()
+
+    await userEvent.click(slider, {
+      position: { x: rect.width / 2, y: rect.height / 2 }
+    })
+
+    await vi.waitFor(() => {
+      expect(onChange).toHaveBeenCalledTimes(2)
+    })
+  })
+
+  for (const key of ['{ArrowRight}', '{ArrowLeft}', 'a', 'd']) {
+    it(`should alpha value change with '${key}' key pressed`, async () => {
+      const onChange = vi.fn()
+      await render(
+        <ColorMixer
+          withAlpha
+          value="#000000AA"
+          {...testInputLabels}
+          {...testScreenReaderLabels}
+          onChange={onChange}
+        />
+      )
+
+      alphaSlider().focus()
+      await userEvent.keyboard(key)
+
+      await vi.waitFor(() => {
+        expect(onChange).toHaveBeenCalledTimes(2)
+      })
+    })
+  }
+
+  it('should not move the alpha indicator when reach the left border', async () => {
+    await render(
+      <ColorMixer
+        withAlpha
+        value="#80404100"
+        {...testInputLabels}
+        {...testScreenReaderLabels}
+        onChange={vi.fn()}
+      />
+    )
+    const slider = alphaSlider()
+    const indicator = sliderIndicator(slider)
+    const pos1 = indicator.getBoundingClientRect().x
+
+    slider.focus()
+    await userEvent.keyboard('a')
+    const pos2 = indicator.getBoundingClientRect().x
+    expect(pos2).toEqual(pos1)
+
+    await userEvent.keyboard('{ArrowLeft}')
+    const pos3 = indicator.getBoundingClientRect().x
+    expect(pos3).toEqual(pos2)
+  })
+
+  it('should not move the alpha indicator when reach the right border', async () => {
+    await render(
+      <ColorMixer
+        withAlpha
+        value="#804041FF"
+        {...testInputLabels}
+        {...testScreenReaderLabels}
+        onChange={vi.fn()}
+      />
+    )
+    const slider = alphaSlider()
+    const indicator = sliderIndicator(slider)
+    const pos1 = indicator.getBoundingClientRect().x
+
+    slider.focus()
+    await userEvent.keyboard('d')
+    const pos2 = indicator.getBoundingClientRect().x
+    expect(pos2).toEqual(pos1)
+
+    await userEvent.keyboard('{ArrowRight}')
+    const pos3 = indicator.getBoundingClientRect().x
+    expect(pos3).toEqual(pos2)
+  })
+
+  it('should palette change the color when mousedown event is received inside the palette', async () => {
+    const onChange = vi.fn()
+    await render(
+      <ColorMixer
+        {...testInputLabels}
+        {...testScreenReaderLabels}
+        onChange={onChange}
+      />
+    )
+    const surface = paletteSurface()
+    const rect = surface.getBoundingClientRect()
+
+    await userEvent.click(surface, {
+      position: { x: rect.width / 2, y: rect.height / 2 }
+    })
+
+    await vi.waitFor(() => {
+      expect(onChange).toHaveBeenCalledWith('#783A3AFF')
+    })
+  })
+
+  const paletteClickPositions: [
+    string,
+    (rect: DOMRect) => { x: number; y: number }
+  ][] = [
+    ['the top border', (rect) => ({ x: rect.width / 2, y: 1 })],
+    [
+      'the bottom border',
+      (rect) => ({ x: rect.width / 2, y: rect.height - 4 })
+    ],
+    ['the left border', (rect) => ({ x: 1, y: rect.height / 2 })],
+    ['the right border', (rect) => ({ x: rect.width - 2, y: rect.height / 2 })],
+    ['the top left corner', () => ({ x: 1, y: 1 })],
+    ['the top right corner', (rect) => ({ x: rect.width - 2, y: 1 })],
+    [
+      'the bottom right corner',
+      (rect) => ({ x: rect.width - 4, y: rect.height - 4 })
+    ],
+    ['the bottom left corner', (rect) => ({ x: 2, y: rect.height - 2 })]
+  ]
+
+  for (const [name, getPosition] of paletteClickPositions) {
+    it(`should palette change the color when mousedown event is received at ${name}`, async () => {
+      const onChange = vi.fn()
+      await render(
+        <ColorMixer
+          {...testInputLabels}
+          {...testScreenReaderLabels}
+          onChange={onChange}
+        />
+      )
+      const surface = paletteSurface()
+
+      await userEvent.click(surface, {
+        position: getPosition(surface.getBoundingClientRect())
+      })
+
+      await vi.waitFor(() => {
+        expect(onChange).toHaveBeenCalled()
+      })
+    })
+  }
+
+  for (const key of [
+    'a',
+    'w',
+    's',
+    'd',
+    '{ArrowLeft}',
+    '{ArrowRight}',
+    '{ArrowUp}',
+    '{ArrowDown}'
+  ]) {
+    it(`should onChange is call when the palette receive event from keyboard '${key}'`, async () => {
+      const onChange = vi.fn()
+      await render(
+        <ColorMixer
+          {...testValue}
+          {...testInputLabels}
+          {...testScreenReaderLabels}
+          onChange={onChange}
+        />
+      )
+
+      palette().focus()
+      await userEvent.keyboard(key)
+
+      // use `toHaveBeenCalledTimes(2)` because it is called first time when passing `testValue` color
+      await vi.waitFor(() => {
+        expect(onChange).toHaveBeenCalledTimes(2)
+      })
+    })
+  }
+
+  it('should palette indicator moves up when receive the ArrowUp or w keyboard event', async () => {
+    await render(
+      <ColorMixer
+        {...testValue}
+        {...testInputLabels}
+        {...testScreenReaderLabels}
+        onChange={vi.fn()}
+      />
+    )
+    const indicator = paletteIndicator()
+    const pos1 = indicator.getBoundingClientRect().y
+
+    palette().focus()
+    await userEvent.keyboard('w')
+    const pos2 = indicator.getBoundingClientRect().y
+    expect(pos2).toBeLessThan(pos1)
+
+    await userEvent.keyboard('{ArrowUp}')
+    const pos3 = indicator.getBoundingClientRect().y
+    expect(pos3).toBeLessThan(pos2)
+  })
+
+  it('should palette indicator moves down when receive the ArrowDown or s keyboard event', async () => {
+    await render(
+      <ColorMixer
+        {...testValue}
+        {...testInputLabels}
+        {...testScreenReaderLabels}
+        onChange={vi.fn()}
+      />
+    )
+    const indicator = paletteIndicator()
+    const pos1 = indicator.getBoundingClientRect().y
+
+    palette().focus()
+    await userEvent.keyboard('s')
+    const pos2 = indicator.getBoundingClientRect().y
+    expect(pos2).toBeGreaterThan(pos1)
+
+    await userEvent.keyboard('{ArrowDown}')
+    const pos3 = indicator.getBoundingClientRect().y
+    expect(pos3).toBeGreaterThan(pos2)
+  })
+
+  it('should palette indicator moves left when receive the ArrowLeft or a keyboard event', async () => {
+    await render(
+      <ColorMixer
+        {...testValue}
+        {...testInputLabels}
+        {...testScreenReaderLabels}
+        onChange={vi.fn()}
+      />
+    )
+    const indicator = paletteIndicator()
+    const pos1 = indicator.getBoundingClientRect().x
+
+    palette().focus()
+    await userEvent.keyboard('a')
+    const pos2 = indicator.getBoundingClientRect().x
+    expect(pos2).toBeLessThan(pos1)
+
+    await userEvent.keyboard('{ArrowLeft}')
+    const pos3 = indicator.getBoundingClientRect().x
+    expect(pos3).toBeLessThan(pos2)
+  })
+
+  it('should palette indicator moves right when receive the ArrowRight or d keyboard event', async () => {
+    await render(
+      <ColorMixer
+        {...testValue}
+        {...testInputLabels}
+        {...testScreenReaderLabels}
+        onChange={vi.fn()}
+      />
+    )
+    const indicator = paletteIndicator()
+    const pos1 = indicator.getBoundingClientRect().x
+
+    palette().focus()
+    await userEvent.keyboard('d')
+    const pos2 = indicator.getBoundingClientRect().x
+    expect(pos2).toBeGreaterThan(pos1)
+
+    await userEvent.keyboard('{ArrowRight}')
+    const pos3 = indicator.getBoundingClientRect().x
+    expect(pos3).toBeGreaterThan(pos2)
+  })
+
+  it('should palette indicator does not move up when it reach the top border', async () => {
+    await render(
+      <ColorMixer
+        value={conversions.colorToHex8({ h: 200, s: 0.5, v: 1, a: 1 })}
+        {...testInputLabels}
+        {...testScreenReaderLabels}
+        onChange={vi.fn()}
+      />
+    )
+    const indicator = paletteIndicator()
+    const pos1 = indicator.getBoundingClientRect().y
+
+    palette().focus()
+    await userEvent.keyboard('w')
+    expect(indicator.getBoundingClientRect().y).toEqual(pos1)
+
+    await userEvent.keyboard('{ArrowUp}')
+    expect(indicator.getBoundingClientRect().y).toEqual(pos1)
+  })
+
+  it('should palette indicator does not move down when it reach the bottom border', async () => {
+    await render(
+      <ColorMixer
+        value={conversions.colorToHex8({ h: 200, s: 0.5, v: 0, a: 1 })}
+        {...testInputLabels}
+        {...testScreenReaderLabels}
+        onChange={vi.fn()}
+      />
+    )
+    const indicator = paletteIndicator()
+    const pos1 = indicator.getBoundingClientRect().y
+
+    palette().focus()
+    await userEvent.keyboard('s')
+    expect(indicator.getBoundingClientRect().y).toEqual(pos1)
+
+    await userEvent.keyboard('{ArrowDown}')
+    expect(indicator.getBoundingClientRect().y).toEqual(pos1)
+  })
+
+  it('should palette indicator does not move left when it reach the left border', async () => {
+    await render(
+      <ColorMixer
+        value={conversions.colorToHex8({ h: 200, s: 0, v: 0.5, a: 1 })}
+        {...testInputLabels}
+        {...testScreenReaderLabels}
+        onChange={vi.fn()}
+      />
+    )
+    const indicator = paletteIndicator()
+    const pos1 = indicator.getBoundingClientRect().x
+
+    palette().focus()
+    await userEvent.keyboard('a')
+    expect(indicator.getBoundingClientRect().x).toEqual(pos1)
+
+    await userEvent.keyboard('{ArrowLeft}')
+    expect(indicator.getBoundingClientRect().x).toEqual(pos1)
+  })
+
+  it('should palette indicator does not move right when it reach the right border', async () => {
+    await render(
+      <ColorMixer
+        value={conversions.colorToHex8({ h: 200, s: 1, v: 0.5, a: 1 })}
+        {...testInputLabels}
+        {...testScreenReaderLabels}
+        onChange={vi.fn()}
+      />
+    )
+    const indicator = paletteIndicator()
+    const pos1 = indicator.getBoundingClientRect().x
+
+    palette().focus()
+    await userEvent.keyboard('d')
+    expect(indicator.getBoundingClientRect().x).toEqual(pos1)
+
+    await userEvent.keyboard('{ArrowRight}')
+    expect(indicator.getBoundingClientRect().x).toEqual(pos1)
   })
 })

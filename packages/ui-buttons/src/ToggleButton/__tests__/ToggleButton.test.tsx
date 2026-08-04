@@ -46,7 +46,8 @@ describe('<ToggleButton />', () => {
     )
     const button = page.getByRole('button').element()
     const svgIcon = document.querySelector(iconSelector)
-    const tooltip = page.getByRole('tooltip').element()
+    // queried directly: the tooltip is hidden, so it is not in the a11y tree
+    const tooltip = document.querySelector('[role="tooltip"]')
 
     expect(button).toBeInTheDocument()
     expect(button).toHaveTextContent('This is a screen reader label')
@@ -194,5 +195,52 @@ describe('<ToggleButton />', () => {
     await vi.waitFor(() => {
       expect(onClick).toHaveBeenCalledTimes(1)
     })
+  })
+
+  it('should display a tooltip on hover', async () => {
+    await render(
+      <ToggleButton
+        screenReaderLabel="This is a screen reader label"
+        renderIcon={icon}
+        renderTooltipContent="Tooltip content"
+        status="pressed"
+      />
+    )
+    const button = page.getByRole('button', {
+      name: 'This is a screen reader label'
+    })
+
+    expect(button.element().querySelector(iconSelector)).toBeInTheDocument()
+    // an earlier test may have left the pointer over the same spot
+    await userEvent.unhover(button)
+    // while hidden the tooltip is not in the a11y tree, so it has no role
+    await expect.element(page.getByRole('tooltip')).not.toBeInTheDocument()
+
+    await userEvent.hover(button)
+
+    const tooltip = page.getByRole('tooltip')
+    await expect.element(tooltip).toBeVisible()
+    await expect.element(tooltip).toHaveTextContent('Tooltip content')
+  })
+
+  it('should display a tooltip without hover/focus when isShowingTooltip is true', async () => {
+    await render(
+      <ToggleButton
+        screenReaderLabel="This is a screen reader label"
+        renderIcon={icon}
+        renderTooltipContent="Tooltip content"
+        isShowingTooltip
+        status="pressed"
+      />
+    )
+    const button = page.getByRole('button', {
+      name: 'This is a screen reader label'
+    })
+
+    expect(button.element().querySelector(iconSelector)).toBeInTheDocument()
+
+    const tooltip = page.getByRole('tooltip')
+    await expect.element(tooltip).toBeVisible()
+    await expect.element(tooltip).toHaveTextContent('Tooltip content')
   })
 })

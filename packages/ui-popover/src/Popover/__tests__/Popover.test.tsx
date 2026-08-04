@@ -22,11 +22,13 @@
  * SOFTWARE.
  */
 
+import { useState } from 'react'
 import { describe, it, expect, afterEach, vi } from 'vitest'
 import { render, cleanup } from 'vitest-browser-react'
-import { page } from 'vitest/browser'
+import { page, userEvent } from 'vitest/browser'
 import { fireEvent } from '@testing-library/dom'
 
+import { View } from '@instructure/ui-view/latest'
 import { Popover } from '@instructure/ui-popover/latest'
 import type { PopoverProps } from '@instructure/ui-popover/latest'
 
@@ -362,6 +364,178 @@ describe('<Popover />', () => {
         computed.getPropertyValue('--ui-position-available-height').trim() ||
         `${window.innerHeight}px`
       expect(computed.maxHeight).toBe(availableHeight)
+    })
+  })
+
+  describe('Component tests', () => {
+    // `Button`/`CloseButton`/`TextInput` would make ui-popover depend on
+    // packages that depend back on it, so the examples use plain elements
+    const PopoverExample = () => {
+      const [popoverOpen, setPopoverOpen] = useState(false)
+
+      return (
+        <div id="main">
+          <View>
+            <Popover
+              renderTrigger={<button>Sign In</button>}
+              isShowingContent={popoverOpen}
+              onShowContent={() => {
+                setPopoverOpen(true)
+              }}
+              onHideContent={() => {
+                setPopoverOpen(false)
+              }}
+              on="click"
+              screenReaderLabel="Popover Dialog Example"
+              shouldContainFocus
+              shouldReturnFocus
+              shouldCloseOnDocumentClick
+              offsetY="16px"
+              mountNode={() => document.getElementById('main')}
+            >
+              <View padding="medium" display="block" as="form">
+                <h2>Log In</h2>
+                <input aria-label="Username" />
+                <input aria-label="Password" type="password" />
+              </View>
+            </Popover>
+          </View>
+        </div>
+      )
+    }
+
+    const PopoverContainer = ({
+      onHideFn
+    }: {
+      onHideFn: (documentClick: boolean) => void
+    }) => {
+      const [popoverOpen, setPopoverOpen] = useState(true)
+      return (
+        <div>
+          <Popover
+            renderTrigger={<button>Trigger btn</button>}
+            isShowingContent={popoverOpen}
+            onShowContent={() => {
+              setPopoverOpen(true)
+            }}
+            onHideContent={(_e, { documentClick }) => {
+              setPopoverOpen(false)
+              onHideFn(documentClick)
+            }}
+            on="click"
+            screenReaderLabel="Popover Dialog Example"
+            shouldContainFocus
+            shouldReturnFocus
+            shouldCloseOnDocumentClick
+            offsetY="16px"
+          >
+            popover inner text
+          </Popover>
+        </div>
+      )
+    }
+
+    it('opens and closes when clicking on the trigger', async () => {
+      const { container } = await render(<PopoverExample />)
+      const main = container.querySelector('#main')!
+
+      await userEvent.click(page.getByText('Sign In'))
+      await vi.waitFor(() => {
+        expect(main).toHaveTextContent('Log In')
+      })
+
+      await userEvent.click(page.getByText('Sign In'))
+      await vi.waitFor(() => {
+        expect(main).not.toHaveTextContent('Log In')
+      })
+    })
+
+    it('should move focus into the content when the trigger is blurred', async () => {
+      const onHideContent = vi.fn()
+
+      await render(
+        <span>
+          <button>outer btn</button>
+          <Popover
+            isShowingContent={true}
+            onHideContent={onHideContent}
+            renderTrigger={<button>trigger btn initial focus me</button>}
+            on={['hover', 'focus', 'click']}
+            mountNode={() => document.getElementById('container')}
+            shouldContainFocus={false}
+            shouldReturnFocus={false}
+            shouldFocusContentOnTriggerBlur
+          >
+            <button>focus me after trigger</button>
+          </Popover>
+          <span id="container" />
+          <button id="next">focus me last</button>
+        </span>
+      )
+      const contentButton = page.getByText('focus me after trigger')
+
+      page.getByText('trigger btn initial focus me').element().focus()
+
+      await expect.element(contentButton).not.toHaveFocus()
+
+      await userEvent.tab()
+
+      await expect.element(contentButton).toHaveFocus()
+
+      await userEvent.tab()
+
+      await vi.waitFor(() => {
+        expect(onHideContent).toHaveBeenCalled()
+      })
+    })
+
+    it('should close the popover via trigger before dismissing via documentClick', async () => {
+      const hideContentFn = vi.fn()
+      await render(<PopoverContainer onHideFn={hideContentFn} />)
+
+      await userEvent.click(page.getByText('Trigger btn'))
+
+      // this means the `onHideContent` callback was first called because the
+      // trigger and not the document click. If it was the other way around
+      // that would mean the document click closed the popover and a trigger
+      // would open it again, which makes the popover seem "unclosable"
+      await vi.waitFor(() => {
+        expect(hideContentFn).toHaveBeenCalled()
+      })
+      expect(hideContentFn.mock.calls[0][0]).toBe(false)
+    })
+
+    it('should call onHideContent when clicking outside', async () => {
+      const hideContentFn = vi.fn()
+
+      await render(
+        <div id="main">
+          <Popover
+            renderTrigger={<button>Trigger btn</button>}
+            isShowingContent={true}
+            onHideContent={(_e, o) => hideContentFn(o)}
+            on="click"
+            screenReaderLabel="Popover Dialog Example"
+            shouldContainFocus
+            shouldReturnFocus
+            offsetY="16px"
+          >
+            popover inner texts
+          </Popover>
+        </div>
+      )
+
+      await expect
+        .element(page.getByText('popover inner texts'))
+        .toBeInTheDocument()
+
+      await userEvent.click(document.body, { position: { x: 0, y: 0 } })
+
+      await vi.waitFor(() => {
+        expect(hideContentFn).toHaveBeenCalledWith(
+          expect.objectContaining({ documentClick: true })
+        )
+      })
     })
   })
 })

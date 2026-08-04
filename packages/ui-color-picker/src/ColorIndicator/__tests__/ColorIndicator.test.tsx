@@ -25,7 +25,18 @@
 import { render } from 'vitest-browser-react'
 import { describe, it, expect, vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
+import { colorToRGB, colorToHex8 } from '@instructure/ui-color-utils'
 import { ColorIndicator } from '@instructure/ui-color-picker/latest'
+
+const colorTestCases = {
+  '3 digit hex': '#069',
+  '6 digit hex': '#01659a',
+  rgb: 'rgb(100, 0, 200)',
+  rgba: 'rgba(100, 0, 200, .5)',
+  named: 'white',
+  hsl: 'hsl(30, 100%, 50%)',
+  hsla: 'hsla(30, 100%, 50%, .35)'
+}
 
 describe('<ColorIndicator />', () => {
   describe('elementRef prop', () => {
@@ -46,5 +57,63 @@ describe('<ColorIndicator />', () => {
 
       expect(axeCheck).toBe(true)
     })
+  })
+
+  it('should display empty by default', async () => {
+    const { container } = await render(<ColorIndicator />)
+    const indicator = container.querySelector('div[class$="-colorIndicator"]')!
+
+    expect(indicator).toBeInTheDocument()
+    expect(getComputedStyle(indicator).boxShadow).toBe('none')
+  })
+
+  Object.entries(colorTestCases).forEach(([testCase, testColor]) => {
+    it(`should display ${testCase} color`, async () => {
+      const expectedColor = colorToRGB(testColor)
+      const { container } = await render(<ColorIndicator color={testColor} />)
+      const indicator = container.querySelector(
+        'div[class$="-colorIndicator"]'
+      )!
+
+      expect(indicator).toBeInTheDocument()
+
+      const boxShadow = getComputedStyle(indicator).boxShadow
+      const colorValue = boxShadow.split(')')[0] + ')'
+
+      expect(colorToRGB(colorValue)).toEqual(expectedColor)
+    })
+  })
+
+  // needs to be checked separately, the alpha is rounded different
+  it('should display 8 digit hexa color', async () => {
+    const testColor = '#06AD8580'
+    const expectedColor = colorToHex8(testColor)
+    const { container } = await render(<ColorIndicator color={testColor} />)
+    const indicator = container.querySelector('div[class$="-colorIndicator"]')!
+
+    expect(indicator).toBeInTheDocument()
+
+    const boxShadow = getComputedStyle(indicator).boxShadow
+    const colorValue = boxShadow.split(')')[0] + ')'
+
+    expect(colorToHex8(colorValue)).toEqual(expectedColor)
+  })
+
+  it('should display circle by default', async () => {
+    const { container } = await render(<ColorIndicator />)
+    const indicator = container.querySelector('div[class$="-colorIndicator"]')!
+    const { borderRadius, width, height } = getComputedStyle(indicator)
+
+    expect(width).toEqual(height)
+    expect(borderRadius).toEqual(width)
+  })
+
+  it('should display rectangle version', async () => {
+    const { container } = await render(<ColorIndicator shape="rectangle" />)
+    const indicator = container.querySelector('div[class$="-colorIndicator"]')!
+    const { borderRadius, width, height } = getComputedStyle(indicator)
+
+    expect(width).toEqual(height)
+    expect(borderRadius).toEqual('6px')
   })
 })

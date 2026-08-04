@@ -27,7 +27,7 @@ import { page, userEvent } from 'vitest/browser'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import moment from 'moment-timezone'
 
-import { ApplyLocale } from '@instructure/ui-i18n'
+import { ApplyLocale, DateTime } from '@instructure/ui-i18n'
 
 import { TimeSelect } from '@instructure/ui-time-select/latest'
 
@@ -440,6 +440,364 @@ describe('<TimeSelect />', () => {
         const listbox = page.getByRole('listbox').element()
 
         expect(listRef).toHaveBeenCalledWith(listbox)
+      })
+    })
+  })
+
+  describe('Component tests', () => {
+    const options = () => page.getByRole('option')
+
+    it('should render an input and list', async () => {
+      await render(<TimeSelect renderLabel="Choose a time" />)
+      const input = page.getByRole('combobox').element()
+
+      expect(page.getByRole('listbox').query()).not.toBeInTheDocument()
+
+      await userEvent.click(input)
+
+      await expect.element(page.getByRole('listbox')).toBeInTheDocument()
+    })
+
+    it('should fire onChange when selected option changes', async () => {
+      const onChange = vi.fn()
+      await render(
+        <TimeSelect
+          renderLabel="Choose a time"
+          timezone="US/Eastern"
+          onChange={onChange}
+        />
+      )
+      const input = page.getByRole('combobox').element()
+
+      expect(page.getByRole('listbox').query()).not.toBeInTheDocument()
+
+      await userEvent.click(input)
+
+      await expect.element(options().first()).toHaveTextContent('12:00 AM')
+
+      await userEvent.click(options().first())
+
+      await vi.waitFor(() => {
+        expect(input).toHaveValue('12:00 AM')
+        expect(onChange).toHaveBeenCalled()
+        expect(onChange.mock.lastCall![1]).toHaveProperty('value')
+        expect(onChange.mock.lastCall![1]).toHaveProperty(
+          'inputText',
+          '12:00 AM'
+        )
+      })
+    })
+
+    it('should fire onChange when input field is cleared and blurred and allowClearingSelection is true', async () => {
+      const onChange = vi.fn()
+      await render(
+        <TimeSelect
+          renderLabel="Choose a time"
+          timezone="US/Eastern"
+          onChange={onChange}
+          allowClearingSelection={true}
+        />
+      )
+      const input = page.getByRole('combobox').element()
+
+      await userEvent.click(input)
+      await userEvent.click(options().first())
+
+      await userEvent.click(input)
+      await userEvent.clear(input)
+      input.blur()
+
+      await vi.waitFor(() => {
+        expect(onChange.mock.lastCall![1]).toHaveProperty('value', '')
+        expect(onChange.mock.lastCall![1]).toHaveProperty('inputText', '')
+      })
+    })
+
+    it('should behave uncontrolled', async () => {
+      const onChange = vi.fn()
+      await render(
+        <TimeSelect renderLabel="Choose a time" onChange={onChange} />
+      )
+      const input = page.getByRole('combobox').element()
+
+      expect(input).toHaveValue('')
+
+      await userEvent.click(input)
+      await userEvent.click(options().first())
+
+      await vi.waitFor(() => {
+        expect(input).toHaveValue('12:00 AM')
+      })
+    })
+
+    it('should behave controlled', async () => {
+      const onChange = vi.fn()
+      const initialTestValue = moment
+        .tz('1986-05-17T05:00:00.000Z', moment.ISO_8601, 'en', 'US/Eastern')
+        .toISOString()
+
+      const { rerender } = await render(
+        <TimeSelect
+          renderLabel="Choose an option"
+          value={initialTestValue}
+          timezone="US/Eastern"
+          onChange={onChange}
+        />
+      )
+      const input = page.getByRole('combobox').element()
+
+      expect(input).toHaveValue('1:00 AM')
+
+      await userEvent.click(input)
+
+      const fifthOption = options().nth(4)
+      const selectedValue = (await fifthOption.element()).textContent!
+
+      await userEvent.click(fifthOption)
+
+      await vi.waitFor(() => {
+        expect(onChange).toHaveBeenCalled()
+      })
+      // not changed because it's hardcoded
+      expect(input).toHaveValue('1:00 AM')
+
+      const newValue = onChange.mock.lastCall![1].value
+      expect(newValue).not.toBe(initialTestValue)
+
+      // update component with the new value
+      await rerender(
+        <TimeSelect
+          renderLabel="Choose an option"
+          value={newValue}
+          timezone="US/Eastern"
+          onChange={onChange}
+        />
+      )
+
+      await vi.waitFor(() => {
+        expect(input).toHaveValue(selectedValue)
+      })
+    })
+
+    it('Pressing ESC should reset the value in controlled mode', async () => {
+      const onChange = vi.fn()
+      const onKeyDown = vi.fn()
+      const handleInputChange = vi.fn()
+      await render(
+        <TimeSelect
+          renderLabel="Choose a time"
+          allowNonStepInput={true}
+          value=""
+          locale="en_AU"
+          timezone="US/Eastern"
+          onChange={onChange}
+          onInputChange={handleInputChange}
+          onKeyDown={onKeyDown}
+        />
+      )
+      const input = page.getByRole('combobox').element()
+
+      await userEvent.click(input)
+      await userEvent.type(input, '7:45 PM')
+      await userEvent.keyboard('{Escape}')
+
+      await vi.waitFor(() => {
+        expect(input).toHaveValue('')
+      })
+      expect(onChange).not.toHaveBeenCalled()
+      expect(onKeyDown).toHaveBeenCalled()
+      expect(handleInputChange).toHaveBeenCalled()
+    })
+
+    it('value should not be changeable via user input in controlled mode', async () => {
+      const dateTime = DateTime.parse('2017-05-01T17:30Z', 'en-US', 'GMT')
+      await render(
+        <TimeSelect
+          renderLabel="Choose a time"
+          allowNonStepInput={true}
+          value={dateTime.toISOString()}
+          locale="en_AU"
+          timezone="US/Eastern"
+        />
+      )
+      const input = page.getByRole('combobox').element()
+
+      await userEvent.clear(input)
+      await userEvent.type(input, '1:45 PM')
+      await userEvent.keyboard('{Enter}')
+      input.blur()
+
+      await vi.waitFor(() => {
+        expect(input).toHaveValue('1:30 PM')
+      })
+    })
+
+    it('should keep selection when value changes', async () => {
+      const onChange = vi.fn()
+      const locale = 'en-US'
+      const timezone = 'US/Eastern'
+      const dateTime = DateTime.parse('2017-05-01T17:30Z', locale, timezone)
+
+      const { rerender } = await render(
+        <TimeSelect
+          renderLabel="Choose an option"
+          value={dateTime.toISOString()}
+          timezone="US/Eastern"
+          onChange={onChange}
+        />
+      )
+      const input = page.getByRole('combobox').element()
+
+      expect(input).toHaveValue('1:30 PM')
+
+      const newDateTime = DateTime.parse('2022-03-29T19:00Z', locale, timezone)
+
+      await rerender(
+        <TimeSelect
+          renderLabel="Choose an option"
+          value={newDateTime.toISOString()}
+          timezone="US/Eastern"
+          onChange={onChange}
+        />
+      )
+
+      await vi.waitFor(() => {
+        expect(page.getByRole('combobox').element()).toHaveValue('3:00 PM')
+      })
+    })
+
+    it('should accept values that are not divisible by step', async () => {
+      const onChange = vi.fn()
+      const { rerender } = await render(
+        <TimeSelect
+          renderLabel="Choose an option"
+          timezone="US/Eastern"
+          onChange={onChange}
+        />
+      )
+      const input = page.getByRole('combobox').element()
+
+      // this expectation is needed so TimeSelect generates some default options
+      expect(input).toHaveAttribute('value', '')
+
+      const value = moment.tz(
+        '1986-05-17T05:02:00.000Z',
+        moment.ISO_8601,
+        'en',
+        'US/Eastern'
+      )
+
+      await rerender(
+        <TimeSelect
+          renderLabel="Choose an option"
+          timezone="US/Eastern"
+          onChange={onChange}
+          value={value.toISOString()}
+        />
+      )
+
+      await vi.waitFor(() => {
+        expect(input).toHaveAttribute('value', '1:02 AM')
+      })
+    })
+
+    it('should use the specified step value', async () => {
+      const value = moment.tz(
+        '1986-05-17T18:00:00.000Z',
+        moment.ISO_8601,
+        'en',
+        'US/Eastern'
+      )
+      await render(
+        <TimeSelect
+          renderLabel="Choose a time"
+          timezone="US/Eastern"
+          step={15}
+          value={value.toISOString()}
+        />
+      )
+      const input = page.getByRole('combobox').element()
+
+      await userEvent.click(input)
+
+      expect(input).toHaveValue('2:00 PM')
+
+      await expect.element(options().nth(0)).toHaveTextContent('12:00 AM')
+      await expect.element(options().nth(1)).toHaveTextContent('12:15 AM')
+    })
+
+    it('should not allow non-step value when allowNonStepInput=false', async () => {
+      const onChange = vi.fn()
+      await render(
+        <TimeSelect
+          renderLabel="Choose a time"
+          allowNonStepInput={false}
+          locale="en_AU"
+          timezone="US/Eastern"
+          onChange={onChange}
+        />
+      )
+      const input = page.getByRole('combobox').element()
+
+      await userEvent.click(input)
+      await userEvent.type(input, '7:34 PM')
+      // should not accept the value and send onChange event
+      await userEvent.keyboard('{Enter}')
+      // should reset the value
+      await userEvent.keyboard('{Escape}')
+
+      await vi.waitFor(() => {
+        expect(input).toHaveValue('')
+      })
+      expect(onChange).not.toHaveBeenCalled()
+    })
+
+    it('should allow non-step value when allowNonStepInput=true', async () => {
+      const onChange = vi.fn()
+      await render(
+        <TimeSelect
+          renderLabel="Choose a time"
+          allowNonStepInput={true}
+          locale="en_AU"
+          timezone="US/Eastern"
+          onChange={onChange}
+        />
+      )
+      const input = page.getByRole('combobox').element()
+
+      await userEvent.click(input)
+      await userEvent.type(input, '7:34 PM')
+      input.blur() // sends onChange event
+
+      await vi.waitFor(() => {
+        expect(onChange).toHaveBeenCalled()
+        expect(onChange.mock.lastCall![1]).toHaveProperty('value')
+        expect(input).toHaveAttribute('value', '7:34 PM')
+      })
+    })
+
+    it('should round down seconds when applicable', async () => {
+      const onChange = vi.fn()
+      await render(
+        <TimeSelect
+          renderLabel="Choose a time"
+          allowNonStepInput={true}
+          locale="en_AU"
+          format="LTS" // `h:mm:ss A`
+          timezone="US/Eastern"
+          onChange={onChange}
+        />
+      )
+      const input = page.getByRole('combobox').element()
+
+      expect(input).toHaveValue('')
+
+      await userEvent.click(input)
+      await userEvent.type(input, '4:45:55 AM')
+      input.blur() // sends onChange event
+
+      await vi.waitFor(() => {
+        expect(input).toHaveValue('4:45:00 AM')
       })
     })
   })

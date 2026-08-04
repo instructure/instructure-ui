@@ -26,10 +26,11 @@ import { fireEvent } from '@testing-library/dom'
 import { cleanup, render } from 'vitest-browser-react'
 import { page, userEvent } from 'vitest/browser'
 import { describe, it, expect, afterEach, vi } from 'vitest'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Tray } from '@instructure/ui-tray/latest'
 import type { TrayProps } from '@instructure/ui-tray/latest'
+import { Overlay } from '@instructure/ui-overlays/latest'
 
 describe('<Tray />', () => {
   afterEach(async () => {
@@ -268,5 +269,151 @@ describe('<Tray />', () => {
     expect(onDismiss).not.toHaveBeenCalled()
     expect(onExited).not.toHaveBeenCalled()
     expect(page.getByText('Tray Content').element()).toBeInTheDocument()
+  })
+
+  describe('Component tests', () => {
+    it('should apply theme overrides when open', async () => {
+      await render(
+        <Tray
+          label="Tray Example"
+          open
+          size="small"
+          placement="start"
+          themeOverride={{ widthSm: '165px' }}
+        >
+          <div>Hello</div>
+        </Tray>
+      )
+      const tray = page.getByRole('dialog').element()
+
+      expect(tray).toHaveAttribute('aria-label', 'Tray Example')
+      await vi.waitFor(() => {
+        expect(getComputedStyle(tray.parentElement!).width).toBe('165px')
+      })
+    })
+
+    it('should call onDismiss prop when Esc key pressed', async () => {
+      const onDismiss = vi.fn()
+      const onEntered = vi.fn()
+      await render(
+        <Tray
+          open
+          label="Tray Example"
+          shouldCloseOnDocumentClick
+          onDismiss={onDismiss}
+          onEntered={onEntered}
+        >
+          Hello Tray
+          <input type="text" />
+          <input type="text" id="my-input" />
+        </Tray>
+      )
+      // Dialog attaches its Escape listener in a requestAnimationFrame callback,
+      // so wait until the Tray finished entering before pressing the key
+      await vi.waitFor(() => {
+        expect(onEntered).toHaveBeenCalled()
+      })
+
+      await userEvent.keyboard('{Escape}')
+
+      await vi.waitFor(() => {
+        expect(onDismiss).toHaveBeenCalled()
+      })
+    })
+
+    it('should handle focus properly in complex cases', async () => {
+      const onEntered = vi.fn()
+
+      const Example = () => {
+        const [showTray, setShowTray] = useState(false)
+        const [showOverlay, setShowOverlay] = useState(false)
+
+        const handleTrayButtonClick = () => {
+          setShowOverlay(true)
+        }
+
+        // Hide the Tray once the Overlay has mounted, so the Tray is no longer
+        // on top of the FocusRegion stack. This runs after the Overlay's own
+        // mount effects have registered its region, which a fixed setTimeout
+        // could not guarantee under load.
+        useEffect(() => {
+          if (showOverlay) {
+            setShowTray(false)
+          }
+        }, [showOverlay])
+
+        return (
+          <div>
+            <p>
+              Click the button below to open a tray. Then click the button
+              inside the tray to trigger an overlay that will automatically
+              close after a short time.
+            </p>
+            <button id="open_tray_button" onClick={() => setShowTray(true)}>
+              Open Tray
+            </button>
+            <button id="test1_button">test 1</button>
+            <button id="test2_button">test 2</button>
+
+            <Tray
+              label="Sample Tray"
+              open={showTray}
+              placement="end"
+              onEntered={onEntered}
+            >
+              <p>
+                This is the Tray. Click the button below to show an overlay and
+                automatically close this tray after a short time.
+              </p>
+              <button id="close_tray_button" onClick={handleTrayButtonClick}>
+                Close after a short time
+              </button>
+              <button onClick={() => setShowTray(false)}>Cancel</button>
+              <button>test</button>
+            </Tray>
+
+            <Overlay
+              open={showOverlay}
+              transition="fade"
+              label="Loading overlay"
+            >
+              <span>This is the overlay.</span>
+            </Overlay>
+          </div>
+        )
+      }
+
+      await render(<Example />)
+
+      const openButton = page.getByRole('button', { name: 'Open Tray' })
+      const closeButton = page.getByRole('button', {
+        name: 'Close after a short time'
+      })
+
+      await userEvent.click(openButton)
+      // wait for the enter transition, so the Tray's focus region is fully set
+      // up before it gets closed from behind the Overlay
+      await vi.waitFor(() => {
+        expect(onEntered).toHaveBeenCalled()
+      })
+
+      // Click the close_tray_button. This should run the state changes in its handler
+      await userEvent.click(closeButton)
+
+      await vi.waitFor(() => {
+        expect(closeButton.query()).not.toBeInTheDocument()
+      })
+      await expect.element(openButton).toHaveFocus()
+
+      await userEvent.tab()
+      await expect
+        .element(page.getByRole('button', { name: 'test 1' }))
+        .toHaveFocus()
+
+      await userEvent.tab()
+      await expect
+        .element(page.getByRole('button', { name: 'test 2' }))
+        .toHaveFocus()
+    })
   })
 })

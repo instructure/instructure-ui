@@ -27,6 +27,7 @@ import { page, userEvent } from 'vitest/browser'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 
+import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { View } from '@instructure/ui-view/latest'
 import { Pagination, PaginationButton } from '@instructure/ui-pagination/latest'
 import type { ViewOwnProps } from '@instructure/ui-view/latest'
@@ -1240,6 +1241,82 @@ describe('<Pagination />', () => {
           `Page ${i + 1} of ${paginationButtons.length}`
         )
       }
+    })
+  })
+
+  describe('Component tests', () => {
+    it('should render no additional space when label text is hidden', async () => {
+      const { rerender } = await render(
+        <Pagination
+          as="nav"
+          margin="small"
+          variant="compact"
+          labelNext="Next"
+          labelPrev="Prev"
+          currentPage={3}
+          totalPageNumber={10}
+          onPageChange={vi.fn()}
+        />
+      )
+      const pagination = page.getByRole('navigation').element()
+      const heightWithNoLabel = getComputedStyle(pagination).height
+
+      await rerender(
+        <Pagination
+          as="nav"
+          margin="small"
+          variant="compact"
+          labelNext="Next"
+          labelPrev="Prev"
+          currentPage={3}
+          totalPageNumber={10}
+          onPageChange={vi.fn()}
+          label={<ScreenReaderContent>I am a hidden label</ScreenReaderContent>}
+        />
+      )
+      const paginationWithLabel = page.getByRole('navigation').element()
+
+      expect(getComputedStyle(paginationWithLabel).height).toEqual(
+        heightWithNoLabel
+      )
+      expect(paginationWithLabel).toHaveTextContent('I am a hidden label')
+    })
+
+    it('should wrap at a small viewport width', async () => {
+      const hasWrapped = () => {
+        const items = page
+          .getByRole('navigation')
+          .getByRole('button')
+          .elements()
+        const firstItemTop = items[0].getBoundingClientRect().top
+
+        return items.some(
+          (item, index) =>
+            index > 0 && item.getBoundingClientRect().top > firstItemTop
+        )
+      }
+
+      await render(
+        <Pagination
+          as="nav"
+          margin="small"
+          variant="compact"
+          currentPage={4}
+          totalPageNumber={100000}
+          siblingCount={3}
+          boundaryCount={2}
+        />
+      )
+
+      await page.viewport(1000, 800)
+      await vi.waitFor(() => {
+        expect(hasWrapped()).toBe(false)
+      })
+
+      await page.viewport(100, 800)
+      await vi.waitFor(() => {
+        expect(hasWrapped()).toBe(true)
+      })
     })
   })
 })

@@ -215,4 +215,68 @@ describe('<Item />', () => {
     expect(link).toHaveAttribute('href', '/helloWorld')
     expect(link?.tagName).toBe('A')
   })
+
+  describe('Component tests', () => {
+    it('should allow label to receive focus', async () => {
+      const onFocus = vi.fn()
+      const { container } = await render(
+        <Item tabIndex={-1} onFocus={onFocus}>
+          Hello World
+        </Item>
+      )
+      const item = container.querySelector<HTMLElement>(
+        'span[role="listitem"]'
+      )!
+
+      item.focus()
+
+      await vi.waitFor(() => {
+        expect(onFocus).toHaveBeenCalled()
+      })
+      await expect.element(page.getByText('Hello World')).toHaveFocus()
+    })
+
+    it('should render colored icon before label', async () => {
+      const { container } = await render(
+        <Item
+          renderBeforeLabel={(props) => {
+            return (
+              <IconCheckSolid
+                {...(props.variant === 'default' && { color: 'warning' })}
+              />
+            )
+          }}
+        >
+          Hello World
+        </Item>
+      )
+      const icon = container.querySelector(
+        '[class$="-optionItem__content--before"] svg[name="IconCheck"]'
+      )!
+
+      expect(getComputedStyle(icon).color).toBe('rgb(207, 74, 0)')
+    })
+
+    it('should render colored icon after highlighted label', async () => {
+      const { container } = await render(
+        <Item
+          variant="highlighted"
+          renderAfterLabel={(props) => {
+            return (
+              <IconCheckSolid
+                {...(props.variant === 'highlighted' && { color: 'success' })}
+              />
+            )
+          }}
+        >
+          Hello World
+        </Item>
+      )
+      const icon = container.querySelector(
+        '[class$="-optionItem__content--after"] svg[name="IconCheck"]'
+      )!
+
+      expect(getComputedStyle(icon).color).toBe('rgb(3, 137, 61)')
+    })
+  })
 })

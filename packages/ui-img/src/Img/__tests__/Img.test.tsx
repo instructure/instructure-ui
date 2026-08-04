@@ -151,4 +151,54 @@ describe('<Img />', () => {
 
     expect(imgStyle.objectFit).toBe('contain')
   })
+
+  describe('Component tests', () => {
+    const HEIGHT = 32
+    const WIDTH = 24
+    const ALT = 'test-alt'
+
+    it('has a container with matching height and width when constrain="cover" is used with overlay', async () => {
+      const { container } = await render(
+        <div style={{ width: WIDTH, height: HEIGHT }}>
+          <Img
+            src={image}
+            alt={ALT}
+            constrain="cover"
+            overlay={{ color: '#ff0000', opacity: 7 }}
+          />
+        </div>
+      )
+      const imgContainer = container.querySelector(
+        '[class*="-img__container"]'
+      )!
+      const imgContainerStyle = getComputedStyle(imgContainer)
+
+      expect(imgContainerStyle.height).toBe(`${HEIGHT}px`)
+      expect(imgContainerStyle.width).toBe(`${WIDTH}px`)
+      expect(container.querySelector('img')).toHaveAttribute('alt', ALT)
+    })
+
+    it('has a container with matching height and not matching width when constrain="contain" is used with overlay', async () => {
+      const { container } = await render(
+        <div style={{ width: WIDTH, height: HEIGHT }}>
+          <Img
+            src={image}
+            alt={ALT}
+            constrain="contain"
+            overlay={{ color: '#ff0000', opacity: 7 }}
+          />
+        </div>
+      )
+      const imgContainer = container.querySelector(
+        '[class*="-img__container"]'
+      )!
+      const imgContainerStyle = getComputedStyle(imgContainer)
+
+      // height is set to inherit, it should match
+      expect(imgContainerStyle.height).toBe(`${HEIGHT}px`)
+      // width isn't set, it shouldn't match
+      expect(imgContainerStyle.width).not.toBe(`${WIDTH}px`)
+      expect(container.querySelector('img')).toHaveAttribute('alt', ALT)
+    })
+  })
 })
