@@ -1,0 +1,3 @@
+:HL["/visual-regression/pr-2678/app/_next/static/media/e4af272ccee01ff0-s.p.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/visual-regression/pr-2678/app/_next/static/css/c3c6475a4abfc13a.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"treebrowser","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"44y1txX1DzTTdQSPPezoW"}
