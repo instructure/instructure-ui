@@ -22,16 +22,18 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
-import { vi } from 'vitest'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect, vi } from 'vitest'
 
 import { DrawerContent } from '@instructure/ui-drawer-layout/latest'
 
 describe('<DrawerContent />', () => {
   it('should render', async () => {
-    render(<DrawerContent label="DrawerContentTest">Hello World</DrawerContent>)
-    const drawerContent = screen.getByLabelText('DrawerContentTest')
+    await render(
+      <DrawerContent label="DrawerContentTest">Hello World</DrawerContent>
+    )
+    const drawerContent = page.getByLabelText('DrawerContentTest').element()
 
     expect(drawerContent).toBeInTheDocument()
     expect(drawerContent).toHaveTextContent('Hello World')
@@ -39,29 +41,29 @@ describe('<DrawerContent />', () => {
 
   it('should call the content ref', async () => {
     const contentRef = vi.fn()
-    render(
+    await render(
       <DrawerContent label="DrawerContentTest" contentRef={contentRef}>
         Hello World
       </DrawerContent>
     )
-    const drawerContent = screen.getByLabelText('DrawerContentTest')
+    const drawerContent = page.getByLabelText('DrawerContentTest').element()
 
     expect(contentRef).toHaveBeenCalledWith(drawerContent)
   })
 
   it('should not transition on mount, just on update', async () => {
-    const { rerender } = render(
+    const { rerender } = await render(
       <DrawerContent label="DrawerContentTest">Hello World</DrawerContent>
     )
-    const drawerContent = screen.getByLabelText('DrawerContentTest')
+    const drawerContent = page.getByLabelText('DrawerContentTest').element()
 
     const styleOnMount = getComputedStyle(drawerContent)
     expect(styleOnMount.transition).toBe('')
 
-    rerender(<DrawerContent label="test">Hello World</DrawerContent>)
+    await rerender(<DrawerContent label="test">Hello World</DrawerContent>)
 
-    await waitFor(() => {
-      const drawerContentUpdated = screen.getByLabelText('test')
+    await vi.waitFor(() => {
+      const drawerContentUpdated = page.getByLabelText('test').element()
       const updatedStyle = getComputedStyle(drawerContentUpdated)
 
       expect(updatedStyle.transition).not.toBe('')

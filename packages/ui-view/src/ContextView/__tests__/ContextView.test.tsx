@@ -22,21 +22,21 @@
  * SOFTWARE.
  */
 
-import { render } from '@testing-library/react'
 import { ContextView } from '@instructure/ui-view/latest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { describe, it, expect } from 'vitest'
 
 describe('<ContextView />', () => {
-  it('should render', () => {
-    const { container } = render(<ContextView />)
+  it('should render', async () => {
+    const { container } = await render(<ContextView />)
 
     const contextView = container.querySelector("span[class$='-contextView']")
     expect(contextView).toBeInTheDocument()
   })
 
   it('should meet a11y standards', async () => {
-    const { container } = render(<ContextView />)
+    const { container } = await render(<ContextView />)
 
     const axeCheck = await runAxeCheck(container)
 

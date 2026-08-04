@@ -23,11 +23,11 @@
  */
 
 import { ReactElement, ReactNode } from 'react'
-import { vi } from 'vitest'
 
 import { createChainedFunction } from '@instructure/ui-utils'
-import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect, vi } from 'vitest'
 
 import { safeCloneElement } from '../safeCloneElement.js'
 
@@ -44,11 +44,11 @@ describe('safeCloneElement', () => {
     return safeCloneElement(element, props, children)
   }
 
-  it('should preserve refs', () => {
+  it('should preserve refs', async () => {
     const origRef = vi.fn()
     const cloneRef = vi.fn()
 
-    render(
+    await render(
       <SafeClone element={<div ref={origRef} />} props={{ ref: cloneRef }} />
     )
 
@@ -56,37 +56,37 @@ describe('safeCloneElement', () => {
     expect(cloneRef).toHaveBeenCalled()
   })
 
-  it('should preserve event handlers', () => {
+  it('should preserve event handlers', async () => {
     const onClickA = vi.fn()
     const onClickB = vi.fn()
 
-    render(
+    await render(
       <SafeClone
         element={<button onClick={onClickA} />}
         props={{ onClick: onClickB }}
       />
     )
 
-    const button = screen.getByRole('button')
+    const button = page.getByRole('button').element()
     button.click()
 
     expect(onClickA).toHaveBeenCalled()
     expect(onClickB).toHaveBeenCalled()
   })
 
-  it('should preserve already chained functions', () => {
+  it('should preserve already chained functions', async () => {
     const onClickA = vi.fn()
     const onClickB = vi.fn()
     const onClickC = vi.fn()
 
-    render(
+    await render(
       <SafeClone
         element={<button onClick={onClickA} />}
         props={{ onClick: createChainedFunction(onClickB, onClickC) }}
       />
     )
 
-    const button = screen.getByRole('button')
+    const button = page.getByRole('button').element()
     button.click()
 
     expect(onClickA).toHaveBeenCalled()

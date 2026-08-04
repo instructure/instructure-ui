@@ -22,10 +22,9 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
-import { vi } from 'vitest'
-import userEvent from '@testing-library/user-event'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { BaseButton, Button } from '@instructure/ui-buttons/latest'
@@ -61,10 +60,10 @@ describe('<Button/>', () => {
     consoleErrorMock.mockRestore()
   })
 
-  it('should render children', () => {
+  it('should render children', async () => {
     const children = 'Hello world'
 
-    render(<Button>{children}</Button>)
+    await render(<Button>{children}</Button>)
 
     const button = document.querySelector('button')
 
@@ -73,19 +72,19 @@ describe('<Button/>', () => {
   })
 
   it('should render a button', async () => {
-    render(<Button>Hello World</Button>)
+    await render(<Button>Hello World</Button>)
 
-    const button = screen.getByRole('button')
+    const button = page.getByRole('button').element()
 
     expect(button).toBeInTheDocument()
     expect(button).toHaveAttribute('type', 'button')
     expect(button).toHaveTextContent('Hello World')
   })
 
-  it('should provide a focused getter', () => {
+  it('should provide a focused getter', async () => {
     let componentRef: BaseButton | undefined
 
-    render(
+    await render(
       <Button
         //@ts-expect-error TODO this is coming from ReactComponentWrapper
         ref={(component: BaseButton) => {
@@ -95,17 +94,17 @@ describe('<Button/>', () => {
         Hello
       </Button>
     )
-    const button = screen.getByRole('button', { name: 'Hello' })
+    const button = page.getByRole('button', { name: 'Hello' }).element()
 
     button.focus()
 
     expect(componentRef?.focused).toBe(true)
   })
 
-  it('should provide a focus function', () => {
+  it('should provide a focus function', async () => {
     let componentRef: BaseButton | undefined
 
-    render(
+    await render(
       <Button
         //@ts-expect-error TODO this is coming from ReactComponentWrapper
         ref={(component: BaseButton) => {
@@ -115,33 +114,33 @@ describe('<Button/>', () => {
         Hello
       </Button>
     )
-    const button = screen.getByRole('button', { name: 'Hello' })
+    const button = page.getByRole('button', { name: 'Hello' }).element()
 
     componentRef?.focus()
 
     expect(document.activeElement).toBe(button)
   })
 
-  it('should pass the type attribute', () => {
-    render(<Button type="submit">Hello</Button>)
+  it('should pass the type attribute', async () => {
+    await render(<Button type="submit">Hello</Button>)
 
-    const button = screen.getByRole('button', { name: 'Hello' })
+    const button = page.getByRole('button', { name: 'Hello' }).element()
 
     expect(button).toBeInTheDocument()
     expect(button).toHaveAttribute('type', 'submit')
   })
 
-  it('should pass the `elementRef` prop', () => {
+  it('should pass the `elementRef` prop', async () => {
     const elementRef = vi.fn()
-    render(<Button elementRef={elementRef}>Hello</Button>)
+    await render(<Button elementRef={elementRef}>Hello</Button>)
 
-    const button = screen.getByRole('button', { name: 'Hello' })
+    const button = page.getByRole('button', { name: 'Hello' }).element()
 
     expect(elementRef).toHaveBeenCalledWith(button)
   })
 
-  it('should pass the `as` prop', () => {
-    const { container } = render(<Button as="li">Hello</Button>)
+  it('should pass the `as` prop', async () => {
+    const { container } = await render(<Button as="li">Hello</Button>)
 
     const button = container.querySelector('[type="button"]')
 
@@ -150,52 +149,52 @@ describe('<Button/>', () => {
     expect(button!.tagName).toBe('LI')
   })
 
-  it('should set the disabled attribute when `interaction` is set to disabled', () => {
-    render(<Button interaction="disabled">Hello</Button>)
+  it('should set the disabled attribute when `interaction` is set to disabled', async () => {
+    await render(<Button interaction="disabled">Hello</Button>)
 
-    const button = screen.getByRole('button', { name: 'Hello' })
-
-    expect(button).toHaveAttribute('disabled')
-  })
-
-  it('should set the disabled attribute when `disabled` is set', () => {
-    render(<Button disabled>Hello</Button>)
-
-    const button = screen.getByRole('button', { name: 'Hello' })
+    const button = page.getByRole('button', { name: 'Hello' }).element()
 
     expect(button).toHaveAttribute('disabled')
   })
 
-  it('should set the disabled attribute when `interaction` is set to readonly', () => {
-    render(<Button interaction="readonly">Hello</Button>)
+  it('should set the disabled attribute when `disabled` is set', async () => {
+    await render(<Button disabled>Hello</Button>)
 
-    const button = screen.getByRole('button', { name: 'Hello' })
-
-    expect(button).toHaveAttribute('disabled')
-  })
-
-  it('should set the disabled attribute when `readOnly` is set', () => {
-    render(<Button readOnly>Hello</Button>)
-
-    const button = screen.getByRole('button', { name: 'Hello' })
+    const button = page.getByRole('button', { name: 'Hello' }).element()
 
     expect(button).toHaveAttribute('disabled')
   })
 
-  it('should pass the `href` prop', () => {
-    render(<Button href="#">Hello</Button>)
+  it('should set the disabled attribute when `interaction` is set to readonly', async () => {
+    await render(<Button interaction="readonly">Hello</Button>)
 
-    const linkButton = screen.getByRole('link', { name: 'Hello' })
+    const button = page.getByRole('button', { name: 'Hello' }).element()
+
+    expect(button).toHaveAttribute('disabled')
+  })
+
+  it('should set the disabled attribute when `readOnly` is set', async () => {
+    await render(<Button readOnly>Hello</Button>)
+
+    const button = page.getByRole('button', { name: 'Hello' }).element()
+
+    expect(button).toHaveAttribute('disabled')
+  })
+
+  it('should pass the `href` prop', async () => {
+    await render(<Button href="#">Hello</Button>)
+
+    const linkButton = page.getByRole('link', { name: 'Hello' }).element()
 
     expect(linkButton).toBeInTheDocument()
     expect(linkButton).toHaveAttribute('href', '#')
   })
 
-  it('should pass the `renderIcon` prop', () => {
-    render(<Button renderIcon={icon}>Hello</Button>)
+  it('should pass the `renderIcon` prop', async () => {
+    await render(<Button renderIcon={icon}>Hello</Button>)
 
     const svgIcon = document.querySelector(iconSelector)
-    const button = screen.getByRole('button', { name: 'Hello' })
+    const button = page.getByRole('button', { name: 'Hello' }).element()
 
     expect(button).toBeInTheDocument()
     expect(svgIcon).toBeInTheDocument()
@@ -203,45 +202,45 @@ describe('<Button/>', () => {
 
   it('should pass the `onClick` prop', async () => {
     const onClick = vi.fn()
-    render(<Button onClick={onClick}>Hello</Button>)
+    await render(<Button onClick={onClick}>Hello</Button>)
 
-    const button = screen.getByRole('button', { name: 'Hello' })
+    const button = page.getByRole('button', { name: 'Hello' }).element()
 
     await userEvent.click(button)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onClick).toHaveBeenCalledTimes(1)
     })
   })
 
-  it('should render the children as button text', () => {
-    render(<Button>Hello World</Button>)
+  it('should render the children as button text', async () => {
+    await render(<Button>Hello World</Button>)
 
-    const button = screen.getByRole('button')
+    const button = page.getByRole('button').element()
 
     expect(button).toBeInTheDocument()
     expect(button).toHaveTextContent('Hello World')
   })
 
-  it('should not error with a null child', () => {
-    render(<Button>Hello World{null}</Button>)
+  it('should not error with a null child', async () => {
+    await render(<Button>Hello World{null}</Button>)
 
-    const button = screen.getByRole('button', { name: 'Hello World' })
+    const button = page.getByRole('button', { name: 'Hello World' }).element()
 
     expect(button).toBeInTheDocument()
   })
 
-  it('should render a link styled as a button if href is provided', () => {
-    render(<Button href="example.html">Hello World</Button>)
+  it('should render a link styled as a button if href is provided', async () => {
+    await render(<Button href="example.html">Hello World</Button>)
 
-    const button = screen.getAllByRole('link', { name: 'Hello World' })
+    const button = page.getByRole('link', { name: 'Hello World' }).elements()
 
     expect(button).toHaveLength(1)
     expect(button[0]).toHaveAttribute('href', 'example.html')
   })
 
-  it('should render as a link when `to` prop is provided', () => {
-    const { container } = render(<Button to="/example">Test</Button>)
+  it('should render as a link when `to` prop is provided', async () => {
+    const { container } = await render(<Button to="/example">Test</Button>)
 
     const linkButton = container.querySelector('a')
 
@@ -249,8 +248,8 @@ describe('<Button/>', () => {
     expect(linkButton).toHaveAttribute('to', '/example')
   })
 
-  it('should render designated tag if `as` prop is specified', () => {
-    const { container } = render(<Button as="span">Hello World</Button>)
+  it('should render designated tag if `as` prop is specified', async () => {
+    const { container } = await render(<Button as="span">Hello World</Button>)
 
     const button = container.querySelector('[type="button"]')
 
@@ -259,9 +258,9 @@ describe('<Button/>', () => {
     expect(button!.tagName).toBe('SPAN')
   })
 
-  it('should set role="button"', () => {
+  it('should set role="button"', async () => {
     const onClick = vi.fn()
-    const { container } = render(
+    const { container } = await render(
       <Button as="span" onClick={onClick}>
         Hello World
       </Button>
@@ -272,37 +271,37 @@ describe('<Button/>', () => {
     expect(button).toHaveAttribute('role', 'button')
   })
 
-  it('should set tabIndex="0"', () => {
+  it('should set tabIndex="0"', async () => {
     const onClick = vi.fn()
-    render(
+    await render(
       <Button as="span" onClick={onClick}>
         Hello World
       </Button>
     )
-    const button = screen.getByRole('button')
+    const button = page.getByRole('button').element()
 
     expect(button).toBeInTheDocument()
     expect(button).toHaveAttribute('tabIndex', '0')
   })
 
-  it('should pass down the type prop to the button element', () => {
+  it('should pass down the type prop to the button element', async () => {
     const onClick = vi.fn()
-    render(
+    await render(
       <Button type="submit" onClick={onClick}>
         Hello World
       </Button>
     )
-    const button = screen.getByRole('button')
+    const button = page.getByRole('button').element()
 
     expect(button).toBeInTheDocument()
     expect(button).toHaveAttribute('type', 'submit')
   })
 
-  it('focuses with the focus helper', () => {
+  it('focuses with the focus helper', async () => {
     const onFocus = vi.fn()
-    render(<Button onFocus={onFocus}>Hello World</Button>)
+    await render(<Button onFocus={onFocus}>Hello World</Button>)
 
-    const button = screen.getByRole('button')
+    const button = page.getByRole('button').element()
 
     button.focus()
 
@@ -313,13 +312,13 @@ describe('<Button/>', () => {
   describe('onClick', () => {
     it('should call onClick when clicked', async () => {
       const onClick = vi.fn()
-      render(<Button onClick={onClick}>Hello World</Button>)
+      await render(<Button onClick={onClick}>Hello World</Button>)
 
-      const button = screen.getByRole('button', { name: 'Hello World' })
+      const button = page.getByRole('button', { name: 'Hello World' }).element()
 
       await userEvent.click(button)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onClick).toHaveBeenCalled()
       })
     })
@@ -327,16 +326,16 @@ describe('<Button/>', () => {
     it('should not call onClick when button is disabled', async () => {
       const onClick = vi.fn()
 
-      render(
+      await render(
         <Button disabled onClick={onClick}>
           Hello World
         </Button>
       )
-      const button = screen.getByRole('button', { name: 'Hello World' })
+      const button = page.getByRole('button', { name: 'Hello World' }).element()
 
       await userEvent.click(button)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onClick).not.toHaveBeenCalled()
       })
     })
@@ -344,16 +343,16 @@ describe('<Button/>', () => {
     it('should not call onClick when button is readOnly', async () => {
       const onClick = vi.fn()
 
-      render(
+      await render(
         <Button readOnly onClick={onClick}>
           Hello World
         </Button>
       )
-      const button = screen.getByRole('button', { name: 'Hello World' })
+      const button = page.getByRole('button', { name: 'Hello World' }).element()
 
       await userEvent.click(button)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onClick).not.toHaveBeenCalled()
       })
     })
@@ -361,13 +360,13 @@ describe('<Button/>', () => {
     it('should not call onClick when button is disabled and an href prop is provided', async () => {
       const onClick = vi.fn()
 
-      render(<Button href="#">Hello World</Button>)
+      await render(<Button href="#">Hello World</Button>)
 
-      const button = screen.getByRole('link', { name: 'Hello World' })
+      const button = page.getByRole('link', { name: 'Hello World' }).element()
 
       await userEvent.click(button)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onClick).not.toHaveBeenCalled()
       })
     })
@@ -375,16 +374,16 @@ describe('<Button/>', () => {
     it('should not call onClick when button is readOnly and an href prop is provided', async () => {
       const onClick = vi.fn()
 
-      render(
+      await render(
         <Button readOnly onClick={onClick} href="#">
           Hello World
         </Button>
       )
-      const button = screen.getByRole('link', { name: 'Hello World' })
+      const button = page.getByRole('link', { name: 'Hello World' }).element()
 
       await userEvent.click(button)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onClick).not.toHaveBeenCalled()
       })
     })
@@ -392,16 +391,16 @@ describe('<Button/>', () => {
     it('should call onClick when space key is pressed if href is provided', async () => {
       const onClick = vi.fn()
 
-      render(
+      await render(
         <Button onClick={onClick} href="#">
           Hello World
         </Button>
       )
-      const button = screen.getByRole('link', { name: 'Hello World' })
+      const button = page.getByRole('link', { name: 'Hello World' }).element()
 
       await userEvent.type(button, '{space}')
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onClick).toHaveBeenCalled()
       })
     })
@@ -409,16 +408,16 @@ describe('<Button/>', () => {
     it('should call onClick when enter key is pressed when not a button or link', async () => {
       const onClick = vi.fn()
 
-      render(
+      await render(
         <Button as="span" onClick={onClick}>
           Hello World
         </Button>
       )
-      const button = screen.getByRole('button', { name: 'Hello World' })
+      const button = page.getByRole('button', { name: 'Hello World' }).element()
 
       await userEvent.type(button, '{enter}')
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onClick).toHaveBeenCalled()
       })
     })
@@ -426,16 +425,16 @@ describe('<Button/>', () => {
     it('should not call onClick when button is disabled and space key is pressed', async () => {
       const onClick = vi.fn()
 
-      render(
+      await render(
         <Button disabled onClick={onClick} href="#">
           Hello World
         </Button>
       )
-      const button = screen.getByRole('link', { name: 'Hello World' })
+      const button = page.getByRole('link', { name: 'Hello World' }).element()
 
       await userEvent.type(button, '{spaec}')
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onClick).not.toHaveBeenCalled()
       })
     })
@@ -443,16 +442,16 @@ describe('<Button/>', () => {
     it('should not call onClick when button is readOnly and space key is pressed', async () => {
       const onClick = vi.fn()
 
-      render(
+      await render(
         <Button readOnly onClick={onClick} href="#">
           Hello World
         </Button>
       )
-      const button = screen.getByRole('link', { name: 'Hello World' })
+      const button = page.getByRole('link', { name: 'Hello World' }).element()
 
       await userEvent.type(button, '{space}')
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onClick).not.toHaveBeenCalled()
       })
     })
@@ -461,13 +460,13 @@ describe('<Button/>', () => {
   describe('for a11y', () => {
     it('should meet standards when onClick is given', async () => {
       const onClick = vi.fn()
-      render(<Button onClick={onClick}>Hello World</Button>)
+      await render(<Button onClick={onClick}>Hello World</Button>)
 
-      const button = screen.getByRole('button', { name: 'Hello World' })
+      const button = page.getByRole('button', { name: 'Hello World' }).element()
 
       await userEvent.click(button)
 
-      await waitFor(async () => {
+      await vi.waitFor(async () => {
         const axeCheck = await runAxeCheck(button)
 
         expect(axeCheck).toBe(true)
@@ -475,20 +474,24 @@ describe('<Button/>', () => {
     })
 
     describe('when disabled', () => {
-      it('sets the disabled attribute so that the button is not in tab order', () => {
-        render(<Button disabled>Hello World</Button>)
+      it('sets the disabled attribute so that the button is not in tab order', async () => {
+        await render(<Button disabled>Hello World</Button>)
 
-        const button = screen.getByRole('button', { name: 'Hello World' })
+        const button = page
+          .getByRole('button', { name: 'Hello World' })
+          .element()
 
         expect(button).toHaveAttribute('disabled')
       })
     })
 
     describe('when readOnly', () => {
-      it('sets the disabled attribute so that the button is not in tab order', () => {
-        render(<Button readOnly>Hello World</Button>)
+      it('sets the disabled attribute so that the button is not in tab order', async () => {
+        await render(<Button readOnly>Hello World</Button>)
 
-        const button = screen.getByRole('button', { name: 'Hello World' })
+        const button = page
+          .getByRole('button', { name: 'Hello World' })
+          .element()
 
         expect(button).toHaveAttribute('disabled')
       })

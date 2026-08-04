@@ -22,32 +22,34 @@
  * SOFTWARE.
  */
 
-import { render } from '@testing-library/react'
-import { vi } from 'vitest'
-
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { describe, it, expect, vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { View } from '@instructure/ui-view/latest'
 
 import { Rating } from '@instructure/ui-rating/latest'
 
 describe('<Rating />', () => {
-  it('should render the correct number of icons', () => {
-    const { container } = render(<Rating label="Course rating" iconCount={5} />)
+  it('should render the correct number of icons', async () => {
+    const { container } = await render(
+      <Rating label="Course rating" iconCount={5} />
+    )
     const icons = container.querySelectorAll('svg')
 
     expect(icons).toHaveLength(5)
   })
 
-  it('should handle a valueMax of zero', () => {
-    const { container } = render(<Rating label="Course rating" valueMax={0} />)
+  it('should handle a valueMax of zero', async () => {
+    const { container } = await render(
+      <Rating label="Course rating" valueMax={0} />
+    )
     const icons = container.querySelectorAll('svg')
 
     expect(icons).toHaveLength(3)
   })
 
-  it('should fill the correct number of icons', () => {
-    const { container } = render(
+  it('should fill the correct number of icons', async () => {
+    const { container } = await render(
       <Rating
         label="Course rating"
         iconCount={5}
@@ -60,8 +62,8 @@ describe('<Rating />', () => {
     expect(filledIcons).toHaveLength(4)
   })
 
-  it('never renders more than `iconCount` icons', () => {
-    const { container } = render(
+  it('never renders more than `iconCount` icons', async () => {
+    const { container } = await render(
       <Rating
         label="Course rating"
         iconCount={5}
@@ -75,8 +77,8 @@ describe('<Rating />', () => {
     expect(icons).toHaveLength(5)
   })
 
-  it('should render screen reader text to give context', () => {
-    const { container } = render(
+  it('should render screen reader text to give context', async () => {
+    const { container } = await render(
       <Rating
         label="Course rating"
         iconCount={5}
@@ -90,7 +92,9 @@ describe('<Rating />', () => {
   })
 
   it('should meet a11y standards', async () => {
-    const { container } = render(<Rating label="Course rating" iconCount={5} />)
+    const { container } = await render(
+      <Rating label="Course rating" iconCount={5} />
+    )
 
     const axeCheck = await runAxeCheck(container)
     expect(axeCheck).toBe(true)
@@ -105,7 +109,7 @@ describe('<Rating />', () => {
       .filter((prop) => prop !== 'children')
       .forEach((prop) => {
         if (Object.keys(allowedProps).indexOf(prop) < 0) {
-          it(`should NOT allow the '${prop}' prop`, () => {
+          it(`should NOT allow the '${prop}' prop`, async () => {
             const consoleErrorSpy = vi
               .spyOn(console, 'error')
               .mockImplementation(() => {})
@@ -114,7 +118,9 @@ describe('<Rating />', () => {
               [prop]: 'foo'
             }
 
-            render(<Rating label="Course rating" iconCount={5} {...props} />)
+            await render(
+              <Rating label="Course rating" iconCount={5} {...props} />
+            )
             expect(consoleErrorSpy).toHaveBeenCalledWith(
               expect.stringContaining(expectedErrorMessage),
               expect.any(String)
@@ -123,13 +129,15 @@ describe('<Rating />', () => {
             consoleErrorSpy.mockRestore()
           })
         } else {
-          it(`should allow the '${prop}' prop`, () => {
+          it(`should allow the '${prop}' prop`, async () => {
             const props = { [prop]: allowedProps[prop] }
             const consoleErrorSpy = vi
               .spyOn(console, 'error')
               .mockImplementation(() => {})
 
-            render(<Rating label="Course rating" iconCount={5} {...props} />)
+            await render(
+              <Rating label="Course rating" iconCount={5} {...props} />
+            )
             expect(consoleErrorSpy).not.toHaveBeenCalled()
 
             consoleErrorSpy.mockRestore()

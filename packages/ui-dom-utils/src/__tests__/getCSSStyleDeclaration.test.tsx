@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-import '@testing-library/jest-dom'
-import { vi } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { getCSSStyleDeclaration } from '../getCSSStyleDeclaration.js'
 
 describe('getCSSStyleDeclaration', () => {

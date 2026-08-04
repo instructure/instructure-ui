@@ -22,10 +22,9 @@
  * SOFTWARE.
  */
 
-import { render, screen } from '@testing-library/react'
-import { vi, expect } from 'vitest'
-
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import measureText from '../v2/utils/measureText.js'
 
 const baseStyle = {
@@ -80,13 +79,13 @@ describe('measureText', () => {
     expect(width).toBe(0)
   })
 
-  it('should calculate text width correctly', () => {
-    render(
+  it('should calculate text width correctly', async () => {
+    await render(
       <div data-testid="stage" style={baseStyle}>
         Lorem ipsum <span style={baseStyle}>DOLOR SIT AMET.</span>
       </div>
     )
-    const stage = screen.getByTestId('stage')
+    const stage = page.getByTestId('stage').element()
     const nodes = getNodes(stage)
 
     const width = measureText(nodes, stage)
@@ -95,23 +94,23 @@ describe('measureText', () => {
   })
 
   it('should account for different nodes', async () => {
-    const { rerender } = render(
+    const { rerender } = await render(
       <div data-testid="stage" style={baseStyle}>
         Lorem ipsum <span style={baseStyle}>DOLOR SIT AMET.</span>
       </div>
     )
-    const stage = screen.getByTestId('stage')
+    const stage = page.getByTestId('stage').element()
     const nodes = getNodes(stage)
 
     const width = measureText(nodes, stage)
 
     // Set child
-    rerender(
+    await rerender(
       <div data-testid="stage" style={baseStyle}>
         Lorem ipsum DOLOR SIT AMET.
       </div>
     )
-    const stage2 = screen.getByTestId('stage')
+    const stage2 = page.getByTestId('stage').element()
     const nodes2 = getNodes(stage2)
 
     const width2 = measureText(nodes2, stage2)
@@ -119,7 +118,7 @@ describe('measureText', () => {
     expect(width).toEqual(width2)
   })
 
-  it('should call measureText on a properly configured canvas 2d context', () => {
+  it('should call measureText on a properly configured canvas 2d context', async () => {
     const mockedStyle = {
       fontSize: '20px',
       fontWeight: 'bold',
@@ -127,12 +126,12 @@ describe('measureText', () => {
       fontFamily: 'Arial'
     }
 
-    render(
+    await render(
       <div data-testid="stage" style={mockedStyle}>
         Lorem ipsum
       </div>
     )
-    const stage = screen.getByTestId('stage')
+    const stage = page.getByTestId('stage').element()
     const nodes = getNodes(stage)
 
     measureText(nodes, stage)
@@ -146,24 +145,24 @@ describe('measureText', () => {
   })
 
   it('should account for letter spacing styles', async () => {
-    const { rerender } = render(
+    const { rerender } = await render(
       <div data-testid="stage" style={baseStyle}>
         Lorem ipsum
       </div>
     )
-    const stage = screen.getByTestId('stage')
+    const stage = page.getByTestId('stage').element()
     const nodes = getNodes(stage)
     const width = measureText(nodes, stage)
 
     expect(width).toBe(110) // default mocked width (text.length * 10)
 
     // Set letterSpacing
-    rerender(
+    await rerender(
       <div data-testid="stage2" style={{ ...baseStyle, letterSpacing: '5px' }}>
         Lorem ipsum
       </div>
     )
-    const stage2 = screen.getByTestId('stage2')
+    const stage2 = page.getByTestId('stage2').element()
     const nodes2 = getNodes(stage2)
     const width2 = measureText(nodes2, stage2)
 

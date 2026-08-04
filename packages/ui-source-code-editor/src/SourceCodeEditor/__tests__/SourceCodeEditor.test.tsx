@@ -21,18 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { render, screen, waitFor } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
-import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
 
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import { SourceCodeEditor } from '@instructure/ui-source-code-editor/latest'
 
 describe('<SourceCodeEditor />', () => {
   describe('syntax highlight', () => {
     it('should highlight jsx code', async () => {
-      const { container } = render(
+      const { container } = await render(
         <SourceCodeEditor
           label="test"
           language="jsx"
@@ -49,7 +48,7 @@ describe('<SourceCodeEditor />', () => {
     })
 
     it('should link editor element to label using aria-labelledby attribute', async () => {
-      const { container } = render(
+      const { container } = await render(
         <SourceCodeEditor
           label="test"
           language="jsx"
@@ -83,8 +82,8 @@ describe('<SourceCodeEditor />', () => {
     })
 
     it('should be applied on load', async () => {
-      render(<SourceCodeEditor label="foo" defaultValue="hello" />)
-      const input = screen.getByRole('textbox')
+      await render(<SourceCodeEditor label="foo" defaultValue="hello" />)
+      const input = page.getByRole('textbox').element()
 
       expect(input).toHaveTextContent('hello')
     })
@@ -92,8 +91,8 @@ describe('<SourceCodeEditor />', () => {
 
   describe('spellcheck', () => {
     it('should set `spellcheck="true"` on the input', async () => {
-      render(<SourceCodeEditor label="foo" spellcheck />)
-      const input = screen.getByRole('textbox')
+      await render(<SourceCodeEditor label="foo" spellcheck />)
+      const input = page.getByRole('textbox').element()
 
       expect(input).toHaveAttribute('spellcheck', 'true')
     })
@@ -102,7 +101,7 @@ describe('<SourceCodeEditor />', () => {
   describe('readOnly', () => {
     it('should still update value when value prop changes', async () => {
       const onChange = vi.fn()
-      const { rerender } = render(
+      const { rerender } = await render(
         <SourceCodeEditor
           label="foo"
           readOnly
@@ -110,10 +109,10 @@ describe('<SourceCodeEditor />', () => {
           onChange={onChange}
         />
       )
-      const input = screen.getByRole('textbox')
+      const input = page.getByRole('textbox').element()
       expect(input).not.toHaveTextContent('hello world')
 
-      rerender(
+      await rerender(
         <SourceCodeEditor
           label="foo"
           readOnly
@@ -122,14 +121,14 @@ describe('<SourceCodeEditor />', () => {
         />
       )
 
-      const inputUpdated = screen.getByRole('textbox')
+      const inputUpdated = page.getByRole('textbox').element()
       expect(inputUpdated).toHaveTextContent('hello world')
     })
 
     it('should still be focusable', async () => {
       let elementRef: SourceCodeEditor | null = null
 
-      render(
+      await render(
         <SourceCodeEditor
           label="foo"
           readOnly
@@ -138,11 +137,11 @@ describe('<SourceCodeEditor />', () => {
           }}
         />
       )
-      const input = screen.getByRole('textbox')
+      const input = page.getByRole('textbox').element()
 
       elementRef!.focus()
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(input).toHaveFocus()
         expect(document.activeElement).toBe(input)
       })
@@ -151,16 +150,16 @@ describe('<SourceCodeEditor />', () => {
 
   describe('editable turned off', () => {
     it('should set `contenteditable` to false', async () => {
-      render(<SourceCodeEditor label="foo" editable={false} />)
+      await render(<SourceCodeEditor label="foo" editable={false} />)
 
-      const input = screen.getByRole('textbox')
+      const input = page.getByRole('textbox').element()
       expect(input).toHaveAttribute('contenteditable', 'false')
     })
 
     it('should not be focusable', async () => {
       let elementRef: HTMLDivElement | null = null
 
-      render(
+      await render(
         <SourceCodeEditor
           label="foo"
           editable={false}
@@ -170,11 +169,11 @@ describe('<SourceCodeEditor />', () => {
         />
       )
 
-      const input = screen.getByRole('textbox')
+      const input = page.getByRole('textbox').element()
 
       elementRef!.focus()
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(elementRef).not.toHaveFocus()
         expect(document.activeElement).not.toBe(input)
       })
@@ -183,7 +182,7 @@ describe('<SourceCodeEditor />', () => {
 
   describe('lineNumbers', () => {
     it('should display line numbers', async () => {
-      const { container } = render(
+      const { container } = await render(
         <SourceCodeEditor
           label="foo"
           defaultValue={`
@@ -204,7 +203,7 @@ describe('<SourceCodeEditor />', () => {
 
   describe('foldGutter', () => {
     it('should display fold icons', async () => {
-      render(
+      await render(
         <SourceCodeEditor
           label="foo"
           defaultValue={`const func = () => {
@@ -214,14 +213,14 @@ describe('<SourceCodeEditor />', () => {
         />
       )
 
-      const gutterIcon = screen.getByTitle('Fold line')
+      const gutterIcon = page.getByTitle('Fold line').element()
 
       expect(gutterIcon).toBeInTheDocument()
       expect(gutterIcon).toBeVisible()
     })
 
     it('should fold lines on click', async () => {
-      const { container } = render(
+      const { container } = await render(
         <SourceCodeEditor
           label="foo"
           defaultValue={`const func = () => {
@@ -231,13 +230,13 @@ describe('<SourceCodeEditor />', () => {
         />
       )
       const editor = container.querySelector('[class$="-codeEditor"]')
-      const gutterIcon = screen.getByTitle('Fold line')
+      const gutterIcon = page.getByTitle('Fold line').element()
 
       expect(gutterIcon).toBeInTheDocument()
 
       await userEvent.click(gutterIcon)
 
-      const unfoldIcons = screen.getAllByTitle('Unfold line')
+      const unfoldIcons = page.getByTitle('Unfold line').elements()
 
       expect(editor).not.toHaveTextContent("console.log('foo')")
       expect(unfoldIcons[1]).toBeVisible()
@@ -246,7 +245,7 @@ describe('<SourceCodeEditor />', () => {
 
   describe('highlightActiveLine', () => {
     it('should not highlight line by default', async () => {
-      const { container } = render(
+      const { container } = await render(
         <SourceCodeEditor label="foo" defaultValue={`const myNumber = 8`} />
       )
       const allLines = container.querySelectorAll('[class="cm-line"]')!
@@ -255,7 +254,7 @@ describe('<SourceCodeEditor />', () => {
     })
 
     it('should highlight line when true', async () => {
-      const { container } = render(
+      const { container } = await render(
         <SourceCodeEditor
           label="foo"
           defaultValue={`const myNumber = 8`}
@@ -269,7 +268,7 @@ describe('<SourceCodeEditor />', () => {
 
   describe('highlightActiveLineGutter', () => {
     it('should not highlight gutter element by default', async () => {
-      const { container } = render(
+      const { container } = await render(
         <SourceCodeEditor
           label="foo"
           defaultValue={`const myNumber = 8`}
@@ -284,7 +283,7 @@ describe('<SourceCodeEditor />', () => {
     })
 
     it('should highlight gutter element when true', async () => {
-      const { container } = render(
+      const { container } = await render(
         <SourceCodeEditor
           label="foo"
           defaultValue={`const myNumber = 8`}
@@ -302,10 +301,10 @@ describe('<SourceCodeEditor />', () => {
 
   describe('direction', () => {
     it('rtl should apply', async () => {
-      render(
+      await render(
         <SourceCodeEditor label="foo" defaultValue="hello" direction={'rtl'} />
       )
-      const input = screen.getByRole('textbox')
+      const input = page.getByRole('textbox').element()
 
       expect(input).toHaveAttribute('dir', 'rtl')
     })
@@ -313,7 +312,7 @@ describe('<SourceCodeEditor />', () => {
 
   describe('label', () => {
     it('should be inserted in the ScreenReaderContent', async () => {
-      const { container } = render(
+      const { container } = await render(
         <SourceCodeEditor
           label="this is a label for the SR"
           defaultValue="hello"
@@ -328,7 +327,7 @@ describe('<SourceCodeEditor />', () => {
   describe('elementRef', () => {
     it('should return with the root element', async () => {
       const elementRef = vi.fn()
-      const { container } = render(
+      const { container } = await render(
         <SourceCodeEditor
           label="foo"
           defaultValue="hello"
@@ -344,7 +343,7 @@ describe('<SourceCodeEditor />', () => {
   describe('containerRef', () => {
     it('should return with the root element', async () => {
       const containerRef = vi.fn()
-      const { container } = render(
+      const { container } = await render(
         <SourceCodeEditor
           label="foo"
           defaultValue="hello"

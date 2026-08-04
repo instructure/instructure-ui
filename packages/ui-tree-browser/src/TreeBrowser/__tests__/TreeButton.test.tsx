@@ -22,15 +22,14 @@
  * SOFTWARE.
  */
 
-import { render, screen } from '@testing-library/react'
-import { vi } from 'vitest'
-
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect, vi } from 'vitest'
 import { TreeButton } from '@instructure/ui-tree-browser/latest'
 
 describe('<TreeButton />', () => {
   it('should render', async () => {
-    const { container } = render(<TreeButton id="1" />)
+    const { container } = await render(<TreeButton id="1" />)
     const treeButton = container.querySelector('button[class$="-treeButton"]')
 
     expect(treeButton).toBeInTheDocument()
@@ -40,12 +39,12 @@ describe('<TreeButton />', () => {
     it('should call with parent element', async () => {
       const containerRef = vi.fn()
 
-      render(
+      await render(
         <div data-testid="1">
           <TreeButton id="2" containerRef={containerRef} />
         </div>
       )
-      const div = screen.getByTestId('1')
+      const div = page.getByTestId('1').element()
 
       expect(containerRef).toHaveBeenCalledWith(div)
     })
@@ -53,7 +52,7 @@ describe('<TreeButton />', () => {
 
   describe('descriptor', () => {
     it('should not render a descriptor element if no descriptor passed', async () => {
-      const { container } = render(<TreeButton id="1" />)
+      const { container } = await render(<TreeButton id="1" />)
 
       const descriptor = container.querySelector(
         '[class$="-treeButton__textDescriptor"]'
@@ -62,7 +61,7 @@ describe('<TreeButton />', () => {
     })
 
     it('should render a descriptor element if descriptor passed', async () => {
-      const { container } = render(
+      const { container } = await render(
         <TreeButton id="1" descriptor="Some Descriptor" />
       )
       const descriptor = container.querySelector(
@@ -83,11 +82,11 @@ describe('<TreeButton />', () => {
     )
 
     it('should render a collection icon', async () => {
-      render(
+      await render(
         <TreeButton id="1" type="collection" collectionIcon={() => Icon} />
       )
-      const icon = screen.getByTestId('custom-icon')
-      const iconTitle = screen.getByTestId('custom-icon-title')
+      const icon = page.getByTestId('custom-icon').element()
+      const iconTitle = page.getByTestId('custom-icon-title').element()
 
       expect(icon).toBeInTheDocument()
       expect(icon).toHaveTextContent('Test icon')
@@ -95,22 +94,22 @@ describe('<TreeButton />', () => {
     })
 
     it('should render an item icon', async () => {
-      render(<TreeButton id="1" type="item" itemIcon={() => Icon} />)
-      const icon = screen.getByTestId('custom-icon')
+      await render(<TreeButton id="1" type="item" itemIcon={() => Icon} />)
+      const icon = page.getByTestId('custom-icon').element()
 
       expect(icon).toBeInTheDocument()
       expect(icon).toHaveTextContent('Test icon')
     })
 
     it('should render no icon if no icon prop passed', async () => {
-      const { container } = render(<TreeButton id="1" />)
+      const { container } = await render(<TreeButton id="1" />)
       const icon = container.querySelector('svg')
 
       expect(icon).not.toBeInTheDocument()
     })
 
     it('should render a thumbnail instead of an icon if a thumbnail URL is passed', async () => {
-      const { container } = render(
+      const { container } = await render(
         <TreeButton
           id="1"
           type="item"
@@ -123,14 +122,14 @@ describe('<TreeButton />', () => {
     })
 
     it('should not render a thumbnail if no thumbnail URL is passed', async () => {
-      const { container } = render(<TreeButton id="1" type="item" />)
+      const { container } = await render(<TreeButton id="1" type="item" />)
       const thumbnail = container.querySelector('img')
 
       expect(thumbnail).not.toBeInTheDocument()
     })
 
     it('should render a thumbnail if a thumbnail and an icon are passed', async () => {
-      const { container } = render(
+      const { container } = await render(
         <TreeButton
           id="1"
           type="item"
@@ -148,7 +147,7 @@ describe('<TreeButton />', () => {
 
   describe('renderContent', () => {
     it('should render the content passed to renderContent', async () => {
-      const { container } = render(
+      const { container } = await render(
         <TreeButton
           id="1"
           renderContent={() => <div className="test1">abcd</div>}

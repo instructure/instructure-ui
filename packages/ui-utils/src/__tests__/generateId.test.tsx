@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import '@testing-library/jest-dom'
+import { describe, it, expect } from 'vitest'
 import { generateId } from '../generateId.js'
 
 describe('generateId', () => {

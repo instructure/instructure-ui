@@ -22,10 +22,18 @@
  * SOFTWARE.
  */
 import { useState } from 'react'
-import { fireEvent, render, screen, waitFor } from '@testing-library/react'
-import { vi, MockInstance } from 'vitest'
-import userEvent from '@testing-library/user-event'
-import '@testing-library/jest-dom'
+import { fireEvent } from '@testing-library/dom'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import {
+  describe,
+  it,
+  expect,
+  beforeEach,
+  afterEach,
+  vi,
+  MockInstance
+} from 'vitest'
 import { HeartInstUIIcon } from '@instructure/ui-icons'
 
 import { DateInput2 } from '@instructure/ui-date-input/latest'
@@ -68,7 +76,7 @@ describe('<DateInput2 />', () => {
   })
 
   it('should render an input', async () => {
-    const { container } = render(<DateInputExample />)
+    const { container } = await render(<DateInputExample />)
     const dateInput = container.querySelector('input')
 
     expect(dateInput).toBeInTheDocument()
@@ -76,7 +84,7 @@ describe('<DateInput2 />', () => {
   })
 
   it('should render an input label', async () => {
-    const { container } = render(<DateInputExample />)
+    const { container } = await render(<DateInputExample />)
 
     const label = container.querySelector('label')
 
@@ -86,7 +94,7 @@ describe('<DateInput2 />', () => {
 
   it('should render an input placeholder', async () => {
     const placeholder = 'Placeholder'
-    render(
+    await render(
       <DateInput2
         renderLabel="Choose a date"
         screenReaderLabels={{
@@ -98,14 +106,14 @@ describe('<DateInput2 />', () => {
         value=""
       />
     )
-    const dateInput = screen.getByLabelText('Choose a date')
+    const dateInput = page.getByLabelText('Choose a date').element()
 
     expect(dateInput).toHaveAttribute('placeholder', placeholder)
   })
 
   it('should render a calendar icon with screen reader label', async () => {
     const iconLabel = 'Calendar icon Label'
-    const { container } = render(
+    const { container } = await render(
       <DateInput2
         renderLabel="Choose a date"
         screenReaderLabels={{
@@ -117,7 +125,7 @@ describe('<DateInput2 />', () => {
       />
     )
     const calendarIcon = container.querySelector('svg[name="Calendar"]')
-    const calendarLabel = screen.getByText(iconLabel)
+    const calendarLabel = page.getByText(iconLabel).element()
 
     expect(calendarIcon).toBeInTheDocument()
     expect(calendarLabel).toBeInTheDocument()
@@ -126,7 +134,7 @@ describe('<DateInput2 />', () => {
   it('refs should return the underlying component', async () => {
     const inputRef = vi.fn()
     const ref: React.Ref<TextInput> = { current: null }
-    const { container } = render(
+    const { container } = await render(
       <DateInput2
         id="dateInput2"
         inputRef={inputRef}
@@ -147,7 +155,7 @@ describe('<DateInput2 />', () => {
 
   it('should render a custom calendar icon with screen reader label', async () => {
     const iconLabel = 'Calendar icon Label'
-    const { container } = render(
+    const { container } = await render(
       <DateInput2
         renderLabel="Choose a date"
         screenReaderLabels={{
@@ -160,29 +168,29 @@ describe('<DateInput2 />', () => {
       />
     )
     const calendarIcon = container.querySelector('svg[name="Heart"]')
-    const calendarLabel = screen.getByText(iconLabel)
+    const calendarLabel = page.getByText(iconLabel).element()
 
     expect(calendarIcon).toBeInTheDocument()
     expect(calendarLabel).toBeInTheDocument()
   })
 
   it('should not show calendar table by default', async () => {
-    render(<DateInputExample />)
-    const calendarTable = screen.queryByRole('table')
+    await render(<DateInputExample />)
+    const calendarTable = page.getByRole('table').query()
 
     expect(calendarTable).not.toBeInTheDocument()
   })
 
   it('should show calendar table when calendar button is clicked', async () => {
-    render(<DateInputExample />)
-    const calendarButton = screen.getByRole('button')
+    await render(<DateInputExample />)
+    const calendarButton = page.getByRole('button').element()
 
     expect(calendarButton).toBeInTheDocument()
 
     await userEvent.click(calendarButton)
 
-    await waitFor(() => {
-      const calendarTable = screen.queryByRole('table')
+    await vi.waitFor(() => {
+      const calendarTable = page.getByRole('table').query()
       expect(calendarTable).toBeInTheDocument()
     })
   })
@@ -191,7 +199,7 @@ describe('<DateInput2 />', () => {
     const nextMonthLabel = 'Next month'
     const prevMonthLabel = 'Previous month'
 
-    render(
+    await render(
       <DateInput2
         renderLabel="Choose a date"
         screenReaderLabels={{
@@ -202,23 +210,27 @@ describe('<DateInput2 />', () => {
         value=""
       />
     )
-    const calendarButton = screen.getByRole('button')
+    const calendarButton = page.getByRole('button').element()
 
     await userEvent.click(calendarButton)
 
-    await waitFor(() => {
-      const prevMonthButton = screen.getByRole('button', {
-        name: prevMonthLabel
-      })
-      const nextMonthButton = screen.getByRole('button', {
-        name: nextMonthLabel
-      })
+    await vi.waitFor(() => {
+      const prevMonthButton = page
+        .getByRole('button', {
+          name: prevMonthLabel
+        })
+        .element()
+      const nextMonthButton = page
+        .getByRole('button', {
+          name: nextMonthLabel
+        })
+        .element()
 
       expect(prevMonthButton).toBeInTheDocument()
       expect(nextMonthButton).toBeInTheDocument()
 
-      const prevButtonLabel = screen.getByText(prevMonthLabel)
-      const nextButtonLabel = screen.getByText(nextMonthLabel)
+      const prevButtonLabel = page.getByText(prevMonthLabel).element()
+      const nextButtonLabel = page.getByText(nextMonthLabel).element()
 
       expect(prevButtonLabel).toBeInTheDocument()
       expect(nextButtonLabel).toBeInTheDocument()
@@ -237,7 +249,7 @@ describe('<DateInput2 />', () => {
 
   it('should programmatically set and render the initial value', async () => {
     const value = '26/03/2024'
-    render(
+    await render(
       <DateInput2
         renderLabel="Choose a date"
         screenReaderLabels={{
@@ -250,7 +262,7 @@ describe('<DateInput2 />', () => {
         value={value}
       />
     )
-    const dateInput = screen.getByLabelText('Choose a date')
+    const dateInput = page.getByLabelText('Choose a date').element()
 
     expect(dateInput).toHaveValue(value)
     expect(dateInput).toBeInTheDocument()
@@ -258,7 +270,7 @@ describe('<DateInput2 />', () => {
 
   it('should set interaction type to disabled', async () => {
     const interactionDisabled = 'disabled'
-    const { container } = render(
+    const { container } = await render(
       <DateInput2
         renderLabel="Choose a date"
         screenReaderLabels={{
@@ -277,7 +289,7 @@ describe('<DateInput2 />', () => {
 
   it('should set interaction type to readonly', async () => {
     const interactionReadOnly = 'readonly'
-    const { container } = render(
+    const { container } = await render(
       <DateInput2
         renderLabel="Choose a date"
         screenReaderLabels={{
@@ -290,22 +302,22 @@ describe('<DateInput2 />', () => {
       />
     )
     const dateInput = container.querySelector('input')
-    const calendarButton = screen.getByRole('button')
+    const calendarButton = page.getByRole('button').element()
 
     expect(dateInput).toHaveAttribute(interactionReadOnly)
     expect(calendarButton).toBeInTheDocument()
 
     await userEvent.click(calendarButton)
 
-    await waitFor(() => {
-      const calendarTable = screen.queryByRole('table')
+    await vi.waitFor(() => {
+      const calendarTable = page.getByRole('table').query()
 
       expect(calendarTable).not.toBeInTheDocument()
     })
   })
 
   it('should set required', async () => {
-    const { container } = render(
+    const { container } = await render(
       <DateInput2
         renderLabel="Choose a date"
         screenReaderLabels={{
@@ -324,7 +336,7 @@ describe('<DateInput2 />', () => {
 
   it('should call onBlur', async () => {
     const onBlur = vi.fn()
-    render(
+    await render(
       <DateInput2
         renderLabel="Choose a date"
         screenReaderLabels={{
@@ -336,11 +348,11 @@ describe('<DateInput2 />', () => {
         onBlur={onBlur}
       />
     )
-    const dateInput = screen.getByLabelText('Choose a date')
+    const dateInput = page.getByLabelText('Choose a date').element()
 
     fireEvent.blur(dateInput)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onBlur).toHaveBeenCalled()
     })
   })
@@ -367,19 +379,19 @@ describe('<DateInput2 />', () => {
       )
     }
 
-    render(<Example />)
+    await render(<Example />)
 
-    expect(screen.queryByText(errorMsg)).not.toBeInTheDocument()
+    expect(page.getByText(errorMsg).query()).not.toBeInTheDocument()
 
-    const dateInput = screen.getByLabelText(LABEL_TEXT)
+    const dateInput = page.getByLabelText(LABEL_TEXT).element()
 
     await userEvent.click(dateInput)
     await userEvent.type(dateInput, 'Not a date')
 
     dateInput.blur()
 
-    await waitFor(() => {
-      expect(screen.getByText(errorMsg)).toBeInTheDocument()
+    await vi.waitFor(() => {
+      expect(page.getByText(errorMsg).element()).toBeInTheDocument()
     })
   })
 
@@ -392,7 +404,7 @@ describe('<DateInput2 />', () => {
       { type: 'screenreader-only', text: 'Screenreader' }
     ]
 
-    render(
+    await render(
       <DateInput2
         renderLabel="Choose a date"
         screenReaderLabels={{
@@ -405,12 +417,12 @@ describe('<DateInput2 />', () => {
       />
     )
 
-    expect(screen.getByText('TypeLess')).toBeVisible()
-    expect(screen.getByText('Error')).toBeVisible()
-    expect(screen.getByText('Success')).toBeVisible()
-    expect(screen.getByText('Hint')).toBeVisible()
+    expect(page.getByText('TypeLess').element()).toBeVisible()
+    expect(page.getByText('Error').element()).toBeVisible()
+    expect(page.getByText('Success').element()).toBeVisible()
+    expect(page.getByText('Hint').element()).toBeVisible()
 
-    const screenreaderMessage = screen.getByText('Screenreader')
+    const screenreaderMessage = page.getByText('Screenreader').element()
     expect(screenreaderMessage).toBeInTheDocument()
     expect(screenreaderMessage).toHaveClass(/screenReaderContent/)
   })
@@ -418,7 +430,7 @@ describe('<DateInput2 />', () => {
   it('should render date picker dialog with proper role and ARIA label', async () => {
     const datePickerLabel = 'Date picker'
 
-    render(
+    await render(
       <DateInput2
         renderLabel="Choose a date"
         screenReaderLabels={{
@@ -431,11 +443,15 @@ describe('<DateInput2 />', () => {
       />
     )
 
-    const calendarButton = screen.getByRole('button', { name: 'Calendar' })
+    const calendarButton = page
+      .getByRole('button', { name: 'Calendar' })
+      .element()
     await userEvent.click(calendarButton)
 
-    await waitFor(() => {
-      const dialog = screen.getByRole('dialog', { name: datePickerLabel })
+    await vi.waitFor(() => {
+      const dialog = page
+        .getByRole('dialog', { name: datePickerLabel })
+        .element()
       expect(dialog).toBeInTheDocument()
       expect(dialog).toHaveAttribute('aria-label', datePickerLabel)
     })

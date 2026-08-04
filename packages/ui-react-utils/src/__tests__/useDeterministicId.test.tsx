@@ -22,8 +22,9 @@
  * SOFTWARE.
  */
 
-import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect } from 'vitest'
 
 import {
   useDeterministicId,
@@ -74,38 +75,38 @@ const uniqueIds = (el: Element) => {
 }
 
 describe('useDeterministicId', () => {
-  it('should generate a deterministic ID', () => {
-    render(<TestComponent componentName="TestComponent" />)
-    const element = screen.getByTestId('test-component')
+  it('should generate a deterministic ID', async () => {
+    await render(<TestComponent componentName="TestComponent" />)
+    const element = page.getByTestId('test-component').element()
 
     expect(element).toBeInTheDocument()
     expect(element.id).toBe('TestComponent___0')
   })
 
-  it('should generate unique IDs for multiple instances', () => {
-    render(
+  it('should generate unique IDs for multiple instances', async () => {
+    await render(
       <div data-testid="container">
         <TestComponent componentName="TestComponent" />
         <TestComponent componentName="TestComponent" />
         <TestComponent componentName="TestComponent" />
       </div>
     )
-    const container = screen.getByTestId('container')
+    const container = page.getByTestId('container').element()
 
     expect(uniqueIds(container)).toBe(true)
   })
 
-  it('should support custom instance names', () => {
-    render(<TestComponentMultipleIds componentName="MyComponent" />)
-    const container = screen.getByTestId('test-component')
+  it('should support custom instance names', async () => {
+    await render(<TestComponentMultipleIds componentName="MyComponent" />)
+    const container = page.getByTestId('test-component').element()
 
     expect(container.id).toBe('MyComponent___0')
     expect(container.querySelector('label')?.id).toBe('MyComponent-label___0')
     expect(container.querySelector('input')?.id).toBe('MyComponent-input___0')
   })
 
-  it('should generate unique IDs without Provider wrapper', () => {
-    render(
+  it('should generate unique IDs without Provider wrapper', async () => {
+    await render(
       <div data-testid="test-components">
         <TestComponent componentName="TestComponent" />
         <TestComponent componentName="TestComponent" />
@@ -114,13 +115,13 @@ describe('useDeterministicId', () => {
         <TestComponent componentName="TestComponent" />
       </div>
     )
-    const el = screen.getByTestId('test-components')
+    const el = page.getByTestId('test-components').element()
 
     expect(uniqueIds(el)).toBe(true)
   })
 
-  it('should generate unique IDs when components are rendered both outside and inside of provider', () => {
-    render(
+  it('should generate unique IDs when components are rendered both outside and inside of provider', async () => {
+    await render(
       <div data-testid="test-components">
         <DeterministicIdContextProvider>
           <TestComponent componentName="TestComponent" />
@@ -131,12 +132,12 @@ describe('useDeterministicId', () => {
         <TestComponent componentName="TestComponent" />
       </div>
     )
-    const el = screen.getByTestId('test-components')
+    const el = page.getByTestId('test-components').element()
 
     expect(uniqueIds(el)).toBe(true)
   })
 
-  it('should generate unique IDs with Provider only', () => {
+  it('should generate unique IDs with Provider only', async () => {
     const Wrapper = ({ children }: any) => {
       return (
         <DeterministicIdContextProvider>
@@ -149,18 +150,18 @@ describe('useDeterministicId', () => {
       children.push(<TestComponent key={i} componentName="TestComponent" />)
     }
 
-    render(<Wrapper>{children}</Wrapper>)
-    const el = screen.getByTestId('wrapper')
+    await render(<Wrapper>{children}</Wrapper>)
+    const el = page.getByTestId('wrapper').element()
 
     expect(uniqueIds(el)).toBe(true)
   })
 
-  it('should use the global instance counter', () => {
+  it('should use the global instance counter', async () => {
     const instUIInstanceCounter = '__INSTUI_GLOBAL_INSTANCE_COUNTER__'
     const counterValue = 500
     globalThis[instUIInstanceCounter].set('GlobalTestComponent', counterValue)
 
-    render(
+    await render(
       <div data-testid="test-components">
         <TestComponent componentName="GlobalTestComponent" />
         <TestComponent componentName="GlobalTestComponent" />
@@ -172,21 +173,21 @@ describe('useDeterministicId', () => {
     expect(instanceCounter.get('GlobalTestComponent')).toBe(counterValue + 3)
   })
 
-  it('should generate sequential IDs for the same component', () => {
-    const { rerender } = render(
+  it('should generate sequential IDs for the same component', async () => {
+    const { rerender } = await render(
       <div data-testid="container">
         <TestComponent componentName="SequentialTest" />
       </div>
     )
 
-    rerender(
+    await rerender(
       <div data-testid="container">
         <TestComponent componentName="SequentialTest" />
         <TestComponent componentName="SequentialTest" />
       </div>
     )
 
-    const allElements = screen.getAllByTestId('test-component')
+    const allElements = page.getByTestId('test-component').elements()
     expect(allElements).toHaveLength(2)
 
     // IDs should be sequential
@@ -196,7 +197,7 @@ describe('useDeterministicId', () => {
     expect(ids[0]).not.toBe(ids[1])
   })
 
-  it('should work correctly with nested components', () => {
+  it('should work correctly with nested components', async () => {
     const ParentComponent = () => {
       const deterministicId = useDeterministicId('ParentComponent')
       return (
@@ -207,14 +208,14 @@ describe('useDeterministicId', () => {
       )
     }
 
-    render(<ParentComponent />)
-    const parent = screen.getByTestId('parent')
+    await render(<ParentComponent />)
+    const parent = page.getByTestId('parent').element()
 
     expect(parent.id).toBe('ParentComponent___0')
     expect(uniqueIds(parent)).toBe(true)
   })
 
-  it('should handle multiple calls to the same deterministicId function', () => {
+  it('should handle multiple calls to the same deterministicId function', async () => {
     const MultiCallComponent = () => {
       const deterministicId = useDeterministicId('MultiCallComponent')
       const id1 = deterministicId()
@@ -230,8 +231,8 @@ describe('useDeterministicId', () => {
       )
     }
 
-    render(<MultiCallComponent />)
-    const container = screen.getByTestId('multi-call')
+    await render(<MultiCallComponent />)
+    const container = page.getByTestId('multi-call').element()
 
     const ids = Array.from(container.children).map((el) => el.id)
     expect(ids).toHaveLength(3)

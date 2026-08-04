@@ -22,12 +22,11 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
-import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
 
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import { TreeCollection } from '@instructure/ui-tree-browser/latest'
 
 const IconFolder = (
@@ -72,7 +71,7 @@ describe('<TreeCollection />', () => {
   })
 
   it('should render', async () => {
-    const { container } = render(
+    const { container } = await render(
       <TreeCollection
         level={1}
         id={1}
@@ -90,7 +89,7 @@ describe('<TreeCollection />', () => {
 
   describe('collections', () => {
     it('should render icons on children', async () => {
-      render(
+      await render(
         <TreeCollection
           level={1}
           id={1}
@@ -105,17 +104,17 @@ describe('<TreeCollection />', () => {
           expanded={true}
         />
       )
-      const folderIcons = await screen.findAllByTitle('Folder icon')
+      const folderIcons = await page.getByTitle('Folder icon').elements()
       expect(folderIcons.length).toBe(2)
 
-      const documentIcons = await screen.findAllByTitle('Document icon')
+      const documentIcons = await page.getByTitle('Document icon').elements()
       expect(documentIcons.length).toBe(1)
     })
 
     it('should support the containerRef prop', async () => {
       const containerRef = vi.fn()
 
-      const { container } = render(
+      const { container } = await render(
         <TreeCollection
           level={1}
           id={1}
@@ -133,7 +132,7 @@ describe('<TreeCollection />', () => {
     })
 
     it('should pass an aria-expanded attribute to its list item', async () => {
-      render(
+      await render(
         <TreeCollection
           level={1}
           id={1}
@@ -144,13 +143,13 @@ describe('<TreeCollection />', () => {
           items={[{ id: 1, name: 'Item 1' }]}
         />
       )
-      const item = screen.getByRole('treeitem')
+      const item = page.getByRole('treeitem').element()
 
       expect(item).toHaveAttribute('aria-expanded')
     })
 
     it('should pass an aria-selected attribute to its list item', async () => {
-      render(
+      await render(
         <TreeCollection
           level={1}
           id={1}
@@ -162,13 +161,13 @@ describe('<TreeCollection />', () => {
           selection="collection_1"
         />
       )
-      const item = screen.getByRole('treeitem')
+      const item = page.getByRole('treeitem').element()
 
       expect(item).toHaveAttribute('aria-selected')
     })
 
     it('should correctly evaluate `getCollectionProps` for each item', async () => {
-      const { container } = render(
+      const { container } = await render(
         <TreeCollection
           level={1}
           id={1}
@@ -195,7 +194,7 @@ describe('<TreeCollection />', () => {
           expanded={true}
         />
       )
-      const svgIconUser = screen.getByTitle('User icon')
+      const svgIconUser = page.getByTitle('User icon').element()
       const item1 = container.querySelectorAll('button')[1]
 
       expect(svgIconUser).toBeInTheDocument()
@@ -207,7 +206,7 @@ describe('<TreeCollection />', () => {
       it('should return the correct collection params on click', async () => {
         const onCollectionClick = vi.fn()
 
-        render(
+        await render(
           <TreeCollection
             level={1}
             id={1}
@@ -219,11 +218,11 @@ describe('<TreeCollection />', () => {
             onCollectionClick={onCollectionClick}
           />
         )
-        const item = screen.getByRole('treeitem')
+        const item = page.getByRole('treeitem').element()
 
         await userEvent.click(item)
 
-        await waitFor(() => {
+        await vi.waitFor(() => {
           const args = onCollectionClick.mock.calls[0][1]
 
           expect(onCollectionClick).toHaveBeenCalledTimes(1)
@@ -239,7 +238,7 @@ describe('<TreeCollection />', () => {
 
   describe('items', () => {
     it('should not pass an aria-expanded attribute to its button', async () => {
-      render(
+      await render(
         <TreeCollection
           level={1}
           id={1}
@@ -251,7 +250,7 @@ describe('<TreeCollection />', () => {
           expanded={true}
         />
       )
-      const item = screen.getAllByLabelText('Coll 1')[0]
+      const item = page.getByLabelText('Coll 1').elements()[0]
       const button = item.firstChild as HTMLElement
 
       expect(item).toHaveAttribute('aria-expanded', 'true')
@@ -262,7 +261,7 @@ describe('<TreeCollection />', () => {
     it('should call custom functions passed by onItemClick', async () => {
       const onItemClick = vi.fn()
 
-      render(
+      await render(
         <TreeCollection
           level={1}
           id={1}
@@ -275,11 +274,11 @@ describe('<TreeCollection />', () => {
           expanded={true}
         />
       )
-      const item = screen.getByLabelText('Item 1')
+      const item = page.getByLabelText('Item 1').element()
 
       await userEvent.click(item)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         const args = onItemClick.mock.calls[0][1]
 
         expect(onItemClick).toHaveBeenCalledTimes(1)
@@ -291,7 +290,7 @@ describe('<TreeCollection />', () => {
     })
 
     it('should correctly evaluate `getItemProps` for each item', async () => {
-      render(
+      await render(
         <TreeCollection
           level={1}
           id={1}
@@ -322,15 +321,15 @@ describe('<TreeCollection />', () => {
         />
       )
 
-      expect(screen.getByTitle('Folder icon')).toBeInTheDocument()
-      expect(screen.getByTitle('User icon')).toBeInTheDocument()
-      expect(screen.getByTitle('Document icon')).toBeInTheDocument()
+      expect(page.getByTitle('Folder icon').element()).toBeInTheDocument()
+      expect(page.getByTitle('User icon').element()).toBeInTheDocument()
+      expect(page.getByTitle('Document icon').element()).toBeInTheDocument()
     })
   })
 
   describe('sorting', () => {
     it('should show the items and subcollections in alphabetical order', async () => {
-      const { container } = render(
+      const { container } = await render(
         <TreeCollection
           level={1}
           id={1}
@@ -370,7 +369,7 @@ describe('<TreeCollection />', () => {
     })
 
     it('should show the items before the collections', async () => {
-      const { container } = render(
+      const { container } = await render(
         <TreeCollection
           level={1}
           id={1}

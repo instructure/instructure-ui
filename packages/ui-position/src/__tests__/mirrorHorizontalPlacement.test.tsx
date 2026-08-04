@@ -28,7 +28,7 @@ import {
   placementPropValues,
   PlacementValueArray
 } from '../PositionPropTypes.js'
-import '@testing-library/jest-dom'
+import { describe, it, expect } from 'vitest'
 
 const mirrorHorizontallyAsArrayMap = [
   ['top'],

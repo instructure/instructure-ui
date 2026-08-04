@@ -22,10 +22,9 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
-import { vi } from 'vitest'
-import userEvent from '@testing-library/user-event'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
@@ -58,14 +57,14 @@ describe('<AppNav.Item />', () => {
   })
 
   it('should render label text', async () => {
-    render(<Item renderLabel="Some label" href="#" />)
-    const item = screen.getByRole('link')
+    await render(<Item renderLabel="Some label" href="#" />)
+    const item = page.getByRole('link').element()
 
     expect(item).toHaveTextContent('Some label')
   })
 
   it('should render an icon/image/etc.', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Item
         renderIcon={icon}
         renderLabel={<ScreenReaderContent>Some label</ScreenReaderContent>}
@@ -73,9 +72,9 @@ describe('<AppNav.Item />', () => {
       />
     )
 
-    const iconTitle = screen.getByTitle('Some icon')
+    const iconTitle = page.getByTitle('Some icon').element()
     const iconSvg = container.querySelector('svg')
-    const item = screen.getByRole('link')
+    const item = page.getByRole('link').element()
 
     expect(iconTitle).toBeInTheDocument()
     expect(iconSvg).toBeInTheDocument()
@@ -85,15 +84,15 @@ describe('<AppNav.Item />', () => {
   })
 
   it('should render content after the label text to accommodate badges, etc.', async () => {
-    render(
+    await render(
       <Item
         renderLabel="Some label"
         href="#"
         renderAfter={<strong>I am rendered after!</strong>}
       />
     )
-    const item = screen.getByRole('link')
-    const after = screen.getByText('I am rendered after!')
+    const item = page.getByRole('link').element()
+    const after = page.getByText('I am rendered after!').element()
 
     expect(item).toBeInTheDocument()
     expect(item).toHaveTextContent('Some label')
@@ -104,19 +103,19 @@ describe('<AppNav.Item />', () => {
 
   it('should respond to an onClick event', async () => {
     const onClick = vi.fn()
-    render(<Item renderLabel="Some label" onClick={onClick} />)
+    await render(<Item renderLabel="Some label" onClick={onClick} />)
 
-    const button = screen.getByRole('button')
+    const button = page.getByRole('button').element()
 
     await userEvent.click(button)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onClick).toHaveBeenCalledTimes(1)
     })
   })
 
   it('should output a console error if icon is used with non-screenreader label text', async () => {
-    render(
+    await render(
       <Item
         renderIcon={icon}
         renderLabel="Some label"
@@ -134,7 +133,7 @@ describe('<AppNav.Item />', () => {
   })
 
   it('should meet a11y standards', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Item
         renderIcon={icon}
         renderLabel={<ScreenReaderContent>Some label</ScreenReaderContent>}

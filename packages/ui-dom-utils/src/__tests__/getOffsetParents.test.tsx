@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { render } from '@testing-library/react'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { describe, it, expect, beforeEach } from 'vitest'
 import { getScrollParents } from '../getScrollParents.js'
 
 describe('getScrollParents', () => {
@@ -71,8 +71,8 @@ describe('getScrollParents', () => {
     </div>
   )
 
-  beforeEach(() => {
-    render(node)
+  beforeEach(async () => {
+    await render(node)
   })
 
   it('should find scroll parent for inline elements', () => {

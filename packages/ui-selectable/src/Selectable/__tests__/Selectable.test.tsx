@@ -22,10 +22,9 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
-import { vi } from 'vitest'
-import userEvent from '@testing-library/user-event'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import { describe, it, expect, vi } from 'vitest'
 
 import { Selectable } from '../index.js'
 import { SelectableRender } from '../props.js'
@@ -52,7 +51,7 @@ describe('<Selectable />', () => {
   )
 
   it('should focus trigger when label is clicked', async () => {
-    render(
+    await render(
       <Selectable>
         {(selectable) => (
           <span {...selectable.getRootProps()}>
@@ -73,14 +72,14 @@ describe('<Selectable />', () => {
         )}
       </Selectable>
     )
-    const label = screen.getByText('Selectable')
-    const input = screen.getByRole('combobox')
+    const label = page.getByText('Selectable').element()
+    const input = page.getByRole('combobox').element()
 
     expect(document.activeElement).not.toBe(input)
 
     await userEvent.click(label)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(document.activeElement).toBe(input)
     })
   })
@@ -89,7 +88,7 @@ describe('<Selectable />', () => {
     const onFocus = vi.fn()
     const onBlur = vi.fn()
 
-    render(
+    await render(
       <Selectable>
         {(selectable) => (
           <span {...selectable.getRootProps()}>
@@ -112,14 +111,14 @@ describe('<Selectable />', () => {
         )}
       </Selectable>
     )
-    const label = screen.getByText('Selectable')
-    const input = screen.getByRole('combobox')
+    const label = page.getByText('Selectable').element()
+    const input = page.getByRole('combobox').element()
 
     expect(document.activeElement).not.toBe(input)
 
     await userEvent.click(label)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onFocus).toHaveBeenCalledTimes(1)
       expect(onBlur).not.toHaveBeenCalled()
     })
@@ -130,7 +129,7 @@ describe('<Selectable />', () => {
     const onMouseDown = vi.fn()
     const onRequestHideOptions = vi.fn()
 
-    render(
+    await render(
       <Selectable
         isShowingOptions={true}
         onRequestHideOptions={onRequestHideOptions}
@@ -154,13 +153,13 @@ describe('<Selectable />', () => {
         )}
       </Selectable>
     )
-    const input = screen.getByRole('combobox')
-    const list = screen.getByRole('listbox')
+    const input = page.getByRole('combobox').element()
+    const list = page.getByRole('listbox').element()
 
     input.focus()
     await userEvent.click(list)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(document.activeElement).toBe(input)
       expect(onClick).toHaveBeenCalledTimes(1)
       expect(onMouseDown).toHaveBeenCalledTimes(1)
@@ -173,7 +172,7 @@ describe('<Selectable />', () => {
     const onMouseDown = vi.fn()
     const onRequestHideOptions = vi.fn()
 
-    render(
+    await render(
       <Selectable
         isShowingOptions={true}
         onRequestHideOptions={onRequestHideOptions}
@@ -204,13 +203,13 @@ describe('<Selectable />', () => {
         )}
       </Selectable>
     )
-    const input = screen.getByRole('combobox')
-    const option = screen.getByText('foo')
+    const input = page.getByRole('combobox').element()
+    const option = page.getByText('foo').element()
 
     input.focus()
     await userEvent.click(option)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(document.activeElement).toBe(input)
       expect(onClick).toHaveBeenCalledTimes(1)
       expect(onMouseDown).toHaveBeenCalledTimes(1)
@@ -223,7 +222,7 @@ describe('<Selectable />', () => {
     const onClick = vi.fn()
     const onKeyDown = vi.fn()
 
-    render(
+    await render(
       <Selectable>
         {(selectable) => (
           <span {...selectable.getRootProps()}>
@@ -251,12 +250,12 @@ describe('<Selectable />', () => {
         )}
       </Selectable>
     )
-    const button = screen.getByText('Selected')
+    const button = page.getByText('Selected').element()
 
     await userEvent.click(button)
     await userEvent.type(button, '{enter}')
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onClick).toHaveBeenCalled()
       expect(onMouseDown).toHaveBeenCalled()
       expect(onKeyDown).toHaveBeenCalled()
@@ -268,7 +267,7 @@ describe('<Selectable />', () => {
       it('when label is clicked', async () => {
         const onRequestShowOptions = vi.fn()
 
-        const { rerender } = render(
+        const { rerender } = await render(
           <Selectable
             isShowingOptions={false}
             onRequestShowOptions={onRequestShowOptions}
@@ -276,16 +275,16 @@ describe('<Selectable />', () => {
             {(selectable) => getSelectable(selectable)}
           </Selectable>
         )
-        const label = screen.getByText('Selectable')
+        const label = page.getByText('Selectable').element()
 
         await userEvent.click(label)
 
-        await waitFor(() => {
+        await vi.waitFor(() => {
           expect(onRequestShowOptions).toHaveBeenCalledTimes(1)
         })
 
         // Set isShowingOptions:
-        rerender(
+        await rerender(
           <Selectable
             isShowingOptions={true}
             onRequestShowOptions={onRequestShowOptions}
@@ -296,7 +295,7 @@ describe('<Selectable />', () => {
 
         await userEvent.click(label)
 
-        await waitFor(() => {
+        await vi.waitFor(() => {
           expect(onRequestShowOptions).toHaveBeenCalledTimes(1)
         })
       })
@@ -304,7 +303,7 @@ describe('<Selectable />', () => {
       it('when input is clicked', async () => {
         const onRequestShowOptions = vi.fn()
 
-        const { rerender } = render(
+        const { rerender } = await render(
           <Selectable
             isShowingOptions={false}
             onRequestShowOptions={onRequestShowOptions}
@@ -312,15 +311,15 @@ describe('<Selectable />', () => {
             {(selectable) => getSelectable(selectable)}
           </Selectable>
         )
-        const input = screen.getByRole('combobox')
+        const input = page.getByRole('combobox').element()
 
         await userEvent.click(input)
 
-        await waitFor(() => {
+        await vi.waitFor(() => {
           expect(onRequestShowOptions).toHaveBeenCalledTimes(1)
         })
 
-        rerender(
+        await rerender(
           <Selectable
             isShowingOptions={true}
             onRequestShowOptions={onRequestShowOptions}
@@ -331,7 +330,7 @@ describe('<Selectable />', () => {
 
         await userEvent.click(input)
 
-        await waitFor(() => {
+        await vi.waitFor(() => {
           expect(onRequestShowOptions).toHaveBeenCalledTimes(1)
         })
       })
@@ -339,7 +338,7 @@ describe('<Selectable />', () => {
       it('when up/down arrows are pressed', async () => {
         const onRequestShowOptions = vi.fn()
 
-        render(
+        await render(
           <Selectable
             isShowingOptions={false}
             onRequestShowOptions={onRequestShowOptions}
@@ -347,15 +346,15 @@ describe('<Selectable />', () => {
             {(selectable) => getSelectable(selectable)}
           </Selectable>
         )
-        const input = screen.getByRole('combobox')
+        const input = page.getByRole('combobox').element()
 
         await userEvent.type(input, '{arrowdown}')
-        await waitFor(() => {
+        await vi.waitFor(() => {
           expect(onRequestShowOptions).toHaveBeenCalledTimes(1)
         })
 
         await userEvent.type(input, '{arrowup}')
-        await waitFor(() => {
+        await vi.waitFor(() => {
           expect(onRequestShowOptions).toHaveBeenCalledTimes(2)
         })
       })
@@ -363,16 +362,16 @@ describe('<Selectable />', () => {
       it('when space is pressed', async () => {
         const onRequestShowOptions = vi.fn()
 
-        const { rerender } = render(
+        const { rerender } = await render(
           <Selectable onRequestShowOptions={onRequestShowOptions}>
             {(selectable) => getSelectable(selectable)}
           </Selectable>
         )
-        const input = screen.getByRole('combobox')
+        const input = page.getByRole('combobox').element()
 
         await userEvent.type(input, '{space}')
 
-        rerender(
+        await rerender(
           <Selectable
             isShowingOptions={true}
             onRequestShowOptions={onRequestShowOptions}
@@ -382,7 +381,7 @@ describe('<Selectable />', () => {
         )
 
         await userEvent.type(input, '{space}')
-        await waitFor(() => {
+        await vi.waitFor(() => {
           expect(onRequestShowOptions).toHaveBeenCalledTimes(1)
         })
       })
@@ -392,7 +391,7 @@ describe('<Selectable />', () => {
       it('when label is clicked', async () => {
         const onRequestHideOptions = vi.fn()
 
-        const { rerender } = render(
+        const { rerender } = await render(
           <Selectable
             isShowingOptions={true}
             onRequestHideOptions={onRequestHideOptions}
@@ -400,14 +399,14 @@ describe('<Selectable />', () => {
             {(selectable) => getSelectable(selectable)}
           </Selectable>
         )
-        const label = screen.getByText('Selectable')
+        const label = page.getByText('Selectable').element()
 
         await userEvent.click(label)
-        await waitFor(() => {
+        await vi.waitFor(() => {
           expect(onRequestHideOptions).toHaveBeenCalledTimes(1)
         })
 
-        rerender(
+        await rerender(
           <Selectable
             isShowingOptions={false}
             onRequestHideOptions={onRequestHideOptions}
@@ -417,7 +416,7 @@ describe('<Selectable />', () => {
         )
 
         await userEvent.click(label)
-        await waitFor(() => {
+        await vi.waitFor(() => {
           expect(onRequestHideOptions).toHaveBeenCalledTimes(1)
         })
       })
@@ -425,7 +424,7 @@ describe('<Selectable />', () => {
       it('when input is clicked', async () => {
         const onRequestHideOptions = vi.fn()
 
-        const { rerender } = render(
+        const { rerender } = await render(
           <Selectable
             isShowingOptions={true}
             onRequestHideOptions={onRequestHideOptions}
@@ -433,14 +432,14 @@ describe('<Selectable />', () => {
             {(selectable) => getSelectable(selectable)}
           </Selectable>
         )
-        const input = screen.getByRole('combobox')
+        const input = page.getByRole('combobox').element()
 
         await userEvent.click(input)
-        await waitFor(() => {
+        await vi.waitFor(() => {
           expect(onRequestHideOptions).toHaveBeenCalledTimes(1)
         })
 
-        rerender(
+        await rerender(
           <Selectable
             isShowingOptions={false}
             onRequestHideOptions={onRequestHideOptions}
@@ -450,7 +449,7 @@ describe('<Selectable />', () => {
         )
 
         await userEvent.click(input)
-        await waitFor(() => {
+        await vi.waitFor(() => {
           expect(onRequestHideOptions).toHaveBeenCalledTimes(1)
         })
       })
@@ -461,7 +460,7 @@ describe('<Selectable />', () => {
     it('should provide prop getter for root element', async () => {
       const renderSpy = vi.fn()
 
-      render(
+      await render(
         <Selectable>
           {(selectable) => {
             renderSpy(selectable)
@@ -474,7 +473,7 @@ describe('<Selectable />', () => {
     })
 
     it('should allow custom props to pass through', async () => {
-      render(
+      await render(
         <Selectable>
           {(selectable) => (
             <span
@@ -494,7 +493,7 @@ describe('<Selectable />', () => {
           )}
         </Selectable>
       )
-      const root = screen.getByText('Selectable').closest('span')
+      const root = page.getByText('Selectable').element().closest('span')
 
       expect(root).toHaveAttribute('data-custom-attr', 'true')
       expect(root).toHaveClass('customClass')
@@ -505,7 +504,7 @@ describe('<Selectable />', () => {
       const onClick = vi.fn()
       const onRequestShowOptions = vi.fn()
 
-      render(
+      await render(
         <Selectable onRequestShowOptions={onRequestShowOptions}>
           {(selectable) => (
             <span>
@@ -518,10 +517,10 @@ describe('<Selectable />', () => {
           )}
         </Selectable>
       )
-      const input = screen.getByRole('combobox')
+      const input = page.getByRole('combobox').element()
 
       await userEvent.click(input)
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onClick).toHaveBeenCalledTimes(1)
         expect(onRequestShowOptions).toHaveBeenCalledTimes(1)
       })
@@ -532,7 +531,7 @@ describe('<Selectable />', () => {
     it('should provide prop getter for label element', async () => {
       const renderSpy = vi.fn()
 
-      render(
+      await render(
         <Selectable>
           {(selectable) => {
             renderSpy(selectable)
@@ -545,7 +544,7 @@ describe('<Selectable />', () => {
     })
 
     it('should set htmlFor prop', async () => {
-      render(
+      await render(
         <Selectable>
           {(selectable) => (
             <span>
@@ -559,8 +558,8 @@ describe('<Selectable />', () => {
           )}
         </Selectable>
       )
-      const label = screen.getByText('Selectable')
-      const input = screen.getByRole('combobox')
+      const label = page.getByText('Selectable').element()
+      const input = page.getByRole('combobox').element()
 
       expect(label).toHaveAttribute('for', input.getAttribute('id'))
     })
@@ -568,7 +567,7 @@ describe('<Selectable />', () => {
     it('should set htmlFor prop with custom defined id', async () => {
       const customId = 'CustomSelect'
 
-      render(
+      await render(
         <Selectable id={customId}>
           {(selectable) => (
             <span>
@@ -582,15 +581,15 @@ describe('<Selectable />', () => {
           )}
         </Selectable>
       )
-      const label = screen.getByText('Selectable')
-      const input = screen.getByRole('combobox')
+      const label = page.getByText('Selectable').element()
+      const input = page.getByRole('combobox').element()
 
       expect(input).toHaveAttribute('id', customId)
       expect(label).toHaveAttribute('for', customId)
     })
 
     it('should allow custom props to pass through', async () => {
-      render(
+      await render(
         <Selectable>
           {(selectable) => (
             <span>
@@ -612,7 +611,7 @@ describe('<Selectable />', () => {
           )}
         </Selectable>
       )
-      const label = screen.getByText('Selectable')
+      const label = page.getByText('Selectable').element()
 
       expect(label).toHaveAttribute('data-custom-attr', 'true')
       expect(label).toHaveClass('customClass')
@@ -624,7 +623,7 @@ describe('<Selectable />', () => {
     it('should provide prop getter for trigger element', async () => {
       const renderSpy = vi.fn()
 
-      render(
+      await render(
         <Selectable>
           {(selectable) => {
             renderSpy(selectable)
@@ -636,7 +635,7 @@ describe('<Selectable />', () => {
     })
 
     it('should set appropriate prop defaults', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Selectable>
           {(selectable) => (
             <span>
@@ -648,7 +647,7 @@ describe('<Selectable />', () => {
       )
 
       const input = container.querySelector('input')
-      const desc = screen.getByText('description')
+      const desc = page.getByText('description').element()
 
       expect(input).toHaveAttribute('aria-haspopup', 'listbox')
       expect(input).toHaveAttribute('aria-describedby', desc.id)
@@ -656,7 +655,7 @@ describe('<Selectable />', () => {
     })
 
     it('should set appropriate props based on isShowingOptions', async () => {
-      const { container, rerender } = render(
+      const { container, rerender } = await render(
         <Selectable isShowingOptions={false}>
           {(selectable) => (
             <span>
@@ -667,13 +666,13 @@ describe('<Selectable />', () => {
         </Selectable>
       )
       const input = container.querySelector('input')
-      const list = screen.getByRole('listbox')
+      const list = page.getByRole('listbox').element()
 
       expect(input).toHaveAttribute('aria-expanded', 'false')
       expect(input).not.toHaveAttribute('aria-controls')
 
       // Set prop: isShowingOptions true
-      rerender(
+      await rerender(
         <Selectable isShowingOptions={true}>
           {(selectable) => (
             <span>
@@ -689,7 +688,7 @@ describe('<Selectable />', () => {
     })
 
     it('should set appropriate props based on highlightedOptionId', async () => {
-      const { container, rerender } = render(
+      const { container, rerender } = await render(
         <Selectable isShowingOptions={true}>
           {(selectable) => (
             <span>
@@ -704,12 +703,12 @@ describe('<Selectable />', () => {
         </Selectable>
       )
       const input = container.querySelector('input')
-      const options = screen.getAllByRole('option')
+      const options = page.getByRole('option').elements()
 
       expect(input).not.toHaveAttribute('aria-activedescendant')
 
       // Set prop: highlightedOptionId
-      rerender(
+      await rerender(
         <Selectable
           isShowingOptions={true}
           highlightedOptionId={defaultOptions[0]}
@@ -729,7 +728,7 @@ describe('<Selectable />', () => {
       expect(input).toHaveAttribute('aria-activedescendant', options[0].id)
 
       // Set prop: highlightedOptionId
-      rerender(
+      await rerender(
         <Selectable
           isShowingOptions={true}
           highlightedOptionId={defaultOptions[1]}
@@ -749,7 +748,7 @@ describe('<Selectable />', () => {
       expect(input).toHaveAttribute('aria-activedescendant', options[1].id)
 
       // Set prop: isShowingOptions
-      rerender(
+      await rerender(
         <Selectable
           isShowingOptions={false}
           highlightedOptionId={defaultOptions[1]}
@@ -770,7 +769,7 @@ describe('<Selectable />', () => {
     })
 
     it('should allow custom props to pass through', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Selectable>
           {(selectable) => (
             <span>
@@ -796,7 +795,7 @@ describe('<Selectable />', () => {
     })
 
     it('should allow props to be overridden', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Selectable>
           {(selectable) => (
             <span>
@@ -820,7 +819,7 @@ describe('<Selectable />', () => {
     it('should provide a ref to the text input', async () => {
       const inputRef = vi.fn()
 
-      const { container } = render(
+      const { container } = await render(
         <Selectable>
           {(selectable) => (
             <span>
@@ -840,7 +839,7 @@ describe('<Selectable />', () => {
     })
 
     it('should allow role and aria-autocomplete props to be overridden', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Selectable>
           {(selectable) => (
             <span>
@@ -866,7 +865,7 @@ describe('<Selectable />', () => {
 
       const onRequestShowOptions = vi.fn()
 
-      render(
+      await render(
         <Selectable onRequestShowOptions={onRequestShowOptions}>
           {(selectable) => (
             <span {...selectable.getRootProps()}>
@@ -879,7 +878,7 @@ describe('<Selectable />', () => {
           )}
         </Selectable>
       )
-      const input = screen.getByRole('combobox')
+      const input = page.getByRole('combobox').element()
 
       await input.click()
       expect(onClick).toHaveBeenCalledTimes(1)
@@ -891,7 +890,7 @@ describe('<Selectable />', () => {
     it('should provide prop getter for trigger element', async () => {
       const renderSpy = vi.fn()
 
-      render(
+      await render(
         <Selectable>
           {(selectable) => {
             renderSpy(selectable)
@@ -905,7 +904,7 @@ describe('<Selectable />', () => {
     })
 
     it('should set appropriate prop defaults', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Selectable>
           {(selectable) => (
             <span>
@@ -922,7 +921,7 @@ describe('<Selectable />', () => {
     })
 
     it('should set appropriate props when readOnly', async () => {
-      render(
+      await render(
         <Selectable>
           {(selectable) => (
             <span>
@@ -934,7 +933,7 @@ describe('<Selectable />', () => {
           )}
         </Selectable>
       )
-      const input = screen.getByRole('combobox')
+      const input = page.getByRole('combobox').element()
 
       expect(input).toHaveAttribute('aria-autocomplete', 'none')
       expect(input).toHaveAttribute('readOnly')
@@ -942,7 +941,7 @@ describe('<Selectable />', () => {
     })
 
     it('should allow props to be overridden', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Selectable>
           {(selectable) => (
             <span>
@@ -964,7 +963,7 @@ describe('<Selectable />', () => {
     })
 
     it('should allow custom props to pass through', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Selectable>
           {(selectable) => (
             <span>
@@ -994,7 +993,7 @@ describe('<Selectable />', () => {
     it('should provide prop getter for list element', async () => {
       const renderSpy = vi.fn()
 
-      render(
+      await render(
         <Selectable>
           {(selectable) => {
             renderSpy(selectable)
@@ -1008,7 +1007,7 @@ describe('<Selectable />', () => {
     })
 
     it('should set appropriate prop defaults', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Selectable isShowingOptions={true}>
           {(selectable) => (
             <span {...selectable.getRootProps()}>
@@ -1025,7 +1024,7 @@ describe('<Selectable />', () => {
     })
 
     it('should allow custom props to pass through', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Selectable isShowingOptions={true}>
           {(selectable) => (
             <span {...selectable.getRootProps()}>
@@ -1053,7 +1052,7 @@ describe('<Selectable />', () => {
     it('should provide prop getter for option element', async () => {
       const renderSpy = vi.fn()
 
-      render(
+      await render(
         <Selectable>
           {(selectable) => {
             renderSpy(selectable)
@@ -1067,7 +1066,7 @@ describe('<Selectable />', () => {
     })
 
     it('should set appropriate prop defaults', async () => {
-      render(
+      await render(
         <Selectable>
           {(selectable) => (
             <span>
@@ -1083,7 +1082,7 @@ describe('<Selectable />', () => {
           )}
         </Selectable>
       )
-      const option = screen.getByText(defaultOptions[0])
+      const option = page.getByText(defaultOptions[0]).element()
 
       expect(option.tagName).toBe('LI')
       expect(option).toHaveAttribute('role', 'option')
@@ -1091,7 +1090,7 @@ describe('<Selectable />', () => {
     })
 
     it('should set aria-selected based on selectedOptionId', async () => {
-      const { container, rerender } = render(
+      const { container, rerender } = await render(
         <Selectable selectedOptionId={defaultOptions[1]}>
           {(selectable) => (
             <span>
@@ -1114,7 +1113,7 @@ describe('<Selectable />', () => {
       expect(options[2]).toHaveAttribute('aria-selected', 'false')
 
       // Set prop: selectedOptionId
-      rerender(
+      await rerender(
         <Selectable selectedOptionId={[defaultOptions[0], defaultOptions[1]]}>
           {(selectable) => (
             <span>
@@ -1137,7 +1136,7 @@ describe('<Selectable />', () => {
     })
 
     it('should allow custom props to pass through', async () => {
-      render(
+      await render(
         <Selectable>
           {(selectable) => (
             <span>
@@ -1161,7 +1160,7 @@ describe('<Selectable />', () => {
           )}
         </Selectable>
       )
-      const option = screen.getByText(defaultOptions[0])
+      const option = page.getByText(defaultOptions[0]).element()
 
       expect(option.tagName).toBe('LI')
       expect(option).toHaveAttribute('data-custom-attr', 'true')
@@ -1173,7 +1172,7 @@ describe('<Selectable />', () => {
       const onClick = vi.fn()
       const onRequestSelectOption = vi.fn()
 
-      render(
+      await render(
         <Selectable
           isShowingOptions={true}
           onRequestSelectOption={onRequestSelectOption}
@@ -1195,13 +1194,13 @@ describe('<Selectable />', () => {
           )}
         </Selectable>
       )
-      const option_0 = screen.getByText(defaultOptions[0])
-      const option_1 = screen.getByText(defaultOptions[1])
+      const option_0 = page.getByText(defaultOptions[0]).element()
+      const option_1 = page.getByText(defaultOptions[1]).element()
 
       await userEvent.click(option_0)
       await userEvent.click(option_1)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onRequestSelectOption).toHaveBeenCalledTimes(2)
         expect(onClick).toHaveBeenCalledTimes(2)
       })
@@ -1212,7 +1211,7 @@ describe('<Selectable />', () => {
     it('should provide prop getter for disabled option element', async () => {
       const renderSpy = vi.fn()
 
-      render(
+      await render(
         <Selectable>
           {(selectable) => {
             renderSpy(selectable)
@@ -1226,7 +1225,7 @@ describe('<Selectable />', () => {
     })
 
     it('should set aria-disabled prop', async () => {
-      render(
+      await render(
         <Selectable>
           {(selectable) => (
             <span>
@@ -1250,7 +1249,7 @@ describe('<Selectable />', () => {
           )}
         </Selectable>
       )
-      const option = screen.getByText(defaultOptions[0])
+      const option = page.getByText(defaultOptions[0]).element()
 
       expect(option.tagName).toBe('LI')
       expect(option).toHaveAttribute('aria-disabled', 'true')
@@ -1261,7 +1260,7 @@ describe('<Selectable />', () => {
     it('should provide prop getter for description element', async () => {
       const renderSpy = vi.fn()
 
-      render(
+      await render(
         <Selectable>
           {(selectable) => {
             renderSpy(selectable)

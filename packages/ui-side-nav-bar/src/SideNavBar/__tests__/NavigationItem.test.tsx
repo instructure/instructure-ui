@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-import { render, screen } from '@testing-library/react'
-import { vi } from 'vitest'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { IconAdminLine } from '@instructure/ui-icons'
@@ -45,10 +45,10 @@ describe('<SideNavBarItem />', () => {
   })
 
   it('should render', async () => {
-    const { container } = render(
+    const { container } = await render(
       <SideNavBarItem icon={<IconAdminLine />} label="Admin" href="#" />
     )
-    const navItem = screen.getByRole('link')
+    const navItem = page.getByRole('link').element()
     const icon = container.querySelector('svg')
 
     expect(icon).toBeInTheDocument()
@@ -61,7 +61,7 @@ describe('<SideNavBarItem />', () => {
   })
 
   it('should meet a11y standards', async () => {
-    const { container } = render(
+    const { container } = await render(
       <SideNavBarItem icon={<IconAdminLine />} label="Dashboard" href="#" />
     )
     const axeCheck = await runAxeCheck(container)

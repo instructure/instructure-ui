@@ -22,11 +22,11 @@
  * SOFTWARE.
  */
 
-import { fireEvent, render, screen, waitFor } from '@testing-library/react'
-import { vi } from 'vitest'
-import userEvent from '@testing-library/user-event'
 import moment from 'moment-timezone'
-import '@testing-library/jest-dom'
+import { fireEvent } from '@testing-library/dom'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 import { ApplyLocale } from '@instructure/ui-i18n'
 
@@ -53,13 +53,13 @@ describe('<TimeSelect />', () => {
 
   it('should fire onFocus when input gains focus', async () => {
     const onFocus = vi.fn()
-    render(<TimeSelect renderLabel="Choose a time" onFocus={onFocus} />)
+    await render(<TimeSelect renderLabel="Choose a time" onFocus={onFocus} />)
 
-    const input = screen.getByRole('combobox')
+    const input = page.getByRole('combobox').element()
 
     input.focus()
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onFocus).toHaveBeenCalled()
     })
   })
@@ -74,7 +74,7 @@ describe('<TimeSelect />', () => {
 
     const onChange = vi.fn()
 
-    render(
+    await render(
       <TimeSelect
         renderLabel="Choose a time"
         onChange={onChange}
@@ -82,7 +82,7 @@ describe('<TimeSelect />', () => {
         defaultValue={defaultValue.toISOString()}
       />
     )
-    const input = screen.getByRole('combobox')
+    const input = page.getByRole('combobox').element()
 
     expect(input).toHaveValue('2:00 PM')
   })
@@ -100,7 +100,7 @@ describe('<TimeSelect />', () => {
       'en',
       'US/Eastern'
     )
-    render(
+    await render(
       <TimeSelect
         renderLabel="Choose a time"
         timezone="US/Eastern"
@@ -108,14 +108,16 @@ describe('<TimeSelect />', () => {
         defaultValue={defaultValue.toISOString()}
       />
     )
-    const input = screen.getByRole('combobox')
+    const input = page.getByRole('combobox').element()
 
     expect(input).toHaveValue(value.format('LT'))
   })
 
   it('should default to the first option if defaultToFirstOption is true', async () => {
-    render(<TimeSelect renderLabel="Choose a time" defaultToFirstOption />)
-    const input = screen.getByRole('combobox')
+    await render(
+      <TimeSelect renderLabel="Choose a time" defaultToFirstOption />
+    )
+    const input = page.getByRole('combobox').element()
 
     expect(input).toHaveValue('12:00 AM')
   })
@@ -128,7 +130,7 @@ describe('<TimeSelect />', () => {
       'UTC'
     )
 
-    render(
+    await render(
       <TimeSelect
         renderLabel="Choose a time"
         locale="fr"
@@ -136,7 +138,7 @@ describe('<TimeSelect />', () => {
         value={value.toISOString()}
       />
     )
-    const input = screen.getByRole('combobox')
+    const input = page.getByRole('combobox').element()
 
     expect(input).toHaveValue('16:00')
   })
@@ -148,7 +150,7 @@ describe('<TimeSelect />', () => {
       'fr', // 24-hour clock
       'UTC'
     )
-    render(
+    await render(
       <TimeSelect
         renderLabel="Choose a time"
         locale="en" // 12-hour clock
@@ -156,7 +158,7 @@ describe('<TimeSelect />', () => {
         value={value.toISOString()}
       />
     )
-    const input = screen.getByRole('combobox')
+    const input = page.getByRole('combobox').element()
 
     expect(input).toHaveValue('1:00 PM')
   })
@@ -176,7 +178,7 @@ describe('<TimeSelect />', () => {
       'UTC' // no time offset
     )
 
-    const { rerender } = render(
+    const { rerender } = await render(
       <TimeSelect
         renderLabel="Choose a time"
         locale="en"
@@ -184,11 +186,11 @@ describe('<TimeSelect />', () => {
         value={valueSummer.toISOString()}
       />
     )
-    const input = screen.getByRole('combobox')
+    const input = page.getByRole('combobox').element()
 
     expect(input).toHaveValue('2:00 PM')
 
-    rerender(
+    await rerender(
       <TimeSelect
         renderLabel="Choose a time"
         locale="en"
@@ -196,7 +198,7 @@ describe('<TimeSelect />', () => {
         value={valueWinter.toISOString()}
       />
     )
-    const inputUpdated = screen.getByRole('combobox')
+    const inputUpdated = page.getByRole('combobox').element()
 
     expect(inputUpdated).toHaveValue('1:00 PM')
   })
@@ -208,7 +210,7 @@ describe('<TimeSelect />', () => {
       'en', // 12-hour clock format
       'UTC' // no time offset
     )
-    render(
+    await render(
       <ApplyLocale
         locale="fr" // 24-hour clock format
         timezone="Africa/Nairobi" // UTC + 3
@@ -220,7 +222,7 @@ describe('<TimeSelect />', () => {
         />
       </ApplyLocale>
     )
-    const input = screen.getByRole('combobox')
+    const input = page.getByRole('combobox').element()
 
     expect(input).toHaveValue('20:30')
   })
@@ -229,7 +231,7 @@ describe('<TimeSelect />', () => {
     const onChange = vi.fn()
     const onKeyDown = vi.fn()
     const handleInputChange = vi.fn()
-    render(
+    await render(
       <TimeSelect
         renderLabel="Choose a time"
         allowNonStepInput={true}
@@ -240,7 +242,7 @@ describe('<TimeSelect />', () => {
         onKeyDown={onKeyDown}
       />
     )
-    const input = screen.getByRole('combobox')
+    const input = page.getByRole('combobox').element()
 
     await userEvent.type(input, '7:45 PM')
     fireEvent.blur(input) // sends onChange event
@@ -262,7 +264,7 @@ describe('<TimeSelect />', () => {
       'US/Eastern'
     )
     const onChange = vi.fn()
-    render(
+    await render(
       <TimeSelect
         allowClearingSelection
         renderLabel="Choose a time"
@@ -273,7 +275,7 @@ describe('<TimeSelect />', () => {
         onChange={onChange}
       />
     )
-    const input = screen.getByRole('combobox')
+    const input = page.getByRole('combobox').element()
 
     await userEvent.type(
       input,
@@ -298,7 +300,7 @@ describe('<TimeSelect />', () => {
     const onChange = vi.fn()
     const onKeyDown = vi.fn()
     const handleInputChange = vi.fn()
-    render(
+    await render(
       <TimeSelect
         renderLabel="Choose a time"
         allowNonStepInput={true}
@@ -310,7 +312,7 @@ describe('<TimeSelect />', () => {
         onKeyDown={onKeyDown}
       />
     )
-    const input = screen.getByRole('combobox')
+    const input = page.getByRole('combobox').element()
 
     await userEvent.type(
       input,
@@ -336,7 +338,7 @@ describe('<TimeSelect />', () => {
     const onChange = vi.fn()
     const onKeyDown = vi.fn()
     const handleInputChange = vi.fn()
-    render(
+    await render(
       <TimeSelect
         renderLabel="Choose a time"
         allowNonStepInput={true}
@@ -348,7 +350,7 @@ describe('<TimeSelect />', () => {
         onKeyDown={onKeyDown}
       />
     )
-    const input = screen.getByRole('combobox')
+    const input = page.getByRole('combobox').element()
 
     await userEvent.type(
       input,
@@ -368,39 +370,45 @@ describe('<TimeSelect />', () => {
 
   describe('input', () => {
     it('should render with a custom id if given', async () => {
-      render(<TimeSelect renderLabel="Choose a time" id="timeSelect" />)
+      await render(<TimeSelect renderLabel="Choose a time" id="timeSelect" />)
 
-      const input = screen.getByRole('combobox')
+      const input = page.getByRole('combobox').element()
 
       expect(input).toHaveAttribute('id', 'timeSelect')
     })
 
     it('should render readonly when interaction="readonly"', async () => {
-      render(<TimeSelect renderLabel="Choose a time" interaction="readonly" />)
-      const input = screen.getByRole('combobox')
+      await render(
+        <TimeSelect renderLabel="Choose a time" interaction="readonly" />
+      )
+      const input = page.getByRole('combobox').element()
 
       expect(input).toHaveAttribute('readonly')
       expect(input).not.toHaveAttribute('disabled')
     })
 
     it('should render disabled when interaction="disabled"', async () => {
-      render(<TimeSelect renderLabel="Choose a time" interaction="disabled" />)
-      const input = screen.getByRole('combobox')
+      await render(
+        <TimeSelect renderLabel="Choose a time" interaction="disabled" />
+      )
+      const input = page.getByRole('combobox').element()
 
       expect(input).toHaveAttribute('disabled')
       expect(input).not.toHaveAttribute('readonly')
     })
 
     it('should render required when isRequired is true', async () => {
-      render(<TimeSelect renderLabel="Choose a time" isRequired />)
-      const input = screen.getByRole('combobox')
+      await render(<TimeSelect renderLabel="Choose a time" isRequired />)
+      const input = page.getByRole('combobox').element()
 
       expect(input).toHaveAttribute('required')
     })
 
     it('should allow custom props to pass through', async () => {
-      render(<TimeSelect renderLabel="Choose a time" data-custom-attr="true" />)
-      const input = screen.getByRole('combobox')
+      await render(
+        <TimeSelect renderLabel="Choose a time" data-custom-attr="true" />
+      )
+      const input = page.getByRole('combobox').element()
 
       expect(input).toHaveAttribute('data-custom-attr', 'true')
     })
@@ -408,8 +416,10 @@ describe('<TimeSelect />', () => {
     it('should provide a ref to the input element', async () => {
       const inputRef = vi.fn()
 
-      render(<TimeSelect renderLabel="Choose a time" inputRef={inputRef} />)
-      const input = screen.getByRole('combobox')
+      await render(
+        <TimeSelect renderLabel="Choose a time" inputRef={inputRef} />
+      )
+      const input = page.getByRole('combobox').element()
 
       expect(inputRef).toHaveBeenCalledWith(input)
     })
@@ -418,14 +428,14 @@ describe('<TimeSelect />', () => {
   describe('list', () => {
     it('should provide a ref to the list element', async () => {
       const listRef = vi.fn()
-      render(<TimeSelect renderLabel="Choose a time" listRef={listRef} />)
+      await render(<TimeSelect renderLabel="Choose a time" listRef={listRef} />)
 
-      const input = screen.getByRole('combobox')
+      const input = page.getByRole('combobox').element()
 
       await userEvent.click(input)
 
-      await waitFor(() => {
-        const listbox = screen.getByRole('listbox')
+      await vi.waitFor(() => {
+        const listbox = page.getByRole('listbox').element()
 
         expect(listRef).toHaveBeenCalledWith(listbox)
       })

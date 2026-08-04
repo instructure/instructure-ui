@@ -22,12 +22,11 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
-import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
-import userEvent from '@testing-library/user-event'
 import { Tooltip } from '@instructure/ui-tooltip/latest'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 describe('<Tooltip />', () => {
   let consoleErrorMock: ReturnType<typeof vi.spyOn>
@@ -44,19 +43,19 @@ describe('<Tooltip />', () => {
   })
 
   it('should render', async () => {
-    render(
+    await render(
       <Tooltip renderTip="Hello">
         <a href="example.html">Hover or focus me</a>
       </Tooltip>
     )
-    const tip = screen.getByRole('tooltip')
+    const tip = page.getByRole('tooltip').element()
 
     expect(tip).toBeInTheDocument()
     expect(tip).toHaveTextContent('Hello')
   })
 
   it('should render children', async () => {
-    render(
+    await render(
       <Tooltip renderTip="Hello">
         <a data-testid="trigger" href="example.html">
           Hover or focus me
@@ -64,8 +63,8 @@ describe('<Tooltip />', () => {
       </Tooltip>
     )
 
-    const tip = screen.getByRole('tooltip')
-    const trigger = screen.getByTestId('trigger')
+    const tip = page.getByRole('tooltip').element()
+    const trigger = page.getByTestId('trigger').element()
 
     expect(trigger).toBeInTheDocument()
     expect(trigger).toHaveTextContent('Hover or focus me')
@@ -74,34 +73,34 @@ describe('<Tooltip />', () => {
   })
 
   it('should have an aria-describedby attribute', async () => {
-    render(
+    await render(
       <Tooltip renderTip={<h2>Hello</h2>}>
         <a data-testid="trigger" href="example.html">
           Hover or focus me
         </a>
       </Tooltip>
     )
-    const trigger = screen.getByTestId('trigger')
-    const tooltip = screen.getByRole('tooltip')
+    const trigger = page.getByTestId('trigger').element()
+    const tooltip = page.getByRole('tooltip').element()
 
     expect(trigger).toHaveAttribute('aria-describedby', tooltip.id)
   })
 
   it('should accept a function for renderTip', async () => {
-    render(
+    await render(
       <Tooltip renderTip={() => 'Hello'}>
         <a href="example.html">Hover or focus me</a>
       </Tooltip>
     )
 
-    const content = screen.getByText('Hello')
+    const content = page.getByText('Hello').element()
 
     expect(content).toBeInTheDocument()
   })
 
   describe('using as', () => {
     it('should render children', async () => {
-      render(
+      await render(
         <Tooltip
           renderTip={<h2>Hello</h2>}
           placement="end"
@@ -112,8 +111,8 @@ describe('<Tooltip />', () => {
         </Tooltip>
       )
 
-      const tip = screen.getByRole('tooltip')
-      const trigger = screen.getByText('Hover or focus me')
+      const tip = page.getByRole('tooltip').element()
+      const trigger = page.getByText('Hover or focus me').element()
 
       expect(trigger).toBeInTheDocument()
       expect(trigger).toHaveAttribute('href', 'example.html')
@@ -124,7 +123,7 @@ describe('<Tooltip />', () => {
     })
 
     it('should have an aria-describedby attribute', async () => {
-      render(
+      await render(
         <Tooltip
           renderTip={<h2>Hello</h2>}
           placement="end"
@@ -135,14 +134,14 @@ describe('<Tooltip />', () => {
         </Tooltip>
       )
 
-      const trigger = screen.getByText('Hover or focus me')
-      const tooltip = screen.getByRole('tooltip')
+      const trigger = page.getByText('Hover or focus me').element()
+      const tooltip = page.getByRole('tooltip').element()
 
       expect(trigger).toHaveAttribute('aria-describedby', tooltip.id)
     })
 
     it('should pass down the href attribute', async () => {
-      render(
+      await render(
         <Tooltip
           renderTip={<h2>Hello</h2>}
           placement="end"
@@ -153,7 +152,7 @@ describe('<Tooltip />', () => {
         </Tooltip>
       )
 
-      const link = screen.getByText('Hover or focus me')
+      const link = page.getByText('Hover or focus me').element()
 
       expect(link).toHaveAttribute('href', 'example.html')
     })
@@ -163,17 +162,17 @@ describe('<Tooltip />', () => {
     it('should call onClick of child', async () => {
       const onClick = vi.fn()
 
-      render(
+      await render(
         <Tooltip renderTip={<h2>Hello</h2>}>
           <button onClick={onClick}>Hover or focus me</button>
         </Tooltip>
       )
 
-      const button = screen.getByText('Hover or focus me')
+      const button = page.getByText('Hover or focus me').element()
 
       await userEvent.click(button)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onClick).toHaveBeenCalledTimes(1)
       })
     })

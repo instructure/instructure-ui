@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import '@testing-library/jest-dom'
+import { describe, it, expect, beforeEach, afterEach } from 'vitest'
 import { getFontSize } from '@instructure/ui-dom-utils'
 
 import { px } from '../px.js'

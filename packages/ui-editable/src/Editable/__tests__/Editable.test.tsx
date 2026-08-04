@@ -22,13 +22,13 @@
  * SOFTWARE.
  */
 
-import { fireEvent, render, screen, waitFor } from '@testing-library/react'
-import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
-import userEvent from '@testing-library/user-event'
 import { Editable } from '@instructure/ui-editable/latest'
 import type { EditableRenderProps } from '../v1/props'
-import '@testing-library/jest-dom'
+import { fireEvent } from '@testing-library/dom'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 const TEXT_VIEW = 'text-view'
 const TEXT_EDIT = 'text-edit'
@@ -88,10 +88,12 @@ describe('<Editable />', () => {
   })
 
   it('should render view mode', async () => {
-    render(<Editable mode="view" onChangeMode={vi.fn()} render={childRender} />)
+    await render(
+      <Editable mode="view" onChangeMode={vi.fn()} render={childRender} />
+    )
     const currentMode = childRender.mock.calls[0][0].mode
-    const viewModeText = screen.getByText(TEXT_VIEW)
-    const editButton = screen.getByRole('button', { name: TEXT_EDIT })
+    const viewModeText = page.getByText(TEXT_VIEW).element()
+    const editButton = page.getByRole('button', { name: TEXT_EDIT }).element()
 
     expect(childRender).toHaveBeenCalled()
     expect(currentMode).toBe('view')
@@ -101,10 +103,12 @@ describe('<Editable />', () => {
   })
 
   it('should render edit mode', async () => {
-    render(<Editable mode="edit" onChangeMode={vi.fn()} render={childRender} />)
+    await render(
+      <Editable mode="edit" onChangeMode={vi.fn()} render={childRender} />
+    )
     const currentMode = childRender.mock.calls[0][0].mode
-    const inputForEdit = screen.getByTestId('edit-mode-input')
-    const editButton = screen.getByRole('button', { name: TEXT_EDIT })
+    const inputForEdit = page.getByTestId('edit-mode-input').element()
+    const editButton = page.getByRole('button', { name: TEXT_EDIT }).element()
 
     expect(childRender).toHaveBeenCalled()
     expect(currentMode).toBe('edit')
@@ -113,18 +117,18 @@ describe('<Editable />', () => {
     expect(editButton).toBeInTheDocument()
   })
 
-  it('should change to edit mode on button click', () => {
+  it('should change to edit mode on button click', async () => {
     const onChangeModeSpy = vi.fn()
 
-    render(
+    await render(
       <Editable
         mode="view"
         onChangeMode={onChangeModeSpy}
         render={childRender}
       />
     )
-    const viewModeText = screen.getByText(TEXT_VIEW)
-    const editButton = screen.getByRole('button')
+    const viewModeText = page.getByText(TEXT_VIEW).element()
+    const editButton = page.getByRole('button').element()
 
     expect(viewModeText).toBeInTheDocument()
 
@@ -136,58 +140,58 @@ describe('<Editable />', () => {
   it('should change to edit mode on component click', async () => {
     const onChangeModeSpy = vi.fn()
 
-    render(
+    await render(
       <Editable
         mode="view"
         onChangeMode={onChangeModeSpy}
         render={childRender}
       />
     )
-    const childContainer = screen.getByTestId('child-container')
+    const childContainer = page.getByTestId('child-container').element()
 
     await userEvent.click(childContainer)
 
-    await waitFor(() => expect(onChangeModeSpy).toHaveBeenCalledWith('edit'))
+    await vi.waitFor(() => expect(onChangeModeSpy).toHaveBeenCalledWith('edit'))
   })
 
   it('should set the button to visible on mouse over', async () => {
     const onChangeModeSpy = vi.fn()
 
-    render(
+    await render(
       <Editable
         mode="view"
         onChangeMode={onChangeModeSpy}
         render={childRender}
       />
     )
-    const editButton = screen.getByRole('button')
+    const editButton = page.getByRole('button').element()
 
     expect(editButton).toHaveClass('test-hidden')
 
     fireEvent.mouseOver(editButton)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(editButton).toHaveClass('test-visible')
     })
 
     fireEvent.mouseOut(editButton)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(editButton).toHaveClass('test-hidden')
     })
   })
 
-  it('should change to view mode on editor blur', () => {
+  it('should change to view mode on editor blur', async () => {
     const onChangeModeSpy = vi.fn()
 
-    render(
+    await render(
       <Editable
         mode="edit"
         onChangeMode={onChangeModeSpy}
         render={childRender}
       />
     )
-    const inputForEdit = screen.getByTestId('edit-mode-input')
+    const inputForEdit = page.getByTestId('edit-mode-input').element()
 
     fireEvent.focus(inputForEdit)
     fireEvent.blur(inputForEdit)
@@ -195,27 +199,27 @@ describe('<Editable />', () => {
     expect(onChangeModeSpy).toHaveBeenCalledWith('view')
   })
 
-  it('should change to view mode on escape', () => {
+  it('should change to view mode on escape', async () => {
     const onChangeModeSpy = vi.fn()
 
-    render(
+    await render(
       <Editable
         mode="edit"
         onChangeMode={onChangeModeSpy}
         render={childRender}
       />
     )
-    const inputForEdit = screen.getByTestId('edit-mode-input')
+    const inputForEdit = page.getByTestId('edit-mode-input').element()
 
     fireEvent.keyUp(inputForEdit, { key: 'Escape', code: 'Escape' })
 
     expect(onChangeModeSpy).toHaveBeenCalledWith('view')
   })
 
-  it('should call onChange when the user is finished editing', () => {
+  it('should call onChange when the user is finished editing', async () => {
     const onChangeSpy = vi.fn()
 
-    const { rerender } = render(
+    const { rerender } = await render(
       <Editable
         mode="edit"
         onChangeMode={vi.fn()}
@@ -224,14 +228,14 @@ describe('<Editable />', () => {
         onChange={onChangeSpy}
       />
     )
-    const inputForEdit = screen.getByTestId('edit-mode-input')
+    const inputForEdit = page.getByTestId('edit-mode-input').element()
 
     fireEvent.change(inputForEdit, { target: { value: 'updated_value' } })
 
     expect(onChangeSpy).not.toHaveBeenCalled()
 
     // Simulate mode prop change
-    rerender(
+    await rerender(
       <Editable
         mode="view"
         onChangeMode={vi.fn()}
@@ -244,12 +248,12 @@ describe('<Editable />', () => {
     expect(onChangeSpy).toHaveBeenCalledWith('updated_value')
   })
 
-  it('should warn if readOnly + mode="edit"', () => {
+  it('should warn if readOnly + mode="edit"', async () => {
     const consoleWarningSpy = vi
       .spyOn(console, 'warn')
       .mockImplementation(() => {})
 
-    render(
+    await render(
       <Editable
         mode="edit"
         onChangeMode={vi.fn()}

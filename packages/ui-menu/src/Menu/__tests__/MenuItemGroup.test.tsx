@@ -22,9 +22,10 @@
  * SOFTWARE.
  */
 
-import { fireEvent, render, screen } from '@testing-library/react'
-import { vi } from 'vitest'
-import '@testing-library/jest-dom'
+import { fireEvent } from '@testing-library/dom'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect, vi } from 'vitest'
 
 import {
   MenuItem,
@@ -33,8 +34,8 @@ import {
 } from '@instructure/ui-menu/latest'
 
 describe('<MenuItemGroup />', () => {
-  it('should render', () => {
-    const { container } = render(
+  it('should render', async () => {
+    const { container } = await render(
       <MenuItemGroup label="Menu Label">
         <MenuItem>Item Text 1</MenuItem>
         <MenuItem>Item Text 2</MenuItem>
@@ -48,79 +49,79 @@ describe('<MenuItemGroup />', () => {
     expect(group).toHaveTextContent('Item Text 2')
   })
 
-  it('should default to children with type "radio"', () => {
-    render(
+  it('should default to children with type "radio"', async () => {
+    await render(
       <MenuItemGroup label="Select one">
         <MenuItem>Foo</MenuItem>
         <MenuItem>Bar</MenuItem>
         <MenuItemSeparator />
       </MenuItemGroup>
     )
-    const menuItems = screen.getAllByRole('menuitemradio')
+    const menuItems = page.getByRole('menuitemradio').elements()
 
     expect(menuItems).toHaveLength(2)
   })
 
-  it('should render children with type "checkbox" if allowMultiple is true', () => {
-    render(
+  it('should render children with type "checkbox" if allowMultiple is true', async () => {
+    await render(
       <MenuItemGroup label="Select a few" allowMultiple>
         <MenuItem>Foo</MenuItem>
         <MenuItem>Bar</MenuItem>
         <MenuItemSeparator />
       </MenuItemGroup>
     )
-    const menuItems = screen.getAllByRole('menuitemcheckbox')
+    const menuItems = page.getByRole('menuitemcheckbox').elements()
 
     expect(menuItems).toHaveLength(2)
   })
 
-  it('should set aria-disabled', () => {
-    render(
+  it('should set aria-disabled', async () => {
+    await render(
       <MenuItemGroup label="Select one" disabled>
         <MenuItem>Foo</MenuItem>
         <MenuItem>Bar</MenuItem>
         <MenuItemSeparator />
       </MenuItemGroup>
     )
-    const menuItems = screen.getAllByRole('menuitemradio')
+    const menuItems = page.getByRole('menuitemradio').elements()
 
     expect(menuItems).toHaveLength(2)
     expect(menuItems[0]).toHaveAttribute('aria-disabled', 'true')
     expect(menuItems[1]).toHaveAttribute('aria-disabled', 'true')
   })
 
-  it('should set selected from defaultSelected prop', () => {
-    render(
+  it('should set selected from defaultSelected prop', async () => {
+    await render(
       <MenuItemGroup label="Select one" defaultSelected={[1]}>
         <MenuItem>Foo</MenuItem>
         <MenuItem>Bar</MenuItem>
         <MenuItemSeparator />
       </MenuItemGroup>
     )
-    const menuItems = screen.getAllByRole('menuitemradio')
+    const menuItems = page.getByRole('menuitemradio').elements()
 
     expect(menuItems).toHaveLength(2)
     expect(menuItems[0]).toHaveAttribute('aria-checked', 'false')
     expect(menuItems[1]).toHaveAttribute('aria-checked', 'true')
   })
 
-  it('should set selected from selected prop', () => {
-    render(
+  it('should set selected from selected prop', async () => {
+    await render(
       <MenuItemGroup label="Select one" onSelect={vi.fn()} selected={[1]}>
         <MenuItem>Foo</MenuItem>
         <MenuItem>Bar</MenuItem>
         <MenuItemSeparator />
       </MenuItemGroup>
     )
-    const menuItems = screen.getAllByRole('menuitemradio')
+    const menuItems = page.getByRole('menuitemradio').elements()
 
     expect(menuItems).toHaveLength(2)
     expect(menuItems[0]).toHaveAttribute('aria-checked', 'false')
     expect(menuItems[1]).toHaveAttribute('aria-checked', 'true')
   })
 
-  it('should set selected from children', () => {
-    render(
+  it('should set selected from children', async () => {
+    await render(
       <MenuItemGroup label="Select a few" allowMultiple>
         <MenuItem key="foo" defaultSelected>
           Foo
@@ -130,15 +131,15 @@ describe('<MenuItemGroup />', () => {
         </MenuItem>
       </MenuItemGroup>
     )
-    const menuItems = screen.getAllByRole('menuitemcheckbox')
+    const menuItems = page.getByRole('menuitemcheckbox').elements()
 
     expect(menuItems).toHaveLength(2)
     expect(menuItems[0]).toHaveAttribute('aria-checked', 'true')
     expect(menuItems[1]).toHaveAttribute('aria-checked', 'true')
   })
 
-  it('should honor the allowMultiple prop (defaults to false)', () => {
-    render(
+  it('should honor the allowMultiple prop (defaults to false)', async () => {
+    await render(
       <MenuItemGroup label="Select one">
         <MenuItem defaultSelected>Foo</MenuItem>
         <MenuItem selected onSelect={vi.fn()}>
@@ -146,23 +147,23 @@ describe('<MenuItemGroup />', () => {
         </MenuItem>
       </MenuItemGroup>
     )
-    const menuItems = screen.getAllByRole('menuitemradio')
+    const menuItems = page.getByRole('menuitemradio').elements()
 
     expect(menuItems).toHaveLength(2)
     expect(menuItems[0]).toHaveAttribute('aria-checked', 'true')
     expect(menuItems[1]).toHaveAttribute('aria-checked', 'false')
   })
 
-  it('calls onSelect when items are selected', () => {
+  it('calls onSelect when items are selected', async () => {
     const onSelect = vi.fn()
-    render(
+    await render(
       <MenuItemGroup label="Select one" onSelect={onSelect} selected={[1]}>
         <MenuItem>Item 1</MenuItem>
         <MenuItem>Item 2</MenuItem>
         <MenuItemSeparator />
       </MenuItemGroup>
     )
-    const menuItem = screen.getByText('Item 1')
+    const menuItem = page.getByText('Item 1').element()
 
     fireEvent.click(menuItem)
 
@@ -171,16 +172,16 @@ describe('<MenuItemGroup />', () => {
     expect(onSelect.mock.calls[0][2]).toEqual(true)
   })
 
-  it('does not call onSelect when disabled', () => {
+  it('does not call onSelect when disabled', async () => {
     const onSelect = vi.fn()
-    render(
+    await render(
       <MenuItemGroup label="Select one" onSelect={onSelect} disabled>
         <MenuItem>Item 1</MenuItem>
         <MenuItem>Item 2</MenuItem>
         <MenuItemSeparator />
       </MenuItemGroup>
     )
-    const menuItem = screen.getByText('Item 1')
+    const menuItem = page.getByText('Item 1').element()
 
     fireEvent.click(menuItem)
 

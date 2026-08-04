@@ -22,16 +22,14 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
-import { vi } from 'vitest'
-
 import { NumberInput } from '@instructure/ui-number-input/latest'
 import {
   ChevronUpInstUIIcon,
   ChevronDownInstUIIcon
 } from '@instructure/ui-icons'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 describe('<NumberInput />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
@@ -54,22 +52,26 @@ describe('<NumberInput />', () => {
 
   it('sets value on the input', async () => {
     const onChange = vi.fn()
-    render(<NumberInput renderLabel="Label" onChange={onChange} value="42" />)
-    const input = screen.getByRole('spinbutton')
+    await render(
+      <NumberInput renderLabel="Label" onChange={onChange} value="42" />
+    )
+    const input = page.getByRole('spinbutton').element()
 
     expect(input).toHaveValue(42)
   })
 
   it('should accept a number for the value', async () => {
     const onChange = vi.fn()
-    render(<NumberInput renderLabel="Label" onChange={onChange} value={42} />)
-    const input = screen.getByRole('spinbutton')
+    await render(
+      <NumberInput renderLabel="Label" onChange={onChange} value={42} />
+    )
+    const input = page.getByRole('spinbutton').element()
 
     expect(input).toHaveValue(42)
   })
 
   it('displays the label', async () => {
-    const { container } = render(<NumberInput renderLabel="Label" />)
+    const { container } = await render(<NumberInput renderLabel="Label" />)
     const label = container.querySelector(
       'span[class$="-formFieldLayout__label"]'
     )
@@ -79,8 +81,8 @@ describe('<NumberInput />', () => {
 
   it('passes the input element to inputRef', async () => {
     const inputRef = vi.fn()
-    render(<NumberInput renderLabel="Label" inputRef={inputRef} />)
-    const input = screen.getByRole('spinbutton')
+    await render(<NumberInput renderLabel="Label" inputRef={inputRef} />)
+    const input = page.getByRole('spinbutton').element()
 
     expect(inputRef).toHaveBeenCalledTimes(1)
     expect(inputRef).toHaveBeenCalledWith(input)
@@ -88,12 +90,12 @@ describe('<NumberInput />', () => {
 
   it('passes change events to onChange handler', async () => {
     const onChange = vi.fn()
-    render(<NumberInput renderLabel="Label" onChange={onChange} />)
-    const input = screen.getByRole('spinbutton')
+    await render(<NumberInput renderLabel="Label" onChange={onChange} />)
+    const input = page.getByRole('spinbutton').element()
 
     await userEvent.type(input, '5')
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       const event = onChange.mock.calls[0][0]
       const args = onChange.mock.calls[0][1]
       expect(onChange).toHaveBeenCalledTimes(1)
@@ -104,42 +106,42 @@ describe('<NumberInput />', () => {
 
   it('passes keyboard events to the onKeyDown handler', async () => {
     const onKeyDown = vi.fn()
-    render(<NumberInput renderLabel="Label" onKeyDown={onKeyDown} />)
-    const input = screen.getByRole('spinbutton')
+    await render(<NumberInput renderLabel="Label" onKeyDown={onKeyDown} />)
+    const input = page.getByRole('spinbutton').element()
 
     await userEvent.type(input, '5')
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onKeyDown).toHaveBeenCalledTimes(1)
     })
   })
 
   it('passes blur events to onBlur handler', async () => {
     const onBlur = vi.fn()
-    render(<NumberInput renderLabel="Label" onBlur={onBlur} />)
+    await render(<NumberInput renderLabel="Label" onBlur={onBlur} />)
 
     await userEvent.tab()
     await userEvent.tab()
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onBlur).toHaveBeenCalledTimes(1)
     })
   })
 
   it('passes focus events to onFocus handler', async () => {
     const onFocus = vi.fn()
-    render(<NumberInput renderLabel="Label" onFocus={onFocus} />)
-    const input = screen.getByRole('spinbutton')
+    await render(<NumberInput renderLabel="Label" onFocus={onFocus} />)
+    const input = page.getByRole('spinbutton').element()
 
     input.focus()
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onFocus).toHaveBeenCalledTimes(1)
     })
   })
 
   it('shows arrow spinbuttons by default', async () => {
-    const { container } = render(<NumberInput renderLabel="Label" />)
+    const { container } = await render(<NumberInput renderLabel="Label" />)
     const buttons = container.querySelectorAll(
       'button[class$="-numberInput_arrow"]'
     )
@@ -148,7 +150,7 @@ describe('<NumberInput />', () => {
   })
 
   it('hides arrow spinbuttons when showArrows is false', async () => {
-    const { container } = render(
+    const { container } = await render(
       <NumberInput renderLabel="Label" showArrows={false} />
     )
     const buttons = container.querySelectorAll(
@@ -160,7 +162,7 @@ describe('<NumberInput />', () => {
 
   it('calls onIncrement when up arrow spinbutton is clicked', async () => {
     const onIncrement = vi.fn()
-    const { container } = render(
+    const { container } = await render(
       <NumberInput renderLabel="Label" onIncrement={onIncrement} />
     )
     const buttons = container.querySelectorAll(
@@ -169,14 +171,14 @@ describe('<NumberInput />', () => {
 
     await userEvent.click(buttons[0])
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onIncrement).toHaveBeenCalledTimes(1)
     })
   })
 
   it('does not call onIncrement when `interaction` is set to readonly', async () => {
     const onIncrement = vi.fn()
-    const { container } = render(
+    const { container } = await render(
       <NumberInput
         renderLabel="Label"
         interaction="readonly"
@@ -189,14 +191,14 @@ describe('<NumberInput />', () => {
 
     await userEvent.click(buttons[0])
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onIncrement).toHaveBeenCalledTimes(0)
     })
   })
 
   it('does not call onIncrement when `readOnly` is set', async () => {
     const onIncrement = vi.fn()
-    const { container } = render(
+    const { container } = await render(
       <NumberInput renderLabel="Label" readOnly onIncrement={onIncrement} />
     )
     const buttons = container.querySelectorAll(
@@ -205,14 +207,14 @@ describe('<NumberInput />', () => {
 
     await userEvent.click(buttons[0])
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onIncrement).toHaveBeenCalledTimes(0)
     })
   })
 
   it('calls onDecrement when down arrow spinbutton is clicked', async () => {
     const onDecrement = vi.fn()
-    const { container } = render(
+    const { container } = await render(
       <NumberInput renderLabel="Label" onDecrement={onDecrement} />
     )
 
@@ -222,14 +224,14 @@ describe('<NumberInput />', () => {
 
     await userEvent.click(buttons[1])
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onDecrement).toHaveBeenCalledTimes(1)
     })
   })
 
   it('does not call onDecrement when `interaction` is set to readonly', async () => {
     const onDecrement = vi.fn()
-    const { container } = render(
+    const { container } = await render(
       <NumberInput
         renderLabel="Label"
         interaction="readonly"
@@ -242,14 +244,14 @@ describe('<NumberInput />', () => {
 
     await userEvent.click(buttons[1])
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onDecrement).toHaveBeenCalledTimes(0)
     })
   })
 
   it('does not call onDecrement when `readOnly` is set', async () => {
     const onDecrement = vi.fn()
-    const { container } = render(
+    const { container } = await render(
       <NumberInput renderLabel="Label" readOnly onDecrement={onDecrement} />
     )
     const buttons = container.querySelectorAll(
@@ -258,14 +260,14 @@ describe('<NumberInput />', () => {
 
     await userEvent.click(buttons[1])
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onDecrement).toHaveBeenCalledTimes(0)
     })
   })
 
   it('puts inputMode prop to input', async () => {
-    render(<NumberInput renderLabel="Label" inputMode="decimal" />)
-    const input = screen.getByRole('spinbutton')
+    await render(<NumberInput renderLabel="Label" inputMode="decimal" />)
+    const input = page.getByRole('spinbutton').element()
 
     expect(input).toHaveAttribute('inputMode', 'decimal')
   })
@@ -273,7 +275,7 @@ describe('<NumberInput />', () => {
   it('renders custom interactive icons', async () => {
     const onDecrement = vi.fn()
     const onIncrement = vi.fn()
-    const { container } = render(
+    const { container } = await render(
       <NumberInput
         renderLabel="Label"
         onIncrement={onIncrement}
@@ -295,24 +297,24 @@ describe('<NumberInput />', () => {
     )
 
     await userEvent.click(buttons[0])
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onIncrement).toHaveBeenCalledTimes(1)
     })
 
     await userEvent.click(buttons[1])
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onDecrement).toHaveBeenCalledTimes(1)
     })
   })
 
   it('associates messages with the input as its description, not its accessible name', async () => {
-    render(
+    await render(
       <NumberInput
         renderLabel="Label"
         messages={[{ type: 'error', text: 'some error message' }]}
       />
     )
-    const input = screen.getByRole('spinbutton')
+    const input = page.getByRole('spinbutton').element()
 
     const describedById = input.getAttribute('aria-describedby')
     expect(describedById).toBeTruthy()
@@ -328,8 +330,8 @@ describe('<NumberInput />', () => {
   })
 
   it('does not override the accessible name with aria-labelledby when there are no messages', async () => {
-    render(<NumberInput renderLabel="Label" />)
-    const input = screen.getByRole('spinbutton')
+    await render(<NumberInput renderLabel="Label" />)
+    const input = page.getByRole('spinbutton').element()
 
     expect(input).not.toHaveAttribute('aria-labelledby')
   })

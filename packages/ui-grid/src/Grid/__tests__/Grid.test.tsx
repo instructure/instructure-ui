@@ -22,13 +22,14 @@
  * SOFTWARE.
  */
 
-import { render, screen } from '@testing-library/react'
 import { Grid } from '@instructure/ui-grid/latest'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect } from 'vitest'
 
 describe('<Grid />', () => {
   it('should render content in each column', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Grid>
         <Grid.Row>
           <Grid.Col>Foo</Grid.Col>
@@ -42,7 +43,7 @@ describe('<Grid />', () => {
   })
 
   it('should pass aria and role attributes to underlying DOM elements', async () => {
-    render(
+    await render(
       <Grid data-testid="grid" role="grid" aria-hidden="true">
         <Grid.Row data-testid="grid-row" aria-live="polite" role="presentation">
           <Grid.Col data-testid="grid-col" aria-disabled="true">
@@ -52,11 +53,13 @@ describe('<Grid />', () => {
       </Grid>
     )
 
-    expect(screen.getByTestId('grid')).toHaveAttribute('aria-hidden')
-    expect(screen.getByTestId('grid-row')).toHaveAttribute(
+    expect(page.getByTestId('grid').element()).toHaveAttribute('aria-hidden')
+    expect(page.getByTestId('grid-row').element()).toHaveAttribute(
       'aria-live',
       'polite'
     )
-    expect(screen.getByTestId('grid-col')).toHaveAttribute('aria-disabled')
+    expect(page.getByTestId('grid-col').element()).toHaveAttribute(
+      'aria-disabled'
+    )
   })
 })

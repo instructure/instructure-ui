@@ -22,12 +22,12 @@
  * SOFTWARE.
  */
 
-import { render, screen } from '@testing-library/react'
-import { vi } from 'vitest'
 import { InPlaceEdit } from '@instructure/ui-editable/latest'
 import type { InPlaceEditProps } from '@instructure/ui-editable/latest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 const VIEWER_TEXT = 'viewer-text'
 const EDIT_BUTTON_TEXT = 'edit-button-text'
@@ -77,8 +77,8 @@ describe('<InPlaceEdit />', () => {
     consoleErrorMock.mockRestore()
   })
 
-  it('should render view mode', () => {
-    render(
+  it('should render view mode', async () => {
+    await render(
       <InPlaceEdit
         mode="view"
         onChangeMode={vi.fn()}
@@ -87,16 +87,16 @@ describe('<InPlaceEdit />', () => {
         renderEditButton={renderEditButton}
       />
     )
-    const viewModeText = screen.getByText(VIEWER_TEXT)
-    const editButton = screen.getByRole('button')
+    const viewModeText = page.getByText(VIEWER_TEXT).element()
+    const editButton = page.getByRole('button').element()
 
     expect(viewModeText).toBeInTheDocument()
     expect(editButton).toBeInTheDocument()
     expect(editButton).toHaveTextContent(EDIT_BUTTON_TEXT)
   })
 
-  it('should render view mode with string button label', () => {
-    const { container } = render(
+  it('should render view mode with string button label', async () => {
+    const { container } = await render(
       <InPlaceEdit
         mode="view"
         onChangeMode={vi.fn()}
@@ -105,8 +105,8 @@ describe('<InPlaceEdit />', () => {
         renderEditButton={renderEditButton}
       />
     )
-    const viewModeText = screen.getByText(VIEWER_TEXT)
-    const editButton = screen.getByRole('button')
+    const viewModeText = page.getByText(VIEWER_TEXT).element()
+    const editButton = page.getByRole('button').element()
     const buttonLabel = container.querySelector(
       "[class$='-screenReaderContent']"
     ) as HTMLElement
@@ -117,8 +117,8 @@ describe('<InPlaceEdit />', () => {
     expect(buttonLabel).toHaveTextContent(EDIT_BUTTON_TEXT)
   })
 
-  it('should render edit mode', () => {
-    render(
+  it('should render edit mode', async () => {
+    await render(
       <InPlaceEdit
         mode="edit"
         onChangeMode={vi.fn()}
@@ -127,15 +127,15 @@ describe('<InPlaceEdit />', () => {
         renderEditButton={renderEditButton}
       />
     )
-    const inputForEdit = screen.getByTestId('input-editor')
+    const inputForEdit = page.getByTestId('input-editor').element()
 
     expect(inputForEdit).toBeInTheDocument()
     expect(document.activeElement).toBe(inputForEdit)
   })
 
-  it('should render a custom edit button', () => {
+  it('should render a custom edit button', async () => {
     const customButtonText = 'custom-button-text'
-    render(
+    await render(
       <InPlaceEdit
         mode="view"
         onChangeMode={vi.fn()}
@@ -146,16 +146,16 @@ describe('<InPlaceEdit />', () => {
         }}
       />
     )
-    const viewModeText = screen.getByText(VIEWER_TEXT)
-    const customEditButton = screen.getByTestId('custom_button')
+    const viewModeText = page.getByText(VIEWER_TEXT).element()
+    const customEditButton = page.getByTestId('custom_button').element()
 
     expect(viewModeText).toBeInTheDocument()
     expect(customEditButton).toBeInTheDocument()
     expect(customEditButton).toHaveTextContent(customButtonText)
   })
 
-  it('should switch mode to edit via props, and focus the editor', () => {
-    const { rerender, container } = render(
+  it('should switch mode to edit via props, and focus the editor', async () => {
+    const { rerender, container } = await render(
       <InPlaceEdit
         mode="view"
         onChangeMode={vi.fn()}
@@ -164,11 +164,11 @@ describe('<InPlaceEdit />', () => {
         renderEditButton={renderEditButton}
       />
     )
-    const viewModeText = screen.getByText(VIEWER_TEXT)
+    const viewModeText = page.getByText(VIEWER_TEXT).element()
     expect(viewModeText).toBeInTheDocument()
 
     // Simulate mode prop change
-    rerender(
+    await rerender(
       <InPlaceEdit
         mode="edit"
         onChangeMode={vi.fn()}
@@ -177,15 +177,15 @@ describe('<InPlaceEdit />', () => {
         renderEditButton={renderEditButton}
       />
     )
-    const inputForEdit = screen.getByTestId('input-editor')
+    const inputForEdit = page.getByTestId('input-editor').element()
 
     expect(container).not.toHaveTextContent(VIEWER_TEXT)
     expect(inputForEdit).toBeInTheDocument()
     expect(document.activeElement).toBe(inputForEdit)
   })
 
-  it('should switch mode to view via props, and focus the edit button', () => {
-    const { rerender, container } = render(
+  it('should switch mode to view via props, and focus the edit button', async () => {
+    const { rerender, container } = await render(
       <InPlaceEdit
         mode="edit"
         onChangeMode={vi.fn()}
@@ -194,13 +194,13 @@ describe('<InPlaceEdit />', () => {
         renderEditButton={renderEditButton}
       />
     )
-    const inputForEdit = screen.getByTestId('input-editor')
+    const inputForEdit = page.getByTestId('input-editor').element()
 
     expect(container).not.toHaveTextContent(VIEWER_TEXT)
     expect(inputForEdit).toBeInTheDocument()
 
     // Simulate mode prop change
-    rerender(
+    await rerender(
       <InPlaceEdit
         mode="view"
         onChangeMode={vi.fn()}
@@ -212,7 +212,7 @@ describe('<InPlaceEdit />', () => {
     const inputForEditAfterModeChange = container.querySelector(
       "[id='input-editor']"
     )
-    const editButton = screen.getByRole('button')
+    const editButton = page.getByRole('button').element()
 
     expect(container).toHaveTextContent(VIEWER_TEXT)
     expect(inputForEditAfterModeChange).not.toBeInTheDocument()
@@ -222,7 +222,7 @@ describe('<InPlaceEdit />', () => {
   })
 
   it('should meet a11y standards in view mode', async () => {
-    const { container } = render(
+    const { container } = await render(
       <InPlaceEdit
         mode="view"
         onChangeMode={vi.fn()}
@@ -237,7 +237,7 @@ describe('<InPlaceEdit />', () => {
   })
 
   it('should meet a11y standards in edit mode', async () => {
-    const { container } = render(
+    const { container } = await render(
       <InPlaceEdit
         mode="edit"
         onChangeMode={vi.fn()}

@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-import '@testing-library/jest-dom'
-import { vi } from 'vitest'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import { safeLinkProps } from '../safeLinkProps.js'
 
 describe('safeLinkProps', () => {

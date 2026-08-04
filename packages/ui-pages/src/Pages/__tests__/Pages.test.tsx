@@ -22,12 +22,11 @@
  * SOFTWARE.
  */
 
-import { render, waitFor } from '@testing-library/react'
-import { vi, expect } from 'vitest'
 import type { MockInstance } from 'vitest'
 
-import '@testing-library/jest-dom'
-import userEvent from '@testing-library/user-event'
+import { render } from 'vitest-browser-react'
+import { userEvent } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import { Pages, PagesPage as Page } from '@instructure/ui-pages/latest'
 
 describe('<Pages />', () => {
@@ -45,7 +44,7 @@ describe('<Pages />', () => {
   })
 
   it('should render', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Pages>
         <Page>{() => 'Foo'}</Page>
         <Page>{() => 'Bar'}</Page>
@@ -57,7 +56,7 @@ describe('<Pages />', () => {
   })
 
   it('should render a Page', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Pages>
         <Page>{() => 'Hello World'}</Page>
       </Pages>
@@ -68,7 +67,7 @@ describe('<Pages />', () => {
   })
 
   it('should render the 0th Page by default', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Pages>
         <Page>{() => 'Foo'}</Page>
         <Page>{() => 'Bar'}</Page>
@@ -80,7 +79,7 @@ describe('<Pages />', () => {
   })
 
   it('should render the active Page', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Pages activePageIndex={1} onPageIndexChange={() => {}}>
         <Page>{() => 'Foo'}</Page>
         <Page>{() => 'Bar'}</Page>
@@ -93,13 +92,13 @@ describe('<Pages />', () => {
 
   it('should pass history and navigateToPreviousPage to Page', async () => {
     const pageSpy = vi.fn()
-    render(
+    await render(
       <Pages>
         <Page>{pageSpy}</Page>
       </Pages>
     )
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       const args = pageSpy.mock.calls[0]
 
       expect(pageSpy).toHaveBeenCalledTimes(1)
@@ -111,7 +110,7 @@ describe('<Pages />', () => {
   it('should fire onPageIndexChange event', async () => {
     const onPageIndexChange = vi.fn()
 
-    const { container, rerender } = render(
+    const { container, rerender } = await render(
       <Pages activePageIndex={0} onPageIndexChange={onPageIndexChange}>
         <Page key={0}>{() => 'Foo'}</Page>
         <Page key={1}>
@@ -121,7 +120,7 @@ describe('<Pages />', () => {
     )
 
     // Set prop: activePageIndex
-    rerender(
+    await rerender(
       <Pages activePageIndex={1} onPageIndexChange={onPageIndexChange}>
         <Page key={0}>{() => 'Foo'}</Page>
         <Page key={1}>
@@ -134,7 +133,7 @@ describe('<Pages />', () => {
 
     await userEvent.click(button)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onPageIndexChange).toHaveBeenCalledTimes(1)
       expect(onPageIndexChange).toHaveBeenCalledWith(0, 1)
     })

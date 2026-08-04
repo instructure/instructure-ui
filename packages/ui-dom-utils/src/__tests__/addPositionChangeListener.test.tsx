@@ -22,9 +22,8 @@
  * SOFTWARE.
  */
 
-import { render, waitFor } from '@testing-library/react'
-import { vi } from 'vitest'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { describe, it, expect, vi } from 'vitest'
 import { addPositionChangeListener } from '../addPositionChangeListener.js'
 
 const mockRect = {
@@ -44,7 +43,7 @@ describe('addPositionChangeListener', () => {
     const callback = vi.fn()
     Element.prototype.getBoundingClientRect = vi.fn(() => mockRect as DOMRect)
 
-    const { container } = render(<div />)
+    const { container } = await render(<div />)
     const node = container.firstChild as HTMLDivElement
 
     const listener = addPositionChangeListener(node, callback)
@@ -54,7 +53,7 @@ describe('addPositionChangeListener', () => {
       return { ...mockRect, top: 200 } as DOMRect
     })
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(callback).toHaveBeenCalledTimes(1)
       expect(typeof listener.remove).toBe('function')
     })

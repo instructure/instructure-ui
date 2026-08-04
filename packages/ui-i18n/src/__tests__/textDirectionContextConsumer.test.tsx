@@ -23,9 +23,9 @@
  */
 
 import { Component } from 'react'
-import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom'
-import { vi, expect } from 'vitest'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import type { MockInstance } from 'vitest'
 
 import {
@@ -74,22 +74,24 @@ describe('@textDirectionContextConsumer', () => {
   })
 
   it('should take on the direction of the document by default', async () => {
-    const { container } = render(<TextDirectionContextConsumerComponent />)
+    const { container } = await render(
+      <TextDirectionContextConsumerComponent />
+    )
 
     expect(container.firstChild).toHaveAttribute('data-dir', 'ltr')
   })
 
   it('should render correctly', async () => {
-    render(<WrapperComponent />)
+    await render(<WrapperComponent />)
 
-    const foundComponent = screen.getByTestId('test-consumer')
+    const foundComponent = page.getByTestId('test-consumer').element()
 
     expect(foundComponent).toBeInTheDocument()
     expect(foundComponent).toHaveAttribute('data-dir')
   })
 
   it('should set the text direction via props', async () => {
-    const { container } = render(
+    const { container } = await render(
       <TextDirectionContextConsumerComponent dir="rtl" />
     )
     expect(container.firstChild).toHaveAttribute('data-dir', 'rtl')
@@ -111,7 +113,7 @@ describe('@textDirectionContextConsumer', () => {
   */
 
   it('should give props preference when context and context are present', async () => {
-    const { container } = render(
+    const { container } = await render(
       <TextDirectionContext.Provider value="ltr">
         <TextDirectionContextConsumerComponent dir="rtl" />
       </TextDirectionContext.Provider>

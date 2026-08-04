@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
-import { vi } from 'vitest'
-import userEvent from '@testing-library/user-event'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import { describe, it, expect, vi } from 'vitest'
 import { ToggleButton } from '@instructure/ui-buttons/latest'
 
 describe('<ToggleButton />', () => {
@@ -35,8 +35,8 @@ describe('<ToggleButton />', () => {
   )
   const iconSelector = 'svg[data-title="myIcon"]'
 
-  it('should render', () => {
-    render(
+  it('should render', async () => {
+    await render(
       <ToggleButton
         screenReaderLabel="This is a screen reader label"
         renderIcon={icon}
@@ -44,9 +44,9 @@ describe('<ToggleButton />', () => {
         status="pressed"
       />
     )
-    const button = screen.getByRole('button')
+    const button = page.getByRole('button').element()
     const svgIcon = document.querySelector(iconSelector)
-    const tooltip = screen.getByRole('tooltip')
+    const tooltip = page.getByRole('tooltip').element()
 
     expect(button).toBeInTheDocument()
     expect(button).toHaveTextContent('This is a screen reader label')
@@ -55,8 +55,8 @@ describe('<ToggleButton />', () => {
     expect(tooltip).toHaveTextContent('This is tooltip content')
   })
 
-  it('should set `aria-pressed` to `true` if `status` is `pressed`', () => {
-    render(
+  it('should set `aria-pressed` to `true` if `status` is `pressed`', async () => {
+    await render(
       <ToggleButton
         screenReaderLabel="This is a screen reader label"
         renderIcon={icon}
@@ -64,13 +64,13 @@ describe('<ToggleButton />', () => {
         status="pressed"
       />
     )
-    const button = screen.getByRole('button')
+    const button = page.getByRole('button').element()
 
     expect(button).toHaveAttribute('aria-pressed', 'true')
   })
 
-  it('should set `aria-pressed` to `false` if `status` is `unpressed`', () => {
-    render(
+  it('should set `aria-pressed` to `false` if `status` is `unpressed`', async () => {
+    await render(
       <ToggleButton
         screenReaderLabel="This is a screen reader label"
         renderIcon={icon}
@@ -78,13 +78,13 @@ describe('<ToggleButton />', () => {
         status="unpressed"
       />
     )
-    const button = screen.getByRole('button')
+    const button = page.getByRole('button').element()
 
     expect(button).toHaveAttribute('aria-pressed', 'false')
   })
 
-  it('should render an icon', () => {
-    render(
+  it('should render an icon', async () => {
+    await render(
       <ToggleButton
         screenReaderLabel="This is a screen reader label"
         renderIcon={icon}
@@ -92,15 +92,15 @@ describe('<ToggleButton />', () => {
         status="pressed"
       />
     )
-    const button = screen.getByRole('button')
+    const button = page.getByRole('button').element()
     const svgIcon = document.querySelector(iconSelector)
 
     expect(button).toBeInTheDocument()
     expect(svgIcon).toBeInTheDocument()
   })
 
-  it('should pass the `as` prop', () => {
-    const { container } = render(
+  it('should pass the `as` prop', async () => {
+    const { container } = await render(
       <ToggleButton
         screenReaderLabel="This is a screen reader label"
         renderIcon={icon}
@@ -115,8 +115,8 @@ describe('<ToggleButton />', () => {
     expect(button!.tagName).toBe('LI')
   })
 
-  it('should set the disabled attribute when `interaction` prop is set to disabled', () => {
-    render(
+  it('should set the disabled attribute when `interaction` prop is set to disabled', async () => {
+    await render(
       <ToggleButton
         screenReaderLabel="This is a screen reader label"
         renderIcon={icon}
@@ -125,13 +125,13 @@ describe('<ToggleButton />', () => {
         status="pressed"
       />
     )
-    const button = screen.getByRole('button')
+    const button = page.getByRole('button').element()
 
     expect(button).toHaveAttribute('disabled')
   })
 
-  it('should set the disabled attribute when `disabled` prop is set', () => {
-    render(
+  it('should set the disabled attribute when `disabled` prop is set', async () => {
+    await render(
       <ToggleButton
         screenReaderLabel="This is a screen reader label"
         renderIcon={icon}
@@ -140,13 +140,13 @@ describe('<ToggleButton />', () => {
         status="pressed"
       />
     )
-    const button = screen.getByRole('button')
+    const button = page.getByRole('button').element()
 
     expect(button).toHaveAttribute('disabled')
   })
 
-  it('should set the disabled attribute when `interaction` prop is set to readonly', () => {
-    render(
+  it('should set the disabled attribute when `interaction` prop is set to readonly', async () => {
+    await render(
       <ToggleButton
         screenReaderLabel="This is a screen reader label"
         renderIcon={icon}
@@ -155,13 +155,13 @@ describe('<ToggleButton />', () => {
         status="pressed"
       />
     )
-    const button = screen.getByRole('button')
+    const button = page.getByRole('button').element()
 
     expect(button).toHaveAttribute('disabled')
   })
 
-  it('should set the disabled attribute when `readOnly` prop is set', () => {
-    render(
+  it('should set the disabled attribute when `readOnly` prop is set', async () => {
+    await render(
       <ToggleButton
         screenReaderLabel="This is a screen reader label"
         renderIcon={icon}
@@ -170,7 +170,7 @@ describe('<ToggleButton />', () => {
         status="pressed"
       />
     )
-    const button = screen.getByRole('button')
+    const button = page.getByRole('button').element()
 
     expect(button).toHaveAttribute('disabled')
   })
@@ -178,7 +178,7 @@ describe('<ToggleButton />', () => {
   it('should pass the `onClick` prop', async () => {
     const onClick = vi.fn()
 
-    render(
+    await render(
       <ToggleButton
         screenReaderLabel="This is a screen reader label"
         renderIcon={icon}
@@ -187,11 +187,11 @@ describe('<ToggleButton />', () => {
         status="pressed"
       />
     )
-    const button = screen.getByRole('button')
+    const button = page.getByRole('button').element()
 
     await userEvent.click(button)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onClick).toHaveBeenCalledTimes(1)
     })
   })

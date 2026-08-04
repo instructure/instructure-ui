@@ -22,11 +22,10 @@
  * SOFTWARE.
  */
 
-import { render, waitFor } from '@testing-library/react'
-import { vi, expect } from 'vitest'
 import type { MockInstance } from 'vitest'
 
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { TruncateText } from '@instructure/ui-truncate-text/latest'
 
@@ -47,7 +46,7 @@ describe('<TruncateText />', () => {
   })
 
   it('should warn if children prop receives too deep of a node tree', async () => {
-    render(
+    await render(
       <div style={{ width: '200px' }}>
         <TruncateText>
           Hello world!{' '}
@@ -62,7 +61,7 @@ describe('<TruncateText />', () => {
     const expectedErrorMessage =
       'Some children are too deep in the node tree and will not render.'
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(consoleErrorMock).toHaveBeenCalledWith(
         expect.stringContaining(expectedErrorMessage),
         expect.any(String)
@@ -74,10 +73,10 @@ describe('<TruncateText />', () => {
     let error = false
 
     try {
-      const { rerender } = render(<TruncateText>{''}</TruncateText>)
+      const { rerender } = await render(<TruncateText>{''}</TruncateText>)
 
-      rerender(<TruncateText>{'hello world'}</TruncateText>)
-      rerender(<TruncateText>{''}</TruncateText>)
+      await rerender(<TruncateText>{'hello world'}</TruncateText>)
+      await rerender(<TruncateText>{''}</TruncateText>)
     } catch (_e) {
       error = true
     }
@@ -86,7 +85,7 @@ describe('<TruncateText />', () => {
   })
 
   it('should meet a11y standards', async () => {
-    const { container } = render(
+    const { container } = await render(
       <div style={{ width: '200px' }}>
         <TruncateText>{defaultText}</TruncateText>
       </div>

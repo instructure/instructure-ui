@@ -22,10 +22,9 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
-import { userEvent } from '@testing-library/user-event'
-import { vi } from 'vitest'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { deepEqual } from '@instructure/ui-utils'
@@ -81,7 +80,7 @@ describe('<ColorMixer />', () => {
   describe('elementRef prop', () => {
     it('should provide ref', async () => {
       const elementRef = vi.fn()
-      const { container } = render(
+      const { container } = await render(
         <ColorMixer
           {...testValue}
           {...testInputLabels}
@@ -97,7 +96,7 @@ describe('<ColorMixer />', () => {
 
   describe('labels are displayed:', () => {
     it('should render input labels', async () => {
-      const { container } = render(
+      const { container } = await render(
         <ColorMixer
           {...testValue}
           {...testInputLabels}
@@ -117,7 +116,7 @@ describe('<ColorMixer />', () => {
     })
 
     it('should render explanation labels', async () => {
-      render(
+      await render(
         <ColorMixer
           {...testValue}
           {...testInputLabels}
@@ -126,8 +125,8 @@ describe('<ColorMixer />', () => {
           onChange={vi.fn()}
         />
       )
-      const sliders = screen.getAllByRole('slider')
-      const palette = screen.getByRole('button')
+      const sliders = page.getByRole('slider').elements()
+      const palette = page.getByRole('button').element()
 
       expect(sliders[0]).toHaveAttribute(
         'aria-label',
@@ -146,7 +145,7 @@ describe('<ColorMixer />', () => {
 
   describe('should be accessible', () => {
     it('a11y', async () => {
-      const { container } = render(
+      const { container } = await render(
         <ColorMixer
           {...testValue}
           {...testInputLabels}
@@ -163,7 +162,7 @@ describe('<ColorMixer />', () => {
   describe('edge cases for color value', () => {
     Object.entries(edgeColorValues).forEach(([label, color]) => {
       it(label, async () => {
-        render(
+        await render(
           <ColorMixer
             value={color}
             {...testInputLabels}
@@ -173,7 +172,7 @@ describe('<ColorMixer />', () => {
           />
         )
 
-        const inputs = screen.getAllByRole('textbox')
+        const inputs = page.getByRole('textbox').elements()
         const [r, g, b, a] = inputs.map((input) =>
           Number(input.getAttribute('value'))
         )
@@ -185,7 +184,7 @@ describe('<ColorMixer />', () => {
     Object.entries(differentHexColorValues).forEach(([length, color]) => {
       it(`mount with ${length}-character hex color`, async () => {
         const colorInput = color
-        render(
+        await render(
           <ColorMixer
             value={colorInput}
             {...testInputLabels}
@@ -195,7 +194,7 @@ describe('<ColorMixer />', () => {
           />
         )
 
-        const inputs = screen.getAllByRole('textbox')
+        const inputs = page.getByRole('textbox').elements()
         const [r, g, b, a] = inputs.map((input) =>
           Number(input.getAttribute('value'))
         )
@@ -206,7 +205,7 @@ describe('<ColorMixer />', () => {
     })
 
     it('mount with invalid hex color', async () => {
-      render(
+      await render(
         <ColorMixer
           value="#GGGGGGGG"
           {...testInputLabels}
@@ -216,14 +215,14 @@ describe('<ColorMixer />', () => {
         />
       )
 
-      const inputs = screen.getAllByRole('textbox')
+      const inputs = page.getByRole('textbox').elements()
       const [r, g, b, a] = inputs.map((input: any) =>
         Number(input.getAttribute('value'))
       )
       const colorHex = conversions.colorToHex8({ r, g, b, a })
       expect(colorHex).toBe('#000000FF')
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(consoleWarningMock.mock.calls[0][0]).toEqual(
           expect.stringContaining(
             'Warning: [ColorMixer] The passed color value is not valid.'
@@ -236,7 +235,7 @@ describe('<ColorMixer />', () => {
   describe('hue slider', () => {
     it('should not call onChange when the `tab` key is pressed', async () => {
       const onChange = vi.fn()
-      render(
+      await render(
         <ColorMixer
           withAlpha
           {...testInputLabels}
@@ -245,21 +244,23 @@ describe('<ColorMixer />', () => {
         />
       )
 
-      const colorSlider = screen.getByRole('slider', {
-        name: testScreenReaderLabels.colorSliderNavigationExplanationScreenReaderLabel
-      })
+      const colorSlider = page
+        .getByRole('slider', {
+          name: testScreenReaderLabels.colorSliderNavigationExplanationScreenReaderLabel
+        })
+        .element()
 
       colorSlider.focus()
       await userEvent.tab()
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onChange).not.toHaveBeenCalled()
       })
     })
 
     it('onChange should not be call when component is disabled', async () => {
       const onChange = vi.fn()
-      render(
+      await render(
         <ColorMixer
           disabled
           {...testInputLabels}
@@ -267,13 +268,15 @@ describe('<ColorMixer />', () => {
           onChange={onChange}
         />
       )
-      const colorSlider = screen.getByRole('slider', {
-        name: testScreenReaderLabels.colorSliderNavigationExplanationScreenReaderLabel
-      })
+      const colorSlider = page
+        .getByRole('slider', {
+          name: testScreenReaderLabels.colorSliderNavigationExplanationScreenReaderLabel
+        })
+        .element()
 
       await userEvent.type(colorSlider, '{arrowright}')
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onChange).not.toHaveBeenCalled()
       })
     })
@@ -282,7 +285,7 @@ describe('<ColorMixer />', () => {
   describe('alpha slider', () => {
     it('should not call onChange when a `tab` key press is received', async () => {
       const onChange = vi.fn()
-      render(
+      await render(
         <ColorMixer
           withAlpha
           {...testInputLabels}
@@ -290,21 +293,23 @@ describe('<ColorMixer />', () => {
           onChange={onChange}
         />
       )
-      const alphaSlider = screen.getByRole('slider', {
-        name: testScreenReaderLabels.alphaSliderNavigationExplanationScreenReaderLabel
-      })
+      const alphaSlider = page
+        .getByRole('slider', {
+          name: testScreenReaderLabels.alphaSliderNavigationExplanationScreenReaderLabel
+        })
+        .element()
 
       alphaSlider.focus()
       await userEvent.tab()
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onChange).not.toHaveBeenCalled()
       })
     })
 
     it('should not call onChange when the component is disabled', async () => {
       const onChange = vi.fn()
-      render(
+      await render(
         <ColorMixer
           withAlpha
           disabled
@@ -315,13 +320,15 @@ describe('<ColorMixer />', () => {
         />
       )
 
-      const alphaSlider = screen.getByRole('slider', {
-        name: testScreenReaderLabels.alphaSliderNavigationExplanationScreenReaderLabel
-      })
+      const alphaSlider = page
+        .getByRole('slider', {
+          name: testScreenReaderLabels.alphaSliderNavigationExplanationScreenReaderLabel
+        })
+        .element()
 
       await userEvent.type(alphaSlider, '{arrowright}')
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onChange).not.toHaveBeenCalled()
       })
     })
@@ -329,7 +336,7 @@ describe('<ColorMixer />', () => {
     it('the alpha slider does not show when withAlpha is false', async () => {
       const onChange = vi.fn()
 
-      render(
+      await render(
         <ColorMixer
           withAlpha={false}
           value="#80404100"
@@ -338,9 +345,11 @@ describe('<ColorMixer />', () => {
           onChange={onChange}
         />
       )
-      const alphaSlider = screen.queryByRole('slider', {
-        name: testScreenReaderLabels.alphaSliderNavigationExplanationScreenReaderLabel
-      })
+      const alphaSlider = page
+        .getByRole('slider', {
+          name: testScreenReaderLabels.alphaSliderNavigationExplanationScreenReaderLabel
+        })
+        .query()
 
       expect(alphaSlider).not.toBeInTheDocument()
     })
@@ -348,7 +357,7 @@ describe('<ColorMixer />', () => {
     it('the alpha slider does not show when withAlpha is not set', async () => {
       const onChange = vi.fn()
 
-      render(
+      await render(
         <ColorMixer
           value="#80404100"
           {...testInputLabels}
@@ -356,9 +365,11 @@ describe('<ColorMixer />', () => {
           onChange={onChange}
         />
       )
-      const alphaSlider = screen.queryByRole('slider', {
-        name: testScreenReaderLabels.alphaSliderNavigationExplanationScreenReaderLabel
-      })
+      const alphaSlider = page
+        .getByRole('slider', {
+          name: testScreenReaderLabels.alphaSliderNavigationExplanationScreenReaderLabel
+        })
+        .query()
 
       expect(alphaSlider).not.toBeInTheDocument()
     })
@@ -366,7 +377,7 @@ describe('<ColorMixer />', () => {
     it('should set the disabled attribute when `disabled` is set', async () => {
       const onChange = vi.fn()
 
-      render(
+      await render(
         <ColorMixer
           withAlpha
           disabled
@@ -376,9 +387,11 @@ describe('<ColorMixer />', () => {
           onChange={onChange}
         />
       )
-      const alphaSlider = screen.queryByRole('slider', {
-        name: testScreenReaderLabels.alphaSliderNavigationExplanationScreenReaderLabel
-      })
+      const alphaSlider = page
+        .getByRole('slider', {
+          name: testScreenReaderLabels.alphaSliderNavigationExplanationScreenReaderLabel
+        })
+        .query()
 
       expect(alphaSlider).toHaveAttribute('disabled')
     })
@@ -388,7 +401,7 @@ describe('<ColorMixer />', () => {
     it('should set the disabled attribute when `disabled` is set', async () => {
       const onChange = vi.fn()
 
-      render(
+      await render(
         <ColorMixer
           withAlpha
           disabled
@@ -398,9 +411,11 @@ describe('<ColorMixer />', () => {
           onChange={onChange}
         />
       )
-      const colorPalette = screen.queryByRole('button', {
-        name: testScreenReaderLabels.colorPaletteNavigationExplanationScreenReaderLabel
-      })
+      const colorPalette = page
+        .getByRole('button', {
+          name: testScreenReaderLabels.colorPaletteNavigationExplanationScreenReaderLabel
+        })
+        .query()
 
       expect(colorPalette).toHaveAttribute('disabled')
     })
@@ -408,7 +423,7 @@ describe('<ColorMixer />', () => {
 
   describe('color input', () => {
     it('the alpha input exsits when `withAlpha` is set', async () => {
-      const { container } = render(
+      const { container } = await render(
         <ColorMixer
           withAlpha
           {...testValue}
@@ -420,16 +435,16 @@ describe('<ColorMixer />', () => {
       const alphaInput = container.querySelector(
         'span[class$="-RGBAInput__aInput"]'
       )
-      const alphaInputScreenReaderLabel = screen.getByText(
-        testInputLabels.rgbAlphaInputScreenReaderLabel
-      )
+      const alphaInputScreenReaderLabel = page
+        .getByText(testInputLabels.rgbAlphaInputScreenReaderLabel)
+        .element()
 
       expect(alphaInput).toBeInTheDocument()
       expect(alphaInputScreenReaderLabel).toBeInTheDocument()
     })
 
     it('the alpha input does not exsit when `withAlpha` is not set', async () => {
-      const { container } = render(
+      const { container } = await render(
         <ColorMixer
           {...testValue}
           {...testInputLabels}
@@ -440,9 +455,9 @@ describe('<ColorMixer />', () => {
       const alphaInput = container.querySelector(
         'span[class$="-RGBAInput__aInput"]'
       )
-      const alphaInputScreenReaderLabel = screen.queryByText(
-        testInputLabels.rgbAlphaInputScreenReaderLabel
-      )
+      const alphaInputScreenReaderLabel = page
+        .getByText(testInputLabels.rgbAlphaInputScreenReaderLabel)
+        .query()
 
       expect(alphaInput).not.toBeInTheDocument()
       expect(alphaInputScreenReaderLabel).not.toBeInTheDocument()
@@ -451,7 +466,7 @@ describe('<ColorMixer />', () => {
     it('should not call onChange when `disabled` is set and get the input', async () => {
       const fakeValue = '234234'
       const onChange = vi.fn()
-      render(
+      await render(
         <ColorMixer
           disabled
           withAlpha
@@ -460,7 +475,7 @@ describe('<ColorMixer />', () => {
           onChange={onChange}
         />
       )
-      const inputs = screen.getAllByRole('textbox')
+      const inputs = page.getByRole('textbox').elements()
       expect(inputs.length).toBe(4)
 
       await userEvent.type(inputs[0], fakeValue)
@@ -468,13 +483,13 @@ describe('<ColorMixer />', () => {
       await userEvent.type(inputs[2], fakeValue)
       await userEvent.type(inputs[3], fakeValue)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onChange).not.toHaveBeenCalled()
       })
     })
 
     it('should set the disabled attribute when `disabled` and `withAlpha` is set', async () => {
-      render(
+      await render(
         <ColorMixer
           disabled
           withAlpha
@@ -483,7 +498,7 @@ describe('<ColorMixer />', () => {
           onChange={vi.fn()}
         />
       )
-      const inputs = screen.getAllByRole('textbox')
+      const inputs = page.getByRole('textbox').elements()
       expect(inputs.length).toBe(4)
 
       inputs.forEach((input) => {
@@ -492,7 +507,7 @@ describe('<ColorMixer />', () => {
     })
 
     it('should set the disabled attribute when `disabled` is set', async () => {
-      render(
+      await render(
         <ColorMixer
           disabled
           {...testInputLabels}
@@ -500,7 +515,7 @@ describe('<ColorMixer />', () => {
           onChange={vi.fn()}
         />
       )
-      const inputs = screen.getAllByRole('textbox')
+      const inputs = page.getByRole('textbox').elements()
       expect(inputs.length).toBe(3)
 
       inputs.forEach((input) => {
@@ -510,7 +525,7 @@ describe('<ColorMixer />', () => {
 
     it('should not accept letter character', async () => {
       const invalidColor = 'adfafas'
-      render(
+      await render(
         <ColorMixer
           withAlpha
           {...testInputLabels}
@@ -518,7 +533,7 @@ describe('<ColorMixer />', () => {
           onChange={vi.fn()}
         />
       )
-      const inputs = screen.getAllByRole('textbox')
+      const inputs = page.getByRole('textbox').elements()
       expect(inputs.length).toBe(4)
 
       await userEvent.type(inputs[0], invalidColor)
@@ -526,7 +541,7 @@ describe('<ColorMixer />', () => {
       await userEvent.type(inputs[2], invalidColor)
       await userEvent.type(inputs[3], invalidColor)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(inputs[0]).not.toHaveValue(invalidColor)
         expect(inputs[1]).not.toHaveValue(invalidColor)
         expect(inputs[2]).not.toHaveValue(invalidColor)
@@ -536,7 +551,7 @@ describe('<ColorMixer />', () => {
 
     it('should not accept negative value', async () => {
       const invalidColor = '-10'
-      render(
+      await render(
         <ColorMixer
           withAlpha
           {...testInputLabels}
@@ -544,7 +559,7 @@ describe('<ColorMixer />', () => {
           onChange={vi.fn()}
         />
       )
-      const inputs = screen.getAllByRole('textbox')
+      const inputs = page.getByRole('textbox').elements()
       expect(inputs.length).toBe(4)
 
       await userEvent.type(inputs[0], invalidColor)
@@ -552,7 +567,7 @@ describe('<ColorMixer />', () => {
       await userEvent.type(inputs[2], invalidColor)
       await userEvent.type(inputs[3], invalidColor)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(inputs[0]).not.toHaveValue(invalidColor)
         expect(inputs[1]).not.toHaveValue(invalidColor)
         expect(inputs[2]).not.toHaveValue(invalidColor)
@@ -562,21 +577,21 @@ describe('<ColorMixer />', () => {
 
     it('should not accept value that bigger than 255', async () => {
       const invalidColor = '300'
-      render(
+      await render(
         <ColorMixer
           {...testInputLabels}
           {...testScreenReaderLabels}
           onChange={vi.fn()}
         />
       )
-      const inputs = screen.getAllByRole('textbox')
+      const inputs = page.getByRole('textbox').elements()
       expect(inputs.length).toBe(3)
 
       await userEvent.type(inputs[0], invalidColor)
       await userEvent.type(inputs[1], invalidColor)
       await userEvent.type(inputs[2], invalidColor)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(inputs[0]).not.toHaveValue(invalidColor)
         expect(inputs[1]).not.toHaveValue(invalidColor)
         expect(inputs[2]).not.toHaveValue(invalidColor)
@@ -585,7 +600,7 @@ describe('<ColorMixer />', () => {
 
     it('for alpha input, should not accept value that bigger than 100', async () => {
       const invalidColor = '101'
-      render(
+      await render(
         <ColorMixer
           withAlpha
           {...testInputLabels}
@@ -593,12 +608,12 @@ describe('<ColorMixer />', () => {
           onChange={vi.fn()}
         />
       )
-      const inputs = screen.getAllByRole('textbox')
+      const inputs = page.getByRole('textbox').elements()
       expect(inputs.length).toBe(4)
 
       await userEvent.type(inputs[3], invalidColor)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(inputs[3]).not.toHaveValue(invalidColor)
       })
     })

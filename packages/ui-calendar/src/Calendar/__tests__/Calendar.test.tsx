@@ -22,10 +22,9 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
-import { vi } from 'vitest'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import { Calendar } from '@instructure/ui-calendar/latest'
 import type { CalendarDayProps } from '@instructure/ui-calendar/latest'
 
@@ -72,14 +71,14 @@ describe('<Calendar />', () => {
 
   describe('with minimal config', () => {
     it('should render 44 buttons without config', async () => {
-      render(<Calendar selectedLabel="Selected" />)
+      await render(<Calendar selectedLabel="Selected" />)
       const buttons = document.getElementsByTagName('button')
 
       expect(buttons.length).toEqual(44)
     })
 
     it('should render proper week names by default', async () => {
-      const { container } = render(<Calendar selectedLabel="Selected" />)
+      const { container } = await render(<Calendar selectedLabel="Selected" />)
       const thead = container.querySelector('thead')
 
       expect(thead).toHaveTextContent(
@@ -88,7 +87,7 @@ describe('<Calendar />', () => {
     })
 
     it('should render proper week names if locale is set', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Calendar locale="hu" selectedLabel="Selected" />
       )
       const thead = container.querySelector('thead')
@@ -99,7 +98,7 @@ describe('<Calendar />', () => {
     })
 
     it('should disable days properly', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Calendar
           currentDate="2023-12-15"
           disabledDates={['2023-12-22', '2023-12-12', '2023-12-11']}
@@ -119,7 +118,7 @@ describe('<Calendar />', () => {
     })
 
     it('should indicate selected day', async () => {
-      render(
+      await render(
         <Calendar
           currentDate="2023-12-15"
           selectedDate="2023-12-22"
@@ -127,7 +126,7 @@ describe('<Calendar />', () => {
         />
       )
 
-      const selectedDay = screen.queryByText('22 December 2023, Selected')
+      const selectedDay = page.getByText('22 December 2023, Selected').query()
         ?.parentElement?.parentElement
 
       expect(selectedDay).toBeDefined()
@@ -138,7 +137,7 @@ describe('<Calendar />', () => {
   })
 
   it('should render children', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Calendar renderWeekdayLabels={weekdayLabels} selectedLabel="Selected">
         {generateDays()}
       </Calendar>
@@ -154,7 +153,7 @@ describe('<Calendar />', () => {
   it(`should warn if the correct number of children are not provided`, async () => {
     const count = Calendar.DAY_COUNT - 1
 
-    render(
+    await render(
       <Calendar renderWeekdayLabels={weekdayLabels} selectedLabel="Selected">
         {generateDays(count)}
       </Calendar>
@@ -169,7 +168,7 @@ describe('<Calendar />', () => {
   })
 
   it('should render weekday labels', async () => {
-    const { container, rerender } = render(
+    const { container, rerender } = await render(
       <Calendar renderWeekdayLabels={weekdayLabels} selectedLabel="Selected">
         {generateDays()}
       </Calendar>
@@ -193,7 +192,7 @@ describe('<Calendar />', () => {
     ]
 
     // Set prop: renderWeekdayLabels
-    rerender(
+    await rerender(
       <Calendar
         renderWeekdayLabels={functionalWeekdayLabels}
         selectedLabel="Selected"
@@ -211,7 +210,7 @@ describe('<Calendar />', () => {
   })
 
   it('should warn if 7 weekday labels are not provided', async () => {
-    render(
+    await render(
       <Calendar renderWeekdayLabels={[]} selectedLabel="Selected">
         {generateDays()}
       </Calendar>
@@ -227,7 +226,7 @@ describe('<Calendar />', () => {
   })
 
   it('should format the weekday labels and days correctly', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Calendar renderWeekdayLabels={weekdayLabels} selectedLabel="Selected">
         {generateDays()}
       </Calendar>
@@ -256,7 +255,7 @@ describe('<Calendar />', () => {
       </span>
     )
 
-    const { rerender } = render(
+    const { rerender } = await render(
       <Calendar
         renderWeekdayLabels={weekdayLabels}
         renderNavigationLabel={navLabel}
@@ -265,14 +264,14 @@ describe('<Calendar />', () => {
         {generateDays()}
       </Calendar>
     )
-    const month = screen.getByText('March')
-    const year = screen.getByText('2019')
+    const month = page.getByText('March').element()
+    const year = page.getByText('2019').element()
 
     expect(month).toBeInTheDocument()
     expect(year).toBeInTheDocument()
 
     // Set prop: renderNavigationLabel
-    rerender(
+    await rerender(
       <Calendar
         renderWeekdayLabels={weekdayLabels}
         renderNavigationLabel={() => navLabel}
@@ -281,30 +280,34 @@ describe('<Calendar />', () => {
         {generateDays()}
       </Calendar>
     )
-    const updatedMonth = screen.getByText('March')
-    const updatedYear = screen.getByText('2019')
+    const updatedMonth = page.getByText('March').element()
+    const updatedYear = page.getByText('2019').element()
 
     expect(updatedMonth).toBeInTheDocument()
     expect(updatedYear).toBeInTheDocument()
   })
 
   it('should render next and prev buttons', async () => {
-    const { rerender } = render(
+    const { rerender } = await render(
       <Calendar renderWeekdayLabels={weekdayLabels} selectedLabel="Selected">
         {generateDays()}
       </Calendar>
     )
-    const defaultPrevButton = screen.getByRole('button', {
-      name: /^Previous month/
-    })
-    const defaultNextButton = screen.getByRole('button', {
-      name: /^Next month/
-    })
+    const defaultPrevButton = page
+      .getByRole('button', {
+        name: /^Previous month/
+      })
+      .element()
+    const defaultNextButton = page
+      .getByRole('button', {
+        name: /^Next month/
+      })
+      .element()
 
     expect(defaultPrevButton).toBeInTheDocument()
     expect(defaultNextButton).toBeInTheDocument()
 
-    rerender(
+    await rerender(
       <Calendar
         renderWeekdayLabels={weekdayLabels}
         renderPrevMonthButton={<button>test-prev</button>}
@@ -314,13 +317,13 @@ describe('<Calendar />', () => {
         {generateDays()}
       </Calendar>
     )
-    const customPrevButton = screen.getByText('test-prev')
-    const customNextButton = screen.getByText('test-next')
+    const customPrevButton = page.getByText('test-prev').element()
+    const customNextButton = page.getByText('test-next').element()
 
     expect(customPrevButton).toBeInTheDocument()
     expect(customNextButton).toBeInTheDocument()
 
-    rerender(
+    await rerender(
       <Calendar
         renderWeekdayLabels={weekdayLabels}
         renderPrevMonthButton={() => <button>func-test-prev</button>}
@@ -330,8 +333,8 @@ describe('<Calendar />', () => {
         {generateDays()}
       </Calendar>
     )
-    const funcPrevButton = screen.getByText('func-test-prev')
-    const funcNextButton = screen.getByText('func-test-next')
+    const funcPrevButton = page.getByText('func-test-prev').element()
+    const funcNextButton = page.getByText('func-test-next').element()
 
     expect(funcPrevButton).toBeInTheDocument()
     expect(funcNextButton).toBeInTheDocument()
@@ -341,7 +344,7 @@ describe('<Calendar />', () => {
     const onRequestRenderPrevMonth = vi.fn()
     const onRequestRenderNextMonth = vi.fn()
 
-    render(
+    await render(
       <Calendar
         renderWeekdayLabels={weekdayLabels}
         renderPrevMonthButton={<button>prev month</button>}
@@ -354,8 +357,8 @@ describe('<Calendar />', () => {
       </Calendar>
     )
 
-    const prevButton = screen.getByText('prev month')
-    const nextButton = screen.getByText('next month')
+    const prevButton = page.getByText('prev month').element()
+    const nextButton = page.getByText('next month').element()
 
     expect(onRequestRenderPrevMonth).not.toHaveBeenCalled()
     expect(onRequestRenderNextMonth).not.toHaveBeenCalled()
@@ -363,7 +366,7 @@ describe('<Calendar />', () => {
     await userEvent.click(prevButton)
     await userEvent.click(nextButton)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onRequestRenderPrevMonth).toHaveBeenCalledTimes(1)
       expect(onRequestRenderNextMonth).toHaveBeenCalledTimes(1)
     })
@@ -371,7 +374,7 @@ describe('<Calendar />', () => {
 
   describe('when role="listbox"', () => {
     it('should set role="listbox" on table root and role="presentation" on the correct elements', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Calendar
           renderWeekdayLabels={weekdayLabels}
           role="listbox"
@@ -396,7 +399,7 @@ describe('<Calendar />', () => {
     })
 
     it("should link each day with it's weekday header via `aria-describedby`", async () => {
-      const { container } = render(
+      const { container } = await render(
         <Calendar
           renderWeekdayLabels={weekdayLabels}
           role="listbox"
@@ -421,7 +424,7 @@ describe('<Calendar />', () => {
     })
 
     it('should set role="option" and aria-selected on each day', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Calendar
           renderWeekdayLabels={weekdayLabels}
           role="listbox"
@@ -442,7 +445,7 @@ describe('<Calendar />', () => {
     })
 
     it('should announce selected state via accessible label when selectedLabel is provided', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Calendar
           renderWeekdayLabels={weekdayLabels}
           role="listbox"
@@ -476,7 +479,7 @@ describe('<Calendar />', () => {
 
   describe('when role="table" (default)', () => {
     it('should set role="button" on each day and not set aria-selected', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Calendar
           renderWeekdayLabels={weekdayLabels}
           currentDate="2019-08-01"
@@ -494,7 +497,7 @@ describe('<Calendar />', () => {
     })
 
     it('should announce selected state via accessible label when selectedLabel is provided', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Calendar
           renderWeekdayLabels={weekdayLabels}
           currentDate="2019-08-01"
@@ -526,7 +529,7 @@ describe('<Calendar />', () => {
   })
 
   it('should render root as designated by the `as` prop', async () => {
-    render(
+    await render(
       <Calendar
         renderWeekdayLabels={weekdayLabels}
         as="ul"
@@ -535,15 +538,15 @@ describe('<Calendar />', () => {
         {generateDays()}
       </Calendar>
     )
-    const calendar = screen.getByRole('list')
+    const calendar = page.getByRole('list').element()
 
     expect(calendar.tagName).toBe('UL')
     expect(calendar).toHaveTextContent(weekdayLabels.join(''))
   })
 
   describe('navigation button targetMonthSrLabel', () => {
-    it('should include the target month in the default button screen reader labels', () => {
-      render(
+    it('should include the target month in the default button screen reader labels', async () => {
+      await render(
         <Calendar
           renderWeekdayLabels={weekdayLabels}
           visibleMonth="2023-12-01"
@@ -555,15 +558,17 @@ describe('<Calendar />', () => {
       )
 
       expect(
-        screen.getByRole('button', { name: 'Previous month, November 2023' })
+        page
+          .getByRole('button', { name: 'Previous month, November 2023' })
+          .element()
       ).toBeInTheDocument()
       expect(
-        screen.getByRole('button', { name: 'Next month, January 2024' })
+        page.getByRole('button', { name: 'Next month, January 2024' }).element()
       ).toBeInTheDocument()
     })
 
-    it('should pass targetMonthSrLabel to function render props', () => {
-      render(
+    it('should pass targetMonthSrLabel to function render props', async () => {
+      await render(
         <Calendar
           renderWeekdayLabels={weekdayLabels}
           visibleMonth="2023-12-01"
@@ -581,10 +586,10 @@ describe('<Calendar />', () => {
       )
 
       expect(
-        screen.getByRole('button', { name: 'Go to November 2023' })
+        page.getByRole('button', { name: 'Go to November 2023' }).element()
       ).toBeInTheDocument()
       expect(
-        screen.getByRole('button', { name: 'Go to January 2024' })
+        page.getByRole('button', { name: 'Go to January 2024' }).element()
       ).toBeInTheDocument()
     })
   })

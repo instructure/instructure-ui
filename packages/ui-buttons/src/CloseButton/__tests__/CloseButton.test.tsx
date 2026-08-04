@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
-import { vi } from 'vitest'
-import userEvent from '@testing-library/user-event'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import { CloseButton } from '@instructure/ui-buttons/latest'
 
 describe('<CloseButton />', () => {
@@ -42,9 +42,9 @@ describe('<CloseButton />', () => {
   })
 
   it('should render with x icon', async () => {
-    render(<CloseButton screenReaderLabel="Close" />)
+    await render(<CloseButton screenReaderLabel="Close" />)
 
-    const button = screen.getByRole('button')
+    const button = page.getByRole('button').element()
 
     const icon = document.querySelector('svg')
 
@@ -57,13 +57,13 @@ describe('<CloseButton />', () => {
   it('should pass the `onClick` prop', async () => {
     const onClick = vi.fn()
 
-    render(<CloseButton onClick={onClick} screenReaderLabel="Hello" />)
+    await render(<CloseButton onClick={onClick} screenReaderLabel="Hello" />)
 
-    const button = screen.getByRole('button')
+    const button = page.getByRole('button').element()
 
     await userEvent.click(button)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onClick).toHaveBeenCalledTimes(1)
     })
   })

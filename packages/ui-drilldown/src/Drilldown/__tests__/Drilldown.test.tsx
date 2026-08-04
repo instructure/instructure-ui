@@ -22,10 +22,9 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
-import { vi } from 'vitest'
-import userEvent from '@testing-library/user-event'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { CheckInstUIIcon } from '@instructure/ui-icons'
@@ -61,7 +60,7 @@ describe('<Drilldown />', () => {
 
   describe('rootPageId prop', () => {
     it('should set the initial page and render it', async () => {
-      render(
+      await render(
         <Drilldown rootPageId="page1">
           <Drilldown.Page id="page0">
             <Drilldown.Option id="option01">Option-01</Drilldown.Option>
@@ -72,9 +71,9 @@ describe('<Drilldown />', () => {
         </Drilldown>
       )
 
-      const drilldown = screen.getByRole('menu')
-      const options = screen.getAllByRole('menuitem')
-      const rootlessOption = screen.queryByText('Option-01')
+      const drilldown = page.getByRole('menu').element()
+      const options = page.getByRole('menuitem').elements()
+      const rootlessOption = page.getByText('Option-01').query()
 
       expect(drilldown).toBeInTheDocument()
       expect(rootlessOption).not.toBeInTheDocument()
@@ -87,15 +86,15 @@ describe('<Drilldown />', () => {
 
   describe('children prop', () => {
     it('should not allow non-DrilldownPage children', async () => {
-      render(
+      await render(
         <Drilldown rootPageId="page0">
           <div id="testDiv">DIV-child</div>
         </Drilldown>
       )
 
-      const drilldown = screen.queryByRole('menu')
-      const options = screen.queryAllByRole('menuitem')
-      const notAllowedChild = screen.queryByText('DIV-child')
+      const drilldown = page.getByRole('menu').query()
+      const options = page.getByRole('menuitem').elements()
+      const notAllowedChild = page.getByText('DIV-child').query()
 
       expect(drilldown).not.toBeInTheDocument()
       expect(options.length).toBe(0)
@@ -105,7 +104,7 @@ describe('<Drilldown />', () => {
     it('should not crash for weird option ids', async () => {
       const onSelect = vi.fn()
       const weirdID = 'some"_weird!@#$%^&*()\\|`id'
-      render(
+      await render(
         <Drilldown rootPageId="page0" onSelect={onSelect}>
           <Drilldown.Page id="page0">
             {data.map((option) => (
@@ -121,10 +120,10 @@ describe('<Drilldown />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const option_1 = screen.getByTestId(weirdID + 'opt_1')
+      const option_1 = page.getByTestId(weirdID + 'opt_1').element()
       await userEvent.click(option_1)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onSelect).toHaveBeenCalled()
       })
     })
@@ -132,7 +131,7 @@ describe('<Drilldown />', () => {
 
   describe('id prop', () => {
     it('should put id attr on the drilldown', async () => {
-      render(
+      await render(
         <Drilldown rootPageId="page0" id="testId">
           <Drilldown.Page id="page0">
             <Drilldown.Option id="option01">Option</Drilldown.Option>
@@ -140,7 +139,7 @@ describe('<Drilldown />', () => {
         </Drilldown>
       )
 
-      const drilldown = screen.getByRole('menu')
+      const drilldown = page.getByRole('menu').element()
 
       expect(drilldown).toBeInTheDocument()
       expect(drilldown).toHaveAttribute('id', 'testId')
@@ -149,7 +148,7 @@ describe('<Drilldown />', () => {
 
   describe('label prop', () => {
     it('should be added as aria-label', async () => {
-      render(
+      await render(
         <Drilldown rootPageId="page0" label="testLabel">
           <Drilldown.Page id="page0">
             <Drilldown.Option id="option01">Option</Drilldown.Option>
@@ -157,7 +156,7 @@ describe('<Drilldown />', () => {
         </Drilldown>
       )
 
-      const drilldown = screen.getByRole('menu')
+      const drilldown = page.getByRole('menu').element()
 
       expect(drilldown).toBeInTheDocument()
       expect(drilldown).toHaveAttribute('aria-label', 'testLabel')
@@ -166,7 +165,7 @@ describe('<Drilldown />', () => {
 
   describe('disabled prop', () => {
     it('should disable all options', async () => {
-      render(
+      await render(
         <Drilldown rootPageId="page0" disabled>
           <Drilldown.Page id="page0" renderActionLabel="Action">
             <Drilldown.Option id="option01">Option</Drilldown.Option>
@@ -175,7 +174,7 @@ describe('<Drilldown />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const options = screen.getAllByRole('menuitem')
+      const options = page.getByRole('menuitem').elements()
 
       expect(options.length).toBe(4) // header action + 3 options
 
@@ -185,7 +184,7 @@ describe('<Drilldown />', () => {
     })
 
     it('should not allow selection if the main Drilldown is disabled', async () => {
-      render(
+      await render(
         <Drilldown rootPageId="page0" disabled>
           <Drilldown.Page id="page0">
             <Drilldown.Group id="group0" selectableType="multiple">
@@ -194,8 +193,10 @@ describe('<Drilldown />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const optionItemContainer = screen.getByLabelText('Disabled Option')
-      const optionContent = screen.getByText('Disabled Option')
+      const optionItemContainer = page
+        .getByLabelText('Disabled Option')
+        .element()
+      const optionContent = page.getByText('Disabled Option').element()
 
       expect(optionItemContainer).toHaveAttribute('aria-checked', 'false')
 
@@ -205,7 +206,7 @@ describe('<Drilldown />', () => {
     })
 
     it('should always allow back navigation even if the page is disabled', async () => {
-      render(
+      await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0" renderTitle="First Page">
             <Drilldown.Option id="opt1" subPageId="page1">
@@ -221,19 +222,19 @@ describe('<Drilldown />', () => {
       )
 
       // 1. Navigate to the disabled page
-      await userEvent.click(screen.getByText('Go to Disabled Page'))
-      expect(screen.getByText('Disabled Page')).toBeInTheDocument()
+      await userEvent.click(page.getByText('Go to Disabled Page').element())
+      expect(page.getByText('Disabled Page').element()).toBeInTheDocument()
 
-      await userEvent.click(screen.getByText('Back'))
+      await userEvent.click(page.getByText('Back').element())
 
       // 4. Verify we have successfully navigated back
-      expect(screen.getByText('First Page')).toBeInTheDocument()
+      expect(page.getByText('First Page').element()).toBeInTheDocument()
     })
   })
 
   describe('as prop', () => {
     it('should be "ul" by default', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Option id="option01">Option</Drilldown.Option>
@@ -246,7 +247,7 @@ describe('<Drilldown />', () => {
     })
 
     it('should render as passed element', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Drilldown rootPageId="page0" as="ol">
           <Drilldown.Page id="page0">
             <Drilldown.Option id="option01">Option</Drilldown.Option>
@@ -261,7 +262,7 @@ describe('<Drilldown />', () => {
 
   describe('role prop', () => {
     it('should be "menu" by default', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Option id="option01">Option</Drilldown.Option>
@@ -274,7 +275,7 @@ describe('<Drilldown />', () => {
     })
 
     it('should apply passed role', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Drilldown rootPageId="page0" role="list">
           <Drilldown.Page id="page0">
             <Drilldown.Option id="option01">Option</Drilldown.Option>
@@ -291,14 +292,14 @@ describe('<Drilldown />', () => {
     it('should give back the drilldown element when there is no trigger', async () => {
       const elementRef = vi.fn()
 
-      render(
+      await render(
         <Drilldown rootPageId="page0" elementRef={elementRef}>
           <Drilldown.Page id="page0">
             <Drilldown.Option id="option01">Option</Drilldown.Option>
           </Drilldown.Page>
         </Drilldown>
       )
-      const drilldown = screen.getByRole('menu')
+      const drilldown = page.getByRole('menu').element()
 
       expect(drilldown).toBeInTheDocument()
       expect(elementRef).toHaveBeenCalledWith(drilldown)
@@ -306,7 +307,7 @@ describe('<Drilldown />', () => {
 
     it('should give back the Popover root when drilldown has trigger and is closed', async () => {
       const elementRef = vi.fn()
-      const { container } = render(
+      const { container } = await render(
         <Drilldown
           rootPageId="page0"
           elementRef={elementRef}
@@ -317,7 +318,7 @@ describe('<Drilldown />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const trigger = screen.getByText('Toggle')
+      const trigger = page.getByText('Toggle').element()
       const positionId = trigger.getAttribute('data-position-target')
       const drilldownRoot = container.querySelector(
         `span[data-position="${positionId}"]`
@@ -329,7 +330,7 @@ describe('<Drilldown />', () => {
 
     it('should give back the the Popover root when drilldown has trigger and is open', async () => {
       const elementRef = vi.fn()
-      const { container } = render(
+      const { container } = await render(
         <Drilldown
           rootPageId="page0"
           elementRef={elementRef}
@@ -341,7 +342,7 @@ describe('<Drilldown />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const trigger = screen.getByText('Toggle')
+      const trigger = page.getByText('Toggle').element()
       const positionId = trigger.getAttribute('data-position-target')
       const drilldownRoot = container.querySelector(
         `span[data-position="${positionId}"]`
@@ -355,21 +356,21 @@ describe('<Drilldown />', () => {
   describe('drilldownRef prop', () => {
     it('should give back the drilldown element when there is no trigger', async () => {
       const drilldownRef = vi.fn()
-      render(
+      await render(
         <Drilldown rootPageId="page0" drilldownRef={drilldownRef}>
           <Drilldown.Page id="page0">
             <Drilldown.Option id="option01">Option</Drilldown.Option>
           </Drilldown.Page>
         </Drilldown>
       )
-      const drilldown = screen.getByRole('menu')
+      const drilldown = page.getByRole('menu').element()
 
       expect(drilldownRef).toHaveBeenCalledWith(drilldown)
     })
 
     it("shouldn't be called when drilldown has trigger and is closed", async () => {
       const drilldownRef = vi.fn()
-      render(
+      await render(
         <Drilldown
           rootPageId="page0"
           drilldownRef={drilldownRef}
@@ -386,7 +387,7 @@ describe('<Drilldown />', () => {
 
     it('should give back the drilldown element when drilldown has trigger and is open', async () => {
       const drilldownRef = vi.fn()
-      render(
+      await render(
         <Drilldown
           rootPageId="page0"
           drilldownRef={drilldownRef}
@@ -398,7 +399,7 @@ describe('<Drilldown />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const drilldown = screen.getByRole('menu')
+      const drilldown = page.getByRole('menu').element()
 
       expect(drilldownRef).toHaveBeenCalledWith(drilldown)
     })
@@ -407,7 +408,7 @@ describe('<Drilldown />', () => {
   describe('popoverRef prop', () => {
     it('should not be called when there is no trigger', async () => {
       const popoverRef = vi.fn()
-      render(
+      await render(
         <Drilldown rootPageId="page0" popoverRef={popoverRef}>
           <Drilldown.Page id="page0">
             <Drilldown.Option id="option01">Option</Drilldown.Option>
@@ -420,7 +421,7 @@ describe('<Drilldown />', () => {
 
     it('should give back the Popover component when drilldown has trigger and is closed', async () => {
       const popoverRef = vi.fn()
-      const { container } = render(
+      const { container } = await render(
         <Drilldown
           rootPageId="page0"
           popoverRef={popoverRef}
@@ -431,7 +432,7 @@ describe('<Drilldown />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const trigger = screen.getByText('Toggle')
+      const trigger = page.getByText('Toggle').element()
       const positionId = trigger.getAttribute('data-position-target')
       const popoverRoot = container.querySelector(
         `span[data-position="${positionId}"]`
@@ -446,7 +447,7 @@ describe('<Drilldown />', () => {
 
     it('should give back the Popover component when drilldown has trigger and is open', async () => {
       const popoverRef = vi.fn()
-      const { container } = render(
+      const { container } = await render(
         <Drilldown
           rootPageId="page0"
           popoverRef={popoverRef}
@@ -458,7 +459,7 @@ describe('<Drilldown />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const trigger = screen.getByText('Toggle')
+      const trigger = page.getByText('Toggle').element()
       const positionId = trigger.getAttribute('data-position-target')
       const popoverRoot = container.querySelector(
         `span[data-position="${positionId}"]`
@@ -475,7 +476,7 @@ describe('<Drilldown />', () => {
   describe('onSelect prop', () => {
     it('should fire when option is selected', async () => {
       const onSelect = vi.fn()
-      render(
+      await render(
         <Drilldown rootPageId="page0" onSelect={onSelect}>
           <Drilldown.Page id="page0">
             {data.map((option) => (
@@ -491,11 +492,11 @@ describe('<Drilldown />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const option_1 = screen.getByTestId('opt_1')
+      const option_1 = page.getByTestId('opt_1').element()
 
       await userEvent.click(option_1)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onSelect).toHaveBeenCalled()
 
         const args = onSelect.mock.calls[0][1]
@@ -517,7 +518,7 @@ describe('<Drilldown />', () => {
 
     it('should not fire when drilldown is disabled', async () => {
       const onSelect = vi.fn()
-      render(
+      await render(
         <Drilldown rootPageId="page0" onSelect={onSelect} disabled>
           <Drilldown.Page id="page0">
             {data.map((option) => (
@@ -532,11 +533,11 @@ describe('<Drilldown />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const option_1 = screen.getByTestId('opt_1')
+      const option_1 = page.getByTestId('opt_1').element()
 
       await userEvent.click(option_1)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onSelect).not.toHaveBeenCalled()
       })
     })
@@ -544,14 +545,14 @@ describe('<Drilldown />', () => {
 
   describe('with a trigger', () => {
     it('should not show content by default', async () => {
-      render(
+      await render(
         <Drilldown rootPageId="page0" trigger={<button>click me</button>}>
           <Drilldown.Page id="page0">
             <Drilldown.Option id="option0">Option 0</Drilldown.Option>
           </Drilldown.Page>
         </Drilldown>
       )
-      const option_0 = screen.queryByText('Option 0')
+      const option_0 = page.getByText('Option 0').query()
 
       expect(option_0).not.toBeInTheDocument()
     })
@@ -561,7 +562,7 @@ describe('<Drilldown />', () => {
       container.setAttribute('data-testid', 'container')
       document.body.appendChild(container)
 
-      render(
+      await render(
         <Drilldown
           rootPageId="page0"
           mountNode={container}
@@ -572,36 +573,36 @@ describe('<Drilldown />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const optionsContainer = screen.getByTestId('container')
-      const trigger = screen.getByRole('button')
+      const optionsContainer = page.getByTestId('container').element()
+      const trigger = page.getByRole('button').element()
 
       expect(optionsContainer).not.toHaveTextContent('Option 0')
 
       await userEvent.click(trigger)
 
-      await waitFor(() => {
-        const updatedOptionsContainer = screen.getByTestId('container')
+      await vi.waitFor(() => {
+        const updatedOptionsContainer = page.getByTestId('container').element()
 
         expect(updatedOptionsContainer).toHaveTextContent('Option 0')
       })
     })
 
     it('should have an aria-haspopup attribute', async () => {
-      render(
+      await render(
         <Drilldown rootPageId="page0" trigger={<button>Options</button>}>
           <Drilldown.Page id="page0">
             <Drilldown.Option id="option0">Option 0</Drilldown.Option>
           </Drilldown.Page>
         </Drilldown>
       )
-      const trigger = screen.getByRole('button')
+      const trigger = page.getByRole('button').element()
 
       expect(trigger).toHaveAttribute('aria-haspopup')
     })
 
     it('should call onToggle when Drilldown is opened', async () => {
       const onToggle = vi.fn()
-      render(
+      await render(
         <Drilldown
           rootPageId="page0"
           trigger={<button>Options</button>}
@@ -613,11 +614,11 @@ describe('<Drilldown />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const trigger = screen.getByRole('button')
+      const trigger = page.getByRole('button').element()
 
       await userEvent.click(trigger)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onToggle).toHaveBeenCalled()
 
         const args = onToggle.mock.calls[0][1]
@@ -635,7 +636,7 @@ describe('<Drilldown />', () => {
 
     it('should call onToggle when Drilldown is closed', async () => {
       const onToggle = vi.fn()
-      render(
+      await render(
         <Drilldown
           rootPageId="page0"
           trigger={<button>Options</button>}
@@ -647,11 +648,11 @@ describe('<Drilldown />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const trigger = screen.getByRole('button')
+      const trigger = page.getByRole('button').element()
 
       await userEvent.click(trigger)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onToggle).toHaveBeenCalled()
 
         const args = onToggle.mock.calls[0][1]
@@ -669,7 +670,7 @@ describe('<Drilldown />', () => {
   describe('placement prop', () => {
     it('should be passed to Popover', async () => {
       let popoverRef: Popover | null = null
-      render(
+      await render(
         <Drilldown
           rootPageId="page0"
           trigger={<button>Toggle</button>}
@@ -692,7 +693,7 @@ describe('<Drilldown />', () => {
 
   describe('defaultShow prop', () => {
     it('should display Popover on render', async () => {
-      render(
+      await render(
         <Drilldown
           rootPageId="page0"
           trigger={<button>Toggle</button>}
@@ -703,7 +704,7 @@ describe('<Drilldown />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const popoverContent = screen.getByText('Option')
+      const popoverContent = page.getByText('Option').element()
 
       expect(popoverContent).toBeVisible()
     })
@@ -712,7 +713,7 @@ describe('<Drilldown />', () => {
   describe('show prop', () => {
     it('should display popover', async () => {
       const onToggle = vi.fn()
-      render(
+      await render(
         <Drilldown
           rootPageId="page0"
           trigger={<button>Toggle</button>}
@@ -724,7 +725,7 @@ describe('<Drilldown />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const popoverContent = screen.getByText('Option')
+      const popoverContent = page.getByText('Option').element()
 
       expect(popoverContent).toBeVisible()
     })
@@ -734,7 +735,7 @@ describe('<Drilldown />', () => {
     it('should be passed to Popover', async () => {
       let popoverRef: Popover | null = null
       const onFocus = vi.fn()
-      render(
+      await render(
         <Drilldown
           rootPageId="page0"
           trigger={<button>Toggle</button>}
@@ -759,7 +760,7 @@ describe('<Drilldown />', () => {
     it('should be passed to Popover', async () => {
       let popoverRef: Popover | null = null
       const onMouseOver = vi.fn()
-      render(
+      await render(
         <Drilldown
           rootPageId="page0"
           trigger={<button>Toggle</button>}
@@ -783,7 +784,7 @@ describe('<Drilldown />', () => {
   describe('shouldContainFocus prop', () => {
     it('should be passed to Popover', async () => {
       let popoverRef: Popover | null = null
-      render(
+      await render(
         <Drilldown
           rootPageId="page0"
           trigger={<button>Toggle</button>}
@@ -807,7 +808,7 @@ describe('<Drilldown />', () => {
   describe('shouldReturnFocus prop', () => {
     it('should be passed to Popover', async () => {
       let popoverRef: Popover | null = null
-      render(
+      await render(
         <Drilldown
           rootPageId="page0"
           trigger={<button>Toggle</button>}
@@ -831,7 +832,7 @@ describe('<Drilldown />', () => {
   describe('withArrow prop', () => {
     it('should be passed to Popover', async () => {
       let popoverRef: Popover | null = null
-      render(
+      await render(
         <Drilldown
           rootPageId="page0"
           trigger={<button>Toggle</button>}
@@ -855,7 +856,7 @@ describe('<Drilldown />', () => {
   describe('offsetX prop', () => {
     it('should be passed to Popover', async () => {
       let popoverRef: Popover | null = null
-      render(
+      await render(
         <Drilldown
           rootPageId="page0"
           trigger={<button>Toggle</button>}
@@ -879,7 +880,7 @@ describe('<Drilldown />', () => {
   describe('offsetY prop', () => {
     it('should be passed to Popover', async () => {
       let popoverRef: Popover | null = null
-      render(
+      await render(
         <Drilldown
           rootPageId="page0"
           trigger={<button>Toggle</button>}
@@ -903,7 +904,7 @@ describe('<Drilldown />', () => {
   describe('positionContainerDisplay prop', () => {
     it('should be passed to Popover', async () => {
       let popoverRef: Popover | null = null
-      render(
+      await render(
         <Drilldown
           rootPageId="page0"
           trigger={<button>Toggle</button>}
@@ -926,7 +927,7 @@ describe('<Drilldown />', () => {
 
   describe('for a11y', () => {
     it('should be accessible', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page
             id="page0"
@@ -1002,7 +1003,7 @@ describe('<Drilldown />', () => {
     })
 
     it('should meet a11y standarts when drilldown is open', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Drilldown defaultShow rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Option id="option0">Option 0</Drilldown.Option>

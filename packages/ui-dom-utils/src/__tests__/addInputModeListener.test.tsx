@@ -22,16 +22,17 @@
  * SOFTWARE.
  */
 
-import { render, fireEvent, screen } from '@testing-library/react'
-import { vi } from 'vitest'
-import '@testing-library/jest-dom'
+import { fireEvent } from '@testing-library/dom'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect, vi } from 'vitest'
 import { addInputModeListener } from '../addInputModeListener.js'
 
 describe('addInputModeListener', () => {
-  it('should handle input mode changes', () => {
+  it('should handle input mode changes', async () => {
     const handleInputModeChange = vi.fn()
 
-    render(
+    await render(
       <div>
         <button id="button-1">hello</button>
         <button>world</button>
@@ -42,7 +43,7 @@ describe('addInputModeListener', () => {
       onInputModeChange: handleInputModeChange
     })
 
-    const button = screen.getByRole('button', { name: 'hello' })
+    const button = page.getByRole('button', { name: 'hello' }).element()
 
     fireEvent.mouseUp(button)
     expect(inputModeListener.isKeyboardMode()).toBe(false)

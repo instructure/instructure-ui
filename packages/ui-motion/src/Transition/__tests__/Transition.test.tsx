@@ -23,14 +23,9 @@
  */
 
 import { Component, createRef, RefObject } from 'react'
-import {
-  render,
-  waitFor,
-  waitForElementToBeRemoved
-} from '@testing-library/react'
-import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 import { Transition } from '../index.js'
 import { getClassNames } from '../styles.js'
@@ -88,8 +83,8 @@ describe('<Transition />', () => {
   ]
 
   const expectTypeClass = function (type: TransitionType) {
-    it(`should correctly apply classes for '${type}' with html element`, () => {
-      const { getByText } = render(
+    it(`should correctly apply classes for '${type}' with html element`, async () => {
+      const { getByText } = await render(
         <Transition type={type} in={true}>
           <div>hello</div>
         </Transition>
@@ -99,8 +94,8 @@ describe('<Transition />', () => {
       expect(element).toHaveClass(getClass(type, 'entered'))
     })
 
-    it(`should correctly apply classes for '${type}' with Component`, () => {
-      const { getByText } = render(
+    it(`should correctly apply classes for '${type}' with Component`, async () => {
+      const { getByText } = await render(
         <Transition type={type} in={true}>
           <ExampleComponent />
         </Transition>
@@ -118,7 +113,7 @@ describe('<Transition />', () => {
   it('should correctly apply enter and exit classes', async () => {
     const type = 'fade'
 
-    const { getByText, rerender } = render(
+    const { getByText, rerender } = await render(
       <Transition type={type} in={true}>
         <div>hello</div>
       </Transition>
@@ -127,19 +122,19 @@ describe('<Transition />', () => {
 
     expect(element).toHaveClass(getClass(type, 'entered'))
 
-    rerender(
+    await rerender(
       <Transition type={type} in={false}>
         <div>hello</div>
       </Transition>
     )
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(element).toHaveClass(getClass(type, 'exited'))
     })
   })
 
   it('should remove component from DOM when `unmountOnExit` is set', async () => {
-    const { getByText, rerender } = render(
+    const { getByText, rerender } = await render(
       <Transition type="fade" in={true} unmountOnExit={true}>
         <div>hello</div>
       </Transition>
@@ -147,7 +142,7 @@ describe('<Transition />', () => {
 
     expect(getByText('hello')).toBeInTheDocument()
 
-    rerender(
+    await rerender(
       <Transition type="fade" in={false} unmountOnExit={true}>
         <div>hello</div>
       </Transition>
@@ -159,7 +154,7 @@ describe('<Transition />', () => {
   it('should not execute enter transition with `transitionEnter` set to false', async () => {
     const onEntering = vi.fn()
 
-    const { rerender } = render(
+    const { rerender } = await render(
       <Transition
         type="fade"
         in={false}
@@ -170,7 +165,7 @@ describe('<Transition />', () => {
       </Transition>
     )
 
-    rerender(
+    await rerender(
       <Transition
         type="fade"
         in={true}
@@ -181,7 +176,7 @@ describe('<Transition />', () => {
       </Transition>
     )
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onEntering).not.toHaveBeenCalled()
     })
   })
@@ -189,7 +184,7 @@ describe('<Transition />', () => {
   it('should not execute exit transition with `transitionExit` set to false', async () => {
     const onExiting = vi.fn()
 
-    const { rerender } = render(
+    const { rerender } = await render(
       <Transition
         type="fade"
         in={true}
@@ -200,7 +195,7 @@ describe('<Transition />', () => {
       </Transition>
     )
 
-    rerender(
+    await rerender(
       <Transition
         type="fade"
         in={false}
@@ -211,7 +206,7 @@ describe('<Transition />', () => {
       </Transition>
     )
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onExiting).not.toHaveBeenCalled()
     })
   })
@@ -221,7 +216,7 @@ describe('<Transition />', () => {
     const onEntering = vi.fn()
     const onEntered = vi.fn()
 
-    render(
+    await render(
       <Transition
         type="fade"
         in={true}
@@ -233,7 +228,7 @@ describe('<Transition />', () => {
       </Transition>
     )
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onEnter).toHaveBeenCalled()
       expect(onEntering).toHaveBeenCalled()
       expect(onEntered).toHaveBeenCalled()
@@ -245,7 +240,7 @@ describe('<Transition />', () => {
     const onExiting = vi.fn()
     const onExited = vi.fn()
 
-    const { rerender } = render(
+    const { rerender } = await render(
       <Transition
         type="fade"
         in={true}
@@ -257,7 +252,7 @@ describe('<Transition />', () => {
       </Transition>
     )
 
-    rerender(
+    await rerender(
       <Transition
         type="fade"
         in={false}
@@ -269,7 +264,7 @@ describe('<Transition />', () => {
       </Transition>
     )
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onExit).toHaveBeenCalled()
       expect(onExiting).toHaveBeenCalled()
       expect(onExited).toHaveBeenCalled()

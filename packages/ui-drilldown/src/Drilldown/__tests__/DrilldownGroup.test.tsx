@@ -22,11 +22,9 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
-import { vi } from 'vitest'
-
-import userEvent from '@testing-library/user-event'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 import { Drilldown } from '@instructure/ui-drilldown/latest'
 
@@ -76,23 +74,23 @@ describe('<Drilldown.Group />', () => {
       )
     }
 
-    render(<Example opts={options} />)
+    await render(<Example opts={options} />)
 
-    const selectedOption = screen.getByTestId('three')
+    const selectedOption = page.getByTestId('three').element()
 
     expect(selectedOption).toHaveAttribute('aria-checked', 'true')
 
     await userEvent.click(selectedOption)
 
-    await waitFor(() => {
-      const updatedSelectedOption = screen.getByTestId('three')
+    await vi.waitFor(() => {
+      const updatedSelectedOption = page.getByTestId('three').element()
 
       expect(updatedSelectedOption).toHaveAttribute('aria-checked', 'true')
     })
   })
 
   it("shouldn't render non-DrilldownGroup children", async () => {
-    render(
+    await render(
       <Drilldown rootPageId="page0">
         <Drilldown.Page id="page0">
           <Drilldown.Group id="group0">
@@ -101,8 +99,8 @@ describe('<Drilldown.Group />', () => {
         </Drilldown.Page>
       </Drilldown>
     )
-    const nonGroupChild = screen.queryByTestId('testDiv')
-    const childText = screen.queryByText('Div')
+    const nonGroupChild = page.getByTestId('testDiv').query()
+    const childText = page.getByText('Div').query()
 
     expect(nonGroupChild).not.toBeInTheDocument()
     expect(childText).not.toBeInTheDocument()
@@ -110,7 +108,7 @@ describe('<Drilldown.Group />', () => {
 
   it('elementRef should return ref to the group', async () => {
     const elementRef = vi.fn()
-    const { container } = render(
+    const { container } = await render(
       <Drilldown rootPageId="page0">
         <Drilldown.Page id="page0">
           <Drilldown.Group id="group0" elementRef={elementRef}>
@@ -126,7 +124,7 @@ describe('<Drilldown.Group />', () => {
 
   describe('renderGroupTitle', () => {
     it('should display', async () => {
-      render(
+      await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Group id="group0" renderGroupTitle="Group Title">
@@ -135,13 +133,13 @@ describe('<Drilldown.Group />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const title = screen.getByText('Group Title')
+      const title = page.getByText('Group Title').element()
 
       expect(title).toBeInTheDocument()
     })
 
     it('should display, if function is provided', async () => {
-      render(
+      await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Group id="group0" renderGroupTitle={() => 'Group Title'}>
@@ -150,7 +148,7 @@ describe('<Drilldown.Group />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const title = screen.getByText('Group Title')
+      const title = page.getByText('Group Title').element()
 
       expect(title).toBeInTheDocument()
     })
@@ -158,7 +156,7 @@ describe('<Drilldown.Group />', () => {
 
   describe('separators', () => {
     it("shouldn't display, when group is first and/or last item", async () => {
-      const { container } = render(
+      const { container } = await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Group id="group0">
@@ -173,7 +171,7 @@ describe('<Drilldown.Group />', () => {
     })
 
     it('should display by default, if group is between other items', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Option id="option1">Option</Drilldown.Option>
@@ -190,7 +188,7 @@ describe('<Drilldown.Group />', () => {
     })
 
     it("shouldn't display extra separator between groups", async () => {
-      const { container } = render(
+      const { container } = await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Option id="option1">Option</Drilldown.Option>
@@ -212,7 +210,7 @@ describe('<Drilldown.Group />', () => {
 
   describe('disabled prop', () => {
     it('should disable all items in the group', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Option id="option1">Option</Drilldown.Option>
@@ -236,7 +234,7 @@ describe('<Drilldown.Group />', () => {
     })
 
     it('should not allow selection if the Drilldown.Group is disabled', async () => {
-      render(
+      await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Group id="group0" selectableType="multiple" disabled>
@@ -245,8 +243,10 @@ describe('<Drilldown.Group />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const optionItemContainer = screen.getByLabelText('Disabled Option')
-      const optionContent = screen.getByText('Disabled Option')
+      const optionItemContainer = page
+        .getByLabelText('Disabled Option')
+        .element()
+      const optionContent = page.getByText('Disabled Option').element()
 
       expect(optionItemContainer).toHaveAttribute('aria-checked', 'false')
 
@@ -258,7 +258,7 @@ describe('<Drilldown.Group />', () => {
 
   describe('role prop', () => {
     it('should be "group" by default', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Group id="group0">
@@ -274,7 +274,7 @@ describe('<Drilldown.Group />', () => {
     })
 
     it('should render the group with passed role', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Group id="group0" role="menu">
@@ -292,7 +292,7 @@ describe('<Drilldown.Group />', () => {
 
   describe('as prop', () => {
     it('should inherit Drilldown\'s "ul" by default', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Group id="group0">
@@ -312,7 +312,7 @@ describe('<Drilldown.Group />', () => {
     })
 
     it('should inherit Drilldown\'s "as" prop', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Drilldown rootPageId="page0" as="ol">
           <Drilldown.Page id="page0">
             <Drilldown.Group id="group0">
@@ -332,7 +332,7 @@ describe('<Drilldown.Group />', () => {
     })
 
     it('should render the group as other element', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Group id="group0" as="ol">
@@ -354,7 +354,7 @@ describe('<Drilldown.Group />', () => {
 
   describe('selectableType', () => {
     it('if not set, should render role="menuitem" options without icon by default', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Group id="group0">
@@ -371,7 +371,7 @@ describe('<Drilldown.Group />', () => {
     })
 
     it('value "single" should render role="menuitemradio" options with icon', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Group id="group0" selectableType="single">
@@ -388,7 +388,7 @@ describe('<Drilldown.Group />', () => {
     })
 
     it('value "multiple" should render role="menuitemcheckbox" options with icon', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Group id="group0" selectableType="multiple">
@@ -408,7 +408,7 @@ describe('<Drilldown.Group />', () => {
   describe('defaultSelected', () => {
     describe('if not provided', () => {
       it('all group options has to be unselected', async () => {
-        render(
+        await render(
           <Drilldown rootPageId="page0">
             <Drilldown.Page id="page0">
               <Drilldown.Group id="group0" selectableType="multiple">
@@ -425,7 +425,7 @@ describe('<Drilldown.Group />', () => {
             </Drilldown.Page>
           </Drilldown>
         )
-        const options = screen.getAllByRole('menuitemcheckbox')
+        const options = page.getByRole('menuitemcheckbox').elements()
         expect(options.length).toBe(3)
 
         options.forEach((option) => {
@@ -434,7 +434,7 @@ describe('<Drilldown.Group />', () => {
       })
 
       it('all checkboxes should not be visible', async () => {
-        const { container } = render(
+        const { container } = await render(
           <Drilldown rootPageId="page0">
             <Drilldown.Page id="page0">
               <Drilldown.Group id="group0" selectableType="multiple">
@@ -464,7 +464,7 @@ describe('<Drilldown.Group />', () => {
     describe('if provided', () => {
       it('all selected checkboxes should be visible', async () => {
         const selectedValues = ['item1', 'item3']
-        const { container } = render(
+        const { container } = await render(
           <Drilldown rootPageId="page0">
             <Drilldown.Page id="page0">
               <Drilldown.Group
@@ -485,7 +485,7 @@ describe('<Drilldown.Group />', () => {
             </Drilldown.Page>
           </Drilldown>
         )
-        const options = screen.getAllByRole('menuitemcheckbox')
+        const options = page.getByRole('menuitemcheckbox').elements()
         const icons = container.querySelectorAll('svg[name="Check"]')
 
         expect(options[0]).toHaveAttribute('aria-checked', 'true')
@@ -499,7 +499,7 @@ describe('<Drilldown.Group />', () => {
 
       it("should be overridden by the Option's own defaultSelected", async () => {
         const selectedValues = ['item1', 'item3']
-        render(
+        await render(
           <Drilldown rootPageId="page0">
             <Drilldown.Page id="page0">
               <Drilldown.Group
@@ -528,7 +528,7 @@ describe('<Drilldown.Group />', () => {
             </Drilldown.Page>
           </Drilldown>
         )
-        const options = screen.getAllByRole('menuitemcheckbox')
+        const options = page.getByRole('menuitemcheckbox').elements()
 
         expect(options[0]).toHaveAttribute('aria-checked', 'true') // from the group,
         expect(options[1]).toHaveAttribute('aria-checked', 'true') // from own prop,
@@ -538,7 +538,7 @@ describe('<Drilldown.Group />', () => {
       describe('for "single" selectableType', () => {
         it('the selected option should be checked', async () => {
           const selectedValues = ['item2']
-          render(
+          await render(
             <Drilldown rootPageId="page0">
               <Drilldown.Page id="page0">
                 <Drilldown.Group
@@ -559,7 +559,7 @@ describe('<Drilldown.Group />', () => {
               </Drilldown.Page>
             </Drilldown>
           )
-          const options = screen.getAllByRole('menuitemradio')
+          const options = page.getByRole('menuitemradio').elements()
 
           expect(options[0]).toHaveAttribute('aria-checked', 'false')
           expect(options[1]).toHaveAttribute('aria-checked', 'true')
@@ -568,7 +568,7 @@ describe('<Drilldown.Group />', () => {
 
         it("should throw error if multiple items are selected, and shouldn't select any item", async () => {
           const selectedValues = ['item1', 'item3']
-          render(
+          await render(
             <Drilldown rootPageId="page0">
               <Drilldown.Page id="page0">
                 <Drilldown.Group
@@ -589,7 +589,7 @@ describe('<Drilldown.Group />', () => {
               </Drilldown.Page>
             </Drilldown>
           )
-          const options = screen.getAllByRole('menuitemradio')
+          const options = page.getByRole('menuitemradio').elements()
 
           expect(options[0]).toHaveAttribute('aria-checked', 'false')
           expect(options[1]).toHaveAttribute('aria-checked', 'false')
@@ -604,7 +604,7 @@ describe('<Drilldown.Group />', () => {
   describe('selection', () => {
     it('should fire "onSelect" callback', async () => {
       const onSelect = vi.fn()
-      render(
+      await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Group
@@ -625,11 +625,11 @@ describe('<Drilldown.Group />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const option2 = screen.getByText('Option 2')
+      const option2 = page.getByText('Option 2').element()
 
       await userEvent.click(option2)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onSelect).toHaveBeenCalledTimes(1)
 
         const args = onSelect.mock.calls[0][1]
@@ -652,8 +652,8 @@ describe('<Drilldown.Group />', () => {
   })
 
   describe('selectedOptions', () => {
-    it('should warn if selectableType="single" but multiple values are passed', () => {
-      render(
+    it('should warn if selectableType="single" but multiple values are passed', async () => {
+      await render(
         <Drilldown rootPageId="root">
           <Drilldown.Page id="root">
             <Drilldown.Group
@@ -681,7 +681,7 @@ describe('<Drilldown.Group />', () => {
     })
 
     it('should prevent user selection if selectedOptions provided', async () => {
-      render(
+      await render(
         <Drilldown rootPageId="root">
           <Drilldown.Page id="root">
             <Drilldown.Group
@@ -699,19 +699,19 @@ describe('<Drilldown.Group />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const options = screen.getAllByRole('menuitemcheckbox')
+      const options = page.getByRole('menuitemcheckbox').elements()
 
       expect(options[0]).toHaveAttribute('aria-checked', 'true')
       expect(options[1]).toHaveAttribute('aria-checked', 'false')
 
-      await userEvent.click(screen.getByText('C2'))
+      await userEvent.click(page.getByText('C2').element())
 
       expect(options[0]).toHaveAttribute('aria-checked', 'true')
       expect(options[1]).toHaveAttribute('aria-checked', 'false')
     })
 
     it('should preserve user changes in uncontrolled groups when selectedOptions props change', async () => {
-      const { rerender } = render(
+      const { rerender } = await render(
         <Drilldown rootPageId="root">
           <Drilldown.Page id="root">
             <Drilldown.Group
@@ -741,7 +741,7 @@ describe('<Drilldown.Group />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const options = screen.getAllByRole('menuitemcheckbox')
+      const options = page.getByRole('menuitemcheckbox').elements()
 
       expect(options[0]).toHaveAttribute('aria-checked', 'true') // C1 controlled
       expect(options[1]).toHaveAttribute('aria-checked', 'false') // C2 controlled
@@ -749,14 +749,14 @@ describe('<Drilldown.Group />', () => {
       expect(options[3]).toHaveAttribute('aria-checked', 'false') // D2 uncontrolled
 
       // user changes uncontrolled group (select D2)
-      await userEvent.click(screen.getByText('D2'))
+      await userEvent.click(page.getByText('D2').element())
       expect(options[0]).toHaveAttribute('aria-checked', 'true') // C1 controlled
       expect(options[1]).toHaveAttribute('aria-checked', 'false') // C2 controlled
       expect(options[2]).toHaveAttribute('aria-checked', 'true') // D1 uncontrolled
       expect(options[3]).toHaveAttribute('aria-checked', 'true') // D2 uncontrolled
 
       // controlled selectedOptions prop changes
-      rerender(
+      await rerender(
         <Drilldown rootPageId="root">
           <Drilldown.Page id="root">
             <Drilldown.Group
@@ -826,7 +826,7 @@ describe('<Drilldown.Group />', () => {
           },
           optionProps: { value: 'val1', defaultSelected: false }
         })
-        expect(screen.getByTestId(TEST_ID)).toHaveAttribute(
+        expect(page.getByTestId(TEST_ID).element()).toHaveAttribute(
           'aria-checked',
           'true'
         ) // selectedOptions prop wins
@@ -840,7 +840,7 @@ describe('<Drilldown.Group />', () => {
           },
           optionProps: { value: 'val1', defaultSelected: false }
         })
-        expect(screen.getByTestId(TEST_ID)).toHaveAttribute(
+        expect(page.getByTestId(TEST_ID).element()).toHaveAttribute(
           'aria-checked',
           'true'
         ) // selectedOptions prop wins
@@ -854,7 +854,7 @@ describe('<Drilldown.Group />', () => {
           },
           optionProps: { value: 'val1', defaultSelected: false }
         })
-        expect(screen.getByTestId(TEST_ID)).toHaveAttribute(
+        expect(page.getByTestId(TEST_ID).element()).toHaveAttribute(
           'aria-checked',
           'false'
         ) // selectedOptions prop wins
@@ -868,7 +868,7 @@ describe('<Drilldown.Group />', () => {
           },
           optionProps: { value: 'val1', defaultSelected: true }
         })
-        expect(screen.getByTestId(TEST_ID)).toHaveAttribute(
+        expect(page.getByTestId(TEST_ID).element()).toHaveAttribute(
           'aria-checked',
           'false'
         ) // selectedOptions prop wins
@@ -881,7 +881,7 @@ describe('<Drilldown.Group />', () => {
           },
           optionProps: { value: 'val1', defaultSelected: false }
         })
-        expect(screen.getByTestId(TEST_ID)).toHaveAttribute(
+        expect(page.getByTestId(TEST_ID).element()).toHaveAttribute(
           'aria-checked',
           'false'
         ) // option default wins
@@ -894,7 +894,7 @@ describe('<Drilldown.Group />', () => {
           },
           optionProps: { value: 'val1', defaultSelected: true }
         })
-        expect(screen.getByTestId(TEST_ID)).toHaveAttribute(
+        expect(page.getByTestId(TEST_ID).element()).toHaveAttribute(
           'aria-checked',
           'true'
         ) // option default wins
@@ -907,7 +907,7 @@ describe('<Drilldown.Group />', () => {
           },
           optionProps: { value: 'val1', defaultSelected: false }
         })
-        expect(screen.getByTestId(TEST_ID)).toHaveAttribute(
+        expect(page.getByTestId(TEST_ID).element()).toHaveAttribute(
           'aria-checked',
           'true'
         ) // selectedOptions prop wins
@@ -920,7 +920,7 @@ describe('<Drilldown.Group />', () => {
           },
           optionProps: { value: 'val1', defaultSelected: true }
         })
-        expect(screen.getByTestId(TEST_ID)).toHaveAttribute(
+        expect(page.getByTestId(TEST_ID).element()).toHaveAttribute(
           'aria-checked',
           'false'
         ) // selectedOptions prop wins
@@ -934,7 +934,7 @@ describe('<Drilldown.Group />', () => {
           },
           optionProps: { value: 'val1' }
         })
-        expect(screen.getByTestId(TEST_ID)).toHaveAttribute(
+        expect(page.getByTestId(TEST_ID).element()).toHaveAttribute(
           'aria-checked',
           'true'
         ) // selectedOptions prop wins
@@ -948,7 +948,7 @@ describe('<Drilldown.Group />', () => {
           },
           optionProps: { value: 'val1' }
         })
-        expect(screen.getByTestId(TEST_ID)).toHaveAttribute(
+        expect(page.getByTestId(TEST_ID).element()).toHaveAttribute(
           'aria-checked',
           'false'
         ) // selectedOptions prop wins
@@ -997,8 +997,8 @@ describe('<Drilldown.Group />', () => {
           </Drilldown>
         )
 
-        it('should overwrite previous selectedOptions prop selections', () => {
-          const { rerender } = render(
+        it('should overwrite previous selectedOptions prop selections', async () => {
+          const { rerender } = await render(
             getDrilldownComponent({
               groupProps: {
                 selectedOptions: ['val1', 'val2']
@@ -1009,20 +1009,20 @@ describe('<Drilldown.Group />', () => {
             })
           )
 
-          expect(screen.getByTestId(TEST_ID_1)).toHaveAttribute(
+          expect(page.getByTestId(TEST_ID_1).element()).toHaveAttribute(
             'aria-checked',
             'true'
           )
-          expect(screen.getByTestId(TEST_ID_2)).toHaveAttribute(
+          expect(page.getByTestId(TEST_ID_2).element()).toHaveAttribute(
             'aria-checked',
             'true'
           )
-          expect(screen.getByTestId(TEST_ID_3)).toHaveAttribute(
+          expect(page.getByTestId(TEST_ID_3).element()).toHaveAttribute(
             'aria-checked',
             'false'
           )
 
-          rerender(
+          await rerender(
             getDrilldownComponent({
               groupProps: {
                 selectedOptions: ['val3']
@@ -1033,22 +1033,22 @@ describe('<Drilldown.Group />', () => {
             })
           )
 
-          expect(screen.getByTestId(TEST_ID_1)).toHaveAttribute(
+          expect(page.getByTestId(TEST_ID_1).element()).toHaveAttribute(
             'aria-checked',
             'false'
           )
-          expect(screen.getByTestId(TEST_ID_2)).toHaveAttribute(
+          expect(page.getByTestId(TEST_ID_2).element()).toHaveAttribute(
             'aria-checked',
             'false'
           )
-          expect(screen.getByTestId(TEST_ID_3)).toHaveAttribute(
+          expect(page.getByTestId(TEST_ID_3).element()).toHaveAttribute(
             'aria-checked',
             'true'
           )
         })
 
-        it('should overwrite group default selection and option default selection', () => {
-          const { rerender } = render(
+        it('should overwrite group default selection and option default selection', async () => {
+          const { rerender } = await render(
             getDrilldownComponent({
               groupProps: {
                 selectedOptions: ['val1'],
@@ -1060,21 +1060,21 @@ describe('<Drilldown.Group />', () => {
             })
           )
 
-          expect(screen.getByTestId(TEST_ID_1)).toHaveAttribute(
+          expect(page.getByTestId(TEST_ID_1).element()).toHaveAttribute(
             'aria-checked',
             'true'
           )
-          expect(screen.getByTestId(TEST_ID_2)).toHaveAttribute(
+          expect(page.getByTestId(TEST_ID_2).element()).toHaveAttribute(
             'aria-checked',
             'false'
           )
-          expect(screen.getByTestId(TEST_ID_3)).toHaveAttribute(
+          expect(page.getByTestId(TEST_ID_3).element()).toHaveAttribute(
             'aria-checked',
             'false'
           )
 
           // Set prop: selectedOptions
-          rerender(
+          await rerender(
             getDrilldownComponent({
               groupProps: {
                 selectedOptions: [],
@@ -1086,22 +1086,22 @@ describe('<Drilldown.Group />', () => {
             })
           )
 
-          expect(screen.getByTestId(TEST_ID_1)).toHaveAttribute(
+          expect(page.getByTestId(TEST_ID_1).element()).toHaveAttribute(
             'aria-checked',
             'false'
           )
-          expect(screen.getByTestId(TEST_ID_2)).toHaveAttribute(
+          expect(page.getByTestId(TEST_ID_2).element()).toHaveAttribute(
             'aria-checked',
             'false'
           )
-          expect(screen.getByTestId(TEST_ID_3)).toHaveAttribute(
+          expect(page.getByTestId(TEST_ID_3).element()).toHaveAttribute(
             'aria-checked',
             'false'
           )
         })
 
-        it('should overwrite group default selection and option default selection when selectedOptions provided', () => {
-          const { rerender } = render(
+        it('should overwrite group default selection and option default selection when selectedOptions provided', async () => {
+          const { rerender } = await render(
             getDrilldownComponent({
               groupProps: {
                 defaultSelected: ['val2']
@@ -1112,21 +1112,21 @@ describe('<Drilldown.Group />', () => {
             })
           )
 
-          expect(screen.getByTestId(TEST_ID_1)).toHaveAttribute(
+          expect(page.getByTestId(TEST_ID_1).element()).toHaveAttribute(
             'aria-checked',
             'false'
           )
-          expect(screen.getByTestId(TEST_ID_2)).toHaveAttribute(
+          expect(page.getByTestId(TEST_ID_2).element()).toHaveAttribute(
             'aria-checked',
             'true'
           )
-          expect(screen.getByTestId(TEST_ID_3)).toHaveAttribute(
+          expect(page.getByTestId(TEST_ID_3).element()).toHaveAttribute(
             'aria-checked',
             'true'
           )
 
           // Set new prop: selectedOptions
-          rerender(
+          await rerender(
             getDrilldownComponent({
               groupProps: {
                 selectedOptions: [],
@@ -1138,15 +1138,15 @@ describe('<Drilldown.Group />', () => {
             })
           )
 
-          expect(screen.getByTestId(TEST_ID_1)).toHaveAttribute(
+          expect(page.getByTestId(TEST_ID_1).element()).toHaveAttribute(
             'aria-checked',
             'false'
           )
-          expect(screen.getByTestId(TEST_ID_2)).toHaveAttribute(
+          expect(page.getByTestId(TEST_ID_2).element()).toHaveAttribute(
             'aria-checked',
             'false'
           )
-          expect(screen.getByTestId(TEST_ID_3)).toHaveAttribute(
+          expect(page.getByTestId(TEST_ID_3).element()).toHaveAttribute(
             'aria-checked',
             'false'
           )

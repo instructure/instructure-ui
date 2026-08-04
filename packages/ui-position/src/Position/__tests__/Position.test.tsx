@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
-import { vi } from 'vitest'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import { within } from '@instructure/ui-utils'
 
 import { Position } from '../index.js'
@@ -37,8 +37,8 @@ describe('<Position />', () => {
     overflow: 'auto'
   }
 
-  it('should render', () => {
-    render(
+  it('should render', async () => {
+    await render(
       <div style={{ padding: '50px' }}>
         <div style={{ ...parentDefaults }}>
           <Position
@@ -53,8 +53,8 @@ describe('<Position />', () => {
       </div>
     )
 
-    const target = screen.getByTestId('target-btn')
-    const content = screen.getByTestId('content')
+    const target = page.getByTestId('target-btn').element()
+    const content = page.getByTestId('content').element()
 
     expect(target).toBeInTheDocument()
     expect(target).toHaveTextContent('Target')
@@ -62,8 +62,8 @@ describe('<Position />', () => {
     expect(content).toHaveTextContent('Content')
   })
 
-  it('should absolutely position content', () => {
-    render(
+  it('should absolutely position content', async () => {
+    await render(
       <div style={{ padding: '50px' }}>
         <div style={{ ...parentDefaults }}>
           <Position
@@ -78,7 +78,7 @@ describe('<Position />', () => {
       </div>
     )
 
-    const content = screen.getByTestId('content')
+    const content = page.getByTestId('content').element()
     const style = window.getComputedStyle(content)
 
     expect(style.position).toBe('absolute')
@@ -86,7 +86,7 @@ describe('<Position />', () => {
 
   it('should render right of target', async () => {
     const onPositionChanged = vi.fn()
-    render(
+    await render(
       <div style={{ padding: '50px' }}>
         <div style={{ ...parentDefaults }}>
           <Position
@@ -102,10 +102,10 @@ describe('<Position />', () => {
       </div>
     )
 
-    const target = screen.getByTestId('target')
-    const content = screen.getByTestId('content')
+    const target = page.getByTestId('target').element()
+    const content = page.getByTestId('content').element()
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onPositionChanged).toHaveBeenCalled()
     })
 
@@ -119,7 +119,7 @@ describe('<Position />', () => {
 
   it('should render below target', async () => {
     const onPositionChanged = vi.fn()
-    render(
+    await render(
       <div style={{ padding: '50px' }}>
         <div style={{ ...parentDefaults }}>
           <Position
@@ -135,10 +135,10 @@ describe('<Position />', () => {
       </div>
     )
 
-    const target = screen.getByTestId('target')
-    const content = screen.getByTestId('content')
+    const target = page.getByTestId('target').element()
+    const content = page.getByTestId('content').element()
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onPositionChanged).toHaveBeenCalled()
     })
 
@@ -152,7 +152,7 @@ describe('<Position />', () => {
 
   it('should render left of target', async () => {
     const onPositionChanged = vi.fn()
-    render(
+    await render(
       <div style={{ padding: '50px' }}>
         <div style={{ ...parentDefaults }}>
           <Position
@@ -168,10 +168,10 @@ describe('<Position />', () => {
       </div>
     )
 
-    const target = screen.getByTestId('target')
-    const content = screen.getByTestId('content')
+    const target = page.getByTestId('target').element()
+    const content = page.getByTestId('content').element()
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onPositionChanged).toHaveBeenCalled()
     })
 
@@ -185,7 +185,7 @@ describe('<Position />', () => {
 
   it('should render above target', async () => {
     const onPositionChanged = vi.fn()
-    render(
+    await render(
       <div style={{ padding: '50px' }}>
         <div style={{ ...parentDefaults }}>
           <Position
@@ -201,10 +201,10 @@ describe('<Position />', () => {
       </div>
     )
 
-    const target = screen.getByTestId('target')
-    const content = screen.getByTestId('content')
+    const target = page.getByTestId('target').element()
+    const content = page.getByTestId('content').element()
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onPositionChanged).toHaveBeenCalled()
     })
 
@@ -216,7 +216,7 @@ describe('<Position />', () => {
 
   it('should center vertically', async () => {
     const onPositionChanged = vi.fn()
-    render(
+    await render(
       <div style={{ padding: '50px' }}>
         <div style={{ ...parentDefaults }}>
           <Position
@@ -232,10 +232,10 @@ describe('<Position />', () => {
       </div>
     )
 
-    const target = screen.getByTestId('target')
-    const content = screen.getByTestId('content')
+    const target = page.getByTestId('target').element()
+    const content = page.getByTestId('content').element()
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onPositionChanged).toHaveBeenCalled()
     })
 
@@ -252,7 +252,7 @@ describe('<Position />', () => {
 
   it('should center horizontally', async () => {
     const onPositionChanged = vi.fn()
-    render(
+    await render(
       <div style={{ padding: '50px' }}>
         <div style={{ ...parentDefaults }}>
           <Position
@@ -268,10 +268,10 @@ describe('<Position />', () => {
       </div>
     )
 
-    const target = screen.getByTestId('target')
-    const content = screen.getByTestId('content')
+    const target = page.getByTestId('target').element()
+    const content = page.getByTestId('content').element()
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onPositionChanged).toHaveBeenCalled()
     })
 
@@ -290,7 +290,7 @@ describe('<Position />', () => {
     it('should re-position below target', async () => {
       const onPositionChanged = vi.fn()
 
-      render(
+      await render(
         <div style={{ padding: '50px' }}>
           <div data-testid="mountNode">mount</div>
           <div
@@ -316,10 +316,10 @@ describe('<Position />', () => {
         </div>
       )
 
-      const target = screen.getByTestId('target')
-      const content = screen.getByTestId('content')
+      const target = page.getByTestId('target').element()
+      const content = page.getByTestId('content').element()
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onPositionChanged).toHaveBeenCalled()
       })
 
@@ -334,7 +334,7 @@ describe('<Position />', () => {
     it('should re-position above target', async () => {
       const onPositionChanged = vi.fn()
 
-      render(
+      await render(
         <div style={{ padding: '50px' }}>
           <div id="mountNode">mount</div>
           <div
@@ -360,10 +360,10 @@ describe('<Position />', () => {
         </div>
       )
 
-      const target = screen.getByTestId('target')
-      const content = screen.getByTestId('content')
+      const target = page.getByTestId('target').element()
+      const content = page.getByTestId('content').element()
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onPositionChanged).toHaveBeenCalled()
       })
 
@@ -378,7 +378,7 @@ describe('<Position />', () => {
     it('should re-position after target', async () => {
       const onPositionChanged = vi.fn()
 
-      render(
+      await render(
         <div style={{ padding: '50px' }}>
           <div id="mountNode">mount</div>
           <div
@@ -404,10 +404,10 @@ describe('<Position />', () => {
         </div>
       )
 
-      const target = screen.getByTestId('target')
-      const content = screen.getByTestId('content')
+      const target = page.getByTestId('target').element()
+      const content = page.getByTestId('content').element()
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onPositionChanged).toHaveBeenCalled()
       })
 
@@ -422,7 +422,7 @@ describe('<Position />', () => {
     it('should re-position before target', async () => {
       const onPositionChanged = vi.fn()
 
-      render(
+      await render(
         <div style={{ padding: '50px' }}>
           <div id="mountNode">mount</div>
           <div
@@ -448,10 +448,10 @@ describe('<Position />', () => {
         </div>
       )
 
-      const target = screen.getByTestId('target')
-      const content = screen.getByTestId('content')
+      const target = page.getByTestId('target').element()
+      const content = page.getByTestId('content').element()
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onPositionChanged).toHaveBeenCalled()
       })
 
@@ -476,7 +476,7 @@ describe('<Position />', () => {
     })
 
     it('should position correctly', async () => {
-      render(
+      await render(
         <div style={{ padding: '100px' }}>
           <Position
             placement="bottom"
@@ -489,10 +489,10 @@ describe('<Position />', () => {
         </div>
       )
 
-      const target = screen.getByTestId('target')
-      const content = screen.getByTestId('content')
+      const target = page.getByTestId('target').element()
+      const content = page.getByTestId('content').element()
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(content.getBoundingClientRect().top).toEqual(
           target.getBoundingClientRect().bottom
         )
@@ -500,7 +500,7 @@ describe('<Position />', () => {
     })
 
     it('should position correctly with mountNode', async () => {
-      render(
+      await render(
         <div style={{ padding: '100px' }}>
           <div data-testid="mountNode">mount</div>
           <div
@@ -525,10 +525,10 @@ describe('<Position />', () => {
         </div>
       )
 
-      const target = screen.getByTestId('target')
-      const content = screen.getByTestId('content')
+      const target = page.getByTestId('target').element()
+      const content = page.getByTestId('content').element()
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(content.getBoundingClientRect().top).toEqual(
           target.getBoundingClientRect().bottom
         )
@@ -537,8 +537,8 @@ describe('<Position />', () => {
   })
 
   describe('containerDisplay prop', () => {
-    it('should apply "inline-block"', () => {
-      const { container } = render(
+    it('should apply "inline-block"', async () => {
+      const { container } = await render(
         <div style={{ padding: '50px' }}>
           <div style={{ ...parentDefaults }}>
             <Position
@@ -560,8 +560,8 @@ describe('<Position />', () => {
       expect(style.display).toEqual('inline-block')
     })
 
-    it('should apply "block"', () => {
-      const { container } = render(
+    it('should apply "block"', async () => {
+      const { container } = await render(
         <div style={{ padding: '50px' }}>
           <div style={{ ...parentDefaults }}>
             <Position
@@ -585,7 +585,7 @@ describe('<Position />', () => {
   })
 
   it('writes --ui-position-available-{height,width} on the content node', async () => {
-    render(
+    await render(
       <Position
         constrain="window"
         placement="bottom"
@@ -594,8 +594,8 @@ describe('<Position />', () => {
         <div data-testid="content">Content</div>
       </Position>
     )
-    const content = screen.getByTestId('content')
-    await waitFor(() => {
+    const content = page.getByTestId('content').element()
+    await vi.waitFor(() => {
       expect(
         content.style.getPropertyValue('--ui-position-available-height')
       ).not.toBe('')

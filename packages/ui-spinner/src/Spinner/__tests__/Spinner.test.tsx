@@ -22,12 +22,12 @@
  * SOFTWARE.
  */
 
-import { render, waitFor, screen } from '@testing-library/react'
 import { runAxeCheck } from '@instructure/ui-axe-check'
-import { vi, expect } from 'vitest'
 import type { MockInstance } from 'vitest'
 
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import { Spinner } from '@instructure/ui-spinner/latest'
 import type { SpinnerProps } from '@instructure/ui-spinner/latest'
 
@@ -46,21 +46,27 @@ describe('<Spinner />', () => {
   })
 
   it('should render', async () => {
-    const { container } = render(<Spinner renderTitle="Loading" size="small" />)
+    const { container } = await render(
+      <Spinner renderTitle="Loading" size="small" />
+    )
     const spinner = container.querySelector('div[class*="-spinner"]')
 
     expect(spinner).toBeInTheDocument()
   })
 
   it('should render the title prop text in the SVG element title', async () => {
-    const { container } = render(<Spinner renderTitle="Loading" size="large" />)
+    const { container } = await render(
+      <Spinner renderTitle="Loading" size="large" />
+    )
     const spinner = container.querySelector('div[class*="-spinner"]')
 
     expect(spinner).toHaveTextContent('Loading')
   })
 
   it('should meet a11y standards', async () => {
-    const { container } = render(<Spinner renderTitle="Loading" size="small" />)
+    const { container } = await render(
+      <Spinner renderTitle="Loading" size="small" />
+    )
     const axeCheck = await runAxeCheck(container)
     expect(axeCheck).toBe(true)
   })
@@ -70,7 +76,7 @@ describe('<Spinner />', () => {
       <span>I have translated {children}.</span>
     )
 
-    const { container } = render(
+    const { container } = await render(
       <Spinner renderTitle={<Translation>Loading</Translation>} size="small" />
     )
 
@@ -83,14 +89,14 @@ describe('<Spinner />', () => {
 
   describe('with the delay prop', () => {
     it('should delay rendering', async () => {
-      render(<Spinner renderTitle="Loading" delay={300} />)
+      await render(<Spinner renderTitle="Loading" delay={300} />)
 
-      expect(screen.queryByText('Loading')).not.toBeInTheDocument()
+      expect(page.getByText('Loading').query()).not.toBeInTheDocument()
 
-      await waitFor(
+      await vi.waitFor(
         async () => {
-          const title = await screen.findByText('Loading')
-          const icon = await screen.findByRole('img')
+          const title = await page.getByText('Loading').element()
+          const icon = await page.getByRole('img').element()
 
           expect(title).toBeInTheDocument()
           expect(icon).toBeInTheDocument()

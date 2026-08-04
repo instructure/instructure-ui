@@ -22,12 +22,12 @@
  * SOFTWARE.
  */
 
-import { render, waitFor, fireEvent } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
 import type { MockInstance } from 'vitest'
-import { vi } from 'vitest'
 
-import '@testing-library/jest-dom'
+import { fireEvent } from '@testing-library/dom'
+import { render } from 'vitest-browser-react'
+import { userEvent } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { RadioInput, RadioInputGroup } from '@instructure/ui-radio-input/latest'
 
@@ -51,7 +51,7 @@ describe('<RadioInputGroup />', () => {
   })
 
   it('adds the name props to all RadioInput types', async () => {
-    const { container } = render(
+    const { container } = await render(
       <RadioInputGroup name="fruit" description="Select a fruit">
         <RadioInput label="Apple" value="apple" />
         <RadioInput label="Banana" value="banana" />
@@ -66,7 +66,7 @@ describe('<RadioInputGroup />', () => {
 
   it('calls the onChange prop', async () => {
     const onChange = vi.fn()
-    const { container } = render(
+    const { container } = await render(
       <RadioInputGroup
         name="fruit"
         description="Select a fruit"
@@ -81,14 +81,14 @@ describe('<RadioInputGroup />', () => {
 
     await userEvent.click(input!)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onChange).toHaveBeenCalled()
     })
   })
 
   it('does not call the onChange prop when disabled', async () => {
     const onChange = vi.fn()
-    const { container } = render(
+    const { container } = await render(
       <RadioInputGroup
         disabled
         name="fruit"
@@ -104,7 +104,7 @@ describe('<RadioInputGroup />', () => {
 
     fireEvent.click(input!)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onChange).not.toHaveBeenCalled()
       expect(input).toBeDisabled()
     })
@@ -112,7 +112,7 @@ describe('<RadioInputGroup />', () => {
 
   it('does not call the onChange prop when readOnly', async () => {
     const onChange = vi.fn()
-    const { container } = render(
+    const { container } = await render(
       <RadioInputGroup
         readOnly
         name="fruit"
@@ -128,7 +128,7 @@ describe('<RadioInputGroup />', () => {
 
     fireEvent.click(input!)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onChange).not.toHaveBeenCalled()
       expect(input).not.toBeDisabled()
       expect(input).toHaveAttribute('readonly')
@@ -136,7 +136,7 @@ describe('<RadioInputGroup />', () => {
   })
 
   it('should not update the value when the value prop is set', async () => {
-    const { container } = render(
+    const { container } = await render(
       <RadioInputGroup
         name="fruit"
         description="Select a fruit"
@@ -155,13 +155,13 @@ describe('<RadioInputGroup />', () => {
 
     await userEvent.click(banana!)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(orange).toHaveAttribute('checked')
     })
   })
 
   it('adds the correct tabindex to RadioInputs when none are checked', async () => {
-    const { container } = render(
+    const { container } = await render(
       <RadioInputGroup name="fruit" description="Select a fruit">
         <RadioInput label="Apple" value="apple" />
         <RadioInput label="Banana" value="banana" />
@@ -176,7 +176,7 @@ describe('<RadioInputGroup />', () => {
   })
 
   it('adds the correct tabindex to RadioInputs when checked', async () => {
-    const { container } = render(
+    const { container } = await render(
       <RadioInputGroup
         name="fruit"
         description="Select a fruit"
@@ -196,7 +196,7 @@ describe('<RadioInputGroup />', () => {
 
   describe('for a11y', () => {
     it('should meet a11y standards', async () => {
-      const { container } = render(
+      const { container } = await render(
         <RadioInputGroup name="fruit" description="Select a fruit">
           <RadioInput label="Apple" value="apple" />
           <RadioInput label="Banana" value="banana" />
@@ -209,8 +209,8 @@ describe('<RadioInputGroup />', () => {
     })
   })
 
-  it('adds the correct ARIA attributes', () => {
-    const { container } = render(
+  it('adds the correct ARIA attributes', async () => {
+    const { container } = await render(
       <RadioInputGroup
         name="fruit"
         description="Select a fruit"

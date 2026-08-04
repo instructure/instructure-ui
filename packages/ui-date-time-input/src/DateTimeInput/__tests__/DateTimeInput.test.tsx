@@ -22,12 +22,12 @@
  * SOFTWARE.
  */
 
-import { fireEvent, render, screen, waitFor } from '@testing-library/react'
-import { vi } from 'vitest'
-import userEvent from '@testing-library/user-event'
 import { DateTimeInput } from '@instructure/ui-date-time-input/latest'
 import { ApplyLocale, DateTime } from '@instructure/ui-i18n'
-import '@testing-library/jest-dom'
+import { fireEvent } from '@testing-library/dom'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 describe('<DateTimeInput />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
@@ -48,12 +48,12 @@ describe('<DateTimeInput />', () => {
     consoleErrorMock.mockRestore()
   })
 
-  it('should use the default value', () => {
+  it('should use the default value', async () => {
     const locale = 'en-US'
     const timezone = 'US/Eastern'
     const dateTime = DateTime.parse('2017-05-01T17:30Z', locale, timezone)
 
-    render(
+    await render(
       <DateTimeInput
         description="date_time"
         screenReaderLabels={{
@@ -71,20 +71,20 @@ describe('<DateTimeInput />', () => {
         defaultValue={dateTime.toISOString()}
       />
     )
-    const dateInput = screen.getByLabelText('date-input')
-    const timeInput = screen.getByLabelText('time-input')
+    const dateInput = page.getByLabelText('date-input').element()
+    const timeInput = page.getByLabelText('time-input').element()
 
     expect(dateInput).toHaveValue('5/1/2017')
     expect(timeInput).toHaveValue('1:30 PM')
   })
 
-  it('should use the value', () => {
+  it('should use the value', async () => {
     const onChange = vi.fn()
     const locale = 'en-US'
     const timezone = 'US/Eastern'
     const dateTime = DateTime.parse('2017-05-01T23:30Z', locale, timezone)
 
-    render(
+    await render(
       <DateTimeInput
         description="date_time"
         screenReaderLabels={{
@@ -103,21 +103,21 @@ describe('<DateTimeInput />', () => {
         onChange={onChange}
       />
     )
-    const dateInput = screen.getByLabelText('date-input')
-    const timeInput = screen.getByLabelText('time-input')
+    const dateInput = page.getByLabelText('date-input').element()
+    const timeInput = page.getByLabelText('time-input').element()
 
     expect(dateInput).toHaveValue('5/1/2017')
     expect(timeInput).toHaveValue('7:30 PM')
   })
 
-  it('should prefer value to defaultValue', () => {
+  it('should prefer value to defaultValue', async () => {
     const locale = 'en-US'
     const timezone = 'US/Eastern'
     const value = DateTime.parse('2017-05-01T17:30Z', locale, timezone)
     const defaultValue = DateTime.parse('2016-04-01T17:00Z', locale, timezone)
     const onChange = vi.fn()
 
-    render(
+    await render(
       <DateTimeInput
         description="date_time"
         screenReaderLabels={{
@@ -137,20 +137,20 @@ describe('<DateTimeInput />', () => {
         onChange={onChange}
       />
     )
-    const dateInput = screen.getByLabelText('date-input')
-    const timeInput = screen.getByLabelText('time-input')
+    const dateInput = page.getByLabelText('date-input').element()
+    const timeInput = page.getByLabelText('time-input').element()
 
     expect(dateInput).toHaveValue('5/1/2017')
     expect(timeInput).toHaveValue('1:30 PM')
   })
 
-  it('should set time to local midnight when only date is set', () => {
+  it('should set time to local midnight when only date is set', async () => {
     const locale = 'en-US'
     const timezone = 'US/Eastern'
     const dateObj = DateTime.parse('2017-04-01T18:30Z', locale, timezone)
     const date = dateObj.toISOString().split('T')[0]
 
-    render(
+    await render(
       <DateTimeInput
         description="date_time"
         dateRenderLabel="date-input"
@@ -168,8 +168,8 @@ describe('<DateTimeInput />', () => {
         defaultValue={date}
       />
     )
-    const dateInput = screen.getByLabelText('date-input')
-    const timeInput = screen.getByLabelText('time-input')
+    const dateInput = page.getByLabelText('date-input').element()
+    const timeInput = page.getByLabelText('time-input').element()
 
     expect(dateInput).toHaveValue('4/1/2017')
     expect(timeInput).toHaveValue('12:00 AM')
@@ -178,7 +178,7 @@ describe('<DateTimeInput />', () => {
   it('should call invalidDateTimeMessage if time is set w/o a date and is required', async () => {
     const invalidDateTimeMessage = vi.fn((_rawd) => 'whoops')
 
-    const { container } = render(
+    const { container } = await render(
       <DateTimeInput
         description="date_time"
         dateRenderLabel="date-input"
@@ -196,12 +196,12 @@ describe('<DateTimeInput />', () => {
         invalidDateTimeMessage={invalidDateTimeMessage}
       />
     )
-    const timeInput = screen.getByLabelText('time-input *')
+    const timeInput = page.getByLabelText('time-input *').element()
 
     await userEvent.type(timeInput, '1:00 PM')
     fireEvent.blur(timeInput)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(container).toHaveTextContent('whoops')
       expect(invalidDateTimeMessage).toHaveBeenCalled()
     })
@@ -210,7 +210,7 @@ describe('<DateTimeInput />', () => {
   it('should not call invalidDateTimeMessage if time is set w/o a date', async () => {
     const invalidDateTimeMessage = vi.fn((_rawd) => 'whoops')
 
-    render(
+    await render(
       <DateTimeInput
         description="date_time"
         dateRenderLabel="date-input"
@@ -227,12 +227,12 @@ describe('<DateTimeInput />', () => {
         invalidDateTimeMessage={invalidDateTimeMessage}
       />
     )
-    const timeInput = screen.getByLabelText('time-input')
+    const timeInput = page.getByLabelText('time-input').element()
 
     await userEvent.type(timeInput, '1:00 PM{enter}')
 
-    await waitFor(() => {
-      const errorMessages = screen.queryByText('whoops')
+    await vi.waitFor(() => {
+      const errorMessages = page.getByText('whoops').query()
 
       expect(errorMessages).not.toBeInTheDocument()
       expect(invalidDateTimeMessage).not.toHaveBeenCalled()
@@ -246,7 +246,7 @@ describe('<DateTimeInput />', () => {
     const timezone = 'US/Eastern'
     const defaultValue = DateTime.parse('2017-05-01T17:00', locale, timezone)
 
-    render(
+    await render(
       <DateTimeInput
         description="date_time"
         dateRenderLabel="date-input"
@@ -265,20 +265,20 @@ describe('<DateTimeInput />', () => {
         defaultValue={defaultValue.toISOString()}
       />
     )
-    const timeInput = screen.getByLabelText('time-input')
+    const timeInput = page.getByLabelText('time-input').element()
 
     fireEvent.change(timeInput, { target: { value: '3:00 AM' } })
     fireEvent.keyDown(timeInput, { key: 'Enter', code: 'Enter' })
     fireEvent.blur(timeInput)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onChange).toHaveBeenCalled()
       expect(onChange.mock.calls[0][0].target.value).toMatch('3:00 AM')
     })
   })
 
-  it('should show correct message when TimeInput value changes', () => {
-    const { container } = render(
+  it('should show correct message when TimeInput value changes', async () => {
+    const { container } = await render(
       <DateTimeInput
         description="date_time"
         dateRenderLabel="date-input"
@@ -296,7 +296,7 @@ describe('<DateTimeInput />', () => {
         defaultValue="2018-01-18T13:00"
       />
     )
-    const timeInput = screen.getByLabelText('time-input')
+    const timeInput = page.getByLabelText('time-input').element()
 
     fireEvent.change(timeInput, { target: { value: '5:00 PM' } })
     fireEvent.keyDown(timeInput, { key: 'Enter', code: 'Enter' })
@@ -305,12 +305,12 @@ describe('<DateTimeInput />', () => {
     expect(container).toHaveTextContent('Thursday, January 18, 2018 5:00 PM')
   })
 
-  it('should show the formatted date-time message', () => {
+  it('should show the formatted date-time message', async () => {
     const locale = 'en-US'
     const timezone = 'US/Eastern'
     const defaultValue = DateTime.parse('2017-05-01T17:30Z', locale, timezone)
 
-    const { container } = render(
+    const { container } = await render(
       <DateTimeInput
         description="date_time"
         dateRenderLabel="date-input"
@@ -332,12 +332,12 @@ describe('<DateTimeInput />', () => {
     expect(container).toHaveTextContent('Monday, May 1, 2017 1:30 PM')
   })
 
-  it('should show the formatted date-time message in the proper locale', () => {
+  it('should show the formatted date-time message in the proper locale', async () => {
     const timezone = 'US/Eastern'
     const locale = 'fr'
     const defaultValue = DateTime.parse('2017-05-01T17:30Z', locale, timezone)
 
-    const { container } = render(
+    const { container } = await render(
       <DateTimeInput
         description="date_time"
         dateRenderLabel="date-input"
@@ -358,11 +358,11 @@ describe('<DateTimeInput />', () => {
     expect(container).toHaveTextContent('1 mai 2017 13:30')
   })
 
-  it('should provide the html elements for date and time input', () => {
+  it('should provide the html elements for date and time input', async () => {
     let dref
     let tref
 
-    render(
+    await render(
       <DateTimeInput
         description="date_time"
         dateRenderLabel="date-input"
@@ -385,14 +385,14 @@ describe('<DateTimeInput />', () => {
         }}
       />
     )
-    const dateInput = screen.getByLabelText('date-input')
-    const timeInput = screen.getByLabelText('time-input')
+    const dateInput = page.getByLabelText('date-input').element()
+    const timeInput = page.getByLabelText('time-input').element()
 
     expect(dateInput).toEqual(dref)
     expect(timeInput).toEqual(tref)
   })
 
-  it('should update message when value prop changes', () => {
+  it('should update message when value prop changes', async () => {
     const onChange = vi.fn()
     const locale = 'en-US'
     const timezone = 'US/Eastern'
@@ -416,14 +416,14 @@ describe('<DateTimeInput />', () => {
       onChange
     }
 
-    const { container, rerender } = render(<DateTimeInput {...props} />)
+    const { container, rerender } = await render(<DateTimeInput {...props} />)
     expect(container).toHaveTextContent('May 1, 2017 1:30 PM')
 
-    rerender(<DateTimeInput {...props} value="2018-03-29T16:30Z" />)
+    await rerender(<DateTimeInput {...props} value="2018-03-29T16:30Z" />)
     expect(container).toHaveTextContent('March 29, 2018 12:30 PM')
   })
 
-  it('should update message when locale changed', () => {
+  it('should update message when locale changed', async () => {
     const onChange = vi.fn()
     const locale = 'en-US'
     const timezone = 'US/Eastern'
@@ -447,14 +447,14 @@ describe('<DateTimeInput />', () => {
       value: dateTime.toISOString()
     }
 
-    const { container, rerender } = render(<DateTimeInput {...props} />)
+    const { container, rerender } = await render(<DateTimeInput {...props} />)
     expect(container).toHaveTextContent('May 1, 2017 1:30 PM')
 
-    rerender(<DateTimeInput {...props} locale="fr" />)
+    await rerender(<DateTimeInput {...props} locale="fr" />)
     expect(container).toHaveTextContent('1 mai 2017 13:30')
   })
 
-  it('should update message when timezone changed', () => {
+  it('should update message when timezone changed', async () => {
     const onChange = vi.fn()
     const locale = 'en-US'
     const timezone = 'US/Eastern'
@@ -477,15 +477,15 @@ describe('<DateTimeInput />', () => {
       value: dateTime.toISOString()
     }
 
-    const { container, rerender } = render(<DateTimeInput {...props} />)
+    const { container, rerender } = await render(<DateTimeInput {...props} />)
     expect(container).toHaveTextContent('May 1, 2017 1:30 PM')
 
-    rerender(<DateTimeInput {...props} timezone="Europe/Paris" />)
+    await rerender(<DateTimeInput {...props} timezone="Europe/Paris" />)
     expect(container).toHaveTextContent('May 1, 2017 7:30 PM')
   })
 
   it('should show error message if initial value is invalid', async () => {
-    const { container } = render(
+    const { container } = await render(
       <DateTimeInput
         description="date_time"
         dateRenderLabel="date-input"
@@ -501,16 +501,16 @@ describe('<DateTimeInput />', () => {
         value="totally not a date"
       />
     )
-    const dateInput = screen.getByLabelText('date-input')
+    const dateInput = page.getByLabelText('date-input').element()
     fireEvent.blur(dateInput)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(container).toHaveTextContent('whoops')
     })
   })
 
   it('should show error message if initial defaultValue is invalid', async () => {
-    const { container } = render(
+    const { container } = await render(
       <DateTimeInput
         description="date_time"
         dateRenderLabel="date-input"
@@ -526,10 +526,10 @@ describe('<DateTimeInput />', () => {
         defaultValue="totally not a date"
       />
     )
-    const dateInput = screen.getByLabelText('date-input')
+    const dateInput = page.getByLabelText('date-input').element()
     fireEvent.blur(dateInput)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(container).toHaveTextContent('whoops')
     })
   })
@@ -554,14 +554,14 @@ describe('<DateTimeInput />', () => {
       timezone,
       value: dateTime.toISOString()
     }
-    const { container, rerender } = render(<DateTimeInput {...props} />)
+    const { container, rerender } = await render(<DateTimeInput {...props} />)
     expect(container).toHaveTextContent('May 1, 2017 1:30 PM')
 
-    rerender(<DateTimeInput {...props} value="A very invalid date" />)
-    const dateInput = screen.getByLabelText('date-input')
+    await rerender(<DateTimeInput {...props} value="A very invalid date" />)
+    const dateInput = page.getByLabelText('date-input').element()
     fireEvent.blur(dateInput)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(container).toHaveTextContent('whoops')
     })
   })
@@ -586,19 +586,19 @@ describe('<DateTimeInput />', () => {
       timezone,
       value: dateTime.toISOString()
     }
-    const { container, rerender } = render(<DateTimeInput {...props} />)
+    const { container, rerender } = await render(<DateTimeInput {...props} />)
     expect(container).toHaveTextContent('May 1, 2017 1:30 PM')
 
-    rerender(
+    await rerender(
       <DateTimeInput
         {...props}
         messages={[{ text: 'message_text', type: 'success' }]}
       />
     )
-    const dateInput = screen.getByLabelText('date-input')
+    const dateInput = page.getByLabelText('date-input').element()
     fireEvent.blur(dateInput)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(container).toHaveTextContent('May 1, 2017 1:30 PM')
       expect(container).toHaveTextContent('message_text')
     })
@@ -624,28 +624,28 @@ describe('<DateTimeInput />', () => {
       timezone,
       value: dateTime.toISOString()
     }
-    const { container, rerender } = render(
+    const { container, rerender } = await render(
       <DateTimeInput {...props} showMessages={false} />
     )
     expect(container).not.toHaveTextContent('2017')
 
-    rerender(
+    await rerender(
       <DateTimeInput
         {...props}
         showMessages={false}
         messages={[{ text: 'message_text', type: 'success' }]}
       />
     )
-    const dateInput = screen.getByLabelText('date-input')
+    const dateInput = page.getByLabelText('date-input').element()
 
     fireEvent.blur(dateInput)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(container).not.toHaveTextContent('2017')
       expect(container).toHaveTextContent('message_text')
     })
 
-    rerender(
+    await rerender(
       <DateTimeInput
         {...props}
         messages={[{ text: 'message_text', type: 'success' }]}
@@ -653,18 +653,18 @@ describe('<DateTimeInput />', () => {
       />
     )
 
-    fireEvent.blur(screen.getByLabelText('date-input'))
+    fireEvent.blur(page.getByLabelText('date-input').element())
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(container).toHaveTextContent('2017')
       expect(container).toHaveTextContent('message_text')
     })
   })
 
-  it('should read locale and timezone from context', () => {
+  it('should read locale and timezone from context', async () => {
     const onChange = vi.fn()
     const dateTime = DateTime.parse('2017-05-01T17:30Z', 'en-US', 'GMT')
-    const { container } = render(
+    const { container } = await render(
       // Africa/Nairobi is GMT +3
       <ApplyLocale locale="fr" timezone="Africa/Nairobi">
         <DateTimeInput
@@ -708,12 +708,14 @@ describe('<DateTimeInput />', () => {
     }
 
     // locale string: French format gives DD/MM/YYYY
-    const { rerender } = render(<DateTimeInput {...props} dateFormat="fr" />)
-    const dateInput = screen.getByLabelText('date-input')
+    const { rerender } = await render(
+      <DateTimeInput {...props} dateFormat="fr" />
+    )
+    const dateInput = page.getByLabelText('date-input').element()
     expect(dateInput).toHaveValue('01/05/2017')
 
     // custom { parser, formatter } object
-    rerender(
+    await rerender(
       <DateTimeInput
         {...props}
         dateFormat={{
@@ -730,7 +732,7 @@ describe('<DateTimeInput />', () => {
       />
     )
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(dateInput).toHaveValue('2017/05/01')
     })
   })
@@ -756,13 +758,13 @@ describe('<DateTimeInput />', () => {
       timezone: 'US/Eastern'
     }
 
-    const { container, rerender } = render(<DateTimeInput {...props} />)
+    const { container, rerender } = await render(<DateTimeInput {...props} />)
     expect(container).toHaveTextContent('Monday, May 1, 2017 1:30 PM')
 
-    rerender(<DateTimeInput {...props} messageFormat="l, LT" />)
-    fireEvent.blur(screen.getByLabelText('date-input'))
+    await rerender(<DateTimeInput {...props} messageFormat="l, LT" />)
+    fireEvent.blur(page.getByLabelText('date-input').element())
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(container).toHaveTextContent('5/1/2017, 1:30 PM')
     })
   })
@@ -787,18 +789,18 @@ describe('<DateTimeInput />', () => {
       timezone,
       value: dateTime.toISOString()
     }
-    const { container, rerender } = render(<DateTimeInput {...props} />)
+    const { container, rerender } = await render(<DateTimeInput {...props} />)
     expect(container).toHaveTextContent('May 1, 2017 1:30 PM')
 
     const newDateStr = '2022-03-29T19:00Z'
 
-    rerender(<DateTimeInput {...props} value={newDateStr} />)
-    const dateInput = screen.getByLabelText('date-input')
-    const timeInput = screen.getByLabelText('time-input')
+    await rerender(<DateTimeInput {...props} value={newDateStr} />)
+    const dateInput = page.getByLabelText('date-input').element()
+    const timeInput = page.getByLabelText('time-input').element()
 
     fireEvent.blur(dateInput)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(dateInput).toHaveValue('3/29/2022')
       expect(timeInput).toHaveValue('3:00 PM')
     })
@@ -807,7 +809,7 @@ describe('<DateTimeInput />', () => {
   it("should throw warning if date select and initialTimeForNewDate prop's value is not HH:MM", async () => {
     const initialTimeForNewDate = 'WRONG_FORMAT'
 
-    render(
+    await render(
       <DateTimeInput
         description="date_time"
         dateRenderLabel="date-input"
@@ -826,13 +828,13 @@ describe('<DateTimeInput />', () => {
       />
     )
 
-    const dateInput = screen.getByLabelText('date-input')
+    const dateInput = page.getByLabelText('date-input').element()
 
     fireEvent.change(dateInput, { target: { value: 'May 1, 2017' } })
     fireEvent.keyDown(dateInput, { key: 'Enter', code: 'Enter' })
     fireEvent.blur(dateInput)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(consoleErrorMock.mock.calls[0][0]).toBe(
         `Warning: [DateTimeInput] initialTimeForNewDate prop is not in the correct format. Please use HH:MM format.`
       )
@@ -842,7 +844,7 @@ describe('<DateTimeInput />', () => {
   it('should throw warning if initialTimeForNewDate prop hour and minute values are not in interval', async () => {
     const initialTimeForNewDate = '99:99'
 
-    render(
+    await render(
       <DateTimeInput
         description="date_time"
         dateRenderLabel="date-input"
@@ -860,13 +862,13 @@ describe('<DateTimeInput />', () => {
         initialTimeForNewDate={initialTimeForNewDate}
       />
     )
-    const dateInput = screen.getByLabelText('date-input')
+    const dateInput = page.getByLabelText('date-input').element()
 
     fireEvent.change(dateInput, { target: { value: 'May 1, 2017' } })
     fireEvent.keyDown(dateInput, { key: 'Enter', code: 'Enter' })
     fireEvent.blur(dateInput)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(consoleErrorMock.mock.calls[0][0]).toEqual(
         expect.stringContaining(
           `Warning: [DateTimeInput] 0 <= hour < 24 and 0 <= minute < 60 for initialTimeForNewDate prop.`
@@ -881,7 +883,7 @@ describe('<DateTimeInput />', () => {
     const initialTimeForNewDate = '16:16'
     const defaultValue = '2018-01-18T13:30'
 
-    const { container } = render(
+    const { container } = await render(
       <DateTimeInput
         description="date_time"
         dateRenderLabel="date-input"
@@ -900,7 +902,7 @@ describe('<DateTimeInput />', () => {
         initialTimeForNewDate={initialTimeForNewDate}
       />
     )
-    const timeInput = screen.getByLabelText('time-input')
+    const timeInput = page.getByLabelText('time-input').element()
 
     expect(timeInput).toHaveValue('1:30 PM')
     expect(container).toHaveTextContent('Thursday, January 18, 2018 1:30 PM')
@@ -912,7 +914,7 @@ describe('<DateTimeInput />', () => {
     // ("LL" by default) as a hint. This test verifies that typing an ISO date string
     // still works correctly after the switch to DateInput v2.
     const onChange = vi.fn()
-    render(
+    await render(
       <DateTimeInput
         description="date_time"
         dateRenderLabel="date-input"
@@ -930,12 +932,12 @@ describe('<DateTimeInput />', () => {
         onChange={onChange}
       />
     )
-    const dateInput = screen.getByLabelText('date-input')
+    const dateInput = page.getByLabelText('date-input').element()
 
     await userEvent.type(dateInput, '2017-05-01')
     fireEvent.blur(dateInput)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onChange).toHaveBeenCalled()
       expect(onChange.mock.calls[0][1]).toContain('2017-05-01')
       expect(dateInput).toHaveValue('5/1/2017')
@@ -954,7 +956,7 @@ describe('<DateTimeInput />', () => {
     const locale = 'en-US'
     const timezone = 'US/Eastern'
 
-    render(
+    await render(
       <DateTimeInput
         description="date_time"
         dateRenderLabel="date-input"
@@ -974,19 +976,25 @@ describe('<DateTimeInput />', () => {
       />
     )
 
-    const calendarButton = screen.getByRole('button', { name: 'Open calendar' })
+    const calendarButton = page
+      .getByRole('button', { name: 'Open calendar' })
+      .element()
     await userEvent.click(calendarButton)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(
-        screen.getByRole('button', { name: '15 May 2017' })
+        page.getByRole('button', { name: '15 May 2017' }).element()
       ).toBeInTheDocument()
     })
-    await userEvent.click(screen.getByRole('button', { name: '15 May 2017' }))
+    await userEvent.click(
+      page.getByRole('button', { name: '15 May 2017' }).element()
+    )
 
-    await waitFor(() => {
-      expect(screen.getByLabelText('date-input')).toHaveValue('5/15/2017')
-      expect(screen.getByLabelText('time-input')).toHaveValue('1:30 PM')
+    await vi.waitFor(() => {
+      expect(page.getByLabelText('date-input').element()).toHaveValue(
+        '5/15/2017'
+      )
+      expect(page.getByLabelText('time-input').element()).toHaveValue('1:30 PM')
       expect(onChange).toHaveBeenCalled()
       expect(onChange.mock.calls[0][1]).toContain('2017-05-15')
     })
@@ -999,7 +1007,7 @@ describe('<DateTimeInput />', () => {
     // before onRequestValidateDate. DateTimeInput must handle this correctly: the
     // displayed value should be normalized and onChange should fire with the correct ISO.
     const onChange = vi.fn()
-    render(
+    await render(
       <DateTimeInput
         description="date_time"
         dateRenderLabel="date-input"
@@ -1017,12 +1025,12 @@ describe('<DateTimeInput />', () => {
         onChange={onChange}
       />
     )
-    const dateInput = screen.getByLabelText('date-input')
+    const dateInput = page.getByLabelText('date-input').element()
 
     await userEvent.type(dateInput, 'May 1 2017')
     fireEvent.blur(dateInput)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(dateInput).toHaveValue('5/1/2017')
       expect(onChange).toHaveBeenCalled()
       expect(onChange.mock.calls[0][1]).toContain('2017-05-01')
@@ -1036,7 +1044,7 @@ describe('<DateTimeInput />', () => {
     // (default 'LL'). The tests below document the regression: these inputs were
     // accepted in v1 but are currently rejected in v2. They should pass once fixed.
     const renderComponent = (onChange = vi.fn()) =>
-      render(
+      await render(
         <DateTimeInput
           description="date_time"
           dateRenderLabel="date-input"
@@ -1058,13 +1066,13 @@ describe('<DateTimeInput />', () => {
     it('should accept abbreviated month name (ll format: "Sep 4, 1986")', async () => {
       const onChange = vi.fn()
       renderComponent(onChange)
-      const dateInput = screen.getByLabelText('date-input')
+      const dateInput = page.getByLabelText('date-input').element()
 
       await userEvent.type(dateInput, 'Sep 4, 1986')
       fireEvent.blur(dateInput)
 
-      await waitFor(() => {
-        expect(screen.queryByText('whoops')).not.toBeInTheDocument()
+      await vi.waitFor(() => {
+        expect(page.getByText('whoops').query()).not.toBeInTheDocument()
         expect(onChange).toHaveBeenCalled()
         expect(onChange.mock.calls[0][1]).toContain('1986-09-04')
       })
@@ -1073,13 +1081,13 @@ describe('<DateTimeInput />', () => {
     it('should accept numeric date with leading zeros (L format: "09/04/1986")', async () => {
       const onChange = vi.fn()
       renderComponent(onChange)
-      const dateInput = screen.getByLabelText('date-input')
+      const dateInput = page.getByLabelText('date-input').element()
 
       await userEvent.type(dateInput, '09/04/1986')
       fireEvent.blur(dateInput)
 
-      await waitFor(() => {
-        expect(screen.queryByText('whoops')).not.toBeInTheDocument()
+      await vi.waitFor(() => {
+        expect(page.getByText('whoops').query()).not.toBeInTheDocument()
         expect(onChange).toHaveBeenCalled()
         expect(onChange.mock.calls[0][1]).toContain('1986-09-04')
       })
@@ -1088,13 +1096,13 @@ describe('<DateTimeInput />', () => {
     it('should accept numeric date without leading zeros (l format: "9/4/1986")', async () => {
       const onChange = vi.fn()
       renderComponent(onChange)
-      const dateInput = screen.getByLabelText('date-input')
+      const dateInput = page.getByLabelText('date-input').element()
 
       await userEvent.type(dateInput, '9/4/1986')
       fireEvent.blur(dateInput)
 
-      await waitFor(() => {
-        expect(screen.queryByText('whoops')).not.toBeInTheDocument()
+      await vi.waitFor(() => {
+        expect(page.getByText('whoops').query()).not.toBeInTheDocument()
         expect(onChange).toHaveBeenCalled()
         expect(onChange.mock.calls[0][1]).toContain('1986-09-04')
       })
@@ -1103,13 +1111,13 @@ describe('<DateTimeInput />', () => {
     it('should accept date with time component (LLL format: "September 4, 1986 8:30 PM")', async () => {
       const onChange = vi.fn()
       renderComponent(onChange)
-      const dateInput = screen.getByLabelText('date-input')
+      const dateInput = page.getByLabelText('date-input').element()
 
       await userEvent.type(dateInput, 'September 4, 1986 8:30 PM')
       fireEvent.blur(dateInput)
 
-      await waitFor(() => {
-        expect(screen.queryByText('whoops')).not.toBeInTheDocument()
+      await vi.waitFor(() => {
+        expect(page.getByText('whoops').query()).not.toBeInTheDocument()
         expect(onChange).toHaveBeenCalled()
         expect(onChange.mock.calls[0][1]).toContain('1986-09-05')
       })
@@ -1117,7 +1125,7 @@ describe('<DateTimeInput />', () => {
   })
 
   it('should render the year picker in the calendar when withYearPicker is set', async () => {
-    render(
+    await render(
       <DateTimeInput
         description="date_time"
         dateRenderLabel="date-input"
@@ -1141,13 +1149,17 @@ describe('<DateTimeInput />', () => {
       />
     )
 
-    const calendarButton = screen.getByRole('button', { name: 'Open calendar' })
+    const calendarButton = page
+      .getByRole('button', { name: 'Open calendar' })
+      .element()
     await userEvent.click(calendarButton)
 
-    await waitFor(() => {
-      const yearPicker = screen.getByRole('combobox', {
-        description: 'Pick a year'
-      })
+    await vi.waitFor(() => {
+      const yearPicker = page
+        .getByRole('combobox', {
+          description: 'Pick a year'
+        })
+        .element()
       expect(yearPicker).toBeInTheDocument()
       expect(yearPicker).toHaveValue('2017')
     })
@@ -1155,7 +1167,7 @@ describe('<DateTimeInput />', () => {
 
   it('should call consumer onChange exactly once when typing a short-format date and blurring', async () => {
     const onChange = vi.fn()
-    render(
+    await render(
       <DateTimeInput
         description="date_time"
         screenReaderLabels={{
@@ -1173,12 +1185,12 @@ describe('<DateTimeInput />', () => {
         onChange={onChange}
       />
     )
-    const dateInput = screen.getByLabelText('date-input')
+    const dateInput = page.getByLabelText('date-input').element()
 
     await userEvent.type(dateInput, '9/1/2017')
     fireEvent.blur(dateInput)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(dateInput).toHaveValue('9/1/2017')
       expect(onChange).toHaveBeenCalledTimes(1)
       expect(onChange.mock.calls[0][1]).toContain('2017-09-01')
@@ -1200,8 +1212,8 @@ describe('<DateTimeInput />', () => {
       invalidDateTimeMessage: 'whoops'
     } as const
 
-    it('uses datePlaceholder when provided', () => {
-      render(
+    it('uses datePlaceholder when provided', async () => {
+      await render(
         <DateTimeInput
           {...defaultProps}
           locale="en-US"
@@ -1209,18 +1221,18 @@ describe('<DateTimeInput />', () => {
           datePlaceholder="Pick a date"
         />
       )
-      expect(screen.getByLabelText('date-input')).toHaveAttribute(
+      expect(page.getByLabelText('date-input').element()).toHaveAttribute(
         'placeholder',
         'Pick a date'
       )
     })
 
-    it('shows built-in format hint when datePlaceholder is omitted', () => {
-      render(
+    it('shows built-in format hint when datePlaceholder is omitted', async () => {
+      await render(
         <DateTimeInput {...defaultProps} locale="en-US" timezone="US/Eastern" />
       )
       expect(
-        screen.getByLabelText('date-input').getAttribute('placeholder')
+        page.getByLabelText('date-input').element().getAttribute('placeholder')
       ).toBeTruthy()
     })
   })

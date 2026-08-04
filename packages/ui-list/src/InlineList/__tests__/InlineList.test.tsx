@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-import '@testing-library/jest-dom'
-import { render, screen } from '@testing-library/react'
-import { vi } from 'vitest'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 import { InlineList } from '@instructure/ui-list/latest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
@@ -49,7 +49,7 @@ describe('<InlineList />', () => {
   })
 
   it('should render list items and filter out null/falsy children', async () => {
-    render(
+    await render(
       <InlineList>
         <InlineList.Item>List item 1</InlineList.Item>
         <InlineList.Item>List item 2</InlineList.Item>
@@ -59,13 +59,13 @@ describe('<InlineList />', () => {
         {false}
       </InlineList>
     )
-    const listItems = screen.getAllByRole('listitem')
+    const listItems = page.getByRole('listitem').elements()
 
     expect(listItems.length).toEqual(4)
   })
 
   it('should render a delimiter when delimiter="pipe"', async () => {
-    const { container } = render(
+    const { container } = await render(
       <InlineList delimiter="pipe">
         <InlineList.Item>List item 1</InlineList.Item>
         <InlineList.Item>List item 2</InlineList.Item>
@@ -84,7 +84,7 @@ describe('<InlineList />', () => {
   })
 
   it('should warn when itemSpacing is set when delimiter is set to anything other than none', async () => {
-    render(
+    await render(
       <InlineList delimiter="pipe" itemSpacing="large">
         <InlineList.Item>List item 1</InlineList.Item>
         <InlineList.Item>List item 2</InlineList.Item>
@@ -98,7 +98,7 @@ describe('<InlineList />', () => {
   })
 
   it('should render an ordered list', async () => {
-    render(
+    await render(
       <InlineList as="ol">
         <InlineList.Item>List item 1</InlineList.Item>
         <InlineList.Item>List item 2</InlineList.Item>
@@ -106,13 +106,13 @@ describe('<InlineList />', () => {
         <InlineList.Item>List item 4</InlineList.Item>
       </InlineList>
     )
-    const list = screen.getByRole('list')
+    const list = page.getByRole('list').element()
 
     expect(list.tagName).toBe('OL')
   })
 
   it('should meet a11y standards', async () => {
-    const { container } = render(
+    const { container } = await render(
       <InlineList>
         <InlineList.Item>List item 1</InlineList.Item>
         <InlineList.Item>List item 2</InlineList.Item>

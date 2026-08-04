@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-import '@testing-library/jest-dom'
-import { render, screen } from '@testing-library/react'
-import { vi } from 'vitest'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 import { List } from '@instructure/ui-list/latest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
@@ -49,7 +49,7 @@ describe('<List />', () => {
   })
 
   it('should render list items and filter out null/falsy children', async () => {
-    render(
+    await render(
       <List>
         <List.Item>List item 1</List.Item>
         <List.Item>List item 2</List.Item>
@@ -59,13 +59,13 @@ describe('<List />', () => {
         {false}
       </List>
     )
-    const listItems = screen.getAllByRole('listitem')
+    const listItems = page.getByRole('listitem').elements()
 
     expect(listItems.length).toEqual(4)
   })
 
   it('should warn when itemSpacing is set when delimiter is set to anything other than none', async () => {
-    render(
+    await render(
       <List delimiter="dashed" itemSpacing="large">
         <List.Item>List item 1</List.Item>
         <List.Item>List item 2</List.Item>
@@ -79,7 +79,7 @@ describe('<List />', () => {
   })
 
   it('should render an ordered list', async () => {
-    render(
+    await render(
       <List as="ol">
         <List.Item>List item 1</List.Item>
         <List.Item>List item 2</List.Item>
@@ -87,13 +87,13 @@ describe('<List />', () => {
         <List.Item>List item 4</List.Item>
       </List>
     )
-    const list = screen.getByRole('list')
+    const list = page.getByRole('list').element()
 
     expect(list.tagName).toBe('OL')
   })
 
   it('should meet a11y standards', async () => {
-    const { container } = render(
+    const { container } = await render(
       <List>
         <List.Item>List item 1</List.Item>
         <List.Item>List item 2</List.Item>

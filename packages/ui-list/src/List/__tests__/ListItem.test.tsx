@@ -22,24 +22,24 @@
  * SOFTWARE.
  */
 
-import '@testing-library/jest-dom'
-import { render, screen } from '@testing-library/react'
-import { vi } from 'vitest'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect, vi } from 'vitest'
 
 import { ListItem } from '@instructure/ui-list/latest'
 
 describe('<ListItem />', () => {
   it('should render children', async () => {
-    render(<ListItem>hello</ListItem>)
-    const listItem = screen.getByRole('listitem')
+    await render(<ListItem>hello</ListItem>)
+    const listItem = page.getByRole('listitem').element()
 
     expect(listItem).toHaveTextContent('hello')
   })
 
   it('should call elementRef', async () => {
     const elementRef = vi.fn()
-    render(<ListItem elementRef={elementRef}>List item</ListItem>)
-    const listItem = screen.getByRole('listitem')
+    await render(<ListItem elementRef={elementRef}>List item</ListItem>)
+    const listItem = page.getByRole('listitem').element()
 
     expect(elementRef).toHaveBeenCalledWith(listItem)
   })

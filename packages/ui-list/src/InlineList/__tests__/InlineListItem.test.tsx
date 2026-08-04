@@ -22,22 +22,22 @@
  * SOFTWARE.
  */
 
-import '@testing-library/jest-dom'
-import { render, screen } from '@testing-library/react'
-import { vi } from 'vitest'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect, vi } from 'vitest'
 
 import { InlineListItem } from '@instructure/ui-list/latest'
 
 describe('<InlineListItem />', () => {
   it('should render children', async () => {
-    render(<InlineListItem>hello</InlineListItem>)
-    const listItem = screen.getByRole('listitem')
+    await render(<InlineListItem>hello</InlineListItem>)
+    const listItem = page.getByRole('listitem').element()
 
     expect(listItem).toHaveTextContent('hello')
   })
 
   it('should render delimiter', async () => {
-    const { container } = render(
+    const { container } = await render(
       <InlineListItem delimiter="slash">List item</InlineListItem>
     )
     const listItem = container.querySelector('span[class$="delimiter"]')
@@ -47,8 +47,10 @@ describe('<InlineListItem />', () => {
 
   it('should call elementRef', async () => {
     const elementRef = vi.fn()
-    render(<InlineListItem elementRef={elementRef}>List item</InlineListItem>)
-    const listItem = screen.getByRole('listitem')
+    await render(
+      <InlineListItem elementRef={elementRef}>List item</InlineListItem>
+    )
+    const listItem = page.getByRole('listitem').element()
 
     expect(elementRef).toHaveBeenCalledWith(listItem)
   })

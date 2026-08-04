@@ -23,11 +23,10 @@
  */
 
 import { createRef } from 'react'
-import { render, screen, waitFor } from '@testing-library/react'
-import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
-import userEvent from '@testing-library/user-event'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import { Select } from '@instructure/ui-select/latest'
 
 import * as utils from '@instructure/ui-utils'
@@ -315,7 +314,7 @@ describe('<Select />', () => {
   it('should not crash for weird option ids', async () => {
     const weirdID = 'some_`w@ei:r|!@#$%^&*(()|\\.l/d"id'
     vi.useFakeTimers()
-    const { container } = render(
+    const { container } = await render(
       <Select
         renderLabel="Choose an option"
         scrollToHighlightedOption
@@ -336,7 +335,7 @@ describe('<Select />', () => {
   })
 
   it('should have role button in Safari without onInputChange', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Select renderLabel="Choose an option">{getOptions()}</Select>
     )
     const input = container.querySelector('input')
@@ -346,7 +345,7 @@ describe('<Select />', () => {
   it('should have role combobox in different browsers than Safari without onInputChange', async () => {
     mockUtils.isSafari = vi.fn(() => false)
 
-    const { container } = render(
+    const { container } = await render(
       <Select renderLabel="Choose an option">{getOptions()}</Select>
     )
     const input = container.querySelector('input')
@@ -354,7 +353,7 @@ describe('<Select />', () => {
   })
 
   it('should have role combobox with onInputChange', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Select renderLabel="Choose an option" onInputChange={() => {}}>
         {getOptions()}
       </Select>
@@ -367,7 +366,7 @@ describe('<Select />', () => {
     it('keeps meaningful renderBeforeInput content in the accessible name', async () => {
       // e.g. a country dial-code prefix rendered before the input: the Select
       // must not strip it from the name (it is the only place it is exposed).
-      const { container } = render(
+      const { container } = await render(
         <Select renderLabel="Country code" renderBeforeInput={<span>+1</span>}>
           {getOptions()}
         </Select>
@@ -380,7 +379,7 @@ describe('<Select />', () => {
     })
 
     it('lets a consumer keep decorative pills out of the name via aria-label, while each pill still announces "Remove"', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Select
           renderLabel="Multiple Select"
           aria-label="Multiple Select"
@@ -398,13 +397,13 @@ describe('<Select />', () => {
       expect(input).toHaveAccessibleName('Multiple Select')
 
       // the pill keeps its own "Remove ..." accessible name
-      const pill = screen.getByRole('button', { name: 'Remove foo' })
+      const pill = page.getByRole('button', { name: 'Remove foo' }).element()
       expect(pill).toHaveAccessibleName('Remove foo')
     })
   })
 
   it('should render an input and a list', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Select
         renderLabel="Choose an option"
         isShowingOptions
@@ -414,12 +413,12 @@ describe('<Select />', () => {
       </Select>
     )
 
-    const select = screen.getByTestId('subidubi')
-    const label = screen.getByLabelText('Choose an option')
+    const select = page.getByTestId('subidubi').element()
+    const label = page.getByLabelText('Choose an option').element()
     const input = container.querySelector('input[id^="Select_"]')
-    const list = screen.getByRole('listbox')
+    const list = page.getByRole('listbox').element()
 
-    const options = screen.getAllByRole('option')
+    const options = page.getByRole('option').elements()
     const optionsCount = defaultOptions.length
 
     expect(select).toBeInTheDocument()
@@ -434,7 +433,7 @@ describe('<Select />', () => {
   })
 
   it('should render groups', async () => {
-    render(
+    await render(
       <Select renderLabel="Choose an option" isShowingOptions>
         <Select.Option id="0">ungrouped option one</Select.Option>
         <Select.Group renderLabel="Group one">
@@ -447,8 +446,8 @@ describe('<Select />', () => {
       </Select>
     )
 
-    const groups = screen.getAllByRole('group')
-    const groupLabel = screen.getByText('Group one')
+    const groups = page.getByRole('group').elements()
+    const groupLabel = page.getByText('Group one').element()
 
     expect(groupLabel).toHaveAttribute('role', 'presentation')
     expect(groups[0].getAttribute('aria-labelledby')).toEqual(
@@ -458,30 +457,30 @@ describe('<Select />', () => {
   })
 
   it('should ignore invalid children', async () => {
-    render(
+    await render(
       <Select renderLabel="Choose an option" isShowingOptions>
         <Select.Option id="0">valid</Select.Option>
         <div>invalid</div>
       </Select>
     )
-    const invalidChild = screen.queryByText('invalid')
+    const invalidChild = page.getByText('invalid').query()
 
     expect(invalidChild).not.toBeInTheDocument()
   })
 
   it('should provide a focus method', async () => {
     const ref = createRef<Select>()
-    render(
+    await render(
       <Select renderLabel="Choose an option" ref={ref}>
         {getOptions()}
       </Select>
     )
 
-    const input = screen.getByLabelText('Choose an option')
+    const input = page.getByLabelText('Choose an option').element()
 
     ref.current?.focus()
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(document.activeElement).toBe(input)
     })
   })
@@ -489,7 +488,7 @@ describe('<Select />', () => {
   it('should provide a focused getter', async () => {
     const ref = createRef<Select>()
 
-    render(
+    await render(
       <Select renderLabel="Choose an option" ref={ref}>
         {getOptions()}
       </Select>
@@ -498,22 +497,24 @@ describe('<Select />', () => {
 
     ref.current?.focus()
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(ref.current?.focused).toBe(true)
     })
   })
 
   describe('input', () => {
-    it('should render with a generated id by default', () => {
-      const { container } = render(<Select renderLabel="Choose an option" />)
+    it('should render with a generated id by default', async () => {
+      const { container } = await render(
+        <Select renderLabel="Choose an option" />
+      )
       const input = container.querySelector('input[id^="Select_"]')
 
       expect(input).toBeInTheDocument()
       expect(input).toHaveAttribute('id', expect.stringContaining('Select_'))
     })
 
-    it('should render with a custom id if given', () => {
-      const { container } = render(
+    it('should render with a custom id if given', async () => {
+      const { container } = await render(
         <Select renderLabel="Choose an option" id="customSelect" />
       )
       const input = container.querySelector('input[id^="customSelect"]')
@@ -522,129 +523,133 @@ describe('<Select />', () => {
       expect(input!.getAttribute('id')).toEqual('customSelect')
     })
 
-    it('should render readonly when interaction="enabled" with no onInputChange', () => {
-      render(<Select renderLabel="Choose an option" />)
-      const input = screen.getByLabelText('Choose an option')
+    it('should render readonly when interaction="enabled" with no onInputChange', async () => {
+      await render(<Select renderLabel="Choose an option" />)
+      const input = page.getByLabelText('Choose an option').element()
 
       expect(input).toHaveAttribute('readonly')
       expect(input).not.toHaveAttribute('disabled')
     })
 
-    it('should not render readonly when interaction="enabled" with onInputChange', () => {
-      render(<Select renderLabel="Choose an option" onInputChange={() => {}} />)
-      const input = screen.getByLabelText('Choose an option')
+    it('should not render readonly when interaction="enabled" with onInputChange', async () => {
+      await render(
+        <Select renderLabel="Choose an option" onInputChange={() => {}} />
+      )
+      const input = page.getByLabelText('Choose an option').element()
 
       expect(input).not.toHaveAttribute('readonly')
       expect(input).not.toHaveAttribute('disabled')
     })
 
-    it('should render readonly when interaction="readonly"', () => {
-      render(
+    it('should render readonly when interaction="readonly"', async () => {
+      await render(
         <Select
           renderLabel="Choose an option"
           interaction="readonly"
           onInputChange={() => {}}
         />
       )
-      const input = screen.getByLabelText('Choose an option')
+      const input = page.getByLabelText('Choose an option').element()
 
       expect(input).toHaveAttribute('readonly')
       expect(input).not.toHaveAttribute('disabled')
     })
 
-    it('should render disabled when interaction="disabled"', () => {
-      render(
+    it('should render disabled when interaction="disabled"', async () => {
+      await render(
         <Select
           renderLabel="Choose an option"
           interaction="disabled"
           onInputChange={() => {}}
         />
       )
-      const input = screen.getByLabelText('Choose an option')
+      const input = page.getByLabelText('Choose an option').element()
 
       expect(input).toHaveAttribute('disabled')
       expect(input).not.toHaveAttribute('readonly')
     })
 
-    it('should not render readonly when disabled', () => {
-      render(<Select renderLabel="Choose an option" interaction="disabled" />)
-      const input = screen.getByLabelText('Choose an option')
+    it('should not render readonly when disabled', async () => {
+      await render(
+        <Select renderLabel="Choose an option" interaction="disabled" />
+      )
+      const input = page.getByLabelText('Choose an option').element()
 
       expect(input).toHaveAttribute('disabled')
       expect(input).not.toHaveAttribute('readonly')
     })
 
-    it('should render required when isRequired={true}', () => {
-      render(<Select renderLabel="Choose an option" isRequired />)
-      const input = screen.getByLabelText('Choose an option *')
+    it('should render required when isRequired={true}', async () => {
+      await render(<Select renderLabel="Choose an option" isRequired />)
+      const input = page.getByLabelText('Choose an option *').element()
 
       expect(input).toHaveAttribute('required')
     })
 
-    it('should render with inputValue', () => {
+    it('should render with inputValue', async () => {
       const val = 'hello world'
 
-      render(<Select renderLabel="Choose an option" inputValue={val} />)
-      const input = screen.getByLabelText('Choose an option')
+      await render(<Select renderLabel="Choose an option" inputValue={val} />)
+      const input = page.getByLabelText('Choose an option').element()
 
       expect(input).toHaveAttribute('value', val)
     })
 
-    it('should set aria-activedescendant based on the highlighted option', () => {
-      render(
+    it('should set aria-activedescendant based on the highlighted option', async () => {
+      await render(
         <Select renderLabel="Choose an option" isShowingOptions>
           {getOptions(defaultOptions[1])}
         </Select>
       )
-      const input = screen.getByLabelText('Choose an option')
+      const input = page.getByLabelText('Choose an option').element()
 
       expect(input).toHaveAttribute('aria-activedescendant', defaultOptions[1])
     })
 
-    it('should not set aria-activedescendant when not showing options', () => {
-      render(
+    it('should not set aria-activedescendant when not showing options', async () => {
+      await render(
         <Select renderLabel="Choose an option">
           {getOptions(defaultOptions[1])}
         </Select>
       )
-      const input = screen.getByLabelText('Choose an option')
+      const input = page.getByLabelText('Choose an option').element()
 
       expect(input).not.toHaveAttribute('aria-activedescendant')
     })
 
-    it('should allow assistive text', () => {
-      render(
+    it('should allow assistive text', async () => {
+      await render(
         <Select renderLabel="Choose an option" assistiveText="hello world">
           {getOptions()}
         </Select>
       )
-      const input = screen.getByLabelText('Choose an option')
-      const assistiveText = screen.getByText('hello world')
+      const input = page.getByLabelText('Choose an option').element()
+      const assistiveText = page.getByText('hello world').element()
       const assistiveTextId = assistiveText.getAttribute('id')
 
       expect(input).toHaveAttribute('aria-describedby', assistiveTextId)
     })
 
-    it('should allow custom props to pass through', () => {
-      render(
+    it('should allow custom props to pass through', async () => {
+      await render(
         <Select renderLabel="Choose an option" data-custom-attr="true">
           {getOptions()}
         </Select>
       )
-      const input = screen.getByLabelText('Choose an option')
+      const input = page.getByLabelText('Choose an option').element()
 
       expect(input).toHaveAttribute('data-custom-attr', 'true')
     })
 
-    it('should allow override of autoComplete prop', () => {
-      const { rerender } = render(
+    it('should allow override of autoComplete prop', async () => {
+      const { rerender } = await render(
         <Select renderLabel="Choose an option">{getOptions()}</Select>
       )
-      const input = screen.getByLabelText('Choose an option')
+      const input = page.getByLabelText('Choose an option').element()
 
       expect(input).toHaveAttribute('autocomplete', 'off')
 
-      rerender(
+      await rerender(
         <Select renderLabel="Choose an option" autoComplete="false">
           {getOptions()}
         </Select>
@@ -656,21 +661,21 @@ describe('<Select />', () => {
     it('should provide a ref to the input element', async () => {
       const inputRef = vi.fn()
 
-      render(
+      await render(
         <Select renderLabel="Choose an option" inputRef={inputRef}>
           {getOptions()}
         </Select>
       )
 
-      const input = screen.getByLabelText('Choose an option')
+      const input = page.getByLabelText('Choose an option').element()
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(inputRef).toHaveBeenCalledWith(input)
       })
     })
 
     it("should not render option's before content in input field when isOptionContentAppliedToInput is set to false", async () => {
-      const { container } = render(
+      const { container } = await render(
         <Select
           renderLabel="Choose an option"
           isOptionContentAppliedToInput={false}
@@ -688,7 +693,7 @@ describe('<Select />', () => {
     })
 
     it('should render arrow in input field when isOptionContentAppliedToInput is set to false', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Select
           renderLabel="Choose an option"
           isOptionContentAppliedToInput={false}
@@ -706,7 +711,7 @@ describe('<Select />', () => {
     })
 
     it("should render option's before content in input field when isOptionContentAppliedToInput is set to true", async () => {
-      const { container } = render(
+      const { container } = await render(
         <Select
           renderLabel="Choose an option"
           isOptionContentAppliedToInput={true}
@@ -724,7 +729,7 @@ describe('<Select />', () => {
     })
 
     it('should render arrow icon when isOptionContentAppliedToInput is set to true with before content', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Select
           renderLabel="Choose an option"
           isOptionContentAppliedToInput={true}
@@ -742,7 +747,7 @@ describe('<Select />', () => {
     })
 
     it("should render option's after content in input field when isOptionContentAppliedToInput is set to true", async () => {
-      const { container } = render(
+      const { container } = await render(
         <Select
           renderLabel="Choose an option"
           isOptionContentAppliedToInput={true}
@@ -759,7 +764,7 @@ describe('<Select />', () => {
     })
 
     it("should render option's before content in input field when isOptionContentAppliedToInput is set to true but renderBeforeInput is also set", async () => {
-      const { container } = render(
+      const { container } = await render(
         <Select
           renderLabel="Choose an option"
           isOptionContentAppliedToInput={true}
@@ -778,7 +783,7 @@ describe('<Select />', () => {
     })
 
     it("should render option's after content in input field when isOptionContentAppliedToInput is set to true but renderAfterInput is also set", async () => {
-      const { container } = render(
+      const { container } = await render(
         <Select
           renderLabel="Choose an option"
           isOptionContentAppliedToInput={true}
@@ -796,7 +801,7 @@ describe('<Select />', () => {
     })
 
     it("should not render option's before content in input field when isOptionContentAppliedToInput is set to true but inputValue is not set", async () => {
-      const { container } = render(
+      const { container } = await render(
         <Select
           renderLabel="Choose an option"
           isOptionContentAppliedToInput={true}
@@ -813,7 +818,7 @@ describe('<Select />', () => {
     })
 
     it("should render option's before content in input field when isOptionContentAppliedToInput is set to true and both optionBeforeContent and optionAfterContent are provided", async () => {
-      const { container } = render(
+      const { container } = await render(
         <Select
           renderLabel="Choose an option"
           isOptionContentAppliedToInput={true}
@@ -831,7 +836,7 @@ describe('<Select />', () => {
     })
 
     it("should render option's after content in input field when isOptionContentAppliedToInput is set to true and both optionBeforeContent and optionAfterContent are provided", async () => {
-      const { container } = render(
+      const { container } = await render(
         <Select
           renderLabel="Choose an option"
           isOptionContentAppliedToInput={true}
@@ -848,7 +853,7 @@ describe('<Select />', () => {
     })
 
     it('should render arrow in input field when isOptionContentAppliedToInput is set to true but inputValue is not set', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Select
           renderLabel="Choose an option"
           isOptionContentAppliedToInput={true}
@@ -866,7 +871,7 @@ describe('<Select />', () => {
     })
 
     it("should not render option's after content in input field when isOptionContentAppliedToInput is set to true but inputValue is not set", async () => {
-      const { container } = render(
+      const { container } = await render(
         <Select
           renderLabel="Choose an option"
           isOptionContentAppliedToInput={true}
@@ -883,7 +888,7 @@ describe('<Select />', () => {
     })
 
     it("should render option's before content input field when isOptionContentAppliedToInput is set to true with group options", async () => {
-      const { container } = render(
+      const { container } = await render(
         <Select
           renderLabel="Choose an option"
           isOptionContentAppliedToInput={true}
@@ -901,7 +906,7 @@ describe('<Select />', () => {
     })
 
     it('should render arrow icon when isOptionContentAppliedToInput is set to true with before content and group options', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Select
           renderLabel="Choose an option"
           isOptionContentAppliedToInput={true}
@@ -919,7 +924,7 @@ describe('<Select />', () => {
     })
 
     it("should render option's after content input field when isOptionContentAppliedToInput is set to true with group options", async () => {
-      const { container } = render(
+      const { container } = await render(
         <Select
           renderLabel="Choose an option"
           isOptionContentAppliedToInput={true}
@@ -938,36 +943,36 @@ describe('<Select />', () => {
   })
 
   describe('list', () => {
-    it('should set aria-selected on options with isSelected={true}', () => {
-      render(
+    it('should set aria-selected on options with isSelected={true}', async () => {
+      await render(
         <Select renderLabel="Choose an option" isShowingOptions>
           {getOptions(undefined, defaultOptions[1])}
         </Select>
       )
-      const options = screen.getAllByRole('option')
+      const options = page.getByRole('option').elements()
 
       expect(options[1].getAttribute('aria-selected')).toEqual('true')
     })
 
-    it('should set aria-disabled on options when isDisabled={true}', () => {
-      render(
+    it('should set aria-disabled on options when isDisabled={true}', async () => {
+      await render(
         <Select renderLabel="Choose an option" isShowingOptions>
           {getOptions(undefined, undefined, defaultOptions[2])}
         </Select>
       )
-      const options = screen.getAllByRole('option')
+      const options = page.getByRole('option').elements()
 
       expect(options[0]).not.toHaveAttribute('aria-disabled')
       expect(options[2]).toHaveAttribute('aria-disabled', 'true')
     })
 
     it('should set list element role to "listbox"', async () => {
-      render(
+      await render(
         <Select renderLabel="Choose an option" isShowingOptions>
           {getOptions()}
         </Select>
       )
-      const listbox = screen.getByRole('listbox')
+      const listbox = page.getByRole('listbox').element()
 
       expect(listbox).toBeInTheDocument()
       expect(listbox.tagName).toBe('UL')
@@ -976,7 +981,7 @@ describe('<Select />', () => {
     it('should provide a ref to the list element', async () => {
       const listRef = vi.fn()
 
-      render(
+      await render(
         <Select
           renderLabel="Choose an option"
           isShowingOptions
@@ -986,9 +991,9 @@ describe('<Select />', () => {
         </Select>
       )
 
-      const listbox = screen.getByRole('listbox')
+      const listbox = page.getByRole('listbox').element()
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(listRef).toHaveBeenCalledWith(listbox)
       })
     })
@@ -999,7 +1004,7 @@ describe('<Select />', () => {
       it('when root is clicked', async () => {
         const onRequestShowOptions = vi.fn()
 
-        const { container, rerender } = render(
+        const { container, rerender } = await render(
           <Select
             renderLabel="Choose an option"
             onRequestShowOptions={onRequestShowOptions}
@@ -1009,22 +1014,22 @@ describe('<Select />', () => {
         )
 
         const icon = container.querySelector('svg[name="ChevronDown"]')
-        const label = screen.getByText('Choose an option')
+        const label = page.getByText('Choose an option').element()
 
         expect(icon).toBeInTheDocument()
         expect(label).toBeInTheDocument()
 
         await userEvent.click(label)
-        await waitFor(() => {
+        await vi.waitFor(() => {
           expect(onRequestShowOptions).toHaveBeenCalledTimes(1)
         })
 
         await userEvent.click(icon!)
-        await waitFor(() => {
+        await vi.waitFor(() => {
           expect(onRequestShowOptions).toHaveBeenCalledTimes(2)
         })
 
-        rerender(
+        await rerender(
           <Select
             renderLabel="Choose an option"
             onRequestShowOptions={onRequestShowOptions}
@@ -1035,7 +1040,7 @@ describe('<Select />', () => {
         )
 
         await userEvent.click(label)
-        await waitFor(() => {
+        await vi.waitFor(() => {
           expect(onRequestShowOptions).toHaveBeenCalledTimes(2)
         })
       })
@@ -1043,7 +1048,7 @@ describe('<Select />', () => {
       it('when input is clicked', async () => {
         const onRequestShowOptions = vi.fn()
 
-        const { rerender } = render(
+        const { rerender } = await render(
           <Select
             renderLabel="Choose an option"
             onRequestShowOptions={onRequestShowOptions}
@@ -1051,14 +1056,14 @@ describe('<Select />', () => {
             {getOptions()}
           </Select>
         )
-        const input = screen.getByLabelText('Choose an option')
+        const input = page.getByLabelText('Choose an option').element()
 
         await userEvent.click(input)
-        await waitFor(() => {
+        await vi.waitFor(() => {
           expect(onRequestShowOptions).toHaveBeenCalledTimes(1)
         })
 
-        rerender(
+        await rerender(
           <Select
             renderLabel="Choose an option"
             onRequestShowOptions={onRequestShowOptions}
@@ -1069,7 +1074,7 @@ describe('<Select />', () => {
         )
 
         await userEvent.click(input)
-        await waitFor(() => {
+        await vi.waitFor(() => {
           expect(onRequestShowOptions).toHaveBeenCalledTimes(1)
         })
       })
@@ -1077,7 +1082,7 @@ describe('<Select />', () => {
       it('when up/down arrows are pressed', async () => {
         const onRequestShowOptions = vi.fn()
 
-        render(
+        await render(
           <Select
             renderLabel="Choose an option"
             onRequestShowOptions={onRequestShowOptions}
@@ -1086,15 +1091,15 @@ describe('<Select />', () => {
           </Select>
         )
 
-        const input = screen.getByLabelText('Choose an option')
+        const input = page.getByLabelText('Choose an option').element()
 
         await userEvent.type(input, '{arrowdown}')
-        await waitFor(() => {
+        await vi.waitFor(() => {
           expect(onRequestShowOptions).toHaveBeenCalledTimes(1)
         })
 
         await userEvent.type(input, '{arrowup}')
-        await waitFor(() => {
+        await vi.waitFor(() => {
           expect(onRequestShowOptions).toHaveBeenCalledTimes(2)
         })
       })
@@ -1102,7 +1107,7 @@ describe('<Select />', () => {
       it('when space is pressed', async () => {
         const onRequestShowOptions = vi.fn()
 
-        const { rerender } = render(
+        const { rerender } = await render(
           <Select
             renderLabel="Choose an option"
             onRequestShowOptions={onRequestShowOptions}
@@ -1111,14 +1116,14 @@ describe('<Select />', () => {
           </Select>
         )
 
-        const input = screen.getByLabelText('Choose an option')
+        const input = page.getByLabelText('Choose an option').element()
 
         await userEvent.type(input, '{space}')
-        await waitFor(() => {
+        await vi.waitFor(() => {
           expect(onRequestShowOptions).toHaveBeenCalledTimes(1)
         })
 
-        rerender(
+        await rerender(
           <Select
             renderLabel="Choose an option"
             onRequestShowOptions={onRequestShowOptions}
@@ -1129,7 +1134,7 @@ describe('<Select />', () => {
         )
 
         await userEvent.type(input, '{space}')
-        await waitFor(() => {
+        await vi.waitFor(() => {
           expect(onRequestShowOptions).toHaveBeenCalledTimes(1)
         })
       })
@@ -1139,7 +1144,7 @@ describe('<Select />', () => {
       it('when root is clicked and isShowingOptions is true', async () => {
         const onRequestHideOptions = vi.fn()
 
-        const { container } = render(
+        const { container } = await render(
           <Select
             renderLabel="Choose an option"
             isShowingOptions
@@ -1150,18 +1155,18 @@ describe('<Select />', () => {
         )
 
         const icon = container.querySelector('svg[name="ChevronUp"]')
-        const label = screen.getByText('Choose an option')
+        const label = page.getByText('Choose an option').element()
 
         expect(icon).toBeInTheDocument()
         expect(label).toBeInTheDocument()
 
         await userEvent.click(label)
-        await waitFor(() => {
+        await vi.waitFor(() => {
           expect(onRequestHideOptions).toHaveBeenCalledTimes(1)
         })
 
         await userEvent.click(icon!)
-        await waitFor(() => {
+        await vi.waitFor(() => {
           expect(onRequestHideOptions).toHaveBeenCalledTimes(2)
         })
       })
@@ -1169,7 +1174,7 @@ describe('<Select />', () => {
       it('when root is clicked and isShowingOptions is false should NOT fire onRequestHideOptions', async () => {
         const onRequestHideOptions = vi.fn()
 
-        render(
+        await render(
           <Select
             renderLabel="Choose an option"
             isShowingOptions={false}
@@ -1179,12 +1184,12 @@ describe('<Select />', () => {
           </Select>
         )
 
-        const label = screen.getByText('Choose an option')
+        const label = page.getByText('Choose an option').element()
 
         expect(label).toBeInTheDocument()
 
         await userEvent.click(label)
-        await waitFor(() => {
+        await vi.waitFor(() => {
           expect(onRequestHideOptions).not.toHaveBeenCalled()
         })
       })
@@ -1192,7 +1197,7 @@ describe('<Select />', () => {
       it('when input is clicked', async () => {
         const onRequestHideOptions = vi.fn()
 
-        const { rerender } = render(
+        const { rerender } = await render(
           <Select
             renderLabel="Choose an option"
             isShowingOptions
@@ -1202,14 +1207,14 @@ describe('<Select />', () => {
           </Select>
         )
 
-        const input = screen.getByLabelText('Choose an option')
+        const input = page.getByLabelText('Choose an option').element()
 
         await userEvent.click(input)
-        await waitFor(() => {
+        await vi.waitFor(() => {
           expect(onRequestHideOptions).toHaveBeenCalledTimes(1)
         })
 
-        rerender(
+        await rerender(
           <Select
             renderLabel="Choose an option"
             isShowingOptions={false}
@@ -1219,7 +1224,7 @@ describe('<Select />', () => {
           </Select>
         )
         await userEvent.click(input)
-        await waitFor(() => {
+        await vi.waitFor(() => {
           expect(onRequestHideOptions).toHaveBeenCalledTimes(1)
         })
       })
@@ -1227,7 +1232,7 @@ describe('<Select />', () => {
       it('when escape is pressed', async () => {
         const onRequestHideOptions = vi.fn()
 
-        render(
+        await render(
           <Select
             renderLabel="Choose an option"
             isShowingOptions
@@ -1237,10 +1242,10 @@ describe('<Select />', () => {
           </Select>
         )
 
-        const input = screen.getByLabelText('Choose an option')
+        const input = page.getByLabelText('Choose an option').element()
 
         await userEvent.type(input, '{esc}')
-        await waitFor(() => {
+        await vi.waitFor(() => {
           expect(onRequestHideOptions).toHaveBeenCalledTimes(1)
         })
       })
@@ -1250,7 +1255,7 @@ describe('<Select />', () => {
       it('when options are hovered', async () => {
         const onRequestHighlightOption = vi.fn()
 
-        render(
+        await render(
           <Select
             renderLabel="Choose an option"
             isShowingOptions
@@ -1259,10 +1264,10 @@ describe('<Select />', () => {
             {getOptions()}
           </Select>
         )
-        const options = screen.getAllByRole('option')
+        const options = page.getByRole('option').elements()
 
         await userEvent.hover(options[0])
-        await waitFor(() => {
+        await vi.waitFor(() => {
           expect(onRequestHighlightOption).toHaveBeenCalledWith(
             expect.anything(),
             expect.objectContaining({
@@ -1272,7 +1277,7 @@ describe('<Select />', () => {
         })
 
         await userEvent.hover(options[1])
-        await waitFor(() => {
+        await vi.waitFor(() => {
           expect(onRequestHighlightOption).toHaveBeenCalledWith(
             expect.anything(),
             expect.objectContaining({
@@ -1287,16 +1292,16 @@ describe('<Select />', () => {
       it('should fire onInputChange when input is typed in', async () => {
         const onInputChange = vi.fn()
 
-        render(
+        await render(
           <Select renderLabel="Choose an option" onInputChange={onInputChange}>
             {getOptions()}
           </Select>
         )
 
-        const input = screen.getByLabelText('Choose an option')
+        const input = page.getByLabelText('Choose an option').element()
 
         await userEvent.type(input, 'h')
-        await waitFor(() => {
+        await vi.waitFor(() => {
           expect(onInputChange).toHaveBeenCalled()
         })
       })
@@ -1304,16 +1309,16 @@ describe('<Select />', () => {
       it('should fire onFocus when input gains focus', async () => {
         const onFocus = vi.fn()
 
-        render(
+        await render(
           <Select renderLabel="Choose an option" onFocus={onFocus}>
             {getOptions()}
           </Select>
         )
 
-        const input = screen.getByLabelText('Choose an option')
+        const input = page.getByLabelText('Choose an option').element()
 
         input.focus()
-        await waitFor(() => {
+        await vi.waitFor(() => {
           expect(onFocus).toHaveBeenCalled()
         })
       })

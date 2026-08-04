@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import '@testing-library/jest-dom'
+import { describe, it, expect, beforeAll } from 'vitest'
 import { isDefinedCustomElement } from '../isDefinedCustomElement.js'
 
 class TestElement extends HTMLElement {}

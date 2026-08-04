@@ -22,29 +22,29 @@
  * SOFTWARE.
  */
 
-import { render } from '@testing-library/react'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { describe, it, expect } from 'vitest'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { Text } from '@instructure/ui-text/latest'
 
 describe('<Text />', () => {
   it('should render', async () => {
-    const { container } = render(<Text />)
+    const { container } = await render(<Text />)
     const text = container.querySelector("span[class$='-text']")
 
     expect(text).toBeInTheDocument()
   })
 
   it('should meet a11y standards', async () => {
-    const { container } = render(<Text />)
+    const { container } = await render(<Text />)
     const axeCheck = await runAxeCheck(container)
 
     expect(axeCheck).toBe(true)
   })
 
   it('should render with the specified tag when `as` prop is set', async () => {
-    const { container } = render(<Text as="li" />)
+    const { container } = await render(<Text as="li" />)
     const text = container.querySelector("[class$='-text']")
 
     expect(text?.tagName).toBe('LI')

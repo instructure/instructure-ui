@@ -22,14 +22,14 @@
  * SOFTWARE.
  */
 
-import { render } from '@testing-library/react'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { describe, it, expect } from 'vitest'
 import { findTabbable } from '../findTabbable.js'
 
 describe('findTabbable', () => {
   describe('tabbable content', () => {
-    it('should find tabbable descendants', () => {
-      const { container } = render(
+    it('should find tabbable descendants', async () => {
+      const { container } = await render(
         <div>
           <a href="https://instructure-test">Tabbable</a>
           <div>Not Tabbable</div>
@@ -48,9 +48,9 @@ describe('findTabbable', () => {
   })
 
   describe('tabbable root', () => {
-    it('should search the root node when shouldSearchRootNode is set', () => {
+    it('should search the root node when shouldSearchRootNode is set', async () => {
       const shouldSearchRootNode = true
-      const { container } = render(
+      const { container } = await render(
         <button>
           <span>hello</span>
         </button>

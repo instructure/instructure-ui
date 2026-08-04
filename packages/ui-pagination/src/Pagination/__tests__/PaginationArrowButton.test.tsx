@@ -22,17 +22,16 @@
  * SOFTWARE.
  */
 
-import { render, screen } from '@testing-library/react'
-import { vi } from 'vitest'
-
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect, vi } from 'vitest'
 import { PaginationArrowButton } from '../v2/PaginationArrowButton/index.js'
 
 describe('<PaginationArrowButton />', () => {
   it('should render', async () => {
-    render(<PaginationArrowButton direction="prev" label="Label" />)
+    await render(<PaginationArrowButton direction="prev" label="Label" />)
 
-    const button = screen.getByRole('button', { name: 'Label' })
+    const button = page.getByRole('button', { name: 'Label' }).element()
 
     expect(button).toBeInTheDocument()
   })
@@ -40,14 +39,14 @@ describe('<PaginationArrowButton />', () => {
   it('should provide a ref to the button element', async () => {
     const buttonRef = vi.fn()
 
-    render(
+    await render(
       <PaginationArrowButton
         direction="prev"
         label="Label"
         buttonRef={buttonRef}
       />
     )
-    const button = screen.getByRole('button', { name: 'Label' })
+    const button = page.getByRole('button', { name: 'Label' }).element()
 
     expect(buttonRef).toHaveBeenCalledWith(button)
   })

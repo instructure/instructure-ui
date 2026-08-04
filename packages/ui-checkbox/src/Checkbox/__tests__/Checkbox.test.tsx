@@ -23,10 +23,10 @@
  */
 
 import { createRef } from 'react'
-import { fireEvent, render, screen, waitFor } from '@testing-library/react'
-import { vi } from 'vitest'
-import userEvent from '@testing-library/user-event'
-import '@testing-library/jest-dom'
+import { fireEvent } from '@testing-library/dom'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { Checkbox } from '@instructure/ui-checkbox/latest'
@@ -72,7 +72,7 @@ describe('<Checkbox />', () => {
 
   it('renders an input with type "checkbox"', () => {
     renderCheckbox()
-    const inputElem = screen.getByRole('checkbox')
+    const inputElem = page.getByRole('checkbox').element()
 
     expect(inputElem).toBeInTheDocument()
     expect(inputElem.tagName).toBe('INPUT')
@@ -90,7 +90,7 @@ describe('<Checkbox />', () => {
     expect(svgElement).not.toBeInTheDocument()
 
     await userEvent.click(checkboxElement!)
-    await waitFor(() => {
+    await vi.waitFor(() => {
       const svgElementAfterClick = container.querySelector('svg')
       expect(svgElementAfterClick).toBeInTheDocument()
     })
@@ -99,7 +99,7 @@ describe('<Checkbox />', () => {
   it('`simple` variant supports indeterminate/mixed state', () => {
     renderCheckbox({ variant: 'simple', indeterminate: true })
 
-    const inputElem = screen.getByRole('checkbox')
+    const inputElem = page.getByRole('checkbox').element()
 
     expect(inputElem).toBeInTheDocument()
     expect(inputElem).toHaveAttribute('aria-checked', 'mixed')
@@ -108,7 +108,7 @@ describe('<Checkbox />', () => {
   it('should provide an inputRef prop', async () => {
     const inputRef = vi.fn()
     renderCheckbox({ inputRef })
-    const input = screen.getByRole('checkbox')
+    const input = page.getByRole('checkbox').element()
 
     expect(inputRef).toHaveBeenCalledWith(input)
   })
@@ -118,11 +118,11 @@ describe('<Checkbox />', () => {
       const onClick = vi.fn()
       const onChange = vi.fn()
       renderCheckbox({ onClick, onChange })
-      const checkboxElement = screen.getByRole('checkbox')
+      const checkboxElement = page.getByRole('checkbox').element()
 
       await userEvent.click(checkboxElement)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onClick).toHaveBeenCalled()
         expect(onChange).toHaveBeenCalled()
       })
@@ -132,11 +132,11 @@ describe('<Checkbox />', () => {
       const onClick = vi.fn()
       const onChange = vi.fn()
       renderCheckbox({ onClick, onChange, disabled: true })
-      const checkboxElement = screen.getByRole('checkbox')
+      const checkboxElement = page.getByRole('checkbox').element()
 
       fireEvent.click(checkboxElement)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onClick).not.toHaveBeenCalled()
         expect(onChange).not.toHaveBeenCalled()
         expect(checkboxElement).toBeDisabled()
@@ -147,11 +147,11 @@ describe('<Checkbox />', () => {
       const onClick = vi.fn()
       const onChange = vi.fn()
       renderCheckbox({ onClick, onChange, readOnly: true })
-      const checkboxElement = screen.getByRole('checkbox')
+      const checkboxElement = page.getByRole('checkbox').element()
 
       fireEvent.click(checkboxElement)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onClick).not.toHaveBeenCalled()
         expect(onChange).not.toHaveBeenCalled()
         expect(checkboxElement).not.toBeDisabled()
@@ -160,7 +160,7 @@ describe('<Checkbox />', () => {
 
     it('when focused, readOnly checkbox is focusable', async () => {
       renderCheckbox({ readOnly: true })
-      const checkboxElement = screen.getByRole('checkbox')
+      const checkboxElement = page.getByRole('checkbox').element()
 
       checkboxElement.focus()
 
@@ -170,11 +170,11 @@ describe('<Checkbox />', () => {
     it('calls onChange when enter key is pressed', async () => {
       const onChange = vi.fn()
       renderCheckbox({ onChange })
-      const checkboxElement = screen.getByRole('checkbox')
+      const checkboxElement = page.getByRole('checkbox').element()
 
       await userEvent.type(checkboxElement, '{enter}')
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onChange).toHaveBeenCalled()
       })
     })
@@ -186,7 +186,7 @@ describe('<Checkbox />', () => {
       await userEvent.tab()
       await userEvent.tab()
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onBlur).toHaveBeenCalled()
       })
     })
@@ -197,15 +197,15 @@ describe('<Checkbox />', () => {
 
       await userEvent.tab()
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onFocus).toHaveBeenCalled()
       })
     })
 
-    it('focuses with the focus helper', () => {
+    it('focuses with the focus helper', async () => {
       const checkboxRef = createRef<Checkbox>()
-      render(<Checkbox ref={checkboxRef} {...initProps} />)
-      const checkboxElement = screen.getByRole('checkbox')
+      await render(<Checkbox ref={checkboxRef} {...initProps} />)
+      const checkboxElement = page.getByRole('checkbox').element()
 
       expect(checkboxElement).not.toHaveFocus()
 
@@ -217,11 +217,11 @@ describe('<Checkbox />', () => {
     it('calls onMouseOver', async () => {
       const onMouseOver = vi.fn()
       renderCheckbox({ onMouseOver })
-      const checkboxElement = screen.getByRole('checkbox')
+      const checkboxElement = page.getByRole('checkbox').element()
 
       await userEvent.hover(checkboxElement)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onMouseOver).toHaveBeenCalled()
       })
     })
@@ -229,12 +229,12 @@ describe('<Checkbox />', () => {
     it('calls onMouseOut', async () => {
       const onMouseOut = vi.fn()
       renderCheckbox({ onMouseOut })
-      const checkboxElement = screen.getByRole('checkbox')
+      const checkboxElement = page.getByRole('checkbox').element()
 
       await userEvent.hover(checkboxElement)
       await userEvent.unhover(checkboxElement)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onMouseOut).toHaveBeenCalled()
       })
     })
@@ -242,19 +242,19 @@ describe('<Checkbox />', () => {
 
   it('reflects checked state changes via data-checked attribute', async () => {
     renderCheckbox({ defaultChecked: false })
-    const input = screen.getByRole('checkbox')
+    const input = page.getByRole('checkbox').element()
 
     expect(input).toHaveAttribute('data-checked', 'false')
 
     await userEvent.click(input)
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(input).toHaveAttribute('data-checked', 'true')
     })
   })
 
   it('sets data-checked to mixed when indeterminate', () => {
     renderCheckbox({ indeterminate: true })
-    const input = screen.getByRole('checkbox')
+    const input = page.getByRole('checkbox').element()
 
     expect(input).toHaveAttribute('data-checked', 'mixed')
   })
@@ -263,14 +263,14 @@ describe('<Checkbox />', () => {
     renderCheckbox({
       messages: [{ type: 'error', text: 'This field is required' }]
     })
-    const input = screen.getByRole('checkbox')
+    const input = page.getByRole('checkbox').element()
 
     expect(input).toHaveAttribute('aria-invalid', 'true')
   })
 
   it('should not set aria-invalid when there are no error messages', () => {
     renderCheckbox({ messages: [{ type: 'hint', text: 'This is a hint' }] })
-    const input = screen.getByRole('checkbox')
+    const input = page.getByRole('checkbox').element()
 
     expect(input).not.toHaveAttribute('aria-invalid')
   })
@@ -291,14 +291,14 @@ describe('<Checkbox />', () => {
     })
 
     it('associates messages with the checkbox as its description, not its accessible name', async () => {
-      render(
+      await render(
         <Checkbox
           label="Accept terms"
           value="v"
           messages={[{ type: 'error', text: 'You must accept' }]}
         />
       )
-      const input = screen.getByRole('checkbox')
+      const input = page.getByRole('checkbox').element()
 
       const describedById = input.getAttribute('aria-describedby')
       expect(describedById).toBeTruthy()
@@ -314,8 +314,8 @@ describe('<Checkbox />', () => {
     })
 
     it('does not set aria-labelledby when there are no messages', async () => {
-      render(<Checkbox label="Accept terms" value="v" />)
-      const input = screen.getByRole('checkbox')
+      await render(<Checkbox label="Accept terms" value="v" />)
+      const input = page.getByRole('checkbox').element()
 
       expect(input).not.toHaveAttribute('aria-labelledby')
     })

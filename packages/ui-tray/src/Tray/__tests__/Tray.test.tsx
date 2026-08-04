@@ -22,9 +22,10 @@
  * SOFTWARE.
  */
 
-import { act, fireEvent, render, screen } from '@testing-library/react'
-import { vi } from 'vitest'
-import '@testing-library/jest-dom'
+import { fireEvent } from '@testing-library/dom'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect, beforeAll, afterAll, vi } from 'vitest'
 import { useState } from 'react'
 
 import { Tray } from '@instructure/ui-tray/latest'
@@ -39,37 +40,37 @@ describe('<Tray />', async () => {
     vi.useRealTimers()
   })
 
-  it('should render nothing and have a node with no parent when closed', () => {
-    render(<Tray label="Tray Example">Hello Tray</Tray>)
+  it('should render nothing and have a node with no parent when closed', async () => {
+    await render(<Tray label="Tray Example">Hello Tray</Tray>)
 
-    const trayContent = screen.queryByText('Hello Tray')
+    const trayContent = page.getByText('Hello Tray').query()
     expect(trayContent).not.toBeInTheDocument()
   })
 
-  it('should render children and have a node with a parent when open', () => {
-    render(
+  it('should render children and have a node with a parent when open', async () => {
+    await render(
       <Tray label="Tray Example" open>
         Hello Tray
       </Tray>
     )
-    const trayContent = screen.getByText('Hello Tray')
+    const trayContent = page.getByText('Hello Tray').element()
 
     expect(trayContent).toBeInTheDocument()
   })
 
-  it('should apply the a11y attributes', () => {
-    render(
+  it('should apply the a11y attributes', async () => {
+    await render(
       <Tray label="Tray Example" open>
         Hello Tray
       </Tray>
     )
-    const tray = screen.getByRole('dialog')
+    const tray = page.getByRole('dialog').element()
     expect(tray).toHaveAttribute('aria-label', 'Tray Example')
   })
 
-  it('should support onOpen prop', () => {
+  it('should support onOpen prop', async () => {
     const onOpen = vi.fn()
-    render(
+    await render(
       <Tray label="Tray Example" open onOpen={onOpen}>
         Hello Tray
       </Tray>
@@ -80,17 +81,17 @@ describe('<Tray />', async () => {
     expect(onOpen).toHaveBeenCalled()
   })
 
-  it('should support onClose prop', () => {
+  it('should support onClose prop', async () => {
     const onClose = vi.fn()
 
-    const { rerender } = render(
+    const { rerender } = await render(
       <Tray label="Tray Example" open onClose={onClose}>
         Hello Tray
       </Tray>
     )
 
     // Set prop: open
-    rerender(
+    await rerender(
       <Tray label="Tray Example" open={false} onClose={onClose}>
         Hello Tray
       </Tray>
@@ -101,8 +102,8 @@ describe('<Tray />', async () => {
     expect(onClose).toHaveBeenCalled()
   })
 
-  it('should take a prop for finding default focus', () => {
-    render(
+  it('should take a prop for finding default focus', async () => {
+    await render(
       <Tray
         label="Tray Example"
         open
@@ -113,7 +114,7 @@ describe('<Tray />', async () => {
         <input type="text" id="my-input" aria-label="my-input-label" />
       </Tray>
     )
-    const input = screen.getByLabelText('my-input-label')
+    const input = page.getByLabelText('my-input-label').element()
     act(() => {
       vi.runAllTimers()
     })
@@ -155,7 +156,7 @@ describe('<Tray />', async () => {
             const onEntered = vi.fn()
             document.documentElement.setAttribute('dir', dir)
 
-            render(
+            await render(
               <Tray
                 open
                 label="Tray Example"
@@ -174,11 +175,11 @@ describe('<Tray />', async () => {
 
         for (const placement in placements[dir].exitingPlacements) {
           const val = placements[dir].exitingPlacements[placement]
-          it(`returns ${val} for ${placement} when exiting`, () => {
+          it(`returns ${val} for ${placement} when exiting`, async () => {
             const onExited = vi.fn()
             document.documentElement.setAttribute('dir', dir)
 
-            const { rerender } = render(
+            const { rerender } = await render(
               <Tray
                 open
                 label="Tray Example"
@@ -190,7 +191,7 @@ describe('<Tray />', async () => {
             )
 
             // Set prop: open
-            rerender(
+            await rerender(
               <Tray
                 open={false}
                 label="Tray Example"
@@ -240,17 +241,17 @@ describe('<Tray />', async () => {
         </div>
       )
     }
-    render(<TrayWithButton />)
+    await render(<TrayWithButton />)
     // 1. Open Tray
-    expect(screen.queryByText('Tray Content')).not.toBeInTheDocument()
-    const button = screen.getByText('Toggle Tray')
+    expect(page.getByText('Tray Content').query()).not.toBeInTheDocument()
+    const button = page.getByText('Toggle Tray').element()
     fireEvent.click(button, { button: 0, detail: 1 })
     act(() => {
       vi.runAllTimers()
     })
     expect(onEntered).toHaveBeenCalled()
     expect(onDismiss).not.toHaveBeenCalled()
-    expect(screen.getByText('Tray Content')).toBeInTheDocument()
+    expect(page.getByText('Tray Content').element()).toBeInTheDocument()
     // 2. Close Tray be clicking outside it
     // event.detail and button are needed because FocusRegion.ts/handleDocumentClick
     fireEvent.click(document, { button: 0, detail: 1 })
@@ -259,7 +260,7 @@ describe('<Tray />', async () => {
     })
     expect(onDismiss).toHaveBeenCalled()
     expect(onExited).toHaveBeenCalled()
-    expect(screen.queryByText('Tray Content')).not.toBeInTheDocument()
+    expect(page.getByText('Tray Content').query()).not.toBeInTheDocument()
 
     onEntered.mockClear()
     onDismiss.mockClear()
@@ -273,6 +274,6 @@ describe('<Tray />', async () => {
     expect(onEntered).toHaveBeenCalled()
     expect(onDismiss).not.toHaveBeenCalled()
     expect(onExited).not.toHaveBeenCalled()
-    expect(screen.getByText('Tray Content')).toBeInTheDocument()
+    expect(page.getByText('Tray Content').element()).toBeInTheDocument()
   })
 })

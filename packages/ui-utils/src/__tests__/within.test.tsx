@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import '@testing-library/jest-dom'
+import { describe, it, expect } from 'vitest'
 
 import { within } from '../within.js'
 

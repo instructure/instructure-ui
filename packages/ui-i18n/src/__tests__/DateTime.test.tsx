@@ -21,8 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import '@testing-library/jest-dom'
-import { expect } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { DateTime } from '../DateTime.js'
 
 const {

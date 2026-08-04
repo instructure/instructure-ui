@@ -22,43 +22,43 @@
  * SOFTWARE.
  */
 
-import { render } from '@testing-library/react'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { describe, it, expect } from 'vitest'
 import { SVGIcon } from '../index.js'
 
 const SVG_SRC = `<svg><circle cx="50" cy="50" r="40" /></svg>`
 
 describe('<SVGIcon />', () => {
   it('should render', async () => {
-    const { container } = render(<SVGIcon src={SVG_SRC} />)
+    const { container } = await render(<SVGIcon src={SVG_SRC} />)
     const svg = container.querySelector('svg')
 
     expect(svg).toBeInTheDocument()
   })
 
   it('should set rotate to 0 by default', async () => {
-    const { container } = render(<SVGIcon src={SVG_SRC} />)
+    const { container } = await render(<SVGIcon src={SVG_SRC} />)
     const svg = container.querySelector('svg')
 
     expect(svg).toHaveAttribute('rotate', '0')
   })
 
   it('should allow rotate prop to be overridden', async () => {
-    const { container } = render(<SVGIcon rotate="90" src={SVG_SRC} />)
+    const { container } = await render(<SVGIcon rotate="90" src={SVG_SRC} />)
     const svg = container.querySelector('svg')
 
     expect(svg).toHaveAttribute('rotate', '90')
   })
 
   it('should set size', async () => {
-    const { container, rerender } = render(
+    const { container, rerender } = await render(
       <SVGIcon size="large" src={SVG_SRC} />
     )
     const svg = container.querySelector('svg')
     const largeFontSize = window.getComputedStyle(svg!).fontSize
 
     // set prop: size
-    rerender(<SVGIcon size="small" src={SVG_SRC} />)
+    await rerender(<SVGIcon size="small" src={SVG_SRC} />)
     const svgUpdated = container.querySelector('svg')
     const smallFontSize = window.getComputedStyle(svgUpdated!).fontSize
 

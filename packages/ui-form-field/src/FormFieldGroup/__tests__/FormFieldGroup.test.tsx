@@ -22,12 +22,12 @@
  * SOFTWARE.
  */
 
-import { render, screen } from '@testing-library/react'
-import { vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { FormFieldGroup } from '@instructure/ui-form-field/latest'
 import type { FormMessage } from '@instructure/ui-form-field/latest'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 describe('<FormFieldGroup />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
@@ -48,8 +48,8 @@ describe('<FormFieldGroup />', () => {
     consoleErrorMock.mockRestore()
   })
 
-  it('should render', () => {
-    const { container } = render(
+  it('should render', async () => {
+    const { container } = await render(
       <FormFieldGroup description="Please enter your full name">
         <label>
           First: <input />
@@ -66,9 +66,9 @@ describe('<FormFieldGroup />', () => {
     const formFieldGroup = container.querySelector(
       "span[class$='-formFieldLayout__label']"
     )
-    const firstNameInput = screen.getByLabelText('First:')
-    const middleNameInput = screen.getByLabelText('Middle:')
-    const lastNameInput = screen.getByLabelText('Last:')
+    const firstNameInput = page.getByLabelText('First:').element()
+    const middleNameInput = page.getByLabelText('Middle:').element()
+    const lastNameInput = page.getByLabelText('Last:').element()
 
     expect(formFieldGroup).toBeInTheDocument()
     expect(formFieldGroup).toHaveTextContent('Please enter your full name')
@@ -78,7 +78,7 @@ describe('<FormFieldGroup />', () => {
     expect(lastNameInput).toBeInTheDocument()
   })
 
-  it('can handle null children', () => {
+  it('can handle null children', async () => {
     const children = [
       <label key="first">
         First: <input />
@@ -86,7 +86,7 @@ describe('<FormFieldGroup />', () => {
       null
     ]
 
-    const { container } = render(
+    const { container } = await render(
       <FormFieldGroup description="Please enter your full name">
         {children}
       </FormFieldGroup>
@@ -97,10 +97,10 @@ describe('<FormFieldGroup />', () => {
     expect(formFieldGroup).toBeInTheDocument()
   })
 
-  it('links the messages to the fieldset via aria-describedby', () => {
+  it('links the messages to the fieldset via aria-describedby', async () => {
     const messages: FormMessage[] = [{ text: 'Invalid name', type: 'error' }]
 
-    const { container } = render(
+    const { container } = await render(
       <FormFieldGroup
         description="Please enter your full name"
         messages={messages}
@@ -132,10 +132,10 @@ describe('<FormFieldGroup />', () => {
     expect(message).toHaveAttribute('id', messagesId)
   })
 
-  it('displays description message inside the label', () => {
+  it('displays description message inside the label', async () => {
     const description = 'Please enter your full name'
 
-    const { container } = render(
+    const { container } = await render(
       <FormFieldGroup description={description}>
         <label>
           First: <input />
@@ -157,26 +157,26 @@ describe('<FormFieldGroup />', () => {
     expect(legend).toHaveTextContent(description)
   })
 
-  it('disables children when disabled', () => {
+  it('disables children when disabled', async () => {
     const TestComponent = ({ disabled }: { disabled?: boolean }) => (
       <input data-testid="test-input" disabled={disabled} />
     )
 
-    render(
+    await render(
       <FormFieldGroup description="Test group" disabled>
         <TestComponent />
       </FormFieldGroup>
     )
 
-    expect(screen.getByTestId('test-input')).toBeDisabled()
+    expect(page.getByTestId('test-input').element()).toBeDisabled()
   })
 
-  it('disables all children when disabled', () => {
+  it('disables all children when disabled', async () => {
     const TestComponent = ({ disabled }: { disabled?: boolean }) => (
       <input data-testid="test-input" disabled={disabled} />
     )
 
-    render(
+    await render(
       <FormFieldGroup description="Test group" disabled>
         <TestComponent data-testid="first" />
         <TestComponent data-testid="second" />
@@ -184,27 +184,30 @@ describe('<FormFieldGroup />', () => {
       </FormFieldGroup>
     )
 
-    screen.getAllByTestId('test-input').forEach((input) => {
-      expect(input).toBeDisabled()
-    })
+    page
+      .getByTestId('test-input')
+      .elements()
+      .forEach((input) => {
+        expect(input).toBeDisabled()
+      })
   })
 
-  it('does not disable children when not disabled', () => {
+  it('does not disable children when not disabled', async () => {
     const TestComponent = ({ disabled }: { disabled?: boolean }) => (
       <input data-testid="test-input" disabled={disabled} />
     )
 
-    render(
+    await render(
       <FormFieldGroup description="Test group">
         <TestComponent />
       </FormFieldGroup>
     )
 
-    expect(screen.getByTestId('test-input')).not.toBeDisabled()
+    expect(page.getByTestId('test-input').element()).not.toBeDisabled()
   })
 
   it('should meet a11y standards', async () => {
-    const { container } = render(
+    const { container } = await render(
       <FormFieldGroup description="Please enter your full name">
         <label>
           First: <input />

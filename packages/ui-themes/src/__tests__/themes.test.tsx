@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import { canvas, canvasHighContrast } from '../index.js'
-import '@testing-library/jest-dom'
+import { describe, it, expect } from 'vitest'
 
 const themes = [canvas, canvasHighContrast]
 

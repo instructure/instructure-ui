@@ -22,16 +22,16 @@
  * SOFTWARE.
  */
 
-import { render, screen } from '@testing-library/react'
-import { vi, expect } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 
 import { RangeInput } from '@instructure/ui-range-input/latest'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect, vi } from 'vitest'
 
 describe('<RangeInput />', () => {
   it('renders an input with type "range"', async () => {
-    const { container } = render(
+    const { container } = await render(
       <RangeInput
         label="Opacity"
         name="opacity"
@@ -54,7 +54,7 @@ describe('<RangeInput />', () => {
   })
 
   it('displays the default value', async () => {
-    const { container } = render(
+    const { container } = await render(
       <RangeInput
         label="Opacity"
         name="opacity"
@@ -69,7 +69,7 @@ describe('<RangeInput />', () => {
   })
 
   it('sets input value to default value', async () => {
-    const { container } = render(
+    const { container } = await render(
       <RangeInput
         label="Opacity"
         name="opacity"
@@ -84,7 +84,7 @@ describe('<RangeInput />', () => {
   })
 
   it('sets input value to controlled value', async () => {
-    const { container } = render(
+    const { container } = await render(
       <RangeInput
         label="Opacity"
         name="opacity"
@@ -101,7 +101,7 @@ describe('<RangeInput />', () => {
 
   it('should provide an inputRef prop', async () => {
     const inputRef = vi.fn()
-    const { container } = render(
+    const { container } = await render(
       <RangeInput
         label="Opacity"
         name="opacity"
@@ -117,7 +117,7 @@ describe('<RangeInput />', () => {
   })
 
   it('sets min value', async () => {
-    render(
+    await render(
       <RangeInput
         label="Opacity"
         name="opacity"
@@ -126,13 +126,13 @@ describe('<RangeInput />', () => {
         displayValue={false}
       />
     )
-    const input = screen.getByLabelText('Opacity')
+    const input = page.getByLabelText('Opacity').element()
 
     expect(input).toHaveAttribute('min', '25')
   })
 
   it('sets max value', async () => {
-    render(
+    await render(
       <RangeInput
         label="Opacity"
         name="opacity"
@@ -142,13 +142,13 @@ describe('<RangeInput />', () => {
       />
     )
 
-    const input = screen.getByLabelText('Opacity')
+    const input = page.getByLabelText('Opacity').element()
 
     expect(input).toHaveAttribute('max', '75')
   })
 
   it('sets step value', async () => {
-    render(
+    await render(
       <RangeInput
         label="Opacity"
         name="opacity"
@@ -158,13 +158,13 @@ describe('<RangeInput />', () => {
         displayValue={false}
       />
     )
-    const input = screen.getByLabelText('Opacity')
+    const input = page.getByLabelText('Opacity').element()
 
     expect(input).toHaveAttribute('step', '5')
   })
 
   it('formats the value displayed', async () => {
-    const { container } = render(
+    const { container } = await render(
       <RangeInput
         label="Opacity"
         name="opacity"
@@ -182,7 +182,7 @@ describe('<RangeInput />', () => {
   })
 
   it('hides the value when displayValue is false', async () => {
-    const { container } = render(
+    const { container } = await render(
       <RangeInput
         label="Opacity"
         name="opacity"
@@ -198,7 +198,7 @@ describe('<RangeInput />', () => {
 
   describe('for a11y', () => {
     it('should meet standards', async () => {
-      const { container } = render(
+      const { container } = await render(
         <RangeInput
           label="Opacity"
           name="opacity"
@@ -212,7 +212,7 @@ describe('<RangeInput />', () => {
     })
 
     it('associates messages with the input as its description, not its accessible name', async () => {
-      const { container } = render(
+      const { container } = await render(
         <RangeInput
           label="Opacity"
           name="opacity"
@@ -238,7 +238,7 @@ describe('<RangeInput />', () => {
     })
 
     it('does not override the accessible name with aria-labelledby when there are no messages', async () => {
-      const { container } = render(
+      const { container } = await render(
         <RangeInput label="Opacity" name="opacity" max={100} min={0} />
       )
       const input = container.querySelector('input')!
@@ -247,7 +247,7 @@ describe('<RangeInput />', () => {
     })
 
     it('formats the aria-valuetext attribute', async () => {
-      const { container } = render(
+      const { container } = await render(
         <RangeInput
           label="Opacity"
           name="opacity"

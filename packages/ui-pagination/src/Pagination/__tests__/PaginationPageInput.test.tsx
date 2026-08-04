@@ -22,10 +22,9 @@
  * SOFTWARE.
  */
 
-import { render, screen } from '@testing-library/react'
-import { vi } from 'vitest'
-
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect, vi } from 'vitest'
 import { PaginationPageInput } from '../v2/PaginationPageInput/index.js'
 
 const defaultSRLabel = (currentPage: number, numberOfPages: number) =>
@@ -34,7 +33,7 @@ const defaultSRLabel = (currentPage: number, numberOfPages: number) =>
 describe('<PaginationPageInput />', () => {
   it('should render', async () => {
     const defaultOnChange = vi.fn()
-    render(
+    await render(
       <PaginationPageInput
         numberOfPages={10}
         currentPageIndex={0}
@@ -42,7 +41,7 @@ describe('<PaginationPageInput />', () => {
         screenReaderLabel={defaultSRLabel}
       />
     )
-    const input = screen.getByRole('spinbutton')
+    const input = page.getByRole('spinbutton').element()
 
     expect(input).toBeInTheDocument()
     expect(input.tagName).toBe('INPUT')
@@ -50,7 +49,7 @@ describe('<PaginationPageInput />', () => {
 
   it('should display the current page number', async () => {
     const defaultOnChange = vi.fn()
-    render(
+    await render(
       <PaginationPageInput
         numberOfPages={10}
         currentPageIndex={3}
@@ -58,14 +57,14 @@ describe('<PaginationPageInput />', () => {
         screenReaderLabel={defaultSRLabel}
       />
     )
-    const input = screen.getByRole('spinbutton')
+    const input = page.getByRole('spinbutton').element()
 
     expect(input).toHaveAttribute('value', '4')
   })
 
   it('should correctly update page number', async () => {
     const defaultOnChange = vi.fn()
-    const { rerender } = render(
+    const { rerender } = await render(
       <PaginationPageInput
         numberOfPages={10}
         currentPageIndex={3}
@@ -73,12 +72,12 @@ describe('<PaginationPageInput />', () => {
         screenReaderLabel={defaultSRLabel}
       />
     )
-    const input = screen.getByRole('spinbutton')
+    const input = page.getByRole('spinbutton').element()
 
     expect(input).toHaveAttribute('value', '4')
 
     // Set currentPageIndex: 6
-    rerender(
+    await rerender(
       <PaginationPageInput
         numberOfPages={10}
         currentPageIndex={6}
@@ -91,7 +90,7 @@ describe('<PaginationPageInput />', () => {
 
   it("shouldn't display the arrow keys of NumberInput", async () => {
     const defaultOnChange = vi.fn()
-    const { container } = render(
+    const { container } = await render(
       <PaginationPageInput
         numberOfPages={10}
         currentPageIndex={3}
@@ -99,7 +98,7 @@ describe('<PaginationPageInput />', () => {
         screenReaderLabel={defaultSRLabel}
       />
     )
-    const arrowButtons = screen.queryAllByRole('button')
+    const arrowButtons = page.getByRole('button').elements()
     expect(arrowButtons.length).toBe(0)
 
     const arrowKeys = container.querySelectorAll('svg')
@@ -108,7 +107,7 @@ describe('<PaginationPageInput />', () => {
 
   it("should disable the input on 'disabled'", async () => {
     const defaultOnChange = vi.fn()
-    render(
+    await render(
       <PaginationPageInput
         numberOfPages={10}
         currentPageIndex={3}
@@ -117,14 +116,14 @@ describe('<PaginationPageInput />', () => {
         disabled
       />
     )
-    const input = screen.getByRole('spinbutton')
+    const input = page.getByRole('spinbutton').element()
 
     expect(input).toHaveAttribute('disabled')
   })
 
   it('should set the ScreenReaderLabel for the input', async () => {
     const defaultOnChange = vi.fn()
-    const { container } = render(
+    const { container } = await render(
       <PaginationPageInput
         numberOfPages={10}
         currentPageIndex={3}
@@ -139,7 +138,7 @@ describe('<PaginationPageInput />', () => {
 
   it('should display the number of pages in the label', async () => {
     const defaultOnChange = vi.fn()
-    const { container } = render(
+    const { container } = await render(
       <PaginationPageInput
         numberOfPages={10}
         currentPageIndex={3}

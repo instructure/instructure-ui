@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-import { render, screen } from '@testing-library/react'
-import { vi } from 'vitest'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { CheckboxFacade } from '@instructure/ui-checkbox/latest'
@@ -50,15 +50,17 @@ describe('<CheckboxFacade />', () => {
     consoleErrorMock.mockRestore()
   })
 
-  it('should render', () => {
-    render(<CheckboxFacade>{TEST_TEXT}</CheckboxFacade>)
-    const facade = screen.getByText(TEST_TEXT)
+  it('should render', async () => {
+    await render(<CheckboxFacade>{TEST_TEXT}</CheckboxFacade>)
+    const facade = page.getByText(TEST_TEXT).element()
 
     expect(facade).toBeInTheDocument()
   })
 
   it('should meet a11y standards', async () => {
-    const { container } = render(<CheckboxFacade>{TEST_TEXT}</CheckboxFacade>)
+    const { container } = await render(
+      <CheckboxFacade>{TEST_TEXT}</CheckboxFacade>
+    )
     const axeCheck = await runAxeCheck(container)
 
     expect(axeCheck).toBe(true)

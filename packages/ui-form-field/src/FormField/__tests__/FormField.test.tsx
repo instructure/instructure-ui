@@ -22,12 +22,11 @@
  * SOFTWARE.
  */
 
-import { render, screen } from '@testing-library/react'
-import { vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { FormField } from '@instructure/ui-form-field/latest'
-import { userEvent } from '@testing-library/user-event'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 describe('<FormField />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
@@ -48,36 +47,36 @@ describe('<FormField />', () => {
     consoleErrorMock.mockRestore()
   })
 
-  it('should render', () => {
-    render(<FormField label="foo" id="bar" />)
-    const formField = screen.getByText('foo').closest('label')
+  it('should render', async () => {
+    await render(<FormField label="foo" id="bar" />)
+    const formField = page.getByText('foo').element().closest('label')
 
     expect(formField).toBeInTheDocument()
   })
 
-  it('passes props through to FormField', () => {
-    render(<FormField label="foo" id="bar" data-automation="baz" />)
-    const formField = screen.getByText('foo').closest('label')
+  it('passes props through to FormField', async () => {
+    await render(<FormField label="foo" id="bar" data-automation="baz" />)
+    const formField = page.getByText('foo').element().closest('label')
 
     expect(formField).toHaveAttribute('data-automation', 'baz')
   })
 
   it('should meet a11y standards', async () => {
-    const { container } = render(<FormField label="foo" id="bar" />)
+    const { container } = await render(<FormField label="foo" id="bar" />)
     const axeCheck = await runAxeCheck(container)
     expect(axeCheck).toBe(true)
   })
 
   it('should focus the control with the supplied id', async () => {
     const user = userEvent.setup()
-    render(
+    await render(
       <FormField label="labelText" id="foo">
         <input />
         <input id="foo" />
         <input />
       </FormField>
     )
-    const label = screen.getByText('labelText').closest('label')!
+    const label = page.getByText('labelText').element().closest('label')!
     await user.click(label)
     const input = document.getElementById('foo')!
     expect(input).toHaveFocus()

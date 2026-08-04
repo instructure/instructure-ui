@@ -24,8 +24,9 @@
 
 import { Component } from 'react'
 
-import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect } from 'vitest'
 
 import {
   withDeterministicId,
@@ -62,16 +63,16 @@ const uniqueIds = (el: Element) => {
 }
 
 describe('DeterministicIdContext', () => {
-  it('can be found and tested with ReactTestUtils', () => {
-    render(<WrapperComponent />)
-    const testComponent = screen.getByTestId('test-component')
+  it('can be found and tested with ReactTestUtils', async () => {
+    await render(<WrapperComponent />)
+    const testComponent = page.getByTestId('test-component').element()
 
     expect(testComponent).toBeInTheDocument()
     expect(testComponent.id).toBeDefined()
   })
 
-  it('should generate unique ids without Provider wrapper', () => {
-    render(
+  it('should generate unique ids without Provider wrapper', async () => {
+    await render(
       <div data-testid="test-components">
         <TestComponent />
         <TestComponent />
@@ -80,13 +81,13 @@ describe('DeterministicIdContext', () => {
         <TestComponent />
       </div>
     )
-    const el = screen.getByTestId('test-components')
+    const el = page.getByTestId('test-components').element()
 
     expect(uniqueIds(el)).toBe(true)
   })
 
-  it('should generate unique ids when components are rendered both out and inside of provider', () => {
-    render(
+  it('should generate unique ids when components are rendered both out and inside of provider', async () => {
+    await render(
       <div data-testid="test-components">
         <DeterministicIdContextProvider>
           <TestComponent />
@@ -97,12 +98,12 @@ describe('DeterministicIdContext', () => {
         <TestComponent />
       </div>
     )
-    const el = screen.getByTestId('test-components')
+    const el = page.getByTestId('test-components').element()
 
     expect(uniqueIds(el)).toBe(true)
   })
 
-  it('should generate unique ids with provider only', () => {
+  it('should generate unique ids with provider only', async () => {
     const Wrapper = ({ children }: any) => {
       return (
         <DeterministicIdContextProvider>
@@ -115,17 +116,17 @@ describe('DeterministicIdContext', () => {
       children.push(<TestComponent key={i} />)
     }
 
-    render(<Wrapper>{children}</Wrapper>)
-    const el = screen.getByTestId('wrapper')
+    await render(<Wrapper>{children}</Wrapper>)
+    const el = page.getByTestId('wrapper').element()
 
     expect(uniqueIds(el)).toBe(true)
   })
 
-  it('should use a global object for ID counter', () => {
+  it('should use a global object for ID counter', async () => {
     const instUIInstanceCounter = '__INSTUI_GLOBAL_INSTANCE_COUNTER__'
     const counterValue = 345
     globalThis[instUIInstanceCounter].set('TestComponent', counterValue)
-    render(
+    await render(
       <div data-testid="test-components">
         <TestComponent />
         <TestComponent />

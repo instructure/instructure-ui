@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
-import { userEvent } from '@testing-library/user-event'
-import { vi } from 'vitest'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import { describe, it, expect, vi } from 'vitest'
 import { ColorPreset } from '@instructure/ui-color-picker/latest'
 import type { ColorPresetProps } from '@instructure/ui-color-picker/latest'
 
@@ -80,8 +80,8 @@ describe('<ColorPreset />', () => {
       colorScreenReaderLabel: mockScreenReaderLabel
     }
 
-    render(<ColorPreset {...props} />)
-    const buttons = screen.getAllByRole('button')
+    await render(<ColorPreset {...props} />)
+    const buttons = page.getByRole('button').elements()
 
     buttons.forEach((button, index) => {
       const expectedColor = testValue.colors[index]
@@ -90,8 +90,8 @@ describe('<ColorPreset />', () => {
   })
 
   it('should default to using the hex code as aria-label when colorScreenReaderLabel is not provided', async () => {
-    render(<ColorPreset {...testValue} />)
-    const buttons = screen.getAllByRole('button')
+    await render(<ColorPreset {...testValue} />)
+    const buttons = page.getByRole('button').elements()
 
     buttons.forEach((button, index) => {
       const expectedColor = testValue.colors[index]
@@ -102,7 +102,7 @@ describe('<ColorPreset />', () => {
   describe('elementRef prop', () => {
     it('should provide ref', async () => {
       const elementRef = vi.fn()
-      const { container } = render(
+      const { container } = await render(
         <ColorPreset {...testValue} elementRef={elementRef} />
       )
 
@@ -112,9 +112,9 @@ describe('<ColorPreset />', () => {
 
   describe('label prop', () => {
     it('should display title', async () => {
-      render(<ColorPreset {...testValue} label="This is a title" />)
+      await render(<ColorPreset {...testValue} label="This is a title" />)
 
-      const title = screen.getByText('This is a title')
+      const title = page.getByText('This is a title').element()
 
       expect(title).toBeInTheDocument()
     })
@@ -122,11 +122,11 @@ describe('<ColorPreset />', () => {
 
   describe('colors prop', () => {
     it('should render tooltips for all colors', async () => {
-      render(<ColorPreset colors={testValue.colors} onSelect={vi.fn()} />)
+      await render(<ColorPreset colors={testValue.colors} onSelect={vi.fn()} />)
 
       const testColors = testValue.colors
-      const indicators = screen.getAllByRole('button')
-      const tooltips = screen.getAllByRole('tooltip')
+      const indicators = page.getByRole('button').elements()
+      const tooltips = page.getByRole('tooltip').elements()
 
       expect(indicators.length).toBe(testColors.length)
       expect(tooltips.length).toBe(testColors.length)
@@ -139,7 +139,7 @@ describe('<ColorPreset />', () => {
     })
 
     it('should not render component when colors not provided and not modifiable', async () => {
-      render(<ColorPreset colors={[]} onSelect={vi.fn()} />)
+      await render(<ColorPreset colors={[]} onSelect={vi.fn()} />)
 
       const colorPreset = document.querySelector('span[class$="-colorPreset"]')
 
@@ -150,13 +150,13 @@ describe('<ColorPreset />', () => {
   describe('onSelect prop', () => {
     it('should fire with color hex when indicator clicked', async () => {
       const onSelect = vi.fn()
-      render(<ColorPreset {...testValue} onSelect={onSelect} />)
+      await render(<ColorPreset {...testValue} onSelect={onSelect} />)
 
-      const indicators = screen.getAllByRole('button')
+      const indicators = page.getByRole('button').elements()
 
       await userEvent.click(indicators[1])
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onSelect).toHaveBeenCalledWith(testValue.colors[1])
       })
     })
@@ -164,27 +164,27 @@ describe('<ColorPreset />', () => {
     it('should fire with color hex when transparent indicator clicked', async () => {
       const testColor = '#12345678'
       const onSelect = vi.fn()
-      render(
+      await render(
         <ColorPreset selected={''} colors={[testColor]} onSelect={onSelect} />
       )
-      const indicators = screen.getAllByRole('button')
+      const indicators = page.getByRole('button').elements()
 
       await userEvent.click(indicators[0])
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onSelect).toHaveBeenCalledWith(testColor)
       })
     })
 
     it('should not fire when disabled prop is set', async () => {
       const onSelect = vi.fn()
-      render(<ColorPreset {...testValue} disabled onSelect={onSelect} />)
+      await render(<ColorPreset {...testValue} disabled onSelect={onSelect} />)
 
-      const indicators = screen.getAllByRole('button')
+      const indicators = page.getByRole('button').elements()
 
       await userEvent.click(indicators[1])
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onSelect).not.toHaveBeenCalled()
       })
     })
@@ -192,13 +192,13 @@ describe('<ColorPreset />', () => {
 
   describe('colorMixerSettings prop', () => {
     it('displays "new color" button', async () => {
-      render(
+      await render(
         <ColorPreset
           {...testValue}
           colorMixerSettings={testColorMixerSettings}
         />
       )
-      const buttons = screen.getAllByRole('button')
+      const buttons = page.getByRole('button').elements()
 
       expect(buttons[0]).toHaveTextContent(
         testColorMixerSettings.addNewPresetButtonScreenReaderLabel
@@ -206,7 +206,7 @@ describe('<ColorPreset />', () => {
     })
 
     it('renders color menus for all indicators', async () => {
-      render(
+      await render(
         <ColorPreset
           {...testValue}
           colorMixerSettings={testColorMixerSettings}

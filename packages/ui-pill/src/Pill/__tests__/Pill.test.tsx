@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { render } from '@testing-library/react'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { describe, it, expect } from 'vitest'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { Pill } from '@instructure/ui-pill/latest'
@@ -31,7 +31,7 @@ import { IconEyeLine } from '@instructure/ui-icons'
 
 describe('<Pill />', () => {
   it('should render', async () => {
-    const { container } = render(<Pill>Overdue</Pill>)
+    const { container } = await render(<Pill>Overdue</Pill>)
     const pill = container.querySelector('div[class$="-pill"]')
 
     expect(pill).toBeInTheDocument()
@@ -39,20 +39,22 @@ describe('<Pill />', () => {
   })
 
   it('should display text', async () => {
-    const { container } = render(<Pill>Overdue</Pill>)
+    const { container } = await render(<Pill>Overdue</Pill>)
 
     expect(container).toHaveTextContent('Overdue')
   })
 
   it('should display status text', async () => {
-    const { container } = render(<Pill statusLabel="Statuslabel">Overdue</Pill>)
+    const { container } = await render(
+      <Pill statusLabel="Statuslabel">Overdue</Pill>
+    )
 
     expect(container).toHaveTextContent('Statuslabel:')
     expect(container).toHaveTextContent('Overdue')
   })
 
   it('should render icon text', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Pill
         statusLabel="Statuslabel"
         renderIcon={<IconEyeLine color="auto" title="Love" />}
@@ -69,7 +71,7 @@ describe('<Pill />', () => {
   })
 
   it('should be accessible', async () => {
-    const { container } = render(<Pill>Overdue</Pill>)
+    const { container } = await render(<Pill>Overdue</Pill>)
     const axeCheck = await runAxeCheck(container)
 
     expect(axeCheck).toBe(true)

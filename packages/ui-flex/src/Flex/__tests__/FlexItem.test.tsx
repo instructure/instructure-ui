@@ -22,16 +22,15 @@
  * SOFTWARE.
  */
 
-import { render, waitFor, screen } from '@testing-library/react'
-import { vi } from 'vitest'
-
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect, vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { FlexItem as Item } from '@instructure/ui-flex/latest'
 
 describe('<Item />', () => {
   it('should render children', async () => {
-    const { container } = render(<Item>Flex item 1</Item>)
+    const { container } = await render(<Item>Flex item 1</Item>)
     const item = container.querySelector('[class*="-flexItem"]')
 
     expect(item).toBeInTheDocument()
@@ -41,33 +40,33 @@ describe('<Item />', () => {
   it('should support an elementRef prop', async () => {
     const elementRef = vi.fn()
 
-    const { container } = render(
+    const { container } = await render(
       <Item elementRef={elementRef}>Flex item 2</Item>
     )
     const item = container.querySelector('[class*="-flexItem"]')
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(elementRef).toHaveBeenCalledWith(item)
     })
   })
 
   it('should meet a11y standards', async () => {
-    const { container } = render(<Item>Flex item 3</Item>)
+    const { container } = await render(<Item>Flex item 3</Item>)
     const axeCheck = await runAxeCheck(container)
 
     expect(axeCheck).toBe(true)
   })
 
   describe('order prop', () => {
-    it('should apply `order` CSS when passed', () => {
-      render(<Item order={2}>Item with order</Item>)
-      const item = screen.getByText('Item with order')
+    it('should apply `order` CSS when passed', async () => {
+      await render(<Item order={2}>Item with order</Item>)
+      const item = page.getByText('Item with order').element()
       expect(item).toHaveStyle('order: 2')
     })
 
-    it('should not apply `order` CSS when prop is undefined', () => {
-      render(<Item>Item without order</Item>)
-      const item = screen.getByText('Item without order')
+    it('should not apply `order` CSS when prop is undefined', async () => {
+      await render(<Item>Item without order</Item>)
+      const item = page.getByText('Item without order').element()
       expect(item).not.toHaveStyle({ order: expect.anything() })
     })
   })

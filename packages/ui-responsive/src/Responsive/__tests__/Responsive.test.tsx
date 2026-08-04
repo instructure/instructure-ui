@@ -22,10 +22,9 @@
  * SOFTWARE.
  */
 
-import { render } from '@testing-library/react'
-import { vi, expect } from 'vitest'
 import type { MockInstance } from 'vitest'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 import { deepEqual } from '@instructure/ui-utils'
 import { Responsive } from '@instructure/ui-responsive/latest'
@@ -46,7 +45,7 @@ describe('<Responsive />', () => {
 
   it('should call render with the correct matches', async () => {
     const renderSpy = vi.fn()
-    render(
+    await render(
       <div style={{ width: 200 }}>
         <Responsive
           query={{
@@ -72,7 +71,7 @@ describe('<Responsive />', () => {
       medium: { options: [1, 2, 3], icons: { edit: true, flag: false } },
       large: { margin: 'small', label: 'hello world', describedBy: 'fakeId' }
     }
-    render(
+    await render(
       <div style={{ width: 200 }}>
         <Responsive
           props={props}
@@ -94,7 +93,7 @@ describe('<Responsive />', () => {
   })
 
   it('should warn when more than one breakpoint is applied and a prop value is overwritten', async () => {
-    render(
+    await render(
       <div style={{ width: 200 }}>
         <Responsive
           props={{
@@ -131,7 +130,7 @@ describe('<Responsive />', () => {
 
   it('should call render prop only once', async () => {
     const renderSpy = vi.fn()
-    render(
+    await render(
       <div style={{ width: 200 }}>
         <Responsive
           query={{
@@ -152,7 +151,7 @@ describe('<Responsive />', () => {
 
   it('should apply the `display` prop', async () => {
     const renderSpy = vi.fn()
-    const { container } = render(
+    const { container } = await render(
       <div style={{ width: 200 }} id="testContainer">
         <Responsive
           query={{

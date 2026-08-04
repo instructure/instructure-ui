@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
-import { fireEvent, render, screen, waitFor } from '@testing-library/react'
-import { vi } from 'vitest'
-import userEvent from '@testing-library/user-event'
-import '@testing-library/jest-dom'
+import { fireEvent } from '@testing-library/dom'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { Checkbox, CheckboxGroup } from '@instructure/ui-checkbox/latest'
@@ -75,7 +75,7 @@ describe('<CheckboxGroup />', () => {
 
   it('adds the name props to all Checkbox types', () => {
     renderCheckboxGroup({ name: TEST_NAME })
-    const checkboxes = screen.getAllByRole('checkbox')
+    const checkboxes = page.getByRole('checkbox').elements()
 
     expect(checkboxes.length).toBe(2)
     expect(checkboxes[0]).toHaveAttribute('name', TEST_NAME)
@@ -86,7 +86,7 @@ describe('<CheckboxGroup />', () => {
     const { container } = renderCheckboxGroup({
       messages: [{ text: TEST_ERROR_MESSAGE, type: 'error' }]
     })
-    const group = screen.getByRole('group')
+    const group = page.getByRole('group').element()
     const ariaDesc = group.getAttribute('aria-describedby')
     const messageById = container.querySelector(`[id="${ariaDesc}"]`)
 
@@ -107,11 +107,11 @@ describe('<CheckboxGroup />', () => {
   it('does not call the onChange prop when disabled', async () => {
     const onChange = vi.fn()
     renderCheckboxGroup({ onChange, disabled: true })
-    const checkboxElement = screen.getAllByRole('checkbox')[0]
+    const checkboxElement = page.getByRole('checkbox').elements()[0]
 
     fireEvent.click(checkboxElement)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onChange).not.toHaveBeenCalled()
       expect(checkboxElement).toBeDisabled()
     })
@@ -120,11 +120,11 @@ describe('<CheckboxGroup />', () => {
   it('does not call the onChange prop when readOnly', async () => {
     const onChange = vi.fn()
     renderCheckboxGroup({ onChange, readOnly: true })
-    const checkboxElement = screen.getAllByRole('checkbox')[0]
+    const checkboxElement = page.getByRole('checkbox').elements()[0]
 
     fireEvent.click(checkboxElement)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onChange).not.toHaveBeenCalled()
       expect(checkboxElement).not.toBeDisabled()
     })
@@ -133,14 +133,14 @@ describe('<CheckboxGroup />', () => {
   it('should not update the value when the value prop is set', async () => {
     const onChange = vi.fn()
     renderCheckboxGroup({ onChange, value: ['tester'] })
-    const checkboxes = screen.getAllByRole('checkbox')
+    const checkboxes = page.getByRole('checkbox').elements()
 
     expect(checkboxes[0]).not.toBeChecked()
     expect(checkboxes[1]).not.toBeChecked()
 
     await userEvent.click(checkboxes[0])
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(['tester', 'test-value-1'])
       expect(checkboxes[0]).not.toBeChecked()
       expect(checkboxes[1]).not.toBeChecked()
@@ -150,7 +150,7 @@ describe('<CheckboxGroup />', () => {
   it('should add the checkbox value to the value list when it is checked', async () => {
     const onChange = vi.fn()
     renderCheckboxGroup({ onChange })
-    const checkboxes = screen.getAllByRole('checkbox')
+    const checkboxes = page.getByRole('checkbox').elements()
 
     expect(checkboxes[0]).not.toBeChecked()
     expect(checkboxes[1]).not.toBeChecked()
@@ -158,7 +158,7 @@ describe('<CheckboxGroup />', () => {
     await userEvent.click(checkboxes[0])
     await userEvent.click(checkboxes[1])
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(checkboxes[0]).toBeChecked()
       expect(checkboxes[1]).toBeChecked()
       expect(onChange).toHaveBeenCalledWith([TEST_VALUE_1, TEST_VALUE_2])
@@ -168,7 +168,7 @@ describe('<CheckboxGroup />', () => {
   it('should check the checkboxes based on the defaultValue prop', () => {
     const defaultValue = [TEST_VALUE_2]
     renderCheckboxGroup({ defaultValue })
-    const checkboxes = screen.getAllByRole('checkbox')
+    const checkboxes = page.getByRole('checkbox').elements()
 
     expect(checkboxes[0]).not.toBeChecked()
     expect(checkboxes[1]).toBeChecked()
@@ -178,14 +178,14 @@ describe('<CheckboxGroup />', () => {
     const onChange = vi.fn()
     const defaultValue = [TEST_VALUE_1, TEST_VALUE_2]
     renderCheckboxGroup({ onChange, defaultValue })
-    const checkboxes = screen.getAllByRole('checkbox')
+    const checkboxes = page.getByRole('checkbox').elements()
 
     expect(checkboxes[0]).toBeChecked()
     expect(checkboxes[1]).toBeChecked()
 
     await userEvent.click(checkboxes[0])
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(checkboxes[0]).not.toBeChecked()
       expect(checkboxes[1]).toBeChecked()
       expect(onChange).toHaveBeenCalledWith([TEST_VALUE_2])
@@ -196,14 +196,14 @@ describe('<CheckboxGroup />', () => {
     const onChange = vi.fn()
     const defaultValue = [TEST_VALUE_2]
     renderCheckboxGroup({ onChange, defaultValue })
-    const checkboxes = screen.getAllByRole('checkbox')
+    const checkboxes = page.getByRole('checkbox').elements()
 
     expect(checkboxes[0]).not.toBeChecked()
     expect(checkboxes[1]).toBeChecked()
 
     await userEvent.click(checkboxes[0])
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(checkboxes[0]).toBeChecked()
       expect(checkboxes[1]).toBeChecked()
       expect(onChange).toHaveBeenCalledWith([TEST_VALUE_2, TEST_VALUE_1])

@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
-import { vi } from 'vitest'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
-import userEvent from '@testing-library/user-event'
 
 import { View } from '@instructure/ui-view/latest'
 import { Pagination, PaginationButton } from '@instructure/ui-pagination/latest'
@@ -61,10 +61,10 @@ describe('<Pagination />', () => {
   })
 
   it('should render all pages buttons', async () => {
-    render(<Pagination variant="compact">{buildPages(5)}</Pagination>)
+    await render(<Pagination variant="compact">{buildPages(5)}</Pagination>)
 
-    const buttons = screen.getAllByRole('button')
-    const pagination = screen.getByRole('navigation')
+    const buttons = page.getByRole('button').elements()
+    const pagination = page.getByRole('navigation').element()
 
     expect(buttons.length).toEqual(5)
     expect(pagination).toHaveTextContent('#0#1#2#3#4')
@@ -72,7 +72,7 @@ describe('<Pagination />', () => {
 
   describe('with 5 or less pages', () => {
     it('should not render next/prev buttons', async () => {
-      render(
+      await render(
         <Pagination
           label="Example"
           variant="compact"
@@ -83,9 +83,9 @@ describe('<Pagination />', () => {
         </Pagination>
       )
 
-      const pagination = screen.queryByText('Example')
-      const nextButton = screen.queryByText('Next')
-      const prevButton = screen.queryByText('Prev')
+      const pagination = page.getByText('Example').query()
+      const nextButton = page.getByText('Next').query()
+      const prevButton = page.getByText('Prev').query()
 
       expect(pagination).toBeInTheDocument()
       expect(nextButton).not.toBeInTheDocument()
@@ -93,7 +93,7 @@ describe('<Pagination />', () => {
     })
 
     it('should not render first/last buttons', async () => {
-      render(
+      await render(
         <Pagination
           label="Example"
           variant="compact"
@@ -107,9 +107,9 @@ describe('<Pagination />', () => {
         </Pagination>
       )
 
-      const pagination = screen.queryByText('Example')
-      const firstButton = screen.queryByText('First')
-      const lastButton = screen.queryByText('Last')
+      const pagination = page.getByText('Example').query()
+      const firstButton = page.getByText('First').query()
+      const lastButton = page.getByText('Last').query()
 
       expect(pagination).toBeInTheDocument()
       expect(firstButton).not.toBeInTheDocument()
@@ -119,7 +119,7 @@ describe('<Pagination />', () => {
 
   describe('should meet a11y standards', () => {
     it('by default', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Pagination variant="compact" labelNext="Next" labelPrev="Prev">
           {buildPages(5)}
         </Pagination>
@@ -129,7 +129,7 @@ describe('<Pagination />', () => {
     })
 
     it('by default with more pages', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Pagination variant="compact" labelNext="Next" labelPrev="Prev">
           {buildPages(8)}
         </Pagination>
@@ -139,7 +139,7 @@ describe('<Pagination />', () => {
     })
 
     it('with first/last arrows', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Pagination
           variant="compact"
           labelNext="Next"
@@ -156,7 +156,7 @@ describe('<Pagination />', () => {
     })
 
     it('with disabled arrows', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Pagination
           variant="compact"
           labelNext="Next"
@@ -175,49 +175,53 @@ describe('<Pagination />', () => {
   })
 
   it('should render page buttons', async () => {
-    render(
+    await render(
       <Pagination variant="compact" labelNext="Next" labelPrev="Prev">
         {buildPages(5)}
       </Pagination>
     )
-    const buttons = screen.getAllByRole('button')
-    const pagination = screen.getByRole('navigation')
+    const buttons = page.getByRole('button').elements()
+    const pagination = page.getByRole('navigation').element()
 
     expect(buttons.length).toEqual(5)
     expect(pagination).toHaveTextContent('#0#1#2#3#4')
   })
 
   it('should render a single page button', async () => {
-    render(
+    await render(
       <Pagination variant="compact" labelNext="Next" labelPrev="Prev">
         {buildPages(1)}
       </Pagination>
     )
-    const buttons = screen.getAllByRole('button')
-    const pagination = screen.getByRole('navigation')
+    const buttons = page.getByRole('button').elements()
+    const pagination = page.getByRole('navigation').element()
 
     expect(buttons.length).toEqual(1)
     expect(pagination).toHaveTextContent('#0')
   })
 
   it('should render nothing if there are no pages', async () => {
-    render(<Pagination variant="compact" labelNext="Next" labelPrev="Prev" />)
-    const pagination = screen.getByRole('navigation')
-    const buttons = screen.queryAllByRole('button')
+    await render(
+      <Pagination variant="compact" labelNext="Next" labelPrev="Prev" />
+    )
+    const pagination = page.getByRole('navigation').element()
+    const buttons = page.getByRole('button').elements()
 
     expect(pagination).toBeInTheDocument()
     expect(buttons.length).toEqual(0)
   })
 
   it('should truncate pages to context', async () => {
-    render(
+    await render(
       <Pagination variant="compact" labelNext="Next" labelPrev="Prev">
         {buildPages(9, 3)}
       </Pagination>
     )
-    const pagination = screen.getByRole('navigation')
-    const allButtons = screen.queryAllByRole('button')
-    const paginationButtons = screen.getAllByRole('button', { name: /^#\d$/ })
+    const pagination = page.getByRole('navigation').element()
+    const allButtons = page.getByRole('button').elements()
+    const paginationButtons = page
+      .getByRole('button', { name: /^#\d$/ })
+      .elements()
     const ellipses = document.querySelectorAll('li[aria-hidden="true"]')
 
     expect(pagination).toBeInTheDocument()
@@ -232,15 +236,17 @@ describe('<Pagination />', () => {
   })
 
   it('should truncate start', async () => {
-    render(
+    await render(
       <Pagination variant="compact" labelNext="Next" labelPrev="Prev">
         {buildPages(9, 8)}
       </Pagination>
     )
 
-    const pagination = screen.getByRole('navigation')
-    const allButtons = screen.queryAllByRole('button')
-    const paginationButtons = screen.getAllByRole('button', { name: /^#\d$/ })
+    const pagination = page.getByRole('navigation').element()
+    const allButtons = page.getByRole('button').elements()
+    const paginationButtons = page
+      .getByRole('button', { name: /^#\d$/ })
+      .elements()
     const ellipses = document.querySelectorAll('li[aria-hidden="true"]')
 
     expect(pagination).toBeInTheDocument()
@@ -255,15 +261,17 @@ describe('<Pagination />', () => {
   })
 
   it('should truncate end', async () => {
-    render(
+    await render(
       <Pagination variant="compact" labelNext="Next" labelPrev="Prev">
         {buildPages(6)}
       </Pagination>
     )
 
-    const pagination = screen.getByRole('navigation')
-    const allButtons = screen.queryAllByRole('button')
-    const paginationButtons = screen.getAllByRole('button', { name: /^#\d$/ })
+    const pagination = page.getByRole('navigation').element()
+    const allButtons = page.getByRole('button').elements()
+    const paginationButtons = page
+      .getByRole('button', { name: /^#\d$/ })
+      .elements()
     const ellipses = document.querySelectorAll('li[aria-hidden="true"]')
 
     expect(pagination).toBeInTheDocument()
@@ -278,18 +286,22 @@ describe('<Pagination />', () => {
   })
 
   it('should omit ellipses when bounds included in context', async () => {
-    render(
+    await render(
       <Pagination variant="compact" labelNext="Next" labelPrev="Prev">
         {buildPages(7, 2)}
       </Pagination>
     )
 
-    const pagination = screen.getByRole('navigation')
-    const allButtons = screen.queryAllByRole('button')
-    const paginationButtons = screen.getAllByRole('button', { name: /^#\d$/ })
-    const ellipses = screen.queryAllByText('…', {
-      selector: '[aria-hidden="true"]'
-    })
+    const pagination = page.getByRole('navigation').element()
+    const allButtons = page.getByRole('button').elements()
+    const paginationButtons = page
+      .getByRole('button', { name: /^#\d$/ })
+      .elements()
+    const ellipses = page
+      .getByText('…', {
+        selector: '[aria-hidden="true"]'
+      })
+      .elements()
 
     expect(pagination).toBeInTheDocument()
     expect(pagination).toHaveTextContent('Prev#0#1#2#3#4#5#6Next')
@@ -301,30 +313,32 @@ describe('<Pagination />', () => {
 
   describe('when updating with the FIRST page becoming current', () => {
     it('should move focus from the Previous Page button to the first page button', async () => {
-      const { rerender } = render(
+      const { rerender } = await render(
         <Pagination variant="compact" labelNext="Next" labelPrev="Previous">
           {buildPages(7, 1)}
         </Pagination>
       )
 
-      const prevButton = screen.getByRole('button', { name: 'Previous' })
+      const prevButton = page
+        .getByRole('button', { name: 'Previous' })
+        .element()
 
       prevButton.focus()
       expect(prevButton).toHaveFocus()
 
       // Set children: buildPages(7, 0)
-      rerender(
+      await rerender(
         <Pagination variant="compact" labelNext="Next" labelPrev="Previous">
           {buildPages(7, 0)}
         </Pagination>
       )
 
-      const button0 = screen.getByRole('button', { name: '#0' })
+      const button0 = page.getByRole('button', { name: '#0' }).element()
       expect(button0).toHaveFocus()
     })
 
     it('should move focus from the First Page button to the first page button', async () => {
-      const { rerender } = render(
+      const { rerender } = await render(
         <Pagination
           variant="compact"
           labelNext="Next"
@@ -337,13 +351,13 @@ describe('<Pagination />', () => {
         </Pagination>
       )
 
-      const firstButton = screen.getByRole('button', { name: 'First' })
+      const firstButton = page.getByRole('button', { name: 'First' }).element()
 
       firstButton.focus()
       expect(firstButton).toHaveFocus()
 
       // Set children: buildPages(7, 0)
-      rerender(
+      await rerender(
         <Pagination
           variant="compact"
           labelNext="Next"
@@ -355,23 +369,23 @@ describe('<Pagination />', () => {
           {buildPages(7, 0)}
         </Pagination>
       )
-      const button0 = screen.getByRole('button', { name: '#0' })
+      const button0 = page.getByRole('button', { name: '#0' }).element()
       expect(button0).toHaveFocus()
     })
 
     it('should not change focus when the Previous Page button did not have focus', async () => {
-      const { rerender } = render(
+      const { rerender } = await render(
         <Pagination variant="compact" labelNext="Next" labelPrev="Previous">
           {buildPages(7, 1)}
         </Pagination>
       )
 
-      const button1 = screen.getByRole('button', { name: '#1' })
+      const button1 = page.getByRole('button', { name: '#1' }).element()
 
       button1.focus()
       expect(button1).toHaveFocus()
 
-      rerender(
+      await rerender(
         <Pagination variant="compact" labelNext="Next" labelPrev="Previous">
           {buildPages(7, 0)}
         </Pagination>
@@ -381,7 +395,7 @@ describe('<Pagination />', () => {
     })
 
     it('should not change focus when the First Page button did not have focus', async () => {
-      const { rerender } = render(
+      const { rerender } = await render(
         <Pagination
           variant="compact"
           labelNext="Next"
@@ -393,12 +407,12 @@ describe('<Pagination />', () => {
           {buildPages(7, 1)}
         </Pagination>
       )
-      const button1 = screen.getByRole('button', { name: '#1' })
+      const button1 = page.getByRole('button', { name: '#1' }).element()
 
       button1.focus()
       expect(button1).toHaveFocus()
 
-      rerender(
+      await rerender(
         <Pagination
           variant="compact"
           labelNext="Next"
@@ -415,30 +429,32 @@ describe('<Pagination />', () => {
     })
 
     it('should not continue to change focus on subsequent updates', async () => {
-      const { rerender } = render(
+      const { rerender } = await render(
         <Pagination variant="compact" labelNext="Next" labelPrev="Previous">
           {buildPages(7, 1)}
         </Pagination>
       )
 
-      const prevButton = screen.getByRole('button', { name: 'Previous' })
+      const prevButton = page
+        .getByRole('button', { name: 'Previous' })
+        .element()
 
       prevButton.focus()
       expect(prevButton).toHaveFocus()
 
       // Set children: buildPages(7, 0)
-      rerender(
+      await rerender(
         <Pagination variant="compact" labelNext="Next" labelPrev="Previous">
           {buildPages(7, 0)}
         </Pagination>
       )
-      const button1 = screen.getByRole('button', { name: '#1' })
+      const button1 = page.getByRole('button', { name: '#1' }).element()
 
       button1.focus()
       expect(button1).toHaveFocus()
 
       // Set children: buildPages(7, 0)
-      rerender(
+      await rerender(
         <Pagination variant="compact" labelNext="Next" labelPrev="Previous">
           {buildPages(7, 0)}
         </Pagination>
@@ -450,29 +466,29 @@ describe('<Pagination />', () => {
 
   describe('when updating with the LAST page becoming current', () => {
     it('should move focus from the Next Page button to the last page button', async () => {
-      const { rerender } = render(
+      const { rerender } = await render(
         <Pagination variant="compact" labelNext="Next" labelPrev="Previous">
           {buildPages(7, 5)}
         </Pagination>
       )
-      const nextButton = screen.getByRole('button', { name: 'Next' })
+      const nextButton = page.getByRole('button', { name: 'Next' }).element()
 
       nextButton.focus()
       expect(nextButton).toHaveFocus()
 
       // Set children: buildPages(7, 6)
-      rerender(
+      await rerender(
         <Pagination variant="compact" labelNext="Next" labelPrev="Previous">
           {buildPages(7, 6)}
         </Pagination>
       )
-      const button6 = screen.getByRole('button', { name: '#6' })
+      const button6 = page.getByRole('button', { name: '#6' }).element()
 
       expect(button6).toHaveFocus()
     })
 
     it('should move focus from the Last Page button to the last page button', async () => {
-      const { rerender } = render(
+      const { rerender } = await render(
         <Pagination
           variant="compact"
           labelNext="Next"
@@ -484,13 +500,13 @@ describe('<Pagination />', () => {
           {buildPages(7, 4)}
         </Pagination>
       )
-      const lastButton = screen.getByRole('button', { name: 'Last' })
+      const lastButton = page.getByRole('button', { name: 'Last' }).element()
 
       lastButton.focus()
       expect(lastButton).toHaveFocus()
 
       // Set children: buildPages(7, 6)
-      rerender(
+      await rerender(
         <Pagination
           variant="compact"
           labelNext="Next"
@@ -502,24 +518,24 @@ describe('<Pagination />', () => {
           {buildPages(7, 6)}
         </Pagination>
       )
-      const button6 = screen.getByRole('button', { name: '#6' })
+      const button6 = page.getByRole('button', { name: '#6' }).element()
 
       expect(button6).toHaveFocus()
     })
 
     it('should not change focus when the Next Page button did not have focus', async () => {
-      const { rerender } = render(
+      const { rerender } = await render(
         <Pagination variant="compact" labelNext="Next" labelPrev="Previous">
           {buildPages(7, 5)}
         </Pagination>
       )
-      const button5 = screen.getByRole('button', { name: '#5' })
+      const button5 = page.getByRole('button', { name: '#5' }).element()
 
       button5.focus()
       expect(button5).toHaveFocus()
 
       // Set children: buildPages(7, 5)
-      rerender(
+      await rerender(
         <Pagination variant="compact" labelNext="Next" labelPrev="Previous">
           {buildPages(7, 5)}
         </Pagination>
@@ -528,7 +544,7 @@ describe('<Pagination />', () => {
     })
 
     it('should not change focus when the Last Page button did not have focus', async () => {
-      const { rerender } = render(
+      const { rerender } = await render(
         <Pagination
           variant="compact"
           labelNext="Next"
@@ -540,13 +556,13 @@ describe('<Pagination />', () => {
           {buildPages(7, 5)}
         </Pagination>
       )
-      const button5 = screen.getByRole('button', { name: '#5' })
+      const button5 = page.getByRole('button', { name: '#5' }).element()
 
       button5.focus()
       expect(button5).toHaveFocus()
 
       // Set children: buildPages(7, 6)
-      rerender(
+      await rerender(
         <Pagination
           variant="compact"
           labelNext="Next"
@@ -563,29 +579,29 @@ describe('<Pagination />', () => {
     })
 
     it('should not continue to change focus on subsequent updates', async () => {
-      const { rerender } = render(
+      const { rerender } = await render(
         <Pagination variant="compact" labelNext="Next" labelPrev="Previous">
           {buildPages(7, 5)}
         </Pagination>
       )
-      const nextButton = screen.getByRole('button', { name: 'Next' })
+      const nextButton = page.getByRole('button', { name: 'Next' }).element()
 
       nextButton.focus()
       expect(nextButton).toHaveFocus()
 
       // Set children: buildPages(7, 6)
-      rerender(
+      await rerender(
         <Pagination variant="compact" labelNext="Next" labelPrev="Previous">
           {buildPages(7, 6)}
         </Pagination>
       )
-      const button5 = screen.getByRole('button', { name: '#5' })
+      const button5 = page.getByRole('button', { name: '#5' }).element()
 
       button5.focus()
       expect(button5).toHaveFocus()
 
       // Set children: buildPages(7, 6)
-      rerender(
+      await rerender(
         <Pagination variant="compact" labelNext="Next" labelPrev="Previous">
           {buildPages(7, 6)}
         </Pagination>
@@ -597,34 +613,40 @@ describe('<Pagination />', () => {
   describe('arrows', () => {
     describe('should render', () => {
       it('only the stepper arrows when available', async () => {
-        const { rerender } = render(
+        const { rerender } = await render(
           <Pagination variant="compact" labelNext="Next" labelPrev="Previous">
             {buildPages(6)}
           </Pagination>
         )
-        const prevButton = screen.queryByRole('button', { name: 'Previous' })
-        const nextButton = screen.queryByRole('button', { name: 'Next' })
+        const prevButton = page
+          .getByRole('button', { name: 'Previous' })
+          .query()
+        const nextButton = page.getByRole('button', { name: 'Next' }).query()
 
         expect(prevButton).not.toBeInTheDocument()
         expect(nextButton).toBeInTheDocument()
 
         // Set children: buildPages(6, 5)
-        rerender(
+        await rerender(
           <Pagination variant="compact" labelNext="Next" labelPrev="Previous">
             {buildPages(6, 5)}
           </Pagination>
         )
-        const prevButtonUpdated = screen.queryByRole('button', {
-          name: 'Previous'
-        })
-        const nextButtonUpdated = screen.queryByRole('button', { name: 'Next' })
+        const prevButtonUpdated = page
+          .getByRole('button', {
+            name: 'Previous'
+          })
+          .query()
+        const nextButtonUpdated = page
+          .getByRole('button', { name: 'Next' })
+          .query()
 
         expect(prevButtonUpdated).toBeInTheDocument()
         expect(nextButtonUpdated).not.toBeInTheDocument()
       })
 
       it('the First and Last arrows withFirstAndLastButton', async () => {
-        const { rerender } = render(
+        const { rerender } = await render(
           <Pagination
             variant="compact"
             labelNext="Next"
@@ -636,14 +658,14 @@ describe('<Pagination />', () => {
             {buildPages(6)}
           </Pagination>
         )
-        const firstButton = screen.queryByRole('button', { name: 'First' })
-        const lastButton = screen.queryByRole('button', { name: 'Last' })
+        const firstButton = page.getByRole('button', { name: 'First' }).query()
+        const lastButton = page.getByRole('button', { name: 'Last' }).query()
 
         expect(firstButton).not.toBeInTheDocument()
         expect(lastButton).toBeInTheDocument()
 
         // Set children: buildPages(6, 5)
-        rerender(
+        await rerender(
           <Pagination
             variant="compact"
             labelNext="Next"
@@ -655,17 +677,21 @@ describe('<Pagination />', () => {
             {buildPages(6, 5)}
           </Pagination>
         )
-        const firstButtonUpdated = screen.queryByRole('button', {
-          name: 'First'
-        })
-        const lastButtonUpdated = screen.queryByRole('button', { name: 'Last' })
+        const firstButtonUpdated = page
+          .getByRole('button', {
+            name: 'First'
+          })
+          .query()
+        const lastButtonUpdated = page
+          .getByRole('button', { name: 'Last' })
+          .query()
 
         expect(firstButtonUpdated).toBeInTheDocument()
         expect(lastButtonUpdated).not.toBeInTheDocument()
       })
 
       it('the disabled arrows with showDisabledButtons', async () => {
-        const { rerender } = render(
+        const { rerender } = await render(
           <Pagination
             variant="compact"
             labelNext="Next"
@@ -679,10 +705,14 @@ describe('<Pagination />', () => {
           </Pagination>
         )
 
-        const firstButton = screen.getByRole('button', { name: 'First' })
-        const prevButton = screen.getByRole('button', { name: 'Previous' })
-        const nextButton = screen.getByRole('button', { name: 'Next' })
-        const lastButton = screen.getByRole('button', { name: 'Last' })
+        const firstButton = page
+          .getByRole('button', { name: 'First' })
+          .element()
+        const prevButton = page
+          .getByRole('button', { name: 'Previous' })
+          .element()
+        const nextButton = page.getByRole('button', { name: 'Next' }).element()
+        const lastButton = page.getByRole('button', { name: 'Last' }).element()
 
         expect(firstButton).toBeDisabled()
         expect(prevButton).toBeDisabled()
@@ -691,7 +721,7 @@ describe('<Pagination />', () => {
 
         // Go to last item
         // Set children: buildPages(6, 5)
-        rerender(
+        await rerender(
           <Pagination
             variant="compact"
             labelNext="Next"
@@ -704,12 +734,20 @@ describe('<Pagination />', () => {
             {buildPages(6, 5)}
           </Pagination>
         )
-        const firstButtonUpdated = screen.getByRole('button', { name: 'First' })
-        const prevButtonUpdated = screen.getByRole('button', {
-          name: 'Previous'
-        })
-        const nextButtonUpdated = screen.getByRole('button', { name: 'Next' })
-        const lastButtonUpdated = screen.getByRole('button', { name: 'Last' })
+        const firstButtonUpdated = page
+          .getByRole('button', { name: 'First' })
+          .element()
+        const prevButtonUpdated = page
+          .getByRole('button', {
+            name: 'Previous'
+          })
+          .element()
+        const nextButtonUpdated = page
+          .getByRole('button', { name: 'Next' })
+          .element()
+        const lastButtonUpdated = page
+          .getByRole('button', { name: 'Last' })
+          .element()
 
         expect(firstButtonUpdated).not.toBeDisabled()
         expect(prevButtonUpdated).not.toBeDisabled()
@@ -719,31 +757,35 @@ describe('<Pagination />', () => {
     })
 
     it('should not continue to change focus on subsequent updates', async () => {
-      const { rerender } = render(
+      const { rerender } = await render(
         <Pagination variant="compact" labelNext="Next" labelPrev="Previous">
           {buildPages(6)}
         </Pagination>
       )
 
-      const prevButton = screen.queryByRole('button', { name: 'Previous' })
+      const prevButton = page.getByRole('button', { name: 'Previous' }).query()
       expect(prevButton).not.toBeInTheDocument()
 
-      const nextButton = screen.queryByRole('button', { name: 'Next' })
+      const nextButton = page.getByRole('button', { name: 'Next' }).query()
       expect(nextButton).toBeInTheDocument()
 
       // Set children: buildPages(6, 5)
-      rerender(
+      await rerender(
         <Pagination variant="compact" labelNext="Next" labelPrev="Previous">
           {buildPages(6, 5)}
         </Pagination>
       )
 
-      const prevButtonUpdated = screen.queryByRole('button', {
-        name: 'Previous'
-      })
+      const prevButtonUpdated = page
+        .getByRole('button', {
+          name: 'Previous'
+        })
+        .query()
       expect(prevButtonUpdated).toBeInTheDocument()
 
-      const nextButtonUpdated = screen.queryByRole('button', { name: 'Next' })
+      const nextButtonUpdated = page
+        .getByRole('button', { name: 'Next' })
+        .query()
       expect(nextButtonUpdated).not.toBeInTheDocument()
     })
 
@@ -764,7 +806,7 @@ describe('<Pagination />', () => {
               )
               const props = { [prop]: 'foo' }
 
-              render(
+              await render(
                 <Pagination
                   variant="compact"
                   labelNext="Next"
@@ -774,7 +816,7 @@ describe('<Pagination />', () => {
                   {buildPages(6)}
                 </Pagination>
               )
-              await waitFor(() => {
+              await vi.waitFor(() => {
                 expect(consoleErrorMock.mock.calls[0][0]).toMatch(
                   expectedErrorMessageRegExp
                 )
@@ -784,7 +826,7 @@ describe('<Pagination />', () => {
             it(`should allow the '${prop}' prop`, async () => {
               const props = { [prop]: allowedProps[prop] }
 
-              render(
+              await render(
                 <Pagination
                   variant="compact"
                   labelNext="Next"
@@ -794,7 +836,7 @@ describe('<Pagination />', () => {
                   {buildPages(6)}
                 </Pagination>
               )
-              await waitFor(() => {
+              await vi.waitFor(() => {
                 expect(consoleErrorMock).not.toHaveBeenCalled()
               })
             })
@@ -805,7 +847,7 @@ describe('<Pagination />', () => {
     it(`should pass down the elementRef prop`, async () => {
       const elementRef = vi.fn()
 
-      const { container } = render(
+      const { container } = await render(
         <Pagination
           elementRef={elementRef}
           variant="compact"
@@ -821,7 +863,7 @@ describe('<Pagination />', () => {
     it('should navigate to adjacent pages', async () => {
       const onClick = vi.fn()
 
-      render(
+      await render(
         <Pagination variant="compact" labelNext="Next" labelPrev="Previous">
           {[
             ...buildPages(6, 5),
@@ -831,11 +873,11 @@ describe('<Pagination />', () => {
           ]}
         </Pagination>
       )
-      const nextButton = screen.getByRole('button', { name: 'Next' })
+      const nextButton = page.getByRole('button', { name: 'Next' }).element()
 
       await userEvent.click(nextButton)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onClick).toHaveBeenCalled()
       })
     })
@@ -843,7 +885,7 @@ describe('<Pagination />', () => {
 
   describe('input variant', () => {
     it('should display number input', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Pagination
           variant="input"
           labelNext="Next"
@@ -860,7 +902,7 @@ describe('<Pagination />', () => {
     })
 
     it('should display all arrow buttons', async () => {
-      render(
+      await render(
         <Pagination
           variant="input"
           labelNext="Next"
@@ -872,10 +914,10 @@ describe('<Pagination />', () => {
         </Pagination>
       )
 
-      const firstButton = screen.getByRole('button', { name: 'First' })
-      const prevButton = screen.getByRole('button', { name: 'Prev' })
-      const nextButton = screen.getByRole('button', { name: 'Next' })
-      const lastButton = screen.getByRole('button', { name: 'Last' })
+      const firstButton = page.getByRole('button', { name: 'First' }).element()
+      const prevButton = page.getByRole('button', { name: 'Prev' }).element()
+      const nextButton = page.getByRole('button', { name: 'Next' }).element()
+      const lastButton = page.getByRole('button', { name: 'Last' }).element()
 
       expect(firstButton).toBeVisible()
       expect(prevButton).toBeVisible()
@@ -884,7 +926,7 @@ describe('<Pagination />', () => {
     })
 
     it('should pass label', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Pagination
           variant="input"
           labelNext="Next"
@@ -903,7 +945,7 @@ describe('<Pagination />', () => {
     })
 
     it('should pass ScreenReaderLabel', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Pagination
           variant="input"
           labelNext="Next"
@@ -925,7 +967,7 @@ describe('<Pagination />', () => {
       const onClick1 = vi.fn()
       const onClick2 = vi.fn()
 
-      const { container } = render(
+      const { container } = await render(
         <Pagination
           variant="input"
           labelNext="Next"
@@ -948,13 +990,13 @@ describe('<Pagination />', () => {
 
       await userEvent.type(numberInput!, '2{enter}')
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onClick2).toHaveBeenCalled()
       })
     })
 
     it('should update page number when currentPage changes', async () => {
-      const { container, rerender } = render(
+      const { container, rerender } = await render(
         <Pagination
           variant="input"
           labelNext="Next"
@@ -969,7 +1011,7 @@ describe('<Pagination />', () => {
 
       expect(numberInput).toHaveValue(4)
 
-      rerender(
+      await rerender(
         <Pagination
           variant="input"
           labelNext="Next"
@@ -985,7 +1027,7 @@ describe('<Pagination />', () => {
     })
 
     it('should disable the input when disabled', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Pagination
           variant="input"
           labelNext="Next"
@@ -1004,8 +1046,8 @@ describe('<Pagination />', () => {
   })
 
   describe('with minimal config', () => {
-    it('should render the correct pages - 1', () => {
-      const { container } = render(
+    it('should render the correct pages - 1', async () => {
+      const { container } = await render(
         <Pagination
           variant="compact"
           labelNext="Next Page"
@@ -1015,8 +1057,8 @@ describe('<Pagination />', () => {
       )
       expect(container.firstChild).toHaveTextContent('12…9Next Page')
     })
-    it('should render the correct pages - 2', () => {
-      const { container } = render(
+    it('should render the correct pages - 2', async () => {
+      const { container } = await render(
         <Pagination
           variant="compact"
           labelNext="Next Page"
@@ -1029,8 +1071,8 @@ describe('<Pagination />', () => {
         'Previous Page1…456…9Next Page'
       )
     })
-    it('should render the correct pages - 3', () => {
-      const { container } = render(
+    it('should render the correct pages - 3', async () => {
+      const { container } = await render(
         <Pagination
           variant="compact"
           labelNext="Next Page"
@@ -1045,8 +1087,8 @@ describe('<Pagination />', () => {
         'Previous Page123456789Next Page'
       )
     })
-    it('should render the correct pages - 4', () => {
-      const { container } = render(
+    it('should render the correct pages - 4', async () => {
+      const { container } = await render(
         <Pagination
           variant="compact"
           labelNext="Next Page"
@@ -1061,8 +1103,8 @@ describe('<Pagination />', () => {
         'Previous Page12…456…89Next Page'
       )
     })
-    it('should render the correct pages - 5', () => {
-      const { container } = render(
+    it('should render the correct pages - 5', async () => {
+      const { container } = await render(
         <Pagination
           variant="compact"
           labelNext="Next Page"
@@ -1076,8 +1118,8 @@ describe('<Pagination />', () => {
         'Previous Page123456789Next Page'
       )
     })
-    it('should render the correct pages - 6', () => {
-      const { container } = render(
+    it('should render the correct pages - 6', async () => {
+      const { container } = await render(
         <Pagination
           variant="compact"
           labelNext="Next Page"
@@ -1091,8 +1133,8 @@ describe('<Pagination />', () => {
         'Previous Page123456789Next Page'
       )
     })
-    it('should render the correct pages - 7', () => {
-      const { container } = render(
+    it('should render the correct pages - 7', async () => {
+      const { container } = await render(
         <Pagination
           variant="compact"
           labelNext="Next Page"
@@ -1105,8 +1147,8 @@ describe('<Pagination />', () => {
       )
       expect(container.firstChild).toHaveTextContent('123…789Next Page')
     })
-    it('should render the correct ellipsis', () => {
-      const { container } = render(
+    it('should render the correct ellipsis', async () => {
+      const { container } = await render(
         <Pagination
           variant="compact"
           labelNext="Next Page"
@@ -1120,9 +1162,9 @@ describe('<Pagination />', () => {
       )
       expect(container.firstChild).toHaveTextContent('123<->789Next Page')
     })
-    it('should render custom buttons', () => {
+    it('should render custom buttons', async () => {
       const pageMap = ['A-G', 'H-J', 'K-M', 'N-Q', 'R-Z']
-      const { container } = render(
+      const { container } = await render(
         <Pagination
           variant="full"
           labelNext="Next Page"
@@ -1134,8 +1176,8 @@ describe('<Pagination />', () => {
       )
       expect(container.firstChild).toHaveTextContent('A-GH-JK-MN-QR-Z')
     })
-    it('should render huge "totalPageNumber"s properly', () => {
-      const { container } = render(
+    it('should render huge "totalPageNumber"s properly', async () => {
+      const { container } = await render(
         <Pagination
           variant="compact"
           labelNext="Next Page"
@@ -1148,8 +1190,8 @@ describe('<Pagination />', () => {
         'Previous Page1…567756785679…1000000000000000Next Page'
       )
     })
-    it('should render first and last buttons', () => {
-      const { container } = render(
+    it('should render first and last buttons', async () => {
+      const { container } = await render(
         <Pagination
           variant="compact"
           labelNext="Next Page"
@@ -1165,8 +1207,8 @@ describe('<Pagination />', () => {
         'First PagePrevious Page1…456…100Next PageLast Page'
       )
     })
-    it('should render every page if boundary and sibling counts are big enough', () => {
-      const { container } = render(
+    it('should render every page if boundary and sibling counts are big enough', async () => {
+      const { container } = await render(
         <Pagination
           variant="compact"
           labelNext="Next Page"
@@ -1181,7 +1223,7 @@ describe('<Pagination />', () => {
     })
 
     it('should add aria-label when screenReaderLabelPageButton is set', async () => {
-      render(
+      await render(
         <Pagination
           labelNext="Next Page"
           labelPrev="Previous Page"
@@ -1191,7 +1233,9 @@ describe('<Pagination />', () => {
           }
         />
       )
-      const paginationButtons = screen.getAllByRole('button', { name: /\d$/ })
+      const paginationButtons = page
+        .getByRole('button', { name: /\d$/ })
+        .elements()
 
       for (let i: number = 0; i < paginationButtons.length; i++) {
         expect(paginationButtons[i]).toHaveAttribute(

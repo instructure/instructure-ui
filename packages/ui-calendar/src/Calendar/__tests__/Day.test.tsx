@@ -22,15 +22,14 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
-import { vi } from 'vitest'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import { describe, it, expect, vi } from 'vitest'
 import { CalendarDay as Day } from '@instructure/ui-calendar/latest'
 
 describe('Day', () => {
   it('should render children', async () => {
-    const { rerender } = render(
+    const { rerender } = await render(
       <Day
         date="2019-08-02"
         label="1 August 2019 Friday"
@@ -39,11 +38,11 @@ describe('Day', () => {
         8
       </Day>
     )
-    const child = screen.getByText('8')
+    const child = page.getByText('8').element()
 
     expect(child).toBeInTheDocument()
 
-    rerender(
+    await rerender(
       <Day
         date="2019-08-02"
         label="1 August 2019 Friday"
@@ -52,14 +51,14 @@ describe('Day', () => {
         31
       </Day>
     )
-    const childUpdated = screen.getByText('31')
+    const childUpdated = page.getByText('31').element()
 
     expect(childUpdated).toBeInTheDocument()
   })
 
   it('should have an accessible label', async () => {
     const label = '1 August 2019 Friday'
-    const { container } = render(
+    const { container } = await render(
       <Day date="2019-08-02" label={label} selectedLabel="Selected">
         8
       </Day>
@@ -73,7 +72,7 @@ describe('Day', () => {
   })
 
   it('should set aria-current="date" when `isToday`', async () => {
-    const { container, rerender } = render(
+    const { container, rerender } = await render(
       <Day
         date="2019-08-02"
         label="1 August 2019 Friday"
@@ -87,7 +86,7 @@ describe('Day', () => {
 
     expect(today).toHaveAttribute('aria-current', 'date')
 
-    rerender(
+    await rerender(
       <Day
         date="2019-08-02"
         label="1 August 2019 Friday"
@@ -103,7 +102,7 @@ describe('Day', () => {
   })
 
   it('should not set aria-selected without a role', async () => {
-    const { container, rerender } = render(
+    const { container, rerender } = await render(
       <Day
         date="2019-08-02"
         label="1 August 2019 Friday"
@@ -116,7 +115,7 @@ describe('Day', () => {
 
     expect(day).not.toHaveAttribute('aria-selected')
 
-    rerender(
+    await rerender(
       <Day
         date="2019-08-02"
         label="1 August 2019 Friday"
@@ -132,7 +131,7 @@ describe('Day', () => {
   })
 
   it('should set aria-selected="true/false" when `isSelected` and `role` is `option` or `gridcell`', async () => {
-    const { container, rerender } = render(
+    const { container, rerender } = await render(
       <Day
         date="2019-08-02"
         label="1 August 2019 Friday"
@@ -145,7 +144,7 @@ describe('Day', () => {
     const day = container.querySelector('[class*="-calendarDay"]')
     expect(day).toHaveAttribute('aria-selected', 'false')
 
-    rerender(
+    await rerender(
       <Day
         date="2019-08-02"
         label="1 August 2019 Friday"
@@ -159,7 +158,7 @@ describe('Day', () => {
     const daySelected = container.querySelector('[class*="-calendarDay"]')
     expect(daySelected).toHaveAttribute('aria-selected', 'true')
 
-    rerender(
+    await rerender(
       <Day
         date="2019-08-02"
         label="1 August 2019 Friday"
@@ -173,7 +172,7 @@ describe('Day', () => {
     const dayCell = container.querySelector('[class*="-calendarDay"]')
     expect(dayCell).toHaveAttribute('aria-selected', 'false')
 
-    rerender(
+    await rerender(
       <Day
         date="2019-08-02"
         label="1 August 2019 Friday"
@@ -192,7 +191,7 @@ describe('Day', () => {
     const onClick = vi.fn()
     const date = '2019-08-02'
 
-    const { container } = render(
+    const { container } = await render(
       <Day
         date={date}
         label="1 August 2019 Friday"
@@ -206,7 +205,7 @@ describe('Day', () => {
 
     await userEvent.click(day!)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       const args = onClick.mock.calls[0][1]
 
       expect(onClick).toHaveBeenCalledTimes(1)
@@ -218,7 +217,7 @@ describe('Day', () => {
     const onKeyDown = vi.fn()
     const date = '2019-08-02'
 
-    const { container } = render(
+    const { container } = await render(
       <Day
         date={date}
         label="1 August 2019 Friday"
@@ -234,7 +233,7 @@ describe('Day', () => {
 
     await userEvent.type(day, '{enter}')
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       const args = onKeyDown.mock.calls[0][1]
 
       expect(onKeyDown).toHaveBeenCalledTimes(1)
@@ -245,7 +244,7 @@ describe('Day', () => {
   it('should apply disabled when interaction is `disabled`', async () => {
     const onClick = vi.fn()
 
-    const { container } = render(
+    const { container } = await render(
       <Day
         date="2019-08-02"
         label="1 August 2019 Friday"
@@ -260,7 +259,7 @@ describe('Day', () => {
 
     await userEvent.click(day)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onClick).not.toHaveBeenCalled()
       expect(day).toHaveAttribute('disabled')
     })
@@ -271,7 +270,7 @@ describe('Day', () => {
     const elementRef = (el: Element | null) => {
       element = el
     }
-    const { container } = render(
+    const { container } = await render(
       <Day
         date="2019-08-02"
         label="1 August 2019 Friday"
@@ -288,7 +287,7 @@ describe('Day', () => {
 
   describe('element type', () => {
     it('should render as a span by default', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Day
           date="2019-08-02"
           label="1 August 2019 Friday"
@@ -303,7 +302,7 @@ describe('Day', () => {
     })
 
     it('should render as a button when onClick is provided', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Day
           date="2019-08-02"
           label="1 August 2019 Friday"
@@ -319,7 +318,7 @@ describe('Day', () => {
     })
 
     it('default elementTypes should be overwritten when `as` prop is set', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Day
           date="2019-08-02"
           label="1 August 2019 Friday"
