@@ -9,7 +9,6 @@ External docs (preferred over guessing component APIs): https://instructure.desi
 - `pnpm run bootstrap` — required first time and after `pnpm run clean`. Builds icons, compiles, generates tokens. Plain `pnpm install` is **not** enough.
 - `pnpm run dev` — docs app at http://localhost:9090 (hot-reloads component changes).
 - `pnpm run test:vitest <pkg>` — run a single package's unit tests, e.g. `pnpm run test:vitest ui-radio-input`. Without an argument it runs everything (slow).
-- `pnpm run cy:component` — Cypress component tests.
 - Visual regression lives in `/regression-test` (separate Next.js app, port 3000). See `/regression-test/README.md`.
 
 ## Code conventions

@@ -257,7 +257,7 @@ type: code
 pnpm run test:vitest ui-alerts
 ```
 
-Both Cypress component tests and visual regression tests use the `/latest` versions, so they always test the newest implementation. If they break after a change, they need to be fixed as part of that change.
+The visual regression tests use the `/latest` versions, so they always test the newest implementation. If they break after a change, they need to be fixed as part of that change.
 
 ## Versioning and Releases
 
