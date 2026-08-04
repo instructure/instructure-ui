@@ -39,9 +39,15 @@ importers:
       '@instructure/ui-babel-preset':
         specifier: workspace:*
         version: link:packages/ui-babel-preset
+      '@instructure/ui-icons':
+        specifier: workspace:*
+        version: link:packages/ui-icons
       '@instructure/ui-scripts':
         specifier: workspace:*
         version: link:packages/ui-scripts
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:packages/ui-themes
       '@testing-library/dom':
         specifier: ^10.4.1
         version: 10.4.1
