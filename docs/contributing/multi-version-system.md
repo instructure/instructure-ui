@@ -312,3 +312,50 @@ When you add a breaking change to a component, you manually add the new `./v11_8
 3. **Implement** breaking changes in the new version (keep `/latest` imports)
 4. **Create** a new lettered export file that exports all components at their latest versions
 5. **Update** `package.json` exports: add the new `./vX_Y` entry and point `./latest` to the new letter
+
+## Component versions in the changelog
+
+Because a single library release (e.g. `11.7.4`) can contain fixes that landed in
+different component versions, each changelog entry is prefixed with the component
+version(s) the change touched, so consumers know which version(s) received it:
+
+```md
+---
+type: code
+---
+
+### Bug Fixes
+
+- [v11.7] **ui-buttons:** fix textAlign center on Buttons without icon ([b46ddb7](...))
+- [v11.6, v11.7] **ui-form-field:** keep messages out of the accessible name ([409d077](...))
+```
+
+This is fully automatic — there is nothing to remember when committing. At release
+time, `lerna version` runs with our `--changelog-preset ./scripts/component-versions`
+(`scripts/component-versions/changelog-preset.cjs`). It is the stock angular preset
+with one addition: for each commit it computes which published component version(s)
+the changed files belong to and renders them as the `[...]` prefix.
+
+The mapping is derived exactly the same way the exports are wired up (see
+[How It All Fits Together](#how-it-all-fits-together)): a changed file under
+`<Component>/vN/` is traced to the lettered export file(s) that re-export it, then to
+the `./vX_Y` `package.json` export keys that point at those letters
+(`scripts/component-versions/resolveComponentVersions.cjs`). A file that is not inside
+a versioned component folder (build config, tests, non-versioned packages) resolves to
+no version and gets no prefix — the "if applicable" rule.
+
+> A single lettered file can mix versions — e.g. `ui-form-field`'s `b.ts` (which backs
+> `./v11_7`) re-exports most components from `v2` but `utils` from `v1` because `utils`
+> has no `v2`. A change to `utils/v1` therefore affects **both** `v11.6` and `v11.7`.
+> Computing this by hand is error-prone, which is why it is derived automatically.
+
+Because master uses rebase-and-merge (each commit is preserved with its message
+intact), the preset sees every commit individually — no squash collapses multiple
+component-version changes into a single entry.
+
+The `/commit` flow also records the versions as a `Component-Versions:` trailer in the
+commit message itself (via `scripts/component-versions/staged-versions.cjs`), so they
+are visible in `git log` too. The changelog does **not** depend on that trailer — it
+always recomputes from the changed files — so commits made another way (a manual
+`git commit`, `pnpm run commit`) are still annotated correctly in the changelog; they
+just won't carry the trailer in their message.

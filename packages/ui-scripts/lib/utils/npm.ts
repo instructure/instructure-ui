@@ -98,6 +98,9 @@ export async function bumpPackages(
       '--no-git-tag-version', // do not add git tag or commit
       '--force-publish=*', // bump all packages even if they have no changes
       '--conventional-commits', // determines new version and updates Changelog
+      // Prefix each changelog entry with the component version(s)
+      '--changelog-preset',
+      './scripts/component-versions',
       '--preid=SECURITY' // postfixes releases if type is prerelease
     ])
 
