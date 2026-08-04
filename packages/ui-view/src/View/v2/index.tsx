@@ -99,8 +99,11 @@ class View extends Component<ViewProps> {
       (process?.env?.GITHUB_PULL_REQUEST_PREVIEW === 'true' ||
         process?.env?.NODE_ENV !== 'production')
     ) {
+      const name = Component.displayName
+        ? Component.displayName
+        : Component.name
       Object.keys(pickProps(props, propsToOmit)).forEach((prop) => {
-        error(false, `[${Component.name}] prop '${prop}' is not allowed.`)
+        error(false, `[${name}] prop '${prop}' is not allowed.`)
       })
     }
     return omitProps(props, propsToOmit)
