@@ -21,11 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import type { MockInstance } from 'vitest'
-
 import { render } from 'vitest-browser-react'
 import { page, userEvent } from 'vitest/browser'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import type { MockInstance } from 'vitest'
+
 import { SourceCodeEditor } from '@instructure/ui-source-code-editor/latest'
 
 describe('<SourceCodeEditor />', () => {
@@ -213,7 +213,7 @@ describe('<SourceCodeEditor />', () => {
         />
       )
 
-      const gutterIcon = page.getByTitle('Fold line').element()
+      const gutterIcon = page.getByTitle('Fold line', { exact: true }).element()
 
       expect(gutterIcon).toBeInTheDocument()
       expect(gutterIcon).toBeVisible()
@@ -230,7 +230,7 @@ describe('<SourceCodeEditor />', () => {
         />
       )
       const editor = container.querySelector('[class$="-codeEditor"]')
-      const gutterIcon = page.getByTitle('Fold line').element()
+      const gutterIcon = page.getByTitle('Fold line', { exact: true }).element()
 
       expect(gutterIcon).toBeInTheDocument()
 

@@ -149,7 +149,7 @@ describe('<Tabs.Tab />', () => {
     )
     const tab = page.getByRole('tab').element()
 
-    await userEvent.click(tab)
+    await userEvent.click(tab, { force: true })
 
     await vi.waitFor(() => {
       expect(onClick).not.toHaveBeenCalled()
@@ -173,7 +173,8 @@ describe('<Tabs.Tab />', () => {
     )
     const tab = page.getByRole('tab').element()
 
-    await userEvent.type(tab, '{enter}')
+    tab.focus()
+    await userEvent.keyboard('{Enter}')
 
     await vi.waitFor(() => {
       expect(onKeyDown).toHaveBeenCalled()
@@ -199,7 +200,8 @@ describe('<Tabs.Tab />', () => {
     )
     const tab = page.getByRole('tab').element()
 
-    await userEvent.type(tab, '{enter}')
+    tab.focus()
+    await userEvent.keyboard('{Enter}')
 
     await vi.waitFor(() => {
       expect(onKeyDown).not.toHaveBeenCalled()

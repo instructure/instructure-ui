@@ -25,12 +25,15 @@
 import { render } from 'vitest-browser-react'
 import { page } from 'vitest/browser'
 import { describe, it, expect, vi } from 'vitest'
+
 import { PaginationButton } from '@instructure/ui-pagination/latest'
 
 describe('<PaginationButton />', () => {
   it('should designate current page', async () => {
     await render(<PaginationButton current>1</PaginationButton>)
-    const button = page.getByRole('button', { name: '1' }).element()
+    const button = page
+      .getByRole('button', { name: '1' })
+      .element() as HTMLElement
 
     expect(button).toHaveAttribute('aria-current', 'page')
   })
@@ -39,7 +42,9 @@ describe('<PaginationButton />', () => {
     const onClick = vi.fn()
     await render(<PaginationButton onClick={onClick}>1</PaginationButton>)
 
-    const button = page.getByRole('button', { name: '1' }).element()
+    const button = page
+      .getByRole('button', { name: '1' })
+      .element() as HTMLElement
 
     button.click()
 
@@ -55,7 +60,9 @@ describe('<PaginationButton />', () => {
         1
       </PaginationButton>
     )
-    const button = page.getByRole('button', { name: '1' }).element()
+    const button = page
+      .getByRole('button', { name: '1' })
+      .element() as HTMLElement
 
     button.click()
 

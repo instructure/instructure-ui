@@ -23,10 +23,10 @@
  */
 
 import { createRef } from 'react'
-import type { MockInstance } from 'vitest'
 import { render } from 'vitest-browser-react'
 import { page, userEvent } from 'vitest/browser'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import type { MockInstance } from 'vitest'
 import { Select } from '@instructure/ui-select/latest'
 
 import * as utils from '@instructure/ui-utils'
@@ -295,8 +295,6 @@ vi.mock('@instructure/ui-utils', async (importOriginal) => {
   }
 })
 
-const mockUtils = utils as any
-
 describe('<Select />', () => {
   let consoleErrorMock: ReturnType<typeof vi.spyOn>
 
@@ -343,7 +341,7 @@ describe('<Select />', () => {
   })
 
   it('should have role combobox in different browsers than Safari without onInputChange', async () => {
-    mockUtils.isSafari = vi.fn(() => false)
+    vi.mocked(utils.isSafari).mockReturnValue(false)
 
     const { container } = await render(
       <Select renderLabel="Choose an option">{getOptions()}</Select>
@@ -1093,12 +1091,13 @@ describe('<Select />', () => {
 
         const input = page.getByLabelText('Choose an option').element()
 
-        await userEvent.type(input, '{arrowdown}')
+        input.focus()
+        await userEvent.keyboard('{ArrowDown}')
         await vi.waitFor(() => {
           expect(onRequestShowOptions).toHaveBeenCalledTimes(1)
         })
 
-        await userEvent.type(input, '{arrowup}')
+        await userEvent.keyboard('{ArrowUp}')
         await vi.waitFor(() => {
           expect(onRequestShowOptions).toHaveBeenCalledTimes(2)
         })
@@ -1118,7 +1117,8 @@ describe('<Select />', () => {
 
         const input = page.getByLabelText('Choose an option').element()
 
-        await userEvent.type(input, '{space}')
+        input.focus()
+        await userEvent.keyboard(' ')
         await vi.waitFor(() => {
           expect(onRequestShowOptions).toHaveBeenCalledTimes(1)
         })
@@ -1133,7 +1133,8 @@ describe('<Select />', () => {
           </Select>
         )
 
-        await userEvent.type(input, '{space}')
+        input.focus()
+        await userEvent.keyboard(' ')
         await vi.waitFor(() => {
           expect(onRequestShowOptions).toHaveBeenCalledTimes(1)
         })
@@ -1244,7 +1245,8 @@ describe('<Select />', () => {
 
         const input = page.getByLabelText('Choose an option').element()
 
-        await userEvent.type(input, '{esc}')
+        input.focus()
+        await userEvent.keyboard('{Escape}')
         await vi.waitFor(() => {
           expect(onRequestHideOptions).toHaveBeenCalledTimes(1)
         })

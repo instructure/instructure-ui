@@ -23,6 +23,7 @@
  */
 
 import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
 import { describe, it, expect } from 'vitest'
 
 import canvas from '@instructure/ui-themes'
@@ -32,12 +33,14 @@ import { ModalHeader } from '@instructure/ui-modal/latest'
 
 const HEADER_TEXT = 'Modal-footer-text'
 
+// the browser resolves the theme's `rem` values to `px` in computed styles
+const remToPx = (value: string) =>
+  value.replace(/([\d.]+)rem/g, (_match, rem) => `${parseFloat(rem) * 16}px`)
+
 describe('<ModalHeader />', () => {
   it('should render', async () => {
-    const { findByText } = await render(
-      <ModalHeader>{HEADER_TEXT}</ModalHeader>
-    )
-    const modalHeader = await findByText(HEADER_TEXT)
+    await render(<ModalHeader>{HEADER_TEXT}</ModalHeader>)
+    const modalHeader = page.getByText(HEADER_TEXT).element()
 
     expect(modalHeader).toBeInTheDocument()
   })
@@ -46,10 +49,8 @@ describe('<ModalHeader />', () => {
     const themeVariables = canvas.newTheme.components.ModalHeader(
       canvas.newTheme.semantics(canvas.newTheme.primitives)
     )
-    const { findByText } = await render(
-      <ModalHeader variant="inverse">{HEADER_TEXT}</ModalHeader>
-    )
-    const modalHeader = await findByText(HEADER_TEXT)
+    await render(<ModalHeader variant="inverse">{HEADER_TEXT}</ModalHeader>)
+    const modalHeader = page.getByText(HEADER_TEXT).element()
 
     const modalHeaderStyle = window.getComputedStyle(modalHeader)
     const headerBackground = color2hex(
@@ -69,48 +70,42 @@ describe('<ModalHeader />', () => {
       const themeVariables = canvas.newTheme.components.ModalHeader(
         canvas.newTheme.semantics(canvas.newTheme.primitives)
       )
-      const { findByText } = await render(
-        <ModalHeader>{HEADER_TEXT}</ModalHeader>
-      )
-      const modalHeader = await findByText(HEADER_TEXT)
+      await render(<ModalHeader>{HEADER_TEXT}</ModalHeader>)
+      const modalHeader = page.getByText(HEADER_TEXT).element()
 
       const modalHeaderStyle = window.getComputedStyle(modalHeader)
       const headerPadding = modalHeaderStyle.padding
 
       expect(modalHeader).toBeInTheDocument()
-      expect(headerPadding).toBe(themeVariables.padding)
+      expect(headerPadding).toBe(remToPx(themeVariables.padding))
     })
 
     it('should correctly set default spacing', async () => {
       const themeVariables = canvas.newTheme.components.ModalHeader(
         canvas.newTheme.semantics(canvas.newTheme.primitives)
       )
-      const { findByText } = await render(
-        <ModalHeader spacing="default">{HEADER_TEXT}</ModalHeader>
-      )
-      const modalHeader = await findByText(HEADER_TEXT)
+      await render(<ModalHeader spacing="default">{HEADER_TEXT}</ModalHeader>)
+      const modalHeader = page.getByText(HEADER_TEXT).element()
 
       const modalHeaderStyle = window.getComputedStyle(modalHeader)
       const headerPadding = modalHeaderStyle.padding
 
       expect(modalHeader).toBeInTheDocument()
-      expect(headerPadding).toBe(themeVariables.padding)
+      expect(headerPadding).toBe(remToPx(themeVariables.padding))
     })
 
     it('should correctly set compact spacing', async () => {
       const themeVariables = canvas.newTheme.components.ModalHeader(
         canvas.newTheme.semantics(canvas.newTheme.primitives)
       )
-      const { findByText } = await render(
-        <ModalHeader spacing="compact">{HEADER_TEXT}</ModalHeader>
-      )
-      const modalHeader = await findByText(HEADER_TEXT)
+      await render(<ModalHeader spacing="compact">{HEADER_TEXT}</ModalHeader>)
+      const modalHeader = page.getByText(HEADER_TEXT).element()
 
       const modalHeaderStyle = window.getComputedStyle(modalHeader)
       const headerPadding = modalHeaderStyle.padding
 
       expect(modalHeader).toBeInTheDocument()
-      expect(headerPadding).toBe(themeVariables.paddingCompact)
+      expect(headerPadding).toBe(remToPx(themeVariables.paddingCompact))
     })
   })
 })

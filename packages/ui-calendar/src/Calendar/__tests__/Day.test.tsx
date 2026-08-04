@@ -38,7 +38,7 @@ describe('Day', () => {
         8
       </Day>
     )
-    const child = page.getByText('8').element()
+    const child = page.getByText('8', { exact: true }).element()
 
     expect(child).toBeInTheDocument()
 
@@ -51,7 +51,7 @@ describe('Day', () => {
         31
       </Day>
     )
-    const childUpdated = page.getByText('31').element()
+    const childUpdated = page.getByText('31', { exact: true }).element()
 
     expect(childUpdated).toBeInTheDocument()
   })
@@ -257,7 +257,8 @@ describe('Day', () => {
     )
     const day = container.querySelector('[class*="-calendarDay"]')!
 
-    await userEvent.click(day)
+    // `force` because Playwright refuses to click disabled elements
+    await userEvent.click(day, { force: true })
 
     await vi.waitFor(() => {
       expect(onClick).not.toHaveBeenCalled()

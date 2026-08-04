@@ -23,10 +23,10 @@
  */
 
 import { createRef } from 'react'
-import { runAxeCheck } from '@instructure/ui-axe-check'
-import { FormFieldLayout } from '@instructure/ui-form-field/latest'
 import { render } from 'vitest-browser-react'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import { runAxeCheck } from '@instructure/ui-axe-check'
+import { FormFieldLayout } from '@instructure/ui-form-field/latest'
 
 describe('<FormFieldLayout />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>

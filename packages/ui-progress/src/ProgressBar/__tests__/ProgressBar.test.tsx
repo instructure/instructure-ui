@@ -24,6 +24,7 @@
 
 import { render } from 'vitest-browser-react'
 import { describe, it, expect } from 'vitest'
+
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { ProgressBar } from '@instructure/ui-progress/latest'
 

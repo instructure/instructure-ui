@@ -23,7 +23,8 @@
  */
 
 import { render } from 'vitest-browser-react'
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import { page } from 'vitest/browser'
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 
 import { color2hex } from '@instructure/ui-color-utils'
 import canvas from '@instructure/ui-themes'
@@ -36,8 +37,8 @@ const BODY_TEXT = 'Modal-body-text'
 
 describe('<ModalBody />', () => {
   it('should render', async () => {
-    const { findByText } = await render(<ModalBody>{BODY_TEXT}</ModalBody>)
-    const modalBody = await findByText(BODY_TEXT)
+    await render(<ModalBody>{BODY_TEXT}</ModalBody>)
+    const modalBody = page.getByText(BODY_TEXT).element()
 
     expect(modalBody).toBeInTheDocument()
   })
@@ -46,10 +47,8 @@ describe('<ModalBody />', () => {
     const themeVariables = canvas.newTheme.components.ModalBody(
       canvas.newTheme.semantics(canvas.newTheme.primitives)
     )
-    const { findByText } = await render(
-      <ModalBody variant="inverse">{BODY_TEXT}</ModalBody>
-    )
-    const modalBody = await findByText(BODY_TEXT)
+    await render(<ModalBody variant="inverse">{BODY_TEXT}</ModalBody>)
+    const modalBody = page.getByText(BODY_TEXT).element()
     const modalBodyStyle = window.getComputedStyle(modalBody)
     const bodyBackground = color2hex(
       modalBodyStyle.getPropertyValue('background-color')
@@ -60,16 +59,17 @@ describe('<ModalBody />', () => {
   })
 
   it('should set the same width and height as the parent when overflow is set to fit', async () => {
-    const { findByText } = await render(
+    await render(
       <div style={{ width: '500px', height: '600px' }}>
         <ModalBody overflow="fit">{BODY_TEXT}</ModalBody>
       </div>
     )
-    const modalBody = await findByText(BODY_TEXT)
+    const modalBody = page.getByText(BODY_TEXT).element()
     const modalBodyStyle = window.getComputedStyle(modalBody)
+    const parentStyle = window.getComputedStyle(modalBody.parentElement!)
 
-    expect(modalBodyStyle.width).toBe('100%')
-    expect(modalBodyStyle.height).toBe('100%')
+    expect(modalBodyStyle.width).toBe(parentStyle.width)
+    expect(modalBodyStyle.height).toBe(parentStyle.height)
   })
 
   describe('when passing down props to View', () => {
@@ -163,29 +163,29 @@ describe('<ModalBody />', () => {
 
     it('is a tab stop when scrollable and it has no focusable children', async () => {
       mockScrollable(true)
-      const { findByText } = await render(<ModalBody>{BODY_TEXT}</ModalBody>)
-      const body = await findByText(BODY_TEXT)
+      await render(<ModalBody>{BODY_TEXT}</ModalBody>)
+      const body = page.getByText(BODY_TEXT).element()
 
       await vi.waitFor(() => expect(body).toHaveAttribute('tabindex', '0'))
     })
 
     it('is not a tab stop when scrollable but it has a focusable child', async () => {
       mockScrollable(true)
-      const { findByText } = await render(
+      await render(
         <ModalBody>
           <button>focusable</button>
           {BODY_TEXT}
         </ModalBody>
       )
-      const body = await findByText(BODY_TEXT)
+      const body = page.getByText(BODY_TEXT).element()
 
       await vi.waitFor(() => expect(body).not.toHaveAttribute('tabindex'))
     })
 
     it('is not a tab stop when it is not scrollable', async () => {
       mockScrollable(false)
-      const { findByText } = await render(<ModalBody>{BODY_TEXT}</ModalBody>)
-      const body = await findByText(BODY_TEXT)
+      await render(<ModalBody>{BODY_TEXT}</ModalBody>)
+      const body = page.getByText(BODY_TEXT).element()
 
       await vi.waitFor(() => expect(body).toBeInTheDocument())
       expect(body).not.toHaveAttribute('tabindex')
@@ -193,13 +193,11 @@ describe('<ModalBody />', () => {
 
     it('drops the tab stop when a focusable child is added later', async () => {
       mockScrollable(true)
-      const { findByText, rerender } = await render(
-        <ModalBody>{BODY_TEXT}</ModalBody>
-      )
-      const body = await findByText(BODY_TEXT)
+      const { rerender } = await render(<ModalBody>{BODY_TEXT}</ModalBody>)
+      const body = page.getByText(BODY_TEXT).element()
       await vi.waitFor(() => expect(body).toHaveAttribute('tabindex', '0'))
 
-      await rerender(
+      rerender(
         <ModalBody>
           <button>focusable</button>
           {BODY_TEXT}
@@ -215,7 +213,7 @@ describe('<ModalBody />', () => {
       // renders: a decorative "IgniteAI" text node immediately followed by the
       // title, with no whitespace between them. The body's aria-label must not
       // collapse these into "IgniteAI Nutrition Facts".
-      const { findByText } = await render(
+      await render(
         <Modal
           open
           label="AI information"
@@ -230,7 +228,7 @@ describe('<ModalBody />', () => {
           <ModalBody>{BODY_TEXT}</ModalBody>
         </Modal>
       )
-      const body = await findByText(BODY_TEXT)
+      const body = page.getByText(BODY_TEXT).element()
 
       await vi.waitFor(() =>
         expect(body).toHaveAttribute(

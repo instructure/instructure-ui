@@ -25,31 +25,32 @@
 import { Component } from 'react'
 
 import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
 import { describe, it, expect } from 'vitest'
 
 import { callRenderProp } from '../callRenderProp.js'
 
 describe('callRenderProp', () => {
-  it('strings', () => {
+  it('strings', async () => {
     expect(callRenderProp('foo')).toEqual('foo')
   })
 
-  it('numbers', () => {
+  it('numbers', async () => {
     expect(callRenderProp(2)).toEqual(2)
   })
 
-  it('arrays', () => {
+  it('arrays', async () => {
     const prop = ['foo', 'bar', 'baz']
 
     expect(callRenderProp(prop)).toStrictEqual(prop)
     expect(callRenderProp([])).toStrictEqual([])
   })
 
-  it('booleans', () => {
+  it('booleans', async () => {
     expect(callRenderProp(false)).toEqual(false)
   })
 
-  it('JSX literals', () => {
+  it('JSX literals', async () => {
     const Foo = () => <div>hello</div>
     expect(callRenderProp(<Foo />)).toStrictEqual(<Foo />)
   })
@@ -64,8 +65,8 @@ describe('callRenderProp', () => {
     const Result = callRenderProp(Foo)
     expect(Result).toStrictEqual(<Foo />)
 
-    const { getByText } = await render(Result)
-    expect(getByText('hello')).toBeInTheDocument()
+    await render(Result)
+    await expect.element(page.getByText('hello')).toBeInTheDocument()
   })
 
   it('functions', async () => {
@@ -74,9 +75,9 @@ describe('callRenderProp', () => {
     }
     const result = callRenderProp(Baz)
 
-    const { getByText } = await render(<div>{result}</div>)
+    await render(<div>{result}</div>)
 
-    expect(getByText('some text')).toBeInTheDocument()
+    await expect.element(page.getByText('some text')).toBeInTheDocument()
   })
 
   it('fat arrow functions', async () => {
@@ -93,9 +94,9 @@ describe('callRenderProp', () => {
 
     const result = callRenderProp(Baz)
 
-    const { getByText } = await render(<div>{result}</div>)
+    await render(<div>{result}</div>)
 
-    expect(getByText('some text')).toBeInTheDocument()
+    await expect.element(page.getByText('some text')).toBeInTheDocument()
   })
 
   describe('passing props', () => {
@@ -104,9 +105,9 @@ describe('callRenderProp', () => {
 
       const result = callRenderProp(someFunc, { shape: 'rectangle' })
 
-      const { getByText } = await render(<div>{result}</div>)
+      await render(<div>{result}</div>)
 
-      expect(getByText('rectangle')).toBeInTheDocument()
+      await expect.element(page.getByText('rectangle')).toBeInTheDocument()
     })
 
     it('should pass props correctly to React classes', async () => {
@@ -123,9 +124,9 @@ describe('callRenderProp', () => {
 
       const result = callRenderProp(Foo, { shape: 'rectangle' })
 
-      const { getByText } = await render(<div>{result}</div>)
+      await render(<div>{result}</div>)
 
-      expect(getByText('rectangle')).toBeInTheDocument()
+      await expect.element(page.getByText('rectangle')).toBeInTheDocument()
     })
   })
 })

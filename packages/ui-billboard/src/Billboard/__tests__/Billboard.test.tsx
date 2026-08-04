@@ -22,13 +22,12 @@
  * SOFTWARE.
  */
 
-import { IconUserLine } from '@instructure/ui-icons'
-import { Billboard } from '@instructure/ui-billboard/latest'
-import { runAxeCheck } from '@instructure/ui-axe-check'
-import { fireEvent } from '@testing-library/dom'
 import { render } from 'vitest-browser-react'
 import { page, userEvent } from 'vitest/browser'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import { IconUserLine } from '@instructure/ui-icons'
+import { Billboard } from '@instructure/ui-billboard/latest'
+import { runAxeCheck } from '@instructure/ui-axe-check'
 
 const TEST_HEADING = 'test-heading'
 const TEST_MESSAGE = 'test-message'
@@ -94,9 +93,8 @@ describe('<Billboard />', () => {
     const onClick = vi.fn()
 
     await render(<Billboard onClick={onClick} />)
-    const button = page.getByRole('button').element()
 
-    fireEvent.click(button)
+    await userEvent.click(page.getByRole('button'))
 
     expect(onClick).toHaveBeenCalledTimes(1)
   })
@@ -151,9 +149,10 @@ describe('<Billboard />', () => {
       const onClick = vi.fn()
 
       await render(<Billboard onClick={onClick} readOnly />)
-      const button = page.getByRole('button').element()
 
-      await userEvent.click(button)
+      // `force` because Playwright treats aria-disabled elements as disabled
+      // and would otherwise refuse to click
+      await userEvent.click(page.getByRole('button'), { force: true })
 
       expect(onClick).not.toHaveBeenCalled()
     })

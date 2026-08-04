@@ -253,7 +253,8 @@ describe('<Selectable />', () => {
     const button = page.getByText('Selected').element()
 
     await userEvent.click(button)
-    await userEvent.type(button, '{enter}')
+    button.focus()
+    await userEvent.keyboard('{Enter}')
 
     await vi.waitFor(() => {
       expect(onClick).toHaveBeenCalled()
@@ -348,12 +349,13 @@ describe('<Selectable />', () => {
         )
         const input = page.getByRole('combobox').element()
 
-        await userEvent.type(input, '{arrowdown}')
+        input.focus()
+        await userEvent.keyboard('{ArrowDown}')
         await vi.waitFor(() => {
           expect(onRequestShowOptions).toHaveBeenCalledTimes(1)
         })
 
-        await userEvent.type(input, '{arrowup}')
+        await userEvent.keyboard('{ArrowUp}')
         await vi.waitFor(() => {
           expect(onRequestShowOptions).toHaveBeenCalledTimes(2)
         })
@@ -369,7 +371,8 @@ describe('<Selectable />', () => {
         )
         const input = page.getByRole('combobox').element()
 
-        await userEvent.type(input, '{space}')
+        input.focus()
+        await userEvent.keyboard(' ')
 
         await rerender(
           <Selectable
@@ -380,7 +383,8 @@ describe('<Selectable />', () => {
           </Selectable>
         )
 
-        await userEvent.type(input, '{space}')
+        input.focus()
+        await userEvent.keyboard(' ')
         await vi.waitFor(() => {
           expect(onRequestShowOptions).toHaveBeenCalledTimes(1)
         })
@@ -880,7 +884,7 @@ describe('<Selectable />', () => {
       )
       const input = page.getByRole('combobox').element()
 
-      await input.click()
+      await userEvent.click(input)
       expect(onClick).toHaveBeenCalledTimes(1)
       expect(onRequestShowOptions).toHaveBeenCalledTimes(1)
     })

@@ -22,12 +22,12 @@
  * SOFTWARE.
  */
 
-import { runAxeCheck } from '@instructure/ui-axe-check'
-import { FormFieldGroup } from '@instructure/ui-form-field/latest'
-import type { FormMessage } from '@instructure/ui-form-field/latest'
 import { render } from 'vitest-browser-react'
 import { page } from 'vitest/browser'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import { runAxeCheck } from '@instructure/ui-axe-check'
+import { FormFieldGroup } from '@instructure/ui-form-field/latest'
+import type { FormMessage } from '@instructure/ui-form-field/latest'
 
 describe('<FormFieldGroup />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>

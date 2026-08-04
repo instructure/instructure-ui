@@ -25,6 +25,7 @@
 import { render } from 'vitest-browser-react'
 import { page } from 'vitest/browser'
 import { describe, it, expect } from 'vitest'
+
 import { TabsPanel as Panel } from '@instructure/ui-tabs/latest'
 
 describe('<Tabs.Panel />', () => {

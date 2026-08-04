@@ -22,12 +22,12 @@
  * SOFTWARE.
  */
 
-import { InPlaceEdit } from '@instructure/ui-editable/latest'
-import type { InPlaceEditProps } from '@instructure/ui-editable/latest'
-import { runAxeCheck } from '@instructure/ui-axe-check'
 import { render } from 'vitest-browser-react'
 import { page } from 'vitest/browser'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import { InPlaceEdit } from '@instructure/ui-editable/latest'
+import type { InPlaceEditProps } from '@instructure/ui-editable/latest'
+import { runAxeCheck } from '@instructure/ui-axe-check'
 
 const VIEWER_TEXT = 'viewer-text'
 const EDIT_BUTTON_TEXT = 'edit-button-text'

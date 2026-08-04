@@ -23,9 +23,10 @@
  */
 
 import { Component, createRef, RefObject } from 'react'
-import type { MockInstance } from 'vitest'
 import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import type { MockInstance } from 'vitest'
 
 import { Transition } from '../index.js'
 import { getClassNames } from '../styles.js'
@@ -84,23 +85,23 @@ describe('<Transition />', () => {
 
   const expectTypeClass = function (type: TransitionType) {
     it(`should correctly apply classes for '${type}' with html element`, async () => {
-      const { getByText } = await render(
+      await render(
         <Transition type={type} in={true}>
           <div>hello</div>
         </Transition>
       )
-      const element = getByText('hello')
+      const element = page.getByText('hello').element()
 
       expect(element).toHaveClass(getClass(type, 'entered'))
     })
 
     it(`should correctly apply classes for '${type}' with Component`, async () => {
-      const { getByText } = await render(
+      await render(
         <Transition type={type} in={true}>
           <ExampleComponent />
         </Transition>
       )
-      const element = getByText(COMPONENT_TEXT)
+      const element = page.getByText(COMPONENT_TEXT).element()
 
       expect(element).toHaveClass(getClass(type, 'entered'))
     })
@@ -113,12 +114,12 @@ describe('<Transition />', () => {
   it('should correctly apply enter and exit classes', async () => {
     const type = 'fade'
 
-    const { getByText, rerender } = await render(
+    const { rerender } = await render(
       <Transition type={type} in={true}>
         <div>hello</div>
       </Transition>
     )
-    const element = getByText('hello')
+    const element = page.getByText('hello').element()
 
     expect(element).toHaveClass(getClass(type, 'entered'))
 
@@ -134,13 +135,13 @@ describe('<Transition />', () => {
   })
 
   it('should remove component from DOM when `unmountOnExit` is set', async () => {
-    const { getByText, rerender } = await render(
+    const { rerender } = await render(
       <Transition type="fade" in={true} unmountOnExit={true}>
         <div>hello</div>
       </Transition>
     )
 
-    expect(getByText('hello')).toBeInTheDocument()
+    await expect.element(page.getByText('hello')).toBeInTheDocument()
 
     await rerender(
       <Transition type="fade" in={false} unmountOnExit={true}>
@@ -148,7 +149,7 @@ describe('<Transition />', () => {
       </Transition>
     )
 
-    await waitForElementToBeRemoved(() => getByText('hello'))
+    await expect.element(page.getByText('hello')).not.toBeInTheDocument()
   })
 
   it('should not execute enter transition with `transitionEnter` set to false', async () => {

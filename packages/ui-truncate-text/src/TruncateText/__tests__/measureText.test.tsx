@@ -25,6 +25,7 @@
 import { render } from 'vitest-browser-react'
 import { page } from 'vitest/browser'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+
 import measureText from '../v2/utils/measureText.js'
 
 const baseStyle = {
@@ -63,8 +64,11 @@ describe('measureText', () => {
     const node = document.createElement('div')
     Object.assign(node.style, baseStyle)
     node.textContent = 'Hello'
+    // styles are only computed for nodes attached to the document
+    document.body.appendChild(node)
 
     const width = measureText([node])
+    node.remove()
 
     expect(width).toBe(50) // 5 characters * 10 (mocked width per character)
   })
@@ -141,7 +145,8 @@ describe('measureText', () => {
     const context = getContextSpy.mock.results[0].value
 
     expect(context.measureText).toHaveBeenCalledTimes(1)
-    expect(context.font).toBe('bold italic 20px Arial')
+    // the browser computes `bold` as the numeric weight `700`
+    expect(context.font).toBe('700 italic 20px Arial')
   })
 
   it('should account for letter spacing styles', async () => {

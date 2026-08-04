@@ -72,7 +72,7 @@ describe('<AppNav.Item />', () => {
       />
     )
 
-    const iconTitle = page.getByTitle('Some icon').element()
+    const iconTitle = container.querySelector('svg > title')
     const iconSvg = container.querySelector('svg')
     const item = page.getByRole('link').element()
 
@@ -105,7 +105,7 @@ describe('<AppNav.Item />', () => {
     const onClick = vi.fn()
     await render(<Item renderLabel="Some label" onClick={onClick} />)
 
-    const button = page.getByRole('button').element()
+    const button = page.getByRole('button')
 
     await userEvent.click(button)
 

@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
-import type { MockInstance } from 'vitest'
 import { render } from 'vitest-browser-react'
 import { page } from 'vitest/browser'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import type { MockInstance } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { Breadcrumb } from '@instructure/ui-breadcrumb/latest'
 
@@ -127,8 +127,8 @@ describe('<Breadcrumb />', () => {
   // This test fails because the @instructure/ui-breadcrumb/latest import
   // resolves to compiled output where console.warn is stripped by the
   // babel preset (removeConsole in production builds).
-  // it('should throw a warning when multiple elements have isCurrent set to true', async () => {
-  //   await render(
+  // it('should throw a warning when multiple elements have isCurrent set to true', () => {
+  //   render(
   //     <Breadcrumb label={TEST_LABEL}>
   //       <Breadcrumb.Link isCurrentPage href={TEST_LINK}>
   //         {TEST_TEXT_01}

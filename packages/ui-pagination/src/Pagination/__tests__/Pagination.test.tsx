@@ -297,11 +297,7 @@ describe('<Pagination />', () => {
     const paginationButtons = page
       .getByRole('button', { name: /^#\d$/ })
       .elements()
-    const ellipses = page
-      .getByText('…', {
-        selector: '[aria-hidden="true"]'
-      })
-      .elements()
+    const ellipses = document.querySelectorAll('li[aria-hidden="true"]')
 
     expect(pagination).toBeInTheDocument()
     expect(pagination).toHaveTextContent('Prev#0#1#2#3#4#5#6Next')
@@ -988,7 +984,8 @@ describe('<Pagination />', () => {
       )
       const numberInput = container.querySelector('input')
 
-      await userEvent.type(numberInput!, '2{enter}')
+      await userEvent.fill(numberInput!, '2')
+      await userEvent.keyboard('{Enter}')
 
       await vi.waitFor(() => {
         expect(onClick2).toHaveBeenCalled()

@@ -57,8 +57,9 @@ describe('<DrawerContent />', () => {
     )
     const drawerContent = page.getByLabelText('DrawerContentTest').element()
 
+    // in a real browser the missing transition shows up as a zero duration
     const styleOnMount = getComputedStyle(drawerContent)
-    expect(styleOnMount.transition).toBe('')
+    expect(styleOnMount.transitionDuration).toBe('0s')
 
     await rerender(<DrawerContent label="test">Hello World</DrawerContent>)
 
@@ -66,7 +67,7 @@ describe('<DrawerContent />', () => {
       const drawerContentUpdated = page.getByLabelText('test').element()
       const updatedStyle = getComputedStyle(drawerContentUpdated)
 
-      expect(updatedStyle.transition).not.toBe('')
+      expect(updatedStyle.transitionDuration).not.toBe('0s')
     })
   })
 })

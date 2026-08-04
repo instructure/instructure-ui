@@ -23,10 +23,10 @@
  */
 
 import { Component } from 'react'
-import type { MockInstance } from 'vitest'
 import { render } from 'vitest-browser-react'
 import { page, userEvent } from 'vitest/browser'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import type { MockInstance } from 'vitest'
 
 import { Focusable } from '../index.js'
 import type { FocusableRenderOptions } from '../props'

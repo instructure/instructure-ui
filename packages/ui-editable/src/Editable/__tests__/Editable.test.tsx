@@ -22,13 +22,13 @@
  * SOFTWARE.
  */
 
-import type { MockInstance } from 'vitest'
-import { Editable } from '@instructure/ui-editable/latest'
-import type { EditableRenderProps } from '../v1/props'
 import { fireEvent } from '@testing-library/dom'
 import { render } from 'vitest-browser-react'
 import { page, userEvent } from 'vitest/browser'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import type { MockInstance } from 'vitest'
+import { Editable } from '@instructure/ui-editable/latest'
+import type { EditableRenderProps } from '../v1/props'
 
 const TEXT_VIEW = 'text-view'
 const TEXT_EDIT = 'text-edit'
@@ -67,11 +67,24 @@ const childRender = vi.fn(
   }
 )
 
+// In browser mode the real mouse pointer stays wherever the previous test's
+// `userEvent` interaction left it. Park it to prevent erroneous mouse events
+async function parkPointer() {
+  const parkingSpot = document.createElement('div')
+  parkingSpot.style.cssText =
+    'position:fixed;bottom:4px;right:4px;width:20px;height:20px'
+  document.body.appendChild(parkingSpot)
+  await userEvent.hover(parkingSpot)
+  parkingSpot.remove()
+}
+
 describe('<Editable />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
   let consoleErrorMock: ReturnType<typeof vi.spyOn>
 
-  beforeEach(() => {
+  beforeEach(async () => {
+    await parkPointer()
+
     // Mocking console to prevent test output pollution and expect for messages
     consoleWarningMock = vi
       .spyOn(console, 'warn')
@@ -147,7 +160,7 @@ describe('<Editable />', () => {
         render={childRender}
       />
     )
-    const childContainer = page.getByTestId('child-container').element()
+    const childContainer = page.getByTestId('child-container')
 
     await userEvent.click(childContainer)
 
@@ -193,8 +206,8 @@ describe('<Editable />', () => {
     )
     const inputForEdit = page.getByTestId('edit-mode-input').element()
 
-    fireEvent.focus(inputForEdit)
-    fireEvent.blur(inputForEdit)
+    inputForEdit.focus()
+    inputForEdit.blur()
 
     expect(onChangeModeSpy).toHaveBeenCalledWith('view')
   })

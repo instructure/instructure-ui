@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import { fireEvent } from '@testing-library/dom'
 import { render } from 'vitest-browser-react'
 import { page, userEvent } from 'vitest/browser'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
@@ -73,8 +72,8 @@ describe('<CheckboxGroup />', () => {
     consoleErrorMock.mockRestore()
   })
 
-  it('adds the name props to all Checkbox types', () => {
-    renderCheckboxGroup({ name: TEST_NAME })
+  it('adds the name props to all Checkbox types', async () => {
+    await renderCheckboxGroup({ name: TEST_NAME })
     const checkboxes = page.getByRole('checkbox').elements()
 
     expect(checkboxes.length).toBe(2)
@@ -82,8 +81,8 @@ describe('<CheckboxGroup />', () => {
     expect(checkboxes[1]).toHaveAttribute('name', TEST_NAME)
   })
 
-  it('links the messages to the fieldset via aria-describedby', () => {
-    const { container } = renderCheckboxGroup({
+  it('links the messages to the fieldset via aria-describedby', async () => {
+    const { container } = await renderCheckboxGroup({
       messages: [{ text: TEST_ERROR_MESSAGE, type: 'error' }]
     })
     const group = page.getByRole('group').element()
@@ -94,8 +93,10 @@ describe('<CheckboxGroup />', () => {
     expect(messageById).toHaveTextContent(TEST_ERROR_MESSAGE)
   })
 
-  it('displays description message inside the legend', () => {
-    const { container } = renderCheckboxGroup({ description: TEST_DESCRIPTION })
+  it('displays description message inside the legend', async () => {
+    const { container } = await renderCheckboxGroup({
+      description: TEST_DESCRIPTION
+    })
     const legend = container.querySelector(
       'span[class$="-formFieldLayout__label"]'
     )
@@ -106,10 +107,10 @@ describe('<CheckboxGroup />', () => {
 
   it('does not call the onChange prop when disabled', async () => {
     const onChange = vi.fn()
-    renderCheckboxGroup({ onChange, disabled: true })
+    await renderCheckboxGroup({ onChange, disabled: true })
     const checkboxElement = page.getByRole('checkbox').elements()[0]
 
-    fireEvent.click(checkboxElement)
+    await userEvent.click(checkboxElement, { force: true })
 
     await vi.waitFor(() => {
       expect(onChange).not.toHaveBeenCalled()
@@ -119,10 +120,10 @@ describe('<CheckboxGroup />', () => {
 
   it('does not call the onChange prop when readOnly', async () => {
     const onChange = vi.fn()
-    renderCheckboxGroup({ onChange, readOnly: true })
+    await renderCheckboxGroup({ onChange, readOnly: true })
     const checkboxElement = page.getByRole('checkbox').elements()[0]
 
-    fireEvent.click(checkboxElement)
+    await userEvent.click(checkboxElement, { force: true })
 
     await vi.waitFor(() => {
       expect(onChange).not.toHaveBeenCalled()
@@ -132,13 +133,13 @@ describe('<CheckboxGroup />', () => {
 
   it('should not update the value when the value prop is set', async () => {
     const onChange = vi.fn()
-    renderCheckboxGroup({ onChange, value: ['tester'] })
+    await renderCheckboxGroup({ onChange, value: ['tester'] })
     const checkboxes = page.getByRole('checkbox').elements()
 
     expect(checkboxes[0]).not.toBeChecked()
     expect(checkboxes[1]).not.toBeChecked()
 
-    await userEvent.click(checkboxes[0])
+    await userEvent.click(checkboxes[0], { force: true })
 
     await vi.waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(['tester', 'test-value-1'])
@@ -149,14 +150,14 @@ describe('<CheckboxGroup />', () => {
 
   it('should add the checkbox value to the value list when it is checked', async () => {
     const onChange = vi.fn()
-    renderCheckboxGroup({ onChange })
+    await renderCheckboxGroup({ onChange })
     const checkboxes = page.getByRole('checkbox').elements()
 
     expect(checkboxes[0]).not.toBeChecked()
     expect(checkboxes[1]).not.toBeChecked()
 
-    await userEvent.click(checkboxes[0])
-    await userEvent.click(checkboxes[1])
+    await userEvent.click(checkboxes[0], { force: true })
+    await userEvent.click(checkboxes[1], { force: true })
 
     await vi.waitFor(() => {
       expect(checkboxes[0]).toBeChecked()
@@ -165,9 +166,9 @@ describe('<CheckboxGroup />', () => {
     })
   })
 
-  it('should check the checkboxes based on the defaultValue prop', () => {
+  it('should check the checkboxes based on the defaultValue prop', async () => {
     const defaultValue = [TEST_VALUE_2]
-    renderCheckboxGroup({ defaultValue })
+    await renderCheckboxGroup({ defaultValue })
     const checkboxes = page.getByRole('checkbox').elements()
 
     expect(checkboxes[0]).not.toBeChecked()
@@ -177,13 +178,13 @@ describe('<CheckboxGroup />', () => {
   it('should remove the checkbox value from the value list when it is unchecked', async () => {
     const onChange = vi.fn()
     const defaultValue = [TEST_VALUE_1, TEST_VALUE_2]
-    renderCheckboxGroup({ onChange, defaultValue })
+    await renderCheckboxGroup({ onChange, defaultValue })
     const checkboxes = page.getByRole('checkbox').elements()
 
     expect(checkboxes[0]).toBeChecked()
     expect(checkboxes[1]).toBeChecked()
 
-    await userEvent.click(checkboxes[0])
+    await userEvent.click(checkboxes[0], { force: true })
 
     await vi.waitFor(() => {
       expect(checkboxes[0]).not.toBeChecked()
@@ -195,13 +196,13 @@ describe('<CheckboxGroup />', () => {
   it('passes the array of selected values to onChange handler', async () => {
     const onChange = vi.fn()
     const defaultValue = [TEST_VALUE_2]
-    renderCheckboxGroup({ onChange, defaultValue })
+    await renderCheckboxGroup({ onChange, defaultValue })
     const checkboxes = page.getByRole('checkbox').elements()
 
     expect(checkboxes[0]).not.toBeChecked()
     expect(checkboxes[1]).toBeChecked()
 
-    await userEvent.click(checkboxes[0])
+    await userEvent.click(checkboxes[0], { force: true })
 
     await vi.waitFor(() => {
       expect(checkboxes[0]).toBeChecked()
@@ -212,14 +213,14 @@ describe('<CheckboxGroup />', () => {
 
   describe('for a11y', () => {
     it('should meet standards', async () => {
-      const { container } = renderCheckboxGroup()
+      const { container } = await renderCheckboxGroup()
       const axeCheck = await runAxeCheck(container)
 
       expect(axeCheck).toBe(true)
     })
 
-    it('adds the correct ARIA attributes', () => {
-      const { container } = renderCheckboxGroup({
+    it('adds the correct ARIA attributes', async () => {
+      const { container } = await renderCheckboxGroup({
         disabled: true,
         messages: [{ type: 'newError', text: 'abc' }],
         // @ts-ignore This is a valid attribute

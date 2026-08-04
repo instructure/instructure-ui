@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-import type { MockInstance } from 'vitest'
 import { render } from 'vitest-browser-react'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import type { MockInstance } from 'vitest'
 
 import { InstUISettingsProvider } from '@instructure/emotion'
 import { runAxeCheck } from '@instructure/ui-axe-check'

@@ -22,19 +22,13 @@
  * SOFTWARE.
  */
 
-import { fireEvent } from '@testing-library/dom'
 import { render } from 'vitest-browser-react'
 import { page, userEvent } from 'vitest/browser'
-import {
-  describe,
-  it,
-  expect,
-  beforeEach,
-  afterEach,
-  vi,
-  MockInstance
-} from 'vitest'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import type { MockInstance } from 'vitest'
 import { CheckInstUIIcon } from '@instructure/ui-icons'
+
+import * as utils from '@instructure/ui-utils'
 
 import { SimpleSelect } from '@instructure/ui-simple-select/latest'
 
@@ -52,6 +46,15 @@ const getOptions = (disabled?: ExampleOption) =>
       {opt}
     </SimpleSelect.Option>
   ))
+
+vi.mock('@instructure/ui-utils', async (importOriginal) => {
+  const originalModule = (await importOriginal()) as any
+  return {
+    __esModule: true,
+    ...originalModule,
+    isSafari: vi.fn(() => false)
+  }
+})
 
 describe('<SimpleSelect />', () => {
   let consoleErrorMock: ReturnType<typeof vi.spyOn>
@@ -342,7 +345,7 @@ describe('<SimpleSelect />', () => {
         </SimpleSelect.Option>
       ))
 
-    const renderSimpleSelect = (options: ExampleOption[]) => {
+    const renderSimpleSelect = async (options: ExampleOption[]) => {
       return render(
         <SimpleSelect renderLabel="Choose an option">
           {getOptions(options)}
@@ -351,15 +354,15 @@ describe('<SimpleSelect />', () => {
     }
 
     it('should clear selection if selected option does not exist in updated options', async () => {
-      const { rerender } = renderSimpleSelect(initialOptions)
+      const { rerender } = await renderSimpleSelect(initialOptions)
 
       const input = page
         .getByRole('combobox', { name: 'Choose an option' })
         .element()
-      fireEvent.click(input)
+      await userEvent.click(input)
 
       const fooOption = page.getByRole('option', { name: 'foo' }).element()
-      fireEvent.click(fooOption)
+      await userEvent.click(fooOption)
 
       expect(input).toHaveValue('foo')
 
@@ -373,15 +376,15 @@ describe('<SimpleSelect />', () => {
     })
 
     it('should persist selected option if it exists in updated options', async () => {
-      const { rerender } = renderSimpleSelect(initialOptions)
+      const { rerender } = await renderSimpleSelect(initialOptions)
 
       const input = page
         .getByRole('combobox', { name: 'Choose an option' })
         .element()
-      fireEvent.click(input)
+      await userEvent.click(input)
 
       const barOption = page.getByRole('option', { name: 'bar' }).element()
-      fireEvent.click(barOption)
+      await userEvent.click(barOption)
 
       expect(input).toHaveValue('bar')
 

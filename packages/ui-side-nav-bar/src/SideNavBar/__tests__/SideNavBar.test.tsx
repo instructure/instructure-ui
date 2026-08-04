@@ -27,7 +27,10 @@ import { page, userEvent } from 'vitest/browser'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 import { Badge } from '@instructure/ui-badge/latest'
-import { IconAdminLine, IconDashboardLine } from '@instructure/ui-icons'
+import {
+  LayoutDashboardInstUIIcon,
+  ShieldUserInstUIIcon
+} from '@instructure/ui-icons'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 
 import { SideNavBar, SideNavBarItem } from '@instructure/ui-side-nav-bar/latest'
@@ -56,7 +59,7 @@ describe('<SideNavBar />', () => {
         }}
       >
         <SideNavBarItem
-          icon={<IconDashboardLine />}
+          icon={<LayoutDashboardInstUIIcon />}
           label="Dashboard"
           href="#"
         />
@@ -66,7 +69,7 @@ describe('<SideNavBar />', () => {
     const icons = container.querySelectorAll('svg')
 
     expect(icons.length).toBe(2)
-    expect(icons[0]).toHaveAttribute('name', 'IconDashboard')
+    expect(icons[0]).toHaveAttribute('name', 'LayoutDashboard')
     expect(icons[1]).toHaveAttribute('name', 'PanelLeftClose')
 
     expect(nav).toBeInTheDocument()
@@ -87,7 +90,7 @@ describe('<SideNavBar />', () => {
         {false}
         <div>test123</div>
         <SideNavBarItem
-          icon={<IconDashboardLine />}
+          icon={<LayoutDashboardInstUIIcon />}
           label="Dashboard"
           href="#"
         />
@@ -108,7 +111,7 @@ describe('<SideNavBar />', () => {
         }}
       >
         <SideNavBarItem
-          icon={<IconDashboardLine />}
+          icon={<LayoutDashboardInstUIIcon />}
           label="Dashboard"
           href="#"
         />
@@ -133,14 +136,14 @@ describe('<SideNavBar />', () => {
         }}
       >
         <SideNavBarItem
-          icon={<IconDashboardLine />}
+          icon={<LayoutDashboardInstUIIcon />}
           label="Dashboard"
           href="#"
         />
         <SideNavBarItem
           icon={
             <Badge count={99}>
-              <IconAdminLine />
+              <ShieldUserInstUIIcon />
             </Badge>
           }
           label="Inbox"
@@ -166,14 +169,14 @@ describe('<SideNavBar />', () => {
         }}
       >
         <SideNavBarItem
-          icon={<IconDashboardLine />}
+          icon={<LayoutDashboardInstUIIcon />}
           label="Dashboard"
           href="#"
         />
         <SideNavBarItem
           icon={
             <Badge count={99}>
-              <IconAdminLine />
+              <ShieldUserInstUIIcon />
             </Badge>
           }
           label="Inbox"
@@ -208,14 +211,14 @@ describe('<SideNavBar />', () => {
         }}
       >
         <SideNavBarItem
-          icon={<IconDashboardLine />}
+          icon={<LayoutDashboardInstUIIcon />}
           label="Dashboard"
           href="#"
         />
         <SideNavBarItem
           icon={
             <Badge count={99}>
-              <IconAdminLine />
+              <ShieldUserInstUIIcon />
             </Badge>
           }
           label="Inbox"

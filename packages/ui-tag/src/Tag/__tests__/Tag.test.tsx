@@ -22,38 +22,16 @@
  * SOFTWARE.
  */
 
-import { ComponentType } from 'react'
 import { render } from 'vitest-browser-react'
 import { page, userEvent } from 'vitest/browser'
-import { describe, it, expect, beforeAll, afterAll, vi } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import type { ViewProps } from '@instructure/ui-view/latest'
 import { Tag } from '@instructure/ui-tag/latest'
 import { View } from '@instructure/ui-view/latest'
 
-const originalOmitViewProps = View.omitViewProps
-
 describe('<Tag />', async () => {
-  beforeAll(() => {
-    // View component read Component.name instead of Component.displayName
-    // causing [undefined] in error messages
-    type TagComponentType = ComponentType & {
-      name: 'Tag'
-    }
-
-    View.omitViewProps = (props, Component) => {
-      const ModifiedComponent = {
-        ...Component,
-        name: 'Tag'
-      } as TagComponentType
-      return originalOmitViewProps(props, ModifiedComponent)
-    }
-  })
-  afterAll(() => {
-    View.omitViewProps = originalOmitViewProps
-  })
-
   it('should display text', async () => {
     await render(<Tag text="Summer" />)
     const tag = page.getByText('Summer').element()

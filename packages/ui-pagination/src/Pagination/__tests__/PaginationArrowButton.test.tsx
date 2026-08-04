@@ -25,6 +25,7 @@
 import { render } from 'vitest-browser-react'
 import { page } from 'vitest/browser'
 import { describe, it, expect, vi } from 'vitest'
+
 import { PaginationArrowButton } from '../v2/PaginationArrowButton/index.js'
 
 describe('<PaginationArrowButton />', () => {

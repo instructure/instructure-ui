@@ -23,23 +23,16 @@
  */
 
 import { Component } from 'react'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import type { MockInstance } from 'vitest'
 import { Table } from '@instructure/ui-table/latest'
 import type {
   TableProps,
   TableColHeaderProps
 } from '@instructure/ui-table/latest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
-import { render } from 'vitest-browser-react'
-import { page, userEvent } from 'vitest/browser'
-import {
-  describe,
-  it,
-  expect,
-  beforeEach,
-  afterEach,
-  vi,
-  MockInstance
-} from 'vitest'
 
 describe('<Table />', async () => {
   let consoleErrorMock: MockInstance<typeof console.error>
@@ -54,7 +47,7 @@ describe('<Table />', async () => {
   })
 
   const renderTable = (props?: TableProps) =>
-    await render(
+    render(
       <Table caption={() => 'Test table'} {...props}>
         <Table.Head>
           <Table.Row>
@@ -72,7 +65,7 @@ describe('<Table />', async () => {
     )
 
   it('should render a caption', async () => {
-    const { container } = renderTable()
+    const { container } = await renderTable()
     const caption = container.querySelector('caption')
 
     expect(caption).toBeInTheDocument()
@@ -80,7 +73,7 @@ describe('<Table />', async () => {
   })
 
   it('should meet a11y standards', async () => {
-    const { container } = renderTable()
+    const { container } = await renderTable()
     const axeCheck = await runAxeCheck(container)
 
     expect(axeCheck).toBe(true)
@@ -97,7 +90,7 @@ describe('<Table />', async () => {
   })
 
   it('passes hover to table row', async () => {
-    renderTable({
+    await renderTable({
       hover: true,
       caption: () => 'Test table'
     })
@@ -119,7 +112,7 @@ describe('<Table />', async () => {
   })
 
   it('sets the scope of row header to row', async () => {
-    renderTable()
+    await renderTable()
     const rowHeaders = page.getByRole('rowheader').elements()
 
     rowHeaders.forEach((rowHeader) => {
@@ -128,7 +121,7 @@ describe('<Table />', async () => {
   })
 
   it('can render table in stacked layout', async () => {
-    renderTable({
+    await renderTable({
       layout: 'stacked',
       caption: () => 'Test table'
     })
@@ -239,7 +232,7 @@ describe('<Table />', async () => {
       handlers = {},
       layout: TableProps['layout'] = 'auto'
     ) =>
-      await render(
+      render(
         <Table caption={() => 'Sortable table'} layout={layout}>
           <Table.Head>
             <Table.Row>
@@ -259,7 +252,7 @@ describe('<Table />', async () => {
       )
 
     it('can render up arrow for ascending order', async () => {
-      const { container } = renderSortableTable({
+      const { container } = await renderSortableTable({
         id: 'id',
         sortDirection: 'ascending'
       })
@@ -269,7 +262,7 @@ describe('<Table />', async () => {
     })
 
     it('can render down arrow for descending order', async () => {
-      const { container } = renderSortableTable({
+      const { container } = await renderSortableTable({
         id: 'id',
         sortDirection: 'descending'
       })
@@ -280,7 +273,7 @@ describe('<Table />', async () => {
 
     it('calls onRequestSort when column header is clicked', async () => {
       const onRequestSort = vi.fn()
-      renderSortableTable(
+      await renderSortableTable(
         {
           id: 'id'
         },
@@ -298,7 +291,7 @@ describe('<Table />', async () => {
     })
 
     it('can display custom label in the select in stacked layout', async () => {
-      renderSortableTable(
+      await renderSortableTable(
         {
           id: 'id',
           stackedSortByLabel: 'Custom Text'
@@ -321,7 +314,7 @@ describe('<Table />', async () => {
     })
 
     it('can render check mark for sorted column in stacked layout', async () => {
-      const { container } = renderSortableTable(
+      const { container } = await renderSortableTable(
         {
           id: 'id',
           sortDirection: 'ascending'
@@ -337,7 +330,7 @@ describe('<Table />', async () => {
     })
 
     it('creates proper aria-sort attributes (ascending)', async () => {
-      renderSortableTable({
+      await renderSortableTable({
         id: 'id',
         sortDirection: 'ascending'
       })
@@ -347,7 +340,7 @@ describe('<Table />', async () => {
     })
 
     it('creates proper aria-sort attributes (descending)', async () => {
-      renderSortableTable({
+      await renderSortableTable({
         id: 'id',
         sortDirection: 'descending'
       })
@@ -384,7 +377,7 @@ describe('<Table />', async () => {
 
     it('calls the caption function with an empty header and "none" when nothing is sorted', async () => {
       const caption = vi.fn(() => 'Movies')
-      renderTable({ caption } as Partial<TableProps> as TableProps)
+      await renderTable({ caption } as Partial<TableProps> as TableProps)
 
       expect(caption).toHaveBeenCalledWith('', 'none')
     })

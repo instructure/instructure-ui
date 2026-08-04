@@ -23,11 +23,11 @@
  */
 
 import { ReactElement, ReactNode } from 'react'
+import { describe, it, expect, vi } from 'vitest'
 
 import { createChainedFunction } from '@instructure/ui-utils'
 import { render } from 'vitest-browser-react'
 import { page } from 'vitest/browser'
-import { describe, it, expect, vi } from 'vitest'
 
 import { safeCloneElement } from '../safeCloneElement.js'
 
@@ -67,7 +67,7 @@ describe('safeCloneElement', () => {
       />
     )
 
-    const button = page.getByRole('button').element()
+    const button = page.getByRole('button').element() as HTMLElement
     button.click()
 
     expect(onClickA).toHaveBeenCalled()
@@ -86,7 +86,7 @@ describe('safeCloneElement', () => {
       />
     )
 
-    const button = page.getByRole('button').element()
+    const button = page.getByRole('button').element() as HTMLElement
     button.click()
 
     expect(onClickA).toHaveBeenCalled()

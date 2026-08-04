@@ -23,16 +23,17 @@
  */
 
 import { Component } from 'react'
+import { fireEvent } from '@testing-library/dom'
 import { render } from 'vitest-browser-react'
-import { userEvent } from 'vitest/browser'
+import { page, userEvent } from 'vitest/browser'
 import {
   describe,
   it,
   expect,
-  beforeAll,
-  afterAll,
   beforeEach,
   afterEach,
+  beforeAll,
+  afterAll,
   vi
 } from 'vitest'
 import {
@@ -44,8 +45,7 @@ import {
 import type { ModalProps } from '@instructure/ui-modal/latest'
 import { View } from '@instructure/ui-view/latest'
 
-//TODO-rework fix breaking tests after migration
-describe.skip('<Modal />', () => {
+describe('<Modal />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
   let consoleErrorMock: ReturnType<typeof vi.spyOn>
   const originalScroll = window.scroll
@@ -89,7 +89,7 @@ describe.skip('<Modal />', () => {
   it('should apply theme overrides when open', async () => {
     const testFont = 'test-font'
     const bodyText = 'Modal-body-text'
-    const { findByText, findByRole } = await render(
+    await render(
       <Modal
         open
         size="small"
@@ -100,8 +100,8 @@ describe.skip('<Modal />', () => {
         <Modal.Body>{bodyText}</Modal.Body>
       </Modal>
     )
-    const modalBody = await findByText(bodyText)
-    const dialog = await findByRole('dialog')
+    const modalBody = page.getByText(bodyText).element()
+    const dialog = page.getByRole('dialog').element()
     const dialogStyle = window.getComputedStyle(dialog)
 
     expect(modalBody).toBeInTheDocument()
@@ -109,7 +109,7 @@ describe.skip('<Modal />', () => {
   })
 
   it('should render its own positioning context if constrained to parent', async () => {
-    const { findByRole } = await render(
+    await render(
       <Modal
         open
         label="Modal Dialog"
@@ -119,7 +119,7 @@ describe.skip('<Modal />', () => {
         <Modal.Body>Foo Bar Baz</Modal.Body>
       </Modal>
     )
-    const dialog = await findByRole('dialog')
+    const dialog = page.getByRole('dialog').element()
     const constrain = document.querySelector("[class*='constrainContext']")
 
     expect(dialog).toBeInTheDocument()
@@ -127,7 +127,7 @@ describe.skip('<Modal />', () => {
   })
 
   it("should not inherit its parent's font color", async () => {
-    const { findByRole } = await render(
+    await render(
       <div style={{ color: 'rgb(255, 255, 255)' }}>
         <Modal
           open
@@ -140,7 +140,7 @@ describe.skip('<Modal />', () => {
         </Modal>
       </div>
     )
-    const dialog = await findByRole('dialog')
+    const dialog = page.getByRole('dialog').element()
     const dialogStyle = window.getComputedStyle(dialog)
 
     expect(dialog).toBeInTheDocument()
@@ -148,12 +148,12 @@ describe.skip('<Modal />', () => {
   })
 
   it('should pass `as` prop to the dialog', async () => {
-    const { findByRole, rerender } = await render(
+    const { rerender } = await render(
       <Modal open label="Modal Dialog" shouldReturnFocus={false}>
         <Modal.Body>Foo Bar Baz</Modal.Body>
       </Modal>
     )
-    const dialog = await findByRole('dialog')
+    const dialog = page.getByRole('dialog').element()
 
     expect(dialog).toBeInTheDocument()
     expect(dialog.tagName).toBe('SPAN')
@@ -163,47 +163,48 @@ describe.skip('<Modal />', () => {
         <Modal.Body>Foo Bar Baz</Modal.Body>
       </Modal>
     )
-    const dialogForm = await findByRole('dialog')
 
-    expect(dialogForm.tagName).toBe('FORM')
+    await vi.waitFor(() =>
+      expect(page.getByRole('dialog').element().tagName).toBe('FORM')
+    )
   })
 
   it('should handle null children', async () => {
     const bodyText = 'Modal-body-text'
-    const { findByText } = await render(
+    await render(
       <Modal open label="Modal Dialog" shouldReturnFocus={false}>
         {null}
         <Modal.Body>{bodyText}</Modal.Body>
         {null}
       </Modal>
     )
-    const modalBody = await findByText(bodyText)
+    const modalBody = page.getByText(bodyText).element()
 
     expect(modalBody).toBeInTheDocument()
   })
 
   it('should handle custom children', async () => {
     const bodyText = 'Modal-body-text'
-    const { findByText } = await render(
+    await render(
       <Modal open label="Modal Dialog" shouldReturnFocus={false}>
         <View>This is a custom child</View>
         <Modal.Body>{bodyText}</Modal.Body>
       </Modal>
     )
-    const modalBody = await findByText(bodyText)
-    const customChild = await findByText('This is a custom child')
+    const modalBody = page.getByText(bodyText).element()
+    const customChild = page.getByText('This is a custom child').element()
 
     expect(modalBody).toBeInTheDocument()
     expect(customChild).toBeInTheDocument()
   })
 
   it('should apply the aria attributes', async () => {
-    const { findByRole } = await render(
+    await render(
       <Modal open label="Modal Dialog" shouldReturnFocus={false}>
         <Modal.Body>Foo Bar Baz</Modal.Body>
       </Modal>
     )
-    const dialog = await findByRole('dialog')
+    const dialog = page.getByRole('dialog').element()
 
     expect(dialog).toBeInTheDocument()
     expect(dialog).toHaveAttribute('aria-label', 'Modal Dialog')
@@ -214,7 +215,7 @@ describe.skip('<Modal />', () => {
     const onEntering = vi.fn()
     const onEntered = vi.fn()
 
-    const { findByRole } = await render(
+    await render(
       <Modal
         open
         onEnter={onEnter}
@@ -227,7 +228,7 @@ describe.skip('<Modal />', () => {
         <Modal.Body>Foo Bar Baz</Modal.Body>
       </Modal>
     )
-    const dialog = await findByRole('dialog')
+    const dialog = page.getByRole('dialog').element()
 
     expect(dialog).toBeInTheDocument()
 
@@ -240,7 +241,7 @@ describe.skip('<Modal />', () => {
 
   it('should support onOpen prop', async () => {
     const onOpen = vi.fn()
-    const { findByRole } = await render(
+    await render(
       <Modal
         open
         onOpen={onOpen}
@@ -250,7 +251,7 @@ describe.skip('<Modal />', () => {
         <Modal.Body>Foo Bar Baz</Modal.Body>
       </Modal>
     )
-    const dialog = await findByRole('dialog')
+    const dialog = page.getByRole('dialog').element()
 
     expect(dialog).toBeInTheDocument()
 
@@ -262,7 +263,7 @@ describe.skip('<Modal />', () => {
   it('should support onClose prop', async () => {
     const onClose = vi.fn()
 
-    const { findByRole, rerender } = await render(
+    const { rerender } = await render(
       <Modal
         open
         onClose={onClose}
@@ -272,11 +273,11 @@ describe.skip('<Modal />', () => {
         <Modal.Body>Foo Bar Baz</Modal.Body>
       </Modal>
     )
-    const dialog = await findByRole('dialog')
+    const dialog = page.getByRole('dialog').element()
 
     expect(dialog).toBeInTheDocument()
 
-    await rerender(
+    rerender(
       <Modal
         open={false}
         onClose={onClose}
@@ -294,7 +295,7 @@ describe.skip('<Modal />', () => {
 
   it('should dismiss when overlay clicked by default', async () => {
     const onDismiss = vi.fn()
-    const { findByText } = await render(
+    await render(
       <Modal
         open
         onDismiss={onDismiss}
@@ -304,11 +305,13 @@ describe.skip('<Modal />', () => {
         <Modal.Body>Modal Text</Modal.Body>
       </Modal>
     )
-    const modalBody = await findByText('Modal Text')
+    const modalBody = page.getByText('Modal Text').element()
 
     expect(modalBody).toBeInTheDocument()
 
-    await userEvent.click(document.body)
+    // click outside of the modal content
+    await userEvent.click(document.body, { position: { x: 0, y: 0 } })
+
     await vi.waitFor(() => {
       expect(onDismiss).toHaveBeenCalled()
     })
@@ -318,7 +321,7 @@ describe.skip('<Modal />', () => {
     const onDismiss = vi.fn()
     const onClickOuter = vi.fn()
 
-    const { findByRole, getByTestId } = await render(
+    await render(
       <div>
         <button data-testid="outer-element" onClick={onClickOuter}>
           for dismiss
@@ -336,11 +339,15 @@ describe.skip('<Modal />', () => {
         </Modal>
       </div>
     )
-    const dialog = await findByRole('dialog')
+    const dialog = page.getByRole('dialog').element()
 
     expect(dialog).toBeInTheDocument()
 
-    await userEvent.click(getByTestId('outer-element'))
+    // the modal's overlay covers the button, so a real click can't reach it
+    fireEvent.click(page.getByTestId('outer-element').element(), {
+      button: 0,
+      detail: 1
+    })
 
     await vi.waitFor(() => {
       expect(onClickOuter).toHaveBeenCalled()
@@ -350,21 +357,21 @@ describe.skip('<Modal />', () => {
   })
 
   it('should render children', async () => {
-    const { findByText } = await render(
+    await render(
       <Modal open label="Modal Dialog" shouldReturnFocus={false}>
         <Modal.Body>
           <button>Cancel</button>
         </Modal.Body>
       </Modal>
     )
-    const cancelButton = await findByText('Cancel')
+    const cancelButton = page.getByText('Cancel').element()
 
     expect(cancelButton).toBeInTheDocument()
   })
 
   describe('children validation', () => {
     it('should pass validation when children are valid', async () => {
-      const { findByRole } = await render(
+      await render(
         <Modal open label="Modal Dialog" shouldReturnFocus={false}>
           <Modal.Header>Hello World</Modal.Header>
           <Modal.Body>Foo Bar Baz</Modal.Body>
@@ -373,7 +380,7 @@ describe.skip('<Modal />', () => {
           </Modal.Footer>
         </Modal>
       )
-      const dialog = await findByRole('dialog')
+      const dialog = page.getByRole('dialog').element()
 
       expect(dialog).toBeInTheDocument()
       expect(consoleErrorMock).not.toHaveBeenCalled()
@@ -384,7 +391,7 @@ describe.skip('<Modal />', () => {
       let bodyRef: ModalBody | null = null
       let footerRef: ModalFooter | null = null
 
-      const { findByRole } = await render(
+      await render(
         <Modal
           open
           label="Dark Modal"
@@ -414,7 +421,7 @@ describe.skip('<Modal />', () => {
           </Modal.Footer>
         </Modal>
       )
-      const dialog = await findByRole('dialog')
+      const dialog = page.getByRole('dialog').element()
 
       expect(dialog).toBeInTheDocument()
       expect(headerRef!.props.variant).toBe('inverse')
@@ -425,7 +432,7 @@ describe.skip('<Modal />', () => {
     it('should pass overflow to Modal.Body', async () => {
       let bodyRef: ModalBody | null = null
 
-      const { findByRole } = await render(
+      await render(
         <Modal open label="Modal" shouldReturnFocus={false} overflow="fit">
           <Modal.Body
             ref={(el) => {
@@ -436,7 +443,7 @@ describe.skip('<Modal />', () => {
           </Modal.Body>
         </Modal>
       )
-      const dialog = await findByRole('dialog')
+      const dialog = page.getByRole('dialog').element()
 
       expect(dialog).toBeInTheDocument()
       expect(bodyRef!.props.overflow).toBe('fit')
@@ -469,8 +476,8 @@ describe.skip('<Modal />', () => {
     }
 
     it('should focus closeButton by default', async () => {
-      const { findByText } = await render(<ModalExample open label="A Modal" />)
-      const closeButton = await findByText('Close')
+      await render(<ModalExample open label="A Modal" />)
+      const closeButton = page.getByText('Close').element()
 
       expect(closeButton).toBeInTheDocument()
 
@@ -480,14 +487,14 @@ describe.skip('<Modal />', () => {
     })
 
     it('should take a prop for finding default focus', async () => {
-      const { findByTestId } = await render(
+      await render(
         <ModalExample
           open
           label="A Modal"
           defaultFocusElement={() => document.getElementById('input-one')}
         />
       )
-      const input = await findByTestId('input-first')
+      const input = page.getByTestId('input-first').element()
 
       await vi.waitFor(() => {
         expect(input).toHaveFocus()

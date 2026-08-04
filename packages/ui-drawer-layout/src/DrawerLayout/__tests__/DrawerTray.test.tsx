@@ -26,7 +26,9 @@ import { render } from 'vitest-browser-react'
 import { page } from 'vitest/browser'
 import { describe, it, expect, vi } from 'vitest'
 
-import { DrawerTray } from '@instructure/ui-drawer-layout/latest'
+import canvas from '@instructure/ui-themes'
+
+import { DrawerTray } from '../v2/index.js'
 
 describe('<DrawerTray />', () => {
   it('should render tray content when open', async () => {

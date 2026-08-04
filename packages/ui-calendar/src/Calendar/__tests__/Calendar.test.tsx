@@ -130,7 +130,7 @@ describe('<Calendar />', () => {
         ?.parentElement?.parentElement
 
       expect(selectedDay).toBeDefined()
-      expect(window.getComputedStyle(selectedDay!).background).toBe(
+      expect(window.getComputedStyle(selectedDay!).backgroundColor).toBe(
         'rgb(3, 137, 61)'
       )
     })
@@ -264,8 +264,8 @@ describe('<Calendar />', () => {
         {generateDays()}
       </Calendar>
     )
-    const month = page.getByText('March').element()
-    const year = page.getByText('2019').element()
+    const month = page.getByText('March', { exact: true }).element()
+    const year = page.getByText('2019', { exact: true }).element()
 
     expect(month).toBeInTheDocument()
     expect(year).toBeInTheDocument()
@@ -280,8 +280,8 @@ describe('<Calendar />', () => {
         {generateDays()}
       </Calendar>
     )
-    const updatedMonth = page.getByText('March').element()
-    const updatedYear = page.getByText('2019').element()
+    const updatedMonth = page.getByText('March', { exact: true }).element()
+    const updatedYear = page.getByText('2019', { exact: true }).element()
 
     expect(updatedMonth).toBeInTheDocument()
     expect(updatedYear).toBeInTheDocument()

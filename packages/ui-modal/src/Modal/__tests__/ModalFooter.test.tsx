@@ -23,6 +23,7 @@
  */
 
 import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
 import { describe, it, expect } from 'vitest'
 
 import canvas from '@instructure/ui-themes'
@@ -34,10 +35,8 @@ const FOOTER_TEXT = 'Modal-footer-text'
 
 describe('<ModalFooter />', () => {
   it('should render', async () => {
-    const { findByText } = await render(
-      <ModalFooter>{FOOTER_TEXT}</ModalFooter>
-    )
-    const modalFooter = await findByText(FOOTER_TEXT)
+    await render(<ModalFooter>{FOOTER_TEXT}</ModalFooter>)
+    const modalFooter = page.getByText(FOOTER_TEXT).element()
 
     expect(modalFooter).toBeInTheDocument()
   })
@@ -46,10 +45,8 @@ describe('<ModalFooter />', () => {
     const themeVariables = canvas.newTheme.components.ModalFooter(
       canvas.newTheme.semantics(canvas.newTheme.primitives)
     )
-    const { findByText } = await render(
-      <ModalFooter variant="inverse">{FOOTER_TEXT}</ModalFooter>
-    )
-    const modalFooter = await findByText(FOOTER_TEXT)
+    await render(<ModalFooter variant="inverse">{FOOTER_TEXT}</ModalFooter>)
+    const modalFooter = page.getByText(FOOTER_TEXT).element()
 
     const modalFooterStyle = window.getComputedStyle(modalFooter)
     const footerBackground = color2hex(

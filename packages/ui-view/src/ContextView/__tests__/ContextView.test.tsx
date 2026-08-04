@@ -22,10 +22,11 @@
  * SOFTWARE.
  */
 
-import { ContextView } from '@instructure/ui-view/latest'
-import { runAxeCheck } from '@instructure/ui-axe-check'
 import { render } from 'vitest-browser-react'
 import { describe, it, expect } from 'vitest'
+
+import { ContextView } from '@instructure/ui-view/latest'
+import { runAxeCheck } from '@instructure/ui-axe-check'
 
 describe('<ContextView />', () => {
   it('should render', async () => {

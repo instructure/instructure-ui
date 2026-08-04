@@ -25,6 +25,7 @@
 import { render } from 'vitest-browser-react'
 import { page } from 'vitest/browser'
 import { describe, it, expect, vi } from 'vitest'
+
 import { PaginationPageInput } from '../v2/PaginationPageInput/index.js'
 
 const defaultSRLabel = (currentPage: number, numberOfPages: number) =>

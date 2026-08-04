@@ -22,23 +22,13 @@
  * SOFTWARE.
  */
 
-import { ComponentType } from 'react'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { Byline } from '@instructure/ui-byline/latest'
 import type { BylineProps } from '@instructure/ui-byline/latest'
 import { View } from '@instructure/ui-view/latest'
-import { render } from 'vitest-browser-react'
-import { page } from 'vitest/browser'
-import {
-  describe,
-  it,
-  expect,
-  beforeAll,
-  afterAll,
-  beforeEach,
-  afterEach,
-  vi
-} from 'vitest'
 
 const TEST_TITLE = 'Test-title'
 const TEST_DESCRIPTION = 'Test-description'
@@ -61,8 +51,6 @@ const renderByline = (props: Partial<BylineProps> = { ...initProps }) => {
   return render(<Byline {...props}>{TEST_IMAGE}</Byline>)
 }
 
-const originalOmitViewProps = View.omitViewProps
-
 describe('<Byline />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
   let consoleErrorMock: ReturnType<typeof vi.spyOn>
@@ -82,33 +70,13 @@ describe('<Byline />', () => {
     consoleErrorMock.mockRestore()
   })
 
-  beforeAll(() => {
-    // View component read Component.name instead of Component.displayName
-    // causing [undefined] in error messages
-    type BylineComponentType = ComponentType & {
-      name: 'Byline'
-    }
-
-    View.omitViewProps = (props, Component) => {
-      const ModifiedComponent = {
-        ...Component,
-        name: 'Byline'
-      } as BylineComponentType
-      return originalOmitViewProps(props, ModifiedComponent)
-    }
-  })
-
-  afterAll(() => {
-    View.omitViewProps = originalOmitViewProps
-  })
-
-  it('should render', () => {
-    const { container } = renderByline()
+  it('should render', async () => {
+    const { container } = await renderByline()
 
     expect(container.firstChild).toBeInTheDocument()
   })
 
-  it('should pass down div and its contents via the description property', () => {
+  it('should pass down div and its contents via the description property', async () => {
     const descriptionElement = (
       <div>
         <h2>
@@ -117,7 +85,7 @@ describe('<Byline />', () => {
         <p>{TEST_PARAGRAPH}</p>
       </div>
     )
-    renderByline({ description: descriptionElement })
+    await renderByline({ description: descriptionElement })
     const clickableHeading = page.getByText(TEST_HEADING).element()
     const descriptionText = page.getByText(TEST_PARAGRAPH).element()
 
@@ -130,7 +98,7 @@ describe('<Byline />', () => {
   })
 
   it('should meet a11y standards', async () => {
-    const { container } = renderByline()
+    const { container } = await renderByline()
     const axeCheck = await runAxeCheck(container)
 
     expect(axeCheck).toBe(true)
@@ -147,16 +115,16 @@ describe('<Byline />', () => {
     })
 
     testPropsToAllow.forEach((prop) => {
-      it(`should allow the '${prop}' prop`, () => {
-        renderByline({ [prop]: customAllowedProps[prop] })
+      it(`should allow the '${prop}' prop`, async () => {
+        await renderByline({ [prop]: customAllowedProps[prop] })
 
         expect(consoleErrorMock).not.toHaveBeenCalled()
       })
     })
 
     testPropsToDisallow.forEach((prop) => {
-      it(`should NOT allow the '${prop}' prop`, () => {
-        renderByline({ [prop]: 'foo' })
+      it(`should NOT allow the '${prop}' prop`, async () => {
+        await renderByline({ [prop]: 'foo' })
         const expectedWarningMessage = `Warning: [Byline] prop '${prop}' is not allowed.`
         const warningMessage = consoleErrorMock.mock.calls[0][0]
 

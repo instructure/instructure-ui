@@ -22,12 +22,12 @@
  * SOFTWARE.
  */
 
-import { runAxeCheck } from '@instructure/ui-axe-check'
-import type { MockInstance } from 'vitest'
-
 import { render } from 'vitest-browser-react'
 import { page } from 'vitest/browser'
+import { runAxeCheck } from '@instructure/ui-axe-check'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import type { MockInstance } from 'vitest'
+
 import { Spinner } from '@instructure/ui-spinner/latest'
 import type { SpinnerProps } from '@instructure/ui-spinner/latest'
 
@@ -93,16 +93,8 @@ describe('<Spinner />', () => {
 
       expect(page.getByText('Loading').query()).not.toBeInTheDocument()
 
-      await vi.waitFor(
-        async () => {
-          const title = await page.getByText('Loading').element()
-          const icon = await page.getByRole('img').element()
-
-          expect(title).toBeInTheDocument()
-          expect(icon).toBeInTheDocument()
-        },
-        { timeout: 400 }
-      )
+      await expect.element(page.getByText('Loading')).toBeInTheDocument()
+      await expect.element(page.getByRole('img')).toBeInTheDocument()
     })
   })
 })

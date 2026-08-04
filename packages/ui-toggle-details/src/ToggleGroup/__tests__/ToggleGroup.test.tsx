@@ -22,13 +22,13 @@
  * SOFTWARE.
  */
 
-import { runAxeCheck } from '@instructure/ui-axe-check'
-import type { MockInstance } from 'vitest'
-
-import { ToggleGroup } from '@instructure/ui-toggle-details/latest'
 import { render } from 'vitest-browser-react'
 import { page, userEvent } from 'vitest/browser'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import type { MockInstance } from 'vitest'
+import { runAxeCheck } from '@instructure/ui-axe-check'
+
+import { ToggleGroup } from '@instructure/ui-toggle-details/latest'
 
 describe('<ToggleGroup />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>

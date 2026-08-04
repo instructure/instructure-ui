@@ -1,5 +1,5 @@
 /*
- * The MIT License (MIT)
+ * The MIT License (MIT).
  *
  * Copyright (c) 2015 - present Instructure, Inc.
  *
@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
-import { fireEvent } from '@testing-library/dom'
+import { describe, it, expect, afterEach, vi } from 'vitest'
 import { render, cleanup } from 'vitest-browser-react'
 import { page } from 'vitest/browser'
-import { describe, it, expect, afterEach, vi } from 'vitest'
+import { fireEvent } from '@testing-library/dom'
 
 import { Popover } from '@instructure/ui-popover/latest'
 import type { PopoverProps } from '@instructure/ui-popover/latest'
@@ -58,7 +58,8 @@ describe('<Popover />', () => {
           fireEvent.click(trigger, eventInit)
           break
         case 'focus':
-          fireEvent.focus(trigger, eventInit)
+          // `focus` doesn't bubble, so React never sees it: use `focusin`
+          fireEvent.focusIn(trigger, eventInit)
           break
         case 'mouseOver':
           fireEvent.mouseOver(trigger, eventInit)
@@ -67,7 +68,9 @@ describe('<Popover />', () => {
           break
       }
 
-      expect(page.getByText('Popover Content').element()).toBeInTheDocument()
+      await expect
+        .element(page.getByText('Popover Content'))
+        .toBeInTheDocument()
     })
   }
 
@@ -93,10 +96,11 @@ describe('<Popover />', () => {
           fireEvent.click(trigger)
           break
         case 'focus':
-          fireEvent.focus(trigger)
+          // `focus`/`blur` don't bubble, so React never sees them
+          fireEvent.focusIn(trigger)
           break
         case 'blur':
-          fireEvent.blur(trigger)
+          fireEvent.focusOut(trigger)
           break
         case 'focusOut':
           fireEvent.focusOut(trigger)
@@ -161,15 +165,19 @@ describe('<Popover />', () => {
     fireEvent.click(triggerButton)
 
     expect(onHideContent).not.toHaveBeenCalled()
-    expect(page.getByText('Popover Title').query()).toBeInTheDocument()
+    await expect.element(page.getByText('Popover Title')).toBeInTheDocument()
 
     fireEvent.click(triggerButton)
 
-    expect(onHideContent).toHaveBeenCalled()
+    await vi.waitFor(() => {
+      expect(onHideContent).toHaveBeenCalled()
+    })
     expect(onHideContent).toHaveBeenCalledWith(
       expect.objectContaining({ documentClick: false })
     )
-    expect(page.getByText('Popover Title').query()).not.toBeInTheDocument()
+    await expect
+      .element(page.getByText('Popover Title'))
+      .not.toBeInTheDocument()
   })
 
   it('should show content if defaultIsShowingContent is true', async () => {
@@ -349,7 +357,11 @@ describe('<Popover />', () => {
       expect(wrapper).not.toBeNull()
       const computed = getComputedStyle(wrapper)
       expect(computed.overflowY).toBe('auto')
-      expect(computed.maxHeight).toContain('--ui-position-available-height')
+      // the custom property resolves to a px value in a real browser
+      const availableHeight =
+        computed.getPropertyValue('--ui-position-available-height').trim() ||
+        `${window.innerHeight}px`
+      expect(computed.maxHeight).toBe(availableHeight)
     })
   })
 })

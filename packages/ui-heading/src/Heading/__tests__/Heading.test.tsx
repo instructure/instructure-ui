@@ -22,11 +22,11 @@
  * SOFTWARE.
  */
 
-import { Heading } from '@instructure/ui-heading/latest'
-import { runAxeCheck } from '@instructure/ui-axe-check'
 import { render } from 'vitest-browser-react'
 import { page } from 'vitest/browser'
 import { describe, it, expect } from 'vitest'
+import { Heading } from '@instructure/ui-heading/latest'
+import { runAxeCheck } from '@instructure/ui-axe-check'
 
 describe('<Heading />', () => {
   it('should render as an H2 element', async () => {

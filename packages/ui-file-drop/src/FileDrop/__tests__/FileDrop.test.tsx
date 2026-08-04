@@ -22,12 +22,12 @@
  * SOFTWARE.
  */
 
+import { render } from 'vitest-browser-react'
+import { describe, it, expect, vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { FileDrop } from '@instructure/ui-file-drop/latest'
 import type { FileDropProps } from '@instructure/ui-file-drop/latest'
 import { act } from 'react'
-import { render } from 'vitest-browser-react'
-import { describe, it, expect, vi } from 'vitest'
 
 describe('<FileDrop/>', () => {
   it('should focus the input when focus is called', async () => {

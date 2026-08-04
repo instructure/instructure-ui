@@ -22,9 +22,8 @@
  * SOFTWARE.
  */
 
-import { fireEvent } from '@testing-library/dom'
 import { render } from 'vitest-browser-react'
-import { page } from 'vitest/browser'
+import { page, userEvent } from 'vitest/browser'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
@@ -68,9 +67,9 @@ describe('<BreadcrumbLink />', () => {
     await render(
       <BreadcrumbLink onClick={onClick}>{TEST_TEXT_01}</BreadcrumbLink>
     )
-    const button = page.getByRole('button').element()
+    const button = page.getByRole('button')
 
-    fireEvent.click(button)
+    await userEvent.click(button)
 
     expect(onClick).toHaveBeenCalledTimes(1)
   })
@@ -83,8 +82,8 @@ describe('<BreadcrumbLink />', () => {
         {TEST_TEXT_01}
       </BreadcrumbLink>
     )
-    const link = page.getByRole('link').element()
-    fireEvent.mouseEnter(link)
+    const link = page.getByRole('link')
+    await userEvent.hover(link)
 
     expect(onMouseEnter).toHaveBeenCalledTimes(1)
   })

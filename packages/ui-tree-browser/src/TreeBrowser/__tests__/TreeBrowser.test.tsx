@@ -345,8 +345,9 @@ describe('<TreeBrowser />', () => {
       const item = page.getByLabelText('Root Directory').element()
 
       await userEvent.click(item)
-      await userEvent.type(item, '{space}')
-      await userEvent.type(item, '{enter}')
+      item.focus()
+      await userEvent.keyboard(' ')
+      await userEvent.keyboard('{Enter}')
 
       await vi.waitFor(() => {
         expect(onCollectionClick).toHaveBeenCalledTimes(3)

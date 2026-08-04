@@ -21,8 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { canvas, canvasHighContrast } from '../index.js'
 import { describe, it, expect } from 'vitest'
+
+import { canvas, canvasHighContrast } from '../index.js'
 
 const themes = [canvas, canvasHighContrast]
 

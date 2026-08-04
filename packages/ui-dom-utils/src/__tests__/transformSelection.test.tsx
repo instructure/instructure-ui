@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+import { describe, it, expect } from 'vitest'
 import { transformSelection, transformCursor } from '../transformSelection.js'
 
 describe('transformSelection', () => {

@@ -23,12 +23,13 @@
  */
 
 import { CSSProperties } from 'react'
-import type { MockInstance } from 'vitest'
-import { View } from '@instructure/ui-view/latest'
-import { runAxeCheck } from '@instructure/ui-axe-check'
 import { render } from 'vitest-browser-react'
 import { page } from 'vitest/browser'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import type { MockInstance } from 'vitest'
+
+import { View } from '@instructure/ui-view/latest'
+import { runAxeCheck } from '@instructure/ui-axe-check'
 
 describe('<View />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
@@ -101,7 +102,8 @@ describe('<View />', () => {
     expect(styles['minWidth']).toEqual('20px')
     expect(styles['minHeight']).toEqual('208px')
     expect(styles['position']).toEqual('absolute')
-    expect(styles['transform']).toEqual('translate(30px, 15px)')
+    // the browser resolves `transform` to its matrix form
+    expect(styles['transform']).toEqual('matrix(1, 0, 0, 1, 30, 15)')
     expect(styles['overflow']).toEqual('hidden')
     expect(styles['display']).toEqual('block')
     expect(styles['pointerEvents']).toEqual('none')
@@ -244,10 +246,10 @@ describe('<View />', () => {
     const styles = getComputedStyle(view!)
 
     // general.spaceMd resolves to 0.75rem (12px)
-    expect(styles.marginTop).toEqual('0.75rem')
-    expect(styles.marginRight).toEqual('0.75rem')
-    expect(styles.marginBottom).toEqual('0.75rem')
-    expect(styles.marginLeft).toEqual('0.75rem')
+    expect(styles.marginTop).toEqual('12px')
+    expect(styles.marginRight).toEqual('12px')
+    expect(styles.marginBottom).toEqual('12px')
+    expect(styles.marginLeft).toEqual('12px')
 
     // a known token should not emit the "not found in theme" warning
     expect(consoleWarningMock).not.toHaveBeenCalledWith(
@@ -266,9 +268,9 @@ describe('<View />', () => {
     const styles = getComputedStyle(view!)
 
     // 3-value shorthand: top | left+right | bottom
-    expect(styles.marginTop).toEqual('1rem') // general.spaceLg
+    expect(styles.marginTop).toEqual('16px') // general.spaceLg
     expect(styles.marginRight).toEqual('auto')
-    expect(styles.marginBottom).toEqual('1.5rem') // general.spaceXl
+    expect(styles.marginBottom).toEqual('24px') // general.spaceXl
     expect(styles.marginLeft).toEqual('auto')
   })
 

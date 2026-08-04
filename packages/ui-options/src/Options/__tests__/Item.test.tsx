@@ -24,7 +24,9 @@
 
 import { render } from 'vitest-browser-react'
 import { page, userEvent } from 'vitest/browser'
-import { describe, it, expect, vi } from 'vitest'
+import { fireEvent } from '@testing-library/dom'
+import { describe, it, vi, expect } from 'vitest'
+
 import { IconCheckSolid } from '@instructure/ui-icons'
 import { Options, OptionItem as Item } from '@instructure/ui-options/latest'
 
@@ -98,12 +100,13 @@ describe('<Item />', () => {
   })
 
   it('should render role attributes for description', async () => {
-    await render(
+    const { container } = await render(
       <Item description="Some text as description" descriptionRole="comment">
         Hello World
       </Item>
     )
-    const description = page.getByRole('comment').element()
+    // `comment` isn't in the locator's role list, so query the attribute
+    const description = container.querySelector('[role="comment"]')
 
     expect(description).toBeInTheDocument()
     expect(description).toHaveTextContent('Some text as description')
@@ -137,7 +140,9 @@ describe('<Item />', () => {
       '[class$="-optionItem__container"]'
     )
 
-    await userEvent.click(optionItem!)
+    // the container fills the whole item, so a real click on the outer
+    // element would land on the container: dispatch it directly instead
+    fireEvent.click(optionItem!)
     await vi.waitFor(() => {
       expect(onClick).not.toHaveBeenCalled()
     })

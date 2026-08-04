@@ -89,13 +89,16 @@ describe('<Menu />', () => {
     })
 
     it('should meet standards when menu is open', async () => {
-      const { container } = await render(
+      await render(
         <Menu trigger={<button>More</button>} defaultShow>
           <MenuItem>Learning Mastery</MenuItem>
           <MenuItem disabled>Gradebook</MenuItem>
         </Menu>
       )
-      const axeCheck = await runAxeCheck(container)
+      // while the menu is open the rest of the page is `aria-hidden`, so the
+      // check runs on the portalled menu instead of the render container
+      const menu = page.getByRole('menu').element() as HTMLElement
+      const axeCheck = await runAxeCheck(menu)
 
       expect(axeCheck).toBe(true)
     })
@@ -103,12 +106,12 @@ describe('<Menu />', () => {
     it('should call onSelect when menu item is selected', async () => {
       const onSelect = vi.fn()
 
-      const { getByText } = await render(
+      await render(
         <Menu label="Settings" onSelect={onSelect}>
           <MenuItem value="Test">Test Item</MenuItem>
         </Menu>
       )
-      const item = getByText('Test Item')
+      const item = page.getByText('Test Item').element()
 
       await userEvent.click(item)
 
@@ -119,12 +122,12 @@ describe('<Menu />', () => {
     it('should not call onSelect when disabled', async () => {
       const onSelect = vi.fn()
 
-      const { getByText } = await render(
+      await render(
         <Menu label="Settings" onSelect={onSelect} disabled>
           <MenuItem value="Account">Account</MenuItem>
         </Menu>
       )
-      const itemText = getByText('Account')
+      const itemText = page.getByText('Account').element()
       const menu = page.getByRole('menu').element()
       const menuItem = page.getByRole('menuitem').element()
 
@@ -182,7 +185,7 @@ describe('<Menu />', () => {
     })
 
     it('should set aria attributes properly', async () => {
-      await render(
+      const { container } = await render(
         <Menu trigger={<button>Settings</button>} defaultShow>
           <MenuItem>Learning Mastery</MenuItem>
           <MenuItem disabled>Gradebook</MenuItem>
@@ -198,7 +201,7 @@ describe('<Menu />', () => {
         </Menu>
       )
       const menu = page.getByRole('menu').element()
-      const trigger = page.getByRole('button', { name: 'Settings' }).element()
+      const trigger = container.querySelector('button')!
 
       expect(menu).toBeInTheDocument()
       expect(menu).toHaveAttribute(
@@ -210,31 +213,31 @@ describe('<Menu />', () => {
     it('should call onFocus on focus', async () => {
       const onFocus = vi.fn()
 
-      const { getByRole } = await render(
+      await render(
         <Menu trigger={<button>More</button>} onFocus={onFocus}>
           <MenuItem>Learning Mastery</MenuItem>
           <MenuItem disabled>Gradebook</MenuItem>
         </Menu>
       )
-      const triggerButton = getByRole('button', { name: 'More' })
+      const triggerButton = page.getByRole('button', { name: 'More' }).element()
 
-      fireEvent.focus(triggerButton)
+      ;(triggerButton as HTMLElement).focus()
 
       expect(onFocus).toHaveBeenCalled()
     })
 
     it('should render when show and onToggle props are set', async () => {
-      const { getByRole, getAllByRole, queryByText } = await render(
+      const { container } = await render(
         <Menu trigger={<button>More</button>} show onToggle={() => {}}>
           <MenuItem>Test1</MenuItem>
           <MenuItem disabled>Test2</MenuItem>
         </Menu>
       )
-      const menuItems = getAllByRole('menuitem')
-      const triggerButton = getByRole('button', { name: 'More' })
+      const menuItems = page.getByRole('menuitem').elements()
+      const triggerButton = container.querySelector('button')!
 
-      const menuItem1 = queryByText('Test1')
-      const menuItem2 = queryByText('Test2')
+      const menuItem1 = page.getByText('Test1').query()
+      const menuItem2 = page.getByText('Test2').query()
 
       expect(triggerButton).toBeInTheDocument()
       expect(menuItems).toHaveLength(2)
@@ -243,16 +246,16 @@ describe('<Menu />', () => {
     })
 
     it('should not show by default', async () => {
-      const { queryByText, getByRole } = await render(
+      await render(
         <Menu trigger={<button>More</button>}>
           <MenuItem>Test1</MenuItem>
           <MenuItem disabled>Test2</MenuItem>
         </Menu>
       )
-      const triggerButton = getByRole('button', { name: 'More' })
+      const triggerButton = page.getByRole('button', { name: 'More' }).element()
 
-      const menuItem1 = queryByText('Test1')
-      const menuItem2 = queryByText('Test2')
+      const menuItem1 = page.getByText('Test1').query()
+      const menuItem2 = page.getByText('Test2').query()
 
       expect(triggerButton).toBeInTheDocument()
       expect(menuItem1).not.toBeInTheDocument()
@@ -260,16 +263,16 @@ describe('<Menu />', () => {
     })
 
     it('should accept a default show', async () => {
-      const { queryByText, getByRole } = await render(
+      const { container } = await render(
         <Menu trigger={<button>More</button>} defaultShow>
           <MenuItem>Test1</MenuItem>
           <MenuItem disabled>Test2</MenuItem>
         </Menu>
       )
-      const triggerButton = getByRole('button', { name: 'More' })
+      const triggerButton = container.querySelector('button')!
 
-      const menuItem1 = queryByText('Test1')
-      const menuItem2 = queryByText('Test2')
+      const menuItem1 = page.getByText('Test1').query()
+      const menuItem2 = page.getByText('Test2').query()
 
       expect(triggerButton).toBeInTheDocument()
       expect(menuItem1).toBeInTheDocument()

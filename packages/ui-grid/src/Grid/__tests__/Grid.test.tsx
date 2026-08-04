@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
-import { Grid } from '@instructure/ui-grid/latest'
 import { render } from 'vitest-browser-react'
 import { page } from 'vitest/browser'
 import { describe, it, expect } from 'vitest'
+import { Grid } from '@instructure/ui-grid/latest'
 
 describe('<Grid />', () => {
   it('should render content in each column', async () => {

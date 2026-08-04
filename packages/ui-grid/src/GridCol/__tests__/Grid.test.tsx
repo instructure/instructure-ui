@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-import { GridCol } from '@instructure/ui-grid/latest'
 import { render } from 'vitest-browser-react'
 import { describe, it, expect, vi } from 'vitest'
+import { GridCol } from '@instructure/ui-grid/latest'
 
 describe('<GridCol />', () => {
   it('should render content in each column', async () => {
