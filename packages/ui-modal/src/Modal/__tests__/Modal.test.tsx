@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Component } from 'react'
+import { Component, useState } from 'react'
 import { fireEvent } from '@testing-library/dom'
 import { render } from 'vitest-browser-react'
 import { page, userEvent } from 'vitest/browser'
@@ -44,6 +44,8 @@ import {
 } from '@instructure/ui-modal/latest'
 import type { ModalProps } from '@instructure/ui-modal/latest'
 import { View } from '@instructure/ui-view/latest'
+import { Button, CloseButton } from '@instructure/ui-buttons/latest'
+import { Tooltip } from '@instructure/ui-tooltip/latest'
 
 describe('<Modal />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
@@ -499,6 +501,364 @@ describe('<Modal />', () => {
       await vi.waitFor(() => {
         expect(input).toHaveFocus()
       })
+    })
+  })
+  describe('Component tests', () => {
+    // renders a Modal with a Tooltip inside, the tooltip is the thing under
+    // test in the `shouldCloseOnDocumentClick` cases below
+    const TooltipModal = ({ renderTip }: { renderTip: React.ReactNode }) => {
+      const [open, setOpen] = useState(false)
+
+      return (
+        <div>
+          <Button onClick={() => setOpen(true)}>Open the Modal</Button>
+          <Modal
+            label="modal"
+            open={open}
+            onDismiss={() => setOpen(false)}
+            shouldCloseOnDocumentClick
+          >
+            <CloseButton
+              screenReaderLabel="Close"
+              onClick={() => setOpen(false)}
+            />
+            <Tooltip renderTip={renderTip}>
+              <Button data-testid="trigger">Hello</Button>
+            </Tooltip>
+          </Modal>
+        </div>
+      )
+    }
+
+    const tooltipOf = (trigger: Element) =>
+      document.querySelector<HTMLElement>(
+        `span[data-position-content="${trigger.getAttribute(
+          'data-position-target'
+        )}"]`
+      )!
+
+    it('should not close when button is clicked to rerender content', async () => {
+      const TestModal = () => {
+        const [isOpen, setIsOpen] = useState(false)
+        const [state, setState] = useState({
+          content:
+            'This content should change by clicking on the Change content button',
+          isButtonVisible: true
+        })
+
+        return (
+          <div>
+            <Button onClick={() => setIsOpen(true)}>Open the Modal</Button>
+
+            {isOpen && (
+              <Modal
+                label="label"
+                open
+                onDismiss={() => setIsOpen(false)}
+                shouldCloseOnDocumentClick
+              >
+                <Modal.Body>
+                  <div data-testid="modal-content">{state.content}</div>
+                  {state.isButtonVisible && (
+                    <Button
+                      onClick={() =>
+                        setState({
+                          content: 'The content has changed!',
+                          isButtonVisible: false
+                        })
+                      }
+                      data-testid="change-content-button"
+                    >
+                      Change content
+                    </Button>
+                  )}
+                  <Button
+                    data-testid="close-button"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Close
+                  </Button>
+                </Modal.Body>
+              </Modal>
+            )}
+          </div>
+        )
+      }
+
+      await render(<TestModal />)
+
+      await userEvent.click(page.getByText('Open the Modal'))
+      await expect.element(page.getByTestId('modal-content')).toBeVisible()
+
+      await userEvent.click(page.getByTestId('change-content-button'))
+      await expect.element(page.getByTestId('modal-content')).toBeVisible()
+
+      await expect.element(page.getByTestId('close-button')).toBeVisible()
+      await userEvent.click(page.getByTestId('close-button'))
+
+      await vi.waitFor(() =>
+        expect(
+          page.getByTestId('modal-content').query()
+        ).not.toBeInTheDocument()
+      )
+    })
+
+    it('should not close with shouldCloseOnDocumentClick when Tooltip inside is clicked on', async () => {
+      await render(<TooltipModal renderTip="Tooltip!" />)
+
+      await userEvent.click(page.getByText('Open the Modal'))
+      const trigger = page.getByTestId('trigger').element()
+      const tooltip = tooltipOf(trigger)
+
+      expect(tooltip).not.toBeVisible()
+
+      await userEvent.hover(page.getByTestId('trigger'))
+      await vi.waitFor(() => expect(tooltip).toBeVisible())
+
+      await userEvent.click(tooltip)
+
+      expect(tooltip).toBeVisible()
+      expect(page.getByRole('dialog').element()).toBeVisible()
+    })
+
+    it('should not close with shouldCloseOnDocumentClick when inside Tooltip has renderTip with HTML content', async () => {
+      await render(
+        <TooltipModal
+          renderTip={
+            <div>
+              <div>HTML content</div>
+            </div>
+          }
+        />
+      )
+
+      await userEvent.click(page.getByText('Open the Modal'))
+      const trigger = page.getByTestId('trigger').element()
+      const tooltip = tooltipOf(trigger)
+
+      expect(tooltip).not.toBeVisible()
+
+      await userEvent.hover(page.getByTestId('trigger'))
+      await vi.waitFor(() => expect(tooltip).toBeVisible())
+
+      await userEvent.click(tooltip)
+
+      expect(tooltip).toBeVisible()
+      expect(page.getByRole('dialog').element()).toBeVisible()
+    })
+
+    it('should not close with shouldCloseOnDocumentClick when ToolTip button is focused and Tooltip is clicked', async () => {
+      await render(<TooltipModal renderTip={<div>HTML content</div>} />)
+
+      await userEvent.click(page.getByText('Open the Modal'))
+      const trigger = page.getByTestId('trigger').element()
+      const tooltip = tooltipOf(trigger)
+
+      expect(tooltip).not.toBeVisible()
+
+      await userEvent.click(page.getByTestId('trigger'))
+      await vi.waitFor(() => expect(tooltip).toBeVisible())
+      expect(trigger).toHaveFocus()
+
+      await userEvent.click(tooltip)
+
+      expect(page.getByRole('dialog').element()).toBeVisible()
+    })
+
+    it('should call onDismiss prop when Esc key pressed by default', async () => {
+      const onDismiss = vi.fn()
+      const onOpen = vi.fn()
+      await render(
+        <Modal
+          open
+          onDismiss={onDismiss}
+          onOpen={onOpen}
+          label="Modal Dialog"
+          shouldReturnFocus={false}
+        >
+          <p>Modal body text</p>
+        </Modal>
+      )
+      await expect.element(page.getByText('Modal body text')).toBeVisible()
+      await vi.waitFor(() => expect(onOpen).toHaveBeenCalled())
+
+      await userEvent.keyboard('{Escape}')
+
+      await vi.waitFor(() => expect(onDismiss).toHaveBeenCalledOnce())
+    })
+
+    it('should not call stale callbacks', async () => {
+      const handleDismiss = vi.fn()
+
+      function Example() {
+        const [value, setValue] = useState(0)
+
+        return (
+          <View>
+            <Modal
+              label="Modal"
+              open
+              onDismiss={() => {
+                handleDismiss(value)
+              }}
+            >
+              <Modal.Body>
+                <p>Modal body text</p>
+                <div id="value-indicator">{value}</div>
+                <button id="increment-btn" onClick={() => setValue(value + 1)}>
+                  Increment Button
+                </button>
+              </Modal.Body>
+            </Modal>
+          </View>
+        )
+      }
+
+      await render(<Example />)
+      await expect.element(page.getByText('Modal body text')).toBeVisible()
+
+      await userEvent.click(page.getByText('Increment Button'))
+
+      await expect.element(page.getByText('Modal body text')).toBeVisible()
+      expect(document.querySelector('#value-indicator')).toHaveTextContent('1')
+      expect(handleDismiss).not.toHaveBeenCalled()
+
+      // click outside of the modal content
+      await userEvent.click(document.body, { position: { x: 0, y: 0 } })
+
+      await vi.waitFor(() => expect(handleDismiss).toHaveBeenCalledOnce())
+      expect(handleDismiss).toHaveBeenCalledWith(1)
+    })
+
+    it('should close the inside Tooltip when Esc key is pressed, but should not close the parent modal', async () => {
+      const TestModal = () => {
+        const [open, setOpen] = useState(false)
+
+        return (
+          <div>
+            <Button onClick={() => setOpen((state) => !state)}>
+              Open the Modal
+            </Button>
+            <Modal
+              data-testid="modal"
+              open={open}
+              onDismiss={() => setOpen(false)}
+              label="modal"
+            >
+              Hello, Word!
+              <Tooltip renderTip="Hello. I'm a tool tip">
+                <span data-testid="trigger">info</span>
+              </Tooltip>
+              <div data-testid="pointerParkingSpot" style={{ height: 200 }} />
+            </Modal>
+          </div>
+        )
+      }
+      await render(<TestModal />)
+
+      await userEvent.click(page.getByText('Open the Modal'))
+
+      const trigger = page.getByTestId('trigger').element()
+      const tooltip = tooltipOf(trigger)
+
+      // the real pointer stays where an earlier test left it, so it could
+      // already sit on the trigger and open the tooltip on its own
+      await userEvent.hover(page.getByTestId('pointerParkingSpot'))
+
+      await vi.waitFor(() => expect(tooltip).not.toBeVisible())
+
+      await userEvent.hover(page.getByTestId('trigger'))
+
+      await vi.waitFor(() => expect(tooltip).toBeVisible())
+
+      await userEvent.keyboard('{Escape}')
+
+      await vi.waitFor(() => expect(tooltip).not.toBeVisible())
+      expect(page.getByRole('dialog').element()).toBeVisible()
+
+      await userEvent.keyboard('{Escape}')
+
+      await vi.waitFor(() =>
+        expect(page.getByRole('dialog').query()).not.toBeInTheDocument()
+      )
+    })
+
+    it('should allow closing modal with Esc when the modal trigger button has a Tooltip', async () => {
+      const TestModal = () => {
+        const [open, setOpen] = useState(false)
+
+        return (
+          <div>
+            <Tooltip renderTip="Hello. I'm a tool tip">
+              <Button onClick={() => setOpen((state) => !state)}>
+                Open the Modal
+              </Button>
+            </Tooltip>
+            <Modal open={open} onDismiss={() => setOpen(false)} label="modal">
+              Hello, World!
+            </Modal>
+          </div>
+        )
+      }
+      await render(<TestModal />)
+
+      await userEvent.click(page.getByText('Open the Modal'))
+
+      await expect.element(page.getByRole('dialog')).toBeVisible()
+
+      await userEvent.keyboard('{Escape}')
+
+      await vi.waitFor(() =>
+        expect(page.getByRole('dialog').query()).not.toBeInTheDocument()
+      )
+    })
+
+    it('should not trap focus when Modal closing button has a Tooltip', async () => {
+      const TestModal = () => {
+        const [open, setOpen] = useState(false)
+
+        return (
+          <div>
+            <Button onClick={() => setOpen((state) => !state)}>
+              Open the Modal
+            </Button>
+            <Button>Hello</Button>
+            <Modal
+              label="modal"
+              open={open}
+              onDismiss={() => setOpen((state) => !state)}
+            >
+              <Tooltip renderTip="Hello. I'm a tool tip">
+                <Button onClick={() => setOpen((state) => !state)}>
+                  Close the Modal
+                </Button>
+              </Tooltip>
+            </Modal>
+          </div>
+        )
+      }
+      await render(<TestModal />)
+
+      const openButton = page.getByRole('button', { name: 'Open the Modal' })
+
+      await userEvent.click(openButton)
+
+      await expect.element(page.getByRole('dialog')).toBeVisible()
+
+      page.getByRole('button', { name: 'Close the Modal' }).element().focus()
+      await userEvent.keyboard(' ')
+
+      await vi.waitFor(() =>
+        expect(page.getByRole('dialog').query()).not.toBeInTheDocument()
+      )
+
+      await expect.element(openButton).toHaveFocus()
+
+      await userEvent.tab()
+
+      await expect
+        .element(page.getByRole('button', { name: 'Hello' }))
+        .toHaveFocus()
     })
   })
 })

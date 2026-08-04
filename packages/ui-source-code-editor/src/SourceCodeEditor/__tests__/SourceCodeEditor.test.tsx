@@ -357,4 +357,173 @@ describe('<SourceCodeEditor />', () => {
       expect(containerRef).toHaveBeenCalledWith(editorContainer)
     })
   })
+
+  describe('Component tests', () => {
+    const LONG_TEXT =
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in aliquam erat, sit amet imperdiet arcu. Curabitur cursus et diam in pharetra.'
+
+    it('should behave uncontrolled', async () => {
+      const onChange = vi.fn()
+
+      await render(
+        <SourceCodeEditor
+          label="foo"
+          defaultValue="hello"
+          onChange={onChange}
+        />
+      )
+      const input = page.getByRole('textbox').element()
+
+      expect(input).toHaveTextContent('hello')
+
+      await userEvent.click(input)
+      await userEvent.keyboard(' world')
+
+      await vi.waitFor(() => {
+        expect(onChange).toHaveBeenCalledWith('hello world')
+      })
+      expect(input).toHaveTextContent('hello world')
+    })
+
+    it('should behave controlled', async () => {
+      const onChange = vi.fn()
+
+      const { rerender } = await render(
+        <SourceCodeEditor label="foo" value="hello" onChange={onChange} />
+      )
+      const input = page.getByRole('textbox').element()
+
+      expect(input).toHaveTextContent('hello')
+
+      await userEvent.click(input)
+      await userEvent.keyboard('w')
+
+      await vi.waitFor(() => {
+        expect(onChange).toHaveBeenCalledWith('hellow')
+      })
+      expect(input.textContent).toBe('hello')
+
+      // Set prop: value
+      await rerender(
+        <SourceCodeEditor label="foo" value="hello world" onChange={onChange} />
+      )
+
+      await vi.waitFor(() => {
+        expect(page.getByRole('textbox').element().textContent).toBe(
+          'hello world'
+        )
+      })
+    })
+
+    it('should focus editor on load', async () => {
+      await render(<SourceCodeEditor label="foo" autofocus />)
+      const input = page.getByRole('textbox').element()
+
+      await vi.waitFor(() => {
+        expect(input).toHaveFocus()
+      })
+    })
+
+    it("shouldn't update value when typing if readOnly", async () => {
+      await render(<SourceCodeEditor label="foo" readOnly />)
+      const input = page.getByRole('textbox').element()
+
+      expect(input).not.toHaveTextContent('w')
+
+      await userEvent.click(input)
+      await userEvent.keyboard('w')
+
+      expect(input).not.toHaveTextContent('w')
+    })
+
+    it('should wrap lines when lineWrapping is true', async () => {
+      const { rerender } = await render(
+        <SourceCodeEditor label="foo" defaultValue={LONG_TEXT} />
+      )
+      const styles = window.getComputedStyle(
+        page.getByRole('textbox').element()
+      )
+      const boxWidth = parseFloat(styles.width)
+      const boxHeight = parseFloat(styles.height)
+
+      // Set prop: lineWrapping
+      await rerender(
+        <SourceCodeEditor label="foo" defaultValue={LONG_TEXT} lineWrapping />
+      )
+      const wrappedStyles = window.getComputedStyle(
+        page.getByRole('textbox').element()
+      )
+
+      expect(parseFloat(wrappedStyles.width)).toBeLessThan(boxWidth)
+      expect(parseFloat(wrappedStyles.height)).toBeGreaterThan(boxHeight)
+    })
+
+    it('should apply and update width', async () => {
+      const testValue1 = '300px'
+      const testValue2 = '500px'
+
+      const { container, rerender } = await render(
+        <SourceCodeEditor
+          label="this is a label for the SR"
+          defaultValue="hello"
+          width={testValue1}
+        />
+      )
+      const codeEditor = () =>
+        container.querySelector('[class$="-codeEditor"]')!
+      const cmEditor = () => container.querySelector('.cm-editor')!
+      const textbox = () => page.getByRole('textbox').element()
+
+      expect(window.getComputedStyle(codeEditor()).width).toBe(testValue1)
+      expect(window.getComputedStyle(cmEditor()).width).toBe(testValue1)
+      expect(window.getComputedStyle(textbox()).width).toBe(testValue1)
+
+      // Set prop: width
+      await rerender(
+        <SourceCodeEditor
+          label="this is a label for the SR"
+          defaultValue="hello"
+          width={testValue2}
+        />
+      )
+
+      expect(window.getComputedStyle(codeEditor()).width).toBe(testValue2)
+      expect(window.getComputedStyle(cmEditor()).width).toBe(testValue2)
+      expect(window.getComputedStyle(textbox()).width).toBe(testValue2)
+    })
+
+    it('should apply and update height', async () => {
+      const testValue1 = '300px'
+      const testValue2 = '500px'
+
+      const { container, rerender } = await render(
+        <SourceCodeEditor
+          label="this is a label for the SR"
+          defaultValue="hello"
+          height={testValue1}
+        />
+      )
+      const codeEditor = () =>
+        container.querySelector('[class$="-codeEditor"]')!
+      const cmEditor = () => container.querySelector('.cm-editor')!
+      const textbox = () => page.getByRole('textbox').element()
+
+      expect(window.getComputedStyle(codeEditor()).height).toBe(testValue1)
+      expect(window.getComputedStyle(cmEditor()).height).toBe(testValue1)
+      expect(window.getComputedStyle(textbox()).height).toBe(testValue1)
+
+      // Set prop: height
+      await rerender(
+        <SourceCodeEditor
+          label="this is a label for the SR"
+          defaultValue="hello"
+          height={testValue2}
+        />
+      )
+
+      expect(window.getComputedStyle(codeEditor()).height).toBe(testValue2)
+      expect(window.getComputedStyle(cmEditor()).height).toBe(testValue2)
+      expect(window.getComputedStyle(textbox()).height).toBe(testValue2)
+    })
+  })
 })

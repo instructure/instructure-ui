@@ -57,4 +57,24 @@ describe('<Drilldown.Separator />', () => {
 
     expect(separatorChild).not.toBeInTheDocument()
   })
+
+  describe('Component tests', () => {
+    it('themeOverride prop should pass overrides to Option.Separator', async () => {
+      await render(
+        <Drilldown rootPageId="page0">
+          <Drilldown.Page id="page0">
+            <Drilldown.Separator
+              id="separator1"
+              themeOverride={{ height: '16px', background: 'rgb(0, 128, 0)' }}
+            />
+          </Drilldown.Page>
+        </Drilldown>
+      )
+      const separator = document.querySelector<HTMLElement>('#separator1')!
+      const style = getComputedStyle(separator)
+
+      expect(style.height).toBe('16px')
+      expect(style.backgroundColor).toBe('rgb(0, 128, 0)')
+    })
+  })
 })

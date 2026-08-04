@@ -604,4 +604,139 @@ describe('<Position />', () => {
       ).not.toBe('')
     })
   })
+
+  describe('Component tests', () => {
+    it('should render top stretched inside of target', async () => {
+      const onPositionChanged = vi.fn()
+      await render(
+        <div style={{ padding: '50px' }}>
+          <div style={{ ...parentDefaults }}>
+            <Position
+              placement="top stretch"
+              shouldPositionOverTarget
+              onPositionChanged={onPositionChanged}
+              renderTarget={<button data-testid="target">Target</button>}
+            >
+              <div data-testid="content">
+                <div>Content</div>
+              </div>
+            </Position>
+          </div>
+        </div>
+      )
+      const target = page.getByTestId('target').element()
+      const content = page.getByTestId('content').element()
+      const targetRect = target.getBoundingClientRect()
+
+      await vi.waitFor(() => {
+        expect(onPositionChanged).toHaveBeenCalled()
+      })
+
+      // the content mounts unpositioned at top:0 and is positioned async,
+      // so re-measure until positioning has been applied
+      await vi.waitFor(() => {
+        const contentRect = content.getBoundingClientRect()
+
+        expect(
+          within(Math.floor(contentRect.top), Math.floor(targetRect.top), 1)
+        ).toEqual(true)
+        expect(
+          within(Math.floor(contentRect.width), Math.floor(targetRect.width), 1)
+        ).toEqual(true)
+      })
+    })
+
+    it('should be <span> default when containerDisplay prop unset', async () => {
+      const { container } = await render(
+        <div style={{ padding: '50px' }}>
+          <div data-testid="positionContainer" style={{ ...parentDefaults }}>
+            <Position
+              constrain="window"
+              renderTarget={<button data-testid="target">Target</button>}
+            >
+              <div data-testid="content">
+                <div>Content</div>
+              </div>
+            </Position>
+          </div>
+        </div>
+      )
+      const span = container.querySelector("span[class$='-position']")!
+
+      expect(getComputedStyle(span).display).toEqual('inline')
+    })
+
+    describe('with offset props', () => {
+      function assertOffset(
+        placement: any,
+        offset: number | string,
+        offsetTop: number,
+        offsetLeft: number
+      ) {
+        it(`should render offset for ${placement}`, async () => {
+          const onPositionChanged = vi.fn()
+
+          const { rerender } = await render(
+            <Position
+              constrain="none"
+              placement={placement}
+              onPositionChanged={onPositionChanged}
+              renderTarget={<button data-testid="target">Target</button>}
+            >
+              <div data-testid="content">
+                <div>Content</div>
+              </div>
+            </Position>
+          )
+          const content = page.getByTestId('content').element()
+
+          await vi.waitFor(() => {
+            expect(onPositionChanged).toHaveBeenCalled()
+          })
+
+          // Capture the baseline position only after positioning has actually
+          // been applied. The content mounts unpositioned at top:0 and is
+          // positioned asynchronously, so retry until it settles.
+          await vi.waitFor(() => {
+            expect(content.getBoundingClientRect().top).not.toEqual(0)
+          })
+          const baselineRect = content.getBoundingClientRect()
+
+          // Set new offset props
+          await rerender(
+            <Position
+              offsetX={offset}
+              offsetY={offset}
+              constrain="none"
+              placement={placement}
+              onPositionChanged={onPositionChanged}
+              renderTarget={<button data-testid="target">Target</button>}
+            >
+              <div data-testid="content-updated">
+                <div>Content</div>
+              </div>
+            </Position>
+          )
+          const updatedContent = page.getByTestId('content-updated').element()
+
+          // retry: re-measure until the offset has been applied
+          await vi.waitFor(() => {
+            const contentRect = updatedContent.getBoundingClientRect()
+
+            expect(
+              within(contentRect.top, baselineRect.top + offsetTop, 1)
+            ).toEqual(true)
+            expect(
+              within(contentRect.left, baselineRect.left + offsetLeft, 1)
+            ).toEqual(true)
+          })
+        })
+      }
+
+      assertOffset('top', 10, -10, -10)
+      assertOffset('start', '10px', -10, -10)
+      assertOffset('end', 10, -10, 10)
+      assertOffset('bottom', 10, 10, -10)
+    })
+  })
 })

@@ -24,7 +24,7 @@
 
 import { render } from 'vitest-browser-react'
 import { page, userEvent } from 'vitest/browser'
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect, beforeEach, vi } from 'vitest'
 
 import { Selectable } from '../index.js'
 import { SelectableRender } from '../props.js'
@@ -1275,6 +1275,334 @@ describe('<Selectable />', () => {
       const selectableProps = renderSpy.mock.calls[0][0]
 
       expect(selectableProps.getDescriptionProps).toBeDefined()
+    })
+  })
+
+  describe('Component tests', () => {
+    // the real cursor stays where the previous test left it, which can hover an
+    // option of the next render: park it off-component before each test
+    beforeEach(async () => {
+      const parkingSpot = document.createElement('div')
+      parkingSpot.style.cssText =
+        'position:fixed;right:0;bottom:0;width:20px;height:20px'
+      document.body.appendChild(parkingSpot)
+      await userEvent.hover(parkingSpot)
+      parkingSpot.remove()
+    })
+
+    it('should fire onRequestHideOptions when escape is pressed', async () => {
+      const onRequestHideOptions = vi.fn()
+      let defaultPrevented = false
+
+      await render(
+        <div
+          role="button"
+          tabIndex={0}
+          onKeyUp={(e) => {
+            defaultPrevented = e.defaultPrevented
+          }}
+        >
+          <Selectable
+            isShowingOptions={true}
+            onRequestHideOptions={onRequestHideOptions}
+          >
+            {(selectable) => getSelectable(selectable)}
+          </Selectable>
+        </div>
+      )
+      const input = page.getByRole('combobox').element()
+
+      input.focus()
+      await userEvent.keyboard('{Escape}')
+
+      expect(onRequestHideOptions).toHaveBeenCalledOnce()
+      expect(defaultPrevented).toBe(true)
+    })
+
+    it('should fire onRequestHighlightOption when options are hovered', async () => {
+      const onRequestHighlightOption = vi.fn()
+
+      const { container } = await render(
+        <Selectable onRequestHighlightOption={onRequestHighlightOption}>
+          {(selectable) => getSelectable(selectable)}
+        </Selectable>
+      )
+      const options = container.querySelectorAll('li')
+
+      await userEvent.hover(options[0])
+      await vi.waitFor(() => {
+        expect(onRequestHighlightOption).toHaveBeenCalled()
+      })
+      expect(onRequestHighlightOption.mock.lastCall![1]).toHaveProperty(
+        'id',
+        defaultOptions[0]
+      )
+      expect(onRequestHighlightOption.mock.lastCall![1]).not.toHaveProperty(
+        'direction'
+      )
+
+      await userEvent.hover(options[1])
+      await vi.waitFor(() => {
+        expect(onRequestHighlightOption.mock.lastCall![1]).toHaveProperty(
+          'id',
+          defaultOptions[1]
+        )
+      })
+      expect(onRequestHighlightOption.mock.lastCall![1]).not.toHaveProperty(
+        'direction'
+      )
+    })
+
+    it('should fire onRequestHighlightOption when up/down arrows are pressed', async () => {
+      const onRequestShowOptions = vi.fn()
+      const onRequestHighlightOption = vi.fn()
+
+      const { rerender } = await render(
+        <Selectable
+          isShowingOptions={false}
+          onRequestShowOptions={onRequestShowOptions}
+          onRequestHighlightOption={onRequestHighlightOption}
+        >
+          {(selectable) => getSelectable(selectable)}
+        </Selectable>
+      )
+      const input = page.getByRole('combobox').element()
+
+      input.focus()
+      await userEvent.keyboard('{ArrowDown}')
+      await vi.waitFor(() => {
+        expect(onRequestShowOptions).toHaveBeenCalled()
+      })
+      expect(onRequestHighlightOption).not.toHaveBeenCalled()
+
+      // Set prop: isShowingOptions, highlightedOptionId
+      await rerender(
+        <Selectable
+          isShowingOptions={true}
+          highlightedOptionId={defaultOptions[0]}
+          onRequestShowOptions={onRequestShowOptions}
+          onRequestHighlightOption={onRequestHighlightOption}
+        >
+          {(selectable) => getSelectable(selectable)}
+        </Selectable>
+      )
+
+      input.focus()
+      await userEvent.keyboard('{ArrowDown}')
+      await vi.waitFor(() => {
+        expect(onRequestHighlightOption.mock.lastCall![1]).toHaveProperty(
+          'direction',
+          1
+        )
+      })
+      expect(onRequestHighlightOption.mock.lastCall![1]).not.toHaveProperty(
+        'id'
+      )
+
+      // Set prop: highlightedOptionId
+      await rerender(
+        <Selectable
+          isShowingOptions={true}
+          highlightedOptionId={defaultOptions[1]}
+          onRequestShowOptions={onRequestShowOptions}
+          onRequestHighlightOption={onRequestHighlightOption}
+        >
+          {(selectable) => getSelectable(selectable)}
+        </Selectable>
+      )
+
+      input.focus()
+      await userEvent.keyboard('{ArrowUp}')
+      await vi.waitFor(() => {
+        expect(onRequestHighlightOption.mock.lastCall![1]).toHaveProperty(
+          'direction',
+          -1
+        )
+      })
+      expect(onRequestHighlightOption.mock.lastCall![1]).not.toHaveProperty(
+        'id'
+      )
+    })
+
+    it('should fire onRequestHighlightFirst/LastOption when home/end is pressed', async () => {
+      const onRequestHighlightOption = vi.fn()
+      const onRequestHighlightFirstOption = vi.fn()
+      const onRequestHighlightLastOption = vi.fn()
+
+      await render(
+        <Selectable
+          isShowingOptions={true}
+          highlightedOptionId={defaultOptions[1]}
+          onRequestHighlightOption={onRequestHighlightOption}
+          onRequestHighlightFirstOption={onRequestHighlightFirstOption}
+          onRequestHighlightLastOption={onRequestHighlightLastOption}
+        >
+          {(selectable) => getSelectable(selectable)}
+        </Selectable>
+      )
+      const input = page.getByRole('combobox').element()
+
+      input.focus()
+      await userEvent.keyboard('{Home}')
+      await userEvent.keyboard('{End}')
+
+      await vi.waitFor(() => {
+        expect(onRequestHighlightFirstOption).toHaveBeenCalledOnce()
+        expect(onRequestHighlightLastOption).toHaveBeenCalledOnce()
+      })
+      expect(onRequestHighlightOption).not.toHaveBeenCalled()
+    })
+
+    it('should fire onRequestSelectOption when enter is pressed', async () => {
+      const onRequestSelectOption = vi.fn()
+
+      await render(
+        <Selectable
+          isShowingOptions={true}
+          highlightedOptionId={defaultOptions[1]}
+          onRequestSelectOption={onRequestSelectOption}
+        >
+          {(selectable) => getSelectable(selectable)}
+        </Selectable>
+      )
+      const input = page.getByRole('combobox').element()
+
+      input.focus()
+      await userEvent.keyboard('{Enter}')
+
+      await vi.waitFor(() => {
+        expect(onRequestSelectOption.mock.lastCall![1]).toHaveProperty(
+          'id',
+          defaultOptions[1]
+        )
+      })
+    })
+
+    it('should fire onRequestSelectOption when options are clicked', async () => {
+      const onRequestSelectOption = vi.fn()
+
+      const { container } = await render(
+        <Selectable
+          isShowingOptions={true}
+          onRequestSelectOption={onRequestSelectOption}
+        >
+          {(selectable) => getSelectable(selectable)}
+        </Selectable>
+      )
+      const options = container.querySelectorAll('li')
+
+      await userEvent.click(options[1])
+
+      await vi.waitFor(() => {
+        expect(onRequestSelectOption.mock.lastCall![1]).toHaveProperty(
+          'id',
+          defaultOptions[1]
+        )
+      })
+    })
+
+    it('getRootProps() should allow supplemental onKeyDown behavior', async () => {
+      const onKeyDown = vi.fn()
+      const onRequestHighlightOption = vi.fn()
+
+      await render(
+        <Selectable
+          isShowingOptions={true}
+          highlightedOptionId={defaultOptions[1]}
+          onRequestHighlightOption={onRequestHighlightOption}
+        >
+          {(selectable) => (
+            <span {...selectable.getRootProps({ onKeyDown })}>
+              <input
+                type="text"
+                {...selectable.getTriggerProps()}
+                {...selectable.getInputProps()}
+              />
+            </span>
+          )}
+        </Selectable>
+      )
+      const input = page.getByRole('combobox').element()
+
+      input.focus()
+      await userEvent.keyboard('{ArrowDown}')
+      await userEvent.keyboard('{ArrowUp}')
+
+      await vi.waitFor(() => {
+        expect(onRequestHighlightOption).toHaveBeenCalledTimes(2)
+        expect(onKeyDown).toHaveBeenCalledTimes(2)
+      })
+    })
+
+    it('getTriggerProps() should allow supplemental onKeyDown behavior', async () => {
+      const onKeyDown = vi.fn()
+      const onRequestHighlightOption = vi.fn()
+
+      await render(
+        <Selectable
+          isShowingOptions={true}
+          highlightedOptionId={defaultOptions[1]}
+          onRequestHighlightOption={onRequestHighlightOption}
+        >
+          {(selectable) => (
+            <span {...selectable.getRootProps()}>
+              <input
+                type="text"
+                {...selectable.getTriggerProps({ onKeyDown })}
+                {...selectable.getInputProps()}
+              />
+            </span>
+          )}
+        </Selectable>
+      )
+      const input = page.getByRole('combobox').element()
+
+      input.focus()
+      await userEvent.keyboard('{ArrowDown}')
+      await userEvent.keyboard('{ArrowUp}')
+      await userEvent.keyboard('a')
+
+      await vi.waitFor(() => {
+        expect(onRequestHighlightOption).toHaveBeenCalledTimes(2)
+        expect(onKeyDown).toHaveBeenCalledTimes(3)
+      })
+    })
+
+    it('getOptionProps() should allow supplemental onMouseOver behavior', async () => {
+      const onMouseOver = vi.fn()
+      const onRequestHighlightOption = vi.fn()
+
+      const { container } = await render(
+        <Selectable
+          isShowingOptions={true}
+          onRequestHighlightOption={onRequestHighlightOption}
+        >
+          {(selectable) => (
+            <span>
+              <input type="text" {...selectable.getInputProps()} />
+              <ul {...selectable.getListProps()}>
+                {defaultOptions.map((opt) => (
+                  <li
+                    key={opt}
+                    {...selectable.getOptionProps({ id: opt, onMouseOver })}
+                  >
+                    {opt}
+                  </li>
+                ))}
+              </ul>
+            </span>
+          )}
+        </Selectable>
+      )
+      const options = container.querySelectorAll('li')
+
+      await userEvent.hover(options[0])
+      await userEvent.hover(options[1])
+
+      await vi.waitFor(() => {
+        expect(onMouseOver).toHaveBeenCalledTimes(2)
+        expect(onRequestHighlightOption).toHaveBeenCalledTimes(2)
+      })
     })
   })
 })

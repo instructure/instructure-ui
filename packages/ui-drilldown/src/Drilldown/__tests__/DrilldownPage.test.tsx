@@ -369,4 +369,112 @@ describe('<Drilldown.Page />', () => {
       })
     })
   })
+
+  describe('Component tests', () => {
+    const optionItemWithText = (text: string) =>
+      Array.from(
+        document.querySelectorAll<HTMLElement>('li[class$="-optionItem"]')
+      ).find((item) => item.textContent?.includes(text))!
+
+    it('should have a back arrow in header back navigation', async () => {
+      await render(
+        <Drilldown rootPageId="page0">
+          <Drilldown.Page id="page0">
+            <Drilldown.Option id="option1" subPageId="page2">
+              Option01
+            </Drilldown.Option>
+          </Drilldown.Page>
+          <Drilldown.Page id="page2" renderBackButtonLabel="HeaderBackString">
+            <Drilldown.Option id="option2">Option22</Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+
+      await userEvent.click(page.getByText('Option01'))
+
+      await vi.waitFor(() => {
+        const backItem = optionItemWithText('HeaderBackString')
+
+        // v2 renders the back button with a lucide ChevronLeft (was IconArrowOpenStart)
+        expect(backItem.querySelector('svg[name="ChevronLeft"]')).toBeVisible()
+      })
+    })
+
+    it('should still display the back icon in header back navigation, even if function has no return value', async () => {
+      await render(
+        <Drilldown rootPageId="page0">
+          <Drilldown.Page id="page0" renderTitle="Page Title">
+            <Drilldown.Option id="option1" subPageId="page2">
+              Option01
+            </Drilldown.Option>
+          </Drilldown.Page>
+          <Drilldown.Page id="page2" renderBackButtonLabel={() => null}>
+            <Drilldown.Option id="option2">Option22</Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+
+      await userEvent.click(page.getByText('Option01'))
+
+      await vi.waitFor(() => {
+        // v2 renders the back button with a lucide ChevronLeft (was IconArrowOpenStart)
+        const icon = document.querySelector(
+          'div[role="menu"] svg[name="ChevronLeft"]'
+        )
+
+        expect(icon).toBeVisible()
+      })
+    })
+
+    it('should fire onBackButtonClicked on header back navigation click', async () => {
+      const backNavCallback = vi.fn()
+      await render(
+        <Drilldown rootPageId="page0">
+          <Drilldown.Page id="page0" renderTitle="Page Title">
+            <Drilldown.Option id="option1" subPageId="page2">
+              Option01
+            </Drilldown.Option>
+          </Drilldown.Page>
+          <Drilldown.Page id="page2" onBackButtonClicked={backNavCallback}>
+            <Drilldown.Option id="option2">Option22</Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+
+      await userEvent.click(page.getByText('Option01'))
+      await userEvent.click(page.getByText('Back'))
+
+      await vi.waitFor(() => {
+        expect(backNavCallback).toHaveBeenCalled()
+      })
+    })
+
+    it('should go back one page on click', async () => {
+      await render(
+        <Drilldown rootPageId="page0">
+          <Drilldown.Page id="page0" renderTitle="Page Title">
+            <Drilldown.Option id="option1" subPageId="page2">
+              Option01
+            </Drilldown.Option>
+          </Drilldown.Page>
+          <Drilldown.Page id="page2">
+            <Drilldown.Option id="option2">Option22</Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+      expect(page.getByText('Option01').element()).toBeVisible()
+
+      await userEvent.click(page.getByText('Option01'))
+
+      await vi.waitFor(() => {
+        expect(page.getByText('Option01').query()).not.toBeInTheDocument()
+      })
+
+      await userEvent.click(page.getByText('Back'))
+
+      await vi.waitFor(() => {
+        expect(page.getByText('Option01').element()).toBeVisible()
+      })
+    })
+  })
 })

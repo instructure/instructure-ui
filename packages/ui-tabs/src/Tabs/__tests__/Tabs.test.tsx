@@ -428,4 +428,117 @@ describe('<Tabs />', () => {
       expect(tabPanels.length).toBe(3)
     })
   })
+
+  describe('Component tests', () => {
+    it('should call onRequestTabChange with keyboard arrow keys', async () => {
+      const onChange = vi.fn()
+
+      await render(
+        <Tabs onRequestTabChange={onChange}>
+          <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
+          <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
+          <Tabs.Panel renderTitle="Third Tab" isDisabled>
+            Tab 3 content
+          </Tabs.Panel>
+        </Tabs>
+      )
+      const selectedTab = page
+        .getByRole('tab', { selected: true })
+        .element() as HTMLElement
+
+      for (const key of [
+        '{ArrowLeft}',
+        '{ArrowRight}',
+        '{ArrowUp}',
+        '{ArrowDown}'
+      ]) {
+        onChange.mockClear()
+
+        selectedTab.focus()
+        await userEvent.keyboard(key)
+
+        await vi.waitFor(() => {
+          expect(onChange).toHaveBeenCalledOnce()
+          expect(onChange.mock.lastCall![1].index).toBe(1)
+        })
+      }
+    })
+
+    it('should keep non-selected panel hidden when unmountOnExit is false', async () => {
+      // Tabs is a controlled component: a tab click only fires onRequestTabChange,
+      // so the parent must own the selected index for the panel to actually switch.
+      const Example = () => {
+        const [selectedIndex, setSelectedIndex] = useState(0)
+        return (
+          <Tabs
+            onRequestTabChange={(_event, { index }) => setSelectedIndex(index)}
+          >
+            <Tabs.Panel
+              renderTitle="First Tab"
+              isSelected={selectedIndex === 0}
+              unmountOnExit={false}
+            >
+              Tab 1 content
+            </Tabs.Panel>
+            <Tabs.Panel
+              renderTitle="Second Tab"
+              isSelected={selectedIndex === 1}
+            >
+              Tab 2 content
+            </Tabs.Panel>
+          </Tabs>
+        )
+      }
+
+      await render(<Example />)
+      const panels = () => page.getByRole('tabpanel', { includeHidden: true })
+
+      expect(panels().elements().length).toBe(2)
+      expect(panels().elements()[0]).not.toHaveStyle({ display: 'none' })
+      expect(panels().elements()[1]).toHaveStyle({ display: 'none' })
+
+      await userEvent.click(page.getByRole('tab', { name: 'Second Tab' }))
+
+      await vi.waitFor(() => {
+        expect(panels().elements()[1]).not.toHaveStyle({ display: 'none' })
+        expect(panels().elements()[0]).toHaveStyle({ display: 'none' })
+      })
+    })
+
+    it('should render a fade-out gradient when tabOverflow set to scroll and Tabs overflow', async () => {
+      const Example = ({ width }: { width: string }) => (
+        <div style={{ width }}>
+          <Tabs tabOverflow="scroll">
+            <Tabs.Panel renderTitle="Tab1">Contents of panel</Tabs.Panel>
+            <Tabs.Panel renderTitle="Tab2">Contents of panel</Tabs.Panel>
+            <Tabs.Panel renderTitle="Tab3">Contents of panel</Tabs.Panel>
+            <Tabs.Panel renderTitle="Tab4">Contents of panel</Tabs.Panel>
+            <Tabs.Panel renderTitle="Tab5">Contents of panel</Tabs.Panel>
+          </Tabs>
+        </div>
+      )
+
+      const { container, rerender } = await render(<Example width="150px" />)
+
+      await vi.waitFor(() => {
+        expect(
+          container.querySelector('[class$="-tabs__startScrollOverlay"]')
+        ).toBeInTheDocument()
+        expect(
+          container.querySelector('[class$="-tabs__endScrollOverlay"]')
+        ).toBeInTheDocument()
+      })
+
+      await rerender(<Example width="550px" />)
+
+      await vi.waitFor(() => {
+        expect(
+          container.querySelector('[class$="-tabs__startScrollOverlay"]')
+        ).not.toBeInTheDocument()
+        expect(
+          container.querySelector('[class$="-tabs__endScrollOverlay"]')
+        ).not.toBeInTheDocument()
+      })
+    })
+  })
 })

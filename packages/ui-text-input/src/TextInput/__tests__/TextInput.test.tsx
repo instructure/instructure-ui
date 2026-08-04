@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+import { useState } from 'react'
 import { render } from 'vitest-browser-react'
 import { page, userEvent } from 'vitest/browser'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
@@ -212,6 +213,137 @@ describe('<TextInput/>', () => {
       const input = page.getByRole('textbox').element()
 
       expect(input).not.toHaveAttribute('aria-labelledby')
+    })
+  })
+
+  describe('Component tests', () => {
+    const contentBeforeSVG = (
+      <svg height="24" width="24">
+        <title>Content before</title>
+        <circle cx="50" cy="50" r="40" />
+      </svg>
+    )
+
+    const contentAfterSVG = (
+      <svg height="24" width="24">
+        <title>Content after</title>
+        <circle cx="50" cy="50" r="40" />
+      </svg>
+    )
+
+    it('should prepend and append content', async () => {
+      const { container, rerender } = await render(
+        <TextInput
+          renderLabel="Name"
+          renderBeforeInput={() => contentBeforeSVG}
+        />
+      )
+      const beforeElement = container.querySelector(
+        'span[class$="__beforeElement"]'
+      )
+
+      expect(beforeElement).toBeInTheDocument()
+      expect(beforeElement).toHaveTextContent('Content before')
+
+      await rerender(
+        <TextInput
+          renderLabel="Name"
+          renderBeforeInput={() => contentBeforeSVG}
+          renderAfterInput={() => contentAfterSVG}
+        />
+      )
+
+      const titles = container.querySelectorAll('svg title')
+
+      expect(container.querySelectorAll('svg')).toHaveLength(2)
+      expect(titles[0]).toHaveTextContent('Content before')
+      expect(titles[1]).toHaveTextContent('Content after')
+    })
+
+    // Providing a renderBeforeInput/renderAfterInput slot applies the horizontal
+    // gap padding based on the slot's *existence*, not its contents — an empty
+    // slot still gets the gap.
+    it('should apply horizontal padding when before/after content is provided', async () => {
+      // even empty slots get the gap
+      const { container, rerender } = await render(
+        <TextInput
+          renderLabel="Name"
+          renderBeforeInput={<span id="before"></span>}
+          renderAfterInput={<span id="after"></span>}
+        />
+      )
+      const paddings = () => {
+        const layout = container.querySelector('[class*="__layout"]')!
+        const afterElement = container.querySelector(
+          '[class*="__afterElement"]'
+        )!
+
+        return [
+          getComputedStyle(layout).paddingInlineStart,
+          getComputedStyle(afterElement).paddingInlineEnd
+        ]
+      }
+
+      expect(paddings()).toEqual(['12px', '12px'])
+
+      await rerender(
+        <TextInput
+          renderLabel="Name"
+          renderBeforeInput={() => contentBeforeSVG}
+          renderAfterInput={() => contentAfterSVG}
+        />
+      )
+
+      expect(paddings()).toEqual(['12px', '12px'])
+    })
+
+    it('should maintain focus while typing when after-content is conditionally rendered', async () => {
+      const TestTextInput = () => {
+        const [value, setValue] = useState('')
+
+        const renderAfterInput = () => {
+          if (!value) return
+          return <div>Hello!</div>
+        }
+
+        return (
+          <TextInput
+            renderLabel="Name"
+            value={value}
+            onChange={(_event, newValue) => {
+              setValue(newValue)
+            }}
+            renderAfterInput={renderAfterInput}
+          />
+        )
+      }
+
+      const { container } = await render(<TestTextInput />)
+      const input = page.getByRole('textbox').element()
+
+      await userEvent.click(input)
+
+      expect(input).toHaveFocus()
+      expect(
+        container.querySelector('[class*="textInput__afterElement"]')
+      ).not.toBeInTheDocument()
+
+      await userEvent.fill(page.getByRole('textbox'), 'a')
+
+      await vi.waitFor(() => {
+        expect(input).toHaveValue('a')
+        expect(
+          container.querySelector('[class*="textInput__afterElement"]')
+        ).toHaveTextContent('Hello!')
+      })
+      expect(input).toHaveFocus()
+
+      await userEvent.fill(page.getByRole('textbox'), 'abc')
+
+      await vi.waitFor(() => {
+        expect(input).toHaveValue('abc')
+      })
+      expect(input).toHaveFocus()
     })
   })
 })

@@ -24,6 +24,7 @@
 
 import { createRef } from 'react'
 import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { FormFieldLayout } from '@instructure/ui-form-field/latest'
@@ -80,5 +81,37 @@ describe('<FormFieldLayout />', () => {
     )
     expect(ref.current).toBeInstanceOf(HTMLInputElement)
     expect(inputContainerRef).toHaveBeenCalledWith(ref.current!.parentElement)
+  })
+
+  describe('Component tests', () => {
+    it('should align FormFieldLayout label to right by default', async () => {
+      await page.viewport(800, 600)
+      const { container } = await render(
+        <FormFieldLayout label="Username" layout="inline">
+          <input type="text" />
+        </FormFieldLayout>
+      )
+      const label = container.querySelector(
+        'span[class$="-formFieldLayout__label"]'
+      )!
+
+      expect(label).toHaveTextContent('Username')
+      expect(window.getComputedStyle(label).textAlign).toBe('end')
+    })
+
+    it('should align FormFieldLayout label to left', async () => {
+      await page.viewport(800, 600)
+      const { container } = await render(
+        <FormFieldLayout label="Username" layout="inline" labelAlign="start">
+          <input type="text" />
+        </FormFieldLayout>
+      )
+      const label = container.querySelector(
+        'span[class$="-formFieldLayout__label"]'
+      )!
+
+      expect(label).toHaveTextContent('Username')
+      expect(window.getComputedStyle(label).textAlign).toBe('start')
+    })
   })
 })

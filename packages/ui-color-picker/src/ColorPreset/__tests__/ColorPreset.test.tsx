@@ -25,6 +25,7 @@
 import { render } from 'vitest-browser-react'
 import { page, userEvent } from 'vitest/browser'
 import { describe, it, expect, vi } from 'vitest'
+import { colorToRGB } from '@instructure/ui-color-utils'
 import { ColorPreset } from '@instructure/ui-color-picker/latest'
 import type { ColorPresetProps } from '@instructure/ui-color-picker/latest'
 
@@ -89,7 +90,7 @@ describe('<ColorPreset />', () => {
     })
   })
 
-  it('should default to using the hex code as aria-label when colorScreenReaderLabel is not provided', async () => {
+  it('should default to using the hex code as aria-label when colorScreenReaderLabel is not provided ', async () => {
     await render(<ColorPreset {...testValue} />)
     const buttons = page.getByRole('button').elements()
 
@@ -126,7 +127,8 @@ describe('<ColorPreset />', () => {
 
       const testColors = testValue.colors
       const indicators = page.getByRole('button').elements()
-      const tooltips = page.getByRole('tooltip').elements()
+      // queried directly: hidden tooltips are not in the a11y tree
+      const tooltips = document.querySelectorAll('[role="tooltip"]')
 
       expect(indicators.length).toBe(testColors.length)
       expect(tooltips.length).toBe(testColors.length)
@@ -182,7 +184,8 @@ describe('<ColorPreset />', () => {
 
       const indicators = page.getByRole('button').elements()
 
-      await userEvent.click(indicators[1])
+      // `force` because Playwright refuses to click disabled elements
+      await userEvent.click(indicators[1], { force: true })
 
       await vi.waitFor(() => {
         expect(onSelect).not.toHaveBeenCalled()
@@ -221,4 +224,148 @@ describe('<ColorPreset />', () => {
   })
 
   // The accessibility tests are ignored because the tooltips of the ColorIndicator, which are defined in the "aria-labelledby" attribute, are located out of the scope of the ColorPreset.
+
+  it('should display color indicators for all colors', async () => {
+    await render(<ColorPreset colors={testValue.colors} onSelect={vi.fn()} />)
+
+    const indicators = document.querySelectorAll(
+      'div[role="presentation"][class$="-colorIndicator"]'
+    )
+
+    expect(indicators.length).toBe(testValue.colors.length)
+
+    indicators.forEach((indicator, index) => {
+      const expectedColor = colorToRGB(testValue.colors[index])
+      const boxShadow = getComputedStyle(indicator).boxShadow
+      const colorValue = boxShadow.split(')')[0] + ')'
+
+      expect(colorToRGB(colorValue)).toEqual(expectedColor)
+    })
+  })
+
+  it('empty string should leave all unselected', async () => {
+    await render(<ColorPreset {...testValue} selected="" />)
+
+    expect(
+      document.querySelector('button[aria-label="selected"]')
+    ).not.toBeInTheDocument()
+    expect(
+      document.querySelector('div[class$="__selectedIndicator"]')
+    ).not.toBeInTheDocument()
+  })
+
+  it('should select proper color', async () => {
+    const testableColor = testValue.colors[6]
+    await render(<ColorPreset {...testValue} selected={testableColor} />)
+
+    const selectedButton = document
+      .querySelector('[class*="selectedIndicator"]')!
+      .closest('button')!
+    const indicator = selectedButton.querySelector(
+      'div[role="presentation"][class$="-colorIndicator"]'
+    )!
+    const boxShadow = getComputedStyle(indicator).boxShadow
+    const colorValue = boxShadow.split(')')[0] + ')'
+
+    expect(colorToRGB(colorValue)).toEqual(colorToRGB(testableColor))
+  })
+
+  it('shows menu on indicator click', async () => {
+    await render(
+      <ColorPreset {...testValue} colorMixerSettings={testColorMixerSettings} />
+    )
+    const indicators = document.querySelectorAll(
+      'div[role="presentation"][class$="-colorIndicator"]'
+    )
+
+    // an earlier test may have left the pointer over another indicator, whose
+    // tooltip would then cover the one we want to click
+    await userEvent.unhover(indicators[0])
+    await userEvent.click(indicators[5])
+
+    await vi.waitFor(() => {
+      expect(
+        document.querySelector('div[id^=DrilldownHeader-Title]')
+      ).toHaveTextContent(testValue.colors[5])
+    })
+
+    const menu = document.querySelector('div[role="menu"]')!
+
+    expect(menu).toHaveTextContent(testColorMixerSettings!.selectColorLabel!)
+    expect(menu).toHaveTextContent(testColorMixerSettings!.removeColorLabel!)
+  })
+
+  it('should allow adding presets', async () => {
+    const onPresetChange = vi.fn()
+    await render(
+      <ColorPreset
+        {...testValue}
+        colorMixerSettings={{ ...testColorMixerSettings!, onPresetChange }}
+      />
+    )
+
+    await userEvent.click(
+      document.querySelector('div[class$="addNewPresetButton"]')!
+    )
+
+    const footer = document.querySelector('div[class$="popoverFooter"]')!
+    const addButton = Array.from(footer.querySelectorAll('button')).find(
+      (button) => button.textContent?.includes('Add')
+    )!
+
+    await userEvent.click(addButton)
+
+    // Adding a preset calls onPresetChange with the new color prepended to the
+    // existing colors array.
+    await vi.waitFor(() => {
+      expect(onPresetChange).toHaveBeenCalledTimes(1)
+      expect(onPresetChange.mock.lastCall![0]).toHaveLength(
+        testValue.colors.length + 1
+      )
+    })
+  })
+
+  it('should allow removing presets', async () => {
+    const onPresetChange = vi.fn()
+    await render(
+      <ColorPreset
+        {...testValue}
+        colorMixerSettings={{ ...testColorMixerSettings!, onPresetChange }}
+      />
+    )
+    const lastColorIndex = testValue.colors.length - 1
+    const expectedColors = testValue.colors.slice(0, -1)
+    const indicators = document.querySelectorAll(
+      'div[role="presentation"][class$="-colorIndicator"]'
+    )
+
+    await userEvent.click(indicators[lastColorIndex])
+    await userEvent.click(page.getByRole('menuitem', { name: 'Remove' }))
+
+    await vi.waitFor(() => {
+      expect(onPresetChange).toHaveBeenCalledWith(expectedColors)
+    })
+  })
+
+  it('should allow selecting presets', async () => {
+    const testableIdx = 3
+    const onSelect = vi.fn()
+    await render(
+      <ColorPreset
+        {...testValue}
+        onSelect={onSelect}
+        colorMixerSettings={testColorMixerSettings}
+      />
+    )
+    const indicators = document.querySelectorAll(
+      'div[role="presentation"][class$="-colorIndicator"]'
+    )
+
+    await userEvent.click(indicators[testableIdx])
+    await userEvent.click(page.getByRole('menuitem', { name: 'Select' }))
+
+    await vi.waitFor(() => {
+      expect(onSelect).toHaveBeenCalledWith(testValue.colors[testableIdx])
+    })
+  })
 })

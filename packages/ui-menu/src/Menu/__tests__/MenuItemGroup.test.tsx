@@ -24,7 +24,7 @@
 
 import { fireEvent } from '@testing-library/dom'
 import { render } from 'vitest-browser-react'
-import { page } from 'vitest/browser'
+import { page, userEvent } from 'vitest/browser'
 import { describe, it, expect, vi } from 'vitest'
 
 import {
@@ -186,5 +186,70 @@ describe('<MenuItemGroup />', () => {
     fireEvent.click(menuItem)
 
     expect(onSelect).not.toHaveBeenCalled()
+  })
+  describe('Component tests', () => {
+    it('updates the selected items when allowMultiple is true', async () => {
+      const onSelect = vi.fn()
+      await render(
+        <MenuItemGroup label="Group Label" allowMultiple onSelect={onSelect}>
+          <MenuItem>First Menu Item</MenuItem>
+          <MenuItem>Second Menu Item</MenuItem>
+          <MenuItemSeparator />
+        </MenuItemGroup>
+      )
+      const checkboxes = () => page.getByRole('menuitemcheckbox').elements()
+
+      await userEvent.click(page.getByText('First Menu Item'))
+
+      expect(checkboxes()[0]).toHaveAttribute('aria-checked', 'true')
+      expect(checkboxes()[1]).toHaveAttribute('aria-checked', 'false')
+      expect(onSelect).toHaveBeenCalledOnce()
+      expect(onSelect.mock.calls[0][1]).toEqual([0])
+      expect(onSelect.mock.calls[0][2]).toEqual(true)
+
+      await userEvent.click(page.getByText('Second Menu Item'))
+
+      expect(checkboxes()[0]).toHaveAttribute('aria-checked', 'true')
+      expect(checkboxes()[1]).toHaveAttribute('aria-checked', 'true')
+      expect(onSelect).toHaveBeenCalledTimes(2)
+      expect(onSelect.mock.calls[1][1]).toEqual([0, 1])
+      expect(onSelect.mock.calls[1][2]).toEqual(true)
+
+      await userEvent.click(page.getByText('First Menu Item'))
+
+      expect(checkboxes()[0]).toHaveAttribute('aria-checked', 'false')
+      expect(checkboxes()[1]).toHaveAttribute('aria-checked', 'true')
+      expect(onSelect).toHaveBeenCalledTimes(3)
+      expect(onSelect.mock.calls[2][1]).toEqual([1])
+      expect(onSelect.mock.calls[2][2]).toEqual(false)
+    })
+
+    it('updates the selected items when allowMultiple is false', async () => {
+      const onSelect = vi.fn()
+      await render(
+        <MenuItemGroup label="Group Label" onSelect={onSelect}>
+          <MenuItem>First Menu Item</MenuItem>
+          <MenuItem>Second Menu Item</MenuItem>
+          <MenuItemSeparator />
+        </MenuItemGroup>
+      )
+      const radios = () => page.getByRole('menuitemradio').elements()
+
+      await userEvent.click(page.getByText('First Menu Item'))
+
+      expect(radios()[0]).toHaveAttribute('aria-checked', 'true')
+      expect(radios()[1]).toHaveAttribute('aria-checked', 'false')
+      expect(onSelect).toHaveBeenCalledOnce()
+      expect(onSelect.mock.calls[0][1]).toEqual([0])
+      expect(onSelect.mock.calls[0][2]).toEqual(true)
+
+      await userEvent.click(page.getByText('Second Menu Item'))
+
+      expect(radios()[0]).toHaveAttribute('aria-checked', 'false')
+      expect(radios()[1]).toHaveAttribute('aria-checked', 'true')
+      expect(onSelect).toHaveBeenCalledTimes(2)
+      expect(onSelect.mock.calls[1][1]).toEqual([1])
+      expect(onSelect.mock.calls[1][2]).toEqual(true)
+    })
   })
 })

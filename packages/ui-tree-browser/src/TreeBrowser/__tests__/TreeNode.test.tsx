@@ -53,4 +53,43 @@ describe('<TreeNode />', () => {
 
     expect(containerRef).toHaveBeenCalledWith(div)
   })
+
+  describe('Component tests', () => {
+    it('should take the selected CSS props if it is selected', async () => {
+      const pink = 'rgb(255, 0, 255)'
+
+      const { container } = await render(
+        <TreeNode
+          id="1"
+          selected={true}
+          themeOverride={{ selectedBackgroundColor: pink }}
+        >
+          <div> Hello!</div>
+        </TreeNode>
+      )
+      const treeButton = container.querySelector<HTMLElement>(
+        '[class$="-treeButton"]'
+      )!
+
+      expect(treeButton).toBeInTheDocument()
+      expect(getComputedStyle(treeButton).backgroundColor).toBe(pink)
+    })
+
+    it('should take the focused class if it is focused', async () => {
+      const { container } = await render(
+        <TreeNode id="1" focused={true}>
+          <input />
+        </TreeNode>
+      )
+      const treeButton = container.querySelector<HTMLElement>(
+        '[class$="-treeButton"]'
+      )!
+
+      expect(treeButton).toBeInTheDocument()
+      // the button fades in, so wait for the animation to finish
+      await vi.waitFor(() => {
+        expect(getComputedStyle(treeButton).opacity).toBe('1')
+      })
+    })
+  })
 })

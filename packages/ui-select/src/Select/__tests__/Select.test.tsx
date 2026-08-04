@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { createRef } from 'react'
+import { createRef, useState } from 'react'
 import { render } from 'vitest-browser-react'
 import { page, userEvent } from 'vitest/browser'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
@@ -1323,6 +1323,488 @@ describe('<Select />', () => {
         await vi.waitFor(() => {
           expect(onFocus).toHaveBeenCalled()
         })
+      })
+    })
+  })
+
+  describe('Component tests', () => {
+    const cyOptionsWithBeforeContent = [
+      { id: 'opt1', label: 'Text', renderBeforeLabel: 'XY' },
+      { id: 'opt2', label: 'Icon', renderBeforeLabel: 'YY' },
+      {
+        id: 'opt3',
+        label: 'Colored Icon',
+        renderBeforeLabel: <EyeInstUIIcon />
+      }
+    ]
+    const cyOptionsWithAfterContent = [
+      { id: 'opt1', label: 'Text', renderAfterLabel: 'XY' },
+      { id: 'opt2', label: 'Icon', renderAfterLabel: 'YY' },
+      { id: 'opt3', label: 'Colored Icon', renderAfterLabel: <EyeInstUIIcon /> }
+    ]
+
+    // the real cursor stays where the previous test left it, which can hover an
+    // option of the next render: park it off-component before each test
+    beforeEach(async () => {
+      const parkingSpot = document.createElement('div')
+      parkingSpot.style.cssText =
+        'position:fixed;right:0;bottom:0;width:20px;height:20px'
+      document.body.appendChild(parkingSpot)
+      await userEvent.hover(parkingSpot)
+      parkingSpot.remove()
+    })
+
+    it('should render dynamically colored icons before option', async () => {
+      const renderBeforeLabel = (props: any) => {
+        return (
+          <CheckInstUIIcon
+            color={props.isHighlighted ? 'warningColor' : 'infoColor'}
+          />
+        )
+      }
+
+      const { container } = await render(
+        <Select renderLabel="Choose an option" isShowingOptions>
+          <Select.Option
+            id="0"
+            isHighlighted
+            renderBeforeLabel={renderBeforeLabel}
+          >
+            ungrouped option one
+          </Select.Option>
+          <Select.Option id="1" renderBeforeLabel={renderBeforeLabel}>
+            grouped option one
+          </Select.Option>
+        </Select>
+      )
+
+      await userEvent.click(container.querySelector('input')!)
+
+      const icons = document.querySelectorAll<SVGElement>(
+        'ul[role="listbox"] li [role="presentation"] svg'
+      )
+      // the icons colour themselves via `stroke`, not `fill`
+      const iconStyles = Array.from(icons).map(
+        (icon) => window.getComputedStyle(icon).stroke
+      )
+
+      expect(iconStyles[0]).toBe('rgb(207, 74, 0)')
+      expect(iconStyles[1]).toBe('rgb(43, 122, 188)')
+    })
+
+    it('should set maxHeight according to the visibleOptionsCount prop', async () => {
+      await render(
+        <Select
+          renderLabel="Choose an option"
+          isShowingOptions
+          visibleOptionsCount={2}
+        >
+          {getOptions()}
+        </Select>
+      )
+
+      // In v2 the maxHeight clamp lives on the scrollable View wrapping the
+      // listbox, not on the <ul> itself; two options => 2 * the option height
+      // the theme resolves to (43.75px in the browser).
+      const view = document
+        .querySelector('ul[role="listbox"]')!
+        .closest('[class$="view--block"]')!
+
+      expect(window.getComputedStyle(view).height).toBe('87.5px')
+    })
+
+    it('should override maxHeight with optionsMaxHeight, even if visibleOptionsCount is set', async () => {
+      await render(
+        <Select
+          renderLabel="Choose an option"
+          isShowingOptions
+          visibleOptionsCount={2}
+          optionsMaxHeight="50px"
+        >
+          {getOptions()}
+        </Select>
+      )
+      const view = document
+        .querySelector('ul[role="listbox"]')!
+        .closest('[class$="view--block"]')!
+
+      expect(window.getComputedStyle(view).height).toBe('50px')
+    })
+
+    it('should fire onRequestHighlightOption when up/down arrows are pressed', async () => {
+      const onRequestShowOptions = vi.fn()
+      const onRequestHighlightOption = vi.fn()
+
+      const { container, rerender } = await render(
+        <Select
+          renderLabel="Choose an option"
+          onRequestShowOptions={onRequestShowOptions}
+          onRequestHighlightOption={onRequestHighlightOption}
+        >
+          {getOptions()}
+        </Select>
+      )
+      const input = () => container.querySelector('input')!
+
+      input().focus()
+      await userEvent.keyboard('{ArrowDown}')
+
+      await vi.waitFor(() => {
+        expect(onRequestShowOptions).toHaveBeenCalledOnce()
+      })
+      expect(onRequestHighlightOption).not.toHaveBeenCalled()
+
+      // Set prop isShowingOptions
+      await rerender(
+        <Select
+          renderLabel="Choose an option"
+          onRequestShowOptions={onRequestShowOptions}
+          onRequestHighlightOption={onRequestHighlightOption}
+          isShowingOptions={true}
+        >
+          {getOptions()}
+        </Select>
+      )
+
+      input().focus()
+      await userEvent.keyboard('{ArrowDown}')
+      await vi.waitFor(() => {
+        expect(onRequestHighlightOption.mock.lastCall![1].id).toBe(
+          defaultOptions[0]
+        )
+      })
+
+      // Set prop children
+      await rerender(
+        <Select
+          renderLabel="Choose an option"
+          onRequestShowOptions={onRequestShowOptions}
+          onRequestHighlightOption={onRequestHighlightOption}
+          isShowingOptions={true}
+        >
+          {getOptions(defaultOptions[0])}
+        </Select>
+      )
+
+      input().focus()
+      await userEvent.keyboard('{ArrowDown}')
+      await vi.waitFor(() => {
+        expect(onRequestHighlightOption.mock.lastCall![1].id).toBe(
+          defaultOptions[1]
+        )
+      })
+
+      // Set prop children
+      await rerender(
+        <Select
+          renderLabel="Choose an option"
+          onRequestShowOptions={onRequestShowOptions}
+          onRequestHighlightOption={onRequestHighlightOption}
+          isShowingOptions={true}
+        >
+          {getOptions(defaultOptions[1])}
+        </Select>
+      )
+
+      input().focus()
+      await userEvent.keyboard('{ArrowUp}')
+      await vi.waitFor(() => {
+        expect(onRequestHighlightOption.mock.lastCall![1].id).toBe(
+          defaultOptions[0]
+        )
+      })
+
+      // Set prop children (Should skip disabled option...)
+      await rerender(
+        <Select
+          renderLabel="Choose an option"
+          onRequestShowOptions={onRequestShowOptions}
+          onRequestHighlightOption={onRequestHighlightOption}
+          isShowingOptions={true}
+        >
+          {getOptions(defaultOptions[0], undefined, defaultOptions[1])}
+        </Select>
+      )
+
+      input().focus()
+      await userEvent.keyboard('{ArrowDown}')
+      await vi.waitFor(() => {
+        expect(onRequestHighlightOption.mock.lastCall![1].id).toBe(
+          defaultOptions[2]
+        )
+      })
+
+      // Set prop children
+      await rerender(
+        <Select
+          renderLabel="Choose an option"
+          onRequestShowOptions={onRequestShowOptions}
+          onRequestHighlightOption={onRequestHighlightOption}
+          isShowingOptions={true}
+        >
+          {getOptions(defaultOptions[2], undefined, defaultOptions[1])}
+        </Select>
+      )
+
+      input().focus()
+      await userEvent.keyboard('{ArrowUp}')
+      await vi.waitFor(() => {
+        expect(onRequestHighlightOption.mock.lastCall![1].id).toBe(
+          defaultOptions[0]
+        )
+      })
+    })
+
+    it('should fire onRequestHighlightOption when home/end is pressed', async () => {
+      const onRequestHighlightOption = vi.fn()
+
+      const { container, rerender } = await render(
+        <Select
+          renderLabel="Choose an option"
+          isShowingOptions
+          onRequestHighlightOption={onRequestHighlightOption}
+        >
+          {getOptions(defaultOptions[1])}
+        </Select>
+      )
+      const input = () => container.querySelector('input')!
+
+      input().focus()
+      await userEvent.keyboard('{Home}')
+      await vi.waitFor(() => {
+        expect(onRequestHighlightOption.mock.lastCall![1].id).toBe(
+          defaultOptions[0]
+        )
+      })
+
+      input().focus()
+      await userEvent.keyboard('{End}')
+      await vi.waitFor(() => {
+        expect(onRequestHighlightOption.mock.lastCall![1].id).toBe(
+          defaultOptions[2]
+        )
+      })
+
+      // Set prop children (with a disabled option...)
+      await rerender(
+        <Select
+          renderLabel="Choose an option"
+          isShowingOptions
+          onRequestHighlightOption={onRequestHighlightOption}
+        >
+          {getOptions(undefined, undefined, defaultOptions[2])}
+        </Select>
+      )
+
+      input().focus()
+      await userEvent.keyboard('{End}')
+      // `baz` (defaultOptions[2]) is disabled here, so End highlights the last
+      // *enabled* option, `bar` (defaultOptions[1]).
+      await vi.waitFor(() => {
+        expect(onRequestHighlightOption.mock.lastCall![1].id).toBe(
+          defaultOptions[1]
+        )
+      })
+    })
+
+    it('should fire onRequestHighlightOption when onRequestShowOptions is called with selected options', async () => {
+      const onRequestHighlightOption = vi.fn()
+
+      const { container } = await render(
+        <Select
+          renderLabel="Choose an option"
+          onRequestHighlightOption={onRequestHighlightOption}
+        >
+          {getOptions(undefined, defaultOptions[1])}
+        </Select>
+      )
+
+      await userEvent.click(container.querySelector('input')!)
+
+      await vi.waitFor(() => {
+        expect(onRequestHighlightOption.mock.lastCall![1].id).toBe(
+          defaultOptions[1]
+        )
+      })
+    })
+
+    it('should fire onRequestSelectOption when enter is pressed', async () => {
+      const onRequestSelectOption = vi.fn()
+
+      const { container } = await render(
+        <Select
+          renderLabel="Choose an option"
+          isShowingOptions
+          onRequestSelectOption={onRequestSelectOption}
+        >
+          {getOptions(defaultOptions[1])}
+        </Select>
+      )
+
+      container.querySelector('input')!.focus()
+      await userEvent.keyboard('{Enter}')
+
+      await vi.waitFor(() => {
+        expect(onRequestSelectOption.mock.lastCall![1].id).toBe(
+          defaultOptions[1]
+        )
+      })
+    })
+
+    it('should fire onRequestSelectOption when options are clicked', async () => {
+      const onRequestSelectOption = vi.fn()
+
+      await render(
+        <Select
+          renderLabel="Choose an option"
+          isShowingOptions
+          onRequestSelectOption={onRequestSelectOption}
+        >
+          {getOptions()}
+        </Select>
+      )
+
+      // Click the option's <li>, not the inner text node — the click handler is
+      // on the list item. Clicking `foo` selects `foo`.
+      await userEvent.click(page.getByRole('option', { name: 'foo' }))
+
+      await vi.waitFor(() => {
+        expect(onRequestSelectOption.mock.lastCall![1].id).toBe(
+          defaultOptions[0]
+        )
+      })
+    })
+
+    it('should fire onKeyDown while preserving default behavior', async () => {
+      const onRequestHighlightOption = vi.fn()
+      const onKeyDown = vi.fn()
+
+      const { container } = await render(
+        <Select
+          isShowingOptions
+          renderLabel="Choose an option"
+          onRequestHighlightOption={onRequestHighlightOption}
+          onKeyDown={onKeyDown}
+        >
+          {getOptions(defaultOptions[0])}
+        </Select>
+      )
+      const input = container.querySelector('input')!
+
+      input.focus()
+      await userEvent.keyboard('{ArrowDown}')
+      input.focus()
+      await userEvent.keyboard('a')
+
+      await vi.waitFor(() => {
+        expect(onRequestHighlightOption).toHaveBeenCalledOnce()
+        expect(onKeyDown).toHaveBeenCalledTimes(2)
+      })
+    })
+
+    it("should render the selected option's before content in the input field", async () => {
+      const MyTestComponent = () => {
+        const [selectedOptionId, setSelectedOptionId] = useState<string>(
+          cyOptionsWithBeforeContent[0].id
+        )
+        const [isShowingOptions, setIsShowingOptions] = useState(false)
+
+        const getOptionById = (id: string) =>
+          cyOptionsWithBeforeContent.find((opt) => opt.id === id)
+
+        return (
+          <Select
+            renderLabel="Choose an option"
+            inputValue={getOptionById(selectedOptionId)?.label}
+            isOptionContentAppliedToInput={true}
+            isShowingOptions={isShowingOptions}
+            onRequestShowOptions={() => setIsShowingOptions(true)}
+            onRequestHideOptions={() => setIsShowingOptions(false)}
+            onRequestSelectOption={(_event, data: { id?: string }) => {
+              if (data.id) {
+                setSelectedOptionId(data.id)
+              }
+              setIsShowingOptions(false)
+            }}
+          >
+            {cyOptionsWithBeforeContent.map((opt) => (
+              <Select.Option
+                id={opt.id}
+                key={opt.id}
+                value={opt.label}
+                renderBeforeLabel={opt.renderBeforeLabel}
+                isSelected={opt.id === selectedOptionId}
+              ></Select.Option>
+            ))}
+          </Select>
+        )
+      }
+      const { container } = await render(<MyTestComponent />)
+      const beforeElement = () =>
+        container.querySelector('span[class$="-textInput__beforeElement"]')
+
+      expect(beforeElement()).toHaveTextContent('XY')
+
+      await userEvent.click(container.querySelector('input')!)
+      await userEvent.click(
+        document.querySelectorAll<HTMLElement>('ul[role="listbox"] li')[1]
+      )
+
+      await vi.waitFor(() => {
+        expect(beforeElement()).toHaveTextContent('YY')
+      })
+    })
+
+    it("should render the selected option's after content in the input field", async () => {
+      const MyTestComponent = () => {
+        const [selectedOptionId, setSelectedOptionId] = useState<string>(
+          cyOptionsWithAfterContent[0].id
+        )
+        const [isShowingOptions, setIsShowingOptions] = useState(false)
+
+        const getOptionById = (id: string) =>
+          cyOptionsWithAfterContent.find((opt) => opt.id === id)
+
+        return (
+          <Select
+            renderLabel="Choose an option"
+            inputValue={getOptionById(selectedOptionId)?.label}
+            isOptionContentAppliedToInput={true}
+            isShowingOptions={isShowingOptions}
+            onRequestShowOptions={() => setIsShowingOptions(true)}
+            onRequestHideOptions={() => setIsShowingOptions(false)}
+            onRequestSelectOption={(_event, data: { id?: string }) => {
+              if (data.id) {
+                setSelectedOptionId(data.id)
+              }
+              setIsShowingOptions(false)
+            }}
+          >
+            {cyOptionsWithAfterContent.map((opt) => (
+              <Select.Option
+                id={opt.id}
+                key={opt.id}
+                value={opt.label}
+                renderAfterLabel={opt.renderAfterLabel}
+                isSelected={opt.id === selectedOptionId}
+              ></Select.Option>
+            ))}
+          </Select>
+        )
+      }
+      const { container } = await render(<MyTestComponent />)
+      const afterElement = () =>
+        container.querySelector('span[class$="-textInput__afterElement"]')
+
+      expect(afterElement()).toHaveTextContent('XY')
+
+      await userEvent.click(container.querySelector('input')!)
+      await userEvent.click(
+        document.querySelectorAll<HTMLElement>('ul[role="listbox"] li')[1]
+      )
+
+      await vi.waitFor(() => {
+        expect(afterElement()).toHaveTextContent('YY')
       })
     })
   })

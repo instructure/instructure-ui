@@ -1154,4 +1154,91 @@ describe('<Drilldown.Group />', () => {
       })
     })
   })
+
+  describe('Component tests', () => {
+    const renderDrilldown = (
+      selectableType: 'single' | 'multiple',
+      defaultSelected: string[]
+    ) =>
+      render(
+        <Drilldown rootPageId="page0">
+          <Drilldown.Page id="page0">
+            <Drilldown.Group
+              id="group0"
+              selectableType={selectableType}
+              defaultSelected={defaultSelected}
+            >
+              <Drilldown.Option id="groupOption0" value="item0">
+                Option0
+              </Drilldown.Option>
+              <Drilldown.Option id="groupOption1" value="item1">
+                Option1
+              </Drilldown.Option>
+              <Drilldown.Option id="groupOption2" value="item2">
+                Option2
+              </Drilldown.Option>
+            </Drilldown.Group>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+
+    it('should toggle the selected option only when selectableType is multiple', async () => {
+      await renderDrilldown('multiple', ['item0', 'item1', 'item2'])
+
+      const options = page.getByRole('menuitemcheckbox').elements()
+
+      options.forEach((option) => {
+        expect(option).toHaveAttribute('aria-checked', 'true')
+      })
+
+      await userEvent.click(page.getByText('Option1'))
+
+      await vi.waitFor(() => {
+        expect(options[0]).toHaveAttribute('aria-checked', 'true')
+        expect(options[1]).toHaveAttribute('aria-checked', 'false')
+        expect(options[2]).toHaveAttribute('aria-checked', 'true')
+      })
+    })
+
+    it('should toggle options in radio fashion when selectableType is single', async () => {
+      await renderDrilldown('single', ['item0'])
+
+      const options = page.getByRole('menuitemradio').elements()
+
+      expect(options[0]).toHaveAttribute('aria-checked', 'true')
+      expect(options[1]).toHaveAttribute('aria-checked', 'false')
+      expect(options[2]).toHaveAttribute('aria-checked', 'false')
+
+      await userEvent.click(page.getByText('Option1'))
+
+      await vi.waitFor(() => {
+        expect(options[0]).toHaveAttribute('aria-checked', 'false')
+        expect(options[1]).toHaveAttribute('aria-checked', 'true')
+        expect(options[2]).toHaveAttribute('aria-checked', 'false')
+      })
+    })
+
+    it('should themeOverride prop passed to the Options component', async () => {
+      await render(
+        <Drilldown rootPageId="page0">
+          <Drilldown.Page id="page0">
+            <Drilldown.Group
+              id="group0"
+              renderGroupTitle="Group label"
+              themeOverride={{ labelColor: 'rgb(100, 0, 0)' }}
+            >
+              <Drilldown.Option id="groupOption01">Option</Drilldown.Option>
+              <Drilldown.Option id="groupOption02">Option</Drilldown.Option>
+            </Drilldown.Group>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+      const groupTitle = Array.from(
+        document.querySelectorAll<HTMLElement>('[role="presentation"]')
+      ).find((el) => el.textContent === 'Group label')!
+
+      expect(groupTitle).toBeInTheDocument()
+      expect(getComputedStyle(groupTitle).color).toBe('rgb(100, 0, 0)')
+    })
+  })
 })

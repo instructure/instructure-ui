@@ -23,9 +23,10 @@
  */
 
 import { render } from 'vitest-browser-react'
-import { page } from 'vitest/browser'
+import { page, userEvent } from 'vitest/browser'
 import { describe, it, expect, vi } from 'vitest'
 
+import { Pagination } from '@instructure/ui-pagination/latest'
 import { PaginationPageInput } from '../v2/PaginationPageInput/index.js'
 
 const defaultSRLabel = (currentPage: number, numberOfPages: number) =>
@@ -151,5 +152,161 @@ describe('<PaginationPageInput />', () => {
     const label = container.querySelector('label')
 
     expect(label).toHaveTextContent('of 10')
+  })
+
+  describe('Component tests', () => {
+    const renderPagination = (onPageChange = vi.fn()) =>
+      render(
+        <Pagination
+          as="nav"
+          margin="small"
+          variant="input"
+          labelNext="Next Page"
+          labelPrev="Previous Page"
+          currentPage={4}
+          totalPageNumber={10}
+          onPageChange={onPageChange}
+        />
+      )
+
+    it('should update the number in the input on typing a number', async () => {
+      const { container } = await renderPagination()
+      const input = container.querySelector('input')!
+
+      expect(input).toHaveValue(4)
+
+      await userEvent.clear(input)
+      await userEvent.type(input, '6')
+
+      expect(input).toHaveValue(6)
+    })
+
+    it('should not update the input on typing a letter', async () => {
+      const { container } = await renderPagination()
+      const input = container.querySelector('input')!
+
+      expect(input).toHaveValue(4)
+
+      await userEvent.clear(input)
+      await userEvent.type(input, 'a')
+
+      expect(input.value).toBe('')
+    })
+
+    it("shouldn't call onChange on input typing ", async () => {
+      const onChange = vi.fn()
+      const { container } = await renderPagination(onChange)
+      const input = container.querySelector('input')!
+
+      await userEvent.clear(input)
+      await userEvent.type(input, '6')
+
+      expect(onChange).not.toHaveBeenCalled()
+    })
+
+    it('should keep the number in the input, on input and Enter ', async () => {
+      const { container } = await renderPagination()
+      const input = container.querySelector('input')!
+
+      await userEvent.clear(input)
+      await userEvent.type(input, '6')
+      await userEvent.keyboard('{Enter}')
+
+      await vi.waitFor(() => {
+        expect(input).toHaveValue(6)
+      })
+    })
+
+    it('should call onChange on successful update, on input and Enter', async () => {
+      const onChange = vi.fn()
+      const { container } = await renderPagination(onChange)
+      const input = container.querySelector('input')!
+
+      expect(input).toHaveValue(4)
+
+      await userEvent.clear(input)
+      await userEvent.type(input, '6')
+      await userEvent.keyboard('{Enter}')
+
+      await vi.waitFor(() => {
+        expect(onChange.mock.calls[0][0]).toBe(6)
+      })
+    })
+
+    it('should set MAX value on too big number, on input and Enter', async () => {
+      const onChange = vi.fn()
+      const { container } = await renderPagination(onChange)
+      const input = container.querySelector('input')!
+
+      await userEvent.clear(input)
+      await userEvent.type(input, '200')
+      await userEvent.keyboard('{Enter}')
+
+      await vi.waitFor(() => {
+        expect(input).toHaveValue(10)
+        expect(onChange.mock.calls[0][0]).toBe(10)
+      })
+    })
+
+    it('should set MIN value on too small number, on input and Enter', async () => {
+      const onChange = vi.fn()
+      const { container } = await renderPagination(onChange)
+      const input = container.querySelector('input')!
+
+      await userEvent.clear(input)
+      await userEvent.type(input, '0')
+      await userEvent.keyboard('{Enter}')
+
+      await vi.waitFor(() => {
+        expect(input).toHaveValue(1)
+        expect(onChange.mock.calls[0][0]).toBe(1)
+      })
+    })
+
+    it('should reset current value and not call onChange on empty string, on input and Enter', async () => {
+      const onChange = vi.fn()
+      const { container } = await renderPagination(onChange)
+      const input = container.querySelector('input')!
+
+      await userEvent.clear(input)
+      await userEvent.keyboard('{Enter}')
+
+      await vi.waitFor(() => {
+        expect(input).toHaveValue(4)
+      })
+      expect(onChange).not.toHaveBeenCalled()
+    })
+
+    it('should increment value and call onChange on up arrow', async () => {
+      const onChange = vi.fn()
+      const { container } = await renderPagination(onChange)
+      const input = container.querySelector('input')!
+
+      expect(input).toHaveValue(4)
+
+      input.focus()
+      await userEvent.keyboard('{ArrowUp}')
+
+      await vi.waitFor(() => {
+        expect(input).toHaveValue(5)
+        expect(onChange.mock.calls[0][0]).toBe(5)
+      })
+    })
+
+    it('should decrement value and call onChange on down arrow', async () => {
+      const onChange = vi.fn()
+      const { container } = await renderPagination(onChange)
+      const input = container.querySelector('input')!
+
+      expect(input).toHaveValue(4)
+
+      input.focus()
+      await userEvent.keyboard('{ArrowDown}')
+
+      await vi.waitFor(() => {
+        expect(input).toHaveValue(3)
+        expect(onChange.mock.calls[0][0]).toBe(3)
+      })
+    })
   })
 })

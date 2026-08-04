@@ -1255,4 +1255,322 @@ describe('<DateTimeInput />', () => {
       ).toBeTruthy()
     })
   })
+
+  describe('Component tests', () => {
+    it('should merge defaultValue and initialTimeForNewDate and handle onChange when the user clears date input and select another one', async () => {
+      const onChange = vi.fn()
+      const locale = 'en-US'
+      const timezone = 'US/Eastern'
+      const initialTimeForNewDate = '16:16'
+      const defaultValue = '2018-01-18T13:30'
+
+      const { container } = await render(
+        <DateTimeInput
+          description="date time description"
+          screenReaderLabels={{
+            calendarIcon: 'Choose date',
+            prevMonthButton: 'Previous month',
+            nextMonthButton: 'Next month',
+            datePickerDialog: 'Date picker',
+            selectedLabel: 'selected'
+          }}
+          dateRenderLabel="date-input label"
+          timeRenderLabel="time-input label"
+          invalidDateTimeMessage="whoops"
+          defaultValue={defaultValue}
+          locale={locale}
+          timezone={timezone}
+          initialTimeForNewDate={initialTimeForNewDate}
+          onChange={onChange}
+        />
+      )
+      expect(container).toHaveTextContent('date time description')
+      expect(container).toHaveTextContent('date-input label')
+      expect(container).toHaveTextContent('time-input label')
+      expect(container).toHaveTextContent('Thursday, January 18, 2018 1:30 PM')
+
+      const dateInput = dateInputElement()
+      const timeInput = timeInputElement()
+
+      expect(dateInput).toHaveValue('1/18/2018')
+      expect(timeInput).toHaveValue('1:30 PM')
+
+      await userEvent.clear(dateInput)
+      dateInput.blur()
+
+      await vi.waitFor(() => {
+        expect(timeInput).toHaveValue('')
+        expect(onChange).toHaveBeenCalled()
+      })
+
+      await userEvent.click(page.getByRole('button', { name: 'Choose date' }))
+
+      await vi.waitFor(() => {
+        expect(dayButton('22')).toBeInTheDocument()
+      })
+      await userEvent.click(dayButton('22'))
+
+      await vi.waitFor(() => {
+        expect(onChange).toHaveBeenCalled()
+      })
+
+      const selectedDateId: string = onChange.mock.lastCall![1]
+      const selectedDateValue = new Date(selectedDateId).toLocaleDateString(
+        'en-US',
+        {
+          timeZone: 'US/Eastern',
+          calendar: 'gregory',
+          numberingSystem: 'latn'
+        }
+      )
+
+      await vi.waitFor(() => {
+        expect(dateInput).toHaveValue(selectedDateValue)
+        expect(timeInput).toHaveValue('4:16 PM')
+      })
+
+      expect(selectedDateId.split('T')[0]).toContain('-22')
+    })
+
+    it('should not fire the onDateChange event when DateInput value change is not a date change', async () => {
+      const onChange = vi.fn()
+
+      await render(
+        <DateTimeInput
+          description="date_time"
+          dateRenderLabel="date-input"
+          screenReaderLabels={{
+            calendarIcon: 'Open calendar',
+            prevMonthButton: 'Previous month',
+            nextMonthButton: 'Next month',
+            datePickerDialog: 'Date picker',
+            selectedLabel: 'selected'
+          }}
+          timeRenderLabel="time-input"
+          invalidDateTimeMessage="whoops"
+          locale="en-US"
+          timezone="US/Eastern"
+          onChange={onChange}
+        />
+      )
+      const dateInput = dateInputElement()
+
+      await userEvent.click(dateInput)
+      await userEvent.type(dateInput, 'Not a date{Enter}')
+      dateInput.blur()
+
+      expect(onChange).not.toHaveBeenCalled()
+    })
+
+    it('should show an error message when setting a disabled date array', async () => {
+      const locale = 'en-US'
+      const timezone = 'US/Eastern'
+      const dateTime = DateTime.parse('2017-05-01T17:30Z', locale, timezone)
+      const errorMsg = 'Disabled date selected!'
+
+      const { container } = await render(
+        <DateTimeInput
+          description="date_time"
+          screenReaderLabels={{
+            calendarIcon: 'Open calendar',
+            prevMonthButton: 'Previous month',
+            nextMonthButton: 'Next month',
+            datePickerDialog: 'Date picker',
+            selectedLabel: 'selected'
+          }}
+          dateRenderLabel="date-input"
+          timeRenderLabel="time-input"
+          invalidDateTimeMessage="whoops"
+          locale={locale}
+          timezone={timezone}
+          defaultValue={dateTime.toISOString()}
+          disabledDates={[dateTime.toISOString()]}
+          disabledDateTimeMessage={errorMsg}
+        />
+      )
+      const dateInput = dateInputElement()
+
+      expect(container).toHaveTextContent(errorMsg)
+
+      await userEvent.fill(dateInput, '05/18/2017')
+      dateInput.blur()
+
+      await vi.waitFor(() => {
+        expect(container).not.toHaveTextContent(errorMsg)
+      })
+    })
+
+    it('should show an error message when setting a disabled date function', async () => {
+      const locale = 'en-US'
+      const timezone = 'US/Eastern'
+      const dateTime = DateTime.parse('2017-05-01T17:30Z', locale, timezone)
+      const errorMsgText = 'Disabled date selected!'
+      const errorMsg = (_rawDate?: string) => errorMsgText
+      const checker = (toCheck: string) => {
+        return toCheck.includes('2017')
+      }
+
+      const { container } = await render(
+        <DateTimeInput
+          description="date_time"
+          screenReaderLabels={{
+            calendarIcon: 'Open calendar',
+            prevMonthButton: 'Previous month',
+            nextMonthButton: 'Next month',
+            datePickerDialog: 'Date picker',
+            selectedLabel: 'selected'
+          }}
+          dateRenderLabel="date-input"
+          timeRenderLabel="time-input"
+          invalidDateTimeMessage="whoops"
+          locale={locale}
+          timezone={timezone}
+          defaultValue={dateTime.toISOString()}
+          disabledDates={checker}
+          disabledDateTimeMessage={errorMsg}
+        />
+      )
+      const dateInput = dateInputElement()
+
+      expect(container).toHaveTextContent(errorMsgText)
+
+      await userEvent.fill(dateInput, 'May 18, 2022')
+      dateInput.blur()
+
+      await vi.waitFor(() => {
+        expect(container).not.toHaveTextContent(errorMsgText)
+      })
+    })
+
+    it('should clear TimeSelect when DateInput is cleared', async () => {
+      const locale = 'en-US'
+      const timezone = 'US/Eastern'
+      const dateTime = DateTime.parse('2017-05-01T17:30Z', locale, timezone)
+      const invalidDateTimeMessage = 'invalidDateTimeMessage'
+      const props = {
+        description: 'date_time',
+        dateRenderLabel: 'date-input',
+        screenReaderLabels: {
+          calendarIcon: 'Open calendar',
+          prevMonthButton: 'Previous month',
+          nextMonthButton: 'Next month',
+          datePickerDialog: 'Date picker',
+          selectedLabel: 'selected'
+        },
+        timeRenderLabel: 'time-input',
+        invalidDateTimeMessage: 'whoops',
+        locale,
+        timezone
+      }
+
+      const { container, rerender } = await render(
+        <DateTimeInput {...props} value={dateTime.toISOString()} />
+      )
+
+      const dateInput = dateInputElement()
+      const timeInput = timeInputElement()
+
+      expect(dateInput).toHaveValue('5/1/2017')
+      expect(timeInput).toHaveValue('1:30 PM')
+      expect(container).toHaveTextContent('May 1, 2017 1:30 PM')
+
+      // 1. clear programmatically
+      await rerender(<DateTimeInput {...props} value={undefined} />)
+
+      await vi.waitFor(() => {
+        expect(dateInput).toHaveValue('')
+        expect(timeInput).toHaveValue('')
+        expect(container).not.toHaveTextContent('May 1, 2017 1:30 PM')
+      })
+
+      // 2. clear via keyboard input
+      const newDateStr = '2022-03-29T19:00Z'
+      await rerender(<DateTimeInput {...props} value={newDateStr} />)
+
+      await vi.waitFor(() => {
+        expect(dateInput).toHaveValue('3/29/2022')
+        expect(timeInput).toHaveValue('3:00 PM')
+        expect(container).toHaveTextContent('March 29, 2022 3:00 PM')
+      })
+
+      await userEvent.clear(dateInput)
+      dateInput.blur()
+
+      await vi.waitFor(() => {
+        expect(dateInput).toHaveValue('')
+        expect(timeInput).toHaveValue('')
+        expect(container).not.toHaveTextContent('March 29, 2022 3:00 PM')
+        expect(container).not.toHaveTextContent(invalidDateTimeMessage)
+      })
+    })
+
+    it('should allow the user to enter any time value if allowNonStepInput is true', async () => {
+      const onChange = vi.fn()
+
+      await render(
+        <DateTimeInput
+          description="date_time"
+          dateRenderLabel="date-input"
+          screenReaderLabels={{
+            calendarIcon: 'Open calendar',
+            prevMonthButton: 'Previous month',
+            nextMonthButton: 'Next month',
+            datePickerDialog: 'Date picker',
+            selectedLabel: 'selected'
+          }}
+          timeRenderLabel="time-input"
+          invalidDateTimeMessage="whoops"
+          locale="en-US"
+          timezone="US/Eastern"
+          onChange={onChange}
+          allowNonStepInput={true}
+        />
+      )
+      const dateInput = dateInputElement()
+      const timeInput = timeInputElement()
+
+      await userEvent.fill(timeInput, '7:34 PM')
+
+      await userEvent.fill(dateInput, 'May 1, 2017')
+      dateInput.blur()
+
+      await vi.waitFor(() => {
+        expect(onChange).toHaveBeenCalled()
+        expect(onChange.mock.lastCall![1]).toBe('2017-05-01T23:34:00.000Z')
+      })
+    })
+
+    it("should change value of TimeSelect to initialTimeForNewDate prop's value", async () => {
+      const locale = 'en-US'
+      const timezone = 'US/Eastern'
+
+      await render(
+        <DateTimeInput
+          description="date_time"
+          dateRenderLabel="date-input"
+          screenReaderLabels={{
+            calendarIcon: 'Open calendar',
+            prevMonthButton: 'Previous month',
+            nextMonthButton: 'Next month',
+            datePickerDialog: 'Date picker',
+            selectedLabel: 'selected'
+          }}
+          timeRenderLabel="time-input"
+          invalidDateTimeMessage="whoops"
+          locale={locale}
+          timezone={timezone}
+          initialTimeForNewDate="05:05"
+        />
+      )
+      const dateInput = dateInputElement()
+      const timeInput = timeInputElement()
+
+      await userEvent.fill(dateInput, 'May 1, 2017')
+      dateInput.blur()
+
+      await vi.waitFor(() => {
+        expect(timeInput).toHaveValue('5:05 AM')
+      })
+    })
+  })
 })

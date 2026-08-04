@@ -22,11 +22,13 @@
  * SOFTWARE.
  */
 
+import { useState } from 'react'
 import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
 import { describe, it, beforeEach, afterEach, vi, expect } from 'vitest'
 import type { MockInstance } from 'vitest'
 
-import { PagesPage as Page } from '@instructure/ui-pages/latest'
+import { Pages, PagesPage as Page } from '@instructure/ui-pages/latest'
 
 describe('<Page />', () => {
   let consoleErrorMock: ReturnType<typeof vi.spyOn>
@@ -57,5 +59,51 @@ describe('<Page />', () => {
     )
 
     expect(container).toHaveTextContent('Hello World')
+  })
+
+  describe('Component tests', () => {
+    it('should focus default element', async () => {
+      const Example = () => {
+        const [activePageIndex, setActivePageIndex] = useState(0)
+        let inputRef: HTMLInputElement | null
+
+        const handleNextPageClick = () => {
+          setActivePageIndex(1)
+        }
+
+        const handleBackButtonClick = () => {
+          setActivePageIndex(0)
+        }
+
+        return (
+          <Pages activePageIndex={activePageIndex} onPageIndexChange={vi.fn()}>
+            <Page defaultFocusElement={() => inputRef}>
+              <button onClick={handleNextPageClick}> Next Page </button>
+            </Page>
+
+            <Page defaultFocusElement={() => inputRef}>
+              <input type="text" />
+              <input
+                id="default-input"
+                type="text"
+                ref={(el) => {
+                  inputRef = el
+                }}
+              />
+              <input type="text" />
+              <button onClick={handleBackButtonClick}> Back </button>
+            </Page>
+          </Pages>
+        )
+      }
+
+      const { container } = await render(<Example />)
+
+      await page.getByRole('button', { name: 'Next Page' }).click()
+
+      await vi.waitFor(() => {
+        expect(container.querySelector('#default-input')).toHaveFocus()
+      })
+    })
   })
 })

@@ -26,6 +26,7 @@ import { render } from 'vitest-browser-react'
 import { page } from 'vitest/browser'
 import { describe, it, expect, vi } from 'vitest'
 
+import { Pagination } from '@instructure/ui-pagination/latest'
 import { PaginationArrowButton } from '../v2/PaginationArrowButton/index.js'
 
 describe('<PaginationArrowButton />', () => {
@@ -50,5 +51,34 @@ describe('<PaginationArrowButton />', () => {
     const button = page.getByRole('button', { name: 'Label' }).element()
 
     expect(buttonRef).toHaveBeenCalledWith(button)
+  })
+
+  describe('Component tests', () => {
+    it('should display tooltips', async () => {
+      await render(
+        <Pagination
+          as="nav"
+          margin="small"
+          variant="compact"
+          labelNext="Next"
+          labelPrev="Prev"
+          currentPage={3}
+          totalPageNumber={10}
+          onPageChange={vi.fn()}
+        />
+      )
+      const tooltip = () =>
+        Array.from(
+          document.querySelectorAll<HTMLElement>('[role="tooltip"]')
+        ).find((el) => el.textContent === 'Next')!
+
+      expect(tooltip()).not.toBeVisible()
+
+      await page.getByRole('button', { name: 'Next' }).hover()
+
+      await vi.waitFor(() => {
+        expect(tooltip()).toBeVisible()
+      })
+    })
   })
 })

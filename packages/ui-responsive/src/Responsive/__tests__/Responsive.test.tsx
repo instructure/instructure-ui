@@ -172,4 +172,76 @@ describe('<Responsive />', () => {
 
     expect(responsiveDiv).toHaveStyle('display: inline-flex')
   })
+
+  describe('Component tests', () => {
+    it('should merge props correctly when more than one breakpoint is applied', async () => {
+      const renderSpy = vi.fn()
+      const props = {
+        small: { withBorder: true, background: 'transparent' },
+        medium: { options: [1, 2, 3], icons: { edit: true, flag: false } },
+        large: { margin: 'small', label: 'hello world', describedBy: 'fakeId' }
+      }
+      await render(
+        <Responsive
+          props={props}
+          query={{
+            small: { maxWidth: 300 },
+            medium: { minWidth: 300 },
+            large: { minWidth: 300 }
+          }}
+          render={(props, matches) => {
+            renderSpy(props, matches)
+            return <div>hello</div>
+          }}
+        />
+      )
+
+      await vi.waitFor(() => {
+        expect(renderSpy).toHaveBeenCalled()
+      })
+
+      const expectedProps = Object.assign(
+        { ...props.medium },
+        { ...props.large }
+      )
+
+      expect(deepEqual(renderSpy.mock.lastCall![0], expectedProps)).toBe(true)
+    })
+
+    it('should provide correct props in case of multiple breakpoints in query', async () => {
+      const renderSpy = vi.fn()
+      const props = {
+        small: { withBorder: true, background: 'transparent' },
+        medium: { options: [1, 2, 3], icons: { edit: true, flag: false } },
+        large: { margin: 'small', label: 'hello world', describedBy: 'fakeId' }
+      }
+      await render(
+        <div style={{ width: 800, height: 400 }}>
+          <Responsive
+            props={props}
+            query={{
+              small: { maxWidth: 300 },
+              medium: { maxWidth: 800 },
+              large: {
+                minWidth: 800,
+                maxWidth: 1000
+              }
+            }}
+            render={(props, matches) => {
+              renderSpy(props, matches)
+              return <div>hello</div>
+            }}
+          />
+        </div>
+      )
+
+      await vi.waitFor(() => {
+        expect(renderSpy).toHaveBeenCalled()
+      })
+
+      const expectedProps = { ...props.medium, ...props.large }
+
+      expect(deepEqual(renderSpy.mock.lastCall![0], expectedProps)).toBe(true)
+    })
+  })
 })

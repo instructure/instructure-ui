@@ -27,8 +27,9 @@ import { page } from 'vitest/browser'
 import { describe, it, expect, vi } from 'vitest'
 
 import canvas from '@instructure/ui-themes'
+import { InstUISettingsProvider } from '@instructure/emotion'
 
-import { DrawerTray } from '../v2/index.js'
+import { DrawerTray, DrawerLayoutContext } from '../v2/index.js'
 
 describe('<DrawerTray />', () => {
   it('should render tray content when open', async () => {
@@ -145,6 +146,114 @@ describe('<DrawerTray />', () => {
 
     await vi.waitFor(() => {
       expect(onClose).toHaveBeenCalled()
+    })
+  })
+
+  describe('Component tests', () => {
+    const trayContent = () =>
+      document.querySelector<HTMLElement>('div[class$="-drawerTray__content"]')
+
+    it('should render tray content when open', async () => {
+      await render(
+        <DrawerTray
+          label="DrawerTray Example"
+          open={true}
+          render={() => {
+            return 'Hello from layout tray'
+          }}
+        />
+      )
+
+      expect(trayContent()).toHaveTextContent('Hello from layout tray')
+    })
+
+    it('should not render tray content when closed', async () => {
+      await render(
+        <DrawerTray
+          label="DrawerTray Example"
+          render={() => {
+            return 'Hello from layout tray'
+          }}
+        />
+      )
+
+      expect(trayContent()).not.toBeInTheDocument()
+    })
+
+    it('should place the tray correctly with placement=start', async () => {
+      await render(
+        <DrawerTray
+          label="DrawerTray Example"
+          open={true}
+          placement="start"
+          render={() => {
+            return 'Hello from layout tray'
+          }}
+        />
+      )
+
+      const tray = trayContent()!.parentElement!
+
+      expect(getComputedStyle(tray).left).toBe('0px')
+    })
+
+    it('should place the tray correctly with placement=end', async () => {
+      await render(
+        <DrawerTray
+          label="DrawerTray Example"
+          open={true}
+          placement="end"
+          render={() => {
+            return 'Hello from layout tray'
+          }}
+        />
+      )
+
+      const tray = trayContent()!.parentElement!
+
+      expect(getComputedStyle(tray).right).toBe('0px')
+    })
+
+    it('should apply theme overrides when open', async () => {
+      await render(
+        <DrawerTray
+          label="DrawerTray Example"
+          open={true}
+          themeOverride={{ zIndex: 333 }}
+          render={() => {
+            return 'Hello from layout tray'
+          }}
+        />
+      )
+
+      const tray = trayContent()!.parentElement!
+
+      expect(getComputedStyle(tray).zIndex).toBe('333')
+    })
+
+    it('drops a shadow if the prop is set, and it is overlaying content', async () => {
+      const onEntered = vi.fn()
+      await render(
+        <DrawerLayoutContext.Provider value={true}>
+          <InstUISettingsProvider theme={canvas}>
+            <DrawerTray
+              label="DrawerTray Example"
+              open={true}
+              shadow={true}
+              onEntered={onEntered}
+              render={() => {
+                return 'Hello from layout tray'
+              }}
+            />
+          </InstUISettingsProvider>
+        </DrawerLayoutContext.Provider>
+      )
+
+      const trayWithShadow = document.querySelector<HTMLElement>(
+        'div[class*="-drawerTray--with-shadow"]'
+      )!
+
+      expect(getComputedStyle(trayWithShadow).boxShadow).not.toBe('none')
     })
   })
 })

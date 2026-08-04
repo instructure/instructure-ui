@@ -42,6 +42,7 @@
     "@instructure/uid": "workspace:*"
   },
   "devDependencies": {
+    "@instructure/ui-a11y-content": "workspace:*",
     "@instructure/ui-axe-check": "workspace:*",
     "@instructure/ui-babel-preset": "workspace:*",
     "@testing-library/jest-dom": "^6.9.1",

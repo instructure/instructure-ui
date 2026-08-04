@@ -483,4 +483,30 @@ describe('<Focusable />', () => {
       expect(input).not.toHaveFocus()
     })
   })
+
+  describe('Component tests', () => {
+    it('should populate the focusVisible argument', async () => {
+      const renderSpy = vi.fn()
+
+      await render(
+        <Focusable>
+          {(args) => {
+            renderSpy(args)
+            return <button>foo</button>
+          }}
+        </Focusable>
+      )
+      const button = page.getByRole('button').element() as HTMLElement
+
+      await userEvent.click(button)
+      button.focus()
+
+      await vi.waitFor(() => {
+        const args = renderSpy.mock.lastCall![0]
+
+        expect(args).toHaveProperty('focused', true)
+        expect(args).toHaveProperty('focusVisible', false)
+      })
+    })
+  })
 })

@@ -191,4 +191,76 @@ describe('<InlineSVG />', () => {
       expect(svg?.querySelector('path')).toHaveAttribute('d', 'M0 0L10 10')
     })
   })
+
+  describe('Component tests', () => {
+    const WIDTH = '100px'
+    const HEIGHT = '200px'
+
+    it('should set custom width and height properly', async () => {
+      const { container } = await render(
+        <InlineSVG src={SVG_SRC} width={WIDTH} height={HEIGHT} />
+      )
+      const svg = container.querySelector('svg')!
+      const styles = window.getComputedStyle(svg)
+
+      expect(styles.width).toBe(WIDTH)
+      expect(styles.height).toBe(HEIGHT)
+
+      const attributeNames = Array.from(svg.attributes).map((attr) => attr.name)
+
+      expect(attributeNames).toContain('width')
+      expect(attributeNames).toContain('height')
+    })
+
+    it('should not set width/height attributes and styles when value is auto', async () => {
+      const { container } = await render(
+        <InlineSVG src={SVG_SRC} width="auto" height="auto" />
+      )
+      const svg = container.querySelector('svg')!
+      const attributeNames = Array.from(svg.attributes).map((attr) => attr.name)
+
+      expect(attributeNames).not.toContain('width')
+      expect(attributeNames).not.toContain('height')
+    })
+
+    it('should display block when inline is false', async () => {
+      const { container } = await render(
+        <InlineSVG src={SVG_SRC} inline={false} />
+      )
+      const svg = container.querySelector('svg')!
+
+      expect(window.getComputedStyle(svg).display).toBe('block')
+    })
+
+    it('should change the SVG color property', async () => {
+      const { container, rerender } = await render(
+        <InlineSVG src={SVG_SRC} color="success" />
+      )
+      const colorSuccess = window.getComputedStyle(
+        container.querySelector('svg')!
+      ).color
+
+      // Set prop: color
+      await rerender(<InlineSVG src={SVG_SRC} color="error" />)
+      const colorError = window.getComputedStyle(
+        container.querySelector('svg')!
+      ).color
+
+      expect(colorError).not.toEqual(colorSuccess)
+    })
+
+    it('should allow passing in the svg src as a string', async () => {
+      const { container } = await render(
+        <InlineSVG src={`<svg><circle cx="50" cy="50" r="40" /></svg>`} />
+      )
+      const svg = container.querySelector('svg')
+      const group = container.querySelector('g')
+
+      expect(svg).toBeInTheDocument()
+      expect(group).toBeInTheDocument()
+      expect(group!.innerHTML.trim()).toBe(
+        '<circle cx="50" cy="50" r="40"></circle>'
+      )
+    })
+  })
 })
