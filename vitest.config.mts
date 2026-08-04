@@ -28,6 +28,7 @@ import { defineConfig } from 'vitest/config'
 import { playwright } from '@vitest/browser-playwright'
 import path from 'path'
 import fs from 'fs'
+import crypto from 'crypto'
 import { createRequire } from 'module'
 
 const require = createRequire(import.meta.url)
@@ -38,6 +39,43 @@ const momentDir = path.dirname(
 const momentWithLocales = path.join(momentDir, 'min', 'moment-with-locales.js')
 
 
+
+const packageDir = (pkgName: string) =>
+  path.resolve(__dirname, 'packages', pkgName.replace('@instructure/', ''))
+
+// Packages deliberately NOT aliased to source, so Vite resolves them to their
+// built `es/` output.
+// This trades DX for speed — after editing the *source* of one
+// of these, run that package's `build` before browser tests will see the change.
+const PREBUNDLED_PACKAGES = ['@instructure/ui-icons', '@instructure/ui-themes']
+
+PREBUNDLED_PACKAGES.filter((pkgName) => {
+  if (!fs.existsSync(path.join(packageDir(pkgName), 'es', 'index.js'))) {
+    throw new Error(`${pkgName} has no es/ build, run \`pnpm run bootstrap\`.`)
+  }
+})
+
+// Create a hash of every file's updated time. This hash changes if any file's
+// updated time changes
+function getPrebundleStamp() {
+  const entries = PREBUNDLED_PACKAGES.flatMap((pkgName) =>
+    fs
+      .readdirSync(path.join(packageDir(pkgName), 'es'), {
+        recursive: true,
+        withFileTypes: true
+      })
+      .filter((entry) => entry.isFile())
+      .map((entry) => {
+        const file = path.join(entry.parentPath, entry.name)
+        return `${file}:${fs.statSync(file).mtimeMs}`
+      })
+  )
+  // sort to keep the hash stable across runs
+  return crypto
+    .createHash('sha1')
+    .update(entries.sort().join('\n'))
+    .digest('hex')
+}
 
 // Build Vite resolve aliases for every @instructure/* workspace package,
 // pointing bare/subpath specifiers at TypeScript source.
@@ -56,6 +94,7 @@ function getWorkspaceAliases() {
     const pkgJson = JSON.parse(fs.readFileSync(pkgJsonPath, 'utf8'))
     const pkgName: string | undefined = pkgJson.name
     if (!pkgName || !pkgName.startsWith('@instructure/')) continue
+    if (PREBUNDLED_PACKAGES.includes(pkgName)) continue
     if (pkgJson.exports) {
       for (const [subpath, target] of Object.entries<any>(pkgJson.exports)) {
         if (subpath.includes('*')) continue
@@ -131,6 +170,13 @@ export default defineConfig({
             instances: [{ browser: 'chromium' }],
             screenshotFailures: false
           }
+        },
+        // A plugin that does nothing: it exists so the stamp becomes part of
+        // the dep optimizer's cache key, which hashes `plugins.map(p => p.name)`.
+        plugins: [{ name: `instui-prebundle-stamp:${getPrebundleStamp()}` }],
+        optimizeDeps: {
+          // https://vite.dev/config/dep-optimization-options#optimizedeps-include
+          include: PREBUNDLED_PACKAGES
         },
         resolve: {
           alias: [
