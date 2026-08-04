@@ -24,7 +24,7 @@
 
 /// <reference types="vitest" />
 
-import { defineConfig, configDefaults } from 'vitest/config'
+import { defineConfig } from 'vitest/config'
 import { playwright } from '@vitest/browser-playwright'
 import path from 'path'
 import fs from 'fs'
@@ -36,6 +36,8 @@ const momentDir = path.dirname(
   require.resolve('moment', { paths: [momentTimezoneDir] })
 )
 const momentWithLocales = path.join(momentDir, 'min', 'moment-with-locales.js')
+
+
 
 // Build Vite resolve aliases for every @instructure/* workspace package,
 // pointing bare/subpath specifiers at TypeScript source.
@@ -86,9 +88,7 @@ function getWorkspaceAliases() {
       find: `${pkgName}/src`,
       replacement: path.join(pkgPath, 'src')
     })
-
   }
-
   return aliases
 }
 
@@ -108,31 +108,8 @@ export default defineConfig({
       }
     ],
     projects: [
+      // Node script tests
       {
-        // DOM-based unit tests
-        test: {
-          // Allows using APIs like Jest without importing them
-          globals: true,
-          include: ['**/__tests__/**/*.test.tsx'],
-          // these packages' tests run in the `browser` project,
-          // so exclude them here to avoid double-running.
-          exclude: [
-            ...configDefaults.exclude,
-            'packages/emotion/**',
-            'packages/ui-a11y-content/**',
-            'packages/ui-a11y-utils/**',
-            'packages/ui-alerts/**',
-            'packages/ui-avatar/**',
-            'packages/ui-badge/**',
-            'packages/ui-dialog/**'
-          ],
-          environment: 'jsdom',
-          setupFiles: './vitest.setup.ts',
-          name: { label: 'web', color: 'blue' }
-        }
-      },
-      {
-        // tests for node scripts
         test: {
           globals: true,
           include: ['**/__node_tests__/**/*.test.{ts,tsx}'],
@@ -140,30 +117,11 @@ export default defineConfig({
           name: { label: 'node', color: 'magenta' }
         }
       },
+      // Real browser tests
       {
-        // Real-browser component tests (Vitest browser mode via Playwright).
-        // Run just these with: pnpm exec vitest --project browser
-        resolve: {
-          alias: [
-            // Bare `moment` -> the all-locales build (see above). Matches
-            // `moment` exactly, never `moment-timezone` or `moment/<subpath>`.
-            { find: /^moment$/, replacement: momentWithLocales },
-            // `moment/<subpath>` -> resolved package dir (e.g. moment/locale/*).
-            { find: /^moment\/(.*)$/, replacement: path.join(momentDir, '$1') },
-            ...getWorkspaceAliases()
-          ]
-        },
         test: {
           globals: true, // TODO try to set it to false
-          include: [
-            'packages/emotion/**/__tests__/**/*.test.tsx',
-            'packages/ui-a11y-content/**/__tests__/**/*.test.tsx',
-            'packages/ui-a11y-utils/**/__tests__/**/*.test.tsx',
-            'packages/ui-alerts/**/__tests__/**/*.test.tsx',
-            'packages/ui-avatar/**/__tests__/**/*.test.tsx',
-            'packages/ui-badge/**/__tests__/**/*.test.tsx',
-            'packages/ui-dialog/**/__tests__/**/*.test.tsx'
-          ],
+          include: ['packages/**/__tests__/**/*.test.tsx'],
           setupFiles: './vitest.setup.browser.ts',
           name: { label: 'browser', color: 'green' },
           browser: {
@@ -173,9 +131,18 @@ export default defineConfig({
             instances: [{ browser: 'chromium' }],
             screenshotFailures: false
           }
+        },
+        resolve: {
+          alias: [
+            // Bare `moment` -> the all-locales build. Matches
+            // `moment` exactly, never `moment-timezone` or `moment/<subpath>`.
+            { find: /^moment$/, replacement: momentWithLocales },
+            // `moment/<subpath>` -> resolved package dir (e.g. moment/locale/*).
+            { find: /^moment\/(.*)$/, replacement: path.join(momentDir, '$1') },
+            ...getWorkspaceAliases()
+          ]
         }
       }
     ]
-
   }
 })
