@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { getEventFiles } from '../v2/utils/getEventFiles.js'
 
 describe('getEventFiles', () => {

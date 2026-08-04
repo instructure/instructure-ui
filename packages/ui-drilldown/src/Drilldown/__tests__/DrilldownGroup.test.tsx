@@ -818,8 +818,8 @@ describe('<Drilldown.Group />', () => {
         )
       }
 
-      it('should set correctly when option in selectedOptions prop, in group default prop, option default=false', () => {
-        renderSelectionTest({
+      it('should set correctly when option in selectedOptions prop, in group default prop, option default=false', async () => {
+        await renderSelectionTest({
           groupProps: {
             selectedOptions: ['val1'],
             defaultSelected: ['val1']
@@ -832,8 +832,8 @@ describe('<Drilldown.Group />', () => {
         ) // selectedOptions prop wins
       })
 
-      it('should set correctly when option in selectedOptions prop, not in group default prop, option default=false', () => {
-        renderSelectionTest({
+      it('should set correctly when option in selectedOptions prop, not in group default prop, option default=false', async () => {
+        await renderSelectionTest({
           groupProps: {
             selectedOptions: ['val1'],
             defaultSelected: ['x']
@@ -846,8 +846,8 @@ describe('<Drilldown.Group />', () => {
         ) // selectedOptions prop wins
       })
 
-      it('should set correctly when option not in selectedOptions prop, in group default prop, option default=false', () => {
-        renderSelectionTest({
+      it('should set correctly when option not in selectedOptions prop, in group default prop, option default=false', async () => {
+        await renderSelectionTest({
           groupProps: {
             selectedOptions: ['x'],
             defaultSelected: ['val1']
@@ -860,8 +860,8 @@ describe('<Drilldown.Group />', () => {
         ) // selectedOptions prop wins
       })
 
-      it('should set correctly when option not in selectedOptions prop, not in group default prop, option default=true', () => {
-        renderSelectionTest({
+      it('should set correctly when option not in selectedOptions prop, not in group default prop, option default=true', async () => {
+        await renderSelectionTest({
           groupProps: {
             selectedOptions: ['x'],
             defaultSelected: ['x']
@@ -874,8 +874,8 @@ describe('<Drilldown.Group />', () => {
         ) // selectedOptions prop wins
       })
 
-      it('should set correctly when option controlled prop not exist, in group default prop, option default=false)', () => {
-        renderSelectionTest({
+      it('should set correctly when option controlled prop not exist, in group default prop, option default=false)', async () => {
+        await renderSelectionTest({
           groupProps: {
             defaultSelected: ['val1']
           },
@@ -887,8 +887,8 @@ describe('<Drilldown.Group />', () => {
         ) // option default wins
       })
 
-      it('should set correctly when option controlled prop not exist, not in group default prop, option default=true', () => {
-        renderSelectionTest({
+      it('should set correctly when option controlled prop not exist, not in group default prop, option default=true', async () => {
+        await renderSelectionTest({
           groupProps: {
             defaultSelected: ['x']
           },
@@ -900,8 +900,8 @@ describe('<Drilldown.Group />', () => {
         ) // option default wins
       })
 
-      it('should set correctly when option in selectedOptions prop, group default not exist, option default=false', () => {
-        renderSelectionTest({
+      it('should set correctly when option in selectedOptions prop, group default not exist, option default=false', async () => {
+        await renderSelectionTest({
           groupProps: {
             selectedOptions: ['val1']
           },
@@ -913,8 +913,8 @@ describe('<Drilldown.Group />', () => {
         ) // selectedOptions prop wins
       })
 
-      it('should set correctly when option not in selectedOptions prop, group default not exist, option default=true', () => {
-        renderSelectionTest({
+      it('should set correctly when option not in selectedOptions prop, group default not exist, option default=true', async () => {
+        await renderSelectionTest({
           groupProps: {
             selectedOptions: ['x']
           },
@@ -926,8 +926,8 @@ describe('<Drilldown.Group />', () => {
         ) // selectedOptions prop wins
       })
 
-      it('should set correctly when option in selectedOptions prop, not in group default prop, option default not exist', () => {
-        renderSelectionTest({
+      it('should set correctly when option in selectedOptions prop, not in group default prop, option default not exist', async () => {
+        await renderSelectionTest({
           groupProps: {
             selectedOptions: ['val1'],
             defaultSelected: ['x']
@@ -940,8 +940,8 @@ describe('<Drilldown.Group />', () => {
         ) // selectedOptions prop wins
       })
 
-      it('should set correctly when option not in selectedOptions prop, in group default prop, option default not exist', () => {
-        renderSelectionTest({
+      it('should set correctly when option not in selectedOptions prop, in group default prop, option default not exist', async () => {
+        await renderSelectionTest({
           groupProps: {
             selectedOptions: ['x'],
             defaultSelected: ['val1']

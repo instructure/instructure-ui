@@ -22,11 +22,11 @@
  * SOFTWARE.
  */
 
-import type { MockInstance } from 'vitest'
-import { Tooltip } from '@instructure/ui-tooltip/latest'
 import { render } from 'vitest-browser-react'
 import { page, userEvent } from 'vitest/browser'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import type { MockInstance } from 'vitest'
+import { Tooltip } from '@instructure/ui-tooltip/latest'
 
 describe('<Tooltip />', () => {
   let consoleErrorMock: ReturnType<typeof vi.spyOn>
@@ -48,7 +48,7 @@ describe('<Tooltip />', () => {
         <a href="example.html">Hover or focus me</a>
       </Tooltip>
     )
-    const tip = page.getByRole('tooltip').element()
+    const tip = page.getByRole('tooltip', { includeHidden: true }).element()
 
     expect(tip).toBeInTheDocument()
     expect(tip).toHaveTextContent('Hello')
@@ -63,7 +63,7 @@ describe('<Tooltip />', () => {
       </Tooltip>
     )
 
-    const tip = page.getByRole('tooltip').element()
+    const tip = page.getByRole('tooltip', { includeHidden: true }).element()
     const trigger = page.getByTestId('trigger').element()
 
     expect(trigger).toBeInTheDocument()
@@ -81,7 +81,7 @@ describe('<Tooltip />', () => {
       </Tooltip>
     )
     const trigger = page.getByTestId('trigger').element()
-    const tooltip = page.getByRole('tooltip').element()
+    const tooltip = page.getByRole('tooltip', { includeHidden: true }).element()
 
     expect(trigger).toHaveAttribute('aria-describedby', tooltip.id)
   })
@@ -111,7 +111,7 @@ describe('<Tooltip />', () => {
         </Tooltip>
       )
 
-      const tip = page.getByRole('tooltip').element()
+      const tip = page.getByRole('tooltip', { includeHidden: true }).element()
       const trigger = page.getByText('Hover or focus me').element()
 
       expect(trigger).toBeInTheDocument()
@@ -135,7 +135,9 @@ describe('<Tooltip />', () => {
       )
 
       const trigger = page.getByText('Hover or focus me').element()
-      const tooltip = page.getByRole('tooltip').element()
+      const tooltip = page
+        .getByRole('tooltip', { includeHidden: true })
+        .element()
 
       expect(trigger).toHaveAttribute('aria-describedby', tooltip.id)
     })
@@ -168,7 +170,7 @@ describe('<Tooltip />', () => {
         </Tooltip>
       )
 
-      const button = page.getByText('Hover or focus me').element()
+      const button = page.getByText('Hover or focus me')
 
       await userEvent.click(button)
 

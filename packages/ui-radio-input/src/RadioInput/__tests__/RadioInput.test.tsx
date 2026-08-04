@@ -22,12 +22,11 @@
  * SOFTWARE.
  */
 
-import type { MockInstance } from 'vitest'
-
-import { fireEvent } from '@testing-library/dom'
 import { render } from 'vitest-browser-react'
 import { userEvent } from 'vitest/browser'
+import type { MockInstance } from 'vitest'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import {
   RadioInput,
@@ -94,7 +93,7 @@ describe('<RadioInput />', () => {
 
       const input = container.querySelector('input')
 
-      await userEvent.click(input!)
+      await userEvent.click(input!, { force: true })
 
       await vi.waitFor(() => {
         expect(onClick).toHaveBeenCalled()
@@ -116,7 +115,7 @@ describe('<RadioInput />', () => {
 
       const input = container.querySelector('input')
 
-      fireEvent.click(input!)
+      await userEvent.click(input!, { force: true })
 
       await vi.waitFor(() => {
         expect(onClick).not.toHaveBeenCalled()
@@ -139,7 +138,7 @@ describe('<RadioInput />', () => {
 
       const input = container.querySelector('input')
 
-      fireEvent.click(input!)
+      await userEvent.click(input!, { force: true })
 
       await vi.waitFor(() => {
         expect(onClick).not.toHaveBeenCalled()
@@ -162,7 +161,7 @@ describe('<RadioInput />', () => {
 
       const input = container.querySelector('input')
 
-      await userEvent.click(input!)
+      await userEvent.click(input!, { force: true })
 
       await vi.waitFor(() => {
         expect(onChange).toHaveBeenCalled()
@@ -184,7 +183,7 @@ describe('<RadioInput />', () => {
 
       const input = container.querySelector('input')
 
-      fireEvent.click(input!)
+      await userEvent.click(input!, { force: true })
 
       await vi.waitFor(() => {
         expect(onChange).not.toHaveBeenCalled()
@@ -206,7 +205,7 @@ describe('<RadioInput />', () => {
 
       const input = container.querySelector('input')
 
-      fireEvent.click(input!)
+      await userEvent.click(input!, { force: true })
 
       await vi.waitFor(() => {
         expect(onChange).not.toHaveBeenCalled()
@@ -227,7 +226,8 @@ describe('<RadioInput />', () => {
 
       const input = container.querySelector('input')
 
-      fireEvent.focusOut(input!)
+      input!.focus()
+      input!.blur()
 
       await vi.waitFor(() => {
         expect(onBlur).toHaveBeenCalled()
@@ -247,7 +247,7 @@ describe('<RadioInput />', () => {
       )
       const input = container.querySelector('input')
 
-      fireEvent.focus(input!)
+      input!.focus()
 
       await vi.waitFor(() => {
         expect(onFocus).toHaveBeenCalled()

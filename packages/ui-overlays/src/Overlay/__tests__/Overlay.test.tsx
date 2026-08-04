@@ -22,17 +22,18 @@
  * SOFTWARE.
  */
 
-import { Overlay } from '@instructure/ui-overlays/latest'
 import { render } from 'vitest-browser-react'
 import { page } from 'vitest/browser'
 import { describe, it, expect, vi } from 'vitest'
+import { Overlay } from '@instructure/ui-overlays/latest'
 
 describe('<Overlay />', () => {
   it('should render nothing when closed', async () => {
     await render(<Overlay label="Overlay Example" />)
-    const overlay = page.getByText('Overlay Example').query()
 
-    expect(overlay).not.toBeInTheDocument()
+    await expect
+      .element(page.getByText('Overlay Example'))
+      .not.toBeInTheDocument()
   })
 
   it('should render children when open', async () => {

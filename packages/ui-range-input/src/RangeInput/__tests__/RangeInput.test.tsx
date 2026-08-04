@@ -22,12 +22,12 @@
  * SOFTWARE.
  */
 
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, vi, expect } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 
 import { RangeInput } from '@instructure/ui-range-input/latest'
-import { render } from 'vitest-browser-react'
-import { page } from 'vitest/browser'
-import { describe, it, expect, vi } from 'vitest'
 
 describe('<RangeInput />', () => {
   it('renders an input with type "range"', async () => {

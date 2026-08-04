@@ -22,11 +22,10 @@
  * SOFTWARE.
  */
 
-import moment from 'moment-timezone'
-import { fireEvent } from '@testing-library/dom'
 import { render } from 'vitest-browser-react'
 import { page, userEvent } from 'vitest/browser'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import moment from 'moment-timezone'
 
 import { ApplyLocale } from '@instructure/ui-i18n'
 
@@ -245,7 +244,7 @@ describe('<TimeSelect />', () => {
     const input = page.getByRole('combobox').element()
 
     await userEvent.type(input, '7:45 PM')
-    fireEvent.blur(input) // sends onChange event
+    input.blur() // sends onChange event
 
     expect(onChange).toHaveBeenCalledWith(expect.anything(), {
       inputText: '7:45 PM',
@@ -281,7 +280,7 @@ describe('<TimeSelect />', () => {
       input,
       '{Backspace}{Backspace}{Backspace}{Backspace}{Backspace}{Backspace}{Backspace}'
     )
-    fireEvent.blur(input) // sends onChange event
+    input.blur() // sends onChange event
 
     expect(onChange).toHaveBeenCalledWith(expect.anything(), {
       inputText: '',
@@ -318,7 +317,7 @@ describe('<TimeSelect />', () => {
       input,
       '{Backspace}{Backspace}{Backspace}{Backspace}{Backspace}{Backspace}{Backspace}7:45 PM'
     )
-    fireEvent.blur(input) // sends onChange event
+    input.blur() // sends onChange event
     expect(onChange).toHaveBeenCalledWith(expect.anything(), {
       inputText: '7:45 PM',
       value: '1986-05-17T23:45:00.000Z'
@@ -356,16 +355,18 @@ describe('<TimeSelect />', () => {
       input,
       '{Backspace}{Backspace}{Backspace}{Backspace}{Backspace}{Backspace}{Backspace}7:45 PM'
     )
-    fireEvent.blur(input) // sends onChange event
+    input.blur() // sends onChange event
     await userEvent.type(input, 'asdf')
-    fireEvent.blur(input)
+    input.blur()
     expect(onChange).toHaveBeenCalledWith(expect.anything(), {
       inputText: '7:45 PM',
       value: '1986-05-17T23:45:00.000Z'
     })
     expect(onKeyDown).toHaveBeenCalled()
     expect(handleInputChange).toHaveBeenCalled()
-    expect(input).toHaveValue('7:45 PM')
+    await vi.waitFor(() => {
+      expect(input).toHaveValue('7:45 PM')
+    })
   })
 
   describe('input', () => {
@@ -388,10 +389,11 @@ describe('<TimeSelect />', () => {
     })
 
     it('should render disabled when interaction="disabled"', async () => {
-      await render(
+      const { container } = await render(
         <TimeSelect renderLabel="Choose a time" interaction="disabled" />
       )
-      const input = page.getByRole('combobox').element()
+      // a disabled input is not exposed as a `combobox` in the a11y tree
+      const input = container.querySelector('input')
 
       expect(input).toHaveAttribute('disabled')
       expect(input).not.toHaveAttribute('readonly')

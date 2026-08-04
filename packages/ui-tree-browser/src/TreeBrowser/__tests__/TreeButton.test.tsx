@@ -25,6 +25,7 @@
 import { render } from 'vitest-browser-react'
 import { page } from 'vitest/browser'
 import { describe, it, expect, vi } from 'vitest'
+
 import { TreeButton } from '@instructure/ui-tree-browser/latest'
 
 describe('<TreeButton />', () => {

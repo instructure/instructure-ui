@@ -22,12 +22,11 @@
  * SOFTWARE.
  */
 
-import type { MockInstance } from 'vitest'
-
-import { fireEvent } from '@testing-library/dom'
 import { render } from 'vitest-browser-react'
 import { userEvent } from 'vitest/browser'
+import type { MockInstance } from 'vitest'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { RadioInput, RadioInputGroup } from '@instructure/ui-radio-input/latest'
 
@@ -79,7 +78,7 @@ describe('<RadioInputGroup />', () => {
     )
     const input = container.querySelector('input')
 
-    await userEvent.click(input!)
+    await userEvent.click(input!, { force: true })
 
     await vi.waitFor(() => {
       expect(onChange).toHaveBeenCalled()
@@ -102,7 +101,7 @@ describe('<RadioInputGroup />', () => {
     )
     const input = container.querySelector('input')
 
-    fireEvent.click(input!)
+    await userEvent.click(input!, { force: true })
 
     await vi.waitFor(() => {
       expect(onChange).not.toHaveBeenCalled()
@@ -126,7 +125,7 @@ describe('<RadioInputGroup />', () => {
     )
     const input = container.querySelector('input')
 
-    fireEvent.click(input!)
+    await userEvent.click(input!, { force: true })
 
     await vi.waitFor(() => {
       expect(onChange).not.toHaveBeenCalled()
@@ -153,7 +152,7 @@ describe('<RadioInputGroup />', () => {
 
     expect(orange).toHaveAttribute('checked')
 
-    await userEvent.click(banana!)
+    await userEvent.click(banana!, { force: true })
 
     await vi.waitFor(() => {
       expect(orange).toHaveAttribute('checked')

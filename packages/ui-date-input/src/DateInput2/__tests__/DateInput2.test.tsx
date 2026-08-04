@@ -307,7 +307,8 @@ describe('<DateInput2 />', () => {
     expect(dateInput).toHaveAttribute(interactionReadOnly)
     expect(calendarButton).toBeInTheDocument()
 
-    await userEvent.click(calendarButton)
+    // `force` because Playwright refuses to click the disabled trigger
+    await userEvent.click(calendarButton, { force: true })
 
     await vi.waitFor(() => {
       const calendarTable = page.getByRole('table').query()
@@ -350,7 +351,7 @@ describe('<DateInput2 />', () => {
     )
     const dateInput = page.getByLabelText('Choose a date').element()
 
-    fireEvent.blur(dateInput)
+    fireEvent.focusOut(dateInput)
 
     await vi.waitFor(() => {
       expect(onBlur).toHaveBeenCalled()

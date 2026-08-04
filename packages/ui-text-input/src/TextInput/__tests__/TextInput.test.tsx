@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
-import { fireEvent } from '@testing-library/dom'
 import { render } from 'vitest-browser-react'
 import { page, userEvent } from 'vitest/browser'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import { fireEvent } from '@testing-library/dom'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { TextInput } from '@instructure/ui-text-input/latest'

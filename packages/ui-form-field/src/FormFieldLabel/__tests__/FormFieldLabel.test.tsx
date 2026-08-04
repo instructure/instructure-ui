@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
-import { runAxeCheck } from '@instructure/ui-axe-check'
-import { FormFieldLabel } from '@instructure/ui-form-field/v11_6'
 import { render } from 'vitest-browser-react'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import { runAxeCheck } from '@instructure/ui-axe-check'
+import { FormFieldLabel } from '@instructure/ui-form-field/v11_6'
 
 describe('<FormFieldLabel />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>

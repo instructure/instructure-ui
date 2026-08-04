@@ -22,11 +22,11 @@
  * SOFTWARE.
  */
 
+import { render } from 'vitest-browser-react'
+import { describe, it, expect } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { IconWarningLine } from '@instructure/ui-icons'
 import { FormFieldMessage } from '@instructure/ui-form-field/latest'
-import { render } from 'vitest-browser-react'
-import { describe, it, expect } from 'vitest'
 
 describe('<FormFieldMessage />', () => {
   it('should render message', async () => {

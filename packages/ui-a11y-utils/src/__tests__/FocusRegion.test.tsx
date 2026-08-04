@@ -40,7 +40,7 @@ describe('FocusRegion', () => {
         <button data-testid="button2">Button 2</button>
       </div>
     )
-    container = page.getByTestId('container').element()
+    container = page.getByTestId('container').element() as HTMLElement
   })
 
   afterEach(() => {

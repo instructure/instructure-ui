@@ -333,7 +333,7 @@ describe('<Button/>', () => {
       )
       const button = page.getByRole('button', { name: 'Hello World' }).element()
 
-      await userEvent.click(button)
+      await userEvent.click(button, { force: true })
 
       await vi.waitFor(() => {
         expect(onClick).not.toHaveBeenCalled()
@@ -350,7 +350,7 @@ describe('<Button/>', () => {
       )
       const button = page.getByRole('button', { name: 'Hello World' }).element()
 
-      await userEvent.click(button)
+      await userEvent.click(button, { force: true })
 
       await vi.waitFor(() => {
         expect(onClick).not.toHaveBeenCalled()
@@ -398,7 +398,7 @@ describe('<Button/>', () => {
       )
       const button = page.getByRole('link', { name: 'Hello World' }).element()
 
-      await userEvent.type(button, '{space}')
+      await userEvent.type(button, ' ')
 
       await vi.waitFor(() => {
         expect(onClick).toHaveBeenCalled()
@@ -449,7 +449,7 @@ describe('<Button/>', () => {
       )
       const button = page.getByRole('link', { name: 'Hello World' }).element()
 
-      await userEvent.type(button, '{space}')
+      await userEvent.type(button, ' ')
 
       await vi.waitFor(() => {
         expect(onClick).not.toHaveBeenCalled()

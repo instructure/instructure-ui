@@ -22,12 +22,29 @@
  * SOFTWARE.
  */
 
-import { DateTimeInput } from '@instructure/ui-date-time-input/latest'
-import { ApplyLocale, DateTime } from '@instructure/ui-i18n'
 import { fireEvent } from '@testing-library/dom'
 import { render } from 'vitest-browser-react'
 import { page, userEvent } from 'vitest/browser'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import { DateTimeInput } from '@instructure/ui-date-time-input/latest'
+import { ApplyLocale, DateTime } from '@instructure/ui-i18n'
+
+// the id prefixes keep these unambiguous, the same way the Cypress specs
+// looked the inputs up
+const dateInputElement = () =>
+  document.querySelector<HTMLInputElement>('input[id^="TextInput_"]')!
+
+const timeInputElement = () =>
+  document.querySelector<HTMLInputElement>('input[id^="Select_"]')!
+
+// the day number is rendered twice (visible + screen reader label), so match
+// on the button's text the same way the Cypress `cy.contains` did
+const dayButton = (day: string) =>
+  Array.from(
+    document.querySelectorAll<HTMLButtonElement>(
+      'button[class*="-calendarDay"]'
+    )
+  ).find((button) => button.textContent?.includes(day))!
 
 describe('<DateTimeInput />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
@@ -199,7 +216,7 @@ describe('<DateTimeInput />', () => {
     const timeInput = page.getByLabelText('time-input *').element()
 
     await userEvent.type(timeInput, '1:00 PM')
-    fireEvent.blur(timeInput)
+    fireEvent.focusOut(timeInput)
 
     await vi.waitFor(() => {
       expect(container).toHaveTextContent('whoops')
@@ -269,7 +286,7 @@ describe('<DateTimeInput />', () => {
 
     fireEvent.change(timeInput, { target: { value: '3:00 AM' } })
     fireEvent.keyDown(timeInput, { key: 'Enter', code: 'Enter' })
-    fireEvent.blur(timeInput)
+    fireEvent.focusOut(timeInput)
 
     await vi.waitFor(() => {
       expect(onChange).toHaveBeenCalled()
@@ -300,9 +317,11 @@ describe('<DateTimeInput />', () => {
 
     fireEvent.change(timeInput, { target: { value: '5:00 PM' } })
     fireEvent.keyDown(timeInput, { key: 'Enter', code: 'Enter' })
-    fireEvent.blur(timeInput)
+    fireEvent.focusOut(timeInput)
 
-    expect(container).toHaveTextContent('Thursday, January 18, 2018 5:00 PM')
+    await vi.waitFor(() => {
+      expect(container).toHaveTextContent('Thursday, January 18, 2018 5:00 PM')
+    })
   })
 
   it('should show the formatted date-time message', async () => {
@@ -502,7 +521,7 @@ describe('<DateTimeInput />', () => {
       />
     )
     const dateInput = page.getByLabelText('date-input').element()
-    fireEvent.blur(dateInput)
+    fireEvent.focusOut(dateInput)
 
     await vi.waitFor(() => {
       expect(container).toHaveTextContent('whoops')
@@ -527,7 +546,7 @@ describe('<DateTimeInput />', () => {
       />
     )
     const dateInput = page.getByLabelText('date-input').element()
-    fireEvent.blur(dateInput)
+    fireEvent.focusOut(dateInput)
 
     await vi.waitFor(() => {
       expect(container).toHaveTextContent('whoops')
@@ -559,7 +578,7 @@ describe('<DateTimeInput />', () => {
 
     await rerender(<DateTimeInput {...props} value="A very invalid date" />)
     const dateInput = page.getByLabelText('date-input').element()
-    fireEvent.blur(dateInput)
+    fireEvent.focusOut(dateInput)
 
     await vi.waitFor(() => {
       expect(container).toHaveTextContent('whoops')
@@ -596,7 +615,7 @@ describe('<DateTimeInput />', () => {
       />
     )
     const dateInput = page.getByLabelText('date-input').element()
-    fireEvent.blur(dateInput)
+    fireEvent.focusOut(dateInput)
 
     await vi.waitFor(() => {
       expect(container).toHaveTextContent('May 1, 2017 1:30 PM')
@@ -638,7 +657,7 @@ describe('<DateTimeInput />', () => {
     )
     const dateInput = page.getByLabelText('date-input').element()
 
-    fireEvent.blur(dateInput)
+    fireEvent.focusOut(dateInput)
 
     await vi.waitFor(() => {
       expect(container).not.toHaveTextContent('2017')
@@ -653,7 +672,7 @@ describe('<DateTimeInput />', () => {
       />
     )
 
-    fireEvent.blur(page.getByLabelText('date-input').element())
+    fireEvent.focusOut(page.getByLabelText('date-input').element())
 
     await vi.waitFor(() => {
       expect(container).toHaveTextContent('2017')
@@ -762,7 +781,7 @@ describe('<DateTimeInput />', () => {
     expect(container).toHaveTextContent('Monday, May 1, 2017 1:30 PM')
 
     await rerender(<DateTimeInput {...props} messageFormat="l, LT" />)
-    fireEvent.blur(page.getByLabelText('date-input').element())
+    fireEvent.focusOut(page.getByLabelText('date-input').element())
 
     await vi.waitFor(() => {
       expect(container).toHaveTextContent('5/1/2017, 1:30 PM')
@@ -798,7 +817,7 @@ describe('<DateTimeInput />', () => {
     const dateInput = page.getByLabelText('date-input').element()
     const timeInput = page.getByLabelText('time-input').element()
 
-    fireEvent.blur(dateInput)
+    fireEvent.focusOut(dateInput)
 
     await vi.waitFor(() => {
       expect(dateInput).toHaveValue('3/29/2022')
@@ -832,7 +851,7 @@ describe('<DateTimeInput />', () => {
 
     fireEvent.change(dateInput, { target: { value: 'May 1, 2017' } })
     fireEvent.keyDown(dateInput, { key: 'Enter', code: 'Enter' })
-    fireEvent.blur(dateInput)
+    fireEvent.focusOut(dateInput)
 
     await vi.waitFor(() => {
       expect(consoleErrorMock.mock.calls[0][0]).toBe(
@@ -866,7 +885,7 @@ describe('<DateTimeInput />', () => {
 
     fireEvent.change(dateInput, { target: { value: 'May 1, 2017' } })
     fireEvent.keyDown(dateInput, { key: 'Enter', code: 'Enter' })
-    fireEvent.blur(dateInput)
+    fireEvent.focusOut(dateInput)
 
     await vi.waitFor(() => {
       expect(consoleErrorMock.mock.calls[0][0]).toEqual(
@@ -935,7 +954,7 @@ describe('<DateTimeInput />', () => {
     const dateInput = page.getByLabelText('date-input').element()
 
     await userEvent.type(dateInput, '2017-05-01')
-    fireEvent.blur(dateInput)
+    fireEvent.focusOut(dateInput)
 
     await vi.waitFor(() => {
       expect(onChange).toHaveBeenCalled()
@@ -986,9 +1005,7 @@ describe('<DateTimeInput />', () => {
         page.getByRole('button', { name: '15 May 2017' }).element()
       ).toBeInTheDocument()
     })
-    await userEvent.click(
-      page.getByRole('button', { name: '15 May 2017' }).element()
-    )
+    await userEvent.click(page.getByRole('button', { name: '15 May 2017' }))
 
     await vi.waitFor(() => {
       expect(page.getByLabelText('date-input').element()).toHaveValue(
@@ -1028,7 +1045,7 @@ describe('<DateTimeInput />', () => {
     const dateInput = page.getByLabelText('date-input').element()
 
     await userEvent.type(dateInput, 'May 1 2017')
-    fireEvent.blur(dateInput)
+    fireEvent.focusOut(dateInput)
 
     await vi.waitFor(() => {
       expect(dateInput).toHaveValue('5/1/2017')
@@ -1044,7 +1061,7 @@ describe('<DateTimeInput />', () => {
     // (default 'LL'). The tests below document the regression: these inputs were
     // accepted in v1 but are currently rejected in v2. They should pass once fixed.
     const renderComponent = (onChange = vi.fn()) =>
-      await render(
+      render(
         <DateTimeInput
           description="date_time"
           dateRenderLabel="date-input"
@@ -1065,11 +1082,11 @@ describe('<DateTimeInput />', () => {
 
     it('should accept abbreviated month name (ll format: "Sep 4, 1986")', async () => {
       const onChange = vi.fn()
-      renderComponent(onChange)
+      await renderComponent(onChange)
       const dateInput = page.getByLabelText('date-input').element()
 
       await userEvent.type(dateInput, 'Sep 4, 1986')
-      fireEvent.blur(dateInput)
+      fireEvent.focusOut(dateInput)
 
       await vi.waitFor(() => {
         expect(page.getByText('whoops').query()).not.toBeInTheDocument()
@@ -1080,11 +1097,11 @@ describe('<DateTimeInput />', () => {
 
     it('should accept numeric date with leading zeros (L format: "09/04/1986")', async () => {
       const onChange = vi.fn()
-      renderComponent(onChange)
+      await renderComponent(onChange)
       const dateInput = page.getByLabelText('date-input').element()
 
       await userEvent.type(dateInput, '09/04/1986')
-      fireEvent.blur(dateInput)
+      fireEvent.focusOut(dateInput)
 
       await vi.waitFor(() => {
         expect(page.getByText('whoops').query()).not.toBeInTheDocument()
@@ -1095,11 +1112,11 @@ describe('<DateTimeInput />', () => {
 
     it('should accept numeric date without leading zeros (l format: "9/4/1986")', async () => {
       const onChange = vi.fn()
-      renderComponent(onChange)
+      await renderComponent(onChange)
       const dateInput = page.getByLabelText('date-input').element()
 
       await userEvent.type(dateInput, '9/4/1986')
-      fireEvent.blur(dateInput)
+      fireEvent.focusOut(dateInput)
 
       await vi.waitFor(() => {
         expect(page.getByText('whoops').query()).not.toBeInTheDocument()
@@ -1110,11 +1127,11 @@ describe('<DateTimeInput />', () => {
 
     it('should accept date with time component (LLL format: "September 4, 1986 8:30 PM")', async () => {
       const onChange = vi.fn()
-      renderComponent(onChange)
+      await renderComponent(onChange)
       const dateInput = page.getByLabelText('date-input').element()
 
       await userEvent.type(dateInput, 'September 4, 1986 8:30 PM')
-      fireEvent.blur(dateInput)
+      fireEvent.focusOut(dateInput)
 
       await vi.waitFor(() => {
         expect(page.getByText('whoops').query()).not.toBeInTheDocument()
@@ -1155,11 +1172,13 @@ describe('<DateTimeInput />', () => {
     await userEvent.click(calendarButton)
 
     await vi.waitFor(() => {
-      const yearPicker = page
-        .getByRole('combobox', {
-          description: 'Pick a year'
-        })
-        .element()
+      // The year picker is looked up through its screen reader description
+      const description = Array.from(
+        document.querySelectorAll<HTMLElement>('[id$="-description"]')
+      ).find((el) => el.textContent === 'Pick a year')!
+      const yearPicker = document.querySelector<HTMLInputElement>(
+        `input[aria-describedby~="${description?.id}"]`
+      )
       expect(yearPicker).toBeInTheDocument()
       expect(yearPicker).toHaveValue('2017')
     })
@@ -1188,7 +1207,7 @@ describe('<DateTimeInput />', () => {
     const dateInput = page.getByLabelText('date-input').element()
 
     await userEvent.type(dateInput, '9/1/2017')
-    fireEvent.blur(dateInput)
+    fireEvent.focusOut(dateInput)
 
     await vi.waitFor(() => {
       expect(dateInput).toHaveValue('9/1/2017')

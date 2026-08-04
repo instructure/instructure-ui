@@ -26,13 +26,13 @@ import { describe, it, expect } from 'vitest'
 import { Locale } from '../Locale.js'
 
 describe('browserLocale', () => {
-  it('returns the navigator language if a navigator is explicity passed', () => {
+  it('returns the navigator language if a navigator is explicity passed', async () => {
     const navigator = { language: 'de' }
     expect(Locale.browserLocale(navigator)).toBe('de')
   })
 
   describe('with document lang attribute', () => {
-    it('returns the document locale if no navigator is passed', () => {
+    it('returns the document locale if no navigator is passed', async () => {
       const original = document.documentElement.lang
 
       document.documentElement.lang = 'fr'
@@ -43,12 +43,14 @@ describe('browserLocale', () => {
     })
   })
 
-  it('returns the browser locale if no navigator is passed, or "en-US" if no browser locale is set', () => {
-    const expectedLanguage = navigator ? navigator.language : 'en-US'
+  it('returns the browser locale if no navigator is passed, or "en-US" if no browser locale is set', async () => {
+    // the real browser sets a lang on <html>, which takes precedence
+    const expectedLanguage =
+      document.documentElement.lang || navigator?.language || 'en-US'
     expect(Locale.browserLocale()).toBe(expectedLanguage)
   })
 
-  it('returns the default "en-US" if navigator is undefined and the DOM is unavailable', () => {
+  it('returns the default "en-US" if navigator is undefined and the DOM is unavailable', async () => {
     expect(Locale.browserLocale(null, false)).toBe('en-US')
   })
 })

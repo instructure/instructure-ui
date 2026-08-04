@@ -22,14 +22,15 @@
  * SOFTWARE.
  */
 
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+
 import { NumberInput } from '@instructure/ui-number-input/latest'
 import {
   ChevronUpInstUIIcon,
   ChevronDownInstUIIcon
 } from '@instructure/ui-icons'
-import { render } from 'vitest-browser-react'
-import { page, userEvent } from 'vitest/browser'
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 describe('<NumberInput />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
@@ -189,11 +190,9 @@ describe('<NumberInput />', () => {
       'button[class$="-numberInput_arrow"]'
     )
 
-    await userEvent.click(buttons[0])
-
-    await vi.waitFor(() => {
-      expect(onIncrement).toHaveBeenCalledTimes(0)
-    })
+    // arrow spinbuttons aren't rendered in readonly mode
+    expect(buttons).toHaveLength(0)
+    expect(onIncrement).not.toHaveBeenCalled()
   })
 
   it('does not call onIncrement when `readOnly` is set', async () => {
@@ -205,11 +204,9 @@ describe('<NumberInput />', () => {
       'button[class$="-numberInput_arrow"]'
     )
 
-    await userEvent.click(buttons[0])
-
-    await vi.waitFor(() => {
-      expect(onIncrement).toHaveBeenCalledTimes(0)
-    })
+    // arrow spinbuttons aren't rendered in readonly mode
+    expect(buttons).toHaveLength(0)
+    expect(onIncrement).not.toHaveBeenCalled()
   })
 
   it('calls onDecrement when down arrow spinbutton is clicked', async () => {
@@ -242,11 +239,9 @@ describe('<NumberInput />', () => {
       'button[class$="-numberInput_arrow"]'
     )
 
-    await userEvent.click(buttons[1])
-
-    await vi.waitFor(() => {
-      expect(onDecrement).toHaveBeenCalledTimes(0)
-    })
+    // arrow spinbuttons aren't rendered in readonly mode
+    expect(buttons).toHaveLength(0)
+    expect(onDecrement).not.toHaveBeenCalled()
   })
 
   it('does not call onDecrement when `readOnly` is set', async () => {
@@ -258,11 +253,9 @@ describe('<NumberInput />', () => {
       'button[class$="-numberInput_arrow"]'
     )
 
-    await userEvent.click(buttons[1])
-
-    await vi.waitFor(() => {
-      expect(onDecrement).toHaveBeenCalledTimes(0)
-    })
+    // arrow spinbuttons aren't rendered in readonly mode
+    expect(buttons).toHaveLength(0)
+    expect(onDecrement).not.toHaveBeenCalled()
   })
 
   it('puts inputMode prop to input', async () => {

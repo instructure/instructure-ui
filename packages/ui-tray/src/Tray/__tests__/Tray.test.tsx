@@ -23,21 +23,21 @@
  */
 
 import { fireEvent } from '@testing-library/dom'
-import { render } from 'vitest-browser-react'
-import { page } from 'vitest/browser'
-import { describe, it, expect, beforeAll, afterAll, vi } from 'vitest'
+import { cleanup, render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import { describe, it, expect, afterEach, vi } from 'vitest'
 import { useState } from 'react'
 
 import { Tray } from '@instructure/ui-tray/latest'
 import type { TrayProps } from '@instructure/ui-tray/latest'
 
-describe('<Tray />', async () => {
-  beforeAll(() => {
-    vi.useFakeTimers()
-  })
-
-  afterAll(() => {
-    vi.useRealTimers()
+describe('<Tray />', () => {
+  afterEach(async () => {
+    // the Tray's FocusRegion tears down asynchronously on unmount, let it drain
+    // so a leftover `keydown` listener cannot scope away the Tab presses of a
+    // later test
+    cleanup()
+    await new Promise((resolve) => setTimeout(resolve, 100))
   })
 
   it('should render nothing and have a node with no parent when closed', async () => {
@@ -75,10 +75,9 @@ describe('<Tray />', async () => {
         Hello Tray
       </Tray>
     )
-    act(() => {
-      vi.runAllTimers()
+    await vi.waitFor(() => {
+      expect(onOpen).toHaveBeenCalled()
     })
-    expect(onOpen).toHaveBeenCalled()
   })
 
   it('should support onClose prop', async () => {
@@ -96,10 +95,9 @@ describe('<Tray />', async () => {
         Hello Tray
       </Tray>
     )
-    act(() => {
-      vi.runAllTimers()
+    await vi.waitFor(() => {
+      expect(onClose).toHaveBeenCalled()
     })
-    expect(onClose).toHaveBeenCalled()
   })
 
   it('should take a prop for finding default focus', async () => {
@@ -114,11 +112,9 @@ describe('<Tray />', async () => {
         <input type="text" id="my-input" aria-label="my-input-label" />
       </Tray>
     )
-    const input = page.getByLabelText('my-input-label').element()
-    act(() => {
-      vi.runAllTimers()
-    })
-    expect(document.activeElement).toBe(input)
+    const input = page.getByLabelText('my-input-label')
+
+    await expect.element(input).toHaveFocus()
   })
 
   describe('transition()', () => {
@@ -166,10 +162,9 @@ describe('<Tray />', async () => {
                 Hello
               </Tray>
             )
-            act(() => {
-              vi.runAllTimers()
+            await vi.waitFor(() => {
+              expect(onEntered).toHaveBeenCalled()
             })
-            expect(onEntered).toHaveBeenCalled()
           })
         }
 
@@ -201,10 +196,9 @@ describe('<Tray />', async () => {
                 Hello
               </Tray>
             )
-            act(() => {
-              vi.runAllTimers()
+            await vi.waitFor(() => {
+              expect(onExited).toHaveBeenCalled()
             })
-            expect(onExited).toHaveBeenCalled()
           })
         }
       })
@@ -244,34 +238,33 @@ describe('<Tray />', async () => {
     await render(<TrayWithButton />)
     // 1. Open Tray
     expect(page.getByText('Tray Content').query()).not.toBeInTheDocument()
-    const button = page.getByText('Toggle Tray').element()
-    fireEvent.click(button, { button: 0, detail: 1 })
-    act(() => {
-      vi.runAllTimers()
+    const button = page.getByText('Toggle Tray')
+    await userEvent.click(button)
+    await vi.waitFor(() => {
+      expect(onEntered).toHaveBeenCalled()
     })
-    expect(onEntered).toHaveBeenCalled()
     expect(onDismiss).not.toHaveBeenCalled()
     expect(page.getByText('Tray Content').element()).toBeInTheDocument()
-    // 2. Close Tray be clicking outside it
-    // event.detail and button are needed because FocusRegion.ts/handleDocumentClick
+    // 2. Close Tray be clicking outside it. The Tray covers the rest of the
+    // page, so dispatch the click on the document instead of pointing at a
+    // spot outside it. event.detail and button are needed because
+    // FocusRegion.ts/handleDocumentClick
     fireEvent.click(document, { button: 0, detail: 1 })
-    act(() => {
-      vi.runAllTimers()
+    await vi.waitFor(() => {
+      expect(onDismiss).toHaveBeenCalled()
+      expect(onExited).toHaveBeenCalled()
+      expect(page.getByText('Tray Content').query()).not.toBeInTheDocument()
     })
-    expect(onDismiss).toHaveBeenCalled()
-    expect(onExited).toHaveBeenCalled()
-    expect(page.getByText('Tray Content').query()).not.toBeInTheDocument()
 
     onEntered.mockClear()
     onDismiss.mockClear()
     onExited.mockClear()
 
     // 3. click Button again, Tray should reopen.
-    fireEvent.click(button, { button: 0, detail: 1 })
-    act(() => {
-      vi.runAllTimers()
+    await userEvent.click(button)
+    await vi.waitFor(() => {
+      expect(onEntered).toHaveBeenCalled()
     })
-    expect(onEntered).toHaveBeenCalled()
     expect(onDismiss).not.toHaveBeenCalled()
     expect(onExited).not.toHaveBeenCalled()
     expect(page.getByText('Tray Content').element()).toBeInTheDocument()

@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
+import { describe, it, expect, vi } from 'vitest'
 import { render } from 'vitest-browser-react'
 import { page, userEvent } from 'vitest/browser'
-import { describe, it, expect, vi } from 'vitest'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { Portal } from '../index.js'
@@ -116,7 +116,8 @@ describe(`<Portal />`, () => {
       const portal = page.getByTestId('portal').element()
       const button = page.getByRole('button', { name: 'Hello World' }).element()
 
-      await userEvent.type(button, '{enter}')
+      button.focus()
+      await userEvent.keyboard('{Enter}')
 
       await vi.waitFor(() => {
         expect(onKeyDown).toHaveBeenCalled()

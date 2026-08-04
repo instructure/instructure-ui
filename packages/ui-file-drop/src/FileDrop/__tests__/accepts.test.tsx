@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { expect } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { accepts } from '../v2/utils/accepts.js'
 
 describe('accepts', () => {

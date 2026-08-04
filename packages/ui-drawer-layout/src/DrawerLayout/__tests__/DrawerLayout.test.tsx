@@ -130,7 +130,7 @@ describe('<DrawerLayout />', () => {
     )
     const { rerender } = await render(<TestComponent />)
     expect(page.getByText(msg).element()).toBeInTheDocument()
-    await act(() => new Promise((resolve) => requestAnimationFrame(resolve)))
+    await new Promise((resolve) => requestAnimationFrame(resolve))
     fireEvent.keyUp(document, { keyCode: 27 }) // ESC key
     await vi.waitFor(() => {
       expect(onDismiss).toHaveBeenCalled()

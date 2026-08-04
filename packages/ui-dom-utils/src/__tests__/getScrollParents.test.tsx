@@ -59,8 +59,8 @@ describe('getOffsetParents', () => {
 
   it('should find offset parent for inline elements', async () => {
     const { getByTestId } = await render(node)
-    const child = getByTestId('child-1')
-    const parent = getByTestId('child_1_wrapper_parent')
+    const child = getByTestId('child-1').element()
+    const parent = getByTestId('child_1_wrapper_parent').element()
     const offsetParents = getOffsetParents(child)
 
     expect(offsetParents[0]).toBe(parent)
@@ -68,7 +68,7 @@ describe('getOffsetParents', () => {
 
   it('should ignore static parents when absolute', async () => {
     const { getByTestId } = await render(node)
-    const child = getByTestId('child-2')
+    const child = getByTestId('child-2').element()
     const offsetParents = getOffsetParents(child)
 
     expect(offsetParents.length).toBe(3)
@@ -76,7 +76,7 @@ describe('getOffsetParents', () => {
 
   it('should handle fixed', async () => {
     const { getByTestId } = await render(node)
-    const child = getByTestId('child-3')
+    const child = getByTestId('child-3').element()
     const offsetParents = getOffsetParents(child)
 
     expect(offsetParents.length).toBe(1)

@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
-import type { MockInstance } from 'vitest'
-
 import { render } from 'vitest-browser-react'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import type { MockInstance } from 'vitest'
+
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { TruncateText } from '@instructure/ui-truncate-text/latest'
 

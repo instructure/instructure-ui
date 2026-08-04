@@ -22,11 +22,11 @@
  * SOFTWARE.
  */
 
-import type { MockInstance } from 'vitest'
-
 import { render } from 'vitest-browser-react'
 import { userEvent } from 'vitest/browser'
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import { describe, it, beforeEach, afterEach, vi, expect } from 'vitest'
+import type { MockInstance } from 'vitest'
+
 import { Pages, PagesPage as Page } from '@instructure/ui-pages/latest'
 
 describe('<Pages />', () => {

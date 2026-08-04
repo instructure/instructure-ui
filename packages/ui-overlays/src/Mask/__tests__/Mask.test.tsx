@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
-import { Mask } from '@instructure/ui-overlays/latest'
 import { render } from 'vitest-browser-react'
 import { userEvent } from 'vitest/browser'
 import { describe, it, expect, beforeAll, afterAll, vi } from 'vitest'
+import { Mask } from '@instructure/ui-overlays/latest'
 
 describe('<Mask />', () => {
   let originalScroll: any

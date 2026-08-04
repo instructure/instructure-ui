@@ -24,7 +24,7 @@
 
 import { render } from 'vitest-browser-react'
 import { page } from 'vitest/browser'
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, vi, expect } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 
 import { Options } from '@instructure/ui-options/latest'

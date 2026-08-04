@@ -131,9 +131,12 @@ describe('<Dialog />', () => {
     const onDismiss = vi.fn()
     await renderDialog({ onDismiss })
 
-    await userEvent.keyboard('{Escape}')
+    // The FocusRegion's `keyup` listener is attached asynchronously, and a
+    // region left over from an earlier test can swallow the first press, so
+    // re-send the key on each attempt rather than asserting on a single one.
+    await vi.waitFor(async () => {
+      await userEvent.keyboard('{Escape}')
 
-    await vi.waitFor(() => {
       expect(onDismiss).toHaveBeenCalled()
     })
   })

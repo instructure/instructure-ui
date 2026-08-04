@@ -512,7 +512,8 @@ describe('<Drilldown />', () => {
         expect(args.drilldown.props).toHaveProperty('role', 'menu')
         expect(args.drilldown.hide).toBeInstanceOf(Function)
 
-        expect(event.target).toBe(option_1)
+        // a real click lands on the innermost label element
+        expect(option_1).toContainElement(event.target)
       })
     })
 
@@ -533,9 +534,8 @@ describe('<Drilldown />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const option_1 = page.getByTestId('opt_1').element()
-
-      await userEvent.click(option_1)
+      // the option itself is aria-disabled, so click its label content
+      await userEvent.click(page.getByText('option 1'))
 
       await vi.waitFor(() => {
         expect(onSelect).not.toHaveBeenCalled()

@@ -38,7 +38,7 @@ describe('DateTime', () => {
   const timezone = 'America/Halifax' // -3
   const locale = 'en'
 
-  it('checks params', () => {
+  it('checks params', async () => {
     let whoops = false
     try {
       // @ts-expect-error intentionally wrong
@@ -59,24 +59,24 @@ describe('DateTime', () => {
     }
   })
 
-  it('knows when now is', () => {
+  it('knows when now is', async () => {
     // not much of a test, but I need it for coverage stats
     const result = now(locale, timezone)
     expect(result).toBeDefined()
   })
 
-  it("can figure out the browser's timezone", () => {
+  it("can figure out the browser's timezone", async () => {
     const result = browserTimeZone()
     expect(result).toBeDefined()
   })
 
-  it('validates', () => {
+  it('validates', async () => {
     expect(isValid('2018-04-15T23:30:00Z')).toBe(true)
     expect(isValid('2018-04-15T23:30')).toBe(true)
     expect(isValid('2018-04-15')).toBe(true)
   })
 
-  it('parses iso8601', () => {
+  it('parses iso8601', async () => {
     const result = parse(
       '2018-04-15T20:30:00-03:00',
       locale,
@@ -85,7 +85,7 @@ describe('DateTime', () => {
     expect(result).toEqual('2018-04-15T23:30:00.000Z')
   })
 
-  it('parses llll', () => {
+  it('parses llll', async () => {
     const result = parse(
       'Sun, Apr 15, 2018 8:30 PM',
       locale,
@@ -94,7 +94,7 @@ describe('DateTime', () => {
     expect(result).toEqual('2018-04-15T23:30:00.000Z')
   })
 
-  it('parses LLLL', () => {
+  it('parses LLLL', async () => {
     const result = parse(
       'Sunday, April 15, 2018 8:30 PM',
       locale,
@@ -103,12 +103,12 @@ describe('DateTime', () => {
     expect(result).toEqual('2018-04-15T23:30:00.000Z')
   })
 
-  it('parses lll', () => {
+  it('parses lll', async () => {
     const result = parse('Apr 15, 2018 8:30 PM', locale, timezone).toISOString()
     expect(result).toEqual('2018-04-15T23:30:00.000Z')
   })
 
-  it('parses LLL', () => {
+  it('parses LLL', async () => {
     const result = parse(
       'April 15, 2018 8:30 PM',
       locale,
@@ -117,37 +117,37 @@ describe('DateTime', () => {
     expect(result).toEqual('2018-04-15T23:30:00.000Z')
   })
 
-  it('parses ll', () => {
+  it('parses ll', async () => {
     const result = parse('Apr 15, 2018', locale, timezone).toISOString()
     expect(result).toEqual('2018-04-15T03:00:00.000Z')
   })
 
-  it('parses LL', () => {
+  it('parses LL', async () => {
     const result = parse('April 15, 2018', locale, timezone).toISOString()
     expect(result).toEqual('2018-04-15T03:00:00.000Z')
   })
 
-  it('parses l', () => {
+  it('parses l', async () => {
     const result = parse('4/15/2018', locale, timezone).toISOString()
     expect(result).toEqual('2018-04-15T03:00:00.000Z')
   })
 
-  it('parses L', () => {
+  it('parses L', async () => {
     const result = parse('04/15/2018', locale, timezone).toISOString()
     expect(result).toEqual('2018-04-15T03:00:00.000Z')
   })
 
-  it('parses French L', () => {
+  it('parses French L', async () => {
     const result = parse('15/04/2018', 'fr', timezone).toISOString()
     expect(result).toEqual('2018-04-15T03:00:00.000Z')
   })
 
-  it('parses French LL', () => {
+  it('parses French LL', async () => {
     const result = parse('15 Avril, 2018', 'fr', timezone).toISOString()
     expect(result).toEqual('2018-04-15T03:00:00.000Z')
   })
 
-  it('returns localized string', () => {
+  it('returns localized string', async () => {
     let result = toLocaleString('2018-04-15T13:00Z', 'en', 'UTC', 'LLL')
     expect(result).toEqual('April 15, 2018 1:00 PM')
     result = toLocaleString('2018-04-15T13:00Z', 'fr', 'UTC', 'LLL')
@@ -157,7 +157,7 @@ describe('DateTime', () => {
     expect(result).toEqual('2018-04-15T10:00:00.000-03:00')
   })
 
-  it('calculates the first day of the week', () => {
+  it('calculates the first day of the week', async () => {
     // normal case
     const d11 = DateTime.parse('2021-09-15T20:30:00Z', 'hu-hu', 'UTC')
     expect(getFirstDayOfWeek(d11).date()).toEqual(13)
@@ -180,7 +180,7 @@ describe('DateTime', () => {
     expect(getFirstDayOfWeek(d33).date()).toEqual(5)
   })
 
-  it('calculates the local day names of the week', () => {
+  it('calculates the local day names of the week', async () => {
     // short names
     expect(getLocalDayNamesOfTheWeek('hu-hu', 'short')).toEqual([
       'h',

@@ -25,8 +25,9 @@
 import { render } from 'vitest-browser-react'
 import { page } from 'vitest/browser'
 import { describe, it, expect, vi } from 'vitest'
+
 import { runAxeCheck } from '@instructure/ui-axe-check'
-import { FlexItem as Item } from '@instructure/ui-flex/latest'
+import { Flex, FlexItem as Item } from '@instructure/ui-flex/latest'
 
 describe('<Item />', () => {
   it('should render children', async () => {

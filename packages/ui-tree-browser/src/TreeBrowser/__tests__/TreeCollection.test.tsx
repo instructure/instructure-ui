@@ -22,11 +22,11 @@
  * SOFTWARE.
  */
 
-import type { MockInstance } from 'vitest'
-
 import { render } from 'vitest-browser-react'
 import { page, userEvent } from 'vitest/browser'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import type { MockInstance } from 'vitest'
+
 import { TreeCollection } from '@instructure/ui-tree-browser/latest'
 
 const IconFolder = (
@@ -49,6 +49,13 @@ const IconUser = (
     <circle cx="50" cy="50" r="40" />
   </svg>
 )
+
+// unlike testing-library's `getByTitle`, browser-mode locators only match the
+// `title` attribute, so look up the `<title>` elements of the SVGs by hand
+const iconTitles = (title: string) =>
+  Array.from(document.querySelectorAll<SVGTitleElement>('svg > title')).filter(
+    (el) => el.textContent === title
+  )
 
 describe('<TreeCollection />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
@@ -104,11 +111,10 @@ describe('<TreeCollection />', () => {
           expanded={true}
         />
       )
-      const folderIcons = await page.getByTitle('Folder icon').elements()
-      expect(folderIcons.length).toBe(2)
-
-      const documentIcons = await page.getByTitle('Document icon').elements()
-      expect(documentIcons.length).toBe(1)
+      await vi.waitFor(() => {
+        expect(iconTitles('Folder icon').length).toBe(2)
+        expect(iconTitles('Document icon').length).toBe(1)
+      })
     })
 
     it('should support the containerRef prop', async () => {
@@ -194,7 +200,7 @@ describe('<TreeCollection />', () => {
           expanded={true}
         />
       )
-      const svgIconUser = page.getByTitle('User icon').element()
+      const svgIconUser = iconTitles('User icon')[0]
       const item1 = container.querySelectorAll('button')[1]
 
       expect(svgIconUser).toBeInTheDocument()
@@ -321,9 +327,9 @@ describe('<TreeCollection />', () => {
         />
       )
 
-      expect(page.getByTitle('Folder icon').element()).toBeInTheDocument()
-      expect(page.getByTitle('User icon').element()).toBeInTheDocument()
-      expect(page.getByTitle('Document icon').element()).toBeInTheDocument()
+      expect(iconTitles('Folder icon')[0]).toBeInTheDocument()
+      expect(iconTitles('User icon')[0]).toBeInTheDocument()
+      expect(iconTitles('Document icon')[0]).toBeInTheDocument()
     })
   })
 

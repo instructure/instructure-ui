@@ -27,7 +27,7 @@ import { page } from 'vitest/browser'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
-import { IconAdminLine } from '@instructure/ui-icons'
+import { ShieldUserInstUIIcon } from '@instructure/ui-icons'
 import { SideNavBarItem } from '@instructure/ui-side-nav-bar/latest'
 
 describe('<SideNavBarItem />', () => {
@@ -46,13 +46,13 @@ describe('<SideNavBarItem />', () => {
 
   it('should render', async () => {
     const { container } = await render(
-      <SideNavBarItem icon={<IconAdminLine />} label="Admin" href="#" />
+      <SideNavBarItem icon={<ShieldUserInstUIIcon />} label="Admin" href="#" />
     )
     const navItem = page.getByRole('link').element()
     const icon = container.querySelector('svg')
 
     expect(icon).toBeInTheDocument()
-    expect(icon).toHaveAttribute('name', 'IconAdmin')
+    expect(icon).toHaveAttribute('name', 'ShieldUser')
 
     expect(navItem).toBeInTheDocument()
     expect(navItem.tagName).toBe('A')
@@ -62,7 +62,11 @@ describe('<SideNavBarItem />', () => {
 
   it('should meet a11y standards', async () => {
     const { container } = await render(
-      <SideNavBarItem icon={<IconAdminLine />} label="Dashboard" href="#" />
+      <SideNavBarItem
+        icon={<ShieldUserInstUIIcon />}
+        label="Dashboard"
+        href="#"
+      />
     )
     const axeCheck = await runAxeCheck(container)
 

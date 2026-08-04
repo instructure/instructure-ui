@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-import type { MockInstance } from 'vitest'
 import { render } from 'vitest-browser-react'
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import { describe, it, beforeEach, afterEach, vi, expect } from 'vitest'
+import type { MockInstance } from 'vitest'
 
 import { deepEqual } from '@instructure/ui-utils'
 import { Responsive } from '@instructure/ui-responsive/latest'

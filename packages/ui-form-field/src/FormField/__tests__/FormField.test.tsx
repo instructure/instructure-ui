@@ -22,11 +22,11 @@
  * SOFTWARE.
  */
 
-import { runAxeCheck } from '@instructure/ui-axe-check'
-import { FormField } from '@instructure/ui-form-field/latest'
 import { render } from 'vitest-browser-react'
 import { page, userEvent } from 'vitest/browser'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import { runAxeCheck } from '@instructure/ui-axe-check'
+import { FormField } from '@instructure/ui-form-field/latest'
 
 describe('<FormField />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
@@ -68,7 +68,6 @@ describe('<FormField />', () => {
   })
 
   it('should focus the control with the supplied id', async () => {
-    const user = userEvent.setup()
     await render(
       <FormField label="labelText" id="foo">
         <input />
@@ -77,7 +76,7 @@ describe('<FormField />', () => {
       </FormField>
     )
     const label = page.getByText('labelText').element().closest('label')!
-    await user.click(label)
+    await userEvent.click(label)
     const input = document.getElementById('foo')!
     expect(input).toHaveFocus()
   })
