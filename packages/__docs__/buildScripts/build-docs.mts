@@ -37,12 +37,12 @@ import {
   legacyCanvas,
   legacyCanvasHighContrast
 } from '@instructure/ui-themes'
-import type {
-  MainDocsData,
-  ProcessedFile,
-  VersionMap
-} from './DataTypes.mjs'
-import { buildVersionMap, getPackageShortName, isDocIncludedInVersion } from './utils/buildVersionMap.mjs'
+import type { MainDocsData, ProcessedFile, VersionMap } from './DataTypes.mjs'
+import {
+  buildVersionMap,
+  getPackageShortName,
+  isDocIncludedInVersion
+} from './utils/buildVersionMap.mjs'
 import { fileURLToPath, pathToFileURL } from 'url'
 import { generateAIAccessibleMarkdowns } from './ai-accessible-documentation/generate-ai-accessible-markdowns.mjs'
 import { generateAIAccessibleLlmsFile } from './ai-accessible-documentation/generate-ai-accessible-llms-file.mjs'
@@ -172,7 +172,9 @@ async function buildDocs() {
 
       const versionDocs = filterDocsForVersion(allDocs, libVersion, versionMap)
       // eslint-disable-next-line no-console
-      console.log(`Generated docs for ${libVersion} (${versionDocs.length} entries)`)
+      console.log(
+        `Generated docs for ${libVersion} (${versionDocs.length} entries)`
+      )
 
       const clientProps = getClientProps(versionDocs)
       const mainDocsData: MainDocsData = {
@@ -208,7 +210,11 @@ async function buildDocs() {
 
     // Write default version's per-doc JSONs to root docs/ as a backward-compatible
     // fallback (no version prefix in the path).
-    const defaultVersionDocs = filterDocsForVersion(allDocs, defaultVersion, versionMap)
+    const defaultVersionDocs = filterDocsForVersion(
+      allDocs,
+      defaultVersion,
+      versionMap
+    )
     for (const doc of defaultVersionDocs) {
       fs.writeFileSync(
         buildDir + 'docs/' + doc.id + '.json',
@@ -216,9 +222,23 @@ async function buildDocs() {
       )
     }
 
+    // builds a map with all the components and collects all the versions a component has in the library. e.g.: the component was introduced only in v11.8 and removed in 11.13, it should not be presented pre 11.8 and post 11.13
+    const getActiveVersions = () => {
+      const { libraryVersions, mapping } = versionMap
+      return libraryVersions.reduce((acc, version) => {
+        const componentsInThisVersion = Object.keys(mapping[version])
+        const res: Record<string, Array<string>> = { ...acc }
+        componentsInThisVersion.forEach((component) => {
+          res[component] = [...(acc[component] ? acc[component] : []), version]
+        })
+        return res
+      }, {} as Record<string, Array<string>>)
+    }
+
     // Write version manifest (client only needs versions + default, not the full map)
     const docsVersionsManifest = {
       libraryVersions: versionMap.libraryVersions,
+      activeVersions: getActiveVersions(),
       defaultVersion
     }
     fs.writeFileSync(
@@ -260,12 +280,15 @@ async function buildDocs() {
     })
 
     fs.copyFileSync(
-      projectRoot + '/packages/ui-icons/src/generated/legacy/legacy-icons-data.json',
+      projectRoot +
+        '/packages/ui-icons/src/generated/legacy/legacy-icons-data.json',
       buildDir + 'legacy-icons-data.json'
     )
 
     // eslint-disable-next-line no-console
-    console.log(`Docs built in ${((Date.now() - startedAt) / 1000).toFixed(1)}s`)
+    console.log(
+      `Docs built in ${((Date.now() - startedAt) / 1000).toFixed(1)}s`
+    )
 
     if (shouldDoTheVersionCopy) {
       const versionFilePath = path.resolve(__dirname, '..', 'versions.json')
@@ -408,7 +431,9 @@ async function parseFilesInParallel(
   return slots.filter(Boolean) as ProcessedFile[]
 }
 
-function resolveComponents(theme: typeof legacyCanvas | typeof legacyCanvasHighContrast) {
+function resolveComponents(
+  theme: typeof legacyCanvas | typeof legacyCanvasHighContrast
+) {
   const sem = theme.semantics(theme.primitives)
   const resolved: Record<string, any> = {}
   for (const [key, fn] of Object.entries(theme.components)) {
@@ -420,7 +445,9 @@ function resolveComponents(theme: typeof legacyCanvas | typeof legacyCanvasHighC
 }
 
 /** Recursively flatten a nested color object, keeping only string values, using the innermost key (e.g. grey.grey10 → grey10) */
-function flattenPrimitiveColors(obj: Record<string, any>): Record<string, string> {
+function flattenPrimitiveColors(
+  obj: Record<string, any>
+): Record<string, string> {
   const result: Record<string, string> = {}
   for (const [key, value] of Object.entries(obj)) {
     if (typeof value === 'string') {
@@ -433,7 +460,10 @@ function flattenPrimitiveColors(obj: Record<string, any>): Record<string, string
 }
 
 /** Flatten a nested object using camelCase prefix concatenation for the keys */
-function flattenSemanticColors(obj: Record<string, any>, prefix = ''): Record<string, string> {
+function flattenSemanticColors(
+  obj: Record<string, any>,
+  prefix = ''
+): Record<string, string> {
   const result: Record<string, string> = {}
   for (const [key, value] of Object.entries(obj)) {
     const fullKey = prefix
@@ -463,7 +493,10 @@ function parseThemes() {
     resource: { ...canvas, resolvedComponents: resolveComponents(legacyCanvas) }
   }
   parsed['legacy-canvas-high-contrast'] = {
-    resource: { ...canvasHighContrast, resolvedComponents: resolveComponents(legacyCanvasHighContrast) }
+    resource: {
+      ...canvasHighContrast,
+      resolvedComponents: resolveComponents(legacyCanvasHighContrast)
+    }
   }
   // `key` is read by Document.tsx's `componentDidUpdate` to detect theme
   // changes and refetch the Default Theme Variables. `legacyCanvas` /
@@ -493,25 +526,30 @@ function parseThemes() {
   parsed[light.key] = {
     resource: {
       ...light,
-      resolvedColors: resolveNewThemeColors(light.newTheme as typeof legacyCanvas),
-      resolvedComponents: resolveComponents(light.newTheme as typeof legacyCanvas)
+      resolvedColors: resolveNewThemeColors(
+        light.newTheme as typeof legacyCanvas
+      ),
+      resolvedComponents: resolveComponents(
+        light.newTheme as typeof legacyCanvas
+      )
     }
   }
   parsed[dark.key] = {
     resource: {
       ...dark,
-      resolvedColors: resolveNewThemeColors(dark.newTheme as typeof legacyCanvas),
-      resolvedComponents: resolveComponents(dark.newTheme as typeof legacyCanvas)
+      resolvedColors: resolveNewThemeColors(
+        dark.newTheme as typeof legacyCanvas
+      ),
+      resolvedComponents: resolveComponents(
+        dark.newTheme as typeof legacyCanvas
+      )
     }
   }
   const canvasSemantics = legacyCanvas.semantics(legacyCanvas.primitives)
-  parsed['shared-tokens'] = { resource: legacyCanvas.sharedTokens(canvasSemantics) }
+  parsed['shared-tokens'] = {
+    resource: legacyCanvas.sharedTokens(canvasSemantics)
+  }
   return parsed
 }
 
-export {
-  pathsToProcess,
-  pathsToIgnore,
-  buildDocs,
-  filterDocsForVersion
-}
+export { pathsToProcess, pathsToIgnore, buildDocs, filterDocsForVersion }

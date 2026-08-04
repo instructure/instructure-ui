@@ -573,9 +573,16 @@ class App extends Component<AppProps, AppState> {
   }
 
   renderThemeSelect() {
+    const currentComponentPackageName =
+      this.state.currentDocData?.esPath.split('/')[1]
+
     const { minorVersionsData, selectedMinorVersion } = this.state
     const allThemeKeys = Object.keys(this.state.docsData!.themes)
     const showNewThemes = selectedMinorVersion !== 'v11_6'
+
+    const activeComponentVersions = currentComponentPackageName
+      ? minorVersionsData?.activeVersions[currentComponentPackageName]
+      : []
 
     // The `parsed.themes` map in build-docs.mts contains both:
     //   - `canvas` / `canvas-high-contrast` → new-system resources (primitives/semantics/sharedTokens/components`)
@@ -630,8 +637,14 @@ class App extends Component<AppProps, AppState> {
     const category = key ? docsData?.docs[key]?.category : undefined
     if (!category || !category.startsWith('components')) return null
 
+    // Gate on the current component's own versions, not the library's. Packages
+    // that don't declare `./v11_x` export keys (e.g. ui-motion, ui-position)
+    // are absent from the version map and so have no `activeVersions` entry —
+    // hide the select for those rather than rendering it with no options. A
+    // single applicable version still renders, as a read-out of what the page
+    // is showing.
     const showMinorVersionSelect =
-      minorVersionsData && minorVersionsData.libraryVersions.length > 1
+      minorVersionsData && (activeComponentVersions?.length ?? 0) > 0
 
     return themeKeys.length > 1 ? (
       <Flex
@@ -655,11 +668,14 @@ class App extends Component<AppProps, AppState> {
               value={selectedMinorVersion ?? this.getLatestMinorVersion()}
               width="16.5rem"
             >
-              {[...minorVersionsData!.libraryVersions].reverse().map((ver) => (
-                <option key={ver} value={ver}>
-                  {formatMinorVersion(ver)}
-                </option>
-              ))}
+              {(activeComponentVersions ?? [])
+                .slice()
+                .reverse()
+                .map((ver) => (
+                  <option key={ver} value={ver}>
+                    {formatMinorVersion(ver)}
+                  </option>
+                ))}
             </Select>
           </Flex.Item>
         )}

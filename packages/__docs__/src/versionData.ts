@@ -75,7 +75,8 @@ const fetchMinorVersionData = async (
     const data = await result.json()
     return {
       libraryVersions: data.libraryVersions,
-      defaultVersion: data.defaultVersion
+      defaultVersion: data.defaultVersion,
+      activeVersions: data.activeVersions
     }
   } catch {
     return undefined

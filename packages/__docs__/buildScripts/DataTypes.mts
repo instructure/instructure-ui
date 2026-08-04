@@ -32,12 +32,15 @@ import type {
   SharedTokens
 } from '@instructure/ui-themes'
 
-type ProcessedFile =
-  Documentation &
+type ProcessedFile = Documentation &
   YamlMetaInfo &
   JsDocResult &
-  PackagePathData &
-  { title: string, id:string, componentVersion?: string, componentDirName?: string }
+  PackagePathData & {
+    title: string
+    id: string
+    componentVersion?: string
+    componentDirName?: string
+  }
 
 type PackagePathData = {
   extension: string
@@ -73,10 +76,10 @@ type YamlMetaInfo = {
 
 type JsDocResult = {
   // the comment without the comment characters ("/*" etc)
-  description?: string,
+  description?: string
   // If it's a function it will be the function's name, otherwise
   // it's either the string after the '@module' annotation or the variable's name
-  name?: string,
+  name?: string
   // function params. undefined if the comment is e.g. above imports
   params?: {
     name: string
@@ -85,14 +88,14 @@ type JsDocResult = {
     optional?: boolean
     // the description of the param
     description?: string
-  }[],
+  }[]
   genericParameters?: {
     name: string
     defaultValue?: string
     constraint?: string
   }[]
   // function return value. undefined if the comment is e.g. above imports
-  returns?: JSDocFunctionReturns,
+  returns?: JSDocFunctionReturns
 }
 
 type JSDocFunctionReturns = {
@@ -126,13 +129,16 @@ export type ParsedDoc = {
   docs: ParsedDocSummary
 }
 
-export type ParsedDocSummary = Record<string,{
-  title: string
-  order?: string
-  category?: string
-  isWIP?: boolean
-  tags?: string
-}>
+export type ParsedDocSummary = Record<
+  string,
+  {
+    title: string
+    order?: string
+    category?: string
+    isWIP?: boolean
+    tags?: string
+  }
+>
 
 type Glyph = {
   bidirectional: boolean
@@ -153,10 +159,10 @@ type ResolvedColors = {
 // canvas / canvas-high-contrast: `key`, `description`) to the new-system
 // entries. Not declared per-branch; surfaced as optional on `MainDocsData.themes`.
 type ThemeResource =
-  | (BaseTheme & { resolvedComponents: Record<string, any> })   // legacy-canvas, legacy-canvas-high-contrast
-  | (NewBaseTheme & { resolvedColors: ResolvedColors })          // canvas, canvas-high-contrast
-  | (LightTheme & { resolvedColors: ResolvedColors })            // light
-  | (DarkTheme & { resolvedColors: ResolvedColors })             // dark
+  | (BaseTheme & { resolvedComponents: Record<string, any> }) // legacy-canvas, legacy-canvas-high-contrast
+  | (NewBaseTheme & { resolvedColors: ResolvedColors }) // canvas, canvas-high-contrast
+  | (LightTheme & { resolvedColors: ResolvedColors }) // light
+  | (DarkTheme & { resolvedColors: ResolvedColors }) // dark
   | SharedTokens
 
 type MainDocsData = {
@@ -167,7 +173,10 @@ type MainDocsData = {
   //   (BaseTheme & { resolvedComponents })  →  has key ✓
   //   (NewBaseTheme & { resolvedColors })   →  gains key? via intersection ✓
   //   SharedTokens                          →  gains key? via intersection ✓
-  themes: Record<string, { resource: ThemeResource & { key?: string; description?: string } }>
+  themes: Record<
+    string,
+    { resource: ThemeResource & { key?: string; description?: string } }
+  >
   library: LibraryOptions
 } & ParsedDoc
 
@@ -186,6 +195,7 @@ type VersionMap = {
 type MinorVersionData = {
   libraryVersions: string[]
   defaultVersion: string
+  activeVersions: Record<string, Array<string>>
 }
 
 export type {
