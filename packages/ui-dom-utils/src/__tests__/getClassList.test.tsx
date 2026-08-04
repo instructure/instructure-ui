@@ -22,13 +22,15 @@
  * SOFTWARE.
  */
 
-import { render } from '@testing-library/react'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { describe, it, expect } from 'vitest'
 import { getClassList } from '../getClassList.js'
 
 describe('getClassList', () => {
-  it('should provide classlist methods', () => {
-    const { container } = render(<span className="foo bar baz">Test</span>)
+  it('should provide classlist methods', async () => {
+    const { container } = await render(
+      <span className="foo bar baz">Test</span>
+    )
     const node = container.firstChild as HTMLElement
 
     const classes = getClassList(node)

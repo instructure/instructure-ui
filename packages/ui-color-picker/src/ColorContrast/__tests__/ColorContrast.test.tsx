@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-import { render, screen } from '@testing-library/react'
-import { vi } from 'vitest'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect, vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { contrast } from '@instructure/ui-color-utils'
 
@@ -52,7 +52,7 @@ describe('<ColorContrast />', () => {
   describe('elementRef prop', () => {
     it('should provide ref', async () => {
       const elementRef = vi.fn()
-      const { container } = render(
+      const { container } = await render(
         <ColorContrast
           {...testColors}
           {...testLabels}
@@ -67,7 +67,7 @@ describe('<ColorContrast />', () => {
   describe('labels are displayed:', () => {
     Object.entries(testLabels).forEach(([label, text]) => {
       it(label, async () => {
-        const { container } = render(
+        const { container } = await render(
           <ColorContrast {...testColors} {...testLabels} />
         )
 
@@ -78,47 +78,57 @@ describe('<ColorContrast />', () => {
 
   describe('labelLevel prop', () => {
     it('should render label as div when labelLevel is not provided', async () => {
-      render(<ColorContrast {...testColors} {...testLabels} />)
+      await render(<ColorContrast {...testColors} {...testLabels} />)
 
-      const heading = screen.queryByRole('heading', {
-        name: testLabels.label
-      })
+      const heading = page
+        .getByRole('heading', {
+          name: testLabels.label
+        })
+        .query()
       expect(heading).not.toBeInTheDocument()
 
-      const labelText = screen.getByText(testLabels.label)
+      const labelText = page.getByText(testLabels.label).element()
       expect(labelText).toBeInTheDocument()
       expect(labelText.tagName.toLowerCase()).toBe('div')
     })
 
     it('should render label as Heading when labelLevel is provided', async () => {
-      render(<ColorContrast {...testColors} {...testLabels} labelLevel="h2" />)
+      await render(
+        <ColorContrast {...testColors} {...testLabels} labelLevel="h2" />
+      )
 
-      const heading = screen.getByRole('heading', {
-        name: testLabels.label,
-        level: 2
-      })
+      const heading = page
+        .getByRole('heading', {
+          name: testLabels.label,
+          level: 2
+        })
+        .element()
       expect(heading).toBeInTheDocument()
     })
 
     it('should render correct heading level', async () => {
-      const { rerender } = render(
+      const { rerender } = await render(
         <ColorContrast {...testColors} {...testLabels} labelLevel="h3" />
       )
 
-      let heading = screen.getByRole('heading', {
-        name: testLabels.label,
-        level: 3
-      })
+      let heading = page
+        .getByRole('heading', {
+          name: testLabels.label,
+          level: 3
+        })
+        .element()
       expect(heading).toBeInTheDocument()
 
-      rerender(
+      await rerender(
         <ColorContrast {...testColors} {...testLabels} labelLevel="h1" />
       )
 
-      heading = screen.getByRole('heading', {
-        name: testLabels.label,
-        level: 1
-      })
+      heading = page
+        .getByRole('heading', {
+          name: testLabels.label,
+          level: 1
+        })
+        .element()
       expect(heading).toBeInTheDocument()
     })
   })
@@ -128,7 +138,7 @@ describe('<ColorContrast />', () => {
       const color1 = '#fff'
       const color2 = '#088'
 
-      const { container } = render(
+      const { container } = await render(
         <ColorContrast
           {...testLabels}
           firstColor={color1}
@@ -144,7 +154,7 @@ describe('<ColorContrast />', () => {
       const color1 = '#fff'
       const color2 = '#00888880'
 
-      const { container } = render(
+      const { container } = await render(
         <ColorContrast
           {...testLabels}
           firstColor={color1}
@@ -160,7 +170,7 @@ describe('<ColorContrast />', () => {
 
   describe('withoutColorPreview prop', () => {
     it('should be false by default, should display preview', async () => {
-      const { container } = render(
+      const { container } = await render(
         <ColorContrast {...testColors} {...testLabels} />
       )
 
@@ -171,7 +181,7 @@ describe('<ColorContrast />', () => {
     })
 
     it('should hide preview', async () => {
-      const { container } = render(
+      const { container } = await render(
         <ColorContrast {...testColors} {...testLabels} withoutColorPreview />
       )
 
@@ -195,7 +205,7 @@ describe('<ColorContrast />', () => {
     ) => {
       describe(title, () => {
         it(`normal text should ${expectedResult.normal.toLowerCase()}`, async () => {
-          const { container } = render(
+          const { container } = await render(
             <ColorContrast
               {...testLabels}
               firstColor={firstColor}
@@ -207,7 +217,7 @@ describe('<ColorContrast />', () => {
         })
 
         it(`large text should ${expectedResult.large.toLowerCase()}`, async () => {
-          const { container } = render(
+          const { container } = await render(
             <ColorContrast
               {...testLabels}
               firstColor={firstColor}
@@ -219,7 +229,7 @@ describe('<ColorContrast />', () => {
         })
 
         it(`graphics should ${expectedResult.graphics.toLowerCase()}`, async () => {
-          const { container } = render(
+          const { container } = await render(
             <ColorContrast
               {...testLabels}
               firstColor={firstColor}
@@ -252,7 +262,7 @@ describe('<ColorContrast />', () => {
 
   describe('should be accessible', () => {
     it('a11y', async () => {
-      const { container } = render(
+      const { container } = await render(
         <ColorContrast {...testColors} {...testLabels} />
       )
       const axeCheck = await runAxeCheck(container)

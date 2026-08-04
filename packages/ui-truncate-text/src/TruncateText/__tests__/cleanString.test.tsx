@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-import { expect } from 'vitest'
-import '@testing-library/jest-dom'
+import { describe, it, expect } from 'vitest'
 import cleanString from '../v2/utils/cleanString.js'
 
 describe('cleanSring', () => {

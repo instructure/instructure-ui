@@ -22,23 +22,25 @@
  * SOFTWARE.
  */
 
-import { render, screen } from '@testing-library/react'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect } from 'vitest'
 import { TabsPanel as Panel } from '@instructure/ui-tabs/latest'
 
 describe('<Tabs.Panel />', () => {
   it('should render children', async () => {
-    render(
+    await render(
       <Panel isSelected renderTitle="Panel Title">
         Panel contents
       </Panel>
     )
-    const children = screen.getByText('Panel contents')
+    const children = page.getByText('Panel contents').element()
 
     expect(children).toBeInTheDocument()
   })
 
   it('should have appropriate role attribute', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Panel isSelected renderTitle="Panel Title">
         Panel contents
       </Panel>
@@ -49,7 +51,7 @@ describe('<Tabs.Panel />', () => {
   })
 
   it('should not have tabIndex 0 by default', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Panel isSelected renderTitle="Panel Title">
         Panel contents
       </Panel>
@@ -60,7 +62,7 @@ describe('<Tabs.Panel />', () => {
   })
 
   it('should allow custom tabIndex', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Panel isSelected renderTitle="Panel Title" tabIndex={-1}>
         Panel contents
       </Panel>

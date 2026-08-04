@@ -23,12 +23,12 @@
  */
 
 import { CSSProperties } from 'react'
-import { render, screen } from '@testing-library/react'
-import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
 import { View } from '@instructure/ui-view/latest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 describe('<View />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
@@ -49,8 +49,8 @@ describe('<View />', () => {
     consoleErrorMock.mockRestore()
   })
 
-  it('should render', () => {
-    const { container } = render(
+  it('should render', async () => {
+    const { container } = await render(
       <View>
         <h1>View Content</h1>
       </View>
@@ -61,20 +61,20 @@ describe('<View />', () => {
     expect(view).toHaveTextContent('View Content')
   })
 
-  it('should render children', () => {
-    render(
+  it('should render children', async () => {
+    await render(
       <View>
         <h1>View Content</h1>
       </View>
     )
 
-    const viewContent = screen.getByText('View Content')
+    const viewContent = page.getByText('View Content').element()
 
     expect(viewContent).toBeInTheDocument()
     expect(viewContent.tagName).toBe('H1')
   })
 
-  it('should pass whitelisted style attributes', () => {
+  it('should pass whitelisted style attributes', async () => {
     const styleProps: CSSProperties = {
       top: '160px',
       left: '5px',
@@ -87,7 +87,7 @@ describe('<View />', () => {
       pointerEvents: 'none'
     }
 
-    const { container } = render(
+    const { container } = await render(
       <View style={{ ...styleProps }}>
         <h1>View Content</h1>
       </View>
@@ -107,8 +107,8 @@ describe('<View />', () => {
     expect(styles['pointerEvents']).toEqual('none')
   })
 
-  it('should pass flex style', () => {
-    const { container } = render(
+  it('should pass flex style', async () => {
+    const { container } = await render(
       <View style={{ flexBasis: '200px' }}>
         <h1>View Content</h1>
       </View>
@@ -120,10 +120,10 @@ describe('<View />', () => {
     expect(styles['flexBasis']).toEqual('200px')
   })
 
-  it('should pass className', () => {
+  it('should pass className', async () => {
     const className = 'fooBarBaz'
 
-    const { container } = render(
+    const { container } = await render(
       <View className={className}>
         <h1>View Content</h1>
       </View>
@@ -134,10 +134,10 @@ describe('<View />', () => {
     expect(view!.classList.contains(className)).toEqual(true)
   })
 
-  it('should provide an elementRef', () => {
+  it('should provide an elementRef', async () => {
     const elementRef = vi.fn()
 
-    const { container } = render(
+    const { container } = await render(
       <View elementRef={elementRef}>
         <h1>View Content</h1>
       </View>
@@ -147,10 +147,10 @@ describe('<View />', () => {
     expect(elementRef).toHaveBeenCalledWith(view)
   })
 
-  it('should pass cursor', () => {
+  it('should pass cursor', async () => {
     const cursor = 'cell'
 
-    const { container } = render(
+    const { container } = await render(
       <View cursor={cursor}>
         <h1>View Content</h1>
       </View>
@@ -162,8 +162,8 @@ describe('<View />', () => {
     expect(styles['cursor']).toEqual(cursor)
   })
 
-  it('should set overflow', () => {
-    const { container } = render(
+  it('should set overflow', async () => {
+    const { container } = await render(
       <View overflowX="hidden" overflowY="auto">
         <h1>View Content</h1>
       </View>
@@ -176,8 +176,8 @@ describe('<View />', () => {
     expect(styles.overflowY).toEqual('auto')
   })
 
-  it('should set CSS position', () => {
-    const { container } = render(
+  it('should set CSS position', async () => {
+    const { container } = await render(
       <View position="fixed">
         <h1>View Content</h1>
       </View>
@@ -189,8 +189,8 @@ describe('<View />', () => {
     expect(styles.position).toEqual('fixed')
   })
 
-  it('should set inline offset (top, bottom, left, right)', () => {
-    const { container } = render(
+  it('should set inline offset (top, bottom, left, right)', async () => {
+    const { container } = await render(
       <View
         insetBlockStart="0"
         insetBlockEnd="20px"
@@ -210,8 +210,8 @@ describe('<View />', () => {
     expect(styles['right']).toEqual('3px')
   })
 
-  it('should override default max-width', () => {
-    const { container, rerender } = render(
+  it('should override default max-width', async () => {
+    const { container, rerender } = await render(
       <View>
         <h1>View Content</h1>
       </View>
@@ -222,7 +222,7 @@ describe('<View />', () => {
 
     expect(styles.maxWidth).toEqual('100%')
 
-    rerender(
+    await rerender(
       <View maxWidth="200px">
         <h1>View Content</h1>
       </View>
@@ -233,8 +233,8 @@ describe('<View />', () => {
     expect(newStyles.maxWidth).toEqual('200px')
   })
 
-  it('should resolve current (era-3) spacing tokens for the margin prop', () => {
-    const { container } = render(
+  it('should resolve current (era-3) spacing tokens for the margin prop', async () => {
+    const { container } = await render(
       <View margin="general.spaceMd">
         <h1>View Content</h1>
       </View>
@@ -255,8 +255,8 @@ describe('<View />', () => {
     )
   })
 
-  it('should resolve era-3 tokens via CSS-like shorthand for the margin prop', () => {
-    const { container } = render(
+  it('should resolve era-3 tokens via CSS-like shorthand for the margin prop', async () => {
+    const { container } = await render(
       <View margin="general.spaceLg auto general.spaceXl">
         <h1>View Content</h1>
       </View>
@@ -273,7 +273,7 @@ describe('<View />', () => {
   })
 
   it('should meet a11y standards', async () => {
-    const { container } = render(<View>View Content</View>)
+    const { container } = await render(<View>View Content</View>)
 
     const axeCheck = await runAxeCheck(container)
 

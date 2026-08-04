@@ -22,13 +22,13 @@
  * SOFTWARE.
  */
 
-import { fireEvent, render, screen, waitFor } from '@testing-library/react'
-import { vi } from 'vitest'
-import userEvent from '@testing-library/user-event'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { TextArea } from '@instructure/ui-text-area/latest'
 import type { TextAreaElement } from '../v2/index'
-import '@testing-library/jest-dom'
+import { fireEvent } from '@testing-library/dom'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 describe('TextArea', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
@@ -50,14 +50,18 @@ describe('TextArea', () => {
   })
 
   it('should accept a default value', async () => {
-    render(<TextArea label="Name" autoGrow={false} defaultValue="Tom Servo" />)
-    const input = screen.getByRole('textbox')
+    await render(
+      <TextArea label="Name" autoGrow={false} defaultValue="Tom Servo" />
+    )
+    const input = page.getByRole('textbox').element()
 
     expect(input).toHaveTextContent('Tom Servo')
   })
 
   it('should include a label', async () => {
-    const { container } = render(<TextArea label="Name" autoGrow={false} />)
+    const { container } = await render(
+      <TextArea label="Name" autoGrow={false} />
+    )
     const textArea = container.querySelector(
       'span[class$="-formFieldLayout__label"]'
     )
@@ -66,15 +70,15 @@ describe('TextArea', () => {
   })
 
   it('should set an initial height', async () => {
-    render(<TextArea label="Name" autoGrow={false} height="100px" />)
-    const input = screen.getByRole('textbox')
+    await render(<TextArea label="Name" autoGrow={false} height="100px" />)
+    const input = page.getByRole('textbox').element()
 
     expect(input).toHaveStyle('height: 100px')
   })
 
   it('should focus the textarea when focus is called', async () => {
     let ref: TextAreaElement
-    render(
+    await render(
       <TextArea
         label="Name"
         autoGrow={false}
@@ -82,7 +86,7 @@ describe('TextArea', () => {
         textareaRef={(el: TextAreaElement) => (ref = el)}
       />
     )
-    const input = screen.getByRole('textbox')
+    const input = page.getByRole('textbox').element()
 
     ref!.focus()
 
@@ -91,7 +95,7 @@ describe('TextArea', () => {
 
   it('provides a focused getter', async () => {
     let ref: TextAreaElement
-    render(
+    await render(
       <TextArea
         label="Name"
         autoGrow={false}
@@ -108,15 +112,17 @@ describe('TextArea', () => {
 
   it('should provide an textareaRef prop', async () => {
     const textareaRef = vi.fn()
-    render(<TextArea label="Name" autoGrow={false} textareaRef={textareaRef} />)
-    const input = screen.getByRole('textbox')
+    await render(
+      <TextArea label="Name" autoGrow={false} textareaRef={textareaRef} />
+    )
+    const input = page.getByRole('textbox').element()
 
     expect(textareaRef).toHaveBeenCalledWith(input)
   })
 
   it('should provide a value getter', async () => {
     let ref: TextAreaElement
-    render(
+    await render(
       <TextArea
         label="Name"
         autoGrow={false}
@@ -132,22 +138,24 @@ describe('TextArea', () => {
   describe('events', () => {
     it('responds to onChange event', async () => {
       const onChange = vi.fn()
-      render(<TextArea label="Name" autoGrow={false} onChange={onChange} />)
-      const input = screen.getByRole('textbox')
+      await render(
+        <TextArea label="Name" autoGrow={false} onChange={onChange} />
+      )
+      const input = page.getByRole('textbox').element()
 
       fireEvent.change(input, { target: { value: 'foo' } })
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onChange).toHaveBeenCalledTimes(1)
       })
     })
 
     it('does not respond to onChange event when disabled', async () => {
       const onChange = vi.fn()
-      render(
+      await render(
         <TextArea disabled label="Name" autoGrow={false} onChange={onChange} />
       )
-      const input = screen.getByRole('textbox')
+      const input = page.getByRole('textbox').element()
 
       fireEvent.change(input, { target: { value: 'foo' } })
 
@@ -156,10 +164,10 @@ describe('TextArea', () => {
 
     it('does not respond to onChange event when readOnly', async () => {
       const onChange = vi.fn()
-      render(
+      await render(
         <TextArea readOnly label="Name" autoGrow={false} onChange={onChange} />
       )
-      const input = screen.getByRole('textbox')
+      const input = page.getByRole('textbox').element()
 
       fireEvent.change(input, { target: { value: 'foo' } })
 
@@ -168,24 +176,24 @@ describe('TextArea', () => {
 
     it('responds to onBlur event', async () => {
       const onBlur = vi.fn()
-      render(<TextArea label="Name" autoGrow={false} onBlur={onBlur} />)
+      await render(<TextArea label="Name" autoGrow={false} onBlur={onBlur} />)
 
       await userEvent.tab()
       await userEvent.tab()
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onBlur).toHaveBeenCalled()
       })
     })
 
     it('responds to onFocus event', async () => {
       const onFocus = vi.fn()
-      render(<TextArea label="Name" autoGrow={false} onFocus={onFocus} />)
-      const input = screen.getByRole('textbox')
+      await render(<TextArea label="Name" autoGrow={false} onFocus={onFocus} />)
+      const input = page.getByRole('textbox').element()
 
       input.focus()
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onFocus).toHaveBeenCalled()
       })
     })
@@ -193,34 +201,36 @@ describe('TextArea', () => {
 
   describe('for a11y', () => {
     it('should meet standards', async () => {
-      const { container } = render(<TextArea label="Name" autoGrow={false} />)
+      const { container } = await render(
+        <TextArea label="Name" autoGrow={false} />
+      )
       const axeCheck = await runAxeCheck(container)
 
       expect(axeCheck).toBe(true)
     })
 
     it('should set aria-invalid when errors prop is set', async () => {
-      render(
+      await render(
         <TextArea
           label="Name"
           autoGrow={false}
           messages={[{ type: 'error', text: 'some error message' }]}
         />
       )
-      const input = screen.getByRole('textbox')
+      const input = page.getByRole('textbox').element()
 
       expect(input).toHaveAttribute('aria-invalid')
     })
 
     it('associates messages with the textarea as its description, not its accessible name', async () => {
-      render(
+      await render(
         <TextArea
           label="Name"
           autoGrow={false}
           messages={[{ type: 'error', text: 'some error message' }]}
         />
       )
-      const input = screen.getByRole('textbox')
+      const input = page.getByRole('textbox').element()
 
       const describedById = input.getAttribute('aria-describedby')
       expect(describedById).toBeTruthy()
@@ -236,8 +246,8 @@ describe('TextArea', () => {
     })
 
     it('does not override the accessible name with aria-labelledby when there are no messages', async () => {
-      render(<TextArea label="Name" autoGrow={false} />)
-      const input = screen.getByRole('textbox')
+      await render(<TextArea label="Name" autoGrow={false} />)
+      const input = page.getByRole('textbox').element()
 
       expect(input).not.toHaveAttribute('aria-labelledby')
     })

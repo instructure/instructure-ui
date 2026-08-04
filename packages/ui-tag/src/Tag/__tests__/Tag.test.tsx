@@ -23,10 +23,9 @@
  */
 
 import { ComponentType } from 'react'
-import { render, screen, waitFor } from '@testing-library/react'
-import { userEvent } from '@testing-library/user-event'
-import '@testing-library/jest-dom'
-import { vi } from 'vitest'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import { describe, it, expect, beforeAll, afterAll, vi } from 'vitest'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import type { ViewProps } from '@instructure/ui-view/latest'
@@ -56,21 +55,23 @@ describe('<Tag />', async () => {
   })
 
   it('should display text', async () => {
-    render(<Tag text="Summer" />)
-    const tag = screen.getByText('Summer')
+    await render(<Tag text="Summer" />)
+    const tag = page.getByText('Summer').element()
 
     expect(tag).toBeInTheDocument()
   })
 
   it('should render as a button and respond to onClick event', async () => {
     const onClick = vi.fn()
-    render(<Tag data-testid="summer-button" text="Summer" onClick={onClick} />)
+    await render(
+      <Tag data-testid="summer-button" text="Summer" onClick={onClick} />
+    )
 
-    const button = screen.getByTestId('summer-button')
+    const button = page.getByTestId('summer-button').element()
 
     await userEvent.click(button)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onClick).toHaveBeenCalledTimes(1)
       expect(button.tagName).toBe('BUTTON')
     })
@@ -78,7 +79,7 @@ describe('<Tag />', async () => {
 
   it('should render a close icon when it is dismissible and clickable', async () => {
     const onClick = vi.fn()
-    const { container } = render(
+    const { container } = await render(
       <Tag text="Summer" onClick={onClick} dismissible={true} />
     )
     const icon = container.querySelector('svg')
@@ -87,7 +88,7 @@ describe('<Tag />', async () => {
   })
 
   it('should meet a11y standards', async () => {
-    const { container } = render(<Tag text="Summer" />)
+    const { container } = await render(<Tag text="Summer" />)
     const axeCheck = await runAxeCheck(container)
 
     expect(axeCheck).toBe(true)
@@ -110,7 +111,7 @@ describe('<Tag />', async () => {
               .spyOn(console, 'error')
               .mockImplementation(() => {})
 
-            render(<Tag text="Summer" {...props} />)
+            await render(<Tag text="Summer" {...props} />)
             const warning = `Warning: [Tag] prop '${prop}' is not allowed.`
 
             expect(consoleError.mock.calls[0][0]).toBe(warning)
@@ -121,7 +122,7 @@ describe('<Tag />', async () => {
             const props = { [prop]: allowedProps[prop] }
             const consoleError = vi.spyOn(console, 'error')
 
-            render(<Tag text="Summer" {...props} />)
+            await render(<Tag text="Summer" {...props} />)
 
             expect(consoleError).not.toHaveBeenCalled()
             consoleError.mockRestore()

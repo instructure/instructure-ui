@@ -22,13 +22,13 @@
  * SOFTWARE.
  */
 
-import { fireEvent, render, screen } from '@testing-library/react'
-import { vi } from 'vitest'
-import userEvent from '@testing-library/user-event'
 import { IconUserLine } from '@instructure/ui-icons'
 import { Billboard } from '@instructure/ui-billboard/latest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
-import '@testing-library/jest-dom'
+import { fireEvent } from '@testing-library/dom'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 const TEST_HEADING = 'test-heading'
 const TEST_MESSAGE = 'test-message'
@@ -54,14 +54,14 @@ describe('<Billboard />', () => {
     consoleErrorMock.mockRestore()
   })
 
-  it('should render', () => {
-    const { container } = render(<Billboard />)
+  it('should render', async () => {
+    const { container } = await render(<Billboard />)
 
     expect(container.firstChild).toBeInTheDocument()
   })
 
   it('should be accessible', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Billboard
         heading={TEST_HEADING}
         message={TEST_MESSAGE}
@@ -73,28 +73,28 @@ describe('<Billboard />', () => {
     expect(axeCheck).toBe(true)
   })
 
-  it('should render a heading with the correct tag', () => {
-    render(<Billboard heading={TEST_HEADING} headingAs="h2" />)
-    const heading = screen.getByText(TEST_HEADING)
+  it('should render a heading with the correct tag', async () => {
+    await render(<Billboard heading={TEST_HEADING} headingAs="h2" />)
+    const heading = page.getByText(TEST_HEADING).element()
 
     expect(heading).toBeInTheDocument()
     expect(heading.tagName).toBe('H2')
   })
 
-  it('renders as a link if it has an href prop', () => {
-    render(<Billboard href={TEST_LINK} />)
+  it('renders as a link if it has an href prop', async () => {
+    await render(<Billboard href={TEST_LINK} />)
 
-    const link = screen.getByRole('link')
+    const link = page.getByRole('link').element()
 
     expect(link).toBeInTheDocument()
     expect(link).toHaveAttribute('href', TEST_LINK)
   })
 
-  it('renders as a button and responds to onClick event', () => {
+  it('renders as a button and responds to onClick event', async () => {
     const onClick = vi.fn()
 
-    render(<Billboard onClick={onClick} />)
-    const button = screen.getByRole('button')
+    await render(<Billboard onClick={onClick} />)
+    const button = page.getByRole('button').element()
 
     fireEvent.click(button)
 
@@ -105,18 +105,18 @@ describe('<Billboard />', () => {
     it('should render message when passed a node', async () => {
       const messageNode = <span>{TEST_MESSAGE}</span>
 
-      render(<Billboard message={messageNode} />)
-      const messageElement = screen.getByText(TEST_MESSAGE)
+      await render(<Billboard message={messageNode} />)
+      const messageElement = page.getByText(TEST_MESSAGE).element()
 
       expect(messageElement).toBeInTheDocument()
       expect(messageElement.tagName).toBe('SPAN')
     })
 
-    it('should render message passed a function', () => {
+    it('should render message passed a function', async () => {
       const messageNode = <span>{TEST_MESSAGE}</span>
 
-      render(<Billboard message={() => messageNode} />)
-      const messageElement = screen.getByText(TEST_MESSAGE)
+      await render(<Billboard message={() => messageNode} />)
+      const messageElement = page.getByText(TEST_MESSAGE).element()
 
       expect(messageElement).toBeInTheDocument()
       expect(messageElement.tagName).toBe('SPAN')
@@ -124,25 +124,25 @@ describe('<Billboard />', () => {
   })
 
   describe('when disabled', () => {
-    it('should apply aria-disabled to link', () => {
-      render(<Billboard href={TEST_LINK} disabled={true} />)
-      const link = screen.getByRole('link')
+    it('should apply aria-disabled to link', async () => {
+      await render(<Billboard href={TEST_LINK} disabled={true} />)
+      const link = page.getByRole('link').element()
 
       expect(link).toHaveAttribute('aria-disabled', 'true')
     })
 
-    it('should not be clickable', () => {
-      render(<Billboard onClick={vi.fn()} disabled />)
-      const button = screen.getByRole('button')
+    it('should not be clickable', async () => {
+      await render(<Billboard onClick={vi.fn()} disabled />)
+      const button = page.getByRole('button').element()
 
       expect(button).toHaveAttribute('aria-disabled', 'true')
     })
   })
 
   describe('when readOnly', () => {
-    it('should apply aria-disabled', () => {
-      render(<Billboard href={TEST_LINK} readOnly />)
-      const link = screen.getByRole('link')
+    it('should apply aria-disabled', async () => {
+      await render(<Billboard href={TEST_LINK} readOnly />)
+      const link = page.getByRole('link').element()
 
       expect(link).toHaveAttribute('aria-disabled', 'true')
     })
@@ -150,8 +150,8 @@ describe('<Billboard />', () => {
     it('should not be clickable', async () => {
       const onClick = vi.fn()
 
-      render(<Billboard onClick={onClick} readOnly />)
-      const button = screen.getByRole('button')
+      await render(<Billboard onClick={onClick} readOnly />)
+      const button = page.getByRole('button').element()
 
       await userEvent.click(button)
 
@@ -160,17 +160,17 @@ describe('<Billboard />', () => {
   })
 
   describe('when passing down props to View', () => {
-    it('should support an elementRef prop', () => {
+    it('should support an elementRef prop', async () => {
       const elementRef = vi.fn()
 
-      render(<Billboard elementRef={elementRef} href={TEST_LINK} />)
-      const link = screen.getByRole('link')
+      await render(<Billboard elementRef={elementRef} href={TEST_LINK} />)
+      const link = page.getByRole('link').element()
 
       expect(elementRef).toHaveBeenCalledWith(link)
     })
 
-    it('should support an `as` prop', () => {
-      const { container } = render(<Billboard as="em" />)
+    it('should support an `as` prop', async () => {
+      const { container } = await render(<Billboard as="em" />)
       const billboardAsEm = container.querySelector('em')
 
       expect(billboardAsEm).toBeInTheDocument()

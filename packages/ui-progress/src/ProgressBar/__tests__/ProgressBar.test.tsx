@@ -22,15 +22,14 @@
  * SOFTWARE.
  */
 
-import { render } from '@testing-library/react'
-
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { describe, it, expect } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { ProgressBar } from '@instructure/ui-progress/latest'
 
 describe('<ProgressBar />', () => {
   it('should render', async () => {
-    const { container } = render(
+    const { container } = await render(
       <ProgressBar
         screenReaderLabel="Chapters read"
         valueMax={60}
@@ -43,7 +42,7 @@ describe('<ProgressBar />', () => {
   })
 
   it('should render a progress element with correct aria attributes', async () => {
-    const { container } = render(
+    const { container } = await render(
       <ProgressBar
         screenReaderLabel="Chapters read"
         valueMax={60}
@@ -56,7 +55,7 @@ describe('<ProgressBar />', () => {
   })
 
   it('should render a progress element with an aria-label attribute', async () => {
-    const { container } = render(
+    const { container } = await render(
       <ProgressBar
         screenReaderLabel="Chapters read"
         valueMax={60}
@@ -71,7 +70,7 @@ describe('<ProgressBar />', () => {
   it('should format the displayed text', async () => {
     const current = 30
     const max = 60
-    const { container } = render(
+    const { container } = await render(
       <ProgressBar
         screenReaderLabel="Chapters read"
         valueMax={max}
@@ -85,7 +84,7 @@ describe('<ProgressBar />', () => {
   })
 
   it('should meet a11y standards', async () => {
-    const { container } = render(
+    const { container } = await render(
       <ProgressBar
         screenReaderLabel="Chapters read"
         valueMax={60}
@@ -96,9 +95,9 @@ describe('<ProgressBar />', () => {
     expect(axeCheck).toBe(true)
   })
 
-  it('should not render the value inside when the prop is set to false', () => {
+  it('should not render the value inside when the prop is set to false', async () => {
     const valueNow = 33
-    const { container } = render(
+    const { container } = await render(
       <ProgressBar
         screenReaderLabel="Chapters read"
         valueMax={100}
@@ -114,9 +113,9 @@ describe('<ProgressBar />', () => {
     expect(progressMeter).not.toHaveTextContent('33%')
   })
 
-  it('should render the value inside when the prop is set', () => {
+  it('should render the value inside when the prop is set', async () => {
     const valueNow = 33
-    const { container } = render(
+    const { container } = await render(
       <ProgressBar
         screenReaderLabel="Chapters read"
         valueMax={100}

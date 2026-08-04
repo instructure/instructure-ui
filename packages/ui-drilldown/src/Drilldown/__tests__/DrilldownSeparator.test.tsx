@@ -22,28 +22,29 @@
  * SOFTWARE.
  */
 
-import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect } from 'vitest'
 
 import { Drilldown } from '@instructure/ui-drilldown/latest'
 
 describe('<Drilldown.Separator />', () => {
   it('should render', async () => {
-    render(
+    await render(
       <Drilldown rootPageId="page0">
         <Drilldown.Page id="page0">
           <Drilldown.Separator id="sep1" data-testid="separator1" />
         </Drilldown.Page>
       </Drilldown>
     )
-    const separator = screen.getByTestId('separator1')
+    const separator = page.getByTestId('separator1').element()
 
     expect(separator).toBeVisible()
     expect(separator.getAttribute('class')).toContain('-separator')
   })
 
   it('should not render children', async () => {
-    render(
+    await render(
       <Drilldown rootPageId="page0">
         <Drilldown.Page id="page0">
           <Drilldown.Separator id="sep1" data-testid="separator1">
@@ -52,7 +53,7 @@ describe('<Drilldown.Separator />', () => {
         </Drilldown.Page>
       </Drilldown>
     )
-    const separatorChild = screen.queryByText('Children')
+    const separatorChild = page.getByText('Children').query()
 
     expect(separatorChild).not.toBeInTheDocument()
   })

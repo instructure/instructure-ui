@@ -22,15 +22,15 @@
  * SOFTWARE.
  */
 
-import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom'
-import { vi } from 'vitest'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect, vi } from 'vitest'
 
 import { Metric } from '@instructure/ui-metric/latest'
 
 describe('<Metric />', () => {
   it('should render the label', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Metric renderLabel="Grade" renderValue="80%" />
     )
 
@@ -38,7 +38,7 @@ describe('<Metric />', () => {
   })
 
   it('should render the value', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Metric renderLabel="Grade" renderValue="80%" />
     )
 
@@ -46,7 +46,7 @@ describe('<Metric />', () => {
   })
 
   it('passes props through to Metric element', async () => {
-    render(
+    await render(
       <Metric
         data-testid="metric"
         data-automation="foo"
@@ -54,41 +54,43 @@ describe('<Metric />', () => {
         renderValue="80%"
       />
     )
-    const metric = screen.getByTestId('metric')
+    const metric = page.getByTestId('metric').element()
 
     expect(metric).toHaveAttribute('data-automation', 'foo')
   })
 
   it('should not have role="gridcell" for the value', async () => {
-    render(<Metric renderLabel="Grade" renderValue="80%" />)
-    const value = screen.getByText('80%')
+    await render(<Metric renderLabel="Grade" renderValue="80%" />)
+    const value = page.getByText('80%').element()
 
     expect(value).not.toHaveAttribute('role', 'gridcell')
   })
 
   it('should not have role=rowheader for the label', async () => {
-    render(<Metric renderLabel="Grade" renderValue="80%" />)
-    const label = screen.getByText('Grade')
+    await render(<Metric renderLabel="Grade" renderValue="80%" />)
+    const label = page.getByText('Grade').element()
 
     expect(label).not.toHaveAttribute('role', 'rowheader')
   })
 
   it('should allow ReactNodes as labels and values', async () => {
-    const { container } = render(<Metric renderLabel={<div>hello</div>} />)
+    const { container } = await render(
+      <Metric renderLabel={<div>hello</div>} />
+    )
 
     expect(container).toHaveTextContent('hello')
   })
 
   it('should allow methods as labels', async () => {
     const renderLabel = vi.fn()
-    render(<Metric renderLabel={renderLabel} />)
+    await render(<Metric renderLabel={renderLabel} />)
 
     expect(renderLabel).toHaveBeenCalled()
   })
 
   it('should allow methods as values', async () => {
     const renderValue = vi.fn()
-    render(<Metric renderValue={renderValue} />)
+    await render(<Metric renderValue={renderValue} />)
 
     expect(renderValue).toHaveBeenCalled()
   })

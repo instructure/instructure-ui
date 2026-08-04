@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor, fireEvent } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
-import { vi } from 'vitest'
-import '@testing-library/jest-dom'
+import { fireEvent } from '@testing-library/dom'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { TextInput } from '@instructure/ui-text-input/latest'
@@ -43,14 +43,14 @@ describe('<TextInput/>', () => {
   })
 
   it('should include a label', async () => {
-    const { container } = render(<TextInput renderLabel="Name" />)
+    const { container } = await render(<TextInput renderLabel="Name" />)
     const label = container.querySelector('label')
     expect(label).toHaveTextContent('Name')
   })
 
   it('should focus the input when focus is called', async () => {
     let ref: TextInput | undefined
-    render(
+    await render(
       <TextInput
         renderLabel="Name"
         //@ts-expect-error TODO this is coming from ReactComponentWrapper
@@ -59,7 +59,7 @@ describe('<TextInput/>', () => {
         }}
       />
     )
-    const input = screen.getByRole('textbox')
+    const input = page.getByRole('textbox').element()
 
     ref?.focus()
 
@@ -68,15 +68,15 @@ describe('<TextInput/>', () => {
 
   it('should provide an inputRef prop', async () => {
     const inputRef = vi.fn()
-    render(<TextInput renderLabel="Name" inputRef={inputRef} />)
-    const input = screen.getByRole('textbox')
+    await render(<TextInput renderLabel="Name" inputRef={inputRef} />)
+    const input = page.getByRole('textbox').element()
 
     expect(inputRef).toHaveBeenCalledWith(input)
   })
 
   it('should provide a value getter', async () => {
     let ref: TextInput | undefined
-    render(
+    await render(
       <TextInput
         renderLabel="Name"
         defaultValue="bar"
@@ -90,8 +90,8 @@ describe('<TextInput/>', () => {
   })
 
   it('should let aria-describedby through', async () => {
-    render(<TextInput renderLabel="Name" aria-describedby="abcd" />)
-    const input = screen.getByRole('textbox')
+    await render(<TextInput renderLabel="Name" aria-describedby="abcd" />)
+    const input = page.getByRole('textbox').element()
 
     expect(input).toHaveAttribute('aria-describedby', 'abcd')
   })
@@ -99,35 +99,35 @@ describe('<TextInput/>', () => {
   describe('events', () => {
     it('responds to onChange event', async () => {
       const onChange = vi.fn()
-      render(<TextInput renderLabel="Name" onChange={onChange} />)
-      const input = screen.getByRole('textbox')
+      await render(<TextInput renderLabel="Name" onChange={onChange} />)
+      const input = page.getByRole('textbox').element()
       fireEvent.change(input, { target: { value: 'foo' } })
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onChange).toHaveBeenCalledTimes(1)
       })
     })
 
     it('responds to onBlur event', async () => {
       const onBlur = vi.fn()
-      render(<TextInput renderLabel="Name" onBlur={onBlur} />)
+      await render(<TextInput renderLabel="Name" onBlur={onBlur} />)
 
       await userEvent.tab()
       await userEvent.tab()
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onBlur).toHaveBeenCalled()
       })
     })
 
     it('responds to onFocus event', async () => {
       const onFocus = vi.fn()
-      render(<TextInput renderLabel="Name" onFocus={onFocus} />)
-      const input = screen.getByRole('textbox')
+      await render(<TextInput renderLabel="Name" onFocus={onFocus} />)
+      const input = page.getByRole('textbox').element()
 
       input.focus()
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onFocus).toHaveBeenCalled()
       })
     })
@@ -135,29 +135,29 @@ describe('<TextInput/>', () => {
 
   describe('interaction', () => {
     it('should set the disabled attribute when `interaction` is disabled', async () => {
-      render(<TextInput renderLabel="Name" interaction="disabled" />)
-      const input = screen.getByRole('textbox')
+      await render(<TextInput renderLabel="Name" interaction="disabled" />)
+      const input = page.getByRole('textbox').element()
 
       expect(input).toHaveAttribute('disabled')
     })
 
     it('should set the disabled attribute when `disabled` is set', async () => {
-      render(<TextInput renderLabel="Name" disabled />)
-      const input = screen.getByRole('textbox')
+      await render(<TextInput renderLabel="Name" disabled />)
+      const input = page.getByRole('textbox').element()
 
       expect(input).toHaveAttribute('disabled')
     })
 
     it('should set the readonly attribute when `interaction` is readonly', async () => {
-      render(<TextInput renderLabel="Name" interaction="readonly" />)
-      const input = screen.getByRole('textbox')
+      await render(<TextInput renderLabel="Name" interaction="readonly" />)
+      const input = page.getByRole('textbox').element()
 
       expect(input).toHaveAttribute('readonly')
     })
 
     it('should set the readonly attribute when `readOnly` is set', async () => {
-      render(<TextInput renderLabel="Name" readOnly />)
-      const input = screen.getByRole('textbox')
+      await render(<TextInput renderLabel="Name" readOnly />)
+      const input = page.getByRole('textbox').element()
 
       expect(input).toHaveAttribute('readonly')
     })
@@ -165,32 +165,32 @@ describe('<TextInput/>', () => {
 
   describe('for a11y', () => {
     it('should meet standards', async () => {
-      const { container } = render(<TextInput renderLabel="Name" />)
+      const { container } = await render(<TextInput renderLabel="Name" />)
       const axeCheck = await runAxeCheck(container)
 
       expect(axeCheck).toBe(true)
     })
 
     it('should set aria-invalid when errors prop is set', async () => {
-      render(
+      await render(
         <TextInput
           renderLabel="Name"
           messages={[{ type: 'error', text: 'some error message' }]}
         />
       )
-      const input = screen.getByRole('textbox')
+      const input = page.getByRole('textbox').element()
 
       expect(input).toHaveAttribute('aria-invalid')
     })
 
     it('associates messages with the input as its description, not its accessible name', async () => {
-      render(
+      await render(
         <TextInput
           renderLabel="Name"
           messages={[{ type: 'error', text: 'some error message' }]}
         />
       )
-      const input = screen.getByRole('textbox')
+      const input = page.getByRole('textbox').element()
 
       // messages are referenced as the input's description
       const describedById = input.getAttribute('aria-describedby')
@@ -208,8 +208,8 @@ describe('<TextInput/>', () => {
     })
 
     it('does not override the accessible name with aria-labelledby when there are no messages', async () => {
-      render(<TextInput renderLabel="Name" />)
-      const input = screen.getByRole('textbox')
+      await render(<TextInput renderLabel="Name" />)
+      const input = page.getByRole('textbox').element()
 
       expect(input).not.toHaveAttribute('aria-labelledby')
     })

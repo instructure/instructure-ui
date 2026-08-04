@@ -22,15 +22,15 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
-import { vi } from 'vitest'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect, vi } from 'vitest'
 
 import { DrawerTray } from '@instructure/ui-drawer-layout/latest'
 
 describe('<DrawerTray />', () => {
   it('should render tray content when open', async () => {
-    render(
+    await render(
       <DrawerTray
         label="DrawerTray Example"
         open={true}
@@ -39,7 +39,7 @@ describe('<DrawerTray />', () => {
         }}
       />
     )
-    const drawerTray = screen.getByLabelText('DrawerTray Example')
+    const drawerTray = page.getByLabelText('DrawerTray Example').element()
 
     expect(drawerTray).toBeInTheDocument()
     expect(drawerTray).toHaveTextContent('Hello from layout tray')
@@ -47,7 +47,7 @@ describe('<DrawerTray />', () => {
 
   it('should call the contentRef', async () => {
     const contentRef = vi.fn()
-    render(
+    await render(
       <DrawerTray
         label="DrawerTray Example"
         open={true}
@@ -57,7 +57,7 @@ describe('<DrawerTray />', () => {
         }}
       />
     )
-    const drawerTray = screen.getByLabelText('DrawerTray Example')
+    const drawerTray = page.getByLabelText('DrawerTray Example').element()
 
     expect(contentRef).toHaveBeenCalledWith(drawerTray.parentElement)
   })
@@ -65,7 +65,7 @@ describe('<DrawerTray />', () => {
   it('should call onOpen', async () => {
     const onOpen = vi.fn()
 
-    const { rerender } = render(
+    const { rerender } = await render(
       <DrawerTray
         label="DrawerTray Example"
         open={false}
@@ -79,7 +79,7 @@ describe('<DrawerTray />', () => {
     expect(onOpen).not.toHaveBeenCalled()
 
     // set prop open
-    rerender(
+    await rerender(
       <DrawerTray
         label="DrawerTray Example"
         open={true}
@@ -90,14 +90,14 @@ describe('<DrawerTray />', () => {
       />
     )
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onOpen).toHaveBeenCalled()
     })
   })
 
   it('should call onOpen when open initially', async () => {
     const onOpen = vi.fn()
-    render(
+    await render(
       <DrawerTray
         label="DrawerTray Example"
         open={true}
@@ -108,7 +108,7 @@ describe('<DrawerTray />', () => {
       />
     )
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onOpen).toHaveBeenCalled()
     })
   })
@@ -116,7 +116,7 @@ describe('<DrawerTray />', () => {
   it('should call onClose', async () => {
     const onClose = vi.fn()
 
-    const { rerender } = render(
+    const { rerender } = await render(
       <DrawerTray
         label="DrawerTray Example"
         open={true}
@@ -130,7 +130,7 @@ describe('<DrawerTray />', () => {
     expect(onClose).not.toHaveBeenCalled()
 
     // set prop open
-    rerender(
+    await rerender(
       <DrawerTray
         label="DrawerTray Example"
         open={false}
@@ -141,7 +141,7 @@ describe('<DrawerTray />', () => {
       />
     )
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onClose).toHaveBeenCalled()
     })
   })

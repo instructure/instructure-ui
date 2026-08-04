@@ -22,14 +22,13 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
 import { runAxeCheck } from '@instructure/ui-axe-check'
-import userEvent from '@testing-library/user-event'
-import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
 
 import { ToggleGroup } from '@instructure/ui-toggle-details/latest'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 describe('<ToggleGroup />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
@@ -51,7 +50,7 @@ describe('<ToggleGroup />', () => {
   })
 
   it('should show its summary and hide its children by default', async () => {
-    render(
+    await render(
       <ToggleGroup
         data-testId="toggle-group"
         transition={false}
@@ -61,14 +60,14 @@ describe('<ToggleGroup />', () => {
         This is the details section
       </ToggleGroup>
     )
-    const toggleGroup = screen.getByTestId('toggle-group')
+    const toggleGroup = page.getByTestId('toggle-group').element()
 
     expect(toggleGroup).toHaveTextContent('This is the summary section')
     expect(toggleGroup).not.toHaveTextContent('This is the details section')
   })
 
   it('should render with children showing with the defaultExpanded prop', async () => {
-    const { container } = render(
+    const { container } = await render(
       <ToggleGroup
         data-testId="toggle-group"
         transition={false}
@@ -79,7 +78,7 @@ describe('<ToggleGroup />', () => {
         This is the details section
       </ToggleGroup>
     )
-    const toggleGroup = screen.getByTestId('toggle-group')
+    const toggleGroup = page.getByTestId('toggle-group').element()
     const toggle = container.querySelector('button')
 
     expect(toggle).toHaveAttribute('aria-expanded', 'true')
@@ -87,7 +86,7 @@ describe('<ToggleGroup />', () => {
   })
 
   it('should have an aria-controls attribute', async () => {
-    const { container } = render(
+    const { container } = await render(
       <ToggleGroup
         transition={false}
         summary="This is the summary section"
@@ -97,14 +96,14 @@ describe('<ToggleGroup />', () => {
         This is the details section
       </ToggleGroup>
     )
-    const content = screen.getByText('This is the details section')
+    const content = page.getByText('This is the details section').element()
     const toggle = container.querySelector('button')
 
     expect(toggle).toHaveAttribute('aria-controls', content.id)
   })
 
   it('should have an aria-expanded attribute', async () => {
-    const { container } = render(
+    const { container } = await render(
       <ToggleGroup
         transition={false}
         summary="This is the summary section"
@@ -119,7 +118,7 @@ describe('<ToggleGroup />', () => {
   })
 
   it('should toggle on click events', async () => {
-    const { container } = render(
+    const { container } = await render(
       <ToggleGroup
         transition={false}
         summary="This is the summary section"
@@ -134,7 +133,7 @@ describe('<ToggleGroup />', () => {
 
     await userEvent.click(toggle)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(toggle).toHaveAttribute('aria-expanded', 'true')
     })
   })
@@ -142,7 +141,7 @@ describe('<ToggleGroup />', () => {
   it('should call onToggle on click events', async () => {
     const onToggle = vi.fn()
 
-    const { container } = render(
+    const { container } = await render(
       <ToggleGroup
         transition={false}
         summary="This is the summary section"
@@ -157,7 +156,7 @@ describe('<ToggleGroup />', () => {
 
     await userEvent.click(toggle)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       const args = onToggle.mock.calls[0]
 
       expect(onToggle).toHaveBeenCalledTimes(1)
@@ -167,7 +166,7 @@ describe('<ToggleGroup />', () => {
   })
 
   it('should update the toggle screenreader label based on the expanded state', async () => {
-    const { container } = render(
+    const { container } = await render(
       <ToggleGroup
         transition={false}
         summary="This is the summary section"
@@ -185,7 +184,7 @@ describe('<ToggleGroup />', () => {
 
     await userEvent.click(toggle)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(scrContent).toHaveTextContent('Hide content')
     })
   })
@@ -205,7 +204,7 @@ describe('<ToggleGroup />', () => {
       </svg>
     )
 
-    const { container } = render(
+    const { container } = await render(
       <ToggleGroup
         transition={false}
         summary="This is the summary section"
@@ -223,14 +222,14 @@ describe('<ToggleGroup />', () => {
 
     await userEvent.click(toggle)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       svg = container.querySelector('svg')!
       expect(svg).toHaveTextContent('Icon expanded')
     })
   })
 
   it('should meet a11y standards', async () => {
-    const { container } = render(
+    const { container } = await render(
       <ToggleGroup
         transition={false}
         summary="This is the summary section"
@@ -246,7 +245,7 @@ describe('<ToggleGroup />', () => {
 
   it('focuses with the focus helper', async () => {
     let toggleRef: any
-    const { container } = render(
+    const { container } = await render(
       <ToggleGroup
         data-testId="toggle-group"
         transition={false}

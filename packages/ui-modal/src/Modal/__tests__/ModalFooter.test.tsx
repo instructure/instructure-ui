@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { render } from '@testing-library/react'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { describe, it, expect } from 'vitest'
 
 import canvas from '@instructure/ui-themes'
 import { color2hex } from '@instructure/ui-color-utils'
@@ -34,7 +34,9 @@ const FOOTER_TEXT = 'Modal-footer-text'
 
 describe('<ModalFooter />', () => {
   it('should render', async () => {
-    const { findByText } = render(<ModalFooter>{FOOTER_TEXT}</ModalFooter>)
+    const { findByText } = await render(
+      <ModalFooter>{FOOTER_TEXT}</ModalFooter>
+    )
     const modalFooter = await findByText(FOOTER_TEXT)
 
     expect(modalFooter).toBeInTheDocument()
@@ -44,7 +46,7 @@ describe('<ModalFooter />', () => {
     const themeVariables = canvas.newTheme.components.ModalFooter(
       canvas.newTheme.semantics(canvas.newTheme.primitives)
     )
-    const { findByText } = render(
+    const { findByText } = await render(
       <ModalFooter variant="inverse">{FOOTER_TEXT}</ModalFooter>
     )
     const modalFooter = await findByText(FOOTER_TEXT)

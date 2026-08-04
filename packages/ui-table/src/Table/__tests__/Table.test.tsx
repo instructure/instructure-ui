@@ -23,16 +23,23 @@
  */
 
 import { Component } from 'react'
-import { render, screen, waitFor } from '@testing-library/react'
-import { MockInstance, vi } from 'vitest'
-import { userEvent } from '@testing-library/user-event'
 import { Table } from '@instructure/ui-table/latest'
 import type {
   TableProps,
   TableColHeaderProps
 } from '@instructure/ui-table/latest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import {
+  describe,
+  it,
+  expect,
+  beforeEach,
+  afterEach,
+  vi,
+  MockInstance
+} from 'vitest'
 
 describe('<Table />', async () => {
   let consoleErrorMock: MockInstance<typeof console.error>
@@ -47,7 +54,7 @@ describe('<Table />', async () => {
   })
 
   const renderTable = (props?: TableProps) =>
-    render(
+    await render(
       <Table caption={() => 'Test table'} {...props}>
         <Table.Head>
           <Table.Row>
@@ -84,7 +91,7 @@ describe('<Table />', async () => {
       layout: 'fixed',
       caption: () => 'Test table'
     })
-    const table = screen.getByRole('table')
+    const table = page.getByRole('table').element()
 
     expect(table).toHaveStyle({ tableLayout: 'fixed' })
   })
@@ -94,7 +101,7 @@ describe('<Table />', async () => {
       hover: true,
       caption: () => 'Test table'
     })
-    const tableRows = screen.getAllByRole('row')
+    const tableRows = page.getByRole('row').elements()
 
     tableRows.forEach((tableRow) => {
       expect(tableRow).not.toHaveAttribute('border-left', 'none')
@@ -104,7 +111,7 @@ describe('<Table />', async () => {
 
   it('sets the scope of column header to col', async () => {
     await renderTable()
-    const columnHeaders = screen.getAllByRole('columnheader')
+    const columnHeaders = page.getByRole('columnheader').elements()
 
     columnHeaders.forEach((columnHeader) => {
       expect(columnHeader).toHaveAttribute('scope', 'col')
@@ -113,7 +120,7 @@ describe('<Table />', async () => {
 
   it('sets the scope of row header to row', async () => {
     renderTable()
-    const rowHeaders = screen.getAllByRole('rowheader')
+    const rowHeaders = page.getByRole('rowheader').elements()
 
     rowHeaders.forEach((rowHeader) => {
       expect(rowHeader).toHaveAttribute('scope', 'row')
@@ -125,7 +132,7 @@ describe('<Table />', async () => {
       layout: 'stacked',
       caption: () => 'Test table'
     })
-    const stackedTable = screen.getByRole('table')
+    const stackedTable = page.getByRole('table').element()
 
     expect(stackedTable).toBeInTheDocument()
     expect(stackedTable).toHaveTextContent('RowHeader')
@@ -134,29 +141,29 @@ describe('<Table />', async () => {
   })
 
   it('can handle non-existent head in stacked layout', async () => {
-    render(
+    await render(
       <Table caption={() => 'Test table'} layout="stacked">
         <Table.Body></Table.Body>
       </Table>
     )
-    const stackedTable = screen.getByRole('table')
+    const stackedTable = page.getByRole('table').element()
 
     expect(stackedTable).toBeInTheDocument()
   })
 
   it('can handle empty head in stacked layout', async () => {
-    render(
+    await render(
       <Table caption={() => 'Test table'} layout="stacked">
         <Table.Head></Table.Head>
       </Table>
     )
-    const stackedTable = screen.getByRole('table')
+    const stackedTable = page.getByRole('table').element()
 
     expect(stackedTable).toBeInTheDocument()
   })
 
   it('can handle invalid header in stacked layout', async () => {
-    render(
+    await render(
       <Table caption={() => 'Test table'} layout="stacked">
         <Table.Head>
           <Table.Row>
@@ -181,14 +188,14 @@ describe('<Table />', async () => {
         </Table.Body>
       </Table>
     )
-    const stackedTable = screen.getByRole('table')
+    const stackedTable = page.getByRole('table').element()
 
     expect(stackedTable).toBeInTheDocument()
     expect(stackedTable).not.toHaveTextContent('Foo')
   })
 
   it('does not crash for invalid children in stacked layout', async () => {
-    render(
+    await render(
       <Table caption={() => 'Test table'} layout="stacked">
         test1
         <span>test</span>
@@ -220,7 +227,7 @@ describe('<Table />', async () => {
         </Table.Body>
       </Table>
     )
-    const table = screen.getByRole('table')
+    const table = page.getByRole('table').element()
 
     expect(table).toBeInTheDocument()
     expect(table).toHaveTextContent('Foo')
@@ -232,7 +239,7 @@ describe('<Table />', async () => {
       handlers = {},
       layout: TableProps['layout'] = 'auto'
     ) =>
-      render(
+      await render(
         <Table caption={() => 'Sortable table'} layout={layout}>
           <Table.Head>
             <Table.Row>
@@ -281,11 +288,11 @@ describe('<Table />', async () => {
           onRequestSort
         }
       )
-      const button = screen.getByRole('button', { name: 'Foo' })
+      const button = page.getByRole('button', { name: 'Foo' }).element()
 
       await userEvent.click(button)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onRequestSort).toHaveBeenCalledTimes(1)
       })
     })
@@ -301,12 +308,12 @@ describe('<Table />', async () => {
         },
         'stacked'
       )
-      const input = screen.getByRole('combobox')
+      const input = page.getByRole('combobox').element()
 
       await userEvent.click(input)
 
-      await waitFor(async () => {
-        const options = screen.getAllByRole('option')
+      await vi.waitFor(async () => {
+        const options = page.getByRole('option').elements()
 
         expect(options[0]).toHaveTextContent('Custom Text')
         expect(options[1]).toHaveTextContent('bar')
@@ -334,7 +341,7 @@ describe('<Table />', async () => {
         id: 'id',
         sortDirection: 'ascending'
       })
-      const header = screen.getByRole('columnheader', { name: 'Foo' })
+      const header = page.getByRole('columnheader', { name: 'Foo' }).element()
 
       expect(header).toHaveAttribute('aria-sort', 'ascending')
     })
@@ -344,7 +351,7 @@ describe('<Table />', async () => {
         id: 'id',
         sortDirection: 'descending'
       })
-      const header = screen.getByRole('columnheader', { name: 'Foo' })
+      const header = page.getByRole('columnheader', { name: 'Foo' }).element()
 
       expect(header).toHaveAttribute('aria-sort', 'descending')
     })
@@ -353,7 +360,7 @@ describe('<Table />', async () => {
       const caption = vi.fn((header: string, direction: string) =>
         header ? `Movies, sorted by ${header} ${direction}` : 'Movies'
       )
-      const { container } = render(
+      const { container } = await render(
         <Table caption={caption}>
           <Table.Head>
             <Table.Row>
@@ -384,7 +391,7 @@ describe('<Table />', async () => {
   })
 
   describe('when using custom components', () => {
-    it('should render wrapper HOCs', () => {
+    it('should render wrapper HOCs', async () => {
       class CustomTableCell extends Component<any> {
         render() {
           return <Table.Cell {...this.props}>{this.props.children}</Table.Cell>
@@ -401,7 +408,7 @@ describe('<Table />', async () => {
           )
         }
       }
-      const table = render(
+      const table = await render(
         <Table caption={() => 'Test custom table'}>
           <Table.Head>
             <Table.Row>
@@ -420,7 +427,7 @@ describe('<Table />', async () => {
           </Table.Body>
         </Table>
       )
-      const stackedTable = screen.getByRole('table')
+      const stackedTable = page.getByRole('table').element()
 
       expect(stackedTable).toBeInTheDocument()
       const { container } = table
@@ -429,7 +436,7 @@ describe('<Table />', async () => {
       expect(container).toHaveTextContent('9.3')
     })
 
-    it('should render fully custom components', () => {
+    it('should render fully custom components', async () => {
       class CustomTableCell extends Component<any> {
         render() {
           return <td>{this.props.children}</td>
@@ -442,7 +449,7 @@ describe('<Table />', async () => {
         }
       }
 
-      const table = render(
+      const table = await render(
         <Table caption={() => 'Test custom table'}>
           <Table.Head>
             <CustomTableRow>
@@ -460,7 +467,7 @@ describe('<Table />', async () => {
           </Table.Body>
         </Table>
       )
-      const stackedTable = screen.getByRole('table')
+      const stackedTable = page.getByRole('table').element()
 
       expect(stackedTable).toBeInTheDocument()
       const { container } = table

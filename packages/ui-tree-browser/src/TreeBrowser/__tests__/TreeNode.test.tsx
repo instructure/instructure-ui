@@ -22,34 +22,33 @@
  * SOFTWARE.
  */
 
-import { render, screen } from '@testing-library/react'
-import { vi } from 'vitest'
-
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect, vi } from 'vitest'
 import { TreeNode } from '@instructure/ui-tree-browser/latest'
 
 describe('<TreeNode />', () => {
   it('should render children', async () => {
-    render(
+    await render(
       <TreeNode>
         <button>Hello World</button>
       </TreeNode>
     )
-    const item = screen.getByText('Hello World')
+    const item = page.getByText('Hello World').element()
 
     expect(item).toBeInTheDocument()
   })
 
   it('supports containerRef prop', async () => {
     const containerRef = vi.fn()
-    render(
+    await render(
       <div data-testid="1">
         <TreeNode containerRef={containerRef}>
           <button>Hello World</button>
         </TreeNode>
       </div>
     )
-    const div = screen.getByTestId('1')
+    const div = page.getByTestId('1').element()
 
     expect(containerRef).toHaveBeenCalledWith(div)
   })

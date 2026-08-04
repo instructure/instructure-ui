@@ -22,9 +22,8 @@
  * SOFTWARE.
  */
 
-import { render, waitFor } from '@testing-library/react'
-import { vi } from 'vitest'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { describe, it, expect, vi } from 'vitest'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { TruncateList } from '../index.js'
@@ -33,7 +32,7 @@ describe('<TruncateList />', () => {
   it('should return ref with elementRef prop', async () => {
     const elementRef = vi.fn()
 
-    const { container } = render(
+    const { container } = await render(
       <TruncateList elementRef={elementRef}>
         <div>Item 1</div>
         <div>Item 2</div>
@@ -42,13 +41,13 @@ describe('<TruncateList />', () => {
     )
     const list = container.querySelector('ul[class$="-truncateList"]')
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(elementRef).toHaveBeenCalledWith(list)
     })
   })
 
   it('should render <ul> and <li> items', async () => {
-    const { container } = render(
+    const { container } = await render(
       <TruncateList>
         <div>Item 1</div>
         <div>Item 2</div>
@@ -70,7 +69,7 @@ describe('<TruncateList />', () => {
   })
 
   it('should render only `visibleItemsCount` items', async () => {
-    const { container } = render(
+    const { container } = await render(
       <TruncateList visibleItemsCount={2}>
         <div>Item 1</div>
         <div>Item 2</div>
@@ -88,7 +87,7 @@ describe('<TruncateList />', () => {
 
   describe('renderHiddenItemMenu', () => {
     it('should render element', async () => {
-      const { container } = render(
+      const { container } = await render(
         <TruncateList
           visibleItemsCount={2}
           renderHiddenItemMenu={() => <div id="trigger">trigger label</div>}
@@ -108,7 +107,7 @@ describe('<TruncateList />', () => {
 
   describe('should be accessible', () => {
     it('a11y', async () => {
-      const { container } = render(<TruncateList />)
+      const { container } = await render(<TruncateList />)
       const axeCheck = await runAxeCheck(container)
 
       expect(axeCheck).toBe(true)

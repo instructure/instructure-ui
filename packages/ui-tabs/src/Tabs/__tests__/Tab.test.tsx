@@ -22,99 +22,98 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
-import { vi } from 'vitest'
-import userEvent from '@testing-library/user-event'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import { describe, it, expect, vi } from 'vitest'
 
 import { TabsTab as Tab } from '@instructure/ui-tabs/latest'
 
 describe('<Tabs.Tab />', () => {
   it('should render children', async () => {
-    render(
+    await render(
       <Tab id="foo" index={0} controls="foo-panel">
         Tab Label
       </Tab>
     )
-    const children = screen.getByText('Tab Label')
+    const children = page.getByText('Tab Label').element()
 
     expect(children).toBeInTheDocument()
   })
 
   it('should have appropriate role attribute', async () => {
-    render(
+    await render(
       <Tab id="foo" index={0} controls="foo-panel">
         Tab Label
       </Tab>
     )
-    const tab = screen.getByRole('tab')
+    const tab = page.getByRole('tab').element()
 
     expect(tab).toBeInTheDocument()
   })
 
   it('should have appropriate aria attributes', async () => {
-    render(
+    await render(
       <Tab id="foo" index={0} controls="foo-panel">
         Tab Label
       </Tab>
     )
-    const tab = screen.getByRole('tab')
+    const tab = page.getByRole('tab').element()
 
     expect(tab).not.toHaveAttribute('aria-selected')
     expect(tab).not.toHaveAttribute('aria-disabled')
   })
 
   it('should set the aria-selected attribute', async () => {
-    render(
+    await render(
       <Tab id="foo" index={0} controls="foo-panel" isSelected>
         Tab Label
       </Tab>
     )
-    const tab = screen.getByRole('tab')
+    const tab = page.getByRole('tab').element()
 
     expect(tab).toHaveAttribute('aria-selected', 'true')
   })
 
   it('should set the aria-disabled attribute', async () => {
-    render(
+    await render(
       <Tab id="foo" index={0} controls="foo-panel" isDisabled>
         Tab Label
       </Tab>
     )
-    const tab = screen.getByRole('tab')
+    const tab = page.getByRole('tab').element()
 
     expect(tab).toHaveAttribute('aria-disabled', 'true')
   })
 
   it('should set the tabindex to 0 when selected', async () => {
-    render(
+    await render(
       <Tab id="foo" index={0} controls="foo-panel" isSelected>
         Tab Label
       </Tab>
     )
-    const tab = screen.getByRole('tab')
+    const tab = page.getByRole('tab').element()
 
     expect(tab).toHaveAttribute('tabindex', '0')
   })
 
   it('should not set the tabindex when not selected', async () => {
-    render(
+    await render(
       <Tab id="foo" index={0} controls="foo-panel">
         Tab Label
       </Tab>
     )
-    const tab = screen.getByRole('tab')
+    const tab = page.getByRole('tab').element()
 
     expect(tab).not.toHaveAttribute('tabindex')
   })
 
   it('should remove the tabindex attribute when disabled', async () => {
-    render(
+    await render(
       <Tab id="foo" index={0} controls="foo-panel" isDisabled>
         Tab Label
       </Tab>
     )
-    const tab = screen.getByRole('tab')
+    const tab = page.getByRole('tab').element()
 
     expect(tab).not.toHaveAttribute('tabindex')
   })
@@ -123,16 +122,16 @@ describe('<Tabs.Tab />', () => {
     const onClick = vi.fn()
     const index = 2
 
-    render(
+    await render(
       <Tab id="foo" index={index} controls="foo-panel" onClick={onClick}>
         Tab Label
       </Tab>
     )
-    const tab = screen.getByRole('tab')
+    const tab = page.getByRole('tab').element()
 
     await userEvent.click(tab)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onClick).toHaveBeenCalled()
 
       const args = onClick.mock.calls[0][1]
@@ -143,16 +142,16 @@ describe('<Tabs.Tab />', () => {
   it('should NOT call onClick when clicked and tab is disabled', async () => {
     const onClick = vi.fn()
 
-    render(
+    await render(
       <Tab id="foo" index={0} controls="foo-panel" onClick={onClick} isDisabled>
         Tab Label
       </Tab>
     )
-    const tab = screen.getByRole('tab')
+    const tab = page.getByRole('tab').element()
 
     await userEvent.click(tab)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onClick).not.toHaveBeenCalled()
     })
   })
@@ -161,7 +160,7 @@ describe('<Tabs.Tab />', () => {
     const onKeyDown = vi.fn()
     const index = 2
 
-    render(
+    await render(
       <Tab
         id="foo"
         isSelected
@@ -172,11 +171,11 @@ describe('<Tabs.Tab />', () => {
         Tab Label
       </Tab>
     )
-    const tab = screen.getByRole('tab')
+    const tab = page.getByRole('tab').element()
 
     await userEvent.type(tab, '{enter}')
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onKeyDown).toHaveBeenCalled()
 
       const args = onKeyDown.mock.calls[0][1]
@@ -187,7 +186,7 @@ describe('<Tabs.Tab />', () => {
   it('should NOT call onKeyDown when keys are pressed and tab is disabled', async () => {
     const onKeyDown = vi.fn()
 
-    render(
+    await render(
       <Tab
         id="foo"
         index={0}
@@ -198,11 +197,11 @@ describe('<Tabs.Tab />', () => {
         Tab Label
       </Tab>
     )
-    const tab = screen.getByRole('tab')
+    const tab = page.getByRole('tab').element()
 
     await userEvent.type(tab, '{enter}')
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onKeyDown).not.toHaveBeenCalled()
     })
   })

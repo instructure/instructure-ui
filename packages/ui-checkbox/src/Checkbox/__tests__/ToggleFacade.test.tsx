@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-import { render, screen } from '@testing-library/react'
-import { vi } from 'vitest'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { ToggleFacade } from '@instructure/ui-checkbox/latest'
@@ -50,15 +50,15 @@ describe('<ToggleFacade />', () => {
     consoleErrorMock.mockRestore()
   })
 
-  it('should render', () => {
-    render(<ToggleFacade>{TEST_TEXT}</ToggleFacade>)
-    const facade = screen.getByText(TEST_TEXT)
+  it('should render', async () => {
+    await render(<ToggleFacade>{TEST_TEXT}</ToggleFacade>)
+    const facade = page.getByText(TEST_TEXT).element()
 
     expect(facade).toBeInTheDocument()
   })
 
   it('should meet a11y standards', async () => {
-    const { container } = render(<ToggleFacade>{TEST_TEXT}</ToggleFacade>)
+    const { container } = await render(<ToggleFacade>{TEST_TEXT}</ToggleFacade>)
     const axeCheck = await runAxeCheck(container)
 
     expect(axeCheck).toBe(true)

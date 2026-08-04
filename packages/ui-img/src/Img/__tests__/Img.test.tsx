@@ -22,11 +22,10 @@
  * SOFTWARE.
  */
 
-import { render } from '@testing-library/react'
 import type { MockInstance } from 'vitest'
-import { vi } from 'vitest'
 
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { Img } from '@instructure/ui-img/latest'
 
@@ -53,14 +52,14 @@ describe('<Img />', () => {
 
   describe('for a11y', () => {
     it('should meet a11y standards', async () => {
-      const { container } = render(<Img src={image} />)
+      const { container } = await render(<Img src={image} />)
       const axeCheck = await runAxeCheck(container)
 
       expect(axeCheck).toBe(true)
     })
 
     it('should render an empty alt attribute by default', async () => {
-      const { container } = render(<Img src={image} />)
+      const { container } = await render(<Img src={image} />)
       const img = container.querySelector('img')
 
       expect(img).toHaveAttribute('alt', '')
@@ -68,7 +67,7 @@ describe('<Img />', () => {
 
     it('should render the provided alt attribute', async () => {
       const altValue = 'Foo'
-      const { container } = render(<Img src={image} alt={altValue} />)
+      const { container } = await render(<Img src={image} alt={altValue} />)
       const img = container.querySelector('img')
 
       expect(img).toHaveAttribute('alt', altValue)
@@ -76,7 +75,7 @@ describe('<Img />', () => {
   })
 
   it('should render an overlay color', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Img src={image} overlay={{ color: '#ff0000', opacity: 7 }} />
     )
     const overlay = container.querySelector('[class*="-img__overlay"]')
@@ -85,7 +84,7 @@ describe('<Img />', () => {
   })
 
   it('should render a blur filter', async () => {
-    const { container } = render(<Img src={image} withBlur={true} />)
+    const { container } = await render(<Img src={image} withBlur={true} />)
 
     const img = container.querySelector('img')!
     const style = getComputedStyle(img)
@@ -94,7 +93,7 @@ describe('<Img />', () => {
   })
 
   it('should render a grayscale filter', async () => {
-    const { container } = render(<Img src={image} withGrayscale={true} />)
+    const { container } = await render(<Img src={image} withGrayscale={true} />)
 
     const img = container.querySelector('img')!
     const style = getComputedStyle(img)
@@ -104,7 +103,7 @@ describe('<Img />', () => {
 
   // // If component renders as simple image
   it('should display block-level when display="block"', async () => {
-    const { container } = render(<Img src={image} display="block" />)
+    const { container } = await render(<Img src={image} display="block" />)
     const img = container.querySelector('img')!
     const style = getComputedStyle(img)
 
@@ -113,7 +112,7 @@ describe('<Img />', () => {
 
   // // If component has an overlay and renders as image inside containing element
   it('should display block-level with overlay when display="block"', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Img
         src={image}
         display="block"
@@ -130,7 +129,7 @@ describe('<Img />', () => {
   })
 
   it('should apply CSS object-fit: cover when constrain="cover"', async () => {
-    const { container } = render(
+    const { container } = await render(
       <div style={{ width: 16, height: 16 }}>
         <Img src={image} constrain="cover" />
       </div>
@@ -142,7 +141,7 @@ describe('<Img />', () => {
   })
 
   it('should apply CSS object-fit: contain when constrain="contain"', async () => {
-    const { container } = render(
+    const { container } = await render(
       <div style={{ width: 16, height: 16 }}>
         <Img src={image} constrain="contain" />
       </div>

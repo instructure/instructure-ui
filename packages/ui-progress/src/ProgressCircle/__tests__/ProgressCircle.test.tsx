@@ -22,15 +22,14 @@
  * SOFTWARE.
  */
 
-import { render } from '@testing-library/react'
-
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { describe, it, expect } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { ProgressCircle } from '@instructure/ui-progress/latest'
 
 describe('<ProgressCircle />', () => {
   it('should render', async () => {
-    const { container } = render(
+    const { container } = await render(
       <ProgressCircle
         screenReaderLabel="Chapters read"
         valueMax={60}
@@ -43,7 +42,7 @@ describe('<ProgressCircle />', () => {
   })
 
   it('should render a progress element with correct aria attributes', async () => {
-    const { container } = render(
+    const { container } = await render(
       <ProgressCircle
         screenReaderLabel="Chapters read"
         valueMax={60}
@@ -58,7 +57,7 @@ describe('<ProgressCircle />', () => {
   it('should format the displayed text', async () => {
     const current = 30
     const max = 60
-    const { container } = render(
+    const { container } = await render(
       <ProgressCircle
         screenReaderLabel="Chapters read"
         valueMax={max}
@@ -72,7 +71,7 @@ describe('<ProgressCircle />', () => {
   })
 
   it('should meet a11y standards', async () => {
-    const { container } = render(
+    const { container } = await render(
       <ProgressCircle
         screenReaderLabel="Chapters read"
         valueMax={60}

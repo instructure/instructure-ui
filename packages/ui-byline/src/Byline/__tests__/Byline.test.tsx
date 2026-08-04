@@ -23,13 +23,22 @@
  */
 
 import { ComponentType } from 'react'
-import { render, screen } from '@testing-library/react'
-import { vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { Byline } from '@instructure/ui-byline/latest'
 import type { BylineProps } from '@instructure/ui-byline/latest'
 import { View } from '@instructure/ui-view/latest'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import {
+  describe,
+  it,
+  expect,
+  beforeAll,
+  afterAll,
+  beforeEach,
+  afterEach,
+  vi
+} from 'vitest'
 
 const TEST_TITLE = 'Test-title'
 const TEST_DESCRIPTION = 'Test-description'
@@ -109,8 +118,8 @@ describe('<Byline />', () => {
       </div>
     )
     renderByline({ description: descriptionElement })
-    const clickableHeading = screen.getByText(TEST_HEADING)
-    const descriptionText = screen.getByText(TEST_PARAGRAPH)
+    const clickableHeading = page.getByText(TEST_HEADING).element()
+    const descriptionText = page.getByText(TEST_PARAGRAPH).element()
 
     expect(clickableHeading.tagName).toBe('A')
     expect(clickableHeading).toHaveAttribute('href', TEST_LINK)

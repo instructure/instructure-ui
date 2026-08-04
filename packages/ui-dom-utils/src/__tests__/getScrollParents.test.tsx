@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { render } from '@testing-library/react'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { describe, it, expect } from 'vitest'
 import { getOffsetParents } from '../getOffsetParents.js'
 
 describe('getOffsetParents', () => {
@@ -57,8 +57,8 @@ describe('getOffsetParents', () => {
     </div>
   )
 
-  it('should find offset parent for inline elements', () => {
-    const { getByTestId } = render(node)
+  it('should find offset parent for inline elements', async () => {
+    const { getByTestId } = await render(node)
     const child = getByTestId('child-1')
     const parent = getByTestId('child_1_wrapper_parent')
     const offsetParents = getOffsetParents(child)
@@ -66,16 +66,16 @@ describe('getOffsetParents', () => {
     expect(offsetParents[0]).toBe(parent)
   })
 
-  it('should ignore static parents when absolute', () => {
-    const { getByTestId } = render(node)
+  it('should ignore static parents when absolute', async () => {
+    const { getByTestId } = await render(node)
     const child = getByTestId('child-2')
     const offsetParents = getOffsetParents(child)
 
     expect(offsetParents.length).toBe(3)
   })
 
-  it('should handle fixed', () => {
-    const { getByTestId } = render(node)
+  it('should handle fixed', async () => {
+    const { getByTestId } = await render(node)
     const child = getByTestId('child-3')
     const offsetParents = getOffsetParents(child)
 

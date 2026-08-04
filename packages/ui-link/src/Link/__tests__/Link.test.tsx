@@ -24,10 +24,10 @@
 
 /** jsxImportSource @emotion/react */
 import { Component, PropsWithChildren } from 'react'
-import { userEvent } from '@testing-library/user-event'
-import { fireEvent, render, screen, waitFor } from '@testing-library/react'
-import '@testing-library/jest-dom'
-import { expect, vi } from 'vitest'
+import { fireEvent } from '@testing-library/dom'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { Link } from '@instructure/ui-link/latest'
@@ -51,22 +51,22 @@ describe('<Link />', () => {
   })
 
   it('should render the children as text content', async () => {
-    render(<Link href="https://instructure.design">Hello World</Link>)
-    const link = screen.getByRole('link')
+    await render(<Link href="https://instructure.design">Hello World</Link>)
+    const link = page.getByRole('link').element()
 
     expect(link).toHaveTextContent('Hello World')
   })
 
   it('should render a button', async () => {
     const onClick = vi.fn()
-    render(<Link onClick={onClick}>Hello World</Link>)
-    const button = screen.getByRole('button')
+    await render(<Link onClick={onClick}>Hello World</Link>)
+    const button = page.getByRole('button').element()
 
     expect(button).toHaveAttribute('type', 'button')
   })
 
   it('should meet a11y standards', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Link href="https://instructure.design">Hello World</Link>
     )
     const axeCheck = await runAxeCheck(container)
@@ -76,7 +76,7 @@ describe('<Link />', () => {
 
   it('should focus with the focus helper', async () => {
     let linkRef: any
-    render(
+    await render(
       <Link
         href="https://instructure.design"
         elementRef={(el) => {
@@ -86,7 +86,7 @@ describe('<Link />', () => {
         Hello World
       </Link>
     )
-    const linkElement = screen.getByRole('link')
+    const linkElement = page.getByRole('link').element()
 
     linkRef.focus()
 
@@ -94,12 +94,12 @@ describe('<Link />', () => {
   })
 
   it('should display block when TruncateText is a child', async () => {
-    render(
+    await render(
       <Link href="example.html">
         <TruncateText>Hello World</TruncateText>
       </Link>
     )
-    const link = screen.getByRole('link')
+    const link = page.getByRole('link').element()
 
     expect(link).toHaveStyle('display: block')
   })
@@ -111,38 +111,38 @@ describe('<Link />', () => {
         <circle cx="50" cy="50" r="40" />
       </svg>
     )
-    render(
+    await render(
       <Link href="example.html" renderIcon={customIcon}>
         <TruncateText>Hello World</TruncateText>
       </Link>
     )
-    const link = screen.getByRole('link')
+    const link = page.getByRole('link').element()
 
     expect(link).toHaveStyle('display: inline-flex')
   })
 
   it('should call the onClick prop when clicked', async () => {
     const onClick = vi.fn()
-    render(<Link onClick={onClick}>Hello World</Link>)
-    const link = screen.getByRole('button')
+    await render(<Link onClick={onClick}>Hello World</Link>)
+    const link = page.getByRole('button').element()
 
     fireEvent.click(link, { button: 0, detail: 1 })
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onClick).toHaveBeenCalledTimes(1)
     })
   })
 
   it('should call the onMouseEnter prop when mouseEntered', async () => {
     const onMouseEnter = vi.fn()
-    const { container } = render(
+    const { container } = await render(
       <Link onMouseEnter={onMouseEnter}>Hello World</Link>
     )
     const link = container.querySelector('span[class*="-link"]')!
 
     await userEvent.hover(link)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onMouseEnter).toHaveBeenCalledTimes(1)
     })
   })
@@ -154,13 +154,13 @@ describe('<Link />', () => {
         <circle cx="50" cy="50" r="40" />
       </svg>
     )
-    render(
+    await render(
       <Link href="https://instructure.design" renderIcon={customIcon}>
         Hello World
       </Link>
     )
-    const title = screen.getByText('Custom icon')
-    const icon = screen.getByTestId('svg')
+    const title = page.getByText('Custom icon').element()
+    const icon = page.getByTestId('svg').element()
 
     expect(title).toBeInTheDocument()
     expect(icon).toBeInTheDocument()
@@ -168,48 +168,48 @@ describe('<Link />', () => {
 
   describe('when interaction is disabled', () => {
     it('should apply aria-disabled when interaction is disabled', async () => {
-      render(
+      await render(
         <Link href="example.html" interaction="disabled">
           Hello World
         </Link>
       )
-      const link = screen.getByRole('link')
+      const link = page.getByRole('link').element()
 
       expect(link).toHaveAttribute('aria-disabled')
     })
   })
 
   it('should apply aria-disabled when `disabled` is set', async () => {
-    render(
+    await render(
       <Link href="example.html" disabled>
         Hello World
       </Link>
     )
-    const link = screen.getByRole('link')
+    const link = page.getByRole('link').element()
 
     expect(link).toHaveAttribute('aria-disabled')
   })
 
   it('should not be clickable when interaction is disabled', async () => {
     const onClick = vi.fn()
-    render(
+    await render(
       <Link onClick={onClick} interaction="disabled">
         Hello World
       </Link>
     )
-    const button = screen.getByRole('button')
+    const button = page.getByRole('button').element()
 
     expect(button).toHaveAttribute('aria-disabled', 'true')
   })
 
   it('should not be clickable when `disabled` is set', async () => {
     const onClick = vi.fn()
-    render(
+    await render(
       <Link onClick={onClick} disabled>
         Hello World
       </Link>
     )
-    const button = screen.getByRole('button')
+    const button = page.getByRole('button').element()
 
     expect(button).toHaveAttribute('aria-disabled', 'true')
   })
@@ -219,24 +219,24 @@ describe('with `as` prop', () => {
   describe('with `onClick`', () => {
     it('should render designated tag', async () => {
       const onClick = vi.fn()
-      render(
+      await render(
         <Link as="a" onClick={onClick}>
           Hello World
         </Link>
       )
-      const link = screen.getByText('Hello World')
+      const link = page.getByText('Hello World').element()
 
       expect(link.tagName).toBe('A')
     })
 
     it('should set role="button"', async () => {
       const onClick = vi.fn()
-      render(
+      await render(
         <Link as="span" onClick={onClick}>
           Hello World
         </Link>
       )
-      const spanLink = screen.getByRole('button')
+      const spanLink = page.getByRole('button').element()
 
       expect(spanLink).toHaveAttribute('role', 'button')
     })
@@ -245,36 +245,36 @@ describe('with `as` prop', () => {
   describe('should not set type="button", unless it is actually a button', () => {
     it('should not set type="button" on other things like <span>s', async () => {
       const onClick = vi.fn()
-      render(
+      await render(
         <Link as="span" onClick={onClick}>
           Hello World
         </Link>
       )
-      const link = screen.getByText('Hello World')
+      const link = page.getByText('Hello World').element()
 
       expect(link).not.toHaveAttribute('type', 'button')
     })
 
     it('should set type="button" on <button>s', async () => {
       const onClick = vi.fn()
-      render(
+      await render(
         <Link as="button" onClick={onClick}>
           Hello World
         </Link>
       )
-      const button = screen.getByText('Hello World')
+      const button = page.getByText('Hello World').element()
 
       expect(button).toHaveAttribute('type', 'button')
     })
 
     it('should set tabIndex="0"', async () => {
       const onClick = vi.fn()
-      render(
+      await render(
         <Link as="span" onClick={onClick}>
           Hello World
         </Link>
       )
-      const spanLink = screen.getByText('Hello World')
+      const spanLink = page.getByText('Hello World').element()
 
       expect(spanLink).toHaveAttribute('tabIndex', '0')
     })
@@ -282,29 +282,29 @@ describe('with `as` prop', () => {
 
   describe('without `onClick`', () => {
     it('should render designated tag', async () => {
-      render(<Link as="a">Hello World</Link>)
-      const link = screen.getByText('Hello World')
+      await render(<Link as="a">Hello World</Link>)
+      const link = page.getByText('Hello World').element()
 
       expect(link.tagName).toBe('A')
     })
 
     it('should not set role="button"', async () => {
-      render(<Link as="span">Hello World</Link>)
-      const link = screen.getByText('Hello World')
+      await render(<Link as="span">Hello World</Link>)
+      const link = page.getByText('Hello World').element()
 
       expect(link).not.toHaveAttribute('role', 'button')
     })
 
     it('should not set type="button"', async () => {
-      render(<Link as="span">Hello World</Link>)
-      const link = screen.getByText('Hello World')
+      await render(<Link as="span">Hello World</Link>)
+      const link = page.getByText('Hello World').element()
 
       expect(link).not.toHaveAttribute('type', 'button')
     })
 
     it('should not set tabIndex="0"', async () => {
-      render(<Link as="span">Hello World</Link>)
-      const link = screen.getByText('Hello World')
+      await render(<Link as="span">Hello World</Link>)
+      const link = page.getByText('Hello World').element()
 
       expect(link).not.toHaveAttribute('tabIndex', '0')
     })
@@ -312,29 +312,29 @@ describe('with `as` prop', () => {
 
   describe('when an href is provided', () => {
     it('should render an anchor element', async () => {
-      render(<Link href="example.html">Hello World</Link>)
-      const link = screen.getByRole('link')
+      await render(<Link href="example.html">Hello World</Link>)
+      const link = page.getByRole('link').element()
 
       expect(link.tagName).toBe('A')
     })
 
     it('should set the href attribute', async () => {
-      render(<Link href="example.html">Hello World</Link>)
-      const link = screen.getByRole('link')
+      await render(<Link href="example.html">Hello World</Link>)
+      const link = page.getByRole('link').element()
 
       expect(link).toHaveAttribute('href', 'example.html')
     })
 
     it('should not set role="button"', async () => {
-      render(<Link href="example.html">Hello World</Link>)
-      const link = screen.getByRole('link')
+      await render(<Link href="example.html">Hello World</Link>)
+      const link = page.getByRole('link').element()
 
       expect(link).not.toHaveAttribute('role', 'button')
     })
 
     it('should not set type="button"', async () => {
-      render(<Link href="example.html">Hello World</Link>)
-      const link = screen.getByRole('link')
+      await render(<Link href="example.html">Hello World</Link>)
+      const link = page.getByRole('link').element()
 
       expect(link).not.toHaveAttribute('type', 'button')
     })
@@ -342,24 +342,24 @@ describe('with `as` prop', () => {
 
   describe('when a `role` is provided', () => {
     it('should set role', async () => {
-      render(
+      await render(
         <Link href="example.html" role="button">
           Hello World
         </Link>
       )
-      const link = screen.getByText('Hello World')
+      const link = page.getByText('Hello World').element()
 
       expect(link).toHaveAttribute('role', 'button')
     })
 
     it('should not override button role when it is forced by default', async () => {
       const onClick = vi.fn()
-      render(
+      await render(
         <Link role="link" onClick={onClick} as="a">
           Hello World
         </Link>
       )
-      const link = screen.getByText('Hello World')
+      const link = page.getByText('Hello World').element()
 
       expect(link).toHaveAttribute('role', 'button')
     })
@@ -368,24 +368,24 @@ describe('with `as` prop', () => {
   describe('when a `forceButtonRole` is set to false', () => {
     it('should not force button role', async () => {
       const onClick = vi.fn()
-      render(
+      await render(
         <Link onClick={onClick} as="a" forceButtonRole={false}>
           Hello World
         </Link>
       )
-      const link = screen.getByText('Hello World')
+      const link = page.getByText('Hello World').element()
 
       expect(link).not.toHaveAttribute('role')
     })
 
     it('should override button role with `role` prop', async () => {
       const onClick = vi.fn()
-      render(
+      await render(
         <Link role="link" onClick={onClick} as="a" forceButtonRole={false}>
           Hello World
         </Link>
       )
-      const link = screen.getByText('Hello World')
+      const link = page.getByText('Hello World').element()
 
       expect(link).toHaveAttribute('role', 'link')
     })
@@ -393,22 +393,22 @@ describe('with `as` prop', () => {
 
   describe('when a `to` is provided', () => {
     it('should render an anchor element', async () => {
-      render(<Link to="/example">Hello World</Link>)
-      const link = screen.getByText('Hello World')
+      await render(<Link to="/example">Hello World</Link>)
+      const link = page.getByText('Hello World').element()
 
       expect(link.tagName).toBe('A')
     })
 
     it('should set the to attribute', async () => {
-      render(<Link to="/example">Hello World</Link>)
-      const link = screen.getByText('Hello World')
+      await render(<Link to="/example">Hello World</Link>)
+      const link = page.getByText('Hello World').element()
 
       expect(link).toHaveAttribute('to', '/example')
     })
 
     it('should not set role="button"', async () => {
-      render(<Link to="/example">Hello World</Link>)
-      const link = screen.getByText('Hello World')
+      await render(<Link to="/example">Hello World</Link>)
+      const link = page.getByText('Hello World').element()
 
       expect(link).not.toHaveAttribute('role', 'button')
     })
@@ -416,47 +416,47 @@ describe('with `as` prop', () => {
 
   describe('href safety', () => {
     it('strips javascript: schemes from href', async () => {
-      render(<Link href="javascript:alert(1)">Hello</Link>)
-      const el = screen.getByText('Hello')
+      await render(<Link href="javascript:alert(1)">Hello</Link>)
+      const el = page.getByText('Hello').element()
       expect(el).not.toHaveAttribute('href', 'javascript:alert(1)')
       expect(el).not.toHaveAttribute('href')
     })
 
     it('strips data: schemes from href', async () => {
-      render(<Link href="data:text/html,<x>">Hello</Link>)
-      const el = screen.getByText('Hello')
+      await render(<Link href="data:text/html,<x>">Hello</Link>)
+      const el = page.getByText('Hello').element()
       expect(el).not.toHaveAttribute('href')
     })
 
     it('preserves safe https hrefs', async () => {
-      render(<Link href="https://example.com">Hello</Link>)
-      const link = screen.getByRole('link')
+      await render(<Link href="https://example.com">Hello</Link>)
+      const link = page.getByRole('link').element()
       expect(link).toHaveAttribute('href', 'https://example.com')
     })
 
     it('defaults rel to noopener noreferrer for target=_blank', async () => {
-      render(
+      await render(
         <Link href="https://example.com" target="_blank">
           Hello
         </Link>
       )
-      const link = screen.getByRole('link')
+      const link = page.getByRole('link').element()
       expect(link).toHaveAttribute('rel', 'noopener noreferrer')
     })
 
     it('does not override consumer-supplied rel', async () => {
-      render(
+      await render(
         <Link href="https://example.com" target="_blank" rel="external">
           Hello
         </Link>
       )
-      const link = screen.getByRole('link')
+      const link = page.getByRole('link').element()
       expect(link).toHaveAttribute('rel', 'external')
     })
 
     it('does not add rel when target is not _blank', async () => {
-      render(<Link href="https://example.com">Hello</Link>)
-      const link = screen.getByRole('link')
+      await render(<Link href="https://example.com">Hello</Link>)
+      const link = page.getByRole('link').element()
       expect(link).not.toHaveAttribute('rel')
     })
   })

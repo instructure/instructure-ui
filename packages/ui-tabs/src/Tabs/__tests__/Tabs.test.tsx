@@ -23,11 +23,10 @@
  */
 
 import { useState } from 'react'
-import { render, screen, waitFor } from '@testing-library/react'
-import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
-import userEvent from '@testing-library/user-event'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { Tabs } from '@instructure/ui-tabs/latest'
@@ -89,8 +88,8 @@ describe('<Tabs />', () => {
     consoleWarningMock.mockRestore()
   })
 
-  it('should render the correct number of panels', () => {
-    const { container } = render(
+  it('should render the correct number of panels', async () => {
+    const { container } = await render(
       <Tabs>
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
         <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
@@ -105,7 +104,7 @@ describe('<Tabs />', () => {
   })
 
   it('should render with null children', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Tabs>
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
         <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
@@ -121,13 +120,13 @@ describe('<Tabs />', () => {
   })
 
   it('should be okay with rendering without any children', async () => {
-    render(<Tabs></Tabs>)
+    await render(<Tabs></Tabs>)
 
     expect(consoleErrorMock).not.toHaveBeenCalled()
   })
 
   it('should render correct number of tabs', async () => {
-    render(
+    await render(
       <Tabs>
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
         <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
@@ -136,13 +135,13 @@ describe('<Tabs />', () => {
         </Tabs.Panel>
       </Tabs>
     )
-    const tabs = screen.getAllByRole('tab')
+    const tabs = page.getByRole('tab').elements()
 
     expect(tabs.length).toBe(3)
   })
 
-  it('should render same content for other tabs as for the active one', () => {
-    const { container } = render(
+  it('should render same content for other tabs as for the active one', async () => {
+    const { container } = await render(
       <Tabs>
         <Tabs.Panel renderTitle="First Tab" active>
           CONTENT
@@ -154,12 +153,12 @@ describe('<Tabs />', () => {
       </Tabs>
     )
 
-    const tabContent = screen.getByText('CONTENT')
+    const tabContent = page.getByText('CONTENT').element()
 
     expect(container).toBeInTheDocument()
     expect(tabContent).toBeInTheDocument()
 
-    const childContent = screen.queryByText('Child')
+    const childContent = page.getByText('Child').query()
 
     expect(childContent).toBeNull()
   })
@@ -167,24 +166,26 @@ describe('<Tabs />', () => {
   it('should render the same content in second tab when selected', async () => {
     const onIndexChange = vi.fn()
 
-    const { container } = render(<TabExample onIndexChange={onIndexChange} />)
+    const { container } = await render(
+      <TabExample onIndexChange={onIndexChange} />
+    )
     expect(container).toBeInTheDocument()
 
-    const secondTab = screen.getAllByRole('tab')[1]
+    const secondTab = page.getByRole('tab').elements()[1]
 
     await userEvent.click(secondTab)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onIndexChange).toHaveBeenCalledWith(1)
     })
 
-    const panelContent = screen.queryByText('CONTENT')
+    const panelContent = page.getByText('CONTENT').query()
 
     expect(panelContent).toBeInTheDocument()
   })
 
-  it('should warn if multiple active tabs exist', () => {
-    const { container } = render(
+  it('should warn if multiple active tabs exist', async () => {
+    const { container } = await render(
       <Tabs>
         <Tabs.Panel renderTitle="First Tab" active>
           Tab 1 content
@@ -206,7 +207,7 @@ describe('<Tabs />', () => {
   })
 
   it('should default to selecting the first tab', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Tabs>
         <Tabs.Panel renderTitle="First Tab">{tab1Content}</Tabs.Panel>
         <Tabs.Panel renderTitle="Second Tab">{tab2Content}</Tabs.Panel>
@@ -220,14 +221,14 @@ describe('<Tabs />', () => {
     )
 
     expect(panelsContainer).toHaveTextContent(tab1Content)
-    expect(screen.getByText(tab1Content)).toBeVisible()
+    expect(page.getByText(tab1Content).element()).toBeVisible()
 
     expect(panelsContainer).not.toHaveTextContent(tab2Content)
     expect(panelsContainer).not.toHaveTextContent(tab3Content)
   })
 
   it('should honor the isSelected prop', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Tabs>
         <Tabs.Panel renderTitle="First Tab">{tab1Content}</Tabs.Panel>
         <Tabs.Panel renderTitle="Second Tab" isSelected>
@@ -243,14 +244,14 @@ describe('<Tabs />', () => {
     )
 
     expect(panelsContainer).toHaveTextContent(tab2Content)
-    expect(screen.getByText(tab2Content)).toBeVisible()
+    expect(page.getByText(tab2Content).element()).toBeVisible()
 
     expect(panelsContainer).not.toHaveTextContent(tab1Content)
     expect(panelsContainer).not.toHaveTextContent(tab3Content)
   })
 
   it('should not allow selecting a disabled tab', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Tabs>
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
         <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
@@ -265,7 +266,7 @@ describe('<Tabs />', () => {
     const panels = container.querySelectorAll('[role="tabpanel"]')
 
     expect(panelsContainer).toHaveTextContent(tab1Content)
-    expect(screen.getByText(tab1Content)).toBeVisible()
+    expect(page.getByText(tab1Content).element()).toBeVisible()
 
     expect(panelsContainer).not.toHaveTextContent(tab2Content)
     expect(panelsContainer).not.toHaveTextContent(tab3Content)
@@ -279,7 +280,7 @@ describe('<Tabs />', () => {
   it('should call onRequestTabChange when selection changes via click', async () => {
     const onChange = vi.fn()
 
-    render(
+    await render(
       <Tabs onRequestTabChange={onChange}>
         <Tabs.Panel renderTitle="First Tab" isSelected id="one">
           Tab 1 content
@@ -292,11 +293,11 @@ describe('<Tabs />', () => {
         </Tabs.Panel>
       </Tabs>
     )
-    const secondTab = screen.getByText('Second Tab')
+    const secondTab = page.getByText('Second Tab').element()
 
     await userEvent.click(secondTab)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onChange).toHaveBeenCalled()
 
       const args = onChange.mock.calls[0][1]
@@ -307,7 +308,7 @@ describe('<Tabs />', () => {
   })
 
   it('should focus the selected tab when shouldFocusOnRender is set', async () => {
-    render(
+    await render(
       <Tabs shouldFocusOnRender>
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
         <Tabs.Panel renderTitle="Second Tab" isSelected>
@@ -318,16 +319,16 @@ describe('<Tabs />', () => {
         </Tabs.Panel>
       </Tabs>
     )
-    const secondTab = screen.getByText('Second Tab')
+    const secondTab = page.getByText('Second Tab').element()
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(document.activeElement).toBe(secondTab)
     })
   })
 
   it('should not call onRequestTabChange when clicking a disabled tab', async () => {
     const onChange = vi.fn()
-    render(
+    await render(
       <Tabs onRequestTabChange={onChange}>
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
         <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
@@ -336,17 +337,17 @@ describe('<Tabs />', () => {
         </Tabs.Panel>
       </Tabs>
     )
-    const thirdTab = screen.getByText('Third Tab')
+    const thirdTab = page.getByText('Third Tab').element()
 
     await userEvent.click(thirdTab)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onChange).not.toHaveBeenCalled()
     })
   })
 
   it('should meet a11y standards when set to the secondary variant', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Tabs variant="secondary">
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
         <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
@@ -361,7 +362,7 @@ describe('<Tabs />', () => {
   })
 
   it('should meet a11y standards when set to the default variant', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Tabs variant="default">
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
         <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
@@ -376,7 +377,7 @@ describe('<Tabs />', () => {
   })
 
   it('should link tabs with the corresponding panels via ids', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Tabs>
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
         <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
@@ -385,7 +386,7 @@ describe('<Tabs />', () => {
         </Tabs.Panel>
       </Tabs>
     )
-    const firstTab = screen.getByText('First Tab')
+    const firstTab = page.getByText('First Tab').element()
     const firstPanel = container.querySelectorAll('[role="tabpanel"]')[0]
 
     expect(firstTab).toHaveAttribute('aria-controls', firstPanel.id)
@@ -394,7 +395,7 @@ describe('<Tabs />', () => {
 
   describe('with duplicate-named tabs', () => {
     it('should still render the correct number of panels', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Tabs>
           <Tabs.Panel renderTitle="A Tab">Contents of first tab.</Tabs.Panel>
           <Tabs.Panel renderTitle="A Tab">Contents of second tab.</Tabs.Panel>
@@ -411,7 +412,7 @@ describe('<Tabs />', () => {
 
   describe('with nodes as tab titles', () => {
     it('should still render the correct number of panels', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Tabs>
           <Tabs.Panel renderTitle={<div />}>Contents of first tab.</Tabs.Panel>
           <Tabs.Panel renderTitle={<span />}>

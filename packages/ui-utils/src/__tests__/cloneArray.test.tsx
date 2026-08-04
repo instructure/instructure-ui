@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import '@testing-library/jest-dom'
+import { describe, it, expect } from 'vitest'
 
 import { cloneArray } from '../cloneArray.js'
 import { deepEqual } from '../deepEqual.js'

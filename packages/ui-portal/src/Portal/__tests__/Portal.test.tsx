@@ -22,24 +22,23 @@
  * SOFTWARE.
  */
 
-import { vi } from 'vitest'
-import { render, screen, waitFor } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import { describe, it, expect, vi } from 'vitest'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { Portal } from '../index.js'
 
 describe(`<Portal />`, () => {
   it('should render', async () => {
-    render(<Portal open>Hello World</Portal>)
-    const portal = screen.getByText('Hello World')
+    await render(<Portal open>Hello World</Portal>)
+    const portal = page.getByText('Hello World').element()
 
     expect(portal).toBeInTheDocument()
   })
 
   it('should be accessible', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Portal open data-testid="portal">
         Hello World
       </Portal>
@@ -51,19 +50,19 @@ describe(`<Portal />`, () => {
 
   it('should support onOpen prop', async () => {
     const onOpen = vi.fn()
-    render(
+    await render(
       <Portal open onOpen={onOpen} data-testid="portal">
         Hello World
       </Portal>
     )
-    const portal = screen.getByTestId('portal')
+    const portal = page.getByTestId('portal').element()
 
     expect(onOpen).toHaveBeenCalledWith(portal)
   })
 
   it('should support onClose prop', async () => {
     const onClose = vi.fn()
-    const { rerender } = render(
+    const { rerender } = await render(
       <Portal open onClose={onClose}>
         Hello World
       </Portal>
@@ -71,7 +70,7 @@ describe(`<Portal />`, () => {
 
     expect(onClose).not.toHaveBeenCalled()
 
-    rerender(
+    await rerender(
       <Portal open={false} onClose={onClose}>
         Hello World
       </Portal>
@@ -82,44 +81,44 @@ describe(`<Portal />`, () => {
 
   it('should add a dir attribute to the root DOM node', async () => {
     const onOpen = vi.fn()
-    render(
+    await render(
       <Portal open onOpen={onOpen} data-testid="portal">
         Hello World
       </Portal>
     )
-    const portal = screen.getByTestId('portal')
+    const portal = page.getByTestId('portal').element()
 
     expect(portal).toHaveAttribute('dir', 'ltr')
   })
 
   it('should not render if children are empty', async () => {
-    render(<Portal open data-testid="portal" />)
-    const portal = screen.queryByTestId('portal')
+    await render(<Portal open data-testid="portal" />)
+    const portal = page.getByTestId('portal').query()
 
     expect(portal).not.toBeInTheDocument()
   })
 
   describe('without a mountNode prop', () => {
     it('should render nothing when closed', async () => {
-      render(<Portal>Hello World</Portal>)
-      const portal = screen.queryByTestId('portal')
+      await render(<Portal>Hello World</Portal>)
+      const portal = page.getByTestId('portal').query()
 
       expect(portal).not.toBeInTheDocument()
     })
 
     it('should render children and have a node with a parent when open', async () => {
       const onKeyDown = vi.fn()
-      render(
+      await render(
         <Portal open data-testid="portal">
           <button onKeyDown={onKeyDown}>Hello World</button>
         </Portal>
       )
-      const portal = screen.getByTestId('portal')
-      const button = screen.getByRole('button', { name: 'Hello World' })
+      const portal = page.getByTestId('portal').element()
+      const button = page.getByRole('button', { name: 'Hello World' }).element()
 
       await userEvent.type(button, '{enter}')
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onKeyDown).toHaveBeenCalled()
       })
 
@@ -129,7 +128,7 @@ describe(`<Portal />`, () => {
 
   describe('when a mountNode prop is provided', () => {
     it('should render nothing when closed', async () => {
-      render(
+      await render(
         <div>
           <Portal
             mountNode={() => document.getElementById('portal-mount-node')!}
@@ -140,7 +139,7 @@ describe(`<Portal />`, () => {
           <div id="portal-mount-node" />
         </div>
       )
-      const portal = screen.queryByTestId('portal')
+      const portal = page.getByTestId('portal').query()
 
       expect(portal).not.toBeInTheDocument()
     })
@@ -150,12 +149,12 @@ describe(`<Portal />`, () => {
       mountNode.setAttribute('id', 'portal-mount-node')
       document.body.appendChild(mountNode)
 
-      render(
+      await render(
         <Portal open mountNode={mountNode} data-testid="portal">
           Hello World
         </Portal>
       )
-      const portal = screen.getByTestId('portal')
+      const portal = page.getByTestId('portal').element()
 
       expect(portal.parentElement).toBe(mountNode)
       expect(mountNode.parentElement).toBe(document.body)

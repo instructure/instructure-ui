@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { render } from '@testing-library/react'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { describe, it, expect } from 'vitest'
 
 import canvas from '@instructure/ui-themes'
 import { color2hex } from '@instructure/ui-color-utils'
@@ -34,7 +34,9 @@ const HEADER_TEXT = 'Modal-footer-text'
 
 describe('<ModalHeader />', () => {
   it('should render', async () => {
-    const { findByText } = render(<ModalHeader>{HEADER_TEXT}</ModalHeader>)
+    const { findByText } = await render(
+      <ModalHeader>{HEADER_TEXT}</ModalHeader>
+    )
     const modalHeader = await findByText(HEADER_TEXT)
 
     expect(modalHeader).toBeInTheDocument()
@@ -44,7 +46,7 @@ describe('<ModalHeader />', () => {
     const themeVariables = canvas.newTheme.components.ModalHeader(
       canvas.newTheme.semantics(canvas.newTheme.primitives)
     )
-    const { findByText } = render(
+    const { findByText } = await render(
       <ModalHeader variant="inverse">{HEADER_TEXT}</ModalHeader>
     )
     const modalHeader = await findByText(HEADER_TEXT)
@@ -67,7 +69,9 @@ describe('<ModalHeader />', () => {
       const themeVariables = canvas.newTheme.components.ModalHeader(
         canvas.newTheme.semantics(canvas.newTheme.primitives)
       )
-      const { findByText } = render(<ModalHeader>{HEADER_TEXT}</ModalHeader>)
+      const { findByText } = await render(
+        <ModalHeader>{HEADER_TEXT}</ModalHeader>
+      )
       const modalHeader = await findByText(HEADER_TEXT)
 
       const modalHeaderStyle = window.getComputedStyle(modalHeader)
@@ -81,7 +85,7 @@ describe('<ModalHeader />', () => {
       const themeVariables = canvas.newTheme.components.ModalHeader(
         canvas.newTheme.semantics(canvas.newTheme.primitives)
       )
-      const { findByText } = render(
+      const { findByText } = await render(
         <ModalHeader spacing="default">{HEADER_TEXT}</ModalHeader>
       )
       const modalHeader = await findByText(HEADER_TEXT)
@@ -97,7 +101,7 @@ describe('<ModalHeader />', () => {
       const themeVariables = canvas.newTheme.components.ModalHeader(
         canvas.newTheme.semantics(canvas.newTheme.primitives)
       )
-      const { findByText } = render(
+      const { findByText } = await render(
         <ModalHeader spacing="compact">{HEADER_TEXT}</ModalHeader>
       )
       const modalHeader = await findByText(HEADER_TEXT)

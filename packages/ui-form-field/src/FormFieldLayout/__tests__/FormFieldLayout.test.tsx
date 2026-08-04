@@ -23,11 +23,10 @@
  */
 
 import { createRef } from 'react'
-import { render } from '@testing-library/react'
-import { vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { FormFieldLayout } from '@instructure/ui-form-field/latest'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 describe('<FormFieldLayout />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
@@ -48,8 +47,8 @@ describe('<FormFieldLayout />', () => {
     consoleErrorMock.mockRestore()
   })
 
-  it('should render', () => {
-    const { container } = render(<FormFieldLayout label="Username" />)
+  it('should render', async () => {
+    const { container } = await render(<FormFieldLayout label="Username" />)
 
     const formFieldLayout = container.querySelector(
       "label[class$='-formFieldLayout']"
@@ -64,17 +63,17 @@ describe('<FormFieldLayout />', () => {
   })
 
   it('should meet a11y standards', async () => {
-    const { container } = render(<FormFieldLayout label="Username" />)
+    const { container } = await render(<FormFieldLayout label="Username" />)
 
     const axeCheck = await runAxeCheck(container)
 
     expect(axeCheck).toBe(true)
   })
 
-  it('should provide a ref to the input container', () => {
+  it('should provide a ref to the input container', async () => {
     const inputContainerRef = vi.fn()
     const ref = createRef<HTMLInputElement>()
-    render(
+    await render(
       <FormFieldLayout label="Username" inputContainerRef={inputContainerRef}>
         <input type="text" ref={ref} />
       </FormFieldLayout>

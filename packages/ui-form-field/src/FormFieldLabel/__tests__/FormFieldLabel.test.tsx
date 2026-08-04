@@ -22,11 +22,10 @@
  * SOFTWARE.
  */
 
-import { render } from '@testing-library/react'
-import { vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { FormFieldLabel } from '@instructure/ui-form-field/v11_6'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 describe('<FormFieldLabel />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
@@ -47,8 +46,8 @@ describe('<FormFieldLabel />', () => {
     consoleErrorMock.mockRestore()
   })
 
-  it('should render', () => {
-    const { container } = render(<FormFieldLabel>Foo</FormFieldLabel>)
+  it('should render', async () => {
+    const { container } = await render(<FormFieldLabel>Foo</FormFieldLabel>)
 
     const formFieldLabel = container.querySelector(
       "span[class$='-formFieldLabel']"
@@ -58,8 +57,10 @@ describe('<FormFieldLabel />', () => {
     expect(formFieldLabel).toHaveTextContent('Foo')
   })
 
-  it('should render as specified via the `as` prop', () => {
-    const { container } = render(<FormFieldLabel as="li">Foo</FormFieldLabel>)
+  it('should render as specified via the `as` prop', async () => {
+    const { container } = await render(
+      <FormFieldLabel as="li">Foo</FormFieldLabel>
+    )
 
     const formFieldLabel = container.querySelector('li')
 
@@ -68,7 +69,7 @@ describe('<FormFieldLabel />', () => {
   })
 
   it('should meet a11y standards', async () => {
-    const { container } = render(<FormFieldLabel>Foo</FormFieldLabel>)
+    const { container } = await render(<FormFieldLabel>Foo</FormFieldLabel>)
 
     const axeCheck = await runAxeCheck(container)
 

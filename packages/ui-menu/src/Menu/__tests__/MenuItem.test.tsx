@@ -22,9 +22,10 @@
  * SOFTWARE.
  */
 
-import { fireEvent, render, screen } from '@testing-library/react'
-import { vi } from 'vitest'
-import '@testing-library/jest-dom'
+import { fireEvent } from '@testing-library/dom'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect, vi } from 'vitest'
 
 import { MenuItem } from '@instructure/ui-menu/latest'
 import type { MenuItemProps } from '@instructure/ui-menu/latest'
@@ -38,38 +39,38 @@ const ExtendedMenuItem: React.FC<ExtendedMenuItemProps> = ({ ...props }) => {
 }
 
 describe('<MenuItem />', () => {
-  it('should render', () => {
-    render(<MenuItem>Menu Item Text</MenuItem>)
-    const menuItem = screen.getByText('Menu Item Text')
+  it('should render', async () => {
+    await render(<MenuItem>Menu Item Text</MenuItem>)
+    const menuItem = page.getByText('Menu Item Text').element()
 
     expect(menuItem).toBeInTheDocument()
   })
 
-  it('should render as a link when an href is provided', () => {
-    render(<MenuItem href="example.html">Menu Item Text</MenuItem>)
+  it('should render as a link when an href is provided', async () => {
+    await render(<MenuItem href="example.html">Menu Item Text</MenuItem>)
 
-    const menuItem = screen.getByRole('menuitem')
+    const menuItem = page.getByRole('menuitem').element()
 
     expect(menuItem).toBeInTheDocument()
     expect(menuItem).toHaveAttribute('href', 'example.html')
   })
 
-  it('should render as a link when a to is provided', () => {
-    render(<ExtendedMenuItem to="/example">Hello</ExtendedMenuItem>)
+  it('should render as a link when a to is provided', async () => {
+    await render(<ExtendedMenuItem to="/example">Hello</ExtendedMenuItem>)
 
-    const menuItem = screen.getByRole('menuitem')
+    const menuItem = page.getByRole('menuitem').element()
 
     expect(menuItem).toHaveAttribute('to', '/example')
   })
 
-  it('should call onSelect after click', () => {
+  it('should call onSelect after click', async () => {
     const onSelect = vi.fn()
-    render(
+    await render(
       <MenuItem onSelect={onSelect} value="foo">
         Hello
       </MenuItem>
     )
-    const menuItem = screen.getByRole('menuitem')
+    const menuItem = page.getByRole('menuitem').element()
 
     fireEvent.click(menuItem)
 
@@ -81,79 +82,81 @@ describe('<MenuItem />', () => {
     )
   })
 
-  it('should call onClick after click', () => {
+  it('should call onClick after click', async () => {
     const onClick = vi.fn()
-    render(
+    await render(
       <MenuItem onClick={onClick} value="foo">
         Hello
       </MenuItem>
     )
-    const menuItem = screen.getByRole('menuitem')
+    const menuItem = page.getByRole('menuitem').element()
 
     fireEvent.click(menuItem)
 
     expect(onClick).toHaveBeenCalled()
   })
 
-  it('should set the tabIndex attribute', () => {
-    render(<MenuItem>Hello</MenuItem>)
-    const menuItem = screen.getByRole('menuitem')
+  it('should set the tabIndex attribute', async () => {
+    await render(<MenuItem>Hello</MenuItem>)
+    const menuItem = page.getByRole('menuitem').element()
 
     expect(menuItem).toHaveAttribute('tabIndex', '-1')
   })
 
-  it('should set the aria-controls attribute', () => {
-    render(<MenuItem controls="testId">Hello</MenuItem>)
-    const menuItem = screen.getByRole('menuitem')
+  it('should set the aria-controls attribute', async () => {
+    await render(<MenuItem controls="testId">Hello</MenuItem>)
+    const menuItem = page.getByRole('menuitem').element()
 
     expect(menuItem).toHaveAttribute('aria-controls', 'testId')
   })
 
-  it('should set the aria-disabled attribute', () => {
-    render(<MenuItem disabled>Hello</MenuItem>)
-    const menuItem = screen.getByRole('menuitem')
+  it('should set the aria-disabled attribute', async () => {
+    await render(<MenuItem disabled>Hello</MenuItem>)
+    const menuItem = page.getByRole('menuitem').element()
 
     expect(menuItem).toHaveAttribute('aria-disabled', 'true')
   })
 
-  it('should set the aria-checked attribute when defaultSelected prop is true', () => {
-    render(
+  it('should set the aria-checked attribute when defaultSelected prop is true', async () => {
+    await render(
       <MenuItem type="checkbox" defaultSelected>
         Hello
       </MenuItem>
     )
-    const menuItem = screen.getByRole('menuitemcheckbox')
+    const menuItem = page.getByRole('menuitemcheckbox').element()
 
     expect(menuItem).toHaveAttribute('aria-checked', 'true')
   })
 
-  it('should set the aria-checked attribute when selected prop is true', () => {
-    render(
+  it('should set the aria-checked attribute when selected prop is true', async () => {
+    await render(
       <MenuItem type="checkbox" selected onSelect={vi.fn()}>
         Hello
       </MenuItem>
     )
-    const menuItem = screen.getByRole('menuitemcheckbox')
+    const menuItem = page.getByRole('menuitemcheckbox').element()
 
     expect(menuItem).toHaveAttribute('aria-checked', 'true')
   })
 
-  it('should default to the "menuitem" role', () => {
-    const { container } = render(<MenuItem>Menu Item Text</MenuItem>)
+  it('should default to the "menuitem" role', async () => {
+    const { container } = await render(<MenuItem>Menu Item Text</MenuItem>)
     const menuItem = container.querySelector("span[class$='-menuItem']")
 
     expect(menuItem).toHaveAttribute('role', 'menuitem')
   })
 
-  it('should set the role to "menuitemcheckbox" when the type is "checkbox"', () => {
-    const { container } = render(<MenuItem type="checkbox">Hello</MenuItem>)
+  it('should set the role to "menuitemcheckbox" when the type is "checkbox"', async () => {
+    const { container } = await render(
+      <MenuItem type="checkbox">Hello</MenuItem>
+    )
     const menuItem = container.querySelector("span[class$='-menuItem']")
 
     expect(menuItem).toHaveAttribute('role', 'menuitemcheckbox')
   })
 
-  it('should set the role to "menuitemradio" when the type is "radio"', () => {
-    const { container } = render(<MenuItem type="radio">Hello</MenuItem>)
+  it('should set the role to "menuitemradio" when the type is "radio"', async () => {
+    const { container } = await render(<MenuItem type="radio">Hello</MenuItem>)
     const menuItem = container.querySelector("span[class$='-menuItem']")
 
     expect(menuItem).toHaveAttribute('role', 'menuitemradio')

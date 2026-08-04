@@ -22,11 +22,10 @@
  * SOFTWARE.
  */
 
-import { render, waitFor } from '@testing-library/react'
-import { vi } from 'vitest'
-import userEvent from '@testing-library/user-event'
 import { Mask } from '@instructure/ui-overlays/latest'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { userEvent } from 'vitest/browser'
+import { describe, it, expect, beforeAll, afterAll, vi } from 'vitest'
 
 describe('<Mask />', () => {
   let originalScroll: any
@@ -44,18 +43,18 @@ describe('<Mask />', () => {
     window.scroll = originalScroll
   })
 
-  it('should render', () => {
-    render(<Mask />)
+  it('should render', async () => {
+    await render(<Mask />)
 
     const mask = document.querySelector("span[class$='-mask']")
 
     expect(mask).toBeInTheDocument()
   })
 
-  it('should have tabIndex -1 when onClick is provided', () => {
+  it('should have tabIndex -1 when onClick is provided', async () => {
     const onClick = vi.fn()
 
-    render(<Mask onClick={onClick} />)
+    await render(<Mask onClick={onClick} />)
     const mask = document.querySelector("span[class$='-mask']")
 
     expect(mask).toHaveAttribute('tabindex', '-1')
@@ -64,19 +63,19 @@ describe('<Mask />', () => {
   it('should call onClick prop when clicked', async () => {
     const onClick = vi.fn()
 
-    render(<Mask onClick={onClick} />)
+    await render(<Mask onClick={onClick} />)
 
     const mask = document.querySelector("span[class$='-mask']")
 
     await userEvent.click(mask!)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onClick).toHaveBeenCalled()
     })
   })
 
-  it('should apply fullscreen CSS when prop is true', () => {
-    render(<Mask fullscreen />)
+  it('should apply fullscreen CSS when prop is true', async () => {
+    await render(<Mask fullscreen />)
     const mask = document.querySelector("span[class$='-mask']")
 
     expect(mask).toHaveStyle('position: fixed')
@@ -85,7 +84,7 @@ describe('<Mask />', () => {
   it('should provide an elementRef', async () => {
     const elementRef = vi.fn()
 
-    render(<Mask elementRef={elementRef} />)
+    await render(<Mask elementRef={elementRef} />)
     const mask = document.querySelector("span[class$='-mask']")
 
     expect(elementRef).toHaveBeenCalledWith(mask)

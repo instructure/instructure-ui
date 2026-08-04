@@ -22,9 +22,10 @@
  * SOFTWARE.
  */
 
-import { vi } from 'vitest'
-import { fireEvent, render, screen, cleanup } from '@testing-library/react'
-import '@testing-library/jest-dom'
+import { fireEvent } from '@testing-library/dom'
+import { render, cleanup } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect, afterEach, vi } from 'vitest'
 
 import { Popover } from '@instructure/ui-popover/latest'
 import type { PopoverProps } from '@instructure/ui-popover/latest'
@@ -39,18 +40,18 @@ describe('<Popover />', () => {
     eventType: 'click' | 'focus' | 'mouseOver',
     eventInit?: Record<string, any>
   ) {
-    it(`should show content on ${on}`, () => {
+    it(`should show content on ${on}`, async () => {
       const onValue: PopoverProps['on'] = [on]
       if (on === 'hover') {
         onValue.push('focus')
       }
-      render(
+      await render(
         <Popover on={onValue} renderTrigger={<button>Trigger</button>}>
           <h2>Popover Content</h2>
         </Popover>
       )
 
-      const trigger = screen.getByRole('button', { name: 'Trigger' })
+      const trigger = page.getByRole('button', { name: 'Trigger' }).element()
 
       switch (eventType) {
         case 'click':
@@ -66,7 +67,7 @@ describe('<Popover />', () => {
           break
       }
 
-      expect(screen.getByText('Popover Content')).toBeInTheDocument()
+      expect(page.getByText('Popover Content').element()).toBeInTheDocument()
     })
   }
 
@@ -74,18 +75,18 @@ describe('<Popover />', () => {
     handler: 'onClick' | 'onFocus' | 'onBlur',
     eventType: 'focusOut' | 'blur' | 'click' | 'focus'
   ) {
-    it(`should fire ${handler} handler for ${eventType} event`, () => {
+    it(`should fire ${handler} handler for ${eventType} event`, async () => {
       const handlerSpy = vi.fn()
       const props = {
         [handler]: handlerSpy
       }
-      render(
+      await render(
         <Popover {...props} renderTrigger={<button>Trigger</button>}>
           <h2>Popover content</h2>
         </Popover>
       )
 
-      const trigger = screen.getByRole('button', { name: 'Trigger' })
+      const trigger = page.getByRole('button', { name: 'Trigger' }).element()
 
       switch (eventType) {
         case 'click':
@@ -108,16 +109,18 @@ describe('<Popover />', () => {
     })
   }
 
-  it('should not render content by default', () => {
-    render(
+  it('should not render content by default', async () => {
+    await render(
       <div>
         <Popover on="click" renderTrigger={<button>Trigger button</button>}>
           <h2>Popover Title</h2>
         </Popover>
       </div>
     )
-    const triggerButton = screen.getByRole('button', { name: 'Trigger button' })
-    const popoverContent = screen.queryByText('Popover Title')
+    const triggerButton = page
+      .getByRole('button', { name: 'Trigger button' })
+      .element()
+    const popoverContent = page.getByText('Popover Title').query()
 
     expect(triggerButton).toBeInTheDocument()
     expect(popoverContent).not.toBeInTheDocument()
@@ -136,9 +139,9 @@ describe('<Popover />', () => {
     testEventHandler('onBlur', 'focusOut')
   })
 
-  it('should hide content when trigger is clicked', () => {
+  it('should hide content when trigger is clicked', async () => {
     const onHideContent = vi.fn()
-    render(
+    await render(
       <Popover
         on="click"
         onHideContent={(_e, o) => onHideContent(o)}
@@ -148,15 +151,17 @@ describe('<Popover />', () => {
         <h2>Popover Title</h2>
       </Popover>
     )
-    const triggerButton = screen.getByRole('button', { name: 'Trigger button' })
+    const triggerButton = page
+      .getByRole('button', { name: 'Trigger button' })
+      .element()
 
     expect(triggerButton).toBeInTheDocument()
-    expect(screen.queryByText('Popover Title')).not.toBeInTheDocument()
+    expect(page.getByText('Popover Title').query()).not.toBeInTheDocument()
 
     fireEvent.click(triggerButton)
 
     expect(onHideContent).not.toHaveBeenCalled()
-    expect(screen.queryByText('Popover Title')).toBeInTheDocument()
+    expect(page.getByText('Popover Title').query()).toBeInTheDocument()
 
     fireEvent.click(triggerButton)
 
@@ -164,11 +169,11 @@ describe('<Popover />', () => {
     expect(onHideContent).toHaveBeenCalledWith(
       expect.objectContaining({ documentClick: false })
     )
-    expect(screen.queryByText('Popover Title')).not.toBeInTheDocument()
+    expect(page.getByText('Popover Title').query()).not.toBeInTheDocument()
   })
 
-  it('should show content if defaultIsShowingContent is true', () => {
-    render(
+  it('should show content if defaultIsShowingContent is true', async () => {
+    await render(
       <Popover
         on="click"
         defaultIsShowingContent
@@ -177,14 +182,14 @@ describe('<Popover />', () => {
         <h2>Popover content</h2>
       </Popover>
     )
-    const popoverContent = screen.queryByText('Popover content')
+    const popoverContent = page.getByText('Popover content').query()
 
     expect(popoverContent).toBeInTheDocument()
   })
 
   describe('controlled', () => {
-    it('should show content by default if isShowingContent is true', () => {
-      render(
+    it('should show content by default if isShowingContent is true', async () => {
+      await render(
         <Popover
           on="click"
           isShowingContent={true}
@@ -193,13 +198,13 @@ describe('<Popover />', () => {
           <h2>Popover content</h2>
         </Popover>
       )
-      const popoverContent = screen.queryByText('Popover content')
+      const popoverContent = page.getByText('Popover content').query()
 
       expect(popoverContent).toBeInTheDocument()
     })
 
-    it('should not show content if isShowingContent prop is false', () => {
-      render(
+    it('should not show content if isShowingContent prop is false', async () => {
+      await render(
         <Popover
           on="click"
           isShowingContent={false}
@@ -208,15 +213,17 @@ describe('<Popover />', () => {
           <h2>Popover content</h2>
         </Popover>
       )
-      const triggerButton = screen.getByRole('button', { name: 'Trigger' })
-      const popoverContent = screen.queryByText('Popover content')
+      const triggerButton = page
+        .getByRole('button', { name: 'Trigger' })
+        .element()
+      const popoverContent = page.getByText('Popover content').query()
 
       expect(triggerButton).toBeInTheDocument()
       expect(popoverContent).not.toBeInTheDocument()
     })
 
-    it('should show content if isShowingContent prop is true', () => {
-      render(
+    it('should show content if isShowingContent prop is true', async () => {
+      await render(
         <Popover
           on="click"
           isShowingContent={true}
@@ -225,15 +232,15 @@ describe('<Popover />', () => {
           <h2>Popover content</h2>
         </Popover>
       )
-      const popoverContent = screen.queryByText('Popover content')
+      const popoverContent = page.getByText('Popover content').query()
 
       expect(popoverContent).toBeInTheDocument()
     })
 
-    it('should call onShowContent', () => {
+    it('should call onShowContent', async () => {
       const onShowContent = vi.fn()
 
-      render(
+      await render(
         <Popover
           on="click"
           isShowingContent={false}
@@ -244,17 +251,17 @@ describe('<Popover />', () => {
           <h2>Popover content</h2>
         </Popover>
       )
-      const trigger = screen.getByRole('button', { name: 'Trigger' })
+      const trigger = page.getByRole('button', { name: 'Trigger' }).element()
 
       fireEvent.click(trigger)
 
       expect(onShowContent).toHaveBeenCalledTimes(1)
     })
 
-    it('should call onHideContent', () => {
+    it('should call onHideContent', async () => {
       const onHideContent = vi.fn()
 
-      render(
+      await render(
         <Popover
           on="click"
           isShowingContent={true}
@@ -265,15 +272,15 @@ describe('<Popover />', () => {
           <h2>Popover content</h2>
         </Popover>
       )
-      const trigger = screen.getByRole('button', { name: 'Trigger' })
+      const trigger = page.getByRole('button', { name: 'Trigger' }).element()
 
       fireEvent.click(trigger)
 
       expect(onHideContent).toHaveBeenCalledWith({ documentClick: false })
     })
 
-    it('should not show content on click', () => {
-      render(
+    it('should not show content on click', async () => {
+      await render(
         <Popover
           on="click"
           isShowingContent={false}
@@ -282,18 +289,20 @@ describe('<Popover />', () => {
           <h2>Popover content</h2>
         </Popover>
       )
-      const triggerButton = screen.getByRole('button', { name: 'Trigger' })
+      const triggerButton = page
+        .getByRole('button', { name: 'Trigger' })
+        .element()
 
       fireEvent.click(triggerButton)
 
-      const popoverContent = screen.queryByText('Popover content')
+      const popoverContent = page.getByText('Popover content').query()
 
       expect(popoverContent).not.toBeInTheDocument()
     })
   })
 
-  it('should pass positionContainerDisplay prop to Position', () => {
-    render(
+  it('should pass positionContainerDisplay prop to Position', async () => {
+    await render(
       <Popover
         on="click"
         renderTrigger={<button>Trigger</button>}
@@ -309,7 +318,7 @@ describe('<Popover />', () => {
 
   describe('shouldScrollContent', () => {
     it('does not wrap content when the prop is unset', async () => {
-      render(
+      await render(
         <Popover
           isShowingContent
           on="click"
@@ -318,12 +327,12 @@ describe('<Popover />', () => {
           <h2 data-testid="content">Popover content</h2>
         </Popover>
       )
-      const content = await screen.findByTestId('content')
+      const content = await page.getByTestId('content').element()
       expect(content.closest('[class*="popover__scrollContainer"]')).toBeNull()
     })
 
     it('wraps content in an overflow:auto + auto-fit max-height container when set', async () => {
-      render(
+      await render(
         <Popover
           isShowingContent
           on="click"
@@ -333,7 +342,7 @@ describe('<Popover />', () => {
           <h2 data-testid="content">Popover content</h2>
         </Popover>
       )
-      const content = await screen.findByTestId('content')
+      const content = await page.getByTestId('content').element()
       const wrapper = content.closest(
         '[class*="popover__scrollContainer"]'
       ) as HTMLElement

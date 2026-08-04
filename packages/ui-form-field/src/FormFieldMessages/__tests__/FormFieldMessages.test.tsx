@@ -22,13 +22,12 @@
  * SOFTWARE.
  */
 
-import { render } from '@testing-library/react'
-import { vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { IconWarningLine } from '@instructure/ui-icons'
 import { FormFieldMessages } from '@instructure/ui-form-field/latest'
 import type { FormMessage } from '@instructure/ui-form-field/latest'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 describe('<FormFieldMessages />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
@@ -49,14 +48,16 @@ describe('<FormFieldMessages />', () => {
     consoleErrorMock.mockRestore()
   })
 
-  it('should render', () => {
+  it('should render', async () => {
     const messages: FormMessage[] = [
       { text: 'Invalid name', type: 'error' },
       { text: 'Good job!', type: 'success' },
       { text: 'Full name, first and last', type: 'hint' }
     ]
 
-    const { container } = render(<FormFieldMessages messages={messages} />)
+    const { container } = await render(
+      <FormFieldMessages messages={messages} />
+    )
 
     const formFieldMessages = container.querySelector(
       "div[class$='-formFieldMessages']"
@@ -68,7 +69,7 @@ describe('<FormFieldMessages />', () => {
     )
   })
 
-  it('should render if Node is passed as message text', () => {
+  it('should render if Node is passed as message text', async () => {
     const messages: FormMessage[] = [
       {
         text: (
@@ -80,7 +81,9 @@ describe('<FormFieldMessages />', () => {
       }
     ]
 
-    const { container } = render(<FormFieldMessages messages={messages} />)
+    const { container } = await render(
+      <FormFieldMessages messages={messages} />
+    )
 
     const formFieldMessages = container.querySelector(
       "div[class$='-formFieldMessages']"
@@ -99,7 +102,9 @@ describe('<FormFieldMessages />', () => {
       { text: 'Full name, first and last', type: 'hint' }
     ]
 
-    const { container } = render(<FormFieldMessages messages={messages} />)
+    const { container } = await render(
+      <FormFieldMessages messages={messages} />
+    )
 
     const axeCheck = await runAxeCheck(container)
 

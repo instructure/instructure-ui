@@ -22,15 +22,16 @@
  * SOFTWARE.
  */
 
-import { render, screen } from '@testing-library/react'
-import { vi, expect } from 'vitest'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect, vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 
 import { Options } from '@instructure/ui-options/latest'
 
 describe('<Options />', () => {
   it('should render', async () => {
-    const { container } = render(<Options />)
+    const { container } = await render(<Options />)
 
     const options = container.querySelector('div[class*="-options"]')
 
@@ -38,13 +39,13 @@ describe('<Options />', () => {
   })
 
   it('should render items', async () => {
-    render(
+    await render(
       <Options>
         <Options.Item>Option one</Options.Item>
         <Options.Item>Option two</Options.Item>
       </Options>
     )
-    const items = screen.getAllByRole('listitem')
+    const items = page.getByRole('listitem').elements()
 
     expect(items.length).toBe(2)
   })
@@ -52,31 +53,31 @@ describe('<Options />', () => {
   it('should provide elementRef', async () => {
     const elementRef = vi.fn()
 
-    render(
+    await render(
       <Options elementRef={elementRef} as="ul">
         <Options.Item>Option one</Options.Item>
         <Options.Item>Option two</Options.Item>
       </Options>
     )
-    const optionList = screen.getByRole('list')
+    const optionList = page.getByRole('list').element()
 
     expect(elementRef).toHaveBeenCalledWith(optionList)
   })
 
   it('should render designated tag if `as` prop is specified', async () => {
-    render(
+    await render(
       <Options as="ol">
         <Options.Item>Option one</Options.Item>
         <Options.Item>Option two</Options.Item>
       </Options>
     )
-    const optionList = screen.getByRole('list')
+    const optionList = page.getByRole('list').element()
 
     expect(optionList.tagName).toBe('OL')
   })
 
   it('should render children as listitems when appropriate', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Options as="ul">
         <Options.Item>Option one</Options.Item>
         <Options.Item>Option two</Options.Item>
@@ -90,7 +91,7 @@ describe('<Options />', () => {
   })
 
   it('should pass props through to list', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Options as="ul" role="listbox" data-custom-attr="true">
         <Options.Item>Option one</Options.Item>
         <Options.Item>Option two</Options.Item>
@@ -103,7 +104,7 @@ describe('<Options />', () => {
   })
 
   it('should render root with appropriate role', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Options role="listbox">
         <Options.Item>Option one</Options.Item>
         <Options.Item>Option two</Options.Item>
@@ -115,15 +116,15 @@ describe('<Options />', () => {
   })
 
   it('should allow null children', async () => {
-    render(<Options />)
+    await render(<Options />)
 
-    const options = screen.getByRole('list')
+    const options = page.getByRole('list').element()
 
     expect(options).toBeInTheDocument()
   })
 
   it('should render nested options properly', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Options data-testid="outer-list">
         <Options.Item>Option one </Options.Item>
         <Options.Item>Option two </Options.Item>
@@ -139,7 +140,7 @@ describe('<Options />', () => {
     expect(allLists.length).toBe(2)
     expect(allItems.length).toBe(5)
 
-    const outerList = screen.getByTestId('outer-list')
+    const outerList = page.getByTestId('outer-list').element()
     expect(outerList).toHaveTextContent('Option one Option two')
 
     const nestedLabel = outerList.querySelector(
@@ -148,7 +149,7 @@ describe('<Options />', () => {
     expect(nestedLabel).toBeInTheDocument()
     expect(nestedLabel).toHaveTextContent('Nested list')
 
-    const nestedList = screen.getByTestId('nested-list')
+    const nestedList = page.getByTestId('nested-list').element()
     expect(nestedList).toHaveTextContent('Nested option one Nested option two')
 
     const nestedListItems = nestedList!.querySelectorAll('[class$=-optionItem]')
@@ -160,7 +161,7 @@ describe('<Options />', () => {
 
   describe('for a11y', () => {
     it('should be accessible with links', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Options>
           <Options.Item>Option</Options.Item>
           <Options.Item href="/">Option link</Options.Item>

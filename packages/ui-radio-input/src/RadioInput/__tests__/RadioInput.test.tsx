@@ -22,12 +22,12 @@
  * SOFTWARE.
  */
 
-import { render, waitFor, fireEvent } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
 import type { MockInstance } from 'vitest'
-import { vi } from 'vitest'
 
-import '@testing-library/jest-dom'
+import { fireEvent } from '@testing-library/dom'
+import { render } from 'vitest-browser-react'
+import { userEvent } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import {
   RadioInput,
@@ -54,7 +54,7 @@ describe('<RadioInput />', () => {
   })
 
   it('renders an input with type "radio"', async () => {
-    const { container } = render(
+    const { container } = await render(
       <RadioInput label="fake label" value="someValue" name="someName" />
     )
 
@@ -66,7 +66,7 @@ describe('<RadioInput />', () => {
 
   it('should provide an inputRef prop', async () => {
     const inputRef = vi.fn()
-    const { container } = render(
+    const { container } = await render(
       <RadioInput
         label="fake label"
         value="someValue"
@@ -83,7 +83,7 @@ describe('<RadioInput />', () => {
     it('responds to onClick event', async () => {
       const onClick = vi.fn()
 
-      const { container } = render(
+      const { container } = await render(
         <RadioInput
           label="fake label"
           value="someValue"
@@ -96,7 +96,7 @@ describe('<RadioInput />', () => {
 
       await userEvent.click(input!)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onClick).toHaveBeenCalled()
       })
     })
@@ -104,7 +104,7 @@ describe('<RadioInput />', () => {
     it('does not respond to onClick event when disabled', async () => {
       const onClick = vi.fn()
 
-      const { container } = render(
+      const { container } = await render(
         <RadioInput
           disabled
           label="fake label"
@@ -118,7 +118,7 @@ describe('<RadioInput />', () => {
 
       fireEvent.click(input!)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onClick).not.toHaveBeenCalled()
         expect(input).toBeDisabled()
       })
@@ -127,7 +127,7 @@ describe('<RadioInput />', () => {
     it('does not respond to onClick event when readOnly', async () => {
       const onClick = vi.fn()
 
-      const { container } = render(
+      const { container } = await render(
         <RadioInput
           readOnly
           label="fake label"
@@ -141,7 +141,7 @@ describe('<RadioInput />', () => {
 
       fireEvent.click(input!)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onClick).not.toHaveBeenCalled()
         expect(input).not.toBeDisabled()
         expect(input).toHaveAttribute('readonly')
@@ -151,7 +151,7 @@ describe('<RadioInput />', () => {
     it('responds to onChange event', async () => {
       const onChange = vi.fn()
 
-      const { container } = render(
+      const { container } = await render(
         <RadioInput
           label="fake label"
           value="someValue"
@@ -164,7 +164,7 @@ describe('<RadioInput />', () => {
 
       await userEvent.click(input!)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onChange).toHaveBeenCalled()
       })
     })
@@ -172,7 +172,7 @@ describe('<RadioInput />', () => {
     it('does not respond to onChange event when disabled', async () => {
       const onChange = vi.fn()
 
-      const { container } = render(
+      const { container } = await render(
         <RadioInput
           disabled
           label="fake label"
@@ -186,7 +186,7 @@ describe('<RadioInput />', () => {
 
       fireEvent.click(input!)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onChange).not.toHaveBeenCalled()
       })
     })
@@ -194,7 +194,7 @@ describe('<RadioInput />', () => {
     it('does not respond to onChange event when readOnly', async () => {
       const onChange = vi.fn()
 
-      const { container } = render(
+      const { container } = await render(
         <RadioInput
           readOnly
           label="fake label"
@@ -208,7 +208,7 @@ describe('<RadioInput />', () => {
 
       fireEvent.click(input!)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onChange).not.toHaveBeenCalled()
       })
     })
@@ -216,7 +216,7 @@ describe('<RadioInput />', () => {
     it('responds to onBlur event', async () => {
       const onBlur = vi.fn()
 
-      const { container } = render(
+      const { container } = await render(
         <RadioInput
           label="fake label"
           value="someValue"
@@ -229,7 +229,7 @@ describe('<RadioInput />', () => {
 
       fireEvent.focusOut(input!)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onBlur).toHaveBeenCalled()
       })
     })
@@ -237,7 +237,7 @@ describe('<RadioInput />', () => {
     it('responds to onFocus event', async () => {
       const onFocus = vi.fn()
 
-      const { container } = render(
+      const { container } = await render(
         <RadioInput
           label="fake label"
           value="someValue"
@@ -249,13 +249,13 @@ describe('<RadioInput />', () => {
 
       fireEvent.focus(input!)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onFocus).toHaveBeenCalled()
       })
     })
 
     it('sets input to checked when selected', async () => {
-      const { container } = render(
+      const { container } = await render(
         <RadioInput
           checked
           label="fake label"
@@ -271,7 +271,7 @@ describe('<RadioInput />', () => {
     it('focuses with the focus helper', async () => {
       let ref: RadioInputHandle
 
-      const { container } = render(
+      const { container } = await render(
         <RadioInput
           label="fake label"
           value="someValue"
@@ -284,7 +284,7 @@ describe('<RadioInput />', () => {
 
       ref!.focus()
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(document.activeElement).toBe(input)
       })
     })
@@ -292,7 +292,7 @@ describe('<RadioInput />', () => {
 
   describe('for a11y', () => {
     it('simple variant should meet a11y standards', async () => {
-      const { container } = render(
+      const { container } = await render(
         <RadioInput
           variant="simple"
           label="fake label"

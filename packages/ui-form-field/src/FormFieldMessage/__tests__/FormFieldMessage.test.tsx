@@ -22,15 +22,15 @@
  * SOFTWARE.
  */
 
-import { render } from '@testing-library/react'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { IconWarningLine } from '@instructure/ui-icons'
 import { FormFieldMessage } from '@instructure/ui-form-field/latest'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { describe, it, expect } from 'vitest'
 
 describe('<FormFieldMessage />', () => {
-  it('should render message', () => {
-    const { container } = render(
+  it('should render message', async () => {
+    const { container } = await render(
       <FormFieldMessage>hello world</FormFieldMessage>
     )
 
@@ -42,8 +42,8 @@ describe('<FormFieldMessage />', () => {
     expect(formFieldMessage).toHaveTextContent('hello world')
   })
 
-  it('should render message if Node is passed', () => {
-    const { container } = render(
+  it('should render message if Node is passed', async () => {
+    const { container } = await render(
       <FormFieldMessage>
         <span>
           <IconWarningLine /> Invalid name
@@ -62,7 +62,7 @@ describe('<FormFieldMessage />', () => {
   })
 
   it('should meet a11y standards', async () => {
-    const { container } = render(<FormFieldMessage />)
+    const { container } = await render(<FormFieldMessage />)
 
     const axeCheck = await runAxeCheck(container)
 

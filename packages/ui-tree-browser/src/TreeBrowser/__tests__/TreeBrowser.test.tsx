@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
-import { vi } from 'vitest'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import type { MockInstance } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 
@@ -76,7 +76,7 @@ describe('<TreeBrowser />', () => {
   })
 
   it('should render a tree', async () => {
-    const { container } = render(
+    const { container } = await render(
       <TreeBrowser
         collections={COLLECTIONS_DATA}
         items={ITEMS_DATA}
@@ -89,55 +89,55 @@ describe('<TreeBrowser />', () => {
   })
 
   it('should render subcollections', async () => {
-    render(
+    await render(
       <TreeBrowser
         collections={COLLECTIONS_DATA}
         items={ITEMS_DATA}
         rootId={2}
       />
     )
-    const items = screen.getAllByRole('treeitem')
+    const items = page.getByRole('treeitem').elements()
 
     expect(items.length).toEqual(1)
 
     await userEvent.click(items[0])
 
-    await waitFor(() => {
-      const itemsAfterClick = screen.getAllByRole('treeitem')
+    await vi.waitFor(() => {
+      const itemsAfterClick = page.getByRole('treeitem').elements()
       expect(itemsAfterClick.length).toEqual(4)
     })
   })
 
   it('should render all collections at top level if showRootCollection is true and rootId is undefined', async () => {
-    render(
+    await render(
       <TreeBrowser
         collections={COLLECTIONS_DATA}
         items={ITEMS_DATA}
         rootId={undefined}
       />
     )
-    const items = screen.getAllByRole('treeitem')
+    const items = page.getByRole('treeitem').elements()
 
     expect(items.length).toEqual(4)
   })
 
   describe('expanded', () => {
     it('should not expand collections or items without defaultExpanded prop', async () => {
-      render(
+      await render(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
           items={ITEMS_DATA}
           rootId={2}
         />
       )
-      const items = screen.getAllByRole('treeitem')
+      const items = page.getByRole('treeitem').elements()
 
       expect(items.length).toEqual(1)
       expect(items[0]).toHaveTextContent('Root Directory')
     })
 
     it('should accept an array of default expanded collections', async () => {
-      render(
+      await render(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
           items={ITEMS_DATA}
@@ -145,9 +145,9 @@ describe('<TreeBrowser />', () => {
           defaultExpanded={[2, 3]}
         />
       )
-      const items = screen.getAllByRole('treeitem')
-      const subRoot2 = screen.getByLabelText('Sub Root 2')
-      const nestedSub = screen.getByLabelText('Nested Sub Collection')
+      const items = page.getByRole('treeitem').elements()
+      const subRoot2 = page.getByLabelText('Sub Root 2').element()
+      const nestedSub = page.getByLabelText('Nested Sub Collection').element()
 
       expect(items.length).toEqual(5)
 
@@ -161,24 +161,24 @@ describe('<TreeBrowser />', () => {
 
   describe('selected', () => {
     it('should not show the selection if selectionType is none', async () => {
-      render(
+      await render(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
           items={ITEMS_DATA}
           rootId={2}
         />
       )
-      const item = screen.getByRole('treeitem')
+      const item = page.getByRole('treeitem').element()
 
       await userEvent.click(item)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(item).not.toHaveAttribute('aria-selected')
       })
     })
 
     it('should show the selection indicator on last clicked collection or item', async () => {
-      render(
+      await render(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
           items={ITEMS_DATA}
@@ -186,19 +186,19 @@ describe('<TreeBrowser />', () => {
           selectionType="single"
         />
       )
-      const item = screen.getByLabelText('Root Directory')
+      const item = page.getByLabelText('Root Directory').element()
 
       await userEvent.click(item)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(item).toHaveAttribute('aria-selected')
       })
 
-      const nestedItem = screen.getByLabelText('Item 1')
+      const nestedItem = page.getByLabelText('Item 1').element()
 
       await userEvent.click(nestedItem)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(nestedItem).toHaveAttribute('aria-selected')
       })
     })
@@ -206,7 +206,7 @@ describe('<TreeBrowser />', () => {
 
   describe('collections', () => {
     it('should render collections with string-keyed ids', async () => {
-      render(
+      await render(
         <TreeBrowser
           collections={COLLECTIONS_DATA_WITH_STRING_IDS}
           items={ITEMS_DATA}
@@ -214,13 +214,13 @@ describe('<TreeBrowser />', () => {
           showRootCollection={true}
         />
       )
-      const item = screen.getByLabelText('Root Directory')
+      const item = page.getByLabelText('Root Directory').element()
 
       expect(item).toBeInTheDocument()
     })
 
     it('should not show the first keyed collection if showRootCollection is false', async () => {
-      render(
+      await render(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
           items={ITEMS_DATA}
@@ -228,26 +228,26 @@ describe('<TreeBrowser />', () => {
           showRootCollection={false}
         />
       )
-      const items = screen.getAllByRole('treeitem')
+      const items = page.getByRole('treeitem').elements()
 
       expect(items.length).toEqual(3)
     })
 
     it('should render first keyed collection if showRootCollection is true and rootId specified', async () => {
-      render(
+      await render(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
           items={ITEMS_DATA}
           rootId={2}
         />
       )
-      const item = screen.getByLabelText('Root Directory')
+      const item = page.getByLabelText('Root Directory').element()
 
       expect(item).toBeInTheDocument()
     })
 
     it('should not show the first keyed collection if showRootCollection is false and rootId is 0', async () => {
-      render(
+      await render(
         <TreeBrowser
           collections={COLLECTIONS_DATA_WITH_ZERO}
           items={ITEMS_DATA}
@@ -255,13 +255,13 @@ describe('<TreeBrowser />', () => {
           showRootCollection={false}
         />
       )
-      const items = screen.getAllByRole('treeitem')
+      const items = page.getByRole('treeitem').elements()
 
       expect(items.length).toEqual(3)
     })
 
     it('should render a folder icon by default', async () => {
-      const { container } = render(
+      const { container } = await render(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
           items={ITEMS_DATA}
@@ -281,7 +281,7 @@ describe('<TreeBrowser />', () => {
         </svg>
       )
 
-      render(
+      await render(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
           items={ITEMS_DATA}
@@ -289,8 +289,8 @@ describe('<TreeBrowser />', () => {
           collectionIcon={() => IconCustom}
         />
       )
-      const iconCustom = screen.getByTestId('icon-custom')
-      const title = screen.getByTestId('icon-custom-title')
+      const iconCustom = page.getByTestId('icon-custom').element()
+      const title = page.getByTestId('icon-custom-title').element()
 
       expect(iconCustom).toBeInTheDocument()
       expect(title).toBeInTheDocument()
@@ -298,7 +298,7 @@ describe('<TreeBrowser />', () => {
     })
 
     it('should render without icon if set to null', async () => {
-      const { container } = render(
+      const { container } = await render(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
           items={ITEMS_DATA}
@@ -314,7 +314,7 @@ describe('<TreeBrowser />', () => {
     it('should call onCollectionToggle when expanding and collapsing with mouse', async () => {
       const onCollectionToggle = vi.fn()
 
-      render(
+      await render(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
           items={ITEMS_DATA}
@@ -322,11 +322,11 @@ describe('<TreeBrowser />', () => {
           onCollectionToggle={onCollectionToggle}
         />
       )
-      const item = screen.getByRole('treeitem')
+      const item = page.getByRole('treeitem').element()
 
       await userEvent.click(item)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onCollectionToggle).toHaveBeenCalled()
       })
     })
@@ -334,7 +334,7 @@ describe('<TreeBrowser />', () => {
     it('should call onCollectionClick on button activation (space/enter or click)', async () => {
       const onCollectionClick = vi.fn()
 
-      render(
+      await render(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
           items={ITEMS_DATA}
@@ -342,19 +342,19 @@ describe('<TreeBrowser />', () => {
           onCollectionClick={onCollectionClick}
         />
       )
-      const item = screen.getByLabelText('Root Directory')
+      const item = page.getByLabelText('Root Directory').element()
 
       await userEvent.click(item)
       await userEvent.type(item, '{space}')
       await userEvent.type(item, '{enter}')
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onCollectionClick).toHaveBeenCalledTimes(3)
       })
     })
 
     it('should render before, after nodes of the provided collection', async () => {
-      const { container } = render(
+      const { container } = await render(
         <TreeBrowser
           collections={{
             2: {
@@ -389,7 +389,7 @@ describe('<TreeBrowser />', () => {
 
   describe('items', () => {
     it('should render a document icon by default', async () => {
-      const { container } = render(
+      const { container } = await render(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
           items={ITEMS_DATA}
@@ -410,7 +410,7 @@ describe('<TreeBrowser />', () => {
         </svg>
       )
 
-      render(
+      await render(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
           items={ITEMS_DATA}
@@ -419,8 +419,8 @@ describe('<TreeBrowser />', () => {
           itemIcon={() => IconCustom}
         />
       )
-      const iconCustom = screen.getByTestId('icon-custom')
-      const title = screen.getByTestId('icon-custom-title')
+      const iconCustom = page.getByTestId('icon-custom').element()
+      const title = page.getByTestId('icon-custom-title').element()
 
       expect(iconCustom).toBeInTheDocument()
       expect(title).toBeInTheDocument()
@@ -428,7 +428,7 @@ describe('<TreeBrowser />', () => {
     })
 
     it('should render without icon if set to null', async () => {
-      const { container } = render(
+      const { container } = await render(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
           items={ITEMS_DATA}
@@ -443,7 +443,7 @@ describe('<TreeBrowser />', () => {
 
   describe('for a11y', () => {
     it('should meet a11y standards', async () => {
-      const { container } = render(
+      const { container } = await render(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
           items={ITEMS_DATA}
@@ -455,7 +455,7 @@ describe('<TreeBrowser />', () => {
     })
 
     it('should accept a treeLabel prop', async () => {
-      render(
+      await render(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
           items={ITEMS_DATA}
@@ -463,31 +463,31 @@ describe('<TreeBrowser />', () => {
           treeLabel="Test treeLabel"
         />
       )
-      const tree = screen.getByLabelText('Test treeLabel')
+      const tree = page.getByLabelText('Test treeLabel').element()
       expect(tree).toBeInTheDocument()
     })
 
     it('should toggle aria-expanded', async () => {
-      render(
+      await render(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
           items={ITEMS_DATA}
           rootId={2}
         />
       )
-      const item = screen.getByRole('treeitem')
+      const item = page.getByRole('treeitem').element()
 
       expect(item).toHaveAttribute('aria-expanded', 'false')
 
       await userEvent.click(item)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(item).toHaveAttribute('aria-expanded', 'true')
       })
     })
 
     it('should use aria-selected when selectionType is not none', async () => {
-      render(
+      await render(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
           items={ITEMS_DATA}
@@ -495,23 +495,23 @@ describe('<TreeBrowser />', () => {
           selectionType="single"
         />
       )
-      const item = screen.getByRole('treeitem')
+      const item = page.getByRole('treeitem').element()
       expect(item).not.toHaveAttribute('aria-selected')
 
       await userEvent.click(item)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(item).toHaveAttribute('aria-selected', 'true')
       })
 
-      const nestedItem = screen.getByLabelText('Sub Root 1')
+      const nestedItem = page.getByLabelText('Sub Root 1').element()
       expect(nestedItem).toHaveAttribute('aria-selected', 'false')
     })
   })
 
   describe('sorting', () => {
     it("should present collections and items in alphabetical order, in spite of the order of 'collections' and 'items' arrays", async () => {
-      render(
+      await render(
         <TreeBrowser
           collections={{
             1: {
@@ -549,7 +549,7 @@ describe('<TreeBrowser />', () => {
           }}
         />
       )
-      const items = screen.getAllByRole('treeitem')
+      const items = page.getByRole('treeitem').elements()
 
       const arr = items.map((item) => item.textContent)
       expect(arr.slice(1, 5)).toStrictEqual([

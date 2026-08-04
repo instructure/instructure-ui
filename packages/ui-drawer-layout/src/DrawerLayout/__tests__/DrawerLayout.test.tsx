@@ -22,16 +22,18 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor, fireEvent, act } from '@testing-library/react'
-import { vi } from 'vitest'
+import { fireEvent } from '@testing-library/dom'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect, vi } from 'vitest'
 import DrawerLayoutFixture from '../v2/__fixtures__/DrawerLayout.fixture.js'
 import { Button } from '@instructure/ui-buttons/latest'
 import { DrawerLayout } from '@instructure/ui-drawer-layout/latest'
 import { View } from '@instructure/ui-view/latest'
 
 describe('<DrawerLayout />', () => {
-  it('should render', () => {
-    const { container } = render(<DrawerLayoutFixture />)
+  it('should render', async () => {
+    const { container } = await render(<DrawerLayoutFixture />)
 
     const layout = container.querySelector('div[class$="-drawerLayout"]')
 
@@ -39,11 +41,11 @@ describe('<DrawerLayout />', () => {
   })
 
   it('should render a DrawerTray and DrawerContent', async () => {
-    const { container } = render(
+    const { container } = await render(
       <DrawerLayoutFixture open={true} layoutWidth="800px" trayWidth="250px" />
     )
 
-    const tray = screen.getByText('Hello from tray')
+    const tray = page.getByText('Hello from tray').element()
     const contentWrapper = container.querySelector(
       'div[class$="drawerLayout__content"]'
     )
@@ -55,7 +57,7 @@ describe('<DrawerLayout />', () => {
 
   describe('DrawerTray a11y role', () => {
     it('should have role="dialog" in overlay mode', async () => {
-      render(
+      await render(
         <View height="25rem" as="div" position="relative">
           <DrawerLayout minWidth="4444px">
             <DrawerLayout.Tray open={true} label="a tray test">
@@ -68,14 +70,14 @@ describe('<DrawerLayout />', () => {
         </View>
       )
 
-      await waitFor(() => {
-        const drawerTray = screen.getByLabelText('a tray test')
+      await vi.waitFor(() => {
+        const drawerTray = page.getByLabelText('a tray test').element()
         expect(drawerTray).toHaveAttribute('role', 'dialog')
       })
     })
 
     it('should have role="region" when not in overlay mode', async () => {
-      render(
+      await render(
         <View height="25rem" as="div" position="relative">
           <DrawerLayout minWidth="0px">
             <DrawerLayout.Tray open={true} label="a tray test">
@@ -88,8 +90,8 @@ describe('<DrawerLayout />', () => {
         </View>
       )
 
-      await waitFor(() => {
-        const drawerTray = screen.getByLabelText('a tray test')
+      await vi.waitFor(() => {
+        const drawerTray = page.getByLabelText('a tray test').element()
         expect(drawerTray).toHaveAttribute('role', 'region')
       })
     })
@@ -126,16 +128,16 @@ describe('<DrawerLayout />', () => {
         </DrawerLayout>
       </View>
     )
-    const { rerender } = render(<TestComponent />)
-    expect(screen.getByText(msg)).toBeInTheDocument()
+    const { rerender } = await render(<TestComponent />)
+    expect(page.getByText(msg).element()).toBeInTheDocument()
     await act(() => new Promise((resolve) => requestAnimationFrame(resolve)))
     fireEvent.keyUp(document, { keyCode: 27 }) // ESC key
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onDismiss).toHaveBeenCalled()
     })
-    rerender(<TestComponent />)
-    await waitFor(() => {
-      expect(screen.queryByText(msg)).not.toBeInTheDocument()
+    await rerender(<TestComponent />)
+    await vi.waitFor(() => {
+      expect(page.getByText(msg).query()).not.toBeInTheDocument()
     })
   })
 })

@@ -22,10 +22,9 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
-import { vi } from 'vitest'
-import userEvent from '@testing-library/user-event'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 import { CheckInstUIIcon } from '@instructure/ui-icons'
 
@@ -51,7 +50,7 @@ describe('<Drilldown.Option />', () => {
   })
 
   it('should allow setting "selected" property on Options', async () => {
-    render(
+    await render(
       <Drilldown rootPageId="page0">
         <Drilldown.Page id="page0">
           <Drilldown.Group id="group0">
@@ -65,7 +64,7 @@ describe('<Drilldown.Option />', () => {
         </Drilldown.Page>
       </Drilldown>
     )
-    const selectedOption = screen.getByLabelText('Option - 2')
+    const selectedOption = page.getByLabelText('Option - 2').element()
 
     expect(selectedOption).toBeInTheDocument()
     expect(selectedOption).toHaveAttribute('id', 'groupOption02')
@@ -74,7 +73,7 @@ describe('<Drilldown.Option />', () => {
 
   describe('id prop', () => {
     it('should throw warning the id is not provided', async () => {
-      render(
+      await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             {/* @ts-expect-error: Testing behavior when `id` is missing */}
@@ -92,7 +91,7 @@ describe('<Drilldown.Option />', () => {
     })
 
     it('should throw warning the id is duplicated', async () => {
-      render(
+      await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Option id="option1">Option1</Drilldown.Option>
@@ -110,7 +109,7 @@ describe('<Drilldown.Option />', () => {
     })
 
     it('should not render the options with duplicated id', async () => {
-      render(
+      await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Option id="option1">Option1</Drilldown.Option>
@@ -119,8 +118,8 @@ describe('<Drilldown.Option />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const menuitems = screen.queryAllByRole('menuitem')
-      const option = screen.queryByText('Option2')
+      const menuitems = page.getByRole('menuitem').elements()
+      const option = page.getByText('Option2').query()
 
       expect(menuitems.length).toBe(0)
       expect(option).not.toBeInTheDocument()
@@ -129,7 +128,7 @@ describe('<Drilldown.Option />', () => {
 
   describe('children function prop', () => {
     it('should throw warning if it returns nothing', async () => {
-      render(
+      await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Option id="option1">{() => null}</Drilldown.Option>
@@ -148,7 +147,7 @@ describe('<Drilldown.Option />', () => {
     it('should provide props as parameters', async () => {
       const childrenFunction = vi.fn(() => 'Option')
 
-      render(
+      await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Option id="option1">{childrenFunction}</Drilldown.Option>
@@ -167,7 +166,7 @@ describe('<Drilldown.Option />', () => {
   describe('elementRef prop', () => {
     it('should give back to ref for the option wrapper (Options.Item)', async () => {
       const elementRef = vi.fn()
-      const { container } = render(
+      const { container } = await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Option id="option1" elementRef={elementRef}>
@@ -184,7 +183,7 @@ describe('<Drilldown.Option />', () => {
 
   describe('subPageId prop', () => {
     it('should display arrow icon', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Option id="option1" subPageId="page1">
@@ -200,7 +199,7 @@ describe('<Drilldown.Option />', () => {
     })
 
     it('should indicate subpage fo SR', async () => {
-      render(
+      await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Option id="option1" subPageId="page1">
@@ -209,7 +208,7 @@ describe('<Drilldown.Option />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const option = screen.getByLabelText('Option')
+      const option = page.getByLabelText('Option').element()
 
       expect(option).toHaveAttribute('role', 'menuitem')
       expect(option).toHaveAttribute('aria-haspopup', 'true')
@@ -218,7 +217,7 @@ describe('<Drilldown.Option />', () => {
 
   describe('disabled prop', () => {
     it('should mark option as disabled for SR', async () => {
-      render(
+      await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Option id="option1" disabled>
@@ -227,13 +226,13 @@ describe('<Drilldown.Option />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const option = screen.getByLabelText('Option')
+      const option = page.getByLabelText('Option').element()
 
       expect(option).toHaveAttribute('aria-disabled', 'true')
     })
 
     it('should not allow selection if the Drilldown.Option itself is disabled', async () => {
-      render(
+      await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Group id="group0" selectableType="multiple">
@@ -244,8 +243,10 @@ describe('<Drilldown.Option />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const optionItemContainer = screen.getByLabelText('Disabled Option')
-      const optionContent = screen.getByText('Disabled Option')
+      const optionItemContainer = page
+        .getByLabelText('Disabled Option')
+        .element()
+      const optionContent = page.getByText('Disabled Option').element()
 
       expect(optionItemContainer).toHaveAttribute('aria-checked', 'false')
 
@@ -257,7 +258,7 @@ describe('<Drilldown.Option />', () => {
 
   describe('href prop', () => {
     it('should display option as link', async () => {
-      render(
+      await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Option id="option1" href="/helloWorld">
@@ -266,14 +267,14 @@ describe('<Drilldown.Option />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const option = screen.getByLabelText('Option')
+      const option = page.getByLabelText('Option').element()
 
       expect(option.tagName).toBe('A')
       expect(option).toHaveAttribute('href', '/helloWorld')
     })
 
     it('should throw warning if subPageId is provided too', async () => {
-      render(
+      await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Option id="option1" href="/helloWorld" subPageId="page1">
@@ -282,7 +283,7 @@ describe('<Drilldown.Option />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const option = screen.getByLabelText('Option')
+      const option = page.getByLabelText('Option').element()
       const expectedErrorMessage =
         'Warning: Drilldown.Option with id "option1" has subPageId, so it will ignore the "href" property.'
 
@@ -296,7 +297,7 @@ describe('<Drilldown.Option />', () => {
     })
 
     it('should throw warning if option is in selectable group', async () => {
-      render(
+      await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Group id="group0" selectableType="multiple">
@@ -307,7 +308,7 @@ describe('<Drilldown.Option />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const option = screen.getByLabelText('Option')
+      const option = page.getByLabelText('Option').element()
       const expectedErrorMessage =
         'Warning: Drilldown.Option with id "groupOption01" is in a selectable group, so it will ignore the "href" property.'
 
@@ -323,14 +324,14 @@ describe('<Drilldown.Option />', () => {
 
   describe('as prop', () => {
     it('should render option as `li` by default', async () => {
-      render(
+      await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Option id="option1">Option</Drilldown.Option>
           </Drilldown.Page>
         </Drilldown>
       )
-      const option = screen.getByLabelText('Option')
+      const option = page.getByLabelText('Option').element()
       const wrapper = option.parentElement
 
       expect(option).toHaveAttribute('id', 'option1')
@@ -338,7 +339,7 @@ describe('<Drilldown.Option />', () => {
     })
 
     it('should force option to be `li` while the parent is "ul" or "ol"', async () => {
-      render(
+      await render(
         <Drilldown rootPageId="page0" as="ol">
           <Drilldown.Page id="page0">
             <Drilldown.Option id="option1" as="div">
@@ -347,7 +348,7 @@ describe('<Drilldown.Option />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const option = screen.getByLabelText('Option')
+      const option = page.getByLabelText('Option').element()
       const wrapper = option.parentElement
 
       expect(option).toHaveAttribute('id', 'option1')
@@ -355,7 +356,7 @@ describe('<Drilldown.Option />', () => {
     })
 
     it('should render option as specified html element, when the parent in non-list element', async () => {
-      render(
+      await render(
         <Drilldown rootPageId="page0" as="div">
           <Drilldown.Page id="page0">
             <Drilldown.Option id="option1" as="div">
@@ -364,7 +365,7 @@ describe('<Drilldown.Option />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const option = screen.getByLabelText('Option')
+      const option = page.getByLabelText('Option').element()
       const wrapper = option.parentElement
 
       expect(option).toHaveAttribute('id', 'option1')
@@ -374,20 +375,20 @@ describe('<Drilldown.Option />', () => {
 
   describe('role prop', () => {
     it('should be "menuitem" by default', async () => {
-      render(
+      await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Option id="option1">Option</Drilldown.Option>
           </Drilldown.Page>
         </Drilldown>
       )
-      const option = screen.getByLabelText('Option')
+      const option = page.getByLabelText('Option').element()
 
       expect(option).toHaveAttribute('role', 'menuitem')
     })
 
     it('should be applied on prop', async () => {
-      render(
+      await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Option id="option1" role="presentation">
@@ -396,7 +397,7 @@ describe('<Drilldown.Option />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const option = screen.getByLabelText('Option')
+      const option = page.getByLabelText('Option').element()
 
       expect(option).toHaveAttribute('role', 'presentation')
     })
@@ -404,7 +405,7 @@ describe('<Drilldown.Option />', () => {
 
   describe('renderLabelInfo prop', () => {
     it('should display tag next to the label', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Option id="option1" renderLabelInfo="Info">
@@ -421,7 +422,7 @@ describe('<Drilldown.Option />', () => {
 
     it('as function should have option props as params', async () => {
       const infoFunction = vi.fn(() => 'Info')
-      render(
+      await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Option id="option1" renderLabelInfo={infoFunction}>
@@ -443,7 +444,7 @@ describe('<Drilldown.Option />', () => {
 
   describe('renderBeforeLabel prop', () => {
     it('should display icon before the label', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Option
@@ -463,7 +464,7 @@ describe('<Drilldown.Option />', () => {
 
     it('as function should have option props as params', async () => {
       const beforeLabelFunction = vi.fn(() => <CheckInstUIIcon />)
-      render(
+      await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Option
@@ -489,7 +490,7 @@ describe('<Drilldown.Option />', () => {
     })
 
     it('should throw warning if it is in selectable group', async () => {
-      render(
+      await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Group id="group1" selectableType="multiple">
@@ -512,7 +513,7 @@ describe('<Drilldown.Option />', () => {
 
   describe('renderAfterLabel prop', () => {
     it('should display icon before the label', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Option
@@ -532,7 +533,7 @@ describe('<Drilldown.Option />', () => {
 
     it('as function should have option props as params', async () => {
       const beforeLabelFunction = vi.fn(() => <CheckInstUIIcon />)
-      render(
+      await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Option
@@ -558,7 +559,7 @@ describe('<Drilldown.Option />', () => {
     })
 
     it('should throw warning if it has subPageId', async () => {
-      render(
+      await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Option
@@ -583,7 +584,7 @@ describe('<Drilldown.Option />', () => {
 
   describe('description prop', () => {
     it('should display description under the option', async () => {
-      render(
+      await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Option id="option1" description="This is a description.">
@@ -592,13 +593,13 @@ describe('<Drilldown.Option />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const description = screen.getByText('This is a description.')
+      const description = page.getByText('This is a description.').element()
 
       expect(description).toBeInTheDocument()
     })
 
     it('as a function should display description under the option', async () => {
-      render(
+      await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Option
@@ -610,7 +611,7 @@ describe('<Drilldown.Option />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const description = screen.getByText('This is a description.')
+      const description = page.getByText('This is a description.').element()
 
       expect(description).toBeInTheDocument()
     })
@@ -618,7 +619,7 @@ describe('<Drilldown.Option />', () => {
 
   describe('descriptionRole prop', () => {
     it('should set the role of description', async () => {
-      render(
+      await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Option
@@ -631,7 +632,7 @@ describe('<Drilldown.Option />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const description = screen.getByText('This is a description.')
+      const description = page.getByText('This is a description.').element()
 
       expect(description).toHaveAttribute('role', 'button')
     })
@@ -640,7 +641,7 @@ describe('<Drilldown.Option />', () => {
   describe('onOptionClick callback', () => {
     it('should fire on click with correct params', async () => {
       const onOptionClick = vi.fn()
-      render(
+      await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Option id="option1" onOptionClick={onOptionClick}>
@@ -649,11 +650,11 @@ describe('<Drilldown.Option />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const option = screen.getByText('Option')
+      const option = page.getByText('Option').element()
 
       await userEvent.click(option)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onOptionClick).toHaveBeenCalledTimes(1)
 
         const args = onOptionClick.mock.calls[0][1]
@@ -670,7 +671,7 @@ describe('<Drilldown.Option />', () => {
     })
 
     it('should provide goToPreviousPage method that throws a warning, if there is no previous page', async () => {
-      render(
+      await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Option
@@ -684,11 +685,11 @@ describe('<Drilldown.Option />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const option = screen.getByText('Option')
+      const option = page.getByText('Option').element()
 
       await userEvent.click(option)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         const expectedErrorMessage =
           'Warning: There is no previous page to go to. The current page history is: [page0].'
 
@@ -701,7 +702,7 @@ describe('<Drilldown.Option />', () => {
 
     describe('provide goToPage method', () => {
       it("should throws warning if page doesn't exist", async () => {
-        render(
+        await render(
           <Drilldown rootPageId="page0">
             <Drilldown.Page id="page0">
               <Drilldown.Option
@@ -715,11 +716,11 @@ describe('<Drilldown.Option />', () => {
             </Drilldown.Page>
           </Drilldown>
         )
-        const option = screen.getByText('Option')
+        const option = page.getByText('Option').element()
 
         await userEvent.click(option)
 
-        await waitFor(() => {
+        await vi.waitFor(() => {
           const expectedErrorMessage =
             'Warning: Cannot go to page because page with id: "page1" doesn\'t exist.'
 
@@ -731,7 +732,7 @@ describe('<Drilldown.Option />', () => {
       })
 
       it('should throws warning if if no page id is provided', async () => {
-        render(
+        await render(
           <Drilldown rootPageId="page0">
             <Drilldown.Page id="page0">
               <Drilldown.Option
@@ -746,11 +747,11 @@ describe('<Drilldown.Option />', () => {
             </Drilldown.Page>
           </Drilldown>
         )
-        const option = screen.getByText('Option')
+        const option = page.getByText('Option').element()
 
         await userEvent.click(option)
 
-        await waitFor(() => {
+        await vi.waitFor(() => {
           const expectedErrorMessage =
             'Warning: Cannot go to page because there was no page id provided.'
 
@@ -762,7 +763,7 @@ describe('<Drilldown.Option />', () => {
       })
 
       it('should throws warning if parameter is not string', async () => {
-        render(
+        await render(
           <Drilldown rootPageId="page0">
             <Drilldown.Page id="page0">
               <Drilldown.Option
@@ -777,11 +778,11 @@ describe('<Drilldown.Option />', () => {
             </Drilldown.Page>
           </Drilldown>
         )
-        const option = screen.getByText('Option')
+        const option = page.getByText('Option').element()
 
         await userEvent.click(option)
 
-        await waitFor(() => {
+        await vi.waitFor(() => {
           const expectedErrorMessage =
             'Warning: Cannot go to page because parameter newPageId has to be string (valid page id). Current newPageId is "object".'
 

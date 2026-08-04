@@ -22,16 +22,16 @@
  * SOFTWARE.
  */
 
-import { fireEvent, render } from '@testing-library/react'
-import { vi } from 'vitest'
-import '@testing-library/jest-dom'
+import { fireEvent } from '@testing-library/dom'
+import { render } from 'vitest-browser-react'
+import { describe, it, expect, vi } from 'vitest'
 import { addEventListener } from '../addEventListener.js'
 
 describe('addEventListener', () => {
-  it('should add an event listener and provide a remove method', () => {
+  it('should add an event listener and provide a remove method', async () => {
     const callback = vi.fn()
 
-    const { container } = render(<div />)
+    const { container } = await render(<div />)
     const node = container.firstChild as HTMLDivElement
 
     const listener = addEventListener(node, 'click', callback)

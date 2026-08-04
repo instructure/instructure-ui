@@ -23,8 +23,9 @@
  */
 
 import { useContext } from 'react'
-import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect } from 'vitest'
 
 import { IconPropsProvider, IconPropsContext } from '../index.js'
 
@@ -82,79 +83,81 @@ const MockIconWithProps = ({
 
 describe('IconPropsProvider', () => {
   describe('useIconProps hook', () => {
-    it('should return context values when inside provider', () => {
-      render(
+    it('should return context values when inside provider', async () => {
+      await render(
         <IconPropsProvider size="lg" color="baseColor">
           <TestComponentWithHook />
         </IconPropsProvider>
       )
 
-      expect(screen.getByTestId('size')).toHaveTextContent('lg')
-      expect(screen.getByTestId('color')).toHaveTextContent('baseColor')
+      expect(page.getByTestId('size').element()).toHaveTextContent('lg')
+      expect(page.getByTestId('color').element()).toHaveTextContent('baseColor')
     })
 
-    it('should return empty object when outside provider', () => {
-      render(<TestComponentWithHook />)
+    it('should return empty object when outside provider', async () => {
+      await render(<TestComponentWithHook />)
 
-      expect(screen.getByTestId('size')).toHaveTextContent('undefined')
-      expect(screen.getByTestId('color')).toHaveTextContent('undefined')
+      expect(page.getByTestId('size').element()).toHaveTextContent('undefined')
+      expect(page.getByTestId('color').element()).toHaveTextContent('undefined')
     })
 
-    it('should return semantic size tokens', () => {
-      render(
+    it('should return semantic size tokens', async () => {
+      await render(
         <IconPropsProvider size="lg" color="accentRedColor">
           <TestComponentWithHook />
         </IconPropsProvider>
       )
 
-      expect(screen.getByTestId('size')).toHaveTextContent('lg')
-      expect(screen.getByTestId('color')).toHaveTextContent('accentRedColor')
+      expect(page.getByTestId('size').element()).toHaveTextContent('lg')
+      expect(page.getByTestId('color').element()).toHaveTextContent(
+        'accentRedColor'
+      )
     })
   })
 
   describe('Icon components receive props from context', () => {
-    it('should pass context values to icon component', () => {
-      render(
+    it('should pass context values to icon component', async () => {
+      await render(
         <IconPropsProvider size="md" color="baseColor">
           <MockIconComponent />
         </IconPropsProvider>
       )
 
-      const icon = screen.getByTestId('mock-icon')
+      const icon = page.getByTestId('mock-icon').element()
       expect(icon).toHaveAttribute('data-size', 'md')
       expect(icon).toHaveAttribute('data-color', 'baseColor')
     })
 
-    it('should work without IconPropsProvider', () => {
-      render(<MockIconComponent />)
+    it('should work without IconPropsProvider', async () => {
+      await render(<MockIconComponent />)
 
-      const icon = screen.getByTestId('mock-icon')
+      const icon = page.getByTestId('mock-icon').element()
       expect(icon).toHaveAttribute('data-size', 'none')
       expect(icon).toHaveAttribute('data-color', 'none')
     })
   })
 
   describe('Direct props override context props', () => {
-    it('should allow direct props to override context', () => {
-      render(
+    it('should allow direct props to override context', async () => {
+      await render(
         <IconPropsProvider size="lg" color="baseColor">
           <MockIconWithProps size="sm" color="accentRedColor" />
         </IconPropsProvider>
       )
 
-      const icon = screen.getByTestId('mock-icon-with-props')
+      const icon = page.getByTestId('mock-icon-with-props').element()
       expect(icon).toHaveAttribute('data-size', 'sm')
       expect(icon).toHaveAttribute('data-color', 'accentRedColor')
     })
 
-    it('should use context when no direct props provided', () => {
-      render(
+    it('should use context when no direct props provided', async () => {
+      await render(
         <IconPropsProvider size="lg" color="baseColor">
           <MockIconWithProps />
         </IconPropsProvider>
       )
 
-      const icon = screen.getByTestId('mock-icon-with-props')
+      const icon = page.getByTestId('mock-icon-with-props').element()
       expect(icon).toHaveAttribute('data-size', 'lg')
       expect(icon).toHaveAttribute('data-color', 'baseColor')
     })

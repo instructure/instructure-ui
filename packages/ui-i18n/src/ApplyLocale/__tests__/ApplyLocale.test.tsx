@@ -22,9 +22,8 @@
  * SOFTWARE.
  */
 import { Component } from 'react'
-import { render } from '@testing-library/react'
-import '@testing-library/jest-dom'
-import { expect } from 'vitest'
+import { render } from 'vitest-browser-react'
+import { describe, it, expect } from 'vitest'
 import { ApplyLocale } from '../index.js'
 import { ApplyLocaleContext } from '../ApplyLocaleContext.js'
 
@@ -44,7 +43,7 @@ class LocalizableComponent extends Component {
 
 describe('<ApplyLocale />', async () => {
   it('applies locale context', async () => {
-    const { container } = render(
+    const { container } = await render(
       <ApplyLocale locale="fr">
         <LocalizableComponent />
       </ApplyLocale>
@@ -53,7 +52,7 @@ describe('<ApplyLocale />', async () => {
   })
 
   it('applies timezone context', async () => {
-    const { container } = render(
+    const { container } = await render(
       <ApplyLocale timezone="Europe/Paris">
         <LocalizableComponent />
       </ApplyLocale>

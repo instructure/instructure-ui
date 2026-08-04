@@ -22,15 +22,16 @@
  * SOFTWARE.
  */
 
-import { render } from '@testing-library/react'
-import { vi } from 'vitest'
 import { GridCol } from '@instructure/ui-grid/latest'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { describe, it, expect, vi } from 'vitest'
 
 describe('<GridCol />', () => {
   it('should render content in each column', async () => {
     const elementRef = vi.fn()
-    const { container } = render(<GridCol elementRef={elementRef}>Foo</GridCol>)
+    const { container } = await render(
+      <GridCol elementRef={elementRef}>Foo</GridCol>
+    )
 
     expect(container).toHaveTextContent('Foo')
     expect(elementRef).toHaveBeenCalledWith(container.firstChild)

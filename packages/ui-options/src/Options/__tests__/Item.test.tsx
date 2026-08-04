@@ -22,17 +22,15 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
-import { vi, expect } from 'vitest'
-import userEvent from '@testing-library/user-event'
-
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import { describe, it, expect, vi } from 'vitest'
 import { IconCheckSolid } from '@instructure/ui-icons'
 import { Options, OptionItem as Item } from '@instructure/ui-options/latest'
 
 describe('<Item />', () => {
   it('should render', async () => {
-    const { container } = render(<Item />)
+    const { container } = await render(<Item />)
 
     const optionItem = container.querySelector('[class$="-optionItem"]')
     expect(optionItem).toBeInTheDocument()
@@ -44,7 +42,7 @@ describe('<Item />', () => {
   })
 
   it('should not render as a list item by default', async () => {
-    const { container } = render(<Item>Hello World</Item>)
+    const { container } = await render(<Item>Hello World</Item>)
 
     const item = container.querySelector('[class$="-optionItem"]')
 
@@ -53,7 +51,7 @@ describe('<Item />', () => {
   })
 
   it('should render designated tag if `as` prop is specified', async () => {
-    const { container } = render(<Item as="li">Hello World</Item>)
+    const { container } = await render(<Item as="li">Hello World</Item>)
 
     const item = container.querySelector('[class$="-optionItem"]')
 
@@ -62,7 +60,7 @@ describe('<Item />', () => {
   })
 
   it('should render children properly', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Item>
         <span id="customContent">Hello World</span>
       </Item>
@@ -75,17 +73,17 @@ describe('<Item />', () => {
   })
 
   it('should render role attributes appropriately when given a role', async () => {
-    const { container } = render(<Item role="option">Hello World</Item>)
+    const { container } = await render(<Item role="option">Hello World</Item>)
 
     const item = container.querySelector('[class$="-optionItem"]')
-    const child = screen.getByRole('option')
+    const child = page.getByRole('option').element()
 
     expect(item).toHaveAttribute('role', 'none')
     expect(child).toBeInTheDocument()
   })
 
   it('should render description properly', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Item description="Some text as description">
         <span id="customContent">Hello World</span>
       </Item>
@@ -100,19 +98,19 @@ describe('<Item />', () => {
   })
 
   it('should render role attributes for description', async () => {
-    render(
+    await render(
       <Item description="Some text as description" descriptionRole="comment">
         Hello World
       </Item>
     )
-    const description = screen.getByRole('comment')
+    const description = page.getByRole('comment').element()
 
     expect(description).toBeInTheDocument()
     expect(description).toHaveTextContent('Some text as description')
   })
 
   it('should pass props through to label', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Item role="option" tabIndex={-1} data-custom-attr="true">
         Hello World
       </Item>
@@ -130,7 +128,9 @@ describe('<Item />', () => {
 
   it('should pass event handlers through to label', async () => {
     const onClick = vi.fn()
-    const { container } = render(<Item onClick={onClick}>Hello World</Item>)
+    const { container } = await render(
+      <Item onClick={onClick}>Hello World</Item>
+    )
 
     const optionItem = container.querySelector('[class$="-optionItem"]')
     const optionItemContainer = container.querySelector(
@@ -138,18 +138,18 @@ describe('<Item />', () => {
     )
 
     await userEvent.click(optionItem!)
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onClick).not.toHaveBeenCalled()
     })
 
     await userEvent.click(optionItemContainer!)
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onClick).toHaveBeenCalledTimes(1)
     })
   })
 
   it('should render content before label', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Item renderBeforeLabel={<IconCheckSolid />}>Hello World</Item>
     )
 
@@ -163,7 +163,7 @@ describe('<Item />', () => {
   })
 
   it('should render content after label', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Item renderAfterLabel={<IconCheckSolid />}>Hello World</Item>
     )
 
@@ -177,7 +177,7 @@ describe('<Item />', () => {
   })
 
   it('should render nested lists', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Item>
         <Options as="ul" renderLabel={'Nested list'}>
           <Item>Sub item</Item>
@@ -200,7 +200,9 @@ describe('<Item />', () => {
   })
 
   it('should render as link with href prop', async () => {
-    const { container } = render(<Item href="/helloWorld">Hello World</Item>)
+    const { container } = await render(
+      <Item href="/helloWorld">Hello World</Item>
+    )
 
     const link = container.querySelector('[class$="-optionItem__container"]')
 

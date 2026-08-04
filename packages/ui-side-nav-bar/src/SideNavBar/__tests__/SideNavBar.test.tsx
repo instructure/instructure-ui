@@ -22,10 +22,9 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
-import { vi } from 'vitest'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 import { Badge } from '@instructure/ui-badge/latest'
 import { IconAdminLine, IconDashboardLine } from '@instructure/ui-icons'
@@ -48,7 +47,7 @@ describe('<SideNavBar />', () => {
   })
 
   it('should render', async () => {
-    const { container } = render(
+    const { container } = await render(
       <SideNavBar
         label="Main navigation"
         toggleLabel={{
@@ -63,7 +62,7 @@ describe('<SideNavBar />', () => {
         />
       </SideNavBar>
     )
-    const nav = screen.getByRole('navigation')
+    const nav = page.getByRole('navigation').element()
     const icons = container.querySelectorAll('svg')
 
     expect(icons.length).toBe(2)
@@ -77,7 +76,7 @@ describe('<SideNavBar />', () => {
   })
 
   it('should not crash with valid React elements', async () => {
-    render(
+    await render(
       <SideNavBar
         label="Main navigation"
         toggleLabel={{
@@ -94,13 +93,13 @@ describe('<SideNavBar />', () => {
         />
       </SideNavBar>
     )
-    const navElements = screen.getAllByRole('listitem')
+    const navElements = page.getByRole('listitem').elements()
     expect(navElements[0]).toHaveTextContent('test123')
     expect(navElements[1]).toHaveTextContent('Dashboard')
   })
 
   it('should render a single semantic nav element', async () => {
-    render(
+    await render(
       <SideNavBar
         label="Main navigation"
         toggleLabel={{
@@ -115,8 +114,8 @@ describe('<SideNavBar />', () => {
         />
       </SideNavBar>
     )
-    const nav = screen.getByRole('navigation')
-    const navElements = screen.getAllByRole('listitem')
+    const nav = page.getByRole('navigation').element()
+    const navElements = page.getByRole('listitem').elements()
 
     expect(nav).toBeInTheDocument()
     expect(nav.tagName).toBe('NAV')
@@ -125,7 +124,7 @@ describe('<SideNavBar />', () => {
   })
 
   it('should render a semantic list for the nav content', async () => {
-    render(
+    await render(
       <SideNavBar
         label="Main navigation"
         toggleLabel={{
@@ -149,8 +148,8 @@ describe('<SideNavBar />', () => {
         />
       </SideNavBar>
     )
-    const list = screen.getAllByRole('list')
-    const navElements = screen.getAllByRole('listitem')
+    const list = page.getByRole('list').elements()
+    const navElements = page.getByRole('listitem').elements()
 
     expect(list[0].tagName).toBe('UL')
     expect(list.length).toBe(1)
@@ -158,7 +157,7 @@ describe('<SideNavBar />', () => {
   })
 
   it('should switch aria-expanded when the Toggle SideNavBar button is clicked', async () => {
-    render(
+    await render(
       <SideNavBar
         label="Main navigation"
         toggleLabel={{
@@ -182,17 +181,17 @@ describe('<SideNavBar />', () => {
         />
       </SideNavBar>
     )
-    const nav = screen.getByRole('navigation')
-    const toggleBtn = screen.getByRole('button')
+    const nav = page.getByRole('navigation').element()
+    const toggleBtn = page.getByRole('button').element()
 
     expect(nav).toHaveTextContent('Minimize SideNavBar')
     expect(toggleBtn).toHaveAttribute('aria-expanded', 'true')
 
     await userEvent.click(toggleBtn)
 
-    await waitFor(() => {
-      const updatedToggleBtn = screen.getByRole('button')
-      const updatedNav = screen.getByRole('navigation')
+    await vi.waitFor(() => {
+      const updatedToggleBtn = page.getByRole('button').element()
+      const updatedNav = page.getByRole('navigation').element()
 
       expect(updatedNav).toHaveTextContent('Expand SideNavBar')
       expect(updatedToggleBtn).toHaveAttribute('aria-expanded', 'false')
@@ -200,7 +199,7 @@ describe('<SideNavBar />', () => {
   })
 
   it('should meet a11y standards', async () => {
-    const { container } = render(
+    const { container } = await render(
       <SideNavBar
         label="Main navigation"
         toggleLabel={{

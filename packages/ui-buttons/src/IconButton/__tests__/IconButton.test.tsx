@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
-import { vi } from 'vitest'
-import userEvent from '@testing-library/user-event'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import { describe, it, expect, vi } from 'vitest'
 import { IconButton } from '@instructure/ui-buttons/latest'
 
 describe('<IconButton/>', () => {
@@ -40,30 +40,34 @@ describe('<IconButton/>', () => {
   )
   const iconSelector = 'svg[data-title="myIcon"]'
 
-  it('should render an icon when provided as the `children` prop', () => {
-    render(<IconButton screenReaderLabel="some action">{icon}</IconButton>)
+  it('should render an icon when provided as the `children` prop', async () => {
+    await render(
+      <IconButton screenReaderLabel="some action">{icon}</IconButton>
+    )
 
     const svgIcon = document.querySelector(iconSelector)
-    const button = screen.getByRole('button')
+    const button = page.getByRole('button').element()
 
     expect(button).toBeInTheDocument()
     expect(svgIcon).toBeInTheDocument()
     expect(button).toHaveTextContent('some action')
   })
 
-  it('should render an icon when provided as the `renderIcon` prop', () => {
-    render(<IconButton screenReaderLabel="some action" renderIcon={icon} />)
+  it('should render an icon when provided as the `renderIcon` prop', async () => {
+    await render(
+      <IconButton screenReaderLabel="some action" renderIcon={icon} />
+    )
     const svgIcon = document.querySelector(iconSelector)
-    const button = screen.getByRole('button')
+    const button = page.getByRole('button').element()
 
     expect(button).toBeInTheDocument()
     expect(svgIcon).toBeInTheDocument()
   })
 
-  it('should provide a focused getter', () => {
+  it('should provide a focused getter', async () => {
     let componentRef: IconButton | undefined
 
-    render(
+    await render(
       <IconButton
         screenReaderLabel="some action"
         renderIcon={icon}
@@ -72,17 +76,17 @@ describe('<IconButton/>', () => {
         }}
       />
     )
-    const button = screen.getByRole('button')
+    const button = page.getByRole('button').element()
 
     button.focus()
 
     expect(componentRef?.focused).toBe(true)
   })
 
-  it('should provide a focus function', () => {
+  it('should provide a focus function', async () => {
     let componentRef: IconButton | undefined
 
-    render(
+    await render(
       <IconButton
         screenReaderLabel="some action"
         renderIcon={icon}
@@ -91,53 +95,53 @@ describe('<IconButton/>', () => {
         }}
       />
     )
-    const button = screen.getByRole('button')
+    const button = page.getByRole('button').element()
 
     componentRef?.focus()
 
     expect(document.activeElement).toBe(button)
   })
 
-  it('should pass the `href` prop', () => {
-    render(
+  it('should pass the `href` prop', async () => {
+    await render(
       <IconButton screenReaderLabel="some action" renderIcon={icon} href="#" />
     )
-    const linkButton = screen.getByRole('link')
+    const linkButton = page.getByRole('link').element()
 
     expect(linkButton).toBeInTheDocument()
     expect(linkButton).toHaveAttribute('href', '#')
   })
 
-  it('should pass the `type` prop', () => {
-    render(
+  it('should pass the `type` prop', async () => {
+    await render(
       <IconButton
         screenReaderLabel="some action"
         renderIcon={icon}
         type="reset"
       />
     )
-    const button = screen.getByRole('button')
+    const button = page.getByRole('button').element()
 
     expect(button).toBeInTheDocument()
     expect(button).toHaveAttribute('type', 'reset')
   })
 
-  it('should pass the `elementRef` prop', () => {
+  it('should pass the `elementRef` prop', async () => {
     const elementRef = vi.fn()
-    render(
+    await render(
       <IconButton
         screenReaderLabel="some action"
         renderIcon={icon}
         elementRef={elementRef}
       />
     )
-    const button = screen.getByRole('button')
+    const button = page.getByRole('button').element()
 
     expect(elementRef).toHaveBeenCalledWith(button)
   })
 
-  it('should pass the `as` prop', () => {
-    const { container } = render(
+  it('should pass the `as` prop', async () => {
+    const { container } = await render(
       <IconButton screenReaderLabel="some action" renderIcon={icon} as="li" />
     )
     const button = container.querySelector('[type="button"]')
@@ -147,46 +151,46 @@ describe('<IconButton/>', () => {
     expect(button!.tagName).toBe('LI')
   })
 
-  it('should set the disabled attribute when `interaction` is set to disabled', () => {
-    render(
+  it('should set the disabled attribute when `interaction` is set to disabled', async () => {
+    await render(
       <IconButton
         screenReaderLabel="some action"
         renderIcon={icon}
         interaction="disabled"
       />
     )
-    const button = screen.getByRole('button')
+    const button = page.getByRole('button').element()
 
     expect(button).toHaveAttribute('disabled')
   })
 
-  it('should set the disabled attribute when `disabled` is set', () => {
-    render(
+  it('should set the disabled attribute when `disabled` is set', async () => {
+    await render(
       <IconButton screenReaderLabel="some action" renderIcon={icon} disabled />
     )
-    const button = screen.getByRole('button')
+    const button = page.getByRole('button').element()
 
     expect(button).toHaveAttribute('disabled')
   })
 
-  it('should set the disabled attribute when `interaction` is set to readonly', () => {
-    render(
+  it('should set the disabled attribute when `interaction` is set to readonly', async () => {
+    await render(
       <IconButton
         screenReaderLabel="some action"
         renderIcon={icon}
         interaction="readonly"
       />
     )
-    const button = screen.getByRole('button')
+    const button = page.getByRole('button').element()
 
     expect(button).toHaveAttribute('disabled')
   })
 
-  it('should set the disabled attribute when `readOnly` is set', () => {
-    render(
+  it('should set the disabled attribute when `readOnly` is set', async () => {
+    await render(
       <IconButton screenReaderLabel="some action" renderIcon={icon} readOnly />
     )
-    const button = screen.getByRole('button')
+    const button = page.getByRole('button').element()
 
     expect(button).toHaveAttribute('disabled')
   })
@@ -194,18 +198,18 @@ describe('<IconButton/>', () => {
   it('should pass the `onClick` prop', async () => {
     const onClick = vi.fn()
 
-    render(
+    await render(
       <IconButton
         screenReaderLabel="some action"
         renderIcon={icon}
         onClick={onClick}
       />
     )
-    const button = screen.getByRole('button')
+    const button = page.getByRole('button').element()
 
     await userEvent.click(button)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onClick).toHaveBeenCalledTimes(1)
     })
   })

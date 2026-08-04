@@ -22,64 +22,65 @@
  * SOFTWARE.
  */
 
-import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect } from 'vitest'
 import { isVisible } from '../isVisible.js'
 
 describe('isVisible', () => {
-  it('should recognize visible elements', () => {
-    render(<div data-testid="test">Hello world!</div>)
-    const element = screen.getByTestId('test')
+  it('should recognize visible elements', async () => {
+    await render(<div data-testid="test">Hello world!</div>)
+    const element = page.getByTestId('test').element()
 
     expect(isVisible(element)).toBe(true)
   })
 
-  it('should recognize elements with display: none', () => {
-    render(
+  it('should recognize elements with display: none', async () => {
+    await render(
       <div data-testid="test">
         <span style={{ display: 'none' }}>Hello world!</span>
       </div>
     )
-    const element = screen.getByTestId('test').firstChild
+    const element = page.getByTestId('test').element().firstChild
 
     expect(isVisible(element)).toBe(false)
   })
 
-  it('should recognize elements hidden with clip', () => {
+  it('should recognize elements hidden with clip', async () => {
     const style: React.CSSProperties = {
       position: 'absolute',
       overflow: 'hidden',
       clip: 'rect(0,0,0,0)'
     }
-    render(
+    await render(
       <div data-testid="test">
         <span style={style}>Hello world!</span>
       </div>
     )
-    const element = screen.getByTestId('test').firstChild
+    const element = page.getByTestId('test').element().firstChild
 
     expect(isVisible(element)).toBe(false)
   })
 
-  it('should recognize clipped elements that are not hidden', () => {
+  it('should recognize clipped elements that are not hidden', async () => {
     const style: React.CSSProperties = {
       position: 'absolute',
       overflow: 'hidden',
       clip: 'rect(0,0,10px,0)'
     }
-    render(
+    await render(
       <div data-testid="test">
         <span style={style}>Hello world!</span>
       </div>
     )
-    const element = screen.getByTestId('test').firstChild
+    const element = page.getByTestId('test').element().firstChild
 
     expect(isVisible(element)).toBe(true)
   })
 
-  it('should recursively check parent visibility', () => {
+  it('should recursively check parent visibility', async () => {
     const style: React.CSSProperties = { visibility: 'hidden' }
-    render(
+    await render(
       <div data-testid="test" style={style}>
         <span>
           <span data-testid="test-2" style={{ visibility: 'visible' }}>
@@ -88,15 +89,15 @@ describe('isVisible', () => {
         </span>
       </div>
     )
-    const element = screen.getByTestId('test-2')
+    const element = page.getByTestId('test-2').element()
 
     expect(isVisible(element, false)).toBe(true)
     expect(isVisible(element)).toBe(false)
   })
 
-  it('should not recursively check text nodes', () => {
+  it('should not recursively check text nodes', async () => {
     const style: React.CSSProperties = { visibility: 'hidden' }
-    render(
+    await render(
       <div data-testid="test" style={style}>
         <span>
           <span data-testid="test-2" style={{ visibility: 'visible' }}>
@@ -105,7 +106,7 @@ describe('isVisible', () => {
         </span>
       </div>
     )
-    const element = screen.getByTestId('test-2').firstChild
+    const element = page.getByTestId('test-2').element().firstChild
 
     expect(isVisible(element, false)).toBe(true)
     expect(isVisible(element)).toBe(false)

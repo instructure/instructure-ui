@@ -22,9 +22,8 @@
  * SOFTWARE.
  */
 
-import { render } from '@testing-library/react'
-import { vi } from 'vitest'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { describe, it, expect, vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { ColorIndicator } from '@instructure/ui-color-picker/latest'
 
@@ -32,7 +31,9 @@ describe('<ColorIndicator />', () => {
   describe('elementRef prop', () => {
     it('should provide ref', async () => {
       const elementRef = vi.fn()
-      const { container } = render(<ColorIndicator elementRef={elementRef} />)
+      const { container } = await render(
+        <ColorIndicator elementRef={elementRef} />
+      )
 
       expect(elementRef).toHaveBeenCalledWith(container.firstChild)
     })
@@ -40,7 +41,7 @@ describe('<ColorIndicator />', () => {
 
   describe('should be accessible', () => {
     it('a11y', async () => {
-      const { container } = render(<ColorIndicator />)
+      const { container } = await render(<ColorIndicator />)
       const axeCheck = await runAxeCheck(container)
 
       expect(axeCheck).toBe(true)

@@ -22,8 +22,9 @@
  * SOFTWARE.
  */
 
-import { render, screen } from '@testing-library/react'
-import { vi } from 'vitest'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import { AppNav } from '@instructure/ui-navigation/latest'
 
 describe('<AppNav />', () => {
@@ -42,7 +43,7 @@ describe('<AppNav />', () => {
 
   describe('for a11y', () => {
     it('should render a nav element with an aria-label', async () => {
-      const { container } = render(
+      const { container } = await render(
         <AppNav screenReaderLabel="Screen reader label" visibleItemsCount={2}>
           <AppNav.Item
             renderLabel="Some label"
@@ -63,7 +64,7 @@ describe('<AppNav />', () => {
     })
 
     it('should render a semantic list of items', async () => {
-      render(
+      await render(
         <AppNav screenReaderLabel="App navigation" visibleItemsCount={2}>
           <AppNav.Item
             renderLabel="Some first label"
@@ -76,10 +77,10 @@ describe('<AppNav />', () => {
         </AppNav>
       )
 
-      const list = screen.getAllByRole('list')
-      const items = screen.getAllByRole('listitem')
-      const link = screen.getAllByRole('link')
-      const button = screen.getAllByRole('button')
+      const list = page.getByRole('list').elements()
+      const items = page.getByRole('listitem').elements()
+      const link = page.getByRole('link').elements()
+      const button = page.getByRole('button').elements()
 
       expect(list.length).toBe(1)
       expect(items.length).toBe(2)
@@ -88,7 +89,7 @@ describe('<AppNav />', () => {
     })
 
     it('should render with a single item', async () => {
-      render(
+      await render(
         <AppNav screenReaderLabel="App navigation" visibleItemsCount={1}>
           <AppNav.Item
             renderLabel="Some label"
@@ -97,9 +98,9 @@ describe('<AppNav />', () => {
         </AppNav>
       )
 
-      const list = screen.getAllByRole('list')
-      const items = screen.getAllByRole('listitem')
-      const link = screen.getAllByRole('link')
+      const list = page.getByRole('list').elements()
+      const items = page.getByRole('listitem').elements()
+      const link = page.getByRole('link').elements()
 
       expect(list.length).toBe(1)
       expect(items.length).toBe(1)
@@ -109,7 +110,7 @@ describe('<AppNav />', () => {
 
   describe('with rendered content', () => {
     it('should render content after the navigation', async () => {
-      render(
+      await render(
         <AppNav
           screenReaderLabel="App navigation"
           renderAfterItems={<button type="button">I am rendered after!</button>}
@@ -125,7 +126,7 @@ describe('<AppNav />', () => {
           />
         </AppNav>
       )
-      const button = screen.getByRole('button')
+      const button = page.getByRole('button').element()
 
       expect(button).toHaveTextContent('I am rendered after!')
     })
@@ -133,7 +134,7 @@ describe('<AppNav />', () => {
 
   describe('with item truncation', () => {
     it('should pass a custom label to the menu trigger', async () => {
-      render(
+      await render(
         <AppNav
           screenReaderLabel="App navigation"
           visibleItemsCount={2}
@@ -148,7 +149,7 @@ describe('<AppNav />', () => {
         </AppNav>
       )
 
-      const items = screen.getAllByRole('listitem')
+      const items = page.getByRole('listitem').elements()
 
       expect(items.length).toBe(3)
       expect(items[2]).toHaveTextContent('I am sooo custom!')

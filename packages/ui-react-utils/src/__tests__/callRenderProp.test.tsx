@@ -24,8 +24,8 @@
 
 import { Component } from 'react'
 
-import { render } from '@testing-library/react'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { describe, it, expect } from 'vitest'
 
 import { callRenderProp } from '../callRenderProp.js'
 
@@ -54,7 +54,7 @@ describe('callRenderProp', () => {
     expect(callRenderProp(<Foo />)).toStrictEqual(<Foo />)
   })
 
-  it('React classes', () => {
+  it('React classes', async () => {
     class Foo extends Component {
       render() {
         return <div>hello</div>
@@ -64,22 +64,22 @@ describe('callRenderProp', () => {
     const Result = callRenderProp(Foo)
     expect(Result).toStrictEqual(<Foo />)
 
-    const { getByText } = render(Result)
+    const { getByText } = await render(Result)
     expect(getByText('hello')).toBeInTheDocument()
   })
 
-  it('functions', () => {
+  it('functions', async () => {
     const Baz = function () {
       return 'some text'
     }
     const result = callRenderProp(Baz)
 
-    const { getByText } = render(<div>{result}</div>)
+    const { getByText } = await render(<div>{result}</div>)
 
     expect(getByText('some text')).toBeInTheDocument()
   })
 
-  it('fat arrow functions', () => {
+  it('fat arrow functions', async () => {
     const Baz = () => 'some text'
 
     // in this test we are trying to test that it works with fat arrow functions,
@@ -93,23 +93,23 @@ describe('callRenderProp', () => {
 
     const result = callRenderProp(Baz)
 
-    const { getByText } = render(<div>{result}</div>)
+    const { getByText } = await render(<div>{result}</div>)
 
     expect(getByText('some text')).toBeInTheDocument()
   })
 
   describe('passing props', () => {
-    it('should pass props correctly to functions', () => {
+    it('should pass props correctly to functions', async () => {
       const someFunc = ({ shape }: { shape: string }) => <div>{shape}</div>
 
       const result = callRenderProp(someFunc, { shape: 'rectangle' })
 
-      const { getByText } = render(<div>{result}</div>)
+      const { getByText } = await render(<div>{result}</div>)
 
       expect(getByText('rectangle')).toBeInTheDocument()
     })
 
-    it('should pass props correctly to React classes', () => {
+    it('should pass props correctly to React classes', async () => {
       type FooProps = { shape?: string }
       class Foo extends Component<FooProps> {
         static defaultProps = {
@@ -123,7 +123,7 @@ describe('callRenderProp', () => {
 
       const result = callRenderProp(Foo, { shape: 'rectangle' })
 
-      const { getByText } = render(<div>{result}</div>)
+      const { getByText } = await render(<div>{result}</div>)
 
       expect(getByText('rectangle')).toBeInTheDocument()
     })

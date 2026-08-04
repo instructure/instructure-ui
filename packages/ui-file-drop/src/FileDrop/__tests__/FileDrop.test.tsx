@@ -22,18 +22,17 @@
  * SOFTWARE.
  */
 
-import { render } from '@testing-library/react'
-import { vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { FileDrop } from '@instructure/ui-file-drop/latest'
 import type { FileDropProps } from '@instructure/ui-file-drop/latest'
 import { act } from 'react'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { describe, it, expect, vi } from 'vitest'
 
 describe('<FileDrop/>', () => {
   it('should focus the input when focus is called', async () => {
     let inputEl: HTMLInputElement | null | undefined
-    const { container } = render(
+    const { container } = await render(
       <FileDrop
         renderLabel="filedrop"
         inputRef={(el: HTMLInputElement | null) => {
@@ -50,7 +49,7 @@ describe('<FileDrop/>', () => {
 
   it('should provide an inputRef prop', async () => {
     const inputRef = vi.fn()
-    const { container } = render(
+    const { container } = await render(
       <FileDrop renderLabel="filedrop" inputRef={inputRef} />
     )
     const input = container.querySelector('input[class$="-fileDrop__input"]')
@@ -59,21 +58,21 @@ describe('<FileDrop/>', () => {
   })
 
   it('should render', async () => {
-    const { container } = render(<FileDrop renderLabel="fake label" />)
+    const { container } = await render(<FileDrop renderLabel="fake label" />)
     const fileDrop = container.querySelector('[class$="-fileDrop__input"]')
 
     expect(fileDrop).toBeInTheDocument()
   })
 
   it('should meet a11y standards', async () => {
-    const { container } = render(<FileDrop renderLabel="fake label" />)
+    const { container } = await render(<FileDrop renderLabel="fake label" />)
     const axeCheck = await runAxeCheck(container)
     expect(axeCheck).toBe(true)
   })
 
   describe('interactions', async () => {
     it('should functionally disable the input if `interaction` is set to disabled', async () => {
-      const { container } = render(
+      const { container } = await render(
         <FileDrop renderLabel="Some label" interaction="disabled" />
       )
       const fileDrop = container.querySelector('[class$="-fileDrop__input"]')
@@ -82,7 +81,7 @@ describe('<FileDrop/>', () => {
     })
 
     it('should functionally disable the input if `disabled` is set', async () => {
-      const { container } = render(
+      const { container } = await render(
         <FileDrop renderLabel="Some label" disabled />
       )
       const fileDrop = container.querySelector('[class$="-fileDrop__input"]')
@@ -91,7 +90,7 @@ describe('<FileDrop/>', () => {
     })
 
     it('should functionally disable the input if `interaction` is set to readonly', async () => {
-      const { container } = render(
+      const { container } = await render(
         <FileDrop renderLabel="Some label" interaction="readonly" />
       )
       const fileDrop = container.querySelector('[class$="-fileDrop__input"]')
@@ -100,7 +99,7 @@ describe('<FileDrop/>', () => {
     })
 
     it('should functionally disable the input if `readOnly` is set', async () => {
-      const { container } = render(
+      const { container } = await render(
         <FileDrop renderLabel="Some label" readOnly />
       )
       const fileDrop = container.querySelector('[class$="-fileDrop__input"]')
@@ -112,7 +111,7 @@ describe('<FileDrop/>', () => {
   describe('label handling', async () => {
     it('renders element label directly', async () => {
       const label = <section id="test-id">This is an element label</section>
-      const { container } = render(<FileDrop renderLabel={label} />)
+      const { container } = await render(<FileDrop renderLabel={label} />)
 
       const renderedLabel = container.querySelector('[id="test-id"]')
 
@@ -131,7 +130,7 @@ describe('<FileDrop/>', () => {
         return null
       }
 
-      render(<FileDrop renderLabel={label} />)
+      await render(<FileDrop renderLabel={label} />)
 
       expect(typeof result.isDragAccepted).toBe('boolean')
       expect(typeof result.isDragRejected).toBe('boolean')
@@ -149,7 +148,7 @@ describe('<FileDrop/>', () => {
         return null
       }
 
-      render(<FileDrop renderLabel={label} />)
+      await render(<FileDrop renderLabel={label} />)
 
       expect(result.isDragAccepted).toBe(false)
       expect(result.isDragRejected).toBe(false)

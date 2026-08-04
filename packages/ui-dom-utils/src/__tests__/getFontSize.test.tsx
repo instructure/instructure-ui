@@ -22,13 +22,15 @@
  * SOFTWARE.
  */
 
-import { render } from '@testing-library/react'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { describe, it, expect } from 'vitest'
 import { getFontSize } from '../getFontSize.js'
 
 describe('getFontSize', () => {
-  it('should return font size as a number', () => {
-    const { container } = render(<span style={{ fontSize: '17px' }}>Test</span>)
+  it('should return font size as a number', async () => {
+    const { container } = await render(
+      <span style={{ fontSize: '17px' }}>Test</span>
+    )
     const node = container.firstChild
 
     expect(getFontSize(node)).toBe(17)

@@ -22,9 +22,10 @@
  * SOFTWARE.
  */
 
-import { fireEvent, render, screen } from '@testing-library/react'
-import { vi } from 'vitest'
-import '@testing-library/jest-dom'
+import { fireEvent } from '@testing-library/dom'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { BreadcrumbLink } from '@instructure/ui-breadcrumb/latest'
@@ -52,40 +53,44 @@ describe('<BreadcrumbLink />', () => {
     consoleErrorMock.mockRestore()
   })
 
-  it('should render an anchor tag when given a href prop', () => {
-    render(<BreadcrumbLink href={TEST_LINK}>{TEST_TEXT_01}</BreadcrumbLink>)
-    const anchor = screen.getByRole('link')
+  it('should render an anchor tag when given a href prop', async () => {
+    await render(
+      <BreadcrumbLink href={TEST_LINK}>{TEST_TEXT_01}</BreadcrumbLink>
+    )
+    const anchor = page.getByRole('link').element()
 
     expect(anchor).toHaveAttribute('href', TEST_LINK)
   })
 
-  it('should render as a button and respond to onClick event', () => {
+  it('should render as a button and respond to onClick event', async () => {
     const onClick = vi.fn()
 
-    render(<BreadcrumbLink onClick={onClick}>{TEST_TEXT_01}</BreadcrumbLink>)
-    const button = screen.getByRole('button')
+    await render(
+      <BreadcrumbLink onClick={onClick}>{TEST_TEXT_01}</BreadcrumbLink>
+    )
+    const button = page.getByRole('button').element()
 
     fireEvent.click(button)
 
     expect(onClick).toHaveBeenCalledTimes(1)
   })
 
-  it('should respond to mouseEnter event when provided with onMouseEnter prop', () => {
+  it('should respond to mouseEnter event when provided with onMouseEnter prop', async () => {
     const onMouseEnter = vi.fn()
 
-    render(
+    await render(
       <BreadcrumbLink onMouseEnter={onMouseEnter} href={TEST_LINK}>
         {TEST_TEXT_01}
       </BreadcrumbLink>
     )
-    const link = screen.getByRole('link')
+    const link = page.getByRole('link').element()
     fireEvent.mouseEnter(link)
 
     expect(onMouseEnter).toHaveBeenCalledTimes(1)
   })
 
-  it('should allow to prop to pass through', () => {
-    const { container } = render(
+  it('should allow to prop to pass through', async () => {
+    const { container } = await render(
       <BreadcrumbLink to={TEST_TO}>{TEST_TEXT_01}</BreadcrumbLink>
     )
     const link = container.querySelector('a')
@@ -94,8 +99,8 @@ describe('<BreadcrumbLink />', () => {
     expect(link).toHaveAttribute('to', TEST_TO)
   })
 
-  it('should not render a link when not given an href prop', () => {
-    const { container } = render(
+  it('should not render a link when not given an href prop', async () => {
+    const { container } = await render(
       <BreadcrumbLink>{TEST_TEXT_01}</BreadcrumbLink>
     )
     const elementWithHref = container.querySelector('[href]')
@@ -108,8 +113,8 @@ describe('<BreadcrumbLink />', () => {
     expect(span).toHaveTextContent(TEST_TEXT_01)
   })
 
-  it('should not render a button when not given an onClick prop', () => {
-    const { container } = render(
+  it('should not render a button when not given an onClick prop', async () => {
+    const { container } = await render(
       <BreadcrumbLink>{TEST_TEXT_01}</BreadcrumbLink>
     )
     const button = container.querySelector('button')
@@ -121,7 +126,7 @@ describe('<BreadcrumbLink />', () => {
   })
 
   it('should meet a11y standards as a link', async () => {
-    const { container } = render(
+    const { container } = await render(
       <BreadcrumbLink href={TEST_LINK}>{TEST_TEXT_01}</BreadcrumbLink>
     )
     const axeCheck = await runAxeCheck(container)
@@ -130,7 +135,7 @@ describe('<BreadcrumbLink />', () => {
   })
 
   it('should meet a11y standards as a span', async () => {
-    const { container } = render(
+    const { container } = await render(
       <BreadcrumbLink>{TEST_TEXT_01}</BreadcrumbLink>
     )
     const axeCheck = await runAxeCheck(container)

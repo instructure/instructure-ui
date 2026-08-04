@@ -22,54 +22,53 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
-import { vi } from 'vitest'
-
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect, vi } from 'vitest'
 import { PaginationButton } from '@instructure/ui-pagination/latest'
 
 describe('<PaginationButton />', () => {
   it('should designate current page', async () => {
-    render(<PaginationButton current>1</PaginationButton>)
-    const button = screen.getByRole('button', { name: '1' })
+    await render(<PaginationButton current>1</PaginationButton>)
+    const button = page.getByRole('button', { name: '1' }).element()
 
     expect(button).toHaveAttribute('aria-current', 'page')
   })
 
   it('should navigate using button when onClick provided', async () => {
     const onClick = vi.fn()
-    render(<PaginationButton onClick={onClick}>1</PaginationButton>)
+    await render(<PaginationButton onClick={onClick}>1</PaginationButton>)
 
-    const button = screen.getByRole('button', { name: '1' })
+    const button = page.getByRole('button', { name: '1' }).element()
 
     button.click()
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onClick).toHaveBeenCalled()
     })
   })
 
   it('should disable navigation to current page', async () => {
     const onClick = vi.fn()
-    render(
+    await render(
       <PaginationButton onClick={onClick} current>
         1
       </PaginationButton>
     )
-    const button = screen.getByRole('button', { name: '1' })
+    const button = page.getByRole('button', { name: '1' }).element()
 
     button.click()
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onClick).not.toHaveBeenCalled()
     })
   })
 
   it('should navigate using link when href provided', async () => {
-    render(
+    await render(
       <PaginationButton href="https://instructure.design/">1</PaginationButton>
     )
-    const button = screen.getByRole('link')
+    const button = page.getByRole('link').element()
 
     expect(button).toHaveAttribute('href', 'https://instructure.design/')
   })

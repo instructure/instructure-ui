@@ -22,10 +22,9 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
-import { vi } from 'vitest'
-import userEvent from '@testing-library/user-event'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 import { Drilldown } from '@instructure/ui-drilldown/latest'
 
@@ -49,21 +48,21 @@ describe('<Drilldown.Page />', () => {
   })
 
   it("shouldn't render non-DrilldownPage children", async () => {
-    render(
+    await render(
       <Drilldown rootPageId="page0">
         <Drilldown.Page id="page0">
           <div id="testDiv">Div</div>
         </Drilldown.Page>
       </Drilldown>
     )
-    const nonPageChild = screen.queryByText('DIV')
+    const nonPageChild = page.getByText('DIV').query()
 
     expect(nonPageChild).not.toBeInTheDocument()
   })
 
   describe('header title', () => {
     it('should be displayed in the header', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0" renderTitle="HeaderTitleString">
             <Drilldown.Option id="option1">Option</Drilldown.Option>
@@ -73,27 +72,27 @@ describe('<Drilldown.Page />', () => {
       const titleContainer = container.querySelector(
         '[id^="DrilldownHeader-Title-Label_"]'
       )
-      const title = screen.queryByText('HeaderTitleString')
+      const title = page.getByText('HeaderTitleString').query()
 
       expect(titleContainer).toBeInTheDocument()
       expect(title).toBeInTheDocument()
     })
 
     it('should be displayed when function is passed', async () => {
-      render(
+      await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0" renderTitle={() => 'HeaderTitleFunction'}>
             <Drilldown.Option id="option1">Option</Drilldown.Option>
           </Drilldown.Page>
         </Drilldown>
       )
-      const title = screen.queryByText('HeaderTitleFunction')
+      const title = page.getByText('HeaderTitleFunction').query()
 
       expect(title).toBeInTheDocument()
     })
 
     it("shouldn't be displayed when function has no return value", async () => {
-      const { container } = render(
+      const { container } = await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0" renderTitle={() => null}>
             <Drilldown.Option id="option1">Option</Drilldown.Option>
@@ -112,7 +111,7 @@ describe('<Drilldown.Page />', () => {
 
   describe('header action label', () => {
     it('should be displayed in the header', async () => {
-      render(
+      await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page
             id="page0"
@@ -122,13 +121,13 @@ describe('<Drilldown.Page />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const actionLabel = screen.queryByText('HeaderActionLabelString')
+      const actionLabel = page.getByText('HeaderActionLabelString').query()
 
       expect(actionLabel).toBeInTheDocument()
     })
 
     it('should be displayed when function is passed', async () => {
-      render(
+      await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page
             id="page0"
@@ -138,13 +137,13 @@ describe('<Drilldown.Page />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const actionLabel = screen.queryByText('HeaderActionLabelFunction')
+      const actionLabel = page.getByText('HeaderActionLabelFunction').query()
 
       expect(actionLabel).toBeInTheDocument()
     })
 
     it("shouldn't be displayed when function has no return value", async () => {
-      const { container } = render(
+      const { container } = await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0" renderActionLabel={() => null}>
             <Drilldown.Option id="option1">Option</Drilldown.Option>
@@ -162,7 +161,7 @@ describe('<Drilldown.Page />', () => {
 
     it('should fire header action callback', async () => {
       const actionCallback = vi.fn()
-      render(
+      await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page
             id="page0"
@@ -173,11 +172,11 @@ describe('<Drilldown.Page />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const actionLabel = screen.getByText('ActionWithCallback')
+      const actionLabel = page.getByText('ActionWithCallback').element()
 
       await userEvent.click(actionLabel)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(actionCallback).toHaveBeenCalled()
       })
     })
@@ -185,20 +184,20 @@ describe('<Drilldown.Page />', () => {
 
   describe('header back navigation', () => {
     it('should not be displayed on root page', async () => {
-      render(
+      await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0" renderBackButtonLabel="HeaderBackString">
             <Drilldown.Option id="option1">Option</Drilldown.Option>
           </Drilldown.Page>
         </Drilldown>
       )
-      const label = screen.queryByText('HeaderBackString')
+      const label = page.getByText('HeaderBackString').query()
 
       expect(label).not.toBeInTheDocument()
     })
 
     it('should be displayed on subpages', async () => {
-      render(
+      await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Option id="option1" subPageId="page2">
@@ -210,12 +209,12 @@ describe('<Drilldown.Page />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const option = screen.getByText('Option')
+      const option = page.getByText('Option').element()
 
       await userEvent.click(option)
 
-      await waitFor(() => {
-        const label = screen.queryByText('HeaderBackString')
+      await vi.waitFor(() => {
+        const label = page.getByText('HeaderBackString').query()
 
         expect(label).toBeInTheDocument()
       })
@@ -223,7 +222,7 @@ describe('<Drilldown.Page />', () => {
 
     it('should be displayed when function is passed, and can use former page title', async () => {
       const pageTitle = 'Page Title'
-      render(
+      await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0" renderTitle={pageTitle}>
             <Drilldown.Option id="option1" subPageId="page2">
@@ -240,12 +239,12 @@ describe('<Drilldown.Page />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const option = screen.getByText('Option')
+      const option = page.getByText('Option').element()
 
       await userEvent.click(option)
 
-      await waitFor(() => {
-        const label = screen.queryByText(`Back to ${pageTitle}`)
+      await vi.waitFor(() => {
+        const label = page.getByText(`Back to ${pageTitle}`).query()
 
         expect(label).toBeInTheDocument()
       })
@@ -254,7 +253,7 @@ describe('<Drilldown.Page />', () => {
 
   describe('header separator', () => {
     it('should not be displayed, if no item is on the header', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Option id="option1">Option</Drilldown.Option>
@@ -269,7 +268,7 @@ describe('<Drilldown.Page />', () => {
     })
 
     it('should be displayed, if there are items in the header', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0" renderTitle="Title">
             <Drilldown.Option id="option1">Option</Drilldown.Option>
@@ -284,7 +283,7 @@ describe('<Drilldown.Page />', () => {
     })
 
     it('should not be displayed, if withoutHeaderSeparator is set', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0" renderTitle="Title" withoutHeaderSeparator>
             <Drilldown.Option id="option1">Option</Drilldown.Option>
@@ -301,14 +300,14 @@ describe('<Drilldown.Page />', () => {
 
   describe('disabled prop', () => {
     it('should make all options disabled', async () => {
-      render(
+      await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0" renderActionLabel="Action Label" disabled>
             <Drilldown.Option id="option1">Option</Drilldown.Option>
           </Drilldown.Page>
         </Drilldown>
       )
-      const allOptions = screen.getAllByRole('menuitem')
+      const allOptions = page.getByRole('menuitem').elements()
 
       allOptions.forEach((option) => {
         expect(option).toHaveAttribute('aria-disabled', 'true')
@@ -316,7 +315,7 @@ describe('<Drilldown.Page />', () => {
     })
 
     it('should not allow selection if the Drilldown.Page is disabled', async () => {
-      render(
+      await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0" disabled>
             <Drilldown.Group id="group0" selectableType="multiple">
@@ -325,8 +324,10 @@ describe('<Drilldown.Page />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const optionItemContainer = screen.getByLabelText('Disabled Option')
-      const optionContent = screen.getByText('Disabled Option')
+      const optionItemContainer = page
+        .getByLabelText('Disabled Option')
+        .element()
+      const optionContent = page.getByText('Disabled Option').element()
 
       expect(optionItemContainer).toHaveAttribute('aria-checked', 'false')
 
@@ -336,7 +337,7 @@ describe('<Drilldown.Page />', () => {
     })
 
     it("shouldn't make header Back options disabled", async () => {
-      render(
+      await render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
             <Drilldown.Option id="option1" subPageId="page2">
@@ -352,13 +353,13 @@ describe('<Drilldown.Page />', () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const subPageOption = screen.getByText('Option1')
+      const subPageOption = page.getByText('Option1').element()
 
       await userEvent.click(subPageOption)
 
-      await waitFor(() => {
-        const option2 = screen.getByLabelText('Option2')
-        const backOption = screen.getByLabelText('HeaderBackString')
+      await vi.waitFor(() => {
+        const option2 = page.getByLabelText('Option2').element()
+        const backOption = page.getByLabelText('HeaderBackString').element()
 
         expect(option2).toHaveAttribute('role', 'menuitem')
         expect(option2).toHaveAttribute('aria-disabled', 'true')

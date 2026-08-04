@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
-import { vi } from 'vitest'
-import userEvent from '@testing-library/user-event'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import { describe, it, expect, vi } from 'vitest'
 import { CondensedButton } from '@instructure/ui-buttons/latest'
 
 describe('<CondensedButton/>', () => {
@@ -40,10 +40,10 @@ describe('<CondensedButton/>', () => {
   )
   const iconSelector = 'svg[data-title="myIcon"]'
 
-  it('should render children', () => {
+  it('should render children', async () => {
     const children = 'Hello world'
 
-    render(<CondensedButton>{children}</CondensedButton>)
+    await render(<CondensedButton>{children}</CondensedButton>)
 
     const button = document.querySelector('button')
 
@@ -51,10 +51,10 @@ describe('<CondensedButton/>', () => {
     expect(button).toHaveTextContent(children)
   })
 
-  it('should provide a focused getter', () => {
+  it('should provide a focused getter', async () => {
     let componentRef: CondensedButton | undefined
 
-    render(
+    await render(
       <CondensedButton
         ref={(component: CondensedButton) => {
           componentRef = component
@@ -63,17 +63,17 @@ describe('<CondensedButton/>', () => {
         Hello
       </CondensedButton>
     )
-    const button = screen.getByRole('button', { name: 'Hello' })
+    const button = page.getByRole('button', { name: 'Hello' }).element()
 
     button.focus()
 
     expect(componentRef?.focused).toBe(true)
   })
 
-  it('should provide a focus function', () => {
+  it('should provide a focus function', async () => {
     let componentRef: CondensedButton | undefined
 
-    render(
+    await render(
       <CondensedButton
         ref={(component: CondensedButton) => {
           componentRef = component
@@ -82,17 +82,17 @@ describe('<CondensedButton/>', () => {
         Hello
       </CondensedButton>
     )
-    const button = screen.getByRole('button', { name: 'Hello' })
+    const button = page.getByRole('button', { name: 'Hello' }).element()
 
     componentRef?.focus()
 
     expect(document.activeElement).toBe(button)
   })
 
-  it('should pass the type attribute', () => {
-    render(<CondensedButton type="submit">Hello</CondensedButton>)
+  it('should pass the type attribute', async () => {
+    await render(<CondensedButton type="submit">Hello</CondensedButton>)
 
-    const button = screen.getByRole('button', { name: 'Hello' })
+    const button = page.getByRole('button', { name: 'Hello' }).element()
 
     expect(button).toBeInTheDocument()
     expect(button).toHaveAttribute('type', 'submit')
@@ -100,14 +100,16 @@ describe('<CondensedButton/>', () => {
 
   it('should pass the `elementRef` prop', async () => {
     const elementRef = vi.fn()
-    render(<CondensedButton elementRef={elementRef}>Hello</CondensedButton>)
-    const button = screen.getByRole('button', { name: 'Hello' })
+    await render(
+      <CondensedButton elementRef={elementRef}>Hello</CondensedButton>
+    )
+    const button = page.getByRole('button', { name: 'Hello' }).element()
 
     expect(elementRef).toHaveBeenCalledWith(button)
   })
 
-  it('should pass the `as` prop', () => {
-    const { container } = render(
+  it('should pass the `as` prop', async () => {
+    const { container } = await render(
       <CondensedButton as="li">Hello</CondensedButton>
     )
 
@@ -118,52 +120,56 @@ describe('<CondensedButton/>', () => {
     expect(button!.tagName).toBe('LI')
   })
 
-  it('should set the disabled attribute when `interaction` is set to disabled', () => {
-    render(<CondensedButton interaction="disabled">Hello</CondensedButton>)
+  it('should set the disabled attribute when `interaction` is set to disabled', async () => {
+    await render(
+      <CondensedButton interaction="disabled">Hello</CondensedButton>
+    )
 
-    const button = screen.getByRole('button', { name: 'Hello' })
-
-    expect(button).toHaveAttribute('disabled')
-  })
-
-  it('should set the disabled attribute when `disabled` is set', () => {
-    render(<CondensedButton disabled>Hello</CondensedButton>)
-
-    const button = screen.getByRole('button', { name: 'Hello' })
+    const button = page.getByRole('button', { name: 'Hello' }).element()
 
     expect(button).toHaveAttribute('disabled')
   })
 
-  it('should set the disabled attribute when `interaction` is set to readonly', () => {
-    render(<CondensedButton interaction="readonly">Hello</CondensedButton>)
+  it('should set the disabled attribute when `disabled` is set', async () => {
+    await render(<CondensedButton disabled>Hello</CondensedButton>)
 
-    const button = screen.getByRole('button', { name: 'Hello' })
-
-    expect(button).toHaveAttribute('disabled')
-  })
-
-  it('should set the disabled attribute when `readOnly` is set', () => {
-    render(<CondensedButton readOnly>Hello</CondensedButton>)
-
-    const button = screen.getByRole('button', { name: 'Hello' })
+    const button = page.getByRole('button', { name: 'Hello' }).element()
 
     expect(button).toHaveAttribute('disabled')
   })
 
-  it('should pass the `href` prop', () => {
-    render(<CondensedButton href="#">Hello</CondensedButton>)
+  it('should set the disabled attribute when `interaction` is set to readonly', async () => {
+    await render(
+      <CondensedButton interaction="readonly">Hello</CondensedButton>
+    )
 
-    const linkButton = screen.getByRole('link', { name: 'Hello' })
+    const button = page.getByRole('button', { name: 'Hello' }).element()
+
+    expect(button).toHaveAttribute('disabled')
+  })
+
+  it('should set the disabled attribute when `readOnly` is set', async () => {
+    await render(<CondensedButton readOnly>Hello</CondensedButton>)
+
+    const button = page.getByRole('button', { name: 'Hello' }).element()
+
+    expect(button).toHaveAttribute('disabled')
+  })
+
+  it('should pass the `href` prop', async () => {
+    await render(<CondensedButton href="#">Hello</CondensedButton>)
+
+    const linkButton = page.getByRole('link', { name: 'Hello' }).element()
 
     expect(linkButton).toBeInTheDocument()
     expect(linkButton).toHaveAttribute('href', '#')
   })
 
   it('should pass the `renderIcon` prop', async () => {
-    render(<CondensedButton renderIcon={icon}>Hello</CondensedButton>)
+    await render(<CondensedButton renderIcon={icon}>Hello</CondensedButton>)
 
     const svgIcon = document.querySelector(iconSelector)
-    const button = screen.getByRole('button', { name: 'Hello' })
+    const button = page.getByRole('button', { name: 'Hello' }).element()
 
     expect(button).toBeInTheDocument()
     expect(svgIcon).toBeInTheDocument()
@@ -171,13 +177,13 @@ describe('<CondensedButton/>', () => {
 
   it('should pass the `onClick` prop', async () => {
     const onClick = vi.fn()
-    render(<CondensedButton onClick={onClick}>Hello</CondensedButton>)
+    await render(<CondensedButton onClick={onClick}>Hello</CondensedButton>)
 
-    const button = screen.getByRole('button', { name: 'Hello' })
+    const button = page.getByRole('button', { name: 'Hello' }).element()
 
     await userEvent.click(button)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onClick).toHaveBeenCalledTimes(1)
     })
   })

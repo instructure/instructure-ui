@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor, fireEvent } from '@testing-library/react'
-import { userEvent } from '@testing-library/user-event'
-import { vi } from 'vitest'
-import '@testing-library/jest-dom'
+import { fireEvent } from '@testing-library/dom'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import conversions from '@instructure/ui-color-utils'
@@ -67,7 +67,7 @@ describe('<ColorPicker />', () => {
 
   describe('simple input mode', () => {
     it('should render correctly', async () => {
-      const { container } = render(<SimpleExample />)
+      const { container } = await render(<SimpleExample />)
       expect(container.firstChild).toBeInTheDocument()
     })
 
@@ -75,80 +75,82 @@ describe('<ColorPicker />', () => {
       const color = '#FFF'
       const onChange = vi.fn()
 
-      const { rerender } = render(
+      const { rerender } = await render(
         <SimpleExample value={color} onChange={onChange} />
       )
 
-      const input = screen.getByRole('textbox')
+      const input = page.getByRole('textbox').element()
       expect(input).toHaveValue('FFF')
 
       // set new value
-      rerender(<SimpleExample value={`${color}555`} onChange={onChange} />)
+      await rerender(
+        <SimpleExample value={`${color}555`} onChange={onChange} />
+      )
 
-      const inputUpdated = screen.getByRole('textbox')
+      const inputUpdated = page.getByRole('textbox').element()
       expect(inputUpdated).toHaveValue('FFF555')
     })
 
     it('should accept 3 digit hex code', async () => {
       const color = '0CB'
-      render(<SimpleExample />)
+      await render(<SimpleExample />)
 
-      const input = screen.getByRole('textbox')
+      const input = page.getByRole('textbox').element()
 
       await userEvent.type(input, color)
       fireEvent.blur(input)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(input).toHaveValue(color)
       })
     })
 
     it('should accept 6 digit hex code', async () => {
       const color = '0CBF2D'
-      render(<SimpleExample />)
+      await render(<SimpleExample />)
 
-      const input = screen.getByRole('textbox')
+      const input = page.getByRole('textbox').element()
 
       await userEvent.type(input, color)
       fireEvent.blur(input)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(input).toHaveValue(color)
       })
     })
 
     it('should not accept not valid hex code', async () => {
       const color = 'WWWZZZ'
-      render(<SimpleExample />)
+      await render(<SimpleExample />)
 
-      const input = screen.getByRole('textbox')
+      const input = page.getByRole('textbox').element()
 
       await userEvent.type(input, color)
       fireEvent.blur(input)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(input).not.toHaveValue(color)
       })
     })
 
     it('should not allow more than 6 characters', async () => {
       const color = '0CBF2D1234567'
-      render(<SimpleExample />)
+      await render(<SimpleExample />)
 
-      const input = screen.getByRole('textbox')
+      const input = page.getByRole('textbox').element()
 
       await userEvent.type(input, color)
       fireEvent.blur(input)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(input).toHaveValue('0CBF2D')
       })
     })
 
     it('should not allow input when disabled', async () => {
-      render(<SimpleExample disabled />)
+      await render(<SimpleExample disabled />)
 
-      const input = screen.getByRole('textbox')
+      const input = page.getByRole('textbox').element()
       expect(input).toHaveAttribute('disabled')
     })
 
@@ -160,7 +162,7 @@ describe('<ColorPicker />', () => {
       it(`should check contrast correctly when color has enough contrast [contrastStrength=${contrastStrength}]`, async () => {
         //oxford in canvas color palette, should be valid with all contrast strenght checkers
         const colorToCheck = '394B58'
-        const { container } = render(
+        const { container } = await render(
           <SimpleExample
             checkContrast={{
               isStrict: false,
@@ -168,12 +170,12 @@ describe('<ColorPicker />', () => {
             }}
           />
         )
-        const input = screen.getByRole('textbox')
+        const input = page.getByRole('textbox').element()
 
         await userEvent.type(input, colorToCheck)
         fireEvent.blur(input)
 
-        await waitFor(() => {
+        await vi.waitFor(() => {
           expect(input).toHaveValue(colorToCheck)
 
           const successIconWrapper = container.querySelector(
@@ -189,7 +191,7 @@ describe('<ColorPicker />', () => {
       it(`should check contrast correctly when color does not have enough contrast [contrastStrength=${contrastStrength}, isStrict=false]`, async () => {
         //porcelain in canvas color palette, it should be failing even the min check
         const colorToCheck = 'F5F5F5'
-        const { container } = render(
+        const { container } = await render(
           <SimpleExample
             checkContrast={{
               isStrict: false,
@@ -197,12 +199,12 @@ describe('<ColorPicker />', () => {
             }}
           />
         )
-        const input = screen.getByRole('textbox')
+        const input = page.getByRole('textbox').element()
 
         await userEvent.type(input, colorToCheck)
         fireEvent.blur(input)
 
-        await waitFor(() => {
+        await vi.waitFor(() => {
           expect(input).toHaveValue(colorToCheck)
 
           const warningIconWrapper = container.querySelector(
@@ -218,7 +220,7 @@ describe('<ColorPicker />', () => {
       it(`should check contrast correctly when color does not have enough contrast [contrastStrength=${contrastStrength}, isStrict=true]`, async () => {
         //porcelain in canvas color palette, it should be failing even the min check
         const colorToCheck = 'F5F5F5'
-        const { container } = render(
+        const { container } = await render(
           <SimpleExample
             checkContrast={{
               isStrict: true,
@@ -226,12 +228,12 @@ describe('<ColorPicker />', () => {
             }}
           />
         )
-        const input = screen.getByRole('textbox')
+        const input = page.getByRole('textbox').element()
 
         await userEvent.type(input, colorToCheck)
         fireEvent.blur(input)
 
-        await waitFor(() => {
+        await vi.waitFor(() => {
           expect(input).toHaveValue(colorToCheck)
 
           const errorIconWrapper = container.querySelector(
@@ -246,7 +248,7 @@ describe('<ColorPicker />', () => {
 
       it(`should display success message when contrast is met [contrastStrength=${contrastStrength}]`, async () => {
         const colorToCheck = '394B58'
-        render(
+        await render(
           <SimpleExample
             checkContrast={{
               isStrict: false,
@@ -257,15 +259,15 @@ describe('<ColorPicker />', () => {
             }}
           />
         )
-        const input = screen.getByRole('textbox')
+        const input = page.getByRole('textbox').element()
 
         await userEvent.type(input, colorToCheck)
         fireEvent.blur(input)
 
-        await waitFor(() => {
-          const successMessage = screen.getByText(
-            'I am a contrast success message'
-          )
+        await vi.waitFor(() => {
+          const successMessage = page
+            .getByText('I am a contrast success message')
+            .element()
 
           expect(input).toHaveValue(colorToCheck)
           expect(successMessage).toBeInTheDocument()
@@ -274,7 +276,7 @@ describe('<ColorPicker />', () => {
 
       it(`should display error message when contrast is not met [contrastStrength=${contrastStrength}, isStrict=false]`, async () => {
         const colorToCheck = 'F5F5F5'
-        render(
+        await render(
           <SimpleExample
             checkContrast={{
               isStrict: false,
@@ -285,15 +287,15 @@ describe('<ColorPicker />', () => {
             }}
           />
         )
-        const input = screen.getByRole('textbox')
+        const input = page.getByRole('textbox').element()
 
         await userEvent.type(input, colorToCheck)
         fireEvent.blur(input)
 
-        await waitFor(() => {
-          const warningMessage = screen.getByText(
-            'I am a contrast warning message'
-          )
+        await vi.waitFor(() => {
+          const warningMessage = page
+            .getByText('I am a contrast warning message')
+            .element()
 
           expect(input).toHaveValue(colorToCheck)
           expect(warningMessage).toBeInTheDocument()
@@ -302,7 +304,7 @@ describe('<ColorPicker />', () => {
 
       it(`should display error message when contrast is not met [contrastStrength=${contrastStrength}, isStrict=true]`, async () => {
         const colorToCheck = 'F5F5F5'
-        render(
+        await render(
           <SimpleExample
             checkContrast={{
               isStrict: true,
@@ -313,13 +315,15 @@ describe('<ColorPicker />', () => {
             }}
           />
         )
-        const input = screen.getByRole('textbox')
+        const input = page.getByRole('textbox').element()
 
         await userEvent.type(input, colorToCheck)
         fireEvent.blur(input)
 
-        await waitFor(() => {
-          const errorMessage = screen.getByText('I am a contrast error message')
+        await vi.waitFor(() => {
+          const errorMessage = page
+            .getByText('I am a contrast error message')
+            .element()
 
           expect(input).toHaveValue(colorToCheck)
           expect(errorMessage).toBeInTheDocument()
@@ -329,20 +333,20 @@ describe('<ColorPicker />', () => {
 
     it('should call onChange', async () => {
       const onChange = vi.fn()
-      render(<SimpleExample onChange={onChange} />)
+      await render(<SimpleExample onChange={onChange} />)
 
-      const input = screen.getByRole('textbox')
+      const input = page.getByRole('textbox').element()
 
       fireEvent.change(input, { target: { value: 'FFF' } })
       fireEvent.blur(input)
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(onChange).toHaveBeenLastCalledWith('#FFF')
       })
     })
 
     it('should display message when ColorPicker is a required field', async () => {
-      render(
+      await render(
         <SimpleExample
           isRequired
           renderInvalidColorMessage={() => [
@@ -353,33 +357,37 @@ describe('<ColorPicker />', () => {
           ]}
         />
       )
-      const input = screen.getByRole('textbox')
+      const input = page.getByRole('textbox').element()
 
       fireEvent.focus(input)
       fireEvent.blur(input)
 
-      await waitFor(() => {
-        const requiredMessage = screen.getByText('I am a required message')
+      await vi.waitFor(() => {
+        const requiredMessage = page
+          .getByText('I am a required message')
+          .element()
 
         expect(requiredMessage).toBeInTheDocument()
       })
     })
 
     it('should display message when color is invalid', async () => {
-      render(
+      await render(
         <SimpleExample
           renderInvalidColorMessage={() => [
             { type: 'error', text: 'I am an invalid color message' }
           ]}
         />
       )
-      const input = screen.getByRole('textbox')
+      const input = page.getByRole('textbox').element()
 
       await userEvent.type(input, 'F')
       fireEvent.blur(input)
 
-      await waitFor(() => {
-        const errorMessage = screen.getByText('I am an invalid color message')
+      await vi.waitFor(() => {
+        const errorMessage = page
+          .getByText('I am an invalid color message')
+          .element()
 
         expect(errorMessage).toBeInTheDocument()
       })
@@ -387,75 +395,75 @@ describe('<ColorPicker />', () => {
 
     it('should provide an inputRef prop', async () => {
       const inputRef = vi.fn()
-      render(<SimpleExample inputRef={inputRef} />)
-      const input = screen.getByRole('textbox')
+      await render(<SimpleExample inputRef={inputRef} />)
+      const input = page.getByRole('textbox').element()
 
       expect(inputRef).toHaveBeenCalledWith(input)
     })
 
     describe('paste behavior', () => {
       it('should strip leading # from pasted value', async () => {
-        render(<SimpleExample />)
-        const input = screen.getByRole('textbox') as HTMLInputElement
+        await render(<SimpleExample />)
+        const input = page.getByRole('textbox').element() as HTMLInputElement
 
         fireEvent.paste(input, {
           clipboardData: { getData: () => '#FF0000' }
         })
 
-        await waitFor(() => {
+        await vi.waitFor(() => {
           expect(input).toHaveValue('FF0000')
         })
       })
 
       it('should block pasted value that exceeds 6 characters', async () => {
-        render(<SimpleExample />)
-        const input = screen.getByRole('textbox') as HTMLInputElement
+        await render(<SimpleExample />)
+        const input = page.getByRole('textbox').element() as HTMLInputElement
 
         fireEvent.paste(input, {
           clipboardData: { getData: () => 'FF00001' }
         })
 
-        await waitFor(() => {
+        await vi.waitFor(() => {
           expect(input).toHaveValue('')
         })
       })
 
       it('should block pasted value with invalid hex characters', async () => {
-        render(<SimpleExample />)
-        const input = screen.getByRole('textbox') as HTMLInputElement
+        await render(<SimpleExample />)
+        const input = page.getByRole('textbox').element() as HTMLInputElement
 
         fireEvent.paste(input, {
           clipboardData: { getData: () => 'ZZZZZZ' }
         })
 
-        await waitFor(() => {
+        await vi.waitFor(() => {
           expect(input).toHaveValue('')
         })
       })
 
       it('should replace entirely selected text when pasting', async () => {
-        render(<SimpleExample />)
-        const input = screen.getByRole('textbox') as HTMLInputElement
+        await render(<SimpleExample />)
+        const input = page.getByRole('textbox').element() as HTMLInputElement
 
         fireEvent.change(input, { target: { value: 'FF0000' } })
-        await waitFor(() => expect(input).toHaveValue('FF0000'))
+        await vi.waitFor(() => expect(input).toHaveValue('FF0000'))
 
         input.setSelectionRange(0, 6)
         fireEvent.paste(input, {
           clipboardData: { getData: () => 'AABBCC' }
         })
 
-        await waitFor(() => {
+        await vi.waitFor(() => {
           expect(input).toHaveValue('AABBCC')
         })
       })
 
       it('should replace partially selected text when pasting', async () => {
-        render(<SimpleExample />)
-        const input = screen.getByRole('textbox') as HTMLInputElement
+        await render(<SimpleExample />)
+        const input = page.getByRole('textbox').element() as HTMLInputElement
 
         fireEvent.change(input, { target: { value: 'FF0000' } })
-        await waitFor(() => expect(input).toHaveValue('FF0000'))
+        await vi.waitFor(() => expect(input).toHaveValue('FF0000'))
 
         // select the two middle zeros (positions 2–4), paste FF → FFFF00
         input.setSelectionRange(2, 4)
@@ -463,58 +471,58 @@ describe('<ColorPicker />', () => {
           clipboardData: { getData: () => 'FF' }
         })
 
-        await waitFor(() => {
+        await vi.waitFor(() => {
           expect(input).toHaveValue('FFFF00')
         })
       })
 
       it('should insert pasted text at cursor start position', async () => {
-        render(<SimpleExample />)
-        const input = screen.getByRole('textbox') as HTMLInputElement
+        await render(<SimpleExample />)
+        const input = page.getByRole('textbox').element() as HTMLInputElement
 
         fireEvent.change(input, { target: { value: '0000' } })
-        await waitFor(() => expect(input).toHaveValue('0000'))
+        await vi.waitFor(() => expect(input).toHaveValue('0000'))
 
         input.setSelectionRange(0, 0)
         fireEvent.paste(input, {
           clipboardData: { getData: () => 'FF' }
         })
 
-        await waitFor(() => {
+        await vi.waitFor(() => {
           expect(input).toHaveValue('FF0000')
         })
       })
 
       it('should insert pasted text at cursor middle position', async () => {
-        render(<SimpleExample />)
-        const input = screen.getByRole('textbox') as HTMLInputElement
+        await render(<SimpleExample />)
+        const input = page.getByRole('textbox').element() as HTMLInputElement
 
         fireEvent.change(input, { target: { value: 'FF00' } })
-        await waitFor(() => expect(input).toHaveValue('FF00'))
+        await vi.waitFor(() => expect(input).toHaveValue('FF00'))
 
         input.setSelectionRange(2, 2)
         fireEvent.paste(input, {
           clipboardData: { getData: () => 'AB' }
         })
 
-        await waitFor(() => {
+        await vi.waitFor(() => {
           expect(input).toHaveValue('FFAB00')
         })
       })
 
       it('should insert pasted text at cursor end position', async () => {
-        render(<SimpleExample />)
-        const input = screen.getByRole('textbox') as HTMLInputElement
+        await render(<SimpleExample />)
+        const input = page.getByRole('textbox').element() as HTMLInputElement
 
         fireEvent.change(input, { target: { value: '0000' } })
-        await waitFor(() => expect(input).toHaveValue('0000'))
+        await vi.waitFor(() => expect(input).toHaveValue('0000'))
 
         input.setSelectionRange(4, 4)
         fireEvent.paste(input, {
           clipboardData: { getData: () => 'FF' }
         })
 
-        await waitFor(() => {
+        await vi.waitFor(() => {
           expect(input).toHaveValue('0000FF')
         })
       })
@@ -523,7 +531,7 @@ describe('<ColorPicker />', () => {
 
   describe('complex mode', () => {
     it('should display trigger button', async () => {
-      const { container } = render(
+      const { container } = await render(
         <SimpleExample
           colorMixerSettings={{
             popoverAddButtonLabel: 'add',
@@ -534,14 +542,14 @@ describe('<ColorPicker />', () => {
       const buttonWrapper = container.querySelector(
         'div[class$="-colorPicker__colorMixerButtonWrapper"]'
       )
-      const button = screen.getByRole('button')
+      const button = page.getByRole('button').element()
 
       expect(buttonWrapper).toBeInTheDocument()
       expect(button).toBeInTheDocument()
     })
 
     it('should open popover when trigger is clicked', async () => {
-      render(
+      await render(
         <SimpleExample
           colorMixerSettings={{
             popoverAddButtonLabel: 'add',
@@ -549,15 +557,15 @@ describe('<ColorPicker />', () => {
           }}
         />
       )
-      const trigger = screen.getByRole('button')
+      const trigger = page.getByRole('button').element()
 
       expect(trigger).toBeInTheDocument()
       expect(trigger).toHaveAttribute('aria-expanded', 'false')
 
       fireEvent.click(trigger)
 
-      await waitFor(() => {
-        const buttons = screen.getAllByRole('button')
+      await vi.waitFor(() => {
+        const buttons = page.getByRole('button').elements()
         const popoverContent = document.querySelector(
           'div[class$="-colorPicker__popoverContent"]'
         )
@@ -572,7 +580,7 @@ describe('<ColorPicker />', () => {
     })
 
     it('should display the color mixer', async () => {
-      render(
+      await render(
         <SimpleExample
           colorMixerSettings={{
             popoverAddButtonLabel: 'add',
@@ -590,14 +598,14 @@ describe('<ColorPicker />', () => {
           }}
         />
       )
-      const trigger = screen.getByRole('button')
+      const trigger = page.getByRole('button').element()
 
       fireEvent.click(trigger)
 
-      await waitFor(() => {
-        const redInput = screen.getByLabelText('Red input')
-        const blueInput = screen.getByLabelText('Blue input')
-        const greenInput = screen.getByLabelText('Green input')
+      await vi.waitFor(() => {
+        const redInput = page.getByLabelText('Red input').element()
+        const blueInput = page.getByLabelText('Blue input').element()
+        const greenInput = page.getByLabelText('Green input').element()
 
         expect(redInput).toBeInTheDocument()
         expect(blueInput).toBeInTheDocument()
@@ -607,7 +615,7 @@ describe('<ColorPicker />', () => {
 
     it('should display the correct color in the colormixer when the input is prefilled', async () => {
       const color = '0374B5'
-      render(
+      await render(
         <SimpleExample
           colorMixerSettings={{
             popoverAddButtonLabel: 'add',
@@ -625,21 +633,23 @@ describe('<ColorPicker />', () => {
           }}
         />
       )
-      const input = screen.getByRole('textbox')
-      const trigger = screen.getByRole('button')
+      const input = page.getByRole('textbox').element()
+      const trigger = page.getByRole('button').element()
 
       await userEvent.type(input, color)
       fireEvent.blur(input)
       fireEvent.click(trigger)
 
-      await waitFor(() => {
-        const redInput = screen.getByLabelText('Red input') as HTMLInputElement
-        const blueInput = screen.getByLabelText(
-          'Blue input'
-        ) as HTMLInputElement
-        const greenInput = screen.getByLabelText(
-          'Green input'
-        ) as HTMLInputElement
+      await vi.waitFor(() => {
+        const redInput = page
+          .getByLabelText('Red input')
+          .element() as HTMLInputElement
+        const blueInput = page
+          .getByLabelText('Blue input')
+          .element() as HTMLInputElement
+        const greenInput = page
+          .getByLabelText('Green input')
+          .element() as HTMLInputElement
         const convertedColor = conversions.colorToRGB(`#${color}`)
 
         const actualColor = {
@@ -656,7 +666,7 @@ describe('<ColorPicker />', () => {
     it('should trigger onChange when selected color is added from colorMixer', async () => {
       const onChange = vi.fn()
       const rgb = { r: 131, g: 6, b: 25, a: 1 }
-      render(
+      await render(
         <SimpleExample
           onChange={onChange}
           colorMixerSettings={{
@@ -676,19 +686,21 @@ describe('<ColorPicker />', () => {
         />
       )
 
-      const trigger = screen.getByRole('button')
+      const trigger = page.getByRole('button').element()
 
       fireEvent.click(trigger)
 
-      await waitFor(() => {
-        const addBtn = screen.getByRole('button', { name: 'add' })
-        const redInput = screen.getByLabelText('Red input') as HTMLInputElement
-        const greenInput = screen.getByLabelText(
-          'Green input'
-        ) as HTMLInputElement
-        const blueInput = screen.getByLabelText(
-          'Blue input'
-        ) as HTMLInputElement
+      await vi.waitFor(() => {
+        const addBtn = page.getByRole('button', { name: 'add' }).element()
+        const redInput = page
+          .getByLabelText('Red input')
+          .element() as HTMLInputElement
+        const greenInput = page
+          .getByLabelText('Green input')
+          .element() as HTMLInputElement
+        const blueInput = page
+          .getByLabelText('Blue input')
+          .element() as HTMLInputElement
 
         fireEvent.change(redInput, { target: { value: `${rgb.r}` } })
         fireEvent.change(greenInput, { target: { value: `${rgb.g}` } })
@@ -703,7 +715,7 @@ describe('<ColorPicker />', () => {
 
   describe('custom popover mode', () => {
     it('should throw warning if children and settings object are passed too', async () => {
-      render(
+      await render(
         <SimpleExample
           colorMixerSettings={{
             popoverAddButtonLabel: 'add',
@@ -714,7 +726,7 @@ describe('<ColorPicker />', () => {
         </SimpleExample>
       )
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(consoleWarningMock.mock.calls[0][0]).toEqual(
           expect.stringContaining(
             'Warning: You should either use children, colorMixerSettings or neither, not both. In this case, the colorMixerSettings will be ignored.'
@@ -724,9 +736,9 @@ describe('<ColorPicker />', () => {
     })
 
     it('should display trigger button', async () => {
-      render(<SimpleExample>{() => <div></div>}</SimpleExample>)
+      await render(<SimpleExample>{() => <div></div>}</SimpleExample>)
 
-      const trigger = screen.getByRole('button')
+      const trigger = page.getByRole('button').element()
       expect(trigger).toBeInTheDocument()
       expect(trigger).toHaveAttribute('data-popover-trigger', 'true')
     })
@@ -734,7 +746,7 @@ describe('<ColorPicker />', () => {
 
   describe('should be accessible', () => {
     it('a11y', async () => {
-      const { container } = render(<SimpleExample />)
+      const { container } = await render(<SimpleExample />)
       const axeCheck = await runAxeCheck(container)
 
       expect(axeCheck).toBe(true)

@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-import { waitFor } from '@testing-library/react'
-import { vi } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { requestAnimationFrame } from '../requestAnimationFrame.js'
 
 describe('requestAnimationFrame', () => {
@@ -31,7 +30,7 @@ describe('requestAnimationFrame', () => {
     const callback = vi.fn()
     const raf = requestAnimationFrame(callback)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(callback).toHaveBeenCalledTimes(1)
       expect(typeof raf.cancel).toBe('function')
     })

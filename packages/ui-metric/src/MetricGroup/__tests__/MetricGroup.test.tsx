@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom'
-import { vi } from 'vitest'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { MetricGroup } from '@instructure/ui-metric/latest'
@@ -43,7 +43,7 @@ describe('<MetricGroup />', () => {
   })
 
   it('should render children', async () => {
-    const { container } = render(
+    const { container } = await render(
       <MetricGroup>
         <Metric renderLabel="Grade" renderValue="80%" />
         <Metric renderLabel="Late" renderValue="4" />
@@ -55,7 +55,7 @@ describe('<MetricGroup />', () => {
   })
 
   it('passes props through to MetricGroup element', async () => {
-    render(
+    await render(
       <MetricGroup data-testid="metric-group" data-automation="foo">
         <Metric renderLabel="Grade" renderValue="80%" />
         <Metric renderLabel="Late" renderValue="4" />
@@ -63,13 +63,13 @@ describe('<MetricGroup />', () => {
       </MetricGroup>
     )
 
-    const metric = screen.getByTestId('metric-group')
+    const metric = page.getByTestId('metric-group').element()
     expect(metric).toHaveAttribute('data-automation', 'foo')
   })
 
   describe('for a11y', () => {
     it('should meet standards', async () => {
-      const { container } = render(
+      const { container } = await render(
         <MetricGroup>
           <Metric renderLabel="Grade" renderValue="80%" />
           <Metric renderLabel="Late" renderValue="4" />
@@ -82,41 +82,41 @@ describe('<MetricGroup />', () => {
     })
 
     it('should have role=grid with aria-readonly=true', async () => {
-      render(
+      await render(
         <MetricGroup>
           <Metric renderLabel="Grade" renderValue="80%" />
           <Metric renderLabel="Late" renderValue="4" />
           <Metric renderLabel="Missing" renderValue="2" />
         </MetricGroup>
       )
-      const grids = screen.getAllByRole('grid')
+      const grids = page.getByRole('grid').elements()
 
       expect(grids.length).toBe(1)
       expect(grids[0]).toHaveAttribute('aria-readonly', 'true')
     })
 
     it('should have role=row', async () => {
-      render(
+      await render(
         <MetricGroup>
           <Metric renderLabel="Grade" renderValue="80%" />
           <Metric renderLabel="Late" renderValue="4" />
           <Metric renderLabel="Missing" renderValue="2" />
         </MetricGroup>
       )
-      const rows = screen.getAllByRole('row')
+      const rows = page.getByRole('row').elements()
 
       expect(rows.length).toBe(3)
     })
 
     it('should have role=gridcell', async () => {
-      render(
+      await render(
         <MetricGroup>
           <Metric renderLabel="Grade" renderValue="80%" />
           <Metric renderLabel="Late" renderValue="4" />
           <Metric renderLabel="Missing" renderValue="2" />
         </MetricGroup>
       )
-      const cells = screen.getAllByRole('gridcell')
+      const cells = page.getByRole('gridcell').elements()
 
       expect(cells.length).toBe(3)
     })

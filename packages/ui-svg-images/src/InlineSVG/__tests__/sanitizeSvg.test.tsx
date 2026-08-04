@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import '@testing-library/jest-dom'
+import { describe, it, expect, afterEach } from 'vitest'
 import DOMPurifySingleton from 'dompurify'
 import { sanitizeSvg } from '../sanitizeSvg.js'
 

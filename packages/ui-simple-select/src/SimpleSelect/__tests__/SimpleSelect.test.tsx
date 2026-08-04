@@ -22,10 +22,18 @@
  * SOFTWARE.
  */
 
-import { fireEvent, render, screen, waitFor } from '@testing-library/react'
-import { vi, MockInstance, it } from 'vitest'
-import userEvent from '@testing-library/user-event'
-import '@testing-library/jest-dom'
+import { fireEvent } from '@testing-library/dom'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import {
+  describe,
+  it,
+  expect,
+  beforeEach,
+  afterEach,
+  vi,
+  MockInstance
+} from 'vitest'
 import { CheckInstUIIcon } from '@instructure/ui-icons'
 
 import { SimpleSelect } from '@instructure/ui-simple-select/latest'
@@ -60,26 +68,26 @@ describe('<SimpleSelect />', () => {
   })
 
   it('should render an input and a list', async () => {
-    render(
+    await render(
       <SimpleSelect renderLabel="Choose an option">{getOptions()}</SimpleSelect>
     )
-    const input = screen.getByLabelText('Choose an option')
-    const listInitial = screen.queryByRole('listbox')
+    const input = page.getByLabelText('Choose an option').element()
+    const listInitial = page.getByRole('listbox').query()
 
     expect(listInitial).not.toBeInTheDocument()
     expect(input).toBeInTheDocument()
 
     await userEvent.click(input)
 
-    await waitFor(() => {
-      const list = screen.queryByRole('listbox')
+    await vi.waitFor(() => {
+      const list = page.getByRole('listbox').query()
 
       expect(list).toBeInTheDocument()
     })
   })
 
   it('should render groups', async () => {
-    render(
+    await render(
       <SimpleSelect renderLabel="Choose an option">
         <SimpleSelect.Option id="0" value="0">
           ungrouped option one
@@ -99,13 +107,13 @@ describe('<SimpleSelect />', () => {
         </SimpleSelect.Option>
       </SimpleSelect>
     )
-    const input = screen.getByLabelText('Choose an option')
+    const input = page.getByLabelText('Choose an option').element()
 
     await userEvent.click(input)
 
-    await waitFor(() => {
-      const groups = screen.getAllByRole('group')
-      const labelOne = screen.getByText('Group one')
+    await vi.waitFor(() => {
+      const groups = page.getByRole('group').elements()
+      const labelOne = page.getByText('Group one').element()
       const labelOneID = labelOne.getAttribute('id')
 
       expect(groups.length).toBe(2)
@@ -115,7 +123,7 @@ describe('<SimpleSelect />', () => {
   })
 
   it('should ignore invalid children', async () => {
-    render(
+    await render(
       <SimpleSelect renderLabel="Choose an option">
         <SimpleSelect.Option id="0" value={0}>
           valid
@@ -123,12 +131,12 @@ describe('<SimpleSelect />', () => {
         <div>invalid</div>
       </SimpleSelect>
     )
-    const input = screen.getByLabelText('Choose an option')
+    const input = page.getByLabelText('Choose an option').element()
 
     await userEvent.click(input)
 
-    await waitFor(() => {
-      const invalidChild = screen.queryByText('invalid')
+    await vi.waitFor(() => {
+      const invalidChild = page.getByText('invalid').query()
 
       expect(invalidChild).not.toBeInTheDocument()
     })
@@ -136,57 +144,59 @@ describe('<SimpleSelect />', () => {
 
   it('should fire onFocus when input gains focus', async () => {
     const onFocus = vi.fn()
-    render(
+    await render(
       <SimpleSelect renderLabel="Choose an option" onFocus={onFocus}>
         {getOptions()}
       </SimpleSelect>
     )
-    const input = screen.getByLabelText('Choose an option')
+    const input = page.getByLabelText('Choose an option').element()
 
     input.focus()
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onFocus).toHaveBeenCalled()
     })
   })
 
   describe('input', () => {
     it('should render with a custom id if given', async () => {
-      render(<SimpleSelect renderLabel="Choose an option" id="customSelect" />)
-      const input = screen.getByLabelText('Choose an option')
+      await render(
+        <SimpleSelect renderLabel="Choose an option" id="customSelect" />
+      )
+      const input = page.getByLabelText('Choose an option').element()
 
       expect(input).toHaveAttribute('id', 'customSelect')
     })
 
     it('should always render readonly', async () => {
-      render(
+      await render(
         <SimpleSelect renderLabel="Choose an option" interaction="enabled" />
       )
-      const input = screen.getByLabelText('Choose an option')
+      const input = page.getByLabelText('Choose an option').element()
 
       expect(input).toHaveAttribute('readonly')
       expect(input).not.toHaveAttribute('disabled')
     })
 
     it('should render disabled when interaction="disabled"', async () => {
-      render(
+      await render(
         <SimpleSelect renderLabel="Choose an option" interaction="disabled" />
       )
-      const input = screen.getByLabelText('Choose an option')
+      const input = page.getByLabelText('Choose an option').element()
 
       expect(input).toHaveAttribute('disabled')
       expect(input).not.toHaveAttribute('readonly')
     })
 
     it('should render required when isRequired={true}', async () => {
-      render(<SimpleSelect renderLabel="Choose an option" isRequired />)
-      const input = screen.getByLabelText('Choose an option *')
+      await render(<SimpleSelect renderLabel="Choose an option" isRequired />)
+      const input = page.getByLabelText('Choose an option *').element()
 
       expect(input).toHaveAttribute('required')
     })
 
     it('should allow assistive text', async () => {
-      render(
+      await render(
         <SimpleSelect
           renderLabel="Choose an option"
           assistiveText="hello world"
@@ -194,20 +204,20 @@ describe('<SimpleSelect />', () => {
           {getOptions()}
         </SimpleSelect>
       )
-      const input = screen.getByLabelText('Choose an option')
-      const assistiveText = screen.getByText('hello world')
+      const input = page.getByLabelText('Choose an option').element()
+      const assistiveText = page.getByText('hello world').element()
       const assistiveTextID = assistiveText.getAttribute('id')
 
       expect(input).toHaveAttribute('aria-describedby', assistiveTextID)
     })
 
     it('should allow custom props to pass through', async () => {
-      render(
+      await render(
         <SimpleSelect renderLabel="Choose an option" data-custom-attr="true">
           {getOptions()}
         </SimpleSelect>
       )
-      const input = screen.getByLabelText('Choose an option')
+      const input = page.getByLabelText('Choose an option').element()
 
       expect(input).toHaveAttribute('data-custom-attr', 'true')
     })
@@ -215,12 +225,12 @@ describe('<SimpleSelect />', () => {
     it('should provide a ref to the input element', async () => {
       const inputRef = vi.fn()
 
-      render(
+      await render(
         <SimpleSelect renderLabel="Choose an option" inputRef={inputRef}>
           {getOptions()}
         </SimpleSelect>
       )
-      const input = screen.getByLabelText('Choose an option')
+      const input = page.getByLabelText('Choose an option').element()
 
       expect(inputRef).toHaveBeenCalledWith(input)
     })
@@ -231,7 +241,7 @@ describe('<SimpleSelect />', () => {
       <CheckInstUIIcon data-testid="option-icon" />
     ))
 
-    render(
+    await render(
       <SimpleSelect renderLabel="Choose an option">
         <SimpleSelect.Option
           id="option-1"
@@ -250,12 +260,12 @@ describe('<SimpleSelect />', () => {
         </SimpleSelect.Option>
       </SimpleSelect>
     )
-    const input = screen.getByLabelText('Choose an option')
+    const input = page.getByLabelText('Choose an option').element()
 
     await userEvent.click(input)
 
-    await waitFor(() => {
-      const optionIcons = screen.getAllByTestId('option-icon')
+    await vi.waitFor(() => {
+      const optionIcons = page.getByTestId('option-icon').elements()
       expect(optionIcons.length).toBe(2)
 
       expect(renderBeforeLabel).toHaveBeenCalledTimes(2)
@@ -284,17 +294,17 @@ describe('<SimpleSelect />', () => {
 
   describe('list', () => {
     it('should set aria-disabled on options when isDisabled={true}', async () => {
-      render(
+      await render(
         <SimpleSelect renderLabel="Choose an option">
           {getOptions(defaultOptions[2])}
         </SimpleSelect>
       )
-      const input = screen.getByLabelText('Choose an option')
+      const input = page.getByLabelText('Choose an option').element()
 
       await userEvent.click(input)
 
-      await waitFor(() => {
-        const options = screen.getAllByRole('option')
+      await vi.waitFor(() => {
+        const options = page.getByRole('option').elements()
 
         expect(options[0]).not.toHaveAttribute('aria-disabled')
         expect(options[2]).toHaveAttribute('aria-disabled', 'true')
@@ -304,17 +314,17 @@ describe('<SimpleSelect />', () => {
     it('should provide a ref to the list element', async () => {
       const listRef = vi.fn()
 
-      render(
+      await render(
         <SimpleSelect renderLabel="Choose an option" listRef={listRef}>
           {getOptions()}
         </SimpleSelect>
       )
-      const input = screen.getByLabelText('Choose an option')
+      const input = page.getByLabelText('Choose an option').element()
 
       await userEvent.click(input)
 
-      await waitFor(() => {
-        const listbox = screen.getByRole('listbox')
+      await vi.waitFor(() => {
+        const listbox = page.getByRole('listbox').element()
 
         expect(listRef).toHaveBeenCalledWith(listbox)
       })
@@ -340,18 +350,20 @@ describe('<SimpleSelect />', () => {
       )
     }
 
-    it('should clear selection if selected option does not exist in updated options', () => {
+    it('should clear selection if selected option does not exist in updated options', async () => {
       const { rerender } = renderSimpleSelect(initialOptions)
 
-      const input = screen.getByRole('combobox', { name: 'Choose an option' })
+      const input = page
+        .getByRole('combobox', { name: 'Choose an option' })
+        .element()
       fireEvent.click(input)
 
-      const fooOption = screen.getByRole('option', { name: 'foo' })
+      const fooOption = page.getByRole('option', { name: 'foo' }).element()
       fireEvent.click(fooOption)
 
       expect(input).toHaveValue('foo')
 
-      rerender(
+      await rerender(
         <SimpleSelect renderLabel="Choose an option">
           {getOptions(updatedOptions)}
         </SimpleSelect>
@@ -360,18 +372,20 @@ describe('<SimpleSelect />', () => {
       expect(input).toHaveValue('')
     })
 
-    it('should persist selected option if it exists in updated options', () => {
+    it('should persist selected option if it exists in updated options', async () => {
       const { rerender } = renderSimpleSelect(initialOptions)
 
-      const input = screen.getByRole('combobox', { name: 'Choose an option' })
+      const input = page
+        .getByRole('combobox', { name: 'Choose an option' })
+        .element()
       fireEvent.click(input)
 
-      const barOption = screen.getByRole('option', { name: 'bar' })
+      const barOption = page.getByRole('option', { name: 'bar' }).element()
       fireEvent.click(barOption)
 
       expect(input).toHaveValue('bar')
 
-      rerender(
+      await rerender(
         <SimpleSelect renderLabel="Choose an option">
           {getOptions(updatedOptions)}
         </SimpleSelect>

@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
-import { render, screen } from '@testing-library/react'
-import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { Breadcrumb } from '@instructure/ui-breadcrumb/latest'
 
@@ -54,7 +54,7 @@ describe('<Breadcrumb />', () => {
   })
 
   it('should be accessible', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Breadcrumb label={TEST_LABEL}>
         <Breadcrumb.Link href={TEST_LINK}>{TEST_TEXT_01}</Breadcrumb.Link>
         <Breadcrumb.Link>{TEST_TEXT_02}</Breadcrumb.Link>
@@ -65,21 +65,21 @@ describe('<Breadcrumb />', () => {
     expect(axeCheck).toBe(true)
   })
 
-  it('should render the label as an aria-label attribute', () => {
-    render(
+  it('should render the label as an aria-label attribute', async () => {
+    await render(
       <Breadcrumb label={TEST_LABEL}>
         <Breadcrumb.Link>{TEST_TEXT_01}</Breadcrumb.Link>
       </Breadcrumb>
     )
 
-    const label = screen.getByLabelText(TEST_LABEL)
+    const label = page.getByLabelText(TEST_LABEL).element()
 
     expect(label).toBeInTheDocument()
     expect(label).toHaveAttribute('aria-label', TEST_LABEL)
   })
 
-  it('should render an icon as a separator', () => {
-    const { container } = render(
+  it('should render an icon as a separator', async () => {
+    const { container } = await render(
       <Breadcrumb label={TEST_LABEL}>
         <Breadcrumb.Link href={TEST_LINK}>{TEST_TEXT_01}</Breadcrumb.Link>
         <Breadcrumb.Link>{TEST_TEXT_02}</Breadcrumb.Link>
@@ -91,8 +91,8 @@ describe('<Breadcrumb />', () => {
     expect(icon).toHaveAttribute('aria-hidden', 'true')
   })
 
-  it('should add aria-current="page" to the last element by default', () => {
-    const { container } = render(
+  it('should add aria-current="page" to the last element by default', async () => {
+    const { container } = await render(
       <Breadcrumb label={TEST_LABEL}>
         <Breadcrumb.Link href={TEST_LINK}>{TEST_TEXT_01}</Breadcrumb.Link>
         <Breadcrumb.Link>{TEST_TEXT_02}</Breadcrumb.Link>
@@ -106,8 +106,8 @@ describe('<Breadcrumb />', () => {
     expect(lastLink).toHaveAttribute('aria-current', 'page')
   })
 
-  it('should add aria-current="page" to the element if isCurrent is true', () => {
-    const { container } = render(
+  it('should add aria-current="page" to the element if isCurrent is true', async () => {
+    const { container } = await render(
       <Breadcrumb label={TEST_LABEL}>
         <Breadcrumb.Link isCurrentPage href={TEST_LINK}>
           {TEST_TEXT_01}
@@ -127,8 +127,8 @@ describe('<Breadcrumb />', () => {
   // This test fails because the @instructure/ui-breadcrumb/latest import
   // resolves to compiled output where console.warn is stripped by the
   // babel preset (removeConsole in production builds).
-  // it('should throw a warning when multiple elements have isCurrent set to true', () => {
-  //   render(
+  // it('should throw a warning when multiple elements have isCurrent set to true', async () => {
+  //   await render(
   //     <Breadcrumb label={TEST_LABEL}>
   //       <Breadcrumb.Link isCurrentPage href={TEST_LINK}>
   //         {TEST_TEXT_01}
@@ -144,8 +144,8 @@ describe('<Breadcrumb />', () => {
   //   )
   // })
 
-  it('should not add aria-current="page" to the last element if it set to false', () => {
-    const { container } = render(
+  it('should not add aria-current="page" to the last element if it set to false', async () => {
+    const { container } = await render(
       <Breadcrumb label={TEST_LABEL}>
         <Breadcrumb.Link href={TEST_LINK}>{TEST_TEXT_01}</Breadcrumb.Link>
         <Breadcrumb.Link isCurrentPage={false}>{TEST_TEXT_02}</Breadcrumb.Link>

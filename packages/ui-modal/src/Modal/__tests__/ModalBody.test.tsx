@@ -22,9 +22,8 @@
  * SOFTWARE.
  */
 
-import { render, waitFor } from '@testing-library/react'
-import { vi, beforeEach, afterEach } from 'vitest'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 import { color2hex } from '@instructure/ui-color-utils'
 import canvas from '@instructure/ui-themes'
@@ -37,7 +36,7 @@ const BODY_TEXT = 'Modal-body-text'
 
 describe('<ModalBody />', () => {
   it('should render', async () => {
-    const { findByText } = render(<ModalBody>{BODY_TEXT}</ModalBody>)
+    const { findByText } = await render(<ModalBody>{BODY_TEXT}</ModalBody>)
     const modalBody = await findByText(BODY_TEXT)
 
     expect(modalBody).toBeInTheDocument()
@@ -47,7 +46,7 @@ describe('<ModalBody />', () => {
     const themeVariables = canvas.newTheme.components.ModalBody(
       canvas.newTheme.semantics(canvas.newTheme.primitives)
     )
-    const { findByText } = render(
+    const { findByText } = await render(
       <ModalBody variant="inverse">{BODY_TEXT}</ModalBody>
     )
     const modalBody = await findByText(BODY_TEXT)
@@ -61,7 +60,7 @@ describe('<ModalBody />', () => {
   })
 
   it('should set the same width and height as the parent when overflow is set to fit', async () => {
-    const { findByText } = render(
+    const { findByText } = await render(
       <div style={{ width: '500px', height: '600px' }}>
         <ModalBody overflow="fit">{BODY_TEXT}</ModalBody>
       </div>
@@ -84,26 +83,26 @@ describe('<ModalBody />', () => {
 
     allProps.forEach((prop) => {
       if (prop in allowedProps) {
-        it(`should allow the '${prop}' prop`, () => {
+        it(`should allow the '${prop}' prop`, async () => {
           const consoleErrorSpy = vi
             .spyOn(console, 'error')
             .mockImplementation(() => {})
           const props = { [prop]: allowedProps[prop] }
-          render(<ModalBody {...props} />)
+          await render(<ModalBody {...props} />)
 
           expect(consoleErrorSpy).not.toHaveBeenCalled()
 
           consoleErrorSpy.mockRestore()
         })
       } else {
-        it(`should NOT allow the '${prop}' prop`, () => {
+        it(`should NOT allow the '${prop}' prop`, async () => {
           const expectedErrorMessage = `prop '${prop}' is not allowed.`
           const consoleErrorSpy = vi
             .spyOn(console, 'error')
             .mockImplementation(() => {})
 
           const props = { [prop]: 'NOT_ALLOWED_VALUE' }
-          render(<ModalBody {...props} />)
+          await render(<ModalBody {...props} />)
 
           expect(consoleErrorSpy).toHaveBeenCalledWith(
             expect.stringContaining(expectedErrorMessage),
@@ -164,15 +163,15 @@ describe('<ModalBody />', () => {
 
     it('is a tab stop when scrollable and it has no focusable children', async () => {
       mockScrollable(true)
-      const { findByText } = render(<ModalBody>{BODY_TEXT}</ModalBody>)
+      const { findByText } = await render(<ModalBody>{BODY_TEXT}</ModalBody>)
       const body = await findByText(BODY_TEXT)
 
-      await waitFor(() => expect(body).toHaveAttribute('tabindex', '0'))
+      await vi.waitFor(() => expect(body).toHaveAttribute('tabindex', '0'))
     })
 
     it('is not a tab stop when scrollable but it has a focusable child', async () => {
       mockScrollable(true)
-      const { findByText } = render(
+      const { findByText } = await render(
         <ModalBody>
           <button>focusable</button>
           {BODY_TEXT}
@@ -180,34 +179,34 @@ describe('<ModalBody />', () => {
       )
       const body = await findByText(BODY_TEXT)
 
-      await waitFor(() => expect(body).not.toHaveAttribute('tabindex'))
+      await vi.waitFor(() => expect(body).not.toHaveAttribute('tabindex'))
     })
 
     it('is not a tab stop when it is not scrollable', async () => {
       mockScrollable(false)
-      const { findByText } = render(<ModalBody>{BODY_TEXT}</ModalBody>)
+      const { findByText } = await render(<ModalBody>{BODY_TEXT}</ModalBody>)
       const body = await findByText(BODY_TEXT)
 
-      await waitFor(() => expect(body).toBeInTheDocument())
+      await vi.waitFor(() => expect(body).toBeInTheDocument())
       expect(body).not.toHaveAttribute('tabindex')
     })
 
     it('drops the tab stop when a focusable child is added later', async () => {
       mockScrollable(true)
-      const { findByText, rerender } = render(
+      const { findByText, rerender } = await render(
         <ModalBody>{BODY_TEXT}</ModalBody>
       )
       const body = await findByText(BODY_TEXT)
-      await waitFor(() => expect(body).toHaveAttribute('tabindex', '0'))
+      await vi.waitFor(() => expect(body).toHaveAttribute('tabindex', '0'))
 
-      rerender(
+      await rerender(
         <ModalBody>
           <button>focusable</button>
           {BODY_TEXT}
         </ModalBody>
       )
 
-      await waitFor(() => expect(body).not.toHaveAttribute('tabindex'))
+      await vi.waitFor(() => expect(body).not.toHaveAttribute('tabindex'))
     })
 
     it('labels the scrollable body from the header with a space between adjacent text nodes', async () => {
@@ -216,7 +215,7 @@ describe('<ModalBody />', () => {
       // renders: a decorative "IgniteAI" text node immediately followed by the
       // title, with no whitespace between them. The body's aria-label must not
       // collapse these into "IgniteAI Nutrition Facts".
-      const { findByText } = render(
+      const { findByText } = await render(
         <Modal
           open
           label="AI information"
@@ -233,7 +232,7 @@ describe('<ModalBody />', () => {
       )
       const body = await findByText(BODY_TEXT)
 
-      await waitFor(() =>
+      await vi.waitFor(() =>
         expect(body).toHaveAttribute(
           'aria-label',
           'IgniteAI AI Nutrition Facts'

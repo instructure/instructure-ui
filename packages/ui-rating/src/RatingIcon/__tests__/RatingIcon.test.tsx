@@ -22,10 +22,9 @@
  * SOFTWARE.
  */
 
-import { render, waitFor } from '@testing-library/react'
-import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 import { InstUISettingsProvider } from '@instructure/emotion'
 import { runAxeCheck } from '@instructure/ui-axe-check'
@@ -52,7 +51,7 @@ describe('<RatingIcon />', () => {
   })
 
   it('transitions when filled on render and animateFill is true', async () => {
-    const { container } = render(
+    const { container } = await render(
       <InstUISettingsProvider
         theme={{
           componentOverrides: {
@@ -66,7 +65,7 @@ describe('<RatingIcon />', () => {
       </InstUISettingsProvider>
     )
 
-    await waitFor(
+    await vi.waitFor(
       () => {
         const icon = container.querySelector('svg')
         const iconWrapper = container.querySelector(
@@ -82,7 +81,7 @@ describe('<RatingIcon />', () => {
   })
 
   it('transitions when filled after render and animateFill is true', async () => {
-    const { container, rerender } = render(
+    const { container, rerender } = await render(
       <InstUISettingsProvider
         theme={{
           componentOverrides: {
@@ -95,7 +94,7 @@ describe('<RatingIcon />', () => {
         <RatingIcon filled={false} animateFill={true} />
       </InstUISettingsProvider>
     )
-    await waitFor(
+    await vi.waitFor(
       () => {
         const icon = container.querySelector('svg')
         const iconWrapper = container.querySelector(
@@ -109,7 +108,7 @@ describe('<RatingIcon />', () => {
       { timeout: 500 }
     )
 
-    rerender(
+    await rerender(
       <InstUISettingsProvider
         theme={{
           componentOverrides: {
@@ -123,7 +122,7 @@ describe('<RatingIcon />', () => {
       </InstUISettingsProvider>
     )
 
-    await waitFor(
+    await vi.waitFor(
       () => {
         const icon = container.querySelector('svg')
         const iconWrapper = container.querySelector(
@@ -139,7 +138,7 @@ describe('<RatingIcon />', () => {
   })
 
   it('should meet a11y standards', async () => {
-    const { container } = render(<RatingIcon filled animateFill />)
+    const { container } = await render(<RatingIcon filled animateFill />)
 
     const axeCheck = await runAxeCheck(container)
     expect(axeCheck).toBe(true)

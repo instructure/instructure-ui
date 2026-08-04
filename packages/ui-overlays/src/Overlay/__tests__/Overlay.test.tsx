@@ -22,26 +22,26 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
-import { vi } from 'vitest'
 import { Overlay } from '@instructure/ui-overlays/latest'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect, vi } from 'vitest'
 
 describe('<Overlay />', () => {
-  it('should render nothing when closed', () => {
-    render(<Overlay label="Overlay Example" />)
-    const overlay = screen.queryByText('Overlay Example')
+  it('should render nothing when closed', async () => {
+    await render(<Overlay label="Overlay Example" />)
+    const overlay = page.getByText('Overlay Example').query()
 
     expect(overlay).not.toBeInTheDocument()
   })
 
-  it('should render children when open', () => {
-    render(
+  it('should render children when open', async () => {
+    await render(
       <Overlay open label="Overlay Example">
         Hello World
       </Overlay>
     )
-    const overlay = screen.getByRole('dialog')
+    const overlay = page.getByRole('dialog').element()
 
     expect(overlay).toHaveTextContent('Hello World')
   })
@@ -51,7 +51,7 @@ describe('<Overlay />', () => {
     const onEntering = vi.fn()
     const onEntered = vi.fn()
 
-    render(
+    await render(
       <Overlay
         open
         transition="fade"
@@ -62,7 +62,7 @@ describe('<Overlay />', () => {
       />
     )
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onEnter).toHaveBeenCalled()
       expect(onEntering).toHaveBeenCalled()
       expect(onEntered).toHaveBeenCalled()
@@ -72,9 +72,9 @@ describe('<Overlay />', () => {
   it('should support onOpen prop', async () => {
     const onOpen = vi.fn()
 
-    render(<Overlay open label="Overlay Example" onOpen={onOpen} />)
+    await render(<Overlay open label="Overlay Example" onOpen={onOpen} />)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onOpen).toHaveBeenCalled()
     })
   })
@@ -82,13 +82,15 @@ describe('<Overlay />', () => {
   it('should support onClose prop', async () => {
     const onClose = vi.fn()
 
-    const { rerender } = render(
+    const { rerender } = await render(
       <Overlay open label="Overlay Example" onClose={onClose} />
     )
 
-    rerender(<Overlay label="Overlay Example" onClose={onClose} open={false} />)
+    await rerender(
+      <Overlay label="Overlay Example" onClose={onClose} open={false} />
+    )
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onClose).toHaveBeenCalled()
     })
   })

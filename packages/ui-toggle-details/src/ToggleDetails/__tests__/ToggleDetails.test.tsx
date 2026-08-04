@@ -22,14 +22,13 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
 import { runAxeCheck } from '@instructure/ui-axe-check'
-import userEvent from '@testing-library/user-event'
-import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
 
 import { ToggleDetails } from '@instructure/ui-toggle-details/latest'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page, userEvent } from 'vitest/browser'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 describe('<ToggleDetails />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
@@ -51,14 +50,14 @@ describe('<ToggleDetails />', () => {
   })
 
   it('should hide its content', async () => {
-    render(<ToggleDetails summary="Click me">Content</ToggleDetails>)
-    const content = screen.queryByText('Content')
+    await render(<ToggleDetails summary="Click me">Content</ToggleDetails>)
+    const content = page.getByText('Content').query()
 
     expect(content).not.toBeInTheDocument()
   })
 
   it('should place the icon after the summary when prop is set', async () => {
-    const { container } = render(
+    const { container } = await render(
       <ToggleDetails iconPosition="end" summary="Click me">
         Content
       </ToggleDetails>
@@ -72,7 +71,7 @@ describe('<ToggleDetails />', () => {
   })
 
   it('should have an aria-controls attribute', async () => {
-    const { container } = render(
+    const { container } = await render(
       <ToggleDetails summary="Click me">Details</ToggleDetails>
     )
 
@@ -85,7 +84,7 @@ describe('<ToggleDetails />', () => {
   })
 
   it('should have an aria-expanded attribute', async () => {
-    const { container } = render(
+    const { container } = await render(
       <ToggleDetails summary="Click me">Details</ToggleDetails>
     )
     const toggle = container.querySelector('[class$="-toggleDetails__toggle"]')
@@ -94,26 +93,26 @@ describe('<ToggleDetails />', () => {
   })
 
   it('should not have aria attributes when it has no children', async () => {
-    render(
+    await render(
       <ToggleDetails summary="Click me" data-testid="td__0"></ToggleDetails>
     )
-    const toggle = screen.getByTestId('td__0')
+    const toggle = page.getByTestId('td__0').element()
 
     expect(toggle).not.toHaveAttribute('aria-controls')
     expect(toggle).not.toHaveAttribute('aria-expanded')
   })
 
   it('should toggle on click events', async () => {
-    const { container } = render(
+    const { container } = await render(
       <ToggleDetails summary="Click me">Details</ToggleDetails>
     )
     const toggle = container.querySelector('[class$="-toggleDetails__toggle"]')
 
     expect(toggle).toHaveAttribute('aria-expanded', 'false')
 
-    await userEvent.click(screen.getByText('Click me'))
+    await userEvent.click(page.getByText('Click me').element())
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(toggle).toHaveAttribute('aria-expanded', 'true')
     })
   })
@@ -121,15 +120,15 @@ describe('<ToggleDetails />', () => {
   it('should call onToggle on click events', async () => {
     const onToggle = vi.fn()
 
-    render(
+    await render(
       <ToggleDetails summary="Click me" expanded={false} onToggle={onToggle}>
         Details
       </ToggleDetails>
     )
 
-    await userEvent.click(screen.getByText('Click me'))
+    await userEvent.click(page.getByText('Click me').element())
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       const args = onToggle.mock.calls[0]
 
       expect(onToggle).toHaveBeenCalledTimes(1)
@@ -141,7 +140,7 @@ describe('<ToggleDetails />', () => {
   it('should call onToggle on click events when it has no children', async () => {
     const onToggle = vi.fn()
 
-    render(
+    await render(
       <ToggleDetails
         summary="Click me"
         expanded={false}
@@ -149,10 +148,10 @@ describe('<ToggleDetails />', () => {
         data-testid="td__1"
       ></ToggleDetails>
     )
-    const toggle = screen.getByTestId('td__1')
+    const toggle = page.getByTestId('td__1').element()
     await userEvent.click(toggle)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       const args = onToggle.mock.calls[0]
 
       expect(onToggle).toHaveBeenCalledTimes(1)
@@ -162,7 +161,7 @@ describe('<ToggleDetails />', () => {
   })
 
   it('should be initialized by defaultExpanded prop', async () => {
-    const { container } = render(
+    const { container } = await render(
       <ToggleDetails summary="Click me" defaultExpanded>
         Content
       </ToggleDetails>
@@ -177,7 +176,7 @@ describe('<ToggleDetails />', () => {
   })
 
   it('should meet a11y standards', async () => {
-    const { container } = render(
+    const { container } = await render(
       <ToggleDetails summary="Click me">Content</ToggleDetails>
     )
     const axeCheck = await runAxeCheck(container)
@@ -188,7 +187,7 @@ describe('<ToggleDetails />', () => {
   it('focuses with the focus helper', async () => {
     let toggleRef: any
 
-    const { container } = render(
+    const { container } = await render(
       <ToggleDetails
         summary="Click me"
         ref={(el) => {

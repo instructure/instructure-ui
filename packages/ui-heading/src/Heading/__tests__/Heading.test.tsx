@@ -22,43 +22,44 @@
  * SOFTWARE.
  */
 
-import { render, screen } from '@testing-library/react'
 import { Heading } from '@instructure/ui-heading/latest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
-import '@testing-library/jest-dom'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect } from 'vitest'
 
 describe('<Heading />', () => {
   it('should render as an H2 element', async () => {
-    const { container } = render(<Heading>Hello World</Heading>)
+    const { container } = await render(<Heading>Hello World</Heading>)
     const heading = container.querySelector('[class*="-heading"]')
 
     expect(heading!.tagName).toBe('H2')
   })
 
   it('should render the children as text content', async () => {
-    const { container } = render(<Heading>Hello World</Heading>)
+    const { container } = await render(<Heading>Hello World</Heading>)
     const heading = container.querySelector('[class*="-heading"]')
 
     expect(heading).toHaveTextContent('Hello World')
   })
 
   it('should render as a SPAN if level is `reset`', async () => {
-    render(<Heading level="reset">Hello World</Heading>)
-    const heading = screen.getByText('Hello World')
+    await render(<Heading level="reset">Hello World</Heading>)
+    const heading = page.getByText('Hello World').element()
 
     expect(heading.tagName).toBe('SPAN')
   })
 
   it('should meet a11y standards', async () => {
-    const { container } = render(<Heading>Hello World</Heading>)
+    const { container } = await render(<Heading>Hello World</Heading>)
     const axeCheck = await runAxeCheck(container)
 
     expect(axeCheck).toBe(true)
   })
 
   it('should render with the specified tag when `as` prop is set', async () => {
-    render(<Heading as="div">Hello World</Heading>)
-    const heading = screen.getByText('Hello World')
+    await render(<Heading as="div">Hello World</Heading>)
+    const heading = page.getByText('Hello World').element()
 
     expect(heading.tagName).toBe('DIV')
   })
