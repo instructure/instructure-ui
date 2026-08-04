@@ -31,7 +31,7 @@ import type {
   ThemeOrLegacyOverride,
   SpecificThemeOverride
 } from './EmotionTypes'
-import { InstUIProviderProps } from './InstUISettingsProvider/index.js'
+import type { InstUIProviderProps } from './InstUISettingsProvider'
 declare const process: Record<string, any> | undefined
 
 /**
@@ -61,21 +61,8 @@ const getTheme =
   ) =>
   (ancestorTheme = {} as Theme) => {
     // we need to clone the ancestor theme not to override it
-    let currentTheme
-    if (Object.keys(ancestorTheme).length === 0) {
-      if (
-        typeof process !== 'undefined' &&
-        (process?.env?.NODE_ENV !== 'production' ||
-          process?.env?.GITHUB_PULL_REQUEST_PREVIEW === 'true')
-      ) {
-        console.warn(
-          'No theme provided for [InstUISettingsProvider], using default `canvas` theme.'
-        )
-      }
-      currentTheme = canvas
-    } else {
-      currentTheme = ancestorTheme
-    }
+    const hasAncestorTheme = Object.keys(ancestorTheme).length > 0
+    const currentTheme = hasAncestorTheme ? ancestorTheme : canvas
 
     const resolvedThemeOverride =
       typeof themeOverride === 'function'
@@ -113,6 +100,19 @@ const getTheme =
         )
       }
       resolvedLegacyThemeOrOverride = {}
+    }
+
+    // We only get here if no full theme was given, so the overrides are merged
+    // into the implicit `canvas` fallback instead of a theme the consumer chose.
+    if (
+      !hasAncestorTheme &&
+      typeof process !== 'undefined' &&
+      (process?.env?.NODE_ENV !== 'production' ||
+        process?.env?.GITHUB_PULL_REQUEST_PREVIEW === 'true')
+    ) {
+      console.warn(
+        'No theme provided for [InstUISettingsProvider], using default `canvas` theme.'
+      )
     }
 
     const themeName = currentTheme.key
