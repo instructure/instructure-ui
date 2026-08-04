@@ -22,23 +22,7 @@ jobs:
       - name: Lint code
         run: pnpm run lint:changes
   vitest-tests:
-    name: Vitest unit tests
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-      - uses: pnpm/action-setup@v6
-      - uses: actions/setup-node@v6
-        with:
-          node-version: '24'
-          cache: 'pnpm'
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-      - name: Bootstrap project
-        run: pnpm run bootstrap
-      - name: Run vitest unit tests
-        run: pnpm run test:vitest
-  vitest-browser-tests:
-    name: Vitest browser tests
+    name: Vitest tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -54,7 +38,7 @@ jobs:
       - name: Bootstrap project
         run: pnpm run bootstrap
       - name: Run vitest browser tests
-        run: pnpm run test:browser
+        run: pnpm run test:vitest
   cypress:
     name: Cypress component tests
     runs-on: ubuntu-latest
@@ -73,4 +57,3 @@ jobs:
         run: pnpm run bootstrap
       - name: Run Cypress components tests
         run: pnpm run cy:component
-

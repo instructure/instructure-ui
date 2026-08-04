@@ -22,6 +22,7 @@
     { "path": "../ui-babel-preset/tsconfig.build.json" },
     { "path": "../ui-color-utils/tsconfig.build.json" },
     { "path": "../ui-position/tsconfig.build.json" },
+    { "path": "../ui-tooltip/tsconfig.build.json" },
     { "path": "../ui-themes/tsconfig.build.json" }
   ]
 }

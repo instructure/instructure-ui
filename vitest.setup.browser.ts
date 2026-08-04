@@ -24,6 +24,7 @@
 
 // Setup for the `browser` project (real-browser tests via vitest-browser).
 import '@testing-library/jest-dom/vitest'
+import { vi } from 'vitest'
 
 // @instructure/console only outputs logs if process.env.NODE_ENV !== 'production'
 // these messages are sometimes used in test assertions
@@ -32,3 +33,9 @@ if (typeof globalThis.process === 'undefined') {
 } else if (!globalThis.process.env) {
   globalThis.process.env = { NODE_ENV: 'test' }
 }
+
+// Spies (e.g. on `console.warn`) would otherwise stay installed for the rest of
+// the file, so a later test could see calls made by an earlier one.
+afterEach(() => {
+  vi.restoreAllMocks()
+})
