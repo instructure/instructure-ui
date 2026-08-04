@@ -10,17 +10,11 @@ This page provides an overview of the testing strategies we use to ensure the qu
 
 ### Test strategies:
 
-#### Unit tests with Vitest and React Testing Library:
+#### Unit tests with Vitest-browser and Vitest:
 
-These tools are our primary stack for writing component-level unit tests. They are lightweight and fast. [Vitest](https://vitest.dev/guide/) is one of the fastest modern testing framework. It offers a Jest-like API and runs in a Node.js environment, making it ideal for testing individual components and functions in isolation. Paired with [React Testing Library](https://testing-library.com/docs/react-testing-library/intro), Vitest encourages accessible and maintainable test practices by querying elements the way users interact with them. It's best suited for testing component logic, rendering conditions, and props/state changes without needing a full browser environment.
+InstUI's main testing suite runs in [Vitest browser mode](https://vitest.dev/guide/browser/). This runs the tests in a real browser with a Jest/Vitest like API. Node scripts are tested in Vitest too.
 
 For more information about our unit tests you can check out our [detailed guides and examples.](/#vitest-unit-testing)
-
-#### Component Testing with Cypress:
-
-[Cypress Component Testing](https://docs.cypress.io/app/component-testing/get-started) allows us to mount individual components in a real browser environment for precise interaction testing. Unlike traditional unit tests, it renders with full CSS and browser APIs, offering more realistic behavior. This makes it ideal for testing user interactions like clicks, keyboard navigation, focus traps, and animations. While a bit heavier than Vitest, it provides greate visibility and debugging capabilities for complex UI logic.
-
-For more information check out our [detailed guides and examples.](cypress-component-testing)
 
 #### Visual Regression Testing with Cypress:
 
