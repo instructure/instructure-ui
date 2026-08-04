@@ -30,7 +30,7 @@
 
 import { resolve } from 'node:path'
 import { mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs'
-import ts from 'typescript'
+import jscodeshift from 'jscodeshift'
 
 // '@instructure/ui-button/v8_0' → matches; '@instructure/ui-button' or 'react' → no match
 const VERSIONED_INSTUI = /^@instructure\/[^/]+\/v\d+_\d+$/
@@ -62,33 +62,34 @@ function findLatestVersionFile(dir: string): string {
   return resolve(dir, latest)
 }
 
-function isVersionedInstUIExport(node: ts.ExportDeclaration): boolean {
-  const { moduleSpecifier } = node
-  return (
-    moduleSpecifier !== undefined &&
-    ts.isStringLiteral(moduleSpecifier) &&
-    VERSIONED_INSTUI.test(moduleSpecifier.text)
-  )
-}
-
-function getExportedNames(node: ts.ExportDeclaration): string[] {
-  const { exportClause } = node
-  if (!exportClause || !ts.isNamedExports(exportClause)) return []
-  return exportClause.elements.map((el) => el.name.text)
-}
-
 function parseVersionedComponents(filePath: string): string[] {
   const source = readFileSync(filePath, 'utf-8')
-  const sourceFile = ts.createSourceFile(
-    filePath,
-    source,
-    ts.ScriptTarget.Latest
-  )
+  const j = jscodeshift.withParser('ts')
+  const root = j(source)
+  const components: string[] = []
 
-  return sourceFile.statements
-    .filter(ts.isExportDeclaration)
-    .filter(isVersionedInstUIExport)
-    .flatMap(getExportedNames)
+  root.find(j.ExportNamedDeclaration).forEach((path: any) => {
+    const node = path.value
+    const source = node.source
+
+    // Check if this is a versioned @instructure/ui import
+    if (
+      source &&
+      source.type === 'StringLiteral' &&
+      VERSIONED_INSTUI.test(source.value)
+    ) {
+      // Extract exported names
+      if (node.specifiers && node.specifiers.length > 0) {
+        node.specifiers.forEach((spec: any) => {
+          if (spec.local && spec.local.name) {
+            components.push(spec.local.name)
+          }
+        })
+      }
+    }
+  })
+
+  return components
 }
 
 function generateFileContent(components: string[]): string {
