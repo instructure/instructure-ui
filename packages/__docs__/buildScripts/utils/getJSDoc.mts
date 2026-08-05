@@ -22,7 +22,10 @@
  * SOFTWARE.
  */
 
-import * as ts from 'typescript'
+// TypeScript 7 dropped the programmatic Compiler API, so this imports
+// Microsoft's TypeScript 6.0 compatibility shim instead.
+// TODO revisit once TypeScript 7.1 adds a Compiler API (see https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/)
+import * as ts from 'typescript-compiler-api'
 import type { JsDocResult } from '../DataTypes.mjs'
 import {
   ArrowFunction,
@@ -31,7 +34,7 @@ import {
   JSDocTag, NamedDeclaration,
   TypeChecker,
   VariableDeclaration
-} from 'typescript'
+} from 'typescript-compiler-api'
 import fs from 'fs'
 
 /**
