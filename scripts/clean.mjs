@@ -97,7 +97,7 @@ function removeNodeModules() {
 }
 
 async function main() {
-  console.info('Deleting build artifacts...')
+  console.info('Removing build output and caches from all packages...')
   await clean()
 
   const args = process.argv.slice(2)
