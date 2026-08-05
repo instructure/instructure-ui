@@ -209,10 +209,11 @@ describe('<Table />', async () => {
         <Table.Body>
           test
           <span>test</span>
-          {/* @ts-expect-error error is normal here */}
+          {/* @ts-ignore error is normal here */}
           <Table.Row>
             test
             <span>test</span>
+            {/* @ts-ignore error is normal here */}
             <Table.Cell>Foo</Table.Cell>
             test
             <span>test</span>
