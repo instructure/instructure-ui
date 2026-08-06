@@ -23,6 +23,7 @@
  */
 
 import { Component, createRef, RefObject } from 'react'
+import type { ComponentType } from 'react'
 import {
   render,
   waitFor,
@@ -31,6 +32,8 @@ import {
 import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
 import '@testing-library/jest-dom'
+
+import { withStyle } from '@instructure/emotion'
 
 import { Transition } from '../index.js'
 import { getClassNames } from '../styles.js'
@@ -58,6 +61,23 @@ class ExampleComponent extends Component<any, any> {
     return <div ref={this.ref}>{COMPONENT_TEXT}</div>
   }
 }
+
+// Stands in for an InstUI component: `withStyle`-decorated, and declaring
+// `elementRef` in `allowedProps` the way real components do. ui-motion can't
+// import one directly — ui-alerts and friends depend on ui-motion.
+type StyledChildProps = { elementRef?: (el: Element | null) => void }
+
+class StyledChildBase extends Component<StyledChildProps> {
+  static allowedProps = ['elementRef']
+  render() {
+    return <div ref={this.props.elementRef}>{COMPONENT_TEXT}</div>
+  }
+}
+
+const StyledChild = withStyle(
+  () => ({}),
+  () => ({})
+)(StyledChildBase) as unknown as ComponentType<StyledChildProps>
 
 describe('<Transition />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
@@ -273,6 +293,77 @@ describe('<Transition />', () => {
       expect(onExit).toHaveBeenCalled()
       expect(onExiting).toHaveBeenCalled()
       expect(onExited).toHaveBeenCalled()
+    })
+  })
+
+  describe('capturing the child node', () => {
+    const warningsMatching = (mock: MockInstance, pattern: RegExp) =>
+      mock.mock.calls.filter((args: unknown[]) => pattern.test(args.join(' ')))
+
+    const elementRefWarnings = (mock: MockInstance) =>
+      warningsMatching(mock, /elementRef/)
+
+    const refIsNotAPropWarnings = (mock: MockInstance) =>
+      warningsMatching(mock, /`?ref`? is not a prop/)
+
+    // The repo compiles JSX with `jsxImportSource: '@emotion/react'`, so a child
+    // written with a `css` prop is rendered through emotion's own forwardRef
+    // wrapper. These children are the realistic case — Tray, DrawerTray, Modal
+    // and Alert all render one.
+    it('does not leak elementRef onto an emotion-wrapped host element', async () => {
+      const { getByText } = render(
+        <Transition type="fade" in={true}>
+          <div css={{ color: 'red' }}>hello</div>
+        </Transition>
+      )
+      const element = getByText('hello')
+
+      expect(element).not.toHaveAttribute('elementref')
+      expect(elementRefWarnings(consoleErrorMock)).toHaveLength(0)
+    })
+
+    it('still captures an emotion-wrapped host element', async () => {
+      const elementRef = vi.fn()
+      const { getByText } = render(
+        <Transition type="fade" in={true} elementRef={elementRef}>
+          <div css={{ color: 'red' }}>hello</div>
+        </Transition>
+      )
+
+      // the node reached handleRef, so the transition classes could be applied
+      expect(getByText('hello')).toHaveClass(getClass('fade', 'entered'))
+      await waitFor(() => {
+        expect(elementRef).toHaveBeenCalledWith(expect.any(Element))
+      })
+    })
+
+    // LX-4014 (#2618): a withStyle child plus an actually-running transition
+    // made React read `ref` off the element. Both conditions are required — a
+    // host child, or a mount that never transitions, won't reproduce it.
+    it('does not read `ref` off a withStyle child mid-transition', async () => {
+      const childElementRef = vi.fn()
+      const transitionElementRef = vi.fn()
+
+      const { getByText } = render(
+        <Transition
+          type="fade"
+          in={false}
+          transitionOnMount
+          elementRef={transitionElementRef}
+        >
+          <StyledChild elementRef={childElementRef} />
+        </Transition>
+      )
+
+      await waitFor(() => {
+        // the child's own elementRef is chained, not overwritten, and
+        // Transition still captured the node
+        expect(childElementRef).toHaveBeenCalledWith(expect.any(Element))
+        expect(transitionElementRef).toHaveBeenCalledWith(expect.any(Element))
+      })
+      expect(getByText(COMPONENT_TEXT)).toBeInTheDocument()
+      expect(refIsNotAPropWarnings(consoleErrorMock)).toHaveLength(0)
+      expect(elementRefWarnings(consoleErrorMock)).toHaveLength(0)
     })
   })
 })
