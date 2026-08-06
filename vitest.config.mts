@@ -151,7 +151,7 @@ export default defineConfig({
       {
         test: {
           globals: true,
-          include: ['**/__node_tests__/**/*.test.{ts,tsx}'],
+          include: ['{packages,scripts}/**/__node_tests__/**/*.test.{ts,tsx}'],
           environment: 'node',
           name: { label: 'node', color: 'magenta' }
         }
