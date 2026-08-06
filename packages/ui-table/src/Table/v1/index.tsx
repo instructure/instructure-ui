@@ -161,7 +161,7 @@ class Table extends Component<TableProps> {
         const headerText =
           typeof colHeader.props.children === 'string'
             ? colHeader.props.children
-            : (colHeader.props.children?.props?.children ?? '')
+            : colHeader.props.children?.props?.children ?? ''
         return { header: headerText, direction: colHeader.props.sortDirection }
       }
     }
@@ -174,7 +174,13 @@ class Table extends Component<TableProps> {
     if (typeof caption === 'function') {
       return caption(sortInfo?.header ?? '', sortInfo?.direction ?? 'none')
     }
-    const sortText = ` Sorted by ${sortInfo?.header} (${sortInfo?.direction})`
+    // An unsorted table has no sort state to describe. Falling through would
+    // put ' Sorted by undefined (undefined)' into the accessible name of every
+    // unsorted table.
+    if (!sortInfo) {
+      return caption as string
+    }
+    const sortText = ` Sorted by ${sortInfo.header} (${sortInfo.direction})`
 
     return caption ? caption + sortText : sortText.trim()
   }
