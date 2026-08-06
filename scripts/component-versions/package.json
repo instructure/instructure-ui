@@ -1,0 +1,8 @@
+{
+  "name": "instui-component-versions-changelog-preset",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Internal conventional-changelog preset (used by `lerna version`) that prefixes each changelog entry with the published component version(s) the change touched. Not published; not a workspace package.",
+  "main": "changelog-preset.cjs",
+  "license": "MIT"
+}

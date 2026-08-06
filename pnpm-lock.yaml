@@ -96,6 +96,9 @@ importers:
       concurrently:
         specifier: ^9.2.3
         version: 9.2.3
+      conventional-changelog-angular:
+        specifier: ^7.0.0
+        version: 7.0.0
       cross-spawn:
         specifier: ^7.0.6
         version: 7.0.6
