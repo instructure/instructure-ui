@@ -33,14 +33,42 @@ const purify = createDOMPurify(
   typeof window === 'undefined' ? undefined : window
 )
 
-// Sanitize a full `<svg>...</svg>` string. DOMPurify only operates when a DOM
-// is available (i.e. in the browser); on the server it returns empty so unsafe
-// content never lands in SSR output. Callers should pass the complete SVG —
-// outer attributes are filtered in the same pass as the inner content.
-function sanitizeSvg(src: string) {
+// Restrict <use> references to same-document fragments like #my-symbol, hooks
+// are per-instance
+if (purify.isSupported) {
+  purify.addHook('afterSanitizeAttributes', (node) => {
+    if (node.nodeName?.toLowerCase() !== 'use') return
+
+    for (const attribute of ['href', 'xlink:href']) {
+      const value = node.getAttribute(attribute)
+      if (value !== null && !value.trim().startsWith('#')) {
+        node.removeAttribute(attribute)
+      }
+    }
+  })
+}
+
+type SanitizeSvgOptions = {
+  allowUseElement?: boolean
+}
+
+// Sanitize a full `<svg>...</svg>` string; pass the complete SVG.
+// Outer attributes are filtered alongside the inner content.
+// DOMPurify needs a DOM, so SSR returns empty instead.
+function sanitizeSvg(src: string, options?: SanitizeSvgOptions) {
   if (typeof src !== 'string' || src === '') return src
   if (!purify.isSupported) return ''
-  return purify.sanitize(src, { USE_PROFILES: { svg: true, svgFilters: true } })
+
+  const config: Record<string, unknown> = {
+    USE_PROFILES: { svg: true, svgFilters: true }
+  }
+
+  if (options?.allowUseElement) {
+    config.ADD_TAGS = ['use']
+    config.ADD_ATTR = ['href', 'xlink:href']
+  }
+
+  return purify.sanitize(src, config as Parameters<typeof purify.sanitize>[1])
 }
 
 export default sanitizeSvg

@@ -184,5 +184,35 @@ describe('<InlineSVG />', () => {
       expect(svg).toHaveAttribute('viewBox', '0 0 24 24')
       expect(svg?.querySelector('path')).toHaveAttribute('d', 'M0 0L10 10')
     })
+
+    describe('svg with <use> tags (allowUseElement)', () => {
+      const MJX_PLUS_ICON = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1.043ex" height="1.676ex" viewBox="0 -583 461 741">
+<defs>
+<path id="MJX-1-TEX-N-2B" stroke-width="1" d="M56 237T56 250T70 270H369V420L370 570Q380 583 397 583Q414 583 424 570V270H723Q740 270 740 250T723 230H424V-70Q424 -170 415 -180H385Q374 -170 366 -142V230H70Q56 237 56 250Z"></path>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)">
+<use xlink:href="#MJX-1-TEX-N-2B" x="0" y="0"></use>
+</g>
+</svg>`
+
+      it('strips <use> and its glyph reference by default', () => {
+        const { container } = render(<InlineSVG src={MJX_PLUS_ICON} />)
+        const group = container.querySelector('g[role="presentation"]')
+
+        expect(group?.querySelector('use')).not.toBeInTheDocument()
+      })
+
+      it('renders the glyph via <use> when allowUseElement is set', () => {
+        const { container } = render(
+          <InlineSVG src={MJX_PLUS_ICON} allowUseElement />
+        )
+        const group = container.querySelector('g[role="presentation"]')
+
+        expect(group?.querySelector('path#MJX-1-TEX-N-2B')).toBeInTheDocument()
+        const use = group?.querySelector('use')
+        expect(use).toBeInTheDocument()
+        expect(use?.getAttribute('xlink:href')).toBe('#MJX-1-TEX-N-2B')
+      })
+    })
   })
 })
