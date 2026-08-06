@@ -28,7 +28,7 @@
     "test:browser-watch": "pnpm run playwright:install && vitest --project browser",
     "test:browser-ui": "pnpm run playwright:install && vitest --project browser --browser.headless=false --ui",
     "lint": "pnpm -r --stream lint",
-    "lint:changes": "pnpm run lint -- --since HEAD^",
+    "lint:changes": "git diff --name-only $(git merge-base HEAD origin/master)..HEAD | xargs -r oxlint --format=unix",
     "lint:fix": "pnpm -r --stream lint:fix",
     "lint:commits": "commitlint --from=HEAD^1",
     "bootstrap": "node scripts/bootstrap.mjs",
