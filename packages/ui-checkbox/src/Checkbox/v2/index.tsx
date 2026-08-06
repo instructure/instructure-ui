@@ -286,10 +286,9 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
         display="block"
         margin="small 0 0"
         css={
-          this.isError &&
-          (variant === 'toggle'
+          variant === 'toggle'
             ? styles?.indentedToggleError
-            : styles?.indentedError)
+            : styles?.indentedError
         }
       >
         <FormFieldMessages id={this._messagesId} messages={messages} />
