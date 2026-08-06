@@ -29,8 +29,7 @@ import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import { DateTimeInput } from '@instructure/ui-date-time-input/latest'
 import { ApplyLocale, DateTime } from '@instructure/ui-i18n'
 
-// the id prefixes keep these unambiguous, the same way the Cypress specs
-// looked the inputs up
+// the id prefixes keep these unambiguous
 const dateInputElement = () =>
   document.querySelector<HTMLInputElement>('input[id^="TextInput_"]')!
 
@@ -38,7 +37,7 @@ const timeInputElement = () =>
   document.querySelector<HTMLInputElement>('input[id^="Select_"]')!
 
 // the day number is rendered twice (visible + screen reader label), so match
-// on the button's text the same way the Cypress `cy.contains` did
+// on the button's text
 const dayButton = (day: string) =>
   Array.from(
     document.querySelectorAll<HTMLButtonElement>(
