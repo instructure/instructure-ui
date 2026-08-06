@@ -77,19 +77,6 @@ jobs:
           mkdir -p regression-test/.actual
           find regression-test/cypress/screenshots -name '*.png' -exec cp {} regression-test/.actual/ \;
 
-      # TEMP (remove before merge): this PR renames every screenshot with a
-      # `-<theme>` suffix, so nothing matches the old baselines and the report
-      # has zero "changed" rows — leaving the new diff visualization impossible
-      # to preview. Inject one synthetic baseline/actual pair that differs in a
-      # few localized spots so the report always has a "changed" example.
-      # Fixtures live in regression-test/cypress/diff-demo/. Delete this step
-      # and that directory to revert.
-      - name: TEMP inject diff-demo fixture
-        run: |
-          mkdir -p regression-test/.baselines regression-test/.actual
-          cp regression-test/cypress/diff-demo/baseline.png regression-test/.baselines/diff-demo.png
-          cp regression-test/cypress/diff-demo/actual.png regression-test/.actual/diff-demo.png
-
       - name: Diff and generate report
         id: diff
         working-directory: regression-test
@@ -102,6 +89,7 @@ jobs:
           --pr-number ${{ github.event.pull_request.number }}
           --pr-url ${{ github.event.pull_request.html_url }}
           --meta cypress/meta.json
+          --a11y cypress/a11y.json
           --source-base-url https://github.com/${{ github.repository }}/blob/${{ github.head_ref }}/regression-test/src/app
           --facets canvas,light,dark
           --app-path app
@@ -137,7 +125,7 @@ jobs:
         run: |
           node -e "
             const fs = require('fs');
-            const { summary: s, results } = JSON.parse(fs.readFileSync('regression-test/.report/summary.json', 'utf8'));
+            const { summary: s, results, a11y = [] } = JSON.parse(fs.readFileSync('regression-test/.report/summary.json', 'utf8'));
             const base = 'https://instructure.design/visual-regression/pr-' + process.env.PR_NUMBER;
             const interesting = results.filter(r => r.status === 'changed' || r.status === 'removed');
             let md = '';
@@ -153,6 +141,17 @@ jobs:
               }
               md += '</details>';
             }
+            // Name the a11y rules in the comment. Numbers are per offending
+            // element; the same rule across themes is one row, matching the
+            // report's overview panel.
+            let a11yMd = '✅ No violations.';
+            if (a11y.length) {
+              a11yMd = '⚠️ **' + s.a11yViolations + ' violation' + (s.a11yViolations === 1 ? '' : 's') +
+                '** on ' + s.a11yPages + ' screenshot' + (s.a11yPages === 1 ? '' : 's') + '.\n\n' +
+                '| Impact | Issue | Rule | Elements | Screenshots |\n|---|---|---|---:|---:|\n' +
+                a11y.map(r => '| ' + r.impact + ' | ' + r.title + ' | [`' + r.rule + '`](' + r.helpUrl + ') | ' +
+                  r.nodes + ' | ' + r.screens + ' |').join('\n');
+            }
             const lines = [
               'total=' + s.total,
               'unchanged=' + s.unchanged,
@@ -163,6 +162,7 @@ jobs:
             ];
             let out = lines.join('\n') + '\n';
             out += 'diff_images<<DIFFIMAGES_EOF\n' + md + '\nDIFFIMAGES_EOF\n';
+            out += 'a11y<<A11Y_EOF\n' + a11yMd + '\nA11Y_EOF\n';
             fs.appendFileSync(process.env.GITHUB_OUTPUT, out);
           "
 
@@ -173,7 +173,9 @@ jobs:
           message: |
             ## Visual regression report
 
-            ${{ steps.summary.outputs.status }}
+            **Cypress suite:** ${{ steps.cypress.outcome == 'failure' && format('❌ **Failing** — see the [run logs]({0}/{1}/actions/runs/{2}).', github.server_url, github.repository, github.run_id) || '✅ Passing' }}
+
+            **Visual diff:** ${{ steps.summary.outputs.status }}
 
             | Status | Count |
             |---|---|
@@ -182,11 +184,13 @@ jobs:
             | New | ${{ steps.summary.outputs.added }} |
             | Removed | ${{ steps.summary.outputs.removed }} |
 
-            📊 **[View full report](https://instructure.design/visual-regression/pr-${{ github.event.pull_request.number }}/index.html)**
+            **Accessibility (axe):** ${{ steps.summary.outputs.a11y }}
+
+            📊 **[View full report](https://instructure.design/visual-regression/pr-${{ github.event.pull_request.number }}/index.html)** — click a screenshot's ⚠ badge to see each violation boxed on the image, with the offending element named and contrast failures shown as color swatches.
 
             ${{ steps.summary.outputs.diff_images }}
 
-            <sub>Baselines come from the `visual-baselines` branch. They refresh on every merge to `master`.</sub>
+            <sub>Baselines come from the `visual-baselines` branch. They refresh on every merge to `master`. The <b>Cypress suite</b> line covers the a11y and console-error assertions — a ❌ there means the suite found real issues even if the visual diff is clean.</sub>
 
       - name: Fail if regressions or Cypress failed
         if: steps.diff.outcome == 'failure' || steps.cypress.outcome == 'failure'

@@ -23,6 +23,7 @@
  */
 
 import type { Result, RunOnly } from 'axe-core'
+import { captureViolations } from '../support/a11y-capture'
 
 type ConsoleErrorStub = Cypress.Agent<sinon.SinonStub<any[], any>>
 let windowErrorSpy: ConsoleErrorStub | undefined
@@ -204,16 +205,33 @@ describe('visual regression test', () => {
 
         if (a11y) {
           cy.injectAxe()
+          // Collect here, serialize in the cy.window() step below: measuring
+          // each violating element needs DOM access, and the violation callback
+          // runs synchronously inside checkA11y without a window handle.
+          const found: Result[] = []
           cy.checkA11y(
             '.axe-test',
             axeOptions,
             (violations) => {
               terminalLog(violations)
               violationCount += violations.length
+              found.push(...violations)
             },
             // skipFailures: don't throw here — collect and assert once at the end
             true
           )
+          // Persist the violations for this screenshot so the visual-diff report
+          // can draw them on the image and describe them in plain language.
+          // The page is untouched since the screenshot above, so the geometry
+          // captured here lines up with the pixels.
+          cy.window({ log: false }).then((win) => {
+            if (!found.length) return
+            cy.task(
+              'recordA11y',
+              { name, ...captureViolations(found, win) },
+              { log: false }
+            )
+          })
         }
       })
 

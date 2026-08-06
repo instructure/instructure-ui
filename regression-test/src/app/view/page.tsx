@@ -24,9 +24,10 @@
 
 'use client'
 import React from 'react'
-import { View as vw } from '@instructure/ui/latest'
+import { View as vw, Text as tx } from '@instructure/ui/latest'
 
 const View = vw as any
+const Text = tx as any
 
 export default function ViewPage() {
   return (
@@ -252,7 +253,7 @@ export default function ViewPage() {
             margin="large auto"
             padding="0 small 0 0"
           >
-            Inline block A
+            <Text>Inline block A</Text>
           </View>
           <View
             as="div"
@@ -261,21 +262,23 @@ export default function ViewPage() {
             margin="large auto"
             padding="0 0 0 small"
           >
-            Inline block B
+            <Text>Inline block B</Text>
           </View>
         </View>
         <section style={{ margin: '15px' }}>
           <View as="header" margin="0 0 medium" withVisualDebug>
-            Some header content
+            <Text>Some header content</Text>
           </View>
-          <div>Paragraph-like content</div>
+          <div>
+            <Text>Paragraph-like content</Text>
+          </div>
         </section>
       </section>
 
       {/* Current (era-3) spacing tokens via dot-path notation */}
       <section>
         <View as="div" margin="general.spaceMd" padding="small" withVisualDebug>
-          margin=&quot;general.spaceMd&quot;
+          <Text>margin=&quot;general.spaceMd&quot;</Text>
         </View>
         <View
           as="div"
@@ -283,13 +286,13 @@ export default function ViewPage() {
           padding="small"
           withVisualDebug
         >
-          margin=&quot;general.spaceLg auto general.spaceXl&quot;
+          <Text>margin=&quot;general.spaceLg auto general.spaceXl&quot;</Text>
         </View>
         <View as="div" margin="gap.cards.md" padding="small" withVisualDebug>
-          margin=&quot;gap.cards.md&quot;
+          <Text>margin=&quot;gap.cards.md&quot;</Text>
         </View>
         <View as="div" margin="padding.card.lg" padding="small" withVisualDebug>
-          margin=&quot;padding.card.lg&quot;
+          <Text>margin=&quot;padding.card.lg&quot;</Text>
         </View>
       </section>
     </main>

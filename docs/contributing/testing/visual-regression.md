@@ -59,19 +59,20 @@ open .report/index.html
 
 `npm run visual-diff` invokes the same `ui-scripts visual-diff` command CI uses. Pass extra flags to override the defaults:
 
-| Flag                                                           | Default               | Description                                                                                                                                                                |
-| -------------------------------------------------------------- | --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--actual-dir <dir>`                                           | `cypress/screenshots` | Newly captured screenshots.                                                                                                                                                |
-| `--baseline-dir <dir>`                                         | `.baselines`          | Baselines to compare against.                                                                                                                                              |
-| `--output-dir <dir>`                                           | `visual-report`       | Where the HTML report + diff PNGs are written.                                                                                                                             |
-| `--threshold <0..1>`                                           | `0.1`                 | Per-pixel YIQ color threshold. Lower is stricter.                                                                                                                          |
-| `--fail-on-missing-baseline` / `--no-fail-on-missing-baseline` | on                    | Whether to exit 1 when actual screenshots have no baseline.                                                                                                                |
-| `--pr-number <n>`                                              | —                     | Rendered in the report header as a link to the PR.                                                                                                                         |
-| `--pr-url <url>`                                               | —                     | Target of the PR link.                                                                                                                                                     |
-| `--meta <file>`                                                | —                     | JSON mapping screenshot slug → visited URL path. Enables per-row source-file links in the report. Produced automatically by `spec.cy.ts` via `cy.task('recordMeta', ...)`. |
-| `--source-base-url <url>`                                      | —                     | GitHub blob URL of `regression-test/src/app` on the branch being reviewed. Combined with `--meta` to build links like `treebrowser/page.tsx`.                              |
-| `--facets <list>`                                              | —                     | Comma-separated facet suffixes (e.g. `canvas,light,dark`) rendered as one-click filter chips that match screenshots named `<name>-<facet>`.                                |
-| `--app-path <path>`                                            | —                     | Path, relative to the report root, where a static export of the app is published (CI uses `app`). Enables the lightbox **HTML** view, which iframes the live rendered page. |
+| Flag                                                           | Default               | Description                                                                                                                                                                                              |
+| -------------------------------------------------------------- | --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--actual-dir <dir>`                                           | `cypress/screenshots` | Newly captured screenshots.                                                                                                                                                                              |
+| `--baseline-dir <dir>`                                         | `.baselines`          | Baselines to compare against.                                                                                                                                                                            |
+| `--output-dir <dir>`                                           | `visual-report`       | Where the HTML report + diff PNGs are written.                                                                                                                                                           |
+| `--threshold <0..1>`                                           | `0.1`                 | Per-pixel YIQ color threshold. Lower is stricter.                                                                                                                                                        |
+| `--fail-on-missing-baseline` / `--no-fail-on-missing-baseline` | on                    | Whether to exit 1 when actual screenshots have no baseline.                                                                                                                                              |
+| `--pr-number <n>`                                              | —                     | Rendered in the report header as a link to the PR.                                                                                                                                                       |
+| `--pr-url <url>`                                               | —                     | Target of the PR link.                                                                                                                                                                                   |
+| `--meta <file>`                                                | —                     | JSON mapping screenshot slug → visited URL path. Enables per-row source-file links in the report. Produced automatically by `spec.cy.ts` via `cy.task('recordMeta', ...)`.                               |
+| `--source-base-url <url>`                                      | —                     | GitHub blob URL of `regression-test/src/app` on the branch being reviewed. Combined with `--meta` to build links like `treebrowser/page.tsx`.                                                            |
+| `--facets <list>`                                              | —                     | Comma-separated facet suffixes (e.g. `canvas,light,dark`) rendered as one-click filter chips that match screenshots named `<name>-<facet>`.                                                              |
+| `--app-path <path>`                                            | —                     | Path, relative to the report root, where a static export of the app is published (CI uses `app`). Enables the lightbox **HTML** view, which iframes the live rendered page.                              |
+| `--a11y <file>`                                                | —                     | JSON of axe violations keyed by screenshot slug. Enables everything in [Accessibility findings](#accessibility-findings) below. Produced automatically by `spec.cy.ts` via `cy.task('recordA11y', ...)`. |
 
 ### Interpreting the report
 
@@ -79,14 +80,33 @@ The HTML report is a single self-contained page showing one section per screensh
 
 Top-bar controls:
 
-- **Filter buttons** (`All`, `Changed`, `New`, `Removed`, `Unchanged`) — the active one is highlighted.
+- **Filter buttons** (`All`, `Changed`, `New`, `Removed`, `Unchanged`, `⚠ A11y`) — the active one is highlighted.
 - **Search input** — live, debounced substring filter on the screenshot name.
+- **Theme chips** — narrow to one theme's screenshots.
 - **Lightbox** — click any thumbnail to open a fullscreen viewer. Inside:
   - `Baseline`, `Actual`, `Diff` buttons switch between the three images.
   - `Slider` mode overlays baseline and actual with a drag handle so you can scrub the boundary back and forth.
+  - `⚠ N a11y` mode shows the screenshot at full size with every violating element boxed, and the findings docked alongside. Shown only for screenshots with findings.
   - `HTML` mode iframes the live rendered page (a static export of the app published next to the report) so you can inspect the real DOM, computed styles, and text alongside the pixels. Shown only when the page still exists and the app was published (`--app-path`).
   - `1:1` / `Fit` toggles between native pixel size (scrollable) and fit-to-window.
   - `‹` / `›` step through visible rows (respects the current filter).
+
+### Accessibility findings
+
+axe runs against every page and theme, and the report shows what it found **on the picture**, so a designer can act on it without reading a selector.
+
+While the page is still on screen, `spec.cy.ts` records each violating element's bounding box, a human-readable name for it, and — for contrast failures — the foreground/background colors and ratios axe computed (see `cypress/support/a11y-capture.ts`). The report then renders:
+
+- **A run-level overview** at the top of the page: one line per rule with its impact, how many elements it affects, and how many screenshots it appears on. The same rule tripping in `canvas`, `light`, and `dark` collapses to a single line. Click a rule to narrow the list to just the screenshots it affects.
+- **A `⚠ N a11y` badge** in each affected screenshot's header, colored by the worst impact on it. That badge is the only a11y marking in the list — rows stay a clean three-up image comparison. **Click it** to open the lightbox's **A11y** view.
+- **The A11y view**: the screenshot at full size with every violating element boxed and numbered, colored by impact, and the findings listed beside it. Clicking a card highlights its box and vice versa. Findings are ordered worst-impact-first, so `#1` is always the most serious thing on that screenshot.
+- **One card per offending element**, leading with a plain-language headline ("Text contrast is too low") rather than the rule id, naming the element (`button “Archive this item”`), and suggesting a fix. Contrast failures show both colors as swatches with the measured and required ratios. The raw axe output — rule id, selector, and `failureSummary` — sits behind **Technical details**.
+
+The boxes and cards are rendered into an inert `<template>` inside each row and cloned when the A11y view opens, so there's one renderer rather than a server-side and a client-side copy.
+
+Plain-language copy comes from a rule dictionary in `packages/ui-scripts/lib/commands/visual-diff.ts` (`RULE_COPY`). A rule that isn't in it still renders correctly — it just falls back to axe's own `help` text. Add an entry when a new rule starts showing up.
+
+A page with a known, tracked a11y issue can opt out of the axe check entirely with `a11y: false` and an `a11ySkipReason` in the `PAGES` array in `spec.cy.ts`.
 
 ## Adding a new component page
 

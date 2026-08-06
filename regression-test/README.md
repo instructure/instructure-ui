@@ -3,7 +3,7 @@
 A small Next.js app that imports `@instructure/ui` locally and exposes one page per component. Cypress visits each page to:
 
 - **Detect visual changes** — screenshots are diffed against baselines by the `ui-scripts visual-diff` command; an interactive HTML report is published to GitHub Pages on every PR. Each screenshot opens in a lightbox that switches between Baseline / Actual / Diff / Slider views and an **HTML** view that iframes the live rendered page (a static export of this app is published next to the report), so you can inspect the real DOM alongside the pixels.
-- **Detect a11y issues** — axe-core runs against every page.
+- **Detect a11y issues** — axe-core runs against every page. Violations are recorded with the offending element's position and name (`cypress/support/a11y-capture.ts`), so the diff report can box them on the screenshot itself and describe each one in plain language instead of printing a CSS selector.
 - **Detect unexpected console errors** — the spec's `afterEach` hook asserts `console.error` was not called.
 
 Each page is captured once **per theme** (`canvas`, `light`, `dark`), so screenshots are named `<slug>-<theme>.png`. The theme is selected with the `?theme=<key>` query param, which `src/app/layout.tsx` reads and applies via `InstUISettingsProvider`. The page background is painted from the active theme's own `background.page` semantic token, so each theme is captured on the surface it's actually used on — most visibly, the dark theme renders on its near-black surface rather than on white. Add or remove themes with the `THEMES` array in `cypress/e2e/spec.cy.ts` (this multiplies the screenshot/baseline count).

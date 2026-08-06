@@ -27,13 +27,15 @@ import {
   Checkbox as cb,
   View as vw,
   ScreenReaderContent as src,
-  FormFieldGroup as ffg
+  FormFieldGroup as ffg,
+  Text as tx
 } from '@instructure/ui/latest'
 
 const Checkbox = cb as any
 const View = vw as any
 const ScreenReaderContent = src as any
 const FormFieldGroup = ffg as any
+const Text = tx as any
 
 export default function CheckboxPage() {
   return (
@@ -147,7 +149,9 @@ export default function CheckboxPage() {
         />
       </FormFieldGroup>
 
-      <span>Screenreader-only label:</span>
+      <span>
+        <Text>Screenreader-only label:</Text>
+      </span>
       <Checkbox
         label={
           <ScreenReaderContent>

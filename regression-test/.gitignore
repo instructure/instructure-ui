@@ -41,6 +41,7 @@ next-env.d.ts
 /cypress/downloads
 /cypress/screenshots
 /cypress/meta.json
+/cypress/a11y.json
 
 # visual regression local runs
 /.actual
