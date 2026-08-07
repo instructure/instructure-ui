@@ -62,6 +62,10 @@ type ViewOwnProps = {
   /**
    * By default the display prop is 'auto', meaning it takes on the
    * display rules of the html element it's rendered as (see `as` prop).
+   *
+   * `inherit`, `initial`, `revert`, `revert-layer` and `unset` are the global
+   * CSS values (see the
+   * [MDN `display` reference](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/display)).
    */
   display?:
     | 'auto'
@@ -71,12 +75,11 @@ type ViewOwnProps = {
     | 'flex'
     | 'inline-flex'
     | 'contents'
-    // these are global CSS values
-    | 'inherit' // inherit the parent's display value
-    | 'initial' // reset the property back to the spec default
-    | 'revert' // reset to user agent stylesheet
+    | 'inherit'
+    | 'initial'
+    | 'revert'
     | 'revert-layer'
-    | 'unset' // same as initial
+    | 'unset'
   overflowX?: 'auto' | 'hidden' | 'visible'
   overflowY?: 'auto' | 'hidden' | 'visible'
   height?: string | number

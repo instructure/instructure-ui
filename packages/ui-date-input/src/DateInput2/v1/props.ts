@@ -39,7 +39,6 @@ type DateInput2OwnProps = {
     calendarIcon: string
     prevMonthButton: string
     nextMonthButton: string
-    // TODO: Make this field required in the next version. Currently optional to avoid breaking change.
     datePickerDialog?: string
     selectedLabel?: string
   }

@@ -29,7 +29,10 @@ import type {
   RangeInputTheme,
   PickPropsWithExceptions
 } from '@instructure/shared-types'
-import type { FormFieldOwnProps, FormMessage } from '@instructure/ui-form-field/v11_6'
+import type {
+  FormFieldOwnProps,
+  FormMessage
+} from '@instructure/ui-form-field/v11_6'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { InputHTMLAttributes } from 'react'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
@@ -89,9 +92,7 @@ type RangeInputOwnProps = {
    * The "deprecated" variant has an outer shadow on focus.
    * The "accessible" variant has better color contrast, border and inset focus ring for better accessibility.
    */
-  thumbVariant?:
-    | 'deprecated' // TODO: deprecated, remove in V9.
-    | 'accessible'
+  thumbVariant?: 'deprecated' | 'accessible'
 
   /**
    * A function that provides a reference to the actual underlying input element
