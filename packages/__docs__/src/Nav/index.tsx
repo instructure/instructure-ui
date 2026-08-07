@@ -24,18 +24,18 @@
 
 import React, { Component } from 'react'
 
-import { IconSearchLine } from '@instructure/ui-icons'
-import { Link } from '@instructure/ui-link'
-import { TextInput } from '@instructure/ui-text-input'
+import { SearchInstUIIcon } from '@instructure/ui-icons'
+import { Link } from '@instructure/ui-link/latest'
+import { TextInput } from '@instructure/ui-text-input/latest'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
-import { View, ViewOwnProps } from '@instructure/ui-view'
+import { View, ViewOwnProps } from '@instructure/ui-view/latest'
 
 import { capitalizeFirstLetter } from '@instructure/ui-utils'
 
 import { navigateTo, buildUrl } from '../navigationUtils'
 import { NavToggle } from '../NavToggle'
 import type { NavProps, NavState } from './props'
-import { Alert } from '@instructure/ui-alerts'
+import { Alert } from '@instructure/ui-alerts/latest'
 import type { Section } from '../../buildScripts/DataTypes.mjs'
 
 class Nav extends Component<NavProps, NavState> {
@@ -276,8 +276,8 @@ class Nav extends Component<NavProps, NavState> {
         as="li"
         display="block"
         key={docId}
-        margin="xx-small none xx-small"
-        padding="none none none x-small"
+        margin="general.spaceMd none general.spaceMd"
+        padding="none none none general.spaceSm"
         position="relative"
       >
         {docSelected && (
@@ -478,8 +478,8 @@ class Nav extends Component<NavProps, NavState> {
             as="li"
             display="block"
             key={themeKey}
-            margin="xx-small none xx-small"
-            padding="none none none x-small"
+            margin="general.spaceSm none general.spaceSm"
+            padding="none none none general.spaceSm"
             position="relative"
           >
             {isSelected && (
@@ -546,7 +546,7 @@ class Nav extends Component<NavProps, NavState> {
     ]
 
     return (
-      <View display="block" padding="none medium">
+      <View display="block" padding="none general.spaceXl">
         <View role="search" display="block">
           <TextInput
             placeholder="Find..."
@@ -555,7 +555,7 @@ class Nav extends Component<NavProps, NavState> {
               <ScreenReaderContent>Search Documentation</ScreenReaderContent>
             }
             type="search"
-            renderBeforeInput={<IconSearchLine inline={false} />}
+            renderBeforeInput={<SearchInstUIIcon inline={false} />}
             messages={
               hasMatches || this.state.queryStr == null
                 ? undefined
@@ -574,7 +574,7 @@ class Nav extends Component<NavProps, NavState> {
         >
           {this.state.announcement}
         </Alert>
-        <View margin="medium none none" display="block">
+        <View margin="general.spaceXl none none" display="block">
           {hasMatches && matches}
         </View>
       </View>

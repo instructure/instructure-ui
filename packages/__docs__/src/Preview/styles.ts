@@ -22,31 +22,31 @@
  * SOFTWARE.
  */
 
-import type { PreviewProps, PreviewTheme, PreviewStyle } from './props'
+import type { DocsTokens } from '../withStyleForDocs'
+import type { PreviewProps, PreviewStyle } from './props'
 
 /**
  * ---
  * private: true
  * ---
  * Generates the style object from the theme and provided additional information
- * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: PreviewTheme,
-  props: PreviewProps
+  props: PreviewProps,
+  { semantics }: DocsTokens
 ): PreviewStyle => {
   const { fullscreen, frameless, themeKey } = props
   const previewStyle = {
     boxSizing: 'border-box',
     margin: 0,
     overflow: 'auto',
-    padding: componentTheme.padding,
-    borderWidth: componentTheme.borderWidth,
+    padding: semantics.spacing.spaceMd,
+    borderWidth: semantics.borderWidth.sm,
     borderStyle: 'solid',
-    borderColor: componentTheme.borderColor,
-    borderRadius: componentTheme.borderRadius,
+    borderColor: '#aaaaaa',
+    borderRadius: semantics.borderRadius.sm,
     backgroundColor: themeKey === 'dark' ? '#000000' : '#FFFFFF',
     ...(fullscreen && {
       position: 'fixed',
@@ -62,16 +62,16 @@ const generateStyle = (
   }
 
   const errorStyle = {
-    background: componentTheme.backgroundError,
+    background: semantics.color.background.error,
     boxSizing: 'border-box',
     margin: 0,
     display: 'block',
-    color: componentTheme.colorError,
-    fontFamily: componentTheme.fontFamilyError,
-    fontSize: componentTheme.fontSizeError,
+    color: semantics.color.text.onColor,
+    fontFamily: semantics.fontFamily.code,
+    fontSize: semantics.fontSize.textSm,
     lineHeight: 1.4,
 
-    'pre, code': { color: componentTheme.colorError }
+    'pre, code': { color: semantics.color.text.onColor }
   }
 
   return {

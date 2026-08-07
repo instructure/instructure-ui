@@ -23,7 +23,6 @@
  */
 
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
-import type { Border, Typography } from '@instructure/shared-types'
 
 type PlaygroundOwnProps = {
   title: string
@@ -37,13 +36,9 @@ type PropKeys = keyof PlaygroundOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type PlaygroundProps = PlaygroundOwnProps &
-  WithStyleProps<PlaygroundTheme, PlaygroundStyle>
+  WithStyleProps<null, PlaygroundStyle>
 
 type PlaygroundStyle = ComponentStyle<'playground' | 'close'>
-type PlaygroundTheme = {
-  editorBorderRadius: Border['radiusMedium']
-  fontSize: Typography['fontSizeMedium']
-}
 
 const allowedProps: AllowedPropKeys = ['code', 'language', 'readOnly', 'title']
 
@@ -54,5 +49,5 @@ export type PlaygroundState = {
   showCode: boolean
   rtl: boolean
 }
-export type { PlaygroundProps, PlaygroundStyle, PlaygroundTheme }
+export type { PlaygroundProps, PlaygroundStyle }
 export { allowedProps }

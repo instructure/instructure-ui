@@ -21,7 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import type { Colors } from '@instructure/shared-types'
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 
 type SearchStatusOwnProps = {
@@ -34,18 +33,9 @@ type PropKeys = keyof SearchStatusOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type SearchStatusProps = SearchStatusOwnProps &
-  WithStyleProps<SearchStatusTheme, SearchStatusStyle>
+  WithStyleProps<null, SearchStatusStyle>
 
-type SearchStatusTheme = {
-  colorBrand: Colors['contrasts']['blue4570']
-  colorAlert: Colors['contrasts']['red4570']
-  colorWarning: Colors['contrasts']['orange4570']
-  colorDanger: Colors['contrasts']['red4570']
-  colorFaceSuccess: Colors['contrasts']['blue4570']
-  colorFaceFailure: Colors['contrasts']['orange4570']
-  colorFeatures: Colors['contrasts']['grey125125']
-}
 export type SearchStatusStyle = ComponentStyle<'searchStatus' | 'box'>
 const allowedProps: AllowedPropKeys = ['size', 'status']
-export type { SearchStatusProps, SearchStatusTheme }
+export type { SearchStatusProps }
 export { allowedProps }

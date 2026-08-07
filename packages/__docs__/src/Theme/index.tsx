@@ -27,12 +27,12 @@ import { withStyleForDocs } from '../withStyleForDocs'
 
 import { px } from '@instructure/ui-utils'
 
-import { Table } from '@instructure/ui-table'
+import { Table } from '@instructure/ui-table/latest'
 
-import { View } from '@instructure/ui-view'
-import { Alert } from '@instructure/ui-alerts'
-import { Spinner } from '@instructure/ui-spinner'
-import { Link } from '@instructure/ui-link'
+import { View } from '@instructure/ui-view/latest'
+import { Alert } from '@instructure/ui-alerts/latest'
+import { Spinner } from '@instructure/ui-spinner/latest'
+import { Link } from '@instructure/ui-link/latest'
 
 import { navigateTo } from '../navigationUtils'
 import { Heading } from '../Heading'
@@ -41,7 +41,6 @@ import { ColorSwatch } from '../ColorSwatch'
 import { ThemeColors } from '../ThemeColors'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import { ThemeProps } from './props'
 import { BaseTheme, Colors } from '@instructure/shared-types'
@@ -50,8 +49,8 @@ type valueof<X> = X[keyof X]
 
 type ThemeState = { showColors: boolean }
 
-@withStyleForDocs(generateStyle, generateComponentTheme)
-  class Theme extends Component<ThemeProps, ThemeState> {
+@withStyleForDocs(generateStyle)
+class Theme extends Component<ThemeProps, ThemeState> {
   static displayName = 'Theme'
   static defaultProps = {
     description: undefined
@@ -156,7 +155,7 @@ type ThemeState = { showColors: boolean }
         <Table.Cell>
           {valueColor.toString().charAt(0) === '#' ? (
             <span>
-              <View margin="0 xx-small 0 0">
+              <View margin="0 general.spaceXs 0 0">
                 <ColorSwatch color={valueColor} />
               </View>
               {display}
@@ -180,8 +179,10 @@ type ThemeState = { showColors: boolean }
   renderTable(name: string, content: React.ReactElement[], sub = false) {
     const headingElement = sub ? 'h4' : 'h3'
     const headingLevel = sub ? 'h3' : 'h2'
-    const margin = sub ? 'small none small' : 'small none large'
-    const padding = 'small'
+    const margin = sub
+      ? 'general.spaceMd none general.spaceMd'
+      : 'general.spaceMd none general.space2xl'
+    const padding = 'general.spaceMd'
     const label = name + 'variables'
     return (
       <View key={label} as="div" padding={sub ? padding : 'none'}>
@@ -192,10 +193,10 @@ type ThemeState = { showColors: boolean }
           as="div"
           background="secondary"
           padding={!sub ? padding : 'none'}
-          margin={!sub ? margin : 'small none none'}
+          margin={!sub ? margin : 'general.spaceMd none none'}
           borderRadius="medium"
         >
-          <Table caption={label} key={name} layout="fixed">
+          <Table caption={() => label} key={name} layout="fixed">
             <Table.Head>
               <Table.Row>
                 <Table.ColHeader id="Name" key="Name">
@@ -252,7 +253,7 @@ type ThemeState = { showColors: boolean }
             background="secondary"
             as="div"
             padding="none"
-            margin="small none large"
+            margin="general.spaceMd none general.space2xl"
             borderRadius="medium"
           >
             {groups.map(({ label, data: groupData }) =>
@@ -292,7 +293,7 @@ type ThemeState = { showColors: boolean }
           background="secondary"
           as="div"
           padding="none"
-          margin="small none large"
+          margin="general.spaceMd none general.space2xl"
           borderRadius="medium"
         >
           <ThemeColors colors={resolvedColors.primitives} label="primitives" />
@@ -324,7 +325,7 @@ type ThemeState = { showColors: boolean }
     return (
       <div>
         {isLegacyTheme && (
-          <Alert variant="info" margin="0 0 medium">
+          <Alert variant="info" margin="0 0 general.spaceXl">
             This theme is used by <strong>InstUI v11.6</strong> components. For
             v11.7 and later, use the{' '}
             <Link
@@ -340,12 +341,12 @@ type ThemeState = { showColors: boolean }
           </Alert>
         )}
         {variables.description && (
-          <Alert variant="info" margin="0 0 medium">
+          <Alert variant="info" margin="0 0 general.spaceXl">
             {variables.description}
           </Alert>
         )}
 
-        <Alert margin="large 0">
+        <Alert margin="general.space2xl 0">
           The <code>rem</code> values on this page are based on{' '}
           <code>1rem={px('1rem')}px</code>. The <code>rem</code> unit represents
           the font-size of the root <code>&lt;html&gt;</code> element.
@@ -424,7 +425,7 @@ ${'```'}
             this.renderNewThemeColors()
           )
         ) : (
-          <View as="div" textAlign="center" padding="large">
+          <View as="div" textAlign="center" padding="general.space2xl">
             <Spinner renderTitle="Loading colors..." size="medium" />
           </View>
         )}

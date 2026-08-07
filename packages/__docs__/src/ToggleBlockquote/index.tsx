@@ -24,8 +24,8 @@
 
 import { Component } from 'react'
 
-import { View } from '@instructure/ui-view'
-import { ToggleDetails } from '@instructure/ui-toggle-details'
+import { View } from '@instructure/ui-view/latest'
+import { ToggleDetails } from '@instructure/ui-toggle-details/latest'
 import { Heading } from '../Heading'
 import { Paragraph } from './Paragraph'
 import type { ToggleBlockquoteProps } from './props'
@@ -42,8 +42,8 @@ class ToggleBlockquote extends Component<ToggleBlockquoteProps> {
     return (
       <View
         as="div"
-        margin="large 0"
-        padding="medium"
+        margin="general.space2xl 0"
+        padding="general.spaceXl"
         borderWidth="none none none large"
         borderColor="info"
         shadow="above"

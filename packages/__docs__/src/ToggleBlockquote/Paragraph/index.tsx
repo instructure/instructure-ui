@@ -24,7 +24,7 @@
 
 import { Component } from 'react'
 
-import { View } from '@instructure/ui-view'
+import { View } from '@instructure/ui-view/latest'
 import type { ParagraphProps } from './props'
 
 class Paragraph extends Component<ParagraphProps> {
@@ -37,7 +37,7 @@ class Paragraph extends Component<ParagraphProps> {
 
   render() {
     return (
-      <View as="div" margin="small 0">
+      <View as="div" margin="general.spaceMd 0">
         {this.props.children}
       </View>
     )

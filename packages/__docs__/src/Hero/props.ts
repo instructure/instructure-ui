@@ -36,7 +36,7 @@ type PropKeys = keyof HeroOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type HeroProps = HeroOwnProps & WithStyleProps<HeroTheme, HeroStyle>
+type HeroProps = HeroOwnProps & WithStyleProps<null, HeroStyle>
 const allowedProps: AllowedPropKeys = [
   'docs',
   'layout',
@@ -47,9 +47,6 @@ type HeroStyle = ComponentStyle<
   'backgroundColor' | 'overlayLayout' | 'contentLayout' | 'content'
 >
 
-type HeroTheme = {
-  backgroundColor: string
-}
-export type { HeroStyle, HeroTheme }
+export type { HeroStyle }
 export type { HeroProps }
 export { allowedProps }

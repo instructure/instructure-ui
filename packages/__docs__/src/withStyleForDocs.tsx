@@ -31,78 +31,33 @@ import type {
 
 import hoistNonReactStatics from 'hoist-non-react-statics'
 
-import { deepEqual as isEqual } from '@instructure/ui-utils'
-import { warn } from '@instructure/console'
+import { deepEqual as isEqual, mergeDeep } from '@instructure/ui-utils'
 import { decorator } from '@instructure/ui-decorator'
-
-import { getComponentThemeOverride } from '@instructure/emotion'
-import { useTheme } from '@instructure/emotion'
-import type {
-  BaseTheme,
-  ComponentTheme,
-  DeepPartial,
-  ComponentThemeMap,
-  InstUIComponent
-} from '@instructure/shared-types'
-
+import { applyColorModifiers, useTheme } from '@instructure/emotion'
 import type { ComponentStyle } from '@instructure/emotion'
-import { StyleObject } from '@instructure/emotion'
+import type { Light, SharedTokens, Theme } from '@instructure/ui-themes'
 
 /**
- * A theme object where every prop is optional
+ * The theme's semantic tokens.
  */
-type PartialTheme = DeepPartial<Omit<BaseTheme, 'key'>>
+type Semantics = ReturnType<Light['semantics']>
+
+/**
+ * Docs components are not registered in the theme's component map, so they read
+ * what they need from here instead of from a `theme.ts`.
+ */
+type DocsTokens = {
+  semantics: Semantics
+  sharedTokens: SharedTokens
+}
+
 type Props = Record<string, unknown>
-type State = Record<string, unknown>
-type GenerateComponentTheme = (
-  theme: BaseTheme | PartialTheme
-) => ComponentTheme
 
 type GenerateStyle = (
-  componentTheme: ComponentTheme,
-  props: Props,
-  state?: State
-) => StyleObject
-
-/**
- * Keys are component IDs, values are their theme props.
- * Key can be an arbitrary string to support custom components
- */
-type ComponentOverride = {
-  [otherComponent: string]: ComponentTheme
-} & DeepPartial<ComponentThemeMap>
-
-// Extract is needed because it would allow number otherwise
-// https://stackoverflow.com/a/51808262/319473
-
-// Unique name of an InstUI component
-type ComponentName = Extract<keyof ComponentOverride, string>
-
-interface WithStyleComponent extends InstUIComponent {
-  componentId?: ComponentName
-}
-
-type WithStylePrivateProps<
-  Style extends ComponentStyle | null = ComponentStyle
-> = Style extends null
-  ? object
-  : {
-      styles?: Style
-      makeStyles?: (extraArgs?: Record<string, unknown>) => void
-    }
-
-type ThemeOverrideProp<Theme extends ComponentTheme | null = ComponentTheme> = {
-  themeOverride?:
-    | Partial<Theme>
-    | ((componentTheme: Theme, currentTheme: BaseTheme) => Partial<Theme>)
-}
-
-type WithStyleProps<
-  Theme extends ComponentTheme | null = ComponentTheme,
-  Style extends ComponentStyle | null = ComponentStyle
-> = Theme extends null
-  ? WithStylePrivateProps<Style>
-  : WithStylePrivateProps<Style> & ThemeOverrideProp<Theme>
+  props: any,
+  tokens: DocsTokens,
+  extraArgs?: Record<string, unknown>
+) => ComponentStyle
 
 const defaultValues = {
   styles: {},
@@ -111,63 +66,38 @@ const defaultValues = {
 
 /**
  * ---
- * category: utilities/themes
+ * private: true
  * ---
+ * Styling decorator for the docs app's own components.
  *
- * Same shape as the legacy `withStyle` decorator, used only by the docs app.
- * Injects a `makeStyles` function and the generated `styles` object as props,
- * and forwards a `themeOverride` prop to the component.
+ * Docs components live outside `@instructure/ui-themes`, so they have no entry
+ * in `theme.newTheme.components` and cannot get a `componentTheme` the way
+ * library components do. This decorator resolves the theme the same way
+ * `withStyleNew` does — `primitives -> semantics -> sharedTokens` and passes the result
+ * straight to `generateStyle`.
  *
  * ```js-code
  * import { withStyleForDocs } from '../withStyleForDocs'
  * import generateStyle from './styles'
- * import generateComponentTheme from './theme'
  *
- * export default withStyleForDocs(generateStyle, generateComponentTheme)(ExampleComponent)
+ * export default withStyleForDocs(generateStyle)(ExampleComponent)
  * ```
  *
- * Override patterns (provider-scoped, per-component, function form) are
- * documented on the [Legacy theme overrides](/#legacy-theme-overrides) docs
- * page — `withStyleForDocs` follows the same model.
- *
- * @module withStyleForDocs
- *
- * @param {function} generateStyle - Returns the component's style object
- * @param {function} generateComponentTheme - Returns the component's theme variables object
- * @returns {ReactElement} The decorated component
+ * @param generateStyle Returns the component's style object
  */
 const withStyleForDocs = decorator(
-  (
-    ComposedComponent: WithStyleComponent,
-    generateStyle: GenerateStyle,
-    generateComponentTheme: GenerateComponentTheme
-  ) => {
+  (ComposedComponent: any, generateStyle: GenerateStyle) => {
     const displayName = ComposedComponent.displayName || ComposedComponent.name
 
     const WithStyle: ForwardRefExoticComponent<
       PropsWithoutRef<Props> & RefAttributes<any>
     > & {
-      generateComponentTheme?: GenerateComponentTheme
       allowedProps?: string[]
-      originalType?: WithStyleComponent
+      originalType?: any
       defaultProps?: Partial<any>
     } = forwardRef((props, ref) => {
-      const theme = useTheme()
-
-      if (props.styles) {
-        warn(
-          false,
-          `Manually passing the "styles" property is not allowed on the ${displayName} component. Using the default styles calculated by the @withStyleNew decorator instead.\n`,
-          props.styles
-        )
-      }
-
-      if (props.makeStyles) {
-        warn(
-          false,
-          `Manually passing the "makeStyles" property is not allowed on the ${displayName} component. Styles are calculated by the @withStyleNew decorator.`
-        )
-      }
+      const theme = useTheme() as Theme
+      const themeOverride = theme.themeOverride
 
       const componentProps: Props = {
         ...ComposedComponent.defaultProps,
@@ -175,29 +105,37 @@ const withStyleForDocs = decorator(
         ...defaultValues
       }
 
-      let componentTheme: ComponentTheme =
-        typeof generateComponentTheme === 'function'
-          ? generateComponentTheme(theme as BaseTheme)
-          : {}
-
-      const themeOverride = getComponentThemeOverride(
-        theme,
-        displayName,
-        ComposedComponent.componentId,
-        (componentProps as ThemeOverrideProp).themeOverride,
-        componentTheme
+      // same resolution order as withStyleNew, so InstUISettingsProvider-level
+      // primitives/semantics/sharedTokens overrides apply here too
+      const primitives = mergeDeep(
+        theme.newTheme.primitives,
+        themeOverride?.primitives ?? {}
       )
 
-      componentTheme = { ...componentTheme, ...themeOverride }
+      const semantics = applyColorModifiers(
+        mergeDeep(
+          theme.newTheme.semantics?.(primitives),
+          themeOverride?.semantics ?? {}
+        )
+      ) as Semantics
+
+      const sharedTokens = applyColorModifiers(
+        mergeDeep(
+          theme.newTheme.sharedTokens?.(semantics),
+          (themeOverride?.sharedTokens ?? {}) as Record<string, unknown>
+        )
+      ) as SharedTokens
+
+      const tokens: DocsTokens = { semantics, sharedTokens }
 
       const [styles, setStyles] = useState(
-        generateStyle ? generateStyle(componentTheme, componentProps, {}) : {}
+        generateStyle ? generateStyle(componentProps, tokens, {}) : {}
       )
 
-      const makeStyleHandler: WithStyleProps['makeStyles'] = (extraArgs) => {
+      const makeStyleHandler = (extraArgs?: Record<string, unknown>) => {
         const calculatedStyles = generateStyle(
-          componentTheme,
           componentProps,
+          tokens,
           extraArgs
         )
         if (!isEqual(calculatedStyles, styles)) {
@@ -211,10 +149,6 @@ const withStyleForDocs = decorator(
           {...props}
           makeStyles={makeStyleHandler}
           styles={styles}
-          // passing themeOverrides is needed for components like Button
-          // that have no makeStyles of their own and only pass themeOverrides
-          // to the underlying component (e.g.: BaseButton)
-          themeOverride={themeOverride}
         />
       )
     })
@@ -226,13 +160,8 @@ const withStyleForDocs = decorator(
     WithStyle.originalType = ComposedComponent.originalType || ComposedComponent
 
     WithStyle.defaultProps = ComposedComponent.defaultProps
-    // These static fields exist on InstUI components
     WithStyle.allowedProps = ComposedComponent.allowedProps
 
-    // we are exposing the theme generator for the docs generation
-    WithStyle.generateComponentTheme = generateComponentTheme
-
-    // we have to add defaults to makeStyles and styles added by this decorator
     // eslint-disable-next-line no-param-reassign
     ComposedComponent.defaultProps = {
       ...ComposedComponent.defaultProps,
@@ -248,4 +177,4 @@ const withStyleForDocs = decorator(
 
 export default withStyleForDocs
 export { withStyleForDocs }
-export type { WithStyleProps }
+export type { DocsTokens, Semantics }

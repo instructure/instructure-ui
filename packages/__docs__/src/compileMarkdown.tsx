@@ -28,12 +28,12 @@ import grayMatter from 'gray-matter'
 import { v4 as uuid } from 'uuid'
 
 import { InstUISettingsProvider } from '@instructure/emotion'
-import canvas from '@instructure/ui-themes'
+import { light } from '@instructure/ui-themes'
 
-import { View } from '@instructure/ui-view'
-import { Table } from '@instructure/ui-table'
-import { Img } from '@instructure/ui-img'
-import { SourceCodeEditor } from '@instructure/ui-source-code-editor'
+import { View } from '@instructure/ui-view/latest'
+import { Table } from '@instructure/ui-table/latest'
+import { Img } from '@instructure/ui-img/latest'
+import { SourceCodeEditor } from '@instructure/ui-source-code-editor/latest'
 
 import { Playground } from './Playground'
 import { compileAndRenderExample } from './compileAndRenderExample'
@@ -103,7 +103,7 @@ const headingVariants: Record<
         id={getHeadingId(children)}
         key={key}
         level="h1"
-        margin="0 0 large"
+        margin="0 0 general.space2xl"
       >
         {children}
       </Heading>
@@ -115,7 +115,7 @@ const headingVariants: Record<
       key={key}
       level="h1"
       as="h2"
-      margin="x-large 0 large 0"
+      margin="general.space2xl 0 general.space2xl 0"
     >
       {children}
     </Heading>
@@ -126,7 +126,7 @@ const headingVariants: Record<
       key={key}
       level="h2"
       as="h3"
-      margin="large 0 medium 0"
+      margin="general.space2xl 0 general.spaceXl 0"
     >
       {children}
     </Heading>
@@ -138,7 +138,7 @@ const headingVariants: Record<
         key={key}
         level="h3"
         as="h4"
-        margin="large 0 medium 0"
+        margin="general.space2xl 0 general.spaceXl 0"
       >
         {children}
       </Heading>
@@ -150,7 +150,7 @@ const headingVariants: Record<
       key={key}
       level="h4"
       as="h5"
-      margin="large 0 small 0"
+      margin="general.space2xl 0 general.spaceMd 0"
     >
       {children}
     </Heading>
@@ -202,7 +202,7 @@ const renderer = (title: string) => ({
     const body = table?.[1]?.props?.children
 
     return (
-      <Table key={uuid()} caption="Tabs for codePreview">
+      <Table key={uuid()} caption={() => 'Tabs for codePreview'}>
         <Table.Head>
           <Table.Row>
             {headCells?.map((headCell: string) => (
@@ -248,21 +248,21 @@ const renderer = (title: string) => ({
 
       if (type === 'code') {
         return (
-          <View key={uuid()} display="block" margin="medium none">
+          <View key={uuid()} display="block" margin="general.spaceXl none">
             {getComponent('SourceCodeEditor', data)}
           </View>
         )
       }
       if (type === 'embed') {
         return (
-          <InstUISettingsProvider key={uuid()} theme={canvas}>
+          <InstUISettingsProvider key={uuid()} theme={light}>
             {compileAndRenderExample(matter.content)}
           </InstUISettingsProvider>
         )
       }
       if (type === 'example') {
         return (
-          <View key={uuid()} display="block" margin="medium none">
+          <View key={uuid()} display="block" margin="general.spaceXl none">
             {getComponent('Playground', data)}
           </View>
         )

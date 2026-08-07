@@ -37,7 +37,8 @@ export {
   mirrorShorthandCorners,
   mirrorShorthandEdges,
   calcSpacingFromShorthand,
-  calcFocusOutlineStyles
+  calcFocusOutlineStyles,
+  applyColorModifiers
 } from './styleUtils/index.js'
 
 export { useStyle } from './useStyle.js'

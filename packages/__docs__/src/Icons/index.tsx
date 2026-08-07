@@ -23,10 +23,10 @@
  */
 
 import { lazy, Suspense } from 'react'
-import { Spinner } from '@instructure/ui-spinner'
-import { View } from '@instructure/ui-view'
-import { Alert } from '@instructure/ui-alerts'
-import { Link } from '@instructure/ui-link'
+import { Spinner } from '@instructure/ui-spinner/latest'
+import { View } from '@instructure/ui-view/latest'
+import { Alert } from '@instructure/ui-alerts/latest'
+import { Link } from '@instructure/ui-link/latest'
 import { navigateTo } from '../navigationUtils'
 
 // Lazy load icons gallery component
@@ -48,7 +48,7 @@ const IconsPage = () => {
           </div>
         }
       >
-        <Alert variant="info" margin="0 0 medium">
+        <Alert variant="info" margin="0 0 general.spaceXl">
           For icons compatible with older versions, use{' '}
           <Link
             href="legacy-icons"

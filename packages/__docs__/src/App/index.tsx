@@ -30,22 +30,22 @@ import React, {
   createRef
 } from 'react'
 
-import { Alert } from '@instructure/ui-alerts'
+import { Alert } from '@instructure/ui-alerts/latest'
 import { InstUISettingsProvider, Global } from '@instructure/emotion'
-import { Flex } from '@instructure/ui-flex'
-import { Text } from '@instructure/ui-text'
-import { View } from '@instructure/ui-view'
+import { Flex } from '@instructure/ui-flex/latest'
+import { Text } from '@instructure/ui-text/latest'
+import { View } from '@instructure/ui-view/latest'
 import { AccessibleContent } from '@instructure/ui-a11y-content'
-import { Mask } from '@instructure/ui-overlays'
-import { IconButton } from '@instructure/ui-buttons'
-import { Tray } from '@instructure/ui-tray'
-import { Link } from '@instructure/ui-link'
-import { addMediaQueryMatchListener } from '@instructure/ui-responsive'
-import type { QueriesMatching } from '@instructure/ui-responsive'
+import { Mask } from '@instructure/ui-overlays/latest'
+import { IconButton } from '@instructure/ui-buttons/latest'
+import { Tray } from '@instructure/ui-tray/latest'
+import { Link } from '@instructure/ui-link/latest'
+import { addMediaQueryMatchListener } from '@instructure/ui-responsive/latest'
+import type { QueriesMatching } from '@instructure/ui-responsive/latest'
 import {
-  IconHamburgerSolid,
-  IconHeartLine,
-  IconXSolid
+  MenuInstUIIcon,
+  HeartInstUIIcon,
+  XInstUIIcon
 } from '@instructure/ui-icons'
 
 import { withStyleForDocs } from '../withStyleForDocs'
@@ -77,7 +77,6 @@ import {
 } from '../navigationUtils'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 import { LoadingScreen } from '../LoadingScreen'
 import { getComponentsForVersion } from '../../versioned-components'
 import { updateGlobalsForVersion } from '../../globals'
@@ -93,7 +92,7 @@ import type { BaseTheme } from '@instructure/shared-types'
 import { FocusRegion } from '@instructure/ui-a11y-utils'
 import { AppContext } from '../appContext'
 
-@withStyleForDocs(generateStyle, generateComponentTheme)
+@withStyleForDocs(generateStyle)
 class App extends Component<AppProps, AppState> {
   static displayName = 'App'
   static contextType = AppContext
@@ -172,9 +171,15 @@ class App extends Component<AppProps, AppState> {
     return fetch(url, { signal })
       .then((response) => response.json())
       .then((docsData) => {
+        const showNewThemes = this.state.selectedMinorVersion !== 'v11_6'
+        const themeKeys = Object.keys(docsData.themes).filter((key) =>
+          showNewThemes
+            ? key !== 'shared-tokens' && !key.startsWith('legacy-')
+            : key.startsWith('legacy-')
+        )
         this.setState({
           docsData,
-          themeKey: Object.keys(docsData.themes)[0]
+          themeKey: themeKeys[0]
         })
       })
   }
@@ -630,10 +635,14 @@ class App extends Component<AppProps, AppState> {
 
     return themeKeys.length > 1 ? (
       <Flex
-        margin={smallScreen ? 'none none medium' : 'none none x-small'}
+        margin={
+          smallScreen
+            ? 'none none general.spaceXl'
+            : 'none none general.spaceSm'
+        }
         justifyItems={!smallScreen ? 'end' : 'start'}
         wrap="wrap"
-        gap="small"
+        gap="general.spaceMd"
       >
         {showMinorVersionSelect && (
           <Flex.Item shouldGrow={smallScreen} shouldShrink={smallScreen}>
@@ -679,7 +688,7 @@ class App extends Component<AppProps, AppState> {
     if (!window.location.pathname.includes('v11_6')) return null
     const v11_7Href = window.location.pathname.replace('v11_6', 'v11_7')
     return (
-      <Alert variant="info" margin="0 0 medium">
+      <Alert variant="info" margin="0 0 general.spaceXl">
         {subject} is designed for components for <strong>v11.7</strong> and
         later.{' '}
         <Link
@@ -709,10 +718,12 @@ class App extends Component<AppProps, AppState> {
       <View
         as="div"
         padding={
-          smallerScreens ? 'x-large none none large' : 'x-large none none'
+          smallerScreens
+            ? 'general.space2xl none none general.space2xl'
+            : 'general.space2xl none none'
         }
       >
-        <Heading level="h1" as="h2" margin="0 0 medium 0">
+        <Heading level="h1" as="h2" margin="0 0 general.spaceXl 0">
           Theme: {themeKey}
         </Heading>
         {isNewThemePage && this.renderNewThemePageAlert()}
@@ -732,10 +743,12 @@ class App extends Component<AppProps, AppState> {
       <View
         as="div"
         padding={
-          smallerScreens ? 'x-large none none large' : 'x-large none none'
+          smallerScreens
+            ? 'general.space2xl none none general.space2xl'
+            : 'general.space2xl none none'
         }
       >
-        <Heading level="h1" as="h2" margin="0 0 medium">
+        <Heading level="h1" as="h2" margin="0 0 general.spaceXl">
           Icons
         </Heading>
         <IconsPage />
@@ -753,7 +766,9 @@ class App extends Component<AppProps, AppState> {
       <View
         as="div"
         padding={
-          smallerScreens ? 'x-large none none large' : 'x-large none none'
+          smallerScreens
+            ? 'general.space2xl none none general.space2xl'
+            : 'general.space2xl none none'
         }
       >
         <LegacyIconsPage iconData={this.state.legacyIconsData} />
@@ -796,7 +811,7 @@ class App extends Component<AppProps, AppState> {
           }
         })
       return (
-        <View as="div" padding="xx-large 0">
+        <View as="div" padding="general.space2xl 0">
           <LoadingScreen />
         </View>
       )
@@ -816,11 +831,11 @@ class App extends Component<AppProps, AppState> {
     const heading = currentData.extension !== '.md' ? currentData.title : ''
     const isGuidePage = currentData.extension === '.md'
     const documentContent = (
-      <View as="div" padding="x-large none none">
+      <View as="div" padding="general.space2xl none none">
         {this.renderThemeSelect()}
         {isGuidePage &&
           (currentData.id as string) !== 'legacy-theme-overrides' && (
-            <Alert variant="info" margin="xx-large 0">
+            <Alert variant="info" margin="general.space2xl 0">
               This page is made for the latest version (
               {this.getLatestMinorVersion()?.replace('_', '.')}) of InstUI.{' '}
               <Link
@@ -856,7 +871,9 @@ class App extends Component<AppProps, AppState> {
       </View>
     )
     const padding: Spacing =
-      layout === 'small' ? 'large small large small' : 'large'
+      layout === 'small'
+        ? 'general.space2xl general.spaceMd general.space2xl general.spaceMd'
+        : 'large'
     return this.renderWrappedContent(documentContent, padding)
   }
 
@@ -908,7 +925,7 @@ class App extends Component<AppProps, AppState> {
           }
         })
       return (
-        <View as="div" padding="xx-large 0">
+        <View as="div" padding="general.space2xl 0">
           <LoadingScreen />
         </View>
       )
@@ -943,7 +960,7 @@ class App extends Component<AppProps, AppState> {
 
   renderError() {
     const errorContent = (
-      <Alert variant="error" margin="small">
+      <Alert variant="error" margin="general.spaceMd">
         <Text weight="bold">Document not found.</Text> Please use the search in
         the navigation to find any page in this documentation.
       </Alert>
@@ -1036,7 +1053,11 @@ class App extends Component<AppProps, AppState> {
   renderFooter() {
     const author = 'Instructure, Inc. Engineering and Product Design'
     return (
-      <View as="footer" textAlign="center" padding="large medium">
+      <View
+        as="footer"
+        textAlign="center"
+        padding="general.space2xl general.spaceXl"
+      >
         <AccessibleContent alt={`Made with love by ${author}`}>
           <Text
             color="secondary"
@@ -1045,7 +1066,8 @@ class App extends Component<AppProps, AppState> {
             size="small"
             lineHeight="fit"
           >
-            Made with <IconHeartLine size="small" color="error" /> by {author}.
+            Made with <HeartInstUIIcon size="xl" color="errorColor" /> by{' '}
+            {author}.
           </Text>
         </AccessibleContent>
       </View>
@@ -1063,14 +1085,18 @@ class App extends Component<AppProps, AppState> {
     const navContent = (
       <View
         as="div"
-        padding="small none none"
+        padding="general.spaceMd none none"
         minHeight="100vh"
         width="18.75rem"
       >
-        <View display="block" textAlign="end" margin="space4 space8 space12">
+        <View
+          display="block"
+          textAlign="end"
+          margin="general.spaceXs general.spaceSm general.spaceMd"
+        >
           <InstUISettingsProvider>
             <IconButton
-              renderIcon={IconXSolid}
+              renderIcon={XInstUIIcon}
               screenReaderLabel="Close Navigation"
               withBorder={false}
               withBackground={false}
@@ -1121,8 +1147,8 @@ class App extends Component<AppProps, AppState> {
     return versionInPath ? (
       <div css={this.props.styles?.legacyVersionAlert}>
         <InstUISettingsProvider
-          theme={{
-            componentOverrides: {
+          themeOverride={{
+            components: {
               BaseButton: {
                 secondaryGhostColor: 'white'
               }
@@ -1133,14 +1159,14 @@ class App extends Component<AppProps, AppState> {
             variant="warning"
             transition="none"
             margin="none"
+            hasShadow={false}
             renderCloseButtonLabel="Close"
             themeOverride={{
               background: '#BF32A4',
               color: 'white',
               borderRadius: '0rem',
               warningBorderColor: '#BF32A4',
-              warningIconBackground: '#BF32A4',
-              boxShadow: 'none'
+              warningIconBackground: '#BF32A4'
             }}
           >
             You are currently viewing the documentation of an older version of
@@ -1164,7 +1190,7 @@ class App extends Component<AppProps, AppState> {
         css={this.props.styles?.skipToMainButton}
         borderRadius="small"
         display="inline-block"
-        padding="small"
+        padding="general.spaceMd"
         background="primary"
         elementRef={this.skipToMainButtonRef}
       >
@@ -1210,7 +1236,7 @@ class App extends Component<AppProps, AppState> {
                     }}
                     onClick={this.handleMenuOpen}
                     elementRef={this.handleMenuTriggerRef}
-                    renderIcon={IconHamburgerSolid}
+                    renderIcon={MenuInstUIIcon}
                     screenReaderLabel="Open Navigation"
                     shape="circle"
                     aria-expanded={false}

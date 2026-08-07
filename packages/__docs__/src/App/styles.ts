@@ -22,19 +22,23 @@
  * SOFTWARE.
  */
 
-import type { AppStyle, AppTheme } from './props'
+import type { DocsTokens } from '../withStyleForDocs'
+import type { AppStyle } from './props'
 
 /**
  * ---
  * private: true
  * ---
  * Generates the style object from the theme and provided additional information
- * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
+ * @param  {Object} tokens The theme's semantic and shared tokens.
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme: AppTheme): AppStyle => {
+const generateStyle = (
+  _props: unknown,
+  { semantics }: DocsTokens
+): AppStyle => {
+  const { spaceSm, spaceXl } = semantics.spacing
   return {
     app: {
       label: 'app',
@@ -62,7 +66,7 @@ const generateStyle = (componentTheme: AppTheme): AppStyle => {
     hamburger: {
       label: 'app__hamburger',
       position: 'fixed',
-      zIndex: componentTheme.menuToggleZIndex,
+      zIndex: 1,
       top: '1.25rem',
       insetInlineStart: '0.75rem'
     },
@@ -72,8 +76,8 @@ const generateStyle = (componentTheme: AppTheme): AppStyle => {
       overflowX: 'hidden',
       minHeight: '100%',
       flexShrink: 0,
-      borderInlineEndColor: componentTheme.navBorderColor,
-      borderInlineEndWidth: componentTheme.navBorderWidth,
+      borderInlineEndColor: semantics.color.stroke.muted,
+      borderInlineEndWidth: semantics.borderWidth.sm,
       borderInlineEndStyle: 'solid'
     },
     skipToMainButton: {
@@ -100,16 +104,16 @@ const generateStyle = (componentTheme: AppTheme): AppStyle => {
         height: '100%',
         overflow: 'hidden',
         margin: 0,
-        color: componentTheme.color,
-        fontFamily: componentTheme.fontFamily,
-        lineHeight: componentTheme.lineHeight,
-        fontWeight: componentTheme.fontWeight,
-        background: componentTheme.background
+        color: semantics.color.text.base,
+        fontFamily: semantics.fontFamily.base,
+        lineHeight: semantics.lineHeight.paragraph.base,
+        fontWeight: semantics.fontWeight.body.base,
+        background: semantics.color.background.container
       },
       code: {
-        fontFamily: componentTheme.fontFamilyMonospace,
-        backgroundColor: componentTheme.codeBackground,
-        borderRadius: componentTheme.codeBorderRadius,
+        fontFamily: semantics.fontFamily.code,
+        backgroundColor: '#eee',
+        borderRadius: semantics.borderRadius.xs,
         padding: '0.125em'
       },
       'code[class^="lang-"]': {
@@ -125,11 +129,15 @@ const generateStyle = (componentTheme: AppTheme): AppStyle => {
       },
       blockquote: {
         display: 'block',
-        background: componentTheme.background,
-        padding: componentTheme.quotePadding,
-        margin: componentTheme.quoteMargin,
-        borderTop: `${componentTheme.borderWidth} ${componentTheme.borderStyle} ${componentTheme.borderColor}`,
-        borderBottom: `${componentTheme.borderWidth} ${componentTheme.borderStyle} ${componentTheme.borderColor}`
+        background: semantics.color.background.container,
+        padding: `${spaceSm} ${spaceXl}`,
+        margin: `2.25rem ${spaceXl}`,
+        borderTop: `${semantics.borderWidth.lg} ${'solid'} ${
+          semantics.color.stroke.muted
+        }`,
+        borderBottom: `${semantics.borderWidth.lg} ${'solid'} ${
+          semantics.color.stroke.muted
+        }`
       }
     }
   }

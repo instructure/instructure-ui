@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { Heading as UIHeading } from '@instructure/ui-heading'
-import type { HeadingProps } from '@instructure/ui-heading'
+import { Heading as UIHeading } from '@instructure/ui-heading/latest'
+import type { HeadingProps } from '@instructure/ui-heading/latest'
 import { InstUISettingsProvider } from '@instructure/emotion'
 
 const Heading = (props: HeadingProps) => (

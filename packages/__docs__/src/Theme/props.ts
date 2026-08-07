@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import type { Colors, Typography, BaseTheme } from '@instructure/shared-types'
+import type { BaseTheme } from '@instructure/shared-types'
 
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 
@@ -34,13 +34,9 @@ type PropKeys = keyof ThemeOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type ThemeProps = ThemeOwnProps & WithStyleProps<ThemeTheme, ThemeStyle>
+type ThemeProps = ThemeOwnProps & WithStyleProps<null, ThemeStyle>
 
-type ThemeTheme = {
-  convertedValueTextColor: Colors['contrasts']['grey100100']
-  convertedValueFontSize: Typography['fontSizeSmall']
-}
 export type ThemeStyle = ComponentStyle<'convertedValue'>
 const allowedProps: AllowedPropKeys = ['themeKey', 'variables']
-export type { ThemeProps, ThemeTheme }
+export type { ThemeProps }
 export { allowedProps }
