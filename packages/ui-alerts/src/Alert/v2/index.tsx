@@ -153,11 +153,6 @@ class Alert extends Component<AlertProps, AlertState> {
   }
 
   initLiveRegion(liveRegion: Element) {
-    error(
-      liveRegion.getAttribute('role') === 'alert',
-      `[Alert] live region must have role='alert' set on page load in order to announce content`
-    )
-
     if (liveRegion) {
       liveRegion.setAttribute('aria-live', this.props.liveRegionPoliteness!)
       // indicates what notifications the user agent will trigger when the
