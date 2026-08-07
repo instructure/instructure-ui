@@ -320,4 +320,28 @@ describe('<Checkbox />', () => {
       expect(input).not.toHaveAttribute('aria-labelledby')
     })
   })
+
+  describe('margin prop', () => {
+    it('resolves spacing tokens, custom CSS values, and shorthand', () => {
+      const { container } = render(
+        <div>
+          <Checkbox label="A" value="a" margin="general.spaceMd" />
+          <Checkbox label="B" value="b" margin="30px" />
+          <Checkbox label="C" value="c" margin="general.spaceLg auto" />
+        </div>
+      )
+      const boxes = container.querySelectorAll("[class$='-checkbox']")
+
+      const token = getComputedStyle(boxes[0]!)
+      expect(token.marginTop).toEqual('0.75rem') // general.spaceMd
+      expect(token.marginLeft).toEqual('0.75rem')
+
+      const custom = getComputedStyle(boxes[1]!)
+      expect(custom.marginTop).toEqual('30px')
+
+      const shorthand = getComputedStyle(boxes[2]!)
+      expect(shorthand.marginTop).toEqual('1rem') // general.spaceLg
+      expect(shorthand.marginRight).toEqual('auto')
+    })
+  })
 })

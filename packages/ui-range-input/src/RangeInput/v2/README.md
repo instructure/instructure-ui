@@ -24,6 +24,7 @@ const Example = () => {
           max={100}
           min={0}
           size={size}
+          margin="general.spaceMd 0"
         />
       </View>
 

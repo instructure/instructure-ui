@@ -17,6 +17,7 @@ type: example
     rowSpacing="small"
     layout="inline"
     vAlign="middle"
+    margin="general.spaceMd 0"
   >
     <TextInput renderLabel="Favorite Breakfast Eatery"
       messages={[

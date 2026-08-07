@@ -266,4 +266,21 @@ describe('<RangeInput />', () => {
       expect(output).toHaveTextContent('40%')
     })
   })
+
+  describe('margin prop', () => {
+    it('forwards margin to the field layout, resolving spacing tokens', () => {
+      const { container } = render(
+        <RangeInput
+          label="Volume"
+          name="volume"
+          min={0}
+          max={100}
+          margin="general.spaceMd"
+        />
+      )
+      const layout = container.querySelector("[class$='-formFieldLayout']")
+
+      expect(getComputedStyle(layout!).marginTop).toEqual('0.75rem')
+    })
+  })
 })

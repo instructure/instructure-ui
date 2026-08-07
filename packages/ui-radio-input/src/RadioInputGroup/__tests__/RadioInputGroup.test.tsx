@@ -230,4 +230,22 @@ describe('<RadioInputGroup />', () => {
     expect(group).toHaveAttribute('aria-invalid', 'true')
     expect(group).toHaveAttribute('aria-errormessage', expect.anything())
   })
+
+  describe('margin prop', () => {
+    it('forwards margin to the field layout, resolving spacing tokens', () => {
+      const { container } = render(
+        <RadioInputGroup
+          name="fruit"
+          description="Select a fruit"
+          margin="general.spaceMd"
+        >
+          <RadioInput label="Apple" value="apple" />
+          <RadioInput label="Banana" value="banana" />
+        </RadioInputGroup>
+      )
+      const layout = container.querySelector("[class$='-formFieldLayout']")
+
+      expect(getComputedStyle(layout!).marginTop).toEqual('0.75rem')
+    })
+  })
 })

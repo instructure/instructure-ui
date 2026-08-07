@@ -305,4 +305,33 @@ describe('<RadioInput />', () => {
       expect(axeCheck).toBe(true)
     })
   })
+
+  describe('margin prop', () => {
+    it('resolves spacing tokens, custom CSS values, and shorthand', () => {
+      const { container } = render(
+        <div>
+          <RadioInput label="A" value="a" name="n" margin="general.spaceMd" />
+          <RadioInput label="B" value="b" name="n" margin="30px" />
+          <RadioInput
+            label="C"
+            value="c"
+            name="n"
+            margin="general.spaceLg auto"
+          />
+        </div>
+      )
+      const inputs = container.querySelectorAll("[class$='-radioInput']")
+
+      const token = getComputedStyle(inputs[0]!)
+      expect(token.marginTop).toEqual('0.75rem') // general.spaceMd
+      expect(token.marginLeft).toEqual('0.75rem')
+
+      const custom = getComputedStyle(inputs[1]!)
+      expect(custom.marginTop).toEqual('30px')
+
+      const shorthand = getComputedStyle(inputs[2]!)
+      expect(shorthand.marginTop).toEqual('1rem') // general.spaceLg
+      expect(shorthand.marginRight).toEqual('auto')
+    })
+  })
 })

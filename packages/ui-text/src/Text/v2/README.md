@@ -186,6 +186,21 @@ type: example
 </Text>
 ```
 
+### Margin
+
+Use the `margin` prop to add space around the component with spacing tokens or CSS-like shorthand. On the default inline `Text` only left/right margins render, so render it as a block element (`as="p"`) when you need vertical spacing.
+
+```js
+---
+type: example
+---
+<div>
+  <Text margin="general.spaceXs general.spaceXs">text</Text>
+  <Text margin="general.spaceMd general.spaceMd">text</Text>
+  <Text as="p" margin="general.spaceXl">text</Text>
+</div>
+```
+
 ### DEPRECATED legacy values
 
 Multiple values from `size`, `weight` and `lineHeight` are deprecated, but still supported for backward compatibility reasons. Please only use the above listed, semantic values.
