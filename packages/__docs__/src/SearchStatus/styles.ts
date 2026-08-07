@@ -22,11 +22,8 @@
  * SOFTWARE.
  */
 
-import type {
-  SearchStatusTheme,
-  SearchStatusStyle,
-  SearchStatusProps
-} from './props'
+import type { DocsTokens } from '../withStyleForDocs'
+import type { SearchStatusStyle, SearchStatusProps } from './props'
 import { keyframes } from '@instructure/emotion'
 
 // keyframes have to be outside of 'generateStyle',
@@ -38,14 +35,13 @@ const scaleUp = keyframes`
 
 /**
  * Generates the style object from the theme and provided additional information
- * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
+ * @param  {Object} tokens The theme's semantic and shared tokens.
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: SearchStatusTheme,
-  props: SearchStatusProps
+  props: SearchStatusProps,
+  { sharedTokens }: DocsTokens
 ): SearchStatusStyle => {
   const { status } = props
 
@@ -85,24 +81,24 @@ const generateStyle = (
       '&:nth-of-type(1)': {
         insetInlineStart: 0,
         top: 0,
-        background: componentTheme.colorBrand
+        background: sharedTokens.background.infoColor
       },
       '&:nth-of-type(2)': {
         insetInlineEnd: 0,
         top: 0,
-        background: componentTheme.colorAlert,
+        background: sharedTokens.background.infoColor,
         animationDelay: '0.1s'
       },
       '&:nth-of-type(3)': {
         insetInlineStart: 0,
         bottom: 0,
-        background: componentTheme.colorWarning,
+        background: sharedTokens.background.warningColor,
         animationDelay: '0.2s'
       },
       '&:nth-of-type(4)': {
         insetInlineEnd: 0,
         bottom: 0,
-        background: componentTheme.colorDanger,
+        background: sharedTokens.background.errorColor,
         animationDelay: '0.3s'
       }
     }

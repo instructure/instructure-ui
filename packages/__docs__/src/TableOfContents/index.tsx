@@ -26,10 +26,10 @@ import { Component } from 'react'
 
 import { canUseDOM, ownerDocument } from '@instructure/ui-dom-utils'
 
-import { Link } from '@instructure/ui-link'
-import { List } from '@instructure/ui-list'
-import { View } from '@instructure/ui-view'
-import { ToggleDetails } from '@instructure/ui-toggle-details'
+import { Link } from '@instructure/ui-link/latest'
+import { List } from '@instructure/ui-list/latest'
+import { View } from '@instructure/ui-view/latest'
+import { ToggleDetails } from '@instructure/ui-toggle-details/latest'
 import { InstUISettingsProvider } from '@instructure/emotion'
 import type { SpacingValues } from '@instructure/emotion'
 
@@ -147,9 +147,9 @@ class TableOfContents extends Component<
       1: '0',
       2: '0',
       3: '0',
-      4: 'small',
-      5: 'medium',
-      6: 'x-large'
+      4: 'general.spaceMd',
+      5: 'general.spaceXl',
+      6: 'general.space2xl'
     }
 
     const TOC = TOCData.filter((data) => !!data.id).map((data) => {
@@ -173,7 +173,7 @@ class TableOfContents extends Component<
 
     return (
       <InstUISettingsProvider>
-        <View as="div" margin="medium 0">
+        <View as="div" margin="general.spaceXl 0">
           <ToggleDetails
             summary="Table of Contents"
             defaultExpanded={
@@ -182,7 +182,7 @@ class TableOfContents extends Component<
             size="large"
           >
             <List
-              margin="0 0 large"
+              margin="0 0 general.space2xl"
               isUnstyled
               size="small"
               itemSpacing="xx-small"

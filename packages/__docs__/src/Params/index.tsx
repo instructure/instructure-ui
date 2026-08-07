@@ -23,10 +23,10 @@
  */
 
 import { Component } from 'react'
-import { Table } from '@instructure/ui-table'
+import { Table } from '@instructure/ui-table/latest'
 import { compileMarkdown } from '../compileMarkdown'
 import type { ParamsProps } from './props'
-import { Heading } from '@instructure/ui-heading'
+import { Heading } from '@instructure/ui-heading/latest'
 
 class Params extends Component<ParamsProps> {
   static displayName = 'Params'
@@ -85,13 +85,13 @@ class Params extends Component<ParamsProps> {
             level="h3"
             as="h4"
             id="genericParameters"
-            margin="0 0 small 0"
+            margin="0 0 general.spaceMd 0"
           >
             Generic type Parameters
           </Heading>
           <Table
-            caption="Parameters"
-            margin="0 0 large"
+            caption={() => 'Parameters'}
+            margin="0 0 general.space2xl"
             layout={layout === 'small' ? 'stacked' : 'auto'}
           >
             <Table.Head>
@@ -120,8 +120,8 @@ class Params extends Component<ParamsProps> {
     return (
       <>
         <Table
-          caption="Parameters"
-          margin="0 0 large"
+          caption={() => 'Parameters'}
+          margin="0 0 general.space2xl"
           layout={layout === 'small' ? 'stacked' : 'auto'}
         >
           <Table.Head>

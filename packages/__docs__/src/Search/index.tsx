@@ -24,11 +24,11 @@
 
 import { Component } from 'react'
 
-import { Alert } from '@instructure/ui-alerts'
-import { IconButton } from '@instructure/ui-buttons'
+import { Alert } from '@instructure/ui-alerts/latest'
+import { IconButton } from '@instructure/ui-buttons/latest'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
-import { IconTroubleLine } from '@instructure/ui-icons'
-import { Select } from '@instructure/ui-select'
+import { CircleXInstUIIcon } from '@instructure/ui-icons'
+import { Select } from '@instructure/ui-select/latest'
 
 import { SearchStatus } from '../SearchStatus'
 import { navigateTo } from '../navigationUtils'
@@ -296,7 +296,7 @@ class Search extends Component<SearchProps, SearchState> {
                 screenReaderLabel="Clear search"
                 onClick={this.handleClearInput}
               >
-                <IconTroubleLine />
+                <CircleXInstUIIcon />
               </IconButton>
             ) : (
               <span />

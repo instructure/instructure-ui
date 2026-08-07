@@ -21,13 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import type {
-  Colors,
-  Typography,
-  Spacing,
-  Border
-} from '@instructure/shared-types'
-
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 
 import type { MainDocsData } from '../../buildScripts/DataTypes.mjs'
@@ -47,18 +40,8 @@ type PropKeys = keyof PreviewOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type PreviewProps = PreviewOwnProps & WithStyleProps<PreviewTheme, PreviewStyle>
+type PreviewProps = PreviewOwnProps & WithStyleProps<null, PreviewStyle>
 
-type PreviewTheme = {
-  padding: Spacing['small']
-  borderRadius: Border['radiusMedium']
-  borderWidth: Border['widthSmall']
-  borderColor: string
-  fontFamilyError: 'Menlo, Consolas, Monaco, "Andale Mono", monospace'
-  fontSizeError: Typography['fontSizeSmall']
-  backgroundError: Colors['contrasts']['red4570']
-  colorError: Colors['contrasts']['white1010']
-}
 export type PreviewStyle = ComponentStyle<'preview' | 'previewError' | 'error'>
 
 type PreviewState = {
@@ -73,5 +56,5 @@ const allowedProps: AllowedPropKeys = [
   'rtl',
   'themeKey'
 ]
-export type { PreviewProps, PreviewTheme, PreviewState }
+export type { PreviewProps, PreviewState }
 export { allowedProps }

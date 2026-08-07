@@ -24,8 +24,8 @@
 
 import { Component } from 'react'
 
-import { Table } from '@instructure/ui-table'
-import { withStyleForDocs as withStyleNew } from '../withStyleForDocs'
+import { Table } from '@instructure/ui-table/latest'
+import { withStyleForDocs } from '../withStyleForDocs'
 
 import generateStyle from './styles'
 import { compileMarkdown } from '../compileMarkdown'
@@ -39,10 +39,10 @@ import type {
   TSFunctionSignatureType,
   TypeDescriptor
 } from 'react-docgen'
-import { Heading } from '@instructure/ui-heading'
-import { View } from '@instructure/ui-view'
+import { Heading } from '@instructure/ui-heading/latest'
+import { View } from '@instructure/ui-view/latest'
 
-@withStyleNew(generateStyle, null)
+@withStyleForDocs(generateStyle)
 class Properties extends Component<PropertiesProps> {
   static displayName = 'Properties'
   static defaultProps = {
@@ -279,13 +279,13 @@ class Properties extends Component<PropertiesProps> {
       }
     }
     return (
-      <View margin="x-large 0" display="block">
-        <Heading level="h2" as="h3" margin="0 0 small 0">
+      <View margin="general.space2xl 0" display="block">
+        <Heading level="h2" as="h3" margin="0 0 general.spaceMd 0">
           Properties
         </Heading>
         <div css={styles?.properties}>
           <Table
-            caption="Component Properties"
+            caption={() => 'Component Properties'}
             layout={layout === 'small' ? 'stacked' : 'auto'}
           >
             <Table.Head>

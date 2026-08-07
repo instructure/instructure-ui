@@ -33,7 +33,7 @@ import type { DocDataType } from '../Document/props'
 import type { Theme } from '@instructure/ui-themes'
 import type { ThemeVariables } from '@instructure/shared-types'
 
-type AppProps = WithStyleProps<AppTheme, AppStyle>
+type AppProps = WithStyleProps<null, AppStyle>
 
 type AppStyle = ComponentStyle<
   | 'app'
@@ -44,26 +44,6 @@ type AppStyle = ComponentStyle<
   | 'globalStyles'
   | 'skipToMainButton'
 >
-
-type AppTheme = {
-  background: string
-  color: string
-  fontFamily: string
-  fontFamilyMonospace: string
-  lineHeight: string | number
-  fontWeight: number
-  codeBorderRadius: string | 0
-  codeBackground: string
-  shadow: string
-  quotePadding: string
-  quoteMargin: string
-  borderWidth: string | 0
-  borderStyle: string
-  borderColor: string
-  menuToggleZIndex: number
-  navBorderColor: string
-  navBorderWidth: string | 0
-}
 
 type LayoutSize = 'small' | 'medium' | 'large'
 
@@ -103,4 +83,4 @@ type DocData = ProcessedFile & {
   children: DocDataType[]
 }
 
-export type { AppProps, AppState, DocData, LayoutSize, AppStyle, AppTheme }
+export type { AppProps, AppState, DocData, LayoutSize, AppStyle }

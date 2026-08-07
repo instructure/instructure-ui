@@ -25,20 +25,20 @@
 import { useState, memo, useCallback, useMemo, useRef } from 'react'
 import type { ChangeEvent } from 'react'
 
-import { Heading } from '@instructure/ui-heading'
-import { TextInput } from '@instructure/ui-text-input'
-import { Checkbox } from '@instructure/ui-checkbox'
-import { FormFieldGroup } from '@instructure/ui-form-field'
-import { IconButton } from '@instructure/ui-buttons'
+import { Heading } from '@instructure/ui-heading/latest'
+import { TextInput } from '@instructure/ui-text-input/latest'
+import { Checkbox } from '@instructure/ui-checkbox/latest'
+import { FormFieldGroup } from '@instructure/ui-form-field/latest'
+import { IconButton } from '@instructure/ui-buttons/latest'
 import {
   ScreenReaderContent,
   AccessibleContent
 } from '@instructure/ui-a11y-content'
-import { Modal } from '@instructure/ui-modal'
-import { SourceCodeEditor } from '@instructure/ui-source-code-editor'
+import { Modal } from '@instructure/ui-modal/latest'
+import { SourceCodeEditor } from '@instructure/ui-source-code-editor/latest'
 import { LucideIcons, CustomIcons } from '@instructure/ui-icons'
 import { XInstUIIcon } from '@instructure/ui-icons'
-import { Flex } from '@instructure/ui-flex'
+import { Flex } from '@instructure/ui-flex/latest'
 
 type IconInfo = {
   name: string
@@ -265,7 +265,7 @@ const IconsGallery = () => {
           </Modal.Header>
           <Modal.Body>
             <div>
-              <Heading level="h3" margin="small 0">
+              <Heading level="h3" margin="general.spaceMd 0">
                 Usage
               </Heading>
               <SourceCodeEditor
@@ -274,7 +274,7 @@ const IconsGallery = () => {
                 language="javascript"
                 readOnly
               />
-              <Heading level="h4" margin="medium 0 small 0">
+              <Heading level="h4" margin="general.spaceXl 0 general.spaceMd 0">
                 Available Props
               </Heading>
               <ul>

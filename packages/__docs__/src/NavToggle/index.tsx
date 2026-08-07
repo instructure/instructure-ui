@@ -24,9 +24,9 @@
 
 import { Component } from 'react'
 
-import { ToggleDetails } from '@instructure/ui-toggle-details'
-import { Text } from '@instructure/ui-text'
-import { View } from '@instructure/ui-view'
+import { ToggleDetails } from '@instructure/ui-toggle-details/latest'
+import { Text } from '@instructure/ui-text/latest'
+import { View } from '@instructure/ui-view/latest'
 import { InstUISettingsProvider } from '@instructure/emotion'
 import type { NavToggleProps } from './props'
 import { allowedProps } from './props'
@@ -73,8 +73,8 @@ class NavToggle extends Component<NavToggleProps> {
     return (
       <View
         display="block"
-        padding="x-small none"
-        margin={isSection ? 'none' : 'none none none x-small'}
+        padding="general.spaceSm none"
+        margin={isSection ? 'none' : 'none none none general.spaceSm'}
         onClick={this.blurNavToggle}
         as={'div'}
       >

@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-import { Link as UILink } from '@instructure/ui-link'
+import { Link as UILink } from '@instructure/ui-link/latest'
 import { InstUISettingsProvider } from '@instructure/emotion'
-import type { LinkProps } from '@instructure/ui-link'
+import type { LinkProps } from '@instructure/ui-link/latest'
 
 const Link = (props: LinkProps) => (
   <InstUISettingsProvider>

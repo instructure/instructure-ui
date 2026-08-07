@@ -28,11 +28,10 @@ import { isValid } from '@instructure/ui-color-utils'
 import { withStyleForDocs } from '../withStyleForDocs'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 import { allowedProps } from './props'
 import type { ColorSwatchProps } from './props'
 
-@withStyleForDocs(generateStyle, generateComponentTheme)
+@withStyleForDocs(generateStyle)
 class ColorSwatch extends Component<ColorSwatchProps> {
   static displayName = 'ColorSwatch'
   static allowedProps = allowedProps

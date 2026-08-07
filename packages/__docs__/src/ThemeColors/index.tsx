@@ -24,9 +24,9 @@
 
 import { Component } from 'react'
 
-import { View } from '@instructure/ui-view'
-import { Flex } from '@instructure/ui-flex'
-import { Responsive } from '@instructure/ui-responsive'
+import { View } from '@instructure/ui-view/latest'
+import { Flex } from '@instructure/ui-flex/latest'
+import { Responsive } from '@instructure/ui-responsive/latest'
 import { contrast } from '@instructure/ui-color-utils'
 import { ColorCard } from '../ColorCard'
 import { Heading } from '../Heading'
@@ -94,17 +94,21 @@ class ThemeColors extends Component<ThemeColorsProps, ThemeColorsState> {
         }}
         render={(props) => {
           return (
-            <View as="div" padding="small">
+            <View as="div" padding="general.spaceMd">
               <Heading level="h3" as="h4">
                 {this.props.label}
               </Heading>
               {Object.keys(colorGroups).map((colorGroup) => (
-                <Flex key={colorGroup} wrap="wrap" margin="0 0 large 0">
+                <Flex
+                  key={colorGroup}
+                  wrap="wrap"
+                  margin="0 0 general.space2xl 0"
+                >
                   {colorGroups[colorGroup].map((color: string) => (
                     <Flex.Item
                       key={`${color}-flex`}
                       size={props && props.colWidth}
-                      padding="small xx-small"
+                      padding="general.spaceMd general.spaceXs"
                     >
                       <ColorCard
                         hex={colors[color]}

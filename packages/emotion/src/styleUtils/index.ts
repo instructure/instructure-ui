@@ -29,6 +29,7 @@ export { mirrorShorthandCorners } from './mirrorShorthandCorners.js'
 export { mirrorShorthandEdges } from './mirrorShorthandEdges.js'
 export { calcSpacingFromShorthand } from './calcSpacingFromShorthand.js'
 export { calcFocusOutlineStyles } from './calcFocusOutlineStyles.js'
+export { applyColorModifiers } from './applyColorModifiers.js'
 
 export type {
   SpacingValues,

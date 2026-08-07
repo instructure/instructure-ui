@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
-import { Table } from '@instructure/ui-table'
-import { Heading } from '@instructure/ui-heading'
-import { View } from '@instructure/ui-view'
-import { Text } from '@instructure/ui-text'
+import { Table } from '@instructure/ui-table/latest'
+import { Heading } from '@instructure/ui-heading/latest'
+import { View } from '@instructure/ui-view/latest'
+import { Text } from '@instructure/ui-text/latest'
 
 type V12ChangelogTableProps = {
   removed?: {
@@ -49,16 +49,16 @@ const V12ChangelogTable = ({
   changed
 }: V12ChangelogTableProps) => {
   return (
-    <View as="div" margin="large 0">
-      <Heading level="h4" margin="0 0 small">
+    <View as="div" margin="general.space2xl 0">
+      <Heading level="h4" margin="0 0 general.spaceMd">
         Theme variable changes
       </Heading>
       {removed && (
-        <View as="div" margin="medium 0">
-          <Heading level="h4" margin="0 0 small">
+        <View as="div" margin="general.spaceXl 0">
+          <Heading level="h4" margin="0 0 general.spaceMd">
             Removed
           </Heading>
-          <Table caption={`Removed variables`} layout="auto">
+          <Table caption={() => `Removed variables`} layout="auto">
             <Table.Head>
               <Table.Row>
                 <Table.ColHeader id="removed-name">
@@ -82,11 +82,11 @@ const V12ChangelogTable = ({
       )}
 
       {added && (
-        <View as="div" margin="medium 0">
-          <Heading level="h4" margin="0 0 small">
+        <View as="div" margin="general.spaceXl 0">
+          <Heading level="h4" margin="0 0 general.spaceMd">
             Added
           </Heading>
-          <Table caption={`Added variables`} layout="auto">
+          <Table caption={() => `Added variables`} layout="auto">
             <Table.Head>
               <Table.Row>
                 <Table.ColHeader id="added-name">Variable name</Table.ColHeader>
@@ -108,11 +108,11 @@ const V12ChangelogTable = ({
       )}
 
       {changed && (
-        <View as="div" margin="medium 0">
-          <Heading level="h4" margin="0 0 small">
+        <View as="div" margin="general.spaceXl 0">
+          <Heading level="h4" margin="0 0 general.spaceMd">
             Renamed
           </Heading>
-          <Table caption={`Renamed variables`} layout="auto">
+          <Table caption={() => `Renamed variables`} layout="auto">
             <Table.Head>
               <Table.Row>
                 <Table.ColHeader id="changed-old">Old variable</Table.ColHeader>

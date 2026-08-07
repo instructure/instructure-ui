@@ -21,20 +21,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import type { HeroStyle, HeroTheme } from './props'
+import type { DocsTokens } from '../withStyleForDocs'
+import type { HeroStyle } from './props'
 /**
  * ---
  * private: true
  * ---
  * Generates the style object from the theme and provided additional information
- * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
+ * @param  {Object} tokens The theme's semantic and shared tokens.
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme: HeroTheme): HeroStyle => {
+const generateStyle = (
+  _props: unknown,
+  { semantics }: DocsTokens
+): HeroStyle => {
   return {
-    backgroundColor: componentTheme.backgroundColor,
+    backgroundColor: semantics.color.background.info,
 
     overlayLayout: {
       label: 'hero__overlayLayout',
