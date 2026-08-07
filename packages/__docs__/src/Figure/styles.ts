@@ -27,30 +27,33 @@
  * private: true
  * ---
  * Generates the style object from the theme and provided additional information
- * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
+ * @param  {Object} tokens The theme's semantic and shared tokens.
  * @return {Object} The final style object, which will be used in the component
  */
-import type { FigureProps, FigureStyle, FigureTheme } from './props'
+import { boxShadowObjectsToCSSString } from '@instructure/ui-themes'
+import type { DocsTokens } from '../withStyleForDocs'
+import type { FigureProps, FigureStyle } from './props'
 const generateStyle = (
-  componentTheme: FigureTheme,
-  props: FigureProps
+  props: FigureProps,
+  { semantics, sharedTokens }: DocsTokens
 ): FigureStyle => {
   const { recommendation } = props
+  const { success, error, info } = semantics.color.background
+  const iconContainerSize = '2.25rem'
 
   const recommendationVariants = {
     yes: {
-      figure: { borderTopColor: componentTheme.yesColor },
-      iconContainer: { background: componentTheme.yesColor }
+      figure: { borderTopColor: success },
+      iconContainer: { background: success }
     },
     no: {
-      figure: { borderTopColor: componentTheme.noColor },
-      iconContainer: { background: componentTheme.noColor }
+      figure: { borderTopColor: error },
+      iconContainer: { background: error }
     },
     a11y: {
-      figure: { borderTopColor: componentTheme.a11yColor },
-      iconContainer: { background: componentTheme.a11yColor }
+      figure: { borderTopColor: info },
+      iconContainer: { background: info }
     },
     none: {
       figure: {},
@@ -66,10 +69,10 @@ const generateStyle = (
       display: 'block',
       padding: 0,
       margin: 0,
-      boxShadow: componentTheme.shadow,
-      borderTopWidth: componentTheme.borderWidth,
+      boxShadow: boxShadowObjectsToCSSString(sharedTokens.boxShadow.elevation2),
+      borderTopWidth: semantics.borderWidth.md,
       borderTopStyle: 'solid',
-      borderTopColor: componentTheme.borderColor,
+      borderTopColor: semantics.color.stroke.accent.ash,
       ...recommendationVariants[recommendation].figure
     },
 
@@ -77,11 +80,11 @@ const generateStyle = (
     caption: {
       label: 'figure__caption',
       display: 'block',
-      fontFamily: componentTheme.captionFontFamily,
-      fontSize: componentTheme.captionFontSize,
-      color: componentTheme.captionColor,
-      background: componentTheme.captionBackground,
-      padding: componentTheme.captionPadding,
+      fontFamily: semantics.fontFamily.base,
+      fontSize: semantics.fontSize.textSm,
+      color: semantics.color.text.base,
+      background: '#DCEEE4',
+      padding: semantics.spacing.spaceMd,
       textAlign: 'center'
     },
 
@@ -89,8 +92,8 @@ const generateStyle = (
       label: 'figure__content',
       display: 'block',
       position: 'relative',
-      background: componentTheme.contentBackground,
-      padding: componentTheme.contentPadding
+      background: semantics.color.background.container,
+      padding: semantics.spacing.spaceXl
     },
 
     iconContainer: {
@@ -98,14 +101,14 @@ const generateStyle = (
       position: 'absolute',
       top: '-0.0625rem',
       insetInlineEnd: '-0.0313rem',
-      zIndex: componentTheme.iconContainerStacking,
-      width: componentTheme.iconContainerSize,
-      height: componentTheme.iconContainerSize,
+      zIndex: 1,
+      width: iconContainerSize,
+      height: iconContainerSize,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       pointerEvents: 'none',
-      color: componentTheme.iconColor,
+      color: semantics.color.text.onColor,
       ...recommendationVariants[recommendation].iconContainer
     }
   }

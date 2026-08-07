@@ -22,16 +22,19 @@
  * SOFTWARE.
  */
 
-import { ColorSwatchTheme, ColorSwatchStyle } from './props'
+import type { DocsTokens } from '../withStyleForDocs'
+import { ColorSwatchProps, ColorSwatchStyle } from './props'
 
 /**
  * Generates the style object from the theme and provided additional information
- * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
+ * @param  {Object} tokens The theme's semantic and shared tokens.
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme: ColorSwatchTheme): ColorSwatchStyle => {
+const generateStyle = (
+  _props: ColorSwatchProps,
+  { sharedTokens }: DocsTokens
+): ColorSwatchStyle => {
   return {
     colorSwatch: {
       label: 'colorSwatch',
@@ -41,7 +44,7 @@ const generateStyle = (componentTheme: ColorSwatchTheme): ColorSwatchStyle => {
       verticalAlign: 'middle',
       marginInlineEnd: 0,
       marginInlineStart: 0,
-      border: `1px solid ${componentTheme.borderColor}`,
+      border: `1px solid ${sharedTokens.stroke.strongColor}`,
       borderRadius: '3px'
     }
   }

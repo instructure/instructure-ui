@@ -25,10 +25,10 @@
 import { Component } from 'react'
 import { getParameters } from 'codesandbox-import-utils/lib/api/define'
 
-import { Tooltip } from '@instructure/ui-tooltip'
+import { Tooltip } from '@instructure/ui-tooltip/latest'
 import { SVGIcon } from '@instructure/ui-svg-images'
 
-import { IconButton } from '@instructure/ui-buttons'
+import { IconButton } from '@instructure/ui-buttons/latest'
 import { allowedProps } from './props'
 import type { CodeSandboxButtonProps } from './props'
 

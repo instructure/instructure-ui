@@ -23,7 +23,7 @@
  */
 
 import { Children, Component } from 'react'
-import { Flex } from '@instructure/ui-flex'
+import { Flex } from '@instructure/ui-flex/latest'
 import type { GuidelinesProps } from './props'
 import { allowedProps } from './props'
 
@@ -38,7 +38,12 @@ class Guidelines extends Component<GuidelinesProps> {
     return (
       <Flex wrap="wrap" justifyItems="end" alignItems="stretch">
         {Children.map(this.props.children, (child) => (
-          <Flex.Item shouldGrow shouldShrink size="14rem" margin="xx-small">
+          <Flex.Item
+            shouldGrow
+            shouldShrink
+            size="14rem"
+            margin="general.spaceXs"
+          >
             {child}
           </Flex.Item>
         ))}

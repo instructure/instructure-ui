@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { ToggleDetailsProps } from '@instructure/ui-toggle-details'
+import { ToggleDetailsProps } from '@instructure/ui-toggle-details/latest'
 
 type NavToggleOwnProps = {
   summary: string

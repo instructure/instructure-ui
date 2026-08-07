@@ -24,21 +24,21 @@
 
 import { Component } from 'react'
 
-import { Button, IconButton } from '@instructure/ui-buttons'
-import { Flex } from '@instructure/ui-flex'
-import { Img } from '@instructure/ui-img'
-import { Link } from '@instructure/ui-link'
-import { InlineList, List } from '@instructure/ui-list'
-import { Text } from '@instructure/ui-text'
-import { View } from '@instructure/ui-view'
-import { IconGithubSolid, IconCheckMarkSolid } from '@instructure/ui-icons'
+import { Button, IconButton } from '@instructure/ui-buttons/latest'
+import { Flex } from '@instructure/ui-flex/latest'
+import { Img } from '@instructure/ui-img/latest'
+import { Link } from '@instructure/ui-link/latest'
+import { InlineList, List } from '@instructure/ui-list/latest'
+import { Text } from '@instructure/ui-text/latest'
+import { View } from '@instructure/ui-view/latest'
+import { CheckInstUIIcon } from '@instructure/ui-icons'
+import GithubLogo from './github-logo'
 import { AccessibleContent } from '@instructure/ui-a11y-content'
 import { InlineSVG, SVGIcon } from '@instructure/ui-svg-images'
 
 import { withStyleForDocs } from '../withStyleForDocs'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import { ColorBand } from '../ColorBand'
 import { ContentWrap } from '../ContentWrap'
@@ -51,7 +51,7 @@ import { allowedProps } from './props'
 //@ts-expect-error ts complains for no real reason
 import logo from '../../logo.svg'
 
-@withStyleForDocs(generateStyle, generateComponentTheme)
+@withStyleForDocs(generateStyle)
 class Hero extends Component<HeroProps> {
   static displayName = 'Hero'
   static allowedProps = allowedProps
@@ -179,7 +179,7 @@ class Hero extends Component<HeroProps> {
 
     const bigScreen = layout === 'large'
     const contentMaxWidth = '84rem'
-    const checkmark = <IconCheckMarkSolid inline={false} color="success" />
+    const checkmark = <CheckInstUIIcon inline={false} color="successColor" />
 
     const heroBodyContent = (
       <View
@@ -188,10 +188,10 @@ class Hero extends Component<HeroProps> {
         tabIndex={0}
         aria-label="main content"
       >
-        <Heading as="h3" level="h2" margin="none none medium">
+        <Heading as="h3" level="h2" margin="none none general.spaceXl">
           Components everyone can count on
         </Heading>
-        <View as="div" margin="medium none">
+        <View as="div" margin="general.spaceXl none">
           <Text size="large">
             Instructure UI is maintained by Instructure designers, developers,
             and accessibility experts. Our components and utilities offer
@@ -201,12 +201,14 @@ class Hero extends Component<HeroProps> {
         <List
           size="large"
           itemSpacing="xx-small"
-          margin="none none xx-large"
+          margin="none none general.space2xl"
           isUnstyled
         >
           <List.Item>
             <Flex>
-              <Flex.Item padding="none small none none">{checkmark}</Flex.Item>
+              <Flex.Item padding="none general.spaceMd none none">
+                {checkmark}
+              </Flex.Item>
               <Flex.Item>
                 Leading screen readers: VoiceOver, NVDA, and JAWS
               </Flex.Item>
@@ -214,7 +216,9 @@ class Hero extends Component<HeroProps> {
           </List.Item>
           <List.Item>
             <Flex>
-              <Flex.Item padding="none small none none">{checkmark}</Flex.Item>
+              <Flex.Item padding="none general.spaceMd none none">
+                {checkmark}
+              </Flex.Item>
               <Flex.Item shouldGrow shouldShrink>
                 Keyboard only navigation
               </Flex.Item>
@@ -222,15 +226,17 @@ class Hero extends Component<HeroProps> {
           </List.Item>
           <List.Item>
             <Flex>
-              <Flex.Item padding="none small none none">{checkmark}</Flex.Item>
+              <Flex.Item padding="none general.spaceMd none none">
+                {checkmark}
+              </Flex.Item>
               <Flex.Item>Right-to-left (RTL) languages</Flex.Item>
             </Flex>
           </List.Item>
         </List>
-        <Heading as="h3" level="h2" margin="none none medium">
+        <Heading as="h3" level="h2" margin="none none general.spaceXl">
           Getting started
         </Heading>
-        <View as="p" margin="none none small">
+        <View as="p" margin="none none general.spaceMd">
           <Text size="large">
             Check out our{' '}
             <Link
@@ -246,7 +252,7 @@ class Hero extends Component<HeroProps> {
             project.
           </Text>
         </View>
-        <List margin="none none x-large" itemSpacing="xx-small">
+        <List margin="none none general.space2xl" itemSpacing="xx-small">
           <List.Item>
             <Text weight="bold">React support:</Text> 18.0 and later
           </List.Item>
@@ -267,10 +273,10 @@ class Hero extends Component<HeroProps> {
             </Link>
           </List.Item>
         </List>
-        <Heading as="h3" level="h2" margin="none none medium">
+        <Heading as="h3" level="h2" margin="none none general.spaceXl">
           Accessibility
         </Heading>
-        <View as="p" margin="none none x-large">
+        <View as="p" margin="none none general.space2xl">
           <Text size="large">
             Instructure UI components are designed to be accessible to everyone,
             including users with vision, hearing, cognitive, or motor
@@ -288,16 +294,16 @@ class Hero extends Component<HeroProps> {
             </Link>
           </Text>
         </View>
-        <Heading as="h3" level="h2" margin="none none medium">
+        <Heading as="h3" level="h2" margin="none none general.spaceXl">
           Contribute
         </Heading>
-        <View as="p" margin="none none small">
+        <View as="p" margin="none none general.spaceMd">
           <Text size="large">
             Whether it&apos;s finding a bug, committing a fix, or suggesting a
             feature, we welcome contributions.
           </Text>
         </View>
-        <List margin="none none large" itemSpacing="xx-small">
+        <List margin="none none general.space2xl" itemSpacing="xx-small">
           <List.Item>
             <Link
               href="contributing-getting-started"
@@ -346,21 +352,18 @@ class Hero extends Component<HeroProps> {
           display="block"
           href="https://www.instructure.com/canvas/"
           variant="standalone"
-          themeOverride={{
-            hoverTextDecorationOutsideText: 'none'
-          }}
         >
           <View
             display="block"
             background="danger"
-            margin="x-large none none"
-            padding="large"
+            margin="general.space2xl none none"
+            padding="general.space2xl"
             textAlign="center"
           >
             <AccessibleContent alt="Instructure UI powers Canvas">
               <Text size="large">Instructure UI powers</Text>
             </AccessibleContent>
-            <View display="block" margin="xx-small none none">
+            <View display="block" margin="general.spaceXs none none">
               {canvasLogo}
             </View>
           </View>
@@ -401,7 +404,11 @@ class Hero extends Component<HeroProps> {
               shadow="resting"
             >
               <Flex
-                padding={bigScreen ? 'small' : 'small x-small'}
+                padding={
+                  bigScreen
+                    ? 'general.spaceMd'
+                    : 'general.spaceMd general.spaceSm'
+                }
                 justifyItems="space-between"
               >
                 <Flex.Item size="4rem"></Flex.Item>
@@ -409,14 +416,16 @@ class Hero extends Component<HeroProps> {
                   shouldShrink={!bigScreen}
                   shouldGrow={!bigScreen}
                   size={bigScreen ? '36%' : undefined}
-                  padding={bigScreen ? 'none' : 'none x-small none none'}
+                  padding={
+                    bigScreen ? 'none' : 'none general.spaceSm none none'
+                  }
                 >
                   <Search options={this.props.docs} />
                 </Flex.Item>
                 <Flex.Item>
                   <IconButton
                     href="https://github.com/instructure/instructure-ui"
-                    renderIcon={<IconGithubSolid />}
+                    renderIcon={<GithubLogo />}
                     screenReaderLabel="Contribute on Github"
                     withBackground={false}
                     withBorder={false}
@@ -435,18 +444,18 @@ class Hero extends Component<HeroProps> {
             </View>
             <View display="block" css={styles?.content}>
               <ContentWrap
-                padding={
-                  layout === 'small' ? 'xx-large large' : 'x-large xx-large'
-                }
+                padding="general.space2xl general.space2xl"
                 maxWidth={contentMaxWidth}
               >
                 <View
                   as="div"
                   maxWidth={bigScreen ? '66%' : undefined}
-                  padding={bigScreen ? 'none x-large none none' : 'none'}
+                  padding={
+                    bigScreen ? 'none general.space2xl none none' : 'none'
+                  }
                 >
-                  <Flex margin="0 0 large">
-                    <Flex.Item padding="0 x-small 0 0">
+                  <Flex margin="0 0 general.space2xl">
+                    <Flex.Item padding="0 general.spaceSm 0 0">
                       <Heading as="h1" level="h3" color="primary-inverse">
                         Instructure UI
                       </Heading>
@@ -464,7 +473,7 @@ class Hero extends Component<HeroProps> {
                     Create beautiful, accessible React apps.
                   </Heading>
 
-                  <View as="p" margin="large 0">
+                  <View as="p" margin="general.space2xl 0">
                     <Text
                       size={bigScreen ? 'large' : 'medium'}
                       color="primary-inverse"
@@ -480,7 +489,7 @@ class Hero extends Component<HeroProps> {
                         withBackground={false}
                         color="primary-inverse"
                         href="guides-getting-started"
-                        margin="0 x-small x-small 0"
+                        margin="0 general.spaceSm general.spaceSm 0"
                         size={bigScreen ? 'large' : 'medium'}
                         onClick={(e: any) => {
                           e.preventDefault()
@@ -494,10 +503,10 @@ class Hero extends Component<HeroProps> {
                       <Button
                         withBackground={false}
                         color="primary-inverse"
-                        renderIcon={IconGithubSolid as any}
+                        renderIcon={GithubLogo}
                         href="https://github.com/instructure/instructure-ui"
                         size={bigScreen ? 'large' : 'medium'}
-                        margin="0 x-small x-small 0"
+                        margin="0 general.spaceSm general.spaceSm 0"
                       >
                         Github
                       </Button>
@@ -508,7 +517,7 @@ class Hero extends Component<HeroProps> {
                         color="success"
                         href="upgrade-guide-v11"
                         size={bigScreen ? 'large' : 'medium'}
-                        margin="0 x-small x-small 0"
+                        margin="0 general.spaceSm general.spaceSm 0"
                         onClick={(e: any) => {
                           e.preventDefault()
                           navigateTo('upgrade-guide-v11')
@@ -522,23 +531,20 @@ class Hero extends Component<HeroProps> {
               </ContentWrap>
             </View>
             <ContentWrap
-              padding={bigScreen ? 'none xx-large' : 'none'}
+              padding={bigScreen ? 'none general.space2xl' : 'none'}
               maxWidth={contentMaxWidth}
             >
               <ColorBand />
             </ContentWrap>
           </View>
         </View>
-        <ContentWrap
-          padding={layout === 'small' ? 'large' : 'xx-large'}
-          maxWidth={contentMaxWidth}
-        >
+        <ContentWrap padding="general.space2xl" maxWidth={contentMaxWidth}>
           {bigScreen ? (
-            <Flex alignItems="start" padding="medium none none">
+            <Flex alignItems="start" padding="general.spaceXl none none">
               <Flex.Item
                 shouldGrow
                 shouldShrink
-                padding="none xx-large none none"
+                padding="none general.space2xl none none"
               >
                 {heroBodyContent}
               </Flex.Item>

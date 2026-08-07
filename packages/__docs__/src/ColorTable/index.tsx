@@ -25,8 +25,8 @@
 import { Component } from 'react'
 
 import { Heading } from '../Heading'
-import { Table } from '@instructure/ui-table'
-import { View } from '@instructure/ui-view'
+import { Table } from '@instructure/ui-table/latest'
+import { View } from '@instructure/ui-view/latest'
 import { ColorSwatch } from '../ColorSwatch'
 import { ColorTableProps } from './props'
 
@@ -46,7 +46,7 @@ class ColorTable extends Component<ColorTableProps> {
           <code>{key}</code>
         </Table.Cell>
         <Table.Cell>
-          <View margin="0 xx-small 0 0">
+          <View margin="0 general.spaceXs 0 0">
             <ColorSwatch color={this.props.colors[key]} />
           </View>
           <code>
@@ -63,8 +63,8 @@ class ColorTable extends Component<ColorTableProps> {
   render() {
     const headingElement = 'h3'
     const headingLevel = 'h2'
-    const margin = 'small none large'
-    const padding = 'small'
+    const margin = 'general.spaceMd none general.space2xl'
+    const padding = 'general.spaceMd'
     const label = 'name' + 'variables'
     return (
       <View key={label} as="div" padding={'none'}>
@@ -76,7 +76,7 @@ class ColorTable extends Component<ColorTableProps> {
           margin={margin}
           borderRadius="medium"
         >
-          <Table caption={label} layout="fixed">
+          <Table caption={() => label} layout="fixed">
             <Table.Head>
               <Table.Row>
                 <Table.ColHeader id="Name" key="Name">

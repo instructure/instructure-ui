@@ -26,18 +26,17 @@ import { Children, Component, PropsWithChildren } from 'react'
 
 import { omitProps, ensureSingleChild } from '@instructure/ui-react-utils'
 import {
-  IconCheckMarkSolid,
-  IconNoSolid,
-  IconA11ySolid
+  CheckInstUIIcon,
+  BanInstUIIcon,
+  Accessibility2InstUIIcon
 } from '@instructure/ui-icons'
-import { List } from '@instructure/ui-list'
-import { Responsive } from '@instructure/ui-responsive'
-import { View } from '@instructure/ui-view'
+import { List } from '@instructure/ui-list/latest'
+import { Responsive } from '@instructure/ui-responsive/latest'
+import { View } from '@instructure/ui-view/latest'
 
 import { withStyleForDocs } from '../withStyleForDocs'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import { Heading } from '../Heading'
 import type { FigureProps } from './props'
@@ -57,7 +56,7 @@ class FigureItem extends Component<PropsWithChildren> {
   }
 }
 
-@withStyleForDocs(generateStyle, generateComponentTheme)
+@withStyleForDocs(generateStyle)
 class Figure extends Component<FigureProps> {
   static displayName = 'Figure'
   static allowedProps = allowedProps
@@ -83,13 +82,13 @@ class Figure extends Component<FigureProps> {
 
   get recommendationIcon() {
     if (this.props.recommendation === 'yes') {
-      return IconCheckMarkSolid
+      return CheckInstUIIcon
     } else if (this.props.recommendation === 'no') {
-      return IconNoSolid
+      return BanInstUIIcon
     } else if (this.props.recommendation === 'a11y') {
-      return IconA11ySolid
+      return Accessibility2InstUIIcon
     }
-    return IconNoSolid
+    return BanInstUIIcon
   }
 
   renderFigure(props?: FigureProps) {
@@ -110,17 +109,17 @@ class Figure extends Component<FigureProps> {
         <span css={styles?.content}>
           {recommendation !== 'none' ? (
             <span css={styles?.iconContainer}>
-              <RecommendationIcon
-                title={iconTitle}
-                size="x-small"
-                inline={false}
-              />
+              <RecommendationIcon title={iconTitle} size="md" inline={false} />
             </span>
           ) : null}
-          <Heading level="h3" as="h4" margin="medium 0 small small">
+          <Heading
+            level="h3"
+            as="h4"
+            margin="general.spaceXl 0 general.spaceMd general.spaceMd"
+          >
             {title}
           </Heading>
-          <List itemSpacing="small" margin="0 0 small 0">
+          <List itemSpacing="small" margin="0 0 general.spaceMd 0">
             {Children.map(children, (child) => {
               return <List.Item>{child}</List.Item>
             })}

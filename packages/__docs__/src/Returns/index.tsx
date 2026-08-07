@@ -23,7 +23,7 @@
  */
 
 import { Component } from 'react'
-import { Table } from '@instructure/ui-table'
+import { Table } from '@instructure/ui-table/latest'
 import type { ReturnsProps } from './props'
 import Markdown from 'marked-react'
 
@@ -31,7 +31,7 @@ class Returns extends Component<ReturnsProps> {
   static displayName = 'Returns'
   render() {
     return (
-      <Table caption="Returns" margin="0 0 large">
+      <Table caption={() => 'Returns'} margin="0 0 general.space2xl">
         <Table.Head>
           <Table.Row>
             <Table.ColHeader id="Type">Type</Table.ColHeader>

@@ -24,14 +24,14 @@
 
 import React, { Component } from 'react'
 
-import { Link } from '@instructure/ui-link'
-import { View } from '@instructure/ui-view'
-import { Tabs } from '@instructure/ui-tabs'
-import type { TabsProps } from '@instructure/ui-tabs'
+import { Link } from '@instructure/ui-link/latest'
+import { View } from '@instructure/ui-view/latest'
+import { Tabs } from '@instructure/ui-tabs/latest'
+import type { TabsProps } from '@instructure/ui-tabs/latest'
 import type { NewBaseTheme } from '@instructure/ui-themes'
 import type { ComponentTheme as ComponentThemeData } from '@instructure/shared-types'
-import { SourceCodeEditor } from '@instructure/ui-source-code-editor'
-import { withStyleForDocs as withStyleNew } from '../withStyleForDocs'
+import { SourceCodeEditor } from '@instructure/ui-source-code-editor/latest'
+import { withStyleForDocs } from '../withStyleForDocs'
 
 import generateStyle from './styles'
 
@@ -49,7 +49,7 @@ import { navigateTo } from '../navigationUtils'
 import { allowedProps } from './props'
 import type { DocumentProps, DocumentState, DocDataType } from './props'
 
-@withStyleNew(generateStyle)
+@withStyleForDocs(generateStyle)
 class Document extends Component<DocumentProps, DocumentState> {
   static displayName = 'Document'
   static allowedProps = allowedProps
@@ -184,12 +184,17 @@ class Document extends Component<DocumentProps, DocumentState> {
       componentTheme &&
       themeVariableKeys &&
       themeVariableKeys.length > 0 ? (
-      <View margin="x-large 0" display="block">
-        <Heading level="h2" as="h3" id={`${doc.id}Theme`} margin="0 0 small 0">
+      <View margin="general.space2xl 0" display="block">
+        <Heading
+          level="h2"
+          as="h3"
+          id={`${doc.id}Theme`}
+          margin="0 0 general.spaceMd 0"
+        >
           Default Theme Variables
         </Heading>
         {borrowsTokens ? (
-          <View as="div" margin="0 0 small 0">
+          <View as="div" margin="0 0 general.spaceMd 0">
             Note: <code>{doc.id}</code> shares its theme tokens with{' '}
             <code>{borrowedThemeId}</code>, so the table below lists every token
             of <code>{borrowedThemeId}</code>. Some of these may not actually be
@@ -197,7 +202,7 @@ class Document extends Component<DocumentProps, DocumentState> {
           </View>
         ) : null}
         {doc.themePath ? (
-          <View as="div" margin="0 0 x-small 0">
+          <View as="div" margin="0 0 general.spaceSm 0">
             See which global theme variables are mapped to the component here:{' '}
             {this.renderThemeLink(doc)}
             <br />
@@ -213,23 +218,23 @@ class Document extends Component<DocumentProps, DocumentState> {
         ) : null}
         <ComponentTheme componentTheme={componentTheme as ComponentThemeData} />
 
-        <View margin="x-large 0 0" display="block">
+        <View margin="general.space2xl 0 0" display="block">
           <Heading
             level="h4"
             id={`${doc.id}ThemeOverrideExample`}
-            margin="0 0 small 0"
+            margin="0 0 general.spaceMd 0"
           >
             How to override the default theme
           </Heading>
 
-          <View margin="small 0" display="block">
+          <View margin="general.spaceMd 0" display="block">
             In case you need to change the appearance of the{' '}
             <code>{doc.id}</code> component, you can override its
             {doc.themePath
               ? this.renderThemeLink(doc, ' default theme variables.')
               : ' default theme variables.'}
           </View>
-          <View margin="small 0" display="block">
+          <View margin="general.spaceMd 0" display="block">
             The easiest way to do this is to utilize the{' '}
             <code>themeOverride</code> property. See the{' '}
             <Link
@@ -290,7 +295,7 @@ class Document extends Component<DocumentProps, DocumentState> {
     }
 
     return (
-      <View as="div" margin="0 0 x-large 0">
+      <View as="div" margin="0 0 general.space2xl 0">
         <Link href={legacySrcUrl || srcUrl}>{srcPath}</Link>
       </View>
     )
@@ -331,8 +336,13 @@ class Document extends Component<DocumentProps, DocumentState> {
 import { ${importName} } from '${versionedPackageName}'`
 
     return (
-      <View margin="xx-large 0" display="block">
-        <Heading level="h2" as="h3" id={`${id}Usage`} margin="0 0 small 0">
+      <View margin="general.space2xl 0" display="block">
+        <Heading
+          level="h2"
+          as="h3"
+          id={`${id}Usage`}
+          margin="0 0 general.spaceMd 0"
+        >
           Usage
         </Heading>
         <SourceCodeEditor
@@ -341,7 +351,7 @@ import { ${importName} } from '${versionedPackageName}'`
           language="javascript"
           readOnly
         />
-        <View as="div" margin="small 0 0 0">
+        <View as="div" margin="general.spaceMd 0 0 0">
           This import is pinned to the selected component version; future
           breaking changes land at new paths. For other import styles, see the{' '}
           <Link
@@ -374,8 +384,13 @@ import { ${importName} } from '${versionedPackageName}'`
     const { id, params, genericParameters } = doc
 
     return params ? (
-      <View margin="small 0" display="block">
-        <Heading level="h2" as="h3" id={`${id}Parameters`} margin="0 0 small 0">
+      <View margin="general.spaceMd 0" display="block">
+        <Heading
+          level="h2"
+          as="h3"
+          id={`${id}Parameters`}
+          margin="0 0 general.spaceMd 0"
+        >
           Parameters
         </Heading>
         <Params
@@ -391,8 +406,13 @@ import { ${importName} } from '${versionedPackageName}'`
     const { id, returns } = doc
 
     return returns ? (
-      <View margin="small 0" display="block">
-        <Heading level="h2" as="h3" id={`${id}Returns`} margin="0 0 small 0">
+      <View margin="general.spaceMd 0" display="block">
+        <Heading
+          level="h2"
+          as="h3"
+          id={`${id}Returns`}
+          margin="0 0 general.spaceMd 0"
+        >
           Returns
         </Heading>
         <Returns types={returns} />

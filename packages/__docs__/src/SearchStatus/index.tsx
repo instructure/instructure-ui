@@ -25,14 +25,13 @@
 import { Component } from 'react'
 
 import { withStyleForDocs } from '../withStyleForDocs'
-import { IconSearchLine } from '@instructure/ui-icons'
+import { SearchInstUIIcon } from '@instructure/ui-icons'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import type { SearchStatusProps } from './props'
 
-@withStyleForDocs(generateStyle, generateComponentTheme)
+@withStyleForDocs(generateStyle)
 class SearchStatus extends Component<SearchStatusProps> {
   static displayName = 'SearchStatus'
   static defaultProps = {
@@ -51,7 +50,7 @@ class SearchStatus extends Component<SearchStatusProps> {
   render() {
     const { size, status, styles } = this.props
     if (status === 'inactive') {
-      return <IconSearchLine color="primary" size="x-small" inline={false} />
+      return <SearchInstUIIcon color="baseColor" size="sm" inline={false} />
     } else {
       return (
         <span

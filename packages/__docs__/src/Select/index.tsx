@@ -24,7 +24,7 @@
 
 import { Component, Children, ReactElement } from 'react'
 
-import { Select as UISelect } from '@instructure/ui-select'
+import { Select as UISelect } from '@instructure/ui-select/latest'
 
 import type { SelectProps, SelectState } from './props'
 

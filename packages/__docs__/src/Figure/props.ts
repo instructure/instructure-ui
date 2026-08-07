@@ -23,15 +23,6 @@
  */
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 
-import {
-  Shadows,
-  Typography,
-  Colors,
-  Spacing,
-  Border,
-  Stacking
-} from '@instructure/shared-types'
-
 type FigureOwnProps = {
   title?: React.ReactNode
   caption?: React.ReactNode
@@ -45,28 +36,7 @@ type PropKeys = keyof FigureOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type FigureProps = FigureOwnProps & WithStyleProps<FigureTheme, FigureStyle>
-
-type FigureTheme = {
-  shadow: Shadows['depth2']
-  captionFontFamily: Typography['fontFamily']
-  captionFontSize: Typography['fontSizeSmall']
-  captionBackground: Colors['contrasts']['green1212']
-  captionPadding: Spacing['small']
-  captionColor: Colors['contrasts']['grey100100']
-  borderWidth: Border['widthMedium']
-  borderColor: Colors['contrasts']['grey100100']
-  contentPadding: Spacing['medium']
-  contentBackground: Colors['contrasts']['white1010']
-  yesColor: Colors['contrasts']['green4570']
-  noColor: Colors['contrasts']['red4570']
-  a11yColor: Colors['contrasts']['blue4570']
-  iconColor: Colors['contrasts']['white1010']
-  iconContainerStacking: Stacking['above']
-  iconContainerSize: Spacing['large']
-  floatMargin: Spacing['large']
-  floatMarginSmall: Spacing['xxSmall']
-}
+type FigureProps = FigureOwnProps & WithStyleProps<null, FigureStyle>
 
 type FigureStyle = ComponentStyle<
   'figure' | 'caption' | 'content' | 'iconContainer'
@@ -80,5 +50,5 @@ const allowedProps: AllowedPropKeys = [
   'title'
 ]
 
-export type { FigureProps, FigureStyle, FigureTheme }
+export type { FigureProps, FigureStyle }
 export { allowedProps }
