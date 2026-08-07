@@ -24,20 +24,19 @@
 
 import { Component } from 'react'
 
-import { Modal } from '@instructure/ui-modal'
-import { Tooltip } from '@instructure/ui-tooltip'
+import { Modal } from '@instructure/ui-modal/latest'
+import { Tooltip } from '@instructure/ui-tooltip/latest'
 import { AccessibleContent } from '@instructure/ui-a11y-content'
 import { SVGIcon } from '@instructure/ui-svg-images'
-import { SourceCodeEditor } from '@instructure/ui-source-code-editor'
-import { Checkbox } from '@instructure/ui-checkbox'
-import { Flex } from '@instructure/ui-flex'
-import { IconButton, CloseButton } from '@instructure/ui-buttons'
-import { IconXLine } from '@instructure/ui-icons'
+import { SourceCodeEditor } from '@instructure/ui-source-code-editor/latest'
+import { Checkbox } from '@instructure/ui-checkbox/latest'
+import { Flex } from '@instructure/ui-flex/latest'
+import { IconButton, CloseButton } from '@instructure/ui-buttons/latest'
+import { XInstUIIcon } from '@instructure/ui-icons'
 
 import { withStyleForDocs } from '../withStyleForDocs'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import { AppContext } from '../appContext'
 import Preview from '../Preview'
@@ -52,7 +51,7 @@ const fullScreenIconPath = (
   <path d="M12,0v2h8.6L8.3,14.3l1.4,1.4L22,3.4v8.5h2V0H12z M18,22H2V6h10l2-2H0v20h20V10l-2,2V22z" />
 )
 
-@withStyleForDocs(generateStyle, generateComponentTheme)
+@withStyleForDocs(generateStyle)
 class Playground extends Component<PlaygroundProps, PlaygroundState> {
   static displayName = 'Playground'
   static allowedProps = allowedProps
@@ -143,7 +142,7 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
             screenReaderLabel="Hide Code"
             withBorder={false}
             withBackground={false}
-            renderIcon={IconXLine}
+            renderIcon={XInstUIIcon}
           />
         </div>
         <SourceCodeEditor
@@ -222,7 +221,7 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
 
             {this.state.showCode && this.renderEditor()}
 
-            <Flex alignItems="center" padding="xx-small 0 0">
+            <Flex alignItems="center" padding="general.spaceXs 0 0">
               <Flex.Item shouldShrink shouldGrow>
                 <Flex>
                   <Flex.Item>
@@ -252,7 +251,7 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
                       placement="bottom"
                     >
                       <IconButton
-                        margin="0 x-small"
+                        margin="0 general.spaceSm"
                         onClick={this.handleCodeToggle}
                         size="small"
                         withBorder={false}

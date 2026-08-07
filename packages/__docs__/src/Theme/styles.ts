@@ -22,21 +22,24 @@
  * SOFTWARE.
  */
 
-import type { ThemeTheme, ThemeStyle } from './props'
+import type { DocsTokens } from '../withStyleForDocs'
+import type { ThemeStyle } from './props'
 
 /**
  * Generates the style object from the theme and provided additional information
- * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
+ * @param  {Object} tokens The theme's semantic and shared tokens.
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme: ThemeTheme): ThemeStyle => {
+const generateStyle = (
+  _props: unknown,
+  { semantics }: DocsTokens
+): ThemeStyle => {
   return {
     convertedValue: {
       label: 'searchStatus',
-      color: componentTheme.convertedValueTextColor,
-      fontSize: componentTheme.convertedValueFontSize,
+      color: semantics.color.text.base,
+      fontSize: semantics.fontSize.textSm,
       display: 'inline-block'
     }
   }

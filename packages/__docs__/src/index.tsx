@@ -26,7 +26,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 
 import { App } from './App'
-import canvas from './canvas'
+import { light } from '@instructure/ui-themes'
 import { InstUISettingsProvider } from '@instructure/emotion'
 import '../globals'
 
@@ -44,7 +44,7 @@ if (spaRouteParam) {
 
 createRoot(document.getElementById('app')!).render(
   <StrictMode>
-    <InstUISettingsProvider theme={canvas}>
+    <InstUISettingsProvider theme={light}>
       <App />
     </InstUISettingsProvider>
   </StrictMode>

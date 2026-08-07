@@ -24,8 +24,8 @@
 
 import { Component } from 'react'
 
-import { Text } from '@instructure/ui-text'
-import { View } from '@instructure/ui-view'
+import { Text } from '@instructure/ui-text/latest'
+import { View } from '@instructure/ui-view/latest'
 import { ColorName } from '../ColorName'
 import type { ColorCardProps } from './props'
 import { allowedProps } from './props'
@@ -89,7 +89,7 @@ class ColorCard extends Component<ColorCardProps> {
         shadow="above"
         display="block"
         margin="0"
-        padding="small"
+        padding="general.spaceMd"
       >
         <div style={{ position: 'relative' }}>
           <div

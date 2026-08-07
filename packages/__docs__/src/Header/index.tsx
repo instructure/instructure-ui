@@ -24,13 +24,13 @@
 
 import { Component } from 'react'
 
-import { Link } from '@instructure/ui-link'
+import { Link } from '@instructure/ui-link/latest'
 import { InlineSVG } from '@instructure/ui-svg-images'
-import { Text } from '@instructure/ui-text'
-import { View } from '@instructure/ui-view'
-import { CondensedButton } from '@instructure/ui-buttons'
-import { IconMiniArrowDownLine } from '@instructure/ui-icons'
-import { Menu } from '@instructure/ui-menu'
+import { Text } from '@instructure/ui-text/latest'
+import { View } from '@instructure/ui-view/latest'
+import { CondensedButton } from '@instructure/ui-buttons/latest'
+import { ChevronDownInstUIIcon } from '@instructure/ui-icons'
+import { Menu } from '@instructure/ui-menu/latest'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
 import { versionInPath } from '../versionData'
@@ -107,7 +107,11 @@ class Header extends Component<HeaderProps> {
       <View
         display="block"
         textAlign="center"
-        margin={hasMinorVersions ? 'small none none' : 'small none large'}
+        margin={
+          hasMinorVersions
+            ? 'general.spaceMd none none'
+            : 'general.spaceMd none general.space2xl'
+        }
       >
         <Menu
           placement="bottom"
@@ -122,7 +126,7 @@ class Header extends Component<HeaderProps> {
                   'Documentation'
                 )}
               </Text>
-              <IconMiniArrowDownLine size="x-small" />
+              <ChevronDownInstUIIcon size="sm" />
             </CondensedButton>
           }
         >
@@ -149,7 +153,11 @@ class Header extends Component<HeaderProps> {
   render() {
     const { versionsData } = this.props
     return (
-      <View as="div" margin="none none medium" padding="none medium">
+      <View
+        as="div"
+        margin="none none general.spaceXl"
+        padding="none general.spaceXl"
+      >
         <Link
           href="index"
           variant="standalone"
@@ -177,7 +185,7 @@ class Header extends Component<HeaderProps> {
                 navigateTo('index')
               }}
             >
-              <View display="block" margin="small none none">
+              <View display="block" margin="general.spaceMd none none">
                 <Text size="large">v{this.getDisplayVersion()}</Text>
               </View>
             </Link>

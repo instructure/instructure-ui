@@ -24,9 +24,9 @@
 
 import { Component } from 'react'
 
-import { withStyleForDocs as withStyleNew } from '../withStyleForDocs'
-import { Table } from '@instructure/ui-table'
-import { View } from '@instructure/ui-view'
+import { withStyleForDocs } from '../withStyleForDocs'
+import { Table } from '@instructure/ui-table/latest'
+import { View } from '@instructure/ui-view/latest'
 
 import { ColorSwatch } from '../ColorSwatch'
 
@@ -36,7 +36,7 @@ import type { ComponentThemeProps } from './props'
 
 type ThemeEntry = { name: string; value: string | number }
 
-@withStyleNew(generateStyle, null)
+@withStyleForDocs(generateStyle)
 class ComponentTheme extends Component<ComponentThemeProps> {
   static displayName = 'ComponentTheme'
   static allowedProps = allowedProps
@@ -51,7 +51,7 @@ class ComponentTheme extends Component<ComponentThemeProps> {
     ) {
       return (
         <span>
-          <View margin="0 xx-small 0 0">
+          <View margin="0 general.spaceXs 0 0">
             <ColorSwatch color={value} />
           </View>
           <code>{value}</code>
@@ -116,7 +116,7 @@ class ComponentTheme extends Component<ComponentThemeProps> {
 
     return componentTheme && Object.keys(componentTheme).length > 0 ? (
       <div css={styles?.componentTheme}>
-        <Table caption="Component theme">
+        <Table caption={() => 'Component theme'}>
           <Table.Head>
             <Table.Row>
               <Table.ColHeader id="name">Name</Table.ColHeader>

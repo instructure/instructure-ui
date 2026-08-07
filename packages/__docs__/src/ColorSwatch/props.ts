@@ -30,12 +30,9 @@ type ColorSwatchOwnProps = {
 type PropKeys = keyof ColorSwatchOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 type ColorSwatchProps = ColorSwatchOwnProps &
-  WithStyleProps<ColorSwatchTheme, ColorSwatchStyle>
+  WithStyleProps<null, ColorSwatchStyle>
 
 const allowedProps: AllowedPropKeys = ['color']
-type ColorSwatchTheme = {
-  borderColor: string
-}
 export type ColorSwatchStyle = ComponentStyle<'colorSwatch'>
-export type { ColorSwatchProps, ColorSwatchTheme }
+export type { ColorSwatchProps }
 export { allowedProps }

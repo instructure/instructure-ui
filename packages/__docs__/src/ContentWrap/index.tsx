@@ -24,7 +24,7 @@
 
 import { Component } from 'react'
 
-import { View } from '@instructure/ui-view'
+import { View } from '@instructure/ui-view/latest'
 import { allowedProps } from './props'
 import type { ContentWrapProps } from './props'
 
@@ -34,7 +34,7 @@ class ContentWrap extends Component<ContentWrapProps> {
   static defaultProps = {
     children: null,
     maxWidth: '80rem',
-    padding: 'none medium'
+    padding: 'none general.spaceXl'
   }
 
   render() {

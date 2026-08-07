@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
-import { Alert } from '@instructure/ui-alerts'
-import { Heading } from '@instructure/ui-heading'
-import { Text } from '@instructure/ui-text'
-import { View } from '@instructure/ui-view'
+import { Alert } from '@instructure/ui-alerts/latest'
+import { Heading } from '@instructure/ui-heading/latest'
+import { Text } from '@instructure/ui-text/latest'
+import { View } from '@instructure/ui-view/latest'
 import { boxShadowObjectsToCSSString } from '@instructure/ui-themes'
 import type { ComponentTheme as ComponentThemeType } from '@instructure/shared-types'
 import { ComponentTheme } from '../ComponentTheme'
@@ -56,13 +56,17 @@ const SharedTokensPage = ({ layout, rawTokens }: SharedTokensPageProps) => {
   const content = (
     <View
       as="div"
-      padding={smallerScreens ? 'x-large none none large' : 'x-large none none'}
+      padding={
+        smallerScreens
+          ? 'general.space2xl none none general.space2xl'
+          : 'general.space2xl none none'
+      }
     >
-      <Heading level="h1" as="h2" margin="0 0 medium 0">
+      <Heading level="h1" as="h2" margin="0 0 general.spaceXl 0">
         Shared Tokens
       </Heading>
       {!isV11_7 && (
-        <Alert variant="info" margin="0 0 medium">
+        <Alert variant="info" margin="0 0 general.spaceXl">
           Shared tokens are designed for components for <strong>v11.7</strong>{' '}
           and later. Components in v11.6 handle these individually in their
           themes.
@@ -76,8 +80,8 @@ const SharedTokensPage = ({ layout, rawTokens }: SharedTokensPageProps) => {
         <code>@instructure/emotion</code>.
       </Text>
       {Object.entries(processedData).map(([section, data]) => (
-        <View key={section} as="div" margin="0 0 large">
-          <Heading as="h3" level="h3" margin="0 0 small">
+        <View key={section} as="div" margin="0 0 general.space2xl">
+          <Heading as="h3" level="h3" margin="0 0 general.spaceMd">
             {section}
           </Heading>
           <ComponentTheme componentTheme={data as ComponentThemeType} />
@@ -88,7 +92,7 @@ const SharedTokensPage = ({ layout, rawTokens }: SharedTokensPageProps) => {
 
   return (
     <Section id="shared-tokens">
-      <ContentWrap padding="large">{content}</ContentWrap>
+      <ContentWrap padding="general.space2xl">{content}</ContentWrap>
     </Section>
   )
 }

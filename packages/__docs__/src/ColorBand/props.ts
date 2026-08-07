@@ -28,16 +28,10 @@ type ColorBandOwnProps = {
 }
 type PropKeys = keyof ColorBandOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
-type ColorBandProps = ColorBandOwnProps &
-  WithStyleProps<ColorBandTheme, ColorBandStyle>
+type ColorBandProps = ColorBandOwnProps & WithStyleProps<null, ColorBandStyle>
 
 const allowedProps: AllowedPropKeys = ['height']
 
 type ColorBandStyle = ComponentStyle<'band1' | 'band2' | 'band3'>
-type ColorBandTheme = {
-  colorAlert: string
-  colorWarning: string
-  colorDanger: string
-}
-export type { ColorBandProps, ColorBandStyle, ColorBandTheme }
+export type { ColorBandProps, ColorBandStyle }
 export { allowedProps }

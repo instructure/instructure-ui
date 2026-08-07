@@ -26,23 +26,23 @@ import { useState, useRef, memo, useCallback, useMemo } from 'react'
 import type { ChangeEvent, SyntheticEvent } from 'react'
 
 import { InlineSVG } from '@instructure/ui-svg-images'
-import { Heading } from '@instructure/ui-heading'
-import { TextInput } from '@instructure/ui-text-input'
-import { SimpleSelect } from '@instructure/ui-simple-select'
-import { Checkbox } from '@instructure/ui-checkbox'
-import { FormFieldGroup } from '@instructure/ui-form-field'
-import { IconButton } from '@instructure/ui-buttons'
-import { Alert } from '@instructure/ui-alerts'
+import { Heading } from '@instructure/ui-heading/latest'
+import { TextInput } from '@instructure/ui-text-input/latest'
+import { SimpleSelect } from '@instructure/ui-simple-select/latest'
+import { Checkbox } from '@instructure/ui-checkbox/latest'
+import { FormFieldGroup } from '@instructure/ui-form-field/latest'
+import { IconButton } from '@instructure/ui-buttons/latest'
+import { Alert } from '@instructure/ui-alerts/latest'
 import {
   ScreenReaderContent,
   AccessibleContent
 } from '@instructure/ui-a11y-content'
-import { Modal } from '@instructure/ui-modal'
-import { SourceCodeEditor } from '@instructure/ui-source-code-editor'
+import { Modal } from '@instructure/ui-modal/latest'
+import { SourceCodeEditor } from '@instructure/ui-source-code-editor/latest'
 import * as InstIcons from '@instructure/ui-icons'
 import { IconXSolid } from '@instructure/ui-icons'
-import { Link } from '@instructure/ui-link'
-import { Flex } from '@instructure/ui-flex'
+import { Link } from '@instructure/ui-link/latest'
+import { Flex } from '@instructure/ui-flex/latest'
 import type { Glyph } from '../../buildScripts/DataTypes.mjs'
 
 type Format = 'react' | 'svg' | 'font'
@@ -147,7 +147,7 @@ const LegacyIconTile = memo(
               withBorder={false}
               screenReaderLabel={name}
               size="large"
-              margin="xx-small 0 xx-small 0"
+              margin="general.spaceXs 0 general.spaceXs 0"
               onClick={() => onClick(glyph, 'line')}
             >
               {getIconNode('line')}
@@ -157,7 +157,7 @@ const LegacyIconTile = memo(
               withBorder={false}
               screenReaderLabel={name}
               size="large"
-              margin="xx-small 0 xx-small 0"
+              margin="general.spaceXs 0 general.spaceXs 0"
               onClick={() => onClick(glyph, 'solid')}
             >
               {getIconNode('solid')}
@@ -269,7 +269,7 @@ const LegacyIconsGallery = ({ glyphs }: LegacyIconsGalleryProps) => {
         />
       </FormFieldGroup>
       {selectedFormat === 'font' && (
-        <Alert variant="warning" margin="small 0">
+        <Alert variant="warning" margin="general.spaceMd 0">
           Icon Font is a deprecated format and only here for compatibility
           reasons. It doesn&apos;t have right-to-left support and some icons
           have visual artifacts due to svg-to-ttf conversion. We recommend using
@@ -277,7 +277,7 @@ const LegacyIconsGallery = ({ glyphs }: LegacyIconsGalleryProps) => {
         </Alert>
       )}
       {selectedFormat === 'svg' && (
-        <Alert variant="info" margin="small 0">
+        <Alert variant="info" margin="general.spaceMd 0">
           The SVG format doesn&apos;t have right-to-left support. If you need
           that, please use the React format.
         </Alert>
@@ -330,7 +330,7 @@ const LegacyIconsGallery = ({ glyphs }: LegacyIconsGalleryProps) => {
           </Modal.Header>
           <Modal.Body>
             <div>
-              <Heading level="h3" margin="small 0">
+              <Heading level="h3" margin="general.spaceMd 0">
                 Usage
               </Heading>
               <SourceCodeEditor
