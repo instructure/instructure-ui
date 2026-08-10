@@ -18,13 +18,7 @@ ui-scripts <command> --help
 
 To build (babel transpile) a package to be consumed as a library:
 
-`pnpm run ui-scripts build --modules cjs` writes commonjs modules to the lib/ directory.
-
-`pnpm run ui-scripts build --modules es` writes es modules to the es/ directory.
-
-`pnpm run ui-scripts build --modules es,cjs` writes es modules to both directories.
-
-If not specified, `modules` defaults to `es`.
+`pnpm run ui-scripts build` writes es modules to the es/ directory.
 
 To build (webpack) a package to be consumed as an application:
 

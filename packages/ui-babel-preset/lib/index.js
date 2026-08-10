@@ -25,7 +25,6 @@
 module.exports = function (
   context,
   opts = {
-    esModules: false,
     removeConsole: false
   }
 ) {
@@ -33,7 +32,7 @@ module.exports = function (
     targets: {
       browsers: require('@instructure/browserslist-config-instui')
     },
-    modules: opts.esModules ? false : 'commonjs'
+    modules: false
     // debug: true, // un-comment if you want to see what browsers are being targeted and what plugins that means it will activate
   }
 
@@ -71,15 +70,7 @@ module.exports = function (
       require('@babel/plugin-transform-runtime').default,
       {
         ...babelHelperVersion,
-        useESModules: opts.esModules,
-        // When `inlineHelpers` is set, don't externalize Babel helpers to
-        // `@babel/runtime`; emit them inline in each module instead. This avoids
-        // a CJS/ESM mismatch in consumers that compile to CommonJS but resolve
-        // `@babel/runtime` via the `import` condition (which serves the ESM
-        // helper), where `_interopRequireDefault(...)` would be a namespace
-        // object rather than a function. Off by default so library builds keep
-        // sharing helpers via `@babel/runtime`.
-        ...(opts.inlineHelpers ? { helpers: false } : {})
+        useESModules: true
       }
     ]
   ])
@@ -99,7 +90,7 @@ module.exports = function (
   }
 
   // Add .js extensions to imports for ES modules
-  if (opts.esModules) {
+  if (process.env.ES_MODULES) {
     plugins.push([
       require('babel-plugin-add-import-extension'),
       { extension: 'js' }
