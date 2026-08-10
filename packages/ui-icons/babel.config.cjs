@@ -28,7 +28,6 @@ module.exports = {
       require('@instructure/ui-babel-preset'),
       {
         esModules: Boolean(process.env.ES_MODULES),
-        transformImports: Boolean(process.env.TRANSFORM_IMPORTS),
 
         // we need the console for the deprecation warning.
         // Note: if you want to use console in the icons, wrap it in a
