@@ -1,10 +1,10 @@
 {
   "name": "@instructure/shared-types",
   "version": "11.7.4",
+  "type": "module",
   "description": "Shared TypeScript typings for Instructure UI packages.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
-  "main": "./lib/index.js",
   "types": "./types/index.d.ts",
   "repository": {
     "type": "git",
@@ -30,7 +30,6 @@
     ".": {
       "types": "./types/index.d.ts",
       "import": "./es/index.js",
-      "require": "./lib/index.js",
       "default": "./es/index.js"
     },
     "./types/*": "./types/*",
