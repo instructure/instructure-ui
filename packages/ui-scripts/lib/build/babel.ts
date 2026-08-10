@@ -22,14 +22,8 @@
  * SOFTWARE.
  */
 
-import path from 'path'
 import { runCommandsConcurrently, getCommand } from '@instructure/command-utils'
-import { fileURLToPath } from 'url'
 import type { Argv } from 'yargs'
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
-
-const specifyCJSFormat = path.resolve(__dirname, 'specify-commonjs-format.ts')
 
 export default {
   command: 'build',
@@ -42,13 +36,6 @@ export default {
     yargs.option('watch', {
       boolean: true,
       desc: 'Run constantly and recompile on changes'
-    })
-    yargs.option('modules', {
-      string: true,
-      desc: 'What kind of modules to build. "es": build into the /es folder using ESM; "cjs": build into the /lib folder using commonJS',
-      choices: ['es', 'cjs'],
-      default: 'es',
-      coerce: (value: string) => value.split(',')
     })
     yargs.strictOptions(true)
   },
@@ -88,27 +75,13 @@ export default {
       }
     }
 
-    const commands: Record<string, any> = {
+    const commands = {
       es: getCommand('babel', [...babelArgs, '--out-dir', 'es'], {
         ...envVars,
         ...{ ES_MODULES: '1' }
-      }),
-      cjs: [
-        getCommand('babel', [...babelArgs, '--out-dir', 'lib'], {
-          ...envVars,
-          ...{ TRANSFORM_IMPORTS: '1' }
-        }),
-        getCommand(specifyCJSFormat, [])
-      ]
+      })
     }
 
-    const commandsToRun = argv.modules.reduce(
-      (obj: Record<string, any>, key: string) => ({
-        ...obj,
-        [key]: commands[key]
-      }),
-      {}
-    )
-    runCommandsConcurrently(commandsToRun)
+    runCommandsConcurrently(commands)
   }
 }
