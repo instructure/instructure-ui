@@ -25,6 +25,7 @@
     "coverage/**",
     "**/stylelint.config.js",
     "**/babel.config.js",
+    "**/babel.config.cjs",
     "**/.next/**",
     "**/next-env.d.ts"
   ],
