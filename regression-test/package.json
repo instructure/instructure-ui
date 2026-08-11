@@ -31,7 +31,7 @@
     "@instructure/ui-scripts": "file:../packages/ui-scripts",
     "next": "16.2.10",
     "react": "19.2.7",
-    "react-dom": "19.2.7"
+    "react-dom": "19.2.8"
   },
   "allowScripts": {
     "file:.pnpm/cypress@15.13.0/node_modules/cypress": true
