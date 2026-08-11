@@ -30,8 +30,10 @@ import { Card } from '@instructure/ui-card/latest'
 
 // Values come from the generated Card theme tokens, see
 // packages/ui-themes/src/themes/newThemeTokens/<theme>/components/card.ts
-const BREAKPOINT_MD = '20rem'
-const BREAKPOINT_LG = '40rem'
+// (20rem/40rem). Tests run in a real browser, whose getComputedStyle
+// resolves rem to the equivalent px at the default 16px root font size.
+const BREAKPOINT_MD = '320px'
+const BREAKPOINT_LG = '640px'
 
 const renderCard = (props = {}) => {
   const { container } = render(<Card {...props}>content</Card>)
@@ -86,7 +88,7 @@ describe('<Card />', () => {
       expect(style.borderColor).not.toBe('')
       // and that it opts out of the base surface treatment
       expect(style.backgroundColor).toBe('rgba(0, 0, 0, 0)')
-      expect(style.boxShadow).toBe('')
+      expect(style.boxShadow).toBe('none')
     })
 
     it('should apply a smaller padding for nested than for base at the same size', () => {
@@ -103,7 +105,7 @@ describe('<Card />', () => {
     it('sm should cap width at the md breakpoint with no min-width', () => {
       const { style } = renderCard({ size: 'sm' })
       expect(style.maxWidth).toBe(BREAKPOINT_MD)
-      expect(style.minWidth).toBe('auto')
+      expect(style.minWidth).toBe('0px')
     })
 
     it('md should span the md and lg breakpoints', () => {
@@ -133,7 +135,7 @@ describe('<Card />', () => {
       'nested should apply no width constraint at size %s',
       (size) => {
         const { style } = renderCard({ variant: 'nested', size })
-        expect(style.minWidth).toBe('auto')
+        expect(style.minWidth).toBe('0px')
         expect(style.maxWidth).toBe('none')
       }
     )
