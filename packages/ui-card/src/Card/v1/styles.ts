@@ -43,32 +43,58 @@ const generateStyle = (
 
   const boxShadow = boxShadowObjectsToCSSString(componentTheme.boxShadow)
 
+  const borderRadius = {
+    base: {
+      sm: componentTheme.borderRadiusBaseSm,
+      md: componentTheme.borderRadiusBaseMd,
+      lg: componentTheme.borderRadiusBaseLg
+    },
+    nested: {
+      sm: componentTheme.borderRadiusNestedSm,
+      md: componentTheme.borderRadiusNestedMd,
+      lg: componentTheme.borderRadiusNestedLg
+    }
+  }
+
+  const padding = {
+    base: {
+      sm: componentTheme.paddingBaseSm,
+      md: componentTheme.paddingBaseMd,
+      lg: componentTheme.paddingBaseLg
+    },
+    nested: {
+      sm: componentTheme.paddingNestedSm,
+      md: componentTheme.paddingNestedMd,
+      lg: componentTheme.paddingNestedLg
+    }
+  }
+
   // Width breakpoints only apply to `base`: a `nested` Card's available width
   // is already constrained by its parent's padded content box, so enforcing
   // the same breakpoints on `nested` could make it not fit inside `base`.
   const widthVariants =
     variant === 'base'
       ? {
-          sm: { maxWidth: componentTheme.breakpoint.md },
+          sm: { maxWidth: componentTheme.breakpointMd },
           md: {
-            minWidth: componentTheme.breakpoint.md,
-            maxWidth: componentTheme.breakpoint.lg
+            minWidth: componentTheme.breakpointMd,
+            maxWidth: componentTheme.breakpointLg
           },
-          lg: { minWidth: componentTheme.breakpoint.lg }
+          lg: { minWidth: componentTheme.breakpointLg }
         }
       : { sm: {}, md: {}, lg: {} }
 
   const sizeVariants = {
     sm: {
-      padding: componentTheme.padding[variant].sm,
+      padding: padding[variant].sm,
       ...widthVariants.sm
     },
     md: {
-      padding: componentTheme.padding[variant].md,
+      padding: padding[variant].md,
       ...widthVariants.md
     },
     lg: {
-      padding: componentTheme.padding[variant].lg,
+      padding: padding[variant].lg,
       ...widthVariants.lg
     }
   }
@@ -87,7 +113,7 @@ const generateStyle = (
     card: {
       label: 'card',
       boxSizing: 'border-box',
-      borderRadius: componentTheme.borderRadius[variant][size],
+      borderRadius: borderRadius[variant][size],
       ...sizeVariants[size],
       ...variantVariants[variant]
     }
