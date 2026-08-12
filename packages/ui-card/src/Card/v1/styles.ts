@@ -40,6 +40,10 @@ const generateStyle = (
   props: CardProps
 ): CardStyle => {
   const { variant = 'base', size = 'md' } = props
+  const isAuto = size === 'auto' && variant === 'base'
+  // `auto` isn't supported for `nested` Cards (see props.ts) — fall back to
+  // the default size rather than indexing the size lookups with 'auto'.
+  const sizeKey = size === 'auto' ? 'md' : size
 
   const boxShadow = boxShadowObjectsToCSSString(componentTheme.boxShadow)
 
@@ -109,12 +113,42 @@ const generateStyle = (
     }
   }
 
+  // `auto` measures the Card's own rendered width via a CSS container query
+  // and picks padding/border-radius from the same breakpoints the explicit
+  // sizes use — mobile-first: `sm` values are the base, `md`/`lg` values
+  // apply once the container is wide enough. It needs a wrapping element
+  // (`container`) because a container query can't target the element that
+  // declares `containerType` itself, only its descendants.
+  if (isAuto) {
+    return {
+      container: {
+        label: 'card__container',
+        containerType: 'inline-size'
+      },
+      card: {
+        label: 'card',
+        boxSizing: 'border-box',
+        borderRadius: borderRadius.base.sm,
+        padding: padding.base.sm,
+        ...variantVariants.base,
+        [`@container (min-width: ${componentTheme.breakpointMd})`]: {
+          borderRadius: borderRadius.base.md,
+          padding: padding.base.md
+        },
+        [`@container (min-width: ${componentTheme.breakpointLg})`]: {
+          borderRadius: borderRadius.base.lg,
+          padding: padding.base.lg
+        }
+      }
+    }
+  }
+
   return {
     card: {
       label: 'card',
       boxSizing: 'border-box',
-      borderRadius: borderRadius[variant][size],
-      ...sizeVariants[size],
+      borderRadius: borderRadius[variant][sizeKey],
+      ...sizeVariants[sizeKey],
       ...variantVariants[variant]
     }
   }

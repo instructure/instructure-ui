@@ -40,6 +40,24 @@ type: example
 </div>
 ```
 
+### Auto sizing (prototype)
+
+For `variant="base"`, `size="auto"` measures the Card's own rendered width
+(via a CSS container query, using the same breakpoints as the explicit
+sizes) and picks `sm`/`md`/`lg` padding and border radius itself — no size
+prop needed. Resize the panel below to see it change.
+
+```js
+---
+type: example
+---
+<div style={{ resize: 'horizontal', overflow: 'auto', minWidth: '10rem', maxWidth: '100%', border: '1px dashed #999', padding: '0.5rem' }}>
+  <Card size="auto">
+    <Text variant="content">Resize this panel's right edge to see padding and border radius change.</Text>
+  </Card>
+</div>
+```
+
 ### Nested cards
 
 The `nested` variant is meant to be placed inside a `base` Card. It omits the

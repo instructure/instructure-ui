@@ -47,6 +47,16 @@ const Card = ({
     displayName: 'Card'
   })
 
+  if (size === 'auto' && variant === 'base') {
+    return (
+      <div css={styles?.container}>
+        <div {...passthroughProps(rest)} css={styles?.card}>
+          {children}
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div {...passthroughProps(rest)} css={styles?.card}>
       {children}

@@ -44,8 +44,15 @@ type CardOwnProps = {
    * applies a min- and max-width, and `lg` applies a min-width. `nested`
    * doesn't enforce a width — its available space is already constrained
    * by its parent `base` Card.
+   *
+   * `"auto"` is only supported for `variant="base"`. Instead of a fixed
+   * size, the Card measures its own rendered width (via a CSS container
+   * query, using the same breakpoints as the explicit sizes) and picks
+   * `sm`/`md`/`lg` accordingly. Prefer an explicit size for `nested` Cards,
+   * where size is a deliberate content choice rather than a reflection of
+   * available space.
    */
-  size?: 'sm' | 'md' | 'lg'
+  size?: 'sm' | 'md' | 'lg' | 'auto'
 }
 
 type PropKeys = keyof CardOwnProps
@@ -56,7 +63,7 @@ type CardProps = CardOwnProps &
   NewThemeOverrideProp<ReturnType<NewComponentTypes['Card']>> &
   OtherHTMLAttributes<CardOwnProps>
 
-type CardStyle = ComponentStyle<'card'>
+type CardStyle = ComponentStyle<'card'> & Partial<ComponentStyle<'container'>>
 
 const allowedProps: AllowedPropKeys = ['children', 'variant', 'size']
 

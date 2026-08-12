@@ -63,6 +63,25 @@ export default function CardPage() {
           </Card>
         </Card>
       </div>
+
+      {/* Auto sizing: each wrapper's fixed width pins it to one breakpoint */}
+      <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+        <div style={{ width: '200px' }} data-testid="auto-card-sm-wrapper">
+          <Card size="auto">
+            <Text variant="content">Auto card, sm width</Text>
+          </Card>
+        </div>
+        <div style={{ width: '400px' }} data-testid="auto-card-md-wrapper">
+          <Card size="auto">
+            <Text variant="content">Auto card, md width</Text>
+          </Card>
+        </div>
+        <div style={{ width: '800px' }} data-testid="auto-card-lg-wrapper">
+          <Card size="auto">
+            <Text variant="content">Auto card, lg width</Text>
+          </Card>
+        </div>
+      </div>
     </main>
   )
 }

@@ -168,4 +168,84 @@ describe('<Card />', () => {
       expect(bare.style.boxShadow).toContain('rgba')
     })
   })
+
+  describe('size="auto"', () => {
+    // "auto" measures its own rendered width via a CSS container query, so
+    // it needs a real ancestor width to react to — render it inside a fixed-
+    // width wrapper rather than using renderCard's bare, unconstrained render.
+    const renderAutoCard = (widthPx: number, props = {}) => {
+      const { container } = render(
+        <div style={{ width: `${widthPx}px` }}>
+          <Card size="auto" {...props}>
+            content
+          </Card>
+        </div>
+      )
+      const widthDiv = container.firstElementChild as HTMLElement
+      const cardContainer = widthDiv.firstElementChild as HTMLElement
+      const card = cardContainer.firstElementChild as HTMLElement
+      return { widthDiv, cardContainer, card, style: getComputedStyle(card) }
+    }
+
+    it('should render an extra wrapper element with containerType set', () => {
+      const { cardContainer } = renderAutoCard(400)
+      expect(getComputedStyle(cardContainer).containerType).toBe('inline-size')
+    })
+
+    it('should not apply a min-/max-width to itself', () => {
+      const { style } = renderAutoCard(400)
+      expect(style.minWidth).toBe('0px')
+      expect(style.maxWidth).toBe('none')
+    })
+
+    it('should match the sm padding below the md breakpoint', () => {
+      const auto = renderAutoCard(200).style.padding
+      const sm = renderCard({ size: 'sm' }).style.padding
+      expect(auto).toBe(sm)
+    })
+
+    it('should match the md padding between the md and lg breakpoints', () => {
+      const auto = renderAutoCard(400).style.padding
+      const md = renderCard({ size: 'md' }).style.padding
+      expect(auto).toBe(md)
+    })
+
+    it('should match the lg padding at or above the lg breakpoint', () => {
+      const auto = renderAutoCard(800).style.padding
+      const lg = renderCard({ size: 'lg' }).style.padding
+      expect(auto).toBe(lg)
+    })
+
+    it('should grow padding as the container widens', () => {
+      const narrow = parseFloat(renderAutoCard(200).style.padding)
+      const medium = parseFloat(renderAutoCard(400).style.padding)
+      const wide = parseFloat(renderAutoCard(800).style.padding)
+      expect(narrow).toBeLessThan(medium)
+      expect(medium).toBeLessThan(wide)
+    })
+
+    it('is not supported for the nested variant and falls back to a normal render', () => {
+      const { container } = render(
+        <div style={{ width: '200px' }}>
+          <Card size="auto" variant="nested">
+            content
+          </Card>
+        </div>
+      )
+      const widthDiv = container.firstElementChild as HTMLElement
+      // no extra wrapper: the card is the direct (and only) child element
+      expect(widthDiv.children).toHaveLength(1)
+      expect(widthDiv.firstElementChild!.tagName).toBe('DIV')
+    })
+
+    it('should be accessible', async () => {
+      const { container } = render(
+        <div style={{ width: '400px' }}>
+          <Card size="auto">content</Card>
+        </div>
+      )
+      const axeCheck = await runAxeCheck(container)
+      expect(axeCheck).toBe(true)
+    })
+  })
 })
