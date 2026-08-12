@@ -23,14 +23,14 @@
  */
 
 import React from 'react'
-import type { ViewProps } from '@instructure/ui-view/v11_7'
+import type { ViewProps } from '@instructure/ui-view/latest'
 import type {
   Spacing,
   WithStyleProps,
   ComponentStyle
 } from '@instructure/emotion'
 import type { NewComponentTypes } from '@instructure/ui-themes'
-import type { OtherHTMLAttributes } from '@instructure/shared-types'
+import type { OtherHTMLAttributes, Renderable } from '@instructure/shared-types'
 
 type TagOwnProps = {
   className?: string
@@ -43,7 +43,28 @@ type TagOwnProps = {
    * Works just like disabled but keeps the same styles as if it were active
    */
   readOnly?: boolean
+  /**
+   * When `true`, renders a close button. Clicking the close
+   * button dismisses the tag via the `onDismiss` callback. When implementing
+   * dismissible tags, be sure to provide an accessible label for the close
+   * button (e.g. via `AccessibleContent` on the `text`) so screen readers
+   * announce that the tag is dismissible.
+   */
   dismissible?: boolean
+  /**
+   * Called when the close button of a `dismissible` Tag is clicked.
+   */
+  onDismiss?: (event: React.MouseEvent<ViewProps & Element>) => void
+  /**
+   * Add an SVG icon to the left of the Tag text. Do not add icons directly as
+   * children. When using Lucide icons, Tag will automatically pass the
+   * appropriate size prop based on the Tag's `size`.
+   */
+  renderIcon?: Renderable
+  /**
+   * If you provide an `href`, the Tag body renders as a link (`<a>`).
+   */
+  href?: string
   /**
    * Valid values are `0`, `none`, `auto`, and Spacing token values,
    * see https://instructure.design/layout-spacing. Apply these values via
@@ -69,13 +90,18 @@ type TagProps = TagOwnProps &
   WithStyleProps<ReturnType<NewComponentTypes['Tag']>, TagStyle> &
   OtherHTMLAttributes<TagOwnProps>
 
-type TagStyle = ComponentStyle<'tag' | 'text' | 'icon'>
+type TagStyle = ComponentStyle<
+  'tag' | 'body' | 'text' | 'leadIcon' | 'closeButton' | 'closeIcon'
+>
 const allowedProps: AllowedPropKeys = [
   'className',
   'text',
   'disabled',
   'readOnly',
   'dismissible',
+  'onDismiss',
+  'renderIcon',
+  'href',
   'margin',
   'onClick',
   'elementRef',

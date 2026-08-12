@@ -24,9 +24,9 @@
 
 import { Component } from 'react'
 
-import { XInstUIIcon } from '@instructure/ui-icons'
-import { View } from '@instructure/ui-view/v11_7'
-import type { ViewProps } from '@instructure/ui-view/v11_7'
+import { XInstUIIcon, renderIconWithProps } from '@instructure/ui-icons'
+import { View } from '@instructure/ui-view/latest'
+import type { ViewProps } from '@instructure/ui-view/latest'
 import { omitProps } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { withStyleNew } from '@instructure/emotion'
@@ -59,6 +59,8 @@ class Tag extends Component<TagProps> {
   }
 
   ref: Element | null = null
+  bodyRef: HTMLElement | null = null
+  closeRef: HTMLElement | null = null
 
   componentDidMount() {
     this.props.makeStyles?.()
@@ -68,12 +70,18 @@ class Tag extends Component<TagProps> {
     this.props.makeStyles?.()
   }
 
+  get interactive() {
+    return !!this.props.href || typeof this.props.onClick === 'function'
+  }
+
   get focused() {
-    return isActiveElement(this.ref)
+    return isActiveElement(this.bodyRef) || isActiveElement(this.closeRef)
   }
 
   focus = () => {
-    this.ref && (this.ref as HTMLElement).focus()
+    const target =
+      this.interactive && this.bodyRef ? this.bodyRef : this.closeRef
+    target?.focus()
   }
 
   handleIconMouseEnter = () => {
@@ -84,14 +92,25 @@ class Tag extends Component<TagProps> {
     this.setState({ iconHovered: false })
   }
 
-  handleClick = (e: React.MouseEvent<ViewProps & Element>) => {
+  handleClick = (e: React.MouseEvent<Element>) => {
     const { disabled, readOnly, onClick } = this.props
 
     if (disabled || readOnly) {
       e.preventDefault()
       e.stopPropagation()
     } else if (typeof onClick === 'function') {
-      onClick(e)
+      onClick(e as React.MouseEvent<ViewProps & Element>)
+    }
+  }
+
+  handleDismiss = (e: React.MouseEvent<Element>) => {
+    const { disabled, readOnly, onDismiss } = this.props
+
+    if (disabled || readOnly) {
+      e.preventDefault()
+      e.stopPropagation()
+    } else if (typeof onDismiss === 'function') {
+      onDismiss(e as React.MouseEvent<ViewProps & Element>)
     }
   }
 
@@ -101,6 +120,14 @@ class Tag extends Component<TagProps> {
     if (typeof this.props.elementRef === 'function') {
       this.props.elementRef(element)
     }
+  }
+
+  handleBodyRef = (element: HTMLElement | null) => {
+    this.bodyRef = element
+  }
+
+  handleCloseRef = (element: HTMLElement | null) => {
+    this.closeRef = element
   }
 
   getIconSize = () => {
@@ -122,7 +149,8 @@ class Tag extends Component<TagProps> {
       disabled,
       readOnly,
       text,
-      onClick,
+      href,
+      renderIcon,
       margin,
       styles
     } = this.props
@@ -139,28 +167,60 @@ class Tag extends Component<TagProps> {
       return this.state.iconHovered ? 'actionSecondaryHoverColor' : 'baseColor'
     }
 
+    const isInteractive = this.interactive
+    const isDisabled = disabled || readOnly
+    const BodyElement: React.ElementType = href
+      ? 'a'
+      : this.props.onClick
+      ? 'button'
+      : 'span'
+
+    const bodyProps: Record<string, unknown> = {}
+    if (BodyElement === 'a') {
+      bodyProps.href = isDisabled ? undefined : href
+    } else if (BodyElement === 'button') {
+      bodyProps.type = 'button'
+      bodyProps.disabled = isDisabled
+    }
+    if (isInteractive) {
+      bodyProps.onClick = this.handleClick
+      bodyProps['aria-disabled'] = isDisabled ? 'true' : undefined
+    }
+
     return (
       <View
         {...passthroughProps}
         elementRef={this.handleRef}
         css={styles?.tag}
         className={className}
-        as={onClick ? 'button' : 'span'}
+        as="span"
         margin={margin}
-        type={onClick ? 'button' : undefined}
-        {...(onClick && { onClick: this.handleClick })}
-        disabled={disabled || readOnly}
         display={undefined}
         title={typeof text === 'string' ? text : undefined}
         data-cid="Tag"
-        onMouseEnter={this.handleIconMouseEnter}
-        onMouseLeave={this.handleIconMouseLeave}
       >
-        <span css={styles?.text}>{text}</span>
-        {onClick && dismissible ? (
-          <span css={styles?.icon}>
-            <XInstUIIcon size={this.getIconSize()} color={getIconColor()} />
-          </span>
+        <BodyElement css={styles?.body} ref={this.handleBodyRef} {...bodyProps}>
+          {renderIcon ? (
+            <span css={styles?.leadIcon}>
+              {renderIconWithProps(renderIcon, this.getIconSize(), undefined)}
+            </span>
+          ) : null}
+          <span css={styles?.text}>{text}</span>
+        </BodyElement>
+        {dismissible ? (
+          <button
+            type="button"
+            css={styles?.closeButton}
+            ref={this.handleCloseRef}
+            onClick={this.handleDismiss}
+            onMouseEnter={this.handleIconMouseEnter}
+            onMouseLeave={this.handleIconMouseLeave}
+            disabled={isDisabled}
+          >
+            <span css={styles?.closeIcon}>
+              <XInstUIIcon size={this.getIconSize()} color={getIconColor()} />
+            </span>
+          </button>
         ) : null}
       </View>
     )
