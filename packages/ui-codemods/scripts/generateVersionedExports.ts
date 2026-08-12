@@ -81,8 +81,8 @@ function parseVersionedComponents(filePath: string): string[] {
       // Extract exported names
       if (node.specifiers && node.specifiers.length > 0) {
         node.specifiers.forEach((spec: any) => {
-          if (spec.local && spec.local.name) {
-            components.push(spec.local.name)
+          if (spec.exported && spec.exported.name) {
+            components.push(spec.exported.name)
           }
         })
       }
