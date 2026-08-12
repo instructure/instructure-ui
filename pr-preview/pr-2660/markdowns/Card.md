@@ -39,6 +39,24 @@ type: example
 </div>
 ```
 
+### Auto sizing (prototype)
+
+For `variant="base"`, `size="auto"` measures the Card's own rendered width
+(via a CSS container query, using the same breakpoints as the explicit
+sizes) and picks `sm`/`md`/`lg` padding and border radius itself — no size
+prop needed. Resize the panel below to see it change.
+
+```js
+---
+type: example
+---
+<div style={{ resize: 'horizontal', overflow: 'auto', minWidth: '10rem', maxWidth: '100%', border: '1px dashed #999', padding: '0.5rem' }}>
+  <Card size="auto">
+    <Text variant="content">Resize this panel's right edge to see padding and border radius change.</Text>
+  </Card>
+</div>
+```
+
 ### Nested cards
 
 The `nested` variant is meant to be placed inside a `base` Card. It omits the
@@ -182,7 +200,7 @@ type: embed
 |-----------|------|------|----------|---------|-------------|
 | Card | children | `ReactNode` | No | - | The content to be rendered inside the Card |
 | Card | variant | `'base' \| 'nested'` | No | `'base'` | `base` renders a background, border color, and shadow. `nested` is meant to be placed inside a `base` Card and omits the background, border color, and shadow. |
-| Card | size | `'sm' \| 'md' \| 'lg'` | No | `'md'` | Scales padding and border radius. For `variant="base"` only, `size` also applies min-/max-width breakpoints: `sm` applies a max-width, `md` applies a min- and max-width, and `lg` applies a min-width. `nested` doesn't enforce a width — its available space is already constrained by its parent `base` Card. |
+| Card | size | `'sm' \| 'md' \| 'lg' \| 'auto'` | No | `'md'` | Scales padding and border radius. For `variant="base"` only, `size` also applies min-/max-width breakpoints: `sm` applies a max-width, `md` applies a min- and max-width, and `lg` applies a min-width. `nested` doesn't enforce a width — its available space is already constrained by its parent `base` Card. `"auto"` is only supported for `variant="base"`. Instead of a fixed size, the Card measures its own rendered width (via a CSS container query, using the same breakpoints as the explicit sizes) and picks `sm`/`md`/`lg` accordingly. Prefer an explicit size for `nested` Cards, where size is a deliberate content choice rather than a reflection of available space. |
 
 ### Usage
 
