@@ -54,6 +54,15 @@ describe('updateInstUIImportVersions', () => {
     )
   })
 
+  it('rewrites an import that @instructure/ui re-exports under an alias', () => {
+    runInlineTest(
+      updateInstUIImportVersions,
+      { versionTo: 'v11.7' },
+      makeFileInfo(`import { TreeBrowserCollection } from '@instructure/ui'`),
+      `import { TreeBrowserCollection } from '@instructure/ui/v11_7'`
+    )
+  })
+
   it('rewrites versioned import from versionFrom to versionTo', () => {
     runInlineTest(
       updateInstUIImportVersions,
