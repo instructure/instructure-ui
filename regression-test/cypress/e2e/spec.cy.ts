@@ -113,6 +113,7 @@ const PAGES: PageSpec[] = [
   { slug: 'alert', title: 'Alert' },
   { slug: 'avatar', title: 'Avatar', wait: 300 },
   { slug: 'badge', title: 'Badge' },
+  { slug: 'banner', title: 'Banner' },
   { slug: 'billboard', title: 'Billboard' },
   {
     slug: 'breadcrumb',

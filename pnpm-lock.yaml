@@ -662,6 +662,9 @@ importers:
       '@instructure/ui-badge':
         specifier: workspace:*
         version: link:../ui-badge
+      '@instructure/ui-banner':
+        specifier: workspace:*
+        version: link:../ui-banner
       '@instructure/ui-billboard':
         specifier: workspace:*
         version: link:../ui-billboard
@@ -1170,6 +1173,61 @@ importers:
       vitest:
         specifier: ^4.1.9
         version: 4.1.9(@types/node@22.19.15)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
+
+  packages/ui-banner:
+    dependencies:
+      '@babel/runtime':
+        specifier: ^7.29.7
+        version: 7.29.7
+      '@instructure/console':
+        specifier: workspace:*
+        version: link:../console
+      '@instructure/emotion':
+        specifier: workspace:*
+        version: link:../emotion
+      '@instructure/shared-types':
+        specifier: workspace:*
+        version: link:../shared-types
+      '@instructure/ui-buttons':
+        specifier: workspace:*
+        version: link:../ui-buttons
+      '@instructure/ui-heading':
+        specifier: workspace:*
+        version: link:../ui-heading
+      '@instructure/ui-icons':
+        specifier: workspace:*
+        version: link:../ui-icons
+      '@instructure/ui-react-utils':
+        specifier: workspace:*
+        version: link:../ui-react-utils
+      '@instructure/ui-text':
+        specifier: workspace:*
+        version: link:../ui-text
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
+      react:
+        specifier: 18.3.1
+        version: 18.3.1
+    devDependencies:
+      '@instructure/ui-axe-check':
+        specifier: workspace:*
+        version: link:../ui-axe-check
+      '@instructure/ui-babel-preset':
+        specifier: workspace:*
+        version: link:../ui-babel-preset
+      '@instructure/ui-color-utils':
+        specifier: workspace:*
+        version: link:../ui-color-utils
+      '@testing-library/jest-dom':
+        specifier: ^6.9.1
+        version: 6.9.1
+      '@testing-library/react':
+        specifier: 16.3.2
+        version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@18.3.1)(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      vitest:
+        specifier: ^4.1.9
+        version: 4.1.9(@types/node@24.1.0)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
 
   packages/ui-billboard:
     dependencies:
@@ -3903,8 +3961,8 @@ importers:
         specifier: workspace:*
         version: link:../command-utils
       '@instructure/instructure-design-tokens':
-        specifier: github:instructure/instructure-design-tokens#v1.5.0
-        version: https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/ae8f600e8ad4cbadddbaad857f0b6477c4a1e1d6
+        specifier: github:instructure/instructure-design-tokens#v1.8.0
+        version: https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/b85c96436131df6a23174a54bcbd3b03a5da1b8a
       dprint:
         specifier: ^0.55.1
         version: 0.55.1
@@ -7065,8 +7123,8 @@ packages:
       '@types/node':
         optional: true
 
-  '@instructure/instructure-design-tokens@https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/ae8f600e8ad4cbadddbaad857f0b6477c4a1e1d6':
-    resolution: {gitHosted: true, tarball: https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/ae8f600e8ad4cbadddbaad857f0b6477c4a1e1d6}
+  '@instructure/instructure-design-tokens@https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/b85c96436131df6a23174a54bcbd3b03a5da1b8a':
+    resolution: {gitHosted: true, tarball: https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/b85c96436131df6a23174a54bcbd3b03a5da1b8a}
     version: 1.0.0
 
   '@isaacs/cliui@8.0.2':
@@ -14191,7 +14249,7 @@ snapshots:
       '@commitlint/top-level': 21.2.0
       '@commitlint/types': 21.2.0
       git-raw-commits: 5.0.1(conventional-commits-parser@6.4.0)
-      tinyexec: 1.0.4
+      tinyexec: 1.2.4
     transitivePeerDependencies:
       - conventional-commits-filter
       - conventional-commits-parser
@@ -14865,7 +14923,7 @@ snapshots:
     optionalDependencies:
       '@types/node': 22.19.15
 
-  '@instructure/instructure-design-tokens@https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/ae8f600e8ad4cbadddbaad857f0b6477c4a1e1d6':
+  '@instructure/instructure-design-tokens@https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/b85c96436131df6a23174a54bcbd3b03a5da1b8a':
     dependencies:
       glob: 13.0.6
 
