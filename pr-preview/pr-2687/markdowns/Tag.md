@@ -20,11 +20,7 @@ to match the Tag `size`.
 ---
 type: example
 ---
-<div>
-  <Tag text="Small" size="small" renderIcon={<GlobeInstUIIcon />} margin="0 general.spaceXs 0 0" />
-  <Tag text="Medium" renderIcon={<GlobeInstUIIcon />} margin="0 general.spaceXs 0 0" />
-  <Tag text="Large" size="large" renderIcon={<GlobeInstUIIcon />} margin="0 general.spaceXs 0 0" />
-</div>
+<Tag text="Tag with icon" renderIcon={<GlobeInstUIIcon />} />
 ```
 
 ### Dismissible
