@@ -39,6 +39,37 @@ ReactDOM.render(
 )
 ```
 
+##### Using the themes as CSS custom properties:
+
+Every theme also ships as a plain stylesheet that declares its shared tokens as CSS custom
+properties. Import the one you need directly from the package:
+
+```js
+import '@instructure/ui-themes/light.css'
+import '@instructure/ui-themes/dark.css'
+import '@instructure/ui-themes/legacyCanvas.css'
+import '@instructure/ui-themes/legacyCanvasHighContrast.css'
+```
+
+Each of these scopes its custom properties to a class named `instui-theme-` plus the theme
+name — `instui-theme-light`, `instui-theme-dark`, `instui-theme-legacyCanvas`, and
+`instui-theme-legacyCanvasHighContrast`. Pick a theme by putting that class on an element.
+Everything inside it reads the theme's values:
+
+```html
+<div class="instui-theme-light">
+  <!-- --colors-* and the other tokens resolve to the light theme here -->
+</div>
+```
+
+There is one more stylesheet that follows the operating system setting instead of a class. It
+declares the light theme on `:root` and swaps to the dark theme under
+`prefers-color-scheme: dark`:
+
+```js
+import '@instructure/ui-themes/cssThemesWithMediaQueries.css'
+```
+
 > You can read more about how our theming system works and how to use it:
 
 - [Legacy theme overrides](/#legacy-theme-overrides).

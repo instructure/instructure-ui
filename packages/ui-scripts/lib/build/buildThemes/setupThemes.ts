@@ -33,6 +33,10 @@ import generateComponent, {
   generateComponentType
 } from './generateComponents.ts'
 import { resolveBin, runCommandAsync } from '@instructure/command-utils'
+import buildCSSVariables from './buildCSSVariables.ts'
+
+// namespaces the generated theme class names, e.g. `.instui-theme-light`
+const CSS_THEME_CLASS_PREFIX = 'instui-theme-'
 
 // transform to an object for easier handling
 export const transformThemes = (themes: any, input: any) =>
@@ -96,11 +100,18 @@ const getTypeImports = (componentTypes: any, theme: any): string => {
   return imports
 }
 
-const setupThemes = async (targetPath: string, input: any): Promise<void> => {
+const setupThemes = async (
+  targetPath: string,
+  input: any,
+  cssTargetPath: string
+): Promise<void> => {
   //clear old themes
   await promises.rm(targetPath, { recursive: true, force: true })
   //make new root folder
   await promises.mkdir(targetPath, { recursive: true })
+  //clear old stylesheets
+  await promises.rm(cssTargetPath, { recursive: true, force: true })
+  await promises.mkdir(cssTargetPath, { recursive: true })
 
   // we need to put sharedTokensTypes to the commonTypes where it makes sense, however it comes from token studio as a component. This variable is seen by both parts of the code
   let sharedTokensTypes = ''
@@ -193,12 +204,12 @@ const setupThemes = async (targetPath: string, input: any): Promise<void> => {
           sharedTokensTypes = componentTypes
           const componentFileContent = `
 
-        import { SharedTokens } from '../commonTypes'
+        import type { SharedTokens } from '../commonTypes'
         import type { Semantics } from "./semantics"
 
         const ${fullComponentName} = (semantic: Semantics): ${capitalize(
-          fullComponentName
-        )} => ({${componentThemeVars}})
+            fullComponentName
+          )} => ({${componentThemeVars}})
         export default ${fullComponentName}
           `
 
@@ -368,11 +379,44 @@ const setupThemes = async (targetPath: string, input: any): Promise<void> => {
     }
   `
   await createFile(`${targetPath}/index.ts`, exportIndexFileContent)
+
+  // generate themes  as css variables
+  const cssVarObject = await buildCSSVariables(targetPath)
+
+  const cssThemes = Object.keys(cssVarObject)
+  for (let i = 0; i < cssThemes.length; i++) {
+    const cssTheme = cssThemes[i]
+    await createFile(
+      `${cssTargetPath}/${cssTheme}.css`,
+      `.${CSS_THEME_CLASS_PREFIX}${cssTheme}{
+      ${cssVarObject[cssTheme]}
+      }`
+    )
+  }
+
+  const cssThemesWithMediaQueries = `
+      :root {
+        color-scheme: light;
+        ${cssVarObject['light']}
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          color-scheme: dark;
+          ${cssVarObject['dark']}
+        }
+      }
+    `
+  await createFile(
+    `${cssTargetPath}/cssThemesWithMediaQueries.css`,
+    `${cssThemesWithMediaQueries}`
+  )
+
   try {
     const dprintBin = resolveBin('dprint')
     const { stdout, stderr } = await runCommandAsync(dprintBin, [
       'fmt',
-      `${targetPath}/**/*.*`
+      `${targetPath}/**/*.*`,
+      `${cssTargetPath}/**/*.css`
     ])
     console.log('[dprint]', stdout)
     if (stderr) {

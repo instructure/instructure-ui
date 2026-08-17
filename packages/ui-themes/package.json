@@ -35,8 +35,11 @@
   "publishConfig": {
     "access": "public"
   },
-  "sideEffects": false,
+  "sideEffects": [
+    "*.css"
+  ],
   "exports": {
+    "./*.css": "./css/*.css",
     "./lib/*": "./lib/*",
     "./es/*": "./es/*",
     "./types/*": "./types/*",
