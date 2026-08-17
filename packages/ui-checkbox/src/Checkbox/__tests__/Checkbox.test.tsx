@@ -279,30 +279,28 @@ describe('<Checkbox />', () => {
   })
 
   describe('`toggle` variant', () => {
-    it('should expose a button role and pressed state', () => {
-      renderCheckbox({ variant: 'toggle', defaultChecked: true })
-      const toggle = screen.getByRole('button')
+    it('should expose a button role and pressed state', async () => {
+      await renderCheckbox({ variant: 'toggle', defaultChecked: true })
+      const toggle = page.getByRole('button').element()
 
       expect(toggle).toHaveAttribute('aria-pressed', 'true')
-      expect(screen.queryByRole('checkbox')).not.toBeInTheDocument()
+      expect(page.getByRole('checkbox').query()).not.toBeInTheDocument()
     })
 
     it('should update the pressed state when toggled', async () => {
-      renderCheckbox({ variant: 'toggle', defaultChecked: false })
-      const toggle = screen.getByRole('button')
+      await renderCheckbox({ variant: 'toggle', defaultChecked: false })
+      const toggle = page.getByRole('button')
 
-      expect(toggle).toHaveAttribute('aria-pressed', 'false')
+      await expect.element(toggle).toHaveAttribute('aria-pressed', 'false')
 
-      await userEvent.click(toggle)
+      await userEvent.click(toggle, { force: true })
 
-      await waitFor(() => {
-        expect(toggle).toHaveAttribute('aria-pressed', 'true')
-      })
+      await expect.element(toggle).toHaveAttribute('aria-pressed', 'true')
     })
 
-    it('should leave the `simple` variant as a checkbox', () => {
-      renderCheckbox({ variant: 'simple' })
-      const input = screen.getByRole('checkbox')
+    it('should leave the `simple` variant as a checkbox', async () => {
+      await renderCheckbox({ variant: 'simple' })
+      const input = page.getByRole('checkbox').element()
 
       expect(input).not.toHaveAttribute('role')
       expect(input).not.toHaveAttribute('aria-pressed')
