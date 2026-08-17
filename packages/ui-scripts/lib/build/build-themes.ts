@@ -32,7 +32,8 @@ export default {
   handler: async () => {
     await setupThemes(
       'packages/ui-themes/src/themes/newThemeTokens',
-      themeTokens
+      themeTokens,
+      'packages/ui-themes/css'
     )
   }
 }
