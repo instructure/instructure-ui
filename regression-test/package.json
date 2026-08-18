@@ -25,13 +25,13 @@
     "typescript": "6.0.3"
   },
   "dependencies": {
-    "@fontsource/lato": "^5.2.7",
+    "@fontsource/lato": "^5.3.0",
     "@instructure/ui": "file:../packages/ui",
     "@instructure/ui-icons": "file:../packages/ui-icons",
     "@instructure/ui-scripts": "file:../packages/ui-scripts",
-    "next": "16.2.10",
-    "react": "19.2.7",
-    "react-dom": "19.2.7"
+    "next": "16.2.11",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
   },
   "allowScripts": {
     "file:.pnpm/cypress@15.13.0/node_modules/cypress": true
