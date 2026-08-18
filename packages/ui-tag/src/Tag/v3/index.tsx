@@ -27,7 +27,7 @@ import { Component } from 'react'
 import { XInstUIIcon, renderIconWithProps } from '@instructure/ui-icons'
 import { View } from '@instructure/ui-view/latest'
 import type { ViewProps } from '@instructure/ui-view/latest'
-import { omitProps } from '@instructure/ui-react-utils'
+import { omitProps, callRenderProp } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { withStyleNew } from '@instructure/emotion'
 
@@ -49,7 +49,6 @@ class Tag extends Component<TagProps> {
   static allowedProps = allowedProps
   static defaultProps = {
     size: 'medium',
-    dismissible: false,
     disabled: false,
     readOnly: false
   }
@@ -75,8 +74,8 @@ class Tag extends Component<TagProps> {
   }
 
   get isWholeTagButton() {
-    const { onClick, href, dismissible } = this.props
-    return typeof onClick === 'function' && !href && !dismissible
+    const { onClick, href, renderDismissButtonLabel } = this.props
+    return typeof onClick === 'function' && !href && !renderDismissButtonLabel
   }
 
   get focused() {
@@ -157,7 +156,7 @@ class Tag extends Component<TagProps> {
   render() {
     const {
       className,
-      dismissible,
+      renderDismissButtonLabel,
       disabled,
       readOnly,
       text,
@@ -166,6 +165,11 @@ class Tag extends Component<TagProps> {
       margin,
       styles
     } = this.props
+
+    const dismissLabel =
+      renderDismissButtonLabel != null
+        ? callRenderProp(renderDismissButtonLabel)
+        : undefined
 
     const passthroughProps = View.omitViewProps(
       omitProps(this.props, Tag.allowedProps),
@@ -232,7 +236,7 @@ class Tag extends Component<TagProps> {
           ) : null}
           <span css={styles?.text}>{text}</span>
         </BodyElement>
-        {dismissible ? (
+        {dismissLabel ? (
           <button
             type="button"
             css={styles?.closeButton}
@@ -241,6 +245,7 @@ class Tag extends Component<TagProps> {
             onMouseEnter={this.handleIconMouseEnter}
             onMouseLeave={this.handleIconMouseLeave}
             disabled={isDisabled}
+            aria-label={dismissLabel as string}
           >
             <span css={styles?.closeIcon}>
               <XInstUIIcon size={this.getIconSize()} color={getIconColor()} />

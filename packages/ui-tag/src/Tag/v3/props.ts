@@ -44,15 +44,13 @@ type TagOwnProps = {
    */
   readOnly?: boolean
   /**
-   * When `true`, renders a close button. Clicking the close
-   * button dismisses the tag via the `onDismiss` callback. When implementing
-   * dismissible tags, be sure to provide an accessible label for the close
-   * button (e.g. via `AccessibleContent` on the `text`) so screen readers
-   * announce that the tag is dismissible.
+   * Providing this prop renders a close button and makes the Tag dismissible.
+   * The value is used as the close button's screen reader label.
+   * Clicking the close button calls `onDismiss`.
    */
-  dismissible?: boolean
+  renderDismissButtonLabel?: Renderable
   /**
-   * Called when the close button of a `dismissible` Tag is clicked.
+   * Called when the close button is clicked.
    */
   onDismiss?: (event: React.MouseEvent<ViewProps & Element>) => void
   /**
@@ -98,7 +96,7 @@ const allowedProps: AllowedPropKeys = [
   'text',
   'disabled',
   'readOnly',
-  'dismissible',
+  'renderDismissButtonLabel',
   'onDismiss',
   'renderIcon',
   'href',

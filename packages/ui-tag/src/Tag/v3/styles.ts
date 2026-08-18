@@ -41,11 +41,12 @@ const generateStyle = (
   props: TagProps,
   sharedTokens: SharedTokens
 ): TagStyle => {
-  const { size, onClick, href, dismissible, disabled, readOnly } = props
+  const { size, onClick, href, renderDismissButtonLabel, disabled, readOnly } =
+    props
 
   const isInteractive = !!href || !!onClick
   const isDisabled = !!disabled || !!readOnly
-  const isWholeTagButton = !!onClick && !href && !dismissible
+  const isWholeTagButton = !!onClick && !href && !renderDismissButtonLabel
   const isBodyInteractive = isInteractive && !isWholeTagButton
 
   const focusOutline = calcFocusOutlineStyles(sharedTokens.focusOutline)

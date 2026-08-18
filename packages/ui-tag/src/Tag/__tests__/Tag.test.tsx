@@ -110,7 +110,11 @@ describe('<Tag />', async () => {
   it('should render a close button and fire onDismiss when it is dismissible', async () => {
     const onDismiss = vi.fn()
     const { container } = render(
-      <Tag text="Summer" dismissible onDismiss={onDismiss} />
+      <Tag
+        text="Summer"
+        renderDismissButtonLabel="Remove Summer"
+        onDismiss={onDismiss}
+      />
     )
     const icon = container.querySelector('svg')
     expect(icon).toHaveAttribute('name', 'X')
@@ -127,7 +131,12 @@ describe('<Tag />', async () => {
     const onClick = vi.fn()
     const onDismiss = vi.fn()
     render(
-      <Tag text="Summer" onClick={onClick} dismissible onDismiss={onDismiss} />
+      <Tag
+        text="Summer"
+        onClick={onClick}
+        renderDismissButtonLabel="Remove Summer"
+        onDismiss={onDismiss}
+      />
     )
 
     // body button (contains the text) and close button (contains the X icon)
@@ -147,7 +156,7 @@ describe('<Tag />', async () => {
       <Tag
         text="Summer"
         onClick={onClick}
-        dismissible
+        renderDismissButtonLabel="Remove Summer"
         onDismiss={onDismiss}
         disabled
       />
@@ -166,7 +175,12 @@ describe('<Tag />', async () => {
 
   it('should move focus to the link body then the close button via Tab', async () => {
     render(
-      <Tag text="Summer" href="/summer" dismissible onDismiss={() => {}} />
+      <Tag
+        text="Summer"
+        href="/summer"
+        renderDismissButtonLabel="Remove Summer"
+        onDismiss={() => {}}
+      />
     )
     const link = screen.getByRole('link')
     const closeButton = screen.getByRole('button')
@@ -180,6 +194,19 @@ describe('<Tag />', async () => {
 
   it('should meet a11y standards', async () => {
     const { container } = render(<Tag text="Summer" />)
+    const axeCheck = await runAxeCheck(container)
+
+    expect(axeCheck).toBe(true)
+  })
+
+  it('should meet a11y standards when dismissible (close button is labelled)', async () => {
+    const { container } = render(
+      <Tag
+        text="Summer"
+        renderDismissButtonLabel="Remove Summer"
+        onDismiss={() => {}}
+      />
+    )
     const axeCheck = await runAxeCheck(container)
 
     expect(axeCheck).toBe(true)

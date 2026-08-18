@@ -26,21 +26,18 @@ type: example
 
 ### Dismissible
 
-When the `dismissible` prop is added to a clickable Tag, the button
-renders an X/close icon (the Tag should be dismissed via the `onDismiss`
-prop). When implementing dismissable tags, be sure to add [AccessibleContent](AccessibleContent) to clarify that the tag is dismissible to screen readers.
+Provide `renderDismissButtonLabel` to render a close (X) button and make the
+Tag dismissible. Its value is the close button's screen reader label, so it
+must describe the dismiss action. Clicking the close
+button calls `onDismiss`.
 
 ```js
 ---
 type: example
 ---
 <Tag
-  text={
-    <AccessibleContent alt="Remove dismissible tag">
-      Dismissible tag
-    </AccessibleContent>
-  }
-  dismissible
+  text="Dismissible tag"
+  renderDismissButtonLabel="Remove dismissible tag"
   margin="0 general.spaceXs 0 0"
   onDismiss={function () {
     alert("This Tag was dismissed")
@@ -69,7 +66,7 @@ type: example
 ---
 <Tag
   text="Dismissible Disabled"
-  dismissible
+  renderDismissButtonLabel="Remove Dismissible Disabled"
   disabled
   margin="0 general.spaceXs 0 0"
   onDismiss={function () {
@@ -114,7 +111,7 @@ type: embed
 ---
 <Guidelines>
   <Figure recommendation="a11y" title="Accessibility">
-    <Figure.Item>When implementing dismissable tags, be sure to add AccessibleContent to clarify that the tag is dismissible to screen readers</Figure.Item>
+    <Figure.Item>When implementing dismissible tags, provide a descriptive `renderDismissButtonLabel` (e.g. "Remove Summer") so screen readers announce what the close button does</Figure.Item>
   </Figure>
 </Guidelines>
 ```
