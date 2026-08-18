@@ -123,7 +123,10 @@ jobs:
         env:
           PR_NUMBER: ${{ github.event.pull_request.number }}
         run: |
-          node -e "
+          # Quoted heredoc, not `node -e "..."`: in a double-quoted shell string
+          # the backticks around the rule name below would be command
+          # substitution, and the rule name would vanish from the comment.
+          node <<'NODE'
             const fs = require('fs');
             const { summary: s, results, a11y = [] } = JSON.parse(fs.readFileSync('regression-test/.report/summary.json', 'utf8'));
             const base = 'https://instructure.design/visual-regression/pr-' + process.env.PR_NUMBER;
@@ -164,7 +167,7 @@ jobs:
             out += 'diff_images<<DIFFIMAGES_EOF\n' + md + '\nDIFFIMAGES_EOF\n';
             out += 'a11y<<A11Y_EOF\n' + a11yMd + '\nA11Y_EOF\n';
             fs.appendFileSync(process.env.GITHUB_OUTPUT, out);
-          "
+          NODE
 
       - name: Post PR comment
         uses: marocchino/sticky-pull-request-comment@v3
