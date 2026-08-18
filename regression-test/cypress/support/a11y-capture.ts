@@ -74,7 +74,6 @@ export type CapturedPage = {
   violations: CapturedViolation[]
 }
 
-// Longer than this and the label stops being a label.
 const MAX_LABEL_TEXT = 60
 
 /**
