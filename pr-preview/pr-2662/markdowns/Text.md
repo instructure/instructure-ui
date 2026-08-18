@@ -222,7 +222,7 @@ Deprecated `lineHeight` values:
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
 | Text | as | `AsElementType` | No | `'span'` | the element type to render as |
-| Text | color | `\| 'inherit' \| 'primary' \| 'secondary' \| 'brand' \| 'success' \| 'danger' \| 'warning' \| 'primary-inverse' \| 'secondary-inverse' \| 'primary-on' // used on colored surfaces like warning, same color in dark and light themes \| 'secondary-on' // used on colored surfaces like warning, same color in dark and light themes \| 'ai-highlight'` | No | - | Color of the text |
+| Text | color | `\| 'inherit' \| 'primary' \| 'secondary' \| 'brand' \| 'success' \| 'danger' \| 'warning' \| 'primary-inverse' \| 'secondary-inverse' \| 'primary-on' \| 'secondary-on' \| 'ai-highlight'` | No | - | Color of the text. `primary-on` and `secondary-on` are meant for use on colored surfaces (like `warning`) and keep the same color in dark and light themes. |
 | Text | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to the underlying HTML element |
 | Text | fontStyle | `'italic' \| 'normal'` | No | - |  |
 | Text | letterSpacing | `'normal' \| 'condensed' \| 'expanded'` | No | `'normal'` |  |
