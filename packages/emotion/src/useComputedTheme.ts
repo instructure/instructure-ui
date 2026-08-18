@@ -29,14 +29,9 @@ import { applyColorModifiers } from './styleUtils/applyColorModifiers.js'
  * ---
  * category: utilities/themes
  * ---
- * A hook that returns the fully resolved theme object from the context, with all token layers evaluated.
+ * A hook that returns the fully resolved v11.7+ theme object from the context.
  *
- * The raw `newTheme` stored on the context exposes its layers as functions
- * that depend on the previous layer (`semantics` takes `primitives`,
- * `components` and `sharedTokens` take `semantics`). This hook runs those
- * functions for you and returns the computed values, so you can read
- * tokens directly without having to know the evaluation order.
- *
+ * @module useComputedTheme
  * @returns An object containing the computed `primitives`, `semantics`,
  *          `components` and `sharedTokens` of the current theme.
  */
