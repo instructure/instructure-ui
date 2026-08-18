@@ -54,20 +54,20 @@ const generateStyle = (
   const sizeVariants = {
     small: {
       height: componentTheme.heightSmall,
-      paddingLeft: componentTheme.paddingHorizontalSmall,
-      paddingRight: componentTheme.paddingHorizontalSmall,
+      paddingInlineStart: componentTheme.iconMargin,
+      paddingInlineEnd: componentTheme.paddingHorizontalSmall,
       fontSize: componentTheme.fontSizeSmall
     },
     medium: {
       height: componentTheme.heightMedium,
-      paddingLeft: componentTheme.paddingHorizontal,
-      paddingRight: componentTheme.paddingHorizontal,
+      paddingInlineStart: componentTheme.iconMargin,
+      paddingInlineEnd: componentTheme.paddingHorizontal,
       fontSize: `calc(${componentTheme.fontSizeMedium} - 0.0625rem)`
     },
     large: {
       height: componentTheme.heightLarge,
-      paddingLeft: componentTheme.paddingHorizontalSmall,
-      paddingRight: componentTheme.paddingHorizontal,
+      paddingInlineStart: componentTheme.iconMargin,
+      paddingInlineEnd: componentTheme.paddingHorizontal,
       fontSize: `calc(${componentTheme.fontSizeLarge} - 0.0625rem)`
     }
   }
@@ -128,7 +128,7 @@ const generateStyle = (
       label: 'tag__leadIcon',
       display: 'inline-flex',
       alignItems: 'center',
-      marginInlineEnd: componentTheme.iconMargin,
+      marginInlineEnd: componentTheme.leadElementLabel,
       marginInlineStart: 0
     },
     text: {
