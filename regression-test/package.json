@@ -29,7 +29,7 @@
     "@instructure/ui": "file:../packages/ui",
     "@instructure/ui-icons": "file:../packages/ui-icons",
     "@instructure/ui-scripts": "file:../packages/ui-scripts",
-    "next": "16.2.10",
+    "next": "16.2.12",
     "react": "19.2.7",
     "react-dom": "19.2.7"
   },
