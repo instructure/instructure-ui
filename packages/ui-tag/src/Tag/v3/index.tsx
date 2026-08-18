@@ -74,14 +74,26 @@ class Tag extends Component<TagProps> {
     return !!this.props.href || typeof this.props.onClick === 'function'
   }
 
+  get isWholeTagButton() {
+    const { onClick, href, dismissible } = this.props
+    return typeof onClick === 'function' && !href && !dismissible
+  }
+
   get focused() {
-    return isActiveElement(this.bodyRef) || isActiveElement(this.closeRef)
+    return (
+      isActiveElement(this.ref) ||
+      isActiveElement(this.bodyRef) ||
+      isActiveElement(this.closeRef)
+    )
   }
 
   focus = () => {
-    const target =
-      this.interactive && this.bodyRef ? this.bodyRef : this.closeRef
-    target?.focus()
+    const target = this.isWholeTagButton
+      ? this.ref
+      : this.interactive && this.bodyRef
+      ? this.bodyRef
+      : this.closeRef
+    ;(target as HTMLElement | null)?.focus()
   }
 
   handleIconMouseEnter = () => {
@@ -167,13 +179,26 @@ class Tag extends Component<TagProps> {
       return this.state.iconHovered ? 'actionSecondaryHoverColor' : 'baseColor'
     }
 
-    const isInteractive = this.interactive
     const isDisabled = disabled || readOnly
-    const BodyElement: React.ElementType = href
+    const isWholeTagButton = this.isWholeTagButton
+    const BodyElement: React.ElementType = isWholeTagButton
+      ? 'span'
+      : href
       ? 'a'
       : this.props.onClick
       ? 'button'
       : 'span'
+    const isBodyInteractive = !isWholeTagButton && this.interactive
+
+    const rootProps: Record<string, unknown> = isWholeTagButton
+      ? {
+          as: 'button',
+          type: 'button',
+          disabled: isDisabled,
+          onClick: this.handleClick,
+          'aria-disabled': isDisabled ? 'true' : undefined
+        }
+      : { as: 'span' }
 
     const bodyProps: Record<string, unknown> = {}
     if (BodyElement === 'a') {
@@ -182,7 +207,7 @@ class Tag extends Component<TagProps> {
       bodyProps.type = 'button'
       bodyProps.disabled = isDisabled
     }
-    if (isInteractive) {
+    if (isBodyInteractive) {
       bodyProps.onClick = this.handleClick
       bodyProps['aria-disabled'] = isDisabled ? 'true' : undefined
     }
@@ -193,11 +218,11 @@ class Tag extends Component<TagProps> {
         elementRef={this.handleRef}
         css={styles?.tag}
         className={className}
-        as="span"
         margin={margin}
         display={undefined}
         title={typeof text === 'string' ? text : undefined}
         data-cid="Tag"
+        {...rootProps}
       >
         <BodyElement css={styles?.body} ref={this.handleBodyRef} {...bodyProps}>
           {renderIcon ? (

@@ -41,10 +41,12 @@ const generateStyle = (
   props: TagProps,
   sharedTokens: SharedTokens
 ): TagStyle => {
-  const { size, onClick, href, disabled, readOnly } = props
+  const { size, onClick, href, dismissible, disabled, readOnly } = props
 
   const isInteractive = !!href || !!onClick
   const isDisabled = !!disabled || !!readOnly
+  const isWholeTagButton = !!onClick && !href && !dismissible
+  const isBodyInteractive = isInteractive && !isWholeTagButton
 
   const focusOutline = calcFocusOutlineStyles(sharedTokens.focusOutline)
 
@@ -87,6 +89,12 @@ const generateStyle = (
         transition: `background-color ${componentTheme.transitionTiming}`,
         '&:hover': { backgroundColor: componentTheme.defaultBackgroundHover }
       }),
+      ...(isWholeTagButton && {
+        appearance: 'none',
+        cursor: isDisabled ? 'not-allowed' : 'pointer',
+        ...focusOutline,
+        transition: `background-color ${componentTheme.transitionTiming}, outline-color 0.2s, outline-offset 0.25s`
+      }),
       ...sizeVariants[size!],
       ...(isDisabled && {
         cursor: 'not-allowed',
@@ -102,7 +110,7 @@ const generateStyle = (
       minWidth: 0,
       color: 'inherit',
       font: 'inherit',
-      ...(isInteractive && {
+      ...(isBodyInteractive && {
         appearance: 'none',
         background: 'none',
         border: 0,
