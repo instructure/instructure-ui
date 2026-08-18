@@ -541,7 +541,7 @@ type: example
       }
     }}
   >
-    <Table caption="Independent overrides: ColHeader purple, RowHeader deeppink">
+    <Table caption={() => 'Independent overrides: ColHeader purple, RowHeader deeppink'}>
       <Table.Head>
         <Table.Row>
           <Table.ColHeader id="row-headers">Row headers column - purple</Table.ColHeader>

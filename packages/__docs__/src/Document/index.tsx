@@ -24,10 +24,10 @@
 
 import React, { Component } from 'react'
 
-import { Link } from '@instructure/ui-link/latest'
-import { View } from '@instructure/ui-view/latest'
-import { Tabs } from '@instructure/ui-tabs/latest'
-import type { TabsProps } from '@instructure/ui-tabs/latest'
+import { Link } from '@instructure/ui-link'
+import { View } from '@instructure/ui-view'
+import { Tabs } from '@instructure/ui-tabs'
+import type { TabsProps } from '@instructure/ui-tabs'
 import type { NewBaseTheme } from '@instructure/ui-themes'
 import type { ComponentTheme as ComponentThemeData } from '@instructure/shared-types'
 import { SourceCodeEditor } from '@instructure/ui-source-code-editor/latest'
@@ -324,25 +324,38 @@ class Document extends Component<DocumentProps, DocumentState> {
     const importName = displayName || id
 
     // For versioned components, show the version-specific import path
-    // e.g. '@instructure/ui-avatar/v11_6' instead of '@instructure/ui-avatar'
+    // e.g. '@instructure/ui-avatar/v11_6'.
+    // For non-versioned ones just the import path e.g. '@instructure/emotion'
     const versionedPackageName =
       packageName && componentVersion && selectedMinorVersion
         ? `${packageName}/${selectedMinorVersion}`
         : packageName
-
     if (!versionedPackageName) return
+    const importHelp = componentVersion ? (
+      <>
+        This import shows how to use a specific component version. For other
+        import styles, see the{' '}
+        <Link
+          href="component-versioning"
+          onClick={(e) => {
+            e.preventDefault()
+            navigateTo('component-versioning')
+          }}
+        >
+          Component versioning
+        </Link>{' '}
+        guide.
+      </>
+    ) : (
+      ``
+    )
 
     const example = `\
 import { ${importName} } from '${versionedPackageName}'`
 
     return (
       <View margin="general.space2xl 0" display="block">
-        <Heading
-          level="h2"
-          as="h3"
-          id={`${id}Usage`}
-          margin="0 0 general.spaceMd 0"
-        >
+        <Heading level="h2" as="h3" id={`${id}Usage`} margin="0 0 general.spaceMd 0">
           Usage
         </Heading>
         <SourceCodeEditor
@@ -352,18 +365,7 @@ import { ${importName} } from '${versionedPackageName}'`
           readOnly
         />
         <View as="div" margin="general.spaceMd 0 0 0">
-          This import is pinned to the selected component version; future
-          breaking changes land at new paths. For other import styles, see the{' '}
-          <Link
-            href="component-versioning"
-            onClick={(e) => {
-              e.preventDefault()
-              navigateTo('component-versioning')
-            }}
-          >
-            Component versioning
-          </Link>{' '}
-          guide.
+          {importHelp}
         </View>
       </View>
     )

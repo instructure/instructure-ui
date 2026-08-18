@@ -80,24 +80,16 @@ class TableOfContents extends Component<
   }
 
   componentDidMount() {
-    const { doc, pageElement } = this.props
+    const { pageElement } = this.props
 
     const headings = pageElement?.querySelectorAll<HTMLHeadingElement>(
       'h1, h2, h3, h4, h5, h6'
     )
     const TOCData: TableOfContentsState['TOCData'] = []
-    let hasLinkToTitle = false
-
     headings?.forEach((h) => {
       const { id, innerText, tagName } = h
-      const level = tagName[1]
       const text = innerText.toLowerCase()
       const charCount = innerText.length
-
-      if (['1', '2'].includes(level) || doc.id === id) {
-        // already has a page title
-        hasLinkToTitle = true
-      }
 
       // if header is a note or warning, leave it out
       // (e.g.: "Note", "Notes:", "Warning!", etc.)
@@ -116,21 +108,10 @@ class TableOfContents extends Component<
       TOCData.push(data)
     })
 
-    if (!hasLinkToTitle) {
-      // if there is no link to the main title,
-      // add at the beginning of the list
-      TOCData.unshift({
-        id: doc.id,
-        innerText: doc.id,
-        level: '1'
-      })
-    }
-
+    // if there is only 1 item, clear TOC, no need for list
     if (TOCData.length === 1) {
-      // if there is only 1 item, clear TOC, no need for list
       TOCData.pop()
     }
-
     this.setState({ TOCData })
   }
 
