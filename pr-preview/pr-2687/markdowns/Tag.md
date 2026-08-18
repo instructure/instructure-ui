@@ -25,21 +25,18 @@ type: example
 
 ### Dismissible
 
-When the `dismissible` prop is added to a clickable Tag, the button
-renders an X/close icon (the Tag should be dismissed via the `onDismiss`
-prop). When implementing dismissable tags, be sure to add [AccessibleContent](AccessibleContent) to clarify that the tag is dismissible to screen readers.
+Provide `renderDismissButtonLabel` to render a close (X) button and make the
+Tag dismissible. Its value is the close button's screen reader label, so it
+must describe the dismiss action. Clicking the close
+button calls `onDismiss`.
 
 ```js
 ---
 type: example
 ---
 <Tag
-  text={
-    <AccessibleContent alt="Remove dismissible tag">
-      Dismissible tag
-    </AccessibleContent>
-  }
-  dismissible
+  text="Dismissible tag"
+  renderDismissButtonLabel="Remove dismissible tag"
   margin="0 general.spaceXs 0 0"
   onDismiss={function () {
     alert("This Tag was dismissed")
@@ -68,7 +65,7 @@ type: example
 ---
 <Tag
   text="Dismissible Disabled"
-  dismissible
+  renderDismissButtonLabel="Remove Dismissible Disabled"
   disabled
   margin="0 general.spaceXs 0 0"
   onDismiss={function () {
@@ -113,7 +110,7 @@ type: embed
 ---
 <Guidelines>
   <Figure recommendation="a11y" title="Accessibility">
-    <Figure.Item>When implementing dismissable tags, be sure to add AccessibleContent to clarify that the tag is dismissible to screen readers</Figure.Item>
+    <Figure.Item>When implementing dismissible tags, provide a descriptive `renderDismissButtonLabel` (e.g. "Remove Summer") so screen readers announce what the close button does</Figure.Item>
   </Figure>
 </Guidelines>
 ```
@@ -127,8 +124,8 @@ type: embed
 | Tag | text | `string \| React.ReactNode` | Yes | - |  |
 | Tag | disabled | `boolean` | No | `false` | Whether or not to disable the tag |
 | Tag | readOnly | `boolean` | No | `false` | Works just like disabled but keeps the same styles as if it were active |
-| Tag | dismissible | `boolean` | No | `false` | When `true`, renders a close button. Clicking the close button dismisses the tag via the `onDismiss` callback. When implementing dismissible tags, be sure to provide an accessible label for the close button (e.g. via `AccessibleContent` on the `text`) so screen readers announce that the tag is dismissible. |
-| Tag | onDismiss | `(event: React.MouseEvent<ViewProps & Element>) => void` | No | - | Called when the close button of a `dismissible` Tag is clicked. |
+| Tag | renderDismissButtonLabel | `Renderable` | No | - | Providing this prop renders a close button and makes the Tag dismissible. The value is used as the close button's screen reader label. Clicking the close button calls `onDismiss`. |
+| Tag | onDismiss | `(event: React.MouseEvent<ViewProps & Element>) => void` | No | - | Called when the close button is clicked. |
 | Tag | renderIcon | `Renderable` | No | - | Add an SVG icon to the left of the Tag text. Do not add icons directly as children. When using Lucide icons, Tag will automatically pass the appropriate size prop based on the Tag's `size`. |
 | Tag | href | `string` | No | - | If you provide an `href`, the Tag body renders as a link (`<a>`). |
 | Tag | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`. |
