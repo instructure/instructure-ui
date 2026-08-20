@@ -36,7 +36,6 @@
     "@instructure/ui-themes": "workspace:*",
     "@instructure/ui-utils": "workspace:*",
     "@instructure/ui-view": "workspace:*",
-    "@instructure/uid": "workspace:*",
     "keycode": "^2"
   },
   "devDependencies": {

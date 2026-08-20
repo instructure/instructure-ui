@@ -24,6 +24,16 @@
 
 /**
  * Generates unique css safe ids for elements.
+ *
+ * @deprecated Use `useDeterministicId` (function components) or the
+ * `withDeterministicId` decorator (class components) from
+ * `@instructure/ui-react-utils` instead. Both are backed by React's `useId`, so
+ * they produce the same id on the server and the client. This counter-based
+ * helper depends on render order: the count advances once per render pass, so a
+ * server render and the subsequent client render disagree, and the id changes on
+ * every re-render. It is no longer used anywhere in InstUI and will be removed
+ * in the next major version.
+ *
  * @param instanceName - the name of the element/instance to keep track of
  * @param map - a Map<string, counter>, which counts how many times the given element/instance was rendered
  * @returns a string in a format `instanceName_intanceRenderedCount`: `Alert_4`

@@ -24,28 +24,23 @@
 import React from 'react'
 import type { DeterministicIdProviderValue } from './DeterministicIdContextProvider'
 
-declare global {
-  var __INSTUI_GLOBAL_INSTANCE_COUNTER__: Map<string, number>
-}
-const instUIInstanceCounter = '__INSTUI_GLOBAL_INSTANCE_COUNTER__'
+/**
+ * @deprecated Id generation no longer uses an instance counter map. Ids are now
+ * generated with React's built-in `useId` (see `useDeterministicId` /
+ * `withDeterministicId`), which is SSR-safe and hydration-stable without any
+ * shared counter. This map is retained only for backwards compatibility and is
+ * no longer read; it will be removed in the next major version.
+ */
+const defaultDeterministicIDMap: DeterministicIdProviderValue = new Map<
+  string,
+  number
+>()
 
 /**
- * Returns a global (window-level) instance counter map.
- * This needs to be global so that IDs are unique across application instances,
- * e.g. in module federation applications are loaded as a .js blob, this method
- * makes sure that there are no duplicate IDs across instances.
+ * @deprecated This context is no longer consumed by the id generation utilities
+ * and has no effect. It is retained only for backwards compatibility and will be
+ * removed in the next major version.
  */
-function generateInstanceCounterMap(): DeterministicIdProviderValue {
-  if (globalThis[instUIInstanceCounter]) {
-    return globalThis[instUIInstanceCounter]
-  }
-  const map = new Map<string, number>()
-  globalThis[instUIInstanceCounter] = map
-  return map
-}
-
-const defaultDeterministicIDMap = generateInstanceCounterMap()
-
 const DeterministicIdContext = React.createContext(defaultDeterministicIDMap)
 
 export { DeterministicIdContext, defaultDeterministicIDMap }

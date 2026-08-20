@@ -46,10 +46,10 @@ const nextConfig = {
   // resolves /route without needing a .html fallback config.
   trailingSlash: true,
   images: { unoptimized: true },
-  // strict mode needs to be disabled, so deterministic ID generation
-  // works. If its enabled, client side double rendering causes IDs to
-  // come out of sync. TODO fix
-  reactStrictMode: false,
+  // Deterministic ids come from React's `useId`, which is stable across
+  // StrictMode's double render, so strict mode is safe to leave on here — and
+  // keeping it on means the app catches hydration and id regressions.
+  reactStrictMode: true,
   // Use regression-test as its own workspace root (simulates external usage)
   outputFileTracingRoot: __dirname,
   // TODO move to turbopack (then we can also remove the `--webpack` flag

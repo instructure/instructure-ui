@@ -29,6 +29,7 @@ import type {
 } from '@instructure/emotion'
 import type { OtherHTMLAttributes, TabsTheme } from '@instructure/shared-types'
 import type { TextDirectionContextConsumerProps } from '@instructure/ui-i18n'
+import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 import type { ViewOwnProps } from '@instructure/ui-view/v11_6'
 
 type TabsOwnProps = {
@@ -85,6 +86,7 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TabsProps = TabsOwnProps &
   TextDirectionContextConsumerProps &
+  WithDeterministicIdProps &
   WithStyleProps<TabsTheme, TabsStyle> &
   OtherHTMLAttributes<TabsOwnProps>
 

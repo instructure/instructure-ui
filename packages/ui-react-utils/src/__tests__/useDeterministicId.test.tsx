@@ -60,16 +60,16 @@ const TestComponentMultipleIds = ({
   )
 }
 
-const uniqueIds = (el: Element) => {
-  const getAllIds = (element: Element): string[] => {
-    const ids: string[] = []
-    if (element.id) ids.push(element.id)
-    Array.from(element.children).forEach((child) => {
-      ids.push(...getAllIds(child))
-    })
-    return ids
-  }
+const getAllIds = (element: Element): string[] => {
+  const ids: string[] = []
+  if (element.id) ids.push(element.id)
+  Array.from(element.children).forEach((child) => {
+    ids.push(...getAllIds(child))
+  })
+  return ids
+}
 
+const uniqueIds = (el: Element) => {
   const idList = getAllIds(el)
   return new Set(idList).size === idList.length
 }
@@ -80,7 +80,7 @@ describe('useDeterministicId', () => {
     const element = page.getByTestId('test-component').element()
 
     expect(element).toBeInTheDocument()
-    expect(element.id).toBe('TestComponent___0')
+    expect(element.id).toBeTruthy()
   })
 
   it('should generate unique IDs for multiple instances', async () => {
@@ -96,13 +96,18 @@ describe('useDeterministicId', () => {
     expect(uniqueIds(container)).toBe(true)
   })
 
-  it('should support custom instance names', async () => {
+  it('should support custom instance names that yield distinct ids', async () => {
     await render(<TestComponentMultipleIds componentName="MyComponent" />)
     const container = page.getByTestId('test-component').element()
 
-    expect(container.id).toBe('MyComponent___0')
-    expect(container.querySelector('label')?.id).toBe('MyComponent-label___0')
-    expect(container.querySelector('input')?.id).toBe('MyComponent-input___0')
+    const mainId = container.id
+    const labelId = container.querySelector('label')?.id
+    const inputId = container.querySelector('input')?.id
+
+    expect(mainId).toBeTruthy()
+    expect(labelId).toBeTruthy()
+    expect(inputId).toBeTruthy()
+    expect(new Set([mainId, labelId, inputId]).size).toBe(3)
   })
 
   it('should generate unique IDs without Provider wrapper', async () => {
@@ -120,7 +125,7 @@ describe('useDeterministicId', () => {
     expect(uniqueIds(el)).toBe(true)
   })
 
-  it('should generate unique IDs when components are rendered both outside and inside of provider', async () => {
+  it('should generate unique IDs when components are rendered both outside and inside of the (deprecated) provider', async () => {
     await render(
       <div data-testid="test-components">
         <DeterministicIdContextProvider>
@@ -156,45 +161,21 @@ describe('useDeterministicId', () => {
     expect(uniqueIds(el)).toBe(true)
   })
 
-  it('should use the global instance counter', async () => {
-    const instUIInstanceCounter = '__INSTUI_GLOBAL_INSTANCE_COUNTER__'
-    const counterValue = 500
-    globalThis[instUIInstanceCounter].set('GlobalTestComponent', counterValue)
-
-    await render(
-      <div data-testid="test-components">
-        <TestComponent componentName="GlobalTestComponent" />
-        <TestComponent componentName="GlobalTestComponent" />
-        <TestComponent componentName="GlobalTestComponent" />
-      </div>
-    )
-
-    const instanceCounter = globalThis[instUIInstanceCounter]
-    expect(instanceCounter.get('GlobalTestComponent')).toBe(counterValue + 3)
-  })
-
-  it('should generate sequential IDs for the same component', async () => {
+  it('should generate stable, unique IDs across re-renders', async () => {
     const { rerender } = await render(
       <div data-testid="container">
-        <TestComponent componentName="SequentialTest" />
+        <TestComponent key="a" componentName="StableTest" />
       </div>
     )
+    const firstId = page.getByTestId('test-component').element().id
 
     await rerender(
       <div data-testid="container">
-        <TestComponent componentName="SequentialTest" />
-        <TestComponent componentName="SequentialTest" />
+        <TestComponent key="a" componentName="StableTest" />
       </div>
     )
-
-    const allElements = page.getByTestId('test-component').elements()
-    expect(allElements).toHaveLength(2)
-
-    // IDs should be sequential
-    const ids = allElements.map((el) => el.id)
-    expect(ids[0]).toMatch(/^SequentialTest___\d+$/)
-    expect(ids[1]).toMatch(/^SequentialTest___\d+$/)
-    expect(ids[0]).not.toBe(ids[1])
+    // Same instance (same key/position) keeps the same id after a re-render
+    expect(page.getByTestId('test-component').element().id).toBe(firstId)
   })
 
   it('should work correctly with nested components', async () => {
@@ -211,11 +192,11 @@ describe('useDeterministicId', () => {
     await render(<ParentComponent />)
     const parent = page.getByTestId('parent').element()
 
-    expect(parent.id).toBe('ParentComponent___0')
+    expect(parent.id).toBeTruthy()
     expect(uniqueIds(parent)).toBe(true)
   })
 
-  it('should handle multiple calls to the same deterministicId function', async () => {
+  it('should return the same id for repeated no-arg calls and distinct ids for distinct names', async () => {
     const MultiCallComponent = () => {
       const deterministicId = useDeterministicId('MultiCallComponent')
       const id1 = deterministicId()
@@ -223,9 +204,7 @@ describe('useDeterministicId', () => {
       const id3 = deterministicId('custom-instance')
 
       return (
-        <div data-testid="multi-call">
-          <div id={id1}>First</div>
-          <div id={id2}>Second</div>
+        <div data-testid="multi-call" data-id1={id1} data-id2={id2}>
           <div id={id3}>Third</div>
         </div>
       )
@@ -234,8 +213,13 @@ describe('useDeterministicId', () => {
     await render(<MultiCallComponent />)
     const container = page.getByTestId('multi-call').element()
 
-    const ids = Array.from(container.children).map((el) => el.id)
-    expect(ids).toHaveLength(3)
-    expect(new Set(ids).size).toBe(3) // All IDs should be unique
+    // Repeated no-arg calls are idempotent (same stable base id)
+    expect(container.getAttribute('data-id1')).toBe(
+      container.getAttribute('data-id2')
+    )
+    // A distinct instance name produces a distinct id
+    expect(container.querySelector('div')?.id).not.toBe(
+      container.getAttribute('data-id1')
+    )
   })
 })

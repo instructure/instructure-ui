@@ -86,7 +86,10 @@ class Calendar extends Component<CalendarProps, CalendarState> {
     this._weekdayHeaderIds = (
       this.props.renderWeekdayLabels || this.defaultWeekdays
     ).reduce((ids: Record<number, string>, _label, i) => {
-      return { ...ids, [i]: this.props.deterministicId!('weekday-header') }
+      // The instance name must vary per weekday: `deterministicId` derives the
+      // id from the name, so calling it repeatedly with the same name returns
+      // the same id (it is no longer a counter) and every header would collide.
+      return { ...ids, [i]: this.props.deterministicId!(`weekday-header-${i}`) }
     }, {})
     this.state = this.calculateState(
       this.locale(),

@@ -22,43 +22,51 @@
  * SOFTWARE.
  */
 
-import { useContext } from 'react'
-import { generateId } from '@instructure/ui-utils'
-import { DeterministicIdContext } from './DeterministicIdContext.js'
+import { useId } from 'react'
 
 /**
- * A React hook that provides deterministic ID generation for functional components.
+ * A React hook that provides SSR-safe, hydration-stable ID generation for
+ * functional components.
  *
- * This hook is the functional component equivalent of the `withDeterministicId` decorator.
- * It uses the `DeterministicIdContext` which is needed for deterministic id generation.
+ * This hook is the functional component equivalent of the `withDeterministicId`
+ * decorator. It is backed by React's built-in {@link https://react.dev/reference/react/useId `useId`},
+ * which produces the same id on the server and the client for a given position
+ * in the React tree, so ids no longer rely on a global instance counter.
  *
- * The context is there for the users to pass an `instanceCounterMap` Map which is then used
- * in the child components to deterministically create ids for them based on the `instanceCounterMap`.
+ * The returned function may be called multiple times with distinct
+ * `instanceName` values to derive several unique, stable ids from the same
+ * component instance (e.g. one for an input and one for its messages).
+ *
+ * Note: for apps that mount more than one independent React root on the same
+ * page (including module federation), pass a distinct `identifierPrefix` to each
+ * `createRoot`/`hydrateRoot` call so ids stay unique across roots.
+ *
  * Read more about it here: [SSR guide](https://instructure.design/#server-side-rendering)
  *
- * @param componentName - Optional component name to use as the ID prefix.
- * @returns A function that generates deterministic IDs. The function accepts an optional instanceName parameter.
+ * @param componentName - Component name used as a human-readable id prefix.
+ * @returns A function that generates stable ids. It accepts an optional
+ * `instanceName` used as the prefix for that specific id.
  *
  * @example
  * ```tsx
  * const MyComponent = () => {
- *     const [deterministicId, setDeterministicId] = useState()
- *     const getId = useDeterministicId('MyComponent')
- *     useEffect(() => {
- *       setDeterministicId(getId())
- *     }, [])
- *   return <div id={deterministicId}>Content</div>
+ *   const getId = useDeterministicId('MyComponent')
+ *   const id = getId()
+ *   const messagesId = getId('MyComponent-messages')
+ *   return <div id={id} aria-describedby={messagesId}>Content</div>
  * }
  * ```
  */
 function useDeterministicId(
   componentName: string
 ): (instanceName?: string) => string {
-  const instanceCounterMap = useContext(DeterministicIdContext)
+  // React wraps the value of `useId` in delimiters that are not valid in a CSS
+  // selector (`:r0:` in React 18, `«r0»` in React 19), which would break any
+  // `querySelector('#' + id)` call, so strip them. The `___` separator keeps the
+  // historical `ComponentName___token` id shape.
+  const base = useId().replace(/[^a-zA-Z0-9-]/g, '')
 
-  return (instanceName = componentName) => {
-    return generateId(instanceName, instanceCounterMap)
-  }
+  return (instanceName?: string) => `${instanceName ?? componentName}___${base}`
 }
 
 export default useDeterministicId

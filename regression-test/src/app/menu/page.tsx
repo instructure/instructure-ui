@@ -25,58 +25,55 @@
 'use client'
 import React from 'react'
 import { Menu as mn, Button as btn } from '@instructure/ui/latest'
-import { NoSSR } from '../NoSSR'
 
 const Menu = mn as any
 const Button = btn as any
 
 export default function MenuPage() {
-  // Disabling SSR is needed here because Menu does not work when it starts in
-  // the open state
+  // This page used to be wrapped in <NoSSR> because of a `mountNode` prop that
+  // resolved a DOM node (`document.getElementById('main')`). That node does not
+  // exist while pre-rendering, so the open menu was rendered inline on the
+  // server but portalled on the client — a structural hydration mismatch
+  // (React #418). Without `mountNode` the menu portals to document.body on both
+  // sides and hydrates cleanly, so the page can be server rendered like the
+  // rest. Don't reintroduce a DOM-resolving `mountNode` here.
   return (
-    <NoSSR>
-      <div id="main" className="flex gap-8 p-8 flex-col items-start axe-test">
-        <Menu
-          defaultShow
-          placement="bottom"
-          trigger={<Button>Menu</Button>}
-          mountNode={() => document.getElementById('main')}
+    <div id="main" className="flex gap-8 p-8 flex-col items-start axe-test">
+      <Menu defaultShow placement="bottom" trigger={<Button>Menu</Button>}>
+        <Menu.Item value="mastery">Learning Mastery</Menu.Item>
+        <Menu.Item
+          href="https://instructure.github.io/instructure-ui/"
+          target="_blank"
         >
-          <Menu.Item value="mastery">Learning Mastery</Menu.Item>
-          <Menu.Item
-            href="https://instructure.github.io/instructure-ui/"
-            target="_blank"
+          Default (Grid view)
+        </Menu.Item>
+        <Menu.Item disabled>Individual (List view)</Menu.Item>
+
+        <Menu label="More Options">
+          <Menu.Group
+            allowMultiple
+            label="Select Many"
+            selected={['optionOne', 'optionThree']}
           >
-            Default (Grid view)
-          </Menu.Item>
-          <Menu.Item disabled>Individual (List view)</Menu.Item>
-
-          <Menu label="More Options">
-            <Menu.Group
-              allowMultiple
-              label="Select Many"
-              selected={['optionOne', 'optionThree']}
-            >
-              <Menu.Item value="optionOne">Option 1</Menu.Item>
-              <Menu.Item value="optionTwo">Option 2</Menu.Item>
-              <Menu.Item value="optionThree">Option 3</Menu.Item>
-            </Menu.Group>
-            <Menu.Separator />
-            <Menu.Item value="navigation">Navigation</Menu.Item>
-            <Menu.Item value="set">Set as default</Menu.Item>
-          </Menu>
-
-          <Menu.Separator />
-
-          <Menu.Group label="Select One" selected="itemOne">
-            <Menu.Item value="itemOne">Item 1</Menu.Item>
-            <Menu.Item value="itemTwo">Item 2</Menu.Item>
+            <Menu.Item value="optionOne">Option 1</Menu.Item>
+            <Menu.Item value="optionTwo">Option 2</Menu.Item>
+            <Menu.Item value="optionThree">Option 3</Menu.Item>
           </Menu.Group>
-
           <Menu.Separator />
-          <Menu.Item value="baz">Open grading history...</Menu.Item>
+          <Menu.Item value="navigation">Navigation</Menu.Item>
+          <Menu.Item value="set">Set as default</Menu.Item>
         </Menu>
-      </div>
-    </NoSSR>
+
+        <Menu.Separator />
+
+        <Menu.Group label="Select One" selected="itemOne">
+          <Menu.Item value="itemOne">Item 1</Menu.Item>
+          <Menu.Item value="itemTwo">Item 2</Menu.Item>
+        </Menu.Group>
+
+        <Menu.Separator />
+        <Menu.Item value="baz">Open grading history...</Menu.Item>
+      </Menu>
+    </div>
   )
 }

@@ -30,6 +30,7 @@ import type {
 import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { OtherHTMLAttributes } from '@instructure/shared-types'
 import type { TextDirectionContextConsumerProps } from '@instructure/ui-i18n'
+import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 import type { ViewOwnProps } from '@instructure/ui-view/latest'
 
 type TabsOwnProps = {
@@ -86,6 +87,7 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TabsProps = TabsOwnProps &
   TextDirectionContextConsumerProps &
+  WithDeterministicIdProps &
   WithStyleProps<ReturnType<NewComponentTypes['Tabs']>, TabsStyle> &
   OtherHTMLAttributes<TabsOwnProps>
 
