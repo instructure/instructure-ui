@@ -122,20 +122,20 @@ describe('DeterministicIdContext', () => {
     expect(uniqueIds(el)).toBe(true)
   })
 
-  it('should use a global object for ID counter', async () => {
-    const instUIInstanceCounter = '__INSTUI_GLOBAL_INSTANCE_COUNTER__'
-    const counterValue = 345
-    globalThis[instUIInstanceCounter].set('TestComponent', counterValue)
-    await render(
-      <div data-testid="test-components">
-        <TestComponent />
-        <TestComponent />
-        <TestComponent />
-        <TestComponent />
+  it('should keep the same id for an instance across re-renders', async () => {
+    const { rerender } = await render(
+      <div>
         <TestComponent />
       </div>
     )
-    const instanceCounter = globalThis[instUIInstanceCounter]
-    expect(instanceCounter.get('TestComponent')).toBe(counterValue + 5)
+    const firstId = page.getByTestId('test-component').element().id
+    expect(firstId).toBeTruthy()
+
+    await rerender(
+      <div>
+        <TestComponent />
+      </div>
+    )
+    expect(page.getByTestId('test-component').element().id).toBe(firstId)
   })
 })

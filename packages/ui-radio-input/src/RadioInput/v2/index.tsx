@@ -28,7 +28,6 @@ import {
   useImperativeHandle,
   forwardRef,
   useCallback,
-  useEffect,
   type RefObject
 } from 'react'
 
@@ -77,12 +76,8 @@ const RadioInput = forwardRef<RadioInputHandle, RadioInputProps>(
     const containerRef = useRef<HTMLDivElement | null>(null)
     const inputElementRef = useRef<HTMLInputElement | null>(null)
 
-    // Deterministic ID generation
-    const [deterministicId, setDeterministicId] = useState<string | undefined>()
-    const getId = useDeterministicId('RadioInput')
-    useEffect(() => {
-      setDeterministicId(getId())
-    }, [])
+    // SSR-safe deterministic ID generation (stable across server/client render)
+    const deterministicId = useDeterministicId('RadioInput')()
     const id = idProp || deterministicId
 
     // Computed checked value

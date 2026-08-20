@@ -25,7 +25,6 @@
 import { Children } from 'react'
 
 import { warn } from '@instructure/console'
-import { generateId } from '@instructure/ui-utils'
 import { matchComponentTypes } from '@instructure/ui-react-utils'
 
 import { Drilldown } from '@instructure/ui-drilldown/v11_6'
@@ -58,8 +57,6 @@ const mapItemsForDrilldown = (
 ) => {
   const submenus: ItemMappedForDrilldownOption[] = []
   const { currentPageId, renderOptionContent } = options
-
-  const customPopoverIdMap = new Map<string, number>()
 
   Children.forEach(itemList, (item) => {
     if (!item || !matchComponentTypes(item, [TopNavBarItem])) return
@@ -124,10 +121,9 @@ const mapItemsForDrilldown = (
 
       // if still has customPopover...
       if (customPopover) {
-        customPopoverId = generateId(
-          `TopNavBarItem__customPopoverOption`,
-          customPopoverIdMap
-        )
+        // Derive a stable, unique id from the item's (required) id so it
+        // matches across server and client renders without a shared counter.
+        customPopoverId = `${id}__customPopoverOption`
         optionSubPageId = customPopoverId
         submenuPages.push(
           <Drilldown.Page id={customPopoverId} key={customPopoverId}>

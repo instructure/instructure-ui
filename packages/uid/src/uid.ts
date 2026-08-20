@@ -36,6 +36,14 @@ const dictionaryLengthMinus1 = dictionary.length - 1
  * ---
  * Generate a unique (CSS-safe) id string
  *
+ * NOTE: this is `Math.random()`-based, so it is **not** SSR-safe and must not be
+ * called during render — the server and the client produce different values,
+ * which React reports as a hydration mismatch, and the id changes on every
+ * re-render. For ids that end up in the DOM, use `useDeterministicId` or the
+ * `withDeterministicId` decorator from `@instructure/ui-react-utils`. Reach for
+ * `uid` only for client-side, non-rendered identifiers (e.g. keying an entry in
+ * a runtime registry).
+ *
  * @module uid
  * @param {String} prefix a string to prefix the id for debugging in non-production env
  * @param {Number} length id length (in characters, minus the prefix). Default is 12

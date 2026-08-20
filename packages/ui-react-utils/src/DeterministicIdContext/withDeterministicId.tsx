@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { ComponentClass, forwardRef, useContext } from 'react'
+import { ComponentClass, forwardRef } from 'react'
 import type {
   ForwardRefExoticComponent,
   PropsWithoutRef,
@@ -29,9 +29,8 @@ import type {
 } from 'react'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 
-import { DeterministicIdContext } from './DeterministicIdContext.js'
 import { decorator } from '@instructure/ui-decorator'
-import { generateId } from '@instructure/ui-utils'
+import { useDeterministicId } from './useDeterministicId.js'
 
 import type { InstUIComponent } from '@instructure/shared-types'
 import { warn } from '@instructure/console'
@@ -42,11 +41,18 @@ type WithDeterministicIdProps = {
   deterministicId?: (instanceName?: string) => string
 }
 /**
- * This decorator is used to enable the decorated class to use the `DeterministicIdContext` which is needed
- * for deterministic id generation.
+ * This decorator injects a `deterministicId` prop into the decorated class,
+ * used to generate SSR-safe, hydration-stable ids.
  *
- * The context is there for the users to pass an `instanceCounterMap` Map which is then used
- * in the child components to deterministically create ids for them based on the `instanceCounterMap`.
+ * It is backed by React's built-in {@link https://react.dev/reference/react/useId `useId`},
+ * which produces the same id on the server and the client for a given position
+ * in the React tree The injected `deterministicId(instanceName?)` function may
+ * be called multiple times with distinct `instanceName` values to derive
+ * several unique, stable ids from the same component instance.
+ *
+ * Note: for apps that mount more than one independent React root on the same
+ * page (including module federation), pass a distinct `identifierPrefix` to each
+ * `createRoot`/`hydrateRoot` call so ids stay unique across roots.
  * Read more about it here: [SSR guide](https://instructure.design/#server-side-rendering)
  */
 const withDeterministicId = decorator((ComposedComponent: InstUIComponent) => {
@@ -58,9 +64,7 @@ const withDeterministicId = decorator((ComposedComponent: InstUIComponent) => {
       ComposedComponent.componentId ||
       ComposedComponent.displayName ||
       ComposedComponent.name
-    const instanceCounterMap = useContext(DeterministicIdContext)
-    const deterministicId = (instanceName = componentName) =>
-      generateId(instanceName, instanceCounterMap)
+    const deterministicId = useDeterministicId(componentName)
 
     if (props.deterministicId) {
       warn(

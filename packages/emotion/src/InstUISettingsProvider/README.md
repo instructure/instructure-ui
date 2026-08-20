@@ -13,7 +13,7 @@ Table of Contents:
   - [Nesting theme providers](/#InstUISettingsProvider/#theme-management-nesting-theme-providers)
   - [Theme overrides](/#InstUISettingsProvider/#theme-management-theme-overrides)
 - [Text direction management](/#InstUISettingsProvider/#text-direction-management)
-- [Server Side Rendering support](/#InstUISettingsProvider/#server-side-rendering-support)
+- [Server side rendering (SSR)](/#server-side-rendering)
 - [Properties](/#InstUISettingsProvider/#InstUISettingsProviderProperties)
 
 ### Theme management

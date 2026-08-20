@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { forwardRef, useEffect, useState, useCallback } from 'react'
+import { forwardRef, useCallback } from 'react'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { omitProps, useDeterministicId } from '@instructure/ui-react-utils'
 
@@ -62,18 +62,13 @@ const FormFieldLayout = forwardRef<Element, FormFieldLayoutProps>(
       ...rest
     } = props
 
-    // Deterministic ID generation
-    const [deterministicId, setDeterministicId] = useState<string | undefined>()
-    const getId = useDeterministicId('FormFieldLayout')
-    useEffect(() => {
-      setDeterministicId(getId())
-    }, [])
+    // SSR-safe deterministic ID generation (stable across server/client render)
+    const deterministicId = useDeterministicId('FormFieldLayout')()
 
     const messagesId = messagesIdProp || deterministicId
     // Give the label an id so controls can reference only the label text via
     // `aria-labelledby`, keeping messages out of the accessible name.
-    const labelId =
-      labelIdProp || (deterministicId ? `${deterministicId}-Label` : undefined)
+    const labelId = labelIdProp || `${deterministicId}-Label`
 
     // Filter out error and success messages when disabled or readOnly
     const filteredMessages =

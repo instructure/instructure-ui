@@ -72,7 +72,15 @@ class ComponentTheme extends Component<ComponentThemeProps> {
   ) {
     for (const key in componentTheme) {
       if (typeof componentTheme[key] === 'object') {
-        this.themeToArray(componentTheme[key], arr, key)
+        // Keep the accumulated prefix so nested keys stay fully qualified,
+        // e.g. `arrowsBackgroundHoverColor.modify.type`. Without this, every
+        // token with a `modify` block would collapse to the same `modify.type`
+        // name and collide as a React key.
+        this.themeToArray(
+          componentTheme[key],
+          arr,
+          prefix ? `${prefix}.${key}` : key
+        )
       } else if (componentTheme[key] !== undefined) {
         const name = prefix ? `${prefix}.${key}` : key
         arr.push({ name: name, value: componentTheme[key] })

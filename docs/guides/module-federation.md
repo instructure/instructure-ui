@@ -27,4 +27,22 @@ Just use themes as you would without module federation. Note that theme objects 
 
 > Overrides specified in global themes are not applied to local themes.
 
+### Keeping generated ids unique across apps
+
+InstUI generates element ids with React's `useId`, which only guarantees
+uniqueness within a single React root. When a host and a guest app each mount
+their own root on the same page, both start numbering from scratch and their ids
+can collide. Give each root a distinct `identifierPrefix`:
+
+```javascript
+---
+type: code
+---
+createRoot(hostEl, { identifierPrefix: 'host-' })
+createRoot(guestEl, { identifierPrefix: 'guest-' })
+```
+
+Older InstUI versions handled this with a shared `instanceCounterMap`, which is
+now ignored. See [Server side rendering](/#server-side-rendering) for details.
+
 You can check out a sample application on [Github](https://github.com/matyasf/module-federation-instui)

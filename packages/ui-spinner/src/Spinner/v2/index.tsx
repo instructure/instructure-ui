@@ -52,12 +52,8 @@ const Spinner = forwardRef<HTMLDivElement, SpinnerProps>((props, ref) => {
   } = props
 
   const [shouldRender, setShouldRender] = useState(!delay)
-  // Deterministic ID generation
-  const [titleId, setTitleId] = useState<string | undefined>()
-  const getId = useDeterministicId('Spinner')
-  useEffect(() => {
-    setTitleId(getId())
-  }, [])
+  // SSR-safe deterministic ID generation (stable across server/client render)
+  const titleId = useDeterministicId('Spinner')()
 
   const styles = useStyleNew({
     generateStyle,

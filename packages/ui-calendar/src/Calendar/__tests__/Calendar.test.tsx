@@ -593,4 +593,23 @@ describe('<Calendar />', () => {
       ).toBeInTheDocument()
     })
   })
+
+  describe('weekday header ids', () => {
+    it('gives every weekday header a unique id', async () => {
+      const { container } = await render(
+        <Calendar renderWeekdayLabels={weekdayLabels} selectedLabel="Selected">
+          {generateDays()}
+        </Calendar>
+      )
+
+      const headers = Array.from(
+        container.querySelectorAll('[id^="weekday-header"]')
+      ).map((el) => el.id)
+
+      expect(headers.length).toBeGreaterThan(1)
+      // `deterministicId` derives the id from the instance name, so a shared
+      // name would hand every header the same id.
+      expect(new Set(headers).size).toBe(headers.length)
+    })
+  })
 })

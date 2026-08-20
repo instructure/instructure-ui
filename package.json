@@ -121,7 +121,7 @@
   },
   "lint-staged": {
     "*.{js,ts,tsx}": [
-      "oxlint -c .oxlintrc.json --fix",
+      "oxlint -c .oxlintrc.json --fix --no-error-on-unmatched-pattern",
       "prettier --write"
     ],
     "*.{json,jsx,md,mdx,html}": [
