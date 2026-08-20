@@ -176,7 +176,18 @@ export default defineConfig({
         plugins: [{ name: `instui-prebundle-stamp:${getPrebundleStamp()}` }],
         optimizeDeps: {
           // https://vite.dev/config/dep-optimization-options#optimizedeps-include
-          include: PREBUNDLED_PACKAGES
+          include: [
+            ...PREBUNDLED_PACKAGES,
+            // The SSR/hydration tests are the only browser tests that import
+            // these. Left to be discovered on first import, Vite re-optimizes
+            // mid-run and reloads, which breaks in-flight dynamic imports in
+            // unrelated suites ("Failed to fetch dynamically imported module")
+            // and can serve React and react-dom/server from different optimizer
+            // generations. Surfacing as a null dispatcher, i.e.
+            // "Cannot read properties of null (reading 'useId')".
+            'react-dom/server',
+            'react-dom/client'
+          ]
         },
         resolve: {
           alias: [

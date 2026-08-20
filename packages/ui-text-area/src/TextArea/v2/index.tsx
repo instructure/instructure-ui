@@ -26,7 +26,6 @@ import {
   forwardRef,
   useRef,
   useEffect,
-  useContext,
   useImperativeHandle,
   useCallback,
   useMemo,
@@ -44,12 +43,12 @@ import { debounce } from '@instructure/debounce'
 import type { Debounced } from '@instructure/debounce'
 
 import { useStyleNew } from '@instructure/emotion'
-import { generateId, px } from '@instructure/ui-utils'
+import { px } from '@instructure/ui-utils'
 
 import {
   passthroughProps,
   pickProps,
-  DeterministicIdContext
+  useDeterministicId
 } from '@instructure/ui-react-utils'
 
 import generateStyle from './styles.js'
@@ -96,12 +95,8 @@ const TextArea = forwardRef<TextAreaElement, TextAreaProps>((props, ref) => {
     ...rest
   } = props
 
-  // Use deterministic ID
-  const instanceCounterMap = useContext(DeterministicIdContext)
-  const defaultId = useMemo(
-    () => generateId('TextArea', instanceCounterMap),
-    [instanceCounterMap]
-  )
+  // SSR-safe deterministic ID generation (stable across server/client render)
+  const defaultId = useDeterministicId('TextArea')()
   const id = propId || defaultId
 
   // Use refs for mutable values

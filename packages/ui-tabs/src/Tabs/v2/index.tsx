@@ -37,10 +37,10 @@ import type { ViewOwnProps } from '@instructure/ui-view/latest'
 import {
   matchComponentTypes,
   safeCloneElement,
-  passthroughProps
+  passthroughProps,
+  withDeterministicId
 } from '@instructure/ui-react-utils'
 import { logError as error } from '@instructure/console'
-import { uid } from '@instructure/uid'
 import { Focusable } from '@instructure/ui-focusable'
 import { getBoundingClientRect } from '@instructure/ui-dom-utils'
 import type { RectType } from '@instructure/ui-dom-utils'
@@ -69,6 +69,7 @@ type PanelChild = ComponentElement<TabsPanelProps, Panel>
 category: components
 ---
 **/
+@withDeterministicId()
 @withStyleNew(generateStyle)
 class Tabs extends Component<TabsProps, TabsState> {
   static displayName = 'Tabs'
@@ -476,7 +477,7 @@ class Tabs extends Component<TabsProps, TabsState> {
         const selected =
           !child.props.isDisabled &&
           (child.props.isSelected || selectedIndex === index)
-        const id = uid()
+        const id = this.props.deterministicId!(`Tabs_${index}`)
 
         tabs.push(this.createTab(index, id, selected, child))
         if (activePanels.length === 1) {

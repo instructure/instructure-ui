@@ -4517,9 +4517,6 @@ importers:
       '@instructure/ui-view':
         specifier: workspace:*
         version: link:../ui-view
-      '@instructure/uid':
-        specifier: workspace:*
-        version: link:../uid
       keycode:
         specifier: ^2
         version: 2.2.1

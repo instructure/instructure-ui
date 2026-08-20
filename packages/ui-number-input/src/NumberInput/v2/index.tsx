@@ -28,7 +28,6 @@ import {
   useCallback,
   useImperativeHandle,
   forwardRef,
-  useEffect,
   type RefObject
 } from 'react'
 import keycode from 'keycode'
@@ -103,12 +102,8 @@ const NumberInput = forwardRef<NumberInputHandle, NumberInputProps>(
     const containerRef = useRef<Element | null>(null)
     const inputRef = useRef<HTMLInputElement | null>(null)
 
-    // Deterministic ID generation
-    const [deterministicId, setDeterministicId] = useState<string | undefined>()
-    const getId = useDeterministicId('NumberInput')
-    useEffect(() => {
-      setDeterministicId(getId())
-    }, []) // Empty deps array - only run once on mount
+    // SSR-safe deterministic ID generation (stable across server/client render)
+    const deterministicId = useDeterministicId('NumberInput')()
     const id = idProp || deterministicId
 
     // Computed values
