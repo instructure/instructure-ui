@@ -1,0 +1,26 @@
+{
+  "name": "@instructure/ssr-lab",
+  "description": "Real server-side-rendered InstUI app used to measure hydration layout shift.",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --webpack -p 3200",
+    "build": "next build --webpack",
+    "start": "next start -p 3200",
+    "lint": "oxlint ."
+  },
+  "devDependencies": {
+    "@types/node": "24.1.0",
+    "@types/react": "19.2.17",
+    "@types/react-dom": "19.2.3",
+    "typescript": "6.0.3"
+  },
+  "dependencies": {
+    "@fontsource/lato": "^5.2.7",
+    "@instructure/ui": "file:../packages/ui",
+    "@instructure/ui-icons": "file:../packages/ui-icons",
+    "next": "16.2.10",
+    "react": "19.2.7",
+    "react-dom": "19.2.7"
+  }
+}
