@@ -40,18 +40,13 @@ import { InstUISettingsProvider, canvas } from '@instructure/ui/latest'
  */
 export function Providers({ children }: { children: ReactNode }) {
   return (
-    <InstUISettingsProvider
-      theme={canvas as any}
-      // A fresh Map on every render. InstUI's deterministic ID counter is
-      // module-level state, so on a long-lived Node server it keeps counting
-      // across requests: without this, request #1 emits `TextInput___1`,
-      // request #2 emits `TextInput___6`, and so on, while the browser always
-      // starts from zero — a guaranteed server/client mismatch on every reload
-      // but the first. The regression-test app does the same thing for the same
-      // reason. Note this only makes the ids line up; it does not fix that the
-      // ids arrive after hydration.
-      instanceCounterMap={new Map()}
-    >
+    // No `instanceCounterMap` here. It used to be needed, because the id
+    // counter was module-level state that never reset between server requests,
+    // so every reload after the first produced server/client id mismatches.
+    // INSTUI-5152 moved id generation onto React's `useId`, which is stable
+    // across the server and client render on its own, and the prop is now a
+    // deprecated no-op.
+    <InstUISettingsProvider theme={canvas as any}>
       {children}
     </InstUISettingsProvider>
   )

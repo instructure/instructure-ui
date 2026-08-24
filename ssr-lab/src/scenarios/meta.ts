@@ -53,7 +53,8 @@ export type ScenarioMeta = {
    * run has something to compare against. Recorded against the production build
    * (`npm run build && npm start`) in headless Chrome at 1280x900 with 4x CPU
    * throttling. Absolute numbers depend on viewport and machine — the sign and
-   * the order of magnitude are the parts worth comparing.
+   * the order of magnitude are the parts worth comparing. Re-recorded on top of
+   * INSTUI-5152 (useId-based id generation).
    */
   baseline: string
 }
@@ -70,8 +71,8 @@ export const SCENARIOS: ScenarioMeta[] = [
     slug: 'text-input',
     title: 'TextInput + FormFieldLayout',
     risk: 'two-pass-styles',
-    note: 'A ticketben említett eset. A FormFieldLayout grid-je v2-ben MÁR HELYES a szerver HTML-ben (mind a 6 példány ugyanazt a grid-template-areas értéket adja hidratálás előtt és után) — v1-ben viszont csak "controls" van, tehát a label és a hibaüzenet implicit sorokba kerül. A v2-ben mért teljes shift EGYETLEN okra vezethető vissza: a NumberInput `if (!id) return null`-t csinál, az id pedig useEffect-ből jön, tehát a szerveren nem rendereli le magát. Okozati bizonyíték: ha a NumberInput kap egy explicit `id` propot, az SSR magasság 730-ról 854-re nő, a shift 0-ra esik és a CLS is 0 lesz. Szándékosan hagyjuk id nélkül, mert ez a valós fogyasztói alapeset.',
-    baseline: 'CLS 0,015 · +124px'
+    note: 'A ticketben említett eset. A FormFieldLayout grid-je v2-ben helyes a szerver HTML-ben (mind a 6 példány ugyanazt a grid-template-areas értéket adja hidratálás előtt és után) — v1-ben viszont csak "controls" van, tehát a label és a hibaüzenet implicit sorokba kerül. Az itt korábban mért +124px a NumberInput `if (!id) return null` kapujából jött, amit az INSTUI-5152 (useId alapú id-generálás) megszüntetett: az oldal most 0px-et mozdul.',
+    baseline: 'CLS 0,000 · 0px'
   },
   {
     slug: 'link',
@@ -148,7 +149,7 @@ export const SCENARIOS: ScenarioMeta[] = [
     title: 'ProgressCircle',
     risk: 'two-pass-styles',
     note: 'Két-passzos, plusz mount-animáció. Az animáció a körön belül marad, a layoutot nem tolja el.',
-    baseline: 'CLS 0,000 · 0px'
+    baseline: 'CLS 0 · 0px'
   },
   {
     slug: 'rating',
@@ -190,7 +191,7 @@ export const SCENARIOS: ScenarioMeta[] = [
     title: 'Pill',
     risk: 'dom-measurement',
     note: 'A szöveg szélességét méri a csonkoláshoz; csak pár pixelt mozdul vízszintesen.',
-    baseline: 'CLS 0,000 · 0px'
+    baseline: 'CLS 0 · 0px'
   },
   {
     slug: 'text-area',
@@ -217,8 +218,8 @@ export const SCENARIOS: ScenarioMeta[] = [
     slug: 'suite-form',
     title: 'Űrlap oldal',
     risk: 'suite',
-    note: 'Sok form control egy oldalon — itt adódnak össze a kis shiftek.',
-    baseline: 'CLS 0,016 · +88px'
+    note: 'Sok form control egy oldalon. Az INSTUI-5152 előtt +88px volt (a NumberInput hiányzott a szerver HTML-ből), utána 0px.',
+    baseline: 'CLS 0 · 0px'
   },
   {
     slug: 'suite-dashboard',
