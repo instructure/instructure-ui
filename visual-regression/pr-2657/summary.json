@@ -1,529 +1,599 @@
 {
   "summary": {
-    "total": 129,
-    "unchanged": 0,
-    "changed": 1,
-    "added": 96,
-    "removed": 32
+    "total": 96,
+    "unchanged": 94,
+    "changed": 2,
+    "added": 0,
+    "removed": 0,
+    "a11yPages": 7,
+    "a11yViolations": 15
   },
   "results": [
     {
       "name": "alert-canvas.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "alert-dark.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "alert-light.png",
-      "status": "added"
-    },
-    {
-      "name": "alert.png",
-      "status": "removed"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "avatar-canvas.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "avatar-dark.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "avatar-light.png",
-      "status": "added"
-    },
-    {
-      "name": "avatar.png",
-      "status": "removed"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "badge-canvas.png",
-      "status": "added"
+      "status": "changed",
+      "numDiff": 1573,
+      "sizeMismatch": false
     },
     {
       "name": "badge-dark.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "badge-light.png",
-      "status": "added"
-    },
-    {
-      "name": "badge.png",
-      "status": "removed"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "billboard-canvas.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "billboard-dark.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "billboard-light.png",
-      "status": "added"
-    },
-    {
-      "name": "billboard.png",
-      "status": "removed"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "breadcrumb-canvas.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "breadcrumb-dark.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "breadcrumb-light.png",
-      "status": "added"
-    },
-    {
-      "name": "breadcrumb.png",
-      "status": "removed"
-    },
-    {
-      "name": "button-and-derivatives.png",
-      "status": "removed"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "button-canvas.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "button-dark.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "button-light.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "byline-canvas.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "byline-dark.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "byline-light.png",
-      "status": "added"
-    },
-    {
-      "name": "byline.png",
-      "status": "removed"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "calendar-canvas.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "calendar-dark.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "calendar-light.png",
-      "status": "added"
-    },
-    {
-      "name": "calendar.png",
-      "status": "removed"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "checkbox-canvas.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "checkbox-dark.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "checkbox-light.png",
-      "status": "added"
-    },
-    {
-      "name": "checkbox.png",
-      "status": "removed"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "checkboxgroup-canvas.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "checkboxgroup-dark.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "checkboxgroup-light.png",
-      "status": "added"
-    },
-    {
-      "name": "checkboxgroup.png",
-      "status": "removed"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "colorpicker-canvas.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "colorpicker-dark.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "colorpicker-light.png",
-      "status": "added"
-    },
-    {
-      "name": "colorpicker.png",
-      "status": "removed"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "contextview-canvas.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "contextview-dark.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "contextview-light.png",
-      "status": "added"
-    },
-    {
-      "name": "contextview.png",
-      "status": "removed"
-    },
-    {
-      "name": "custom-and-lucide-icons.png",
-      "status": "removed"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "custom-icons-canvas.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "custom-icons-dark.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "custom-icons-light.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "dateinput-canvas.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "dateinput-dark.png",
-      "status": "added"
-    },
-    {
-      "name": "dateinput-dateinput2.png",
-      "status": "removed"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "dateinput-light.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "datetimeinput-canvas.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "datetimeinput-dark.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "datetimeinput-light.png",
-      "status": "added"
-    },
-    {
-      "name": "datetimeinput.png",
-      "status": "removed"
-    },
-    {
-      "name": "diff-demo.png",
-      "status": "changed",
-      "numDiff": 6324,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "drilldown-canvas.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "drilldown-dark.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "drilldown-light.png",
-      "status": "added"
-    },
-    {
-      "name": "drilldown.png",
-      "status": "removed"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "filedrop-canvas.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "filedrop-dark.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "filedrop-light.png",
-      "status": "added"
-    },
-    {
-      "name": "filedrop.png",
-      "status": "removed"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "form-errors-canvas.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "form-errors-dark.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "form-errors-light.png",
-      "status": "added"
-    },
-    {
-      "name": "form-errors.png",
-      "status": "removed"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "heading-canvas.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "heading-dark.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "heading-light.png",
-      "status": "added"
-    },
-    {
-      "name": "heading.png",
-      "status": "removed"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "img-canvas.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "img-dark.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "img-light.png",
-      "status": "added"
-    },
-    {
-      "name": "img.png",
-      "status": "removed"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "link-canvas.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "link-dark.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "link-light.png",
-      "status": "added"
-    },
-    {
-      "name": "link.png",
-      "status": "removed"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "menu-canvas.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "menu-dark.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "menu-light.png",
-      "status": "added"
-    },
-    {
-      "name": "menu.png",
-      "status": "removed"
-    },
-    {
-      "name": "metric-pill-tag-timeselect-text.png",
-      "status": "removed"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "options-canvas.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "options-dark.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "options-light.png",
-      "status": "added"
-    },
-    {
-      "name": "options.png",
-      "status": "removed"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "pagination-canvas.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "pagination-dark.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "pagination-light.png",
-      "status": "added"
-    },
-    {
-      "name": "pagination.png",
-      "status": "removed"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "progressbar-canvas.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "progressbar-dark.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "progressbar-light.png",
-      "status": "added"
-    },
-    {
-      "name": "progressbar.png",
-      "status": "removed"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "select-canvas.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "select-dark.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "select-light.png",
-      "status": "added"
-    },
-    {
-      "name": "select-simpleselect.png",
-      "status": "removed"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "small-components-canvas.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "small-components-dark.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "small-components-light.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "table-canvas.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "table-dark.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "table-light.png",
-      "status": "added"
-    },
-    {
-      "name": "table.png",
-      "status": "removed"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "tabs-canvas.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "tabs-dark.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "tabs-light.png",
-      "status": "added"
-    },
-    {
-      "name": "tabs.png",
-      "status": "removed"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "tooltip-canvas.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "tooltip-dark.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "tooltip-light.png",
-      "status": "added"
-    },
-    {
-      "name": "tooltip.png",
-      "status": "removed"
+      "status": "changed",
+      "numDiff": 14438,
+      "sizeMismatch": false
     },
     {
       "name": "treebrowser-canvas.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "treebrowser-dark.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "treebrowser-light.png",
-      "status": "added"
-    },
-    {
-      "name": "treebrowser.png",
-      "status": "removed"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "view-canvas.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "view-dark.png",
-      "status": "added"
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "view-light.png",
-      "status": "added"
-    },
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
+    }
+  ],
+  "a11y": [
     {
-      "name": "view.png",
-      "status": "removed"
+      "rule": "color-contrast",
+      "impact": "serious",
+      "title": "Text contrast is too low",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/color-contrast?application=axeAPI",
+      "nodes": 15,
+      "screens": 7
     }
   ]
 }
