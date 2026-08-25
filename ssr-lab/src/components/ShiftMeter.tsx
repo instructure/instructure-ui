@@ -42,6 +42,11 @@ const NEEDS_IMPROVEMENT = 0.25
 // allowed to draw its report.
 const SETTLE_MS = 1200
 
+/** Always shows the direction, so a value never reads as an absolute distance. */
+function signedText(value: number) {
+  return value > 0 ? `+${value}` : `${value}`
+}
+
 function verdict(cls: number) {
   if (cls <= GOOD) return { text: 'good', color: '#0b874b' }
   if (cls <= NEEDS_IMPROVEMENT)
@@ -148,9 +153,17 @@ export function ShiftMeter() {
     state.shifts.forEach((shift) => {
       lines.push(`  +${shift.value.toFixed(4)} @${shift.at}ms`)
       shift.sources.forEach((source) => {
-        lines.push(
-          `    ${source.label}  dy ${source.dy}px  dx ${source.dx}px  dHeight ${source.dHeight}px`
-        )
+        // Same wording and same omission of zeroes as the panel, so a pasted
+        // report reads exactly like what the reporter was looking at.
+        const metrics = [
+          source.dHeight !== 0
+            ? `height ${signedText(source.dHeight)}px`
+            : null,
+          source.dy !== 0 ? `vertical ${signedText(source.dy)}px` : null,
+          source.dx !== 0 ? `horizontal ${signedText(source.dx)}px` : null
+        ].filter(Boolean)
+        lines.push(`    ${source.label}`)
+        metrics.forEach((metric) => lines.push(`      ${metric}`))
       })
     })
     return lines.join('\n')
@@ -205,8 +218,6 @@ export function ShiftMeter() {
   // and there was no server render to measure.
   const noServerRender = ssrHeight === null
 
-  const signed = (value: number) => (value > 0 ? `+${value}` : `${value}`)
-
   return (
     <aside
       id="ssr-lab-meter"
@@ -256,7 +267,7 @@ export function ShiftMeter() {
                   {fontDelta !== null && fontDelta !== 0 && (
                     <span className="meter__neutral">
                       {' '}
-                      ({signed(fontDelta)}px)
+                      ({signedText(fontDelta)}px)
                     </span>
                   )}
                 </>
@@ -269,7 +280,7 @@ export function ShiftMeter() {
               {hydrationDelta !== null && hydrationDelta !== 0 && (
                 <strong className="meter__delta">
                   {' '}
-                  ({signed(hydrationDelta)}px)
+                  ({signedText(hydrationDelta)}px)
                 </strong>
               )}
             </dd>
@@ -318,12 +329,29 @@ export function ShiftMeter() {
                         key={`${source.label}-${sourceIndex}`}
                         className="meter__source"
                       >
-                        <code>{source.label}</code>
-                        {source.dy !== 0 && <span> dy {source.dy}px</span>}
-                        {source.dx !== 0 && <span> dx {source.dx}px</span>}
-                        {source.dHeight !== 0 && (
-                          <span> dH {source.dHeight}px</span>
-                        )}
+                        <code className="meter__sourceLabel">
+                          {source.label}
+                        </code>
+                        <dl className="meter__metrics">
+                          {source.dHeight !== 0 && (
+                            <>
+                              <dt>height</dt>
+                              <dd>{signedText(source.dHeight)}px</dd>
+                            </>
+                          )}
+                          {source.dy !== 0 && (
+                            <>
+                              <dt>vertical</dt>
+                              <dd>{signedText(source.dy)}px</dd>
+                            </>
+                          )}
+                          {source.dx !== 0 && (
+                            <>
+                              <dt>horizontal</dt>
+                              <dd>{signedText(source.dx)}px</dd>
+                            </>
+                          )}
+                        </dl>
                       </li>
                     ))}
                   </ul>
@@ -332,21 +360,22 @@ export function ShiftMeter() {
             </ol>
           )}
 
-          {/* The spaces after each bold label are explicit expressions on
+          {/* The spaces around the bold labels are explicit expressions on
               purpose: JSX drops the leading space of a text node that spans
-              several source lines, which silently glued a label to the word
+              several source lines, which silently glues a label to the word
               after it. */}
           {state.shifts.length > 0 && (
             <p className="meter__legend">
-              <b>dy</b> <span>moved vertically, + is down.</span> <b>dx</b>{' '}
-              <span>moved horizontally, + is right.</span> <b>dH</b>{' '}
+              <b>height</b>{' '}
+              <span>is the element resizing itself, + taller.</span>{' '}
+              <b>vertical</b> <span>and</span> <b>horizontal</b>{' '}
               <span>
-                the element&rsquo;s own height changed. Zeroes are left out, so
-                a bare
+                are how far it moved, + down and + right. Rows that would be
+                zero are left out, so an entry with only
               </span>{' '}
-              <b>dy</b>{' '}
+              <b>vertical</b>{' '}
               <span>
-                means the element did not resize — something above it did.
+                means the element kept its size — something above it changed.
               </span>
             </p>
           )}
