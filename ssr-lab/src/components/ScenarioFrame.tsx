@@ -36,15 +36,21 @@ import { SCENARIO_ELEMENT_ID } from '@/lib/constants'
  */
 export function ScenarioFrame({
   title,
+  warning,
   children
 }: {
   title: string
+  warning?: ReactNode
   children: ReactNode
 }) {
   return (
     <>
       <div className="scenario">
         <p className="scenario__title">{title}</p>
+        {/* Deliberately outside the measured element: it is static markup, so it
+            shifts the scenario's starting position but never its height, and it
+            cannot contribute to the numbers the panel reports. */}
+        {warning && <div className="scenario__warning">{warning}</div>}
         <div id={SCENARIO_ELEMENT_ID}>{children}</div>
       </div>
       <script

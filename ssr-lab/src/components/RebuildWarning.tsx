@@ -23,20 +23,22 @@
  */
 
 /**
- * The id of the element that wraps whatever scenario is under test. Both the
- * pre-hydration snapshot script and the measurement panel look it up, so it
- * lives here rather than being repeated as a string literal.
+ * Shown above the scratch page. `npm start` serves the last build, so reloading
+ * after an edit silently shows — and measures — the previous version of the
+ * file. That failure is quiet enough to waste a lot of time, hence the banner.
+ *
+ * Rendered outside the measured element by `ScenarioFrame`, and static, so it
+ * cannot affect the reported height or CLS.
  */
-export const SCENARIO_ELEMENT_ID = 'ssr-lab-scenario'
-
-/**
- * The id of the measurement panel. The observer uses it to ignore shifts that
- * happen inside the lab's own UI.
- */
-export const METER_ELEMENT_ID = 'ssr-lab-meter'
-
-/**
- * Slug of the pre-registered scratch page, so the routes can recognise it and
- * show the rebuild warning.
- */
-export const CUSTOM_SLUG = 'custom'
+export function RebuildWarning() {
+  return (
+    <>
+      <strong>Rebuild after every edit.</strong> <code>npm start</code> serves
+      the last <code>npm run build</code>, so a reload will show the previous
+      version of <code>src/scenarios/custom.tsx</code> — and the panel will
+      measure that. Run <code>npm run build &amp;&amp; npm start</code> again.
+      For writing the markup, <code>npm run dev</code> hot-reloads, but its
+      numbers are not comparable to the recorded baselines.
+    </>
+  )
+}

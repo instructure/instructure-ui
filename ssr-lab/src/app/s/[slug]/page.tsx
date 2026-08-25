@@ -25,8 +25,10 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ScenarioFrame } from '@/components/ScenarioFrame'
+import { RebuildWarning } from '@/components/RebuildWarning'
 import { LOADERS } from '@/scenarios/loaders'
 import { findScenario } from '@/scenarios/meta'
+import { CUSTOM_SLUG } from '@/lib/constants'
 
 // Never serve a cached prerender: every reload must go through an actual server
 // render, otherwise we would be measuring a static file instead of SSR.
@@ -48,7 +50,10 @@ export default async function ScenarioPage({
       <Link href="/" className="scenario__back">
         &larr; list
       </Link>
-      <ScenarioFrame title={meta.title}>
+      <ScenarioFrame
+        title={meta.title}
+        warning={slug === CUSTOM_SLUG ? <RebuildWarning /> : undefined}
+      >
         <Scenario />
       </ScenarioFrame>
     </>

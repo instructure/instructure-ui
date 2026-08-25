@@ -146,6 +146,35 @@ body {
   margin: 0 0 1rem;
 }
 
+/* The lab's own chrome around a scenario deliberately avoids the web font. Lato
+   loads after the HTML is parsed, and the swap changes text metrics — that would
+   change the chrome's height and push the measured element down, which the
+   browser reports as a layout shift against the component under test. System
+   fonts are available immediately, so they never swap. */
+.scenario__title,
+.scenario__warning {
+  font-family:
+    system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.scenario__warning {
+  border: 1px solid #e0b44a;
+  border-left-width: 0.25rem;
+  background: #fdf6e6;
+  border-radius: 0.25rem;
+  padding: 0.5rem 0.75rem;
+  margin: 0 0 1.5rem;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  max-width: 44rem;
+}
+
+.scenario__warning code {
+  background: #f4ead2;
+  border-radius: 0.1875rem;
+  padding: 0 0.1875rem;
+}
+
 .scenario__back {
   position: fixed;
   top: 0.5rem;

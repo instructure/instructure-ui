@@ -25,8 +25,10 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ScenarioFrame } from '@/components/ScenarioFrame'
+import { RebuildWarning } from '@/components/RebuildWarning'
 import { LOADERS } from '@/scenarios/loaders'
 import { findScenario } from '@/scenarios/meta'
+import { CUSTOM_SLUG } from '@/lib/constants'
 
 export const dynamic = 'force-dynamic'
 
@@ -67,6 +69,11 @@ export default async function MixPage({
         title={`Combination: ${selected
           .map((entry) => entry.meta!.title)
           .join(' + ')}`}
+        warning={
+          selected.some((entry) => entry.slug === CUSTOM_SLUG) ? (
+            <RebuildWarning />
+          ) : undefined
+        }
       >
         {selected.map(({ slug, Scenario }) => (
           <div key={slug} style={{ marginBottom: '3rem' }}>
