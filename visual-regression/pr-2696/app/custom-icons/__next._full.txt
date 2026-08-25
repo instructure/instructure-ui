@@ -1,0 +1,23 @@
+1:"$Sreact.fragment"
+2:I[78616,[],"ClientSegmentRoot"]
+3:I[84802,["11","static/chunks/11-561b8e5b9de104cd.js","5636","static/chunks/5636-78145a3b6a5469df.js","7177","static/chunks/app/layout-a371ddfcae3c18ae.js"],"default"]
+4:I[57121,[],""]
+5:I[74581,[],""]
+7:I[61304,[],"ClientPageRoot"]
+8:I[42579,["11","static/chunks/11-561b8e5b9de104cd.js","5437","static/chunks/5437-5ae2d4dad551afac.js","8904","static/chunks/8904-ff8ee911de4c3eaa.js","5636","static/chunks/5636-78145a3b6a5469df.js","8734","static/chunks/8734-f8c546f5727e0487.js","1412","static/chunks/1412-5bf30ef259f49822.js","6738","static/chunks/6738-96b52e416ee02d22.js","6174","static/chunks/6174-d1b2bf6b75e930da.js","5561","static/chunks/5561-501ad52efeac50aa.js","4403","static/chunks/app/custom-icons/page-850e9c27794c366f.js"],"default"]
+b:I[90484,[],"OutletBoundary"]
+c:"$Sreact.suspense"
+f:I[90484,[],"ViewportBoundary"]
+11:I[90484,[],"MetadataBoundary"]
+13:I[27123,[],"default",1]
+:HL["/visual-regression/pr-2696/app/_next/static/media/e4af272ccee01ff0-s.p.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/visual-regression/pr-2696/app/_next/static/css/8b6f383ea5be8530.css","style"]
+0:{"P":null,"c":["","custom-icons",""],"q":"","i":false,"f":[[["",{"children":["custom-icons",{"children":["__PAGE__",{}]}]},"$undefined","$undefined",16],[["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/visual-regression/pr-2696/app/_next/static/css/8b6f383ea5be8530.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","$L2",null,{"Component":"$3","slots":{"children":["$","$L4",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]},"serverProvidedParams":{"params":{},"promises":["$@6"]}}]]}],{"children":[["$","$1","c",{"children":[null,["$","$L4",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["$","$1","c",{"children":[["$","$L7",null,{"Component":"$8","serverProvidedParams":{"searchParams":{},"params":"$0:f:0:1:0:props:children:1:props:serverProvidedParams:params","promises":["$@9","$@a"]}}],null,["$","$Lb",null,{"children":["$","$c",null,{"name":"Next.MetadataOutlet","children":"$@d"}]}]]}],{},null,false,null]},null,false,"$@e"]},null,false,null],["$","$1","h",{"children":[null,["$","$Lf",null,{"children":"$L10"}],["$","div",null,{"hidden":true,"children":["$","$L11",null,{"children":["$","$c",null,{"name":"Next.Metadata","children":"$L12"}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],false]],"m":"$undefined","G":["$13",[]],"S":true,"h":null,"s":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"PDILR0K0HqZIE0CtmWvO5"}
+14:[]
+e:"$W14"
+6:"$0:f:0:1:0:props:children:1:props:serverProvidedParams:params"
+9:{}
+a:"$0:f:0:1:0:props:children:1:props:serverProvidedParams:params"
+10:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
+d:null
+12:[]
