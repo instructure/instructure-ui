@@ -25,7 +25,6 @@
  */
 
 import { useState } from 'react'
-import Link from 'next/link'
 import { RISK_LABELS, SCENARIOS, type RiskKind } from '@/scenarios/meta'
 
 const GROUPS: { risk: RiskKind; heading: string; hint: string }[] = [
@@ -86,9 +85,11 @@ export function ScenarioPicker() {
                         onChange={() => toggle(scenario.slug)}
                       />
                       <span>
-                        <Link href={`/s/${scenario.slug}`}>
-                          {scenario.title}
-                        </Link>
+                        {/* A plain anchor, not next/link: a client-side
+                            transition would skip the server render entirely,
+                            leaving nothing to measure. Every scenario has to be
+                            reached by a full page load. */}
+                        <a href={`/s/${scenario.slug}`}>{scenario.title}</a>
                         <span className="baseline"> {scenario.baseline}</span>
                         <span className="note"> — {scenario.note}</span>
                       </span>
@@ -103,9 +104,9 @@ export function ScenarioPicker() {
 
       <div className="actions">
         {selected.length > 0 ? (
-          <Link className="button" href={mixHref}>
+          <a className="button" href={mixHref}>
             Open {selected.length} selected on one page
-          </Link>
+          </a>
         ) : (
           <span className="button" aria-disabled="true">
             Tick components to assemble a page

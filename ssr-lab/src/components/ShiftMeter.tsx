@@ -199,6 +199,12 @@ export function ShiftMeter() {
     state.hydratedAt !== null &&
     state.fontsReadyAt > state.hydratedAt
 
+  // The snapshot script only runs while the server HTML is being parsed. If the
+  // scenario is on screen but that number is missing, this page was not reached
+  // by a real page load — a client-side transition or a back/forward restore —
+  // and there was no server render to measure.
+  const noServerRender = ssrHeight === null
+
   const signed = (value: number) => (value > 0 ? `+${value}` : `${value}`)
 
   return (
@@ -277,6 +283,13 @@ export function ShiftMeter() {
             <dt>Shifts</dt>
             <dd>{state.shifts.length}</dd>
           </dl>
+
+          {noServerRender && (
+            <p className="meter__warning">
+              No server render was measured — this page was probably reached by
+              a client-side transition or the back button. Reload it to measure.
+            </p>
+          )}
 
           {fontsAfterHydration && (
             <p className="meter__warning">

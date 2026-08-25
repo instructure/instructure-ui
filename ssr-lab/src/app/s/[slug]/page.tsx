@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ScenarioFrame } from '@/components/ScenarioFrame'
 import { RebuildWarning } from '@/components/RebuildWarning'
@@ -47,9 +46,9 @@ export default async function ScenarioPage({
 
   return (
     <>
-      <Link href="/" className="scenario__back">
+      <a href="/" className="scenario__back">
         &larr; list
-      </Link>
+      </a>
       <ScenarioFrame
         title={meta.title}
         warning={slug === CUSTOM_SLUG ? <RebuildWarning /> : undefined}
