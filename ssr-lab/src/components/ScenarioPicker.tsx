@@ -31,23 +31,23 @@ import { RISK_LABELS, SCENARIOS, type RiskKind } from '@/scenarios/meta'
 const GROUPS: { risk: RiskKind; heading: string; hint: string }[] = [
   {
     risk: 'two-pass-styles',
-    heading: 'Két-passzos stílus',
-    hint: 'Ezek a komponensek a mount után újraszámolják a stílusukat, tehát a szerver egy másik CSS-t küld le, mint amit a böngésző végül használ.'
+    heading: 'Two-pass styles',
+    hint: 'These recompute their styles after mount, so the server sends down different CSS than the one the browser ends up using.'
   },
   {
     risk: 'both',
-    heading: 'Két-passzos stílus + DOM-mérés',
-    hint: 'A két hibaforrás együtt — itt a legnagyobb az elmozdulás.'
+    heading: 'Two-pass styles + DOM measurement',
+    hint: 'Both causes at once — these tend to move the most.'
   },
   {
     risk: 'dom-measurement',
-    heading: 'DOM-mérés',
-    hint: 'Ezek megmérik a rendelkezésre álló helyet, amit a szerveren nem tudnak megtenni.'
+    heading: 'DOM measurement',
+    hint: 'These measure the space available to them, which is impossible on the server.'
   },
   {
     risk: 'suite',
-    heading: 'Összeállított oldalak',
-    hint: 'Több komponens egy oldalon, ahogy egy valódi képernyőn lennének.'
+    heading: 'Assembled pages',
+    hint: 'Several components on one page, the way they would appear on a real screen.'
   }
 ]
 
@@ -99,11 +99,11 @@ export function ScenarioPicker() {
       <div className="actions">
         {selected.length > 0 ? (
           <Link className="button" href={mixHref}>
-            {selected.length} kiválasztott megnyitása egy oldalon
+            Open {selected.length} selected on one page
           </Link>
         ) : (
           <span className="button" aria-disabled="true">
-            Jelölj ki komponenseket az összeállításhoz
+            Tick components to assemble a page
           </span>
         )}
         {selected.length > 0 && (
@@ -112,19 +112,20 @@ export function ScenarioPicker() {
             className="button"
             onClick={() => setSelected([])}
           >
-            Kijelölés törlése
+            Clear selection
           </button>
         )}
       </div>
 
       <p className="group__hint" style={{ marginTop: '1.5rem' }}>
-        Egyetlen komponens: kattints a nevére. Saját összeállítás: jelöld be
-        többet, vagy írd be kézzel az URL-t{' '}
-        <code>/mix?c=text-input&amp;c=table</code> formában. Ugyanezt lehet egy
-        új fájllal is: <code>src/scenarios/&lt;nev&gt;.tsx</code>, majd egy sor
-        a <code>loaders.ts</code>-be és a <code>meta.ts</code>-be. Az{' '}
-        {RISK_LABELS['dom-measurement']} és a {RISK_LABELS['two-pass-styles']}{' '}
-        kategória más okból ugrik, ezért érdemes külön vizsgálni őket.
+        One component: click its name. Your own combination: tick several, or
+        type the URL by hand as <code>/mix?c=text-input&amp;c=table</code>. The
+        same thing can be a file instead — add{' '}
+        <code>src/scenarios/&lt;name&gt;.tsx</code>, then one line in{' '}
+        <code>loaders.ts</code> and one entry in <code>meta.ts</code>. The{' '}
+        {RISK_LABELS['dom-measurement']} and {RISK_LABELS['two-pass-styles']}{' '}
+        groups move for different reasons, so they are worth looking at
+        separately.
       </p>
     </>
   )

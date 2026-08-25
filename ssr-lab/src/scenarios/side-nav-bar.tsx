@@ -49,10 +49,10 @@ export default function Scenario() {
   return (
     <div style={{ height: '34rem', width: '12rem' }}>
       <SideNavBar
-        label="Fő navigáció"
+        label="Main navigation"
         toggleLabel={{
-          expandedLabel: 'Navigáció összecsukása',
-          minimizedLabel: 'Navigáció kinyitása'
+          expandedLabel: 'Minimize navigation',
+          minimizedLabel: 'Expand navigation'
         }}
         onMinimized={(_event: unknown, isMinimized: boolean) =>
           setMinimized(isMinimized)
@@ -60,22 +60,22 @@ export default function Scenario() {
       >
         <SideNavBar.Item
           icon={<IconDashboardLine size={minimized ? 'small' : 'medium'} />}
-          label={<ScreenReaderContent>Kezdőlap</ScreenReaderContent>}
+          label={<ScreenReaderContent>Home</ScreenReaderContent>}
           href="#"
         />
         <SideNavBar.Item
           selected
           icon={<IconCoursesLine />}
-          label="Kurzusok"
+          label="Courses"
           href="#"
         />
         <SideNavBar.Item
           icon={<IconCalendarMonthLine />}
-          label="Naptár"
+          label="Calendar"
           href="#"
         />
-        <SideNavBar.Item icon={<IconInboxLine />} label="Bejövő" href="#" />
-        <SideNavBar.Item icon={<IconQuestionLine />} label="Súgó" href="#" />
+        <SideNavBar.Item icon={<IconInboxLine />} label="Inbox" href="#" />
+        <SideNavBar.Item icon={<IconQuestionLine />} label="Help" href="#" />
       </SideNavBar>
     </div>
   )

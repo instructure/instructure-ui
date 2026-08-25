@@ -43,7 +43,7 @@ export default function RootLayout({
   children
 }: Readonly<{ children: ReactNode }>) {
   return (
-    <html lang="hu">
+    <html lang="en">
       <head>
         {/* Must be the first script on the page: it has to be observing before
             anything gets a chance to move. */}

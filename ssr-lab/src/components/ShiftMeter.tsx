@@ -43,9 +43,10 @@ const NEEDS_IMPROVEMENT = 0.25
 const SETTLE_MS = 1200
 
 function verdict(cls: number) {
-  if (cls <= GOOD) return { text: 'jó', color: '#0b874b' }
-  if (cls <= NEEDS_IMPROVEMENT) return { text: 'javítandó', color: '#c47f00' }
-  return { text: 'rossz', color: '#c5283d' }
+  if (cls <= GOOD) return { text: 'good', color: '#0b874b' }
+  if (cls <= NEEDS_IMPROVEMENT)
+    return { text: 'needs improvement', color: '#c47f00' }
+  return { text: 'poor', color: '#c5283d' }
 }
 
 /**
@@ -129,15 +130,17 @@ export function ShiftMeter() {
   const buildReport = useCallback(() => {
     if (!state) return ''
     const lines = [
-      `oldal: ${window.location.pathname}${window.location.search}`,
+      `page: ${window.location.pathname}${window.location.search}`,
       `CLS: ${state.cls.toFixed(4)} (${verdict(state.cls).text})`,
-      `magasság: SSR ${state.preHydrationHeight ?? '?'}px -> betűtípus után ${
+      `height: server HTML ${
+        state.preHydrationHeight ?? '?'
+      }px -> after fonts ${
         state.heightAfterFonts ?? '?'
-      }px -> hidratálás után ${currentHeight ?? '?'}px`,
-      `időzítés: betűtípus ${state.fontsReadyAt ?? '?'}ms, hidratálás ${
+      }px -> after hydration ${currentHeight ?? '?'}px`,
+      `timing: fonts ${state.fontsReadyAt ?? '?'}ms, hydration ${
         state.hydratedAt ?? '?'
       }ms`,
-      `shiftek: ${state.shifts.length}`
+      `shifts: ${state.shifts.length}`
     ]
     state.shifts.forEach((shift) => {
       lines.push(`  +${shift.value.toFixed(4)} @${shift.at}ms`)
@@ -164,9 +167,9 @@ export function ShiftMeter() {
       <aside
         id="ssr-lab-meter"
         className="meter meter--waiting"
-        aria-label="Layout shift mérés"
+        aria-label="Layout shift measurement"
       >
-        <strong>Mérés folyamatban…</strong>
+        <strong>Measuring…</strong>
       </aside>
     )
   }
@@ -196,7 +199,11 @@ export function ShiftMeter() {
   const signed = (value: number) => (value > 0 ? `+${value}` : `${value}`)
 
   return (
-    <aside id="ssr-lab-meter" className="meter" aria-label="Layout shift mérés">
+    <aside
+      id="ssr-lab-meter"
+      className="meter"
+      aria-label="Layout shift measurement"
+    >
       <header className="meter__head">
         <strong>Layout shift</strong>
         <button
@@ -204,7 +211,7 @@ export function ShiftMeter() {
           className="meter__button"
           onClick={() => setCollapsed((value) => !value)}
         >
-          {collapsed ? 'Kinyit' : 'Becsuk'}
+          {collapsed ? 'Expand' : 'Collapse'}
         </button>
       </header>
 
@@ -212,8 +219,7 @@ export function ShiftMeter() {
         <>
           {state.unsupported && (
             <p className="meter__warning">
-              Ez a böngésző nem támogatja a layout-shift mérést. Használj
-              Chrome-ot vagy Edge-et.
+              This browser cannot measure layout shift. Use Chrome or Edge.
             </p>
           )}
 
@@ -223,10 +229,10 @@ export function ShiftMeter() {
           </div>
 
           <dl className="meter__facts">
-            <dt>SSR HTML</dt>
+            <dt>server HTML</dt>
             <dd>{ssrHeight ?? '?'}px</dd>
 
-            <dt>betűtípus után</dt>
+            <dt>after fonts</dt>
             <dd>
               {fontHeight ?? '?'}px
               {fontDelta !== null && fontDelta !== 0 && (
@@ -234,7 +240,7 @@ export function ShiftMeter() {
               )}
             </dd>
 
-            <dt>hidratálás után</dt>
+            <dt>after hydration</dt>
             <dd>
               {currentHeight ?? '?'}px
               {hydrationDelta !== null && hydrationDelta !== 0 && (
@@ -245,21 +251,21 @@ export function ShiftMeter() {
               )}
             </dd>
 
-            <dt>Időzítés</dt>
+            <dt>Timing</dt>
             <dd>
-              betűtípus {state.fontsReadyAt ?? '?'}ms &middot; hidratálás{' '}
+              fonts {state.fontsReadyAt ?? '?'}ms &middot; hydration{' '}
               {state.hydratedAt ?? '?'}ms
             </dd>
 
-            <dt>Shiftek</dt>
+            <dt>Shifts</dt>
             <dd>{state.shifts.length}</dd>
           </dl>
 
           {fontsAfterHydration && (
             <p className="meter__warning">
-              A betűtípus a hidratálás után állt be, így a fenti szétválasztás
-              nem megbízható. Kapcsold be a network throttlingot, hogy a
-              betűtípus biztosan előbb érkezzen meg, mint a JS.
+              The fonts settled after hydration, so the split above is not
+              reliable. Turn on network throttling so the fonts are guaranteed
+              to arrive before the JS.
             </p>
           )}
 
@@ -274,7 +280,7 @@ export function ShiftMeter() {
                   <ul>
                     {shift.sources.length === 0 && (
                       <li className="meter__source">
-                        (a böngésző nem adott meg elmozdult elemet)
+                        (the browser reported no moved element)
                       </li>
                     )}
                     {shift.sources.map((source, sourceIndex) => (
@@ -302,14 +308,14 @@ export function ShiftMeter() {
               className="meter__button"
               onClick={copyReport}
             >
-              {copied ? 'Kimásolva' : 'Riport másolása'}
+              {copied ? 'Copied' : 'Copy report'}
             </button>
             <button
               type="button"
               className="meter__button"
               onClick={() => window.location.reload()}
             >
-              Újramérés
+              Re-measure
             </button>
           </footer>
         </>

@@ -61,10 +61,10 @@ export default async function MixPage({
   return (
     <>
       <Link href="/" className="scenario__back">
-        &larr; lista
+        &larr; list
       </Link>
       <ScenarioFrame
-        title={`Összeállítás: ${selected
+        title={`Combination: ${selected
           .map((entry) => entry.meta!.title)
           .join(' + ')}`}
       >

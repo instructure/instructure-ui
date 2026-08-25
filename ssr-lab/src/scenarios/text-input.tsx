@@ -40,8 +40,8 @@ const RadioInput = ri as any
 const RadioInputGroup = rig as any
 const View = vw as any
 
-const error = [{ type: 'newError', text: 'Ez a mező kötelező' }]
-const hint = [{ type: 'hint', text: 'Legalább 8 karakter' }]
+const error = [{ type: 'newError', text: 'This field is required' }]
+const hint = [{ type: 'hint', text: 'At least 8 characters' }]
 
 export default function Scenario() {
   return (
@@ -52,13 +52,13 @@ export default function Scenario() {
         <TextInput renderLabel="" display="inline-block" />
 
         {/* Visible label only. */}
-        <TextInput renderLabel="Csak label" />
+        <TextInput renderLabel="Label only" />
 
         {/* Label + message: the server-side grid has neither a `label` nor a
             `messages` row, so both get placed into implicit tracks and then
             move once the real styles arrive. */}
-        <TextInput renderLabel="Label és hibaüzenet" messages={error} />
-        <TextInput renderLabel="Label és hint" messages={hint} isRequired />
+        <TextInput renderLabel="Label and error" messages={error} />
+        <TextInput renderLabel="Label and hint" messages={hint} isRequired />
         <NumberInput renderLabel="NumberInput" messages={error} isRequired />
 
         {/* Inline layout puts the label in a column, which is a second grid
@@ -76,8 +76,8 @@ export default function Scenario() {
           description="RadioInputGroup"
           messages={error}
         >
-          <RadioInput label="Első" value="1" />
-          <RadioInput label="Második" value="2" />
+          <RadioInput label="First" value="1" />
+          <RadioInput label="Second" value="2" />
         </RadioInputGroup>
       </div>
     </View>

@@ -46,7 +46,7 @@ export default function Scenario() {
           visibleMonth="2026-02"
           currentDate="2026-02-10"
           withYearPicker={{
-            screenReaderLabel: 'Év választó',
+            screenReaderLabel: 'Year picker',
             startYear: 2000,
             endYear: 2030,
             maxHeight: '200px'

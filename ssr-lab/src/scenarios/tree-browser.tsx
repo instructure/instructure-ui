@@ -32,23 +32,23 @@ const View = vw as any
 const collections = {
   1: {
     id: 1,
-    name: 'Feladatok',
+    name: 'Assignments',
     collections: [2, 3],
     items: [3],
-    descriptor: 'Osztály feladatai'
+    descriptor: 'Class assignments'
   },
-  2: { id: 2, name: 'Irodalom', collections: [4], items: [] },
-  3: { id: 3, name: 'Matematika', collections: [5], items: [1, 2] },
-  4: { id: 4, name: 'Olvasás', collections: [], items: [4] },
-  5: { id: 5, name: 'Haladó matematika', items: [5] }
+  2: { id: 2, name: 'Literature', collections: [4], items: [] },
+  3: { id: 3, name: 'Mathematics', collections: [5], items: [1, 2] },
+  4: { id: 4, name: 'Reading', collections: [], items: [4] },
+  5: { id: 5, name: 'Advanced mathematics', items: [5] }
 }
 
 const items = {
-  1: { id: 1, name: 'Összeadás munkalap' },
-  2: { id: 2, name: 'Kivonás munkalap' },
-  3: { id: 3, name: 'Általános kérdések' },
-  4: { id: 4, name: 'Vogon költészet' },
-  5: { id: 5, name: 'Bistromath', descriptor: 'Magyarázd el a hajtóművet' }
+  1: { id: 1, name: 'Addition worksheet' },
+  2: { id: 2, name: 'Subtraction worksheet' },
+  3: { id: 3, name: 'General questions' },
+  4: { id: 4, name: 'Vogon poetry' },
+  5: { id: 5, name: 'Bistromath', descriptor: 'Explain the drive' }
 }
 
 export default function Scenario() {

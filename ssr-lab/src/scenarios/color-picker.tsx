@@ -29,17 +29,17 @@ import { ColorPicker as cp, View as vw } from '@instructure/ui/latest'
 const ColorPicker = cp as any
 const View = vw as any
 
-const error = [{ type: 'newError', text: 'Érvénytelen szín' }]
+const error = [{ type: 'newError', text: 'Invalid color' }]
 
 export default function Scenario() {
   return (
     <View as="div" maxWidth="30rem">
-      <ColorPicker label="Alap" placeholderText="HEX kód" />
+      <ColorPicker label="Basic" placeholderText="HEX code" />
 
       <View as="div" margin="medium 0">
         <ColorPicker
-          label="Kötelező, hibaüzenettel"
-          placeholderText="HEX kód"
+          label="Required, with an error"
+          placeholderText="HEX code"
           isRequired
           renderMessages={() => error}
         />
@@ -47,8 +47,8 @@ export default function Scenario() {
 
       <View as="div" margin="medium 0">
         <ColorPicker
-          label="Előnézettel"
-          placeholderText="HEX kód"
+          label="With a preview"
+          placeholderText="HEX code"
           withAlpha
           value="#0097D3"
         />

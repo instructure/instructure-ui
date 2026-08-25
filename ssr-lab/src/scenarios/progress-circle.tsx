@@ -42,7 +42,7 @@ export default function Scenario() {
           <ProgressCircle
             key={size}
             size={size}
-            screenReaderLabel="Betöltés"
+            screenReaderLabel="Loading"
             valueNow={40}
             valueMax={60}
           />
@@ -57,7 +57,7 @@ export default function Scenario() {
             <ProgressCircle
               key={size}
               size={size}
-              screenReaderLabel="Betöltés animációval"
+              screenReaderLabel="Loading with animation"
               valueNow={40}
               valueMax={60}
               shouldAnimateOnMount
@@ -71,7 +71,7 @@ export default function Scenario() {
           <View as="div" key={size} margin="0 0 small">
             <ProgressBar
               size={size}
-              screenReaderLabel="Betöltés"
+              screenReaderLabel="Loading"
               valueNow={40}
               valueMax={60}
             />

@@ -56,7 +56,7 @@ const FileDrop = fd as any
 const Button = btn as any
 const Alert = al as any
 
-const error = [{ type: 'newError', text: 'Ez a mező kötelező' }]
+const error = [{ type: 'newError', text: 'This field is required' }]
 
 /**
  * A realistic "create assignment" form. Individually each field shifts by a few
@@ -66,52 +66,55 @@ const error = [{ type: 'newError', text: 'Ez a mező kötelező' }]
 export default function Scenario() {
   return (
     <View as="div" maxWidth="38rem">
-      <Heading level="h1">Feladat létrehozása</Heading>
+      <Heading level="h1">Create assignment</Heading>
 
       <View as="div" margin="medium 0">
         <Alert variant="info" margin="0">
-          Az űrlap kitöltése után mentsd el a feladatot.
+          Save the assignment once the form is filled in.
         </Alert>
       </View>
 
       <div style={{ display: 'grid', gap: '1.25rem' }}>
-        <TextInput renderLabel="Feladat neve" isRequired messages={error} />
+        <TextInput renderLabel="Assignment name" isRequired messages={error} />
 
-        <TextArea label="Leírás" defaultValue={'Első sor\nMásodik sor'} />
+        <TextArea
+          label="Description"
+          defaultValue={'First line\nSecond line'}
+        />
 
-        <NumberInput renderLabel="Pontszám" isRequired />
+        <NumberInput renderLabel="Points" isRequired />
 
-        <SimpleSelect renderLabel="Feladat típusa">
+        <SimpleSelect renderLabel="Assignment type">
           <SimpleSelect.Option id="essay" value="essay">
-            Esszé
+            Essay
           </SimpleSelect.Option>
           <SimpleSelect.Option id="quiz" value="quiz">
-            Kvíz
+            Quiz
           </SimpleSelect.Option>
           <SimpleSelect.Option id="upload" value="upload">
-            Feltöltés
+            Upload
           </SimpleSelect.Option>
         </SimpleSelect>
 
         <RadioInputGroup
           name="ssrLabVisibility"
-          description="Láthatóság"
+          description="Visibility"
           messages={error}
         >
-          <RadioInput label="Mindenki" value="all" />
-          <RadioInput label="Csak szekciók" value="sections" />
+          <RadioInput label="Everyone" value="all" />
+          <RadioInput label="Sections only" value="sections" />
         </RadioInputGroup>
 
-        <CheckboxGroup name="ssrLabOptions" description="Beállítások">
-          <Checkbox label="Csoportos feladat" value="group" />
+        <CheckboxGroup name="ssrLabOptions" description="Options">
+          <Checkbox label="Group assignment" value="group" />
           <Checkbox label="Peer review" value="peer" />
-          <Checkbox label="Anonim értékelés" value="anonymous" />
+          <Checkbox label="Anonymous grading" value="anonymous" />
         </CheckboxGroup>
 
         <FileDrop
           renderLabel={
             <View as="div" padding="medium" background="secondary">
-              <Text>Csatolmány feltöltése</Text>
+              <Text>Upload an attachment</Text>
             </View>
           }
         />
@@ -119,9 +122,9 @@ export default function Scenario() {
 
       <View as="div" margin="large 0 0">
         <Button color="primary" margin="0 small 0 0">
-          Mentés
+          Save
         </Button>
-        <Button>Mégse</Button>
+        <Button>Cancel</Button>
       </View>
     </View>
   )

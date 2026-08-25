@@ -29,24 +29,24 @@ import { Drilldown as dd, View as vw } from '@instructure/ui/latest'
 const Drilldown = dd as any
 const View = vw as any
 
-const fruits = ['Alma', 'Narancs', 'Cseresznye', 'Mangó', 'Banán', 'Szamóca']
-const vegetables = ['Paradicsom', 'Uborka', 'Répa', 'Spenót', 'Brokkoli']
+const fruits = ['Apple', 'Orange', 'Cherry', 'Mango', 'Banana', 'Strawberry']
+const vegetables = ['Tomato', 'Cucumber', 'Carrot', 'Spinach', 'Broccoli']
 
 export default function Scenario() {
   return (
     <View as="div" maxWidth="30rem">
       <Drilldown rootPageId="root" width="20rem" maxHeight="26rem">
-        <Drilldown.Page id="root" renderTitle="Élelmiszer">
+        <Drilldown.Page id="root" renderTitle="Groceries">
           <Drilldown.Option id="fruits" subPageId="fruits">
-            Gyümölcsök
+            Fruits
           </Drilldown.Option>
           <Drilldown.Option id="vegetables" subPageId="vegetables">
-            Zöldségek
+            Vegetables
           </Drilldown.Option>
-          <Drilldown.Option id="other">Egyéb</Drilldown.Option>
+          <Drilldown.Option id="other">Other</Drilldown.Option>
         </Drilldown.Page>
 
-        <Drilldown.Page id="fruits" renderTitle="Gyümölcsök">
+        <Drilldown.Page id="fruits" renderTitle="Fruits">
           {fruits.map((fruit) => (
             <Drilldown.Option id={`fruit-${fruit}`} key={fruit}>
               {fruit}
@@ -54,7 +54,7 @@ export default function Scenario() {
           ))}
         </Drilldown.Page>
 
-        <Drilldown.Page id="vegetables" renderTitle="Zöldségek">
+        <Drilldown.Page id="vegetables" renderTitle="Vegetables">
           {vegetables.map((vegetable) => (
             <Drilldown.Option id={`vegetable-${vegetable}`} key={vegetable}>
               {vegetable}

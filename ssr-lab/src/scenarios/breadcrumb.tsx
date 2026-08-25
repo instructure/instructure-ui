@@ -35,11 +35,11 @@ const View = vw as any
 const Text = tx as any
 
 const crumbs = [
-  'Kurzusok',
-  'Magyar irodalom 204',
-  'Modulok',
-  'Második félév',
-  'Aktuális lecke'
+  'Courses',
+  'English literature 204',
+  'Modules',
+  'Second term',
+  'Current lesson'
 ]
 
 /**
@@ -53,7 +53,7 @@ export default function Scenario() {
       {['48rem', '30rem', '20rem', '14rem'].map((width) => (
         <View as="div" key={width} margin="0 0 medium" maxWidth={width}>
           <Text size="small">{width}</Text>
-          <Breadcrumb label="Itt vagy">
+          <Breadcrumb label="You are here">
             {crumbs.map((crumb, index) =>
               index === crumbs.length - 1 ? (
                 <Breadcrumb.Link key={crumb}>{crumb}</Breadcrumb.Link>

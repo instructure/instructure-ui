@@ -37,7 +37,7 @@ const Heading = hd as any
 const Text = tx as any
 
 const paragraph =
-  'A TruncateText csak akkor tudja eldönteni, hol vágja el a szöveget, ha meg tudja mérni a rendelkezésre álló helyet. A szerveren nincs mit mérni, ezért a teljes szöveg kerül a HTML-be, és a rövidítés csak a hidratálás után történik meg.'
+  'TruncateText can only decide where to cut the text once it can measure the space available to it. There is nothing to measure on the server, so the full text goes into the HTML and the truncation only happens after hydration.'
 
 export default function Scenario() {
   return (
@@ -64,7 +64,7 @@ export default function Scenario() {
 
       {/* Content below the truncated blocks: this is what visibly moves. */}
       <View as="div" background="secondary" padding="small" margin="medium 0 0">
-        <Text>Ez a blokk a rövidített szövegek alatt van.</Text>
+        <Text>This block sits below the truncated paragraphs.</Text>
       </View>
     </View>
   )

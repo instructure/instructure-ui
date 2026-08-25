@@ -54,7 +54,7 @@ export default function Scenario() {
           id="ssrLabTray"
           open={open}
           placement="start"
-          label="Példa fiók"
+          label="Example tray"
           onDismiss={() => setOpen(false)}
         >
           <View as="div" maxWidth="16rem" padding="medium">
@@ -62,27 +62,27 @@ export default function Scenario() {
               placement="end"
               offset="small"
               onClick={() => setOpen(false)}
-              screenReaderLabel="Bezárás"
+              screenReaderLabel="Close"
             />
             <Text as="div" size="small">
-              A fiók tartalma.
+              The tray content.
             </Text>
           </View>
         </DrawerLayout.Tray>
 
-        <DrawerLayout.Content label="Példa tartalom">
+        <DrawerLayout.Content label="Example content">
           <View as="div" padding="large" background="primary">
-            <Heading>Egyszerű drawer layout</Heading>
+            <Heading>A simple drawer layout</Heading>
             <Button
               margin="medium 0"
               size="small"
               onClick={() => setOpen(true)}
             >
-              Fiók kinyitása
+              Expand tray
             </Button>
             <Text as="p" size="small">
-              A tartalom szélessége dönti el, hogy a fiók átfedi-e ezt a
-              területet vagy mellé kerül.
+              The content width decides whether the tray overlays this area or
+              sits beside it.
             </Text>
           </View>
         </DrawerLayout.Content>

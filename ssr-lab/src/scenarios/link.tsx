@@ -40,28 +40,28 @@ export default function Scenario() {
   return (
     <View as="div" maxWidth="34rem">
       <Text as="p">
-        Egy bekezdés, benne{' '}
-        <Link href="https://instructure.design/">egy linkkel</Link>, hogy
-        látszódjon, elmozdul-e a körülötte lévő szöveg.
+        A paragraph with{' '}
+        <Link href="https://instructure.design/">a link in it</Link>, so it is
+        visible whether the surrounding text moves.
       </Text>
 
       <Text as="p">
-        Ikonos link:{' '}
+        Link with an icon:{' '}
         <Link href="https://instructure.design/" renderIcon={<IconUserLine />}>
-          profil
+          profile
         </Link>{' '}
-        — az ikon szélessége befolyásolja a sortörést.
+        — the icon width affects where the line breaks.
       </Text>
 
       <View as="div" margin="medium 0">
         <Link variant="standalone" href="https://instructure.design/">
-          Önálló link
+          Standalone link
         </Link>
       </View>
 
       <View as="div" margin="medium 0">
         <Link variant="inline-small" href="https://instructure.design/">
-          Kis inline link
+          Small inline link
         </Link>
       </View>
 

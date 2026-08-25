@@ -43,35 +43,37 @@ const IconClockLine = iclk as any
 export default function Scenario() {
   return (
     <View as="div" maxWidth="26rem">
-      <Text size="small">Rövid szövegek</Text>
+      <Text size="small">Short labels</Text>
       <View as="div" margin="x-small 0 medium">
-        <Pill margin="x-small">Felmentve</Pill>
+        <Pill margin="x-small">Excused</Pill>
         <Pill color="info" margin="x-small">
-          Piszkozat
+          Draft
         </Pill>
         <Pill renderIcon={<IconCheckLine />} color="success" margin="x-small">
-          Kész
+          Checked in
         </Pill>
         <Pill renderIcon={<IconClockLine />} color="warning" margin="x-small">
-          Késés
+          Late
         </Pill>
       </View>
 
       {/* Pill measures its own text to decide whether it needs truncating, so a
           label that is too long for the container is the interesting case. */}
-      <Text size="small">Hosszú szövegek szűk helyen</Text>
+      <Text size="small">Long labels in a narrow container</Text>
       <View as="div" margin="x-small 0 medium" maxWidth="12rem">
-        <Pill margin="x-small">Ez egy szándékosan túl hosszú pill szöveg</Pill>
-        <Pill color="danger" margin="x-small" statusLabel="Állapot">
-          Még egy hosszú felirat a csonkoláshoz
+        <Pill margin="x-small">
+          This pill label is deliberately far too long
+        </Pill>
+        <Pill color="danger" margin="x-small" statusLabel="Status">
+          Another long label to force truncation
         </Pill>
       </View>
 
       <Text size="small">Tag</Text>
       <View as="div" margin="x-small 0 0">
-        <Tag text="Statikus" margin="0 xx-small 0 0" />
-        <Tag text="Közepes" margin="0 xx-small 0 0" />
-        <Tag text="Nagy" size="large" margin="0 xx-small 0 0" />
+        <Tag text="Static" margin="0 xx-small 0 0" />
+        <Tag text="Medium" margin="0 xx-small 0 0" />
+        <Tag text="Large" size="large" margin="0 xx-small 0 0" />
       </View>
     </View>
   )

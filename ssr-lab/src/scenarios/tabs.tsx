@@ -31,19 +31,19 @@ const Text = tx as any
 const View = vw as any
 
 const filler =
-  'Ez a panel tartalma. Azért van benne több sor szöveg, hogy a panel magassága érzékelhető legyen, ha a Tabs a mount után átméretezi magát.'
+  'The panel content. It spans several lines so the panel height is noticeable if Tabs resizes itself after mount.'
 
 export default function Scenario() {
   return (
     <View as="div" maxWidth="44rem">
       <Tabs>
-        <Tabs.Panel id="p1" renderTitle="Áttekintés">
+        <Tabs.Panel id="p1" renderTitle="Overview">
           <Text as="p">{filler}</Text>
         </Tabs.Panel>
-        <Tabs.Panel id="p2" renderTitle="Részletek">
+        <Tabs.Panel id="p2" renderTitle="Details">
           <Text as="p">{filler}</Text>
         </Tabs.Panel>
-        <Tabs.Panel id="p3" renderTitle="Aktivitás">
+        <Tabs.Panel id="p3" renderTitle="Activity">
           <Text as="p">{filler}</Text>
         </Tabs.Panel>
       </Tabs>
@@ -67,9 +67,9 @@ export default function Scenario() {
             <Tabs.Panel
               key={index}
               id={`overflow-${index}`}
-              renderTitle={`Hosszabb fül ${index + 1}`}
+              renderTitle={`Longer tab ${index + 1}`}
             >
-              <Text as="p">{index + 1}. panel</Text>
+              <Text as="p">Panel {index + 1}</Text>
             </Tabs.Panel>
           ))}
         </Tabs>

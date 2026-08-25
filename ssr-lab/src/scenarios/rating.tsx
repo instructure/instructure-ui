@@ -40,7 +40,7 @@ export default function Scenario() {
           <Text size="small">{size}</Text>
           <div style={{ display: 'flex', gap: '2rem' }}>
             <Rating
-              label="Értékelés animáció nélkül"
+              label="Rating without animation"
               size={size}
               iconCount={5}
               valueNow={3.76}
@@ -51,7 +51,7 @@ export default function Scenario() {
                 mount-time visual change on top of the two-pass styles. */}
             <Rating
               animateFill
-              label="Értékelés animációval"
+              label="Rating with animation"
               size={size}
               iconCount={5}
               valueNow={3.76}

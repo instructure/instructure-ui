@@ -69,15 +69,15 @@ export default function Scenario() {
 
       <View as="div" margin="medium 0">
         <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-          <IconButton screenReaderLabel="Törlés">
+          <IconButton screenReaderLabel="Delete">
             <IconTrashLine />
           </IconButton>
-          <IconButton screenReaderLabel="Megtekintés" withBackground={false}>
+          <IconButton screenReaderLabel="View" withBackground={false}>
             <IconEyeLine />
           </IconButton>
           <ToggleButton
-            screenReaderLabel="Megtekintés"
-            renderTooltipContent="Megtekintés"
+            screenReaderLabel="View"
+            renderTooltipContent="View"
             renderIcon={IconEyeLine}
             status="pressed"
           />

@@ -29,28 +29,29 @@ export default function IndexPage() {
     <main className="page">
       <h1>InstUI SSR lab</h1>
       <p className="lede">
-        Minden oldal valódi szerveroldali rendereléssel jön le, majd a
-        böngészőben hidratálódik — ugyanaz a folyamat, amit egy Next.js
-        alkalmazás csinálna. A jobb alsó panel megmutatja, mennyit mozdult el a
-        tartalom eközben: a <strong>CLS</strong> a Google mérőszáma (0,1 alatt
-        jó), a <strong>magasság</strong> pedig azt mutatja, hány pixellel lett
-        más az oldal a hidratálás után. Csak a v2 (<code>latest</code>)
-        komponensek szerepelnek.
+        Every page here is rendered on the server for real and then hydrated in
+        the browser — the same sequence a Next.js app goes through. The panel in
+        the top right reports how much the content moved in between:{' '}
+        <strong>CLS</strong> is Google&rsquo;s metric (under 0.1 is good), and{' '}
+        <strong>height</strong> shows how many pixels taller or shorter the page
+        became once hydration finished. Only the v2 (<code>latest</code>)
+        components are covered.
       </p>
       <p className="lede">
-        A lista minden eleménél szerepel egy referenciaérték az első felmérésből
-        (production build, 1280&times;900, headless Chrome, 4&times; CPU
-        lassítás). A saját géped és böngészőablakod más számokat fog adni — az
-        előjel és a nagyságrend az, amit érdemes összevetni. Valósághű
-        eredményhez <code>npm run build &amp;&amp; npm start</code>-ot használj,
-        ne a <code>npm run dev</code>-et.
+        Each entry carries the value it measured on the first survey (production
+        build, 1280&times;900, headless Chrome, 4&times; CPU throttling). Your
+        machine and window size will produce different absolute numbers — the
+        sign and the order of magnitude are what to compare. For realistic
+        results run <code>npm run build &amp;&amp; npm start</code>, not{' '}
+        <code>npm run dev</code>.
       </p>
       <p className="lede">
-        A lassú betöltés szimulálásához nyisd meg a DevToolst, és a Network
-        fülön állítsd a throttlingot &bdquo;Slow 4G&rdquo;-re, a Performance
-        fülön pedig a CPU-t 4&times; vagy 6&times; lassításra. Utána töltsd újra
-        az oldalt — így válik szemmel is láthatóvá az, amit a panel számokban
-        mutat.
+        To make a shift visible rather than just measurable, open DevTools, set
+        Performance &rarr; CPU to 20&times; slowdown, and enable Rendering
+        &rarr; <em>Layout Shift Regions</em>, which flashes the areas that
+        moved. Then reload with <code>Cmd+Shift+R</code>. A slow network profile
+        with high latency helps too, but CPU throttling is the more reliable
+        lever on localhost.
       </p>
 
       <ScenarioPicker />

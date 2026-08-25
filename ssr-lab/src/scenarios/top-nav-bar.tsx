@@ -29,7 +29,7 @@ import { TopNavBar as tnb, View as vw } from '@instructure/ui/latest'
 const TopNavBar = tnb as any
 const View = vw as any
 
-const pages = ['Áttekintés', 'Feladatok', 'Emberek', 'Jegyek', 'Beállítások']
+const pages = ['Overview', 'Assignments', 'People', 'Grades', 'Settings']
 
 export default function Scenario() {
   return (
@@ -40,23 +40,23 @@ export default function Scenario() {
       <TopNavBar>
         {() => (
           <TopNavBar.Layout
-            navLabel="Példa navigáció"
+            navLabel="Example navigation"
             smallViewportConfig={{
-              dropdownMenuToggleButtonLabel: 'Menü',
-              dropdownMenuLabel: 'Főmenü'
+              dropdownMenuToggleButtonLabel: 'Toggle menu',
+              dropdownMenuLabel: 'Main menu'
             }}
             renderBrand={
-              <TopNavBar.Brand screenReaderLabel="Márkanév" href="#" />
+              <TopNavBar.Brand screenReaderLabel="Brand name" href="#" />
             }
             renderMenuItems={
               <TopNavBar.MenuItems
-                listLabel="Oldal navigáció"
+                listLabel="Page navigation"
                 currentPageId="page-0"
                 renderHiddenItemsMenuTriggerLabel={(count: number) =>
-                  `${count} további`
+                  `${count} more`
                 }
                 renderHiddenItemsMenuTriggerAriaLabel={(count: number) =>
-                  `${count} további menüelem`
+                  `${count} more menu items`
                 }
               >
                 {pages.map((page, index) => (
@@ -80,20 +80,20 @@ export default function Scenario() {
         <TopNavBar breakpoint="10rem">
           {() => (
             <TopNavBar.Layout
-              navLabel="Szűk navigáció"
+              navLabel="Narrow navigation"
               smallViewportConfig={{
-                dropdownMenuToggleButtonLabel: 'Menü',
-                dropdownMenuLabel: 'Főmenü'
+                dropdownMenuToggleButtonLabel: 'Toggle menu',
+                dropdownMenuLabel: 'Main menu'
               }}
               renderMenuItems={
                 <TopNavBar.MenuItems
-                  listLabel="Oldal navigáció"
+                  listLabel="Page navigation"
                   currentPageId="narrow-0"
                   renderHiddenItemsMenuTriggerLabel={(count: number) =>
-                    `${count} további`
+                    `${count} more`
                   }
                   renderHiddenItemsMenuTriggerAriaLabel={(count: number) =>
-                    `${count} további menüelem`
+                    `${count} more menu items`
                   }
                 >
                   {pages.map((page, index) => (

@@ -44,16 +44,16 @@ export default function Scenario() {
       ].map((config, index) => (
         <View as="div" key={index} margin="0 0 medium">
           <ToggleGroup
-            toggleLabel="Tartalom nyitása és zárása"
-            summary={`Összefoglaló ${index + 1}`}
+            toggleLabel="Open and close the content"
+            summary={`Summary ${index + 1}`}
             background={config.background}
             defaultExpanded={config.expanded}
             transition={false}
           >
             <View display="block" padding="medium">
               <Text>
-                A kinyitott tartalom. Ha a ToggleGroup a mount után változtat
-                paddinget vagy bordert, az itt lentebb tolja mindent.
+                The expanded content. If ToggleGroup changes padding or border
+                after mount, everything below is pushed down.
               </Text>
             </View>
           </ToggleGroup>

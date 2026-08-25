@@ -33,29 +33,29 @@ const Text = tx as any
 const longValue = Array.from({ length: 8 })
   .map(
     (_item, index) =>
-      `${
+      `Line ${
         index + 1
-      }. sor: a TextArea autogrow magassága a tartalom megméréséből jön.`
+      }: the TextArea autogrow height comes from measuring the content.`
   )
   .join('\n')
 
 export default function Scenario() {
   return (
     <View as="div" maxWidth="32rem">
-      <TextArea label="Alap" placeholder="Írj valamit" />
+      <TextArea label="Basic" placeholder="Type something" />
 
       <View as="div" margin="medium 0">
         {/* autoGrow sizes the field from the measured content height, which only
             exists after mount. The server renders the default height. */}
         <TextArea
-          label="Autogrow, hosszú kezdőértékkel"
+          label="Autogrow with a long initial value"
           defaultValue={longValue}
         />
       </View>
 
       <View as="div" margin="medium 0">
         <TextArea
-          label="Autogrow kikapcsolva"
+          label="Autogrow disabled"
           autoGrow={false}
           defaultValue={longValue}
         />
@@ -63,13 +63,13 @@ export default function Scenario() {
 
       <View as="div" margin="medium 0">
         <TextArea
-          label="Hibaüzenettel"
-          messages={[{ type: 'newError', text: 'Túl hosszú' }]}
+          label="With an error message"
+          messages={[{ type: 'newError', text: 'Too long' }]}
           defaultValue={longValue}
         />
       </View>
 
-      <Text as="p">Ez a bekezdés a mezők alatt van.</Text>
+      <Text as="p">This paragraph sits below the fields.</Text>
     </View>
   )
 }

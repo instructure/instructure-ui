@@ -40,7 +40,7 @@ const Text = tx as any
 const Billboard = bb as any
 const IconImageLine = iil as any
 
-const error = [{ type: 'newError', text: 'Nem támogatott fájltípus' }]
+const error = [{ type: 'newError', text: 'Unsupported file type' }]
 
 export default function Scenario() {
   return (
@@ -49,8 +49,8 @@ export default function Scenario() {
         accept="image/*"
         renderLabel={
           <View as="div" padding="large" background="primary">
-            <Heading>Húzd ide a fájlokat</Heading>
-            <Text color="brand">Vagy kattints a böngészéshez</Text>
+            <Heading>Drop files here</Heading>
+            <Text color="brand">Or click to browse</Text>
           </View>
         }
       />
@@ -60,8 +60,8 @@ export default function Scenario() {
           messages={error}
           renderLabel={
             <Billboard
-              heading="Kép feltöltése"
-              message="Húzd ide, vagy kattints"
+              heading="Upload an image"
+              message="Drag and drop, or click"
               hero={<IconImageLine />}
             />
           }
@@ -73,7 +73,7 @@ export default function Scenario() {
           interaction="disabled"
           renderLabel={
             <View as="div" padding="medium" background="secondary">
-              <Text>Letiltott állapot</Text>
+              <Text>Disabled state</Text>
             </View>
           }
         />

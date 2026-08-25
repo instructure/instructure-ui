@@ -46,10 +46,10 @@ export default function Scenario() {
       <Table caption={() => 'Auto layout'} layout="auto" hover>
         <Table.Head>
           <Table.Row>
-            <Table.ColHeader id="rank">Helyezés</Table.ColHeader>
-            <Table.ColHeader id="title">Cím</Table.ColHeader>
-            <Table.ColHeader id="year">Év</Table.ColHeader>
-            <Table.ColHeader id="rating">Értékelés</Table.ColHeader>
+            <Table.ColHeader id="rank">Rank</Table.ColHeader>
+            <Table.ColHeader id="title">Title</Table.ColHeader>
+            <Table.ColHeader id="year">Year</Table.ColHeader>
+            <Table.ColHeader id="rating">Rating</Table.ColHeader>
           </Table.Row>
         </Table.Head>
         <Table.Body>
@@ -70,10 +70,10 @@ export default function Scenario() {
         <Table caption={() => 'Stacked layout'} layout="stacked">
           <Table.Head>
             <Table.Row>
-              <Table.ColHeader id="s-rank">Helyezés</Table.ColHeader>
-              <Table.ColHeader id="s-title">Cím</Table.ColHeader>
-              <Table.ColHeader id="s-year">Év</Table.ColHeader>
-              <Table.ColHeader id="s-rating">Értékelés</Table.ColHeader>
+              <Table.ColHeader id="s-rank">Rank</Table.ColHeader>
+              <Table.ColHeader id="s-title">Title</Table.ColHeader>
+              <Table.ColHeader id="s-year">Year</Table.ColHeader>
+              <Table.ColHeader id="s-rating">Rating</Table.ColHeader>
             </Table.Row>
           </Table.Head>
           <Table.Body>

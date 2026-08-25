@@ -60,10 +60,10 @@ export type ScenarioMeta = {
 }
 
 export const RISK_LABELS: Record<RiskKind, string> = {
-  'two-pass-styles': 'két-passzos stílus',
-  'dom-measurement': 'DOM-mérés',
-  both: 'két-passzos + DOM-mérés',
-  suite: 'összeállított oldal'
+  'two-pass-styles': 'two-pass styles',
+  'dom-measurement': 'DOM measurement',
+  both: 'two-pass + DOM measurement',
+  suite: 'assembled page'
 }
 
 export const SCENARIOS: ScenarioMeta[] = [
@@ -71,169 +71,169 @@ export const SCENARIOS: ScenarioMeta[] = [
     slug: 'text-input',
     title: 'TextInput + FormFieldLayout',
     risk: 'two-pass-styles',
-    note: 'A ticketben említett eset. A FormFieldLayout grid-je v2-ben helyes a szerver HTML-ben (mind a 6 példány ugyanazt a grid-template-areas értéket adja hidratálás előtt és után) — v1-ben viszont csak "controls" van, tehát a label és a hibaüzenet implicit sorokba kerül. Az itt korábban mért +124px a NumberInput `if (!id) return null` kapujából jött, amit az INSTUI-5152 (useId alapú id-generálás) megszüntetett: az oldal most 0px-et mozdul.',
-    baseline: 'CLS 0,000 · 0px'
+    note: 'The case named in the ticket. In v2 the FormFieldLayout grid is already correct in the server HTML (all 6 instances produce the same grid-template-areas before and after hydration); in v1 it collapses to just "controls", so the label and the messages land in implicit tracks. The +124px measured here earlier came from the NumberInput `if (!id) return null` gate, which INSTUI-5152 (useId-based ids) removed: the page now moves 0px.',
+    baseline: 'CLS 0.000 · 0px'
   },
   {
     slug: 'link',
     title: 'Link',
     risk: 'two-pass-styles',
-    note: 'Link/v2 a componentDidMount-ban számol újra stílust; a bekezdés újratördelése miatt kicsit összébb húzódik.',
-    baseline: 'CLS 0,002 · −16px'
+    note: 'Link/v2 recomputes its styles in componentDidMount; the paragraph re-wraps and pulls together slightly.',
+    baseline: 'CLS 0.001 · −16px'
   },
   {
     slug: 'button',
     title: 'Button / BaseButton',
     risk: 'two-pass-styles',
-    note: 'BaseButton/v2 két-passzos, de a mért elmozdulás elhanyagolható. Nagyon sok komponens épül rá, ezért érdemes szemmel tartani.',
-    baseline: 'CLS 0,000 · 0px'
+    note: 'BaseButton/v2 is two-pass, but the measured movement is negligible. Worth watching because a great many components build on it.',
+    baseline: 'CLS 0.000 · 0px'
   },
   {
     slug: 'table',
     title: 'Table',
     risk: 'two-pass-styles',
-    note: 'Table.Row/v2 két-passzos; a sorok magassága a hidratálás után nő.',
-    baseline: 'CLS 0,015 · +64px'
+    note: 'Table.Row/v2 is two-pass; row heights grow after hydration.',
+    baseline: 'CLS 0.020 · +64px'
   },
   {
     slug: 'tabs',
     title: 'Tabs',
     risk: 'both',
-    note: 'Tabs.Panel/v2 két-passzos és a Tabs méri a fejléc túlcsordulását, de ezen az oldalon nem eredményezett elmozdulást.',
+    note: 'Tabs.Panel/v2 is two-pass and Tabs measures header overflow, but neither moved anything on this page.',
     baseline: 'CLS 0 · 0px'
   },
   {
     slug: 'tree-browser',
     title: 'TreeBrowser',
     risk: 'two-pass-styles',
-    note: 'TreeNode, TreeButton és TreeCollection mind két-passzos, mégsem mozdult el semmi.',
+    note: 'TreeNode, TreeButton and TreeCollection are all two-pass, yet nothing moved.',
     baseline: 'CLS 0 · 0px'
   },
   {
     slug: 'side-nav-bar',
     title: 'SideNavBar',
     risk: 'two-pass-styles',
-    note: 'A `minimized` állapot csak mount után kerül a stílusba; a kezdő állapotban nem látszik elmozdulás.',
+    note: 'The `minimized` flag only reaches the styles after mount; in the initial state no movement shows up.',
     baseline: 'CLS 0 · 0px'
   },
   {
     slug: 'top-nav-bar',
     title: 'TopNavBar',
     risk: 'both',
-    note: 'A legsúlyosabb eset: a szerver HTML-ben a komponens NULLA magas, a teljes navigáció csak a hidratálás után jelenik meg. A CLS 0, mert a beugrás még az első festés előtt történt — a magasságkülönbség mutatja meg. A Responsive komponens üres div-et renderel, amíg nincs DOM.',
+    note: 'The worst case: in the server HTML the component is ZERO pixels tall, and the whole navigation only appears after hydration. CLS is 0 because the pop-in happens before the first paint, so the height difference is what reveals it. Responsive renders an empty div until it has a DOM.',
     baseline: 'CLS 0 · 0px → 164px'
   },
   {
     slug: 'drawer-layout',
     title: 'DrawerLayout',
     risk: 'both',
-    note: 'A tartalom szélességét méri, hogy eldöntse, a tray átfedjen-e. A magasság nem változik, de vízszintesen mozdul.',
-    baseline: 'CLS 0,041 · 0px'
+    note: 'Measures the content width to decide whether the tray overlays it. The height does not change, but things move horizontally.',
+    baseline: 'CLS 0.044 · 0px'
   },
   {
     slug: 'toggle-group',
     title: 'ToggleGroup',
     risk: 'two-pass-styles',
-    note: 'ToggleGroup/v2 két-passzos, a mért elmozdulás elhanyagolható.',
-    baseline: 'CLS 0,000 · 0px'
+    note: 'ToggleGroup/v2 is two-pass; the measured movement is negligible.',
+    baseline: 'CLS 0.000 · 0px'
   },
   {
     slug: 'file-drop',
     title: 'FileDrop',
     risk: 'two-pass-styles',
-    note: 'FileDrop/v2 két-passzos, de nem mozdult el.',
+    note: 'FileDrop/v2 is two-pass, but nothing moved.',
     baseline: 'CLS 0 · 0px'
   },
   {
     slug: 'progress-circle',
     title: 'ProgressCircle',
     risk: 'two-pass-styles',
-    note: 'Két-passzos, plusz mount-animáció. Az animáció a körön belül marad, a layoutot nem tolja el.',
+    note: 'Two-pass, plus a mount animation. The animation stays inside the circle and does not push the layout.',
     baseline: 'CLS 0 · 0px'
   },
   {
     slug: 'rating',
     title: 'Rating',
     risk: 'two-pass-styles',
-    note: 'RatingIcon/v2 két-passzos; az animateFill sem tolja el a layoutot.',
+    note: 'RatingIcon/v2 is two-pass; animateFill does not push the layout either.',
     baseline: 'CLS 0 · 0px'
   },
   {
     slug: 'calendar',
     title: 'Calendar',
     risk: 'two-pass-styles',
-    note: 'Calendar.Day/v2 két-passzos és 35 példányban renderelődik, de nem mozdult el.',
+    note: 'Calendar.Day/v2 is two-pass and renders 35 times, but nothing moved.',
     baseline: 'CLS 0 · 0px'
   },
   {
     slug: 'color-picker',
     title: 'ColorPicker',
     risk: 'both',
-    note: 'Két-passzos és matchMedia-t is használ; a mért elmozdulás elhanyagolható.',
-    baseline: 'CLS 0,000 · 0px'
+    note: 'Two-pass and also uses matchMedia; the measured movement is negligible.',
+    baseline: 'CLS 0.000 · 0px'
   },
   {
     slug: 'drilldown',
     title: 'Drilldown',
     risk: 'two-pass-styles',
-    note: 'Drilldown/v2 két-passzos, de nem mozdult el.',
+    note: 'Drilldown/v2 is two-pass, but nothing moved.',
     baseline: 'CLS 0 · 0px'
   },
   {
     slug: 'truncate-text',
     title: 'TruncateText',
     risk: 'dom-measurement',
-    note: 'A második legsúlyosabb eset: a szerver a teljes szöveget küldi le, a böngésző pedig a hidratálás után vágja el, így az oldal 324 pixellel összeugrik.',
-    baseline: 'CLS 0,045 · −324px'
+    note: 'The worst remaining case: the server sends the full text and the browser only truncates it after hydration, so the page collapses by 289 pixels.',
+    baseline: 'CLS 0.037 · −289px'
   },
   {
     slug: 'pill',
     title: 'Pill',
     risk: 'dom-measurement',
-    note: 'A szöveg szélességét méri a csonkoláshoz; csak pár pixelt mozdul vízszintesen.',
+    note: 'Measures its own text width to decide on truncation; moves a few pixels horizontally at most.',
     baseline: 'CLS 0 · 0px'
   },
   {
     slug: 'text-area',
     title: 'TextArea',
     risk: 'dom-measurement',
-    note: 'Az autogrow magasság csak mount után áll be, addig a mező az alapmagasságán van — 228 pixel különbség.',
-    baseline: 'CLS 0,038 · +228px'
+    note: 'The autogrow height only settles after mount; until then the field sits at its default height, a 532 pixel difference — on its own enough to push CLS past the 0.1 "good" threshold.',
+    baseline: 'CLS 0.103 · +532px'
   },
   {
     slug: 'breadcrumb',
     title: 'Breadcrumb (TruncateList)',
     risk: 'dom-measurement',
-    note: 'A TruncateList a rendelkezésre álló szélességet méri, és a hidratálás után csukja össze a közbülső elemeket.',
-    baseline: 'CLS 0,003 · −68px'
+    note: 'TruncateList measures the available width and collapses the middle crumbs after hydration, taking 84px off the page.',
+    baseline: 'CLS 0.004 · −84px'
   },
   {
     slug: 'select',
     title: 'Select',
     risk: 'dom-measurement',
-    note: 'Input és lista méretét is méri, de zárt állapotban nem mozdul.',
+    note: 'Measures both the input and the list, but does not move while closed.',
     baseline: 'CLS 0 · 0px'
   },
   {
     slug: 'suite-form',
-    title: 'Űrlap oldal',
+    title: 'Form page',
     risk: 'suite',
-    note: 'Sok form control egy oldalon. Az INSTUI-5152 előtt +88px volt (a NumberInput hiányzott a szerver HTML-ből), utána 0px.',
+    note: 'Many form controls on one page. Before INSTUI-5152 this was +88px (NumberInput was missing from the server HTML); afterwards 0px.',
     baseline: 'CLS 0 · 0px'
   },
   {
     slug: 'suite-dashboard',
-    title: 'Dashboard oldal',
+    title: 'Dashboard page',
     risk: 'suite',
-    note: 'Kártyák, metrikák, progress és tábla vegyesen.',
-    baseline: 'CLS 0,002 · −19px'
+    note: 'Cards, metrics, progress and a table mixed together.',
+    baseline: 'CLS 0.002 · −19px'
   },
   {
     slug: 'suite-app-shell',
     title: 'App shell',
     risk: 'suite',
-    note: 'Navigáció + tartalom, a legéletszerűbb eset. A TopNavBar üres SSR-je itt is benne van.',
-    baseline: 'CLS 0,017 · +64px'
+    note: 'Navigation plus content, the most lifelike case. The empty TopNavBar server render shows up here too.',
+    baseline: 'CLS 0.017 · +64px'
   }
 ]
 

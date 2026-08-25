@@ -44,10 +44,10 @@ const Button = btn as any
 const TopNavBar = tnb as any
 const TruncateText = tt as any
 
-const pages = ['Áttekintés', 'Feladatok', 'Emberek', 'Jegyek']
+const pages = ['Overview', 'Assignments', 'People', 'Grades']
 
 const paragraph =
-  'Egy tipikus tartalmi bekezdés. A körülötte lévő navigáció és a fülek mind mérésre vagy mount utáni stílusszámításra támaszkodnak, így ez a szöveg az, ami a hidratálás alatt elmozdul.'
+  'A typical body paragraph. The navigation and the tabs around it all rely on measurement or on styles computed after mount, so this text is what moves during hydration.'
 
 /**
  * The closest thing here to a real page: navigation on top, breadcrumb, tabs and
@@ -60,23 +60,23 @@ export default function Scenario() {
       <TopNavBar>
         {() => (
           <TopNavBar.Layout
-            navLabel="Alkalmazás navigáció"
+            navLabel="Application navigation"
             smallViewportConfig={{
-              dropdownMenuToggleButtonLabel: 'Menü',
-              dropdownMenuLabel: 'Főmenü'
+              dropdownMenuToggleButtonLabel: 'Toggle menu',
+              dropdownMenuLabel: 'Main menu'
             }}
             renderBrand={
-              <TopNavBar.Brand screenReaderLabel="Márkanév" href="#" />
+              <TopNavBar.Brand screenReaderLabel="Brand name" href="#" />
             }
             renderMenuItems={
               <TopNavBar.MenuItems
-                listLabel="Oldal navigáció"
+                listLabel="Page navigation"
                 currentPageId="shell-0"
                 renderHiddenItemsMenuTriggerLabel={(count: number) =>
-                  `${count} további`
+                  `${count} more`
                 }
                 renderHiddenItemsMenuTriggerAriaLabel={(count: number) =>
-                  `${count} további menüelem`
+                  `${count} more menu items`
                 }
               >
                 {pages.map((page, index) => (
@@ -95,14 +95,14 @@ export default function Scenario() {
       </TopNavBar>
 
       <View as="div" padding="medium" maxWidth="52rem">
-        <Breadcrumb label="Itt vagy">
-          <Breadcrumb.Link href="#">Kurzusok</Breadcrumb.Link>
-          <Breadcrumb.Link href="#">Magyar irodalom 204</Breadcrumb.Link>
-          <Breadcrumb.Link>Feladatok</Breadcrumb.Link>
+        <Breadcrumb label="You are here">
+          <Breadcrumb.Link href="#">Courses</Breadcrumb.Link>
+          <Breadcrumb.Link href="#">English literature 204</Breadcrumb.Link>
+          <Breadcrumb.Link>Assignments</Breadcrumb.Link>
         </Breadcrumb>
 
         <Heading level="h1" margin="small 0 medium">
-          Feladatok
+          Assignments
         </Heading>
 
         <Tabs>
@@ -112,7 +112,7 @@ export default function Scenario() {
                 <TruncateText maxLines={3}>{paragraph}</TruncateText>
               </Text>
               <Text as="p">{paragraph}</Text>
-              <Button color="primary">Új feladat</Button>
+              <Button color="primary">New assignment</Button>
             </Tabs.Panel>
           ))}
         </Tabs>

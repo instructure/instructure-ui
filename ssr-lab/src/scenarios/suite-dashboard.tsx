@@ -57,10 +57,10 @@ const Badge = bd as any
 const IconCheckLine = icl as any
 
 const courses = [
-  ['Magyar irodalom 204', 'Kovács Anna', 82],
-  ['Matematika 101', 'Nagy Béla', 64],
-  ['Történelem 300', 'Szabó Csilla', 91],
-  ['Fizika 210', 'Tóth Dénes', 47]
+  ['English literature 204', 'Anna Coleman', 82],
+  ['Mathematics 101', 'Ben Nagy', 64],
+  ['History 300', 'Cynthia Sabo', 91],
+  ['Physics 210', 'Dennis Toth', 47]
 ] as const
 
 /**
@@ -70,14 +70,14 @@ const courses = [
 export default function Scenario() {
   return (
     <View as="div" maxWidth="52rem">
-      <Heading level="h1">Áttekintés</Heading>
+      <Heading level="h1">Overview</Heading>
 
       <View as="div" margin="medium 0">
         <MetricGroup>
-          <Metric renderLabel="Átlag" renderValue="80%" />
-          <Metric renderLabel="Késés" renderValue="4" />
-          <Metric renderLabel="Hiányzó" renderValue="2" />
-          <Metric renderLabel="Beadva" renderValue="18" />
+          <Metric renderLabel="Average" renderValue="80%" />
+          <Metric renderLabel="Late" renderValue="4" />
+          <Metric renderLabel="Missing" renderValue="2" />
+          <Metric renderLabel="Submitted" renderValue="18" />
         </MetricGroup>
       </View>
 
@@ -90,34 +90,33 @@ export default function Scenario() {
         }}
       >
         <ProgressCircle
-          screenReaderLabel="Félév haladása"
+          screenReaderLabel="Term progress"
           valueNow={40}
           valueMax={60}
         />
         <Badge count={12}>
-          <Avatar name="Kovács Anna" size="small" />
+          <Avatar name="Anna Coleman" size="small" />
         </Badge>
         <Pill renderIcon={<IconCheckLine />} color="success">
-          Naprakész
+          Up to date
         </Pill>
       </div>
 
       <View as="div" maxWidth="26rem" margin="0 0 medium">
         <Text as="p">
           <TruncateText maxLines={2}>
-            Egy hosszabb bejelentés szöveg, amit a TruncateText csak a
-            hidratálás után tud a helyére rövidíteni, tehát a szerver a teljes
-            szöveget küldi le.
+            A longer announcement that TruncateText can only cut down to size
+            after hydration, so the server sends the whole thing.
           </TruncateText>
         </Text>
       </View>
 
-      <Table caption={() => 'Kurzusok'} layout="auto" hover>
+      <Table caption={() => 'Courses'} layout="auto" hover>
         <Table.Head>
           <Table.Row>
-            <Table.ColHeader id="course">Kurzus</Table.ColHeader>
-            <Table.ColHeader id="teacher">Oktató</Table.ColHeader>
-            <Table.ColHeader id="progress">Haladás</Table.ColHeader>
+            <Table.ColHeader id="course">Course</Table.ColHeader>
+            <Table.ColHeader id="teacher">Teacher</Table.ColHeader>
+            <Table.ColHeader id="progress">Progress</Table.ColHeader>
           </Table.Row>
         </Table.Head>
         <Table.Body>
@@ -130,7 +129,7 @@ export default function Scenario() {
               <Table.Cell>
                 <ProgressBar
                   size="small"
-                  screenReaderLabel={`${name} haladása`}
+                  screenReaderLabel={`${name} progress`}
                   valueNow={progress}
                   valueMax={100}
                 />

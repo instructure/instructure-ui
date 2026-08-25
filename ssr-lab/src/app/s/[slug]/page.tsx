@@ -46,7 +46,7 @@ export default async function ScenarioPage({
   return (
     <>
       <Link href="/" className="scenario__back">
-        &larr; lista
+        &larr; list
       </Link>
       <ScenarioFrame title={meta.title}>
         <Scenario />

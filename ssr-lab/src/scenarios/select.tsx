@@ -51,7 +51,7 @@ const options = [
 export default function Scenario() {
   return (
     <View as="div" maxWidth="30rem">
-      <SimpleSelect renderLabel="Alap">
+      <SimpleSelect renderLabel="Basic">
         {options.map((option) => (
           <SimpleSelect.Option id={option} key={option} value={option}>
             {option}
@@ -61,8 +61,8 @@ export default function Scenario() {
 
       <View as="div" margin="medium 0">
         <SimpleSelect
-          renderLabel="Hibaüzenettel"
-          messages={[{ type: 'newError', text: 'Válassz egy elemet' }]}
+          renderLabel="With an error message"
+          messages={[{ type: 'newError', text: 'Pick an item' }]}
         >
           {options.map((option) => (
             <SimpleSelect.Option id={`e-${option}`} key={option} value={option}>
@@ -82,7 +82,7 @@ export default function Scenario() {
         </SimpleSelect>
       </View>
 
-      <Text as="p">Ez a bekezdés a mezők alatt van.</Text>
+      <Text as="p">This paragraph sits below the fields.</Text>
     </View>
   )
 }
