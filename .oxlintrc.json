@@ -31,6 +31,7 @@
     "packages/ui-codemods/lib/__node_tests__/__testfixtures__/**",
     "scripts/oxlint/__node_tests__/__testfixtures__/**",
     "regression-test/**",
+    "ssr-lab/**",
     "coverage/**",
     "**/stylelint.config.js",
     "**/babel.config.js",
