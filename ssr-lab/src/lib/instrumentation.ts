@@ -98,13 +98,40 @@ export const OBSERVER_SCRIPT = `
   // moves content on its own. Recording the height once the fonts have settled
   // separates that from what hydration does: under network throttling the fonts
   // are always in place long before React's bundle arrives.
+  //
+  // Records once, and only when there is something to measure. With a warm font
+  // cache there may be no pending font load at all, in which case this resolves
+  // while the body is still being parsed and the scenario element does not exist
+  // yet — hence the second attempt from the snapshot script below.
+  function recordFontHeight() {
+    if (state.heightAfterFonts !== null) return
+    var height = measureScenario()
+    if (height === null) return
+    state.heightAfterFonts = height
+    if (typeof state.onUpdate === 'function') state.onUpdate()
+  }
+  state.recordFontHeight = recordFontHeight
+
   if (document.fonts && document.fonts.ready) {
     document.fonts.ready.then(function () {
       state.fontsReadyAt = Math.round(performance.now())
-      state.heightAfterFonts = measureScenario()
-      if (typeof state.onUpdate === 'function') state.onUpdate()
+      recordFontHeight()
     })
+  } else {
+    // No Font Loading API: treat the fonts as settled so the fallbacks below
+    // still produce a number rather than leaving the field empty.
+    state.fontsReadyAt = 0
   }
+
+  // Last resort. The load event fires after every subresource, fonts included,
+  // and on a throttled connection it still lands well before the React bundle.
+  // If both paths above missed, this one cannot: the document is fully parsed.
+  window.addEventListener('load', function () {
+    if (state.fontsReadyAt === null) {
+      state.fontsReadyAt = Math.round(performance.now())
+    }
+    recordFontHeight()
+  })
 
   try {
     var observer = new PerformanceObserver(function (list) {
@@ -159,9 +186,19 @@ export const OBSERVER_SCRIPT = `
 export const preHydrationSnapshotScript = (elementId: string) => `
 (function () {
   var el = document.getElementById('${elementId}')
-  if (!el || !window.__ssrLab) return
-  if (window.__ssrLab.preHydrationHeight !== null) return
-  window.__ssrLab.preHydrationHeight = Math.round(el.getBoundingClientRect().height)
+  var state = window.__ssrLab
+  if (!el || !state) return
+
+  if (state.preHydrationHeight === null) {
+    state.preHydrationHeight = Math.round(el.getBoundingClientRect().height)
+  }
+
+  // If the fonts had already settled before this markup was parsed — a warm
+  // cache makes that the normal case — then the height just taken is also the
+  // after-fonts height, and the fonts.ready handler had nothing to measure.
+  if (state.fontsReadyAt !== null && typeof state.recordFontHeight === 'function') {
+    state.recordFontHeight()
+  }
 })()
 `
 
@@ -189,6 +226,7 @@ export type LabState = {
   fontsReadyAt: number | null
   hydratedAt: number | null
   measureScenario?: () => number | null
+  recordFontHeight?: () => void
   onUpdate: (() => void) | null
   unsupported?: boolean
 }

@@ -73,6 +73,7 @@ export function ShiftMeter() {
   // component's, and the browser gives one score per entry — there is no way to
   // subtract the panel's share afterwards. Staying still is the only fix.
   const [settled, setSettled] = useState(false)
+  const [hasScenario, setHasScenario] = useState(true)
   const settleTimer = useRef<number | undefined>(undefined)
 
   useEffect(() => {
@@ -101,7 +102,9 @@ export function ShiftMeter() {
 
     const element = document.getElementById(SCENARIO_ELEMENT_ID)
     if (!element) {
-      forceRender((n) => n + 1)
+      // Pages without a scenario (the index) have nothing to measure, so the
+      // panel would only be able to report question marks. Stay hidden.
+      setHasScenario(false)
       return () => {
         state.onUpdate = null
         window.clearTimeout(settleTimer.current)
@@ -160,7 +163,7 @@ export function ShiftMeter() {
     })
   }
 
-  if (!state) return null
+  if (!state || !hasScenario) return null
 
   if (!settled) {
     return (
@@ -234,9 +237,23 @@ export function ShiftMeter() {
 
             <dt>after fonts</dt>
             <dd>
-              {fontHeight ?? '?'}px
-              {fontDelta !== null && fontDelta !== 0 && (
-                <span className="meter__neutral"> ({signed(fontDelta)}px)</span>
+              {fontHeight === null ? (
+                <span
+                  className="meter__neutral"
+                  title="The fonts settled before the scenario markup existed, so there was nothing to measure at that point. The delta below falls back to the server HTML height."
+                >
+                  not captured
+                </span>
+              ) : (
+                <>
+                  {fontHeight}px
+                  {fontDelta !== null && fontDelta !== 0 && (
+                    <span className="meter__neutral">
+                      {' '}
+                      ({signed(fontDelta)}px)
+                    </span>
+                  )}
+                </>
               )}
             </dd>
 
