@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.5](https://github.com/instructure/instructure-ui/compare/v11.7.4...v11.7.5) (2026-08-25)
+
+
+### Bug Fixes
+
+* **ui-table:** don't append a sort state to unsorted v1 captions ([d3d892e](https://github.com/instructure/instructure-ui/commit/d3d892e4dc415a275e5524740bddb84c67c98185)), closes [#2574](https://github.com/instructure/instructure-ui/issues/2574)
+
+
+
+
+
 ## [11.7.4](https://github.com/instructure/instructure-ui/compare/v11.7.3...v11.7.4) (2026-07-24)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.5](https://github.com/instructure/instructure-ui/compare/v11.7.4...v11.7.5) (2026-08-25)
+
+
+### Bug Fixes
+
+* **ui-codemods:** use exported name when collecting versioned exports ([d1dc807](https://github.com/instructure/instructure-ui/commit/d1dc807ee7386e3bb3e14639b4b634012e862922))
+
+
+
+
+
 ## [11.7.4](https://github.com/instructure/instructure-ui/compare/v11.7.3...v11.7.4) (2026-07-24)
 
 

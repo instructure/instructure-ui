@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-form-field",
-  "version": "11.7.4",
+  "version": "11.7.5",
   "description": "Form layout components.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",

@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.5](https://github.com/instructure/instructure-ui/compare/v11.7.4...v11.7.5) (2026-08-25)
+
+
+### Features
+
+* replace ESLint with oxlint across the workspace ([deed11c](https://github.com/instructure/instructure-ui/commit/deed11cc2428b6436d8e5627ac025a2075da5ef5))
+* **ui-scripts:** add a live HTML view to the visual-diff report ([5f1957e](https://github.com/instructure/instructure-ui/commit/5f1957e3df2ad7485a9a4df8d0fe8a5cddc3d82e))
+* **ui-scripts:** highlight a11y violations in the visual-diff report HTML view ([514af82](https://github.com/instructure/instructure-ui/commit/514af82c8b2b58bccfc459f7829efb81325e9509))
+* **ui-scripts:** highlight changed regions and add theme facet filter to the visual-diff report ([9a5385a](https://github.com/instructure/instructure-ui/commit/9a5385accf6e07d9dbba7bd0ca8e8283273e3e12))
+* **ui-scripts:** improve the visual-diff report UX and diff rendering ([18589e7](https://github.com/instructure/instructure-ui/commit/18589e7d9f7c05372bc76b2f7d9096faa5af13e0))
+* **ui-scripts:** show a11y violations on the screenshot itself ([689551c](https://github.com/instructure/instructure-ui/commit/689551c0b7a70be8db2e1b5ae5071a20fc1a2951))
+* **ui-scripts:** surface axe a11y violations in the visual-diff report ([72a91bb](https://github.com/instructure/instructure-ui/commit/72a91bb78aec1f933103f8aa18409afc1052af48))
+
+
+
+
+
 ## [11.7.4](https://github.com/instructure/instructure-ui/compare/v11.7.3...v11.7.4) (2026-07-24)
 
 

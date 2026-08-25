@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.5](https://github.com/instructure/instructure-ui/compare/v11.7.4...v11.7.5) (2026-08-25)
+
+
+### Bug Fixes
+
+* **many:** update eslint-disable comments for oxlint's rule IDs ([ea28383](https://github.com/instructure/instructure-ui/commit/ea283832859749546a065bd643ea778885d974b4))
+
+
+
+
+
 ## [11.7.4](https://github.com/instructure/instructure-ui/compare/v11.7.3...v11.7.4) (2026-07-24)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.5](https://github.com/instructure/instructure-ui/compare/v11.7.4...v11.7.5) (2026-08-25)
+
+
+### Features
+
+* **ui-svg-images:** add allowUseElement prop to InlineSVG ([3a56f60](https://github.com/instructure/instructure-ui/commit/3a56f60386bf23c583ec612fc83443980ff472db))
+
+
+
+
+
 ## [11.7.4](https://github.com/instructure/instructure-ui/compare/v11.7.3...v11.7.4) (2026-07-24)
 
 

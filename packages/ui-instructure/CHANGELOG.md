@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.5](https://github.com/instructure/instructure-ui/compare/v11.7.4...v11.7.5) (2026-08-25)
+
+
+### Bug Fixes
+
+* **ui-instructure:** use CondensedButton for AI component triggers ([b99dd57](https://github.com/instructure/instructure-ui/commit/b99dd570811b9d917bcdf6d4578a7764c830681e))
+
+
+
+
+
 ## [11.7.4](https://github.com/instructure/instructure-ui/compare/v11.7.3...v11.7.4) (2026-07-24)
 
 
