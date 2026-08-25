@@ -332,6 +332,25 @@ export function ShiftMeter() {
             </ol>
           )}
 
+          {/* The spaces after each bold label are explicit expressions on
+              purpose: JSX drops the leading space of a text node that spans
+              several source lines, which silently glued a label to the word
+              after it. */}
+          {state.shifts.length > 0 && (
+            <p className="meter__legend">
+              <b>dy</b> <span>moved vertically, + is down.</span> <b>dx</b>{' '}
+              <span>moved horizontally, + is right.</span> <b>dH</b>{' '}
+              <span>
+                the element&rsquo;s own height changed. Zeroes are left out, so
+                a bare
+              </span>{' '}
+              <b>dy</b>{' '}
+              <span>
+                means the element did not resize — something above it did.
+              </span>
+            </p>
+          )}
+
           <footer className="meter__foot">
             <button
               type="button"

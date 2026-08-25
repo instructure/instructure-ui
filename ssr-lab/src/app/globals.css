@@ -307,6 +307,19 @@ body {
   color: #0a5a9e;
 }
 
+.meter__legend {
+  margin: 0.5rem 0 0;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--lab-border);
+  font-size: 0.625rem;
+  line-height: 1.45;
+  color: var(--lab-muted);
+}
+
+.meter__legend b {
+  color: #374151;
+}
+
 .meter__foot {
   display: flex;
   gap: 0.375rem;
