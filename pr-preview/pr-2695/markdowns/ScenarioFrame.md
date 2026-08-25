@@ -12,6 +12,7 @@ rather than being re-created during hydration.
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
 | ScenarioFrame | title | `string` | Yes | - |  |
+| ScenarioFrame | warning | `ReactNode` | No | - |  |
 | ScenarioFrame | children | `ReactNode` | Yes | - |  |
 
 ### Usage
