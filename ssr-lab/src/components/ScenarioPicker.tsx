@@ -30,6 +30,11 @@ import { RISK_LABELS, SCENARIOS, type RiskKind } from '@/scenarios/meta'
 
 const GROUPS: { risk: RiskKind; heading: string; hint: string }[] = [
   {
+    risk: 'custom',
+    heading: 'Your own page',
+    hint: 'Edit src/scenarios/custom.tsx and reload — it is already registered, so there is nothing to wire up. Rerun `npm run build && npm start` after each edit if you want trustworthy numbers.'
+  },
+  {
     risk: 'two-pass-styles',
     heading: 'Two-pass styles',
     hint: 'These recompute their styles after mount, so the server sends down different CSS than the one the browser ends up using.'
@@ -118,14 +123,19 @@ export function ScenarioPicker() {
       </div>
 
       <p className="group__hint" style={{ marginTop: '1.5rem' }}>
-        One component: click its name. Your own combination: tick several, or
-        type the URL by hand as <code>/mix?c=text-input&amp;c=table</code>. The
-        same thing can be a file instead — add{' '}
-        <code>src/scenarios/&lt;name&gt;.tsx</code>, then one line in{' '}
-        <code>loaders.ts</code> and one entry in <code>meta.ts</code>. The{' '}
-        {RISK_LABELS['dom-measurement']} and {RISK_LABELS['two-pass-styles']}{' '}
-        groups move for different reasons, so they are worth looking at
-        separately.
+        Three ways to test something of your own. <strong>Write it</strong>:
+        edit <code>src/scenarios/custom.tsx</code>, which is already registered
+        as the scratch page above. <strong>Combine existing ones</strong>: tick
+        several and use the button, or type the URL by hand as{' '}
+        <code>/mix?c=text-input&amp;c=table</code>. <strong>Keep it</strong>: if
+        a case is worth saving, copy the scratch page to{' '}
+        <code>src/scenarios/&lt;name&gt;.tsx</code> and add one line to{' '}
+        <code>loaders.ts</code> plus one entry to <code>meta.ts</code>.
+      </p>
+      <p className="group__hint">
+        The {RISK_LABELS['dom-measurement']} and{' '}
+        {RISK_LABELS['two-pass-styles']} groups move for different reasons, so
+        they are worth looking at separately.
       </p>
     </>
   )

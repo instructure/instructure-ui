@@ -41,7 +41,12 @@
  * - `suite`: a hand-assembled page combining several components.
  */
 
-export type RiskKind = 'two-pass-styles' | 'dom-measurement' | 'both' | 'suite'
+export type RiskKind =
+  | 'custom'
+  | 'two-pass-styles'
+  | 'dom-measurement'
+  | 'both'
+  | 'suite'
 
 export type ScenarioMeta = {
   slug: string
@@ -60,6 +65,7 @@ export type ScenarioMeta = {
 }
 
 export const RISK_LABELS: Record<RiskKind, string> = {
+  custom: 'scratch page',
   'two-pass-styles': 'two-pass styles',
   'dom-measurement': 'DOM measurement',
   both: 'two-pass + DOM measurement',
@@ -67,6 +73,13 @@ export const RISK_LABELS: Record<RiskKind, string> = {
 }
 
 export const SCENARIOS: ScenarioMeta[] = [
+  {
+    slug: 'custom',
+    title: 'Custom scratch page',
+    risk: 'custom',
+    note: 'Already registered and empty-ish: put whatever you want to measure into src/scenarios/custom.tsx and reload. No entry to add anywhere.',
+    baseline: 'yours'
+  },
   {
     slug: 'text-input',
     title: 'TextInput + FormFieldLayout',

@@ -35,6 +35,7 @@ import type { ComponentType } from 'react'
  * throttling.
  */
 export const LOADERS: Record<string, ComponentType> = {
+  custom: dynamic(() => import('./custom')),
   'text-input': dynamic(() => import('./text-input')),
   link: dynamic(() => import('./link')),
   button: dynamic(() => import('./button')),
