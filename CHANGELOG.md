@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.5](https://github.com/instructure/instructure-ui/compare/v11.7.4...v11.7.5) (2026-08-25)
+
+### Bug Fixes
+
+- **emotion:** only warn about a missing theme when the fallback is actually used ([b885ac7](https://github.com/instructure/instructure-ui/commit/b885ac7895c5280480ab16f580a0e1ef365da68e))
+- **ui-checkbox:** announce the toggle variant as a toggle button ([c713660](https://github.com/instructure/instructure-ui/commit/c7136606d91ef7dd59c7479a6d65565b24dea972))
+- **ui-checkbox:** fix message indentation ([dfaa13a](https://github.com/instructure/instructure-ui/commit/dfaa13ad61ca4f53bd445211e661fae6cd9a02e1))
+- **ui-instructure:** use CondensedButton for AI component triggers ([b99dd57](https://github.com/instructure/instructure-ui/commit/b99dd570811b9d917bcdf6d4578a7764c830681e))
+- **ui-motion:** only pass elementRef to children that declare it ([9142976](https://github.com/instructure/instructure-ui/commit/9142976da43a34ade5a0195d2e366b498a161280)), closes [#2618](https://github.com/instructure/instructure-ui/issues/2618)
+- **ui-table:** don't append a sort state to unsorted v1 captions ([d3d892e](https://github.com/instructure/instructure-ui/commit/d3d892e4dc415a275e5524740bddb84c67c98185)), closes [#2574](https://github.com/instructure/instructure-ui/issues/2574)
+- **ui-view:** no undefined error message for disallowed props ([e1bef06](https://github.com/instructure/instructure-ui/commit/e1bef062f45fd67d9c0659463bc44ff784c709a5))
+
+### Features
+
+- **ui-icons:** add user-round-star and venetian-mask-stem custom icons ([3c229e4](https://github.com/instructure/instructure-ui/commit/3c229e4cd7e7f237f33d0e2e2f2e79a57dc7a76b))
+- **ui-svg-images:** add allowUseElement prop to InlineSVG ([3a56f60](https://github.com/instructure/instructure-ui/commit/3a56f60386bf23c583ec612fc83443980ff472db))
+- **ui-text-input,ui-select:** add forcePlaceholder prop to TextInput ([7a87063](https://github.com/instructure/instructure-ui/commit/7a870631b091839b360d1ca8bb4fd6ea171315da))
+
 ## [11.7.4](https://github.com/instructure/instructure-ui/compare/v11.7.3...v11.7.4) (2026-07-24)
 
 InstUI 11.7.4 marks the first production release of the new components (accessible via the /v11_7 path).

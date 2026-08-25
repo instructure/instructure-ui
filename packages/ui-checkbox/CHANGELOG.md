@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.5](https://github.com/instructure/instructure-ui/compare/v11.7.4...v11.7.5) (2026-08-25)
+
+
+### Bug Fixes
+
+* **ui-checkbox:** announce the toggle variant as a toggle button ([c713660](https://github.com/instructure/instructure-ui/commit/c7136606d91ef7dd59c7479a6d65565b24dea972))
+* **ui-checkbox:** fix message indentation ([dfaa13a](https://github.com/instructure/instructure-ui/commit/dfaa13ad61ca4f53bd445211e661fae6cd9a02e1))
+
+
+
+
+
 ## [11.7.4](https://github.com/instructure/instructure-ui/compare/v11.7.3...v11.7.4) (2026-07-24)
 
 

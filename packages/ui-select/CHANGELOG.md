@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.5](https://github.com/instructure/instructure-ui/compare/v11.7.4...v11.7.5) (2026-08-25)
+
+
+### Features
+
+* **ui-text-input,ui-select:** add forcePlaceholder prop to TextInput ([7a87063](https://github.com/instructure/instructure-ui/commit/7a870631b091839b360d1ca8bb4fd6ea171315da))
+
+
+
+
+
 ## [11.7.4](https://github.com/instructure/instructure-ui/compare/v11.7.3...v11.7.4) (2026-07-24)
 
 
