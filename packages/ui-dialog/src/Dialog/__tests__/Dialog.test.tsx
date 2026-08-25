@@ -272,6 +272,53 @@ describe('<Dialog />', () => {
       })
     })
 
+    it('should not leak a focus region when it is closed before its activation frame runs', async () => {
+      // The Dialog activates its FocusRegion in a requestAnimationFrame
+      // callback. On a busy machine that callback can land after the Dialog
+      // has already been closed. Activating a region for a closed Dialog
+      // leaked it: nothing blurred it afterwards, so its document `keydown`
+      // listener kept scoping every later tab press to an element that is not
+      // rendered anymore.
+      const realRequestAnimationFrame = window.requestAnimationFrame
+      const realCancelAnimationFrame = window.cancelAnimationFrame
+      const frames = new Map<number, FrameRequestCallback>()
+      let nextFrameId = 0
+      try {
+        window.requestAnimationFrame = ((callback: FrameRequestCallback) => {
+          frames.set(++nextFrameId, callback)
+          return nextFrameId
+        }) as typeof window.requestAnimationFrame
+        window.cancelAnimationFrame = ((id: number) => {
+          frames.delete(id)
+        }) as typeof window.cancelAnimationFrame
+
+        const Example = ({ open }: { open: boolean }) => (
+          <div>
+            <button data-testid="outside-one">one</button>
+            <button data-testid="outside-two">two</button>
+            <Dialog open={open} shouldContainFocus label={TEST_LABEL}>
+              <button>{TEST_TEXT}</button>
+            </Dialog>
+          </div>
+        )
+        const { rerender } = await render(<Example open />)
+        await rerender(<Example open={false} />)
+        // the frames queued while the Dialog was open only run now
+        frames.forEach((callback) => callback(0))
+      } finally {
+        window.requestAnimationFrame = realRequestAnimationFrame
+        window.cancelAnimationFrame = realCancelAnimationFrame
+      }
+
+      const outsideOne = page.getByTestId('outside-one')
+      ;(outsideOne.element() as HTMLElement).focus()
+      await expect.element(outsideOne).toHaveFocus()
+
+      await userEvent.tab()
+
+      await expect.element(page.getByTestId('outside-two')).toHaveFocus()
+    })
+
     it('should return focus', async () => {
       const { rerender } = await render(<DialogExample open={false} />)
       await expect.element(page.getByTestId('input-trigger')).toHaveFocus()
