@@ -1,8 +1,8 @@
 {
   "summary": {
     "total": 96,
-    "unchanged": 96,
-    "changed": 0,
+    "unchanged": 95,
+    "changed": 1,
     "added": 0,
     "removed": 0,
     "a11yPages": 0,
@@ -545,8 +545,8 @@
     },
     {
       "name": "tooltip-light.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 956,
       "sizeMismatch": false
     },
     {
