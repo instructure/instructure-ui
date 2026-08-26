@@ -39,3 +39,17 @@ if (typeof globalThis.process === 'undefined') {
 afterEach(() => {
   vi.restoreAllMocks()
 })
+
+//Do not let test components spam the logs because they are not wrapped in InstUISettingsProvider.
+const originalConsoleWarn = console.warn
+console.warn = (...args: Parameters<typeof console.warn>) => {
+  if (
+    typeof args[0] === 'string' &&
+    (args[0] as string).includes(
+      'No theme provided for [InstUISettingsProvider], using default'
+    )
+  ) {
+    return
+  }
+  originalConsoleWarn(...args)
+}
