@@ -47,8 +47,8 @@
     },
     {
       "name": "badge-canvas.png",
-      "status": "changed",
-      "numDiff": 1573,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
@@ -497,8 +497,8 @@
     },
     {
       "name": "table-canvas.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 3338,
       "sizeMismatch": false
     },
     {
