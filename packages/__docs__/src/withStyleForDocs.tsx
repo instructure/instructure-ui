@@ -54,7 +54,7 @@ type DocsTokens = {
 type Props = Record<string, unknown>
 
 type GenerateStyle = (
-  props: any,
+  props: Props,
   tokens: DocsTokens,
   extraArgs?: Record<string, unknown>
 ) => ComponentStyle

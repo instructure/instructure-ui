@@ -458,7 +458,6 @@ function resolveNewThemeColors(newThemeObj: typeof legacyCanvas) {
 
 function parseThemes() {
   const parsed: MainDocsData['themes'] = {}
-  // legacy-canvas first so it becomes the default rendering theme
   // resolvedComponents/resolvedColors: pre-computed plain objects (functions can't survive JSON.stringify)
   parsed['legacy-canvas'] = {
     resource: { ...canvas, resolvedComponents: resolveComponents(legacyCanvas) }
