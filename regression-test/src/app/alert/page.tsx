@@ -30,7 +30,7 @@ export default function AlertPage() {
   const myElementRef = useRef(null)
   return (
     <main className="flex gap-8 p-8 flex-row items-start axe-test">
-      <div id="flash-messages" role="alert" ref={myElementRef}></div>
+      <div id="flash-messages" ref={myElementRef}></div>
       <div>
         {variants.map((variant) => (
           <Alert variant={variant} key={variant} transition="none">
