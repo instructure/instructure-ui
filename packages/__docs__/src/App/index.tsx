@@ -873,13 +873,13 @@ class App extends Component<AppProps, AppState> {
     const padding: Spacing =
       layout === 'small'
         ? 'general.space2xl general.spaceMd general.space2xl general.spaceMd'
-        : 'large'
+        : 'general.space2xl'
     return this.renderWrappedContent(documentContent, padding)
   }
 
   renderWrappedContent(
     content: ReactElement[] | ReactElement,
-    padding: Spacing = 'large'
+    padding: Spacing = 'general.space2xl'
   ) {
     return <ContentWrap padding={padding}>{content}</ContentWrap>
   }
