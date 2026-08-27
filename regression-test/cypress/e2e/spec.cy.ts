@@ -109,11 +109,7 @@ type PageSpec = {
   a11y?: boolean
   // Reason/ticket for skipping a11y, for the record
   a11ySkipReason?: string
-  // Themes for which the axe `color-contrast` rule is skipped, for pages that
-  // trip known theme-level contrast bugs. Every other axe rule still runs, and
-  // the themes not listed here still enforce contrast — so this is the narrowest
-  // possible opt-out. Each entry must say what's broken; delete the entry (not
-  // just the theme) once the underlying bug is fixed.
+  // Themes for which the axe `color-contrast` rule is skipped
   contrastSkipThemes?: readonly Theme[]
   // What the skipped contrast failures are, and what has to be fixed first
   contrastSkipReason?: string
@@ -126,38 +122,25 @@ type PageSpec = {
 }
 
 const PAGES: PageSpec[] = [
-  {
-    slug: 'small-components',
-    title: 'Metric, Pill, Tag, TimeSelect, Text',
-    contrastSkipThemes: ['light', 'dark'],
-    contrastSkipReason:
-      'The page renders `*-inverse`/`*-on` Text colors directly on the page ' +
-      'surface with no inverse container, so they are white-on-light (light) ' +
-      'and dark-on-dark (dark). Dark also shows the unadapted canvas error red ' +
-      '(#aa0000 on #10141a). Fix: give the inverse samples an inverse surface, ' +
-      'and adapt the error color for dark.'
-  },
+  { slug: 'small-components', title: 'Metric, Pill, Tag, TimeSelect, Text' },
   { slug: 'alert', title: 'Alert' },
   { slug: 'avatar', title: 'Avatar', wait: 300 },
   { slug: 'badge', title: 'Badge' },
   { slug: 'billboard', title: 'Billboard' },
-  {
-    slug: 'breadcrumb',
-    title: 'Breadcrumb',
-    wait: 300,
-    a11y: false,
-    a11ySkipReason: 'INSTUI-4676'
-  },
+  { slug: 'breadcrumb', title: 'Breadcrumb', wait: 300 },
   {
     slug: 'button',
     title: 'Button and derivatives',
     wait: 100,
     contrastSkipThemes: ['dark'],
     contrastSkipReason:
-      'The `primary-inverse` Button keeps its light surface (#f2f4f5, correct ' +
-      'for an inverse variant) but its label resolves to white instead of the ' +
-      'dark text its own wrapper uses — 1.1:1. Fix the dark theme inverse ' +
-      'button text token.'
+      'Theme token, not fixable here: the `withBackground={false}` ' +
+      '`primary-inverse` Button draws its label from baseButton ' +
+      '`primaryInverseGhostColor` -> `color.text.interactive.action.' +
+      'secondaryOnColor.base`, which stays #ffffff in dark while the inverse ' +
+      'surface it sits on (`color.background.elevatedSurface.inverse`) flips ' +
+      'to light #f2f4f5 — 1.1:1. The page already wraps it in an inverse View. ' +
+      'Fix: flip `secondaryOnColor.base` for the dark theme.'
   },
   { slug: 'byline', title: 'Byline' },
   { slug: 'calendar', title: 'Calendar' },
@@ -177,15 +160,7 @@ const PAGES: PageSpec[] = [
   { slug: 'datetimeinput', title: 'DateTimeInput', wait: 400 },
   { slug: 'drilldown', title: 'Drilldown', wait: 300 },
   { slug: 'filedrop', title: 'Filedrop' },
-  {
-    slug: 'form-errors',
-    title: 'Form errors',
-    wait: 300,
-    contrastSkipThemes: ['dark'],
-    contrastSkipReason:
-      'Error text renders as #000000 on the dark surface #1c222b (1.31:1) — ' +
-      'the message color is not adapted for the dark theme.'
-  },
+  { slug: 'form-errors', title: 'Form errors', wait: 300 },
   { slug: 'heading', title: 'Heading' },
   { slug: 'img', title: 'Img', wait: 100 },
   {
@@ -193,8 +168,11 @@ const PAGES: PageSpec[] = [
     title: 'Link',
     contrastSkipThemes: ['dark'],
     contrastSkipReason:
-      'Inverse Link renders white on the light #f2f4f5 surface (1.1:1); same ' +
-      'dark-theme inverse token bug as the Button page.'
+      'Theme token, not fixable here: `color="link-inverse"` draws from link ' +
+      '`onColorTextColor` -> `color.text.interactive.navigation.' +
+      'primaryOnColor.base`, which stays #ffffff in dark while the inverse ' +
+      'surface flips to light #f2f4f5 — 1.1:1. Note the sibling ' +
+      '`Text color="primary-inverse"` in the same View does flip correctly.'
   },
   {
     slug: 'menu',
@@ -212,31 +190,9 @@ const PAGES: PageSpec[] = [
   { slug: 'select', title: 'Select, SimpleSelect', wait: 300 },
   { slug: 'table', title: 'Table' },
   { slug: 'tabs', title: 'Tabs' },
-  {
-    slug: 'tooltip',
-    title: 'Tooltip',
-    wait: 300,
-    contrastSkipThemes: ['dark'],
-    contrastSkipReason:
-      'The text input renders #000000 text on the dark surface #10141a ' +
-      '(1.13:1) — input text color is not adapted for the dark theme.'
-  },
-  {
-    slug: 'treebrowser',
-    title: 'TreeBrowser',
-    wait: 1000,
-    a11y: false,
-    a11ySkipReason: 'axe color-contrast failures; animations'
-  },
-  {
-    slug: 'view',
-    title: 'View',
-    contrastSkipThemes: ['dark'],
-    contrastSkipReason:
-      'Dark text (#1c222b) on the mid-tone background samples (#2b7abc, ' +
-      '#03893d, #e62429, #cf4a00) lands at ~3.5:1, just under the 4.5:1 ' +
-      'threshold. Fix: darken those surfaces or lighten the text in dark.'
-  }
+  { slug: 'tooltip', title: 'Tooltip', wait: 300 },
+  { slug: 'treebrowser', title: 'TreeBrowser', wait: 1000 },
+  { slug: 'view', title: 'View' }
 ]
 
 const SCREENSHOT_OPTIONS = {

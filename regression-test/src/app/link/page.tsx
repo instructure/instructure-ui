@@ -29,9 +29,9 @@ import {
   Text,
   View,
   IconUserLine,
-  ScreenReaderContent,
   TruncateText
 } from '@instructure/ui/latest'
+import type { ViewOwnProps } from '@instructure/ui/latest'
 
 export default function LinkPage() {
   return (
@@ -67,7 +67,7 @@ export default function LinkPage() {
       <section>
         <Link
           variant="standalone"
-          onClick={(e: any) => {
+          onClick={(e: React.MouseEvent<ViewOwnProps>) => {
             e.preventDefault()
           }}
           forceButtonRole={false}

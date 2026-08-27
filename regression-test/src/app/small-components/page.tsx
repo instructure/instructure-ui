@@ -31,6 +31,7 @@ import {
   Tag,
   Text,
   TimeSelect,
+  View,
   IconMessageLine,
   IconClockLine,
   IconEndLine,
@@ -126,7 +127,7 @@ export default function SmallComponentsPage() {
         <Text variant="contentImportant"> contentImportant </Text>
       </div>
       <div>
-        <span style={{ color: '#AA0000' }}>
+        <span style={{ color: '#AA0000', background: '#FFFFFF' }}>
           <Text color="inherit"> inherit </Text>
         </span>
         <Text variant="contentQuote"> contentQuote </Text>
@@ -143,13 +144,28 @@ export default function SmallComponentsPage() {
         <Text color="warning">I&#39;m warning text</Text>
         <Text color="danger">I&#39;m danger text</Text>
         <Text color="ai-highlight">I&#39;m an ai-highlight text</Text>
-        <Text color="primary-inverse">I&#39;m primary-inverse text</Text>
       </div>
-      <div>
-        <Text color="secondary-inverse">I&#39;m secondary-inverse text</Text>
-        <Text color="primary-on">I&#39;m primary-on text</Text>
-        <Text color="secondary-on">I&#39;m secondary-on text</Text>
-      </div>
+      <View
+        as="div"
+        display="inline-block"
+        background="primary-inverse"
+        padding="small"
+      >
+        <div>
+          <Text color="primary-inverse">I&#39;m primary-inverse text</Text>
+        </div>
+        <div>
+          <Text color="secondary-inverse">I&#39;m secondary-inverse text</Text>
+        </div>
+      </View>
+      <View as="div" display="inline-block" background="alert" padding="small">
+        <div>
+          <Text color="primary-on">I&#39;m primary-on text</Text>
+        </div>
+        <div>
+          <Text color="secondary-on">I&#39;m secondary-on text</Text>
+        </div>
+      </View>
       <div>
         <Text size="descriptionPage">descriptionPage</Text>
         <br />

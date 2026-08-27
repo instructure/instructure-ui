@@ -115,7 +115,14 @@ export default function TooltipPage() {
       </Flex.Item>
     </Flex>,
     <FormField id="foo" label="This is a FormField" width="200px">
-      <input style={{ display: 'block', width: '100%' }} />
+      <input
+        style={{
+          display: 'block',
+          width: '100%',
+          color: '#273540',
+          background: '#FFFFFF'
+        }}
+      />
     </FormField>,
     <Heading>Default Heading</Heading>,
     <IconButton screenReaderLabel="Add User">

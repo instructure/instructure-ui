@@ -87,6 +87,7 @@ export default function RootLayout({
       ? newTheme.semantics(newTheme.primitives)
       : newTheme?.semantics
   const pageBackground = semantics?.color?.background?.page ?? 'transparent'
+  const pageColor = semantics?.color?.text?.base
 
   return (
     // we need to make a new Map to reset counting on the server side
@@ -94,7 +95,7 @@ export default function RootLayout({
     <html
       lang="en"
       data-theme={themeKey}
-      style={{ background: pageBackground }}
+      style={{ background: pageBackground, color: pageColor }}
     >
       <head>
         <title>Component visual and regression test suite</title>
@@ -111,7 +112,11 @@ export default function RootLayout({
             in the captured baselines. */}
         <body
           className={inter.className}
-          style={{ background: pageBackground, minHeight: '100vh' }}
+          style={{
+            background: pageBackground,
+            color: pageColor,
+            minHeight: '100vh'
+          }}
         >
           {children}
         </body>
