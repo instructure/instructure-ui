@@ -130,11 +130,10 @@
     </div>
     <div class="counts">
       <span>Total: 96</span>
-      <span style="color:#1a7f37;">OK: 94</span>
-      <span style="color:#cf222e;">Changed: 2</span>
+      <span style="color:#1a7f37;">OK: 95</span>
+      <span style="color:#cf222e;">Changed: 1</span>
       <span style="color:#0969da;">New: 0</span>
       <span style="color:#9a6700;">Removed: 0</span>
-      <span style="color:#cf222e;">⚠ A11y: 15 on 7</span>
     </div>
     <div class="filter" id="status-filter">
       <button data-filter="all">All</button><button data-filter="changed" class="active">Changed</button><button data-filter="added">New</button><button data-filter="removed">Removed</button><button data-filter="unchanged">Unchanged</button><button data-filter="a11y">⚠ A11y</button>
@@ -147,17 +146,7 @@
       <button data-facet="canvas">canvas</button><button data-facet="light">light</button><button data-facet="dark">dark</button>
     </div>
   </header>
-  <main><details class="overview" open>
-    <summary><b>⚠ 15 accessibility issues</b> across 7 screenshots · 1 rule</summary>
-    <div class="ov-hint">Click a rule to see only the screenshots it affects. Click a screenshot’s ⚠ badge to see its issues boxed on the image.</div>
-    <div class="ov-rules"><button class="ov-rule" data-rule="color-contrast">
-        <span class="impact serious">serious</span>
-        <span class="ov-title">Text contrast is too low</span>
-        <code class="ov-id">color-contrast</code>
-        <span class="ov-count"><b>15</b> elements</span>
-        <span class="ov-screens">7 screenshots</span>
-      </button></div>
-  </details>
+  <main>
     <section class="row" data-status="unchanged" data-name="alert-canvas.png" data-has-both="true" data-a11y="0" data-rules="" data-html-url="app/alert/?theme=canvas">
       <header><h2>alert-canvas.png</h2><span class="pill pass">ok</span><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/docs/visual-prop-editor/regression-test/src/app/alert/page.tsx" target="_blank" rel="noopener">alert/page.tsx</a></header>
       <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/alert-canvas.png" data-name="alert-canvas.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/alert-canvas.png" data-name="alert-canvas.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
@@ -238,22 +227,10 @@
       <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/button-canvas.png" data-name="button-canvas.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/button-canvas.png" data-name="button-canvas.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
       
     </section>
-    <section class="row" data-status="unchanged" data-name="button-dark.png" data-has-both="true" data-a11y="1" data-rules="color-contrast" data-html-url="app/button/?theme=dark">
-      <header><h2>button-dark.png</h2><span class="pill pass">ok</span><button type="button" class="pill a11y" data-impact="serious" title="1 accessibility issue (worst: serious) — click to review them on the screenshot">⚠ 1 a11y</button><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/docs/visual-prop-editor/regression-test/src/app/button/page.tsx" target="_blank" rel="noopener">button/page.tsx</a></header>
+    <section class="row" data-status="unchanged" data-name="button-dark.png" data-has-both="true" data-a11y="0" data-rules="" data-html-url="app/button/?theme=dark">
+      <header><h2>button-dark.png</h2><span class="pill pass">ok</span><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/docs/visual-prop-editor/regression-test/src/app/button/page.tsx" target="_blank" rel="noopener">button/page.tsx</a></header>
       <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/button-dark.png" data-name="button-dark.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/button-dark.png" data-name="button-dark.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
-      <template class="a11y-findings"><span class="mk" data-n="1" data-rule="color-contrast" data-impact="serious" title="1. Text contrast is too low" style="--x:19.368%;--y:14.148%;--w:8.696%;--h:1.374%"><b>1</b></span><article class="v-card" data-n="1" data-rule="color-contrast" data-impact="serious">
-        <span class="v-num" data-impact="serious">1</span>
-        <div class="v-body">
-          <div class="v-head"><span class="impact serious">serious</span><h3>Text contrast is too low</h3></div>
-          <div class="v-where">span “primary-inverse”</div><div class="v-contrast"><span class="sw" style="background:#ffffff"></span><code>#FFFFFF</code><span class="on">on</span><span class="sw" style="background:#f2f4f5"></span><code>#F2F4F5</code><span class="ratio bad">1.10:1</span><span class="need">needs 4.5:1</span><span class="fs">12.0pt (16px) · normal</span></div><div class="v-fix">Darken the text or lighten the background until it reaches the required ratio.</div>
-          <details class="v-tech"><summary>Technical details</summary><dl>
-            <dt>Rule</dt><dd><a href="https://dequeuniversity.com/rules/axe/4.12/color-contrast?application=axeAPI" target="_blank" rel="noopener">color-contrast</a> — Elements must meet minimum color contrast ratio thresholds</dd>
-            <dt>Selector</dt><dd><code>.css-1a38frd-baseButton__content &gt; .css-1g9i2-baseButton__children</code></dd>
-            <dt>axe</dt><dd><pre>Fix any of the following:
-  Element has insufficient color contrast of 1.1 (foreground color: #ffffff, background color: #f2f4f5, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1</pre></dd>
-          </dl></details>
-        </div>
-      </article></template>
+      
     </section>
     <section class="row" data-status="unchanged" data-name="button-light.png" data-has-both="true" data-a11y="0" data-rules="" data-html-url="app/button/?theme=light">
       <header><h2>button-light.png</h2><span class="pill pass">ok</span><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/docs/visual-prop-editor/regression-test/src/app/button/page.tsx" target="_blank" rel="noopener">button/page.tsx</a></header>
@@ -430,22 +407,10 @@
       <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/form-errors-canvas.png" data-name="form-errors-canvas.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/form-errors-canvas.png" data-name="form-errors-canvas.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
       
     </section>
-    <section class="row" data-status="unchanged" data-name="form-errors-dark.png" data-has-both="true" data-a11y="1" data-rules="color-contrast" data-html-url="app/form-errors/?theme=dark">
-      <header><h2>form-errors-dark.png</h2><span class="pill pass">ok</span><button type="button" class="pill a11y" data-impact="serious" title="1 accessibility issue (worst: serious) — click to review them on the screenshot">⚠ 1 a11y</button><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/docs/visual-prop-editor/regression-test/src/app/form-errors/page.tsx" target="_blank" rel="noopener">form-errors/page.tsx</a></header>
+    <section class="row" data-status="unchanged" data-name="form-errors-dark.png" data-has-both="true" data-a11y="0" data-rules="" data-html-url="app/form-errors/?theme=dark">
+      <header><h2>form-errors-dark.png</h2><span class="pill pass">ok</span><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/docs/visual-prop-editor/regression-test/src/app/form-errors/page.tsx" target="_blank" rel="noopener">form-errors/page.tsx</a></header>
       <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/form-errors-dark.png" data-name="form-errors-dark.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/form-errors-dark.png" data-name="form-errors-dark.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
-      <template class="a11y-findings"><span class="mk" data-n="1" data-rule="color-contrast" data-impact="serious" title="1. Text contrast is too low" style="--x:22.213%;--y:60.912%;--w:4.743%;--h:1.048%"><b>1</b></span><article class="v-card" data-n="1" data-rule="color-contrast" data-impact="serious">
-        <span class="v-num" data-impact="serious">1</span>
-        <div class="v-body">
-          <div class="v-head"><span class="impact serious">serious</span><h3>Text contrast is too low</h3></div>
-          <div class="v-where">span “FileDrop”</div><div class="v-contrast"><span class="sw" style="background:#000000"></span><code>#000000</code><span class="on">on</span><span class="sw" style="background:#1c222b"></span><code>#1C222B</code><span class="ratio bad">1.31:1</span><span class="need">needs 4.5:1</span><span class="fs">12.0pt (16px) · normal</span></div><div class="v-fix">Darken the text or lighten the background until it reaches the required ratio.</div>
-          <details class="v-tech"><summary>Technical details</summary><dl>
-            <dt>Rule</dt><dd><a href="https://dequeuniversity.com/rules/axe/4.12/color-contrast?application=axeAPI" target="_blank" rel="noopener">color-contrast</a> — Elements must meet minimum color contrast ratio thresholds</dd>
-            <dt>Selector</dt><dd><code>.css-zdfyd-view</code></dd>
-            <dt>axe</dt><dd><pre>Fix any of the following:
-  Element has insufficient color contrast of 1.31 (foreground color: #000000, background color: #1c222b, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1</pre></dd>
-          </dl></details>
-        </div>
-      </article></template>
+      
     </section>
     <section class="row" data-status="unchanged" data-name="form-errors-light.png" data-has-both="true" data-a11y="0" data-rules="" data-html-url="app/form-errors/?theme=light">
       <header><h2>form-errors-light.png</h2><span class="pill pass">ok</span><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/docs/visual-prop-editor/regression-test/src/app/form-errors/page.tsx" target="_blank" rel="noopener">form-errors/page.tsx</a></header>
@@ -487,22 +452,10 @@
       <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/link-canvas.png" data-name="link-canvas.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/link-canvas.png" data-name="link-canvas.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
       
     </section>
-    <section class="row" data-status="unchanged" data-name="link-dark.png" data-has-both="true" data-a11y="1" data-rules="color-contrast" data-html-url="app/link/?theme=dark">
-      <header><h2>link-dark.png</h2><span class="pill pass">ok</span><button type="button" class="pill a11y" data-impact="serious" title="1 accessibility issue (worst: serious) — click to review them on the screenshot">⚠ 1 a11y</button><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/docs/visual-prop-editor/regression-test/src/app/link/page.tsx" target="_blank" rel="noopener">link/page.tsx</a></header>
+    <section class="row" data-status="unchanged" data-name="link-dark.png" data-has-both="true" data-a11y="0" data-rules="" data-html-url="app/link/?theme=dark">
+      <header><h2>link-dark.png</h2><span class="pill pass">ok</span><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/docs/visual-prop-editor/regression-test/src/app/link/page.tsx" target="_blank" rel="noopener">link/page.tsx</a></header>
       <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/link-dark.png" data-name="link-dark.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/link-dark.png" data-name="link-dark.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
-      <template class="a11y-findings"><span class="mk" data-n="1" data-rule="color-contrast" data-impact="serious" title="1. Text contrast is too low" style="--x:15.937%;--y:15.000%;--w:3.359%;--h:2.125%"><b>1</b></span><article class="v-card" data-n="1" data-rule="color-contrast" data-impact="serious">
-        <span class="v-num" data-impact="serious">1</span>
-        <div class="v-body">
-          <div class="v-head"><span class="impact serious">serious</span><h3>Text contrast is too low</h3></div>
-          <div class="v-where">a “jumps”</div><div class="v-contrast"><span class="sw" style="background:#ffffff"></span><code>#FFFFFF</code><span class="on">on</span><span class="sw" style="background:#f2f4f5"></span><code>#F2F4F5</code><span class="ratio bad">1.10:1</span><span class="need">needs 4.5:1</span><span class="fs">12.0pt (16px) · normal</span></div><div class="v-fix">Darken the text or lighten the background until it reaches the required ratio.</div>
-          <details class="v-tech"><summary>Technical details</summary><dl>
-            <dt>Rule</dt><dd><a href="https://dequeuniversity.com/rules/axe/4.12/color-contrast?application=axeAPI" target="_blank" rel="noopener">color-contrast</a> — Elements must meet minimum color contrast ratio thresholds</dd>
-            <dt>Selector</dt><dd><code>.css-ozlwaj-view-link</code></dd>
-            <dt>axe</dt><dd><pre>Fix any of the following:
-  Element has insufficient color contrast of 1.1 (foreground color: #ffffff, background color: #f2f4f5, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1</pre></dd>
-          </dl></details>
-        </div>
-      </article></template>
+      
     </section>
     <section class="row" data-status="unchanged" data-name="link-light.png" data-has-both="true" data-a11y="0" data-rules="" data-html-url="app/link/?theme=light">
       <header><h2>link-light.png</h2><span class="pill pass">ok</span><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/docs/visual-prop-editor/regression-test/src/app/link/page.tsx" target="_blank" rel="noopener">link/page.tsx</a></header>
@@ -589,99 +542,15 @@
       <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/small-components-canvas.png" data-name="small-components-canvas.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/small-components-canvas.png" data-name="small-components-canvas.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
       
     </section>
-    <section class="row" data-status="unchanged" data-name="small-components-dark.png" data-has-both="true" data-a11y="3" data-rules="color-contrast" data-html-url="app/small-components/?theme=dark">
-      <header><h2>small-components-dark.png</h2><span class="pill pass">ok</span><button type="button" class="pill a11y" data-impact="serious" title="3 accessibility issues (worst: serious) — click to review them on the screenshot">⚠ 3 a11y</button><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/docs/visual-prop-editor/regression-test/src/app/small-components/page.tsx" target="_blank" rel="noopener">small-components/page.tsx</a></header>
+    <section class="row" data-status="unchanged" data-name="small-components-dark.png" data-has-both="true" data-a11y="0" data-rules="" data-html-url="app/small-components/?theme=dark">
+      <header><h2>small-components-dark.png</h2><span class="pill pass">ok</span><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/docs/visual-prop-editor/regression-test/src/app/small-components/page.tsx" target="_blank" rel="noopener">small-components/page.tsx</a></header>
       <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/small-components-dark.png" data-name="small-components-dark.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/small-components-dark.png" data-name="small-components-dark.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
-      <template class="a11y-findings"><span class="mk" data-n="1" data-rule="color-contrast" data-impact="serious" title="1. Text contrast is too low" style="--x:2.530%;--y:72.134%;--w:3.794%;--h:1.234%"><b>1</b></span><span class="mk" data-n="2" data-rule="color-contrast" data-impact="serious" title="2. Text contrast is too low" style="--x:31.937%;--y:80.406%;--w:13.123%;--h:1.234%"><b>2</b></span><span class="mk" data-n="3" data-rule="color-contrast" data-impact="serious" title="3. Text contrast is too low" style="--x:2.530%;--y:84.543%;--w:14.704%;--h:1.234%"><b>3</b></span><article class="v-card" data-n="1" data-rule="color-contrast" data-impact="serious">
-        <span class="v-num" data-impact="serious">1</span>
-        <div class="v-body">
-          <div class="v-head"><span class="impact serious">serious</span><h3>Text contrast is too low</h3></div>
-          <div class="v-where">span “inherit”</div><div class="v-contrast"><span class="sw" style="background:#aa0000"></span><code>#AA0000</code><span class="on">on</span><span class="sw" style="background:#10141a"></span><code>#10141A</code><span class="ratio bad">2.38:1</span><span class="need">needs 4.5:1</span><span class="fs">12.0pt (16px) · normal</span></div><div class="v-fix">Darken the text or lighten the background until it reaches the required ratio.</div>
-          <details class="v-tech"><summary>Technical details</summary><dl>
-            <dt>Rule</dt><dd><a href="https://dequeuniversity.com/rules/axe/4.12/color-contrast?application=axeAPI" target="_blank" rel="noopener">color-contrast</a> — Elements must meet minimum color contrast ratio thresholds</dd>
-            <dt>Selector</dt><dd><code>.css-1pklgqo-text</code></dd>
-            <dt>axe</dt><dd><pre>Fix any of the following:
-  Element has insufficient color contrast of 2.38 (foreground color: #aa0000, background color: #10141a, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1</pre></dd>
-          </dl></details>
-        </div>
-      </article><article class="v-card" data-n="2" data-rule="color-contrast" data-impact="serious">
-        <span class="v-num" data-impact="serious">2</span>
-        <div class="v-body">
-          <div class="v-head"><span class="impact serious">serious</span><h3>Text contrast is too low</h3></div>
-          <div class="v-where">span “I'm primary-inverse text”</div><div class="v-contrast"><span class="sw" style="background:#1c222b"></span><code>#1C222B</code><span class="on">on</span><span class="sw" style="background:#10141a"></span><code>#10141A</code><span class="ratio bad">1.15:1</span><span class="need">needs 4.5:1</span><span class="fs">12.0pt (16px) · normal</span></div><div class="v-fix">Darken the text or lighten the background until it reaches the required ratio.</div>
-          <details class="v-tech"><summary>Technical details</summary><dl>
-            <dt>Rule</dt><dd><a href="https://dequeuniversity.com/rules/axe/4.12/color-contrast?application=axeAPI" target="_blank" rel="noopener">color-contrast</a> — Elements must meet minimum color contrast ratio thresholds</dd>
-            <dt>Selector</dt><dd><code>span[color=&quot;primary-inverse&quot;]</code></dd>
-            <dt>axe</dt><dd><pre>Fix any of the following:
-  Element has insufficient color contrast of 1.15 (foreground color: #1c222b, background color: #10141a, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1</pre></dd>
-          </dl></details>
-        </div>
-      </article><article class="v-card" data-n="3" data-rule="color-contrast" data-impact="serious">
-        <span class="v-num" data-impact="serious">3</span>
-        <div class="v-body">
-          <div class="v-head"><span class="impact serious">serious</span><h3>Text contrast is too low</h3></div>
-          <div class="v-where">span “I'm secondary-inverse text”</div><div class="v-contrast"><span class="sw" style="background:#1c222b"></span><code>#1C222B</code><span class="on">on</span><span class="sw" style="background:#10141a"></span><code>#10141A</code><span class="ratio bad">1.15:1</span><span class="need">needs 4.5:1</span><span class="fs">12.0pt (16px) · normal</span></div><div class="v-fix">Darken the text or lighten the background until it reaches the required ratio.</div>
-          <details class="v-tech"><summary>Technical details</summary><dl>
-            <dt>Rule</dt><dd><a href="https://dequeuniversity.com/rules/axe/4.12/color-contrast?application=axeAPI" target="_blank" rel="noopener">color-contrast</a> — Elements must meet minimum color contrast ratio thresholds</dd>
-            <dt>Selector</dt><dd><code>span[color=&quot;secondary-inverse&quot;]</code></dd>
-            <dt>axe</dt><dd><pre>Fix any of the following:
-  Element has insufficient color contrast of 1.15 (foreground color: #1c222b, background color: #10141a, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1</pre></dd>
-          </dl></details>
-        </div>
-      </article></template>
+      
     </section>
-    <section class="row" data-status="unchanged" data-name="small-components-light.png" data-has-both="true" data-a11y="4" data-rules="color-contrast" data-html-url="app/small-components/?theme=light">
-      <header><h2>small-components-light.png</h2><span class="pill pass">ok</span><button type="button" class="pill a11y" data-impact="serious" title="4 accessibility issues (worst: serious) — click to review them on the screenshot">⚠ 4 a11y</button><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/docs/visual-prop-editor/regression-test/src/app/small-components/page.tsx" target="_blank" rel="noopener">small-components/page.tsx</a></header>
+    <section class="row" data-status="unchanged" data-name="small-components-light.png" data-has-both="true" data-a11y="0" data-rules="" data-html-url="app/small-components/?theme=light">
+      <header><h2>small-components-light.png</h2><span class="pill pass">ok</span><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/docs/visual-prop-editor/regression-test/src/app/small-components/page.tsx" target="_blank" rel="noopener">small-components/page.tsx</a></header>
       <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/small-components-light.png" data-name="small-components-light.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/small-components-light.png" data-name="small-components-light.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
-      <template class="a11y-findings"><span class="mk" data-n="1" data-rule="color-contrast" data-impact="serious" title="1. Text contrast is too low" style="--x:31.937%;--y:80.406%;--w:13.123%;--h:1.234%"><b>1</b></span><span class="mk" data-n="2" data-rule="color-contrast" data-impact="serious" title="2. Text contrast is too low" style="--x:2.530%;--y:84.543%;--w:14.704%;--h:1.234%"><b>2</b></span><span class="mk" data-n="3" data-rule="color-contrast" data-impact="serious" title="3. Text contrast is too low" style="--x:17.233%;--y:84.543%;--w:10.435%;--h:1.234%"><b>3</b></span><span class="mk" data-n="4" data-rule="color-contrast" data-impact="serious" title="4. Text contrast is too low" style="--x:27.668%;--y:84.543%;--w:12.016%;--h:1.234%"><b>4</b></span><article class="v-card" data-n="1" data-rule="color-contrast" data-impact="serious">
-        <span class="v-num" data-impact="serious">1</span>
-        <div class="v-body">
-          <div class="v-head"><span class="impact serious">serious</span><h3>Text contrast is too low</h3></div>
-          <div class="v-where">span “I'm primary-inverse text”</div><div class="v-contrast"><span class="sw" style="background:#ffffff"></span><code>#FFFFFF</code><span class="on">on</span><span class="sw" style="background:#f2f4f5"></span><code>#F2F4F5</code><span class="ratio bad">1.10:1</span><span class="need">needs 4.5:1</span><span class="fs">12.0pt (16px) · normal</span></div><div class="v-fix">Darken the text or lighten the background until it reaches the required ratio.</div>
-          <details class="v-tech"><summary>Technical details</summary><dl>
-            <dt>Rule</dt><dd><a href="https://dequeuniversity.com/rules/axe/4.12/color-contrast?application=axeAPI" target="_blank" rel="noopener">color-contrast</a> — Elements must meet minimum color contrast ratio thresholds</dd>
-            <dt>Selector</dt><dd><code>span[color=&quot;primary-inverse&quot;]</code></dd>
-            <dt>axe</dt><dd><pre>Fix any of the following:
-  Element has insufficient color contrast of 1.1 (foreground color: #ffffff, background color: #f2f4f5, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1</pre></dd>
-          </dl></details>
-        </div>
-      </article><article class="v-card" data-n="2" data-rule="color-contrast" data-impact="serious">
-        <span class="v-num" data-impact="serious">2</span>
-        <div class="v-body">
-          <div class="v-head"><span class="impact serious">serious</span><h3>Text contrast is too low</h3></div>
-          <div class="v-where">span “I'm secondary-inverse text”</div><div class="v-contrast"><span class="sw" style="background:#ffffff"></span><code>#FFFFFF</code><span class="on">on</span><span class="sw" style="background:#f2f4f5"></span><code>#F2F4F5</code><span class="ratio bad">1.10:1</span><span class="need">needs 4.5:1</span><span class="fs">12.0pt (16px) · normal</span></div><div class="v-fix">Darken the text or lighten the background until it reaches the required ratio.</div>
-          <details class="v-tech"><summary>Technical details</summary><dl>
-            <dt>Rule</dt><dd><a href="https://dequeuniversity.com/rules/axe/4.12/color-contrast?application=axeAPI" target="_blank" rel="noopener">color-contrast</a> — Elements must meet minimum color contrast ratio thresholds</dd>
-            <dt>Selector</dt><dd><code>span[color=&quot;secondary-inverse&quot;]</code></dd>
-            <dt>axe</dt><dd><pre>Fix any of the following:
-  Element has insufficient color contrast of 1.1 (foreground color: #ffffff, background color: #f2f4f5, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1</pre></dd>
-          </dl></details>
-        </div>
-      </article><article class="v-card" data-n="3" data-rule="color-contrast" data-impact="serious">
-        <span class="v-num" data-impact="serious">3</span>
-        <div class="v-body">
-          <div class="v-head"><span class="impact serious">serious</span><h3>Text contrast is too low</h3></div>
-          <div class="v-where">span “I'm primary-on text”</div><div class="v-contrast"><span class="sw" style="background:#ffffff"></span><code>#FFFFFF</code><span class="on">on</span><span class="sw" style="background:#f2f4f5"></span><code>#F2F4F5</code><span class="ratio bad">1.10:1</span><span class="need">needs 4.5:1</span><span class="fs">12.0pt (16px) · normal</span></div><div class="v-fix">Darken the text or lighten the background until it reaches the required ratio.</div>
-          <details class="v-tech"><summary>Technical details</summary><dl>
-            <dt>Rule</dt><dd><a href="https://dequeuniversity.com/rules/axe/4.12/color-contrast?application=axeAPI" target="_blank" rel="noopener">color-contrast</a> — Elements must meet minimum color contrast ratio thresholds</dd>
-            <dt>Selector</dt><dd><code>span[color=&quot;primary-on&quot;]</code></dd>
-            <dt>axe</dt><dd><pre>Fix any of the following:
-  Element has insufficient color contrast of 1.1 (foreground color: #ffffff, background color: #f2f4f5, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1</pre></dd>
-          </dl></details>
-        </div>
-      </article><article class="v-card" data-n="4" data-rule="color-contrast" data-impact="serious">
-        <span class="v-num" data-impact="serious">4</span>
-        <div class="v-body">
-          <div class="v-head"><span class="impact serious">serious</span><h3>Text contrast is too low</h3></div>
-          <div class="v-where">span “I'm secondary-on text”</div><div class="v-contrast"><span class="sw" style="background:#ffffff"></span><code>#FFFFFF</code><span class="on">on</span><span class="sw" style="background:#f2f4f5"></span><code>#F2F4F5</code><span class="ratio bad">1.10:1</span><span class="need">needs 4.5:1</span><span class="fs">12.0pt (16px) · normal</span></div><div class="v-fix">Darken the text or lighten the background until it reaches the required ratio.</div>
-          <details class="v-tech"><summary>Technical details</summary><dl>
-            <dt>Rule</dt><dd><a href="https://dequeuniversity.com/rules/axe/4.12/color-contrast?application=axeAPI" target="_blank" rel="noopener">color-contrast</a> — Elements must meet minimum color contrast ratio thresholds</dd>
-            <dt>Selector</dt><dd><code>span[color=&quot;secondary-on&quot;]</code></dd>
-            <dt>axe</dt><dd><pre>Fix any of the following:
-  Element has insufficient color contrast of 1.1 (foreground color: #ffffff, background color: #f2f4f5, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1</pre></dd>
-          </dl></details>
-        </div>
-      </article></template>
+      
     </section>
     <section class="row" data-status="unchanged" data-name="table-canvas.png" data-has-both="true" data-a11y="0" data-rules="" data-html-url="app/table/?theme=canvas">
       <header><h2>table-canvas.png</h2><span class="pill pass">ok</span><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/docs/visual-prop-editor/regression-test/src/app/table/page.tsx" target="_blank" rel="noopener">table/page.tsx</a></header>
@@ -718,26 +587,14 @@
       <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/tooltip-canvas.png" data-name="tooltip-canvas.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/tooltip-canvas.png" data-name="tooltip-canvas.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
       
     </section>
-    <section class="row" data-status="unchanged" data-name="tooltip-dark.png" data-has-both="true" data-a11y="1" data-rules="color-contrast" data-html-url="app/tooltip/?theme=dark">
-      <header><h2>tooltip-dark.png</h2><span class="pill pass">ok</span><button type="button" class="pill a11y" data-impact="serious" title="1 accessibility issue (worst: serious) — click to review them on the screenshot">⚠ 1 a11y</button><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/docs/visual-prop-editor/regression-test/src/app/tooltip/page.tsx" target="_blank" rel="noopener">tooltip/page.tsx</a></header>
+    <section class="row" data-status="unchanged" data-name="tooltip-dark.png" data-has-both="true" data-a11y="0" data-rules="" data-html-url="app/tooltip/?theme=dark">
+      <header><h2>tooltip-dark.png</h2><span class="pill pass">ok</span><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/docs/visual-prop-editor/regression-test/src/app/tooltip/page.tsx" target="_blank" rel="noopener">tooltip/page.tsx</a></header>
       <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/tooltip-dark.png" data-name="tooltip-dark.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/tooltip-dark.png" data-name="tooltip-dark.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
-      <template class="a11y-findings"><span class="mk" data-n="1" data-rule="color-contrast" data-impact="serious" title="1. Text contrast is too low" style="--x:5.059%;--y:44.298%;--w:15.810%;--h:0.517%"><b>1</b></span><article class="v-card" data-n="1" data-rule="color-contrast" data-impact="serious">
-        <span class="v-num" data-impact="serious">1</span>
-        <div class="v-body">
-          <div class="v-head"><span class="impact serious">serious</span><h3>Text contrast is too low</h3></div>
-          <div class="v-where">input</div><div class="v-contrast"><span class="sw" style="background:#000000"></span><code>#000000</code><span class="on">on</span><span class="sw" style="background:#10141a"></span><code>#10141A</code><span class="ratio bad">1.13:1</span><span class="need">needs 4.5:1</span><span class="fs">12.0pt (16px) · normal</span></div><div class="v-fix">Darken the text or lighten the background until it reaches the required ratio.</div>
-          <details class="v-tech"><summary>Technical details</summary><dl>
-            <dt>Rule</dt><dd><a href="https://dequeuniversity.com/rules/axe/4.12/color-contrast?application=axeAPI" target="_blank" rel="noopener">color-contrast</a> — Elements must meet minimum color contrast ratio thresholds</dd>
-            <dt>Selector</dt><dd><code>.css-j7s35e-formFieldLayout__children &gt; input</code></dd>
-            <dt>axe</dt><dd><pre>Fix any of the following:
-  Element has insufficient color contrast of 1.13 (foreground color: #000000, background color: #10141a, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1</pre></dd>
-          </dl></details>
-        </div>
-      </article></template>
+      
     </section>
-    <section class="row" data-status="changed" data-name="tooltip-light.png" data-has-both="true" data-a11y="0" data-rules="" data-html-url="app/tooltip/?theme=light">
-      <header><h2>tooltip-light.png</h2><span class="pill fail">changed</span><div class="meta">14438 pixels differ</div><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/docs/visual-prop-editor/regression-test/src/app/tooltip/page.tsx" target="_blank" rel="noopener">tooltip/page.tsx</a></header>
-      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/tooltip-light.png" data-name="tooltip-light.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/tooltip-light.png" data-name="tooltip-light.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption><img loading="lazy" src="diff/tooltip-light.png" data-name="tooltip-light.png" data-mode="diff" class="thumb" /></figure></div>
+    <section class="row" data-status="unchanged" data-name="tooltip-light.png" data-has-both="true" data-a11y="0" data-rules="" data-html-url="app/tooltip/?theme=light">
+      <header><h2>tooltip-light.png</h2><span class="pill pass">ok</span><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/docs/visual-prop-editor/regression-test/src/app/tooltip/page.tsx" target="_blank" rel="noopener">tooltip/page.tsx</a></header>
+      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/tooltip-light.png" data-name="tooltip-light.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/tooltip-light.png" data-name="tooltip-light.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
       
     </section>
     <section class="row" data-status="unchanged" data-name="treebrowser-canvas.png" data-has-both="true" data-a11y="0" data-rules="" data-html-url="app/treebrowser/?theme=canvas">
@@ -760,58 +617,10 @@
       <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/view-canvas.png" data-name="view-canvas.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/view-canvas.png" data-name="view-canvas.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
       
     </section>
-    <section class="row" data-status="unchanged" data-name="view-dark.png" data-has-both="true" data-a11y="4" data-rules="color-contrast" data-html-url="app/view/?theme=dark">
-      <header><h2>view-dark.png</h2><span class="pill pass">ok</span><button type="button" class="pill a11y" data-impact="serious" title="4 accessibility issues (worst: serious) — click to review them on the screenshot">⚠ 4 a11y</button><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/docs/visual-prop-editor/regression-test/src/app/view/page.tsx" target="_blank" rel="noopener">view/page.tsx</a></header>
+    <section class="row" data-status="unchanged" data-name="view-dark.png" data-has-both="true" data-a11y="0" data-rules="" data-html-url="app/view/?theme=dark">
+      <header><h2>view-dark.png</h2><span class="pill pass">ok</span><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/docs/visual-prop-editor/regression-test/src/app/view/page.tsx" target="_blank" rel="noopener">view/page.tsx</a></header>
       <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/view-dark.png" data-name="view-dark.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/view-dark.png" data-name="view-dark.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
-      <template class="a11y-findings"><span class="mk" data-n="1" data-rule="color-contrast" data-impact="serious" title="1. Text contrast is too low" style="--x:50.830%;--y:13.095%;--w:4.348%;--h:2.965%"><b>1</b></span><span class="mk" data-n="2" data-rule="color-contrast" data-impact="serious" title="2. Text contrast is too low" style="--x:57.075%;--y:13.095%;--w:6.482%;--h:2.965%"><b>2</b></span><span class="mk" data-n="3" data-rule="color-contrast" data-impact="serious" title="3. Text contrast is too low" style="--x:65.455%;--y:13.095%;--w:5.850%;--h:2.965%"><b>3</b></span><span class="mk" data-n="4" data-rule="color-contrast" data-impact="serious" title="4. Text contrast is too low" style="--x:73.202%;--y:13.095%;--w:6.324%;--h:2.965%"><b>4</b></span><article class="v-card" data-n="1" data-rule="color-contrast" data-impact="serious">
-        <span class="v-num" data-impact="serious">1</span>
-        <div class="v-body">
-          <div class="v-head"><span class="impact serious">serious</span><h3>Text contrast is too low</h3></div>
-          <div class="v-where">div “alert”</div><div class="v-contrast"><span class="sw" style="background:#1c222b"></span><code>#1C222B</code><span class="on">on</span><span class="sw" style="background:#2b7abc"></span><code>#2B7ABC</code><span class="ratio bad">3.51:1</span><span class="need">needs 4.5:1</span><span class="fs">12.0pt (16px) · normal</span></div><div class="v-fix">Darken the text or lighten the background until it reaches the required ratio.</div>
-          <details class="v-tech"><summary>Technical details</summary><dl>
-            <dt>Rule</dt><dd><a href="https://dequeuniversity.com/rules/axe/4.12/color-contrast?application=axeAPI" target="_blank" rel="noopener">color-contrast</a> — Elements must meet minimum color contrast ratio thresholds</dd>
-            <dt>Selector</dt><dd><code>.css-1nsw77o-view--inlineBlock</code></dd>
-            <dt>axe</dt><dd><pre>Fix any of the following:
-  Element has insufficient color contrast of 3.51 (foreground color: #1c222b, background color: #2b7abc, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1</pre></dd>
-          </dl></details>
-        </div>
-      </article><article class="v-card" data-n="2" data-rule="color-contrast" data-impact="serious">
-        <span class="v-num" data-impact="serious">2</span>
-        <div class="v-body">
-          <div class="v-head"><span class="impact serious">serious</span><h3>Text contrast is too low</h3></div>
-          <div class="v-where">div “success”</div><div class="v-contrast"><span class="sw" style="background:#1c222b"></span><code>#1C222B</code><span class="on">on</span><span class="sw" style="background:#03893d"></span><code>#03893D</code><span class="ratio bad">3.54:1</span><span class="need">needs 4.5:1</span><span class="fs">12.0pt (16px) · normal</span></div><div class="v-fix">Darken the text or lighten the background until it reaches the required ratio.</div>
-          <details class="v-tech"><summary>Technical details</summary><dl>
-            <dt>Rule</dt><dd><a href="https://dequeuniversity.com/rules/axe/4.12/color-contrast?application=axeAPI" target="_blank" rel="noopener">color-contrast</a> — Elements must meet minimum color contrast ratio thresholds</dd>
-            <dt>Selector</dt><dd><code>.css-1glc3oy-view--inlineBlock</code></dd>
-            <dt>axe</dt><dd><pre>Fix any of the following:
-  Element has insufficient color contrast of 3.54 (foreground color: #1c222b, background color: #03893d, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1</pre></dd>
-          </dl></details>
-        </div>
-      </article><article class="v-card" data-n="3" data-rule="color-contrast" data-impact="serious">
-        <span class="v-num" data-impact="serious">3</span>
-        <div class="v-body">
-          <div class="v-head"><span class="impact serious">serious</span><h3>Text contrast is too low</h3></div>
-          <div class="v-where">div “danger”</div><div class="v-contrast"><span class="sw" style="background:#1c222b"></span><code>#1C222B</code><span class="on">on</span><span class="sw" style="background:#e62429"></span><code>#E62429</code><span class="ratio bad">3.54:1</span><span class="need">needs 4.5:1</span><span class="fs">12.0pt (16px) · normal</span></div><div class="v-fix">Darken the text or lighten the background until it reaches the required ratio.</div>
-          <details class="v-tech"><summary>Technical details</summary><dl>
-            <dt>Rule</dt><dd><a href="https://dequeuniversity.com/rules/axe/4.12/color-contrast?application=axeAPI" target="_blank" rel="noopener">color-contrast</a> — Elements must meet minimum color contrast ratio thresholds</dd>
-            <dt>Selector</dt><dd><code>.css-1jzx41y-view--inlineBlock</code></dd>
-            <dt>axe</dt><dd><pre>Fix any of the following:
-  Element has insufficient color contrast of 3.54 (foreground color: #1c222b, background color: #e62429, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1</pre></dd>
-          </dl></details>
-        </div>
-      </article><article class="v-card" data-n="4" data-rule="color-contrast" data-impact="serious">
-        <span class="v-num" data-impact="serious">4</span>
-        <div class="v-body">
-          <div class="v-head"><span class="impact serious">serious</span><h3>Text contrast is too low</h3></div>
-          <div class="v-where">div “warning”</div><div class="v-contrast"><span class="sw" style="background:#1c222b"></span><code>#1C222B</code><span class="on">on</span><span class="sw" style="background:#cf4a00"></span><code>#CF4A00</code><span class="ratio bad">3.52:1</span><span class="need">needs 4.5:1</span><span class="fs">12.0pt (16px) · normal</span></div><div class="v-fix">Darken the text or lighten the background until it reaches the required ratio.</div>
-          <details class="v-tech"><summary>Technical details</summary><dl>
-            <dt>Rule</dt><dd><a href="https://dequeuniversity.com/rules/axe/4.12/color-contrast?application=axeAPI" target="_blank" rel="noopener">color-contrast</a> — Elements must meet minimum color contrast ratio thresholds</dd>
-            <dt>Selector</dt><dd><code>.css-iyf4ds-view--inlineBlock</code></dd>
-            <dt>axe</dt><dd><pre>Fix any of the following:
-  Element has insufficient color contrast of 3.52 (foreground color: #1c222b, background color: #cf4a00, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1</pre></dd>
-          </dl></details>
-        </div>
-      </article></template>
+      
     </section>
     <section class="row" data-status="unchanged" data-name="view-light.png" data-has-both="true" data-a11y="0" data-rules="" data-html-url="app/view/?theme=light">
       <header><h2>view-light.png</h2><span class="pill pass">ok</span><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/docs/visual-prop-editor/regression-test/src/app/view/page.tsx" target="_blank" rel="noopener">view/page.tsx</a></header>
