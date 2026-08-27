@@ -1,10 +1,10 @@
 # Instructure UI (InstUI) - React Component Library
 
-- version 11.7.4 
+- version 11.7.5 
 
 - Instructure UI (InstUI) is a comprehensive React component library.
 
-- All component documentation below always reflects the latest InstUI version noted above (11.7.4). Props, types, and examples describe this version.
+- All component documentation below always reflects the latest InstUI version noted above (11.7.5). Props, types, and examples describe this version.
 
 ## Documentation
 
@@ -22,6 +22,7 @@
 - [Guides getting started](./guides-getting-started.md): Quick start: Create a React app, add `@instructure/ui`, wrap with `InstUISettingsProvider`, and use components. Integrate with existing projects by adding the dependency and provider. Read about theme overrides and accessibility for best practices.
 - [Layout spacing](./layout-spacing.md): InstUI provides semantic spacing tokens (e.g., buttons, tags) for consistent layouts. Apply spacing via `margin` prop, container `gap`, or importing from theme. Legacy tokens are available for compatibility but not recommended for new layouts.
 - [Module federation](./module-federation.md): InstUI supports module federation with specific version requirements. For v10.14+, use local themes (`canvasThemeLocal`). For older hosts, guest apps must use v10.14+ and local themes. Global theme overrides don't apply to local themes.
+- [Server side rendering](./server-side-rendering.md): SSR with Next.js requires wrapping the app with `InstUISettingsProvider` for deterministic ID generation. Avoid `@instructure/ui` meta-package; install only needed packages. CodeEditor isn't SSR-compatible and must be dynamically imported.
 - [Using icons](./UsingIcons.md): Guidelines for using icons with proper accessibility roles, size variants, and color options. Line icons for light backgrounds, solid for dark backgrounds. Icons scale with parent font-size by default.
 
 ### Components
@@ -108,8 +109,8 @@
 - [Dialog](./Dialog.md): A utility component for accessibility in modals, popovers, and trays. Manages focus trapping, screen reader visibility, and keyboard navigation. Essential for WCAG-compliant modal interactions.
 - [Focusable](./Focusable.md): A utility component that detects when elements receive focus. Provides render props for creating accessible focus-based interactions, such as skip-to-content links or focus-triggered tooltips. Ensures WCAG compliance for focus management.
 - [Transition](./Transition.md): A wrapper component for transitioning elements in and out of the UI. Supports fade, scale, and slide transitions with customizable directions. Handles mount/unmount transitions and supports RTL mirroring for slide animations.
-- [Portal](./Portal.md): Renders a React subtree into a different DOM element. Useful for modal-like components that need to break out of parent containers. Typically used with Overlay, Modal, or other components that need to render outside their parent hierarchy.
 - [Position](./Position.md): Positions content relative to a target element with various placement options. Supports RTL internationalization, offset adjustments, and mounting in specific DOM nodes. Replaces older Target/Content pattern with renderTarget prop.
+- [Portal](./Portal.md): Renders a React subtree into a different DOM element. Useful for modal-like components that need to break out of parent containers. Typically used with Overlay, Modal, or other components that need to render outside their parent hierarchy.
 - [Selectable](./Selectable.md): Low-level utility for building custom combobox widgets. Provides ARIA-compliant prop getters and state management hooks. Use existing Select component when possible.
 - [InlineSVG](./InlineSVG.md): Renders accessible SVG content inline with support for fixed dimensions or container filling. Differentiates from SVGIcon by being suitable for non-icon SVG graphics while maintaining accessibility standards.
 - [SVGIcon](./SVGIcon.md): Renders accessible inline SVG icons. Supports custom sizing, color theming, rotation, and display properties. Accepts SVG content via children or external source strings.
