@@ -1,8 +1,8 @@
 {
   "summary": {
     "total": 96,
-    "unchanged": 94,
-    "changed": 2,
+    "unchanged": 96,
+    "changed": 0,
     "added": 0,
     "removed": 0,
     "a11yPages": 7,
@@ -395,8 +395,8 @@
     },
     {
       "name": "menu-dark.png",
-      "status": "changed",
-      "numDiff": 5950,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
@@ -497,8 +497,8 @@
     },
     {
       "name": "table-canvas.png",
-      "status": "changed",
-      "numDiff": 3338,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
