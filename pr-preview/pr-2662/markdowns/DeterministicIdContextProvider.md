@@ -12,7 +12,10 @@ See detailed documentation about how to use it: [InstUISettingsProvider](/#InstU
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| DeterministicIdContextProvider | instanceCounterMap | `` | No | `generateInstanceCounterMap()` |  |
+| DeterministicIdContextProvider | instanceCounterMap | `` | No | `new Map<
+  string,
+  number
+>()` |  |
 
 ### Usage
 
