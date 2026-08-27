@@ -33,7 +33,7 @@ import generateStyle from './styles.js'
 import generateComponentTheme from './theme.js'
 
 import { allowedProps } from './props.js'
-import type { ModalBodyProps } from './props'
+import type { ModalBodyProps, ModalBodyState } from './props'
 import { UIElement } from '@instructure/shared-types'
 import ModalContext from '../ModalContext.js'
 
@@ -44,7 +44,7 @@ id: Modal.Body
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class ModalBody extends Component<ModalBodyProps> {
+class ModalBody extends Component<ModalBodyProps, ModalBodyState> {
   static displayName = 'ModalBody'
   static readonly componentId = 'Modal.Body'
 
@@ -54,6 +54,11 @@ class ModalBody extends Component<ModalBodyProps> {
     as: 'div',
     variant: 'default'
   }
+
+  state: ModalBodyState = { isFirefox: false, needsTabIndex: false }
+  // mirrors state.needsTabIndex, but readable synchronously in the observer
+  // callbacks below, where a pending setState would make this.state stale
+  private lastNeedsTabIndex = false
 
   ref: UIElement | null = null
   private resizeObserver?: ResizeObserver
@@ -92,9 +97,10 @@ class ModalBody extends Component<ModalBodyProps> {
 
     const finalRef = this.getFinalRef(this.ref)
     if (finalRef && typeof ResizeObserver !== 'undefined') {
-      this.resizeObserver = new ResizeObserver(() => this.forceUpdate())
+      this.syncTabIndex()
+      this.resizeObserver = new ResizeObserver(this.syncTabIndex)
       this.resizeObserver.observe(finalRef)
-      this.mutationObserver = new MutationObserver(() => this.forceUpdate())
+      this.mutationObserver = new MutationObserver(this.syncTabIndex)
       this.mutationObserver.observe(finalRef, {
         childList: true,
         subtree: true,
@@ -122,6 +128,32 @@ class ModalBody extends Component<ModalBodyProps> {
     this.mutationObserver?.disconnect()
   }
 
+  // The body is a tab stop only while it can be scrolled but holds nothing
+  // focusable. Both inputs come from the DOM, so the observers recompute them
+  // on resize and on subtree changes — which is most changes inside the body,
+  // the vast majority of them leaving the result identical. Comparing against
+  // the last computed value before calling setState keeps those callbacks from
+  // scheduling an update at all, rather than scheduling one React later
+  // discards: `setState` warns about updates outside `act()` in tests as soon
+  // as it schedules, so bailing out inside the updater would be too late.
+  syncTabIndex = () => {
+    const finalRef = this.getFinalRef(this.ref)
+    const hasScrollbar =
+      !!finalRef &&
+      Math.abs(
+        (finalRef.scrollHeight ?? 0) -
+          (finalRef.getBoundingClientRect()?.height ?? 0)
+      ) > 1
+    const needsTabIndex = hasScrollbar && findTabbable(finalRef).length === 0
+
+    if (needsTabIndex === this.lastNeedsTabIndex) return
+    this.lastNeedsTabIndex = needsTabIndex
+    this.setState({ needsTabIndex })
+  }
+
+  // this recursive function is needed because `ref` can be a React component.
+  // TODO rethink, the 'as' prop, likely its not a good idea to allow React
+  // components. See INSTUI-4674
   getFinalRef(el: UIElement): Element | undefined {
     if (!el) {
       return undefined
@@ -144,18 +176,7 @@ class ModalBody extends Component<ModalBodyProps> {
       ModalBody
     )
     const isFit = overflow === 'fit'
-    // this recursive function is needed because `ref` can be a React component.
-    // TODO rethink, the 'as' prop, likely its not a good idea to allow React
-    // components. See INSTUI-4674
-    const finalRef = this.getFinalRef(this.ref)
-    const hasScrollbar =
-      finalRef &&
-      Math.abs(
-        (finalRef.scrollHeight ?? 0) -
-          (finalRef.getBoundingClientRect()?.height ?? 0)
-      ) > 1
-    const hasTabbableChildren = !!finalRef && findTabbable(finalRef).length > 0
-    const needsTabIndex = hasScrollbar && !hasTabbableChildren
+    const { needsTabIndex } = this.state
     return (
       <ModalContext.Consumer>
         {(value) => (
