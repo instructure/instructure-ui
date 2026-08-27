@@ -24,10 +24,7 @@
 
 'use client'
 import React from 'react'
-import { View as vw, Text as tx } from '@instructure/ui/latest'
-
-const View = vw as any
-const Text = tx as any
+import { View, Text } from '@instructure/ui/latest'
 
 export default function ViewPage() {
   return (
@@ -47,17 +44,19 @@ export default function ViewPage() {
       {/* Backgrounds */}
       <section>
         <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-          {[
-            'transparent',
-            'primary',
-            'secondary',
-            'primary-inverse',
-            'brand',
-            'alert',
-            'success',
-            'danger',
-            'warning'
-          ].map((bg) => (
+          {(
+            [
+              'transparent',
+              'primary',
+              'secondary',
+              'primary-inverse',
+              'brand',
+              'alert',
+              'success',
+              'danger',
+              'warning'
+            ] as const
+          ).map((bg) => (
             <View
               key={bg}
               as="div"
@@ -76,7 +75,7 @@ export default function ViewPage() {
       {/* Shadows */}
       <section>
         <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-          {['resting', 'above', 'topmost'].map((sh) => (
+          {(['resting', 'above', 'topmost'] as const).map((sh) => (
             <View
               key={sh}
               as="span"
@@ -238,7 +237,7 @@ export default function ViewPage() {
           overflowY="auto"
           overflowX="auto"
           withVisualDebug
-          tabIndex="0"
+          tabIndex={0}
         >
           <div style={{ width: '30rem', height: '10rem', background: '#ccc' }}>
             Scrollable content

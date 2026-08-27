@@ -24,16 +24,11 @@
 'use client'
 import React from 'react'
 import {
-  Checkbox as cb,
-  CheckboxGroup as cg,
-  FormFieldGroup as ffg,
-  ScreenReaderContent as src
+  Checkbox,
+  CheckboxGroup,
+  FormFieldGroup,
+  ScreenReaderContent
 } from '@instructure/ui/latest'
-
-const Checkbox = cb as any
-const CheckboxGroup = cg as any
-const FormFieldGroup = ffg as any
-const ScreenReaderContent = src as any
 
 export default function CheckboxGroupPage() {
   return (

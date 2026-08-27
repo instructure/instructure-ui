@@ -24,20 +24,13 @@
 'use client'
 import React from 'react'
 import {
-  Byline as bl,
-  Avatar as av,
-  View as vw,
-  Heading as hd,
-  Link as lk,
-  Text as tx
+  Byline,
+  Avatar,
+  View,
+  Heading,
+  Link,
+  Text
 } from '@instructure/ui/latest'
-
-const Byline = bl as any
-const Avatar = av as any
-const View = vw as any
-const Heading = hd as any
-const Link = lk as any
-const Text = tx as any
 
 export default function BylinePage() {
   return (

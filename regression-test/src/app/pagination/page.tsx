@@ -24,15 +24,7 @@
 
 'use client'
 import React, { useMemo, useState } from 'react'
-import {
-  Pagination as pg,
-  View as vw,
-  Text as tx
-} from '@instructure/ui/latest'
-
-const Pagination = pg as any
-const View = vw as any
-const Text = tx as any
+import { Pagination, View, Text } from '@instructure/ui/latest'
 
 export default function PaginationPage() {
   // New API states

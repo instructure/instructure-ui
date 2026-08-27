@@ -25,26 +25,16 @@
 'use client'
 import React, { useRef, useState } from 'react'
 import {
-  Select as sl,
-  SimpleSelect as ss,
-  View as vw,
-  Tag as tg,
-  AccessibleContent as ac,
-  IconUserSolid as ius,
-  IconUserLine as iul,
-  IconSearchLine as isl,
-  Text as tx
+  Select,
+  SimpleSelect,
+  View,
+  Tag,
+  AccessibleContent,
+  IconUserSolid,
+  IconUserLine,
+  IconSearchLine,
+  Text
 } from '@instructure/ui/latest'
-
-const Select = sl as any
-const SimpleSelect = ss as any
-const View = vw as any
-const Tag = tg as any
-const AccessibleContent = ac as any
-const IconUserSolid = ius as any
-const IconUserLine = iul as any
-const IconSearchLine = isl as any
-const Text = tx as any
 
 type OptionT = { id: string; label: string; disabled?: boolean }
 
@@ -75,18 +65,18 @@ function SingleSelectExample({ options }: { options: OptionT[] }) {
     const option = getOptionById(selectedOptionId)
     setInputValue(option ? option.label : '')
   }
-  const handleHighlightOption = (_e: any, { id }: { id: string }) => {
-    setHighlightedOptionId(id)
+  const handleHighlightOption = (_e: any, { id }: { id?: string }) => {
+    setHighlightedOptionId(id ?? null)
   }
-  const handleSelectOption = (_e: any, { id }: { id: string }) => {
-    const option = getOptionById(id)
+  const handleSelectOption = (_e: any, { id }: { id?: string }) => {
+    const option = id ? getOptionById(id) : undefined
     if (!option) return
     // focus juggling improves SR experience
     if (inputRef.current) {
       inputRef.current.blur()
       inputRef.current.focus()
     }
-    setSelectedOptionId(id)
+    setSelectedOptionId(option.id)
     setInputValue(option.label)
     setIsShowingOptions(false)
   }
@@ -167,17 +157,17 @@ function AutocompleteExample({ options }: { options: OptionT[] }) {
     setHighlightedOptionId(newOptions.length > 0 ? newOptions[0].id : null)
     setIsShowingOptions(true)
   }
-  const handleHighlightOption = (_e: any, { id }: { id: string }) => {
-    setHighlightedOptionId(id)
+  const handleHighlightOption = (_e: any, { id }: { id?: string }) => {
+    setHighlightedOptionId(id ?? null)
   }
-  const handleSelectOption = (_e: any, { id }: { id: string }) => {
-    const option = getOptionById(id)
+  const handleSelectOption = (_e: any, { id }: { id?: string }) => {
+    const option = id ? getOptionById(id) : undefined
     if (!option) return
     if (inputRef.current) {
       inputRef.current.blur()
       inputRef.current.focus()
     }
-    setSelectedOptionId(id)
+    setSelectedOptionId(option.id)
     setInputValue(option.label)
     setIsShowingOptions(false)
     setFilteredOptions(options)
@@ -257,17 +247,17 @@ function GroupSelectExample({
           const selected = getOptionById(selectedOptionId)
           setInputValue(selected ? selected.label : '')
         }}
-        onRequestHighlightOption={(_e: any, { id }: { id: string }) =>
-          setHighlightedOptionId(id)
+        onRequestHighlightOption={(_e: any, { id }: { id?: string }) =>
+          setHighlightedOptionId(id ?? null)
         }
-        onRequestSelectOption={(_e: any, { id }: { id: string }) => {
+        onRequestSelectOption={(_e: any, { id }: { id?: string }) => {
           const opt = getOptionById(id)
           if (!opt) return
           if (inputRef.current) {
             inputRef.current.blur()
             inputRef.current.focus()
           }
-          setSelectedOptionId(id)
+          setSelectedOptionId(opt.id)
           setInputValue(opt.label)
           setIsShowingOptions(false)
         }}

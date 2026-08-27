@@ -24,14 +24,7 @@
 
 'use client'
 import React, { useState } from 'react'
-import {
-  DateInput as di,
-  IconAddLine,
-  Text as tx
-} from '@instructure/ui/latest'
-
-const DateInput = di as any
-const Text = tx as any
+import { DateInput, IconAddLine, Text } from '@instructure/ui/latest'
 
 export default function DateInputExamplesPage() {
   // DateInput states
@@ -57,7 +50,9 @@ export default function DateInputExamplesPage() {
           screenReaderLabels={{
             calendarIcon: 'Calendar',
             nextMonthButton: 'Next month',
-            prevMonthButton: 'Previous month'
+            prevMonthButton: 'Previous month',
+            datePickerDialog: 'Date picker',
+            selectedLabel: 'Selected'
           }}
           value={di2Value}
           width="40rem"
@@ -87,7 +82,9 @@ export default function DateInputExamplesPage() {
           screenReaderLabels={{
             calendarIcon: 'Calendar',
             nextMonthButton: 'Next month',
-            prevMonthButton: 'Previous month'
+            prevMonthButton: 'Previous month',
+            datePickerDialog: 'Date picker',
+            selectedLabel: 'Selected'
           }}
           value={di2Value2}
           width="40rem"
@@ -111,7 +108,9 @@ export default function DateInputExamplesPage() {
           screenReaderLabels={{
             calendarIcon: 'Calendar',
             nextMonthButton: 'Next month',
-            prevMonthButton: 'Previous month'
+            prevMonthButton: 'Previous month',
+            datePickerDialog: 'Date picker',
+            selectedLabel: 'Selected'
           }}
           value={di2Value3}
           width="40rem"
