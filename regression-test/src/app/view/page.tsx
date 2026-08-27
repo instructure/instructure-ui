@@ -43,6 +43,7 @@ export default function ViewPage() {
 
       {/* Backgrounds */}
       <section>
+        <Text>Backgrounds:</Text>
         <div style={{ display: 'flex', flexWrap: 'wrap' }}>
           {(
             [
@@ -56,18 +57,20 @@ export default function ViewPage() {
               'danger',
               'warning'
             ] as const
-          ).map((bg) => (
-            <View
-              key={bg}
-              as="div"
-              display="inline-block"
-              maxWidth="10rem"
-              margin="small"
-              padding="small"
-              background={bg}
-            >
-              {bg}
-            </View>
+          ).map((bg, index) => (
+            <div key={index}>
+              <Text>{bg}</Text>
+              <View
+                key={bg}
+                as="div"
+                display="inline-block"
+                width="2rem"
+                height="2rem"
+                margin="small"
+                padding="small"
+                background={bg}
+              ></View>
+            </div>
           ))}
         </div>
       </section>
@@ -239,9 +242,9 @@ export default function ViewPage() {
           withVisualDebug
           tabIndex={0}
         >
-          <div style={{ width: '30rem', height: '10rem', background: '#ccc' }}>
-            Scrollable content
-          </div>
+          <div
+            style={{ width: '30rem', height: '10rem', background: '#ccc' }}
+          ></div>
         </View>
         <View as="div" textAlign="center" padding="x-small" withVisualDebug>
           <View

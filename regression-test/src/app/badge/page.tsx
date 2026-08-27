@@ -44,7 +44,7 @@ export default function BadgePage() {
         <Badge
           count={99}
           margin="0 medium 0 0"
-          formatOutput={function (formattedCount: any) {
+          formatOutput={function (formattedCount: string) {
             return (
               <AccessibleContent
                 alt={`You have ${formattedCount} new edits to review`}
