@@ -234,6 +234,7 @@ type: embed
 | Checkbox | inline | `boolean` | No | `false` |  |
 | Checkbox | labelPlacement | `'top' \| 'start' \| 'end'` | No | `'end'` |  |
 | Checkbox | isRequired | `boolean` | No | - |  |
+| Checkbox | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`. |
 | Checkbox | inputRef | `(inputElement: HTMLInputElement \| null) => void` | No | - | A function that provides a reference to the actual underlying input element |
 | Checkbox.CheckboxFacade | children | `React.ReactNode` | Yes | - |  |
 | Checkbox.CheckboxFacade | checked | `boolean` | No | `false` |  |
