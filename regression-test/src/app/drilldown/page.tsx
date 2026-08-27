@@ -25,18 +25,12 @@
 'use client'
 import React from 'react'
 import {
-  Drilldown as dd,
-  Button as btn,
-  Pill as pl,
-  IconCheckSolid as ics,
-  IconArrowOpenEndSolid as iaoes
+  Drilldown,
+  Button,
+  Pill,
+  IconCheckSolid,
+  IconArrowOpenEndSolid
 } from '@instructure/ui/latest'
-
-const Drilldown = dd as any
-const Button = btn as any
-const Pill = pl as any
-const IconCheckSolid = ics as any
-const IconArrowOpenEndSolid = iaoes as any
 
 export default function DrilldownPage() {
   return (
@@ -163,7 +157,7 @@ export default function DrilldownPage() {
             description="Manage subscription and invoices"
             afterLabelContentVAlign="center"
             renderLabelInfo={() => (
-              <Pill color="danger" margin="0 0 0 x-small">
+              <Pill color="error" margin="0 0 0 x-small">
                 New
               </Pill>
             )}

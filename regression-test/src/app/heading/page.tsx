@@ -24,15 +24,7 @@
 
 'use client'
 import React from 'react'
-import {
-  Heading as hd,
-  View as vw,
-  IconAdminSolid as ias
-} from '@instructure/ui/latest'
-
-const Heading = hd as any
-const View = vw as any
-const IconAdminSolid = ias as any
+import { Heading, View, IconAdminSolid } from '@instructure/ui/latest'
 
 export default function HeadingPage() {
   return (

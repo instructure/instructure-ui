@@ -24,18 +24,12 @@
 'use client'
 import React from 'react'
 import {
-  Billboard as bb,
-  View as vw,
-  IconUserLine as iul,
-  IconGradebookLine as igl,
-  IconPlusLine as ipl
+  Billboard,
+  View,
+  IconUserLine,
+  IconGradebookLine,
+  IconPlusLine
 } from '@instructure/ui/latest'
-
-const Billboard = bb as any
-const View = vw as any
-const IconUserLine = iul as any
-const IconGradebookLine = igl as any
-const IconPlusLine = ipl as any
 
 export default function BillboardPage() {
   return (
@@ -45,7 +39,7 @@ export default function BillboardPage() {
         size="medium"
         heading="Well, this is awkward."
         message="Think there should be something here?"
-        hero={(size: string) => <IconGradebookLine size={size} />}
+        hero={(size) => <IconGradebookLine size={size} />}
       />
 
       {/* Structure examples */}
@@ -56,7 +50,7 @@ export default function BillboardPage() {
           message="Billboard is now a button"
           size="small"
           onClick={() => {}}
-          hero={(size: string) => <IconUserLine size={size} />}
+          hero={(size) => <IconUserLine size={size} />}
         />
       </View>
 
@@ -65,7 +59,7 @@ export default function BillboardPage() {
           margin="large"
           message="Click this link"
           href="https://instructure.com"
-          hero={(size: string) => <IconGradebookLine size={size} />}
+          hero={(size) => <IconGradebookLine size={size} />}
         />
       </View>
 
@@ -74,7 +68,7 @@ export default function BillboardPage() {
         message="Create a new Module"
         size="large"
         onClick={() => {}}
-        hero={(size: string) => <IconPlusLine size={size} />}
+        hero={(size) => <IconPlusLine size={size} />}
       />
 
       {/* Disabled */}
@@ -82,7 +76,7 @@ export default function BillboardPage() {
         size="small"
         heading="This is disabled"
         onClick={() => {}}
-        hero={(size: string) => <IconUserLine size={size} />}
+        hero={(size) => <IconUserLine size={size} />}
         disabled
       />
     </main>

@@ -25,25 +25,18 @@
 'use client'
 import React from 'react'
 import {
-  Metric as mc,
-  MetricGroup as mcg,
-  Pill as pl,
-  Tag as tg,
-  Text as tx,
-  TimeSelect as ts,
+  Metric,
+  MetricGroup,
+  Pill,
+  Tag,
+  Text,
+  TimeSelect,
   IconMessageLine,
   IconClockLine,
   IconEndLine,
   IconCheckLine,
   AccessibleContent
 } from '@instructure/ui/latest'
-
-const Metric = mc as any
-const MetricGroup = mcg as any
-const Pill = pl as any
-const Tag = tg as any
-const TimeSelect = ts as any
-const Text = tx as any
 
 export default function SmallComponentsPage() {
   return (
@@ -78,13 +71,13 @@ export default function SmallComponentsPage() {
         >
           Checked In
         </Pill>
-        <Pill renderIcon={<IconEndLine />} color="danger" margin="x-small">
+        <Pill renderIcon={<IconEndLine />} color="error" margin="x-small">
           Missing
         </Pill>
         <Pill renderIcon={<IconClockLine />} color="warning" margin="x-small">
           Late
         </Pill>
-        <Pill renderIcon={<IconMessageLine />} color="alert" margin="x-small">
+        <Pill renderIcon={<IconMessageLine />} color="info" margin="x-small">
           Notification
         </Pill>
       </div>

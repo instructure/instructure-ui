@@ -23,14 +23,7 @@
  */
 'use client'
 import React from 'react'
-import {
-  Avatar as avv,
-  IconGroupLine as igl,
-  IconAiSolid
-} from '@instructure/ui/latest'
-
-const Avatar = avv as any
-const IconGroupLine = igl as any
+import { Avatar, IconGroupLine, IconAiSolid } from '@instructure/ui/latest'
 
 export default function AvatarPage() {
   return (
@@ -67,41 +60,52 @@ export default function AvatarPage() {
       <div>
         <Avatar
           size="xx-small"
+          name="AI Assistant"
           color="ai"
           renderIcon={IconAiSolid}
           margin="0 space8 0 0"
         />
         <Avatar
           size="x-small"
+          name="AI Assistant"
           color="ai"
           renderIcon={IconAiSolid}
           margin="0 space8 0 0"
         />
         <Avatar
           size="small"
+          name="AI Assistant"
           color="ai"
           renderIcon={IconAiSolid}
           margin="0 space8 0 0"
         />
         <Avatar
           size="medium"
+          name="AI Assistant"
           color="ai"
           renderIcon={IconAiSolid}
           margin="0 space8 0 0"
         />
         <Avatar
           size="large"
+          name="AI Assistant"
           color="ai"
           renderIcon={IconAiSolid}
           margin="0 space8 0 0"
         />
         <Avatar
           size="x-large"
+          name="AI Assistant"
           color="ai"
           renderIcon={IconAiSolid}
           margin="0 space8 0 0"
         />
-        <Avatar size="xx-large" color="ai" renderIcon={IconAiSolid} />
+        <Avatar
+          size="xx-large"
+          name="AI Assistant"
+          color="ai"
+          renderIcon={IconAiSolid}
+        />
       </div>
       <div>
         <Avatar name="Arthur C. Clarke" margin="0 space8 0 0" />
@@ -163,7 +167,10 @@ export default function AvatarPage() {
         <Avatar
           name="Heather Wheeler"
           color="accent1"
-          themeOverride={{ accent1TextColor: '222222' }}
+          themeOverride={{
+            blueTextColor: '#222222',
+            backgroundColor: '#ffffff'
+          }}
           margin="0 space8 0 0"
         />
         <Avatar
@@ -172,7 +179,7 @@ export default function AvatarPage() {
           hasInverseColor
           themeOverride={{
             textOnColor: 'lightblue',
-            accent1BackgroundColor: 'black'
+            blueBackgroundColor: 'black'
           }}
           margin="0 space8 0 0"
         />
@@ -180,7 +187,7 @@ export default function AvatarPage() {
           name="David Herbert"
           hasInverseColor
           color="accent3"
-          themeOverride={{ accent3BackgroundColor: '#013410' }}
+          themeOverride={{ redBackgroundColor: '#013410' }}
         />
       </div>
       <div>

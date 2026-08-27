@@ -24,10 +24,7 @@
 
 'use client'
 import React from 'react'
-import { Menu as mn, Button as btn } from '@instructure/ui/latest'
-
-const Menu = mn as any
-const Button = btn as any
+import { Menu, Button } from '@instructure/ui/latest'
 
 export default function MenuPage() {
   return (
@@ -59,7 +56,7 @@ export default function MenuPage() {
 
         <Menu.Separator />
 
-        <Menu.Group label="Select One" selected="itemOne">
+        <Menu.Group label="Select One" selected={['itemOne']}>
           <Menu.Item value="itemOne">Item 1</Menu.Item>
           <Menu.Item value="itemTwo">Item 2</Menu.Item>
         </Menu.Group>

@@ -24,25 +24,17 @@
 'use client'
 import React from 'react'
 import {
-  Badge as b,
-  Button as btn,
-  IconButton as icb,
-  IconUserSolid as ius,
-  Flex as flx,
-  View as vw,
-  AccessibleContent as ac,
-  ScreenReaderContent as src
+  Badge,
+  Button,
+  IconButton,
+  IconUserSolid,
+  Flex,
+  View,
+  AccessibleContent,
+  ScreenReaderContent
 } from '@instructure/ui/latest'
 
 // alias to avoid TS/SSR friction like other pages
-const Badge = b as any
-const Button = btn as any
-const IconButton = icb as any
-const IconUserSolid = ius as any
-const Flex = flx as any
-const View = vw as any
-const AccessibleContent = ac as any
-const ScreenReaderContent = src as any
 
 export default function BadgePage() {
   return (
@@ -163,12 +155,7 @@ export default function BadgePage() {
       </div>
       <div>
         <View display="inline-flex" background="primary-inverse">
-          <Flex
-            padding="small"
-            display="inline-flex"
-            alignItems="center"
-            background="primary-inverse"
-          >
+          <Flex padding="small" display="inline-flex" alignItems="center">
             <Badge
               standalone
               variant="inverse"

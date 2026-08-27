@@ -24,10 +24,7 @@
 
 'use client'
 import React from 'react'
-import { Img as ig, View as vw } from '@instructure/ui/latest'
-
-const Img = ig as any
-const View = vw as any
+import { Img, View } from '@instructure/ui/latest'
 
 export default function ImgPage() {
   return (
@@ -54,7 +51,6 @@ export default function ImgPage() {
       <section>
         <View
           as="div"
-          withGrayscale
           background="primary-inverse"
           width="500px"
           height="200px"
@@ -62,6 +58,12 @@ export default function ImgPage() {
         >
           <Img
             withBlur
+            src="/assets/avatarSquare.jpg"
+            constrain="contain"
+            alt=""
+          />
+          <Img
+            withGrayscale
             src="/assets/avatarSquare.jpg"
             constrain="contain"
             alt=""

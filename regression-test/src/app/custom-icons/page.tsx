@@ -39,10 +39,7 @@ import {
   HeartInstUIIcon
 } from '@instructure/ui-icons'
 import type { InstUIIconProps } from '@instructure/ui-icons'
-import { Heading as hd, Text as tx } from '@instructure/ui/latest'
-
-const Heading = hd as any
-const Text = tx as any
+import { Heading, Text } from '@instructure/ui/latest'
 
 // This is just a React component, but that type doesn't work because
 // the main project uses a different React version
@@ -133,7 +130,11 @@ function SizeRow({
   )
 }
 
-function SectionHeader({ children }: { children: React.ReactNode }) {
+function SectionHeader({
+  children
+}: {
+  children: React.ComponentProps<typeof Heading>['children']
+}) {
   return (
     <div className="mt-7 mb-2">
       <Heading level="h3" variant="label" border="bottom">

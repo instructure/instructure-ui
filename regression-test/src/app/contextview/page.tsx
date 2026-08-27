@@ -24,15 +24,7 @@
 
 'use client'
 import React from 'react'
-import {
-  ContextView as cv,
-  Heading as hd,
-  Text as tx
-} from '@instructure/ui/latest'
-
-const ContextView = cv as any
-const Heading = hd as any
-const Text = tx as any
+import { ContextView, Heading, Text } from '@instructure/ui/latest'
 
 export default function ContextViewPage() {
   return (

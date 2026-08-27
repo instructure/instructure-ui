@@ -25,33 +25,19 @@
 'use client'
 import React from 'react'
 import {
-  FileDrop as fd,
-  View as vw,
-  Heading as hd,
-  Text as tx,
-  Billboard as bb,
-  Flex as fl,
-  IconModuleLine as iml,
-  IconUploadSolid as ius,
-  IconVideoLine as ivl,
-  IconImageLine as iil,
-  IconAnnotateLine as ial,
-  IconPdfLine as ipfl
+  FileDrop,
+  View,
+  Heading,
+  Text,
+  Billboard,
+  Flex,
+  IconModuleLine,
+  IconUploadSolid,
+  IconVideoLine,
+  IconImageLine,
+  IconAnnotateLine,
+  IconPdfLine
 } from '@instructure/ui/latest'
-
-const FileDrop = fd as any
-const View = vw as any
-const Heading = hd as any
-const Text = tx as any
-const Billboard = bb as any
-const Flex = fl as any
-
-const IconModuleLine = iml as any
-const IconUploadSolid = ius as any
-const IconVideoLine = ivl as any
-const IconImageLine = iil as any
-const IconAnnotateLine = ial as any
-const IconPdfLine = ipfl as any
 
 export default function FileDropPage() {
   return (

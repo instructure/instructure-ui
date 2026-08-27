@@ -24,18 +24,12 @@
 'use client'
 import React from 'react'
 import {
-  Breadcrumb as bc,
-  View as vw,
-  IconBankLine as ibl,
-  IconClockLine as icl,
-  IconPlusLine as ipl
+  Breadcrumb,
+  View,
+  IconBankLine,
+  IconClockLine,
+  IconPlusLine
 } from '@instructure/ui/latest'
-
-const Breadcrumb = bc as any
-const View = vw as any
-const IconBankLine = ibl as any
-const IconClockLine = icl as any
-const IconPlusLine = ipl as any
 
 export default function BreadcrumbPage() {
   return (

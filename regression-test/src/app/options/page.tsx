@@ -25,18 +25,12 @@
 'use client'
 import React from 'react'
 import {
-  Options as op,
-  View as vw,
-  IconArrowOpenEndSolid as iaoes,
-  IconCheckSolid as ics,
-  IconCheckLine as icl
+  Options,
+  View,
+  IconArrowOpenEndSolid,
+  IconCheckSolid,
+  IconCheckLine
 } from '@instructure/ui/latest'
-
-const Options = op as any
-const View = vw as any
-const IconArrowOpenEndSolid = iaoes as any
-const IconCheckSolid = ics as any
-const IconCheckLine = icl as any
 
 export default function OptionsPage() {
   return (

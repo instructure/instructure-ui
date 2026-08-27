@@ -23,9 +23,7 @@
  */
 'use client'
 import React from 'react'
-import { Calendar as cl } from '@instructure/ui/latest'
-
-const Calendar = cl as any
+import { Calendar } from '@instructure/ui/latest'
 
 export default function CalendarPage() {
   return (
@@ -34,6 +32,7 @@ export default function CalendarPage() {
       <Calendar
         visibleMonth="2025-05"
         currentDate="2023-12-15"
+        selectedLabel="Selected"
         disabledDates={['2023-12-22', '2025-05-22', '2025-05-11']}
       />
 
@@ -41,12 +40,12 @@ export default function CalendarPage() {
       <Calendar
         visibleMonth="2024-02"
         currentDate="2024-02-29"
+        selectedLabel="Selected"
         disabledDates={['2024-02-10', '2024-02-12']}
         withYearPicker={{
           screenReaderLabel: 'Year picker',
           startYear: 1999,
-          endYear: 2024,
-          maxHeight: '200px'
+          endYear: 2024
         }}
       />
     </main>

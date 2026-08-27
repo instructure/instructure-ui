@@ -25,31 +25,23 @@
 'use client'
 import React from 'react'
 import {
-  TextInput as ti,
-  NumberInput as ni,
-  TextArea as ta,
-  Checkbox as cb,
-  CheckboxGroup as cg,
-  RadioInput as ri,
-  RadioInputGroup as rig,
-  FileDrop as fd,
-  ColorPicker as cp,
-  DateTimeInput as dti
+  TextInput,
+  NumberInput,
+  TextArea,
+  Checkbox,
+  CheckboxGroup,
+  RadioInput,
+  RadioInputGroup,
+  FileDrop,
+  ColorPicker,
+  DateTimeInput
 } from '@instructure/ui/latest'
-
-const TextInput = ti as any
-const NumberInput = ni as any
-const TextArea = ta as any
-const Checkbox = cb as any
-const CheckboxGroup = cg as any
-const RadioInput = ri as any
-const RadioInputGroup = rig as any
-const FileDrop = fd as any
-const ColorPicker = cp as any
-const DateTimeInput = dti as any
+import type { FormMessage } from '@instructure/ui/latest'
 
 export default function FormErrorsPage() {
-  const messages = [{ type: 'newError', text: 'Short error message' }]
+  const messages: FormMessage[] = [
+    { type: 'newError', text: 'Short error message' }
+  ]
 
   return (
     <main className="flex gap-8 p-8 flex-col items-start axe-test">
@@ -105,7 +97,9 @@ export default function FormErrorsPage() {
           screenReaderLabels={{
             calendarIcon: 'Open calendar',
             prevMonthButton: 'Previous month',
-            nextMonthButton: 'Next month'
+            nextMonthButton: 'Next month',
+            datePickerDialog: 'Date picker',
+            selectedLabel: 'Selected'
           }}
           defaultValue="2018-01-18T13:30"
           layout="columns"
@@ -122,7 +116,9 @@ export default function FormErrorsPage() {
           screenReaderLabels={{
             calendarIcon: 'Open calendar',
             prevMonthButton: 'Previous month',
-            nextMonthButton: 'Next month'
+            nextMonthButton: 'Next month',
+            datePickerDialog: 'Date picker',
+            selectedLabel: 'Selected'
           }}
           defaultValue="2018-01-18T13:30"
           layout="stacked"

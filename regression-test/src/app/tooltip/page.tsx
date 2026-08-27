@@ -26,85 +26,47 @@
 
 import React from 'react'
 import {
-  Alert as al,
-  ApplyLocale as ap,
-  Avatar as av,
-  Billboard as bi,
-  Breadcrumb as br,
-  Button as bu,
-  Byline as by,
-  Checkbox as ch,
-  CheckboxGroup as checkboxGroup,
-  CloseButton as cl,
-  CondensedButton as co,
-  ContextView as contextView,
-  Flex as fl,
-  FormField as fo,
-  Heading as he,
-  IconButton as ic,
-  IconAddLine as iconAddLine,
-  Img as im,
-  Link as li,
-  List as list,
-  ListItem as listItem,
-  Menu as me,
-  Metric as metric,
-  MetricGroup as metricGroup,
-  NumberInput as nu,
-  Pill as pi,
-  ProgressBar as pr,
-  ProgressCircle as progressCircle,
-  RadioInput as radioInput,
-  RadioInputGroup as radioInputGroup,
-  Rating as ra,
-  Spinner as sp,
-  Tag as ta,
-  Text as te,
-  TextArea as textArea,
-  TextInput as textInput,
-  Tooltip as to,
-  View as vi
+  Alert,
+  ApplyLocale,
+  Avatar,
+  Billboard,
+  Breadcrumb,
+  Button,
+  Byline,
+  Checkbox,
+  CheckboxGroup,
+  CloseButton,
+  CondensedButton,
+  ContextView,
+  Flex,
+  FormField,
+  Heading,
+  IconButton,
+  IconAddLine,
+  Img,
+  Link,
+  List,
+  ListItem,
+  Menu,
+  Metric,
+  MetricGroup,
+  NumberInput,
+  Pill,
+  ProgressBar,
+  ProgressCircle,
+  RadioInput,
+  RadioInputGroup,
+  Rating,
+  Spinner,
+  Tag,
+  Text,
+  TextArea,
+  TextInput,
+  Tooltip,
+  View
 } from '@instructure/ui/latest'
 
 export default function TooltipPage() {
-  const Alert = al as any
-  const ApplyLocale = ap as any
-  const Avatar = av as any
-  const Billboard = bi as any
-  const Breadcrumb = br as any
-  const Button = bu as any
-  const Byline = by as any
-  const Checkbox = ch as any
-  const CheckboxGroup = checkboxGroup as any
-  const CloseButton = cl as any
-  const CondensedButton = co as any
-  const ContextView = contextView as any
-  const Flex = fl as any
-  const FormField = fo as any
-  const Heading = he as any
-  const IconButton = ic as any
-  const IconAddLine = iconAddLine as any
-  const Img = im as any
-  const Link = li as any
-  const List = list as any
-  const ListItem = listItem as any
-  const Menu = me as any
-  const Metric = metric as any
-  const MetricGroup = metricGroup as any
-  const NumberInput = nu as any
-  const Pill = pi as any
-  const ProgressBar = pr as any
-  const ProgressCircle = progressCircle as any
-  const RadioInput = radioInput as any
-  const RadioInputGroup = radioInputGroup as any
-  const Rating = ra as any
-  const Spinner = sp as any
-  const Tag = ta as any
-  const Text = te as any
-  const TextArea = textArea as any
-  const TextInput = textInput as any
-  const View = vi as any
-
   /* eslint-disable react/jsx-key */
   const components = [
     <Text>just some text</Text>,
@@ -229,7 +191,6 @@ export default function TooltipPage() {
 }
 
 function wrapComponent(component: string | React.JSX.Element, key: string) {
-  const Tooltip = to as any
   return (
     <div key={key} style={{ margin: '4rem' }}>
       <Tooltip

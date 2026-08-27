@@ -24,17 +24,7 @@
 
 'use client'
 import React from 'react'
-import {
-  ProgressBar as pb,
-  ProgressCircle as pc,
-  View as vw,
-  Text as tx
-} from '@instructure/ui/latest'
-
-const ProgressCircle = pc as any
-const ProgressBar = pb as any
-const View = vw as any
-const Text = tx as any
+import { ProgressBar, ProgressCircle, View, Text } from '@instructure/ui/latest'
 
 export default function ProgressBarPage() {
   return (
