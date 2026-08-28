@@ -102,6 +102,7 @@ type: embed
 | ToggleButton | mountNode | `PositionMountNode` | No | `null` | An element or a function returning an element to use as the mount node |
 | ToggleButton | placement | `PlacementPropValues` | No | `'top center'` | The placement of the tooltip in relation to the button |
 | ToggleButton | constrain | `PositionConstraint` | No | `'window'` | The parent in which to constrain the tooltip. One of: 'window', 'scroll-parent', 'parent', 'none', an element, or a function returning an element. |
+| ToggleButton | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`. |
 
 ### Usage
 
