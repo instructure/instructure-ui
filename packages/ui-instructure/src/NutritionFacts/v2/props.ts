@@ -85,6 +85,7 @@ type NutritionFactsStyle = ComponentStyle<
   | 'segmentContainer'
   | 'blockContainer'
   | 'body'
+  | 'trigger'
 > & {
   maxWidth?: string
 }

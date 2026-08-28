@@ -30,6 +30,7 @@ import {
 } from '@instructure/ui-buttons/latest'
 import { Heading } from '@instructure/ui-heading/latest'
 import { Text } from '@instructure/ui-text/latest'
+import { InfoInstUIIcon } from '@instructure/ui-icons'
 import { useStyleNew } from '@instructure/emotion'
 
 import { DataPermissionLevelsProps } from './props.js'
@@ -64,7 +65,10 @@ const DataPermissionLevels = ({
   return (
     <div>
       <CondensedButton onClick={() => setOpen(true)} aria-haspopup="dialog">
-        {triggerText}
+        <span css={styles?.trigger}>
+          {triggerText}
+          <InfoInstUIIcon size="sm" />
+        </span>
       </CondensedButton>
       <Modal
         size={fullscreen ? 'fullscreen' : 'medium'}
