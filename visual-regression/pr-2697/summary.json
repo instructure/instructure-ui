@@ -1,12 +1,12 @@
 {
   "summary": {
     "total": 96,
-    "unchanged": 96,
-    "changed": 0,
+    "unchanged": 95,
+    "changed": 1,
     "added": 0,
     "removed": 0,
-    "a11yPages": 7,
-    "a11yViolations": 15
+    "a11yPages": 0,
+    "a11yViolations": 0
   },
   "results": [
     {
@@ -47,8 +47,8 @@
     },
     {
       "name": "badge-canvas.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 1573,
       "sizeMismatch": false
     },
     {
@@ -586,14 +586,5 @@
       "sizeMismatch": false
     }
   ],
-  "a11y": [
-    {
-      "rule": "color-contrast",
-      "impact": "serious",
-      "title": "Text contrast is too low",
-      "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/color-contrast?application=axeAPI",
-      "nodes": 15,
-      "screens": 7
-    }
-  ]
+  "a11y": []
 }
