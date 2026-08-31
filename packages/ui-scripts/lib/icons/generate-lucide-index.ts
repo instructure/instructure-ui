@@ -89,14 +89,17 @@ export default function generateLucideIndex() {
   const iconExports = allLucideIcons
     .map(
       (iconName) =>
-        `export const ${iconName}InstUIIcon = wrapLucideIcon(Lucide.${iconName})`
+        `export const ${iconName}InstUIIcon = /*#__PURE__*/ wrapLucideIcon(${iconName})`
     )
     .join('\n')
 
+  // Named imports (rather than `import * as Lucide`) let bundlers tree-shake
+  // lucide-react itself, and the /*#__PURE__*/ annotation above lets minifiers
+  // drop unused wrapLucideIcon(...) calls.
   // Output goes to src/generated/lucide/ so the import is relative to that:
   // ../../lucide/wrapLucideIcon resolves to src/lucide/wrapLucideIcon
   const content = `${HEADER}
-import * as Lucide from 'lucide-react'
+import { ${allLucideIcons.join(', ')} } from 'lucide-react'
 import { wrapLucideIcon } from '../../lucide/wrapLucideIcon'
 
 ${iconExports}
