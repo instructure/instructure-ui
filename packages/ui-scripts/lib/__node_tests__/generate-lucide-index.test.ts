@@ -52,9 +52,9 @@ describe('generateLucideIndex', () => {
     const content = readFileSync(dir + 'src/generated/lucide/index.ts', 'utf-8')
     const exportCount = (content.match(/^export const /gm) || []).length
     expect(exportCount).toBeGreaterThan(0)
-    // Every exported icon should follow the wrapLucideIcon pattern
+    // Every exported icon should follow the wrapLucideIcon pattern, annotated
     expect(content).toMatch(
-      /export const \w+InstUIIcon = wrapLucideIcon\(Lucide\.\w+\)/
+      /export const \w+InstUIIcon = \/\*#__PURE__\*\/ wrapLucideIcon\(\w+\)/
     )
   })
 
@@ -74,6 +74,8 @@ describe('generateLucideIndex', () => {
     expect(content).toContain(
       "import { wrapLucideIcon } from '../../lucide/wrapLucideIcon'"
     )
-    expect(content).toContain("import * as Lucide from 'lucide-react'")
+
+    expect(content).not.toContain("import * as Lucide from 'lucide-react'")
+    expect(content).toMatch(/^import \{ \w+(, \w+)* \} from 'lucide-react'$/m)
   })
 })
