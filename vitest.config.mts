@@ -55,6 +55,34 @@ PREBUNDLED_PACKAGES.filter((pkgName) => {
   }
 })
 
+// Prebundled alongside PREBUNDLED_PACKAGES, but resolved from node_modules.
+// SSR/hydration tests are the only that import these. Without prebundling,
+// Vite may re-optimize mid-run, breaking dynamic imports and
+// causing React and react-dom/server to use different optimizer generations.
+const PREBUNDLED_MODULES = ['react-dom/server', 'react-dom/client']
+
+const OPTIMIZED_DEPS = [...PREBUNDLED_PACKAGES, ...PREBUNDLED_MODULES]
+
+// Warn when an optimizeDeps entry cannot be resolved. This can cause Vite to
+// discover it mid-run, leading to different optimizer generations and SSR
+// failures.
+//
+// Uses CJS resolution; ESM-only entries may need a different check.
+OPTIMIZED_DEPS.forEach((entry) => {
+  try {
+    require.resolve(entry, { paths: [__dirname] })
+  } catch {
+    console.warn(
+      `[vitest.config] "${entry}" is in optimizeDeps.include but cannot be ` +
+        `resolved from the repo root, so Vite will skip prebundling it. ` +
+        `Expect it to be discovered mid-run instead, which can put React and ` +
+        `react-dom in different optimizer generations and fail SSR tests with ` +
+        `"Cannot read properties of null (reading 'useId')". Add it to the ` +
+        `root package.json devDependencies.`
+    )
+  }
+})
+
 // Create a hash of every file's updated time. This hash changes if any file's
 // updated time changes
 function getPrebundleStamp() {
@@ -176,20 +204,14 @@ export default defineConfig({
         plugins: [{ name: `instui-prebundle-stamp:${getPrebundleStamp()}` }],
         optimizeDeps: {
           // https://vite.dev/config/dep-optimization-options#optimizedeps-include
-          include: [
-            ...PREBUNDLED_PACKAGES,
-            // The SSR/hydration tests are the only browser tests that import
-            // these. Left to be discovered on first import, Vite re-optimizes
-            // mid-run and reloads, which breaks in-flight dynamic imports in
-            // unrelated suites ("Failed to fetch dynamically imported module")
-            // and can serve React and react-dom/server from different optimizer
-            // generations. Surfacing as a null dispatcher, i.e.
-            // "Cannot read properties of null (reading 'useId')".
-            'react-dom/server',
-            'react-dom/client'
-          ]
+          include: OPTIMIZED_DEPS
         },
         resolve: {
+          // Keep a single copy of React across the prebundled chunks and the
+          // on-demand transformed sources. Two copies mean react-dom installs
+          // its hooks dispatcher on one of them while components read the
+          // other, which throws on the first hook call.
+          dedupe: ['react', 'react-dom'],
           alias: [
             // Bare `moment` -> the all-locales build. Matches
             // `moment` exactly, never `moment-timezone` or `moment/<subpath>`.
