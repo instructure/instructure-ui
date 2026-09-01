@@ -21,56 +21,48 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { useStyleNew } from '@instructure/emotion'
+import { passthroughProps } from '@instructure/ui-react-utils'
 
-'use client'
-import { Link } from '@instructure/ui/latest'
+import type { CardProps } from './props.js'
+import generateStyle from './styles.js'
 
-const components = [
-  'small-components',
-  'custom-icons',
-  'alert',
-  'avatar',
-  'badge',
-  'billboard',
-  'breadcrumb',
-  'button',
-  'tooltip',
-  'byline',
-  'calendar',
-  'card',
-  'checkbox',
-  'checkboxgroup',
-  'colorpicker',
-  'contextview',
-  'dateinput',
-  'datetimeinput',
-  'drilldown',
-  'filedrop',
-  'form-errors',
-  'heading',
-  'img',
-  'link',
-  'menu',
-  'options',
-  'pagination',
-  'progressbar',
-  'select',
-  'table',
-  'tabs',
-  'treebrowser',
-  'view'
-]
+/**
+---
+category: components
+---
+**/
+const Card = ({
+  children,
+  variant = 'base',
+  size = 'md',
+  themeOverride,
+  ...rest
+}: CardProps) => {
+  const styles = useStyleNew({
+    generateStyle,
+    themeOverride,
+    params: { variant, size },
+    componentId: 'Card',
+    displayName: 'Card'
+  })
 
-export default function Home() {
+  if (size === 'auto' && variant === 'base') {
+    return (
+      <div css={styles?.container}>
+        <div {...passthroughProps(rest)} css={styles?.card}>
+          {children}
+        </div>
+      </div>
+    )
+  }
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-6">
-      <ul>
-        {components.map((component) => (
-          <li key={component}>
-            <Link href={component}>{component}</Link>
-          </li>
-        ))}
-      </ul>
-    </main>
+    <div {...passthroughProps(rest)} css={styles?.card}>
+      {children}
+    </div>
   )
 }
+
+export default Card
+export { Card }
