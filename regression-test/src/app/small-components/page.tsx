@@ -34,8 +34,7 @@ import {
   IconMessageLine,
   IconClockLine,
   IconEndLine,
-  IconCheckLine,
-  AccessibleContent
+  IconCheckLine
 } from '@instructure/ui/latest'
 
 const Metric = mc as any
@@ -89,29 +88,84 @@ export default function SmallComponentsPage() {
         </Pill>
       </div>
       <div>
-        <Text>Tag:</Text>
+        <Text>Tag (static / leading icon in 3 sizes):</Text>
       </div>
       <div>
         <Tag text="Static" margin="0 xx-small 0 0" />
         <Tag
-          text={
-            <AccessibleContent alt="Remove dismissible tag">
-              Dismissible tag
-            </AccessibleContent>
-          }
-          dismissible
+          text="Small"
+          size="small"
+          renderIcon={<IconCheckLine />}
           margin="0 xx-small 0 0"
-          onClick={function () {}}
         />
-        <Tag text="Small" size="small" margin="0 xx-small 0 0" />
-        <Tag text="Medium" margin="0 xx-small 0 0" />
         <Tag
-          disabled
-          dismissible
+          text="Medium"
+          renderIcon={<IconCheckLine />}
+          margin="0 xx-small 0 0"
+        />
+        <Tag
           text="Large"
           size="large"
+          renderIcon={<IconCheckLine />}
           margin="0 xx-small 0 0"
+        />
+      </div>
+      <div>
+        <Text>Tag (clickable button / dismissible):</Text>
+      </div>
+      <div>
+        <Tag
+          text="Clickable"
           onClick={function () {}}
+          margin="0 xx-small 0 0"
+        />
+        <Tag
+          text="Clickable with icon"
+          renderIcon={<IconCheckLine />}
+          onClick={function () {}}
+          margin="0 xx-small 0 0"
+        />
+        <Tag
+          text="Dismissible"
+          renderDismissButtonLabel="Remove Dismissible"
+          onDismiss={function () {}}
+          margin="0 xx-small 0 0"
+        />
+        <Tag
+          text="Dismissible with icon"
+          renderIcon={<IconCheckLine />}
+          renderDismissButtonLabel="Remove Dismissible with icon"
+          onDismiss={function () {}}
+          margin="0 xx-small 0 0"
+        />
+      </div>
+      <div>
+        <Text>Tag (link / disabled):</Text>
+      </div>
+      <div>
+        <Tag text="Link" href="#" margin="0 xx-small 0 0" />
+        <Tag
+          text="Link with icon"
+          href="#"
+          renderIcon={<IconCheckLine />}
+          margin="0 xx-small 0 0"
+        />
+        <Tag
+          text="Link dismissible"
+          href="#"
+          renderIcon={<IconCheckLine />}
+          renderDismissButtonLabel="Remove Link dismissible"
+          onDismiss={function () {}}
+          margin="0 xx-small 0 0"
+        />
+        <Tag
+          text="Disabled link dismissible"
+          href="#"
+          disabled
+          renderIcon={<IconCheckLine />}
+          renderDismissButtonLabel="Remove Disabled link dismissible"
+          onDismiss={function () {}}
+          margin="0 xx-small 0 0"
         />
       </div>
       <div>
