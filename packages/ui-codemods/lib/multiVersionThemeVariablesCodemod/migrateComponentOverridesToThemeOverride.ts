@@ -39,6 +39,7 @@ import { namedTypes } from 'ast-types'
  * channel, so every component override must move - regardless of whether its
  * tokens have changed. Token renames are handled separately by
  * `transformThemeVariables`.
+ * This change was introduced in InstUI v11.7.2
  */
 const migrateComponentOverridesToThemeOverride: Transform = (
   file,

@@ -1,5 +1,5 @@
 ---
-title: Upgrade guide for v11.7
+title: Upgrade guide for v11.x -> 11.7
 category: Upgrading
 order: 2
 ---
@@ -130,6 +130,99 @@ type: example
   />
 </InstUISettingsProvider>
 ```
+
+## Codemods
+
+How to use:
+
+It is worth adding `--extensions=ts,tsx` for TypeScript codebases. Also exclude `node_modules` and declaration files to avoid false matches:
+
+```sh
+---
+type: code
+---
+npm install @instructure/ui-codemods
+npx jscodeshift@latest -t node_modules/@instructure/ui-codemods/lib/[codemod name].ts <path>  \
+  --extensions=ts,tsx \
+  --ignore-pattern="**/node_modules/**" \
+  --ignore-pattern="**/*.d.ts" \
+```
+
+### updateInstUIImportVersions
+
+Rewrites `@instructure/*` import paths to a specific version subpath (e.g. `@instructure/ui-buttons/v11_7`). Only touches known versioned components — utilities and non-versioned symbols are left untouched. Imports mixing versioned components with other symbols are automatically split into two declarations.
+
+**Diagnose** — inspect which components are imported and at what version, without modifying files:
+
+```sh
+---
+type: code
+---
+# inspect all versioned imports
+npx jscodeshift@latest -t node_modules/@instructure/ui-codemods/lib/updateInstUIImportVersions.ts <path> \
+  --extensions=ts,tsx \
+  --ignore-pattern="**/node_modules/**" --ignore-pattern="**/*.d.ts" \
+  --diagnose=true
+
+# inspect only specific components
+npx jscodeshift@latest -t node_modules/@instructure/ui-codemods/lib/updateInstUIImportVersions.ts <path> \
+  --extensions=ts,tsx \
+  --ignore-pattern="**/node_modules/**" --ignore-pattern="**/*.d.ts" \
+  --diagnose=true --components=Button,Alert
+```
+
+**Update** — rewrite import paths:
+
+```sh
+---
+type: code
+---
+# all versioned components → v11.7
+npx jscodeshift@latest -t node_modules/@instructure/ui-codemods/lib/updateInstUIImportVersions.ts <path> \
+  --extensions=ts,tsx \
+  --ignore-pattern="**/node_modules/**" --ignore-pattern="**/*.d.ts" \
+  --versionTo=v11.7
+
+# only imports already pinned to v11.6
+npx jscodeshift@latest -t node_modules/@instructure/ui-codemods/lib/updateInstUIImportVersions.ts <path> \
+  --extensions=ts,tsx \
+  --ignore-pattern="**/node_modules/**" --ignore-pattern="**/*.d.ts" \
+  --versionFrom=v11.6 --versionTo=v11.7
+
+# specific components only
+npx jscodeshift@latest -t node_modules/@instructure/ui-codemods/lib/updateInstUIImportVersions.ts <path> \
+  --extensions=ts,tsx \
+  --ignore-pattern="**/node_modules/**" --ignore-pattern="**/*.d.ts" \
+  --versionTo=v11.7 --components=Button,Alert
+```
+
+Options:
+
+- `versionTo`: target version, e.g. `v11.7`. Required for update mode.
+- `versionFrom`: only rewrite imports already pinned to this version.
+- `components`: comma-separated component names. Defaults to all known versioned exports.
+- `diagnose`: report matching imports without modifying files.
+- `fileName`: write parse errors and transform failures to this file.
+- `usePrettier`: run output through Prettier (default `true`).
+
+### migrateToNewIcons
+
+Migrates legacy InstUI icons (`IconXxxLine` / `IconXxxSolid`) to new `XxxInstUIIcon` components. Does the rename based on the official mapping: https://github.com/instructure/instructure-ui/blob/v11.7.5/packages/ui-icons/src/lucide/mapping.json (link just for reference, the codemod will always use the latest version).  
+Warns about legacy icons that has no mappings and have to be migrated manually.
+
+This codemod will rename icons if they are imported from:
+
+- `@instructure/ui-icons`
+- `@instructure/ui-icons/es/svg`
+- `@instructure/ui`
+
+### multiVersionThemeVariablesCodemod
+
+- Renames/removes component theme variables to their new (multi-version) names, basically it does the theme variable changes described in the "Breaking changes" section described below.
+- Migrates the legacy provider-level theme override `<InstUISettingsProvider theme={{ componentOverrides: { Comp: {...} } }} />`
+  to the new theming-system shape `<InstUISettingsProvider themeOverride={{ components: { Comp: {...} } }} />`
+
+## Breaking changes for each component
 
 ### Alert
 
@@ -1856,82 +1949,3 @@ type: embed
 />
 
 ```
-
-## Codemods
-
-### updateInstUIImportVersions
-
-Rewrites `@instructure/*` import paths to a specific version subpath (e.g. `@instructure/ui-buttons/v11_7`). Only touches known versioned components — utilities and non-versioned symbols are left untouched. Imports mixing versioned components with other symbols are automatically split into two declarations.
-
-```sh
----
-type: code
----
-npm install @instructure/ui-codemods
-```
-
-It is worth adding `--extensions=ts,tsx` for TypeScript codebases. Also exclude `node_modules` and declaration files to avoid false matches:
-
-```sh
----
-type: code
----
-npx jscodeshift@latest node_modules/@instructure/ui-codemods/lib/updateInstUIImportVersions.ts <path> \
-  --extensions=ts,tsx \
-  --ignore-pattern="**/node_modules/**" \
-  --ignore-pattern="**/*.d.ts" \
-  --diagnose=true
-```
-
-**Diagnose** — inspect which components are imported and at what version, without modifying files:
-
-```sh
----
-type: code
----
-# inspect all versioned imports
-npx jscodeshift@latest -t node_modules/@instructure/ui-codemods/lib/updateInstUIImportVersions.ts <path> \
-  --extensions=ts,tsx \
-  --ignore-pattern="**/node_modules/**" --ignore-pattern="**/*.d.ts" \
-  --diagnose=true
-
-# inspect only specific components
-npx jscodeshift@latest -t node_modules/@instructure/ui-codemods/lib/updateInstUIImportVersions.ts <path> \
-  --extensions=ts,tsx \
-  --ignore-pattern="**/node_modules/**" --ignore-pattern="**/*.d.ts" \
-  --diagnose=true --components=Button,Alert
-```
-
-**Update** — rewrite import paths:
-
-```sh
----
-type: code
----
-# all versioned components → v11.7
-npx jscodeshift@latest -t node_modules/@instructure/ui-codemods/lib/updateInstUIImportVersions.ts <path> \
-  --extensions=ts,tsx \
-  --ignore-pattern="**/node_modules/**" --ignore-pattern="**/*.d.ts" \
-  --versionTo=v11.7
-
-# only imports already pinned to v11.6
-npx jscodeshift@latest -t node_modules/@instructure/ui-codemods/lib/updateInstUIImportVersions.ts <path> \
-  --extensions=ts,tsx \
-  --ignore-pattern="**/node_modules/**" --ignore-pattern="**/*.d.ts" \
-  --versionFrom=v11.6 --versionTo=v11.7
-
-# specific components only
-npx jscodeshift@latest -t node_modules/@instructure/ui-codemods/lib/updateInstUIImportVersions.ts <path> \
-  --extensions=ts,tsx \
-  --ignore-pattern="**/node_modules/**" --ignore-pattern="**/*.d.ts" \
-  --versionTo=v11.7 --components=Button,Alert
-```
-
-Options:
-
-- `versionTo`: target version, e.g. `v11.7`. Required for update mode.
-- `versionFrom`: only rewrite imports already pinned to this version.
-- `components`: comma-separated component names. Defaults to all known versioned exports.
-- `diagnose`: report matching imports without modifying files.
-- `fileName`: write parse errors and transform failures to this file.
-- `usePrettier`: run output through Prettier (default `true`).

@@ -28,7 +28,8 @@ import { transformThemeVariablesCodemod } from './transformThemeVariables'
 import { migrateComponentOverridesToThemeOverrideCodemod } from './migrateComponentOverridesToThemeOverride'
 
 /**
- * Runs all InstUI multi-version upgrade codemods
+ * Runs all InstUI multi-version upgrade codemods.
+ * (used for multi-version introduced in InstUI v11.7.2)
  */
 const multiVersionThemeVariablesCodemod: Transform = (
   file,
