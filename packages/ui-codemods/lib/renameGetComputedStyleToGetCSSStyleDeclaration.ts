@@ -28,12 +28,12 @@ import instUICodemodExecutor from './utils/instUICodemodExecutor'
 /**
  * renames the `getComputedStyle` utility function to `getCSSStyleDeclaration`
  */
-const renameGetComputedStyleToGetCSSStyleDeclaration: Transform = (
+const renameGetComputedStyleToGetCSSStyleDeclaration: Transform = async (
   file,
   api,
   options?: { fileName?: string; usePrettier?: boolean }
 ) => {
-  return instUICodemodExecutor(renameGetComputedStyle, file, api, options)
+  return await instUICodemodExecutor(renameGetComputedStyle, file, api, options)
 }
 
 const renameGetComputedStyle = (j: JSCodeshift, root: Collection) => {

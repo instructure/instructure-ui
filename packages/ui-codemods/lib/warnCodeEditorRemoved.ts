@@ -29,12 +29,17 @@ import type { InstUICodemod } from './utils/instUICodemodExecutor'
 /**
  * Prints a warning if a `CodeEditor` import is found
  */
-const warnCodeEditorRemoved: Transform = (
+const warnCodeEditorRemoved: Transform = async (
   file,
   api,
   options?: { fileName?: string; usePrettier?: boolean }
 ) => {
-  return instUICodemodExecutor(warnCodeEditorRemovedCodemod, file, api, options)
+  return await instUICodemodExecutor(
+    warnCodeEditorRemovedCodemod,
+    file,
+    api,
+    options
+  )
 }
 
 const warnCodeEditorRemovedCodemod: InstUICodemod = (

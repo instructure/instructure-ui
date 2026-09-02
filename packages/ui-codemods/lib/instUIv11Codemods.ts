@@ -32,12 +32,12 @@ import { warnCodeEditorRemovedCodemod } from './warnCodeEditorRemoved'
 /**
  * Runs all InstUI v10 -> v11 upgrade codemods
  */
-const InstUIv11Codemods: Transform = (
+const InstUIv11Codemods: Transform = async (
   file,
   api,
   options?: { fileName?: string; usePrettier?: boolean }
 ) => {
-  return instUICodemodExecutor(
+  return await instUICodemodExecutor(
     [
       removeAsProp,
       renameCanvasThemes,

@@ -1,5 +1,5 @@
 # Ignore all ejs files:
 *.ejs
-# Ignore codemod test files
-*.input.js
-*.output.js
+# Ignore codemod test fixtures. They must stay exactly as the codemod emits
+# them, which is with the consumer's Prettier (v2 or v3), not this repo's.
+packages/ui-codemods/lib/__node_tests__/__testfixtures__/

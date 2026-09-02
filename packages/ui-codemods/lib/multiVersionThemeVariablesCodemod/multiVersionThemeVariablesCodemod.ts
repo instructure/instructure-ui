@@ -31,12 +31,12 @@ import { migrateComponentOverridesToThemeOverrideCodemod } from './migrateCompon
  * Runs all InstUI multi-version upgrade codemods.
  * (used for multi-version introduced in InstUI v11.7.2)
  */
-const multiVersionThemeVariablesCodemod: Transform = (
+const multiVersionThemeVariablesCodemod: Transform = async (
   file,
   api,
   options?: { fileName?: string; usePrettier?: boolean }
 ) => {
-  return instUICodemodExecutor(
+  return await instUICodemodExecutor(
     [
       transformThemeVariablesCodemod,
       migrateComponentOverridesToThemeOverrideCodemod

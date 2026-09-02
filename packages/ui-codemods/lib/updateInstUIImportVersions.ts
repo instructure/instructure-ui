@@ -211,7 +211,7 @@ const updateInstUIImportVersionsCodemod =
     return hasChanges
   }
 
-const updateInstUIImportVersions: Transform = (file, api, options) => {
+const updateInstUIImportVersions: Transform = async (file, api, options) => {
   // When no --components filter is given, fall back to the full list of known
   const components = parseComponents(options.components) ?? [
     ...versionedExports
@@ -245,7 +245,7 @@ const updateInstUIImportVersions: Transform = (file, api, options) => {
   const hasSemi = detectSemi(file.source)
 
   try {
-    const result = instUICodemodExecutor(
+    const result = await instUICodemodExecutor(
       updateInstUIImportVersionsCodemod(
         components,
         versionTo,

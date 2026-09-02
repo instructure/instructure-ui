@@ -60,38 +60,38 @@ describe('test codemods', () => {
     consoleWarningMock.mockRestore()
   })
 
-  it('test InstUI v10 color codemods', () => {
-    runTest(updateV10Breaking)
+  it('test InstUI v10 color codemods', async () => {
+    await runTest(updateV10Breaking)
   })
 
-  it('test removing "as" prop from InstUISettingsProvider', () => {
-    runTest(removeAsFromInstUISettingsProvider)
+  it('test removing "as" prop from InstUISettingsProvider', async () => {
+    await runTest(removeAsFromInstUISettingsProvider)
   })
 
-  it('test renaming Canvas themes', () => {
-    runTest(renameCanvasThemesCodemod)
+  it('test renaming Canvas themes', async () => {
+    await runTest(renameCanvasThemesCodemod)
   })
 
-  it('test renaming "getComputedStyle" to getCSSStyleDeclaration', () => {
-    runTest(renameGetComputedStyleToGetCSSStyleDeclaration)
+  it('test renaming "getComputedStyle" to getCSSStyleDeclaration', async () => {
+    await runTest(renameGetComputedStyleToGetCSSStyleDeclaration)
   })
 
   it('test Table caption prop warning', async () => {
-    runTest(warnTableCaptionMissing)
+    await runTest(warnTableCaptionMissing)
   })
 
   it('test CodeEditor removed warning', async () => {
-    runTest(warnCodeEditorRemoved)
+    await runTest(warnCodeEditorRemoved)
   })
 
-  it('test migrating legacy icons to lucide/custom icons', () => {
-    runTest(migrateToNewIcons)
+  it('test migrating legacy icons to lucide/custom icons', async () => {
+    await runTest(migrateToNewIcons)
   })
 
   // All fixtures run through the full `multiVersionThemeVariablesCodemod` (both
   // legs: token renames + provider override relocation), so every `.output` is
   // the real end-to-end result a user gets - no single-leg intermediate states.
-  it('test multi-version theme variables codemod (end-to-end)', () => {
-    runTest(multiVersionThemeVariablesCodemod)
+  it('test multi-version theme variables codemod (end-to-end)', async () => {
+    await runTest(multiVersionThemeVariablesCodemod)
   })
 })

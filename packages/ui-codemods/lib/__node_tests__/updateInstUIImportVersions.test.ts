@@ -45,8 +45,8 @@ function makeFileInfo(source: string) {
 }
 
 describe('updateInstUIImportVersions', () => {
-  it('rewrites unversioned @instructure import to target version', () => {
-    runInlineTest(
+  it('rewrites unversioned @instructure import to target version', async () => {
+    await runInlineTest(
       updateInstUIImportVersions,
       { versionTo: 'v11.7' },
       makeFileInfo(`import { Button } from '@instructure/ui'`),
@@ -54,8 +54,8 @@ describe('updateInstUIImportVersions', () => {
     )
   })
 
-  it('rewrites an import that @instructure/ui re-exports under an alias', () => {
-    runInlineTest(
+  it('rewrites an import that @instructure/ui re-exports under an alias', async () => {
+    await runInlineTest(
       updateInstUIImportVersions,
       { versionTo: 'v11.7' },
       makeFileInfo(`import { TreeBrowserCollection } from '@instructure/ui'`),
@@ -63,8 +63,8 @@ describe('updateInstUIImportVersions', () => {
     )
   })
 
-  it('rewrites versioned import from versionFrom to versionTo', () => {
-    runInlineTest(
+  it('rewrites versioned import from versionFrom to versionTo', async () => {
+    await runInlineTest(
       updateInstUIImportVersions,
       { versionTo: 'v11.7', versionFrom: 'v11.6' },
       makeFileInfo(`import { Button } from '@instructure/ui/v11_6'`),
@@ -72,8 +72,8 @@ describe('updateInstUIImportVersions', () => {
     )
   })
 
-  it('returns null when versionFrom does not match', () => {
-    const result = updateInstUIImportVersions(
+  it('returns null when versionFrom does not match', async () => {
+    const result = await updateInstUIImportVersions(
       makeFileInfo(`import { Button } from '@instructure/ui/v11_5'`),
       makeApi() as Parameters<typeof updateInstUIImportVersions>[1],
       { versionTo: 'v11.7', versionFrom: 'v11.6' }
@@ -81,8 +81,8 @@ describe('updateInstUIImportVersions', () => {
     expect(result).toBeNull()
   })
 
-  it('rewrites only imports containing the specified component', () => {
-    runInlineTest(
+  it('rewrites only imports containing the specified component', async () => {
+    await runInlineTest(
       updateInstUIImportVersions,
       { versionTo: 'v11.7', components: 'Button' },
       makeFileInfo(
@@ -99,8 +99,8 @@ describe('updateInstUIImportVersions', () => {
     )
   })
 
-  it('returns null when no imports match the specified component', () => {
-    const result = updateInstUIImportVersions(
+  it('returns null when no imports match the specified component', async () => {
+    const result = await updateInstUIImportVersions(
       makeFileInfo(`import { Alert } from '@instructure/ui'`),
       makeApi() as Parameters<typeof updateInstUIImportVersions>[1],
       { versionTo: 'v11.7', components: 'Button' }
@@ -108,7 +108,7 @@ describe('updateInstUIImportVersions', () => {
     expect(result).toBeNull()
   })
 
-  it('returns null for non-@instructure imports', () => {
+  it('returns null for non-@instructure imports', async () => {
     // Includes component names that are in versionedExports but come from other packages —
     // the codemod must check the package, not just the import name.
     const cases = [
@@ -118,7 +118,7 @@ describe('updateInstUIImportVersions', () => {
       `import { Alert } from 'antd'`
     ]
     for (const source of cases) {
-      const result = updateInstUIImportVersions(
+      const result = await updateInstUIImportVersions(
         makeFileInfo(source),
         makeApi() as Parameters<typeof updateInstUIImportVersions>[1],
         { versionTo: 'v11.7' }
@@ -127,9 +127,9 @@ describe('updateInstUIImportVersions', () => {
     }
   })
 
-  it('does not rewrite non-versioned components', () => {
+  it('does not rewrite non-versioned components', async () => {
     // 'withStyleNew' is not in versionedExports, so it should be skipped
-    const result = updateInstUIImportVersions(
+    const result = await updateInstUIImportVersions(
       makeFileInfo(`import { withStyleNew } from '@instructure/ui'`),
       makeApi() as Parameters<typeof updateInstUIImportVersions>[1],
       { versionTo: 'v11.7' }
@@ -137,10 +137,10 @@ describe('updateInstUIImportVersions', () => {
     expect(result).toBeNull()
   })
 
-  it('does not split mixed @instructure/ui import: moves all specifiers to versioned path', () => {
+  it('does not split mixed @instructure/ui import: moves all specifiers to versioned path', async () => {
     // @instructure/ui version files re-export everything including non-component
     // symbols (e.g. canvas), so splitting is unnecessary — rewrite the whole import.
-    runInlineTest(
+    await runInlineTest(
       updateInstUIImportVersions,
       { versionTo: 'v11.7' },
       makeFileInfo(`import {canvas, Button} from "@instructure/ui"`),
@@ -148,9 +148,9 @@ describe('updateInstUIImportVersions', () => {
     )
   })
 
-  it('splits mixed import from an individual @instructure package: non-component stays, component moves', () => {
+  it('splits mixed import from an individual @instructure package: non-component stays, component moves', async () => {
     // TestComponent is not in versionedExports, Button is → triggers a split
-    runInlineTest(
+    await runInlineTest(
       updateInstUIImportVersions,
       { versionTo: 'v11.7' },
       makeFileInfo(
@@ -161,8 +161,8 @@ describe('updateInstUIImportVersions', () => {
     )
   })
 
-  it('does not add semicolons to split imports when usePrettier=false and file has no semis', () => {
-    runInlineTest(
+  it('does not add semicolons to split imports when usePrettier=false and file has no semis', async () => {
+    await runInlineTest(
       updateInstUIImportVersions,
       { versionTo: 'v11.7', usePrettier: false },
       makeFileInfo(
@@ -172,8 +172,8 @@ describe('updateInstUIImportVersions', () => {
     )
   })
 
-  it('preserves semicolons in split imports when file uses semis and usePrettier=false', () => {
-    runInlineTest(
+  it('preserves semicolons in split imports when file uses semis and usePrettier=false', async () => {
+    await runInlineTest(
       updateInstUIImportVersions,
       { versionTo: 'v11.7', usePrettier: false },
       makeFileInfo(
@@ -183,9 +183,9 @@ describe('updateInstUIImportVersions', () => {
     )
   })
 
-  it('moves type specifier to versioned path when its name is a known component', () => {
+  it('moves type specifier to versioned path when its name is a known component', async () => {
     // 'type Alert' — inline type modifier, Alert is in versionedExports
-    runInlineTest(
+    await runInlineTest(
       updateInstUIImportVersions,
       { versionTo: 'v11.7', components: 'Button,Alert' },
       makeFileInfo(`import { Button, type Alert } from '@instructure/ui'`),
@@ -193,10 +193,10 @@ describe('updateInstUIImportVersions', () => {
     )
   })
 
-  it('moves all specifiers to versioned path when source is @instructure/ui, even with --components filter', () => {
+  it('moves all specifiers to versioned path when source is @instructure/ui, even with --components filter', async () => {
     // ButtonProps is not in the components filter, but @instructure/ui
     // version files re-export everything — no split, whole import moves.
-    runInlineTest(
+    await runInlineTest(
       updateInstUIImportVersions,
       { versionTo: 'v11.7', components: 'Button' },
       makeFileInfo(
@@ -206,8 +206,8 @@ describe('updateInstUIImportVersions', () => {
     )
   })
 
-  it('leaves default imports and type-only named imports untouched when not in components', () => {
-    const result = updateInstUIImportVersions(
+  it('leaves default imports and type-only named imports untouched when not in components', async () => {
+    const result = await updateInstUIImportVersions(
       makeFileInfo(`import Service, { type Config } from '@instructure/ui'`),
       makeApi() as Parameters<typeof updateInstUIImportVersions>[1],
       { versionTo: 'v11.7' }
@@ -216,8 +216,8 @@ describe('updateInstUIImportVersions', () => {
     expect(result).toBeNull()
   })
 
-  it('returns null when versionTo is not provided', () => {
-    const result = updateInstUIImportVersions(
+  it('returns null when versionTo is not provided', async () => {
+    const result = await updateInstUIImportVersions(
       makeFileInfo(`import { Button } from '@instructure/ui'`),
       makeApi() as Parameters<typeof updateInstUIImportVersions>[1],
       {}
@@ -225,11 +225,11 @@ describe('updateInstUIImportVersions', () => {
     expect(result).toBeNull()
   })
 
-  it('diagnose mode reports matching imports', () => {
+  it('diagnose mode reports matching imports', async () => {
     const reported: string[] = []
     const api = makeApi((msg: string) => reported.push(msg))
 
-    updateInstUIImportVersions(
+    await updateInstUIImportVersions(
       makeFileInfo(`import { Button, Alert } from '@instructure/ui/v11_6'`),
       api as Parameters<typeof updateInstUIImportVersions>[1],
       { diagnose: true }
@@ -241,11 +241,11 @@ describe('updateInstUIImportVersions', () => {
     expect(reported[0]).toContain('v11_6')
   })
 
-  it('diagnose mode filters by component name', () => {
+  it('diagnose mode filters by component name', async () => {
     const reported: string[] = []
     const api = makeApi((msg: string) => reported.push(msg))
 
-    updateInstUIImportVersions(
+    await updateInstUIImportVersions(
       makeFileInfo(`import { Button, Alert } from '@instructure/ui/v11_6'`),
       api as Parameters<typeof updateInstUIImportVersions>[1],
       { diagnose: true, components: 'Button' }
@@ -256,11 +256,11 @@ describe('updateInstUIImportVersions', () => {
     expect(reported[0]).not.toContain('Alert')
   })
 
-  it('diagnose mode shows "oldest" label for unversioned imports', () => {
+  it('diagnose mode shows "oldest" label for unversioned imports', async () => {
     const reported: string[] = []
     const api = makeApi((msg: string) => reported.push(msg))
 
-    updateInstUIImportVersions(
+    await updateInstUIImportVersions(
       makeFileInfo(`import { Button } from '@instructure/ui'`),
       api as Parameters<typeof updateInstUIImportVersions>[1],
       { diagnose: true }
@@ -270,7 +270,7 @@ describe('updateInstUIImportVersions', () => {
     expect(reported[0]).toContain('oldest')
   })
 
-  it('rewrites all matching imports in a file with 10+ @instructure imports', () => {
+  it('rewrites all matching imports in a file with 10+ @instructure imports', async () => {
     const input = [
       `import React from 'react'`,
       `import { Alert } from '@instructure/ui'`,
@@ -305,7 +305,7 @@ describe('updateInstUIImportVersions', () => {
       `import type { SomeType } from 'some-lib'`
     ].join('\n')
 
-    runInlineTest(
+    await runInlineTest(
       updateInstUIImportVersions,
       { versionTo: 'v11.7' },
       makeFileInfo(input),
@@ -313,8 +313,8 @@ describe('updateInstUIImportVersions', () => {
     )
   })
 
-  it('rewrites named imports from individual @instructure packages', () => {
-    runInlineTest(
+  it('rewrites named imports from individual @instructure packages', async () => {
+    await runInlineTest(
       updateInstUIImportVersions,
       { versionTo: 'v11.7' },
       makeFileInfo(
@@ -332,8 +332,8 @@ describe('updateInstUIImportVersions', () => {
     )
   })
 
-  it('does not rewrite default imports from @instructure packages', () => {
-    const result = updateInstUIImportVersions(
+  it('does not rewrite default imports from @instructure packages', async () => {
+    const result = await updateInstUIImportVersions(
       makeFileInfo(`import Button from '@instructure/ui-button'`),
       makeApi() as Parameters<typeof updateInstUIImportVersions>[1],
       { versionTo: 'v11.7' }

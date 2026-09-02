@@ -49,10 +49,11 @@ export type InstUICodemod = (
  * written to this file.
  * @param options.usePrettier if `true` the transformed code will be run through
  * [Prettier](https://prettier.io/). You can customize this through a [Prettier
- * config file](https://prettier.io/docs/configuration.html)
- * @returns the modified file as `string` or `null`
+ * config file](https://prettier.io/docs/configuration.html). Prettier is an
+ * optional peer dependency; both Prettier 2 and 3 work.
+ * @returns a promise resolving to the modified file as `string` or to `null`
  */
-const instUICodemodExecutor = (
+const instUICodemodExecutor = async (
   instUICodemods: InstUICodemod[] | InstUICodemod,
   file: FileInfo,
   api: API,
@@ -61,7 +62,7 @@ const instUICodemodExecutor = (
     usePrettier?: boolean
     quote?: 'single' | 'double' | 'auto'
   }
-) => {
+): Promise<string | null> => {
   const j = api.jscodeshift.withParser('tsx')
   const root = j(file.source)
   let hasModifications = false
@@ -83,7 +84,7 @@ const instUICodemodExecutor = (
   if (hasModifications) {
     const shouldUsePrettier = options?.usePrettier !== false
     return shouldUsePrettier
-      ? formatSource(root.toSource(), file.path)
+      ? await formatSource(root.toSource(), file.path)
       : root.toSource({ quote: options?.quote ?? 'double' })
   } else {
     return null

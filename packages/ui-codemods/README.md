@@ -28,6 +28,13 @@ type: code
 npx jscodeshift@latest -t node_modules/@instructure/ui-codemods/lib/updateV10Breaking.ts <path>
 ```
 
+### Formatting
+
+Codemods run their output through [Prettier](https://prettier.io/) by default,
+using your project's Prettier installation and [config
+file](https://prettier.io/docs/configuration.html). Prettier is an optional peer
+dependency, both Prettier 2 and Prettier 3 work.
+
 For more information about what the codemods do, see the [major version upgrade guides](upgrade-guide)
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-codemods.svg

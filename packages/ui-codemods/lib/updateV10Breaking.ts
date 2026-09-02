@@ -29,12 +29,12 @@ import instUICodemodExecutor from './utils/instUICodemodExecutor'
 /**
  * Updates theme color syntax from InstUI v9 to v10
  */
-const updateV10Breaking: Transform = (
+const updateV10Breaking: Transform = async (
   file,
   api,
   options?: { fileName?: string; usePrettier?: boolean }
 ) => {
-  return instUICodemodExecutor(updateToV10Colors, file, api, options)
+  return await instUICodemodExecutor(updateToV10Colors, file, api, options)
 }
 
 export default updateV10Breaking

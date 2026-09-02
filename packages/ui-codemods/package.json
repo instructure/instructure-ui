@@ -20,15 +20,22 @@
   },
   "license": "MIT",
   "dependencies": {
-    "jscodeshift": "^17.3.0",
-    "prettier": "^2.8.8"
+    "jscodeshift": "^17.3.0"
+  },
+  "peerDependencies": {
+    "prettier": "^2.8.8 || ^3.0.0"
+  },
+  "peerDependenciesMeta": {
+    "prettier": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@instructure/ui-babel-preset": "workspace:*",
     "@types/jscodeshift": "^17.3.0",
     "@types/node": "24.1.0",
-    "@types/prettier": "^2.7.3",
     "ast-types": "^0.16.1",
+    "prettier": "3.8.1",
     "vitest": "^4.1.9"
   },
   "publishConfig": {
@@ -44,9 +51,6 @@
     "./types/*": "./types/*",
     "./package.json": "./package.json",
     "./src/*": "./src/*"
-  },
-  "//dependency-comments": {
-    "prettier": "Prettier 3 is async, https://prettier.io/blog/2023/07/05/3.0.0.html#api-1"
   },
   "type": "module"
 }

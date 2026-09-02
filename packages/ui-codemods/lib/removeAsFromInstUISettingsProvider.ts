@@ -30,12 +30,12 @@ import { isJSXAttribute } from './utils/codemodTypeCheckers'
 /**
  * removes the `as` prop from InstUISettingsProvider.
  */
-const removeAsFromInstUISettingsProvider: Transform = (
+const removeAsFromInstUISettingsProvider: Transform = async (
   file,
   api,
   options?: { fileName?: string; usePrettier?: boolean }
 ) => {
-  return instUICodemodExecutor(removeAsProp, file, api, options)
+  return await instUICodemodExecutor(removeAsProp, file, api, options)
 }
 
 const removeAsProp = (j: JSCodeshift, root: Collection, filePath: string) => {
