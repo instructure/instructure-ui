@@ -159,7 +159,9 @@ export const THEME_VARIABLE_MAPPINGS: Record<string, ComponentMapping> = {
     import: '@instructure/ui-billboard',
     removed: {
       iconColor: {},
-      iconHoverColor: {}
+      iconHoverColor: {},
+      iconHoverColorInverse: {},
+      messageColorInverse: {}
     }
   },
   Spinner: {
@@ -1189,6 +1191,14 @@ export const THEME_VARIABLE_MAPPINGS: Record<string, ComponentMapping> = {
     import: '@instructure/ui-instructure',
     renamed: {
       cardBorderRadius: { to: 'borderRadius' }
+    }
+  },
+  DataPermissionLevels: {
+    import: '@instructure/ui-instructure',
+    removed: {
+      cardPadding: {},
+      cardExplainerContainerBottomMargin: {},
+      cardGap: {}
     }
   },
   Flex: {

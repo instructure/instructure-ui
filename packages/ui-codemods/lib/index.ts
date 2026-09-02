@@ -34,14 +34,17 @@ import updateInstUIImportVersions from './updateInstUIImportVersions'
 import multiVersionThemeVariablesCodemod from './multiVersionThemeVariablesCodemod/multiVersionThemeVariablesCodemod'
 
 export {
+  // Codemods for InstUI v9 -> v10
   updateV10Breaking,
+  // Codemods for InstUI v10 -> v11
   instUIv11Codemods,
   removeAsFromInstUISettingsProvider,
   renameCanvasThemes,
-  renameGetComputedStyleToGetCSSStyleDeclaration,
   warnTableCaptionMissing,
+  renameGetComputedStyleToGetCSSStyleDeclaration,
   warnCodeEditorRemoved,
+  // Codemods for new theming/multi version (used by InstUI v11.7.2 and above)
   migrateToNewIcons,
-  updateInstUIImportVersions,
-  multiVersionThemeVariablesCodemod
+  multiVersionThemeVariablesCodemod,
+  updateInstUIImportVersions
 }

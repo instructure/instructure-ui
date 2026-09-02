@@ -111,8 +111,10 @@ function migrateIcons(j: JSCodeshift, root: Collection): boolean {
 /**
  * Migrates legacy InstUI icons (`IconXxxLine` / `IconXxxSolid`) to new
  * `XxxInstUIIcon` components.
+ * Warns about legacy icons that has no mappings and have to be migrated manually.
+ * New icons were introduced in InstUI v11.7.2
  *
- * Renames specifiers in-place for imports from:
+ * This codemod will rename icons if they are imported from:
  *   - `@instructure/ui-icons`
  *   - `@instructure/ui-icons/es/svg`
  *   - `@instructure/ui`

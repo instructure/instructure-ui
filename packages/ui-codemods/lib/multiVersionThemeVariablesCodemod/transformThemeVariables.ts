@@ -32,6 +32,7 @@ import type { ComponentMapping } from './themeVariableMappings'
 
 /**
  * Renames/removes component theme variables to their new (multi-version) names.
+ * This change was introduced in InstUI v11.7.2
  */
 const transformThemeVariables: Transform = (
   file,
