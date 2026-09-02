@@ -36,13 +36,13 @@ import { expect, vi } from 'vitest'
  * - Fixtures must be named `XY.input.[ts|tsx|js]` and `XY.output.[ts|tsx|js]`
  * @param codemod The codemod to run
  */
-export function runTest(codemod: Transform) {
+export async function runTest(codemod: Transform) {
   // Fixtures live in `./__testfixtures__/[codemod name]/`.
   const fixturesDir = `${__dirname}/__testfixtures__/${codemod.name}`
   const entries = fs.readdirSync(fixturesDir, { withFileTypes: true })
 
   let fixturesRun = 0
-  entries.forEach((entry) => {
+  for (const entry of entries) {
     if (entry.isFile() && entry.name.includes('input')) {
       const isWarningTest = entry.name.includes('.warning.input')
       const inputPath = path.join(entry.parentPath, entry.name)
@@ -82,7 +82,7 @@ export function runTest(codemod: Transform) {
           const options = {}
 
           // Run codemod withouth comparison
-          codemod(fileInfo, api, options)
+          await codemod(fileInfo, api, options)
 
           const expectedWarningContent = fs
             .readFileSync(expectedPath, 'utf8')
@@ -123,11 +123,16 @@ export function runTest(codemod: Transform) {
           warnSpy.mockRestore()
         }
       } else {
-        runInlineTest(codemod, {}, { path: inputPath, source: input }, expected)
+        await runInlineTest(
+          codemod,
+          {},
+          { path: inputPath, source: input },
+          expected
+        )
       }
       fixturesRun++
     }
-  })
+  }
   if (fixturesRun === 0) {
     throw new Error(
       `Test failed for codemod "${codemod.name}": No fixtures found.`

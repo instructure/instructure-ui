@@ -32,12 +32,12 @@ import instUICodemodExecutor from './utils/instUICodemodExecutor'
  * `canvasHighContrastTheme`, warns about deleted `ThemeRegistry` imports and
  * the removed `canvas.use()`/`canvasHighContrast.use()` functions
  */
-const renameCanvasThemesCodemod: Transform = (
+const renameCanvasThemesCodemod: Transform = async (
   file,
   api,
   options?: { fileName?: string; usePrettier?: boolean }
 ) => {
-  return instUICodemodExecutor(renameCanvasThemes, file, api, options)
+  return await instUICodemodExecutor(renameCanvasThemes, file, api, options)
 }
 
 const renameCanvasThemes: InstUICodemod = (j, root, filePath) => {

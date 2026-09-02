@@ -28,11 +28,11 @@ import type { Transform } from 'jscodeshift'
  * @param options.usePrettier if `true` the transformed code will be run through
  * [Prettier](https://prettier.io/). You can customize this through a [Prettier
  * config file](https://prettier.io/docs/configuration.html)
- * @returns the modified file as `string` or `null`
+ * @returns a promise resolving to the modified file as `string` or to `null`
  */
-const myCodemod: Transform = (file, api,
+const myCodemod: Transform = async (file, api,
                               options?: { fileName?: string; usePrettier?: boolean }) => {
-    return instUICodemodExecutor([my, cool, scripts], file, api, options)
+    return await instUICodemodExecutor([my, cool, scripts], file, api, options)
 }
 export default myCodemod
 ```
@@ -44,14 +44,19 @@ export default myCodemod
 You should write unit tests for your codemods. They are tested via test fixtures (sample before transform, sample after transform). To create a unit test for say `sampleCodemod` the following steps are needed:
 
 1. Create a new test in `packages/ui-codemods/lib/__node_tests__/codemod.tests.ts`:
+
    ```ts
    ---
    type: code
    ---
-   it('tests the cool sampleCodemod', () => {
-     runTest(sampleCodemod)
+   it('tests the cool sampleCodemod', async () => {
+     await runTest(sampleCodemod)
    })
    ```
+
+   Don't forget the `await`: an un-awaited `runTest` reports a passing test
+   while its assertions land in a later one.
+
 2. Create a folder named `sampleCodemod` in `packages/ui-codemods/lib/__node_tests__/__testfixtures__`
 3. Here create sample input-output file pairs whose filename follows the following naming convention: `[fixtureName].input.[js/ts/tsx]`, `[fixtureName].output.[js/ts/tsx]`. These should be your test cases that ensure that the codemod does the transformation correctly.
 

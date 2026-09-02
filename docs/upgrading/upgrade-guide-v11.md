@@ -1,5 +1,5 @@
 ---
-title: Upgrade guide for v10 -> 11
+title: Upgrade guide from v10 to v11
 category: Upgrading
 order: 1
 ---

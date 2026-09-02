@@ -36,12 +36,12 @@ const TABLE_IMPORT_PATHS = ['@instructure/ui-table', '@instructure/ui']
 /**
  * Prints a warning if the `caption` prop is missing from a `<Table />`.
  */
-const warnTableCaptionMissing: Transform = (
+const warnTableCaptionMissing: Transform = async (
   file,
   api,
   options?: { fileName?: string; usePrettier?: boolean }
 ) => {
-  return instUICodemodExecutor(
+  return await instUICodemodExecutor(
     warnTableCaptionMissingCodemod,
     file,
     api,

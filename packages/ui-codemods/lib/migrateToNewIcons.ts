@@ -124,8 +124,13 @@ const migrateToNewIconsCodemod: InstUICodemod = (j, root, filePath) => {
   return migrateIcons(j, root)
 }
 
-const migrateToNewIcons: Transform = (file, api, options) => {
-  return instUICodemodExecutor(migrateToNewIconsCodemod, file, api, options)
+const migrateToNewIcons: Transform = async (file, api, options) => {
+  return await instUICodemodExecutor(
+    migrateToNewIconsCodemod,
+    file,
+    api,
+    options
+  )
 }
 
 export default migrateToNewIcons

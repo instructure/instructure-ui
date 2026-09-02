@@ -34,12 +34,12 @@ import type { ComponentMapping } from './themeVariableMappings'
  * Renames/removes component theme variables to their new (multi-version) names.
  * This change was introduced in InstUI v11.7.2
  */
-const transformThemeVariables: Transform = (
+const transformThemeVariables: Transform = async (
   file,
   api,
   options?: { fileName?: string; usePrettier?: boolean }
 ) => {
-  return instUICodemodExecutor(
+  return await instUICodemodExecutor(
     transformThemeVariablesCodemod,
     file,
     api,

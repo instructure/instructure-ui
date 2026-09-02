@@ -41,12 +41,12 @@ import { namedTypes } from 'ast-types'
  * `transformThemeVariables`.
  * This change was introduced in InstUI v11.7.2
  */
-const migrateComponentOverridesToThemeOverride: Transform = (
+const migrateComponentOverridesToThemeOverride: Transform = async (
   file,
   api,
   options?: { fileName?: string; usePrettier?: boolean }
 ) => {
-  return instUICodemodExecutor(
+  return await instUICodemodExecutor(
     migrateComponentOverridesToThemeOverrideCodemod,
     file,
     api,

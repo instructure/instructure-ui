@@ -1,10 +1,10 @@
 ---
-title: Upgrade guide for v11.x -> 11.7
+title: Upgrade guide for new theming
 category: Upgrading
 order: 2
 ---
 
-# Upgrade Guide for multi version support
+# Upgrade Guide to the /v11_7 components
 
 ## New theming system
 
@@ -145,7 +145,7 @@ npm install @instructure/ui-codemods
 npx jscodeshift@latest -t node_modules/@instructure/ui-codemods/lib/[codemod name].ts <path>  \
   --extensions=ts,tsx \
   --ignore-pattern="**/node_modules/**" \
-  --ignore-pattern="**/*.d.ts" \
+  --ignore-pattern="**/*.d.ts"
 ```
 
 ### updateInstUIImportVersions

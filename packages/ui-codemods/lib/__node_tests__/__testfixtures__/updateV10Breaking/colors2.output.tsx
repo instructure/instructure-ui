@@ -602,8 +602,10 @@ const Header: React.FC<HeaderProps> = ({
   )
 }
 
-interface HeaderSearchProps
-  extends Omit<Partial<ComponentProps<typeof StaticSearch>>, 'styles'> {
+interface HeaderSearchProps extends Omit<
+  Partial<ComponentProps<typeof StaticSearch>>,
+  'styles'
+> {
   styles: Record<string, any>
 }
 

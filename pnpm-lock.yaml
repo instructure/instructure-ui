@@ -1548,9 +1548,6 @@ importers:
       jscodeshift:
         specifier: ^17.3.0
         version: 17.3.0(@babel/preset-env@7.29.5(@babel/core@7.29.0))
-      prettier:
-        specifier: ^2.8.8
-        version: 2.8.8
     devDependencies:
       '@instructure/ui-babel-preset':
         specifier: workspace:*
@@ -1561,12 +1558,12 @@ importers:
       '@types/node':
         specifier: 24.1.0
         version: 24.1.0
-      '@types/prettier':
-        specifier: ^2.7.3
-        version: 2.7.3
       ast-types:
         specifier: ^0.16.1
         version: 0.16.1
+      prettier:
+        specifier: 3.8.1
+        version: 3.8.1
       vitest:
         specifier: ^4.1.9
         version: 4.1.9(@types/node@24.1.0)(@vitest/browser-playwright@4.1.9)(@vitest/ui@4.1.9)(jsdom@29.1.1)(vite@7.3.1(@types/node@24.1.0)(jiti@2.6.1)(terser@5.48.0)(yaml@2.9.0))
@@ -8032,9 +8029,6 @@ packages:
 
   '@types/pngjs@6.0.5':
     resolution: {integrity: sha512-0k5eKfrA83JOZPppLtS2C7OUtyNAl2wKNxfyYl9Q5g9lPkgBl/9hNyAu6HuEH2J4XmIv2znEpkDd0SaZVxW6iQ==}
-
-  '@types/prettier@2.7.3':
-    resolution: {integrity: sha512-+68kP9yzs4LMp7VNh8gdzMSPZFL44MLGqiHWvttYJe+6qnuVr4Ek9wSBQoveqY/r+LwjCcU29kNVkidwim+kYA==}
 
   '@types/prop-types@15.7.15':
     resolution: {integrity: sha512-F6bEyamV9jKGAFBEmlQnesRPGOQqS2+Uwi0Em15xenOxHaf2hv6L8YCVn3rPdPJOiJfPiCnLIRyvwVaqMY3MIw==}
@@ -16010,8 +16004,6 @@ snapshots:
   '@types/pngjs@6.0.5':
     dependencies:
       '@types/node': 22.19.15
-
-  '@types/prettier@2.7.3': {}
 
   '@types/prop-types@15.7.15': {}
 
