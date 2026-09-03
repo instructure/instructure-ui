@@ -4,7 +4,6 @@
 # Refresh manually as the team changes. Lines starting with # are ignored;
 # a leading @ is optional.
 matyasf
-ToMESSKa
 joyenjoyer
 balzss
 git-nandor
