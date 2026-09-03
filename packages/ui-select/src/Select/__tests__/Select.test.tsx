@@ -940,6 +940,75 @@ describe('<Select />', () => {
     })
   })
 
+  describe('messages', () => {
+    const errorMessage = 'This is an error message'
+
+    it('should render error messages when there is no onInputChange', async () => {
+      await render(
+        <Select
+          renderLabel="Choose an option"
+          messages={[{ type: 'error', text: errorMessage }]}
+        />
+      )
+
+      expect(page.getByText(errorMessage).element()).toBeInTheDocument()
+    })
+
+    it('should render error messages when there is an onInputChange', async () => {
+      await render(
+        <Select
+          renderLabel="Choose an option"
+          onInputChange={() => {}}
+          messages={[{ type: 'error', text: errorMessage }]}
+        />
+      )
+
+      expect(page.getByText(errorMessage).element()).toBeInTheDocument()
+    })
+
+    it('should describe the input with the rendered messages', async () => {
+      await render(
+        <Select
+          renderLabel="Choose an option"
+          messages={[{ type: 'error', text: errorMessage }]}
+        />
+      )
+      const input = page.getByLabelText('Choose an option').element()
+      const descriptions = input
+        .getAttribute('aria-describedby')!
+        .split(' ')
+        .map((id) => document.getElementById(id))
+
+      expect(
+        descriptions.find((element) => element?.textContent === errorMessage)
+      ).toBeInTheDocument()
+    })
+
+    it('should not render error messages when interaction="readonly"', async () => {
+      await render(
+        <Select
+          renderLabel="Choose an option"
+          interaction="readonly"
+          messages={[{ type: 'error', text: errorMessage }]}
+        />
+      )
+
+      expect(page.getByText(errorMessage).query()).toBeNull()
+    })
+
+    it('should not render error messages when interaction="disabled"', async () => {
+      await render(
+        <Select
+          renderLabel="Choose an option"
+          interaction="disabled"
+          messages={[{ type: 'error', text: errorMessage }]}
+        />
+      )
+
+      expect(page.getByText(errorMessage).query()).toBeNull()
+    })
+  })
+
   describe('list', () => {
     it('should set aria-selected on options with isSelected={true}', async () => {
       await render(
