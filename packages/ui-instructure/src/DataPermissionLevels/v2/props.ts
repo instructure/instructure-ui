@@ -87,6 +87,7 @@ type DataPermissionLevelsStyle = ComponentStyle<
   | 'currentFeature'
   | 'contentContainer'
   | 'permissionTitle'
+  | 'trigger'
 > & {
   maxWidth?: string
 }
