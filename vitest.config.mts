@@ -63,22 +63,15 @@ const PREBUNDLED_MODULES = ['react-dom/server', 'react-dom/client']
 
 const OPTIMIZED_DEPS = [...PREBUNDLED_PACKAGES, ...PREBUNDLED_MODULES]
 
-// Warn when an optimizeDeps entry cannot be resolved. This can cause Vite to
-// discover it mid-run, leading to different optimizer generations and SSR
-// failures.
-//
 // Uses CJS resolution; ESM-only entries may need a different check.
 OPTIMIZED_DEPS.forEach((entry) => {
   try {
     require.resolve(entry, { paths: [__dirname] })
   } catch {
-    console.warn(
-      `[vitest.config] "${entry}" is in optimizeDeps.include but cannot be ` +
-        `resolved from the repo root, so Vite will skip prebundling it. ` +
-        `Expect it to be discovered mid-run instead, which can put React and ` +
-        `react-dom in different optimizer generations and fail SSR tests with ` +
-        `"Cannot read properties of null (reading 'useId')". Add it to the ` +
-        `root package.json devDependencies.`
+    throw new Error(
+      `optimizeDeps.include entry "${entry}" cannot be resolved from the repo ` +
+        `root, so Vite would skip prebundling it. Add it to the root ` +
+        `package.json devDependencies.`
     )
   }
 })
@@ -207,10 +200,8 @@ export default defineConfig({
           include: OPTIMIZED_DEPS
         },
         resolve: {
-          // Keep a single copy of React across the prebundled chunks and the
-          // on-demand transformed sources. Two copies mean react-dom installs
-          // its hooks dispatcher on one of them while components read the
-          // other, which throws on the first hook call.
+          // Keep a single copy of React. 
+          // Prevents errors when a dependency pulls in a different version.
           dedupe: ['react', 'react-dom'],
           alias: [
             // Bare `moment` -> the all-locales build. Matches
