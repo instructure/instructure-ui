@@ -114,7 +114,7 @@ export default function generateCustomIndex() {
           `    ${jsxContent}\n` +
           `  </>\n` +
           `)\n` +
-          `export const ${iconName}InstUIIcon = wrapCustomIcon(${iconName}Paths, '${iconName}', ${viewBoxArg})`
+          `export const ${iconName}InstUIIcon = /*#__PURE__*/ wrapCustomIcon(${iconName}Paths, '${iconName}', ${viewBoxArg})`
       )
     } catch (err) {
       throw new Error(`Error processing ${fileName}: ${err}`)
