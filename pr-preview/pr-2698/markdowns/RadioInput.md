@@ -124,6 +124,7 @@ type: embed
 | RadioInput | size | `'small' \| 'medium' \| 'large'` | No | - |  |
 | RadioInput | context | `'success' \| 'warning' \| 'danger' \| 'off'` | No | - | Sets the background color of the radio button when `variant="toggle"` |
 | RadioInput | inline | `boolean` | No | - | Sets the `display:inline-flex` in CSS |
+| RadioInput | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`. |
 | RadioInput | onClick | `(event: React.MouseEvent<HTMLInputElement>) => void` | No | - |  |
 | RadioInput | onChange | `(event: React.ChangeEvent<HTMLInputElement>) => void` | No | - | Callback fired when the input fires a change event. event.target.value will contain the new value. It will always be a string. |
 | RadioInput | inputRef | `(inputElement: HTMLInputElement \| null) => void` | No | - | A function that provides a reference to the actual underlying input element |
