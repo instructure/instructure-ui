@@ -75,6 +75,7 @@ type TextInputOwnProps = {
    * receive user interactions. When "readonly" the input still cannot receive
    * user interactions but it keeps the same styles as if it were enabled.
    * Note: placeholder is only displayed when interaction is enabled. You can force it with forcePlaceholder prop
+   * Note: error and success messages are hidden when interaction is not enabled. You can force them for readonly with the forceMessages prop
    */
   interaction?: InteractionType
 
@@ -144,6 +145,11 @@ type TextInputOwnProps = {
    * Always displays placeholder when textInput is empty, regardless of interaction type
    */
   forcePlaceholder?: boolean
+
+  /**
+   * Always displays `messages`, even when the interaction is `readonly`.
+   */
+  forceMessages?: boolean
 
   /**
    * provides a reference to the underlying html root element
@@ -236,6 +242,7 @@ const allowedProps: AllowedPropKeys = [
   'placeholder',
   'isRequired',
   'forcePlaceholder',
+  'forceMessages',
   'elementRef',
   'inputRef',
   'inputContainerRef',
