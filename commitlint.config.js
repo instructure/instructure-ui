@@ -64,16 +64,94 @@ function getAllPackages() {
   }
 }
 
+// Trailers and ticket ids carry no prose, so they don't count towards the body
+// limits.
+const isTrailer = (line) =>
+  /^[A-Za-z][A-Za-z-]*:\s/.test(line) ||
+  /^[A-Z][A-Z0-9]+-\d+$/.test(line) ||
+  line.startsWith('🤖')
+
+function bodyLines(raw) {
+  return (raw || '')
+    .split('\n')
+    .slice(1)
+    .map((line) => line.trim())
+    .filter((line) => line !== '' && !line.startsWith('#') && !isTrailer(line))
+}
+
+/**
+ * Caps body length. Set well above the longest real commit so it only catches a
+ * body that has turned into a full changelog of the diff.
+ */
+function bodyMaxLines(parsed, _when, max) {
+  const count = bodyLines(parsed.raw).length
+  return [
+    count <= max,
+    `body has ${count} lines, the limit is ${max}. Explain why the change was ` +
+      'made; the diff already covers what changed.'
+  ]
+}
+
+/**
+ * Rejects a body shaped like a changelog: grouped under several headings, or a
+ * long bullet list naming the files that changed. Thresholds sit above the
+ * heaviest legitimate usage in this repo - one "The fixes:" style lead-in and a
+ * handful of bullets are fine.
+ */
+function bodyNoChangelog(parsed) {
+  const lines = bodyLines(parsed.raw)
+  const headings = lines.filter((line) =>
+    /^[A-Z][A-Za-z /()]{2,40}:$/.test(line)
+  )
+  const bullets = lines.filter((line) => /^[-*] /.test(line))
+  const pathBullets = bullets.filter((line) =>
+    /(packages\/|scripts\/|\.(ts|tsx|js|jsx|mjs|cjs|json|ya?ml|md)\b)/.test(
+      line
+    )
+  )
+
+  if (headings.length > 1) {
+    return [
+      false,
+      `body groups changes under ${headings.length} headings (${headings.join(
+        ' '
+      )}). ` + 'Write prose explaining why, not a grouped changelog.'
+    ]
+  }
+  if (bullets.length > 12) {
+    return [
+      false,
+      `body has ${bullets.length} bullets. Summarise the reason for the change instead.`
+    ]
+  }
+  if (pathBullets.length > 6) {
+    return [
+      false,
+      `body lists ${pathBullets.length} changed files. The diff already lists them.`
+    ]
+  }
+  return [true, '']
+}
+
 module.exports = {
   extends: ['@commitlint/config-conventional'],
-  parserOpts: {
-    headerPattern: /^(\w*)\((\w*)\)-(\w*)\s(.*)$/,
-    headerCorrespondence: ['type', 'scope', 'subject']
-  },
+  plugins: [
+    {
+      rules: {
+        'body-max-lines': bodyMaxLines,
+        'body-no-changelog': bodyNoChangelog
+      }
+    }
+  ],
   // https://commitlint.js.org/reference/rules.html
   rules: {
+    // The header is unbounded because multi-package scopes are long, e.g.
+    // `fix(ui-drawer-layout,ui-a11y-utils):`. The subject itself is capped.
     'header-max-length': [0, 'always', 150], // 0 === rule is disabled
-    'subject-max-length': [2, 'always', 150]
+    'subject-max-length': [2, 'always', 72],
+    'body-max-line-length': [2, 'always', 100],
+    'body-max-lines': [2, 'always', 28],
+    'body-no-changelog': [2, 'always']
   },
 
   // https://cz-git.qbb.sh/config/
