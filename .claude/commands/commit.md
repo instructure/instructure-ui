@@ -13,16 +13,36 @@ type(scope): imperative subject
 
 BREAKING CHANGE: <only if applicable>
 
-🤖 Generated with [Claude Code](https://claude.com/claude-code)
-
 Co-Authored-By: Claude <noreply@anthropic.com>
 ```
 
 - **type**: one of `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert`. `commitlint.config.js` extends [`@commitlint/config-conventional`](https://www.npmjs.com/package/@commitlint/config-conventional), which defines the allowed set — pick the type that genuinely matches the change (`feat`/`fix` only for actual features/bug fixes).
 - **scope**: full package name (`ui-button`, `ui-select`). Comma-separate for a few, use `many` for several, omit for repo-wide.
-- **subject**: imperative ("add loading state", not "added"). Must start with a lowercase letter (commitlint's `subject-case` rejects sentence/Start/PascalCase). No trailing period.
-- **Body lines: hard-wrap at 100 characters.** Commitlint (`body-max-line-length: 100`) runs in CI and will reject longer lines. The footer lines (Claude Code attribution, Co-Authored-By) are exempt.
+- **subject**: imperative ("add loading state", not "added"). Must start with a lowercase letter (commitlint's `subject-case` rejects sentence/Start/PascalCase). No trailing period. **Max 72 characters** (`subject-max-length`) — if it doesn't fit, you're listing everything the change touches instead of naming the change.
 - **Breaking changes**: add a `BREAKING CHANGE:` line in the body describing what breaks. See CLAUDE.md for what counts as breaking.
+- **Attribution**: end with `Co-Authored-By: Claude <noreply@anthropic.com>` — that exact form, not a model-specific one, so history stays consistent. **No `🤖 Generated with` line in commit messages**; that belongs in PR bodies (`/pr` handles it).
+
+### Body
+
+**Omit the body when the subject says it all.** When you do write one, it explains **why** — the constraint, the cause, the thing the diff cannot show. Never restate what changed.
+
+- **Hard-wrap at 100 characters** (`body-max-line-length`). Trailers are exempt.
+- ❌ **Never turn the body into a changelog.** No grouping headings (`Configuration:`, `Build Tooling:`), no numbered sections, no long bullet list of the files you touched. Commitlint's `body-no-changelog` rejects 2+ headings, more than 12 bullets, or more than 6 bullets naming files.
+- ✅ A single lead-in like `The fixes:` followed by a few bullets is fine, and naming a specific file is fine when the file _is_ the point.
+- Hard ceiling of 28 body lines (`body-max-lines`) — a backstop for runaway bodies, not a target.
+
+```
+❌ feat(many): migrate from npm to pnpm          ✅ feat(many): migrate from npm to pnpm
+
+    Configuration:                                   regression-test stays on npm so it keeps
+    - Add pnpm-workspace.yaml                        installing @instructure/ui the way an
+    - Add .npmrc with hoisted node linker            external consumer would.
+    Build Tooling:
+    - Update scripts/bootstrap.js
+    ...25 more lines...
+```
+
+Writing about _before_ and _after_ is encouraged — "Previously the placeholder only showed on hover" is exactly right in a commit message, which is permanently anchored to its own diff. (Code comments are different: see CLAUDE.md.)
 
 ## Steps
 
