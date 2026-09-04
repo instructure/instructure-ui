@@ -25,20 +25,13 @@
 'use client'
 import React from 'react'
 import {
-  Link as lk,
-  Text as tx,
-  View as vw,
-  IconUserLine as iul,
-  ScreenReaderContent as src,
-  TruncateText as tt
+  Link,
+  Text,
+  View,
+  IconUserLine,
+  TruncateText
 } from '@instructure/ui/latest'
-
-const Link = lk as any
-const Text = tx as any
-const View = vw as any
-const IconUserLine = iul as any
-const ScreenReaderContent = src as any
-const TruncateText = tt as any
+import type { ViewOwnProps } from '@instructure/ui/latest'
 
 export default function LinkPage() {
   return (
@@ -74,7 +67,7 @@ export default function LinkPage() {
       <section>
         <Link
           variant="standalone"
-          onClick={(e: any) => {
+          onClick={(e: React.MouseEvent<ViewOwnProps>) => {
             e.preventDefault()
           }}
           forceButtonRole={false}
@@ -161,7 +154,7 @@ export default function LinkPage() {
 
       {/* Underlines (outside text) */}
       <section>
-        <Link href="http://instructure.design" isWithinText={false}>
+        <Link href="http://instructure.design" variant="standalone">
           I have no default underline
         </Link>
       </section>
@@ -170,7 +163,7 @@ export default function LinkPage() {
       <section style={{ maxWidth: '24rem' }}>
         <Link
           onClick={() => {}}
-          isWithinText={false}
+          variant="standalone"
           renderIcon={<IconUserLine size="small" />}
         >
           <TruncateText>

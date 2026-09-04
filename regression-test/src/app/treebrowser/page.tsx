@@ -24,36 +24,16 @@
 
 'use client'
 import React, { useState } from 'react'
+import { TreeBrowser } from '@instructure/ui/latest'
 import {
-  TreeBrowser as tb,
-  RadioInput as ri,
-  RadioInputGroup as rig,
-  View as vw,
-  ScreenReaderContent as src
-} from '@instructure/ui/latest'
-import {
-  BookCheckInstUIIcon as igl,
-  XInstUIIcon as ixs,
-  UserInstUIIcon as ius,
-  BoxesInstUIIcon as iml,
-  PlaySquareInstUIIcon as ivl
+  BookCheckInstUIIcon,
+  XInstUIIcon,
+  UserInstUIIcon,
+  BoxesInstUIIcon,
+  PlaySquareInstUIIcon
 } from '@instructure/ui-icons'
 
-const TreeBrowser = tb as any
-const RadioInput = ri as any
-const RadioInputGroup = rig as any
-const View = vw as any
-const ScreenReaderContent = src as any
-const BookCheckInstUIIcon = igl as any
-const XInstUIIcon = ixs as any
-const UserInstUIIcon = ius as any
-const BoxesInstUIIcon = iml as any
-const PlaySquareInstUIIcon = ivl as any
-
 export default function TreeBrowserPage() {
-  const [size, setSize] = useState('medium')
-  const sizes = ['small', 'medium', 'large']
-
   return (
     <main className="flex gap-12 p-8 flex-col items-start axe-test">
       <section>

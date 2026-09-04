@@ -24,9 +24,7 @@
 
 'use client'
 import React from 'react'
-import { Table as tb } from '@instructure/ui/latest'
-
-const Table = tb as any
+import { Table } from '@instructure/ui/latest'
 
 export default function TablePage() {
   return (

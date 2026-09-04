@@ -25,18 +25,12 @@
 'use client'
 import React, { useState } from 'react'
 import {
-  ColorContrast as cc,
-  ColorIndicator as ci,
-  ColorMixer as cm,
-  ColorPreset as cp,
-  ColorPicker as cpk
+  ColorContrast,
+  ColorIndicator,
+  ColorMixer,
+  ColorPreset,
+  ColorPicker
 } from '@instructure/ui/latest'
-
-const ColorContrast = cc as any
-const ColorIndicator = ci as any
-const ColorMixer = cm as any
-const ColorPreset = cp as any
-const ColorPicker = cpk as any
 
 export default function ColorPickerPage() {
   const value = '#328DCFC2'

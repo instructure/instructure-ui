@@ -24,10 +24,7 @@
 
 'use client'
 import React from 'react'
-import { View as vw, Text as tx } from '@instructure/ui/latest'
-
-const View = vw as any
-const Text = tx as any
+import { View, Text } from '@instructure/ui/latest'
 
 export default function ViewPage() {
   return (
@@ -46,29 +43,34 @@ export default function ViewPage() {
 
       {/* Backgrounds */}
       <section>
+        <Text>Backgrounds:</Text>
         <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-          {[
-            'transparent',
-            'primary',
-            'secondary',
-            'primary-inverse',
-            'brand',
-            'alert',
-            'success',
-            'danger',
-            'warning'
-          ].map((bg) => (
-            <View
-              key={bg}
-              as="div"
-              display="inline-block"
-              maxWidth="10rem"
-              margin="small"
-              padding="small"
-              background={bg}
-            >
-              {bg}
-            </View>
+          {(
+            [
+              'transparent',
+              'primary',
+              'secondary',
+              'primary-inverse',
+              'brand',
+              'alert',
+              'success',
+              'danger',
+              'warning'
+            ] as const
+          ).map((bg, index) => (
+            <div key={index}>
+              <Text>{bg}</Text>
+              <View
+                key={bg}
+                as="div"
+                display="inline-block"
+                width="2rem"
+                height="2rem"
+                margin="small"
+                padding="small"
+                background={bg}
+              ></View>
+            </div>
           ))}
         </div>
       </section>
@@ -76,7 +78,7 @@ export default function ViewPage() {
       {/* Shadows */}
       <section>
         <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-          {['resting', 'above', 'topmost'].map((sh) => (
+          {(['resting', 'above', 'topmost'] as const).map((sh) => (
             <View
               key={sh}
               as="span"
@@ -238,11 +240,11 @@ export default function ViewPage() {
           overflowY="auto"
           overflowX="auto"
           withVisualDebug
-          tabIndex="0"
+          tabIndex={0}
         >
-          <div style={{ width: '30rem', height: '10rem', background: '#ccc' }}>
-            Scrollable content
-          </div>
+          <div
+            style={{ width: '30rem', height: '10rem', background: '#ccc' }}
+          ></div>
         </View>
         <View as="div" textAlign="center" padding="x-small" withVisualDebug>
           <View

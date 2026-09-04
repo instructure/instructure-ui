@@ -25,14 +25,10 @@
 'use client'
 import React, { useRef, useState } from 'react'
 import {
-  DateTimeInput as dti,
-  ScreenReaderContent as src,
-  Text as tx
+  DateTimeInput,
+  ScreenReaderContent,
+  Text
 } from '@instructure/ui/latest'
-
-const DateTimeInput = dti as any
-const ScreenReaderContent = src as any
-const Text = tx as any
 
 export default function DateTimeInputPage() {
   // Example 2: required + hint if in past
@@ -51,7 +47,9 @@ export default function DateTimeInputPage() {
         screenReaderLabels={{
           calendarIcon: 'Open calendar',
           prevMonthButton: 'Previous month',
-          nextMonthButton: 'Next month'
+          nextMonthButton: 'Next month',
+          datePickerDialog: 'Date picker',
+          selectedLabel: 'Selected'
         }}
         defaultValue="2018-01-18T13:30"
         layout="columns"
@@ -67,7 +65,9 @@ export default function DateTimeInputPage() {
         screenReaderLabels={{
           calendarIcon: 'Open calendar',
           prevMonthButton: 'Previous month',
-          nextMonthButton: 'Next month'
+          nextMonthButton: 'Next month',
+          datePickerDialog: 'Date picker',
+          selectedLabel: 'Selected'
         }}
         onChange={(_e: any, isoDate?: string) => {
           let messages: any[] = []
@@ -100,7 +100,9 @@ export default function DateTimeInputPage() {
         screenReaderLabels={{
           calendarIcon: 'Open calendar',
           prevMonthButton: 'Previous month',
-          nextMonthButton: 'Next month'
+          nextMonthButton: 'Next month',
+          datePickerDialog: 'Date picker',
+          selectedLabel: 'Selected'
         }}
         invalidDateTimeMessage={(dvalue: string) => `'${dvalue} is not valid.`}
         layout="columns"

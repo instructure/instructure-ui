@@ -25,25 +25,19 @@
 'use client'
 import React from 'react'
 import {
-  Metric as mc,
-  MetricGroup as mcg,
-  Pill as pl,
-  Tag as tg,
-  Text as tx,
-  TimeSelect as ts,
+  Metric,
+  MetricGroup,
+  Pill,
+  Tag,
+  Text,
+  TimeSelect,
+  View,
   IconMessageLine,
   IconClockLine,
   IconEndLine,
   IconCheckLine,
   AccessibleContent
 } from '@instructure/ui/latest'
-
-const Metric = mc as any
-const MetricGroup = mcg as any
-const Pill = pl as any
-const Tag = tg as any
-const TimeSelect = ts as any
-const Text = tx as any
 
 export default function SmallComponentsPage() {
   return (
@@ -78,13 +72,13 @@ export default function SmallComponentsPage() {
         >
           Checked In
         </Pill>
-        <Pill renderIcon={<IconEndLine />} color="danger" margin="x-small">
+        <Pill renderIcon={<IconEndLine />} color="error" margin="x-small">
           Missing
         </Pill>
         <Pill renderIcon={<IconClockLine />} color="warning" margin="x-small">
           Late
         </Pill>
-        <Pill renderIcon={<IconMessageLine />} color="alert" margin="x-small">
+        <Pill renderIcon={<IconMessageLine />} color="info" margin="x-small">
           Notification
         </Pill>
       </div>
@@ -133,7 +127,7 @@ export default function SmallComponentsPage() {
         <Text variant="contentImportant"> contentImportant </Text>
       </div>
       <div>
-        <span style={{ color: '#AA0000' }}>
+        <span style={{ color: '#AA0000', background: '#FFFFFF' }}>
           <Text color="inherit"> inherit </Text>
         </span>
         <Text variant="contentQuote"> contentQuote </Text>
@@ -150,13 +144,28 @@ export default function SmallComponentsPage() {
         <Text color="warning">I&#39;m warning text</Text>
         <Text color="danger">I&#39;m danger text</Text>
         <Text color="ai-highlight">I&#39;m an ai-highlight text</Text>
-        <Text color="primary-inverse">I&#39;m primary-inverse text</Text>
       </div>
-      <div>
-        <Text color="secondary-inverse">I&#39;m secondary-inverse text</Text>
-        <Text color="primary-on">I&#39;m primary-on text</Text>
-        <Text color="secondary-on">I&#39;m secondary-on text</Text>
-      </div>
+      <View
+        as="div"
+        display="inline-block"
+        background="primary-inverse"
+        padding="small"
+      >
+        <div>
+          <Text color="primary-inverse">I&#39;m primary-inverse text</Text>
+        </div>
+        <div>
+          <Text color="secondary-inverse">I&#39;m secondary-inverse text</Text>
+        </div>
+      </View>
+      <View as="div" display="inline-block" background="alert" padding="small">
+        <div>
+          <Text color="primary-on">I&#39;m primary-on text</Text>
+        </div>
+        <div>
+          <Text color="secondary-on">I&#39;m secondary-on text</Text>
+        </div>
+      </View>
       <div>
         <Text size="descriptionPage">descriptionPage</Text>
         <br />

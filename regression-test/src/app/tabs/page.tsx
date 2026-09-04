@@ -24,11 +24,7 @@
 
 'use client'
 import React from 'react'
-import { Tabs as tbs, View as vw, Text as tx } from '@instructure/ui/latest'
-
-const Tabs = tbs as any
-const View = vw as any
-const Text = tx as any
+import { Tabs, View, Text } from '@instructure/ui/latest'
 
 export default function TabsPage() {
   return (
