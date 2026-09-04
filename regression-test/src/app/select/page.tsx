@@ -349,6 +349,37 @@ function MultipleSelectExample({ selected }: { selected: string[] }) {
   )
 }
 
+function MessagesExample() {
+  return (
+    <View display="block">
+      <Select
+        renderLabel="Select with an error message"
+        width="450px"
+        inputValue="Alaska"
+        isShowingOptions={false}
+        messages={[{ type: 'error', text: 'This is an error message' }]}
+        onRequestShowOptions={() => {}}
+        onRequestHideOptions={() => {}}
+        onRequestHighlightOption={() => {}}
+        onRequestSelectOption={() => {}}
+      >
+        <Select.Option id="msg_opt1" key="msg_opt1">
+          Alaska
+        </Select.Option>
+      </Select>
+      <SimpleSelect
+        renderLabel="SimpleSelect with an error message"
+        width="450px"
+        messages={[{ type: 'error', text: 'This is an error message' }]}
+      >
+        <SimpleSelect.Option id="msg_opt2" value="msg_opt2">
+          Alaska
+        </SimpleSelect.Option>
+      </SimpleSelect>
+    </View>
+  )
+}
+
 export default function SelectPage() {
   const basicOptions: OptionT[] = [
     { id: 'opt1', label: 'Alaska' },
@@ -394,6 +425,7 @@ export default function SelectPage() {
           'Colorado'
         ]}
       />
+      <MessagesExample />
     </main>
   )
 }
