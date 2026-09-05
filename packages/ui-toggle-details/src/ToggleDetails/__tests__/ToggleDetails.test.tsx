@@ -172,7 +172,7 @@ describe('<ToggleDetails />', () => {
     )
 
     expect(toggle).toHaveAttribute('aria-expanded', 'true')
-    expect(content).toHaveTextContent('Content')
+    expect(content).toMatchTextContent('Content')
   })
 
   it('should meet a11y standards', async () => {

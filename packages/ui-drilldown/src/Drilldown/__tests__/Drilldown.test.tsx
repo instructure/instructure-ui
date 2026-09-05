@@ -80,7 +80,7 @@ describe('<Drilldown />', () => {
       expect(rootlessOption).not.toBeInTheDocument()
 
       expect(options.length).toBe(1)
-      expect(options[0]).toHaveTextContent('Option-11')
+      expect(options[0]).toMatchTextContent('Option-11')
       expect(options[0]).toHaveAttribute('id', 'option11')
     })
   })
@@ -577,14 +577,14 @@ describe('<Drilldown />', () => {
       const optionsContainer = page.getByTestId('container').element()
       const trigger = page.getByRole('button').element()
 
-      expect(optionsContainer).not.toHaveTextContent('Option 0')
+      expect(optionsContainer).not.toMatchTextContent('Option 0')
 
       await userEvent.click(trigger)
 
       await vi.waitFor(() => {
         const updatedOptionsContainer = page.getByTestId('container').element()
 
-        expect(updatedOptionsContainer).toHaveTextContent('Option 0')
+        expect(updatedOptionsContainer).toMatchTextContent('Option 0')
       })
     })
 
@@ -1507,11 +1507,11 @@ describe('<Drilldown />', () => {
 
       // the option which navigates to next page should be focused
       await navPress('{ArrowDown}', 'opt0')
-      expect(document.activeElement).toHaveTextContent('To Page 1')
+      expect(document.activeElement).toMatchTextContent('To Page 1')
 
       // go to Page 1
       await userEvent.keyboard('{ArrowRight}')
-      await vi.waitFor(() => expect(headerTitle()).toHaveTextContent('Page 1'))
+      await vi.waitFor(() => expect(headerTitle()).toMatchTextContent('Page 1'))
 
       // focus takes a moment to land on the new page's menu
       await focusMenu()
@@ -1519,18 +1519,18 @@ describe('<Drilldown />', () => {
       // on the Page 1 the 1st option is the `Back` button
       await userEvent.keyboard('{ArrowDown}')
       await vi.waitFor(() =>
-        expect(document.activeElement).toHaveTextContent('Back')
+        expect(document.activeElement).toMatchTextContent('Back')
       )
 
       // next arrowDown should skip the header Title and focus on 'To Page 2' option
       await navPress('{ArrowDown}', 'opt5')
-      expect(document.activeElement).toHaveTextContent('To Page 2')
+      expect(document.activeElement).toMatchTextContent('To Page 2')
 
       // go to Page 2
       await userEvent.keyboard('{ArrowRight}')
 
       // on Page 2 the header title should be 'Page 2'
-      await vi.waitFor(() => expect(headerTitle()).toHaveTextContent('Page 2'))
+      await vi.waitFor(() => expect(headerTitle()).toMatchTextContent('Page 2'))
     })
 
     it('should be able to navigate back to previous page with left arrow', async () => {
@@ -1562,7 +1562,7 @@ describe('<Drilldown />', () => {
       await userEvent.keyboard('{ArrowRight}')
 
       // on Page 1 should be visible header title
-      await vi.waitFor(() => expect(headerTitle()).toHaveTextContent('Page 1'))
+      await vi.waitFor(() => expect(headerTitle()).toMatchTextContent('Page 1'))
 
       // focus takes a moment to land on the new page's menu
       await focusMenu()
@@ -1571,7 +1571,7 @@ describe('<Drilldown />', () => {
       await userEvent.keyboard('{ArrowLeft}')
 
       // on Page 0 should be visible header title
-      await vi.waitFor(() => expect(headerTitle()).toHaveTextContent('Page 0'))
+      await vi.waitFor(() => expect(headerTitle()).toMatchTextContent('Page 0'))
     })
 
     it('should close the drilldown on root page and left arrow is pressed', async () => {
@@ -1601,7 +1601,7 @@ describe('<Drilldown />', () => {
         </Drilldown>
       )
       await focusMenu()
-      expect(headerTitle()).toHaveTextContent('Page 0')
+      expect(headerTitle()).toMatchTextContent('Page 0')
 
       // on the root page ArrowLeft can only ever close the drilldown, so it is
       // safe to re-press it until it is gone

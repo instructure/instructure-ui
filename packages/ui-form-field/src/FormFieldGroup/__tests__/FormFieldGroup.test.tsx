@@ -71,7 +71,7 @@ describe('<FormFieldGroup />', () => {
     const lastNameInput = page.getByLabelText('Last:').element()
 
     expect(formFieldGroup).toBeInTheDocument()
-    expect(formFieldGroup).toHaveTextContent('Please enter your full name')
+    expect(formFieldGroup).toMatchTextContent('Please enter your full name')
 
     expect(firstNameInput).toBeInTheDocument()
     expect(middleNameInput).toBeInTheDocument()
@@ -128,7 +128,7 @@ describe('<FormFieldGroup />', () => {
 
     const messagesId = formFieldGroup!.getAttribute('aria-describedby')
 
-    expect(message).toHaveTextContent('Invalid name')
+    expect(message).toMatchTextContent('Invalid name')
     expect(message).toHaveAttribute('id', messagesId)
   })
 
@@ -154,7 +154,7 @@ describe('<FormFieldGroup />', () => {
     )
 
     expect(legend).toBeInTheDocument()
-    expect(legend).toHaveTextContent(description)
+    expect(legend).toMatchTextContent(description)
   })
 
   it('disables children when disabled', async () => {

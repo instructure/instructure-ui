@@ -24,20 +24,20 @@
     "@babel/cli": "^7.27.2",
     "@instructure/command-utils": "workspace:*",
     "@instructure/instructure-design-tokens": "github:instructure/instructure-design-tokens#v1.5.0",
-    "dprint": "^0.55.1",
+    "dprint": "^0.57.1",
     "http-server": "^14.1.1",
-    "inquirer": "^14.0.2",
-    "lerna": "9.0.7",
+    "inquirer": "^14.2.1",
+    "lerna": "10.0.1",
     "lodash.isplainobject": "^4.0.6",
-    "lucide-react": "1.23.0",
+    "lucide-react": "1.41.0",
     "pixelmatch": "^7.2.0",
     "pngjs": "^7.0.0",
     "read-package-up": "^12.0.0",
     "semver": "^7.8.5",
-    "style-dictionary": "5.5.0",
-    "webpack-cli": "^7.1.0",
-    "webpack-dev-server": "5.2.5",
-    "yargs": "^18.0.0"
+    "style-dictionary": "5.5.2",
+    "webpack-cli": "^7.2.3",
+    "webpack-dev-server": "6.0.0",
+    "yargs": "^18.1.0"
   },
   "peerDependencies": {
     "oxlint": "^1.72.0",
@@ -51,9 +51,9 @@
     "@types/lodash.isplainobject": "^4.0.9",
     "@types/pixelmatch": "^5.2.6",
     "@types/pngjs": "^6.0.5",
-    "@types/semver": "^7.7.1",
+    "@types/semver": "^7.8.0",
     "@types/yargs": "^17.0.35",
     "fantasticon": "^4.1.0",
-    "svgo": "^4.0.1"
+    "svgo": "^4.1.0"
   }
 }

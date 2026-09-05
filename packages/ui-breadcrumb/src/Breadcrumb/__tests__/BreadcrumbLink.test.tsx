@@ -109,7 +109,7 @@ describe('<BreadcrumbLink />', () => {
     expect(elementWithHref).toBeNull()
     expect(anchor).toBeNull()
     expect(span).toBeInTheDocument()
-    expect(span).toHaveTextContent(TEST_TEXT_01)
+    expect(span).toMatchTextContent(TEST_TEXT_01)
   })
 
   it('should not render a button when not given an onClick prop', async () => {
@@ -121,7 +121,7 @@ describe('<BreadcrumbLink />', () => {
 
     expect(button).toBeNull()
     expect(span).toBeInTheDocument()
-    expect(span).toHaveTextContent(TEST_TEXT_01)
+    expect(span).toMatchTextContent(TEST_TEXT_01)
   })
 
   it('should meet a11y standards as a link', async () => {

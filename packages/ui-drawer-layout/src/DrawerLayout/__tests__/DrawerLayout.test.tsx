@@ -52,7 +52,7 @@ describe('<DrawerLayout />', () => {
     )
 
     expect(tray).toBeInTheDocument()
-    expect(contentWrapper).toHaveTextContent('Hello from content')
+    expect(contentWrapper).toMatchTextContent('Hello from content')
     expect(contentWrapper).toHaveAttribute('aria-label', 'Test DrawerContent')
   })
 
@@ -130,7 +130,7 @@ describe('<DrawerLayout />', () => {
       </View>
     )
     const { rerender } = await render(<TestComponent />)
-    expect(page.getByText(msg).element()).toBeInTheDocument()
+    expect(page.getByText(msg, { exact: false }).element()).toBeInTheDocument()
     await new Promise((resolve) => requestAnimationFrame(resolve))
     fireEvent.keyUp(document, { keyCode: 27 }) // ESC key
     await vi.waitFor(() => {
@@ -138,7 +138,9 @@ describe('<DrawerLayout />', () => {
     })
     await rerender(<TestComponent />)
     await vi.waitFor(() => {
-      expect(page.getByText(msg).query()).not.toBeInTheDocument()
+      expect(
+        page.getByText(msg, { exact: false }).query()
+      ).not.toBeInTheDocument()
     })
   })
 

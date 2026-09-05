@@ -81,7 +81,7 @@ describe('<ProgressBar />', () => {
     )
     const progress = container.querySelector('[class*="-progressBar"]')
 
-    expect(progress).toHaveTextContent(`${current} of ${max}`)
+    expect(progress).toMatchTextContent(`${current} of ${max}`)
   })
 
   it('should meet a11y standards', async () => {
@@ -111,7 +111,7 @@ describe('<ProgressBar />', () => {
       '[class*="-progressBar__trackValue"]'
     )
 
-    expect(progressMeter).not.toHaveTextContent('33%')
+    expect(progressMeter).not.toMatchTextContent('33%')
   })
 
   it('should render the value inside when the prop is set', async () => {
@@ -129,6 +129,6 @@ describe('<ProgressBar />', () => {
       '[class*="-progressBar__trackValue"]'
     )
 
-    expect(progressMeter).toHaveTextContent('33%')
+    expect(progressMeter).toMatchTextContent('33%')
   })
 })

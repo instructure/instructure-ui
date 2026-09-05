@@ -60,7 +60,7 @@ describe('<Menu />', () => {
       const menu = page.getByRole('menu').element()
 
       expect(menu).toBeInTheDocument()
-      expect(menu).toHaveTextContent('Menu Item Text')
+      expect(menu).toMatchTextContent('Menu Item Text')
       expect(menu).toHaveAttribute('aria-label', 'Menu-label-text')
     })
 
@@ -179,7 +179,7 @@ describe('<Menu />', () => {
         </Menu>
       )
 
-      expect(mountNode).toHaveTextContent('Account')
+      expect(mountNode).toMatchTextContent('Account')
 
       document.body.removeChild(mountNode)
     })

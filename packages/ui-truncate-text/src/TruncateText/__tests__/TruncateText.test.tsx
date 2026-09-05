@@ -269,7 +269,7 @@ describe('<TruncateText />', () => {
 
       await expect
         .element(page.getByTestId('container'))
-        .toHaveTextContent('xsmallsmallmediumlargexlargexxlarge')
+        .toMatchTextContent('xsmallsmallmediumlargexlargexxlarge')
     })
   })
 })

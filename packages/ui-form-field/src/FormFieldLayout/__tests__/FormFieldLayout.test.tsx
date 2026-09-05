@@ -60,7 +60,7 @@ describe('<FormFieldLayout />', () => {
 
     expect(formFieldLayout).toBeInTheDocument()
     expect(formFieldLabel).toBeInTheDocument()
-    expect(formFieldLabel).toHaveTextContent('Username')
+    expect(formFieldLabel).toMatchTextContent('Username')
   })
 
   it('should meet a11y standards', async () => {
@@ -95,7 +95,7 @@ describe('<FormFieldLayout />', () => {
         'span[class$="-formFieldLayout__label"]'
       )!
 
-      expect(label).toHaveTextContent('Username')
+      expect(label).toMatchTextContent('Username')
       expect(window.getComputedStyle(label).textAlign).toBe('end')
     })
 
@@ -110,7 +110,7 @@ describe('<FormFieldLayout />', () => {
         'span[class$="-formFieldLayout__label"]'
       )!
 
-      expect(label).toHaveTextContent('Username')
+      expect(label).toMatchTextContent('Username')
       expect(window.getComputedStyle(label).textAlign).toBe('start')
     })
   })

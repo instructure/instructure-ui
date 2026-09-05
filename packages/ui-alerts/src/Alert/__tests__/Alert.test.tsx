@@ -144,7 +144,7 @@ describe('<Alert />', () => {
     )
 
     await vi.waitFor(() => {
-      expect(liveRegion).toHaveTextContent('Success: Sample alert text.')
+      expect(liveRegion).toMatchTextContent('Success: Sample alert text.')
     })
     expect(liveRegion).toHaveAttribute('aria-live', 'polite')
   })
@@ -164,7 +164,7 @@ describe('<Alert />', () => {
     )
 
     await vi.waitFor(() => {
-      expect(liveRegion).toHaveTextContent('Success: Sample alert text.')
+      expect(liveRegion).toMatchTextContent('Success: Sample alert text.')
     })
     expect(liveRegion).toHaveAttribute('aria-atomic', 'true')
   })
@@ -232,7 +232,7 @@ describe('<Alert />', () => {
       )
 
       await vi.waitFor(() => {
-        expect(liveRegion).toHaveTextContent('Success: Sample alert text.')
+        expect(liveRegion).toMatchTextContent('Success: Sample alert text.')
       })
       expect(liveRegion).toHaveAttribute('aria-atomic', 'true')
     })
@@ -290,7 +290,7 @@ describe('<Alert />', () => {
       )
 
       await vi.waitFor(() => {
-        expect(container).not.toHaveTextContent('Success: Sample alert text.')
+        expect(container).not.toMatchTextContent('Success: Sample alert text.')
         expect(liveRegion.children.length).toBe(0)
       })
     })

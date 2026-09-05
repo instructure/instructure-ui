@@ -62,8 +62,8 @@ describe('<ToggleGroup />', () => {
     )
     const toggleGroup = page.getByTestId('toggle-group').element()
 
-    expect(toggleGroup).toHaveTextContent('This is the summary section')
-    expect(toggleGroup).not.toHaveTextContent('This is the details section')
+    expect(toggleGroup).toMatchTextContent('This is the summary section')
+    expect(toggleGroup).not.toMatchTextContent('This is the details section')
   })
 
   it('should render with children showing with the defaultExpanded prop', async () => {
@@ -82,7 +82,7 @@ describe('<ToggleGroup />', () => {
     const toggle = container.querySelector('button')
 
     expect(toggle).toHaveAttribute('aria-expanded', 'true')
-    expect(toggleGroup).toHaveTextContent('This is the details section')
+    expect(toggleGroup).toMatchTextContent('This is the details section')
   })
 
   it('should have an aria-controls attribute', async () => {
@@ -180,12 +180,12 @@ describe('<ToggleGroup />', () => {
       '[class$="-screenReaderContent"]'
     )
 
-    expect(scrContent).toHaveTextContent('Show content')
+    expect(scrContent).toMatchTextContent('Show content')
 
     await userEvent.click(toggle)
 
     await vi.waitFor(() => {
-      expect(scrContent).toHaveTextContent('Hide content')
+      expect(scrContent).toMatchTextContent('Hide content')
     })
   })
 
@@ -218,13 +218,13 @@ describe('<ToggleGroup />', () => {
     const toggle = container.querySelector('button')!
     let svg = container.querySelector('svg')!
 
-    expect(svg).toHaveTextContent('Icon collapsed')
+    expect(svg).toMatchTextContent('Icon collapsed')
 
     await userEvent.click(toggle)
 
     await vi.waitFor(() => {
       svg = container.querySelector('svg')!
-      expect(svg).toHaveTextContent('Icon expanded')
+      expect(svg).toMatchTextContent('Icon expanded')
     })
   })
 

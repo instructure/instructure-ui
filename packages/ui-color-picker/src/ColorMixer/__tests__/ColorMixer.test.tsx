@@ -111,7 +111,7 @@ describe('<ColorMixer />', () => {
       expect(labelElement.length).toBe(4)
 
       Object.entries(testInputLabels).forEach(([_label, text], index) => {
-        expect(labelElement[index]).toHaveTextContent(text)
+        expect(labelElement[index]).toMatchTextContent(text)
       })
     })
 

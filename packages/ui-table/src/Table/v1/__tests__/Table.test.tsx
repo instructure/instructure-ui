@@ -65,7 +65,7 @@ describe('<Table /> (v1)', () => {
     it('uses the caption verbatim when no column is sorted', async () => {
       const { container } = await renderTable()
 
-      expect(container.querySelector('caption')).toHaveTextContent(/^Movies$/)
+      expect(container.querySelector('caption')?.textContent).toBe('Movies')
       await expect
         .element(page.getByRole('table', { name: 'Movies' }))
         .toBeInTheDocument()
@@ -75,8 +75,8 @@ describe('<Table /> (v1)', () => {
       const { container } = await renderTable()
       const caption = container.querySelector('caption')
 
-      expect(caption).not.toHaveTextContent('Sorted by')
-      expect(caption).not.toHaveTextContent('undefined')
+      expect(caption).not.toMatchTextContent('Sorted by')
+      expect(caption).not.toMatchTextContent('undefined')
     })
 
     it('appends the sort state when a column is sorted', async () => {
@@ -85,7 +85,7 @@ describe('<Table /> (v1)', () => {
         sortDirection: 'ascending'
       })
 
-      expect(container.querySelector('caption')).toHaveTextContent(
+      expect(container.querySelector('caption')).toMatchTextContent(
         'Movies Sorted by Foo (ascending)'
       )
     })

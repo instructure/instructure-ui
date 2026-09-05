@@ -39,7 +39,7 @@ describe('<Grid />', () => {
       </Grid>
     )
 
-    expect(container).toHaveTextContent('FooBarBaz')
+    expect(container).toMatchTextContent('FooBarBaz')
   })
 
   it('should pass aria and role attributes to underlying DOM elements', async () => {

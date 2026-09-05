@@ -69,7 +69,7 @@ describe.skip('<Badge />', () => {
   it('should show the count', async () => {
     const { container } = await renderBadge({ count: 100 })
 
-    expect(container).toHaveTextContent('100')
+    expect(container).toMatchTextContent('100')
   })
 
   it('should truncate the count via countUntil', async () => {
@@ -125,7 +125,7 @@ describe.skip('<Badge />', () => {
     const childBtnElement = container.querySelector('button')
 
     expect(childBtnElement).toBeInTheDocument()
-    expect(container).toHaveTextContent(TEST_STRING)
+    expect(container).toMatchTextContent(TEST_STRING)
   })
 
   it('should call elementRef function', async () => {
@@ -138,7 +138,7 @@ describe.skip('<Badge />', () => {
   it('should show the count when type is count', async () => {
     const { container } = await renderBadge({ count: 100, type: 'count' })
 
-    expect(container).toHaveTextContent('100')
+    expect(container).toMatchTextContent('100')
   })
 
   it('should NOT show the count when type is notification', async () => {
@@ -147,6 +147,6 @@ describe.skip('<Badge />', () => {
       type: 'notification'
     })
 
-    expect(container).not.toHaveTextContent('100')
+    expect(container).not.toMatchTextContent('100')
   })
 })

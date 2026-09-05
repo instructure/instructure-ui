@@ -133,7 +133,7 @@ describe('<TreeBrowser />', () => {
       const items = page.getByRole('treeitem').elements()
 
       expect(items.length).toEqual(1)
-      expect(items[0]).toHaveTextContent('Root Directory')
+      expect(items[0]).toMatchTextContent('Root Directory')
     })
 
     it('should accept an array of default expanded collections', async () => {
@@ -152,10 +152,10 @@ describe('<TreeBrowser />', () => {
       expect(items.length).toEqual(5)
 
       expect(subRoot2).toHaveAttribute('aria-label', 'Sub Root 2')
-      expect(subRoot2).toHaveTextContent('Sub Root 2')
+      expect(subRoot2).toMatchTextContent('Sub Root 2')
 
       expect(nestedSub).toHaveAttribute('aria-label', 'Nested Sub Collection')
-      expect(nestedSub).toHaveTextContent('Nested Sub Collection')
+      expect(nestedSub).toMatchTextContent('Nested Sub Collection')
     })
   })
 
@@ -294,7 +294,7 @@ describe('<TreeBrowser />', () => {
 
       expect(iconCustom).toBeInTheDocument()
       expect(title).toBeInTheDocument()
-      expect(title).toHaveTextContent('Custom icon')
+      expect(title).toMatchTextContent('Custom icon')
     })
 
     it('should render without icon if set to null', async () => {
@@ -425,7 +425,7 @@ describe('<TreeBrowser />', () => {
 
       expect(iconCustom).toBeInTheDocument()
       expect(title).toBeInTheDocument()
-      expect(title).toHaveTextContent('Custom icon')
+      expect(title).toMatchTextContent('Custom icon')
     })
 
     it('should render without icon if set to null', async () => {

@@ -45,7 +45,7 @@ describe('<DrawerTray />', () => {
     const drawerTray = page.getByLabelText('DrawerTray Example').element()
 
     expect(drawerTray).toBeInTheDocument()
-    expect(drawerTray).toHaveTextContent('Hello from layout tray')
+    expect(drawerTray).toMatchTextContent('Hello from layout tray')
   })
 
   it('should call the contentRef', async () => {
@@ -164,7 +164,7 @@ describe('<DrawerTray />', () => {
         />
       )
 
-      expect(trayContent()).toHaveTextContent('Hello from layout tray')
+      expect(trayContent()).toMatchTextContent('Hello from layout tray')
     })
 
     it('should not render tray content when closed', async () => {

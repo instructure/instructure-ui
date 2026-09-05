@@ -92,7 +92,7 @@ describe('<InPlaceEdit />', () => {
 
     expect(viewModeText).toBeInTheDocument()
     expect(editButton).toBeInTheDocument()
-    expect(editButton).toHaveTextContent(EDIT_BUTTON_TEXT)
+    expect(editButton).toMatchTextContent(EDIT_BUTTON_TEXT)
   })
 
   it('should render view mode with string button label', async () => {
@@ -114,7 +114,7 @@ describe('<InPlaceEdit />', () => {
     expect(viewModeText).toBeInTheDocument()
     expect(editButton).toBeInTheDocument()
     expect(editButton).toContainElement(buttonLabel!)
-    expect(buttonLabel).toHaveTextContent(EDIT_BUTTON_TEXT)
+    expect(buttonLabel).toMatchTextContent(EDIT_BUTTON_TEXT)
   })
 
   it('should render edit mode', async () => {
@@ -151,7 +151,7 @@ describe('<InPlaceEdit />', () => {
 
     expect(viewModeText).toBeInTheDocument()
     expect(customEditButton).toBeInTheDocument()
-    expect(customEditButton).toHaveTextContent(customButtonText)
+    expect(customEditButton).toMatchTextContent(customButtonText)
   })
 
   it('should switch mode to edit via props, and focus the editor', async () => {
@@ -179,7 +179,7 @@ describe('<InPlaceEdit />', () => {
     )
     const inputForEdit = page.getByTestId('input-editor').element()
 
-    expect(container).not.toHaveTextContent(VIEWER_TEXT)
+    expect(container).not.toMatchTextContent(VIEWER_TEXT)
     expect(inputForEdit).toBeInTheDocument()
     expect(document.activeElement).toBe(inputForEdit)
   })
@@ -196,7 +196,7 @@ describe('<InPlaceEdit />', () => {
     )
     const inputForEdit = page.getByTestId('input-editor').element()
 
-    expect(container).not.toHaveTextContent(VIEWER_TEXT)
+    expect(container).not.toMatchTextContent(VIEWER_TEXT)
     expect(inputForEdit).toBeInTheDocument()
 
     // Simulate mode prop change
@@ -214,10 +214,10 @@ describe('<InPlaceEdit />', () => {
     )
     const editButton = page.getByRole('button').element()
 
-    expect(container).toHaveTextContent(VIEWER_TEXT)
+    expect(container).toMatchTextContent(VIEWER_TEXT)
     expect(inputForEditAfterModeChange).not.toBeInTheDocument()
     expect(editButton).toBeInTheDocument()
-    expect(editButton).toHaveTextContent(EDIT_BUTTON_TEXT)
+    expect(editButton).toMatchTextContent(EDIT_BUTTON_TEXT)
     expect(document.activeElement).toBe(editButton)
   })
 

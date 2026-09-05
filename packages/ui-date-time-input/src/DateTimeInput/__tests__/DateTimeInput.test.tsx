@@ -218,7 +218,7 @@ describe('<DateTimeInput />', () => {
     fireEvent.focusOut(timeInput)
 
     await vi.waitFor(() => {
-      expect(container).toHaveTextContent('whoops')
+      expect(container).toMatchTextContent('whoops')
       expect(invalidDateTimeMessage).toHaveBeenCalled()
     })
   })
@@ -319,7 +319,7 @@ describe('<DateTimeInput />', () => {
     fireEvent.focusOut(timeInput)
 
     await vi.waitFor(() => {
-      expect(container).toHaveTextContent('Thursday, January 18, 2018 5:00 PM')
+      expect(container).toMatchTextContent('Thursday, January 18, 2018 5:00 PM')
     })
   })
 
@@ -347,7 +347,7 @@ describe('<DateTimeInput />', () => {
       />
     )
 
-    expect(container).toHaveTextContent('Monday, May 1, 2017 1:30 PM')
+    expect(container).toMatchTextContent('Monday, May 1, 2017 1:30 PM')
   })
 
   it('should show the formatted date-time message in the proper locale', async () => {
@@ -373,7 +373,7 @@ describe('<DateTimeInput />', () => {
         defaultValue={defaultValue.toISOString()}
       />
     )
-    expect(container).toHaveTextContent('1 mai 2017 13:30')
+    expect(container).toMatchTextContent('1 mai 2017 13:30')
   })
 
   it('should provide the html elements for date and time input', async () => {
@@ -435,10 +435,10 @@ describe('<DateTimeInput />', () => {
     }
 
     const { container, rerender } = await render(<DateTimeInput {...props} />)
-    expect(container).toHaveTextContent('May 1, 2017 1:30 PM')
+    expect(container).toMatchTextContent('May 1, 2017 1:30 PM')
 
     await rerender(<DateTimeInput {...props} value="2018-03-29T16:30Z" />)
-    expect(container).toHaveTextContent('March 29, 2018 12:30 PM')
+    expect(container).toMatchTextContent('March 29, 2018 12:30 PM')
   })
 
   it('should update message when locale changed', async () => {
@@ -466,10 +466,10 @@ describe('<DateTimeInput />', () => {
     }
 
     const { container, rerender } = await render(<DateTimeInput {...props} />)
-    expect(container).toHaveTextContent('May 1, 2017 1:30 PM')
+    expect(container).toMatchTextContent('May 1, 2017 1:30 PM')
 
     await rerender(<DateTimeInput {...props} locale="fr" />)
-    expect(container).toHaveTextContent('1 mai 2017 13:30')
+    expect(container).toMatchTextContent('1 mai 2017 13:30')
   })
 
   it('should update message when timezone changed', async () => {
@@ -496,10 +496,10 @@ describe('<DateTimeInput />', () => {
     }
 
     const { container, rerender } = await render(<DateTimeInput {...props} />)
-    expect(container).toHaveTextContent('May 1, 2017 1:30 PM')
+    expect(container).toMatchTextContent('May 1, 2017 1:30 PM')
 
     await rerender(<DateTimeInput {...props} timezone="Europe/Paris" />)
-    expect(container).toHaveTextContent('May 1, 2017 7:30 PM')
+    expect(container).toMatchTextContent('May 1, 2017 7:30 PM')
   })
 
   it('should show error message if initial value is invalid', async () => {
@@ -523,7 +523,7 @@ describe('<DateTimeInput />', () => {
     fireEvent.focusOut(dateInput)
 
     await vi.waitFor(() => {
-      expect(container).toHaveTextContent('whoops')
+      expect(container).toMatchTextContent('whoops')
     })
   })
 
@@ -548,7 +548,7 @@ describe('<DateTimeInput />', () => {
     fireEvent.focusOut(dateInput)
 
     await vi.waitFor(() => {
-      expect(container).toHaveTextContent('whoops')
+      expect(container).toMatchTextContent('whoops')
     })
   })
 
@@ -573,14 +573,14 @@ describe('<DateTimeInput />', () => {
       value: dateTime.toISOString()
     }
     const { container, rerender } = await render(<DateTimeInput {...props} />)
-    expect(container).toHaveTextContent('May 1, 2017 1:30 PM')
+    expect(container).toMatchTextContent('May 1, 2017 1:30 PM')
 
     await rerender(<DateTimeInput {...props} value="A very invalid date" />)
     const dateInput = page.getByLabelText('date-input').element()
     fireEvent.focusOut(dateInput)
 
     await vi.waitFor(() => {
-      expect(container).toHaveTextContent('whoops')
+      expect(container).toMatchTextContent('whoops')
     })
   })
 
@@ -605,7 +605,7 @@ describe('<DateTimeInput />', () => {
       value: dateTime.toISOString()
     }
     const { container, rerender } = await render(<DateTimeInput {...props} />)
-    expect(container).toHaveTextContent('May 1, 2017 1:30 PM')
+    expect(container).toMatchTextContent('May 1, 2017 1:30 PM')
 
     await rerender(
       <DateTimeInput
@@ -617,8 +617,8 @@ describe('<DateTimeInput />', () => {
     fireEvent.focusOut(dateInput)
 
     await vi.waitFor(() => {
-      expect(container).toHaveTextContent('May 1, 2017 1:30 PM')
-      expect(container).toHaveTextContent('message_text')
+      expect(container).toMatchTextContent('May 1, 2017 1:30 PM')
+      expect(container).toMatchTextContent('message_text')
     })
   })
 
@@ -645,7 +645,7 @@ describe('<DateTimeInput />', () => {
     const { container, rerender } = await render(
       <DateTimeInput {...props} showMessages={false} />
     )
-    expect(container).not.toHaveTextContent('2017')
+    expect(container).not.toMatchTextContent('2017')
 
     await rerender(
       <DateTimeInput
@@ -659,8 +659,8 @@ describe('<DateTimeInput />', () => {
     fireEvent.focusOut(dateInput)
 
     await vi.waitFor(() => {
-      expect(container).not.toHaveTextContent('2017')
-      expect(container).toHaveTextContent('message_text')
+      expect(container).not.toMatchTextContent('2017')
+      expect(container).toMatchTextContent('message_text')
     })
 
     await rerender(
@@ -674,8 +674,8 @@ describe('<DateTimeInput />', () => {
     fireEvent.focusOut(page.getByLabelText('date-input').element())
 
     await vi.waitFor(() => {
-      expect(container).toHaveTextContent('2017')
-      expect(container).toHaveTextContent('message_text')
+      expect(container).toMatchTextContent('2017')
+      expect(container).toMatchTextContent('message_text')
     })
   })
 
@@ -703,7 +703,7 @@ describe('<DateTimeInput />', () => {
       </ApplyLocale>
     )
 
-    expect(container).toHaveTextContent('lundi 1 mai 2017 20:30')
+    expect(container).toMatchTextContent('lundi 1 mai 2017 20:30')
   })
 
   it('should format date according to dateFormat', async () => {
@@ -777,13 +777,13 @@ describe('<DateTimeInput />', () => {
     }
 
     const { container, rerender } = await render(<DateTimeInput {...props} />)
-    expect(container).toHaveTextContent('Monday, May 1, 2017 1:30 PM')
+    expect(container).toMatchTextContent('Monday, May 1, 2017 1:30 PM')
 
     await rerender(<DateTimeInput {...props} messageFormat="l, LT" />)
     fireEvent.focusOut(page.getByLabelText('date-input').element())
 
     await vi.waitFor(() => {
-      expect(container).toHaveTextContent('5/1/2017, 1:30 PM')
+      expect(container).toMatchTextContent('5/1/2017, 1:30 PM')
     })
   })
 
@@ -808,7 +808,7 @@ describe('<DateTimeInput />', () => {
       value: dateTime.toISOString()
     }
     const { container, rerender } = await render(<DateTimeInput {...props} />)
-    expect(container).toHaveTextContent('May 1, 2017 1:30 PM')
+    expect(container).toMatchTextContent('May 1, 2017 1:30 PM')
 
     const newDateStr = '2022-03-29T19:00Z'
 
@@ -923,7 +923,7 @@ describe('<DateTimeInput />', () => {
     const timeInput = page.getByLabelText('time-input').element()
 
     expect(timeInput).toHaveValue('1:30 PM')
-    expect(container).toHaveTextContent('Thursday, January 18, 2018 1:30 PM')
+    expect(container).toMatchTextContent('Thursday, January 18, 2018 1:30 PM')
   })
 
   it('should parse ISO format date typed into the date input', async () => {
@@ -1283,10 +1283,10 @@ describe('<DateTimeInput />', () => {
           onChange={onChange}
         />
       )
-      expect(container).toHaveTextContent('date time description')
-      expect(container).toHaveTextContent('date-input label')
-      expect(container).toHaveTextContent('time-input label')
-      expect(container).toHaveTextContent('Thursday, January 18, 2018 1:30 PM')
+      expect(container).toMatchTextContent('date time description')
+      expect(container).toMatchTextContent('date-input label')
+      expect(container).toMatchTextContent('time-input label')
+      expect(container).toMatchTextContent('Thursday, January 18, 2018 1:30 PM')
 
       const dateInput = dateInputElement()
       const timeInput = timeInputElement()
@@ -1389,13 +1389,13 @@ describe('<DateTimeInput />', () => {
       )
       const dateInput = dateInputElement()
 
-      expect(container).toHaveTextContent(errorMsg)
+      expect(container).toMatchTextContent(errorMsg)
 
       await userEvent.fill(dateInput, '05/18/2017')
       dateInput.blur()
 
       await vi.waitFor(() => {
-        expect(container).not.toHaveTextContent(errorMsg)
+        expect(container).not.toMatchTextContent(errorMsg)
       })
     })
 
@@ -1431,13 +1431,13 @@ describe('<DateTimeInput />', () => {
       )
       const dateInput = dateInputElement()
 
-      expect(container).toHaveTextContent(errorMsgText)
+      expect(container).toMatchTextContent(errorMsgText)
 
       await userEvent.fill(dateInput, 'May 18, 2022')
       dateInput.blur()
 
       await vi.waitFor(() => {
-        expect(container).not.toHaveTextContent(errorMsgText)
+        expect(container).not.toMatchTextContent(errorMsgText)
       })
     })
 
@@ -1471,7 +1471,7 @@ describe('<DateTimeInput />', () => {
 
       expect(dateInput).toHaveValue('5/1/2017')
       expect(timeInput).toHaveValue('1:30 PM')
-      expect(container).toHaveTextContent('May 1, 2017 1:30 PM')
+      expect(container).toMatchTextContent('May 1, 2017 1:30 PM')
 
       // 1. clear programmatically
       await rerender(<DateTimeInput {...props} value={undefined} />)
@@ -1479,7 +1479,7 @@ describe('<DateTimeInput />', () => {
       await vi.waitFor(() => {
         expect(dateInput).toHaveValue('')
         expect(timeInput).toHaveValue('')
-        expect(container).not.toHaveTextContent('May 1, 2017 1:30 PM')
+        expect(container).not.toMatchTextContent('May 1, 2017 1:30 PM')
       })
 
       // 2. clear via keyboard input
@@ -1489,7 +1489,7 @@ describe('<DateTimeInput />', () => {
       await vi.waitFor(() => {
         expect(dateInput).toHaveValue('3/29/2022')
         expect(timeInput).toHaveValue('3:00 PM')
-        expect(container).toHaveTextContent('March 29, 2022 3:00 PM')
+        expect(container).toMatchTextContent('March 29, 2022 3:00 PM')
       })
 
       await userEvent.clear(dateInput)
@@ -1498,8 +1498,8 @@ describe('<DateTimeInput />', () => {
       await vi.waitFor(() => {
         expect(dateInput).toHaveValue('')
         expect(timeInput).toHaveValue('')
-        expect(container).not.toHaveTextContent('March 29, 2022 3:00 PM')
-        expect(container).not.toHaveTextContent(invalidDateTimeMessage)
+        expect(container).not.toMatchTextContent('March 29, 2022 3:00 PM')
+        expect(container).not.toMatchTextContent(invalidDateTimeMessage)
       })
     })
 

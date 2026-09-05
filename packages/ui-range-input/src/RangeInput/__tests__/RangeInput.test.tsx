@@ -45,7 +45,7 @@ describe('<RangeInput />', () => {
     const input = container.querySelector('[class$="-rangeInput__input"]')
 
     expect(label).toBeInTheDocument()
-    expect(label).toHaveTextContent('Opacity')
+    expect(label).toMatchTextContent('Opacity')
 
     expect(input).toBeInTheDocument()
     expect(input!.tagName).toBe('INPUT')
@@ -65,7 +65,7 @@ describe('<RangeInput />', () => {
     )
     const output = container.querySelector('[class$="-rangeInput__value"]')
 
-    expect(output).toHaveTextContent('42')
+    expect(output).toMatchTextContent('42')
   })
 
   it('sets input value to default value', async () => {
@@ -178,7 +178,7 @@ describe('<RangeInput />', () => {
     )
     const output = container.querySelector('[class$="-rangeInput__value"]')
 
-    expect(output).toHaveTextContent('45%')
+    expect(output).toMatchTextContent('45%')
   })
 
   it('hides the value when displayValue is false', async () => {
@@ -226,15 +226,15 @@ describe('<RangeInput />', () => {
 
       const describedById = input.getAttribute('aria-describedby')
       expect(describedById).toBeTruthy()
-      expect(document.getElementById(describedById!)).toHaveTextContent(
+      expect(document.getElementById(describedById!)).toMatchTextContent(
         'some error message'
       )
 
       const labelledById = input.getAttribute('aria-labelledby')
       expect(labelledById).toBeTruthy()
       const labelEl = document.getElementById(labelledById!)
-      expect(labelEl).toHaveTextContent('Opacity')
-      expect(labelEl).not.toHaveTextContent('some error message')
+      expect(labelEl).toMatchTextContent('Opacity')
+      expect(labelEl).not.toMatchTextContent('some error message')
     })
 
     it('does not override the accessible name with aria-labelledby when there are no messages', async () => {
@@ -263,7 +263,7 @@ describe('<RangeInput />', () => {
       const output = container.querySelector('[class$="-rangeInput__value"]')
 
       expect(input).toHaveAttribute('aria-valuetext', '40%')
-      expect(output).toHaveTextContent('40%')
+      expect(output).toMatchTextContent('40%')
     })
   })
 
@@ -295,7 +295,7 @@ describe('<RangeInput />', () => {
 
       await vi.waitFor(() => {
         const output = container.querySelector('[class$="-rangeInput__value"]')
-        expect(output).toHaveTextContent('30')
+        expect(output).toMatchTextContent('30')
       })
     })
 
@@ -386,7 +386,7 @@ describe('<RangeInput />', () => {
       )
       const messages = container.querySelector('[class$="-formFieldMessages"]')
 
-      expect(messages).toHaveTextContent(message)
+      expect(messages).toMatchTextContent(message)
     })
   })
 

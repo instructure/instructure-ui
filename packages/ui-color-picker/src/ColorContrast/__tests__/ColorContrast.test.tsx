@@ -71,7 +71,7 @@ describe('<ColorContrast />', () => {
           <ColorContrast {...testColors} {...testLabels} />
         )
 
-        expect(container).toHaveTextContent(text)
+        expect(container).toMatchTextContent(text)
       })
     })
   })
@@ -147,7 +147,7 @@ describe('<ColorContrast />', () => {
       )
       const contrastResult = contrast(color1, color2, 2)
 
-      expect(container).toHaveTextContent(contrastResult + ':1')
+      expect(container).toMatchTextContent(contrastResult + ':1')
     })
 
     it('on transparent colors', async () => {
@@ -164,7 +164,7 @@ describe('<ColorContrast />', () => {
 
       // this is the result of a complicated "blended color" calculation
       // in the component, not simple `contrast()` check
-      expect(container).toHaveTextContent('2:1')
+      expect(container).toMatchTextContent('2:1')
     })
   })
 
@@ -213,7 +213,7 @@ describe('<ColorContrast />', () => {
             />
           )
 
-          expect(container).toHaveTextContent(expectedResult.normal)
+          expect(container).toMatchTextContent(expectedResult.normal)
         })
 
         it(`large text should ${expectedResult.large.toLowerCase()}`, async () => {
@@ -225,7 +225,7 @@ describe('<ColorContrast />', () => {
             />
           )
 
-          expect(container).toHaveTextContent(expectedResult.large)
+          expect(container).toMatchTextContent(expectedResult.large)
         })
 
         it(`graphics should ${expectedResult.graphics.toLowerCase()}`, async () => {
@@ -236,7 +236,7 @@ describe('<ColorContrast />', () => {
               secondColor={secondColor}
             />
           )
-          expect(container).toHaveTextContent(expectedResult.graphics)
+          expect(container).toMatchTextContent(expectedResult.graphics)
         })
       })
     }

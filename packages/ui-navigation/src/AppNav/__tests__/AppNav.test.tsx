@@ -128,7 +128,7 @@ describe('<AppNav />', () => {
       )
       const button = page.getByRole('button').element()
 
-      expect(button).toHaveTextContent('I am rendered after!')
+      expect(button).toMatchTextContent('I am rendered after!')
     })
   })
 
@@ -152,7 +152,7 @@ describe('<AppNav />', () => {
       const items = page.getByRole('listitem').elements()
 
       expect(items.length).toBe(3)
-      expect(items[2]).toHaveTextContent('I am sooo custom!')
+      expect(items[2]).toMatchTextContent('I am sooo custom!')
     })
   })
 

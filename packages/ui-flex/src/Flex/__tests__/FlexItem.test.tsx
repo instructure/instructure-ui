@@ -35,7 +35,7 @@ describe('<Item />', () => {
     const item = container.querySelector('[class*="-flexItem"]')
 
     expect(item).toBeInTheDocument()
-    expect(item).toHaveTextContent('Flex item 1')
+    expect(item).toMatchTextContent('Flex item 1')
   })
 
   it('should support an elementRef prop', async () => {
@@ -68,7 +68,7 @@ describe('<Item />', () => {
     it('should not apply `order` CSS when prop is undefined', async () => {
       await render(<Item>Item without order</Item>)
       const item = page.getByText('Item without order').element()
-      expect(item).not.toHaveStyle({ order: expect.anything() })
+      expect(getComputedStyle(item).order).toBe('0')
     })
   })
 

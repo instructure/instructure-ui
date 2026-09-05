@@ -33,7 +33,7 @@ describe('<GridCol />', () => {
       <GridCol elementRef={elementRef}>Foo</GridCol>
     )
 
-    expect(container).toHaveTextContent('Foo')
+    expect(container).toMatchTextContent('Foo')
     expect(elementRef).toHaveBeenCalledWith(container.firstChild)
   })
 })

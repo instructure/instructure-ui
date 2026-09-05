@@ -135,7 +135,7 @@ describe('<PaginationPageInput />', () => {
     )
     const label = container.querySelector('label')
 
-    expect(label).toHaveTextContent('Select page (4 of 10)')
+    expect(label).toMatchTextContent('Select page (4 of 10)')
   })
 
   it('should display the number of pages in the label', async () => {
@@ -151,7 +151,7 @@ describe('<PaginationPageInput />', () => {
     )
     const label = container.querySelector('label')
 
-    expect(label).toHaveTextContent('of 10')
+    expect(label).toMatchTextContent('of 10')
   })
 
   describe('Component tests', () => {
@@ -193,7 +193,7 @@ describe('<PaginationPageInput />', () => {
       expect(input.value).toBe('')
     })
 
-    it("shouldn't call onChange on input typing ", async () => {
+    it("shouldn't call onChange on input typing", async () => {
       const onChange = vi.fn()
       const { container } = await renderPagination(onChange)
       const input = container.querySelector('input')!
@@ -204,7 +204,7 @@ describe('<PaginationPageInput />', () => {
       expect(onChange).not.toHaveBeenCalled()
     })
 
-    it('should keep the number in the input, on input and Enter ', async () => {
+    it('should keep the number in the input, on input and Enter', async () => {
       const { container } = await renderPagination()
       const input = container.querySelector('input')!
 

@@ -33,7 +33,7 @@ describe('<ListItem />', () => {
     await render(<ListItem>hello</ListItem>)
     const listItem = page.getByRole('listitem').element()
 
-    expect(listItem).toHaveTextContent('hello')
+    expect(listItem).toMatchTextContent('hello')
   })
 
   it('should call elementRef', async () => {

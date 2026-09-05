@@ -720,7 +720,7 @@ describe('<Modal />', () => {
       await userEvent.click(page.getByText('Increment Button'))
 
       await expect.element(page.getByText('Modal body text')).toBeVisible()
-      expect(document.querySelector('#value-indicator')).toHaveTextContent('1')
+      expect(document.querySelector('#value-indicator')).toMatchTextContent('1')
       expect(handleDismiss).not.toHaveBeenCalled()
 
       // click outside of the modal content
