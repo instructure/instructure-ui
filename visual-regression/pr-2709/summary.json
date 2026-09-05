@@ -1,8 +1,8 @@
 {
   "summary": {
     "total": 96,
-    "unchanged": 93,
-    "changed": 3,
+    "unchanged": 96,
+    "changed": 0,
     "added": 0,
     "removed": 0,
     "a11yPages": 0,
@@ -47,8 +47,8 @@
     },
     {
       "name": "badge-canvas.png",
-      "status": "changed",
-      "numDiff": 1573,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
@@ -539,14 +539,14 @@
     },
     {
       "name": "tooltip-dark.png",
-      "status": "changed",
-      "numDiff": 881,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "tooltip-light.png",
-      "status": "changed",
-      "numDiff": 956,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
