@@ -441,12 +441,12 @@ describe('<Popover />', () => {
 
       await userEvent.click(page.getByText('Sign In'))
       await vi.waitFor(() => {
-        expect(main).toHaveTextContent('Log In')
+        expect(main).toMatchTextContent('Log In')
       })
 
       await userEvent.click(page.getByText('Sign In'))
       await vi.waitFor(() => {
-        expect(main).not.toHaveTextContent('Log In')
+        expect(main).not.toMatchTextContent('Log In')
       })
     })
 

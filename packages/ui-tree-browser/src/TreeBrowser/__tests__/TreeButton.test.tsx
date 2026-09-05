@@ -70,7 +70,7 @@ describe('<TreeButton />', () => {
       )
 
       expect(descriptor).toBeInTheDocument()
-      expect(descriptor).toHaveTextContent('Some Descriptor')
+      expect(descriptor).toMatchTextContent('Some Descriptor')
     })
   })
 
@@ -90,7 +90,7 @@ describe('<TreeButton />', () => {
       const iconTitle = page.getByTestId('custom-icon-title').element()
 
       expect(icon).toBeInTheDocument()
-      expect(icon).toHaveTextContent('Test icon')
+      expect(icon).toMatchTextContent('Test icon')
       expect(iconTitle).toBeInTheDocument()
     })
 
@@ -99,7 +99,7 @@ describe('<TreeButton />', () => {
       const icon = page.getByTestId('custom-icon').element()
 
       expect(icon).toBeInTheDocument()
-      expect(icon).toHaveTextContent('Test icon')
+      expect(icon).toMatchTextContent('Test icon')
     })
 
     it('should render no icon if no icon prop passed', async () => {

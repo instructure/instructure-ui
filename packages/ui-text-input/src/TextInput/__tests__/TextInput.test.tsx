@@ -46,7 +46,7 @@ describe('<TextInput/>', () => {
   it('should include a label', async () => {
     const { container } = await render(<TextInput renderLabel="Name" />)
     const label = container.querySelector('label')
-    expect(label).toHaveTextContent('Name')
+    expect(label).toMatchTextContent('Name')
   })
 
   it('should focus the input when focus is called', async () => {
@@ -196,7 +196,7 @@ describe('<TextInput/>', () => {
       // messages are referenced as the input's description
       const describedById = input.getAttribute('aria-describedby')
       expect(describedById).toBeTruthy()
-      expect(document.getElementById(describedById!)).toHaveTextContent(
+      expect(document.getElementById(describedById!)).toMatchTextContent(
         'some error message'
       )
 
@@ -204,8 +204,8 @@ describe('<TextInput/>', () => {
       const labelledById = input.getAttribute('aria-labelledby')
       expect(labelledById).toBeTruthy()
       const labelEl = document.getElementById(labelledById!)
-      expect(labelEl).toHaveTextContent('Name')
-      expect(labelEl).not.toHaveTextContent('some error message')
+      expect(labelEl).toMatchTextContent('Name')
+      expect(labelEl).not.toMatchTextContent('some error message')
     })
 
     it('does not override the accessible name with aria-labelledby when there are no messages', async () => {
@@ -243,7 +243,7 @@ describe('<TextInput/>', () => {
       )
 
       expect(beforeElement).toBeInTheDocument()
-      expect(beforeElement).toHaveTextContent('Content before')
+      expect(beforeElement).toMatchTextContent('Content before')
 
       await rerender(
         <TextInput
@@ -256,8 +256,8 @@ describe('<TextInput/>', () => {
       const titles = container.querySelectorAll('svg title')
 
       expect(container.querySelectorAll('svg')).toHaveLength(2)
-      expect(titles[0]).toHaveTextContent('Content before')
-      expect(titles[1]).toHaveTextContent('Content after')
+      expect(titles[0]).toMatchTextContent('Content before')
+      expect(titles[1]).toMatchTextContent('Content after')
     })
 
     // Providing a renderBeforeInput/renderAfterInput slot applies the horizontal
@@ -334,7 +334,7 @@ describe('<TextInput/>', () => {
         expect(input).toHaveValue('a')
         expect(
           container.querySelector('[class*="textInput__afterElement"]')
-        ).toHaveTextContent('Hello!')
+        ).toMatchTextContent('Hello!')
       })
       expect(input).toHaveFocus()
 

@@ -57,9 +57,9 @@ describe('<Position />', () => {
     const content = page.getByTestId('content').element()
 
     expect(target).toBeInTheDocument()
-    expect(target).toHaveTextContent('Target')
+    expect(target).toMatchTextContent('Target')
     expect(content).toBeInTheDocument()
-    expect(content).toHaveTextContent('Content')
+    expect(content).toMatchTextContent('Content')
   })
 
   it('should absolutely position content', async () => {

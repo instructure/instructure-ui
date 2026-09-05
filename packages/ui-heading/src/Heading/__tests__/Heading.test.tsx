@@ -40,7 +40,7 @@ describe('<Heading />', () => {
     const { container } = await render(<Heading>Hello World</Heading>)
     const heading = container.querySelector('[class*="-heading"]')
 
-    expect(heading).toHaveTextContent('Hello World')
+    expect(heading).toMatchTextContent('Hello World')
   })
 
   it('should render as a SPAN if level is `reset`', async () => {

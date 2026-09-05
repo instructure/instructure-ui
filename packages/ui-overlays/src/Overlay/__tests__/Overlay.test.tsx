@@ -44,7 +44,7 @@ describe('<Overlay />', () => {
     )
     const overlay = page.getByRole('dialog').element()
 
-    expect(overlay).toHaveTextContent('Hello World')
+    expect(overlay).toMatchTextContent('Hello World')
   })
 
   it('should fire transition callback props', async () => {

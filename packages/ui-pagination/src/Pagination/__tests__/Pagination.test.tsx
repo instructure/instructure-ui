@@ -68,7 +68,7 @@ describe('<Pagination />', () => {
     const pagination = page.getByRole('navigation').element()
 
     expect(buttons.length).toEqual(5)
-    expect(pagination).toHaveTextContent('#0#1#2#3#4')
+    expect(pagination).toMatchTextContent('#0#1#2#3#4')
   })
 
   describe('with 5 or less pages', () => {
@@ -185,7 +185,7 @@ describe('<Pagination />', () => {
     const pagination = page.getByRole('navigation').element()
 
     expect(buttons.length).toEqual(5)
-    expect(pagination).toHaveTextContent('#0#1#2#3#4')
+    expect(pagination).toMatchTextContent('#0#1#2#3#4')
   })
 
   it('should render a single page button', async () => {
@@ -198,7 +198,7 @@ describe('<Pagination />', () => {
     const pagination = page.getByRole('navigation').element()
 
     expect(buttons.length).toEqual(1)
-    expect(pagination).toHaveTextContent('#0')
+    expect(pagination).toMatchTextContent('#0')
   })
 
   it('should render nothing if there are no pages', async () => {
@@ -226,7 +226,7 @@ describe('<Pagination />', () => {
     const ellipses = document.querySelectorAll('li[aria-hidden="true"]')
 
     expect(pagination).toBeInTheDocument()
-    expect(pagination).toHaveTextContent('Prev#0…#2#3#4#5#6…#8Next')
+    expect(pagination).toMatchTextContent('Prev#0…#2#3#4#5#6…#8Next')
 
     expect(allButtons.length).toEqual(9)
     expect(paginationButtons.length).toEqual(7)
@@ -251,7 +251,7 @@ describe('<Pagination />', () => {
     const ellipses = document.querySelectorAll('li[aria-hidden="true"]')
 
     expect(pagination).toBeInTheDocument()
-    expect(pagination).toHaveTextContent('Prev#0…#5#6#7#8')
+    expect(pagination).toMatchTextContent('Prev#0…#5#6#7#8')
 
     expect(allButtons.length).toEqual(6)
     expect(paginationButtons.length).toEqual(5)
@@ -276,7 +276,7 @@ describe('<Pagination />', () => {
     const ellipses = document.querySelectorAll('li[aria-hidden="true"]')
 
     expect(pagination).toBeInTheDocument()
-    expect(pagination).toHaveTextContent('#0#1#2#3…#5Next')
+    expect(pagination).toMatchTextContent('#0#1#2#3…#5Next')
 
     expect(allButtons.length).toEqual(6)
     expect(paginationButtons.length).toEqual(5)
@@ -301,7 +301,7 @@ describe('<Pagination />', () => {
     const ellipses = document.querySelectorAll('li[aria-hidden="true"]')
 
     expect(pagination).toBeInTheDocument()
-    expect(pagination).toHaveTextContent('Prev#0#1#2#3#4#5#6Next')
+    expect(pagination).toMatchTextContent('Prev#0#1#2#3#4#5#6Next')
 
     expect(allButtons.length).toEqual(9)
     expect(paginationButtons.length).toEqual(7)
@@ -938,7 +938,7 @@ describe('<Pagination />', () => {
         </Pagination>
       )
 
-      expect(container).toHaveTextContent('custom-input-label: 6')
+      expect(container).toMatchTextContent('custom-input-label: 6')
     })
 
     it('should pass ScreenReaderLabel', async () => {
@@ -957,7 +957,7 @@ describe('<Pagination />', () => {
         </Pagination>
       )
 
-      expect(container).toHaveTextContent('number: 6, current: 3')
+      expect(container).toMatchTextContent('number: 6, current: 3')
     })
 
     it('should change pages on input change', async () => {
@@ -1053,7 +1053,7 @@ describe('<Pagination />', () => {
           totalPageNumber={9}
         />
       )
-      expect(container.firstChild).toHaveTextContent('12…9Next Page')
+      expect(container.firstChild).toMatchTextContent('12…9Next Page')
     })
     it('should render the correct pages - 2', async () => {
       const { container } = await render(
@@ -1065,7 +1065,7 @@ describe('<Pagination />', () => {
           currentPage={5}
         />
       )
-      expect(container.firstChild).toHaveTextContent(
+      expect(container.firstChild).toMatchTextContent(
         'Previous Page1…456…9Next Page'
       )
     })
@@ -1081,7 +1081,7 @@ describe('<Pagination />', () => {
           boundaryCount={3}
         />
       )
-      expect(container.firstChild).toHaveTextContent(
+      expect(container.firstChild).toMatchTextContent(
         'Previous Page123456789Next Page'
       )
     })
@@ -1097,7 +1097,7 @@ describe('<Pagination />', () => {
           boundaryCount={2}
         />
       )
-      expect(container.firstChild).toHaveTextContent(
+      expect(container.firstChild).toMatchTextContent(
         'Previous Page12…456…89Next Page'
       )
     })
@@ -1112,7 +1112,7 @@ describe('<Pagination />', () => {
           siblingCount={100}
         />
       )
-      expect(container.firstChild).toHaveTextContent(
+      expect(container.firstChild).toMatchTextContent(
         'Previous Page123456789Next Page'
       )
     })
@@ -1127,7 +1127,7 @@ describe('<Pagination />', () => {
           boundaryCount={100}
         />
       )
-      expect(container.firstChild).toHaveTextContent(
+      expect(container.firstChild).toMatchTextContent(
         'Previous Page123456789Next Page'
       )
     })
@@ -1143,7 +1143,7 @@ describe('<Pagination />', () => {
           siblingCount={1}
         />
       )
-      expect(container.firstChild).toHaveTextContent('123…789Next Page')
+      expect(container.firstChild).toMatchTextContent('123…789Next Page')
     })
     it('should render the correct ellipsis', async () => {
       const { container } = await render(
@@ -1158,7 +1158,7 @@ describe('<Pagination />', () => {
           ellipsis="<->"
         />
       )
-      expect(container.firstChild).toHaveTextContent('123<->789Next Page')
+      expect(container.firstChild).toMatchTextContent('123<->789Next Page')
     })
     it('should render custom buttons', async () => {
       const pageMap = ['A-G', 'H-J', 'K-M', 'N-Q', 'R-Z']
@@ -1172,7 +1172,7 @@ describe('<Pagination />', () => {
           renderPageIndicator={(page) => pageMap[page - 1]}
         />
       )
-      expect(container.firstChild).toHaveTextContent('A-GH-JK-MN-QR-Z')
+      expect(container.firstChild).toMatchTextContent('A-GH-JK-MN-QR-Z')
     })
     it('should render huge "totalPageNumber"s properly', async () => {
       const { container } = await render(
@@ -1184,7 +1184,7 @@ describe('<Pagination />', () => {
           currentPage={5678}
         />
       )
-      expect(container.firstChild).toHaveTextContent(
+      expect(container.firstChild).toMatchTextContent(
         'Previous Page1…567756785679…1000000000000000Next Page'
       )
     })
@@ -1201,7 +1201,7 @@ describe('<Pagination />', () => {
           withFirstAndLastButton
         />
       )
-      expect(container.firstChild).toHaveTextContent(
+      expect(container.firstChild).toMatchTextContent(
         'First PagePrevious Page1…456…100Next PageLast Page'
       )
     })
@@ -1217,7 +1217,7 @@ describe('<Pagination />', () => {
           boundaryCount={4}
         />
       )
-      expect(container.firstChild).toHaveTextContent('12345678910Next Page')
+      expect(container.firstChild).toMatchTextContent('12345678910Next Page')
     })
 
     it('should add aria-label when screenReaderLabelPageButton is set', async () => {
@@ -1279,7 +1279,7 @@ describe('<Pagination />', () => {
       expect(getComputedStyle(paginationWithLabel).height).toEqual(
         heightWithNoLabel
       )
-      expect(paginationWithLabel).toHaveTextContent('I am a hidden label')
+      expect(paginationWithLabel).toMatchTextContent('I am a hidden label')
     })
 
     it('should wrap at a small viewport width', async () => {

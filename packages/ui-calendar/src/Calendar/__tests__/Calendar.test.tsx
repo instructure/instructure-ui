@@ -81,7 +81,7 @@ describe('<Calendar />', () => {
       const { container } = await render(<Calendar selectedLabel="Selected" />)
       const thead = container.querySelector('thead')
 
-      expect(thead).toHaveTextContent(
+      expect(thead).toMatchTextContent(
         'SundaySuMondayMoTuesdayTuWednesdayWeThursdayThFridayFrSaturdaySa'
       )
     })
@@ -92,7 +92,7 @@ describe('<Calendar />', () => {
       )
       const thead = container.querySelector('thead')
 
-      expect(thead).toHaveTextContent(
+      expect(thead).toMatchTextContent(
         'hétfőhkeddkszerdaszecsütörtökcspéntekpszombatszovasárnapv'
       )
     })
@@ -113,7 +113,7 @@ describe('<Calendar />', () => {
         '22 December 202322'
       ]
       buttons.forEach((button, index) => {
-        expect(button).toHaveTextContent(disabledTexts[index])
+        expect(button).toMatchTextContent(disabledTexts[index])
       })
     })
 
@@ -178,7 +178,7 @@ describe('<Calendar />', () => {
     expect(originalHeaders.length).toEqual(7)
 
     weekdayLabels.forEach((label, i) => {
-      expect(originalHeaders[i]).toHaveTextContent(label)
+      expect(originalHeaders[i]).toMatchTextContent(label)
     })
 
     const functionalWeekdayLabels = [
@@ -205,7 +205,7 @@ describe('<Calendar />', () => {
     expect(updatedHeaders.length).toEqual(7)
 
     functionalWeekdayLabels.forEach((functionalLabel, i) => {
-      expect(updatedHeaders[i]).toHaveTextContent(functionalLabel())
+      expect(updatedHeaders[i]).toMatchTextContent(functionalLabel())
     })
   })
 
@@ -541,7 +541,7 @@ describe('<Calendar />', () => {
     const calendar = page.getByRole('list').element()
 
     expect(calendar.tagName).toBe('UL')
-    expect(calendar).toHaveTextContent(weekdayLabels.join(''))
+    expect(calendar).toMatchTextContent(weekdayLabels.join(''))
   })
 
   describe('navigation button targetMonthSrLabel', () => {

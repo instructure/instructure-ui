@@ -54,7 +54,7 @@ describe('<BaseButton/>', () => {
     const button = document.querySelector('button')
 
     expect(button).toBeInTheDocument()
-    expect(button).toHaveTextContent('Hello World')
+    expect(button).toMatchTextContent('Hello World')
   })
 
   it('should not error with a null child', async () => {
@@ -63,7 +63,7 @@ describe('<BaseButton/>', () => {
     const button = document.querySelector('button')
 
     expect(button).toBeInTheDocument()
-    expect(button).toHaveTextContent('Hello World')
+    expect(button).toMatchTextContent('Hello World')
   })
 
   it('should render a link styled as a button if href is provided', async () => {
@@ -93,7 +93,7 @@ describe('<BaseButton/>', () => {
     const button = container.querySelector('[type="button"]')
 
     expect(button).toBeInTheDocument()
-    expect(button).toHaveTextContent('Hello World')
+    expect(button).toMatchTextContent('Hello World')
     expect(button!.tagName).toBe('SPAN')
   })
 

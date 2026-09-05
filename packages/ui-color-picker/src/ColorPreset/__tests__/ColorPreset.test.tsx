@@ -90,7 +90,7 @@ describe('<ColorPreset />', () => {
     })
   })
 
-  it('should default to using the hex code as aria-label when colorScreenReaderLabel is not provided ', async () => {
+  it('should default to using the hex code as aria-label when colorScreenReaderLabel is not provided', async () => {
     await render(<ColorPreset {...testValue} />)
     const buttons = page.getByRole('button').elements()
 
@@ -136,7 +136,7 @@ describe('<ColorPreset />', () => {
       testColors.forEach((testColor, index) => {
         const tooltip = tooltips[index]
 
-        expect(tooltip).toHaveTextContent(testColor)
+        expect(tooltip).toMatchTextContent(testColor)
       })
     })
 
@@ -203,7 +203,7 @@ describe('<ColorPreset />', () => {
       )
       const buttons = page.getByRole('button').elements()
 
-      expect(buttons[0]).toHaveTextContent(
+      expect(buttons[0]).toMatchTextContent(
         testColorMixerSettings.addNewPresetButtonScreenReaderLabel
       )
     })
@@ -286,13 +286,13 @@ describe('<ColorPreset />', () => {
     await vi.waitFor(() => {
       expect(
         document.querySelector('div[id^=DrilldownHeader-Title]')
-      ).toHaveTextContent(testValue.colors[5])
+      ).toMatchTextContent(testValue.colors[5])
     })
 
     const menu = document.querySelector('div[role="menu"]')!
 
-    expect(menu).toHaveTextContent(testColorMixerSettings!.selectColorLabel!)
-    expect(menu).toHaveTextContent(testColorMixerSettings!.removeColorLabel!)
+    expect(menu).toMatchTextContent(testColorMixerSettings!.selectColorLabel!)
+    expect(menu).toMatchTextContent(testColorMixerSettings!.removeColorLabel!)
   })
 
   it('should allow adding presets', async () => {

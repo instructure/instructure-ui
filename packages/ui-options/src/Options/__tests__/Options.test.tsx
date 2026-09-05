@@ -141,16 +141,16 @@ describe('<Options />', () => {
     expect(allItems.length).toBe(5)
 
     const outerList = page.getByTestId('outer-list').element()
-    expect(outerList).toHaveTextContent('Option one Option two')
+    expect(outerList).toMatchTextContent('Option one Option two')
 
     const nestedLabel = outerList.querySelector(
       '[class*=-options__label]'
     ) as HTMLElement
     expect(nestedLabel).toBeInTheDocument()
-    expect(nestedLabel).toHaveTextContent('Nested list')
+    expect(nestedLabel).toMatchTextContent('Nested list')
 
     const nestedList = page.getByTestId('nested-list').element()
-    expect(nestedList).toHaveTextContent('Nested option one Nested option two')
+    expect(nestedList).toMatchTextContent('Nested option one Nested option two')
 
     const nestedListItems = nestedList!.querySelectorAll('[class$=-optionItem]')
     expect(nestedListItems.length).toBe(2)

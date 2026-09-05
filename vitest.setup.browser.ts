@@ -23,8 +23,7 @@
  */
 
 // Setup for the `browser` project (real-browser tests via vitest-browser).
-import '@testing-library/jest-dom/vitest'
-import { vi } from 'vitest'
+import { afterEach, vi } from 'vitest'
 
 // @instructure/console only outputs logs if process.env.NODE_ENV !== 'production'
 // these messages are sometimes used in test assertions

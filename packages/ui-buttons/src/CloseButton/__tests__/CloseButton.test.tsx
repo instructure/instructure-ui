@@ -51,7 +51,7 @@ describe('<CloseButton />', () => {
     expect(icon).toBeInTheDocument()
     expect(icon).toHaveAttribute('name', 'X')
     expect(button).toBeInTheDocument()
-    expect(button).toHaveTextContent('Close')
+    expect(button).toMatchTextContent('Close')
   })
 
   it('should pass the `onClick` prop', async () => {

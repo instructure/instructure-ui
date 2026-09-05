@@ -89,7 +89,7 @@ describe('<DateInput2 />', () => {
     const label = container.querySelector('label')
 
     expect(label).toBeInTheDocument()
-    expect(label).toHaveTextContent(LABEL_TEXT)
+    expect(label).toMatchTextContent(LABEL_TEXT)
   })
 
   it('should render an input placeholder', async () => {

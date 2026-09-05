@@ -50,7 +50,7 @@ describe('<IconButton/>', () => {
 
     expect(button).toBeInTheDocument()
     expect(svgIcon).toBeInTheDocument()
-    expect(button).toHaveTextContent('some action')
+    expect(button).toMatchTextContent('some action')
   })
 
   it('should render an icon when provided as the `renderIcon` prop', async () => {
@@ -147,7 +147,7 @@ describe('<IconButton/>', () => {
     const button = container.querySelector('[type="button"]')
 
     expect(button).toBeInTheDocument()
-    expect(button).toHaveTextContent('some action')
+    expect(button).toMatchTextContent('some action')
     expect(button!.tagName).toBe('LI')
   })
 

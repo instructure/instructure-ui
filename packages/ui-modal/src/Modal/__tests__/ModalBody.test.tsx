@@ -177,7 +177,7 @@ describe('<ModalBody />', () => {
           {BODY_TEXT}
         </ModalBody>
       )
-      const body = page.getByText(BODY_TEXT).element()
+      const body = page.getByText(BODY_TEXT, { exact: false }).element()
 
       await vi.waitFor(() => expect(body).not.toHaveAttribute('tabindex'))
     })

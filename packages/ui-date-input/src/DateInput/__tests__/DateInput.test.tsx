@@ -194,7 +194,7 @@ describe('<DateInput />', () => {
     const label = container.querySelector('label')
 
     expect(label).toBeInTheDocument()
-    expect(label).toHaveTextContent(LABEL_TEXT)
+    expect(label).toMatchTextContent(LABEL_TEXT)
   })
 
   it('should render an input placeholder', async () => {
@@ -677,8 +677,8 @@ describe('<DateInput />', () => {
       'div[class*="navigation-calendar"]'
     )
 
-    expect(navigation).toHaveTextContent('March')
-    expect(navigation).toHaveTextContent('2022')
+    expect(navigation).toMatchTextContent('March')
+    expect(navigation).toMatchTextContent('2022')
 
     // Get day 16 background color for comparison
     const controlDayBgColor = getComputedStyle(
@@ -1058,9 +1058,9 @@ describe('<DateInput />', () => {
     const options = document.querySelectorAll('[class$="-optionItem"]')
 
     expect(options).toHaveLength(3)
-    expect(options[0]).toHaveTextContent('2024')
-    expect(options[1]).toHaveTextContent('2023')
-    expect(options[2]).toHaveTextContent('2022')
+    expect(options[0]).toMatchTextContent('2024')
+    expect(options[1]).toMatchTextContent('2023')
+    expect(options[2]).toMatchTextContent('2022')
   })
 
   it('should set correct value using calendar year picker', async () => {

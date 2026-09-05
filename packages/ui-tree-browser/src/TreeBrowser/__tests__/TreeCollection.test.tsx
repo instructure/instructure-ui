@@ -205,7 +205,7 @@ describe('<TreeCollection />', () => {
 
       expect(svgIconUser).toBeInTheDocument()
       expect(item1).toContainElement(svgIconUser)
-      expect(item1).toHaveTextContent('Coll 2')
+      expect(item1).toMatchTextContent('Coll 2')
     })
 
     describe('onCollectionClick', () => {

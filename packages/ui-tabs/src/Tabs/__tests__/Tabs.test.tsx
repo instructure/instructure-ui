@@ -220,11 +220,11 @@ describe('<Tabs />', () => {
       '[class$="panelsContainer"]'
     )
 
-    expect(panelsContainer).toHaveTextContent(tab1Content)
+    expect(panelsContainer).toMatchTextContent(tab1Content)
     expect(page.getByText(tab1Content).element()).toBeVisible()
 
-    expect(panelsContainer).not.toHaveTextContent(tab2Content)
-    expect(panelsContainer).not.toHaveTextContent(tab3Content)
+    expect(panelsContainer).not.toMatchTextContent(tab2Content)
+    expect(panelsContainer).not.toMatchTextContent(tab3Content)
   })
 
   it('should honor the isSelected prop', async () => {
@@ -243,11 +243,11 @@ describe('<Tabs />', () => {
       '[class$="panelsContainer"]'
     )
 
-    expect(panelsContainer).toHaveTextContent(tab2Content)
+    expect(panelsContainer).toMatchTextContent(tab2Content)
     expect(page.getByText(tab2Content).element()).toBeVisible()
 
-    expect(panelsContainer).not.toHaveTextContent(tab1Content)
-    expect(panelsContainer).not.toHaveTextContent(tab3Content)
+    expect(panelsContainer).not.toMatchTextContent(tab1Content)
+    expect(panelsContainer).not.toMatchTextContent(tab3Content)
   })
 
   it('should not allow selecting a disabled tab', async () => {
@@ -265,11 +265,11 @@ describe('<Tabs />', () => {
     )
     const panels = container.querySelectorAll('[role="tabpanel"]')
 
-    expect(panelsContainer).toHaveTextContent(tab1Content)
+    expect(panelsContainer).toMatchTextContent(tab1Content)
     expect(page.getByText(tab1Content).element()).toBeVisible()
 
-    expect(panelsContainer).not.toHaveTextContent(tab2Content)
-    expect(panelsContainer).not.toHaveTextContent(tab3Content)
+    expect(panelsContainer).not.toMatchTextContent(tab2Content)
+    expect(panelsContainer).not.toMatchTextContent(tab3Content)
 
     expect(panels.length).toBe(3)
     expect(panels[0]).not.toHaveAttribute('aria-hidden', 'true')

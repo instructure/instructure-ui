@@ -12,7 +12,6 @@
   "homepage": "https://instructure.github.io/instructure-ui/",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
-    "test:vitest": "vitest --watch=false",
     "lint": "ui-scripts lint",
     "lint:fix": "ui-scripts lint --fix",
     "ts:check": "tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false",
@@ -36,7 +35,7 @@
     "@types/node": "24.1.0",
     "ast-types": "^0.16.1",
     "prettier": "3.8.1",
-    "vitest": "^4.1.9"
+    "vitest": "^5.0.0"
   },
   "publishConfig": {
     "access": "public"
