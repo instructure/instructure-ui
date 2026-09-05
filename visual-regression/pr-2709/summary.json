@@ -1,8 +1,8 @@
 {
   "summary": {
     "total": 96,
-    "unchanged": 93,
-    "changed": 3,
+    "unchanged": 84,
+    "changed": 12,
     "added": 0,
     "removed": 0,
     "a11yPages": 0,
@@ -11,20 +11,20 @@
   "results": [
     {
       "name": "alert-canvas.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 4,
       "sizeMismatch": false
     },
     {
       "name": "alert-dark.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 4,
       "sizeMismatch": false
     },
     {
       "name": "alert-light.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 4,
       "sizeMismatch": false
     },
     {
@@ -47,8 +47,8 @@
     },
     {
       "name": "badge-canvas.png",
-      "status": "changed",
-      "numDiff": 1573,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
@@ -245,38 +245,38 @@
     },
     {
       "name": "dateinput-canvas.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 126,
       "sizeMismatch": false
     },
     {
       "name": "dateinput-dark.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 108,
       "sizeMismatch": false
     },
     {
       "name": "dateinput-light.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 126,
       "sizeMismatch": false
     },
     {
       "name": "datetimeinput-canvas.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 141,
       "sizeMismatch": false
     },
     {
       "name": "datetimeinput-dark.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 116,
       "sizeMismatch": false
     },
     {
       "name": "datetimeinput-light.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 135,
       "sizeMismatch": false
     },
     {
@@ -317,20 +317,20 @@
     },
     {
       "name": "form-errors-canvas.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 134,
       "sizeMismatch": false
     },
     {
       "name": "form-errors-dark.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 116,
       "sizeMismatch": false
     },
     {
       "name": "form-errors-light.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 134,
       "sizeMismatch": false
     },
     {
@@ -539,14 +539,14 @@
     },
     {
       "name": "tooltip-dark.png",
-      "status": "changed",
-      "numDiff": 881,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "tooltip-light.png",
-      "status": "changed",
-      "numDiff": 956,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
