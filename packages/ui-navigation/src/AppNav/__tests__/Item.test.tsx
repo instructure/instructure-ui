@@ -60,7 +60,7 @@ describe('<AppNav.Item />', () => {
     await render(<Item renderLabel="Some label" href="#" />)
     const item = page.getByRole('link').element()
 
-    expect(item).toHaveTextContent('Some label')
+    expect(item).toMatchTextContent('Some label')
   })
 
   it('should render an icon/image/etc.', async () => {
@@ -79,8 +79,8 @@ describe('<AppNav.Item />', () => {
     expect(iconTitle).toBeInTheDocument()
     expect(iconSvg).toBeInTheDocument()
 
-    expect(iconSvg).toHaveTextContent('Some icon')
-    expect(item).toHaveTextContent('Some label')
+    expect(iconSvg).toMatchTextContent('Some icon')
+    expect(item).toMatchTextContent('Some label')
   })
 
   it('should render content after the label text to accommodate badges, etc.', async () => {
@@ -95,7 +95,7 @@ describe('<AppNav.Item />', () => {
     const after = page.getByText('I am rendered after!').element()
 
     expect(item).toBeInTheDocument()
-    expect(item).toHaveTextContent('Some label')
+    expect(item).toMatchTextContent('Some label')
 
     expect(after).toBeInTheDocument()
     expect(after.tagName).toBe('STRONG')

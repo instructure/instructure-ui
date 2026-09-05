@@ -417,7 +417,7 @@ describe('<Drilldown.Option />', () => {
       const tag = container.querySelector('[class$="optionLabelInfo"]')
 
       expect(tag).toBeInTheDocument()
-      expect(tag).toHaveTextContent('Info')
+      expect(tag).toMatchTextContent('Info')
     })
 
     it('as function should have option props as params', async () => {
@@ -969,7 +969,7 @@ describe('<Drilldown.Option />', () => {
         '[class$=-drilldown__optionLabelInfo]'
       )!
 
-      expect(labelInfo).toHaveTextContent('Info')
+      expect(labelInfo).toMatchTextContent('Info')
       expect(getComputedStyle(labelInfo).alignSelf).toBe('flex-end')
     })
 

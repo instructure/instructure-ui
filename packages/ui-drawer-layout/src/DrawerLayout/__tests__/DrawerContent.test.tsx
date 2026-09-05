@@ -36,7 +36,7 @@ describe('<DrawerContent />', () => {
     const drawerContent = page.getByLabelText('DrawerContentTest').element()
 
     expect(drawerContent).toBeInTheDocument()
-    expect(drawerContent).toHaveTextContent('Hello World')
+    expect(drawerContent).toMatchTextContent('Hello World')
   })
 
   it('should call the content ref', async () => {

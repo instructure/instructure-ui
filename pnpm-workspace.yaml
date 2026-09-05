@@ -12,6 +12,11 @@ allowBuilds:
   nx: true
   style-dictionary: true
   ttf2woff2: true
+# eslint-plugin-react is loaded by oxlint (jsPlugins). It only reads eslint/package.json, so it
+# works with ESLint 10 even though its declared peer range stops at 9.x, which npm has deprecated.
+peerDependencyRules:
+  allowedVersions:
+    'eslint-plugin-react>eslint': '10'
 overrides:
   "react": "18.3.1"
   "react-dom": "18.3.1"

@@ -90,7 +90,7 @@ describe('<CheckboxGroup />', () => {
     const messageById = container.querySelector(`[id="${ariaDesc}"]`)
 
     expect(messageById).toBeInTheDocument()
-    expect(messageById).toHaveTextContent(TEST_ERROR_MESSAGE)
+    expect(messageById).toMatchTextContent(TEST_ERROR_MESSAGE)
   })
 
   it('displays description message inside the legend', async () => {
@@ -102,7 +102,7 @@ describe('<CheckboxGroup />', () => {
     )
 
     expect(legend).toBeInTheDocument()
-    expect(legend).toHaveTextContent(TEST_DESCRIPTION)
+    expect(legend).toMatchTextContent(TEST_DESCRIPTION)
   })
 
   it('does not call the onChange prop when disabled', async () => {

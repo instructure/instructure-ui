@@ -54,7 +54,7 @@ describe('<FormFieldLabel />', () => {
     )
 
     expect(formFieldLabel).toBeInTheDocument()
-    expect(formFieldLabel).toHaveTextContent('Foo')
+    expect(formFieldLabel).toMatchTextContent('Foo')
   })
 
   it('should render as specified via the `as` prop', async () => {
@@ -65,7 +65,7 @@ describe('<FormFieldLabel />', () => {
     const formFieldLabel = container.querySelector('li')
 
     expect(formFieldLabel).toBeInTheDocument()
-    expect(formFieldLabel).toHaveTextContent('Foo')
+    expect(formFieldLabel).toMatchTextContent('Foo')
   })
 
   it('should meet a11y standards', async () => {

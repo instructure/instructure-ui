@@ -334,15 +334,15 @@ describe('<Checkbox />', () => {
 
       const describedById = input.getAttribute('aria-describedby')
       expect(describedById).toBeTruthy()
-      expect(document.getElementById(describedById!)).toHaveTextContent(
+      expect(document.getElementById(describedById!)).toMatchTextContent(
         'You must accept'
       )
 
       const labelledById = input.getAttribute('aria-labelledby')
       expect(labelledById).toBeTruthy()
       const labelEl = document.getElementById(labelledById!)
-      expect(labelEl).toHaveTextContent('Accept terms')
-      expect(labelEl).not.toHaveTextContent('You must accept')
+      expect(labelEl).toMatchTextContent('Accept terms')
+      expect(labelEl).not.toMatchTextContent('You must accept')
     })
 
     it('does not set aria-labelledby when there are no messages', async () => {

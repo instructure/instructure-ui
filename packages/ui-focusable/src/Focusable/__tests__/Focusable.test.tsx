@@ -56,7 +56,7 @@ describe('<Focusable />', () => {
     const button = page.getByRole('button').element()
 
     expect(button).toBeInTheDocument()
-    expect(button).toHaveTextContent('hello world')
+    expect(button).toMatchTextContent('hello world')
   })
 
   it('should call children function with focused when element receives focus', async () => {

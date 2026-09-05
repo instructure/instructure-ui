@@ -71,7 +71,7 @@ describe('<Item />', () => {
     const item = container.querySelector('[class$="-optionItem"]')
     const customContent = item!.querySelector('#customContent')
 
-    expect(customContent).toHaveTextContent('Hello World')
+    expect(customContent).toMatchTextContent('Hello World')
   })
 
   it('should render role attributes appropriately when given a role', async () => {
@@ -95,8 +95,8 @@ describe('<Item />', () => {
     const customContent = item!.querySelector('#customContent')
     const description = item!.querySelector('[class$="__description"]')
 
-    expect(customContent).toHaveTextContent('Hello World')
-    expect(description).toHaveTextContent('Some text as description')
+    expect(customContent).toMatchTextContent('Hello World')
+    expect(description).toMatchTextContent('Some text as description')
   })
 
   it('should render role attributes for description', async () => {
@@ -109,7 +109,7 @@ describe('<Item />', () => {
     const description = container.querySelector('[role="comment"]')
 
     expect(description).toBeInTheDocument()
-    expect(description).toHaveTextContent('Some text as description')
+    expect(description).toMatchTextContent('Some text as description')
   })
 
   it('should pass props through to label', async () => {
@@ -201,7 +201,7 @@ describe('<Item />', () => {
 
     expect(nestedList).toBeInTheDocument()
     expect(nestedItem).toBeInTheDocument()
-    expect(nestedItem).toHaveTextContent('Sub item')
+    expect(nestedItem).toMatchTextContent('Sub item')
   })
 
   it('should render as link with href prop', async () => {

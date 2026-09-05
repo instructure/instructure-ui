@@ -64,7 +64,7 @@ describe('<FormFieldMessages />', () => {
     )
 
     expect(formFieldMessages).toBeInTheDocument()
-    expect(formFieldMessages).toHaveTextContent(
+    expect(formFieldMessages).toMatchTextContent(
       'Invalid nameGood job!Full name, first and last'
     )
   })
@@ -92,7 +92,7 @@ describe('<FormFieldMessages />', () => {
 
     expect(iconSvg).toBeInTheDocument()
     expect(formFieldMessages).toBeInTheDocument()
-    expect(formFieldMessages).toHaveTextContent('Invalid name')
+    expect(formFieldMessages).toMatchTextContent('Invalid name')
   })
 
   it('should meet a11y standards', async () => {

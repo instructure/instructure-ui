@@ -68,7 +68,7 @@ describe('<ProgressCircle />', () => {
     )
     const progress = container.querySelector('[class*="-progressCircle"]')
 
-    expect(progress).toHaveTextContent(`${current} of ${max}`)
+    expect(progress).toMatchTextContent(`${current} of ${max}`)
   })
 
   it('should meet a11y standards', async () => {

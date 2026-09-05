@@ -77,7 +77,7 @@ describe('<NumberInput />', () => {
       'span[class$="-formFieldLayout__label"]'
     )
 
-    expect(label).toHaveTextContent('Label')
+    expect(label).toMatchTextContent('Label')
   })
 
   it('passes the input element to inputRef', async () => {
@@ -311,15 +311,15 @@ describe('<NumberInput />', () => {
 
     const describedById = input.getAttribute('aria-describedby')
     expect(describedById).toBeTruthy()
-    expect(document.getElementById(describedById!)).toHaveTextContent(
+    expect(document.getElementById(describedById!)).toMatchTextContent(
       'some error message'
     )
 
     const labelledById = input.getAttribute('aria-labelledby')
     expect(labelledById).toBeTruthy()
     const labelEl = document.getElementById(labelledById!)
-    expect(labelEl).toHaveTextContent('Label')
-    expect(labelEl).not.toHaveTextContent('some error message')
+    expect(labelEl).toMatchTextContent('Label')
+    expect(labelEl).not.toMatchTextContent('some error message')
   })
 
   it('does not override the accessible name with aria-labelledby when there are no messages', async () => {

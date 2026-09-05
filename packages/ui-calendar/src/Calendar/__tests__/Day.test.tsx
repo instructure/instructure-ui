@@ -68,7 +68,7 @@ describe('Day', () => {
     )
 
     expect(screenReaderContent).toBeInTheDocument()
-    expect(screenReaderContent).toHaveTextContent(label)
+    expect(screenReaderContent).toMatchTextContent(label)
   })
 
   it('should set aria-current="date" when `isToday`', async () => {

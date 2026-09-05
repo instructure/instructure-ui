@@ -84,7 +84,7 @@ describe('<TruncateList />', () => {
     )
 
     expect(items.length).toBe(2)
-    expect(list).not.toHaveTextContent('Item 3')
+    expect(list).not.toMatchTextContent('Item 3')
   })
 
   describe('renderHiddenItemMenu', () => {
@@ -103,7 +103,7 @@ describe('<TruncateList />', () => {
       )
       const trigger = container.querySelector('[id="trigger"]')
 
-      expect(trigger).toHaveTextContent('trigger label')
+      expect(trigger).toMatchTextContent('trigger label')
     })
   })
 

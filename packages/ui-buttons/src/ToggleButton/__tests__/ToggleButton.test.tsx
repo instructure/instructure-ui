@@ -50,10 +50,10 @@ describe('<ToggleButton />', () => {
     const tooltip = document.querySelector('[role="tooltip"]')
 
     expect(button).toBeInTheDocument()
-    expect(button).toHaveTextContent('This is a screen reader label')
+    expect(button).toMatchTextContent('This is a screen reader label')
     expect(svgIcon).toBeInTheDocument()
     expect(tooltip).toBeInTheDocument()
-    expect(tooltip).toHaveTextContent('This is tooltip content')
+    expect(tooltip).toMatchTextContent('This is tooltip content')
   })
 
   it('should set `aria-pressed` to `true` if `status` is `pressed`', async () => {
@@ -220,7 +220,7 @@ describe('<ToggleButton />', () => {
 
     const tooltip = page.getByRole('tooltip')
     await expect.element(tooltip).toBeVisible()
-    await expect.element(tooltip).toHaveTextContent('Tooltip content')
+    await expect.element(tooltip).toMatchTextContent('Tooltip content')
   })
 
   it('should display a tooltip without hover/focus when isShowingTooltip is true', async () => {
@@ -241,7 +241,7 @@ describe('<ToggleButton />', () => {
 
     const tooltip = page.getByRole('tooltip')
     await expect.element(tooltip).toBeVisible()
-    await expect.element(tooltip).toHaveTextContent('Tooltip content')
+    await expect.element(tooltip).toMatchTextContent('Tooltip content')
   })
 
   it('forwards the margin prop to the button', async () => {

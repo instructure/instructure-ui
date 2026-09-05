@@ -44,9 +44,9 @@ describe('<MenuItemGroup />', () => {
     )
     const group = container.querySelector("[class*='menuItemGroup']")
     expect(group).toBeInTheDocument()
-    expect(group).toHaveTextContent('Menu Label')
-    expect(group).toHaveTextContent('Item Text 1')
-    expect(group).toHaveTextContent('Item Text 2')
+    expect(group).toMatchTextContent('Menu Label')
+    expect(group).toMatchTextContent('Item Text 1')
+    expect(group).toMatchTextContent('Item Text 2')
   })
 
   it('should default to children with type "radio"', async () => {

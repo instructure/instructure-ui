@@ -34,7 +34,7 @@ describe('<Metric />', () => {
       <Metric renderLabel="Grade" renderValue="80%" />
     )
 
-    expect(container).toHaveTextContent('Grade')
+    expect(container).toMatchTextContent('Grade')
   })
 
   it('should render the value', async () => {
@@ -42,7 +42,7 @@ describe('<Metric />', () => {
       <Metric renderLabel="Grade" renderValue="80%" />
     )
 
-    expect(container).toHaveTextContent('80%')
+    expect(container).toMatchTextContent('80%')
   })
 
   it('passes props through to Metric element', async () => {
@@ -78,7 +78,7 @@ describe('<Metric />', () => {
       <Metric renderLabel={<div>hello</div>} />
     )
 
-    expect(container).toHaveTextContent('hello')
+    expect(container).toMatchTextContent('hello')
   })
 
   it('should allow methods as labels', async () => {

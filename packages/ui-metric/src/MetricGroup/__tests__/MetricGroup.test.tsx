@@ -51,7 +51,7 @@ describe('<MetricGroup />', () => {
       </MetricGroup>
     )
 
-    expect(container).toHaveTextContent('Grade80%Late4Missing2')
+    expect(container).toMatchTextContent('Grade80%Late4Missing2')
   })
 
   it('passes props through to MetricGroup element', async () => {

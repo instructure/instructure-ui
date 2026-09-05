@@ -51,7 +51,7 @@ describe('<Tooltip />', () => {
     const tip = page.getByRole('tooltip', { includeHidden: true }).element()
 
     expect(tip).toBeInTheDocument()
-    expect(tip).toHaveTextContent('Hello')
+    expect(tip).toMatchTextContent('Hello')
   })
 
   it('should render children', async () => {
@@ -67,9 +67,9 @@ describe('<Tooltip />', () => {
     const trigger = page.getByTestId('trigger').element()
 
     expect(trigger).toBeInTheDocument()
-    expect(trigger).toHaveTextContent('Hover or focus me')
+    expect(trigger).toMatchTextContent('Hover or focus me')
     expect(trigger).toHaveAttribute('href', 'example.html')
-    expect(tip).toHaveTextContent('Hello')
+    expect(tip).toMatchTextContent('Hello')
   })
 
   it('should have an aria-describedby attribute', async () => {
@@ -119,7 +119,7 @@ describe('<Tooltip />', () => {
       expect(trigger.tagName).toBe('A')
 
       expect(tip).toBeInTheDocument()
-      expect(tip).toHaveTextContent('Hello')
+      expect(tip).toMatchTextContent('Hello')
     })
 
     it('should have an aria-describedby attribute', async () => {
@@ -213,7 +213,7 @@ describe('<Tooltip />', () => {
       const tip = getTip(trigger.element())
 
       await vi.waitFor(() => {
-        expect(tip).toHaveTextContent('Hello')
+        expect(tip).toMatchTextContent('Hello')
         expect(getComputedStyle(tip).display).toBe('none')
         expect(getComputedStyle(tip).left).toBe('-159984px')
       })
@@ -237,7 +237,7 @@ describe('<Tooltip />', () => {
       const tip = getTip(page.getByTestId('trigger').element())
 
       await vi.waitFor(() => {
-        expect(tip).toHaveTextContent('Hello')
+        expect(tip).toMatchTextContent('Hello')
         expect(getComputedStyle(tip).display).toBe('block')
         expect(getComputedStyle(tip).left).toBe('0px')
       })
@@ -254,7 +254,7 @@ describe('<Tooltip />', () => {
       const tip = getTip(page.getByTestId('trigger').element())
 
       await vi.waitFor(() => {
-        expect(tip).toHaveTextContent('Hello')
+        expect(tip).toMatchTextContent('Hello')
         expect(getComputedStyle(tip).display).toBe('block')
         expect(getComputedStyle(tip).left).toBe('0px')
       })

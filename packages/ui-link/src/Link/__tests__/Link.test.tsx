@@ -54,7 +54,7 @@ describe('<Link />', () => {
     await render(<Link href="https://instructure.design">Hello World</Link>)
     const link = page.getByRole('link').element()
 
-    expect(link).toHaveTextContent('Hello World')
+    expect(link).toMatchTextContent('Hello World')
   })
 
   it('should render a button', async () => {

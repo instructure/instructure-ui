@@ -473,7 +473,7 @@ describe('<TimeSelect />', () => {
 
       await userEvent.click(input)
 
-      await expect.element(options().first()).toHaveTextContent('12:00 AM')
+      await expect.element(options().first()).toMatchTextContent('12:00 AM')
 
       await userEvent.click(options().first())
 
@@ -722,8 +722,8 @@ describe('<TimeSelect />', () => {
 
       expect(input).toHaveValue('2:00 PM')
 
-      await expect.element(options().nth(0)).toHaveTextContent('12:00 AM')
-      await expect.element(options().nth(1)).toHaveTextContent('12:15 AM')
+      await expect.element(options().nth(0)).toMatchTextContent('12:00 AM')
+      await expect.element(options().nth(1)).toMatchTextContent('12:15 AM')
     })
 
     it('should not allow non-step value when allowNonStepInput=false', async () => {

@@ -59,7 +59,7 @@ describe('<View />', () => {
     const view = container.querySelector("span[class$='-view']")
 
     expect(view).toBeInTheDocument()
-    expect(view).toHaveTextContent('View Content')
+    expect(view).toMatchTextContent('View Content')
   })
 
   it('should render children', async () => {

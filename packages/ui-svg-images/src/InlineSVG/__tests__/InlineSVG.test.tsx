@@ -75,7 +75,7 @@ describe('<InlineSVG />', () => {
     const title = container.querySelector('title')
 
     expect(title).toBeInTheDocument()
-    expect(title).toHaveTextContent('Test Title')
+    expect(title).toMatchTextContent('Test Title')
   })
 
   it('should not render description when no description prop is provided', async () => {
@@ -92,7 +92,7 @@ describe('<InlineSVG />', () => {
     const description = container.querySelector('desc')
 
     expect(description).toBeInTheDocument()
-    expect(description).toHaveTextContent('testIconDesc')
+    expect(description).toMatchTextContent('testIconDesc')
   })
 
   it('should produce null for "labelledBy" when no title or desc are provided', async () => {
