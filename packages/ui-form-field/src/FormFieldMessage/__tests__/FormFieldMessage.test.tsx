@@ -39,7 +39,7 @@ describe('<FormFieldMessage />', () => {
     )
 
     expect(formFieldMessage).toBeInTheDocument()
-    expect(formFieldMessage).toHaveTextContent('hello world')
+    expect(formFieldMessage).toMatchTextContent('hello world')
   })
 
   it('should render message if Node is passed', async () => {
@@ -58,7 +58,7 @@ describe('<FormFieldMessage />', () => {
 
     expect(iconSvg).toBeInTheDocument()
     expect(formFieldMessage).toBeInTheDocument()
-    expect(formFieldMessage).toHaveTextContent('Invalid name')
+    expect(formFieldMessage).toMatchTextContent('Invalid name')
   })
 
   it('should meet a11y standards', async () => {

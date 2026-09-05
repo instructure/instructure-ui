@@ -48,7 +48,7 @@ describe('<CondensedButton/>', () => {
     const button = document.querySelector('button')
 
     expect(button).toBeInTheDocument()
-    expect(button).toHaveTextContent(children)
+    expect(button).toMatchTextContent(children)
   })
 
   it('should provide a focused getter', async () => {
@@ -116,7 +116,7 @@ describe('<CondensedButton/>', () => {
     const button = container.querySelector('[type="button"]')
 
     expect(button).toBeInTheDocument()
-    expect(button).toHaveTextContent('Hello')
+    expect(button).toMatchTextContent('Hello')
     expect(button!.tagName).toBe('LI')
   })
 

@@ -63,7 +63,7 @@ describe('<Pages />', () => {
     )
     const pages = container.querySelector('div[id^="Pages_"]')
 
-    expect(pages).toHaveTextContent('Hello World')
+    expect(pages).toMatchTextContent('Hello World')
   })
 
   it('should render the 0th Page by default', async () => {
@@ -75,7 +75,7 @@ describe('<Pages />', () => {
     )
     const pages = container.querySelector('div[id^="Pages_"]')
 
-    expect(pages).toHaveTextContent('Foo')
+    expect(pages).toMatchTextContent('Foo')
   })
 
   it('should render the active Page', async () => {
@@ -87,7 +87,7 @@ describe('<Pages />', () => {
     )
     const pages = container.querySelector('div[id^="Pages_"]')
 
-    expect(pages).toHaveTextContent('Bar')
+    expect(pages).toMatchTextContent('Bar')
   })
 
   it('should pass history and navigateToPreviousPage to Page', async () => {

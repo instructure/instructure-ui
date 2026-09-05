@@ -49,7 +49,7 @@ describe('<PresentationContent />', () => {
     )
     const content = container.querySelector('[aria-hidden="true"]')
 
-    expect(content).toHaveTextContent('Hello World')
+    expect(content).toMatchTextContent('Hello World')
   })
 
   it('should render the specified tag when `as` prop is set', async () => {

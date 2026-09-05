@@ -90,15 +90,19 @@ describe('IconPropsProvider', () => {
         </IconPropsProvider>
       )
 
-      expect(page.getByTestId('size').element()).toHaveTextContent('lg')
-      expect(page.getByTestId('color').element()).toHaveTextContent('baseColor')
+      expect(page.getByTestId('size').element()).toMatchTextContent('lg')
+      expect(page.getByTestId('color').element()).toMatchTextContent(
+        'baseColor'
+      )
     })
 
     it('should return empty object when outside provider', async () => {
       await render(<TestComponentWithHook />)
 
-      expect(page.getByTestId('size').element()).toHaveTextContent('undefined')
-      expect(page.getByTestId('color').element()).toHaveTextContent('undefined')
+      expect(page.getByTestId('size').element()).toMatchTextContent('undefined')
+      expect(page.getByTestId('color').element()).toMatchTextContent(
+        'undefined'
+      )
     })
 
     it('should return semantic size tokens', async () => {
@@ -108,8 +112,8 @@ describe('IconPropsProvider', () => {
         </IconPropsProvider>
       )
 
-      expect(page.getByTestId('size').element()).toHaveTextContent('lg')
-      expect(page.getByTestId('color').element()).toHaveTextContent(
+      expect(page.getByTestId('size').element()).toMatchTextContent('lg')
+      expect(page.getByTestId('color').element()).toMatchTextContent(
         'accentRedColor'
       )
     })

@@ -33,7 +33,7 @@ describe('<InlineListItem />', () => {
     await render(<InlineListItem>hello</InlineListItem>)
     const listItem = page.getByRole('listitem').element()
 
-    expect(listItem).toHaveTextContent('hello')
+    expect(listItem).toMatchTextContent('hello')
   })
 
   it('should render delimiter', async () => {

@@ -48,7 +48,7 @@ describe('<ApplyLocale />', async () => {
         <LocalizableComponent />
       </ApplyLocale>
     )
-    expect(container).toHaveTextContent('fr')
+    expect(container).toMatchTextContent('fr')
   })
 
   it('applies timezone context', async () => {
@@ -57,6 +57,6 @@ describe('<ApplyLocale />', async () => {
         <LocalizableComponent />
       </ApplyLocale>
     )
-    expect(container).toHaveTextContent('Europe/Paris')
+    expect(container).toMatchTextContent('Europe/Paris')
   })
 })

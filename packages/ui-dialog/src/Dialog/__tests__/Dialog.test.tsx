@@ -101,7 +101,7 @@ describe('<Dialog />', () => {
     const { container } = await renderDialog({ open: true })
 
     expect(container.firstChild).toBeInTheDocument()
-    expect(container.firstChild).toHaveTextContent(TEST_TEXT)
+    expect(container.firstChild).toMatchTextContent(TEST_TEXT)
   })
 
   it('should apply the a11y attributes', async () => {

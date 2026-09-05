@@ -89,7 +89,7 @@ describe('<Rating />', () => {
       />
     )
 
-    expect(container).toHaveTextContent('Course rating 4 out of 5')
+    expect(container).toMatchTextContent('Course rating 4 out of 5')
   })
 
   it('should meet a11y standards', async () => {

@@ -75,7 +75,7 @@ describe('<SideNavBar />', () => {
     expect(nav).toBeInTheDocument()
     expect(nav.tagName).toBe('NAV')
     expect(nav).toHaveAttribute('aria-label', 'Main navigation')
-    expect(nav).toHaveTextContent('Minimize SideNavBar')
+    expect(nav).toMatchTextContent('Minimize SideNavBar')
   })
 
   it('should not crash with valid React elements', async () => {
@@ -97,8 +97,8 @@ describe('<SideNavBar />', () => {
       </SideNavBar>
     )
     const navElements = page.getByRole('listitem').elements()
-    expect(navElements[0]).toHaveTextContent('test123')
-    expect(navElements[1]).toHaveTextContent('Dashboard')
+    expect(navElements[0]).toMatchTextContent('test123')
+    expect(navElements[1]).toMatchTextContent('Dashboard')
   })
 
   it('should render a single semantic nav element', async () => {
@@ -123,7 +123,7 @@ describe('<SideNavBar />', () => {
     expect(nav).toBeInTheDocument()
     expect(nav.tagName).toBe('NAV')
     expect(navElements.length).toBe(1)
-    expect(navElements[0]).toHaveTextContent('Dashboard')
+    expect(navElements[0]).toMatchTextContent('Dashboard')
   })
 
   it('should render a semantic list for the nav content', async () => {
@@ -187,7 +187,7 @@ describe('<SideNavBar />', () => {
     const nav = page.getByRole('navigation').element()
     const toggleBtn = page.getByRole('button').element()
 
-    expect(nav).toHaveTextContent('Minimize SideNavBar')
+    expect(nav).toMatchTextContent('Minimize SideNavBar')
     expect(toggleBtn).toHaveAttribute('aria-expanded', 'true')
 
     await userEvent.click(toggleBtn)
@@ -196,7 +196,7 @@ describe('<SideNavBar />', () => {
       const updatedToggleBtn = page.getByRole('button').element()
       const updatedNav = page.getByRole('navigation').element()
 
-      expect(updatedNav).toHaveTextContent('Expand SideNavBar')
+      expect(updatedNav).toMatchTextContent('Expand SideNavBar')
       expect(updatedToggleBtn).toHaveAttribute('aria-expanded', 'false')
     })
   })

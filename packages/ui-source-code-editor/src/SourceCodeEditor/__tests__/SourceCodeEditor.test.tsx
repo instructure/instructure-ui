@@ -85,7 +85,7 @@ describe('<SourceCodeEditor />', () => {
       await render(<SourceCodeEditor label="foo" defaultValue="hello" />)
       const input = page.getByRole('textbox').element()
 
-      expect(input).toHaveTextContent('hello')
+      expect(input).toMatchTextContent('hello')
     })
   })
 
@@ -110,7 +110,7 @@ describe('<SourceCodeEditor />', () => {
         />
       )
       const input = page.getByRole('textbox').element()
-      expect(input).not.toHaveTextContent('hello world')
+      expect(input).not.toMatchTextContent('hello world')
 
       await rerender(
         <SourceCodeEditor
@@ -122,7 +122,7 @@ describe('<SourceCodeEditor />', () => {
       )
 
       const inputUpdated = page.getByRole('textbox').element()
-      expect(inputUpdated).toHaveTextContent('hello world')
+      expect(inputUpdated).toMatchTextContent('hello world')
     })
 
     it('should still be focusable', async () => {
@@ -197,7 +197,7 @@ describe('<SourceCodeEditor />', () => {
 
       expect(lineNumbers).toBeInTheDocument()
       expect(lineNumbers).toBeVisible()
-      expect(lineNumbers).toHaveTextContent('123')
+      expect(lineNumbers).toMatchTextContent('123')
     })
   })
 
@@ -238,7 +238,7 @@ describe('<SourceCodeEditor />', () => {
 
       const unfoldIcons = page.getByTitle('Unfold line').elements()
 
-      expect(editor).not.toHaveTextContent("console.log('foo')")
+      expect(editor).not.toMatchTextContent("console.log('foo')")
       expect(unfoldIcons[1]).toBeVisible()
     })
   })
@@ -320,7 +320,7 @@ describe('<SourceCodeEditor />', () => {
       )
       const label = container.querySelector('[class$="-screenReaderContent"]')
 
-      expect(label).toHaveTextContent('this is a label for the SR')
+      expect(label).toMatchTextContent('this is a label for the SR')
     })
   })
 
@@ -374,7 +374,7 @@ describe('<SourceCodeEditor />', () => {
       )
       const input = page.getByRole('textbox').element()
 
-      expect(input).toHaveTextContent('hello')
+      expect(input).toMatchTextContent('hello')
 
       await userEvent.click(input)
       await userEvent.keyboard(' world')
@@ -382,7 +382,7 @@ describe('<SourceCodeEditor />', () => {
       await vi.waitFor(() => {
         expect(onChange).toHaveBeenCalledWith('hello world')
       })
-      expect(input).toHaveTextContent('hello world')
+      expect(input).toMatchTextContent('hello world')
     })
 
     it('should behave controlled', async () => {
@@ -393,7 +393,7 @@ describe('<SourceCodeEditor />', () => {
       )
       const input = page.getByRole('textbox').element()
 
-      expect(input).toHaveTextContent('hello')
+      expect(input).toMatchTextContent('hello')
 
       await userEvent.click(input)
       await userEvent.keyboard('w')
@@ -428,12 +428,12 @@ describe('<SourceCodeEditor />', () => {
       await render(<SourceCodeEditor label="foo" readOnly />)
       const input = page.getByRole('textbox').element()
 
-      expect(input).not.toHaveTextContent('w')
+      expect(input).not.toMatchTextContent('w')
 
       await userEvent.click(input)
       await userEvent.keyboard('w')
 
-      expect(input).not.toHaveTextContent('w')
+      expect(input).not.toMatchTextContent('w')
     })
 
     it('should wrap lines when lineWrapping is true', async () => {

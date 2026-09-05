@@ -60,7 +60,7 @@ describe('<Spinner />', () => {
     )
     const spinner = container.querySelector('div[class*="-spinner"]')
 
-    expect(spinner).toHaveTextContent('Loading')
+    expect(spinner).toMatchTextContent('Loading')
   })
 
   it('should meet a11y standards', async () => {
@@ -84,7 +84,7 @@ describe('<Spinner />', () => {
     const axeCheck = await runAxeCheck(container)
 
     expect(axeCheck).toBe(true)
-    expect(spinner).toHaveTextContent('I have translated Loading')
+    expect(spinner).toMatchTextContent('I have translated Loading')
   })
 
   describe('with the delay prop', () => {

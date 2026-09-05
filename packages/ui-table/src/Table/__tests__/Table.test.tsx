@@ -69,7 +69,7 @@ describe('<Table />', async () => {
     const caption = container.querySelector('caption')
 
     expect(caption).toBeInTheDocument()
-    expect(caption).toHaveTextContent('Test table')
+    expect(caption).toMatchTextContent('Test table')
   })
 
   it('should meet a11y standards', async () => {
@@ -128,9 +128,9 @@ describe('<Table />', async () => {
     const stackedTable = page.getByRole('table').element()
 
     expect(stackedTable).toBeInTheDocument()
-    expect(stackedTable).toHaveTextContent('RowHeader')
-    expect(stackedTable).toHaveTextContent('Cell')
-    expect(stackedTable).not.toHaveTextContent('ColHeader')
+    expect(stackedTable).toMatchTextContent('RowHeader')
+    expect(stackedTable).toMatchTextContent('Cell')
+    expect(stackedTable).not.toMatchTextContent('ColHeader')
   })
 
   it('can handle non-existent head in stacked layout', async () => {
@@ -184,7 +184,7 @@ describe('<Table />', async () => {
     const stackedTable = page.getByRole('table').element()
 
     expect(stackedTable).toBeInTheDocument()
-    expect(stackedTable).not.toHaveTextContent('Foo')
+    expect(stackedTable).not.toMatchTextContent('Foo')
   })
 
   it('does not crash for invalid children in stacked layout', async () => {
@@ -224,7 +224,7 @@ describe('<Table />', async () => {
     const table = page.getByRole('table').element()
 
     expect(table).toBeInTheDocument()
-    expect(table).toHaveTextContent('Foo')
+    expect(table).toMatchTextContent('Foo')
   })
 
   describe('when table is sortable', async () => {
@@ -309,8 +309,8 @@ describe('<Table />', async () => {
       await vi.waitFor(async () => {
         const options = page.getByRole('option').elements()
 
-        expect(options[0]).toHaveTextContent('Custom Text')
-        expect(options[1]).toHaveTextContent('bar')
+        expect(options[0]).toMatchTextContent('Custom Text')
+        expect(options[1]).toMatchTextContent('bar')
       })
     })
 
@@ -371,7 +371,7 @@ describe('<Table />', async () => {
       )
 
       expect(caption).toHaveBeenCalledWith('Foo', 'ascending')
-      expect(container.querySelector('caption')).toHaveTextContent(
+      expect(container.querySelector('caption')).toMatchTextContent(
         'Movies, sorted by Foo ascending'
       )
     })
@@ -426,8 +426,8 @@ describe('<Table />', async () => {
       expect(stackedTable).toBeInTheDocument()
       const { container } = table
       expect(container).toBeInTheDocument()
-      expect(container).toHaveTextContent('The Shawshank Redemption')
-      expect(container).toHaveTextContent('9.3')
+      expect(container).toMatchTextContent('The Shawshank Redemption')
+      expect(container).toMatchTextContent('9.3')
     })
 
     it('should render fully custom components', async () => {
@@ -466,11 +466,11 @@ describe('<Table />', async () => {
       expect(stackedTable).toBeInTheDocument()
       const { container } = table
       expect(container).toBeInTheDocument()
-      expect(container).toHaveTextContent('ColHeader')
-      expect(container).toHaveTextContent('Bar-header')
-      expect(container).toHaveTextContent('RowHeader2')
-      expect(container).toHaveTextContent('Cell')
-      expect(container).toHaveTextContent('Cell2')
+      expect(container).toMatchTextContent('ColHeader')
+      expect(container).toMatchTextContent('Bar-header')
+      expect(container).toMatchTextContent('RowHeader2')
+      expect(container).toMatchTextContent('Cell')
+      expect(container).toMatchTextContent('Cell2')
     })
   })
 

@@ -627,8 +627,8 @@ describe('<ColorPicker />', () => {
         expect(popoverContent).toBeInTheDocument()
 
         expect(buttons.length).toBe(2)
-        expect(buttons[0]).toHaveTextContent('close')
-        expect(buttons[1]).toHaveTextContent('add')
+        expect(buttons[0]).toMatchTextContent('close')
+        expect(buttons[1]).toMatchTextContent('add')
       })
     })
 
@@ -919,9 +919,9 @@ describe('<ColorPicker />', () => {
 
     const colorContrast = document.querySelector('div[class$="-colorContrast"]')
 
-    expect(colorContrast).toHaveTextContent('Normal text')
-    expect(colorContrast).toHaveTextContent('Large text')
-    expect(colorContrast).toHaveTextContent('Graphics text')
+    expect(colorContrast).toMatchTextContent('Normal text')
+    expect(colorContrast).toMatchTextContent('Large text')
+    expect(colorContrast).toMatchTextContent('Graphics text')
   })
 
   it('should display the correct color in the colormixer when the input is prefilled in custom popover mode', async () => {
@@ -1173,8 +1173,8 @@ describe('<ColorPicker />', () => {
 
     const colorContrast = document.querySelector('div[class$="-colorContrast"]')
 
-    expect(colorContrast).toHaveTextContent('Normal text')
-    expect(colorContrast).toHaveTextContent('Large text')
-    expect(colorContrast).toHaveTextContent('Graphics text')
+    expect(colorContrast).toMatchTextContent('Normal text')
+    expect(colorContrast).toMatchTextContent('Large text')
+    expect(colorContrast).toMatchTextContent('Graphics text')
   })
 })

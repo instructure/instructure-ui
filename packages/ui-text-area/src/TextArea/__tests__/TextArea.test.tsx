@@ -55,7 +55,7 @@ describe('TextArea', () => {
     )
     const input = page.getByRole('textbox').element()
 
-    expect(input).toHaveTextContent('Tom Servo')
+    expect(input).toMatchTextContent('Tom Servo')
   })
 
   it('should include a label', async () => {
@@ -66,7 +66,7 @@ describe('TextArea', () => {
       'span[class$="-formFieldLayout__label"]'
     )
 
-    expect(textArea).toHaveTextContent('Name')
+    expect(textArea).toMatchTextContent('Name')
   })
 
   it('should set an initial height', async () => {
@@ -234,15 +234,15 @@ describe('TextArea', () => {
 
       const describedById = input.getAttribute('aria-describedby')
       expect(describedById).toBeTruthy()
-      expect(document.getElementById(describedById!)).toHaveTextContent(
+      expect(document.getElementById(describedById!)).toMatchTextContent(
         'some error message'
       )
 
       const labelledById = input.getAttribute('aria-labelledby')
       expect(labelledById).toBeTruthy()
       const labelEl = document.getElementById(labelledById!)
-      expect(labelEl).toHaveTextContent('Name')
-      expect(labelEl).not.toHaveTextContent('some error message')
+      expect(labelEl).toMatchTextContent('Name')
+      expect(labelEl).not.toMatchTextContent('some error message')
     })
 
     it('does not override the accessible name with aria-labelledby when there are no messages', async () => {

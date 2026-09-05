@@ -425,9 +425,9 @@ describe('<Select />', () => {
     expect(list).toBeInTheDocument()
 
     expect(options.length).toBe(optionsCount)
-    expect(options[0]).toHaveTextContent(defaultOptions[0])
-    expect(options[1]).toHaveTextContent(defaultOptions[1])
-    expect(options[2]).toHaveTextContent(defaultOptions[2])
+    expect(options[0]).toMatchTextContent(defaultOptions[0])
+    expect(options[1]).toMatchTextContent(defaultOptions[1])
+    expect(options[2]).toMatchTextContent(defaultOptions[2])
   })
 
   it('should render groups', async () => {
@@ -687,7 +687,7 @@ describe('<Select />', () => {
         'span[class$="-textInput__layout"]'
       )
 
-      expect(beforeContent).not.toHaveTextContent('XY')
+      expect(beforeContent).not.toMatchTextContent('XY')
     })
 
     it('should render arrow in input field when isOptionContentAppliedToInput is set to false', async () => {
@@ -723,7 +723,7 @@ describe('<Select />', () => {
         'span[class$="-textInput__layout"]'
       )
 
-      expect(beforeContent).toHaveTextContent('XY')
+      expect(beforeContent).toMatchTextContent('XY')
     })
 
     it('should render arrow icon when isOptionContentAppliedToInput is set to true with before content', async () => {
@@ -758,7 +758,7 @@ describe('<Select />', () => {
       const beforeContent = container.querySelector(
         'span[class$="-textInput__afterElement"]'
       )
-      expect(beforeContent).toHaveTextContent('XY')
+      expect(beforeContent).toMatchTextContent('XY')
     })
 
     it("should render option's before content in input field when isOptionContentAppliedToInput is set to true but renderBeforeInput is also set", async () => {
@@ -777,7 +777,7 @@ describe('<Select />', () => {
         'span[class$="-textInput__layout"]'
       )
 
-      expect(beforeContent).toHaveTextContent('XY')
+      expect(beforeContent).toMatchTextContent('XY')
     })
 
     it("should render option's after content in input field when isOptionContentAppliedToInput is set to true but renderAfterInput is also set", async () => {
@@ -795,7 +795,7 @@ describe('<Select />', () => {
       const afterContent = container.querySelector(
         'span[class$="-textInput__afterElement"]'
       )
-      expect(afterContent).toHaveTextContent('XY')
+      expect(afterContent).toMatchTextContent('XY')
     })
 
     it("should not render option's before content in input field when isOptionContentAppliedToInput is set to true but inputValue is not set", async () => {
@@ -812,7 +812,7 @@ describe('<Select />', () => {
         'span[class$="-textInput__layout"]'
       )
 
-      expect(beforeContent).not.toHaveTextContent('XY')
+      expect(beforeContent).not.toMatchTextContent('XY')
     })
 
     it("should render option's before content in input field when isOptionContentAppliedToInput is set to true and both optionBeforeContent and optionAfterContent are provided", async () => {
@@ -830,7 +830,7 @@ describe('<Select />', () => {
         'span[class$="-textInput__layout"]'
       )
 
-      expect(beforeContent).toHaveTextContent('XY')
+      expect(beforeContent).toMatchTextContent('XY')
     })
 
     it("should render option's after content in input field when isOptionContentAppliedToInput is set to true and both optionBeforeContent and optionAfterContent are provided", async () => {
@@ -847,7 +847,7 @@ describe('<Select />', () => {
       const afterContent = container.querySelector(
         'span[class$="-textInput__afterElement"]'
       )
-      expect(afterContent).toHaveTextContent('ZZ')
+      expect(afterContent).toMatchTextContent('ZZ')
     })
 
     it('should render arrow in input field when isOptionContentAppliedToInput is set to true but inputValue is not set', async () => {
@@ -882,7 +882,7 @@ describe('<Select />', () => {
         'span[class$="-textInput__afterElement"]'
       )
 
-      expect(afterContent).not.toHaveTextContent('XY')
+      expect(afterContent).not.toMatchTextContent('XY')
     })
 
     it("should render option's before content input field when isOptionContentAppliedToInput is set to true with group options", async () => {
@@ -900,7 +900,7 @@ describe('<Select />', () => {
         'span[class$="-textInput__layout"]'
       )
 
-      expect(beforeContent).toHaveTextContent('XY')
+      expect(beforeContent).toMatchTextContent('XY')
     })
 
     it('should render arrow icon when isOptionContentAppliedToInput is set to true with before content and group options', async () => {
@@ -936,7 +936,7 @@ describe('<Select />', () => {
         'span[class$="-textInput__afterElement"]'
       )
 
-      expect(afterContent).toHaveTextContent('AB')
+      expect(afterContent).toMatchTextContent('AB')
     })
   })
 
@@ -1743,7 +1743,7 @@ describe('<Select />', () => {
       const beforeElement = () =>
         container.querySelector('span[class$="-textInput__beforeElement"]')
 
-      expect(beforeElement()).toHaveTextContent('XY')
+      expect(beforeElement()).toMatchTextContent('XY')
 
       await userEvent.click(container.querySelector('input')!)
       await userEvent.click(
@@ -1751,7 +1751,7 @@ describe('<Select />', () => {
       )
 
       await vi.waitFor(() => {
-        expect(beforeElement()).toHaveTextContent('YY')
+        expect(beforeElement()).toMatchTextContent('YY')
       })
     })
 
@@ -1796,7 +1796,7 @@ describe('<Select />', () => {
       const afterElement = () =>
         container.querySelector('span[class$="-textInput__afterElement"]')
 
-      expect(afterElement()).toHaveTextContent('XY')
+      expect(afterElement()).toMatchTextContent('XY')
 
       await userEvent.click(container.querySelector('input')!)
       await userEvent.click(
@@ -1804,7 +1804,7 @@ describe('<Select />', () => {
       )
 
       await vi.waitFor(() => {
-        expect(afterElement()).toHaveTextContent('YY')
+        expect(afterElement()).toMatchTextContent('YY')
       })
     })
   })

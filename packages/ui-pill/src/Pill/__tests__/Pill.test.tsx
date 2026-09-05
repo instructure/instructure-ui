@@ -36,13 +36,13 @@ describe('<Pill />', () => {
     const pill = container.querySelector('div[class$="-pill"]')
 
     expect(pill).toBeInTheDocument()
-    expect(pill).toHaveTextContent('Overdue')
+    expect(pill).toMatchTextContent('Overdue')
   })
 
   it('should display text', async () => {
     const { container } = await render(<Pill>Overdue</Pill>)
 
-    expect(container).toHaveTextContent('Overdue')
+    expect(container).toMatchTextContent('Overdue')
   })
 
   it('should display status text', async () => {
@@ -50,8 +50,8 @@ describe('<Pill />', () => {
       <Pill statusLabel="Statuslabel">Overdue</Pill>
     )
 
-    expect(container).toHaveTextContent('Statuslabel:')
-    expect(container).toHaveTextContent('Overdue')
+    expect(container).toMatchTextContent('Statuslabel:')
+    expect(container).toMatchTextContent('Overdue')
   })
 
   it('should render icon text', async () => {
@@ -66,8 +66,8 @@ describe('<Pill />', () => {
 
     const svg = container.querySelector('svg')
 
-    expect(container).toHaveTextContent('Statuslabel:')
-    expect(container).toHaveTextContent('Overdue')
+    expect(container).toMatchTextContent('Statuslabel:')
+    expect(container).toMatchTextContent('Overdue')
     expect(svg).toHaveAttribute('name', 'IconEye')
   })
 
@@ -108,7 +108,7 @@ describe('<Pill />', () => {
       const tooltip = () =>
         document.querySelector<HTMLElement>('span[role="tooltip"]')!
 
-      expect(trigger).toHaveTextContent(text)
+      expect(trigger).toMatchTextContent(text)
       expect(tooltip()).not.toBeVisible()
 
       await userEvent.hover(trigger)
@@ -116,7 +116,7 @@ describe('<Pill />', () => {
       await vi.waitFor(() => {
         expect(tooltip()).toBeVisible()
       })
-      expect(tooltip()).toHaveTextContent(text)
+      expect(tooltip()).toMatchTextContent(text)
     })
   })
 })

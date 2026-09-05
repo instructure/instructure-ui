@@ -247,7 +247,7 @@ describe('<Avatar />', () => {
       const { container } = await render(<Avatar name="" />)
       const initials = container.querySelector('span')
       expect(initials).toBeInTheDocument()
-      expect(initials).toHaveTextContent('')
+      expect(initials).toMatchTextContent('')
     })
   })
 

@@ -68,7 +68,7 @@ describe('<Button/>', () => {
     const button = document.querySelector('button')
 
     expect(button).toBeInTheDocument()
-    expect(button).toHaveTextContent(children)
+    expect(button).toMatchTextContent(children)
   })
 
   it('should render a button', async () => {
@@ -78,7 +78,7 @@ describe('<Button/>', () => {
 
     expect(button).toBeInTheDocument()
     expect(button).toHaveAttribute('type', 'button')
-    expect(button).toHaveTextContent('Hello World')
+    expect(button).toMatchTextContent('Hello World')
   })
 
   it('should provide a focused getter', async () => {
@@ -145,7 +145,7 @@ describe('<Button/>', () => {
     const button = container.querySelector('[type="button"]')
 
     expect(button).toBeInTheDocument()
-    expect(button).toHaveTextContent('Hello')
+    expect(button).toMatchTextContent('Hello')
     expect(button!.tagName).toBe('LI')
   })
 
@@ -219,7 +219,7 @@ describe('<Button/>', () => {
     const button = page.getByRole('button').element()
 
     expect(button).toBeInTheDocument()
-    expect(button).toHaveTextContent('Hello World')
+    expect(button).toMatchTextContent('Hello World')
   })
 
   it('should not error with a null child', async () => {
@@ -254,7 +254,7 @@ describe('<Button/>', () => {
     const button = container.querySelector('[type="button"]')
 
     expect(button).toBeInTheDocument()
-    expect(button).toHaveTextContent('Hello World')
+    expect(button).toMatchTextContent('Hello World')
     expect(button!.tagName).toBe('SPAN')
   })
 

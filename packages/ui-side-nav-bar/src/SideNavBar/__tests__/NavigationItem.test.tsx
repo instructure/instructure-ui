@@ -57,7 +57,7 @@ describe('<SideNavBarItem />', () => {
     expect(navItem).toBeInTheDocument()
     expect(navItem.tagName).toBe('A')
     expect(navItem).toHaveAttribute('href', '#')
-    expect(navItem).toHaveTextContent('Admin')
+    expect(navItem).toMatchTextContent('Admin')
   })
 
   it('should meet a11y standards', async () => {
@@ -90,7 +90,7 @@ describe('<SideNavBarItem />', () => {
       )
       const tooltip = page.getByRole('tooltip', { includeHidden: true })
 
-      await expect.element(tooltip).toHaveTextContent('Admin')
+      await expect.element(tooltip).toMatchTextContent('Admin')
 
       // The real pointer stays wherever an earlier test left it, so it can
       // already sit on the nav item when this one renders and open the tooltip

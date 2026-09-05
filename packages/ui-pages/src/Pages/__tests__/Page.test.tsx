@@ -58,7 +58,7 @@ describe('<Page />', () => {
       </Page>
     )
 
-    expect(container).toHaveTextContent('Hello World')
+    expect(container).toMatchTextContent('Hello World')
   })
 
   describe('Component tests', () => {

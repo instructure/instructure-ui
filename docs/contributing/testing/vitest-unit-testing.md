@@ -43,16 +43,17 @@ Vitest tests usually have a structure like this:
 ---
 type: code
 ---
-import { render, screen } from '@testing-library/react'
-import { vi } from 'vitest'
+import { render } from 'vitest-browser-react'
+import { page } from 'vitest/browser'
+import { describe, it, expect, vi } from 'vitest'
 
-import '@testing-library/jest-dom'
-import ComponentToTest from '../index'
+import { ComponentToTest } from '../index'
 
 describe('<ComponentToTest/>', () => {
-  it('works as intended...', () => {
+  it('works as intended...', async () => {
     const onClickMock = vi.fn()
-    render(<ComponentToTest onClick={onClickMock}/>)
+    await render(<ComponentToTest onClick={onClickMock} />)
+    await expect.element(page.getByText('Label')).toBeVisible()
     // rest of the test comes here
   })
 })
@@ -72,10 +73,11 @@ If you need to debug a test in your IDE or print extra info, you can use:
 console.log('Debug info')
 ```
 
-To inspect the rendered DOM and current test state, you can also use:
+To inspect the rendered DOM, log the container returned by `render`:
 
 ```
-screen.debug()
+const { container } = await render(<ComponentToTest />)
+console.log(container.innerHTML)
 ```
 
 If you want to debug tests using breakpoints, see [IDE Integrations](https://vitest.dev/guide/ide.html).
