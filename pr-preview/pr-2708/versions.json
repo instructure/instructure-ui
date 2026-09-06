@@ -1,0 +1,10 @@
+{
+  "latestVersion": "v11",
+  "previousVersions": ["v10", "v9", "v8", "v7"],
+  "olderVersionsGitBranchMap": {
+    "v10": "v10_maintenance",
+    "v9": "v9_maintenance",
+    "v8": "v8_maintenance",
+    "v7": "v7_maintenance"
+  }
+}
