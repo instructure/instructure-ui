@@ -1,456 +1,355 @@
 {
   "summary": {
     "total": 96,
-    "unchanged": 3,
-    "changed": 93,
+    "unchanged": 93,
+    "changed": 3,
     "added": 0,
     "removed": 0,
-    "shifted": 0,
     "a11yPages": 0,
     "a11yViolations": 0
   },
   "results": [
     {
       "name": "alert-canvas.png",
-      "status": "changed",
-      "numDiff": 1207,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "alert-dark.png",
-      "status": "changed",
-      "numDiff": 1308,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "alert-light.png",
-      "status": "changed",
-      "numDiff": 1282,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "avatar-canvas.png",
-      "status": "changed",
-      "numDiff": 794,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "avatar-dark.png",
-      "status": "changed",
-      "numDiff": 830,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "avatar-light.png",
-      "status": "changed",
-      "numDiff": 815,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "badge-canvas.png",
       "status": "changed",
-      "numDiff": 288,
+      "numDiff": 1573,
       "sizeMismatch": false
     },
     {
       "name": "badge-dark.png",
-      "status": "changed",
-      "numDiff": 301,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "badge-light.png",
-      "status": "changed",
-      "numDiff": 295,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "billboard-canvas.png",
-      "status": "changed",
-      "numDiff": 947,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "billboard-dark.png",
-      "status": "changed",
-      "numDiff": 1431,
-      "sizeMismatch": false,
-      "offset": {
-        "dx": 0,
-        "dy": -1,
-        "residual": 297
-      }
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "billboard-light.png",
-      "status": "changed",
-      "numDiff": 1409,
-      "sizeMismatch": false,
-      "offset": {
-        "dx": 0,
-        "dy": -1,
-        "residual": 760
-      }
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "breadcrumb-canvas.png",
-      "status": "changed",
-      "numDiff": 1628,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "breadcrumb-dark.png",
-      "status": "changed",
-      "numDiff": 1812,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "breadcrumb-light.png",
-      "status": "changed",
-      "numDiff": 1754,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "button-canvas.png",
-      "status": "changed",
-      "numDiff": 4784,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "button-dark.png",
-      "status": "changed",
-      "numDiff": 4896,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "button-light.png",
-      "status": "changed",
-      "numDiff": 5117,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "byline-canvas.png",
-      "status": "changed",
-      "numDiff": 1761,
-      "sizeMismatch": false,
-      "offset": {
-        "dx": 0,
-        "dy": -1,
-        "residual": 1136
-      }
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "byline-dark.png",
-      "status": "changed",
-      "numDiff": 1926,
-      "sizeMismatch": false,
-      "offset": {
-        "dx": 0,
-        "dy": -1,
-        "residual": 1139
-      }
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "byline-light.png",
-      "status": "changed",
-      "numDiff": 1853,
-      "sizeMismatch": false,
-      "offset": {
-        "dx": 0,
-        "dy": -1,
-        "residual": 1120
-      }
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "calendar-canvas.png",
-      "status": "changed",
-      "numDiff": 4133,
-      "sizeMismatch": false,
-      "offset": {
-        "dx": 0,
-        "dy": -1,
-        "residual": 403
-      }
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "calendar-dark.png",
-      "status": "changed",
-      "numDiff": 4521,
-      "sizeMismatch": false,
-      "offset": {
-        "dx": 0,
-        "dy": -1,
-        "residual": 373
-      }
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "calendar-light.png",
-      "status": "changed",
-      "numDiff": 4570,
-      "sizeMismatch": false,
-      "offset": {
-        "dx": 0,
-        "dy": -1,
-        "residual": 373
-      }
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "checkbox-canvas.png",
-      "status": "changed",
-      "numDiff": 2132,
-      "sizeMismatch": false,
-      "offset": {
-        "dx": 0,
-        "dy": -1,
-        "residual": 1561
-      }
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "checkbox-dark.png",
-      "status": "changed",
-      "numDiff": 2678,
-      "sizeMismatch": false,
-      "offset": {
-        "dx": 0,
-        "dy": -1,
-        "residual": 1500
-      }
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "checkbox-light.png",
-      "status": "changed",
-      "numDiff": 2641,
-      "sizeMismatch": false,
-      "offset": {
-        "dx": 0,
-        "dy": -1,
-        "residual": 1623
-      }
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "checkboxgroup-canvas.png",
-      "status": "changed",
-      "numDiff": 3385,
-      "sizeMismatch": false,
-      "offset": {
-        "dx": 0,
-        "dy": -1,
-        "residual": 1751
-      }
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "checkboxgroup-dark.png",
-      "status": "changed",
-      "numDiff": 3464,
-      "sizeMismatch": false,
-      "offset": {
-        "dx": 0,
-        "dy": -1,
-        "residual": 1895
-      }
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "checkboxgroup-light.png",
-      "status": "changed",
-      "numDiff": 3402,
-      "sizeMismatch": false,
-      "offset": {
-        "dx": 0,
-        "dy": -1,
-        "residual": 1822
-      }
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "colorpicker-canvas.png",
-      "status": "changed",
-      "numDiff": 11336,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "colorpicker-dark.png",
-      "status": "changed",
-      "numDiff": 4166,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "colorpicker-light.png",
-      "status": "changed",
-      "numDiff": 11366,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "contextview-canvas.png",
-      "status": "changed",
-      "numDiff": 3779,
-      "sizeMismatch": false,
-      "offset": {
-        "dx": 0,
-        "dy": -1,
-        "residual": 996
-      }
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "contextview-dark.png",
-      "status": "changed",
-      "numDiff": 4612,
-      "sizeMismatch": false,
-      "offset": {
-        "dx": 0,
-        "dy": -1,
-        "residual": 3325
-      }
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "contextview-light.png",
-      "status": "changed",
-      "numDiff": 4508,
-      "sizeMismatch": false,
-      "offset": {
-        "dx": 0,
-        "dy": -1,
-        "residual": 28
-      }
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "custom-icons-canvas.png",
-      "status": "changed",
-      "numDiff": 10685,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "custom-icons-dark.png",
-      "status": "changed",
-      "numDiff": 10546,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "custom-icons-light.png",
-      "status": "changed",
-      "numDiff": 10068,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "dateinput-canvas.png",
-      "status": "changed",
-      "numDiff": 2162,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "dateinput-dark.png",
-      "status": "changed",
-      "numDiff": 2249,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "dateinput-light.png",
-      "status": "changed",
-      "numDiff": 2227,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "datetimeinput-canvas.png",
-      "status": "changed",
-      "numDiff": 3272,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "datetimeinput-dark.png",
-      "status": "changed",
-      "numDiff": 3549,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "datetimeinput-light.png",
-      "status": "changed",
-      "numDiff": 3458,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "drilldown-canvas.png",
-      "status": "changed",
-      "numDiff": 3360,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "drilldown-dark.png",
-      "status": "changed",
-      "numDiff": 3474,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "drilldown-light.png",
-      "status": "changed",
-      "numDiff": 3437,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "filedrop-canvas.png",
-      "status": "changed",
-      "numDiff": 3335,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "filedrop-dark.png",
-      "status": "changed",
-      "numDiff": 3549,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "filedrop-light.png",
-      "status": "changed",
-      "numDiff": 3570,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "form-errors-canvas.png",
-      "status": "changed",
-      "numDiff": 5239,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "form-errors-dark.png",
-      "status": "changed",
-      "numDiff": 5216,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "form-errors-light.png",
-      "status": "changed",
-      "numDiff": 5203,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "heading-canvas.png",
-      "status": "changed",
-      "numDiff": 3632,
-      "sizeMismatch": false,
-      "offset": {
-        "dx": 0,
-        "dy": -1,
-        "residual": 2434
-      }
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "heading-dark.png",
-      "status": "changed",
-      "numDiff": 4547,
-      "sizeMismatch": false,
-      "offset": {
-        "dx": 0,
-        "dy": -1,
-        "residual": 1890
-      }
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "heading-light.png",
-      "status": "changed",
-      "numDiff": 4432,
-      "sizeMismatch": false,
-      "offset": {
-        "dx": 0,
-        "dy": -1,
-        "residual": 1864
-      }
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "img-canvas.png",
@@ -472,283 +371,218 @@
     },
     {
       "name": "link-canvas.png",
-      "status": "changed",
-      "numDiff": 8842,
-      "sizeMismatch": true,
-      "offset": {
-        "dx": 0,
-        "dy": -1,
-        "residual": 1478
-      }
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "link-dark.png",
-      "status": "changed",
-      "numDiff": 9345,
-      "sizeMismatch": false,
-      "offset": {
-        "dx": 0,
-        "dy": -1,
-        "residual": 1279
-      }
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "link-light.png",
-      "status": "changed",
-      "numDiff": 8701,
-      "sizeMismatch": false,
-      "offset": {
-        "dx": 0,
-        "dy": -1,
-        "residual": 1272
-      }
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "menu-canvas.png",
-      "status": "changed",
-      "numDiff": 1582,
-      "sizeMismatch": false,
-      "offset": {
-        "dx": 0,
-        "dy": -1,
-        "residual": 1451
-      }
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "menu-dark.png",
-      "status": "changed",
-      "numDiff": 1750,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "menu-light.png",
-      "status": "changed",
-      "numDiff": 1715,
-      "sizeMismatch": false,
-      "offset": {
-        "dx": 0,
-        "dy": -1,
-        "residual": 796
-      }
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "options-canvas.png",
-      "status": "changed",
-      "numDiff": 3276,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "options-dark.png",
-      "status": "changed",
-      "numDiff": 3441,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "options-light.png",
-      "status": "changed",
-      "numDiff": 3445,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "pagination-canvas.png",
-      "status": "changed",
-      "numDiff": 978,
-      "sizeMismatch": false,
-      "offset": {
-        "dx": 0,
-        "dy": -1,
-        "residual": 931
-      }
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "pagination-dark.png",
-      "status": "changed",
-      "numDiff": 1155,
-      "sizeMismatch": false,
-      "offset": {
-        "dx": 0,
-        "dy": -1,
-        "residual": 808
-      }
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "pagination-light.png",
-      "status": "changed",
-      "numDiff": 1130,
-      "sizeMismatch": false,
-      "offset": {
-        "dx": 0,
-        "dy": -1,
-        "residual": 807
-      }
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "progressbar-canvas.png",
-      "status": "changed",
-      "numDiff": 1449,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "progressbar-dark.png",
-      "status": "changed",
-      "numDiff": 1585,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "progressbar-light.png",
-      "status": "changed",
-      "numDiff": 1523,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "select-canvas.png",
-      "status": "changed",
-      "numDiff": 1979,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "select-dark.png",
-      "status": "changed",
-      "numDiff": 2066,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "select-light.png",
-      "status": "changed",
-      "numDiff": 2033,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "small-components-canvas.png",
-      "status": "changed",
-      "numDiff": 3644,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "small-components-dark.png",
-      "status": "changed",
-      "numDiff": 5603,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "small-components-light.png",
-      "status": "changed",
-      "numDiff": 4988,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "table-canvas.png",
-      "status": "changed",
-      "numDiff": 3923,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "table-dark.png",
-      "status": "changed",
-      "numDiff": 4240,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "table-light.png",
-      "status": "changed",
-      "numDiff": 4199,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "tabs-canvas.png",
-      "status": "changed",
-      "numDiff": 1179,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "tabs-dark.png",
-      "status": "changed",
-      "numDiff": 1412,
-      "sizeMismatch": false,
-      "offset": {
-        "dx": 0,
-        "dy": -1,
-        "residual": 1190
-      }
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "tabs-light.png",
-      "status": "changed",
-      "numDiff": 1349,
-      "sizeMismatch": false,
-      "offset": {
-        "dx": 0,
-        "dy": -1,
-        "residual": 1190
-      }
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "tooltip-canvas.png",
-      "status": "changed",
-      "numDiff": 6940,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "tooltip-dark.png",
       "status": "changed",
-      "numDiff": 21776,
+      "numDiff": 881,
       "sizeMismatch": false
     },
     {
       "name": "tooltip-light.png",
       "status": "changed",
-      "numDiff": 7764,
+      "numDiff": 956,
       "sizeMismatch": false
     },
     {
       "name": "treebrowser-canvas.png",
-      "status": "changed",
-      "numDiff": 2503,
-      "sizeMismatch": false,
-      "offset": {
-        "dx": 0,
-        "dy": -1,
-        "residual": 1666
-      }
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "treebrowser-dark.png",
-      "status": "changed",
-      "numDiff": 2832,
-      "sizeMismatch": false,
-      "offset": {
-        "dx": 0,
-        "dy": -1,
-        "residual": 1765
-      }
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "treebrowser-light.png",
-      "status": "changed",
-      "numDiff": 2753,
-      "sizeMismatch": false,
-      "offset": {
-        "dx": 0,
-        "dy": -1,
-        "residual": 1753
-      }
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
     },
     {
       "name": "view-canvas.png",
-      "status": "changed",
-      "numDiff": 13036,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "view-dark.png",
-      "status": "changed",
-      "numDiff": 13477,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
       "name": "view-light.png",
-      "status": "changed",
-      "numDiff": 13433,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     }
   ],
