@@ -1,0 +1,2 @@
+:HL["/visual-regression/pr-2710/app/_next/static/css/da0fb08a9a6768f5.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"checkbox","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"PRuLiSm2-cBAfgS2xlKQX"}

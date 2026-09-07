@@ -1,0 +1,756 @@
+{
+  "summary": {
+    "total": 96,
+    "unchanged": 3,
+    "changed": 93,
+    "added": 0,
+    "removed": 0,
+    "shifted": 0,
+    "a11yPages": 0,
+    "a11yViolations": 0
+  },
+  "results": [
+    {
+      "name": "alert-canvas.png",
+      "status": "changed",
+      "numDiff": 1207,
+      "sizeMismatch": false
+    },
+    {
+      "name": "alert-dark.png",
+      "status": "changed",
+      "numDiff": 1308,
+      "sizeMismatch": false
+    },
+    {
+      "name": "alert-light.png",
+      "status": "changed",
+      "numDiff": 1282,
+      "sizeMismatch": false
+    },
+    {
+      "name": "avatar-canvas.png",
+      "status": "changed",
+      "numDiff": 794,
+      "sizeMismatch": false
+    },
+    {
+      "name": "avatar-dark.png",
+      "status": "changed",
+      "numDiff": 830,
+      "sizeMismatch": false
+    },
+    {
+      "name": "avatar-light.png",
+      "status": "changed",
+      "numDiff": 815,
+      "sizeMismatch": false
+    },
+    {
+      "name": "badge-canvas.png",
+      "status": "changed",
+      "numDiff": 288,
+      "sizeMismatch": false
+    },
+    {
+      "name": "badge-dark.png",
+      "status": "changed",
+      "numDiff": 301,
+      "sizeMismatch": false
+    },
+    {
+      "name": "badge-light.png",
+      "status": "changed",
+      "numDiff": 295,
+      "sizeMismatch": false
+    },
+    {
+      "name": "billboard-canvas.png",
+      "status": "changed",
+      "numDiff": 947,
+      "sizeMismatch": false
+    },
+    {
+      "name": "billboard-dark.png",
+      "status": "changed",
+      "numDiff": 1431,
+      "sizeMismatch": false,
+      "offset": {
+        "dx": 0,
+        "dy": -1,
+        "residual": 297
+      }
+    },
+    {
+      "name": "billboard-light.png",
+      "status": "changed",
+      "numDiff": 1409,
+      "sizeMismatch": false,
+      "offset": {
+        "dx": 0,
+        "dy": -1,
+        "residual": 760
+      }
+    },
+    {
+      "name": "breadcrumb-canvas.png",
+      "status": "changed",
+      "numDiff": 1628,
+      "sizeMismatch": false
+    },
+    {
+      "name": "breadcrumb-dark.png",
+      "status": "changed",
+      "numDiff": 1812,
+      "sizeMismatch": false
+    },
+    {
+      "name": "breadcrumb-light.png",
+      "status": "changed",
+      "numDiff": 1754,
+      "sizeMismatch": false
+    },
+    {
+      "name": "button-canvas.png",
+      "status": "changed",
+      "numDiff": 4784,
+      "sizeMismatch": false
+    },
+    {
+      "name": "button-dark.png",
+      "status": "changed",
+      "numDiff": 4896,
+      "sizeMismatch": false
+    },
+    {
+      "name": "button-light.png",
+      "status": "changed",
+      "numDiff": 5117,
+      "sizeMismatch": false
+    },
+    {
+      "name": "byline-canvas.png",
+      "status": "changed",
+      "numDiff": 1761,
+      "sizeMismatch": false,
+      "offset": {
+        "dx": 0,
+        "dy": -1,
+        "residual": 1136
+      }
+    },
+    {
+      "name": "byline-dark.png",
+      "status": "changed",
+      "numDiff": 1926,
+      "sizeMismatch": false,
+      "offset": {
+        "dx": 0,
+        "dy": -1,
+        "residual": 1139
+      }
+    },
+    {
+      "name": "byline-light.png",
+      "status": "changed",
+      "numDiff": 1853,
+      "sizeMismatch": false,
+      "offset": {
+        "dx": 0,
+        "dy": -1,
+        "residual": 1120
+      }
+    },
+    {
+      "name": "calendar-canvas.png",
+      "status": "changed",
+      "numDiff": 4133,
+      "sizeMismatch": false,
+      "offset": {
+        "dx": 0,
+        "dy": -1,
+        "residual": 403
+      }
+    },
+    {
+      "name": "calendar-dark.png",
+      "status": "changed",
+      "numDiff": 4521,
+      "sizeMismatch": false,
+      "offset": {
+        "dx": 0,
+        "dy": -1,
+        "residual": 373
+      }
+    },
+    {
+      "name": "calendar-light.png",
+      "status": "changed",
+      "numDiff": 4570,
+      "sizeMismatch": false,
+      "offset": {
+        "dx": 0,
+        "dy": -1,
+        "residual": 373
+      }
+    },
+    {
+      "name": "checkbox-canvas.png",
+      "status": "changed",
+      "numDiff": 2132,
+      "sizeMismatch": false,
+      "offset": {
+        "dx": 0,
+        "dy": -1,
+        "residual": 1561
+      }
+    },
+    {
+      "name": "checkbox-dark.png",
+      "status": "changed",
+      "numDiff": 2678,
+      "sizeMismatch": false,
+      "offset": {
+        "dx": 0,
+        "dy": -1,
+        "residual": 1500
+      }
+    },
+    {
+      "name": "checkbox-light.png",
+      "status": "changed",
+      "numDiff": 2641,
+      "sizeMismatch": false,
+      "offset": {
+        "dx": 0,
+        "dy": -1,
+        "residual": 1623
+      }
+    },
+    {
+      "name": "checkboxgroup-canvas.png",
+      "status": "changed",
+      "numDiff": 3385,
+      "sizeMismatch": false,
+      "offset": {
+        "dx": 0,
+        "dy": -1,
+        "residual": 1751
+      }
+    },
+    {
+      "name": "checkboxgroup-dark.png",
+      "status": "changed",
+      "numDiff": 3464,
+      "sizeMismatch": false,
+      "offset": {
+        "dx": 0,
+        "dy": -1,
+        "residual": 1895
+      }
+    },
+    {
+      "name": "checkboxgroup-light.png",
+      "status": "changed",
+      "numDiff": 3402,
+      "sizeMismatch": false,
+      "offset": {
+        "dx": 0,
+        "dy": -1,
+        "residual": 1822
+      }
+    },
+    {
+      "name": "colorpicker-canvas.png",
+      "status": "changed",
+      "numDiff": 11336,
+      "sizeMismatch": false
+    },
+    {
+      "name": "colorpicker-dark.png",
+      "status": "changed",
+      "numDiff": 4166,
+      "sizeMismatch": false
+    },
+    {
+      "name": "colorpicker-light.png",
+      "status": "changed",
+      "numDiff": 11366,
+      "sizeMismatch": false
+    },
+    {
+      "name": "contextview-canvas.png",
+      "status": "changed",
+      "numDiff": 3779,
+      "sizeMismatch": false,
+      "offset": {
+        "dx": 0,
+        "dy": -1,
+        "residual": 996
+      }
+    },
+    {
+      "name": "contextview-dark.png",
+      "status": "changed",
+      "numDiff": 4612,
+      "sizeMismatch": false,
+      "offset": {
+        "dx": 0,
+        "dy": -1,
+        "residual": 3325
+      }
+    },
+    {
+      "name": "contextview-light.png",
+      "status": "changed",
+      "numDiff": 4508,
+      "sizeMismatch": false,
+      "offset": {
+        "dx": 0,
+        "dy": -1,
+        "residual": 28
+      }
+    },
+    {
+      "name": "custom-icons-canvas.png",
+      "status": "changed",
+      "numDiff": 10685,
+      "sizeMismatch": false
+    },
+    {
+      "name": "custom-icons-dark.png",
+      "status": "changed",
+      "numDiff": 10546,
+      "sizeMismatch": false
+    },
+    {
+      "name": "custom-icons-light.png",
+      "status": "changed",
+      "numDiff": 10068,
+      "sizeMismatch": false
+    },
+    {
+      "name": "dateinput-canvas.png",
+      "status": "changed",
+      "numDiff": 2162,
+      "sizeMismatch": false
+    },
+    {
+      "name": "dateinput-dark.png",
+      "status": "changed",
+      "numDiff": 2249,
+      "sizeMismatch": false
+    },
+    {
+      "name": "dateinput-light.png",
+      "status": "changed",
+      "numDiff": 2227,
+      "sizeMismatch": false
+    },
+    {
+      "name": "datetimeinput-canvas.png",
+      "status": "changed",
+      "numDiff": 3272,
+      "sizeMismatch": false
+    },
+    {
+      "name": "datetimeinput-dark.png",
+      "status": "changed",
+      "numDiff": 3549,
+      "sizeMismatch": false
+    },
+    {
+      "name": "datetimeinput-light.png",
+      "status": "changed",
+      "numDiff": 3458,
+      "sizeMismatch": false
+    },
+    {
+      "name": "drilldown-canvas.png",
+      "status": "changed",
+      "numDiff": 3360,
+      "sizeMismatch": false
+    },
+    {
+      "name": "drilldown-dark.png",
+      "status": "changed",
+      "numDiff": 3474,
+      "sizeMismatch": false
+    },
+    {
+      "name": "drilldown-light.png",
+      "status": "changed",
+      "numDiff": 3437,
+      "sizeMismatch": false
+    },
+    {
+      "name": "filedrop-canvas.png",
+      "status": "changed",
+      "numDiff": 3335,
+      "sizeMismatch": false
+    },
+    {
+      "name": "filedrop-dark.png",
+      "status": "changed",
+      "numDiff": 3549,
+      "sizeMismatch": false
+    },
+    {
+      "name": "filedrop-light.png",
+      "status": "changed",
+      "numDiff": 3570,
+      "sizeMismatch": false
+    },
+    {
+      "name": "form-errors-canvas.png",
+      "status": "changed",
+      "numDiff": 5239,
+      "sizeMismatch": false
+    },
+    {
+      "name": "form-errors-dark.png",
+      "status": "changed",
+      "numDiff": 5216,
+      "sizeMismatch": false
+    },
+    {
+      "name": "form-errors-light.png",
+      "status": "changed",
+      "numDiff": 5203,
+      "sizeMismatch": false
+    },
+    {
+      "name": "heading-canvas.png",
+      "status": "changed",
+      "numDiff": 3632,
+      "sizeMismatch": false,
+      "offset": {
+        "dx": 0,
+        "dy": -1,
+        "residual": 2434
+      }
+    },
+    {
+      "name": "heading-dark.png",
+      "status": "changed",
+      "numDiff": 4547,
+      "sizeMismatch": false,
+      "offset": {
+        "dx": 0,
+        "dy": -1,
+        "residual": 1890
+      }
+    },
+    {
+      "name": "heading-light.png",
+      "status": "changed",
+      "numDiff": 4432,
+      "sizeMismatch": false,
+      "offset": {
+        "dx": 0,
+        "dy": -1,
+        "residual": 1864
+      }
+    },
+    {
+      "name": "img-canvas.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
+    },
+    {
+      "name": "img-dark.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
+    },
+    {
+      "name": "img-light.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
+    },
+    {
+      "name": "link-canvas.png",
+      "status": "changed",
+      "numDiff": 8842,
+      "sizeMismatch": true,
+      "offset": {
+        "dx": 0,
+        "dy": -1,
+        "residual": 1478
+      }
+    },
+    {
+      "name": "link-dark.png",
+      "status": "changed",
+      "numDiff": 9345,
+      "sizeMismatch": false,
+      "offset": {
+        "dx": 0,
+        "dy": -1,
+        "residual": 1279
+      }
+    },
+    {
+      "name": "link-light.png",
+      "status": "changed",
+      "numDiff": 8701,
+      "sizeMismatch": false,
+      "offset": {
+        "dx": 0,
+        "dy": -1,
+        "residual": 1272
+      }
+    },
+    {
+      "name": "menu-canvas.png",
+      "status": "changed",
+      "numDiff": 1582,
+      "sizeMismatch": false,
+      "offset": {
+        "dx": 0,
+        "dy": -1,
+        "residual": 1451
+      }
+    },
+    {
+      "name": "menu-dark.png",
+      "status": "changed",
+      "numDiff": 1750,
+      "sizeMismatch": false
+    },
+    {
+      "name": "menu-light.png",
+      "status": "changed",
+      "numDiff": 1715,
+      "sizeMismatch": false,
+      "offset": {
+        "dx": 0,
+        "dy": -1,
+        "residual": 796
+      }
+    },
+    {
+      "name": "options-canvas.png",
+      "status": "changed",
+      "numDiff": 3276,
+      "sizeMismatch": false
+    },
+    {
+      "name": "options-dark.png",
+      "status": "changed",
+      "numDiff": 3441,
+      "sizeMismatch": false
+    },
+    {
+      "name": "options-light.png",
+      "status": "changed",
+      "numDiff": 3445,
+      "sizeMismatch": false
+    },
+    {
+      "name": "pagination-canvas.png",
+      "status": "changed",
+      "numDiff": 978,
+      "sizeMismatch": false,
+      "offset": {
+        "dx": 0,
+        "dy": -1,
+        "residual": 931
+      }
+    },
+    {
+      "name": "pagination-dark.png",
+      "status": "changed",
+      "numDiff": 1155,
+      "sizeMismatch": false,
+      "offset": {
+        "dx": 0,
+        "dy": -1,
+        "residual": 808
+      }
+    },
+    {
+      "name": "pagination-light.png",
+      "status": "changed",
+      "numDiff": 1130,
+      "sizeMismatch": false,
+      "offset": {
+        "dx": 0,
+        "dy": -1,
+        "residual": 807
+      }
+    },
+    {
+      "name": "progressbar-canvas.png",
+      "status": "changed",
+      "numDiff": 1449,
+      "sizeMismatch": false
+    },
+    {
+      "name": "progressbar-dark.png",
+      "status": "changed",
+      "numDiff": 1585,
+      "sizeMismatch": false
+    },
+    {
+      "name": "progressbar-light.png",
+      "status": "changed",
+      "numDiff": 1523,
+      "sizeMismatch": false
+    },
+    {
+      "name": "select-canvas.png",
+      "status": "changed",
+      "numDiff": 1979,
+      "sizeMismatch": false
+    },
+    {
+      "name": "select-dark.png",
+      "status": "changed",
+      "numDiff": 2066,
+      "sizeMismatch": false
+    },
+    {
+      "name": "select-light.png",
+      "status": "changed",
+      "numDiff": 2033,
+      "sizeMismatch": false
+    },
+    {
+      "name": "small-components-canvas.png",
+      "status": "changed",
+      "numDiff": 3644,
+      "sizeMismatch": false
+    },
+    {
+      "name": "small-components-dark.png",
+      "status": "changed",
+      "numDiff": 5603,
+      "sizeMismatch": false
+    },
+    {
+      "name": "small-components-light.png",
+      "status": "changed",
+      "numDiff": 4988,
+      "sizeMismatch": false
+    },
+    {
+      "name": "table-canvas.png",
+      "status": "changed",
+      "numDiff": 3923,
+      "sizeMismatch": false
+    },
+    {
+      "name": "table-dark.png",
+      "status": "changed",
+      "numDiff": 4240,
+      "sizeMismatch": false
+    },
+    {
+      "name": "table-light.png",
+      "status": "changed",
+      "numDiff": 4199,
+      "sizeMismatch": false
+    },
+    {
+      "name": "tabs-canvas.png",
+      "status": "changed",
+      "numDiff": 1179,
+      "sizeMismatch": false
+    },
+    {
+      "name": "tabs-dark.png",
+      "status": "changed",
+      "numDiff": 1412,
+      "sizeMismatch": false,
+      "offset": {
+        "dx": 0,
+        "dy": -1,
+        "residual": 1190
+      }
+    },
+    {
+      "name": "tabs-light.png",
+      "status": "changed",
+      "numDiff": 1349,
+      "sizeMismatch": false,
+      "offset": {
+        "dx": 0,
+        "dy": -1,
+        "residual": 1190
+      }
+    },
+    {
+      "name": "tooltip-canvas.png",
+      "status": "changed",
+      "numDiff": 6940,
+      "sizeMismatch": false
+    },
+    {
+      "name": "tooltip-dark.png",
+      "status": "changed",
+      "numDiff": 21776,
+      "sizeMismatch": false
+    },
+    {
+      "name": "tooltip-light.png",
+      "status": "changed",
+      "numDiff": 7764,
+      "sizeMismatch": false
+    },
+    {
+      "name": "treebrowser-canvas.png",
+      "status": "changed",
+      "numDiff": 2503,
+      "sizeMismatch": false,
+      "offset": {
+        "dx": 0,
+        "dy": -1,
+        "residual": 1666
+      }
+    },
+    {
+      "name": "treebrowser-dark.png",
+      "status": "changed",
+      "numDiff": 2832,
+      "sizeMismatch": false,
+      "offset": {
+        "dx": 0,
+        "dy": -1,
+        "residual": 1765
+      }
+    },
+    {
+      "name": "treebrowser-light.png",
+      "status": "changed",
+      "numDiff": 2753,
+      "sizeMismatch": false,
+      "offset": {
+        "dx": 0,
+        "dy": -1,
+        "residual": 1753
+      }
+    },
+    {
+      "name": "view-canvas.png",
+      "status": "changed",
+      "numDiff": 13036,
+      "sizeMismatch": false
+    },
+    {
+      "name": "view-dark.png",
+      "status": "changed",
+      "numDiff": 13477,
+      "sizeMismatch": false
+    },
+    {
+      "name": "view-light.png",
+      "status": "changed",
+      "numDiff": 13433,
+      "sizeMismatch": false
+    }
+  ],
+  "a11y": []
+}
