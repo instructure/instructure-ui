@@ -1,8 +1,8 @@
 {
   "summary": {
     "total": 96,
-    "unchanged": 95,
-    "changed": 1,
+    "unchanged": 96,
+    "changed": 0,
     "added": 0,
     "removed": 0,
     "a11yPages": 0,
@@ -47,8 +47,8 @@
     },
     {
       "name": "badge-canvas.png",
-      "status": "changed",
-      "numDiff": 1573,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
