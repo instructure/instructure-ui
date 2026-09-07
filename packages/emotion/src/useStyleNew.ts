@@ -96,7 +96,12 @@ const useStyleNew = <
   // if this component is an older component version but still uses the new theming system, it'll have a frozenTheme
   // object passed to it. We use that instead of the current theme so backward compatibility stays intact
   const theme = frozenTheme
-    ? { newTheme: frozenTheme[themeKey] }
+    ? {
+        newTheme: {
+          ...frozenTheme[themeKey],
+          components: { [componentId]: frozenTheme[themeKey].component }
+        }
+      }
     : themeInContext
 
   const themeOverrideFromProvider = themeInContext.themeOverride
