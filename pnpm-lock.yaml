@@ -3524,6 +3524,9 @@ importers:
       style-dictionary:
         specifier: 5.5.2
         version: 5.5.2(tslib@2.8.1)
+      typescript-compiler-api:
+        specifier: npm:@typescript/typescript6@^6.0.2
+        version: '@typescript/typescript6@6.0.2'
       webpack:
         specifier: ^5
         version: 5.110.3(esbuild@0.28.2)(svgo@4.1.0)(webpack-cli@7.2.3)
