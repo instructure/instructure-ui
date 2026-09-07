@@ -27,13 +27,9 @@ import type { MainDocsData } from '../../buildScripts/DataTypes.mjs'
 
 type PreviewOwnProps = {
   code: string
-  language: string
-  fullscreen?: boolean
-  frameless?: boolean
-  inverse?: boolean
+  fullscreen: boolean
   rtl?: boolean
   themeKey?: keyof MainDocsData['themes']
-  error?: string
 }
 
 type PropKeys = keyof PreviewOwnProps
@@ -47,14 +43,6 @@ export type PreviewStyle = ComponentStyle<'preview' | 'previewError' | 'error'>
 type PreviewState = {
   error: string | null
 }
-const allowedProps: AllowedPropKeys = [
-  'code',
-  'language',
-  'fullscreen',
-  'frameless',
-  'inverse',
-  'rtl',
-  'themeKey'
-]
+const allowedProps: AllowedPropKeys = ['code', 'fullscreen', 'rtl', 'themeKey']
 export type { PreviewProps, PreviewState }
 export { allowedProps }

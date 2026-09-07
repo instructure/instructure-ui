@@ -180,7 +180,7 @@ Update the fields in the file `./packages/__docs__/versions.json` with the lates
 
 1. In `docs/guides/guides-getting-started.md` update the version in the code snippet for `package.json`
 2. In `packages/__docs__/src/Hero/index.tsx` update title of the Upgrade Guide button
-3. In `packages/__docs__/src/CodeSandboxButton/index.tsx` update the `@instructure/` dependencies to the latest version
+3. In `packages/__docs__/src/StackBlitzButton/index.tsx` update the `@instructure/` dependencies to the latest version
 
 ##### 5. Do a release like it was a minor update
 

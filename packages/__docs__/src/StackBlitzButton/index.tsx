@@ -109,10 +109,9 @@ function buildProjectFiles(
   code: string,
   usedNames: string[],
   instuiVersion: string,
-  componentVersion: string | undefined,
-  isTypeScript: boolean
+  componentVersion: string | undefined
 ) {
-  const ext = isTypeScript ? 'tsx' : 'jsx'
+  const ext = 'jsx'
   const importPath = `${META_PACKAGE}/${componentVersion ?? 'latest'}`
 
   const neededMedia = SAMPLE_MEDIA_HELPERS.filter((h) =>
@@ -149,14 +148,7 @@ function buildProjectFiles(
         dependencies,
         devDependencies: {
           vite: '^8.0.0',
-          '@vitejs/plugin-react': '^6.0.0',
-          ...(isTypeScript
-            ? {
-                typescript: '^7.0.0',
-                '@types/react': '^18.3.0',
-                '@types/react-dom': '^18.3.0'
-              }
-            : {})
+          '@vitejs/plugin-react': '^6.0.0'
         }
       },
       null,
@@ -198,33 +190,14 @@ export default defineConfig({
 import ReactDOM from 'react-dom/client'
 ${mediaImport}${instuiImports}
 
-const render = (el${isTypeScript ? ': React.ReactNode' : ''}) =>
-  ReactDOM.createRoot(document.getElementById('app')${
-    isTypeScript ? '!' : ''
-  }).render(el)
+const render = (el) =>
+  ReactDOM.createRoot(document.getElementById('app')).render(el)
 
 ${body}
 `
   }
   if (neededMedia.length) {
-    files[`src/samplemedia.${isTypeScript ? 'ts' : 'js'}`] = SAMPLE_MEDIA_SOURCE
-  }
-  if (isTypeScript) {
-    files['tsconfig.json'] = JSON.stringify(
-      {
-        compilerOptions: {
-          target: 'ES2022',
-          module: 'ESNext',
-          moduleResolution: 'bundler',
-          jsx: 'react-jsx',
-          strict: false,
-          skipLibCheck: true
-        },
-        include: ['src']
-      },
-      null,
-      2
-    )
+    files[`src/samplemedia.js`] = SAMPLE_MEDIA_SOURCE
   }
   return { files, entry: `src/main.${ext}` }
 }
@@ -259,7 +232,7 @@ function postToStackBlitz(
   form.remove()
 }
 
-function StackBlitzButton({ code, title, language }: StackBlitzButtonProps) {
+function StackBlitzButton({ code, title }: StackBlitzButtonProps) {
   const { library, componentVersion } = useContext(AppContext)
 
   const handleClick = () => {
@@ -273,8 +246,7 @@ function StackBlitzButton({ code, title, language }: StackBlitzButtonProps) {
       code,
       collectUsedNames(code),
       version,
-      componentVersion,
-      /tsx?$/.test(language)
+      componentVersion
     )
     postToStackBlitz(title, files, entry)
   }

@@ -27,7 +27,6 @@ import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 type PlaygroundOwnProps = {
   title: string
   code: string
-  language: string
   readOnly?: boolean
 }
 
@@ -40,7 +39,7 @@ type PlaygroundProps = PlaygroundOwnProps &
 
 type PlaygroundStyle = ComponentStyle<'playground' | 'close'>
 
-const allowedProps: AllowedPropKeys = ['code', 'language', 'readOnly', 'title']
+const allowedProps: AllowedPropKeys = ['code', 'readOnly', 'title']
 
 export type PlaygroundState = {
   defaultCode: string

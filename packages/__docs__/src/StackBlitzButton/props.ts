@@ -27,8 +27,6 @@ type StackBlitzButtonProps = {
   code: string
   /** Title of the generated project */
   title: string
-  /** Language of the example, e.g. 'jsx' or 'tsx' */
-  language: string
 }
 
 export type { StackBlitzButtonProps }
