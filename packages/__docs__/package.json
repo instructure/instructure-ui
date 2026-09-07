@@ -116,7 +116,6 @@
     "@instructure/ui-view": "workspace:*",
     "babel-loader": "^10.1.1",
     "buffer": "^6.0.3",
-    "codesandbox-import-utils": "^2.2.3",
     "hoist-non-react-statics": "^3.3.2",
     "lorem-ipsum": "^3.0.0",
     "marked-react": "^4.0.0",
