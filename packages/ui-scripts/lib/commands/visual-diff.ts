@@ -48,6 +48,7 @@ type Args = {
   baselineDir: string
   outputDir: string
   threshold: number
+  maxShift: number
   failOnMissingBaseline: boolean
   prNumber?: string
   prUrl?: string
@@ -223,6 +224,64 @@ function diffMask(baseline: PNG, actual: PNG, threshold: number) {
     sizeMismatch: bw !== aw || bh !== ah,
     actual: a
   }
+}
+
+// Copy a w*h window out of `src` starting at (sx, sy). Callers clamp the window
+// to the source bounds first.
+function crop(src: PNG, sx: number, sy: number, w: number, h: number): PNG {
+  const out = new PNG({ width: w, height: h })
+  PNG.bitblt(src, out, sx, sy, w, h, 0, 0)
+  return out
+}
+
+// Is `actual` pixel-identical to `baseline` once shifted by up to `maxShift`?
+//
+// When a layout box rounds one device pixel differently, the whole painted
+// subtree moves — glyphs, borders, all of it. The image is unchanged, just
+// translated, but a direct comparison lights up every edge in it: a one-pixel
+// shift routinely produces several thousand differing pixels. A component that
+// moved a pixel and is otherwise identical is not a visual regression, so this
+// is the check that says so.
+//
+// A pixel-count tolerance cannot do this job. The shift above and a genuine
+// 40x40 recolor land in the same order of magnitude, so any threshold loose
+// enough to absorb the first also hides the second.
+//
+// Each offset is scored over the region the two images share, so the band that
+// shifts in from outside is never counted. (0, 0) is included deliberately: the
+// caller's comparison *pads* mismatched sizes, while this one *crops* to the
+// overlap, which is what lets "one pixel taller, same content" pass.
+/** @internal — exported only for tests; not part of the package's public API. */
+export function matchesWhenShifted(
+  baseline: PNG,
+  actual: PNG,
+  threshold: number,
+  maxShift: number
+): boolean {
+  for (let dy = -maxShift; dy <= maxShift; dy++) {
+    for (let dx = -maxShift; dx <= maxShift; dx++) {
+      // A positive dx means the content sits that many pixels further right
+      // than in the baseline, so actual (x, y) lines up with baseline
+      // (x - dx, y - dy).
+      const x0 = Math.max(0, dx)
+      const y0 = Math.max(0, dy)
+      const w = Math.min(actual.width, baseline.width + dx) - x0
+      const h = Math.min(actual.height, baseline.height + dy) - y0
+      if (w <= 0 || h <= 0) continue
+
+      // No output buffer — only the count matters here.
+      const numDiff = pixelmatch(
+        crop(actual, x0, y0, w, h).data,
+        crop(baseline, x0 - dx, y0 - dy, w, h).data,
+        undefined,
+        w,
+        h,
+        { threshold, includeAA: false }
+      )
+      if (numDiff === 0) return true
+    }
+  }
+  return false
 }
 
 // How much unchanged pixels are dimmed in the diff image so the changed pixels
@@ -1431,6 +1490,7 @@ function run(args: Args): number {
     baselineDir,
     outputDir,
     threshold,
+    maxShift,
     failOnMissingBaseline
   } = args
 
@@ -1471,8 +1531,21 @@ function run(args: Args): number {
       actual: padded
     } = diffMask(baseline, actual, threshold)
 
-    const status: Status =
+    // Straight comparison first, so identical screenshots cost nothing extra;
+    // the realignment check below only runs on one that already failed it. The
+    // size guard keeps a real layout change from being shifted away — only a
+    // delta within the shift budget is a rounding artifact.
+    let status: Status =
       numDiff === 0 && !sizeMismatch ? 'unchanged' : 'changed'
+    if (
+      status === 'changed' &&
+      maxShift > 0 &&
+      Math.abs(baseline.width - actual.width) <= maxShift &&
+      Math.abs(baseline.height - actual.height) <= maxShift &&
+      matchesWhenShifted(baseline, actual, threshold, maxShift)
+    ) {
+      status = 'unchanged'
+    }
 
     if (status === 'changed') {
       const highlight = highlightImage(padded, changed, width, height)
@@ -1579,6 +1652,12 @@ export default {
       type: 'number',
       describe: 'pixelmatch color threshold (0-1)',
       default: 0.1
+    },
+    'max-shift': {
+      type: 'number',
+      describe:
+        'Treat a screenshot as unchanged when it matches its baseline exactly after being shifted by up to this many pixels. Absorbs whole-pixel layout rounding, which moves a component without altering it. 0 requires an exact match.',
+      default: 1
     },
     'fail-on-missing-baseline': {
       type: 'boolean',
