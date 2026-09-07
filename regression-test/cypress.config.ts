@@ -40,7 +40,14 @@ export default defineConfig({
   screenshotOnRunFailure: false,
   e2e: {
     viewportWidth: 1280,
-    viewportHeight: 800,
+    // Deliberately taller than a real browser window. `capture: 'fullPage'`
+    // scrolls the viewport down the document and stitches the slices together,
+    // and the stitch is the least reproducible part of the capture. Measured
+    // against the baselines on the `visual-baselines` branch, raising this from
+    // 800 takes the suite from 58 stitch operations to 37, and from 17 of 32
+    // pages captured in one pass to 28. Only `min-height: 100vh` on the body
+    // depends on this value.
+    viewportHeight: 2000,
     setupNodeEvents(on, config) {
       on('before:run', () => {
         writeFileSync(META_FILE, '{}')
