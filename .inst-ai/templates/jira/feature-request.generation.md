@@ -17,7 +17,7 @@
   - Do NOT add bullets, lists, or code blocks - just plain paragraph text with the paths
 - Always include a "Context Links" section with:
   - Slack thread URL (if slack_thread_url is available) as a clickable link
-  - CodeSandbox URLs (if codesandbox_urls are available) as clickable links
+  - StackBlitz URLs (if stackblitz_urls are available) as clickable links
 - End with a disclaimer paragraph in italics: "This ticket was automatically generated with AI assistance from conversation data. Please review and update as needed."
 
 **CONTEXT:**

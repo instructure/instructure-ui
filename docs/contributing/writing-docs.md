@@ -226,42 +226,6 @@ render(<Example />)
 
 **_Note:_** you should use `funcional React`.
 
-#### 5. comment examples
-
-`JSDoc` can parse `markdown` even in the comments of `js/ts files`. These `comment-based examples` can not contain `front-matter`:
-
-```text
----
-type: code
----
----
-key: value
----
-```
-
-This means that it can not get a `type`. The `docs` can display list-based, tabbable options as described at the 4th point.
-
-The other three can be postfixed after the language of the markdown code block:
-
-````text
----
-type: code
----
-```js-code
-// code here
-```
-
-```js-embed
-// code here
-```
-
-```js-example
-// code here
-```
-````
-
-The compiler will strip the postfix and calculate the language and type from it as well.
-
 ### Purely documentation files
 
 Under the docs folder, there are additional folders, which are containing `.md` files, which are for general documentation. These need a `frontmatter`:
