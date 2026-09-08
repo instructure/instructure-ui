@@ -38,6 +38,11 @@ type TabsTabOwnProps = {
   controls: string
   isDisabled?: boolean
   isSelected?: boolean
+  /**
+   * Whether this tab holds the tablist's roving tabindex. Exactly one tab in a
+   * tablist should have it. Defaults to `isSelected`.
+   */
+  isFocusable?: boolean
   onClick?: (
     event: React.MouseEvent<ViewOwnProps>,
     tabData: { index: number; id: string }
@@ -51,6 +56,10 @@ type TabsTabOwnProps = {
    * Whether tabOverflow prop in Tabs is set to 'scroll'.
    */
   isOverflowScroll?: boolean
+  /**
+   * provides a reference to the underlying html root element
+   */
+  elementRef?: (element: Element | null) => void
 }
 
 type PropKeys = keyof TabsTabOwnProps
@@ -70,10 +79,12 @@ const allowedProps: AllowedPropKeys = [
   'controls',
   'isDisabled',
   'isSelected',
+  'isFocusable',
   'onClick',
   'onKeyDown',
   'children',
-  'isOverflowScroll'
+  'isOverflowScroll',
+  'elementRef'
 ]
 
 export type { TabsTabProps, TabsTabStyle }
