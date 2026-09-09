@@ -702,30 +702,15 @@ class Select extends Component<SelectProps> {
     const { ref, ...triggerProps } = getTriggerProps({ ...passthroughProps })
     const isEditable = typeof onInputChange !== 'undefined'
 
-    // props to ensure screen readers treat uneditable selects as accessible
-    // popup buttons rather than comboboxes.
-    const overrideProps: Partial<TextInputProps> = !isEditable
-      ? {
-          // We need role="combobox" for the 'open list' button shortcut to work
-          // with desktop screenreaders.
-          // But desktop Safari with Voiceover does not support proper combobox
-          // handling, a 'button' role is set as a workaround.
-          // See https://bugs.webkit.org/show_bug.cgi?id=236881
-          // Also on iOS Chrome with role='combobox' it announces unnecessarily
-          // that its 'read-only' and that this is a 'textfield', see INSTUI-4500
-          role:
-            utils.isSafari() ||
-            utils.isAndroidOrIOS() ||
-            (interaction === 'disabled' && utils.isChromium())
-              ? 'button'
-              : 'combobox',
-          title: inputValue,
-          'aria-autocomplete': undefined,
-          'aria-readonly': true
-        }
-      : interaction === 'disabled' && utils.isChromium()
-      ? { role: 'button' }
-      : {}
+    let overrideProps: Partial<TextInputProps> = {}
+    if (!isEditable) {
+      overrideProps = {
+        role: 'combobox',
+        title: inputValue,
+        'aria-autocomplete': undefined,
+        'aria-readonly': true
+      }
+    }
 
     // backdoor to autocomplete attr to work around chrome autofill issues
     if (passthroughProps['autoComplete']) {

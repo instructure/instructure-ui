@@ -27,9 +27,6 @@ import { page, userEvent } from 'vitest/browser'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import type { MockInstance } from 'vitest'
 import { CheckInstUIIcon } from '@instructure/ui-icons'
-
-import * as utils from '@instructure/ui-utils'
-
 import { SimpleSelect } from '@instructure/ui-simple-select/latest'
 
 type ExampleOption = 'foo' | 'bar' | 'baz'
@@ -46,15 +43,6 @@ const getOptions = (disabled?: ExampleOption) =>
       {opt}
     </SimpleSelect.Option>
   ))
-
-vi.mock('@instructure/ui-utils', async (importOriginal) => {
-  const originalModule = (await importOriginal()) as any
-  return {
-    __esModule: true,
-    ...originalModule,
-    isSafari: vi.fn(() => false)
-  }
-})
 
 describe('<SimpleSelect />', () => {
   let consoleErrorMock: ReturnType<typeof vi.spyOn>
@@ -399,23 +387,6 @@ describe('<SimpleSelect />', () => {
   })
 
   describe('Component tests', () => {
-    afterEach(() => {
-      vi.mocked(utils.isSafari).mockReturnValue(false)
-    })
-
-    it('should have role button in Safari', async () => {
-      vi.mocked(utils.isSafari).mockReturnValue(true)
-
-      const { container } = await render(
-        <SimpleSelect renderLabel="Choose an option">
-          {getOptions()}
-        </SimpleSelect>
-      )
-      const input = container.querySelector('input')
-
-      expect(input).toHaveAttribute('role', 'button')
-    })
-
     it('should have role combobox in different browsers than Safari', async () => {
       const { container } = await render(
         <SimpleSelect renderLabel="Choose an option">
@@ -425,6 +396,7 @@ describe('<SimpleSelect />', () => {
       const input = container.querySelector('input')
 
       expect(input).toHaveAttribute('role', 'combobox')
+      expect(input).toHaveAttribute('aria-readonly', 'true')
     })
 
     it('should fire onChange when selected option changes', async () => {
