@@ -22,17 +22,11 @@
  * SOFTWARE.
  */
 
-type CodeSandboxButtonOwnProps = {
+type StackBlitzButtonProps = {
+  /** The example source code shown in the Playground */
   code: string
+  /** Title of the generated project */
   title: string
-  language: string
-  options?: Record<string, any>
 }
 
-type PropKeys = keyof CodeSandboxButtonOwnProps
-type AllowedPropKeys = Readonly<Array<PropKeys>>
-type CodeSandboxButtonProps = CodeSandboxButtonOwnProps
-
-const allowedProps: AllowedPropKeys = ['code', 'title', 'language', 'options']
-export type { CodeSandboxButtonProps }
-export { allowedProps }
+export type { StackBlitzButtonProps }

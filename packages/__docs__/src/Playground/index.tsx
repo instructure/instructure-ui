@@ -40,7 +40,7 @@ import generateStyle from './styles'
 
 import { AppContext } from '../appContext'
 import Preview from '../Preview'
-import { CodeSandboxButton } from '../CodeSandboxButton'
+import { StackBlitzButton } from '../StackBlitzButton'
 import type { PlaygroundProps, PlaygroundState } from './props'
 import { allowedProps } from './props'
 
@@ -56,8 +56,7 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
   static displayName = 'Playground'
   static allowedProps = allowedProps
   static defaultProps = {
-    readOnly: false,
-    language: 'jsx'
+    readOnly: false
   }
 
   _fullScreenButton: IconButton | null = null
@@ -179,11 +178,9 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
 
   renderPreview = (code: string, themeKey: string) => {
     const { fullscreen, rtl } = this.state
-
     return (
       <Preview
         code={code}
-        language={this.props.language}
         fullscreen={fullscreen}
         rtl={rtl}
         themeKey={themeKey}
@@ -267,10 +264,9 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
                   </Flex.Item>
                   {
                     <Flex.Item>
-                      <CodeSandboxButton
+                      <StackBlitzButton
                         code={this.state.code}
                         title={`${this.props.title} Example`}
-                        language={this.props.language}
                       />
                     </Flex.Item>
                   }

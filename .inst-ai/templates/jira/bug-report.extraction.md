@@ -7,7 +7,7 @@
 - `component_name`: string | null - The name of the UI component or module mentioned
 - `browser_name`: string | null - Browser where the issue occurs (e.g., "Chrome", "Firefox", "Safari")
 - `os_name`: string | null - Operating system where the issue occurs (e.g., "macOS", "Windows", "Linux")
-- `instui_version`: string | null - InstUI version (e.g., "8.51.0", "v8.51.0"). Look for @instructure/ui-\* package versions in package.json, version mentions in conversation, or CodeSandbox dependencies
+- `instui_version`: string | null - InstUI version (e.g., "8.51.0", "v8.51.0"). Look for @instructure/ui-\* package versions in package.json, version mentions in conversation, or Stackblitz dependencies
 - `summary_of_bug`: string - Brief description of the bug
 - `reporter_name`: string - Name of the person reporting the bug
 - `environment_text`: string | null - Additional environment details

@@ -31,34 +31,24 @@ import type { PreviewProps, PreviewStyle } from './props'
  * ---
  * Generates the style object from the theme and provided additional information
  * @param  {Object} props the props of the component, the style is applied to
+ * @param  {DocsTokens} docsTokens custom variables passed from the component
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
   props: PreviewProps,
   { semantics }: DocsTokens
 ): PreviewStyle => {
-  const { fullscreen, frameless, themeKey } = props
+  const { fullscreen, themeKey } = props
   const previewStyle = {
     boxSizing: 'border-box',
     margin: 0,
     overflow: 'auto',
     padding: semantics.spacing.spaceMd,
     borderWidth: semantics.borderWidth.sm,
-    borderStyle: 'solid',
+    borderStyle: fullscreen ? 'none' : 'solid',
     borderColor: '#aaaaaa',
     borderRadius: semantics.borderRadius.sm,
-    backgroundColor: themeKey === 'dark' ? '#000000' : '#FFFFFF',
-    ...(fullscreen && {
-      position: 'fixed',
-      width: '100vw',
-      height: '100vh'
-    }),
-
-    ...(frameless && {
-      padding: '0',
-      border: 'none',
-      margin: '1rem 0 2rem 0'
-    })
+    backgroundColor: themeKey === 'dark' ? '#000000' : '#FFFFFF'
   }
 
   const errorStyle = {
@@ -70,7 +60,6 @@ const generateStyle = (
     fontFamily: semantics.fontFamily.code,
     fontSize: semantics.fontSize.textSm,
     lineHeight: 1.4,
-
     'pre, code': { color: semantics.color.text.onColor }
   }
 

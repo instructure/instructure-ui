@@ -43,9 +43,7 @@ import { navigateTo, MINOR_VERSION_REGEX } from './navigationUtils'
 
 type CodeData = {
   code: string
-  language?: string
   title: string
-  readOnly?: boolean
 }
 
 function trimIndent(str: string) {
@@ -158,40 +156,15 @@ const headingVariants: Record<
 }
 
 const getComponent = (componentType: string, data: CodeData) => {
-  const { code, title, readOnly = undefined } = data
+  const { code, title } = data
   if (componentType === 'Playground') {
-    return <Playground title={title} code={code} readOnly={readOnly} />
+    return <Playground title={title} code={code} />
   }
 
   if (componentType === 'SourceCodeEditor') {
     return <SourceCodeEditor label={title} defaultValue={code} readOnly />
   }
   return undefined
-}
-
-/**
- * this needed here, because the ts-doc parser can't handle frontmatter inside the codeblock, so we can't
- * figure type out. All comment-based codeblocks need to postfix the language with '-code', '-embed' or '-example'
- */
-const inferTypeAndLanguage = ({
-  type,
-  language
-}: {
-  type?: string
-  language?: string
-}) => {
-  if (!type && language) {
-    if (language.includes('-code')) {
-      return { language: language.slice(0, -5), type: 'code' }
-    }
-    if (language.includes('-embed')) {
-      return { language: language.slice(0, -6), type: 'embed' }
-    }
-    if (language.includes('-example')) {
-      return { language: language.slice(0, -8), type: 'example' }
-    }
-  }
-  return { language, type }
 }
 
 const renderer = (title: string) => ({
@@ -235,32 +208,26 @@ const renderer = (title: string) => ({
   code: (code: string, rawLanguage: string) => {
     if (rawLanguage) {
       const matter = grayMatter(trimIndent(code))
-      const { type, language } = inferTypeAndLanguage({
-        type: matter.data.type,
-        language: rawLanguage
-      })
-
-      const data = {
+      const data: CodeData = {
         code: matter.content,
-        language,
         title
       }
 
-      if (type === 'code') {
+      if (matter.data.type === 'code') {
         return (
           <View key={uuid()} display="block" margin="general.spaceXl none">
             {getComponent('SourceCodeEditor', data)}
           </View>
         )
       }
-      if (type === 'embed') {
+      if (matter.data.type === 'embed') {
         return (
           <InstUISettingsProvider key={uuid()} theme={light}>
             {compileAndRenderExample(matter.content)}
           </InstUISettingsProvider>
         )
       }
-      if (type === 'example') {
+      if (matter.data.type === 'example') {
         return (
           <View key={uuid()} display="block" margin="general.spaceXl none">
             {getComponent('Playground', data)}

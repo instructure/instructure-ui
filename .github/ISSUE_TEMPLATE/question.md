@@ -14,7 +14,7 @@ assignees: ''
 
 ### Code Sample
 
-<!-- If applicable, provide a code sample (codesandbox, codepen, etc.) that isolates the functionality in question -->
+<!-- If applicable, provide a code sample (codesandbox, Stackblitz, etc.) that isolates the functionality in question -->
 
 ### Additional Details
 
