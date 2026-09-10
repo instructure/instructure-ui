@@ -28,8 +28,6 @@ import { page, userEvent } from 'vitest/browser'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import type { MockInstance } from 'vitest'
 import { Select } from '@instructure/ui-select/latest'
-
-import * as utils from '@instructure/ui-utils'
 import {
   CheckInstUIIcon,
   DownloadInstUIIcon,
@@ -286,15 +284,6 @@ const getOptionsWithBeforeAndAfterContent = (
     ></Select.Option>
   ))
 
-vi.mock('@instructure/ui-utils', async (importOriginal) => {
-  const originalModule = (await importOriginal()) as any
-  return {
-    __esModule: true,
-    ...originalModule,
-    isSafari: vi.fn(() => true)
-  }
-})
-
 describe('<Select />', () => {
   let consoleErrorMock: ReturnType<typeof vi.spyOn>
 
@@ -332,24 +321,6 @@ describe('<Select />', () => {
     expect(input).toBeInTheDocument()
   })
 
-  it('should have role button in Safari without onInputChange', async () => {
-    const { container } = await render(
-      <Select renderLabel="Choose an option">{getOptions()}</Select>
-    )
-    const input = container.querySelector('input')
-    expect(input).toHaveAttribute('role', 'button')
-  })
-
-  it('should have role combobox in different browsers than Safari without onInputChange', async () => {
-    vi.mocked(utils.isSafari).mockReturnValue(false)
-
-    const { container } = await render(
-      <Select renderLabel="Choose an option">{getOptions()}</Select>
-    )
-    const input = container.querySelector('input')
-    expect(input).toHaveAttribute('role', 'combobox')
-  })
-
   it('should have role combobox with onInputChange', async () => {
     const { container } = await render(
       <Select renderLabel="Choose an option" onInputChange={() => {}}>
@@ -358,6 +329,7 @@ describe('<Select />', () => {
     )
     const input = container.querySelector('input')
     expect(input).toHaveAttribute('role', 'combobox')
+    expect(input).not.toHaveAttribute('aria-readonly')
   })
 
   describe('accessible name with content rendered before the input', () => {
