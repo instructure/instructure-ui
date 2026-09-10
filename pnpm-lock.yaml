@@ -4007,9 +4007,6 @@ importers:
       '@instructure/ui-dom-utils':
         specifier: workspace:*
         version: link:../ui-dom-utils
-      '@instructure/ui-focusable':
-        specifier: workspace:*
-        version: link:../ui-focusable
       '@instructure/ui-i18n':
         specifier: workspace:*
         version: link:../ui-i18n
@@ -6445,7 +6442,7 @@ packages:
         optional: true
 
   '@instructure/instructure-design-tokens@https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/ae8f600e8ad4cbadddbaad857f0b6477c4a1e1d6':
-    resolution: {gitHosted: true, tarball: https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/ae8f600e8ad4cbadddbaad857f0b6477c4a1e1d6}
+    resolution: {gitHosted: true, integrity: sha512-zGW8VeTKSmXwpBTg+cobqem926UB4YQMtEphYOwifvo/oVxj7UCZ/VbQ2ZHlqPIdYXrLoCzkrLKz4vj0ixflrA==, tarball: https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/ae8f600e8ad4cbadddbaad857f0b6477c4a1e1d6}
     version: 1.0.0
 
   '@isaacs/cliui@8.0.2':

@@ -59,7 +59,7 @@ describe('<Tabs.Tab />', () => {
     )
     const tab = page.getByRole('tab').element()
 
-    expect(tab).not.toHaveAttribute('aria-selected')
+    expect(tab).toHaveAttribute('aria-selected', 'false')
     expect(tab).not.toHaveAttribute('aria-disabled')
   })
 
@@ -96,7 +96,7 @@ describe('<Tabs.Tab />', () => {
     expect(tab).toHaveAttribute('tabindex', '0')
   })
 
-  it('should not set the tabindex when not selected', async () => {
+  it('should set the tabindex to -1 when not selected', async () => {
     await render(
       <Tab id="foo" index={0} controls="foo-panel">
         Tab Label
@@ -104,7 +104,7 @@ describe('<Tabs.Tab />', () => {
     )
     const tab = page.getByRole('tab').element()
 
-    expect(tab).not.toHaveAttribute('tabindex')
+    expect(tab).toHaveAttribute('tabindex', '-1')
   })
 
   it('should remove the tabindex attribute when disabled', async () => {
