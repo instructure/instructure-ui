@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0b3aa8ba-d980-48c1-a39f-c249c10cdc8f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager">
+    <option name="groupingKeys">
+      <option value="directory" />
+      <option value="repository" />
+    </option>
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="19813" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="add_missing_dateinput_dep" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;matyasf&quot;
+  }
+}</component>
+  <component name="GitHubPullRequestState">{
+  &quot;prStates&quot;: [
+    {
+      &quot;id&quot;: {
+        &quot;id&quot;: &quot;PR_kwDOAtkBGc7YxnF7&quot;,
+        &quot;number&quot;: 2543
+      },
+      &quot;lastSeen&quot;: 1779112328005
+    }
+  ]
+}</component>
+  <component name="GithubProjectSettings">
+    <option name="branchProtectionPatterns">
+      <list>
+        <option value="master" />
+        <option value=".*_maintenance" />
+      </list>
+    </option>
+  </component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;git@github.com:instructure/instructure-ui.git&quot;,
+    &quot;accountId&quot;: &quot;bab2fa0c-fae9-4872-bef3-1853a11acf85&quot;
+  }
+}</component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="9.1611519735734E-82" />
+      <entry key="MS500" value="2.1304431913401687E-16" />
+      <entry key="S2" value="5.049906136024061E-4" />
+      <entry key="S5" value="0.17567732164168787" />
+      <entry key="S10" value="1.4989692032755326" />
+      <entry key="S30" value="11.953164273753542" />
+      <entry key="S60" value="27.136908558016025" />
+      <entry key="M2" value="45.74032518002167" />
+      <entry key="M5" value="69.20091208778055" />
+      <entry key="M10" value="84.99839340362743" />
+      <entry key="M15" value="94.88325613874332" />
+      <entry key="M30" value="112.81396284623868" />
+      <entry key="H1" value="128.2830226576972" />
+      <entry key="H2" value="138.83184166474797" />
+      <entry key="H4" value="145.04665416447412" />
+      <entry key="D1" value="213.33163653927943" />
+      <entry key="W1" value="991.8097140868442" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0" />
+      <entry key="S5" value="1.0000000000262" />
+      <entry key="S10" value="1.0000071885612956" />
+      <entry key="S30" value="1.03121569369094" />
+      <entry key="S60" value="1.2726506727637654" />
+      <entry key="M2" value="1.889049131449406" />
+      <entry key="M5" value="3.301061506723765" />
+      <entry key="M10" value="5.088670581273241" />
+      <entry key="M15" value="6.520638392457966" />
+      <entry key="M30" value="9.236381240268692" />
+      <entry key="H1" value="11.548378904777994" />
+      <entry key="H2" value="13.096624860157299" />
+      <entry key="H4" value="13.998602559897234" />
+      <entry key="D1" value="18.28168019976455" />
+      <entry key="W1" value="49.92744044839836" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="2.3288867324227278E-5" />
+      <entry key="MS500" value="0.11842125882490867" />
+      <entry key="S2" value="0.587124704230728" />
+      <entry key="S5" value="0.9833966980076418" />
+      <entry key="S10" value="2.3970782195226836" />
+      <entry key="S30" value="12.946477977056512" />
+      <entry key="S60" value="28.384640618078645" />
+      <entry key="M2" value="47.609761009070276" />
+      <entry key="M5" value="72.48709794642791" />
+      <entry key="M10" value="90.07520260295018" />
+      <entry key="M15" value="101.39380285814573" />
+      <entry key="M30" value="122.04335934238233" />
+      <entry key="H1" value="139.8271221368322" />
+      <entry key="H2" value="151.92606933257915" />
+      <entry key="H4" value="159.04398396967258" />
+      <entry key="D1" value="231.61300991364115" />
+      <entry key="W1" value="1041.736926062252" />
+    </decayedShown>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="39kNDyxxfk2OA2P9UlXMQE83xWm" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Git.Working.Tree.Tab.closed.by.user": "closed",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "Vitest.<Tag />.should render a close icon when it is dismissible and clickable.executor": "Run",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "gh-pages",
+    "javascript.preferred.runtime.type.id": "node",
+    "last_opened_file_path": "/Users/matyas.szabo/CODE/instructure-ui-DEV",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "pnpm",
+    "npm.__docs__ > build:scripts:ts.executor": "Run",
+    "npm.__docs__ > generate:component-overrides.executor": "Run",
+    "npm.__docs__ > prestart.executor": "Debug",
+    "npm.build:themes.executor": "Debug",
+    "npm.bump.executor": "Debug",
+    "npm.emotion > build.executor": "Run",
+    "npm.emotion > build:types.executor": "Run",
+    "npm.export:icons.executor": "Run",
+    "npm.regression-test > lint.executor": "Run",
+    "npm.shared-types > build:types.executor": "Run",
+    "npm.ui-avatar > build.executor": "Run",
+    "npm.ui-buttons > build:types.executor": "Run",
+    "npm.ui-dom-utils > build.executor": "Run",
+    "npm.ui-icons > generate-custom.executor": "Run",
+    "npm.ui-icons > generate-lucide.executor": "Run",
+    "npm.ui-themes > build.executor": "Run",
+    "npm.ui-themes > build:types (1).executor": "Run",
+    "npm.ui-themes > build:types.executor": "Run",
+    "npm.ui-utils > build.executor": "Run",
+    "npm.ui-utils > build:types.executor": "Run",
+    "prettierjs.PrettierConfiguration.Package": "/Users/matyas.szabo/CODE/instructure-ui-DEV/node_modules/prettier",
+    "settings.editor.selected.configurable": "web-ide.project.structure",
+    "ts.external.directory.path": "/Users/matyas.szabo/CODE/instructure-ui-DEV/node_modules/typescript/lib"
+  },
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "TEXT"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/packages/ui-modal/src/Modal/v1" />
+      <recent name="$PROJECT_DIR$/packages/ui-modal/src/Modal/v2" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/packages/ui-modal/src/utils/v1" />
+    </key>
+  </component>
+  <component name="RunManager" selected="npm.ui-utils &gt; build:types">
+    <configuration name="build:themes" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build:themes" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="regression-test &gt; lint" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/regression-test/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="lint" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="ui-dom-utils &gt; build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/packages/ui-dom-utils/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="ui-utils &gt; build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/packages/ui-utils/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="ui-utils &gt; build:types" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/packages/ui-utils/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build:types" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="npm.build:themes" />
+      <item itemvalue="npm.regression-test &gt; lint" />
+      <item itemvalue="npm.ui-dom-utils &gt; build" />
+      <item itemvalue="npm.ui-utils &gt; build" />
+      <item itemvalue="npm.ui-utils &gt; build:types" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.ui-utils &gt; build:types" />
+        <item itemvalue="npm.ui-utils &gt; build" />
+        <item itemvalue="npm.regression-test &gt; lint" />
+        <item itemvalue="npm.ui-dom-utils &gt; build" />
+        <item itemvalue="npm.build:themes" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-WS-262.10315.144" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0b3aa8ba-d980-48c1-a39f-c249c10cdc8f" name="Changes" comment="" />
+      <created>1771235992384</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1771235992384</updated>
+      <workItem from="1771235993407" duration="16290000" />
+      <workItem from="1771341312688" duration="3685000" />
+      <workItem from="1771411644447" duration="12245000" />
+      <workItem from="1771507426675" duration="7627000" />
+      <workItem from="1771584996025" duration="7638000" />
+      <workItem from="1771874920684" duration="3539000" />
+      <workItem from="1771932541501" duration="2239000" />
+      <workItem from="1772024801138" duration="2032000" />
+      <workItem from="1772188383704" duration="31381000" />
+      <workItem from="1772642190458" duration="3559000" />
+      <workItem from="1772788605211" duration="7761000" />
+      <workItem from="1772806980830" duration="8666000" />
+      <workItem from="1773232163412" duration="8321000" />
+      <workItem from="1773308522102" duration="31915000" />
+      <workItem from="1773834805372" duration="99235000" />
+      <workItem from="1774532354727" duration="27000" />
+      <workItem from="1774532401031" duration="12958000" />
+      <workItem from="1774616489676" duration="4148000" />
+      <workItem from="1774621738181" duration="7612000" />
+      <workItem from="1774861854898" duration="16464000" />
+      <workItem from="1774957032509" duration="526000" />
+      <workItem from="1774957837439" duration="5763000" />
+      <workItem from="1774992517723" duration="29326000" />
+      <workItem from="1775553722340" duration="4489000" />
+      <workItem from="1775561434069" duration="34415000" />
+      <workItem from="1775739462648" duration="7113000" />
+      <workItem from="1775812227878" duration="13063000" />
+      <workItem from="1776085010557" duration="6728000" />
+      <workItem from="1776175086846" duration="103007000" />
+      <workItem from="1777281121449" duration="14424000" />
+      <workItem from="1777371959526" duration="24600000" />
+      <workItem from="1777463736512" duration="4354000" />
+      <workItem from="1777885484821" duration="36737000" />
+      <workItem from="1778059411958" duration="16605000" />
+      <workItem from="1778147529184" duration="24366000" />
+      <workItem from="1778245942858" duration="8426000" />
+      <workItem from="1778508908632" duration="5643000" />
+      <workItem from="1778594748402" duration="25338000" />
+      <workItem from="1778847437197" duration="762000" />
+      <workItem from="1779102303800" duration="172000" />
+      <workItem from="1779103679901" duration="1583000" />
+      <workItem from="1779112112181" duration="4806000" />
+      <workItem from="1779184982722" duration="44000" />
+      <workItem from="1779185044730" duration="14605000" />
+      <workItem from="1779286634210" duration="3405000" />
+      <workItem from="1780910586956" duration="6397000" />
+      <workItem from="1781079915601" duration="39447000" />
+      <workItem from="1781513693371" duration="2530000" />
+      <workItem from="1781685766773" duration="607000" />
+      <workItem from="1781702098579" duration="11919000" />
+      <workItem from="1781783684483" duration="12586000" />
+      <workItem from="1781864325872" duration="12913000" />
+      <workItem from="1781982097651" duration="2000" />
+      <workItem from="1782383652244" duration="16693000" />
+      <workItem from="1782981773142" duration="9597000" />
+      <workItem from="1783946986841" duration="34218000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="dependencySupport" implementationName="javascript:npm:react" />
+    <option featureType="dependencySupport" implementationName="javascript:npm:prettier" />
+    <option featureType="dependencySupport" implementationName="executable:docker" />
+    <option featureType="dependencySupport" implementationName="javascript:npm:vite" />
+    <option featureType="dependencySupport" implementationName="javascript:npm:webpack" />
+    <option featureType="dependencySupport" implementationName="javascript:npm:@angular/core" />
+    <option featureType="dependencySupport" implementationName="executable:kubectl" />
+    <option featureType="dependencySupport" implementationName="javascript:npm:next" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="b9fb4906-38b1-413f-a57a-45986d12d3b0" value="TOOL_WINDOW" />
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="text">
+                    <value>
+                      <list>
+                        <option value="theme" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+        <entry key="b9fb4906-38b1-413f-a57a-45986d12d3b0">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/packages/ui-babel-preset/lib/index.js</url>
+          <line>85</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
