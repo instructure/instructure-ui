@@ -283,6 +283,7 @@ class TextInput extends Component<TextInputProps> {
       messages,
       inputContainerRef,
       isRequired,
+      forceMessages,
       styles
     } = this.props
 
@@ -312,7 +313,7 @@ class TextInput extends Component<TextInputProps> {
         margin={this.props.margin}
         isRequired={isRequired}
         disabled={this.interaction === 'disabled'}
-        readOnly={this.interaction === 'readonly'}
+        readOnly={this.interaction === 'readonly' && !forceMessages}
         data-cid="TextInput"
       >
         <span css={styles?.facade}>

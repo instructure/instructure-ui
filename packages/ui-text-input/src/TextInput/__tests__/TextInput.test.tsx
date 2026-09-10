@@ -164,6 +164,58 @@ describe('<TextInput/>', () => {
     })
   })
 
+  describe('messages', () => {
+    const errorMessage = 'some error message'
+    const errorMessages = [{ type: 'error' as const, text: errorMessage }]
+
+    it('should render error messages', async () => {
+      await render(<TextInput renderLabel="Name" messages={errorMessages} />)
+
+      expect(page.getByText(errorMessage).element()).toBeInTheDocument()
+    })
+
+    it('should not render error messages when readonly', async () => {
+      await render(
+        <TextInput
+          renderLabel="Name"
+          interaction="readonly"
+          messages={errorMessages}
+        />
+      )
+
+      expect(page.getByText(errorMessage).query()).toBeNull()
+    })
+
+    it('should render error messages when readonly and `forceMessages` is set', async () => {
+      await render(
+        <TextInput
+          renderLabel="Name"
+          interaction="readonly"
+          messages={errorMessages}
+          forceMessages
+        />
+      )
+      const input = page.getByRole('textbox').element()
+
+      expect(page.getByText(errorMessage).element()).toBeInTheDocument()
+      expect(input).toHaveAttribute('readonly')
+      expect(input).not.toHaveAttribute('forcemessages')
+    })
+
+    it('should not render error messages when disabled and `forceMessages` is set', async () => {
+      await render(
+        <TextInput
+          renderLabel="Name"
+          interaction="disabled"
+          messages={errorMessages}
+          forceMessages
+        />
+      )
+
+      expect(page.getByText(errorMessage).query()).toBeNull()
+    })
+  })
+
   describe('for a11y', () => {
     it('should meet standards', async () => {
       const { container } = await render(<TextInput renderLabel="Name" />)

@@ -239,6 +239,37 @@ describe('<SimpleSelect />', () => {
     })
   })
 
+  describe('messages', () => {
+    const errorMessage = 'This is an error message'
+
+    it('should render error messages', async () => {
+      await render(
+        <SimpleSelect
+          renderLabel="Choose an option"
+          messages={[{ type: 'error', text: errorMessage }]}
+        >
+          {getOptions()}
+        </SimpleSelect>
+      )
+
+      expect(page.getByText(errorMessage).element()).toBeInTheDocument()
+    })
+
+    it('should not render error messages when interaction="readonly"', async () => {
+      await render(
+        <SimpleSelect
+          renderLabel="Choose an option"
+          interaction="readonly"
+          messages={[{ type: 'error', text: errorMessage }]}
+        >
+          {getOptions()}
+        </SimpleSelect>
+      )
+
+      expect(page.getByText(errorMessage).query()).toBeNull()
+    })
+  })
+
   it('should render icons before option and call renderBeforeLabel callback with necessary props', async () => {
     const renderBeforeLabel = vi.fn(() => (
       <CheckInstUIIcon data-testid="option-icon" />
