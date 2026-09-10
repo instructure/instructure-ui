@@ -167,6 +167,7 @@ class RadioInputGroup extends Component<
         elementRef={this.handleRef}
         role="radiogroup"
         isRequired={isRequired}
+        aria-required={isRequired ? true : undefined}
         data-cid="RadioInputGroup"
       >
         {this.renderChildren()}
