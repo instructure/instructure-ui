@@ -21,41 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import promptThemeInput from './promptThemeInput.ts'
 
-import bump from './bump.ts'
-import server from './server.ts'
-import tag from './tag.ts'
-import deprecate from './deprecate.ts'
-import publish from './publish.ts'
-import publishPrivate from './publish-private.ts'
-import visualDiff from './visual-diff.ts'
-import transpileDiff from './transpile-diff.ts'
-import lint from './lint.ts'
-import bundle from '../build/webpack.ts'
-import clean from '../build/clean.ts'
-import build from '../build/babel.ts'
-import generateAllTokens from '../build/generate-all-tokens.ts'
-import buildIcons from '../icons/build-icons.ts'
-import buildThemes from '../build/build-themes.ts'
-import createComponentVersion from './create-component-version.ts'
-import buildFrozenThemes from './build-frozen-themes.ts'
-
-export const yargCommands = [
-  bump,
-  server,
-  tag,
-  deprecate,
-  publish,
-  publishPrivate,
-  visualDiff,
-  transpileDiff,
-  lint,
-  bundle,
-  clean,
-  build,
-  generateAllTokens,
-  buildIcons,
-  buildThemes,
-  createComponentVersion,
-  buildFrozenThemes
-]
+export default {
+  command: 'build-frozen-themes',
+  desc:
+    'Prompts for a theme, package, component and version, then writes the ' +
+    "narrowed frozenThemes folder into that component version's folder",
+  handler: async () => {
+    await promptThemeInput()
+  }
+}

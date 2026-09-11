@@ -35,6 +35,7 @@
     "read-package-up": "^12.0.0",
     "semver": "^7.8.5",
     "style-dictionary": "5.5.2",
+    "typescript-compiler-api": "npm:@typescript/typescript6@^6.0.2",
     "webpack-cli": "^7.2.3",
     "webpack-dev-server": "6.0.0",
     "yargs": "^18.1.0"

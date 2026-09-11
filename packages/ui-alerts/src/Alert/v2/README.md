@@ -14,13 +14,7 @@ space above or below the alert.
 ---
 type: example
 ---
-<InstUISettingsProvider theme={{
-    componentOverrides: {
-      "Alert": {
-        dangerIconBackground: 'purple'
-      }
-    }
-}}>
+<>
   <Alert
     variant="success"
     renderCloseButtonLabel="Close"
@@ -56,7 +50,7 @@ type: example
   >
     Sample warning text. This alert is not dismissible and cannot be closed.
   </Alert>
-</InstUISettingsProvider>
+  </>
 ```
 
 The `timeout` prop can be used to automatically dismiss an alert after a time.

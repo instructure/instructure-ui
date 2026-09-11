@@ -150,6 +150,8 @@ The version that was previously the latest (`v2` in this case) must be frozen:
 
    This freezes the old version to a known, working state. Only packages that have versioning (i.e., those with `./vX_Y` entries in their `exports` field) need this treatment. Non-versioned packages like `@instructure/emotion` are left as-is.
 
+2. **Freeze its theme tokens.** Pinning imports doesn't cover theming — see [Frozen Themes](#frozen-themes) below.
+
 #### 3. Make breaking changes in the new version
 
 In `v3`, make whatever breaking changes are needed. The new version's internal imports should use `/latest` subpaths to always reference the newest implementations of other packages:
@@ -246,6 +248,62 @@ However, a broken build alone is **not** sufficient reason to create a new versi
 
 For example, suppose `View` gets a `v2` that removes a prop. `Alert` imports `View` via `/latest`, so after the change it receives the new `View` and it breaks in some way. If fixing `Alert` only requires internal adjustments (e.g., stopping use of the removed prop) without changing Alert's own API or visual output, just update Alert's latest version in place. But if the fix would alter Alert's props or visual appearance in a way that could affect consumers, then a new Alert version (`v3`) is needed.
 
+## Frozen Themes
+
+Pinning imports freezes a version's code, not its theming. The themes keep evolving, so an old version reading the live theme would silently drift. A frozen theme is a snapshot of only the tokens one component version needs, written into that version's own folder.
+
+### Generating one
+
+```sh
+---
+type: code
+---
+pnpm run build:frozen-themes
+```
+
+The command prompts for one or more themes, a package, a component, and a version.
+
+Tokens come from the compiled build of `@instructure/ui-themes`, so run `pnpm run bootstrap` first if you haven't.
+
+Each selected theme gets a folder:
+
+```sh
+---
+type: code
+---
+packages/ui-alerts/src/Alert/v2/frozenThemes/
+├── index.ts              # collects every theme folder
+└── canvas/
+    ├── index.ts          # collects the four files below
+    ├── primitives.ts     # plain object
+    ├── semantics.ts      # (primitives) => ({ ... })
+    ├── sharedTokens.ts   # (semantic) => ({ ... })
+    └── component.ts      # (semantic) => ({ ... })
+```
+
+Every file is narrowed to what the component actually reads — Alert v2's semantics come out at 82 lines against more than 1600 in the full theme. These are real source files, not data dumps, so references like `semantic.color.stroke.error` survive as written. 
+
+### Wiring it up
+
+Generating the folder doesn't connect it. Class components take it as the third argument to `withStyleNew`:
+
+```js
+---
+type: code
+---
+import frozenThemes from './frozenThemes/index.js'
+
+@withStyleNew(generateStyle, null, frozenThemes)
+```
+
+The second argument is `useTokensFrom`, which stays `null` unless the component borrows another component's tokens. Function components pass the same object to `useStyleNew` as `frozenTheme`.
+
+A frozen component then resolves tokens from its snapshot instead of the theme in context, and logs an error if it's handed a theme it wasn't frozen with. Freeze every theme the version has to support.
+
+### Limits
+
+UseTokensFrom is not handled currently. 
+
 ## Testing
 
 Only the latest version of each component is tested and supported. Older versions are frozen and considered stable. When you create a new version, ensure the `__tests__/` directory lives in the new version's folder and that all tests pass:
@@ -308,7 +366,7 @@ When you add a breaking change to a component, you manually add the new `./v11_8
 ## Summary of steps needed to add a new version of a component
 
 1. **`git mv`** the current latest version to a new `vX` directory, then recreate the old version as a copy (see the one-liner in step 1 above)
-2. **Freeze** the old version: pin `/latest` imports to the current released version
+2. **Freeze** the old version: pin `/latest` imports to the current released version, then generate and wire up its frozen themes
 3. **Implement** breaking changes in the new version (keep `/latest` imports)
 4. **Create** a new lettered export file that exports all components at their latest versions
 5. **Update** `package.json` exports: add the new `./vX_Y` entry and point `./latest` to the new letter
