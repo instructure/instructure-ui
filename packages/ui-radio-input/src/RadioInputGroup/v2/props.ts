@@ -86,7 +86,9 @@ type RadioInputGroupOwnProps = {
   children?: React.ReactNode
 
   /**
-   * Setting this to `true` adds and asterisk after the description (group label). It does not cause any behavioural change.
+   * Setting this to `true` adds an asterisk after the description (group label) and
+   * sets `aria-required` on the group, so screen readers announce it as required.
+   * It does not turn on native form validation.
    */
   isRequired?: boolean
 
