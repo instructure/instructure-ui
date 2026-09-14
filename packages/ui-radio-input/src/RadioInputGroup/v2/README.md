@@ -224,6 +224,8 @@ type: example
 
 Whenever a `RadioInputGroup` contains required fields, you must include a note explaining what the asterisk means — typically "Fields marked with an asterisk (\*) are required."
 
+`isRequired` adds the asterisk and sets `aria-required` on the group, so screen readers announce it as required. It does not block form submission. To let the browser enforce a choice, pass `required` to every `RadioInput` in the group.
+
 ```js
 ---
 type: example
