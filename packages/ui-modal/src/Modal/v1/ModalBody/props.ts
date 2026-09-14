@@ -56,6 +56,7 @@ type ModalBodyStyle = ComponentStyle<'modalBody'>
 
 type ModalBodyState = {
   isFirefox: boolean
+  needsTabIndex: boolean
 }
 const allowedProps: AllowedPropKeys = [
   'children',

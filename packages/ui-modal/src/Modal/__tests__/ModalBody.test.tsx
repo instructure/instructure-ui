@@ -207,6 +207,22 @@ describe('<ModalBody />', () => {
       await vi.waitFor(() => expect(body).not.toHaveAttribute('tabindex'))
     })
 
+    it('becomes a tab stop when the content grows without a DOM structure change', async () => {
+      mockScrollable(false)
+      const { rerender } = await render(<ModalBody>{'short body'}</ModalBody>)
+      const body = page.getByText('short body').element()
+
+      expect(body).not.toHaveAttribute('tabindex')
+
+      // Neither observer fires here: the body is already at its max height, so
+      // its own box does not change, and React rewrites a lone text child
+      // through `nodeValue`, which is a mutation type we do not subscribe to.
+      scrollHeightSpy.mockReturnValue(500)
+      rerender(<ModalBody>{'a much longer body that now overflows'}</ModalBody>)
+
+      await vi.waitFor(() => expect(body).toHaveAttribute('tabindex', '0'))
+    })
+
     it('labels the scrollable body from the header with a space between adjacent text nodes', async () => {
       mockScrollable(true)
       // The header reproduces what a `Heading` with `aiVariant="stacked"`
