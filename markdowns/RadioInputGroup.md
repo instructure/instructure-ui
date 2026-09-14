@@ -24,7 +24,7 @@ function Example () {
     console.log(value)
   }
   return (
-    <RadioInputGroup onChange={handleChange} name="example1" defaultValue="foo" description="Select something">
+    <RadioInputGroup onChange={handleChange} name="example1" defaultValue="foo" description="Select something" margin="general.spaceMd 0">
       {inputs.map(input => <RadioInput key={input.value} value={input.value} label={input.label} />)}
     </RadioInputGroup>
   )
@@ -275,6 +275,7 @@ type: embed
 | RadioInputGroup | layout | `'stacked' \| 'columns' \| 'inline'` | No | `'stacked'` |  |
 | RadioInputGroup | children | `React.ReactNode` | No | - | any children (ones that aren't `RadioInput` are passed through) |
 | RadioInputGroup | isRequired | `boolean` | No | - | Setting this to `true` adds and asterisk after the description (group label). It does not cause any behavioural change. |
+| RadioInputGroup | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`. |
 
 ### Usage
 

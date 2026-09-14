@@ -11,6 +11,7 @@ type: example
 ---
 <FormFieldGroup description={<ScreenReaderContent>CheckboxGroup examples</ScreenReaderContent>}>
   <CheckboxGroup name="sports"
+    margin="general.spaceMd 0"
     onChange={function (value) { console.log(value) }}
     defaultValue={['football', 'volleyball']}
     description="Select your favorite sports"
@@ -129,6 +130,7 @@ type: embed
 | CheckboxGroup | messages | `FormMessage[]` | No | - |  |
 | CheckboxGroup | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` |  |
 | CheckboxGroup | layout | `'stacked' \| 'columns' \| 'inline'` | No | `'stacked'` |  |
+| CheckboxGroup | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`. |
 
 ### Usage
 
