@@ -71,6 +71,18 @@ Please update the documentation and examples with any changes.
 - Write documentation inline in code comment blocks. The code and docs should
   always be in sync.
 
+### Code Comments
+
+Write comments for someone reading the file a year from now, with no access to
+the pull request or ticket that introduced the change.
+
+- Explain _why_, not _what_. If the code already says it, leave the comment out.
+- Keep it to one line where you can.
+- Don't refer to the change itself ("we now…", "previously…", "this fix…") or
+  narrate the diff ("added onKeyDown handler") - `git log` covers that.
+- Document props with a JSDoc block containing one prose sentence. Types are
+  parsed from TypeScript, so `@param` and `@type` tags aren't needed.
+
 ### Commit Guidelines
 
 Run `git commit` to commit your changes and follow our commit message format.
