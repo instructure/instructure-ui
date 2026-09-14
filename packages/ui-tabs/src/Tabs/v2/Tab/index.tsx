@@ -92,9 +92,11 @@ class Tab extends Component<TabsTabProps> {
       variant,
       isSelected,
       isDisabled,
+      isFocusable,
       controls,
       children,
       styles,
+      elementRef,
       ...props
     } = this.props
 
@@ -104,13 +106,14 @@ class Tab extends Component<TabsTabProps> {
         as="div"
         role="tab"
         id={id}
+        elementRef={elementRef}
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
         css={styles?.tab}
-        aria-selected={isSelected ? 'true' : undefined}
+        aria-selected={isSelected ? 'true' : 'false'}
         aria-disabled={isDisabled ? 'true' : undefined}
         aria-controls={controls}
-        tabIndex={isSelected && !isDisabled ? 0 : undefined}
+        tabIndex={isDisabled ? undefined : isFocusable ?? isSelected ? 0 : -1}
         position="relative"
         focusPosition="offset"
       >

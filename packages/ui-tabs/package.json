@@ -29,7 +29,6 @@
     "@instructure/emotion": "workspace:*",
     "@instructure/shared-types": "workspace:*",
     "@instructure/ui-dom-utils": "workspace:*",
-    "@instructure/ui-focusable": "workspace:*",
     "@instructure/ui-i18n": "workspace:*",
     "@instructure/ui-motion": "workspace:*",
     "@instructure/ui-react-utils": "workspace:*",
