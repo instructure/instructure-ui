@@ -66,14 +66,12 @@ function getAllPackages() {
 
 module.exports = {
   extends: ['@commitlint/config-conventional'],
-  parserOpts: {
-    headerPattern: /^(\w*)\((\w*)\)-(\w*)\s(.*)$/,
-    headerCorrespondence: ['type', 'scope', 'subject']
-  },
   // https://commitlint.js.org/reference/rules.html
   rules: {
+    // The header is unbounded because multi-package scopes are long, e.g.
+    // `fix(ui-drawer-layout,ui-a11y-utils):`. The subject itself is capped.
     'header-max-length': [0, 'always', 150], // 0 === rule is disabled
-    'subject-max-length': [2, 'always', 150]
+    'subject-max-length': [2, 'always', 100]
   },
 
   // https://cz-git.qbb.sh/config/
