@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.6](https://github.com/instructure/instructure-ui/compare/v11.7.5...v11.7.6) (2026-09-14)
+
+### Bug Fixes
+
+* **many:** generate deterministic ids with React useId ([83aa25a](https://github.com/instructure/instructure-ui/commit/83aa25aebd41720fd09beac025dbf961e1f413c2))
+
+### Features
+
+* **many:** add margin prop to v2 FormFieldGroup, CheckboxGroup, RadioInputGroup, Checkbox, RadioInput, RangeInput, Text, and ToggleButton ([fea952f](https://github.com/instructure/instructure-ui/commit/fea952f22e553745c299eeba1a2700dbb3b9d296))
+
+
 ## [11.7.5](https://github.com/instructure/instructure-ui/compare/v11.7.4...v11.7.5) (2026-08-25)
 
 **Note:** Version bump only for package @instructure/ui-radio-input
