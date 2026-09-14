@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.6](https://github.com/instructure/instructure-ui/compare/v11.7.5...v11.7.6) (2026-09-14)
+
+### Bug Fixes
+
+* **__docs__:** restore JSDoc extraction broken by TS7 API removal ([4c70025](https://github.com/instructure/instructure-ui/commit/4c70025bfdffa92d29546aed43c534efcd0051c0))
+* **many:** generate deterministic ids with React useId ([83aa25a](https://github.com/instructure/instructure-ui/commit/83aa25aebd41720fd09beac025dbf961e1f413c2))
+
+### Features
+
+* **docs-app:** limit the version select to a component's own versions ([e7282b8](https://github.com/instructure/instructure-ui/commit/e7282b835d1e077e2c920b1e2e5d1ab4c296c2bb))
+
+
 ## [11.7.5](https://github.com/instructure/instructure-ui/compare/v11.7.4...v11.7.5) (2026-08-25)
 
 

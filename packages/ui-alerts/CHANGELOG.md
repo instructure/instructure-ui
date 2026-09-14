@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.6](https://github.com/instructure/instructure-ui/compare/v11.7.5...v11.7.6) (2026-09-14)
+
+### Bug Fixes
+
+* **ui-alerts:** remove live region role warning ([884a1fa](https://github.com/instructure/instructure-ui/commit/884a1faf40befef98716751b39f46f65c906c45c))
+
+
 ## [11.7.5](https://github.com/instructure/instructure-ui/compare/v11.7.4...v11.7.5) (2026-08-25)
 
 **Note:** Version bump only for package @instructure/ui-alerts

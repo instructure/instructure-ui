@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.6](https://github.com/instructure/instructure-ui/compare/v11.7.5...v11.7.6) (2026-09-14)
+
+### Bug Fixes
+
+* **ui-select,ui-simple-select:** remove aria-readonly from Select when it has a button role ([9c2a412](https://github.com/instructure/instructure-ui/commit/9c2a41253c1e7b431708b16b4c27dbe693e4d4fa))
+
+
 ## [11.7.5](https://github.com/instructure/instructure-ui/compare/v11.7.4...v11.7.5) (2026-08-25)
 
 **Note:** Version bump only for package @instructure/ui-simple-select

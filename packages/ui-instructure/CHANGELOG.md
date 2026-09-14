@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.6](https://github.com/instructure/instructure-ui/compare/v11.7.5...v11.7.6) (2026-09-14)
+
+### Bug Fixes
+
+* **ui-instructure:** add an info icon to AI Information dialog triggers for WCAG 1.4.1 compliance ([968906f](https://github.com/instructure/instructure-ui/commit/968906ffefd41f5b6fc0494a90fda4dc43e32179))
+
+
 ## [11.7.5](https://github.com/instructure/instructure-ui/compare/v11.7.4...v11.7.5) (2026-08-25)
 
 

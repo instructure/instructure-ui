@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.6](https://github.com/instructure/instructure-ui/compare/v11.7.5...v11.7.6) (2026-09-14)
+
+### Bug Fixes
+
+* **ui-dialog:** cancel the pending focus region activation on close ([9b0467d](https://github.com/instructure/instructure-ui/commit/9b0467db66ccab2197768c3ff8809c8d95aaad4b))
+
+
 ## [11.7.5](https://github.com/instructure/instructure-ui/compare/v11.7.4...v11.7.5) (2026-08-25)
 
 **Note:** Version bump only for package @instructure/ui-dialog

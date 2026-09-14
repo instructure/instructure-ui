@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.6](https://github.com/instructure/instructure-ui/compare/v11.7.5...v11.7.6) (2026-09-14)
+
+### Features
+
+* **ui-scripts,ui-themes:** generate theme tokens as css custom properties ([a70736c](https://github.com/instructure/instructure-ui/commit/a70736ce270437b5caaf68f914751038e1eedf55))
+
+### Performance Improvements
+
+* **ui-scripts,ui-icons:** generate tree-shakeable named imports for lucide icons ([3863096](https://github.com/instructure/instructure-ui/commit/38630967b8cdcddf2230687e0f6a30d7535dc03f))
+* **ui-scripts:** annotate generated custom icons as side-effect free ([78d3d8f](https://github.com/instructure/instructure-ui/commit/78d3d8f6320039a1abb2196acc66737016ae41cd))
+
+
 ## [11.7.5](https://github.com/instructure/instructure-ui/compare/v11.7.4...v11.7.5) (2026-08-25)
 
 
