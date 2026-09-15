@@ -719,6 +719,7 @@ class Select extends Component<SelectProps> {
     const passthroughProps = omitProps(rest, Select.allowedProps)
     const { ref, ...triggerProps } = getTriggerProps({ ...passthroughProps })
     const isEditable = typeof onInputChange !== 'undefined'
+    const isForcedReadOnly = interaction === 'enabled' && !isEditable
 
     let overrideProps: Partial<TextInputProps> = {}
     if (!isEditable) {
@@ -746,10 +747,8 @@ class Select extends Component<SelectProps> {
       value: inputValue,
       inputRef: utils.createChainedFunction(ref, this.handleInputRef),
       inputContainerRef: this.handleInputContainerRef,
-      interaction:
-        interaction === 'enabled' && !isEditable
-          ? 'readonly' // prevent keyboard cursor
-          : interaction,
+      interaction: isForcedReadOnly ? 'readonly' : interaction, // if readonly prevent keyboard cursor
+      forceMessages: isForcedReadOnly,
       isRequired,
       shouldNotWrap,
       layout,
@@ -789,12 +788,11 @@ class Select extends Component<SelectProps> {
         {...triggerProps}
         {...getInputProps(inputProps)}
         suppressHydrationWarning
-        {...(interaction === 'enabled' &&
-          !isEditable && {
-            themeOverride: (componentTheme) => ({
-              backgroundReadonlyColor: componentTheme.backgroundColor
-            })
-          })}
+        {...(isForcedReadOnly && {
+          themeOverride: (componentTheme) => ({
+            backgroundReadonlyColor: componentTheme.backgroundColor
+          })
+        })}
       />
     )
   }
