@@ -1,0 +1,27 @@
+name: Sweep stale PR folders from gh-pages
+
+# Cleanup files in the gh-pages branch for merged and closed PRs.
+on:
+  schedule:
+    # run once a day at 03:00 UTC
+    - cron: '0 3 * * *'
+
+permissions:
+  contents: write
+  pull-requests: read
+
+concurrency:
+  group: gh-pages-sweep
+  cancel-in-progress: false
+
+jobs:
+  sweep:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          sparse-checkout: .github/workflows
+      - name: Remove folders of closed PRs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: ./.github/workflows/gh-pages-cleanup.sh
