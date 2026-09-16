@@ -30,8 +30,10 @@ import {
   omitProps,
   useDeterministicId
 } from '@instructure/ui-react-utils'
+import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { logError as error } from '@instructure/console'
 
+import { AISpinnerIcon } from './AISpinnerIcon.js'
 import generateStyle from './styles.js'
 import type { SpinnerProps } from './props'
 import { allowedProps } from './props.js'
@@ -78,6 +80,48 @@ const Spinner = forwardRef<HTMLDivElement, SpinnerProps>((props, ref) => {
     return undefined
   }, [delay])
 
+  const isAI = variant === 'ai' || variant === 'ai-inverse'
+
+  const renderCircle = () => (
+    <svg
+      css={styles?.circle}
+      role="img"
+      aria-labelledby={titleId}
+      focusable="false"
+    >
+      <title id={titleId}>{callRenderProp(renderTitle)}</title>
+      <g role="presentation">
+        {variant === 'default' && (
+          <circle
+            css={styles?.circleTrack}
+            cx="50%"
+            cy="50%"
+            r={styles?.radius as string}
+          />
+        )}
+        <circle
+          css={styles?.circleSpin}
+          cx="50%"
+          cy="50%"
+          r={styles?.radius as string}
+        />
+      </g>
+    </svg>
+  )
+
+  // The icon accepts only a string `title`, but `renderTitle` can be any node.
+  // So the label goes on the wrapping element instead.
+  const renderAIIcon = () => (
+    <>
+      <ScreenReaderContent id={titleId}>
+        {callRenderProp(renderTitle)}
+      </ScreenReaderContent>
+      <span css={styles?.aiSpin}>
+        <AISpinnerIcon color={variant === 'ai' ? 'ai' : 'onColor'} />
+      </span>
+    </>
+  )
+
   const renderSpinner = () => {
     error(
       !!renderTitle,
@@ -88,35 +132,13 @@ const Spinner = forwardRef<HTMLDivElement, SpinnerProps>((props, ref) => {
 
     return (
       <div
+        {...(isAI && { role: 'img', 'aria-labelledby': titleId })}
         {...passthroughProps}
         css={styles?.spinner}
         ref={ref}
         data-cid="Spinner"
       >
-        <svg
-          css={styles?.circle}
-          role="img"
-          aria-labelledby={titleId}
-          focusable="false"
-        >
-          <title id={titleId}>{callRenderProp(renderTitle)}</title>
-          <g role="presentation">
-            {variant !== 'inverse' && (
-              <circle
-                css={styles?.circleTrack}
-                cx="50%"
-                cy="50%"
-                r={styles?.radius as string}
-              />
-            )}
-            <circle
-              css={styles?.circleSpin}
-              cx="50%"
-              cy="50%"
-              r={styles?.radius as string}
-            />
-          </g>
-        </svg>
+        {isAI ? renderAIIcon() : renderCircle()}
       </div>
     )
   }
