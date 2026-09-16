@@ -2,12 +2,11 @@ name: Visual regression
 
 on:
   pull_request:
-    # `closed` is included so the cleanup job can remove the PR's published
-    # report from gh-pages; the capture job skips the `closed` event.
-    types: [opened, synchronize, reopened, closed]
+    types: [opened, synchronize, reopened]
 
-# push collisions to the gh-pages branch with other workflows are handled by
-# the retry loop in gh-pages-dir.sh
+# One group per PR: a new push cancels a capture still running for an older commit.
+# A repo-wide group cancelled other PRs' queued runs, so those PRs got no report.
+# Published reports of closed PRs are removed by gh-pages-cleanup.yml.
 concurrency:
   group: visual-regression-${{ github.event.pull_request.number }}
   cancel-in-progress: true
@@ -15,7 +14,6 @@ concurrency:
 jobs:
   visual-regression:
     name: Capture, diff, and publish report
-    if: github.event.action != 'closed'
     runs-on: ubuntu-latest
     container:
       image: cypress/browsers:latest
@@ -111,13 +109,14 @@ jobs:
         continue-on-error: true
 
       - name: Publish report to gh-pages
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          COMMIT_MESSAGE: "visual-regression: PR #${{ github.event.pull_request.number }} (${{ github.sha }})"
-        run: >
-          ./.github/workflows/gh-pages-dir.sh
-          visual-regression/pr-${{ github.event.pull_request.number }}
-          regression-test/.report
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: regression-test/.report
+          publish_branch: gh-pages
+          destination_dir: visual-regression/pr-${{ github.event.pull_request.number }}
+          keep_files: true
+          commit_message: "visual-regression: PR #${{ github.event.pull_request.number }} (${{ github.sha }})"
 
       - name: Read summary
         id: summary
@@ -199,19 +198,3 @@ jobs:
       - name: Fail if regressions or Cypress failed
         if: steps.diff.outcome == 'failure' || steps.cypress.outcome == 'failure'
         run: exit 1
-
-  cleanup-report:
-    name: Remove report when PR closes
-    if: github.event.action == 'closed'
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@v6
-        with:
-          sparse-checkout: .github/workflows
-      - name: Remove this PR's report directory
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          COMMIT_MESSAGE: "visual-regression: remove report for closed PR #${{ github.event.pull_request.number }}"
-        run: ./.github/workflows/gh-pages-dir.sh visual-regression/pr-${{ github.event.pull_request.number }}
