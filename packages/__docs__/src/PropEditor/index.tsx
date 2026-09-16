@@ -28,7 +28,6 @@ import { View } from '@instructure/ui-view'
 import { Flex } from '@instructure/ui-flex'
 import { Button } from '@instructure/ui-buttons'
 import { Text } from '@instructure/ui-text'
-import { Spinner } from '@instructure/ui-spinner'
 import { Checkbox } from '@instructure/ui-checkbox'
 import { TextInput } from '@instructure/ui-text-input'
 import { NumberInput } from '@instructure/ui-number-input'
@@ -37,19 +36,9 @@ import { SourceCodeEditor } from '@instructure/ui-source-code-editor'
 
 import { AppContext } from '../appContext'
 import Preview from '../Preview'
-import { getDeployBase } from '../navigationUtils'
 
-import {
-  generateControls,
-  serializeComposition,
-  serializeJsx
-} from './propControls'
-import type {
-  Control,
-  PropEditorProps,
-  PropValue,
-  ReactDocgenProps
-} from './props'
+import { generateControls, serializeComposition } from './propControls'
+import type { Control, PropEditorProps, PropValue } from './props'
 
 /** A section's resolved controls, ready to render and serialize. */
 type ResolvedSection = {
@@ -62,122 +51,32 @@ type ResolvedSection = {
 /** Per-section form values: `{ [sectionId]: { [propName]: value } }`. */
 type SectionValues = Record<string, Record<string, PropValue>>
 
-type Status = 'loading' | 'ready' | 'error'
-
-const noop = () => {}
-
 /**
- * An auto-generated, form-based playground for a component's props. Reads the
- * component's react-docgen metadata (fetched at runtime, the same JSON the
- * props table uses), derives a form control per prop, and renders a live
- * preview plus the equivalent JSX. Intended for use inside component READMEs
- * via a `type: embed` code block, e.g. `<PropEditor componentId="Button" />`.
+ * A form-based playground for a component's props. Derives a form control per
+ * prop from the component's react-docgen metadata, then renders a live preview
+ * of the resulting JSX alongside the snippet itself.
+ *
+ * Which components get one, and how each is configured, lives in `./registry`.
  *
  * @private used only by the docs app.
  */
 function PropEditor({
   componentId,
-  props: providedProps,
-  config: configProp,
   sections: sectionInputs,
   template
 }: PropEditorProps) {
-  const { componentVersion, themeKey, themes } = useContext(AppContext)
-  const name = componentId
+  // The page-level theme switcher drives the preview, the same way it drives
+  // every `type: example` block (see `Playground`). It knows which themes
+  // apply to the selected library version; a local switcher here would have to
+  // duplicate that and would get it wrong for the legacy versions.
+  const { themeKey } = useContext(AppContext)
 
-  // Stabilize config: when it isn't passed (composition mode), the inline
-  // default would be a fresh object every render, thrashing the memo below and
-  // re-seeding (i.e. wiping) the form on every keystroke.
-  const config = useMemo(() => configProp ?? {}, [configProp])
-
-  // Composition mode: multiple elements edited against a template. Otherwise
-  // the single-element form, sourcing metadata from props or a runtime fetch.
-  const isComposition = Boolean(sectionInputs && template)
-
-  const [docgenProps, setDocgenProps] = useState<ReactDocgenProps | null>(
-    providedProps ?? null
-  )
-  const [status, setStatus] = useState<Status>(
-    providedProps || isComposition ? 'ready' : 'loading'
-  )
-  const [errorMsg, setErrorMsg] = useState('')
   const [values, setValues] = useState<SectionValues>({})
 
-  // The switchable themes, minus the shared-tokens bundle and the legacy
-  // wrappers (v2 components use the new theming system).
-  const themeOptions = useMemo(
+  // Resolve every section's controls — one per template slot.
+  const sections = useMemo<ResolvedSection[]>(
     () =>
-      Object.keys(themes || {}).filter(
-        (key) => key !== 'shared-tokens' && !key.startsWith('legacy-')
-      ),
-    [themes]
-  )
-
-  // `themeKey` is undefined until the reader picks one in the page-level theme
-  // switcher (`App` falls back to the first theme for its own select), so fall
-  // back the same way here — otherwise the select renders blank and the preview
-  // gets a theme name that resolves to nothing.
-  const appTheme = useMemo(
-    () =>
-      themeOptions.includes(String(themeKey))
-        ? String(themeKey)
-        : themeOptions[0] ?? '',
-    [themeKey, themeOptions]
-  )
-
-  // A theme override local to the preview, so a reader can flip themes without
-  // scrolling back to the page-level theme switcher. Seeded from the app's
-  // selected theme and reset to it whenever that changes.
-  const [selectedTheme, setSelectedTheme] = useState<string>(appTheme)
-  useEffect(() => {
-    setSelectedTheme(appTheme)
-  }, [appTheme])
-
-  // Fetch the component's prop metadata (mirrors App.getDocsBasePath). Skipped
-  // when metadata is supplied via props (the auto-injected Document case) or in
-  // composition mode (each section carries its own metadata).
-  useEffect(() => {
-    if (isComposition) return
-    if (providedProps) {
-      setDocgenProps(providedProps)
-      setStatus('ready')
-      return
-    }
-
-    let cancelled = false
-    const base = getDeployBase()
-    const versionSeg = componentVersion ? `/${componentVersion}` : ''
-    const url = `${base}/docs${versionSeg}/${name}.json`
-
-    setStatus('loading')
-    fetch(url)
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error(`request failed (${res.status})`)
-        }
-        return res.json()
-      })
-      .then((data) => {
-        if (cancelled) return
-        setDocgenProps((data.props as ReactDocgenProps) || {})
-        setStatus('ready')
-      })
-      .catch((err) => {
-        if (cancelled) return
-        setErrorMsg(err?.message || String(err))
-        setStatus('error')
-      })
-
-    return () => {
-      cancelled = true
-    }
-  }, [name, componentVersion, providedProps, isComposition])
-
-  // Resolve every section's controls. Simple mode is just a single section
-  // keyed by the component name; composition mode has one per template slot.
-  const sections = useMemo<ResolvedSection[]>(() => {
-    if (isComposition) {
-      return sectionInputs!.map((section) => {
+      sectionInputs.map((section) => {
         const { controls, skipped } = generateControls(
           section.props,
           section.config || {}
@@ -188,12 +87,9 @@ function PropEditor({
           controls,
           skipped
         }
-      })
-    }
-    if (!docgenProps) return []
-    const { controls, skipped } = generateControls(docgenProps, config)
-    return [{ id: name, label: name, controls, skipped }]
-  }, [isComposition, sectionInputs, docgenProps, config, name])
+      }),
+    [sectionInputs]
+  )
 
   // A structural signature of the sections/controls. Seeding keys off this
   // rather than the `sections` array identity, so an unrelated re-render that
@@ -221,15 +117,10 @@ function PropEditor({
     // intentionally not a dependency (its identity changes on every render).
   }, [sectionsKey])
 
-  const code = useMemo(() => {
-    if (isComposition) {
-      return serializeComposition(template!, sections, values)
-    }
-    const section = sections[0]
-    return section
-      ? serializeJsx(name, section.controls, values[section.id] || {})
-      : ''
-  }, [isComposition, template, sections, values, name])
+  const code = useMemo(
+    () => serializeComposition(template, sections, values),
+    [template, sections, values]
+  )
 
   // A reader-triggered remount, for state that lives inside the preview rather
   // than in the form: an Alert that has already timed out, a checkbox toggled
@@ -338,27 +229,6 @@ function PropEditor({
     )
   }
 
-  if (status === 'loading') {
-    return (
-      <View as="div" padding="medium">
-        <Spinner renderTitle="Loading props" size="x-small" />
-        <View as="span" margin="0 0 0 small">
-          <Text>Loading {name} props…</Text>
-        </View>
-      </View>
-    )
-  }
-
-  if (status === 'error') {
-    return (
-      <View as="div" padding="medium">
-        <Text color="danger">
-          Could not load props for <code>{name}</code>: {errorMsg}
-        </Text>
-      </View>
-    )
-  }
-
   return (
     <View
       as="div"
@@ -369,37 +239,16 @@ function PropEditor({
       margin="medium 0"
     >
       <Flex alignItems="stretch" gap="medium" wrap="wrap">
-        {/* Controls column: narrow, holds the theme + prop selectors. */}
+        {/* Controls column: narrow, holds the prop selectors. */}
         <Flex.Item size="18rem" shouldGrow shouldShrink>
-          {themeOptions.length > 1 && (
-            <View as="div" margin="0 0 small 0">
-              <SimpleSelect
-                renderLabel="Theme"
-                value={selectedTheme}
-                onChange={(_event, { value: selected }) =>
-                  setSelectedTheme(String(selected))
-                }
-              >
-                {themeOptions.map((option) => (
-                  <SimpleSelect.Option
-                    key={option}
-                    id={`theme--${option}`}
-                    value={option}
-                  >
-                    {option}
-                  </SimpleSelect.Option>
-                ))}
-              </SimpleSelect>
-            </View>
-          )}
           {sections.map((section, index) => (
             <View
               key={section.id}
               as="div"
               margin={index === 0 ? '0' : 'medium 0 0 0'}
             >
-              {/* Single-section (simple) mode keeps the generic "Props" label;
-                  composition mode labels each group by its element. */}
+              {/* Single-section mode keeps the generic "Props" label; a
+                  composition labels each group by its element. */}
               <Text weight="bold">
                 {sections.length > 1 ? section.label : 'Props'}
               </Text>
@@ -440,17 +289,16 @@ function PropEditor({
             <Preview
               key={previewKey}
               code={code}
-              language="jsx"
-              themeKey={selectedTheme}
+              themeKey={themeKey}
+              fullscreen={false}
             />
           </View>
 
           <View as="div" margin="medium 0 0 0">
             <SourceCodeEditor
-              label={`${name} code`}
+              label={`${componentId} code`}
               language="jsx"
               value={code}
-              onChange={noop}
               readOnly
               lineWrapping
             />
@@ -463,5 +311,4 @@ function PropEditor({
 
 PropEditor.displayName = 'PropEditor'
 
-export default PropEditor
 export { PropEditor }

@@ -44,10 +44,7 @@ import { TableOfContents } from '../TableOfContents'
 import { Heading } from '../Heading'
 import { PropEditor } from '../PropEditor'
 import type { PropEditorSection, ReactDocgenProps } from '../PropEditor/props'
-import {
-  getCustomPlayground,
-  getSimplePlayground
-} from '../PropEditor/registry'
+import { getPlayground } from '../PropEditor/registry'
 
 import { AppContext } from '../appContext'
 import { navigateTo } from '../navigationUtils'
@@ -179,63 +176,47 @@ class Document extends Component<DocumentProps, DocumentState> {
     )
   }
 
-  // Which playground (if any) a component gets — both are opt-in, registered by
-  // id in `PropEditor/registry`:
-  //  - a curated composition, when a custom playground is registered;
-  //  - the single-element form, for the components registered as simple;
-  //  - none otherwise, which is the common case: those pages document
-  //    themselves through their README examples.
+  // A playground is opt-in, registered by id in `PropEditor/registry`. The
+  // common case is not having one: those pages document themselves through
+  // their README examples.
   getPlaygroundEditor(doc: DocDataType) {
-    const custom = getCustomPlayground(doc.id)
+    const playground = getPlayground(doc.id)
+    if (!playground) return null
 
-    if (custom) {
-      // A template written against a newer API doesn't apply to the older
-      // minor versions the docs also serve.
-      const docProps = (doc.props || {}) as ReactDocgenProps
-      if (custom.requiresProps?.some((propName) => !docProps[propName])) {
-        return null
-      }
-
-      const sections = custom.sections
-        .map<PropEditorSection | null>((section) => {
-          const sectionProps =
-            section.id === doc.id
-              ? doc.props
-              : doc.children?.find((child) => child.id === section.id)?.props
-          return sectionProps
-            ? {
-                id: section.id,
-                label: section.label,
-                props: sectionProps as ReactDocgenProps,
-                config: section.config
-              }
-            : null
-        })
-        .filter((section): section is PropEditorSection => section !== null)
-
-      // Bail if any section's metadata is missing rather than render a partial,
-      // broken composition.
-      if (sections.length !== custom.sections.length) return null
-
-      return (
-        <PropEditor
-          componentId={doc.id}
-          sections={sections}
-          template={custom.template}
-        />
-      )
+    // An entry written against a newer API doesn't apply to the older minor
+    // versions the docs also serve.
+    const docProps = (doc.props || {}) as ReactDocgenProps
+    if (playground.requiresProps?.some((propName) => !docProps[propName])) {
+      return null
     }
 
-    const config = getSimplePlayground(doc.id)
-    // Registered but with no prop metadata (a doc page that isn't a parsed
-    // component) has nothing to build a form from.
-    if (!config || !doc.props) return null
+    const sections = playground.sections
+      .map<PropEditorSection | null>((section) => {
+        const sectionProps =
+          section.id === doc.id
+            ? doc.props
+            : doc.children?.find((child) => child.id === section.id)?.props
+        return sectionProps
+          ? {
+              id: section.id,
+              label: section.label,
+              props: sectionProps as ReactDocgenProps,
+              config: section.config
+            }
+          : null
+      })
+      .filter((section): section is PropEditorSection => section !== null)
+
+    // Bail if any section's metadata is missing rather than render a partial,
+    // broken preview. A doc page that isn't a parsed component has none at
+    // all, and lands here too.
+    if (sections.length !== playground.sections.length) return null
 
     return (
       <PropEditor
         componentId={doc.id}
-        props={doc.props as ReactDocgenProps}
-        config={config}
+        sections={sections}
+        template={playground.template}
       />
     )
   }
@@ -441,7 +422,12 @@ import { ${importName} } from '${versionedPackageName}'`
 
     return (
       <View margin="general.space2xl 0" display="block">
-        <Heading level="h2" as="h3" id={`${id}Usage`} margin="0 0 general.spaceMd 0">
+        <Heading
+          level="h2"
+          as="h3"
+          id={`${id}Usage`}
+          margin="0 0 general.spaceMd 0"
+        >
           Usage
         </Heading>
         <SourceCodeEditor

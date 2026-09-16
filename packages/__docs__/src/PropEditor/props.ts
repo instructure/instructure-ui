@@ -106,9 +106,9 @@ export type PropEditorConfig = {
 }
 
 /**
- * One editable element in a composition playground. Each section becomes a
- * labeled group of controls and contributes its serialized attributes to the
- * matching `{{id}}` placeholder in the template.
+ * One editable element in a playground. Each section becomes a labeled group
+ * of controls and contributes its serialized attributes to the matching
+ * `{{id}}` placeholder in the template.
  */
 export type PropEditorSection = {
   /**
@@ -126,30 +126,25 @@ export type PropEditorSection = {
 
 export type PropEditorProps = {
   /**
-   * The component's name. Used both to fetch its prop metadata (the doc JSON
-   * file name) and as the tag rendered in the preview, so it must match a
-   * component registered in the docs globals (e.g. `"Button"`, `"Avatar"`).
+   * The component's name, used to label the generated code block. Sections
+   * carry their own ids, and the template names the tags it renders, so this
+   * is display-only.
    */
   componentId: string
   /**
-   * Prop metadata to build the form from. When supplied (e.g. by the docs
-   * `Document` page, which already has it), the editor uses it directly and
-   * skips the runtime fetch. When omitted (the README-embed case), the editor
-   * fetches `<componentId>.json` itself.
+   * The elements the form can edit — one control group each. A single-element
+   * playground is just one section; a compound component adds a section per
+   * template slot (e.g. a `Menu` plus a representative `Menu.Item`).
    */
-  props?: ReactDocgenProps
-  config?: PropEditorConfig
+  sections: PropEditorSection[]
   /**
-   * Composition mode: edit several elements' props at once (e.g. a `Menu` plus
-   * a representative `Menu.Item`). When provided together with `template`, the
-   * editor renders one control group per section and skips the single-element
-   * form. Each section's live attributes fill its `{{id}}` placeholder.
+   * The JSX the preview renders, with one `{{id}}` placeholder per section
+   * where that element's attributes go, plus an optional `{{id:children}}`
+   * slot for editable children — e.g.
+   * `<Menu {{Menu}}>\n  <Menu.Item {{Menu.Item}}>Item</Menu.Item>\n</Menu>`.
+   *
+   * Resolved by the registry, which supplies a default single-element
+   * template for entries that don't need a hand-written one.
    */
-  sections?: PropEditorSection[]
-  /**
-   * JSX composition template used in composition mode. Contains one `{{id}}`
-   * placeholder per section, positioned where that element's attributes go —
-   * e.g. `<Menu {{Menu}}>\n  <Menu.Item {{Menu.Item}}>Item</Menu.Item>\n</Menu>`.
-   */
-  template?: string
+  template: string
 }
