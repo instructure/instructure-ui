@@ -32,6 +32,7 @@
     "@instructure/ui-i18n": "workspace:*",
     "@instructure/ui-position": "workspace:*",
     "@instructure/ui-react-utils": "workspace:*",
+    "@instructure/ui-skeleton": "workspace:*",
     "@instructure/ui-themes": "workspace:*"
   },
   "devDependencies": {

@@ -38,6 +38,7 @@ import type {
 } from '@instructure/emotion'
 import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { CSSShorthandValue } from '@instructure/shared-types'
+import type { SkeletonShapeType, SkeletonSize } from '@instructure/ui-skeleton'
 
 type BorderColor =
   | string
@@ -226,6 +227,35 @@ type ViewOwnProps = {
    * CSS selector)
    */
   focusWithin?: boolean
+  /**
+   * Shows a skeleton placeholder instead of `children`, and sets `aria-busy`.
+   * The placeholder fills the View, so set its `width` and `height`.
+   *
+   * - `true` / `false`: you decide when loading ends, e.g. after a data fetch.
+   * - `'untilHydrated'`: shows the skeleton until the page has hydrated.
+   *
+   * The View doesn't announce anything to screen readers. Wrap the loading
+   * area in a `SkeletonLoader` for that.
+   */
+  isLoading?: boolean | 'untilHydrated'
+  /**
+   * Which placeholder to show while `isLoading`. Defaults to `rectangle`.
+   */
+  skeletonShape?: SkeletonShapeType
+  /**
+   * Number of lines to draw when `skeletonShape="text"`.
+   */
+  skeletonLines?: number
+  /**
+   * Font size of the text the placeholder replaces, when
+   * `skeletonShape="text"`.
+   */
+  skeletonSize?: SkeletonSize
+  /**
+   * Set to `false` to turn off the skeleton animation, whatever the user's
+   * motion setting. Useful for snapshot and visual regression tests.
+   */
+  skeletonAnimate?: boolean
 }
 
 type PropKeys = keyof ViewOwnProps
@@ -256,11 +286,13 @@ const allowedProps: AllowedPropKeys = [
   'elementRef',
   'focusColor',
   'focusPosition',
+  'focusWithin',
   'height',
   'insetBlockEnd',
   'insetBlockStart',
   'insetInlineEnd',
   'insetInlineStart',
+  'isLoading',
   'margin',
   'maxHeight',
   'maxWidth',
@@ -273,12 +305,15 @@ const allowedProps: AllowedPropKeys = [
   'position',
   'shadow',
   'shouldAnimateFocus',
+  'skeletonAnimate',
+  'skeletonLines',
+  'skeletonShape',
+  'skeletonSize',
   'stacking',
   'textAlign',
   'width',
   'withFocusOutline',
-  'withVisualDebug',
-  'focusWithin'
+  'withVisualDebug'
 ]
 
 export { allowedProps }
