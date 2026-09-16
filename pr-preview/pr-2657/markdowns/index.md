@@ -1,10 +1,10 @@
 # Instructure UI (InstUI) - React Component Library
 
-- version 11.7.5 
+- version 11.7.6 
 
 - Instructure UI (InstUI) is a comprehensive React component library.
 
-- All component documentation below always reflects the latest InstUI version noted above (11.7.5). Props, types, and examples describe this version.
+- All component documentation below always reflects the latest InstUI version noted above (11.7.6). Props, types, and examples describe this version.
 
 ## Documentation
 
@@ -109,8 +109,8 @@
 - [Dialog](./Dialog.md): A utility component for accessibility in modals, popovers, and trays. Manages focus trapping, screen reader visibility, and keyboard navigation. Essential for WCAG-compliant modal interactions.
 - [Focusable](./Focusable.md): A utility component that detects when elements receive focus. Provides render props for creating accessible focus-based interactions, such as skip-to-content links or focus-triggered tooltips. Ensures WCAG compliance for focus management.
 - [Transition](./Transition.md): A wrapper component for transitioning elements in and out of the UI. Supports fade, scale, and slide transitions with customizable directions. Handles mount/unmount transitions and supports RTL mirroring for slide animations.
-- [Position](./Position.md): Positions content relative to a target element with various placement options. Supports RTL internationalization, offset adjustments, and mounting in specific DOM nodes. Replaces older Target/Content pattern with renderTarget prop.
 - [Portal](./Portal.md): Renders a React subtree into a different DOM element. Useful for modal-like components that need to break out of parent containers. Typically used with Overlay, Modal, or other components that need to render outside their parent hierarchy.
+- [Position](./Position.md): Positions content relative to a target element with various placement options. Supports RTL internationalization, offset adjustments, and mounting in specific DOM nodes. Replaces older Target/Content pattern with renderTarget prop.
 - [Selectable](./Selectable.md): Low-level utility for building custom combobox widgets. Provides ARIA-compliant prop getters and state management hooks. Use existing Select component when possible.
 - [InlineSVG](./InlineSVG.md): Renders accessible SVG content inline with support for fixed dimensions or container filling. Differentiates from SVGIcon by being suitable for non-icon SVG graphics while maintaining accessibility standards.
 - [SVGIcon](./SVGIcon.md): Renders accessible inline SVG icons. Supports custom sizing, color theming, rotation, and display properties. Accepts SVG content via children or external source strings.
