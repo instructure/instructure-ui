@@ -1,6 +1,9 @@
 {
   "references": [
     {
+      "path": "./packages/__docs__/tsconfig.build.json"
+    },
+    {
       "path": "./packages/canvas-high-contrast-theme/tsconfig.build.json"
     },
     {
@@ -20,9 +23,6 @@
     },
     {
       "path": "./packages/shared-types/tsconfig.build.json"
-    },
-    {
-      "path": "./packages/ui/tsconfig.build.json"
     },
     {
       "path": "./packages/ui-a11y-content/tsconfig.build.json"
@@ -76,13 +76,13 @@
       "path": "./packages/ui-date-input/tsconfig.build.json"
     },
     {
+      "path": "./packages/ui-date-time-input/tsconfig.build.json"
+    },
+    {
       "path": "./packages/ui-decorator/tsconfig.build.json"
     },
     {
       "path": "./packages/ui-dialog/tsconfig.build.json"
-    },
-    {
-      "path": "./packages/ui-date-time-input/tsconfig.build.json"
     },
     {
       "path": "./packages/ui-dom-utils/tsconfig.build.json"
@@ -208,6 +208,9 @@
       "path": "./packages/ui-simple-select/tsconfig.build.json"
     },
     {
+      "path": "./packages/ui-skeleton/tsconfig.build.json"
+    },
+    {
       "path": "./packages/ui-source-code-editor/tsconfig.build.json"
     },
     {
@@ -226,13 +229,13 @@
       "path": "./packages/ui-tag/tsconfig.build.json"
     },
     {
-      "path": "./packages/ui-text/tsconfig.build.json"
-    },
-    {
       "path": "./packages/ui-text-area/tsconfig.build.json"
     },
     {
       "path": "./packages/ui-text-input/tsconfig.build.json"
+    },
+    {
+      "path": "./packages/ui-text/tsconfig.build.json"
     },
     {
       "path": "./packages/ui-theme-tokens/tsconfig.build.json"
@@ -274,10 +277,10 @@
       "path": "./packages/ui-webpack-config/tsconfig.build.json"
     },
     {
-      "path": "./packages/uid/tsconfig.build.json"
+      "path": "./packages/ui/tsconfig.build.json"
     },
     {
-      "path": "./packages/__docs__/tsconfig.build.json"
+      "path": "./packages/uid/tsconfig.build.json"
     }
   ],
   "files": []

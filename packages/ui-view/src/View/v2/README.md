@@ -888,3 +888,39 @@ type: example
   <Button color="success">Some Action</Button>
 </View>
 ```
+
+### Skeleton loading
+
+`isLoading` replaces the children with a placeholder that fills the View and
+sets `aria-busy`. Give the View a `width` and `height` so the page doesn't jump
+when the content loads.
+
+```js
+---
+type: example
+---
+<View
+  as="div"
+  isLoading
+  width="20rem"
+  height="8rem"
+  borderRadius="medium"
+/>
+```
+
+Use `skeletonShape="text"` with `skeletonLines` to show lines of text instead of
+a box. Set `skeletonAnimate={false}` to turn off the animation, for example in
+visual regression tests.
+
+```js
+---
+type: example
+---
+<View as="div" isLoading skeletonShape="text" skeletonLines={3} width="20rem" />
+```
+
+With `isLoading="untilHydrated"`, the server renders the skeleton and the
+children replace it once the page has hydrated.
+
+View doesn't announce loading to screen readers. Wrap the loading area in a
+[SkeletonLoader](#SkeletonLoader) for that.
