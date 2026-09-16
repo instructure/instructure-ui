@@ -1,5 +1,7 @@
 name: Deploy preview docs from PR
-concurrency: preview-${{ github.ref }}
+concurrency:
+  group: preview-${{ github.ref }}
+  cancel-in-progress: true
 on:
   pull_request:
     types:

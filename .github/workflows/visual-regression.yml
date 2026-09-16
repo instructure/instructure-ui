@@ -6,9 +6,11 @@ on:
     # report from gh-pages; the capture job skips the `closed` event.
     types: [opened, synchronize, reopened, closed]
 
+# push collisions to the gh-pages branch with other workflows are handled by
+# the retry loop in gh-pages-dir.sh
 concurrency:
-  group: gh-pages
-  cancel-in-progress: false
+  group: visual-regression-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
 
 jobs:
   visual-regression:
@@ -109,14 +111,13 @@ jobs:
         continue-on-error: true
 
       - name: Publish report to gh-pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: regression-test/.report
-          publish_branch: gh-pages
-          destination_dir: visual-regression/pr-${{ github.event.pull_request.number }}
-          keep_files: true
-          commit_message: "visual-regression: PR #${{ github.event.pull_request.number }} (${{ github.sha }})"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COMMIT_MESSAGE: "visual-regression: PR #${{ github.event.pull_request.number }} (${{ github.sha }})"
+        run: >
+          ./.github/workflows/gh-pages-dir.sh
+          visual-regression/pr-${{ github.event.pull_request.number }}
+          regression-test/.report
 
       - name: Read summary
         id: summary
@@ -208,20 +209,9 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
-          ref: gh-pages
-          fetch-depth: 0
+          sparse-checkout: .github/workflows
       - name: Remove this PR's report directory
-        run: |
-          DIR="visual-regression/pr-${{ github.event.pull_request.number }}"
-          if [ ! -d "$DIR" ]; then
-            echo "No report directory ($DIR); nothing to remove."
-            exit 0
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git rm -rq "$DIR"
-          git commit -m "visual-regression: remove report for closed PR #${{ github.event.pull_request.number }}"
-          # gh-pages is written by several workflows; rebase before pushing in
-          # case it moved since checkout.
-          git pull --rebase origin gh-pages
-          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COMMIT_MESSAGE: "visual-regression: remove report for closed PR #${{ github.event.pull_request.number }}"
+        run: ./.github/workflows/gh-pages-dir.sh visual-regression/pr-${{ github.event.pull_request.number }}
