@@ -888,3 +888,42 @@ type: example
   <Button color="success">Some Action</Button>
 </View>
 ```
+
+### Skeleton loading
+
+`isLoading` swaps the children for a placeholder sized from the View's own
+`width`, `height`, and `borderRadius`, and marks the element `aria-busy`. Because
+the View already reserves the box, the swap causes no layout shift.
+
+```js
+---
+type: example
+---
+<View
+  as="div"
+  isLoading
+  width="20rem"
+  height="8rem"
+  borderRadius="medium"
+/>
+```
+
+Use `skeletonShape="text"` with `skeletonLines` for copy rather than a filled box.
+Pass `skeletonAnimate={false}` to render it static, which is what you want in
+snapshot and visual regression tests.
+
+```js
+---
+type: example
+---
+<View as="div" isLoading skeletonShape="text" skeletonLines={3} width="20rem" />
+```
+
+Passing `isLoading="untilHydrated"` puts the skeleton in the server HTML and
+keeps it through the hydrating render, handing over to the children once
+hydration commits. It is opt-in rather than the default for `isLoading`, because
+defaulting to it would turn every existing View on a page into a skeleton.
+
+View only draws the shapes. The loading state still has to be announced, by a
+single [SkeletonLoader](#SkeletonLoader) region wrapping the whole area — one
+per region, never one per View.

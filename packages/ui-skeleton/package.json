@@ -1,7 +1,7 @@
 {
-  "name": "@instructure/ui-view",
+  "name": "@instructure/ui-skeleton",
   "version": "11.7.6",
-  "description": "A component for basic styles including spacing, sizing, borders, display, positioning, and focus states.",
+  "description": "Skeleton loader primitives that render a correctly sized placeholder from server HTML, with no DOM measurement.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
   "main": "./lib/index.js",
@@ -24,15 +24,10 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.29.7",
-    "@instructure/console": "workspace:*",
     "@instructure/emotion": "workspace:*",
     "@instructure/shared-types": "workspace:*",
-    "@instructure/ui-color-utils": "workspace:*",
-    "@instructure/ui-dom-utils": "workspace:*",
     "@instructure/ui-i18n": "workspace:*",
-    "@instructure/ui-position": "workspace:*",
     "@instructure/ui-react-utils": "workspace:*",
-    "@instructure/ui-skeleton": "workspace:*",
     "@instructure/ui-themes": "workspace:*"
   },
   "devDependencies": {
@@ -54,32 +49,25 @@
     "./package.json": "./package.json",
     "./src/*": "./src/*",
     ".": {
-      "src": "./src/exports/a.ts",
-      "types": "./types/exports/a.d.ts",
-      "import": "./es/exports/a.js",
-      "require": "./lib/exports/a.js",
-      "default": "./es/exports/a.js"
-    },
-    "./v11_6": {
-      "src": "./src/exports/a.ts",
-      "types": "./types/exports/a.d.ts",
-      "import": "./es/exports/a.js",
-      "require": "./lib/exports/a.js",
-      "default": "./es/exports/a.js"
+      "src": "./src/index.ts",
+      "types": "./types/index.d.ts",
+      "import": "./es/index.js",
+      "require": "./lib/index.js",
+      "default": "./es/index.js"
     },
     "./v11_7": {
-      "src": "./src/exports/b.ts",
-      "types": "./types/exports/b.d.ts",
-      "import": "./es/exports/b.js",
-      "require": "./lib/exports/b.js",
-      "default": "./es/exports/b.js"
+      "src": "./src/index.ts",
+      "types": "./types/index.d.ts",
+      "import": "./es/index.js",
+      "require": "./lib/index.js",
+      "default": "./es/index.js"
     },
     "./latest": {
-      "src": "./src/exports/b.ts",
-      "types": "./types/exports/b.d.ts",
-      "import": "./es/exports/b.js",
-      "require": "./lib/exports/b.js",
-      "default": "./es/exports/b.js"
+      "src": "./src/index.ts",
+      "types": "./types/index.d.ts",
+      "import": "./es/index.js",
+      "require": "./lib/index.js",
+      "default": "./es/index.js"
     }
   }
 }

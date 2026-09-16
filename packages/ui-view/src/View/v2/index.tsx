@@ -31,9 +31,11 @@ import {
   getElementType,
   omitProps,
   pickProps,
-  passthroughProps
+  passthroughProps,
+  HydrationGate
 } from '@instructure/ui-react-utils'
 import { withStyleNew } from '@instructure/emotion'
+import { SkeletonLoader } from '@instructure/ui-skeleton'
 
 import generateStyle from './styles.js'
 
@@ -211,21 +213,50 @@ class View extends Component<ViewProps> {
       overscrollBehavior,
       styles,
       makeStyles,
+      isLoading,
+      skeletonShape,
+      skeletonLines,
+      skeletonSize,
+      skeletonAnimate,
       ...props
     } = this.props
 
     const ElementType = getElementType(View, this.props)
 
-    return (
-      <ElementType
-        {...passthroughProps(props)}
-        className={className}
-        css={[styles?.view, styles?.inlineStyles]}
-        ref={this.handleElementRef}
-      >
-        {children}
-      </ElementType>
-    )
+    const renderContent = (loading: boolean) => {
+      return (
+        <ElementType
+          {...passthroughProps(props)}
+          aria-busy={loading || undefined}
+          className={className}
+          css={[styles?.view, styles?.inlineStyles]}
+          ref={this.handleElementRef}
+        >
+          {loading ? (
+            <SkeletonLoader.Shape
+              animate={skeletonAnimate}
+              height={skeletonShape === 'text' ? undefined : '100%'}
+              lines={skeletonLines}
+              shape={skeletonShape ?? 'rectangle'}
+              size={skeletonSize}
+              width="100%"
+            />
+          ) : (
+            children
+          )}
+        </ElementType>
+      )
+    }
+
+    if (isLoading === 'untilHydrated') {
+      return (
+        <HydrationGate>
+          {(isHydrated) => renderContent(!isHydrated)}
+        </HydrationGate>
+      )
+    }
+
+    return renderContent(isLoading === true)
   }
 }
 
