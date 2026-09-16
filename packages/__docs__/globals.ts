@@ -61,8 +61,6 @@ import placeholderImage from './buildScripts/samplemedia/placeholder-image'
 import ThemeColors from './src/ThemeColors'
 // eslint-disable-next-line no-restricted-imports
 import ColorTable from './src/ColorTable'
-// eslint-disable-next-line no-restricted-imports
-import { PropEditor } from './src/PropEditor'
 
 import { additionalPrimitives, dataVisualization } from '@instructure/ui-themes'
 
@@ -109,8 +107,7 @@ const globals: Record<string, any> = {
   additionalPrimitives,
   dataVisualization,
   ThemeColors,
-  ColorTable,
-  PropEditor
+  ColorTable
 }
 
 Object.keys(globals).forEach((key) => {

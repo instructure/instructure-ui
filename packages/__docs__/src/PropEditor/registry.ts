@@ -47,147 +47,168 @@ const PLACEMENTS = [
 ]
 
 /**
- * A curated composition playground for a compound component, letting a reader
- * edit both the outer element's props and a representative child's props. The
- * `template` is JSX with one `{{id}}` placeholder per section, positioned where
- * that element's attributes belong; each section's `config` typically carries
- * an `include` list of the props to expose.
+ * A registered playground. Everything is optional, which is what lets the two
+ * kinds of entry share one shape:
+ *
+ *  - the common case names only a `config`, and gets a generated
+ *    single-element template (`<Id {{Id}}>{{Id:children}}</Id>`);
+ *  - a compound or awkward component supplies `sections` and a hand-written
+ *    `template`, so a reader can edit the outer element and a representative
+ *    child at once.
+ *
+ * Either way {@link getPlayground} resolves it to the same `sections` +
+ * `template` pair, so there is a single code path downstream.
  */
-export type CustomPlayground = {
-  sections: Array<{ id: string; label?: string; config?: PropEditorConfig }>
-  template: string
+export type Playground = {
   /**
-   * Prop names the component has to expose for this template to apply. The docs
-   * site serves several minor versions from one registry, and a few components
-   * changed API between them — v11.6's `DateInput` is the old manual-calendar
-   * one, v11.7's is the `DateInput2` API under the same name. A template written
-   * against one shape is skipped on versions whose metadata lacks these props,
-   * rather than rendering a preview that can't work.
+   * Form config for the component itself, when it's the only editable element.
+   * Shorthand for a lone `sections` entry; ignored if `sections` is given.
+   */
+  config?: PropEditorConfig
+  /**
+   * The editable elements. Each id must match a `{{id}}` placeholder in the
+   * template and, for children, a child doc id (e.g. `Menu.Item`) so the
+   * editor can source that element's prop metadata. Defaults to the component
+   * itself.
+   */
+  sections?: Array<{ id: string; label?: string; config?: PropEditorConfig }>
+  /**
+   * The JSX to render. Defaults to a single element carrying the component's
+   * attributes and its editable `children`.
+   */
+  template?: string
+  /**
+   * Prop names the component has to expose for this entry to apply. The docs
+   * site builds every minor version from one source tree, so a registry entry
+   * (and a README, for that matter) is shared across versions — and a few
+   * components changed API between them. v11.6's `DateInput` is the old
+   * manual-calendar one; v11.7's is the `DateInput2` API under the same name.
+   * An entry written against one shape is skipped on versions whose metadata
+   * lacks these props, rather than rendering a preview that can't work.
    */
   requiresProps?: string[]
 }
 
-/**
- * Which docs pages get a `PropEditor` and how it's configured.
- *
- * A playground is opt-in: a component gets one only by appearing in
- * {@link SIMPLE_PLAYGROUNDS} (single-element form) or
- * {@link CUSTOM_PLAYGROUNDS} (curated composition). Everything else keeps its
- * README examples as its documentation. Deriving the list from prop metadata
- * instead was tried and doesn't work: most components can't render from a bare
- * `<Name />` — they need a required `label`/`renderLabel`/`src`, a data array,
- * a render prop, or a portal target — so the generated preview came out empty,
- * unlabeled, or crashed.
- */
+/** A {@link Playground} with its defaults filled in. */
+export type ResolvedPlayground = {
+  sections: Array<{ id: string; label?: string; config?: PropEditorConfig }>
+  template: string
+  requiresProps?: string[]
+}
 
 /**
- * Components that get the simple single-element form, keyed by id, with that
- * component's form config.
+ * Which docs pages get a `PropEditor` and how it's configured, keyed by doc id.
  *
- * A component belongs here when `<Name />` plus a few seeded values renders a
- * complete example — that is, every prop it *needs* is one the form can edit
- * (a string, number, boolean, or literal union), so `defaults` can supply it
- * and the snippet stays copy-pasteable. Components that need something the
- * form can't type — element children, a render prop, a data fixture — get a
- * {@link CUSTOM_PLAYGROUNDS} template instead.
+ * A playground is opt-in: a component gets one only by appearing here.
+ * Everything else keeps its README examples as its documentation. Deriving the
+ * list from prop metadata instead was tried and doesn't work: most components
+ * can't render from a bare `<Name />` — they need a required
+ * `label`/`renderLabel`/`src`, a data array, a render prop, or a portal target
+ * — so the generated preview came out empty, unlabeled, or crashed.
+ *
+ * Most entries name only a `config` and lean on the generated single-element
+ * template. That fits a component when every prop it *needs* is one the form
+ * can edit (a string, number, boolean, or literal union), so `defaults` can
+ * supply it and the snippet stays copy-pasteable.
+ *
+ * The rest supply a `template`, for anything that can't express: compound
+ * components (a bare `<Menu />` is not a useful form), and components whose
+ * required props have to be hardcoded around the editable ones — element
+ * children, a render prop, a data fixture, a prop whose type the form can't
+ * infer a control for.
+ *
+ * Only placeholders are substituted, so a template can be anything the README
+ * examples can be — including a stateful wrapper ending in
+ * `render(<Example />)`. That's what a controlled component with no internal
+ * fallback needs (see `ColorMixer`): a hardcoded handler would leave it
+ * frozen. Whatever the template wires up itself belongs in the section's
+ * `exclude`, so the form doesn't write a second copy of the same attribute.
  */
-const SIMPLE_PLAYGROUNDS: Record<string, PropEditorConfig> = {
-  Alert: { defaults: { children: 'This is an alert' } },
-  Avatar: { defaults: { name: 'Sarah Robbins' } },
+const PLAYGROUNDS: Record<string, Playground> = {
+  Alert: { config: { defaults: { children: 'This is an alert' } } },
+  Avatar: { config: { defaults: { name: 'Sarah Robbins' } } },
   // `standalone` renders the badge on its own; normally it wraps a child.
-  Badge: { defaults: { count: 99, standalone: true } },
-  Billboard: { defaults: { heading: 'Nothing to see here' } },
-  Button: { defaults: { children: 'Click me' } },
-  Byline: { defaults: { children: 'Byline content' } },
+  Badge: { config: { defaults: { count: 99, standalone: true } } },
+  Billboard: { config: { defaults: { heading: 'Nothing to see here' } } },
+  Button: { config: { defaults: { children: 'Click me' } } },
+  Byline: { config: { defaults: { children: 'Byline content' } } },
   // Renders a full month grid from its own defaults. `selectedLabel` is
   // required from v11.7 on; on older versions there's no such prop and the
   // seed is simply unused.
-  Calendar: { defaults: { selectedLabel: 'Selected' } },
-  Checkbox: { defaults: { label: 'Enable notifications' } },
-  CloseButton: { defaults: { screenReaderLabel: 'Close' } },
+  Calendar: { config: { defaults: { selectedLabel: 'Selected' } } },
+  Checkbox: { config: { defaults: { label: 'Enable notifications' } } },
+  CloseButton: { config: { defaults: { screenReaderLabel: 'Close' } } },
   ColorContrast: {
-    defaults: {
-      firstColor: '#FFFFFF',
-      secondColor: '#0F7C51',
-      label: 'Contrast ratio',
-      successLabel: 'PASS',
-      failureLabel: 'FAIL',
-      normalTextLabel: 'Normal text',
-      largeTextLabel: 'Large text',
-      graphicsTextLabel: 'Graphics text'
+    config: {
+      defaults: {
+        firstColor: '#FFFFFF',
+        secondColor: '#0F7C51',
+        label: 'Contrast ratio',
+        successLabel: 'PASS',
+        failureLabel: 'FAIL',
+        normalTextLabel: 'Normal text',
+        largeTextLabel: 'Large text',
+        graphicsTextLabel: 'Graphics text'
+      }
     }
   },
   ColorIndicator: {},
   ColorPicker: {
-    defaults: { label: 'Background color', placeholderText: 'Enter HEX' }
+    config: {
+      defaults: { label: 'Background color', placeholderText: 'Enter HEX' }
+    }
   },
-  CondensedButton: { defaults: { children: 'Click me' } },
-  ContextView: { defaults: { children: 'Context content' } },
-  Heading: { defaults: { children: 'Heading text' } },
-  Link: { defaults: { children: 'A link' } },
+  CondensedButton: { config: { defaults: { children: 'Click me' } } },
+  ContextView: { config: { defaults: { children: 'Context content' } } },
+  Heading: { config: { defaults: { children: 'Heading text' } } },
+  Link: { config: { defaults: { children: 'A link' } } },
   // Prop-driven: the page buttons come from the counts, not from children.
-  Pagination: { defaults: { totalPageNumber: 10, currentPage: 3 } },
-  Pill: { defaults: { children: 'Pill' } },
+  Pagination: {
+    config: { defaults: { totalPageNumber: 10, currentPage: 3 } }
+  },
+  Pill: { config: { defaults: { children: 'Pill' } } },
   ProgressBar: {
-    defaults: {
-      screenReaderLabel: 'Loading completion',
-      valueNow: 40,
-      valueMax: 60
+    config: {
+      defaults: {
+        screenReaderLabel: 'Loading completion',
+        valueNow: 40,
+        valueMax: 60
+      }
     }
   },
   ProgressCircle: {
-    defaults: {
-      screenReaderLabel: 'Loading completion',
-      valueNow: 40,
-      valueMax: 60
+    config: {
+      defaults: {
+        screenReaderLabel: 'Loading completion',
+        valueNow: 40,
+        valueMax: 60
+      }
     }
   },
-  RadioInput: { defaults: { label: 'Option one' } },
+  RadioInput: { config: { defaults: { label: 'Option one' } } },
   // `max` defaults to 0, which leaves nothing to drag.
-  RangeInput: { defaults: { label: 'Volume', max: 100 } },
-  Rating: { defaults: { label: 'Course rating', valueNow: 3 } },
+  RangeInput: { config: { defaults: { label: 'Volume', max: 100 } } },
+  Rating: { config: { defaults: { label: 'Course rating', valueNow: 3 } } },
   SourceCodeEditor: {
-    defaults: { label: 'Code editor', defaultValue: 'const answer = 42' }
+    config: {
+      defaults: { label: 'Code editor', defaultValue: 'const answer = 42' }
+    }
   },
-  Text: { defaults: { children: 'Some text' } },
-  TextArea: { defaults: { label: 'Description' } },
+  Text: { config: { defaults: { children: 'Some text' } } },
+  TextArea: { config: { defaults: { label: 'Description' } } },
   ToggleDetails: {
-    defaults: { summary: 'Toggle me', children: 'Details content' }
+    config: { defaults: { summary: 'Toggle me', children: 'Details content' } }
   },
   TruncateText: {
-    defaults: {
-      children:
-        'A long line of text that gets truncated once it outgrows its container'
+    config: {
+      defaults: {
+        children:
+          'A long line of text that gets truncated once it outgrows its container'
+      }
     }
   },
-  View: { defaults: { children: 'View content' } }
-}
+  View: { config: { defaults: { children: 'View content' } } },
 
-/**
- * The simple-form config for a component, or `undefined` when it isn't
- * registered for a single-element playground.
- */
-export function getSimplePlayground(id: string): PropEditorConfig | undefined {
-  return SIMPLE_PLAYGROUNDS[id]
-}
-
-/**
- * Curated composition playgrounds, keyed by the outer component's id. This is
- * the home for anything the single-element form can't express: compound
- * components (a bare `<Menu />` with no children isn't a useful form) and
- * components whose required props have to be hardcoded around the editable
- * ones. Section ids must match a `{{id}}` placeholder in the `template` and,
- * for children, a child doc id (e.g. `Menu.Item`) so the editor can source that
- * element's metadata.
- *
- * Only the placeholders are substituted, so a template can be anything the
- * README examples can be — including a stateful wrapper component ending in
- * `render(<Example />)`. That's what a controlled component with no internal
- * fallback needs (see `ColorMixer`): a hardcoded handler would leave it frozen.
- * Whatever the template wires up itself belongs in the section's `exclude`, so
- * the form doesn't write a second copy of the same attribute.
- */
-const CUSTOM_PLAYGROUNDS: Record<string, CustomPlayground> = {
   AppNav: {
     sections: [
       {
@@ -1061,7 +1082,19 @@ render(<Example />)`
  *    show; what a reader would tweak belongs to the child they wrap.
  */
 
-/** The curated composition playground for a component, if one is registered. */
-export function getCustomPlayground(id: string): CustomPlayground | undefined {
-  return CUSTOM_PLAYGROUNDS[id]
+/**
+ * The playground registered for a component, with its defaults resolved, or
+ * `undefined` when it doesn't have one.
+ */
+export function getPlayground(id: string): ResolvedPlayground | undefined {
+  const entry = PLAYGROUNDS[id]
+  if (!entry) return undefined
+
+  return {
+    sections: entry.sections ?? [{ id, config: entry.config }],
+    // A single element carrying its own attributes and editable children. The
+    // empty body collapses to `<Id ... />` when there are no children to show.
+    template: entry.template ?? `<${id} {{${id}}}>{{${id}:children}}</${id}>`,
+    requiresProps: entry.requiresProps
+  }
 }

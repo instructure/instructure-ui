@@ -22,6 +22,8 @@
  * SOFTWARE.
  */
 
+import { INTERNAL_PROPS, NON_PREVIEWABLE_PROPS } from '../hiddenProps'
+
 import type {
   Control,
   ControlType,
@@ -31,20 +33,8 @@ import type {
   ReactDocgenProps
 } from './props'
 
-/**
- * Props react-docgen surfaces that are internal plumbing rather than public
- * API — the same ones the docs props table hides (see `src/Properties`) — plus
- * the two that are editable but have no observable effect in a preview
- * (`id`, `className`), so a reader can't mistake them for a broken control.
- */
-const INTERNAL_PROPS = [
-  'styles',
-  'makeStyles',
-  'dir',
-  'elementRef',
-  'id',
-  'className'
-]
+/** Props the playground never offers a control for. */
+const HIDDEN_PROPS = [...INTERNAL_PROPS, ...NON_PREVIEWABLE_PROPS]
 
 /**
  * Props a component reads only while mounting, beyond the `default*` family:
@@ -140,7 +130,7 @@ export function generateControls(
   const { include, exclude = [], defaults = {}, overrides = {} } = config
 
   const names = Object.keys(docgenProps).filter((name) => {
-    if (INTERNAL_PROPS.includes(name)) return false
+    if (HIDDEN_PROPS.includes(name)) return false
     if (include && !include.includes(name)) return false
     if (exclude.includes(name)) return false
     return true
@@ -228,33 +218,48 @@ export function serializeAttrs(
   return attrs.join(' ')
 }
 
-/**
- * Serializes the current form values into a JSX snippet for `<Name .../>`.
- */
-export function serializeJsx(
-  displayName: string,
-  controls: Control[],
-  values: Record<string, PropValue>
-): string {
-  const attrs = serializeAttrs(controls, values)
-  const attrStr = attrs ? ` ${attrs}` : ''
-
-  const childrenValue = controls.some((c) => c.name === 'children')
-    ? values.children
-    : undefined
-  const childrenText = childrenValue == null ? '' : String(childrenValue)
-
-  return childrenText
-    ? `<${displayName}${attrStr}>${childrenText}</${displayName}>`
-    : `<${displayName}${attrStr} />`
+/** Escapes a placeholder token for use inside a regular expression. */
+function escapeRegExp(raw: string): string {
+  return raw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 }
 
 /**
- * Fills a composition template's `{{sectionId}}` placeholders with each
- * section's live attributes. A placeholder with no attributes collapses to
- * nothing, and the trailing-space cleanup keeps `<Menu {{Menu}}>` tidy as
- * `<Menu>` when unset. `children` is authored statically in the template, so
- * only attributes are injected here.
+ * Replaces every occurrence of `token` with `value`.
+ *
+ * An empty `value` has to take its surroundings with it, or the template is
+ * left with stray whitespace. The two cases are handled separately, rather
+ * than by cleaning up the finished string: a global whitespace pass also eats
+ * the blank lines and line breaks the templates deliberately contain.
+ */
+function substitute(source: string, token: string, value: string): string {
+  if (value !== '') return source.split(token).join(value)
+
+  return (
+    source
+      // A placeholder alone on its line takes the whole line with it.
+      .replace(
+        new RegExp(`^[ \\t]*${escapeRegExp(token)}[ \\t]*\\r?\\n`, 'gm'),
+        ''
+      )
+      // Inline, it leaves behind the space that separated it from the previous
+      // attribute: `<Menu {{Menu}}>` → `<Menu>`.
+      .split(` ${token}`)
+      .join('')
+      // Anything left (a placeholder with no leading space, e.g. the children
+      // slot in `>{{Id:children}}<`) just goes.
+      .split(token)
+      .join('')
+  )
+}
+
+/**
+ * Fills a template's placeholders with the live form values. Each section
+ * contributes two:
+ *
+ *  - `{{id}}` → that element's attributes
+ *  - `{{id:children}}` → that element's `children` text, when the section
+ *    exposes a control for it (the default single-element template does;
+ *    hand-written templates usually author children statically instead)
  */
 export function serializeComposition(
   template: string,
@@ -264,18 +269,30 @@ export function serializeComposition(
   let out = template
 
   for (const section of sections) {
-    const attrs = serializeAttrs(section.controls, values[section.id] || {})
-    out = out.split(`{{${section.id}}}`).join(attrs)
+    const sectionValues = values[section.id] || {}
+
+    out = substitute(
+      out,
+      `{{${section.id}}}`,
+      serializeAttrs(section.controls, sectionValues)
+    )
+
+    const childrenValue = section.controls.some((c) => c.name === 'children')
+      ? sectionValues.children
+      : undefined
+    out = substitute(
+      out,
+      `{{${section.id}:children}}`,
+      childrenValue == null ? '' : String(childrenValue)
+    )
   }
 
-  return (
-    out
-      // Collapse the space left before a `>` when a placeholder expanded to
-      // empty (e.g. `<Menu >` → `<Menu>`); self-closing ` />` is untouched.
-      .replace(/ >/g, '>')
-      // A placeholder on its own line leaves an indented blank line behind
-      // when it expands to nothing.
-      .replace(/[ \t]+$/gm, '')
-      .replace(/\n{2,}/g, '\n')
+  // An element left with an empty body is identical self-closed, and reads
+  // better in the snippet: `<Avatar name="Sarah" ></Avatar>` → `<Avatar
+  // name="Sarah" />`. Attribute values containing `>` (an arrow function)
+  // simply don't match, which leaves valid JSX either way.
+  return out.replace(
+    /<([A-Za-z][\w.]*)((?:"[^"]*"|[^<>])*?)><\/\1>/g,
+    '<$1$2 />'
   )
 }

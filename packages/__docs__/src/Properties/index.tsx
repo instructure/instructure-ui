@@ -29,6 +29,7 @@ import { withStyleForDocs } from '../withStyleForDocs'
 
 import generateStyle from './styles'
 import { compileMarkdown } from '../compileMarkdown'
+import { INTERNAL_PROPS } from '../hiddenProps'
 
 import type { PropertiesProps } from './props'
 import type {
@@ -67,7 +68,7 @@ class Properties extends Component<PropertiesProps> {
 
   getPropsToRender() {
     const { props } = this.props
-    const propsToIgnore = ['styles', 'makeStyles', 'dir']
+    const propsToIgnore = INTERNAL_PROPS
     return Object.keys(props).filter((name) => {
       const description = props[name].description || ''
       // we need to manually pass through the dir prop of InstUISettingsProvider
