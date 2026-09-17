@@ -1,0 +1,8 @@
+{
+  "flex": {
+    "fontFamily": {
+      "value": "{semantic.fontFamily.base}",
+      "type": "fontFamilies"
+    }
+  }
+}

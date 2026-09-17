@@ -1,0 +1,32 @@
+{
+  "formFieldMessage": {
+    "hintTextColor": {
+      "value": "{semantic.color.institutional.brandFontColorDark}",
+      "type": "color"
+    },
+    "errorTextColor": {
+      "value": "{semantic.color.text.error}",
+      "type": "color"
+    },
+    "successTextColor": {
+      "value": "{semantic.color.text.success}",
+      "type": "color"
+    },
+    "fontWeight": {
+      "value": "{semantic.fontWeight.body.base}",
+      "type": "fontWeights"
+    },
+    "fontSize": {
+      "value": "{semantic.fontSize.textSm}",
+      "type": "fontSizes"
+    },
+    "lineHeight": {
+      "value": "{semantic.lineHeight.paragraph.textSm}",
+      "type": "lineHeights"
+    },
+    "fontFamily": {
+      "value": "{semantic.fontFamily.base}",
+      "type": "fontFamilies"
+    }
+  }
+}

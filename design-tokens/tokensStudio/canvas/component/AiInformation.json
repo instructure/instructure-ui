@@ -1,0 +1,52 @@
+{
+  "aiInformation": {
+    "bodyPadding": {
+      "value": "{semantic.spacing.spaceXl}",
+      "type": "spacing"
+    },
+    "headingBottomMargin": {
+      "value": "{semantic.spacing.spaceXl}",
+      "type": "spacing"
+    },
+    "featureNameBottomMargin": {
+      "value": "{semantic.spacing.spaceLg}",
+      "type": "spacing"
+    },
+    "permissionLevelTextBottomMargin": {
+      "value": "{semantic.spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "permissionLevelBottomMargin": {
+      "value": "{semantic.spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "descriptionBottomMargin": {
+      "value": "{semantic.spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "modelNameTextBottomMargin": {
+      "value": "{semantic.spacing.spaceXs}",
+      "type": "spacing"
+    },
+    "modelNameBottomMargin": {
+      "value": "{semantic.spacing.spaceXs}",
+      "type": "spacing"
+    },
+    "dividerMargin": {
+      "value": "{semantic.spacing.spaceLg}",
+      "type": "spacing"
+    },
+    "dividerColor": {
+      "value": "{semantic.color.stroke.muted}",
+      "type": "color"
+    },
+    "levelColor": {
+      "value": "{semantic.color.text.aiColor}",
+      "type": "color"
+    },
+    "permissionLevelsModalTriggerBottomMargin": {
+      "value": "{semantic.spacing.spaceXl}",
+      "type": "spacing"
+    }
+  }
+}

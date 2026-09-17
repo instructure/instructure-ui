@@ -1,0 +1,96 @@
+{
+  "colorPicker": {
+    "checkerboardBackgroundColor": {
+      "value": "{semantic.color.background.elevatedSurface.base}",
+      "type": "color"
+    },
+    "colorIndicatorBorderColor": {
+      "value": "{semantic.color.stroke.base}",
+      "type": "color"
+    },
+    "colorMixerButtonContainerLeftMargin": {
+      "value": "0.5rem",
+      "type": "spacing"
+    },
+    "errorIconsRightPadding": {
+      "value": "{semantic.spacing.padding.container.xs}",
+      "type": "spacing"
+    },
+    "hashMarkColor": {
+      "value": "{semantic.color.text.muted}",
+      "type": "color"
+    },
+    "hashMarkContainerLeftPadding": {
+      "value": "0.5rem",
+      "type": "spacing"
+    },
+    "hashMarkContainerLineHeight": {
+      "value": "{semantic.lineHeight.heading.textLg}",
+      "type": "lineHeights"
+    },
+    "hashMarkContainerRightPadding": {
+      "value": "{semantic.spacing.space2xs}",
+      "type": "spacing"
+    },
+    "labelRightMargin": {
+      "value": "0.375rem",
+      "type": "spacing"
+    },
+    "popoverContentBlockBorderWidth": {
+      "value": "{semantic.borderWidth.sm}",
+      "type": "borderWidth"
+    },
+    "popoverFooterTopBorderWidth": {
+      "value": "{semantic.borderWidth.sm}",
+      "type": "borderWidth"
+    },
+    "popoverContentPadding": {
+      "value": "{semantic.spacing.spaceMd}",
+      "type": "spacing"
+    },
+    "popoverFooterPadding": {
+      "value": "{semantic.spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "popoverSeparatorColor": {
+      "value": "{semantic.color.stroke.muted}",
+      "type": "color"
+    },
+    "simpleColorContainerLeftPadding": {
+      "value": "{semantic.spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "successIconRightPadding": {
+      "value": "{semantic.spacing.spaceMd}",
+      "type": "spacing"
+    },
+    "xLargeFontSize": {
+      "value": "{semantic.fontSize.textXl}",
+      "type": "fontSizes"
+    },
+    "xSmallSpacing": {
+      "value": "{semantic.spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "xxxSmallSpacing": {
+      "value": "{semantic.spacing.space2xs}",
+      "type": "spacing"
+    },
+    "popoverContentBlockBottomMargin": {
+      "value": "0.5rem",
+      "type": "spacing"
+    },
+    "popoverContentBlockTopMargin": {
+      "value": "0.5rem",
+      "type": "spacing"
+    },
+    "popoverContentBlockTopPadding": {
+      "value": "0.5rem",
+      "type": "spacing"
+    },
+    "popoverFooterColor": {
+      "value": "{semantic.color.background.elevatedSurface.base}",
+      "type": "color"
+    }
+  }
+}

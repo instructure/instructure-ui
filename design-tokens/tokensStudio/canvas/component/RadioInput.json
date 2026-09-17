@@ -1,0 +1,198 @@
+{
+  "radioInput": {
+    "backgroundColor": {
+      "value": "{semantic.color.background.interactive.input.base}",
+      "type": "color"
+    },
+    "backgroundHoverColor": {
+      "value": "{semantic.color.background.interactive.input.hover}",
+      "type": "color"
+    },
+    "backgroundReadonlyColor": {
+      "value": "{semantic.color.background.interactive.input.readonly}",
+      "type": "color"
+    },
+    "backgroundDisabledColor": {
+      "value": "{semantic.color.background.interactive.input.disabled}",
+      "type": "color"
+    },
+    "borderColor": {
+      "value": "{semantic.color.stroke.interactive.input.base}",
+      "type": "color"
+    },
+    "borderHoverColor": {
+      "value": "{semantic.color.institutional.brandFontColorDark}",
+      "type": "color"
+    },
+    "borderReadonlyColor": {
+      "value": "{semantic.color.stroke.interactive.input.readonly}",
+      "type": "color"
+    },
+    "borderDisabledColor": {
+      "value": "{semantic.color.stroke.interactive.input.disabled}",
+      "type": "color"
+    },
+    "borderSelectedColor": {
+      "value": "{semantic.color.stroke.interactive.input.selected}",
+      "type": "color"
+    },
+    "fontSizeSm": {
+      "value": "{semantic.fontSize.textSm}",
+      "type": "fontSizes"
+    },
+    "fontSizeMd": {
+      "value": "{semantic.fontSize.textBase}",
+      "type": "fontSizes"
+    },
+    "fontSizeLg": {
+      "value": "1.375rem",
+      "type": "fontSizes"
+    },
+    "toggleSmallFontSize": {
+      "value": "{semantic.fontSize.textXs}",
+      "type": "fontSizes"
+    },
+    "toggleMediumFontSize": {
+      "value": "{semantic.fontSize.textSm}",
+      "type": "fontSizes"
+    },
+    "toggleLargeFontSize": {
+      "value": "{semantic.fontSize.textBase}",
+      "type": "fontSizes"
+    },
+    "lineHeightSm": {
+      "value": "{semantic.lineHeight.paragraph.textSm}",
+      "type": "lineHeights"
+    },
+    "lineHeightMd": {
+      "value": "{semantic.lineHeight.paragraph.textBase}",
+      "type": "lineHeights"
+    },
+    "lineHeightLg": {
+      "value": "{semantic.lineHeight.paragraph.textBase}",
+      "type": "lineHeights"
+    },
+    "fontFamily": {
+      "value": "{semantic.fontFamily.base}",
+      "type": "fontFamilies"
+    },
+    "fontWeight": {
+      "value": "{semantic.fontWeight.body.base}",
+      "type": "fontWeights"
+    },
+    "gap": {
+      "value": "{semantic.spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "borderWidth": {
+      "value": "{semantic.borderWidth.interactive.base}",
+      "type": "borderWidth"
+    },
+    "toggleBorderWidth": {
+      "value": "{semantic.borderWidth.lg}",
+      "type": "borderWidth"
+    },
+    "labelBaseColor": {
+      "value": "{semantic.color.institutional.brandFontColorDark}",
+      "type": "color"
+    },
+    "labelHoverColor": {
+      "value": "{semantic.color.institutional.brandFontColorDark}",
+      "type": "color"
+    },
+    "labelDisabledColor": {
+      "value": "{semantic.color.text.interactive.disabled.base}",
+      "type": "color"
+    },
+    "labelReadonlyColor": {
+      "value": "{semantic.color.text.base}",
+      "type": "color"
+    },
+    "controlSizeSm": {
+      "value": "{semantic.size.choiceControl.height.sm}",
+      "type": "sizing"
+    },
+    "controlSizeMd": {
+      "value": "{semantic.size.choiceControl.height.md}",
+      "type": "sizing"
+    },
+    "controlSizeLg": {
+      "value": "{semantic.size.choiceControl.height.lg}",
+      "type": "sizing"
+    },
+    "checkedInsetSm": {
+      "value": "0.1875rem",
+      "type": "sizing"
+    },
+    "checkedInsetMd": {
+      "value": "0.25rem",
+      "type": "sizing"
+    },
+    "checkedInsetLg": {
+      "value": "0.375rem",
+      "type": "sizing"
+    },
+    "toggleSmallHeight": {
+      "value": "{semantic.size.interactive.height.sm}",
+      "type": "sizing"
+    },
+    "toggleMediumHeight": {
+      "value": "{semantic.size.interactive.height.md}",
+      "type": "sizing"
+    },
+    "toggleLargeHeight": {
+      "value": "{semantic.size.interactive.height.lg}",
+      "type": "sizing"
+    },
+    "controlVerticalMargin": {
+      "value": "{semantic.spacing.space2xs}",
+      "type": "spacing"
+    },
+    "toggleBackgroundDanger": {
+      "value": "{semantic.color.background.warning}",
+      "type": "color"
+    },
+    "toggleBackgroundOff": {
+      "value": "{semantic.color.background.success}",
+      "type": "color"
+    },
+    "toggleBackgroundSuccess": {
+      "value": "{semantic.color.background.success}",
+      "type": "color"
+    },
+    "toggleBackgroundWarning": {
+      "value": "{semantic.color.background.warning}",
+      "type": "color"
+    },
+    "toggleHandleText": {
+      "value": "{semantic.color.text.onColor}",
+      "type": "color"
+    },
+    "toggleBorderRadius": {
+      "value": "0.125rem",
+      "type": "borderRadius"
+    },
+    "toggleShadow": {
+      "value": [
+        {
+          "x": "{semantic.dropShadow.x.elevation1.dropshadow1}",
+          "y": "{semantic.dropShadow.y.elevation1.dropshadow1}",
+          "blur": "{semantic.dropShadow.blur.elevation1.dropshadow1}",
+          "spread": "{semantic.dropShadow.spread.elevation1.dropshadow1}",
+          "color": "{semantic.color.dropShadow.shadowColor1}",
+          "type": "dropShadow"
+        },
+        {
+          "x": "{semantic.dropShadow.x.elevation1.dropshadow2}",
+          "y": "{semantic.dropShadow.y.elevation1.dropshadow2}",
+          "blur": "{semantic.dropShadow.blur.elevation1.dropshadow2}",
+          "spread": "{semantic.dropShadow.spread.elevation1.dropshadow2}",
+          "color": "{semantic.color.dropShadow.shadowColor2}",
+          "type": "innerShadow"
+        }
+      ],
+      "type": "boxShadow",
+      "description": "Do not use this for other components"
+    }
+  }
+}

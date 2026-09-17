@@ -1,0 +1,25 @@
+{
+  "name": "@instructure/instructure-design-tokens",
+  "version": "1.0.0",
+  "description": "Instructure design tokens (Token Studio JSON files)",
+  "author": "Instructure, Inc. Engineering and Product Design",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "default": "./src/index.js"
+    },
+    "./tokens/*": "./tokenStudio/*.json"
+  },
+  "files": [
+    "src/",
+    "tokensStudio/**/*.json"
+  ],
+  "dependencies": {
+    "glob": "^13.0.6"
+  },
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "sourceCodeEditor": {
+    "background": {
+      "value": "{semantic.color.background.base}",
+      "type": "color"
+    },
+    "borderColor": {
+      "value": "{semantic.color.stroke.base}",
+      "type": "color"
+    },
+    "borderRadius": {
+      "value": "{semantic.borderRadius.md}",
+      "type": "borderRadius"
+    },
+    "borderWidth": {
+      "value": "{semantic.borderWidth.sm}",
+      "type": "borderWidth"
+    },
+    "color": {
+      "value": "{semantic.color.text.base}",
+      "type": "color"
+    },
+    "fontFamily": {
+      "value": "{semantic.fontFamily.code}",
+      "type": "fontFamilies"
+    },
+    "fontSize": {
+      "value": "{semantic.fontSize.textSm}",
+      "type": "fontSizes"
+    },
+    "gutterBackground": {
+      "value": "{semantic.color.background.muted}",
+      "type": "color"
+    },
+    "horizontalPadding": {
+      "value": "{semantic.spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "verticalPadding": {
+      "value": "0.375rem",
+      "type": "spacing"
+    },
+    "focusedSelectionBackgroundColor": {
+      "value": "rgba(90,75,227,0.2)",
+      "type": "color"
+    },
+    "placeholderBackgroundColor": {
+      "value": "{semantic.color.text.accent.stone}",
+      "type": "color"
+    },
+    "tagKeywordColor": {
+      "value": "{semantic.color.text.accent.violet}",
+      "type": "color"
+    },
+    "tagLiteralColor": {
+      "value": "{semantic.color.text.accent.green}",
+      "type": "color"
+    },
+    "tagStringColor": {
+      "value": "{semantic.color.text.accent.red}",
+      "type": "color"
+    },
+    "tagDefinitionVariableNameColor": {
+      "value": "{semantic.color.text.accent.blue}",
+      "type": "color"
+    },
+    "tagLocalVariableNameColor": {
+      "value": "{semantic.color.text.accent.sky}",
+      "type": "color"
+    },
+    "tagClassNameColor": {
+      "value": "{semantic.color.text.accent.sea}",
+      "type": "color"
+    },
+    "tagSpecialVariableNameColor": {
+      "value": "{semantic.color.text.accent.sea}",
+      "type": "color"
+    },
+    "tagDefinitionPropertyNameColor": {
+      "value": "{semantic.color.text.accent.blue}",
+      "type": "color"
+    },
+    "tagCommentColor": {
+      "value": "{semantic.color.text.accent.orange}",
+      "type": "color"
+    },
+    "tagMetaColor": {
+      "value": "{semantic.color.text.muted}",
+      "type": "color"
+    },
+    "tagRegExpColor": {
+      "value": "{semantic.color.text.accent.orange}",
+      "type": "color"
+    },
+    "tagTypeNameColor": {
+      "value": "{semantic.color.text.accent.aurora}",
+      "type": "color"
+    },
+    "tagInvalidColor": {
+      "value": "{semantic.color.text.error}",
+      "type": "color"
+    },
+    "tagAtomColor": {
+      "value": "{semantic.color.text.accent.blue}",
+      "type": "color"
+    },
+    "activeLineColor": {
+      "value": "#99999912",
+      "type": "color"
+    }
+  }
+}
