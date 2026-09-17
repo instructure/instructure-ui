@@ -15,9 +15,6 @@
     "src/",
     "tokensStudio/**/*.json"
   ],
-  "dependencies": {
-    "glob": "^13.0.6"
-  },
   "license": "MIT",
   "publishConfig": {
     "access": "public"

@@ -24,7 +24,6 @@
     "@babel/cli": "^7.27.2",
     "@instructure/command-utils": "workspace:*",
     "@instructure/instructure-design-tokens": "link:../../design-tokens",
-    "glob": "^13.0.6",
     "dprint": "^0.57.1",
     "http-server": "^14.1.1",
     "inquirer": "^14.2.1",

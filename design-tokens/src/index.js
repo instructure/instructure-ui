@@ -23,8 +23,7 @@
  */
 import { fileURLToPath } from 'url'
 import { dirname, join } from 'path'
-import { readFileSync } from 'fs'
-import { globSync } from 'glob'
+import { readFileSync, readdirSync } from 'fs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
@@ -33,7 +32,18 @@ const tokensDir = join(__dirname, '..', 'tokensStudio')
 // Nested object mirroring the tokensStudio/ directory structure
 export const themeTokens = {}
 
-for (const filePath of globSync('**/*.json', { cwd: tokensDir })) {
+// Deviation from the vendored upstream source: the original uses `glob` to
+// enumerate tokensStudio/**/*.json. Since this copy is consumed via a local
+// `link:` dependency (not a normal package install), pnpm doesn't install
+// its declared dependencies, so `glob` isn't resolvable at runtime here. The
+// repo requires Node >=22.18 (see package.json engines), which has built-in
+// recursive readdir, so this vendored copy drops the `glob` dependency
+// entirely rather than trying to vendor it too. See README-VENDORED.md.
+const jsonFiles = readdirSync(tokensDir, { recursive: true }).filter((p) =>
+  p.endsWith('.json')
+)
+
+for (const filePath of jsonFiles) {
   const tokens = JSON.parse(readFileSync(join(tokensDir, filePath), 'utf8'))
   // e.g. 'canvas/semantic/color/canvas.json' -> ['canvas', 'semantic', 'color', 'canvas']
   const keys = filePath.replace(/\.json$/, '').split('/')
