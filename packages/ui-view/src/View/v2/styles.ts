@@ -526,14 +526,16 @@ const generateStyle = (
     focusPosition,
     shouldAnimateFocus,
     withFocusOutline,
-    focusWithin
+    focusWithin,
+    shouldUseFocusVisible
   } = props
   const focusOutline = calcFocusOutlineStyles(sharedTokens.focusOutline, {
     focusColor,
     focusPosition,
     shouldAnimateFocus,
     focusWithin,
-    withFocusOutline
+    withFocusOutline,
+    customCSSSelector: shouldUseFocusVisible ? '&:focus-visible' : undefined
   })
   return {
     view: {

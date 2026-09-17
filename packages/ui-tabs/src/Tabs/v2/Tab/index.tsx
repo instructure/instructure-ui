@@ -86,12 +86,25 @@ class Tab extends Component<TabsTabProps> {
     }
   }
 
+  handleFocus = (event: React.FocusEvent<ViewOwnProps>) => {
+    const { onFocus, index, id, isDisabled } = this.props
+
+    if (isDisabled) {
+      return
+    }
+
+    if (typeof onFocus === 'function') {
+      onFocus(event, { index, id })
+    }
+  }
+
   render() {
     const {
       id,
       variant,
       isSelected,
       isDisabled,
+      isTabbable = isSelected,
       controls,
       children,
       styles,
@@ -106,13 +119,16 @@ class Tab extends Component<TabsTabProps> {
         id={id}
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
+        onFocus={this.handleFocus}
         css={styles?.tab}
-        aria-selected={isSelected ? 'true' : undefined}
+        aria-selected={isSelected ? 'true' : 'false'}
         aria-disabled={isDisabled ? 'true' : undefined}
         aria-controls={controls}
-        tabIndex={isSelected && !isDisabled ? 0 : undefined}
+        tabIndex={isDisabled ? undefined : isTabbable ? 0 : -1}
         position="relative"
         focusPosition="offset"
+        // Roving tabindex makes tabs mouse-focusable; the ring is keyboard-only.
+        shouldUseFocusVisible
       >
         {callRenderProp(children)}
       </View>
