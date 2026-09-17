@@ -523,6 +523,30 @@ type: example
 </Flex>
 ```
 
+By default the outline displays on `:focus`, which means it also appears when the `View` is focused
+by a mouse click. Set `shouldUseFocusVisible` to switch to `:focus-visible`, so the outline only
+appears when the focus came from the keyboard. Use it where the component already has its own
+visual state for a mouse interaction — keyboard users still need the outline, so never replace it
+with a state indicator that does not track focus.
+
+```javascript
+---
+type: example
+---
+<Flex gap="general.spaceXl" direction="column">
+  <View tabIndex="0" role="button" cursor="pointer">
+    <Text>
+      Click here, then tab here — the outline shows for both
+    </Text>
+  </View>
+  <View tabIndex="0" role="button" cursor="pointer" shouldUseFocusVisible>
+    <Text>
+      with <code>shouldUseFocusVisible</code>, clicking shows no outline, but tabbing here does
+    </Text>
+  </View>
+</Flex>
+```
+
 In some situations, you may want to manually control when the focus outline is displayed instead of leaving it up to the browser.
 This can be done using the `withFocusOutline` prop. Set it to `true` to make View's focus outline display or `false` to hide it.
 Be careful when overriding the display of the focus outline as it is essential for accessibility.
