@@ -42,6 +42,9 @@ import { Returns } from '../Returns'
 import { ComponentTheme } from '../ComponentTheme'
 import { TableOfContents } from '../TableOfContents'
 import { Heading } from '../Heading'
+import { PropEditor } from '../PropEditor'
+import type { PropEditorSection, ReactDocgenProps } from '../PropEditor/props'
+import { getPlayground } from '../PropEditor/registry'
 
 import { AppContext } from '../appContext'
 import { navigateTo } from '../navigationUtils'
@@ -152,6 +155,70 @@ class Document extends Component<DocumentProps, DocumentState> {
     return props ? (
       <Properties props={props} layout={this.props.layout} />
     ) : null
+  }
+
+  renderPlayground(doc: DocDataType) {
+    const editor = this.getPlaygroundEditor(doc)
+    if (!editor) return null
+
+    return (
+      <View margin="x-large 0" display="block">
+        <Heading
+          level="h2"
+          as="h3"
+          id={`${doc.id}Playground`}
+          margin="0 0 small 0"
+        >
+          Playground
+        </Heading>
+        {editor}
+      </View>
+    )
+  }
+
+  // A playground is opt-in, registered by id in `PropEditor/registry`. The
+  // common case is not having one: those pages document themselves through
+  // their README examples.
+  getPlaygroundEditor(doc: DocDataType) {
+    const playground = getPlayground(doc.id)
+    if (!playground) return null
+
+    // An entry written against a newer API doesn't apply to the older minor
+    // versions the docs also serve.
+    const docProps = (doc.props || {}) as ReactDocgenProps
+    if (playground.requiresProps?.some((propName) => !docProps[propName])) {
+      return null
+    }
+
+    const sections = playground.sections
+      .map<PropEditorSection | null>((section) => {
+        const sectionProps =
+          section.id === doc.id
+            ? doc.props
+            : doc.children?.find((child) => child.id === section.id)?.props
+        return sectionProps
+          ? {
+              id: section.id,
+              label: section.label,
+              props: sectionProps as ReactDocgenProps,
+              config: section.config
+            }
+          : null
+      })
+      .filter((section): section is PropEditorSection => section !== null)
+
+    // Bail if any section's metadata is missing rather than render a partial,
+    // broken preview. A doc page that isn't a parsed component has none at
+    // all, and lands here too.
+    if (sections.length !== playground.sections.length) return null
+
+    return (
+      <PropEditor
+        componentId={doc.id}
+        sections={sections}
+        template={playground.template}
+      />
+    )
   }
 
   renderTheme(doc: DocDataType) {
@@ -355,7 +422,12 @@ import { ${importName} } from '${versionedPackageName}'`
 
     return (
       <View margin="general.space2xl 0" display="block">
-        <Heading level="h2" as="h3" id={`${id}Usage`} margin="0 0 general.spaceMd 0">
+        <Heading
+          level="h2"
+          as="h3"
+          id={`${id}Usage`}
+          margin="0 0 general.spaceMd 0"
+        >
           Usage
         </Heading>
         <SourceCodeEditor
@@ -489,6 +561,9 @@ import { ${importName} } from '${versionedPackageName}'`
         {pageRef && <TableOfContents doc={doc} pageElement={pageRef} />}
         {['.js', '.ts', '.tsx'].includes(doc.extension) && this.renderUsage()}
         {this.renderDescription(doc, this.props.description)}
+        {/* Playground sits above the per-subcomponent details tabs so it always
+            applies to the whole component, not the selected tab. */}
+        {this.renderPlayground(doc)}
         {details}
         {this.renderEditOnGithub()}
         {repository && layout !== 'small' && (
