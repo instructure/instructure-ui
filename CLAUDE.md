@@ -17,6 +17,31 @@ External docs (preferred over guessing component APIs): https://instructure.desi
 - **New components: functional + hooks only.** Class components exist in legacy code — don't extend that pattern.
 - Styling is Emotion CSS-in-JS via `theme.ts` files co-located with each component.
 
+## Code comments
+
+**A comment must make sense to someone reading the file in a year who never saw the change that introduced it** — no access to the PR, the ticket, or the conversation. The same standard applies to commit messages; `/commit` has the specifics.
+
+- Explain **why**, never **what**. If the code already says it, delete the comment.
+- **One line.** Two or three only when the reason genuinely needs them.
+- **Never reference the change itself.** `now`, `new`, `previously`, `used to`, `this change`, `the fix`, `as discussed`, `per review`, `we decided`, `recently` — these only mean something next to the diff. Name the constraint instead.
+- **Never narrate the diff** (`// added onKeyDown handler`, `// updated to support X`) — that's what `git log` is for.
+- No commented-out code, no banner or separator comments, and **don't add comments to code you didn't change**.
+- Lowercase `//` on its own line above what it explains, never trailing. Ticket ids only on a real external blocker: `// TODO INSTUI-1234: <what unblocks it>`.
+- Leave the MIT license header alone — `notice/notice` in `eslint.config.mjs` enforces it.
+
+```ts
+// ❌ verbose, references the change, restates the code
+// We now memoize this because we found a performance issue during testing
+// where the component re-rendered too often. Previously computed inline.
+const styles = useMemo(...)
+
+// ✅ names the constraint, reads standalone
+// getCSSStyleDeclaration costs ~100ms per call
+const styles = useMemo(...)
+```
+
+Prop docs are a JSDoc block with **one prose sentence** and no `@param`/`@type` — types come from TypeScript and `react-docgen`. See `packages/ui-alerts/src/Alert/props.ts`.
+
 ## Component versioning (v1/v2)
 
 Some components ship in two versions during a migration period — a legacy **v1** and a newer **v2** (e.g. `DateInput`). v2 is the preferred implementation for new work; v1 is deprecated and gets removed in a later major release. Don't assume a component has only one version: check its README and the package exports to see which versions exist and which is current before using or changing one.

@@ -13,16 +13,37 @@ type(scope): imperative subject
 
 BREAKING CHANGE: <only if applicable>
 
-🤖 Generated with [Claude Code](https://claude.com/claude-code)
-
 Co-Authored-By: Claude <noreply@anthropic.com>
 ```
 
 - **type**: one of `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert`. `commitlint.config.js` extends [`@commitlint/config-conventional`](https://www.npmjs.com/package/@commitlint/config-conventional), which defines the allowed set — pick the type that genuinely matches the change (`feat`/`fix` only for actual features/bug fixes).
 - **scope**: full package name (`ui-button`, `ui-select`). Comma-separate for a few, use `many` for several, omit for repo-wide.
-- **subject**: imperative ("add loading state", not "added"). Must start with a lowercase letter (commitlint's `subject-case` rejects sentence/Start/PascalCase). No trailing period.
-- **Body lines: hard-wrap at 100 characters.** Commitlint (`body-max-line-length: 100`) runs in CI and will reject longer lines. The footer lines (Claude Code attribution, Co-Authored-By) are exempt.
+- **subject**: imperative ("add loading state", not "added"). Must start with a lowercase letter (commitlint's `subject-case` rejects sentence/Start/PascalCase). No trailing period. **Hard limit 100 characters** (`subject-max-length`), but aim for ~70: the median subject in this repo is 50. If you're pushing the limit, you're listing everything the change touches instead of naming the change.
 - **Breaking changes**: add a `BREAKING CHANGE:` line in the body describing what breaks. See CLAUDE.md for what counts as breaking.
+- **Attribution**: no `🤖 Generated with` line in commit messages — that belongs in PR bodies (`/pr` handles it).
+
+### Body
+
+**Omit the body when the subject says it all.** When you do write one, it explains **why** — the constraint, the cause, the thing the diff cannot show. Never restate what changed.
+
+- **Hard-wrap at 100 characters** (`body-max-line-length`). Trailers are exempt.
+- **Never turn the body into a changelog.** No grouping headings (`Configuration:`, `Build Tooling:`), no numbered sections, no bullet list of the files you touched — the diff already lists them.
+- Naming a specific file is fine when the file _is_ the point.
+
+```
+❌ a changelog of the diff
+Configuration:
+- Add pnpm-workspace.yaml
+- Add .npmrc with hoisted node linker
+Build Tooling:
+- Update scripts/bootstrap.js
+
+✅ the reason the diff cannot show
+regression-test stays on npm so it keeps installing @instructure/ui
+the way an external consumer would.
+```
+
+Writing about _before_ and _after_ is encouraged — "Previously the placeholder only showed on hover" is exactly right in a commit message, which is permanently anchored to its own diff. (Code comments are different: see CLAUDE.md.)
 
 ## Steps
 
@@ -31,7 +52,7 @@ Co-Authored-By: Claude <noreply@anthropic.com>
    - If you're on a feature branch, glance at its name. If it looks **unrelated** to the change you're about to commit, flag it and offer to branch off (so you don't pile an unrelated commit onto someone else's WIP); otherwise proceed.
 2. Stage the files that belong in this commit — be specific, don't `git add -A`.
 3. Propose a type(scope) and subject based on the diff, then **ask the user to confirm or override the commit type** before writing the message — don't assume `fix`/`feat` silently; **`feat`/`fix` types are used for non-test/tooling code in our public packages.**
-4. Commit normally — let the git hooks run. The interactive Commitizen prompt is **no longer** a hook (it now lives behind `pnpm run commit` for humans), so a non-interactive `-m` commit works while `pre-commit` (lint-staged + TS references check) and `commit-msg` (commitlint) still fire:
+4. Commit normally — let the git hooks run. Commitizen's interactive prompt is not a hook; it lives behind `pnpm run commit` for humans. A non-interactive `-m` commit therefore works, while `pre-commit` (lint-staged + TS references check) and `commit-msg` (commitlint) still fire:
 
    ```bash
    git commit -m "$(cat <<'EOF'
