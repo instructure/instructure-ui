@@ -36,9 +36,6 @@
       "path": "../shared-types/tsconfig.build.json"
     },
     {
-      "path": "../ui/tsconfig.build.json"
-    },
-    {
       "path": "../ui-a11y-content/tsconfig.build.json"
     },
     {
@@ -49,6 +46,9 @@
     },
     {
       "path": "../ui-avatar/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-babel-preset/tsconfig.build.json"
     },
     {
       "path": "../ui-badge/tsconfig.build.json"
@@ -70,6 +70,9 @@
     },
     {
       "path": "../ui-checkbox/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-color-picker/tsconfig.build.json"
     },
     {
       "path": "../ui-color-utils/tsconfig.build.json"
@@ -198,6 +201,9 @@
       "path": "../ui-responsive/tsconfig.build.json"
     },
     {
+      "path": "../ui-scripts/tsconfig.build.json"
+    },
+    {
       "path": "../ui-select/tsconfig.build.json"
     },
     {
@@ -208,6 +214,9 @@
     },
     {
       "path": "../ui-simple-select/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-skeleton/tsconfig.build.json"
     },
     {
       "path": "../ui-source-code-editor/tsconfig.build.json"
@@ -228,13 +237,13 @@
       "path": "../ui-tag/tsconfig.build.json"
     },
     {
-      "path": "../ui-text/tsconfig.build.json"
-    },
-    {
       "path": "../ui-text-area/tsconfig.build.json"
     },
     {
       "path": "../ui-text-input/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-text/tsconfig.build.json"
     },
     {
       "path": "../ui-themes/tsconfig.build.json"
@@ -270,16 +279,10 @@
       "path": "../ui-view/tsconfig.build.json"
     },
     {
-      "path": "../ui-babel-preset/tsconfig.build.json"
-    },
-    {
-      "path": "../ui-color-picker/tsconfig.build.json"
-    },
-    {
-      "path": "../ui-scripts/tsconfig.build.json"
-    },
-    {
       "path": "../ui-webpack-config/tsconfig.build.json"
+    },
+    {
+      "path": "../ui/tsconfig.build.json"
     }
   ]
 }

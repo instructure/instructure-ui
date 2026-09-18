@@ -38,6 +38,7 @@ import type {
 } from '@instructure/emotion'
 import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { CSSShorthandValue } from '@instructure/shared-types'
+import type { SkeletonShapeType, SkeletonSize } from '@instructure/ui-skeleton'
 
 type BorderColor =
   | string
@@ -226,6 +227,41 @@ type ViewOwnProps = {
    * CSS selector)
    */
   focusWithin?: boolean
+  /**
+   * Renders a skeleton placeholder instead of `children`, sized from this
+   * View's own `width` / `height` / `borderRadius`, and marks the element
+   * `aria-busy`.
+   *
+   * - `true` / `false` — you control it. Use this when the wait is a data fetch.
+   * - `'untilHydrated'` — the skeleton is in the server HTML and stays through
+   *   the hydrating render, then `children` take over once hydration commits.
+   *   Use this for content that cannot render correctly until it has a DOM.
+   * - omitted — renders `children`, exactly as before.
+   *
+   * This View only draws the shapes. The loading state has to be announced by a
+   * single `SkeletonLoader` region wrapping the whole area — one per region,
+   * never one per View.
+   */
+  isLoading?: boolean | 'untilHydrated'
+  /**
+   * Which skeleton primitive to draw when `isLoading`. Defaults to `rectangle`,
+   * which fills the View's box.
+   */
+  skeletonShape?: SkeletonShapeType
+  /**
+   * Number of text rows to draw when `skeletonShape="text"`.
+   */
+  skeletonLines?: number
+  /**
+   * Type ramp step for `skeletonShape="text"`.
+   */
+  skeletonSize?: SkeletonSize
+  /**
+   * Set to `false` to render the skeleton static regardless of the user's
+   * motion preference. Use it for snapshot and visual regression tests, where a
+   * running shimmer makes diffs unstable.
+   */
+  skeletonAnimate?: boolean
 }
 
 type PropKeys = keyof ViewOwnProps
@@ -256,11 +292,13 @@ const allowedProps: AllowedPropKeys = [
   'elementRef',
   'focusColor',
   'focusPosition',
+  'focusWithin',
   'height',
   'insetBlockEnd',
   'insetBlockStart',
   'insetInlineEnd',
   'insetInlineStart',
+  'isLoading',
   'margin',
   'maxHeight',
   'maxWidth',
@@ -273,12 +311,15 @@ const allowedProps: AllowedPropKeys = [
   'position',
   'shadow',
   'shouldAnimateFocus',
+  'skeletonAnimate',
+  'skeletonLines',
+  'skeletonShape',
+  'skeletonSize',
   'stacking',
   'textAlign',
   'width',
   'withFocusOutline',
-  'withVisualDebug',
-  'focusWithin'
+  'withVisualDebug'
 ]
 
 export { allowedProps }

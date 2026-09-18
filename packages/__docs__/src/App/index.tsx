@@ -1178,8 +1178,11 @@ class App extends Component<AppProps, AppState> {
             hasShadow={false}
             renderCloseButtonLabel="Close"
             themeOverride={{
-              background: '#BF32A4',
-              color: 'white',
+              // v1.10.0 replaced Alert's single `background` token with
+              // per-variant ones, and dropped `color` entirely — the body
+              // color is now expected to adapt with the theme rather than be
+              // pinned per instance.
+              warningBackgroundInline: '#BF32A4',
               borderRadius: '0rem',
               warningBorderColor: '#BF32A4',
               warningIconBackground: '#BF32A4'

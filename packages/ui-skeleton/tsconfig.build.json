@@ -2,14 +2,11 @@
   "extends": "../../tsconfig.build.json",
   "compilerOptions": {
     "outDir": "./types",
-    "rootDir": "./src",
-    "composite": true
+    "composite": true,
+    "rootDir": "./src"
   },
   "include": ["src"],
   "references": [
-    {
-      "path": "../console/tsconfig.build.json"
-    },
     {
       "path": "../emotion/tsconfig.build.json"
     },
@@ -23,22 +20,10 @@
       "path": "../ui-babel-preset/tsconfig.build.json"
     },
     {
-      "path": "../ui-color-utils/tsconfig.build.json"
-    },
-    {
-      "path": "../ui-dom-utils/tsconfig.build.json"
-    },
-    {
       "path": "../ui-i18n/tsconfig.build.json"
     },
     {
-      "path": "../ui-position/tsconfig.build.json"
-    },
-    {
       "path": "../ui-react-utils/tsconfig.build.json"
-    },
-    {
-      "path": "../ui-skeleton/tsconfig.build.json"
     },
     {
       "path": "../ui-themes/tsconfig.build.json"

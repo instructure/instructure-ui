@@ -43,23 +43,28 @@ const generateStyle = (
   const pillColorVariants = {
     primary: {
       color: componentTheme.baseTextColor,
-      borderColor: componentTheme.baseBorderColor
+      borderColor: componentTheme.baseBorderColor,
+      background: componentTheme.neutralBackgroundColor
     },
     success: {
       color: componentTheme.successTextColor,
-      borderColor: componentTheme.successBorderColor
+      borderColor: componentTheme.successBorderColor,
+      background: componentTheme.successBackgroundColor
     },
     info: {
       color: componentTheme.infoTextColor,
-      borderColor: componentTheme.infoBorderColor
+      borderColor: componentTheme.infoBorderColor,
+      background: componentTheme.infoBackgroundColor
     },
     warning: {
       color: componentTheme.warningTextColor,
-      borderColor: componentTheme.warningBorderColor
+      borderColor: componentTheme.warningBorderColor,
+      background: componentTheme.warningBackgroundColor
     },
     error: {
       color: componentTheme.errorTextColor,
-      borderColor: componentTheme.errorBorderColor
+      borderColor: componentTheme.errorBorderColor,
+      background: componentTheme.errorBackgroundColor
     }
   }
 
@@ -70,7 +75,6 @@ const generateStyle = (
       alignItems: 'center',
       boxSizing: 'border-box',
       padding: `0 ${componentTheme.paddingHorizontal}`,
-      background: componentTheme.backgroundColor,
       borderWidth: componentTheme.borderWidth,
       borderStyle: componentTheme.borderStyle,
       borderRadius: componentTheme.borderRadius,
