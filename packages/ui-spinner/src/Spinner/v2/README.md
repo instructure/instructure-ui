@@ -61,3 +61,36 @@ type: example
   <Spinner renderTitle={() => "Hello world"} />
 </div>
 ```
+
+### AI variants
+
+Use the `ai` variants to show that an AI feature is working. They show the AI
+icon instead of the circle. The `size`, `margin`, `delay`, and `renderTitle`
+props work the same way.
+
+The `ai` variant takes its gradient from the theme, so the colors follow the
+current theme, including high contrast.
+
+```js
+---
+type: example
+---
+<div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+  <Spinner renderTitle="Loading" variant="ai" size="x-small" />
+  <Spinner renderTitle="Loading" variant="ai" size="small" />
+  <Spinner renderTitle="Loading" variant="ai" />
+  <Spinner renderTitle="Loading" variant="ai" size="large" />
+</div>
+```
+
+Use `ai-inverse` on dark backgrounds. It draws the same icon in a single color
+instead of the gradient.
+
+```js
+---
+type: example
+---
+<View background="primary-inverse" as="div">
+  <Spinner renderTitle="Loading" variant="ai-inverse" />
+</View>
+```

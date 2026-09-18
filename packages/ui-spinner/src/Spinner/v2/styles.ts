@@ -151,10 +151,7 @@ const generateStyle = (
     }
   }
 
-  const circleSpinVariant = {
-    default: { stroke: componentTheme.color },
-    inverse: { stroke: componentTheme.inverseColor }
-  }
+  const isInverse = variant === 'inverse' || variant === 'ai-inverse'
 
   return {
     spinner: {
@@ -199,7 +196,25 @@ const generateStyle = (
       animationTimingFunction: 'ease',
       strokeDasharray: `calc(${radii[size!]} * 2 * 3.14159 * 0.75) 1000px`,
       ...circleSpinSizes[size!],
-      ...circleSpinVariant[variant!]
+      stroke: isInverse ? componentTheme.inverseColor : componentTheme.color
+    },
+    aiSpin: {
+      label: 'spinner__aiSpin',
+      display: 'block',
+      // The icon sits in an inline-block span. Without this, the line adds
+      // extra space below it, and the icon no longer rotates around its center.
+      lineHeight: 0,
+      ...circleSizes[size!],
+      animationName: rotate,
+      animationDuration: '2.25s',
+      animationIterationCount: 'infinite',
+      animationTimingFunction: 'linear',
+      // The icon has no `size` prop, so its svg has no width or height. Use the
+      // same size as the circle, so the layout stays the same in every variant.
+      '& svg': {
+        display: 'block',
+        ...circleSizes[size!]
+      }
     },
     radius: radii[size!]
   }

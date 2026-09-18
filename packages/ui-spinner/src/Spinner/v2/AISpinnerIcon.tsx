@@ -22,20 +22,24 @@
  * SOFTWARE.
  */
 
-// Shared icon utilities
-export type { InstUIIconProps } from './props'
-export { renderIconWithProps } from './IconPropsProvider/index.js'
-export { wrapCustomIcon } from './custom/wrapCustomIcon.js'
+import { wrapCustomIcon } from '@instructure/ui-icons'
 
-// Lucide icons
-export * from './generated/lucide/index.js'
+/**
+ * ---
+ * private: true
+ * ---
+ * The star path from packages/ui-icons/svg/Custom/igniteai-logo.svg, without
+ * the small sparkle. The star alone is centered in the viewBox, so it rotates
+ * evenly. If that logo changes, update this file too.
+ */
+const AISpinnerPaths = ({ color = 'currentColor' }: { color?: string }) => (
+  <path
+    d="M11.0621 2.53451C11.3843 1.66389 12.6157 1.66389 12.9379 2.53451L15.0815 8.32767C15.1828 8.60139 15.3986 8.8172 15.6723 8.91848L21.4655 11.0621C22.3361 11.3843 22.3361 12.6157 21.4655 12.9379L15.6723 15.0815C15.3986 15.1828 15.1828 15.3986 15.0815 15.6723L12.9379 21.4655C12.6157 22.3361 11.3843 22.3361 11.0621 21.4655L8.91849 15.6723C8.8172 15.3986 8.60139 15.1828 8.32767 15.0815L2.53451 12.9379C1.66389 12.6157 1.66389 11.3843 2.53451 11.0621L8.32767 8.91849C8.60139 8.8172 8.8172 8.60139 8.91848 8.32767L11.0621 2.53451Z"
+    fill={color}
+  />
+)
 
-// Custom/brand icons
-export * from './generated/custom/index.js'
+const AISpinnerIcon = wrapCustomIcon(AISpinnerPaths, 'AISpinner', '0 0 24 24')
 
-// Re-export legacy icons for backwards compatibility
-export * from './generated/index.js'
-
-// Re-export as namespaces for cases where distinction is needed (e.g., icon gallery)
-export * as CustomIcons from './generated/custom/index.js'
-export * as LucideIcons from './generated/lucide/index.js'
+export default AISpinnerIcon
+export { AISpinnerIcon }
