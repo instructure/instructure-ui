@@ -1,0 +1,360 @@
+{
+  "icon": {
+    "sizeXs": {
+      "value": "0.75rem",
+      "type": "sizing"
+    },
+    "sizeSm": {
+      "value": "1rem",
+      "type": "sizing"
+    },
+    "sizeMd": {
+      "value": "1.25rem",
+      "type": "sizing"
+    },
+    "sizeLg": {
+      "value": "1.5rem",
+      "type": "sizing"
+    },
+    "sizeXl": {
+      "value": "2rem",
+      "type": "sizing"
+    },
+    "size2xl": {
+      "value": "2.25rem",
+      "type": "sizing"
+    },
+    "illuSm": {
+      "value": "3rem",
+      "type": "sizing"
+    },
+    "illuMd": {
+      "value": "5rem",
+      "type": "sizing"
+    },
+    "illuLg": {
+      "value": "10rem",
+      "type": "sizing"
+    },
+    "strokeWidthXs": {
+      "value": "0.0625rem",
+      "type": "borderWidth"
+    },
+    "strokeWidthSm": {
+      "value": "0.078125rem",
+      "type": "borderWidth"
+    },
+    "strokeWidthMd": {
+      "value": "0.09375rem",
+      "type": "borderWidth"
+    },
+    "strokeWidthLg": {
+      "value": "0.125rem",
+      "type": "borderWidth"
+    },
+    "strokeWidthXl": {
+      "value": "0.15625rem",
+      "type": "borderWidth"
+    },
+    "strokeWidth2xl": {
+      "value": "0.1875rem",
+      "type": "borderWidth"
+    },
+    "strokeWidthIlluSm": {
+      "value": "0.25rem",
+      "type": "borderWidth"
+    },
+    "strokeWidthIlluMd": {
+      "value": "0.5rem",
+      "type": "borderWidth"
+    },
+    "strokeWidthIlluLg": {
+      "value": "0.75rem",
+      "type": "borderWidth"
+    },
+    "baseColor": {
+      "value": "{semantic.color.institutional.brandFontColorDark}",
+      "type": "color"
+    },
+    "mutedColor": {
+      "value": "{semantic.color.icon.muted}",
+      "type": "color"
+    },
+    "successColor": {
+      "value": "{semantic.color.icon.success}",
+      "type": "color"
+    },
+    "errorColor": {
+      "value": "{semantic.color.icon.error}",
+      "type": "color"
+    },
+    "warningColor": {
+      "value": "{semantic.color.icon.warning}",
+      "type": "color"
+    },
+    "infoColor": {
+      "value": "{semantic.color.icon.info}",
+      "type": "color"
+    },
+    "onColor": {
+      "value": "{semantic.color.icon.onColor}",
+      "type": "color"
+    },
+    "inverseColor": {
+      "value": "{semantic.color.icon.inverse}",
+      "type": "color"
+    },
+    "disabledBaseColor": {
+      "value": "{semantic.color.icon.interactive.disabled.base}",
+      "type": "color"
+    },
+    "disabledOnColor": {
+      "value": "{semantic.color.icon.interactive.disabled.onColor}",
+      "type": "color"
+    },
+    "dark": {
+      "value": "{semantic.color.icon.dark}",
+      "type": "color"
+    },
+    "sideNavColor": {
+      "value": "{semantic.color.institutional.brandGlobalNavMenuItemTextColor}",
+      "type": "color"
+    },
+    "sideNavActiveColor": {
+      "value": "{semantic.color.institutional.brandGlobalNavMenuItemTextColorActive}",
+      "type": "color"
+    },
+    "navigationPrimaryBaseColor": {
+      "value": "{semantic.color.icon.interactive.navigation.primary.base}",
+      "type": "color"
+    },
+    "navigationPrimaryHoverColor": {
+      "value": "{semantic.color.icon.interactive.navigation.primary.hover}",
+      "type": "color"
+    },
+    "navigationPrimaryActiveColor": {
+      "value": "{semantic.color.icon.interactive.navigation.primary.active}",
+      "type": "color"
+    },
+    "navigationPrimaryOnColorBaseColor": {
+      "value": "{semantic.color.icon.interactive.navigation.primaryOnColor.base}",
+      "type": "color"
+    },
+    "navigationPrimaryOnColorHoverColor": {
+      "value": "{semantic.color.icon.interactive.navigation.primaryOnColor.hover}",
+      "type": "color"
+    },
+    "navigationPrimaryOnColorActiveColor": {
+      "value": "{semantic.color.icon.interactive.navigation.primaryOnColor.active}",
+      "type": "color"
+    },
+    "actionSecondaryBaseColor": {
+      "value": "{semantic.color.institutional.brandButtonSecondaryText}",
+      "type": "color"
+    },
+    "actionSecondaryHoverColor": {
+      "value": "{semantic.color.institutional.brandButtonSecondaryText}",
+      "type": "color"
+    },
+    "actionSecondaryActiveColor": {
+      "value": "{semantic.color.institutional.brandButtonSecondaryText}",
+      "type": "color"
+    },
+    "actionSecondaryDisabledColor": {
+      "value": "{semantic.color.icon.interactive.action.secondary.disabled}",
+      "type": "color"
+    },
+    "actionStatusBaseColor": {
+      "value": "{semantic.color.icon.interactive.action.status.base}",
+      "type": "color"
+    },
+    "actionStatusHoverColor": {
+      "value": "{semantic.color.icon.interactive.action.status.hover}",
+      "type": "color"
+    },
+    "actionStatusActiveColor": {
+      "value": "{semantic.color.icon.interactive.action.status.active}",
+      "type": "color"
+    },
+    "actionStatusDisabledColor": {
+      "value": "{semantic.color.icon.interactive.action.status.disabled}",
+      "type": "color"
+    },
+    "actionAiSecondaryTopGradientBaseColor": {
+      "value": "{semantic.color.icon.interactive.action.aiSecondary.topGradient.base}",
+      "type": "color"
+    },
+    "actionAiSecondaryBottomGradientBaseColor": {
+      "value": "{semantic.color.icon.interactive.action.aiSecondary.bottomGradient.base}",
+      "type": "color"
+    },
+    "actionAiBaseColor": {
+      "value": "{semantic.color.icon.interactive.action.ai.base}",
+      "type": "color"
+    },
+    "actionAiHoverColor": {
+      "value": "{semantic.color.icon.interactive.action.ai.hover}",
+      "type": "color"
+    },
+    "actionAiActiveColor": {
+      "value": "{semantic.color.icon.interactive.action.ai.active}",
+      "type": "color"
+    },
+    "actionAiDisabledColor": {
+      "value": "{semantic.color.icon.interactive.action.ai.disabled}",
+      "type": "color"
+    },
+    "actionPrimaryBaseColor": {
+      "value": "{semantic.color.institutional.brandButtonPrimaryText}",
+      "type": "color"
+    },
+    "actionPrimaryHoverColor": {
+      "value": "{semantic.color.institutional.brandButtonPrimaryText}",
+      "type": "color"
+    },
+    "actionPrimaryActiveColor": {
+      "value": "{semantic.color.institutional.brandButtonPrimaryText}",
+      "type": "color"
+    },
+    "actionPrimaryDisabledColor": {
+      "value": "{semantic.color.icon.interactive.action.primary.disabled}",
+      "type": "color"
+    },
+    "actionPrimaryOnColorBaseColor": {
+      "value": "{semantic.color.icon.interactive.action.primaryOnColor.base}",
+      "type": "color"
+    },
+    "actionTertiaryBaseColor": {
+      "value": "{semantic.color.icon.interactive.action.tertiary.base}",
+      "type": "color"
+    },
+    "actionTertiaryHoverColor": {
+      "value": "{semantic.color.icon.interactive.action.tertiary.hover}",
+      "type": "color"
+    },
+    "actionTertiaryActiveColor": {
+      "value": "{semantic.color.icon.interactive.action.tertiary.active}",
+      "type": "color"
+    },
+    "actionPrimaryOnColorHoverColor": {
+      "value": "{semantic.color.icon.interactive.action.primaryOnColor.hover}",
+      "type": "color"
+    },
+    "actionPrimaryOnColorActiveColor": {
+      "value": "{semantic.color.icon.interactive.action.primaryOnColor.active}",
+      "type": "color"
+    },
+    "actionPrimaryOnColorDisabledColor": {
+      "value": "{semantic.color.icon.interactive.action.primaryOnColor.disabled}",
+      "type": "color"
+    },
+    "actionTertiaryDisabledColor": {
+      "value": "{semantic.color.icon.interactive.action.tertiary.disabled}",
+      "type": "color"
+    },
+    "actionSuccessSecondaryBaseColor": {
+      "value": "{semantic.color.icon.interactive.action.successSecondary.base}",
+      "type": "color"
+    },
+    "actionSuccessSecondaryHoverColor": {
+      "value": "{semantic.color.icon.interactive.action.successSecondary.hover}",
+      "type": "color"
+    },
+    "actionSuccessSecondaryActiveColor": {
+      "value": "{semantic.color.icon.interactive.action.successSecondary.active}",
+      "type": "color"
+    },
+    "actionSuccessSecondaryDisabledColor": {
+      "value": "{semantic.color.icon.interactive.action.successSecondary.disabled}",
+      "type": "color"
+    },
+    "actionDestructiveSecondaryBaseColor": {
+      "value": "{semantic.color.icon.interactive.action.destructiveSecondary.base}",
+      "type": "color"
+    },
+    "actionDestructiveSecondaryHoverColor": {
+      "value": "{semantic.color.icon.interactive.action.destructiveSecondary.hover}",
+      "type": "color"
+    },
+    "actionDestructiveSecondaryActiveColor": {
+      "value": "{semantic.color.icon.interactive.action.destructiveSecondary.active}",
+      "type": "color"
+    },
+    "actionDestructiveSecondaryDisabledColor": {
+      "value": "{semantic.color.icon.interactive.action.destructiveSecondary.disabled}",
+      "type": "color"
+    },
+    "accentBlueColor": {
+      "value": "{semantic.color.icon.accent.blue}",
+      "type": "color"
+    },
+    "accentGreenColor": {
+      "value": "{semantic.color.icon.accent.green}",
+      "type": "color"
+    },
+    "accentRedColor": {
+      "value": "{semantic.color.icon.accent.red}",
+      "type": "color"
+    },
+    "accentOrangeColor": {
+      "value": "{semantic.color.icon.accent.orange}",
+      "type": "color"
+    },
+    "accentGreyColor": {
+      "value": "{semantic.color.icon.accent.grey}",
+      "type": "color"
+    },
+    "accentAshColor": {
+      "value": "{semantic.color.icon.accent.ash}",
+      "type": "color"
+    },
+    "accentPlumColor": {
+      "value": "{semantic.color.icon.accent.plum}",
+      "type": "color"
+    },
+    "accentVioletColor": {
+      "value": "{semantic.color.icon.accent.violet}",
+      "type": "color"
+    },
+    "accentStoneColor": {
+      "value": "{semantic.color.icon.accent.stone}",
+      "type": "color"
+    },
+    "accentSkyColor": {
+      "value": "{semantic.color.icon.accent.sky}",
+      "type": "color"
+    },
+    "accentHoneyColor": {
+      "value": "{semantic.color.icon.accent.honey}",
+      "type": "color"
+    },
+    "accentSeaColor": {
+      "value": "{semantic.color.icon.accent.sea}",
+      "type": "color"
+    },
+    "accentAuroraColor": {
+      "value": "{semantic.color.icon.accent.aurora}",
+      "type": "color"
+    },
+    "actionAiSecondaryDisabledColor": {
+      "value": "{semantic.color.icon.interactive.action.aiSecondary.disabled}",
+      "type": "color"
+    },
+    "actionSecondaryOnColorBaseColor": {
+      "value": "{semantic.color.icon.interactive.action.secondaryOnColor.base}",
+      "type": "color"
+    },
+    "actionSecondaryOnColorHoverColor": {
+      "value": "{semantic.color.icon.interactive.action.secondaryOnColor.hover}",
+      "type": "color"
+    },
+    "actionSecondaryOnColorActiveColor": {
+      "value": "{semantic.color.icon.interactive.action.secondaryOnColor.active}",
+      "type": "color"
+    },
+    "actionSecondaryOnColorDisabledColor": {
+      "value": "{semantic.color.icon.interactive.action.secondaryOnColor.disabled}",
+      "type": "color"
+    }
+  }
+}

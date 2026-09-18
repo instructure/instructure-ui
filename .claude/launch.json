@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "instui-docs",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["run", "dev"],
+      "port": 9090
+    },
+    {
+      "name": "regression-test",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "regression-test", "run", "dev"],
+      "port": 3000
+    }
+  ]
+}

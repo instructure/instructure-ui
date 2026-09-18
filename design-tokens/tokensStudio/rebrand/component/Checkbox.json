@@ -1,0 +1,124 @@
+{
+  "checkbox": {
+    "backgroundColor": {
+      "value": "{semantic.color.background.interactive.input.base}",
+      "type": "color"
+    },
+    "backgroundHoverColor": {
+      "value": "{semantic.color.background.interactive.input.hover}",
+      "type": "color"
+    },
+    "backgroundReadonlyColor": {
+      "value": "{semantic.color.background.interactive.input.readonly}",
+      "type": "color"
+    },
+    "backgroundDisabledColor": {
+      "value": "{semantic.color.background.interactive.input.disabled}",
+      "type": "color"
+    },
+    "backgroundCheckedColor": {
+      "value": "{semantic.color.institutional.brandFontColorDark}",
+      "type": "color"
+    },
+    "borderColor": {
+      "value": "{semantic.color.stroke.interactive.input.base}",
+      "type": "color"
+    },
+    "borderHoverColor": {
+      "value": "{semantic.color.stroke.interactive.input.hover}",
+      "type": "color"
+    },
+    "borderReadonlyColor": {
+      "value": "{semantic.color.stroke.interactive.input.readonly}",
+      "type": "color"
+    },
+    "borderDisabledColor": {
+      "value": "{semantic.color.stroke.interactive.input.disabled}",
+      "type": "color"
+    },
+    "errorBorderColor": {
+      "value": "{semantic.color.stroke.interactive.action.destructive.secondary.base}",
+      "type": "color"
+    },
+    "errorBorderHoverColor": {
+      "value": "{semantic.color.stroke.interactive.action.destructive.secondary.hover}",
+      "type": "color"
+    },
+    "asteriskColor": {
+      "value": "{semantic.color.text.error}",
+      "type": "color"
+    },
+    "borderCheckedColor": {
+      "value": "{semantic.color.institutional.brandFontColorDark}",
+      "type": "color"
+    },
+    "fontSizeSm": {
+      "value": "{semantic.fontSize.textSm}",
+      "type": "fontSizes"
+    },
+    "fontSizeMd": {
+      "value": "{semantic.fontSize.textBase}",
+      "type": "fontSizes"
+    },
+    "fontSizeLg": {
+      "value": "{semantic.fontSize.textLg}",
+      "type": "fontSizes"
+    },
+    "lineHeight": {
+      "value": "{semantic.lineHeight.standalone.base}",
+      "type": "lineHeights"
+    },
+    "fontFamily": {
+      "value": "{semantic.fontFamily.base}",
+      "type": "fontFamilies"
+    },
+    "fontWeight": {
+      "value": "{semantic.fontWeight.body.base}",
+      "type": "fontWeights"
+    },
+    "gap": {
+      "value": "{semantic.spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "borderRadius": {
+      "value": "{semantic.borderRadius.sm}",
+      "type": "borderRadius"
+    },
+    "controlSizeSm": {
+      "value": "{semantic.size.choiceControl.height.sm}",
+      "type": "sizing"
+    },
+    "controlSizeMd": {
+      "value": "{semantic.size.choiceControl.height.md}",
+      "type": "sizing"
+    },
+    "controlSizeLg": {
+      "value": "{semantic.size.choiceControl.height.lg}",
+      "type": "sizing"
+    },
+    "borderWidth": {
+      "value": "{semantic.borderWidth.interactive.base}",
+      "type": "borderWidth"
+    },
+    "labelBaseColor": {
+      "value": "{semantic.color.institutional.brandFontColorDark}",
+      "type": "color"
+    },
+    "labelHoverColor": {
+      "value": "{semantic.color.institutional.brandFontColorDark}",
+      "type": "color"
+    },
+    "labelDisabledColor": {
+      "value": "{semantic.color.text.interactive.disabled.base}",
+      "type": "color"
+    },
+    "labelReadonlyColor": {
+      "value": "{semantic.color.institutional.brandFontColorDark}",
+      "type": "color"
+    },
+    "controlVerticalMargin": {
+      "value": "0rem",
+      "type": "spacing"
+    }
+  }
+}

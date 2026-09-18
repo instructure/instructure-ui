@@ -1,0 +1,20 @@
+{
+  "tooltip": {
+    "fontFamily": {
+      "value": "{semantic.fontFamily.base}",
+      "type": "fontFamilies"
+    },
+    "fontWeight": {
+      "value": "{semantic.fontWeight.body.base}",
+      "type": "fontWeights"
+    },
+    "fontSize": {
+      "value": "{semantic.fontSize.textSm}",
+      "type": "fontSizes"
+    },
+    "padding": {
+      "value": "{semantic.spacing.spaceMd}",
+      "type": "spacing"
+    }
+  }
+}

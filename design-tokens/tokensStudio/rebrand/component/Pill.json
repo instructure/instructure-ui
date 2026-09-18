@@ -1,0 +1,92 @@
+{
+  "pill": {
+    "paddingHorizontal": {
+      "value": "{semantic.spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "height": {
+      "value": "24px",
+      "type": "sizing"
+    },
+    "backgroundColor": {
+      "value": "{semantic.color.background.base}",
+      "type": "color"
+    },
+    "textFontSize": {
+      "value": "{semantic.fontSize.textSm}",
+      "type": "fontSizes"
+    },
+    "textFontWeight": {
+      "value": "{semantic.fontWeight.body.strong}",
+      "type": "fontWeights"
+    },
+    "statusLabelFontWeight": {
+      "value": "{semantic.fontWeight.body.strong}",
+      "type": "fontWeights"
+    },
+    "maxWidth": {
+      "value": "240px",
+      "type": "sizing"
+    },
+    "baseTextColor": {
+      "value": "{semantic.color.text.base}",
+      "type": "color"
+    },
+    "baseBorderColor": {
+      "value": "{semantic.color.stroke.base}",
+      "type": "color"
+    },
+    "infoTextColor": {
+      "value": "{semantic.color.text.info}",
+      "type": "color"
+    },
+    "infoBorderColor": {
+      "value": "{semantic.color.stroke.info}",
+      "type": "color"
+    },
+    "errorTextColor": {
+      "value": "{semantic.color.text.error}",
+      "type": "color"
+    },
+    "errorBorderColor": {
+      "value": "{semantic.color.stroke.error}",
+      "type": "color"
+    },
+    "successTextColor": {
+      "value": "{semantic.color.text.success}",
+      "type": "color"
+    },
+    "successBorderColor": {
+      "value": "{semantic.color.stroke.success}",
+      "type": "color"
+    },
+    "warningTextColor": {
+      "value": "{semantic.color.text.warning}",
+      "type": "color"
+    },
+    "warningBorderColor": {
+      "value": "{semantic.color.stroke.warning}",
+      "type": "color"
+    },
+    "borderRadius": {
+      "value": "{semantic.borderRadius.md}",
+      "type": "borderRadius"
+    },
+    "borderWidth": {
+      "value": "{semantic.borderWidth.sm}",
+      "type": "borderWidth"
+    },
+    "lineHeight": {
+      "value": "{semantic.lineHeight.standalone.textSm}",
+      "type": "lineHeights"
+    },
+    "fontFamily": {
+      "value": "{semantic.fontFamily.base}",
+      "type": "fontFamilies"
+    },
+    "borderStyle": {
+      "value": "solid",
+      "type": "text"
+    }
+  }
+}

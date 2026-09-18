@@ -1,0 +1,40 @@
+{
+  "formFieldLayout": {
+    "textColor": {
+      "value": "{semantic.color.institutional.brandFontColorDark}",
+      "type": "color"
+    },
+    "readonlyTextColor": {
+      "value": "{semantic.color.text.muted}",
+      "type": "color"
+    },
+    "asteriskColor": {
+      "value": "{semantic.color.text.base}",
+      "type": "color"
+    },
+    "fontFamily": {
+      "value": "{semantic.fontFamily.base}",
+      "type": "fontFamilies"
+    },
+    "fontWeight": {
+      "value": "{semantic.fontWeight.body.strong}",
+      "type": "fontWeights"
+    },
+    "fontSize": {
+      "value": "{semantic.fontSize.textBase}",
+      "type": "fontSizes"
+    },
+    "lineHeight": {
+      "value": "{semantic.lineHeight.label.base}",
+      "type": "lineHeights"
+    },
+    "gapPrimitives": {
+      "value": "{semantic.spacing.gap.inputElements}",
+      "type": "spacing"
+    },
+    "gapInputs": {
+      "value": "0.75rem",
+      "type": "spacing"
+    }
+  }
+}

@@ -1,0 +1,184 @@
+{
+  "progressCircle": {
+    "fontFamily": {
+      "value": "{semantic.fontFamily.base}",
+      "type": "fontFamilies"
+    },
+    "fontWeight": {
+      "value": "{semantic.fontWeight.heading.base}",
+      "type": "fontWeights"
+    },
+    "lineHeight": {
+      "value": "{semantic.lineHeight.heading.base}",
+      "type": "lineHeights"
+    },
+    "xSmallSize": {
+      "value": "3em",
+      "type": "sizing"
+    },
+    "xSmallCircumference": {
+      "value": "6.25em",
+      "type": "sizing"
+    },
+    "xSmallTransform": {
+      "value": "1.5em",
+      "type": "sizing"
+    },
+    "xSmallStrokeWidth": {
+      "value": "0.2em",
+      "type": "borderWidth"
+    },
+    "smallSize": {
+      "value": "5em",
+      "type": "sizing"
+    },
+    "smallCircumference": {
+      "value": "11em",
+      "type": "sizing"
+    },
+    "smallTransform": {
+      "value": "2.5em",
+      "type": "sizing"
+    },
+    "smallStrokeWidth": {
+      "value": "0.5em",
+      "type": "borderWidth"
+    },
+    "mediumSize": {
+      "value": "7em",
+      "type": "sizing"
+    },
+    "mediumCircumference": {
+      "value": "17.25em",
+      "type": "sizing"
+    },
+    "mediumTransform": {
+      "value": "3.5em",
+      "type": "sizing"
+    },
+    "mediumStrokeWidth": {
+      "value": "0.625em",
+      "type": "borderWidth"
+    },
+    "largeSize": {
+      "value": "9em",
+      "type": "sizing"
+    },
+    "largeCircumference": {
+      "value": "22em",
+      "type": "sizing"
+    },
+    "largeTransform": {
+      "value": "4.5em",
+      "type": "sizing"
+    },
+    "largeStrokeWidth": {
+      "value": "0.875em",
+      "type": "borderWidth"
+    },
+    "color": {
+      "value": "{semantic.color.institutional.brandFontColorDark}",
+      "type": "color"
+    },
+    "colorInverse": {
+      "value": "{semantic.color.text.inverse}",
+      "type": "color"
+    },
+    "trackColor": {
+      "value": "{semantic.color.background.base}",
+      "type": "color"
+    },
+    "trackColorInverse": {
+      "value": "{semantic.color.transparentColor}",
+      "type": "color"
+    },
+    "trackBorderColor": {
+      "value": "{semantic.color.stroke.base}",
+      "type": "color"
+    },
+    "trackBorderColorInverse": {
+      "value": "{semantic.color.stroke.inverse}",
+      "type": "color"
+    },
+    "meterColorAlert": {
+      "value": "{semantic.color.stroke.info}",
+      "type": "color"
+    },
+    "meterColorAlertInverse": {
+      "value": "{semantic.color.stroke.inverse}",
+      "type": "color"
+    },
+    "meterColorBrand": {
+      "value": "{semantic.color.institutional.brandPrimary}",
+      "type": "color"
+    },
+    "meterColorBrandInverse": {
+      "value": "{semantic.color.stroke.inverse}",
+      "type": "color"
+    },
+    "meterColorDanger": {
+      "value": "{semantic.color.stroke.error}",
+      "type": "color"
+    },
+    "meterColorDangerInverse": {
+      "value": "{semantic.color.stroke.inverse}",
+      "type": "color"
+    },
+    "meterColorInfo": {
+      "value": "{semantic.color.stroke.info}",
+      "type": "color"
+    },
+    "meterColorInfoInverse": {
+      "value": "{semantic.color.stroke.inverse}",
+      "type": "color"
+    },
+    "meterColorSuccess": {
+      "value": "{semantic.color.stroke.success}",
+      "type": "color"
+    },
+    "meterColorSuccessInverse": {
+      "value": "{semantic.color.stroke.inverse}",
+      "type": "color"
+    },
+    "meterColorWarning": {
+      "value": "{semantic.color.stroke.warning}",
+      "type": "color"
+    },
+    "meterColorWarningInverse": {
+      "value": "{semantic.color.stroke.inverse}",
+      "type": "color"
+    },
+    "xSmallRadius": {
+      "value": "1em",
+      "type": "borderRadius"
+    },
+    "smallRadius": {
+      "value": "1.8em",
+      "type": "borderRadius"
+    },
+    "mediumRadius": {
+      "value": "2.75em",
+      "type": "borderRadius"
+    },
+    "largeRadius": {
+      "value": "3.5em",
+      "type": "borderRadius"
+    },
+    "xSmallBorderOffset": {
+      "value": "0.94em",
+      "type": "spacing"
+    },
+    "smallBorderOffset": {
+      "value": "1.6125em",
+      "type": "spacing"
+    },
+    "mediumBorderOffset": {
+      "value": "2.5em",
+      "type": "spacing"
+    },
+    "largeBorderOffset": {
+      "value": "3.125em",
+      "type": "spacing"
+    }
+  }
+}

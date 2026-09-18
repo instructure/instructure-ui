@@ -1,0 +1,125 @@
+{
+  "rangeInput": {
+    "handleBackground": {
+      "value": "{semantic.color.institutional.brandPrimary}",
+      "type": "color"
+    },
+    "handleHoverBackground": {
+      "value": "{semantic.color.institutional.brandPrimary}",
+      "type": "color"
+    },
+    "handleFocusBackground": {
+      "value": "{semantic.color.institutional.brandPrimary}",
+      "type": "color"
+    },
+    "handleFocusOutlineColor": {
+      "value": "{semantic.color.institutional.brandPrimary}",
+      "type": "color",
+      "description": "Deprecated, remove with \"deprecated\" thumbVariant"
+    },
+    "handleShadowColor": {
+      "value": "{semantic.color.institutional.brandPrimary}",
+      "type": "color",
+      "description": "Deprecated, remove with \"deprecated\" thumbVariant\n"
+    },
+    "handleBorderColor": {
+      "value": "{semantic.color.stroke.brand}",
+      "type": "color"
+    },
+    "handleBorderSize": {
+      "value": "{semantic.borderWidth.md}",
+      "type": "borderWidth"
+    },
+    "handleFocusInset": {
+      "value": "{semantic.spacing.space2xs}",
+      "type": "spacing"
+    },
+    "trackBackground": {
+      "value": "{semantic.color.background.interactive.input.base}",
+      "type": "color"
+    },
+    "valueFontFamily": {
+      "value": "{semantic.fontFamily.base}",
+      "type": "fontFamilies"
+    },
+    "valueFontWeight": {
+      "value": "{semantic.fontWeight.body.base}",
+      "type": "fontWeights"
+    },
+    "valueSmallFontSize": {
+      "value": "{semantic.fontSize.textSm}",
+      "type": "fontSizes"
+    },
+    "valueMediumFontSize": {
+      "value": "{semantic.fontSize.textBase}",
+      "type": "fontSizes"
+    },
+    "valueLargeFontSize": {
+      "value": "{semantic.fontSize.textLg}",
+      "type": "fontSizes"
+    },
+    "valueSmallPadding": {
+      "value": "{semantic.spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "valueMediumPadding": {
+      "value": "{semantic.spacing.spaceMd}",
+      "type": "spacing"
+    },
+    "valueLargePadding": {
+      "value": "{semantic.spacing.spaceLg}",
+      "type": "spacing"
+    },
+    "valueSmallLineHeight": {
+      "value": "1.75rem",
+      "type": "lineHeights"
+    },
+    "valueMediumLineHeight": {
+      "value": "2.375rem",
+      "type": "lineHeights"
+    },
+    "valueLargeLineHeight": {
+      "value": "3rem",
+      "type": "lineHeights"
+    },
+    "trackBorderColor": {
+      "value": "{semantic.color.stroke.interactive.input.base}",
+      "type": "color"
+    },
+    "minWidth": {
+      "value": "12.5rem",
+      "type": "sizing"
+    },
+    "handleSize": {
+      "value": "1.5rem",
+      "type": "sizing"
+    },
+    "boxShadow": {
+      "value": [
+        {
+          "x": "{semantic.dropShadow.x.elevation1.dropshadow1}",
+          "y": "{semantic.dropShadow.y.elevation1.dropshadow1}",
+          "blur": "{semantic.dropShadow.blur.elevation1.dropshadow1}",
+          "spread": "{semantic.dropShadow.spread.elevation1.dropshadow1}",
+          "color": "{semantic.color.dropShadow.shadowColor1}",
+          "type": "dropShadow"
+        },
+        {
+          "x": "{semantic.dropShadow.x.elevation1.dropshadow2}",
+          "y": "{semantic.dropShadow.y.elevation1.dropshadow2}",
+          "blur": "{semantic.dropShadow.blur.elevation1.dropshadow2}",
+          "spread": "{semantic.dropShadow.spread.elevation1.dropshadow2}",
+          "color": "{semantic.color.dropShadow.shadowColor2}",
+          "type": "dropShadow"
+        }
+      ],
+      "type": "boxShadow",
+      "description": "Do not use this for other components"
+    },
+    "handleFocusOutlineWidth": {
+      "value": "0.75em",
+      "type": "borderWidth",
+      "description": "Deprecated, remove with \"deprecated\" thumbVariant"
+    }
+  }
+}
