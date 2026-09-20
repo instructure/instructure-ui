@@ -719,7 +719,7 @@ class Select extends Component<SelectProps> {
     const passthroughProps = omitProps(rest, Select.allowedProps)
     const { ref, ...triggerProps } = getTriggerProps({ ...passthroughProps })
     const isEditable = typeof onInputChange !== 'undefined'
-    const isForcedReadOnly = interaction === 'enabled' && !isEditable
+    const isNonEditableSelect = interaction === 'enabled' && !isEditable
 
     let overrideProps: Partial<TextInputProps> = {}
     if (!isEditable) {
@@ -747,8 +747,8 @@ class Select extends Component<SelectProps> {
       value: inputValue,
       inputRef: utils.createChainedFunction(ref, this.handleInputRef),
       inputContainerRef: this.handleInputContainerRef,
-      interaction: isForcedReadOnly ? 'readonly' : interaction, // if readonly prevent keyboard cursor
-      forceMessages: isForcedReadOnly,
+      interaction: isNonEditableSelect ? 'readonly' : interaction, // if readonly prevent keyboard cursor
+      forceMessages: isNonEditableSelect,
       isRequired,
       shouldNotWrap,
       layout,
@@ -788,7 +788,7 @@ class Select extends Component<SelectProps> {
         {...triggerProps}
         {...getInputProps(inputProps)}
         suppressHydrationWarning
-        {...(isForcedReadOnly && {
+        {...(isNonEditableSelect && {
           themeOverride: (componentTheme) => ({
             backgroundReadonlyColor: componentTheme.backgroundColor
           })
