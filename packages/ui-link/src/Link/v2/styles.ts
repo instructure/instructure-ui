@@ -23,7 +23,8 @@
  */
 
 import { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
-import type { LinkProps, LinkStyle, LinkStyleProps } from './props'
+import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
+import type { LinkProps, LinkStyle } from './props'
 import {
   calcFocusOutlineStyles,
   calcSpacingFromShorthand
@@ -36,31 +37,27 @@ import {
  * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
  * @param  {Object} sharedTokens Shared token object that stores common values for the theme.
- * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
   componentTheme: ReturnType<NewComponentTypes['Link']>,
   props: LinkProps,
-  sharedTokens: SharedTokens,
-  state: Partial<
-    LinkStyleProps & {
-      variant?: 'inline' | 'standalone'
-      size?: 'small' | 'medium' | 'large'
-    }
-  > = {}
+  sharedTokens: SharedTokens
 ): LinkStyle => {
   const {
     renderIcon,
     iconPlacement = 'start', // TODO workaround needed for react 19 where defaultprops doesn't apply for some reasong
     color,
-    margin
+    margin,
+    variant,
+    children
   } = props
 
-  // Get size and variant from state (passed from makeStyleProps) or fall back to props
-  const size = state.size ?? props.size
-  const variant = state.variant ?? props.variant
-  const hasVisibleChildren = state.hasVisibleChildren ?? false
+  const size =
+    !props.size && (variant === 'inline' || variant === 'standalone')
+      ? 'medium'
+      : props.size
+  const hasVisibleContent = hasVisibleChildren(children)
   const isInverseStyle = color === 'link-inverse'
 
   const inlineLinkSizeStyles = {
@@ -152,7 +149,7 @@ const generateStyle = (
     // If icon is present, use flex to align icon with text
     // Use 'flex' for standalone variant (block-level), 'inline-flex' for inline variant
     ...(renderIcon &&
-      hasVisibleChildren && {
+      hasVisibleContent && {
         display: variant === 'standalone' ? 'flex' : 'inline-flex',
         alignItems: 'baseline'
       }),

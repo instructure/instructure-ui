@@ -30,6 +30,7 @@ import type {
 } from '@instructure/shared-types'
 import type { ViewOwnProps } from '@instructure/ui-view/latest'
 import type { LinkProps } from '@instructure/ui-link/latest'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type BreadcrumbLinkOwnProps = {
   /**
@@ -81,7 +82,10 @@ type BreadcrumbLinkProps = PickPropsWithExceptions<
   | 'elementRef'
 > &
   BreadcrumbLinkOwnProps &
+  WithStyleProps<null, BreadcrumbLinkStyle> &
   OtherHTMLAttributes<BreadcrumbLinkOwnProps & LinkProps>
+
+type BreadcrumbLinkStyle = ComponentStyle<'text'>
 const allowedProps: AllowedPropKeys = [
   'children',
   'href',
@@ -97,5 +101,5 @@ type BreadcrumbLinkState = {
   isTruncated: boolean
 }
 
-export type { BreadcrumbLinkProps, BreadcrumbLinkState }
+export type { BreadcrumbLinkProps, BreadcrumbLinkState, BreadcrumbLinkStyle }
 export { allowedProps }
