@@ -22,52 +22,24 @@
  * SOFTWARE.
  */
 
-import type { NewComponentTypes } from '@instructure/ui-themes'
-import type { BreadcrumbProps, BreadcrumbStyle } from './props'
+import type { BreadcrumbLinkStyle } from './props'
 
 /**
  * ---
  * private: true
  * ---
  * Generates the style object from the theme and provided additional information
- * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} _componentTheme The theme variable object.
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (
-  componentTheme: ReturnType<NewComponentTypes['Breadcrumb']>,
-  props: BreadcrumbProps
-): BreadcrumbStyle => {
-  const { size } = props
-
-  const gapSizeVariants = {
-    small: componentTheme.gapSm,
-    medium: componentTheme.gapMd,
-    large: componentTheme.gapLg
-  }
-
+const generateStyle = (_componentTheme: never): BreadcrumbLinkStyle => {
   return {
-    breadcrumb: {
-      label: 'breadcrumb',
-      margin: 0,
-      padding: 0,
-      listStyleType: 'none',
-      overflow: 'visible',
-      display: 'flex',
-      alignItems: 'center',
-      gap: gapSizeVariants[size!]
-    },
-    crumb: {
-      label: 'breadcrumb__crumb',
-      boxSizing: 'border-box',
-      display: 'block'
-    },
-    separator: {
-      label: 'breadcrumb__separator',
-      boxSizing: 'border-box',
-      display: 'inline-flex',
-      alignItems: 'center',
-      flexShrink: 0
+    text: {
+      label: 'breadcrumbLink__text',
+      display: 'block',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap'
     }
   }
 }

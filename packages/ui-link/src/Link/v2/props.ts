@@ -136,11 +136,6 @@ type LinkOwnProps = {
   size?: 'small' | 'medium' | 'large'
 }
 
-export type LinkStyleProps = {
-  containsTruncateText: boolean
-  hasVisibleChildren: boolean
-}
-
 type PropKeys = keyof LinkOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>

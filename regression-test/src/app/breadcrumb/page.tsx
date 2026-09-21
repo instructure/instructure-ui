@@ -90,6 +90,15 @@ export default function BreadcrumbPage() {
           New Question
         </Breadcrumb.Link>
       </Breadcrumb>
+      <View as="div" width="14rem">
+        <Breadcrumb label="Truncated crumbs">
+          <Breadcrumb.Link href="#">English literature 204</Breadcrumb.Link>
+          <Breadcrumb.Link renderIcon={<IconClockLine size="small" />} href="#">
+            Second term modules
+          </Breadcrumb.Link>
+          <Breadcrumb.Link>Current lesson overview</Breadcrumb.Link>
+        </Breadcrumb>
+      </View>
     </main>
   )
 }

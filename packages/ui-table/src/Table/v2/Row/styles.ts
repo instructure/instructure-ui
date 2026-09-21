@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { TableRowProps, TableRowStyle } from './props'
 
 /**
@@ -31,18 +31,18 @@ import type { TableRowProps, TableRowStyle } from './props'
  * ---
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} _sharedTokens Shared token object (not used in this component)
- * @param  {Object} extraArgs the state of the component, the style is applied to
+ * @param  {Object} params the props and Table context values the style depends on
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
   componentTheme: ReturnType<NewComponentTypes['TableRow']>,
-  props: TableRowProps,
-  _sharedTokens: SharedTokens,
-  extraArgs: { isStacked: boolean; hover: boolean }
+  params: {
+    isStacked: boolean
+    hover: boolean
+    setHoverStateTo: TableRowProps['setHoverStateTo']
+  }
 ): TableRowStyle => {
-  const { setHoverStateTo } = props
+  const { isStacked, hover, setHoverStateTo } = params
 
   const hoverStyles = {
     borderLeftColor: componentTheme.hoverBorderColor,
@@ -62,13 +62,13 @@ const generateStyle = (
       borderBottomWidth: '0.0625rem',
       borderBottomColor: componentTheme.borderColor,
 
-      ...((setHoverStateTo ?? extraArgs.hover) && {
+      ...((setHoverStateTo ?? hover) && {
         borderLeft: '0.1875rem solid transparent',
         borderRight: '0.1875rem solid transparent',
         ...(setHoverStateTo === true ? hoverStyles : { '&:hover': hoverStyles })
       }),
 
-      ...(extraArgs.isStacked && {
+      ...(isStacked && {
         padding: `${componentTheme.paddingVertical} ${componentTheme.paddingHorizontal}`
       })
     }

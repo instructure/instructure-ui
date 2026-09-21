@@ -24,7 +24,7 @@
 
 import React from 'react'
 import type { OtherHTMLAttributes } from '@instructure/shared-types'
-import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
+import type { ComponentStyle, NewThemeOverrideProp } from '@instructure/emotion'
 import type { NewComponentTypes } from '@instructure/ui-themes'
 
 type TableRowOwnProps = {
@@ -57,7 +57,7 @@ type PropKeys = keyof TableRowOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TableRowProps = TableRowOwnProps &
-  WithStyleProps<ReturnType<NewComponentTypes['TableRow']>, TableRowStyle> &
+  NewThemeOverrideProp<ReturnType<NewComponentTypes['TableRow']>> &
   OtherHTMLAttributes<TableRowOwnProps>
 
 type TableRowStyle = ComponentStyle<'row'>

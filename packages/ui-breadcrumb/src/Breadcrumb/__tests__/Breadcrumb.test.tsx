@@ -65,6 +65,32 @@ describe('<Breadcrumb />', () => {
     expect(axeCheck).toBe(true)
   })
 
+  it('should stay on a single line when the crumbs do not fit', async () => {
+    const crumbs = (
+      <Breadcrumb label={TEST_LABEL}>
+        <Breadcrumb.Link href="#">English literature 204</Breadcrumb.Link>
+        <Breadcrumb.Link href="#">Second term modules</Breadcrumb.Link>
+        <Breadcrumb.Link>Current lesson</Breadcrumb.Link>
+      </Breadcrumb>
+    )
+    const { container } = await render(
+      <div>
+        <div data-testid="wide" style={{ width: '40rem' }}>
+          {crumbs}
+        </div>
+        <div data-testid="narrow" style={{ width: '12rem' }}>
+          {crumbs}
+        </div>
+      </div>
+    )
+    const [wideList, narrowList] = [...container.querySelectorAll('ol')].map(
+      (list) => list.getBoundingClientRect()
+    )
+
+    expect(narrowList.width).toBeLessThan(wideList.width)
+    expect(narrowList.height).toBe(wideList.height)
+  })
+
   it('should render the label as an aria-label attribute', async () => {
     await render(
       <Breadcrumb label={TEST_LABEL}>

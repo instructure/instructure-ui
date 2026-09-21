@@ -24,10 +24,12 @@
 
 import { Component } from 'react'
 
-import { TruncateText } from '@instructure/ui-truncate-text/latest'
 import { Link } from '@instructure/ui-link/latest'
 import { omitProps } from '@instructure/ui-react-utils'
 import { Tooltip } from '@instructure/ui-tooltip/latest'
+import { withStyleNew } from '@instructure/emotion'
+
+import generateStyle from './styles.js'
 
 import { allowedProps } from './props.js'
 import type { BreadcrumbLinkProps, BreadcrumbLinkState } from './props'
@@ -39,6 +41,7 @@ id: Breadcrumb.Link
 ---
 **/
 
+@withStyleNew(generateStyle)
 class BreadcrumbLink extends Component<
   BreadcrumbLinkProps,
   BreadcrumbLinkState
@@ -50,10 +53,17 @@ class BreadcrumbLink extends Component<
   static defaultProps = {}
 
   ref: Element | null = null
+  private _textRef: HTMLSpanElement | null = null
+  private _resizeObserver?: ResizeObserver
 
   handleRef = (el: Element | null) => {
     this.ref = el
   }
+
+  handleTextRef = (el: HTMLSpanElement | null) => {
+    this._textRef = el
+  }
+
   constructor(props: BreadcrumbLinkProps) {
     super(props)
 
@@ -61,7 +71,32 @@ class BreadcrumbLink extends Component<
       isTruncated: false
     }
   }
-  handleTruncation(isTruncated: boolean) {
+
+  componentDidMount() {
+    this.props.makeStyles?.()
+
+    if (this._textRef && typeof ResizeObserver !== 'undefined') {
+      this._resizeObserver = new ResizeObserver(this.checkTruncation)
+      this._resizeObserver.observe(this._textRef)
+    }
+    this.checkTruncation()
+  }
+
+  componentDidUpdate() {
+    this.props.makeStyles?.()
+    this.checkTruncation()
+  }
+
+  componentWillUnmount() {
+    this._resizeObserver?.disconnect()
+  }
+
+  checkTruncation = () => {
+    if (!this._textRef) {
+      return
+    }
+    const isTruncated = this._textRef.scrollWidth > this._textRef.clientWidth
+
     if (isTruncated !== this.state.isTruncated) {
       this.setState({ isTruncated })
     }
@@ -76,7 +111,8 @@ class BreadcrumbLink extends Component<
       onClick,
       onMouseEnter,
       isCurrentPage,
-      size
+      size,
+      styles
     } = this.props
     const { isTruncated } = this.state
     const props = omitProps(this.props, BreadcrumbLink.allowedProps)
@@ -87,7 +123,7 @@ class BreadcrumbLink extends Component<
         renderTip={children}
         preventTooltip={!isTruncated}
         // this wraps the achor/button tag in a span and puts the aria-describedby on that instead of the anchor/button tag
-        // to avoid SRs reading the text twice when there is already an aria-label
+        // to avoid SRs reading the text twice
         {...(isInteractive && { as: 'span' })}
       >
         <Link
@@ -101,18 +137,14 @@ class BreadcrumbLink extends Component<
           elementRef={this.handleRef}
           forceButtonRole={false}
           size={size}
+          // needed so the focus ring shows up
+          {...(!renderIcon && { display: 'block' })}
           {...(isCurrentPage && { 'aria-current': 'page' })}
-          {...(isTruncated && {
-            ...(typeof children === 'string' && { 'aria-label': children }),
-            ...(!isInteractive && { role: 'text' })
-          })}
           data-cid="BreadcrumbLink"
         >
-          <TruncateText
-            onUpdate={(isTruncated) => this.handleTruncation(isTruncated)}
-          >
-            <span aria-hidden={isTruncated}>{children}</span>
-          </TruncateText>
+          <span css={styles?.text} ref={this.handleTextRef}>
+            {children}
+          </span>
         </Link>
       </Tooltip>
     )
