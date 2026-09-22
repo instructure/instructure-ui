@@ -29,9 +29,9 @@ import type {
   WithStyleProps,
   ComponentStyle
 } from '@instructure/emotion'
-import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { Renderable } from '@instructure/shared-types'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
+import type { DesignTokensV1ComponentTypes } from '@instructure/ui-themes'
 
 type AlertOwnProps = {
   /**
@@ -122,7 +122,10 @@ type PropKeys = keyof AlertOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type AlertProps = AlertOwnProps &
-  WithStyleProps<ReturnType<NewComponentTypes['Alert']>, AlertStyle> &
+  WithStyleProps<
+    ReturnType<DesignTokensV1ComponentTypes['Alert']>,
+    AlertStyle
+  > &
   WithDeterministicIdProps
 
 type AlertStyle = ComponentStyle<

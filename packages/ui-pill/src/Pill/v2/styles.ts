@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { PillProps, PillStyle } from './props'
+import type { DesignTokensV1ComponentTypes } from '@instructure/ui-themes'
 
 /**
  * ---
@@ -35,7 +35,7 @@ import type { PillProps, PillStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: ReturnType<NewComponentTypes['Pill']>,
+  componentTheme: ReturnType<DesignTokensV1ComponentTypes['Pill']>,
   props: PillProps
 ): PillStyle => {
   const { color } = props
