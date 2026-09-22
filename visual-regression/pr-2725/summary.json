@@ -540,13 +540,13 @@
     {
       "name": "tooltip-dark.png",
       "status": "changed",
-      "numDiff": 85113,
+      "numDiff": 84609,
       "sizeMismatch": true
     },
     {
       "name": "tooltip-light.png",
       "status": "changed",
-      "numDiff": 82993,
+      "numDiff": 82467,
       "sizeMismatch": true
     },
     {
