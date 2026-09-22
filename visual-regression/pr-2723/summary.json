@@ -137,8 +137,8 @@
     },
     {
       "name": "calendar-canvas.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 478,
       "sizeMismatch": false
     },
     {
@@ -539,8 +539,8 @@
     },
     {
       "name": "tooltip-dark.png",
-      "status": "changed",
-      "numDiff": 14357,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
