@@ -87,7 +87,7 @@ const useStyleNew = <
   // if a new theme has been added to the lib since this component version has been frozen, it can't be used with this
   // theme, so we throw an error. Solution: upgrade to the latest version, it will support it
   if (frozenTheme && !frozenTheme[themeKey]) {
-    console.error(
+    throw new Error(
       `The version of ${componentId} you are using does not support the currently applied "${themeKey}" theme. ` +
         `Please upgrade to the latest version of ${componentId}.`
     )

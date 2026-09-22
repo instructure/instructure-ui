@@ -27,11 +27,11 @@ import type {
   WithStyleProps,
   ComponentStyle
 } from '@instructure/emotion'
-import type { NewComponentTypes } from '@instructure/ui-themes'
 import type {
   AsElementType,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
+import type { DesignTokensV1ComponentTypes } from '@instructure/ui-themes'
 
 type PillOwnProps = {
   as?: AsElementType
@@ -63,7 +63,7 @@ type PropKeys = keyof PillOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type PillProps = PillOwnProps &
-  WithStyleProps<ReturnType<NewComponentTypes['Pill']>, PillStyle> &
+  WithStyleProps<ReturnType<DesignTokensV1ComponentTypes['Pill']>, PillStyle> &
   OtherHTMLAttributes<PillOwnProps>
 
 type PillStyle = ComponentStyle<
