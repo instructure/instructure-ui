@@ -127,8 +127,6 @@ class Tab extends Component<TabsTabProps> {
         tabIndex={isDisabled ? undefined : isTabbable ? 0 : -1}
         position="relative"
         focusPosition="offset"
-        // Roving tabindex makes tabs mouse-focusable; the ring is keyboard-only.
-        shouldUseFocusVisible
       >
         {callRenderProp(children)}
       </View>

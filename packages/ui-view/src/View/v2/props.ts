@@ -171,12 +171,6 @@ type ViewOwnProps = {
    */
   shouldAnimateFocus?: boolean
   /**
-   * Display the focus ring only for keyboard focus, not for a mouse click or tap
-   * (uses the [:focus-visible](https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible)
-   * CSS selector). Text entry elements always show it.
-   */
-  shouldUseFocusVisible?: boolean
-  /**
    * Activate a dotted outline around the component to make building your
    * layout easier
    */
@@ -279,7 +273,6 @@ const allowedProps: AllowedPropKeys = [
   'position',
   'shadow',
   'shouldAnimateFocus',
-  'shouldUseFocusVisible',
   'stacking',
   'textAlign',
   'width',
