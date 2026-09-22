@@ -22,8 +22,9 @@
  * SOFTWARE.
  */
 import { boxShadowObjectsToCSSString } from '@instructure/ui-themes'
-import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
+import type { SharedTokens } from '@instructure/ui-themes'
 import type { AlertProps, AlertStyle } from './props'
+import type { DesignTokensV1ComponentTypes } from '@instructure/ui-themes'
 
 /**
  * ---
@@ -36,7 +37,7 @@ import type { AlertProps, AlertStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: ReturnType<NewComponentTypes['Alert']>,
+  componentTheme: ReturnType<DesignTokensV1ComponentTypes['Alert']>,
   props: AlertProps,
   sharedTokens: SharedTokens
 ): AlertStyle => {

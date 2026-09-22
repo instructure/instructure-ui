@@ -35,6 +35,7 @@ import generateStyle from './styles.js'
 
 import type { PillProps, PillState } from './props'
 import { allowedProps } from './props.js'
+import { frozenThemesDesignTokensV1 } from '@instructure/ui-themes'
 
 /**
 ---
@@ -42,7 +43,7 @@ category: components
 ---
 **/
 
-@withStyleNew(generateStyle)
+@withStyleNew(generateStyle, null, frozenThemesDesignTokensV1)
 class Pill extends Component<PillProps, PillState> {
   static displayName = 'Pill'
   static readonly componentId = 'Pill'
