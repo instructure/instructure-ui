@@ -84,9 +84,9 @@ git push origin release
 
 ##### 11. Notify the People Whose Issues Got Fixed
 
-- Run `/release-notify` in Claude Code. It reads the Jira issue keys out of the release's commits (or the pull requests behind them), then finds who originally reported each one from two directions — the Slack link in the Jira ticket, and the channel threads that quote the issue key — and hands you a ready-made message that credits them by name.
+- Run `/release-notify` in Claude Code. It reads the Jira issue keys out of the release's commits (or the pull requests behind them), takes the reporter and Slack thread that `/slack-triage` recorded on each ticket, and hands you a ready-made message that credits them by name.
 - Post the resulting block in the `#instui` channel, in the thread under the release notes message. **Retype each `@` in the Slack composer** and pick the person from the autocomplete: Slack does not turn pasted text into a real mention, so without this nobody gets notified.
-- The skill never posts anything itself. It needs two read-only credentials in the root `.env` — the Slack bot token (and the bot must be a member of the channel) plus a Jira API token — a one-time setup, see `/slack-setup`.
+- The skill never posts anything itself, and needs no Slack access — only a read-only Jira API token in the root `.env`. A reporter is only creditable if the ticket carries the required Context Links block from triage.
 
 ## Release Process for Legacy Versions
 
