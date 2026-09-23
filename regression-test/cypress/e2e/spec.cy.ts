@@ -188,6 +188,7 @@ const PAGES: PageSpec[] = [
   { slug: 'pagination', title: 'Pagination', wait: 400 },
   { slug: 'progressbar', title: 'Progressbar' },
   { slug: 'select', title: 'Select, SimpleSelect', wait: 300 },
+  { slug: 'spinner', title: 'Spinner' },
   { slug: 'table', title: 'Table' },
   { slug: 'tabs', title: 'Tabs' },
   { slug: 'tooltip', title: 'Tooltip', wait: 300 },

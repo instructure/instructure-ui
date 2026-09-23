@@ -28,7 +28,7 @@ dark backgrounds.
 ---
 type: example
 ---
-<View background="primary-inverse" as="div" >
+<View background="info" as="div" >
   <Spinner renderTitle="Loading" variant="inverse"  />
 </View>
 ```
@@ -59,5 +59,25 @@ type: example
 ---
 <div>
   <Spinner renderTitle={() => "Hello world"} />
+</div>
+```
+
+### AI variants
+
+Use the `ai` variants to show that an AI feature is working. Use `ai-on-color`
+on colored backgrounds.
+
+```js
+---
+type: example
+---
+<div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+  <Spinner renderTitle="Loading" variant="ai" size="x-small" />
+  <Spinner renderTitle="Loading" variant="ai" size="small" />
+  <Spinner renderTitle="Loading" variant="ai" />
+  <Spinner renderTitle="Loading" variant="ai" size="large" />
+  <View background="info" as="div" padding="small">
+    <Spinner renderTitle="Loading" variant="ai-on-color" />
+  </View>
 </div>
 ```

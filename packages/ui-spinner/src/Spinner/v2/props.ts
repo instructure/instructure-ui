@@ -52,9 +52,11 @@ type SpinnerOwnProps = {
    */
   size?: 'x-small' | 'small' | 'medium' | 'large'
   /**
-   * Different color schemes for use with light or dark backgrounds
+   * Different color schemes for use with light or dark backgrounds.
+   * The `ai` variants show the AI icon instead of the circle. `ai` uses the
+   * theme's AI gradient, and `ai-on-color` is for colored backgrounds.
    */
-  variant?: 'default' | 'inverse'
+  variant?: 'default' | 'inverse' | 'ai' | 'ai-on-color'
 }
 
 type PropKeys = keyof SpinnerOwnProps
@@ -67,7 +69,7 @@ type SpinnerProps = SpinnerOwnProps &
   WithDeterministicIdProps
 
 type SpinnerStyle = ComponentStyle<
-  'spinner' | 'circle' | 'circleTrack' | 'circleSpin' | 'radius'
+  'spinner' | 'circle' | 'circleTrack' | 'circleSpin' | 'radius' | 'aiSpin'
 >
 
 const allowedProps: AllowedPropKeys = [
