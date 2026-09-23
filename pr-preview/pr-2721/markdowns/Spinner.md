@@ -63,12 +63,8 @@ type: example
 
 ### AI variants
 
-Use the `ai` variants to show that an AI feature is working. They show the AI
-icon instead of the circle. The `size`, `margin`, `delay`, and `renderTitle`
-props work the same way.
-
-The `ai` variant takes its gradient from the theme, so the colors follow the
-current theme, including high contrast.
+Use the `ai` variants to show that an AI feature is working. Use `ai-on-color`
+on colored backgrounds.
 
 ```js
 ---
@@ -79,19 +75,10 @@ type: example
   <Spinner renderTitle="Loading" variant="ai" size="small" />
   <Spinner renderTitle="Loading" variant="ai" />
   <Spinner renderTitle="Loading" variant="ai" size="large" />
+  <View background="info" as="div" padding="small">
+    <Spinner renderTitle="Loading" variant="ai-on-color" />
+  </View>
 </div>
-```
-
-Use `ai-inverse` on dark backgrounds. It draws the same icon in a single color
-instead of the gradient.
-
-```js
----
-type: example
----
-<View background="primary-inverse" as="div">
-  <Spinner renderTitle="Loading" variant="ai-inverse" />
-</View>
 ```
 
 
@@ -103,7 +90,7 @@ type: example
 | Spinner | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`. |
 | Spinner | renderTitle | `Renderable` | No | - | Give the spinner a title to be read by screenreaders |
 | Spinner | size | `'x-small' \| 'small' \| 'medium' \| 'large'` | No | - | Different-sized spinners |
-| Spinner | variant | `'default' \| 'inverse' \| 'ai' \| 'ai-inverse'` | No | - | Different color schemes for use with light or dark backgrounds. The `ai` variants show the AI icon instead of the circle. `ai` uses the theme's AI gradient, and `ai-inverse` is for dark backgrounds. |
+| Spinner | variant | `'default' \| 'inverse' \| 'ai' \| 'ai-on-color'` | No | - | Different color schemes for use with light or dark backgrounds. The `ai` variants show the AI icon instead of the circle. `ai` uses the theme's AI gradient, and `ai-on-color` is for colored backgrounds. |
 
 ### Usage
 
