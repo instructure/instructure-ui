@@ -27,7 +27,7 @@ dark backgrounds.
 ---
 type: example
 ---
-<View background="primary-inverse" as="div" >
+<View background="info" as="div" >
   <Spinner renderTitle="Loading" variant="inverse"  />
 </View>
 ```
