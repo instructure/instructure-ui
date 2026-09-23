@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.7](https://github.com/instructure/instructure-ui/compare/v11.7.6...v11.7.7) (2026-09-23)
+
+### Bug Fixes
+
+* **ui-modal:** avoid redundant Modal.Body re-renders from its observers ([bccca5c](https://github.com/instructure/instructure-ui/commit/bccca5cc1f4bc10001a344b9142d2122a265a573))
+* **ui-progress:** round all track corners in ProgressBar v2 ([3341282](https://github.com/instructure/instructure-ui/commit/33412820dc21bd4fecc5e4926190d6abcc26416c))
+* **ui-radio-input:** set aria-required on RadioInputGroup when isRequired ([346d087](https://github.com/instructure/instructure-ui/commit/346d0877d42a17b24df437db74013fbb9ab5fbdb))
+* **ui-select,ui-text-input:** show messages for non-editable selects ([e0d2743](https://github.com/instructure/instructure-ui/commit/e0d274340de17e3dbe118f27dabc49d8753e4d96))
+
+### Features
+
+* **ui-spinner,ui-icons:** add ai and ai-on-color spinner variants ([cb3bd29](https://github.com/instructure/instructure-ui/commit/cb3bd2953f89f72a6d3a06c338a217eedce1a392))
+
+
 ## [11.7.6](https://github.com/instructure/instructure-ui/compare/v11.7.5...v11.7.6) (2026-09-14)
 
 ### Bug Fixes

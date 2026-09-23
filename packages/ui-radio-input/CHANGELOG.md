@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.7](https://github.com/instructure/instructure-ui/compare/v11.7.6...v11.7.7) (2026-09-23)
+
+### Bug Fixes
+
+* **ui-radio-input:** set aria-required on RadioInputGroup when isRequired ([346d087](https://github.com/instructure/instructure-ui/commit/346d0877d42a17b24df437db74013fbb9ab5fbdb))
+
+
 ## [11.7.6](https://github.com/instructure/instructure-ui/compare/v11.7.5...v11.7.6) (2026-09-14)
 
 ### Bug Fixes

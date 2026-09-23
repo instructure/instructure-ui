@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.7](https://github.com/instructure/instructure-ui/compare/v11.7.6...v11.7.7) (2026-09-23)
+
+### Features
+
+* **ui-spinner,ui-icons:** add ai and ai-on-color spinner variants ([cb3bd29](https://github.com/instructure/instructure-ui/commit/cb3bd2953f89f72a6d3a06c338a217eedce1a392))
+
+
 ## [11.7.6](https://github.com/instructure/instructure-ui/compare/v11.7.5...v11.7.6) (2026-09-14)
 
 ### Bug Fixes
