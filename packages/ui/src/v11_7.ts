@@ -376,6 +376,15 @@ export { SourceCodeEditor } from '@instructure/ui-source-code-editor/v11_7'
 export type { SourceCodeEditorProps } from '@instructure/ui-source-code-editor/v11_7'
 export { Spinner } from '@instructure/ui-spinner/v11_7'
 export type { SpinnerProps } from '@instructure/ui-spinner/v11_7'
+
+export { SkeletonLoader } from '@instructure/ui-skeleton/v11_7'
+export type {
+  SkeletonLoaderProps,
+  SkeletonShapeProps,
+  SkeletonShapeType,
+  SkeletonSize,
+  SkeletonLeading
+} from '@instructure/ui-skeleton/v11_7'
 export { InlineSVG, SVGIcon } from '@instructure/ui-svg-images'
 export type { InlineSVGProps, SVGIconProps } from '@instructure/ui-svg-images'
 export {

@@ -44,28 +44,40 @@ const generateStyle = (
 
   const variantStyles = {
     error: {
-      alert: { borderColor: componentTheme.dangerBorderColor },
+      alert: {
+        borderColor: componentTheme.dangerBorderColor,
+        background: componentTheme.dangerBackgroundInline
+      },
       icon: {
         background: componentTheme.dangerIconBackground,
         borderRightColor: componentTheme.dangerIconBackground
       }
     },
     info: {
-      alert: { borderColor: componentTheme.infoBorderColor },
+      alert: {
+        borderColor: componentTheme.infoBorderColor,
+        background: componentTheme.infoBackgroundInline
+      },
       icon: {
         background: componentTheme.infoIconBackground,
         borderRightColor: componentTheme.infoIconBackground
       }
     },
     success: {
-      alert: { borderColor: componentTheme.successBorderColor },
+      alert: {
+        borderColor: componentTheme.successBorderColor,
+        background: componentTheme.successBackgroundInline
+      },
       icon: {
         backgroundColor: componentTheme.successIconBackground,
         borderRightColor: componentTheme.successIconBackground
       }
     },
     warning: {
-      alert: { borderColor: componentTheme.warningBorderColor },
+      alert: {
+        borderColor: componentTheme.warningBorderColor,
+        background: componentTheme.warningBackgroundInline
+      },
       icon: {
         background: componentTheme.warningIconBackground,
         borderRightColor: componentTheme.warningIconBackground
@@ -76,8 +88,6 @@ const generateStyle = (
   return {
     alert: {
       label: 'alert',
-      color: componentTheme.color,
-      background: componentTheme.background,
       boxSizing: 'border-box',
       display: 'flex',
       minWidth: '12rem',
@@ -92,7 +102,7 @@ const generateStyle = (
       })
     },
     icon: {
-      color: componentTheme.iconColor,
+      color: sharedTokens.background.onColor,
       boxSizing: 'border-box',
       flex: '0 0 2.5rem',
       display: 'flex',
