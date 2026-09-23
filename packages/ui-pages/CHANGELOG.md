@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.7](https://github.com/instructure/instructure-ui/compare/v11.7.6...v11.7.7) (2026-09-23)
+
+**Note:** Version bump only for package @instructure/ui-pages
+
+
+
+
+
 ## [11.7.6](https://github.com/instructure/instructure-ui/compare/v11.7.5...v11.7.6) (2026-09-14)
 
 **Note:** Version bump only for package @instructure/ui-pages

@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.7](https://github.com/instructure/instructure-ui/compare/v11.7.6...v11.7.7) (2026-09-23)
+
+### Bug Fixes
+
+* **ui-select,ui-text-input:** show messages for non-editable selects ([e0d2743](https://github.com/instructure/instructure-ui/commit/e0d274340de17e3dbe118f27dabc49d8753e4d96))
+
+
 ## [11.7.6](https://github.com/instructure/instructure-ui/compare/v11.7.5...v11.7.6) (2026-09-14)
 
 ### Bug Fixes

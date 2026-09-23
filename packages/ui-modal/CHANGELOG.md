@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.7](https://github.com/instructure/instructure-ui/compare/v11.7.6...v11.7.7) (2026-09-23)
+
+### Bug Fixes
+
+* **ui-modal:** avoid redundant Modal.Body re-renders from its observers ([bccca5c](https://github.com/instructure/instructure-ui/commit/bccca5cc1f4bc10001a344b9142d2122a265a573))
+
+
 ## [11.7.6](https://github.com/instructure/instructure-ui/compare/v11.7.5...v11.7.6) (2026-09-14)
 
 **Note:** Version bump only for package @instructure/ui-modal
