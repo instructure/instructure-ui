@@ -28,12 +28,14 @@ import { View } from '@instructure/ui-view/latest'
 import { passthroughProps } from '@instructure/ui-react-utils'
 import { Tooltip } from '@instructure/ui-tooltip/latest'
 import type { TooltipRenderChildrenArgs } from '@instructure/ui-tooltip/latest'
+import { renderIconWithProps } from '@instructure/ui-icons'
 
 import { useStyleNew } from '@instructure/emotion'
 
 import generateStyle from './styles.js'
 
 import type { PillProps } from './props'
+import { pillSizeToIconSize } from './props.js'
 
 /**
 ---
@@ -45,6 +47,7 @@ const Pill = (props: PillProps) => {
     as,
     children,
     color = 'primary',
+    size = 'small',
     elementRef,
     margin,
     statusLabel,
@@ -59,7 +62,7 @@ const Pill = (props: PillProps) => {
   const styles = useStyleNew({
     generateStyle,
     themeOverride,
-    params: { color },
+    params: { color, size },
     componentId: 'Pill',
     displayName: 'Pill'
   })
@@ -69,7 +72,7 @@ const Pill = (props: PillProps) => {
     if (el) {
       setTruncated(el.offsetWidth < el.scrollWidth)
     }
-  }, [children, statusLabel])
+  }, [children, statusLabel, size])
 
   const handleRef = (el: Element | null) => {
     if (typeof elementRef === 'function') {
@@ -105,7 +108,15 @@ const Pill = (props: PillProps) => {
         data-cid="Pill"
       >
         <div css={styles?.pill}>
-          {renderIcon && <div css={styles?.icon}>{renderIcon}</div>}
+          {renderIcon && (
+            <div css={styles?.icon}>
+              {renderIconWithProps(
+                renderIcon,
+                pillSizeToIconSize[size],
+                undefined
+              )}
+            </div>
+          )}
           <div css={styles?.text} ref={ellipsisRef}>
             {statusLabel && (
               <span css={styles?.status}>{statusLabel.concat(':')}</span>

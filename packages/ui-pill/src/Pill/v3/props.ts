@@ -30,12 +30,41 @@ import type {
 import type { NewComponentTypes } from '@instructure/ui-themes'
 import type {
   AsElementType,
-  OtherHTMLAttributes
+  OtherHTMLAttributes,
+  Renderable
 } from '@instructure/shared-types'
+
+const pillSizeToIconSize = {
+  'x-small': 'xs',
+  small: 'xs',
+  medium: 'sm',
+  large: 'sm'
+} as const
 
 type PillOwnProps = {
   as?: AsElementType
-  color?: 'primary' | 'success' | 'info' | 'warning' | 'error'
+  /**
+   * The status colors (`primary`, `info`, `success`, `warning`, `error`) convey
+   * meaning, the accent colors (`stone`, `sky`, `orange`, `aurora`, `plum`,
+   * `violet`, `sea`) are for categorization.
+   */
+  color?:
+    | 'primary'
+    | 'info'
+    | 'success'
+    | 'warning'
+    | 'error'
+    | 'stone'
+    | 'sky'
+    | 'orange'
+    | 'aurora'
+    | 'plum'
+    | 'violet'
+    | 'sea'
+  /**
+   * The size of the Pill. The icon is sized to match.
+   */
+  size?: keyof typeof pillSizeToIconSize
   /**
    * Provides a reference to the underlying HTML element
    */
@@ -54,9 +83,10 @@ type PillOwnProps = {
   statusLabel?: string
 
   /**
-   * An icon displayed to the left of the text.
+   * An icon displayed before the text. InstUI icons are sized and colored
+   * automatically.
    */
-  renderIcon?: React.ReactNode
+  renderIcon?: Renderable
 }
 type PropKeys = keyof PillOwnProps
 
@@ -70,12 +100,13 @@ type PillStyle = ComponentStyle<
   'pill' | 'text' | 'maxWidth' | 'status' | 'icon'
 >
 
-type PillStyleParams = Required<Pick<PillProps, 'color'>>
+type PillStyleParams = Required<Pick<PillProps, 'color' | 'size'>>
 
 const allowedProps: AllowedPropKeys = [
   'as',
   'children',
   'color',
+  'size',
   'elementRef',
   'margin',
   'statusLabel',
@@ -83,4 +114,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { PillProps, PillStyle, PillStyleParams }
-export { allowedProps }
+export { allowedProps, pillSizeToIconSize }

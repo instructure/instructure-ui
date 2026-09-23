@@ -28,7 +28,7 @@ import { describe, it, expect, beforeEach, vi } from 'vitest'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { Pill } from '@instructure/ui-pill/latest'
-import { IconEyeLine } from '@instructure/ui-icons'
+import { IconEyeLine, CheckInstUIIcon } from '@instructure/ui-icons'
 
 describe('<Pill />', () => {
   it('should render', async () => {
@@ -76,6 +76,14 @@ describe('<Pill />', () => {
     const axeCheck = await runAxeCheck(container)
 
     expect(axeCheck).toBe(true)
+  })
+
+  it('should accept an icon component reference', async () => {
+    const { container } = await render(
+      <Pill renderIcon={CheckInstUIIcon}>Overdue</Pill>
+    )
+
+    expect(container.querySelector('svg')).toBeInTheDocument()
   })
 
   describe('Component tests', () => {

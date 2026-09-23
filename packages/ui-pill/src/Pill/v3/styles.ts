@@ -38,30 +38,99 @@ const generateStyle = (
   componentTheme: ReturnType<NewComponentTypes['Pill']>,
   params: PillStyleParams
 ): PillStyle => {
-  const { color } = params
+  const { color, size } = params
 
-  const pillColorVariants = {
+  const sizeVariants = {
+    'x-small': {
+      height: componentTheme.heightXSmall,
+      paddingInline: componentTheme.paddingHorizontal,
+      fontSize: componentTheme.textFontSize,
+      gap: componentTheme.gapIconLabel
+    },
+    small: {
+      height: componentTheme.height,
+      paddingInline: componentTheme.paddingHorizontal,
+      fontSize: componentTheme.textFontSize,
+      gap: componentTheme.gapIconLabel
+    },
+    medium: {
+      height: componentTheme.heightMedium,
+      paddingInline: componentTheme.paddingHorizontalMedium,
+      fontSize: componentTheme.textFontSizeMedium,
+      gap: componentTheme.gapIconLabelMedium
+    },
+    large: {
+      height: componentTheme.heightLarge,
+      paddingInline: componentTheme.paddingHorizontalLarge,
+      fontSize: componentTheme.textFontSizeLarge,
+      gap: componentTheme.gapIconLabelLarge
+    }
+  }
+
+  const colorVariants = {
     primary: {
       color: componentTheme.baseTextColor,
-      borderColor: componentTheme.baseBorderColor
-    },
-    success: {
-      color: componentTheme.successTextColor,
-      borderColor: componentTheme.successBorderColor
+      borderColor: componentTheme.baseBorderColor,
+      background: componentTheme.neutralBackgroundColor
     },
     info: {
       color: componentTheme.infoTextColor,
-      borderColor: componentTheme.infoBorderColor
+      borderColor: componentTheme.infoBorderColor,
+      background: componentTheme.infoBackgroundColor
+    },
+    success: {
+      color: componentTheme.successTextColor,
+      borderColor: componentTheme.successBorderColor,
+      background: componentTheme.successBackgroundColor
     },
     warning: {
       color: componentTheme.warningTextColor,
-      borderColor: componentTheme.warningBorderColor
+      borderColor: componentTheme.warningBorderColor,
+      background: componentTheme.warningBackgroundColor
     },
     error: {
       color: componentTheme.errorTextColor,
-      borderColor: componentTheme.errorBorderColor
+      borderColor: componentTheme.errorBorderColor,
+      background: componentTheme.errorBackgroundColor
+    },
+    stone: {
+      color: componentTheme.stoneTextColor,
+      borderColor: componentTheme.stoneBorderColor,
+      background: componentTheme.stoneBackgroundColor
+    },
+    sky: {
+      color: componentTheme.skyTextColor,
+      borderColor: componentTheme.skyBorderColor,
+      background: componentTheme.skyBackgroundColor
+    },
+    orange: {
+      color: componentTheme.orangeTextColor,
+      borderColor: componentTheme.orangeBorderColor,
+      background: componentTheme.orangeBackgroundColor
+    },
+    aurora: {
+      color: componentTheme.auroraTextColor,
+      borderColor: componentTheme.auroraBorderColor,
+      background: componentTheme.auroraBackgroundColor
+    },
+    plum: {
+      color: componentTheme.plumTextColor,
+      borderColor: componentTheme.plumBorderColor,
+      background: componentTheme.plumBackgroundColor
+    },
+    violet: {
+      color: componentTheme.violetTextColor,
+      borderColor: componentTheme.violetBorderColor,
+      background: componentTheme.violetBackgroundColor
+    },
+    sea: {
+      color: componentTheme.seaTextColor,
+      borderColor: componentTheme.seaBorderColor,
+      background: componentTheme.seaBackgroundColor
     }
   }
+
+  const { fontSize, ...sizeStyles } = sizeVariants[size]
 
   return {
     pill: {
@@ -69,35 +138,31 @@ const generateStyle = (
       display: 'flex',
       alignItems: 'center',
       boxSizing: 'border-box',
-      padding: `0 ${componentTheme.paddingHorizontal}`,
-      background: componentTheme.backgroundColor,
       borderWidth: componentTheme.borderWidth,
       borderStyle: componentTheme.borderStyle,
       borderRadius: componentTheme.borderRadius,
       fontFamily: componentTheme.fontFamily,
-      height: componentTheme.height,
-      lineHeight: componentTheme.lineHeight,
-      ...pillColorVariants[color]
+      ...sizeStyles,
+      ...colorVariants[color]
     },
     status: {
       label: 'pill__status',
-      boxSizing: 'border-box',
-      fontSize: componentTheme.textFontSize,
       fontWeight: componentTheme.statusLabelFontWeight,
-      marginRight: '0.125rem'
+      marginInlineEnd: componentTheme.gapContent
     },
     icon: {
       label: 'pill__icon',
       display: 'flex',
       alignItems: 'center',
-      marginRight: '0.375rem',
-      fontSize: '0.75rem'
+      flexShrink: 0,
+      ...(color === 'error' && { color: componentTheme.errorIconColor })
     },
     text: {
       label: 'pill__text',
       boxSizing: 'border-box',
       maxWidth: componentTheme.maxWidth,
-      fontSize: componentTheme.textFontSize,
+      fontSize,
+      lineHeight: `calc(${sizeStyles.height} - 2 * ${componentTheme.borderWidth})`,
       fontWeight: componentTheme.textFontWeight,
       textOverflow: 'ellipsis',
       whiteSpace: 'nowrap',
