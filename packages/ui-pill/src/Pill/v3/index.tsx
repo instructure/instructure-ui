@@ -22,106 +22,76 @@
  * SOFTWARE.
  */
 
-import { Component } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { View } from '@instructure/ui-view/latest'
 import { passthroughProps } from '@instructure/ui-react-utils'
 import { Tooltip } from '@instructure/ui-tooltip/latest'
 import type { TooltipRenderChildrenArgs } from '@instructure/ui-tooltip/latest'
 
-import { withStyleNew } from '@instructure/emotion'
+import { useStyleNew } from '@instructure/emotion'
 
 import generateStyle from './styles.js'
 
-import type { PillProps, PillState } from './props'
-import { allowedProps } from './props.js'
+import type { PillProps } from './props'
 
 /**
 ---
 category: components
 ---
 **/
+const Pill = (props: PillProps) => {
+  const {
+    as,
+    children,
+    color = 'primary',
+    elementRef,
+    margin,
+    statusLabel,
+    renderIcon,
+    themeOverride,
+    ...rest
+  } = props
 
-@withStyleNew(generateStyle)
-class Pill extends Component<PillProps, PillState> {
-  static displayName = 'Pill'
-  static readonly componentId = 'Pill'
+  const [truncated, setTruncated] = useState(false)
+  const ellipsisRef = useRef<HTMLDivElement | null>(null)
 
-  static allowedProps = allowedProps
+  const styles = useStyleNew({
+    generateStyle,
+    themeOverride,
+    params: { color },
+    componentId: 'Pill',
+    displayName: 'Pill'
+  })
 
-  static defaultProps = {
-    color: 'primary'
-  }
-
-  ref: Element | null = null
-
-  ellipsisRef: HTMLElement | null = null
-
-  constructor(props: PillProps) {
-    super(props)
-
-    this.state = {
-      truncated: false
+  useEffect(() => {
+    const el = ellipsisRef.current
+    if (el) {
+      setTruncated(el.offsetWidth < el.scrollWidth)
     }
-  }
+  }, [children, statusLabel])
 
-  componentDidMount() {
-    this.setTruncation()
-    this.props.makeStyles?.()
-  }
-
-  componentDidUpdate() {
-    this.props.makeStyles?.()
-  }
-
-  setTruncation() {
-    if (this.ellipsisRef) {
-      this.setState({
-        truncated: this.ellipsisRef.offsetWidth < this.ellipsisRef.scrollWidth
-      })
-    }
-  }
-
-  handleRef = (el: Element | null) => {
-    const { elementRef } = this.props
-
-    this.ref = el
-
+  const handleRef = (el: Element | null) => {
     if (typeof elementRef === 'function') {
       elementRef(el)
     }
   }
 
-  renderPill(
+  const renderPill = (
     focused?: TooltipRenderChildrenArgs['focused'],
     getTriggerProps?: TooltipRenderChildrenArgs['getTriggerProps']
-  ) {
-    const {
-      margin,
-      children,
-      color,
-      as,
-      elementRef,
-      styles,
-      makeStyles,
-      statusLabel,
-      renderIcon,
-      ...props
-    } = this.props
-
-    const filteredProps = passthroughProps(props)
-
+  ) => {
+    const filteredProps = passthroughProps(rest)
     const containerProps =
       typeof getTriggerProps === 'function'
         ? getTriggerProps(filteredProps)
         : filteredProps
 
-    const refProp = this.state.truncated ? {} : { elementRef: this.handleRef }
     return (
       <View
         {...containerProps}
         as={as}
-        {...refProp}
+        {...(truncated ? {} : { elementRef: handleRef })}
         margin={margin}
         padding="0"
         maxWidth={styles?.maxWidth as string}
@@ -136,16 +106,9 @@ class Pill extends Component<PillProps, PillState> {
       >
         <div css={styles?.pill}>
           {renderIcon && <div css={styles?.icon}>{renderIcon}</div>}
-          <div
-            css={styles?.text}
-            ref={(el) => {
-              this.ellipsisRef = el
-            }}
-          >
+          <div css={styles?.text} ref={ellipsisRef}>
             {statusLabel && (
-              <span css={styles?.status}>
-                {statusLabel && statusLabel.concat(':')}
-              </span>
+              <span css={styles?.status}>{statusLabel.concat(':')}</span>
             )}
             {children}
           </div>
@@ -154,30 +117,23 @@ class Pill extends Component<PillProps, PillState> {
     )
   }
 
-  render() {
-    if (this.state.truncated) {
-      return (
-        <Tooltip
-          renderTip={
-            this.props.statusLabel
-              ? this.props.statusLabel.concat(
-                  ': ',
-                  this.props.children as string
-                )
-              : this.props.children
-          }
-          elementRef={this.handleRef}
-        >
-          {({ focused, getTriggerProps }) => {
-            return this.renderPill(focused, getTriggerProps)
-          }}
-        </Tooltip>
-      )
-    } else {
-      return this.renderPill()
-    }
+  if (truncated) {
+    return (
+      <Tooltip
+        renderTip={
+          statusLabel ? statusLabel.concat(': ', children as string) : children
+        }
+        elementRef={handleRef}
+      >
+        {({ focused, getTriggerProps }) => renderPill(focused, getTriggerProps)}
+      </Tooltip>
+    )
   }
+
+  return renderPill()
 }
+
+Pill.displayName = 'Pill'
 
 export default Pill
 export { Pill }

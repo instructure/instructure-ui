@@ -24,8 +24,8 @@
 import React from 'react'
 import type {
   Spacing,
-  WithStyleProps,
-  ComponentStyle
+  ComponentStyle,
+  NewThemeOverrideProp
 } from '@instructure/emotion'
 import type { NewComponentTypes } from '@instructure/ui-themes'
 import type {
@@ -63,23 +63,24 @@ type PropKeys = keyof PillOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type PillProps = PillOwnProps &
-  WithStyleProps<ReturnType<NewComponentTypes['Pill']>, PillStyle> &
+  NewThemeOverrideProp<ReturnType<NewComponentTypes['Pill']>> &
   OtherHTMLAttributes<PillOwnProps>
 
 type PillStyle = ComponentStyle<
   'pill' | 'text' | 'maxWidth' | 'status' | 'icon'
 >
+
+type PillStyleParams = Required<Pick<PillProps, 'color'>>
+
 const allowedProps: AllowedPropKeys = [
   'as',
   'children',
   'color',
   'elementRef',
-  'margin'
+  'margin',
+  'statusLabel',
+  'renderIcon'
 ]
 
-type PillState = {
-  truncated: boolean
-}
-
-export type { PillProps, PillStyle, PillState }
+export type { PillProps, PillStyle, PillStyleParams }
 export { allowedProps }
