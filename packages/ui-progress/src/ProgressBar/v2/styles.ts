@@ -165,8 +165,7 @@ const generateStyle = (
       background: 'transparent',
       // Inner border-radius must be smaller than outer to avoid geometric gaps with nested rounded borders
       // Formula: inner radius = outer radius - border width
-      borderTopLeftRadius: `calc(${componentTheme.borderRadius} - ${componentTheme.trackBottomBorderWidth})`,
-      borderBottomLeftRadius: `calc(${componentTheme.borderRadius} - ${componentTheme.trackBottomBorderWidth})`,
+      borderRadius: `calc(${componentTheme.borderRadius} - ${componentTheme.trackBottomBorderWidth})`,
       // Negative margin pulls track down so trackLayout's full border overlaps and hides track's bottom border.
       // When trackLayout border is visible (light/dark themes), it creates a clean full border appearance.
       // When trackLayout border is transparent (legacy Canvas), track's bottom border remains visible.
