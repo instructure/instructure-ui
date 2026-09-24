@@ -185,6 +185,21 @@ type: example
 </Text>
 ```
 
+### Margin
+
+Use the `margin` prop to add space around the component with spacing tokens or CSS-like shorthand. On the default inline `Text` only left/right margins render, so render it as a block element (`as="p"`) when you need vertical spacing.
+
+```js
+---
+type: example
+---
+<div>
+  <Text margin="general.spaceXs general.spaceXs">text</Text>
+  <Text margin="general.spaceMd general.spaceMd">text</Text>
+  <Text as="p" margin="general.spaceXl">text</Text>
+</div>
+```
+
 ### DEPRECATED legacy values
 
 Multiple values from `size`, `weight` and `lineHeight` are deprecated, but still supported for backward compatibility reasons. Please only use the above listed, semantic values.
@@ -207,7 +222,7 @@ Deprecated `lineHeight` values:
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
 | Text | as | `AsElementType` | No | `'span'` | the element type to render as |
-| Text | color | `\| 'inherit' \| 'primary' \| 'secondary' \| 'brand' \| 'success' \| 'danger' \| 'warning' \| 'primary-inverse' \| 'secondary-inverse' \| 'primary-on' // used on colored surfaces like warning, same color in dark and light themes \| 'secondary-on' // used on colored surfaces like warning, same color in dark and light themes \| 'ai-highlight'` | No | - | Color of the text |
+| Text | color | `\| 'inherit' \| 'primary' \| 'secondary' \| 'brand' \| 'success' \| 'danger' \| 'warning' \| 'primary-inverse' \| 'secondary-inverse' \| 'primary-on' \| 'secondary-on' \| 'ai-highlight'` | No | - | Color of the text. `primary-on` and `secondary-on` are meant for use on colored surfaces (like `warning`) and keep the same color in dark and light themes. |
 | Text | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to the underlying HTML element |
 | Text | fontStyle | `'italic' \| 'normal'` | No | - |  |
 | Text | letterSpacing | `'normal' \| 'condensed' \| 'expanded'` | No | `'normal'` |  |
@@ -217,6 +232,7 @@ Deprecated `lineHeight` values:
 | Text | variant | `\| 'descriptionPage' \| 'descriptionSection' \| 'content' \| 'contentImportant' \| 'contentQuote' \| 'contentSmall' \| 'legend'` | No | - | Sets multiple props at once. (size, fontStyle, lineHeight, weight) If set, these props are not allowed. NOTE: this is the recommended way of setting these values |
 | Text | weight | `'normal' \| 'light' \| 'bold' \| 'weightRegular' \| 'weightImportant'` | No | - | Weight of the text. Use `variant` if possible instead. `weightRegular`, `weightImportant` are deprecated |
 | Text | wrap | `'normal' \| 'break-word'` | No | `'normal'` |  |
+| Text | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`. |
 | Text | children | `React.ReactNode` | No | `null` |  |
 
 ### Usage

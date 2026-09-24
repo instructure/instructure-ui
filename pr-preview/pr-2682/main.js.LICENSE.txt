@@ -23,7 +23,7 @@
  * Released under the MIT License.
  */
 
-/*! @license DOMPurify 3.4.12 | (c) Cure53 and other contributors | Released under the Apache license 2.0 and Mozilla Public License 2.0 | github.com/cure53/DOMPurify/blob/3.4.12/LICENSE */
+/*! @license DOMPurify 3.4.15 | (c) Cure53 and other contributors | Released under the Apache license 2.0 and Mozilla Public License 2.0 | github.com/cure53/DOMPurify/blob/3.4.15/LICENSE */
 
 /*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
 
@@ -70,7 +70,7 @@
  */
 
 /**
- * @license lucide-react v1.23.0 - ISC
+ * @license lucide-react v1.41.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -97,4 +97,4 @@
 
 //! moment.js locale configuration
 
-//! version : 0.6.2
+//! version : 0.6.4

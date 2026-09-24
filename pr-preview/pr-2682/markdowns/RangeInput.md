@@ -23,6 +23,7 @@ const Example = () => {
           max={100}
           min={0}
           size={size}
+          margin="general.spaceMd 0"
         />
       </View>
 
@@ -76,6 +77,7 @@ render(<Example />)
 | RangeInput | inline | `boolean` | No | `false` |  |
 | RangeInput | disabled | `boolean` | No | `false` |  |
 | RangeInput | readOnly | `boolean` | No | `false` |  |
+| RangeInput | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`. |
 | RangeInput | inputRef | `(inputElement: HTMLInputElement \| null) => void` | No | - | A function that provides a reference to the actual underlying input element |
 
 ### Usage

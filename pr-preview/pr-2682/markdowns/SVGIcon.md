@@ -145,6 +145,7 @@ type: example
 | SVGIcon | inline | `boolean` | No | - |  |
 | SVGIcon | color | `\| 'inherit' \| 'primary' \| 'secondary' \| 'primary-inverse' \| 'secondary-inverse' \| 'success' \| 'error' \| 'alert' \| 'warning' \| 'brand' \| 'auto'` | No | - |  |
 | SVGIcon | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
+| SVGIcon | allowUseElement | `boolean` | No | - | Allow `<use>` elements with `href`/`xlink:href` attributes. When enabled, only same-document fragment references (e.g. `#my-symbol`) are permitted; external URLs are blocked. |
 | SVGIcon | rotate | `'0' \| '90' \| '180' \| '270'` | No | `'0'` |  |
 | SVGIcon | size | `'x-small' \| 'small' \| 'medium' \| 'large' \| 'x-large'` | No | - |  |
 | SVGIcon | bidirectional | `boolean` | No | `false` |  |

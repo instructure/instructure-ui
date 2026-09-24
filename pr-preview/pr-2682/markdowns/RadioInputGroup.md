@@ -24,7 +24,7 @@ function Example () {
     console.log(value)
   }
   return (
-    <RadioInputGroup onChange={handleChange} name="example1" defaultValue="foo" description="Select something">
+    <RadioInputGroup onChange={handleChange} name="example1" defaultValue="foo" description="Select something" margin="general.spaceMd 0">
       {inputs.map(input => <RadioInput key={input.value} value={input.value} label={input.label} />)}
     </RadioInputGroup>
   )
@@ -223,6 +223,8 @@ type: example
 
 Whenever a `RadioInputGroup` contains required fields, you must include a note explaining what the asterisk means — typically "Fields marked with an asterisk (\*) are required."
 
+`isRequired` adds the asterisk and sets `aria-required` on the group, so screen readers announce it as required. It does not block form submission. To let the browser enforce a choice, pass `required` to every `RadioInput` in the group.
+
 ```js
 ---
 type: example
@@ -274,7 +276,8 @@ type: embed
 | RadioInputGroup | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` |  |
 | RadioInputGroup | layout | `'stacked' \| 'columns' \| 'inline'` | No | `'stacked'` |  |
 | RadioInputGroup | children | `React.ReactNode` | No | - | any children (ones that aren't `RadioInput` are passed through) |
-| RadioInputGroup | isRequired | `boolean` | No | - | Setting this to `true` adds and asterisk after the description (group label). It does not cause any behavioural change. |
+| RadioInputGroup | isRequired | `boolean` | No | - | Setting this to `true` adds an asterisk after the description (group label) and sets `aria-required` on the group, so screen readers announce it as required. It does not turn on native form validation. |
+| RadioInputGroup | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`. |
 
 ### Usage
 
