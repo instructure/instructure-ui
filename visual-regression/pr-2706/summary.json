@@ -1,7 +1,7 @@
 {
   "summary": {
-    "total": 96,
-    "unchanged": 93,
+    "total": 99,
+    "unchanged": 96,
     "changed": 3,
     "added": 0,
     "removed": 0,
@@ -491,6 +491,24 @@
     },
     {
       "name": "small-components-light.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
+    },
+    {
+      "name": "spinner-canvas.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
+    },
+    {
+      "name": "spinner-dark.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
+    },
+    {
+      "name": "spinner-light.png",
       "status": "unchanged",
       "numDiff": 0,
       "sizeMismatch": false
