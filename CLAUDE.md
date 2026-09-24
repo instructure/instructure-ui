@@ -17,6 +17,31 @@ External docs (preferred over guessing component APIs): https://instructure.desi
 - **New components: functional + hooks only.** Class components exist in legacy code — don't extend that pattern.
 - Styling is Emotion CSS-in-JS via `theme.ts` files co-located with each component.
 
+## Code comments
+
+**A comment must make sense to someone reading the file in a year who never saw the change that introduced it** — no access to the PR, the ticket, or the conversation. The same standard applies to commit messages; `/commit` has the specifics.
+
+- Explain **why**, never **what**. If the code already says it, delete the comment.
+- **One line.** Two or three only when the reason genuinely needs them.
+- **Never reference the change itself.** `now`, `new`, `previously`, `used to`, `this change`, `the fix`, `as discussed`, `per review`, `we decided`, `recently` — these only mean something next to the diff. Name the constraint instead.
+- **Never narrate the diff** (`// added onKeyDown handler`, `// updated to support X`) — that's what `git log` is for.
+- No commented-out code, no banner or separator comments, and **don't add comments to code you didn't change**.
+- Lowercase `//` on its own line above what it explains, never trailing. Ticket ids only on a real external blocker: `// TODO INSTUI-1234: <what unblocks it>`.
+- Leave the MIT license header alone — `notice/notice` in `.oxlintrc.json` enforces it.
+
+```ts
+// ❌ verbose, references the change, restates the code
+// We now memoize this because we found a performance issue during testing
+// where the component re-rendered too often. Previously computed inline.
+const styles = useMemo(...)
+
+// ✅ names the constraint, reads standalone
+// getCSSStyleDeclaration costs ~100ms per call
+const styles = useMemo(...)
+```
+
+Prop docs are a JSDoc block with **one prose sentence** and no `@param`/`@type` — types come from TypeScript and `react-docgen`.
+
 ## Component versioning (v1/v2)
 
 Some components ship in two versions during a migration period — a legacy **v1** and a newer **v2** (e.g. `DateInput`). v2 is the preferred implementation for new work; v1 is deprecated and gets removed in a later major release. Don't assume a component has only one version: check its README and the package exports to see which versions exist and which is current before using or changing one.
@@ -42,6 +67,6 @@ Avoid them unless the user explicitly asks. Breaking = removing/renaming a prop,
 ## Workflow
 
 - Use `/commit` and `/pr` — they follow InstUI conventions (Conventional Commits with package-name scopes, PR body with an `INSTUI-` Jira ref). Husky `pre-commit` runs lint-staged + a TS references check and `commit-msg` runs commitlint; both fire on a normal `git commit`. The interactive Commitizen prompt is **not** a git hook — run `pnpm run commit` for the guided flow. Don't use `HUSKY=0` to bypass failing hooks; fix the cause.
-- Branch from `master`. PRs are squash-merged.
-- **Integrate `master` by rebasing, not merging** — use `git rebase master` (or `git pull --rebase`) to update a branch. Don't create merge commits; keep branch history linear since PRs are squash-merged anyway.
+- Branch from `master`. PRs are rebase-merged — squash and merge commits are both disabled, so every commit on the branch lands on `master` as its own commit. Make each one stand on its own; fold review fixes into the commit they belong to with `git commit --fixup` instead of appending them.
+- **Integrate `master` by rebasing, not merging** — use `git rebase master` (or `git pull --rebase`) to update a branch. Don't create merge commits; branch history is what `master` gets.
 - **Docs structure:** the site is generated from source code (JSDoc + `react-docgen` for prop types) plus `.md` files. Markdown docs use fenced code blocks with a gray-matter `type:` header that controls rendering: `type: code` (syntax-highlighted, not executed), `type: embed` (renders the JSX live into the page), and `type: example` (interactive, editable playground). Full reference: `/docs/contributing/writing-docs.md`.
