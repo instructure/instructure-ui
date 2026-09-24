@@ -77,8 +77,6 @@
     "concurrently": "^10.0.5",
     "cz-git": "^1.14.0",
     "esbuild": "^0.28.2",
-    "eslint": "^10.10.0",
-    "eslint-plugin-react": "^7.37.5",
     "husky": "^9.1.7",
     "lerna": "10.0.1",
     "lint-staged": "17.4.1",
@@ -97,7 +95,6 @@
     "scripts": "The '--' at the end of commands is needed so user parameters are passed forward",
     "danger": "^11.3.1 -- add this back if we use it in pr-validation.yml",
     "tar": "Lerna 8 needs tar for this fixed(?) bug: https://github.com/lerna/lerna/issues/4005",
-    "eslint": "needed by eslint-plugin-react",
     "git-raw-commits>dargs": "Force dargs@7.0.0 (CommonJS) for git-raw-commits@3.0.0 used by lerna. pnpm hoisting was causing ESM dargs@8.1.0 to be resolved instead, breaking 'pnpm run bump' with 'TypeError: dargs is not a function'"
   },
   "engines": {

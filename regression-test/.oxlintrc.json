@@ -2,10 +2,6 @@
   "$schema": "../node_modules/oxlint/configuration_schema.json",
   "extends": ["../.oxlintrc.json"],
   "jsPlugins": [
-    {
-      "name": "react-js",
-      "specifier": "eslint-plugin-react"
-    },
     "../scripts/oxlint/no-relative-imports-plugin.mjs",
     "../scripts/oxlint/notice-plugin.mjs"
   ],
