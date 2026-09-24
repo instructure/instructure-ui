@@ -28,7 +28,7 @@ import { fireEvent } from '@testing-library/dom'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
-import conversions, { colorToRGB, color2hex } from '@instructure/ui-color-utils'
+import { colorToRGB, color2hex } from '@instructure/ui-color-utils'
 import { Button } from '@instructure/ui-buttons/latest'
 
 import { ContrastStrength } from '../v2/props.js'
@@ -703,7 +703,7 @@ describe('<ColorPicker />', () => {
         const greenInput = page
           .getByLabelText('Green input')
           .element() as HTMLInputElement
-        const convertedColor = conversions.colorToRGB(`#${color}`)
+        const convertedColor = colorToRGB(`#${color}`)
 
         const actualColor = {
           r: parseInt(redInput.value),
@@ -761,7 +761,7 @@ describe('<ColorPicker />', () => {
 
         fireEvent.click(addBtn)
 
-        expect(onChange).toHaveBeenCalledWith(conversions.color2hex(rgb))
+        expect(onChange).toHaveBeenCalledWith(color2hex(rgb))
       })
     })
   })

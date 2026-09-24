@@ -27,7 +27,7 @@
     "**/types/**",
     "**/es/**",
     "packages/*/lib/**",
-    "!packages/{browserslist-config-instui,ui-babel-preset,ui-codemods,ui-stylelint-config,ui-scripts,ui-webpack-config,command-utils,instui-cli,babel-plugin-transform-imports}/lib/**",
+    "!packages/{browserslist-config-instui,ui-babel-preset,ui-codemods,ui-stylelint-config,ui-scripts,ui-webpack-config,command-utils,instui-cli}/lib/**",
     "packages/ui-codemods/lib/__node_tests__/__testfixtures__/**",
     "scripts/oxlint/__node_tests__/__testfixtures__/**",
     "regression-test/**",
@@ -498,7 +498,7 @@
     },
     {
       "files": [
-        "packages/{browserslist-config-instui,ui-babel-preset,ui-codemods,ui-stylelint-config,ui-scripts,ui-webpack-config,command-utils,instui-cli,babel-plugin-transform-imports}/**/*",
+        "packages/{browserslist-config-instui,ui-babel-preset,ui-codemods,ui-stylelint-config,ui-scripts,ui-webpack-config,command-utils,instui-cli}/**/*",
         "packages/__docs__/**/*.js",
         "packages/__docs__/**/*.mjs"
       ],
