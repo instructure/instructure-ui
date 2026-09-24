@@ -1,0 +1,28 @@
+{
+  "ratingIcon": {
+    "iconMargin": {
+      "value": "{semantic.spacing.space2xs}",
+      "type": "spacing"
+    },
+    "iconEmptyColor": {
+      "value": "{semantic.color.stroke.brand}",
+      "type": "color"
+    },
+    "iconFilledColor": {
+      "value": "{semantic.color.background.brand}",
+      "type": "color"
+    },
+    "smallIconFontSize": {
+      "value": "1rem",
+      "type": "sizing"
+    },
+    "mediumIconFontSize": {
+      "value": "1.375rem",
+      "type": "sizing"
+    },
+    "largeIconFontSize": {
+      "value": "2.375rem",
+      "type": "sizing"
+    }
+  }
+}

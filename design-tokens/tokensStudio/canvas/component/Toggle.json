@@ -1,0 +1,214 @@
+{
+  "toggle": {
+    "backgroundColor": {
+      "value": "{semantic.color.background.muted}",
+      "type": "color"
+    },
+    "backgroundHoverColor": {
+      "value": "{semantic.color.background.muted}",
+      "type": "color"
+    },
+    "backgroundDisabledColor": {
+      "value": "{semantic.color.background.muted}",
+      "type": "color"
+    },
+    "backgroundReadonlyColor": {
+      "value": "{semantic.color.background.muted}",
+      "type": "color"
+    },
+    "errorBackgroundColor": {
+      "value": "{semantic.color.background.muted}",
+      "type": "color"
+    },
+    "errorBackgroundHoverColor": {
+      "value": "{semantic.color.background.muted}",
+      "type": "color"
+    },
+    "borderColor": {
+      "value": "{semantic.color.stroke.interactive.input.base}",
+      "type": "color"
+    },
+    "borderHoverColor": {
+      "value": "{semantic.color.stroke.interactive.input.hover}",
+      "type": "color"
+    },
+    "borderDisabledColor": {
+      "value": "{semantic.color.stroke.interactive.input.base}",
+      "type": "color"
+    },
+    "borderReadonlyColor": {
+      "value": "{semantic.color.stroke.interactive.input.readonly}",
+      "type": "color"
+    },
+    "errorBorderColor": {
+      "value": "{semantic.color.stroke.error}",
+      "type": "color"
+    },
+    "checkedBorderColor": {
+      "value": "{semantic.color.stroke.success}",
+      "type": "color"
+    },
+    "checkedBorderHoverColor": {
+      "value": "{semantic.color.stroke.success}",
+      "type": "color"
+    },
+    "checkedBorderDisabledColor": {
+      "value": "{semantic.color.stroke.success}",
+      "type": "color"
+    },
+    "checkedBorderReadonlyColor": {
+      "value": "{semantic.color.stroke.success}",
+      "type": "color"
+    },
+    "borderWidth": {
+      "value": "{semantic.borderWidth.sm}",
+      "type": "borderWidth"
+    },
+    "borderRadius": {
+      "value": "{semantic.borderRadius.full}",
+      "type": "borderRadius"
+    },
+    "checkedBackgroundColor": {
+      "value": "{semantic.color.background.success}",
+      "type": "color"
+    },
+    "checkedBackgroundHoverColor": {
+      "value": "{semantic.color.background.success}",
+      "type": "color"
+    },
+    "checkedBackgroundDisabledColor": {
+      "value": "{semantic.color.background.success}",
+      "type": "color"
+    },
+    "checkedBackgroundReadonlyColor": {
+      "value": "{semantic.color.background.success}",
+      "type": "color"
+    },
+    "labelColor": {
+      "value": "{semantic.color.institutional.brandFontColorDark}",
+      "type": "color"
+    },
+    "labelDisabledColor": {
+      "value": "{semantic.color.institutional.brandFontColorDark}",
+      "type": "color"
+    },
+    "uncheckedIconBorderColor": {
+      "value": "{semantic.color.stroke.strong}",
+      "type": "color"
+    },
+    "uncheckedIconErrorBorderColor": {
+      "value": "{semantic.color.stroke.strong}",
+      "type": "color"
+    },
+    "uncheckedIconBorderHoverColor": {
+      "value": "{semantic.color.stroke.strong}",
+      "type": "color"
+    },
+    "uncheckedIconBorderDisabledColor": {
+      "value": "{semantic.color.stroke.strong}",
+      "type": "color"
+    },
+    "uncheckedIconBorderReadonlyColor": {
+      "value": "{semantic.color.stroke.strong}",
+      "type": "color"
+    },
+    "checkedIconBorderColor": {
+      "value": "{semantic.color.stroke.interactive.action.success.base}",
+      "type": "color"
+    },
+    "checkedIconBorderHoverColor": {
+      "value": "{semantic.color.stroke.interactive.action.success.hover}",
+      "type": "color"
+    },
+    "checkedIconBorderDisabledColor": {
+      "value": "{semantic.color.stroke.interactive.action.success.base}",
+      "type": "color"
+    },
+    "checkedIconBorderReadonlyColor": {
+      "value": "{semantic.color.stroke.interactive.action.success.base}",
+      "type": "color"
+    },
+    "marginStart": {
+      "value": "{semantic.spacing.spaceMd}",
+      "type": "spacing"
+    },
+    "marginEnd": {
+      "value": "{semantic.spacing.spaceMd}",
+      "type": "spacing"
+    },
+    "marginVertical": {
+      "value": "{semantic.spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "toggleShadow": {
+      "value": [
+        {
+          "x": "{semantic.dropShadow.x.elevation1.dropshadow1}",
+          "y": "{semantic.dropShadow.y.elevation1.dropshadow1}",
+          "blur": "{semantic.dropShadow.blur.elevation1.dropshadow1}",
+          "spread": "{semantic.dropShadow.spread.elevation1.dropshadow1}",
+          "color": "{semantic.color.dropShadow.shadowColor1}",
+          "type": "dropShadow"
+        },
+        {
+          "x": "{semantic.dropShadow.x.elevation1.dropshadow2}",
+          "y": "{semantic.dropShadow.y.elevation1.dropshadow2}",
+          "blur": "{semantic.dropShadow.blur.elevation1.dropshadow2}",
+          "spread": "{semantic.dropShadow.spread.elevation1.dropshadow2}",
+          "color": "{semantic.color.dropShadow.shadowColor2}",
+          "type": "dropShadow"
+        }
+      ],
+      "type": "boxShadow",
+      "description": "Do not use this for other components"
+    },
+    "toggleSize": {
+      "value": "1.625rem",
+      "type": "sizing"
+    },
+    "toggleWidth": {
+      "value": "2.5rem",
+      "type": "sizing"
+    },
+    "labelFontFamily": {
+      "value": "{semantic.fontFamily.base}",
+      "type": "fontFamilies"
+    },
+    "labelFontWeight": {
+      "value": "{semantic.fontWeight.body.base}",
+      "type": "fontWeights"
+    },
+    "labelLineHeightMd": {
+      "value": "{semantic.lineHeight.paragraph.textBase}",
+      "type": "lineHeights"
+    },
+    "labelLineHeightLg": {
+      "value": "{semantic.lineHeight.paragraph.textBase}",
+      "type": "lineHeights"
+    },
+    "labelLineHeightSm": {
+      "value": "{semantic.lineHeight.paragraph.textSm}",
+      "type": "lineHeights"
+    },
+    "labelFontSizeSm": {
+      "value": "{semantic.fontSize.textSm}",
+      "type": "fontSizes"
+    },
+    "labelFontSizeMd": {
+      "value": "{semantic.fontSize.textBase}",
+      "type": "fontSizes"
+    },
+    "labelFontSizeLg": {
+      "value": "{semantic.fontSize.textLg}",
+      "type": "fontSizes"
+    },
+    "toggleBackground": {
+      "value": "{semantic.color.background.base}",
+      "type": "color"
+    },
+    "disabledOpacity": {
+      "value": "{semantic.opacity.disabled}",
+      "type": "opacity"
+    }
+  }
+}

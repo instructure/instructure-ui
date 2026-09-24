@@ -1,0 +1,94 @@
+{
+  "calendar": {
+    "background": {
+      "value": "{semantic.color.background.elevatedSurface.base}",
+      "type": "color"
+    },
+    "color": {
+      "value": "{semantic.color.institutional.brandFontColorDark}",
+      "type": "color"
+    },
+    "fontFamily": {
+      "value": "{semantic.fontFamily.base}",
+      "type": "fontFamilies"
+    },
+    "fontSize": {
+      "value": "{semantic.fontSize.textBase}",
+      "type": "fontSizes"
+    },
+    "fontWeight": {
+      "value": "{semantic.fontWeight.body.strong}",
+      "type": "fontWeights"
+    },
+    "navMargin": {
+      "value": "{semantic.spacing.spaceMd}",
+      "type": "spacing"
+    },
+    "navWithYearMargin": {
+      "value": "{semantic.spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "yearPickerMargin": {
+      "value": "{semantic.spacing.spaceLg}",
+      "type": "spacing"
+    },
+    "lineHeight": {
+      "value": "{semantic.lineHeight.paragraph.base}",
+      "type": "lineHeights"
+    },
+    "maxHeaderWidth": {
+      "value": "1.5rem",
+      "type": "sizing"
+    }
+  },
+  "calendarDay": {
+    "background": {
+      "value": "{semantic.color.background.elevatedSurface.base}",
+      "type": "color"
+    },
+    "color": {
+      "value": "{semantic.color.text.base}",
+      "type": "color"
+    },
+    "outsideMonthColor": {
+      "value": "{semantic.color.text.muted}",
+      "type": "color"
+    },
+    "selectedBackground": {
+      "value": "{semantic.color.background.interactive.action.success.base}",
+      "type": "color"
+    },
+    "selectedColor": {
+      "value": "{semantic.color.text.onColor}",
+      "type": "color"
+    },
+    "todayColor": {
+      "value": "{semantic.color.text.inverse}",
+      "type": "color"
+    },
+    "todayBackground": {
+      "value": "{semantic.color.institutional.brandPrimary}",
+      "type": "color"
+    },
+    "fontSize": {
+      "value": "{semantic.fontSize.textBase}",
+      "type": "fontSizes"
+    },
+    "height": {
+      "value": "{semantic.size.interactive.height.sm}",
+      "type": "sizing"
+    },
+    "minWidth": {
+      "value": "{semantic.size.interactive.height.sm}",
+      "type": "sizing"
+    },
+    "selectedBorderRadius": {
+      "value": "{semantic.borderRadius.lg}",
+      "type": "borderRadius"
+    },
+    "todayBorderRadius": {
+      "value": "{semantic.borderRadius.full}",
+      "type": "borderRadius"
+    }
+  }
+}

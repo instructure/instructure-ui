@@ -1,0 +1,84 @@
+{
+  "inlineListItem": {
+    "arrowSpacing": {
+      "value": "{semantic.spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "color": {
+      "value": "{semantic.color.institutional.brandFontColorDark}",
+      "type": "color"
+    },
+    "delimiterColor": {
+      "value": "{semantic.color.text.base}",
+      "type": "color"
+    },
+    "fontFamily": {
+      "value": "{semantic.fontFamily.base}",
+      "type": "fontFamilies"
+    },
+    "fontSizeLarge": {
+      "value": "{semantic.fontSize.textLg}",
+      "type": "fontSizes"
+    },
+    "fontSizeMedium": {
+      "value": "{semantic.fontSize.textBase}",
+      "type": "fontSizes"
+    },
+    "fontSizeSmall": {
+      "value": "{semantic.fontSize.textSm}",
+      "type": "fontSizes"
+    },
+    "fontWeight": {
+      "value": "{semantic.fontWeight.body.base}",
+      "type": "fontWeights"
+    },
+    "lineHeight": {
+      "value": "{semantic.lineHeight.standalone.base}",
+      "type": "lineHeights"
+    },
+    "noneSpacing": {
+      "value": "{semantic.spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "pipeSpacing": {
+      "value": "{semantic.spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "slashSpacing": {
+      "value": "{semantic.spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "spacingLarge": {
+      "value": "2.25rem",
+      "type": "spacing"
+    },
+    "spacingMedium": {
+      "value": "{semantic.spacing.spaceXl}",
+      "type": "spacing"
+    },
+    "spacingSmall": {
+      "value": "{semantic.spacing.spaceMd}",
+      "type": "spacing"
+    },
+    "spacingXLarge": {
+      "value": "3rem",
+      "type": "spacing"
+    },
+    "spacingXSmall": {
+      "value": "{semantic.spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "spacingXXLarge": {
+      "value": "3.75rem",
+      "type": "spacing"
+    },
+    "spacingXXSmall": {
+      "value": "0.375rem",
+      "type": "spacing"
+    },
+    "spacingXXXSmall": {
+      "value": "{semantic.spacing.space2xs}",
+      "type": "spacing"
+    }
+  }
+}

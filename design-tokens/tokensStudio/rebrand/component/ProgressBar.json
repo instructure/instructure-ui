@@ -1,0 +1,144 @@
+{
+  "progressBar": {
+    "borderRadius": {
+      "value": "{semantic.borderRadius.md}",
+      "type": "borderRadius"
+    },
+    "fontFamily": {
+      "value": "{semantic.fontFamily.base}",
+      "type": "fontFamilies"
+    },
+    "fontSize": {
+      "value": "{semantic.fontSize.textBase}",
+      "type": "fontSizes"
+    },
+    "fontWeight": {
+      "value": "{semantic.fontWeight.body.base}",
+      "type": "fontWeights"
+    },
+    "lineHeight": {
+      "value": "{semantic.lineHeight.heading.base}",
+      "type": "lineHeights"
+    },
+    "xSmallHeight": {
+      "value": "0.5rem",
+      "type": "sizing"
+    },
+    "smallHeight": {
+      "value": "1rem",
+      "type": "sizing"
+    },
+    "mediumHeight": {
+      "value": "1.5rem",
+      "type": "sizing"
+    },
+    "meterColorAlert": {
+      "value": "{semantic.color.background.brand}",
+      "type": "color"
+    },
+    "meterColorAlertInverse": {
+      "value": "{semantic.color.background.base}",
+      "type": "color"
+    },
+    "meterColorBrand": {
+      "value": "{semantic.color.background.brand}",
+      "type": "color"
+    },
+    "meterColorBrandInverse": {
+      "value": "{semantic.color.background.base}",
+      "type": "color"
+    },
+    "meterColorDanger": {
+      "value": "{semantic.color.background.brand}",
+      "type": "color"
+    },
+    "meterColorDangerInverse": {
+      "value": "{semantic.color.background.base}",
+      "type": "color"
+    },
+    "meterColorInfo": {
+      "value": "{semantic.color.background.brand}",
+      "type": "color"
+    },
+    "meterColorInfoInverse": {
+      "value": "{semantic.color.background.base}",
+      "type": "color"
+    },
+    "meterColorSuccess": {
+      "value": "{semantic.color.background.brand}",
+      "type": "color"
+    },
+    "meterColorSuccessInverse": {
+      "value": "{semantic.color.background.base}",
+      "type": "color"
+    },
+    "meterColorWarning": {
+      "value": "{semantic.color.background.brand}",
+      "type": "color"
+    },
+    "meterColorWarningInverse": {
+      "value": "{semantic.color.background.base}",
+      "type": "color"
+    },
+    "largeHeight": {
+      "value": "2rem",
+      "type": "sizing"
+    },
+    "trackBottomBorderColor": {
+      "value": "{semantic.color.transparentColor}",
+      "type": "color"
+    },
+    "trackBottomBorderColorInverse": {
+      "value": "{semantic.color.transparentColor}",
+      "type": "color"
+    },
+    "trackBottomBorderWidth": {
+      "value": "{semantic.borderWidth.sm}",
+      "type": "borderWidth"
+    },
+    "trackColor": {
+      "value": "{semantic.color.transparentColor}",
+      "type": "color"
+    },
+    "trackColorInverse": {
+      "value": "{semantic.color.transparentColor}",
+      "type": "color"
+    },
+    "valuePadding": {
+      "value": "{semantic.spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "textColor": {
+      "value": "{semantic.color.text.muted}",
+      "type": "color"
+    },
+    "textColorInverse": {
+      "value": "{semantic.color.text.inverse}",
+      "type": "color"
+    },
+    "xSmallValueFontSize": {
+      "value": "{semantic.fontSize.textBase}",
+      "type": "fontSizes"
+    },
+    "smallValueFontSize": {
+      "value": "{semantic.fontSize.textBase}",
+      "type": "fontSizes"
+    },
+    "mediumValueFontSize": {
+      "value": "{semantic.fontSize.textBase}",
+      "type": "fontSizes"
+    },
+    "largeValueFontSize": {
+      "value": "{semantic.fontSize.textBase}",
+      "type": "fontSizes"
+    },
+    "borderColor": {
+      "value": "{semantic.color.stroke.brand}",
+      "type": "color"
+    },
+    "borderColorInverse": {
+      "value": "{semantic.color.stroke.inverse}",
+      "type": "color"
+    }
+  }
+}
