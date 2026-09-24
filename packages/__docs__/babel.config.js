@@ -29,7 +29,6 @@ export default {
     [
       uiBabelPreset,
       {
-        transformImports: false, // needed for webpack reload on change to work
         // Inline Babel helpers instead of importing them from `@babel/runtime`.
         // The dev build compiles `@instructure/*` from raw `src` to CommonJS,
         // but webpack's `import` condition resolves `@babel/runtime` helpers to
