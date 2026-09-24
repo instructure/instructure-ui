@@ -36,10 +36,7 @@ import { renderIconWithProps } from '@instructure/ui-icons'
 import { View } from '@instructure/ui-view/latest'
 import type { ViewProps } from '@instructure/ui-view/latest'
 
-// TODO these have to be imported in separate lines because otherwise `isSafari` will be missing from the babel build
-// this bug is very likely caused by `babel-plugin-transform-imports` and can be reverted once it is removed from the codebase
-import { isSafari, safeLinkProps } from '@instructure/ui-utils'
-import { combineDataCid } from '@instructure/ui-utils'
+import { isSafari, safeLinkProps, combineDataCid } from '@instructure/ui-utils'
 
 import { withStyleNew } from '@instructure/emotion'
 
