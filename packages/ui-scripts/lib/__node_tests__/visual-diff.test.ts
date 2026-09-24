@@ -23,6 +23,7 @@
  */
 
 import { describe, it, expect } from 'vitest'
+import { PNG } from 'pngjs'
 import {
   badgeFor,
   thumb,
@@ -30,6 +31,7 @@ import {
   sourceLinkFor,
   appUrlFor,
   dilateMask,
+  matchesWhenShifted,
   esc,
   normalizeA11y,
   normalizeImpact,
@@ -269,6 +271,82 @@ describe('dilateMask', () => {
     const src = mask(16, 16, [{ x: 3, y: 3, w: 2, h: 2 }])
     const out = dilateMask(src, 16, 16, 0)
     expect(countSet(out)).toBe(countSet(src))
+  })
+})
+
+// An opaque white image with the given rectangles painted solid black. Hard
+// edges, so a one-pixel move registers as a real difference instead of being
+// written off as antialiasing by pixelmatch's `includeAA: false`.
+function image(
+  w: number,
+  h: number,
+  rects: Array<{ x: number; y: number; w: number; h: number }>
+) {
+  const png = new PNG({ width: w, height: h })
+  png.data.fill(255)
+  for (const r of rects) {
+    for (let y = r.y; y < r.y + r.h; y++) {
+      for (let x = r.x; x < r.x + r.w; x++) {
+        const i = (y * w + x) * 4
+        png.data[i] = 0
+        png.data[i + 1] = 0
+        png.data[i + 2] = 0
+      }
+    }
+  }
+  return png
+}
+
+describe('matchesWhenShifted', () => {
+  // Big enough that a 1px move is unambiguous, and far enough from the edges to
+  // shift in any direction without clipping.
+  const box = [{ x: 6, y: 6, w: 8, h: 8 }]
+  const baseline = image(24, 24, box)
+  const matches = (actual: PNG, maxShift = 1) =>
+    matchesWhenShifted(baseline, actual, 0.1, maxShift)
+
+  it('matches an identical image', () => {
+    expect(matches(image(24, 24, box))).toBe(true)
+  })
+
+  it('matches a one-pixel horizontal shift in either direction', () => {
+    expect(matches(image(24, 24, [{ x: 7, y: 6, w: 8, h: 8 }]))).toBe(true)
+    expect(matches(image(24, 24, [{ x: 5, y: 6, w: 8, h: 8 }]))).toBe(true)
+  })
+
+  it('matches a one-pixel vertical shift', () => {
+    expect(matches(image(24, 24, [{ x: 6, y: 7, w: 8, h: 8 }]))).toBe(true)
+  })
+
+  it('matches a diagonal shift', () => {
+    expect(matches(image(24, 24, [{ x: 5, y: 7, w: 8, h: 8 }]))).toBe(true)
+  })
+
+  it('matches when the actual is a pixel taller but otherwise identical', () => {
+    expect(matches(image(24, 25, box))).toBe(true)
+  })
+
+  it('rejects a shift larger than the budget', () => {
+    expect(matches(image(24, 24, [{ x: 9, y: 6, w: 8, h: 8 }]))).toBe(false)
+  })
+
+  it('matches that larger shift once the budget allows it', () => {
+    expect(matches(image(24, 24, [{ x: 9, y: 6, w: 8, h: 8 }]), 3)).toBe(true)
+  })
+
+  it('rejects a real change that no shift can explain', () => {
+    const recolored = image(24, 24, box)
+    const i = (10 * 24 + 10) * 4
+    recolored.data[i] = 255
+    recolored.data[i + 1] = 0
+    recolored.data[i + 2] = 0
+    expect(matches(recolored)).toBe(false)
+  })
+
+  it('considers only the identity offset when maxShift is 0', () => {
+    const shifted = image(24, 24, [{ x: 7, y: 6, w: 8, h: 8 }])
+    expect(matches(shifted, 0)).toBe(false)
+    expect(matches(image(24, 24, box), 0)).toBe(true)
   })
 })
 
