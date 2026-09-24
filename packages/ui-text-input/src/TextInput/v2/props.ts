@@ -60,6 +60,11 @@ type TextInputOwnProps = {
   id?: string
 
   /**
+   * id for the label. If empty, it's auto generated
+   */
+  labelId?: string
+
+  /**
    * the selected value (must be accompanied by an `onChange` prop)
    */
   value?: string // TODO: controllable(PropTypes.string)
@@ -228,6 +233,7 @@ const allowedProps: AllowedPropKeys = [
   'renderLabel',
   'type',
   'id',
+  'labelId',
   'value',
   'defaultValue',
   'interaction',

@@ -72,7 +72,7 @@ class TextInput extends Component<TextInputProps> {
     super(props)
     this._defaultId = props.deterministicId!()
     this._messagesId = props.deterministicId!('TextInput-messages')
-    this._labelId = props.deterministicId!('TextInput-label')
+    this._labelId = props.labelId ?? props.deterministicId!('TextInput-label')
   }
 
   ref: Element | null = null
