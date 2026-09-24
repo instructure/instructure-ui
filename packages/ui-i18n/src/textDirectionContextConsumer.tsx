@@ -171,7 +171,6 @@ const textDirectionContextConsumer: TextDirectionContextConsumerType =
       TextDirectionContextConsumerForwardingRef.defaultProps =
         ComposedComponent.defaultProps
       TextDirectionContextConsumerForwardingRef.propTypes =
-        // eslint-disable-next-line react-js/forbid-foreign-prop-types
         ComposedComponent.propTypes
       TextDirectionContextConsumerForwardingRef.allowedProps =
         ComposedComponent.allowedProps
