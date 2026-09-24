@@ -27,8 +27,11 @@ import { Component } from 'react'
 import { withStyleNew, InstUISettingsProvider } from '@instructure/emotion'
 import { warn, error } from '@instructure/console'
 import { omitProps } from '@instructure/ui-react-utils'
-import { isValid, contrast as getContrast } from '@instructure/ui-color-utils'
-import conversions from '@instructure/ui-color-utils'
+import {
+  isValid,
+  contrast as getContrast,
+  colorToHex8
+} from '@instructure/ui-color-utils'
 import { TextInput } from '@instructure/ui-text-input/latest'
 import { Tooltip } from '@instructure/ui-tooltip/latest'
 import { Button, IconButton } from '@instructure/ui-buttons/latest'
@@ -546,7 +549,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
             `#${this.mixedColorWithStrippedAlpha}`,
             (newColor: string) => {
               this.setState({
-                mixedColor: conversions.colorToHex8(newColor).slice(1)
+                mixedColor: colorToHex8(newColor).slice(1)
               })
             },
             () => {
@@ -576,7 +579,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
             value={`#${this.state.mixedColor}`}
             onChange={(newColor: string) =>
               this.setState({
-                mixedColor: conversions.colorToHex8(newColor).slice(1)
+                mixedColor: colorToHex8(newColor).slice(1)
               })
             }
             withAlpha={this.props.colorMixerSettings.colorMixer.withAlpha}
