@@ -16,6 +16,7 @@ type: example
     rowSpacing="small"
     layout="inline"
     vAlign="middle"
+    margin="general.spaceMd 0"
   >
     <TextInput renderLabel="Favorite Breakfast Eatery"
       messages={[
@@ -149,6 +150,7 @@ type: embed
 | FormFieldGroup | colSpacing | `'none' \| 'small' \| 'medium' \| 'large'` | No | `'small'` |  |
 | FormFieldGroup | vAlign | `'top' \| 'middle' \| 'bottom'` | No | `'middle'` |  |
 | FormFieldGroup | startAt | `'small' \| 'medium' \| 'large' \| 'x-large' \| null` | No | - |  |
+| FormFieldGroup | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`. |
 | FormFieldGroup | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
 | FormFieldGroup | isGroup | `` | No | `true` |  |
 
