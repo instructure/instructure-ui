@@ -3,4 +3,5 @@
 **/__testfixtures__
 **/__examples__
 *.config.js
+*.config.cjs
 *.conf.js
