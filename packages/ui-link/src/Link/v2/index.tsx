@@ -25,7 +25,6 @@
 import { Children, Component } from 'react'
 
 import { View } from '@instructure/ui-view/latest'
-import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { isActiveElement, findFocusable } from '@instructure/ui-dom-utils'
 import {
   getElementType,
@@ -41,7 +40,7 @@ import { withStyleNew } from '@instructure/emotion'
 import generateStyle from './styles.js'
 
 import { allowedProps } from './props.js'
-import type { LinkProps, LinkState, LinkStyleProps } from './props'
+import type { LinkProps, LinkState } from './props'
 
 import type { ViewOwnProps } from '@instructure/ui-view/latest'
 
@@ -69,31 +68,11 @@ class Link extends Component<LinkProps, LinkState> {
   ref: Element | null = null
 
   componentDidMount() {
-    this.props.makeStyles?.(this.makeStyleProps())
+    this.props.makeStyles?.()
   }
 
   componentDidUpdate() {
-    this.props.makeStyles?.(this.makeStyleProps())
-  }
-
-  makeStyleProps = (): LinkStyleProps & {
-    variant?: LinkProps['variant']
-    size?: LinkProps['size']
-  } => {
-    const { variant, size: sizeProp } = this.props
-
-    let size = sizeProp
-
-    if ((variant === 'inline' || variant === 'standalone') && !sizeProp) {
-      size = 'medium'
-    }
-
-    return {
-      containsTruncateText: this.containsTruncateText,
-      hasVisibleChildren: this.hasVisibleChildren,
-      variant,
-      size
-    }
+    this.props.makeStyles?.()
   }
 
   handleElementRef = (el: Element | null) => {
@@ -178,10 +157,6 @@ class Link extends Component<LinkProps, LinkState> {
 
   get focusable() {
     return findFocusable(this.ref)
-  }
-
-  get hasVisibleChildren() {
-    return hasVisibleChildren(this.props.children)
   }
 
   get role() {

@@ -124,6 +124,70 @@ describe('<BreadcrumbLink />', () => {
     expect(span).toMatchTextContent(TEST_TEXT_01)
   })
 
+  describe('truncation', () => {
+    const LONG_TEXT = 'A very long breadcrumb text that does not fit'
+
+    it('should truncate long text with CSS and keep the full text in the DOM', async () => {
+      const { container } = await render(
+        <div style={{ width: '6rem' }}>
+          <BreadcrumbLink href={TEST_LINK}>{LONG_TEXT}</BreadcrumbLink>
+        </div>
+      )
+      const link = page.getByRole('link').element()
+      const text = container.querySelector('a > span')!
+
+      expect(link).toMatchTextContent(LONG_TEXT)
+      expect(text).toHaveStyle('white-space: nowrap')
+      expect(text).toHaveStyle('text-overflow: ellipsis')
+      expect(text.scrollWidth).toBeGreaterThan(text.clientWidth)
+    })
+
+    it('should truncate long text next to an icon', async () => {
+      const { container } = await render(
+        <div style={{ width: '6rem' }}>
+          <BreadcrumbLink
+            href={TEST_LINK}
+            renderIcon={<svg data-testid="icon" width="16" height="16" />}
+          >
+            {LONG_TEXT}
+          </BreadcrumbLink>
+        </div>
+      )
+      const link = page.getByRole('link').element()
+      const text = container.querySelector('a > span:last-child')!
+      const icon = page.getByTestId('icon').element()
+
+      expect(text).toMatchTextContent(LONG_TEXT)
+      expect(text.scrollWidth).toBeGreaterThan(text.clientWidth)
+      expect(link.getBoundingClientRect().height).toBeLessThan(
+        icon.getBoundingClientRect().height * 2
+      )
+    })
+
+    it('should show the full text in a tooltip only when truncated', async () => {
+      await render(
+        <div>
+          <div style={{ width: '6rem' }}>
+            <BreadcrumbLink href={TEST_LINK}>{LONG_TEXT}</BreadcrumbLink>
+          </div>
+          <BreadcrumbLink href={TEST_LINK}>{TEST_TEXT_01}</BreadcrumbLink>
+        </div>
+      )
+      const [truncatedLink, shortLink] = page.getByRole('link').all()
+
+      await userEvent.hover(truncatedLink)
+      await expect
+        .element(page.getByRole('tooltip'))
+        .toMatchTextContent(LONG_TEXT)
+
+      await userEvent.unhover(truncatedLink)
+      await expect.element(page.getByRole('tooltip')).not.toBeInTheDocument()
+
+      await userEvent.hover(shortLink)
+      await expect.element(page.getByRole('tooltip')).not.toBeInTheDocument()
+    })
+  })
+
   it('should meet a11y standards as a link', async () => {
     const { container } = await render(
       <BreadcrumbLink href={TEST_LINK}>{TEST_TEXT_01}</BreadcrumbLink>

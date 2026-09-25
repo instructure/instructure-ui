@@ -23,9 +23,9 @@
  */
 
 import {
-  Component,
+  forwardRef,
+  useContext,
   Children,
-  ContextType,
   isValidElement,
   type ReactElement
 } from 'react'
@@ -33,7 +33,7 @@ import {
 import { omitProps, safeCloneElement } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view/latest'
 
-import { withStyleNew } from '@instructure/emotion'
+import { useStyleNew } from '@instructure/emotion'
 
 import generateStyle from './styles.js'
 
@@ -47,60 +47,52 @@ parent: Table
 id: Table.Row
 ---
 **/
-@withStyleNew(generateStyle)
-class Row extends Component<TableRowProps> {
-  static displayName = 'Row'
-  static readonly componentId = 'Table.Row'
-  static contextType = TableContext
-  declare context: ContextType<typeof TableContext>
-  static allowedProps = allowedProps
+const Row = forwardRef<HTMLElement, TableRowProps>((props, ref) => {
+  const { children, setHoverStateTo, themeOverride } = props
+  const { isStacked, hover, headers } = useContext(TableContext)
 
-  static defaultProps = {
-    children: null
+  const styles = useStyleNew({
+    generateStyle,
+    themeOverride,
+    params: { isStacked, hover, setHoverStateTo },
+    componentId: 'TableRow',
+    displayName: 'Row'
+  })
+
+  const handleElementRef = (el: HTMLElement | null) => {
+    if (typeof ref === 'function') {
+      ref(el)
+    } else if (ref) {
+      const refObject = ref as React.MutableRefObject<HTMLElement | null>
+      refObject.current = el
+    }
   }
 
-  componentDidMount() {
-    this.props.makeStyles?.({
-      isStacked: this.context.isStacked,
-      hover: this.context.hover
-    })
-  }
+  return (
+    <View
+      {...View.omitViewProps(omitProps(props, allowedProps), Row)}
+      as={isStacked ? 'div' : 'tr'}
+      css={styles?.row}
+      role={isStacked ? 'row' : undefined}
+      elementRef={handleElementRef}
+    >
+      {Children.toArray(children)
+        .filter(Boolean)
+        .map((child, index) => {
+          if (isValidElement(child)) {
+            return safeCloneElement(child, {
+              key: (child as ReactElement<any>).props.name,
+              // used by `Cell` to render its column title in `stacked` layout
+              header: headers && headers[index]
+            })
+          }
+          return child
+        })}
+    </View>
+  )
+})
 
-  componentDidUpdate() {
-    this.props.makeStyles?.({
-      isStacked: this.context.isStacked,
-      hover: this.context.hover
-    })
-  }
-
-  render() {
-    const { children, styles } = this.props
-    const isStacked = this.context.isStacked
-    const headers = this.context.headers
-
-    return (
-      <View
-        {...View.omitViewProps(omitProps(this.props, Row.allowedProps), Row)}
-        as={isStacked ? 'div' : 'tr'}
-        css={styles?.row}
-        role={isStacked ? 'row' : undefined}
-      >
-        {Children.toArray(children)
-          .filter(Boolean)
-          .map((child, index) => {
-            if (isValidElement(child)) {
-              return safeCloneElement(child, {
-                key: (child as ReactElement<any>).props.name,
-                // used by `Cell` to render its column title in `stacked` layout
-                header: headers && headers[index]
-              })
-            }
-            return child
-          })}
-      </View>
-    )
-  }
-}
+Row.displayName = 'Row'
 
 export default Row
 export { Row }
