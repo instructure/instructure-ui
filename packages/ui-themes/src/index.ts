@@ -63,6 +63,9 @@ import type {
   Light
 } from './themes/newThemeTokens'
 
+import { frozenThemesDesignTokensV1 } from './themes/frozenThemes'
+import type { DesignTokensV1ComponentTypes } from './themes/frozenThemes'
+
 type ThemeMap = {
   canvas: CanvasTheme
   'canvas-high-contrast': CanvasHighContrastTheme
@@ -72,9 +75,32 @@ type ThemeMap = {
 
 type ThemeKeys = keyof ThemeMap
 
-// converts `AA: (semantics: any) => AA` to `AA: AA`
+type KeysOfUnion<T> = T extends unknown ? keyof T : never
+
+type ExclusiveUnion<T, All = T> = T extends unknown
+  ? T & { [K in Exclude<KeysOfUnion<All>, keyof T>]?: never }
+  : never
+
+type FrozenComponentValuesV1 = {
+  Alert: ReturnType<DesignTokensV1ComponentTypes['Alert']>
+  Pill: ReturnType<DesignTokensV1ComponentTypes['Pill']>
+}
+
+/**
+ * Every frozen token-shape map. Register a new frozen version by adding it to
+ * this union — nothing below needs to change.
+ */
+type FrozenComponentValues = FrozenComponentValuesV1
+
+type FrozenValueFor<
+  K extends PropertyKey,
+  Maps = FrozenComponentValues
+> = Maps extends Record<K, unknown> ? Maps[K] : never
+
 type NewComponentsAsValue = {
-  [K in keyof NewComponentTypes]: ReturnType<NewComponentTypes[K]>
+  [K in keyof NewComponentTypes]: K extends KeysOfUnion<FrozenComponentValues>
+    ? ExclusiveUnion<ReturnType<NewComponentTypes[K]> | FrozenValueFor<K>>
+    : ReturnType<NewComponentTypes[K]>
 }
 
 type NewThemeOverrideObject = {
@@ -105,7 +131,8 @@ export {
   primitives,
   additionalPrimitives,
   dataVisualization,
-  boxShadowObjectsToCSSString
+  boxShadowObjectsToCSSString,
+  frozenThemesDesignTokensV1
 }
 export default canvas
 export type {
@@ -128,6 +155,7 @@ export type {
   Dark,
   Light,
   NewComponentTypes,
+  DesignTokensV1ComponentTypes,
   NewBaseTheme,
   NewThemeOverrideObject,
   TokenBoxshadowValueInst,

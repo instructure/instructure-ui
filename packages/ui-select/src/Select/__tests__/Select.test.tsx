@@ -27,6 +27,10 @@ import { render } from 'vitest-browser-react'
 import { page, userEvent } from 'vitest/browser'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import type { MockInstance } from 'vitest'
+
+import { color2hex } from '@instructure/ui-color-utils'
+import canvas from '@instructure/ui-themes'
+
 import { Select } from '@instructure/ui-select/latest'
 import {
   CheckInstUIIcon,
@@ -1396,6 +1400,9 @@ describe('<Select />', () => {
     })
 
     it('should render dynamically colored icons before option', async () => {
+      const iconTheme = canvas.newTheme.components.Icon(
+        canvas.newTheme.semantics(canvas.newTheme.primitives)
+      )
       const renderBeforeLabel = (props: any) => {
         return (
           <CheckInstUIIcon
@@ -1425,12 +1432,12 @@ describe('<Select />', () => {
         'ul[role="listbox"] li [role="presentation"] svg'
       )
       // the icons colour themselves via `stroke`, not `fill`
-      const iconStyles = Array.from(icons).map(
-        (icon) => window.getComputedStyle(icon).stroke
+      const iconStyles = Array.from(icons).map((icon) =>
+        color2hex(window.getComputedStyle(icon).stroke)
       )
 
-      expect(iconStyles[0]).toBe('rgb(207, 74, 0)')
-      expect(iconStyles[1]).toBe('rgb(43, 122, 188)')
+      expect(iconStyles[0]).toBe(iconTheme.warningColor)
+      expect(iconStyles[1]).toBe(iconTheme.infoColor)
     })
 
     it('should set maxHeight according to the visibleOptionsCount prop', async () => {
