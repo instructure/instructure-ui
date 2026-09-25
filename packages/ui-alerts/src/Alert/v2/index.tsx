@@ -49,6 +49,7 @@ import generateStyle from './styles.js'
 
 import { allowedProps } from './props.js'
 import type { AlertProps, AlertState } from './props'
+import frozenThemes from './frozenThemes/index.js'
 
 /**
 ---
@@ -56,7 +57,7 @@ category: components
 ---
 **/
 @withDeterministicId()
-@withStyleNew(generateStyle)
+@withStyleNew(generateStyle, null, frozenThemes)
 class Alert extends Component<AlertProps, AlertState> {
   static displayName = 'Alert'
   static readonly componentId = 'Alert'

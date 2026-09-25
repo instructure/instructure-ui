@@ -38,6 +38,7 @@ import generateAllTokens from '../build/generate-all-tokens.ts'
 import buildIcons from '../icons/build-icons.ts'
 import buildThemes from '../build/build-themes.ts'
 import createComponentVersion from './create-component-version.ts'
+import buildFrozenThemes from './build-frozen-themes.ts'
 
 export const yargCommands = [
   bump,
@@ -55,5 +56,6 @@ export const yargCommands = [
   generateAllTokens,
   buildIcons,
   buildThemes,
-  createComponentVersion
+  createComponentVersion,
+  buildFrozenThemes
 ]

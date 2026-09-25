@@ -135,6 +135,17 @@ const withStyleNew = decorator(
     const rawComponentId: keyof NewComponentTypes =
       ComposedComponent.componentId?.replace('.', '')
 
+    // a frozen theme snapshots the tokens of the components in one component version's folder, so there is nothing
+    // in it for a component whose tokens live elsewhere. Freezing is not implemented for that case, and silently
+    // falling back would resolve the borrowed tokens against the live theme, which is the drift freezing prevents
+    if (frozenTheme && useTokensFrom) {
+      throw new Error(
+        `${displayName} cannot borrow "${useTokensFrom}" tokens through "useTokensFrom" while it has a frozen theme, ` +
+          `because "useTokensFrom" is not supported with frozen themes yet. Freeze the tokens ${displayName} needs ` +
+          `into its own frozen theme instead.`
+      )
+    }
+
     const componentId: keyof NewComponentTypes = useTokensFrom ?? rawComponentId
 
     const WithStyle: ForwardRefExoticComponent<
