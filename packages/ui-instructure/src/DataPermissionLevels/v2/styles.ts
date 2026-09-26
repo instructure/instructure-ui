@@ -87,6 +87,7 @@ const generateStyle = (
       color: componentTheme?.levelColor
     },
     currentFeature: {
+      all: 'unset',
       label: 'data-permission-levels__current-feature',
       background: `
         linear-gradient(to right, ${componentTheme.aiTextLeftGradientColor} 0%, ${componentTheme.aiTextRightGradientColor} 100%)`,
