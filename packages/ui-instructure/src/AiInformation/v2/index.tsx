@@ -77,7 +77,7 @@ const AiInformation = ({
         renderTrigger={trigger}
         isShowingContent={open}
         on="click"
-        screenReaderLabel="Popover Dialog Example"
+        screenReaderLabel={title}
         shouldContainFocus
         shouldReturnFocus
         shouldCloseOnDocumentClick
@@ -104,6 +104,7 @@ const AiInformation = ({
                   featureName,
                   privacyNoticeText,
                   privacyNoticeUrl,
+                  privacyNoticeScreenReaderLabel,
                   permissionLevelText,
                   permissionLevel,
                   description,
@@ -118,6 +119,7 @@ const AiInformation = ({
                   <div css={styles?.privacyNotice}>
                     <Link
                       href={privacyNoticeUrl}
+                      aria-label={privacyNoticeScreenReaderLabel}
                       renderIcon={<ExternalLinkInstUIIcon size="sm" />}
                       iconPlacement="end"
                       variant="standalone"

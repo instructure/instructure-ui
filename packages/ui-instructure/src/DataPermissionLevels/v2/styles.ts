@@ -98,6 +98,7 @@ const generateStyle = (
       borderTopRightRadius: componentTheme?.cardBorderRadius
     },
     contentContainer: {
+      all: 'unset',
       label: 'data-permission-levels__content-container',
       background: componentTheme?.contentContainerColor,
       borderBottomLeftRadius: componentTheme?.contentContainerBorderRadius,
