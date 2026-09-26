@@ -111,7 +111,7 @@ const DataPermissionLevels = ({
                   </div>
                 ) : null}
 
-                <div css={styles?.contentContainer}>
+                <h3 css={styles?.contentContainer}>
                   <div css={styles?.level}>{level}</div>
                   <div css={styles?.permissionTitle}>
                     <Text variant="descriptionPage">{title} </Text>
@@ -119,7 +119,7 @@ const DataPermissionLevels = ({
                   <Text variant="content" color="secondary">
                     {description}
                   </Text>
-                </div>
+                </h3>
               </div>
             ))}
           </div>
