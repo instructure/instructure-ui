@@ -40,6 +40,7 @@ type AiInformationOwnProps = {
     featureName: string
     privacyNoticeText: string
     privacyNoticeUrl: string
+    privacyNoticeScreenReaderLabel?: string
     permissionLevelText: string
     permissionLevel: string
     description: string

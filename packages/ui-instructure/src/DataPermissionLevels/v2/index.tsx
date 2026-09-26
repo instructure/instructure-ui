@@ -97,7 +97,7 @@ const DataPermissionLevels = ({
                 css={highlighted ? styles?.highlightedCard : styles?.card}
               >
                 {highlighted ? (
-                  <div css={styles?.currentFeature}>
+                  <h3 css={styles?.currentFeature}>
                     <Heading
                       color="primary-on"
                       level="reset"
@@ -108,14 +108,16 @@ const DataPermissionLevels = ({
                     <Text color="primary-on" variant="content">
                       {currentFeature}
                     </Text>
-                  </div>
+                  </h3>
                 ) : null}
 
                 <div css={styles?.contentContainer}>
-                  <div css={styles?.level}>{level}</div>
-                  <div css={styles?.permissionTitle}>
-                    <Text variant="descriptionPage">{title} </Text>
-                  </div>
+                  <h3 style={{ all: 'unset' }}>
+                    <div css={styles?.level}>{level}</div>
+                    <div css={styles?.permissionTitle}>
+                      <Text variant="descriptionPage">{title} </Text>
+                    </div>
+                  </h3>
                   <Text variant="content" color="secondary">
                     {description}
                   </Text>
