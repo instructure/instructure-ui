@@ -1,0 +1,116 @@
+{
+  "tabs": {
+    "defaultBackground": {
+      "value": "{semantic.color.transparentColor}",
+      "type": "color"
+    },
+    "scrollFadeColor": {
+      "value": "{semantic.color.background.base}",
+      "type": "color"
+    },
+    "scrollOverlayWidthDefault": {
+      "value": "5rem",
+      "type": "sizing"
+    },
+    "scrollOverlayWidthSecondary": {
+      "value": "3rem",
+      "type": "sizing"
+    },
+    "tabVerticalOffset": {
+      "value": "0.0625rem",
+      "type": "spacing"
+    },
+    "zIndex": {
+      "value": "1",
+      "type": "number"
+    }
+  },
+  "tabsPanel": {
+    "background": {
+      "value": "{semantic.color.transparentColor}",
+      "type": "color"
+    },
+    "borderColor": {
+      "value": "{semantic.color.stroke.base}",
+      "type": "color"
+    },
+    "textColor": {
+      "value": "{semantic.color.institutional.brandFontColorDark}",
+      "type": "color"
+    },
+    "borderWidth": {
+      "value": "{semantic.borderWidth.sm}",
+      "type": "borderWidth"
+    },
+    "defaultOverflowY": {
+      "value": "auto",
+      "type": "text"
+    },
+    "fontFamily": {
+      "value": "{semantic.fontFamily.base}",
+      "type": "fontFamilies"
+    },
+    "fontSize": {
+      "value": "{semantic.fontSize.textBase}",
+      "type": "fontSizes"
+    },
+    "fontWeight": {
+      "value": "{semantic.fontWeight.body.base}",
+      "type": "fontWeights"
+    },
+    "lineHeight": {
+      "value": "{semantic.lineHeight.paragraph.base}",
+      "type": "lineHeights"
+    }
+  },
+  "tabsTab": {
+    "defaultTextColor": {
+      "value": "{semantic.color.institutional.brandFontColorDark}",
+      "type": "color"
+    },
+    "defaultHoverBorderColor": {
+      "value": "{semantic.color.stroke.base}",
+      "type": "color"
+    },
+    "defaultSelectedBorderColor": {
+      "value": "{semantic.color.institutional.brandPrimary}",
+      "type": "color"
+    },
+    "fontFamily": {
+      "value": "{semantic.fontFamily.base}",
+      "type": "fontFamilies"
+    },
+    "fontSize": {
+      "value": "{semantic.fontSize.textBase}",
+      "type": "fontSizes"
+    },
+    "fontWeight": {
+      "value": "{semantic.fontWeight.body.base}",
+      "type": "fontWeights"
+    },
+    "lineHeight": {
+      "value": "{semantic.lineHeight.standalone.base}",
+      "type": "lineHeights"
+    },
+    "secondaryTextColor": {
+      "value": "{semantic.color.institutional.brandFontColorDark}",
+      "type": "color"
+    },
+    "secondarySelectedTextColor": {
+      "value": "{semantic.color.text.inverse}",
+      "type": "color"
+    },
+    "secondarySelectedBackground": {
+      "value": "{semantic.color.background.brand}",
+      "type": "color"
+    },
+    "secondarySelectedBorderColor": {
+      "value": "{semantic.color.stroke.brand}",
+      "type": "color"
+    },
+    "zIndex": {
+      "value": "1",
+      "type": "number"
+    }
+  }
+}

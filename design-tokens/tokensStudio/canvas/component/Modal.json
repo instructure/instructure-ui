@@ -1,0 +1,160 @@
+{
+  "modal": {
+    "autoMinWidth": {
+      "value": "16em",
+      "type": "sizing"
+    },
+    "backgroundColor": {
+      "value": "{semantic.color.background.container}",
+      "type": "color"
+    },
+    "borderColor": {
+      "value": "{semantic.color.stroke.container.base}",
+      "type": "color"
+    },
+    "inverseBackgroundColor": {
+      "value": "{semantic.color.background.dark}",
+      "type": "color"
+    },
+    "borderRadius": {
+      "value": "{semantic.borderRadius.xl}",
+      "type": "borderRadius"
+    },
+    "fontFamily": {
+      "value": "{semantic.fontFamily.base}",
+      "type": "fontFamilies"
+    },
+    "inverseBorderColor": {
+      "value": "{semantic.color.stroke.container.dark}",
+      "type": "color"
+    },
+    "textColor": {
+      "value": "{semantic.color.text.base}",
+      "type": "color"
+    },
+    "inverseTextColor": {
+      "value": "{semantic.color.text.onColor}",
+      "type": "color"
+    },
+    "largeMaxWidth": {
+      "value": "62em",
+      "type": "sizing"
+    },
+    "mediumMaxWidth": {
+      "value": "48em",
+      "type": "sizing"
+    },
+    "smallMaxWidth": {
+      "value": "30em",
+      "type": "sizing"
+    },
+    "boxShadow": {
+      "value": [
+        {
+          "x": "{semantic.dropShadow.x.elevation4.dropshadow1}",
+          "y": "{semantic.dropShadow.y.elevation4.dropshadow1}",
+          "blur": "{semantic.dropShadow.blur.elevation4.dropshadow1}",
+          "spread": "{semantic.dropShadow.spread.elevation4.dropshadow1}",
+          "color": "{semantic.color.dropShadow.shadowColor2}",
+          "type": "dropShadow"
+        },
+        {
+          "x": "{semantic.dropShadow.x.elevation4.dropshadow2}",
+          "y": "{semantic.dropShadow.y.elevation4.dropshadow2}",
+          "blur": "{semantic.dropShadow.blur.elevation4.dropshadow2}",
+          "spread": "{semantic.dropShadow.spread.elevation4.dropshadow2}",
+          "color": "{semantic.color.dropShadow.shadowColor1}",
+          "type": "dropShadow"
+        }
+      ],
+      "type": "boxShadow",
+      "description": "Do not use this for other components"
+    },
+    "borderWidth": {
+      "value": "{semantic.borderWidth.sm}",
+      "type": "borderWidth"
+    },
+    "fullScreenMargin": {
+      "value": "40px",
+      "type": "spacing"
+    }
+  },
+  "modalHeader": {
+    "backgroundColor": {
+      "value": "{semantic.color.background.container}",
+      "type": "color"
+    },
+    "borderColor": {
+      "value": "{semantic.color.stroke.container.base}",
+      "type": "color"
+    },
+    "inverseBackgroundColor": {
+      "value": "{semantic.color.background.dark}",
+      "type": "color"
+    },
+    "inverseBorderColor": {
+      "value": "{semantic.color.stroke.container.dark}",
+      "type": "color"
+    },
+    "padding": {
+      "value": "{semantic.spacing.padding.container.md}",
+      "type": "spacing"
+    },
+    "paddingCompact": {
+      "value": "{semantic.spacing.padding.container.xs}",
+      "type": "spacing"
+    },
+    "borderWidth": {
+      "value": "{semantic.borderWidth.sm}",
+      "type": "borderWidth"
+    }
+  },
+  "modalFooter": {
+    "borderColor": {
+      "value": "{semantic.color.stroke.container.base}",
+      "type": "color"
+    },
+    "borderRadius": {
+      "value": "{semantic.borderRadius.xl}",
+      "type": "borderRadius"
+    },
+    "inverseBorderColor": {
+      "value": "{semantic.color.stroke.container.dark}",
+      "type": "color"
+    },
+    "borderWidth": {
+      "value": "{semantic.borderWidth.sm}",
+      "type": "borderWidth"
+    },
+    "backgroundColor": {
+      "value": "{semantic.color.background.muted}",
+      "type": "color"
+    },
+    "inverseBackgroundColor": {
+      "value": "{semantic.color.background.dark}",
+      "type": "color"
+    },
+    "padding": {
+      "value": "{semantic.spacing.padding.container.md}",
+      "type": "spacing"
+    },
+    "paddingCompact": {
+      "value": "{semantic.spacing.padding.container.xs}",
+      "type": "spacing"
+    }
+  },
+  "modalBody": {
+    "inverseBackgroundColor": {
+      "value": "{semantic.color.background.dark}",
+      "type": "color"
+    },
+    "padding": {
+      "value": "{semantic.spacing.padding.container.md}",
+      "type": "spacing"
+    },
+    "paddingCompact": {
+      "value": "{semantic.spacing.padding.container.xs}",
+      "type": "spacing"
+    }
+  }
+}

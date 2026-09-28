@@ -1,0 +1,116 @@
+{
+  "link": {
+    "textColor": {
+      "value": "{semantic.color.institutional.linkColor}",
+      "type": "color"
+    },
+    "textHoverColor": {
+      "value": "{semantic.color.text.interactive.navigation.primary.hover}",
+      "type": "color"
+    },
+    "textDisabledColor": {
+      "value": "{semantic.color.text.interactive.disabled.base}",
+      "type": "color"
+    },
+    "onColorTextColor": {
+      "value": "{semantic.color.text.interactive.navigation.primaryOnColor.base}",
+      "type": "color"
+    },
+    "onColorTextHoverColor": {
+      "value": "{semantic.color.text.interactive.navigation.primaryOnColor.hover}",
+      "type": "color"
+    },
+    "onColorTextDisabledColor": {
+      "value": "{semantic.color.text.interactive.disabled.onColor}",
+      "type": "color"
+    },
+    "fontSizeSm": {
+      "value": "{semantic.fontSize.textSm}",
+      "type": "fontSizes"
+    },
+    "fontSizeMd": {
+      "value": "{semantic.fontSize.textBase}",
+      "type": "fontSizes"
+    },
+    "fontSizeLg": {
+      "value": "22px",
+      "type": "fontSizes"
+    },
+    "fontWeight": {
+      "value": "{semantic.fontWeight.interactive}",
+      "type": "fontWeights"
+    },
+    "gapSm": {
+      "value": "{semantic.spacing.space2xs}",
+      "type": "spacing"
+    },
+    "gapMd": {
+      "value": "{semantic.spacing.spaceXs}",
+      "type": "spacing"
+    },
+    "gapLg": {
+      "value": "{semantic.spacing.spaceXs}",
+      "type": "spacing"
+    },
+    "lineHeightSm": {
+      "value": "{semantic.lineHeight.standalone.textSm}",
+      "type": "lineHeights"
+    },
+    "lineHeightMd": {
+      "value": "{semantic.lineHeight.standalone.textBase}",
+      "type": "lineHeights"
+    },
+    "lineHeightLg": {
+      "value": "33px",
+      "type": "lineHeights"
+    },
+    "fontFamily": {
+      "value": "{semantic.fontFamily.base}",
+      "type": "fontFamilies"
+    },
+    "inlineLink": {
+      "small": {
+        "value": {
+          "fontFamily": "{semantic.fontFamily.base}",
+          "fontWeight": "{semantic.fontWeight.body.base}",
+          "fontSize": "{semantic.fontSize.textSm}",
+          "lineHeight": "{semantic.lineHeight.paragraph.textSm}",
+          "textDecoration": "underline"
+        },
+        "type": "typography"
+      },
+      "medium": {
+        "value": {
+          "fontFamily": "{semantic.fontFamily.base}",
+          "fontWeight": "{semantic.fontWeight.body.base}",
+          "fontSize": "{semantic.fontSize.textBase}",
+          "lineHeight": "{semantic.lineHeight.paragraph.textBase}",
+          "textDecoration": "underline"
+        },
+        "type": "typography"
+      },
+      "large": {
+        "value": {
+          "fontFamily": "{semantic.fontFamily.base}",
+          "fontWeight": "{semantic.fontWeight.body.base}",
+          "fontSize": "22px",
+          "lineHeight": "33px",
+          "textDecoration": "underline"
+        },
+        "type": "typography"
+      }
+    },
+    "textDecorationWithinText": {
+      "value": "underline",
+      "type": "textDecoration"
+    },
+    "textDecorationOutsideText": {
+      "value": "none",
+      "type": "textDecoration"
+    },
+    "unstyledTextColor": {
+      "value": "{semantic.color.text.base}",
+      "type": "color"
+    }
+  }
+}

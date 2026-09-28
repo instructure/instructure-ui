@@ -1,0 +1,36 @@
+{
+  "nutritionFacts": {
+    "borderRadius": {
+      "value": "{semantic.borderRadius.md}",
+      "type": "borderRadius"
+    },
+    "cardBorderColor": {
+      "value": "{semantic.color.stroke.muted}",
+      "type": "color"
+    },
+    "cardBorderWidth": {
+      "value": "{semantic.borderWidth.sm}",
+      "type": "borderWidth"
+    },
+    "cardPadding": {
+      "value": "{semantic.spacing.gap.cards.sm}",
+      "type": "spacing"
+    },
+    "cardExplainerContainerBottomMargin": {
+      "value": "{semantic.spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "cardGap": {
+      "value": "{semantic.spacing.spaceXl}",
+      "type": "spacing"
+    },
+    "bodyPadding": {
+      "value": "{semantic.spacing.padding.container.md}",
+      "type": "spacing"
+    },
+    "blockGap": {
+      "value": "{semantic.spacing.gap.cards.md}",
+      "type": "spacing"
+    }
+  }
+}

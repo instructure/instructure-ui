@@ -1,0 +1,112 @@
+{
+  "banner": {
+    "plumBackground": {
+      "value": "{semantic.color.background.accentMuted.plum}",
+      "type": "color"
+    },
+    "skyBackground": {
+      "value": "{semantic.color.background.accentMuted.sky}",
+      "type": "color"
+    },
+    "plumIconBackground": {
+      "value": "{semantic.color.background.accent.plum}",
+      "type": "color"
+    },
+    "skyIconBackground": {
+      "value": "{semantic.color.background.accent.sky}",
+      "type": "color"
+    },
+    "iconColor": {
+      "value": "{semantic.color.icon.onColor}",
+      "type": "color"
+    },
+    "color": {
+      "value": "{semantic.color.text.base}",
+      "type": "color"
+    },
+    "titleColor": {
+      "value": "{semantic.color.text.base}",
+      "type": "color"
+    },
+    "borderRadius": {
+      "value": "{semantic.borderRadius.xl}",
+      "type": "borderRadius"
+    },
+    "iconContainerBorderRadius": {
+      "value": "{semantic.borderRadius.lg}",
+      "type": "borderRadius"
+    },
+    "borderWidth": {
+      "value": "{semantic.borderWidth.sm}",
+      "type": "borderWidth"
+    },
+    "borderStyle": {
+      "value": "solid",
+      "type": "other"
+    },
+    "borderColor": {
+      "value": "{semantic.color.stroke.muted}",
+      "type": "color"
+    },
+    "paddingVertical": {
+      "value": "{semantic.spacing.spaceMd}",
+      "type": "spacing"
+    },
+    "paddingHorizontal": {
+      "value": "{semantic.spacing.spaceLg}",
+      "type": "spacing"
+    },
+    "iconGap": {
+      "value": "{semantic.spacing.spaceMd}",
+      "type": "spacing"
+    },
+    "stackGap": {
+      "value": "{semantic.spacing.spaceXs}",
+      "type": "spacing"
+    },
+    "actionGap": {
+      "value": "{semantic.spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "closeButtonMarginTop": {
+      "value": "{semantic.spacing.spaceXs}",
+      "type": "spacing"
+    },
+    "closeButtonMarginEnd": {
+      "value": "{semantic.spacing.spaceXs}",
+      "type": "spacing"
+    },
+    "titleFontFamily": {
+      "value": "{semantic.fontFamily.heading}",
+      "type": "fontFamilies"
+    },
+    "titleFontSize": {
+      "value": "{semantic.fontSize.textBase}",
+      "type": "fontSizes"
+    },
+    "titleFontWeight": {
+      "value": "{semantic.fontWeight.heading.base}",
+      "type": "fontWeights"
+    },
+    "titleLineHeight": {
+      "value": "{semantic.lineHeight.heading.base}",
+      "type": "lineHeights"
+    },
+    "contentFontFamily": {
+      "value": "{semantic.fontFamily.base}",
+      "type": "fontFamilies"
+    },
+    "contentFontSize": {
+      "value": "{semantic.fontSize.textBase}",
+      "type": "fontSizes"
+    },
+    "contentFontWeight": {
+      "value": "{semantic.fontWeight.body.base}",
+      "type": "fontWeights"
+    },
+    "contentLineHeight": {
+      "value": "{semantic.lineHeight.standalone.base}",
+      "type": "lineHeights"
+    }
+  }
+}

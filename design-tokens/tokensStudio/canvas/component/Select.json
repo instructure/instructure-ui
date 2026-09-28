@@ -1,0 +1,8 @@
+{
+  "select": {
+    "popoverBorderWidth": {
+      "value": "{semantic.borderWidth.sm}",
+      "type": "borderWidth"
+    }
+  }
+}

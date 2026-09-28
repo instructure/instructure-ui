@@ -1,0 +1,164 @@
+{
+  "avatar": {
+    "backgroundColor": {
+      "value": "{semantic.color.background.base}",
+      "type": "color"
+    },
+    "borderColor": {
+      "value": "{semantic.color.stroke.base}",
+      "type": "color"
+    },
+    "borderWidthSm": {
+      "value": "{semantic.borderWidth.sm}",
+      "type": "borderWidth"
+    },
+    "borderWidthMd": {
+      "value": "{semantic.borderWidth.md}",
+      "type": "borderWidth"
+    },
+    "boxShadow": {
+      "value": {
+        "x": "0",
+        "y": "0",
+        "blur": "1rem",
+        "spread": "0",
+        "color": "rgba(45,59,69,0.12)",
+        "type": "innerShadow"
+      },
+      "type": "boxShadow",
+      "color": {
+        "value": "rgba(45,59,69,0.12)",
+        "type": "color"
+      },
+      "description": "Do not use this for other components"
+    },
+    "fontWeight": {
+      "value": "{semantic.fontWeight.heading.base}",
+      "type": "fontWeights"
+    },
+    "blueBackgroundColor": {
+      "value": "{semantic.color.background.accent.blue}",
+      "type": "color"
+    },
+    "blueTextColor": {
+      "value": "{semantic.color.text.accent.blue}",
+      "type": "color"
+    },
+    "greenBackgroundColor": {
+      "value": "{semantic.color.background.accent.green}",
+      "type": "color"
+    },
+    "greenTextColor": {
+      "value": "{semantic.color.text.accent.green}",
+      "type": "color"
+    },
+    "redBackgroundColor": {
+      "value": "{semantic.color.background.accent.red}",
+      "type": "color"
+    },
+    "redTextColor": {
+      "value": "{semantic.color.text.accent.red}",
+      "type": "color"
+    },
+    "orangeBackgroundColor": {
+      "value": "{semantic.color.background.accent.orange}",
+      "type": "color"
+    },
+    "orangeTextColor": {
+      "value": "{semantic.color.text.accent.orange}",
+      "type": "color"
+    },
+    "greyBackgroundColor": {
+      "value": "{semantic.color.background.accent.grey}",
+      "type": "color"
+    },
+    "greyTextColor": {
+      "value": "{semantic.color.text.accent.grey}",
+      "type": "color"
+    },
+    "ashBackgroundColor": {
+      "value": "{semantic.color.background.accent.ash}",
+      "type": "color"
+    },
+    "ashTextColor": {
+      "value": "{semantic.color.text.accent.ash}",
+      "type": "color"
+    },
+    "aiBottomGradientColor": {
+      "value": "{semantic.color.background.aiBottomGradient}",
+      "type": "color"
+    },
+    "aiTopGradientColor": {
+      "value": "{semantic.color.background.aiTopGradient}",
+      "type": "color"
+    },
+    "textOnColor": {
+      "value": "{semantic.color.text.onColor}",
+      "type": "color"
+    },
+    "size2xs": {
+      "value": "1.5rem",
+      "type": "sizing"
+    },
+    "sizeXs": {
+      "value": "2rem",
+      "type": "sizing"
+    },
+    "sizeSm": {
+      "value": "2.5rem",
+      "type": "sizing"
+    },
+    "sizeMd": {
+      "value": "3rem",
+      "type": "sizing"
+    },
+    "sizeLg": {
+      "value": "3.5rem",
+      "type": "sizing"
+    },
+    "sizeXl": {
+      "value": "4rem",
+      "type": "sizing"
+    },
+    "size2xl": {
+      "value": "5rem",
+      "type": "sizing"
+    },
+    "fontSize2xs": {
+      "value": "{semantic.fontSize.textXs}",
+      "type": "fontSizes"
+    },
+    "fontSizeXs": {
+      "value": "{semantic.fontSize.textXs}",
+      "type": "fontSizes"
+    },
+    "fontSizeSm": {
+      "value": "{semantic.fontSize.textSm}",
+      "type": "fontSizes"
+    },
+    "fontSizeMd": {
+      "value": "{semantic.fontSize.textBase}",
+      "type": "fontSizes"
+    },
+    "fontSizeLg": {
+      "value": "{semantic.fontSize.textLg}",
+      "type": "fontSizes"
+    },
+    "fontSizeXl": {
+      "value": "{semantic.fontSize.textXl}",
+      "type": "fontSizes"
+    },
+    "fontSize2xl": {
+      "value": "{semantic.fontSize.text2xl}",
+      "type": "fontSizes"
+    },
+    "fontFamily": {
+      "value": "{semantic.fontFamily.base}",
+      "type": "fontFamilies"
+    },
+    "rectangleRadius": {
+      "value": "{semantic.borderRadius.sm}",
+      "type": "borderRadius"
+    }
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "badge": {
+    "borderRadius": {
+      "value": "{semantic.borderRadius.full}",
+      "type": "borderRadius"
+    },
+    "fontFamily": {
+      "value": "{semantic.fontFamily.base}",
+      "type": "fontFamilies"
+    },
+    "color": {
+      "value": "{semantic.color.text.onColor}",
+      "type": "color"
+    },
+    "colorInverse": {
+      "value": "{semantic.color.text.dark}",
+      "type": "color"
+    },
+    "colorDanger": {
+      "value": "{semantic.color.background.error}",
+      "type": "color"
+    },
+    "colorSuccess": {
+      "value": "{semantic.color.background.success}",
+      "type": "color"
+    },
+    "colorPrimary": {
+      "value": "{semantic.color.institutional.brandPrimary}",
+      "type": "color"
+    },
+    "fontSize": {
+      "value": "{semantic.fontSize.textXs}",
+      "type": "fontSizes"
+    },
+    "fontWeight": {
+      "value": "{semantic.fontWeight.body.strong}",
+      "type": "fontWeights"
+    },
+    "sizeNotification": {
+      "value": "0.75rem",
+      "type": "sizing"
+    },
+    "size": {
+      "value": "1rem",
+      "type": "sizing"
+    },
+    "padding": {
+      "value": "{semantic.spacing.spaceXs}",
+      "type": "spacing"
+    },
+    "notificationOffset": {
+      "value": "0.125rem",
+      "type": "other"
+    },
+    "notificationZIndex": {
+      "value": 1,
+      "type": "number"
+    },
+    "pulseBorderThickness": {
+      "value": "0.125rem",
+      "type": "other"
+    },
+    "countOffset": {
+      "value": "0.5rem",
+      "type": "other"
+    },
+    "primaryTextColor": {
+      "value": "{semantic.color.text.inverse}",
+      "type": "color"
+    }
+  }
+}

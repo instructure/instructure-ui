@@ -1,0 +1,12 @@
+{
+  "popover": {
+    "borderColor": {
+      "value": "{semantic.color.stroke.base}",
+      "type": "color"
+    },
+    "borderRadius": {
+      "value": "{semantic.borderRadius.lg}",
+      "type": "borderRadius"
+    }
+  }
+}

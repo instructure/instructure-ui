@@ -1,0 +1,226 @@
+{
+  "heading": {
+    "h1FontSize": {
+      "value": "{semantic.fontSize.text2xl}",
+      "type": "fontSizes"
+    },
+    "h2FontSize": {
+      "value": "{semantic.fontSize.textXl}",
+      "type": "fontSizes"
+    },
+    "h3FontSize": {
+      "value": "{semantic.fontSize.textLg}",
+      "type": "fontSizes"
+    },
+    "h4FontSize": {
+      "value": "{semantic.fontSize.textBase}",
+      "type": "fontSizes"
+    },
+    "h5FontSize": {
+      "value": "{semantic.fontSize.textSm}",
+      "type": "fontSizes"
+    },
+    "h6FontSize": {
+      "value": "{semantic.fontSize.textXs}",
+      "type": "fontSizes"
+    },
+    "h1FontWeight": {
+      "value": "{semantic.fontWeight.heading.strong}",
+      "type": "fontWeights"
+    },
+    "h2FontWeight": {
+      "value": "{semantic.fontWeight.heading.base}",
+      "type": "fontWeights"
+    },
+    "h3FontWeight": {
+      "value": "{semantic.fontWeight.heading.strong}",
+      "type": "fontWeights"
+    },
+    "h4FontWeight": {
+      "value": "{semantic.fontWeight.heading.strong}",
+      "type": "fontWeights"
+    },
+    "h5FontWeight": {
+      "value": "{semantic.fontWeight.heading.base}",
+      "type": "fontWeights"
+    },
+    "h6FontWeight": {
+      "value": "{semantic.fontWeight.heading.base}",
+      "type": "fontWeights"
+    },
+    "h1FontFamily": {
+      "value": "{semantic.fontFamily.heading}",
+      "type": "fontFamilies"
+    },
+    "h2FontFamily": {
+      "value": "{semantic.fontFamily.heading}",
+      "type": "fontFamilies"
+    },
+    "h3FontFamily": {
+      "value": "{semantic.fontFamily.heading}",
+      "type": "fontFamilies"
+    },
+    "h4FontFamily": {
+      "value": "{semantic.fontFamily.heading}",
+      "type": "fontFamilies"
+    },
+    "h5FontFamily": {
+      "value": "{semantic.fontFamily.heading}",
+      "type": "fontFamilies"
+    },
+    "h6FontFamily": {
+      "value": "{semantic.fontFamily.heading}",
+      "type": "fontFamilies"
+    },
+    "lineHeight": {
+      "value": "{semantic.lineHeight.heading.base}",
+      "type": "lineHeights"
+    },
+    "borderWidth": {
+      "value": "{semantic.borderWidth.sm}",
+      "type": "borderWidth"
+    },
+    "baseColor": {
+      "value": "{semantic.color.institutional.brandFontColorDark}",
+      "type": "color"
+    },
+    "baseOnColor": {
+      "value": "{semantic.color.text.onColor}",
+      "type": "color"
+    },
+    "mutedColor": {
+      "value": "{semantic.color.text.muted}",
+      "type": "color"
+    },
+    "mutedOnColor": {
+      "value": "{semantic.color.text.onColor}",
+      "type": "color"
+    },
+    "inverseColor": {
+      "value": "{semantic.color.text.inverse}",
+      "type": "color"
+    },
+    "aiTextTopGradientColor": {
+      "value": "{semantic.color.text.accent.violet}",
+      "type": "color"
+    },
+    "aiTextBottomGradientColor": {
+      "value": "{semantic.color.text.accent.sea}",
+      "type": "color"
+    },
+    "borderColor": {
+      "value": "{semantic.color.stroke.base}",
+      "type": "color"
+    },
+    "borderStyle": {
+      "value": "solid",
+      "type": "text"
+    },
+    "borderPadding": {
+      "value": "{semantic.spacing.space2xs}",
+      "type": "spacing"
+    },
+    "titlePageDesktop": {
+      "value": {
+        "fontFamily": "{semantic.fontFamily.heading}",
+        "fontWeight": "{semantic.fontWeight.heading.strong}",
+        "fontSize": "{semantic.fontSize.text2xl}",
+        "lineHeight": "{semantic.lineHeight.heading.base}"
+      },
+      "type": "typography"
+    },
+    "titlePageMobile": {
+      "value": {
+        "fontFamily": "{semantic.fontFamily.heading}",
+        "fontWeight": "{semantic.fontWeight.heading.strong}",
+        "fontSize": "2rem",
+        "lineHeight": "{semantic.lineHeight.heading.base}"
+      },
+      "type": "typography"
+    },
+    "titleSection": {
+      "value": {
+        "fontFamily": "{semantic.fontFamily.heading}",
+        "fontWeight": "{semantic.fontWeight.heading.strong}",
+        "fontSize": "{semantic.fontSize.textXl}",
+        "lineHeight": "{semantic.lineHeight.heading.base}"
+      },
+      "type": "typography"
+    },
+    "titleCardSection": {
+      "value": {
+        "fontFamily": "{semantic.fontFamily.heading}",
+        "fontWeight": "{semantic.fontWeight.heading.strong}",
+        "fontSize": "{semantic.fontSize.textXl}",
+        "lineHeight": "{semantic.lineHeight.heading.base}"
+      },
+      "type": "typography"
+    },
+    "titleModule": {
+      "value": {
+        "fontFamily": "{semantic.fontFamily.heading}",
+        "fontWeight": "{semantic.fontWeight.heading.strong}",
+        "fontSize": "1.5rem",
+        "lineHeight": "{semantic.lineHeight.heading.base}"
+      },
+      "type": "typography"
+    },
+    "titleCardLarge": {
+      "value": {
+        "fontFamily": "{semantic.fontFamily.heading}",
+        "fontWeight": "{semantic.fontWeight.heading.strong}",
+        "fontSize": "1.5rem",
+        "lineHeight": "{semantic.lineHeight.heading.base}"
+      },
+      "type": "typography"
+    },
+    "titleCardRegular": {
+      "value": {
+        "fontFamily": "{semantic.fontFamily.heading}",
+        "fontWeight": "{semantic.fontWeight.heading.strong}",
+        "fontSize": "{semantic.fontSize.textLg}",
+        "lineHeight": "{semantic.lineHeight.heading.base}"
+      },
+      "type": "typography"
+    },
+    "titleCardMini": {
+      "value": {
+        "fontFamily": "{semantic.fontFamily.heading}",
+        "fontWeight": "{semantic.fontWeight.heading.strong}",
+        "fontSize": "{semantic.fontSize.textBase}",
+        "lineHeight": "{semantic.lineHeight.heading.base}"
+      },
+      "type": "typography"
+    },
+    "label": {
+      "value": {
+        "fontFamily": "{semantic.fontFamily.heading}",
+        "fontWeight": "{semantic.fontWeight.heading.strong}",
+        "fontSize": "{semantic.fontSize.textBase}",
+        "lineHeight": "{semantic.lineHeight.heading.base}"
+      },
+      "type": "typography"
+    },
+    "labelInline": {
+      "value": {
+        "fontFamily": "{semantic.fontFamily.heading}",
+        "fontWeight": "{semantic.fontWeight.heading.strong}",
+        "fontSize": "{semantic.fontSize.textBase}",
+        "lineHeight": "{semantic.lineHeight.heading.base}"
+      },
+      "type": "typography"
+    },
+    "gapIconSm": {
+      "value": "{semantic.spacing.space2xs}",
+      "type": "spacing"
+    },
+    "gapIconMd": {
+      "value": "{semantic.spacing.spaceXs}",
+      "type": "spacing"
+    },
+    "gapIconLg": {
+      "value": "{semantic.spacing.spaceSm}",
+      "type": "spacing"
+    }
+  }
+}

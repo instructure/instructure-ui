@@ -1,0 +1,30 @@
+{
+  "gridCol": {
+    "spacingLarge": {
+      "value": "2.25rem",
+      "type": "spacing"
+    },
+    "spacingMedium": {
+      "value": "{semantic.spacing.spaceXl}",
+      "type": "spacing"
+    },
+    "spacingSmall": {
+      "value": "{semantic.spacing.spaceMd}",
+      "type": "spacing"
+    }
+  },
+  "gridRow": {
+    "spacingLarge": {
+      "value": "2.25rem",
+      "type": "spacing"
+    },
+    "spacingMedium": {
+      "value": "{semantic.spacing.spaceXl}",
+      "type": "spacing"
+    },
+    "spacingSmall": {
+      "value": "{semantic.spacing.spaceMd}",
+      "type": "spacing"
+    }
+  }
+}

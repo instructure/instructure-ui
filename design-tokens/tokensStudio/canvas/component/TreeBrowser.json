@@ -1,0 +1,128 @@
+{
+  "treeBrowser": {
+    "borderRadius": {
+      "value": "{semantic.borderRadius.md}",
+      "type": "borderRadius"
+    }
+  },
+  "treeBrowserTreeButton": {
+    "baseSpacingLarge": {
+      "value": "{semantic.spacing.spaceLg}",
+      "type": "spacing"
+    },
+    "baseSpacingMedium": {
+      "value": "{semantic.spacing.spaceMd}",
+      "type": "spacing"
+    },
+    "baseSpacingSmall": {
+      "value": "{semantic.spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "borderColor": {
+      "value": "{semantic.color.stroke.base}",
+      "type": "color"
+    },
+    "borderRadius": {
+      "value": "{semantic.borderRadius.md}",
+      "type": "borderRadius"
+    },
+    "borderWidth": {
+      "value": "{semantic.borderWidth.sm}",
+      "type": "borderWidth"
+    },
+    "descriptorFontSizeLarge": {
+      "value": "{semantic.fontSize.textSm}",
+      "type": "fontSizes"
+    },
+    "descriptorFontSizeMedium": {
+      "value": "{semantic.fontSize.textXs}",
+      "type": "fontSizes"
+    },
+    "descriptorFontSizeSmall": {
+      "value": "{semantic.fontSize.textXs}",
+      "type": "fontSizes"
+    },
+    "descriptorMarginTop": {
+      "value": "{semantic.spacing.space2xs}",
+      "type": "spacing"
+    },
+    "descriptorTextColor": {
+      "value": "{semantic.color.institutional.brandFontColorDark}",
+      "type": "color"
+    },
+    "hoverBackgroundColor": {
+      "value": "{semantic.color.background.brand}",
+      "type": "color"
+    },
+    "hoverTextColor": {
+      "value": "{semantic.color.text.onColor}",
+      "type": "color"
+    },
+    "nameFontSizeLarge": {
+      "value": "{semantic.fontSize.textBase}",
+      "type": "fontSizes"
+    },
+    "nameFontSizeMedium": {
+      "value": "{semantic.fontSize.textSm}",
+      "type": "fontSizes"
+    },
+    "nameFontSizeSmall": {
+      "value": "{semantic.fontSize.textXs}",
+      "type": "fontSizes"
+    },
+    "nameTextColor": {
+      "value": "{semantic.color.text.interactive.navigation.primary.base}",
+      "type": "color"
+    },
+    "selectedBackgroundColor": {
+      "value": "{semantic.color.background.accent.grey}",
+      "type": "color"
+    },
+    "selectedTextColor": {
+      "value": "{semantic.color.text.onColor}",
+      "type": "color"
+    },
+    "textLineHeight": {
+      "value": "{semantic.lineHeight.standalone.base}",
+      "type": "lineHeights"
+    },
+    "iconsMarginRightSmall": {
+      "value": "{semantic.spacing.spaceXs}",
+      "type": "spacing"
+    },
+    "iconsMarginRightMedium": {
+      "value": "{semantic.spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "iconsMarginRightLarge": {
+      "value": "{semantic.spacing.spaceLg}",
+      "type": "spacing"
+    }
+  },
+  "treeBrowserTreeCollection": {
+    "baseSpacingLarge": {
+      "value": "{semantic.spacing.spaceLg}",
+      "type": "spacing"
+    },
+    "baseSpacingMedium": {
+      "value": "{semantic.spacing.spaceMd}",
+      "type": "spacing"
+    },
+    "baseSpacingSmall": {
+      "value": "{semantic.spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "borderColor": {
+      "value": "{semantic.color.stroke.base}",
+      "type": "color"
+    },
+    "borderWidth": {
+      "value": "{semantic.borderWidth.sm}",
+      "type": "borderWidth"
+    },
+    "fontFamily": {
+      "value": "{semantic.fontFamily.base}",
+      "type": "fontFamilies"
+    }
+  }
+}

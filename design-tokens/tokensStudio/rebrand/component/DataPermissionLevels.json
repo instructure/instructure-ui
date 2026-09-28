@@ -1,0 +1,52 @@
+{
+  "dataPermissionLevels": {
+    "cardBorderRadius": {
+      "value": "{semantic.borderRadius.lg}",
+      "type": "borderRadius"
+    },
+    "contentContainerBorderRadius": {
+      "value": "0.625rem",
+      "type": "borderRadius"
+    },
+    "cardBorderColor": {
+      "value": "{semantic.color.stroke.muted}",
+      "type": "color"
+    },
+    "cardBorderWidth": {
+      "value": "{semantic.borderWidth.md}",
+      "type": "borderWidth"
+    },
+    "currentFeaturePaddingSides": {
+      "value": "{semantic.spacing.spaceMd}",
+      "type": "spacing"
+    },
+    "currentFeaturePaddingTopBottom": {
+      "value": "{semantic.spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "permissionTitleBottomMargin": {
+      "value": "{semantic.spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "levelColor": {
+      "value": "{semantic.color.text.aiColor}",
+      "type": "color"
+    },
+    "aiTextLeftGradientColor": {
+      "value": "{semantic.color.background.aiTopGradient}",
+      "type": "color"
+    },
+    "aiTextRightGradientColor": {
+      "value": "{semantic.color.background.aiBottomGradient}",
+      "type": "color"
+    },
+    "bodyPadding": {
+      "value": "0rem",
+      "type": "spacing"
+    },
+    "contentContainerColor": {
+      "value": "{semantic.color.background.elevatedSurface.base}",
+      "type": "color"
+    }
+  }
+}

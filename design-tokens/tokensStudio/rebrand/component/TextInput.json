@@ -1,0 +1,192 @@
+{
+  "textInput": {
+    "backgroundColor": {
+      "value": "{semantic.color.background.interactive.input.base}",
+      "type": "color"
+    },
+    "backgroundHoverColor": {
+      "value": "{semantic.color.background.interactive.input.hover}",
+      "type": "color"
+    },
+    "backgroundReadonlyColor": {
+      "value": "{semantic.color.background.interactive.input.readonly}",
+      "type": "color"
+    },
+    "backgroundDisabledColor": {
+      "value": "{semantic.color.background.interactive.input.disabled}",
+      "type": "color"
+    },
+    "borderColor": {
+      "value": "{semantic.color.stroke.interactive.input.base}",
+      "type": "color"
+    },
+    "borderHoverColor": {
+      "value": "{semantic.color.stroke.interactive.input.hover}",
+      "type": "color"
+    },
+    "borderReadonlyColor": {
+      "value": "{semantic.color.stroke.interactive.input.readonly}",
+      "type": "color"
+    },
+    "borderDisabledColor": {
+      "value": "{semantic.color.stroke.interactive.input.disabled}",
+      "type": "color"
+    },
+    "errorBorderColor": {
+      "value": "{semantic.color.stroke.interactive.action.destructive.secondary.base}",
+      "type": "color"
+    },
+    "successBorderColor": {
+      "value": "{semantic.color.stroke.interactive.action.success.secondary.base}",
+      "type": "color"
+    },
+    "borderRadius": {
+      "value": "{semantic.borderRadius.interactive.base}",
+      "type": "borderRadius"
+    },
+    "borderWidth": {
+      "value": "{semantic.borderWidth.interactive.base}",
+      "type": "borderWidth"
+    },
+    "textColor": {
+      "value": "{semantic.color.institutional.brandFontColorDark}",
+      "type": "color"
+    },
+    "textReadonlyColor": {
+      "value": "{semantic.color.institutional.brandFontColorDark}",
+      "type": "color"
+    },
+    "textDisabledColor": {
+      "value": "{semantic.color.text.interactive.input.disabled}",
+      "type": "color"
+    },
+    "placeholderColor": {
+      "value": "{semantic.color.text.interactive.input.placeholder}",
+      "type": "color"
+    },
+    "placeholderHoverColor": {
+      "value": "{semantic.color.text.interactive.input.hover}",
+      "type": "color"
+    },
+    "arrowsContainerWidth": {
+      "value": "2rem",
+      "type": "sizing"
+    },
+    "arrowsBackgroundColor": {
+      "value": "{semantic.color.institutional.brandButtonSecondaryBgd}",
+      "type": "color"
+    },
+    "arrowsBackgroundHoverColor": {
+      "value": "{semantic.color.institutional.brandButtonSecondaryBgd}",
+      "type": "color",
+      "$extensions": {
+        "studio.tokens": {
+          "modify": {
+            "type": "lighten",
+            "value": "0.1",
+            "space": "hsl"
+          }
+        }
+      }
+    },
+    "arrowsBackgroundActiveColor": {
+      "value": "{semantic.color.background.interactive.action.secondary.active}",
+      "type": "color",
+      "$extensions": {
+        "studio.tokens": {
+          "modify": {
+            "type": "darken",
+            "value": "0.1",
+            "space": "hsl"
+          }
+        }
+      }
+    },
+    "arrowsBackgroundDisabledColor": {
+      "value": "{semantic.color.background.interactive.action.secondary.disabled}",
+      "type": "color"
+    },
+    "arrowsBorderColor": {
+      "value": "{semantic.color.institutional.brandButtonSecondaryBgd}",
+      "type": "color"
+    },
+    "fontFamily": {
+      "value": "{semantic.fontFamily.base}",
+      "type": "fontFamilies"
+    },
+    "fontWeight": {
+      "value": "{semantic.fontWeight.interactive}",
+      "type": "fontWeights"
+    },
+    "fontSizeSm": {
+      "value": "{semantic.fontSize.textSm}",
+      "type": "fontSizes"
+    },
+    "fontSizeMd": {
+      "value": "{semantic.fontSize.textBase}",
+      "type": "fontSizes"
+    },
+    "fontSizeLg": {
+      "value": "{semantic.fontSize.textLg}",
+      "type": "fontSizes"
+    },
+    "heightSm": {
+      "value": "{semantic.size.interactive.height.sm}",
+      "type": "sizing"
+    },
+    "heightMd": {
+      "value": "{semantic.size.interactive.height.md}",
+      "type": "sizing"
+    },
+    "heightLg": {
+      "value": "{semantic.size.interactive.height.lg}",
+      "type": "sizing"
+    },
+    "gapContent": {
+      "value": "{semantic.spacing.spaceMd}",
+      "type": "spacing"
+    },
+    "paddingHorizontalSm": {
+      "value": "{semantic.spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "paddingHorizontalMd": {
+      "value": "{semantic.spacing.spaceMd}",
+      "type": "spacing"
+    },
+    "paddingHorizontalLg": {
+      "value": "{semantic.spacing.spaceMd}",
+      "type": "spacing"
+    },
+    "arrowsBorderHoverColor": {
+      "value": "{semantic.color.institutional.brandButtonSecondaryBgd}",
+      "type": "color",
+      "$extensions": {
+        "studio.tokens": {
+          "modify": {
+            "type": "lighten",
+            "value": "0.1",
+            "space": "hsl"
+          }
+        }
+      }
+    },
+    "arrowsBorderActiveColor": {
+      "value": "{semantic.color.institutional.brandButtonSecondaryBgd}",
+      "type": "color",
+      "$extensions": {
+        "studio.tokens": {
+          "modify": {
+            "type": "darken",
+            "value": "0.1",
+            "space": "hsl"
+          }
+        }
+      }
+    },
+    "arrowsBorderDisabledColor": {
+      "value": "{semantic.color.stroke.interactive.action.secondary.disabled}",
+      "type": "color"
+    }
+  }
+}

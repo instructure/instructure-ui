@@ -1,0 +1,819 @@
+{
+  "chart": {
+    "categorical": {
+      "color10": {
+        "value": "{semantic.color.background.chart.categorical.color10}",
+        "type": "color",
+        "description": "Chart bg only. One categorical group per chart."
+      },
+      "color11": {
+        "value": "{semantic.color.background.chart.categorical.color11}",
+        "type": "color",
+        "description": "Chart bg only. One categorical group per chart."
+      },
+      "color00": {
+        "value": "{semantic.color.background.chart.categorical.color00}",
+        "type": "color",
+        "description": "Chart bg only. One categorical group per chart."
+      },
+      "color01": {
+        "value": "{semantic.color.background.chart.categorical.color01}",
+        "type": "color",
+        "description": "Chart bg only. One categorical group per chart."
+      },
+      "color02": {
+        "value": "{semantic.color.background.chart.categorical.color02}",
+        "type": "color",
+        "description": "Chart bg only. One categorical group per chart."
+      },
+      "color03": {
+        "value": "{semantic.color.background.chart.categorical.color03}",
+        "type": "color",
+        "description": "Chart bg only. One categorical group per chart."
+      },
+      "color04": {
+        "value": "{semantic.color.background.chart.categorical.color04}",
+        "type": "color",
+        "description": "Chart bg only. One categorical group per chart."
+      },
+      "color05": {
+        "value": "{semantic.color.background.chart.categorical.color05}",
+        "type": "color",
+        "description": "Chart bg only. One categorical group per chart."
+      },
+      "color06": {
+        "value": "{semantic.color.background.chart.categorical.color06}",
+        "type": "color",
+        "description": "Chart bg only. One categorical group per chart."
+      },
+      "color07": {
+        "value": "{semantic.color.background.chart.categorical.color07}",
+        "type": "color",
+        "description": "Chart bg only. One categorical group per chart."
+      },
+      "color08": {
+        "value": "{semantic.color.background.chart.categorical.color08}",
+        "type": "color",
+        "description": "Chart bg only. One categorical group per chart."
+      },
+      "color09": {
+        "value": "{semantic.color.background.chart.categorical.color09}",
+        "type": "color",
+        "description": "Chart bg only. One categorical group per chart."
+      }
+    },
+    "categoricalGroup5": {
+      "color00": {
+        "value": "{semantic.color.background.chart.categoricalGroup5.color00}",
+        "type": "color",
+        "description": "Chart bg only. One categorical group per chart."
+      },
+      "color01": {
+        "value": "{semantic.color.background.chart.categoricalGroup5.color01}",
+        "type": "color",
+        "description": "Chart bg only. One categorical group per chart."
+      },
+      "color02": {
+        "value": "{semantic.color.background.chart.categoricalGroup5.color02}",
+        "type": "color",
+        "description": "Chart bg only. One categorical group per chart."
+      },
+      "color03": {
+        "value": "{semantic.color.background.chart.categoricalGroup5.color03}",
+        "type": "color",
+        "description": "Chart bg only. One categorical group per chart."
+      },
+      "color04": {
+        "value": "{semantic.color.background.chart.categoricalGroup5.color04}",
+        "type": "color",
+        "description": "Chart bg only. One categorical group per chart."
+      }
+    },
+    "categoricalGroup4": {
+      "color00": {
+        "value": "{semantic.color.background.chart.categoricalGroup4.color00}",
+        "type": "color",
+        "description": "Chart bg only. One categorical group per chart."
+      },
+      "color01": {
+        "value": "{semantic.color.background.chart.categoricalGroup4.color01}",
+        "type": "color",
+        "description": "Chart bg only. One categorical group per chart."
+      },
+      "color02": {
+        "value": "{semantic.color.background.chart.categoricalGroup4.color02}",
+        "type": "color",
+        "description": "Chart bg only. One categorical group per chart."
+      },
+      "color03": {
+        "value": "{semantic.color.background.chart.categoricalGroup4.color03}",
+        "type": "color",
+        "description": "Chart bg only. One categorical group per chart."
+      }
+    },
+    "categoricalGroup3": {
+      "color00": {
+        "value": "{semantic.color.background.chart.categoricalGroup3.color00}",
+        "type": "color",
+        "description": "Chart bg only. One categorical group per chart."
+      },
+      "color01": {
+        "value": "{semantic.color.background.chart.categoricalGroup3.color01}",
+        "type": "color",
+        "description": "Chart bg only. One categorical group per chart."
+      },
+      "color02": {
+        "value": "{semantic.color.background.chart.categoricalGroup3.color02}",
+        "type": "color",
+        "description": "Chart bg only. One categorical group per chart."
+      }
+    },
+    "categoricalGroup2": {
+      "color00": {
+        "value": "{semantic.color.background.chart.categoricalGroup2.color00}",
+        "type": "color",
+        "description": "Chart bg only. One categorical group per chart."
+      },
+      "color01": {
+        "value": "{semantic.color.background.chart.categoricalGroup2.color01}",
+        "type": "color",
+        "description": "Chart bg only. One categorical group per chart."
+      }
+    },
+    "sequential": {
+      "violet": {
+        "color0": {
+          "value": "{semantic.color.background.chart.sequential.violet.color0}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color1": {
+          "value": "{semantic.color.background.chart.sequential.violet.color1}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color2": {
+          "value": "{semantic.color.background.chart.sequential.violet.color2}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color3": {
+          "value": "{semantic.color.background.chart.sequential.violet.color3}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color4": {
+          "value": "{semantic.color.background.chart.sequential.violet.color4}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color5": {
+          "value": "{semantic.color.background.chart.sequential.violet.color5}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color6": {
+          "value": "{semantic.color.background.chart.sequential.violet.color6}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color7": {
+          "value": "{semantic.color.background.chart.sequential.violet.color7}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color8": {
+          "value": "{semantic.color.background.chart.sequential.violet.color8}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color9": {
+          "value": "{semantic.color.background.chart.sequential.violet.color9}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        }
+      },
+      "plum": {
+        "color0": {
+          "value": "{semantic.color.background.chart.sequential.plum.color0}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color1": {
+          "value": "{semantic.color.background.chart.sequential.plum.color1}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color2": {
+          "value": "{semantic.color.background.chart.sequential.plum.color2}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color3": {
+          "value": "{semantic.color.background.chart.sequential.plum.color3}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color4": {
+          "value": "{semantic.color.background.chart.sequential.plum.color4}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color5": {
+          "value": "{semantic.color.background.chart.sequential.plum.color5}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color6": {
+          "value": "{semantic.color.background.chart.sequential.plum.color6}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color7": {
+          "value": "{semantic.color.background.chart.sequential.plum.color7}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color8": {
+          "value": "{semantic.color.background.chart.sequential.plum.color8}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color9": {
+          "value": "{semantic.color.background.chart.sequential.plum.color9}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        }
+      },
+      "red": {
+        "color0": {
+          "value": "{semantic.color.background.chart.sequential.red.color0}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color1": {
+          "value": "{semantic.color.background.chart.sequential.red.color1}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color2": {
+          "value": "{semantic.color.background.chart.sequential.red.color2}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color3": {
+          "value": "{semantic.color.background.chart.sequential.red.color3}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color4": {
+          "value": "{semantic.color.background.chart.sequential.red.color4}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color5": {
+          "value": "{semantic.color.background.chart.sequential.red.color5}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color6": {
+          "value": "{semantic.color.background.chart.sequential.red.color6}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color7": {
+          "value": "{semantic.color.background.chart.sequential.red.color7}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color8": {
+          "value": "{semantic.color.background.chart.sequential.red.color8}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color9": {
+          "value": "{semantic.color.background.chart.sequential.red.color9}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        }
+      },
+      "orange": {
+        "color0": {
+          "value": "{semantic.color.background.chart.sequential.orange.color0}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color1": {
+          "value": "{semantic.color.background.chart.sequential.orange.color1}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color2": {
+          "value": "{semantic.color.background.chart.sequential.orange.color2}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color3": {
+          "value": "{semantic.color.background.chart.sequential.orange.color3}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color4": {
+          "value": "{semantic.color.background.chart.sequential.orange.color4}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color5": {
+          "value": "{semantic.color.background.chart.sequential.orange.color5}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color6": {
+          "value": "{semantic.color.background.chart.sequential.orange.color6}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color7": {
+          "value": "{semantic.color.background.chart.sequential.orange.color7}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color8": {
+          "value": "{semantic.color.background.chart.sequential.orange.color8}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color9": {
+          "value": "{semantic.color.background.chart.sequential.orange.color9}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        }
+      },
+      "honey": {
+        "color0": {
+          "value": "{semantic.color.background.chart.sequential.honey.color0}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color1": {
+          "value": "{semantic.color.background.chart.sequential.honey.color1}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color2": {
+          "value": "{semantic.color.background.chart.sequential.honey.color2}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color3": {
+          "value": "{semantic.color.background.chart.sequential.honey.color3}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color4": {
+          "value": "{semantic.color.background.chart.sequential.honey.color4}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color5": {
+          "value": "{semantic.color.background.chart.sequential.honey.color5}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color6": {
+          "value": "{semantic.color.background.chart.sequential.honey.color6}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color7": {
+          "value": "{semantic.color.background.chart.sequential.honey.color7}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color8": {
+          "value": "{semantic.color.background.chart.sequential.honey.color8}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color9": {
+          "value": "{semantic.color.background.chart.sequential.honey.color9}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        }
+      },
+      "green": {
+        "color0": {
+          "value": "{semantic.color.background.chart.sequential.green.color0}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color1": {
+          "value": "{semantic.color.background.chart.sequential.green.color1}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color2": {
+          "value": "{semantic.color.background.chart.sequential.green.color2}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color3": {
+          "value": "{semantic.color.background.chart.sequential.green.color3}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color4": {
+          "value": "{semantic.color.background.chart.sequential.green.color4}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color5": {
+          "value": "{semantic.color.background.chart.sequential.green.color5}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color6": {
+          "value": "{semantic.color.background.chart.sequential.green.color6}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color7": {
+          "value": "{semantic.color.background.chart.sequential.green.color7}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color8": {
+          "value": "{semantic.color.background.chart.sequential.green.color8}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color9": {
+          "value": "{semantic.color.background.chart.sequential.green.color9}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        }
+      },
+      "aurora": {
+        "color0": {
+          "value": "{semantic.color.background.chart.sequential.aurora.color0}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color1": {
+          "value": "{semantic.color.background.chart.sequential.aurora.color1}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color2": {
+          "value": "{semantic.color.background.chart.sequential.aurora.color2}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color3": {
+          "value": "{semantic.color.background.chart.sequential.aurora.color3}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color4": {
+          "value": "{semantic.color.background.chart.sequential.aurora.color4}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color5": {
+          "value": "{semantic.color.background.chart.sequential.aurora.color5}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color6": {
+          "value": "{semantic.color.background.chart.sequential.aurora.color6}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color7": {
+          "value": "{semantic.color.background.chart.sequential.aurora.color7}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color8": {
+          "value": "{semantic.color.background.chart.sequential.aurora.color8}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color9": {
+          "value": "{semantic.color.background.chart.sequential.aurora.color9}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        }
+      },
+      "sea": {
+        "color0": {
+          "value": "{semantic.color.background.chart.sequential.sea.color0}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color1": {
+          "value": "{semantic.color.background.chart.sequential.sea.color1}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color2": {
+          "value": "{semantic.color.background.chart.sequential.sea.color2}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color3": {
+          "value": "{semantic.color.background.chart.sequential.sea.color3}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color4": {
+          "value": "{semantic.color.background.chart.sequential.sea.color4}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color5": {
+          "value": "{semantic.color.background.chart.sequential.sea.color5}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color6": {
+          "value": "{semantic.color.background.chart.sequential.sea.color6}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color7": {
+          "value": "{semantic.color.background.chart.sequential.sea.color7}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color8": {
+          "value": "{semantic.color.background.chart.sequential.sea.color8}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color9": {
+          "value": "{semantic.color.background.chart.sequential.sea.color9}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        }
+      },
+      "sky": {
+        "color0": {
+          "value": "{semantic.color.background.chart.sequential.sky.color0}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color1": {
+          "value": "{semantic.color.background.chart.sequential.sky.color1}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color2": {
+          "value": "{semantic.color.background.chart.sequential.sky.color2}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color3": {
+          "value": "{semantic.color.background.chart.sequential.sky.color3}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color4": {
+          "value": "{semantic.color.background.chart.sequential.sky.color4}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color5": {
+          "value": "{semantic.color.background.chart.sequential.sky.color5}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color6": {
+          "value": "{semantic.color.background.chart.sequential.sky.color6}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color7": {
+          "value": "{semantic.color.background.chart.sequential.sky.color7}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color8": {
+          "value": "{semantic.color.background.chart.sequential.sky.color8}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color9": {
+          "value": "{semantic.color.background.chart.sequential.sky.color9}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        }
+      },
+      "blue": {
+        "color0": {
+          "value": "{semantic.color.background.chart.sequential.blue.color0}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color1": {
+          "value": "{semantic.color.background.chart.sequential.blue.color1}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color2": {
+          "value": "{semantic.color.background.chart.sequential.blue.color2}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color3": {
+          "value": "{semantic.color.background.chart.sequential.blue.color3}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color4": {
+          "value": "{semantic.color.background.chart.sequential.blue.color4}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color5": {
+          "value": "{semantic.color.background.chart.sequential.blue.color5}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color6": {
+          "value": "{semantic.color.background.chart.sequential.blue.color6}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color7": {
+          "value": "{semantic.color.background.chart.sequential.blue.color7}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color8": {
+          "value": "{semantic.color.background.chart.sequential.blue.color8}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        },
+        "color9": {
+          "value": "{semantic.color.background.chart.sequential.blue.color9}",
+          "type": "color",
+          "description": "Chart bg only. One sequential scale per chart."
+        }
+      }
+    },
+    "diverging": {
+      "redSea": {
+        "red5": {
+          "value": "{semantic.color.background.chart.diverging.redSea.red5}",
+          "type": "color",
+          "description": "Chart bg only. One diverging palette per chart."
+        },
+        "red4": {
+          "value": "{semantic.color.background.chart.diverging.redSea.red4}",
+          "type": "color",
+          "description": "Chart bg only. One diverging palette per chart."
+        },
+        "red3": {
+          "value": "{semantic.color.background.chart.diverging.redSea.red3}",
+          "type": "color",
+          "description": "Chart bg only. One diverging palette per chart."
+        },
+        "red2": {
+          "value": "{semantic.color.background.chart.diverging.redSea.red2}",
+          "type": "color",
+          "description": "Chart bg only. One diverging palette per chart."
+        },
+        "red1": {
+          "value": "{semantic.color.background.chart.diverging.redSea.red1}",
+          "type": "color",
+          "description": "Chart bg only. One diverging palette per chart."
+        },
+        "grey0": {
+          "value": "{semantic.color.background.chart.diverging.redSea.grey0}",
+          "type": "color",
+          "description": "Chart bg only. One diverging palette per chart."
+        },
+        "sea1": {
+          "value": "{semantic.color.background.chart.diverging.redSea.sea1}",
+          "type": "color",
+          "description": "Chart bg only. One diverging palette per chart."
+        },
+        "sea2": {
+          "value": "{semantic.color.background.chart.diverging.redSea.sea2}",
+          "type": "color",
+          "description": "Chart bg only. One diverging palette per chart."
+        },
+        "sea3": {
+          "value": "{semantic.color.background.chart.diverging.redSea.sea3}",
+          "type": "color",
+          "description": "Chart bg only. One diverging palette per chart."
+        },
+        "sea4": {
+          "value": "{semantic.color.background.chart.diverging.redSea.sea4}",
+          "type": "color",
+          "description": "Chart bg only. One diverging palette per chart."
+        },
+        "sea5": {
+          "value": "{semantic.color.background.chart.diverging.redSea.sea5}",
+          "type": "color",
+          "description": "Chart bg only. One diverging palette per chart."
+        }
+      },
+      "violetSea": {
+        "purple5": {
+          "value": "{semantic.color.background.chart.diverging.violetSea.purple5}",
+          "type": "color",
+          "description": "Chart bg only. One diverging palette per chart."
+        },
+        "purple4": {
+          "value": "{semantic.color.background.chart.diverging.violetSea.purple4}",
+          "type": "color",
+          "description": "Chart bg only. One diverging palette per chart."
+        },
+        "purple3": {
+          "value": "{semantic.color.background.chart.diverging.violetSea.purple3}",
+          "type": "color",
+          "description": "Chart bg only. One diverging palette per chart."
+        },
+        "purple2": {
+          "value": "{semantic.color.background.chart.diverging.violetSea.purple2}",
+          "type": "color",
+          "description": "Chart bg only. One diverging palette per chart."
+        },
+        "purple1": {
+          "value": "{semantic.color.background.chart.diverging.violetSea.purple1}",
+          "type": "color",
+          "description": "Chart bg only. One diverging palette per chart."
+        },
+        "grey0": {
+          "value": "{semantic.color.background.chart.diverging.violetSea.grey0}",
+          "type": "color",
+          "description": "Chart bg only. One diverging palette per chart."
+        },
+        "sea1": {
+          "value": "{semantic.color.background.chart.diverging.violetSea.sea1}",
+          "type": "color",
+          "description": "Chart bg only. One diverging palette per chart."
+        },
+        "sea2": {
+          "value": "{semantic.color.background.chart.diverging.violetSea.sea2}",
+          "type": "color",
+          "description": "Chart bg only. One diverging palette per chart."
+        },
+        "sea3": {
+          "value": "{semantic.color.background.chart.diverging.violetSea.sea3}",
+          "type": "color",
+          "description": "Chart bg only. One diverging palette per chart."
+        },
+        "sea4": {
+          "value": "{semantic.color.background.chart.diverging.violetSea.sea4}",
+          "type": "color",
+          "description": "Chart bg only. One diverging palette per chart."
+        },
+        "sky5": {
+          "value": "{semantic.color.background.chart.diverging.violetSea.sky5}",
+          "type": "color",
+          "description": "Chart bg only. One diverging palette per chart."
+        }
+      }
+    },
+    "alert": {
+      "critical": {
+        "value": "{semantic.color.background.chart.alert.critical}",
+        "type": "color",
+        "description": "Chart bg only. Status callouts in charts; don't mix with other chart tokens."
+      },
+      "danger": {
+        "value": "{semantic.color.background.chart.alert.danger}",
+        "type": "color",
+        "description": "Chart bg only. Status callouts in charts; don't mix with other chart tokens."
+      },
+      "warningMedium": {
+        "value": "{semantic.color.background.chart.alert.warningMedium}",
+        "type": "color",
+        "description": "Chart bg only. Status callouts in charts; don't mix with other chart tokens."
+      },
+      "warningLow": {
+        "value": "{semantic.color.background.chart.alert.warningLow}",
+        "type": "color",
+        "description": "Chart bg only. Status callouts in charts; don't mix with other chart tokens."
+      },
+      "success": {
+        "value": "{semantic.color.background.chart.alert.success}",
+        "type": "color",
+        "description": "Chart bg only. Status callouts in charts; don't mix with other chart tokens."
+      },
+      "info": {
+        "value": "{semantic.color.background.chart.alert.info}",
+        "type": "color",
+        "description": "Chart bg only. Status callouts in charts; don't mix with other chart tokens."
+      },
+      "neutral": {
+        "value": "{semantic.color.background.chart.alert.neutral}",
+        "type": "color",
+        "description": "Chart bg only. Status callouts in charts; don't mix with other chart tokens."
+      }
+    }
+  }
+}

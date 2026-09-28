@@ -1,0 +1,28 @@
+{
+  "drilldown": {
+    "borderColor": {
+      "value": "{semantic.color.stroke.muted}",
+      "type": "color"
+    },
+    "headerActionColor": {
+      "value": "{semantic.color.text.interactive.navigation.primary.base}",
+      "type": "color"
+    },
+    "headerTitleFontWeight": {
+      "value": "{semantic.fontWeight.body.strong}",
+      "type": "fontWeights"
+    },
+    "labelInfoColor": {
+      "value": "{semantic.color.text.muted}",
+      "type": "color"
+    },
+    "borderRadius": {
+      "value": "{semantic.borderRadius.sm}",
+      "type": "borderRadius"
+    },
+    "labelInfoPadding": {
+      "value": "{semantic.spacing.spaceMd}",
+      "type": "spacing"
+    }
+  }
+}
