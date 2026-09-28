@@ -40,6 +40,7 @@ import { mirrorHorizontalPlacement } from '@instructure/ui-position'
 import { getComponentsForVersion } from './versioned-components'
 import { dark, light } from '@instructure/ui-themes'
 import { debounce } from '@instructure/debounce'
+import { useComputedTheme } from '@instructure/emotion'
 
 // @ts-expect-error no type declarations for CSS side-effect import
 // eslint-disable-next-line instructure/no-relative-imports
@@ -103,6 +104,7 @@ const globals: Record<string, any> = {
   useMemo,
   useState,
   useRef,
+  useComputedTheme,
   forwardRef,
   additionalPrimitives,
   dataVisualization,
