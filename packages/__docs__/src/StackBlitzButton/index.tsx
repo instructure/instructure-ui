@@ -78,31 +78,34 @@ export function placeholderImage(width = 512, height = 512) {
 
 /**
  * Guess which InstUI names an example uses so they can be imported from
- * `@instructure/ui`. Examples are bare JSX without imports, so this is text
- * matching, not parsing. Three kinds of usage are recognised:
- *
- *   <Avatar ...>, <Tabs.Panel ...>     -> Avatar, Tabs      (JSX tags)
- *   renderIcon={IconSearchLine}        -> IconSearchLine    (icons used as
- *   icon: UserInstUIIcon                  UserInstUIIcon     values; all icon
- *                                                            exports end in
- *                                                            Line/Solid/InstUIIcon)
- *   useContext(TextDirectionContext)   -> TextDirectionContext
- *
- * Names the example declares itself (`const Example = ...`, `class Foo`,
- * `function bar`) are dropped so we don't import them.
+ * `@instructure/ui`.
  */
-const USED_NAME_PATTERN =
-  /<([A-Z]\w+)|\b(Icon[A-Z]\w*(?:Line|Solid)|[A-Z]\w*InstUIIcon|[A-Z]\w+Context)\b/g
-const LOCAL_DECLARATION_PATTERN = /\b(?:class|function|const|let)\s+([A-Z]\w*)/g
-
 function collectUsedNames(code: string): string[] {
+  // declared variables, do not import these, e.g. const XYZ
   const declared = new Set(
-    [...code.matchAll(LOCAL_DECLARATION_PATTERN)].map((m) => m[1])
+    [...code.matchAll(/\b(?:class|function|const|let)\s+([A-Z]\w*)/g)].map(
+      (m) => m[1]
+    )
   )
+  // icons: IconXYZLine, IconXYZSolid, XYZInstUIIcon
+  // contexts: XYZContext
+  // JSX tags: <XYZ>
   const used = new Set(
-    [...code.matchAll(USED_NAME_PATTERN)].map((m) => m[1] ?? m[2])
+    [
+      ...code.matchAll(
+        /<([A-Z]\w+)|\b(Icon[A-Z]\w*(?:Line|Solid)|[A-Z]\w*InstUIIcon|[A-Z]\w+Context)\b/g
+      )
+    ].map((m) => m[1] ?? m[2])
   )
-  return [...used].filter((name) => !declared.has(name))
+  // light, dark, canvasHighContrast, canvas, useComputedTheme
+  const specials = new Set(
+    [
+      ...code.matchAll(
+        /(?<!['"])\b(light|dark|canvasHighContrast|canvas|useComputedTheme)\b(?!['"])/g
+      )
+    ].map((m) => m[1] ?? m[2])
+  )
+  return [...used, ...specials].filter((name) => !declared.has(name))
 }
 
 function buildProjectFiles(
