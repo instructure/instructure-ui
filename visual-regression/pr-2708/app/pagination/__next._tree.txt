@@ -1,3 +1,0 @@
-:HL["/visual-regression/pr-2708/app/_next/static/media/e4af272ccee01ff0-s.p.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
-:HL["/visual-regression/pr-2708/app/_next/static/css/8d91628e88b5e2c5.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"pagination","param":null,"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}},"staleTime":300,"buildId":"bkFDERqFO72TMtmYD1Fon"}
