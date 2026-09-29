@@ -36,32 +36,27 @@ type StyleParams = FormFieldStyleProps & {
   vAlign: FormFieldLayoutProps['vAlign']
   labelAlign: FormFieldLayoutProps['labelAlign']
   margin: FormFieldLayoutProps['margin']
-  messages: FormFieldLayoutProps['messages']
   isRequired: FormFieldLayoutProps['isRequired']
   invalid: boolean
 }
 
 const generateGridLayout = (
   isInlineLayout: boolean,
-  hasErrorMsgAndIsGroup: boolean,
+  isGroup: boolean,
   hasVisibleLabel: boolean,
   hasMessages: boolean
 ) => {
   if (isInlineLayout) {
-    if (hasErrorMsgAndIsGroup) {
-      if (hasMessages) {
-        return `${hasVisibleLabel ? ' "label messages"' : '. messages'}
-                                      ". controls"`
-      } else {
-        return `${hasVisibleLabel ? ' "label controls"' : '. controls'}`
-      }
+    if (isGroup && hasMessages) {
+      return `${hasVisibleLabel ? ' "label messages"' : '". messages"'}
+              ${hasVisibleLabel ? ' "label controls"' : '". controls"'}`
     } else {
-      return `${hasVisibleLabel ? ' "label controls"' : '. controls'}
+      return `${hasVisibleLabel ? ' "label controls"' : '". controls"'}
               ${hasMessages ? ' ". messages"' : ''}`
     }
   }
   // stacked layout -- in this case we could use a simple `Flex`
-  if (hasErrorMsgAndIsGroup) {
+  if (isGroup) {
     return `${hasVisibleLabel ? ' "label"' : ''}
             ${hasMessages ? ' "messages"' : ''}
             "controls"`
@@ -86,23 +81,27 @@ const generateStyle = (
   params: StyleParams,
   sharedTokens: SharedTokens
 ): FormFieldLayoutStyle => {
-  const { inline, layout, vAlign, labelAlign, margin, messages } = params
-  const { hasMessages, hasVisibleLabel, hasErrorMsgAndIsGroup } = params
+  const {
+    inline,
+    layout,
+    vAlign,
+    labelAlign,
+    margin,
+    hasMessages,
+    hasVisibleMessage,
+    hasVisibleLabel,
+    isGroup
+  } = params
   const cssMargin = calcSpacingFromShorthand(margin, {
     ...sharedTokens.spacing,
     ...sharedTokens.legacy.spacing
   })
   const isInlineLayout = layout === 'inline'
 
-  const hasNonEmptyMessages = messages?.reduce(
-    (acc, message) => acc || message.type !== 'screenreader-only',
-    false
-  )
-
   // This is quite ugly, we should simplify it
   const gridTemplateAreas = generateGridLayout(
     isInlineLayout,
-    hasErrorMsgAndIsGroup,
+    isGroup,
     hasVisibleLabel,
     hasMessages
   )
@@ -162,13 +161,13 @@ const generateStyle = (
         gridTemplateColumns: '100%',
         gridTemplateAreas: generateGridLayout(
           false,
-          hasErrorMsgAndIsGroup,
+          isGroup,
           hasVisibleLabel,
           hasMessages
         )
       },
       columnGap: '0.375rem',
-      rowGap: hasNonEmptyMessages ? componentTheme.gapPrimitives : '0',
+      rowGap: hasVisibleMessage ? componentTheme.gapPrimitives : '0',
       width: '100%',
       ...(inline && {
         display: 'inline-grid',
@@ -181,14 +180,11 @@ const generateStyle = (
       // NOTE: needs separate groups for `:is()` and `:-webkit-any()` because of css selector group validation (see https://www.w3.org/TR/selectors-3/#grouping)
       '&:is(label)': labelStyles,
       '&:-webkit-any(label)': labelStyles,
-
-      paddingBottom: hasNonEmptyMessages ? '0' : componentTheme.gapPrimitives
+      paddingBottom: hasVisibleMessage ? '0' : componentTheme.gapPrimitives
     },
     formFieldChildren: {
       label: 'formFieldLayout__children',
       gridArea: 'controls',
-      // add a small margin between the message and the controls
-      ...(hasMessages && hasErrorMsgAndIsGroup && { marginTop: '0.375rem' }),
       ...(isInlineLayout &&
         inline && {
           [`@media screen and (width >= ${sharedTokens.breakpoints.md})`]: {

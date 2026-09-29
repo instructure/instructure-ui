@@ -29,6 +29,25 @@ import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { FormFieldLayout } from '@instructure/ui-form-field/latest'
 
+// Checks both the DOM (reading) order and the rendered position
+const expectMessageAboveControl = (message: Element, control: Element) => {
+  expect(
+    message.compareDocumentPosition(control) & Node.DOCUMENT_POSITION_FOLLOWING
+  ).toBeTruthy()
+  expect(message.getBoundingClientRect().bottom).toBeLessThanOrEqual(
+    control.getBoundingClientRect().top
+  )
+}
+
+const expectMessageBelowControl = (message: Element, control: Element) => {
+  expect(
+    message.compareDocumentPosition(control) & Node.DOCUMENT_POSITION_PRECEDING
+  ).toBeTruthy()
+  expect(message.getBoundingClientRect().top).toBeGreaterThanOrEqual(
+    control.getBoundingClientRect().bottom
+  )
+}
+
 describe('<FormFieldLayout />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
   let consoleErrorMock: ReturnType<typeof vi.spyOn>
@@ -112,6 +131,77 @@ describe('<FormFieldLayout />', () => {
 
       expect(label).toMatchTextContent('Username')
       expect(window.getComputedStyle(label).textAlign).toBe('start')
+    })
+  })
+
+  describe('message placement', () => {
+    // oxlint-disable-next-line vitest/expect-expect
+    it('should render messages above the controls in stacked groups', async () => {
+      await render(
+        <FormFieldLayout
+          label="Options"
+          as="fieldset"
+          isGroup
+          messages={[{ type: 'hint', text: 'Group message' }]}
+        >
+          <input type="checkbox" aria-label="Option 1" />
+        </FormFieldLayout>
+      )
+      expectMessageAboveControl(
+        page.getByText('Group message').element(),
+        page.getByLabelText('Option 1').element()
+      )
+    })
+    // oxlint-disable-next-line vitest/expect-expect
+    it('should render messages below the controls in stacked layout when not a group', async () => {
+      await render(
+        <FormFieldLayout
+          label="Username"
+          messages={[{ type: 'hint', text: 'Field message' }]}
+        >
+          <input type="text" />
+        </FormFieldLayout>
+      )
+      expectMessageBelowControl(
+        page.getByText('Field message').element(),
+        page.getByRole('textbox').element()
+      )
+    })
+    // oxlint-disable-next-line vitest/expect-expect
+    it('should render messages above the controls in inline groups', async () => {
+      await page.viewport(800, 600)
+      await render(
+        <FormFieldLayout
+          label="Options"
+          as="fieldset"
+          layout="inline"
+          isGroup
+          messages={[{ type: 'hint', text: 'Group message' }]}
+        >
+          <input type="checkbox" aria-label="Option 1" />
+        </FormFieldLayout>
+      )
+      expectMessageAboveControl(
+        page.getByText('Group message').element(),
+        page.getByLabelText('Option 1').element()
+      )
+    })
+    // oxlint-disable-next-line vitest/expect-expect
+    it('should render messages below the controls in inline layout when not a group', async () => {
+      await page.viewport(800, 600)
+      await render(
+        <FormFieldLayout
+          label="Username"
+          layout="inline"
+          messages={[{ type: 'hint', text: 'Field message' }]}
+        >
+          <input type="text" />
+        </FormFieldLayout>
+      )
+      expectMessageBelowControl(
+        page.getByText('Field message').element(),
+        page.getByRole('textbox').element()
+      )
     })
   })
 })
