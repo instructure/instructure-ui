@@ -278,6 +278,7 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
     }
   }
 
+  // TODO use a FormField instead of re-implementing parts of it here
   renderMessages() {
     const { messages, styles, variant } = this.props
 

@@ -77,7 +77,8 @@ class FormFieldMessages extends Component<FormFieldMessagesProps> {
 
   render() {
     const { messages, styles } = this.props
-
+    // TODO try to only use this component in FormFieldLayout, then
+    // we could move a proper hasMessages logic here (see FormFieldLayout)
     return messages && messages.length > 0 ? (
       <div
         css={styles?.formFieldMessages}
@@ -86,7 +87,7 @@ class FormFieldMessages extends Component<FormFieldMessagesProps> {
       >
         {messages.map((msg, i) => {
           return (
-            <span key={`error${i}`} css={styles?.message}>
+            <span key={`FormFieldMessage${i}`} css={styles?.message}>
               <FormFieldMessage variant={msg.type}>{msg.text}</FormFieldMessage>
             </span>
           )

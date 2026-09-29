@@ -81,26 +81,31 @@ const FormFieldLayout = forwardRef<Element, FormFieldLayoutProps>(
           )
         : messages
 
-    // Compute style props
-    const hasMessages =
-      filteredMessages && filteredMessages.length > 0
-        ? filteredMessages.some((msg) => {
-            if (msg.text) {
-              if (typeof msg.text === 'string') {
-                return msg.text.length > 0
+    // any message, even if it's not visible (screenreader only)
+    let hasMessages = false
+    let hasVisibleMessage = false
+    if (filteredMessages) {
+      for (const msg of filteredMessages) {
+        if (msg.text) {
+          if (typeof msg.text === 'string') {
+            if (msg.text.length > 0) {
+              hasMessages = true
+              if (msg.type !== 'screenreader-only') {
+                hasVisibleMessage = true
               }
-              return true
             }
-            return false
-          })
-        : false
+          } else {
+            // if the message is a React component we just assume its non-empty
+            hasMessages = true
+            if (msg.type !== 'screenreader-only') {
+              hasVisibleMessage = true
+            }
+          }
+        }
+      }
+    }
 
     const hasVisibleLabel = label ? hasVisibleChildren(label) : false
-
-    const hasErrorMsgAndIsGroup =
-      !!filteredMessages?.find(
-        (m) => m.type === 'error' || m.type === 'newError'
-      ) && !!isGroup
 
     const invalid = !!filteredMessages?.find(
       (m) => m.type === 'error' || m.type === 'newError'
@@ -113,13 +118,13 @@ const FormFieldLayout = forwardRef<Element, FormFieldLayoutProps>(
       params: {
         hasMessages,
         hasVisibleLabel,
-        hasErrorMsgAndIsGroup,
+        hasVisibleMessage,
+        isGroup: !!isGroup,
         inline,
         layout,
         vAlign,
         labelAlign,
         margin,
-        messages: filteredMessages,
         isRequired,
         invalid
       },
@@ -204,7 +209,7 @@ const FormFieldLayout = forwardRef<Element, FormFieldLayoutProps>(
       } else return null
     }
 
-    const renderVisibleMessages = () => {
+    const renderMessages = () => {
       return hasMessages ? (
         <FormFieldMessages
           id={messagesId}
@@ -224,11 +229,11 @@ const FormFieldLayout = forwardRef<Element, FormFieldLayoutProps>(
         ref={handleRef}
       >
         {renderLabel()}
-        {hasErrorMsgAndIsGroup && renderVisibleMessages()}
+        {isGroup && renderMessages()}
         <span css={styles?.formFieldChildren} ref={handleInputContainerRef}>
           {children}
         </span>
-        {!hasErrorMsgAndIsGroup && renderVisibleMessages()}
+        {!isGroup && renderMessages()}
       </ElementType>
     )
   }
