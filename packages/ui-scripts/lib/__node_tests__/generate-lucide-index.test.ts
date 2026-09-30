@@ -72,7 +72,7 @@ describe('generateLucideIndex', () => {
     generateLucideIndex()
     const content = readFileSync(dir + 'src/generated/lucide/index.ts', 'utf-8')
     expect(content).toContain(
-      "import { wrapLucideIcon } from '../../lucide/wrapLucideIcon'"
+      "import { wrapLucideIcon } from '../../lucide/wrapLucideIcon.js'"
     )
 
     expect(content).not.toContain("import * as Lucide from 'lucide-react'")

@@ -23,7 +23,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/runtime": "^7.29.7",
     "@codemirror/autocomplete": "^6.18.1",
     "@codemirror/commands": "^6.6.2",
     "@codemirror/lang-css": "^6.3.0",
@@ -48,10 +47,10 @@
     "@instructure/ui-text-input": "workspace:*",
     "@instructure/ui-themes": "workspace:*",
     "@instructure/ui-utils": "workspace:*",
-    "@lezer/highlight": "1.2.3"
+    "@lezer/highlight": "1.2.3",
+    "@swc/helpers": "^0.5.23"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "workspace:*",
     "vitest": "^5.0.0"
   },
   "peerDependencies": {

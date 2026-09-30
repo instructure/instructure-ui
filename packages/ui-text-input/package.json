@@ -24,13 +24,11 @@
   "license": "MIT",
   "devDependencies": {
     "@instructure/ui-axe-check": "workspace:*",
-    "@instructure/ui-babel-preset": "workspace:*",
     "@instructure/ui-badge": "workspace:*",
     "@instructure/ui-color-utils": "workspace:*",
     "vitest": "^5.0.0"
   },
   "dependencies": {
-    "@babel/runtime": "^7.29.7",
     "@instructure/emotion": "workspace:*",
     "@instructure/shared-types": "workspace:*",
     "@instructure/ui-a11y-utils": "workspace:*",
@@ -38,7 +36,8 @@
     "@instructure/ui-form-field": "workspace:*",
     "@instructure/ui-react-utils": "workspace:*",
     "@instructure/ui-tag": "workspace:*",
-    "@instructure/ui-themes": "workspace:*"
+    "@instructure/ui-themes": "workspace:*",
+    "@swc/helpers": "^0.5.23"
   },
   "peerDependencies": {
     "react": ">=18 <=19"

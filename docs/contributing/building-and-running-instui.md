@@ -49,7 +49,7 @@ In order to build the project one should have [`git`](https://git-scm.com/book/e
    This script will invoke:
 
    - the `TypeScript` compiler (tsc) to generate the type definitions for the packages
-   - `babel` to transpile the source code of every package to a version that browsers can understand (supported browsers are defined in [`@instructure/browserslist-config-instui`](https://github.com/instructure/instructure-ui/blob/master/packages/browserslist-config-instui/index.js) package)
+   - `swc` to compile every package's source into code that supported browsers can run. The browser targets are listed in `packages/ui-scripts/lib/build/swc.ts`.
    - a `clean` script which removes any previous build output
 
 The output of bootstrap can be found in `lib`, `es` (for non node packages) and `types` directories for each package respectively, where:

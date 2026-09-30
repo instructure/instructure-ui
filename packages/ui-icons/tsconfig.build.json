@@ -8,7 +8,6 @@
   "include": ["src"],
   "exclude": ["/font/Line/**/*", "/font/Solid/**/*"],
   "references": [
-    { "path": "../ui-babel-preset/tsconfig.build.json" },
     { "path": "../ui-svg-images/tsconfig.build.json" },
     { "path": "../emotion/tsconfig.build.json" },
     { "path": "../shared-types/tsconfig.build.json" },

@@ -55,13 +55,16 @@ import {
 import dataVisualization from './legacySharedThemeTokens/colors/dataVisualization.js'
 import { boxShadowObjectsToCSSString } from './utils/boxShadowObjectToString.js'
 
-import { legacyCanvas, legacyCanvasHighContrast } from './themes/newThemeTokens'
+import {
+  legacyCanvas,
+  legacyCanvasHighContrast
+} from './themes/newThemeTokens/index.js'
 import type {
   LegacyCanvas as NewCanvas,
   LegacyCanvasHighContrast as NewCanvasHighContrast,
   Dark,
   Light
-} from './themes/newThemeTokens'
+} from './themes/newThemeTokens/index.js'
 
 import { frozenThemesDesignTokensV1 } from './themes/frozenThemes'
 import type { DesignTokensV1ComponentTypes } from './themes/frozenThemes'

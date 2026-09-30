@@ -29,9 +29,9 @@ import { useIsHydratedContext, omitProps } from '@instructure/ui-react-utils'
 import generateStyle from './styles.js'
 import { allowedProps } from './props.js'
 import type { SkeletonLoaderProps } from './props'
-import { SkeletonText } from '../SkeletonText'
-import { SkeletonRectangle } from '../SkeletonRectangle'
-import { SkeletonCircle } from '../SkeletonCircle'
+import { SkeletonText } from '../SkeletonText/index.js'
+import { SkeletonRectangle } from '../SkeletonRectangle/index.js'
+import { SkeletonCircle } from '../SkeletonCircle/index.js'
 
 /**
 ---
