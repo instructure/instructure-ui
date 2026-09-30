@@ -1,8 +1,8 @@
 {
   "summary": {
     "total": 99,
-    "unchanged": 98,
-    "changed": 1,
+    "unchanged": 92,
+    "changed": 7,
     "added": 0,
     "removed": 0,
     "a11yPages": 0,
@@ -173,20 +173,20 @@
     },
     {
       "name": "checkboxgroup-canvas.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 5379,
       "sizeMismatch": false
     },
     {
       "name": "checkboxgroup-dark.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 5249,
       "sizeMismatch": false
     },
     {
       "name": "checkboxgroup-light.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 4787,
       "sizeMismatch": false
     },
     {
@@ -317,21 +317,21 @@
     },
     {
       "name": "form-errors-canvas.png",
-      "status": "unchanged",
-      "numDiff": 0,
-      "sizeMismatch": false
+      "status": "changed",
+      "numDiff": 37228,
+      "sizeMismatch": true
     },
     {
       "name": "form-errors-dark.png",
-      "status": "unchanged",
-      "numDiff": 0,
-      "sizeMismatch": false
+      "status": "changed",
+      "numDiff": 38391,
+      "sizeMismatch": true
     },
     {
       "name": "form-errors-light.png",
-      "status": "unchanged",
-      "numDiff": 0,
-      "sizeMismatch": false
+      "status": "changed",
+      "numDiff": 37548,
+      "sizeMismatch": true
     },
     {
       "name": "heading-canvas.png",
