@@ -41,6 +41,8 @@ type Result = {
   status: Status
   numDiff?: number
   sizeMismatch?: boolean
+  // 'unchanged' only because the actual matched the baseline after realignment.
+  layoutShifted?: boolean
 }
 
 type Args = {
@@ -226,31 +228,22 @@ function diffMask(baseline: PNG, actual: PNG, threshold: number) {
   }
 }
 
-// Copy a w*h window out of `src` starting at (sx, sy). Callers clamp the window
-// to the source bounds first.
+// Copy a w*h window out of `src` at (sx, sy). Callers clamp to the source bounds.
 function crop(src: PNG, sx: number, sy: number, w: number, h: number): PNG {
   const out = new PNG({ width: w, height: h })
   PNG.bitblt(src, out, sx, sy, w, h, 0, 0)
   return out
 }
 
-// Is `actual` pixel-identical to `baseline` once shifted by up to `maxShift`?
+// Is `actual` pixel-identical to `baseline` after being shifted up to
+// `maxShift` pixels in any direction, diagonals included?
 //
-// When a layout box rounds one device pixel differently, the whole painted
-// subtree moves — glyphs, borders, all of it. The image is unchanged, just
-// translated, but a direct comparison lights up every edge in it: a one-pixel
-// shift routinely produces several thousand differing pixels. A component that
-// moved a pixel and is otherwise identical is not a visual regression, so this
-// is the check that says so.
+// A one-pixel rounding moves the whole painted subtree and lights up every edge
+// in it — thousands of pixels, the same order of magnitude as a genuine small
+// recolor, so a pixel-count tolerance cannot separate the two.
 //
-// A pixel-count tolerance cannot do this job. The shift above and a genuine
-// 40x40 recolor land in the same order of magnitude, so any threshold loose
-// enough to absorb the first also hides the second.
-//
-// Each offset is scored over the region the two images share, so the band that
-// shifts in from outside is never counted. (0, 0) is included deliberately: the
-// caller's comparison *pads* mismatched sizes, while this one *crops* to the
-// overlap, which is what lets "one pixel taller, same content" pass.
+// (0, 0) is included because this comparison crops to the overlap while the
+// caller's pads, which is what lets "one pixel taller, same content" pass.
 /** @internal — exported only for tests; not part of the package's public API. */
 export function matchesWhenShifted(
   baseline: PNG,
@@ -955,6 +948,8 @@ function row(
       ? `<div class="meta">${r.numDiff} pixels differ${
           r.sizeMismatch ? ' · size mismatch' : ''
         }</div>`
+      : r.layoutShifted
+      ? `<div class="meta">layout shifted · ${r.numDiff} pixels differ before realignment</div>`
       : ''
   const source = sourceLinkFor(r.name, meta, sourceBaseUrl)
   const hasBoth = r.status === 'changed' || r.status === 'unchanged'
@@ -1531,12 +1526,12 @@ function run(args: Args): number {
       actual: padded
     } = diffMask(baseline, actual, threshold)
 
-    // Straight comparison first, so identical screenshots cost nothing extra;
-    // the realignment check below only runs on one that already failed it. The
-    // size guard keeps a real layout change from being shifted away — only a
-    // delta within the shift budget is a rounding artifact.
+    // Is the change just a layout shift? Checked only after the straight
+    // comparison fails; the size guard stops a real layout change from being
+    // shifted away.
     let status: Status =
       numDiff === 0 && !sizeMismatch ? 'unchanged' : 'changed'
+    let layoutShifted = false
     if (
       status === 'changed' &&
       maxShift > 0 &&
@@ -1545,6 +1540,7 @@ function run(args: Args): number {
       matchesWhenShifted(baseline, actual, threshold, maxShift)
     ) {
       status = 'unchanged'
+      layoutShifted = true
     }
 
     if (status === 'changed') {
@@ -1553,7 +1549,7 @@ function run(args: Args): number {
       writeFileSync(join(outputDir, 'diff', name), PNG.sync.write(highlight))
     }
 
-    results.push({ name, status, numDiff, sizeMismatch })
+    results.push({ name, status, numDiff, sizeMismatch, layoutShifted })
   }
 
   let a11y: A11y | null = null
@@ -1656,7 +1652,7 @@ export default {
     'max-shift': {
       type: 'number',
       describe:
-        'Treat a screenshot as unchanged when it matches its baseline exactly after being shifted by up to this many pixels. Absorbs whole-pixel layout rounding, which moves a component without altering it. 0 requires an exact match.',
+        'Treat a screenshot as unchanged when it matches its baseline exactly after being shifted up to this many pixels in any direction. Absorbs whole-pixel layout rounding. 0 requires an exact match.',
       default: 1
     },
     'fail-on-missing-baseline': {
