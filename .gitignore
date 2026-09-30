@@ -4,7 +4,6 @@ pnpm-debug.log
 lerna-debug.log
 ./build-storybook.log
 coverage/
-.babel-cache
 __build__
 .vscode
 .idea

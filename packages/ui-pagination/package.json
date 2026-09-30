@@ -23,7 +23,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/runtime": "^7.29.7",
     "@instructure/emotion": "workspace:*",
     "@instructure/shared-types": "workspace:*",
     "@instructure/ui-a11y-content": "workspace:*",
@@ -39,12 +38,12 @@
     "@instructure/ui-tooltip": "workspace:*",
     "@instructure/ui-utils": "workspace:*",
     "@instructure/ui-view": "workspace:*",
-    "@instructure/uid": "workspace:*"
+    "@instructure/uid": "workspace:*",
+    "@swc/helpers": "^0.5.23"
   },
   "devDependencies": {
     "@instructure/ui-a11y-content": "workspace:*",
     "@instructure/ui-axe-check": "workspace:*",
-    "@instructure/ui-babel-preset": "workspace:*",
     "vitest": "^5.0.0"
   },
   "peerDependencies": {

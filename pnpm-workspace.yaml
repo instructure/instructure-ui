@@ -9,6 +9,7 @@ allowBuilds:
   cypress: true
   dprint: true
   esbuild: true
+  '@swc/core': true
   nx: true
   style-dictionary: true
   ttf2woff2: true

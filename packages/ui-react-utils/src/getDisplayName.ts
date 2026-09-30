@@ -29,7 +29,7 @@ import { ComponentType } from 'react'
  * category: utilities/react
  * ---
  * Get the displayName of a React component.
- * needs a babel plugin to work https://github.com/facebook/react/issues/4915 !!
+ * needs `displayName` to be set on the component, see https://github.com/facebook/react/issues/4915 !!
  * @module getDisplayName
  * @param ReactComponent
  * @returns the component displayName

@@ -28,17 +28,16 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "workspace:*",
     "@types/node": "24.1.0"
   },
   "dependencies": {
-    "@babel/runtime": "^7.29.7",
     "@instructure/emotion": "workspace:*",
     "@instructure/shared-types": "workspace:*",
     "@instructure/ui-react-utils": "workspace:*",
     "@instructure/ui-svg-images": "workspace:*",
     "@instructure/ui-themes": "workspace:*",
     "@instructure/ui-utils": "workspace:*",
+    "@swc/helpers": "^0.5.23",
     "lucide-react": "1.41.0"
   },
   "peerDependencies": {

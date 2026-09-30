@@ -36,7 +36,6 @@ export default {
       'dist',
       'lib',
       'tokens',
-      '.babel-cache',
       '.cache',
       'types',
       'tsconfig.build.tsbuildinfo',

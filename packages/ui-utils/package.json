@@ -22,10 +22,10 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/runtime": "^7.29.7",
     "@instructure/console": "workspace:*",
     "@instructure/shared-types": "workspace:*",
     "@instructure/ui-dom-utils": "workspace:*",
+    "@swc/helpers": "^0.5.23",
     "@types/ua-parser-js": "^0.7.39",
     "dompurify": "^3.4.2",
     "fast-deep-equal": "^3.1.3",
@@ -33,7 +33,6 @@
     "ua-parser-js": "^1.0.39"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "workspace:*",
     "vitest": "^5.0.0"
   },
   "//dependency-comments": {

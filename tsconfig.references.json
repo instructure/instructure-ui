@@ -40,9 +40,6 @@
       "path": "./packages/ui-axe-check/tsconfig.build.json"
     },
     {
-      "path": "./packages/ui-babel-preset/tsconfig.build.json"
-    },
-    {
       "path": "./packages/ui-badge/tsconfig.build.json"
     },
     {

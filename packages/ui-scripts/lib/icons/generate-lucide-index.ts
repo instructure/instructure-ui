@@ -100,7 +100,7 @@ export default function generateLucideIndex() {
   // ../../lucide/wrapLucideIcon resolves to src/lucide/wrapLucideIcon
   const content = `${HEADER}
 import { ${allLucideIcons.join(', ')} } from 'lucide-react'
-import { wrapLucideIcon } from '../../lucide/wrapLucideIcon'
+import { wrapLucideIcon } from '../../lucide/wrapLucideIcon.js'
 
 ${iconExports}
 `

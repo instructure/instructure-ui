@@ -28,11 +28,9 @@ import { resolve, join } from 'path'
 import { execSync } from 'child_process'
 
 const NODE_PACKAGES = [
-  'ui-babel-preset',
   'ui-codemods',
   'ui-scripts',
-  'command-utils',
-  'babel-plugin-transform-imports'
+  'command-utils'
 ]
 
 const DIRS_TO_DELETE = [
@@ -41,7 +39,6 @@ const DIRS_TO_DELETE = [
   '__build__',
   'dist',
   'tokens',
-  '.babel-cache',
   '.cache',
   'es',
   'src/themes/newThemeTokens',

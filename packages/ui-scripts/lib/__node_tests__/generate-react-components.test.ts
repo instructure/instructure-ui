@@ -76,8 +76,10 @@ describe('generateReactComponents', () => {
     expect(exportLineCount).toBe(glyphs.length)
 
     expect(indexFile).toContain(
-      "export { IconCheckSolid } from './IconCheckSolid'"
+      "export { IconCheckSolid } from './IconCheckSolid.js'"
     )
-    expect(indexFile).toContain("export { IconAddLine } from './IconAddLine'")
+    expect(indexFile).toContain(
+      "export { IconAddLine } from './IconAddLine.js'"
+    )
   })
 })

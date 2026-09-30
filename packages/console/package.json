@@ -2,7 +2,7 @@
   "name": "@instructure/console",
   "version": "11.7.8",
   "type": "module",
-  "description": "A babel macro made by Instructure Inc.",
+  "description": "A console wrapper made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
   "types": "./types/index.d.ts",
@@ -23,11 +23,9 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/runtime": "^7.29.7"
+    "@swc/helpers": "^0.5.23"
   },
-  "devDependencies": {
-    "@instructure/ui-babel-preset": "workspace:*"
-  },
+  "devDependencies": {},
   "peerDependencies": {
     "react": ">=18 <=19"
   },

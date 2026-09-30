@@ -27,7 +27,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/runtime": "^7.29.7",
     "@babel/standalone": "^7.29.3",
     "@instructure/canvas-high-contrast-theme": "workspace:*",
     "@instructure/canvas-theme": "workspace:*",
@@ -114,7 +113,6 @@
     "@instructure/ui-truncate-text": "workspace:*",
     "@instructure/ui-utils": "workspace:*",
     "@instructure/ui-view": "workspace:*",
-    "babel-loader": "^10.1.1",
     "buffer": "^6.0.3",
     "hoist-non-react-statics": "^3.3.2",
     "lorem-ipsum": "^3.0.0",
@@ -126,7 +124,6 @@
     "webpack-merge": "^6.0.1"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "workspace:*",
     "@instructure/ui-scripts": "workspace:*",
     "@instructure/ui-webpack-config": "workspace:*",
     "@types/hoist-non-react-statics": "^3.3.7",
@@ -138,7 +135,6 @@
     "mkdirp": "3.0.1",
     "react-docgen": "8.0.3",
     "style-loader": "4.0.0",
-    "thread-loader": "^4.0.4",
     "typescript-compiler-api": "npm:@typescript/typescript6@^6.0.2",
     "webpack-bundle-analyzer": "5.3.0"
   },
