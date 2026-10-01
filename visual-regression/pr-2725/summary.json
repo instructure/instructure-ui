@@ -1,8 +1,8 @@
 {
   "summary": {
-    "total": 96,
-    "unchanged": 67,
-    "changed": 29,
+    "total": 99,
+    "unchanged": 71,
+    "changed": 28,
     "added": 0,
     "removed": 0,
     "a11yPages": 0,
@@ -137,8 +137,8 @@
     },
     {
       "name": "calendar-canvas.png",
-      "status": "changed",
-      "numDiff": 478,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false
     },
     {
@@ -496,6 +496,24 @@
       "sizeMismatch": false
     },
     {
+      "name": "spinner-canvas.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
+    },
+    {
+      "name": "spinner-dark.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
+    },
+    {
+      "name": "spinner-light.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false
+    },
+    {
       "name": "table-canvas.png",
       "status": "unchanged",
       "numDiff": 0,
@@ -540,13 +558,13 @@
     {
       "name": "tooltip-dark.png",
       "status": "changed",
-      "numDiff": 85106,
+      "numDiff": 84597,
       "sizeMismatch": true
     },
     {
       "name": "tooltip-light.png",
       "status": "changed",
-      "numDiff": 82987,
+      "numDiff": 82455,
       "sizeMismatch": true
     },
     {
