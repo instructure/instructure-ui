@@ -189,7 +189,13 @@ export default defineConfig({
             provider: playwright(),
             headless: true,
             instances: [{ browser: 'chromium' }],
-            screenshotFailures: false
+            screenshotFailures: false,
+            commands: {
+              // off-page, so it hovers nothing the test renders
+              resetMouse: async ({ page }) => {
+                await page.mouse.move(-1, -1)
+              }
+            }
           }
         },
         // A plugin that does nothing: it exists so the stamp becomes part of
