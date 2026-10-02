@@ -84,7 +84,7 @@ type FormFieldLayoutOwnProps = {
    * `id` for the label/legend element. Useful when the control is not a
    * [labelable](https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Content_categories#labelable)
    * element (e.g. a custom widget), and needs to reference the label via
-   * `aria-labelledby`.
+   * `aria-labelledby={labelId}`.
    */
   labelId?: string
   /**
