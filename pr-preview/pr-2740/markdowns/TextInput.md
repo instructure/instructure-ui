@@ -372,7 +372,7 @@ type: embed
 | TextInput | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
 | TextInput | inputRef | `(inputElement: HTMLInputElement \| null) => void` | No | - | a function that provides a reference to the actual input element |
 | TextInput | inputContainerRef | `(element: HTMLSpanElement \| null) => void` | No | - | a function that provides a reference a parent of the input element |
-| TextInput | renderBeforeInput | `Renderable` | No | - | Content to display before the input text, such as an icon. Its text is part of the input's accessible name (after the label), unless `aria-label` or `aria-labelledby` is set. |
+| TextInput | renderBeforeInput | `Renderable` | No | - | Content to display before the input text, such as an icon |
 | TextInput | renderAfterInput | `Renderable` | No | - | Content to display after the input text, such as an icon |
 | TextInput | onChange | `(event: React.ChangeEvent<HTMLInputElement>, value: string) => void` | No | - | Callback executed when the input fires a change event. @param {Object} event - the event object @param {string} value - the string value of the input |
 | TextInput | onBlur | `(event: React.FocusEvent<HTMLInputElement>) => void` | No | - | Callback fired when input loses focus. |
