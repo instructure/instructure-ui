@@ -25,7 +25,6 @@
 import { type InputHTMLAttributes } from 'react'
 import type { FormMessage } from '@instructure/ui-form-field/latest'
 import type { OtherHTMLAttributes } from '@instructure/shared-types'
-import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 import type { Spacing } from '@instructure/emotion'
 
 import { Checkbox } from '../../Checkbox/v2/index.js'
@@ -61,8 +60,7 @@ type CheckboxGroupProps = CheckboxGroupOwnProps &
   OtherHTMLAttributes<
     CheckboxGroupOwnProps,
     InputHTMLAttributes<CheckboxGroupOwnProps & Element>
-  > &
-  WithDeterministicIdProps
+  >
 const allowedProps: AllowedPropKeys = [
   'name',
   'description',

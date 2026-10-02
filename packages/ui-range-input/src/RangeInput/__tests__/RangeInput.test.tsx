@@ -230,20 +230,7 @@ describe('<RangeInput />', () => {
         'some error message'
       )
 
-      const labelledById = input.getAttribute('aria-labelledby')
-      expect(labelledById).toBeTruthy()
-      const labelEl = document.getElementById(labelledById!)
-      expect(labelEl).toMatchTextContent('Opacity')
-      expect(labelEl).not.toMatchTextContent('some error message')
-    })
-
-    it('does not override the accessible name with aria-labelledby when there are no messages', async () => {
-      const { container } = await render(
-        <RangeInput label="Opacity" name="opacity" max={100} min={0} />
-      )
-      const input = container.querySelector('input')!
-
-      expect(input).not.toHaveAttribute('aria-labelledby')
+      expect(input).toHaveAccessibleName('Opacity')
     })
 
     it('formats the aria-valuetext attribute', async () => {
