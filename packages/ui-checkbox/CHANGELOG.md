@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.8](https://github.com/instructure/instructure-ui/compare/v11.7.7...v11.7.8) (2026-10-02)
+
+### Bug Fixes
+
+* **ui-form-field:** always display messages at the top of form groups (radio group, checkbox group, formFieldGroup) ([2d18472](https://github.com/instructure/instructure-ui/commit/2d18472a52846202bf0993e2786c5c21dc7aba1b))
+
+
 ## [11.7.7](https://github.com/instructure/instructure-ui/compare/v11.7.6...v11.7.7) (2026-09-23)
 
 **Note:** Version bump only for package @instructure/ui-checkbox

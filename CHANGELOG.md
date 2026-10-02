@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.8](https://github.com/instructure/instructure-ui/compare/v11.7.7...v11.7.8) (2026-10-02)
+
+### Bug Fixes
+
+* **ui-date-input,ui-text-input:** label the input with aria-labelledby ([5e30958](https://github.com/instructure/instructure-ui/commit/5e30958230751e2f2f5dedb3d0b05c2a37341303))
+* **ui-form-field:** always display messages at the top of form groups (radio group, checkbox group, formFieldGroup) ([2d18472](https://github.com/instructure/instructure-ui/commit/2d18472a52846202bf0993e2786c5c21dc7aba1b))
+* **ui-instructure:** improve screen reader support in AiInformation and DataPermissionLevels ([ed2720b](https://github.com/instructure/instructure-ui/commit/ed2720b84d126ad1f0c452d200e351cf3b2f538f))
+* **ui-link,ui-breadcrumb,ui-table:** avoid layout shifts on SSR hydration ([d90cd09](https://github.com/instructure/instructure-ui/commit/d90cd09fcf63775879830a1809cd5169acf91b5f))
+
+### Features
+
+* **docs-app,ui-buttons:** add a curated prop playground to component docs ([7c051d8](https://github.com/instructure/instructure-ui/commit/7c051d8b8ba3917f12776ee35f9dac6a5943a370))
+* **docs-app,ui-buttons:** add auto-generated prop playground ([2be455d](https://github.com/instructure/instructure-ui/commit/2be455dca9ebe2c409d052f8d0e956882f1a5f21))
+
+
 ## [11.7.7](https://github.com/instructure/instructure-ui/compare/v11.7.6...v11.7.7) (2026-09-23)
 
 ### Bug Fixes

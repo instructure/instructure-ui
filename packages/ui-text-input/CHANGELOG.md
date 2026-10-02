@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.8](https://github.com/instructure/instructure-ui/compare/v11.7.7...v11.7.8) (2026-10-02)
+
+### Bug Fixes
+
+* **ui-date-input,ui-text-input:** label the input with aria-labelledby ([5e30958](https://github.com/instructure/instructure-ui/commit/5e30958230751e2f2f5dedb3d0b05c2a37341303))
+
+
 ## [11.7.7](https://github.com/instructure/instructure-ui/compare/v11.7.6...v11.7.7) (2026-09-23)
 
 ### Bug Fixes
