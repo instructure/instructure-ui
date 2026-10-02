@@ -119,7 +119,9 @@ const parseType = (key: string, tokenObject: any, acc: string): string => {
       case 'borderRadius':
       case 'borderWidth':
       case 'color':
+      case 'cubicBezier':
       case 'dimension':
+      case 'duration':
       case 'fontFamilies':
       case 'fontSizes':
       case 'letterSpacing':
@@ -127,6 +129,7 @@ const parseType = (key: string, tokenObject: any, acc: string): string => {
       case 'sizing':
       case 'spacing':
       case 'text':
+      case 'transition':
         ret += 'string'
         break
       case 'fontWeights':
