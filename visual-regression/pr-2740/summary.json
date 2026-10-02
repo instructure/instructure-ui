@@ -5,8 +5,8 @@
     "changed": 0,
     "added": 0,
     "removed": 0,
-    "a11yPages": 3,
-    "a11yViolations": 3
+    "a11yPages": 0,
+    "a11yViolations": 0
   },
   "results": [
     {
@@ -703,14 +703,5 @@
       "layoutShifted": false
     }
   ],
-  "a11y": [
-    {
-      "rule": "label",
-      "impact": "critical",
-      "title": "Form field has no label",
-      "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/label?application=axeAPI",
-      "nodes": 3,
-      "screens": 3
-    }
-  ]
+  "a11y": []
 }
