@@ -172,7 +172,9 @@ type TextInputOwnProps = {
   inputContainerRef?: (element: HTMLSpanElement | null) => void
 
   /**
-   * Content to display before the input text, such as an icon
+   * Content to display before the input text, such as an icon.
+   * Its text is part of the input's accessible name (after the label), unless
+   * `aria-label` or `aria-labelledby` is set.
    */
   renderBeforeInput?: Renderable
 

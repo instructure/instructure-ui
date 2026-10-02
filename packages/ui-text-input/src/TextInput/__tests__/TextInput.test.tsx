@@ -252,19 +252,47 @@ describe('<TextInput/>', () => {
         'some error message'
       )
 
-      // the accessible name points at the label text only, excluding messages
-      const labelledById = input.getAttribute('aria-labelledby')
-      expect(labelledById).toBeTruthy()
-      const labelEl = document.getElementById(labelledById!)
-      expect(labelEl).toMatchTextContent('Name')
-      expect(labelEl).not.toMatchTextContent('some error message')
+      // the accessible name is the label text only, excluding messages
+      expect(input).toHaveAccessibleName('Name')
     })
 
-    it('does not override the accessible name with aria-labelledby when there are no messages', async () => {
-      await render(<TextInput renderLabel="Name" />)
+    it('does not reference hidden messages when read-only', async () => {
+      await render(
+        <TextInput
+          renderLabel="Name"
+          interaction="readonly"
+          messages={[{ type: 'error', text: 'some error message' }]}
+        />
+      )
       const input = page.getByRole('textbox').element()
 
+      expect(input).not.toHaveAttribute('aria-describedby')
+    })
+
+    it('lets aria-label override the content rendered before the input', async () => {
+      await render(
+        <TextInput
+          renderLabel="Fruits"
+          aria-label="Fruits"
+          renderBeforeInput={<button type="button">Remove Apple</button>}
+        />
+      )
+      const input = page.getByRole('textbox').element()
+
+      expect(input).toHaveAccessibleName('Fruits')
       expect(input).not.toHaveAttribute('aria-labelledby')
+    })
+
+    it('keeps content rendered after the input out of the accessible name', async () => {
+      await render(
+        <TextInput
+          renderLabel="Name"
+          renderAfterInput={<button type="button">Clear</button>}
+        />
+      )
+      const input = page.getByRole('textbox').element()
+
+      expect(input).toHaveAccessibleName('Name')
     })
   })
 

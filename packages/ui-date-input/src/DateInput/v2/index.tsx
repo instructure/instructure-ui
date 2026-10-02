@@ -33,11 +33,7 @@ import {
 } from '@instructure/ui-icons'
 import { Popover } from '@instructure/ui-popover/latest'
 import { TextInput } from '@instructure/ui-text-input/latest'
-import {
-  callRenderProp,
-  passthroughProps,
-  useDeterministicId
-} from '@instructure/ui-react-utils'
+import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
 import { getLocale, getTimezone } from '@instructure/ui-i18n'
 
 import type { DateInputProps } from './props'
@@ -262,7 +258,6 @@ const DateInput = forwardRef(
     }
 
     const selectedDate = parseDate(value)[1]
-    const labelId = useDeterministicId('TextInput-label')()
 
     return (
       <TextInput
@@ -270,8 +265,6 @@ const DateInput = forwardRef(
         ref={ref}
         inputRef={inputRef}
         renderLabel={renderLabel}
-        labelId={labelId}
-        aria-labelledby={labelId}
         onChange={handleInputChange}
         onBlur={handleBlur}
         isRequired={isRequired}
