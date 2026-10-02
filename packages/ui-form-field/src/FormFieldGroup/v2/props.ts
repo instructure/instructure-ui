@@ -31,8 +31,12 @@ import type {
   ComponentStyle,
   Spacing
 } from '@instructure/emotion'
-import type { FormFieldLayoutOwnProps } from '../../FormFieldLayout/v2/props'
+import type {
+  FormFieldLayoutChildren,
+  FormFieldLayoutOwnProps
+} from '../../FormFieldLayout/v2/props'
 import type { FormMessage } from '../../utils/v1/FormPropTypes'
+import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 type FormFieldGroupOwnProps = {
   description: React.ReactNode
@@ -60,7 +64,11 @@ type FormFieldGroupOwnProps = {
    * Whether the field group is read-only. When true, error and success messages will be hidden.
    */
   readOnly?: boolean
-  children?: React.ReactNode
+  /**
+   * The form controls. Can be a function that receives `{ describedBy }`, so
+   * the controls can reference the group messages via `aria-describedby`.
+   */
+  children?: FormFieldLayoutChildren
   layout?: 'stacked' | 'columns' | 'inline'
   rowSpacing?: 'none' | 'small' | 'medium' | 'large'
   colSpacing?: 'none' | 'small' | 'medium' | 'large'
@@ -85,11 +93,18 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 type FormFieldGroupProps = FormFieldGroupOwnProps &
   WithStyleProps<null, FormFieldGroupStyle> &
   OtherHTMLAttributes<FormFieldGroupOwnProps> &
+  WithDeterministicIdProps &
   // Adding other props that can be passed to FormFieldLayout,
   // excluding the ones we set manually
   Omit<
     FormFieldLayoutOwnProps,
-    'messages' | 'messagesId' | 'vAlign' | 'layout' | 'label' | 'children'
+    | 'id'
+    | 'messages'
+    | 'messagesId'
+    | 'vAlign'
+    | 'layout'
+    | 'label'
+    | 'children'
   >
 
 type FormFieldGroupStyle = ComponentStyle<'formFieldGroup'>

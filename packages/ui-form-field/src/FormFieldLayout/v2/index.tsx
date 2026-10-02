@@ -32,6 +32,27 @@ import generateStyle from './styles.js'
 import { allowedProps } from './props.js'
 import type { FormFieldLayoutProps } from './props'
 
+// Elements that handle clicks themselves, do not override it
+const INTERACTIVE_SELECTOR = [
+  'a[href]',
+  'button',
+  'input',
+  'select',
+  'textarea',
+  'label',
+  'summary',
+  'iframe',
+  'embed',
+  'object',
+  'audio[controls]',
+  'video[controls]',
+  '[contenteditable]:not([contenteditable="false"])',
+  '[tabindex]'
+].join(',')
+
+// Clicks already forwarded by a nested FormFieldLayout
+const forwardedClicks = new WeakSet<Event>()
+
 /**
 ---
 parent: FormField
@@ -42,10 +63,11 @@ const FormFieldLayout = forwardRef<Element, FormFieldLayoutProps>(
     const {
       inline = false,
       layout = 'stacked',
-      as = 'label',
+      as = 'div',
       labelAlign = 'end',
       vAlign,
       label,
+      id,
       messages,
       messagesId: messagesIdProp,
       labelId: labelIdProp,
@@ -107,6 +129,8 @@ const FormFieldLayout = forwardRef<Element, FormFieldLayoutProps>(
 
     const hasVisibleLabel = label ? hasVisibleChildren(label) : false
 
+    const describedBy = hasMessages ? messagesId : undefined
+
     const invalid = !!filteredMessages?.find(
       (m) => m.type === 'error' || m.type === 'newError'
     )
@@ -159,6 +183,31 @@ const FormFieldLayout = forwardRef<Element, FormFieldLayoutProps>(
       [inputContainerRef]
     )
 
+    // Clicks on the rest of the control area (icons, before/after content) need
+    // to be forwarded to the control.
+    const handleChildrenClick = (e: React.MouseEvent<HTMLElement>) => {
+      if (
+        // it's a group, no clear control to forward to
+        ElementType === 'fieldset' ||
+        e.defaultPrevented ||
+        forwardedClicks.has(e.nativeEvent)
+      ) {
+        return
+      }
+      const container = e.currentTarget
+      const interactive = (e.target as Element).closest(INTERACTIVE_SELECTOR)
+      if (interactive && container.contains(interactive)) {
+        return // do not steal clicks for e.g. DateInput's calendar icon
+      }
+      const control = id ? container.ownerDocument.getElementById(id) : null
+      if (!control || !container.contains(control)) {
+        return // no control
+      }
+      forwardedClicks.add(e.nativeEvent)
+      control.focus()
+      control.click()
+    }
+
     const renderLabel = () => {
       const labelContent = hasVisibleLabel ? (
         <>
@@ -188,9 +237,9 @@ const FormFieldLayout = forwardRef<Element, FormFieldLayoutProps>(
           )
         }
         return (
-          <span css={styles?.formFieldLabel} id={labelId}>
+          <label css={styles?.formFieldLabel} id={labelId} htmlFor={id}>
             {labelContent}
-          </span>
+          </label>
         )
       } else if (label) {
         if (ElementType === 'fieldset') {
@@ -200,11 +249,10 @@ const FormFieldLayout = forwardRef<Element, FormFieldLayoutProps>(
             </legend>
           )
         }
-        // needs to be wrapped because it needs an `id`
         return (
-          <div id={labelId} style={{ display: 'contents' }}>
+          <label id={labelId} htmlFor={id} style={{ display: 'contents' }}>
             {label}
-          </div>
+          </label>
         )
       } else return null
     }
@@ -230,8 +278,16 @@ const FormFieldLayout = forwardRef<Element, FormFieldLayoutProps>(
       >
         {renderLabel()}
         {isGroup && renderMessages()}
-        <span css={styles?.formFieldChildren} ref={handleInputContainerRef}>
-          {children}
+        {/* Clicks are forwarded to the control. Needed for e.g. Select's down arrow */}
+        {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
+        <span
+          css={styles?.formFieldChildren}
+          ref={handleInputContainerRef}
+          onClick={handleChildrenClick}
+        >
+          {typeof children === 'function'
+            ? children({ describedBy })
+            : children}
         </span>
         {!isGroup && renderMessages()}
       </ElementType>

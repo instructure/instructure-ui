@@ -36,5 +36,8 @@ export type {
 export type { FormFieldOwnProps, FormFieldProps } from '../FormField/v2/props'
 export type { FormFieldMessageProps } from '../FormFieldMessage/v2/props'
 export type { FormFieldMessagesProps } from '../FormFieldMessages/v2/props'
-export type { FormFieldLayoutProps } from '../FormFieldLayout/v2/props'
+export type {
+  FormFieldLayoutProps,
+  FormFieldLayoutChildrenParams
+} from '../FormFieldLayout/v2/props'
 export type { FormFieldGroupProps } from '../FormFieldGroup/v2/props'

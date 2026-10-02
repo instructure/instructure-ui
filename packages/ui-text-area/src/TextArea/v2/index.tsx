@@ -123,10 +123,6 @@ const TextArea = forwardRef<TextAreaElement, TextAreaProps>((props, ref) => {
     return { isInvalid, isSuccess }
   }, [messages])
 
-  const hasMessages = !!messages?.some((m) => !!m.text)
-  const messagesId = `${id}-messages`
-  const labelId = `${id}-label`
-
   // Use styles
   const styles = useStyleNew({
     generateStyle,
@@ -375,7 +371,7 @@ const TextArea = forwardRef<TextAreaElement, TextAreaProps>((props, ref) => {
     maxHeight
   }
 
-  const textarea = (
+  const renderTextarea = (describedBy: string | undefined) => (
     <textarea
       {...passthroughProps(rest)}
       value={value}
@@ -392,16 +388,9 @@ const TextArea = forwardRef<TextAreaElement, TextAreaProps>((props, ref) => {
       required={required}
       aria-required={required}
       aria-invalid={isInvalid ? 'true' : undefined}
-      // Keep messages in the description so the accessible name contains only the label.
       aria-describedby={
-        [rest['aria-describedby'], hasMessages ? messagesId : null]
-          .filter(Boolean)
-          .join(' ') || undefined
-      }
-      aria-labelledby={
-        hasMessages
-          ? rest['aria-labelledby'] || labelId
-          : rest['aria-labelledby']
+        [rest['aria-describedby'], describedBy].filter(Boolean).join(' ') ||
+        undefined
       }
       disabled={disabled}
       readOnly={readOnly}
@@ -414,8 +403,6 @@ const TextArea = forwardRef<TextAreaElement, TextAreaProps>((props, ref) => {
     <FormField
       {...pickProps(props, FormField.allowedProps)}
       label={label}
-      messagesId={messagesId}
-      labelId={labelId}
       vAlign="top"
       id={id}
       elementRef={(el) => {
@@ -427,18 +414,20 @@ const TextArea = forwardRef<TextAreaElement, TextAreaProps>((props, ref) => {
       readOnly={readOnly}
       data-cid="TextArea"
     >
-      <div
-        css={styles?.textAreaLayout}
-        style={{
-          width,
-          maxHeight
-        }}
-        ref={(node) => {
-          _container.current = node
-        }}
-      >
-        {textarea}
-      </div>
+      {({ describedBy }) => (
+        <div
+          css={styles?.textAreaLayout}
+          style={{
+            width,
+            maxHeight
+          }}
+          ref={(node) => {
+            _container.current = node
+          }}
+        >
+          {renderTextarea(describedBy)}
+        </div>
+      )}
     </FormField>
   )
 })

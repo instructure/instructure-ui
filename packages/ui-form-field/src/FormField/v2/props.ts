@@ -27,6 +27,7 @@ import React from 'react'
 import type { OtherHTMLAttributes } from '@instructure/shared-types'
 import type { FormMessage } from '../../utils/v1/FormPropTypes'
 import type { Spacing } from '@instructure/emotion'
+import type { FormFieldLayoutChildren } from '../../FormFieldLayout/v2/props'
 
 type FormFieldOwnProps = {
   label: React.ReactNode
@@ -47,11 +48,16 @@ type FormFieldOwnProps = {
    */
   messagesId?: string
   /**
-   * id for the label element, so a single form control can reference just the
-   * label text via `aria-labelledby` (keeping messages out of its accessible name)
+   * id for the label element. Useful when the control is not a labelable
+   * element (e.g. a custom widget), and needs to reference the label via
+   * `aria-labelledby`.
    */
   labelId?: string
-  children?: React.ReactNode
+  /**
+   * The form control. Can be a function that receives `{ describedBy }`, so
+   * the control can reference the messages via `aria-describedby`.
+   */
+  children?: FormFieldLayoutChildren
   inline?: boolean
   layout?: 'stacked' | 'inline'
   labelAlign?: 'start' | 'end'
