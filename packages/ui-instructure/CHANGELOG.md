@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.8](https://github.com/instructure/instructure-ui/compare/v11.7.7...v11.7.8) (2026-10-02)
+
+### Bug Fixes
+
+* **ui-instructure:** improve screen reader support in AiInformation and DataPermissionLevels ([ed2720b](https://github.com/instructure/instructure-ui/commit/ed2720b84d126ad1f0c452d200e351cf3b2f538f))
+
+
 ## [11.7.7](https://github.com/instructure/instructure-ui/compare/v11.7.6...v11.7.7) (2026-09-23)
 
 **Note:** Version bump only for package @instructure/ui-instructure

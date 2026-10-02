@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.8](https://github.com/instructure/instructure-ui/compare/v11.7.7...v11.7.8) (2026-10-02)
+
+### Features
+
+* **docs-app,ui-buttons:** add a curated prop playground to component docs ([7c051d8](https://github.com/instructure/instructure-ui/commit/7c051d8b8ba3917f12776ee35f9dac6a5943a370))
+* **docs-app,ui-buttons:** add auto-generated prop playground ([2be455d](https://github.com/instructure/instructure-ui/commit/2be455dca9ebe2c409d052f8d0e956882f1a5f21))
+
+
 ## [11.7.7](https://github.com/instructure/instructure-ui/compare/v11.7.6...v11.7.7) (2026-09-23)
 
 **Note:** Version bump only for package docs-app
