@@ -53,6 +53,12 @@ const generateStyle = (
       label: 'modalBody',
       boxSizing: 'border-box',
       flex: '1 1 auto',
+      // Safari sometimes doesn't repaint text in tall scrolling content after
+      // a fade-in transition ends (e.g. nested ToggleGroups), leaving it
+      // invisible. `isolation: isolate` makes this element a stacking context:
+      // its children are layered and painted as one group, separately from the
+      // rest of the page, which avoids the bug.
+      isolation: 'isolate',
       '&:focus': {
         outline: 'none'
       },
