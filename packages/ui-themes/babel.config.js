@@ -28,8 +28,7 @@ module.exports = {
       require('@instructure/ui-babel-preset'),
       {
         esModules: Boolean(process.env.ES_MODULES),
-        removeConsole: process.env.NODE_ENV === 'production',
-        transformImports: false
+        removeConsole: process.env.NODE_ENV === 'production'
       }
     ]
   ]

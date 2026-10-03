@@ -28,7 +28,7 @@ import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { deepEqual } from '@instructure/ui-utils'
-import conversions from '@instructure/ui-color-utils'
+import { colorToHex8, colorToRGB } from '@instructure/ui-color-utils'
 
 import { ColorMixer } from '@instructure/ui-color-picker/latest'
 
@@ -176,7 +176,7 @@ describe('<ColorMixer />', () => {
         const [r, g, b, a] = inputs.map((input) =>
           Number(input.getAttribute('value'))
         )
-        const colorHex = conversions.colorToHex8({ r, g, b, a })
+        const colorHex = colorToHex8({ r, g, b, a })
         expect(colorHex).toBe(color)
       })
     })
@@ -198,7 +198,7 @@ describe('<ColorMixer />', () => {
         const [r, g, b, a] = inputs.map((input) =>
           Number(input.getAttribute('value'))
         )
-        const rgba = conversions.colorToRGB(colorInput)
+        const rgba = colorToRGB(colorInput)
         rgba.a = Math.round(rgba.a * 100)
         expect(deepEqual(rgba, { r, g, b, a })).toBe(true)
       })
@@ -219,7 +219,7 @@ describe('<ColorMixer />', () => {
       const [r, g, b, a] = inputs.map((input: any) =>
         Number(input.getAttribute('value'))
       )
-      const colorHex = conversions.colorToHex8({ r, g, b, a })
+      const colorHex = colorToHex8({ r, g, b, a })
       expect(colorHex).toBe('#000000FF')
 
       await vi.waitFor(() => {
@@ -781,7 +781,7 @@ describe('<ColorMixer />', () => {
   it('should not move the hue indicator when reach the left border', async () => {
     await render(
       <ColorMixer
-        value={conversions.colorToHex8({ h: 0, s: 0.5, v: 0.5 })}
+        value={colorToHex8({ h: 0, s: 0.5, v: 0.5 })}
         {...testInputLabels}
         {...testScreenReaderLabels}
         onChange={vi.fn()}
@@ -1152,7 +1152,7 @@ describe('<ColorMixer />', () => {
   it('should palette indicator does not move up when it reach the top border', async () => {
     await render(
       <ColorMixer
-        value={conversions.colorToHex8({ h: 200, s: 0.5, v: 1, a: 1 })}
+        value={colorToHex8({ h: 200, s: 0.5, v: 1, a: 1 })}
         {...testInputLabels}
         {...testScreenReaderLabels}
         onChange={vi.fn()}
@@ -1172,7 +1172,7 @@ describe('<ColorMixer />', () => {
   it('should palette indicator does not move down when it reach the bottom border', async () => {
     await render(
       <ColorMixer
-        value={conversions.colorToHex8({ h: 200, s: 0.5, v: 0, a: 1 })}
+        value={colorToHex8({ h: 200, s: 0.5, v: 0, a: 1 })}
         {...testInputLabels}
         {...testScreenReaderLabels}
         onChange={vi.fn()}
@@ -1192,7 +1192,7 @@ describe('<ColorMixer />', () => {
   it('should palette indicator does not move left when it reach the left border', async () => {
     await render(
       <ColorMixer
-        value={conversions.colorToHex8({ h: 200, s: 0, v: 0.5, a: 1 })}
+        value={colorToHex8({ h: 200, s: 0, v: 0.5, a: 1 })}
         {...testInputLabels}
         {...testScreenReaderLabels}
         onChange={vi.fn()}
@@ -1212,7 +1212,7 @@ describe('<ColorMixer />', () => {
   it('should palette indicator does not move right when it reach the right border', async () => {
     await render(
       <ColorMixer
-        value={conversions.colorToHex8({ h: 200, s: 1, v: 0.5, a: 1 })}
+        value={colorToHex8({ h: 200, s: 1, v: 0.5, a: 1 })}
         {...testInputLabels}
         {...testScreenReaderLabels}
         onChange={vi.fn()}

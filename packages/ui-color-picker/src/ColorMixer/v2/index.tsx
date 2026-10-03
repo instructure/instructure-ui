@@ -26,8 +26,12 @@ import { Component } from 'react'
 
 import { withStyleNew } from '@instructure/emotion'
 import { omitProps } from '@instructure/ui-react-utils'
-import { isValid } from '@instructure/ui-color-utils'
-import conversions from '@instructure/ui-color-utils'
+import {
+  isValid,
+  colorToHsva,
+  colorToHex8,
+  colorToRGB
+} from '@instructure/ui-color-utils'
 import { logWarn as warn } from '@instructure/console'
 import type { HSVType } from '@instructure/ui-color-utils'
 import ColorPalette from './ColorPalette/index.js'
@@ -90,7 +94,7 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
       `[ColorMixer] The passed color value is not valid.`
     )
     this.setState({
-      ...conversions.colorToHsva(this.props.value!)
+      ...colorToHsva(this.props.value!)
     })
   }
 
@@ -103,14 +107,14 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
       prevState.v !== v ||
       prevState.a !== a
     ) {
-      this.props.onChange(conversions.colorToHex8({ h, s, v, a }))
+      this.props.onChange(colorToHex8({ h, s, v, a }))
     }
     if (
       prevProps.value !== this.props.value &&
-      conversions.colorToHex8({ h, s, v, a }) !== this.props.value
+      colorToHex8({ h, s, v, a }) !== this.props.value
     ) {
       this.setState({
-        ...conversions.colorToHsva(this.props.value!)
+        ...colorToHsva(this.props.value!)
       })
     }
   }
@@ -141,7 +145,7 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
       >
         <span
           css={styles?.sliderAndPaletteContainer}
-          aria-label={`${conversions.colorToHex8({ h, s, v, a })}`}
+          aria-label={`${colorToHex8({ h, s, v, a })}`}
           aria-live="polite"
         >
           <ColorPalette
@@ -171,7 +175,7 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
             value={h}
             minValue={0}
             maxValue={359}
-            color={conversions.colorToHex8({ h, s, v, a })}
+            color={colorToHex8({ h, s, v, a })}
             onChange={(hue: number) => {
               this.setState({ h: hue })
             }}
@@ -185,7 +189,7 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
               width={this._width}
               height={this._sliderHeight}
               indicatorRadius={this._sliderIndicatorRadius}
-              color={conversions.colorToHex8({ h, s, v })}
+              color={colorToHex8({ h, s, v })}
               value={a}
               minValue={0}
               maxValue={1}
@@ -200,10 +204,8 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
           disabled={disabled}
           label={withAlpha ? 'RGBA' : 'RGB'}
           width={this._width}
-          value={conversions.colorToRGB({ h, s, v, a })}
-          onChange={(color) =>
-            this.setState({ ...conversions.colorToHsva(color) })
-          }
+          value={colorToRGB({ h, s, v, a })}
+          onChange={(color) => this.setState({ ...colorToHsva(color) })}
           withAlpha={withAlpha}
           rgbRedInputScreenReaderLabel={rgbRedInputScreenReaderLabel}
           rgbGreenInputScreenReaderLabel={rgbGreenInputScreenReaderLabel}

@@ -95,8 +95,7 @@ export default {
       }),
       cjs: [
         getCommand('babel', [...babelArgs, '--out-dir', 'lib'], {
-          ...envVars,
-          ...{ TRANSFORM_IMPORTS: '1' }
+          ...envVars
         }),
         getCommand(specifyCJSFormat, [])
       ]

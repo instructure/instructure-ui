@@ -38,23 +38,4 @@ export {
   colorToRGB
 } from './conversions.js'
 
-import {
-  color2hex,
-  colorToHex8,
-  colorToHsva,
-  colorToHsla,
-  colorToRGB
-} from './conversions.js'
-
-// TODO remove when we get rid of babel-plugin-transform-imports
-// This default export is needed because babel-plugin-transform-imports will
-// fail if the exported name is not the same as the filename
-export default {
-  color2hex: color2hex,
-  colorToHex8: colorToHex8,
-  colorToHsva: colorToHsva,
-  colorToHsla: colorToHsla,
-  colorToRGB: colorToRGB
-}
-
 export type { RGBType, HSVType, HSLType, RGBAType } from './colorTypes'
