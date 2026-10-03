@@ -34,6 +34,8 @@ import { applyColorModifiers } from './styleUtils/applyColorModifiers.js'
  * @module useComputedTheme
  * @returns An object containing the computed `primitives`, `semantics`,
  *          `components` and `sharedTokens` of the current theme.
+ *          Only use `sharedTokens` in your code from these, it's the only one
+ *          guaranteed to have the same shape across themes.
  */
 export const useComputedTheme = () => {
   const rawTheme = (useTheme() as any).newTheme
