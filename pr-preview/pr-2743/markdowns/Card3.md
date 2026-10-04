@@ -23,6 +23,7 @@ type: example
 |-----------|------|------|----------|---------|-------------|
 | Card3 | children | `ReactNode` | No | - | The content to be rendered inside the Card |
 | Card3 | src | `string` | Yes | - | image source string. It gets passed to InstUI's <Img> component |
+| Card3 | size | `'sm' \| 'md' \| 'lg'` | No | `'md'` | Scales padding and border radius. |
 
 ### Usage
 
