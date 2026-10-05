@@ -29,7 +29,7 @@ import type {
   ComponentStyle,
   NewThemeOverrideProp
 } from '@instructure/emotion'
-import type { DesignTokensV1ComponentTypes } from '@instructure/ui-themes'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { Renderable } from '@instructure/shared-types'
 
 type AlertOwnProps = {
@@ -41,6 +41,11 @@ type AlertOwnProps = {
    * Determines color and icon
    */
   variant?: 'info' | 'success' | 'warning' | 'error'
+  /**
+   * `prominent` is for page-level alerts that need a prominent message,
+   * `dimmed` for alerts inside a content region.
+   */
+  prominence?: 'prominent' | 'dimmed'
   /**
    * How the screen reader should announce the alert variant. While the `variant` prop sets the color and icon for the alert component, this label should be a textual representation of that information. So e.g. if the variant is `info`, this label could be "Information," or "Information alert,". Note the `,` at the end of the label which helps the screenreader to be more natural sounding.
    */
@@ -101,9 +106,9 @@ type AlertOwnProps = {
    */
   open?: boolean
   /**
-   * If the alert should have a shadow.
+   * The width of the alert.
    */
-  hasShadow?: boolean
+  width?: string | number
 
   /**
    * An icon, or function that returns an icon. Setting it will override the variant's icon.
@@ -121,17 +126,18 @@ type PropKeys = keyof AlertOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type AlertProps = AlertOwnProps &
-  NewThemeOverrideProp<ReturnType<DesignTokensV1ComponentTypes['Alert']>>
+  NewThemeOverrideProp<ReturnType<NewComponentTypes['Alert']>>
 
 type AlertStyle = ComponentStyle<
   'alert' | 'icon' | 'closeButton' | 'content' | 'variantScreenReaderLabel'
 >
 
-type AlertStyleParams = Required<Pick<AlertProps, 'variant' | 'hasShadow'>>
+type AlertStyleParams = Required<Pick<AlertProps, 'variant' | 'prominence'>>
 
 const allowedProps: AllowedPropKeys = [
   'children',
   'variant',
+  'prominence',
   'margin',
   'liveRegion',
   'liveRegionPoliteness',
@@ -142,7 +148,7 @@ const allowedProps: AllowedPropKeys = [
   'onDismiss',
   'transition',
   'open',
-  'hasShadow',
+  'width',
   'renderCustomIcon',
   'elementRef'
 ]

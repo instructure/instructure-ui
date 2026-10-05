@@ -38,12 +38,12 @@ import {
   InfoInstUIIcon,
   XCircleInstUIIcon,
   CircleCheckInstUIIcon,
-  TriangleAlertInstUIIcon
+  TriangleAlertInstUIIcon,
+  renderIconWithProps
 } from '@instructure/ui-icons'
 import { Transition } from '@instructure/ui-motion'
 import { logError as error } from '@instructure/console'
 import { useStyleNew } from '@instructure/emotion'
-import { frozenThemesDesignTokensV1 } from '@instructure/ui-themes'
 
 import generateStyle from './styles.js'
 
@@ -55,6 +55,13 @@ const variantUI = {
   success: CircleCheckInstUIIcon,
   warning: TriangleAlertInstUIIcon
 }
+
+const inlineIconColor = {
+  error: 'errorColor',
+  info: 'infoColor',
+  success: 'successColor',
+  warning: 'warningColor'
+} as const
 
 const isDOMNode = (n: Element | null | undefined): n is Element =>
   !!n && typeof n === 'object' && n.nodeType === 1
@@ -73,6 +80,7 @@ const Alert = (props: AlertProps) => {
   const {
     children = null,
     variant = 'info',
+    prominence = 'prominent',
     variantScreenReaderLabel,
     liveRegion,
     liveRegionPoliteness = 'assertive',
@@ -84,7 +92,7 @@ const Alert = (props: AlertProps) => {
     onDismiss,
     transition = 'fade',
     open: openProp = true,
-    hasShadow = true,
+    width,
     renderCustomIcon,
     elementRef,
     themeOverride,
@@ -95,13 +103,14 @@ const Alert = (props: AlertProps) => {
   const srid = useDeterministicId('Alert')()
   const timeouts = useRef<ReturnType<typeof setTimeout>[]>([])
 
+  const isOnColor = prominence === 'prominent' && variant !== 'warning'
+
   const styles = useStyleNew({
     generateStyle,
     themeOverride,
-    params: { variant, hasShadow },
+    params: { variant, prominence },
     componentId: 'Alert',
-    displayName: 'Alert',
-    frozenTheme: frozenThemesDesignTokensV1
+    displayName: 'Alert'
   })
 
   // ensure screen readers announce relevant content changes in the live region
@@ -181,10 +190,19 @@ const Alert = (props: AlertProps) => {
   }
 
   const renderIcon = () => {
-    const Icon = variantUI[variant]
+    const iconColor =
+      prominence === 'dimmed'
+        ? inlineIconColor[variant]
+        : isOnColor
+        ? 'onColor'
+        : 'baseColor'
     return (
       <div css={styles?.icon}>
-        {renderCustomIcon ? callRenderProp(renderCustomIcon) : <Icon />}
+        {renderIconWithProps(
+          renderCustomIcon ?? variantUI[variant],
+          'sm',
+          iconColor
+        )}
       </div>
     )
   }
@@ -198,6 +216,7 @@ const Alert = (props: AlertProps) => {
         <CloseButton
           onClick={close}
           size="small"
+          color={isOnColor ? 'primary-inverse' : 'primary'}
           screenReaderLabel={closeButtonLabel}
         />
       </div>
@@ -209,6 +228,7 @@ const Alert = (props: AlertProps) => {
       {...passthroughProps(rest)}
       as="div"
       margin={margin}
+      width={width}
       css={styles?.alert}
       onKeyUp={handleKeyUp}
       elementRef={handleRef}
