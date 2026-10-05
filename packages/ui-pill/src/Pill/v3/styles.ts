@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import type { PillProps, PillStyle } from './props'
 import type { DesignTokensV1ComponentTypes } from '@instructure/ui-themes'
+import type { PillStyle, PillStyleParams } from './props'
 
 /**
  * ---
@@ -31,14 +31,14 @@ import type { DesignTokensV1ComponentTypes } from '@instructure/ui-themes'
  * ---
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} params Additional parameters to customize the style.
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
   componentTheme: ReturnType<DesignTokensV1ComponentTypes['Pill']>,
-  props: PillProps
+  params: PillStyleParams
 ): PillStyle => {
-  const { color } = props
+  const { color } = params
 
   const pillColorVariants = {
     primary: {
@@ -77,7 +77,7 @@ const generateStyle = (
       fontFamily: componentTheme.fontFamily,
       height: componentTheme.height,
       lineHeight: componentTheme.lineHeight,
-      ...pillColorVariants[color!]
+      ...pillColorVariants[color]
     },
     status: {
       label: 'pill__status',
