@@ -3,7 +3,8 @@ describes: Alert
 ---
 
 The Alert component can be used to notify the user. It supports several
-variants to provide context to the message.
+variants to provide context to the message, and two prominence levels:
+`prominent` (default) and `dimmed`.
 
 Alert can optionally render as a dismissible 'dialog' with a close button.
 
@@ -14,13 +15,7 @@ space above or below the alert.
 ---
 type: example
 ---
-<InstUISettingsProvider theme={{
-    componentOverrides: {
-      "Alert": {
-        dangerIconBackground: 'purple'
-      }
-    }
-}}>
+<div>
   <Alert
     variant="success"
     renderCloseButtonLabel="Close"
@@ -56,7 +51,114 @@ type: example
   >
     Sample warning text. This alert is not dismissible and cannot be closed.
   </Alert>
-</InstUISettingsProvider>
+</div>
+```
+
+### Prominence
+
+Use `prominent` (default) for page-level alerts that need a prominent
+message. It has a bold background color and a shadow.
+
+Use `dimmed` when the Alert lives inside a content region and should flow
+with the surrounding content. It has a muted background, no shadow and a
+color-coded icon.
+
+```js
+---
+type: example
+---
+<div>
+  <Alert variant="success" renderCloseButtonLabel="Close" margin="0 0 general.spaceLg">
+    This is a prominent Alert for page-level messages.
+  </Alert>
+
+  <Heading level="h3" margin="general.spaceLg 0 general.spaceLg">
+    Lorem ipsum dolor sit amet
+  </Heading>
+  <Text as="p">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat.
+  </Text>
+  <Alert
+    variant="info"
+    prominence="dimmed"
+  >
+    This dimmed Alert sits between two paragraphs.
+  </Alert>
+  <Text as="p">
+    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+    eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+    sunt in culpa qui officia deserunt mollit anim id est laborum.
+  </Text>
+
+  <div>
+    <div style={{ float: 'inline-end', marginInlineStart: '1rem' }}>
+      <Alert
+        variant="info"
+        prominence="dimmed"
+        width="18rem"
+      >
+        The text wraps around this dimmed Alert.
+      </Alert>
+    </div>
+    <Text as="p">
+      Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
+      doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
+      veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim
+      ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
+      consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque
+      porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,
+      adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore
+      et dolore magnam aliquam quaerat voluptatem.
+    </Text>
+  </div>
+</div>
+```
+
+### Buttons in an Alert
+
+An Alert can contain buttons to let the user act on the message. Follow the
+design recommendations for button colors: use `primary-inverse` buttons in
+`prominent` alerts, and `primary` buttons in `dimmed` and `warning` alerts.
+
+```js
+---
+type: example
+---
+<div>
+  {['info', 'success', 'warning', 'error'].map((variant) => {
+    const prominentButtonColor =
+      variant !== 'warning' ? 'primary-inverse' : 'primary'
+    return (
+      <Flex key={variant} gap="general.spaceMd" margin="general.spaceMd 0">
+        <Flex.Item shouldGrow shouldShrink>
+          <Alert variant={variant} margin="0">
+            Prominent {variant} alert. Lorem ipsum dolor sit amet, consectetur.
+            <Flex gap="gap.buttons" padding="general.spaceMd 0 0 0">
+              <Button withBackground={false} color={prominentButtonColor}>
+                Cancel
+              </Button>
+              <Button color={prominentButtonColor}>Submit</Button>
+            </Flex>
+          </Alert>
+        </Flex.Item>
+        <Flex.Item shouldGrow shouldShrink>
+          <Alert variant={variant} prominence="dimmed" margin="0">
+            Dimmed {variant} alert. Lorem ipsum dolor sit amet, consectetur.
+            <Flex gap="gap.buttons" padding="general.spaceMd 0 0 0">
+              <Button withBackground={false} color="primary">
+                Cancel
+              </Button>
+              <Button color="primary">Submit</Button>
+            </Flex>
+          </Alert>
+        </Flex.Item>
+      </Flex>
+    )
+  })}
+</div>
 ```
 
 The `timeout` prop can be used to automatically dismiss an alert after a time.
@@ -65,14 +167,28 @@ The `timeout` prop can be used to automatically dismiss an alert after a time.
 ---
 type: example
 ---
-<Alert
-  variant="info"
-  margin="general.spaceMd"
-  timeout={5000}
-  variantScreenReaderLabel="Information, "
->
-  Sample info text. I will fade out after 5 seconds
-</Alert>
+const Example = () => {
+  const [isOpen, setIsOpen] = useState(true)
+
+  return (
+    <div>
+      <Button onClick={() => setIsOpen(true)}>Show alert</Button>
+      {isOpen && (
+        <Alert
+          variant="info"
+          margin="general.spaceMd 0 0"
+          timeout={3000}
+          variantScreenReaderLabel="Information, "
+          onDismiss={() => setIsOpen(false)}
+        >
+          Sample info text. I will fade out after 3 seconds.
+        </Alert>
+      )}
+    </div>
+  )
+}
+
+render(<Example />)
 ```
 
 Given a `liveRegion` property, Alerts will guarantee a screenreader will announce their text.
@@ -181,42 +297,15 @@ const Example = () => {
 render(<Example />)
 ```
 
-When Alerts are used inline, the shadow can be removed with the `hasShadow` property.
+Use the `width` prop to set the width of the Alert.
 
 ```js
 ---
 type: example
 ---
-<View as="div" background="primary" padding="general.space2xl">
-  <View
-    as="div"
-    background="primary"
-    padding="general.spaceMd general.spaceXl"
-    borderWidth="small"
-    borderRadius="small"
-    margin="general.spaceSm 0"
-  >
-    {lorem.paragraph()}
-  </View>
-  <Alert
-    variant="info"
-    margin="general.spaceSm 0"
-    renderCloseButtonLabel="Close"
-    hasShadow={false}
-  >
-    This is an inline Alert, so it shouldn't have a shadow.
-  </Alert>
-  <View
-    as="div"
-    background="primary"
-    padding="general.spaceMd general.spaceXl"
-    borderWidth="small"
-    borderRadius="small"
-    margin="general.spaceSm 0"
-  >
-    {lorem.paragraph()}
-  </View>
-</View>
+<Alert variant="info" width="20rem" margin="general.spaceMd">
+  This Alert is 20rem wide.
+</Alert>
 ```
 
 ### Guidelines

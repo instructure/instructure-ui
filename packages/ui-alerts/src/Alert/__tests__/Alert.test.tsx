@@ -354,7 +354,7 @@ describe('<Alert />', () => {
   })
 
   describe('Component tests', () => {
-    it('should have shadow by default', async () => {
+    it('should have shadow when `prominence` is `prominent`', async () => {
       const { container } = await render(
         <Alert variant="info" transition="none">
           Success: Sample alert text.
@@ -367,9 +367,9 @@ describe('<Alert />', () => {
       expect(boxShadow).not.toBe('none')
     })
 
-    it("shouldn't have shadow, when `hasShadow` is set to false", async () => {
+    it('should not have shadow when `prominence` is `dimmed`', async () => {
       const { container } = await render(
-        <Alert variant="info" transition="none" hasShadow={false}>
+        <Alert variant="info" transition="none" prominence="dimmed">
           Success: Sample alert text.
         </Alert>
       )
@@ -377,8 +377,20 @@ describe('<Alert />', () => {
         'div[class$="-view-alert"]'
       )!
 
-      const boxShadow = getComputedStyle(view).boxShadow
-      expect(boxShadow).toBe('none')
+      expect(getComputedStyle(view).boxShadow).toBe('none')
+    })
+
+    it('should apply the `width` prop', async () => {
+      const { container } = await render(
+        <Alert variant="info" transition="none" width="300px">
+          Success: Sample alert text.
+        </Alert>
+      )
+      const view = container.querySelector<HTMLElement>(
+        'div[class$="-view-alert"]'
+      )!
+
+      expect(getComputedStyle(view).width).toBe('300px')
     })
   })
 })

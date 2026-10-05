@@ -39,11 +39,24 @@ export default function AlertPage() {
         ))}
       </div>
       <div>
+        {variants.map((variant) => (
+          <Alert
+            variant={variant}
+            key={variant}
+            prominence="dimmed"
+            renderCloseButtonLabel="Close"
+            transition="none"
+          >
+            I&apos;m dimmed {variant} Alert
+          </Alert>
+        ))}
+      </div>
+      <div>
         <Alert transition="none" renderCloseButtonLabel="Close">
           Close button Alert
         </Alert>
-        <Alert transition="none" margin="xx-large" hasShadow={false}>
-          no shadow Alert
+        <Alert transition="none" margin="xx-large">
+          Alert with margin
         </Alert>
       </div>
       <div>
