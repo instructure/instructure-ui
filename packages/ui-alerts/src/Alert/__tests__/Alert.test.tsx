@@ -380,5 +380,57 @@ describe('<Alert />', () => {
       const boxShadow = getComputedStyle(view).boxShadow
       expect(boxShadow).toBe('none')
     })
+
+    it('should not have shadow by default with the `inline` appearance', async () => {
+      const { container } = await render(
+        <Alert variant="info" transition="none" appearance="inline">
+          Success: Sample alert text.
+        </Alert>
+      )
+      const view = container.querySelector<HTMLElement>(
+        'div[class$="-view-alert"]'
+      )!
+
+      expect(getComputedStyle(view).boxShadow).toBe('none')
+    })
+
+    it('should have shadow with the `inline` appearance when `hasShadow` is true', async () => {
+      const { container } = await render(
+        <Alert variant="info" transition="none" appearance="inline" hasShadow>
+          Success: Sample alert text.
+        </Alert>
+      )
+      const view = container.querySelector<HTMLElement>(
+        'div[class$="-view-alert"]'
+      )!
+
+      expect(getComputedStyle(view).boxShadow).not.toBe('none')
+    })
+
+    it('should apply the `width` prop', async () => {
+      const { container } = await render(
+        <Alert variant="info" transition="none" width="300px">
+          Success: Sample alert text.
+        </Alert>
+      )
+      const view = container.querySelector<HTMLElement>(
+        'div[class$="-view-alert"]'
+      )!
+
+      expect(getComputedStyle(view).width).toBe('300px')
+    })
+
+    it('should not pass `appearance` to the DOM', async () => {
+      const { container } = await render(
+        <Alert variant="info" transition="none" appearance="inline">
+          Success: Sample alert text.
+        </Alert>
+      )
+      const view = container.querySelector<HTMLElement>(
+        'div[class$="-view-alert"]'
+      )!
+
+      expect(view.hasAttribute('appearance')).toBe(false)
+    })
   })
 })

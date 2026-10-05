@@ -3,7 +3,8 @@ describes: Alert
 ---
 
 The Alert component can be used to notify the user. It supports several
-variants to provide context to the message.
+variants to provide context to the message, and two appearances: `floating`
+(default) and `inline`.
 
 Alert can optionally render as a dismissible 'dialog' with a close button.
 
@@ -17,7 +18,7 @@ type: example
 <InstUISettingsProvider theme={{
     componentOverrides: {
       "Alert": {
-        dangerIconBackground: 'purple'
+        dangerBackground: 'purple'
       }
     }
 }}>
@@ -57,6 +58,91 @@ type: example
     Sample warning text. This alert is not dismissible and cannot be closed.
   </Alert>
 </InstUISettingsProvider>
+```
+
+### Appearance
+
+Use the `floating` appearance (default) for page-level alerts that need a
+prominent message. It has a bold background color and a shadow.
+
+Use the `inline` appearance when the Alert lives inside a content region and
+should flow with the surrounding content. It has a pastel background, no shadow
+and a color-coded icon.
+
+```js
+---
+type: example
+---
+<div>
+  {['info', 'success', 'warning', 'error'].map((variant) => (
+    <Flex key={variant} gap="general.spaceMd" margin="general.spaceMd 0">
+      <Flex.Item shouldGrow shouldShrink>
+        <Alert variant={variant} renderCloseButtonLabel="Close" margin="0">
+          Floating {variant} alert
+        </Alert>
+      </Flex.Item>
+      <Flex.Item shouldGrow shouldShrink>
+        <Alert
+          variant={variant}
+          appearance="inline"
+          renderCloseButtonLabel="Close"
+          margin="0"
+        >
+          Inline {variant} alert
+        </Alert>
+      </Flex.Item>
+    </Flex>
+  ))}
+</div>
+```
+
+### Buttons in an Alert
+
+An Alert can contain buttons to let the user act on the message. Follow the
+design recommendations for button colors: use `primary-inverse` buttons in
+`floating` alerts, and `primary` buttons in `inline` and `warning` alerts.
+
+```js
+---
+type: example
+---
+<div>
+  {['info', 'success', 'warning', 'error'].map((variant) => {
+    const floatingButtonColor =
+      variant !== 'warning' ? 'primary-inverse' : 'primary'
+    return (
+      <Flex key={variant} gap="general.spaceMd" margin="general.spaceMd 0">
+        <Flex.Item shouldGrow shouldShrink>
+          <Alert variant={variant} renderCloseButtonLabel="Close" margin="0">
+            Floating {variant} alert. Lorem ipsum dolor sit amet, consectetur.
+            <Flex gap="gap.buttons" padding="general.spaceMd 0 0 0">
+              <Button withBackground={false} color={floatingButtonColor}>
+                Cancel
+              </Button>
+              <Button color={floatingButtonColor}>Submit</Button>
+            </Flex>
+          </Alert>
+        </Flex.Item>
+        <Flex.Item shouldGrow shouldShrink>
+          <Alert
+            variant={variant}
+            appearance="inline"
+            renderCloseButtonLabel="Close"
+            margin="0"
+          >
+            Inline {variant} alert. Lorem ipsum dolor sit amet, consectetur.
+            <Flex gap="gap.buttons" padding="general.spaceMd 0 0 0">
+              <Button withBackground={false} color="primary">
+                Cancel
+              </Button>
+              <Button color="primary">Submit</Button>
+            </Flex>
+          </Alert>
+        </Flex.Item>
+      </Flex>
+    )
+  })}
+</div>
 ```
 
 The `timeout` prop can be used to automatically dismiss an alert after a time.
@@ -181,42 +267,15 @@ const Example = () => {
 render(<Example />)
 ```
 
-When Alerts are used inline, the shadow can be removed with the `hasShadow` property.
+Use the `width` prop to set the width of the Alert.
 
 ```js
 ---
 type: example
 ---
-<View as="div" background="primary" padding="general.space2xl">
-  <View
-    as="div"
-    background="primary"
-    padding="general.spaceMd general.spaceXl"
-    borderWidth="small"
-    borderRadius="small"
-    margin="general.spaceSm 0"
-  >
-    {lorem.paragraph()}
-  </View>
-  <Alert
-    variant="info"
-    margin="general.spaceSm 0"
-    renderCloseButtonLabel="Close"
-    hasShadow={false}
-  >
-    This is an inline Alert, so it shouldn't have a shadow.
-  </Alert>
-  <View
-    as="div"
-    background="primary"
-    padding="general.spaceMd general.spaceXl"
-    borderWidth="small"
-    borderRadius="small"
-    margin="general.spaceSm 0"
-  >
-    {lorem.paragraph()}
-  </View>
-</View>
+<Alert variant="info" width="20rem" margin="general.spaceMd">
+  This Alert is 20rem wide.
+</Alert>
 ```
 
 ### Guidelines
