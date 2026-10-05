@@ -2,10 +2,10 @@
 describes: Pill
 ---
 
-Displays short, contextual information about an item. Change the border
-and text color via the `color` prop. Use the `margin` prop to add space around
-the component. Use the `renderIcon` prop to add an icon to the left of the text. Additionally,
-you can use the `statusLabel` prop to add a label to the left of the main text.
+Displays short, contextual information about an item. Set the color via the
+`color` prop and the size via the `size` prop. Use the `margin` prop to add space
+around the component. Use the `renderIcon` prop to add an icon before the text.
+Additionally, you can use the `statusLabel` prop to add a label before the main text.
 
 ```js
 ---
@@ -26,26 +26,79 @@ type: example
   </Pill>
   <Pill
     statusLabel="Status"
-    renderIcon={<CheckInstUIIcon size="sm" />}
+    renderIcon={DiamondInstUIIcon}
     color="success"
     margin="general.spaceSm"
   >
     Checked In
   </Pill>
   <Pill
-    renderIcon={<Clock4InstUIIcon size="sm" />}
+    renderIcon={Clock4InstUIIcon}
     color="warning"
     margin="general.spaceSm"
   >
     Late
   </Pill>
   <Pill
-    renderIcon={<MailInstUIIcon size="sm" />}
+    renderIcon={MailInstUIIcon}
     color="error"
     margin="general.spaceSm"
   >
     Notification
   </Pill>
+</div>
+```
+
+### Sizes
+
+The `size` prop accepts `x-small`, `small` (default), `medium`, and `large`.
+InstUI icons passed to `renderIcon` are sized to match.
+
+```js
+---
+type: example
+---
+<div>
+  <Pill size="x-small" renderIcon={DiamondInstUIIcon} margin="general.spaceSm">
+    x-small
+  </Pill>
+  <Pill size="small" renderIcon={DiamondInstUIIcon} margin="general.spaceSm">
+    small
+  </Pill>
+  <Pill size="medium" renderIcon={DiamondInstUIIcon} margin="general.spaceSm">
+    medium
+  </Pill>
+  <Pill size="large" renderIcon={DiamondInstUIIcon} margin="general.spaceSm">
+    large
+  </Pill>
+</div>
+```
+
+### Colors
+
+The status colors (`primary`, `info`, `success`, `warning`, `error`) convey meaning.
+`primary` is the neutral Pill in the design files. The accent colors (`stone`, `sky`,
+`orange`, `aurora`, `plum`, `violet`, `sea`) are for categorization and carry no
+status meaning.
+
+```js
+---
+type: example
+---
+<div>
+  <Pill color="primary" margin="general.spaceSm">primary</Pill>
+  <Pill color="info" margin="general.spaceSm">info</Pill>
+  <Pill color="success" margin="general.spaceSm">success</Pill>
+  <Pill color="warning" margin="general.spaceSm">warning</Pill>
+  <Pill color="error" margin="general.spaceSm">error</Pill>
+  <br />
+  <Pill color="stone" margin="general.spaceSm">stone</Pill>
+  <Pill color="sky" margin="general.spaceSm">sky</Pill>
+  <Pill color="orange" margin="general.spaceSm">orange</Pill>
+  <Pill color="aurora" margin="general.spaceSm">aurora</Pill>
+  <Pill color="plum" margin="general.spaceSm">plum</Pill>
+  <Pill color="violet" margin="general.spaceSm">violet</Pill>
+  <Pill color="sea" margin="general.spaceSm">sea</Pill>
 </div>
 ```
 
@@ -58,7 +111,7 @@ The component has a `max-width`, set by its theme. Any overflowing text will be 
 type: example
 ---
 <Pill>
-  Supercalifragilisticexpialidocious bear
+  Supercalifragilisticexpialidocious bear with tiny hat
 </Pill>
 ```
 
