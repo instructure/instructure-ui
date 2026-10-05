@@ -76,12 +76,19 @@
       "require": "./lib/exports/b.js",
       "default": "./es/exports/b.js"
     },
+    "./v11_8": {
+      "src": "./src/exports/c.ts",
+      "types": "./types/exports/c.d.ts",
+      "import": "./es/exports/c.js",
+      "require": "./lib/exports/c.js",
+      "default": "./es/exports/c.js"
+    },
     "./latest": {
-      "src": "./src/exports/b.ts",
-      "types": "./types/exports/b.d.ts",
-      "import": "./es/exports/b.js",
-      "require": "./lib/exports/b.js",
-      "default": "./es/exports/b.js"
+      "src": "./src/exports/c.ts",
+      "types": "./types/exports/c.d.ts",
+      "import": "./es/exports/c.js",
+      "require": "./lib/exports/c.js",
+      "default": "./es/exports/c.js"
     }
   }
 }
