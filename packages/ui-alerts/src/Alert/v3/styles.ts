@@ -23,8 +23,8 @@
  */
 import { boxShadowObjectsToCSSString } from '@instructure/ui-themes'
 import type { SharedTokens } from '@instructure/ui-themes'
-import type { AlertProps, AlertStyle } from './props'
 import type { DesignTokensV1ComponentTypes } from '@instructure/ui-themes'
+import type { AlertStyle, AlertStyleParams } from './props'
 
 /**
  * ---
@@ -32,16 +32,16 @@ import type { DesignTokensV1ComponentTypes } from '@instructure/ui-themes'
  * ---
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
+ * @param  {Object} params Additional parameters to customize the style.
+ * @param  {Object} sharedTokens Shared token object that stores common values for the theme.
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
   componentTheme: ReturnType<DesignTokensV1ComponentTypes['Alert']>,
-  props: AlertProps,
+  params: AlertStyleParams,
   sharedTokens: SharedTokens
 ): AlertStyle => {
-  const { variant, hasShadow } = props
+  const { variant, hasShadow } = params
 
   const variantStyles = {
     error: {
@@ -85,7 +85,7 @@ const generateStyle = (
       borderWidth: componentTheme.borderWidth,
       borderStyle: componentTheme.borderStyle,
       borderRadius: componentTheme.borderRadius,
-      ...variantStyles[variant!].alert,
+      ...variantStyles[variant].alert,
       ...(hasShadow && {
         boxShadow: boxShadowObjectsToCSSString(
           sharedTokens.boxShadow.elevation4
@@ -104,7 +104,7 @@ const generateStyle = (
       margin: -1,
       borderStartStartRadius: componentTheme.borderRadius,
       borderEndStartRadius: componentTheme.borderRadius,
-      ...variantStyles[variant!].icon
+      ...variantStyles[variant].icon
     },
     closeButton: {
       boxSizing: 'border-box',

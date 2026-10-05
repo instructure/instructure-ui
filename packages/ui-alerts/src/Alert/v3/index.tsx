@@ -22,14 +22,13 @@
  * SOFTWARE.
  */
 
-import { Fragment, Component } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
 import ReactDOM from 'react-dom'
-import keycode from 'keycode'
 
 import {
   callRenderProp,
-  withDeterministicId,
-  passthroughProps
+  passthroughProps,
+  useDeterministicId
 } from '@instructure/ui-react-utils'
 import { CloseButton } from '@instructure/ui-buttons/latest'
 import { View } from '@instructure/ui-view/latest'
@@ -43,201 +42,151 @@ import {
 } from '@instructure/ui-icons'
 import { Transition } from '@instructure/ui-motion'
 import { logError as error } from '@instructure/console'
-import { withStyleNew } from '@instructure/emotion'
+import { useStyleNew } from '@instructure/emotion'
+import { frozenThemesDesignTokensV1 } from '@instructure/ui-themes'
 
 import generateStyle from './styles.js'
 
-import { allowedProps } from './props.js'
-import type { AlertProps, AlertState } from './props'
-import { frozenThemesDesignTokensV1 } from '@instructure/ui-themes'
+import type { AlertProps } from './props'
+
+const variantUI = {
+  error: XCircleInstUIIcon,
+  info: InfoInstUIIcon,
+  success: CircleCheckInstUIIcon,
+  warning: TriangleAlertInstUIIcon
+}
+
+// duck type for a dom node
+const isDOMNode = (n: Element | null | undefined): n is Element =>
+  !!n && typeof n === 'object' && n.nodeType === 1
+
+const getLiveRegion = (liveRegion: AlertProps['liveRegion']) => {
+  const lr = typeof liveRegion === 'function' ? liveRegion() : liveRegion
+  return isDOMNode(lr) ? lr : null
+}
 
 /**
 ---
 category: components
 ---
 **/
-@withDeterministicId()
-@withStyleNew(generateStyle, null, frozenThemesDesignTokensV1)
-class Alert extends Component<AlertProps, AlertState> {
-  static displayName = 'Alert'
-  static readonly componentId = 'Alert'
+const Alert = (props: AlertProps) => {
+  const {
+    children = null,
+    variant = 'info',
+    variantScreenReaderLabel,
+    liveRegion,
+    liveRegionPoliteness = 'assertive',
+    isLiveRegionAtomic = false,
+    screenReaderOnly = false,
+    timeout = 0,
+    margin = 'x-small 0',
+    renderCloseButtonLabel,
+    onDismiss,
+    transition = 'fade',
+    open: openProp = true,
+    hasShadow = true,
+    renderCustomIcon,
+    elementRef,
+    themeOverride,
+    ...rest
+  } = props
 
-  static allowedProps = allowedProps
-  static defaultProps = {
-    variant: 'info',
-    margin: 'x-small 0',
-    timeout: 0,
-    transition: 'fade',
-    open: true,
-    screenReaderOnly: false,
-    liveRegionPoliteness: 'assertive',
-    isLiveRegionAtomic: false,
-    children: null,
-    hasShadow: true
+  const [open, setOpen] = useState(true)
+  const srid = useDeterministicId('Alert')()
+  const timeouts = useRef<ReturnType<typeof setTimeout>[]>([])
+
+  const styles = useStyleNew({
+    generateStyle,
+    themeOverride,
+    params: { variant, hasShadow },
+    componentId: 'Alert',
+    displayName: 'Alert',
+    frozenTheme: frozenThemesDesignTokensV1
+  })
+
+  const initLiveRegion = (region: Element) => {
+    region.setAttribute('aria-live', liveRegionPoliteness)
+    // indicates what notifications the user agent will trigger when the
+    // accessibility tree within a live region is modified.
+    // additions: elements are added, text: Text content is added
+    region.setAttribute('aria-relevant', 'additions text')
+    region.setAttribute('aria-atomic', `${isLiveRegionAtomic}`)
   }
 
-  constructor(props: AlertProps) {
-    super(props)
+  const removeScreenreaderAlert = () => {
+    const region = getLiveRegion(liveRegion)
+    if (region && document.getElementById(srid)) {
+      // Accessibility attributes must be removed for the deletion of the node
+      // and then reapplied because JAWS/IE will not respect the
+      // "aria-relevant" attribute and read when the node is deleted if
+      // the attributes are in place
+      region.removeAttribute('aria-live')
+      region.removeAttribute('aria-relevant')
+      region.removeAttribute('aria-atomic')
 
-    this.srid = this.props.deterministicId!()
-    this.state = {
-      open: true
+      initLiveRegion(region)
     }
   }
 
-  _timeouts: ReturnType<typeof setTimeout>[] = []
-  srid: string
-
-  variantUI = {
-    error: XCircleInstUIIcon,
-    info: InfoInstUIIcon,
-    success: CircleCheckInstUIIcon,
-    warning: TriangleAlertInstUIIcon
+  const clearTimeouts = () => {
+    timeouts.current.forEach((t) => clearTimeout(t))
+    timeouts.current = []
   }
 
-  ref: Element | null = null
+  const close = () => {
+    clearTimeouts()
+    removeScreenreaderAlert()
+    setOpen(false)
+    // without a transition there is no exit callback, so dismiss right away
+    if (onDismiss && (transition === 'none' || screenReaderOnly)) {
+      onDismiss()
+    }
+  }
 
-  handleRef = (el: Element | null) => {
-    this.ref = el
-    const { elementRef } = this.props
+  // the timeout fires after later renders, so it must call the latest `close`
+  const closeRef = useRef(close)
+  useEffect(() => {
+    closeRef.current = close
+  })
+
+  useEffect(() => {
+    const region = getLiveRegion(liveRegion)
+    if (region) {
+      initLiveRegion(region)
+    }
+    if (timeout > 0) {
+      timeouts.current.push(setTimeout(() => closeRef.current(), timeout))
+    }
+    return clearTimeouts
+    // runs on mount only, like componentDidMount in the class version
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const prevOpenProp = useRef(openProp)
+  useEffect(() => {
+    if (!openProp && !!prevOpenProp.current) {
+      // this outside world is asking us to close the alert, which needs to
+      // take place internally so the transition runs
+      closeRef.current()
+    }
+    prevOpenProp.current = openProp
+  }, [openProp])
+
+  const handleRef = (el: Element | null) => {
     if (typeof elementRef === 'function') {
       elementRef(el)
     }
   }
 
-  handleTimeout = () => {
-    if (this.props.timeout! > 0) {
-      this._timeouts.push(
-        setTimeout(() => {
-          this.close()
-        }, this.props.timeout)
-      )
+  const handleKeyUp = (event: React.KeyboardEvent<ViewOwnProps>) => {
+    if (renderCloseButtonLabel && event.key === 'Escape') {
+      close()
     }
   }
 
-  clearTimeouts() {
-    this._timeouts.forEach((timeout) => clearTimeout(timeout))
-    this._timeouts = []
-  }
-
-  onExitTransition = () => {
-    if (this.props.onDismiss) {
-      this.props.onDismiss()
-    }
-  }
-
-  close = () => {
-    this.clearTimeouts()
-    this.removeScreenreaderAlert()
-    this.setState({ open: false }, () => {
-      if (
-        this.props.onDismiss &&
-        (this.props.transition === 'none' || this.props.screenReaderOnly)
-      ) {
-        this.props.onDismiss()
-      }
-    })
-  }
-
-  // duck type for a dom node
-  isDOMNode(n: Element | null | undefined) {
-    return n && typeof n === 'object' && n.nodeType === 1
-  }
-
-  getLiveRegion() {
-    const lr =
-      typeof this.props.liveRegion === 'function'
-        ? this.props.liveRegion()
-        : this.props.liveRegion
-
-    return this.isDOMNode(lr) ? lr : null
-  }
-
-  initLiveRegion(liveRegion: Element) {
-    if (liveRegion) {
-      liveRegion.setAttribute('aria-live', this.props.liveRegionPoliteness!)
-      // indicates what notifications the user agent will trigger when the
-      // accessibility tree within a live region is modified.
-      // additions: elements are added, text: Text content is added
-      liveRegion.setAttribute('aria-relevant', 'additions text')
-      liveRegion.setAttribute(
-        'aria-atomic',
-        `${this.props.isLiveRegionAtomic!}`
-      )
-    }
-  }
-
-  createScreenreaderContentNode() {
-    return (
-      <ScreenReaderContent>
-        {this.props.variantScreenReaderLabel || ''} {this.props.children}
-      </ScreenReaderContent>
-    )
-  }
-
-  createScreenreaderAlert() {
-    const liveRegion = this.getLiveRegion()
-    if (liveRegion) {
-      const div = document.createElement('div')
-      div.setAttribute('id', this.srid)
-
-      liveRegion.appendChild(div)
-    }
-  }
-
-  removeScreenreaderAlert() {
-    const liveRegion = this.getLiveRegion()
-    if (liveRegion) {
-      const div = document.getElementById(this.srid!)
-      if (div) {
-        // Accessibility attributes must be removed for the deletion of the node
-        // and then reapplied because JAWS/IE will not respect the
-        // "aria-relevant" attribute and read when the node is deleted if
-        // the attributes are in place
-        liveRegion.removeAttribute('aria-live')
-        liveRegion.removeAttribute('aria-relevant')
-        liveRegion.removeAttribute('aria-atomic')
-
-        this.initLiveRegion(liveRegion)
-      }
-    }
-  }
-
-  handleKeyUp = (event: React.KeyboardEvent<ViewOwnProps>) => {
-    if (
-      this.props.renderCloseButtonLabel &&
-      event.keyCode === keycode.codes.esc
-    ) {
-      this.close()
-    }
-  }
-
-  componentDidMount() {
-    this.props.makeStyles?.()
-    const liveRegion = this.getLiveRegion()
-    if (liveRegion) {
-      this.initLiveRegion(liveRegion)
-    }
-
-    this.handleTimeout()
-  }
-
-  componentWillUnmount() {
-    this.clearTimeouts()
-  }
-
-  componentDidUpdate(prevProps: AlertProps) {
-    this.props.makeStyles?.()
-    if (!!this.props.open === false && !!this.props.open !== !!prevProps.open) {
-      // this outside world is asking us to close the alert, which needs to
-      // take place internally so the transition runs
-      this.close()
-    }
-  }
-
-  renderIcon() {
-    const { renderCustomIcon, variant, styles } = this.props
-    const Icon = this.variantUI[variant!]
+  const renderIcon = () => {
+    const Icon = variantUI[variant]
     return (
       <div css={styles?.icon}>
         {renderCustomIcon ? callRenderProp(renderCustomIcon) : <Icon />}
@@ -245,15 +194,14 @@ class Alert extends Component<AlertProps, AlertState> {
     )
   }
 
-  renderCloseButton() {
+  const renderCloseButton = () => {
     const closeButtonLabel =
-      this.props.renderCloseButtonLabel &&
-      callRenderProp(this.props.renderCloseButtonLabel)
+      renderCloseButtonLabel && callRenderProp(renderCloseButtonLabel)
 
     return closeButtonLabel ? (
-      <div css={this.props.styles?.closeButton} key="closeButton">
+      <div css={styles?.closeButton} key="closeButton">
         <CloseButton
-          onClick={this.close}
+          onClick={close}
           size="small"
           screenReaderLabel={closeButtonLabel}
         />
@@ -261,89 +209,78 @@ class Alert extends Component<AlertProps, AlertState> {
     ) : null
   }
 
-  renderAlert() {
-    // prevent onDismiss from being passed to the View component
-    const {
-      margin,
-      styles,
-      children,
-      onDismiss,
-      variantScreenReaderLabel,
-      ...props
-    } = this.props
-    return (
-      <View
-        {...passthroughProps({ ...props })}
-        as="div"
-        margin={margin}
-        css={styles?.alert}
-        onKeyUp={this.handleKeyUp}
-        elementRef={this.handleRef}
-      >
-        {this.renderIcon()}
-        <div css={styles?.content}>
-          {variantScreenReaderLabel && (
-            <span css={styles?.variantScreenReaderLabel}>
-              {variantScreenReaderLabel}
-            </span>
-          )}
-          {children}
-        </div>
-        {this.renderCloseButton()}
-      </View>
-    )
-  }
+  const renderAlert = () => (
+    <View
+      {...passthroughProps(rest)}
+      as="div"
+      margin={margin}
+      css={styles?.alert}
+      onKeyUp={handleKeyUp}
+      elementRef={handleRef}
+    >
+      {renderIcon()}
+      <div css={styles?.content}>
+        {variantScreenReaderLabel && (
+          <span css={styles?.variantScreenReaderLabel}>
+            {variantScreenReaderLabel}
+          </span>
+        )}
+        {children}
+      </div>
+      {renderCloseButton()}
+    </View>
+  )
 
-  createScreenReaderPortal(liveRegion: Element) {
-    const { open } = this.state
-
-    return open
+  const region = getLiveRegion(liveRegion)
+  const screenReaderContent =
+    region && open
       ? ReactDOM.createPortal(
-          <div id={this.srid}>{this.createScreenreaderContentNode()}</div>,
-          liveRegion
+          <div id={srid}>
+            <ScreenReaderContent>
+              {variantScreenReaderLabel || ''} {children}
+            </ScreenReaderContent>
+          </div>,
+          region
         )
       : null
+
+  // Don't render anything if screen reader only
+  if (screenReaderOnly) {
+    error(
+      !!region,
+      `[Alert] The 'screenReaderOnly' prop must be used in conjunction with 'liveRegion'.`
+    )
+
+    return screenReaderContent
   }
 
-  render() {
-    const liveRegion = this.getLiveRegion()
-    const screenReaderContent = liveRegion
-      ? this.createScreenReaderPortal(liveRegion)
-      : null
-    // Don't render anything if screen reader only
-    if (this.props.screenReaderOnly) {
-      error(
-        !!this.getLiveRegion(),
-        `[Alert] The 'screenReaderOnly' prop must be used in conjunction with 'liveRegion'.`
-      )
-
-      return screenReaderContent
-    }
-
-    if (this.props.transition === 'none') {
-      return this.state.open ? (
-        <Fragment>
-          {screenReaderContent}
-          {this.renderAlert()}
-        </Fragment>
-      ) : null
-    }
-    return (
+  if (transition === 'none') {
+    return open ? (
       <Fragment>
         {screenReaderContent}
-        <Transition
-          type={this.props.transition}
-          transitionOnMount
-          in={this.state.open}
-          unmountOnExit
-          onExited={this.onExitTransition}
-        >
-          {this.renderAlert()}
-        </Transition>
+        {renderAlert()}
       </Fragment>
-    )
+    ) : null
   }
+
+  return (
+    <Fragment>
+      {screenReaderContent}
+      <Transition
+        type={transition}
+        transitionOnMount
+        in={open}
+        unmountOnExit
+        onExited={() => onDismiss?.()}
+      >
+        {renderAlert()}
+      </Transition>
+    </Fragment>
+  )
 }
+
+Alert.displayName = 'Alert'
 
 export default Alert
 export { Alert }
+export type { AlertProps }

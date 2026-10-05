@@ -92,6 +92,63 @@ describe('<Alert />', () => {
     })
   })
 
+  it('should call `onDismiss` when Escape is pressed with renderCloseButtonLabel', async () => {
+    const onDismiss = vi.fn()
+    await render(
+      <Alert
+        variant="success"
+        renderCloseButtonLabel="Close"
+        onDismiss={onDismiss}
+        transition="none"
+      >
+        Success: Sample alert text.
+      </Alert>
+    )
+    ;(page.getByRole('button').element() as HTMLElement).focus()
+    await userEvent.keyboard('{Escape}')
+
+    expect(onDismiss).toHaveBeenCalledTimes(1)
+    await expect
+      .element(page.getByText('Success: Sample alert text.'))
+      .not.toBeInTheDocument()
+  })
+
+  it('should dismiss itself after `timeout` milliseconds', async () => {
+    vi.useFakeTimers()
+    try {
+      const onDismiss = vi.fn()
+      await render(
+        <Alert
+          variant="success"
+          timeout={1000}
+          onDismiss={onDismiss}
+          transition="none"
+        >
+          Success: Sample alert text.
+        </Alert>
+      )
+
+      vi.advanceTimersByTime(999)
+      expect(onDismiss).not.toHaveBeenCalled()
+
+      vi.advanceTimersByTime(1)
+      expect(onDismiss).toHaveBeenCalledTimes(1)
+    } finally {
+      vi.useRealTimers()
+    }
+  })
+
+  it('should provide the root element via `elementRef`', async () => {
+    const elementRef = vi.fn()
+    await render(
+      <Alert variant="success" elementRef={elementRef}>
+        Success: Sample alert text.
+      </Alert>
+    )
+
+    expect(elementRef).toHaveBeenCalledWith(expect.any(HTMLDivElement))
+  })
+
   const iconComponentsVariants: Record<
     NonNullable<AlertProps['variant']>,
     string

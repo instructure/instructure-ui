@@ -26,12 +26,11 @@ import { ReactNode } from 'react'
 
 import type {
   Spacing,
-  WithStyleProps,
-  ComponentStyle
+  ComponentStyle,
+  NewThemeOverrideProp
 } from '@instructure/emotion'
-import type { Renderable } from '@instructure/shared-types'
-import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 import type { DesignTokensV1ComponentTypes } from '@instructure/ui-themes'
+import type { Renderable } from '@instructure/shared-types'
 
 type AlertOwnProps = {
   /**
@@ -104,7 +103,7 @@ type AlertOwnProps = {
   /**
    * If the alert should have a shadow.
    */
-  hasShadow: boolean
+  hasShadow?: boolean
 
   /**
    * An icon, or function that returns an icon. Setting it will override the variant's icon.
@@ -122,15 +121,13 @@ type PropKeys = keyof AlertOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type AlertProps = AlertOwnProps &
-  WithStyleProps<
-    ReturnType<DesignTokensV1ComponentTypes['Alert']>,
-    AlertStyle
-  > &
-  WithDeterministicIdProps
+  NewThemeOverrideProp<ReturnType<DesignTokensV1ComponentTypes['Alert']>>
 
 type AlertStyle = ComponentStyle<
   'alert' | 'icon' | 'closeButton' | 'content' | 'variantScreenReaderLabel'
 >
+
+type AlertStyleParams = Required<Pick<AlertProps, 'variant' | 'hasShadow'>>
 
 const allowedProps: AllowedPropKeys = [
   'children',
@@ -150,9 +147,5 @@ const allowedProps: AllowedPropKeys = [
   'elementRef'
 ]
 
-type AlertState = {
-  open: boolean
-}
-
-export type { AlertProps, AlertStyle, AlertState }
+export type { AlertProps, AlertStyle, AlertStyleParams }
 export { allowedProps }
