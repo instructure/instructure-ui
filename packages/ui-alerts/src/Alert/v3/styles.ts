@@ -21,10 +21,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import { boxShadowObjectsToCSSString } from '@instructure/ui-themes'
-import type { SharedTokens } from '@instructure/ui-themes'
-import type { DesignTokensV1ComponentTypes } from '@instructure/ui-themes'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import type { AlertStyle, AlertStyleParams } from './props'
+
+// TODO: replace with Alert tokens once the design team adds them
+// (text/baseColor and text/baseOnColor). These are the light theme values,
+// so dark themes have the wrong text color until then.
+const TEXT_COLOR = '#273540'
+const TEXT_COLOR_ON_COLOR = '#ffffff'
+
+// TODO: ask the design team to remove these unused tokens:
+// - dangerIconBackground, infoIconBackground, successIconBackground,
+//   warningIconBackground (v3 has no icon box)
+// - iconPaddingVertical (the icon is aligned to the first line of text)
 
 /**
  * ---
@@ -37,55 +48,55 @@ import type { AlertStyle, AlertStyleParams } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: ReturnType<DesignTokensV1ComponentTypes['Alert']>,
+  componentTheme: ReturnType<NewComponentTypes['Alert']>,
   params: AlertStyleParams,
   sharedTokens: SharedTokens
 ): AlertStyle => {
-  const { variant, hasShadow } = params
+  const { variant, appearance, hasShadow } = params
+  const isFloating = appearance === 'floating'
 
-  const variantStyles = {
+  const variantColors = {
     error: {
-      alert: { borderColor: componentTheme.dangerBorderColor },
-      icon: {
-        background: componentTheme.dangerIconBackground,
-        borderRightColor: componentTheme.dangerIconBackground
-      }
+      background: componentTheme.dangerBackground,
+      backgroundInline: componentTheme.dangerBackgroundInline,
+      borderColor: componentTheme.dangerBorderColor,
+      borderColorInline: componentTheme.dangerBorderColorInline
     },
     info: {
-      alert: { borderColor: componentTheme.infoBorderColor },
-      icon: {
-        background: componentTheme.infoIconBackground,
-        borderRightColor: componentTheme.infoIconBackground
-      }
+      background: componentTheme.infoBackground,
+      backgroundInline: componentTheme.infoBackgroundInline,
+      borderColor: componentTheme.infoBorderColor,
+      borderColorInline: componentTheme.infoBorderColorInline
     },
     success: {
-      alert: { borderColor: componentTheme.successBorderColor },
-      icon: {
-        backgroundColor: componentTheme.successIconBackground,
-        borderRightColor: componentTheme.successIconBackground
-      }
+      background: componentTheme.successBackground,
+      backgroundInline: componentTheme.successBackgroundInline,
+      borderColor: componentTheme.successBorderColor,
+      borderColorInline: componentTheme.successBorderColorInline
     },
     warning: {
-      alert: { borderColor: componentTheme.warningBorderColor },
-      icon: {
-        background: componentTheme.warningIconBackground,
-        borderRightColor: componentTheme.warningIconBackground
-      }
+      background: componentTheme.warningBackground,
+      backgroundInline: componentTheme.warningBackgroundInline,
+      borderColor: componentTheme.warningBorderColor,
+      borderColorInline: componentTheme.warningBorderColorInline
     }
   }
+  const colors = variantColors[variant]
 
   return {
     alert: {
       label: 'alert',
-      color: componentTheme.color,
-      background: componentTheme.background,
+      color:
+        isFloating && variant !== 'warning' ? TEXT_COLOR_ON_COLOR : TEXT_COLOR,
+      background: isFloating ? colors.background : colors.backgroundInline,
       boxSizing: 'border-box',
       display: 'flex',
+      alignItems: 'flex-start',
       minWidth: '12rem',
       borderWidth: componentTheme.borderWidth,
       borderStyle: componentTheme.borderStyle,
+      borderColor: isFloating ? colors.borderColor : colors.borderColorInline,
       borderRadius: componentTheme.borderRadius,
-      ...variantStyles[variant].alert,
       ...(hasShadow && {
         boxShadow: boxShadowObjectsToCSSString(
           sharedTokens.boxShadow.elevation4
@@ -93,26 +104,24 @@ const generateStyle = (
       })
     },
     icon: {
-      color: componentTheme.iconColor,
-      boxSizing: 'border-box',
-      flex: '0 0 2.5rem',
+      boxSizing: 'content-box',
+      flexShrink: 0,
       display: 'flex',
       alignItems: 'center',
-      justifyContent: 'center',
-      fontSize: '1.125rem',
-      borderRight: `${componentTheme.borderWidth} ${componentTheme.borderStyle}`,
-      margin: -1,
-      borderStartStartRadius: componentTheme.borderRadius,
-      borderEndStartRadius: componentTheme.borderRadius,
-      ...variantStyles[variant].icon
+      //height: '1lh',
+      //fontSize: componentTheme.contentFontSize,
+      //lineHeight: componentTheme.contentLineHeight,
+      //paddingBlock: componentTheme.contentPaddingVertical,
+      paddingBlock: componentTheme.iconPaddingVertical,
+      paddingInlineStart: componentTheme.iconPaddingLeft,
+      paddingInlineEnd: componentTheme.iconPaddingRight
     },
     closeButton: {
       boxSizing: 'border-box',
       display: 'flex',
       alignItems: 'flex-start',
-      order: 1,
       marginTop: componentTheme.closeButtonMarginTop,
-      marginRight: componentTheme.closeButtonMarginRight
+      marginInlineEnd: componentTheme.closeButtonMarginRight
     },
     content: {
       boxSizing: 'border-box',
@@ -121,7 +130,8 @@ const generateStyle = (
       fontSize: componentTheme.contentFontSize,
       fontFamily: componentTheme.contentFontFamily,
       fontWeight: componentTheme.contentFontWeight,
-      lineHeight: componentTheme.contentLineHeight,
+      //lineHeight: componentTheme.contentLineHeight,
+      lineHeight: '24px',
       padding: `${componentTheme.contentPaddingVertical} ${componentTheme.contentPaddingHorizontal}`
     },
     variantScreenReaderLabel: {
