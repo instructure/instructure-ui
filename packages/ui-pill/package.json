@@ -27,6 +27,7 @@
     "@instructure/console": "workspace:*",
     "@instructure/emotion": "workspace:*",
     "@instructure/shared-types": "workspace:*",
+    "@instructure/ui-icons": "workspace:*",
     "@instructure/ui-react-utils": "workspace:*",
     "@instructure/ui-themes": "workspace:*",
     "@instructure/ui-tooltip": "workspace:*",
@@ -38,7 +39,6 @@
     "@instructure/ui-axe-check": "workspace:*",
     "@instructure/ui-babel-preset": "workspace:*",
     "@instructure/ui-color-utils": "workspace:*",
-    "@instructure/ui-icons": "workspace:*",
     "@instructure/ui-scripts": "workspace:*",
     "vitest": "^5.0.0"
   },
