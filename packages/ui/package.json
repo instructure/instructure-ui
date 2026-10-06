@@ -136,12 +136,19 @@
       "require": "./lib/v11_7.js",
       "default": "./es/v11_7.js"
     },
+    "./v11_8": {
+      "src": "./src/v11_8.ts",
+      "types": "./types/v11_8.d.ts",
+      "import": "./es/v11_8.js",
+      "require": "./lib/v11_8.js",
+      "default": "./es/v11_8.js"
+    },
     "./latest": {
-      "src": "./src/v11_7.ts",
-      "types": "./types/v11_7.d.ts",
-      "import": "./es/v11_7.js",
-      "require": "./lib/v11_7.js",
-      "default": "./es/v11_7.js"
+      "src": "./src/v11_8.ts",
+      "types": "./types/v11_8.d.ts",
+      "import": "./es/v11_8.js",
+      "require": "./lib/v11_8.js",
+      "default": "./es/v11_8.js"
     }
   }
 }
