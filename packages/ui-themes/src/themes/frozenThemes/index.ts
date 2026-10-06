@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import frozenThemesDesignTokensV1 from './designTokensV1'
-export type { DesignTokensV1ComponentTypes } from './designTokensV1'
+import frozenThemesDesignTokensV1 from './designTokensV1/index.js'
+export type { DesignTokensV1ComponentTypes } from './designTokensV1/index.js'
 
 export { frozenThemesDesignTokensV1 }

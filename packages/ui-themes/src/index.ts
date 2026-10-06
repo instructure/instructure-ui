@@ -21,17 +21,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import type { ComponentTypes as NewComponentTypes } from './themes/newThemeTokens/componentTypes'
+import type { ComponentTypes as NewComponentTypes } from './themes/newThemeTokens/componentTypes/index.js'
 import type {
   SharedTokens,
   BaseTheme as NewBaseTheme,
   TokenBoxshadowValueInst,
   TokenTypographyValueInst
-} from './themes/newThemeTokens/commonTypes'
-import type { CanvasHighContrastTheme } from './themes/canvasHighContrast'
-import type { CanvasTheme, CanvasBrandVariables } from './themes/canvas'
-import type { DarkTheme } from './themes/dark'
-import type { LightTheme } from './themes/light'
+} from './themes/newThemeTokens/commonTypes.js'
+import type { CanvasHighContrastTheme } from './themes/canvasHighContrast/index.js'
+import type {
+  CanvasTheme,
+  CanvasBrandVariables
+} from './themes/canvas/index.js'
+import type { DarkTheme } from './themes/dark/index.js'
+import type { LightTheme } from './themes/light/index.js'
 import type {
   BaseTheme,
   Primitives,
@@ -66,8 +69,8 @@ import type {
   Light
 } from './themes/newThemeTokens/index.js'
 
-import { frozenThemesDesignTokensV1 } from './themes/frozenThemes'
-import type { DesignTokensV1ComponentTypes } from './themes/frozenThemes'
+import { frozenThemesDesignTokensV1 } from './themes/frozenThemes/index.js'
+import type { DesignTokensV1ComponentTypes } from './themes/frozenThemes/index.js'
 
 type ThemeMap = {
   canvas: CanvasTheme

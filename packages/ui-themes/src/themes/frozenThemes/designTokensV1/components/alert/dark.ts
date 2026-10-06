@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { SemanticsDark as Semantics } from '../../semantics'
+import type { SemanticsDark as Semantics } from '../../semantics.js'
 
 const alert = (semantic: Semantics) => ({
   background: semantic.color.background.elevatedSurface.base,

@@ -27,25 +27,25 @@ import {
   primitivesLight,
   primitivesCanvas,
   primitivesCanvasHighContrast
-} from './primitives'
+} from './primitives.js'
 
 import {
   semanticsDark,
   semanticsLight,
   semanticsCanvas,
   semanticsCanvasHighContrast
-} from './semantics'
+} from './semantics.js'
 
 import {
   sharedTokensDark,
   sharedTokensLight,
   sharedTokensCanvas,
   sharedTokensCanvasHighContrast
-} from './sharedTokens'
+} from './sharedTokens.js'
 
-import components from './components'
+import components from './components/index.js'
 
-import type { Alert, Pill } from './components/index'
+import type { Alert, Pill } from './components/index.js'
 export type DesignTokensV1ComponentTypes = { Alert: Alert; Pill: Pill }
 
 export default {
