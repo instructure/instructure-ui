@@ -29,6 +29,7 @@ import { describe, it, expect, vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import type { ViewProps } from '@instructure/ui-view/latest'
 import { Tag } from '@instructure/ui-tag/latest'
+import type { TagHandle } from '@instructure/ui-tag/latest'
 import { View } from '@instructure/ui-view/latest'
 
 describe('<Tag />', async () => {
@@ -63,6 +64,18 @@ describe('<Tag />', async () => {
     const icon = container.querySelector('svg')
 
     expect(icon).toHaveAttribute('name', 'X')
+  })
+
+  it('should focus the tag through its ref', async () => {
+    let tagRef: TagHandle | null = null
+    await render(
+      <Tag text="Summer" onClick={vi.fn()} ref={(el) => (tagRef = el)} />
+    )
+
+    tagRef!.focus()
+
+    expect(page.getByRole('button').element()).toHaveFocus()
+    expect(tagRef!.focused).toBe(true)
   })
 
   it('should meet a11y standards', async () => {
