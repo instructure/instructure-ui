@@ -24,3 +24,4 @@
 
 export { Tag } from '../Tag/v3/index.js'
 export type { TagProps } from '../Tag/v3/props'
+export type { TagHandle } from '../Tag/v3/index.js'

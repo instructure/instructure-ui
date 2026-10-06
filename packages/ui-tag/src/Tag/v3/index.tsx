@@ -22,14 +22,14 @@
  * SOFTWARE.
  */
 
-import { Component } from 'react'
+import { forwardRef, useImperativeHandle, useRef, useState } from 'react'
 
 import { XInstUIIcon } from '@instructure/ui-icons'
 import { View } from '@instructure/ui-view/latest'
 import type { ViewProps } from '@instructure/ui-view/latest'
 import { omitProps } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
-import { withStyleNew } from '@instructure/emotion'
+import { useStyleNew } from '@instructure/emotion'
 
 import generateStyle from './styles.js'
 import type { TagProps } from './props'
@@ -40,53 +40,52 @@ import { allowedProps } from './props.js'
 category: components
 ---
 **/
+const Tag = forwardRef<TagHandle, TagProps>((props, ref) => {
+  const {
+    className,
+    text,
+    size = 'medium',
+    dismissible = false,
+    disabled = false,
+    readOnly = false,
+    onClick,
+    margin,
+    elementRef,
+    themeOverride
+  } = props
 
-@withStyleNew(generateStyle)
-class Tag extends Component<TagProps> {
-  static displayName = 'Tag'
-  static readonly componentId = 'Tag'
+  const [iconHovered, setIconHovered] = useState(false)
+  const rootRef = useRef<Element | null>(null)
 
-  static allowedProps = allowedProps
-  static defaultProps = {
-    size: 'medium',
-    dismissible: false,
-    disabled: false,
-    readOnly: false
+  const styles = useStyleNew({
+    generateStyle,
+    themeOverride,
+    params: { size, dismissible, disabled, isButton: !!onClick },
+    componentId: 'Tag',
+    displayName: 'Tag'
+  })
+
+  useImperativeHandle(
+    ref,
+    () => ({
+      focus: () => {
+        ;(rootRef.current as HTMLElement | null)?.focus()
+      },
+      get focused() {
+        return isActiveElement(rootRef.current)
+      }
+    }),
+    []
+  )
+
+  const handleRef = (element: Element | null) => {
+    rootRef.current = element
+    if (typeof elementRef === 'function') {
+      elementRef(element)
+    }
   }
 
-  state = {
-    iconHovered: false
-  }
-
-  ref: Element | null = null
-
-  componentDidMount() {
-    this.props.makeStyles?.()
-  }
-
-  componentDidUpdate() {
-    this.props.makeStyles?.()
-  }
-
-  get focused() {
-    return isActiveElement(this.ref)
-  }
-
-  focus = () => {
-    this.ref && (this.ref as HTMLElement).focus()
-  }
-
-  handleIconMouseEnter = () => {
-    this.setState({ iconHovered: true })
-  }
-
-  handleIconMouseLeave = () => {
-    this.setState({ iconHovered: false })
-  }
-
-  handleClick = (e: React.MouseEvent<ViewProps & Element>) => {
-    const { disabled, readOnly, onClick } = this.props
-
+  const handleClick = (e: React.MouseEvent<ViewProps & Element>) => {
     if (disabled || readOnly) {
       e.preventDefault()
       e.stopPropagation()
@@ -95,77 +94,52 @@ class Tag extends Component<TagProps> {
     }
   }
 
-  handleRef = (element: Element | null) => {
-    this.ref = element
+  const iconSize = ({ small: 'xs', medium: 'sm', large: 'md' } as const)[size]
+  const iconColor = disabled
+    ? 'mutedColor'
+    : iconHovered
+    ? 'actionSecondaryHoverColor'
+    : 'baseColor'
 
-    if (typeof this.props.elementRef === 'function') {
-      this.props.elementRef(element)
-    }
-  }
+  const passthroughProps = View.omitViewProps(
+    omitProps(props, allowedProps),
+    Tag
+  )
 
-  getIconSize = () => {
-    const { size } = this.props
+  return (
+    <View
+      {...passthroughProps}
+      elementRef={handleRef}
+      css={styles?.tag}
+      className={className}
+      as={onClick ? 'button' : 'span'}
+      margin={margin}
+      type={onClick ? 'button' : undefined}
+      {...(onClick && { onClick: handleClick })}
+      disabled={disabled || readOnly}
+      display={undefined}
+      title={typeof text === 'string' ? text : undefined}
+      data-cid="Tag"
+      onMouseEnter={() => setIconHovered(true)}
+      onMouseLeave={() => setIconHovered(false)}
+    >
+      <span css={styles?.text}>{text}</span>
+      {onClick && dismissible ? (
+        <span css={styles?.icon}>
+          <XInstUIIcon size={iconSize} color={iconColor} />
+        </span>
+      ) : null}
+    </View>
+  )
+})
 
-    const sizeMap = {
-      small: 'xs',
-      medium: 'sm',
-      large: 'md'
-    } as const
+Tag.displayName = 'Tag'
 
-    return sizeMap[size!]
-  }
-
-  render() {
-    const {
-      className,
-      dismissible,
-      disabled,
-      readOnly,
-      text,
-      onClick,
-      margin,
-      styles
-    } = this.props
-
-    const passthroughProps = View.omitViewProps(
-      omitProps(this.props, Tag.allowedProps),
-      Tag
-    )
-
-    const getIconColor = () => {
-      if (disabled) {
-        return 'mutedColor'
-      }
-      return this.state.iconHovered ? 'actionSecondaryHoverColor' : 'baseColor'
-    }
-
-    return (
-      <View
-        {...passthroughProps}
-        elementRef={this.handleRef}
-        css={styles?.tag}
-        className={className}
-        as={onClick ? 'button' : 'span'}
-        margin={margin}
-        type={onClick ? 'button' : undefined}
-        {...(onClick && { onClick: this.handleClick })}
-        disabled={disabled || readOnly}
-        display={undefined}
-        title={typeof text === 'string' ? text : undefined}
-        data-cid="Tag"
-        onMouseEnter={this.handleIconMouseEnter}
-        onMouseLeave={this.handleIconMouseLeave}
-      >
-        <span css={styles?.text}>{text}</span>
-        {onClick && dismissible ? (
-          <span css={styles?.icon}>
-            <XInstUIIcon size={this.getIconSize()} color={getIconColor()} />
-          </span>
-        ) : null}
-      </View>
-    )
-  }
+interface TagHandle {
+  focus: () => void
+  readonly focused: boolean
 }
 
 export default Tag
 export { Tag }
+export type { TagHandle }

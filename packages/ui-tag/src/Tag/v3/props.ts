@@ -26,8 +26,8 @@ import React from 'react'
 import type { ViewProps } from '@instructure/ui-view/latest'
 import type {
   Spacing,
-  WithStyleProps,
-  ComponentStyle
+  ComponentStyle,
+  NewThemeOverrideProp
 } from '@instructure/emotion'
 import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { OtherHTMLAttributes } from '@instructure/shared-types'
@@ -66,10 +66,15 @@ type PropKeys = keyof TagOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TagProps = TagOwnProps &
-  WithStyleProps<ReturnType<NewComponentTypes['Tag']>, TagStyle> &
+  NewThemeOverrideProp<ReturnType<NewComponentTypes['Tag']>> &
   OtherHTMLAttributes<TagOwnProps>
 
 type TagStyle = ComponentStyle<'tag' | 'text' | 'icon'>
+
+type TagStyleParams = Required<
+  Pick<TagProps, 'size' | 'dismissible' | 'disabled'>
+> & { isButton: boolean }
+
 const allowedProps: AllowedPropKeys = [
   'className',
   'text',
@@ -82,5 +87,5 @@ const allowedProps: AllowedPropKeys = [
   'size'
 ]
 
-export type { TagProps, TagStyle }
+export type { TagProps, TagStyle, TagStyleParams }
 export { allowedProps }
