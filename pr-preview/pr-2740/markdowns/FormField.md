@@ -71,7 +71,7 @@ type: example
 | FormField | id | `string` | Yes | - | the id of the input (to link it to its label for a11y). Applied as the `for` HTML prop on the label. |
 | FormField | messages | `FormMessage[]` | No | - | Array of objects with shape: `{ text: React.ReactNode, type: One of: ['newError', 'error', 'hint', 'success', 'screenreader-only'] }` |
 | FormField | messagesId | `string` | No | - | id for the form field messages |
-| FormField | labelId | `string` | No | - | id for the label element. Useful when the control is not a labelable element (e.g. a custom widget), and needs to reference the label via `aria-labelledby`. |
+| FormField | labelId | `string` | No | - | `id` for the label/legend element. Useful when the control is not a [labelable](https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Content_categories#labelable) element (e.g. a custom widget), and needs to reference the label via `aria-labelledby`. |
 | FormField | children | `\| React.ReactNode \| ((params: FormFieldLayoutChildrenParams) => React.ReactNode)` | No | - | The form control. Can be a function that receives `{ describedBy }`, so the control can reference the messages via `aria-describedby`. |
 | FormField | inline | `boolean` | No | `false` |  |
 | FormField | layout | `'stacked' \| 'inline'` | No | `'stacked'` |  |
@@ -91,7 +91,7 @@ type: example
 | FormField.FormFieldLayout | as | `AsElementType` | No | - | The element type to render as, `div` be default. Also determines how the `label` will be rendered: If its value is `fieldset` (for form groups), it be rendered in a [legend](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/legend), for all other cases it will be in a [label](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/label). |
 | FormField.FormFieldLayout | messages | `FormMessage[]` | No | - | Array of objects with shape: `{ text: React.ReactNode, type: One of: ['newError', 'error', 'hint', 'success', 'screenreader-only'] }` |
 | FormField.FormFieldLayout | messagesId | `string` | No | - | id for the form field messages |
-| FormField.FormFieldLayout | labelId | `string` | No | - | `id` for the label/legend element. Useful when the control is not a [labelable](https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Content_categories#labelable) element (e.g. a custom widget), and needs to reference the label via `aria-labelledby`. |
+| FormField.FormFieldLayout | labelId | `string` | No | - | `id` for the label/legend element. Useful when the control is not a [labelable](https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Content_categories#labelable) element (e.g. a custom widget), and needs to reference the label via `aria-labelledby={labelId}`. |
 | FormField.FormFieldLayout | children | `\| React.ReactNode \| ((params: FormFieldLayoutChildrenParams) => React.ReactNode)` | No | - | The form control(s). Can be a function that receives `{ describedBy }`, so the control can reference the messages via `aria-describedby`. |
 | FormField.FormFieldLayout | inline | `boolean` | No | - | If `true` use an inline layout -- content will flow on the left/right side of this component |
 | FormField.FormFieldLayout | layout | `'stacked' \| 'inline'` | No | - | In `stacked` mode the container is below the label, in `inline` mode the container is to the right/left (depending on text direction) |

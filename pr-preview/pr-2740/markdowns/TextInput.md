@@ -354,6 +354,7 @@ type: embed
 | TextInput | renderLabel | `Renderable` | No | - | The form field label. |
 | TextInput | type | `'text' \| 'email' \| 'url' \| 'tel' \| 'search' \| 'password'` | No | `'text'` | Determines the underlying native HTML `<input>` element's `type`. For more see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/url |
 | TextInput | id | `string` | No | - | The id of the text input. One is generated if not supplied. |
+| TextInput | labelId | `string` | No | - | id for the label element. If empty, it's auto generated. useful if you use `aria-labelledby={labelId}` to label something with the label element. |
 | TextInput | value | `string` | No | - | the selected value (must be accompanied by an `onChange` prop) |
 | TextInput | defaultValue | `string` | No | - | value to set on initial render |
 | TextInput | interaction | `InteractionType` | No | `undefined` | Specifies if interaction with the input is enabled, disabled, or readonly. When "disabled", the input changes visibly to indicate that it cannot receive user interactions. When "readonly" the input still cannot receive user interactions but it keeps the same styles as if it were enabled. Note: placeholder is only displayed when interaction is enabled. You can force it with forcePlaceholder prop Note: error and success messages are hidden when interaction is not enabled. You can force them for readonly with the forceMessages prop |
