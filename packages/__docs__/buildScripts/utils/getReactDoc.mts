@@ -39,7 +39,16 @@ export function getReactDoc(
       {
         resolver: new builtinResolvers.FindExportedDefinitionsResolver(),
         filename: fileName,
-        importer: makeFsImporter()
+        importer: makeFsImporter(),
+        babelOptions: {
+          // without a babel config react-docgen enables jsx for .ts too, which
+          // breaks angle-bracket type assertions like `<T>value`
+          parserOpts: {
+            plugins: fileName.endsWith('.ts')
+              ? ['typescript', 'decorators-legacy']
+              : ['jsx', 'typescript', 'decorators-legacy']
+          }
+        }
       }
     )
     if (parsed.length > 1) {
