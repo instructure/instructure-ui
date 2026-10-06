@@ -23,7 +23,7 @@
  */
 
 import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
-import type { TagProps, TagStyle } from './props'
+import type { TagStyle, TagStyleParams } from './props'
 import { calcFocusOutlineStyles } from '@instructure/emotion'
 
 /**
@@ -32,18 +32,16 @@ import { calcFocusOutlineStyles } from '@instructure/emotion'
  * ---
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} params Additional parameters to customize the style.
  * @param  {Object} sharedTokens the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
   componentTheme: ReturnType<NewComponentTypes['Tag']>,
-  props: TagProps,
+  params: TagStyleParams,
   sharedTokens: SharedTokens
 ): TagStyle => {
-  const { size, dismissible, onClick, disabled } = props
-
-  const isButton = !!onClick
+  const { size, dismissible, disabled, isButton } = params
 
   const sizeVariants = {
     small: {
@@ -135,7 +133,7 @@ const generateStyle = (
       ...(isButton && {
         '&:hover': { backgroundColor: componentTheme.defaultBackgroundHover }
       }),
-      ...sizeVariants[size!].tag,
+      ...sizeVariants[size].tag,
       ...buttonVariant.tag,
 
       '&::before': {
@@ -151,7 +149,7 @@ const generateStyle = (
       overflow: 'hidden',
       textOverflow: 'ellipsis',
       maxWidth: componentTheme.maxWidth,
-      ...sizeVariants[size!].text
+      ...sizeVariants[size].text
     },
     icon: {
       label: 'tag__icon',
