@@ -42,17 +42,76 @@ type: example
 
 ### AI Heading
 
-Pre-configured and with unique styles, the `ai-headings` are used for standardized, ai-related components.
+Use the `aiVariant` prop for headings of AI-related content, such as a Modal or Popover header. Use a standard Heading for all other headings.
+
+`stacked` and `horizontal` show the IgniteAI logo lockup before the heading text:
 
 ```js
 ---
 type: example
 ---
 <div style={{display: 'flex', flexDirection: 'column', gap: '24px'}}>
-  <Heading aiVariant="stacked" level="h2">Nutrition Facts</Heading>
-  <Heading aiVariant="horizontal" level="h3">Nutrition Facts</Heading>
-  <Heading aiVariant="iconOnly" level="h4">Nutrition Facts</Heading>
+  <Heading aiVariant="stacked" level="h2">Stacked AI heading</Heading>
+  <Heading aiVariant="horizontal" level="h3">Horizontal AI heading</Heading>
 </div>
+```
+
+`iconOnly` shows only the AI icon, and it comes in the same sizes as the standard Heading. Set the size with the `variant` or `level` prop, and the icon scales to match:
+
+```js
+---
+type: example
+---
+<div style={{display: 'flex', flexDirection: 'column', gap: '16px'}}>
+  <Heading aiVariant="iconOnly" variant="titlePageDesktop">titlePageDesktop</Heading>
+  <Heading aiVariant="iconOnly" variant="titlePageMobile">titlePageMobile</Heading>
+  <Heading aiVariant="iconOnly" variant="titleSection">titleSection</Heading>
+  <Heading aiVariant="iconOnly" variant="titleCardSection">titleCardSection</Heading>
+  <Heading aiVariant="iconOnly" variant="titleModule">titleModule</Heading>
+  <Heading aiVariant="iconOnly" variant="titleCardLarge">titleCardLarge</Heading>
+  <Heading aiVariant="iconOnly" variant="titleCardRegular">titleCardRegular</Heading>
+  <Heading aiVariant="iconOnly" variant="titleCardMini">titleCardMini</Heading>
+  <Heading aiVariant="iconOnly" variant="label">label</Heading>
+</div>
+```
+
+For example, in a Modal header:
+
+```js
+---
+type: example
+---
+const Example = () => {
+  const [open, setOpen] = useState(false)
+  return (
+    <div>
+      <Button onClick={() => setOpen(true)}>Open Modal</Button>
+      <Modal
+        open={open}
+        onDismiss={() => setOpen(false)}
+        size="small"
+        label="Summarize with AI"
+      >
+        <Modal.Header>
+          <CloseButton
+            placement="end"
+            offset="small"
+            onClick={() => setOpen(false)}
+            screenReaderLabel="Close"
+          />
+          <Heading aiVariant="iconOnly" variant="titleCardLarge">
+            Summarize with AI
+          </Heading>
+        </Modal.Header>
+        <Modal.Body>
+          <Text>The AI-generated summary goes here.</Text>
+        </Modal.Body>
+      </Modal>
+    </div>
+  )
+}
+
+render(<Example />)
 ```
 
 ### Heading level
