@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { SemanticsCanvasHighContrast as Semantics } from '../../semantics'
+import type { SemanticsCanvasHighContrast as Semantics } from '../../semantics.js'
 
 const pill = (semantic: Semantics) => ({
   paddingHorizontal: semantic.spacing.spaceSm,

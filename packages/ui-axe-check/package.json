@@ -22,12 +22,10 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/runtime": "^7.29.7",
+    "@swc/helpers": "^0.5.23",
     "axe-core": "4.12.1"
   },
-  "devDependencies": {
-    "@instructure/ui-babel-preset": "workspace:*"
-  },
+  "devDependencies": {},
   "publishConfig": {
     "access": "public"
   },

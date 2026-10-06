@@ -22,15 +22,15 @@
  * SOFTWARE.
  */
 
-import type { Primitives as PrimitivesDark } from '../../newThemeTokens/dark/primitives'
-import type { Primitives as PrimitivesLight } from '../../newThemeTokens/light/primitives'
-import type { Primitives as PrimitivesCanvas } from '../../newThemeTokens/legacyCanvas/primitives'
-import type { Primitives as PrimitivesCanvasHighContrast } from '../../newThemeTokens/legacyCanvasHighContrast/primitives'
+import type { Primitives as PrimitivesDark } from '../../newThemeTokens/dark/primitives.js'
+import type { Primitives as PrimitivesLight } from '../../newThemeTokens/light/primitives.js'
+import type { Primitives as PrimitivesCanvas } from '../../newThemeTokens/legacyCanvas/primitives.js'
+import type { Primitives as PrimitivesCanvasHighContrast } from '../../newThemeTokens/legacyCanvasHighContrast/primitives.js'
 
-import primitivesDark from '../../newThemeTokens/dark/primitives'
-import primitivesLight from '../../newThemeTokens/light/primitives'
-import primitivesCanvas from '../../newThemeTokens/legacyCanvas/primitives'
-import primitivesCanvasHighContrast from '../../newThemeTokens/legacyCanvasHighContrast/primitives'
+import primitivesDark from '../../newThemeTokens/dark/primitives.js'
+import primitivesLight from '../../newThemeTokens/light/primitives.js'
+import primitivesCanvas from '../../newThemeTokens/legacyCanvas/primitives.js'
+import primitivesCanvasHighContrast from '../../newThemeTokens/legacyCanvasHighContrast/primitives.js'
 
 export type {
   PrimitivesDark,

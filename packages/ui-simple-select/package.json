@@ -23,16 +23,15 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/runtime": "^7.29.7",
     "@instructure/console": "workspace:*",
     "@instructure/shared-types": "workspace:*",
     "@instructure/ui-form-field": "workspace:*",
     "@instructure/ui-position": "workspace:*",
     "@instructure/ui-react-utils": "workspace:*",
-    "@instructure/ui-select": "workspace:*"
+    "@instructure/ui-select": "workspace:*",
+    "@swc/helpers": "^0.5.23"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "workspace:*",
     "@instructure/ui-color-utils": "workspace:*",
     "@instructure/ui-icons": "workspace:*",
     "@instructure/ui-utils": "workspace:*",

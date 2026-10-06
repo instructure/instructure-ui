@@ -146,7 +146,7 @@ function collect(
 /**
  * Reprint the whole snapshot tree with the repo's dprint config (already a
  * ui-scripts dependency — no new dep). This collapses pure-formatting
- * differences so that swapping transpilers (Babel → SWC) or compilers
+ * differences so that swapping transpilers or compilers
  * (tsc → tsgo) shows only *real* code changes, not whitespace/quote churn.
  *
  * IMPORTANT: dprint resolves its file globs relative to `cwd`, NOT to the
@@ -371,7 +371,7 @@ export default {
     yargs.option('semantic', {
       boolean: true,
       default: false,
-      desc: 'Reprint with dprint before diffing so formatting differs are ignored (recommended for Babel→SWC / tsc→tsgo)'
+      desc: 'Reprint with dprint before diffing so formatting differs are ignored (recommended when switching transpilers or tsc→tsgo)'
     })
     yargs.option('no-frozen', {
       boolean: true,

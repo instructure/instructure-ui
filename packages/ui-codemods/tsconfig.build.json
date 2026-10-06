@@ -9,6 +9,5 @@
     "types": ["node"]
   },
   "include": ["lib"],
-  "exclude": ["lib/__node_tests__/__testfixtures__"],
-  "references": [{ "path": "../ui-babel-preset/tsconfig.build.json" }]
+  "exclude": ["lib/__node_tests__/__testfixtures__"]
 }

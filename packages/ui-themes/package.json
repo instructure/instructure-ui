@@ -22,12 +22,11 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "workspace:*",
     "vitest": "^5.0.0"
   },
   "dependencies": {
-    "@babel/runtime": "^7.29.7",
     "@instructure/shared-types": "workspace:*",
+    "@swc/helpers": "^0.5.23",
     "@tokens-studio/types": "^0.5.2"
   },
   "publishConfig": {

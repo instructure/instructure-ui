@@ -21,45 +21,45 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const ENV = process.env.NODE_ENV || 'production'
-const DEBUG = process.env.DEBUG || ENV === 'development'
 const exclude = [/node_modules/, /\/lib\//, /\/es\//]
 
-const babelLoader = {
-  loader: 'babel-loader',
+const swcLoader = (tsx) => ({
+  loader: 'swc-loader',
   options: {
-    cacheDirectory: !DEBUG ? false : '.babel-cache'
+    swcrc: false,
+    env: {
+      targets: [
+        'last 2 chrome versions',
+        'last 2 firefox versions',
+        'last 2 edge versions',
+        'last 2 ios versions',
+        'last 2 opera versions',
+        'last 2 safari versions',
+        'last 2 ChromeAndroid versions'
+      ]
+    },
+    jsc: {
+      parser: { syntax: 'typescript', tsx, decorators: true },
+      transform: {
+        legacyDecorator: true,
+        useDefineForClassFields: false,
+        react: { runtime: 'automatic', importSource: '@emotion/react' }
+      }
+    }
   }
-}
+})
 
 const rules = [
-  // Lucide icons: Process directly with babel-loader, skipping thread-loader
-  // The lucide/index.ts file is very large (~2400 lines, 133KB) with icon wrapper exports.
-  // thread-loader has a 2-second poolTimeout which is insufficient for this file,
-  // causing webpack to hang during dev server startup. Processing it directly avoids the timeout.
+  // `.ts` files are parsed without JSX so `<T>value` type assertions work.
   {
-    test: /\.(js|mjs|jsx|ts|tsx)$/,
-    exclude: [...exclude],
-    include: /lucide/,
-    use: [babelLoader]
+    test: /\.ts$/,
+    exclude,
+    use: [swcLoader(false)]
   },
   {
-    test: /\.(js|mjs|jsx|ts|tsx)$/,
-    exclude: [...exclude, /lucide/],
-    use: [
-      {
-        loader: 'thread-loader',
-        options: {
-          workers: 2,
-          workerParallelJobs: 50,
-          workerNodeArgs: ['--max-old-space-size=8192'],
-          poolRespawn: false,
-          poolTimeout: 2000,
-          name: 'babel-loader-pool'
-        }
-      },
-      babelLoader
-    ]
+    test: /\.(js|mjs|jsx|tsx)$/,
+    exclude,
+    use: [swcLoader(true)]
   },
   {
     test: /\.css$/,

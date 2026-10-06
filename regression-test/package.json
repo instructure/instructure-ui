@@ -13,7 +13,6 @@
   },
   "keywords": [],
   "devDependencies": {
-    "@instructure/browserslist-config-instui": "file:../packages/browserslist-config-instui",
     "@tailwindcss/postcss": "^4.3.3",
     "@types/node": "24.1.0",
     "@types/react": "19.2.18",

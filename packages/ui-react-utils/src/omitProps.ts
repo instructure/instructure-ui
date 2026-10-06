@@ -55,7 +55,7 @@ function omitProps<T extends Record<string, any>>(
 const hasOwnProperty = Object.prototype.hasOwnProperty
 
 const omit = <T>(originalObject: T, keysToOmit: string[]) => {
-  // code based on babel's _objectWithoutProperties
+  // code based on the common _objectWithoutProperties transpiler helper
   const newObject: Partial<T> = {}
   for (const key in originalObject) {
     // special case because we always want to omit these and === is faster than

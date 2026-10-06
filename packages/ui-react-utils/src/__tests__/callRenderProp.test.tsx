@@ -84,7 +84,7 @@ describe('callRenderProp', () => {
     const Baz = () => 'some text'
 
     // in this test we are trying to test that it works with fat arrow functions,
-    // but the babel config when we run these tests is currently configured
+    // but the transpiler used when we run these tests may be configured
     // to transpile fat arrow functions down to normal functions.
     // Real, untranspiled, fat-arrow functions don't have a `prototype` but when
     // they are transpiled down they do. So this next line is to make sure

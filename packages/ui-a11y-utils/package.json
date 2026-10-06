@@ -22,17 +22,16 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/runtime": "^7.29.7",
     "@instructure/console": "workspace:*",
     "@instructure/shared-types": "workspace:*",
     "@instructure/ui-a11y-content": "workspace:*",
     "@instructure/ui-dom-utils": "workspace:*",
     "@instructure/ui-react-utils": "workspace:*",
     "@instructure/uid": "workspace:*",
+    "@swc/helpers": "^0.5.23",
     "keycode": "^2"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "workspace:*",
     "@instructure/ui-color-utils": "workspace:*",
     "vitest": "^5.0.0"
   },

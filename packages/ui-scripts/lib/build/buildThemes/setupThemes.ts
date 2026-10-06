@@ -243,7 +243,7 @@ const setupThemes = async (
         (componentName) =>
           `import ${unCapitalize(
             componentName
-          )} from "./components/${unCapitalize(componentName)}"`
+          )} from "./components/${unCapitalize(componentName)}.js"`
       )
       .join('\n')
     const componentNames = componentAndSubcomponentNames
@@ -253,9 +253,9 @@ const setupThemes = async (
       )
       .join(',\n')
     const indexFileContent = `
-      import sharedTokens from "./sharedTokens";
-      import primitives, {type Primitives} from "./primitives";
-      import semantics, {type Semantics} from "./semantics";
+      import sharedTokens from "./sharedTokens.js";
+      import primitives, {type Primitives} from "./primitives.js";
+      import semantics, {type Semantics} from "./semantics.js";
 
       ${componentImports}
 
@@ -358,7 +358,7 @@ const setupThemes = async (
       (theme) =>
         `import ${theme}, {type Theme as ${capitalize(
           theme
-        )}} from "./${theme}"`
+        )}} from "./${theme}/index.js"`
     )
     .join('\n')
   const themeExports = Object.keys(themeData)

@@ -105,7 +105,7 @@ export { ${name}${variant} }
 function generateIconIndex(glyphs: Glyph[]) {
   const content = glyphs
     .map((glyph) => {
-      return `export { ${glyph.name}${glyph.variant} } from './${glyph.name}${glyph.variant}'`
+      return `export { ${glyph.name}${glyph.variant} } from './${glyph.name}${glyph.variant}.js'`
     })
     .join('\n\n')
 

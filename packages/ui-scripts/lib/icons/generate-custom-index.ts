@@ -124,7 +124,7 @@ export default function generateCustomIndex() {
   // Output goes to src/generated/custom/ so the import is relative to that:
   // ../../custom/wrapCustomIcon resolves to src/custom/wrapCustomIcon
   const content = `${HEADER}
-import { wrapCustomIcon } from '../../custom/wrapCustomIcon'
+import { wrapCustomIcon } from '../../custom/wrapCustomIcon.js'
 
 // Custom icons with InstUI theming
 // Each icon is a JSX component that accepts a color prop

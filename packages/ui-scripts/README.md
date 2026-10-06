@@ -16,7 +16,7 @@ ui-scripts <command> --help
 
 #### build
 
-To build (babel transpile) a package to be consumed as a library:
+To build (transpile with SWC) a package to be consumed as a library:
 
 `pnpm run ui-scripts build --modules cjs` writes commonjs modules to the lib/ directory.
 
