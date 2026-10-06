@@ -82,6 +82,12 @@ git push origin release
 
 - Add a new release to GitHub. This will display the newly released version as the latest and automatically triggers a Slack notification.
 
+##### 11. Notify the People Whose Issues Got Fixed
+
+- Run `/release-notify` in Claude Code. It reads the Jira issue keys out of the release's commits (or the pull requests behind them), takes the reporter and Slack thread that `/slack-triage` recorded on each ticket, and hands you a ready-made message that credits them by name.
+- Post the resulting block in the `#instui` channel, in the thread under the release notes message. **Retype each `@` in the Slack composer** and pick the person from the autocomplete: Slack does not turn pasted text into a real mention, so without this nobody gets notified.
+- The skill never posts anything itself, and needs no Slack access — only a read-only Jira API token in the root `.env`. A reporter is only creditable if the ticket carries the required Context Links block from triage.
+
 ## Release Process for Legacy Versions
 
 This document describes the steps to follow when releasing updates to legacy versions. The example given is for v7:
