@@ -22,15 +22,15 @@
  * SOFTWARE.
  */
 
-import type { Semantics as SemanticsDark } from '../../newThemeTokens/dark/semantics'
-import type { Semantics as SemanticsLight } from '../../newThemeTokens/light/semantics'
-import type { Semantics as SemanticsCanvas } from '../../newThemeTokens/legacyCanvas/semantics'
-import type { Semantics as SemanticsCanvasHighContrast } from '../../newThemeTokens/legacyCanvasHighContrast/semantics'
+import type { Semantics as SemanticsDark } from '../../newThemeTokens/dark/semantics.js'
+import type { Semantics as SemanticsLight } from '../../newThemeTokens/light/semantics.js'
+import type { Semantics as SemanticsCanvas } from '../../newThemeTokens/legacyCanvas/semantics.js'
+import type { Semantics as SemanticsCanvasHighContrast } from '../../newThemeTokens/legacyCanvasHighContrast/semantics.js'
 
-import semanticsDark from '../../newThemeTokens/dark/semantics'
-import semanticsLight from '../../newThemeTokens/light/semantics'
-import semanticsCanvas from '../../newThemeTokens/legacyCanvas/semantics'
-import semanticsCanvasHighContrast from '../../newThemeTokens/legacyCanvasHighContrast/semantics'
+import semanticsDark from '../../newThemeTokens/dark/semantics.js'
+import semanticsLight from '../../newThemeTokens/light/semantics.js'
+import semanticsCanvas from '../../newThemeTokens/legacyCanvas/semantics.js'
+import semanticsCanvasHighContrast from '../../newThemeTokens/legacyCanvasHighContrast/semantics.js'
 
 export type {
   SemanticsDark,

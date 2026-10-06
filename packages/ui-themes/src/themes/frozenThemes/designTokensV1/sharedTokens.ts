@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
-import sharedTokensDark from '../../newThemeTokens/dark/sharedTokens'
-import sharedTokensLight from '../../newThemeTokens/light/sharedTokens'
-import sharedTokensCanvas from '../../newThemeTokens/legacyCanvas/sharedTokens'
-import sharedTokensCanvasHighContrast from '../../newThemeTokens/legacyCanvasHighContrast/sharedTokens'
+import sharedTokensDark from '../../newThemeTokens/dark/sharedTokens.js'
+import sharedTokensLight from '../../newThemeTokens/light/sharedTokens.js'
+import sharedTokensCanvas from '../../newThemeTokens/legacyCanvas/sharedTokens.js'
+import sharedTokensCanvasHighContrast from '../../newThemeTokens/legacyCanvasHighContrast/sharedTokens.js'
 
 export {
   sharedTokensDark,

@@ -22,17 +22,17 @@
  * SOFTWARE.
  */
 
-import alertDark from './alert/dark'
-import alertLight from './alert/light'
-import alertCanvas from './alert/canvas'
-import alertCanvasHighContrast from './alert/canvasHighContrast'
-import type Alert from './alert/type'
+import alertDark from './alert/dark.js'
+import alertLight from './alert/light.js'
+import alertCanvas from './alert/canvas.js'
+import alertCanvasHighContrast from './alert/canvasHighContrast.js'
+import type Alert from './alert/type.js'
 
-import pillDark from './pill/dark'
-import pillLight from './pill/light'
-import pillCanvas from './pill/canvas'
-import pillCanvasHighContrast from './pill/canvasHighContrast'
-import type Pill from './pill/type'
+import pillDark from './pill/dark.js'
+import pillLight from './pill/light.js'
+import pillCanvas from './pill/canvas.js'
+import pillCanvasHighContrast from './pill/canvasHighContrast.js'
+import type Pill from './pill/type.js'
 
 export type { Alert, Pill }
 
