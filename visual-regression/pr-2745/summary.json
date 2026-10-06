@@ -1,8 +1,8 @@
 {
   "summary": {
     "total": 99,
-    "unchanged": 98,
-    "changed": 1,
+    "unchanged": 95,
+    "changed": 4,
     "added": 0,
     "removed": 0,
     "a11yPages": 0,
@@ -53,8 +53,8 @@
     },
     {
       "name": "badge-canvas.png",
-      "status": "changed",
-      "numDiff": 1573,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false,
       "layoutShifted": false
     },
@@ -158,8 +158,8 @@
     },
     {
       "name": "calendar-canvas.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 478,
       "sizeMismatch": false,
       "layoutShifted": false
     },
@@ -431,9 +431,9 @@
     },
     {
       "name": "link-canvas.png",
-      "status": "unchanged",
-      "numDiff": 0,
-      "sizeMismatch": false,
+      "status": "changed",
+      "numDiff": 20480,
+      "sizeMismatch": true,
       "layoutShifted": false
     },
     {
@@ -641,15 +641,15 @@
     },
     {
       "name": "tooltip-canvas.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 16952,
       "sizeMismatch": false,
       "layoutShifted": false
     },
     {
       "name": "tooltip-dark.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 15191,
       "sizeMismatch": false,
       "layoutShifted": false
     },
