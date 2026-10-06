@@ -78,6 +78,7 @@
     "@instructure/ui-selectable": "workspace:*",
     "@instructure/ui-side-nav-bar": "workspace:*",
     "@instructure/ui-simple-select": "workspace:*",
+    "@instructure/ui-skeleton": "workspace:*",
     "@instructure/ui-source-code-editor": "workspace:*",
     "@instructure/ui-spinner": "workspace:*",
     "@instructure/ui-svg-images": "workspace:*",

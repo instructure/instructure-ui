@@ -33,6 +33,7 @@ export { omitProps } from './omitProps.js'
 export { passthroughProps } from './passthroughProps.js'
 export { pickProps } from './pickProps.js'
 export { safeCloneElement } from './safeCloneElement.js'
+export { useIsHydrated } from './useIsHydrated.js'
 export { windowMessageListener } from './windowMessageListener.js'
 export {
   DeterministicIdContext,
@@ -41,9 +42,20 @@ export {
   useDeterministicId
 } from './DeterministicIdContext/index.js'
 
+export {
+  HydrationContext,
+  HydrationProvider,
+  useIsHydratedContext,
+  HydrationGate
+} from './HydrationContext/index.js'
+
 export type { GetInteractionOptions } from './getInteraction'
 export type { InteractionType } from './getInteraction'
 export type {
   DeterministicIdProviderValue,
   WithDeterministicIdProps
 } from './DeterministicIdContext'
+export type {
+  HydrationProviderProps,
+  HydrationGateProps
+} from './HydrationContext'

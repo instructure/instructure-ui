@@ -20,6 +20,9 @@
       "path": "../ui-avatar/tsconfig.build.json"
     },
     {
+      "path": "../ui-babel-preset/tsconfig.build.json"
+    },
+    {
       "path": "../ui-badge/tsconfig.build.json"
     },
     {
@@ -45,6 +48,9 @@
     },
     {
       "path": "../ui-date-input/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-date-time-input/tsconfig.build.json"
     },
     {
       "path": "../ui-dialog/tsconfig.build.json"
@@ -167,6 +173,9 @@
       "path": "../ui-simple-select/tsconfig.build.json"
     },
     {
+      "path": "../ui-skeleton/tsconfig.build.json"
+    },
+    {
       "path": "../ui-source-code-editor/tsconfig.build.json"
     },
     {
@@ -185,13 +194,13 @@
       "path": "../ui-tag/tsconfig.build.json"
     },
     {
-      "path": "../ui-text/tsconfig.build.json"
-    },
-    {
       "path": "../ui-text-area/tsconfig.build.json"
     },
     {
       "path": "../ui-text-input/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-text/tsconfig.build.json"
     },
     {
       "path": "../ui-themes/tsconfig.build.json"
@@ -222,12 +231,6 @@
     },
     {
       "path": "../ui-view/tsconfig.build.json"
-    },
-    {
-      "path": "../ui-babel-preset/tsconfig.build.json"
-    },
-    {
-      "path": "../ui-date-time-input/tsconfig.build.json"
     }
   ]
 }
