@@ -25,6 +25,7 @@ function test() {
       >
         <Spinner renderTitle="Loading" />
       </InstUISettingsProvider>
+
       <Spinner
         renderTitle="Loading"
         themeOverride={{

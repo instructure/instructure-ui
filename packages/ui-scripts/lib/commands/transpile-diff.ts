@@ -130,7 +130,7 @@ function collect(
         const rel = relative(worktree, file)
         const dest = join(destRoot, rel)
         const isText = /\.(js|jsx|ts|tsx|mjs|cjs|d\.ts)$/.test(file)
-        const content = readFileSync(file, isText ? 'utf8' : null)
+        const content = readFileSync(file, { encoding: isText ? 'utf8' : null })
         mkdirSync(dirname(dest), { recursive: true })
         writeFileSync(
           dest,

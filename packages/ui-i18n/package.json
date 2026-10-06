@@ -30,7 +30,7 @@
     "@instructure/ui-react-utils": "workspace:*",
     "@instructure/ui-utils": "workspace:*",
     "hoist-non-react-statics": "^3.3.2",
-    "moment-timezone": "^0.6.2"
+    "moment-timezone": "^0.6.5"
   },
   "devDependencies": {
     "@instructure/ui-babel-preset": "workspace:*",

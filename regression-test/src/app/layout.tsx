@@ -66,11 +66,14 @@ export default function RootLayout({
   // mismatch; the `data-theme` attribute lets the spec wait until the requested
   // theme is actually applied before screenshotting.
   const [themeKey, setThemeKey] = useState<ThemeKey>('canvas')
+  // spec.cy.tsx needs a signal that components are rendered.
+  const [hydrated, setHydrated] = useState(false)
   useEffect(() => {
     const requested = new URLSearchParams(window.location.search).get('theme')
     if (requested && requested in themes) {
       setThemeKey(requested as ThemeKey)
     }
+    setHydrated(true)
   }, [])
 
   // Paint the page on the active theme's own page-surface color so each theme is
@@ -95,6 +98,7 @@ export default function RootLayout({
     <html
       lang="en"
       data-theme={themeKey}
+      data-hydrated={hydrated ? '' : undefined}
       style={{ background: pageBackground, color: pageColor }}
     >
       <head>
