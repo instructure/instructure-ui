@@ -35,14 +35,38 @@ import type { FormMessage } from '../../utils/v1/FormPropTypes'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 import type { NewComponentTypes } from '@instructure/ui-themes'
 
+type FormFieldLayoutChildrenParams = {
+  /**
+   * The id of the rendered messages, or `undefined` when no messages are
+   * shown. Add it to the control's `aria-describedby`.
+   */
+  describedBy?: string
+}
+
+type FormFieldLayoutChildren =
+  | React.ReactNode
+  | ((params: FormFieldLayoutChildrenParams) => React.ReactNode)
+
 type FormFieldLayoutOwnProps = {
+  /**
+   * The label text. Will be appended by a `*` if this field is required.
+   */
   label: React.ReactNode
   /**
-   * the id of the input (to link it to its label for a11y)
+   * The id of the form control (=the child of this component). It's applied as the
+   * [for](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/for)
+   * attribute of the label, so the control needs to have the same `id`.
+   * Not used when rendering as a `fieldset` (group)
    */
-  id?: string
+  id: string
   /**
-   * the element type to render as
+   * The element type to render as, `div` be default.
+   *
+   * Also determines how the `label` will be rendered:
+   * If its value is `fieldset` (for form groups), it be rendered in a
+   * [legend](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/legend),
+   * for all other cases it will be in a
+   * [label](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/label).
    */
   as?: AsElementType
   /**
@@ -57,11 +81,18 @@ type FormFieldLayoutOwnProps = {
    */
   messagesId?: string
   /**
-   * id for the label element, so a single form control can reference just the
-   * label text via `aria-labelledby` (keeping messages out of its accessible name)
+   * `id` for the label/legend element. Useful when the control is not a
+   * [labelable](https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Content_categories#labelable)
+   * element (e.g. a custom widget), and needs to reference the label via
+   * `aria-labelledby={labelId}`.
    */
   labelId?: string
-  children?: React.ReactNode
+  /**
+   * The form control(s). Can be a function that receives
+   * `{ describedBy }`, so the control can reference the messages via
+   * `aria-describedby`.
+   */
+  children?: FormFieldLayoutChildren
   /**
    * If `true` use an inline layout -- content will flow on the left/right side
    * of this component
@@ -157,6 +188,8 @@ type FormFieldStyleProps = {
 }
 
 export type {
+  FormFieldLayoutChildren,
+  FormFieldLayoutChildrenParams,
   FormFieldStyleProps,
   FormFieldLayoutProps,
   FormFieldLayoutStyle,

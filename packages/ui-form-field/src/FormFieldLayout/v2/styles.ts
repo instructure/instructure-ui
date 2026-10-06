@@ -121,6 +121,7 @@ const generateStyle = (
     fontWeight: componentTheme.fontWeight,
     fontSize: componentTheme.fontSize,
     lineHeight: componentTheme.lineHeight,
+    paddingBottom: hasVisibleMessage ? '0' : componentTheme.gapPrimitives,
     ...(isInlineLayout && {
       margin: '0',
       // when inline add a small padding between the label and the control
@@ -179,8 +180,7 @@ const generateStyle = (
       ...labelStyles,
       // NOTE: needs separate groups for `:is()` and `:-webkit-any()` because of css selector group validation (see https://www.w3.org/TR/selectors-3/#grouping)
       '&:is(label)': labelStyles,
-      '&:-webkit-any(label)': labelStyles,
-      paddingBottom: hasVisibleMessage ? '0' : componentTheme.gapPrimitives
+      '&:-webkit-any(label)': labelStyles
     },
     formFieldChildren: {
       label: 'formFieldLayout__children',

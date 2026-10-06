@@ -29,8 +29,7 @@ import {
   matchComponentTypes,
   safeCloneElement,
   omitProps,
-  pickProps,
-  withDeterministicId
+  pickProps
 } from '@instructure/ui-react-utils'
 
 import { RadioInput } from '../../RadioInput/v2/index.js'
@@ -46,7 +45,6 @@ type RadioInputChild = ComponentElement<RadioInputProps, any>
 category: components
 ---
 **/
-@withDeterministicId()
 class RadioInputGroup extends Component<
   RadioInputGroupProps,
   RadioInputGroupState
@@ -66,8 +64,6 @@ class RadioInputGroup extends Component<
 
   ref: Element | null = null
 
-  private readonly _messagesId: string
-
   handleRef = (el: Element | null) => {
     this.ref = el
   }
@@ -80,12 +76,6 @@ class RadioInputGroup extends Component<
         value: props.defaultValue
       }
     }
-
-    this._messagesId = props.deterministicId!('RadioInputGroup-messages')
-  }
-
-  get hasMessages() {
-    return !!this.props.messages && this.props.messages.length > 0
   }
 
   get invalid() {
@@ -117,7 +107,7 @@ class RadioInputGroup extends Component<
       : this.props.value
   }
 
-  renderChildren() {
+  renderChildren(describedBy?: string) {
     const { children, name, variant, size, disabled, readOnly } = this.props
 
     // This adds the passed in name property to each RadioInput component
@@ -135,7 +125,7 @@ class RadioInputGroup extends Component<
           onChange: this.handleChange,
           readOnly: readOnly || child.props.readOnly,
           width: child.props.width || 'auto',
-          'aria-describedby': this.hasMessages ? this._messagesId : undefined,
+          'aria-describedby': describedBy,
           // only one radio in a group should be considered tabbable
           // if a radio is checked, it should be the input to receive focus when tabbed to
           // if none of the inputs are checked, the first should receive the focus
@@ -163,14 +153,13 @@ class RadioInputGroup extends Component<
         rowSpacing="small"
         colSpacing={variant === 'toggle' ? 'none' : 'small'} // keep toggles close together
         startAt={variant === 'toggle' ? 'small' : undefined}
-        messagesId={this._messagesId}
         elementRef={this.handleRef}
         role="radiogroup"
         isRequired={isRequired}
         aria-required={isRequired ? true : undefined}
         data-cid="RadioInputGroup"
       >
-        {this.renderChildren()}
+        {({ describedBy }) => this.renderChildren(describedBy)}
       </FormFieldGroup>
     )
   }

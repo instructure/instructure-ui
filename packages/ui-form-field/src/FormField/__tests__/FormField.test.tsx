@@ -48,15 +48,19 @@ describe('<FormField />', () => {
   })
 
   it('should render', async () => {
-    await render(<FormField label="foo" id="bar" />)
-    const formField = page.getByText('foo').element().closest('label')
+    const { container } = await render(<FormField label="foo" id="bar" />)
+    const formField = container.querySelector("[class$='-formFieldLayout']")
+    const label = page.getByText('foo').element().closest('label')
 
-    expect(formField).toBeInTheDocument()
+    expect(formField?.tagName).toBe('DIV')
+    expect(label).toHaveAttribute('for', 'bar')
   })
 
   it('passes props through to FormField', async () => {
-    await render(<FormField label="foo" id="bar" data-automation="baz" />)
-    const formField = page.getByText('foo').element().closest('label')
+    const { container } = await render(
+      <FormField label="foo" id="bar" data-automation="baz" />
+    )
+    const formField = container.querySelector("[class$='-formFieldLayout']")
 
     expect(formField).toHaveAttribute('data-automation', 'baz')
   })

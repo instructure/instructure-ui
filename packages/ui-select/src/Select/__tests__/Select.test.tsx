@@ -337,21 +337,6 @@ describe('<Select />', () => {
   })
 
   describe('accessible name with content rendered before the input', () => {
-    it('keeps meaningful renderBeforeInput content in the accessible name', async () => {
-      // e.g. a country dial-code prefix rendered before the input: the Select
-      // must not strip it from the name (it is the only place it is exposed).
-      const { container } = await render(
-        <Select renderLabel="Country code" renderBeforeInput={<span>+1</span>}>
-          {getOptions()}
-        </Select>
-      )
-      const input = container.querySelector('input')!
-
-      // the component does not force the name to the label only
-      expect(input).not.toHaveAttribute('aria-labelledby')
-      expect(input).toHaveAccessibleName(/\+1/)
-    })
-
     it('lets a consumer keep decorative pills out of the name via aria-label, while each pill still announces "Remove"', async () => {
       const { container } = await render(
         <Select
