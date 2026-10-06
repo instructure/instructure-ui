@@ -2,7 +2,7 @@
 describes: Tabs
 ---
 
-`<Tabs />` is an accessible tabbed navigation component. Use the TAB key to focus the component and arrow keys to navigate between panels of content. To set a default panel that should be selected on initial render, set the `selected` prop on that `<Tabs.Panel>`.
+`<Tabs />` is an accessible tabbed navigation component. Use the TAB key to focus the component and arrow keys to navigate between panels of content. Home and End jump to the first and last tab, and the arrow keys are mirrored in right-to-left text direction. By default a tab is selected as soon as an arrow key reaches it; see the Manual activation section below to require a key press instead. To set a default panel that should be selected on initial render, set the `selected` prop on that `<Tabs.Panel>`.
 
 ```js
 ---
@@ -525,6 +525,62 @@ const Example = () => {
         tabIndex={0}
       >
         This panel only contains text, so tabIndex is set to 0 to include it in the tab sequence.
+      </Tabs.Panel>
+    </Tabs>
+  )
+}
+
+render(<Example />)
+```
+
+### Manual activation
+
+Set `activationMode="manual"` to separate the two: the arrow keys, Home
+and End only move focus, and Enter or Space selects the focused tab.
+
+Use manual activation for expensive panels. This is also important for VoiceOver, which reserves arrow keys for its cursor, while Enter and Space work across screen readers.
+
+```js
+---
+type: example
+---
+const Example = () => {
+  const [selectedIndex, setSelectedIndex] = useState(0)
+
+  const handleTabChange = (event, { index }) => {
+    setSelectedIndex(index)
+  }
+
+  return (
+    <Tabs
+      activationMode="manual"
+      margin="general.space2xl auto"
+      padding="general.spaceXl"
+      onRequestTabChange={handleTabChange}
+    >
+      <Tabs.Panel
+        id="manualA"
+        renderTitle="First Tab"
+        isSelected={selectedIndex === 0}
+        tabIndex={0}
+      >
+        Arrow to another tab, then press Enter or Space to open it.
+      </Tabs.Panel>
+      <Tabs.Panel
+        id="manualB"
+        renderTitle="Second Tab"
+        isSelected={selectedIndex === 1}
+        tabIndex={0}
+      >
+        Second panel
+      </Tabs.Panel>
+      <Tabs.Panel
+        id="manualC"
+        renderTitle="Third Tab"
+        isSelected={selectedIndex === 2}
+        tabIndex={0}
+      >
+        Third panel
       </Tabs.Panel>
     </Tabs>
   )

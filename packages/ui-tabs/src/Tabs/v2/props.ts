@@ -79,6 +79,13 @@ type TabsOwnProps = {
    */
   tabOverflow?: 'stack' | 'scroll'
   shouldFocusOnRender?: boolean
+  /**
+   * With `auto`, arrow keys select a tab as soon as focus reaches it. With
+   * `manual`, arrow keys only move focus and Enter or Space selects the focused
+   * tab. Screen readers that reserve the arrow keys for their own cursor
+   * (VoiceOver) need `manual`.
+   */
+  activationMode?: 'auto' | 'manual'
 }
 
 type PropKeys = keyof TabsOwnProps
@@ -107,6 +114,7 @@ type TabsState = {
   withTabListOverflow: boolean
   showStartOverLay: boolean
   showEndOverLay: boolean
+  focusedTabId?: string
 }
 const allowedProps: AllowedPropKeys = [
   'children',
@@ -122,7 +130,8 @@ const allowedProps: AllowedPropKeys = [
   'textAlign',
   'elementRef',
   'tabOverflow',
-  'shouldFocusOnRender'
+  'shouldFocusOnRender',
+  'activationMode'
 ]
 
 export type { TabsProps, TabsState, TabsStyle }
