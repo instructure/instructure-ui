@@ -27,7 +27,7 @@ dark backgrounds.
 ---
 type: example
 ---
-<View background="primary-inverse" as="div" >
+<View background="info" as="div" >
   <Spinner renderTitle="Loading" variant="inverse"  />
 </View>
 ```
@@ -61,6 +61,26 @@ type: example
 </div>
 ```
 
+### AI variants
+
+Use the `ai` variants to show that an AI feature is working. Use `ai-on-color`
+on colored backgrounds.
+
+```js
+---
+type: example
+---
+<div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+  <Spinner renderTitle="Loading" variant="ai" size="x-small" />
+  <Spinner renderTitle="Loading" variant="ai" size="small" />
+  <Spinner renderTitle="Loading" variant="ai" />
+  <Spinner renderTitle="Loading" variant="ai" size="large" />
+  <View background="info" as="div" padding="small">
+    <Spinner renderTitle="Loading" variant="ai-on-color" />
+  </View>
+</div>
+```
+
 
 ### Props
 
@@ -70,7 +90,7 @@ type: example
 | Spinner | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`. |
 | Spinner | renderTitle | `Renderable` | No | - | Give the spinner a title to be read by screenreaders |
 | Spinner | size | `'x-small' \| 'small' \| 'medium' \| 'large'` | No | - | Different-sized spinners |
-| Spinner | variant | `'default' \| 'inverse'` | No | - | Different color schemes for use with light or dark backgrounds |
+| Spinner | variant | `'default' \| 'inverse' \| 'ai' \| 'ai-on-color'` | No | - | Different color schemes for use with light or dark backgrounds. The `ai` variants show the AI icon instead of the circle. `ai` uses the theme's AI gradient, and `ai-on-color` is for colored backgrounds. |
 
 ### Usage
 

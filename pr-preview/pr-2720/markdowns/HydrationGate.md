@@ -1,10 +1,13 @@
 # HydrationGate
 
-Render-prop form of `useIsHydratedContext`, for class components.
+Lets class components know whether the page has hydrated. It works with or
+without a `HydrationProvider` above it.
 
-A class can read context directly, but it cannot fall back to computing the
-value when no provider is mounted, which would leave it stuck in the
-pre-hydration branch forever. Going through this component gets both.
+```jsx
+<HydrationGate>
+  {(isHydrated) => (isHydrated ? <Content /> : <Placeholder />)}
+</HydrationGate>
+```
 
 ### Props
 

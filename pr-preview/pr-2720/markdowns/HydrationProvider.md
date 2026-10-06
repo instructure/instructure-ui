@@ -1,14 +1,11 @@
 # HydrationProvider
 
-Reads the hydration state **once per page** and hands it to every descendant
-through context.
+Shares whether the page has hydrated with every component below it, so they
+all switch from their server output at the same time. Class components read
+it with `HydrationGate`.
 
-Doing it here rather than in each component matters for three reasons:
- - class components can consume context but cannot call hooks, so this is what
-   lets `View` participate without being rewritten
- - every consumer flips in the same commit, which is what keeps multiple
-   skeletons animating in step instead of drifting apart
- - it gives us one place to mirror the state onto the DOM for CSS-only consumers
+`InstUISettingsProvider` already includes it, so you usually don't need to
+add it yourself.
 
 ### Props
 
