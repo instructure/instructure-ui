@@ -38,7 +38,7 @@ v11.6 components fall back to the `canvas` theme when one tried to apply the `li
 
 InstUI components handle theming for you. Your own layout elements, like page backgrounds, cards, and dividers, need a little help.
 
-We recommend plain HTML elements, like `<div>`, for layout. Style them with plain CSS, and read colors and sizes from the current theme with the [useComputedTheme](/#useComputedTheme) hook's `sharedTokens` prop:
+We recommend plain HTML elements, like `<div>`, for layout. Style them with plain CSS, and read colors and sizes from the current theme with the [useComputedTheme](/#useComputedTheme) hook, it returns [shared tokens](https://instructure.design/shared-tokens) from the context:
 
 ```js
 ---
@@ -47,7 +47,7 @@ type: code
 import { useComputedTheme } from '@instructure/emotion'
 
 const Card = ({ children }) => {
-  const { sharedTokens } = useComputedTheme()
+  const sharedTokens = useComputedTheme()
 
   return (
     <div
@@ -90,8 +90,7 @@ const themes = [
 ]
 
 const LoginPage = () => {
-  const { sharedTokens } = useComputedTheme()
-  const { background, spacing, borderRadius, stroke } = sharedTokens
+  const { background, spacing, borderRadius, stroke } = useComputedTheme()
 
   const [email, setEmail] = useState('')
   const [emailMessages, setEmailMessages] = useState([])
