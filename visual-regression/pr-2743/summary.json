@@ -1,12 +1,12 @@
 {
   "summary": {
     "total": 102,
-    "unchanged": 98,
-    "changed": 1,
+    "unchanged": 97,
+    "changed": 2,
     "added": 3,
     "removed": 0,
-    "a11yPages": 3,
-    "a11yViolations": 12
+    "a11yPages": 0,
+    "a11yViolations": 0
   },
   "results": [
     {
@@ -53,8 +53,8 @@
     },
     {
       "name": "badge-canvas.png",
-      "status": "changed",
-      "numDiff": 1573,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false,
       "layoutShifted": false
     },
@@ -660,15 +660,15 @@
     },
     {
       "name": "tooltip-dark.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 881,
       "sizeMismatch": false,
       "layoutShifted": false
     },
     {
       "name": "tooltip-light.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 956,
       "sizeMismatch": false,
       "layoutShifted": false
     },
@@ -715,14 +715,5 @@
       "layoutShifted": false
     }
   ],
-  "a11y": [
-    {
-      "rule": "color-contrast",
-      "impact": "serious",
-      "title": "Text contrast is too low",
-      "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/color-contrast?application=axeAPI",
-      "nodes": 12,
-      "screens": 3
-    }
-  ]
+  "a11y": []
 }
