@@ -24,37 +24,24 @@
 
 import { useTheme } from '@emotion/react'
 import { applyColorModifiers } from './styleUtils/applyColorModifiers.js'
+import type { SharedTokens } from '@instructure/ui-themes'
 
 /**
  * ---
  * category: utilities/themes
  * ---
- * A hook that returns the fully resolved v11.7+ theme object from the context.
+ * A hook that returns the current v11.7+ theme object's
+ * [shared tokens](https://instructure.design/shared-tokens) from the context.
  *
  * @module useComputedTheme
- * @returns An object containing the computed `primitives`, `semantics`,
- *          `components` and `sharedTokens` of the current theme.
+ * @returns An object containing the computed `sharedTokens` of the current theme.
  */
 export const useComputedTheme = () => {
   const rawTheme = (useTheme() as any).newTheme
 
   const primitives = rawTheme?.primitives
   const semantics = applyColorModifiers(rawTheme?.semantics?.(primitives))
-  const components = applyColorModifiers(
-    Object.keys(rawTheme?.components).reduce(
-      (acc, component) => ({
-        ...acc,
-        [component]: rawTheme.components[component]?.(semantics)
-      }),
-      {}
-    )
-  )
-  const sharedTokens = applyColorModifiers(rawTheme?.sharedTokens?.(semantics))
-
-  return {
-    primitives,
-    semantics,
-    components,
-    sharedTokens
-  }
+  return applyColorModifiers(
+    rawTheme?.sharedTokens?.(semantics)
+  ) as SharedTokens
 }

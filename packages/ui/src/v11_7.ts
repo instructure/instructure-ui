@@ -22,7 +22,12 @@
  * SOFTWARE.
  */
 
-export { InstUISettingsProvider, withStyleNew } from '@instructure/emotion'
+export {
+  InstUISettingsProvider,
+  withStyleNew,
+  useStyleNew,
+  useComputedTheme
+} from '@instructure/emotion'
 export type {
   ComponentStyle,
   StyleObject,
