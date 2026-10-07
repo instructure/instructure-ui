@@ -32,7 +32,7 @@ InstUI ships with four themes:
 | Canvas (legacy)               | `import { canvas } from '@instructure/ui-themes'`             | `v11_6` and `v11_7+`         |
 | Canvas high contrast (legacy) | `import { canvasHighContrast } from '@instructure/ui-themes'` | `v11_6` and `v11_7+`         |
 
-v11.6 components fall back to the `canvas` theme when one tried to apply the `light` and `dark` themes. See [Component versioning](/#component-versioning) for details.
+See [Component versioning](/#component-versioning) for details.
 
 ### Styling your own layout with the theme
 
