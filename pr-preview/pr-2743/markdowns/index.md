@@ -130,8 +130,6 @@
 #### Cards
 
 - [Card](./Card.md)
-- [Card2](./Card2.md)
-- [Card3](./Card3.md)
 
 #### AI Components
 

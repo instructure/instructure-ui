@@ -130,8 +130,6 @@
 #### Cards
 
 - [Card](https://instructure.design/markdowns/Card.md)
-- [Card2](https://instructure.design/markdowns/Card2.md)
-- [Card3](https://instructure.design/markdowns/Card3.md)
 
 #### AI Components
 
