@@ -5,8 +5,8 @@
     "changed": 1,
     "added": 3,
     "removed": 0,
-    "a11yPages": 0,
-    "a11yViolations": 0
+    "a11yPages": 3,
+    "a11yViolations": 12
   },
   "results": [
     {
@@ -715,5 +715,14 @@
       "layoutShifted": false
     }
   ],
-  "a11y": []
+  "a11y": [
+    {
+      "rule": "color-contrast",
+      "impact": "serious",
+      "title": "Text contrast is too low",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/color-contrast?application=axeAPI",
+      "nodes": 12,
+      "screens": 3
+    }
+  ]
 }
