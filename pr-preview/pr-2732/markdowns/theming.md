@@ -14,9 +14,9 @@ Wrap your app in `InstUISettingsProvider` and pass a theme to its `theme` prop:
 type: code
 ---
 import { InstUISettingsProvider } from '@instructure/emotion'
-import { canvas } from '@instructure/ui-themes'
+import { light } from '@instructure/ui-themes'
 
-<InstUISettingsProvider theme={canvas}>
+<InstUISettingsProvider theme={light}>
   <App />
 </InstUISettingsProvider>
 ```
