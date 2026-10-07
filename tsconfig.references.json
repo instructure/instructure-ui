@@ -7,6 +7,9 @@
       "path": "./packages/canvas-theme/tsconfig.build.json"
     },
     {
+      "path": "./packages/ui-card/tsconfig.build.json"
+    },
+    {
       "path": "./packages/command-utils/tsconfig.build.json"
     },
     {

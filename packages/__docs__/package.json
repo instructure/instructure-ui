@@ -46,6 +46,7 @@
     "@instructure/ui-buttons": "workspace:*",
     "@instructure/ui-byline": "workspace:*",
     "@instructure/ui-calendar": "workspace:*",
+    "@instructure/ui-card": "workspace:*",
     "@instructure/ui-checkbox": "workspace:*",
     "@instructure/ui-color-picker": "workspace:*",
     "@instructure/ui-color-utils": "workspace:*",
