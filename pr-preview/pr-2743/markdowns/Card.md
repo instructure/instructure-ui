@@ -26,16 +26,11 @@ controls the card's min-/max-width breakpoints: `sm` applies a max-width,
 ---
 type: example
 ---
-<div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+<div style={{ display: 'flex', gap: '1rem' }}>
   <Card size="sm">
     <Text variant="content">Small card</Text>
   </Card>
-  <Card size="md">
-    <Text variant="content">Medium card</Text>
-  </Card>
-  <Card size="lg">
-    <Text variant="content">Large card</Text>
-  </Card>
+
 </div>
 ```
 
