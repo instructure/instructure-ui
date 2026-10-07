@@ -22,55 +22,34 @@
  * SOFTWARE.
  */
 
-'use client'
-import { Link } from '@instructure/ui/latest'
+import type { ReactNode } from 'react'
+import type { ComponentStyle, NewThemeOverrideProp } from '@instructure/emotion'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
-const components = [
-  'small-components',
-  'custom-icons',
-  'alert',
-  'avatar',
-  'badge',
-  'billboard',
-  'breadcrumb',
-  'button',
-  'tooltip',
-  'byline',
-  'calendar',
-  'card',
-  'checkbox',
-  'checkboxgroup',
-  'colorpicker',
-  'contextview',
-  'dateinput',
-  'datetimeinput',
-  'drilldown',
-  'filedrop',
-  'form-errors',
-  'heading',
-  'img',
-  'link',
-  'menu',
-  'options',
-  'pagination',
-  'progressbar',
-  'select',
-  'table',
-  'tabs',
-  'treebrowser',
-  'view'
-]
-
-export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-6">
-      <ul>
-        {components.map((component) => (
-          <li key={component}>
-            <Link href={component}>{component}</Link>
-          </li>
-        ))}
-      </ul>
-    </main>
-  )
+type CardOwnProps = {
+  /**
+   * The content to be rendered inside the Card
+   */
+  children?: ReactNode
+  /**
+   * `base` renders card with a background and shadow. `nested` is
+   * meant to be placed inside a `base` Card and omits these
+   */
+  variant?: 'base' | 'nested'
 }
+
+type PropKeys = keyof CardOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type CardProps = CardOwnProps &
+  NewThemeOverrideProp<ReturnType<NewComponentTypes['Card']>> &
+  OtherHTMLAttributes<CardOwnProps>
+
+type CardStyle = ComponentStyle<'card' | 'content'>
+
+const allowedProps: AllowedPropKeys = ['children', 'variant']
+
+export type { CardProps, CardStyle }
+export { allowedProps }
