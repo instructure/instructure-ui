@@ -789,6 +789,30 @@ render(<Example />)`
 </View>`
   },
 
+  // `defaultValue` seeds the selection so a segment is highlighted on load;
+  // the options themselves are hardcoded because the form can't edit children.
+  SegmentedControl: {
+    sections: [
+      {
+        id: 'SegmentedControl',
+        config: {
+          include: ['size', 'isDisabled', 'defaultValue'],
+          defaults: { defaultValue: 'week' }
+        }
+      },
+      {
+        id: 'SegmentedControl.Option',
+        label: 'SegmentedControl.Option (first option)',
+        config: { include: ['isDisabled'] }
+      }
+    ],
+    template: `<SegmentedControl aria-label="Calendar view" {{SegmentedControl}}>
+  <SegmentedControl.Option value="day" renderLabel="Day" {{SegmentedControl.Option}} />
+  <SegmentedControl.Option value="week" renderLabel="Week" />
+  <SegmentedControl.Option value="month" renderLabel="Month" />
+</SegmentedControl>`
+  },
+
   Select: {
     sections: [{ id: 'Select', config: { include: ['size', 'interaction'] } }],
     template: `<Select renderLabel="Choose an option" {{Select}}>
