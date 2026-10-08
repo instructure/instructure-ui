@@ -90,6 +90,7 @@
     "@instructure/ui-rating": "workspace:*",
     "@instructure/ui-react-utils": "workspace:*",
     "@instructure/ui-responsive": "workspace:*",
+    "@instructure/ui-segmented-control": "workspace:*",
     "@instructure/ui-select": "workspace:*",
     "@instructure/ui-selectable": "workspace:*",
     "@instructure/ui-side-nav-bar": "workspace:*",
