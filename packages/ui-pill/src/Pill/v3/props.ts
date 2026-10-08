@@ -96,9 +96,7 @@ type PillProps = PillOwnProps &
   NewThemeOverrideProp<ReturnType<NewComponentTypes['Pill']>> &
   OtherHTMLAttributes<PillOwnProps>
 
-type PillStyle = ComponentStyle<
-  'pill' | 'text' | 'maxWidth' | 'status' | 'icon'
->
+type PillStyle = ComponentStyle<'pill' | 'text' | 'status' | 'icon'>
 
 type PillStyleParams = Required<Pick<PillProps, 'color' | 'size'>>
 
