@@ -565,14 +565,14 @@
     {
       "name": "small-components-dark.png",
       "status": "changed",
-      "numDiff": 298425,
+      "numDiff": 298427,
       "sizeMismatch": true,
       "layoutShifted": false
     },
     {
       "name": "small-components-light.png",
       "status": "changed",
-      "numDiff": 271025,
+      "numDiff": 271027,
       "sizeMismatch": true,
       "layoutShifted": false
     },
