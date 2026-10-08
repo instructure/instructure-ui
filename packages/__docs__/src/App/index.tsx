@@ -45,6 +45,7 @@ import type { QueriesMatching } from '@instructure/ui-responsive/latest'
 import {
   MenuInstUIIcon,
   HeartInstUIIcon,
+  TriangleAlertInstUIIcon,
   XInstUIIcon
 } from '@instructure/ui-icons'
 
@@ -708,6 +709,7 @@ class App extends Component<AppProps, AppState> {
         {subject} is designed for components for <strong>v11.7</strong> and
         later.{' '}
         <Link
+          color="link-inverse"
           href={v11_7Href}
           onClick={(e) => {
             e.preventDefault()
@@ -855,6 +857,7 @@ class App extends Component<AppProps, AppState> {
               This page is made for the latest version (
               {this.getLatestMinorVersion()?.replace('_', '.')}) of InstUI.{' '}
               <Link
+                color="link-inverse"
                 href="component-versioning"
                 onClick={(e) => {
                   e.preventDefault()
@@ -977,8 +980,11 @@ class App extends Component<AppProps, AppState> {
   renderError() {
     const errorContent = (
       <Alert variant="error" margin="general.spaceMd">
-        <Text weight="bold">Document not found.</Text> Please use the search in
-        the navigation to find any page in this documentation.
+        <Text weight="bold" color="inherit">
+          Document not found.
+        </Text>{' '}
+        Please use the search in the navigation to find any page in this
+        documentation.
       </Alert>
     )
     return (
@@ -1162,37 +1168,27 @@ class App extends Component<AppProps, AppState> {
     // tf there is a version in the path, e.g. "/v6", then it is a legacy page
     return versionInPath ? (
       <div css={this.props.styles?.legacyVersionAlert}>
-        <InstUISettingsProvider
+        {/* info, not warning: floating info has white text, icon and close button */}
+        <Alert
+          variant="info"
+          transition="none"
+          margin="none"
+          hasShadow={false}
+          renderCloseButtonLabel="Close"
+          renderCustomIcon={TriangleAlertInstUIIcon}
           themeOverride={{
-            components: {
-              BaseButton: {
-                secondaryGhostColor: 'white'
-              }
-            }
+            borderRadius: '0rem',
+            infoBackground: '#BF32A4',
+            infoBorderColor: '#BF32A4'
           }}
         >
-          <Alert
-            variant="warning"
-            transition="none"
-            margin="none"
-            hasShadow={false}
-            renderCloseButtonLabel="Close"
-            themeOverride={{
-              background: '#BF32A4',
-              color: 'white',
-              borderRadius: '0rem',
-              warningBorderColor: '#BF32A4',
-              warningIconBackground: '#BF32A4'
-            }}
-          >
-            You are currently viewing the documentation of an older version of
-            Instructure UI. For the latest version,{' '}
-            <Link color="link-inverse" href={`/${window.location.hash}`}>
-              click here
-            </Link>
-            .
-          </Alert>
-        </InstUISettingsProvider>
+          You are currently viewing the documentation of an older version of
+          Instructure UI. For the latest version,{' '}
+          <Link color="link-inverse" href={`/${window.location.hash}`}>
+            click here
+          </Link>
+          .
+        </Alert>
       </div>
     ) : null
   }

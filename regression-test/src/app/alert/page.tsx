@@ -39,6 +39,19 @@ export default function AlertPage() {
         ))}
       </div>
       <div>
+        {variants.map((variant) => (
+          <Alert
+            variant={variant}
+            key={variant}
+            appearance="inline"
+            renderCloseButtonLabel="Close"
+            transition="none"
+          >
+            I&apos;m inline {variant} Alert
+          </Alert>
+        ))}
+      </div>
+      <div>
         <Alert transition="none" renderCloseButtonLabel="Close">
           Close button Alert
         </Alert>
