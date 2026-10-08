@@ -22,12 +22,8 @@
  * SOFTWARE.
  */
 
-import { useEffect, useRef, useState } from 'react'
-
 import { View } from '@instructure/ui-view/latest'
 import { passthroughProps } from '@instructure/ui-react-utils'
-import { Tooltip } from '@instructure/ui-tooltip/latest'
-import type { TooltipRenderChildrenArgs } from '@instructure/ui-tooltip/latest'
 import { renderIconWithProps } from '@instructure/ui-icons'
 
 import { useStyleNew } from '@instructure/emotion'
@@ -56,9 +52,6 @@ const Pill = (props: PillProps) => {
     ...rest
   } = props
 
-  const [truncated, setTruncated] = useState(false)
-  const ellipsisRef = useRef<HTMLDivElement | null>(null)
-
   const styles = useStyleNew({
     generateStyle,
     themeOverride,
@@ -67,81 +60,39 @@ const Pill = (props: PillProps) => {
     displayName: 'Pill'
   })
 
-  useEffect(() => {
-    const el = ellipsisRef.current
-    if (el) {
-      setTruncated(el.offsetWidth < el.scrollWidth)
-    }
-  }, [children, statusLabel, size])
-
-  const handleRef = (el: Element | null) => {
-    if (typeof elementRef === 'function') {
-      elementRef(el)
-    }
-  }
-
-  const renderPill = (
-    focused?: TooltipRenderChildrenArgs['focused'],
-    getTriggerProps?: TooltipRenderChildrenArgs['getTriggerProps']
-  ) => {
-    const filteredProps = passthroughProps(rest)
-    const containerProps =
-      typeof getTriggerProps === 'function'
-        ? getTriggerProps(filteredProps)
-        : filteredProps
-
-    return (
-      <View
-        {...containerProps}
-        as={as}
-        {...(truncated ? {} : { elementRef: handleRef })}
-        margin={margin}
-        padding="0"
-        maxWidth={styles?.maxWidth as string}
-        background="transparent"
-        borderRadius="pill"
-        borderWidth="0"
-        display="inline-block"
-        position="relative"
-        withFocusOutline={focused}
-        focusColor="info"
-        data-cid="Pill"
-      >
-        <div css={styles?.pill}>
-          {renderIcon && (
-            <div css={styles?.icon}>
-              {renderIconWithProps(
-                renderIcon,
-                pillSizeToIconSize[size],
-                undefined
-              )}
-            </div>
-          )}
-          <div css={styles?.text} ref={ellipsisRef}>
-            {statusLabel && (
-              <span css={styles?.status}>{statusLabel.concat(':')}</span>
+  return (
+    <View
+      {...passthroughProps(rest)}
+      as={as}
+      elementRef={elementRef}
+      margin={margin}
+      padding="0"
+      background="transparent"
+      borderRadius="pill"
+      borderWidth="0"
+      display="inline-block"
+      position="relative"
+      data-cid="Pill"
+    >
+      <div css={styles?.pill}>
+        {renderIcon && (
+          <div css={styles?.icon}>
+            {renderIconWithProps(
+              renderIcon,
+              pillSizeToIconSize[size],
+              undefined
             )}
-            {children}
           </div>
+        )}
+        <div css={styles?.text}>
+          {statusLabel && (
+            <span css={styles?.status}>{statusLabel.concat(':')}</span>
+          )}
+          {children}
         </div>
-      </View>
-    )
-  }
-
-  if (truncated) {
-    return (
-      <Tooltip
-        renderTip={
-          statusLabel ? statusLabel.concat(': ', children as string) : children
-        }
-        elementRef={handleRef}
-      >
-        {({ focused, getTriggerProps }) => renderPill(focused, getTriggerProps)}
-      </Tooltip>
-    )
-  }
-
-  return renderPill()
+      </div>
+    </View>
+  )
 }
 
 Pill.displayName = 'Pill'
