@@ -482,6 +482,9 @@ importers:
       '@instructure/ui-responsive':
         specifier: workspace:*
         version: link:../ui-responsive
+      '@instructure/ui-segmented-control':
+        specifier: workspace:*
+        version: link:../ui-segmented-control
       '@instructure/ui-select':
         specifier: workspace:*
         version: link:../ui-select
@@ -919,6 +922,9 @@ importers:
       '@instructure/ui-responsive':
         specifier: workspace:*
         version: link:../ui-responsive
+      '@instructure/ui-segmented-control':
+        specifier: workspace:*
+        version: link:../ui-segmented-control
       '@instructure/ui-select':
         specifier: workspace:*
         version: link:../ui-select
@@ -3744,6 +3750,49 @@ importers:
       svgo:
         specifier: ^4.1.0
         version: 4.1.0
+
+  packages/ui-segmented-control:
+    dependencies:
+      '@babel/runtime':
+        specifier: ^7.29.7
+        version: 7.29.7
+      '@instructure/console':
+        specifier: workspace:*
+        version: link:../console
+      '@instructure/emotion':
+        specifier: workspace:*
+        version: link:../emotion
+      '@instructure/shared-types':
+        specifier: workspace:*
+        version: link:../shared-types
+      '@instructure/ui-buttons':
+        specifier: workspace:*
+        version: link:../ui-buttons
+      '@instructure/ui-icons':
+        specifier: workspace:*
+        version: link:../ui-icons
+      '@instructure/ui-react-utils':
+        specifier: workspace:*
+        version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
+      react:
+        specifier: 18.3.1
+        version: 18.3.1
+    devDependencies:
+      '@instructure/ui-axe-check':
+        specifier: workspace:*
+        version: link:../ui-axe-check
+      '@instructure/ui-babel-preset':
+        specifier: workspace:*
+        version: link:../ui-babel-preset
+      '@instructure/ui-color-utils':
+        specifier: workspace:*
+        version: link:../ui-color-utils
+      vitest:
+        specifier: ^5.0.0
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-select:
     dependencies:
