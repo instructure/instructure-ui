@@ -23,8 +23,7 @@
  */
 
 import { render } from 'vitest-browser-react'
-import { page, userEvent } from 'vitest/browser'
-import { describe, it, expect, beforeEach, vi } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { Pill } from '@instructure/ui-pill/latest'
@@ -86,45 +85,14 @@ describe('<Pill />', () => {
     expect(container.querySelector('svg')).toBeInTheDocument()
   })
 
-  describe('Component tests', () => {
-    // the real cursor stays where the previous test left it, which can keep a
-    // Tooltip open: park it off-component before each test
-    beforeEach(async () => {
-      const parkingSpot = document.createElement('div')
-      parkingSpot.style.cssText =
-        'position:fixed;right:0;bottom:0;width:20px;height:20px'
-      document.body.appendChild(parkingSpot)
-      await userEvent.hover(parkingSpot)
-      parkingSpot.remove()
-    })
+  it('should provide a ref to the root element', async () => {
+    const elementRef = vi.fn()
+    const { container } = await render(
+      <Pill elementRef={elementRef}>Overdue</Pill>
+    )
 
-    it('should render without a Tooltip when text does not overflow max-width', async () => {
-      await render(<Pill>hello</Pill>)
-
-      await page.getByText('hello').hover()
-
-      expect(document.querySelector('span[role="tooltip"]')).toBeNull()
-    })
-
-    it('should render a Tooltip when text overflows max-width', async () => {
-      const text =
-        'some really super incredibly long text that will force overflow'
-      await render(<Pill>{text}</Pill>)
-      const trigger = document.querySelector<HTMLElement>(
-        'span[data-popover-trigger="true"]'
-      )!
-      const tooltip = () =>
-        document.querySelector<HTMLElement>('span[role="tooltip"]')!
-
-      expect(trigger).toMatchTextContent(text)
-      expect(tooltip()).not.toBeVisible()
-
-      await userEvent.hover(trigger)
-
-      await vi.waitFor(() => {
-        expect(tooltip()).toBeVisible()
-      })
-      expect(tooltip()).toMatchTextContent(text)
-    })
+    expect(elementRef).toHaveBeenCalledWith(
+      container.querySelector('[data-cid="Pill"]')
+    )
   })
 })

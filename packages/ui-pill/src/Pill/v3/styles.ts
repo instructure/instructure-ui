@@ -160,15 +160,11 @@ const generateStyle = (
     text: {
       label: 'pill__text',
       boxSizing: 'border-box',
-      maxWidth: componentTheme.maxWidth,
       fontSize,
-      lineHeight: `calc(${sizeStyles.height} - 2 * ${componentTheme.borderWidth})`,
+      lineHeight: componentTheme.lineHeight,
       fontWeight: componentTheme.textFontWeight,
-      textOverflow: 'ellipsis',
-      whiteSpace: 'nowrap',
-      overflow: 'hidden'
-    },
-    maxWidth: componentTheme.maxWidth
+      whiteSpace: 'nowrap'
+    }
   }
 }
 
