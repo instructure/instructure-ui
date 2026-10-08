@@ -3001,6 +3001,9 @@ importers:
       '@instructure/shared-types':
         specifier: workspace:*
         version: link:../shared-types
+      '@instructure/ui-icons':
+        specifier: workspace:*
+        version: link:../ui-icons
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
@@ -3032,9 +3035,6 @@ importers:
       '@instructure/ui-color-utils':
         specifier: workspace:*
         version: link:../ui-color-utils
-      '@instructure/ui-icons':
-        specifier: workspace:*
-        version: link:../ui-icons
       '@instructure/ui-scripts':
         specifier: workspace:*
         version: link:../ui-scripts
