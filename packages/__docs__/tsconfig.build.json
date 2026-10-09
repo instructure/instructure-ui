@@ -198,6 +198,9 @@
       "path": "../ui-responsive/tsconfig.build.json"
     },
     {
+      "path": "../ui-segmented-control/tsconfig.build.json"
+    },
+    {
       "path": "../ui-select/tsconfig.build.json"
     },
     {

@@ -345,6 +345,14 @@ export type {
   ResponsiveByBreakpointProps,
   ValidQueryKey
 } from '@instructure/ui-responsive/v11_7'
+export {
+  SegmentedControl,
+  SegmentedControlOption
+} from '@instructure/ui-segmented-control/v11_7'
+export type {
+  SegmentedControlProps,
+  SegmentedControlOptionProps
+} from '@instructure/ui-segmented-control/v11_7'
 export { Select, SelectGroup, SelectOption } from '@instructure/ui-select/v11_7'
 export type {
   SelectOwnProps,
