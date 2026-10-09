@@ -46,18 +46,28 @@ const SLACK_PERMALINK =
 // Written by /slack-triage; the value is the Slack display name verbatim.
 const REPORTED_BY = /Reported by \(Slack\):\s*([^"\\\n]+)/
 
-// Accepts typo'd prefixes (ISTUI, INSUTI) but not lookalikes such as the design
-// token `gray-700`, which Jira would happily resolve to a real old ticket.
+/**
+ * Accepts typo'd prefixes (ISTUI, INSUTI) but rejects lookalikes.
+ */
 const isProjectPrefix = (prefix) =>
   [...new Set(prefix.toUpperCase())].every((letter) =>
     PROJECT_KEY.includes(letter)
   )
 
+/**
+ * Reads a `--name=value` argument off the command line, or the fallback.
+ * A release is normally the two newest tags.
+ */
 const option = (name, fallback) => {
   const found = process.argv.slice(2).find((arg) => arg.startsWith(`--${name}=`))
   return found ? found.slice(name.length + 3) : fallback
 }
 
+/**
+ * Returns a reader for credentials.
+ * Keeping the Jira token in the gitignored .env file avoids exposing it
+ * in command-line arguments and follows the repo's existing tooling conventions.
+ */
 const env = (() => {
   const file = Object.fromEntries(
     (fs.existsSync('./.env') ? fs.readFileSync('./.env', 'utf8') : '')
@@ -69,6 +79,9 @@ const env = (() => {
   return (name) => process.env[name] || file[name] || null
 })()
 
+/**
+ * Runs a command and returns its trimmed stdout, throwing if it fails.
+ */
 const sh = (command, args) =>
   execFileSync(command, args, {
     encoding: 'utf8',
@@ -76,6 +89,9 @@ const sh = (command, args) =>
     stdio: ['ignore', 'pipe', 'pipe']
   }).trim()
 
+/**
+ * Same as `sh`, but returns null instead of throwing when the command fails.
+ */
 const shOrNull = (command, args) => {
   try {
     return sh(command, args) || null
@@ -84,6 +100,11 @@ const shOrNull = (command, args) => {
   }
 }
 
+/**
+ * Collects every project issue key, normalized and deduped.
+ * The keys are the only thread connecting a shipped commit to the ticket that
+ * knows who asked for it.
+ */
 export const issueKeysIn = (text) => [
   ...new Set(
     [...String(text ?? '').matchAll(ISSUE_KEY)]
@@ -92,16 +113,23 @@ export const issueKeysIn = (text) => [
   )
 ]
 
-/** Reads the description as serialized ADF, so link marks match as well as text. */
+/**
+ * Reads the description as serialized ADF, so link marks match as well as text.
+ */
 const describedIn = (description) =>
   typeof description === 'string'
     ? description
     : JSON.stringify(description ?? '')
 
+/**
+ * Reads the reporter's Slack display name out of the description.
+ */
 export const reporterIn = (description) =>
   describedIn(description).match(REPORTED_BY)?.[1].trim() || null
 
-/** A reply link carries the thread root in `thread_ts`; point at the root instead. */
+/**
+ * A reply link carries the thread root in `thread_ts`; point at the root.
+ */
 export const threadLinkIn = (description) => {
   const link = describedIn(description).match(SLACK_PERMALINK)?.[0]
   if (!link) return null
@@ -111,6 +139,10 @@ export const threadLinkIn = (description) => {
     : link
 }
 
+/**
+ * Works out which two tags bound the release.
+ * It decides which commits, and which tickets, belong to this release at all.
+ */
 const releaseRange = () => {
   const tags = (shOrNull('git', ['tag', '--list', 'v*', '--sort=-v:refname']) ?? '')
     .split('\n')
@@ -138,7 +170,10 @@ const releaseRange = () => {
   }
 }
 
-/** Squash merges drop the branch name, so the PR is the only place to find it. */
+/**
+ * Squash merges drop the branch name, so the PR is the only place to find it.
+ * A key turns up in the commit message.
+ */
 const commitsWithPullRequests = ({ from, to, slug }) =>
   sh('git', [
     'log',
@@ -172,6 +207,9 @@ const commitsWithPullRequests = ({ from, to, slug }) =>
       }
     })
 
+/**
+ * Fetches each ticket and keeps its summary plus what triage recorded.
+ */
 const jiraTickets = async (keys) => {
   const authorization = `Basic ${Buffer.from(
     `${env('JIRA_EMAIL')}:${env('JIRA_API_TOKEN')}`
@@ -196,6 +234,10 @@ const jiraTickets = async (keys) => {
   return tickets
 }
 
+/**
+ * Runs the three stages in order and prints the result as JSON on stdout.
+ * Skill reading this output.
+ */
 const main = async () => {
   const missing = ['JIRA_BASE_URL', 'JIRA_EMAIL', 'JIRA_API_TOKEN'].filter(
     (name) => !env(name)
