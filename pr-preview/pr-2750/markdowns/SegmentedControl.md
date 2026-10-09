@@ -129,40 +129,32 @@ type: example
 </div>
 ```
 
-### Keyboard and accessibility
+### Accessibility
 
-`SegmentedControl` renders a `radiogroup`, and each option is a `radio`. Only the
-selected option (or the first enabled one, when nothing is selected) is in the
-tab order.
+`SegmentedControl` renders a `radiogroup` and each option is a `radio`. Give the group a name with `aria-label` or `aria-labelledby`, and give every icon-only option a `screenReaderLabel`.
 
-| Key                        | Action                                                                                           |
-| -------------------------- | ------------------------------------------------------------------------------------------------ |
-| Arrow Left and Arrow Right | Move focus to the previous or next enabled option. In right-to-left layouts the directions swap. |
-| Arrow Up and Arrow Down    | Move focus to the previous or next enabled option.                                               |
-| Home and End               | Move focus to the first or last enabled option.                                                  |
-| Space and Enter            | Select the focused option.                                                                       |
-
-Moving focus doesn't change the selection. Options must be direct children of
-`SegmentedControl`.
+Only the selected option (or the first enabled one, when nothing is selected) is in the tab order. The arrow keys move focus to the next or previous enabled option and select it. In right-to-left layouts, Arrow Left and Arrow Right swap. Home and End jump to the first and last enabled option. Options must be direct children of `SegmentedControl`.
 
 ### Guidelines
 
-#### Use SegmentedControl when
-
-- Switching between two to five related views or filters in the same context
-- Offering mutually exclusive options where only one can be active at a time
-- Replacing tab-like navigation for compact, inline content switching
-
-#### Don't use SegmentedControl when
-
-- There are more options than fit comfortably in one row. Use `Tabs` or `SimpleSelect` instead.
-- The options aren't mutually exclusive. Use `Checkbox` or `Toggle` instead.
-- The options trigger actions. Use `Button` instead.
-
-#### Best practices
-
-- Keep option labels short and similar in length.
-- Always pre-select a default option so users can see the current state.
+```js
+---
+type: embed
+---
+<Guidelines>
+  <Figure recommendation="yes" title="Do">
+    <Figure.Item>Switch between two to five related views or filters in the same context</Figure.Item>
+    <Figure.Item>Offer mutually exclusive options where only one can be active at a time</Figure.Item>
+    <Figure.Item>Keep option labels short and similar in length</Figure.Item>
+    <Figure.Item>Pre-select a default option so users can see the current state</Figure.Item>
+  </Figure>
+  <Figure recommendation="no" title="Don't">
+    <Figure.Item>Use more options than fit comfortably in one row (use <Link href="/#Tabs">Tabs</Link> or <Link href="/#SimpleSelect">SimpleSelect</Link> instead)</Figure.Item>
+    <Figure.Item>Use it when options aren't mutually exclusive (use <Link href="/#Checkbox">Checkbox</Link> or <Link href="/#Toggle">Toggle</Link> instead)</Figure.Item>
+    <Figure.Item>Use it to trigger actions (use <Link href="/#Button">Button</Link> instead)</Figure.Item>
+  </Figure>
+</Guidelines>
+```
 
 
 ### Props
