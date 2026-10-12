@@ -15,6 +15,7 @@ The following steps will create a React app that uses Instructure UI. Recommende
 ---
 type: code
 ---
+
 npm create vite@latest my-cool-app
 ```
 
@@ -97,6 +98,7 @@ Install it from within Claude Code:
 ---
 type: code
 ---
+
 /plugin marketplace add instructure/instructure-ui
 /plugin install instui@instructure-ui
 ```
@@ -105,5 +107,5 @@ The plugin lives in the InstUI repo under [`plugins/instui`](https://github.com/
 
 ## Further reading
 
-- To use a different theme or customize one read about [New Theme Overrides](new-theme-overrides)
+- read about [theming](theming) in more detail
 - Make sure you read about [Accessibility](accessibility) with InstUI.
