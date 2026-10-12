@@ -30,7 +30,7 @@ import type {
   NewThemeOverrideProp
 } from '@instructure/emotion'
 import type { NewComponentTypes } from '@instructure/ui-themes'
-import type { OtherHTMLAttributes } from '@instructure/shared-types'
+import type { OtherHTMLAttributes, Renderable } from '@instructure/shared-types'
 
 type TagOwnProps = {
   className?: string
@@ -43,17 +43,32 @@ type TagOwnProps = {
    * Works just like disabled but keeps the same styles as if it were active
    */
   readOnly?: boolean
-  dismissible?: boolean
+  /**
+   * Providing this prop renders a close button and makes the Tag dismissible.
+   * The value is used as the close button's screen reader label.
+   * Clicking the close button calls `onDismiss`.
+   */
+  renderDismissButtonLabel?: Renderable
+  /**
+   * Called when the close button is clicked.
+   */
+  onDismiss?: (event: React.MouseEvent<ViewProps & Element>) => void
+  /**
+   * Add an SVG icon to the left of the Tag text. Do not add icons directly as
+   * children. When using Lucide icons, Tag will automatically pass the
+   * appropriate size prop based on the Tag's `size`.
+   */
+  renderIcon?: Renderable
+  /**
+   * If you provide an `href`, the Tag body renders as a link (`<a>`).
+   */
+  href?: string
   /**
    * Valid values are `0`, `none`, `auto`, and Spacing token values,
    * see https://instructure.design/layout-spacing. Apply these values via
    * familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`.
    */
   margin?: Spacing
-  /**
-   * If you add an onClick prop, Tag renders as a clickable button
-   */
-  onClick?: (event: React.MouseEvent<ViewProps & Element>) => void
   /**
    * Provides a reference to the underlying html root element
    */
@@ -69,20 +84,24 @@ type TagProps = TagOwnProps &
   NewThemeOverrideProp<ReturnType<NewComponentTypes['Tag']>> &
   OtherHTMLAttributes<TagOwnProps>
 
-type TagStyle = ComponentStyle<'tag' | 'text' | 'icon'>
+type TagStyle = ComponentStyle<
+  'tag' | 'body' | 'text' | 'leadIcon' | 'closeButton' | 'closeIcon'
+>
 
-type TagStyleParams = Required<
-  Pick<TagProps, 'size' | 'dismissible' | 'disabled'>
-> & { isButton: boolean }
+type TagStyleParams = Required<Pick<TagProps, 'size' | 'disabled'>> & {
+  isLink: boolean
+}
 
 const allowedProps: AllowedPropKeys = [
   'className',
   'text',
   'disabled',
   'readOnly',
-  'dismissible',
+  'renderDismissButtonLabel',
+  'onDismiss',
+  'renderIcon',
+  'href',
   'margin',
-  'onClick',
   'elementRef',
   'size'
 ]
