@@ -89,19 +89,6 @@ type: example
 </div>
 ```
 
-### Max-width
-
-> **DEPRECATED** Please do not make Tags that have overflowing text, it's an a11y anti-pattern. The issue is if text overflows it cannot be read by keyboard-only users. We could make the Tag focusable, but that would be an anti-pattern too because only elements that are interactive should be focusable (and just displaying a tooltip is not a real interaction)
-
-```js
----
-type: example
----
-<Tag
-  text="Long string of text designed to trigger overflow"
-/>
-```
-
 ### Guidelines
 
 ```js
@@ -122,16 +109,15 @@ type: embed
 |-----------|------|------|----------|---------|-------------|
 | Tag | className | `string` | No | - |  |
 | Tag | text | `string \| React.ReactNode` | Yes | - |  |
-| Tag | disabled | `boolean` | No | `false` | Whether or not to disable the tag |
-| Tag | readOnly | `boolean` | No | `false` | Works just like disabled but keeps the same styles as if it were active |
+| Tag | disabled | `boolean` | No | - | Whether or not to disable the tag |
+| Tag | readOnly | `boolean` | No | - | Works just like disabled but keeps the same styles as if it were active |
 | Tag | renderDismissButtonLabel | `Renderable` | No | - | Providing this prop renders a close button and makes the Tag dismissible. The value is used as the close button's screen reader label. Clicking the close button calls `onDismiss`. |
 | Tag | onDismiss | `(event: React.MouseEvent<ViewProps & Element>) => void` | No | - | Called when the close button is clicked. |
 | Tag | renderIcon | `Renderable` | No | - | Add an SVG icon to the left of the Tag text. Do not add icons directly as children. When using Lucide icons, Tag will automatically pass the appropriate size prop based on the Tag's `size`. |
 | Tag | href | `string` | No | - | If you provide an `href`, the Tag body renders as a link (`<a>`). |
 | Tag | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="general.spaceMd auto"`. |
-| Tag | onClick | `(event: React.MouseEvent<ViewProps & Element>) => void` | No | - | If you add an onClick prop, Tag renders as a clickable button |
 | Tag | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to the underlying html root element |
-| Tag | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` |  |
+| Tag | size | `'small' \| 'medium' \| 'large'` | No | - |  |
 
 ### Usage
 

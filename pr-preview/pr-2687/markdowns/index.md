@@ -1,10 +1,10 @@
 # Instructure UI (InstUI) - React Component Library
 
-- version 11.7.4 
+- version 11.7.8 
 
 - Instructure UI (InstUI) is a comprehensive React component library.
 
-- All component documentation below always reflects the latest InstUI version noted above (11.7.4). Props, types, and examples describe this version.
+- All component documentation below always reflects the latest InstUI version noted above (11.7.8). Props, types, and examples describe this version.
 
 ## Documentation
 
@@ -22,6 +22,7 @@
 - [Guides getting started](./guides-getting-started.md): Quick start: Create a React app, add `@instructure/ui`, wrap with `InstUISettingsProvider`, and use components. Integrate with existing projects by adding the dependency and provider. Read about theme overrides and accessibility for best practices.
 - [Layout spacing](./layout-spacing.md): InstUI provides semantic spacing tokens (e.g., buttons, tags) for consistent layouts. Apply spacing via `margin` prop, container `gap`, or importing from theme. Legacy tokens are available for compatibility but not recommended for new layouts.
 - [Module federation](./module-federation.md): InstUI supports module federation with specific version requirements. For v10.14+, use local themes (`canvasThemeLocal`). For older hosts, guest apps must use v10.14+ and local themes. Global theme overrides don't apply to local themes.
+- [Server side rendering](./server-side-rendering.md): SSR with Next.js requires wrapping the app with `InstUISettingsProvider` for deterministic ID generation. Avoid `@instructure/ui` meta-package; install only needed packages. CodeEditor isn't SSR-compatible and must be dynamically imported.
 - [Using icons](./UsingIcons.md): Guidelines for using icons with proper accessibility roles, size variants, and color options. Line icons for light backgrounds, solid for dark backgrounds. Icons scale with parent font-size by default.
 
 ### Components
@@ -51,8 +52,6 @@
 - [DateTimeInput](./DateTimeInput.md): Combines DateInput and TimeSelect for entering date-time values. Supports localization, validation, disabled dates, and layout options (stacked or columns). Includes reset functionality and context-aware formatting.
 - [DrawerLayout](./DrawerLayout.md): A responsive layout component with a collapsible tray and content area. Tray can be placed at start or end and switches to overlay on small screens. Supports nested layouts and accessibility features.
 - [Drilldown](./Drilldown.md): A hierarchical navigation component for tree structures. Supports pages, groups, selectable options, and in-place editing. Replaces flyout menus and TreeBrowser for better responsiveness and accessibility.
-- [Editable](./Editable.md): Enables in-place editing of content. Manages state and transitions between view and edit modes. Provides render props for custom UI implementation. Used by InPlaceEdit.
-- [InPlaceEdit](./InPlaceEdit.md): Enables inline editing of content with smooth transitions between view and edit modes. Provides controlled component pattern for mode management, custom renderers for viewer/editor components, and support for various layouts and read-only states.
 - [FileDrop](./FileDrop.md): A drag-and-drop file upload component with browse functionality. Supports file type validation via MIME types/extensions, multiple file uploads, and visual feedback for accepted/rejected files. Includes accessibility features and customizable rendering for labels and error messages.
 - [Flex](./Flex.md): A flexbox-based layout component for creating responsive multi-column designs. Supports directional layouts, gap control, item sizing (grow/shrink), alignment, and overflow handling. Includes visual debugging tools and common layout patterns like header-button combinations.
 - [FormField](./FormField.md): A foundational component for building form inputs with consistent styling and layout. Supports stacked and inline layouts, validation messages, and accessibility features. Typically used internally by other form components rather than directly.
@@ -72,6 +71,8 @@
 - [Overlay](./Overlay.md): A closable/dismissible component that transitions content in and out via a Portal. Supports focus management, accessibility features, and can be used with Mask components. Includes guidelines for ensuring content behind the overlay is hidden from screen readers and dismissible with ESC key.
 - [Pages](./Pages.md): A component for rendering paginated content across multiple pages. Supports navigation between pages, back buttons, and focus management. Each page should contain at least one focusable element. Useful for multi-step workflows or detailed views like user profiles.
 - [Pagination](./Pagination.md): Component for navigating through multi-page content. Offers compact, full, and input variants with configurable page indicators. Supports large page numbers, custom labels, and accessibility features. Includes both new simplified API and legacy support for complex pagination needs.
+- [Editable](./Editable.md): Enables in-place editing of content. Manages state and transitions between view and edit modes. Provides render props for custom UI implementation. Used by InPlaceEdit.
+- [InPlaceEdit](./InPlaceEdit.md): Enables inline editing of content with smooth transitions between view and edit modes. Provides controlled component pattern for mode management, custom renderers for viewer/editor components, and support for various layouts and read-only states.
 - [Pill](./Pill.md): Displays short, contextual information with color-coded status indicators. Supports icons, status labels, and various color schemes. Text truncates with ellipsis if overflow occurs. Not intended for dismissible content or counts - use Tag or Badge components instead.
 - [Popover](./Popover.md): Shows/hides content connected to a trigger element via click, hover, or focus. Supports arrows, various placements, colors, and shadows. Can function as a dialog with focus trapping. Includes controlled and uncontrolled variants with extensive customization options.
 - [ProgressBar](./ProgressBar.md): Styled HTML progress element with accessibility support. Offers multiple sizes, colors, and meter colors. Supports value formatting, animation, and screen reader customization. Meter color can be function-based for dynamic color changes.
