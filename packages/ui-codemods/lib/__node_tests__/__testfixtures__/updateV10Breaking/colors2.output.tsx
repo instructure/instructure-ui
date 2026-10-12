@@ -158,6 +158,7 @@ const Header: React.FC<HeaderProps> = ({
       }}
     >
       {user ? <KBar menuItems={menuItemsToRender} clients={clients} /> : null}
+
       <View
         background="primary"
         themeOverride={{
@@ -509,6 +510,7 @@ const Header: React.FC<HeaderProps> = ({
           ))}
         </AppNav>
       </View>
+
       {isSmall && searchVisible ? (
         <View
           display="block"
@@ -519,6 +521,7 @@ const Header: React.FC<HeaderProps> = ({
           <HeaderSearch styles={styles} />
         </View>
       ) : null}
+
       <Modal
         open={contextModalOpen}
         size="small"
@@ -677,6 +680,7 @@ const HeaderSearchItem = React.memo<HeaderSearchItemProps>(
             />
           )}
         </div>
+
         <View as="div" margin="0 0 0 small" minWidth="0px">
           <View
             as="div"

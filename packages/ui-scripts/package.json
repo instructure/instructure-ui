@@ -21,12 +21,12 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/cli": "^7.27.2",
+    "@babel/cli": "^7.29.7",
     "@instructure/command-utils": "workspace:*",
     "@instructure/instructure-design-tokens": "github:instructure/instructure-design-tokens#v2.1.0",
-    "dprint": "^0.57.1",
+    "dprint": "^0.60.1",
     "http-server": "^14.1.1",
-    "inquirer": "^14.2.1",
+    "inquirer": "14.2.2",
     "lerna": "10.0.1",
     "lodash.isplainobject": "^4.0.6",
     "lucide-react": "1.41.0",
@@ -34,13 +34,13 @@
     "pngjs": "^7.0.0",
     "read-package-up": "^12.0.0",
     "semver": "^7.8.5",
-    "style-dictionary": "5.5.2",
+    "style-dictionary": "5.6.0",
     "webpack-cli": "^7.2.3",
     "webpack-dev-server": "6.0.0",
-    "yargs": "^18.1.0"
+    "yargs": "^18.2.0"
   },
   "peerDependencies": {
-    "oxlint": "^1.72.0",
+    "oxlint": "^1.86.0",
     "react": ">=18 <=19",
     "webpack": "^5"
   },
@@ -49,7 +49,7 @@
   },
   "devDependencies": {
     "@types/lodash.isplainobject": "^4.0.9",
-    "@types/pixelmatch": "^5.2.6",
+    "@types/pixelmatch": "^7.1.0",
     "@types/pngjs": "^6.0.5",
     "@types/semver": "^7.8.0",
     "@types/yargs": "^17.0.35",

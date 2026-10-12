@@ -53,26 +53,26 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@babel/cli": "^7.27.2",
+    "@babel/cli": "^7.29.7",
     "@babel/runtime": "^7.29.7",
-    "@commitlint/cli": "^21.2.2",
-    "@commitlint/config-conventional": "^21.2.2",
+    "@commitlint/cli": "^21.2.3",
+    "@commitlint/config-conventional": "^21.2.3",
     "@emotion/react": "^11.14.0",
     "@instructure/browserslist-config-instui": "workspace:*",
     "@instructure/ui-babel-preset": "workspace:*",
     "@instructure/ui-icons": "workspace:*",
     "@instructure/ui-scripts": "workspace:*",
     "@instructure/ui-themes": "workspace:*",
-    "@testing-library/dom": "^10.4.1",
-    "@types/node": "^24",
+    "@testing-library/dom": "^10.4.2",
+    "@types/node": "^24.19.1",
     "@types/react": "18.3.26",
     "@types/react-dom": "18.3.1",
-    "@vitest/browser": "5.0.0",
-    "@vitest/browser-playwright": "5.0.0",
-    "@vitest/ui": "5.0.0",
+    "@vitest/browser": "5.0.3",
+    "@vitest/browser-playwright": "5.0.3",
+    "@vitest/ui": "5.0.3",
     "babel-loader": "^10.1.1",
     "babel-plugin-add-import-extension": "^1.6.0",
-    "chalk": "^6.0.0",
+    "chalk": "^6.0.1",
     "commitizen": "^4.3.2",
     "concurrently": "^10.0.5",
     "cz-git": "^1.14.0",
@@ -80,27 +80,27 @@
     "husky": "^9.1.7",
     "lerna": "10.0.1",
     "lint-staged": "17.4.1",
-    "moment-timezone": "^0.6.3",
-    "oxlint": "^1.81.0",
+    "moment-timezone": "^0.6.5",
+    "oxlint": "^1.86.0",
     "playwright": "1.62.1",
     "prettier": "2.8.8",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "typescript": "7.0.2",
+    "vite": "7.3.6",
     "vitest": "^5.0.0",
     "vitest-browser-react": "2.3.0",
-    "webpack": "^5.110.3"
+    "webpack": "5.111.1"
   },
   "//dependency-comments": {
     "scripts": "The '--' at the end of commands is needed so user parameters are passed forward",
     "danger": "^11.3.1 -- add this back if we use it in pr-validation.yml",
-    "tar": "Lerna 8 needs tar for this fixed(?) bug: https://github.com/lerna/lerna/issues/4005",
     "git-raw-commits>dargs": "Force dargs@7.0.0 (CommonJS) for git-raw-commits@3.0.0 used by lerna. pnpm hoisting was causing ESM dargs@8.1.0 to be resolved instead, breaking 'pnpm run bump' with 'TypeError: dargs is not a function'"
   },
   "engines": {
     "node": ">=22.18.0",
     "npm": "Use pnpm instead.",
-    "pnpm": ">=10"
+    "pnpm": ">=11"
   },
   "config": {
     "commitizen": {
@@ -119,5 +119,5 @@
   "browserslist": [
     "extends @instructure/browserslist-config-instui"
   ],
-  "packageManager": "pnpm@11.5.3+sha512.7ac1c919341c213a34dc0d02afb7143c5c26ac26ee8c4782deea821b8ac64d2134a081fd8941dae6e29bbb48f58dfc2b7fbceeccc07cb2f09d219d342a4969ed"
+  "packageManager": "pnpm@12.9.1+sha512.06b055fff5cd20dc12781de173ced3310ce0951bf2ec620211a16045d5444d5c93a663210764ef29a653a610459ba0368f0e74f84d80c54723cf95aae7bc0d6d"
 }

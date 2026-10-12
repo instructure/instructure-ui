@@ -25,7 +25,7 @@
 import type { Result, RunOnly } from 'axe-core'
 import { captureViolations } from '../support/a11y-capture'
 
-type ConsoleErrorStub = Cypress.Agent<sinon.SinonStub<any[], any>>
+type ConsoleErrorStub = Cypress.Agent<sinon.SinonStub>
 let windowErrorSpy: ConsoleErrorStub | undefined
 // Running total of console.error calls across every visit in the current test.
 // Each test visits the page once per theme; each cy.visit replaces
@@ -74,7 +74,7 @@ function terminalLog(violations: Result[]) {
     })
     const ret: any = {}
     cy.task('log', 'This error happens in the following elements:')
-    nodes.forEach((item, index) => {
+    nodes.forEach((item, _index) => {
       ret[`${item.target.join(',')}`] = { html: item.html }
     })
     cy.task('table', ret)
@@ -212,10 +212,13 @@ describe('visual regression test', () => {
         let violationCount = 0
 
         THEMES.forEach((theme) => {
+          cy.viewport(
+            Cypress.config('viewportWidth'),
+            Cypress.config('viewportHeight')
+          )
           cy.visit(`${BASE_URL}/${slug}?theme=${theme}`)
-          // Wait until the requested theme has actually been applied before doing
-          // anything else (layout.tsx sets data-theme in an effect after mount).
-          cy.get(`html[data-theme="${theme}"]`)
+          // Cypress keeps polling the page until these are set
+          cy.get(`html[data-theme="${theme}"][data-hydrated]`)
           if (awaitFocused) {
             // Retries until the element is actually focused, so the capture cannot
             // race hydration.
@@ -232,6 +235,16 @@ describe('visual regression test', () => {
           // fallback font with different metrics — producing inconsistent, flaky
           // baselines.
           cy.document({ log: false }).then((doc) => doc.fonts.ready)
+          // Fit the whole page in the viewport so the capture is a single frame.
+          cy.document({ log: false }).then((doc) => {
+            cy.viewport(
+              Cypress.config('viewportWidth'),
+              Math.max(
+                Cypress.config('viewportHeight'),
+                doc.documentElement.scrollHeight
+              )
+            )
+          })
           // Screenshot BEFORE the a11y check so an a11y failure can never leave a
           // page without a visual baseline.
           cy.screenshot(name, SCREENSHOT_OPTIONS)
