@@ -24,10 +24,10 @@
 
 import { forwardRef, useImperativeHandle, useRef, useState } from 'react'
 
-import { XInstUIIcon } from '@instructure/ui-icons'
+import { XInstUIIcon, renderIconWithProps } from '@instructure/ui-icons'
 import { View } from '@instructure/ui-view/latest'
 import type { ViewProps } from '@instructure/ui-view/latest'
-import { omitProps } from '@instructure/ui-react-utils'
+import { omitProps, callRenderProp } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { useStyleNew } from '@instructure/emotion'
 
@@ -45,22 +45,32 @@ const Tag = forwardRef<TagHandle, TagProps>((props, ref) => {
     className,
     text,
     size = 'medium',
-    dismissible = false,
     disabled = false,
     readOnly = false,
-    onClick,
+    href,
+    renderIcon,
+    renderDismissButtonLabel,
+    onDismiss,
     margin,
     elementRef,
     themeOverride
   } = props
 
   const [iconHovered, setIconHovered] = useState(false)
-  const rootRef = useRef<Element | null>(null)
+  const linkRef = useRef<HTMLAnchorElement | null>(null)
+  const closeRef = useRef<HTMLButtonElement | null>(null)
+
+  const isBlocked = disabled || readOnly
+  const isLink = !!href
+  const dismissLabel =
+    renderDismissButtonLabel != null
+      ? callRenderProp(renderDismissButtonLabel)
+      : undefined
 
   const styles = useStyleNew({
     generateStyle,
     themeOverride,
-    params: { size, dismissible, disabled, isButton: !!onClick },
+    params: { size, disabled, isLink },
     componentId: 'Tag',
     displayName: 'Tag'
   })
@@ -69,37 +79,49 @@ const Tag = forwardRef<TagHandle, TagProps>((props, ref) => {
     ref,
     () => ({
       focus: () => {
-        ;(rootRef.current as HTMLElement | null)?.focus()
+        ;(linkRef.current ?? closeRef.current)?.focus()
       },
       get focused() {
-        return isActiveElement(rootRef.current)
+        return (
+          isActiveElement(linkRef.current) || isActiveElement(closeRef.current)
+        )
       }
     }),
     []
   )
 
   const handleRef = (element: Element | null) => {
-    rootRef.current = element
     if (typeof elementRef === 'function') {
       elementRef(element)
     }
   }
 
-  const handleClick = (e: React.MouseEvent<ViewProps & Element>) => {
-    if (disabled || readOnly) {
+  const handleDismiss = (e: React.MouseEvent<Element>) => {
+    if (isBlocked) {
       e.preventDefault()
       e.stopPropagation()
-    } else if (typeof onClick === 'function') {
-      onClick(e)
+    } else if (typeof onDismiss === 'function') {
+      onDismiss(e as React.MouseEvent<ViewProps & Element>)
     }
   }
 
-  const iconSize = ({ small: 'xs', medium: 'sm', large: 'md' } as const)[size]
+  const iconSize = ({ small: 'xs', medium: 'sm', large: 'sm' } as const)[size]
   const iconColor = disabled
     ? 'mutedColor'
     : iconHovered
     ? 'actionSecondaryHoverColor'
     : 'baseColor'
+
+  const content = (
+    <>
+      {renderIcon ? (
+        <span css={styles?.leadIcon}>
+          {renderIconWithProps(renderIcon, iconSize, undefined)}
+        </span>
+      ) : null}
+      <span css={styles?.text}>{text}</span>
+    </>
+  )
 
   const passthroughProps = View.omitViewProps(
     omitProps(props, allowedProps),
@@ -112,22 +134,38 @@ const Tag = forwardRef<TagHandle, TagProps>((props, ref) => {
       elementRef={handleRef}
       css={styles?.tag}
       className={className}
-      as={onClick ? 'button' : 'span'}
+      as="span"
       margin={margin}
-      type={onClick ? 'button' : undefined}
-      {...(onClick && { onClick: handleClick })}
-      disabled={disabled || readOnly}
       display={undefined}
-      title={typeof text === 'string' ? text : undefined}
       data-cid="Tag"
-      onMouseEnter={() => setIconHovered(true)}
-      onMouseLeave={() => setIconHovered(false)}
     >
-      <span css={styles?.text}>{text}</span>
-      {onClick && dismissible ? (
-        <span css={styles?.icon}>
-          <XInstUIIcon size={iconSize} color={iconColor} />
-        </span>
+      {isLink ? (
+        <a
+          css={styles?.body}
+          ref={linkRef}
+          href={isBlocked ? undefined : href}
+          aria-disabled={isBlocked ? 'true' : undefined}
+        >
+          {content}
+        </a>
+      ) : (
+        <span css={styles?.body}>{content}</span>
+      )}
+      {dismissLabel ? (
+        <button
+          type="button"
+          css={styles?.closeButton}
+          ref={closeRef}
+          onClick={handleDismiss}
+          onMouseEnter={() => setIconHovered(true)}
+          onMouseLeave={() => setIconHovered(false)}
+          disabled={isBlocked}
+          aria-label={dismissLabel as string}
+        >
+          <span css={styles?.closeIcon}>
+            <XInstUIIcon size="sm" color={iconColor} />
+          </span>
+        </button>
       ) : null}
     </View>
   )

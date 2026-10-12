@@ -41,80 +41,30 @@ const generateStyle = (
   params: TagStyleParams,
   sharedTokens: SharedTokens
 ): TagStyle => {
-  const { size, dismissible, disabled, isButton } = params
+  const { size, disabled, isLink } = params
+
+  const focusOutline = calcFocusOutlineStyles(sharedTokens.focusOutline)
 
   const sizeVariants = {
     small: {
-      tag: {
-        paddingLeft: componentTheme.paddingHorizontalSmall,
-        paddingRight: componentTheme.paddingHorizontalSmall,
-        fontSize: componentTheme.fontSizeSmall
-      },
-      text: {
-        lineHeight: `calc(${componentTheme.heightSmall} - (${componentTheme.defaultBorderWidth} * 2))`
-      }
+      height: componentTheme.heightSmall,
+      paddingInlineStart: componentTheme.iconMargin,
+      paddingInlineEnd: componentTheme.paddingHorizontalSmall,
+      fontSize: componentTheme.fontSizeSmall
     },
     medium: {
-      tag: {
-        paddingLeft: componentTheme.paddingHorizontal,
-        paddingRight: componentTheme.paddingHorizontal,
-        fontSize: `calc(${componentTheme.fontSizeMedium} - 0.0625rem)`
-      },
-      text: {
-        lineHeight: `calc(${componentTheme.heightMedium} - (${componentTheme.defaultBorderWidth} * 2))`
-      }
+      height: componentTheme.heightMedium,
+      paddingInlineStart: componentTheme.iconMargin,
+      paddingInlineEnd: componentTheme.paddingHorizontal,
+      fontSize: componentTheme.fontSizeMedium
     },
     large: {
-      tag: {
-        paddingLeft: componentTheme.paddingHorizontalSmall,
-        paddingRight: componentTheme.paddingHorizontal,
-        fontSize: `calc(${componentTheme.fontSizeLarge} - 0.0625rem)`
-      },
-      text: {
-        lineHeight: `calc(${componentTheme.heightLarge} - (${componentTheme.defaultBorderWidth} * 2))`
-      }
+      height: componentTheme.heightLarge,
+      paddingInlineStart: componentTheme.iconMargin,
+      paddingInlineEnd: componentTheme.paddingHorizontal,
+      fontSize: componentTheme.fontSizeLarge
     }
   }
-
-  const buttonVariant = isButton
-    ? {
-        tag: {
-          touchAction: 'manipulation',
-          outline: 'none',
-          position: 'relative',
-          overflow: 'visible',
-          transition: `background-color ${componentTheme.transitionTiming}`,
-          ...(!dismissible && { cursor: 'pointer' }),
-
-          '&:focus': {
-            '&::before': {
-              opacity: 1,
-              transform: 'scale(1)'
-            }
-          },
-
-          ...(disabled && {
-            cursor: 'not-allowed',
-            pointerEvents: 'none',
-            opacity: 0.5
-          })
-        },
-        tagBefore: {
-          content: '""',
-          boxSizing: 'border-box',
-          border: calcFocusOutlineStyles(sharedTokens.focusOutline),
-          position: 'absolute',
-          top: '-0.3125rem',
-          bottom: '-0.3125rem',
-          left: '-0.3125rem',
-          right: '-0.3125rem',
-          opacity: 0,
-          transform: 'scale(0.9)',
-          transition: `all ${componentTheme.transitionTiming}`,
-          pointerEvents: 'none'
-        }
-      }
-    : {}
 
   return {
     tag: {
@@ -130,33 +80,69 @@ const generateStyle = (
       border: `${componentTheme.defaultBorderWidth} ${componentTheme.defaultBorderStyle} ${componentTheme.defaultBorderColor}`,
       borderRadius: componentTheme.defaultBorderRadius,
       color: componentTheme.defaultColor,
-      ...(isButton && {
+      ...(isLink && {
+        transition: `background-color ${componentTheme.transitionTiming}`,
         '&:hover': { backgroundColor: componentTheme.defaultBackgroundHover }
       }),
-      ...sizeVariants[size].tag,
-      ...buttonVariant.tag,
-
-      '&::before': {
-        ...buttonVariant.tagBefore,
-        ...(isButton && {
-          borderRadius: componentTheme.defaultBorderRadius
-        })
-      }
+      ...sizeVariants[size],
+      ...(disabled && {
+        cursor: 'not-allowed',
+        pointerEvents: 'none',
+        opacity: 0.5
+      })
+    },
+    body: {
+      label: 'tag__body',
+      boxSizing: 'border-box',
+      display: 'inline-flex',
+      alignItems: 'center',
+      color: 'inherit',
+      font: 'inherit',
+      ...(isLink && {
+        textDecoration: 'none',
+        touchAction: 'manipulation',
+        cursor: disabled ? 'not-allowed' : 'pointer',
+        borderRadius: sharedTokens.borderRadius.xs,
+        ...focusOutline
+      })
+    },
+    leadIcon: {
+      label: 'tag__leadIcon',
+      display: 'inline-flex',
+      alignItems: 'center',
+      marginInlineEnd: componentTheme.leadElementLabel,
+      marginInlineStart: 0
     },
     text: {
       label: 'tag__text',
+      lineHeight: 'normal',
       whiteSpace: 'nowrap',
-      overflow: 'hidden',
-      textOverflow: 'ellipsis',
-      maxWidth: componentTheme.maxWidth,
-      ...sizeVariants[size].text
+      ...(isLink && { textDecoration: 'underline' })
     },
-    icon: {
-      label: 'tag__icon',
+    closeButton: {
+      label: 'tag__closeButton',
+      boxSizing: 'border-box',
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      appearance: 'none',
+      background: 'none',
+      border: 0,
+      margin: 0,
+      padding: 0,
       marginInlineStart: componentTheme.iconMargin,
       marginInlineEnd: 0,
-      transition: `all ${componentTheme.transitionTiming}`,
-      cursor: 'pointer'
+      color: 'inherit',
+      touchAction: 'manipulation',
+      cursor: disabled ? 'not-allowed' : 'pointer',
+      borderRadius: sharedTokens.borderRadius.xs,
+      ...focusOutline
+    },
+    closeIcon: {
+      label: 'tag__closeIcon',
+      display: 'inline-flex',
+      alignItems: 'center',
+      transition: `all ${componentTheme.transitionTiming}`
     }
   }
 }
