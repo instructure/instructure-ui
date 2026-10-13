@@ -99,6 +99,22 @@ const variantToAIHorizontalIconSize: Record<
   labelInline: 'xs'
 }
 
+const variantToAIIconOnlySize: Record<
+  NonNullable<HeadingProps['variant']>,
+  'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'
+> = {
+  titlePageDesktop: 'xl',
+  titlePageMobile: 'xl',
+  titleSection: 'xl',
+  titleCardSection: 'lg',
+  titleModule: 'lg',
+  titleCardLarge: 'lg',
+  titleCardRegular: 'md',
+  titleCardMini: 'sm',
+  label: 'sm',
+  labelInline: 'sm'
+}
+
 const levelToAIHorizontalIconSize: Record<
   Exclude<HeadingProps['level'], 'reset' | undefined>,
   'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'
@@ -159,10 +175,12 @@ class Heading extends Component<HeadingProps> {
     this.checkProps()
   }
 
-  getIconSize(forAIHorizontal = false) {
+  getIconSize(aiMode?: 'horizontal' | 'iconOnly') {
     const { variant, level, as } = this.props
+    const forAIHorizontal = !!aiMode
 
     if (variant) {
+      if (aiMode === 'iconOnly') return variantToAIIconOnlySize[variant]
       return forAIHorizontal
         ? variantToAIHorizontalIconSize[variant]
         : variantToIconSize[variant]
@@ -211,7 +229,10 @@ class Heading extends Component<HeadingProps> {
       return (
         <span css={this.props.styles?.withIcon} aria-hidden="true">
           <span css={this.props.styles?.igniteAIHorizontal}>
-            <IgniteaiLogoInstUIIcon color="ai" size={this.getIconSize(true)} />
+            <IgniteaiLogoInstUIIcon
+              color="ai"
+              size={this.getIconSize('horizontal')}
+            />
             <span css={this.props.styles?.igniteAI}>IgniteAI</span>
           </span>
           {children}
@@ -221,7 +242,10 @@ class Heading extends Component<HeadingProps> {
     if (aiVariant === 'iconOnly') {
       return (
         <span css={this.props.styles?.withIcon} aria-hidden="true">
-          <IgniteaiLogoInstUIIcon color="ai" size={this.getIconSize(true)} />
+          <IgniteaiLogoInstUIIcon
+            color="ai"
+            size={this.getIconSize('iconOnly')}
+          />
           {children}
         </span>
       )

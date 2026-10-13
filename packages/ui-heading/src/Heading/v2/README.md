@@ -42,16 +42,16 @@ type: example
 
 ### AI Heading
 
-Pre-configured and with unique styles, the `ai-headings` are used for standardized, ai-related components.
+Use the `aiVariant` prop for headings of AI-related content, such as a Modal or Popover header. Use a standard Heading for all other headings.
 
 ```js
 ---
 type: example
 ---
-<div style={{display: 'flex', flexDirection: 'column', gap: '24px'}}>
-  <Heading aiVariant="stacked" level="h2">Nutrition Facts</Heading>
-  <Heading aiVariant="horizontal" level="h3">Nutrition Facts</Heading>
-  <Heading aiVariant="iconOnly" level="h4">Nutrition Facts</Heading>
+<div style={{display: 'flex', flexDirection: 'column', gap: '1rem'}}>
+  <Heading aiVariant="stacked" variant="titleSection" level="h2">Stacked AI heading</Heading>
+  <Heading aiVariant="horizontal" variant="titleSection" level="h2">Horizontal AI heading</Heading>
+  <Heading aiVariant="iconOnly" variant="titleSection" level="h2">Icon only AI heading</Heading>
 </div>
 ```
 

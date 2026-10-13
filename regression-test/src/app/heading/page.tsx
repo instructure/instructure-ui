@@ -76,6 +76,28 @@ export default function HeadingPage() {
         </Heading>
       </section>
 
+      {/* AI Heading iconOnly sizes */}
+      <section style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+        {(
+          [
+            'titlePageDesktop',
+            'titlePageMobile',
+            'titleSection',
+            'titleCardSection',
+            'titleModule',
+            'titleCardLarge',
+            'titleCardRegular',
+            'titleCardMini',
+            'label',
+            'labelInline'
+          ] as const
+        ).map((variant) => (
+          <Heading key={variant} aiVariant="iconOnly" variant={variant}>
+            AI {variant}
+          </Heading>
+        ))}
+      </section>
+
       {/* Colors */}
       <section>
         <Heading>I inherit my color via the CSS cascade (default)</Heading>
