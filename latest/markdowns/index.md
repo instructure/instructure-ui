@@ -128,6 +128,10 @@
 - [TableContext](./TableContext.md)
 - [TreeBrowserContext](./TreeBrowserContext.md)
 
+#### Cards
+
+- [Card](./Card.md)
+
 #### AI Components
 
 - [AiInformation](./AiInformation.md): Displays AI-related data in Instructure products. Composed from NutritionFacts and DataPermissionLevels components with prefixed APIs. Supports fullscreen modals for mobile viewports with comprehensive data structure for AI feature information.
