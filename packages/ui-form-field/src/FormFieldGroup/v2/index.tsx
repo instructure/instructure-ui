@@ -34,7 +34,8 @@ import { Grid } from '@instructure/ui-grid/latest'
 import {
   pickProps,
   omitProps,
-  safeCloneElement
+  safeCloneElement,
+  withDeterministicId
 } from '@instructure/ui-react-utils'
 import { withStyleNew } from '@instructure/emotion'
 
@@ -46,12 +47,14 @@ import generateStyle from './styles.js'
 
 import { allowedProps } from './props.js'
 import type { FormFieldGroupProps } from './props'
+import type { FormFieldLayoutChildrenParams } from '../../FormFieldLayout/v2/props'
 
 /**
 ---
 category: components
 ---
 **/
+@withDeterministicId()
 @withStyleNew(generateStyle)
 class FormFieldGroup extends Component<FormFieldGroupProps> {
   static displayName = 'FormFieldGroup'
@@ -66,6 +69,13 @@ class FormFieldGroup extends Component<FormFieldGroupProps> {
     vAlign: 'middle',
     isGroup: true
   }
+
+  constructor(props: FormFieldGroupProps) {
+    super(props)
+    this._defaultId = props.deterministicId!()
+  }
+
+  private readonly _defaultId: string
 
   ref: Element | null = null
 
@@ -96,9 +106,10 @@ class FormFieldGroup extends Component<FormFieldGroupProps> {
     )
   }
 
-  renderColumns() {
-    const { disabled } = this.props
-    return Children.map(this.props.children, (child, index) => {
+  renderColumns(params: FormFieldLayoutChildrenParams) {
+    const { disabled, children } = this.props
+    const fields = typeof children === 'function' ? children(params) : children
+    return Children.map(fields, (child, index) => {
       if (!child) return null
       const el = child as ReactElement<any>
       const renderedChild =
@@ -116,7 +127,7 @@ class FormFieldGroup extends Component<FormFieldGroupProps> {
     })
   }
 
-  renderChildren() {
+  renderChildren(params: FormFieldLayoutChildrenParams) {
     return (
       <Grid
         colSpacing={this.props.colSpacing}
@@ -127,17 +138,17 @@ class FormFieldGroup extends Component<FormFieldGroupProps> {
           (this.props.layout === 'columns' ? 'medium' : null)
         }
       >
-        <Grid.Row>{this.renderColumns()}</Grid.Row>
+        <Grid.Row>{this.renderColumns(params)}</Grid.Row>
       </Grid>
     )
   }
 
-  renderFields() {
+  renderFields(params: FormFieldLayoutChildrenParams) {
     const { styles } = this.props
 
     return (
       <span key="fields" css={styles?.formFieldGroup}>
-        {this.renderChildren()}
+        {this.renderChildren(params)}
       </span>
     )
   }
@@ -180,12 +191,13 @@ class FormFieldGroup extends Component<FormFieldGroupProps> {
         vAlign={props.vAlign}
         layout={props.layout === 'inline' ? 'inline' : 'stacked'}
         label={props.description}
+        id={props.id || this._defaultId}
         aria-disabled={props.disabled ? 'true' : undefined}
         aria-invalid={ariaInvalid}
         elementRef={this.handleRef}
         isGroup={isGroup}
       >
-        {this.renderFields()}
+        {(params: FormFieldLayoutChildrenParams) => this.renderFields(params)}
       </FormFieldLayout>
     )
   }

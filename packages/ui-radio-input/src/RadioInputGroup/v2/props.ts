@@ -26,7 +26,6 @@ import React from 'react'
 
 import type { FormMessage } from '@instructure/ui-form-field/latest'
 import type { OtherHTMLAttributes } from '@instructure/shared-types'
-import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 import type { Spacing } from '@instructure/emotion'
 
 type RadioInputGroupOwnProps = {
@@ -105,8 +104,7 @@ type PropKeys = keyof RadioInputGroupOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type RadioInputGroupProps = RadioInputGroupOwnProps &
-  OtherHTMLAttributes<RadioInputGroupOwnProps> &
-  WithDeterministicIdProps
+  OtherHTMLAttributes<RadioInputGroupOwnProps>
 
 type RadioInputGroupState = {
   value?: string | number

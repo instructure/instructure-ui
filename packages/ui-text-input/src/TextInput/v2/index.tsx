@@ -71,8 +71,6 @@ class TextInput extends Component<TextInputProps> {
   constructor(props: TextInputProps) {
     super(props)
     this._defaultId = props.deterministicId!()
-    this._messagesId = props.deterministicId!('TextInput-messages')
-    this._labelId = props.labelId ?? props.deterministicId!('TextInput-label')
   }
 
   ref: Element | null = null
@@ -80,8 +78,6 @@ class TextInput extends Component<TextInputProps> {
   private _input: HTMLInputElement | null = null
 
   private readonly _defaultId: string
-  private readonly _messagesId: string
-  private readonly _labelId: string
 
   private _focusListener: { remove(): void } | null = null
 
@@ -161,10 +157,6 @@ class TextInput extends Component<TextInputProps> {
     return getInteraction({ props: this.props })
   }
 
-  get hasMessages() {
-    return !!this.props.messages?.some((m) => !!m.text)
-  }
-
   get invalid() {
     return (
       !!this.props.messages &&
@@ -212,7 +204,7 @@ class TextInput extends Component<TextInputProps> {
     }
   }
 
-  renderInput() {
+  renderInput(describedBy: string | undefined) {
     const {
       type,
       size,
@@ -232,19 +224,9 @@ class TextInput extends Component<TextInputProps> {
 
     const { interaction } = this
 
-    let descriptionIds = ''
-    if (props['aria-describedby']) {
-      descriptionIds = `${props['aria-describedby']}`
-    }
-    // Keep messages in the description, not the accessible name.
-    // A consumer-provided aria-labelledby wins.
-    let labelledById = props['aria-labelledby'] as string | undefined
-    if (this.hasMessages) {
-      descriptionIds = [descriptionIds, this._messagesId]
-        .filter(Boolean)
-        .join(' ')
-      labelledById = labelledById || this._labelId
-    }
+    const descriptionIds =
+      [props['aria-describedby'], describedBy].filter(Boolean).join(' ') ||
+      undefined
 
     return (
       <input
@@ -264,8 +246,7 @@ class TextInput extends Component<TextInputProps> {
         aria-invalid={this.invalid ? 'true' : undefined}
         disabled={interaction === 'disabled'}
         readOnly={interaction === 'readonly'}
-        aria-describedby={descriptionIds !== '' ? descriptionIds : undefined}
-        aria-labelledby={labelledById}
+        aria-describedby={descriptionIds}
         size={htmlSize}
         onChange={this.handleChange}
         onBlur={this.handleBlur}
@@ -302,8 +283,7 @@ class TextInput extends Component<TextInputProps> {
       <FormField
         id={this.id}
         label={label}
-        messagesId={this._messagesId}
-        labelId={this._labelId}
+        labelId={this.props.labelId}
         messages={messages}
         inline={display === 'inline-block'}
         width={width}
@@ -316,26 +296,28 @@ class TextInput extends Component<TextInputProps> {
         readOnly={this.interaction === 'readonly' && !forceMessages}
         data-cid="TextInput"
       >
-        <span css={styles?.facade}>
-          {renderBeforeOrAfter ? (
-            <span css={styles?.layout}>
-              {beforeElement && (
-                <span css={styles?.beforeElement}>{beforeElement}</span>
-              )}
-              {/* The input and content after input should not wrap,
-                so they're in their own flex container */}
-              <span css={styles?.inputLayout}>
-                {this.renderInput()}
-                {afterElement && (
-                  <span css={styles?.afterElement}>{afterElement}</span>
+        {({ describedBy }) => (
+          <span css={styles?.facade}>
+            {renderBeforeOrAfter ? (
+              <span css={styles?.layout}>
+                {beforeElement && (
+                  <span css={styles?.beforeElement}>{beforeElement}</span>
                 )}
+                {/* The input and content after input should not wrap,
+                  so they're in their own flex container */}
+                <span css={styles?.inputLayout}>
+                  {this.renderInput(describedBy)}
+                  {afterElement && (
+                    <span css={styles?.afterElement}>{afterElement}</span>
+                  )}
+                </span>
               </span>
-            </span>
-          ) : (
-            /* If no prepended or appended content, don't render Flex layout */
-            this.renderInput()
-          )}
-        </span>
+            ) : (
+              /* If no prepended or appended content, don't render Flex layout */
+              this.renderInput(describedBy)
+            )}
+          </span>
+        )}
       </FormField>
     )
   }

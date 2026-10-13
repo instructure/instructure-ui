@@ -74,7 +74,7 @@ describe('<NumberInput />', () => {
   it('displays the label', async () => {
     const { container } = await render(<NumberInput renderLabel="Label" />)
     const label = container.querySelector(
-      'span[class$="-formFieldLayout__label"]'
+      'label[class$="-formFieldLayout__label"]'
     )
 
     expect(label).toMatchTextContent('Label')
@@ -315,18 +315,7 @@ describe('<NumberInput />', () => {
       'some error message'
     )
 
-    const labelledById = input.getAttribute('aria-labelledby')
-    expect(labelledById).toBeTruthy()
-    const labelEl = document.getElementById(labelledById!)
-    expect(labelEl).toMatchTextContent('Label')
-    expect(labelEl).not.toMatchTextContent('some error message')
-  })
-
-  it('does not override the accessible name with aria-labelledby when there are no messages', async () => {
-    await render(<NumberInput renderLabel="Label" />)
-    const input = page.getByRole('spinbutton').element()
-
-    expect(input).not.toHaveAttribute('aria-labelledby')
+    expect(input).toHaveAccessibleName('Label')
   })
 
   describe('Component tests', () => {

@@ -24,7 +24,7 @@
 
 import { createRef } from 'react'
 import { render } from 'vitest-browser-react'
-import { page } from 'vitest/browser'
+import { page, userEvent } from 'vitest/browser'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { FormFieldLayout } from '@instructure/ui-form-field/latest'
@@ -68,13 +68,15 @@ describe('<FormFieldLayout />', () => {
   })
 
   it('should render', async () => {
-    const { container } = await render(<FormFieldLayout label="Username" />)
+    const { container } = await render(
+      <FormFieldLayout id="ffl-control" label="Username" />
+    )
 
     const formFieldLayout = container.querySelector(
-      "label[class$='-formFieldLayout']"
+      "div[class$='-formFieldLayout']"
     )
     const formFieldLabel = container.querySelector(
-      "span[class$='-formFieldLayout__label']"
+      "label[class$='-formFieldLayout__label']"
     )
 
     expect(formFieldLayout).toBeInTheDocument()
@@ -83,7 +85,9 @@ describe('<FormFieldLayout />', () => {
   })
 
   it('should meet a11y standards', async () => {
-    const { container } = await render(<FormFieldLayout label="Username" />)
+    const { container } = await render(
+      <FormFieldLayout id="ffl-control" label="Username" />
+    )
 
     const axeCheck = await runAxeCheck(container)
 
@@ -94,8 +98,12 @@ describe('<FormFieldLayout />', () => {
     const inputContainerRef = vi.fn()
     const ref = createRef<HTMLInputElement>()
     await render(
-      <FormFieldLayout label="Username" inputContainerRef={inputContainerRef}>
-        <input type="text" ref={ref} />
+      <FormFieldLayout
+        id="ffl-control"
+        label="Username"
+        inputContainerRef={inputContainerRef}
+      >
+        <input type="text" id="ffl-control" ref={ref} />
       </FormFieldLayout>
     )
     expect(ref.current).toBeInstanceOf(HTMLInputElement)
@@ -106,12 +114,12 @@ describe('<FormFieldLayout />', () => {
     it('should align FormFieldLayout label to right by default', async () => {
       await page.viewport(800, 600)
       const { container } = await render(
-        <FormFieldLayout label="Username" layout="inline">
+        <FormFieldLayout id="ffl-control" label="Username" layout="inline">
           <input type="text" />
         </FormFieldLayout>
       )
       const label = container.querySelector(
-        'span[class$="-formFieldLayout__label"]'
+        'label[class$="-formFieldLayout__label"]'
       )!
 
       expect(label).toMatchTextContent('Username')
@@ -121,12 +129,17 @@ describe('<FormFieldLayout />', () => {
     it('should align FormFieldLayout label to left', async () => {
       await page.viewport(800, 600)
       const { container } = await render(
-        <FormFieldLayout label="Username" layout="inline" labelAlign="start">
+        <FormFieldLayout
+          id="ffl-control"
+          label="Username"
+          layout="inline"
+          labelAlign="start"
+        >
           <input type="text" />
         </FormFieldLayout>
       )
       const label = container.querySelector(
-        'span[class$="-formFieldLayout__label"]'
+        'label[class$="-formFieldLayout__label"]'
       )!
 
       expect(label).toMatchTextContent('Username')
@@ -139,6 +152,7 @@ describe('<FormFieldLayout />', () => {
     it('should render messages above the controls in stacked groups', async () => {
       await render(
         <FormFieldLayout
+          id="ffl-control"
           label="Options"
           as="fieldset"
           isGroup
@@ -156,6 +170,7 @@ describe('<FormFieldLayout />', () => {
     it('should render messages below the controls in stacked layout when not a group', async () => {
       await render(
         <FormFieldLayout
+          id="ffl-control"
           label="Username"
           messages={[{ type: 'hint', text: 'Field message' }]}
         >
@@ -172,6 +187,7 @@ describe('<FormFieldLayout />', () => {
       await page.viewport(800, 600)
       await render(
         <FormFieldLayout
+          id="ffl-control"
           label="Options"
           as="fieldset"
           layout="inline"
@@ -191,6 +207,7 @@ describe('<FormFieldLayout />', () => {
       await page.viewport(800, 600)
       await render(
         <FormFieldLayout
+          id="ffl-control"
           label="Username"
           layout="inline"
           messages={[{ type: 'hint', text: 'Field message' }]}
@@ -202,6 +219,170 @@ describe('<FormFieldLayout />', () => {
         page.getByText('Field message').element(),
         page.getByRole('textbox').element()
       )
+    })
+  })
+
+  describe('label association', () => {
+    it('should link the label to the control via `for`', async () => {
+      const { container } = await render(
+        <FormFieldLayout id="ffl-control" label="Username">
+          <input type="text" id="ffl-control" />
+        </FormFieldLayout>
+      )
+      const label = container.querySelector('label')!
+
+      expect(label).toHaveAttribute('for', 'ffl-control')
+      expect(label).toMatchTextContent('Username')
+      expect(label.querySelector('input')).toBeNull()
+    })
+
+    it('should keep messages and other content out of the accessible name', async () => {
+      await render(
+        <FormFieldLayout
+          id="ffl-control"
+          label="Username"
+          messages={[{ type: 'error', text: 'Required' }]}
+        >
+          <button type="button">Clear</button>
+          <input type="text" id="ffl-control" />
+        </FormFieldLayout>
+      )
+
+      await expect
+        .element(page.getByRole('textbox'))
+        .toHaveAccessibleName('Username')
+    })
+
+    it('should link a visually hidden label to the control', async () => {
+      await render(
+        <FormFieldLayout
+          id="ffl-control"
+          label={
+            <span style={{ position: 'absolute', clip: 'rect(0 0 0 0)' }}>
+              Username
+            </span>
+          }
+        >
+          <input type="text" id="ffl-control" />
+        </FormFieldLayout>
+      )
+
+      await expect
+        .element(page.getByRole('textbox'))
+        .toHaveAccessibleName('Username')
+    })
+  })
+
+  describe('children as a function', () => {
+    it('should pass the id of the rendered messages as describedBy', async () => {
+      await render(
+        <FormFieldLayout
+          id="ffl-control"
+          label="Username"
+          messages={[{ type: 'hint', text: 'Some hint' }]}
+        >
+          {({ describedBy }) => (
+            <input
+              type="text"
+              id="ffl-control"
+              aria-describedby={describedBy}
+            />
+          )}
+        </FormFieldLayout>
+      )
+
+      await expect
+        .element(page.getByRole('textbox'))
+        .toHaveAccessibleDescription('Some hint')
+    })
+
+    it('should pass undefined when there are no messages', async () => {
+      const children = vi.fn(() => <input type="text" id="ffl-control" />)
+      await render(
+        <FormFieldLayout id="ffl-control" label="Username">
+          {children}
+        </FormFieldLayout>
+      )
+
+      expect(children).toHaveBeenCalledWith({ describedBy: undefined })
+    })
+
+    it('should pass undefined when all messages are hidden', async () => {
+      const children = vi.fn(() => <input type="text" id="ffl-control" />)
+      await render(
+        <FormFieldLayout
+          id="ffl-control"
+          label="Username"
+          readOnly
+          messages={[{ type: 'error', text: 'Some error' }]}
+        >
+          {children}
+        </FormFieldLayout>
+      )
+
+      expect(children).toHaveBeenCalledWith({ describedBy: undefined })
+      expect(page.getByText('Some error').query()).toBeNull()
+    })
+  })
+
+  describe('clicks in the control area', () => {
+    it('should focus and click the control when clicking non-interactive content', async () => {
+      const onClick = vi.fn()
+      await render(
+        <FormFieldLayout id="ffl-control" label="Username">
+          <span data-testid="icon">icon</span>
+          <input type="text" id="ffl-control" onClick={onClick} />
+        </FormFieldLayout>
+      )
+      await userEvent.click(page.getByTestId('icon'))
+
+      await expect.element(page.getByRole('textbox')).toHaveFocus()
+      expect(onClick).toHaveBeenCalledTimes(1)
+    })
+
+    it('should not forward clicks on interactive content', async () => {
+      const onClick = vi.fn()
+      await render(
+        <FormFieldLayout id="ffl-control" label="Username">
+          <button type="button">Clear</button>
+          <input type="text" id="ffl-control" onClick={onClick} />
+        </FormFieldLayout>
+      )
+      await userEvent.click(page.getByRole('button'))
+
+      await expect.element(page.getByRole('button')).toHaveFocus()
+      expect(onClick).not.toHaveBeenCalled()
+    })
+
+    it('should not forward clicks on messages', async () => {
+      const onClick = vi.fn()
+      await render(
+        <FormFieldLayout
+          id="ffl-control"
+          label="Username"
+          messages={[{ type: 'hint', text: 'Some hint' }]}
+        >
+          <input type="text" id="ffl-control" onClick={onClick} />
+        </FormFieldLayout>
+      )
+      await userEvent.click(page.getByText('Some hint'))
+
+      expect(onClick).not.toHaveBeenCalled()
+    })
+
+    it('should forward the click only once when nested', async () => {
+      const onClick = vi.fn()
+      await render(
+        <FormFieldLayout id="ffl-control" label="Outer">
+          <FormFieldLayout id="ffl-control" label="Inner">
+            <span data-testid="icon">icon</span>
+            <input type="text" id="ffl-control" onClick={onClick} />
+          </FormFieldLayout>
+        </FormFieldLayout>
+      )
+      await userEvent.click(page.getByTestId('icon'))
+
+      expect(onClick).toHaveBeenCalledTimes(1)
     })
   })
 })

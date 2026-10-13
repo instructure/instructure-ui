@@ -115,10 +115,6 @@ const NumberInput = forwardRef<NumberInputHandle, NumberInputProps>(
     const success =
       !!messages && messages.some((message) => message.type === 'success')
 
-    const hasMessages = !!messages?.some((m) => !!m.text)
-    const messagesId = id ? `${id}-messages` : undefined
-    const labelId = id ? `${id}-label` : undefined
-
     const interaction = getInteraction({ props })
     if (
       interaction === 'disabled' &&
@@ -330,8 +326,6 @@ const NumberInput = forwardRef<NumberInputHandle, NumberInputProps>(
       <FormField
         {...pickProps(props, FormField.allowedProps)}
         label={label}
-        messagesId={messagesId}
-        labelId={labelId}
         inline={display === 'inline-block'}
         id={id}
         elementRef={handleRef}
@@ -341,45 +335,40 @@ const NumberInput = forwardRef<NumberInputHandle, NumberInputProps>(
         readOnly={interaction === 'readonly'}
         data-cid="NumberInput"
       >
-        <span css={styles?.inputWidth} style={width ? { width } : undefined}>
-          <span css={styles?.inputContainer}>
-            <input
-              {...passedProps}
-              css={styles?.input}
-              aria-invalid={invalid ? 'true' : undefined}
-              // Keep messages in the description so the accessible name contains only the label.
-              aria-describedby={
-                [
-                  passedProps['aria-describedby'],
-                  hasMessages ? messagesId : null
-                ]
-                  .filter(Boolean)
-                  .join(' ') || undefined
-              }
-              aria-labelledby={
-                hasMessages
-                  ? passedProps['aria-labelledby'] || labelId
-                  : passedProps['aria-labelledby']
-              }
-              id={id}
-              type={allowStringValue ? 'text' : 'number'}
-              inputMode={inputMode}
-              placeholder={interaction === 'enabled' ? placeholder : undefined}
-              ref={handleInputRef}
-              required={isRequired}
-              value={value}
-              disabled={interaction === 'disabled'}
-              readOnly={interaction === 'readonly'}
-              onFocus={handleFocus}
-              onBlur={handleBlur}
-              onChange={handleChange}
-              onKeyDown={handleKeyDown}
-            />
-            {showArrows && interaction !== 'readonly'
-              ? renderArrows(renderIcons)
-              : null}
+        {({ describedBy }) => (
+          <span css={styles?.inputWidth} style={width ? { width } : undefined}>
+            <span css={styles?.inputContainer}>
+              <input
+                {...passedProps}
+                css={styles?.input}
+                aria-invalid={invalid ? 'true' : undefined}
+                aria-describedby={
+                  [passedProps['aria-describedby'], describedBy]
+                    .filter(Boolean)
+                    .join(' ') || undefined
+                }
+                id={id}
+                type={allowStringValue ? 'text' : 'number'}
+                inputMode={inputMode}
+                placeholder={
+                  interaction === 'enabled' ? placeholder : undefined
+                }
+                ref={handleInputRef}
+                required={isRequired}
+                value={value}
+                disabled={interaction === 'disabled'}
+                readOnly={interaction === 'readonly'}
+                onFocus={handleFocus}
+                onBlur={handleBlur}
+                onChange={handleChange}
+                onKeyDown={handleKeyDown}
+              />
+              {showArrows && interaction !== 'readonly'
+                ? renderArrows(renderIcons)
+                : null}
+            </span>
           </span>
-        </span>
+        )}
       </FormField>
     )
   }

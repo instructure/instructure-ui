@@ -60,7 +60,9 @@ type TextInputOwnProps = {
   id?: string
 
   /**
-   * id for the label. If empty, it's auto generated
+   * id for the label element. If empty, it's auto generated.
+   * useful if you use `aria-labelledby={labelId}` to label something with the
+   * label element.
    */
   labelId?: string
 

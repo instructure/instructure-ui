@@ -63,7 +63,7 @@ describe('TextArea', () => {
       <TextArea label="Name" autoGrow={false} />
     )
     const textArea = container.querySelector(
-      'span[class$="-formFieldLayout__label"]'
+      'label[class$="-formFieldLayout__label"]'
     )
 
     expect(textArea).toMatchTextContent('Name')
@@ -238,18 +238,7 @@ describe('TextArea', () => {
         'some error message'
       )
 
-      const labelledById = input.getAttribute('aria-labelledby')
-      expect(labelledById).toBeTruthy()
-      const labelEl = document.getElementById(labelledById!)
-      expect(labelEl).toMatchTextContent('Name')
-      expect(labelEl).not.toMatchTextContent('some error message')
-    })
-
-    it('does not override the accessible name with aria-labelledby when there are no messages', async () => {
-      await render(<TextArea label="Name" autoGrow={false} />)
-      const input = page.getByRole('textbox').element()
-
-      expect(input).not.toHaveAttribute('aria-labelledby')
+      expect(input).toHaveAccessibleName('Name')
     })
   })
 

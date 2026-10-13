@@ -29,8 +29,7 @@ import {
   matchComponentTypes,
   safeCloneElement,
   pickProps,
-  omitProps,
-  withDeterministicId
+  omitProps
 } from '@instructure/ui-react-utils'
 
 import { Checkbox } from '../../Checkbox/v2/index.js'
@@ -47,8 +46,6 @@ import type {
 category: components
 ---
 **/
-
-@withDeterministicId()
 class CheckboxGroup extends Component<CheckboxGroupProps, CheckboxGroupState> {
   static displayName = 'CheckboxGroup'
   static readonly componentId = 'CheckboxGroup'
@@ -70,18 +67,12 @@ class CheckboxGroup extends Component<CheckboxGroupProps, CheckboxGroupState> {
         value: props.defaultValue || []
       }
     }
-
-    this._messagesId = props.deterministicId!()
   }
-  private readonly _messagesId: string
+
   ref: Element | null = null
 
   handleRef = (el: Element | null) => {
     this.ref = el
-  }
-
-  get hasMessages() {
-    return this.props.messages && this.props.messages.length > 0
   }
 
   handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -113,7 +104,7 @@ class CheckboxGroup extends Component<CheckboxGroupProps, CheckboxGroupState> {
       : [...this.props.value]
   }
 
-  renderChildren() {
+  renderChildren(describedBy?: string) {
     const { children, name, size, disabled, readOnly } = this.props
 
     return Children.map(children, (child) => {
@@ -128,7 +119,7 @@ class CheckboxGroup extends Component<CheckboxGroupProps, CheckboxGroupState> {
           checked: this.value.indexOf(child.props.value!) > -1,
           onChange: this.handleChange,
           width: child.props.width || 'auto',
-          'aria-describedby': this.hasMessages ? this._messagesId : undefined
+          'aria-describedby': describedBy
         })
       } else {
         return child
@@ -144,11 +135,10 @@ class CheckboxGroup extends Component<CheckboxGroupProps, CheckboxGroupState> {
         description={this.props.description}
         rowSpacing="small"
         vAlign="top"
-        messagesId={this._messagesId}
         elementRef={this.handleRef}
         data-cid="CheckboxGroup"
       >
-        {this.renderChildren()}
+        {({ describedBy }) => this.renderChildren(describedBy)}
       </FormFieldGroup>
     )
   }

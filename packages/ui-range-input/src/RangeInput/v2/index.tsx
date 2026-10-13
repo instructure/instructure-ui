@@ -184,53 +184,43 @@ class RangeInput extends Component<RangeInputProps, RangeInputState> {
   }
 
   render() {
-    const { formatValue, disabled, readOnly, messages } = this.props
+    const { formatValue, disabled, readOnly } = this.props
 
     const props = omitProps(this.props, RangeInput.allowedProps)
-
-    const hasMessages = !!messages?.some((m) => !!m.text)
-    const messagesId = `${this.id}-messages`
-    const labelId = `${this.id}-label`
 
     return (
       <FormField
         {...pickProps(this.props, FormField.allowedProps)}
         label={this.props.label}
-        messagesId={messagesId}
-        labelId={labelId}
         id={this.id}
         elementRef={this.handleRef}
         data-cid="RangeInput"
       >
-        <div css={this.props.styles?.rangeInput}>
-          <input
-            css={this.props.styles?.rangeInputInput}
-            ref={this.handleInputRef}
-            type="range"
-            id={this.id}
-            min={this.props.min}
-            max={this.props.max}
-            step={this.props.step}
-            value={this.value}
-            onChange={this.noopChange}
-            aria-valuetext={formatValue!(this.value, this.props.max)}
-            {...props}
-            disabled={disabled || readOnly}
-            aria-disabled={disabled || readOnly ? 'true' : undefined}
-            // Keep messages in the description so the accessible name contains only the label.
-            aria-describedby={
-              [props['aria-describedby'], hasMessages ? messagesId : null]
-                .filter(Boolean)
-                .join(' ') || undefined
-            }
-            aria-labelledby={
-              hasMessages
-                ? props['aria-labelledby'] || labelId
-                : props['aria-labelledby']
-            }
-          />
-          {this.renderValue()}
-        </div>
+        {({ describedBy }) => (
+          <div css={this.props.styles?.rangeInput}>
+            <input
+              css={this.props.styles?.rangeInputInput}
+              ref={this.handleInputRef}
+              type="range"
+              id={this.id}
+              min={this.props.min}
+              max={this.props.max}
+              step={this.props.step}
+              value={this.value}
+              onChange={this.noopChange}
+              aria-valuetext={formatValue!(this.value, this.props.max)}
+              {...props}
+              disabled={disabled || readOnly}
+              aria-disabled={disabled || readOnly ? 'true' : undefined}
+              aria-describedby={
+                [props['aria-describedby'], describedBy]
+                  .filter(Boolean)
+                  .join(' ') || undefined
+              }
+            />
+            {this.renderValue()}
+          </div>
+        )}
       </FormField>
     )
   }

@@ -68,12 +68,8 @@ class FormField extends Component<FormFieldProps> {
         {...omitProps(this.props, FormField.allowedProps)}
         {...pickProps(this.props, formFieldLayoutAllowedProps)}
         label={this.props.label}
+        id={this.props.id}
         vAlign={this.props.vAlign}
-        as="label"
-        // This makes the control in focus when the label is clicked
-        // This is needed to prevent the wrong element to be focused, e.g.
-        // multi selects Tag-s
-        htmlFor={this.props.id}
         elementRef={this.handleRef}
         margin={this.props.margin}
         isRequired={this.props.isRequired}

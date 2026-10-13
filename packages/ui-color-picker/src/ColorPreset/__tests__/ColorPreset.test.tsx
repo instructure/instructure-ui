@@ -23,11 +23,18 @@
  */
 
 import { render } from 'vitest-browser-react'
-import { page, userEvent } from 'vitest/browser'
-import { describe, it, expect, vi } from 'vitest'
+import { page, userEvent, commands } from 'vitest/browser'
+import { beforeEach, describe, it, expect, vi } from 'vitest'
 import { colorToRGB } from '@instructure/ui-color-utils'
 import { ColorPreset } from '@instructure/ui-color-picker/latest'
 import type { ColorPresetProps } from '@instructure/ui-color-picker/latest'
+
+declare module 'vitest/browser' {
+  interface BrowserCommands {
+    // this is defined in vitest.config.mts
+    resetMouse: () => Promise<void>
+  }
+}
 
 const testValue = {
   colors: [
@@ -74,6 +81,10 @@ const testColorMixerSettings: ColorPresetProps['colorMixerSettings'] = {
 }
 
 describe('<ColorPreset />', () => {
+  beforeEach(async () => {
+    await commands.resetMouse()
+  })
+
   it('should provide aria-label through the colorScreenReaderLabel prop', async () => {
     const mockScreenReaderLabel = vi.fn((hexCode) => `${hexCode}, hex code`)
     const props = {

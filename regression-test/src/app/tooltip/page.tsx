@@ -114,8 +114,9 @@ export default function TooltipPage() {
         <Text>Flex Three</Text>
       </Flex.Item>
     </Flex>,
-    <FormField id="foo" label="This is a FormField" width="200px">
+    <FormField id="fooFF" label="This is a FormField" width="200px">
       <input
+        id="fooFF"
         style={{
           display: 'block',
           width: '100%',
