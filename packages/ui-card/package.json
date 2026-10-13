@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-card",
-  "version": "11.7.8",
+  "version": "11.7.9",
   "description": "A basic wrapper component for grouping content with padding, border radius, shadow, and background.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",

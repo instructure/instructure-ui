@@ -9,7 +9,7 @@ relevantForAI: true
 
 Every InstUI component reads its colors, spacing, typography, and other visual values from a theme. You don't style components one by one. You pick a theme, and every component inside it follows along.
 
-This page covers the basics: how to apply a theme, which themes ship with InstUI, and how to style your own layout so it matches the active theme. To customize themes read [New Theme Overrides](new-theme-overrides) (should not be needed in most cases).
+This page covers the basics: how to apply a theme, which themes ship with InstUI, and how to style your own layout so it matches the active theme. To customize themes read [New Theme Overrides](/new-theme-overrides) (should not be needed in most cases).
 
 ### Applying a theme
 
@@ -38,13 +38,13 @@ InstUI ships with four themes:
 | Canvas (legacy)               | `import { canvas } from '@instructure/ui-themes'`             | `v11_6` and `v11_7+`         |
 | Canvas high contrast (legacy) | `import { canvasHighContrast } from '@instructure/ui-themes'` | `v11_6` and `v11_7+`         |
 
-See [Component versioning](/#component-versioning) for details.
+See [Component versioning](/component-versioning) for details.
 
 ### Styling your own layout with the theme
 
-InstUI components handle theming for you. Your own layout elements, like page backgrounds, cards, and dividers, need a little help.
+InstUI components handle theming for you. Your own layout elements, like page backgrounds and dividers, need a little help.
 
-We recommend plain HTML elements, like `<div>`, for layout. Style them with plain CSS, and read colors and sizes from the current theme with the [useComputedTheme](/#useComputedTheme) hook, it returns [shared tokens](https://instructure.design/shared-tokens) from the context:
+We recommend plain HTML elements, like `<div>`, for layout. Style them with plain CSS, and read colors and sizes from the current theme with the [useComputedTheme](/useComputedTheme) hook, it returns [shared tokens](/shared-tokens) from the context:
 
 ```js
 ---
@@ -70,9 +70,9 @@ const Card = ({ children }) => {
 }
 ```
 
-`useComputedTheme` returns the resolved tokens of the nearest theme. When the theme changes, your component re-renders with the new values.
+`useComputedTheme` returns the resolved tokens of the nearest theme (the first `InstUISettingsProvider` DOM ancestor). When the theme changes, your component re-renders with the new values.
 
-Call the hook in a component that renders _inside_ the `InstUISettingsProvider` whose theme you want.
+As an alternative you can use a [View](/View) too, but note that this might be overkill.
 
 ### Example: a themed login page
 
