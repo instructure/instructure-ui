@@ -37,6 +37,7 @@ const components = [
   'tooltip',
   'byline',
   'calendar',
+  'card',
   'checkbox',
   'checkboxgroup',
   'colorpicker',
