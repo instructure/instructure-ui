@@ -4,7 +4,7 @@
 Use `<Card />` as a basic wrapper for grouping related content with padding,
 border radius, shadow, and background color.
 
-Card has three internal width breakpoints. It measures its own rendered width and scales its
+Card has two internal width breakpoints. It measures its own rendered width and scales its
 padding and border radius from that, so the same markup works in a narrow
 sidebar and in a wide main region.
 
@@ -27,7 +27,7 @@ type: example
 - `base` _(default)_ draws a background color and a shadow. Use it for a Card
   that sits on the page background.
 - `nested` draws a thin border and no background or shadow. Use it inside a
-  `base` Card
+  `base` Card.
 
 ```js
 ---
