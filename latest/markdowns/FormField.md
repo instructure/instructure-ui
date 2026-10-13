@@ -4,6 +4,32 @@
 This is a helper component that is used by most of the custom form
 components. In most cases it shouldn't be used directly.
 
+### Accessibility
+
+`FormField` renders a `<label>` that wraps the label text, and links it to
+the form control via its `for` attribute. Make sure that you mind the following:
+
+- The control needs to have the same `id` as the one passed to `FormField` via `labelId`.
+  you can also use `aria-labelledby` on your control to read the label.
+- Messages aren't part of the control's accessible name. To have screen readers
+  announce them, pass a function as `children`. It receives `{ describedBy }`,
+  the id of the rendered messages (or `undefined` when none are shown), which
+  you add to the control's `aria-describedby`.
+
+```js
+---
+type: code
+---
+<FormField id="email" label="Email" messages={messages}>
+  {({ describedBy }) => (
+    <input id="email" type="email" aria-describedby={describedBy} />
+  )}
+</FormField>
+```
+
+Clicking non-interactive content around the control (e.g. icons or padding)
+focuses and clicks the control, like clicking the label does.
+
 ```js
 ---
 type: example
@@ -29,8 +55,8 @@ type: example
     <TextInput id="_foo124"/>
   </FormField>
   <hr/>
-  <FormField id="_foo121" label={<ScreenReaderContent>hidden text</ScreenReaderContent>} width="400px" layout="stacked">
-    <TextInput id="_foo121" />
+  <FormField id="_foo125" label={<ScreenReaderContent>hidden text</ScreenReaderContent>} width="400px" layout="stacked">
+    <TextInput id="_foo125" />
   </FormField>
   <hr/>
 </div>
@@ -45,8 +71,8 @@ type: example
 | FormField | id | `string` | Yes | - | the id of the input (to link it to its label for a11y). Applied as the `for` HTML prop on the label. |
 | FormField | messages | `FormMessage[]` | No | - | Array of objects with shape: `{ text: React.ReactNode, type: One of: ['newError', 'error', 'hint', 'success', 'screenreader-only'] }` |
 | FormField | messagesId | `string` | No | - | id for the form field messages |
-| FormField | labelId | `string` | No | - | id for the label element, so a single form control can reference just the label text via `aria-labelledby` (keeping messages out of its accessible name) |
-| FormField | children | `React.ReactNode` | No | - |  |
+| FormField | labelId | `string` | No | - | `id` for the label/legend element. Useful when the control is not a [labelable](https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Content_categories#labelable) element (e.g. a custom widget), and needs to reference the label via `aria-labelledby`. |
+| FormField | children | `\| React.ReactNode \| ((params: FormFieldLayoutChildrenParams) => React.ReactNode)` | No | - | The form control. Can be a function that receives `{ describedBy }`, so the control can reference the messages via `aria-describedby`. |
 | FormField | inline | `boolean` | No | `false` |  |
 | FormField | layout | `'stacked' \| 'inline'` | No | `'stacked'` |  |
 | FormField | labelAlign | `'start' \| 'end'` | No | `'end'` |  |
@@ -60,13 +86,13 @@ type: example
 | FormField | readOnly | `boolean` | No | - | Whether the field is read-only. When true, error and success messages will be hidden. |
 | FormField.FormFieldLabel | children | `React.ReactNode` | Yes | - |  |
 | FormField.FormFieldLabel | as | `AsElementType` | No | `'span'` |  |
-| FormField.FormFieldLayout | label | `React.ReactNode` | Yes | - |  |
-| FormField.FormFieldLayout | id | `string` | No | - | the id of the input (to link it to its label for a11y) |
-| FormField.FormFieldLayout | as | `AsElementType` | No | - | the element type to render as |
+| FormField.FormFieldLayout | label | `React.ReactNode` | Yes | - | The label text. Will be appended by a `*` if this field is required. |
+| FormField.FormFieldLayout | id | `string` | Yes | - | The id of the form control (=the child of this component). It's applied as the [for](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/for) attribute of the label, so the control needs to have the same `id`. Not used when rendering as a `fieldset` (group) |
+| FormField.FormFieldLayout | as | `AsElementType` | No | - | The element type to render as, `div` be default. Also determines how the `label` will be rendered: If its value is `fieldset` (for form groups), it be rendered in a [legend](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/legend), for all other cases it will be in a [label](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/label). |
 | FormField.FormFieldLayout | messages | `FormMessage[]` | No | - | Array of objects with shape: `{ text: React.ReactNode, type: One of: ['newError', 'error', 'hint', 'success', 'screenreader-only'] }` |
 | FormField.FormFieldLayout | messagesId | `string` | No | - | id for the form field messages |
-| FormField.FormFieldLayout | labelId | `string` | No | - | id for the label element, so a single form control can reference just the label text via `aria-labelledby` (keeping messages out of its accessible name) |
-| FormField.FormFieldLayout | children | `React.ReactNode` | No | - |  |
+| FormField.FormFieldLayout | labelId | `string` | No | - | `id` for the label/legend element. Useful when the control is not a [labelable](https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Content_categories#labelable) element (e.g. a custom widget), and needs to reference the label via `aria-labelledby={labelId}`. |
+| FormField.FormFieldLayout | children | `\| React.ReactNode \| ((params: FormFieldLayoutChildrenParams) => React.ReactNode)` | No | - | The form control(s). Can be a function that receives `{ describedBy }`, so the control can reference the messages via `aria-describedby`. |
 | FormField.FormFieldLayout | inline | `boolean` | No | - | If `true` use an inline layout -- content will flow on the left/right side of this component |
 | FormField.FormFieldLayout | layout | `'stacked' \| 'inline'` | No | - | In `stacked` mode the container is below the label, in `inline` mode the container is to the right/left (depending on text direction) |
 | FormField.FormFieldLayout | labelAlign | `'start' \| 'end'` | No | - | The horizontal alignment of the label. Only works in `inline` layout |
