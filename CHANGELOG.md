@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.9](https://github.com/instructure/instructure-ui/compare/v11.7.8...v11.7.9) (2026-10-13)
+
+### Bug Fixes
+
+* **many:** Stop wrapping form field controls in their label ([#2740](https://github.com/instructure/instructure-ui/issues/2740)) ([467269e](https://github.com/instructure/instructure-ui/commit/467269ea6d66c88ef9deb8bd14980730bbd645e8))
+* **ui-modal:** keep content visible in safari after nested transitions ([#2735](https://github.com/instructure/instructure-ui/issues/2735)) ([dedfd07](https://github.com/instructure/instructure-ui/commit/dedfd074e6baab777ac6f1232be07ad39b11ccb7))
+
+### Features
+
+* **ui-card:** add Card component with base and nested variants ([#2743](https://github.com/instructure/instructure-ui/issues/2743)) ([2b652ea](https://github.com/instructure/instructure-ui/commit/2b652ea90c73805905ebb6302c45c52aa2d7f69a))
+* **ui-heading:** add AI Heading iconOnly sizes for every Heading variant ([#2738](https://github.com/instructure/instructure-ui/issues/2738)) ([b107d8f](https://github.com/instructure/instructure-ui/commit/b107d8f91673fc8a8835876075a9da6f4acbef03))
+
+
 ## [11.7.8](https://github.com/instructure/instructure-ui/compare/v11.7.7...v11.7.8) (2026-10-02)
 
 ### Bug Fixes
