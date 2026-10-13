@@ -55,45 +55,6 @@ type: example
 </div>
 ```
 
-Another example, in a Modal header:
-
-```js
----
-type: example
----
-const Example = () => {
-  const [open, setOpen] = useState(false)
-  return (
-    <div>
-      <Button onClick={() => setOpen(true)}>Open Modal</Button>
-      <Modal
-        open={open}
-        onDismiss={() => setOpen(false)}
-        size="small"
-        label="AI generated summary"
-      >
-        <Modal.Header>
-          <CloseButton
-            placement="end"
-            offset="small"
-            onClick={() => setOpen(false)}
-            screenReaderLabel="Close"
-          />
-          <Heading aiVariant="iconOnly" variant="titleCardLarge">
-            AI generated summary
-          </Heading>
-        </Modal.Header>
-        <Modal.Body>
-          <Text>The AI-generated summary goes here.</Text>
-        </Modal.Body>
-      </Modal>
-    </div>
-  )
-}
-
-render(<Example />)
-```
-
 ### Heading level
 
 What DOM element is output is determined in the following order:
