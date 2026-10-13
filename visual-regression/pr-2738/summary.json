@@ -1,8 +1,8 @@
 {
   "summary": {
     "total": 99,
-    "unchanged": 93,
-    "changed": 6,
+    "unchanged": 96,
+    "changed": 3,
     "added": 0,
     "removed": 0,
     "a11yPages": 0,
@@ -641,22 +641,22 @@
     },
     {
       "name": "tooltip-canvas.png",
-      "status": "changed",
-      "numDiff": 894,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false,
       "layoutShifted": false
     },
     {
       "name": "tooltip-dark.png",
-      "status": "changed",
-      "numDiff": 881,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false,
       "layoutShifted": false
     },
     {
       "name": "tooltip-light.png",
-      "status": "changed",
-      "numDiff": 956,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false,
       "layoutShifted": false
     },
