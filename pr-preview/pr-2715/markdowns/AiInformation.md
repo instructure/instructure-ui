@@ -24,6 +24,7 @@ readonly: true
       featureName: "Feature name",
       privacyNoticeText: "AI Privacy Notice",
       privacyNoticeUrl: "https://www.instructure.com/policies/artificial-intelligence-privacy",
+      privacyNoticeScreenReaderLabel: "AI Privacy Notice, opens an external page",
       permissionLevelText: "Permission Level",
       permissionLevel: "Level 1",
       description: "We leverage anonymized aggregate data for detailed analytics to inform model development and product improvements. No AI models are used at this level.",
@@ -172,6 +173,7 @@ readonly: true
       featureName: "Feature name",
       privacyNoticeText: "AI Privacy Notice",
       privacyNoticeUrl: "https://www.instructure.com/policies/artificial-intelligence-privacy",
+      privacyNoticeScreenReaderLabel: "AI Privacy Notice, opens an external page",
       permissionLevelText: "Permission Level",
       permissionLevel: "Level 1",
       description: "We leverage anonymized aggregate data for detailed analytics to inform model development and product improvements. No AI models are used at this level.",
@@ -306,7 +308,7 @@ readonly: true
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
 | AiInformation | title | `string` | Yes | - | i18n text for the title of popover |
-| AiInformation | data | `{ featureName: string privacyNoticeText: string privacyNoticeUrl: string permissionLevelText: string permissionLevel: string description: string permissionLevelsModalTriggerText: string modelNameText: string modelName: string nutritionFactsModalTriggerText: string }[]` | Yes | - | the data structure of the Features on the popover |
+| AiInformation | data | `{ featureName: string privacyNoticeText: string privacyNoticeUrl: string privacyNoticeScreenReaderLabel?: string permissionLevelText: string permissionLevel: string description: string permissionLevelsModalTriggerText: string modelNameText: string modelName: string nutritionFactsModalTriggerText: string }[]` | Yes | - | the data structure of the Features on the popover |
 | AiInformation | fullscreenModals | `boolean` | No | `false` | sets the modal size to 'fullscreen' for NutritionFacts and DataPermissionLevels. Used for small viewports |
 | AiInformation | trigger | `Renderable` | Yes | - | The element that triggers the popover |
 | AiInformation | dataPermissionLevelsModalLabel | `DataPermissionLevelsProps['modalLabel']` | Yes | - | i18n text for the label of the dataPermissionLevels modal |
