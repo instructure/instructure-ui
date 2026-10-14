@@ -23,7 +23,7 @@
  */
 
 import { getPackageJSON, getPackages } from '../utils/pkg-utils/index.ts'
-import { error, info, runCommandAsync } from '@instructure/command-utils'
+import { error, info, warn, runCommandAsync } from '@instructure/command-utils'
 
 import {
   checkWorkingDirectory,
@@ -282,7 +282,7 @@ async function* publishPackages(packages: any[], version: string, tag: string) {
     // if the package is already in the registry then don't try
     // to publish it again
     if (packageVersions.includes(version)) {
-      throw new Error(`📦  v${version} of ${pkg.name} is already published!`)
+      warn(`📦  v${version} of ${pkg.name} is already published, skipping!`)
     } else {
       await publishPackage(pkg, tag)
       yield pkg
