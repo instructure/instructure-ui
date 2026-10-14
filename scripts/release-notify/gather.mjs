@@ -43,8 +43,9 @@ const ISSUE_KEY = /(?<![A-Za-z0-9])([A-Za-z]{4,7})-(\d{3,5})(?!\d)/g
 const SLACK_PERMALINK =
   /https?:\/\/[a-z0-9-]+\.slack\.com\/archives\/[a-z0-9]+\/p\d{10,}(?:\?[^\s"'<>|)\]]*)?/gi
 
-// Written by /slack-triage; the value is the Slack display name verbatim.
-const REPORTED_BY = /Reported by \(Slack\):\s*([^"\\\n]+)/
+// Matches both /slack-triage writes (generated) text and manually entered reporter information.
+const REPORTED_BY =
+  /(?:^|["\n]|\\n)\s*(?:reported\s*by|reporter|reported)(?:\s*\(slack\))?\s*:\s*@?([^"\\\n]+)/i
 
 /**
  * Accepts typo'd prefixes (ISTUI, INSUTI) but rejects lookalikes.

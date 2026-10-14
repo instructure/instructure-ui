@@ -10,7 +10,7 @@ Usage: `/release-notify` — no arguments. The range is always the two most rece
 
 - **Never post anything to Slack.** You produce a draft; the user posts it. This skill makes no Slack calls at all.
 - **The reporter comes from the ticket, not from judgement.** `/slack-triage` records it in the description's Context Links block at triage time. Read that line; never infer a reporter from anything else.
-- **Never invent a person, thread or link.** A ticket with no `Reported by (Slack):` line gets no line in the draft.
+- **Never invent a person, thread or link.** A ticket with no reporter line (`Reported by (Slack):`, or a hand-written `reporter:` / `reported:`) gets no line in the draft.
 
 ## Config
 
