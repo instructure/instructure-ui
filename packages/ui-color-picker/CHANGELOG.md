@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.10](https://github.com/instructure/instructure-ui/compare/v11.7.8...v11.7.10) (2026-10-14)
+
+### Bug Fixes
+
+* **many:** Stop wrapping form field controls in their label ([#2740](https://github.com/instructure/instructure-ui/issues/2740)) ([467269e](https://github.com/instructure/instructure-ui/commit/467269ea6d66c88ef9deb8bd14980730bbd645e8))
+
+
 ## [11.7.9](https://github.com/instructure/instructure-ui/compare/v11.7.8...v11.7.9) (2026-10-13)
 
 ### Bug Fixes
