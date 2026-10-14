@@ -64,14 +64,14 @@ type: example
     themeOverride={{
       components: {
         Alert: {
-          infoIconBackground: 'darkblue',
+          infoBackground: 'darkblue',
           infoBorderColor: 'darkblue'
         }
       }
     }}
   >
     <Alert variant="info" margin="small">
-      Alert with overridden icon background and border color.
+      Alert with overridden background and border color.
     </Alert>
     <Alert variant="success" margin="small">
       Success Alert is unaffected by the info-specific overrides.
@@ -94,7 +94,7 @@ type: example
       components: {
         Alert: {
           infoBorderColor: 'purple',
-          infoIconBackground: 'purple'
+          infoBackground: 'purple'
         },
         Pill: {
           baseTextColor: 'purple',
@@ -125,26 +125,26 @@ type: example
       components: {
         Alert: {
           infoBorderColor: 'darkblue',
-          infoIconBackground: 'darkblue'
+          infoBackground: 'darkblue'
         }
       }
     }}
   >
     <Alert variant="info" margin="small">
-      Dark blue border and icon (from parent override).
+      Dark blue border and background (from parent override).
     </Alert>
 
     <InstUISettingsProvider
       themeOverride={{
         components: {
           Alert: {
-            infoIconBackground: 'deeppink'
+            infoBackground: 'deeppink'
           }
         }
       }}
     >
       <Alert variant="info" margin="small">
-        Dark blue border (inherited from parent) + deep pink icon (child override).
+        Dark blue border (inherited from parent) + deep pink background (child override).
       </Alert>
     </InstUISettingsProvider>
   </InstUISettingsProvider>
@@ -256,7 +256,7 @@ type: example
       components: {
         Alert: {
           warningBorderColor: 'darkorange',
-          warningIconBackground: 'darkorange'
+          warningBackground: 'darkorange'
         }
       }
     }}
@@ -293,7 +293,7 @@ type: example
     margin="small"
     themeOverride={{
       infoBorderColor: 'crimson',
-      infoIconBackground: 'crimson'
+      infoBackground: 'crimson'
     }}
   >
     This specific Alert has crimson info styling.
@@ -315,7 +315,7 @@ type: example
     margin="small"
     themeOverride={(componentTheme) => ({
       infoBorderColor: componentTheme.successBorderColor,
-      infoIconBackground: componentTheme.successIconBackground
+      infoBackground: componentTheme.successBackground
     })}
   >
     Info Alert styled with the success colors via function override.
@@ -336,24 +336,24 @@ type: example
     themeOverride={{
       components: {
         Alert: {
-          infoBorderColor: 'darkblue',
-          infoIconBackground: 'darkblue',
-          background: 'lightyellow'
+          infoBorderColorInline: 'darkblue',
+          infoBackgroundInline: 'lightyellow'
         }
       }
     }}
   >
-    <Alert variant="info" margin="small">
-      Dark blue info + light yellow background (from provider).
+    <Alert variant="info" appearance="inline" margin="small">
+      Dark blue border + light yellow background (from provider).
     </Alert>
     <Alert
       variant="info"
+      appearance="inline"
       margin="small"
       themeOverride={{
-        infoIconBackground: 'deeppink'
+        infoBorderColorInline: 'deeppink'
       }}
     >
-      Dark blue border + light yellow background (from provider), but deep pink icon (from component prop). The component prop wins for infoIconBackground.
+      Light yellow background (from provider), but deep pink border (from component prop). The component prop wins for infoBorderColorInline.
     </Alert>
   </InstUISettingsProvider>
 </InstUISettingsProvider>
@@ -378,7 +378,7 @@ type: example
       components: {
         Alert: {
           infoBorderColor: 'darkorange',
-          infoIconBackground: 'darkorange'
+          infoBackground: 'darkorange'
         }
       }
     }}
@@ -474,7 +474,7 @@ type: example
       components: {
         Alert: {
           infoBorderColor: 'darkorange',
-          infoIconBackground: 'darkorange'
+          infoBackground: 'darkorange'
         }
       }
     }}

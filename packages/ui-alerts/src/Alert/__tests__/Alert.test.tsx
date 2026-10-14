@@ -92,6 +92,63 @@ describe('<Alert />', () => {
     })
   })
 
+  it('should call `onDismiss` when Escape is pressed with renderCloseButtonLabel', async () => {
+    const onDismiss = vi.fn()
+    await render(
+      <Alert
+        variant="success"
+        renderCloseButtonLabel="Close"
+        onDismiss={onDismiss}
+        transition="none"
+      >
+        Success: Sample alert text.
+      </Alert>
+    )
+    ;(page.getByRole('button').element() as HTMLElement).focus()
+    await userEvent.keyboard('{Escape}')
+
+    expect(onDismiss).toHaveBeenCalledTimes(1)
+    await expect
+      .element(page.getByText('Success: Sample alert text.'))
+      .not.toBeInTheDocument()
+  })
+
+  it('should dismiss itself after `timeout` milliseconds', async () => {
+    vi.useFakeTimers()
+    try {
+      const onDismiss = vi.fn()
+      await render(
+        <Alert
+          variant="success"
+          timeout={1000}
+          onDismiss={onDismiss}
+          transition="none"
+        >
+          Success: Sample alert text.
+        </Alert>
+      )
+
+      vi.advanceTimersByTime(999)
+      expect(onDismiss).not.toHaveBeenCalled()
+
+      vi.advanceTimersByTime(1)
+      expect(onDismiss).toHaveBeenCalledTimes(1)
+    } finally {
+      vi.useRealTimers()
+    }
+  })
+
+  it('should provide the root element via `elementRef`', async () => {
+    const elementRef = vi.fn()
+    await render(
+      <Alert variant="success" elementRef={elementRef}>
+        Success: Sample alert text.
+      </Alert>
+    )
+
+    expect(elementRef).toHaveBeenCalledWith(expect.any(HTMLDivElement))
+  })
+
   const iconComponentsVariants: Record<
     NonNullable<AlertProps['variant']>,
     string
@@ -322,6 +379,58 @@ describe('<Alert />', () => {
 
       const boxShadow = getComputedStyle(view).boxShadow
       expect(boxShadow).toBe('none')
+    })
+
+    it('should not have shadow by default with the `inline` appearance', async () => {
+      const { container } = await render(
+        <Alert variant="info" transition="none" appearance="inline">
+          Success: Sample alert text.
+        </Alert>
+      )
+      const view = container.querySelector<HTMLElement>(
+        'div[class$="-view-alert"]'
+      )!
+
+      expect(getComputedStyle(view).boxShadow).toBe('none')
+    })
+
+    it('should have shadow with the `inline` appearance when `hasShadow` is true', async () => {
+      const { container } = await render(
+        <Alert variant="info" transition="none" appearance="inline" hasShadow>
+          Success: Sample alert text.
+        </Alert>
+      )
+      const view = container.querySelector<HTMLElement>(
+        'div[class$="-view-alert"]'
+      )!
+
+      expect(getComputedStyle(view).boxShadow).not.toBe('none')
+    })
+
+    it('should apply the `width` prop', async () => {
+      const { container } = await render(
+        <Alert variant="info" transition="none" width="300px">
+          Success: Sample alert text.
+        </Alert>
+      )
+      const view = container.querySelector<HTMLElement>(
+        'div[class$="-view-alert"]'
+      )!
+
+      expect(getComputedStyle(view).width).toBe('300px')
+    })
+
+    it('should not pass `appearance` to the DOM', async () => {
+      const { container } = await render(
+        <Alert variant="info" transition="none" appearance="inline">
+          Success: Sample alert text.
+        </Alert>
+      )
+      const view = container.querySelector<HTMLElement>(
+        'div[class$="-view-alert"]'
+      )!
+
+      expect(view.hasAttribute('appearance')).toBe(false)
     })
   })
 })
