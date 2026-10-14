@@ -29,7 +29,6 @@ import {
   SimpleSelect,
   View,
   Tag,
-  AccessibleContent,
   IconUserSolid,
   IconUserLine,
   IconSearchLine,
@@ -321,13 +320,9 @@ function MultipleSelectExample({ selected }: { selected: string[] }) {
         renderBeforeInput={selected.map((label, i) => (
           <Tag
             key={i}
-            dismissible
-            text={
-              <AccessibleContent alt={`Remove ${label}`}>
-                {label}
-              </AccessibleContent>
-            }
-            onClick={() => {}}
+            text={label}
+            renderDismissButtonLabel={`Remove ${label}`}
+            onDismiss={() => {}}
           />
         ))}
       >

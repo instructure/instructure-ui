@@ -24,6 +24,7 @@
 
 import * as V11_6 from '@instructure/ui/v11_6'
 import * as V11_7 from '@instructure/ui/v11_7'
+import * as V11_8 from '@instructure/ui/v11_8'
 // eslint-disable-next-line no-restricted-imports
 import { Guidelines } from './src/Guidelines'
 // eslint-disable-next-line no-restricted-imports
@@ -33,11 +34,17 @@ import { ToggleBlockquote } from './src/ToggleBlockquote'
 // eslint-disable-next-line no-restricted-imports
 import { V12ChangelogTable } from './src/V12ChangelogTable'
 
-const docsComponents = { Guidelines, Figure, ToggleBlockquote, V12ChangelogTable }
+const docsComponents = {
+  Guidelines,
+  Figure,
+  ToggleBlockquote,
+  V12ChangelogTable
+}
 
 const versions: Record<string, Record<string, any>> = {
   v11_6: { ...V11_6, ...docsComponents } as any,
   v11_7: { ...V11_7, ...docsComponents } as any,
+  v11_8: { ...V11_8, ...docsComponents } as any
 }
 
 /**
@@ -45,8 +52,6 @@ const versions: Record<string, Record<string, any>> = {
  * Version exports are merged with docs-specific components (Guidelines,
  * Figure, ToggleBlockquote, V12ChangelogTable). Defaults to v11_6.
  */
-export function getComponentsForVersion(
-  version?: string
-): Record<string, any> {
+export function getComponentsForVersion(version?: string): Record<string, any> {
   return versions[version ?? 'v11_6'] ?? versions['v11_6']
 }
