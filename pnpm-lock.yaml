@@ -494,6 +494,9 @@ importers:
       '@instructure/ui-simple-select':
         specifier: workspace:*
         version: link:../ui-simple-select
+      '@instructure/ui-skeleton':
+        specifier: workspace:*
+        version: link:../ui-skeleton
       '@instructure/ui-source-code-editor':
         specifier: workspace:*
         version: link:../ui-source-code-editor
@@ -928,6 +931,9 @@ importers:
       '@instructure/ui-simple-select':
         specifier: workspace:*
         version: link:../ui-simple-select
+      '@instructure/ui-skeleton':
+        specifier: workspace:*
+        version: link:../ui-skeleton
       '@instructure/ui-source-code-editor':
         specifier: workspace:*
         version: link:../ui-source-code-editor
@@ -3938,6 +3944,40 @@ importers:
         specifier: ^5.0.0
         version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
+  packages/ui-skeleton:
+    dependencies:
+      '@babel/runtime':
+        specifier: ^7.29.7
+        version: 7.29.7
+      '@instructure/emotion':
+        specifier: workspace:*
+        version: link:../emotion
+      '@instructure/shared-types':
+        specifier: workspace:*
+        version: link:../shared-types
+      '@instructure/ui-i18n':
+        specifier: workspace:*
+        version: link:../ui-i18n
+      '@instructure/ui-react-utils':
+        specifier: workspace:*
+        version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
+      react:
+        specifier: 18.3.1
+        version: 18.3.1
+    devDependencies:
+      '@instructure/ui-axe-check':
+        specifier: workspace:*
+        version: link:../ui-axe-check
+      '@instructure/ui-babel-preset':
+        specifier: workspace:*
+        version: link:../ui-babel-preset
+      vitest:
+        specifier: ^5.0.0
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+
   packages/ui-source-code-editor:
     dependencies:
       '@babel/runtime':
@@ -4941,6 +4981,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-skeleton':
+        specifier: workspace:*
+        version: link:../ui-skeleton
       '@instructure/ui-themes':
         specifier: workspace:*
         version: link:../ui-themes

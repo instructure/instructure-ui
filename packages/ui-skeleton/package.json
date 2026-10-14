@@ -1,0 +1,73 @@
+{
+  "name": "@instructure/ui-skeleton",
+  "version": "11.7.6",
+  "description": "Skeleton loader primitives that render a correctly sized placeholder from server HTML, with no DOM measurement.",
+  "author": "Instructure, Inc. Engineering and Product Design",
+  "module": "./es/index.js",
+  "main": "./lib/index.js",
+  "types": "./types/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/instructure/instructure-ui.git"
+  },
+  "homepage": "https://instructure.github.io/instructure-ui/",
+  "bugs": "https://github.com/instructure/instructure-ui/issues",
+  "scripts": {
+    "lint": "ui-scripts lint",
+    "lint:fix": "ui-scripts lint --fix",
+    "clean": "ui-scripts clean",
+    "build": "ui-scripts build --modules es,cjs",
+    "build:watch": "pnpm run ts:check -- --watch & ui-scripts build --watch",
+    "build:types": "tsc -p tsconfig.build.json",
+    "ts:check": "tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@babel/runtime": "^7.29.7",
+    "@instructure/emotion": "workspace:*",
+    "@instructure/shared-types": "workspace:*",
+    "@instructure/ui-i18n": "workspace:*",
+    "@instructure/ui-react-utils": "workspace:*",
+    "@instructure/ui-themes": "workspace:*"
+  },
+  "devDependencies": {
+    "@instructure/ui-axe-check": "workspace:*",
+    "@instructure/ui-babel-preset": "workspace:*",
+    "vitest": "^5.0.0"
+  },
+  "peerDependencies": {
+    "react": ">=18 <=19"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": false,
+  "exports": {
+    "./lib/*": "./lib/*",
+    "./es/*": "./es/*",
+    "./types/*": "./types/*",
+    "./package.json": "./package.json",
+    "./src/*": "./src/*",
+    ".": {
+      "src": "./src/index.ts",
+      "types": "./types/index.d.ts",
+      "import": "./es/index.js",
+      "require": "./lib/index.js",
+      "default": "./es/index.js"
+    },
+    "./v11_7": {
+      "src": "./src/index.ts",
+      "types": "./types/index.d.ts",
+      "import": "./es/index.js",
+      "require": "./lib/index.js",
+      "default": "./es/index.js"
+    },
+    "./latest": {
+      "src": "./src/index.ts",
+      "types": "./types/index.d.ts",
+      "import": "./es/index.js",
+      "require": "./lib/index.js",
+      "default": "./es/index.js"
+    }
+  }
+}

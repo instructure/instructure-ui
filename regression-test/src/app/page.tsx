@@ -55,6 +55,7 @@ const components = [
   'pagination',
   'progressbar',
   'select',
+  'skeleton',
   'table',
   'tabs',
   'treebrowser',

@@ -26,7 +26,10 @@ import { useContext } from 'react'
 import { ThemeProvider } from '@emotion/react'
 
 import { TextDirectionContext } from '@instructure/ui-i18n'
-import { DeterministicIdContextProvider } from '@instructure/ui-react-utils'
+import {
+  DeterministicIdContextProvider,
+  HydrationProvider
+} from '@instructure/ui-react-utils'
 
 import { getTheme } from '../getTheme.js'
 
@@ -143,7 +146,7 @@ function InstUISettingsProvider({
     <DeterministicIdContextProvider instanceCounterMap={instanceCounterMap}>
       <ThemeProvider theme={getTheme(theme, themeOverride)}>
         <TextDirectionContext.Provider value={finalDir}>
-          {children}
+          <HydrationProvider>{children}</HydrationProvider>
         </TextDirectionContext.Provider>
       </ThemeProvider>
     </DeterministicIdContextProvider>
