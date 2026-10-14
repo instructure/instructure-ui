@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.7.10](https://github.com/instructure/instructure-ui/compare/v11.7.8...v11.7.10) (2026-10-14)
+
+### Features
+
+* **ui-heading:** add AI Heading iconOnly sizes for every Heading variant ([#2738](https://github.com/instructure/instructure-ui/issues/2738)) ([b107d8f](https://github.com/instructure/instructure-ui/commit/b107d8f91673fc8a8835876075a9da6f4acbef03))
+
+
 ## [11.7.9](https://github.com/instructure/instructure-ui/compare/v11.7.8...v11.7.9) (2026-10-13)
 
 ### Features

@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-menu",
-  "version": "11.7.9",
+  "version": "11.7.10",
   "description": "A dropdown menu component",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
