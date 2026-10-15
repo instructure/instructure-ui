@@ -28,8 +28,69 @@ import { page, userEvent } from 'vitest/browser'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import type { MockInstance } from 'vitest'
 
+import { InstUISettingsProvider } from '@instructure/emotion'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { Tabs } from '@instructure/ui-tabs/latest'
+
+const tab = (name: string) =>
+  page.getByRole('tab', { name, includeHidden: true }).element() as HTMLElement
+
+// "Third" is disabled, so arrow navigation has to skip it. With `withStrayChild`
+// the panels no longer start at child index 0, which is the index every keyboard
+// helper has to resolve against.
+const KeyboardExample = (props: {
+  activationMode?: 'auto' | 'manual'
+  dir?: 'ltr' | 'rtl'
+  onChange?: (index: number) => void
+  withStrayChild?: boolean
+}) => {
+  const { activationMode, dir, onChange, withStrayChild } = props
+  const offset = withStrayChild ? 1 : 0
+  const [selectedIndex, setSelectedIndex] = useState(offset)
+
+  const tabs = (
+    <Tabs
+      activationMode={activationMode}
+      screenReaderLabel="Keyboard tabs"
+      onRequestTabChange={(_event, { index }) => {
+        setSelectedIndex(index)
+        onChange?.(index)
+      }}
+    >
+      {withStrayChild ? <span key="stray" /> : null}
+      <Tabs.Panel
+        id="one"
+        renderTitle="First"
+        isSelected={selectedIndex === offset}
+      >
+        First panel
+      </Tabs.Panel>
+      <Tabs.Panel
+        id="two"
+        renderTitle="Second"
+        isSelected={selectedIndex === offset + 1}
+      >
+        Second panel
+      </Tabs.Panel>
+      <Tabs.Panel id="three" renderTitle="Third" isDisabled>
+        Third panel
+      </Tabs.Panel>
+      <Tabs.Panel
+        id="four"
+        renderTitle="Fourth"
+        isSelected={selectedIndex === offset + 3}
+      >
+        Fourth panel
+      </Tabs.Panel>
+    </Tabs>
+  )
+
+  return dir ? (
+    <InstUISettingsProvider dir={dir}>{tabs}</InstUISettingsProvider>
+  ) : (
+    tabs
+  )
+}
 
 const TabExample = (props: { onIndexChange: (arg: number) => void }) => {
   const [selectedIndex, setSelectedIndex] = useState(0)
@@ -426,6 +487,298 @@ describe('<Tabs />', () => {
       const tabPanels = container.querySelectorAll('[role="tabpanel"]')
 
       expect(tabPanels.length).toBe(3)
+    })
+  })
+
+  describe('with a roving tabindex', () => {
+    it('should keep tabindex="0" on exactly one tab', async () => {
+      await render(<KeyboardExample />)
+
+      expect(tab('First')).toHaveAttribute('tabindex', '0')
+      expect(tab('Second')).toHaveAttribute('tabindex', '-1')
+      expect(tab('Fourth')).toHaveAttribute('tabindex', '-1')
+    })
+
+    it('should leave a disabled tab out of the tab sequence entirely', async () => {
+      await render(<KeyboardExample />)
+
+      expect(tab('Third')).not.toHaveAttribute('tabindex')
+    })
+
+    it('should let an unselected tab take focus', async () => {
+      await render(<KeyboardExample />)
+
+      tab('Second').focus()
+
+      expect(document.activeElement).toBe(tab('Second'))
+    })
+
+    it('should report aria-selected="false" on unselected tabs', async () => {
+      await render(<KeyboardExample />)
+
+      expect(tab('First')).toHaveAttribute('aria-selected', 'true')
+      expect(tab('Second')).toHaveAttribute('aria-selected', 'false')
+    })
+
+    it('should stay reachable when the first tab is disabled', async () => {
+      await render(
+        <Tabs>
+          <Tabs.Panel renderTitle="First Tab" isDisabled>
+            Tab 1 content
+          </Tabs.Panel>
+          <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
+        </Tabs>
+      )
+
+      expect(tab('First Tab')).not.toHaveAttribute('tabindex')
+      expect(tab('Second Tab')).toHaveAttribute('tabindex', '0')
+    })
+
+    it('should follow the tab the user clicked', async () => {
+      await render(<KeyboardExample activationMode="manual" />)
+
+      await userEvent.click(tab('Second'))
+
+      await vi.waitFor(() => {
+        expect(tab('Second')).toHaveAttribute('tabindex', '0')
+        expect(tab('First')).toHaveAttribute('tabindex', '-1')
+      })
+    })
+  })
+
+  describe('with automatic activation', () => {
+    it('should move focus along with the selection on each arrow press', async () => {
+      await render(<KeyboardExample />)
+
+      tab('First').focus()
+
+      await userEvent.keyboard('{ArrowRight}')
+      await vi.waitFor(() => {
+        expect(document.activeElement).toBe(tab('Second'))
+        expect(tab('Second')).toHaveAttribute('tabindex', '0')
+      })
+
+      // skips the disabled tab
+      await userEvent.keyboard('{ArrowRight}')
+      await vi.waitFor(() => {
+        expect(document.activeElement).toBe(tab('Fourth'))
+      })
+
+      await userEvent.keyboard('{ArrowLeft}')
+      await vi.waitFor(() => {
+        expect(document.activeElement).toBe(tab('Second'))
+      })
+    })
+
+    it('should navigate with the up and down arrows as well', async () => {
+      await render(<KeyboardExample />)
+
+      tab('First').focus()
+
+      await userEvent.keyboard('{ArrowDown}')
+      await vi.waitFor(() => {
+        expect(document.activeElement).toBe(tab('Second'))
+      })
+
+      await userEvent.keyboard('{ArrowUp}')
+      await vi.waitFor(() => {
+        expect(document.activeElement).toBe(tab('First'))
+      })
+    })
+
+    it('should select the first and last enabled tab with Home and End', async () => {
+      const onChange = vi.fn()
+      await render(<KeyboardExample onChange={onChange} />)
+
+      tab('First').focus()
+
+      await userEvent.keyboard('{End}')
+      await vi.waitFor(() => {
+        expect(onChange).toHaveBeenLastCalledWith(3)
+        expect(document.activeElement).toBe(tab('Fourth'))
+      })
+
+      await userEvent.keyboard('{Home}')
+      await vi.waitFor(() => {
+        expect(onChange).toHaveBeenLastCalledWith(0)
+        expect(document.activeElement).toBe(tab('First'))
+      })
+    })
+  })
+
+  describe('with manual activation', () => {
+    it('should move focus without selecting when arrowing', async () => {
+      const onChange = vi.fn()
+      await render(
+        <KeyboardExample activationMode="manual" onChange={onChange} />
+      )
+
+      tab('First').focus()
+      await userEvent.keyboard('{ArrowRight}')
+
+      await vi.waitFor(() => {
+        expect(document.activeElement).toBe(tab('Second'))
+      })
+      expect(onChange).not.toHaveBeenCalled()
+      expect(tab('First')).toHaveAttribute('aria-selected', 'true')
+      expect(tab('Second')).toHaveAttribute('aria-selected', 'false')
+    })
+
+    it('should keep the roving tabindex on the focused tab, not the selected one', async () => {
+      await render(<KeyboardExample activationMode="manual" />)
+
+      tab('First').focus()
+      await userEvent.keyboard('{ArrowRight}')
+
+      await vi.waitFor(() => {
+        expect(tab('Second')).toHaveAttribute('tabindex', '0')
+        expect(tab('First')).toHaveAttribute('tabindex', '-1')
+      })
+    })
+
+    it('should move focus without selecting with Home and End', async () => {
+      const onChange = vi.fn()
+      await render(
+        <KeyboardExample activationMode="manual" onChange={onChange} />
+      )
+
+      tab('First').focus()
+      await userEvent.keyboard('{End}')
+
+      await vi.waitFor(() => {
+        expect(document.activeElement).toBe(tab('Fourth'))
+      })
+      expect(onChange).not.toHaveBeenCalled()
+    })
+
+    for (const key of ['{Enter}', '{ }'] as const) {
+      it(`should select the focused tab on ${key}`, async () => {
+        const onChange = vi.fn()
+        await render(
+          <KeyboardExample activationMode="manual" onChange={onChange} />
+        )
+
+        tab('First').focus()
+        await userEvent.keyboard('{ArrowRight}')
+        await vi.waitFor(() => {
+          expect(document.activeElement).toBe(tab('Second'))
+        })
+        expect(onChange).not.toHaveBeenCalled()
+
+        await userEvent.keyboard(key)
+        await vi.waitFor(() => {
+          expect(onChange).toHaveBeenCalledWith(1)
+          expect(tab('Second')).toHaveAttribute('aria-selected', 'true')
+        })
+      })
+    }
+
+    it('should return the roving tabindex to the selected tab once focus leaves', async () => {
+      await render(
+        <>
+          <KeyboardExample activationMode="manual" />
+          <button id="after">after</button>
+        </>
+      )
+
+      tab('First').focus()
+      await userEvent.keyboard('{ArrowRight}')
+      await vi.waitFor(() => {
+        expect(tab('Second')).toHaveAttribute('tabindex', '0')
+      })
+
+      document.getElementById('after')!.focus()
+
+      await vi.waitFor(() => {
+        expect(tab('First')).toHaveAttribute('tabindex', '0')
+        expect(tab('Second')).toHaveAttribute('tabindex', '-1')
+      })
+    })
+
+    it('should meet a11y standards', async () => {
+      const { container } = await render(
+        <KeyboardExample activationMode="manual" />
+      )
+
+      const axeCheck = await runAxeCheck(container)
+
+      expect(axeCheck).toBe(true)
+    })
+  })
+
+  describe('with right-to-left text direction', () => {
+    it('should mirror the left and right arrows', async () => {
+      await render(<KeyboardExample dir="rtl" />)
+
+      tab('First').focus()
+
+      await userEvent.keyboard('{ArrowRight}')
+      await vi.waitFor(() => {
+        expect(document.activeElement).toBe(tab('Fourth'))
+      })
+
+      await userEvent.keyboard('{ArrowLeft}')
+      await vi.waitFor(() => {
+        expect(document.activeElement).toBe(tab('First'))
+      })
+    })
+
+    it('should not mirror Home and End', async () => {
+      await render(<KeyboardExample dir="rtl" />)
+
+      tab('First').focus()
+
+      await userEvent.keyboard('{End}')
+      await vi.waitFor(() => {
+        expect(document.activeElement).toBe(tab('Fourth'))
+      })
+
+      await userEvent.keyboard('{Home}')
+      await vi.waitFor(() => {
+        expect(document.activeElement).toBe(tab('First'))
+      })
+    })
+
+    it('should not mirror the up and down arrows', async () => {
+      await render(<KeyboardExample dir="rtl" />)
+
+      tab('First').focus()
+
+      await userEvent.keyboard('{ArrowDown}')
+      await vi.waitFor(() => {
+        expect(document.activeElement).toBe(tab('Second'))
+      })
+    })
+  })
+
+  describe('with a non-Panel child', () => {
+    it('should resolve Home and End against the real tab positions', async () => {
+      const onChange = vi.fn()
+      await render(<KeyboardExample withStrayChild onChange={onChange} />)
+
+      tab('First').focus()
+
+      await userEvent.keyboard('{End}')
+      await vi.waitFor(() => {
+        expect(onChange).toHaveBeenLastCalledWith(4)
+        expect(document.activeElement).toBe(tab('Fourth'))
+      })
+
+      await userEvent.keyboard('{Home}')
+      await vi.waitFor(() => {
+        expect(onChange).toHaveBeenLastCalledWith(1)
+        expect(document.activeElement).toBe(tab('First'))
+      })
+    })
+
+    it('should mark only one tab as selected', async () => {
+      await render(<KeyboardExample withStrayChild />)
+
+      expect(
+        page
+          .getByRole('tab', { selected: true, includeHidden: true })
+          .elements()
+      ).toHaveLength(1)
     })
   })
 

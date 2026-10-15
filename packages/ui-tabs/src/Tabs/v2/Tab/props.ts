@@ -35,12 +35,17 @@ type TabsTabOwnProps = {
   controls: string
   isDisabled?: boolean
   isSelected?: boolean
+  isTabbable?: boolean
   onClick?: (
     event: React.MouseEvent<ViewOwnProps>,
     tabData: { index: number; id: string }
   ) => void
   onKeyDown?: (
     event: React.KeyboardEvent<ViewOwnProps>,
+    tabData: { index: number; id: string }
+  ) => void
+  onFocus?: (
+    event: React.FocusEvent<ViewOwnProps>,
     tabData: { index: number; id: string }
   ) => void
   children?: Renderable
@@ -67,8 +72,10 @@ const allowedProps: AllowedPropKeys = [
   'controls',
   'isDisabled',
   'isSelected',
+  'isTabbable',
   'onClick',
   'onKeyDown',
+  'onFocus',
   'children',
   'isOverflowScroll'
 ]
