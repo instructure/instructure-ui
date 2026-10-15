@@ -112,6 +112,29 @@ describe('<BaseButton/>', () => {
     expect(button).toHaveAttribute('role', 'button')
   })
 
+  it('should let an explicit role override the default role', async () => {
+    const { container } = await render(
+      <BaseButton as="span" role="radio" onClick={vi.fn()}>
+        Hello World
+      </BaseButton>
+    )
+
+    expect(container.querySelector('span[type="button"]')).toHaveAttribute(
+      'role',
+      'radio'
+    )
+  })
+
+  it('should set an explicit role on a native button', async () => {
+    const { container } = await render(
+      <BaseButton role="radio" aria-checked="true">
+        Hello World
+      </BaseButton>
+    )
+
+    expect(container.querySelector('button')).toHaveAttribute('role', 'radio')
+  })
+
   it('should set tabIndex="0"', async () => {
     const onClick = vi.fn()
 
