@@ -63,6 +63,7 @@ class FocusRegion {
   private _active = false
   private _documentClickTarget: Node | null = null
   private _contextContainsTarget = false
+  private _hasMouseDownTarget = false
 
   constructor(element: Element | Node | null, options: FocusRegionOptions) {
     this._options = options || {
@@ -113,6 +114,7 @@ class FocusRegion {
       this._contextElement,
       this._documentClickTarget
     )
+    this._hasMouseDownTarget = true
     // Preemptively remove aria-hidden before focus moves to the clicked element
     // outside the region, preventing the "aria-hidden on focused ancestor" warning.
     if (
@@ -124,6 +126,20 @@ class FocusRegion {
   }
 
   handleDocumentClick = (event: React.PointerEvent) => {
+    // The region may become active between mousedown and click (e.g., when closing a
+    // Select inside a Modal). Since it missed the mousedown, check the click's event path.
+    // The path is a snapshot, so it remains valid even if a click handler removes the element.
+    let contextContainsTarget = this._contextContainsTarget
+    let clickTarget = this._documentClickTarget
+    if (!this._hasMouseDownTarget) {
+      const path = (event as unknown as Event).composedPath?.() ?? []
+      contextContainsTarget =
+        this._contextElement !== null && path.includes(this._contextElement)
+      clickTarget = event.target as Node
+    }
+
+    this._hasMouseDownTarget = false
+
     // we used event.pointerType === 'mouse' here, but it is not supported in Safari
     // https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/pointerType
     // TODO: Check this in the future, because the linked Webkit bug is marked as fixed in 2025-09
@@ -131,12 +147,12 @@ class FocusRegion {
       this._options.shouldCloseOnDocumentClick &&
       event.button === 0 &&
       event.detail > 0 && // if event.detail is 0 then this is a keyboard and not a mouse press
-      !this._contextContainsTarget &&
+      !contextContainsTarget &&
       //this prevents clicking on Tooltip from closing the parent dialog
       !(
         canUseDOM &&
-        this._documentClickTarget instanceof HTMLElement &&
-        this._documentClickTarget.closest('[role="tooltip"]')
+        clickTarget instanceof HTMLElement &&
+        clickTarget.closest('[role="tooltip"]')
       )
     ) {
       this.handleDismiss(event, true)
@@ -257,6 +273,7 @@ class FocusRegion {
 
   activate() {
     if (!this._active) {
+      this._hasMouseDownTarget = false
       this._keyboardFocusRegion.activate()
       this._screenReaderFocusRegion.activate()
       this.addOrRemoveListeners(
@@ -268,6 +285,7 @@ class FocusRegion {
   }
 
   deactivate({ keyboard = true }: { keyboard?: boolean } = {}) {
+    this._hasMouseDownTarget = false
     this._mouseDownListener?.remove()
     this._mouseDownListener = undefined
     this._clickListener?.remove()
