@@ -279,23 +279,31 @@ describe('<Checkbox />', () => {
   })
 
   describe('`toggle` variant', () => {
-    it('should expose a button role and pressed state', async () => {
+    it('should expose a switch role and checked state', async () => {
       await renderCheckbox({ variant: 'toggle', defaultChecked: true })
-      const toggle = page.getByRole('button').element()
+      const toggle = page.getByRole('switch').element()
 
-      expect(toggle).toHaveAttribute('aria-pressed', 'true')
+      expect(toggle).toBeChecked()
+      expect(toggle).not.toHaveAttribute('aria-pressed')
       expect(page.getByRole('checkbox').query()).not.toBeInTheDocument()
     })
 
-    it('should update the pressed state when toggled', async () => {
+    it('should update the checked state when toggled', async () => {
       await renderCheckbox({ variant: 'toggle', defaultChecked: false })
-      const toggle = page.getByRole('button')
+      const toggle = page.getByRole('switch')
 
-      await expect.element(toggle).toHaveAttribute('aria-pressed', 'false')
+      await expect.element(toggle).not.toBeChecked()
 
       await userEvent.click(toggle, { force: true })
 
-      await expect.element(toggle).toHaveAttribute('aria-pressed', 'true')
+      await expect.element(toggle).toBeChecked()
+    })
+
+    it('should expose the read-only state when readOnly', async () => {
+      await renderCheckbox({ variant: 'toggle', readOnly: true })
+      const toggle = page.getByRole('switch').element()
+
+      expect(toggle).toHaveAttribute('aria-readonly', 'true')
     })
 
     it('should leave the `simple` variant as a checkbox', async () => {
@@ -317,6 +325,16 @@ describe('<Checkbox />', () => {
 
     it('`toggle` variant should meet standards', async () => {
       const { container } = await renderCheckbox({ variant: 'toggle' })
+      const axeCheck = await runAxeCheck(container)
+
+      expect(axeCheck).toBe(true)
+    })
+
+    it('read-only `toggle` variant should meet standards', async () => {
+      const { container } = await renderCheckbox({
+        variant: 'toggle',
+        readOnly: true
+      })
       const axeCheck = await runAxeCheck(container)
 
       expect(axeCheck).toBe(true)
