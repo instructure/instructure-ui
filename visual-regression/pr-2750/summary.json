@@ -1,12 +1,12 @@
 {
   "summary": {
-    "total": 102,
-    "unchanged": 98,
-    "changed": 1,
+    "total": 108,
+    "unchanged": 103,
+    "changed": 2,
     "added": 3,
     "removed": 0,
-    "a11yPages": 0,
-    "a11yViolations": 0
+    "a11yPages": 3,
+    "a11yViolations": 9
   },
   "results": [
     {
@@ -53,8 +53,8 @@
     },
     {
       "name": "badge-canvas.png",
-      "status": "changed",
-      "numDiff": 1573,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false,
       "layoutShifted": false
     },
@@ -172,6 +172,27 @@
     },
     {
       "name": "calendar-light.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false,
+      "layoutShifted": false
+    },
+    {
+      "name": "card-canvas.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false,
+      "layoutShifted": false
+    },
+    {
+      "name": "card-dark.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false,
+      "layoutShifted": false
+    },
+    {
+      "name": "card-light.png",
       "status": "unchanged",
       "numDiff": 0,
       "sizeMismatch": false,
@@ -568,6 +589,27 @@
       "layoutShifted": false
     },
     {
+      "name": "skeleton-canvas.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false,
+      "layoutShifted": false
+    },
+    {
+      "name": "skeleton-dark.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false,
+      "layoutShifted": false
+    },
+    {
+      "name": "skeleton-light.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false,
+      "layoutShifted": false
+    },
+    {
       "name": "small-components-canvas.png",
       "status": "unchanged",
       "numDiff": 0,
@@ -653,15 +695,15 @@
     },
     {
       "name": "tooltip-canvas.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 894,
       "sizeMismatch": false,
       "layoutShifted": false
     },
     {
       "name": "tooltip-dark.png",
-      "status": "unchanged",
-      "numDiff": 0,
+      "status": "changed",
+      "numDiff": 881,
       "sizeMismatch": false,
       "layoutShifted": false
     },
@@ -715,5 +757,14 @@
       "layoutShifted": false
     }
   ],
-  "a11y": []
+  "a11y": [
+    {
+      "rule": "scrollable-region-focusable",
+      "impact": "serious",
+      "title": "Scrollable area cannot be reached by keyboard",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/scrollable-region-focusable?application=axeAPI",
+      "nodes": 9,
+      "screens": 3
+    }
+  ]
 }

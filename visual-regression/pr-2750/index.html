@@ -129,11 +129,12 @@
       <a href="https://github.com/instructure/instructure-ui/pull/2750" style="font-weight:600;color:#0969da;text-decoration:none;">PR #2750</a>
     </div>
     <div class="counts">
-      <span>Total: 102</span>
-      <span style="color:#1a7f37;">OK: 98</span>
-      <span style="color:#cf222e;">Changed: 1</span>
+      <span>Total: 108</span>
+      <span style="color:#1a7f37;">OK: 103</span>
+      <span style="color:#cf222e;">Changed: 2</span>
       <span style="color:#0969da;">New: 3</span>
       <span style="color:#9a6700;">Removed: 0</span>
+      <span style="color:#cf222e;">⚠ A11y: 9 on 3</span>
     </div>
     <div class="filter" id="status-filter">
       <button data-filter="all">All</button><button data-filter="changed" class="active">Changed</button><button data-filter="added">New</button><button data-filter="removed">Removed</button><button data-filter="unchanged">Unchanged</button><button data-filter="a11y">⚠ A11y</button>
@@ -146,7 +147,17 @@
       <button data-facet="canvas">canvas</button><button data-facet="light">light</button><button data-facet="dark">dark</button>
     </div>
   </header>
-  <main>
+  <main><details class="overview" open>
+    <summary><b>⚠ 9 accessibility issues</b> across 3 screenshots · 1 rule</summary>
+    <div class="ov-hint">Click a rule to see only the screenshots it affects. Click a screenshot’s ⚠ badge to see its issues boxed on the image.</div>
+    <div class="ov-rules"><button class="ov-rule" data-rule="scrollable-region-focusable">
+        <span class="impact serious">serious</span>
+        <span class="ov-title">Scrollable area cannot be reached by keyboard</span>
+        <code class="ov-id">scrollable-region-focusable</code>
+        <span class="ov-count"><b>9</b> elements</span>
+        <span class="ov-screens">3 screenshots</span>
+      </button></div>
+  </details>
     <section class="row" data-status="unchanged" data-name="alert-canvas.png" data-has-both="true" data-a11y="0" data-rules="" data-html-url="app/alert/?theme=canvas">
       <header><h2>alert-canvas.png</h2><span class="pill pass">ok</span><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/INSTUI-5203-segmented-control/regression-test/src/app/alert/page.tsx" target="_blank" rel="noopener">alert/page.tsx</a></header>
       <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/alert-canvas.png" data-name="alert-canvas.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/alert-canvas.png" data-name="alert-canvas.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
@@ -177,9 +188,9 @@
       <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/avatar-light.png" data-name="avatar-light.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/avatar-light.png" data-name="avatar-light.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
       
     </section>
-    <section class="row" data-status="changed" data-name="badge-canvas.png" data-has-both="true" data-a11y="0" data-rules="" data-html-url="app/badge/?theme=canvas">
-      <header><h2>badge-canvas.png</h2><span class="pill fail">changed</span><div class="meta">1573 pixels differ</div><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/INSTUI-5203-segmented-control/regression-test/src/app/badge/page.tsx" target="_blank" rel="noopener">badge/page.tsx</a></header>
-      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/badge-canvas.png" data-name="badge-canvas.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/badge-canvas.png" data-name="badge-canvas.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption><img loading="lazy" src="diff/badge-canvas.png" data-name="badge-canvas.png" data-mode="diff" class="thumb" /></figure></div>
+    <section class="row" data-status="unchanged" data-name="badge-canvas.png" data-has-both="true" data-a11y="0" data-rules="" data-html-url="app/badge/?theme=canvas">
+      <header><h2>badge-canvas.png</h2><span class="pill pass">ok</span><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/INSTUI-5203-segmented-control/regression-test/src/app/badge/page.tsx" target="_blank" rel="noopener">badge/page.tsx</a></header>
+      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/badge-canvas.png" data-name="badge-canvas.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/badge-canvas.png" data-name="badge-canvas.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
       
     </section>
     <section class="row" data-status="unchanged" data-name="badge-dark.png" data-has-both="true" data-a11y="0" data-rules="" data-html-url="app/badge/?theme=dark">
@@ -265,6 +276,21 @@
     <section class="row" data-status="unchanged" data-name="calendar-light.png" data-has-both="true" data-a11y="0" data-rules="" data-html-url="app/calendar/?theme=light">
       <header><h2>calendar-light.png</h2><span class="pill pass">ok</span><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/INSTUI-5203-segmented-control/regression-test/src/app/calendar/page.tsx" target="_blank" rel="noopener">calendar/page.tsx</a></header>
       <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/calendar-light.png" data-name="calendar-light.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/calendar-light.png" data-name="calendar-light.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
+      
+    </section>
+    <section class="row" data-status="unchanged" data-name="card-canvas.png" data-has-both="true" data-a11y="0" data-rules="" data-html-url="app/card/?theme=canvas">
+      <header><h2>card-canvas.png</h2><span class="pill pass">ok</span><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/INSTUI-5203-segmented-control/regression-test/src/app/card/page.tsx" target="_blank" rel="noopener">card/page.tsx</a></header>
+      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/card-canvas.png" data-name="card-canvas.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/card-canvas.png" data-name="card-canvas.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
+      
+    </section>
+    <section class="row" data-status="unchanged" data-name="card-dark.png" data-has-both="true" data-a11y="0" data-rules="" data-html-url="app/card/?theme=dark">
+      <header><h2>card-dark.png</h2><span class="pill pass">ok</span><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/INSTUI-5203-segmented-control/regression-test/src/app/card/page.tsx" target="_blank" rel="noopener">card/page.tsx</a></header>
+      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/card-dark.png" data-name="card-dark.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/card-dark.png" data-name="card-dark.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
+      
+    </section>
+    <section class="row" data-status="unchanged" data-name="card-light.png" data-has-both="true" data-a11y="0" data-rules="" data-html-url="app/card/?theme=light">
+      <header><h2>card-light.png</h2><span class="pill pass">ok</span><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/INSTUI-5203-segmented-control/regression-test/src/app/card/page.tsx" target="_blank" rel="noopener">card/page.tsx</a></header>
+      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/card-light.png" data-name="card-light.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/card-light.png" data-name="card-light.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
       
     </section>
     <section class="row" data-status="unchanged" data-name="checkbox-canvas.png" data-has-both="true" data-a11y="0" data-rules="" data-html-url="app/checkbox/?theme=canvas">
@@ -522,20 +548,137 @@
       <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/progressbar-light.png" data-name="progressbar-light.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/progressbar-light.png" data-name="progressbar-light.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
       
     </section>
-    <section class="row" data-status="added" data-name="segmentedcontrol-canvas.png" data-has-both="false" data-a11y="0" data-rules="" data-html-url="app/segmentedcontrol/?theme=canvas">
-      <header><h2>segmentedcontrol-canvas.png</h2><span class="pill new">new</span><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/INSTUI-5203-segmented-control/regression-test/src/app/segmentedcontrol/page.tsx" target="_blank" rel="noopener">segmentedcontrol/page.tsx</a></header>
+    <section class="row" data-status="added" data-name="segmentedcontrol-canvas.png" data-has-both="false" data-a11y="3" data-rules="scrollable-region-focusable" data-html-url="app/segmentedcontrol/?theme=canvas">
+      <header><h2>segmentedcontrol-canvas.png</h2><span class="pill new">new</span><button type="button" class="pill a11y" data-impact="serious" title="3 accessibility issues (worst: serious) — click to review them on the screenshot">⚠ 3 a11y</button><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/INSTUI-5203-segmented-control/regression-test/src/app/segmentedcontrol/page.tsx" target="_blank" rel="noopener">segmentedcontrol/page.tsx</a></header>
       <div class="grid"><figure><figcaption>Baseline</figcaption></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/segmentedcontrol-canvas.png" data-name="segmentedcontrol-canvas.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
-      
+      <template class="a11y-findings"><span class="mk" data-n="1" data-rule="scrollable-region-focusable" data-impact="serious" title="1. Scrollable area cannot be reached by keyboard" style="--x:82.213%;--y:79.800%;--w:25.296%;--h:5.600%"><b>1</b></span><span class="mk" data-n="2" data-rule="scrollable-region-focusable" data-impact="serious" title="2. Scrollable area cannot be reached by keyboard" style="--x:82.213%;--y:87.000%;--w:25.296%;--h:4.600%"><b>2</b></span><span class="mk" data-n="3" data-rule="scrollable-region-focusable" data-impact="serious" title="3. Scrollable area cannot be reached by keyboard" style="--x:82.213%;--y:93.200%;--w:25.296%;--h:3.600%"><b>3</b></span><article class="v-card" data-n="1" data-rule="scrollable-region-focusable" data-impact="serious">
+        <span class="v-num" data-impact="serious">1</span>
+        <div class="v-body">
+          <div class="v-head"><span class="impact serious">serious</span><h3>Scrollable area cannot be reached by keyboard</h3></div>
+          <div class="v-where">div (role=radiogroup) “overflow lg Jan disabled”</div><div class="v-fix">Give the scrollable container tabindex=&quot;0&quot; so keyboard users can scroll it.</div>
+          <details class="v-tech"><summary>Technical details</summary><dl>
+            <dt>Rule</dt><dd><a href="https://dequeuniversity.com/rules/axe/4.13/scrollable-region-focusable?application=axeAPI" target="_blank" rel="noopener">scrollable-region-focusable</a> — Scrollable region must have keyboard access</dd>
+            <dt>Selector</dt><dd><code>div[aria-label=&quot;overflow lg Jan disabled&quot;]</code></dd>
+            <dt>axe</dt><dd><pre>Fix any of the following:
+  Element should have focusable content
+  Element should be focusable</pre></dd>
+          </dl></details>
+        </div>
+      </article><article class="v-card" data-n="2" data-rule="scrollable-region-focusable" data-impact="serious">
+        <span class="v-num" data-impact="serious">2</span>
+        <div class="v-body">
+          <div class="v-head"><span class="impact serious">serious</span><h3>Scrollable area cannot be reached by keyboard</h3></div>
+          <div class="v-where">div (role=radiogroup) “overflow md Jan disabled”</div><div class="v-fix">Give the scrollable container tabindex=&quot;0&quot; so keyboard users can scroll it.</div>
+          <details class="v-tech"><summary>Technical details</summary><dl>
+            <dt>Rule</dt><dd><a href="https://dequeuniversity.com/rules/axe/4.13/scrollable-region-focusable?application=axeAPI" target="_blank" rel="noopener">scrollable-region-focusable</a> — Scrollable region must have keyboard access</dd>
+            <dt>Selector</dt><dd><code>div[aria-label=&quot;overflow md Jan disabled&quot;]</code></dd>
+            <dt>axe</dt><dd><pre>Fix any of the following:
+  Element should have focusable content
+  Element should be focusable</pre></dd>
+          </dl></details>
+        </div>
+      </article><article class="v-card" data-n="3" data-rule="scrollable-region-focusable" data-impact="serious">
+        <span class="v-num" data-impact="serious">3</span>
+        <div class="v-body">
+          <div class="v-head"><span class="impact serious">serious</span><h3>Scrollable area cannot be reached by keyboard</h3></div>
+          <div class="v-where">div (role=radiogroup) “overflow sm Jan disabled”</div><div class="v-fix">Give the scrollable container tabindex=&quot;0&quot; so keyboard users can scroll it.</div>
+          <details class="v-tech"><summary>Technical details</summary><dl>
+            <dt>Rule</dt><dd><a href="https://dequeuniversity.com/rules/axe/4.13/scrollable-region-focusable?application=axeAPI" target="_blank" rel="noopener">scrollable-region-focusable</a> — Scrollable region must have keyboard access</dd>
+            <dt>Selector</dt><dd><code>div[aria-label=&quot;overflow sm Jan disabled&quot;]</code></dd>
+            <dt>axe</dt><dd><pre>Fix any of the following:
+  Element should have focusable content
+  Element should be focusable</pre></dd>
+          </dl></details>
+        </div>
+      </article></template>
     </section>
-    <section class="row" data-status="added" data-name="segmentedcontrol-dark.png" data-has-both="false" data-a11y="0" data-rules="" data-html-url="app/segmentedcontrol/?theme=dark">
-      <header><h2>segmentedcontrol-dark.png</h2><span class="pill new">new</span><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/INSTUI-5203-segmented-control/regression-test/src/app/segmentedcontrol/page.tsx" target="_blank" rel="noopener">segmentedcontrol/page.tsx</a></header>
+    <section class="row" data-status="added" data-name="segmentedcontrol-dark.png" data-has-both="false" data-a11y="3" data-rules="scrollable-region-focusable" data-html-url="app/segmentedcontrol/?theme=dark">
+      <header><h2>segmentedcontrol-dark.png</h2><span class="pill new">new</span><button type="button" class="pill a11y" data-impact="serious" title="3 accessibility issues (worst: serious) — click to review them on the screenshot">⚠ 3 a11y</button><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/INSTUI-5203-segmented-control/regression-test/src/app/segmentedcontrol/page.tsx" target="_blank" rel="noopener">segmentedcontrol/page.tsx</a></header>
       <div class="grid"><figure><figcaption>Baseline</figcaption></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/segmentedcontrol-dark.png" data-name="segmentedcontrol-dark.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
-      
+      <template class="a11y-findings"><span class="mk" data-n="1" data-rule="scrollable-region-focusable" data-impact="serious" title="1. Scrollable area cannot be reached by keyboard" style="--x:82.213%;--y:79.688%;--w:25.296%;--h:5.469%"><b>1</b></span><span class="mk" data-n="2" data-rule="scrollable-region-focusable" data-impact="serious" title="2. Scrollable area cannot be reached by keyboard" style="--x:82.213%;--y:86.719%;--w:25.296%;--h:4.688%"><b>2</b></span><span class="mk" data-n="3" data-rule="scrollable-region-focusable" data-impact="serious" title="3. Scrollable area cannot be reached by keyboard" style="--x:82.213%;--y:92.969%;--w:25.296%;--h:3.906%"><b>3</b></span><article class="v-card" data-n="1" data-rule="scrollable-region-focusable" data-impact="serious">
+        <span class="v-num" data-impact="serious">1</span>
+        <div class="v-body">
+          <div class="v-head"><span class="impact serious">serious</span><h3>Scrollable area cannot be reached by keyboard</h3></div>
+          <div class="v-where">div (role=radiogroup) “overflow lg Jan disabled”</div><div class="v-fix">Give the scrollable container tabindex=&quot;0&quot; so keyboard users can scroll it.</div>
+          <details class="v-tech"><summary>Technical details</summary><dl>
+            <dt>Rule</dt><dd><a href="https://dequeuniversity.com/rules/axe/4.13/scrollable-region-focusable?application=axeAPI" target="_blank" rel="noopener">scrollable-region-focusable</a> — Scrollable region must have keyboard access</dd>
+            <dt>Selector</dt><dd><code>div[aria-label=&quot;overflow lg Jan disabled&quot;]</code></dd>
+            <dt>axe</dt><dd><pre>Fix any of the following:
+  Element should have focusable content
+  Element should be focusable</pre></dd>
+          </dl></details>
+        </div>
+      </article><article class="v-card" data-n="2" data-rule="scrollable-region-focusable" data-impact="serious">
+        <span class="v-num" data-impact="serious">2</span>
+        <div class="v-body">
+          <div class="v-head"><span class="impact serious">serious</span><h3>Scrollable area cannot be reached by keyboard</h3></div>
+          <div class="v-where">div (role=radiogroup) “overflow md Jan disabled”</div><div class="v-fix">Give the scrollable container tabindex=&quot;0&quot; so keyboard users can scroll it.</div>
+          <details class="v-tech"><summary>Technical details</summary><dl>
+            <dt>Rule</dt><dd><a href="https://dequeuniversity.com/rules/axe/4.13/scrollable-region-focusable?application=axeAPI" target="_blank" rel="noopener">scrollable-region-focusable</a> — Scrollable region must have keyboard access</dd>
+            <dt>Selector</dt><dd><code>div[aria-label=&quot;overflow md Jan disabled&quot;]</code></dd>
+            <dt>axe</dt><dd><pre>Fix any of the following:
+  Element should have focusable content
+  Element should be focusable</pre></dd>
+          </dl></details>
+        </div>
+      </article><article class="v-card" data-n="3" data-rule="scrollable-region-focusable" data-impact="serious">
+        <span class="v-num" data-impact="serious">3</span>
+        <div class="v-body">
+          <div class="v-head"><span class="impact serious">serious</span><h3>Scrollable area cannot be reached by keyboard</h3></div>
+          <div class="v-where">div (role=radiogroup) “overflow sm Jan disabled”</div><div class="v-fix">Give the scrollable container tabindex=&quot;0&quot; so keyboard users can scroll it.</div>
+          <details class="v-tech"><summary>Technical details</summary><dl>
+            <dt>Rule</dt><dd><a href="https://dequeuniversity.com/rules/axe/4.13/scrollable-region-focusable?application=axeAPI" target="_blank" rel="noopener">scrollable-region-focusable</a> — Scrollable region must have keyboard access</dd>
+            <dt>Selector</dt><dd><code>div[aria-label=&quot;overflow sm Jan disabled&quot;]</code></dd>
+            <dt>axe</dt><dd><pre>Fix any of the following:
+  Element should have focusable content
+  Element should be focusable</pre></dd>
+          </dl></details>
+        </div>
+      </article></template>
     </section>
-    <section class="row" data-status="added" data-name="segmentedcontrol-light.png" data-has-both="false" data-a11y="0" data-rules="" data-html-url="app/segmentedcontrol/?theme=light">
-      <header><h2>segmentedcontrol-light.png</h2><span class="pill new">new</span><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/INSTUI-5203-segmented-control/regression-test/src/app/segmentedcontrol/page.tsx" target="_blank" rel="noopener">segmentedcontrol/page.tsx</a></header>
+    <section class="row" data-status="added" data-name="segmentedcontrol-light.png" data-has-both="false" data-a11y="3" data-rules="scrollable-region-focusable" data-html-url="app/segmentedcontrol/?theme=light">
+      <header><h2>segmentedcontrol-light.png</h2><span class="pill new">new</span><button type="button" class="pill a11y" data-impact="serious" title="3 accessibility issues (worst: serious) — click to review them on the screenshot">⚠ 3 a11y</button><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/INSTUI-5203-segmented-control/regression-test/src/app/segmentedcontrol/page.tsx" target="_blank" rel="noopener">segmentedcontrol/page.tsx</a></header>
       <div class="grid"><figure><figcaption>Baseline</figcaption></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/segmentedcontrol-light.png" data-name="segmentedcontrol-light.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
-      
+      <template class="a11y-findings"><span class="mk" data-n="1" data-rule="scrollable-region-focusable" data-impact="serious" title="1. Scrollable area cannot be reached by keyboard" style="--x:82.213%;--y:79.688%;--w:25.296%;--h:5.469%"><b>1</b></span><span class="mk" data-n="2" data-rule="scrollable-region-focusable" data-impact="serious" title="2. Scrollable area cannot be reached by keyboard" style="--x:82.213%;--y:86.719%;--w:25.296%;--h:4.688%"><b>2</b></span><span class="mk" data-n="3" data-rule="scrollable-region-focusable" data-impact="serious" title="3. Scrollable area cannot be reached by keyboard" style="--x:82.213%;--y:92.969%;--w:25.296%;--h:3.906%"><b>3</b></span><article class="v-card" data-n="1" data-rule="scrollable-region-focusable" data-impact="serious">
+        <span class="v-num" data-impact="serious">1</span>
+        <div class="v-body">
+          <div class="v-head"><span class="impact serious">serious</span><h3>Scrollable area cannot be reached by keyboard</h3></div>
+          <div class="v-where">div (role=radiogroup) “overflow lg Jan disabled”</div><div class="v-fix">Give the scrollable container tabindex=&quot;0&quot; so keyboard users can scroll it.</div>
+          <details class="v-tech"><summary>Technical details</summary><dl>
+            <dt>Rule</dt><dd><a href="https://dequeuniversity.com/rules/axe/4.13/scrollable-region-focusable?application=axeAPI" target="_blank" rel="noopener">scrollable-region-focusable</a> — Scrollable region must have keyboard access</dd>
+            <dt>Selector</dt><dd><code>div[aria-label=&quot;overflow lg Jan disabled&quot;]</code></dd>
+            <dt>axe</dt><dd><pre>Fix any of the following:
+  Element should have focusable content
+  Element should be focusable</pre></dd>
+          </dl></details>
+        </div>
+      </article><article class="v-card" data-n="2" data-rule="scrollable-region-focusable" data-impact="serious">
+        <span class="v-num" data-impact="serious">2</span>
+        <div class="v-body">
+          <div class="v-head"><span class="impact serious">serious</span><h3>Scrollable area cannot be reached by keyboard</h3></div>
+          <div class="v-where">div (role=radiogroup) “overflow md Jan disabled”</div><div class="v-fix">Give the scrollable container tabindex=&quot;0&quot; so keyboard users can scroll it.</div>
+          <details class="v-tech"><summary>Technical details</summary><dl>
+            <dt>Rule</dt><dd><a href="https://dequeuniversity.com/rules/axe/4.13/scrollable-region-focusable?application=axeAPI" target="_blank" rel="noopener">scrollable-region-focusable</a> — Scrollable region must have keyboard access</dd>
+            <dt>Selector</dt><dd><code>div[aria-label=&quot;overflow md Jan disabled&quot;]</code></dd>
+            <dt>axe</dt><dd><pre>Fix any of the following:
+  Element should have focusable content
+  Element should be focusable</pre></dd>
+          </dl></details>
+        </div>
+      </article><article class="v-card" data-n="3" data-rule="scrollable-region-focusable" data-impact="serious">
+        <span class="v-num" data-impact="serious">3</span>
+        <div class="v-body">
+          <div class="v-head"><span class="impact serious">serious</span><h3>Scrollable area cannot be reached by keyboard</h3></div>
+          <div class="v-where">div (role=radiogroup) “overflow sm Jan disabled”</div><div class="v-fix">Give the scrollable container tabindex=&quot;0&quot; so keyboard users can scroll it.</div>
+          <details class="v-tech"><summary>Technical details</summary><dl>
+            <dt>Rule</dt><dd><a href="https://dequeuniversity.com/rules/axe/4.13/scrollable-region-focusable?application=axeAPI" target="_blank" rel="noopener">scrollable-region-focusable</a> — Scrollable region must have keyboard access</dd>
+            <dt>Selector</dt><dd><code>div[aria-label=&quot;overflow sm Jan disabled&quot;]</code></dd>
+            <dt>axe</dt><dd><pre>Fix any of the following:
+  Element should have focusable content
+  Element should be focusable</pre></dd>
+          </dl></details>
+        </div>
+      </article></template>
     </section>
     <section class="row" data-status="unchanged" data-name="select-canvas.png" data-has-both="true" data-a11y="0" data-rules="" data-html-url="app/select/?theme=canvas">
       <header><h2>select-canvas.png</h2><span class="pill pass">ok</span><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/INSTUI-5203-segmented-control/regression-test/src/app/select/page.tsx" target="_blank" rel="noopener">select/page.tsx</a></header>
@@ -550,6 +693,21 @@
     <section class="row" data-status="unchanged" data-name="select-light.png" data-has-both="true" data-a11y="0" data-rules="" data-html-url="app/select/?theme=light">
       <header><h2>select-light.png</h2><span class="pill pass">ok</span><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/INSTUI-5203-segmented-control/regression-test/src/app/select/page.tsx" target="_blank" rel="noopener">select/page.tsx</a></header>
       <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/select-light.png" data-name="select-light.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/select-light.png" data-name="select-light.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
+      
+    </section>
+    <section class="row" data-status="unchanged" data-name="skeleton-canvas.png" data-has-both="true" data-a11y="0" data-rules="" data-html-url="app/skeleton/?theme=canvas">
+      <header><h2>skeleton-canvas.png</h2><span class="pill pass">ok</span><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/INSTUI-5203-segmented-control/regression-test/src/app/skeleton/page.tsx" target="_blank" rel="noopener">skeleton/page.tsx</a></header>
+      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/skeleton-canvas.png" data-name="skeleton-canvas.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/skeleton-canvas.png" data-name="skeleton-canvas.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
+      
+    </section>
+    <section class="row" data-status="unchanged" data-name="skeleton-dark.png" data-has-both="true" data-a11y="0" data-rules="" data-html-url="app/skeleton/?theme=dark">
+      <header><h2>skeleton-dark.png</h2><span class="pill pass">ok</span><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/INSTUI-5203-segmented-control/regression-test/src/app/skeleton/page.tsx" target="_blank" rel="noopener">skeleton/page.tsx</a></header>
+      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/skeleton-dark.png" data-name="skeleton-dark.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/skeleton-dark.png" data-name="skeleton-dark.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
+      
+    </section>
+    <section class="row" data-status="unchanged" data-name="skeleton-light.png" data-has-both="true" data-a11y="0" data-rules="" data-html-url="app/skeleton/?theme=light">
+      <header><h2>skeleton-light.png</h2><span class="pill pass">ok</span><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/INSTUI-5203-segmented-control/regression-test/src/app/skeleton/page.tsx" target="_blank" rel="noopener">skeleton/page.tsx</a></header>
+      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/skeleton-light.png" data-name="skeleton-light.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/skeleton-light.png" data-name="skeleton-light.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
       
     </section>
     <section class="row" data-status="unchanged" data-name="small-components-canvas.png" data-has-both="true" data-a11y="0" data-rules="" data-html-url="app/small-components/?theme=canvas">
@@ -612,14 +770,14 @@
       <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/tabs-light.png" data-name="tabs-light.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/tabs-light.png" data-name="tabs-light.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
       
     </section>
-    <section class="row" data-status="unchanged" data-name="tooltip-canvas.png" data-has-both="true" data-a11y="0" data-rules="" data-html-url="app/tooltip/?theme=canvas">
-      <header><h2>tooltip-canvas.png</h2><span class="pill pass">ok</span><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/INSTUI-5203-segmented-control/regression-test/src/app/tooltip/page.tsx" target="_blank" rel="noopener">tooltip/page.tsx</a></header>
-      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/tooltip-canvas.png" data-name="tooltip-canvas.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/tooltip-canvas.png" data-name="tooltip-canvas.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
+    <section class="row" data-status="changed" data-name="tooltip-canvas.png" data-has-both="true" data-a11y="0" data-rules="" data-html-url="app/tooltip/?theme=canvas">
+      <header><h2>tooltip-canvas.png</h2><span class="pill fail">changed</span><div class="meta">894 pixels differ</div><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/INSTUI-5203-segmented-control/regression-test/src/app/tooltip/page.tsx" target="_blank" rel="noopener">tooltip/page.tsx</a></header>
+      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/tooltip-canvas.png" data-name="tooltip-canvas.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/tooltip-canvas.png" data-name="tooltip-canvas.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption><img loading="lazy" src="diff/tooltip-canvas.png" data-name="tooltip-canvas.png" data-mode="diff" class="thumb" /></figure></div>
       
     </section>
-    <section class="row" data-status="unchanged" data-name="tooltip-dark.png" data-has-both="true" data-a11y="0" data-rules="" data-html-url="app/tooltip/?theme=dark">
-      <header><h2>tooltip-dark.png</h2><span class="pill pass">ok</span><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/INSTUI-5203-segmented-control/regression-test/src/app/tooltip/page.tsx" target="_blank" rel="noopener">tooltip/page.tsx</a></header>
-      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/tooltip-dark.png" data-name="tooltip-dark.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/tooltip-dark.png" data-name="tooltip-dark.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption></figure></div>
+    <section class="row" data-status="changed" data-name="tooltip-dark.png" data-has-both="true" data-a11y="0" data-rules="" data-html-url="app/tooltip/?theme=dark">
+      <header><h2>tooltip-dark.png</h2><span class="pill fail">changed</span><div class="meta">881 pixels differ</div><a class="source-link" href="https://github.com/instructure/instructure-ui/blob/INSTUI-5203-segmented-control/regression-test/src/app/tooltip/page.tsx" target="_blank" rel="noopener">tooltip/page.tsx</a></header>
+      <div class="grid"><figure><figcaption>Baseline</figcaption><img loading="lazy" src="baseline/tooltip-dark.png" data-name="tooltip-dark.png" data-mode="baseline" class="thumb" /></figure><figure><figcaption>Actual</figcaption><img loading="lazy" src="actual/tooltip-dark.png" data-name="tooltip-dark.png" data-mode="actual" class="thumb" /></figure><figure><figcaption>Diff</figcaption><img loading="lazy" src="diff/tooltip-dark.png" data-name="tooltip-dark.png" data-mode="diff" class="thumb" /></figure></div>
       
     </section>
     <section class="row" data-status="unchanged" data-name="tooltip-light.png" data-has-both="true" data-a11y="0" data-rules="" data-html-url="app/tooltip/?theme=light">
