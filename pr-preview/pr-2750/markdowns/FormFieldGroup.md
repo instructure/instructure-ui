@@ -144,7 +144,7 @@ type: embed
 | FormFieldGroup | messagesId | `string` | No | - | id for the form field messages |
 | FormFieldGroup | disabled | `boolean` | No | `false` | Whether the field group is disabled. When true, the disabled prop is propagated to all child components, error and success messages will be hidden. |
 | FormFieldGroup | readOnly | `boolean` | No | - | Whether the field group is read-only. When true, error and success messages will be hidden. |
-| FormFieldGroup | children | `React.ReactNode` | No | - |  |
+| FormFieldGroup | children | `\| React.ReactNode \| ((params: FormFieldLayoutChildrenParams) => React.ReactNode)` | No | - | The form controls. Can be a function that receives `{ describedBy }`, so the controls can reference the group messages via `aria-describedby`. |
 | FormFieldGroup | layout | `'stacked' \| 'columns' \| 'inline'` | No | - |  |
 | FormFieldGroup | rowSpacing | `'none' \| 'small' \| 'medium' \| 'large'` | No | `'medium'` |  |
 | FormFieldGroup | colSpacing | `'none' \| 'small' \| 'medium' \| 'large'` | No | `'small'` |  |

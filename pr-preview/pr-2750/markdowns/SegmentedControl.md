@@ -129,11 +129,36 @@ type: example
 </div>
 ```
 
+### Overflow
+
+Set `isOverflown` when the options may not fit the available width. The options stay on one row and, once they are clipped, arrow buttons appear over the edges of the control to scroll them. Because the arrows need a name for screen readers, `isOverflown` requires `renderPreviousLabel` and `renderNextLabel`. The control fills at most the width of its container, so put it in a container of the width you want to limit it to.
+
+The arrows are an addition for pointer and touch users. Keyboard users reach every option with the arrow keys, and the selected option always scrolls into view.
+
+```js
+---
+type: example
+---
+<div style={{ width: '20rem' }}>
+  <SegmentedControl
+    aria-label="Month"
+    isOverflown
+    renderPreviousLabel="Show earlier months"
+    renderNextLabel="Show later months"
+    defaultValue="jan"
+  >
+    {['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'].map((month) => (
+      <SegmentedControl.Option key={month} value={month.toLowerCase()} renderLabel={month} />
+    ))}
+  </SegmentedControl>
+</div>
+```
+
 ### Accessibility
 
 `SegmentedControl` renders a `radiogroup` and each option is a `radio`. Give the group a name with `aria-label` or `aria-labelledby`, and give every icon-only option a `screenReaderLabel`.
 
-Only the selected option (or the first enabled one, when nothing is selected) is in the tab order. The arrow keys move focus to the next or previous enabled option and select it. In right-to-left layouts, Arrow Left and Arrow Right swap. Home and End jump to the first and last enabled option. Options must be direct children of `SegmentedControl`.
+Only the selected option (or the first enabled one, when nothing is selected) is in the tab order. The arrow keys move focus to the next or previous enabled option and select it. In right-to-left layouts, Arrow Left and Arrow Right swap. Home and End jump to the first and last enabled option. The overflow arrows are outside the `radiogroup`, so the group still contains only radios. Options must be direct children of `SegmentedControl`.
 
 ### Guidelines
 
@@ -167,6 +192,9 @@ type: embed
 | SegmentedControl | onChange | `(event: SyntheticEvent, value: string) => void` | No | - | Called with the event and the value of the option the user selected. |
 | SegmentedControl | size | `'sm' \| 'md' \| 'lg'` | No | - | The size of the control and its options. |
 | SegmentedControl | isDisabled | `boolean` | No | - | Disables every option. |
+| SegmentedControl | isOverflown | `boolean` | No | - | Keeps the options on one row and shows arrow buttons to scroll them when they don't fit the available width. |
+| SegmentedControl | renderPreviousLabel | `ReactNode \| (() => ReactNode)` | No | - | The accessible name of the arrow that scrolls back to the earlier options. Required with `isOverflown`. |
+| SegmentedControl | renderNextLabel | `ReactNode \| (() => ReactNode)` | No | - | The accessible name of the arrow that scrolls on to the later options. Required with `isOverflown`. |
 | SegmentedControl.SegmentedControlOption | value | `string` | Yes | - | The value passed to the `onChange` of the parent `SegmentedControl` when this option is selected. |
 | SegmentedControl.SegmentedControlOption | renderLabel | `Renderable` | No | - | The text shown in the option. |
 | SegmentedControl.SegmentedControlOption | renderIcon | `Renderable` | No | - | An icon shown in the option, before the label when both are given. |

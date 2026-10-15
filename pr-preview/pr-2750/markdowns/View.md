@@ -888,6 +888,42 @@ type: example
 </View>
 ```
 
+### Skeleton loading
+
+`isLoading` replaces the children with a placeholder that fills the View and
+sets `aria-busy`. Give the View a `width` and `height` so the page doesn't jump
+when the content loads.
+
+```js
+---
+type: example
+---
+<View
+  as="div"
+  isLoading
+  width="20rem"
+  height="8rem"
+  borderRadius="medium"
+/>
+```
+
+Use `skeletonShape="text"` with `skeletonLines` to show lines of text instead of
+a box. Set `skeletonAnimate={false}` to turn off the animation, for example in
+visual regression tests.
+
+```js
+---
+type: example
+---
+<View as="div" isLoading skeletonShape="text" skeletonLines={3} width="20rem" />
+```
+
+With `isLoading="untilHydrated"`, the server renders the skeleton and the
+children replace it once the page has hydrated.
+
+View doesn't announce loading to screen readers. Wrap the loading area in a
+[SkeletonLoader](#SkeletonLoader) for that.
+
 
 ### Props
 
@@ -927,6 +963,11 @@ type: example
 | View | cursor | `Cursor` | No | - | Specify a mouse cursor to use when hovering over the `<View />` |
 | View | overscrollBehavior | `'auto' \| 'contain' \| 'none'` | No | `'auto'` | Sets what a browser does when reaching the boundary of a scrolling area. Valid values are `auto`, `contain`, `none`. |
 | View | focusWithin | `boolean` | No | - | Display the focus ring when any of the descendants is focused. (uses the [:focus-within](https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-within) CSS selector) |
+| View | isLoading | `boolean \| 'untilHydrated'` | No | - | Shows a skeleton placeholder instead of `children`, and sets `aria-busy`. The placeholder fills the View, so set its `width` and `height`. - `true` / `false`: you decide when loading ends, e.g. after a data fetch. - `'untilHydrated'`: shows the skeleton until the page has hydrated. The View doesn't announce anything to screen readers. Wrap the loading area in a `SkeletonLoader` for that. |
+| View | skeletonShape | `SkeletonShapeType` | No | - | Which placeholder to show while `isLoading`. Defaults to `rectangle`. |
+| View | skeletonLines | `number` | No | - | Number of lines to draw when `skeletonShape="text"`. |
+| View | skeletonSize | `SkeletonSize` | No | - | Font size of the text the placeholder replaces, when `skeletonShape="text"`. |
+| View | skeletonAnimate | `boolean` | No | - | Set to `false` to turn off the skeleton animation, whatever the user's motion setting. Useful for snapshot and visual regression tests. |
 
 ### Usage
 
