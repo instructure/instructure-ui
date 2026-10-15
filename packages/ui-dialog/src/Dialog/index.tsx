@@ -92,10 +92,9 @@ class Dialog extends Component<DialogProps> {
   }
 
   open() {
-    const { open, contentElement, ...options } = this.props
-
     this._raf.push(
       requestAnimationFrame(() => {
+        const { open, contentElement, ...options } = this.props
         this._focusRegion = FocusRegionManager.activateRegion(
           this.contentElement as Element,
           {
