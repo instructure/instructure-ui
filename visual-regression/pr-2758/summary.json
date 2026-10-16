@@ -1,8 +1,8 @@
 {
   "summary": {
     "total": 105,
-    "unchanged": 103,
-    "changed": 2,
+    "unchanged": 105,
+    "changed": 0,
     "added": 0,
     "removed": 0,
     "a11yPages": 0,
@@ -683,15 +683,15 @@
     },
     {
       "name": "tooltip-canvas.png",
-      "status": "changed",
-      "numDiff": 894,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false,
       "layoutShifted": false
     },
     {
       "name": "tooltip-dark.png",
-      "status": "changed",
-      "numDiff": 881,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false,
       "layoutShifted": false
     },
