@@ -180,6 +180,95 @@ describe('<SourceCodeEditor />', () => {
     })
   })
 
+  describe('keyboard navigation', () => {
+    it('should focus the textbox with a single Tab', async () => {
+      await render(
+        <>
+          <button>before</button>
+          <SourceCodeEditor label="foo" defaultValue="const a = 2;" />
+        </>
+      )
+      page.getByRole('button').element().focus()
+
+      await userEvent.tab()
+
+      await vi.waitFor(() => {
+        expect(document.activeElement).toBe(page.getByRole('textbox').element())
+      })
+    })
+
+    it('should not make the scroll container focusable when the textbox is focusable', async () => {
+      const { container } = await render(
+        <SourceCodeEditor label="foo" defaultValue="const a = 2;" />
+      )
+
+      expect(container.querySelector('.cm-scroller')).not.toHaveAttribute(
+        'tabindex'
+      )
+    })
+
+    it('should not make the scroll container focusable when not editable and nothing overflows', async () => {
+      const { container } = await render(
+        <SourceCodeEditor
+          label="foo"
+          editable={false}
+          height="9rem"
+          defaultValue="const a = 2;"
+        />
+      )
+      const scroller = container.querySelector('.cm-scroller')
+
+      expect(scroller).not.toHaveAttribute('tabindex')
+      expect(scroller).not.toHaveAttribute('role')
+    })
+
+    it('should make a named, focusable region of the scroll container when not editable and it overflows', async () => {
+      const { container } = await render(
+        <SourceCodeEditor
+          label="foo"
+          editable={false}
+          height="3rem"
+          defaultValue={'a\n'.repeat(50)}
+        />
+      )
+      const scroller = container.querySelector('.cm-scroller')
+      const labelId = container.querySelector('[class$="-label"]')?.id
+
+      await vi.waitFor(() => {
+        expect(scroller).toHaveAttribute('tabindex', '0')
+        expect(scroller).toHaveAttribute('role', 'region')
+        expect(scroller).toHaveAttribute('aria-labelledby', labelId)
+      })
+    })
+
+    it('should update scroll container focusability when `editable` changes', async () => {
+      const value = 'a\n'.repeat(50)
+      const { container, rerender } = await render(
+        <SourceCodeEditor
+          label="foo"
+          editable={false}
+          height="3rem"
+          defaultValue={value}
+        />
+      )
+      const scroller = () => container.querySelector('.cm-scroller')
+      await vi.waitFor(() =>
+        expect(scroller()).toHaveAttribute('tabindex', '0')
+      )
+
+      await rerender(
+        <SourceCodeEditor
+          label="foo"
+          editable
+          height="3rem"
+          defaultValue={value}
+        />
+      )
+      await vi.waitFor(() => expect(scroller()).not.toHaveAttribute('tabindex'))
+      expect(scroller()).not.toHaveAttribute('role')
+    })
+  })
+
   describe('lineNumbers', () => {
     it('should display line numbers', async () => {
       const { container } = await render(
