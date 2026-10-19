@@ -610,7 +610,7 @@ describe('<Modal />', () => {
       const trigger = page.getByTestId('trigger').element()
       const tooltip = tooltipOf(trigger)
 
-      expect(tooltip).not.toBeVisible()
+      await vi.waitFor(() => expect(tooltip).not.toBeVisible())
 
       await userEvent.hover(page.getByTestId('trigger'))
       await vi.waitFor(() => expect(tooltip).toBeVisible())
@@ -636,7 +636,7 @@ describe('<Modal />', () => {
       const trigger = page.getByTestId('trigger').element()
       const tooltip = tooltipOf(trigger)
 
-      expect(tooltip).not.toBeVisible()
+      await vi.waitFor(() => expect(tooltip).not.toBeVisible())
 
       await userEvent.hover(page.getByTestId('trigger'))
       await vi.waitFor(() => expect(tooltip).toBeVisible())
@@ -654,7 +654,7 @@ describe('<Modal />', () => {
       const trigger = page.getByTestId('trigger').element()
       const tooltip = tooltipOf(trigger)
 
-      expect(tooltip).not.toBeVisible()
+      await vi.waitFor(() => expect(tooltip).not.toBeVisible())
 
       await userEvent.click(page.getByTestId('trigger'))
       await vi.waitFor(() => expect(tooltip).toBeVisible())

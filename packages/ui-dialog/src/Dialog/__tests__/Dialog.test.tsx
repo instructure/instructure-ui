@@ -26,6 +26,7 @@ import {
   forwardRef,
   useEffect,
   useImperativeHandle,
+  useLayoutEffect,
   useRef,
   useState
 } from 'react'
@@ -137,6 +138,33 @@ describe('<Dialog />', () => {
     await vi.waitFor(async () => {
       await userEvent.keyboard('{Escape}')
 
+      expect(onDismiss).toHaveBeenCalled()
+    })
+  })
+
+  it('should use props that change before its focus region activates', async () => {
+    // The Dialog activates its FocusRegion in a requestAnimationFrame
+    // callback. Props that changed between mounting and that frame were
+    // ignored, test this here
+    const onDismiss = vi.fn()
+    const Example = () => {
+      const [shouldCloseOnEscape, setShouldCloseOnEscape] = useState(false)
+      useLayoutEffect(() => setShouldCloseOnEscape(true), [])
+      return (
+        <Dialog
+          open
+          shouldCloseOnEscape={shouldCloseOnEscape}
+          onDismiss={onDismiss}
+          label={TEST_LABEL}
+        >
+          <button>{TEST_TEXT}</button>
+        </Dialog>
+      )
+    }
+    await render(<Example />)
+
+    await vi.waitFor(async () => {
+      await userEvent.keyboard('{Escape}')
       expect(onDismiss).toHaveBeenCalled()
     })
   })
