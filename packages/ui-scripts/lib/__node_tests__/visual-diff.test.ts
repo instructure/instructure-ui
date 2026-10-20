@@ -27,6 +27,7 @@ import { PNG } from 'pngjs'
 import {
   badgeFor,
   thumb,
+  imagesFor,
   indexByName,
   sourceLinkFor,
   appUrlFor,
@@ -106,6 +107,47 @@ describe('thumb', () => {
     const html = thumb('baseline', 'Button.png')
     expect(html).toContain('loading="lazy"')
     expect(html).toContain('class="thumb"')
+  })
+})
+
+describe('imagesFor', () => {
+  it('stores only the side that exists for added and removed screenshots', () => {
+    expect(imagesFor('added', false, false)).toEqual({
+      baseline: false,
+      actual: true
+    })
+    expect(imagesFor('removed', false, false)).toEqual({
+      baseline: true,
+      actual: false
+    })
+  })
+
+  it('stores nothing for an unchanged screenshot', () => {
+    expect(imagesFor('unchanged', false, false)).toEqual({
+      baseline: false,
+      actual: false
+    })
+  })
+
+  it('keeps the actual image of an unchanged screenshot that has a11y findings', () => {
+    expect(imagesFor('unchanged', true, false)).toEqual({
+      baseline: false,
+      actual: true
+    })
+  })
+
+  it('keeps both images when the screenshot only matches after a layout shift', () => {
+    expect(imagesFor('unchanged', false, true)).toEqual({
+      baseline: true,
+      actual: true
+    })
+  })
+
+  it('always keeps both images of a changed screenshot', () => {
+    expect(imagesFor('changed', false, false)).toEqual({
+      baseline: true,
+      actual: true
+    })
   })
 })
 
