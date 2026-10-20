@@ -32,6 +32,7 @@ Usage: `/slack-triage <slack-message-link>` — the permalink (or channel-id + t
 If `creds-missing` — or a Slack call later fails with `missing_scope` — **stop and tell the user to run `/slack-setup`**, then re-run. Don't inline the bootstrap.
 
 **0b. Discover tools at runtime** (names depend on the connected server):
+
 - `ToolSearch` `slack thread replies conversation history permalink` → read tools (no post tool needed).
 - `ToolSearch` `jira create issue project atlassian` → ticket creation.
 - `ToolSearch` `chrome devtools navigate page snapshot console network` → browser tools (Step 4).
@@ -45,6 +46,7 @@ Resolve the link to channel + timestamp; fetch the **whole thread** (root + all 
 ## Step 2 — Classify (confirm before proceeding)
 
 State the bucket explicitly:
+
 - **Question / usage** — "how do I", "is X supported", API confusion.
 - **Bug** — behaves wrong; look for repro, versions, component names.
 - **Feature request** — new capability or a prop/option that doesn't exist.
@@ -62,13 +64,14 @@ Validate **observable behavior**, not its cause — the WHY (root cause, introdu
 4. Check for **v1 and v2** versions (exports + README) before stating what's current.
 5. Cross-check published API at `https://instructure.design/markdowns/<Component>.md`.
 
-Establish and **confirm both with the user**: *what's happening* (observed, grounded in code) and *what should happen* (expected — propose your read for anything debatable). The gap between them *is* the ticket.
+Establish and **confirm both with the user**: _what's happening_ (observed, grounded in code) and _what should happen_ (expected — propose your read for anything debatable). The gap between them _is_ the ticket.
 
 **Light dup / known-issue check** (not a root-cause hunt): is it already fixed on `master` (quick look at the code path / recent `CHANGELOG.md`) or already tracked? Keep it shallow — you're checking whether a ticket is warranted. For a **feature request**, confirm the capability genuinely doesn't exist.
 
 ## Step 3b — Surface prior work (light leads, optional)
 
-Offer a couple of past Jira tickets/PRs that *might* be related, clearly hedged — to spot whether it's already fixed, tracked, or a regression. A light suggestion, not an investigation:
+Offer a couple of past Jira tickets/PRs that _might_ be related, clearly hedged — to spot whether it's already fixed, tracked, or a regression. A light suggestion, not an investigation:
+
 - PRs: `gh pr list --search "<keyword>" --state all --limit 10 --json number,title,url,mergedAt`.
 - Jira: a quick JQL search via the Atlassian MCP.
 
@@ -91,9 +94,27 @@ For a **confirmed bug** or actionable **feature request** (not plain usage quest
 
 - **Summary** — short, specific, includes the component name.
 - **Type** — Bug or Story/Task.
-- **Description** — what was reported; confirmed repro + expected-vs-actual (bugs) or use case (features); affected component/version; a **link back to the Slack thread**. Optionally list Step 3b items as *"possibly related"* (unverified). **No** root cause, introducing commit, or fix plan — that's `/implement`'s job.
+- **Description** — what was reported; confirmed repro + expected-vs-actual (bugs) or use case (features); affected component/version. Optionally list Step 3b items as _"possibly related"_ (unverified). **No** root cause, introducing commit, or fix plan — that's `/implement`'s job.
+- **Context Links** — **required**, see below.
 - **Labels / component** — best guess; user adjusts.
 - Project key (default `INSTUI`).
+
+### Context Links (required)
+
+End every description with this block, verbatim in shape:
+
+```
+Context Links
+Slack thread: <permalink of the thread's first message>
+Reported by (Slack): <reporter's Slack display name>
+```
+
+- The reporter is the **author of the thread's root message** — the person who raised it, not whoever answered or files the ticket.
+- Use the display name exactly as Slack shows it (`panna.kristof`, `Botond Tóth`), since it is what someone will type after `@` in the composer. Don't substitute a Jira name or an email.
+- **Don't touch the Jira Reporter field** — that stays the ticket's creator. This block is separate data for a different purpose.
+- If the thread has no identifiable human root author (a bot posted it, or the account is gone), write `Reported by (Slack): unknown` and say so — don't guess a name.
+
+`/release-notify` reads these two lines after a release to credit the reporter by name. It cannot recover them any other way, so a ticket created without this block silently drops that person.
 
 **Walk the user through the fields, let them adjust, and only after they approve, create it** via the Jira MCP. Report the issue key + link.
 
@@ -106,6 +127,7 @@ For a **confirmed bug** or actionable **feature request** (not plain usage quest
 - No internal file paths unless the audience is engineers.
 
 **Tone (match this, it matters):**
+
 - Short — a few sentences. Lead with the conclusion; cut throat-clearing and recaps.
 - Neutral and matter-of-fact. Mildly friendly is fine; **not** sugary — no "Thanks so much!", "Great catch!", "Hope this helps!", exclamation pile-ups, or praise.
 - **No emojis.**
@@ -118,4 +140,4 @@ Show the draft as a single clean, copy-pasteable fenced block. Refine with the u
 
 Recap: classification, whether the repro was confirmed, the ticket key if created, and that the reply draft is ready to post.
 
-If a ticket was created, **offer `/implement` as the next step** — run in *this* session so it inherits the full investigation (confirmed repro, `file:line`, v1/v2 notes), not just the ticket summary. The cause analysis this triage skipped is `/implement`'s first job.
+If a ticket was created, **offer `/implement` as the next step** — run in _this_ session so it inherits the full investigation (confirmed repro, `file:line`, v1/v2 notes), not just the ticket summary. The cause analysis this triage skipped is `/implement`'s first job.
