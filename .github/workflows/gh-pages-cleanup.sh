@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Remove pr-preview/pr-XY and visual-regression/pr-XY folders from gh-pages whose PR is
-# merged, closed or gone.
+# merged, closed or gone, then replace the branch history with a single commit.
 #
 # Needs GITHUB_TOKEN, GITHUB_REPOSITORY and `gh` in the environment.
 set -euo pipefail
@@ -41,33 +41,46 @@ done
 
 summary() { echo "$1"; [ -n "${GITHUB_STEP_SUMMARY:-}" ] && printf '%s\n\n' "$1" >> "$GITHUB_STEP_SUMMARY" || true; }
 
-if [ ${#STALE[@]} -eq 0 ]; then
+if [ ${#STALE[@]} -gt 0 ]; then
+  summary "$REPORT"
+else
   summary "No stale PR folders on $BRANCH."
-  exit 0
 fi
-
-summary "$REPORT"
 
 git config user.name "github-actions[bot]"
 git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-MESSAGE="chore: remove ${#STALE[@]} PR folder(s) of closed PRs from $BRANCH"
 
 for attempt in $(seq 1 "$ATTEMPTS"); do
-  git fetch --quiet --depth 1 origin "$BRANCH"
+  # depth 2 is enough to tell whether the tip has a parent
+  git fetch --quiet --depth 2 origin "$BRANCH"
   git reset --quiet --hard FETCH_HEAD
-  for dir in "${STALE[@]}"; do
-    [ -d "$dir" ] && git rm -r -q "$dir"
+  TIP="$(git rev-parse HEAD)"
+  HAS_HISTORY=false
+  git rev-parse --verify --quiet HEAD^ >/dev/null && HAS_HISTORY=true
+
+  REMOVED=0
+  for dir in ${STALE[@]+"${STALE[@]}"}; do
+    [ -d "$dir" ] && rm -rf "$dir" && REMOVED=$((REMOVED + 1))
   done
-  if git diff --cached --quiet; then
-    summary "Nothing left to remove; another run already cleaned up."
+
+  if [ "$REMOVED" -eq 0 ] && [ "$HAS_HISTORY" = false ]; then
+    summary "Nothing to remove and $BRANCH is already a single commit."
     exit 0
   fi
-  git commit --quiet -m "$MESSAGE"
-  if git push --quiet origin "HEAD:$BRANCH"; then
-    summary "Removed ${#STALE[@]} folder(s) from $BRANCH on attempt $attempt."
+
+  # an orphan commit drops the history, so blobs of removed folders are not kept in the branch
+  git checkout --quiet --orphan "${BRANCH}-squashed"
+  git add -A
+  git commit --quiet -m "chore: squash $BRANCH history (removed $REMOVED PR folder(s) of closed PRs)"
+
+  # the lease fails if a deploy pushed after the fetch, so a new commit is never overwritten
+  if git push --quiet --force-with-lease="refs/heads/${BRANCH}:${TIP}" origin "HEAD:refs/heads/${BRANCH}"; then
+    summary "Squashed $BRANCH to one commit and removed $REMOVED folder(s) on attempt $attempt."
     exit 0
   fi
   echo "Push rejected on attempt $attempt: $BRANCH moved. Retrying from the new tip."
+  git checkout --quiet --detach FETCH_HEAD
+  git branch --quiet -D "${BRANCH}-squashed"
   sleep $((attempt * 5))
 done
 
