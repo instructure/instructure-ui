@@ -41,8 +41,8 @@ import {
   withDeterministicId
 } from '@instructure/ui-react-utils'
 import { logError as error } from '@instructure/console'
-import { Focusable } from '@instructure/ui-focusable'
-import { getBoundingClientRect } from '@instructure/ui-dom-utils'
+import { textDirectionContextConsumer } from '@instructure/ui-i18n'
+import { contains, getBoundingClientRect } from '@instructure/ui-dom-utils'
 import type { RectType } from '@instructure/ui-dom-utils'
 import { debounce } from '@instructure/debounce'
 import type { Debounced } from '@instructure/debounce'
@@ -64,6 +64,15 @@ import type { TabsPanelProps } from './Panel/props'
 type TabChild = ComponentElement<TabsTabProps, any>
 type PanelChild = ComponentElement<TabsPanelProps, Panel>
 
+type TabDescriptor = {
+  index: number
+  tabDomId: string
+  panelDomId: string
+  isDisabled: boolean
+  isSelected: boolean
+  panel: PanelChild
+}
+
 /**
 ---
 category: components
@@ -71,6 +80,7 @@ category: components
 **/
 @withDeterministicId()
 @withStyleNew(generateStyle)
+@textDirectionContextConsumer()
 class Tabs extends Component<TabsProps, TabsState> {
   static displayName = 'Tabs'
   static readonly componentId = 'Tabs'
@@ -80,14 +90,14 @@ class Tabs extends Component<TabsProps, TabsState> {
   static defaultProps = {
     variant: 'default',
     shouldFocusOnRender: false,
-    tabOverflow: 'stack'
+    tabOverflow: 'stack',
+    activationMode: 'auto'
   }
 
   static Panel = Panel
   static Tab = Tab
 
   private _tabList: Element | null = null
-  private _focusable: Focusable | null = null
   private _tabListPosition?: RectType
   private _debounced?: Debounced<typeof this.handleResize>
   private _resizeListener?: ResizeObserver
@@ -252,30 +262,74 @@ class Tabs extends Component<TabsProps, TabsState> {
     }
   }
 
+  get isRtl() {
+    return this.props.dir === textDirectionContextConsumer.DIRECTION.rtl
+  }
+
   handleTabClick: TabsTabProps['onClick'] = (event, { index }) => {
-    const nextTab = this.getNextTab(index, 0)
-    this.fireOnChange(event, nextTab)
+    const target = this.getNextTab(this.getTabs(), index, 0)
+
+    if (target) {
+      this.fireOnChange(event, target)
+    }
   }
 
   handleTabKeyDown: TabsTabProps['onKeyDown'] = (event, { index }) => {
-    let nextTab
+    const tabs = this.getTabs()
+    let target: TabDescriptor | undefined
+    let isActivation = false
 
-    if (
-      event.keyCode === keycode.codes.up ||
-      event.keyCode === keycode.codes.left
-    ) {
-      // Select next tab to the left
-      nextTab = this.getNextTab(index, -1)
-    } else if (
-      event.keyCode === keycode.codes.down ||
-      event.keyCode === keycode.codes.right
-    ) {
-      // Select next tab to the right
-      nextTab = this.getNextTab(index, 1)
+    switch (event.keyCode) {
+      case keycode.codes.left:
+        target = this.getNextTab(tabs, index, this.isRtl ? 1 : -1)
+        break
+      case keycode.codes.right:
+        target = this.getNextTab(tabs, index, this.isRtl ? -1 : 1)
+        break
+      case keycode.codes.up:
+        target = this.getNextTab(tabs, index, -1)
+        break
+      case keycode.codes.down:
+        target = this.getNextTab(tabs, index, 1)
+        break
+      case keycode.codes.home:
+        target = this.getEdgeTab(tabs, 'first')
+        break
+      case keycode.codes.end:
+        target = this.getEdgeTab(tabs, 'last')
+        break
+      case keycode.codes.enter:
+      case keycode.codes.space:
+        target = this.getNextTab(tabs, index, 0)
+        isActivation = true
+        break
+      default:
+        return
     }
-    if (nextTab) {
-      event.preventDefault()
-      this.fireOnChange(event, nextTab)
+
+    event.stopPropagation()
+    event.preventDefault()
+
+    if (!target) {
+      return
+    }
+
+    if (isActivation || this.props.activationMode !== 'manual') {
+      this.fireOnChange(event, target)
+    }
+
+    this.focusTab(target.tabDomId)
+  }
+
+  handleTabFocus: TabsTabProps['onFocus'] = (_event, { id }) => {
+    if (this.state.focusedTabId !== id) {
+      this.setState({ focusedTabId: id })
+    }
+  }
+
+  handleTabListBlur = (event: React.FocusEvent) => {
+    if (!contains(event.currentTarget, event.relatedTarget)) {
+      this.setState({ focusedTabId: undefined })
     }
   }
 
@@ -288,75 +342,129 @@ class Tabs extends Component<TabsProps, TabsState> {
     this._tabListPosition = getBoundingClientRect(this._tabList)
   }
 
+  /**
+   * The single source of truth for tab order, ids and state.
+   */
+  getTabs(): TabDescriptor[] {
+    const panels: { index: number; panel: PanelChild }[] = []
+
+    Children.toArray(this.props.children).forEach((child, index) => {
+      if (matchComponentTypes<PanelChild>(child, [Panel])) {
+        panels.push({ index, panel: child as PanelChild })
+      }
+    })
+
+    const explicitlySelected = panels.find(
+      ({ panel }) => panel.props.isSelected && !panel.props.isDisabled
+    )
+    const fallbackIndex = explicitlySelected ? explicitlySelected.index : 0
+
+    return panels.map(({ index, panel }) => {
+      const baseId =
+        panel.props.id || this.props.deterministicId!(`Tabs_${index}`)
+      const isDisabled = !!panel.props.isDisabled
+
+      return {
+        index,
+        tabDomId: `tab-${baseId}`,
+        panelDomId: panel.props.id || `panel-${baseId}`,
+        isDisabled,
+        isSelected:
+          !isDisabled && (!!panel.props.isSelected || index === fallbackIndex),
+        panel
+      }
+    })
+  }
+
   getNextTab(
+    tabs: TabDescriptor[],
     startIndex: number,
     step: -1 | 0 | 1
-  ): { index: number; id?: string } {
-    const tabs = Children.toArray(this.props.children).map(
-      (child) => matchComponentTypes<PanelChild>(child, [Panel]) && child
-    ) as PanelChild[]
+  ): TabDescriptor | undefined {
     const count = tabs.length
-    const change = step < 0 ? step + count : step
+    const from = tabs.findIndex((tab) => tab.index === startIndex)
 
-    error(
-      startIndex >= 0 && startIndex < count,
-      `[Tabs] Invalid tab index: '${startIndex}'.`
+    error(from >= 0, `[Tabs] Invalid tab index: '${startIndex}'.`)
+
+    if (from < 0) {
+      return undefined
+    }
+
+    if (step === 0) {
+      return tabs[from]
+    }
+
+    for (let offset = 1; offset <= count; offset++) {
+      const candidate = tabs[(((from + step * offset) % count) + count) % count]
+
+      if (!candidate.isDisabled) {
+        return candidate
+      }
+    }
+
+    return undefined
+  }
+
+  getEdgeTab(
+    tabs: TabDescriptor[],
+    edge: 'first' | 'last'
+  ): TabDescriptor | undefined {
+    const enabled = tabs.filter((tab) => !tab.isDisabled)
+
+    return edge === 'first' ? enabled[0] : enabled[enabled.length - 1]
+  }
+
+  getRovingTabId(tabs: TabDescriptor[]): string | undefined {
+    const { focusedTabId } = this.state
+    const focused = tabs.find(
+      (tab) => tab.tabDomId === focusedTabId && !tab.isDisabled
     )
 
-    let nextIndex = startIndex
-    let nextTab: PanelChild
-
-    do {
-      nextIndex = (nextIndex + change) % count
-      nextTab = tabs[nextIndex]
-    } while (nextTab && nextTab.props && nextTab.props.isDisabled)
-
-    error(
-      nextIndex >= 0 && nextIndex < count,
-      `[Tabs] Invalid tab index: '${nextIndex}'.`
+    return (
+      focused?.tabDomId ??
+      tabs.find((tab) => tab.isSelected)?.tabDomId ??
+      tabs.find((tab) => !tab.isDisabled)?.tabDomId
     )
-    return { index: nextIndex, id: nextTab.props.id }
   }
 
   fireOnChange(
     event: React.MouseEvent<ViewOwnProps> | React.KeyboardEvent<ViewOwnProps>,
-    { index, id }: { index: number; id?: string }
+    { index, panel, tabDomId }: TabDescriptor
   ) {
     if (typeof this.props.onRequestTabChange === 'function') {
-      this.props.onRequestTabChange(event, { index, id })
+      this.props.onRequestTabChange(event, { index, id: panel.props.id })
     }
 
-    // this is needed because keypress cancels scrolling. So we have to trigger the scrolling
+    this.scrollTabIntoView(tabDomId)
+  }
+
+  scrollTabIntoView(tabDomId: string) {
     // one "tick" later than the keypress
     setTimeout(() => {
       if (this.state.withTabListOverflow) {
-        const tab = id
-          ? this._tabList!.querySelector(`#tab-${CSS.escape(id)}`)
-          : null
-        this.showActiveTabIfOverlayed(tab)
+        this.showActiveTabIfOverlayed(
+          this._tabList!.querySelector(`#${CSS.escape(tabDomId)}`)
+        )
       }
     }, 0)
   }
 
-  createTab(
-    index: number,
-    generatedId: string,
-    selected: boolean,
-    panel: PanelChild
-  ): TabChild {
-    const id = panel.props.id || generatedId
+  createTab(tab: TabDescriptor, isTabbable: boolean): TabChild {
+    const { index, tabDomId, panelDomId, isSelected, isDisabled, panel } = tab
 
     return (
       <Tab
         variant={this.props.variant}
         key={`tab-${index}`}
-        id={`tab-${id}`}
-        controls={panel.props.id || `panel-${id}`}
+        id={tabDomId}
+        controls={panelDomId}
         index={index}
-        isSelected={selected}
-        isDisabled={panel.props.isDisabled}
+        isSelected={isSelected}
+        isDisabled={isDisabled}
+        isTabbable={isTabbable}
         onClick={this.handleTabClick}
         onKeyDown={this.handleTabKeyDown}
+        onFocus={this.handleTabFocus}
         isOverflowScroll={this.props.tabOverflow === 'scroll'}
       >
         {panel.props.renderTitle}
@@ -364,22 +472,16 @@ class Tabs extends Component<TabsProps, TabsState> {
     )
   }
 
-  clonePanel(
-    index: number,
-    generatedId: string,
-    selected: boolean,
-    panel: PanelChild,
-    activePanel?: PanelChild
-  ) {
-    const id = panel.props.id || generatedId
+  clonePanel(tab: TabDescriptor, activePanel?: PanelChild) {
+    const { index, tabDomId, panelDomId, isSelected, panel } = tab
 
     // fixHeight can be 0, so simply `fixheight` could return falsy value
     const hasFixedHeight = typeof this.props.fixHeight !== 'undefined'
 
     const commonProps = {
-      id: panel.props.id || `panel-${id}`,
-      labelledBy: `tab-${id}`,
-      isSelected: selected,
+      id: panelDomId,
+      labelledBy: tabDomId,
+      isSelected,
       variant: this.props.variant,
       maxHeight: !hasFixedHeight ? this.props.maxHeight : undefined,
       minHeight: !hasFixedHeight ? this.props.minHeight : '100%'
@@ -408,18 +510,25 @@ class Tabs extends Component<TabsProps, TabsState> {
     }
   }
 
-  handleFocusableRef = (el: Focusable | null) => {
-    this._focusable = el
-  }
-
   handleTabListRef = (el: Element | null) => {
     this._tabList = el
   }
 
   focus() {
-    this._focusable &&
-      typeof this._focusable.focus === 'function' &&
-      this._focusable.focus()
+    this.focusTab(this.getRovingTabId(this.getTabs()))
+  }
+
+  focusTab(tabDomId?: string) {
+    if (!tabDomId) {
+      return
+    }
+
+    const tab = this._tabList?.querySelector<HTMLElement>(
+      `#${CSS.escape(tabDomId)}`
+    )
+
+    tab?.focus()
+    this.scrollTabIntoView(tabDomId)
   }
 
   handleScroll = (
@@ -456,40 +565,37 @@ class Tabs extends Component<TabsProps, TabsState> {
       onRequestTabChange,
       tabOverflow,
       styles,
+      dir,
       ...props
     } = this.props
 
-    const activePanels = (Children.toArray(children) as PanelChild[])
-      .filter((child) => matchComponentTypes<PanelChild>(child, [Panel]))
-      .filter((child) => child.props.active)
+    const tabDescriptors = this.getTabs()
+    const rovingTabId = this.getRovingTabId(tabDescriptors)
+    const tabsByIndex = new Map(tabDescriptors.map((tab) => [tab.index, tab]))
+
+    const activePanels = tabDescriptors
+      .map((tab) => tab.panel)
+      .filter((panel) => panel.props.active)
 
     if (activePanels.length > 1) {
       error(false, `[Tabs] Only one Panel can be marked as active.`)
     }
 
-    const selectedChildIndex = (Children.toArray(children) as PanelChild[])
-      .filter((child) => matchComponentTypes<PanelChild>(child, [Panel]))
-      .findIndex((child) => child.props.isSelected && !child.props.isDisabled)
+    Children.toArray(children).forEach((child, index) => {
+      const tab = tabsByIndex.get(index)
 
-    const selectedIndex = selectedChildIndex >= 0 ? selectedChildIndex : 0
-    Children.toArray(children).map((child, index) => {
-      if (matchComponentTypes<PanelChild>(child, [Panel])) {
-        const selected =
-          !child.props.isDisabled &&
-          (child.props.isSelected || selectedIndex === index)
-        const id = this.props.deterministicId!(`Tabs_${index}`)
-
-        tabs.push(this.createTab(index, id, selected, child))
-        if (activePanels.length === 1) {
-          panels.push(
-            this.clonePanel(index, id, selected, child, activePanels[0])
-          )
-        } else {
-          panels.push(this.clonePanel(index, id, selected, child))
-        }
-      } else {
+      if (!tab) {
         panels.push(child as PanelChild)
+        return
       }
+
+      tabs.push(this.createTab(tab, tab.tabDomId === rovingTabId))
+      panels.push(
+        this.clonePanel(
+          tab,
+          activePanels.length === 1 ? activePanels[0] : undefined
+        )
+      )
     })
 
     const withScrollFade =
@@ -514,30 +620,27 @@ class Tabs extends Component<TabsProps, TabsState> {
         css={styles?.container}
         data-cid="Tabs"
       >
-        <Focusable ref={this.handleFocusableRef}>
-          {() => (
-            <View
-              as="div"
-              position="relative"
-              borderRadius="medium"
-              shouldAnimateFocus={false}
-              css={styles?.tabs}
-            >
-              <View
-                as="div"
-                role="tablist"
-                css={styles?.tabList}
-                aria-label={screenReaderLabel}
-                elementRef={this.handleTabListRef}
-                onScroll={this.handleScroll}
-              >
-                {tabs}
-                {withScrollFade && startScrollOverlay}
-                {withScrollFade && endScrollOverlay}
-              </View>
-            </View>
-          )}
-        </Focusable>
+        <View
+          as="div"
+          position="relative"
+          borderRadius="medium"
+          shouldAnimateFocus={false}
+          css={styles?.tabs}
+        >
+          <View
+            as="div"
+            role="tablist"
+            css={styles?.tabList}
+            aria-label={screenReaderLabel}
+            elementRef={this.handleTabListRef}
+            onScroll={this.handleScroll}
+            onBlur={this.handleTabListBlur}
+          >
+            {tabs}
+            {withScrollFade && startScrollOverlay}
+            {withScrollFade && endScrollOverlay}
+          </View>
+        </View>
 
         <div css={styles?.panelsContainer}>{panels}</div>
       </View>
