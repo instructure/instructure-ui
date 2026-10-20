@@ -45,24 +45,28 @@ const generateStyle = (
       height: componentTheme.heightXSmall,
       paddingInline: componentTheme.paddingHorizontal,
       fontSize: componentTheme.textFontSize,
+      lineHeight: componentTheme.lineHeight,
       gap: componentTheme.gapIconLabel
     },
     small: {
       height: componentTheme.height,
       paddingInline: componentTheme.paddingHorizontal,
       fontSize: componentTheme.textFontSize,
+      lineHeight: componentTheme.lineHeight,
       gap: componentTheme.gapIconLabel
     },
     medium: {
       height: componentTheme.heightMedium,
       paddingInline: componentTheme.paddingHorizontalMedium,
       fontSize: componentTheme.textFontSizeMedium,
+      lineHeight: componentTheme.lineHeightMedium,
       gap: componentTheme.gapIconLabelMedium
     },
     large: {
       height: componentTheme.heightLarge,
       paddingInline: componentTheme.paddingHorizontalLarge,
       fontSize: componentTheme.textFontSizeLarge,
+      lineHeight: componentTheme.lineHeightLarge,
       gap: componentTheme.gapIconLabelLarge
     }
   }
@@ -130,7 +134,7 @@ const generateStyle = (
     }
   }
 
-  const { fontSize, ...sizeStyles } = sizeVariants[size]
+  const { fontSize, lineHeight, ...sizeStyles } = sizeVariants[size]
 
   return {
     pill: {
@@ -161,7 +165,7 @@ const generateStyle = (
       label: 'pill__text',
       boxSizing: 'border-box',
       fontSize,
-      lineHeight: componentTheme.lineHeight,
+      lineHeight,
       fontWeight: componentTheme.textFontWeight,
       whiteSpace: 'nowrap'
     }
