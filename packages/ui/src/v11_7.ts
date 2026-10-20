@@ -183,6 +183,8 @@ export type {
   FormMessageType,
   FormMessageChild
 } from '@instructure/ui-form-field/v11_7'
+export { GlobalNav } from '@instructure/ui-global-nav/v11_7'
+export type { GlobalNavProps } from '@instructure/ui-global-nav/v11_7'
 export { Grid, GridRow, GridCol } from '@instructure/ui-grid/v11_7'
 export type {
   GridProps,

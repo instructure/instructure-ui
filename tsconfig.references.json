@@ -115,6 +115,9 @@
       "path": "./packages/ui-form-field/tsconfig.build.json"
     },
     {
+      "path": "./packages/ui-global-nav/tsconfig.build.json"
+    },
+    {
       "path": "./packages/ui-grid/tsconfig.build.json"
     },
     {

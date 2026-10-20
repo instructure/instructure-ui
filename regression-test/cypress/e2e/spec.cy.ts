@@ -162,6 +162,7 @@ const PAGES: PageSpec[] = [
   { slug: 'drilldown', title: 'Drilldown', wait: 300 },
   { slug: 'filedrop', title: 'Filedrop' },
   { slug: 'form-errors', title: 'Form errors', wait: 300 },
+  { slug: 'global-nav', title: 'GlobalNav' },
   { slug: 'heading', title: 'Heading' },
   { slug: 'img', title: 'Img', wait: 100 },
   {
