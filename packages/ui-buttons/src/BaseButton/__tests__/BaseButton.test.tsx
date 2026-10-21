@@ -440,6 +440,73 @@ describe('<BaseButton/>', () => {
           .element()
         expect(button).toHaveAttribute('disabled')
       })
+
+      it('sets aria-disabled on a button element', async () => {
+        await render(
+          <BaseButton interaction="disabled">Hello World</BaseButton>
+        )
+
+        const button = page
+          .getByRole('button', { name: 'Hello World' })
+          .element()
+        expect(button).toHaveAttribute('aria-disabled', 'true')
+      })
+
+      it('sets aria-disabled on a link element', async () => {
+        await render(
+          <BaseButton interaction="disabled" href="https://example.com">
+            Hello World
+          </BaseButton>
+        )
+
+        const link = page.getByRole('link', { name: 'Hello World' }).element()
+        expect(link).toHaveAttribute('aria-disabled', 'true')
+      })
+
+      it('sets aria-disabled when rendered as a non-native element', async () => {
+        await render(
+          <BaseButton interaction="disabled" as="span" onClick={vi.fn()}>
+            Hello World
+          </BaseButton>
+        )
+
+        const button = page
+          .getByRole('button', { name: 'Hello World' })
+          .element()
+        expect(button).toHaveAttribute('aria-disabled', 'true')
+      })
+
+      it('meets a11y requirements as a button and as a link', async () => {
+        await render(
+          <div>
+            <BaseButton interaction="disabled">Disabled button</BaseButton>
+            <BaseButton interaction="disabled" href="https://example.com">
+              Disabled link
+            </BaseButton>
+          </div>
+        )
+
+        const button = page
+          .getByRole('button', { name: 'Disabled button' })
+          .element()
+        const link = page.getByRole('link', { name: 'Disabled link' }).element()
+
+        await vi.waitFor(async () => {
+          expect(await runAxeCheck(button)).toBe(true)
+          expect(await runAxeCheck(link)).toBe(true)
+        })
+      })
+    })
+
+    describe('when enabled', () => {
+      it('does not set aria-disabled', async () => {
+        await render(
+          <BaseButton href="https://example.com">Hello World</BaseButton>
+        )
+
+        const link = page.getByRole('link', { name: 'Hello World' }).element()
+        expect(link).not.toHaveAttribute('aria-disabled')
+      })
     })
 
     describe('when readonly', () => {
