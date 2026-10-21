@@ -27,7 +27,9 @@
     "@instructure/emotion": "workspace:*",
     "@instructure/shared-types": "workspace:*",
     "@instructure/ui-react-utils": "workspace:*",
-    "@instructure/ui-themes": "workspace:*"
+    "@instructure/ui-themes": "workspace:*",
+    "@instructure/ui-img": "workspace:*",
+    "@instructure/ui-heading": "workspace:*"
   },
   "devDependencies": {
     "@instructure/ui-axe-check": "workspace:*",

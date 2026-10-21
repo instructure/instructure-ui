@@ -83,8 +83,8 @@ export type {
   CalendarDayProps,
   CalendarProps
 } from '@instructure/ui-calendar/v11_7'
-export { Card } from '@instructure/ui-card/v11_7'
-export type { CardProps } from '@instructure/ui-card/v11_7'
+export { Card, ImageCard } from '@instructure/ui-card/v11_7'
+export type { CardProps, ImageCardProps } from '@instructure/ui-card/v11_7'
 export {
   Checkbox,
   CheckboxGroup,
