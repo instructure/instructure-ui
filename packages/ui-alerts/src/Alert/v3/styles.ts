@@ -26,17 +26,6 @@ import { boxShadowObjectsToCSSString } from '@instructure/ui-themes'
 import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import type { AlertStyle, AlertStyleParams } from './props'
 
-// TODO: replace with Alert tokens once the design team adds them
-// (text/baseColor and text/baseOnColor). These are the light theme values,
-// so dark themes have the wrong text color until then.
-const TEXT_COLOR = '#273540'
-const TEXT_COLOR_ON_COLOR = '#ffffff'
-
-// TODO: ask the design team to remove these unused tokens:
-// - dangerIconBackground, infoIconBackground, successIconBackground,
-//   warningIconBackground (v3 has no icon box)
-// - iconPaddingVertical (the icon is aligned to the first line of text)
-
 /**
  * ---
  * private: true
@@ -88,7 +77,9 @@ const generateStyle = (
     alert: {
       label: 'alert',
       color:
-        isProminent && variant !== 'warning' ? TEXT_COLOR_ON_COLOR : TEXT_COLOR,
+        isProminent && variant !== 'warning'
+          ? componentTheme.textOnColor
+          : componentTheme.textBase,
       background: isProminent ? colors.background : colors.backgroundInline,
       boxSizing: 'border-box',
       display: 'flex',
@@ -109,10 +100,6 @@ const generateStyle = (
       flexShrink: 0,
       display: 'flex',
       alignItems: 'center',
-      //height: '1lh',
-      //fontSize: componentTheme.contentFontSize,
-      //lineHeight: componentTheme.contentLineHeight,
-      //paddingBlock: componentTheme.contentPaddingVertical,
       paddingBlock: componentTheme.iconPaddingVertical,
       paddingInlineStart: componentTheme.iconPaddingLeft,
       paddingInlineEnd: componentTheme.iconPaddingRight
@@ -131,8 +118,7 @@ const generateStyle = (
       fontSize: componentTheme.contentFontSize,
       fontFamily: componentTheme.contentFontFamily,
       fontWeight: componentTheme.contentFontWeight,
-      //lineHeight: componentTheme.contentLineHeight,
-      lineHeight: '24px',
+      lineHeight: componentTheme.contentLineHeight,
       padding: `${componentTheme.contentPaddingVertical} ${componentTheme.contentPaddingHorizontal}`
     },
     variantScreenReaderLabel: {
