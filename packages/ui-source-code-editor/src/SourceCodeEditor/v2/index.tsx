@@ -156,6 +156,7 @@ class SourceCodeEditor extends Component<
 
   private _searchPanelId = 0
   private _isUnmounting = false
+  private _resizeObserver?: ResizeObserver
 
   private _newSelectionAfterValueChange?: EditorSelection
 
@@ -327,13 +328,8 @@ class SourceCodeEditor extends Component<
       parent: this._containerRef
     })
 
-    // from the a11y team:
-    // axe devtools and other automated a11y tests both flagging this issue,
-    // which can be observed while navigating with keyboard:
-    // Ensure elements that have scrollable content are accessible by keyboard
-    // To solve this problem, you need to fix at least (1) of the following:
-    // Element should have focusable content, Element should be focusable
-    this._editorView.scrollDOM.tabIndex = 0
+    this.updateScrollerFocusability()
+    this.observeScrollerOverflow()
 
     if (autofocus) {
       this.focus()
@@ -347,6 +343,7 @@ class SourceCodeEditor extends Component<
 
   componentWillUnmount() {
     this._isUnmounting = true
+    this._resizeObserver?.disconnect()
     this._editorView?.destroy()
 
     this.cancelAnimationFrames()
@@ -652,6 +649,40 @@ class SourceCodeEditor extends Component<
 
   refreshExtensions() {
     this.dispatchViewEffects(StateEffect.reconfigure.of(this.extensions))
+    this.updateScrollerFocusability()
+  }
+
+  // a scrollable region must be keyboard reachable (axe: scrollable-region-focusable).
+  // An editable textbox already is, so the scroller only needs a tab stop when the
+  // textbox can't take focus and the content actually overflows.
+  private updateScrollerFocusability() {
+    const scroller = this._editorView?.scrollDOM
+    if (!scroller) return
+
+    const overflows =
+      scroller.scrollHeight > scroller.clientHeight ||
+      scroller.scrollWidth > scroller.clientWidth
+
+    if (this.props.editable === false && overflows) {
+      scroller.tabIndex = 0
+      scroller.setAttribute('role', 'region')
+      scroller.setAttribute('aria-labelledby', this._id)
+    } else {
+      scroller.removeAttribute('tabindex')
+      scroller.removeAttribute('role')
+      scroller.removeAttribute('aria-labelledby')
+    }
+  }
+
+  // overflow changes with content, wrapping and container size
+  private observeScrollerOverflow() {
+    if (!this._editorView || typeof ResizeObserver === 'undefined') return
+
+    this._resizeObserver = new ResizeObserver(() =>
+      this.updateScrollerFocusability()
+    )
+    this._resizeObserver.observe(this._editorView.scrollDOM)
+    this._resizeObserver.observe(this._editorView.contentDOM)
   }
 
   refreshEditorValue() {
