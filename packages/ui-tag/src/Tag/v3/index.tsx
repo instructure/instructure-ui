@@ -23,6 +23,7 @@
  */
 
 import { forwardRef, useImperativeHandle, useRef, useState } from 'react'
+import type { RefObject } from 'react'
 
 import { XInstUIIcon, renderIconWithProps } from '@instructure/ui-icons'
 import { View } from '@instructure/ui-view/latest'
@@ -57,6 +58,7 @@ const Tag = forwardRef<TagHandle, TagProps>((props, ref) => {
   } = props
 
   const [iconHovered, setIconHovered] = useState(false)
+  const rootRef = useRef<Element | null>(null)
   const linkRef = useRef<HTMLAnchorElement | null>(null)
   const closeRef = useRef<HTMLButtonElement | null>(null)
 
@@ -85,12 +87,15 @@ const Tag = forwardRef<TagHandle, TagProps>((props, ref) => {
         return (
           isActiveElement(linkRef.current) || isActiveElement(closeRef.current)
         )
-      }
+      },
+      // findDOMNode (used by Popover, Tooltip and Position) reads this
+      ref: rootRef
     }),
     []
   )
 
   const handleRef = (element: Element | null) => {
+    rootRef.current = element
     if (typeof elementRef === 'function') {
       elementRef(element)
     }
@@ -176,6 +181,7 @@ Tag.displayName = 'Tag'
 interface TagHandle {
   focus: () => void
   readonly focused: boolean
+  readonly ref: RefObject<Element | null>
 }
 
 export default Tag
