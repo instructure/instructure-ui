@@ -37,3 +37,6 @@ export type { TableColHeaderProps } from '../Table/v2/ColHeader/props'
 export type { TableHeadProps } from '../Table/v2/Head/props'
 export type { TableRowProps } from '../Table/v2/Row/props'
 export type { TableRowHeaderProps } from '../Table/v2/RowHeader/props'
+
+export { DataGrid } from '../DataGrid/index.js'
+export type { DataGridProps } from '../DataGrid/props'
