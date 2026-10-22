@@ -47,6 +47,7 @@ const components = [
   'drilldown',
   'filedrop',
   'form-errors',
+  'global-nav',
   'heading',
   'img',
   'link',
