@@ -1,10 +1,11 @@
 name: Sweep stale PR folders from gh-pages
 
-# Cleanup files in the gh-pages branch for merged and closed PRs.
+# Cleanup files in the gh-pages branch for merged and closed PRs and squash its history to one commit.
 on:
   schedule:
     # run once a day at 03:00 UTC
     - cron: '0 3 * * *'
+  workflow_dispatch:
 
 permissions:
   contents: write
