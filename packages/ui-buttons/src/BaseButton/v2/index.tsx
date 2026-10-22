@@ -339,6 +339,8 @@ class BaseButton extends Component<BaseButtonProps> {
         role={onClick && as !== 'button' ? 'button' : undefined}
         tabIndex={tabIndexValue}
         disabled={isDisabled || isReadOnly}
+        // disabled is invalid on <a> and role="button" elements for screen readers
+        aria-disabled={isDisabled ? 'true' : undefined}
         css={styles?.baseButton}
         withFocusOutline={withFocusOutline}
         data-cid={combineDataCid('BaseButton', this.props)}
