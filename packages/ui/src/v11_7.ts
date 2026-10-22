@@ -397,6 +397,7 @@ export type {
 export { InlineSVG, SVGIcon } from '@instructure/ui-svg-images'
 export type { InlineSVGProps, SVGIconProps } from '@instructure/ui-svg-images'
 export {
+  DataGrid,
   Table,
   TableContext,
   TableBody,
@@ -407,6 +408,7 @@ export {
   TableRowHeader
 } from '@instructure/ui-table/v11_7'
 export type {
+  DataGridProps,
   TableBodyProps,
   TableCellProps,
   TableProps,
