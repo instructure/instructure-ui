@@ -1,8 +1,8 @@
 {
   "summary": {
-    "total": 99,
-    "unchanged": 86,
-    "changed": 13,
+    "total": 105,
+    "unchanged": 93,
+    "changed": 12,
     "added": 0,
     "removed": 0,
     "a11yPages": 0,
@@ -53,8 +53,8 @@
     },
     {
       "name": "badge-canvas.png",
-      "status": "changed",
-      "numDiff": 1573,
+      "status": "unchanged",
+      "numDiff": 0,
       "sizeMismatch": false,
       "layoutShifted": false
     },
@@ -178,6 +178,27 @@
       "layoutShifted": false
     },
     {
+      "name": "card-canvas.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false,
+      "layoutShifted": false
+    },
+    {
+      "name": "card-dark.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false,
+      "layoutShifted": false
+    },
+    {
+      "name": "card-light.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false,
+      "layoutShifted": false
+    },
+    {
       "name": "checkbox-canvas.png",
       "status": "unchanged",
       "numDiff": 0,
@@ -222,7 +243,7 @@
     {
       "name": "colorpicker-canvas.png",
       "status": "changed",
-      "numDiff": 316,
+      "numDiff": 810,
       "sizeMismatch": false,
       "layoutShifted": false
     },
@@ -327,7 +348,7 @@
     {
       "name": "drilldown-canvas.png",
       "status": "changed",
-      "numDiff": 130,
+      "numDiff": 246,
       "sizeMismatch": false,
       "layoutShifted": false
     },
@@ -556,23 +577,44 @@
       "layoutShifted": false
     },
     {
+      "name": "skeleton-canvas.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false,
+      "layoutShifted": false
+    },
+    {
+      "name": "skeleton-dark.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false,
+      "layoutShifted": false
+    },
+    {
+      "name": "skeleton-light.png",
+      "status": "unchanged",
+      "numDiff": 0,
+      "sizeMismatch": false,
+      "layoutShifted": false
+    },
+    {
       "name": "small-components-canvas.png",
       "status": "changed",
-      "numDiff": 251970,
+      "numDiff": 251804,
       "sizeMismatch": true,
       "layoutShifted": false
     },
     {
       "name": "small-components-dark.png",
       "status": "changed",
-      "numDiff": 298427,
+      "numDiff": 298756,
       "sizeMismatch": true,
       "layoutShifted": false
     },
     {
       "name": "small-components-light.png",
       "status": "changed",
-      "numDiff": 271027,
+      "numDiff": 271293,
       "sizeMismatch": true,
       "layoutShifted": false
     },
@@ -642,7 +684,7 @@
     {
       "name": "tooltip-canvas.png",
       "status": "changed",
-      "numDiff": 65,
+      "numDiff": 1274,
       "sizeMismatch": false,
       "layoutShifted": false
     },
@@ -656,7 +698,7 @@
     {
       "name": "tooltip-light.png",
       "status": "changed",
-      "numDiff": 830,
+      "numDiff": 1786,
       "sizeMismatch": false,
       "layoutShifted": false
     },
