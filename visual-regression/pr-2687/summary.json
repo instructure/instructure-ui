@@ -684,21 +684,21 @@
     {
       "name": "tooltip-canvas.png",
       "status": "changed",
-      "numDiff": 7305,
+      "numDiff": 1210,
       "sizeMismatch": false,
       "layoutShifted": false
     },
     {
       "name": "tooltip-dark.png",
       "status": "changed",
-      "numDiff": 7002,
+      "numDiff": 98,
       "sizeMismatch": false,
       "layoutShifted": false
     },
     {
       "name": "tooltip-light.png",
       "status": "changed",
-      "numDiff": 7028,
+      "numDiff": 1052,
       "sizeMismatch": false,
       "layoutShifted": false
     },
