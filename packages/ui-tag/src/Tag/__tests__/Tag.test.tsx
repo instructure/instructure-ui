@@ -172,6 +172,17 @@ describe('<Tag />', async () => {
     expect(tagRef!.focused).toBe(true)
   })
 
+  it('should expose its root element through the ref', async () => {
+    let tagRef: TagHandle | null = null
+    const { container } = await render(
+      <Tag text="Summer" ref={(el) => (tagRef = el)} />
+    )
+
+    expect(tagRef!.ref.current).toBe(
+      container.querySelector('[data-cid="Tag"]')
+    )
+  })
+
   it('should meet a11y standards', async () => {
     const { container } = await render(<Tag text="Summer" />)
     const axeCheck = await runAxeCheck(container)
