@@ -48,6 +48,7 @@
     "@instructure/ui-flex": "workspace:*",
     "@instructure/ui-focusable": "workspace:*",
     "@instructure/ui-form-field": "workspace:*",
+    "@instructure/ui-global-nav": "workspace:*",
     "@instructure/ui-grid": "workspace:*",
     "@instructure/ui-heading": "workspace:*",
     "@instructure/ui-i18n": "workspace:*",

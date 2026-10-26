@@ -120,6 +120,9 @@
       "path": "../ui-form-field/tsconfig.build.json"
     },
     {
+      "path": "../ui-global-nav/tsconfig.build.json"
+    },
+    {
       "path": "../ui-grid/tsconfig.build.json"
     },
     {
