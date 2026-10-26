@@ -177,7 +177,7 @@ export default function TooltipPage() {
     <Spinner renderTitle="Spinner" size="x-small" />,
     <Tag text="Tag" margin="0 x-small 0 0" />,
     <Text>Text component</Text>,
-    <TextArea label="This is a TextArea" />,
+    <TextArea label="This is a TextArea" width="14rem" />,
     <TextInput renderLabel="This is a TextInput" />,
     <View>
       <Text>This is a View</Text>
