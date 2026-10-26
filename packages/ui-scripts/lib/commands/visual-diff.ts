@@ -368,6 +368,24 @@ export function thumb(mode: string, name: string): string {
   return `<img loading="lazy" src="${mode}/${name}" data-name="${name}" data-mode="${mode}" class="thumb" />`
 }
 
+/**
+ * Which screenshots the report stores for a result. The a11y view draws on the actual image,
+ * so that one is kept when the screenshot has findings.
+ * @internal — exported only for tests; not part of the package's public API.
+ */
+export function imagesFor(
+  status: Status,
+  hasA11yFindings: boolean,
+  layoutShifted: boolean
+): { baseline: boolean; actual: boolean } {
+  if (status === 'added') return { baseline: false, actual: true }
+  if (status === 'removed') return { baseline: true, actual: false }
+  if (status === 'unchanged' && !layoutShifted) {
+    return { baseline: false, actual: hasA11yFindings }
+  }
+  return { baseline: true, actual: true }
+}
+
 // ---------------------------------------------------------------------------
 // Accessibility reporting
 //
@@ -940,8 +958,10 @@ function row(
   appPath?: string,
   a11y: A11y | null = null
 ): string {
-  const b = r.status === 'added' ? '' : thumb('baseline', r.name)
-  const a = r.status === 'removed' ? '' : thumb('actual', r.name)
+  const { findings, page } = findingsFor(r.name, a11y)
+  const images = imagesFor(r.status, findings.length > 0, !!r.layoutShifted)
+  const b = images.baseline ? thumb('baseline', r.name) : ''
+  const a = images.actual ? thumb('actual', r.name) : ''
   const d = r.status === 'changed' ? thumb('diff', r.name) : ''
   const pixelMeta =
     r.status === 'changed'
@@ -950,22 +970,28 @@ function row(
         }</div>`
       : r.layoutShifted
       ? `<div class="meta">layout shifted · ${r.numDiff} pixels differ before realignment</div>`
+      : r.status === 'unchanged' && !images.baseline
+      ? `<div class="meta">identical to the baseline, so the image is not stored</div>`
       : ''
   const source = sourceLinkFor(r.name, meta, sourceBaseUrl)
-  const hasBoth = r.status === 'changed' || r.status === 'unchanged'
+  const hasBoth =
+    (r.status === 'changed' || r.status === 'unchanged') &&
+    images.baseline &&
+    images.actual
   // A 'removed' screenshot has no current page to render, so offer the live
   // HTML view only when the page still exists (added/changed/unchanged).
   const htmlUrl =
     r.status === 'removed' ? '' : appUrlFor(r.name, meta, facets, appPath)
   const htmlAttr = htmlUrl ? ` data-html-url="${htmlUrl}"` : ''
-  const { findings, page } = findingsFor(r.name, a11y)
   // Which rules this row trips, so the overview's rule filter can hide the
   // whole row without reaching into the findings.
   const rules = [...new Set(findings.map((f) => f.rule))].join(' ')
   return `
     <section class="row" data-status="${r.status}" data-name="${
     r.name
-  }" data-has-both="${hasBoth}" data-a11y="${
+  }" data-has-both="${hasBoth}" data-baseline="${
+    images.baseline
+  }" data-actual="${images.actual}" data-a11y="${
     findings.length
   }" data-rules="${esc(rules)}"${htmlAttr}>
       <header><h2>${r.name}</h2>${badgeFor(r.status)}${a11yBadge(
@@ -1316,14 +1342,20 @@ function renderHtml(
         })
 
         const availableModes = {
-          baseline: status !== 'added',
-          actual: status !== 'removed',
+          baseline: row.dataset.baseline === 'true',
+          actual: row.dataset.actual === 'true',
           diff: status === 'changed',
           slider: hasBoth,
           a11y: a11yCount > 0,
           html: !!htmlUrl
         }
-        if (!availableModes[state.mode]) state.mode = availableModes.diff ? 'diff' : (availableModes.actual ? 'actual' : 'baseline')
+        if (!availableModes[state.mode]) {
+          state.mode = availableModes.diff ? 'diff'
+            : availableModes.actual ? 'actual'
+            : availableModes.baseline ? 'baseline'
+            : availableModes.html ? 'html'
+            : 'none'
+        }
         lbViewer.classList.toggle('a11y', state.mode === 'a11y')
 
         if (state.mode === 'a11y') {
@@ -1416,6 +1448,8 @@ function renderHtml(
           window.addEventListener('mouseup', () => { dragging = false })
           wrap.addEventListener('touchstart', (e) => { onMove(e); e.preventDefault() }, { passive: false })
           wrap.addEventListener('touchmove', (e) => { onMove(e); e.preventDefault() }, { passive: false })
+        } else if (state.mode === 'none') {
+          lbViewer.textContent = 'This screenshot is unchanged, so its image is not stored.'
         } else if (state.mode === 'html') {
           // Just the live page. A11y findings belong to the A11y view, which
           // shows them against the pixels they were measured on.
@@ -1490,6 +1524,17 @@ function run(args: Args): number {
   } = args
 
   mkdirSync(outputDir, { recursive: true })
+
+  let a11y: A11y | null = null
+  if (args.a11y && existsSync(args.a11y)) {
+    try {
+      a11y = normalizeA11y(JSON.parse(readFileSync(args.a11y, 'utf8')))
+    } catch {
+      a11y = null
+    }
+  }
+  const a11yEntries = Object.values(a11y ?? {})
+
   const actuals = indexByName(walk(actualDir))
   const baselines = indexByName(walk(baselineDir))
 
@@ -1511,9 +1556,6 @@ function run(args: Args): number {
       continue
     }
     if (!a || !b) continue
-
-    copyInto(a.path, join(outputDir, 'actual'), name)
-    copyInto(b.path, join(outputDir, 'baseline'), name)
 
     const baseline = loadPng(b.path)
     const actual = loadPng(a.path)
@@ -1543,6 +1585,14 @@ function run(args: Args): number {
       layoutShifted = true
     }
 
+    const images = imagesFor(
+      status,
+      findingsFor(name, a11y).findings.length > 0,
+      layoutShifted
+    )
+    if (images.actual) copyInto(a.path, join(outputDir, 'actual'), name)
+    if (images.baseline) copyInto(b.path, join(outputDir, 'baseline'), name)
+
     if (status === 'changed') {
       const highlight = highlightImage(padded, changed, width, height)
       mkdirSync(join(outputDir, 'diff'), { recursive: true })
@@ -1551,16 +1601,6 @@ function run(args: Args): number {
 
     results.push({ name, status, numDiff, sizeMismatch, layoutShifted })
   }
-
-  let a11y: A11y | null = null
-  if (args.a11y && existsSync(args.a11y)) {
-    try {
-      a11y = normalizeA11y(JSON.parse(readFileSync(args.a11y, 'utf8')))
-    } catch {
-      a11y = null
-    }
-  }
-  const a11yEntries = Object.values(a11y ?? {})
 
   const summary = {
     total: results.length,
