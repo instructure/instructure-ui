@@ -25,7 +25,7 @@
 import { useStyleNew } from '@instructure/emotion'
 import { useState, useEffect, forwardRef, SyntheticEvent } from 'react'
 
-import { passthroughProps } from '@instructure/ui-react-utils'
+import { omitProps, passthroughProps } from '@instructure/ui-react-utils'
 import { renderIconWithProps } from '@instructure/ui-icons'
 import { AvatarProps, avatarSizeToIconSize } from './props.js'
 
@@ -157,7 +157,8 @@ const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
 
     return (
       <div
-        {...passthroughProps({ ...props })}
+        // React warns on unknown props, prevent this
+        {...passthroughProps(omitProps(props, ['onImageLoaded']))}
         ref={ref}
         aria-label={alt ? alt : undefined}
         role={alt ? 'img' : undefined}
