@@ -24,9 +24,10 @@
 
 import { forwardRef } from 'react'
 import { useStyleNew } from '@instructure/emotion'
-import { passthroughProps } from '@instructure/ui-react-utils'
+import { omitProps } from '@instructure/ui-react-utils'
 
 import type { GlobalNavProps } from './props.js'
+import { allowedProps } from './props.js'
 import generateStyle from './styles.js'
 
 /**
@@ -37,7 +38,7 @@ isWIP: true
 **/
 const GlobalNav = forwardRef<HTMLElement, GlobalNavProps>(
   (props: GlobalNavProps, ref) => {
-    const { label, themeOverride, ...rest } = props
+    const { label, themeOverride } = props
 
     const styles = useStyleNew({
       generateStyle,
@@ -48,7 +49,7 @@ const GlobalNav = forwardRef<HTMLElement, GlobalNavProps>(
 
     return (
       <nav
-        {...passthroughProps(rest)}
+        {...omitProps(props, allowedProps)}
         ref={ref}
         aria-label={label}
         css={styles?.globalNav}
