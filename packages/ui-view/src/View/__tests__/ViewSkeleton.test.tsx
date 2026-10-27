@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import { act } from 'react'
 import { render } from 'vitest-browser-react'
 import { renderToString } from 'react-dom/server'
 import { hydrateRoot } from 'react-dom/client'
@@ -134,24 +133,21 @@ describe('<View /> skeleton loading', () => {
       container.innerHTML = renderToString(<Bare />)
       document.body.appendChild(container)
 
-      await act(async () => {
-        hydrateRoot(container, <Bare />)
-      })
+      hydrateRoot(container, <Bare />)
 
-      expect(container.textContent).toContain('Real content')
+      await expect.poll(() => container.textContent).toContain('Real content')
       container.remove()
     })
 
     it('swaps to children after hydration, with no mismatch', async () => {
-      const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
+      const errorSpy = vi.spyOn(console, 'error')
 
       const container = document.createElement('div')
       container.innerHTML = renderToString(<Example />)
       document.body.appendChild(container)
 
-      await act(async () => {
-        hydrateRoot(container, <Example />)
-      })
+      hydrateRoot(container, <Example />)
+      await expect.poll(() => container.textContent).toContain('Real content')
 
       const mismatches = errorSpy.mock.calls.filter((args) =>
         /hydrat|did not match|didn't match/i.test(String(args[0]))
