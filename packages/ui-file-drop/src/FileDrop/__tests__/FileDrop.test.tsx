@@ -29,7 +29,6 @@ import { describe, it, expect, vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { FileDrop } from '@instructure/ui-file-drop/latest'
 import type { FileDropProps } from '@instructure/ui-file-drop/latest'
-import { act } from 'react'
 
 describe('<FileDrop/>', () => {
   it('should focus the input when focus is called', async () => {
@@ -43,9 +42,7 @@ describe('<FileDrop/>', () => {
       />
     )
     const input = container.querySelector('input[class$="-fileDrop__input"]')
-    act(() => {
-      inputEl!.focus()
-    })
+    inputEl!.focus()
     expect(input).toHaveFocus()
   })
 
