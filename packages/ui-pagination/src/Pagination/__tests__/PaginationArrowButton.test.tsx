@@ -72,7 +72,10 @@ describe('<PaginationArrowButton />', () => {
           document.querySelectorAll<HTMLElement>('[role="tooltip"]')
         ).find((el) => el.textContent === 'Next')!
 
-      expect(tooltip()).not.toBeVisible()
+      // Position hides the offscreen tip only after its debounced first layout
+      await vi.waitFor(() => {
+        expect(tooltip()).not.toBeVisible()
+      })
 
       await page.getByRole('button', { name: 'Next' }).hover()
 

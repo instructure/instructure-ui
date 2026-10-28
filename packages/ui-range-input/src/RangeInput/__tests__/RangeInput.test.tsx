@@ -368,6 +368,8 @@ describe('<RangeInput />', () => {
           name="opacity"
           max={100}
           min={0}
+          defaultValue={50}
+          value={22}
           messages={[{ text: message, type: 'error' }]}
         />
       )
@@ -384,6 +386,7 @@ describe('<RangeInput />', () => {
         name="volume"
         min={0}
         max={100}
+        value={100}
         margin="general.spaceMd"
       />
     )
