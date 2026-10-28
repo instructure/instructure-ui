@@ -117,11 +117,15 @@ type: example
 </div>
 ```
 
-### Buttons in an Alert
+### Buttons and links in an Alert
 
-An Alert can contain buttons to let the user act on the message. Follow the
-design recommendations for button colors: use `primary-inverse` buttons in
-`prominent` alerts, and `primary` buttons in `dimmed` and `warning` alerts.
+An Alert can contain buttons and links to let the user act on the message.
+Follow the design recommendations for button colors: use `primary-inverse`
+buttons in `prominent` alerts, and `primary` buttons in `dimmed` and `warning`
+alerts. Links don't need a `color`: when the Alert's text is light (prominent
+info, success and error alerts, and every alert in the dark theme), links and
+focus outlines turn white. Otherwise they keep the default link and focus
+colors.
 
 ```js
 ---
@@ -135,7 +139,11 @@ type: example
       <Flex key={variant} gap="general.spaceMd" margin="general.spaceMd 0">
         <Flex.Item shouldGrow shouldShrink>
           <Alert variant={variant} margin="0">
-            Prominent {variant} alert. Lorem ipsum dolor sit amet, consectetur.
+            Prominent {variant} alert with{' '}
+            <Link href="#" renderIcon={<DiamondInstUIIcon />}>
+              a link
+            </Link>
+            . Lorem ipsum dolor sit amet, consectetur.
             <Flex gap="gap.buttons" padding="general.spaceMd 0 0 0">
               <Button withBackground={false} color={prominentButtonColor}>
                 Cancel
@@ -146,7 +154,11 @@ type: example
         </Flex.Item>
         <Flex.Item shouldGrow shouldShrink>
           <Alert variant={variant} prominence="dimmed" margin="0">
-            Dimmed {variant} alert. Lorem ipsum dolor sit amet, consectetur.
+            Dimmed {variant} alert with{' '}
+            <Link href="#" renderIcon={<DiamondInstUIIcon />}>
+              a link
+            </Link>
+            . Lorem ipsum dolor sit amet, consectetur.
             <Flex gap="gap.buttons" padding="general.spaceMd 0 0 0">
               <Button withBackground={false} color="primary">
                 Cancel

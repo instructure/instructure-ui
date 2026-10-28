@@ -23,6 +23,7 @@
  */
 
 import { boxShadowObjectsToCSSString } from '@instructure/ui-themes'
+import { contrast } from '@instructure/ui-color-utils'
 import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import type { AlertStyle, AlertStyleParams } from './props'
 
@@ -72,14 +73,19 @@ const generateStyle = (
     }
   }
   const colors = variantColors[variant]
+  const textColor =
+    isProminent && variant !== 'warning'
+      ? componentTheme.textOnColor
+      : componentTheme.textBase
+  // light text means a dark background, where the theme's blue focus and link
+  // colors don't show, so focus outlines and links inside turn white
+  const isTextLight =
+    contrast(textColor, '#000000') > contrast(textColor, '#ffffff')
 
   return {
     alert: {
       label: 'alert',
-      color:
-        isProminent && variant !== 'warning'
-          ? componentTheme.textOnColor
-          : componentTheme.textBase,
+      color: textColor,
       background: isProminent ? colors.background : colors.backgroundInline,
       boxSizing: 'border-box',
       display: 'flex',
@@ -121,6 +127,7 @@ const generateStyle = (
       lineHeight: componentTheme.contentLineHeight,
       padding: `${componentTheme.contentPaddingVertical} ${componentTheme.contentPaddingHorizontal}`
     },
+    contentOnColor: isTextLight ? componentTheme.textOnColor : undefined,
     variantScreenReaderLabel: {
       position: 'absolute',
       height: '1px',

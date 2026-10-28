@@ -29,6 +29,7 @@
     "@instructure/shared-types": "workspace:*",
     "@instructure/ui-a11y-content": "workspace:*",
     "@instructure/ui-buttons": "workspace:*",
+    "@instructure/ui-color-utils": "workspace:*",
     "@instructure/ui-icons": "workspace:*",
     "@instructure/ui-motion": "workspace:*",
     "@instructure/ui-react-utils": "workspace:*",
@@ -39,7 +40,6 @@
   "devDependencies": {
     "@instructure/ui-axe-check": "workspace:*",
     "@instructure/ui-babel-preset": "workspace:*",
-    "@instructure/ui-color-utils": "workspace:*",
     "@instructure/ui-scripts": "workspace:*",
     "vitest": "^5.0.0"
   },
