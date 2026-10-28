@@ -28,7 +28,8 @@ import { omitProps } from '@instructure/ui-react-utils'
 
 import type { GlobalNavProps } from './props.js'
 import { allowedProps } from './props.js'
-import generateStyle from './styles.js'
+import generateStyle, { generateMainNavStyle } from './styles.js'
+import { CollapseButton } from './CollapseButton/index.js'
 
 /**
 ---
@@ -38,13 +39,28 @@ isWIP: true
 **/
 const GlobalNav = forwardRef<HTMLElement, GlobalNavProps>(
   (props: GlobalNavProps, ref) => {
-    const { label, themeOverride } = props
+    const {
+      label,
+      collapsed,
+      onCollapse,
+      collapseLabel,
+      expandLabel,
+      themeOverride
+    } = props
 
     const styles = useStyleNew({
       generateStyle,
       themeOverride,
+      params: { collapsed },
       componentId: 'GlobalNav',
       displayName: 'GlobalNav'
+    })
+
+    // MainNav is a separate token set, and useStyleNew reads one set per call
+    const mainNavStyles = useStyleNew({
+      generateStyle: generateMainNavStyle,
+      params: { collapsed },
+      componentId: 'MainNav'
     })
 
     return (
@@ -53,7 +69,20 @@ const GlobalNav = forwardRef<HTMLElement, GlobalNavProps>(
         ref={ref}
         aria-label={label}
         css={styles?.globalNav}
-      />
+      >
+        <div css={styles?.rail}>
+          <div css={mainNavStyles?.mainNav}>
+            <div css={mainNavStyles?.header}>
+              <CollapseButton
+                collapsed={collapsed}
+                collapseLabel={collapseLabel}
+                expandLabel={expandLabel}
+                onCollapse={onCollapse}
+              />
+            </div>
+          </div>
+        </div>
+      </nav>
     )
   }
 )

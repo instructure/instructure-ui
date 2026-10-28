@@ -287,7 +287,9 @@ type GlobalNavProps = GlobalNavOwnProps &
   NewThemeOverrideProp<ReturnType<NewComponentTypes['GlobalNav']>> &
   OtherHTMLAttributes<GlobalNavOwnProps>
 
-type GlobalNavStyle = ComponentStyle<'globalNav'>
+type GlobalNavStyle = ComponentStyle<'globalNav' | 'rail'>
+
+type MainNavStyle = ComponentStyle<'mainNav' | 'header'>
 
 const allowedProps: AllowedPropKeys = [
   'label',
@@ -307,6 +309,7 @@ const allowedProps: AllowedPropKeys = [
 export type {
   GlobalNavProps,
   GlobalNavStyle,
+  MainNavStyle,
   GlobalNavMainNavItem,
   GlobalNavSubNav,
   GlobalNavSubNavItem,

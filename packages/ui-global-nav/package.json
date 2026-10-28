@@ -26,8 +26,11 @@
     "@babel/runtime": "^7.29.7",
     "@instructure/emotion": "workspace:*",
     "@instructure/shared-types": "workspace:*",
+    "@instructure/ui-buttons": "workspace:*",
+    "@instructure/ui-icons": "workspace:*",
     "@instructure/ui-react-utils": "workspace:*",
-    "@instructure/ui-themes": "workspace:*"
+    "@instructure/ui-themes": "workspace:*",
+    "@instructure/ui-tooltip": "workspace:*"
   },
   "devDependencies": {
     "@instructure/ui-axe-check": "workspace:*",
