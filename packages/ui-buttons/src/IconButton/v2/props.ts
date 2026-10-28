@@ -62,6 +62,13 @@ type IconButtonOwnProps = {
   size?: 'small' | 'medium' | 'large' | 'condensedSmall' | 'condensedMedium'
 
   /**
+   * Show or hide this element without changing the layout of a document.
+   * See the
+   * [MDN `visibility` reference](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/visibility).
+   */
+  visibility?: 'visible' | 'hidden' | 'collapse'
+
+  /**
    * Provides a reference to the `IconButton`'s underlying html element.
    */
   elementRef?: (element: Element | null) => void
@@ -159,6 +166,7 @@ const allowedProps: AllowedPropKeys = [
   'type',
   'withBackground',
   'withBorder',
+  'visibility',
   'onClick'
 ]
 
