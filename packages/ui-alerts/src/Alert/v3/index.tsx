@@ -43,7 +43,7 @@ import {
 } from '@instructure/ui-icons'
 import { Transition } from '@instructure/ui-motion'
 import { logError as error } from '@instructure/console'
-import { useStyleNew } from '@instructure/emotion'
+import { InstUISettingsProvider, useStyleNew } from '@instructure/emotion'
 
 import generateStyle from './styles.js'
 
@@ -223,6 +223,30 @@ const Alert = (props: AlertProps) => {
     ) : null
   }
 
+  // links and buttons read their own tokens, so the color picked in styles.ts
+  // reaches them only through a theme override (undefined keeps the defaults)
+  const contentOnColor = styles?.contentOnColor as string | undefined
+  const contentThemeOverride = contentOnColor
+    ? {
+        sharedTokens: {
+          focusOutline: {
+            infoColor: contentOnColor,
+            onColor: contentOnColor,
+            successColor: contentOnColor,
+            dangerColor: contentOnColor
+          }
+        },
+        components: {
+          Link: {
+            textColor: contentOnColor,
+            textHoverColor: contentOnColor,
+            onColorTextColor: contentOnColor,
+            onColorTextHoverColor: contentOnColor
+          }
+        }
+      }
+    : {}
+
   const renderAlert = () => (
     <View
       {...passthroughProps(rest)}
@@ -233,16 +257,18 @@ const Alert = (props: AlertProps) => {
       onKeyUp={handleKeyUp}
       elementRef={handleRef}
     >
-      {renderIcon()}
-      <div css={styles?.content}>
-        {variantScreenReaderLabel && (
-          <span css={styles?.variantScreenReaderLabel}>
-            {variantScreenReaderLabel}
-          </span>
-        )}
-        {children}
-      </div>
-      {renderCloseButton()}
+      <InstUISettingsProvider themeOverride={contentThemeOverride}>
+        {renderIcon()}
+        <div css={styles?.content}>
+          {variantScreenReaderLabel && (
+            <span css={styles?.variantScreenReaderLabel}>
+              {variantScreenReaderLabel}
+            </span>
+          )}
+          {children}
+        </div>
+        {renderCloseButton()}
+      </InstUISettingsProvider>
     </View>
   )
 
