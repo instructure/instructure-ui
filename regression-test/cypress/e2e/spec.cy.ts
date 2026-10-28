@@ -164,6 +164,7 @@ const PAGES: PageSpec[] = [
   { slug: 'form-errors', title: 'Form errors', wait: 300 },
   { slug: 'global-nav', title: 'GlobalNav' },
   { slug: 'heading', title: 'Heading' },
+  { slug: 'imagecard', title: 'ImageCard', wait: 100 },
   { slug: 'img', title: 'Img', wait: 100 },
   {
     slug: 'link',
