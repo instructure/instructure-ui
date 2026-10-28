@@ -11,6 +11,7 @@ A styled HTML table component.
 The `ui-table` package contains the following:
 
 - [Table](Table)
+- [DataGrid](DataGrid) (work in progress)
 
 ### Installation
 
