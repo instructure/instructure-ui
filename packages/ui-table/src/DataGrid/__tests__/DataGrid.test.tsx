@@ -145,6 +145,164 @@ describe('<DataGrid />', () => {
     })
   })
 
+  describe('expanding rows', () => {
+    type Node = { name: string; age: number; subRows?: Node[] }
+    const tree: Node[] = [
+      {
+        name: 'Parent',
+        age: 50,
+        subRows: [
+          { name: 'Child', age: 20, subRows: [{ name: 'Grandchild', age: 1 }] }
+        ]
+      },
+      { name: 'Leaf', age: 30 }
+    ]
+    // the cell name starts with the expand button label, so match the row name at the end
+    const rowCell = (name: string) =>
+      page.getByRole('cell', { name: new RegExp(`(^|\\s)${name}$`) })
+
+    const renderTree = (showExpandButtons?: boolean) =>
+      render(treeGrid(showExpandButtons))
+
+    const treeGrid = (showExpandButtons?: boolean) => (
+      <DataGrid
+        caption="People"
+        columns={columns}
+        data={tree}
+        expandedRows={{
+          getSubRows: (row) => row.subRows,
+          showExpandButtons,
+          labelExpandRow: 'Expand row',
+          labelCollapseRow: 'Collapse row'
+        }}
+      />
+    )
+
+    it('shows no buttons and all rows collapsed without the expandedRows prop', async () => {
+      await render(<DataGrid caption="People" columns={columns} data={tree} />)
+
+      expect(page.getByRole('button').elements()).toHaveLength(0)
+      expect(rowCell('Child').elements()).toHaveLength(0)
+    })
+
+    it('starts collapsed and expands a row on button click', async () => {
+      await renderTree()
+
+      expect(rowCell('Parent').element()).toBeInTheDocument()
+      expect(rowCell('Child').elements()).toHaveLength(0)
+
+      const button = page.getByRole('button', { name: 'Expand row' })
+      await button.click()
+
+      expect(rowCell('Child').element()).toBeInTheDocument()
+      // grandchildren stay collapsed until their own row is expanded
+      expect(rowCell('Grandchild').elements()).toHaveLength(0)
+      expect(
+        page.getByRole('button', { name: 'Collapse row' }).element()
+      ).toHaveAttribute('aria-expanded', 'true')
+    })
+
+    it('does not render a button for rows without sub rows', async () => {
+      await renderTree()
+
+      // only "Parent" is expandable
+      expect(page.getByRole('button').elements()).toHaveLength(1)
+    })
+
+    it('expands every row and hides the buttons when showExpandButtons is false', async () => {
+      await renderTree(false)
+
+      expect(rowCell('Grandchild').element()).toBeInTheDocument()
+      expect(page.getByRole('button').elements()).toHaveLength(0)
+    })
+
+    it('expands every row when the buttons are turned off after rows were expanded', async () => {
+      const { rerender } = await renderTree()
+
+      await page.getByRole('button', { name: 'Expand row' }).click()
+      await rerender(treeGrid(false))
+
+      expect(rowCell('Grandchild').element()).toBeInTheDocument()
+      expect(page.getByRole('button').elements()).toHaveLength(0)
+    })
+
+    it('keeps rows expanded when the parent re-renders with a new data array', async () => {
+      const { rerender } = await renderTree()
+      const withNewData = (showExpandButtons: boolean) => (
+        <DataGrid
+          caption="People"
+          columns={columns}
+          data={structuredClone(tree)}
+          expandedRows={{
+            getSubRows: (row) => row.subRows,
+            showExpandButtons,
+            labelExpandRow: 'Expand row',
+            labelCollapseRow: 'Collapse row'
+          }}
+        />
+      )
+
+      await rerender(withNewData(false))
+      await rerender(withNewData(false))
+
+      expect(rowCell('Grandchild').element()).toBeInTheDocument()
+    })
+
+    it('collapses all rows again when the buttons are turned back on', async () => {
+      const { rerender } = await renderTree(false)
+
+      await rerender(treeGrid(true))
+
+      expect(rowCell('Child').elements()).toHaveLength(0)
+    })
+
+    it('should meet a11y standards', async () => {
+      const { container } = await renderTree()
+
+      expect(await runAxeCheck(container)).toBe(true)
+    })
+  })
+
+  it('counts expanded sub rows toward the page size when pagination and expandedRows are combined', async () => {
+    type Team = { name: string; age: number; subRows?: Team[] }
+    const teams: Team[] = Array.from({ length: 4 }, (_, i) => ({
+      name: `Team ${i + 1}`,
+      age: i,
+      subRows: [
+        { name: `Member ${i + 1}.1`, age: 1 },
+        { name: `Member ${i + 1}.2`, age: 2 }
+      ]
+    }))
+    await render(
+      <DataGrid
+        caption="Teams"
+        columns={columns}
+        data={teams}
+        pagination={{
+          pageIndex: 0,
+          pageSize: 3,
+          labelNext: 'Next page',
+          labelPrev: 'Previous page'
+        }}
+        expandedRows={{
+          getSubRows: (row) => row.subRows,
+          labelExpandRow: 'Expand row',
+          labelCollapseRow: 'Collapse row'
+        }}
+      />
+    )
+
+    // header row + 3 collapsed teams
+    expect(page.getByRole('row').elements()).toHaveLength(4)
+
+    await page.getByRole('button', { name: 'Expand row' }).first().click()
+
+    // the first team and its two members fill the page
+    expect(page.getByRole('row').elements()).toHaveLength(4)
+    expect(page.getByText('Member 1.2').element()).toBeInTheDocument()
+    expect(page.getByText('Team 2').elements()).toHaveLength(0)
+  })
+
   it('should meet a11y standards', async () => {
     const { container } = await render(
       <DataGrid caption="People" columns={columns} data={data} />

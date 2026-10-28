@@ -22,22 +22,28 @@
  * SOFTWARE.
  */
 
+import { useEffect } from 'react'
 import {
-  //createExpandedRowModel,
+  createExpandedRowModel,
   createPaginatedRowModel,
-  //rowExpandingFeature,
+  rowExpandingFeature,
   rowPaginationFeature,
   tableFeatures,
   useTable
 } from '@tanstack/react-table'
-import type { RowData } from '@tanstack/react-table'
+import type { Row, RowData, Cell } from '@tanstack/react-table'
+import { IconButton } from '@instructure/ui-buttons/latest'
+import {
+  ChevronDownInstUIIcon,
+  ChevronRightInstUIIcon
+} from '@instructure/ui-icons'
 import { Pagination } from '@instructure/ui-pagination/latest'
 
 import type { DataGridProps } from './props'
 
 const features = tableFeatures({
-  //rowExpandingFeature,
-  //expandedRowModel: createExpandedRowModel(), // if using client-side expanding
+  rowExpandingFeature,
+  expandedRowModel: createExpandedRowModel(), // if using client-side expanding
   // manualExpanding: true, // if using manual server-side expanding
   rowPaginationFeature,
   paginatedRowModel: createPaginatedRowModel() // if using client-side pagination
@@ -54,26 +60,76 @@ const DataGrid = <TData extends RowData>({
   data,
   columns,
   caption,
-  pagination
+  pagination,
+  expandedRows
 }: DataGridProps<typeof features, TData>) => {
+  const showExpandButtons = expandedRows?.showExpandButtons ?? true
+
   const table = useTable({
     features,
     columns,
     data,
+    getSubRows: expandedRows?.getSubRows,
+    // consumers commonly rebuild `data` on every render, which would otherwise collapse everything
+    autoResetExpanded: false,
     initialState: {
+      expanded: showExpandButtons ? {} : true,
       pagination: pagination && {
         pageIndex: pagination.pageIndex,
         pageSize: pagination.pageSize
       }
     }
     //manualPagination: true needed for server side pagination
-    // rowCount: dataQuery.data?.rowCount needed for server side pagination
+    //rowCount: dataQuery.data?.rowCount needed for server side pagination
   })
+
+  // initialState only applies on mount, so a later change of the prop has to be pushed into the state.
+  // `table` is not a dependency: useTable returns a new object on every render, which would loop
+  useEffect(() => {
+    table.setExpanded(showExpandButtons ? {} : true)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [showExpandButtons])
 
   // the paginated row model always slices to a page, so skip it when pagination is off
   const rows = pagination
     ? table.getRowModel().rows
     : table.getPrePaginatedRowModel().rows
+
+  const expandableCell = (
+    row: Row<typeof features, TData>,
+    cell: Cell<typeof features, TData>,
+    labelCollapseRow: string,
+    labelExpandRow: string
+  ) => (
+    <span
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        // TODO figure out the exact size of a button
+        paddingInlineStart: `${row.depth * 2}rem`
+      }}
+    >
+      {showExpandButtons && row.getCanExpand() && (
+        <IconButton
+          size="small"
+          withBackground={false}
+          withBorder={false}
+          screenReaderLabel={
+            row.getIsExpanded() ? labelCollapseRow : labelExpandRow
+          }
+          aria-expanded={row.getIsExpanded()}
+          onClick={() => row.toggleExpanded()}
+        >
+          {row.getIsExpanded() ? (
+            <ChevronDownInstUIIcon size="md" />
+          ) : (
+            <ChevronRightInstUIIcon size="md" />
+          )}
+        </IconButton>
+      )}
+      <table.FlexRender cell={cell} />
+    </span>
+  )
 
   return (
     <>
@@ -95,9 +151,19 @@ const DataGrid = <TData extends RowData>({
         <tbody>
           {rows.map((row) => (
             <tr key={row.id}>
-              {row.getAllCells().map((cell) => (
+              {row.getAllCells().map((cell, index) => (
                 <td key={cell.id}>
-                  <table.FlexRender cell={cell} />
+                  {expandedRows && index === 0 ? (
+                    // first column needs indent and expand buttons
+                    expandableCell(
+                      row,
+                      cell,
+                      expandedRows.labelCollapseRow,
+                      expandedRows.labelExpandRow
+                    )
+                  ) : (
+                    <table.FlexRender cell={cell} />
+                  )}
                 </td>
               ))}
             </tr>

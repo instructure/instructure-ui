@@ -50,6 +50,30 @@ type DataGridPagination = {
   ) => string
 }
 
+type DataGridExpandedRows<TData extends RowData> = {
+  /**
+   * Returns the child rows of a row, which makes the row expandable.
+   * Rows without children have no expand button.
+   */
+  getSubRows: (
+    originalRow: TData,
+    index: number
+  ) => undefined | ReadonlyArray<TData>
+  /**
+   * Whether the expand/collapse buttons are visible. When they are hidden,
+   * all rows are expanded. Defaults to `true`.
+   */
+  showExpandButtons?: boolean
+  /**
+   * Accessible label for the expand button of a collapsed row.
+   */
+  labelExpandRow: string
+  /**
+   * Accessible label for the collapse button of an expanded row.
+   */
+  labelCollapseRow: string
+}
+
 type DataGridOwnProps<
   TFeatures extends TableFeatures,
   TData extends RowData
@@ -72,6 +96,10 @@ type DataGridOwnProps<
    * for the pagination controls.
    */
   pagination?: DataGridPagination
+  /**
+   * Turns on expandable rows. Rows with children (see `getSubRows`) get an expand button, and all rows start collapsed.
+   */
+  expandedRows?: DataGridExpandedRows<TData>
 }
 
 type DataGridProps<
@@ -79,4 +107,4 @@ type DataGridProps<
   TData extends RowData
 > = DataGridOwnProps<TFeatures, TData>
 
-export type { DataGridProps, DataGridPagination }
+export type { DataGridProps, DataGridPagination, DataGridExpandedRows }

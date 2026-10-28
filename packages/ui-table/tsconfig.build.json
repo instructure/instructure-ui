@@ -15,6 +15,7 @@
     { "path": "../emotion/tsconfig.build.json" },
     { "path": "../shared-types/tsconfig.build.json" },
     { "path": "../ui-a11y-content/tsconfig.build.json" },
+    { "path": "../ui-buttons/tsconfig.build.json" },
     { "path": "../ui-icons/tsconfig.build.json" },
     { "path": "../ui-pagination/tsconfig.build.json" },
     { "path": "../ui-react-utils/tsconfig.build.json" },
