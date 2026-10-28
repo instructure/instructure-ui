@@ -64,3 +64,22 @@ const Example = () => {
 
 render(<Example />)
 ```
+
+### HTML attributes
+
+`elementProps` adds HTML attributes to the link or button of an item, limited to `id`, `className`, `target`, `rel` and `data-*` attributes. GlobalNav keeps its own `aria-*` attributes and click handling.
+
+```js
+---
+type: code
+---
+const items = [
+  {
+    itemID: 'dashboard',
+    icon: <LayoutDashboardInstUIIcon />,
+    label: 'Dashboard',
+    href: '/',
+    elementProps: { 'data-track': 'dashboard' }
+  }
+]
+```

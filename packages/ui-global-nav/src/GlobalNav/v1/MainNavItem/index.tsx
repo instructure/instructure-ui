@@ -97,44 +97,52 @@ const MainNavItem = (props: MainNavItemProps) => {
     </>
   )
 
-  let element
+  const isLink = !!item.href && !item.subNav
+
+  let ownProps
   if (item.subNav) {
     const handleClick = (event: MouseEvent<HTMLElement>) => {
       item.onClick?.(event)
       onSubNavChange?.(event, open ? undefined : item.itemID)
     }
-    element = (
-      <button
-        type="button"
-        css={styles?.item}
-        aria-expanded={open}
-        onClick={handleClick}
-        aria-current={current ? 'page' : undefined}
-      >
-        {content}
-      </button>
-    )
-  } else if (item.href) {
+    ownProps = {
+      type: 'button' as const,
+      'aria-expanded': open,
+      onClick: handleClick
+    }
+  } else if (isLink) {
     // drops unsafe hrefs, for example javascript: URLs that would run code on click
-    const { href } = safeLinkProps({ href: item.href, tag: 'a', attr: 'href' })
+    ownProps = {
+      ...safeLinkProps({
+        href: item.href,
+        tag: 'a',
+        attr: 'href',
+        target: item.elementProps?.target,
+        rel: item.elementProps?.rel
+      }),
+      onClick: item.onClick
+    }
+  } else {
+    ownProps = { type: 'button' as const, onClick: item.onClick }
+  }
+
+  // InstUI's own props come last, so the app can't override them
+  const mergedProps = {
+    ...item.elementProps,
+    ...ownProps,
+    'aria-current': current ? ('page' as const) : undefined
+  }
+
+  let element
+  if (isLink) {
     element = (
-      <a
-        href={href}
-        css={styles?.item}
-        onClick={item.onClick}
-        aria-current={current ? 'page' : undefined}
-      >
+      <a {...mergedProps} css={styles?.item}>
         {content}
       </a>
     )
   } else {
     element = (
-      <button
-        type="button"
-        css={styles?.item}
-        onClick={item.onClick}
-        aria-current={current ? 'page' : undefined}
-      >
+      <button {...mergedProps} css={styles?.item}>
         {content}
       </button>
     )
