@@ -289,7 +289,7 @@ type GlobalNavProps = GlobalNavOwnProps &
 
 type GlobalNavStyle = ComponentStyle<'globalNav' | 'rail'>
 
-type MainNavStyle = ComponentStyle<'mainNav' | 'header'>
+type MainNavStyle = ComponentStyle<'mainNav' | 'header' | 'items'>
 
 const allowedProps: AllowedPropKeys = [
   'label',

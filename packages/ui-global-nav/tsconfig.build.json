@@ -14,6 +14,12 @@
       "path": "../shared-types/tsconfig.build.json"
     },
     {
+      "path": "../ui-a11y-content/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-badge/tsconfig.build.json"
+    },
+    {
       "path": "../ui-buttons/tsconfig.build.json"
     },
     {
@@ -27,6 +33,9 @@
     },
     {
       "path": "../ui-tooltip/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-utils/tsconfig.build.json"
     },
     {
       "path": "../ui-axe-check/tsconfig.build.json"

@@ -30,6 +30,7 @@ import type { GlobalNavProps } from './props.js'
 import { allowedProps } from './props.js'
 import generateStyle, { generateMainNavStyle } from './styles.js'
 import { CollapseButton } from './CollapseButton/index.js'
+import { MainNavItem } from './MainNavItem/index.js'
 
 /**
 ---
@@ -45,6 +46,9 @@ const GlobalNav = forwardRef<HTMLElement, GlobalNavProps>(
       onCollapse,
       collapseLabel,
       expandLabel,
+      openSubNav,
+      onSubNavChange,
+      items,
       themeOverride
     } = props
 
@@ -80,6 +84,17 @@ const GlobalNav = forwardRef<HTMLElement, GlobalNavProps>(
                 onCollapse={onCollapse}
               />
             </div>
+            <ul css={mainNavStyles?.items}>
+              {items.map((item) => (
+                <MainNavItem
+                  key={item.itemID}
+                  item={item}
+                  collapsed={collapsed}
+                  open={openSubNav === item.itemID}
+                  onSubNavChange={onSubNavChange}
+                />
+              ))}
+            </ul>
           </div>
         </div>
       </nav>

@@ -10,12 +10,39 @@ The app passes the content as data: `items`, `logo` and `account`.
 
 `GlobalNav` fills the height of its container, so put it in a layout with a height.
 
+Items are links (`href`) or buttons. An item with a `subNav` opens a sub navigation.
+
 ```js
 ---
 type: example
 ---
+const items = [
+  {
+    itemID: 'dashboard',
+    icon: <LayoutDashboardInstUIIcon />,
+    label: 'Dashboard',
+    href: '#',
+    current: true
+  },
+  {
+    itemID: 'courses',
+    icon: <BookOpenInstUIIcon />,
+    label: 'Courses',
+    subNav: { title: 'Courses' }
+  },
+  {
+    itemID: 'inbox',
+    icon: <InboxInstUIIcon />,
+    label: 'Inbox',
+    href: '#',
+    badgeCount: 9,
+    badgeLabel: (count) => `${count} unread messages`
+  }
+]
+
 const Example = () => {
   const [collapsed, setCollapsed] = React.useState(false)
+  const [openSubNav, setOpenSubNav] = React.useState()
 
   return (
     <View as="div" height="30rem">
@@ -27,7 +54,9 @@ const Example = () => {
         expandLabel="Expand navigation"
         backLabel="Back"
         closeSubNavLabel="Close sub navigation"
-        items={[]}
+        openSubNav={openSubNav}
+        onSubNavChange={(_e, itemID) => setOpenSubNav(itemID)}
+        items={items}
       />
     </View>
   )

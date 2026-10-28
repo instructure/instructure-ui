@@ -2308,6 +2308,12 @@ importers:
       '@instructure/shared-types':
         specifier: workspace:*
         version: link:../shared-types
+      '@instructure/ui-a11y-content':
+        specifier: workspace:*
+        version: link:../ui-a11y-content
+      '@instructure/ui-badge':
+        specifier: workspace:*
+        version: link:../ui-badge
       '@instructure/ui-buttons':
         specifier: workspace:*
         version: link:../ui-buttons
@@ -2323,6 +2329,9 @@ importers:
       '@instructure/ui-tooltip':
         specifier: workspace:*
         version: link:../ui-tooltip
+      '@instructure/ui-utils':
+        specifier: workspace:*
+        version: link:../ui-utils
       react:
         specifier: 18.3.1
         version: 18.3.1

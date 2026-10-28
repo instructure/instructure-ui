@@ -88,6 +88,9 @@ const generateMainNavStyle = (
     mainNav: {
       label: 'mainNav',
       flex: 1,
+      display: 'flex',
+      flexDirection: 'column',
+      gap: collapsed ? componentTheme.minimizedGap : componentTheme.gap,
       padding: collapsed
         ? `${componentTheme.minimizedGap} ${componentTheme.minimizedMargin}`
         : componentTheme.margin
@@ -96,6 +99,16 @@ const generateMainNavStyle = (
       label: 'mainNav__header',
       display: 'flex',
       justifyContent: collapsed ? 'center' : 'flex-end'
+    },
+    items: {
+      label: 'mainNav__items',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: collapsed ? 'center' : 'stretch',
+      gap: componentTheme.navItemsGap,
+      listStyle: 'none',
+      margin: 0,
+      padding: 0
     }
   }
 }
