@@ -94,6 +94,13 @@ type BaseButtonOwnProps = {
   display?: 'inline-block' | 'block'
 
   /**
+   * Show or hide this element without changing the layout of a document.
+   * See the
+   * [MDN `visibility` reference](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/visibility).
+   */
+  visibility?: 'visible' | 'hidden' | 'collapse'
+
+  /**
    * Sets the alignment of the `Button` children and/or icon.
    */
   textAlign?: 'start' | 'center'
@@ -199,6 +206,7 @@ const allowedProps: AllowedPropKeys = [
   'color',
   'cursor',
   'display',
+  'visibility',
   'elementRef',
   'focusColor',
   'href',

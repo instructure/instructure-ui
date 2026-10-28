@@ -265,6 +265,7 @@ class BaseButton extends Component<BaseButtonProps> {
       textAlign,
       shape,
       display,
+      visibility,
       withBackground,
       withBorder,
       isCondensed,
@@ -323,6 +324,7 @@ class BaseButton extends Component<BaseButtonProps> {
         focusColor={this.focusColor}
         position="relative"
         display={display}
+        visibility={visibility}
         width={display === 'block' ? '100%' : 'auto'}
         borderRadius={shape === 'circle' ? 'circle' : 'medium'}
         background="transparent"
