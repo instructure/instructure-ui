@@ -22,13 +22,27 @@
  * SOFTWARE.
  */
 
-import { tableFeatures, useTable } from '@tanstack/react-table'
+import {
+  //createExpandedRowModel,
+  createPaginatedRowModel,
+  //rowExpandingFeature,
+  rowPaginationFeature,
+  tableFeatures,
+  useTable
+} from '@tanstack/react-table'
 import type { RowData } from '@tanstack/react-table'
+import { Pagination } from '@instructure/ui-pagination/latest'
 
 import type { DataGridProps } from './props'
 
-// no optional TanStack features (sorting, filtering, ...) are registered yet
-const features = tableFeatures({})
+const features = tableFeatures({
+  //rowExpandingFeature,
+  //expandedRowModel: createExpandedRowModel(), // if using client-side expanding
+  // manualExpanding: true, // if using manual server-side expanding
+  rowPaginationFeature,
+  paginatedRowModel: createPaginatedRowModel() // if using client-side pagination
+  // manualPagination: true, // if using manual server-side pagination TODO needed?
+})
 
 /**
 ---
@@ -39,38 +53,71 @@ isWIP: true
 const DataGrid = <TData extends RowData>({
   data,
   columns,
-  caption
+  caption,
+  pagination
 }: DataGridProps<typeof features, TData>) => {
-  const table = useTable({ features, columns, data })
+  const table = useTable({
+    features,
+    columns,
+    data,
+    initialState: {
+      pagination: pagination && {
+        pageIndex: pagination.pageIndex,
+        pageSize: pagination.pageSize
+      }
+    }
+    //manualPagination: true needed for server side pagination
+    // rowCount: dataQuery.data?.rowCount needed for server side pagination
+  })
+
+  // the paginated row model always slices to a page, so skip it when pagination is off
+  const rows = pagination
+    ? table.getRowModel().rows
+    : table.getPrePaginatedRowModel().rows
 
   return (
-    <table>
-      <caption>{caption}</caption>
-      <thead>
-        {table.getHeaderGroups().map((group) => (
-          <tr key={group.id}>
-            {group.headers.map((header) => (
-              <th key={header.id} colSpan={header.colSpan} scope="col">
-                {header.isPlaceholder ? null : (
-                  <table.FlexRender header={header} />
-                )}
-              </th>
-            ))}
-          </tr>
-        ))}
-      </thead>
-      <tbody>
-        {table.getRowModel().rows.map((row) => (
-          <tr key={row.id}>
-            {row.getAllCells().map((cell) => (
-              <td key={cell.id}>
-                <table.FlexRender cell={cell} />
-              </td>
-            ))}
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <>
+      <table>
+        <caption>{caption}</caption>
+        <thead>
+          {table.getHeaderGroups().map((group) => (
+            <tr key={group.id}>
+              {group.headers.map((header) => (
+                <th key={header.id} colSpan={header.colSpan} scope="col">
+                  {header.isPlaceholder ? null : (
+                    <table.FlexRender header={header} />
+                  )}
+                </th>
+              ))}
+            </tr>
+          ))}
+        </thead>
+        <tbody>
+          {rows.map((row) => (
+            <tr key={row.id}>
+              {row.getAllCells().map((cell) => (
+                <td key={cell.id}>
+                  <table.FlexRender cell={cell} />
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {pagination && (
+        <Pagination
+          as="nav"
+          variant="compact"
+          labelNext={pagination.labelNext}
+          labelPrev={pagination.labelPrev}
+          screenReaderLabelPageButton={pagination.screenReaderLabelPageButton}
+          margin="general.spaceMd 0 0"
+          currentPage={table.state.pagination.pageIndex + 1}
+          totalPageNumber={table.getPageCount()}
+          onPageChange={(nextPage) => table.setPageIndex(nextPage - 1)}
+        />
+      )}
+    </>
   )
 }
 
