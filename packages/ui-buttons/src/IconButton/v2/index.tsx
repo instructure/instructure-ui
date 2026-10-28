@@ -92,6 +92,7 @@ class IconButton extends Component<IconButtonProps> {
       screenReaderLabel,
       type,
       size,
+      visibility,
       elementRef,
       as,
       interaction,
@@ -113,6 +114,7 @@ class IconButton extends Component<IconButtonProps> {
         {...passthroughProps(props)}
         type={type}
         size={size}
+        visibility={visibility}
         elementRef={this.handleRef}
         as={as}
         interaction={interaction}
