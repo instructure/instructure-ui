@@ -31,6 +31,7 @@
     "@instructure/ui-buttons": "workspace:*",
     "@instructure/ui-icons": "workspace:*",
     "@instructure/ui-react-utils": "workspace:*",
+    "@instructure/ui-text": "workspace:*",
     "@instructure/ui-themes": "workspace:*",
     "@instructure/ui-tooltip": "workspace:*",
     "@instructure/ui-utils": "workspace:*"

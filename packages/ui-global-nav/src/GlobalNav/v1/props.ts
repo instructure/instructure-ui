@@ -126,13 +126,17 @@ type GlobalNavSubNav = {
 
 type GlobalNavLogo = {
   /**
-   * The URL of the institution logo. A placeholder shows without it.
+   * The URL of the logo image.
    */
   src?: string
   /**
-   * The institution name, used as the alternative text of the logo.
+   * The name of the institution or product, shown next to the image or used as the alternative text of a wordmark.
    */
   name: string
+  /**
+   * Whether to show `name` as text. Set it to `false` when `src` is a wide logo that already shows the name, for example a product wordmark. Defaults to `true`.
+   */
+  showName?: boolean
   /**
    * The URL that the logo links to.
    */
@@ -287,7 +291,7 @@ type GlobalNavProps = GlobalNavOwnProps &
   NewThemeOverrideProp<ReturnType<NewComponentTypes['GlobalNav']>> &
   OtherHTMLAttributes<GlobalNavOwnProps>
 
-type GlobalNavStyle = ComponentStyle<'globalNav' | 'rail'>
+type GlobalNavStyle = ComponentStyle<'globalNav' | 'rail' | 'divider'>
 
 type MainNavStyle = ComponentStyle<'mainNav' | 'header' | 'items'>
 

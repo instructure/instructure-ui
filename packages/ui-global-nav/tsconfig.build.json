@@ -29,6 +29,9 @@
       "path": "../ui-react-utils/tsconfig.build.json"
     },
     {
+      "path": "../ui-text/tsconfig.build.json"
+    },
+    {
       "path": "../ui-themes/tsconfig.build.json"
     },
     {

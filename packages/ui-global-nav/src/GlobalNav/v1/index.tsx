@@ -30,6 +30,7 @@ import type { GlobalNavProps } from './props.js'
 import { allowedProps } from './props.js'
 import generateStyle, { generateMainNavStyle } from './styles.js'
 import { CollapseButton } from './CollapseButton/index.js'
+import { InstitutionLogo } from './InstitutionLogo/index.js'
 import { MainNavItem } from './MainNavItem/index.js'
 
 /**
@@ -49,6 +50,7 @@ const GlobalNav = forwardRef<HTMLElement, GlobalNavProps>(
       openSubNav,
       onSubNavChange,
       items,
+      logo,
       themeOverride
     } = props
 
@@ -77,6 +79,7 @@ const GlobalNav = forwardRef<HTMLElement, GlobalNavProps>(
         <div css={styles?.rail}>
           <div css={mainNavStyles?.mainNav}>
             <div css={mainNavStyles?.header}>
+              <InstitutionLogo logo={logo} collapsed={collapsed} />
               <CollapseButton
                 collapsed={collapsed}
                 collapseLabel={collapseLabel}
@@ -84,6 +87,7 @@ const GlobalNav = forwardRef<HTMLElement, GlobalNavProps>(
                 onCollapse={onCollapse}
               />
             </div>
+            {!collapsed && <div css={styles?.divider} />}
             <ul css={mainNavStyles?.items}>
               {items.map((item) => (
                 <MainNavItem
