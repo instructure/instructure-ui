@@ -49,6 +49,7 @@ const components = [
   'form-errors',
   'global-nav',
   'heading',
+  'imagecard',
   'img',
   'link',
   'menu',

@@ -49,6 +49,7 @@ const ImageCard = ({
   src,
   alt,
   title,
+  titleLevel = 'h3',
   themeOverride,
   ...rest
 }: ImageCardProps) => {
@@ -104,7 +105,9 @@ const ImageCard = ({
     <div {...passthroughProps(rest)} css={styles?.card} ref={ref}>
       <div css={styles?.container}>
         <img src={src} alt={alt} css={styles?.img} />
-        <Heading variant={headingVariantsBySize[size]}>{title}</Heading>
+        <Heading level={titleLevel} variant={headingVariantsBySize[size]}>
+          {title}
+        </Heading>
         <div css={styles?.content}>{children}</div>
       </div>
     </div>

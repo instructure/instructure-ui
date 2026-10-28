@@ -23,12 +23,8 @@
  */
 'use client'
 import React from 'react'
-import { ImageCard as i } from '@instructure/ui/latest'
+import { ImageCard } from '@instructure/ui/latest'
 
-// alias to avoid TS/SSR friction like other pages
-const ImageCard = i as any
-
-// a 1x1 transparent gif keeps the page off the network
 const SRC =
   'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
 

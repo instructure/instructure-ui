@@ -27,6 +27,8 @@ import type { ComponentStyle, NewThemeOverrideProp } from '@instructure/emotion'
 import type { OtherHTMLAttributes } from '@instructure/shared-types'
 import type { NewComponentTypes } from '@instructure/ui-themes'
 
+type HeadingLevel<U extends keyof React.JSX.IntrinsicElements> = U
+
 type ImageCardOwnProps = {
   /**
    * The content to be rendered inside the Card
@@ -36,6 +38,10 @@ type ImageCardOwnProps = {
    * The title string of the card. Renders as InstUI's <Heading>
    */
   title: string
+  /**
+   * Heading is rendered as h3 by default. Rewrite this if necessary.
+   */
+  titleLevel?: HeadingLevel<'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'> | 'reset'
   /**
    * The src string of the img.
    */
@@ -58,7 +64,13 @@ type ImageCardStyle = ComponentStyle<
   'card' | 'container' | 'content' | 'img' | 'breakpointMd' | 'breakpointLg'
 >
 
-const allowedProps: AllowedPropKeys = ['children', 'src', 'alt', 'title']
+const allowedProps: AllowedPropKeys = [
+  'children',
+  'src',
+  'alt',
+  'title',
+  'titleLevel'
+]
 
 export type { ImageCardProps, ImageCardStyle }
 export { allowedProps }
