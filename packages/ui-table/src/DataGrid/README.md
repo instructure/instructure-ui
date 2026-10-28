@@ -38,3 +38,45 @@ const Example = () => {
 
 render(<Example />)
 ```
+
+### Pagination
+
+Pass `pagination` to split the rows into pages and render a [Pagination](Pagination) below the table. `pageSize` is the number of rows per page and `pageIndex` is the zero-based page to show initially. `labelNext` and `labelPrev` are the accessible labels of the arrow buttons, and the optional `screenReaderLabelPageButton` labels the page number buttons.
+
+```js
+---
+type: example
+---
+const Example = () => {
+  const columns = [
+    { accessorKey: 'id', header: 'ID' },
+    { accessorKey: 'name', header: 'Name' },
+    { accessorKey: 'department', header: 'Department' }
+  ]
+
+  const departments = ['Math', 'Physics', 'Computing', 'Chemistry']
+  const data = Array.from({ length: 47 }, (_, i) => ({
+    id: i + 1,
+    name: `Person ${i + 1}`,
+    department: departments[i % departments.length]
+  }))
+
+  return (
+    <DataGrid
+      caption="Staff directory"
+      columns={columns}
+      data={data}
+      pagination={{
+        pageIndex: 0,
+        pageSize: 10,
+        labelNext: 'Next page',
+        labelPrev: 'Previous page',
+        screenReaderLabelPageButton: (page, total) =>
+          `Page ${page} of ${total}`
+      }}
+    />
+  )
+}
+
+render(<Example />)
+```

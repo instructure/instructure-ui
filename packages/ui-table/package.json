@@ -29,6 +29,7 @@
     "@instructure/shared-types": "workspace:*",
     "@instructure/ui-a11y-content": "workspace:*",
     "@instructure/ui-icons": "workspace:*",
+    "@instructure/ui-pagination": "workspace:*",
     "@instructure/ui-react-utils": "workspace:*",
     "@instructure/ui-simple-select": "workspace:*",
     "@instructure/ui-themes": "workspace:*",

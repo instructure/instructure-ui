@@ -50,6 +50,101 @@ describe('<DataGrid />', () => {
     expect(page.getByRole('row').elements()).toHaveLength(3)
   })
 
+  it('renders every row and no pagination without the pagination prop', async () => {
+    const many = Array.from({ length: 25 }, (_, i) => ({
+      name: `Person ${i}`,
+      age: i
+    }))
+    await render(<DataGrid caption="People" columns={columns} data={many} />)
+
+    // header row + 25 data rows
+    expect(page.getByRole('row').elements()).toHaveLength(26)
+    expect(page.getByRole('navigation').elements()).toHaveLength(0)
+  })
+
+  describe('pagination', () => {
+    const many = Array.from({ length: 25 }, (_, i) => ({
+      name: `Person ${i}`,
+      age: i
+    }))
+
+    const labels = { labelNext: 'Next page', labelPrev: 'Previous page' }
+
+    it('shows only pageSize rows, starting at the initial pageIndex', async () => {
+      await render(
+        <DataGrid
+          caption="People"
+          columns={columns}
+          data={many}
+          pagination={{ pageIndex: 1, pageSize: 10, ...labels }}
+        />
+      )
+
+      // header row + 10 data rows
+      expect(page.getByRole('row').elements()).toHaveLength(11)
+      expect(page.getByText('Person 10').element()).toBeInTheDocument()
+      expect(page.getByText('Person 19').element()).toBeInTheDocument()
+      expect(page.getByText('Person 9').elements()).toHaveLength(0)
+    })
+
+    it('changes the visible rows when a page is selected', async () => {
+      await render(
+        <DataGrid
+          caption="People"
+          columns={columns}
+          data={many}
+          pagination={{ pageIndex: 0, pageSize: 10, ...labels }}
+        />
+      )
+
+      await page.getByRole('button', { name: '3', exact: true }).click()
+
+      // the last page holds the remaining 5 rows
+      expect(page.getByRole('row').elements()).toHaveLength(6)
+      expect(page.getByText('Person 20').element()).toBeInTheDocument()
+      expect(
+        page.getByText('Person 0', { exact: true }).elements()
+      ).toHaveLength(0)
+    })
+
+    // compact variant only renders the arrow buttons from 5 pages up
+    it('uses the provided labels for the arrow buttons', async () => {
+      await render(
+        <DataGrid
+          caption="People"
+          columns={columns}
+          data={many}
+          pagination={{
+            pageIndex: 1,
+            pageSize: 3,
+            labelNext: 'Go forward',
+            labelPrev: 'Go back'
+          }}
+        />
+      )
+
+      expect(
+        page.getByRole('button', { name: 'Go forward' }).element()
+      ).toBeInTheDocument()
+      expect(
+        page.getByRole('button', { name: 'Go back' }).element()
+      ).toBeInTheDocument()
+    })
+
+    it('should meet a11y standards', async () => {
+      const { container } = await render(
+        <DataGrid
+          caption="People"
+          columns={columns}
+          data={many}
+          pagination={{ pageIndex: 0, pageSize: 10, ...labels }}
+        />
+      )
+
+      expect(await runAxeCheck(container)).toBe(true)
+    })
+  })
+
   it('should meet a11y standards', async () => {
     const { container } = await render(
       <DataGrid caption="People" columns={columns} data={data} />

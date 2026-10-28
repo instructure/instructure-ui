@@ -39,4 +39,4 @@ export type { TableRowProps } from '../Table/v2/Row/props'
 export type { TableRowHeaderProps } from '../Table/v2/RowHeader/props'
 
 export { DataGrid } from '../DataGrid/index.js'
-export type { DataGridProps } from '../DataGrid/props'
+export type { DataGridProps, DataGridPagination } from '../DataGrid/props'

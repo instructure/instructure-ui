@@ -24,6 +24,32 @@
 
 import type { ColumnDef, RowData, TableFeatures } from '@tanstack/react-table'
 
+type DataGridPagination = {
+  /**
+   * The zero-based index of the page to show initially.
+   */
+  pageIndex: number
+  /**
+   * The number of rows on each page.
+   */
+  pageSize: number
+  /**
+   * Accessible label for the next page button.
+   */
+  labelNext: string
+  /**
+   * Accessible label for the previous page button.
+   */
+  labelPrev: string
+  /**
+   * Accessible label for a page number button, given the page and the total page count.
+   */
+  screenReaderLabelPageButton?: (
+    currentPage: number,
+    totalPageNumber: number
+  ) => string
+}
+
 type DataGridOwnProps<
   TFeatures extends TableFeatures,
   TData extends RowData
@@ -40,6 +66,12 @@ type DataGridOwnProps<
    * A screen reader friendly description of the table.
    */
   caption: string
+  /**
+   * Turns on pagination. `pageIndex` is the zero-based initial page and
+   * `pageSize` is the number of rows per page. The label props are the text
+   * for the pagination controls.
+   */
+  pagination?: DataGridPagination
 }
 
 type DataGridProps<
@@ -47,4 +79,4 @@ type DataGridProps<
   TData extends RowData
 > = DataGridOwnProps<TFeatures, TData>
 
-export type { DataGridProps }
+export type { DataGridProps, DataGridPagination }

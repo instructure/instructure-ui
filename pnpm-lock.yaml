@@ -4218,6 +4218,9 @@ importers:
       '@instructure/ui-icons':
         specifier: workspace:*
         version: link:../ui-icons
+      '@instructure/ui-pagination':
+        specifier: workspace:*
+        version: link:../ui-pagination
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
