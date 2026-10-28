@@ -4,7 +4,7 @@ describes: DataGrid
 
 > **Work in progress.** `DataGrid` is under development. Its API will change and it is not ready for production use.
 
-`DataGrid` is a data table built on [TanStack Table](https://tanstack.com/table/latest) (v9).
+`DataGrid` is a data table built on [TanStack Table](https://tanstack.com/table/v9) (v9).
 
 ### Basic DataGrid
 
@@ -67,7 +67,7 @@ const Example = () => {
       columns={columns}
       data={data}
       pagination={{
-        pageIndex: 0,
+        initialPageIndex: 0,
         pageSize: 10,
         labelNext: 'Next page',
         labelPrev: 'Previous page',
@@ -188,7 +188,7 @@ const Example = () => {
         columns={columns}
         data={data}
         pagination={{
-          pageIndex: 1,
+          initialPageIndex: 1,
           pageSize: 5,
           labelNext: 'Next page',
           labelPrev: 'Previous page',
