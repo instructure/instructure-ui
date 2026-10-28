@@ -1534,6 +1534,9 @@ importers:
       '@instructure/shared-types':
         specifier: workspace:*
         version: link:../shared-types
+      '@instructure/ui-heading':
+        specifier: workspace:*
+        version: link:../ui-heading
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils

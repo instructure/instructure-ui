@@ -23,3 +23,5 @@
  */
 export { Card } from '../Card/v1/index.js'
 export type { CardProps } from '../Card/v1/props'
+export { ImageCard } from '../ImageCard/v1/index.js'
+export type { ImageCardProps } from '../ImageCard/v1/props'

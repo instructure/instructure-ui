@@ -20,6 +20,9 @@
       "path": "../ui-babel-preset/tsconfig.build.json"
     },
     {
+      "path": "../ui-heading/tsconfig.build.json"
+    },
+    {
       "path": "../ui-react-utils/tsconfig.build.json"
     },
     {
