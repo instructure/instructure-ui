@@ -22,14 +22,25 @@
  * SOFTWARE.
  */
 
-import sharedTokensDark from '../../newThemeTokens/dark/sharedTokens'
-import sharedTokensLight from '../../newThemeTokens/light/sharedTokens'
-import sharedTokensCanvas from '../../newThemeTokens/legacyCanvas/sharedTokens'
-import sharedTokensCanvasHighContrast from '../../newThemeTokens/legacyCanvasHighContrast/sharedTokens'
+import type { Semantics as SemanticsDark } from './dark'
+import type { Semantics as SemanticsLight } from './light'
+import type { Semantics as SemanticsCanvas } from './canvas'
+import type { Semantics as SemanticsCanvasHighContrast } from './canvasHighContrast'
 
+import semanticsDark from './dark'
+import semanticsLight from './light'
+import semanticsCanvas from './canvas'
+import semanticsCanvasHighContrast from './canvasHighContrast'
+
+export type {
+  SemanticsDark,
+  SemanticsLight,
+  SemanticsCanvas,
+  SemanticsCanvasHighContrast
+}
 export {
-  sharedTokensDark,
-  sharedTokensLight,
-  sharedTokensCanvas,
-  sharedTokensCanvasHighContrast
+  semanticsDark,
+  semanticsLight,
+  semanticsCanvas,
+  semanticsCanvasHighContrast
 }
