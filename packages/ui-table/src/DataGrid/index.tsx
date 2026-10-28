@@ -75,7 +75,7 @@ const DataGrid = <TData extends RowData>({
     initialState: {
       expanded: showExpandButtons ? {} : true,
       pagination: pagination && {
-        pageIndex: pagination.pageIndex,
+        pageIndex: pagination.initialPageIndex,
         pageSize: pagination.pageSize
       }
     }

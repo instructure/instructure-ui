@@ -76,7 +76,7 @@ describe('<DataGrid />', () => {
           caption="People"
           columns={columns}
           data={many}
-          pagination={{ pageIndex: 1, pageSize: 10, ...labels }}
+          pagination={{ initialPageIndex: 1, pageSize: 10, ...labels }}
         />
       )
 
@@ -93,7 +93,7 @@ describe('<DataGrid />', () => {
           caption="People"
           columns={columns}
           data={many}
-          pagination={{ pageIndex: 0, pageSize: 10, ...labels }}
+          pagination={{ initialPageIndex: 0, pageSize: 10, ...labels }}
         />
       )
 
@@ -115,7 +115,7 @@ describe('<DataGrid />', () => {
           columns={columns}
           data={many}
           pagination={{
-            pageIndex: 1,
+            initialPageIndex: 1,
             pageSize: 3,
             labelNext: 'Go forward',
             labelPrev: 'Go back'
@@ -137,7 +137,7 @@ describe('<DataGrid />', () => {
           caption="People"
           columns={columns}
           data={many}
-          pagination={{ pageIndex: 0, pageSize: 10, ...labels }}
+          pagination={{ initialPageIndex: 0, pageSize: 10, ...labels }}
         />
       )
 
@@ -279,7 +279,7 @@ describe('<DataGrid />', () => {
         columns={columns}
         data={teams}
         pagination={{
-          pageIndex: 0,
+          initialPageIndex: 0,
           pageSize: 3,
           labelNext: 'Next page',
           labelPrev: 'Previous page'

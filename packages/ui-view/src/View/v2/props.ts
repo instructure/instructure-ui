@@ -97,12 +97,6 @@ type ViewOwnProps = {
     | 'revert'
     | 'revert-layer'
     | 'unset'
-  /**
-   * Show or hide this element without changing the layout of a document.
-   * See the
-   * [MDN `visibility` reference](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/visibility).
-   */
-  visibility?: 'visible' | 'hidden' | 'collapse'
   overflowX?: 'auto' | 'hidden' | 'visible'
   overflowY?: 'auto' | 'hidden' | 'visible'
   height?: string | number
@@ -289,7 +283,6 @@ const allowedProps: AllowedPropKeys = [
   'cursor',
   'dir',
   'display',
-  'visibility',
   'elementRef',
   'focusColor',
   'focusPosition',

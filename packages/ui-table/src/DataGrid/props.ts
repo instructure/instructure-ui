@@ -28,7 +28,7 @@ type DataGridPagination = {
   /**
    * The zero-based index of the page to show initially.
    */
-  pageIndex: number
+  initialPageIndex: number
   /**
    * The number of rows on each page.
    */
@@ -91,7 +91,7 @@ type DataGridOwnProps<
    */
   caption: string
   /**
-   * Turns on pagination. `pageIndex` is the zero-based initial page and
+   * Turns on pagination. `initialPageIndex` is the zero-based initial page and
    * `pageSize` is the number of rows per page. The label props are the text
    * for the pagination controls.
    */
