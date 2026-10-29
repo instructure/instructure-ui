@@ -143,7 +143,11 @@ class ToggleDetails extends Component<ToggleDetailsProps> {
       )
     }
 
-    return asHeading ? <h2>{toggle}</h2> : toggle
+    return asHeading ? (
+      <h2 css={this.props.styles?.heading}>{toggle}</h2>
+    ) : (
+      toggle
+    )
   }
 
   renderIcon(expanded: boolean) {
