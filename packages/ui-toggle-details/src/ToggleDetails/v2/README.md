@@ -133,6 +133,22 @@ type: example
 </ToggleDetails>
 ```
 
+### Heading
+
+Set the `asHeading` prop to wrap the toggle in an `h2` element, so it shows up
+in the page's heading outline for screen reader users.
+
+```js
+---
+type: example
+---
+<ToggleDetails summary="Section title" asHeading>
+  <Text>
+    {lorem.paragraph()}
+  </Text>
+</ToggleDetails>
+```
+
 ### Example to demonstrate more properties
 
 ```js
