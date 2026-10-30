@@ -61,7 +61,8 @@ const useStyleNew = <
   ComponentTheme extends ReturnType<NewComponentTypes[keyof NewComponentTypes]>,
   GenerateStyle extends GenerateStyleFn<ComponentTheme>
 >(useStyleParams: {
-  generateStyle: GenerateStyle
+  // the intersection lets TS infer ComponentTheme from generateStyle when there is no themeOverride
+  generateStyle: GenerateStyle & GenerateStyleFn<ComponentTheme>
   params?: SecondParameter<GenerateStyle>
   // needs to be a string too because it might be a child component
   componentId: keyof NewComponentTypes | string
