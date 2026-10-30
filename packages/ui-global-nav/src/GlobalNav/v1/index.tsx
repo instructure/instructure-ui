@@ -24,10 +24,14 @@
 
 import { forwardRef } from 'react'
 import { useStyleNew } from '@instructure/emotion'
-import { passthroughProps } from '@instructure/ui-react-utils'
+import { omitProps } from '@instructure/ui-react-utils'
 
 import type { GlobalNavProps } from './props.js'
-import generateStyle from './styles.js'
+import { allowedProps } from './props.js'
+import generateStyle, { generateMainNavStyle } from './styles.js'
+import { CollapseButton } from './CollapseButton/index.js'
+import { InstitutionLogo } from './InstitutionLogo/index.js'
+import { MainNavItem } from './MainNavItem/index.js'
 
 /**
 ---
@@ -37,22 +41,67 @@ isWIP: true
 **/
 const GlobalNav = forwardRef<HTMLElement, GlobalNavProps>(
   (props: GlobalNavProps, ref) => {
-    const { label, themeOverride, ...rest } = props
+    const {
+      label,
+      collapsed,
+      onCollapse,
+      collapseLabel,
+      expandLabel,
+      openSubNav,
+      onSubNavChange,
+      items,
+      logo,
+      themeOverride
+    } = props
 
     const styles = useStyleNew({
       generateStyle,
       themeOverride,
+      params: { collapsed },
       componentId: 'GlobalNav',
       displayName: 'GlobalNav'
     })
 
+    // MainNav is a separate token set, and useStyleNew reads one set per call
+    const mainNavStyles = useStyleNew({
+      generateStyle: generateMainNavStyle,
+      params: { collapsed },
+      componentId: 'MainNav'
+    })
+
     return (
       <nav
-        {...passthroughProps(rest)}
+        {...omitProps(props, allowedProps)}
         ref={ref}
         aria-label={label}
         css={styles?.globalNav}
-      />
+      >
+        <div css={styles?.rail}>
+          <div css={mainNavStyles?.mainNav}>
+            <div css={mainNavStyles?.header}>
+              <InstitutionLogo logo={logo} collapsed={collapsed} />
+              <CollapseButton
+                collapsed={collapsed}
+                collapseLabel={collapseLabel}
+                expandLabel={expandLabel}
+                onCollapse={onCollapse}
+              />
+            </div>
+            {!collapsed && <div css={styles?.divider} />}
+            <ul css={mainNavStyles?.items}>
+              {items.map((item) => (
+                <MainNavItem
+                  key={item.itemID}
+                  item={item}
+                  collapsed={collapsed}
+                  open={openSubNav === item.itemID}
+                  onSubNavChange={onSubNavChange}
+                />
+              ))}
+            </ul>
+          </div>
+        </div>
+      </nav>
     )
   }
 )
