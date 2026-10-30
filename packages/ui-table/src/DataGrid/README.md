@@ -41,7 +41,7 @@ render(<Example />)
 
 ### Pagination
 
-Pass `pagination` to split the rows into pages and render a [Pagination](Pagination) below the table. `pageSize` is the number of rows per page and `pageIndex` is the zero-based page to show initially. `labelNext` and `labelPrev` are the accessible labels of the arrow buttons, and the optional `screenReaderLabelPageButton` labels the page number buttons.
+Pass `pagination` to split the rows into pages and render a [Pagination](Pagination) below the table. `pageSize` is the number of rows per page and `initialPageIndex` is the zero-based page to show initially. `labelNext` and `labelPrev` are the accessible labels of the arrow buttons, and the optional `screenReaderLabelPageButton` labels the page number buttons.
 
 ```js
 ---
@@ -145,9 +145,70 @@ const Example = () => {
 render(<Example />)
 ```
 
+### Sorting
+
+Pass `sorting` to make the column headers sortable. Clicking a header cycles its column through `ascending`, `descending` and unsorted (`none`). Only one column is sorted at a time, so sorting by another column clears the previous sort.
+
+Features:
+
+- The sort function of a column is inferred automatically from its values; InstUI's wrapper supports Tanstack's [alphanumeric, text, datetime, basic functions](https://tanstack.com/table/latest/docs/framework/react/guide/sorting#sorting-rowmodelfns).
+- `labelSortColumn` returns the accessible label of a header button. It receives the header text and the current sort direction of the column, and should return an accessible label, e.g. "Sort by Name". When a column header is not a string, the column id is passed instead.
+- `defaultSort` (optional) sorts by a column initially.
+- `enableSorting` in a column definition to leave that column unsortable.
+- Expanded rows are sorted within their parent row.
+
+```js
+---
+type: example
+---
+const Example = () => {
+  const columns = [
+    { accessorKey: 'name', header: 'Name', id: 'name' },
+    { accessorKey: 'role', header: 'Role', id: 'role' },
+    {
+      accessorKey: 'born',
+      header: 'Born',
+      id: 'born',
+      cell: ({ getValue }) =>
+        getValue().toLocaleDateString('en-US', {
+          dateStyle: 'medium',
+          timeZone: 'UTC'
+        })
+    },
+    { accessorKey: 'age', header: 'Age', enableSorting:false }
+  ]
+
+  const data = [
+    { name: 'Grace Hopper', role: 'Computer scientist', born: new Date('1906-12-09'), age: 85 },
+    { name: 'Ada Lovelace', role: 'Mathematician', born: new Date('1815-12-10'), age: 36 },
+    { name: 'Katherine Johnson', role: 'Mathematician', born: new Date('1918-08-26'), age: 101 },
+    { name: 'John Doe', role: 'Mathematician', born: new Date('2001-05-17'), age: 23 },
+    { name: 'Isaac Newton', role: 'physicist', born: new Date('1643-01-04'), age: 43 },
+    { name: 'John Von Neumann', role: 'Computer scientist', born: new Date('1903-12-28'), age: 76 }
+  ]
+
+  return (
+    <DataGrid
+      caption="Famous computing pioneers"
+      columns={columns}
+      data={data}
+      sorting={{
+        labelSortColumn: (sortByHeader, sortDirection) =>
+          sortDirection === 'none'
+            ? `Sort by ${sortByHeader}`
+            : `${sortByHeader}, sorted ${sortDirection}. Change sort order`,
+        defaultSort: { columnId: 'role', direction: 'descending' }
+      }}
+    />
+  )
+}
+
+render(<Example />)
+```
+
 ### Putting it together
 
-`pagination` and `expandedRows` work together. Expanded sub rows count toward `pageSize`, so the number of pages grows and shrinks as rows are expanded and collapsed.
+`pagination`, `expandedRows` and `sorting` work together. Expanded sub rows count toward `pageSize`, so the number of pages grows and shrinks as rows are expanded and collapsed. Sorting applies to all pages, and sub rows are sorted within their parent.
 
 ```js
 ---
@@ -188,8 +249,8 @@ const Example = () => {
         columns={columns}
         data={data}
         pagination={{
-          initialPageIndex: 1,
-          pageSize: 5,
+          initialPageIndex: 0,
+          pageSize: 8,
           labelNext: 'Next page',
           labelPrev: 'Previous page',
           screenReaderLabelPageButton: (page, total) =>
@@ -200,6 +261,12 @@ const Example = () => {
           showExpandButtons,
           labelExpandRow: 'Expand row',
           labelCollapseRow: 'Collapse row'
+        }}
+        sorting={{
+          labelSortColumn: (sortByHeader, sortDirection) =>
+            sortDirection === 'none'
+              ? `Sort by ${sortByHeader}`
+              : `${sortByHeader}, sorted ${sortDirection}. Change sort order`
         }}
       />
     </View>
