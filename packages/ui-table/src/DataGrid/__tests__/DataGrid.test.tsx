@@ -263,6 +263,212 @@ describe('<DataGrid />', () => {
     })
   })
 
+  describe('sorting', () => {
+    const people: Person[] = [
+      { name: 'Grace', age: 85 },
+      { name: 'Ada', age: 36 },
+      { name: 'Katherine', age: 101 }
+    ]
+    const labelSortColumn = (header: string, direction: string) =>
+      `Sort by ${header}, currently ${direction}`
+
+    // the first cell of each body row, in display order
+    const names = () =>
+      page
+        .getByRole('row')
+        .elements()
+        .slice(1)
+        .map((row) => row.querySelector('td')?.textContent)
+
+    const renderSortable = (
+      defaultSort?: { columnId: string; direction: 'ascending' | 'descending' },
+      rows = people
+    ) =>
+      render(
+        <DataGrid
+          caption="People"
+          columns={columns}
+          data={rows}
+          sorting={{ labelSortColumn, defaultSort }}
+        />
+      )
+
+    const sortButton = (header: string, direction = 'none') =>
+      page.getByRole('button', { name: labelSortColumn(header, direction) })
+
+    it('renders no sort buttons without the sorting prop', async () => {
+      await render(
+        <DataGrid caption="People" columns={columns} data={people} />
+      )
+
+      expect(page.getByRole('button').elements()).toHaveLength(0)
+      expect(
+        page.getByRole('columnheader').first().element()
+      ).not.toHaveAttribute('aria-sort')
+    })
+
+    it('keeps the original order and reports no sort initially', async () => {
+      await renderSortable()
+
+      expect(names()).toEqual(['Grace', 'Ada', 'Katherine'])
+      expect(page.getByRole('button').elements()).toHaveLength(2)
+      expect(page.getByRole('columnheader').first().element()).toHaveAttribute(
+        'aria-sort',
+        'none'
+      )
+    })
+
+    it('cycles a column through ascending, descending and none', async () => {
+      await renderSortable()
+
+      await sortButton('Name').click()
+      expect(names()).toEqual(['Ada', 'Grace', 'Katherine'])
+      expect(page.getByRole('columnheader').first().element()).toHaveAttribute(
+        'aria-sort',
+        'ascending'
+      )
+
+      await sortButton('Name', 'ascending').click()
+      expect(names()).toEqual(['Katherine', 'Grace', 'Ada'])
+      expect(page.getByRole('columnheader').first().element()).toHaveAttribute(
+        'aria-sort',
+        'descending'
+      )
+
+      await sortButton('Name', 'descending').click()
+      expect(names()).toEqual(['Grace', 'Ada', 'Katherine'])
+      expect(page.getByRole('columnheader').first().element()).toHaveAttribute(
+        'aria-sort',
+        'none'
+      )
+    })
+
+    it('starts numeric columns ascending too', async () => {
+      await renderSortable()
+
+      await sortButton('Age').click()
+
+      expect(names()).toEqual(['Ada', 'Grace', 'Katherine'])
+    })
+
+    it('sorts by the last clicked column only', async () => {
+      await renderSortable()
+
+      await sortButton('Name').click()
+      await sortButton('Age').click()
+
+      expect(names()).toEqual(['Ada', 'Grace', 'Katherine'])
+      expect(page.getByRole('columnheader').first().element()).toHaveAttribute(
+        'aria-sort',
+        'none'
+      )
+      expect(page.getByRole('columnheader').last().element()).toHaveAttribute(
+        'aria-sort',
+        'ascending'
+      )
+    })
+
+    it('applies the default sort', async () => {
+      await renderSortable({ columnId: 'age', direction: 'descending' })
+
+      expect(names()).toEqual(['Katherine', 'Grace', 'Ada'])
+      expect(page.getByRole('columnheader').last().element()).toHaveAttribute(
+        'aria-sort',
+        'descending'
+      )
+      expect(sortButton('Age', 'descending').element()).toBeInTheDocument()
+    })
+
+    it('does not render a sort button for columns with sorting disabled', async () => {
+      await render(
+        <DataGrid
+          caption="People"
+          columns={[
+            { accessorKey: 'name', header: 'Name', enableSorting: false },
+            { accessorKey: 'age', header: 'Age' }
+          ]}
+          data={people}
+          sorting={{ labelSortColumn }}
+        />
+      )
+
+      expect(page.getByRole('button').elements()).toHaveLength(1)
+      expect(
+        page.getByRole('columnheader').first().element()
+      ).not.toHaveAttribute('aria-sort')
+    })
+
+    it('sorts across pages', async () => {
+      const many = Array.from({ length: 25 }, (_, i) => ({
+        name: `Person ${String(i).padStart(2, '0')}`,
+        age: i
+      }))
+      await render(
+        <DataGrid
+          caption="People"
+          columns={columns}
+          data={many}
+          sorting={{
+            labelSortColumn,
+            defaultSort: { columnId: 'age', direction: 'descending' }
+          }}
+          pagination={{
+            initialPageIndex: 0,
+            pageSize: 10,
+            labelNext: 'Next page',
+            labelPrev: 'Previous page'
+          }}
+        />
+      )
+
+      expect(names()[0]).toBe('Person 24')
+      expect(names()).toHaveLength(10)
+    })
+
+    it('sorts sub rows within their parent', async () => {
+      type Node = { name: string; age: number; subRows?: Node[] }
+      await render(
+        <DataGrid
+          caption="People"
+          columns={columns}
+          data={
+            [
+              {
+                name: 'Parent',
+                age: 50,
+                subRows: [
+                  { name: 'Zed', age: 1 },
+                  { name: 'Amy', age: 2 }
+                ]
+              }
+            ] as Node[]
+          }
+          sorting={{
+            labelSortColumn,
+            defaultSort: { columnId: 'name', direction: 'ascending' }
+          }}
+          expandedRows={{
+            getSubRows: (row) => row.subRows,
+            showExpandButtons: false,
+            labelExpandRow: 'Expand row',
+            labelCollapseRow: 'Collapse row'
+          }}
+        />
+      )
+
+      expect(names()).toEqual(['Parent', 'Amy', 'Zed'])
+    })
+
+    it('should meet a11y standards', async () => {
+      const { container } = await renderSortable({
+        columnId: 'name',
+        direction: 'ascending'
+      })
+
+      expect(await runAxeCheck(container)).toBe(true)
+    })
+  })
+
   it('counts expanded sub rows toward the page size when pagination and expandedRows are combined', async () => {
     type Team = { name: string; age: number; subRows?: Team[] }
     const teams: Team[] = Array.from({ length: 4 }, (_, i) => ({

@@ -26,29 +26,67 @@ import { useEffect } from 'react'
 import {
   createExpandedRowModel,
   createPaginatedRowModel,
+  createSortedRowModel,
   rowExpandingFeature,
   rowPaginationFeature,
+  rowSortingFeature,
+  sortFn_alphanumeric,
+  sortFn_basic,
+  sortFn_datetime,
+  sortFn_text,
   tableFeatures,
   useTable
 } from '@tanstack/react-table'
-import type { Row, RowData, Cell } from '@tanstack/react-table'
+import type {
+  Row,
+  RowData,
+  Cell,
+  Header,
+  SortDirection
+} from '@tanstack/react-table'
 import { IconButton } from '@instructure/ui-buttons/latest'
 import {
+  ArrowDownInstUIIcon,
+  ArrowUpDownInstUIIcon,
+  ArrowUpInstUIIcon,
   ChevronDownInstUIIcon,
   ChevronRightInstUIIcon
 } from '@instructure/ui-icons'
 import { Pagination } from '@instructure/ui-pagination/latest'
 
-import type { DataGridProps } from './props'
+import type { DataGridProps, DataGridSortDirection } from './props'
+import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
 const features = tableFeatures({
   rowExpandingFeature,
   expandedRowModel: createExpandedRowModel(), // if using client-side expanding
   // manualExpanding: true, // if using manual server-side expanding
   rowPaginationFeature,
-  paginatedRowModel: createPaginatedRowModel() // if using client-side pagination
+  paginatedRowModel: createPaginatedRowModel(), // if using client-side pagination
   // manualPagination: true, // if using manual server-side pagination TODO needed?
+  rowSortingFeature,
+  sortedRowModel: createSortedRowModel(), // if using client-side sorting
+  sortFns: {
+    alphanumeric: sortFn_alphanumeric,
+    basic: sortFn_basic,
+    datetime: sortFn_datetime,
+    text: sortFn_text
+  }
 })
+
+/**
+ * Converts from Tanstack sorting values to InstUI sort values
+ */
+const toSortDirection = (
+  sorted: false | SortDirection
+): DataGridSortDirection =>
+  sorted === 'asc' ? 'ascending' : sorted === 'desc' ? 'descending' : 'none'
+
+const sortIcons = {
+  none: <ArrowUpDownInstUIIcon size="sm" />,
+  ascending: <ArrowUpInstUIIcon size="sm" />,
+  descending: <ArrowDownInstUIIcon size="sm" />
+}
 
 /**
 ---
@@ -61,9 +99,11 @@ const DataGrid = <TData extends RowData>({
   columns,
   caption,
   pagination,
-  expandedRows
+  expandedRows,
+  sorting
 }: DataGridProps<typeof features, TData>) => {
   const showExpandButtons = expandedRows?.showExpandButtons ?? true
+  const defaultSort = sorting?.defaultSort
 
   const table = useTable({
     features,
@@ -72,12 +112,24 @@ const DataGrid = <TData extends RowData>({
     getSubRows: expandedRows?.getSubRows,
     // consumers commonly rebuild `data` on every render, which would otherwise collapse everything
     autoResetExpanded: false,
+    enableSorting: !!sorting,
+    enableMultiSort: false,
+    // numeric columns would otherwise start descending
+    sortDescFirst: false,
     initialState: {
       expanded: showExpandButtons ? {} : true,
       pagination: pagination && {
         pageIndex: pagination.initialPageIndex,
         pageSize: pagination.pageSize
-      }
+      },
+      sorting: defaultSort
+        ? [
+            {
+              id: defaultSort.columnId,
+              desc: defaultSort.direction === 'descending'
+            }
+          ]
+        : []
     }
     //manualPagination: true needed for server side pagination
     //rowCount: dataQuery.data?.rowCount needed for server side pagination
@@ -131,18 +183,59 @@ const DataGrid = <TData extends RowData>({
     </span>
   )
 
+  const headerContent = (header: Header<typeof features, TData>) => {
+    const { column } = header
+    if (!sorting || !column.getCanSort()) {
+      return <table.FlexRender header={header} />
+    }
+    const { header: headerDef } = column.columnDef
+    return (
+      <button
+        type="button"
+        aria-label={sorting.labelSortColumn(
+          typeof headerDef === 'string' ? headerDef : column.id,
+          toSortDirection(column.getIsSorted())
+        )}
+        onClick={() => column.toggleSorting()}
+        style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: '0.25rem',
+          padding: 0,
+          border: 0,
+          background: 'none',
+          font: 'inherit',
+          color: 'inherit',
+          cursor: 'pointer'
+        }}
+      >
+        <table.FlexRender header={header} />
+        {sortIcons[toSortDirection(column.getIsSorted())]}
+      </button>
+    )
+  }
+
   return (
     <>
       <table>
-        <caption>{caption}</caption>
+        <ScreenReaderContent>
+          <caption>{caption}</caption>
+        </ScreenReaderContent>
         <thead>
           {table.getHeaderGroups().map((group) => (
             <tr key={group.id}>
               {group.headers.map((header) => (
-                <th key={header.id} colSpan={header.colSpan} scope="col">
-                  {header.isPlaceholder ? null : (
-                    <table.FlexRender header={header} />
-                  )}
+                <th
+                  key={header.id}
+                  colSpan={header.colSpan}
+                  scope="col"
+                  aria-sort={
+                    sorting && header.column.getCanSort()
+                      ? toSortDirection(header.column.getIsSorted())
+                      : undefined
+                  }
+                >
+                  {header.isPlaceholder ? null : headerContent(header)}
                 </th>
               ))}
             </tr>
