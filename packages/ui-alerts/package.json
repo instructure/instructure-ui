@@ -29,6 +29,7 @@
     "@instructure/shared-types": "workspace:*",
     "@instructure/ui-a11y-content": "workspace:*",
     "@instructure/ui-buttons": "workspace:*",
+    "@instructure/ui-color-utils": "workspace:*",
     "@instructure/ui-icons": "workspace:*",
     "@instructure/ui-motion": "workspace:*",
     "@instructure/ui-react-utils": "workspace:*",
@@ -39,7 +40,6 @@
   "devDependencies": {
     "@instructure/ui-axe-check": "workspace:*",
     "@instructure/ui-babel-preset": "workspace:*",
-    "@instructure/ui-color-utils": "workspace:*",
     "@instructure/ui-scripts": "workspace:*",
     "vitest": "^5.0.0"
   },
@@ -78,12 +78,19 @@
       "require": "./lib/exports/b.js",
       "default": "./es/exports/b.js"
     },
+    "./v11_8": {
+      "src": "./src/exports/c.ts",
+      "types": "./types/exports/c.d.ts",
+      "import": "./es/exports/c.js",
+      "require": "./lib/exports/c.js",
+      "default": "./es/exports/c.js"
+    },
     "./latest": {
-      "src": "./src/exports/b.ts",
-      "types": "./types/exports/b.d.ts",
-      "import": "./es/exports/b.js",
-      "require": "./lib/exports/b.js",
-      "default": "./es/exports/b.js"
+      "src": "./src/exports/c.ts",
+      "types": "./types/exports/c.d.ts",
+      "import": "./es/exports/c.js",
+      "require": "./lib/exports/c.js",
+      "default": "./es/exports/c.js"
     }
   }
 }

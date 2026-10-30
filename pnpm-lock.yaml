@@ -1096,6 +1096,9 @@ importers:
       '@instructure/ui-buttons':
         specifier: workspace:*
         version: link:../ui-buttons
+      '@instructure/ui-color-utils':
+        specifier: workspace:*
+        version: link:../ui-color-utils
       '@instructure/ui-icons':
         specifier: workspace:*
         version: link:../ui-icons
@@ -1127,9 +1130,6 @@ importers:
       '@instructure/ui-babel-preset':
         specifier: workspace:*
         version: link:../ui-babel-preset
-      '@instructure/ui-color-utils':
-        specifier: workspace:*
-        version: link:../ui-color-utils
       '@instructure/ui-scripts':
         specifier: workspace:*
         version: link:../ui-scripts
