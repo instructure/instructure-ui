@@ -68,6 +68,10 @@ type ToggleDetailsOwnProps = {
    */
   size?: 'small' | 'medium' | 'large'
   /**
+   * Wraps the toggle in the given heading element so it appears in the page's heading outline.
+   */
+  asHeading?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
+  /**
    * The toggleable content passed inside the ToggleDetails component
    */
   children?: React.ReactNode
@@ -89,6 +93,7 @@ type ToggleDetailsStyle = ComponentStyle<
   | 'summary'
   | 'summaryText'
   | 'toggle'
+  | 'heading'
   | 'icon'
   | 'details'
   | 'content'
@@ -108,7 +113,8 @@ const allowedProps: AllowedPropKeys = [
   'iconPosition',
   'fluidWidth',
   'children',
-  'size'
+  'size',
+  'asHeading'
 ]
 
 export type { ToggleDetailsProps, ToggleDetailsStyleProps, ToggleDetailsStyle }

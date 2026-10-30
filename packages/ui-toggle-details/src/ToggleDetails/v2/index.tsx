@@ -101,7 +101,7 @@ class ToggleDetails extends Component<ToggleDetailsProps> {
     toggleProps: ReturnType<ExpandableToggleProps>,
     expanded: boolean
   ) {
-    const { variant } = this.props
+    const { variant, asHeading } = this.props
     const tProps = this.props.children
       ? toggleProps
       : { onClick: toggleProps.onClick }
@@ -111,9 +111,10 @@ class ToggleDetails extends Component<ToggleDetailsProps> {
       children: this.renderSummary(expanded)
     } as Record<string, unknown>
     const summary = this.renderSummary(expanded)
+    let toggle
 
     if (variant === 'filled') {
-      return (
+      toggle = (
         <Button
           {...props}
           display="block"
@@ -124,13 +125,13 @@ class ToggleDetails extends Component<ToggleDetailsProps> {
         </Button>
       )
     } else if (props.href) {
-      return (
+      toggle = (
         <a {...props} css={this.props.styles?.toggle} ref={this.setButtonRef}>
           {summary}
         </a>
       )
     } else {
-      return (
+      toggle = (
         <button
           {...props}
           type="button"
@@ -141,6 +142,11 @@ class ToggleDetails extends Component<ToggleDetailsProps> {
         </button>
       )
     }
+
+    if (!asHeading) return toggle
+
+    const Heading = asHeading
+    return <Heading css={this.props.styles?.heading}>{toggle}</Heading>
   }
 
   renderIcon(expanded: boolean) {

@@ -175,6 +175,59 @@ describe('<ToggleDetails />', () => {
     expect(content).toMatchTextContent('Content')
   })
 
+  it('should not render a heading by default', async () => {
+    const { container } = await render(
+      <ToggleDetails summary="Click me">Content</ToggleDetails>
+    )
+
+    expect(container.querySelector('h2')).not.toBeInTheDocument()
+  })
+
+  it('should wrap the toggle in an h2 when asHeading is h2', async () => {
+    const { container } = await render(
+      <ToggleDetails summary="Click me" asHeading="h2">
+        Content
+      </ToggleDetails>
+    )
+    const heading = container.querySelector('h2')
+
+    expect(heading).toBeInTheDocument()
+    expect(heading?.querySelector('button')).toHaveTextContent('Click me')
+  })
+
+  it.each(['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] as const)(
+    'should render the toggle inside an %s element when asHeading is set to it',
+    async (tag) => {
+      const { container } = await render(
+        <ToggleDetails summary="Click me" asHeading={tag}>
+          Content
+        </ToggleDetails>
+      )
+
+      expect(container.querySelector(`${tag} button`)).toBeInTheDocument()
+    }
+  )
+
+  it('should wrap the filled variant toggle in an h2 when asHeading is h2', async () => {
+    const { container } = await render(
+      <ToggleDetails summary="Click me" variant="filled" asHeading="h2">
+        Content
+      </ToggleDetails>
+    )
+
+    expect(container.querySelector('h2 button')).toBeInTheDocument()
+  })
+
+  it('should wrap the link toggle in an h2 when asHeading is h2', async () => {
+    const { container } = await render(
+      <ToggleDetails summary="Click me" href="#" asHeading="h2">
+        Content
+      </ToggleDetails>
+    )
+
+    expect(container.querySelector('h2 a')).toBeInTheDocument()
+  })
+
   it('should meet a11y standards', async () => {
     const { container } = await render(
       <ToggleDetails summary="Click me">Content</ToggleDetails>

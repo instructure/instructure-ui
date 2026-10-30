@@ -157,6 +157,14 @@ const generateStyle = (
       ...fluidWidthStyles,
       ...fontSizeStyles[size!]
     },
+    heading: {
+      label: 'toggleDetails__heading',
+      margin: 0,
+      fontSize: 'inherit',
+      fontWeight: 'inherit',
+      fontFamily: 'inherit',
+      lineHeight: 'inherit'
+    },
     icon: {
       label: 'toggleDetails__icon',
       display: 'flex',
