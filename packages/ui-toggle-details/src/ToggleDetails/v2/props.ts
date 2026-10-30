@@ -68,9 +68,9 @@ type ToggleDetailsOwnProps = {
    */
   size?: 'small' | 'medium' | 'large'
   /**
-   * Wraps the toggle in an `h2` element so it appears in the page's heading outline.
+   * Wraps the toggle in the given heading element so it appears in the page's heading outline.
    */
-  asHeading?: boolean
+  asHeading?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
   /**
    * The toggleable content passed inside the ToggleDetails component
    */
