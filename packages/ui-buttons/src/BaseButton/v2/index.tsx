@@ -336,7 +336,7 @@ class BaseButton extends Component<BaseButtonProps> {
         elementRef={this.handleElementRef}
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
-        role={onClick && as !== 'button' ? 'button' : undefined}
+        role={props.role ?? (onClick && as !== 'button' ? 'button' : undefined)}
         tabIndex={tabIndexValue}
         disabled={isDisabled || isReadOnly}
         css={styles?.baseButton}
