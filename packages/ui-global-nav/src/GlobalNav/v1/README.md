@@ -34,7 +34,17 @@ const items = [
       title: 'Courses',
       items: [
         { itemID: 'all-courses', label: 'All courses', href: '#' },
-        { itemID: 'biology', label: 'Biology 101', href: '#' },
+        {
+          itemID: 'biology',
+          label: 'Biology 101',
+          subNav: {
+            title: 'Biology 101',
+            items: [
+              { itemID: 'biology-modules', label: 'Modules', href: '#' },
+              { itemID: 'biology-grades', label: 'Grades', href: '#' }
+            ]
+          }
+        },
         { itemID: 'history', label: 'World history', href: '#' },
         { itemID: 'algebra', label: 'Algebra II', href: '#' }
       ]
@@ -66,7 +76,7 @@ const Example = () => {
         onCollapse={(_e, isCollapsed) => setCollapsed(isCollapsed)}
         collapseLabel="Collapse navigation"
         expandLabel="Expand navigation"
-        backLabel="Back"
+        backLabel={(title) => `Back to ${title}`}
         closeSubNavLabel="Close sub navigation"
         expandSubNavLabel="Open sub navigation"
         openSubNav={openSubNav}
@@ -92,11 +102,13 @@ One SubNav is open at a time. The app opens and closes it with `openSubNav` and 
 
 When the user opens a SubNav, focus moves to its first item, or to the close handle when it has no items. When the user closes it, focus goes back to the rail item. Focus doesn't move when the app sets `openSubNav` itself, for example on page load.
 
+An item with a `subNav` opens a deeper level in the same panel. The back button shows the title of the level it returns to, and `backLabel` gives its screen reader text, for example "Back to Courses". Focus moves to the first item of the new level, and back to the item that opened it. A SubNav opens on the level of the item with `current: true`. `onClick` of an item runs before its level opens, so the app can load the level's items there.
+
 An open SubNav makes `GlobalNav` wider and pushes the page. While no SubNav is open, `GlobalNav` has the same width with and without the strip.
 
 When the current page belongs to a SubNav, set `current` on its rail item. Closing that SubNav then leaves a narrow strip that opens it again on click, and other SubNavs close completely.
 
-In this example, the page is a course page, so it loads with the Courses SubNav open. Close it to see the strip.
+In this example, the page is the Modules page of a course, so it loads with the Courses SubNav open on that course. Close it to see the strip.
 
 ```js
 ---
@@ -118,7 +130,22 @@ const items = [
       title: 'Courses',
       items: [
         { itemID: 'all-courses', label: 'All courses', href: '#' },
-        { itemID: 'biology', label: 'Biology 101', href: '#', current: true },
+        {
+          itemID: 'biology',
+          label: 'Biology 101',
+          subNav: {
+            title: 'Biology 101',
+            items: [
+              {
+                itemID: 'biology-modules',
+                label: 'Modules',
+                href: '#',
+                current: true
+              },
+              { itemID: 'biology-grades', label: 'Grades', href: '#' }
+            ]
+          }
+        },
         { itemID: 'history', label: 'World history', href: '#' }
       ]
     }
@@ -146,7 +173,7 @@ const Example = () => {
         onCollapse={(_e, isCollapsed) => setCollapsed(isCollapsed)}
         collapseLabel="Collapse navigation"
         expandLabel="Expand navigation"
-        backLabel="Back"
+        backLabel={(title) => `Back to ${title}`}
         closeSubNavLabel="Close sub navigation"
         expandSubNavLabel="Open sub navigation"
         openSubNav={openSubNav}

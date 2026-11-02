@@ -55,6 +55,7 @@ const GlobalNav = forwardRef<HTMLElement, GlobalNavProps>(
       onCollapse,
       collapseLabel,
       expandLabel,
+      backLabel,
       closeSubNavLabel,
       expandSubNavLabel,
       openSubNav,
@@ -220,6 +221,7 @@ const GlobalNav = forwardRef<HTMLElement, GlobalNavProps>(
               subNavId={subNavId}
               titleId={titleId}
               closeSubNavLabel={closeSubNavLabel}
+              backLabel={backLabel}
               onClose={handleSubNavClose}
               focusIntentRef={focusIntentRef}
             />
