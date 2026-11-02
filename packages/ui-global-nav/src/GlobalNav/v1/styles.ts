@@ -22,8 +22,13 @@
  * SOFTWARE.
  */
 
+import { boxShadowObjectsToCSSString } from '@instructure/ui-themes'
 import type { NewComponentTypes } from '@instructure/ui-themes'
-import type { GlobalNavStyle } from './props.js'
+import type { GlobalNavStyle, MainNavStyle } from './props.js'
+
+type StyleParams = {
+  collapsed: boolean
+}
 
 /**
  * ---
@@ -31,19 +36,93 @@ import type { GlobalNavStyle } from './props.js'
  * ---
  * Generates the style object from the theme and provided additional information
  * @param componentTheme The theme variable object.
+ * @param params Additional parameters to customize the style.
  * @return The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: ReturnType<NewComponentTypes['GlobalNav']>
+  componentTheme: ReturnType<NewComponentTypes['GlobalNav']>,
+  params: StyleParams
 ): GlobalNavStyle => {
+  const { collapsed } = params
+
   return {
     globalNav: {
       label: 'globalNav',
+      display: 'flex',
+      width: 'fit-content',
+      height: '100%',
+      boxSizing: 'border-box',
+      // the width tokens include the outer gap, which is this padding
+      minWidth: collapsed
+        ? componentTheme.minimizedminWidth
+        : componentTheme.minWidth,
+      padding: collapsed
+        ? componentTheme.minimizedMargin
+        : componentTheme.margin
+    },
+    rail: {
+      label: 'globalNav__rail',
+      display: 'flex',
+      flex: 1,
+      boxSizing: 'border-box',
       backgroundColor: componentTheme.backgroundColor,
-      color: componentTheme.textColor,
-      minWidth: componentTheme.minWidth
+      border: `${componentTheme.borderWidth} solid ${componentTheme.borderColor}`,
+      borderRadius: collapsed
+        ? componentTheme.minimizedBorderRadius
+        : componentTheme.borderRadius,
+      boxShadow: boxShadowObjectsToCSSString(componentTheme.boxShadow)
+    },
+    // TODO: use the MainNav divider color once instructure-design-tokens moves it there
+    divider: {
+      label: 'globalNav__divider',
+      borderTop: `${componentTheme.borderWidth} solid ${componentTheme.borderColor}`
+    }
+  }
+}
+
+/**
+ * Generates the style object of the main column from the `MainNav` tokens
+ */
+const generateMainNavStyle = (
+  componentTheme: ReturnType<NewComponentTypes['MainNav']>,
+  params: StyleParams
+): MainNavStyle => {
+  const { collapsed } = params
+
+  return {
+    mainNav: {
+      label: 'mainNav',
+      // TODO: use the MainNav width tokens once instructure-design-tokens adds them
+      width: collapsed ? '3.5rem' : '12.5rem',
+      flexShrink: 0,
+      boxSizing: 'border-box',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: collapsed ? componentTheme.minimizedGap : componentTheme.gap,
+      padding: collapsed
+        ? `${componentTheme.minimizedGap} ${componentTheme.minimizedMargin}`
+        : componentTheme.margin
+    },
+    header: {
+      label: 'mainNav__header',
+      display: 'flex',
+      flexDirection: collapsed ? 'column' : 'row',
+      alignItems: 'center',
+      justifyContent: collapsed ? 'center' : 'flex-end',
+      gap: collapsed ? componentTheme.minimizedGap : componentTheme.gap
+    },
+    items: {
+      label: 'mainNav__items',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: collapsed ? 'center' : 'stretch',
+      gap: componentTheme.navItemsGap,
+      listStyle: 'none',
+      margin: 0,
+      padding: 0
     }
   }
 }
 
 export default generateStyle
+export { generateMainNavStyle }

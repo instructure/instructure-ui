@@ -29,9 +29,18 @@ import { GlobalNav } from '@instructure/ui/latest'
 export default function GlobalNavPage() {
   return (
     <main className="flex gap-8 p-8 flex-col items-start axe-test">
-      {/* an empty nav has no height, the flex row stretches it */}
       <div className="flex h-80">
-        <GlobalNav label="Main navigation" />
+        <GlobalNav
+          label="Main navigation"
+          collapsed={false}
+          onCollapse={() => {}}
+          collapseLabel="Collapse navigation"
+          expandLabel="Expand navigation"
+          backLabel="Back"
+          closeSubNavLabel="Close sub navigation"
+          items={[]}
+          logo={{ name: 'Canvas' }}
+        />
       </div>
     </main>
   )

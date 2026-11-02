@@ -25,26 +25,38 @@
 import { createRef } from 'react'
 import { render } from 'vitest-browser-react'
 import { page } from 'vitest/browser'
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 
 import { GlobalNav } from '@instructure/ui-global-nav/latest'
 
+const requiredProps = {
+  label: 'Main navigation',
+  collapsed: false,
+  onCollapse: vi.fn(),
+  collapseLabel: 'Collapse navigation',
+  expandLabel: 'Expand navigation',
+  backLabel: 'Back',
+  closeSubNavLabel: 'Close sub navigation',
+  items: [],
+  logo: { name: 'Canvas' }
+}
+
 describe('<GlobalNav />', () => {
   it('should render a navigation landmark named by the label', async () => {
-    await render(<GlobalNav label="Main navigation" />)
+    await render(<GlobalNav {...requiredProps} />)
     const nav = page.getByRole('navigation', { name: 'Main navigation' })
     await expect.element(nav).toBeInTheDocument()
   })
 
   it('should forward the ref to the nav element', async () => {
     const ref = createRef<HTMLElement>()
-    await render(<GlobalNav label="Main navigation" ref={ref} />)
+    await render(<GlobalNav {...requiredProps} ref={ref} />)
     expect(ref.current?.tagName).toBe('NAV')
   })
 
   it('should be accessible', async () => {
-    const { container } = await render(<GlobalNav label="Main navigation" />)
+    const { container } = await render(<GlobalNav {...requiredProps} />)
     const axeCheck = await runAxeCheck(container)
     expect(axeCheck).toBe(true)
   })

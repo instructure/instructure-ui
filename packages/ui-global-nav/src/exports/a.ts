@@ -22,4 +22,14 @@
  * SOFTWARE.
  */
 export { GlobalNav } from '../GlobalNav/v1/index.js'
-export type { GlobalNavProps } from '../GlobalNav/v1/props'
+export type {
+  GlobalNavProps,
+  GlobalNavMainNavItem,
+  GlobalNavSubNav,
+  GlobalNavSubNavItem,
+  GlobalNavLogo,
+  GlobalNavAccount,
+  GlobalNavToggle,
+  GlobalNavCountLabel,
+  GlobalNavElementProps
+} from '../GlobalNav/v1/props'

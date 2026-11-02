@@ -26,8 +26,15 @@
     "@babel/runtime": "^7.29.7",
     "@instructure/emotion": "workspace:*",
     "@instructure/shared-types": "workspace:*",
+    "@instructure/ui-a11y-content": "workspace:*",
+    "@instructure/ui-badge": "workspace:*",
+    "@instructure/ui-buttons": "workspace:*",
+    "@instructure/ui-icons": "workspace:*",
     "@instructure/ui-react-utils": "workspace:*",
-    "@instructure/ui-themes": "workspace:*"
+    "@instructure/ui-text": "workspace:*",
+    "@instructure/ui-themes": "workspace:*",
+    "@instructure/ui-tooltip": "workspace:*",
+    "@instructure/ui-utils": "workspace:*"
   },
   "devDependencies": {
     "@instructure/ui-axe-check": "workspace:*",

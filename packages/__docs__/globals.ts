@@ -40,7 +40,7 @@ import { mirrorHorizontalPlacement } from '@instructure/ui-position'
 import { getComponentsForVersion } from './versioned-components'
 import { dark, light } from '@instructure/ui-themes'
 import { debounce } from '@instructure/debounce'
-import { useComputedTheme } from '@instructure/emotion'
+import { useComputedTheme, useTheme } from '@instructure/emotion'
 
 // @ts-expect-error no type declarations for CSS side-effect import
 // eslint-disable-next-line instructure/no-relative-imports
@@ -58,6 +58,11 @@ import avatarSquare from './buildScripts/samplemedia/avatarSquare.jpg'
 // @ts-ignore webpack import
 import avatarPortrait from './buildScripts/samplemedia/avatarPortrait.jpg'
 import placeholderImage from './buildScripts/samplemedia/placeholder-image'
+// @ts-ignore webpack import
+import canvasWordmark from './buildScripts/samplemedia/canvas-wordmark.svg'
+// @ts-ignore webpack import
+// eslint-disable-next-line instructure/no-relative-imports
+import canvasMark from '../ui-icons/svg/Custom/canvas-logo.svg'
 // eslint-disable-next-line no-restricted-imports
 import ThemeColors from './src/ThemeColors'
 // eslint-disable-next-line no-restricted-imports
@@ -77,6 +82,12 @@ const lorem = new LoremIpsum({
 })
 
 const Components = getComponentsForVersion()
+
+// an SVG shown with <img> can't inherit the text color, so the examples get one URL per color
+const svgUrl = (svg: string, color: string) =>
+  `data:image/svg+xml;utf8,${encodeURIComponent(
+    svg.replace(/currentColor/g, color)
+  )}`
 
 const globals: Record<string, any> = {
   ...Components,
@@ -105,6 +116,11 @@ const globals: Record<string, any> = {
   useState,
   useRef,
   useComputedTheme,
+  useTheme,
+  canvasWordmarkWhite: svgUrl(canvasWordmark, '#ffffff'),
+  canvasWordmarkDark: svgUrl(canvasWordmark, '#273540'),
+  canvasMarkWhite: svgUrl(canvasMark, '#ffffff'),
+  canvasMarkDark: svgUrl(canvasMark, '#273540'),
   forwardRef,
   additionalPrimitives,
   dataVisualization,
