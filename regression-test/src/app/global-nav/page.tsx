@@ -36,7 +36,7 @@ export default function GlobalNavPage() {
           onCollapse={() => {}}
           collapseLabel="Collapse navigation"
           expandLabel="Expand navigation"
-          backLabel="Back"
+          backLabel={(title) => `Back to ${title}`}
           closeSubNavLabel="Close sub navigation"
           expandSubNavLabel="Open sub navigation"
           items={[]}

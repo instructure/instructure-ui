@@ -59,6 +59,10 @@ type SubNavProps = {
    */
   closeSubNavLabel: string
   /**
+   * Screen reader text of the back button, from the title of the level it returns to.
+   */
+  backLabel: (parentTitle: string) => string
+  /**
    * Called when the user clicks the close handle.
    */
   onClose: (event: SyntheticEvent) => void

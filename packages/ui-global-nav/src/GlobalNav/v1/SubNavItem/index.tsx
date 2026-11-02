@@ -23,6 +23,7 @@
  */
 
 import { useStyleNew } from '@instructure/emotion'
+import { ChevronRightInstUIIcon } from '@instructure/ui-icons'
 
 import { getItemElementProps } from '../utils/getItemElementProps.js'
 import type { SubNavItemProps } from './props.js'
@@ -35,7 +36,7 @@ id: GlobalNav.SubNavItem
 ---
 **/
 const SubNavItem = (props: SubNavItemProps) => {
-  const { item, elementRef } = props
+  const { item, elementRef, onDrillIn } = props
 
   const styles = useStyleNew({
     generateStyle,
@@ -43,17 +44,32 @@ const SubNavItem = (props: SubNavItemProps) => {
     componentId: 'SubNavItem'
   })
 
-  const { isLink, props: elementProps } = getItemElementProps(item)
+  const { isLink, props: elementProps } = getItemElementProps(
+    item,
+    item.subNav ? (event) => onDrillIn?.(event, item) : undefined
+  )
+
+  const content = (
+    <>
+      <span css={styles?.label}>{item.label}</span>
+      {item.subNav && (
+        // the icon mirrors itself in RTL
+        <span css={styles?.chevron}>
+          <ChevronRightInstUIIcon />
+        </span>
+      )}
+    </>
+  )
 
   return (
     <li>
       {isLink ? (
         <a {...elementProps} ref={elementRef} css={styles?.item}>
-          {item.label}
+          {content}
         </a>
       ) : (
         <button {...elementProps} ref={elementRef} css={styles?.item}>
-          {item.label}
+          {content}
         </button>
       )}
     </li>

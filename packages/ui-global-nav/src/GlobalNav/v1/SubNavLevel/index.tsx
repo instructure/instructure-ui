@@ -26,9 +26,12 @@ import { useEffect, useRef } from 'react'
 import type { FocusEvent, SyntheticEvent } from 'react'
 
 import { useStyleNew } from '@instructure/emotion'
-import { IconButton } from '@instructure/ui-buttons/latest'
+import { CondensedButton, IconButton } from '@instructure/ui-buttons/latest'
 import { Heading } from '@instructure/ui-heading/latest'
-import { PanelLeftCloseInstUIIcon } from '@instructure/ui-icons'
+import {
+  ChevronLeftInstUIIcon,
+  PanelLeftCloseInstUIIcon
+} from '@instructure/ui-icons'
 import { Tooltip } from '@instructure/ui-tooltip/latest'
 
 import { SubNavItem } from '../SubNavItem/index.js'
@@ -42,7 +45,15 @@ id: GlobalNav.SubNavLevel
 ---
 **/
 const SubNavLevel = (props: SubNavLevelProps) => {
-  const { subNav, titleId, closeSubNavLabel, onClose, focusIntentRef } = props
+  const {
+    subNav,
+    titleId,
+    closeSubNavLabel,
+    onClose,
+    back,
+    onDrillIn,
+    focusIntentRef
+  } = props
 
   const styles = useStyleNew({
     generateStyle,
@@ -50,19 +61,31 @@ const SubNavLevel = (props: SubNavLevelProps) => {
   })
 
   const firstItemRef = useRef<HTMLElement | null>(null)
+  const itemRefs = useRef(new Map<string, HTMLElement>())
   const closeRef = useRef<HTMLElement | null>(null)
   const focusInsideRef = useRef(false)
+  const rootRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    const root = rootRef.current
     const intent = focusIntentRef.current
+    const firstElement = firstItemRef.current ?? closeRef.current
     if (intent?.target === 'rescue' || intent?.target === 'first') {
       focusIntentRef.current = undefined
-      ;(firstItemRef.current ?? closeRef.current)?.focus()
+      firstElement?.focus()
+    } else if (intent?.target === 'item') {
+      focusIntentRef.current = undefined
+      ;(itemRefs.current.get(intent.itemID) ?? firstElement)?.focus()
     }
 
     return () => {
       // React fires no blur event for an element it removes, so the flag still says whether focus was inside
-      if (focusInsideRef.current && !focusIntentRef.current) {
+      // StrictMode runs this cleanup without removing the level, and then focus is still in it
+      if (
+        focusInsideRef.current &&
+        !focusIntentRef.current &&
+        !root?.contains(document.activeElement)
+      ) {
         focusIntentRef.current = { target: 'rescue' }
       }
     }
@@ -78,6 +101,7 @@ const SubNavLevel = (props: SubNavLevelProps) => {
 
   return (
     <div
+      ref={rootRef}
       css={styles?.level}
       onFocus={() => {
         focusInsideRef.current = true
@@ -85,6 +109,25 @@ const SubNavLevel = (props: SubNavLevelProps) => {
       onBlur={handleBlur}
     >
       <div css={styles?.header}>
+        {back && (
+          <span css={styles?.back}>
+            <CondensedButton
+              color="secondary"
+              size="small"
+              // the design shows it as plain text, without a hover background
+              themeOverride={{ secondaryGhostHoverBackground: 'transparent' }}
+              // the icon mirrors itself in RTL
+              renderIcon={<ChevronLeftInstUIIcon />}
+              aria-label={back.label}
+              // CondensedButton types the event target as ViewProps, at runtime it is the DOM button
+              onClick={(event) =>
+                back.onClick(event as unknown as SyntheticEvent)
+              }
+            >
+              {back.title}
+            </CondensedButton>
+          </span>
+        )}
         <Tooltip renderTip={closeSubNavLabel}>
           <IconButton
             screenReaderLabel={closeSubNavLabel}
@@ -117,13 +160,15 @@ const SubNavLevel = (props: SubNavLevelProps) => {
               <SubNavItem
                 key={item.itemID}
                 item={item}
-                elementRef={
-                  index === 0
-                    ? (element) => {
-                        firstItemRef.current = element
-                      }
-                    : undefined
-                }
+                elementRef={(element) => {
+                  if (index === 0) firstItemRef.current = element
+                  if (element) {
+                    itemRefs.current.set(item.itemID, element)
+                  } else {
+                    itemRefs.current.delete(item.itemID)
+                  }
+                }}
+                onDrillIn={onDrillIn}
               />
             ))}
           </ul>

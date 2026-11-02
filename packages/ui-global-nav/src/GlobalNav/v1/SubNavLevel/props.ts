@@ -22,11 +22,11 @@
  * SOFTWARE.
  */
 
-import type { MutableRefObject, SyntheticEvent } from 'react'
+import type { MouseEvent, MutableRefObject, SyntheticEvent } from 'react'
 
 import type { ComponentStyle } from '@instructure/emotion'
 
-import type { GlobalNavSubNav } from '../props.js'
+import type { GlobalNavSubNav, GlobalNavSubNavItem } from '../props.js'
 import type { FocusIntent } from '../SubNav/props.js'
 
 type SubNavLevelProps = {
@@ -47,13 +47,28 @@ type SubNavLevelProps = {
    */
   onClose: (event: SyntheticEvent) => void
   /**
+   * The back button of a deeper level: the title of the level it returns to, its screen reader text and its click handler.
+   */
+  back?: {
+    title: string
+    label: string
+    onClick: (event: SyntheticEvent) => void
+  }
+  /**
+   * Called when the user activates an item with a `subNav`.
+   */
+  onDrillIn?: (
+    event: MouseEvent<HTMLElement>,
+    item: GlobalNavSubNavItem
+  ) => void
+  /**
    * The focus move that the user asked for, shared with GlobalNav.
    */
   focusIntentRef: MutableRefObject<FocusIntent | undefined>
 }
 
 type SubNavLevelStyle = ComponentStyle<
-  'level' | 'header' | 'divider' | 'body' | 'items'
+  'level' | 'header' | 'back' | 'divider' | 'body' | 'items'
 >
 
 export type { SubNavLevelProps, SubNavLevelStyle }
