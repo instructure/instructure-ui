@@ -262,6 +262,10 @@ type GlobalNavOwnProps = {
    */
   closeSubNavLabel: string
   /**
+   * Screen reader text of the button that opens the SubNav of the current page again.
+   */
+  expandSubNavLabel: string
+  /**
    * The `itemID` of the item or account whose SubNav is open, or `undefined` when none is open.
    */
   openSubNav?: string
@@ -303,6 +307,7 @@ const allowedProps: AllowedPropKeys = [
   'expandLabel',
   'backLabel',
   'closeSubNavLabel',
+  'expandSubNavLabel',
   'openSubNav',
   'onSubNavChange',
   'items',

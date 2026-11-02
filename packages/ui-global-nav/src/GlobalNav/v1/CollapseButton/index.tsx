@@ -42,7 +42,8 @@ id: GlobalNav.CollapseButton
 ---
 **/
 const CollapseButton = (props: CollapseButtonProps) => {
-  const { collapsed, collapseLabel, expandLabel, onCollapse } = props
+  const { collapsed, collapseLabel, expandLabel, onCollapse, elementRef } =
+    props
 
   const styles = useStyleNew({
     generateStyle,
@@ -64,6 +65,7 @@ const CollapseButton = (props: CollapseButtonProps) => {
         withBackground={false}
         withBorder={false}
         size="small"
+        elementRef={elementRef}
         // IconButton types the event target as ViewProps, at runtime it is the DOM button
         onClick={(event) =>
           onCollapse(event as unknown as SyntheticEvent, !collapsed)

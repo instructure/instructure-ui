@@ -38,6 +38,7 @@ const requiredProps = {
   expandLabel: 'Expand navigation',
   backLabel: 'Back',
   closeSubNavLabel: 'Close sub navigation',
+  expandSubNavLabel: 'Open sub navigation',
   items: [],
   logo: { name: 'Canvas' }
 }
