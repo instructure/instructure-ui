@@ -81,6 +81,9 @@ const generateStyle = (
       background: isDisabled
         ? componentTheme.trackBackgroundDisabledColor
         : componentTheme.trackBackgroundColor,
+      opacity: isDisabled
+        ? componentTheme.opacityDisabled
+        : componentTheme.opacityBase,
       ...(isOverflown && {
         minWidth: 0,
         overflowX: 'auto',
