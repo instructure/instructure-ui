@@ -86,8 +86,6 @@ type WithStyleProps<
   ? WithStylePrivateProps<Style>
   : WithStylePrivateProps<Style> & ThemeOverrideProp<CompTheme>
 
-declare const process: Record<string, any> | undefined
-
 const defaultValues = {
   styles: {},
   makeStyles: () => {}
@@ -98,7 +96,7 @@ const defaultValues = {
  * category: utilities/themes
  * ---
  *
- * Decorator (or HOC) that makes a component themeable using InstUI's new
+ * HOC that makes a component themeable using InstUI's new
  * theming system. Injects a `makeStyles` function and the
  * generated `styles` object as props.
  *
@@ -120,7 +118,7 @@ const defaultValues = {
  *
  * @param {function} generateStyle - Returns the component's style object
  * @param {string}   [useTokensFrom] - Key of another component whose tokens this one should consume
- * @returns {ReactElement} The decorated component
+ * @returns {ReactElement} The wrapped component
  */
 const withStyleNew = decorator(
   (
@@ -143,7 +141,7 @@ const withStyleNew = decorator(
       allowedProps?: string[]
       originalType?: WithStyleComponent
       defaultProps?: Partial<any>
-    } = forwardRef((props, ref) => {
+    } = forwardRef(function WithStyle(props, ref) {
       const themeInContext = useTheme() as Theme
       const themeKey = themeInContext.key
 
@@ -282,24 +280,8 @@ const withStyleNew = decorator(
     // more info: https://github.com/facebook/react/issues/13455
     WithStyle.originalType = ComposedComponent.originalType || ComposedComponent
 
+    // hoisting skips defaultProps, but parents read it (e.g. getElementType)
     WithStyle.defaultProps = ComposedComponent.defaultProps
-    // These static fields exist on InstUI components
-    WithStyle.allowedProps = ComposedComponent.allowedProps
-
-    // we have to add defaults to makeStyles and styles added by this decorator
-    // eslint-disable-next-line no-param-reassign
-    ComposedComponent.defaultProps = {
-      ...ComposedComponent.defaultProps,
-      makeStyles: defaultValues.makeStyles,
-      styles: defaultValues.styles
-    }
-
-    if (
-      typeof process !== 'undefined' &&
-      process?.env?.NODE_ENV !== 'production'
-    ) {
-      WithStyle.displayName = `WithStyle(${displayName})`
-    }
 
     return WithStyle
   }

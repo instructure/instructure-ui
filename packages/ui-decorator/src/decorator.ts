@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { ComponentClass } from 'react'
+import type { ComponentClass, ComponentType } from 'react'
 
 /**
  * ---
@@ -42,11 +42,14 @@ function decorator(
 ) {
   return (...args: unknown[]) => {
     // parameters when the decorator is used
-    return (ComposedComponent: ComponentClass<any>) => {
+    return <C extends ComponentType<any>>(ComposedComponent: C): C => {
       if (typeof decorate === 'function') {
         const displayName =
           ComposedComponent.displayName || ComposedComponent.name
-        const DecoratedComponent = decorate(ComposedComponent, ...args)
+        const DecoratedComponent = decorate(
+          ComposedComponent as unknown as ComponentClass<any>,
+          ...args
+        )
         DecoratedComponent.displayName = displayName
         return DecoratedComponent
       } else {
