@@ -23,6 +23,9 @@
       "path": "../ui-buttons/tsconfig.build.json"
     },
     {
+      "path": "../ui-heading/tsconfig.build.json"
+    },
+    {
       "path": "../ui-icons/tsconfig.build.json"
     },
     {
