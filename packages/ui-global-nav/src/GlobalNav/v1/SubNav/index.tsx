@@ -22,11 +22,41 @@
  * SOFTWARE.
  */
 
+import { useState } from 'react'
+import type { MouseEvent, SyntheticEvent } from 'react'
+
 import { useStyleNew } from '@instructure/emotion'
 
+import type { GlobalNavSubNav, GlobalNavSubNavItem } from '../props.js'
 import { SubNavLevel } from '../SubNavLevel/index.js'
 import type { SubNavProps } from './props.js'
 import generateStyle from './styles.js'
+
+type Level = { subNav: GlobalNavSubNav; itemID?: string }
+
+// the itemIDs of the levels to open so the deepest current item shows, or undefined without one
+const findCurrentPath = (subNav: GlobalNavSubNav): string[] | undefined => {
+  const items = subNav.items ?? []
+  for (const item of items) {
+    if (item.subNav) {
+      const deeperPath = findCurrentPath(item.subNav)
+      if (deeperPath) return [item.itemID, ...deeperPath]
+    }
+  }
+  return items.some((item) => item.current) ? [] : undefined
+}
+
+// stops at an itemID that the latest data no longer has, so the deepest level that still exists shows
+const resolveLevels = (subNav: GlobalNavSubNav, path: string[]) => {
+  const levels: Level[] = [{ subNav }]
+  for (const itemID of path) {
+    const parent = levels[levels.length - 1].subNav
+    const item = parent.items?.find((i) => i.itemID === itemID)
+    if (!item?.subNav) break
+    levels.push({ subNav: item.subNav, itemID })
+  }
+  return levels
+}
 
 /**
 ---
@@ -40,6 +70,7 @@ const SubNav = (props: SubNavProps) => {
     subNavId,
     titleId,
     closeSubNavLabel,
+    backLabel,
     onClose,
     focusIntentRef
   } = props
@@ -49,13 +80,46 @@ const SubNav = (props: SubNavProps) => {
     componentId: 'SubNav'
   })
 
+  const [path, setPath] = useState(() => findCurrentPath(subNav) ?? [])
+
+  const levels = resolveLevels(subNav, path)
+  const resolvedPath = levels.slice(1).map((level) => level.itemID!)
+  const level = levels[levels.length - 1]
+  const parent = levels.length > 1 ? levels[levels.length - 2] : undefined
+
+  const handleDrillIn = (
+    _event: MouseEvent<HTMLElement>,
+    item: GlobalNavSubNavItem
+  ) => {
+    focusIntentRef.current = { target: 'first' }
+    setPath([...resolvedPath, item.itemID])
+  }
+
+  const handleBack = (_event: SyntheticEvent) => {
+    focusIntentRef.current = {
+      target: 'item',
+      itemID: resolvedPath[resolvedPath.length - 1]
+    }
+    setPath(resolvedPath.slice(0, -1))
+  }
+
   return (
     <nav id={subNavId} aria-labelledby={titleId} css={styles?.subNav}>
       <SubNavLevel
-        subNav={subNav}
+        // a new level remounts, which resets its refs, focus and scroll position
+        key={JSON.stringify(resolvedPath)}
+        subNav={level.subNav}
         titleId={titleId}
         closeSubNavLabel={closeSubNavLabel}
         onClose={onClose}
+        back={
+          parent && {
+            title: parent.subNav.title,
+            label: backLabel(parent.subNav.title),
+            onClick: handleBack
+          }
+        }
+        onDrillIn={handleDrillIn}
         focusIntentRef={focusIntentRef}
       />
     </nav>

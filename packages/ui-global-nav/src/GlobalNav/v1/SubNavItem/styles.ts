@@ -92,6 +92,15 @@ const generateStyle = (
           color: componentTheme.activeTextColor
         }
       })
+    },
+    label: {
+      label: 'subNavItem__label',
+      flex: 1
+    },
+    chevron: {
+      label: 'subNavItem__chevron',
+      display: 'flex',
+      flexShrink: 0
     }
   }
 }

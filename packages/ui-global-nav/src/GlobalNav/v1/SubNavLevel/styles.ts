@@ -55,6 +55,12 @@ const generateStyle = (
       alignItems: 'center',
       justifyContent: 'flex-end'
     },
+    back: {
+      label: 'subNavLevel__back',
+      // pushes the close handle to the end, and lets a long parent title shrink
+      marginInlineEnd: 'auto',
+      minWidth: 0
+    },
     divider: {
       label: 'subNavLevel__divider',
       // SubNav has no divider width token

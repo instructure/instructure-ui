@@ -22,6 +22,8 @@
  * SOFTWARE.
  */
 
+import type { MouseEvent } from 'react'
+
 import type { ComponentStyle } from '@instructure/emotion'
 
 import type { GlobalNavSubNavItem } from '../props.js'
@@ -34,9 +36,13 @@ type SubNavItemProps = {
   /**
    * Called with the link or button element of the item.
    */
-  elementRef?: (element: HTMLElement | null) => void
+  elementRef: (element: HTMLElement | null) => void
+  /**
+   * Called when the user activates an item with a `subNav`, after `item.onClick`.
+   */
+  onDrillIn: (event: MouseEvent<HTMLElement>, item: GlobalNavSubNavItem) => void
 }
 
-type SubNavItemStyle = ComponentStyle<'item'>
+type SubNavItemStyle = ComponentStyle<'item' | 'label' | 'chevron'>
 
 export type { SubNavItemProps, SubNavItemStyle }

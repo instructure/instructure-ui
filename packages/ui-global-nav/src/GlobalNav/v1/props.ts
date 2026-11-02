@@ -254,9 +254,9 @@ type GlobalNavOwnProps = {
    */
   expandLabel: string
   /**
-   * Screen reader text of the back button in a deeper SubNav level.
+   * Screen reader text of the back button in a deeper SubNav level, from the title of the level it returns to.
    */
-  backLabel: string
+  backLabel: (parentTitle: string) => string
   /**
    * Screen reader text of the handle that closes the open SubNav.
    */
