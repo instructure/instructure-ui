@@ -45,7 +45,7 @@ const Example = () => {
         <SegmentedControl.Option value="table" renderLabel="Table" />
       </SegmentedControl>
       <View as="div" margin="general.spaceMd 0 0">
-        Selected: {view}
+        <Text>Selected: {view}</Text>
       </View>
     </View>
   )
@@ -56,9 +56,9 @@ render(<Example />)
 
 ### Sizes
 
-The `size` prop accepts `lg` (the default), `md`, and `sm`. Use `lg` in most
-places, `md` in tighter layouts or secondary areas, and `sm` in compact toolbars
-or inline controls.
+The `size` prop accepts `md` (the default), `lg`, and `sm`. Use `md` in most
+places, `lg` where the control needs more prominence, and `sm` in compact
+toolbars or inline controls.
 
 ```js
 ---

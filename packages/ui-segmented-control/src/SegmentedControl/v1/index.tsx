@@ -67,7 +67,7 @@ const SegmentedControlBase = forwardRef<HTMLDivElement, SegmentedControlProps>(
       value,
       defaultValue,
       onChange,
-      size = 'lg',
+      size = 'md',
       isDisabled = false,
       isOverflown = false,
       renderPreviousLabel,

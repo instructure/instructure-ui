@@ -113,8 +113,8 @@ const generateStyle = (
       fontWeight: componentTheme.fontWeight,
       lineHeight: componentTheme.lineHeight,
       paddingVertical: '0',
-      // the disabled colors already carry the disabled look
-      opacityDisabled: 1,
+      opacityBase: componentTheme.opacityBase,
+      opacityDisabled: componentTheme.opacityDisabled,
       secondaryBorderColor: 'transparent',
       secondaryGhostBorderColor: 'transparent',
       secondaryHoverBorderColor: 'transparent',

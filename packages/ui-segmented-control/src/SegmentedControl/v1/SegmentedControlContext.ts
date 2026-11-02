@@ -38,7 +38,7 @@ type SegmentedControlContextValue = {
 }
 
 const SegmentedControlContext = createContext<SegmentedControlContextValue>({
-  size: 'lg',
+  size: 'md',
   isDisabled: false,
   onSelect: () => undefined,
   onKeyDown: () => undefined
