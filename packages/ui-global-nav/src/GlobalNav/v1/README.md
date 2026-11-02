@@ -30,7 +30,15 @@ const items = [
     itemID: 'courses',
     icon: <BookOpenInstUIIcon />,
     label: 'Courses',
-    subNav: { title: 'Courses' }
+    subNav: {
+      title: 'Courses',
+      items: [
+        { itemID: 'all-courses', label: 'All courses', href: '#' },
+        { itemID: 'biology', label: 'Biology 101', href: '#' },
+        { itemID: 'history', label: 'World history', href: '#' },
+        { itemID: 'algebra', label: 'Algebra II', href: '#' }
+      ]
+    }
   },
   {
     itemID: 'inbox',
@@ -76,6 +84,14 @@ const Example = () => {
 
 render(<Example />)
 ```
+
+### Sub navigation
+
+One SubNav is open at a time. The app opens and closes it with `openSubNav` and `onSubNavChange`. Clicking the open rail item again closes it, and so do the close handle and a click on a rail item without a `subNav`. A click with a modifier key, for example to open a link in a new tab, keeps it open.
+
+When the user opens a SubNav, focus moves to its first item, or to the close handle when it has no items. When the user closes it, focus goes back to the rail item. Focus doesn't move when the app sets `openSubNav` itself, for example on page load.
+
+`GlobalNav` gets wider while a SubNav is open, so don't give it a fixed width.
 
 ### Wordmark logo
 

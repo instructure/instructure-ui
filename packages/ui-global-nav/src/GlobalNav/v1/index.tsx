@@ -22,16 +22,19 @@
  * SOFTWARE.
  */
 
-import { forwardRef } from 'react'
+import { forwardRef, useEffect, useRef } from 'react'
+import type { MouseEvent, SyntheticEvent } from 'react'
 import { useStyleNew } from '@instructure/emotion'
-import { omitProps } from '@instructure/ui-react-utils'
+import { omitProps, useDeterministicId } from '@instructure/ui-react-utils'
 
-import type { GlobalNavProps } from './props.js'
+import type { GlobalNavMainNavItem, GlobalNavProps } from './props.js'
 import { allowedProps } from './props.js'
 import generateStyle, { generateMainNavStyle } from './styles.js'
 import { CollapseButton } from './CollapseButton/index.js'
 import { InstitutionLogo } from './InstitutionLogo/index.js'
 import { MainNavItem } from './MainNavItem/index.js'
+import { SubNav } from './SubNav/index.js'
+import type { FocusIntent } from './SubNav/props.js'
 
 /**
 ---
@@ -47,6 +50,7 @@ const GlobalNav = forwardRef<HTMLElement, GlobalNavProps>(
       onCollapse,
       collapseLabel,
       expandLabel,
+      closeSubNavLabel,
       openSubNav,
       onSubNavChange,
       items,
@@ -68,6 +72,59 @@ const GlobalNav = forwardRef<HTMLElement, GlobalNavProps>(
       params: { collapsed },
       componentId: 'MainNav'
     })
+
+    const getId = useDeterministicId('GlobalNav')
+    const subNavId = getId('GlobalNav-subNav')
+    const titleId = getId('GlobalNav-subNavTitle')
+
+    const focusIntentRef = useRef<FocusIntent>()
+    const triggerRefs = useRef(new Map<string, HTMLElement>())
+    const renderedSubNavRef = useRef<string>()
+
+    const openItem = items.find(
+      (item) => item.itemID === openSubNav && item.subNav
+    )
+
+    useEffect(() => {
+      const intent = focusIntentRef.current
+      // an intent lives for one commit, so a change that the app ignores doesn't move focus later
+      focusIntentRef.current = undefined
+      const closedID = renderedSubNavRef.current
+      renderedSubNavRef.current = openItem?.itemID
+
+      if (
+        !openItem &&
+        closedID !== undefined &&
+        (intent?.target === 'trigger' || intent?.target === 'rescue')
+      ) {
+        triggerRefs.current.get(closedID)?.focus()
+      }
+    })
+
+    const handleItemActivate = (
+      event: MouseEvent<HTMLElement>,
+      item: GlobalNavMainNavItem
+    ) => {
+      if (item.subNav) {
+        const next = openSubNav === item.itemID ? undefined : item.itemID
+        focusIntentRef.current = next
+          ? { target: 'first' }
+          : { target: 'trigger' }
+        onSubNavChange?.(event, next)
+      } else if (
+        openItem &&
+        // a link opened in a new tab or window keeps the SubNav open
+        !(event.metaKey || event.ctrlKey || event.shiftKey || event.altKey)
+      ) {
+        focusIntentRef.current = { target: 'none' }
+        onSubNavChange?.(event, undefined)
+      }
+    }
+
+    const handleSubNavClose = (event: SyntheticEvent) => {
+      focusIntentRef.current = { target: 'trigger' }
+      onSubNavChange?.(event, undefined)
+    }
 
     return (
       <nav
@@ -95,11 +152,32 @@ const GlobalNav = forwardRef<HTMLElement, GlobalNavProps>(
                   item={item}
                   collapsed={collapsed}
                   open={openSubNav === item.itemID}
-                  onSubNavChange={onSubNavChange}
+                  subNavId={
+                    openItem?.itemID === item.itemID ? subNavId : undefined
+                  }
+                  onActivate={handleItemActivate}
+                  elementRef={(element) => {
+                    if (element) {
+                      triggerRefs.current.set(item.itemID, element)
+                    } else {
+                      triggerRefs.current.delete(item.itemID)
+                    }
+                  }}
                 />
               ))}
             </ul>
           </div>
+          {openItem?.subNav && (
+            <SubNav
+              key={openItem.itemID}
+              subNav={openItem.subNav}
+              subNavId={subNavId}
+              titleId={titleId}
+              closeSubNavLabel={closeSubNavLabel}
+              onClose={handleSubNavClose}
+              focusIntentRef={focusIntentRef}
+            />
+          )}
         </div>
       </nav>
     )
