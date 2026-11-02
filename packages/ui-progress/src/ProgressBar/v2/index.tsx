@@ -39,8 +39,7 @@ import { allowedProps } from './props.js'
 category: components
 ---
 **/
-@withStyleNew(generateStyle)
-class ProgressBar extends Component<ProgressBarProps> {
+export class ProgressBarBase extends Component<ProgressBarProps> {
   static displayName = 'ProgressBar'
   static readonly componentId = 'ProgressBar'
 
@@ -138,6 +137,9 @@ class ProgressBar extends Component<ProgressBarProps> {
     )
   }
 }
+
+const ProgressBar = withStyleNew(generateStyle)(ProgressBarBase)
+type ProgressBar = ProgressBarBase
 
 export default ProgressBar
 export { ProgressBar }

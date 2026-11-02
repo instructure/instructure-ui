@@ -39,8 +39,7 @@ category: utilities/a11y
 ---
 @module ScreenReaderContent
 **/
-@withStyle(generateStyle, null)
-class ScreenReaderContent extends Component<ScreenReaderContentProps> {
+export class ScreenReaderContentBase extends Component<ScreenReaderContentProps> {
   static displayName = 'ScreenReaderContent'
   static readonly componentId = 'ScreenReaderContent'
 
@@ -85,6 +84,12 @@ class ScreenReaderContent extends Component<ScreenReaderContentProps> {
     )
   }
 }
+
+const ScreenReaderContent = withStyle(
+  generateStyle,
+  null
+)(ScreenReaderContentBase)
+type ScreenReaderContent = ScreenReaderContentBase
 
 export default ScreenReaderContent
 export { ScreenReaderContent }

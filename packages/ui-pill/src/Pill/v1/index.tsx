@@ -42,8 +42,7 @@ import { allowedProps } from './props.js'
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
-class Pill extends Component<PillProps, PillState> {
+export class PillBase extends Component<PillProps, PillState> {
   static displayName = 'Pill'
   static readonly componentId = 'Pill'
 
@@ -178,6 +177,9 @@ class Pill extends Component<PillProps, PillState> {
     }
   }
 }
+
+const Pill = withStyle(generateStyle, generateComponentTheme)(PillBase)
+type Pill = PillBase
 
 export default Pill
 export { Pill }

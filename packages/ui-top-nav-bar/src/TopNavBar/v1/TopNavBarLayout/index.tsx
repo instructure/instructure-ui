@@ -50,8 +50,7 @@ id: TopNavBar.Layout
 ---
 @module TopNavBarLayout
 **/
-@withStyle(null, generateComponentTheme)
-class TopNavBarLayout extends Component<TopNavBarLayoutProps> {
+export class TopNavBarLayoutBase extends Component<TopNavBarLayoutProps> {
   static displayName = 'TopNavBarLayout'
   static readonly componentId = 'TopNavBar.Layout'
 
@@ -145,6 +144,12 @@ class TopNavBarLayout extends Component<TopNavBarLayoutProps> {
     )
   }
 }
+
+const TopNavBarLayout = withStyle(
+  null,
+  generateComponentTheme
+)(TopNavBarLayoutBase)
+type TopNavBarLayout = TopNavBarLayoutBase
 
 export { TopNavBarLayout }
 export default TopNavBarLayout

@@ -54,9 +54,7 @@ import { PositionElement } from '../PositionPropTypes.js'
 category: components/Util Components
 ---
 **/
-@withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
-class Position extends Component<PositionProps, PositionState> {
+export class PositionBase extends Component<PositionProps, PositionState> {
   static displayName = 'Position'
   static readonly componentId = 'Position'
 
@@ -341,6 +339,11 @@ class Position extends Component<PositionProps, PositionState> {
     )
   }
 }
+
+const Position = withDeterministicId()(
+  withStyle(generateStyle, generateComponentTheme)(PositionBase)
+)
+type Position = PositionBase
 
 export default Position
 export { Position }

@@ -44,8 +44,10 @@ const navMinimized = ({ minimized }: { minimized: boolean }) => ({
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
-class SideNavBar extends Component<SideNavBarProps, SideNavBarState> {
+export class SideNavBarBase extends Component<
+  SideNavBarProps,
+  SideNavBarState
+> {
   static displayName = 'SideNavBar'
   static readonly componentId = 'SideNavBar'
 
@@ -149,6 +151,12 @@ class SideNavBar extends Component<SideNavBarProps, SideNavBarState> {
     )
   }
 }
+
+const SideNavBar = withStyle(
+  generateStyle,
+  generateComponentTheme
+)(SideNavBarBase)
+type SideNavBar = SideNavBarBase
 
 export default SideNavBar
 export { SideNavBar, SideNavBarItem }

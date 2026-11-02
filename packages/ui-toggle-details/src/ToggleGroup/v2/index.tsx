@@ -59,8 +59,7 @@ const toggleGroupSizeToIconSize = {
 category: components
 ---
 **/
-@withStyleNew(generateStyle)
-class ToggleGroup extends Component<ToggleGroupProps> {
+export class ToggleGroupBase extends Component<ToggleGroupProps> {
   static displayName = 'ToggleGroup'
   static readonly componentId = 'ToggleGroup'
 
@@ -209,6 +208,9 @@ class ToggleGroup extends Component<ToggleGroupProps> {
     )
   }
 }
+
+const ToggleGroup = withStyleNew(generateStyle)(ToggleGroupBase)
+type ToggleGroup = ToggleGroupBase
 
 export default ToggleGroup
 export { ToggleGroup }

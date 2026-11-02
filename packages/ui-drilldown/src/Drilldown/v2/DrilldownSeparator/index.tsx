@@ -39,8 +39,7 @@ themeId: OptionsSeparator
 **/
 // needed for listing the available theme variables on docs page,
 // we pass the themeOverrides to Options.Separator
-@withStyleNew(null)
-class DrilldownSeparator extends Component<DrilldownSeparatorProps> {
+export class DrilldownSeparatorBase extends Component<DrilldownSeparatorProps> {
   static displayName = 'DrilldownSeparator'
   static readonly componentId = 'Drilldown.Separator'
 
@@ -53,6 +52,9 @@ class DrilldownSeparator extends Component<DrilldownSeparatorProps> {
     return null
   }
 }
+
+const DrilldownSeparator = withStyleNew(null)(DrilldownSeparatorBase)
+type DrilldownSeparator = DrilldownSeparatorBase
 
 export default DrilldownSeparator
 export { DrilldownSeparator }

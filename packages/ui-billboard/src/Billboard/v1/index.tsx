@@ -46,8 +46,7 @@ import type { ViewProps } from '@instructure/ui-view/v11_6'
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
-class Billboard extends Component<BillboardProps> {
+export class BillboardBase extends Component<BillboardProps> {
   static displayName = 'Billboard'
   static readonly componentId = 'Billboard'
 
@@ -167,6 +166,12 @@ class Billboard extends Component<BillboardProps> {
     )
   }
 }
+
+const Billboard = withStyle(
+  generateStyle,
+  generateComponentTheme
+)(BillboardBase)
+type Billboard = BillboardBase
 
 export default Billboard
 export { Billboard }

@@ -104,10 +104,7 @@ import type { SourceCodeEditorProps } from './props'
 category: components
 ---
 **/
-@withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
-@textDirectionContextConsumer()
-class SourceCodeEditor extends Component<SourceCodeEditorProps> {
+export class SourceCodeEditorBase extends Component<SourceCodeEditorProps> {
   static displayName = 'SourceCodeEditor'
   static readonly componentId = 'SourceCodeEditor'
 
@@ -364,7 +361,7 @@ class SourceCodeEditor extends Component<SourceCodeEditorProps> {
 
   get direction() {
     // comes from the `direction` prop and
-    // falls back to the `dir` prop coming from the bidirectional decorator
+    // falls back to the `dir` prop coming from the `textDirectionContextConsumer` HOC
     return this.props.direction || this.props.dir
   }
 
@@ -682,6 +679,14 @@ class SourceCodeEditor extends Component<SourceCodeEditorProps> {
     )
   }
 }
+
+const SourceCodeEditor = withDeterministicId()(
+  withStyle(
+    generateStyle,
+    generateComponentTheme
+  )(textDirectionContextConsumer()(SourceCodeEditorBase))
+)
+type SourceCodeEditor = SourceCodeEditorBase
 
 export default SourceCodeEditor
 export { SourceCodeEditor }

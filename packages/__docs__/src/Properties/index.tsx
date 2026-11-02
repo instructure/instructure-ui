@@ -43,8 +43,7 @@ import type {
 import { Heading } from '@instructure/ui-heading/latest'
 import { View } from '@instructure/ui-view/latest'
 
-@withStyleForDocs(generateStyle)
-class Properties extends Component<PropertiesProps> {
+export class PropertiesBase extends Component<PropertiesProps> {
   static displayName = 'Properties'
   static defaultProps = {
     layout: 'small'
@@ -306,6 +305,9 @@ class Properties extends Component<PropertiesProps> {
     )
   }
 }
+
+const Properties = withStyleForDocs(generateStyle)(PropertiesBase)
+type Properties = PropertiesBase
 
 export default Properties
 export { Properties }

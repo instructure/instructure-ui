@@ -46,9 +46,10 @@ import generateComponentTheme from './theme.js'
 private: true
 ---
 **/
-@withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
-class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
+export class ColorPaletteBase extends Component<
+  ColorPaletteProps,
+  ColorPaletteState
+> {
   static displayName = 'ColorPalette'
   static allowedProps = allowedProps
   static readonly componentId = 'ColorMixer.Palette'
@@ -261,5 +262,10 @@ class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
     )
   }
 }
+
+const ColorPalette = withDeterministicId()(
+  withStyle(generateStyle, generateComponentTheme)(ColorPaletteBase)
+)
+type ColorPalette = ColorPaletteBase
 
 export default ColorPalette

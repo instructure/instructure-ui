@@ -44,8 +44,7 @@ import type {
 private: true
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
-class TopNavBarDesktopLayout extends Component<TopNavBarDesktopLayoutProps> {
+export class TopNavBarDesktopLayoutBase extends Component<TopNavBarDesktopLayoutProps> {
   static displayName = 'TopNavBarDesktopLayout'
   static readonly componentId = 'TopNavBar.DesktopLayout'
 
@@ -162,6 +161,12 @@ class TopNavBarDesktopLayout extends Component<TopNavBarDesktopLayoutProps> {
     )
   }
 }
+
+const TopNavBarDesktopLayout = withStyle(
+  generateStyle,
+  generateComponentTheme
+)(TopNavBarDesktopLayoutBase)
+type TopNavBarDesktopLayout = TopNavBarDesktopLayoutBase
 
 export { TopNavBarDesktopLayout }
 export default TopNavBarDesktopLayout

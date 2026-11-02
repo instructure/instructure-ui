@@ -42,8 +42,7 @@ category: components
 ---
 **/
 
-@withStyleNew(generateStyle)
-class Breadcrumb extends Component<BreadcrumbProps> {
+export class BreadcrumbBase extends Component<BreadcrumbProps> {
   static displayName = 'Breadcrumb'
   static readonly componentId = 'Breadcrumb'
 
@@ -152,6 +151,9 @@ class Breadcrumb extends Component<BreadcrumbProps> {
     )
   }
 }
+
+const Breadcrumb = withStyleNew(generateStyle)(BreadcrumbBase)
+type Breadcrumb = BreadcrumbBase
 
 export default Breadcrumb
 export { Breadcrumb, BreadcrumbLink }

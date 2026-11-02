@@ -57,8 +57,7 @@ category: components
 tags: overlay, portal, dialog
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
-class Modal extends Component<ModalProps, ModalState> {
+export class ModalBase extends Component<ModalProps, ModalState> {
   static displayName = 'Modal'
   static readonly componentId = 'Modal'
 
@@ -331,6 +330,9 @@ class Modal extends Component<ModalProps, ModalState> {
     )
   }
 }
+
+const Modal = withStyle(generateStyle, generateComponentTheme)(ModalBase)
+type Modal = ModalBase
 
 export default Modal
 export { Modal, ModalHeader, ModalBody, ModalFooter }
