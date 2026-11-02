@@ -40,8 +40,7 @@ import generateStyle from './styles.js'
 private: true
 ---
 **/
-@withStyleNew(generateStyle, 'Slider')
-class Slider extends Component<SliderProps> {
+export class SliderBase extends Component<SliderProps> {
   static displayName = 'Slider'
   static allowedProps = allowedProps
   static readonly componentId = 'ColorMixer.Slider'
@@ -243,5 +242,8 @@ class Slider extends Component<SliderProps> {
     )
   }
 }
+
+const Slider = withStyleNew(generateStyle, 'Slider')(SliderBase)
+type Slider = SliderBase
 
 export default Slider

@@ -38,8 +38,7 @@ parent: List
 id: List.Item
 ---
 **/
-@withStyleNew(generateStyle)
-class ListItem extends Component<ListItemProps> {
+export class ListItemBase extends Component<ListItemProps> {
   static displayName = 'ListItem'
   static readonly componentId = 'List.Item'
 
@@ -100,6 +99,9 @@ class ListItem extends Component<ListItemProps> {
     )
   }
 }
+
+const ListItem = withStyleNew(generateStyle)(ListItemBase)
+type ListItem = ListItemBase
 
 export default ListItem
 export { ListItem }

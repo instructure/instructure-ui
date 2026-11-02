@@ -39,8 +39,7 @@ id: Menu.Separator
 ---
 @module MenuItemSeparator
 **/
-@withStyleNew(generateStyle)
-class MenuItemSeparator extends Component<MenuSeparatorProps> {
+export class MenuItemSeparatorBase extends Component<MenuSeparatorProps> {
   static displayName = 'MenuItemSeparator'
   static readonly componentId = 'Menu.Separator'
 
@@ -75,6 +74,9 @@ class MenuItemSeparator extends Component<MenuSeparatorProps> {
     )
   }
 }
+
+const MenuItemSeparator = withStyleNew(generateStyle)(MenuItemSeparatorBase)
+type MenuItemSeparator = MenuItemSeparatorBase
 
 export default MenuItemSeparator
 export { MenuItemSeparator }

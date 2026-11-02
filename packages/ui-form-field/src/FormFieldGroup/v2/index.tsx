@@ -54,9 +54,7 @@ import type { FormFieldLayoutChildrenParams } from '../../FormFieldLayout/v2/pro
 category: components
 ---
 **/
-@withDeterministicId()
-@withStyleNew(generateStyle)
-class FormFieldGroup extends Component<FormFieldGroupProps> {
+export class FormFieldGroupBase extends Component<FormFieldGroupProps> {
   static displayName = 'FormFieldGroup'
   static readonly componentId = 'FormFieldGroup'
 
@@ -202,6 +200,11 @@ class FormFieldGroup extends Component<FormFieldGroupProps> {
     )
   }
 }
+
+const FormFieldGroup = withDeterministicId()(
+  withStyleNew(generateStyle)(FormFieldGroupBase)
+)
+type FormFieldGroup = FormFieldGroupBase
 
 export default FormFieldGroup
 export { FormFieldGroup }

@@ -58,9 +58,10 @@ category: components
 id: NumberInput
 ---
 **/
-@withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
-class NumberInput extends Component<NumberInputProps, NumberInputState> {
+export class NumberInputBase extends Component<
+  NumberInputProps,
+  NumberInputState
+> {
   static displayName = 'NumberInput'
   static readonly componentId = 'NumberInput'
   static allowedProps = allowedProps
@@ -312,6 +313,11 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
     )
   }
 }
+
+const NumberInput = withDeterministicId()(
+  withStyle(generateStyle, generateComponentTheme)(NumberInputBase)
+)
+type NumberInput = NumberInputBase
 
 export default NumberInput
 export { NumberInput }

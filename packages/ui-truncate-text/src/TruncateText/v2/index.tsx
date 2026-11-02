@@ -45,8 +45,10 @@ import type { TruncateTextProps } from './props'
 category: components
 ---
 **/
-@withStyleNew(generateStyle)
-class TruncateText extends Component<TruncateTextProps, TruncateTextState> {
+export class TruncateTextBase extends Component<
+  TruncateTextProps,
+  TruncateTextState
+> {
   static displayName = 'TruncateText'
   static readonly componentId = 'TruncateText'
 
@@ -302,6 +304,9 @@ class TruncateText extends Component<TruncateTextProps, TruncateTextState> {
     )
   }
 }
+
+const TruncateText = withStyleNew(generateStyle)(TruncateTextBase)
+type TruncateText = TruncateTextBase
 
 export default TruncateText
 export { TruncateText }

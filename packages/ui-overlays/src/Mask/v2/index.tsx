@@ -40,8 +40,7 @@ import MaskCounter from './MaskCounter.js'
 category: components/Util Components
 ---
 **/
-@withStyleNew(generateStyle)
-class Mask extends Component<MaskProps> {
+export class MaskBase extends Component<MaskProps> {
   static displayName = 'Mask'
   static readonly componentId = 'Mask'
 
@@ -115,6 +114,9 @@ class Mask extends Component<MaskProps> {
     return <span {...props}>{content}</span>
   }
 }
+
+const Mask = withStyleNew(generateStyle)(MaskBase)
+type Mask = MaskBase
 
 export default Mask
 export { Mask }

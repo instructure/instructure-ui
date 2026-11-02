@@ -34,8 +34,7 @@ import {
 } from '../textDirectionContextConsumer.js'
 import { TextDirectionContext } from '../TextDirectionContext.js'
 
-@textDirectionContextConsumer()
-class TextDirectionContextConsumerComponent extends Component<TextDirectionContextConsumerProps> {
+class TextDirectionContextConsumerComponentBase extends Component<TextDirectionContextConsumerProps> {
   render() {
     return (
       <div
@@ -48,6 +47,10 @@ class TextDirectionContextConsumerComponent extends Component<TextDirectionConte
     )
   }
 }
+
+const TextDirectionContextConsumerComponent = textDirectionContextConsumer()(
+  TextDirectionContextConsumerComponentBase
+)
 
 class WrapperComponent extends Component {
   render() {

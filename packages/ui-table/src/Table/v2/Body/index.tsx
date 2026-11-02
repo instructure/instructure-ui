@@ -45,8 +45,7 @@ parent: Table
 id: Table.Body
 ---
 **/
-@withStyleNew(generateStyle)
-class Body extends Component<TableBodyProps> {
+export class BodyBase extends Component<TableBodyProps> {
   static displayName = 'Body'
   static readonly componentId = 'Table.Body'
   static contextType = TableContext
@@ -87,6 +86,9 @@ class Body extends Component<TableBodyProps> {
     )
   }
 }
+
+const Body = withStyleNew(generateStyle)(BodyBase)
+type Body = BodyBase
 
 export default Body
 export { Body }

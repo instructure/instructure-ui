@@ -53,8 +53,10 @@ import TreeBrowserContext from './TreeBrowserContext.js'
 category: components
 ---
 **/
-@withStyleNew(generateStyles)
-class TreeBrowser extends Component<TreeBrowserProps, TreeBrowserState> {
+export class TreeBrowserBase extends Component<
+  TreeBrowserProps,
+  TreeBrowserState
+> {
   static displayName = 'TreeBrowser'
   static readonly componentId = 'TreeBrowser'
 
@@ -427,6 +429,9 @@ class TreeBrowser extends Component<TreeBrowserProps, TreeBrowserState> {
     )
   }
 }
+
+const TreeBrowser = withStyleNew(generateStyles)(TreeBrowserBase)
+type TreeBrowser = TreeBrowserBase
 
 export default TreeBrowser
 export { TreeBrowser }

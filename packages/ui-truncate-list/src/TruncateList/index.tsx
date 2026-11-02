@@ -45,8 +45,10 @@ import type { TruncateListProps, TruncateListState } from './props'
 category: components/Util Components
 ---
 **/
-@withStyle(generateStyle, null)
-class TruncateList extends Component<TruncateListProps, TruncateListState> {
+export class TruncateListBase extends Component<
+  TruncateListProps,
+  TruncateListState
+> {
   static displayName = 'TruncateList'
   static readonly componentId = 'TruncateList'
 
@@ -312,6 +314,9 @@ class TruncateList extends Component<TruncateListProps, TruncateListState> {
     )
   }
 }
+
+const TruncateList = withStyle(generateStyle, null)(TruncateListBase)
+type TruncateList = TruncateListBase
 
 export { TruncateList }
 export default TruncateList

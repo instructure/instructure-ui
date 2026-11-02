@@ -40,8 +40,7 @@ import { SVGIconTheme } from '@instructure/shared-types'
 category: components/Util Components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
-class SVGIcon extends Component<SVGIconProps> {
+export class SVGIconBase extends Component<SVGIconProps> {
   static displayName = 'SVGIcon'
   static readonly componentId = 'SVGIcon'
 
@@ -110,6 +109,9 @@ class SVGIcon extends Component<SVGIconProps> {
     )
   }
 }
+
+const SVGIcon = withStyle(generateStyle, generateComponentTheme)(SVGIconBase)
+type SVGIcon = SVGIconBase
 
 export default SVGIcon
 export { SVGIcon }

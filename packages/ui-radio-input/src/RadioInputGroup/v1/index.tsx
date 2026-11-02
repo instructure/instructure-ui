@@ -52,9 +52,7 @@ type RadioInputChild = ComponentElement<RadioInputProps, RadioInput>
 category: components
 ---
 **/
-@withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
-class RadioInputGroup extends Component<
+export class RadioInputGroupBase extends Component<
   RadioInputGroupProps,
   RadioInputGroupState
 > {
@@ -197,6 +195,11 @@ class RadioInputGroup extends Component<
     )
   }
 }
+
+const RadioInputGroup = withDeterministicId()(
+  withStyle(generateStyle, generateComponentTheme)(RadioInputGroupBase)
+)
+type RadioInputGroup = RadioInputGroupBase
 
 export default RadioInputGroup
 export { RadioInputGroup }

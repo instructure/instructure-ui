@@ -46,8 +46,10 @@ parent: Rating
 id: Rating.Icon
 ---
 **/
-@withStyleNew(generateStyle)
-class RatingIcon extends Component<RatingIconProps, RatingIconState> {
+export class RatingIconBase extends Component<
+  RatingIconProps,
+  RatingIconState
+> {
   static displayName = 'RatingIcon'
   static readonly componentId = 'Rating.Icon'
 
@@ -136,6 +138,9 @@ class RatingIcon extends Component<RatingIconProps, RatingIconState> {
     )
   }
 }
+
+const RatingIcon = withStyleNew(generateStyle)(RatingIconBase)
+type RatingIcon = RatingIconBase
 
 export default RatingIcon
 export { RatingIcon }

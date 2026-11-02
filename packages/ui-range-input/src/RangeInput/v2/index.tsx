@@ -45,9 +45,10 @@ import { allowedProps } from './props.js'
 category: components
 ---
 **/
-@withDeterministicId()
-@withStyleNew(generateStyle)
-class RangeInput extends Component<RangeInputProps, RangeInputState> {
+export class RangeInputBase extends Component<
+  RangeInputProps,
+  RangeInputState
+> {
   static displayName = 'RangeInput'
   static readonly componentId = 'RangeInput'
   static outputLocatorAttribute = 'data-range-output'
@@ -225,6 +226,11 @@ class RangeInput extends Component<RangeInputProps, RangeInputState> {
     )
   }
 }
+
+const RangeInput = withDeterministicId()(
+  withStyleNew(generateStyle)(RangeInputBase)
+)
+type RangeInput = RangeInputBase
 
 export default RangeInput
 export { RangeInput }

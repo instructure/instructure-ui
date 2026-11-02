@@ -99,9 +99,7 @@ type PageMap = Record<string, MappedPage>
 category: components
 ---
 **/
-@withDeterministicId()
-@withStyleNew(generateStyle)
-class Drilldown extends Component<DrilldownProps, DrilldownState> {
+export class DrilldownBase extends Component<DrilldownProps, DrilldownState> {
   static displayName = 'Drilldown'
   static readonly componentId = 'Drilldown'
 
@@ -1687,6 +1685,11 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
     )
   }
 }
+
+const Drilldown = withDeterministicId()(
+  withStyleNew(generateStyle)(DrilldownBase)
+)
+type Drilldown = DrilldownBase
 
 export default Drilldown
 export { Drilldown }

@@ -48,8 +48,7 @@ parent: Grid
 id: Grid.Row
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
-class GridRow extends Component<GridRowProps> {
+export class GridRowBase extends Component<GridRowProps> {
   static displayName = 'GridRow'
   static readonly componentId = 'Grid.Row'
 
@@ -106,6 +105,9 @@ class GridRow extends Component<GridRowProps> {
     )
   }
 }
+
+const GridRow = withStyle(generateStyle, generateComponentTheme)(GridRowBase)
+type GridRow = GridRowBase
 
 export default GridRow
 export { GridRow }

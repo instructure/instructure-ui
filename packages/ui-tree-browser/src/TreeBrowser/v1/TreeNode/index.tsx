@@ -44,8 +44,7 @@ id: TreeBrowser.Node
 A helper class used to render the :renderBeforeItems and :renderAfterItems
 in the TreeBrowser.
 **/
-@withStyle(generateStyles, generateComponentTheme)
-class TreeNode extends Component<TreeBrowserNodeProps> {
+export class TreeNodeBase extends Component<TreeBrowserNodeProps> {
   static displayName = 'TreeNode'
   static readonly componentId = 'TreeBrowser.Node'
 
@@ -110,6 +109,9 @@ class TreeNode extends Component<TreeBrowserNodeProps> {
     )
   }
 }
+
+const TreeNode = withStyle(generateStyles, generateComponentTheme)(TreeNodeBase)
+type TreeNode = TreeNodeBase
 
 export default TreeNode
 export { TreeNode }

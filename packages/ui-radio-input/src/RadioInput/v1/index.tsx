@@ -40,9 +40,10 @@ import { allowedProps } from './props.js'
 category: components
 ---
 **/
-@withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
-class RadioInput extends Component<RadioInputProps, RadioInputState> {
+export class RadioInputBase extends Component<
+  RadioInputProps,
+  RadioInputState
+> {
   static displayName = 'RadioInput'
   static readonly componentId = 'RadioInput'
 
@@ -169,6 +170,11 @@ class RadioInput extends Component<RadioInputProps, RadioInputState> {
     )
   }
 }
+
+const RadioInput = withDeterministicId()(
+  withStyle(generateStyle, generateComponentTheme)(RadioInputBase)
+)
+type RadioInput = RadioInputBase
 
 export default RadioInput
 export { RadioInput }

@@ -44,9 +44,7 @@ import { allowedProps } from './props.js'
 category: components
 ---
 **/
-@withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
-class Spinner extends Component<SpinnerProps, SpinnerState> {
+export class SpinnerBase extends Component<SpinnerProps, SpinnerState> {
   static displayName = 'Spinner'
   static readonly componentId = 'Spinner'
   static allowedProps = allowedProps
@@ -167,6 +165,11 @@ class Spinner extends Component<SpinnerProps, SpinnerState> {
     return this.state.shouldRender ? this.renderSpinner() : null
   }
 }
+
+const Spinner = withDeterministicId()(
+  withStyle(generateStyle, generateComponentTheme)(SpinnerBase)
+)
+type Spinner = SpinnerBase
 
 export default Spinner
 export { Spinner }

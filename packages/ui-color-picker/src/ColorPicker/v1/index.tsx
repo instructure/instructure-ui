@@ -90,8 +90,10 @@ const acceptedCharactersForHEX = [
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
-class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
+export class ColorPickerBase extends Component<
+  ColorPickerProps,
+  ColorPickerState
+> {
   static displayName = 'ColorPicker'
   static allowedProps = allowedProps
   static readonly componentId = 'ColorPicker'
@@ -746,6 +748,12 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
     )
   }
 }
+
+const ColorPicker = withStyle(
+  generateStyle,
+  generateComponentTheme
+)(ColorPickerBase)
+type ColorPicker = ColorPickerBase
 
 export { ColorPicker }
 export default ColorPicker

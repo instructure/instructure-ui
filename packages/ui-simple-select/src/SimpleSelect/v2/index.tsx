@@ -68,8 +68,10 @@ category: components
 tags: form, field, dropdown
 ---
 **/
-@withDeterministicId()
-class SimpleSelect extends Component<SimpleSelectProps, SimpleSelectState> {
+export class SimpleSelectBase extends Component<
+  SimpleSelectProps,
+  SimpleSelectState
+> {
   static displayName = 'SimpleSelect'
   static readonly componentId = 'SimpleSelect'
 
@@ -547,6 +549,9 @@ class SimpleSelect extends Component<SimpleSelectProps, SimpleSelectState> {
     )
   }
 }
+
+const SimpleSelect = withDeterministicId()(SimpleSelectBase)
+type SimpleSelect = SimpleSelectBase
 
 export { SimpleSelect }
 export default SimpleSelect

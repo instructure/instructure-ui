@@ -41,9 +41,7 @@ import { sanitizeSvg } from './sanitizeSvg.js'
 category: components/Util Components
 ---
 **/
-@withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
-class InlineSVG extends Component<InlineSVGProps> {
+export class InlineSVGBase extends Component<InlineSVGProps> {
   static displayName = 'InlineSVG'
   static readonly componentId = 'InlineSVG'
 
@@ -209,6 +207,11 @@ class InlineSVG extends Component<InlineSVGProps> {
     )
   }
 }
+
+const InlineSVG = withDeterministicId()(
+  withStyle(generateStyle, generateComponentTheme)(InlineSVGBase)
+)
+type InlineSVG = InlineSVGBase
 
 function parseAttributes(src: InlineSVGProps['src']) {
   const attributes: Record<string, string> = {}
