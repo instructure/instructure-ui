@@ -258,7 +258,7 @@ type GlobalNavOwnProps = {
    */
   backLabel: string
   /**
-   * Screen reader text of the handle that closes the open SubNav.
+   * Screen reader text and tooltip of the handle that closes the open SubNav.
    */
   closeSubNavLabel: string
   /**
