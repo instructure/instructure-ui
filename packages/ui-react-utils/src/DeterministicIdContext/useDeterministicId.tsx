@@ -29,7 +29,7 @@ import { useId } from 'react'
  * functional components.
  *
  * This hook is the functional component equivalent of the `withDeterministicId`
- * decorator. It is backed by React's built-in {@link https://react.dev/reference/react/useId `useId`},
+ * HOC. It is backed by React's built-in {@link https://react.dev/reference/react/useId `useId`},
  * which produces the same id on the server and the client for a given position
  * in the React tree.
  *
