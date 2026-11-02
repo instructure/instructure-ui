@@ -45,7 +45,9 @@ const generateStyle = (
       minHeight: 0,
       boxSizing: 'border-box',
       gap: componentTheme.gap,
-      padding: componentTheme.padding
+      padding: componentTheme.padding,
+      // GlobalNav sets the variable, so the close handle lines up with the rail's collapse button
+      paddingTop: `var(--globalNav-collapseButtonTop, ${componentTheme.padding})`
     },
     header: {
       label: 'subNavLevel__header',
