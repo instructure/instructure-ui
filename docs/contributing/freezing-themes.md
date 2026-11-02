@@ -55,8 +55,13 @@ type: code
 // class component
 import { frozenThemesDesignTokensV1 } from '@instructure/ui-themes'
 
-@withStyleNew(generateStyle, null, frozenThemesDesignTokensV1)
-class Alert extends Component<AlertProps, AlertState> { /* ... */ }
+class AlertBase extends Component<AlertProps, AlertState> { /* ... */ }
+
+const Alert = withStyleNew(
+  generateStyle,
+  null,
+  frozenThemesDesignTokensV1
+)(AlertBase)
 
 // function component
 const styles = useStyleNew({

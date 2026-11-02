@@ -26,7 +26,7 @@
  * Generates unique css safe ids for elements.
  *
  * @deprecated Use `useDeterministicId` (function components) or the
- * `withDeterministicId` decorator (class components) from
+ * `withDeterministicId` HOC (class components) from
  * `@instructure/ui-react-utils` instead. Both are backed by React's `useId`, so
  * they produce the same id on the server and the client. This counter-based
  * helper depends on render order: the count advances once per render pass, so a
