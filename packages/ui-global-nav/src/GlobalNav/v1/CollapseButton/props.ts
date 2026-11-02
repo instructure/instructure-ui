@@ -43,6 +43,10 @@ type CollapseButtonProps = {
    * Called when the user clicks the button, with the new `collapsed` value.
    */
   onCollapse: (event: SyntheticEvent, collapsed: boolean) => void
+  /**
+   * Called with the button element.
+   */
+  elementRef?: (element: Element | null) => void
 }
 
 type CollapseButtonStyle = {
