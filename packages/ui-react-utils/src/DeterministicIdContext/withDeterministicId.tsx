@@ -21,8 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { ComponentClass, forwardRef } from 'react'
+import { forwardRef } from 'react'
 import type {
+  ComponentClass,
   ForwardRefExoticComponent,
   PropsWithoutRef,
   RefAttributes
@@ -35,13 +36,11 @@ import { useDeterministicId } from './useDeterministicId.js'
 import type { InstUIComponent } from '@instructure/shared-types'
 import { warn } from '@instructure/console'
 
-declare const process: Record<string, any> | undefined
-
 type WithDeterministicIdProps = {
   deterministicId?: (instanceName?: string) => string
 }
 /**
- * This decorator injects a `deterministicId` prop into the decorated class,
+ * This HOC injects a `deterministicId` prop into the wrapped class,
  * used to generate SSR-safe, hydration-stable ids.
  *
  * It is backed by React's built-in {@link https://react.dev/reference/react/useId `useId`},
@@ -59,7 +58,10 @@ const withDeterministicId = decorator((ComposedComponent: InstUIComponent) => {
   type Props = PropsWithoutRef<Record<string, unknown>> & RefAttributes<any>
   const WithDeterministicId: ForwardRefExoticComponent<Props> & {
     originalType?: ComponentClass
-  } = forwardRef((props: Props, ref: React.ForwardedRef<any>) => {
+  } = forwardRef(function WithDeterministicId(
+    props: Props,
+    ref: React.ForwardedRef<any>
+  ) {
     const componentName =
       ComposedComponent.componentId ||
       ComposedComponent.displayName ||
@@ -85,21 +87,10 @@ const withDeterministicId = decorator((ComposedComponent: InstUIComponent) => {
 
   hoistNonReactStatics(WithDeterministicId, ComposedComponent)
 
-  // These static fields exist on InstUI components
-  //@ts-expect-error fix this
-  WithDeterministicId.allowedProps = ComposedComponent.allowedProps
-
   // added so it can be tested with ReactTestUtils
   // more info: https://github.com/facebook/react/issues/13455
   WithDeterministicId.originalType =
     ComposedComponent.originalType || ComposedComponent
-
-  if (
-    typeof process !== 'undefined' &&
-    process?.env?.NODE_ENV !== 'production'
-  ) {
-    WithDeterministicId.displayName = `WithDeterministicId(${ComposedComponent.displayName})`
-  }
 
   return WithDeterministicId
 })

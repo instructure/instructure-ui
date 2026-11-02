@@ -68,11 +68,11 @@ const defaultValues = {
  * ---
  * private: true
  * ---
- * Styling decorator for the docs app's own components.
+ * Styling HOC for the docs app's own components.
  *
  * Docs components live outside `@instructure/ui-themes`, so they have no entry
  * in `theme.newTheme.components` and cannot get a `componentTheme` the way
- * library components do. This decorator resolves the theme the same way
+ * library components do. This HOC resolves the theme the same way
  * `withStyleNew` does — `primitives -> semantics -> sharedTokens` and passes the result
  * straight to `generateStyle`.
  *
@@ -87,15 +87,13 @@ const defaultValues = {
  */
 const withStyleForDocs = decorator(
   (ComposedComponent: any, generateStyle: GenerateStyle) => {
-    const displayName = ComposedComponent.displayName || ComposedComponent.name
-
     const WithStyle: ForwardRefExoticComponent<
       PropsWithoutRef<Props> & RefAttributes<any>
     > & {
       allowedProps?: string[]
       originalType?: any
       defaultProps?: Partial<any>
-    } = forwardRef((props, ref) => {
+    } = forwardRef(function WithStyle(props, ref) {
       const theme = useTheme() as Theme
       const themeOverride = theme.themeOverride
 
@@ -159,17 +157,8 @@ const withStyleForDocs = decorator(
     // more info: https://github.com/facebook/react/issues/13455
     WithStyle.originalType = ComposedComponent.originalType || ComposedComponent
 
+    // hoisting skips defaultProps, but parents read it (e.g. getElementType)
     WithStyle.defaultProps = ComposedComponent.defaultProps
-    WithStyle.allowedProps = ComposedComponent.allowedProps
-
-    // eslint-disable-next-line no-param-reassign
-    ComposedComponent.defaultProps = {
-      ...ComposedComponent.defaultProps,
-      makeStyles: defaultValues.makeStyles,
-      styles: defaultValues.styles
-    }
-
-    WithStyle.displayName = `WithStyle(${displayName})`
 
     return WithStyle
   }
