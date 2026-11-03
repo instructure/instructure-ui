@@ -206,9 +206,64 @@ const Example = () => {
 render(<Example />)
 ```
 
+### Stacked layout
+
+Pass `stackedLayout` to switch to a vertical layout on small screens. At viewport widths up to `48rem` (TODO get from tokens) each row becomes a block and each cell is prefixed with its column header.
+
+When `sorting` is also on, the headers are replaced by a control bar above the rows. A select lists the sortable columns and a menu button, sets the sort order.
+
+Resize the window to be narrow to see it.
+
+```js
+---
+type: example
+---
+const Example = () => {
+  const columns = [
+    { accessorKey: 'name', header: 'Name', id: 'name' },
+    { accessorKey: 'role', header: 'Role', id: 'role' },
+    { accessorKey: 'age', header: 'Age', id: 'age' }
+  ]
+
+  const data = [
+    { name: 'Grace Hopper', role: 'Computer scientist', age: 85 },
+    { name: 'Ada Lovelace', role: 'Mathematician', age: 36 },
+    { name: 'Katherine Johnson', role: 'Mathematician', age: 101 },
+    { name: 'Alan Turing', role: 'Computer scientist', age: 41 },
+    { name: 'Margaret Hamilton', role: 'Software engineer', age: 89 },
+    { name: 'Isaac Newton', role: 'Physicist', age: 84 },
+    { name: 'Hedy Lamarr', role: 'Inventor', age: 85 }
+  ]
+
+  return (
+    <DataGrid
+      caption="Famous computing pioneers"
+      columns={columns}
+      data={data}
+      sorting={{
+        labelSortColumn: (sortByHeader, sortDirection) =>
+          sortDirection === 'none'
+            ? `Sort by ${sortByHeader}`
+            : `${sortByHeader}, sorted ${sortDirection}. Change sort order`
+      }}
+      stackedLayout={{
+        labelSortBy: 'Sort by',
+        labelSortOrder: 'Sort order',
+        labelSortDirection: (direction) =>
+          ({ ascending: 'Ascending', descending: 'Descending', none: 'None' })[
+            direction
+          ]
+      }}
+    />
+  )
+}
+
+render(<Example />)
+```
+
 ### Putting it together
 
-`pagination`, `expandedRows` and `sorting` work together. Expanded sub rows count toward `pageSize`, so the number of pages grows and shrinks as rows are expanded and collapsed. Sorting applies to all pages, and sub rows are sorted within their parent.
+`pagination`, `expandedRows`, `sorting` and `stackedLayout` work together. Expanded sub rows count toward `pageSize`, so the number of pages grows and shrinks as rows are expanded and collapsed. Sorting applies to all pages, and sub rows are sorted within their parent.
 
 ```js
 ---
@@ -267,6 +322,16 @@ const Example = () => {
             sortDirection === 'none'
               ? `Sort by ${sortByHeader}`
               : `${sortByHeader}, sorted ${sortDirection}. Change sort order`
+        }}
+        stackedLayout={{
+          labelSortBy: 'Sort by',
+          labelSortOrder: 'Sort order',
+          labelSortDirection: (direction) =>
+            ({
+              ascending: 'Ascending',
+              descending: 'Descending',
+              none: 'None'
+            })[direction]
         }}
       />
     </View>
