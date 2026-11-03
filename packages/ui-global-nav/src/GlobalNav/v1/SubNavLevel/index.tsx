@@ -27,11 +27,13 @@ import type { FocusEvent, SyntheticEvent } from 'react'
 
 import { useStyleNew } from '@instructure/emotion'
 import { CondensedButton, IconButton } from '@instructure/ui-buttons/latest'
+import { findTabbable } from '@instructure/ui-dom-utils'
 import { Heading } from '@instructure/ui-heading/latest'
 import {
   ChevronLeftInstUIIcon,
   PanelLeftCloseInstUIIcon
 } from '@instructure/ui-icons'
+import { callRenderProp } from '@instructure/ui-react-utils'
 import { Tooltip } from '@instructure/ui-tooltip/latest'
 
 import { SubNavItem } from '../SubNavItem/index.js'
@@ -60,16 +62,18 @@ const SubNavLevel = (props: SubNavLevelProps) => {
     componentId: 'SubNav'
   })
 
-  const firstItemRef = useRef<HTMLElement | null>(null)
   const itemRefs = useRef(new Map<string, HTMLElement>())
   const closeRef = useRef<HTMLElement | null>(null)
   const focusInsideRef = useRef(false)
   const rootRef = useRef<HTMLDivElement>(null)
+  const bodyRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const root = rootRef.current
     const intent = focusIntentRef.current
-    const firstElement = firstItemRef.current ?? closeRef.current
+    const firstElement =
+      (findTabbable(bodyRef.current)[0] as HTMLElement | undefined) ??
+      closeRef.current
     if (intent?.target === 'rescue' || intent?.target === 'first') {
       focusIntentRef.current = undefined
       firstElement?.focus()
@@ -153,26 +157,27 @@ const SubNavLevel = (props: SubNavLevelProps) => {
         {subNav.title}
       </Heading>
       <div css={styles?.divider} />
-      <div css={styles?.body}>
-        {items.length > 0 && (
-          <ul css={styles?.items}>
-            {items.map((item, index) => (
-              <SubNavItem
-                key={item.itemID}
-                item={item}
-                elementRef={(element) => {
-                  if (index === 0) firstItemRef.current = element
-                  if (element) {
-                    itemRefs.current.set(item.itemID, element)
-                  } else {
-                    itemRefs.current.delete(item.itemID)
-                  }
-                }}
-                onDrillIn={onDrillIn}
-              />
-            ))}
-          </ul>
-        )}
+      <div ref={bodyRef} css={styles?.body}>
+        {subNav.renderContent !== undefined
+          ? callRenderProp(subNav.renderContent)
+          : items.length > 0 && (
+              <ul css={styles?.items}>
+                {items.map((item) => (
+                  <SubNavItem
+                    key={item.itemID}
+                    item={item}
+                    elementRef={(element) => {
+                      if (element) {
+                        itemRefs.current.set(item.itemID, element)
+                      } else {
+                        itemRefs.current.delete(item.itemID)
+                      }
+                    }}
+                    onDrillIn={onDrillIn}
+                  />
+                ))}
+              </ul>
+            )}
       </div>
     </div>
   )
