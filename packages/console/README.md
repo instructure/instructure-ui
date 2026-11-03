@@ -4,7 +4,7 @@
 [![MIT License][license-badge]][license]
 [![Code of Conduct][coc-badge]][coc]
 
-A small wrapper for console methods and a babel macro to mark them as pure functions
+A small wrapper for console methods.
 so that they can be removed from production bundles.
 
 ### Installation

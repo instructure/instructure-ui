@@ -60,7 +60,7 @@ execSync(
   opts
 )
 
-// The Babel build and the TypeScript declaration build
+// The SWC build and the TypeScript declaration build
 // (tsc -b, src -> .d.ts) are mutually independent, so we
 // run them concurrently. `--kill-others-on-fail` aborts the whole step (and
 // thus bootstrap) the moment either branch fails.

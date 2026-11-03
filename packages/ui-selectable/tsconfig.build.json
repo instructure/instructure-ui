@@ -7,7 +7,6 @@
   },
   "include": ["src"],
   "references": [
-    { "path": "../ui-babel-preset/tsconfig.build.json" },
     { "path": "../console/tsconfig.build.json" },
     { "path": "../ui-dom-utils/tsconfig.build.json" },
     { "path": "../ui-utils/tsconfig.build.json" },

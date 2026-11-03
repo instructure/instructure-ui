@@ -22,17 +22,16 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/runtime": "^7.29.7",
     "@emotion/is-prop-valid": "^1.4.0",
     "@instructure/console": "workspace:*",
     "@instructure/shared-types": "workspace:*",
     "@instructure/ui-decorator": "workspace:*",
     "@instructure/ui-dom-utils": "workspace:*",
     "@instructure/ui-utils": "workspace:*",
+    "@swc/helpers": "^0.5.23",
     "hoist-non-react-statics": "^3.3.2"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "workspace:*",
     "@types/hoist-non-react-statics": "^3.3.7",
     "vitest": "^5.0.0"
   },

@@ -152,7 +152,7 @@ describe('<Breadcrumb />', () => {
   // TODO: Decide if we want to test for console.warn calls.
   // This test fails because the @instructure/ui-breadcrumb/latest import
   // resolves to compiled output where console.warn is stripped by the
-  // babel preset (removeConsole in production builds).
+  // SWC build (console calls are removed in production builds).
   // it('should throw a warning when multiple elements have isCurrent set to true', () => {
   //   render(
   //     <Breadcrumb label={TEST_LABEL}>

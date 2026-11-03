@@ -28,7 +28,7 @@
     "lint:fix": "pnpm -r --stream lint:fix",
     "lint:commits": "commitlint --from=HEAD^1",
     "bootstrap": "node scripts/bootstrap.mjs",
-    "build": "pnpm -r --stream build",
+    "build": "ui-scripts build --all",
     "build:watch": "pnpm -r --stream build:watch",
     "build:docs": "pnpm --filter docs-app bundle",
     "build:themes": "ui-scripts build-themes",
@@ -53,16 +53,13 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@babel/cli": "^7.29.7",
-    "@babel/runtime": "^7.29.7",
     "@commitlint/cli": "^21.2.3",
     "@commitlint/config-conventional": "^21.2.3",
     "@emotion/react": "^11.14.0",
-    "@instructure/browserslist-config-instui": "workspace:*",
-    "@instructure/ui-babel-preset": "workspace:*",
     "@instructure/ui-icons": "workspace:*",
     "@instructure/ui-scripts": "workspace:*",
     "@instructure/ui-themes": "workspace:*",
+    "@swc/core": "^1.16.2",
     "@testing-library/dom": "^10.4.2",
     "@types/node": "^24.19.1",
     "@types/react": "18.3.26",
@@ -70,8 +67,6 @@
     "@vitest/browser": "5.0.3",
     "@vitest/browser-playwright": "5.0.3",
     "@vitest/ui": "5.0.3",
-    "babel-loader": "^10.1.1",
-    "babel-plugin-add-import-extension": "^1.6.0",
     "chalk": "^6.0.1",
     "commitizen": "^4.3.2",
     "concurrently": "^10.0.5",
@@ -86,6 +81,7 @@
     "prettier": "2.8.8",
     "react": "18.3.1",
     "react-dom": "18.3.1",
+    "swc-loader": "^0.2.7",
     "typescript": "7.0.2",
     "vite": "7.3.6",
     "vitest": "^5.0.0",
@@ -116,8 +112,5 @@
       "prettier --write"
     ]
   },
-  "browserslist": [
-    "extends @instructure/browserslist-config-instui"
-  ],
   "packageManager": "pnpm@12.9.1+sha512.06b055fff5cd20dc12781de173ced3310ce0951bf2ec620211a16045d5444d5c93a663210764ef29a653a610459ba0368f0e74f84d80c54723cf95aae7bc0d6d"
 }

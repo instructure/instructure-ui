@@ -48,9 +48,6 @@
       "path": "../ui-avatar/tsconfig.build.json"
     },
     {
-      "path": "../ui-babel-preset/tsconfig.build.json"
-    },
-    {
       "path": "../ui-badge/tsconfig.build.json"
     },
     {

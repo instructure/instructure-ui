@@ -23,14 +23,13 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/runtime": "^7.29.7",
     "@instructure/emotion": "workspace:*",
     "@instructure/shared-types": "workspace:*",
-    "@instructure/ui-react-utils": "workspace:*"
+    "@instructure/ui-react-utils": "workspace:*",
+    "@swc/helpers": "^0.5.23"
   },
   "devDependencies": {
     "@instructure/ui-axe-check": "workspace:*",
-    "@instructure/ui-babel-preset": "workspace:*",
     "vitest": "^5.0.0"
   },
   "peerDependencies": {

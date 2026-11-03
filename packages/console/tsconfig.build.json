@@ -5,6 +5,5 @@
     "rootDir": "./src",
     "composite": true
   },
-  "include": ["src"],
-  "references": [{ "path": "../ui-babel-preset/tsconfig.build.json" }]
+  "include": ["src"]
 }
