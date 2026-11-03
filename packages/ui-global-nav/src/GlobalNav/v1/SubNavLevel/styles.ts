@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { NewComponentTypes } from '@instructure/ui-themes'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import type { SubNavLevelStyle } from './props.js'
 
 /**
@@ -31,11 +31,16 @@ import type { SubNavLevelStyle } from './props.js'
  * ---
  * Generates the style object from the theme and provided additional information
  * @param componentTheme The theme variable object.
+ * @param sharedTokens Shared token object that stores common values for the theme.
  * @return The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: ReturnType<NewComponentTypes['SubNav']>
+  componentTheme: ReturnType<NewComponentTypes['SubNav']>,
+  _params: undefined,
+  sharedTokens: SharedTokens
 ): SubNavLevelStyle => {
+  const focusRingSize = `calc(${sharedTokens.focusOutline.width} + ${sharedTokens.focusOutline.offset})`
+
   return {
     level: {
       label: 'subNavLevel',
@@ -70,7 +75,10 @@ const generateStyle = (
       label: 'subNavLevel__body',
       flex: 1,
       minHeight: 0,
-      overflowY: 'auto'
+      overflowY: 'auto',
+      // the scroll container clips focus rings that reach past its edges
+      padding: focusRingSize,
+      margin: `calc(-1 * ${focusRingSize})`
     },
     items: {
       label: 'subNavLevel__items',
