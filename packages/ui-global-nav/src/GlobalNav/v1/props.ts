@@ -89,19 +89,15 @@ type GlobalNavMainNavItem = GlobalNavSubNavItem & {
   badgeLabel?: GlobalNavCountLabel
 }
 
-type GlobalNavSubNav = {
+type GlobalNavSubNavWithItems = {
   /**
    * The heading of the panel.
    */
   title: string
   /**
-   * The links of the panel.
+   * The links of the panel, and buttons that open a deeper level.
    */
   items?: GlobalNavSubNavItem[]
-  /**
-   * Any content, rendered after the items.
-   */
-  renderContent?: Renderable
   /**
    * Whether the items are loading, which shows a spinner in their place.
    */
@@ -122,7 +118,28 @@ type GlobalNavSubNav = {
    * Text of the "load more" button.
    */
   loadMoreLabel?: string
+  renderContent?: never
 }
+
+type GlobalNavSubNavWithContent = {
+  /**
+   * The heading of the panel.
+   */
+  title: string
+  /**
+   * Any content in place of `items`, inside the panel frame.
+   */
+  renderContent: Renderable
+  items?: never
+  loading?: never
+  loadingLabel?: never
+  hasMore?: never
+  onLoadMore?: never
+  loadMoreLabel?: never
+}
+
+// a SubNav shows either items or custom content, never both
+type GlobalNavSubNav = GlobalNavSubNavWithItems | GlobalNavSubNavWithContent
 
 type GlobalNavLogo = {
   /**

@@ -2320,6 +2320,9 @@ importers:
       '@instructure/ui-buttons':
         specifier: workspace:*
         version: link:../ui-buttons
+      '@instructure/ui-dom-utils':
+        specifier: workspace:*
+        version: link:../ui-dom-utils
       '@instructure/ui-heading':
         specifier: workspace:*
         version: link:../ui-heading
