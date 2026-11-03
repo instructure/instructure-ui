@@ -129,12 +129,7 @@ type AlertProps = AlertOwnProps &
   NewThemeOverrideProp<ReturnType<NewComponentTypes['Alert']>>
 
 type AlertStyle = ComponentStyle<
-  | 'alert'
-  | 'icon'
-  | 'closeButton'
-  | 'content'
-  | 'contentOnColor'
-  | 'variantScreenReaderLabel'
+  'alert' | 'icon' | 'closeButton' | 'content' | 'variantScreenReaderLabel'
 >
 
 type AlertStyleParams = Required<Pick<AlertProps, 'variant' | 'prominence'>>
