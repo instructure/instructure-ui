@@ -149,6 +149,7 @@ export function getPackageShortName(filePath: string): string | undefined {
  * Rules:
  * - No componentVersion (general docs, utils, CHANGELOG) → included in all versions
  * - No pkgShortName (not a ui-* package file) → included in all versions
+ * - Package mapped only under other library versions → excluded
  * - Package not in version map (no multi-version exports) → included only if v1
  * - Otherwise → included only if componentVersion matches the version map entry
  */
@@ -165,6 +166,13 @@ export function isDocIncludedInVersion(
 
   const entry = versionMap.mapping[libVersion]?.[pkgShortName]
   if (!entry) {
+    // a package exported only under other library versions is absent from this one
+    const isVersionedElsewhere = Object.values(versionMap.mapping).some(
+      (packages) => pkgShortName in packages
+    )
+    if (isVersionedElsewhere) {
+      return false
+    }
     // Package has no multi-version exports; include only the default (v1)
     return componentVersion === 'v1'
   }
