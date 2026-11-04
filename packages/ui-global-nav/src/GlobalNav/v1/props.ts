@@ -98,26 +98,6 @@ type GlobalNavSubNavWithItems = {
    * The links of the panel, and buttons that open a deeper level.
    */
   items?: GlobalNavSubNavItem[]
-  /**
-   * Whether the items are loading, which shows a spinner in their place.
-   */
-  loading?: boolean
-  /**
-   * Screen reader text of the loading spinner.
-   */
-  loadingLabel?: string
-  /**
-   * Whether more items can be loaded, which shows a "load more" button after the items.
-   */
-  hasMore?: boolean
-  /**
-   * Called when the user clicks the "load more" button.
-   */
-  onLoadMore?: (event: SyntheticEvent) => void
-  /**
-   * Text of the "load more" button.
-   */
-  loadMoreLabel?: string
   renderContent?: never
 }
 
@@ -131,11 +111,6 @@ type GlobalNavSubNavWithContent = {
    */
   renderContent: Renderable
   items?: never
-  loading?: never
-  loadingLabel?: never
-  hasMore?: never
-  onLoadMore?: never
-  loadMoreLabel?: never
 }
 
 // a SubNav shows either items or custom content, never both
