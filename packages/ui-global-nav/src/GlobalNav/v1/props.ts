@@ -89,40 +89,32 @@ type GlobalNavMainNavItem = GlobalNavSubNavItem & {
   badgeLabel?: GlobalNavCountLabel
 }
 
-type GlobalNavSubNav = {
+type GlobalNavSubNavWithItems = {
   /**
    * The heading of the panel.
    */
   title: string
   /**
-   * The links of the panel.
+   * The links of the panel, and buttons that open a deeper level.
    */
   items?: GlobalNavSubNavItem[]
-  /**
-   * Any content, rendered after the items.
-   */
-  renderContent?: Renderable
-  /**
-   * Whether the items are loading, which shows a spinner in their place.
-   */
-  loading?: boolean
-  /**
-   * Screen reader text of the loading spinner.
-   */
-  loadingLabel?: string
-  /**
-   * Whether more items can be loaded, which shows a "load more" button after the items.
-   */
-  hasMore?: boolean
-  /**
-   * Called when the user clicks the "load more" button.
-   */
-  onLoadMore?: (event: SyntheticEvent) => void
-  /**
-   * Text of the "load more" button.
-   */
-  loadMoreLabel?: string
+  renderContent?: never
 }
+
+type GlobalNavSubNavWithContent = {
+  /**
+   * The heading of the panel.
+   */
+  title: string
+  /**
+   * Any content in place of `items`, inside the panel frame.
+   */
+  renderContent: Renderable
+  items?: never
+}
+
+// a SubNav shows either items or custom content, never both
+type GlobalNavSubNav = GlobalNavSubNavWithItems | GlobalNavSubNavWithContent
 
 type GlobalNavLogo = {
   /**
@@ -254,13 +246,17 @@ type GlobalNavOwnProps = {
    */
   expandLabel: string
   /**
-   * Screen reader text of the back button in a deeper SubNav level.
+   * Screen reader text of the back button in a deeper SubNav level, from the title of the level it returns to.
    */
-  backLabel: string
+  backLabel: (parentTitle: string) => string
   /**
-   * Screen reader text of the handle that closes the open SubNav.
+   * Screen reader text and tooltip of the handle that closes the open SubNav.
    */
   closeSubNavLabel: string
+  /**
+   * Screen reader text and tooltip of the button that opens the SubNav of the current page again.
+   */
+  expandSubNavLabel: string
   /**
    * The `itemID` of the item or account whose SubNav is open, or `undefined` when none is open.
    */
@@ -303,6 +299,7 @@ const allowedProps: AllowedPropKeys = [
   'expandLabel',
   'backLabel',
   'closeSubNavLabel',
+  'expandSubNavLabel',
   'openSubNav',
   'onSubNavChange',
   'items',

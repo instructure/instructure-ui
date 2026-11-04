@@ -28,6 +28,7 @@ import type { GlobalNavStyle, MainNavStyle } from './props.js'
 
 type StyleParams = {
   collapsed: boolean
+  subNavOpen: boolean
 }
 
 /**
@@ -43,19 +44,22 @@ const generateStyle = (
   componentTheme: ReturnType<NewComponentTypes['GlobalNav']>,
   params: StyleParams
 ): GlobalNavStyle => {
-  const { collapsed } = params
+  const { collapsed, subNavOpen } = params
 
   return {
     globalNav: {
       label: 'globalNav',
       display: 'flex',
-      width: 'fit-content',
+      // an open SubNav widens GlobalNav and pushes the page, otherwise the width stays the same with and without the strip
+      width: subNavOpen
+        ? 'fit-content'
+        : collapsed
+        ? componentTheme.minimizedminWidth
+        : componentTheme.minWidth,
+      flexShrink: 0,
       height: '100%',
       boxSizing: 'border-box',
       // the width tokens include the outer gap, which is this padding
-      minWidth: collapsed
-        ? componentTheme.minimizedminWidth
-        : componentTheme.minWidth,
       padding: collapsed
         ? componentTheme.minimizedMargin
         : componentTheme.margin
@@ -63,7 +67,8 @@ const generateStyle = (
     rail: {
       label: 'globalNav__rail',
       display: 'flex',
-      flex: 1,
+      // the width tokens leave no room for the rail border or the strip's hover growth, so the rail overflows instead of squeezing its content
+      flexShrink: 0,
       boxSizing: 'border-box',
       backgroundColor: componentTheme.backgroundColor,
       border: `${componentTheme.borderWidth} solid ${componentTheme.borderColor}`,
@@ -85,7 +90,7 @@ const generateStyle = (
  */
 const generateMainNavStyle = (
   componentTheme: ReturnType<NewComponentTypes['MainNav']>,
-  params: StyleParams
+  params: Pick<StyleParams, 'collapsed'>
 ): MainNavStyle => {
   const { collapsed } = params
 

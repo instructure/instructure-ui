@@ -22,16 +22,24 @@
  * SOFTWARE.
  */
 
-import { forwardRef } from 'react'
+import { forwardRef, useEffect, useLayoutEffect, useRef } from 'react'
+import type { MouseEvent, SyntheticEvent } from 'react'
 import { useStyleNew } from '@instructure/emotion'
-import { omitProps } from '@instructure/ui-react-utils'
+import { omitProps, useDeterministicId } from '@instructure/ui-react-utils'
 
-import type { GlobalNavProps } from './props.js'
+import type { GlobalNavMainNavItem, GlobalNavProps } from './props.js'
 import { allowedProps } from './props.js'
 import generateStyle, { generateMainNavStyle } from './styles.js'
 import { CollapseButton } from './CollapseButton/index.js'
+import { CollapsedSubNav } from './CollapsedSubNav/index.js'
 import { InstitutionLogo } from './InstitutionLogo/index.js'
 import { MainNavItem } from './MainNavItem/index.js'
+import { SubNav } from './SubNav/index.js'
+import type { FocusIntent } from './SubNav/props.js'
+
+// React 18 warns about useLayoutEffect on the server, where there is no layout to measure
+const useClientLayoutEffect =
+  typeof window === 'undefined' ? useEffect : useLayoutEffect
 
 /**
 ---
@@ -47,6 +55,9 @@ const GlobalNav = forwardRef<HTMLElement, GlobalNavProps>(
       onCollapse,
       collapseLabel,
       expandLabel,
+      backLabel,
+      closeSubNavLabel,
+      expandSubNavLabel,
       openSubNav,
       onSubNavChange,
       items,
@@ -54,10 +65,14 @@ const GlobalNav = forwardRef<HTMLElement, GlobalNavProps>(
       themeOverride
     } = props
 
+    const openItem = items.find(
+      (item) => item.itemID === openSubNav && item.subNav
+    )
+
     const styles = useStyleNew({
       generateStyle,
       themeOverride,
-      params: { collapsed },
+      params: { collapsed, subNavOpen: !!openItem },
       componentId: 'GlobalNav',
       displayName: 'GlobalNav'
     })
@@ -69,6 +84,92 @@ const GlobalNav = forwardRef<HTMLElement, GlobalNavProps>(
       componentId: 'MainNav'
     })
 
+    const getId = useDeterministicId('GlobalNav')
+    const subNavId = getId('GlobalNav-subNav')
+    const titleId = getId('GlobalNav-subNavTitle')
+
+    const focusIntentRef = useRef<FocusIntent>()
+    const triggerRefs = useRef(new Map<string, HTMLElement>())
+    const renderedSubNavRef = useRef<string>()
+    const railRef = useRef<HTMLDivElement>(null)
+    const headerRef = useRef<HTMLDivElement>(null)
+    const collapseButtonRef = useRef<Element | null>(null)
+
+    // the SubNav buttons line up with the rail's collapse button, whose position depends on the logo
+    const updateCollapseButtonTop = () => {
+      const rail = railRef.current
+      const button = collapseButtonRef.current
+      if (!rail || !button) return
+      const top =
+        button.getBoundingClientRect().top -
+        rail.getBoundingClientRect().top -
+        rail.clientTop
+      rail.style.setProperty('--globalNav-collapseButtonTop', `${top}px`)
+    }
+
+    // after every render, because the theme and the collapsed state move the button,
+    // and before paint, so a SubNav that is open on page load doesn't jump
+    useClientLayoutEffect(updateCollapseButtonTop)
+
+    // the header also resizes without a render, for example when the logo image loads
+    useEffect(() => {
+      const header = headerRef.current
+      if (!header || typeof ResizeObserver === 'undefined') return
+      const observer = new ResizeObserver(updateCollapseButtonTop)
+      observer.observe(header)
+      return () => observer.disconnect()
+    }, [])
+
+    // the SubNav of the current page collapses to a strip, other SubNavs close completely
+    const currentSectionItem = items.find((item) => item.current && item.subNav)
+
+    useEffect(() => {
+      const intent = focusIntentRef.current
+      // an intent lives for one commit, so a change that the app ignores doesn't move focus later
+      focusIntentRef.current = undefined
+      const closedID = renderedSubNavRef.current
+      renderedSubNavRef.current = openItem?.itemID
+
+      if (
+        !openItem &&
+        closedID !== undefined &&
+        (intent?.target === 'trigger' || intent?.target === 'rescue')
+      ) {
+        triggerRefs.current.get(closedID)?.focus()
+      }
+    })
+
+    const handleItemActivate = (
+      event: MouseEvent<HTMLElement>,
+      item: GlobalNavMainNavItem
+    ) => {
+      if (item.subNav) {
+        const next = openSubNav === item.itemID ? undefined : item.itemID
+        focusIntentRef.current = next
+          ? { target: 'first' }
+          : { target: 'trigger' }
+        onSubNavChange?.(event, next)
+      } else if (
+        openItem &&
+        // a link opened in a new tab or window keeps the SubNav open
+        !(event.metaKey || event.ctrlKey || event.shiftKey || event.altKey)
+      ) {
+        focusIntentRef.current = { target: 'none' }
+        onSubNavChange?.(event, undefined)
+      }
+    }
+
+    const handleSubNavClose = (event: SyntheticEvent) => {
+      focusIntentRef.current = { target: 'trigger' }
+      onSubNavChange?.(event, undefined)
+    }
+
+    const handleSubNavExpand = (event: SyntheticEvent) => {
+      if (!currentSectionItem) return
+      focusIntentRef.current = { target: 'first' }
+      onSubNavChange?.(event, currentSectionItem.itemID)
+    }
+
     return (
       <nav
         {...omitProps(props, allowedProps)}
@@ -76,15 +177,18 @@ const GlobalNav = forwardRef<HTMLElement, GlobalNavProps>(
         aria-label={label}
         css={styles?.globalNav}
       >
-        <div css={styles?.rail}>
+        <div ref={railRef} css={styles?.rail}>
           <div css={mainNavStyles?.mainNav}>
-            <div css={mainNavStyles?.header}>
+            <div ref={headerRef} css={mainNavStyles?.header}>
               <InstitutionLogo logo={logo} collapsed={collapsed} />
               <CollapseButton
                 collapsed={collapsed}
                 collapseLabel={collapseLabel}
                 expandLabel={expandLabel}
                 onCollapse={onCollapse}
+                elementRef={(element) => {
+                  collapseButtonRef.current = element
+                }}
               />
             </div>
             {!collapsed && <div css={styles?.divider} />}
@@ -95,11 +199,40 @@ const GlobalNav = forwardRef<HTMLElement, GlobalNavProps>(
                   item={item}
                   collapsed={collapsed}
                   open={openSubNav === item.itemID}
-                  onSubNavChange={onSubNavChange}
+                  subNavId={
+                    openItem?.itemID === item.itemID ? subNavId : undefined
+                  }
+                  onActivate={handleItemActivate}
+                  elementRef={(element) => {
+                    if (element) {
+                      triggerRefs.current.set(item.itemID, element)
+                    } else {
+                      triggerRefs.current.delete(item.itemID)
+                    }
+                  }}
                 />
               ))}
             </ul>
           </div>
+          {openItem?.subNav ? (
+            <SubNav
+              key={openItem.itemID}
+              subNav={openItem.subNav}
+              subNavId={subNavId}
+              titleId={titleId}
+              closeSubNavLabel={closeSubNavLabel}
+              backLabel={backLabel}
+              onClose={handleSubNavClose}
+              focusIntentRef={focusIntentRef}
+            />
+          ) : (
+            currentSectionItem && (
+              <CollapsedSubNav
+                label={expandSubNavLabel}
+                onExpand={handleSubNavExpand}
+              />
+            )
+          )}
         </div>
       </nav>
     )

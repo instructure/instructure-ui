@@ -36,8 +36,9 @@ const requiredProps = {
   onCollapse: vi.fn(),
   collapseLabel: 'Collapse navigation',
   expandLabel: 'Expand navigation',
-  backLabel: 'Back',
+  backLabel: (title: string) => `Back to ${title}`,
   closeSubNavLabel: 'Close sub navigation',
+  expandSubNavLabel: 'Open sub navigation',
   items: [],
   logo: { name: 'Canvas' }
 }
