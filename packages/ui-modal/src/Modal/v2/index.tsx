@@ -221,13 +221,11 @@ class Modal extends Component<ModalProps, ModalState> {
       shouldCloseOnDocumentClick,
       shouldReturnFocus,
       liveRegion,
-      size,
       constrain,
       as,
       styles
     } = this.props
 
-    const isFullScreen = size === 'fullscreen'
     const dialog = (
       <Dialog
         {...passthroughProps(props)}
@@ -250,13 +248,7 @@ class Modal extends Component<ModalProps, ModalState> {
     )
 
     return (
-      <Mask
-        placement={this.maskPlacement}
-        fullscreen={constrain === 'window'}
-        themeOverride={
-          isFullScreen ? { borderRadius: '0em', borderWidth: '0em' } : {}
-        }
-      >
+      <Mask placement={this.maskPlacement} fullscreen={constrain === 'window'}>
         {dialog}
       </Mask>
     )
