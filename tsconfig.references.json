@@ -49,6 +49,9 @@
       "path": "./packages/ui-badge/tsconfig.build.json"
     },
     {
+      "path": "./packages/ui-banner/tsconfig.build.json"
+    },
+    {
       "path": "./packages/ui-billboard/tsconfig.build.json"
     },
     {

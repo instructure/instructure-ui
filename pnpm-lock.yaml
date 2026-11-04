@@ -332,6 +332,9 @@ importers:
       '@instructure/ui-badge':
         specifier: workspace:*
         version: link:../ui-badge
+      '@instructure/ui-banner':
+        specifier: workspace:*
+        version: link:../ui-banner
       '@instructure/ui-billboard':
         specifier: workspace:*
         version: link:../ui-billboard
@@ -784,6 +787,9 @@ importers:
       '@instructure/ui-badge':
         specifier: workspace:*
         version: link:../ui-badge
+      '@instructure/ui-banner':
+        specifier: workspace:*
+        version: link:../ui-banner
       '@instructure/ui-billboard':
         specifier: workspace:*
         version: link:../ui-billboard
@@ -1255,6 +1261,55 @@ importers:
       react:
         specifier: 18.3.1
         version: 18.3.1
+    devDependencies:
+      '@instructure/ui-axe-check':
+        specifier: workspace:*
+        version: link:../ui-axe-check
+      '@instructure/ui-babel-preset':
+        specifier: workspace:*
+        version: link:../ui-babel-preset
+      vitest:
+        specifier: ^5.0.0
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+
+  packages/ui-banner:
+    dependencies:
+      '@babel/runtime':
+        specifier: ^7.29.7
+        version: 7.29.7
+      '@instructure/emotion':
+        specifier: workspace:*
+        version: link:../emotion
+      '@instructure/shared-types':
+        specifier: workspace:*
+        version: link:../shared-types
+      '@instructure/ui-a11y-content':
+        specifier: workspace:*
+        version: link:../ui-a11y-content
+      '@instructure/ui-buttons':
+        specifier: workspace:*
+        version: link:../ui-buttons
+      '@instructure/ui-icons':
+        specifier: workspace:*
+        version: link:../ui-icons
+      '@instructure/ui-motion':
+        specifier: workspace:*
+        version: link:../ui-motion
+      '@instructure/ui-react-utils':
+        specifier: workspace:*
+        version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
+      '@instructure/ui-view':
+        specifier: workspace:*
+        version: link:../ui-view
+      react:
+        specifier: 18.3.1
+        version: 18.3.1
+      react-dom:
+        specifier: 18.3.1
+        version: 18.3.1(react@18.3.1)
     devDependencies:
       '@instructure/ui-axe-check':
         specifier: workspace:*
