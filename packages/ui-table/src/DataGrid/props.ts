@@ -23,6 +23,7 @@
  */
 
 import type { ColumnDef, RowData, TableFeatures } from '@tanstack/react-table'
+import type { ComponentStyle } from '@instructure/emotion'
 
 type DataGridPagination = {
   /**
@@ -97,6 +98,22 @@ type DataGridSorting = {
   }
 }
 
+type DataGridStackedLayout = {
+  /**
+   * Label of the select that picks the sorted column. Only shown when `sorting` is on.
+   */
+  labelSortBy: string
+  /**
+   * Accessible label of the button that opens the sort order menu, also used as
+   * the title of the menu. Only shown when `sorting` is on.
+   */
+  labelSortOrder: string
+  /**
+   * Returns the text of a sort order menu item. Only used when `sorting` is on.
+   */
+  labelSortDirection: (sortDirection: DataGridSortDirection) => string
+}
+
 type DataGridOwnProps<
   TFeatures extends TableFeatures,
   TData extends RowData
@@ -129,6 +146,12 @@ type DataGridOwnProps<
    * Columns opt out with `enableSorting: false` in their definition.
    */
   sorting?: DataGridSorting
+  /**
+   * Turns on the stacked layout for small screens. Each row becomes a block, and
+   * each cell shows its column header as a label. With `sorting` on, a select
+   * and a menu above the rows replace the header buttons.
+   */
+  stackedLayout?: DataGridStackedLayout
 }
 
 type DataGridProps<
@@ -136,10 +159,21 @@ type DataGridProps<
   TData extends RowData
 > = DataGridOwnProps<TFeatures, TData>
 
+type DataGridStyle = ComponentStyle<
+  | 'expandableCell'
+  | 'sortButton'
+  | 'sortControls'
+  | 'sortColumnSelect'
+  | 'table'
+  | 'stackedLabel'
+>
+
 export type {
   DataGridProps,
+  DataGridStyle,
   DataGridPagination,
   DataGridExpandedRows,
   DataGridSorting,
-  DataGridSortDirection
+  DataGridSortDirection,
+  DataGridStackedLayout
 }
