@@ -45,8 +45,7 @@ import { TruncateList } from '@instructure/ui-truncate-list'
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
-class AppNav extends Component<AppNavProps> {
+export class AppNavBase extends Component<AppNavProps> {
   static displayName = 'AppNav'
   static readonly componentId = 'AppNav'
 
@@ -163,6 +162,9 @@ class AppNav extends Component<AppNavProps> {
     )
   }
 }
+
+const AppNav = withStyle(generateStyle, generateComponentTheme)(AppNavBase)
+type AppNav = AppNavBase
 
 export { AppNav }
 export default AppNav

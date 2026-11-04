@@ -61,8 +61,7 @@ import type { FormMessage } from '@instructure/ui-form-field/v11_6'
 category: components
 ---
 **/
-@withStyle(generateStyle, null)
-class DateInput extends Component<DateInputProps, DateInputState> {
+export class DateInputBase extends Component<DateInputProps, DateInputState> {
   static displayName = 'DateInput'
   static readonly componentId = 'DateInput'
   static Day = Calendar.Day
@@ -496,6 +495,9 @@ class DateInput extends Component<DateInputProps, DateInputState> {
     )
   }
 }
+
+const DateInput = withStyle(generateStyle, null)(DateInputBase)
+type DateInput = DateInputBase
 
 export default DateInput
 export { DateInput }

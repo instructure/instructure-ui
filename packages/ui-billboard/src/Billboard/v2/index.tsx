@@ -53,8 +53,7 @@ const billboardSizeToIconSize = {
 category: components
 ---
 **/
-@withStyleNew(generateStyle)
-class Billboard extends Component<
+export class BillboardBase extends Component<
   BillboardProps,
   { isHovered: boolean; isActive: boolean }
 > {
@@ -198,6 +197,9 @@ class Billboard extends Component<
     )
   }
 }
+
+const Billboard = withStyleNew(generateStyle)(BillboardBase)
+type Billboard = BillboardBase
 
 export default Billboard
 export { Billboard }

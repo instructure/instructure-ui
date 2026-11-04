@@ -54,8 +54,7 @@ import generateComponentTheme from './theme.js'
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
-class ToggleGroup extends Component<ToggleGroupProps> {
+export class ToggleGroupBase extends Component<ToggleGroupProps> {
   static displayName = 'ToggleGroup'
   static readonly componentId = 'ToggleGroup'
 
@@ -201,6 +200,12 @@ class ToggleGroup extends Component<ToggleGroupProps> {
     )
   }
 }
+
+const ToggleGroup = withStyle(
+  generateStyle,
+  generateComponentTheme
+)(ToggleGroupBase)
+type ToggleGroup = ToggleGroupBase
 
 export default ToggleGroup
 export { ToggleGroup }

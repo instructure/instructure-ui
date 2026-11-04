@@ -38,8 +38,7 @@ category: components/Util Components
 ---
 @module Portal
 **/
-@textDirectionContextConsumer()
-class Portal extends Component<PortalProps, PortalState> {
+export class PortalBase extends Component<PortalProps, PortalState> {
   static displayName = 'Portal'
   static allowedProps = allowedProps
   static defaultProps = {
@@ -222,6 +221,9 @@ class Portal extends Component<PortalProps, PortalState> {
       : null
   }
 }
+
+const Portal = textDirectionContextConsumer()(PortalBase)
+type Portal = PortalBase
 
 export default Portal
 export { Portal }

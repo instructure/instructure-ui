@@ -48,8 +48,7 @@ parent: TreeBrowser
 id: TreeBrowser.Button
 ---
 **/
-@withStyleNew(generateStyles, 'TreeBrowserTreeButton')
-class TreeButton extends Component<
+export class TreeButtonBase extends Component<
   TreeBrowserButtonProps,
   { isHovered: boolean }
 > {
@@ -207,6 +206,12 @@ class TreeButton extends Component<
     )
   }
 }
+
+const TreeButton = withStyleNew(
+  generateStyles,
+  'TreeBrowserTreeButton'
+)(TreeButtonBase)
+type TreeButton = TreeButtonBase
 
 export default TreeButton
 export { TreeButton }

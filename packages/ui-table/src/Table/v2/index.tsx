@@ -50,8 +50,7 @@ import { error } from '@instructure/console'
 category: components
 ---
 **/
-@withStyleNew(generateStyle)
-class Table extends Component<TableProps> {
+export class TableBase extends Component<TableProps> {
   static displayName = 'Table'
   static readonly componentId = 'Table'
 
@@ -226,6 +225,9 @@ class Table extends Component<TableProps> {
     )
   }
 }
+
+const Table = withStyleNew(generateStyle)(TableBase)
+type Table = TableBase
 
 export default Table
 export { Table }

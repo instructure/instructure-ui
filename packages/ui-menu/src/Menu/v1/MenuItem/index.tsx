@@ -50,9 +50,7 @@ parent: Menu
 id: Menu.Item
 ---
 **/
-@withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
-class MenuItem extends Component<MenuItemProps, MenuItemState> {
+export class MenuItemBase extends Component<MenuItemProps, MenuItemState> {
   static displayName = 'MenuItem'
   static readonly componentId = 'Menu.Item'
 
@@ -287,6 +285,11 @@ class MenuItem extends Component<MenuItemProps, MenuItemState> {
     )
   }
 }
+
+const MenuItem = withDeterministicId()(
+  withStyle(generateStyle, generateComponentTheme)(MenuItemBase)
+)
+type MenuItem = MenuItemBase
 
 export default MenuItem
 export { MenuItem }

@@ -43,8 +43,7 @@ parent: Modal
 id: Modal.Body
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
-class ModalBody extends Component<ModalBodyProps, ModalBodyState> {
+export class ModalBodyBase extends Component<ModalBodyProps, ModalBodyState> {
   static displayName = 'ModalBody'
   static readonly componentId = 'Modal.Body'
 
@@ -204,6 +203,12 @@ class ModalBody extends Component<ModalBodyProps, ModalBodyState> {
     )
   }
 }
+
+const ModalBody = withStyle(
+  generateStyle,
+  generateComponentTheme
+)(ModalBodyBase)
+type ModalBody = ModalBodyBase
 
 export default ModalBody
 export { ModalBody }

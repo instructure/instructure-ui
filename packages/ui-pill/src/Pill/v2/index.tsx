@@ -43,8 +43,7 @@ category: components
 ---
 **/
 
-@withStyleNew(generateStyle, null, frozenThemesDesignTokensV1)
-class Pill extends Component<PillProps, PillState> {
+export class PillBase extends Component<PillProps, PillState> {
   static displayName = 'Pill'
   static readonly componentId = 'Pill'
 
@@ -179,6 +178,13 @@ class Pill extends Component<PillProps, PillState> {
     }
   }
 }
+
+const Pill = withStyleNew(
+  generateStyle,
+  null,
+  frozenThemesDesignTokensV1
+)(PillBase)
+type Pill = PillBase
 
 export default Pill
 export { Pill }

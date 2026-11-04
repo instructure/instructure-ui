@@ -46,9 +46,7 @@ category: components
 tags: form, field, input
 ---
 **/
-@withDeterministicId()
-@withStyleNew(generateStyle)
-class TextInput extends Component<TextInputProps> {
+export class TextInputBase extends Component<TextInputProps> {
   static displayName = 'TextInput'
   static readonly componentId = 'TextInput'
 
@@ -322,6 +320,11 @@ class TextInput extends Component<TextInputProps> {
     )
   }
 }
+
+const TextInput = withDeterministicId()(
+  withStyleNew(generateStyle)(TextInputBase)
+)
+type TextInput = TextInputBase
 
 export default TextInput
 export { TextInput }

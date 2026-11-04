@@ -66,10 +66,10 @@ type DrawerChildren = (TrayChild | ContentChild)[]
 category: components
 ---
 **/
-@withDeterministicId()
-@withStyle(generateStyle, null)
-@textDirectionContextConsumer()
-class DrawerLayout extends Component<DrawerLayoutProps, DrawerLayoutState> {
+export class DrawerLayoutBase extends Component<
+  DrawerLayoutProps,
+  DrawerLayoutState
+> {
   static displayName = 'DrawerLayout'
   static readonly componentId = 'DrawerLayout'
 
@@ -330,6 +330,14 @@ class DrawerLayout extends Component<DrawerLayoutProps, DrawerLayoutState> {
     )
   }
 }
+
+const DrawerLayout = withDeterministicId()(
+  withStyle(
+    generateStyle,
+    null
+  )(textDirectionContextConsumer()(DrawerLayoutBase))
+)
+type DrawerLayout = DrawerLayoutBase
 export default DrawerLayout
 export { DrawerLayout, DrawerContent, DrawerTray }
 export const DrawerLayoutContext = createContext(false)

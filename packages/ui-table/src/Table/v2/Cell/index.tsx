@@ -40,8 +40,7 @@ parent: Table
 id: Table.Cell
 ---
 **/
-@withStyleNew(generateStyle)
-class Cell extends Component<TableCellProps> {
+export class CellBase extends Component<TableCellProps> {
   static displayName = 'Cell'
   static readonly componentId = 'Table.Cell'
   static contextType = TableContext
@@ -79,6 +78,9 @@ class Cell extends Component<TableCellProps> {
     )
   }
 }
+
+const Cell = withStyleNew(generateStyle)(CellBase)
+type Cell = CellBase
 
 export default Cell
 export { Cell }

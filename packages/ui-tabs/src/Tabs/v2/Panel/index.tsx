@@ -40,8 +40,7 @@ parent: Tabs
 id: Tabs.Panel
 ---
 **/
-@withStyleNew(generateStyle)
-class Panel extends Component<TabsPanelProps> {
+export class PanelBase extends Component<TabsPanelProps> {
   static displayName = 'Panel'
   static readonly componentId = 'Tabs.Panel'
 
@@ -134,6 +133,9 @@ class Panel extends Component<TabsPanelProps> {
     )
   }
 }
+
+const Panel = withStyleNew(generateStyle)(PanelBase)
+type Panel = PanelBase
 
 export default Panel
 export { Panel }

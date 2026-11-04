@@ -72,10 +72,7 @@ category: components
 tags: overlay, portal, dialog
 ---
 **/
-@withDeterministicId()
-@textDirectionContextConsumer()
-@withStyleNew(generateStyle)
-class Popover extends Component<PopoverProps, PopoverState> {
+export class PopoverBase extends Component<PopoverProps, PopoverState> {
   static displayName = 'Popover'
   static readonly componentId = 'Popover'
 
@@ -521,9 +518,7 @@ class Popover extends Component<PopoverProps, PopoverState> {
     let content = callRenderProp(this.props.children)
 
     if (this.props.shouldScrollContent) {
-      content = (
-        <div css={this.props.styles?.scrollContainer}>{content}</div>
-      )
+      content = <div css={this.props.styles?.scrollContainer}>{content}</div>
     }
 
     if (this.shown && !this.isTooltip) {
@@ -649,6 +644,11 @@ class Popover extends Component<PopoverProps, PopoverState> {
     }
   }
 }
+
+const Popover = withDeterministicId()(
+  textDirectionContextConsumer()(withStyleNew(generateStyle)(PopoverBase))
+)
+type Popover = PopoverBase
 
 export default Popover
 export { Popover }

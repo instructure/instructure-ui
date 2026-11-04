@@ -42,8 +42,7 @@ parent: Tabs
 id: Tabs.Tab
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
-class Tab extends Component<TabsTabProps> {
+export class TabBase extends Component<TabsTabProps> {
   static displayName = 'Tab'
   static readonly componentId = 'Tabs.Tab'
 
@@ -120,6 +119,9 @@ class Tab extends Component<TabsTabProps> {
     )
   }
 }
+
+const Tab = withStyle(generateStyle, generateComponentTheme)(TabBase)
+type Tab = TabBase
 
 export default Tab
 export { Tab }

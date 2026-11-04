@@ -45,9 +45,10 @@ import generateStyle from './styles.js'
 private: true
 ---
 **/
-@withDeterministicId()
-@withStyleNew(generateStyle, 'Palette')
-class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
+export class ColorPaletteBase extends Component<
+  ColorPaletteProps,
+  ColorPaletteState
+> {
   static displayName = 'ColorPalette'
   static allowedProps = allowedProps
   static readonly componentId = 'ColorMixer.Palette'
@@ -261,5 +262,10 @@ class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
     )
   }
 }
+
+const ColorPalette = withDeterministicId()(
+  withStyleNew(generateStyle, 'Palette')(ColorPaletteBase)
+)
+type ColorPalette = ColorPaletteBase
 
 export default ColorPalette

@@ -40,8 +40,7 @@ import type { CheckboxFacadeProps } from './props'
 parent: Checkbox
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
-class CheckboxFacade extends Component<CheckboxFacadeProps> {
+export class CheckboxFacadeBase extends Component<CheckboxFacadeProps> {
   static displayName = 'CheckboxFacade'
   static readonly componentId = 'CheckboxFacade'
 
@@ -95,6 +94,12 @@ class CheckboxFacade extends Component<CheckboxFacadeProps> {
     )
   }
 }
+
+const CheckboxFacade = withStyle(
+  generateStyle,
+  generateComponentTheme
+)(CheckboxFacadeBase)
+type CheckboxFacade = CheckboxFacadeBase
 
 export default CheckboxFacade
 export { CheckboxFacade }

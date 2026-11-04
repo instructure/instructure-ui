@@ -41,8 +41,7 @@ category: components
 ---
 **/
 
-@withStyleNew(generateStyle)
-class Tag extends Component<TagProps> {
+export class TagBase extends Component<TagProps> {
   static displayName = 'Tag'
   static readonly componentId = 'Tag'
 
@@ -166,6 +165,9 @@ class Tag extends Component<TagProps> {
     )
   }
 }
+
+const Tag = withStyleNew(generateStyle)(TagBase)
+type Tag = TagBase
 
 export default Tag
 export { Tag }

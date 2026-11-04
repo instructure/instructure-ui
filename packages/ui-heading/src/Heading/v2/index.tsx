@@ -132,8 +132,7 @@ const levelToAIHorizontalIconSize: Record<
 category: components
 ---
 **/
-@withStyleNew(generateStyle)
-class Heading extends Component<HeadingProps> {
+export class HeadingBase extends Component<HeadingProps> {
   static displayName = 'Heading'
   static readonly componentId = 'Heading'
 
@@ -314,6 +313,9 @@ class Heading extends Component<HeadingProps> {
     )
   }
 }
+
+const Heading = withStyleNew(generateStyle)(HeadingBase)
+type Heading = HeadingBase
 
 export default Heading
 export { Heading }

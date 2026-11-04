@@ -43,8 +43,7 @@ category: components
 **/
 
 // needed for listing the available theme variables on docs page
-@withStyle(null, generateComponentTheme)
-class IconButton extends Component<IconButtonProps> {
+export class IconButtonBase extends Component<IconButtonProps> {
   static displayName = 'IconButton'
   static readonly componentId = 'IconButton'
 
@@ -136,6 +135,9 @@ class IconButton extends Component<IconButtonProps> {
     )
   }
 }
+
+const IconButton = withStyle(null, generateComponentTheme)(IconButtonBase)
+type IconButton = IconButtonBase
 
 export default IconButton
 export { IconButton }

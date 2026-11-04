@@ -33,8 +33,7 @@ import type { PreviewProps, PreviewState } from './props'
 import * as themes from '@instructure/ui-themes'
 import { camelize } from '@instructure/ui-utils'
 
-@withStyleForDocs(generateStyle)
-class Preview extends Component<PreviewProps, PreviewState> {
+export class PreviewBase extends Component<PreviewProps, PreviewState> {
   static displayName = 'Preview'
   static allowedProps = allowedProps
 
@@ -95,5 +94,8 @@ class Preview extends Component<PreviewProps, PreviewState> {
     )
   }
 }
+
+const Preview = withStyleForDocs(generateStyle)(PreviewBase)
+type Preview = PreviewBase
 
 export default Preview

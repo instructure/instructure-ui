@@ -45,9 +45,7 @@ import { Mask } from '@instructure/ui-overlays/v11_6'
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
-@textDirectionContextConsumer()
-class Tray extends Component<TrayProps> {
+export class TrayBase extends Component<TrayProps> {
   static displayName = 'Tray'
   static readonly componentId = 'Tray'
 
@@ -246,6 +244,12 @@ class Tray extends Component<TrayProps> {
     )
   }
 }
+
+const Tray = withStyle(
+  generateStyle,
+  generateComponentTheme
+)(textDirectionContextConsumer()(TrayBase))
+type Tray = TrayBase
 
 export default Tray
 export { Tray }

@@ -51,8 +51,7 @@ import { allowedProps } from './props'
 //@ts-expect-error ts complains for no real reason
 import logo from '../../logo.svg'
 
-@withStyleForDocs(generateStyle)
-class Hero extends Component<HeroProps> {
+export class HeroBase extends Component<HeroProps> {
   static displayName = 'Hero'
   static allowedProps = allowedProps
   static defaultProps = {
@@ -561,6 +560,9 @@ class Hero extends Component<HeroProps> {
     )
   }
 }
+
+const Hero = withStyleForDocs(generateStyle)(HeroBase)
+type Hero = HeroBase
 
 export default Hero
 export { Hero }

@@ -36,8 +36,7 @@ import type { ComponentThemeProps } from './props'
 
 type ThemeEntry = { name: string; value: string | number }
 
-@withStyleForDocs(generateStyle)
-class ComponentTheme extends Component<ComponentThemeProps> {
+export class ComponentThemeBase extends Component<ComponentThemeProps> {
   static displayName = 'ComponentTheme'
   static allowedProps = allowedProps
 
@@ -129,6 +128,9 @@ class ComponentTheme extends Component<ComponentThemeProps> {
     ) : null
   }
 }
+
+const ComponentTheme = withStyleForDocs(generateStyle)(ComponentThemeBase)
+type ComponentTheme = ComponentThemeBase
 
 export default ComponentTheme
 export { ComponentTheme }

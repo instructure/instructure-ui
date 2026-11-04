@@ -47,8 +47,10 @@ import generateStyle from './styles.js'
 category: components
 ---
 **/
-@withStyle(generateStyle, null)
-class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
+export class ColorMixerBase extends Component<
+  ColorMixerProps,
+  ColorMixerState
+> {
   static displayName = 'ColorMixer'
   static allowedProps = allowedProps
   static readonly componentId = 'ColorMixer'
@@ -216,6 +218,9 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
     )
   }
 }
+
+const ColorMixer = withStyle(generateStyle, null)(ColorMixerBase)
+type ColorMixer = ColorMixerBase
 
 export { ColorMixer }
 export default ColorMixer

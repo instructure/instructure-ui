@@ -40,8 +40,7 @@ parent: Table
 id: Table.RowHeader
 ---
 **/
-@withStyleNew(generateStyle)
-class RowHeader extends Component<TableRowHeaderProps> {
+export class RowHeaderBase extends Component<TableRowHeaderProps> {
   static displayName = 'RowHeader'
   static readonly componentId = 'Table.RowHeader'
   static contextType = TableContext
@@ -80,6 +79,9 @@ class RowHeader extends Component<TableRowHeaderProps> {
     )
   }
 }
+
+const RowHeader = withStyleNew(generateStyle)(RowHeaderBase)
+type RowHeader = RowHeaderBase
 
 export default RowHeader
 export { RowHeader }

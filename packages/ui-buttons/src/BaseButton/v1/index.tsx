@@ -52,8 +52,7 @@ category: components/Util Components
 ---
 **/
 
-@withStyle(generateStyles, generateComponentTheme)
-class BaseButton extends Component<BaseButtonProps> {
+export class BaseButtonBase extends Component<BaseButtonProps> {
   static displayName = 'BaseButton'
   static readonly componentId = 'BaseButton'
 
@@ -324,6 +323,12 @@ class BaseButton extends Component<BaseButtonProps> {
     )
   }
 }
+
+const BaseButton = withStyle(
+  generateStyles,
+  generateComponentTheme
+)(BaseButtonBase)
+type BaseButton = BaseButtonBase
 
 export { BaseButton }
 export default BaseButton

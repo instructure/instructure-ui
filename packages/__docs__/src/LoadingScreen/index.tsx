@@ -26,8 +26,7 @@ import { Component } from 'react'
 import generateStyle from './styles'
 import { withStyleForDocs } from '../withStyleForDocs'
 import type { LoadingScreenProps } from './props'
-@withStyleForDocs(generateStyle)
-class LoadingScreen extends Component<LoadingScreenProps> {
+export class LoadingScreenBase extends Component<LoadingScreenProps> {
   static displayName = 'LoadingScreen'
   componentDidMount() {
     this.props.makeStyles?.()
@@ -51,6 +50,9 @@ class LoadingScreen extends Component<LoadingScreenProps> {
     )
   }
 }
+
+const LoadingScreen = withStyleForDocs(generateStyle)(LoadingScreenBase)
+type LoadingScreen = LoadingScreenBase
 
 export default LoadingScreen
 export { LoadingScreen }

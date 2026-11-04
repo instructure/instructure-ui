@@ -47,9 +47,8 @@ const HookComponent = () => {
   )
 }
 
-// A class component that uses the decorator-injected prop.
-@withDeterministicId()
-class ClassComponent extends Component<WithDeterministicIdProps> {
+// A class component that uses the HOC-injected prop.
+class ClassComponentBase extends Component<WithDeterministicIdProps> {
   render() {
     const id = this.props.deterministicId!()
     const messagesId = this.props.deterministicId!('ClassComponent-messages')
@@ -60,6 +59,8 @@ class ClassComponent extends Component<WithDeterministicIdProps> {
     )
   }
 }
+
+const ClassComponent = withDeterministicId()(ClassComponentBase)
 
 const App = (): ReactElement => (
   <div>

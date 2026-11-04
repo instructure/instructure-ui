@@ -38,8 +38,7 @@ import type { ListProps } from './props'
 category: components
 ---
 **/
-@withStyleNew(generateStyle)
-class List extends Component<ListProps> {
+export class ListBase extends Component<ListProps> {
   static displayName = 'List'
   static readonly componentId = 'List'
 
@@ -105,6 +104,9 @@ class List extends Component<ListProps> {
     )
   }
 }
+
+const List = withStyleNew(generateStyle)(ListBase)
+type List = ListBase
 
 export default List
 export { List, ListItem }

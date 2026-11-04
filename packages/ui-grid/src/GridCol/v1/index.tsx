@@ -41,8 +41,7 @@ parent: Grid
 id: Grid.Col
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
-class GridCol extends Component<GridColProps> {
+export class GridColBase extends Component<GridColProps> {
   static displayName = 'GridCol'
   static readonly componentId = 'Grid.Col'
 
@@ -110,6 +109,9 @@ class GridCol extends Component<GridColProps> {
     )
   }
 }
+
+const GridCol = withStyle(generateStyle, generateComponentTheme)(GridColBase)
+type GridCol = GridColBase
 
 export default GridCol
 export { GridCol }

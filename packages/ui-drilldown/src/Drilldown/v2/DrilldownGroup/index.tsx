@@ -40,8 +40,7 @@ themeId: Options
 **/
 // needed for listing the available theme variables on docs page,
 // we pass the themeOverrides to Options
-@withStyleNew(null)
-class DrilldownGroup extends Component<DrilldownGroupProps> {
+export class DrilldownGroupBase extends Component<DrilldownGroupProps> {
   static displayName = 'DrilldownGroup'
   static readonly componentId = 'Drilldown.Group'
 
@@ -60,6 +59,9 @@ class DrilldownGroup extends Component<DrilldownGroupProps> {
     return null
   }
 }
+
+const DrilldownGroup = withStyleNew(null)(DrilldownGroupBase)
+type DrilldownGroup = DrilldownGroupBase
 
 export default DrilldownGroup
 export { DrilldownGroup }

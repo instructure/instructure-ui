@@ -39,8 +39,7 @@ import type { ImgProps } from './props'
 category: components
 ---
 **/
-@withStyleNew(generateStyle)
-class Img extends Component<ImgProps> {
+export class ImgBase extends Component<ImgProps> {
   static displayName = 'Img'
   static readonly componentId = 'Img'
 
@@ -135,6 +134,9 @@ class Img extends Component<ImgProps> {
     }
   }
 }
+
+const Img = withStyleNew(generateStyle)(ImgBase)
+type Img = ImgBase
 
 export default Img
 export { Img }

@@ -44,8 +44,7 @@ id: TopNavBar.User
 ---
 @module TopNavBarUser
 **/
-@withStyle(generateStyle, null)
-class TopNavBarUser extends Component<TopNavBarUserProps> {
+export class TopNavBarUserBase extends Component<TopNavBarUserProps> {
   static displayName = 'TopNavBarUser'
   static readonly componentId = 'TopNavBar.User'
 
@@ -125,6 +124,9 @@ class TopNavBarUser extends Component<TopNavBarUserProps> {
     )
   }
 }
+
+const TopNavBarUser = withStyle(generateStyle, null)(TopNavBarUserBase)
+type TopNavBarUser = TopNavBarUserBase
 
 export { TopNavBarUser }
 export default TopNavBarUser
