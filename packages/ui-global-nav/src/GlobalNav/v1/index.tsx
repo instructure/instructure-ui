@@ -64,10 +64,14 @@ const GlobalNav = forwardRef<HTMLElement, GlobalNavProps>(
       themeOverride
     } = props
 
+    const openItem = items.find(
+      (item) => item.itemID === openSubNav && item.subNav
+    )
+
     const styles = useStyleNew({
       generateStyle,
       themeOverride,
-      params: { collapsed },
+      params: { collapsed, subNavOpen: !!openItem },
       componentId: 'GlobalNav',
       displayName: 'GlobalNav'
     })
@@ -115,9 +119,6 @@ const GlobalNav = forwardRef<HTMLElement, GlobalNavProps>(
       return () => observer.disconnect()
     }, [])
 
-    const openItem = items.find(
-      (item) => item.itemID === openSubNav && item.subNav
-    )
     // the SubNav of the current page collapses to a strip, other SubNavs close completely
     const currentSectionItem = items.find((item) => item.current && item.subNav)
 

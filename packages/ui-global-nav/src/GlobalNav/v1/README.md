@@ -92,7 +92,7 @@ One SubNav is open at a time. The app opens and closes it with `openSubNav` and 
 
 When the user opens a SubNav, focus moves to its first item, or to the close handle when it has no items. When the user closes it, focus goes back to the rail item. Focus doesn't move when the app sets `openSubNav` itself, for example on page load.
 
-`GlobalNav` gets wider while a SubNav is open, so don't give it a fixed width.
+An open SubNav makes `GlobalNav` wider and pushes the page. While no SubNav is open, `GlobalNav` has the same width with and without the strip.
 
 When the current page belongs to a SubNav, set `current` on its rail item. Closing that SubNav then leaves a narrow strip that opens it again on click, and other SubNavs close completely.
 
@@ -139,7 +139,7 @@ const Example = () => {
   const [openSubNav, setOpenSubNav] = React.useState('courses')
 
   return (
-    <View as="div" height="30rem">
+    <View as="div" display="flex" height="30rem">
       <GlobalNav
         label="Main navigation"
         collapsed={collapsed}
@@ -154,6 +154,9 @@ const Example = () => {
         logo={{ name: 'Canvas', href: '#' }}
         items={items}
       />
+      <View as="div" width="100%" padding="medium" background="secondary">
+        <Text>Course page</Text>
+      </View>
     </View>
   )
 }
