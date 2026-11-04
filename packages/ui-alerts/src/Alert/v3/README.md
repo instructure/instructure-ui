@@ -139,6 +139,13 @@ type: example
 </div>
 ```
 
+### Dismissing
+
+Set `renderCloseButtonLabel` to render a close button. The label is the
+button's screen reader text. The user can close the Alert with the button or
+by pressing Escape inside the Alert, and `onDismiss` is called after it
+closes.
+
 The `timeout` prop can be used to automatically dismiss an alert after a time.
 
 ```js
@@ -155,11 +162,12 @@ const Example = () => {
         <Alert
           variant="info"
           margin="general.spaceMd 0 0"
-          timeout={3000}
+          timeout={5000}
+          renderCloseButtonLabel="Close"
           variantScreenReaderLabel="Information, "
           onDismiss={() => setIsOpen(false)}
         >
-          Sample info text. I will fade out after 3 seconds.
+          Sample info text. I will fade out after 5 seconds.
         </Alert>
       )}
     </div>
@@ -168,6 +176,8 @@ const Example = () => {
 
 render(<Example />)
 ```
+
+### Screen reader announcement
 
 Given a `liveRegion` property, Alerts will guarantee a screenreader will announce their text.
 Use `liveRegionPoliteness` to choose an `aria-live` politeness setting of either `polite`
@@ -274,6 +284,8 @@ const Example = () => {
 
 render(<Example />)
 ```
+
+### Width
 
 Use the `width` prop to set the width of the Alert.
 
