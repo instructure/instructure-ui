@@ -22,26 +22,13 @@
  * SOFTWARE.
  */
 
-import type { Primitives as PrimitivesDark } from '../../newThemeTokens/dark/primitives'
-import type { Primitives as PrimitivesLight } from '../../newThemeTokens/light/primitives'
-import type { Primitives as PrimitivesCanvas } from '../../newThemeTokens/legacyCanvas/primitives'
-import type { Primitives as PrimitivesCanvasHighContrast } from '../../newThemeTokens/legacyCanvasHighContrast/primitives'
+import type Alert from './alert'
+import type Pill from './pill'
 
-import primitivesDark from '../../newThemeTokens/dark/primitives'
-import primitivesLight from '../../newThemeTokens/light/primitives'
-import primitivesCanvas from '../../newThemeTokens/legacyCanvas/primitives'
-import primitivesCanvasHighContrast from '../../newThemeTokens/legacyCanvasHighContrast/primitives'
-
-export type {
-  PrimitivesDark,
-  PrimitivesLight,
-  PrimitivesCanvas,
-  PrimitivesCanvasHighContrast
+type ComponentTypes = {
+  Alert: (semantic: any) => Alert
+  Pill: (semantic: any) => Pill
 }
 
-export {
-  primitivesDark,
-  primitivesLight,
-  primitivesCanvas,
-  primitivesCanvasHighContrast
-}
+export type { ComponentTypes }
+export default ComponentTypes
