@@ -108,6 +108,7 @@ const generateStyle = (
     fontWeight: componentTheme.fontWeight,
     fontSize: componentTheme.fontSize,
     lineHeight: componentTheme.lineHeight,
+    paddingBottom: hasNonEmptyMessages ? '0' : '0.75rem',
     ...(isInlineLayout && {
       margin: '0',
       // when inline add a small padding between the label and the control
@@ -115,7 +116,9 @@ const generateStyle = (
       // and use the horizontal alignment prop
       [`@media screen and (width >= ${componentTheme.stackedOrInlineBreakpoint})`]:
         {
-          textAlign: labelAlign
+          textAlign: labelAlign,
+          // label and control are in the same row, no need for padding
+          paddingBottom: '0'
         }
     })
   }
@@ -168,9 +171,7 @@ const generateStyle = (
       ...labelStyles,
       // NOTE: needs separate groups for `:is()` and `:-webkit-any()` because of css selector group validation (see https://www.w3.org/TR/selectors-3/#grouping)
       '&:is(label)': labelStyles,
-      '&:-webkit-any(label)': labelStyles,
-
-      paddingBottom: hasNonEmptyMessages ? '0' : '0.75rem'
+      '&:-webkit-any(label)': labelStyles
     },
     formFieldChildren: {
       label: 'formFieldLayout__children',
