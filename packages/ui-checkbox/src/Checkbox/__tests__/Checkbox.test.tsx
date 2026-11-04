@@ -104,6 +104,14 @@ describe('<Checkbox />', () => {
     expect(inputElem).toHaveAttribute('aria-checked', 'mixed')
   })
 
+  it('`toggle` variant does not set aria-checked when indeterminate', async () => {
+    await renderCheckbox({ variant: 'toggle', indeterminate: true })
+
+    const inputElem = page.getByRole('switch').element()
+
+    expect(inputElem).not.toHaveAttribute('aria-checked')
+  })
+
   it('should provide an inputRef prop', async () => {
     const inputRef = vi.fn()
     await renderCheckbox({ inputRef })

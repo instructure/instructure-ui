@@ -342,7 +342,10 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
             disabled={disabled}
             readOnly={readOnly}
             aria-readonly={readOnly ? true : undefined}
-            aria-checked={indeterminate ? 'mixed' : undefined}
+            // the switch role does not support aria-checked="mixed"
+            aria-checked={
+              indeterminate && variant !== 'toggle' ? 'mixed' : undefined
+            }
             role={variant === 'toggle' ? 'switch' : undefined}
             aria-invalid={this.invalid ? 'true' : undefined}
             // Keep messages in the description so the accessible name contains only the label.
