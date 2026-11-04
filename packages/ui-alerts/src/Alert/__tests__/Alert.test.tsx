@@ -92,6 +92,63 @@ describe('<Alert />', () => {
     })
   })
 
+  it('should call `onDismiss` when Escape is pressed with renderCloseButtonLabel', async () => {
+    const onDismiss = vi.fn()
+    await render(
+      <Alert
+        variant="success"
+        renderCloseButtonLabel="Close"
+        onDismiss={onDismiss}
+        transition="none"
+      >
+        Success: Sample alert text.
+      </Alert>
+    )
+    ;(page.getByRole('button').element() as HTMLElement).focus()
+    await userEvent.keyboard('{Escape}')
+
+    expect(onDismiss).toHaveBeenCalledTimes(1)
+    await expect
+      .element(page.getByText('Success: Sample alert text.'))
+      .not.toBeInTheDocument()
+  })
+
+  it('should dismiss itself after `timeout` milliseconds', async () => {
+    vi.useFakeTimers()
+    try {
+      const onDismiss = vi.fn()
+      await render(
+        <Alert
+          variant="success"
+          timeout={1000}
+          onDismiss={onDismiss}
+          transition="none"
+        >
+          Success: Sample alert text.
+        </Alert>
+      )
+
+      vi.advanceTimersByTime(999)
+      expect(onDismiss).not.toHaveBeenCalled()
+
+      vi.advanceTimersByTime(1)
+      expect(onDismiss).toHaveBeenCalledTimes(1)
+    } finally {
+      vi.useRealTimers()
+    }
+  })
+
+  it('should provide the root element via `elementRef`', async () => {
+    const elementRef = vi.fn()
+    await render(
+      <Alert variant="success" elementRef={elementRef}>
+        Success: Sample alert text.
+      </Alert>
+    )
+
+    expect(elementRef).toHaveBeenCalledWith(expect.any(HTMLDivElement))
+  })
+
   const iconComponentsVariants: Record<
     NonNullable<AlertProps['variant']>,
     string
@@ -297,7 +354,7 @@ describe('<Alert />', () => {
   })
 
   describe('Component tests', () => {
-    it('should have shadow by default', async () => {
+    it('should have shadow when `prominence` is `prominent`', async () => {
       const { container } = await render(
         <Alert variant="info" transition="none">
           Success: Sample alert text.
@@ -310,9 +367,9 @@ describe('<Alert />', () => {
       expect(boxShadow).not.toBe('none')
     })
 
-    it("shouldn't have shadow, when `hasShadow` is set to false", async () => {
+    it('should not have shadow when `prominence` is `dimmed`', async () => {
       const { container } = await render(
-        <Alert variant="info" transition="none" hasShadow={false}>
+        <Alert variant="info" transition="none" prominence="dimmed">
           Success: Sample alert text.
         </Alert>
       )
@@ -320,8 +377,20 @@ describe('<Alert />', () => {
         'div[class$="-view-alert"]'
       )!
 
-      const boxShadow = getComputedStyle(view).boxShadow
-      expect(boxShadow).toBe('none')
+      expect(getComputedStyle(view).boxShadow).toBe('none')
+    })
+
+    it('should apply the `width` prop', async () => {
+      const { container } = await render(
+        <Alert variant="info" transition="none" width="300px">
+          Success: Sample alert text.
+        </Alert>
+      )
+      const view = container.querySelector<HTMLElement>(
+        'div[class$="-view-alert"]'
+      )!
+
+      expect(getComputedStyle(view).width).toBe('300px')
     })
   })
 })
