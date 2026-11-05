@@ -29,6 +29,7 @@ import { describe, it, expect, vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import type { ViewProps } from '@instructure/ui-view/latest'
 import { Tag } from '@instructure/ui-tag/latest'
+import type { TagHandle } from '@instructure/ui-tag/latest'
 import { View } from '@instructure/ui-view/latest'
 
 describe('<Tag />', async () => {
@@ -39,34 +40,164 @@ describe('<Tag />', async () => {
     expect(tag).toBeInTheDocument()
   })
 
-  it('should render as a button and respond to onClick event', async () => {
-    const onClick = vi.fn()
-    await render(
-      <Tag data-testid="summer-button" text="Summer" onClick={onClick} />
+  it('should not be focusable without a link or a close button', async () => {
+    await render(<Tag text="Summer" />)
+
+    await userEvent.tab()
+
+    expect(document.activeElement).toBe(document.body)
+  })
+
+  it('should render the body as a link when an href is provided', async () => {
+    await render(<Tag text="Summer" href="/summer" />)
+    const link = page.getByRole('link').element()
+
+    expect(link.tagName).toBe('A')
+    expect(link).toHaveAttribute('href', '/summer')
+  })
+
+  it('should render a leading icon', async () => {
+    const { container } = await render(
+      <Tag text="Summer" renderIcon={<svg name="calendar" />} />
     )
 
-    const button = page.getByTestId('summer-button').element()
+    expect(container.querySelector('svg[name="calendar"]')).toBeInTheDocument()
+  })
 
-    await userEvent.click(button)
+  it('should render a labelled close button that calls onDismiss', async () => {
+    const onDismiss = vi.fn()
+    await render(
+      <Tag
+        text="Summer"
+        renderDismissButtonLabel="Remove Summer"
+        onDismiss={onDismiss}
+      />
+    )
+
+    await userEvent.click(page.getByRole('button', { name: 'Remove Summer' }))
 
     await vi.waitFor(() => {
-      expect(onClick).toHaveBeenCalledTimes(1)
-      expect(button.tagName).toBe('BUTTON')
+      expect(onDismiss).toHaveBeenCalledTimes(1)
     })
   })
 
-  it('should render a close icon when it is dismissible and clickable', async () => {
-    const onClick = vi.fn()
-    const { container } = await render(
-      <Tag text="Summer" onClick={onClick} dismissible={true} />
+  it('should not call onDismiss when the link is clicked', async () => {
+    const onDismiss = vi.fn()
+    await render(
+      <Tag
+        text="Summer"
+        href="#summer"
+        renderDismissButtonLabel="Remove Summer"
+        onDismiss={onDismiss}
+      />
     )
-    const icon = container.querySelector('svg')
 
-    expect(icon).toHaveAttribute('name', 'X')
+    await userEvent.click(page.getByRole('link'))
+
+    expect(onDismiss).not.toHaveBeenCalled()
+  })
+
+  it.each(['disabled', 'readOnly'] as const)(
+    'should block the link and the close button when %s',
+    async (state) => {
+      const onDismiss = vi.fn()
+      const { container } = await render(
+        <Tag
+          text="Summer"
+          href="/summer"
+          renderDismissButtonLabel="Remove Summer"
+          onDismiss={onDismiss}
+          {...{ [state]: true }}
+        />
+      )
+      const link = container.querySelector('a')!
+
+      container.querySelector('button')!.click()
+
+      expect(link).not.toHaveAttribute('href')
+      expect(link).toHaveAttribute('aria-disabled', 'true')
+      expect(onDismiss).not.toHaveBeenCalled()
+    }
+  )
+
+  it('should move focus to the link and then to the close button with Tab', async () => {
+    await render(
+      <Tag
+        text="Summer"
+        href="/summer"
+        renderDismissButtonLabel="Remove Summer"
+        onDismiss={vi.fn()}
+      />
+    )
+
+    await userEvent.tab()
+    expect(page.getByRole('link').element()).toHaveFocus()
+
+    await userEvent.tab()
+    expect(page.getByRole('button').element()).toHaveFocus()
+  })
+
+  it('should focus the link through the ref', async () => {
+    let tagRef: TagHandle | null = null
+    await render(
+      <Tag
+        text="Summer"
+        href="/summer"
+        renderDismissButtonLabel="Remove Summer"
+        onDismiss={vi.fn()}
+        ref={(el) => (tagRef = el)}
+      />
+    )
+
+    tagRef!.focus()
+
+    expect(page.getByRole('link').element()).toHaveFocus()
+    expect(tagRef!.focused).toBe(true)
+  })
+
+  it('should focus the close button through the ref when it is the only focusable element', async () => {
+    let tagRef: TagHandle | null = null
+    await render(
+      <Tag
+        text="Summer"
+        renderDismissButtonLabel="Remove Summer"
+        onDismiss={vi.fn()}
+        ref={(el) => (tagRef = el)}
+      />
+    )
+
+    tagRef!.focus()
+
+    expect(page.getByRole('button').element()).toHaveFocus()
+    expect(tagRef!.focused).toBe(true)
+  })
+
+  it('should expose its root element through the ref', async () => {
+    let tagRef: TagHandle | null = null
+    const { container } = await render(
+      <Tag text="Summer" ref={(el) => (tagRef = el)} />
+    )
+
+    expect(tagRef!.ref.current).toBe(
+      container.querySelector('[data-cid="Tag"]')
+    )
   })
 
   it('should meet a11y standards', async () => {
     const { container } = await render(<Tag text="Summer" />)
+    const axeCheck = await runAxeCheck(container)
+
+    expect(axeCheck).toBe(true)
+  })
+
+  it('should meet a11y standards when dismissible', async () => {
+    const { container } = await render(
+      <Tag
+        text="Summer"
+        renderDismissButtonLabel="Remove Summer"
+        onDismiss={vi.fn()}
+      />
+    )
     const axeCheck = await runAxeCheck(container)
 
     expect(axeCheck).toBe(true)
