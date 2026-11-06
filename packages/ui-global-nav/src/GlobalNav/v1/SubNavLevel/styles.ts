@@ -76,10 +76,10 @@ const generateStyle = (
       label: 'subNavLevel__items',
       display: 'flex',
       flexDirection: 'column',
-      gap: componentTheme.navItemsGap,
       listStyle: 'none',
       margin: 0,
-      padding: 0
+      padding: 0,
+      '& > li + li :is(a, button)': { marginTop: componentTheme.navItemsGap }
     }
   }
 }

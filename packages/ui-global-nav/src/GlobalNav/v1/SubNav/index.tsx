@@ -108,7 +108,12 @@ const SubNav = (props: SubNavProps) => {
   }
 
   return (
-    <nav id={subNavId} aria-labelledby={titleId} css={styles?.subNav}>
+    <nav
+      {...subNav.elementProps}
+      id={subNavId}
+      aria-labelledby={titleId}
+      css={styles?.subNav}
+    >
       <SubNavLevel
         // a new level remounts, which resets its refs, focus and scroll position
         key={JSON.stringify(resolvedPath)}

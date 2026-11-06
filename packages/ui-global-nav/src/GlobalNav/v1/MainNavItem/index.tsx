@@ -54,6 +54,11 @@ const MainNavItem = (props: MainNavItemProps) => {
 
   const label = item.label
   const icon = <span css={styles?.icon}>{callRenderProp(item.icon)}</span>
+  const labelElement = (
+    <span {...item.labelElementProps} css={styles?.label}>
+      {label}
+    </span>
+  )
 
   const badgeCount = item.badgeCount ?? 0
   const badgeLabel =
@@ -70,7 +75,7 @@ const MainNavItem = (props: MainNavItemProps) => {
   const content = collapsed ? (
     <>
       {/* before the icon, so the name reads the label first and then the badge */}
-      <ScreenReaderContent>{label}</ScreenReaderContent>
+      <ScreenReaderContent>{labelElement}</ScreenReaderContent>
       {badgeCount > 0 ? (
         <Badge count={badgeCount} formatOutput={formatBadge}>
           {icon}
@@ -82,7 +87,7 @@ const MainNavItem = (props: MainNavItemProps) => {
   ) : (
     <>
       {icon}
-      <span css={styles?.label}>{label}</span>
+      {labelElement}
       {badgeCount > 0 && (
         <Badge standalone count={badgeCount} formatOutput={formatBadge} />
       )}
@@ -119,7 +124,7 @@ const MainNavItem = (props: MainNavItemProps) => {
   }
 
   return (
-    <li>
+    <li {...item.itemElementProps}>
       {collapsed ? (
         <Tooltip renderTip={label} placement="end">
           {/* Tooltip overwrites the aria-expanded of its trigger, so the span is the trigger */}

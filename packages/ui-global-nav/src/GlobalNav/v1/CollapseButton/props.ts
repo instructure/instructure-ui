@@ -26,6 +26,8 @@ import type { SyntheticEvent } from 'react'
 
 import type { NewComponentTypes } from '@instructure/ui-themes'
 
+import type { GlobalNavHTMLProps } from '../props.js'
+
 type CollapseButtonProps = {
   /**
    * Whether the rail is collapsed.
@@ -43,6 +45,10 @@ type CollapseButtonProps = {
    * Called when the user clicks the button, with the new `collapsed` value.
    */
   onCollapse: (event: SyntheticEvent, collapsed: boolean) => void
+  /**
+   * HTML attributes for the button.
+   */
+  elementProps?: Omit<GlobalNavHTMLProps, 'className'>
   /**
    * Called with the button element.
    */

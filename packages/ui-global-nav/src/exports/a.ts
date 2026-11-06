@@ -31,5 +31,6 @@ export type {
   GlobalNavAccount,
   GlobalNavToggle,
   GlobalNavCountLabel,
-  GlobalNavElementProps
+  GlobalNavElementProps,
+  GlobalNavHTMLProps
 } from '../GlobalNav/v1/props'

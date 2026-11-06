@@ -25,6 +25,7 @@
 import type {
   AnchorHTMLAttributes,
   ChangeEvent,
+  HTMLAttributes,
   MouseEvent,
   SyntheticEvent
 } from 'react'
@@ -35,13 +36,16 @@ import type { NewComponentTypes } from '@instructure/ui-themes'
 
 type GlobalNavCountLabel = string | ((count: number) => string)
 
-type GlobalNavElementProps = Pick<
-  AnchorHTMLAttributes<HTMLElement>,
-  'id' | 'className' | 'target' | 'rel'
+type GlobalNavHTMLProps = Pick<
+  HTMLAttributes<HTMLElement>,
+  'id' | 'className'
 > & {
   // object literals typed as HTML attributes reject data-* keys without this
   [key: `data-${string}`]: string | number | boolean | undefined
 }
+
+type GlobalNavElementProps = GlobalNavHTMLProps &
+  Pick<AnchorHTMLAttributes<HTMLElement>, 'target' | 'rel'>
 
 type GlobalNavSubNavItem = {
   /**
@@ -72,9 +76,21 @@ type GlobalNavSubNavItem = {
    * HTML attributes for the item's link or button: `id`, `className`, `target`, `rel` and `data-*`.
    */
   elementProps?: GlobalNavElementProps
+  /**
+   * HTML attributes for the item's `li` element: `className` and `data-*`.
+   */
+  itemElementProps?: Omit<GlobalNavHTMLProps, 'id'>
+  /**
+   * HTML attributes for the element around the label text: `className` and `data-*`.
+   */
+  labelElementProps?: Omit<GlobalNavHTMLProps, 'id'>
 }
 
-type GlobalNavMainNavItem = GlobalNavSubNavItem & {
+type GlobalNavMainNavItem = Omit<GlobalNavSubNavItem, 'itemElementProps'> & {
+  /**
+   * HTML attributes for the item's `li` element: `id`, `className` and `data-*`.
+   */
+  itemElementProps?: GlobalNavHTMLProps
   /**
    * The icon of the rail item.
    */
@@ -98,6 +114,14 @@ type GlobalNavSubNavWithItems = {
    * The links of the panel, and buttons that open a deeper level.
    */
   items?: GlobalNavSubNavItem[]
+  /**
+   * HTML attributes for the `ul` element of the items: `id` and `data-*`.
+   */
+  listElementProps?: Omit<GlobalNavHTMLProps, 'className'>
+  /**
+   * HTML attributes for the panel's `nav` element, which only the top level uses: `id` and `data-*`.
+   */
+  elementProps?: Omit<GlobalNavHTMLProps, 'className'>
   renderContent?: never
 }
 
@@ -110,7 +134,12 @@ type GlobalNavSubNavWithContent = {
    * Any content in place of `items`, inside the panel frame.
    */
   renderContent: Renderable
+  /**
+   * HTML attributes for the panel's `nav` element, which only the top level uses: `id` and `data-*`.
+   */
+  elementProps?: Omit<GlobalNavHTMLProps, 'className'>
   items?: never
+  listElementProps?: never
 }
 
 // a SubNav shows either items or custom content, never both
@@ -133,6 +162,10 @@ type GlobalNavLogo = {
    * The URL that the logo links to.
    */
   href?: string
+  /**
+   * HTML attributes for the logo's link, or its `div` without `href`: `id`, `className` and `data-*`.
+   */
+  elementProps?: GlobalNavHTMLProps
 }
 
 type GlobalNavToggle = {
@@ -270,6 +303,14 @@ type GlobalNavOwnProps = {
    */
   items: GlobalNavMainNavItem[]
   /**
+   * HTML attributes for the `ul` element of the rail items: `id`, `className` and `data-*`.
+   */
+  listElementProps?: GlobalNavHTMLProps
+  /**
+   * HTML attributes for the collapse button: `id` and `data-*`.
+   */
+  collapseButtonElementProps?: Omit<GlobalNavHTMLProps, 'className'>
+  /**
    * The institution logo at the top of the rail.
    */
   logo: GlobalNavLogo
@@ -303,6 +344,8 @@ const allowedProps: AllowedPropKeys = [
   'openSubNav',
   'onSubNavChange',
   'items',
+  'listElementProps',
+  'collapseButtonElementProps',
   'logo',
   'account'
 ]
@@ -318,6 +361,7 @@ export type {
   GlobalNavAccount,
   GlobalNavToggle,
   GlobalNavCountLabel,
-  GlobalNavElementProps
+  GlobalNavElementProps,
+  GlobalNavHTMLProps
 }
 export { allowedProps }

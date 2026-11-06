@@ -161,7 +161,7 @@ const SubNavLevel = (props: SubNavLevelProps) => {
         {subNav.renderContent !== undefined
           ? callRenderProp(subNav.renderContent)
           : items.length > 0 && (
-              <ul css={styles?.items}>
+              <ul {...subNav.listElementProps} css={styles?.items}>
                 {items.map((item) => (
                   <SubNavItem
                     key={item.itemID}
