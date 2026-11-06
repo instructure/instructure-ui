@@ -42,8 +42,14 @@ id: GlobalNav.CollapseButton
 ---
 **/
 const CollapseButton = (props: CollapseButtonProps) => {
-  const { collapsed, collapseLabel, expandLabel, onCollapse, elementRef } =
-    props
+  const {
+    collapsed,
+    collapseLabel,
+    expandLabel,
+    onCollapse,
+    elementProps,
+    elementRef
+  } = props
 
   const styles = useStyleNew({
     generateStyle,
@@ -57,6 +63,7 @@ const CollapseButton = (props: CollapseButtonProps) => {
     // TODO INSTUI-5242: an open tooltip flashes at its old spot on toggle, until Position updates before paint
     <Tooltip renderTip={label}>
       <IconButton
+        {...elementProps}
         screenReaderLabel={label}
         // the icons mirror themselves in RTL
         renderIcon={

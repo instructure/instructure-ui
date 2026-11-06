@@ -73,13 +73,17 @@ const InstitutionLogo = (props: InstitutionLogoProps) => {
     // drops unsafe hrefs, for example javascript: URLs that would run code on click
     const { href } = safeLinkProps({ href: logo.href, tag: 'a', attr: 'href' })
     return (
-      <a css={styles?.logo} href={href}>
+      <a {...logo.elementProps} css={styles?.logo} href={href}>
         {content}
       </a>
     )
   }
 
-  return <div css={styles?.logo}>{content}</div>
+  return (
+    <div {...logo.elementProps} css={styles?.logo}>
+      {content}
+    </div>
+  )
 }
 
 export default InstitutionLogo

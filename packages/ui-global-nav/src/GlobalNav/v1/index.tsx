@@ -61,6 +61,8 @@ const GlobalNav = forwardRef<HTMLElement, GlobalNavProps>(
       openSubNav,
       onSubNavChange,
       items,
+      listElementProps,
+      collapseButtonElementProps,
       logo,
       themeOverride
     } = props
@@ -85,7 +87,8 @@ const GlobalNav = forwardRef<HTMLElement, GlobalNavProps>(
     })
 
     const getId = useDeterministicId('GlobalNav')
-    const subNavId = getId('GlobalNav-subNav')
+    const subNavId =
+      openItem?.subNav?.elementProps?.id ?? getId('GlobalNav-subNav')
     const titleId = getId('GlobalNav-subNavTitle')
 
     const focusIntentRef = useRef<FocusIntent>()
@@ -186,13 +189,14 @@ const GlobalNav = forwardRef<HTMLElement, GlobalNavProps>(
                 collapseLabel={collapseLabel}
                 expandLabel={expandLabel}
                 onCollapse={onCollapse}
+                elementProps={collapseButtonElementProps}
                 elementRef={(element) => {
                   collapseButtonRef.current = element
                 }}
               />
             </div>
             {!collapsed && <div css={styles?.divider} />}
-            <ul css={mainNavStyles?.items}>
+            <ul {...listElementProps} css={mainNavStyles?.items}>
               {items.map((item) => (
                 <MainNavItem
                   key={item.itemID}

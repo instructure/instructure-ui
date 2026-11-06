@@ -51,7 +51,9 @@ const SubNavItem = (props: SubNavItemProps) => {
 
   const content = (
     <>
-      <span css={styles?.label}>{item.label}</span>
+      <span {...item.labelElementProps} css={styles?.label}>
+        {item.label}
+      </span>
       {item.subNav && (
         // the icon mirrors itself in RTL
         <span css={styles?.chevron}>
@@ -62,7 +64,7 @@ const SubNavItem = (props: SubNavItemProps) => {
   )
 
   return (
-    <li>
+    <li {...item.itemElementProps}>
       {isLink ? (
         <a {...elementProps} ref={elementRef} css={styles?.item}>
           {content}

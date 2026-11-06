@@ -121,10 +121,10 @@ const generateMainNavStyle = (
       display: 'flex',
       flexDirection: 'column',
       alignItems: collapsed ? 'center' : 'stretch',
-      gap: componentTheme.navItemsGap,
       listStyle: 'none',
       margin: 0,
-      padding: 0
+      padding: 0,
+      '& > li + li :is(a, button)': { marginTop: componentTheme.navItemsGap }
     }
   }
 }

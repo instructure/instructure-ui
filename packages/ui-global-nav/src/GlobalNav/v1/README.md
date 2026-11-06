@@ -232,3 +232,22 @@ render(<Example />)
 - Set `current` on the rail item of the current page's section. Closing its SubNav then leaves a narrow strip that opens it again on click. Other SubNavs close completely.
 - The back button shows the title of the level it returns to, and `backLabel` gets that title for the screen reader text, for example "Back to Courses".
 - `renderContent` shows any content in place of `items`, inside the panel frame. Use it for content that can't be navigation items yet, for example while migrating an existing product.
+
+### HTML attributes
+
+The app can set `data-*` attributes on the elements below, for example for analytics or tests, and `id` or `className` where the table lists them. `GlobalNav`'s own attributes, such as `href`, `aria-*` and `role`, always win.
+
+| Element                                | Prop                         | Attributes                                   |
+| -------------------------------------- | ---------------------------- | -------------------------------------------- |
+| root `nav`                             | GlobalNav's own props        | `id`, `data-*`                               |
+| `ul` of the rail items                 | `listElementProps`           | `id`, `className`, `data-*`                  |
+| collapse button                        | `collapseButtonElementProps` | `id`, `data-*`                               |
+| logo link, or its `div` without `href` | `logo.elementProps`          | `id`, `className`, `data-*`                  |
+| item link or button                    | `item.elementProps`          | `id`, `className`, `target`, `rel`, `data-*` |
+| rail item `li`                         | `item.itemElementProps`      | `id`, `className`, `data-*`                  |
+| SubNav item `li`                       | `item.itemElementProps`      | `className`, `data-*`                        |
+| element around the item label          | `item.labelElementProps`     | `className`, `data-*`                        |
+| SubNav panel `nav` (top level only)    | `subNav.elementProps`        | `id`, `data-*`                               |
+| SubNav `ul`                            | `subNav.listElementProps`    | `id`, `data-*`                               |
+
+The label element stays in the DOM when the rail is collapsed, inside `ScreenReaderContent`, and still names the item. When `subNav.elementProps.id` is set, the panel uses it, and its rail item points to it with `aria-controls`.
