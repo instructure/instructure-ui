@@ -33,11 +33,11 @@ type CollapseButtonProps = {
    */
   collapsed: boolean
   /**
-   * Screen reader text and tooltip when the rail is expanded.
+   * Screen reader text when the rail is expanded.
    */
   collapseLabel: string
   /**
-   * Screen reader text and tooltip when the rail is collapsed.
+   * Screen reader text when the rail is collapsed.
    */
   expandLabel: string
   /**
