@@ -65,7 +65,7 @@ type SubNavLevelProps = {
 }
 
 type SubNavLevelStyle = ComponentStyle<
-  'level' | 'header' | 'back' | 'divider' | 'body' | 'items'
+  'level' | 'header' | 'back' | 'title' | 'divider' | 'body' | 'items'
 >
 
 export type { SubNavLevelProps, SubNavLevelStyle }

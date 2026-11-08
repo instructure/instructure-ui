@@ -58,8 +58,8 @@ const generateStyle = (
       padding: collapsed ? 0 : componentTheme.padding,
       flex: collapsed ? undefined : 1,
       ...(collapsed && {
-        width: '2.5rem',
-        height: '2.5rem',
+        width: componentTheme.minimizedWidth,
+        height: componentTheme.minimizedHeight,
         justifyContent: 'center'
       }),
       color: componentTheme.textColor,
@@ -68,9 +68,11 @@ const generateStyle = (
     },
     mark: {
       label: 'institutionLogo__mark',
-      // MainNavInstitutionLogo has no size tokens
-      width: wordmark ? 'auto' : '2.5rem',
-      height: wordmark ? '2rem' : '2.5rem',
+      // the mark has the collapsed logo size in both rail states
+      width: wordmark ? 'auto' : componentTheme.minimizedWidth,
+      height: wordmark
+        ? componentTheme.wordmarkHeight
+        : componentTheme.minimizedHeight,
       objectFit: 'contain',
       flexShrink: 0
     }
