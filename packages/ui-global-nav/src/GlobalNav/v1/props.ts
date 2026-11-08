@@ -238,11 +238,11 @@ type GlobalNavOwnProps = {
    */
   onCollapse: (event: SyntheticEvent, collapsed: boolean) => void
   /**
-   * Screen reader text and tooltip of the collapse button when the rail is expanded.
+   * Screen reader text of the collapse button when the rail is expanded.
    */
   collapseLabel: string
   /**
-   * Screen reader text and tooltip of the collapse button when the rail is collapsed.
+   * Screen reader text of the collapse button when the rail is collapsed.
    */
   expandLabel: string
   /**
