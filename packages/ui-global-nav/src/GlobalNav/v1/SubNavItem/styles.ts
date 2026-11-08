@@ -65,8 +65,10 @@ const generateStyle = (
       color: current
         ? componentTheme.selectedTextColor
         : componentTheme.textColor,
-      // SubNavItem has no font tokens, and buttons don't inherit the font by default
-      font: 'inherit',
+      fontFamily: componentTheme.fontFamily,
+      fontSize: componentTheme.fontSize,
+      fontWeight: componentTheme.fontWeight,
+      lineHeight: componentTheme.lineHeight,
       textAlign: 'start',
       textDecoration: 'none',
       cursor: 'pointer',

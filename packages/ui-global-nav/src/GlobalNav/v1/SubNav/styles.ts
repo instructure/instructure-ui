@@ -39,8 +39,7 @@ const generateStyle = (
   return {
     subNav: {
       label: 'subNav',
-      // TODO: use the SubNav width token once instructure-design-tokens adds it
-      width: '12.5rem',
+      width: componentTheme.width,
       flexShrink: 0,
       boxSizing: 'border-box',
       display: 'flex',

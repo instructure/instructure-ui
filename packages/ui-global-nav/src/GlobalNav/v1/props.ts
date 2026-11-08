@@ -287,9 +287,9 @@ type GlobalNavProps = GlobalNavOwnProps &
   NewThemeOverrideProp<ReturnType<NewComponentTypes['GlobalNav']>> &
   OtherHTMLAttributes<GlobalNavOwnProps>
 
-type GlobalNavStyle = ComponentStyle<'globalNav' | 'rail' | 'divider'>
+type GlobalNavStyle = ComponentStyle<'globalNav' | 'rail'>
 
-type MainNavStyle = ComponentStyle<'mainNav' | 'header' | 'items'>
+type MainNavStyle = ComponentStyle<'mainNav' | 'header' | 'items' | 'divider'>
 
 const allowedProps: AllowedPropKeys = [
   'label',

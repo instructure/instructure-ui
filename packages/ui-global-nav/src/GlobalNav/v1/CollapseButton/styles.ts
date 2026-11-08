@@ -23,7 +23,11 @@
  */
 
 import type { NewComponentTypes } from '@instructure/ui-themes'
-import type { CollapseButtonStyle } from './props.js'
+import type { CollapseButtonIconStyle, CollapseButtonStyle } from './props.js'
+
+type StyleParams = {
+  collapsed: boolean
+}
 
 /**
  * ---
@@ -31,19 +35,43 @@ import type { CollapseButtonStyle } from './props.js'
  * ---
  * Generates the style object from the theme and provided additional information
  * @param componentTheme The theme variable object.
+ * @param params Additional parameters to customize the style.
  * @return The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: ReturnType<NewComponentTypes['MainNavItem']>
+  componentTheme: ReturnType<NewComponentTypes['CollapseButton']>,
+  params: StyleParams
 ): CollapseButtonStyle => {
+  const { collapsed } = params
+
   return {
-    // the default IconButton colors are unreadable on the dark legacy rail, and the
+    collapseButton: {
+      label: 'collapseButton',
+      display: 'flex',
+      // the collapsed rail centers the button
+      marginInlineEnd: collapsed ? 0 : componentTheme.rightMargin
+    },
+    iconButtonThemeOverride: {
+      secondaryGhostHoverBackground: componentTheme.hoverBackgroundColor,
+      secondaryGhostActiveBackground: componentTheme.activeBackgroundColor
+    }
+  }
+}
+
+/**
+ * Generates the icon color from the `MainNavItem` tokens
+ */
+const generateIconStyle = (
+  componentTheme: ReturnType<NewComponentTypes['MainNavItem']>
+): CollapseButtonIconStyle => {
+  return {
+    // the default IconButton icon is unreadable on the dark legacy rail, and the
     // CollapseButton tokens have no icon color
     iconButtonThemeOverride: {
-      secondaryGhostColor: componentTheme.fontColor,
-      secondaryGhostHoverBackground: componentTheme.hoverBackgroundColor
+      secondaryGhostColor: componentTheme.fontColor
     }
   }
 }
 
 export default generateStyle
+export { generateIconStyle }

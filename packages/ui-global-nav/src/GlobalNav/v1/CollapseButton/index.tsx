@@ -33,7 +33,7 @@ import {
 import { Tooltip } from '@instructure/ui-tooltip/latest'
 
 import type { CollapseButtonProps } from './props.js'
-import generateStyle from './styles.js'
+import generateStyle, { generateIconStyle } from './styles.js'
 
 /**
 ---
@@ -47,6 +47,13 @@ const CollapseButton = (props: CollapseButtonProps) => {
 
   const styles = useStyleNew({
     generateStyle,
+    params: { collapsed },
+    componentId: 'CollapseButton'
+  })
+
+  // MainNavItem is a separate token set, and useStyleNew reads one set per call
+  const iconStyles = useStyleNew({
+    generateStyle: generateIconStyle,
     componentId: 'CollapseButton',
     useTokensFrom: 'MainNavItem'
   })
@@ -55,24 +62,29 @@ const CollapseButton = (props: CollapseButtonProps) => {
 
   return (
     // TODO INSTUI-5242: an open tooltip flashes at its old spot on toggle, until Position updates before paint
-    <Tooltip renderTip={label}>
-      <IconButton
-        screenReaderLabel={label}
-        // the icons mirror themselves in RTL
-        renderIcon={
-          collapsed ? ChevronsRightInstUIIcon : ChevronsLeftInstUIIcon
-        }
-        withBackground={false}
-        withBorder={false}
-        size="small"
-        elementRef={elementRef}
-        // IconButton types the event target as ViewProps, at runtime it is the DOM button
-        onClick={(event) =>
-          onCollapse(event as unknown as SyntheticEvent, !collapsed)
-        }
-        themeOverride={styles?.iconButtonThemeOverride}
-      />
-    </Tooltip>
+    <div css={styles?.collapseButton}>
+      <Tooltip renderTip={label}>
+        <IconButton
+          screenReaderLabel={label}
+          // the icons mirror themselves in RTL
+          renderIcon={
+            collapsed ? ChevronsRightInstUIIcon : ChevronsLeftInstUIIcon
+          }
+          withBackground={false}
+          withBorder={false}
+          size="small"
+          elementRef={elementRef}
+          // IconButton types the event target as ViewProps, at runtime it is the DOM button
+          onClick={(event) =>
+            onCollapse(event as unknown as SyntheticEvent, !collapsed)
+          }
+          themeOverride={{
+            ...styles?.iconButtonThemeOverride,
+            ...iconStyles?.iconButtonThemeOverride
+          }}
+        />
+      </Tooltip>
+    </div>
   )
 }
 

@@ -28,7 +28,6 @@ import type { FocusEvent, SyntheticEvent } from 'react'
 import { useStyleNew } from '@instructure/emotion'
 import { CondensedButton, IconButton } from '@instructure/ui-buttons/latest'
 import { findTabbable } from '@instructure/ui-dom-utils'
-import { Heading } from '@instructure/ui-heading/latest'
 import {
   ChevronLeftInstUIIcon,
   PanelLeftCloseInstUIIcon
@@ -145,14 +144,9 @@ const SubNavLevel = (props: SubNavLevelProps) => {
           onClick={(event) => onClose(event as unknown as SyntheticEvent)}
         />
       </div>
-      <Heading
-        level="h2"
-        variant="titleCardRegular"
-        color="inherit"
-        id={titleId}
-      >
+      <h2 id={titleId} css={styles?.title}>
         {subNav.title}
-      </Heading>
+      </h2>
       <div css={styles?.divider} />
       <div ref={bodyRef} css={styles?.body}>
         {subNav.renderContent !== undefined

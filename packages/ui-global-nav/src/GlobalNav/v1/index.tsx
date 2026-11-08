@@ -191,7 +191,7 @@ const GlobalNav = forwardRef<HTMLElement, GlobalNavProps>(
                 }}
               />
             </div>
-            {!collapsed && <div css={styles?.divider} />}
+            {!collapsed && <div css={mainNavStyles?.divider} />}
             <ul css={mainNavStyles?.items}>
               {items.map((item) => (
                 <MainNavItem

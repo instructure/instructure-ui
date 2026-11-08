@@ -66,6 +66,14 @@ const generateStyle = (
       marginInlineEnd: 'auto',
       minWidth: 0
     },
+    title: {
+      label: 'subNavLevel__title',
+      margin: 0,
+      fontFamily: componentTheme.titleFontFamily,
+      fontSize: componentTheme.titleFontSize,
+      fontWeight: componentTheme.titleFontWeight,
+      lineHeight: componentTheme.titleLineHeight
+    },
     divider: {
       label: 'subNavLevel__divider',
       // SubNav has no divider width token

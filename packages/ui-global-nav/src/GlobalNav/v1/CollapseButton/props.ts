@@ -24,6 +24,7 @@
 
 import type { SyntheticEvent } from 'react'
 
+import type { ComponentStyle } from '@instructure/emotion'
 import type { NewComponentTypes } from '@instructure/ui-themes'
 
 type CollapseButtonProps = {
@@ -49,8 +50,15 @@ type CollapseButtonProps = {
   elementRef: (element: Element | null) => void
 }
 
-type CollapseButtonStyle = {
+type CollapseButtonIconStyle = {
   iconButtonThemeOverride: Partial<ReturnType<NewComponentTypes['BaseButton']>>
 }
 
-export type { CollapseButtonProps, CollapseButtonStyle }
+type CollapseButtonStyle = ComponentStyle<'collapseButton'> &
+  CollapseButtonIconStyle
+
+export type {
+  CollapseButtonProps,
+  CollapseButtonStyle,
+  CollapseButtonIconStyle
+}

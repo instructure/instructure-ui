@@ -76,11 +76,6 @@ const generateStyle = (
         ? componentTheme.minimizedBorderRadius
         : componentTheme.borderRadius,
       boxShadow: boxShadowObjectsToCSSString(componentTheme.boxShadow)
-    },
-    // TODO: use the MainNav divider color once instructure-design-tokens moves it there
-    divider: {
-      label: 'globalNav__divider',
-      borderTop: `${componentTheme.borderWidth} solid ${componentTheme.borderColor}`
     }
   }
 }
@@ -97,8 +92,7 @@ const generateMainNavStyle = (
   return {
     mainNav: {
       label: 'mainNav',
-      // TODO: use the MainNav width tokens once instructure-design-tokens adds them
-      width: collapsed ? '3.5rem' : '12.5rem',
+      width: collapsed ? componentTheme.minimizedWidth : componentTheme.width,
       flexShrink: 0,
       boxSizing: 'border-box',
       display: 'flex',
@@ -125,6 +119,11 @@ const generateMainNavStyle = (
       listStyle: 'none',
       margin: 0,
       padding: 0
+    },
+    divider: {
+      label: 'mainNav__divider',
+      // MainNav has no divider width token
+      borderTop: `0.0625rem solid ${componentTheme.strokeColor}`
     }
   }
 }

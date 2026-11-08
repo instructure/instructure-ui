@@ -2323,9 +2323,6 @@ importers:
       '@instructure/ui-dom-utils':
         specifier: workspace:*
         version: link:../ui-dom-utils
-      '@instructure/ui-heading':
-        specifier: workspace:*
-        version: link:../ui-heading
       '@instructure/ui-icons':
         specifier: workspace:*
         version: link:../ui-icons
