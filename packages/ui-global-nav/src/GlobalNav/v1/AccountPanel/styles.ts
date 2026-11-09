@@ -23,7 +23,10 @@
  */
 
 import type { NewComponentTypes } from '@instructure/ui-themes'
-import type { AccountPanelStyle } from './props.js'
+import type {
+  AccountPanelStyle,
+  AccountPanelVerificationStyle
+} from './props.js'
 
 /**
  * ---
@@ -55,6 +58,11 @@ const generateStyle = (
       alignItems: 'flex-start',
       justifyContent: 'space-between',
       marginBlockEnd: componentTheme.gap
+    },
+    avatar: {
+      label: 'accountPanel__avatar',
+      position: 'relative',
+      display: 'flex'
     },
     cardBody: {
       label: 'accountPanel__cardBody',
@@ -128,4 +136,32 @@ const generateStyle = (
   }
 }
 
+/**
+ * Generates the verification badge style from the `MainNavAccountItem` tokens
+ */
+const generateVerificationStyle = (
+  componentTheme: ReturnType<NewComponentTypes['MainNavAccountItem']>
+): AccountPanelVerificationStyle => {
+  return {
+    verification: {
+      label: 'accountPanel__verification',
+      position: 'absolute',
+      // overlaps the top end corner of the avatar
+      top: '-0.25rem',
+      insetInlineEnd: '-0.375rem',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      boxSizing: 'border-box',
+      width: componentTheme.verificationBadgeSize,
+      height: componentTheme.verificationBadgeSize,
+      // MainNavAccountItem has no badge border width token
+      border: `0.0625rem solid ${componentTheme.verificationBadgeBorderColor}`,
+      borderRadius: componentTheme.verificationBadgeborderRadius,
+      backgroundColor: componentTheme.verificationBadgeBackgroundColor
+    }
+  }
+}
+
 export default generateStyle
+export { generateVerificationStyle }

@@ -31,8 +31,10 @@ import { Checkbox } from '@instructure/ui-checkbox/latest'
 import {
   ChevronsUpDownInstUIIcon,
   LogOutInstUIIcon,
-  renderIconWithProps
+  renderIconWithProps,
+  ShieldAlertInstUIIcon
 } from '@instructure/ui-icons'
+import { Link } from '@instructure/ui-link/latest'
 import { Menu, MenuItem } from '@instructure/ui-menu/latest'
 import { Pill } from '@instructure/ui-pill/latest'
 import { callRenderProp } from '@instructure/ui-react-utils'
@@ -40,7 +42,7 @@ import { Text } from '@instructure/ui-text/latest'
 
 import { SubNavItem } from '../SubNavItem/index.js'
 import type { AccountPanelProps } from './props.js'
-import generateStyle from './styles.js'
+import generateStyle, { generateVerificationStyle } from './styles.js'
 
 /**
 ---
@@ -50,18 +52,36 @@ id: GlobalNav.AccountPanel
 **/
 const AccountPanel = (props: AccountPanelProps) => {
   const { account } = props
-  const { switcher, items = [], toggles, logout } = account
+  const { verification, switcher, items = [], toggles, logout } = account
 
   const styles = useStyleNew({
     generateStyle,
     componentId: 'SubNav'
   })
 
+  // the badge tokens are in MainNavAccountItem, and useStyleNew reads one set per call
+  const verificationStyles = useStyleNew({
+    generateStyle: generateVerificationStyle,
+    componentId: 'SubNav',
+    useTokensFrom: 'MainNavAccountItem'
+  })
+
   return (
     <div css={styles?.panel}>
       <div css={styles?.card}>
         <div css={styles?.cardHeader}>
-          <Avatar name={account.name} src={account.avatarSrc} />
+          <span css={styles?.avatar}>
+            <Avatar name={account.name} src={account.avatarSrc} />
+            {verification && (
+              <span css={verificationStyles?.verification}>
+                <ShieldAlertInstUIIcon
+                  title={verification.badgeLabel}
+                  color="onColor"
+                  size="sm"
+                />
+              </span>
+            )}
+          </span>
           {account.userType && <Pill color="info">{account.userType}</Pill>}
         </div>
         <div css={styles?.cardBody}>
@@ -69,6 +89,23 @@ const AccountPanel = (props: AccountPanelProps) => {
             <Text weight="bold">{account.name}</Text>
             {account.institution && (
               <Text size="small">{account.institution}</Text>
+            )}
+            {verification && (
+              <Link
+                href={verification.href}
+                variant="standalone"
+                size="small"
+                renderIcon={<ShieldAlertInstUIIcon />}
+                iconPlacement="end"
+                // Link types the event target as ViewProps, at runtime it is the DOM link or button
+                onClick={(event) =>
+                  verification.onClick?.(
+                    event as unknown as MouseEvent<HTMLElement>
+                  )
+                }
+              >
+                {verification.linkLabel}
+              </Link>
             )}
           </div>
           {switcher && (

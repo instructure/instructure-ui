@@ -37,6 +37,7 @@ type AccountPanelStyle = ComponentStyle<
   | 'panel'
   | 'card'
   | 'cardHeader'
+  | 'avatar'
   | 'cardBody'
   | 'cardText'
   | 'option'
@@ -50,4 +51,10 @@ type AccountPanelStyle = ComponentStyle<
   | 'toggleLabel'
 >
 
-export type { AccountPanelProps, AccountPanelStyle }
+type AccountPanelVerificationStyle = ComponentStyle<'verification'>
+
+export type {
+  AccountPanelProps,
+  AccountPanelStyle,
+  AccountPanelVerificationStyle
+}

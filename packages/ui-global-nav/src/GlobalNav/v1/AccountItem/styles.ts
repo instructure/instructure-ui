@@ -106,7 +106,26 @@ const generateStyle = (
     avatar: {
       label: 'accountItem__avatar',
       gridArea: 'avatar',
+      justifySelf: 'start',
+      position: 'relative',
       display: 'flex'
+    },
+    verification: {
+      label: 'accountItem__verification',
+      position: 'absolute',
+      // overlaps the top end corner of the avatar
+      top: '-0.25rem',
+      insetInlineEnd: '-0.375rem',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      boxSizing: 'border-box',
+      width: componentTheme.verificationBadgeSize,
+      height: componentTheme.verificationBadgeSize,
+      // MainNavAccountItem has no badge border width token
+      border: `0.0625rem solid ${componentTheme.verificationBadgeBorderColor}`,
+      borderRadius: componentTheme.verificationBadgeborderRadius,
+      backgroundColor: componentTheme.verificationBadgeBackgroundColor
     },
     pill: {
       label: 'accountItem__pill',
