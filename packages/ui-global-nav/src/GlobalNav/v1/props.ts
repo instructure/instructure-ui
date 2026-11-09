@@ -169,6 +169,29 @@ type GlobalNavToggle = {
   onChange: (event: ChangeEvent<HTMLInputElement>, checked: boolean) => void
 }
 
+type GlobalNavAccountOption = {
+  /**
+   * Identifies the account and is its React key.
+   */
+  itemID: string
+  /**
+   * The visible text and accessible name of the account in the menu.
+   */
+  label: string
+  /**
+   * The URL of the avatar of the account.
+   */
+  avatarSrc?: string
+  /**
+   * The URL that switches to the account.
+   */
+  href?: string
+  /**
+   * Called when the user picks the account.
+   */
+  onClick?: (event: MouseEvent<HTMLElement>) => void
+}
+
 type GlobalNavAccount = {
   /**
    * Identifies the account panel in `openSubNav`.
@@ -206,6 +229,13 @@ type GlobalNavAccount = {
    * Screen reader text of the badge.
    */
   badgeLabel?: GlobalNavCountLabel
+  /**
+   * The other accounts of the user, which the button next to the name lists in a menu.
+   */
+  switcher?: {
+    label: string
+    accounts: GlobalNavAccountOption[]
+  }
   /**
    * The links of the panel.
    */
@@ -322,6 +352,7 @@ export type {
   GlobalNavLogo,
   GlobalNavAccount,
   GlobalNavAccountItem,
+  GlobalNavAccountOption,
   GlobalNavToggle,
   GlobalNavCountLabel,
   GlobalNavElementProps

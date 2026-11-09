@@ -33,6 +33,7 @@
     "@instructure/ui-checkbox": "workspace:*",
     "@instructure/ui-dom-utils": "workspace:*",
     "@instructure/ui-icons": "workspace:*",
+    "@instructure/ui-menu": "workspace:*",
     "@instructure/ui-pill": "workspace:*",
     "@instructure/ui-react-utils": "workspace:*",
     "@instructure/ui-text": "workspace:*",

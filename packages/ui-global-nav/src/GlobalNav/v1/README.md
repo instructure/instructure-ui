@@ -195,6 +195,13 @@ const Example = () => {
     institution: 'Example University',
     // the account pages are a section too, so closing the panel there leaves the strip
     current: page.startsWith('account'),
+    switcher: {
+      label: 'Switch account',
+      accounts: [
+        { itemID: 'teacher', label: 'Sam Lee | Teacher', href: '#GlobalNav' },
+        { itemID: 'admin', label: 'Sam Lee | Admin', href: '#GlobalNav' }
+      ]
+    },
     items: [
       {
         itemID: 'profile',

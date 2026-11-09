@@ -56,6 +56,25 @@ const generateStyle = (
       justifyContent: 'space-between',
       marginBlockEnd: componentTheme.gap
     },
+    cardBody: {
+      label: 'accountPanel__cardBody',
+      display: 'flex',
+      alignItems: 'center',
+      gap: componentTheme.gap
+    },
+    cardText: {
+      label: 'accountPanel__cardText',
+      display: 'flex',
+      flexDirection: 'column',
+      flex: 1,
+      minWidth: 0
+    },
+    option: {
+      label: 'accountPanel__option',
+      display: 'flex',
+      alignItems: 'center',
+      gap: componentTheme.gap
+    },
     divider: {
       label: 'accountPanel__divider',
       // SubNav has no divider width token

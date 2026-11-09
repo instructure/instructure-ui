@@ -22,10 +22,17 @@
  * SOFTWARE.
  */
 
+import type { MouseEvent } from 'react'
+
 import { useStyleNew } from '@instructure/emotion'
 import { Avatar } from '@instructure/ui-avatar/latest'
+import { IconButton } from '@instructure/ui-buttons/latest'
 import { Checkbox } from '@instructure/ui-checkbox/latest'
-import { LogOutInstUIIcon } from '@instructure/ui-icons'
+import {
+  ChevronsUpDownInstUIIcon,
+  LogOutInstUIIcon
+} from '@instructure/ui-icons'
+import { Menu, MenuItem } from '@instructure/ui-menu/latest'
 import { Pill } from '@instructure/ui-pill/latest'
 import { callRenderProp } from '@instructure/ui-react-utils'
 import { Text } from '@instructure/ui-text/latest'
@@ -42,7 +49,7 @@ id: GlobalNav.AccountPanel
 **/
 const AccountPanel = (props: AccountPanelProps) => {
   const { account } = props
-  const { items = [], toggles, logout } = account
+  const { switcher, items = [], toggles, logout } = account
 
   const styles = useStyleNew({
     generateStyle,
@@ -56,8 +63,48 @@ const AccountPanel = (props: AccountPanelProps) => {
           <Avatar name={account.name} src={account.avatarSrc} />
           {account.userType && <Pill color="info">{account.userType}</Pill>}
         </div>
-        <Text weight="bold">{account.name}</Text>
-        {account.institution && <Text size="small">{account.institution}</Text>}
+        <div css={styles?.cardBody}>
+          <div css={styles?.cardText}>
+            <Text weight="bold">{account.name}</Text>
+            {account.institution && (
+              <Text size="small">{account.institution}</Text>
+            )}
+          </div>
+          {switcher && (
+            <Menu
+              label={switcher.label}
+              placement="bottom start"
+              trigger={
+                <IconButton
+                  screenReaderLabel={switcher.label}
+                  renderIcon={ChevronsUpDownInstUIIcon}
+                  size="small"
+                />
+              }
+            >
+              {switcher.accounts.map((option) => (
+                <MenuItem
+                  key={option.itemID}
+                  href={option.href}
+                  // MenuItem types the event for any element, at runtime it is the link or button
+                  onClick={(event) =>
+                    option.onClick?.(event as MouseEvent<HTMLElement>)
+                  }
+                >
+                  <span css={styles?.option}>
+                    <Avatar
+                      // the accounts belong to the same user, so their initials are the user's
+                      name={account.name}
+                      src={option.avatarSrc}
+                      size="x-small"
+                    />
+                    {option.label}
+                  </span>
+                </MenuItem>
+              ))}
+            </Menu>
+          )}
+        </div>
       </div>
       <div css={styles?.divider} />
       {items.length > 0 && (
