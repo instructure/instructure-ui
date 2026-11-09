@@ -339,7 +339,8 @@ class BaseButton extends Component<BaseButtonProps> {
         role={onClick && as !== 'button' ? 'button' : undefined}
         tabIndex={tabIndexValue}
         disabled={isDisabled || isReadOnly}
-        // disabled is invalid on <a> and role="button" elements for screen readers
+        // for elements that do not support the "disabled" attribute
+        // "aria-disabled" needs to be added so screen readers announce it as "dimmed"
         aria-disabled={isDisabled ? 'true' : undefined}
         css={styles?.baseButton}
         withFocusOutline={withFocusOutline}
