@@ -28,6 +28,7 @@ import type { SubNavItemStyle } from './props.js'
 
 type StyleParams = {
   current: boolean
+  logout: boolean
 }
 
 /**
@@ -45,7 +46,7 @@ const generateStyle = (
   params: StyleParams,
   sharedTokens: SharedTokens
 ): SubNavItemStyle => {
-  const { current } = params
+  const { current, logout } = params
 
   return {
     item: {
@@ -64,6 +65,8 @@ const generateStyle = (
         : componentTheme.backgroundColor,
       color: current
         ? componentTheme.selectedTextColor
+        : logout
+        ? componentTheme.logoutTextColor
         : componentTheme.textColor,
       fontFamily: componentTheme.fontFamily,
       fontSize: componentTheme.fontSize,
@@ -85,15 +88,24 @@ const generateStyle = (
         textDecoration: 'none',
         ...(!current && {
           backgroundColor: componentTheme.hoverBackgroundColor,
-          color: componentTheme.hoverTextColor
+          color: logout
+            ? componentTheme.logoutTextColor
+            : componentTheme.hoverTextColor
         })
       },
       ...(!current && {
         '&:active': {
           backgroundColor: componentTheme.activeBackgroundColor,
-          color: componentTheme.activeTextColor
+          color: logout
+            ? componentTheme.logoutTextColor
+            : componentTheme.activeTextColor
         }
       })
+    },
+    icon: {
+      label: 'subNavItem__icon',
+      display: 'flex',
+      flexShrink: 0
     },
     label: {
       label: 'subNavItem__label',
