@@ -44,11 +44,9 @@ type TagOwnProps = {
    */
   readOnly?: boolean
   /**
-   * Providing this prop renders a close button and makes the Tag dismissible.
-   * The value is used as the close button's screen reader label.
-   * Clicking the close button calls `onDismiss`.
+   * Renders a close button that calls `onDismiss`, with this text as its screen reader label.
    */
-  renderDismissButtonLabel?: Renderable
+  dismissButtonLabel?: string
   /**
    * Called when the close button is clicked.
    */
@@ -97,7 +95,7 @@ const allowedProps: AllowedPropKeys = [
   'text',
   'disabled',
   'readOnly',
-  'renderDismissButtonLabel',
+  'dismissButtonLabel',
   'onDismiss',
   'renderIcon',
   'href',

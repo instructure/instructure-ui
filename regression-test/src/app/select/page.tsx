@@ -321,7 +321,7 @@ function MultipleSelectExample({ selected }: { selected: string[] }) {
           <Tag
             key={i}
             text={label}
-            renderDismissButtonLabel={`Remove ${label}`}
+            dismissButtonLabel={`Remove ${label}`}
             onDismiss={() => {}}
           />
         ))}

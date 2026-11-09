@@ -69,7 +69,7 @@ describe('<Tag />', async () => {
     await render(
       <Tag
         text="Summer"
-        renderDismissButtonLabel="Remove Summer"
+        dismissButtonLabel="Remove Summer"
         onDismiss={onDismiss}
       />
     )
@@ -87,7 +87,7 @@ describe('<Tag />', async () => {
       <Tag
         text="Summer"
         href="#summer"
-        renderDismissButtonLabel="Remove Summer"
+        dismissButtonLabel="Remove Summer"
         onDismiss={onDismiss}
       />
     )
@@ -105,7 +105,7 @@ describe('<Tag />', async () => {
         <Tag
           text="Summer"
           href="/summer"
-          renderDismissButtonLabel="Remove Summer"
+          dismissButtonLabel="Remove Summer"
           onDismiss={onDismiss}
           {...{ [state]: true }}
         />
@@ -125,7 +125,7 @@ describe('<Tag />', async () => {
       <Tag
         text="Summer"
         href="/summer"
-        renderDismissButtonLabel="Remove Summer"
+        dismissButtonLabel="Remove Summer"
         onDismiss={vi.fn()}
       />
     )
@@ -143,7 +143,7 @@ describe('<Tag />', async () => {
       <Tag
         text="Summer"
         href="/summer"
-        renderDismissButtonLabel="Remove Summer"
+        dismissButtonLabel="Remove Summer"
         onDismiss={vi.fn()}
         ref={(el) => (tagRef = el)}
       />
@@ -160,7 +160,7 @@ describe('<Tag />', async () => {
     await render(
       <Tag
         text="Summer"
-        renderDismissButtonLabel="Remove Summer"
+        dismissButtonLabel="Remove Summer"
         onDismiss={vi.fn()}
         ref={(el) => (tagRef = el)}
       />
@@ -194,7 +194,7 @@ describe('<Tag />', async () => {
     const { container } = await render(
       <Tag
         text="Summer"
-        renderDismissButtonLabel="Remove Summer"
+        dismissButtonLabel="Remove Summer"
         onDismiss={vi.fn()}
       />
     )

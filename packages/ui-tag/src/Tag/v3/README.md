@@ -26,7 +26,7 @@ type: example
 
 ### Dismissible
 
-Provide `renderDismissButtonLabel` to render a close (X) button and make the
+Provide `dismissButtonLabel` to render a close (X) button and make the
 Tag dismissible. Its value is the close button's screen reader label, so it
 must describe the dismiss action. Clicking the close
 button calls `onDismiss`.
@@ -37,7 +37,7 @@ type: example
 ---
 <Tag
   text="Dismissible tag"
-  renderDismissButtonLabel="Remove dismissible tag"
+  dismissButtonLabel="Remove dismissible tag"
   margin="0 general.spaceXs 0 0"
   onDismiss={function () {
     alert("This Tag was dismissed")
@@ -66,7 +66,7 @@ type: example
 ---
 <Tag
   text="Dismissible Disabled"
-  renderDismissButtonLabel="Remove Dismissible Disabled"
+  dismissButtonLabel="Remove Dismissible Disabled"
   disabled
   margin="0 general.spaceXs 0 0"
   onDismiss={function () {
@@ -98,7 +98,7 @@ type: embed
 ---
 <Guidelines>
   <Figure recommendation="a11y" title="Accessibility">
-    <Figure.Item>When implementing dismissible tags, provide a descriptive `renderDismissButtonLabel` (e.g. "Remove Summer") so screen readers announce what the close button does</Figure.Item>
+    <Figure.Item>When implementing dismissible tags, provide a descriptive `dismissButtonLabel` (e.g. "Remove Summer") so screen readers announce what the close button does</Figure.Item>
   </Figure>
 </Guidelines>
 ```

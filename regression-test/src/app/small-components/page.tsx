@@ -110,14 +110,14 @@ export default function SmallComponentsPage() {
       <div>
         <Tag
           text="Dismissible"
-          renderDismissButtonLabel="Remove Dismissible"
+          dismissButtonLabel="Remove Dismissible"
           onDismiss={function () {}}
           margin="0 xx-small 0 0"
         />
         <Tag
           text="Dismissible with icon"
           renderIcon={<IconCheckLine />}
-          renderDismissButtonLabel="Remove Dismissible with icon"
+          dismissButtonLabel="Remove Dismissible with icon"
           onDismiss={function () {}}
           margin="0 xx-small 0 0"
         />
@@ -137,7 +137,7 @@ export default function SmallComponentsPage() {
           text="Link dismissible"
           href="#"
           renderIcon={<IconCheckLine />}
-          renderDismissButtonLabel="Remove Link dismissible"
+          dismissButtonLabel="Remove Link dismissible"
           onDismiss={function () {}}
           margin="0 xx-small 0 0"
         />
@@ -146,7 +146,7 @@ export default function SmallComponentsPage() {
           href="#"
           disabled
           renderIcon={<IconCheckLine />}
-          renderDismissButtonLabel="Remove Disabled link dismissible"
+          dismissButtonLabel="Remove Disabled link dismissible"
           onDismiss={function () {}}
           margin="0 xx-small 0 0"
         />

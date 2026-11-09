@@ -28,7 +28,7 @@ import type { RefObject } from 'react'
 import { XInstUIIcon, renderIconWithProps } from '@instructure/ui-icons'
 import { View } from '@instructure/ui-view/latest'
 import type { ViewProps } from '@instructure/ui-view/latest'
-import { omitProps, callRenderProp } from '@instructure/ui-react-utils'
+import { omitProps } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { useStyleNew } from '@instructure/emotion'
 
@@ -50,7 +50,7 @@ const Tag = forwardRef<TagHandle, TagProps>((props, ref) => {
     readOnly = false,
     href,
     renderIcon,
-    renderDismissButtonLabel,
+    dismissButtonLabel,
     onDismiss,
     margin,
     elementRef,
@@ -64,10 +64,6 @@ const Tag = forwardRef<TagHandle, TagProps>((props, ref) => {
 
   const isBlocked = disabled || readOnly
   const isLink = !!href
-  const dismissLabel =
-    renderDismissButtonLabel != null
-      ? callRenderProp(renderDismissButtonLabel)
-      : undefined
 
   const styles = useStyleNew({
     generateStyle,
@@ -156,7 +152,7 @@ const Tag = forwardRef<TagHandle, TagProps>((props, ref) => {
       ) : (
         <span css={styles?.body}>{content}</span>
       )}
-      {dismissLabel ? (
+      {dismissButtonLabel ? (
         <button
           type="button"
           css={styles?.closeButton}
@@ -165,7 +161,7 @@ const Tag = forwardRef<TagHandle, TagProps>((props, ref) => {
           onMouseEnter={() => setIconHovered(true)}
           onMouseLeave={() => setIconHovered(false)}
           disabled={isBlocked}
-          aria-label={dismissLabel as string}
+          aria-label={dismissButtonLabel}
         >
           <span css={styles?.closeIcon}>
             <XInstUIIcon size="sm" color={iconColor} />
