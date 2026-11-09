@@ -132,7 +132,8 @@ type: example
 ```
 
 To change the label placement for the toggle variety, use the labelPlacement prop. The default
-placement is 'end'.
+placement is 'end'. `start-stretch` puts the label at the start and the switch at the end of the
+row, for example in a list of settings.
 
 _Note: the `simple` variant does not support the `labelPlacement`
 property._
@@ -145,6 +146,7 @@ type: example
   <Checkbox label="Top" variant="toggle" labelPlacement="top" defaultChecked />
   <Checkbox label="Start" variant="toggle" labelPlacement="start" />
   <Checkbox label="End" variant="toggle" labelPlacement="end" defaultChecked />
+  <Checkbox label="Start stretch" variant="toggle" labelPlacement="start-stretch" />
 </FormFieldGroup>
 ```
 

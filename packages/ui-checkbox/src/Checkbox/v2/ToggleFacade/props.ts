@@ -34,7 +34,7 @@ type ToggleFacadeOwnProps = {
   focused?: boolean
   hovered?: boolean
   size?: 'small' | 'medium' | 'large'
-  labelPlacement?: 'top' | 'start' | 'end'
+  labelPlacement?: 'top' | 'start' | 'end' | 'start-stretch'
   /**
    * Indicate if the parent component (`Checkbox`) is invalid to set the style accordingly.
    */
