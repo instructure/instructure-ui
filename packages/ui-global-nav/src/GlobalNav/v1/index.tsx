@@ -27,9 +27,15 @@ import type { MouseEvent, SyntheticEvent } from 'react'
 import { useStyleNew } from '@instructure/emotion'
 import { omitProps, useDeterministicId } from '@instructure/ui-react-utils'
 
-import type { GlobalNavMainNavItem, GlobalNavProps } from './props.js'
+import type {
+  GlobalNavMainNavItem,
+  GlobalNavProps,
+  GlobalNavSubNav
+} from './props.js'
 import { allowedProps } from './props.js'
 import generateStyle, { generateMainNavStyle } from './styles.js'
+import { AccountItem } from './AccountItem/index.js'
+import { AccountPanel } from './AccountPanel/index.js'
 import { CollapseButton } from './CollapseButton/index.js'
 import { CollapsedSubNav } from './CollapsedSubNav/index.js'
 import { InstitutionLogo } from './InstitutionLogo/index.js'
@@ -62,17 +68,32 @@ const GlobalNav = forwardRef<HTMLElement, GlobalNavProps>(
       onSubNavChange,
       items,
       logo,
+      account,
       themeOverride
     } = props
 
     const openItem = items.find(
       (item) => item.itemID === openSubNav && item.subNav
     )
+    // the account panel is a SubNav with the account content, so it shares the panel frame and the focus rules
+    const openPanel: { itemID: string; subNav: GlobalNavSubNav } | undefined =
+      account && openSubNav === account.itemID
+        ? {
+            itemID: account.itemID,
+            subNav: {
+              title: account.label,
+              renderContent: () => <AccountPanel account={account} />
+            }
+          }
+        : openItem?.subNav && {
+            itemID: openItem.itemID,
+            subNav: openItem.subNav
+          }
 
     const styles = useStyleNew({
       generateStyle,
       themeOverride,
-      params: { collapsed, subNavOpen: !!openItem },
+      params: { collapsed, subNavOpen: !!openPanel },
       componentId: 'GlobalNav',
       displayName: 'GlobalNav'
     })
@@ -121,17 +142,19 @@ const GlobalNav = forwardRef<HTMLElement, GlobalNavProps>(
     }, [])
 
     // the SubNav of the current page collapses to a strip, other SubNavs close completely
-    const currentSectionItem = items.find((item) => item.current && item.subNav)
+    const currentSectionID =
+      items.find((item) => item.current && item.subNav)?.itemID ??
+      (account?.current ? account.itemID : undefined)
 
     useEffect(() => {
       const intent = focusIntentRef.current
       // an intent lives for one commit, so a change that the app ignores doesn't move focus later
       focusIntentRef.current = undefined
       const closedID = renderedSubNavRef.current
-      renderedSubNavRef.current = openItem?.itemID
+      renderedSubNavRef.current = openPanel?.itemID
 
       if (
-        !openItem &&
+        !openPanel &&
         closedID !== undefined &&
         (intent?.target === 'trigger' || intent?.target === 'rescue')
       ) {
@@ -139,18 +162,22 @@ const GlobalNav = forwardRef<HTMLElement, GlobalNavProps>(
       }
     })
 
+    const toggleSubNav = (event: SyntheticEvent, itemID: string) => {
+      const next = openSubNav === itemID ? undefined : itemID
+      focusIntentRef.current = next
+        ? { target: 'first' }
+        : { target: 'trigger' }
+      onSubNavChange?.(event, next)
+    }
+
     const handleItemActivate = (
       event: MouseEvent<HTMLElement>,
       item: GlobalNavMainNavItem
     ) => {
       if (item.subNav) {
-        const next = openSubNav === item.itemID ? undefined : item.itemID
-        focusIntentRef.current = next
-          ? { target: 'first' }
-          : { target: 'trigger' }
-        onSubNavChange?.(event, next)
+        toggleSubNav(event, item.itemID)
       } else if (
-        openItem &&
+        openPanel &&
         // a link opened in a new tab or window keeps the SubNav open
         !(event.metaKey || event.ctrlKey || event.shiftKey || event.altKey)
       ) {
@@ -165,9 +192,9 @@ const GlobalNav = forwardRef<HTMLElement, GlobalNavProps>(
     }
 
     const handleSubNavExpand = (event: SyntheticEvent) => {
-      if (!currentSectionItem) return
+      if (!currentSectionID) return
       focusIntentRef.current = { target: 'first' }
-      onSubNavChange?.(event, currentSectionItem.itemID)
+      onSubNavChange?.(event, currentSectionID)
     }
 
     return (
@@ -200,7 +227,7 @@ const GlobalNav = forwardRef<HTMLElement, GlobalNavProps>(
                   collapsed={collapsed}
                   open={openSubNav === item.itemID}
                   subNavId={
-                    openItem?.itemID === item.itemID ? subNavId : undefined
+                    openPanel?.itemID === item.itemID ? subNavId : undefined
                   }
                   onActivate={handleItemActivate}
                   elementRef={(element) => {
@@ -213,11 +240,31 @@ const GlobalNav = forwardRef<HTMLElement, GlobalNavProps>(
                 />
               ))}
             </ul>
+            {account && (
+              <div css={mainNavStyles?.account}>
+                <AccountItem
+                  account={account}
+                  collapsed={collapsed}
+                  open={openSubNav === account.itemID}
+                  panelId={
+                    openPanel?.itemID === account.itemID ? subNavId : undefined
+                  }
+                  onActivate={(event) => toggleSubNav(event, account.itemID)}
+                  elementRef={(element) => {
+                    if (element) {
+                      triggerRefs.current.set(account.itemID, element)
+                    } else {
+                      triggerRefs.current.delete(account.itemID)
+                    }
+                  }}
+                />
+              </div>
+            )}
           </div>
-          {openItem?.subNav ? (
+          {openPanel ? (
             <SubNav
-              key={openItem.itemID}
-              subNav={openItem.subNav}
+              key={openPanel.itemID}
+              subNav={openPanel.subNav}
               subNavId={subNavId}
               titleId={titleId}
               closeSubNavLabel={closeSubNavLabel}
@@ -226,7 +273,7 @@ const GlobalNav = forwardRef<HTMLElement, GlobalNavProps>(
               focusIntentRef={focusIntentRef}
             />
           ) : (
-            currentSectionItem && (
+            currentSectionID && (
               <CollapsedSubNav
                 label={expandSubNavLabel}
                 onExpand={handleSubNavExpand}

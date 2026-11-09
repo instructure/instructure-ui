@@ -17,16 +17,25 @@
       "path": "../ui-a11y-content/tsconfig.build.json"
     },
     {
+      "path": "../ui-avatar/tsconfig.build.json"
+    },
+    {
       "path": "../ui-badge/tsconfig.build.json"
     },
     {
       "path": "../ui-buttons/tsconfig.build.json"
     },
     {
+      "path": "../ui-checkbox/tsconfig.build.json"
+    },
+    {
       "path": "../ui-dom-utils/tsconfig.build.json"
     },
     {
       "path": "../ui-icons/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-pill/tsconfig.build.json"
     },
     {
       "path": "../ui-react-utils/tsconfig.build.json"

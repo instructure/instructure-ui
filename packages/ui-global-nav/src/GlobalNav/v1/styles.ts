@@ -120,6 +120,14 @@ const generateMainNavStyle = (
       margin: 0,
       padding: 0
     },
+    account: {
+      label: 'mainNav__account',
+      // pins the account item to the bottom of the rail
+      marginBlockStart: 'auto',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: collapsed ? 'center' : 'stretch'
+    },
     divider: {
       label: 'mainNav__divider',
       // MainNav has no divider width token
