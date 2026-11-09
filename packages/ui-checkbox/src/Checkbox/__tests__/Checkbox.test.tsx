@@ -314,6 +314,26 @@ describe('<Checkbox />', () => {
       expect(toggle).toHaveAttribute('aria-readonly', 'true')
     })
 
+    it('should spread the label and the switch over the row with `start-stretch`', async () => {
+      const { container } = await render(
+        <div style={{ width: '300px' }}>
+          <Checkbox
+            label="A"
+            value="a"
+            variant="toggle"
+            labelPlacement="start-stretch"
+          />
+        </div>
+      )
+      const row = container.querySelector('label')!.getBoundingClientRect()
+      const facade = container
+        .querySelector("[class$='-toggleFacade__facade']")!
+        .getBoundingClientRect()
+
+      expect(row.width).toBe(300)
+      expect(facade.right).toBe(row.right)
+    })
+
     it('should leave the `simple` variant as a checkbox', async () => {
       await renderCheckbox({ variant: 'simple' })
       const input = page.getByRole('checkbox').element()
