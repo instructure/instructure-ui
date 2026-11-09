@@ -37,6 +37,8 @@ type AccountPanelStyle = ComponentStyle<
   | 'panel'
   | 'card'
   | 'cardHeader'
+  | 'avatar'
+  | 'verification'
   | 'cardBody'
   | 'cardText'
   | 'option'

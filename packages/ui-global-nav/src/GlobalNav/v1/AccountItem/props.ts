@@ -56,7 +56,13 @@ type AccountItemProps = {
 }
 
 type AccountItemStyle = ComponentStyle<
-  'item' | 'avatar' | 'pill' | 'name' | 'end' | 'tooltipTrigger'
+  | 'item'
+  | 'avatar'
+  | 'verification'
+  | 'pill'
+  | 'name'
+  | 'end'
+  | 'tooltipTrigger'
 >
 
 export type { AccountItemProps, AccountItemStyle }

@@ -195,6 +195,11 @@ const Example = () => {
     institution: 'Example University',
     // the account pages are a section too, so closing the panel there leaves the strip
     current: page.startsWith('account'),
+    verification: {
+      badgeLabel: 'Verification needed',
+      linkLabel: 'Reverify account',
+      href: '#GlobalNav'
+    },
     switcher: {
       label: 'Switch account',
       accounts: [

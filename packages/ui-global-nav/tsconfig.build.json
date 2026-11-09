@@ -35,6 +35,9 @@
       "path": "../ui-icons/tsconfig.build.json"
     },
     {
+      "path": "../ui-link/tsconfig.build.json"
+    },
+    {
       "path": "../ui-menu/tsconfig.build.json"
     },
     {

@@ -230,6 +230,15 @@ type GlobalNavAccount = {
    */
   badgeLabel?: GlobalNavCountLabel
   /**
+   * A reminder to verify the account, shown as a badge on the avatar and a link under the institution.
+   */
+  verification?: {
+    badgeLabel: string
+    linkLabel: string
+    href?: string
+    onClick?: (event: MouseEvent<HTMLElement>) => void
+  }
+  /**
    * The other accounts of the user, which the button next to the name lists in a menu.
    */
   switcher?: {

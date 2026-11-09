@@ -30,8 +30,10 @@ import { IconButton } from '@instructure/ui-buttons/latest'
 import { Checkbox } from '@instructure/ui-checkbox/latest'
 import {
   ChevronsUpDownInstUIIcon,
-  LogOutInstUIIcon
+  LogOutInstUIIcon,
+  ShieldAlertInstUIIcon
 } from '@instructure/ui-icons'
+import { Link } from '@instructure/ui-link/latest'
 import { Menu, MenuItem } from '@instructure/ui-menu/latest'
 import { Pill } from '@instructure/ui-pill/latest'
 import { callRenderProp } from '@instructure/ui-react-utils'
@@ -49,7 +51,7 @@ id: GlobalNav.AccountPanel
 **/
 const AccountPanel = (props: AccountPanelProps) => {
   const { account } = props
-  const { switcher, items = [], toggles, logout } = account
+  const { verification, switcher, items = [], toggles, logout } = account
 
   const styles = useStyleNew({
     generateStyle,
@@ -60,7 +62,18 @@ const AccountPanel = (props: AccountPanelProps) => {
     <div css={styles?.panel}>
       <div css={styles?.card}>
         <div css={styles?.cardHeader}>
-          <Avatar name={account.name} src={account.avatarSrc} />
+          <span css={styles?.avatar}>
+            <Avatar name={account.name} src={account.avatarSrc} />
+            {verification && (
+              <span css={styles?.verification}>
+                <ShieldAlertInstUIIcon
+                  title={verification.badgeLabel}
+                  color="inherit"
+                  size="xs"
+                />
+              </span>
+            )}
+          </span>
           {account.userType && <Pill color="info">{account.userType}</Pill>}
         </div>
         <div css={styles?.cardBody}>
@@ -68,6 +81,23 @@ const AccountPanel = (props: AccountPanelProps) => {
             <Text weight="bold">{account.name}</Text>
             {account.institution && (
               <Text size="small">{account.institution}</Text>
+            )}
+            {verification && (
+              <Text size="small">
+                <Link
+                  href={verification.href}
+                  renderIcon={<ShieldAlertInstUIIcon />}
+                  iconPlacement="end"
+                  // Link types the event target as ViewProps, at runtime it is the DOM link or button
+                  onClick={(event) =>
+                    verification.onClick?.(
+                      event as unknown as MouseEvent<HTMLElement>
+                    )
+                  }
+                >
+                  {verification.linkLabel}
+                </Link>
+              </Text>
             )}
           </div>
           {switcher && (

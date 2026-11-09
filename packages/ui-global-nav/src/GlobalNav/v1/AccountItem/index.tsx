@@ -29,7 +29,10 @@ import {
 } from '@instructure/ui-a11y-content'
 import { Avatar } from '@instructure/ui-avatar/latest'
 import { Badge } from '@instructure/ui-badge/latest'
-import { SettingsInstUIIcon } from '@instructure/ui-icons'
+import {
+  SettingsInstUIIcon,
+  ShieldAlertInstUIIcon
+} from '@instructure/ui-icons'
 import { Pill } from '@instructure/ui-pill/latest'
 import { Tooltip } from '@instructure/ui-tooltip/latest'
 
@@ -65,7 +68,18 @@ const AccountItem = (props: AccountItemProps) => {
     )
 
   const avatar = (
-    <Avatar name={account.name} src={account.avatarSrc} size="small" />
+    <span css={styles?.avatar}>
+      <Avatar name={account.name} src={account.avatarSrc} size="small" />
+      {account.verification && (
+        <span css={styles?.verification}>
+          <ShieldAlertInstUIIcon
+            title={account.verification.badgeLabel}
+            color="inherit"
+            size="xs"
+          />
+        </span>
+      )}
+    </span>
   )
 
   const content = collapsed ? (
@@ -87,7 +101,7 @@ const AccountItem = (props: AccountItemProps) => {
     <>
       {/* the panel heading, then the visible name and role, form the accessible name */}
       <ScreenReaderContent>{account.label}</ScreenReaderContent>
-      <span css={styles?.avatar}>{avatar}</span>
+      {avatar}
       <span css={styles?.name}>{account.name}</span>
       {account.userType && (
         <span css={styles?.pill}>
