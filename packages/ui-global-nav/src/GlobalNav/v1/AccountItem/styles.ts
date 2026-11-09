@@ -103,7 +103,25 @@ const generateStyle = (
     avatar: {
       label: 'accountItem__avatar',
       gridArea: 'avatar',
+      justifySelf: 'start',
+      position: 'relative',
       display: 'flex'
+    },
+    verification: {
+      label: 'accountItem__verification',
+      position: 'absolute',
+      // overlaps the top end corner of the avatar
+      top: '-0.25rem',
+      insetInlineEnd: '-0.375rem',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: '1.375rem',
+      height: '1.375rem',
+      borderRadius: '50%',
+      // TODO INSTUI-5234: use verification badge tokens once design adds them, these are honey40 and grey170
+      backgroundColor: '#F0C16C',
+      color: '#273540'
     },
     pill: {
       label: 'accountItem__pill',
