@@ -68,7 +68,7 @@ render(<Example />)
 
 ### Example app
 
-A mock app with pages. The navigation switches between them, and the current page is marked in the rail and in the SubNav. It starts on a course page with the Courses SubNav open. Close it to see the strip that opens it again. On Dashboard, closing a SubNav removes it completely. Help shows custom content.
+A mock app with pages. The navigation switches between them, and the current page is marked in the rail and in the SubNav. It starts on a course page with the Courses SubNav open. Close it to see the strip that opens it again. On Dashboard, closing a SubNav removes it completely. Help shows custom content, and the account item at the bottom opens the account panel.
 
 ```js
 ---
@@ -84,7 +84,9 @@ const pageTitles = {
   dashboard: 'Dashboard',
   courses: 'All courses',
   calendar: 'Calendar',
-  inbox: 'Inbox'
+  inbox: 'Inbox',
+  'account/profile': 'Profile',
+  'account/settings': 'Settings'
 }
 
 const Example = () => {
@@ -93,6 +95,8 @@ const Example = () => {
   const [collapsed, setCollapsed] = React.useState(false)
   // a course page loads with the Courses SubNav open
   const [openSubNav, setOpenSubNav] = React.useState('courses')
+  const [darkMode, setDarkMode] = React.useState(false)
+  const [dyslexiaFont, setDyslexiaFont] = React.useState(false)
 
   // a real app navigates with its router, this example only switches the mock page
   const link = (path) => ({
@@ -183,6 +187,72 @@ const Example = () => {
     }
   ]
 
+  const account = {
+    itemID: 'account',
+    label: 'Account',
+    name: 'Sam Lee',
+    userType: 'Student',
+    institution: 'Example University',
+    // the account pages are a section too, so closing the panel there leaves the strip
+    current: page.startsWith('account'),
+    verification: {
+      badgeLabel: 'Verification needed',
+      linkLabel: 'Reverify account',
+      href: '#GlobalNav'
+    },
+    switcher: {
+      label: 'Switch account',
+      accounts: [
+        { itemID: 'teacher', label: 'Sam Lee | Teacher', href: '#GlobalNav' },
+        { itemID: 'admin', label: 'Sam Lee | Admin', href: '#GlobalNav' }
+      ]
+    },
+    items: [
+      {
+        itemID: 'profile',
+        icon: <UserInstUIIcon />,
+        label: 'Profile',
+        ...link('account/profile')
+      },
+      {
+        itemID: 'settings',
+        icon: <SettingsInstUIIcon />,
+        label: 'Settings',
+        ...link('account/settings')
+      }
+    ],
+    toggles: {
+      label: 'User interface',
+      items: [
+        {
+          itemID: 'dark-mode',
+          icon: <MoonInstUIIcon />,
+          label: 'Dark mode',
+          checked: darkMode,
+          onChange: (_e, checked) => setDarkMode(checked)
+        },
+        {
+          itemID: 'dyslexia-font',
+          icon: <ALargeSmallInstUIIcon />,
+          label: 'Dyslexia friendly font',
+          checked: dyslexiaFont,
+          onChange: (_e, checked) => setDyslexiaFont(checked)
+        },
+        {
+          itemID: 'high-contrast',
+          icon: <ContrastInstUIIcon />,
+          label: 'High contrast mode',
+          checked: false,
+          // a setting the user can't change, for example one the institution sets
+          disabled: true,
+          onChange: () => {}
+        }
+      ]
+    },
+    // a real app logs the user out here
+    logout: { label: 'Log out', onClick: () => {} }
+  }
+
   const [, courseID, coursePage] = page.split('/')
   const course = courses.find((c) => c.id === courseID)
 
@@ -206,6 +276,7 @@ const Example = () => {
           href: '#GlobalNav'
         }}
         items={items}
+        account={account}
       />
       <View as="div" width="100%" padding="medium" background="secondary">
         {course && <Text size="small">{course.name}</Text>}
@@ -227,5 +298,6 @@ render(<Example />)
 - Opening a SubNav or a deeper level moves focus to its first item, to the first focusable element of custom content, or else to the close handle. Back returns focus to the item that opened the level, and closing returns it to the rail item. Focus doesn't move when the app sets `openSubNav` itself.
 - A SubNav opens on the level of its deepest `current` item.
 - Set `current` on the rail item of the current page's section. Closing its SubNav then leaves a narrow strip that opens it again on click. Other SubNavs close completely.
+- The account item at the bottom of the rail opens the account panel by the same rules. Set `current` on the account on account pages, so closing the panel there leaves the strip.
 - The back button shows the title of the level it returns to, and `backLabel` gets that title for the screen reader text, for example "Back to Courses".
 - `renderContent` shows any content in place of `items`, inside the panel frame. Use it for content that can't be navigation items yet, for example while migrating an existing product.

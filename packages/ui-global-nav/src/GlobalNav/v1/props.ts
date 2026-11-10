@@ -89,6 +89,13 @@ type GlobalNavMainNavItem = GlobalNavSubNavItem & {
   badgeLabel?: GlobalNavCountLabel
 }
 
+type GlobalNavAccountItem = Omit<GlobalNavSubNavItem, 'subNav'> & {
+  /**
+   * The icon before the label.
+   */
+  icon?: Renderable
+}
+
 type GlobalNavSubNavWithItems = {
   /**
    * The heading of the panel.
@@ -153,9 +160,36 @@ type GlobalNavToggle = {
    */
   checked: boolean
   /**
+   * Whether the toggle can't be switched, which keeps it visible but greyed out.
+   */
+  disabled?: boolean
+  /**
    * Called when the user switches the toggle, with the new `checked` value.
    */
   onChange: (event: ChangeEvent<HTMLInputElement>, checked: boolean) => void
+}
+
+type GlobalNavAccountOption = {
+  /**
+   * Identifies the account and is its React key.
+   */
+  itemID: string
+  /**
+   * The visible text and accessible name of the account in the menu.
+   */
+  label: string
+  /**
+   * The URL of the avatar of the account.
+   */
+  avatarSrc?: string
+  /**
+   * The URL that switches to the account.
+   */
+  href?: string
+  /**
+   * Called when the user picks the account.
+   */
+  onClick?: (event: MouseEvent<HTMLElement>) => void
 }
 
 type GlobalNavAccount = {
@@ -184,6 +218,10 @@ type GlobalNavAccount = {
    */
   institution?: string
   /**
+   * Whether the current page belongs to the account, for example the profile.
+   */
+  current?: boolean
+  /**
    * The number in the badge of the rail item, which is hidden when it is 0 or missing.
    */
   badgeCount?: number
@@ -192,17 +230,25 @@ type GlobalNavAccount = {
    */
   badgeLabel?: GlobalNavCountLabel
   /**
-   * Whether the panel items are loading.
+   * A reminder to verify the account, shown as a badge on the avatar and a link under the institution.
    */
-  loading?: boolean
+  verification?: {
+    badgeLabel: string
+    linkLabel: string
+    href?: string
+    onClick?: (event: MouseEvent<HTMLElement>) => void
+  }
   /**
-   * Screen reader text of the loading spinner.
+   * The other accounts of the user, which the button next to the name lists in a menu.
    */
-  loadingLabel?: string
+  switcher?: {
+    label: string
+    accounts: GlobalNavAccountOption[]
+  }
   /**
    * The links of the panel.
    */
-  items?: GlobalNavSubNavItem[]
+  items?: GlobalNavAccountItem[]
   /**
    * A section of toggles with a heading, for example user interface settings.
    */
@@ -210,10 +256,6 @@ type GlobalNavAccount = {
     label: string
     items: GlobalNavToggle[]
   }
-  /**
-   * Any content, rendered after the toggles.
-   */
-  renderContent?: Renderable
   /**
    * The log out button at the end of the panel.
    */
@@ -289,7 +331,9 @@ type GlobalNavProps = GlobalNavOwnProps &
 
 type GlobalNavStyle = ComponentStyle<'globalNav' | 'rail'>
 
-type MainNavStyle = ComponentStyle<'mainNav' | 'header' | 'items' | 'divider'>
+type MainNavStyle = ComponentStyle<
+  'mainNav' | 'header' | 'items' | 'divider' | 'account'
+>
 
 const allowedProps: AllowedPropKeys = [
   'label',
@@ -316,6 +360,8 @@ export type {
   GlobalNavSubNavItem,
   GlobalNavLogo,
   GlobalNavAccount,
+  GlobalNavAccountItem,
+  GlobalNavAccountOption,
   GlobalNavToggle,
   GlobalNavCountLabel,
   GlobalNavElementProps

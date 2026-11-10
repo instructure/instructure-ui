@@ -70,6 +70,12 @@ const generateStyle = (
       },
       label: {}
     },
+    'start-stretch': {
+      facade: {
+        marginInlineStart: componentTheme.marginStart
+      },
+      label: {}
+    },
     top: {
       facade: {
         marginTop: componentTheme.marginVertical

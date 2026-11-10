@@ -29,6 +29,8 @@ export type {
   GlobalNavSubNavItem,
   GlobalNavLogo,
   GlobalNavAccount,
+  GlobalNavAccountItem,
+  GlobalNavAccountOption,
   GlobalNavToggle,
   GlobalNavCountLabel,
   GlobalNavElementProps
