@@ -25,10 +25,7 @@
 import { useEffect, useRef, useState } from 'react'
 import ReactDOM from 'react-dom'
 
-import {
-  passthroughProps,
-  useDeterministicId
-} from '@instructure/ui-react-utils'
+import { passthroughProps } from '@instructure/ui-react-utils'
 import { CloseButton } from '@instructure/ui-buttons/latest'
 import { View } from '@instructure/ui-view/latest'
 import type { ViewOwnProps } from '@instructure/ui-view/latest'
@@ -81,7 +78,6 @@ const Banner = (props: BannerProps) => {
   } = props
 
   const [open, setOpen] = useState(true)
-  const srid = useDeterministicId('Banner')()
   const timeouts = useRef<ReturnType<typeof setTimeout>[]>([])
 
   const styles = useStyleNew({
@@ -98,19 +94,6 @@ const Banner = (props: BannerProps) => {
     region.setAttribute('aria-atomic', `${isLiveRegionAtomic}`)
   }
 
-  const removeScreenReaderContent = () => {
-    const region = getLiveRegion(liveRegion)
-    if (region && document.getElementById(srid)) {
-      // JAWS ignores `aria-relevant` and reads the removed node unless the
-      // attributes are removed and reapplied
-      region.removeAttribute('aria-live')
-      region.removeAttribute('aria-relevant')
-      region.removeAttribute('aria-atomic')
-
-      initLiveRegion(region)
-    }
-  }
-
   const clearTimeouts = () => {
     timeouts.current.forEach((t) => clearTimeout(t))
     timeouts.current = []
@@ -118,7 +101,6 @@ const Banner = (props: BannerProps) => {
 
   const close = () => {
     clearTimeouts()
-    removeScreenReaderContent()
     setOpen(false)
     // without a transition there is no exit callback, so dismiss right away
     if (onDismiss && transition === 'none') {
@@ -207,7 +189,7 @@ const Banner = (props: BannerProps) => {
   const screenReaderContent =
     region && open
       ? ReactDOM.createPortal(
-          <div id={srid}>
+          <div>
             <ScreenReaderContent>
               {title} {children}
             </ScreenReaderContent>
