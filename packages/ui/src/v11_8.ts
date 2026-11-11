@@ -83,8 +83,8 @@ export type {
   CalendarDayProps,
   CalendarProps
 } from '@instructure/ui-calendar/v11_7'
-export { Card } from '@instructure/ui-card/v11_7'
-export type { CardProps } from '@instructure/ui-card/v11_7'
+export { Card, ImageCard } from '@instructure/ui-card/v11_7'
+export type { CardProps, ImageCardProps } from '@instructure/ui-card/v11_7'
 export {
   Checkbox,
   CheckboxGroup,
@@ -183,6 +183,18 @@ export type {
   FormMessageType,
   FormMessageChild
 } from '@instructure/ui-form-field/v11_7'
+export { GlobalNav } from '@instructure/ui-global-nav/v11_7'
+export type {
+  GlobalNavProps,
+  GlobalNavMainNavItem,
+  GlobalNavSubNav,
+  GlobalNavSubNavItem,
+  GlobalNavLogo,
+  GlobalNavAccount,
+  GlobalNavToggle,
+  GlobalNavCountLabel,
+  GlobalNavElementProps
+} from '@instructure/ui-global-nav/v11_7'
 export { Grid, GridRow, GridCol } from '@instructure/ui-grid/v11_7'
 export type {
   GridProps,
@@ -397,6 +409,7 @@ export type {
 export { InlineSVG, SVGIcon } from '@instructure/ui-svg-images'
 export type { InlineSVGProps, SVGIconProps } from '@instructure/ui-svg-images'
 export {
+  DataGrid,
   Table,
   TableContext,
   TableBody,
@@ -407,6 +420,7 @@ export {
   TableRowHeader
 } from '@instructure/ui-table/v11_7'
 export type {
+  DataGridProps,
   TableBodyProps,
   TableCellProps,
   TableProps,
