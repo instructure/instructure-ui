@@ -27,24 +27,47 @@ import React from 'react'
 import { Banner, View } from '@instructure/ui/latest'
 import { DiamondInstUIIcon } from '@instructure/ui-icons'
 
+const text =
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+
 export default function BannerPage() {
-  const variants = ['relaxed', 'compact'] as const
   return (
     <main className="flex gap-8 p-8 flex-col items-start axe-test">
-      {variants.map((variant) => (
-        <View key={variant} display="block" width="35rem">
-          <Banner
-            variant={variant}
-            title="Banner header"
-            renderIcon={DiamondInstUIIcon}
-            closeButtonLabel="Close"
-            transition="none"
-          >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </Banner>
-        </View>
-      ))}
+      <View display="block" width="35rem">
+        <Banner
+          title="Banner header"
+          renderIcon={DiamondInstUIIcon}
+          closeButtonLabel="Close"
+          transition="none"
+        >
+          {text}
+        </Banner>
+      </View>
+      <View display="block" width="35rem">
+        <Banner
+          variant="compact"
+          title="Banner header"
+          renderIcon={DiamondInstUIIcon}
+          closeButtonLabel="Close"
+          transition="none"
+        >
+          {text}
+        </Banner>
+      </View>
+      <View display="block" width="35rem">
+        <Banner renderIcon={DiamondInstUIIcon} transition="none">
+          {text}
+        </Banner>
+      </View>
+      <View display="block" width="35rem">
+        <Banner
+          variant="compact"
+          renderIcon={DiamondInstUIIcon}
+          transition="none"
+        >
+          {text}
+        </Banner>
+      </View>
     </main>
   )
 }
