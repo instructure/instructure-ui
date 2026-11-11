@@ -40,7 +40,7 @@ type BannerOwnProps = {
   /**
    * The first row of the Banner, displayed above the content.
    */
-  title?: ReactNode
+  title?: string
   /**
    * The background color of the Banner and its icon box.
    */
@@ -70,9 +70,9 @@ type BannerOwnProps = {
    */
   margin?: Spacing
   /**
-   * Close button label, setting it renders the close button.
+   * Screen reader label of the close button, setting it renders the close button.
    */
-  renderCloseButtonLabel?: Renderable
+  closeButtonLabel?: string
   /**
    * Callback after the Banner is closed.
    */
@@ -114,7 +114,7 @@ const allowedProps: AllowedPropKeys = [
   'isLiveRegionAtomic',
   'timeout',
   'margin',
-  'renderCloseButtonLabel',
+  'closeButtonLabel',
   'onDismiss',
   'transition',
   'open',

@@ -80,17 +80,17 @@ describe('<Banner />', () => {
     expect(container.querySelector('svg')).not.toBeInTheDocument()
   })
 
-  it('should not render the Close button when `renderCloseButtonLabel` is not provided', async () => {
+  it('should not render the Close button when `closeButtonLabel` is not provided', async () => {
     await render(<Banner>Sample banner text.</Banner>)
     const closeButton = page.getByRole('button')
 
     await expect.element(closeButton).not.toBeInTheDocument()
   })
 
-  it('should call `onDismiss` when the close button is clicked with renderCloseButtonLabel', async () => {
+  it('should call `onDismiss` when the close button is clicked with closeButtonLabel', async () => {
     const onDismiss = vi.fn()
     await render(
-      <Banner renderCloseButtonLabel={<div>Close</div>} onDismiss={onDismiss}>
+      <Banner closeButtonLabel="Close" onDismiss={onDismiss}>
         Sample banner text.
       </Banner>
     )
@@ -103,14 +103,10 @@ describe('<Banner />', () => {
     })
   })
 
-  it('should call `onDismiss` when Escape is pressed with renderCloseButtonLabel', async () => {
+  it('should call `onDismiss` when Escape is pressed with closeButtonLabel', async () => {
     const onDismiss = vi.fn()
     await render(
-      <Banner
-        renderCloseButtonLabel="Close"
-        onDismiss={onDismiss}
-        transition="none"
-      >
+      <Banner closeButtonLabel="Close" onDismiss={onDismiss} transition="none">
         Sample banner text.
       </Banner>
     )
@@ -123,7 +119,7 @@ describe('<Banner />', () => {
       .not.toBeInTheDocument()
   })
 
-  it('should not close on Escape without renderCloseButtonLabel', async () => {
+  it('should not close on Escape without closeButtonLabel', async () => {
     const onDismiss = vi.fn()
     const { container } = await render(
       <Banner onDismiss={onDismiss} transition="none">
@@ -169,7 +165,7 @@ describe('<Banner />', () => {
       <Banner
         title="Banner title"
         renderIcon={DiamondInstUIIcon}
-        renderCloseButtonLabel="Close"
+        closeButtonLabel="Close"
         transition="none"
       >
         Sample banner text.

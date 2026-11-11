@@ -22,11 +22,10 @@
  * SOFTWARE.
  */
 
-import { Fragment, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import ReactDOM from 'react-dom'
 
 import {
-  callRenderProp,
   passthroughProps,
   useDeterministicId
 } from '@instructure/ui-react-utils'
@@ -72,7 +71,7 @@ const Banner = (props: BannerProps) => {
     isLiveRegionAtomic = false,
     timeout = 0,
     margin,
-    renderCloseButtonLabel,
+    closeButtonLabel,
     onDismiss,
     transition = 'fade',
     open: openProp = true,
@@ -162,16 +161,13 @@ const Banner = (props: BannerProps) => {
   }
 
   const handleKeyUp = (event: React.KeyboardEvent<ViewOwnProps>) => {
-    if (renderCloseButtonLabel && event.key === 'Escape') {
+    if (closeButtonLabel && event.key === 'Escape') {
       close()
     }
   }
 
-  const renderCloseButton = () => {
-    const closeButtonLabel =
-      renderCloseButtonLabel && callRenderProp(renderCloseButtonLabel)
-
-    return closeButtonLabel ? (
+  const renderCloseButton = () =>
+    closeButtonLabel ? (
       <div css={styles?.closeButton}>
         <CloseButton
           onClick={close}
@@ -180,7 +176,6 @@ const Banner = (props: BannerProps) => {
         />
       </div>
     ) : null
-  }
 
   const renderBanner = () => (
     <View
@@ -223,15 +218,15 @@ const Banner = (props: BannerProps) => {
 
   if (transition === 'none') {
     return open ? (
-      <Fragment>
+      <>
         {screenReaderContent}
         {renderBanner()}
-      </Fragment>
+      </>
     ) : null
   }
 
   return (
-    <Fragment>
+    <>
       {screenReaderContent}
       <Transition
         type={transition}
@@ -242,7 +237,7 @@ const Banner = (props: BannerProps) => {
       >
         {renderBanner()}
       </Transition>
-    </Fragment>
+    </>
   )
 }
 

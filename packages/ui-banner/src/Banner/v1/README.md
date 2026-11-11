@@ -13,7 +13,7 @@ type: example
 <Banner
   title="Banner title"
   renderIcon={DiamondInstUIIcon}
-  renderCloseButtonLabel="Close"
+  closeButtonLabel="Close"
   margin="0 0 general.spaceMd"
 >
   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -66,7 +66,7 @@ type: example
   variant="compact"
   color="sea"
   renderIcon={DiamondInstUIIcon}
-  renderCloseButtonLabel="Close"
+  closeButtonLabel="Close"
 >
   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
   tempor incididunt ut labore et dolore magna aliqua.
@@ -83,7 +83,7 @@ type: example
 
 ### Dismissing
 
-Setting `renderCloseButtonLabel` renders a close button, which also makes the
+Setting `closeButtonLabel` renders a close button, which also makes the
 `Escape` key close the Banner while focus is inside it. The `timeout` prop
 dismisses the Banner automatically. `onDismiss` is called after the Banner
 closes.
@@ -103,7 +103,7 @@ const Example = () => {
           title="Close me"
           variant="compact"
           renderIcon={DiamondInstUIIcon}
-          renderCloseButtonLabel="Close"
+          closeButtonLabel="Close"
           margin="general.spaceMd 0 0"
           timeout={5000}
           onDismiss={() => setIsOpen(false)}
@@ -152,7 +152,7 @@ const Example = () => {
           key={banner}
           title={`Banner ${banner + 1}`}
           renderIcon={DiamondInstUIIcon}
-          renderCloseButtonLabel="Close"
+          closeButtonLabel="Close"
           onDismiss={() => closeBanner(banner)}
           liveRegion={() => document.getElementById('flash-messages')}
           margin="general.spaceMd 0 0"

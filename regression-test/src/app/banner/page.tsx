@@ -37,7 +37,7 @@ export default function BannerPage() {
             variant={variant}
             title="Banner header"
             renderIcon={DiamondInstUIIcon}
-            renderCloseButtonLabel="Close"
+            closeButtonLabel="Close"
             transition="none"
           >
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
