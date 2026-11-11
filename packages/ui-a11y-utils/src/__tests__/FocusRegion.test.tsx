@@ -211,6 +211,133 @@ describe('FocusRegion', () => {
     })
   })
 
+  describe('document click dismissal', () => {
+    const click = (el: Element) => fireEvent.click(el, { button: 0, detail: 1 })
+    let outside: HTMLElement
+
+    beforeEach(() => {
+      outside = document.createElement('div')
+      document.body.appendChild(outside)
+    })
+
+    afterEach(() => {
+      outside.remove()
+    })
+
+    it('should dismiss on mousedown and click outside the region', () => {
+      const onDismiss = vi.fn()
+      focusRegion = new FocusRegion(container, {
+        shouldCloseOnDocumentClick: true,
+        onDismiss
+      })
+      focusRegion.activate()
+
+      fireEvent.mouseDown(outside)
+      click(outside)
+
+      expect(onDismiss).toHaveBeenCalledTimes(1)
+    })
+
+    it('should not dismiss when the region is activated after mousedown and the click is inside', () => {
+      const onDismiss = vi.fn()
+      focusRegion = new FocusRegion(container, {
+        shouldCloseOnDocumentClick: true,
+        onDismiss
+      })
+      const button = page.getByTestId('button1').element()
+
+      fireEvent.mouseDown(button)
+      focusRegion.activate()
+      click(button)
+
+      expect(onDismiss).not.toHaveBeenCalled()
+    })
+
+    it('should dismiss when the region is activated after mousedown and the click is outside', () => {
+      const onDismiss = vi.fn()
+      focusRegion = new FocusRegion(container, {
+        shouldCloseOnDocumentClick: true,
+        onDismiss
+      })
+
+      fireEvent.mouseDown(outside)
+      focusRegion.activate()
+      click(outside)
+
+      expect(onDismiss).toHaveBeenCalledTimes(1)
+    })
+
+    it('should not dismiss when the clicked element is removed by a click handler', () => {
+      const onDismiss = vi.fn()
+      focusRegion = new FocusRegion(container, {
+        shouldCloseOnDocumentClick: true,
+        onDismiss
+      })
+      const button = page.getByTestId('button1').element()
+      button.addEventListener('click', () => button.remove())
+      focusRegion.activate()
+
+      // missed mousedown: the decision relies on the click event path
+      click(button)
+      expect(onDismiss).not.toHaveBeenCalled()
+
+      // seen mousedown: the decision was already made before removal
+      const button2 = page.getByTestId('button2').element()
+      button2.addEventListener('click', () => button2.remove())
+      fireEvent.mouseDown(button2)
+      click(button2)
+      expect(onDismiss).not.toHaveBeenCalled()
+    })
+
+    it('should not dismiss when a drag starts inside and ends outside the region', () => {
+      const onDismiss = vi.fn()
+      focusRegion = new FocusRegion(container, {
+        shouldCloseOnDocumentClick: true,
+        onDismiss
+      })
+      focusRegion.activate()
+
+      fireEvent.mouseDown(page.getByTestId('button1').element())
+      // the browser dispatches click on the common ancestor of mousedown and mouseup
+      click(document.body)
+
+      expect(onDismiss).not.toHaveBeenCalled()
+    })
+
+    it('should not reuse a previous mousedown result for a later click', () => {
+      const onDismiss = vi.fn()
+      focusRegion = new FocusRegion(container, {
+        shouldCloseOnDocumentClick: true,
+        onDismiss
+      })
+      const button = page.getByTestId('button1').element()
+      focusRegion.activate()
+
+      fireEvent.mouseDown(button)
+      click(button)
+      // this click has no mousedown, so it must be judged by its own target
+      click(outside)
+
+      expect(onDismiss).toHaveBeenCalledTimes(1)
+    })
+
+    it('should drop a stale mousedown result when the region is reactivated', () => {
+      const onDismiss = vi.fn()
+      focusRegion = new FocusRegion(container, {
+        shouldCloseOnDocumentClick: true,
+        onDismiss
+      })
+      focusRegion.activate()
+      fireEvent.mouseDown(page.getByTestId('button1').element())
+
+      focusRegion.deactivate()
+      focusRegion.activate()
+      click(outside)
+
+      expect(onDismiss).toHaveBeenCalledTimes(1)
+    })
+  })
+
   describe('activation and deactivation', () => {
     it('should track active state correctly', () => {
       focusRegion = new FocusRegion(container, {})

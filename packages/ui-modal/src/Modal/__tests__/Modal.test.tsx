@@ -46,6 +46,7 @@ import type { ModalProps } from '@instructure/ui-modal/latest'
 import { View } from '@instructure/ui-view/latest'
 import { Button, CloseButton } from '@instructure/ui-buttons/latest'
 import { Tooltip } from '@instructure/ui-tooltip/latest'
+import { Dialog } from '@instructure/ui-dialog'
 
 describe('<Modal />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
@@ -601,6 +602,61 @@ describe('<Modal />', () => {
           page.getByTestId('modal-content').query()
         ).not.toBeInTheDocument()
       )
+    })
+
+    it('should not close when a nested focus region closes between mousedown and click', async () => {
+      const onDismiss = vi.fn()
+      const onButtonClick = vi.fn()
+      const TestModal = () => {
+        const [nestedOpen, setNestedOpen] = useState(false)
+
+        return (
+          <Modal
+            label="modal"
+            open
+            onDismiss={onDismiss}
+            shouldCloseOnDocumentClick
+          >
+            <Modal.Body>
+              <Button
+                data-testid="open-nested-button"
+                onClick={() => setNestedOpen(true)}
+              >
+                Open nested
+              </Button>
+              <Button data-testid="inside-button" onClick={onButtonClick}>
+                Inside
+              </Button>
+              {/* a nested region (like an open Select) deactivates the Modal's region;
+                  the fixed height keeps the buttons in place when it closes */}
+              <div style={{ height: '5rem' }}>
+                <Dialog open={nestedOpen} label="nested">
+                  <input
+                    data-testid="nested-content"
+                    aria-label="nested"
+                    // a mousedown elsewhere blurs this after the event dispatch, closing the
+                    // region (and reactivating the Modal's) between mousedown and click
+                    onBlur={() => setNestedOpen(false)}
+                  />
+                </Dialog>
+              </div>
+            </Modal.Body>
+          </Modal>
+        )
+      }
+
+      await render(<TestModal />)
+      // keyboard only: a mouse press in the Modal would leave a stale mousedown result behind
+      page.getByTestId('open-nested-button').element().focus()
+      await userEvent.keyboard('{Enter}')
+      await expect.element(page.getByTestId('nested-content')).toBeVisible()
+      page.getByTestId('nested-content').element().focus()
+
+      await userEvent.click(page.getByTestId('inside-button'))
+
+      await vi.waitFor(() => expect(onButtonClick).toHaveBeenCalledTimes(1))
+      expect(page.getByTestId('nested-content').query()).not.toBeInTheDocument()
+      expect(onDismiss).not.toHaveBeenCalled()
     })
 
     it('should not close with shouldCloseOnDocumentClick when Tooltip inside is clicked on', async () => {
