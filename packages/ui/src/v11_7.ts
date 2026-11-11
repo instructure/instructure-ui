@@ -406,6 +406,13 @@ export type {
   SkeletonSize,
   SkeletonLineHeight
 } from '@instructure/ui-skeleton/v11_7'
+export { Stepper } from '@instructure/ui-stepper/v11_7'
+export type {
+  StepperProps,
+  StepperStep,
+  StepperStepState,
+  StepperScreenReaderLabels
+} from '@instructure/ui-stepper/v11_7'
 export { InlineSVG, SVGIcon } from '@instructure/ui-svg-images'
 export type { InlineSVGProps, SVGIconProps } from '@instructure/ui-svg-images'
 export {
