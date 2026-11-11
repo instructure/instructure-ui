@@ -2,22 +2,27 @@
 describes: Banner
 ---
 
-The Banner component highlights a non-urgent message, like a new feature or a
-tip. For status messages (info, success, warning, error) use [Alert](Alert)
+Banner is a prominent message used to promote a feature, offer, event, or announcement.
+Its purpose is to market or inform proactively, not to respond to something the user did.
+To communicate system or account status (errors, warnings, confirmations), use [Alert](Alert)
 instead.
+
+Place a page-level Banner at the top of the main content area, above or just below the H1.
+Use one Banner per region at a time. Stacked banners get ignored or can create competing
+hierarchy and message fatigue.
 
 ```js
 ---
 type: example
 ---
 <Banner
-  title="Banner title"
+  title="Summer courses are open"
   renderIcon={DiamondInstUIIcon}
   closeButtonLabel="Close"
   margin="0 0 general.spaceMd"
 >
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-  tempor incididunt ut labore et dolore magna aliqua.
+  Enroll in summer courses before June 1 to secure your spot. Places are
+  limited and usually fill up within weeks.
 </Banner>
 ```
 
@@ -68,14 +73,14 @@ type: example
   renderIcon={DiamondInstUIIcon}
   closeButtonLabel="Close"
 >
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-  tempor incididunt ut labore et dolore magna aliqua.
+  Your school now offers a free study skills course. Enroll by the end of the
+  month to get access to all lessons.
   <Flex gap="gap.buttons" padding="general.spaceSm 0 0 0">
     <Button size="small" color="primary">
-      Submit
+      Enroll
     </Button>
     <Button size="small" withBackground={false} color="primary">
-      Cancel
+      Maybe later
     </Button>
   </Flex>
 </Banner>
