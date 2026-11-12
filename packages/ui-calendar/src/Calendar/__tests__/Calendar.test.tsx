@@ -477,6 +477,45 @@ describe('<Calendar />', () => {
     })
   })
 
+  describe('table accessible name', () => {
+    it('should label the table with the visible month and year', async () => {
+      const { container } = await render(
+        <Calendar
+          renderWeekdayLabels={weekdayLabels}
+          visibleMonth="2023-12-01"
+          locale="en-US"
+          selectedLabel="selected"
+        />
+      )
+
+      expect(container.querySelector('table')).toHaveAttribute(
+        'aria-label',
+        'December 2023'
+      )
+    })
+
+    it('should include the year in the label when withYearPicker is set', async () => {
+      const { container } = await render(
+        <Calendar
+          renderWeekdayLabels={weekdayLabels}
+          visibleMonth="2023-12-01"
+          locale="en-US"
+          selectedLabel="selected"
+          withYearPicker={{
+            screenReaderLabel: 'Year picker',
+            startYear: 2000,
+            endYear: 2030
+          }}
+        />
+      )
+
+      expect(container.querySelector('table')).toHaveAttribute(
+        'aria-label',
+        'December 2023'
+      )
+    })
+  })
+
   describe('when role="table" (default)', () => {
     it('should set role="button" on each day and not set aria-selected', async () => {
       const { container } = await render(

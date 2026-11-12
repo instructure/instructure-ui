@@ -359,7 +359,10 @@ class Calendar extends Component<CalendarProps, CalendarState> {
 
   renderBody() {
     return (
-      <table role={this.role}>
+      <table
+        role={this.role}
+        aria-label={this.state.visibleMonth.format('MMMM YYYY')}
+      >
         <thead>{this.renderWeekdayHeaders()}</thead>
         <tbody>{this.renderDays()}</tbody>
       </table>
