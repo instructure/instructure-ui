@@ -22,8 +22,9 @@
  * SOFTWARE.
  */
 
-import { forwardRef } from 'react'
+import { forwardRef, useEffect } from 'react'
 
+import { warn } from '@instructure/console'
 import { useStyleNew } from '@instructure/emotion'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import {
@@ -32,6 +33,7 @@ import {
 } from '@instructure/ui-react-utils'
 
 import type { StepperProps } from './props.js'
+import { StepItem } from './StepItem/index.js'
 import generateStyle from './styles.js'
 
 /**
@@ -70,6 +72,14 @@ const Stepper = forwardRef<HTMLElement, StepperProps>(
     const headingId = useDeterministicId('Stepper')('Stepper-heading')
     const HeadingElement = headingLevel
 
+    const currentCount = steps.filter((step) => step.state === 'current').length
+    useEffect(() => {
+      warn(
+        currentCount <= 1,
+        `[Stepper] At most one step can be \`current\`, but ${currentCount} are.`
+      )
+    }, [currentCount])
+
     return (
       <section
         {...passthroughProps(rest)}
@@ -86,6 +96,18 @@ const Stepper = forwardRef<HTMLElement, StepperProps>(
             {label}
           </ScreenReaderContent>
         )}
+        <ol css={styles?.list}>
+          {steps.map((step, index) => (
+            <StepItem
+              key={index}
+              step={step}
+              prefix={screenReaderLabels[step.state]}
+              countLabel={stepCountLabel(index + 1, steps.length)}
+              showStepCount={showStepCount}
+              showDetails={showDetails}
+            />
+          ))}
+        </ol>
       </section>
     )
   }

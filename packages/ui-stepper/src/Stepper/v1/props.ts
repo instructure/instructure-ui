@@ -129,7 +129,7 @@ type StepperProps = StepperOwnProps &
   NewThemeOverrideProp<ReturnType<NewComponentTypes['Stepper']>> &
   OtherHTMLAttributes<StepperOwnProps>
 
-type StepperStyle = ComponentStyle<'stepper' | 'heading'>
+type StepperStyle = ComponentStyle<'stepper' | 'heading' | 'list'>
 
 const allowedProps: AllowedPropKeys = [
   'steps',

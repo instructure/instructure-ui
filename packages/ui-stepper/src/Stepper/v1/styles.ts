@@ -64,6 +64,13 @@ const generateStyle = (
       fontSize: '0.75rem',
       fontWeight: 400,
       lineHeight: 1.5
+    },
+    list: {
+      label: 'stepper__list',
+      display: 'flex',
+      margin: 0,
+      padding: 0,
+      listStyleType: 'none'
     }
   }
 }
