@@ -92,7 +92,7 @@ type StepperOwnProps = {
    */
   layout?: 'default' | 'compact'
   /**
-   * Lays the steps out in a row or a column without changing their order or markup.
+   * Lays the steps of the default layout out in a row or a column without changing their order or markup.
    */
   orientation?: 'horizontal' | 'vertical'
   /**

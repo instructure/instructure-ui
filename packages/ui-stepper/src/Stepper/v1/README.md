@@ -119,7 +119,7 @@ render(
 
 `layout="compact"` answers only "where am I": it shows the position, the title of the current step and one segment per step. Use it where the default layout doesn't fit, for example in a modal or a narrow panel. It shows less information, so choose it on purpose; the Stepper never switches to it by itself.
 
-The position is always visible in compact, `showStepCount` doesn't apply. A failed step only turns its segment red, so pass `compactErrorLabel` to name it for screen readers, and show the problem in an [Alert](Alert).
+The position is always visible in compact, and `showStepCount` and `orientation` don't apply. A failed step only turns its segment red, so pass `compactErrorLabel` to name it for screen readers, and show the problem in an [Alert](Alert).
 
 ```js
 ---

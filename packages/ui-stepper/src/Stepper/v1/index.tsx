@@ -32,6 +32,7 @@ import {
   useDeterministicId
 } from '@instructure/ui-react-utils'
 
+import { CompactSteps } from './CompactSteps/index.js'
 import type { StepperProps } from './props.js'
 import { StepItem } from './StepItem/index.js'
 import generateStyle from './styles.js'
@@ -73,12 +74,20 @@ const Stepper = forwardRef<HTMLElement, StepperProps>(
     const HeadingElement = headingLevel
 
     const currentCount = steps.filter((step) => step.state === 'current').length
+    const missingErrorLabel =
+      layout === 'compact' &&
+      !compactErrorLabel &&
+      steps.some((step) => step.state === 'error')
     useEffect(() => {
       warn(
         currentCount <= 1,
         `[Stepper] At most one step can be \`current\`, but ${currentCount} are.`
       )
-    }, [currentCount])
+      warn(
+        !missingErrorLabel,
+        '[Stepper] A step failed in the compact layout, but `compactErrorLabel` is missing, so screen readers cannot tell which step it is.'
+      )
+    }, [currentCount, missingErrorLabel])
 
     return (
       <section
@@ -96,19 +105,29 @@ const Stepper = forwardRef<HTMLElement, StepperProps>(
             {label}
           </ScreenReaderContent>
         )}
-        <ol css={styles?.list}>
-          {steps.map((step, index) => (
-            <StepItem
-              key={index}
-              step={step}
-              orientation={orientation}
-              prefix={screenReaderLabels[step.state]}
-              countLabel={stepCountLabel(index + 1, steps.length)}
-              showStepCount={showStepCount}
-              showDetails={showDetails}
-            />
-          ))}
-        </ol>
+        {layout === 'compact' ? (
+          <CompactSteps
+            steps={steps}
+            showDetails={showDetails}
+            stepCountLabel={stepCountLabel}
+            compactErrorLabel={compactErrorLabel}
+            themeOverride={themeOverride}
+          />
+        ) : (
+          <ol css={styles?.list}>
+            {steps.map((step, index) => (
+              <StepItem
+                key={index}
+                step={step}
+                orientation={orientation}
+                prefix={screenReaderLabels[step.state]}
+                countLabel={stepCountLabel(index + 1, steps.length)}
+                showStepCount={showStepCount}
+                showDetails={showDetails}
+              />
+            ))}
+          </ol>
+        )}
       </section>
     )
   }
