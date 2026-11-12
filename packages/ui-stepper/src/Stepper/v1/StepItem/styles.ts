@@ -47,8 +47,7 @@ const generateStyle = (
 ): StepItemStyle => {
   const { state, orientation } = params
   const vertical = orientation === 'vertical'
-  const current = state === 'current'
-  const filled = state === 'completed' || current
+  const filled = state === 'completed' || state === 'current'
 
   const strokeWidth = filled
     ? componentTheme.stepStrokeFilledWidth
@@ -119,29 +118,13 @@ const generateStyle = (
         ? { paddingBlockEnd: componentTheme.stepVerticalPaddingEnd }
         : { paddingInlineEnd: componentTheme.stepHorizontalPaddingEnd })
     },
-    // TODO: typography guessed from the designs, replace it with tokens once design adds them; font
-    // families and text colours are inherited until then
     count: {
       label: 'stepItem__count',
       display: 'flex',
       alignItems: 'center',
+      // TODO: guessed from the designs, replace it with a token once design adds one
       // the height of the icon row, so the count is centred on the icon
-      minHeight: '1.5rem',
-      fontSize: '0.75rem',
-      fontWeight: 400,
-      lineHeight: 1.5
-    },
-    title: {
-      label: 'stepItem__title',
-      fontSize: '1rem',
-      fontWeight: current ? 700 : 400,
-      lineHeight: current ? 1.25 : 1.5
-    },
-    description: {
-      label: 'stepItem__description',
-      fontSize: '0.875rem',
-      fontWeight: 400,
-      lineHeight: 1.5
+      minHeight: '1.5rem'
     }
   }
 }

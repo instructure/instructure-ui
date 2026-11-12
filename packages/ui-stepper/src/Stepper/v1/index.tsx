@@ -28,6 +28,7 @@ import type { ForwardRefExoticComponent, RefAttributes } from 'react'
 import { warn } from '@instructure/console'
 import { useStyleNew } from '@instructure/emotion'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
+import { Text } from '@instructure/ui-text/latest'
 import {
   passthroughProps,
   useDeterministicId
@@ -81,7 +82,6 @@ const Stepper = forwardRef<HTMLElement, StepperProps>(
     const getId = useDeterministicId('Stepper')
     const headingId = getId('Stepper-heading')
     const listId = getId('Stepper-list')
-    const HeadingElement = headingLevel
 
     const { mobile, sectionRef, listRef } = useMobileForm(
       layout === 'default' && orientation === 'horizontal',
@@ -139,9 +139,17 @@ const Stepper = forwardRef<HTMLElement, StepperProps>(
       content = (
         <>
           {showLabel ? (
-            <HeadingElement id={headingId} css={styles?.heading}>
+            // TODO: the heading uses the Text tokens until design adds Stepper ones
+            <Text
+              as={headingLevel}
+              id={headingId}
+              margin="0 0 general.spaceSm 0"
+              size="x-small"
+              weight="normal"
+              lineHeight="default"
+            >
               {label}
-            </HeadingElement>
+            </Text>
           ) : (
             <ScreenReaderContent as={headingLevel} id={headingId}>
               {label}

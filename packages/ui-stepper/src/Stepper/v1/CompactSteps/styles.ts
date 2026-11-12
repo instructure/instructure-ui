@@ -45,36 +45,16 @@ const generateStyle = (
   })
 
   return {
-    // TODO: gaps and typography guessed from the designs, replace them with tokens once design adds
-    // them; font families and text colours are inherited until then
+    // TODO: the gaps are guessed from the designs, replace them with tokens once design adds them
     compactSteps: {
       label: 'compactSteps',
       display: 'flex',
       flexDirection: 'column',
       gap: '0.5rem'
     },
-    count: {
-      label: 'compactSteps__count',
-      margin: 0,
-      fontSize: '0.75rem',
-      fontWeight: 400,
-      lineHeight: 1.5
-    },
-    titleRow: {
-      label: 'compactSteps__titleRow',
-      margin: 0,
-      lineHeight: 1.25
-    },
-    title: {
-      label: 'compactSteps__title',
-      fontSize: '1rem',
-      fontWeight: 700
-    },
     description: {
       label: 'compactSteps__description',
-      marginInlineStart: '0.25rem',
-      fontSize: '0.875rem',
-      fontWeight: 400
+      marginInlineStart: '0.25rem'
     },
     segments: {
       label: 'compactSteps__segments',

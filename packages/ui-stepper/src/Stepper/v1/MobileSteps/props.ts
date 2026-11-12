@@ -67,8 +67,6 @@ type MobileStepsProps = {
   children: ReactNode
 }
 
-type MobileStepsStyle = ComponentStyle<
-  'bar' | 'heading' | 'title' | 'toggle' | 'list'
->
+type MobileStepsStyle = ComponentStyle<'bar' | 'toggle' | 'list'>
 
 export type { MobileStepsProps, MobileStepsStyle }

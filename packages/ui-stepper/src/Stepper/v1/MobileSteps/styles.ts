@@ -53,8 +53,7 @@ const generateStyle = (
       label: 'mobileSteps__bar',
       display: 'flex',
       flexDirection: 'column',
-      // TODO: the row gap and the typography below are guessed from the designs, replace them with
-      // tokens once design adds them; font families and text colours are inherited until then
+      // TODO: guessed from the designs, replace it with a token once design adds one
       gap: '0.25rem',
       padding: `${componentTheme.mobileTogglePaddingVertical} ${componentTheme.mobileTogglePaddingHorizontal}`,
       borderRadius: componentTheme.mobileToggleBorderRadius,
@@ -65,20 +64,6 @@ const generateStyle = (
       ...calcFocusOutlineStyles(sharedTokens.focusOutline, {
         focusWithin: true
       })
-    },
-    heading: {
-      label: 'mobileSteps__heading',
-      margin: 0,
-      fontSize: '0.75rem',
-      fontWeight: 400,
-      lineHeight: 1.5
-    },
-    title: {
-      label: 'mobileSteps__title',
-      margin: 0,
-      fontSize: '1rem',
-      fontWeight: 700,
-      lineHeight: 1.25
     },
     toggle: {
       label: 'mobileSteps__toggle',
@@ -91,10 +76,7 @@ const generateStyle = (
       border: 'none',
       backgroundColor: 'transparent',
       color: 'inherit',
-      fontFamily: 'inherit',
-      fontSize: '0.875rem',
-      fontWeight: 400,
-      lineHeight: 1.5,
+      font: 'inherit',
       textAlign: 'start',
       cursor: 'pointer',
       // the bar draws the focus ring

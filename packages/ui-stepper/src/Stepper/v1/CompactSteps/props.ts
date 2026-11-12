@@ -51,9 +51,6 @@ type CompactStepsProps = {
 
 type CompactStepsStyle = ComponentStyle<
   | 'compactSteps'
-  | 'count'
-  | 'titleRow'
-  | 'title'
   | 'description'
   | 'segments'
   | 'segment'

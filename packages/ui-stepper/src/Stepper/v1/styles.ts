@@ -57,15 +57,6 @@ const generateStyle = (
         ...sharedTokens.legacy.spacing
       })
     },
-    heading: {
-      label: 'stepper__heading',
-      margin: 0,
-      // TODO: values guessed from the designs, replace them with tokens once design adds them
-      marginBlockEnd: '0.5rem',
-      fontSize: '0.75rem',
-      fontWeight: 400,
-      lineHeight: 1.5
-    },
     list: {
       label: 'stepper__list',
       display: 'flex',

@@ -30,6 +30,7 @@ import {
   CircleDashedInstUIIcon,
   CircleDotInstUIIcon
 } from '@instructure/ui-icons'
+import { Text } from '@instructure/ui-text/latest'
 
 import type { StepItemProps } from './props.js'
 import generateStyle from './styles.js'
@@ -82,11 +83,32 @@ const StepItem = ({
           {/* aria-current doesn't say which step is current, so its position is always read */}
           {current && !showStepCount ? `${prefix} ${countLabel}` : prefix}
         </ScreenReaderContent>
-        {showStepCount && <span css={styles?.count}>{countLabel}</span>}
-        <span css={styles?.title}>{title}</span>
+        {/* TODO: the texts use the Text tokens until design adds Stepper ones (the current title also
+        needs the heading font family) */}
+        {showStepCount && (
+          <span css={styles?.count}>
+            <Text size="x-small" weight="normal" lineHeight="default">
+              {countLabel}
+            </Text>
+          </span>
+        )}
+        <Text
+          size="medium"
+          weight={current ? 'bold' : 'normal'}
+          lineHeight={current ? 'condensed' : 'default'}
+        >
+          {title}
+        </Text>
         {/* the description of a failed step is its error text, so it is never hidden */}
         {description && (showDetails || error) && (
-          <span css={styles?.description}>{description}</span>
+          <Text
+            size="small"
+            weight="normal"
+            lineHeight="default"
+            color="secondary"
+          >
+            {description}
+          </Text>
         )}
       </span>
     </li>

@@ -24,6 +24,7 @@
 
 import { useStyleNew } from '@instructure/emotion'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
+import { Text } from '@instructure/ui-text/latest'
 
 import { getNamedStepIndex } from '../getNamedStepIndex.js'
 import type { CompactStepsProps } from './props.js'
@@ -71,16 +72,32 @@ const CompactSteps = ({
               </ScreenReaderContent>
             )
         )}
-      <p css={styles?.count}>{stepCountLabel(namedIndex + 1, steps.length)}</p>
-      <p css={styles?.titleRow}>
-        <strong css={styles?.title}>{named.title}</strong>
+      {/* TODO: the texts use the Text tokens until design adds Stepper ones (the title also needs the
+      heading font family) */}
+      <Text
+        as="p"
+        margin="0"
+        size="x-small"
+        weight="normal"
+        lineHeight="default"
+      >
+        {stepCountLabel(namedIndex + 1, steps.length)}
+      </Text>
+      <Text as="p" margin="0" lineHeight="condensed">
+        <Text as="strong" size="medium" weight="bold">
+          {named.title}
+        </Text>
         {named.description && (showDetails || named.state === 'error') && (
           <>
             {' '}
-            <span css={styles?.description}>{named.description}</span>
+            <span css={styles?.description}>
+              <Text size="small" weight="normal" color="secondary">
+                {named.description}
+              </Text>
+            </span>
           </>
         )}
-      </p>
+      </Text>
       <div aria-hidden="true" css={styles?.segments}>
         {steps.map((step, index) => (
           <span key={index} css={segmentStyles[step.state]} />

@@ -30,6 +30,7 @@ import {
   ChevronDownInstUIIcon,
   ChevronRightInstUIIcon
 } from '@instructure/ui-icons'
+import { Text } from '@instructure/ui-text/latest'
 
 import { getNamedStepIndex } from '../getNamedStepIndex.js'
 import type { MobileStepsProps } from './props.js'
@@ -61,7 +62,6 @@ const MobileSteps = ({
     componentId: 'Stepper'
   })
 
-  const HeadingElement = headingLevel
   const namedIndex = getNamedStepIndex(steps)
   const named = steps[namedIndex]
   // the chevron right mirrors itself in RTL
@@ -70,11 +70,30 @@ const MobileSteps = ({
   return (
     <>
       <div css={styles?.bar}>
+        {/* TODO: the texts use the Text tokens until design adds Stepper ones (the title also needs the
+        heading font family) */}
         {/* the bar shows the heading even when showLabel is false, as the designs do */}
-        <HeadingElement id={headingId} css={styles?.heading}>
+        <Text
+          as={headingLevel}
+          id={headingId}
+          margin="0"
+          size="x-small"
+          weight="normal"
+          lineHeight="default"
+        >
           {label}
-        </HeadingElement>
-        {named && <p css={styles?.title}>{named.title}</p>}
+        </Text>
+        {named && (
+          <Text
+            as="p"
+            margin="0"
+            size="medium"
+            weight="bold"
+            lineHeight="condensed"
+          >
+            {named.title}
+          </Text>
+        )}
         <button
           type="button"
           aria-expanded={expanded}
@@ -83,7 +102,12 @@ const MobileSteps = ({
           css={styles?.toggle}
         >
           <Chevron size="md" color="baseColor" />
-          {named && <span>{stepCountLabel(namedIndex + 1, steps.length)}</span>}
+          {named && (
+            // muted text is too light on the expanded bar background
+            <Text size="small" weight="normal" lineHeight="default">
+              {stepCountLabel(namedIndex + 1, steps.length)}
+            </Text>
+          )}
           <ScreenReaderContent>{toggleLabel}</ScreenReaderContent>
         </button>
       </div>

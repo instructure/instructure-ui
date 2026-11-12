@@ -53,8 +53,6 @@ type StepItemProps = {
   showDetails: boolean
 }
 
-type StepItemStyle = ComponentStyle<
-  'stepItem' | 'icon' | 'content' | 'count' | 'title' | 'description'
->
+type StepItemStyle = ComponentStyle<'stepItem' | 'icon' | 'content' | 'count'>
 
 export type { StepItemProps, StepItemStyle }
