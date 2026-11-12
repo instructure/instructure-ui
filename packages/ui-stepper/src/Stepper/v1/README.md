@@ -183,6 +183,37 @@ render(
 )
 ```
 
+When a step fails, its segment turns red, and screen readers hear the `compactErrorLabel` text of each failed step before the position.
+
+```js
+---
+type: example
+---
+const steps = [
+  { title: 'Choose file', state: 'completed' },
+  { title: 'Map columns', state: 'error' },
+  { title: 'Review', state: 'current', description: 'Check the imported data' },
+  { title: 'Import', state: 'notStarted' }
+]
+
+render(
+  <Stepper
+    label="Course import progress"
+    steps={steps}
+    layout="compact"
+    stepCountLabel={(position, total) => `Step ${position} of ${total}`}
+    compactErrorLabel={(position, title) => `Step ${position}, ${title}, needs attention`}
+    screenReaderLabels={{
+      completed: 'Completed:',
+      current: 'Current step:',
+      notStarted: 'Upcoming:',
+      error: 'Error:',
+      mobileToggle: 'step list'
+    }}
+  />
+)
+```
+
 ### Heading
 
 The Stepper is a region named by its `label`, rendered as a heading. `showLabel={false}` hides the heading visually, but screen readers still use it to name the region. Set `headingLevel` to fit the heading structure of the page.
