@@ -115,6 +115,39 @@ render(
 )
 ```
 
+### Narrow containers
+
+A horizontal Stepper switches to a summary when its steps no longer fit side by side at their natural width. It measures its own content, so it doesn't depend on the viewport size. The summary bar shows the `label`, the title of the current step and its position, and the position is a button that shows and hides the list of steps. That button is the only control in the Stepper, and screen readers hear its text followed by `screenReaderLabels.mobileToggle`. The bar always shows the `label`, even when `showLabel` is `false`. The vertical orientation and the compact layout never switch.
+
+```js
+---
+type: example
+---
+const steps = [
+  { title: 'Choose file', state: 'completed', description: 'Uploaded 19 August' },
+  { title: 'Map columns', state: 'current', description: 'Match columns to fields' },
+  { title: 'Review', state: 'notStarted' },
+  { title: 'Import', state: 'notStarted' }
+]
+
+render(
+  <View as="div" maxWidth="20rem">
+    <Stepper
+      label="Course import progress"
+      steps={steps}
+      stepCountLabel={(position, total) => `Step ${position} of ${total}`}
+      screenReaderLabels={{
+        completed: 'Completed:',
+        current: 'Current step:',
+        notStarted: 'Upcoming:',
+        error: 'Error:',
+        mobileToggle: 'step list'
+      }}
+    />
+  </View>
+)
+```
+
 ### Compact layout
 
 `layout="compact"` answers only "where am I": it shows the position, the title of the current step and one segment per step. Use it where the default layout doesn't fit, for example in a modal or a narrow panel. It shows less information, so choose it on purpose; the Stepper never switches to it by itself.

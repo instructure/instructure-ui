@@ -25,20 +25,9 @@
 import { useStyleNew } from '@instructure/emotion'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
-import type { StepperStep, StepperStepState } from '../props.js'
+import { getNamedStepIndex } from '../getNamedStepIndex.js'
 import type { CompactStepsProps } from './props.js'
 import generateStyle from './styles.js'
-
-// TODO: confirm with design which step to name when no step is current
-const namedStepOrder: StepperStepState[] = ['current', 'error', 'notStarted']
-
-const getNamedStepIndex = (steps: StepperStep[]) => {
-  for (const state of namedStepOrder) {
-    const index = steps.findIndex((step) => step.state === state)
-    if (index >= 0) return index
-  }
-  return steps.length - 1
-}
 
 /**
 ---

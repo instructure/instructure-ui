@@ -76,6 +76,8 @@ const generateStyle = (
           }
         : {
             flex: '1 1 0',
+            // steps in a row never wrap their text; when they don't fit, the Stepper shows the mobile form
+            minWidth: 'max-content',
             gridTemplateColumns: 'auto 1fr',
             rowGap: componentTheme.stepGap
           }),

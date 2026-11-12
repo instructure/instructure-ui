@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { forwardRef, useEffect } from 'react'
+import { forwardRef, useEffect, useImperativeHandle } from 'react'
 
 import { warn } from '@instructure/console'
 import { useStyleNew } from '@instructure/emotion'
@@ -33,9 +33,11 @@ import {
 } from '@instructure/ui-react-utils'
 
 import { CompactSteps } from './CompactSteps/index.js'
+import { MobileSteps } from './MobileSteps/index.js'
 import type { StepperProps } from './props.js'
 import { StepItem } from './StepItem/index.js'
 import generateStyle from './styles.js'
+import { useMobileForm } from './useMobileForm.js'
 
 /**
 ---
@@ -70,8 +72,16 @@ const Stepper = forwardRef<HTMLElement, StepperProps>(
       displayName: 'Stepper'
     })
 
-    const headingId = useDeterministicId('Stepper')('Stepper-heading')
+    const getId = useDeterministicId('Stepper')
+    const headingId = getId('Stepper-heading')
+    const listId = getId('Stepper-list')
     const HeadingElement = headingLevel
+
+    const { mobile, sectionRef, listRef } = useMobileForm(
+      layout === 'default' && orientation === 'horizontal',
+      JSON.stringify([steps, showStepCount, showDetails])
+    )
+    useImperativeHandle(ref, () => sectionRef.current!, [sectionRef])
 
     const currentCount = steps.filter((step) => step.state === 'current').length
     const missingErrorLabel =
@@ -89,45 +99,73 @@ const Stepper = forwardRef<HTMLElement, StepperProps>(
       )
     }, [currentCount, missingErrorLabel])
 
+    const renderSteps = (itemOrientation: typeof orientation) =>
+      steps.map((step, index) => (
+        <StepItem
+          key={index}
+          step={step}
+          orientation={itemOrientation}
+          prefix={screenReaderLabels[step.state]}
+          countLabel={stepCountLabel(index + 1, steps.length)}
+          showStepCount={showStepCount}
+          showDetails={showDetails}
+        />
+      ))
+
+    let content
+    if (mobile) {
+      content = (
+        <MobileSteps
+          label={label}
+          headingId={headingId}
+          headingLevel={headingLevel}
+          listId={listId}
+          steps={steps}
+          stepCountLabel={stepCountLabel}
+          toggleLabel={screenReaderLabels.mobileToggle}
+          themeOverride={themeOverride}
+        >
+          {/* there is no horizontal mobile form, the expanded list is a column */}
+          {renderSteps('vertical')}
+        </MobileSteps>
+      )
+    } else {
+      content = (
+        <>
+          {showLabel ? (
+            <HeadingElement id={headingId} css={styles?.heading}>
+              {label}
+            </HeadingElement>
+          ) : (
+            <ScreenReaderContent as={headingLevel} id={headingId}>
+              {label}
+            </ScreenReaderContent>
+          )}
+          {layout === 'compact' ? (
+            <CompactSteps
+              steps={steps}
+              showDetails={showDetails}
+              stepCountLabel={stepCountLabel}
+              compactErrorLabel={compactErrorLabel}
+              themeOverride={themeOverride}
+            />
+          ) : (
+            <ol ref={listRef} css={styles?.list}>
+              {renderSteps(orientation)}
+            </ol>
+          )}
+        </>
+      )
+    }
+
     return (
       <section
         {...passthroughProps(rest)}
-        ref={ref}
+        ref={sectionRef}
         aria-labelledby={headingId}
         css={styles?.stepper}
       >
-        {showLabel ? (
-          <HeadingElement id={headingId} css={styles?.heading}>
-            {label}
-          </HeadingElement>
-        ) : (
-          <ScreenReaderContent as={headingLevel} id={headingId}>
-            {label}
-          </ScreenReaderContent>
-        )}
-        {layout === 'compact' ? (
-          <CompactSteps
-            steps={steps}
-            showDetails={showDetails}
-            stepCountLabel={stepCountLabel}
-            compactErrorLabel={compactErrorLabel}
-            themeOverride={themeOverride}
-          />
-        ) : (
-          <ol css={styles?.list}>
-            {steps.map((step, index) => (
-              <StepItem
-                key={index}
-                step={step}
-                orientation={orientation}
-                prefix={screenReaderLabels[step.state]}
-                countLabel={stepCountLabel(index + 1, steps.length)}
-                showStepCount={showStepCount}
-                showDetails={showDetails}
-              />
-            ))}
-          </ol>
-        )}
+        {content}
       </section>
     )
   }
