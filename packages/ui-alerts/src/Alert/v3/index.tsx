@@ -120,19 +120,6 @@ const Alert = (props: AlertProps) => {
     region.setAttribute('aria-atomic', `${isLiveRegionAtomic}`)
   }
 
-  // temporarily remove live region attributes to prevent duplicate or
-  // unintended announcements when removing the alert
-  const removeScreenreaderAlert = () => {
-    const region = getLiveRegion(liveRegion)
-    if (region && document.getElementById(srid)) {
-      region.removeAttribute('aria-live')
-      region.removeAttribute('aria-relevant')
-      region.removeAttribute('aria-atomic')
-
-      initLiveRegion(region)
-    }
-  }
-
   const clearTimeouts = () => {
     timeouts.current.forEach((t) => clearTimeout(t))
     timeouts.current = []
@@ -140,7 +127,6 @@ const Alert = (props: AlertProps) => {
 
   const close = () => {
     clearTimeouts()
-    removeScreenreaderAlert()
     setOpen(false)
     // without a transition there is no exit callback, so dismiss right away
     if (onDismiss && (transition === 'none' || screenReaderOnly)) {
