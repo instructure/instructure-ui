@@ -23,6 +23,7 @@
  */
 
 import { forwardRef, useEffect, useImperativeHandle } from 'react'
+import type { ForwardRefExoticComponent, RefAttributes } from 'react'
 
 import { warn } from '@instructure/console'
 import { useStyleNew } from '@instructure/emotion'
@@ -36,8 +37,13 @@ import { CompactSteps } from './CompactSteps/index.js'
 import { MobileSteps } from './MobileSteps/index.js'
 import type { StepperProps } from './props.js'
 import { StepItem } from './StepItem/index.js'
+import { StepperSkeleton } from './StepperSkeleton/index.js'
 import generateStyle from './styles.js'
 import { useMobileForm } from './useMobileForm.js'
+
+type StepperComponent = ForwardRefExoticComponent<
+  StepperProps & RefAttributes<HTMLElement>
+> & { Skeleton: typeof StepperSkeleton }
 
 /**
 ---
@@ -169,9 +175,10 @@ const Stepper = forwardRef<HTMLElement, StepperProps>(
       </section>
     )
   }
-)
+) as StepperComponent
 
 Stepper.displayName = 'Stepper'
+Stepper.Skeleton = StepperSkeleton
 
 export default Stepper
 export { Stepper }

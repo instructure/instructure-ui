@@ -28,3 +28,4 @@ export type {
   StepperStepState,
   StepperScreenReaderLabels
 } from '../Stepper/v1/props'
+export type { StepperSkeletonProps } from '../Stepper/v1/StepperSkeleton/props'

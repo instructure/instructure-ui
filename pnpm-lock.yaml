@@ -4214,6 +4214,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-skeleton':
+        specifier: workspace:*
+        version: link:../ui-skeleton
       '@instructure/ui-themes':
         specifier: workspace:*
         version: link:../ui-themes

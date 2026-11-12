@@ -411,7 +411,8 @@ export type {
   StepperProps,
   StepperStep,
   StepperStepState,
-  StepperScreenReaderLabels
+  StepperScreenReaderLabels,
+  StepperSkeletonProps
 } from '@instructure/ui-stepper/v11_7'
 export { InlineSVG, SVGIcon } from '@instructure/ui-svg-images'
 export type { InlineSVGProps, SVGIconProps } from '@instructure/ui-svg-images'

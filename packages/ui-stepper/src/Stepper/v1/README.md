@@ -215,6 +215,57 @@ render(
 )
 ```
 
+### Loading
+
+While the steps load, wrap the Stepper in a [SkeletonLoader](SkeletonLoader) and pass `Stepper.Skeleton` as its `skeleton`. The placeholder is hidden from screen readers, and `SkeletonLoader` announces `loadingLabel` and `loadedLabel` in its own live region, so the Stepper itself is never inside one. Set `stepCount` to the number of steps that will load, and `orientation` and `margin` to the values of the Stepper.
+
+```js
+---
+type: example
+---
+const Example = () => {
+  const [isLoading, setIsLoading] = useState(true)
+  const steps = [
+    { title: 'Choose file', state: 'completed', description: 'Uploaded 19 August' },
+    { title: 'Map columns', state: 'current', description: 'Match columns to fields' },
+    { title: 'Review', state: 'notStarted' },
+    { title: 'Import', state: 'notStarted' }
+  ]
+
+  return (
+    <div>
+      <Button
+        onClick={() => setIsLoading(!isLoading)}
+        margin="0 0 general.spaceMd 0"
+      >
+        Toggle
+      </Button>
+      <SkeletonLoader
+        isLoading={isLoading}
+        loadingLabel="Loading the import progress"
+        loadedLabel="Import progress loaded"
+        skeleton={<Stepper.Skeleton stepCount={4} />}
+      >
+        <Stepper
+          label="Course import progress"
+          steps={steps}
+          stepCountLabel={(position, total) => `Step ${position} of ${total}`}
+          screenReaderLabels={{
+            completed: 'Completed:',
+            current: 'Current step:',
+            notStarted: 'Upcoming:',
+            error: 'Error:',
+            mobileToggle: 'step list'
+          }}
+        />
+      </SkeletonLoader>
+    </div>
+  )
+}
+
+render(<Example />)
+```
+
 ### Guidelines
 
 ```js
