@@ -49,6 +49,7 @@ id: Stepper.StepItem
 **/
 const StepItem = ({
   step,
+  orientation,
   prefix,
   countLabel,
   showStepCount,
@@ -60,7 +61,7 @@ const StepItem = ({
 
   const styles = useStyleNew({
     generateStyle,
-    params: { state },
+    params: { state, orientation },
     componentId: 'StepItem'
   })
 

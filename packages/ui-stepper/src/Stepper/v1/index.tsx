@@ -64,7 +64,7 @@ const Stepper = forwardRef<HTMLElement, StepperProps>(
     const styles = useStyleNew({
       generateStyle,
       themeOverride,
-      params: { margin },
+      params: { margin, orientation },
       componentId: 'Stepper',
       displayName: 'Stepper'
     })
@@ -101,6 +101,7 @@ const Stepper = forwardRef<HTMLElement, StepperProps>(
             <StepItem
               key={index}
               step={step}
+              orientation={orientation}
               prefix={screenReaderLabels[step.state]}
               countLabel={stepCountLabel(index + 1, steps.length)}
               showStepCount={showStepCount}

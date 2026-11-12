@@ -24,13 +24,17 @@
 
 import type { ComponentStyle } from '@instructure/emotion'
 
-import type { StepperStep } from '../props.js'
+import type { StepperProps, StepperStep } from '../props.js'
 
 type StepItemProps = {
   /**
    * The data of the step.
    */
   step: StepperStep
+  /**
+   * Whether the steps are laid out in a row or a column.
+   */
+  orientation: NonNullable<StepperProps['orientation']>
   /**
    * The visually hidden text read before the step, chosen by its state.
    */

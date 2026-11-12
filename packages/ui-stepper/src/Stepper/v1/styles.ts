@@ -29,6 +29,7 @@ import type { StepperProps, StepperStyle } from './props.js'
 
 type StyleParams = {
   margin: StepperProps['margin']
+  orientation: StepperProps['orientation']
 }
 
 /**
@@ -46,7 +47,7 @@ const generateStyle = (
   params: StyleParams,
   sharedTokens: SharedTokens
 ): StepperStyle => {
-  const { margin } = params
+  const { margin, orientation } = params
 
   return {
     stepper: {
@@ -68,6 +69,7 @@ const generateStyle = (
     list: {
       label: 'stepper__list',
       display: 'flex',
+      flexDirection: orientation === 'vertical' ? 'column' : 'row',
       margin: 0,
       padding: 0,
       listStyleType: 'none'

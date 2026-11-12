@@ -25,10 +25,11 @@
 import type { NewComponentTypes } from '@instructure/ui-themes'
 
 import type { StepperStepState } from '../props.js'
-import type { StepItemStyle } from './props.js'
+import type { StepItemProps, StepItemStyle } from './props.js'
 
 type StyleParams = {
   state: StepperStepState
+  orientation: StepItemProps['orientation']
 }
 
 /**
@@ -44,7 +45,8 @@ const generateStyle = (
   componentTheme: ReturnType<NewComponentTypes['StepItem']>,
   params: StyleParams
 ): StepItemStyle => {
-  const { state } = params
+  const { state, orientation } = params
+  const vertical = orientation === 'vertical'
   const current = state === 'current'
   const filled = state === 'completed' || current
 
@@ -54,46 +56,66 @@ const generateStyle = (
   const strokeColor = filled
     ? componentTheme.stepStrokeFilledColor
     : componentTheme.stepStrokeColor
+  const stroke = `${strokeWidth} solid ${strokeColor}`
+  // centres a thin stroke on the axis of a thick one, so the strokes read as one line
+  const strokeOffset = `calc((${componentTheme.stepStrokeFilledWidth} - ${strokeWidth}) / 2)`
+  const radius = componentTheme.stepStrokeRadius
 
   return {
     stepItem: {
       label: 'stepItem',
       position: 'relative',
-      flex: '1 1 0',
       display: 'grid',
-      gridTemplateColumns: 'auto 1fr',
       alignContent: 'start',
       alignItems: 'start',
-      columnGap: componentTheme.stepContentGap,
-      rowGap: componentTheme.stepGap,
+      // the gap separates the stroke from the icon and the text
+      ...(vertical
+        ? {
+            gridTemplateColumns: 'auto auto 1fr',
+            columnGap: componentTheme.stepGap
+          }
+        : {
+            flex: '1 1 0',
+            gridTemplateColumns: 'auto 1fr',
+            rowGap: componentTheme.stepGap
+          }),
       // a border instead of a background, so the stroke stays visible in forced colors mode
       '&::before': {
         content: '""',
-        gridColumn: '1 / -1',
-        borderBlockStart: `${strokeWidth} solid ${strokeColor}`,
-        // centres a thin stroke on the axis of a thick one, so the strokes read as one line
-        marginBlock: `calc((${componentTheme.stepStrokeFilledWidth} - ${strokeWidth}) / 2)`
+        ...(vertical
+          ? {
+              alignSelf: 'stretch',
+              borderInlineStart: stroke,
+              marginInline: strokeOffset
+            }
+          : {
+              gridColumn: '1 / -1',
+              borderBlockStart: stroke,
+              marginBlock: strokeOffset
+            })
       },
       // only the two ends of the whole line are rounded
-      '&:first-of-type::before': {
-        borderStartStartRadius: componentTheme.stepStrokeRadius,
-        borderEndStartRadius: componentTheme.stepStrokeRadius
-      },
-      '&:last-of-type::before': {
-        borderStartEndRadius: componentTheme.stepStrokeRadius,
-        borderEndEndRadius: componentTheme.stepStrokeRadius
-      }
+      '&:first-of-type::before': vertical
+        ? { borderStartStartRadius: radius, borderStartEndRadius: radius }
+        : { borderStartStartRadius: radius, borderEndStartRadius: radius },
+      '&:last-of-type::before': vertical
+        ? { borderEndStartRadius: radius, borderEndEndRadius: radius }
+        : { borderStartEndRadius: radius, borderEndEndRadius: radius }
     },
     icon: {
       label: 'stepItem__icon',
       display: 'flex',
+      marginInlineEnd: componentTheme.stepContentGap,
       paddingBlockStart: componentTheme.iconTopPadding
     },
     content: {
       label: 'stepItem__content',
       display: 'flex',
       flexDirection: 'column',
-      paddingInlineEnd: componentTheme.stepHorizontalPaddingEnd
+      // on the content, not on the step, so the stroke runs through the padding
+      ...(vertical
+        ? { paddingBlockEnd: componentTheme.stepVerticalPaddingEnd }
+        : { paddingInlineEnd: componentTheme.stepHorizontalPaddingEnd })
     },
     // TODO: typography guessed from the designs, replace it with tokens once design adds them; font
     // families and text colours are inherited until then
