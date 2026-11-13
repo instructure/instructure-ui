@@ -162,7 +162,23 @@ type: example
       partridges:
         count: 1
         location: "a pear tree"
-      turtle-doves: two`
+      turtle-doves: two`,
+    python: `def fizzbuzz(limit: int) -> list[str]:
+        # multiples of 15 must be checked before 3 and 5
+        result = []
+        for n in range(1, limit + 1):
+            if n % 15 == 0:
+                result.append('FizzBuzz')
+            elif n % 3 == 0:
+                result.append('Fizz')
+            elif n % 5 == 0:
+                result.append('Buzz')
+            else:
+                result.append(str(n))
+        return result
+
+
+    print(fizzbuzz(15))`
   }
 
   const languageMap = {
@@ -177,7 +193,8 @@ type: example
     shell: languages.shell,
     bash: languages.shell,
     yml: languages.yml,
-    yaml: languages.yml
+    yaml: languages.yml,
+    python: languages.python
   }
 
   const LanguageExamples = () => {
