@@ -37,6 +37,7 @@ import { decorator } from '@instructure/ui-decorator'
 
 import { getComponentThemeOverride } from './getComponentThemeOverride.js'
 import { useTheme } from './useTheme.js'
+import { mergeProps } from './mergeProps.js'
 
 import type {
   BaseTheme,
@@ -135,8 +136,10 @@ const withStyle = decorator(
       }
 
       const componentProps: Props = {
-        ...ComposedComponent.defaultProps,
-        ...props,
+        // workaround for React 19: if a prop's vaule is `undefined` and it has
+        // a default value, `undefined` will override the default.
+        // (in React 18, the default value wins, we keep this behaviour)
+        ...mergeProps(ComposedComponent.defaultProps, props),
         ...defaultValues
       }
 
@@ -190,6 +193,9 @@ const withStyle = decorator(
     // more info: https://github.com/facebook/react/issues/13455
     WithStyle.originalType = ComposedComponent.originalType || ComposedComponent
 
+    // Note: This is ignored in React 19 because WithStyle is a functional
+    // component, and React 19 removed defaultProps for them
+    // https://react.dev/blog/2024/04/25/react-19-upgrade-guide#removed-proptypes-and-defaultprops
     WithStyle.defaultProps = ComposedComponent.defaultProps
     // These static fields exist on InstUI components
     WithStyle.allowedProps = ComposedComponent.allowedProps
