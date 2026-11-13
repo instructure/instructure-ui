@@ -44,14 +44,7 @@ const generateStyle = (
   props: LinkProps,
   sharedTokens: SharedTokens
 ): LinkStyle => {
-  const {
-    renderIcon,
-    iconPlacement = 'start', // TODO workaround needed for react 19 where defaultprops doesn't apply for some reasong
-    color,
-    margin,
-    variant,
-    children
-  } = props
+  const { renderIcon, iconPlacement, color, margin, variant, children } = props
 
   const size =
     !props.size && (variant === 'inline' || variant === 'standalone')
