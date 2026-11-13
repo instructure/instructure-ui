@@ -128,7 +128,9 @@ const generateStyle = (
       paddingRight: componentTheme.gapPrimitives,
       // and use the horizontal alignment prop
       [`@media screen and (width >= ${sharedTokens.breakpoints.md})`]: {
-        textAlign: labelAlign
+        textAlign: labelAlign,
+        // label and control share a row here, so bottom padding would offset the label from the control's center
+        paddingBottom: '0'
       }
     })
   }
