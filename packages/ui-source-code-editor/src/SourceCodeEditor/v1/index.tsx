@@ -74,6 +74,7 @@ import { markdown } from '@codemirror/lang-markdown'
 import { json } from '@codemirror/lang-json'
 import { shell } from '@codemirror/legacy-modes/mode/shell'
 import { yaml } from '@codemirror/legacy-modes/mode/yaml'
+import { python } from '@codemirror/legacy-modes/mode/python'
 // import { oneDarkTheme, oneDarkHighlightStyle } from '@codemirror/theme-one-dark'
 
 import {
@@ -529,6 +530,8 @@ class SourceCodeEditor extends Component<SourceCodeEditorProps> {
       case 'yml':
       case 'yaml':
         return StreamLanguage.define(yaml)
+      case 'python':
+        return StreamLanguage.define(python)
       default:
         return javascript({ jsx: true, typescript: true })
     }

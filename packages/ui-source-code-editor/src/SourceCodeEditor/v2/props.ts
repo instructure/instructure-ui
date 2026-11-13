@@ -58,6 +58,7 @@ type SourceCodeEditorOwnProps = {
     | 'yaml'
     | 'yml'
     | 'bash'
+    | 'python'
 
   /**
    * This disables editing of the editor content by the user and API calls.
