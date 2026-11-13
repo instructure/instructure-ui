@@ -92,6 +92,14 @@ import type { BaseTheme } from '@instructure/shared-types'
 import { FocusRegion } from '@instructure/ui-a11y-utils'
 import { AppContext } from '../appContext'
 
+// guide pages whose examples only work with one theming system, so the docs
+// app pins them to the matching component version
+const LEGACY_THEMING_PAGES = [
+  'legacy-theme-overrides',
+  'legacy-institutional-theming'
+]
+const NEW_THEMING_PAGES = ['new-theme-overrides', 'new-institutional-theming']
+
 @withStyleForDocs(generateStyle)
 class App extends Component<AppProps, AppState> {
   static displayName = 'App'
@@ -353,11 +361,11 @@ class App extends Component<AppProps, AppState> {
 
     const latestVersion = this.getLatestMinorVersion()!
 
-    if (key === 'legacy-theme-overrides') {
+    if (key && LEGACY_THEMING_PAGES.includes(key)) {
       if (selectedMinorVersion !== 'v11_6') {
         this.handleMinorVersionChange('v11_6')
       }
-    } else if (key === 'new-theme-overrides') {
+    } else if (key && NEW_THEMING_PAGES.includes(key)) {
       if (selectedMinorVersion !== latestVersion) {
         this.handleMinorVersionChange(latestVersion)
       }
@@ -629,7 +637,7 @@ class App extends Component<AppProps, AppState> {
         : themeKeys[0]
 
     const { key, docsData } = this.state
-    const versionLockedPages = ['legacy-theme-overrides', 'new-theme-overrides']
+    const versionLockedPages = [...LEGACY_THEMING_PAGES, ...NEW_THEMING_PAGES]
     if (versionLockedPages.includes(key ?? '')) return null
 
     // Only show on Components pages — other categories (guides, utilities,
@@ -850,7 +858,7 @@ class App extends Component<AppProps, AppState> {
       <View as="div" padding="general.space2xl none none">
         {this.renderThemeSelect()}
         {isGuidePage &&
-          (currentData.id as string) !== 'legacy-theme-overrides' && (
+          !LEGACY_THEMING_PAGES.includes(currentData.id as string) && (
             <Alert variant="info" margin="general.space2xl 0">
               This page is made for the latest version (
               {this.getLatestMinorVersion()?.replace('_', '.')}) of InstUI.{' '}
