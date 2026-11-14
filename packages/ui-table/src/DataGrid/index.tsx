@@ -22,7 +22,8 @@
  * SOFTWARE.
  */
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import type { ReactNode } from 'react'
 import {
   createExpandedRowModel,
   createPaginatedRowModel,
@@ -50,11 +51,15 @@ import {
   ArrowUpDownInstUIIcon,
   ArrowUpInstUIIcon,
   ChevronDownInstUIIcon,
-  ChevronRightInstUIIcon
+  ChevronRightInstUIIcon,
+  EllipsisVerticalInstUIIcon
 } from '@instructure/ui-icons'
+import { Menu } from '@instructure/ui-menu/latest'
+import { SimpleSelect } from '@instructure/ui-simple-select/latest'
 import { Pagination } from '@instructure/ui-pagination/latest'
 
 import type { DataGridProps, DataGridSortDirection } from './props'
+import generateStyle from './styles.js'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
 const features = tableFeatures({
@@ -88,6 +93,12 @@ const sortIcons = {
   descending: <ArrowDownInstUIIcon size="sm" />
 }
 
+const sortDirections: DataGridSortDirection[] = [
+  'ascending',
+  'descending',
+  'none'
+]
+
 /**
 ---
 category: components
@@ -100,10 +111,14 @@ const DataGrid = <TData extends RowData>({
   caption,
   pagination,
   expandedRows,
-  sorting
+  sorting,
+  stackedLayout
 }: DataGridProps<typeof features, TData>) => {
+  const styles = generateStyle(!!stackedLayout)
   const showExpandButtons = expandedRows?.showExpandButtons ?? true
   const defaultSort = sorting?.defaultSort
+  // keeps the column in the select when the sort order is set to none
+  const [chosenSortColumnId, setChosenSortColumnId] = useState<string>()
 
   const table = useTable({
     features,
@@ -147,19 +162,19 @@ const DataGrid = <TData extends RowData>({
     ? table.getRowModel().rows
     : table.getPrePaginatedRowModel().rows
 
+  /**
+   * Table cell used in the first column if rows are expandable
+   */
   const expandableCell = (
     row: Row<typeof features, TData>,
-    cell: Cell<typeof features, TData>,
+    content: ReactNode,
     labelCollapseRow: string,
     labelExpandRow: string
   ) => (
     <span
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        // TODO figure out the exact size of a button
-        paddingInlineStart: `${row.depth * 2}rem`
-      }}
+      css={styles.expandableCell}
+      // TODO figure out the exact size of a button
+      style={{ paddingInlineStart: `${row.depth * 2}rem` }}
     >
       {showExpandButtons && row.getCanExpand() && (
         <IconButton
@@ -179,7 +194,7 @@ const DataGrid = <TData extends RowData>({
           )}
         </IconButton>
       )}
-      <table.FlexRender cell={cell} />
+      {content}
     </span>
   )
 
@@ -197,17 +212,7 @@ const DataGrid = <TData extends RowData>({
           toSortDirection(column.getIsSorted())
         )}
         onClick={() => column.toggleSorting()}
-        style={{
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: '0.25rem',
-          padding: 0,
-          border: 0,
-          background: 'none',
-          font: 'inherit',
-          color: 'inherit',
-          cursor: 'pointer'
-        }}
+        css={styles.sortButton}
       >
         <table.FlexRender header={header} />
         {sortIcons[toSortDirection(column.getIsSorted())]}
@@ -215,67 +220,183 @@ const DataGrid = <TData extends RowData>({
     )
   }
 
+  const cellContent = (cell: Cell<typeof features, TData>) => {
+    const header = table
+      .getLeafHeaders()
+      .find((leafHeader) => leafHeader.column.id === cell.column.id)
+    return (
+      <>
+        {/* In stacked layout display the column name and ":" */}
+        {stackedLayout && header && (
+          <span css={styles.stackedLabel}>
+            <table.FlexRender header={header} />
+            {': '}
+          </span>
+        )}
+        <table.FlexRender cell={cell} />
+      </>
+    )
+  }
+
+  /**
+   * When sorting is enabled in a Stacked layout display a <Select> to select
+   * which column to sort on and a <Menu> to set sort order.
+   */
+  const renderSortControls = () => {
+    const sortableColumns = table
+      .getAllLeafColumns()
+      .filter((column) => column.getCanSort())
+    if (!sortableColumns.length) {
+      return null
+    }
+    const { labelSortBy, labelSortOrder, labelSortDirection } = stackedLayout!
+    const sortedColumn = table.state.sorting[0]
+    const selectedColumnId = sortedColumn?.id ?? chosenSortColumnId
+    const selectedDirection = sortedColumn
+      ? sortedColumn.desc
+        ? 'descending'
+        : 'ascending'
+      : 'none'
+
+    return (
+      <div css={styles.sortControls}>
+        <div css={styles.sortColumnSelect}>
+          <SimpleSelect
+            renderLabel={labelSortBy}
+            value={selectedColumnId ?? ''}
+            onChange={(_event, { value }) => {
+              const columnId = `${value}`
+              setChosenSortColumnId(columnId)
+              table.setSorting([
+                { id: columnId, desc: selectedDirection === 'descending' }
+              ])
+            }}
+          >
+            {sortableColumns.map((column) => (
+              <SimpleSelect.Option
+                key={column.id}
+                id={column.id}
+                value={column.id}
+              >
+                {typeof column.columnDef.header === 'string'
+                  ? column.columnDef.header
+                  : column.id}
+              </SimpleSelect.Option>
+            ))}
+          </SimpleSelect>
+        </div>
+        <Menu
+          trigger={
+            <IconButton
+              screenReaderLabel={labelSortOrder}
+              interaction={selectedColumnId ? 'enabled' : 'disabled'}
+            >
+              <EllipsisVerticalInstUIIcon />
+            </IconButton>
+          }
+        >
+          <Menu.Group
+            label={labelSortOrder}
+            selected={[selectedDirection]}
+            onSelect={(_event, [direction]) => {
+              if (direction === 'none') {
+                setChosenSortColumnId(selectedColumnId)
+                table.setSorting([])
+              } else if (selectedColumnId) {
+                table.setSorting([
+                  { id: selectedColumnId, desc: direction === 'descending' }
+                ])
+              }
+            }}
+          >
+            {sortDirections.map((direction) => (
+              <Menu.Item key={direction} value={direction}>
+                {labelSortDirection(direction)}
+              </Menu.Item>
+            ))}
+          </Menu.Group>
+        </Menu>
+      </div>
+    )
+  }
+
+  const renderTableHead = () => (
+    <thead>
+      {table.getHeaderGroups().map((group) => (
+        <tr key={group.id}>
+          {group.headers.map((header) => (
+            <th
+              key={header.id}
+              colSpan={header.colSpan}
+              scope="col"
+              aria-sort={
+                sorting && header.column.getCanSort()
+                  ? toSortDirection(header.column.getIsSorted())
+                  : undefined
+              }
+            >
+              {/* header is a placeholder when using grouped columns (colspan) */}
+              {header.isPlaceholder ? null : headerContent(header)}
+            </th>
+          ))}
+        </tr>
+      ))}
+    </thead>
+  )
+
+  const renderTableBody = () => (
+    <tbody>
+      {rows.map((row) => (
+        <tr key={row.id}>
+          {row.getAllCells().map((cell, index) => (
+            <td key={cell.id}>
+              {expandedRows && index === 0
+                ? // first column needs indent and expand buttons
+                  expandableCell(
+                    row,
+                    cellContent(cell),
+                    expandedRows.labelCollapseRow,
+                    expandedRows.labelExpandRow
+                  )
+                : cellContent(cell)}
+            </td>
+          ))}
+        </tr>
+      ))}
+    </tbody>
+  )
+
+  // with `stackedLayout` the same table is restyled by a media query, see styles.ts
+  const renderTable = () => (
+    <table css={styles.table}>
+      <ScreenReaderContent>
+        <caption>{caption}</caption>
+      </ScreenReaderContent>
+      {renderTableHead()}
+      {renderTableBody()}
+    </table>
+  )
+
+  const renderPagination = () =>
+    pagination && (
+      <Pagination
+        as="nav"
+        variant="compact"
+        labelNext={pagination.labelNext}
+        labelPrev={pagination.labelPrev}
+        screenReaderLabelPageButton={pagination.screenReaderLabelPageButton}
+        margin="general.spaceMd 0 0"
+        currentPage={table.state.pagination.pageIndex + 1}
+        totalPageNumber={table.getPageCount()}
+        onPageChange={(nextPage) => table.setPageIndex(nextPage - 1)}
+      />
+    )
+
   return (
     <>
-      <table>
-        <ScreenReaderContent>
-          <caption>{caption}</caption>
-        </ScreenReaderContent>
-        <thead>
-          {table.getHeaderGroups().map((group) => (
-            <tr key={group.id}>
-              {group.headers.map((header) => (
-                <th
-                  key={header.id}
-                  colSpan={header.colSpan}
-                  scope="col"
-                  aria-sort={
-                    sorting && header.column.getCanSort()
-                      ? toSortDirection(header.column.getIsSorted())
-                      : undefined
-                  }
-                >
-                  {header.isPlaceholder ? null : headerContent(header)}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody>
-          {rows.map((row) => (
-            <tr key={row.id}>
-              {row.getAllCells().map((cell, index) => (
-                <td key={cell.id}>
-                  {expandedRows && index === 0 ? (
-                    // first column needs indent and expand buttons
-                    expandableCell(
-                      row,
-                      cell,
-                      expandedRows.labelCollapseRow,
-                      expandedRows.labelExpandRow
-                    )
-                  ) : (
-                    <table.FlexRender cell={cell} />
-                  )}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      {pagination && (
-        <Pagination
-          as="nav"
-          variant="compact"
-          labelNext={pagination.labelNext}
-          labelPrev={pagination.labelPrev}
-          screenReaderLabelPageButton={pagination.screenReaderLabelPageButton}
-          margin="general.spaceMd 0 0"
-          currentPage={table.state.pagination.pageIndex + 1}
-          totalPageNumber={table.getPageCount()}
-          onPageChange={(nextPage) => table.setPageIndex(nextPage - 1)}
-        />
-      )}
+      {stackedLayout && renderSortControls()}
+      {renderTable()}
+      {renderPagination()}
     </>
   )
 }

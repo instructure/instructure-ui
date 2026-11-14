@@ -4245,6 +4245,9 @@ importers:
       '@instructure/ui-icons':
         specifier: workspace:*
         version: link:../ui-icons
+      '@instructure/ui-menu':
+        specifier: workspace:*
+        version: link:../ui-menu
       '@instructure/ui-pagination':
         specifier: workspace:*
         version: link:../ui-pagination
