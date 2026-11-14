@@ -2320,6 +2320,9 @@ importers:
       '@instructure/ui-buttons':
         specifier: workspace:*
         version: link:../ui-buttons
+      '@instructure/ui-dom-utils':
+        specifier: workspace:*
+        version: link:../ui-dom-utils
       '@instructure/ui-icons':
         specifier: workspace:*
         version: link:../ui-icons
@@ -3730,8 +3733,8 @@ importers:
         specifier: workspace:*
         version: link:../command-utils
       '@instructure/instructure-design-tokens':
-        specifier: github:instructure/instructure-design-tokens#v2.4.0
-        version: https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/7d5bb8086d7a0dd812eb9b9701a327f2424ddd62
+        specifier: github:instructure/instructure-design-tokens#v2.5.0
+        version: https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/e5c7c930e8461e04e97a3403664478fad3bf8ee7
       dprint:
         specifier: ^0.60.1
         version: 0.60.1
@@ -6423,8 +6426,8 @@ packages:
       '@types/node':
         optional: true
 
-  '@instructure/instructure-design-tokens@https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/7d5bb8086d7a0dd812eb9b9701a327f2424ddd62':
-    resolution: {gitHosted: true, integrity: sha512-gQBBVaUQ/oA8R6VwTdgNv+5pt4z2e5LSVtRA2vc/LAReESxoyNXqm8heBsg/KH5L6A0u+r9s0nd1FP6HtmayCQ==, tarball: https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/7d5bb8086d7a0dd812eb9b9701a327f2424ddd62}
+  '@instructure/instructure-design-tokens@https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/e5c7c930e8461e04e97a3403664478fad3bf8ee7':
+    resolution: {gitHosted: true, integrity: sha512-G6WNrsq4eJt1dsOYfOdWd820yNePrMYFADe0aGGiEklx03H875OSDjkBz+gOlOldfJCVIqOmdvegxLQECg1neg==, tarball: https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/e5c7c930e8461e04e97a3403664478fad3bf8ee7}
     version: 1.0.0
 
   '@isaacs/cliui@8.0.2':
@@ -13025,7 +13028,7 @@ snapshots:
     optionalDependencies:
       '@types/node': 24.19.1
 
-  '@instructure/instructure-design-tokens@https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/7d5bb8086d7a0dd812eb9b9701a327f2424ddd62':
+  '@instructure/instructure-design-tokens@https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/e5c7c930e8461e04e97a3403664478fad3bf8ee7':
     dependencies:
       glob: 13.0.6
 

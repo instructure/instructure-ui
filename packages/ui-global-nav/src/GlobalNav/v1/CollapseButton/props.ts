@@ -24,6 +24,7 @@
 
 import type { SyntheticEvent } from 'react'
 
+import type { ComponentStyle } from '@instructure/emotion'
 import type { NewComponentTypes } from '@instructure/ui-themes'
 
 type CollapseButtonProps = {
@@ -32,21 +33,32 @@ type CollapseButtonProps = {
    */
   collapsed: boolean
   /**
-   * Screen reader text and tooltip when the rail is expanded.
+   * Screen reader text when the rail is expanded.
    */
   collapseLabel: string
   /**
-   * Screen reader text and tooltip when the rail is collapsed.
+   * Screen reader text when the rail is collapsed.
    */
   expandLabel: string
   /**
    * Called when the user clicks the button, with the new `collapsed` value.
    */
   onCollapse: (event: SyntheticEvent, collapsed: boolean) => void
+  /**
+   * Called with the button element.
+   */
+  elementRef: (element: Element | null) => void
 }
 
-type CollapseButtonStyle = {
+type CollapseButtonIconStyle = {
   iconButtonThemeOverride: Partial<ReturnType<NewComponentTypes['BaseButton']>>
 }
 
-export type { CollapseButtonProps, CollapseButtonStyle }
+type CollapseButtonStyle = ComponentStyle<'collapseButton'> &
+  CollapseButtonIconStyle
+
+export type {
+  CollapseButtonProps,
+  CollapseButtonStyle,
+  CollapseButtonIconStyle
+}

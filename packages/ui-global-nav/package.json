@@ -29,6 +29,7 @@
     "@instructure/ui-a11y-content": "workspace:*",
     "@instructure/ui-badge": "workspace:*",
     "@instructure/ui-buttons": "workspace:*",
+    "@instructure/ui-dom-utils": "workspace:*",
     "@instructure/ui-icons": "workspace:*",
     "@instructure/ui-react-utils": "workspace:*",
     "@instructure/ui-text": "workspace:*",

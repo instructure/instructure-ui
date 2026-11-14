@@ -4,71 +4,60 @@ describes: GlobalNav
 
 The main navigation of an app. Work in progress: the API will change, don't use it in production yet.
 
-The app passes the content as data: `items`, `logo` and `account`.
+The app passes the navigation as data (`items` and `logo`). `GlobalNav` is controlled: the app keeps `collapsed` and `openSubNav` in its state and updates them in `onCollapse` and `onSubNavChange`.
 
-`GlobalNav` is controlled: the app passes `collapsed` and `openSubNav`, and updates them in `onCollapse` and `onSubNavChange`.
+`GlobalNav` fills the height of its container. An open SubNav makes it wider and pushes the page. While no SubNav is open, its width only depends on `collapsed`, so the strip showing or hiding doesn't move the page.
 
-`GlobalNav` fills the height of its container, so put it in a layout with a height.
+### Minimal example
 
-Items are links (`href`) or buttons. An item with a `subNav` opens a sub navigation.
-
-`logo` shows the institution mark and name. Without `src`, only the name shows, and nothing shows when the rail is collapsed.
+A starting point to copy.
 
 ```js
 ---
 type: example
 ---
-const items = [
-  {
-    itemID: 'dashboard',
-    icon: <LayoutDashboardInstUIIcon />,
-    label: 'Dashboard',
-    href: '#',
-    current: true
-  },
-  {
-    itemID: 'courses',
-    icon: <BookOpenInstUIIcon />,
-    label: 'Courses',
-    subNav: { title: 'Courses' }
-  },
-  {
-    itemID: 'inbox',
-    icon: <InboxInstUIIcon />,
-    label: 'Inbox',
-    href: '#',
-    badgeCount: 9,
-    badgeLabel: (count) => `${count} unread messages`
-  }
-]
-
 const Example = () => {
   const [collapsed, setCollapsed] = React.useState(false)
   const [openSubNav, setOpenSubNav] = React.useState()
-  // the light theme has a white rail, the other themes a dark one
-  const onLightRail = useTheme().key === 'light'
-  const wordmark = onLightRail ? canvasWordmarkDark : canvasWordmarkWhite
-  const mark = onLightRail ? canvasMarkDark : canvasMarkWhite
 
   return (
-    <View as="div" height="30rem">
+    <View as="div" height="24rem">
       <GlobalNav
         label="Main navigation"
         collapsed={collapsed}
         onCollapse={(_e, isCollapsed) => setCollapsed(isCollapsed)}
         collapseLabel="Collapse navigation"
         expandLabel="Expand navigation"
-        backLabel="Back"
+        backLabel={(title) => `Back to ${title}`}
         closeSubNavLabel="Close sub navigation"
+        expandSubNavLabel="Open sub navigation"
         openSubNav={openSubNav}
         onSubNavChange={(_e, itemID) => setOpenSubNav(itemID)}
-        logo={{
-          src: collapsed ? mark : wordmark,
-          name: 'Canvas',
-          showName: false,
-          href: '#'
-        }}
-        items={items}
+        logo={{ name: 'My app', href: '#GlobalNav' }}
+        items={[
+          {
+            itemID: 'dashboard',
+            icon: <LayoutDashboardInstUIIcon />,
+            label: 'Dashboard',
+            href: '#GlobalNav',
+            current: true
+          },
+          {
+            itemID: 'courses',
+            icon: <BookOpenInstUIIcon />,
+            label: 'Courses',
+            subNav: {
+              title: 'Courses',
+              items: [
+                {
+                  itemID: 'all-courses',
+                  label: 'All courses',
+                  href: '#GlobalNav'
+                }
+              ]
+            }
+          }
+        ]}
       />
     </View>
   )
@@ -77,25 +66,166 @@ const Example = () => {
 render(<Example />)
 ```
 
-### Wordmark logo
+### Example app
 
-For a logo that already shows the name, for example a product wordmark, set `showName` to `false`. The rail then shows only the image, and `name` is its alternative text. The collapsed rail needs a square mark, so pass it as `src` when `collapsed` is true, as the example above does.
-
-### HTML attributes
-
-`elementProps` adds HTML attributes to the link or button of an item, limited to `id`, `className`, `target`, `rel` and `data-*` attributes. GlobalNav keeps its own `aria-*` attributes and click handling.
+A mock app with pages. The navigation switches between them, and the current page is marked in the rail and in the SubNav. It starts on a course page with the Courses SubNav open. Close it to see the strip that opens it again. On Dashboard, closing a SubNav removes it completely. Help shows custom content.
 
 ```js
 ---
-type: code
+type: example
 ---
-const items = [
-  {
-    itemID: 'dashboard',
-    icon: <LayoutDashboardInstUIIcon />,
-    label: 'Dashboard',
-    href: '/',
-    elementProps: { 'data-track': 'dashboard' }
-  }
+const courses = [
+  { id: 'biology', name: 'Biology 101' },
+  { id: 'history', name: 'World history' },
+  { id: 'algebra', name: 'Algebra II' }
 ]
+const coursePages = ['Home', 'Modules', 'Grades']
+const pageTitles = {
+  dashboard: 'Dashboard',
+  courses: 'All courses',
+  calendar: 'Calendar',
+  inbox: 'Inbox'
+}
+
+const Example = () => {
+  // the current page, for example 'dashboard' or 'courses/biology/Modules'
+  const [page, setPage] = React.useState('courses/biology/Home')
+  const [collapsed, setCollapsed] = React.useState(false)
+  // a course page loads with the Courses SubNav open
+  const [openSubNav, setOpenSubNav] = React.useState('courses')
+
+  // a real app navigates with its router, this example only switches the mock page
+  const link = (path) => ({
+    href: '#GlobalNav',
+    current: page === path,
+    onClick: (event) => {
+      event.preventDefault()
+      setPage(path)
+    }
+  })
+
+  // the light theme has a white rail, the other themes a dark one
+  const onLightRail = useTheme().key === 'light'
+  const wordmark = onLightRail ? canvasWordmarkDark : canvasWordmarkWhite
+  const mark = onLightRail ? canvasMarkDark : canvasMarkWhite
+
+  const items = [
+    {
+      itemID: 'dashboard',
+      icon: <LayoutDashboardInstUIIcon />,
+      label: 'Dashboard',
+      ...link('dashboard')
+    },
+    {
+      itemID: 'courses',
+      icon: <BookOpenInstUIIcon />,
+      label: 'Courses',
+      // the section of the current page, so its SubNav collapses to a strip
+      current: page.startsWith('courses'),
+      subNav: {
+        title: 'Courses',
+        items: [
+          { itemID: 'all-courses', label: 'All courses', ...link('courses') },
+          ...courses.map((course) => ({
+            itemID: course.id,
+            label: course.name,
+            subNav: {
+              title: course.name,
+              items: coursePages.map((coursePage) => ({
+                itemID: `${course.id}-${coursePage}`,
+                label: coursePage,
+                ...link(`courses/${course.id}/${coursePage}`)
+              }))
+            }
+          }))
+        ]
+      }
+    },
+    {
+      itemID: 'calendar',
+      icon: <CalendarInstUIIcon />,
+      label: 'Calendar',
+      ...link('calendar')
+    },
+    {
+      itemID: 'inbox',
+      icon: <InboxInstUIIcon />,
+      label: 'Inbox',
+      badgeCount: 9,
+      badgeLabel: (count) => `${count} unread messages`,
+      ...link('inbox')
+    },
+    {
+      itemID: 'help',
+      icon: <CircleHelpInstUIIcon />,
+      label: 'Help',
+      subNav: {
+        title: 'Help',
+        renderContent: () => (
+          <View as="div" padding="0 small">
+            <Text as="p" size="small">
+              Find answers to common questions.
+            </Text>
+            <List isUnstyled itemSpacing="small">
+              <List.Item>
+                <Link href="#GlobalNav">Search the guides</Link>
+              </List.Item>
+              <List.Item>
+                <Link href="#GlobalNav">Ask your instructor a question</Link>
+              </List.Item>
+              <List.Item>
+                <Link href="#GlobalNav">Report a problem</Link>
+              </List.Item>
+            </List>
+          </View>
+        )
+      }
+    }
+  ]
+
+  const [, courseID, coursePage] = page.split('/')
+  const course = courses.find((c) => c.id === courseID)
+
+  return (
+    <View as="div" display="flex" height="36rem">
+      <GlobalNav
+        label="Main navigation"
+        collapsed={collapsed}
+        onCollapse={(_e, isCollapsed) => setCollapsed(isCollapsed)}
+        collapseLabel="Collapse navigation"
+        expandLabel="Expand navigation"
+        backLabel={(title) => `Back to ${title}`}
+        closeSubNavLabel="Close sub navigation"
+        expandSubNavLabel="Open sub navigation"
+        openSubNav={openSubNav}
+        onSubNavChange={(_e, itemID) => setOpenSubNav(itemID)}
+        logo={{
+          src: collapsed ? mark : wordmark,
+          name: 'Canvas',
+          showName: false,
+          href: '#GlobalNav'
+        }}
+        items={items}
+      />
+      <View as="div" width="100%" padding="medium" background="secondary">
+        {course && <Text size="small">{course.name}</Text>}
+        <Heading level="h2" margin="0 0 small">
+          {course ? coursePage : pageTitles[page]}
+        </Heading>
+        <Text>A mock page. Use the navigation to switch pages.</Text>
+      </View>
+    </View>
+  )
+}
+
+render(<Example />)
 ```
+
+### How it behaves
+
+- One SubNav is open at a time. Clicking its rail item again, its close handle or a rail item without a `subNav` closes it. A click with a modifier key, for example to open a link in a new tab, keeps it open.
+- Opening a SubNav or a deeper level moves focus to its first item, to the first focusable element of custom content, or else to the close handle. Back returns focus to the item that opened the level, and closing returns it to the rail item. Focus doesn't move when the app sets `openSubNav` itself.
+- A SubNav opens on the level of its deepest `current` item.
+- Set `current` on the rail item of the current page's section. Closing its SubNav then leaves a narrow strip that opens it again on click. Other SubNavs close completely.
+- The back button shows the title of the level it returns to, and `backLabel` gets that title for the screen reader text, for example "Back to Courses".
+- `renderContent` shows any content in place of `items`, inside the panel frame. Use it for content that can't be navigation items yet, for example while migrating an existing product.
