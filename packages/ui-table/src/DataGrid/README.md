@@ -4,7 +4,7 @@ describes: DataGrid
 
 > **Work in progress.** `DataGrid` is under development. Its API will change and it is not ready for production use.
 
-`DataGrid` is a data table built on [TanStack Table](https://tanstack.com/table/latest) (v9).
+`DataGrid` is a data table built on [TanStack Table](https://tanstack.com/table/v9) (v9).
 
 ### Basic DataGrid
 
@@ -33,6 +33,176 @@ const Example = () => {
       columns={columns}
       data={data}
     />
+  )
+}
+
+render(<Example />)
+```
+
+### Pagination
+
+Pass `pagination` to split the rows into pages and render a [Pagination](Pagination) below the table. `pageSize` is the number of rows per page and `pageIndex` is the zero-based page to show initially. `labelNext` and `labelPrev` are the accessible labels of the arrow buttons, and the optional `screenReaderLabelPageButton` labels the page number buttons.
+
+```js
+---
+type: example
+---
+const Example = () => {
+  const columns = [
+    { accessorKey: 'id', header: 'ID' },
+    { accessorKey: 'name', header: 'Name' },
+    { accessorKey: 'department', header: 'Department' }
+  ]
+
+  const departments = ['Math', 'Physics', 'Computing', 'Chemistry']
+  const data = Array.from({ length: 47 }, (_, i) => ({
+    id: i + 1,
+    name: `Person ${i + 1}`,
+    department: departments[i % departments.length]
+  }))
+
+  return (
+    <DataGrid
+      caption="Staff directory"
+      columns={columns}
+      data={data}
+      pagination={{
+        initialPageIndex: 0,
+        pageSize: 10,
+        labelNext: 'Next page',
+        labelPrev: 'Previous page',
+        screenReaderLabelPageButton: (page, total) =>
+          `Page ${page} of ${total}`
+      }}
+    />
+  )
+}
+
+render(<Example />)
+```
+
+### Expanding rows
+
+Pass `expandedRows` to make rows expandable. `getSubRows` returns the child rows of a row, and rows with children get an expand/collapse button in their first cell. `labelExpandRow` and `labelCollapseRow` are the accessible labels of that button.
+
+All rows start collapsed. Set `showExpandButtons` to `false` to hide the buttons and show every row expanded.
+
+```js
+---
+type: example
+---
+const Example = () => {
+  const [showExpandButtons, setShowExpandButtons] = useState(true)
+
+  const columns = [
+    { accessorKey: 'name', header: 'Name' },
+    { accessorKey: 'role', header: 'Role' }
+  ]
+
+  const data = [
+    {
+      name: 'Engineering',
+      role: 'Department',
+      subRows: [
+        {
+          name: 'Frontend',
+          role: 'Team',
+          subRows: [
+            { name: 'Ada Lovelace', role: 'Engineer' },
+            { name: 'Grace Hopper', role: 'Engineer' }
+          ]
+        },
+        { name: 'Katherine Johnson', role: 'Engineering manager' }
+      ]
+    },
+    { name: 'Design', role: 'Department' }
+  ]
+
+  return (
+    <View as="div">
+      <Checkbox
+        variant="toggle"
+        label="Show expand buttons"
+        checked={showExpandButtons}
+        onChange={() => setShowExpandButtons(!showExpandButtons)}
+        margin="0 0 small"
+      />
+      <DataGrid
+        caption="Company structure"
+        columns={columns}
+        data={data}
+        expandedRows={{
+          getSubRows: (row) => row.subRows,
+          showExpandButtons,
+          labelExpandRow: 'Expand row',
+          labelCollapseRow: 'Collapse row'
+        }}
+      />
+    </View>
+  )
+}
+
+render(<Example />)
+```
+
+### Putting it together
+
+`pagination` and `expandedRows` work together. Expanded sub rows count toward `pageSize`, so the number of pages grows and shrinks as rows are expanded and collapsed.
+
+```js
+---
+type: example
+---
+const Example = () => {
+  const [showExpandButtons, setShowExpandButtons] = useState(true)
+
+  const columns = [
+    { accessorKey: 'name', header: 'Name' },
+    { accessorKey: 'role', header: 'Role' },
+    { accessorKey: 'location', header: 'Location' }
+  ]
+
+  const locations = ['Salt Lake City', 'London', 'Budapest', 'Sydney']
+  const data = Array.from({ length: 12 }, (_, i) => ({
+    name: `Team ${i + 1}`,
+    role: 'Team',
+    location: locations[i % locations.length],
+    subRows: Array.from({ length: 3 }, (_, j) => ({
+      name: `Member ${i + 1}.${j + 1}`,
+      role: 'Engineer',
+      location: locations[(i + j) % locations.length]
+    }))
+  }))
+
+  return (
+    <View as="div">
+      <Checkbox
+        variant="toggle"
+        label="Show expand buttons"
+        checked={showExpandButtons}
+        onChange={() => setShowExpandButtons(!showExpandButtons)}
+        margin="0 0 small"
+      />
+      <DataGrid
+        caption="Engineering teams"
+        columns={columns}
+        data={data}
+        pagination={{
+          initialPageIndex: 1,
+          pageSize: 5,
+          labelNext: 'Next page',
+          labelPrev: 'Previous page',
+          screenReaderLabelPageButton: (page, total) =>
+            `Page ${page} of ${total}`
+        }}
+        expandedRows={{
+          getSubRows: (row) => row.subRows,
+          showExpandButtons,
+          labelExpandRow: 'Expand row',
+          labelCollapseRow: 'Collapse row'
+        }}
+      />
+    </View>
   )
 }
 
