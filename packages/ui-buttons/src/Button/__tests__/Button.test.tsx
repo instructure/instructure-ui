@@ -483,6 +483,18 @@ describe('<Button/>', () => {
 
         expect(button).toHaveAttribute('disabled')
       })
+
+      it('sets aria-disabled when rendered as a link', async () => {
+        await render(
+          <Button href="https://example.com" interaction="disabled">
+            Hello World
+          </Button>
+        )
+
+        const link = page.getByRole('link', { name: 'Hello World' }).element()
+
+        expect(link).toHaveAttribute('aria-disabled', 'true')
+      })
     })
 
     describe('when readOnly', () => {
