@@ -506,6 +506,9 @@ importers:
       '@instructure/ui-spinner':
         specifier: workspace:*
         version: link:../ui-spinner
+      '@instructure/ui-stepper':
+        specifier: workspace:*
+        version: link:../ui-stepper
       '@instructure/ui-svg-images':
         specifier: workspace:*
         version: link:../ui-svg-images
@@ -946,6 +949,9 @@ importers:
       '@instructure/ui-spinner':
         specifier: workspace:*
         version: link:../ui-spinner
+      '@instructure/ui-stepper':
+        specifier: workspace:*
+        version: link:../ui-stepper
       '@instructure/ui-svg-images':
         specifier: workspace:*
         version: link:../ui-svg-images
@@ -4171,6 +4177,52 @@ importers:
       '@instructure/uid':
         specifier: workspace:*
         version: link:../uid
+      react:
+        specifier: 18.3.1
+        version: 18.3.1
+    devDependencies:
+      '@instructure/ui-axe-check':
+        specifier: workspace:*
+        version: link:../ui-axe-check
+      '@instructure/ui-babel-preset':
+        specifier: workspace:*
+        version: link:../ui-babel-preset
+      vitest:
+        specifier: ^5.0.0
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+
+  packages/ui-stepper:
+    dependencies:
+      '@babel/runtime':
+        specifier: ^7.29.7
+        version: 7.29.7
+      '@instructure/console':
+        specifier: workspace:*
+        version: link:../console
+      '@instructure/emotion':
+        specifier: workspace:*
+        version: link:../emotion
+      '@instructure/shared-types':
+        specifier: workspace:*
+        version: link:../shared-types
+      '@instructure/ui-a11y-content':
+        specifier: workspace:*
+        version: link:../ui-a11y-content
+      '@instructure/ui-icons':
+        specifier: workspace:*
+        version: link:../ui-icons
+      '@instructure/ui-react-utils':
+        specifier: workspace:*
+        version: link:../ui-react-utils
+      '@instructure/ui-skeleton':
+        specifier: workspace:*
+        version: link:../ui-skeleton
+      '@instructure/ui-text':
+        specifier: workspace:*
+        version: link:../ui-text
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       react:
         specifier: 18.3.1
         version: 18.3.1
