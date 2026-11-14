@@ -74,6 +74,29 @@ type DataGridExpandedRows<TData extends RowData> = {
   labelCollapseRow: string
 }
 
+type DataGridSortDirection = 'none' | 'ascending' | 'descending'
+
+type DataGridSorting = {
+  /**
+   * Returns the accessible label of a sortable header button, given the header
+   * text and the current sort direction of its column.
+   */
+  labelSortColumn: (
+    sortByHeader: string,
+    sortDirection: DataGridSortDirection
+  ) => string
+  /**
+   * The sort to apply initially. Without it the rows start in their original order.
+   */
+  defaultSort?: {
+    /**
+     * id of the column (the `accessorKey` unless the column has an `id`)
+     */
+    columnId: string
+    direction: Exclude<DataGridSortDirection, 'none'>
+  }
+}
+
 type DataGridOwnProps<
   TFeatures extends TableFeatures,
   TData extends RowData
@@ -100,6 +123,12 @@ type DataGridOwnProps<
    * Turns on expandable rows. Rows with children (see `getSubRows`) get an expand button, and all rows start collapsed.
    */
   expandedRows?: DataGridExpandedRows<TData>
+  /**
+   * Turns on sorting. Clicking a column header changes sorting order, and only
+   * one column is sorted at a time.
+   * Columns opt out with `enableSorting: false` in their definition.
+   */
+  sorting?: DataGridSorting
 }
 
 type DataGridProps<
@@ -107,4 +136,10 @@ type DataGridProps<
   TData extends RowData
 > = DataGridOwnProps<TFeatures, TData>
 
-export type { DataGridProps, DataGridPagination, DataGridExpandedRows }
+export type {
+  DataGridProps,
+  DataGridPagination,
+  DataGridExpandedRows,
+  DataGridSorting,
+  DataGridSortDirection
+}
