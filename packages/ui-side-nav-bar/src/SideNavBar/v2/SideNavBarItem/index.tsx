@@ -40,8 +40,7 @@ parent: SideNavBar
 id: SideNavBar.Item
 ---
 **/
-@withStyleNew(generateStyle, 'SideNavBarItem')
-class SideNavBarItem extends Component<SideNavBarItemProps> {
+export class SideNavBarItemBase extends Component<SideNavBarItemProps> {
   static displayName = 'SideNavBarItem'
   static readonly componentId = 'SideNavBar.Item'
   static readonly themeId = 'SideNavBarItem'
@@ -118,6 +117,12 @@ class SideNavBarItem extends Component<SideNavBarItemProps> {
     )
   }
 }
+
+const SideNavBarItem = withStyleNew(
+  generateStyle,
+  'SideNavBarItem'
+)(SideNavBarItemBase)
+type SideNavBarItem = SideNavBarItemBase
 
 export default SideNavBarItem
 export { SideNavBarItem }

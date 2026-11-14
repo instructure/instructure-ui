@@ -48,8 +48,10 @@ category: components
 ---
 **/
 
-@withDeterministicId()
-class CheckboxGroup extends Component<CheckboxGroupProps, CheckboxGroupState> {
+export class CheckboxGroupBase extends Component<
+  CheckboxGroupProps,
+  CheckboxGroupState
+> {
   static displayName = 'CheckboxGroup'
   static readonly componentId = 'CheckboxGroup'
 
@@ -153,6 +155,9 @@ class CheckboxGroup extends Component<CheckboxGroupProps, CheckboxGroupState> {
     )
   }
 }
+
+const CheckboxGroup = withDeterministicId()(CheckboxGroupBase)
+type CheckboxGroup = CheckboxGroupBase
 
 export default CheckboxGroup
 export { CheckboxGroup }

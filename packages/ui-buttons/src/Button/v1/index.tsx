@@ -40,8 +40,7 @@ category: components
 ---
 **/
 // needed for listing the available theme variables on docs page
-@withStyle(null, generateComponentTheme)
-class Button extends Component<ButtonProps> {
+export class ButtonBase extends Component<ButtonProps> {
   static displayName = 'Button'
   static readonly componentId = 'Button'
 
@@ -135,6 +134,9 @@ class Button extends Component<ButtonProps> {
     )
   }
 }
+
+const Button = withStyle(null, generateComponentTheme)(ButtonBase)
+type Button = ButtonBase
 
 export default Button
 export { Button }

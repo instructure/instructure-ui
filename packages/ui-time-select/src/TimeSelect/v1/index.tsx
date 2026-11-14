@@ -56,8 +56,10 @@ category: components
 
 A component used to select a time value.
  **/
-@withDeterministicId()
-class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
+export class TimeSelectBase extends Component<
+  TimeSelectProps,
+  TimeSelectState
+> {
   static displayName = 'TimeSelect'
   declare context: React.ContextType<typeof ApplyLocaleContext>
 
@@ -641,6 +643,9 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
     )
   }
 }
+
+const TimeSelect = withDeterministicId()(TimeSelectBase)
+type TimeSelect = TimeSelectBase
 
 export { TimeSelect }
 export default TimeSelect

@@ -38,8 +38,7 @@ import type { MetricProps } from './props'
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
-class Metric extends Component<MetricProps> {
+export class MetricBase extends Component<MetricProps> {
   static displayName = 'Metric'
   static readonly componentId = 'Metric'
 
@@ -91,6 +90,9 @@ class Metric extends Component<MetricProps> {
     )
   }
 }
+
+const Metric = withStyle(generateStyle, generateComponentTheme)(MetricBase)
+type Metric = MetricBase
 
 export default Metric
 export { Metric }

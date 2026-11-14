@@ -37,8 +37,7 @@ import { allowedProps } from './props.js'
 category: components
 ---
 **/
-@withStyleNew(generateStyle)
-class ColorIndicator extends Component<ColorIndicatorProps> {
+export class ColorIndicatorBase extends Component<ColorIndicatorProps> {
   static displayName = 'ColorIndicator'
   static allowedProps = allowedProps
   static readonly componentId = 'ColorIndicator'
@@ -80,6 +79,9 @@ class ColorIndicator extends Component<ColorIndicatorProps> {
     )
   }
 }
+
+const ColorIndicator = withStyleNew(generateStyle)(ColorIndicatorBase)
+type ColorIndicator = ColorIndicatorBase
 
 export default ColorIndicator
 export { ColorIndicator }

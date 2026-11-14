@@ -38,8 +38,7 @@ import type { MetricGroupProps } from './props'
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
-class MetricGroup extends Component<MetricGroupProps> {
+export class MetricGroupBase extends Component<MetricGroupProps> {
   static displayName = 'MetricGroup'
   static readonly componentId = 'MetricGroup'
 
@@ -85,6 +84,12 @@ class MetricGroup extends Component<MetricGroupProps> {
     )
   }
 }
+
+const MetricGroup = withStyle(
+  generateStyle,
+  generateComponentTheme
+)(MetricGroupBase)
+type MetricGroup = MetricGroupBase
 
 export default MetricGroup
 export { MetricGroup }

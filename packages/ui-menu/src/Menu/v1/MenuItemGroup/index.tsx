@@ -56,9 +56,10 @@ parent: Menu
 id: Menu.Group
 ---
 **/
-@withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
-class MenuItemGroup extends Component<MenuGroupProps, MenuGroupState> {
+export class MenuItemGroupBase extends Component<
+  MenuGroupProps,
+  MenuGroupState
+> {
   static displayName = 'MenuItemGroup'
   static readonly componentId = 'Menu.Group'
 
@@ -242,6 +243,11 @@ class MenuItemGroup extends Component<MenuGroupProps, MenuGroupState> {
     )
   }
 }
+
+const MenuItemGroup = withDeterministicId()(
+  withStyle(generateStyle, generateComponentTheme)(MenuItemGroupBase)
+)
+type MenuItemGroup = MenuItemGroupBase
 
 export default MenuItemGroup
 export { MenuItemGroup }

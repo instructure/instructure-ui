@@ -45,8 +45,7 @@ parent: DrawerLayout
 id: DrawerLayout.Content
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
-class DrawerContent extends Component<DrawerLayoutContentProps> {
+export class DrawerContentBase extends Component<DrawerLayoutContentProps> {
   static displayName = 'DrawerContent'
   static readonly componentId = 'DrawerLayout.Content'
 
@@ -144,6 +143,12 @@ class DrawerContent extends Component<DrawerLayoutContentProps> {
     )
   }
 }
+
+const DrawerContent = withStyle(
+  generateStyle,
+  generateComponentTheme
+)(DrawerContentBase)
+type DrawerContent = DrawerContentBase
 
 export default DrawerContent
 export { DrawerContent }

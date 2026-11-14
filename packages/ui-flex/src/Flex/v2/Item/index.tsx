@@ -39,8 +39,7 @@ parent: Flex
 id: Flex.Item
 ---
 **/
-@withStyle(generateStyle, null)
-class Item extends Component<FlexItemProps> {
+export class ItemBase extends Component<FlexItemProps> {
   static displayName = 'Item'
   static readonly componentId = 'Flex.Item'
 
@@ -111,6 +110,9 @@ class Item extends Component<FlexItemProps> {
     )
   }
 }
+
+const Item = withStyle(generateStyle, null)(ItemBase)
+type Item = ItemBase
 
 export default Item
 export { Item }

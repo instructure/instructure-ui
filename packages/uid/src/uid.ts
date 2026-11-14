@@ -40,7 +40,7 @@ const dictionaryLengthMinus1 = dictionary.length - 1
  * called during render — the server and the client produce different values,
  * which React reports as a hydration mismatch, and the id changes on every
  * re-render. For ids that end up in the DOM, use `useDeterministicId` or the
- * `withDeterministicId` decorator from `@instructure/ui-react-utils`. Reach for
+ * `withDeterministicId` HOC from `@instructure/ui-react-utils`. Reach for
  * `uid` only for client-side, non-rendered identifiers (e.g. keying an entry in
  * a runtime registry).
  *

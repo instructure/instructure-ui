@@ -43,8 +43,7 @@ parent: Table
 id: Table.ColHeader
 ---
 **/
-@withStyleNew(generateStyle)
-class ColHeader extends Component<TableColHeaderProps> {
+export class ColHeaderBase extends Component<TableColHeaderProps> {
   static displayName = 'ColHeader'
   static readonly componentId = 'Table.ColHeader'
 
@@ -114,6 +113,9 @@ class ColHeader extends Component<TableColHeaderProps> {
     )
   }
 }
+
+const ColHeader = withStyleNew(generateStyle)(ColHeaderBase)
+type ColHeader = ColHeaderBase
 
 export default ColHeader
 export { ColHeader }

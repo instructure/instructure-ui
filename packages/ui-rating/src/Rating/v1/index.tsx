@@ -38,8 +38,7 @@ import { allowedProps } from './props.js'
 category: components
 ---
 **/
-@withStyle(generateStyle, null)
-class Rating extends Component<RatingProps> {
+export class RatingBase extends Component<RatingProps> {
   static displayName = 'Rating'
   static readonly componentId = 'Rating'
 
@@ -127,6 +126,9 @@ class Rating extends Component<RatingProps> {
     )
   }
 }
+
+const Rating = withStyle(generateStyle, null)(RatingBase)
+type Rating = RatingBase
 
 export default Rating
 export { Rating }

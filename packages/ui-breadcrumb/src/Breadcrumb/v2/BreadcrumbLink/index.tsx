@@ -41,8 +41,7 @@ id: Breadcrumb.Link
 ---
 **/
 
-@withStyleNew(generateStyle)
-class BreadcrumbLink extends Component<
+export class BreadcrumbLinkBase extends Component<
   BreadcrumbLinkProps,
   BreadcrumbLinkState
 > {
@@ -150,6 +149,9 @@ class BreadcrumbLink extends Component<
     )
   }
 }
+
+const BreadcrumbLink = withStyleNew(generateStyle)(BreadcrumbLinkBase)
+type BreadcrumbLink = BreadcrumbLinkBase
 
 export default BreadcrumbLink
 export { BreadcrumbLink }

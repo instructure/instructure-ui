@@ -46,8 +46,7 @@ id: TopNavBar.Breadcrumb
 ---
 @module TopNavBarBreadcrumb
  **/
-@withStyle(generateStyle, null)
-class TopNavBarBreadcrumb extends Component<
+export class TopNavBarBreadcrumbBase extends Component<
   TopNavBarBreadcrumbProps,
   TopNavBarBreadcrumbState
 > {
@@ -143,6 +142,12 @@ class TopNavBarBreadcrumb extends Component<
     )
   }
 }
+
+const TopNavBarBreadcrumb = withStyle(
+  generateStyle,
+  null
+)(TopNavBarBreadcrumbBase)
+type TopNavBarBreadcrumb = TopNavBarBreadcrumbBase
 
 export { TopNavBarBreadcrumb }
 

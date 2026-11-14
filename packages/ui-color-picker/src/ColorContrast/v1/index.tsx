@@ -49,8 +49,10 @@ import generateComponentTheme from './theme.js'
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
-class ColorContrast extends Component<ColorContrastProps, ColorContrastState> {
+export class ColorContrastBase extends Component<
+  ColorContrastProps,
+  ColorContrastState
+> {
   static displayName = 'ColorContrast'
   static allowedProps = allowedProps
   static readonly componentId = 'ColorContrast'
@@ -233,6 +235,12 @@ class ColorContrast extends Component<ColorContrastProps, ColorContrastState> {
     )
   }
 }
+
+const ColorContrast = withStyle(
+  generateStyle,
+  generateComponentTheme
+)(ColorContrastBase)
+type ColorContrast = ColorContrastBase
 
 export { ColorContrast }
 export default ColorContrast

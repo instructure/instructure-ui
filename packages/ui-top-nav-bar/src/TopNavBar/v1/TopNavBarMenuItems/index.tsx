@@ -60,9 +60,7 @@ id: TopNavBar.MenuItems
 ---
 @module TopNavBarMenuItems
 **/
-@withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
-class TopNavBarMenuItems extends Component<
+export class TopNavBarMenuItemsBase extends Component<
   TopNavBarMenuItemsProps,
   TopNavBarMenuItemsState
 > {
@@ -290,6 +288,11 @@ class TopNavBarMenuItems extends Component<
     )
   }
 }
+
+const TopNavBarMenuItems = withDeterministicId()(
+  withStyle(generateStyle, generateComponentTheme)(TopNavBarMenuItemsBase)
+)
+type TopNavBarMenuItems = TopNavBarMenuItemsBase
 
 export { TopNavBarMenuItems }
 export default TopNavBarMenuItems

@@ -40,8 +40,7 @@ category: components/Util Components
 tags: autocomplete, typeahead, combobox, dropdown, search
 ---
 **/
-@withDeterministicId()
-class Selectable extends Component<SelectableProps> {
+export class SelectableBase extends Component<SelectableProps> {
   static displayName = 'Selectable'
   static allowedProps = allowedProps
 
@@ -277,6 +276,9 @@ class Selectable extends Component<SelectableProps> {
     }
   }
 }
+
+const Selectable = withDeterministicId()(SelectableBase)
+type Selectable = SelectableBase
 
 export default Selectable
 export { Selectable }

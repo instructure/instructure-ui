@@ -49,8 +49,7 @@ type valueof<X> = X[keyof X]
 
 type ThemeState = { showColors: boolean }
 
-@withStyleForDocs(generateStyle)
-class Theme extends Component<ThemeProps, ThemeState> {
+export class ThemeBase extends Component<ThemeProps, ThemeState> {
   static displayName = 'Theme'
   static defaultProps = {
     description: undefined
@@ -433,6 +432,9 @@ ${'```'}
     )
   }
 }
+
+const Theme = withStyleForDocs(generateStyle)(ThemeBase)
+type Theme = ThemeBase
 
 export default Theme
 export { Theme }

@@ -42,8 +42,7 @@ import type { CloseButtonProps } from './props'
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
-class CloseButton extends Component<CloseButtonProps> {
+export class CloseButtonBase extends Component<CloseButtonProps> {
   static displayName = 'CloseButton'
   static readonly componentId = 'CloseButton'
 
@@ -136,6 +135,12 @@ class CloseButton extends Component<CloseButtonProps> {
     )
   }
 }
+
+const CloseButton = withStyle(
+  generateStyle,
+  generateComponentTheme
+)(CloseButtonBase)
+type CloseButton = CloseButtonBase
 
 export default CloseButton
 export { CloseButton }

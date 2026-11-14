@@ -61,9 +61,7 @@ import { SimpleSelect } from '@instructure/ui-simple-select/latest'
 category: components
 ---
 **/
-@withDeterministicId()
-@withStyleNew(generateStyle)
-class Calendar extends Component<CalendarProps, CalendarState> {
+export class CalendarBase extends Component<CalendarProps, CalendarState> {
   static displayName = 'Calendar'
   static readonly componentId = 'Calendar'
 
@@ -595,6 +593,11 @@ class Calendar extends Component<CalendarProps, CalendarState> {
     )
   }
 }
+
+const Calendar = withDeterministicId()(
+  withStyleNew(generateStyle)(CalendarBase)
+)
+type Calendar = CalendarBase
 
 export default Calendar
 export { Calendar }

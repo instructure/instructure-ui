@@ -48,8 +48,10 @@ import generateStyle from './styles.js'
 category: components
 ---
 **/
-@withStyleNew(generateStyle)
-class ColorContrast extends Component<ColorContrastProps, ColorContrastState> {
+export class ColorContrastBase extends Component<
+  ColorContrastProps,
+  ColorContrastState
+> {
   static displayName = 'ColorContrast'
   static allowedProps = allowedProps
   static readonly componentId = 'ColorContrast'
@@ -232,6 +234,9 @@ class ColorContrast extends Component<ColorContrastProps, ColorContrastState> {
     )
   }
 }
+
+const ColorContrast = withStyleNew(generateStyle)(ColorContrastBase)
+type ColorContrast = ColorContrastBase
 
 export { ColorContrast }
 export default ColorContrast

@@ -37,8 +37,7 @@ parent: Modal
 id: Modal.Footer
 ---
 **/
-@withStyleNew(generateStyle, 'ModalFooter')
-class ModalFooter extends Component<ModalFooterProps> {
+export class ModalFooterBase extends Component<ModalFooterProps> {
   static displayName = 'ModalFooter'
   static readonly componentId = 'Modal.Footer'
   static readonly themeId = 'ModalFooter'
@@ -77,6 +76,9 @@ class ModalFooter extends Component<ModalFooterProps> {
     )
   }
 }
+
+const ModalFooter = withStyleNew(generateStyle, 'ModalFooter')(ModalFooterBase)
+type ModalFooter = ModalFooterBase
 
 export default ModalFooter
 export { ModalFooter }

@@ -41,8 +41,7 @@ import generateComponentTheme from './theme.js'
 private: true
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
-class Slider extends Component<SliderProps> {
+export class SliderBase extends Component<SliderProps> {
   static displayName = 'Slider'
   static allowedProps = allowedProps
   static readonly componentId = 'ColorMixer.Slider'
@@ -243,5 +242,8 @@ class Slider extends Component<SliderProps> {
     )
   }
 }
+
+const Slider = withStyle(generateStyle, generateComponentTheme)(SliderBase)
+type Slider = SliderBase
 
 export default Slider

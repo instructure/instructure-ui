@@ -43,8 +43,7 @@ import type { FormFieldGroupProps, FormFieldGroupStyleProps } from './props'
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
-class FormFieldGroup extends Component<FormFieldGroupProps> {
+export class FormFieldGroupBase extends Component<FormFieldGroupProps> {
   static displayName = 'FormFieldGroup'
   static readonly componentId = 'FormFieldGroup'
 
@@ -189,6 +188,12 @@ class FormFieldGroup extends Component<FormFieldGroupProps> {
     )
   }
 }
+
+const FormFieldGroup = withStyle(
+  generateStyle,
+  generateComponentTheme
+)(FormFieldGroupBase)
+type FormFieldGroup = FormFieldGroupBase
 
 export default FormFieldGroup
 export { FormFieldGroup }

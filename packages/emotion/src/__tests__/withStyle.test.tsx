@@ -98,8 +98,9 @@ describe.skip('@withStyle', () => {
     }
   }
 
-  @withStyle(generateStyle, generateComponentTheme)
-  class ThemeableComponent extends Component<Props, State> {
+  class ThemeableComponentBase extends Component<Props, State> {
+    static displayName = 'ThemeableComponent'
+
     static defaultTypes = {
       inverse: false
     }
@@ -132,6 +133,11 @@ describe.skip('@withStyle', () => {
       )
     }
   }
+
+  const ThemeableComponent = withStyle(
+    generateStyle,
+    generateComponentTheme
+  )(ThemeableComponentBase)
 
   class WrapperComponent extends Component {
     render() {
@@ -417,8 +423,9 @@ describe('Component tests', () => {
     }
   }
 
-  @withStyle(generateStyle, generateComponentTheme)
-  class ThemeableComponent extends Component<Props, State> {
+  class ThemeableComponentBase extends Component<Props, State> {
+    static displayName = 'ThemeableComponent'
+
     static defaultTypes = {
       inverse: false
     }
@@ -444,6 +451,11 @@ describe('Component tests', () => {
       )
     }
   }
+
+  const ThemeableComponent = withStyle(
+    generateStyle,
+    generateComponentTheme
+  )(ThemeableComponentBase)
 
   describe('withStyleNew should apply bi-directional polyfill on styles object', () => {
     it('in default "ltr" mode', async () => {

@@ -70,9 +70,7 @@ type PanelChild = ComponentElement<TabsPanelProps, Panel>
 category: components
 ---
 **/
-@withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
-class Tabs extends Component<TabsProps, TabsState> {
+export class TabsBase extends Component<TabsProps, TabsState> {
   static displayName = 'Tabs'
   static readonly componentId = 'Tabs'
 
@@ -545,6 +543,11 @@ class Tabs extends Component<TabsProps, TabsState> {
     )
   }
 }
+
+const Tabs = withDeterministicId()(
+  withStyle(generateStyle, generateComponentTheme)(TabsBase)
+)
+type Tabs = TabsBase
 
 export default Tabs
 export { Tabs, Panel }

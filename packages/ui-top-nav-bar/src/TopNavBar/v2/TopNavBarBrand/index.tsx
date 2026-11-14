@@ -45,8 +45,7 @@ id: TopNavBar.Brand
 ---
 @module TopNavBarBrand
 **/
-@withStyleNew(generateStyle, 'TopNavBarBrand')
-class TopNavBarBrand extends Component<TopNavBarBrandProps> {
+export class TopNavBarBrandBase extends Component<TopNavBarBrandProps> {
   static displayName = 'TopNavBarBrand'
   static readonly componentId = 'TopNavBar.Brand'
   static readonly themeId = 'TopNavBarBrand'
@@ -134,6 +133,12 @@ class TopNavBarBrand extends Component<TopNavBarBrandProps> {
     )
   }
 }
+
+const TopNavBarBrand = withStyleNew(
+  generateStyle,
+  'TopNavBarBrand'
+)(TopNavBarBrandBase)
+type TopNavBarBrand = TopNavBarBrandBase
 
 export { TopNavBarBrand }
 export default TopNavBarBrand

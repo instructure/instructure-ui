@@ -51,8 +51,7 @@ type: example
 <FormFieldMessage variant="error">Invalid value</FormFieldMessage>
 ```
 **/
-@withStyle(generateStyle, generateComponentTheme)
-class FormFieldMessage extends Component<FormFieldMessageProps> {
+export class FormFieldMessageBase extends Component<FormFieldMessageProps> {
   static displayName = 'FormFieldMessage'
   static readonly componentId = 'FormFieldMessage'
 
@@ -96,6 +95,12 @@ class FormFieldMessage extends Component<FormFieldMessageProps> {
     )
   }
 }
+
+const FormFieldMessage = withStyle(
+  generateStyle,
+  generateComponentTheme
+)(FormFieldMessageBase)
+type FormFieldMessage = FormFieldMessageBase
 
 export default FormFieldMessage
 export { FormFieldMessage }

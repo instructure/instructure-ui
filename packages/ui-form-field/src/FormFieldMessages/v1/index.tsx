@@ -54,8 +54,7 @@ type: example
 ]} />
 ```
 **/
-@withStyle(generateStyle, generateComponentTheme)
-class FormFieldMessages extends Component<FormFieldMessagesProps> {
+export class FormFieldMessagesBase extends Component<FormFieldMessagesProps> {
   static displayName = 'FormFieldMessages'
   static readonly componentId = 'FormFieldMessages'
 
@@ -96,6 +95,12 @@ class FormFieldMessages extends Component<FormFieldMessagesProps> {
     ) : null
   }
 }
+
+const FormFieldMessages = withStyle(
+  generateStyle,
+  generateComponentTheme
+)(FormFieldMessagesBase)
+type FormFieldMessages = FormFieldMessagesBase
 
 export default FormFieldMessages
 export { FormFieldMessages }

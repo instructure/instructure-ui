@@ -52,9 +52,7 @@ parent: DrawerLayout
 id: DrawerLayout.Tray
 ---
 **/
-@withStyleNew(generateStyle)
-@textDirectionContextConsumer()
-class DrawerTray extends Component<
+export class DrawerTrayBase extends Component<
   DrawerLayoutTrayProps,
   DrawerLayoutTrayState
 > {
@@ -276,6 +274,11 @@ class DrawerTray extends Component<
     )
   }
 }
+
+const DrawerTray = withStyleNew(generateStyle)(
+  textDirectionContextConsumer()(DrawerTrayBase)
+)
+type DrawerTray = DrawerTrayBase
 
 export default DrawerTray
 export { DrawerTray }

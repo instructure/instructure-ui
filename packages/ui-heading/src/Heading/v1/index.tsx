@@ -58,8 +58,7 @@ const variantLevels: Record<
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
-class Heading extends Component<HeadingProps> {
+export class HeadingBase extends Component<HeadingProps> {
   static displayName = 'Heading'
   static readonly componentId = 'Heading'
 
@@ -231,6 +230,9 @@ class Heading extends Component<HeadingProps> {
     )
   }
 }
+
+const Heading = withStyle(generateStyle, generateComponentTheme)(HeadingBase)
+type Heading = HeadingBase
 
 export default Heading
 export { Heading }

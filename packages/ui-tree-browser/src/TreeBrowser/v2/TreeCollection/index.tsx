@@ -44,8 +44,7 @@ parent: TreeBrowser
 id: TreeBrowser.Collection
 ---
 **/
-@withStyleNew(generateStyles, 'TreeBrowserTreeCollection')
-class TreeCollection extends Component<
+export class TreeCollectionBase extends Component<
   TreeBrowserCollectionProps,
   TreeCollectionState
 > {
@@ -410,6 +409,12 @@ class TreeCollection extends Component<
     )
   }
 }
+
+const TreeCollection = withStyleNew(
+  generateStyles,
+  'TreeBrowserTreeCollection'
+)(TreeCollectionBase)
+type TreeCollection = TreeCollectionBase
 
 export default TreeCollection
 export { TreeCollection }

@@ -39,8 +39,7 @@ category: components
 ---
 **/
 
-@withStyleNew(generateStyle)
-class ContextView extends Component<ContextViewProps> {
+export class ContextViewBase extends Component<ContextViewProps> {
   static displayName = 'ContextView'
   static readonly componentId = 'ContextView'
   static allowedProps = allowedProps
@@ -140,6 +139,9 @@ class ContextView extends Component<ContextViewProps> {
     )
   }
 }
+
+const ContextView = withStyleNew(generateStyle)(ContextViewBase)
+type ContextView = ContextViewBase
 
 export default ContextView
 export { ContextView }

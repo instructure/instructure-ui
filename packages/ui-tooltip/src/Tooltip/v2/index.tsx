@@ -46,9 +46,7 @@ import { allowedProps } from './props.js'
 category: components
 ---
 **/
-@withDeterministicId()
-@withStyleNew(generateStyle)
-class Tooltip extends Component<TooltipProps, TooltipState> {
+export class TooltipBase extends Component<TooltipProps, TooltipState> {
   static displayName = 'Tooltip'
   static readonly componentId = 'Tooltip'
 
@@ -187,6 +185,9 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
     )
   }
 }
+
+const Tooltip = withDeterministicId()(withStyleNew(generateStyle)(TooltipBase))
+type Tooltip = TooltipBase
 
 export default Tooltip
 export { Tooltip }
