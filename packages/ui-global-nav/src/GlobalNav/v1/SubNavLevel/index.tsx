@@ -26,7 +26,11 @@ import { useEffect, useRef } from 'react'
 import type { FocusEvent, SyntheticEvent } from 'react'
 
 import { useStyleNew } from '@instructure/emotion'
-import { CondensedButton, IconButton } from '@instructure/ui-buttons/latest'
+import {
+  CloseButton,
+  CondensedButton,
+  IconButton
+} from '@instructure/ui-buttons/latest'
 import { findTabbable } from '@instructure/ui-dom-utils'
 import {
   ChevronLeftInstUIIcon,
@@ -48,6 +52,7 @@ const SubNavLevel = (props: SubNavLevelProps) => {
   const {
     subNav,
     titleId,
+    collapsible,
     closeSubNavLabel,
     onClose,
     back,
@@ -99,6 +104,10 @@ const SubNavLevel = (props: SubNavLevelProps) => {
     )
   }
 
+  const handleCloseRef = (element: Element | null) => {
+    closeRef.current = element as HTMLElement | null
+  }
+
   const items = subNav.items ?? []
 
   return (
@@ -129,19 +138,26 @@ const SubNavLevel = (props: SubNavLevelProps) => {
             </CondensedButton>
           </span>
         )}
-        <IconButton
-          screenReaderLabel={closeSubNavLabel}
-          // the icon mirrors itself in RTL
-          renderIcon={PanelLeftCloseInstUIIcon}
-          withBackground={false}
-          withBorder={false}
-          size="small"
-          elementRef={(element) => {
-            closeRef.current = element as HTMLElement | null
-          }}
-          // IconButton types the event target as ViewProps, at runtime it is the DOM button
-          onClick={(event) => onClose(event as unknown as SyntheticEvent)}
-        />
+        {collapsible ? (
+          <IconButton
+            screenReaderLabel={closeSubNavLabel}
+            renderIcon={PanelLeftCloseInstUIIcon}
+            withBackground={false}
+            withBorder={false}
+            size="small"
+            elementRef={handleCloseRef}
+            // the cast is safe: the click event is typed for ViewProps, but React passes the DOM button's event
+            onClick={(event) => onClose(event as unknown as SyntheticEvent)}
+          />
+        ) : (
+          <CloseButton
+            screenReaderLabel={closeSubNavLabel}
+            size="small"
+            elementRef={handleCloseRef}
+            // the cast is safe: the click event is typed for ViewProps, but React passes the DOM button's event
+            onClick={(event) => onClose(event as unknown as SyntheticEvent)}
+          />
+        )}
       </div>
       <h2 id={titleId} css={styles?.title}>
         {subNav.title}

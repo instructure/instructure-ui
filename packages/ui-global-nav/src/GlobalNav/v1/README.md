@@ -30,6 +30,7 @@ const Example = () => {
         expandLabel="Expand navigation"
         backLabel={(title) => `Back to ${title}`}
         closeSubNavLabel="Close sub navigation"
+        collapseSubNavLabel="Collapse sub navigation"
         expandSubNavLabel="Open sub navigation"
         openSubNav={openSubNav}
         onSubNavChange={(_e, itemID) => setOpenSubNav(itemID)}
@@ -196,6 +197,7 @@ const Example = () => {
         expandLabel="Expand navigation"
         backLabel={(title) => `Back to ${title}`}
         closeSubNavLabel="Close sub navigation"
+        collapseSubNavLabel="Collapse sub navigation"
         expandSubNavLabel="Open sub navigation"
         openSubNav={openSubNav}
         onSubNavChange={(_e, itemID) => setOpenSubNav(itemID)}
@@ -227,5 +229,6 @@ render(<Example />)
 - Opening a SubNav or a deeper level moves focus to its first item, to the first focusable element of custom content, or else to the close handle. Back returns focus to the item that opened the level, and closing returns it to the rail item. Focus doesn't move when the app sets `openSubNav` itself.
 - A SubNav opens on the level of its deepest `current` item.
 - Set `current` on the rail item of the current page's section. Closing its SubNav then leaves a narrow strip that opens it again on click. Other SubNavs close completely.
+- The SubNav of the current page's section has a collapse handle, named by `collapseSubNavLabel`. Other SubNavs have a close button, named by `closeSubNavLabel`.
 - The back button shows the title of the level it returns to, and `backLabel` gets that title for the screen reader text, for example "Back to Courses".
 - `renderContent` shows any content in place of `items`, inside the panel frame. Use it for content that can't be navigation items yet, for example while migrating an existing product.

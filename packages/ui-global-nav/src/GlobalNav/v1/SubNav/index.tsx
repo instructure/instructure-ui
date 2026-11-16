@@ -69,6 +69,7 @@ const SubNav = (props: SubNavProps) => {
     subNav,
     subNavId,
     titleId,
+    collapsible,
     closeSubNavLabel,
     backLabel,
     onClose,
@@ -110,6 +111,7 @@ const SubNav = (props: SubNavProps) => {
         key={JSON.stringify(resolvedPath)}
         subNav={level.subNav}
         titleId={titleId}
+        collapsible={collapsible}
         closeSubNavLabel={closeSubNavLabel}
         onClose={onClose}
         back={

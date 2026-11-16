@@ -250,9 +250,13 @@ type GlobalNavOwnProps = {
    */
   backLabel: (parentTitle: string) => string
   /**
-   * Screen reader text of the handle that closes the open SubNav.
+   * Screen reader text of the button that closes a SubNav.
    */
   closeSubNavLabel: string
+  /**
+   * Screen reader text of the handle that collapses the current page's SubNav to the strip, `closeSubNavLabel` if not set.
+   */
+  collapseSubNavLabel?: string
   /**
    * Screen reader text of the button that opens the SubNav of the current page again.
    */
@@ -299,6 +303,7 @@ const allowedProps: AllowedPropKeys = [
   'expandLabel',
   'backLabel',
   'closeSubNavLabel',
+  'collapseSubNavLabel',
   'expandSubNavLabel',
   'openSubNav',
   'onSubNavChange',

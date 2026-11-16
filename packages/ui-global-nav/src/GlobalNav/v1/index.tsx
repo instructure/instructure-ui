@@ -57,6 +57,7 @@ const GlobalNav = forwardRef<HTMLElement, GlobalNavProps>(
       expandLabel,
       backLabel,
       closeSubNavLabel,
+      collapseSubNavLabel,
       expandSubNavLabel,
       openSubNav,
       onSubNavChange,
@@ -125,6 +126,8 @@ const GlobalNav = forwardRef<HTMLElement, GlobalNavProps>(
 
     // the SubNav of the current page collapses to a strip, other SubNavs close completely
     const currentSectionItem = items.find((item) => item.current && item.subNav)
+    const collapsible =
+      !!openItem && openItem.itemID === currentSectionItem?.itemID
 
     useEffect(() => {
       const intent = focusIntentRef.current
@@ -223,7 +226,12 @@ const GlobalNav = forwardRef<HTMLElement, GlobalNavProps>(
               subNav={openItem.subNav}
               subNavId={subNavId}
               titleId={titleId}
-              closeSubNavLabel={closeSubNavLabel}
+              collapsible={collapsible}
+              closeSubNavLabel={
+                collapsible
+                  ? collapseSubNavLabel ?? closeSubNavLabel
+                  : closeSubNavLabel
+              }
               backLabel={backLabel}
               onClose={handleSubNavClose}
               focusIntentRef={focusIntentRef}

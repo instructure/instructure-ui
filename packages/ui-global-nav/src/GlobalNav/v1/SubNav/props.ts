@@ -55,6 +55,10 @@ type SubNavProps = {
    */
   titleId: string
   /**
+   * Whether closing the SubNav leaves the strip, which the close handle shows with its icon.
+   */
+  collapsible: boolean
+  /**
    * Screen reader text of the close handle.
    */
   closeSubNavLabel: string
