@@ -27,8 +27,8 @@ import type { SyntheticEvent } from 'react'
 import { useStyleNew } from '@instructure/emotion'
 import { IconButton } from '@instructure/ui-buttons/latest'
 import {
-  ChevronsLeftInstUIIcon,
-  ChevronsRightInstUIIcon
+  PanelRightCloseInstUIIcon,
+  PanelRightOpenInstUIIcon
 } from '@instructure/ui-icons'
 
 import type { CollapseButtonProps } from './props.js'
@@ -64,7 +64,7 @@ const CollapseButton = (props: CollapseButtonProps) => {
       <IconButton
         screenReaderLabel={label}
         renderIcon={
-          collapsed ? ChevronsRightInstUIIcon : ChevronsLeftInstUIIcon
+          collapsed ? PanelRightCloseInstUIIcon : PanelRightOpenInstUIIcon
         }
         withBackground={false}
         withBorder={false}
