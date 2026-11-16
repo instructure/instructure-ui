@@ -257,6 +257,11 @@ function calculateNextSnapshotVersion(version: string, prRelease: boolean) {
  */
 async function* publishPackages(packages: any[], version: string, tag: string) {
   for (const pkg of packages) {
+    // not on npm yet, so the first publish gets a 404
+    if (pkg.name === '@instructure/ui-global-nav') {
+      info(`Skipping ${pkg.name}: it has not been bootstrapped on npm`)
+      continue
+    }
     let packageVersions = []
     try {
       const { stdout } = await runCommandAsync(
