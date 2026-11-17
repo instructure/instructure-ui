@@ -90,6 +90,9 @@ const generateStyle = (
             backgroundColor: componentTheme.activeBackgroundColor
           }
         }),
+      // the other GlobalNav focus rings animate with calcFocusOutlineStyles,
+      // which can't take these tokens, because each theme colors a different ring
+      transition: 'box-shadow 0.2s',
       // same focus ring as SideNavBarItem, which has the same focus tokens
       '&:focus': {
         outline: 'none',
