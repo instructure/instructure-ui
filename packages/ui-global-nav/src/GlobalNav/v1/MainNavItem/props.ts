@@ -59,7 +59,7 @@ type MainNavItemProps = {
 }
 
 type MainNavItemStyle = ComponentStyle<
-  'item' | 'icon' | 'label' | 'chevron' | 'tooltipTrigger'
+  'item' | 'icon' | 'badge' | 'label' | 'chevron' | 'tooltipTrigger'
 >
 
 export type { MainNavItemProps, MainNavItemStyle }

@@ -53,7 +53,6 @@ const MainNavItem = (props: MainNavItemProps) => {
   })
 
   const label = item.label
-  const icon = <span css={styles?.icon}>{callRenderProp(item.icon)}</span>
 
   const badgeCount = item.badgeCount ?? 0
   const badgeLabel =
@@ -66,26 +65,24 @@ const MainNavItem = (props: MainNavItemProps) => {
     ) : (
       formattedCount
     )
+  const badge = badgeCount > 0 && (
+    <Badge standalone count={badgeCount} formatOutput={formatBadge} />
+  )
 
   const content = collapsed ? (
     <>
       {/* before the icon, so the name reads the label first and then the badge */}
       <ScreenReaderContent>{label}</ScreenReaderContent>
-      {badgeCount > 0 ? (
-        <Badge count={badgeCount} formatOutput={formatBadge}>
-          {icon}
-        </Badge>
-      ) : (
-        icon
-      )}
+      <span css={styles?.icon}>
+        {callRenderProp(item.icon)}
+        {badge && <span css={styles?.badge}>{badge}</span>}
+      </span>
     </>
   ) : (
     <>
-      {icon}
+      <span css={styles?.icon}>{callRenderProp(item.icon)}</span>
       <span css={styles?.label}>{label}</span>
-      {badgeCount > 0 && (
-        <Badge standalone count={badgeCount} formatOutput={formatBadge} />
-      )}
+      {badge}
       {item.subNav && (
         <span css={styles?.chevron}>
           <ChevronRightInstUIIcon />

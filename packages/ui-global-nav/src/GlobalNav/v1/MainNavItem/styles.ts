@@ -100,10 +100,20 @@ const generateStyle = (
     },
     icon: {
       label: 'mainNavItem__icon',
+      position: 'relative',
       display: 'flex',
       alignItems: 'center',
       flexShrink: 0,
       height: componentTheme.iconWrapperHeight
+    },
+    badge: {
+      label: 'mainNavItem__badge',
+      position: 'absolute',
+      top: 0,
+      // the badge starts at the icon's center, so a longer count grows away from the icon
+      insetInlineStart: '50%',
+      // flex, so the item's line height doesn't push the badge down
+      display: 'flex'
     },
     label: {
       label: 'mainNavItem__label',
