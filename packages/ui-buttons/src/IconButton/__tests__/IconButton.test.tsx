@@ -195,6 +195,20 @@ describe('<IconButton/>', () => {
     expect(button).toHaveAttribute('disabled')
   })
 
+  it('should set aria-disabled when disabled and rendered as a link', async () => {
+    await render(
+      <IconButton
+        screenReaderLabel="some action"
+        renderIcon={icon}
+        href="https://example.com"
+        interaction="disabled"
+      />
+    )
+    const link = page.getByRole('link', { name: 'some action' }).element()
+
+    expect(link).toHaveAttribute('aria-disabled', 'true')
+  })
+
   it('should pass the `onClick` prop', async () => {
     const onClick = vi.fn()
 
