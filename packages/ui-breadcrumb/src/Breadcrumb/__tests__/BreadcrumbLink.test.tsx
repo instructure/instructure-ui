@@ -61,6 +61,15 @@ describe('<BreadcrumbLink />', () => {
     expect(anchor).toHaveAttribute('href', TEST_LINK)
   })
 
+  it('should not clip the descenders of the text', async () => {
+    await render(
+      <BreadcrumbLink href={TEST_LINK}>Student Forecast gjpqy</BreadcrumbLink>
+    )
+    const anchor = page.getByRole('link').element()
+    const text = anchor.querySelector('span') as HTMLElement
+    expect(text.scrollHeight).toBeLessThanOrEqual(text.clientHeight)
+  })
+
   it('should render as a button and respond to onClick event', async () => {
     const onClick = vi.fn()
 

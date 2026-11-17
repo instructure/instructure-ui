@@ -37,6 +37,7 @@ const generateStyle = (_componentTheme: never): BreadcrumbLinkStyle => {
     text: {
       label: 'breadcrumbLink__text',
       display: 'block',
+      lineHeight: 1.5,
       overflow: 'hidden',
       textOverflow: 'ellipsis',
       whiteSpace: 'nowrap'
