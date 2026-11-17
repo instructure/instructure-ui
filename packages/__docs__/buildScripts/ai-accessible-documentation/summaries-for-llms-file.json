@@ -473,6 +473,14 @@
     "summary": "Theme overrides for version `/v11_7` and later on the new token-based theming. Layered model: `primitives` → `semantics` → `components`, plus `sharedTokens` for cross-component patterns (focus rings, box shadows). Apply via structured `themeOverride` on `InstUISettingsProvider` keyed by token layer, or per-component `themeOverride` prop (object or `(componentTheme) => ({...})` function). Per-component overrides have highest priority."
   },
   {
+    "title": "legacy-institutional-theming",
+    "summary": "Branding (user customizable theming) for version `/v11_6` and earlier. Override the `canvas` theme's `ic-brand-*` variables via `themeOverride` on `InstUISettingsProvider` to recolor Tabs, Button, Link, Billboard and SideNavBar. `canvas-high-contrast` does not support branding."
+  },
+  {
+    "title": "new-institutional-theming",
+    "summary": "Branding (user customizable theming) for version `/v11_7` and later. The legacy `ic-brand-*` variables map to `semantics.color.institutional.*` tokens (e.g. `brandPrimary`, `linkColor`), overridden via `themeOverride.semantics` on `InstUISettingsProvider`. Supported on `canvas` and `light`; `dark` is coming soon; high-contrast themes never support it."
+  },
+  {
     "title": "Upgrade Guide for Version 11",
     "summary": "v11 removes deprecated APIs: `InstUISettingsProvider` `as` prop, Table props (use context), and global theming (`canvas.use()`). Codemods automate most changes. Check for API changes like `getComputedStyle` returning `undefined` and TimeSelect behavior on clear."
   }
