@@ -39,8 +39,6 @@ import generateStyle from './styles.js'
 import type { SegmentedControlOptionProps } from './props'
 import { allowedProps } from './props.js'
 
-const buttonSizes = { sm: 'small', md: 'medium', lg: 'large' } as const
-
 /**
 ---
 parent: SegmentedControl
@@ -51,26 +49,13 @@ const SegmentedControlOption = forwardRef<
   HTMLButtonElement,
   SegmentedControlOptionProps
 >((props, ref) => {
-  const {
-    value,
-    renderLabel,
-    renderIcon,
-    screenReaderLabel,
-    isDisabled: isOptionDisabled = false,
-    themeOverride
-  } = props
+  const { value, renderLabel, renderIcon, screenReaderLabel, themeOverride } =
+    props
 
-  const {
-    size,
-    isDisabled: isGroupDisabled,
-    selectedValue,
-    tabbableValue,
-    onSelect,
-    onKeyDown
-  } = useContext(SegmentedControlContext)
+  const { size, selectedValue, tabbableValue, onSelect, onKeyDown } =
+    useContext(SegmentedControlContext)
 
   const isSelected = selectedValue === value
-  const isDisabled = isOptionDisabled || isGroupDisabled
   const hasLabel = renderLabel != null
 
   error(
@@ -81,7 +66,7 @@ const SegmentedControlOption = forwardRef<
   const styles = useStyleNew({
     generateStyle,
     themeOverride,
-    params: { size, isSelected, isDisabled },
+    params: { size, isSelected },
     componentId: 'SegmentedControl',
     displayName: 'SegmentedControlOption'
   })
@@ -95,11 +80,10 @@ const SegmentedControlOption = forwardRef<
       role="radio"
       aria-checked={isSelected}
       aria-label={screenReaderLabel ?? props['aria-label']}
-      size={buttonSizes[size]}
+      size={size}
       color="secondary"
       withBackground={isSelected}
       withBorder={false}
-      interaction={isDisabled ? 'disabled' : 'enabled'}
       tabIndex={value === tabbableValue ? 0 : -1}
       renderIcon={renderIcon}
       onClick={(event) => {

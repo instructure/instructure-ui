@@ -33,7 +33,6 @@ import type { SegmentedControlOptionStyle } from './props'
 type StyleParams = {
   size: NonNullable<SegmentedControlProps['size']>
   isSelected: boolean
-  isDisabled: boolean
 }
 
 /**
@@ -49,24 +48,24 @@ const generateStyle = (
   componentTheme: ReturnType<NewComponentTypes['SegmentedControl']>,
   params: StyleParams
 ): SegmentedControlOptionStyle => {
-  const { size, isSelected, isDisabled } = params
+  const { size, isSelected } = params
 
   const shadow = boxShadowObjectsToCSSString(componentTheme.selectedItemShadow)
 
   const sizes = {
-    sm: {
+    small: {
       smallHeight: componentTheme.heightSm,
       smallPaddingHorizontal: componentTheme.itemPaddingHorizontalSm,
       smallFontSize: componentTheme.fontSizeSm,
       gapButtonContentSm: componentTheme.itemGapSm
     },
-    md: {
+    medium: {
       mediumHeight: componentTheme.heightMd,
       mediumPaddingHorizontal: componentTheme.itemPaddingHorizontalMd,
       mediumFontSize: componentTheme.fontSizeMd,
       gapButtonContentMd: componentTheme.itemGapMd
     },
-    lg: {
+    large: {
       largeHeight: componentTheme.heightLg,
       largePaddingHorizontal: componentTheme.itemPaddingHorizontalLg,
       largeFontSize: componentTheme.fontSizeLg,
@@ -79,17 +78,14 @@ const generateStyle = (
     ? {
         secondaryColor: componentTheme.selectedItemTextColor,
         secondaryBackground: componentTheme.selectedItemBackgroundColor,
-        secondaryBoxShadow: isDisabled ? 'none' : shadow,
+        secondaryBoxShadow: shadow,
         secondaryHoverBackground:
           componentTheme.selectedItemBackgroundHoverColor,
         secondaryHoverTextColor: componentTheme.selectedItemTextColor,
         secondaryHoverBoxShadow: shadow,
         secondaryActiveBackground:
           componentTheme.selectedItemBackgroundActiveColor,
-        secondaryActiveTextColor: componentTheme.selectedItemTextColor,
-        secondaryDisabledBackgroundColor:
-          componentTheme.selectedItemBackgroundDisabledColor,
-        secondaryDisabledTextColor: componentTheme.selectedItemTextDisabledColor
+        secondaryActiveTextColor: componentTheme.selectedItemTextColor
       }
     : {
         secondaryGhostColor: componentTheme.unselectedItemTextColor,
@@ -99,9 +95,7 @@ const generateStyle = (
           componentTheme.unselectedItemBackgroundHoverColor,
         secondaryGhostHoverBoxShadow: 'none',
         secondaryGhostActiveBackground:
-          componentTheme.unselectedItemBackgroundActiveColor,
-        secondaryDisabledTextColor:
-          componentTheme.unselectedItemTextDisabledColor
+          componentTheme.unselectedItemBackgroundActiveColor
       }
 
   return {
@@ -114,12 +108,10 @@ const generateStyle = (
       lineHeight: componentTheme.lineHeight,
       paddingVertical: '0',
       opacityBase: componentTheme.opacityBase,
-      opacityDisabled: componentTheme.opacityDisabled,
       secondaryBorderColor: 'transparent',
       secondaryGhostBorderColor: 'transparent',
       secondaryHoverBorderColor: 'transparent',
-      secondaryActiveBorderColor: 'transparent',
-      secondaryDisabledBorderColor: 'transparent'
+      secondaryActiveBorderColor: 'transparent'
     }
   }
 }

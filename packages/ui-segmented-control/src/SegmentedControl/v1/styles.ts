@@ -22,14 +22,10 @@
  * SOFTWARE.
  */
 
-import type { NewComponentTypes } from '@instructure/ui-themes'
+import { boxShadowObjectsToCSSString } from '@instructure/ui-themes'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 
-import type { SegmentedControlProps, SegmentedControlStyle } from './props'
-
-type StyleParams = {
-  isDisabled: SegmentedControlProps['isDisabled']
-  isOverflown: SegmentedControlProps['isOverflown']
-}
+import type { SegmentedControlStyle } from './props'
 
 /**
  * ---
@@ -37,15 +33,15 @@ type StyleParams = {
  * ---
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
- * @param params Additional parameters to customize the style.
+ * @param _params Unused, the control has no style parameters.
+ * @param  {Object} sharedTokens Shared token object
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
   componentTheme: ReturnType<NewComponentTypes['SegmentedControl']>,
-  params: StyleParams
+  _params: undefined,
+  sharedTokens: SharedTokens
 ): SegmentedControlStyle => {
-  const { isDisabled, isOverflown } = params
-
   return {
     overflowWrapper: {
       label: 'segmentedControl__overflowWrapper',
@@ -53,21 +49,34 @@ const generateStyle = (
       position: 'relative',
       maxWidth: '100%'
     },
+    // the padding makes a hit area that reaches from the track edge past the
+    // button, so a near miss can't land on the option underneath
     arrow: {
       label: 'segmentedControl__arrow',
       display: 'flex',
+      alignItems: 'center',
       position: 'absolute',
-      top: '50%',
-      transform: 'translateY(-50%)',
-      zIndex: 1
+      top: 0,
+      bottom: 0,
+      zIndex: 1,
+      // the shadow belongs to the floating button, not the padded hit area
+      '& > *': {
+        boxShadow: boxShadowObjectsToCSSString(
+          sharedTokens.boxShadow.elevation3
+        )
+      }
     },
     arrowPrevious: {
       label: 'segmentedControl__arrowPrevious',
-      insetInlineStart: componentTheme.trackPadding
+      insetInlineStart: 0,
+      paddingInlineStart: componentTheme.trackPadding,
+      paddingInlineEnd: componentTheme.arrowPaddingLg
     },
     arrowNext: {
       label: 'segmentedControl__arrowNext',
-      insetInlineEnd: componentTheme.trackPadding
+      insetInlineEnd: 0,
+      paddingInlineStart: componentTheme.arrowPaddingLg,
+      paddingInlineEnd: componentTheme.trackPadding
     },
     segmentedControl: {
       label: 'segmentedControl',
@@ -78,19 +87,13 @@ const generateStyle = (
       gap: componentTheme.trackGap,
       padding: componentTheme.trackPadding,
       borderRadius: componentTheme.TrackBorderRadius,
-      background: isDisabled
-        ? componentTheme.trackBackgroundDisabledColor
-        : componentTheme.trackBackgroundColor,
-      opacity: isDisabled
-        ? componentTheme.opacityDisabled
-        : componentTheme.opacityBase,
-      ...(isOverflown && {
-        minWidth: 0,
-        overflowX: 'auto',
-        scrollbarWidth: 'none',
-        '&::-webkit-scrollbar': { display: 'none' },
-        '& > [role="radio"]': { flexShrink: 0 }
-      })
+      background: componentTheme.trackBackgroundColor,
+      opacity: componentTheme.opacityBase,
+      minWidth: 0,
+      overflowX: 'auto',
+      scrollbarWidth: 'none',
+      '&::-webkit-scrollbar': { display: 'none' },
+      '& > [role="radio"]': { flexShrink: 0 }
     }
   }
 }

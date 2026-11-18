@@ -53,8 +53,6 @@ import type { SegmentedControlProps } from './props'
 import { allowedProps } from './props.js'
 import { useOverflowScroll } from './useOverflowScroll.js'
 
-const arrowSizes = { sm: 'small', md: 'medium', lg: 'large' } as const
-
 /**
 ---
 category: components
@@ -67,9 +65,7 @@ const SegmentedControlBase = forwardRef<HTMLDivElement, SegmentedControlProps>(
       value,
       defaultValue,
       onChange,
-      size = 'md',
-      isDisabled = false,
-      isOverflown = false,
+      size = 'medium',
       renderPreviousLabel,
       renderNextLabel,
       themeOverride
@@ -80,6 +76,11 @@ const SegmentedControlBase = forwardRef<HTMLDivElement, SegmentedControlProps>(
     const selectedValue = isControlled ? value : uncontrolledValue
 
     error(
+      !!props['aria-label'] || !!props['aria-labelledby'],
+      '[SegmentedControl] Give the control an accessible name with `aria-label` or `aria-labelledby`.'
+    )
+
+    error(
       !isControlled || !!onChange,
       '[SegmentedControl] The `value` prop requires an `onChange` handler, otherwise the selection can never change.'
     )
@@ -87,15 +88,15 @@ const SegmentedControlBase = forwardRef<HTMLDivElement, SegmentedControlProps>(
     const styles = useStyleNew({
       generateStyle,
       themeOverride,
-      params: { isDisabled, isOverflown },
       componentId: 'SegmentedControl',
       displayName: 'SegmentedControl'
     })
 
     error(
-      !isOverflown || (!!renderPreviousLabel && !!renderNextLabel),
-      '[SegmentedControl] `isOverflown` needs `renderPreviousLabel` and `renderNextLabel` so screen readers can name the arrows.'
+      !!renderPreviousLabel === !!renderNextLabel,
+      '[SegmentedControl] `renderPreviousLabel` and `renderNextLabel` must be set together, otherwise the scroll arrows cannot be named.'
     )
+    const hasArrows = !!renderPreviousLabel && !!renderNextLabel
 
     const trackRef = useRef<HTMLDivElement | null>(null)
     const previousArrowRef = useRef<HTMLSpanElement | null>(null)
@@ -106,11 +107,10 @@ const SegmentedControlBase = forwardRef<HTMLDivElement, SegmentedControlProps>(
     const optionProps = optionElements.map(
       (child) => child.props as SegmentedControlOptionProps
     )
-    const enabledOptions = optionProps.filter((option) => !option.isDisabled)
-    const selectedOption = enabledOptions.find(
+    const selectedOption = optionProps.find(
       (option) => option.value === selectedValue
     )
-    const tabbableValue = (selectedOption ?? enabledOptions[0])?.value
+    const tabbableValue = (selectedOption ?? optionProps[0])?.value
 
     error(
       optionElements.every((child) => child.type === SegmentedControlOption),
@@ -120,7 +120,7 @@ const SegmentedControlBase = forwardRef<HTMLDivElement, SegmentedControlProps>(
     // the overflow styles are not applied before the first render has finished
     const { canScrollPrevious, canScrollNext, scroll } = useOverflowScroll({
       trackRef,
-      isEnabled: isOverflown && !!styles,
+      isEnabled: !!styles,
       selectedValue,
       previousArrowRef,
       nextArrowRef
@@ -140,23 +140,22 @@ const SegmentedControlBase = forwardRef<HTMLDivElement, SegmentedControlProps>(
       if (!group) return
 
       const options = Array.from(
-        group.querySelectorAll<HTMLButtonElement>(
-          '[role="radio"]:not(:disabled)'
-        )
+        group.querySelectorAll<HTMLButtonElement>('[role="radio"]')
       )
       const current = options.indexOf(event.currentTarget as never)
       // the index mapping below only holds when every radio comes from an option child
-      if (current === -1 || options.length !== enabledOptions.length) return
+      if (current === -1 || options.length !== optionProps.length) return
 
       const isRtl = getComputedStyle(group).direction === 'rtl'
       const forward = isRtl ? 'ArrowLeft' : 'ArrowRight'
       const backward = isRtl ? 'ArrowRight' : 'ArrowLeft'
 
+      // the ends don't wrap, so Tab is the way out of the control
       let next: number | undefined
       if (event.key === forward || event.key === 'ArrowDown') {
-        next = (current + 1) % options.length
+        next = Math.min(current + 1, options.length - 1)
       } else if (event.key === backward || event.key === 'ArrowUp') {
-        next = (current - 1 + options.length) % options.length
+        next = Math.max(current - 1, 0)
       } else if (event.key === 'Home') {
         next = 0
       } else if (event.key === 'End') {
@@ -165,9 +164,8 @@ const SegmentedControlBase = forwardRef<HTMLDivElement, SegmentedControlProps>(
 
       if (next !== undefined) {
         event.preventDefault()
+        // moving focus doesn't select, so users can browse before choosing
         options[next].focus()
-        // enabled radios in the DOM follow the order of the enabled children
-        handleSelect(event, enabledOptions[next].value)
       }
     }
 
@@ -175,7 +173,6 @@ const SegmentedControlBase = forwardRef<HTMLDivElement, SegmentedControlProps>(
       <div
         {...passthroughProps(omitProps(props, allowedProps))}
         role="radiogroup"
-        aria-disabled={isDisabled || undefined}
         css={styles?.segmentedControl}
         ref={trackRef}
         data-cid="SegmentedControl"
@@ -198,8 +195,8 @@ const SegmentedControlBase = forwardRef<HTMLDivElement, SegmentedControlProps>(
             screenReaderLabel={callRenderProp(
               isPrevious ? renderPreviousLabel : renderNextLabel
             )}
-            size={arrowSizes[size]}
-            color="primary"
+            size={size}
+            color="primary-inverse"
             renderIcon={
               isPrevious ? (
                 <ChevronLeftInstUIIcon />
@@ -218,22 +215,17 @@ const SegmentedControlBase = forwardRef<HTMLDivElement, SegmentedControlProps>(
       <SegmentedControlContext.Provider
         value={{
           size,
-          isDisabled,
           selectedValue,
           tabbableValue,
           onSelect: handleSelect,
           onKeyDown: handleKeyDown
         }}
       >
-        {isOverflown ? (
-          <div css={styles?.overflowWrapper}>
-            {radioGroup}
-            {canScrollPrevious && renderArrow('previous')}
-            {canScrollNext && renderArrow('next')}
-          </div>
-        ) : (
-          radioGroup
-        )}
+        <div css={styles?.overflowWrapper}>
+          {radioGroup}
+          {hasArrows && canScrollPrevious && renderArrow('previous')}
+          {hasArrows && canScrollNext && renderArrow('next')}
+        </div>
       </SegmentedControlContext.Provider>
     )
   }

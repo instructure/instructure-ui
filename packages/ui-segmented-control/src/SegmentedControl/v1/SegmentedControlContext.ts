@@ -29,7 +29,6 @@ import type { SegmentedControlProps } from './props'
 
 type SegmentedControlContextValue = {
   size: NonNullable<SegmentedControlProps['size']>
-  isDisabled: boolean
   selectedValue?: string
   // the single option that sits in the tab order (roving tabindex)
   tabbableValue?: string
@@ -38,8 +37,7 @@ type SegmentedControlContextValue = {
 }
 
 const SegmentedControlContext = createContext<SegmentedControlContextValue>({
-  size: 'md',
-  isDisabled: false,
+  size: 'medium',
   onSelect: () => undefined,
   onKeyDown: () => undefined
 })

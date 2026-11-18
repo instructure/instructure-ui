@@ -56,6 +56,7 @@ const components = [
   'options',
   'pagination',
   'progressbar',
+  'segmentedcontrol',
   'select',
   'skeleton',
   'table',

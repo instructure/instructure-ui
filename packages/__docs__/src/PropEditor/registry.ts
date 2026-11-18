@@ -796,18 +796,13 @@ render(<Example />)`
       {
         id: 'SegmentedControl',
         config: {
-          include: ['size', 'isDisabled', 'defaultValue'],
+          include: ['size', 'defaultValue'],
           defaults: { defaultValue: 'week' }
         }
-      },
-      {
-        id: 'SegmentedControl.Option',
-        label: 'SegmentedControl.Option (first option)',
-        config: { include: ['isDisabled'] }
       }
     ],
     template: `<SegmentedControl aria-label="Calendar view" {{SegmentedControl}}>
-  <SegmentedControl.Option value="day" renderLabel="Day" {{SegmentedControl.Option}} />
+  <SegmentedControl.Option value="day" renderLabel="Day" />
   <SegmentedControl.Option value="week" renderLabel="Week" />
   <SegmentedControl.Option value="month" renderLabel="Month" />
 </SegmentedControl>`

@@ -48,17 +48,9 @@ type SegmentedControlOwnProps = {
   /**
    * The size of the control and its options.
    */
-  size?: 'sm' | 'md' | 'lg'
+  size?: 'small' | 'medium' | 'large'
   /**
-   * Disables every option.
-   */
-  isDisabled?: boolean
-  /**
-   * Keeps the options on one row and shows arrow buttons to scroll them when they don't fit the available width.
-   */
-  isOverflown?: boolean
-  /**
-   * The accessible name of the arrow that scrolls back to the earlier options.
+   * The accessible name of the arrow that scrolls back to the earlier options. The arrows only appear when both labels are set and the options don't fit the available width.
    */
   renderPreviousLabel?: Renderable
   /**
@@ -89,8 +81,6 @@ const allowedProps: AllowedPropKeys = [
   'defaultValue',
   'onChange',
   'size',
-  'isDisabled',
-  'isOverflown',
   'renderPreviousLabel',
   'renderNextLabel'
 ]

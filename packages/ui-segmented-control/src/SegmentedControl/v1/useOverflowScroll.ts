@@ -22,14 +22,14 @@
  * SOFTWARE.
  */
 
-import { useEffect, useRef, useState } from 'react'
+import { useLayoutEffect, useRef, useState } from 'react'
 import type { RefObject } from 'react'
 
 // share of the visible width that one arrow click moves the options by
 const SCROLL_STEP = 0.75
 
-// fractional layout widths can report a fully visible option as slightly under 1
-const VISIBLE_THRESHOLD = 0.99
+// fractional layout widths can leave a sub-pixel remainder at either end
+const EDGE_TOLERANCE = 1
 
 const getScrollBehavior = (): ScrollBehavior =>
   window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -59,54 +59,48 @@ const useOverflowScroll = ({
   const [canScrollNext, setCanScrollNext] = useState(false)
   const hasPositioned = useRef(false)
 
-  // an end option that is not fully visible means there is more to scroll to,
-  // and options are children, so any change to them re-renders and re-observes
-  useEffect(() => {
+  useLayoutEffect(() => {
     const track = trackRef.current
-    const first = track?.firstElementChild
-    const last = track?.lastElementChild
-    if (!isEnabled || !track || !first || !last) return
+    if (!isEnabled || !track) return
 
-    const update = (
-      isIntersecting: boolean,
+    const apply = (
+      canScroll: boolean,
       setCanScroll: (canScroll: boolean) => void,
       arrowRef: RefObject<HTMLElement | null>
     ) => {
-      setCanScroll(!isIntersecting)
+      setCanScroll(canScroll)
 
       // an arrow that unmounts while focused would drop focus to the page, and
       // scrolling to the focused option would undo the scroll that got us here
-      if (
-        isIntersecting &&
-        arrowRef.current?.contains(document.activeElement)
-      ) {
+      if (!canScroll && arrowRef.current?.contains(document.activeElement)) {
         track
           .querySelector<HTMLElement>('[tabindex="0"]')
           ?.focus({ preventScroll: true })
       }
     }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const { target, isIntersecting } of entries) {
-          // a lone option is both ends
-          if (target === first) {
-            update(isIntersecting, setCanScrollPrevious, previousArrowRef)
-          }
-          if (target === last) {
-            update(isIntersecting, setCanScrollNext, nextArrowRef)
-          }
-        }
-      },
-      { root: track, threshold: VISIBLE_THRESHOLD }
-    )
-    observer.observe(first)
-    observer.observe(last)
-    return () => observer.disconnect()
+    const update = () => {
+      // scrollLeft is negative in right-to-left layouts
+      const distance = Math.abs(track.scrollLeft)
+      const max = track.scrollWidth - track.clientWidth
+      apply(distance > EDGE_TOLERANCE, setCanScrollPrevious, previousArrowRef)
+      apply(distance < max - EDGE_TOLERANCE, setCanScrollNext, nextArrowRef)
+    }
+
+    update()
+    track.addEventListener('scroll', update, { passive: true })
+    const observer = new ResizeObserver(update)
+    observer.observe(track)
+    Array.from(track.children).forEach((child) => observer.observe(child))
+
+    return () => {
+      track.removeEventListener('scroll', update)
+      observer.disconnect()
+    }
   })
 
   // scrollLeft is direction dependent, so move by on-screen distance instead
-  useEffect(() => {
+  useLayoutEffect(() => {
     const track = trackRef.current
     const selected = track?.querySelector('[aria-checked="true"]')
     if (!isEnabled || !track || !selected) return

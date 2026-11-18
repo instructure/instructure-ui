@@ -51,7 +51,6 @@ const renderOverflown = (
     <div style={{ width }}>
       <SegmentedControl
         aria-label="Months"
-        isOverflown
         renderPreviousLabel="Previous options"
         renderNextLabel="Next options"
         defaultValue="jan"
@@ -129,24 +128,19 @@ describe('<SegmentedControl />', () => {
     expect(getRadios(container)[1]).toHaveAttribute('aria-checked', 'false')
   })
 
+  it('should put the first option in the tab order without a selection', async () => {
+    const { container } = await renderControl()
+
+    expect(getRadios(container).map((r) => r.tabIndex)).toEqual([0, -1, -1])
+  })
+
   it('should keep only the selected option in the tab order', async () => {
     const { container } = await renderControl({ defaultValue: 'week' })
 
     expect(getRadios(container).map((r) => r.tabIndex)).toEqual([-1, 0, -1])
   })
 
-  it('should put the first enabled option in the tab order without a selection', async () => {
-    const { container } = await render(
-      <SegmentedControl aria-label="View">
-        <SegmentedControl.Option value="day" renderLabel="Day" isDisabled />
-        <SegmentedControl.Option value="week" renderLabel="Week" />
-      </SegmentedControl>
-    )
-
-    expect(getRadios(container).map((r) => r.tabIndex)).toEqual([-1, 0])
-  })
-
-  it('should move focus and selection with the arrow keys, wrapping around', async () => {
+  it('should move focus without selecting with the arrow keys', async () => {
     const onChange = vi.fn()
     const { container } = await renderControl({
       defaultValue: 'day',
@@ -157,26 +151,37 @@ describe('<SegmentedControl />', () => {
     radios[0].focus()
     await userEvent.keyboard('{ArrowRight}')
     expect(document.activeElement).toBe(radios[1])
-    expect(radios[1]).toHaveAttribute('aria-checked', 'true')
-    expect(onChange.mock.calls[0][1]).toBe('week')
+    await userEvent.keyboard('{ArrowRight}{ArrowLeft}')
+    expect(document.activeElement).toBe(radios[1])
 
-    await userEvent.keyboard('{ArrowLeft}{ArrowLeft}')
-    expect(document.activeElement).toBe(radios[2])
-    expect(radios[2]).toHaveAttribute('aria-checked', 'true')
+    expect(radios[0]).toHaveAttribute('aria-checked', 'true')
+    expect(onChange).not.toHaveBeenCalled()
   })
 
-  it('should move focus and selection to the first and last option with Home and End', async () => {
+  it('should not wrap around at the ends', async () => {
+    const { container } = await renderControl({ defaultValue: 'day' })
+    const radios = getRadios(container)
+
+    radios[0].focus()
+    await userEvent.keyboard('{ArrowLeft}')
+    expect(document.activeElement).toBe(radios[0])
+
+    radios[2].focus()
+    await userEvent.keyboard('{ArrowRight}')
+    expect(document.activeElement).toBe(radios[2])
+  })
+
+  it('should move focus to the first and last option with Home and End', async () => {
     const { container } = await renderControl({ defaultValue: 'week' })
     const radios = getRadios(container)
 
     radios[1].focus()
     await userEvent.keyboard('{End}')
     expect(document.activeElement).toBe(radios[2])
-    expect(radios[2]).toHaveAttribute('aria-checked', 'true')
 
     await userEvent.keyboard('{Home}')
     expect(document.activeElement).toBe(radios[0])
-    expect(radios[0]).toHaveAttribute('aria-checked', 'true')
+    expect(radios[1]).toHaveAttribute('aria-checked', 'true')
   })
 
   it('should select the focused option with Space and Enter', async () => {
@@ -194,47 +199,6 @@ describe('<SegmentedControl />', () => {
     radios[2].focus()
     await userEvent.keyboard('{Enter}')
     expect(onChange.mock.calls[1][1]).toBe('month')
-  })
-
-  it('should skip disabled options when moving with the arrow keys', async () => {
-    const { container } = await render(
-      <SegmentedControl aria-label="View" defaultValue="day">
-        <SegmentedControl.Option value="day" renderLabel="Day" />
-        <SegmentedControl.Option value="week" renderLabel="Week" isDisabled />
-        <SegmentedControl.Option value="month" renderLabel="Month" />
-      </SegmentedControl>
-    )
-    const radios = getRadios(container)
-
-    radios[0].focus()
-    await userEvent.keyboard('{ArrowRight}')
-
-    expect(document.activeElement).toBe(radios[2])
-    expect(radios[1]).toHaveAttribute('aria-checked', 'false')
-  })
-
-  it('should not select a disabled option', async () => {
-    const onChange = vi.fn()
-    const { container } = await render(
-      <SegmentedControl aria-label="View" onChange={onChange}>
-        <SegmentedControl.Option value="day" renderLabel="Day" isDisabled />
-        <SegmentedControl.Option value="week" renderLabel="Week" />
-      </SegmentedControl>
-    )
-
-    await userEvent.click(getRadios(container)[0], { force: true })
-
-    expect(onChange).not.toHaveBeenCalled()
-  })
-
-  it('should disable every option when isDisabled is set', async () => {
-    const { container } = await renderControl({ isDisabled: true })
-
-    expect(getRadios(container).every((r) => r.disabled)).toBe(true)
-    expect(container.querySelector('[role="radiogroup"]')).toHaveAttribute(
-      'aria-disabled',
-      'true'
-    )
   })
 
   it('should name an icon-only option with screenReaderLabel', async () => {
@@ -267,6 +231,19 @@ describe('<SegmentedControl />', () => {
     expect(ref.current).toHaveAttribute('data-cid', 'SegmentedControl')
   })
 
+  it('should log an error without an accessible name', async () => {
+    const consoleError = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => undefined)
+
+    await renderControl({ 'aria-label': undefined })
+
+    expect(consoleError.mock.calls[0][0]).toContain(
+      '[SegmentedControl] Give the control an accessible name'
+    )
+    consoleError.mockRestore()
+  })
+
   it('should log an error when value is set without onChange', async () => {
     const consoleError = vi
       .spyOn(console, 'error')
@@ -280,7 +257,7 @@ describe('<SegmentedControl />', () => {
     consoleError.mockRestore()
   })
 
-  describe('when isOverflown', () => {
+  describe('when the options overflow', () => {
     it('should not render arrows when the options fit', async () => {
       const { container } = await renderOverflown({}, 1000)
 
@@ -289,8 +266,11 @@ describe('<SegmentedControl />', () => {
       ).toHaveLength(0)
     })
 
-    it('should not render arrows without isOverflown', async () => {
-      const { container } = await renderOverflown({ isOverflown: false })
+    it('should not render arrows without labels', async () => {
+      const { container } = await renderOverflown({
+        renderPreviousLabel: undefined,
+        renderNextLabel: undefined
+      })
 
       expect(
         container.querySelectorAll('[data-cid~="SegmentedControlArrow"]')
@@ -357,7 +337,7 @@ describe('<SegmentedControl />', () => {
       expect(onChange).not.toHaveBeenCalled()
     })
 
-    it('should scroll a keyboard-selected option into view', async () => {
+    it('should scroll a keyboard-focused option into view', async () => {
       const { container } = await renderOverflown()
       const radios = getRadios(container)
 
@@ -367,7 +347,42 @@ describe('<SegmentedControl />', () => {
       await expect
         .poll(() => getArrow(container, 'Previous options'))
         .toBeTruthy()
-      expect(radios[7]).toHaveAttribute('aria-checked', 'true')
+      expect(document.activeElement).toBe(radios[7])
+    })
+
+    it('should float the arrows on a shadow with the inverse button colors', async () => {
+      const { container } = await renderOverflown()
+      await expect.poll(() => getArrow(container, 'Next options')).toBeTruthy()
+      const button = getArrow(container, 'Next options')!
+      const style = getComputedStyle(button)
+
+      expect(style.boxShadow).not.toBe('none')
+      // the button's background is on its content layer
+      expect(getComputedStyle(button.firstElementChild!).backgroundColor).toBe(
+        'rgb(255, 255, 255)'
+      )
+    })
+
+    it('should not let a click near an arrow land on an option', async () => {
+      const { container } = await renderOverflown()
+      await expect.poll(() => getArrow(container, 'Next options')).toBeTruthy()
+      const button = getArrow(container, 'Next options')!
+      const area = button.parentElement!.getBoundingClientRect()
+      const track = container
+        .querySelector('[role="radiogroup"]')!
+        .getBoundingClientRect()
+      const box = button.getBoundingClientRect()
+
+      // flush with the track edge, and reaching inward past the button
+      expect(area.right).toBeCloseTo(track.right, 0)
+      expect(box.left - area.left).toBeGreaterThanOrEqual(12)
+
+      const y = box.top + box.height / 2
+      const points = [track.right - 1, area.left + 1]
+      for (const x of points) {
+        const hit = document.elementFromPoint(x, y)
+        expect(hit?.closest('[role="radio"]')).toBeNull()
+      }
     })
 
     it('should keep every option as a radio outside of the arrows', async () => {
@@ -381,18 +396,15 @@ describe('<SegmentedControl />', () => {
       ).toBeNull()
     })
 
-    it('should log an error without arrow labels', async () => {
+    it('should log an error when only one arrow label is set', async () => {
       const consoleError = vi
         .spyOn(console, 'error')
         .mockImplementation(() => undefined)
 
-      await renderOverflown({
-        renderPreviousLabel: undefined,
-        renderNextLabel: undefined
-      })
+      await renderOverflown({ renderPreviousLabel: undefined })
 
       expect(consoleError.mock.calls[0][0]).toContain(
-        '`isOverflown` needs `renderPreviousLabel`'
+        '`renderPreviousLabel` and `renderNextLabel` must be set together'
       )
       consoleError.mockRestore()
     })
@@ -402,7 +414,6 @@ describe('<SegmentedControl />', () => {
         <div style={{ width }}>
           <SegmentedControl
             aria-label="Months"
-            isOverflown
             renderPreviousLabel="Previous options"
             renderNextLabel="Next options"
             defaultValue="jan"
@@ -461,20 +472,6 @@ describe('<SegmentedControl />', () => {
 
         expect(getArrow(container, 'Next options')).toBeFalsy()
         expect(getArrow(container, 'Previous options')).toBeFalsy()
-      })
-
-      it('should disconnect the observer on unmount', async () => {
-        const disconnect = vi.spyOn(
-          IntersectionObserver.prototype,
-          'disconnect'
-        )
-        const { unmount } = await render(tree('a-', months))
-        disconnect.mockClear()
-
-        await unmount()
-
-        expect(disconnect).toHaveBeenCalled()
-        disconnect.mockRestore()
       })
     })
 
@@ -592,15 +589,6 @@ describe('<SegmentedControl />', () => {
 
   it('should meet a11y standards', async () => {
     const { container } = await renderControl({ defaultValue: 'day' })
-
-    expect(await runAxeCheck(container)).toBe(true)
-  })
-
-  it('should meet a11y standards when disabled', async () => {
-    const { container } = await renderControl({
-      defaultValue: 'day',
-      isDisabled: true
-    })
 
     expect(await runAxeCheck(container)).toBe(true)
   })

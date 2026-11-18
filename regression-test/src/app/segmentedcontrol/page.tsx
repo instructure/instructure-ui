@@ -30,20 +30,16 @@ import {
   Text
 } from '@instructure/ui/latest'
 
-const SIZES = ['lg', 'md', 'sm'] as const
+const SIZES = ['large', 'medium', 'small'] as const
 
 function Control({
   size,
-  content,
-  isDisabled,
-  disabledOption
+  content
 }: {
   size: (typeof SIZES)[number]
   content: 'text' | 'icon' | 'text+icon'
-  isDisabled?: boolean
-  disabledOption?: string
 }) {
-  const label = `${content} ${size}${isDisabled ? ' disabled' : ''}`
+  const label = `${content} ${size}`
   const options = [
     { value: 'one', text: 'One', icon: <LayoutGridInstUIIcon />, name: 'Grid' },
     { value: 'two', text: 'Two', icon: <ListInstUIIcon />, name: 'List' },
@@ -55,17 +51,11 @@ function Control({
     }
   ]
   return (
-    <SegmentedControl
-      aria-label={label}
-      size={size}
-      isDisabled={isDisabled}
-      defaultValue="one"
-    >
+    <SegmentedControl aria-label={label} size={size} defaultValue="one">
       {options.map((option) => (
         <SegmentedControl.Option
           key={option.value}
           value={option.value}
-          isDisabled={option.value === disabledOption}
           renderLabel={content === 'icon' ? undefined : option.text}
           renderIcon={content === 'text' ? undefined : option.icon}
           screenReaderLabel={content === 'icon' ? option.name : undefined}
@@ -79,22 +69,16 @@ const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep']
 
 function OverflowControl({
   size,
-  isDisabled,
   defaultValue
 }: {
   size: (typeof SIZES)[number]
-  isDisabled?: boolean
   defaultValue: string
 }) {
   return (
     <div style={{ width: 320 }}>
       <SegmentedControl
-        aria-label={`overflow ${size} ${defaultValue}${
-          isDisabled ? ' disabled' : ''
-        }`}
+        aria-label={`overflow ${size} ${defaultValue}`}
         size={size}
-        isDisabled={isDisabled}
-        isOverflown
         renderPreviousLabel="Show earlier months"
         renderNextLabel="Show later months"
         defaultValue={defaultValue}
@@ -120,8 +104,6 @@ export default function SegmentedControlPage() {
           {SIZES.map((size) => (
             <div key={size} className="flex gap-4 items-center">
               <Control size={size} content={content} />
-              <Control size={size} content={content} isDisabled />
-              <Control size={size} content={content} disabledOption="two" />
             </div>
           ))}
         </section>
@@ -133,7 +115,6 @@ export default function SegmentedControlPage() {
             <OverflowControl size={size} defaultValue="Jan" />
             <OverflowControl size={size} defaultValue="Jun" />
             <OverflowControl size={size} defaultValue="Sep" />
-            <OverflowControl size={size} defaultValue="Jan" isDisabled />
           </div>
         ))}
       </section>

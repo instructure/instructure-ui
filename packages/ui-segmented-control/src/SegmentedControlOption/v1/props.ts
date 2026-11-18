@@ -43,10 +43,6 @@ type SegmentedControlOptionOwnProps = {
    * The accessible name of the option, required when it has no `renderLabel`.
    */
   screenReaderLabel?: string
-  /**
-   * Disables this option.
-   */
-  isDisabled?: boolean
 }
 
 type PropKeys = keyof SegmentedControlOptionOwnProps
@@ -65,8 +61,7 @@ const allowedProps: AllowedPropKeys = [
   'value',
   'renderLabel',
   'renderIcon',
-  'screenReaderLabel',
-  'isDisabled'
+  'screenReaderLabel'
 ]
 
 export type { SegmentedControlOptionProps, SegmentedControlOptionStyle }
