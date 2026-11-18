@@ -23,6 +23,7 @@
  */
 
 import type { ParsedDoc, ProcessedFile } from '../DataTypes.mjs'
+import { getPackageShortName } from './buildVersionMap.mjs'
 
 const CATEGORY_DELIMITER = '/'
 
@@ -60,7 +61,8 @@ export function getClientProps(docs: ProcessedFile[]) {
         order: doc.order,
         category: doc.category,
         isWIP: doc.isWIP,
-        tags: doc.tags
+        tags: doc.tags,
+        packageShortName: getPackageShortName(doc.relativePath)
       }
       docIDs[id] = doc.srcPath
       if (describes) {
