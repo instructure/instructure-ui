@@ -350,6 +350,107 @@ describe('<SegmentedControl />', () => {
       expect(document.activeElement).toBe(radios[7])
     })
 
+    describe('keyboard focus', () => {
+      const expectClearOfArrows = async (container: Element) => {
+        // the arrows mount and unmount in response to the scroll
+        await new Promise((resolve) => setTimeout(resolve, 50))
+        const box = document.activeElement!.getBoundingClientRect()
+        const track = container
+          .querySelector('[role="radiogroup"]')!
+          .getBoundingClientRect()
+
+        expect(box.left).toBeGreaterThanOrEqual(track.left - 0.5)
+        expect(box.right).toBeLessThanOrEqual(track.right + 0.5)
+        for (const name of ['Previous options', 'Next options']) {
+          const area = getArrow(container, name)?.parentElement
+          if (!area) continue
+          const { left, right } = area.getBoundingClientRect()
+          expect(box.right <= left + 0.5 || box.left >= right - 0.5).toBe(true)
+        }
+      }
+
+      it('should keep the focused option clear of the arrows in both directions', async () => {
+        const { container } = await renderOverflown()
+        const radios = getRadios(container)
+        await expect
+          .poll(() => getArrow(container, 'Next options'))
+          .toBeTruthy()
+
+        radios[0].focus()
+        for (let i = 1; i < radios.length; i++) {
+          await userEvent.keyboard('{ArrowRight}')
+          expect(document.activeElement).toBe(radios[i])
+          await expectClearOfArrows(container)
+        }
+        for (let i = radios.length - 2; i >= 0; i--) {
+          await userEvent.keyboard('{ArrowLeft}')
+          expect(document.activeElement).toBe(radios[i])
+          await expectClearOfArrows(container)
+        }
+      })
+
+      it('should keep the focused option clear of the arrows in right-to-left layouts', async () => {
+        const { container } = await render(
+          <div dir="rtl" style={{ width: 200 }}>
+            <SegmentedControl
+              aria-label="Months"
+              renderPreviousLabel="Previous options"
+              renderNextLabel="Next options"
+              defaultValue="jan"
+            >
+              {['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug'].map(
+                (m) => (
+                  <SegmentedControl.Option key={m} value={m} renderLabel={m} />
+                )
+              )}
+            </SegmentedControl>
+          </div>
+        )
+        const radios = getRadios(container)
+        await expect
+          .poll(() => getArrow(container, 'Next options'))
+          .toBeTruthy()
+
+        radios[0].focus()
+        for (let i = 1; i < radios.length; i++) {
+          await userEvent.keyboard('{ArrowLeft}')
+          expect(document.activeElement).toBe(radios[i])
+          await expectClearOfArrows(container)
+        }
+        for (let i = radios.length - 2; i >= 0; i--) {
+          await userEvent.keyboard('{ArrowRight}')
+          expect(document.activeElement).toBe(radios[i])
+          await expectClearOfArrows(container)
+        }
+      })
+
+      it('should not scroll when the focused option is already clear of the arrows', async () => {
+        const { container } = await renderOverflown()
+        const track = container.querySelector<HTMLElement>(
+          '[role="radiogroup"]'
+        )!
+        const radios = getRadios(container)
+        await expect
+          .poll(() => getArrow(container, 'Next options'))
+          .toBeTruthy()
+
+        radios[0].focus()
+        await userEvent.keyboard('{ArrowRight}')
+
+        expect(document.activeElement).toBe(radios[1])
+        expect(track.scrollLeft).toBe(0)
+      })
+
+      it('should call the onFocus passed to the control', async () => {
+        const onFocus = vi.fn()
+        const { container } = await renderOverflown({ onFocus })
+
+        getRadios(container)[0].focus()
+
+        expect(onFocus).toHaveBeenCalledTimes(1)
+      })
+    })
+
     it('should float the arrows on a shadow with the inverse button colors', async () => {
       const { container } = await renderOverflown()
       await expect.poll(() => getArrow(container, 'Next options')).toBeTruthy()

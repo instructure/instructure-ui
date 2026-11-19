@@ -23,7 +23,7 @@
  */
 
 import { useLayoutEffect, useRef, useState } from 'react'
-import type { RefObject } from 'react'
+import type { FocusEvent, RefObject } from 'react'
 
 // share of the visible width that one arrow click moves the options by
 const SCROLL_STEP = 0.75
@@ -58,6 +58,7 @@ const useOverflowScroll = ({
   const [canScrollPrevious, setCanScrollPrevious] = useState(false)
   const [canScrollNext, setCanScrollNext] = useState(false)
   const hasPositioned = useRef(false)
+  const isRestoringFocus = useRef(false)
 
   useLayoutEffect(() => {
     const track = trackRef.current
@@ -73,9 +74,11 @@ const useOverflowScroll = ({
       // an arrow that unmounts while focused would drop focus to the page, and
       // scrolling to the focused option would undo the scroll that got us here
       if (!canScroll && arrowRef.current?.contains(document.activeElement)) {
+        isRestoringFocus.current = true
         track
           .querySelector<HTMLElement>('[tabindex="0"]')
           ?.focus({ preventScroll: true })
+        isRestoringFocus.current = false
       }
     }
 
@@ -114,6 +117,35 @@ const useOverflowScroll = ({
     hasPositioned.current = true
   }, [isEnabled, selectedValue, trackRef])
 
+  // the arrows float over the track edges, so the browser's own scroll on
+  // focus leaves the option hidden underneath them
+  const keepFocusedOptionClear = (event: FocusEvent<HTMLElement>) => {
+    const track = trackRef.current
+    const option = event.target
+    if (!isEnabled || !track || option === track || isRestoringFocus.current) {
+      return
+    }
+
+    const trackBox = track.getBoundingClientRect()
+    const box = option.getBoundingClientRect()
+    const isRtl = getComputedStyle(track).direction === 'rtl'
+    const getWidth = (arrowRef: RefObject<HTMLElement | null>) =>
+      arrowRef.current?.getBoundingClientRect().width ?? 0
+
+    const leftInset = getWidth(isRtl ? nextArrowRef : previousArrowRef)
+    const rightInset = getWidth(isRtl ? previousArrowRef : nextArrowRef)
+    const clippedLeft = box.left - (trackBox.left + leftInset)
+    const clippedRight = box.right - (trackBox.right - rightInset)
+
+    let distance = 0
+    if (clippedLeft < 0) distance = clippedLeft
+    else if (clippedRight > 0) distance = clippedRight
+    if (distance === 0) return
+
+    // the browser's own focus scroll is instant, so this one matches it
+    track.scrollBy({ left: distance, behavior: 'instant' })
+  }
+
   const scroll = (direction: 'previous' | 'next') => {
     const track = trackRef.current
     if (!track) return
@@ -128,7 +160,7 @@ const useOverflowScroll = ({
     })
   }
 
-  return { canScrollPrevious, canScrollNext, scroll }
+  return { canScrollPrevious, canScrollNext, scroll, keepFocusedOptionClear }
 }
 
 export default useOverflowScroll

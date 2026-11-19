@@ -118,13 +118,14 @@ const SegmentedControlBase = forwardRef<HTMLDivElement, SegmentedControlProps>(
     )
 
     // the overflow styles are not applied before the first render has finished
-    const { canScrollPrevious, canScrollNext, scroll } = useOverflowScroll({
-      trackRef,
-      isEnabled: !!styles,
-      selectedValue,
-      previousArrowRef,
-      nextArrowRef
-    })
+    const { canScrollPrevious, canScrollNext, scroll, keepFocusedOptionClear } =
+      useOverflowScroll({
+        trackRef,
+        isEnabled: !!styles,
+        selectedValue,
+        previousArrowRef,
+        nextArrowRef
+      })
 
     const handleSelect = (event: SyntheticEvent, newValue: string) => {
       if (newValue === selectedValue) return
@@ -173,6 +174,10 @@ const SegmentedControlBase = forwardRef<HTMLDivElement, SegmentedControlProps>(
       <div
         {...passthroughProps(omitProps(props, allowedProps))}
         role="radiogroup"
+        onFocus={(event) => {
+          props.onFocus?.(event as never)
+          keepFocusedOptionClear(event)
+        }}
         css={styles?.segmentedControl}
         ref={trackRef}
         data-cid="SegmentedControl"
