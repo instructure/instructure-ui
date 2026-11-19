@@ -23,6 +23,7 @@
  */
 
 import type { NewComponentTypes } from '@instructure/ui-themes'
+import { calcBandFocusStyles } from '../utils/calcBandFocusStyles.js'
 import type { AccountItemStyle } from './props.js'
 
 type StyleParams = {
@@ -92,13 +93,15 @@ const generateStyle = (
         !open && {
           '&:hover': { backgroundColor: componentTheme.hoverBackgroundColor }
         }),
-      // same focus ring as MainNavItem, which has the same focus tokens
-      '&:focus': {
-        outline: 'none',
-        boxShadow: current
-          ? `inset 0 0 0 0.125rem ${componentTheme.selectedOuterFocusOutlineColor}, inset 0 0 0 0.25rem ${componentTheme.selectedInnerFocusOutlineColor}`
-          : `inset 0 0 0 0.125rem ${componentTheme.outerFocusOutlineColor}, inset 0 0 0 0.25rem ${componentTheme.innerFocusOutlineColor}`
-      }
+      ...(current
+        ? calcBandFocusStyles(
+            componentTheme.selectedOuterFocusOutlineColor,
+            componentTheme.selectedInnerFocusOutlineColor
+          )
+        : calcBandFocusStyles(
+            componentTheme.outerFocusOutlineColor,
+            componentTheme.innerFocusOutlineColor
+          ))
     },
     avatar: {
       label: 'accountItem__avatar',

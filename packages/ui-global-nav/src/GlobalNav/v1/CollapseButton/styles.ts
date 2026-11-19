@@ -23,6 +23,7 @@
  */
 
 import type { NewComponentTypes } from '@instructure/ui-themes'
+import { calcBandFocusStyles } from '../utils/calcBandFocusStyles.js'
 import type {
   CollapseButtonIconStyle,
   CollapseButtonSizeStyle,
@@ -67,11 +68,10 @@ const generateStyle = (
       cursor: 'pointer',
       '&:hover': { backgroundColor: componentTheme.hoverBackgroundColor },
       '&:active': { backgroundColor: componentTheme.activeBackgroundColor },
-      // same focus ring as MainNavItem, which has the same focus tokens
-      '&:focus': {
-        outline: 'none',
-        boxShadow: `inset 0 0 0 0.125rem ${componentTheme.outerFocusOutlineColor}, inset 0 0 0 0.25rem ${componentTheme.innerFocusOutlineColor}`
-      }
+      ...calcBandFocusStyles(
+        componentTheme.outerFocusOutlineColor,
+        componentTheme.innerFocusOutlineColor
+      )
     }
   }
 }
