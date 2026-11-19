@@ -31,6 +31,7 @@ const components = [
   'alert',
   'avatar',
   'badge',
+  'banner',
   'billboard',
   'breadcrumb',
   'button',

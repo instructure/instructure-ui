@@ -29,6 +29,7 @@
     "@instructure/ui-alerts": "workspace:*",
     "@instructure/ui-avatar": "workspace:*",
     "@instructure/ui-badge": "workspace:*",
+    "@instructure/ui-banner": "workspace:*",
     "@instructure/ui-billboard": "workspace:*",
     "@instructure/ui-breadcrumb": "workspace:*",
     "@instructure/ui-buttons": "workspace:*",
