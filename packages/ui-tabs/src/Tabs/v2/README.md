@@ -4,6 +4,8 @@ describes: Tabs
 
 `<Tabs />` is an accessible tabbed navigation component. Use the TAB key to focus the component and arrow keys to navigate between panels of content. Home and End jump to the first and last tab, and the arrow keys are mirrored in right-to-left text direction. By default a tab is selected as soon as an arrow key reaches it; see the Manual activation section below to require a key press instead. To set a default panel that should be selected on initial render, set the `selected` prop on that `<Tabs.Panel>`.
 
+Use `Tabs` to move between separate sections of content, each with its own panel. To change how the same content is shown or filtered in place, such as a day, week or month view, use [SegmentedControl](/#SegmentedControl) instead.
+
 ```js
 ---
 type: example

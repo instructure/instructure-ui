@@ -210,6 +210,9 @@
       "path": "../ui-scripts/tsconfig.build.json"
     },
     {
+      "path": "../ui-segmented-control/tsconfig.build.json"
+    },
+    {
       "path": "../ui-select/tsconfig.build.json"
     },
     {
