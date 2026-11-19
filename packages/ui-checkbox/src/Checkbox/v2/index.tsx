@@ -49,9 +49,7 @@ tags: toggle, switch
 ---
 **/
 
-@withDeterministicId()
-@withStyleNew(generateStyle)
-class Checkbox extends Component<CheckboxProps, CheckboxState> {
+export class CheckboxBase extends Component<CheckboxProps, CheckboxState> {
   static displayName = 'Checkbox'
   static readonly componentId = 'Checkbox'
 
@@ -395,6 +393,11 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
     )
   }
 }
+
+const Checkbox = withDeterministicId()(
+  withStyleNew(generateStyle)(CheckboxBase)
+)
+type Checkbox = CheckboxBase
 
 export default Checkbox
 export { Checkbox, CheckboxFacade, ToggleFacade }

@@ -31,8 +31,7 @@ import generateStyle from './styles'
 
 import type { SearchStatusProps } from './props'
 
-@withStyleForDocs(generateStyle)
-class SearchStatus extends Component<SearchStatusProps> {
+export class SearchStatusBase extends Component<SearchStatusProps> {
   static displayName = 'SearchStatus'
   static defaultProps = {
     size: '1.25rem',
@@ -72,6 +71,9 @@ class SearchStatus extends Component<SearchStatusProps> {
     }
   }
 }
+
+const SearchStatus = withStyleForDocs(generateStyle)(SearchStatusBase)
+type SearchStatus = SearchStatusBase
 
 export default SearchStatus
 export { SearchStatus }

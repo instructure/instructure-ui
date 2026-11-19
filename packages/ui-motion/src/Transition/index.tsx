@@ -43,8 +43,7 @@ category: components/Util Components
 ---
 @module Transition
 **/
-@withStyle(generateStyle, generateComponentTheme)
-class Transition extends Component<TransitionProps> {
+export class TransitionBase extends Component<TransitionProps> {
   static displayName = 'Transition'
   static readonly componentId = 'Transition'
 
@@ -131,6 +130,12 @@ class Transition extends Component<TransitionProps> {
     )
   }
 }
+
+const Transition = withStyle(
+  generateStyle,
+  generateComponentTheme
+)(TransitionBase)
+type Transition = TransitionBase
 
 export default Transition
 export { Transition }

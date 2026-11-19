@@ -39,8 +39,7 @@ id: Options.Separator
 ---
 @module Separator
 **/
-@withStyleNew(generateStyles)
-class Separator extends Component<OptionsSeparatorProps> {
+export class SeparatorBase extends Component<OptionsSeparatorProps> {
   static displayName = 'Separator'
   static readonly componentId = 'Options.Separator'
 
@@ -75,6 +74,9 @@ class Separator extends Component<OptionsSeparatorProps> {
     )
   }
 }
+
+const Separator = withStyleNew(generateStyles)(SeparatorBase)
+type Separator = SeparatorBase
 
 export default Separator
 export { Separator }

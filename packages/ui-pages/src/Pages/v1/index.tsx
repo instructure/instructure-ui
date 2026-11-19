@@ -48,9 +48,7 @@ import type { PagesProps, PagesState } from './props'
 category: components
 ---
 **/
-@withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
-class Pages extends Component<PagesProps, PagesState> {
+export class PagesBase extends Component<PagesProps, PagesState> {
   static displayName = 'Pages'
   static readonly componentId = 'Pages'
 
@@ -198,6 +196,11 @@ class Pages extends Component<PagesProps, PagesState> {
     ) : null
   }
 }
+
+const Pages = withDeterministicId()(
+  withStyle(generateStyle, generateComponentTheme)(PagesBase)
+)
+type Pages = PagesBase
 
 export default Pages
 export { Pages, Page }

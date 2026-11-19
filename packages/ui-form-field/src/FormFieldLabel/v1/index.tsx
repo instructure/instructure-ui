@@ -51,8 +51,7 @@ type: example
  @deprecated since version 10. This is an internal component that will be
  removed in the future
 **/
-@withStyle(generateStyle, generateComponentTheme)
-class FormFieldLabel extends Component<FormFieldLabelProps> {
+export class FormFieldLabelBase extends Component<FormFieldLabelProps> {
   static displayName = 'FormFieldLabel'
   static readonly componentId = 'FormFieldLabel'
 
@@ -91,6 +90,12 @@ class FormFieldLabel extends Component<FormFieldLabelProps> {
     )
   }
 }
+
+const FormFieldLabel = withStyle(
+  generateStyle,
+  generateComponentTheme
+)(FormFieldLabelBase)
+type FormFieldLabel = FormFieldLabelBase
 
 export default FormFieldLabel
 export { FormFieldLabel }

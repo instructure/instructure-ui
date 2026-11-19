@@ -47,8 +47,7 @@ parent: Table
 id: Table.Head
 ---
 **/
-@withStyleNew(generateStyle)
-class Head extends Component<TableHeadProps> {
+export class HeadBase extends Component<TableHeadProps> {
   static displayName = 'Head'
   static readonly componentId = 'Table.Head'
   static contextType = TableContext
@@ -196,6 +195,9 @@ class Head extends Component<TableHeadProps> {
     )
   }
 }
+
+const Head = withStyleNew(generateStyle)(HeadBase)
+type Head = HeadBase
 
 export default Head
 export { Head }

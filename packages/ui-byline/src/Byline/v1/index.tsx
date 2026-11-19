@@ -41,8 +41,7 @@ category: components
 ---
 **/
 
-@withStyle(generateStyle, generateComponentTheme)
-class Byline extends Component<BylineProps> {
+export class BylineBase extends Component<BylineProps> {
   static displayName = 'Byline'
   static readonly componentId = 'Byline'
 
@@ -100,6 +99,9 @@ class Byline extends Component<BylineProps> {
     )
   }
 }
+
+const Byline = withStyle(generateStyle, generateComponentTheme)(BylineBase)
+type Byline = BylineBase
 
 export default Byline
 export { Byline }

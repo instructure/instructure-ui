@@ -47,8 +47,7 @@ parent: Calendar
 id: Calendar.Day
 ---
  **/
-@withStyle(generateStyle, generateComponentTheme)
-class Day extends Component<CalendarDayProps> {
+export class DayBase extends Component<CalendarDayProps> {
   static displayName = 'Day'
   static readonly componentId = 'Calendar.Day'
 
@@ -178,6 +177,9 @@ class Day extends Component<CalendarDayProps> {
     )
   }
 }
+
+const Day = withStyle(generateStyle, generateComponentTheme)(DayBase)
+type Day = DayBase
 
 export default Day
 export { Day }

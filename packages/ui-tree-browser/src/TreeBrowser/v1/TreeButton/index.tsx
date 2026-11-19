@@ -42,8 +42,7 @@ parent: TreeBrowser
 id: TreeBrowser.Button
 ---
 **/
-@withStyle(generateStyles, generateComponentTheme)
-class TreeButton extends Component<TreeBrowserButtonProps> {
+export class TreeButtonBase extends Component<TreeBrowserButtonProps> {
   static displayName = 'TreeButton'
   static readonly componentId = 'TreeBrowser.Button'
 
@@ -156,6 +155,12 @@ class TreeButton extends Component<TreeBrowserButtonProps> {
     )
   }
 }
+
+const TreeButton = withStyle(
+  generateStyles,
+  generateComponentTheme
+)(TreeButtonBase)
+type TreeButton = TreeButtonBase
 
 export default TreeButton
 export { TreeButton }

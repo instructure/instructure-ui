@@ -45,8 +45,7 @@ import type { EditableRenderProps } from '../../Editable/v1/props'
 category: components
 ---
 **/
-@withStyle(generateStyle, null)
-class InPlaceEdit extends Component<InPlaceEditProps> {
+export class InPlaceEditBase extends Component<InPlaceEditProps> {
   static displayName = 'InPlaceEdit'
   static readonly componentId = 'InPlaceEdit'
   static allowedProps = allowedProps
@@ -201,6 +200,9 @@ class InPlaceEdit extends Component<InPlaceEditProps> {
     )
   }
 }
+
+const InPlaceEdit = withStyle(generateStyle, null)(InPlaceEditBase)
+type InPlaceEdit = InPlaceEditBase
 
 export default InPlaceEdit
 export { InPlaceEdit }

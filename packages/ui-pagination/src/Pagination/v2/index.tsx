@@ -84,9 +84,7 @@ type ArrowConfig = {
 category: components
 ---
 **/
-@withDeterministicId()
-@withStyleNew(generateStyle)
-class Pagination extends Component<PaginationProps> {
+export class PaginationBase extends Component<PaginationProps> {
   static displayName = 'Pagination'
   static readonly componentId = 'Pagination'
 
@@ -653,6 +651,11 @@ class Pagination extends Component<PaginationProps> {
     )
   }
 }
+
+const Pagination = withDeterministicId()(
+  withStyleNew(generateStyle)(PaginationBase)
+)
+type Pagination = PaginationBase
 
 export default Pagination
 export { Pagination, PaginationButton }

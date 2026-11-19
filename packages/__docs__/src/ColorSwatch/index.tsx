@@ -31,8 +31,7 @@ import generateStyle from './styles'
 import { allowedProps } from './props'
 import type { ColorSwatchProps } from './props'
 
-@withStyleForDocs(generateStyle)
-class ColorSwatch extends Component<ColorSwatchProps> {
+export class ColorSwatchBase extends Component<ColorSwatchProps> {
   static displayName = 'ColorSwatch'
   static allowedProps = allowedProps
   componentDidMount() {
@@ -55,6 +54,9 @@ class ColorSwatch extends Component<ColorSwatchProps> {
     return null
   }
 }
+
+const ColorSwatch = withStyleForDocs(generateStyle)(ColorSwatchBase)
+type ColorSwatch = ColorSwatchBase
 
 export default ColorSwatch
 export { ColorSwatch }

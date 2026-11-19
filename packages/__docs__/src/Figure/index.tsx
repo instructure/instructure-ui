@@ -56,8 +56,7 @@ class FigureItem extends Component<PropsWithChildren> {
   }
 }
 
-@withStyleForDocs(generateStyle)
-class Figure extends Component<FigureProps> {
+export class FigureBase extends Component<FigureProps> {
   static displayName = 'Figure'
   static allowedProps = allowedProps
 
@@ -151,6 +150,9 @@ class Figure extends Component<FigureProps> {
     }
   }
 }
+
+const Figure = withStyleForDocs(generateStyle)(FigureBase)
+type Figure = FigureBase
 
 export default Figure
 export { Figure, FigureItem }

@@ -78,10 +78,7 @@ type TabDescriptor = {
 category: components
 ---
 **/
-@withDeterministicId()
-@withStyleNew(generateStyle)
-@textDirectionContextConsumer()
-class Tabs extends Component<TabsProps, TabsState> {
+export class TabsBase extends Component<TabsProps, TabsState> {
   static displayName = 'Tabs'
   static readonly componentId = 'Tabs'
 
@@ -647,6 +644,11 @@ class Tabs extends Component<TabsProps, TabsState> {
     )
   }
 }
+
+const Tabs = withDeterministicId()(
+  withStyleNew(generateStyle)(textDirectionContextConsumer()(TabsBase))
+)
+type Tabs = TabsBase
 
 export default Tabs
 export { Tabs, Panel }

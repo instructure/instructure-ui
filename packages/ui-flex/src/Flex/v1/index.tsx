@@ -48,8 +48,7 @@ category: components
 ---
 @module Flex
 **/
-@withStyle(generateStyle, generateComponentTheme)
-class Flex extends Component<FlexProps> {
+export class FlexBase extends Component<FlexProps> {
   static displayName = 'Flex'
   static readonly componentId = 'Flex'
 
@@ -152,6 +151,9 @@ class Flex extends Component<FlexProps> {
     }
   }
 }
+
+const Flex = withStyle(generateStyle, generateComponentTheme)(FlexBase)
+type Flex = FlexBase
 
 export default Flex
 export { Flex, Item as FlexItem }

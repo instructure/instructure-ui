@@ -43,9 +43,7 @@ import type { BadgeProps } from './props'
 category: components
 ---
 **/
-@withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
-class Badge extends Component<BadgeProps> {
+export class BadgeBase extends Component<BadgeProps> {
   static displayName = 'Badge'
   static readonly componentId = 'Badge'
 
@@ -167,6 +165,11 @@ class Badge extends Component<BadgeProps> {
     }
   }
 }
+
+const Badge = withDeterministicId()(
+  withStyle(generateStyle, generateComponentTheme)(BadgeBase)
+)
+type Badge = BadgeBase
 
 export default Badge
 export { Badge }

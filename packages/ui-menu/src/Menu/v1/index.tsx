@@ -62,9 +62,7 @@ type MenuSeparatorChild = ComponentElement<
 category: components
 ---
 **/
-@withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
-class Menu extends Component<MenuProps> {
+export class MenuBase extends Component<MenuProps> {
   static displayName = 'Menu'
   static readonly componentId = 'Menu'
   static allowedProps = allowedProps
@@ -511,6 +509,11 @@ class Menu extends Component<MenuProps> {
     )
   }
 }
+
+const Menu = withDeterministicId()(
+  withStyle(generateStyle, generateComponentTheme)(MenuBase)
+)
+type Menu = MenuBase
 
 export default Menu
 export { Menu, MenuItem, MenuItemGroup, MenuItemSeparator }

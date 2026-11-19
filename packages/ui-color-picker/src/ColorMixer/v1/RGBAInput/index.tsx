@@ -41,8 +41,7 @@ import generateComponentTheme from './theme.js'
 private: true
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
-class RGBAInput extends Component<RGBAInputProps, RGBAInputState> {
+export class RGBAInputBase extends Component<RGBAInputProps, RGBAInputState> {
   static displayName = 'RGBAInput'
   static allowedProps = allowedProps
   static readonly componentId = 'ColorMixer.RGBAInput'
@@ -167,5 +166,11 @@ class RGBAInput extends Component<RGBAInputProps, RGBAInputState> {
     )
   }
 }
+
+const RGBAInput = withStyle(
+  generateStyle,
+  generateComponentTheme
+)(RGBAInputBase)
+type RGBAInput = RGBAInputBase
 
 export default RGBAInput

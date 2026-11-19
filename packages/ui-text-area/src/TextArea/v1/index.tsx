@@ -52,9 +52,7 @@ import { allowedProps } from './props.js'
 category: components
 ---
 **/
-@withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
-class TextArea extends Component<TextAreaProps> {
+export class TextAreaBase extends Component<TextAreaProps> {
   static displayName = 'TextArea'
   static readonly componentId = 'TextArea'
 
@@ -404,6 +402,11 @@ class TextArea extends Component<TextAreaProps> {
     )
   }
 }
+
+const TextArea = withDeterministicId()(
+  withStyle(generateStyle, generateComponentTheme)(TextAreaBase)
+)
+type TextArea = TextAreaBase
 
 export default TextArea
 export { TextArea }
