@@ -28,6 +28,7 @@ import type { GlobalNavStyle, MainNavStyle } from './props.js'
 
 type StyleParams = {
   collapsed: boolean
+  subNavOpen: boolean
 }
 
 /**
@@ -43,19 +44,22 @@ const generateStyle = (
   componentTheme: ReturnType<NewComponentTypes['GlobalNav']>,
   params: StyleParams
 ): GlobalNavStyle => {
-  const { collapsed } = params
+  const { collapsed, subNavOpen } = params
 
   return {
     globalNav: {
       label: 'globalNav',
       display: 'flex',
-      width: 'fit-content',
+      // fixed while no SubNav is open, so showing the strip doesn't move the page
+      width: subNavOpen
+        ? 'fit-content'
+        : collapsed
+        ? componentTheme.minimizedminWidth
+        : componentTheme.minWidth,
+      flexShrink: 0,
       height: '100%',
       boxSizing: 'border-box',
       // the width tokens include the outer gap, which is this padding
-      minWidth: collapsed
-        ? componentTheme.minimizedminWidth
-        : componentTheme.minWidth,
       padding: collapsed
         ? componentTheme.minimizedMargin
         : componentTheme.margin
@@ -63,7 +67,8 @@ const generateStyle = (
     rail: {
       label: 'globalNav__rail',
       display: 'flex',
-      flex: 1,
+      // the rail can be wider than the width tokens, so it overflows into the padding instead of shrinking
+      flexShrink: 0,
       boxSizing: 'border-box',
       backgroundColor: componentTheme.backgroundColor,
       border: `${componentTheme.borderWidth} solid ${componentTheme.borderColor}`,
@@ -71,11 +76,6 @@ const generateStyle = (
         ? componentTheme.minimizedBorderRadius
         : componentTheme.borderRadius,
       boxShadow: boxShadowObjectsToCSSString(componentTheme.boxShadow)
-    },
-    // TODO: use the MainNav divider color once instructure-design-tokens moves it there
-    divider: {
-      label: 'globalNav__divider',
-      borderTop: `${componentTheme.borderWidth} solid ${componentTheme.borderColor}`
     }
   }
 }
@@ -85,15 +85,14 @@ const generateStyle = (
  */
 const generateMainNavStyle = (
   componentTheme: ReturnType<NewComponentTypes['MainNav']>,
-  params: StyleParams
+  params: Pick<StyleParams, 'collapsed'>
 ): MainNavStyle => {
   const { collapsed } = params
 
   return {
     mainNav: {
       label: 'mainNav',
-      // TODO: use the MainNav width tokens once instructure-design-tokens adds them
-      width: collapsed ? '3.5rem' : '12.5rem',
+      width: collapsed ? componentTheme.minimizedWidth : componentTheme.width,
       flexShrink: 0,
       boxSizing: 'border-box',
       display: 'flex',
@@ -120,6 +119,11 @@ const generateMainNavStyle = (
       listStyle: 'none',
       margin: 0,
       padding: 0
+    },
+    divider: {
+      label: 'mainNav__divider',
+      // MainNav has no divider width token
+      borderTop: `0.0625rem solid ${componentTheme.strokeColor}`
     }
   }
 }

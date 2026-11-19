@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import type { MouseEvent } from 'react'
-
 import { useStyleNew } from '@instructure/emotion'
 import {
   AccessibleContent,
@@ -33,8 +31,8 @@ import { Badge } from '@instructure/ui-badge/latest'
 import { ChevronRightInstUIIcon } from '@instructure/ui-icons'
 import { callRenderProp } from '@instructure/ui-react-utils'
 import { Tooltip } from '@instructure/ui-tooltip/latest'
-import { safeLinkProps } from '@instructure/ui-utils'
 
+import { getItemElementProps } from '../utils/getItemElementProps.js'
 import type { MainNavItemProps } from './props.js'
 import generateStyle from './styles.js'
 
@@ -45,7 +43,7 @@ id: GlobalNav.MainNavItem
 ---
 **/
 const MainNavItem = (props: MainNavItemProps) => {
-  const { item, collapsed, open, onSubNavChange } = props
+  const { item, collapsed, open, subNavId, onActivate, elementRef } = props
   const current = !!item.current
 
   const styles = useStyleNew({
@@ -55,7 +53,6 @@ const MainNavItem = (props: MainNavItemProps) => {
   })
 
   const label = item.label
-  const icon = <span css={styles?.icon}>{callRenderProp(item.icon)}</span>
 
   const badgeCount = item.badgeCount ?? 0
   const badgeLabel =
@@ -68,28 +65,25 @@ const MainNavItem = (props: MainNavItemProps) => {
     ) : (
       formattedCount
     )
+  const badge = badgeCount > 0 && (
+    <Badge standalone count={badgeCount} formatOutput={formatBadge} />
+  )
 
   const content = collapsed ? (
     <>
       {/* before the icon, so the name reads the label first and then the badge */}
       <ScreenReaderContent>{label}</ScreenReaderContent>
-      {badgeCount > 0 ? (
-        <Badge count={badgeCount} formatOutput={formatBadge}>
-          {icon}
-        </Badge>
-      ) : (
-        icon
-      )}
+      <span css={styles?.icon}>
+        {callRenderProp(item.icon)}
+        {badge && <span css={styles?.badge}>{badge}</span>}
+      </span>
     </>
   ) : (
     <>
-      {icon}
+      <span css={styles?.icon}>{callRenderProp(item.icon)}</span>
       <span css={styles?.label}>{label}</span>
-      {badgeCount > 0 && (
-        <Badge standalone count={badgeCount} formatOutput={formatBadge} />
-      )}
+      {badge}
       {item.subNav && (
-        // the icon mirrors itself in RTL
         <span css={styles?.chevron}>
           <ChevronRightInstUIIcon />
         </span>
@@ -97,52 +91,24 @@ const MainNavItem = (props: MainNavItemProps) => {
     </>
   )
 
-  const isLink = !!item.href && !item.subNav
-
-  let ownProps
-  if (item.subNav) {
-    const handleClick = (event: MouseEvent<HTMLElement>) => {
-      item.onClick?.(event)
-      onSubNavChange?.(event, open ? undefined : item.itemID)
-    }
-    ownProps = {
-      type: 'button' as const,
-      'aria-expanded': open,
-      onClick: handleClick
-    }
-  } else if (isLink) {
-    // drops unsafe hrefs, for example javascript: URLs that would run code on click
-    ownProps = {
-      ...safeLinkProps({
-        href: item.href,
-        tag: 'a',
-        attr: 'href',
-        target: item.elementProps?.target,
-        rel: item.elementProps?.rel
-      }),
-      onClick: item.onClick
-    }
-  } else {
-    ownProps = { type: 'button' as const, onClick: item.onClick }
-  }
-
-  // InstUI's own props come last, so the app can't override them
-  const mergedProps = {
-    ...item.elementProps,
-    ...ownProps,
-    'aria-current': current ? ('page' as const) : undefined
-  }
+  const { isLink, props: mergedProps } = getItemElementProps(
+    item,
+    (event) => onActivate(event, item),
+    item.subNav
+      ? { 'aria-expanded': open, 'aria-controls': subNavId }
+      : undefined
+  )
 
   let element
   if (isLink) {
     element = (
-      <a {...mergedProps} css={styles?.item}>
+      <a {...mergedProps} ref={elementRef} css={styles?.item}>
         {content}
       </a>
     )
   } else {
     element = (
-      <button {...mergedProps} css={styles?.item}>
+      <button {...mergedProps} ref={elementRef} css={styles?.item}>
         {content}
       </button>
     )

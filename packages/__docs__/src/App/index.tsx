@@ -100,6 +100,17 @@ const LEGACY_THEMING_PAGES = [
 ]
 const NEW_THEMING_PAGES = ['new-theme-overrides', 'new-institutional-theming']
 
+// the first key is the default, so examples of v11.7 and later start on light
+const THEME_ORDER = ['light', 'dark', 'canvas', 'canvas-high-contrast']
+// keys outside THEME_ORDER, like the v11.6 legacy themes, keep their order at the end
+const sortThemeKeys = (themeKeys: string[]) => {
+  const rank = (key: string) => {
+    const index = THEME_ORDER.indexOf(key)
+    return index === -1 ? THEME_ORDER.length : index
+  }
+  return [...themeKeys].sort((a, b) => rank(a) - rank(b))
+}
+
 @withStyleForDocs(generateStyle)
 class App extends Component<AppProps, AppState> {
   static displayName = 'App'
@@ -180,10 +191,12 @@ class App extends Component<AppProps, AppState> {
       .then((response) => response.json())
       .then((docsData) => {
         const showNewThemes = this.state.selectedMinorVersion !== 'v11_6'
-        const themeKeys = Object.keys(docsData.themes).filter((key) =>
-          showNewThemes
-            ? key !== 'shared-tokens' && !key.startsWith('legacy-')
-            : key.startsWith('legacy-')
+        const themeKeys = sortThemeKeys(
+          Object.keys(docsData.themes).filter((key) =>
+            showNewThemes
+              ? key !== 'shared-tokens' && !key.startsWith('legacy-')
+              : key.startsWith('legacy-')
+          )
         )
         this.setState({
           docsData,
@@ -585,7 +598,7 @@ class App extends Component<AppProps, AppState> {
       this.state.currentDocData?.esPath.split('/')[1]
 
     const { minorVersionsData, selectedMinorVersion } = this.state
-    const allThemeKeys = Object.keys(this.state.docsData!.themes)
+    const allThemeKeys = sortThemeKeys(Object.keys(this.state.docsData!.themes))
     const showNewThemes = selectedMinorVersion !== 'v11_6'
 
     const activeComponentVersions = currentComponentPackageName

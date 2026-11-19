@@ -90,6 +90,9 @@ const generateStyle = (
             backgroundColor: componentTheme.activeBackgroundColor
           }
         }),
+      // the other GlobalNav focus rings animate with calcFocusOutlineStyles,
+      // which can't take these tokens, because each theme colors a different ring
+      transition: 'box-shadow 0.2s',
       // same focus ring as SideNavBarItem, which has the same focus tokens
       '&:focus': {
         outline: 'none',
@@ -100,10 +103,20 @@ const generateStyle = (
     },
     icon: {
       label: 'mainNavItem__icon',
+      position: 'relative',
       display: 'flex',
       alignItems: 'center',
       flexShrink: 0,
       height: componentTheme.iconWrapperHeight
+    },
+    badge: {
+      label: 'mainNavItem__badge',
+      position: 'absolute',
+      top: 0,
+      // the badge starts at the icon's center, so a longer count grows away from the icon
+      insetInlineStart: '50%',
+      // flex, so the item's line height doesn't push the badge down
+      display: 'flex'
     },
     label: {
       label: 'mainNavItem__label',

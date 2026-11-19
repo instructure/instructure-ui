@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { SyntheticEvent } from 'react'
+import type { MouseEvent } from 'react'
 
 import type { ComponentStyle } from '@instructure/emotion'
 
@@ -42,13 +42,24 @@ type MainNavItemProps = {
    */
   open: boolean
   /**
-   * Called when the user opens or closes the SubNav of the item.
+   * The id of the open SubNav panel, set only while the SubNav of this item is open.
    */
-  onSubNavChange?: (event: SyntheticEvent, itemID: string | undefined) => void
+  subNavId?: string
+  /**
+   * Called when the user activates the item, after `item.onClick`.
+   */
+  onActivate: (
+    event: MouseEvent<HTMLElement>,
+    item: GlobalNavMainNavItem
+  ) => void
+  /**
+   * Called with the link or button element of the item.
+   */
+  elementRef: (element: HTMLElement | null) => void
 }
 
 type MainNavItemStyle = ComponentStyle<
-  'item' | 'icon' | 'label' | 'chevron' | 'tooltipTrigger'
+  'item' | 'icon' | 'badge' | 'label' | 'chevron' | 'tooltipTrigger'
 >
 
 export type { MainNavItemProps, MainNavItemStyle }
