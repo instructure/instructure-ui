@@ -23,7 +23,10 @@
  */
 
 import type { NewComponentTypes } from '@instructure/ui-themes'
-import type { AccountPanelStyle } from './props.js'
+import type {
+  AccountPanelStyle,
+  AccountPanelVerificationStyle
+} from './props.js'
 
 /**
  * ---
@@ -60,22 +63,6 @@ const generateStyle = (
       label: 'accountPanel__avatar',
       position: 'relative',
       display: 'flex'
-    },
-    verification: {
-      label: 'accountPanel__verification',
-      position: 'absolute',
-      // overlaps the top end corner of the avatar
-      top: '-0.25rem',
-      insetInlineEnd: '-0.375rem',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      width: '1.375rem',
-      height: '1.375rem',
-      borderRadius: '50%',
-      // TODO INSTUI-5234: use verification badge tokens once design adds them, these are honey40 and grey170
-      backgroundColor: '#F0C16C',
-      color: '#273540'
     },
     cardBody: {
       label: 'accountPanel__cardBody',
@@ -137,4 +124,32 @@ const generateStyle = (
   }
 }
 
+/**
+ * Generates the verification badge style from the `MainNavAccountItem` tokens
+ */
+const generateVerificationStyle = (
+  componentTheme: ReturnType<NewComponentTypes['MainNavAccountItem']>
+): AccountPanelVerificationStyle => {
+  return {
+    verification: {
+      label: 'accountPanel__verification',
+      position: 'absolute',
+      // overlaps the top end corner of the avatar
+      top: '-0.25rem',
+      insetInlineEnd: '-0.375rem',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      boxSizing: 'border-box',
+      width: componentTheme.verificationBadgeSize,
+      height: componentTheme.verificationBadgeSize,
+      // MainNavAccountItem has no badge border width token
+      border: `0.0625rem solid ${componentTheme.verificationBadgeBorderColor}`,
+      borderRadius: componentTheme.verificationBadgeBorderRadius,
+      backgroundColor: componentTheme.verificationBadgeBackgroundColor
+    }
+  }
+}
+
 export default generateStyle
+export { generateVerificationStyle }

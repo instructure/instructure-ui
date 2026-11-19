@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-import { calcFocusOutlineStyles } from '@instructure/emotion'
-import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { SubNavItemStyle } from './props.js'
 
 type StyleParams = {
@@ -38,13 +37,11 @@ type StyleParams = {
  * Generates the style object from the theme and provided additional information
  * @param componentTheme The theme variable object.
  * @param params Additional parameters to customize the style.
- * @param sharedTokens Shared token object that stores common values for the theme.
  * @return The final style object, which will be used in the component
  */
 const generateStyle = (
   componentTheme: ReturnType<NewComponentTypes['SubNavItem']>,
-  params: StyleParams,
-  sharedTokens: SharedTokens
+  params: StyleParams
 ): SubNavItemStyle => {
   const { current, logout } = params
 
@@ -75,14 +72,13 @@ const generateStyle = (
       textAlign: 'start',
       textDecoration: 'none',
       cursor: 'pointer',
-      ...calcFocusOutlineStyles(
-        {
-          ...sharedTokens.focusOutline,
-          // the `inset` token is 0, so the ring would sit outside the item, where the scrolling panel body clips it
-          inset: `calc(-1 * ${sharedTokens.focusOutline.width})`
-        },
-        { focusPosition: 'inset' }
-      ),
+      // same focus ring as MainNavItem, which has the same focus tokens
+      '&:focus': {
+        outline: 'none',
+        boxShadow: current
+          ? `inset 0 0 0 0.125rem ${componentTheme.selectedOuterFocusOutlineColor}, inset 0 0 0 0.25rem ${componentTheme.selectedInnerFocusOutlineColor}`
+          : `inset 0 0 0 0.125rem ${componentTheme.outerFocusOutlineColor}, inset 0 0 0 0.25rem ${componentTheme.innerFocusOutlineColor}`
+      },
       '&:hover': {
         // a page-wide a:hover rule is more specific than the base class
         textDecoration: 'none',
@@ -105,7 +101,13 @@ const generateStyle = (
     icon: {
       label: 'subNavItem__icon',
       display: 'flex',
-      flexShrink: 0
+      flexShrink: 0,
+      // SubNavItem has no logout icon color token
+      color: current
+        ? componentTheme.selectedIconColor
+        : logout
+        ? componentTheme.logoutTextColor
+        : componentTheme.iconColor
     },
     label: {
       label: 'subNavItem__label',

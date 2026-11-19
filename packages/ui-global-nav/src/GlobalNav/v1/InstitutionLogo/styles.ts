@@ -75,6 +75,13 @@ const generateStyle = (
         : componentTheme.minimizedHeight,
       objectFit: 'contain',
       flexShrink: 0
+    },
+    name: {
+      label: 'institutionLogo__name',
+      fontFamily: componentTheme.fontFamily,
+      fontWeight: componentTheme.fontWeight,
+      fontSize: componentTheme.fontSize,
+      lineHeight: componentTheme.lineHeight
     }
   }
 }
