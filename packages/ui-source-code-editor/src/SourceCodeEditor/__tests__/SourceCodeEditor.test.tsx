@@ -47,6 +47,29 @@ describe('<SourceCodeEditor />', () => {
       expect(activeLine[2]).toHaveStyle({ color: '#116644' })
     })
 
+    it('should highlight python code', async () => {
+      const { container } = await render(
+        <SourceCodeEditor
+          label="test"
+          language="python"
+          defaultValue="def greet(): return 'hi'"
+        />
+      )
+
+      const tokens = container.querySelectorAll('.cm-content span')
+
+      expect(Array.from(tokens).map((span) => span.textContent)).toEqual([
+        'def',
+        'greet',
+        'return',
+        "'hi'"
+      ])
+      expect(tokens[0]).toHaveStyle({ color: '#770088' })
+      expect(tokens[1]).toHaveStyle({ color: '#0000ff' })
+      expect(tokens[2]).toHaveStyle({ color: '#770088' })
+      expect(tokens[3]).toHaveStyle({ color: '#aa1111' })
+    })
+
     it('should link editor element to label using aria-labelledby attribute', async () => {
       const { container } = await render(
         <SourceCodeEditor
