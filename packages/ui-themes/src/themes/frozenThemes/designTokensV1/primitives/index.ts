@@ -22,25 +22,26 @@
  * SOFTWARE.
  */
 
-import type { Semantics as SemanticsDark } from '../../newThemeTokens/dark/semantics'
-import type { Semantics as SemanticsLight } from '../../newThemeTokens/light/semantics'
-import type { Semantics as SemanticsCanvas } from '../../newThemeTokens/legacyCanvas/semantics'
-import type { Semantics as SemanticsCanvasHighContrast } from '../../newThemeTokens/legacyCanvasHighContrast/semantics'
+import type { Primitives as PrimitivesDark } from './dark'
+import type { Primitives as PrimitivesLight } from './light'
+import type { Primitives as PrimitivesCanvas } from './canvas'
+import type { Primitives as PrimitivesCanvasHighContrast } from './canvasHighContrast'
 
-import semanticsDark from '../../newThemeTokens/dark/semantics'
-import semanticsLight from '../../newThemeTokens/light/semantics'
-import semanticsCanvas from '../../newThemeTokens/legacyCanvas/semantics'
-import semanticsCanvasHighContrast from '../../newThemeTokens/legacyCanvasHighContrast/semantics'
+import primitivesDark from './dark'
+import primitivesLight from './light'
+import primitivesCanvas from './canvas'
+import primitivesCanvasHighContrast from './canvasHighContrast'
 
 export type {
-  SemanticsDark,
-  SemanticsLight,
-  SemanticsCanvas,
-  SemanticsCanvasHighContrast
+  PrimitivesDark,
+  PrimitivesLight,
+  PrimitivesCanvas,
+  PrimitivesCanvasHighContrast
 }
+
 export {
-  semanticsDark,
-  semanticsLight,
-  semanticsCanvas,
-  semanticsCanvasHighContrast
+  primitivesDark,
+  primitivesLight,
+  primitivesCanvas,
+  primitivesCanvasHighContrast
 }
