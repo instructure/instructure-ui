@@ -26,23 +26,30 @@ import type { MouseEvent } from 'react'
 
 import type { ComponentStyle } from '@instructure/emotion'
 
-import type { GlobalNavSubNavItem } from '../props.js'
+import type { GlobalNavAccountItem, GlobalNavSubNavItem } from '../props.js'
 
 type SubNavItemProps = {
   /**
    * The data of the item.
    */
-  item: GlobalNavSubNavItem
+  item: GlobalNavSubNavItem & Pick<GlobalNavAccountItem, 'icon'>
+  /**
+   * Whether the item is the log out button of the account panel, which has its own text color.
+   */
+  logout?: boolean
   /**
    * Called with the link or button element of the item.
    */
-  elementRef: (element: HTMLElement | null) => void
+  elementRef?: (element: HTMLElement | null) => void
   /**
    * Called when the user activates an item with a `subNav`, after `item.onClick`.
    */
-  onDrillIn: (event: MouseEvent<HTMLElement>, item: GlobalNavSubNavItem) => void
+  onDrillIn?: (
+    event: MouseEvent<HTMLElement>,
+    item: GlobalNavSubNavItem
+  ) => void
 }
 
-type SubNavItemStyle = ComponentStyle<'item' | 'label' | 'chevron'>
+type SubNavItemStyle = ComponentStyle<'item' | 'icon' | 'label' | 'chevron'>
 
 export type { SubNavItemProps, SubNavItemStyle }

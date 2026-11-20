@@ -22,17 +22,18 @@
  * SOFTWARE.
  */
 
-import type { SyntheticEvent } from 'react'
-
 import { useStyleNew } from '@instructure/emotion'
-import { IconButton } from '@instructure/ui-buttons/latest'
+import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import {
   PanelRightCloseInstUIIcon,
   PanelRightOpenInstUIIcon
 } from '@instructure/ui-icons'
 
 import type { CollapseButtonProps } from './props.js'
-import generateStyle, { generateIconStyle } from './styles.js'
+import generateStyle, {
+  generateIconStyle,
+  generateSizeStyle
+} from './styles.js'
 
 /**
 ---
@@ -50,35 +51,35 @@ const CollapseButton = (props: CollapseButtonProps) => {
     componentId: 'CollapseButton'
   })
 
-  // MainNavItem is a separate token set, and useStyleNew reads one set per call
+  // MainNavItem and BaseButton are separate token sets, and useStyleNew reads one set per call
   const iconStyles = useStyleNew({
     generateStyle: generateIconStyle,
     componentId: 'CollapseButton',
     useTokensFrom: 'MainNavItem'
   })
+  const sizeStyles = useStyleNew({
+    generateStyle: generateSizeStyle,
+    componentId: 'CollapseButton',
+    useTokensFrom: 'BaseButton'
+  })
 
-  const label = collapsed ? expandLabel : collapseLabel
+  const Icon = collapsed ? PanelRightCloseInstUIIcon : PanelRightOpenInstUIIcon
 
   return (
     <div css={styles?.collapseButton}>
-      <IconButton
-        screenReaderLabel={label}
-        renderIcon={
-          collapsed ? PanelRightCloseInstUIIcon : PanelRightOpenInstUIIcon
-        }
-        withBackground={false}
-        withBorder={false}
-        size="small"
-        elementRef={elementRef}
-        // the cast is safe: the click event is typed for ViewProps, but React passes the DOM button's event
-        onClick={(event) =>
-          onCollapse(event as unknown as SyntheticEvent, !collapsed)
-        }
-        themeOverride={{
-          ...styles?.iconButtonThemeOverride,
-          ...iconStyles?.iconButtonThemeOverride
-        }}
-      />
+      <button
+        type="button"
+        ref={elementRef}
+        css={[styles?.button, sizeStyles?.button]}
+        onClick={(event) => onCollapse(event, !collapsed)}
+      >
+        <span css={iconStyles?.icon}>
+          <Icon size="sm" />
+        </span>
+        <ScreenReaderContent>
+          {collapsed ? expandLabel : collapseLabel}
+        </ScreenReaderContent>
+      </button>
     </div>
   )
 }

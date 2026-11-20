@@ -109,7 +109,9 @@ class ToggleFacade extends Component<ToggleFacadeProps> {
 
     return (
       <span css={styles?.toggleFacade} ref={this.handleRef}>
-        {(labelPlacement === 'top' || labelPlacement === 'start') &&
+        {(labelPlacement === 'top' ||
+          labelPlacement === 'start' ||
+          labelPlacement === 'start-stretch') &&
           this.renderLabel()}
         <span css={styles?.facade} aria-hidden="true">
           <span css={styles?.icon}>

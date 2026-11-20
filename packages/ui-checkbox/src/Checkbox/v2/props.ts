@@ -73,7 +73,10 @@ type CheckboxOwnProps = {
   size?: 'small' | 'medium' | 'large'
   variant?: 'simple' | 'toggle'
   inline?: boolean
-  labelPlacement?: 'top' | 'start' | 'end'
+  /**
+   * Where the label of the `toggle` variant sits, with `start-stretch` putting it at the start of the row and the switch at the end.
+   */
+  labelPlacement?: 'top' | 'start' | 'end' | 'start-stretch'
   isRequired?: boolean
   /**
    * Valid values are `0`, `none`, `auto`, and Spacing token values,

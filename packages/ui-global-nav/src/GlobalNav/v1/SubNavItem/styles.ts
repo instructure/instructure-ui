@@ -22,12 +22,13 @@
  * SOFTWARE.
  */
 
-import { calcFocusOutlineStyles } from '@instructure/emotion'
-import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
+import type { NewComponentTypes } from '@instructure/ui-themes'
+import { calcBandFocusStyles } from '../utils/calcBandFocusStyles.js'
 import type { SubNavItemStyle } from './props.js'
 
 type StyleParams = {
   current: boolean
+  logout: boolean
 }
 
 /**
@@ -37,15 +38,13 @@ type StyleParams = {
  * Generates the style object from the theme and provided additional information
  * @param componentTheme The theme variable object.
  * @param params Additional parameters to customize the style.
- * @param sharedTokens Shared token object that stores common values for the theme.
  * @return The final style object, which will be used in the component
  */
 const generateStyle = (
   componentTheme: ReturnType<NewComponentTypes['SubNavItem']>,
-  params: StyleParams,
-  sharedTokens: SharedTokens
+  params: StyleParams
 ): SubNavItemStyle => {
-  const { current } = params
+  const { current, logout } = params
 
   return {
     item: {
@@ -64,6 +63,8 @@ const generateStyle = (
         : componentTheme.backgroundColor,
       color: current
         ? componentTheme.selectedTextColor
+        : logout
+        ? componentTheme.logoutTextColor
         : componentTheme.textColor,
       fontFamily: componentTheme.fontFamily,
       fontSize: componentTheme.fontSize,
@@ -72,28 +73,44 @@ const generateStyle = (
       textAlign: 'start',
       textDecoration: 'none',
       cursor: 'pointer',
-      ...calcFocusOutlineStyles(
-        {
-          ...sharedTokens.focusOutline,
-          // the `inset` token is 0, so the ring would sit outside the item, where the scrolling panel body clips it
-          inset: `calc(-1 * ${sharedTokens.focusOutline.width})`
-        },
-        { focusPosition: 'inset' }
-      ),
+      ...(current
+        ? calcBandFocusStyles(
+            componentTheme.selectedOuterFocusOutlineColor,
+            componentTheme.selectedInnerFocusOutlineColor
+          )
+        : calcBandFocusStyles(
+            componentTheme.outerFocusOutlineColor,
+            componentTheme.innerFocusOutlineColor
+          )),
       '&:hover': {
         // a page-wide a:hover rule is more specific than the base class
         textDecoration: 'none',
         ...(!current && {
           backgroundColor: componentTheme.hoverBackgroundColor,
-          color: componentTheme.hoverTextColor
+          color: logout
+            ? componentTheme.logoutTextColor
+            : componentTheme.hoverTextColor
         })
       },
       ...(!current && {
         '&:active': {
           backgroundColor: componentTheme.activeBackgroundColor,
-          color: componentTheme.activeTextColor
+          color: logout
+            ? componentTheme.logoutTextColor
+            : componentTheme.activeTextColor
         }
       })
+    },
+    icon: {
+      label: 'subNavItem__icon',
+      display: 'flex',
+      flexShrink: 0,
+      // SubNavItem has no logout icon color token
+      color: current
+        ? componentTheme.selectedIconColor
+        : logout
+        ? componentTheme.logoutTextColor
+        : componentTheme.iconColor
     },
     label: {
       label: 'subNavItem__label',

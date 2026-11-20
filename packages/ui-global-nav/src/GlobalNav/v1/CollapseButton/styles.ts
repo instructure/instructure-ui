@@ -23,7 +23,12 @@
  */
 
 import type { NewComponentTypes } from '@instructure/ui-themes'
-import type { CollapseButtonIconStyle, CollapseButtonStyle } from './props.js'
+import { calcBandFocusStyles } from '../utils/calcBandFocusStyles.js'
+import type {
+  CollapseButtonIconStyle,
+  CollapseButtonSizeStyle,
+  CollapseButtonStyle
+} from './props.js'
 
 type StyleParams = {
   collapsed: boolean
@@ -50,9 +55,23 @@ const generateStyle = (
       // the collapsed rail centers the button
       marginInlineEnd: collapsed ? 0 : componentTheme.rightMargin
     },
-    iconButtonThemeOverride: {
-      secondaryGhostHoverBackground: componentTheme.hoverBackgroundColor,
-      secondaryGhostActiveBackground: componentTheme.activeBackgroundColor
+    button: {
+      label: 'collapseButton__button',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      boxSizing: 'border-box',
+      margin: 0,
+      padding: 0,
+      border: 'none',
+      backgroundColor: componentTheme.backgroundColor,
+      cursor: 'pointer',
+      '&:hover': { backgroundColor: componentTheme.hoverBackgroundColor },
+      '&:active': { backgroundColor: componentTheme.activeBackgroundColor },
+      ...calcBandFocusStyles(
+        componentTheme.outerFocusOutlineColor,
+        componentTheme.innerFocusOutlineColor
+      )
     }
   }
 }
@@ -64,13 +83,31 @@ const generateIconStyle = (
   componentTheme: ReturnType<NewComponentTypes['MainNavItem']>
 ): CollapseButtonIconStyle => {
   return {
-    // the default IconButton icon is unreadable on the dark legacy rail, and the
-    // CollapseButton tokens have no icon color
-    iconButtonThemeOverride: {
-      secondaryGhostColor: componentTheme.fontColor
+    icon: {
+      label: 'collapseButton__icon',
+      display: 'flex',
+      // CollapseButton has no icon color token
+      color: componentTheme.fontColor
+    }
+  }
+}
+
+/**
+ * Generates the button size from the `BaseButton` tokens
+ */
+const generateSizeStyle = (
+  componentTheme: ReturnType<NewComponentTypes['BaseButton']>
+): CollapseButtonSizeStyle => {
+  return {
+    button: {
+      label: 'collapseButton__button',
+      // the size of a small IconButton, CollapseButton has no size tokens
+      width: componentTheme.smallHeight,
+      height: componentTheme.smallHeight,
+      borderRadius: componentTheme.borderRadius
     }
   }
 }
 
 export default generateStyle
-export { generateIconStyle }
+export { generateIconStyle, generateSizeStyle }
