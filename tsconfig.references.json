@@ -223,6 +223,9 @@
       "path": "./packages/ui-spinner/tsconfig.build.json"
     },
     {
+      "path": "./packages/ui-stepper/tsconfig.build.json"
+    },
+    {
       "path": "./packages/ui-svg-images/tsconfig.build.json"
     },
     {

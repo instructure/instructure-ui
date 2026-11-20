@@ -83,6 +83,7 @@
     "@instructure/ui-skeleton": "workspace:*",
     "@instructure/ui-source-code-editor": "workspace:*",
     "@instructure/ui-spinner": "workspace:*",
+    "@instructure/ui-stepper": "workspace:*",
     "@instructure/ui-svg-images": "workspace:*",
     "@instructure/ui-table": "workspace:*",
     "@instructure/ui-tabs": "workspace:*",
