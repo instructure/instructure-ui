@@ -30,15 +30,20 @@ export default function ViewPage() {
   return (
     <main className="flex gap-12 p-8 flex-col items-start axe-test">
       <section>
-        <View
-          as="div"
-          margin="small"
-          padding="large"
-          textAlign="center"
-          background="secondary"
-        >
-          Basic View content
-        </View>
+        <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+          <View
+            as="div"
+            margin="small"
+            padding="large"
+            textAlign="center"
+            background="secondary"
+          >
+            Basic View content
+          </View>
+          <View borderWidth="large" padding="small" borderColor={undefined}>
+            undefined prop
+          </View>
+        </div>
       </section>
 
       {/* Backgrounds */}

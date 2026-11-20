@@ -40,13 +40,7 @@ const generateStyle = (
   props: LinkProps,
   state: LinkStyleProps
 ): LinkStyle => {
-  const {
-    isWithinText,
-    renderIcon,
-    iconPlacement = 'start', // TODO workaround needed for react 19 where defaultprops doesn't apply for some reasong
-    color,
-    variant
-  } = props
+  const { isWithinText, renderIcon, iconPlacement, color, variant } = props
 
   const { containsTruncateText, hasVisibleChildren } = state
   const inverseStyle = color === 'link-inverse'
