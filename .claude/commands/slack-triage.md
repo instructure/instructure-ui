@@ -29,7 +29,7 @@ Usage: `/slack-triage <slack-message-link>` — the permalink (or channel-id + t
 ( [ -n "${SLACK_BOT_TOKEN:-}" ] && [ -n "${SLACK_TEAM_ID:-}" ] ) && echo creds-present || echo creds-missing
 ```
 
-If `creds-missing` — or a Slack call later fails with `missing_scope` — **stop and tell the user to run `/slack-setup`**, then re-run. Don't inline the bootstrap.
+If `creds-missing` — or a Slack call later fails with `missing_scope` — **stop and tell the user to ask a teammate or team leader for the Slack bot token**, add `SLACK_BOT_TOKEN` and `SLACK_TEAM_ID` to root `.env` (see `.env.example`), then re-run.
 
 **0b. Discover tools at runtime** (names depend on the connected server):
 
