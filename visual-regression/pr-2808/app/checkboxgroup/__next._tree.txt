@@ -1,0 +1,5 @@
+:HL["/visual-regression/pr-2808/app/_next/static/media/e4af272ccee01ff0-s.p.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/visual-regression/pr-2808/app/_next/static/css/56f48bf49f201c9d.css","style"]
+2:[["children",{"s":"__PAGE__","h":160}]]
+1:[["children",{"s":"checkboxgroup","h":96,"c":"$Q2"}]]
+0:{"b":"ZJfCtXee3mzbJ5_118mKQ","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
