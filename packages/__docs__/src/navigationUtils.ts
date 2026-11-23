@@ -118,10 +118,18 @@ function navigateTo(targetPage: string, options?: BuildUrlOptions): void {
   window.dispatchEvent(new PopStateEvent('popstate'))
 }
 
-function navigateToVersion(version: string | null): void {
+function navigateToVersion(
+  version: string | null,
+  options?: { replace?: boolean }
+): void {
   const { page, sectionId } = parseCurrentUrl()
   const url = buildUrl(page, { minorVersion: version, sectionId })
-  window.history.pushState({}, '', url)
+  // replacing keeps an unsupported-version URL out of the back-button history
+  if (options?.replace) {
+    window.history.replaceState({}, '', url)
+  } else {
+    window.history.pushState({}, '', url)
+  }
   window.dispatchEvent(new PopStateEvent('popstate'))
 }
 
