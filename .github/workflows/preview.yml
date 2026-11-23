@@ -1,6 +1,6 @@
-name: Deploy preview docs from PR
+name: Build PR preview docs
 concurrency:
-  group: preview-${{ github.ref }}
+  group: preview-build-${{ github.ref }}
   cancel-in-progress: true
 on:
   pull_request:
@@ -8,17 +8,22 @@ on:
       - opened
       - reopened
       - synchronize
-      # `pr-preview-action` assumes by default that the preview should be removed during the closed event,
-      # which it only sees if you explicitly add it to the workflow.
-      - closed
+# Deploying needs a write token, which Dependabot-triggered runs never get. This workflow only builds
+# with a read-only token and hands the result to `preview-deploy.yml`, which holds the write access.
+permissions:
+  contents: read
 jobs:
-  deploy-preview:
+  build-preview:
+    # fork PRs don't get previews, they would serve untrusted scripts from the docs origin
+    if: github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     env:
       GITHUB_PULL_REQUEST_PREVIEW: 'true'
       PUBLIC_PATH: /pr-preview/pr-${{ github.event.pull_request.number }}/
     steps:
       - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
       - uses: pnpm/action-setup@v6
       - name: Install Node 24
         uses: actions/setup-node@v6
@@ -27,14 +32,12 @@ jobs:
           cache: 'pnpm'
       - name: Install and bootstrap
         run: pnpm install --frozen-lockfile && pnpm run bootstrap
-        if: github.event.action != 'closed' # don't run install and bootstrap unnecessarily when pr is closed
       - name: Build docs-app
         run: pnpm run build:docs
-        if: github.event.action != 'closed'
-      - uses: rossjrw/pr-preview-action@v1
+      - name: Upload built docs
+        uses: actions/upload-artifact@v7
         with:
-          source-dir: ./packages/__docs__/__build__
-          preview-branch: gh-pages
-          umbrella-dir: pr-preview
-          pages-base-url: instructure.design
-          action: auto
+          name: preview-docs
+          path: ./packages/__docs__/__build__
+          if-no-files-found: error
+          retention-days: 1
