@@ -87,6 +87,9 @@ const withDeterministicId = decorator((ComposedComponent: InstUIComponent) => {
 
   hoistNonReactStatics(WithDeterministicId, ComposedComponent)
 
+  // hoisting skips defaultProps, but parents read it (e.g. getElementType)
+  WithDeterministicId.defaultProps = ComposedComponent.defaultProps
+
   // added so it can be tested with ReactTestUtils
   // more info: https://github.com/facebook/react/issues/13455
   WithDeterministicId.originalType =
