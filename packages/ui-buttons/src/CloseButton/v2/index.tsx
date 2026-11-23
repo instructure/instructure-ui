@@ -41,8 +41,7 @@ import type { CloseButtonProps } from './props'
 category: components
 ---
 **/
-@withStyleNew(generateStyle, 'BaseButton')
-class CloseButton extends Component<CloseButtonProps> {
+export class CloseButtonBase extends Component<CloseButtonProps> {
   static displayName = 'CloseButton'
   static readonly componentId = 'CloseButton'
   // Uses BaseButton's tokens; tell Document where to look for theme variables
@@ -140,6 +139,9 @@ class CloseButton extends Component<CloseButtonProps> {
     )
   }
 }
+
+const CloseButton = withStyleNew(generateStyle, 'BaseButton')(CloseButtonBase)
+type CloseButton = CloseButtonBase
 
 export default CloseButton
 export { CloseButton }

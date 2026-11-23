@@ -111,8 +111,7 @@ const sortThemeKeys = (themeKeys: string[]) => {
   return [...themeKeys].sort((a, b) => rank(a) - rank(b))
 }
 
-@withStyleForDocs(generateStyle)
-class App extends Component<AppProps, AppState> {
+export class AppBase extends Component<AppProps, AppState> {
   static displayName = 'App'
   static contextType = AppContext
   declare context: React.ContextType<typeof AppContext>
@@ -1305,6 +1304,9 @@ class App extends Component<AppProps, AppState> {
     )
   }
 }
+
+const App = withStyleForDocs(generateStyle)(AppBase)
+type App = AppBase
 
 export default App
 export { App }

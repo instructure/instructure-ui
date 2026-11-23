@@ -52,8 +52,7 @@ import { navigateTo } from '../navigationUtils'
 import { allowedProps } from './props'
 import type { DocumentProps, DocumentState, DocDataType } from './props'
 
-@withStyleForDocs(generateStyle)
-class Document extends Component<DocumentProps, DocumentState> {
+export class DocumentBase extends Component<DocumentProps, DocumentState> {
   static displayName = 'Document'
   static allowedProps = allowedProps
   static contextType = AppContext
@@ -610,6 +609,9 @@ import { ${importName} } from '${versionedPackageName}'`
     )
   }
 }
+
+const Document = withStyleForDocs(generateStyle)(DocumentBase)
+type Document = DocumentBase
 
 export default Document
 export { Document }

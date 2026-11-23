@@ -50,8 +50,7 @@ id: AppNav.Item
 ---
 @module Item
 **/
-@withStyleNew(generateStyle)
-class Item extends Component<AppNavItemProps> {
+export class ItemBase extends Component<AppNavItemProps> {
   static displayName = 'Item'
   static readonly componentId = 'AppNav.Item'
 
@@ -155,6 +154,9 @@ class Item extends Component<AppNavItemProps> {
     )
   }
 }
+
+const Item = withStyleNew(generateStyle)(ItemBase)
+type Item = ItemBase
 
 export default Item
 export { Item }

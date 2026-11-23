@@ -34,8 +34,7 @@ import {
 } from '../DeterministicIdContext/index.js'
 import type { WithDeterministicIdProps } from '../DeterministicIdContext'
 
-@withDeterministicId()
-class TestComponent extends Component<
+class TestComponentBase extends Component<
   React.PropsWithChildren<WithDeterministicIdProps>
 > {
   render() {
@@ -46,6 +45,8 @@ class TestComponent extends Component<
     )
   }
 }
+
+const TestComponent = withDeterministicId()(TestComponentBase)
 
 class WrapperComponent extends Component {
   render() {

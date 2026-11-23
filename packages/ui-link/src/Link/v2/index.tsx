@@ -49,8 +49,7 @@ import type { ViewOwnProps } from '@instructure/ui-view/latest'
 category: components
 ---
 **/
-@withStyleNew(generateStyle)
-class Link extends Component<LinkProps, LinkState> {
+export class LinkBase extends Component<LinkProps, LinkState> {
   static displayName = 'Link'
   static readonly componentId = 'Link'
 
@@ -262,6 +261,9 @@ class Link extends Component<LinkProps, LinkState> {
     )
   }
 }
+
+const Link = withStyleNew(generateStyle)(LinkBase)
+type Link = LinkBase
 
 export default Link
 export { Link }

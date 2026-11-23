@@ -36,8 +36,10 @@ const toggleExpanded = ({ expanded }: { expanded: boolean }) => ({
 category: components/Util Components
 ---
 **/
-@withDeterministicId()
-class Expandable extends Component<ExpandableProps, ExpandableState> {
+export class ExpandableBase extends Component<
+  ExpandableProps,
+  ExpandableState
+> {
   static displayName = 'Expandable'
   static allowedProps = allowedProps
   static defaultProps = {
@@ -116,6 +118,9 @@ class Expandable extends Component<ExpandableProps, ExpandableState> {
     }
   }
 }
+
+const Expandable = withDeterministicId()(ExpandableBase)
+type Expandable = ExpandableBase
 
 export default Expandable
 export { Expandable }

@@ -73,10 +73,7 @@ category: components
 tags: overlay, portal, dialog
 ---
 **/
-@withDeterministicId()
-@textDirectionContextConsumer()
-@withStyle(generateStyle, generateComponentTheme)
-class Popover extends Component<PopoverProps, PopoverState> {
+export class PopoverBase extends Component<PopoverProps, PopoverState> {
   static displayName = 'Popover'
   static readonly componentId = 'Popover'
 
@@ -639,6 +636,13 @@ class Popover extends Component<PopoverProps, PopoverState> {
     }
   }
 }
+
+const Popover = withDeterministicId()(
+  textDirectionContextConsumer()(
+    withStyle(generateStyle, generateComponentTheme)(PopoverBase)
+  )
+)
+type Popover = PopoverBase
 
 export default Popover
 export { Popover }

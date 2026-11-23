@@ -64,9 +64,7 @@ id: TopNavBar.ActionItems
 ---
 @module TopNavBarActionItems
 **/
-@withDeterministicId()
-@withStyleNew(generateStyle, 'TopNavBarActionItems')
-class TopNavBarActionItems extends Component<
+export class TopNavBarActionItemsBase extends Component<
   TopNavBarActionItemsProps,
   TopNavBarActionItemsState
 > {
@@ -301,6 +299,11 @@ class TopNavBarActionItems extends Component<
     )
   }
 }
+
+const TopNavBarActionItems = withDeterministicId()(
+  withStyleNew(generateStyle, 'TopNavBarActionItems')(TopNavBarActionItemsBase)
+)
+type TopNavBarActionItems = TopNavBarActionItemsBase
 
 export { TopNavBarActionItems }
 export default TopNavBarActionItems

@@ -50,9 +50,7 @@ category: components
 ---
 @module View
 **/
-@textDirectionContextConsumer()
-@withStyleNew(generateStyle)
-class View extends Component<ViewProps> {
+export class ViewBase extends Component<ViewProps> {
   static displayName = 'View'
   static componentId = 'View'
   static allowedProps = allowedProps
@@ -88,7 +86,7 @@ class View extends Component<ViewProps> {
     Component: ComponentType<any>
   ) => {
     // We don't want the theming and styling props to pass
-    // (these are added and handled by the `@withStyleNew` decorator)
+    // (these are added and handled by the `withStyleNew` HOC)
     const propsToOmit = [
       ...View.allowedProps,
       'styles',
@@ -267,6 +265,11 @@ class View extends Component<ViewProps> {
     return renderContent(isLoading === true)
   }
 }
+
+const View = textDirectionContextConsumer()(
+  withStyleNew(generateStyle)(ViewBase)
+)
+type View = ViewBase
 
 export default View
 export { View }

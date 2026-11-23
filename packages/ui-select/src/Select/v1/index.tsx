@@ -128,9 +128,7 @@ category: components
 tags: autocomplete, typeahead, combobox, dropdown, search, form
 ---
 **/
-@withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
-class Select extends Component<SelectProps> {
+export class SelectBase extends Component<SelectProps> {
   static displayName = 'Select'
   static readonly componentId = 'Select'
   private readonly SCROLL_TOLERANCE = 0.5
@@ -846,6 +844,11 @@ class Select extends Component<SelectProps> {
     )
   }
 }
+
+const Select = withDeterministicId()(
+  withStyle(generateStyle, generateComponentTheme)(SelectBase)
+)
+type Select = SelectBase
 
 export default Select
 export { Select }

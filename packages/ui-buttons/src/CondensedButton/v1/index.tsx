@@ -40,8 +40,7 @@ category: components
 ---
 **/
 // needed for listing the available theme variables on docs page
-@withStyle(null, generateComponentTheme)
-class CondensedButton extends Component<CondensedButtonProps> {
+export class CondensedButtonBase extends Component<CondensedButtonProps> {
   static displayName = 'CondensedButton'
   static readonly componentId = 'CondensedButton'
 
@@ -127,6 +126,12 @@ class CondensedButton extends Component<CondensedButtonProps> {
     )
   }
 }
+
+const CondensedButton = withStyle(
+  null,
+  generateComponentTheme
+)(CondensedButtonBase)
+type CondensedButton = CondensedButtonBase
 
 export default CondensedButton
 export { CondensedButton }

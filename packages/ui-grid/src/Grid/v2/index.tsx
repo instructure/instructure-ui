@@ -47,8 +47,7 @@ import type { GridProps } from './props'
 category: components
 ---
 **/
-@withStyleNew(generateStyle)
-class Grid extends Component<GridProps> {
+export class GridBase extends Component<GridProps> {
   static displayName = 'Grid'
   static readonly componentId = 'Grid'
 
@@ -113,6 +112,9 @@ class Grid extends Component<GridProps> {
     )
   }
 }
+
+const Grid = withStyleNew(generateStyle)(GridBase)
+type Grid = GridBase
 
 export default Grid
 export { Grid, GridRow, GridCol }

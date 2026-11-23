@@ -77,9 +77,10 @@ id: TopNavBar.Item
 ---
 @module TopNavBarItem
 **/
-@withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
-class TopNavBarItem extends Component<TopNavBarItemProps, TopNavBarItemState> {
+export class TopNavBarItemBase extends Component<
+  TopNavBarItemProps,
+  TopNavBarItemState
+> {
   static displayName = 'TopNavBarItem'
   static readonly componentId = 'TopNavBar.Item'
 
@@ -753,6 +754,11 @@ class TopNavBarItem extends Component<TopNavBarItemProps, TopNavBarItemState> {
     )
   }
 }
+
+const TopNavBarItem = withDeterministicId()(
+  withStyle(generateStyle, generateComponentTheme)(TopNavBarItemBase)
+)
+type TopNavBarItem = TopNavBarItemBase
 
 export { TopNavBarItem }
 export default TopNavBarItem

@@ -53,9 +53,7 @@ function keyEventIsClickButton(e: React.KeyboardEvent) {
 category: components
 ---
 **/
-@withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
-class FileDrop extends Component<FileDropProps, FileDropState> {
+export class FileDropBase extends Component<FileDropProps, FileDropState> {
   static displayName = 'FileDrop'
   static readonly componentId = 'FileDrop'
 
@@ -426,6 +424,11 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
     )
   }
 }
+
+const FileDrop = withDeterministicId()(
+  withStyle(generateStyle, generateComponentTheme)(FileDropBase)
+)
+type FileDrop = FileDropBase
 
 export default FileDrop
 export { FileDrop }

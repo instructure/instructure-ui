@@ -55,9 +55,7 @@ tags: toggle, switch
 ---
 **/
 
-@withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
-class Checkbox extends Component<CheckboxProps, CheckboxState> {
+export class CheckboxBase extends Component<CheckboxProps, CheckboxState> {
   static displayName = 'Checkbox'
   static readonly componentId = 'Checkbox'
 
@@ -306,7 +304,7 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
       isRequired
     } = this.props
 
-    const props = omitProps(this.props, Checkbox.allowedProps)
+    const props = omitProps(this.props, CheckboxBase.allowedProps)
 
     error(
       !(variant === 'toggle' && indeterminate),
@@ -350,6 +348,11 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
     )
   }
 }
+
+const Checkbox = withDeterministicId()(
+  withStyle(generateStyle, generateComponentTheme)(CheckboxBase)
+)
+type Checkbox = CheckboxBase
 
 export default Checkbox
 export { Checkbox, CheckboxFacade, ToggleFacade }
