@@ -1,0 +1,85 @@
+name: Deploy PR preview docs
+# Runs from the default branch with write access. The artifact comes from untrusted PR code,
+# so it is only ever copied, never executed.
+on:
+  workflow_run:
+    workflows: ['Build PR preview docs']
+    types:
+      - completed
+permissions:
+  actions: read
+  contents: write
+  pull-requests: write
+jobs:
+  deploy-preview:
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'pull_request' &&
+      github.event.workflow_run.head_repository.full_name == github.repository &&
+      github.event.workflow_run.pull_requests[0].number != null
+    runs-on: ubuntu-latest
+    # the number comes from the event payload, not the artifact, so a PR can't target another PR's preview
+    env:
+      PR_NUMBER: ${{ github.event.workflow_run.pull_requests[0].number }}
+    concurrency:
+      group: preview-deploy-${{ github.event.workflow_run.pull_requests[0].number }}
+      cancel-in-progress: true
+    steps:
+      # the deploy action needs a git repository to create its gh-pages worktree
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Download built docs
+        uses: actions/download-artifact@v8
+        with:
+          name: preview-docs
+          path: preview-site
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ github.token }}
+      - name: Validate artifact and PR state
+        id: guard
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BUILT_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          [[ "$PR_NUMBER" =~ ^[0-9]+$ ]] || { echo "::error::Invalid PR number"; exit 1; }
+          if [ -n "$(find preview-site -type l)" ]; then
+            echo "::error::Artifact contains symlinks"
+            exit 1
+          fi
+          read -r state head_sha < <(gh api "repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER" --jq '[.state, .head.sha] | @tsv')
+          # a closed PR or a newer push means this build is stale
+          if [ "$state" != "open" ] || [ "$head_sha" != "$BUILT_SHA" ]; then
+            echo "PR $PR_NUMBER is $state at $head_sha, built $BUILT_SHA; skipping"
+            echo "proceed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "proceed=true" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Deploy preview
+        id: preview
+        if: steps.guard.outputs.proceed == 'true'
+        uses: rossjrw/pr-preview-action@v1
+        with:
+          source-dir: ./preview-site
+          preview-branch: gh-pages
+          umbrella-dir: pr-preview
+          pages-base-url: instructure.design
+          action: deploy
+          pr-number: ${{ env.PR_NUMBER }}
+          deploy-commit-message: Deploy preview for PR ${{ env.PR_NUMBER }} 🛫
+          git-config-name: github-actions[bot]
+          git-config-email: 41898282+github-actions[bot]@users.noreply.github.com
+          # the action's own comment step reads the PR number from the event, which workflow_run doesn't carry
+          comment: false
+      - name: Comment preview link
+        if: steps.guard.outputs.proceed == 'true' && steps.preview.outputs.preview-url != ''
+        uses: marocchino/sticky-pull-request-comment@67d0dec7b07ed060a405f9b2a64b8ab319fdd7db # v2.9.2
+        with:
+          header: pr-preview
+          number: ${{ env.PR_NUMBER }}
+          # same markup as the comment pr-preview-action generates, which can't post it without a pull_request event
+          message: |
+            [PR Preview Action](https://github.com/rossjrw/pr-preview-action) ${{ steps.preview.outputs.action-version }}
+            :---:
+            | <p><img src="https://qr.rossjrw.com/?color.dark=0d1117&url=${{ steps.preview.outputs.preview-url }}" height="100" align="right" alt="QR code for preview link"></p> :rocket: View preview at <br> ${{ steps.preview.outputs.preview-url }} <br><br>
+            | <h6>Built to branch [`gh-pages`](${{ github.server_url }}/${{ github.repository }}/tree/gh-pages) at ${{ steps.preview.outputs.action-start-time }}. <br> Preview will be ready when the [GitHub Pages deployment](${{ github.server_url }}/${{ github.repository }}/deployments) is complete. <br><br> </h6>
