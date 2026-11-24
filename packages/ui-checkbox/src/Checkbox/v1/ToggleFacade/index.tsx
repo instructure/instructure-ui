@@ -39,8 +39,7 @@ import type { ToggleFacadeProps } from './props'
 parent: Checkbox
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
-class ToggleFacade extends Component<ToggleFacadeProps> {
+export class ToggleFacadeBase extends Component<ToggleFacadeProps> {
   static displayName = 'ToggleFacade'
   static readonly componentId = 'ToggleFacade'
 
@@ -101,6 +100,12 @@ class ToggleFacade extends Component<ToggleFacadeProps> {
     )
   }
 }
+
+const ToggleFacade = withStyle(
+  generateStyle,
+  generateComponentTheme
+)(ToggleFacadeBase)
+type ToggleFacade = ToggleFacadeBase
 
 export default ToggleFacade
 export { ToggleFacade }

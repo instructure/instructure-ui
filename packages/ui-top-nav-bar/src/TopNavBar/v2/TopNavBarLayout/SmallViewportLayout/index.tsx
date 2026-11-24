@@ -76,9 +76,7 @@ import type {
 private: true
 ---
 **/
-@withDeterministicId()
-@withStyleNew(generateStyle, 'TopNavBarLayout')
-class TopNavBarSmallViewportLayout extends Component<
+export class TopNavBarSmallViewportLayoutBase extends Component<
   TopNavBarSmallViewportLayoutProps,
   TopNavBarSmallViewportLayoutState
 > {
@@ -649,6 +647,14 @@ class TopNavBarSmallViewportLayout extends Component<
     )
   }
 }
+
+const TopNavBarSmallViewportLayout = withDeterministicId()(
+  withStyleNew(
+    generateStyle,
+    'TopNavBarLayout'
+  )(TopNavBarSmallViewportLayoutBase)
+)
+type TopNavBarSmallViewportLayout = TopNavBarSmallViewportLayoutBase
 
 export { TopNavBarSmallViewportLayout }
 export default TopNavBarSmallViewportLayout

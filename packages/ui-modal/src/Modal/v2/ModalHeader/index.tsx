@@ -48,8 +48,7 @@ parent: Modal
 id: Modal.Header
 ---
 **/
-@withStyleNew(generateStyle, 'ModalHeader')
-class ModalHeader extends Component<ModalHeaderProps> {
+export class ModalHeaderBase extends Component<ModalHeaderProps> {
   static displayName = 'ModalHeader'
   static readonly componentId = 'Modal.Header'
   static readonly themeId = 'ModalHeader'
@@ -142,6 +141,9 @@ class ModalHeader extends Component<ModalHeaderProps> {
     )
   }
 }
+
+const ModalHeader = withStyleNew(generateStyle, 'ModalHeader')(ModalHeaderBase)
+type ModalHeader = ModalHeaderBase
 
 export default ModalHeader
 export { ModalHeader }

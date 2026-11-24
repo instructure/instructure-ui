@@ -83,8 +83,6 @@ type WithStyleProps<
   ? WithStylePrivateProps<Style>
   : WithStylePrivateProps<Style> & ThemeOverrideProp<Theme>
 
-declare const process: Record<string, any> | undefined
-
 const defaultValues = {
   styles: {},
   makeStyles: () => {}
@@ -94,8 +92,8 @@ const defaultValues = {
  * ---
  * category: utilities/themes
  * ---
- * Legacy decorator for the pre-v11.7 theming system. New components should use
- * `withStyleNew` instead. Override patterns for components decorated with
+ * Legacy HOC for the pre-v11.7 theming system. New components should use
+ * `withStyleNew` instead. Override patterns for components wrapped with
  * `withStyle` are documented on the
  * [Legacy theme overrides](/#legacy-theme-overrides) docs page.
  *
@@ -116,13 +114,13 @@ const withStyle = decorator(
       allowedProps?: string[]
       originalType?: WithStyleComponent
       defaultProps?: Partial<any>
-    } = forwardRef((props, ref) => {
+    } = forwardRef(function WithStyle(props, ref) {
       const theme = useTheme()
 
       if (props.styles) {
         warn(
           false,
-          `Manually passing the "styles" property is not allowed on the ${displayName} component. Using the default styles calculated by the @withStyleNew decorator instead.\n`,
+          `Manually passing the "styles" property is not allowed on the ${displayName} component. Using the default styles calculated by withStyle instead.\n`,
           props.styles
         )
       }
@@ -130,7 +128,7 @@ const withStyle = decorator(
       if (props.makeStyles) {
         warn(
           false,
-          `Manually passing the "makeStyles" property is not allowed on the ${displayName} component. Styles are calculated by the @withStyleNew decorator.`
+          `Manually passing the "makeStyles" property is not allowed on the ${displayName} component. Styles are calculated by withStyle.`
         )
       }
 
@@ -190,27 +188,11 @@ const withStyle = decorator(
     // more info: https://github.com/facebook/react/issues/13455
     WithStyle.originalType = ComposedComponent.originalType || ComposedComponent
 
+    // hoisting skips defaultProps, but parents read it (e.g. getElementType)
     WithStyle.defaultProps = ComposedComponent.defaultProps
-    // These static fields exist on InstUI components
-    WithStyle.allowedProps = ComposedComponent.allowedProps
 
     // we are exposing the theme generator for the docs generation
     WithStyle.generateComponentTheme = generateComponentTheme
-
-    // we have to add defaults to makeStyles and styles added by this decorator
-    // eslint-disable-next-line no-param-reassign
-    ComposedComponent.defaultProps = {
-      ...ComposedComponent.defaultProps,
-      makeStyles: defaultValues.makeStyles,
-      styles: defaultValues.styles
-    }
-
-    if (
-      typeof process !== 'undefined' &&
-      process?.env?.NODE_ENV !== 'production'
-    ) {
-      WithStyle.displayName = `WithStyle(${displayName})`
-    }
 
     return WithStyle
   }

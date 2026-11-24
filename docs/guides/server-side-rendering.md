@@ -125,7 +125,7 @@ const MyComponent = () => {
 
 Call it more than once with different `instanceName` values to derive several
 distinct, stable ids from one component instance. In class components, the
-`withDeterministicId` decorator injects a `deterministicId` prop with the same
+`withDeterministicId` HOC injects a `deterministicId` prop with the same
 signature.
 
 Three things break hydration, all of them avoidable:

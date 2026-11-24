@@ -56,9 +56,7 @@ import type { AlertProps, AlertState } from './props'
 category: components
 ---
 **/
-@withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
-class Alert extends Component<AlertProps, AlertState> {
+export class AlertBase extends Component<AlertProps, AlertState> {
   static displayName = 'Alert'
   static readonly componentId = 'Alert'
 
@@ -349,6 +347,11 @@ class Alert extends Component<AlertProps, AlertState> {
     )
   }
 }
+
+const Alert = withDeterministicId()(
+  withStyle(generateStyle, generateComponentTheme)(AlertBase)
+)
+type Alert = AlertBase
 
 export default Alert
 export { Alert }

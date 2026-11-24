@@ -137,6 +137,8 @@ export type ParsedDocSummary = Record<
     category?: string
     isWIP?: boolean
     tags?: string
+    // short name of the owning package (e.g. 'ui-card')
+    packageShortName?: string
   }
 >
 

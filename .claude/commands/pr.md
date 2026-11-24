@@ -10,8 +10,7 @@ Open a PR for the current branch.
 2. `git log master..HEAD` and `git diff master...HEAD` — read **all** commits in the branch (not just the latest) so the summary covers everything that's changed.
 3. If not pushed: `git push -u origin <branch>`.
 4. Create the PR (see invocation below).
-5. **Suggest reviewers (required — do not skip).** `/pr` is **not complete** until you've run the **Reviewer assignment** flow and presented the ranked list to the user. Creating the PR is only half the job; do this every time, even on a long session.
-6. Return the PR URL and the assigned reviewer (if any).
+5. Return the PR URL.
 
 If the branch name or any commit references a Jira ticket (e.g. `INSTUI-1234`), include it. If you can't find one, ask the user once before opening — don't invent one. If they don't have a ticket and the work warrants one, offer `/ticket` to create it first (it can add the `Fixes` line back to the PR afterward).
 
@@ -26,42 +25,6 @@ EOF
 ```
 
 Open as draft (`--draft`) if the work is in progress.
-
-## Reviewer assignment
-
-After the PR is created, help the user choose a reviewer from the `.claude/reviewers.txt` roster, ranked by **fewest recently-opened PRs reviewed (last 30 days)** — an approximate load proxy, lightest first. (GitHub search can't filter by review *date*, so this counts PRs *created* in the window that the person reviewed; it understates reviews on older, still-active PRs.) Don't auto-assign — the counts can't see who's on PTO or heads-down, so the human makes the call.
-
-`.claude/reviewers.txt` is a plain data file (one handle per line), deliberately **not** `.github/CODEOWNERS`: a real CODEOWNERS at that path makes everyone a GitHub code owner and auto-requests them on every PR with no way to remove them. Keep the roster out of `.github/CODEOWNERS`. **Run this verbatim** to gather the ranked list:
-
-```bash
-set -euo pipefail
-[ -f .claude/reviewers.txt ] || { echo "no reviewer roster — skip assignment"; exit 0; }
-REPO=$(gh repo view --json nameWithOwner -q .nameWithOwner)
-SINCE=$(date -v-30d +%F 2>/dev/null || date -d '30 days ago' +%F)   # macOS || GNU
-AUTHOR=$(gh api user --jq .login)
-
-# Roster: one handle per line; drop comments/blank lines and an optional leading '@'.
-# '|| true' so an empty/comments-only roster skips gracefully instead of tripping set -e.
-{ grep -vE '^[[:space:]]*(#|$)' .claude/reviewers.txt \
-  | sed 's/^[[:space:]]*@//; s/[[:space:]]*$//' | sort -u > /tmp/pr_roster.txt; } || true
-
-: > /tmp/pr_counts.txt
-while IFS= read -r U; do                       # real loop — this shell won't word-split $var
-  [ -z "$U" ] && continue
-  [ "$U" = "$AUTHOR" ] && continue             # can't review own PR
-  N=$(gh search prs --repo "$REPO" --reviewed-by "$U" --created ">=$SINCE" \
-        --limit 1000 --json number --jq 'length') || { echo "WARN: count failed for $U" >&2; continue; }
-  printf '%s %s\n' "$N" "$U" >> /tmp/pr_counts.txt
-done < /tmp/pr_roster.txt
-
-[ -s /tmp/pr_counts.txt ] || { echo "no eligible reviewers — skip assignment"; exit 0; }
-echo "reviewed PRs opened in last 30d, per candidate (approx. load):"; sort -n /tmp/pr_counts.txt
-MIN=$(sort -n /tmp/pr_counts.txt | head -1 | awk '{print $1}')
-WINNER=$(awk -v m="$MIN" '$1==m{print $2}' /tmp/pr_counts.txt | sort -R | head -1)  # random tie-break
-echo "==> suggested (lightest load): $WINNER (count=$MIN)"
-```
-
-The loop's `gh search prs` / `gh repo view` calls may trigger a one-time permission prompt — that's expected; approve and let it finish. **Do not abandon the reviewer step because of a prompt.** Then **present the ranked list to the user** — each candidate with their 30-day review count, lightest first — and recommend the top one as the default. Ask them who to assign (they may pick a heavier-loaded person who's actually available, or skip entirely). Only after they choose, assign with `gh pr edit <pr> --add-reviewer <their-pick>` and confirm. If the script printed a skip message (no reviewer roster / no eligible reviewers), say so and leave the PR unassigned.
 
 ## Body format
 

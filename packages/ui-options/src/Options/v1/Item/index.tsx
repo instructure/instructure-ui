@@ -44,9 +44,7 @@ parent: Options
 id: Options.Item
 ---
 **/
-@withDeterministicId()
-@withStyle(generateStyles, generateComponentTheme)
-class Item extends Component<OptionsItemProps> {
+export class ItemBase extends Component<OptionsItemProps> {
   static displayName = 'Item'
   static readonly componentId = 'Options.Item'
 
@@ -183,6 +181,11 @@ class Item extends Component<OptionsItemProps> {
     )
   }
 }
+
+const Item = withDeterministicId()(
+  withStyle(generateStyles, generateComponentTheme)(ItemBase)
+)
+type Item = ItemBase
 
 export default Item
 export { Item }

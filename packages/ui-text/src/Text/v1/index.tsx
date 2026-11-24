@@ -37,8 +37,7 @@ import { allowedProps } from './props.js'
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
-class Text extends Component<TextProps> {
+export class TextBase extends Component<TextProps> {
   static displayName = 'Text'
   static readonly componentId = 'Text'
 
@@ -103,6 +102,9 @@ class Text extends Component<TextProps> {
     )
   }
 }
+
+const Text = withStyle(generateStyle, generateComponentTheme)(TextBase)
+type Text = TextBase
 
 export default Text
 export { Text }

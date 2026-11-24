@@ -43,8 +43,7 @@ parent: Pagination
 id: Pagination.PageInput
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
-class PaginationPageInput extends Component<
+export class PaginationPageInputBase extends Component<
   PaginationPageInputProps,
   PaginationPageInputState
 > {
@@ -236,6 +235,12 @@ class PaginationPageInput extends Component<
     )
   }
 }
+
+const PaginationPageInput = withStyle(
+  generateStyle,
+  generateComponentTheme
+)(PaginationPageInputBase)
+type PaginationPageInput = PaginationPageInputBase
 
 export default PaginationPageInput
 export { PaginationPageInput }

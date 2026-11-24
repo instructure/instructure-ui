@@ -51,8 +51,10 @@ import { allowedProps } from './props.js'
 category: components
 ---
 **/
-@withStyleNew(generateStyle)
-class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
+export class ColorPresetBase extends Component<
+  ColorPresetProps,
+  ColorPresetState
+> {
   static displayName = 'ColorPreset'
   static allowedProps = allowedProps
   static readonly componentId = 'ColorPreset'
@@ -362,6 +364,9 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
     )
   }
 }
+
+const ColorPreset = withStyleNew(generateStyle)(ColorPresetBase)
+type ColorPreset = ColorPresetBase
 
 export { ColorPreset }
 export default ColorPreset

@@ -38,8 +38,7 @@ parent: InlineList
 id: InlineList.Item
 ---
 **/
-@withStyleNew(generateStyle)
-class InlineListItem extends Component<InlineListItemProps> {
+export class InlineListItemBase extends Component<InlineListItemProps> {
   static displayName = 'InlineListItem'
   static readonly componentId = 'InlineList.Item'
 
@@ -106,6 +105,9 @@ class InlineListItem extends Component<InlineListItemProps> {
     )
   }
 }
+
+const InlineListItem = withStyleNew(generateStyle)(InlineListItemBase)
+type InlineListItem = InlineListItemBase
 
 export default InlineListItem
 export { InlineListItem }

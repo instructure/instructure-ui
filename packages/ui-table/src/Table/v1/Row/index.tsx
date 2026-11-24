@@ -48,8 +48,7 @@ parent: Table
 id: Table.Row
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
-class Row extends Component<TableRowProps> {
+export class RowBase extends Component<TableRowProps> {
   static displayName = 'Row'
   static readonly componentId = 'Table.Row'
   static contextType = TableContext
@@ -102,6 +101,9 @@ class Row extends Component<TableRowProps> {
     )
   }
 }
+
+const Row = withStyle(generateStyle, generateComponentTheme)(RowBase)
+type Row = RowBase
 
 export default Row
 export { Row }

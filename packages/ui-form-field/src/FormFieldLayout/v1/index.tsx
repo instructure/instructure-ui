@@ -42,9 +42,7 @@ import generateComponentTheme from './theme.js'
 parent: FormField
 ---
 **/
-@withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
-class FormFieldLayout extends Component<FormFieldLayoutProps> {
+export class FormFieldLayoutBase extends Component<FormFieldLayoutProps> {
   static displayName = 'FormFieldLayout'
   static readonly componentId = 'FormFieldLayout'
 
@@ -205,6 +203,11 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
     )
   }
 }
+
+const FormFieldLayout = withDeterministicId()(
+  withStyle(generateStyle, generateComponentTheme)(FormFieldLayoutBase)
+)
+type FormFieldLayout = FormFieldLayoutBase
 
 export default FormFieldLayout
 export { FormFieldLayout }

@@ -57,9 +57,7 @@ type OptionsChildren = (ItemChild | SeparatorChild | OptionsChild)[]
 category: components/Util Components
 ---
 **/
-@withDeterministicId()
-@withStyle(generateStyles, generateComponentTheme)
-class Options extends Component<OptionsProps> {
+export class OptionsBase extends Component<OptionsProps> {
   static displayName = 'Options'
   static readonly componentId = 'Options'
 
@@ -192,6 +190,11 @@ class Options extends Component<OptionsProps> {
     )
   }
 }
+
+const Options = withDeterministicId()(
+  withStyle(generateStyles, generateComponentTheme)(OptionsBase)
+)
+type Options = OptionsBase
 
 export default Options
 export { Options }

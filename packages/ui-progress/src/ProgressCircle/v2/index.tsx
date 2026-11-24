@@ -39,8 +39,7 @@ import { allowedProps } from './props.js'
 category: components
 ---
 **/
-@withStyleNew(generateStyle)
-class ProgressCircle extends Component<
+export class ProgressCircleBase extends Component<
   ProgressCircleProps,
   ProgressCircleState
 > {
@@ -192,6 +191,9 @@ class ProgressCircle extends Component<
     )
   }
 }
+
+const ProgressCircle = withStyleNew(generateStyle)(ProgressCircleBase)
+type ProgressCircle = ProgressCircleBase
 
 export default ProgressCircle
 export { ProgressCircle }

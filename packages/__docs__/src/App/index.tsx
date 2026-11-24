@@ -111,8 +111,7 @@ const sortThemeKeys = (themeKeys: string[]) => {
   return [...themeKeys].sort((a, b) => rank(a) - rank(b))
 }
 
-@withStyleForDocs(generateStyle)
-class App extends Component<AppProps, AppState> {
+export class AppBase extends Component<AppProps, AppState> {
   static displayName = 'App'
   static contextType = AppContext
   declare context: React.ContextType<typeof AppContext>
@@ -205,7 +204,10 @@ class App extends Component<AppProps, AppState> {
       })
   }
 
-  handleMinorVersionChange = (newVersion: string) => {
+  handleMinorVersionChange = (
+    newVersion: string,
+    options?: { replace?: boolean }
+  ) => {
     // Abort current fetches
     this._controller?.abort()
     this._controller = new AbortController()
@@ -232,7 +234,7 @@ class App extends Component<AppProps, AppState> {
     })
 
     // Update URL to reflect new version
-    navigateToVersion(newVersion)
+    navigateToVersion(newVersion, options)
 
     this.fetchMainDocsData(
       `${getDeployBase()}/docs/${newVersion}/markdown-and-sources-data.json`,
@@ -359,6 +361,10 @@ class App extends Component<AppProps, AppState> {
     if (!prevState.minorVersionsData && this.state.minorVersionsData) {
       this.handleMinorVersionForPage(this.state.key)
     }
+    // the page's category and package are only known once the docs index loads
+    if (!prevState.docsData && this.state.docsData) {
+      this.handleMinorVersionForPage(this.state.key)
+    }
   }
 
   getLatestMinorVersion = () => {
@@ -376,21 +382,29 @@ class App extends Component<AppProps, AppState> {
 
     if (key && LEGACY_THEMING_PAGES.includes(key)) {
       if (selectedMinorVersion !== 'v11_6') {
-        this.handleMinorVersionChange('v11_6')
+        this.handleMinorVersionChange('v11_6', { replace: true })
       }
     } else if (key && NEW_THEMING_PAGES.includes(key)) {
       if (selectedMinorVersion !== latestVersion) {
-        this.handleMinorVersionChange(latestVersion)
+        this.handleMinorVersionChange(latestVersion, { replace: true })
       }
     } else {
       const category = docsData?.docs[key]?.category
+      const packageShortName = docsData?.docs[key]?.packageShortName
       const isGuidePage =
         !!category &&
         !category.startsWith('components') &&
         !category.startsWith('utilities')
+      // Guide pages (.md) always show with the latest version
       if (isGuidePage && selectedMinorVersion !== latestVersion) {
-        // Guide pages (.md) always show with the latest version
-        this.handleMinorVersionChange(latestVersion)
+        this.handleMinorVersionChange(latestVersion, { replace: true })
+      }
+      // if the package os not shipped in the current version, use the latest one
+      const shippedIn = packageShortName
+        ? minorVersionsData.activeVersions[packageShortName]
+        : undefined
+      if (shippedIn && !shippedIn.includes(selectedMinorVersion)) {
+        this.handleMinorVersionChange(latestVersion, { replace: true })
       }
     }
   }
@@ -1290,6 +1304,9 @@ class App extends Component<AppProps, AppState> {
     )
   }
 }
+
+const App = withStyleForDocs(generateStyle)(AppBase)
+type App = AppBase
 
 export default App
 export { App }

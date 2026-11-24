@@ -56,9 +56,7 @@ import { frozenThemesDesignTokensV1 } from '@instructure/ui-themes'
 category: components
 ---
 **/
-@withDeterministicId()
-@withStyleNew(generateStyle, null, frozenThemesDesignTokensV1)
-class Alert extends Component<AlertProps, AlertState> {
+export class AlertBase extends Component<AlertProps, AlertState> {
   static displayName = 'Alert'
   static readonly componentId = 'Alert'
 
@@ -344,6 +342,11 @@ class Alert extends Component<AlertProps, AlertState> {
     )
   }
 }
+
+const Alert = withDeterministicId()(
+  withStyleNew(generateStyle, null, frozenThemesDesignTokensV1)(AlertBase)
+)
+type Alert = AlertBase
 
 export default Alert
 export { Alert }

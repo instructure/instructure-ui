@@ -44,8 +44,7 @@ import type { ViewProps } from '@instructure/ui-view/latest'
 category: components
 ---
 **/
-@withStyleNew(generateStyle)
-class ToggleDetails extends Component<ToggleDetailsProps> {
+export class ToggleDetailsBase extends Component<ToggleDetailsProps> {
   static displayName = 'ToggleDetails'
   static readonly componentId = 'ToggleDetails'
   static allowedProps = allowedProps
@@ -207,6 +206,9 @@ class ToggleDetails extends Component<ToggleDetailsProps> {
     )
   }
 }
+
+const ToggleDetails = withStyleNew(generateStyle)(ToggleDetailsBase)
+type ToggleDetails = ToggleDetailsBase
 
 export default ToggleDetails
 export { ToggleDetails }

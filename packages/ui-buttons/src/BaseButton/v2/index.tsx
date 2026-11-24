@@ -68,8 +68,7 @@ const buttonColorToIconColor = {
 category: components/Util Components
 ---
 **/
-@withStyleNew(generateStyles)
-class BaseButton extends Component<BaseButtonProps> {
+export class BaseButtonBase extends Component<BaseButtonProps> {
   static displayName = 'BaseButton'
   static readonly componentId = 'BaseButton'
 
@@ -351,6 +350,9 @@ class BaseButton extends Component<BaseButtonProps> {
     )
   }
 }
+
+const BaseButton = withStyleNew(generateStyles)(BaseButtonBase)
+type BaseButton = BaseButtonBase
 
 export { BaseButton }
 export default BaseButton

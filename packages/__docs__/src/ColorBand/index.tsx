@@ -32,8 +32,7 @@ import generateStyle from './styles'
 import { allowedProps } from './props'
 import type { ColorBandProps } from './props'
 
-@withStyleForDocs(generateStyle)
-class ColorBand extends Component<ColorBandProps> {
+export class ColorBandBase extends Component<ColorBandProps> {
   static displayName = 'ColorBand'
   static allowedProps = allowedProps
   componentDidMount() {
@@ -71,6 +70,9 @@ class ColorBand extends Component<ColorBandProps> {
     )
   }
 }
+
+const ColorBand = withStyleForDocs(generateStyle)(ColorBandBase)
+type ColorBand = ColorBandBase
 
 export default ColorBand
 export { ColorBand }
