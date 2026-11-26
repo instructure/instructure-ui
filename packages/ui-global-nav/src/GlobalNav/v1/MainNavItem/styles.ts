@@ -22,14 +22,15 @@
  * SOFTWARE.
  */
 
-import type { NewComponentTypes } from '@instructure/ui-themes'
-import { calcBandFocusStyles } from '../utils/calcBandFocusStyles.js'
+import { calcFocusOutlineStyles } from '@instructure/emotion'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import type { MainNavItemStyle } from './props.js'
 
 type StyleParams = {
   collapsed: boolean
   current: boolean
   open: boolean
+  isLegacy: boolean
 }
 
 /**
@@ -43,9 +44,10 @@ type StyleParams = {
  */
 const generateStyle = (
   componentTheme: ReturnType<NewComponentTypes['MainNavItem']>,
-  params: StyleParams
+  params: StyleParams,
+  sharedTokens: SharedTokens
 ): MainNavItemStyle => {
-  const { collapsed, current, open } = params
+  const { collapsed, current, open, isLegacy } = params
 
   return {
     item: {
@@ -91,16 +93,19 @@ const generateStyle = (
             backgroundColor: componentTheme.activeBackgroundColor
           }
         }),
-      // same focus ring as SideNavBarItem, which has the same focus tokens
+      // in the Canvas theme the focus ring in inset and has inverse color
+      // when not selected
       ...(current
-        ? calcBandFocusStyles(
-            componentTheme.selectedOuterFocusOutlineColor,
-            componentTheme.selectedInnerFocusOutlineColor
-          )
-        : calcBandFocusStyles(
-            componentTheme.outerFocusOutlineColor,
-            componentTheme.innerFocusOutlineColor
-          ))
+        ? calcFocusOutlineStyles(sharedTokens.focusOutline, {
+            //innerColor: componentTheme.selectedInnerFocusOutlineColor, TODO not needed, delete
+            focusColor: 'info',
+            focusPosition: isLegacy ? 'inset' : 'offset'
+          })
+        : calcFocusOutlineStyles(sharedTokens.focusOutline, {
+            //innerColor: componentTheme.innerFocusOutlineColor, TODO not needed, delete
+            focusColor: isLegacy ? 'inverse' : 'info',
+            focusPosition: isLegacy ? 'inset' : 'offset'
+          }))
     },
     icon: {
       label: 'mainNavItem__icon',
