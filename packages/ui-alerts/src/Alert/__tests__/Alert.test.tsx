@@ -99,7 +99,7 @@ describe('<Alert />', () => {
     error: 'CircleX',
     info: 'Info',
     success: 'CircleCheck',
-    warning: 'TriangleAlert'
+    warning: 'TriangleExclamationPoint'
   }
 
   ;(
