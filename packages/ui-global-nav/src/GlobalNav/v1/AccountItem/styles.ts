@@ -81,7 +81,7 @@ const generateStyle = (
         : componentTheme.backgroundColor,
       color: current
         ? componentTheme.currentTextColor
-        : componentTheme.titleFontColor,
+        : componentTheme.textColor,
       fontFamily: componentTheme.titleFontFamily,
       fontSize: componentTheme.titleFontSize,
       fontWeight: componentTheme.fontWeight,
