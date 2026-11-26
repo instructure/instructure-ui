@@ -116,12 +116,13 @@ const generateStyle = (
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      width: '1.375rem',
-      height: '1.375rem',
-      borderRadius: '50%',
-      // TODO INSTUI-5234: use verification badge tokens once design adds them, these are honey40 and grey170
-      backgroundColor: '#F0C16C',
-      color: '#273540'
+      boxSizing: 'border-box',
+      width: componentTheme.verificationBadgeSize,
+      height: componentTheme.verificationBadgeSize,
+      // MainNavAccountItem has no badge border width token
+      border: `0.0625rem solid ${componentTheme.verificationBadgeBorderColor}`,
+      borderRadius: componentTheme.verificationBadgeborderRadius,
+      backgroundColor: componentTheme.verificationBadgeBackgroundColor
     },
     pill: {
       label: 'accountItem__pill',

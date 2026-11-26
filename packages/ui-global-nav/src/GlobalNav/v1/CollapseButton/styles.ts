@@ -23,7 +23,11 @@
  */
 
 import type { NewComponentTypes } from '@instructure/ui-themes'
-import type { CollapseButtonIconStyle, CollapseButtonStyle } from './props.js'
+import type {
+  CollapseButtonMainNavItemStyle,
+  CollapseButtonSizeStyle,
+  CollapseButtonStyle
+} from './props.js'
 
 type StyleParams = {
   collapsed: boolean
@@ -50,27 +54,63 @@ const generateStyle = (
       // the collapsed rail centers the button
       marginInlineEnd: collapsed ? 0 : componentTheme.rightMargin
     },
-    iconButtonThemeOverride: {
-      secondaryGhostHoverBackground: componentTheme.hoverBackgroundColor,
-      secondaryGhostActiveBackground: componentTheme.activeBackgroundColor
+    button: {
+      label: 'collapseButton__button',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      boxSizing: 'border-box',
+      margin: 0,
+      padding: 0,
+      border: 'none',
+      backgroundColor: componentTheme.backgroundColor,
+      cursor: 'pointer',
+      '&:hover': { backgroundColor: componentTheme.hoverBackgroundColor },
+      '&:active': { backgroundColor: componentTheme.activeBackgroundColor }
     }
   }
 }
 
 /**
- * Generates the icon color from the `MainNavItem` tokens
+ * Generates the focus ring and the icon color from the `MainNavItem` tokens
  */
-const generateIconStyle = (
+const generateMainNavItemStyle = (
   componentTheme: ReturnType<NewComponentTypes['MainNavItem']>
-): CollapseButtonIconStyle => {
+): CollapseButtonMainNavItemStyle => {
   return {
-    // the default IconButton icon is unreadable on the dark legacy rail, and the
-    // CollapseButton tokens have no icon color
-    iconButtonThemeOverride: {
-      secondaryGhostColor: componentTheme.fontColor
+    button: {
+      label: 'collapseButton__button',
+      // CollapseButton has no focus color tokens
+      '&:focus': {
+        outline: 'none',
+        boxShadow: `inset 0 0 0 0.125rem ${componentTheme.outerFocusOutlineColor}, inset 0 0 0 0.25rem ${componentTheme.innerFocusOutlineColor}`
+      }
+    },
+    icon: {
+      label: 'collapseButton__icon',
+      display: 'flex',
+      // CollapseButton has no icon color token
+      color: componentTheme.fontColor
+    }
+  }
+}
+
+/**
+ * Generates the button size from the `BaseButton` tokens
+ */
+const generateSizeStyle = (
+  componentTheme: ReturnType<NewComponentTypes['BaseButton']>
+): CollapseButtonSizeStyle => {
+  return {
+    button: {
+      label: 'collapseButton__button',
+      // the size of a small IconButton, CollapseButton has no size tokens
+      width: componentTheme.smallHeight,
+      height: componentTheme.smallHeight,
+      borderRadius: componentTheme.borderRadius
     }
   }
 }
 
 export default generateStyle
-export { generateIconStyle }
+export { generateMainNavItemStyle, generateSizeStyle }

@@ -42,7 +42,7 @@ import { Text } from '@instructure/ui-text/latest'
 
 import { SubNavItem } from '../SubNavItem/index.js'
 import type { AccountPanelProps } from './props.js'
-import generateStyle from './styles.js'
+import generateStyle, { generateVerificationStyle } from './styles.js'
 
 /**
 ---
@@ -59,6 +59,13 @@ const AccountPanel = (props: AccountPanelProps) => {
     componentId: 'SubNav'
   })
 
+  // the badge tokens are in MainNavAccountItem, and useStyleNew reads one set per call
+  const verificationStyles = useStyleNew({
+    generateStyle: generateVerificationStyle,
+    componentId: 'SubNav',
+    useTokensFrom: 'MainNavAccountItem'
+  })
+
   return (
     <div css={styles?.panel}>
       <div css={styles?.card}>
@@ -66,11 +73,11 @@ const AccountPanel = (props: AccountPanelProps) => {
           <span css={styles?.avatar}>
             <Avatar name={account.name} src={account.avatarSrc} />
             {verification && (
-              <span css={styles?.verification}>
+              <span css={verificationStyles?.verification}>
                 <ShieldAlertInstUIIcon
                   title={verification.badgeLabel}
-                  color="inherit"
-                  size="xs"
+                  color="onColor"
+                  size="sm"
                 />
               </span>
             )}

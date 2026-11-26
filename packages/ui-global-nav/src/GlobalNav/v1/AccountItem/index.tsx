@@ -74,8 +74,8 @@ const AccountItem = (props: AccountItemProps) => {
         <span css={styles?.verification}>
           <ShieldAlertInstUIIcon
             title={account.verification.badgeLabel}
-            color="inherit"
-            size="xs"
+            color="onColor"
+            size="sm"
           />
         </span>
       )}
