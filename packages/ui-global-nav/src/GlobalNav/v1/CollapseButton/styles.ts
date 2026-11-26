@@ -23,6 +23,7 @@
  */
 
 import type { NewComponentTypes } from '@instructure/ui-themes'
+import { calcBandFocusStyles } from '../utils/calcBandFocusStyles.js'
 import type {
   CollapseButtonMainNavItemStyle,
   CollapseButtonSizeStyle,
@@ -81,10 +82,10 @@ const generateMainNavItemStyle = (
     button: {
       label: 'collapseButton__button',
       // CollapseButton has no focus color tokens
-      '&:focus': {
-        outline: 'none',
-        boxShadow: `inset 0 0 0 0.125rem ${componentTheme.outerFocusOutlineColor}, inset 0 0 0 0.25rem ${componentTheme.innerFocusOutlineColor}`
-      }
+      ...calcBandFocusStyles(
+        componentTheme.outerFocusOutlineColor,
+        componentTheme.innerFocusOutlineColor
+      )
     },
     icon: {
       label: 'collapseButton__icon',
