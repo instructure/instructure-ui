@@ -89,6 +89,13 @@ type GlobalNavMainNavItem = GlobalNavSubNavItem & {
   badgeLabel?: GlobalNavCountLabel
 }
 
+type GlobalNavAccountItem = Omit<GlobalNavSubNavItem, 'subNav'> & {
+  /**
+   * The icon before the label.
+   */
+  icon?: Renderable
+}
+
 type GlobalNavSubNavWithItems = {
   /**
    * The heading of the panel.
@@ -153,6 +160,10 @@ type GlobalNavToggle = {
    */
   checked: boolean
   /**
+   * Whether the toggle can't be switched, which keeps it visible but greyed out.
+   */
+  disabled?: boolean
+  /**
    * Called when the user switches the toggle, with the new `checked` value.
    */
   onChange: (event: ChangeEvent<HTMLInputElement>, checked: boolean) => void
@@ -184,6 +195,10 @@ type GlobalNavAccount = {
    */
   institution?: string
   /**
+   * Whether the current page belongs to the account, for example the profile.
+   */
+  current?: boolean
+  /**
    * The number in the badge of the rail item, which is hidden when it is 0 or missing.
    */
   badgeCount?: number
@@ -192,17 +207,13 @@ type GlobalNavAccount = {
    */
   badgeLabel?: GlobalNavCountLabel
   /**
-   * Whether the panel items are loading.
+   * Any content above `items`, for content that can't be account items.
    */
-  loading?: boolean
-  /**
-   * Screen reader text of the loading spinner.
-   */
-  loadingLabel?: string
+  renderContent?: Renderable
   /**
    * The links of the panel.
    */
-  items?: GlobalNavSubNavItem[]
+  items?: GlobalNavAccountItem[]
   /**
    * A section of toggles with a heading, for example user interface settings.
    */
@@ -211,10 +222,6 @@ type GlobalNavAccount = {
     items: GlobalNavToggle[]
   }
   /**
-   * Any content, rendered after the toggles.
-   */
-  renderContent?: Renderable
-  /**
    * The log out button at the end of the panel.
    */
   logout?: {
@@ -222,6 +229,13 @@ type GlobalNavAccount = {
     href?: string
     onClick?: (event: MouseEvent<HTMLElement>) => void
   }
+  /**
+   * HTML attributes for the account item's button: `id`, `className` and `data-*`.
+   */
+  elementProps?: Pick<
+    GlobalNavElementProps,
+    'id' | 'className' | `data-${string}`
+  >
 }
 
 type GlobalNavOwnProps = {
@@ -293,7 +307,9 @@ type GlobalNavProps = GlobalNavOwnProps &
 
 type GlobalNavStyle = ComponentStyle<'globalNav' | 'rail'>
 
-type MainNavStyle = ComponentStyle<'mainNav' | 'header' | 'items' | 'divider'>
+type MainNavStyle = ComponentStyle<
+  'mainNav' | 'header' | 'items' | 'divider' | 'account'
+>
 
 const allowedProps: AllowedPropKeys = [
   'label',
@@ -321,6 +337,7 @@ export type {
   GlobalNavSubNavItem,
   GlobalNavLogo,
   GlobalNavAccount,
+  GlobalNavAccountItem,
   GlobalNavToggle,
   GlobalNavCountLabel,
   GlobalNavElementProps

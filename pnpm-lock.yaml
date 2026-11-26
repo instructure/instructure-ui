@@ -2314,18 +2314,27 @@ importers:
       '@instructure/ui-a11y-content':
         specifier: workspace:*
         version: link:../ui-a11y-content
+      '@instructure/ui-avatar':
+        specifier: workspace:*
+        version: link:../ui-avatar
       '@instructure/ui-badge':
         specifier: workspace:*
         version: link:../ui-badge
       '@instructure/ui-buttons':
         specifier: workspace:*
         version: link:../ui-buttons
+      '@instructure/ui-checkbox':
+        specifier: workspace:*
+        version: link:../ui-checkbox
       '@instructure/ui-dom-utils':
         specifier: workspace:*
         version: link:../ui-dom-utils
       '@instructure/ui-icons':
         specifier: workspace:*
         version: link:../ui-icons
+      '@instructure/ui-pill':
+        specifier: workspace:*
+        version: link:../ui-pill
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
