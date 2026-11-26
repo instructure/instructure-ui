@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { useStyleNew } from '@instructure/emotion'
+import { useStyleNew, useTheme } from '@instructure/emotion'
 import {
   AccessibleContent,
   ScreenReaderContent
@@ -46,9 +46,12 @@ const MainNavItem = (props: MainNavItemProps) => {
   const { item, collapsed, open, subNavId, onActivate, elementRef } = props
   const current = !!item.current
 
+  const theme = useTheme() as any
+  const isLegacy = theme.key === 'canvas' || theme.key === 'canvasHighContrast'
+
   const styles = useStyleNew({
     generateStyle,
-    params: { collapsed, current, open },
+    params: { collapsed, current, open, isLegacy },
     componentId: 'MainNavItem'
   })
 

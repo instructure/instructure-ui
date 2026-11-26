@@ -79,7 +79,8 @@ const calcFocusOutlineStyles = (
     outlineColor: focusColorVariants[focusColor!],
     outlineStyle: 'solid',
     outlineWidth: theme.width,
-    outlineOffset: theme[focusPosition]
+    // TODO temp value bc inset's value is 0, revert this change and update SharedTokens.focusoutline.inset
+    outlineOffset: focusPosition == 'inset' ? '-0.3rem' : theme[focusPosition]
   }
   return {
     ...(shouldAnimateFocus && {
