@@ -202,6 +202,50 @@ describe('<TextInput/>', () => {
       expect(input).not.toHaveAttribute('forcemessages')
     })
 
+    it('should show the error border when readonly and `forceMessages` is set', async () => {
+      const { container, rerender } = await render(
+        <TextInput renderLabel="Name" interaction="readonly" forceMessages />
+      )
+      const facade = container.querySelector<HTMLElement>(
+        '[class*="textInput__facade"]'
+      )!
+      const defaultBorderColor = getComputedStyle(facade).borderColor
+
+      await rerender(
+        <TextInput
+          renderLabel="Name"
+          interaction="readonly"
+          messages={errorMessages}
+          forceMessages
+        />
+      )
+
+      expect(getComputedStyle(facade).borderColor).not.toBe(defaultBorderColor)
+    })
+
+    it('should not show the error border when readonly without `forceMessages`', async () => {
+      const { container } = await render(
+        <TextInput
+          renderLabel="Name"
+          interaction="readonly"
+          messages={errorMessages}
+        />
+      )
+      const facade = container.querySelector<HTMLElement>(
+        '[class*="textInput__facade"]'
+      )!
+      const { container: baseContainer } = await render(
+        <TextInput renderLabel="Name" interaction="readonly" />
+      )
+      const baseFacade = baseContainer.querySelector<HTMLElement>(
+        '[class*="textInput__facade"]'
+      )!
+
+      expect(getComputedStyle(facade).borderColor).toBe(
+        getComputedStyle(baseFacade).borderColor
+      )
+    })
+
     it('should not render error messages when disabled and `forceMessages` is set', async () => {
       await render(
         <TextInput

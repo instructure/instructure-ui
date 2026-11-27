@@ -43,7 +43,13 @@ const generateStyle = (
   sharedTokens: SharedTokens,
   state: TextInputStyleProps
 ): TextInputStyle => {
-  const { size, textAlign, shouldNotWrap, renderBeforeInputElementGap } = props
+  const {
+    size,
+    textAlign,
+    shouldNotWrap,
+    renderBeforeInputElementGap,
+    forceMessages
+  } = props
   const { interaction, success, invalid, beforeElementExists } = state
 
   const isEvenSpacing = renderBeforeInputElementGap === 'even'
@@ -172,7 +178,12 @@ const generateStyle = (
     }),
     ...(interaction === 'readonly' && {
       backgroundColor: componentTheme.backgroundReadonlyColor,
-      borderColor: componentTheme.borderReadonlyColor
+      borderColor: componentTheme.borderReadonlyColor,
+      // messages are only shown for readonly inputs with forceMessages, so the border must match
+      ...(invalid &&
+        forceMessages && {
+          borderColor: componentTheme.errorBorderColor
+        })
     }),
     ...(interaction === 'disabled' && {
       cursor: 'not-allowed',

@@ -41,8 +41,7 @@ import { withStyleNew } from '@instructure/emotion'
 import generateStyle from './styles.js'
 
 import { allowedProps } from './props.js'
-import type { FileDropProps, FileDropState } from './props'
-import type { StyleParams } from './styles'
+import type { FileDropProps, FileDropState, FileDropStyleProps } from './props'
 function keyEventIsClickButton(e: React.KeyboardEvent) {
   return e.keyCode === keycode.codes.space || e.keyCode === keycode.codes.enter
 }
@@ -97,9 +96,8 @@ export class FileDropBase extends Component<FileDropProps, FileDropState> {
     else return fileLikeItem
   }
 
-  makeStyleProps = (): StyleParams => {
+  makeStyleProps = (): FileDropStyleProps => {
     return {
-      ...this.props,
       functionallyDisabled: this.functionallyDisabled,
       visuallyDisabled: this.interaction === 'disabled',
       dragRejected: this.state.isDragRejected || this.invalid,

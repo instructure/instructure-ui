@@ -408,4 +408,25 @@ describe('<FileDrop/>', () => {
       expect(stopPropagationSpy).toHaveBeenCalled()
     })
   })
+
+  describe('error messages', () => {
+    const getBorderColor = (container: Element) =>
+      getComputedStyle(
+        container.querySelector('[class*="fileDrop__labelContent"]')!
+      ).borderColor
+
+    it('should show the error border color when there is an error message', async () => {
+      const { container: baseContainer } = await render(
+        <FileDrop renderLabel="fake label" />
+      )
+      const { container } = await render(
+        <FileDrop
+          renderLabel="fake label"
+          messages={[{ type: 'error', text: 'some error' }]}
+        />
+      )
+
+      expect(getBorderColor(container)).not.toBe(getBorderColor(baseContainer))
+    })
+  })
 })

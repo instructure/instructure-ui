@@ -149,6 +149,7 @@ const generateStyle = (
   }
 
   const focusOutline = calcFocusOutlineStyles(sharedTokens.focusOutline, {
+    focusColor: invalid ? 'danger' : success ? 'success' : undefined,
     focusWithin: true
   })
   return {
