@@ -279,7 +279,9 @@ describe('<ColorPicker />', () => {
           const warningIconWrapper = container.querySelector(
             'div[class$="-colorPicker__errorIcons"]'
           )
-          const warningIcon = container.querySelector('svg[name="CircleAlert"]')
+          const warningIcon = container.querySelector(
+            'svg[name="CircleExclamationPoint"]'
+          )
 
           expect(warningIconWrapper).toBeInTheDocument()
           expect(warningIcon).toBeInTheDocument()

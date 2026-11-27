@@ -2502,8 +2502,8 @@ importers:
         specifier: workspace:*
         version: link:../ui-utils
       lucide-react:
-        specifier: 1.41.0
-        version: 1.41.0(react@18.3.1)
+        specifier: 1.79.0
+        version: 1.79.0(@types/react@18.3.26)(react@18.3.1)
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -3751,8 +3751,8 @@ importers:
         specifier: ^4.0.6
         version: 4.0.6
       lucide-react:
-        specifier: 1.41.0
-        version: 1.41.0(react@18.3.1)
+        specifier: 1.79.0
+        version: 1.79.0(@types/react@18.3.26)(react@18.3.1)
       oxlint:
         specifier: ^1.86.0
         version: 1.86.0
@@ -9553,10 +9553,14 @@ packages:
   lru-queue@0.1.0:
     resolution: {integrity: sha512-BpdYkt9EvGl8OfWHDQPISVpcl5xZthb+XPsbELj5AQXxIC8IriDZIQYjBJPEm5rS420sjZ0TLEzRcq5KdBhYrQ==}
 
-  lucide-react@1.41.0:
-    resolution: {integrity: sha512-6lksP35l6KszDKUeRTi4LV7i6DEe0Yzl2ALJm9j4c5xEYN91GdW1xGsawGMOg2mgjF5GHBVX8pKX9kP+cWsP3Q==}
+  lucide-react@1.79.0:
+    resolution: {integrity: sha512-MDHKxzUobPRyQgt4hHO1z+pUQJKYMvenh8qw+ndWQE0Wg+Hbjli/ZrkZXBGmRBrMvvqDRjkmQj0Z5RbeL/ogNw==}
     peerDependencies:
+      '@types/react': 18.3.26
       react: 18.3.1
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
 
   lz-string@1.5.0:
     resolution: {integrity: sha512-h5bgJWpxJNswbU7qCrV0tIKQCaS3blPDrqKWx+QxzuzL1zGUzij9XCWLrSLsJPu5t+eWA/ycetzYAO5IOMcWAQ==}
@@ -16607,9 +16611,11 @@ snapshots:
     dependencies:
       es5-ext: 0.10.64
 
-  lucide-react@1.41.0(react@18.3.1):
+  lucide-react@1.79.0(@types/react@18.3.26)(react@18.3.1):
     dependencies:
       react: 18.3.1
+    optionalDependencies:
+      '@types/react': 18.3.26
 
   lz-string@1.5.0: {}
 
