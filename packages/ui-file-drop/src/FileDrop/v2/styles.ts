@@ -25,30 +25,26 @@
 import type { FileDropProps, FileDropStyleProps, FileDropStyle } from './props'
 import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 
-type StyleParams = FileDropProps & FileDropStyleProps
-
 /**
  * ---
  * private: true
  * ---
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} params the props and state of the component, the style is applied to
- * @param  {Object} sharedTokens Shared tokens from the theme
+ * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} _sharedTokens Shared tokens from the theme
+ * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
   componentTheme: ReturnType<NewComponentTypes['FileDrop']>,
-  params: StyleParams,
-  _sharedTokens: SharedTokens
+  props: FileDropProps,
+  _sharedTokens: SharedTokens,
+  state: FileDropStyleProps
 ): FileDropStyle => {
-  const {
-    height,
-    functionallyDisabled,
-    visuallyDisabled,
-    dragRejected,
-    dragAccepted
-  } = params
+  const { height } = props
+  const { functionallyDisabled, visuallyDisabled, dragRejected, dragAccepted } =
+    state
 
   const dragAcceptedStyle = dragAccepted
     ? {
@@ -137,4 +133,3 @@ const generateStyle = (
 }
 
 export default generateStyle
-export type { StyleParams }
