@@ -27,6 +27,7 @@ import { page, userEvent } from 'vitest/browser'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 import { NumberInput } from '@instructure/ui-number-input/latest'
+import type { FormMessage } from '@instructure/ui-form-field/latest'
 import {
   ChevronUpInstUIIcon,
   ChevronDownInstUIIcon
@@ -429,6 +430,34 @@ describe('<NumberInput />', () => {
       input.dispatchEvent(keyDown)
 
       expect(keyDown.defaultPrevented).toBe(false)
+    })
+  })
+
+  describe('focus ring', () => {
+    const getOutlineColor = async (messages?: FormMessage[]) => {
+      const { container } = await render(
+        <NumberInput renderLabel="Label" messages={messages} />
+      )
+      container.querySelector('input')!.focus()
+      const inputContainer = container.querySelector<HTMLElement>(
+        '[class*="numberInput_inputContainer"]'
+      )!
+      let color = ''
+      // the outline color transitions from transparent, an opaque rgb value means it settled
+      await vi.waitFor(() => {
+        color = getComputedStyle(inputContainer).outlineColor
+        expect(color).toMatch(/^rgb\(/)
+      })
+      return color
+    }
+
+    it('should be red when there is an error message', async () => {
+      const defaultColor = await getOutlineColor()
+      const errorColor = await getOutlineColor([
+        { type: 'error', text: 'some error' }
+      ])
+
+      expect(errorColor).not.toBe(defaultColor)
     })
   })
 })
