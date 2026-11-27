@@ -91,7 +91,12 @@ export class ToggleFacadeBase extends Component<ToggleFacadeProps> {
     const iconColor = getIconColor()
 
     if (checked) {
-      return renderIconWithProps(CheckInstUIIcon, 'xs', iconColor)
+      // a check mark is not directional, so it must not be mirrored in RTL
+      return renderIconWithProps(
+        <CheckInstUIIcon bidirectional={false} />,
+        'xs',
+        iconColor
+      )
     } else {
       return renderIconWithProps(XInstUIIcon, 'xs', iconColor)
     }

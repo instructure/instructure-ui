@@ -90,7 +90,12 @@ export class CheckboxFacadeBase extends Component<CheckboxFacadeProps> {
     if (indeterminate) {
       return renderIconWithProps(MinusInstUIIcon, 'sm', iconColor)
     } else if (checked) {
-      return renderIconWithProps(CheckInstUIIcon, 'sm', iconColor)
+      // a check mark is not directional, so it must not be mirrored in RTL
+      return renderIconWithProps(
+        <CheckInstUIIcon bidirectional={false} />,
+        'sm',
+        iconColor
+      )
     } else {
       return null
     }
