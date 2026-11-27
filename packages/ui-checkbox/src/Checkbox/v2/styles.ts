@@ -42,7 +42,7 @@ const generateStyle = (
   props: CheckboxProps,
   sharedTokens: SharedTokens
 ): CheckboxStyle => {
-  const { inline, size, variant, margin } = props
+  const { inline, size, variant, margin, labelPlacement } = props
 
   // toggleFullWidth calculation based on Toggle facade width (1.625rem * 1.5) and the marginInlineEnd (0.75rem)
   const toggleFullWidth = `calc(1.625rem * 1.5 + 0.75rem)`
@@ -95,9 +95,10 @@ const generateStyle = (
         width: 'auto'
       })
     },
-    // this container is added to reduce the clickable area of the checkbox to the actual checkbox and label
+    // this container is added to reduce the clickable area of the checkbox to the actual checkbox and label,
+    // except when `start-stretch` stretches them over the whole row
     container: {
-      width: 'fit-content'
+      width: labelPlacement === 'start-stretch' ? '100%' : 'fit-content'
     },
     input: {
       label: 'checkbox__input',
