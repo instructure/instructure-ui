@@ -36,6 +36,7 @@ import {
   IconClockLine,
   IconEndLine,
   IconCheckLine,
+  CheckInstUIIcon,
   AccessibleContent
 } from '@instructure/ui/latest'
 
@@ -81,6 +82,39 @@ export default function SmallComponentsPage() {
         <Pill renderIcon={<IconMessageLine />} color="info" margin="x-small">
           Notification
         </Pill>
+      </div>
+      <div>
+        {(['x-small', 'small', 'medium', 'large'] as const).map((size) => (
+          <Pill
+            key={size}
+            size={size}
+            statusLabel="Status"
+            renderIcon={CheckInstUIIcon}
+            margin="x-small"
+          >
+            {size}
+          </Pill>
+        ))}
+        <Pill
+          size="large"
+          renderIcon={CheckInstUIIcon}
+          color="error"
+          margin="x-small"
+        >
+          Missing
+        </Pill>
+      </div>
+      <div>
+        {(['sky', 'aurora', 'plum'] as const).map((color) => (
+          <Pill
+            key={color}
+            color={color}
+            renderIcon={CheckInstUIIcon}
+            margin="x-small"
+          >
+            {color}
+          </Pill>
+        ))}
       </div>
       <div>
         <Text>Tag:</Text>
