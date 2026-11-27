@@ -25,17 +25,5 @@
 import uiBabelPreset from '@instructure/ui-babel-preset'
 
 export default {
-  presets: [
-    [
-      uiBabelPreset,
-      {
-        // Inline Babel helpers instead of importing them from `@babel/runtime`.
-        // The dev build compiles `@instructure/*` from raw `src` to CommonJS,
-        // but webpack's `import` condition resolves `@babel/runtime` helpers to
-        // their ESM build — a mismatch that crashes with
-        // "_interopRequireDefault is not a function". Inlining sidesteps it.
-        inlineHelpers: true
-      }
-    ]
-  ]
+  presets: [uiBabelPreset]
 }

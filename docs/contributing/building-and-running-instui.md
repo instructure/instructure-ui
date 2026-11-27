@@ -52,9 +52,8 @@ In order to build the project one should have [`git`](https://git-scm.com/book/e
    - `babel` to transpile the source code of every package to a version that browsers can understand (supported browsers are defined in [`@instructure/browserslist-config-instui`](https://github.com/instructure/instructure-ui/blob/master/packages/browserslist-config-instui/index.js) package)
    - a `clean` script which removes any previous build output
 
-The output of bootstrap can be found in `lib`, `es` (for non node packages) and `types` directories for each package respectively, where:
+The output of bootstrap can be found in the `es` and `types` directories of each package, where:
 
-- `lib` contains [`commonjs`](https://nodejs.org/docs/latest/api/modules.html#modules-commonjs-modules) module output
 - `es` contains [`es`](https://nodejs.org/docs/latest/api/esm.html#modules-ecmascript-modules) module output
 - `types` contains the TypeScript type definitions
 
