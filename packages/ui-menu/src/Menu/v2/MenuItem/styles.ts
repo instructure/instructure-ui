@@ -51,11 +51,13 @@ const generateStyle = (
         }
       : {}
 
-  const roleStyles = isRadioOrCheckbox
-    ? {
-        paddingInlineEnd: componentTheme.labelPadding
-      }
-    : {}
+  // the icon is absolutely positioned, so its room is reserved even when labelPadding is 0
+  const roleStyles =
+    isRadioOrCheckbox || type === 'flyout'
+      ? {
+          paddingInlineEnd: `max(${componentTheme.labelPadding}, calc(${componentTheme.iconPadding} * 2 + 1em))`
+        }
+      : {}
 
   const roleIconStyles = isRadioOrCheckbox
     ? {

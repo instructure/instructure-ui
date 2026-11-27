@@ -27,6 +27,8 @@ import { render } from 'vitest-browser-react'
 import { page, userEvent } from 'vitest/browser'
 import { describe, it, expect, vi } from 'vitest'
 
+import { InstUISettingsProvider } from '@instructure/emotion'
+import { light } from '@instructure/ui-themes'
 import { MenuItem } from '@instructure/ui-menu/latest'
 import type { MenuItemProps } from '@instructure/ui-menu/latest'
 
@@ -160,6 +162,68 @@ describe('<MenuItem />', () => {
     const menuItem = container.querySelector("span[class$='-menuItem']")
 
     expect(menuItem).toHaveAttribute('role', 'menuitemradio')
+  })
+
+  describe('label and check icon layout', () => {
+    const longLabel =
+      'A considerably longer menu item label that has to wrap onto several lines'
+
+    const getTextEdges = (label: Element) => {
+      const range = document.createRange()
+      range.selectNodeContents(label)
+      const rects = Array.from(range.getClientRects())
+      return {
+        left: Math.min(...rects.map((rect) => rect.left)),
+        right: Math.max(...rects.map((rect) => rect.right)),
+        lines: new Set(rects.map((rect) => rect.top)).size
+      }
+    }
+
+    it.each(['checkbox', 'radio', 'flyout'] as const)(
+      'should wrap a long %s label before the icon',
+      async (type) => {
+        const { container } = await render(
+          <InstUISettingsProvider theme={light}>
+            <div style={{ width: '200px' }}>
+              <MenuItem type={type} defaultSelected>
+                {longLabel}
+              </MenuItem>
+            </div>
+          </InstUISettingsProvider>
+        )
+        const label = container.querySelector("[class$='-menuItem__label']")!
+        const icon = container.querySelector("[class$='-menuItem__icon']")!
+        const textEdges = getTextEdges(label)
+
+        expect(textEdges.lines).toBeGreaterThan(1)
+        expect(textEdges.right).toBeLessThanOrEqual(
+          icon.getBoundingClientRect().left
+        )
+      }
+    )
+
+    it.each(['checkbox', 'radio', 'flyout'] as const)(
+      'should wrap a long %s label before the icon in RTL',
+      async (type) => {
+        const { container } = await render(
+          <InstUISettingsProvider theme={light}>
+            <div dir="rtl" style={{ width: '200px' }}>
+              <MenuItem type={type} defaultSelected>
+                {longLabel}
+              </MenuItem>
+            </div>
+          </InstUISettingsProvider>
+        )
+        const label = container.querySelector("[class$='-menuItem__label']")!
+        const icon = container.querySelector("[class$='-menuItem__icon']")!
+        const textEdges = getTextEdges(label)
+
+        expect(textEdges.lines).toBeGreaterThan(1)
+        expect(textEdges.left).toBeGreaterThanOrEqual(
+          icon.getBoundingClientRect().right
+        )
+      }
+    )
   })
 
   describe('Component tests', () => {
