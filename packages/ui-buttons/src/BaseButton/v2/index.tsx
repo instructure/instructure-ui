@@ -134,22 +134,17 @@ export class BaseButtonBase extends Component<BaseButtonProps> {
   }
 
   get focusColor() {
-    const { color, focusColor, withBackground } = this.props
+    const { color, focusColor } = this.props
 
     // Give user specified focusColor preference
     if (focusColor) {
       return focusColor
     }
-
-    // The `primary-inverse` background has an info focus outline
-    // by default since it is replacing the `light` button variant.
-    // Override the focus color with info even though it is
-    // an inverse color
-    if (color === 'primary-inverse' && withBackground) {
-      return 'info'
+    if (color === 'primary-inverse') {
+      return 'inverse'
     }
 
-    return color!.includes('inverse') ? 'inverse' : 'info'
+    return 'info'
   }
 
   get focused() {
