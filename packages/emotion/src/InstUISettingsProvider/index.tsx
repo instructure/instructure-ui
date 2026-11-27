@@ -69,8 +69,8 @@ type InstUIProviderProps = {
    *   },
    *   components: {
    *     Alert: {
-   *       background: 'brown',
-   *       infoIconBackground: 'darkblue',
+   *       infoBackground: 'brown',
+   *       infoBorderColor: 'darkblue',
    *       borderWidth: '0.5rem'
    *     },
    *     Pill: {
