@@ -216,14 +216,14 @@ importers:
         specifier: 18.3.1
         version: 18.3.1
       '@vitest/browser':
-        specifier: 5.0.3
-        version: 5.0.3(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))(vitest@5.0.3)
+        specifier: 5.0.5
+        version: 5.0.5(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))(vitest@5.0.3)
       '@vitest/browser-playwright':
         specifier: 5.0.3
-        version: 5.0.3(playwright@1.62.1)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))(vitest@5.0.3)
+        version: 5.0.3(playwright@1.62.1)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))(vitest@5.0.3)
       '@vitest/ui':
-        specifier: 5.0.3
-        version: 5.0.3(vitest@5.0.3)
+        specifier: 5.0.5
+        version: 5.0.5(vitest@5.0.3)
       babel-loader:
         specifier: ^10.1.1
         version: 10.1.1(@babel/core@7.29.7(supports-color@7.2.0))(webpack@5.111.1)
@@ -276,11 +276,11 @@ importers:
         specifier: 7.0.2
         version: 7.0.2
       vite:
-        specifier: 7.3.6
-        version: 7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1)
+        specifier: 7.3.7
+        version: 7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1)
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.5)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
       vitest-browser-react:
         specifier: 2.3.0
         version: 2.3.0(@types/react-dom@18.3.1)(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vitest@5.0.3)
@@ -756,7 +756,7 @@ importers:
         version: 18.3.1(react@18.3.1)
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/shared-types:
     dependencies:
@@ -1034,7 +1034,7 @@ importers:
         version: link:../ui-babel-preset
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-a11y-utils:
     dependencies:
@@ -1074,7 +1074,7 @@ importers:
         version: link:../ui-color-utils
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-alerts:
     dependencies:
@@ -1135,7 +1135,7 @@ importers:
         version: link:../ui-scripts
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-avatar:
     dependencies:
@@ -1178,7 +1178,7 @@ importers:
         version: link:../ui-color-utils
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-axe-check:
     dependencies:
@@ -1264,7 +1264,7 @@ importers:
         version: link:../ui-babel-preset
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-billboard:
     dependencies:
@@ -1310,7 +1310,7 @@ importers:
         version: link:../ui-icons
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-breadcrumb:
     dependencies:
@@ -1362,7 +1362,7 @@ importers:
         version: link:../ui-scripts
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-buttons:
     dependencies:
@@ -1426,7 +1426,7 @@ importers:
         version: link:../ui-babel-preset
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-byline:
     dependencies:
@@ -1463,7 +1463,7 @@ importers:
         version: link:../ui-color-utils
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-calendar:
     dependencies:
@@ -1521,7 +1521,7 @@ importers:
         version: link:../ui-color-utils
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-card:
     dependencies:
@@ -1555,7 +1555,7 @@ importers:
         version: link:../ui-babel-preset
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-checkbox:
     dependencies:
@@ -1616,7 +1616,7 @@ importers:
         version: link:../ui-color-utils
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-codemods:
     dependencies:
@@ -1641,7 +1641,7 @@ importers:
         version: 3.8.1
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-color-picker:
     dependencies:
@@ -1723,7 +1723,7 @@ importers:
         version: link:../ui-scripts
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-color-utils:
     dependencies:
@@ -1797,7 +1797,7 @@ importers:
         version: link:../ui-scripts
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-date-time-input:
     dependencies:
@@ -1849,7 +1849,7 @@ importers:
         version: link:../ui-babel-preset
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-decorator:
     dependencies:
@@ -1893,7 +1893,7 @@ importers:
         version: link:../ui-babel-preset
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-dom-utils:
     dependencies:
@@ -1918,7 +1918,7 @@ importers:
         version: link:../ui-babel-preset
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-drawer-layout:
     dependencies:
@@ -1982,7 +1982,7 @@ importers:
         version: link:../ui-buttons
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-drilldown:
     dependencies:
@@ -2046,7 +2046,7 @@ importers:
         version: link:../ui-scripts
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-editable:
     dependencies:
@@ -2101,7 +2101,7 @@ importers:
         version: link:../ui-babel-preset
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-expandable:
     dependencies:
@@ -2123,7 +2123,7 @@ importers:
         version: link:../ui-babel-preset
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-file-drop:
     dependencies:
@@ -2175,7 +2175,7 @@ importers:
         version: link:../ui-babel-preset
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-flex:
     dependencies:
@@ -2212,7 +2212,7 @@ importers:
         version: link:../ui-babel-preset
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-focusable:
     dependencies:
@@ -2246,7 +2246,7 @@ importers:
         version: link:../ui-babel-preset
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-form-field:
     dependencies:
@@ -2298,7 +2298,7 @@ importers:
         version: link:../ui-babel-preset
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-global-nav:
     dependencies:
@@ -2353,7 +2353,7 @@ importers:
         version: link:../ui-babel-preset
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-grid:
     dependencies:
@@ -2393,7 +2393,7 @@ importers:
         version: link:../ui-color-utils
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-heading:
     dependencies:
@@ -2433,7 +2433,7 @@ importers:
         version: link:../ui-babel-preset
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-i18n:
     dependencies:
@@ -2476,7 +2476,7 @@ importers:
         version: 18.3.1(react@18.3.1)
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-icons:
     dependencies:
@@ -2553,7 +2553,7 @@ importers:
         version: link:../ui-babel-preset
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-instructure:
     dependencies:
@@ -2611,7 +2611,7 @@ importers:
         version: link:../ui-color-utils
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-link:
     dependencies:
@@ -2663,7 +2663,7 @@ importers:
         version: link:../ui-babel-preset
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-list:
     dependencies:
@@ -2703,7 +2703,7 @@ importers:
         version: link:../ui-color-utils
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-menu:
     dependencies:
@@ -2764,7 +2764,7 @@ importers:
         version: link:../ui-color-utils
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-metric:
     dependencies:
@@ -2801,7 +2801,7 @@ importers:
         version: link:../ui-color-utils
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-modal:
     dependencies:
@@ -2865,7 +2865,7 @@ importers:
         version: link:../ui-tooltip
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-motion:
     dependencies:
@@ -2899,7 +2899,7 @@ importers:
         version: link:../ui-babel-preset
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-navigation:
     dependencies:
@@ -2975,7 +2975,7 @@ importers:
         version: link:../ui-scripts
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-number-input:
     dependencies:
@@ -3024,7 +3024,7 @@ importers:
         version: link:../ui-scripts
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-options:
     dependencies:
@@ -3067,7 +3067,7 @@ importers:
         version: link:../ui-color-utils
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-overlays:
     dependencies:
@@ -3143,7 +3143,7 @@ importers:
         version: 2.1.2
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-pages:
     dependencies:
@@ -3186,7 +3186,7 @@ importers:
         version: link:../ui-color-utils
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-pagination:
     dependencies:
@@ -3253,7 +3253,7 @@ importers:
         version: link:../ui-babel-preset
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-pill:
     dependencies:
@@ -3308,7 +3308,7 @@ importers:
         version: link:../ui-scripts
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-popover:
     dependencies:
@@ -3372,7 +3372,7 @@ importers:
         version: link:../ui-color-utils
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-portal:
     dependencies:
@@ -3406,7 +3406,7 @@ importers:
         version: link:../ui-babel-preset
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-position:
     dependencies:
@@ -3452,7 +3452,7 @@ importers:
         version: link:../ui-color-utils
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-progress:
     dependencies:
@@ -3495,7 +3495,7 @@ importers:
         version: link:../ui-babel-preset
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-radio-input:
     dependencies:
@@ -3538,7 +3538,7 @@ importers:
         version: link:../ui-color-utils
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-range-input:
     dependencies:
@@ -3593,7 +3593,7 @@ importers:
         version: link:../ui-babel-preset
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-rating:
     dependencies:
@@ -3642,7 +3642,7 @@ importers:
         version: link:../ui-babel-preset
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-react-utils:
     dependencies:
@@ -3685,7 +3685,7 @@ importers:
         version: 3.3.7(@types/react@18.3.26)
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-responsive:
     dependencies:
@@ -3722,7 +3722,7 @@ importers:
         version: link:../ui-color-utils
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-scripts:
     dependencies:
@@ -3874,7 +3874,7 @@ importers:
         version: link:../ui-scripts
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-selectable:
     dependencies:
@@ -3908,7 +3908,7 @@ importers:
         version: link:../ui-babel-preset
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-side-nav-bar:
     dependencies:
@@ -3963,7 +3963,7 @@ importers:
         version: link:../ui-color-utils
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-simple-select:
     dependencies:
@@ -4006,7 +4006,7 @@ importers:
         version: link:../ui-utils
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-skeleton:
     dependencies:
@@ -4040,7 +4040,7 @@ importers:
         version: link:../ui-babel-preset
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-source-code-editor:
     dependencies:
@@ -4134,7 +4134,7 @@ importers:
         version: link:../ui-babel-preset
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-spinner:
     dependencies:
@@ -4186,7 +4186,7 @@ importers:
         version: link:../ui-babel-preset
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-svg-images:
     dependencies:
@@ -4213,7 +4213,7 @@ importers:
         version: link:../uid
       dompurify:
         specifier: ^3.4.2
-        version: 3.4.16
+        version: 3.4.17
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -4223,7 +4223,7 @@ importers:
         version: link:../ui-babel-preset
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-table:
     dependencies:
@@ -4278,7 +4278,7 @@ importers:
         version: link:../ui-color-utils
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-tabs:
     dependencies:
@@ -4339,7 +4339,7 @@ importers:
         version: link:../ui-color-utils
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-tag:
     dependencies:
@@ -4385,7 +4385,7 @@ importers:
         version: link:../ui-babel-preset
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-text:
     dependencies:
@@ -4471,7 +4471,7 @@ importers:
         version: link:../ui-color-utils
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-text-input:
     dependencies:
@@ -4520,7 +4520,7 @@ importers:
         version: link:../ui-color-utils
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-theme-tokens:
     dependencies:
@@ -4552,7 +4552,7 @@ importers:
         version: link:../ui-babel-preset
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-time-select:
     dependencies:
@@ -4592,7 +4592,7 @@ importers:
         version: 0.6.5
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-toggle-details:
     dependencies:
@@ -4650,7 +4650,7 @@ importers:
         version: link:../ui-babel-preset
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-tooltip:
     dependencies:
@@ -4693,7 +4693,7 @@ importers:
         version: link:../ui-scripts
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-top-nav-bar:
     dependencies:
@@ -4781,7 +4781,7 @@ importers:
         version: link:../ui-scripts
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-tray:
     dependencies:
@@ -4833,7 +4833,7 @@ importers:
         version: link:../ui-babel-preset
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-tree-browser:
     dependencies:
@@ -4879,7 +4879,7 @@ importers:
         version: link:../ui-color-utils
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-truncate-list:
     dependencies:
@@ -4925,7 +4925,7 @@ importers:
         version: link:../ui-themes
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-truncate-text:
     dependencies:
@@ -4974,7 +4974,7 @@ importers:
         version: link:../ui-text
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-utils:
     dependencies:
@@ -4995,7 +4995,7 @@ importers:
         version: 0.7.39
       dompurify:
         specifier: ^3.4.2
-        version: 3.4.16
+        version: 3.4.17
       fast-deep-equal:
         specifier: ^3.1.3
         version: 3.1.3
@@ -5017,7 +5017,7 @@ importers:
         version: link:../ui-babel-preset
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-view:
     dependencies:
@@ -5066,7 +5066,7 @@ importers:
         version: link:../ui-babel-preset
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-webpack-config:
     dependencies:
@@ -5097,7 +5097,7 @@ importers:
         version: link:../ui-babel-preset
       vitest:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
 packages:
 
@@ -7520,6 +7520,11 @@ packages:
     peerDependencies:
       vitest: 5.0.3
 
+  '@vitest/browser@5.0.5':
+    resolution: {integrity: sha512-IDMoZX/iZ8rkilw7weaSgN8tJ7iZ9hUv0wYoKXyiyjWjWFwLSWAY707DcVTgxTYOudWC1E3HA9LYn7kVa9a7uQ==}
+    peerDependencies:
+      vitest: 5.0.5
+
   '@vitest/mocker@5.0.3':
     resolution: {integrity: sha512-T8sWAIbkSyAjkwTcaEc3Iu0o9A27X1/kdXrizhZkGuSKScRQtRzclfAMpOTcGdXCsqxeWlpGy3XjqaW8CpLORg==}
     peerDependencies:
@@ -7531,19 +7536,44 @@ packages:
       vite:
         optional: true
 
+  '@vitest/mocker@5.0.5':
+    resolution: {integrity: sha512-xLL3lkDegJZw+MGoGaCCsFayDZthGgpAtr3Vziyfc4p7xH89K7KRPcRBBh/kEYm0Aqkt5DtTmkYpBtRV/FrHZg==}
+    peerDependencies:
+      msw: ^2.4.9 || ^3.0.0
+      vite: ^6.0.0 || ^7.0.0 || ^8.0.0
+    peerDependenciesMeta:
+      msw:
+        optional: true
+      vite:
+        optional: true
+
   '@vitest/pretty-format@5.0.3':
     resolution: {integrity: sha512-3hr5eV5z2ff0l2Q1vaKQbB4j3M3tElw8stDokEOTqXJB3Es5VrT8gBRIMY59gGuFp8Y61sWlWFK1aNUH5dHDYw==}
 
+  '@vitest/pretty-format@5.0.5':
+    resolution: {integrity: sha512-24sSdIlMA9DVPXnYiB9siwU0bTd887Y9jX3+vabztCSsvHwo7ipvJ/a2L3Rljw8+2rK1f5fCj3h5U9I/Jsqgbw==}
+
   '@vitest/spy@5.0.3':
     resolution: {integrity: sha512-XhFysQTB8AZ+P4gMi+Lpo99vg2AZi0qKpaB9yXQl37+CaMEAPO3iH/wGVnSyL5MPERiLezpqTVtrR6UZH5GCXg==}
+
+  '@vitest/spy@5.0.5':
+    resolution: {integrity: sha512-lwJRExuH417257Q5wv9QYugN9IMJkoxcrKrYxGPQkBzl7wlNpTUxD/5yNX4ESKVUIShKPgkGchYPFMWOOk0wzw==}
 
   '@vitest/ui@5.0.3':
     resolution: {integrity: sha512-9dfvqDBvSbHM6y9YVXxAypkl2z7mrWozK/JFo237qI0cj/3M/kzDKiVZqzi3TE54Ler7Jditud7OMBZCyUvRHA==}
     peerDependencies:
       vitest: 5.0.3
 
+  '@vitest/ui@5.0.5':
+    resolution: {integrity: sha512-dCoGUOdgmCaSB2g+WQ/spPCBkytAWdNUkFSXY4z+eYp2d8JEOY8v0uDRaJTG9qf/kTlTVZ4CuYMYMz/f1HS/qQ==}
+    peerDependencies:
+      vitest: 5.0.5
+
   '@vitest/utils@5.0.3':
     resolution: {integrity: sha512-77fDTZv8eu1CzlIfgPU2yrl5MXSUaUAOvgdZEeVm3X3WIxUubIX2SforqS6176lT32HCF6uBVMYVqfHxw7o6eg==}
+
+  '@vitest/utils@5.0.5':
+    resolution: {integrity: sha512-/rBu7gzLDQI/SC79Tn98b5DwOgaHU/Gt4I9OVeP3YofzNaYtbImRCOJQmT1S6vOJg9gEIlWC+r3QxKkjuSa1nQ==}
 
   '@webassemblyjs/ast@1.14.1':
     resolution: {integrity: sha512-nuBEDgQfm1ccRp/8bCQrx1frohyufl4JlbMMZ4P1wpeOfDhF6FQkxZJ1b/e+PLwr6X1Nhw6OLme5usuBWYBvuQ==}
@@ -7843,18 +7873,18 @@ packages:
   boolbase@1.0.0:
     resolution: {integrity: sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww==}
 
-  brace-expansion@1.1.21:
-    resolution: {integrity: sha512-9zeA+KLZNNzglF2TPKRQEDyx6Yby7daAkuy8MiPzpXPsYDWi/DRM8jmwUDxokQjYqBpv5DgPiwD4h4ZZSy1Ujw==}
+  brace-expansion@1.1.22:
+    resolution: {integrity: sha512-CKLDTuSsN0+r1ThM0WkzzBI7dnPI6xEGfa/JnVYIK9JNBA1N1NyPwXVHor//NKD/y3sDxp764sZdLhFK7pH8XQ==}
 
-  brace-expansion@2.1.7:
-    resolution: {integrity: sha512-uZbew1NqdmPDTMJ8ah1y+b+9QEJrfkXFk3RcTQw3X0jW/xRUvFKsg1CfQdSYGdTbXZWExtU3J3ccxtnfw1Fi0g==}
-
-  brace-expansion@5.0.12:
-    resolution: {integrity: sha512-YovQ3rzhaLMIrDjNDMkNS01tea93qhEhG5xy8f6+R0l+dw3Ki+5sCoIoI942iuLZTHWogWktgwVDhU09iNEimQ==}
-    engines: {node: 20 || >=22}
+  brace-expansion@2.1.8:
+    resolution: {integrity: sha512-BnlDzDYQoplTsZSvPi86CNzmbcb07X8ufR8fk1zivaiEJlXJkiq1MQyDCVmlWcsWbj6aWXqHnrwwevbrm/Saig==}
 
   brace-expansion@5.0.9:
     resolution: {integrity: sha512-ScQ4IuvIEF1TMlP7Zt+vjJ//9zlPb2SDcxWxM3bk8s6t6GGdJ7KO1dCcTidOPJKePW30LE/2cT7wCyPho9/Wxg==}
+    engines: {node: 20 || >=22}
+
+  brace-expansion@5.1.0:
+    resolution: {integrity: sha512-aa11Dv491GKnYqxaul3aRJ0szew7yMJMfZPnqD44NjGrZXoj62l41OEDDpdpC4eE2P88vBFfLuSyRhpG91NUvg==}
     engines: {node: 20 || >=22}
 
   braces@3.0.3:
@@ -8417,8 +8447,8 @@ packages:
     resolution: {integrity: sha512-cgwlv/1iFQiFnU96XXgROh8xTeetsnJiDsTc7TYCLFd9+/WNkIqPTxiM/8pSd8VIrhXGTf1Ny1q1hquVqDJB5w==}
     engines: {node: '>= 4'}
 
-  dompurify@3.4.16:
-    resolution: {integrity: sha512-sqo+pNp3qRhCIpbgRi1y8Tgk27Bo2Ry7w0dC1NBeNTdZChWjz9Xb/KOoZbRP/R6pQZ80Qw8YhXw13hWWBbMRnQ==}
+  dompurify@3.4.17:
+    resolution: {integrity: sha512-B/pSlYVHQ58kqISD/yDjuJ1yfzI34m1gF4lAod2bwSRhiN4K5Cl3H8Af7hqB2PmTL911tdEudnnXn5FnhRoz0w==}
 
   domutils@2.8.0:
     resolution: {integrity: sha512-w96Cjofp72M5IIhpjgobBimYEfoPjx1Vx0BSX9P30WBdZW2WIKU0T1Bd0kz2eNZ9ikjKgHbEyKx8BB6H1L3h3A==}
@@ -8647,8 +8677,8 @@ packages:
   fast-string-width@3.0.2:
     resolution: {integrity: sha512-gX8LrtNEI5hq8DVUfRQMbr5lpaS4nMIWV+7XEbXk2b8kiQIizgnlr12B4dA3ZEx3308ze0O4Q1R+cHts8kyUJg==}
 
-  fast-uri@3.1.8:
-    resolution: {integrity: sha512-GZMtZUTNRpOVIECoXwLNZS5xUGE+mVNbTB8h/7Rwh2TFWcBQiPzTgyZi05BF9UMZKkLJv8XBRJTlU7zg8+ZfMg==}
+  fast-uri@3.1.9:
+    resolution: {integrity: sha512-hS/0Wt3Ya043oKXs0sIxrMpKQITXhMLIrVAKKXi4gozGC9v7YRWVnXIZzjNPTO02M9BdxLCWqK1yRXgNziVyJQ==}
 
   fast-wrap-ansi@0.2.0:
     resolution: {integrity: sha512-rLV8JHxTyhVmFYhBJuMujcrHqOT2cnO5Zxj37qROj23CP39GXubJRBUFF0z8KFK77Uc0SukZUf7JZhsVEQ6n8w==}
@@ -9382,8 +9412,8 @@ packages:
     resolution: {integrity: sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==}
     engines: {node: '>=0.10.0'}
 
-  launch-editor@2.14.1:
-    resolution: {integrity: sha512-QWBrQsMpH7gPr965dsKD/3cKWiNoTjpATQf++Xq63N6sKRGMwlVXz41O1IZTMfZQgBctD/K5Zt06+/I6pP6+HA==}
+  launch-editor@2.14.2:
+    resolution: {integrity: sha512-NHJEb30MGBCkmZXLZwz25t37QR4aY03ZzPYUJXOJaOa92uWwExI9SBQUuIznBYc1xkD7cJNGX7oc3Nl3sq2kQQ==}
 
   lerna@10.0.1:
     resolution: {integrity: sha512-ibmMaBmH/sR2HpZzgvpEI5/6bCgMp0AISIFZ/cQcCzRVH2EgPapBYHXS6A6NgI6vRJNE4pgnxQbNiSq00HVSjA==}
@@ -9563,6 +9593,9 @@ packages:
 
   magic-string@1.4.2:
     resolution: {integrity: sha512-vG+rjFRj1PqdIBozIxAGMjPlOhaVe+GXpbttY/iSK7rGcJRMlwNJO7dcUwmUqkymsFLJiNGI06t4D7Fr7yRC9g==}
+
+  magic-string@1.4.5:
+    resolution: {integrity: sha512-oLLC2+YvQUfAa+vxoufE/yc1icb87M9iXIRqAoR/2EhE/8cb3SF/+Gi0c2By1B+5Vz2e2vQtUvHiu1+63Znh+w==}
 
   make-dir@2.1.0:
     resolution: {integrity: sha512-LS9X+dc8KLxXCb8dni79fLIIUA5VyZoyjSMCwTluaXA0o27cCK0bhXkpgw+sTXVpPy/lSO57ilRixqk0vDmtRA==}
@@ -10651,9 +10684,9 @@ packages:
     resolution: {integrity: sha512-e0VyvkVTwVYViNovRkZ9aodhxVlyoMn7eJhVUPxZ+eK9P/7CBkxvvsBOHqFPEH416726W8tLXXXjKwqgTErrCQ==}
     engines: {node: '>= 10.0.0', npm: '>= 3.0.0'}
 
-  source-map-js@1.2.2:
-    resolution: {integrity: sha512-KGj/8Y43x35aZVDtt+J4mK1hoLGHULMYfSkODJNQjNDC3oW1PqPoxMwo0pLUsWM/UEGzON/NxeHywEfNXNP3Vw==}
-    engines: {node: '>=0.10.0'}
+  source-map-js@1.2.4:
+    resolution: {integrity: sha512-J7ZjMvHd9O1fcT/5V09QWaaSl2BbWx3F6O08spde82Namf9UB0GxRVIPiNbVsdKkoizHiSpTodo3vp2bAy91MA==}
+    engines: {node: '>=6.0.0'}
 
   source-map-support@0.5.21:
     resolution: {integrity: sha512-uBHU3L3czsIyYXKX88fdrGovxdSCoTGDRZ6SYXtSRxLZUzHg5P/66Ht6uoUlHu9EZod+inXhKo3qQgwXUT/y1w==}
@@ -11086,8 +11119,8 @@ packages:
     resolution: {integrity: sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==}
     engines: {node: '>= 0.8'}
 
-  vite@7.3.6:
-    resolution: {integrity: sha512-4XP60spRGjSZFf1qYH+dJIkK2znL3zQfl9KkOV9MkkRR/3Dls0dxaBsQPTloEc5BLXWPL9vsOxopxyKoMmDueg==}
+  vite@7.3.7:
+    resolution: {integrity: sha512-AHEzTORMbi7/7aXp7w7KZ5+DCUdSeLsJz0grY8xHpc9DHdYb0vQu6DqJfm2tOw3gDExNgPgnJTXxM6syYFHaCA==}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
     peerDependencies:
@@ -14154,30 +14187,30 @@ snapshots:
     dependencies:
       '@typescript/old': typescript@6.0.3
 
-  '@vitest/browser-playwright@5.0.3(playwright@1.62.1)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))(vitest@5.0.3)':
+  '@vitest/browser-playwright@5.0.3(playwright@1.62.1)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))(vitest@5.0.3)':
     dependencies:
-      '@vitest/browser': 5.0.3(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))(vitest@5.0.3)
-      '@vitest/mocker': 5.0.3(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+      '@vitest/browser': 5.0.3(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))(vitest@5.0.3)
+      '@vitest/mocker': 5.0.3(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
       playwright: 1.62.1
       tinyrainbow: 3.2.0
-      vitest: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+      vitest: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.5)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
     transitivePeerDependencies:
       - bufferutil
       - msw
       - utf-8-validate
       - vite
 
-  '@vitest/browser@5.0.3(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))(vitest@5.0.3)':
+  '@vitest/browser@5.0.3(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))(vitest@5.0.3)':
     dependencies:
       '@blazediff/core': 1.10.0
-      '@vitest/mocker': 5.0.3(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+      '@vitest/mocker': 5.0.3(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
       '@vitest/ui': 5.0.3(vitest@5.0.3)
       '@vitest/utils': 5.0.3
       magic-string: 1.4.2
       pngjs: 7.0.0
       sirv: 3.0.2
       tinyrainbow: 3.2.0
-      vitest: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+      vitest: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.5)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
       ws: 8.22.0
     transitivePeerDependencies:
       - bufferutil
@@ -14185,20 +14218,53 @@ snapshots:
       - utf-8-validate
       - vite
 
-  '@vitest/mocker@5.0.3(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))':
+  '@vitest/browser@5.0.5(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))(vitest@5.0.3)':
+    dependencies:
+      '@blazediff/core': 1.10.0
+      '@vitest/mocker': 5.0.5(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+      '@vitest/ui': 5.0.5(vitest@5.0.3)
+      '@vitest/utils': 5.0.5
+      magic-string: 1.4.5
+      pngjs: 7.0.0
+      sirv: 3.0.2
+      tinyrainbow: 3.2.0
+      vitest: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.5)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+      ws: 8.22.0
+    transitivePeerDependencies:
+      - bufferutil
+      - msw
+      - utf-8-validate
+      - vite
+
+  '@vitest/mocker@5.0.3(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))':
     dependencies:
       '@jridgewell/trace-mapping': 0.3.31
       '@vitest/spy': 5.0.3
       estree-walker: 3.0.3
       magic-string: 1.4.2
     optionalDependencies:
-      vite: 7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1)
+      vite: 7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1)
+
+  '@vitest/mocker@5.0.5(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))':
+    dependencies:
+      '@jridgewell/trace-mapping': 0.3.31
+      '@vitest/spy': 5.0.5
+      estree-walker: 3.0.3
+      magic-string: 1.4.5
+    optionalDependencies:
+      vite: 7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1)
 
   '@vitest/pretty-format@5.0.3':
     dependencies:
       tinyrainbow: 3.2.0
 
+  '@vitest/pretty-format@5.0.5':
+    dependencies:
+      tinyrainbow: 3.2.0
+
   '@vitest/spy@5.0.3': {}
+
+  '@vitest/spy@5.0.5': {}
 
   '@vitest/ui@5.0.3(vitest@5.0.3)':
     dependencies:
@@ -14208,11 +14274,27 @@ snapshots:
       pathe: 2.0.3
       sirv: 3.0.2
       tinyrainbow: 3.2.0
-      vitest: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+      vitest: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.5)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+
+  '@vitest/ui@5.0.5(vitest@5.0.3)':
+    dependencies:
+      '@vitest/utils': 5.0.5
+      fflate: 0.8.3
+      flatted: 3.4.4
+      pathe: 2.0.3
+      sirv: 3.0.2
+      tinyrainbow: 3.2.0
+      vitest: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.5)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   '@vitest/utils@5.0.3':
     dependencies:
       '@vitest/pretty-format': 5.0.3
+      convert-source-map: 2.0.0
+      tinyrainbow: 3.2.0
+
+  '@vitest/utils@5.0.5':
+    dependencies:
+      '@vitest/pretty-format': 5.0.5
       convert-source-map: 2.0.0
       tinyrainbow: 3.2.0
 
@@ -14351,7 +14433,7 @@ snapshots:
   ajv@8.20.0:
     dependencies:
       fast-deep-equal: 3.1.3
-      fast-uri: 3.1.8
+      fast-uri: 3.1.9
       json-schema-traverse: 1.0.0
       require-from-string: 2.0.2
 
@@ -14569,22 +14651,22 @@ snapshots:
 
   boolbase@1.0.0: {}
 
-  brace-expansion@1.1.21:
+  brace-expansion@1.1.22:
     dependencies:
       balanced-match: 1.0.2
       concat-map: 0.0.1
 
-  brace-expansion@2.1.7:
+  brace-expansion@2.1.8:
     dependencies:
       balanced-match: 1.0.2
-
-  brace-expansion@5.0.12:
-    dependencies:
-      balanced-match: 4.0.4
 
   brace-expansion@5.0.9:
     dependencies:
       balanced-match: 4.0.3
+
+  brace-expansion@5.1.0:
+    dependencies:
+      balanced-match: 4.0.4
 
   braces@3.0.3:
     dependencies:
@@ -15026,12 +15108,12 @@ snapshots:
   css-tree@2.2.1:
     dependencies:
       mdn-data: 2.0.28
-      source-map-js: 1.2.2
+      source-map-js: 1.2.4
 
   css-tree@3.2.1:
     dependencies:
       mdn-data: 2.27.1
-      source-map-js: 1.2.2
+      source-map-js: 1.2.4
 
   css-what@6.2.2: {}
 
@@ -15188,7 +15270,7 @@ snapshots:
     dependencies:
       domelementtype: 2.3.0
 
-  dompurify@3.4.16:
+  dompurify@3.4.17:
     optionalDependencies:
       '@types/trusted-types': 2.0.7
 
@@ -15525,7 +15607,7 @@ snapshots:
     dependencies:
       fast-string-truncated-width: 3.0.3
 
-  fast-uri@3.1.8: {}
+  fast-uri@3.1.9: {}
 
   fast-wrap-ansi@0.2.0:
     dependencies:
@@ -16322,7 +16404,7 @@ snapshots:
 
   kind-of@6.0.3: {}
 
-  launch-editor@2.14.1:
+  launch-editor@2.14.2:
     dependencies:
       picocolors: 1.1.1
       shell-quote: 1.12.0
@@ -16618,6 +16700,10 @@ snapshots:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.6.0
 
+  magic-string@1.4.5:
+    dependencies:
+      '@jridgewell/sourcemap-codec': 1.6.0
+
   make-dir@2.1.0:
     dependencies:
       pify: 4.0.1
@@ -16782,23 +16868,23 @@ snapshots:
 
   minimatch@10.2.5:
     dependencies:
-      brace-expansion: 5.0.9
+      brace-expansion: 5.1.0
 
   minimatch@10.2.6:
     dependencies:
-      brace-expansion: 5.0.12
+      brace-expansion: 5.1.0
 
   minimatch@3.1.4:
     dependencies:
-      brace-expansion: 1.1.21
+      brace-expansion: 1.1.22
 
   minimatch@3.1.5:
     dependencies:
-      brace-expansion: 1.1.21
+      brace-expansion: 1.1.22
 
   minimatch@9.0.9:
     dependencies:
-      brace-expansion: 2.1.7
+      brace-expansion: 2.1.8
 
   minimist@1.2.8: {}
 
@@ -17565,7 +17651,7 @@ snapshots:
     dependencies:
       nanoid: 3.3.19
       picocolors: 1.1.1
-      source-map-js: 1.2.2
+      source-map-js: 1.2.4
 
   powershell-utils@0.2.1: {}
 
@@ -18094,7 +18180,7 @@ snapshots:
       ip-address: 10.7.3
       smart-buffer: 4.2.0
 
-  source-map-js@1.2.2: {}
+  source-map-js@1.2.4: {}
 
   source-map-support@0.5.21:
     dependencies:
@@ -18529,7 +18615,7 @@ snapshots:
 
   vary@1.1.2: {}
 
-  vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1):
+  vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1):
     dependencies:
       esbuild: 0.28.2
       fdir: 6.5.0(picomatch@4.0.7)
@@ -18549,15 +18635,15 @@ snapshots:
     dependencies:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
-      vitest: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+      vitest: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.5)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
     optionalDependencies:
       '@types/react': 18.3.26
       '@types/react-dom': 18.3.1
 
-  vitest@5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1)):
+  vitest@5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1)):
     dependencies:
       '@types/chai': 5.2.3
-      '@vitest/mocker': 5.0.3(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+      '@vitest/mocker': 5.0.3(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
       chai: 6.3.0
       es-module-lexer: 2.3.2
       expect-type: 1.4.0
@@ -18568,12 +18654,35 @@ snapshots:
       tinybench: 6.2.0
       tinyexec: 1.3.1
       tinyglobby: 0.2.17
-      vite: 7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1)
+      vite: 7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1)
       why-is-node-running: 3.2.1
     optionalDependencies:
       '@types/node': 24.19.1
-      '@vitest/browser-playwright': 5.0.3(playwright@1.62.1)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))(vitest@5.0.3)
+      '@vitest/browser-playwright': 5.0.3(playwright@1.62.1)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))(vitest@5.0.3)
       '@vitest/ui': 5.0.3(vitest@5.0.3)
+    transitivePeerDependencies:
+      - msw
+
+  vitest@5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.5)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1)):
+    dependencies:
+      '@types/chai': 5.2.3
+      '@vitest/mocker': 5.0.3(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
+      chai: 6.3.0
+      es-module-lexer: 2.3.2
+      expect-type: 1.4.0
+      magic-string: 1.4.2
+      obug: 2.2.1
+      picomatch: 4.0.7
+      std-env: 4.3.0
+      tinybench: 6.2.0
+      tinyexec: 1.3.1
+      tinyglobby: 0.2.17
+      vite: 7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1)
+      why-is-node-running: 3.2.1
+    optionalDependencies:
+      '@types/node': 24.19.1
+      '@vitest/browser-playwright': 5.0.3(playwright@1.62.1)(vite@7.3.7(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))(vitest@5.0.3)
+      '@vitest/ui': 5.0.5(vitest@5.0.3)
     transitivePeerDependencies:
       - msw
 
@@ -18650,7 +18759,7 @@ snapshots:
       graceful-fs: 4.2.11
       http-proxy-middleware: 4.2.0(supports-color@10.2.2)
       ipaddr.js: 2.5.0
-      launch-editor: 2.14.1
+      launch-editor: 2.14.2
       open: 11.0.4
       p-retry: 8.0.1
       schema-utils: 4.5.0
@@ -18685,7 +18794,7 @@ snapshots:
       graceful-fs: 4.2.11
       http-proxy-middleware: 4.2.0(supports-color@7.2.0)
       ipaddr.js: 2.5.0
-      launch-editor: 2.14.1
+      launch-editor: 2.14.2
       open: 11.0.4
       p-retry: 8.0.1
       schema-utils: 4.5.0
