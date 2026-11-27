@@ -125,6 +125,12 @@ const Example = () => {
 
         <NumberInput renderLabel="NumberInput" messages={messages} isRequired={isRequired}/>
 
+        <SimpleSelect renderLabel="SimpleSelect" messages={messages} isRequired={isRequired}>
+          <SimpleSelect.Option id="simpleSelectOption1" value="option1">Option 1</SimpleSelect.Option>
+          <SimpleSelect.Option id="simpleSelectOption2" value="option2">Option 2</SimpleSelect.Option>
+          <SimpleSelect.Option id="simpleSelectOption3" value="option3">Option 3</SimpleSelect.Option>
+        </SimpleSelect>
+
         <TextArea messages={messages} label="TextArea" required={isRequired}/>
 
         <Checkbox label="Checkbox" isRequired={isRequired} messages={messages}/>
