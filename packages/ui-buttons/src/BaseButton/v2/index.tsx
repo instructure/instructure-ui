@@ -335,7 +335,7 @@ export class BaseButtonBase extends Component<BaseButtonProps> {
         elementRef={this.handleElementRef}
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
-        role={onClick && as !== 'button' ? 'button' : undefined}
+        role={props.role ?? (onClick && as !== 'button' ? 'button' : undefined)}
         tabIndex={tabIndexValue}
         disabled={isDisabled || isReadOnly}
         // for elements that do not support the "disabled" attribute

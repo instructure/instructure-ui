@@ -485,6 +485,9 @@ importers:
       '@instructure/ui-responsive':
         specifier: workspace:*
         version: link:../ui-responsive
+      '@instructure/ui-segmented-control':
+        specifier: workspace:*
+        version: link:../ui-segmented-control
       '@instructure/ui-select':
         specifier: workspace:*
         version: link:../ui-select
@@ -925,6 +928,9 @@ importers:
       '@instructure/ui-responsive':
         specifier: workspace:*
         version: link:../ui-responsive
+      '@instructure/ui-segmented-control':
+        specifier: workspace:*
+        version: link:../ui-segmented-control
       '@instructure/ui-select':
         specifier: workspace:*
         version: link:../ui-select
@@ -3733,8 +3739,8 @@ importers:
         specifier: workspace:*
         version: link:../command-utils
       '@instructure/instructure-design-tokens':
-        specifier: github:instructure/instructure-design-tokens#v2.5.0
-        version: https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/e5c7c930e8461e04e97a3403664478fad3bf8ee7
+        specifier: github:instructure/instructure-design-tokens#v2.6.0
+        version: https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/6d9cdb99e36c9421b87693f170cf5ec61e5d4480
       dprint:
         specifier: ^0.60.1
         version: 0.60.1
@@ -3808,6 +3814,49 @@ importers:
       svgo:
         specifier: ^4.1.0
         version: 4.1.0
+
+  packages/ui-segmented-control:
+    dependencies:
+      '@babel/runtime':
+        specifier: ^7.29.7
+        version: 7.29.7
+      '@instructure/console':
+        specifier: workspace:*
+        version: link:../console
+      '@instructure/emotion':
+        specifier: workspace:*
+        version: link:../emotion
+      '@instructure/shared-types':
+        specifier: workspace:*
+        version: link:../shared-types
+      '@instructure/ui-buttons':
+        specifier: workspace:*
+        version: link:../ui-buttons
+      '@instructure/ui-icons':
+        specifier: workspace:*
+        version: link:../ui-icons
+      '@instructure/ui-react-utils':
+        specifier: workspace:*
+        version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
+      react:
+        specifier: 18.3.1
+        version: 18.3.1
+    devDependencies:
+      '@instructure/ui-axe-check':
+        specifier: workspace:*
+        version: link:../ui-axe-check
+      '@instructure/ui-babel-preset':
+        specifier: workspace:*
+        version: link:../ui-babel-preset
+      '@instructure/ui-color-utils':
+        specifier: workspace:*
+        version: link:../ui-color-utils
+      vitest:
+        specifier: ^5.0.0
+        version: 5.0.3(@types/node@24.19.1)(@vitest/browser-playwright@5.0.3)(@vitest/ui@5.0.3)(vite@7.3.6(@types/node@24.19.1)(jiti@2.6.1)(lightningcss@1.33.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/ui-select:
     dependencies:
@@ -6426,8 +6475,8 @@ packages:
       '@types/node':
         optional: true
 
-  '@instructure/instructure-design-tokens@https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/e5c7c930e8461e04e97a3403664478fad3bf8ee7':
-    resolution: {gitHosted: true, integrity: sha512-G6WNrsq4eJt1dsOYfOdWd820yNePrMYFADe0aGGiEklx03H875OSDjkBz+gOlOldfJCVIqOmdvegxLQECg1neg==, tarball: https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/e5c7c930e8461e04e97a3403664478fad3bf8ee7}
+  '@instructure/instructure-design-tokens@https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/6d9cdb99e36c9421b87693f170cf5ec61e5d4480':
+    resolution: {gitHosted: true, integrity: sha512-OBZBRos1YjH0pVc/VVdoS+QzzecYKL0FbqvOYqjU4zCF3Ao33YcavT9B57Wwo/61GDNGpuSHMLKav0yHJDPl/g==, tarball: https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/6d9cdb99e36c9421b87693f170cf5ec61e5d4480}
     version: 1.0.0
 
   '@isaacs/cliui@8.0.2':
@@ -13027,7 +13076,7 @@ snapshots:
     optionalDependencies:
       '@types/node': 24.19.1
 
-  '@instructure/instructure-design-tokens@https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/e5c7c930e8461e04e97a3403664478fad3bf8ee7':
+  '@instructure/instructure-design-tokens@https://codeload.github.com/instructure/instructure-design-tokens/tar.gz/6d9cdb99e36c9421b87693f170cf5ec61e5d4480':
     dependencies:
       glob: 13.0.6
 
