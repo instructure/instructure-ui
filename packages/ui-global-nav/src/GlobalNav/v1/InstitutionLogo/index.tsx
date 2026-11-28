@@ -23,7 +23,6 @@
  */
 
 import { useStyleNew } from '@instructure/emotion'
-import { Text } from '@instructure/ui-text/latest'
 import { safeLinkProps } from '@instructure/ui-utils'
 
 import type { InstitutionLogoProps } from './props.js'
@@ -61,11 +60,7 @@ const InstitutionLogo = (props: InstitutionLogoProps) => {
           alt={showName ? '' : logo.name}
         />
       )}
-      {showName && (
-        <Text color="inherit" weight="bold">
-          {logo.name}
-        </Text>
-      )}
+      {showName && <span css={styles?.name}>{logo.name}</span>}
     </>
   )
 

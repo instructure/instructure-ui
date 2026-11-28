@@ -22,12 +22,13 @@
  * SOFTWARE.
  */
 
-import { calcFocusOutlineStyles } from '@instructure/emotion'
 import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
+import { calcBandFocusStyles } from '../utils/calcBandFocusStyles.js'
 import type { SubNavItemStyle } from './props.js'
 
 type StyleParams = {
   current: boolean
+  logout: boolean
 }
 
 /**
@@ -45,7 +46,7 @@ const generateStyle = (
   params: StyleParams,
   sharedTokens: SharedTokens
 ): SubNavItemStyle => {
-  const { current } = params
+  const { current, logout } = params
 
   return {
     item: {
@@ -64,6 +65,8 @@ const generateStyle = (
         : componentTheme.backgroundColor,
       color: current
         ? componentTheme.selectedTextColor
+        : logout
+        ? componentTheme.logoutTextColor
         : componentTheme.textColor,
       fontFamily: componentTheme.fontFamily,
       fontSize: componentTheme.fontSize,
@@ -72,28 +75,34 @@ const generateStyle = (
       textAlign: 'start',
       textDecoration: 'none',
       cursor: 'pointer',
-      ...calcFocusOutlineStyles(
-        {
-          ...sharedTokens.focusOutline,
-          // the `inset` token is 0, so the ring would sit outside the item, where the scrolling panel body clips it
-          inset: `calc(-1 * ${sharedTokens.focusOutline.width})`
-        },
-        { focusPosition: 'inset' }
+      // SubNavItem has no focus color tokens, so it gets the shared focus color on the outer band
+      ...calcBandFocusStyles(
+        sharedTokens.focusOutline.infoColor,
+        'transparent'
       ),
       '&:hover': {
         // a page-wide a:hover rule is more specific than the base class
         textDecoration: 'none',
         ...(!current && {
           backgroundColor: componentTheme.hoverBackgroundColor,
-          color: componentTheme.hoverTextColor
+          color: logout
+            ? componentTheme.logoutTextColor
+            : componentTheme.hoverTextColor
         })
       },
       ...(!current && {
         '&:active': {
           backgroundColor: componentTheme.activeBackgroundColor,
-          color: componentTheme.activeTextColor
+          color: logout
+            ? componentTheme.logoutTextColor
+            : componentTheme.activeTextColor
         }
       })
+    },
+    icon: {
+      label: 'subNavItem__icon',
+      display: 'flex',
+      flexShrink: 0
     },
     label: {
       label: 'subNavItem__label',

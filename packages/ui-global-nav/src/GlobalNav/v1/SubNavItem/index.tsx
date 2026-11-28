@@ -23,7 +23,10 @@
  */
 
 import { useStyleNew } from '@instructure/emotion'
-import { ChevronRightInstUIIcon } from '@instructure/ui-icons'
+import {
+  ChevronRightInstUIIcon,
+  renderIconWithProps
+} from '@instructure/ui-icons'
 
 import { getItemElementProps } from '../utils/getItemElementProps.js'
 import type { SubNavItemProps } from './props.js'
@@ -36,25 +39,31 @@ id: GlobalNav.SubNavItem
 ---
 **/
 const SubNavItem = (props: SubNavItemProps) => {
-  const { item, elementRef, onDrillIn } = props
+  const { item, logout = false, elementRef, onDrillIn } = props
 
   const styles = useStyleNew({
     generateStyle,
-    params: { current: !!item.current },
+    params: { current: !!item.current, logout },
     componentId: 'SubNavItem'
   })
 
   const { isLink, props: elementProps } = getItemElementProps(
     item,
-    item.subNav ? (event) => onDrillIn(event, item) : undefined
+    item.subNav ? (event) => onDrillIn?.(event, item) : undefined
   )
 
   const content = (
     <>
+      {item.icon && (
+        <span css={styles?.icon}>
+          {/* the design gives Log out the 20px icon of the toggles */}
+          {renderIconWithProps(item.icon, logout ? 'md' : 'sm', undefined)}
+        </span>
+      )}
       <span css={styles?.label}>{item.label}</span>
       {item.subNav && (
         <span css={styles?.chevron}>
-          <ChevronRightInstUIIcon />
+          <ChevronRightInstUIIcon size="md" />
         </span>
       )}
     </>

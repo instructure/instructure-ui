@@ -37,6 +37,6 @@ type InstitutionLogoProps = {
   collapsed: boolean
 }
 
-type InstitutionLogoStyle = ComponentStyle<'logo' | 'mark'>
+type InstitutionLogoStyle = ComponentStyle<'logo' | 'mark' | 'name'>
 
 export type { InstitutionLogoProps, InstitutionLogoStyle }
