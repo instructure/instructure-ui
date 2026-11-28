@@ -24,7 +24,7 @@
 
 import { render } from 'vitest-browser-react'
 import { page } from 'vitest/browser'
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, beforeEach, afterEach } from 'vitest'
 import { DataGrid } from '@instructure/ui-table/latest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 
@@ -464,6 +464,228 @@ describe('<DataGrid />', () => {
         columnId: 'name',
         direction: 'ascending'
       })
+
+      expect(await runAxeCheck(container)).toBe(true)
+    })
+  })
+
+  describe('stacked layout', () => {
+    const people: Person[] = [
+      { name: 'Grace', age: 85 },
+      { name: 'Ada', age: 36 },
+      { name: 'Katherine', age: 101 }
+    ]
+    const labelSortColumn = (header: string) => `Sort by ${header}`
+    const stackedLayout = {
+      labelSortBy: 'Sort by',
+      labelSortOrder: 'Sort order',
+      labelSortDirection: (direction: string) => `Order ${direction}`
+    }
+
+    // the stacked layout starts at 48rem (768px)
+    beforeEach(async () => {
+      await page.viewport(600, 800)
+    })
+    afterEach(async () => {
+      await page.viewport(414, 896)
+    })
+
+    // the text of the first cell of each row, in display order
+    const names = () =>
+      page
+        .getByRole('row')
+        .elements()
+        .map((row) => row.querySelector('td')?.textContent)
+
+    it('hides the header row and shows one block per row below the breakpoint', async () => {
+      await render(
+        <DataGrid
+          caption="People"
+          columns={columns}
+          data={people}
+          stackedLayout={stackedLayout}
+        />
+      )
+
+      expect(page.getByRole('table').element()).toBeInTheDocument()
+      expect(page.getByRole('row').elements()).toHaveLength(3)
+      expect(page.getByRole('columnheader').elements()).toHaveLength(0)
+      expect(
+        getComputedStyle(page.getByRole('row').first().element()).display
+      ).toBe('block')
+    })
+
+    it('labels each cell with its column header', async () => {
+      await render(
+        <DataGrid
+          caption="People"
+          columns={columns}
+          data={people}
+          stackedLayout={stackedLayout}
+        />
+      )
+
+      expect(page.getByText('Name: Grace').element()).toBeInTheDocument()
+      expect(page.getByText('Age: 85').element()).toBeInTheDocument()
+    })
+
+    it('keeps the table above the breakpoint', async () => {
+      await page.viewport(1024, 800)
+      await render(
+        <DataGrid
+          caption="People"
+          columns={columns}
+          data={people}
+          stackedLayout={stackedLayout}
+        />
+      )
+
+      expect(page.getByRole('columnheader').elements()).toHaveLength(2)
+      // header row + 3 data rows
+      expect(page.getByRole('row').elements()).toHaveLength(4)
+      expect(
+        getComputedStyle(page.getByText('Name: ').first().element()).display
+      ).toBe('none')
+    })
+
+    it('shows no sort controls without the sorting prop', async () => {
+      await render(
+        <DataGrid
+          caption="People"
+          columns={columns}
+          data={people}
+          stackedLayout={stackedLayout}
+        />
+      )
+
+      expect(page.getByRole('combobox').elements()).toHaveLength(0)
+      expect(
+        page.getByRole('button', { name: 'Sort order' }).elements()
+      ).toHaveLength(0)
+    })
+
+    describe('with sorting', () => {
+      const renderSortable = (defaultSort?: {
+        columnId: string
+        direction: 'ascending' | 'descending'
+      }) =>
+        render(
+          <DataGrid
+            caption="People"
+            columns={columns}
+            data={people}
+            sorting={{ labelSortColumn, defaultSort }}
+            stackedLayout={stackedLayout}
+          />
+        )
+
+      it('replaces the header buttons with a select and a menu button', async () => {
+        await renderSortable()
+
+        expect(
+          page.getByRole('combobox', { name: 'Sort by' }).element()
+        ).toBeInTheDocument()
+        expect(
+          page.getByRole('button', { name: 'Sort order' }).element()
+        ).toBeInTheDocument()
+        expect(
+          page.getByRole('button', { name: 'Sort by Name' }).elements()
+        ).toHaveLength(0)
+      })
+
+      it('lists only the sortable columns in the select', async () => {
+        await render(
+          <DataGrid
+            caption="People"
+            columns={[
+              { accessorKey: 'name', header: 'Name' },
+              { accessorKey: 'age', header: 'Age', enableSorting: false }
+            ]}
+            data={people}
+            sorting={{ labelSortColumn }}
+            stackedLayout={stackedLayout}
+          />
+        )
+
+        await page.getByRole('combobox', { name: 'Sort by' }).click()
+
+        expect(page.getByRole('option').elements()).toHaveLength(1)
+        expect(
+          page.getByRole('option', { name: 'Name' }).element()
+        ).toBeInTheDocument()
+      })
+
+      it('sorts ascending by the column picked in the select', async () => {
+        await renderSortable()
+
+        await page.getByRole('combobox', { name: 'Sort by' }).click()
+        await page.getByRole('option', { name: 'Name' }).click()
+
+        expect(names()).toEqual(['Name: Ada', 'Name: Grace', 'Name: Katherine'])
+      })
+
+      it('disables the menu button until a column is chosen', async () => {
+        await renderSortable()
+
+        expect(
+          page.getByRole('button', { name: 'Sort order' }).element()
+        ).toBeDisabled()
+      })
+
+      it('shows the default sort in the controls', async () => {
+        await renderSortable({ columnId: 'age', direction: 'descending' })
+
+        expect(
+          page.getByRole('combobox', { name: 'Sort by' }).element()
+        ).toHaveValue('Age')
+        expect(names()).toEqual(['Name: Katherine', 'Name: Grace', 'Name: Ada'])
+      })
+
+      it('changes the sort order from the menu', async () => {
+        await renderSortable({ columnId: 'name', direction: 'ascending' })
+
+        await page.getByRole('button', { name: 'Sort order' }).click()
+        await page
+          .getByRole('menuitemradio', { name: 'Order descending' })
+          .click()
+
+        expect(names()).toEqual(['Name: Katherine', 'Name: Grace', 'Name: Ada'])
+      })
+
+      it('restores the original order and keeps the column when the menu sets none', async () => {
+        await renderSortable({ columnId: 'name', direction: 'ascending' })
+
+        await page.getByRole('button', { name: 'Sort order' }).click()
+        await page.getByRole('menuitemradio', { name: 'Order none' }).click()
+
+        expect(names()).toEqual(['Name: Grace', 'Name: Ada', 'Name: Katherine'])
+        expect(
+          page.getByRole('combobox', { name: 'Sort by' }).element()
+        ).toHaveValue('Name')
+        expect(
+          page.getByRole('button', { name: 'Sort order' }).element()
+        ).toBeEnabled()
+      })
+
+      it('should meet a11y standards', async () => {
+        const { container } = await renderSortable({
+          columnId: 'name',
+          direction: 'ascending'
+        })
+
+        expect(await runAxeCheck(container)).toBe(true)
+      })
+    })
+
+    it('should meet a11y standards', async () => {
+      const { container } = await render(
+        <DataGrid
+          caption="People"
+          columns={columns}
+          data={people}
+          stackedLayout={stackedLayout}
+        />
+      )
 
       expect(await runAxeCheck(container)).toBe(true)
     })
