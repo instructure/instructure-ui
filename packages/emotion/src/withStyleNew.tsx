@@ -37,6 +37,7 @@ import { decorator } from '@instructure/ui-decorator'
 
 import { useTheme } from './useTheme.js'
 import { applyColorModifiers } from './styleUtils/applyColorModifiers.js'
+import { getSemanticsOverrides } from './styleUtils/getSemanticsOverrides.js'
 
 import type { ComponentTheme, InstUIComponent } from '@instructure/shared-types'
 import type {
@@ -134,7 +135,6 @@ const withStyleNew = decorator(
       ComposedComponent.componentId?.replace('.', '')
 
     const componentId: keyof NewComponentTypes = useTokensFrom ?? rawComponentId
-
     const WithStyle: ForwardRefExoticComponent<
       PropsWithoutRef<Props> & RefAttributes<any>
     > & {
@@ -147,7 +147,6 @@ const withStyleNew = decorator(
 
       // this is for the new overrides. theme.themeOverride has all the overrides
       const themeOverride = themeInContext.themeOverride
-
       // if a new theme has been added to the lib since this component version has been frozen, it can't be used with this
       // theme, so we throw an error. Solution: upgrade to the latest version, it will support it
       if (frozenTheme && !frozenTheme[themeKey]) {
@@ -185,7 +184,7 @@ const withStyleNew = decorator(
       }
       // resolving the theming functions and applying the overrides
       const primitiveOverrides = themeOverride?.primitives
-      const semanticsOverrides = themeOverride?.semantics
+      const semanticsOverrides = getSemanticsOverrides(themeInContext)
       const sharedTokensOverrides = themeOverride?.sharedTokens
       const componentOverridesFromSettingsProvider =
         themeOverride?.components?.[rawComponentId] ?? {}

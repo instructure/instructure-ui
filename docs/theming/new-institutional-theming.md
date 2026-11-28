@@ -16,6 +16,8 @@ The new theming system exposes the equivalents of the legacy Canvas `ic-brand-*`
 > - **`dark`** — branding support is coming soon.
 > - **High-contrast themes** — branding will **never** be available, by design. These themes maintain WCAG-compliant color contrast at all times, so user-customizable colors cannot override them.
 
+> **Legacy `ic-brand-*` fallback (`canvas` only):** if you set no `semantics.color.institutional` overrides, the legacy `ic-brand-*` values from `theme` are applied as overrides automatically. Keeping them works, but only as a stopgap while you move to the new system. Set `semantics.color.institutional` overrides instead. `light` uses the same token structure, so the same overrides work there, but the legacy values are **not** applied automatically.
+
 | Legacy variable                                     | New semantic token                      |
 | --------------------------------------------------- | --------------------------------------- |
 | `ic-brand-primary`                                  | `brandPrimary`                          |
@@ -27,11 +29,10 @@ The new theming system exposes the equivalents of the legacy Canvas `ic-brand-*`
 | `ic-global-nav-link-hover`                          | `globalNavLinkHover`                    |
 | `ic-brand-global-nav-menu-item__text-color`         | `brandGlobalNavMenuItemTextColor`       |
 | `ic-brand-global-nav-menu-item__text-color--active` | `brandGlobalNavMenuItemTextColorActive` |
+| `ic-brand-global-nav-ic-icon-svg-fill`              | `brandGlobalNavIconSVGFill`             |
+| `ic-brand-global-nav-ic-icon-svg-fill--active`      | `brandGlobalNavIconSVGFillActive`       |
 
-A handful of legacy variables are not in the new system, for two different reasons:
-
-- **SVG icon-fill variables** (`ic-brand-global-nav-ic-icon-svg-fill` and `--active`) — these _were_ consumed by the `v11.6` to recolor its icons, but `v11.7` uses a different icon-coloring mechanism so they were not migrated.
-- **Variables that no InstUI component ever consumed** (`ic-brand-button--secondary-bgd`, `ic-brand-button--secondary-text`, `ic-link-decoration`)
+A few legacy variables are not in the new system because no InstUI component ever consumed them (`ic-brand-button--secondary-bgd`, `ic-brand-button--secondary-text`, `ic-link-decoration`).
 
 ### Common variables — broad-impact branding
 

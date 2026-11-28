@@ -25,6 +25,7 @@
 import { useTheme } from './useTheme.js'
 import { mergeDeep } from '@instructure/ui-utils'
 import { applyColorModifiers } from './styleUtils/applyColorModifiers.js'
+import { getSemanticsOverrides } from './styleUtils/getSemanticsOverrides.js'
 import type {
   NewComponentTypes,
   SharedTokens,
@@ -106,7 +107,7 @@ const useStyleNew = <
 
   // resolving the theming functions and applying the overrides
   const primitiveOverrides = themeOverrideFromProvider?.primitives
-  const semanticsOverrides = themeOverrideFromProvider?.semantics
+  const semanticsOverrides = getSemanticsOverrides(themeInContext)
   const sharedTokensOverrides = themeOverrideFromProvider?.sharedTokens
   const componentOverridesFromSettingsProvider =
     themeOverrideFromProvider?.components?.[
